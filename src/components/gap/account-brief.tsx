@@ -204,7 +204,7 @@ export function AccountBriefView({ brief, afterGlance }: { brief: AccountIntelli
         ) : null}
       </section>
 
-      <section className="space-y-2" data-testid="brief-hypotheses">
+      <section id="brief-hypotheses" className="scroll-mt-16 space-y-2" data-testid="brief-hypotheses">
         <h2 className="text-sm font-semibold">Hypotheses</h2>
         {brief.hypotheses.length ? (
           <ul className="space-y-2">

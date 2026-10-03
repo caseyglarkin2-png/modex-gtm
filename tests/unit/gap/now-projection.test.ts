@@ -150,7 +150,7 @@ describe('private engagement: interest, never a reason, never aloud, never copy'
 });
 
 describe('Dannon (warm intro only)', () => {
-  it('NEXT is the intro ask, WHO is the introducer with the route, the ASK is to Mark, no relationship line repeats it', () => {
+  it('NEXT is the intro ask, WHO is the introducer with the route; no ASK or relationship line repeats it (final seller review)', () => {
     const r = restrictionForName('Dannon');
     const i = inputs({ account: { name: 'Dannon', tier: 'Tier 1', priorityBand: 'A', vertical: 'dairy', parentBrand: 'Danone', hubspotCompanyId: '7' }, personas: [], facts: [] });
     const ctx = emptyCtx({ relationship: projectRelationship({ restriction: r, account: { best_intro_path: 'Mark Shaughnessy -> Danone CSCO intro', owner: 'Casey' }, personas: [{ name: 'Heiko Gerling', intro_route: 'Mark -> Heiko / CSCO office' }], memberships: [], meetings: [], emails: [], now: NOW }) });
@@ -158,9 +158,45 @@ describe('Dannon (warm intro only)', () => {
     expect(v.next.source).toBe('restriction');
     expect(v.next.text).toMatch(/^Ask Mark Shaughnessy for the introduction/);
     expect(v.who).toMatchObject({ name: 'Mark Shaughnessy', route: 'Mark -> Heiko / CSCO office' });
-    expect(v.ask).toBe('Ask Mark Shaughnessy: who in the Danone CSCO office should you learn from about how their yards run today?');
+    expect(v.ask).toBeNull();
+    expect([v.next.text, v.who?.why, v.relationship ?? ''].join(' ').match(/learn from/g)).toHaveLength(1);
     expect(v.relationship).toBeNull();
     expect(v.stateLine).toMatch(/Warm intro only/);
+  });
+});
+
+describe('final review fixes (2026-10-02)', () => {
+  it('P1: "their own publication" only on the account\'s own domain, never a name match', () => {
+    const y = { domains: ['thehersheycompany.com'], accountName: 'The Hershey Company', citable: new Set<string>() };
+    const at = (url: string) => sellerLine({ text: 't', truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'evidence', ref: 'f', label: 'x', url, at: '2026-09-01' }] }, 'footprint', y)!.basis;
+    expect(at('https://www.thestreet.com/a')).toMatch(/^reported by thestreet\.com/);
+    expect(at('https://www.thehersheycompany.com/news')).toMatch(/^their own publication/);
+    expect(sellerLine({ text: 't', truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'evidence', ref: 'f', label: 'x', url: 'https://www.foodbusinessnews.net/a', at: '2026-09-01' }] }, 'footprint', { domains: [], accountName: 'US Foods', citable: new Set() })!.basis).toMatch(/^reported by/);
+  });
+  it('a buyer metric is not an impact: no WEDGE, impact still unknown', () => {
+    const v = now({ bids: [{ id: 'm', type: 'metric', summary: 'About 300 trucks a day at Dallas.', quote: 'x', who: 'dana', at: '2026-09-28T00:00:00Z', hypothesisId: null }] });
+    expect(v.wedge).toBeNull();
+    expect(v.impact).toMatch(/^Impact: unknown/);
+  });
+  it('THINK never leads on an ungrounded draft', () => {
+    expect(now({ facts: [] }).think).toBeNull();
+  });
+  it('a relationship WHO keeps the prior\'s operator as the alternate; an adjacent pick says the operating owner is still missing', () => {
+    const rel = now({ facts: [], memberships: [{ sourceName: 'Inland26', sourceType: 'conference', relationshipContext: 'Met at Inland26', personName: 'Ryan Rel' }] });
+    expect(rel.who?.name).toBe('Ryan Rel');
+    expect(rel.alternate?.name).toBe('Dana Trans');
+    const adj = now({ personas: [{ ...person, name: 'Vic VP', title: 'VP Supply Chain' }] });
+    expect(adj.who?.name).toBe('Vic VP');
+    expect(adj.whoUnknown).toBe('No US / North America transportation operations owner on record yet: find them (BRIEF: buyer map).');
+    expect(now().whoUnknown).toBeNull();
+  });
+  it('a raw HubSpot stage id never reaches the state line; internal stage names read as words', () => {
+    expect(now({ opportunity: { status: 'ACTIVE', detail: '', deals: [{ name: 'Pilot', stage: '1417384082' }] } }).stateLine).toMatch(/· In a deal$|· In a deal ·/);
+    expect(now({ opportunity: { status: 'ACTIVE', detail: '', deals: [{ name: 'Pilot', stage: 'appointmentscheduled' }] } }).stateLine).toMatch(/In a deal \(appointment scheduled\)/);
+  });
+  it('a vendor\'s own marketing is never WHY NOW', () => {
+    const vendor = { ...fact, id: 'fv', quote: 'Gatik moves freight for Acme Foods across 250 stores.', url: 'https://gatik.ai/news' };
+    expect(now({ facts: [vendor], hypotheses: [] }).whyNow.map((l) => l.text).join(' ')).not.toMatch(/Gatik/);
   });
 });
 

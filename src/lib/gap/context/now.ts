@@ -12,7 +12,7 @@
  * engagement is interest, never a reason: it is its own labelled line and is never read aloud. WEDGE shows only when
  * the buyer confirmed a problem or impact. Pinned by tests/unit/gap/now-projection.test.ts.
  */
-import type { AccountInputs, AccountIntelligenceBrief, DiscoveryQuestion, MotionType } from '../account-intel/build';
+import { VENDOR_LEAD, type AccountInputs, type AccountIntelligenceBrief, type DiscoveryQuestion, type MotionType } from '../account-intel/build';
 import type { Source, Statement } from '../account-intel/truth';
 import { sensitivityOf } from '../research/sensitivity';
 import { readPerson } from '../people/person-prior';
@@ -90,7 +90,9 @@ export function sellerLine(s: Statement, section: string, x: { domains: readonly
   const ev = s.sources.find((y) => y.kind === 'evidence');
   if (ev) {
     const h = host(ev.url);
-    const own = !!h && (x.domains.some((d) => h === d || h.endsWith(`.${d}`)) || h.includes(norm(x.accountName).split(' ')[0] ?? '\u0000'));
+    // Their own publication ONLY when the host is one of the account's domains. Never a name match: "The ...", "US ..."
+    // and "General ..." matched thestreet.com, businessinsider.com and generalaviationnews.com (final review P1).
+    const own = !!h && x.domains.some((d) => h === d || h.endsWith(`.${d.replace(/^www\./, '')}`));
     return { id, text: s.text, tag: 'Checked', basis: `${own ? 'their own publication' : `reported by ${h ?? ev.label}`}, ${day(s.asOf ?? ev.at)}`, cite: ev.ref && x.citable.has(ev.ref) ? 'OK to cite to the buyer' : 'Checked, not for outreach' };
   }
   if (s.sources.some((y) => y.kind === 'audit')) return { id, text: s.text, tag: 'Checked', basis: `seen in imagery, ${day(s.asOf)}; a fact about those sites on that date, never a problem`, cite: 'Never cite (from imagery)' };
@@ -125,11 +127,15 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   else if ((m.type === 'REFERRAL_LED' || m.type === 'RELATIONSHIP_LED') && m.who) who = { name: m.who, title: null, why: `You have a way in: ${m.why.split(':')[0]}.`, route: null };
   else if (p?.primary && !p.primary.doNotContact) who = { name: p.primary.name, title: p.primary.title, why: p.primary.why, route: null };
   const whoUnknown = who ? null : brief.glance.likelyOwner.startsWith('Unknown') ? `${brief.glance.likelyOwner} Find the US / North America transportation operations owner (BRIEF: buyer map).` : brief.glance.likelyOwner;
-  const alt = p?.alternate && p.alternate.name !== who?.name ? { name: p.alternate.name, title: p.alternate.title, why: p.alternate.why } : null;
+  // When the motion names the person (a relationship, a thread, an introducer), the prior's best operator is the
+  // alternate; otherwise the prior's own second choice.
+  const altSrc = who && p?.primary && who.name !== p.primary.name && !p.primary.doNotContact ? p.primary : p?.alternate ?? null;
+  const alt = altSrc && altSrc.name !== who?.name ? { name: altSrc.name, title: altSrc.title, why: altSrc.why } : null;
+  const ownerMissing = !!who && p?.primary?.lane !== 'PRIMARY_OPERATOR' && m.type !== 'INTRO_ONLY' && m.type !== 'FOLLOW_UP' && m.type !== 'IN_DEAL';
 
   // WHY NOW: dated catalysts (checked first, then unverified signals); never private engagement.
   const whyNow: NowLine[] = [];
-  const cat = brief.sections.catalysts.statements.filter((s) => s.truth !== 'CONTRADICTED' && !/^ENDED/.test(s.text));
+  const cat = brief.sections.catalysts.statements.filter((s) => s.truth !== 'CONTRADICTED' && !/^ENDED/.test(s.text) && !VENDOR_LEAD.test(s.text.replace(/^[A-Z /]+:\s*/, '')));
   const rankedCat = [...cat].sort((a, b) => Number(b.truth === 'VERIFIED_PUBLIC') - Number(a.truth === 'VERIFIED_PUBLIC') || String(b.asOf ?? b.sources[0]?.at ?? '').localeCompare(String(a.asOf ?? a.sources[0]?.at ?? '')));
   // At most ONE unverified signal (dogfood, 2026-10-02: three unverified headlines crowded out the decision), and when
   // there is one, a slot is kept for the newest (Walmart's yard-modernization hiring must not be crowded out by facts).
@@ -150,16 +156,18 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
 
   // The gap, from buyer truth only; a hypothesis is "our read", never the buyer's.
   const bidOf = (t: string) => i.bids.find((b) => b.type === t);
-  const top = brief.hypotheses.find((h) => h.truth !== 'CONTRADICTED' && h.grounded) ?? brief.hypotheses.find((h) => h.truth !== 'CONTRADICTED') ?? null;
+  // Only a grounded thesis leads (build.ts: "an ungrounded draft never leads"); the discovery plan reads the same one.
+  const top = brief.hypotheses.find((h) => h.truth !== 'CONTRADICTED' && h.grounded) ?? null;
   const gap: NowView['gap'] = [
     { element: 'Current state', state: bidOf('current_state') ? 'Buyer said' : 'Unknown' },
     { element: 'Problem', state: bidOf('business_problem') ? 'Buyer said' : top ? 'Our read' : 'Unknown' },
-    { element: 'Impact', state: bidOf('impact') || bidOf('metric') ? 'Buyer said' : 'Unknown' },
+    { element: 'Impact', state: bidOf('impact') ? 'Buyer said' : 'Unknown' },
     { element: 'Root cause', state: bidOf('root_cause') ? 'Buyer said' : top?.rootCause ? 'Our read' : 'Unknown' },
   ];
   const cs = bidOf('current_state');
   const currentState = cs ? `Current state (buyer said, ${day(cs.at)}): ${cs.summary}` : 'Current state: not confirmed by the buyer.';
-  const imp = bidOf('impact') ?? bidOf('metric');
+  // A volume metric ("300 trucks a day") is not a cost: only a confirmed impact is.
+  const imp = bidOf('impact');
   const impact = imp ? `Impact (buyer said, ${day(imp.at)}): ${imp.summary}` : 'Impact: unknown. The buyer has not named a cost (our model is in BRIEF, never their pain).';
 
   // KNOW: buyer truth, then checked facts about their operations (max 3), each with its basis and the outreach axis.
@@ -180,9 +188,9 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   const sites = brief.wedge.candidates.map((c) => c.name.toLowerCase());
   const qs = [...brief.discovery].filter((q) => !(gap[0].state === 'Unknown' && LATE.has(q.type))).filter((q) => !sites.some((n) => n && q.question.toLowerCase().includes(n))).sort((a, b) => ASK_ORDER.indexOf(a.type) - ASK_ORDER.indexOf(b.type));
   const vp = who?.title ? readPerson(who.title).seniority >= 4 : false;
-  let ask = qs[0]?.question ?? null;
+  let ask: string | null = qs[0]?.question ?? null;
   if (ask && qs[0].type === 'CURRENT_PROCESS' && vp) ask = 'Does every site check trailers in and find them the same way, or does each site run its own process?';
-  if (m.type === 'INTRO_ONLY' && restriction) ask = `Ask ${restriction.introducer}: who in ${restriction.route} should you learn from about how their yards run today?`;
+  if (m.type === 'INTRO_ONLY') ask = null;
 
   // WEDGE: the pitch conclusion, only after the buyer confirmed a problem or impact.
   const wedge = bidOf('business_problem') || imp ? brief.thesis.whereYardFlowMayFit : null;
@@ -192,13 +200,14 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   const a = assetUseful ? ctx.assets.find((x) => !x.legacy && (soon ? /meeting_prep|one_pager/.test(x.kind) : /one_pager|email|sequence/.test(x.kind))) ?? null : null;
 
   const owner = ctx.relationship.owner && !/^(unassigned|none|n\/a|tbd)$/i.test(ctx.relationship.owner) ? ctx.relationship.owner : null;
-  const stateLine = [brief.glance.fit, m.type === 'IN_DEAL' && brief.deals[0]?.stage ? `In a deal (${brief.deals[0].stage})` : STATE[m.type], owner ? `Owner: ${owner}` : null].filter(Boolean).join(' · ');
+  const stage = brief.deals[0]?.stage && !/^\d+$/.test(brief.deals[0].stage) ? brief.deals[0].stage.replace(/([a-z])(scheduled|qualified|presented|sent|won|lost)\b/g, '$1 $2').replace(/[_-]+/g, ' ') : null;
+  const stateLine = [brief.glance.fit, m.type === 'IN_DEAL' && stage ? `In a deal (${stage})` : STATE[m.type], owner ? `Owner: ${owner}` : null].filter(Boolean).join(' · ');
   const view: NowView = {
     name: brief.accountName,
     stateLine,
     next,
     who,
-    whoUnknown,
+    whoUnknown: ownerMissing ? 'No US / North America transportation operations owner on record yet: find them (BRIEF: buyer map).' : whoUnknown,
     alternate: alt,
     whyNow,
     gap,

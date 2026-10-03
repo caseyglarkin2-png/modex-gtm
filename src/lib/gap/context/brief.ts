@@ -22,12 +22,17 @@ export interface BriefSection {
 
 const SHOW = 5;
 
-export function projectBrief(brief: AccountIntelligenceBrief, ctx: AccountContext, i: Pick<AccountInputs, 'facts' | 'domains' | 'account'>, now: Date): BriefSection[] {
+export function projectBrief(brief: AccountIntelligenceBrief, ctx: AccountContext, i: Pick<AccountInputs, 'facts' | 'domains' | 'account'> & { bids?: AccountInputs['bids'] }, now: Date): BriefSection[] {
   const live = i.facts.filter((f) => !f.expiresAt || new Date(f.expiresAt).getTime() > now.getTime());
   const lx = { domains: i.domains, accountName: i.account.name, citable: new Set(live.filter((f) => !sensitivityOf(f.quote)).flatMap((f) => [f.id, ...(f.sameQuoteIds ?? [])])) };
   const intel = (key: string, title: string, keys: SectionKey[]): BriefSection => {
     const st = keys.flatMap((k) => brief.sections[k].statements.map((s) => ({ s, k })));
-    const lines = st.map(({ s, k }) => sellerLine(s, k, lx)).filter((l): l is NowLine => !!l).map(({ text, tag, basis, cite }) => ({ text, tag, basis, cite }));
+    // One readable line each: no raw URLs, no "fact:" fragments, at most ~240 characters (the rest is in SOURCES).
+    const clean = (t: string) => {
+      const c = t.replace(/\s*https?:\/\/\S+/g, '').replace(/\(\s*\)/g, '').replace(/\s+/g, ' ').trim();
+      return c.length > 240 ? `${c.slice(0, 239).trimEnd()}…` : c;
+    };
+    const lines = st.map(({ s, k }) => sellerLine(s, k, lx)).filter((l): l is NowLine => !!l).map(({ text, tag, basis, cite }) => ({ text: clean(text), tag, basis, cite }));
     return { key, title, lines: lines.slice(0, SHOW), notes: [], unknowns: keys.flatMap((k) => brief.sections[k].unknowns).slice(0, 4), more: Math.max(0, lines.length - SHOW), detailsAnchor: `brief-section-${keys[0]}` };
   };
   const plain = (key: string, title: string, notes: string[], unknowns: string[] = []): BriefSection => ({ key, title, lines: [], notes: notes.slice(0, SHOW), unknowns, more: Math.max(0, notes.length - SHOW), detailsAnchor: null });
@@ -61,7 +66,9 @@ export function projectBrief(brief: AccountIntelligenceBrief, ctx: AccountContex
     ...brief.hypotheses.slice(0, 2).map((h) => `Our read: ${h.problem}${h.wrongIf ? ` Wrong if: ${h.wrongIf}` : ''}`),
     ...brief.discovery.slice(0, 4).map((q) => `Ask (${q.type.replace(/_/g, ' ').toLowerCase()}): ${q.question}`),
   ];
-  const wedgeLine = i && brief.wedge.archetype ? `Where YardFlow may fit (a pitch conclusion; fit stays unknown until the buyer confirms the current state): ${brief.thesis.whereYardFlowMayFit}` : null;
+  // The pitch conclusion only after the buyer confirmed a problem or a cost (the same rule as NOW's WEDGE).
+  const confirmed = i.bids?.some((b) => b.type === 'business_problem' || b.type === 'impact');
+  const wedgeLine = confirmed && brief.wedge.archetype ? `Where YardFlow may fit: ${brief.thesis.whereYardFlowMayFit}` : null;
 
   return [
     intel('network', 'Network', ['identity', 'footprint']),
@@ -69,7 +76,7 @@ export function projectBrief(brief: AccountIntelligenceBrief, ctx: AccountContex
     intel('yard', 'Yard', ['yard', 'volume']),
     intel('tech', 'Tech', ['technology']),
     intel('economics', 'Economics', ['economics']),
-    plain('people', 'Buyer map', people, p?.primary ? [] : ['A US / North America transportation operations owner']),
+    plain('people', 'Buyer map', people, p?.primary?.lane === 'PRIMARY_OPERATOR' ? [] : ['A US / North America transportation operations owner']),
     intel('signals', 'Change and signals', ['catalysts']),
     plain('relationship', 'Relationship', relationship),
     plain('commercial', 'Commercial history', commercial),

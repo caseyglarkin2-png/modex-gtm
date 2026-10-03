@@ -10,6 +10,7 @@
  */
 import { assertUnderDailyCap } from './daily-cap';
 import { assertAutonomyPermitsSend, assertHumanApprovedOneToOne, type HumanConfirmation, type SendPurpose } from './autonomy-gate';
+import { assertRestrictionPermitsSend } from './restriction-gate';
 import { assertSuppressionPermitsSend } from './suppression-gate';
 
 // Read at call time, not module load time, so dynamically-set values work
@@ -290,6 +291,9 @@ export async function sendViaGmail(
   // A HUMAN_APPROVED_1TO1 send must prove, at the wire, that it is one
   // confirmed email to one confirmed person; otherwise it is refused here.
   if (payload.purpose === 'HUMAN_APPROVED_1TO1') assertHumanApprovedOneToOne(payload);
+  // THE WARM-INTRO RESTRICTION (./restriction-gate.ts): a restricted account's domains are never mailed cold from
+  // any app path; only a reply to the buyer's own message (In-Reply-To) or an operator alert passes.
+  assertRestrictionPermitsSend({ to: payload.to, cc: payload.cc, bcc: payload.bcc }, payload.purpose, { inReplyTo: payload.headers?.['In-Reply-To'] ?? null });
   await assertAutonomyPermitsSend(payload.purpose);
 
   // THE CROSS-PLANE SUPPRESSION CONTRACT, the third and last plane to get it.
@@ -415,6 +419,7 @@ export function isGmailSenderConfigured(): boolean {
 export async function createGmailDraft(
   payload: GmailSendPayload,
 ): Promise<{ provider: 'gmail'; draftId: string; messageId: string | null; threadId: string | null }> {
+  assertRestrictionPermitsSend({ to: payload.to, cc: payload.cc, bcc: payload.bcc }, payload.purpose, { inReplyTo: payload.headers?.['In-Reply-To'] ?? null });
   await assertSuppressionPermitsSend({ to: payload.to, cc: payload.cc, bcc: payload.bcc }, payload.purpose);
 
   const userEmail = payload.sender?.userEmail ?? getGmailConfig().userEmail;
@@ -449,6 +454,7 @@ export async function sendGmailDraft(
   recipients: { to: string; cc?: string[]; bcc?: string },
   opts: { userEmail?: string; sender?: GmailSender; purpose?: SendPurpose } = {},
 ): Promise<{ provider: 'gmail'; id: string | null; threadId: string | null }> {
+  assertRestrictionPermitsSend(recipients, opts.purpose);
   await assertAutonomyPermitsSend(opts.purpose);
   await assertSuppressionPermitsSend(recipients, opts.purpose);
   await assertUnderDailyCap();

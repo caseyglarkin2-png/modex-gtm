@@ -122,6 +122,8 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
       : v.next.source === 'conversation' ? { href: '/gap/replies', label: 'Open replies' }
       : v.next.source === 'restriction' ? { href: '/gap/capture', label: 'Log the intro ask' }
       : brief.motion.type === 'FACT_LED' && top ? { href: `/gap/preview/${top.id}`, label: 'Review the thesis and first touch' }
+      : brief.motion.type === 'RELATIONSHIP_LED' || brief.motion.type === 'REFERRAL_LED' ? { href: '/gap/capture', label: 'Log the touch' }
+      : brief.hypotheses.some((h) => h.needsReview.length) ? { href: `${hrefFor('sources')}#brief-hypotheses`, label: 'Review the thesis' }
       : { href: `${hrefFor('sources')}#research-plan`, label: 'Open the research plan' };
     return (
       <div className="mx-auto max-w-2xl space-y-4">
