@@ -19,8 +19,8 @@
  * Operating ownership beats the bare word "transportation": sourcing, purchasing, category, finance, compliance,
  * sustainability, R&D, sales, a product market or business unit named "Transportation", and generic IT are never the
  * default WHO. GEOGRAPHY is two facts about the PERSON, never the company: their LOCATION (where their own record says
- * they sit: US, Canada, elsewhere) and their OPERATING REMIT (the region their title says they run). Canada is North
- * America. The remit decides when stated (a Chicago-based "Director, European Logistics" runs Europe; a Toronto-based
+ * they sit: US, Canada, Mexico, elsewhere) and their OPERATING REMIT (the region their title says they run). North
+ * America is the US, Canada and Mexico (Casey, 2026-10-03); generic Latin America / LATAM is NOT (it is broader). The remit decides when stated (a Chicago-based "Director, European Logistics" runs Europe; a Toronto-based
  * "VP, North America Transportation" runs North America); otherwise the location does; otherwise it is unknown, never
  * filled from a headquarters or a HubSpot company country. The three North America states rank as one tier, after the
  * lane: geography never outranks operating ownership (Casey amendment, 2026-10-03).
@@ -51,14 +51,15 @@ export type PersonLane =
   | 'NON_OPERATING';
 /** The ranking tier: 'US_NA' is North America (a NA remit, or located in the US or Canada). */
 export type PersonRegion = 'US_NA' | 'UNKNOWN' | 'OTHER_REGION';
-export type PersonLocation = 'US' | 'CANADA' | 'OTHER';
+export type PersonLocation = 'US' | 'CANADA' | 'MEXICO' | 'OTHER';
 export type PersonRemit = 'NORTH_AMERICA' | 'OTHER_REGION';
 /** The transparent geography state shown to Casey. */
-export type GeoStatus = 'NA_REMIT' | 'US_CONFIRMED' | 'CANADA_CONFIRMED' | 'OTHER_REGION' | 'UNKNOWN';
+export type GeoStatus = 'NA_REMIT' | 'US_CONFIRMED' | 'CANADA_CONFIRMED' | 'MEXICO_CONFIRMED' | 'OTHER_REGION' | 'UNKNOWN';
 export const GEO_LABEL: Record<GeoStatus, string> = {
   NA_REMIT: 'North America remit confirmed',
   US_CONFIRMED: 'US confirmed',
   CANADA_CONFIRMED: 'Canada confirmed',
+  MEXICO_CONFIRMED: 'Mexico confirmed',
   OTHER_REGION: 'Other region',
   UNKNOWN: 'Location / remit unknown',
 };
@@ -119,12 +120,14 @@ const OUTSIDE_LINE = /\b(board|former|retired|ex-|advisor|adviser|investor|busin
 // Running stores or a retail field organization is not running the freight network.
 const STORE_OPS = /\b(store|stores|retail|field|restaurant|branch sales) operations\b/;
 const SUPPORT_ROLE = /\b(analyst|coordinator|specialist|planner|planning|project manager|assistant|associate)\b/;
-const US_NA = /\b(na|n\.a\.|north america|north american|us|u\.s\.|usa|united states|domestic|nala|canada|canadian)\b/;
-const OTHER_REGION = /\b(europe|european|emea|latam|latin america|china|hong kong|india|asia|apac|middle east|africa|japan|uk|germany|france|mexico|brazil)\b/;
+const US_NA = /\b(na|n\.a\.|north america|north american|us|u\.s\.|usa|united states|domestic|nala|canada|canadian|mexico|mexican)\b/;
+const OTHER_REGION = /\b(europe|european|emea|latam|latin america|china|hong kong|india|asia|apac|middle east|africa|japan|uk|germany|france|brazil)\b/;
 const US_STATES = new Set(['alabama', 'alaska', 'arizona', 'arkansas', 'california', 'colorado', 'connecticut', 'delaware', 'florida', 'georgia', 'hawaii', 'idaho', 'illinois', 'indiana', 'iowa', 'kansas', 'kentucky', 'louisiana', 'maine', 'maryland', 'massachusetts', 'michigan', 'minnesota', 'mississippi', 'missouri', 'montana', 'nebraska', 'nevada', 'new hampshire', 'new jersey', 'new mexico', 'new york', 'north carolina', 'north dakota', 'ohio', 'oklahoma', 'oregon', 'pennsylvania', 'rhode island', 'south carolina', 'south dakota', 'tennessee', 'texas', 'utah', 'vermont', 'virginia', 'washington', 'west virginia', 'wisconsin', 'wyoming', 'district of columbia', 'al', 'ak', 'az', 'ar', 'ca', 'co', 'ct', 'de', 'fl', 'ga', 'hi', 'id', 'il', 'in', 'ia', 'ks', 'ky', 'la', 'me', 'md', 'ma', 'mi', 'mn', 'ms', 'mo', 'mt', 'ne', 'nv', 'nh', 'nj', 'nm', 'ny', 'nc', 'nd', 'oh', 'ok', 'or', 'pa', 'ri', 'sc', 'sd', 'tn', 'tx', 'ut', 'vt', 'va', 'wa', 'wv', 'wi', 'wy', 'dc']);
 const US_COUNTRY = new Set(['united states', 'united states of america', 'usa', 'us', 'u.s.', 'u.s.a.']);
 
 const CA_COUNTRY = new Set(['canada', 'ca']);
+const MX_COUNTRY = new Set(['mexico', 'méxico', 'mx']);
+const MX_STATES = new Set(['aguascalientes', 'baja california', 'baja california sur', 'campeche', 'chiapas', 'chihuahua', 'cdmx', 'ciudad de mexico', 'ciudad de méxico', 'mexico city', 'distrito federal', 'coahuila', 'colima', 'durango', 'estado de mexico', 'estado de méxico', 'guanajuato', 'guerrero', 'hidalgo', 'jalisco', 'michoacan', 'michoacán', 'morelos', 'nayarit', 'nuevo leon', 'nuevo león', 'oaxaca', 'puebla', 'queretaro', 'querétaro', 'quintana roo', 'san luis potosi', 'san luis potosí', 'sinaloa', 'sonora', 'tabasco', 'tamaulipas', 'tlaxcala', 'veracruz', 'yucatan', 'yucatán', 'zacatecas']);
 const CA_PROVINCES = new Set(['ontario', 'quebec', 'québec', 'british columbia', 'alberta', 'manitoba', 'saskatchewan', 'nova scotia', 'new brunswick', 'newfoundland and labrador', 'newfoundland', 'prince edward island', 'yukon', 'northwest territories', 'nunavut', 'on', 'qc', 'bc', 'ab', 'mb', 'sk', 'ns', 'nb', 'nl', 'pe', 'pei', 'yt', 'nt', 'nu']);
 
 /** Where a person's own record says they sit: 'US', 'CANADA', 'OTHER' (another country), or null (nothing usable). */
@@ -134,12 +137,15 @@ export function personLocation(location: string | null | undefined): PersonLocat
   const last = parts[parts.length - 1];
   if (US_COUNTRY.has(last)) return 'US';
   if (last === 'canada') return 'CANADA';
+  // Mexico (never New Mexico, a US state matched above as a whole part).
+  if (MX_COUNTRY.has(last) && !(last === 'mx' && parts.length < 2)) return 'MEXICO';
   // "Toronto, ON, CA": CA is Canada's country code after a province, not California.
   if (last === 'ca' && parts.length >= 3 && CA_PROVINCES.has(parts[parts.length - 2])) return 'CANADA';
   // A recognised state or province without a country decides; a lone city or an unknown region says nothing.
   if (parts.length >= 2 && US_STATES.has(last)) return 'US';
   if (parts.length >= 2 && (CA_PROVINCES.has(last) || CA_COUNTRY.has(last))) return 'CANADA';
-  if (parts.length >= 2 && /^[a-z .'-]{3,}$/.test(last) && !parts.slice(0, -1).some((p) => US_STATES.has(p) || CA_PROVINCES.has(p))) return 'OTHER';
+  if (parts.length >= 2 && MX_STATES.has(last)) return 'MEXICO';
+  if (parts.length >= 2 && /^[a-z .'-]{3,}$/.test(last) && !parts.slice(0, -1).some((p) => US_STATES.has(p) || CA_PROVINCES.has(p) || MX_STATES.has(p))) return 'OTHER';
   return null;
 }
 
@@ -233,6 +239,9 @@ export function readPerson(title: string | null | undefined, opts: { entityType?
   } else if (location === 'CANADA') {
     geo = 'CANADA_CONFIRMED';
     regionWhy = `Canada-based (${at}); remit not stated`;
+  } else if (location === 'MEXICO') {
+    geo = 'MEXICO_CONFIRMED';
+    regionWhy = `Mexico-based (${at}); remit not stated`;
   } else if (location === 'OTHER') {
     geo = 'OTHER_REGION';
     regionWhy = `based outside North America (${at})`;
@@ -285,7 +294,7 @@ export function whoKey(c: WhoCandidate, read: PersonRead): number[] {
 
 /** The geography fact that decided, in a few words (WHO's why, the motion factors). */
 export function geoPhrase(read: Pick<PersonRead, 'geo' | 'regionWhy'>): string {
-  return read.geo === 'NA_REMIT' ? 'North America remit stated' : read.geo === 'US_CONFIRMED' ? 'US-based' : read.geo === 'CANADA_CONFIRMED' ? 'Canada-based' : read.geo === 'UNKNOWN' ? 'location / remit unknown' : read.regionWhy;
+  return read.geo === 'NA_REMIT' ? 'North America remit stated' : read.geo === 'US_CONFIRMED' ? 'US-based' : read.geo === 'CANADA_CONFIRMED' ? 'Canada-based' : read.geo === 'MEXICO_CONFIRMED' ? 'Mexico-based' : read.geo === 'UNKNOWN' ? 'location / remit unknown' : read.regionWhy;
 }
 
 /** One sentence for Casey: why this person, from the first reason that decided it. */
