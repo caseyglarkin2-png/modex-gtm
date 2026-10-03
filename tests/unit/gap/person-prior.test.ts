@@ -95,6 +95,12 @@ describe('WHO order: buyer truth > relationship > initiative > lane > region > s
     expect(first([op, yard, known])).toBe('known');
     expect(first([op, yard, known, p('buyer', 'Logistics Analyst', { buyerTruth: 'replied 2026-09-30' })])).toBe('buyer');
   });
+  it('production finding (PepsiCo, 2026-10-03): named transportation ownership beats generic logistics, and a senior director beats a director', () => {
+    const us = { location: 'Dallas, Texas, United States' };
+    expect(first([p('log', 'Director I Pepsi Logistics Co, Inc.', us), p('pbna', 'Senior Director - PBNA Transportation', { location: 'Chicago, Illinois, United States' })])).toBe('pbna');
+    expect(first([p('dir', 'Director of Transportation', us), p('sr', 'Sr Director of Transportation - Frito-Lay', us)])).toBe('sr');
+    expect(readPerson('Senior Director of Transportation').seniority).toBeGreaterThan(readPerson('Director of Transportation').seniority);
+  });
   it('a do-not-contact person is never first', () => {
     expect(first([p('dnc', 'NA Transportation Operations Director', { doNotContact: true }), p('ok', 'Director, Supply Chain Manager')])).toBe('ok');
   });
@@ -102,6 +108,6 @@ describe('WHO order: buyer truth > relationship > initiative > lane > region > s
     const [top] = rankWho([p('na', 'NA Transportation Operations Director')]);
     expect(top.why).toBe('Primary operator: title says they run transportation, freight or fleet; US / North America remit stated; network scope.');
     expect(top.why).not.toMatch(/\d/);
-    expect(whoKey(top.candidate, top.read).length).toBe(9);
+    expect(whoKey(top.candidate, top.read).length).toBe(10);
   });
 });
