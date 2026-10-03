@@ -20,7 +20,7 @@ import { sensitivityOf } from '../research/sensitivity';
 import { decideApproach } from '../motion/approach';
 import { restrictionFor } from '../policy/restriction';
 import { computeAccountMotion } from '../motion/account-motion';
-import { isDefaultWhoLane, LANE_LABEL, rankWho, type PersonLane, type PersonRegion } from '../people/person-prior';
+import { isDefaultWhoLane, LANE_LABEL, rankWho, type PersonLane, type PersonRegion, GeoStatus } from '../people/person-prior';
 import { divisionOf, divisionsFor, sitesByDivision } from '../people/division';
 
 // ---------------------------------------------------------------- inputs (what load.ts gathers)
@@ -293,6 +293,8 @@ export interface MappedPerson {
   lane: PersonLane;
   laneLabel: string;
   region: PersonRegion;
+  /** Which geography fact holds (location and remit kept apart). */
+  geo?: GeoStatus;
   why: string;
   reachable: boolean;
   doNotContact: boolean;
@@ -1202,7 +1204,7 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
     ],
     { entityType: fit.entityType },
   );
-  const mapped = (r: (typeof everyone)[number]): MappedPerson => ({ name: r.candidate.name, title: r.candidate.title, lane: r.read.lane, laneLabel: LANE_LABEL[r.read.lane], region: r.read.region, why: r.why, reachable: r.candidate.reachable, doNotContact: !!r.candidate.doNotContact, division: divisionOf(i.account.name, r.candidate.title), location: r.candidate.location ?? null, source: r.candidate.source });
+  const mapped = (r: (typeof everyone)[number]): MappedPerson => ({ name: r.candidate.name, title: r.candidate.title, lane: r.read.lane, laneLabel: LANE_LABEL[r.read.lane], region: r.read.region, geo: r.read.geo, why: r.why, reachable: r.candidate.reachable, doNotContact: !!r.candidate.doNotContact, division: divisionOf(i.account.name, r.candidate.title), location: r.candidate.location ?? null, source: r.candidate.source });
   const opAll = everyone.filter((r) => isDefaultWhoLane(r.read.lane) && !r.candidate.doNotContact);
   // The prior's best across both: a reachable GAP contact wins a tie (it can be worked today); a HubSpot-only person
   // wins when the prior ranks them higher (a better-fit owner).

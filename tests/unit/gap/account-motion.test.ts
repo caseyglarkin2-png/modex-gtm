@@ -32,7 +32,7 @@ describe('titleSeniority / rankCandidates: visible factors, no score', () => {
     expect(titleSeniority('VP Supply Chain')).toBe(4);
     const r = rankCandidates([mgr, dir, vp], new Set(['supply_chain']));
     expect(r.map((x) => x.card.id)).toEqual(['vp', 'dir', 'mgr']);
-    expect(r[0].factors).toEqual(['Adjacent operator (VP Supply Chain)', "US location unknown (no remit stated; the company's country is not the person's)", 'VP', 'matches the thesis role (supply chain)', 'email and phone']);
+    expect(r[0].factors).toEqual(['Adjacent operator (VP Supply Chain)', 'location and remit not on record', 'VP', 'matches the thesis role (supply chain)', 'email and phone']);
     const t = rankCandidates([vp, card('tr', 4, 'NA Transportation Operations Director', 'distribution')], new Set(['supply_chain']));
     expect(t[0].card.id).toBe('tr');
   });

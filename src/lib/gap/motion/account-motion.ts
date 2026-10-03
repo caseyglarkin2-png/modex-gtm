@@ -24,7 +24,7 @@
  * Calls and LinkedIn are human judgment: this only governs EMAIL cards.
  */
 import { addBusinessDays } from '../sequence/business-days';
-import { LANE_LABEL, priorKey, readPerson, titleSeniority } from '../people/person-prior';
+import { LANE_LABEL, priorKey, readPerson, titleSeniority, geoPhrase } from '../people/person-prior';
 
 export const MOTION_UNLOCK_BUSINESS_DAYS = 5;
 export const ACCOUNT_MOTION = 'account.motion' as const;
@@ -97,7 +97,7 @@ export function rankCandidates(cards: readonly MotionCard[], thesisKeys: Readonl
       const read = readPerson(card.persona.title);
       const factors = [
         `${LANE_LABEL[read.lane]}${card.persona.title ? ` (${card.persona.title})` : ''}`,
-        read.region === 'US_NA' ? 'US / North America remit stated' : read.regionWhy,
+        read.region === 'US_NA' ? geoPhrase(read) : read.regionWhy,
         SENIORITY_WORD[sen],
         relevant ? `matches the thesis role (${String(card.persona.personaKey).replace(/_/g, ' ')})` : 'outside the thesis role',
         reachable === 2 ? 'email and phone' : card.persona.email ? 'email only' : 'no email',
