@@ -1,6 +1,6 @@
 # GAP V2 resource convergence audit
 
-STATUS: ACTIVE (V2 decision compression + resource convergence, 2026-10-02)
+STATUS: SHIPPED 2026-10-02 (V2 decision compression + resource convergence; see STABLE_BASELINE.md V2)
 <!-- verified:2026-10-02 -->
 
 Read-only audit of every account-relevant resource in modex-gtm at `39f8a619`. Five parallel inventories (account
