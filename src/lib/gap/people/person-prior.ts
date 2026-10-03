@@ -26,7 +26,10 @@ export function titleSeniority(title: string | null | undefined): number {
   // "Vice president" is a VP: "president" alone (never after "vice") is the executive.
   if (/\bchief\b|\bc[a-z]?o\b|\bcsco\b|(?<!vice[ -])\bpresident\b/.test(t)) return 5;
   if (/\b(svp|evp|avp|vp)\b|vice president/.test(t)) return 4;
-  if (/director|\bhead\b/.test(t)) return 3;
+  // "Senior director" outranks "director" (PepsiCo: a Sr Director of Transportation beat a Director only by name order).
+  if (/\b(senior|sr\.?)\s+director\b|\bhead\b/.test(t)) return 3.5;
+  if (/director/.test(t)) return 3;
+  if (/\b(senior|sr\.?)\s+manager\b/.test(t)) return 2.5;
   if (/manager|lead\b/.test(t)) return 2;
   return 1;
 }
@@ -68,6 +71,8 @@ export interface PersonRead {
   regionWhy: string;
   scope: PersonScope;
   seniority: number;
+  /** Inside the primary lane: 2 = owns transportation / fleet / freight by name, 1 = logistics or distribution, 0 = other. */
+  ownership: number;
 }
 
 const has = (t: string, re: RegExp) => re.test(t);
@@ -198,7 +203,8 @@ export function readPerson(title: string | null | undefined, opts: { entityType?
   // A director-or-above who runs transportation, logistics or fleet runs a network unless a site is named.
   const leadsFreight = seniority >= 3 && (lane === 'PRIMARY_OPERATOR' || lane === 'ADJACENT_OPERATOR');
   const scope: PersonScope = has(t, SITE) && !has(t, NETWORK) ? 'SITE' : has(t, NETWORK) || (leadsFreight && !has(t, SITE)) ? 'NETWORK' : 'UNKNOWN';
-  return { lane, laneWhy, region, regionWhy, scope, seniority };
+  const ownership = lane === 'PRIMARY_OPERATOR' ? (/\b(transportation|transport|fleet|freight|otr|dedicated|trucking|line ?haul|intersite)\b/.test(t) ? 2 : 1) : 0;
+  return { lane, laneWhy, region, regionWhy, scope, seniority, ownership };
 }
 
 export interface WhoCandidate {
@@ -231,7 +237,7 @@ export const priorKey = (read: PersonRead): number[] => [rank(LANE_ORDER, read.l
 
 /** The ordered comparison key (first difference wins). Exposed for tests; never shown as a number. */
 export function whoKey(c: WhoCandidate, read: PersonRead): number[] {
-  return [c.doNotContact ? 0 : 1, c.buyerTruth ? 1 : 0, c.relationship ? 1 : 0, c.initiative ? 1 : 0, rank(LANE_ORDER, read.lane), rank(REGION_ORDER, read.region), rank(SCOPE_ORDER, read.scope), read.seniority, c.reachable ? 1 : 0];
+  return [c.doNotContact ? 0 : 1, c.buyerTruth ? 1 : 0, c.relationship ? 1 : 0, c.initiative ? 1 : 0, rank(LANE_ORDER, read.lane), rank(REGION_ORDER, read.region), rank(SCOPE_ORDER, read.scope), read.ownership, read.seniority, c.reachable ? 1 : 0];
 }
 
 /** One sentence for Casey: why this person, from the first reason that decided it. */

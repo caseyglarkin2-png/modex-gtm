@@ -20,8 +20,15 @@ type Row = Record<string, any>;
 
 const soft = <T,>(p: Promise<T> | undefined, fallback: T): Promise<T> => (p ? p.catch(() => fallback) : Promise.resolve(fallback));
 
+/** Load and project in one call (the reads need only the account name; see fetchAccountContextRows). */
 export async function loadAccountContext(prisma: PrismaLike, inputs: Pick<AccountInputs, 'account' | 'aliases' | 'domains' | 'memberships'>, now: Date): Promise<AccountContext> {
-  const name = inputs.account.name;
+  return projectAccountContext(await fetchAccountContextRows(prisma, inputs.account.name), inputs, now);
+}
+
+type ContextRows = Awaited<ReturnType<typeof fetchAccountContextRows>>;
+
+/** Every context read, by account name only: start it alongside the account inputs (V2 speed). Soft. */
+export async function fetchAccountContextRows(prisma: PrismaLike, name: string) {
   const where = { account_name: name };
   const [account, personas, meetings, emails, activities, captures, outcomes, sends, sessions, generated] = await Promise.all([
     soft(prisma.account?.findUnique({ where: { name }, select: { best_intro_path: true, owner: true, next_action: true, updated_at: true } }), null as Row | null),
@@ -42,12 +49,18 @@ export async function loadAccountContext(prisma: PrismaLike, inputs: Pick<Accoun
   })();
   const demoSlug = micro?.slug ?? accountSlug(name);
   const pack = await loadDemoPack(demoSlug).catch(() => null);
+  return { name, account, personas, meetings, emails, activities, captures, outcomes, sends, sessions, generated, micro, demoSlug, hasPack: !!pack };
+}
+
+/** Shape the rows into the account context (pure). */
+export function projectAccountContext(rows: ContextRows, inputs: Pick<AccountInputs, 'account' | 'aliases' | 'domains' | 'memberships'>, now: Date): AccountContext {
+  const { name, account, personas, meetings, emails, activities, captures, outcomes, sends, sessions, generated, micro, demoSlug, hasPack } = rows;
   const restriction = restrictionFor({ name, aliases: inputs.aliases, domains: inputs.domains });
   return {
     relationship: projectRelationship({ restriction, account: account as Row | null, personas: personas as Row[] as never, memberships: inputs.memberships, meetings: meetings as never, emails: emails as never, now }),
     engagement: projectEngagement((sessions as Row[]).map((s) => ({ path: s.path, sections_viewed: s.sections_viewed ?? [], cta_ids: s.cta_ids ?? [], scroll_depth_pct: s.scroll_depth_pct ?? 0, duration_seconds: s.duration_seconds ?? 0, updated_at: s.updated_at, human: isHumanTraffic(s.metadata) })), now),
     history: projectHistory({ activities: activities as never, emails: emails as never, meetings: meetings as never, captures: captures as never, outcomes: outcomes as never, sends: sends as never, now }),
-    assets: projectAssets({ generated: generated as never, sends: sends as never, micrositeSlug: micro?.slug ?? null, demoSlug: pack ? demoSlug : null, legacyMeetingBrief: getMeetingBriefByAccount(name) ? `/briefs/${accountSlug(name)}` : null, accountName: name }),
+    assets: projectAssets({ generated: generated as never, sends: sends as never, micrositeSlug: micro?.slug ?? null, demoSlug: hasPack ? demoSlug : null, legacyMeetingBrief: getMeetingBriefByAccount(name) ? `/briefs/${accountSlug(name)}` : null, accountName: name }),
     legacyNote: account?.next_action?.trim() ? { text: String(account.next_action).trim(), at: account.updated_at ? new Date(account.updated_at).toISOString() : null } : null,
   };
 }

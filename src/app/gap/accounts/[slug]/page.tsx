@@ -48,7 +48,8 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
   const q = (await searchParams) ?? {};
   const view: View = q.view === 'brief' || q.view === 'sources' ? q.view : 'now';
   const now = new Date();
-  const loaded = await loadAccountView(prisma, slug, now, { live: true, name: q.name });
+  // NOW and BRIEF read the account context too: its reads run alongside the inputs (V2 speed).
+  const loaded = await loadAccountView(prisma, slug, now, { live: true, name: q.name, context: view !== 'sources' });
   if (!loaded) notFound();
   if ('collision' in loaded) {
     return (
@@ -91,7 +92,7 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
 
   if (view === 'now' || view === 'brief') {
     // The account context is display-only and soft (a failed read leaves a slot empty, never the page).
-    const ctx = await loadAccountContext(prisma, inputs, now);
+    const ctx = loaded.context ?? (await loadAccountContext(prisma, inputs, now));
     const legacyHref = `/accounts/${accountSlug(brief.accountName)}`;
     const links = [
       { label: 'Account history', href: `${legacyHref}` },

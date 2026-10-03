@@ -19,6 +19,8 @@ import { getFacilityFact } from '@/lib/research/facility-fact-registry';
 import type { AccountMicrositeData, AccountROIModel } from '@/lib/microsites/schema';
 import { buildAccountBrief, type AccountInputs, type AccountIntelligenceBrief, type FactInput, type PackInput } from './build';
 import { loadHubSpotPeople, type HubSpotPeopleReads } from '../people/hubspot-people';
+import { fetchAccountContextRows, loadAccountContext, projectAccountContext } from '../context/load';
+import type { AccountContext } from '../context/context';
 import { accountSlug } from './href';
 
 export { accountSlug };
@@ -120,6 +122,31 @@ export async function loadAccountInputs(
   const skip = <T,>(p: () => Promise<T>, fallback: T): Promise<T> => (lean ? Promise.resolve(fallback) : p());
   const account = await prisma.account.findUnique({ where: { name: accountName }, select: { name: true, tier: true, priority_band: true, vertical: true, parent_brand: true, hubspot_company_id: true, updated_at: true } });
   if (!account) return null;
+  // SPEED (V2): every read that needs only the account name starts NOW and runs alongside the rest; each is awaited
+  // where it was before, with the same failure semantics (a handler is attached so an early rejection is not
+  // "unhandled"; awaiting it still rethrows).
+  const early = <T,>(p: Promise<T>): Promise<T> => {
+    p.catch(() => undefined);
+    return p;
+  };
+  const oppP = opts.live ? early((opts.deps?.opportunity ?? ((p: PrismaLike, a: string) => resolveAccountOpportunity(p, a)))(prisma, accountName)) : null;
+  const hsPeopleP = opts.live && account.hubspot_company_id ? loadHubSpotPeople(account.hubspot_company_id, opts.deps?.hubspotPeople) : Promise.resolve(null);
+  const contradictedP = early(soft(contradictedFactIds(prisma, accountName, now), new Map<string, string>()));
+  const candidateP: Promise<Row | null> = !lean && prisma.gapAccountCandidate?.findFirst
+    ? prisma.gapAccountCandidate.findFirst({ where: { scouted_at: { not: null }, OR: [{ account_name: accountName, decision: { in: ['added', 'mapped'] } }, { company_key: normalizeCompanyName(accountName) }] }, orderBy: { scouted_at: 'desc' } }).catch(() => null)
+    : Promise.resolve(null);
+  const touchesConvsP = lean
+    ? Promise.resolve([new Map(), new Map()] as const)
+    : Promise.all([loadAccountFirstTouches(prisma, [accountName], now).catch(() => new Map()), loadAccountConversations(prisma, [accountName], now).catch(() => new Map())]);
+  const familyP = lean ? Promise.resolve(null) : early((async () => {
+    const fam = await import('../family/family');
+    const f = await fam.loadCorporateFamily(prisma, accountName, opts.live ? { hubspot: fam.hubspotFamily } : {}).catch(() => null);
+    if (!f || (!f.parentName && !f.members.length)) return f ? { parentName: f.parentName, members: [], related: [], separate: null, hold: null } : null;
+    if (!opts.live || !f.members.length) return { parentName: f.parentName, members: f.members, related: null, separate: null, hold: null };
+    const [related, separate] = await Promise.all([fam.loadRelatedActivity(prisma, f, now).catch(() => null), fam.loadSeparateMotion(prisma, accountName, now).catch(() => null)]);
+    const hold = related ? fam.relatedHold(f, related, separate) : { detail: `Related account activity could not be read for ${f.members.map((m) => m.accountName).join(', ')}.`, accounts: f.members.map((m) => m.accountName), unknown: true };
+    return { parentName: f.parentName, members: f.members, related, separate, hold };
+  })());
   const [aliases, link, allNames, profiles, signalRows, factRows, lastRun, hyps, bidRows, personas, candidates, members] = await Promise.all([
     skip(() => prisma.gapAccountAlias.findMany({ where: { account_name: accountName }, select: { alias: true, created_at: true } }).catch(() => []), []),
     skip(() => prisma.canonicalAccountLink.findUnique({ where: { account_name: accountName }, select: { canonical_company_id: true, status: true } }).catch(() => null), null as Row | null),
@@ -150,23 +177,17 @@ export async function loadAccountInputs(
   ]);
   // "I reviewed it" after a THESIS NEEDS REVIEW flag (Casey's click, an audit row): the newest per thesis.
   const hypIds = (hyps as Row[]).map((h) => h.id as string);
-  const ackRows: Row[] = hypIds.length && prisma.gapAuditEvent?.findMany ? await soft(prisma.gapAuditEvent.findMany({ where: { kind: 'thesis.review_ack', subject_type: 'hypothesis', subject_id: { in: hypIds } }, select: { subject_id: true, created_at: true }, orderBy: { created_at: 'desc' } }), [] as Row[]) : [];
+  const rejectedIds = (hyps as Row[]).filter((h) => h.status === 'rejected').map((h) => h.id as string);
+  const [ackRows, buyerNo] = await Promise.all([
+    hypIds.length && prisma.gapAuditEvent?.findMany ? soft(prisma.gapAuditEvent.findMany({ where: { kind: 'thesis.review_ack', subject_type: 'hypothesis', subject_id: { in: hypIds } }, select: { subject_id: true, created_at: true }, orderBy: { created_at: 'desc' } }), [] as Row[]) : Promise.resolve([] as Row[]),
+    // A thesis the BUYER rejected (a human-confirmed problem_rejected disposition) shows as contradicted; a draft Casey withdrew does not.
+    rejectedIds.length && prisma.conversationDisposition?.findMany ? soft(prisma.conversationDisposition.findMany({ where: { hypothesis_id: { in: rejectedIds }, response_class: 'problem_rejected', human_confirmed: true }, select: { hypothesis_id: true } }), [] as Row[]) : Promise.resolve([] as Row[]),
+  ]) as [Row[], Row[]];
   const acks = new Map<string, Date>();
   for (const r of ackRows) if (!acks.has(r.subject_id)) acks.set(r.subject_id, new Date(r.created_at));
-  // A thesis the BUYER rejected (a human-confirmed problem_rejected disposition) shows as contradicted; a draft Casey withdrew does not.
-  const rejectedIds = (hyps as Row[]).filter((h) => h.status === 'rejected').map((h) => h.id as string);
-  const buyerNo: Row[] = rejectedIds.length && prisma.conversationDisposition?.findMany ? await soft(prisma.conversationDisposition.findMany({ where: { hypothesis_id: { in: rejectedIds }, response_class: 'problem_rejected', human_confirmed: true }, select: { hypothesis_id: true } }), [] as Row[]) : [];
   const buyerRejected = new Set(buyerNo.map((r) => r.hypothesis_id as string));
   // The corporate family: related accounts (never merged). What is live at them is read only on the live page.
-  const family = lean ? null : await (async () => {
-    const fam = await import('../family/family');
-    const f = await fam.loadCorporateFamily(prisma, accountName, opts.live ? { hubspot: fam.hubspotFamily } : {}).catch(() => null);
-    if (!f || (!f.parentName && !f.members.length)) return f ? { parentName: f.parentName, members: [], related: [], separate: null, hold: null } : null;
-    if (!opts.live || !f.members.length) return { parentName: f.parentName, members: f.members, related: null, separate: null, hold: null };
-    const [related, separate] = await Promise.all([fam.loadRelatedActivity(prisma, f, now).catch(() => null), fam.loadSeparateMotion(prisma, accountName, now).catch(() => null)]);
-    const hold = related ? fam.relatedHold(f, related, separate) : { detail: `Related account activity could not be read for ${f.members.map((m) => m.accountName).join(', ')}.`, accounts: f.members.map((m) => m.accountName), unknown: true };
-    return { parentName: f.parentName, members: f.members, related, separate, hold };
-  })();
+  const family = await familyP;
   const aliasList = (aliases as Array<{ alias: string }>).map((a) => a.alias);
   // First-party freshness: the record's own timestamp, or none (shown undated). Never a made-up date.
   const iso = (d: unknown): string | null => (d instanceof Date || typeof d === 'string' ? (Number.isNaN(new Date(d).getTime()) ? null : new Date(d).toISOString()) : null);
@@ -181,7 +202,7 @@ export async function loadAccountInputs(
   const profile = (profiles as Array<{ accountName: string; reasons?: string[] }>).find((p) => p.accountName === accountName);
 
   // A fact another live fact contradicts is not outreach evidence (the same check the inbox and the send gate run).
-  const contradicted: Map<string, string> = await soft(contradictedFactIds(prisma, accountName, now), new Map<string, string>());
+  const contradicted: Map<string, string> = await contradictedP;
   // Verified research facts; a continuation row carries its chain (one fact per quote, newest clock).
   const byQuote = new Map<string, FactInput>();
   for (const r of factRows as Row[]) {
@@ -220,20 +241,11 @@ export async function loadAccountInputs(
   // What Scout found while this was a candidate (added or mapped here): leads, never verified facts.
   // What Scout found: while this was a candidate (added or mapped here), or an identity Scout run on the account
   // itself (the same normalized company key). Leads, never verified facts.
-  const candidate: Row | null = !lean && prisma.gapAccountCandidate?.findFirst
-    ? await prisma.gapAccountCandidate.findFirst({ where: { scouted_at: { not: null }, OR: [{ account_name: accountName, decision: { in: ['added', 'mapped'] } }, { company_key: normalizeCompanyName(accountName) }] }, orderBy: { scouted_at: 'desc' } }).catch(() => null)
-    : null;
-  const [touches, convs] = lean
-    ? [new Map(), new Map()]
-    : await Promise.all([
-        loadAccountFirstTouches(prisma, [accountName], now).catch(() => new Map()),
-        loadAccountConversations(prisma, [accountName], now).catch(() => new Map()),
-      ]);
-  // The account's people in HubSpot (live page only; read-only; fails soft to null), read alongside the deal state.
-  const hsPeopleP = opts.live && account.hubspot_company_id ? loadHubSpotPeople(account.hubspot_company_id, opts.deps?.hubspotPeople) : Promise.resolve(null);
+  const candidate: Row | null = await candidateP;
+  const [touches, convs] = await touchesConvsP;
   let opportunity: AccountInputs['opportunity'] = null;
-  if (opts.live) {
-    const o: OpportunityTruth = await (opts.deps?.opportunity ?? ((p, a) => resolveAccountOpportunity(p, a)))(prisma, accountName);
+  if (oppP) {
+    const o: OpportunityTruth = await oppP;
     opportunity = o.status === 'ACTIVE' ? { status: 'ACTIVE', detail: '', deals: o.deals.map((d) => ({ name: d.name, stage: d.stage, amount: d.amount ?? null, closeDate: d.closeDate ?? null, nextStep: d.nextStep ?? null })) } : o.status === 'UNKNOWN' ? { status: 'UNKNOWN', detail: o.reason, deals: [], ...(o.reason === 'identity_unresolved' && /^no HubSpot company/.test(o.detail ?? '') ? { unlinked: true } : {}) } : { status: 'CLEAR', detail: '', deals: [] };
   }
   const conv = (convs as Map<string, { who: string; responseClass: string; at: string }>).get(accountName) ?? null;
@@ -290,13 +302,19 @@ function scoutOf(c: Row | null): AccountInputs['scout'] {
   return { domain: c.domain ?? null, what: s.what ?? null, entityType: c.entity_type ?? null, network: Array.isArray(s.network) ? s.network : [], freight: Array.isArray(s.freight) ? s.freight : [], at: c.scouted_at ? new Date(c.scouted_at).toISOString() : null, basis: s.basis === 'name_rules' ? 'name_rules' : 'web', ambiguous: s.ambiguous === true };
 }
 
-/** The brief AND the inputs it was built from (the V2 NOW / BRIEF projections read both). */
-export async function loadAccountView(prisma: PrismaLike, slug: string, now: Date, opts: Parameters<typeof loadAccountInputs>[3] & { name?: string } = {}): Promise<{ brief: AccountIntelligenceBrief; inputs: AccountInputs } | { collision: string[] } | null> {
+/**
+ * The brief AND the inputs it was built from (the V2 NOW / BRIEF projections read both). With `context`, the
+ * account context's reads (they need only the name) run alongside the inputs instead of after them.
+ */
+export async function loadAccountView(prisma: PrismaLike, slug: string, now: Date, opts: Parameters<typeof loadAccountInputs>[3] & { name?: string; context?: boolean } = {}): Promise<{ brief: AccountIntelligenceBrief; inputs: AccountInputs; context?: AccountContext } | { collision: string[] } | null> {
   const names = await accountNamesForSlug(prisma, slug);
   const name = opts.name && names.includes(opts.name) ? opts.name : names.length === 1 ? names[0] : null;
   if (!name) return names.length > 1 ? { collision: names } : null;
+  const rowsP = opts.context ? fetchAccountContextRows(prisma, name).catch(() => null) : Promise.resolve(null);
   const inputs = await loadAccountInputs(prisma, name, now, opts);
-  return inputs ? { brief: buildAccountBrief(inputs, now), inputs } : null;
+  if (!inputs) return null;
+  const rows = await rowsP;
+  return { brief: buildAccountBrief(inputs, now), inputs, ...(opts.context ? { context: rows ? projectAccountContext(rows, inputs, now) : await loadAccountContext(prisma, inputs, now) } : {}) };
 }
 
 /** The canonical brief for one account (live projection). Null when the slug names no account. */

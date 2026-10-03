@@ -31,6 +31,30 @@ describe('loadHubSpotPeople', () => {
   });
 });
 
+describe('the 15-minute cache', () => {
+  it('serves a repeat read from memory, re-reads after 15 minutes, and never caches a failure', async () => {
+    let calls = 0;
+    let fail = false;
+    const r: HubSpotPeopleReads = {
+      contactIdsForCompany: async () => {
+        calls += 1;
+        if (fail) throw new Error('429');
+        return { ids: ['1'], truncated: false };
+      },
+      readContacts: async () => [{ id: '1', properties: { firstname: 'A', lastname: 'B' } }],
+    };
+    const t = 1_000_000_000_000;
+    fail = true;
+    expect(await loadHubSpotPeople('cache-co', r, 1000, t, true)).toBeNull();
+    fail = false;
+    expect((await loadHubSpotPeople('cache-co', r, 1000, t, true))?.people).toHaveLength(1);
+    await loadHubSpotPeople('cache-co', r, 1000, t + 14 * 60_000, true);
+    expect(calls).toBe(2);
+    await loadHubSpotPeople('cache-co', r, 1000, t + 16 * 60_000, true);
+    expect(calls).toBe(3);
+  });
+});
+
 describe('person location', () => {
   it('the country decides; a US state without a country is US; a lone city says nothing', () => {
     expect(personCountry('Chicago, Illinois, United States')).toBe('US');
