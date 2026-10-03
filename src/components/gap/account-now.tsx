@@ -4,6 +4,7 @@
  * the only client piece is Listen (the existing voice preview, reading NOW without the private line).
  */
 import Link from 'next/link';
+import { PendingLink } from '@/components/gap/pending-link';
 import type { NowLine, NowView } from '@/lib/gap/context/now';
 import { VoicePreviewButton } from '@/components/voice-preview-button';
 
@@ -72,9 +73,9 @@ export function AccountNowView({ v, nextHref, nextLabel, links }: { v: NowView; 
         <p className="text-xs font-semibold uppercase tracking-wide text-[var(--primary)]">Next</p>
         <p className="text-sm font-medium">{v.next.text}</p>
         {nextHref && nextLabel ? (
-          <Link href={nextHref} className="mt-1 inline-flex min-h-11 items-center text-sm font-semibold underline" data-testid="now-next-control">
+          <PendingLink href={nextHref} className="mt-1 inline-flex min-h-11 items-center text-sm font-semibold underline" data-testid="now-next-control">
             {nextLabel}
-          </Link>
+          </PendingLink>
         ) : null}
       </div>
 

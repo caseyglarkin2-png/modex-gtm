@@ -19,6 +19,7 @@
  */
 
 import Link from 'next/link';
+import { PendingLink } from '@/components/gap/pending-link';
 import { cn } from '@/lib/utils';
 
 export type CockpitLane = 'review' | 'research' | 'ready' | 'follow_up' | 'replies' | 'deals';
@@ -108,9 +109,9 @@ export function NextUp({ items }: { items: NextUpItem[] }) {
         <p className="mt-1 text-lg font-semibold" data-testid="next-up-title">{first.title}</p>
         <p className="text-[var(--muted-foreground)]">{first.detail}</p>
       </div>
-      <Link href={first.href} data-testid="do-this-next" className="inline-flex rounded-md bg-[var(--primary)] px-4 py-2 text-sm font-medium text-[var(--primary-foreground)] hover:opacity-90">
+      <PendingLink href={first.href} data-testid="do-this-next" className="inline-flex min-h-11 items-center rounded-md bg-blue-700 px-4 py-2 text-sm font-medium text-white hover:opacity-90">
         Do this next
-      </Link>
+      </PendingLink>
       {rest.length ? (
         <ul className="space-y-1 border-t border-[var(--border)] pt-2 text-xs text-[var(--muted-foreground)]">
           {rest.map((i) => (

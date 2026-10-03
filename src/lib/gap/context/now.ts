@@ -90,10 +90,16 @@ const host = (u: string | null) => {
   }
 };
 /** Comparison form: the catalyst label ("RECENT EVENT:") and punctuation do not make a different idea. */
+const CATALYST_WINDOW_MS = 45 * 86_400_000;
+const SOURCE_KIND: Record<string, string> = { conference: 'a conference', event: 'an event', meeting: 'a meeting', referral: 'a referral' };
+
 const norm = (s: string) => s.replace(/^[A-Z][A-Z /]+:\s*/, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 
 /** A seller line never carries a raw URL or an empty bracket (the source is on the basis line). */
-const noUrls = (t: string) => t.replace(/\s*\(?\s*https?:\/\/[^\s)]+\)?/g, '').replace(/\(\s*\)/g, '').replace(/\s+([).,;])/g, '$1').replace(/\s{2,}/g, ' ').trim();
+const noUrls = (t: string) => t.replace(/\s*\(?\s*https?:\/\/[^\s)]+\)?/g, '')
+  // Machine words (click test round 3): a pipeline version "(V2)", a filing index "(2)". A trailing source host
+  // "(careers.walmart.com)" stays: it is the provenance of a titleless note.
+  .replace(/\s*\(V\d+\)/g, '').replace(/^((?:[A-Z][A-Z /]+:\s*)?)\(\d+\)\s+/, '$1').replace(/\(\s*\)/g, '').replace(/\s+([).,;])/g, '$1').replace(/\s{2,}/g, ' ').trim();
 
 /** The seller tag and basis of a statement, or null when it cannot be said in NOW (a system record about their operations). */
 export function sellerLine(s: Statement, section: string, x: { domains: readonly string[]; accountName: string; citable: ReadonlySet<string> }): NowLine | null {
@@ -149,6 +155,7 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   let who: NowView['who'] = null;
   if (m.type === 'INTRO_ONLY' && restriction) who = { name: restriction.introducer, title: null, why: `Holds the introduction to ${restriction.route}; this account is reached only through them.`, route: ctx.relationship.routes[0]?.route ?? null };
   else if (m.type === 'FOLLOW_UP' && m.who) who = { name: m.who, title: null, why: 'They are already talking to you: continue that thread.', route: null };
+  else if (m.type === 'RELATIONSHIP_LED' && m.met) who = { name: displayName(m.met.name), title: m.met.title, why: `You met them at ${m.met.source} (${SOURCE_KIND[m.met.sourceType] ?? m.met.sourceType.replace(/_/g, ' ')})${m.met.company ? `; works at ${m.met.company}` : ''}.${m.met.title ? '' : ' Title not on record: confirm it before you write.'}`, route: null };
   else if ((m.type === 'REFERRAL_LED' || m.type === 'RELATIONSHIP_LED') && m.who) who = { name: m.who, title: null, why: `You have a way in: ${m.why.split(':')[0]}.`, route: null };
   else if (p?.primary && !p.primary.doNotContact) who = { name: displayName(p.primary.name), title: p.primary.title, why: p.primary.why, route: null, location: p.primary.location ?? null, inHubSpotOnly: p.primary.source === 'hubspot' };
   // ONE ANSWER (click test P0): a first touch can only go where a READY card is. When the cockpit has one for this
@@ -189,6 +196,9 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
     const isSignal = s.sources[0]?.kind === 'signal';
     // An undated signal is not a reason to act now.
     if (isSignal && (signals >= 1 || !s.sources[0]?.at)) continue;
+    // Nor is an event past the 45-day catalyst window (Sources says the same; Tyson led on a 50-day-old "this week").
+    const at = Date.parse(String(s.asOf ?? s.sources[0]?.at ?? ''));
+    if (!isSignal && Number.isFinite(at) && now.getTime() - at > CATALYST_WINDOW_MS) continue;
     if (!isSignal && hasSignal && checked >= 2) continue;
     const l = sellerLine(s, 'catalysts', lx);
     // A slot is spent only by a line that is shown (a duplicate or an unsayable line spends nothing).
