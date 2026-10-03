@@ -20,7 +20,7 @@ import { sensitivityOf } from '../research/sensitivity';
 import { decideApproach } from '../motion/approach';
 import { restrictionFor } from '../policy/restriction';
 import { computeAccountMotion } from '../motion/account-motion';
-import { isDefaultWhoLane, LANE_LABEL, rankWho, type PersonLane, type PersonRegion } from '../people/person-prior';
+import { isDefaultWho, LANE_LABEL, rankWho, type PersonLane, type PersonRegion, GeoStatus } from '../people/person-prior';
 import { divisionOf, divisionsFor, sitesByDivision } from '../people/division';
 
 // ---------------------------------------------------------------- inputs (what load.ts gathers)
@@ -85,6 +85,8 @@ export interface PersonaInput {
   hubspotContactId?: string | null;
   /** The person's own location from their HubSpot contact ("Chicago, Illinois, United States"), when read. */
   location?: string | null;
+  /** When Apollo last enriched this person (a prior result: never spend on them again by accident). */
+  apolloEnrichedAt?: string | null;
 }
 
 interface PackSite {
@@ -293,6 +295,8 @@ export interface MappedPerson {
   lane: PersonLane;
   laneLabel: string;
   region: PersonRegion;
+  /** Which geography fact holds (location and remit kept apart). */
+  geo?: GeoStatus;
   why: string;
   reachable: boolean;
   doNotContact: boolean;
@@ -1187,10 +1191,10 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
   // R&D, sales, generic IT and unread titles are never the default. Nobody in an operating lane is Unknown, never
   // "the first contact on record".
   const ranked = rankWho(i.personas.map((p) => ({ key: String(p.id), name: p.name, title: p.title, location: p.location ?? null, reachable: !p.doNotContact && p.hasEmail, doNotContact: p.doNotContact, persona: p })), { entityType: fit.entityType });
-  const operating = ranked.filter((r) => isDefaultWhoLane(r.read.lane) && !r.candidate.doNotContact);
+  const operating = ranked.filter((r) => isDefaultWho(r.read) && !r.candidate.doNotContact);
   const pick = operating.find((r) => r.candidate.reachable) ?? operating[0] ?? null;
   // The OWNER line still names a do-not-contact operating owner, flagged (never silently skipped); WHO never picks them.
-  const persona = pick?.candidate.persona ?? ranked.find((r) => isDefaultWhoLane(r.read.lane))?.candidate.persona;
+  const persona = pick?.candidate.persona ?? ranked.find((r) => isDefaultWho(r.read))?.candidate.persona;
   // THE BUYER MAP spans GAP's contacts AND the account's people in HubSpot (live, read-only): a HubSpot person who
   // is not a GAP contact (no persona carries their hubspot_contact_id) is ranked by the same prior and marked so.
   const linked = new Set(i.personas.map((p) => p.hubspotContactId).filter((x): x is string => !!x));
@@ -1202,8 +1206,8 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
     ],
     { entityType: fit.entityType },
   );
-  const mapped = (r: (typeof everyone)[number]): MappedPerson => ({ name: r.candidate.name, title: r.candidate.title, lane: r.read.lane, laneLabel: LANE_LABEL[r.read.lane], region: r.read.region, why: r.why, reachable: r.candidate.reachable, doNotContact: !!r.candidate.doNotContact, division: divisionOf(i.account.name, r.candidate.title), location: r.candidate.location ?? null, source: r.candidate.source });
-  const opAll = everyone.filter((r) => isDefaultWhoLane(r.read.lane) && !r.candidate.doNotContact);
+  const mapped = (r: (typeof everyone)[number]): MappedPerson => ({ name: r.candidate.name, title: r.candidate.title, lane: r.read.lane, laneLabel: LANE_LABEL[r.read.lane], region: r.read.region, geo: r.read.geo, why: r.why, reachable: r.candidate.reachable, doNotContact: !!r.candidate.doNotContact, division: divisionOf(i.account.name, r.candidate.title), location: r.candidate.location ?? null, source: r.candidate.source });
+  const opAll = everyone.filter((r) => isDefaultWho(r.read) && !r.candidate.doNotContact);
   // The prior's best across both: a reachable GAP contact wins a tie (it can be worked today); a HubSpot-only person
   // wins when the prior ranks them higher (a better-fit owner).
   const best = opAll[0] ?? null;

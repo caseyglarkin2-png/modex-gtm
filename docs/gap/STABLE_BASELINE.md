@@ -1,6 +1,7 @@
 # GAP stable baseline
 
 STATUS: ACTIVE. GAP is in SELLER DOGFOOD MODE (V2 shipped 2026-10-02; the freeze rule below applies again).
+<!-- verified:2026-10-03 -->
 <!-- verified:2026-10-02 (V2) -->
 
 Production SHA: `11e26869` (GAP V2 click-test rounds 1-7, #368-#381; READY, production-verified 2026-10-03; all three adversarial click reviewers (phone, trust, UX) signed off YES on NOW). Update this line when a change ships.
@@ -131,8 +132,30 @@ V2 contracts (do not change without a new design decision):
   genuine reply to the buyer's own message passes). Account.best_intro_path, warm_intro, outreach_status and
   Persona.intro_route are display only.
 - **One WHO comparator** (`src/lib/gap/people/person-prior.ts`): buyer truth > relationship > initiative owner > lane
-  > US / North America remit (the person's own, never the company's country) > network scope > seniority. Lanes and
-  reasons, never a score. The brief, the buyer map and the cockpit read it.
+  > North America (one tier) > network scope > seniority. Lanes and reasons, never a score. The brief, the buyer map
+  and the cockpit read it.
+- **Geography is two facts about the PERSON** (amendment 2026-10-03; `tests/unit/gap/geography.test.ts`): LOCATION
+  (their own record: US / Canada / elsewhere / unknown; a company HQ never fills it) and OPERATING REMIT (the region
+  the title says they run; Canada is North America). States: NA_REMIT (North America remit confirmed), US_CONFIRMED,
+  CANADA_CONFIRMED, OTHER_REGION, UNKNOWN. The remit decides when stated (a Chicago-based Director, European Logistics
+  is another region; a Toronto-based VP, North America Transportation is NA remit), else the location, else unknown.
+  The three North America states rank as one tier after the lane: geography never outranks operating ownership.
+  The buyer map tags `[North America remit]`, `[US]`, `[Canada]`.
+- **Apollo: zero autonomous spend** (amendment 2026-10-03; `src/lib/enrichment/apollo-policy.ts`,
+  `tests/unit/apollo-policy.test.ts`). Every credit-capable Apollo call takes an initiator. Automation (crons, agents,
+  dogfood, golden runs) is refused unless Casey sets `APOLLO_AUTOMATED_CREDITS_PER_RUN` (default 0; a per-run cap, not a cumulative budget);
+  a human-initiated action (Casey clicks enrich on /contacts) is allowed; under the test runner every live call is
+  refused whoever asks. The reenrich-contacts cron skips with the reason. Reading Casey's saved Apollo lists costs no
+  credits and is not gated. Clawd (separate repo): the committee-enrichment job's paid `people/match` path is capped by
+  `APOLLO_ENRICH_MAX_PER_RUN=0` on Railway production (set 2026-10-03; it was enabled with the default 40/run); its
+  free sweep keeps `APOLLO_FREE_SWEEP_SPEND_CAP=0`; saved-list sync reads saved contacts (free).
+- **Apollo candidates** (`src/lib/gap/people/apollo-candidates.ts`, Sources view, read-only): where a lookup could change
+  WHO or NEXT, GAP proposes FIND_OWNER / FIND_EMAIL / CONFIRM_TITLE with what is missing, why, the decision it could
+  change, any possible match on record, what it checked first, credit cost UNKNOWN. Checked first: GAP and HubSpot
+  people, staged candidates (reviewed before any spend), relationships, a live deal / thread / intro-only account (no
+  request: Apollo would not change NEXT), prior Apollo results (never twice). Never for geography alone. Keyed
+  account|kind|target, so re-evaluation never duplicates. No control on the page runs a lookup; WHO may stay UNKNOWN.
+  Not built: a cross-account batch view (candidates are per account today).
 - **One account context** (`src/lib/gap/context/*`): deterministic projections over existing stores (no table, no
   score). Private engagement is interest, never a reason, never in copy or Listen; drip tasks and opens are not
   history. Both loaders' select keys are pinned to the Prisma schema (`tests/unit/gap/loader-schema.test.ts`).
@@ -167,9 +190,36 @@ extractor, then re-extract); PepsiCo economics "230 facilities" vs the 105-site 
 because production DATABASE_URL has connection_limit=1 (Casey decision); dark-mode --primary contrast (3.68:1) is a
 shared design token (Casey decision); legacy /accounts pages still load 12-36s and tell a different story.
 
+Receipt reconciliation (2026-10-03, against the code): restriction authority, account context, NOW / BRIEF /
+SOURCES, task authority: SHIPPED + VERIFIED (three adversarial click reviewers signed off YES on NOW). WHO comparator:
+SHIPPED BUT NEEDED FIX (Canada-located people ranked "another region"; location and remit conflated): fixed #385.
+"Person geography is not stored anywhere": OBSOLETE (HubSpot contact city / state / country read live since #371).
+Division modeling: PARTIAL (#368 asks which division owns the yard decision; no per-division owner model). Dark mode:
+SHIPPED BUT NEEDED FIX: #384 (tokens, status colors, Tailwind dark variant bound to the theme class). Database:
+BLOCKED EXTERNALLY on McKay (production `connection_limit=1`, last changed 2026-05-02; server max_connections 500,
+8 in use at check; no application code encodes the limit; nothing built around it).
+
+Amendment review (fresh adversarial reviewer, 2026-10-03; PRs #384 dark mode, #385 geography / Apollo). BLOCKER B1
+(a Chicago-based Director, European Logistics became WHO and Apollo treated them as the owner): FIXED, a stated
+other-region remit precedes the lane and never becomes the default WHO; pinned at WHO level. SHOULD FIX, all FIXED:
+SF1 research ranking counted Canada as abroad; SF2 re-clicking enrich re-spent on already-matched people; SF3 the human
+actor was a literal "Casey" (now the session; none, nothing runs); SF4 FIND_OWNER proposed while HubSpot was unread;
+SF5 an injected env could bypass the test refusal; SF6 the automation number was named a budget but is a per-run cap.
+NICE TO HAVE: "Toronto, ON, CA" read as US and "Americas" claimed a NA remit: FIXED. Mexico is OTHER_REGION everywhere:
+Casey's call (the amendment names Canada only). ~30 `text-amber-700 dark:text-amber-400` pairs instead of semantic
+text tokens: accepted (the existing badge-variant convention; a guard test keeps them paired). `/discovery` puts
+`text-white` on `--primary` (3.68:1 in dark): pre-existing, outside the GAP seller flows. The schema comment at
+`prisma/schema.prisma` mentioning `connection_limit=1` is a comment only. REJECTED (verified clean): other Apollo call
+paths, the candidate UI, company-HQ contamination of person geography, Apollo content on NOW, duplication of McKay's
+DB work, the app-wide `@custom-variant dark`, primary-foreground on non-primary fills.
+
 V2 debt (recorded, not built):
-- Person geography is not stored anywhere: most people read "US location unknown" until it is captured.
-- Division-level modeling (PepsiCo: Frito-Lay / PBNA / Quaker) is not built; NOW does not name the operating unit.
+- GitHub Actions does not run: "The job was not started because your account is locked due to a billing issue"
+  (every PR since at least #383). Local vitest / tsc / eslint / the 17 E2Es are the gate until Casey clears billing.
+- Tailwind token utilities (`text-muted-foreground`, `bg-background`, `ring-ring`; 345+ uses) map to nothing (no
+  `@theme`), so focus rings on the shared UI primitives do not render. Mapping them restyles the whole app: Casey's call.
+- Apollo candidates are per account; no cross-account batch view yet.
+- Division-level owner modeling (PepsiCo: Frito-Lay / PBNA / Quaker) is not built; NOW asks the division question.
 - Sub-Zero and World Market (Casey's JOC accounts) are not GAP accounts; their transportation contacts are not in
   HubSpot by title.
 - Legacy-path name matching misses brand aliases such as "DanoneWave" (recipient domains are still caught at the

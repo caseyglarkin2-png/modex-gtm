@@ -9,16 +9,21 @@
  *     buyer truth (the person who answered, a confirmed champion)
  *     > relationship (an introduction, someone Casey met)
  *     > explicit initiative ownership in a live signal (a named yard-modernization leader)
+ *     > not another region's stated remit (a title that says they run Europe owns Europe, not North America)
  *     > LANE  (primary operator > adjacent operator > facility operator > executive sponsor
  *              > transformation / tech > needs review > procurement / commercial > non-operating)
- *     > region (US / North America stated > not stated > another region stated)
+ *     > region (North America: a NA remit, or located in the US or Canada > unknown > another region)
  *     > scope  (network > not stated > one site)
  *     > seniority
  *
  * Operating ownership beats the bare word "transportation": sourcing, purchasing, category, finance, compliance,
  * sustainability, R&D, sales, a product market or business unit named "Transportation", and generic IT are never the
- * default WHO. Region comes from the person's own title or remit only; a company's headquarters or HubSpot company
- * country never makes a person US-based, and an unstated remit is "US location unknown", not foreign.
+ * default WHO. GEOGRAPHY is two facts about the PERSON, never the company: their LOCATION (where their own record says
+ * they sit: US, Canada, elsewhere) and their OPERATING REMIT (the region their title says they run). Canada is North
+ * America. The remit decides when stated (a Chicago-based "Director, European Logistics" runs Europe; a Toronto-based
+ * "VP, North America Transportation" runs North America); otherwise the location does; otherwise it is unknown, never
+ * filled from a headquarters or a HubSpot company country. The three North America states rank as one tier, after the
+ * lane: geography never outranks operating ownership (Casey amendment, 2026-10-03).
  */
 /** Seniority from the title words (5 exec .. 1 other). The LAST tie-break, never the first. */
 export function titleSeniority(title: string | null | undefined): number {
@@ -44,7 +49,19 @@ export type PersonLane =
   | 'NEEDS_REVIEW'
   | 'PROCUREMENT_COMMERCIAL'
   | 'NON_OPERATING';
+/** The ranking tier: 'US_NA' is North America (a NA remit, or located in the US or Canada). */
 export type PersonRegion = 'US_NA' | 'UNKNOWN' | 'OTHER_REGION';
+export type PersonLocation = 'US' | 'CANADA' | 'OTHER';
+export type PersonRemit = 'NORTH_AMERICA' | 'OTHER_REGION';
+/** The transparent geography state shown to Casey. */
+export type GeoStatus = 'NA_REMIT' | 'US_CONFIRMED' | 'CANADA_CONFIRMED' | 'OTHER_REGION' | 'UNKNOWN';
+export const GEO_LABEL: Record<GeoStatus, string> = {
+  NA_REMIT: 'North America remit confirmed',
+  US_CONFIRMED: 'US confirmed',
+  CANADA_CONFIRMED: 'Canada confirmed',
+  OTHER_REGION: 'Other region',
+  UNKNOWN: 'Location / remit unknown',
+};
 export type PersonScope = 'NETWORK' | 'UNKNOWN' | 'SITE';
 
 export const LANE_LABEL: Record<PersonLane, string> = {
@@ -67,8 +84,14 @@ export interface PersonRead {
   lane: PersonLane;
   /** Why the lane, in words (the title fragment that decided it). */
   laneWhy: string;
+  /** The ranking tier (North America / unknown / another region), from geo. */
   region: PersonRegion;
   regionWhy: string;
+  /** Where the person's own record says they sit (null: not on record). */
+  location: PersonLocation | null;
+  /** The region the title says they run (null: not stated). */
+  remit: PersonRemit | null;
+  geo: GeoStatus;
   scope: PersonScope;
   seniority: number;
   /** Inside the primary lane: 2 = owns transportation / fleet / freight by name, 1 = logistics or distribution, 0 = other. */
@@ -96,21 +119,34 @@ const OUTSIDE_LINE = /\b(board|former|retired|ex-|advisor|adviser|investor|busin
 // Running stores or a retail field organization is not running the freight network.
 const STORE_OPS = /\b(store|stores|retail|field|restaurant|branch sales) operations\b/;
 const SUPPORT_ROLE = /\b(analyst|coordinator|specialist|planner|planning|project manager|assistant|associate)\b/;
-const US_NA = /\b(na|n\.a\.|north america|north american|us|u\.s\.|usa|united states|domestic|nala|americas)\b/;
+const US_NA = /\b(na|n\.a\.|north america|north american|us|u\.s\.|usa|united states|domestic|nala|canada|canadian)\b/;
 const OTHER_REGION = /\b(europe|european|emea|latam|latin america|china|hong kong|india|asia|apac|middle east|africa|japan|uk|germany|france|mexico|brazil)\b/;
 const US_STATES = new Set(['alabama', 'alaska', 'arizona', 'arkansas', 'california', 'colorado', 'connecticut', 'delaware', 'florida', 'georgia', 'hawaii', 'idaho', 'illinois', 'indiana', 'iowa', 'kansas', 'kentucky', 'louisiana', 'maine', 'maryland', 'massachusetts', 'michigan', 'minnesota', 'mississippi', 'missouri', 'montana', 'nebraska', 'nevada', 'new hampshire', 'new jersey', 'new mexico', 'new york', 'north carolina', 'north dakota', 'ohio', 'oklahoma', 'oregon', 'pennsylvania', 'rhode island', 'south carolina', 'south dakota', 'tennessee', 'texas', 'utah', 'vermont', 'virginia', 'washington', 'west virginia', 'wisconsin', 'wyoming', 'district of columbia', 'al', 'ak', 'az', 'ar', 'ca', 'co', 'ct', 'de', 'fl', 'ga', 'hi', 'id', 'il', 'in', 'ia', 'ks', 'ky', 'la', 'me', 'md', 'ma', 'mi', 'mn', 'ms', 'mo', 'mt', 'ne', 'nv', 'nh', 'nj', 'nm', 'ny', 'nc', 'nd', 'oh', 'ok', 'or', 'pa', 'ri', 'sc', 'sd', 'tn', 'tx', 'ut', 'vt', 'va', 'wa', 'wv', 'wi', 'wy', 'dc']);
 const US_COUNTRY = new Set(['united states', 'united states of america', 'usa', 'us', 'u.s.', 'u.s.a.']);
 
-/** Where a person record says they are: 'US', 'OTHER' (a non-US country), or null (nothing usable). */
-export function personCountry(location: string | null | undefined): 'US' | 'OTHER' | null {
+const CA_COUNTRY = new Set(['canada', 'ca']);
+const CA_PROVINCES = new Set(['ontario', 'quebec', 'québec', 'british columbia', 'alberta', 'manitoba', 'saskatchewan', 'nova scotia', 'new brunswick', 'newfoundland and labrador', 'newfoundland', 'prince edward island', 'yukon', 'northwest territories', 'nunavut', 'on', 'qc', 'bc', 'ab', 'mb', 'sk', 'ns', 'nb', 'nl', 'pe', 'pei', 'yt', 'nt', 'nu']);
+
+/** Where a person's own record says they sit: 'US', 'CANADA', 'OTHER' (another country), or null (nothing usable). */
+export function personLocation(location: string | null | undefined): PersonLocation | null {
   const parts = String(location ?? '').split(',').map((p) => p.trim().toLowerCase()).filter(Boolean);
   if (!parts.length) return null;
   const last = parts[parts.length - 1];
   if (US_COUNTRY.has(last)) return 'US';
-  // A recognised state without a country is US; a lone city or an unknown region says nothing.
+  if (last === 'canada') return 'CANADA';
+  // "Toronto, ON, CA": CA is Canada's country code after a province, not California.
+  if (last === 'ca' && parts.length >= 3 && CA_PROVINCES.has(parts[parts.length - 2])) return 'CANADA';
+  // A recognised state or province without a country decides; a lone city or an unknown region says nothing.
   if (parts.length >= 2 && US_STATES.has(last)) return 'US';
-  if (parts.length >= 2 && !US_STATES.has(last) && /^[a-z .'-]{3,}$/.test(last) && !parts.slice(0, -1).some((p) => US_STATES.has(p))) return 'OTHER';
+  if (parts.length >= 2 && (CA_PROVINCES.has(last) || CA_COUNTRY.has(last))) return 'CANADA';
+  if (parts.length >= 2 && /^[a-z .'-]{3,}$/.test(last) && !parts.slice(0, -1).some((p) => US_STATES.has(p) || CA_PROVINCES.has(p))) return 'OTHER';
   return null;
+}
+
+/** Where a person record says they are on the old two-way split: North America ('US', which includes Canada) or 'OTHER'. */
+export function personCountry(location: string | null | undefined): 'US' | 'OTHER' | null {
+  const l = personLocation(location);
+  return l === 'OTHER' ? 'OTHER' : l ? 'US' : null;
 }
 
 const NETWORK = /\b(global|network|enterprise|corporate|corp\.|north america|national|regional|region|americas|na|nala|all sites|multi-site|domestic)\b/;
@@ -179,32 +215,38 @@ export function readPerson(title: string | null | undefined, opts: { entityType?
     laneWhy = 'the title does not say what they operate';
   }
 
-  // The person's own record ("Chicago, Illinois, United States"): the country decides; without one, a US state does.
-  const where = personCountry(opts.location);
-  let region: PersonRegion;
+  // Two facts: LOCATION from the person's own record, REMIT from the title. The remit decides when stated.
+  const location = personLocation(opts.location);
+  const remit: PersonRemit | null = has(t, US_NA) ? 'NORTH_AMERICA' : has(t, OTHER_REGION) ? 'OTHER_REGION' : null;
+  const at = String(opts.location ?? '').trim();
+  let geo: GeoStatus;
   let regionWhy: string;
-  if (has(t, US_NA)) {
-    region = 'US_NA';
-    regionWhy = 'US / North America remit in the title';
-  } else if (has(t, OTHER_REGION)) {
-    region = 'OTHER_REGION';
-    regionWhy = 'another region named in the title';
-  } else if (where === 'US') {
-    region = 'US_NA';
-    regionWhy = `US-based (${String(opts.location).trim()})`;
-  } else if (where === 'OTHER') {
-    region = 'OTHER_REGION';
-    regionWhy = `based outside the US (${String(opts.location).trim()})`;
+  if (remit === 'NORTH_AMERICA') {
+    geo = 'NA_REMIT';
+    regionWhy = `North America remit in the title${location ? ` (based in ${at})` : ''}`;
+  } else if (remit === 'OTHER_REGION') {
+    geo = 'OTHER_REGION';
+    regionWhy = `another region's remit in the title${location ? ` (based in ${at}; the remit decides, not the desk)` : ''}`;
+  } else if (location === 'US') {
+    geo = 'US_CONFIRMED';
+    regionWhy = `US-based (${at}); remit not stated`;
+  } else if (location === 'CANADA') {
+    geo = 'CANADA_CONFIRMED';
+    regionWhy = `Canada-based (${at}); remit not stated`;
+  } else if (location === 'OTHER') {
+    geo = 'OTHER_REGION';
+    regionWhy = `based outside North America (${at})`;
   } else {
-    region = 'UNKNOWN';
-    regionWhy = /\bglobal\b/.test(t) ? 'US location unknown (global remit; US responsibility not stated)' : 'US location unknown (no remit stated; the company\'s country is not the person\'s)';
+    geo = 'UNKNOWN';
+    regionWhy = /\bglobal\b/.test(t) ? 'location unknown (global remit; North America responsibility not stated)' : 'location and remit not on record';
   }
+  const region: PersonRegion = geo === 'OTHER_REGION' ? 'OTHER_REGION' : geo === 'UNKNOWN' ? 'UNKNOWN' : 'US_NA';
 
   // A director-or-above who runs transportation, logistics or fleet runs a network unless a site is named.
   const leadsFreight = seniority >= 3 && (lane === 'PRIMARY_OPERATOR' || lane === 'ADJACENT_OPERATOR');
   const scope: PersonScope = has(t, SITE) && !has(t, NETWORK) ? 'SITE' : has(t, NETWORK) || (leadsFreight && !has(t, SITE)) ? 'NETWORK' : 'UNKNOWN';
   const ownership = lane === 'PRIMARY_OPERATOR' ? (/\b(transportation|transport|fleet|freight|otr|dedicated|trucking|line ?haul|intersite)\b/.test(t) ? 2 : 1) : 0;
-  return { lane, laneWhy, region, regionWhy, scope, seniority, ownership };
+  return { lane, laneWhy, region, regionWhy, location, remit, geo, scope, seniority, ownership };
 }
 
 export interface WhoCandidate {
@@ -233,18 +275,24 @@ export interface WhoPick<C extends WhoCandidate = WhoCandidate> {
 const rank = <T>(order: T[], v: T) => order.length - order.indexOf(v);
 
 /** The prior's own part of the order (lane, region, scope), for callers that add their own tie-breaks. */
-export const priorKey = (read: PersonRead): number[] => [rank(LANE_ORDER, read.lane), rank(REGION_ORDER, read.region), rank(SCOPE_ORDER, read.scope)];
+export const priorKey = (read: PersonRead): number[] => [read.remit === 'OTHER_REGION' ? 0 : 1, rank(LANE_ORDER, read.lane), rank(REGION_ORDER, read.region), rank(SCOPE_ORDER, read.scope)];
 
 /** The ordered comparison key (first difference wins). Exposed for tests; never shown as a number. */
 export function whoKey(c: WhoCandidate, read: PersonRead): number[] {
-  return [c.doNotContact ? 0 : 1, c.buyerTruth ? 1 : 0, c.relationship ? 1 : 0, c.initiative ? 1 : 0, rank(LANE_ORDER, read.lane), rank(REGION_ORDER, read.region), rank(SCOPE_ORDER, read.scope), read.ownership, read.seniority, c.reachable ? 1 : 0];
+  // A stated other-region remit is a fact about what they OWN (review B1): it comes before the lane, not as a tie-break.
+  return [c.doNotContact ? 0 : 1, c.buyerTruth ? 1 : 0, c.relationship ? 1 : 0, c.initiative ? 1 : 0, read.remit === 'OTHER_REGION' ? 0 : 1, rank(LANE_ORDER, read.lane), rank(REGION_ORDER, read.region), rank(SCOPE_ORDER, read.scope), read.ownership, read.seniority, c.reachable ? 1 : 0];
+}
+
+/** The geography fact that decided, in a few words (WHO's why, the motion factors). */
+export function geoPhrase(read: Pick<PersonRead, 'geo' | 'regionWhy'>): string {
+  return read.geo === 'NA_REMIT' ? 'North America remit stated' : read.geo === 'US_CONFIRMED' ? 'US-based' : read.geo === 'CANADA_CONFIRMED' ? 'Canada-based' : read.geo === 'UNKNOWN' ? 'location / remit unknown' : read.regionWhy;
 }
 
 /** One sentence for Casey: why this person, from the first reason that decided it. */
 export function whyThem(c: WhoCandidate, read: PersonRead): string {
   const lead = c.buyerTruth ? `They are already talking to you (${c.buyerTruth})` : c.relationship ? `You have a way in (${c.relationship})` : c.initiative ? `A live signal names them on the initiative (${c.initiative})` : null;
   const role = `${LANE_LABEL[read.lane]}: ${read.laneWhy}`;
-  const where = read.region === 'US_NA' ? 'US / North America remit stated' : read.region === 'UNKNOWN' ? 'US location unknown' : read.regionWhy;
+  const where = geoPhrase(read);
   return `${lead ? `${lead}. ` : ''}${role}; ${where}${read.scope === 'NETWORK' ? '; network scope' : read.scope === 'SITE' ? '; one site' : ''}.`;
 }
 
@@ -264,3 +312,6 @@ export function rankWho<C extends WhoCandidate>(cands: readonly C[], opts: { ent
 
 /** A person worth leading with: an operating lane, never procurement, non-operating or an unread title by default. */
 export const isDefaultWhoLane = (lane: PersonLane) => lane === 'PRIMARY_OPERATOR' || lane === 'ADJACENT_OPERATOR' || lane === 'FACILITY_OPERATOR';
+
+/** The default WHO: an operating lane, and never a person whose title says they run another region (review B1). */
+export const isDefaultWho = (read: Pick<PersonRead, 'lane' | 'remit'>) => isDefaultWhoLane(read.lane) && read.remit !== 'OTHER_REGION';

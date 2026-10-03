@@ -60,7 +60,7 @@ describe('person location', () => {
     expect(personCountry('Chicago, Illinois, United States')).toBe('US');
     expect(personCountry('Plano, Texas')).toBe('US');
     expect(personCountry('Chicago, IL')).toBe('US');
-    expect(personCountry('Calgary, Alberta, Canada')).toBe('OTHER');
+    expect(personCountry('Calgary, Alberta, Canada')).toBe('US') // North America on the two-way split (Canada is North America);
     expect(personCountry('Sao Paulo, State of Sao Paulo, Brazil')).toBe('OTHER');
     expect(personCountry('Dallas')).toBeNull();
     expect(personCountry('')).toBeNull();

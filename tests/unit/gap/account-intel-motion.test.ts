@@ -73,7 +73,7 @@ describe('account motion', () => {
       { id: 3, name: 'Dana Trans', title: 'NA Transportation Operations Director', doNotContact: false, hasEmail: true, emailStatus: 'valid' },
     ] }), NOW);
     expect(b.people.primary).toMatchObject({ name: 'Dana Trans', lane: 'PRIMARY_OPERATOR', region: 'US_NA' });
-    expect(b.people.primary!.why).toMatch(/^Primary operator: .*US \/ North America remit stated/);
+    expect(b.people.primary!.why).toMatch(/^Primary operator: .*; North America remit stated/);
     expect(b.people.alternate).toMatchObject({ name: 'Vic VP', lane: 'ADJACENT_OPERATOR' });
     expect(b.people.lanes.map((l) => l.lane)).toEqual(['PRIMARY_OPERATOR', 'ADJACENT_OPERATOR', 'PROCUREMENT_COMMERCIAL']);
     expect(b.motion).toMatchObject({ type: 'FACT_LED', who: 'Dana Trans' });

@@ -4,6 +4,9 @@ import { isApolloConfigured } from '@/lib/enrichment/apollo-client';
 import { getEnrichmentBatchPolicy, getEnrichmentThresholds } from '@/lib/enrichment/config';
 import { getContactById } from '@/lib/hubspot/contacts';
 import { enrichPersonaFromHubSpotContact } from '@/lib/enrichment/apollo-enrichment';
+import { apolloLiveDecision, automatedApolloCreditsPerRun, type ApolloInitiator } from '@/lib/enrichment/apollo-policy';
+
+const CRON_INITIATOR: ApolloInitiator = { kind: 'automation', job: 'reenrich-contacts' };
 
 export const REENRICH_CRON_NAME = 'reenrich-contacts';
 export const REENRICH_CRON_PATH = '/api/cron/reenrich-contacts';
@@ -44,6 +47,13 @@ export async function runReenrichContactsCron(): Promise<ReenrichRunResult> {
     return { status: 'skipped', reason: 'Apollo is not configured' };
   }
 
+  // Zero autonomous Apollo spend (Casey, 2026-10-03): this cron is automation, so it runs only inside a budget Casey set.
+  const decision = apolloLiveDecision(CRON_INITIATOR);
+  if (!decision.allowed) {
+    await markCronSkipped(REENRICH_CRON_NAME, { path: REENRICH_CRON_PATH, schedule: REENRICH_CRON_SCHEDULE, reason: decision.reason }).catch(() => undefined);
+    return { status: 'skipped', reason: decision.reason };
+  }
+
   try {
     const thresholds = getEnrichmentThresholds();
     const policy = getEnrichmentBatchPolicy();
@@ -80,7 +90,8 @@ export async function runReenrichContactsCron(): Promise<ReenrichRunResult> {
       errors: 0,
     };
 
-    const toProcess = stale.slice(0, policy.batchSize);
+    // Never more contacts than the per-run credit cap Casey set (one search per contact).
+    const toProcess = stale.slice(0, Math.min(policy.batchSize, automatedApolloCreditsPerRun()));
     const started = Date.now();
     for (const persona of toProcess) {
       try {
@@ -89,10 +100,10 @@ export async function runReenrichContactsCron(): Promise<ReenrichRunResult> {
           stats.errors++;
           continue;
         }
-        const result = await enrichPersonaFromHubSpotContact(contact);
+        const result = await enrichPersonaFromHubSpotContact(contact, CRON_INITIATOR);
         if (result.status === 'matched') stats.matched++;
         else if (result.status === 'no_match') stats.noMatch++;
-        else stats.noLocal++;
+        else if (result.status === 'no_local_persona') stats.noLocal++;
       } catch {
         stats.errors++;
       }

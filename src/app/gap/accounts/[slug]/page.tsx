@@ -18,6 +18,8 @@ import { AccountNowView } from '@/components/gap/account-now';
 import { AccountBriefSections } from '@/components/gap/account-brief-sections';
 import { GapSubnav } from '@/components/gap/gap-subnav';
 import { ResearchPlanView } from '@/components/gap/research-plan';
+import { ApolloCandidatesView } from '@/components/gap/apollo-candidates';
+import { apolloCandidates } from '@/lib/gap/people/apollo-candidates';
 import { SeparateMotion } from '@/components/gap/separate-motion';
 import { loadResearchHistory, planResearch } from '@/lib/gap/account-intel/orchestrate';
 import { loadDealBrief } from '@/lib/gap/deals/deal-brief';
@@ -181,6 +183,7 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
               </p>
             )}
             <ResearchPlanView accountName={brief.accountName} plan={planResearch(brief, history, now)} />
+            <ApolloCandidatesView view={apolloCandidates(brief, inputs)} />
           </>
         }
       />

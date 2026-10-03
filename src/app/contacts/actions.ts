@@ -6,6 +6,7 @@ import { getContactById, hsSearchContacts, listRecentContacts, type HubSpotConta
 import { normalizeName, normalizeTitle, parseDomainFromEmail, scoreContactQuality, splitName } from '@/lib/contact-standard';
 import { buildHubSpotIntakeCandidates, type HubSpotIntakeCandidate } from '@/lib/contacts/hubspot-intake';
 import { enrichPersonaFromHubSpotContact } from '@/lib/enrichment/apollo-enrichment';
+import { auth } from '@/lib/auth';
 import { listApolloLabels, searchApolloSavedAccounts, searchApolloSavedContacts } from '@/lib/enrichment/apollo-client';
 import { importExternalContact, summarizeImportResults } from '@/lib/contacts/external-contact-import';
 import { parseContactsCsv } from '@/lib/contacts/csv-intake';
@@ -303,9 +304,14 @@ export async function enrichHubSpotContactsBulk(hubspotContactIds: string[]): Pr
   matched: number;
   noMatch: number;
   noLocalPersona: number;
+  alreadyEnriched: number;
   errors: number;
 }> {
-  const summary = { matched: 0, noMatch: 0, noLocalPersona: 0, errors: 0 };
+  const summary = { matched: 0, noMatch: 0, noLocalPersona: 0, alreadyEnriched: 0, errors: 0 };
+  // A human-initiated Apollo action: the actor is the signed-in session, never a literal (review SF3).
+  const session = await auth();
+  const actor = session?.user?.email;
+  if (!actor) return { ...summary, errors: hubspotContactIds.length };
   for (const hsId of hubspotContactIds.slice(0, 100)) {
     try {
       const contact = await getHubSpotContactByIdForIntake(hsId);
@@ -313,9 +319,11 @@ export async function enrichHubSpotContactsBulk(hubspotContactIds: string[]): Pr
         summary.errors++;
         continue;
       }
-      const result = await enrichPersonaFromHubSpotContact(contact);
+      const result = await enrichPersonaFromHubSpotContact(contact, { kind: 'human', actor: `${actor} (contacts: enrich selected)` });
       if (result.status === 'matched') summary.matched++;
       else if (result.status === 'no_match') summary.noMatch++;
+      else if (result.status === 'already_enriched') summary.alreadyEnriched++;
+      else if (result.status === 'blocked') summary.errors++;
       else summary.noLocalPersona++;
     } catch {
       summary.errors++;

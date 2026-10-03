@@ -65,10 +65,10 @@ describe('region: the person\'s own remit, never the company\'s country', () => 
     expect(readPerson('Delivery and Transportation Director Latam').region).toBe('OTHER_REGION');
     expect(readPerson('Director of Transportation', { location: 'Chicago, IL' }).region).toBe('US_NA');
   });
-  it('no remit stated is "US location unknown", not foreign', () => {
+  it('no remit stated is "location unknown", not foreign', () => {
     const r = readPerson('Director of Global Transportation');
     expect(r.region).toBe('UNKNOWN');
-    expect(r.regionWhy).toMatch(/US location unknown/);
+    expect(r.regionWhy).toBe('location unknown (global remit; North America responsibility not stated)');
     expect(readPerson('Sr. Director, International Transportation').region).toBe('UNKNOWN');
   });
 });
@@ -106,8 +106,8 @@ describe('WHO order: buyer truth > relationship > initiative > lane > region > s
   });
   it('why is a sentence, never a number', () => {
     const [top] = rankWho([p('na', 'NA Transportation Operations Director')]);
-    expect(top.why).toBe('Primary operator: title says they run transportation, freight or fleet; US / North America remit stated; network scope.');
+    expect(top.why).toBe('Primary operator: title says they run transportation, freight or fleet; North America remit stated; network scope.');
     expect(top.why).not.toMatch(/\d/);
-    expect(whoKey(top.candidate, top.read).length).toBe(10);
+    expect(whoKey(top.candidate, top.read).length).toBe(11);
   });
 });

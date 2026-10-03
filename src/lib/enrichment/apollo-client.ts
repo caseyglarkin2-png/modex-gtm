@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { ApolloSearchResponseFixtureSchema, ApolloPersonFixtureSchema } from '@/lib/enrichment/contracts';
+import { apolloLiveDecision, type ApolloInitiator } from '@/lib/enrichment/apollo-policy';
 
 export type ApolloPerson = z.infer<typeof ApolloPersonFixtureSchema>;
 
@@ -45,7 +46,9 @@ export function isApolloConfigured(): boolean {
   return Boolean(getApolloApiKey());
 }
 
-export async function searchApolloPeople(query: string): Promise<ApolloPerson[]> {
+/** People search can consume credits: it asks the policy first (initiator required; tests never reach Apollo). */
+export async function searchApolloPeople(query: string, initiator: ApolloInitiator, env?: Record<string, string | undefined>): Promise<ApolloPerson[]> {
+  if (!apolloLiveDecision(initiator, env).allowed) return [];
   const apiKey = getApolloApiKey();
   if (!apiKey) return [];
 

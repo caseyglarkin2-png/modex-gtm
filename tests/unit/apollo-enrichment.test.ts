@@ -12,6 +12,8 @@ vi.mock('@/lib/enrichment/apollo-client', () => ({ searchApolloPeople: mockedSea
 
 describe('apollo enrichment persistence', () => {
   beforeEach(() => {
+    // Apollo is mocked (searchApolloPeople) and fetch is a mock: the human path runs, nothing reaches the network.
+    vi.stubGlobal('fetch', vi.fn());
     vi.clearAllMocks();
   });
 
@@ -48,7 +50,7 @@ describe('apollo enrichment persistence', () => {
       hs_lead_status: '',
       lifecyclestage: '',
       hs_email_optout: false,
-    });
+    }, { kind: 'human', actor: 'test' }, {});
 
     expect(result.status).toBe('matched');
     expect(mockedPrisma.contactEnrichment.upsert).toHaveBeenCalled();
@@ -80,8 +82,8 @@ describe('apollo enrichment persistence', () => {
       hs_email_optout: false,
     };
 
-    const first = await enrichPersonaFromHubSpotContact(contact);
-    const second = await enrichPersonaFromHubSpotContact(contact);
+    const first = await enrichPersonaFromHubSpotContact(contact, { kind: 'human', actor: 'test' }, {});
+    const second = await enrichPersonaFromHubSpotContact(contact, { kind: 'human', actor: 'test' }, {});
 
     expect(first.status).toBe('no_match');
     expect(second.status).toBe('no_match');

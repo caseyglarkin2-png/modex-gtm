@@ -103,7 +103,7 @@ describe('a thesis that needs review is never actionable', () => {
     const r = thesisCurrentness(gm('fb'), 'h-gm', T);
     expect(r.current).toBe(false);
     if (r.current !== false) return;
-    expect(r.reason).toMatch(/opens on activity outside the US network/);
+    expect(r.reason).toMatch(/opens on activity outside the North America network/);
     expect(r.bestFact).toMatch(/redesign the plant and warehouse network/);
     expect(r.opener).toMatch(/business in Brazil/);
     // the brief and the gate agree: the account brief routes to review on the same inputs
@@ -112,7 +112,7 @@ describe('a thesis that needs review is never actionable', () => {
   });
   it('soak P1: the "better current fact" hold is a review reason, so Reviewed, keep it shows for it; Casey keeping it clears the hold', () => {
     const brief = buildAccountBrief(gm('fb'), T);
-    expect(brief.hypotheses.find((h) => h.id === 'h-gm')!.needsReview.join(' ')).toMatch(/opens on activity outside the US network, but a better current fact exists/);
+    expect(brief.hypotheses.find((h) => h.id === 'h-gm')!.needsReview.join(' ')).toMatch(/opens on activity outside the North America network, but a better current fact exists/);
     const kept = gm('fb') as AccountInputs;
     kept.hypotheses[0].reviewAckAt = '2026-10-01T09:00:00Z';
     expect(thesisCurrentness(kept, 'h-gm', T)).toEqual({ current: true });
@@ -131,7 +131,7 @@ describe('a thesis that needs review is never actionable', () => {
   it('draft and send refuse at the click, whatever the card says (an old deep link cannot revive it)', async () => {
     const d = db();
     const gmail = gmailFake();
-    const notCurrent = async () => ({ current: false as const, reason: 'It opens on activity outside the US network, but a better current fact exists.', bestFact: REDESIGN.quote, opener: BRAZIL.quote });
+    const notCurrent = async () => ({ current: false as const, reason: 'It opens on activity outside the North America network, but a better current fact exists.', bestFact: REDESIGN.quote, opener: BRAZIL.quote });
     const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, { ...baseDeps(d, 'pass', gmail), thesisCurrent: notCurrent });
     expect(r).toMatchObject({ ok: false, reason: 'thesis_needs_review' });
     expect(gmail.createGmailDraft).not.toHaveBeenCalled();

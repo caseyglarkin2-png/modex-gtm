@@ -100,7 +100,7 @@ export interface ContinuityRecord {
 
 // ---------------------------------------------------------------- seller relevance (not truth)
 
-const INTERNATIONAL = /\b(?:india|china|brazil|(?<!new )mexico|europe|european|uk|united kingdom|england|scotland|spain|germany|france|italy|africa|african|asia|asian|japan|australia|indonesia|philippines|vietnam|bengaluru|karnataka|iberia|canada|canadian|kazakhstan|russia|ukraine|poland|netherlands|belgium|turkey|egypt|saudi arabia|dubai|pakistan|bangladesh|thailand|malaysia|singapore|korea|taiwan|chile|peru|colombia|argentina|ireland|sweden|norway|denmark|switzerland|austria|portugal|greece|romania|hungary|czech|israel|nigeria|kenya|new zealand)\b/i;
+const INTERNATIONAL = /\b(?:india|china|brazil|(?<!new )mexico|europe|european|uk|united kingdom|england|scotland|spain|germany|france|italy|africa|african|asia|asian|japan|australia|indonesia|philippines|vietnam|bengaluru|karnataka|iberia|kazakhstan|russia|ukraine|poland|netherlands|belgium|turkey|egypt|saudi arabia|dubai|pakistan|bangladesh|thailand|malaysia|singapore|korea|taiwan|chile|peru|colombia|argentina|ireland|sweden|norway|denmark|switzerland|austria|portugal|greece|romania|hungary|czech|israel|nigeria|kenya|new zealand)\b/i;
 const US_PLACES = String.raw`u\.s\.|united states|texas|laredo|el paso|arizona|california|new mexico|illinois|ohio|georgia|pennsylvania|tennessee|kentucky|indiana|north carolina|south carolina|florida|nevada|utah|washington|oregon|new jersey|new york|virginia|michigan|wisconsin|minnesota|missouri|iowa|kansas|oklahoma|arkansas|alabama|mississippi|louisiana|colorado|idaho|nebraska`;
 // A US site in the fact keeps it a US fact: "in Laredo, Texas", "at its Ohio DC", "its new Laredo, Texas distribution
 // center". A dateline or a listing ("U.S.-listed") is not a site.
@@ -128,7 +128,7 @@ export interface SellerRelevance {
 export function sellerRelevance(raw: string): SellerRelevance {
   // A press-release dateline ("NEW YORK--(BUSINESS WIRE)--") says where the wire filed, not where the site is.
   const excerpt = raw.replace(/^\s*[A-Z][A-Z .,'-]{2,40}(?:--|\s[-\u2014]\s?)(?:\(\s*[\w ]+\s*\)\s*-*)?\s*/, '');
-  if (INTERNATIONAL.test(excerpt) && !US_ANCHOR.test(excerpt)) return { bucket: 'context', rank: 8, reason: 'activity outside the US network' };
+  if (INTERNATIONAL.test(excerpt) && !US_ANCHOR.test(excerpt)) return { bucket: 'context', rank: 8, reason: 'activity outside the North America network' };
   if (DIVEST.test(excerpt)) return { bucket: 'context', rank: 7, reason: 'a divestiture or sale' };
   if (LEGAL.test(excerpt) && !NETWORK.test(excerpt)) return { bucket: 'context', rank: 6, reason: 'legal transaction text' };
   if (BROAD.test(excerpt) && !SITE.test(excerpt)) return { bucket: 'context', rank: 6, reason: 'a broad corporate restructuring' };

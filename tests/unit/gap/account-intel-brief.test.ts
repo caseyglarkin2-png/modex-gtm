@@ -462,7 +462,7 @@ describe('closeout: General Mills and RXO', () => {
     const h = { ...base().hypotheses[0], id: 'hb', status: 'draft', observation: brazil.quote, primarySignalId: 'fb' };
     const b = buildAccountBrief(base({ facts: [brazil, redesign], hypotheses: [h] }), NOW);
     expect(b.motion.type).toBe('FACT_LED');
-    expect(b.glance.nextAction).toMatch(/^Review the thesis before any first touch: it opens on activity outside the US network/);
+    expect(b.glance.nextAction).toMatch(/^Review the thesis before any first touch: it opens on activity outside the North America network/);
     expect(b.glance.nextAction).toMatch(/the best current fact is "General Mills will redesign the plant and warehouse network/);
     // a thesis on the best fact keeps the ordinary next action
     const good = buildAccountBrief(base({ facts: [brazil, redesign], hypotheses: [{ ...h, observation: redesign.quote, primarySignalId: 'fr' }] }), NOW);

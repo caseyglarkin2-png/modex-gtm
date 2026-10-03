@@ -173,7 +173,7 @@ export async function loadAccountInputs(
         return [...rows, ...extra];
       }), [] as Row[]),
     soft(prisma.buyerInputData.findMany({ where: { account_name: accountName }, select: { id: true, type: true, normalized_summary: true, raw_buyer_language: true, contact_email: true, captured_at: true, human_confirmed: true, supersedes_id: true, confirmed_at: true, hypothesis_id: true } }), [] as Row[]),
-    skip(() => prisma.persona.findMany({ where: { account_name: accountName }, select: { id: true, name: true, title: true, do_not_contact: true, email: true, email_status: true, updated_at: true, hubspot_contact_id: true }, take: 60 }), [] as Row[]),
+    skip(() => prisma.persona.findMany({ where: { account_name: accountName }, select: { id: true, name: true, title: true, do_not_contact: true, email: true, email_status: true, updated_at: true, hubspot_contact_id: true, enrichment: { select: { apollo_person_id: true, last_enriched_at: true } } }, take: 60 }), [] as Row[]),
     skip(() => prisma.accountContactCandidate.findMany({ where: { account_name: accountName, state: 'staged' }, select: { id: true, full_name: true, title: true, state: true, last_seen_at: true }, take: 30 }).catch(() => []), []),
     skip(() => (prisma.gapWorkSourceMember?.findMany ? prisma.gapWorkSourceMember.findMany({ where: { account_name: accountName, status: { notIn: ['ignored', 'not_now'] } }, select: { name: true, kind: true, title: true, company: true, persona_id: true, relationship_context: true, ingested_at: true, work_source: { select: { name: true, source_type: true } } }, take: 30 }).catch(() => []) : Promise.resolve([])), []),
   ]);
@@ -283,7 +283,7 @@ export async function loadAccountInputs(
       reviewAckAt: acks.get(h.id) ? acks.get(h.id)!.toISOString() : null,
     })),
     bids: confirmed.map((b) => ({ id: b.id, type: b.type, summary: b.normalized_summary ?? b.raw_buyer_language, quote: b.raw_buyer_language, who: b.contact_email ?? null, at: new Date(b.confirmed_at ?? b.captured_at).toISOString(), hypothesisId: b.hypothesis_id ?? null })),
-    personas: (personas as Row[]).map((p) => ({ id: p.id, name: p.name, title: p.title ?? null, doNotContact: !!p.do_not_contact, hasEmail: !!p.email, emailStatus: p.email_status ?? null, updatedAt: iso(p.updated_at), hubspotContactId: p.hubspot_contact_id ?? null, location: p.hubspot_contact_id ? hsById.get(String(p.hubspot_contact_id))?.location ?? null : null })),
+    personas: (personas as Row[]).map((p) => ({ id: p.id, name: p.name, title: p.title ?? null, doNotContact: !!p.do_not_contact, hasEmail: !!p.email, emailStatus: p.email_status ?? null, updatedAt: iso(p.updated_at), hubspotContactId: p.hubspot_contact_id ?? null, apolloEnrichedAt: p.enrichment?.apollo_person_id ? iso(p.enrichment.last_enriched_at) : null, location: p.hubspot_contact_id ? hsById.get(String(p.hubspot_contact_id))?.location ?? null : null })),
     hubspotPeople: hsPeople,
     candidates: (candidates as Row[]).map((c) => ({ id: c.id, name: c.full_name, title: c.title ?? null, state: c.state, seenAt: iso(c.last_seen_at) })),
     // A member whose Persona is do-not-contact is never a way in (relationship context is never consent).

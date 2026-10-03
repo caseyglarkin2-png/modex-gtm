@@ -2,6 +2,8 @@
  * BRIEF (V2, 2026-10-02): the one-page meeting brief. Each section shows 3-5 seller lines (tag + basis) and how many
  * more SOURCES holds. Projected from the same brief and context as NOW; nothing new is decided here.
  */
+/** Which North America fact holds, as a short tag (location and remit kept apart; unknown and other carry none). */
+const GEO_TAG: Record<string, string> = { NA_REMIT: ' [North America remit]', US_CONFIRMED: ' [US]', CANADA_CONFIRMED: ' [Canada]' };
 import { sameIdea } from './same-idea';
 import type { AccountInputs, AccountIntelligenceBrief, SectionKey } from '../account-intel/build';
 import { sensitivityOf } from '../research/sensitivity';
@@ -66,7 +68,7 @@ export function projectBrief(brief: AccountIntelligenceBrief, ctx: AccountContex
 
   const p = brief.people;
   const people = p?.lanes.length
-    ? p.lanes.map((l) => `${l.label}: ${dedupePeople(l.people).slice(0, 3).map((x) => `${displayName(x.name)}${x.title ? ` (${x.title})` : ''}${x.division ? ` [${x.division}]` : ''}${x.location ? ` · ${x.location}` : ''}${x.source === 'hubspot' ? ' · HubSpot only' : ''}${x.doNotContact ? ' [do not contact]' : ''}${x.region === 'US_NA' ? ' [US / NA]' : ''}`).join('; ')}${l.people.length > 3 ? ` and ${l.people.length - 3} more` : ''}`)
+    ? p.lanes.map((l) => `${l.label}: ${dedupePeople(l.people).slice(0, 3).map((x) => `${displayName(x.name)}${x.title ? ` (${x.title})` : ''}${x.division ? ` [${x.division}]` : ''}${x.location ? ` · ${x.location}` : ''}${x.source === 'hubspot' ? ' · HubSpot only' : ''}${x.doNotContact ? ' [do not contact]' : ''}${GEO_TAG[x.geo ?? ''] ?? ''}`).join('; ')}${l.people.length > 3 ? ` and ${l.people.length - 3} more` : ''}`)
     : [];
   const rel = ctx.relationship;
   const relationship = [
