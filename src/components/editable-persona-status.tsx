@@ -25,7 +25,7 @@ export function EditablePersonaStatus({ personaId, currentValue }: Props) {
 
   return (
     <Select value={value} onValueChange={handleChange} disabled={isPending}>
-      <SelectTrigger className="h-7 w-auto min-w-[120px] border-none bg-transparent px-1 text-xs">
+      <SelectTrigger aria-label="Contact status" className="h-7 w-auto min-w-[120px] border-none bg-transparent px-1 text-xs">
         <SelectValue>
           <StatusBadge status={value} />
         </SelectValue>

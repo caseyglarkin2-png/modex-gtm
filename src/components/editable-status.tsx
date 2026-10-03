@@ -21,6 +21,9 @@ interface Props {
   currentValue: string;
 }
 
+/** The accessible name of each status picker (axe: a combobox needs a name). */
+const FIELD_LABEL: Record<Props['field'], string> = { research_status: 'Research status', outreach_status: 'Outreach status', meeting_status: 'Meeting status' };
+
 export function EditableStatus({ accountName, field, currentValue }: Props) {
   const [value, setValue] = useState(currentValue);
   const [isPending, startTransition] = useTransition();
@@ -34,7 +37,7 @@ export function EditableStatus({ accountName, field, currentValue }: Props) {
 
   return (
     <Select value={value} onValueChange={handleChange} disabled={isPending}>
-      <SelectTrigger className="h-7 w-auto min-w-[120px] border-none bg-transparent px-1 text-xs">
+      <SelectTrigger aria-label={FIELD_LABEL[field]} className="h-7 w-auto min-w-[120px] border-none bg-transparent px-1 text-xs">
         <SelectValue>
           <StatusBadge status={value} />
         </SelectValue>

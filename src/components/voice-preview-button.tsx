@@ -65,6 +65,9 @@ export function VoicePreviewButton({ text, label = 'Listen', className }: Props)
       className={className}
       disabled={loading}
       onClick={handlePlay}
+      aria-pressed={playing}
+      aria-busy={loading}
+      aria-label={playing ? `Stop: ${label}` : label}
     >
       {loading ? (
         <Loader2 className="h-3.5 w-3.5 animate-spin" />

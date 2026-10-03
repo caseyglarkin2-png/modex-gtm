@@ -94,8 +94,9 @@ export function GlobalComposeButton() {
       <Button
         onClick={openCompose}
         size="icon"
-        className="fixed bottom-6 right-6 z-50 h-12 w-12 rounded-full shadow-lg"
+        className="fixed bottom-6 right-6 z-50 h-12 w-12 rounded-full shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
         title="Compose email (Ctrl+Shift+E)"
+        aria-label="Compose email"
       >
         <Mail className="h-5 w-5" />
       </Button>

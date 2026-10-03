@@ -75,9 +75,9 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
   const hrefFor = (v: View) => `/gap/accounts/${slug}${v === 'now' ? (nameQ ? `?${nameQ}` : '') : `?view=${v}${nameQ ? `&${nameQ}` : ''}`}`;
 
   const tabs = (
-    <nav className="sticky top-0 z-10 -mx-4 flex gap-1 border-b border-[var(--border)] bg-[var(--background)] px-4 py-2" data-testid="account-view-tabs">
+    <nav aria-label="Account views" className="sticky top-14 z-30 -mx-4 flex gap-1 border-b border-[var(--border)] bg-[var(--background)] px-4 py-1.5 md:top-0" data-testid="account-view-tabs">
       {VIEWS.map((t) => (
-        <Link key={t.v} href={hrefFor(t.v)} aria-current={view === t.v ? 'page' : undefined} className={`rounded px-3 py-1 text-sm ${view === t.v ? 'bg-[var(--primary)] font-semibold text-[var(--primary-foreground)]' : 'text-[var(--muted-foreground)]'}`} data-testid={`account-view-${t.v}`}>
+        <Link key={t.v} href={hrefFor(t.v)} aria-current={view === t.v ? 'page' : undefined} className={`inline-flex min-h-11 min-w-16 items-center justify-center rounded px-4 text-sm ${view === t.v ? 'bg-blue-700 font-semibold text-white' : 'text-[var(--muted-foreground)]'}`} data-testid={`account-view-${t.v}`}>
           {t.label}
         </Link>
       ))}
@@ -104,7 +104,7 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
     if (view === 'brief') {
       const dealBrief = brief.dealState === 'ACTIVE' ? await loadDealBrief(prisma, brief.accountName, { now }).catch(() => null) : null;
       return (
-        <div className="mx-auto max-w-2xl space-y-4">
+        <div className="mx-auto max-w-2xl space-y-4 pb-28">
           <GapSubnav />
           {header}
           {tabs}
@@ -133,7 +133,7 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
       : brief.hypotheses.some((h) => h.needsReview.length) ? { href: `${hrefFor('sources')}#brief-hypotheses`, label: 'Review the thesis' }
       : { href: `${hrefFor('sources')}#research-plan`, label: 'Open the research plan' };
     return (
-      <div className="mx-auto max-w-2xl space-y-4">
+      <div className="mx-auto max-w-2xl space-y-4 pb-28">
         <GapSubnav />
         {header}
         {tabs}
@@ -149,7 +149,7 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
     brief.dealState === 'ACTIVE' ? loadDealBrief(prisma, brief.accountName, { now }).catch(() => null) : Promise.resolve(null),
   ]);
   return (
-    <div className="mx-auto max-w-2xl space-y-5">
+    <div className="mx-auto max-w-2xl space-y-5 pb-28">
       <GapSubnav />
       {header}
       {tabs}

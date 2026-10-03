@@ -42,15 +42,17 @@ export function AccountSourcesSection({ sources, limit, viewAllHref, researchHre
       {limit ? (
         <ul>
           {events.map((e) => (
-            <div key={e.id} data-testid="source-event" data-unreviewed={e.unreviewed}>
-              <SourceCard s={e.lead} accountName={sources.accountName} compact />
+            <li key={e.id} data-testid="source-event" data-unreviewed={e.unreviewed} className="list-none">
+              <ul>
+                <SourceCard s={e.lead} accountName={sources.accountName} compact />
+              </ul>
               {e.more.length ? (
                 <p className="-mt-1 pb-2 text-xs text-[var(--muted-foreground)]" data-testid="source-event-more">
                   + {e.more.length} more {e.more.length === 1 ? 'source' : 'sources'} on this story ({e.more.map((m) => m.publisher).slice(0, 3).join(', ')}
                   {e.more.length > 3 ? ', ...' : ''})
                 </p>
               ) : null}
-            </div>
+            </li>
           ))}
         </ul>
       ) : (
