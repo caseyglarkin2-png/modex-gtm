@@ -21,6 +21,17 @@
   --warning: #f59e0b;
   --ring: #1d4ed8;
   --radius: 0.5rem;
+  /* Semantic aliases: shadcn-style names the primitives and call sites use,
+     pointed at the palette above. No new colours; a theme change to the
+     base token carries through. */
+  --card: var(--background);
+  --card-foreground: var(--foreground);
+  --popover: var(--background);
+  --popover-foreground: var(--foreground);
+  --input: var(--border);
+  --secondary: var(--muted);
+  --secondary-foreground: var(--foreground);
+  --accent-foreground: var(--foreground);
   color-scheme: light;
 }
 
@@ -42,7 +53,49 @@
   --success: #4ade80;
   --warning: #fbbf24;
   --ring: #3b82f6;
+  /* Semantic aliases: shadcn-style names the primitives and call sites use,
+     pointed at the palette above. No new colours; a theme change to the
+     base token carries through. */
+  --card: var(--background);
+  --card-foreground: var(--foreground);
+  --popover: var(--background);
+  --popover-foreground: var(--foreground);
+  --input: var(--border);
+  --secondary: var(--muted);
+  --secondary-foreground: var(--foreground);
+  --accent-foreground: var(--foreground);
   color-scheme: dark;
+}
+
+/* Tailwind v4 only generates a colour utility (text-muted-foreground,
+   bg-background, border-input, ring-ring, ring-offset-background, ...) when
+   @theme declares --color-<name>. Without this block those classes compiled
+   to nothing: muted text inherited the foreground, border-input fell back to
+   currentColor and every ring-ring focus ring was invisible. `inline` makes
+   each utility read the runtime variable, so .dark keeps switching them.
+   tests/unit/ui/semantic-tokens.test.ts pins every token src/ uses. */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
 }
 
 /* Reset lives in @layer base so Tailwind utility classes (margin/padding,
