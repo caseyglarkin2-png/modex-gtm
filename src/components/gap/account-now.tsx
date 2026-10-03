@@ -80,6 +80,12 @@ export function AccountNowView({ v, nextHref, nextLabel, links }: { v: NowView; 
               {v.who.name}
               {v.who.title ? <span className="font-normal text-[var(--muted-foreground)]">, {v.who.title}</span> : null}
             </p>
+            {v.who.location ? <p className="text-xs text-[var(--muted-foreground)]" data-testid="now-who-location">{v.who.location}</p> : null}
+            {v.who.inHubSpotOnly ? (
+              <p className="text-xs font-medium text-amber-700 dark:text-amber-400" data-testid="now-who-hubspot-only">
+                In HubSpot, not yet a GAP contact: add them before any touch.
+              </p>
+            ) : null}
             <p className="text-xs text-[var(--muted-foreground)]">{v.who.why}</p>
             {v.who.route ? <p className="text-xs text-[var(--muted-foreground)]">Route: {v.who.route}</p> : null}
             {v.whoUnknown ? <p className="mt-1 text-xs text-amber-700 dark:text-amber-400" data-testid="now-owner-missing">{v.whoUnknown}</p> : null}

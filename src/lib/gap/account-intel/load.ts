@@ -18,6 +18,7 @@ import { loadDemoPack } from '@/lib/demo/load-pack';
 import { getFacilityFact } from '@/lib/research/facility-fact-registry';
 import type { AccountMicrositeData, AccountROIModel } from '@/lib/microsites/schema';
 import { buildAccountBrief, type AccountInputs, type AccountIntelligenceBrief, type FactInput, type PackInput } from './build';
+import { loadHubSpotPeople, type HubSpotPeopleReads } from '../people/hubspot-people';
 import { accountSlug } from './href';
 
 export { accountSlug };
@@ -103,7 +104,7 @@ export async function loadAccountInputs(
   now: Date,
   opts: {
     live?: boolean;
-    deps?: { opportunity?: (p: PrismaLike, a: string) => Promise<OpportunityTruth> };
+    deps?: { opportunity?: (p: PrismaLike, a: string) => Promise<OpportunityTruth>; hubspotPeople?: HubSpotPeopleReads };
     hypothesisId?: string;
     /**
      * Execution acceptance: only what the current-actionable-thesis rule reads (theses, facts, buyer truth, review
@@ -143,7 +144,7 @@ export async function loadAccountInputs(
         return [...rows, ...extra];
       }), [] as Row[]),
     soft(prisma.buyerInputData.findMany({ where: { account_name: accountName }, select: { id: true, type: true, normalized_summary: true, raw_buyer_language: true, contact_email: true, captured_at: true, human_confirmed: true, supersedes_id: true, confirmed_at: true, hypothesis_id: true } }), [] as Row[]),
-    skip(() => prisma.persona.findMany({ where: { account_name: accountName }, select: { id: true, name: true, title: true, do_not_contact: true, email: true, email_status: true, updated_at: true }, take: 60 }), [] as Row[]),
+    skip(() => prisma.persona.findMany({ where: { account_name: accountName }, select: { id: true, name: true, title: true, do_not_contact: true, email: true, email_status: true, updated_at: true, hubspot_contact_id: true }, take: 60 }), [] as Row[]),
     skip(() => prisma.accountContactCandidate.findMany({ where: { account_name: accountName, state: 'staged' }, select: { id: true, full_name: true, title: true, state: true, last_seen_at: true }, take: 30 }).catch(() => []), []),
     skip(() => (prisma.gapWorkSourceMember?.findMany ? prisma.gapWorkSourceMember.findMany({ where: { account_name: accountName, status: { notIn: ['ignored', 'not_now'] } }, select: { name: true, kind: true, persona_id: true, relationship_context: true, ingested_at: true, work_source: { select: { name: true, source_type: true } } }, take: 30 }).catch(() => []) : Promise.resolve([])), []),
   ]);
@@ -228,12 +229,16 @@ export async function loadAccountInputs(
         loadAccountFirstTouches(prisma, [accountName], now).catch(() => new Map()),
         loadAccountConversations(prisma, [accountName], now).catch(() => new Map()),
       ]);
+  // The account's people in HubSpot (live page only; read-only; fails soft to null), read alongside the deal state.
+  const hsPeopleP = opts.live && account.hubspot_company_id ? loadHubSpotPeople(account.hubspot_company_id, opts.deps?.hubspotPeople) : Promise.resolve(null);
   let opportunity: AccountInputs['opportunity'] = null;
   if (opts.live) {
     const o: OpportunityTruth = await (opts.deps?.opportunity ?? ((p, a) => resolveAccountOpportunity(p, a)))(prisma, accountName);
     opportunity = o.status === 'ACTIVE' ? { status: 'ACTIVE', detail: '', deals: o.deals.map((d) => ({ name: d.name, stage: d.stage, amount: d.amount ?? null, closeDate: d.closeDate ?? null, nextStep: d.nextStep ?? null })) } : o.status === 'UNKNOWN' ? { status: 'UNKNOWN', detail: o.reason, deals: [], ...(o.reason === 'identity_unresolved' && /^no HubSpot company/.test(o.detail ?? '') ? { unlinked: true } : {}) } : { status: 'CLEAR', detail: '', deals: [] };
   }
   const conv = (convs as Map<string, { who: string; responseClass: string; at: string }>).get(accountName) ?? null;
+  const hsPeople = await hsPeopleP;
+  const hsById = new Map((hsPeople?.people ?? []).map((h) => [h.id, h]));
 
   return {
     account: { name: account.name, tier: account.tier ?? null, priorityBand: account.priority_band ?? null, vertical: account.vertical ?? null, parentBrand: account.parent_brand ?? null, hubspotCompanyId: account.hubspot_company_id ?? null, recordUpdatedAt: iso(account.updated_at) },
@@ -262,7 +267,8 @@ export async function loadAccountInputs(
       reviewAckAt: acks.get(h.id) ? acks.get(h.id)!.toISOString() : null,
     })),
     bids: confirmed.map((b) => ({ id: b.id, type: b.type, summary: b.normalized_summary ?? b.raw_buyer_language, quote: b.raw_buyer_language, who: b.contact_email ?? null, at: new Date(b.confirmed_at ?? b.captured_at).toISOString(), hypothesisId: b.hypothesis_id ?? null })),
-    personas: (personas as Row[]).map((p) => ({ id: p.id, name: p.name, title: p.title ?? null, doNotContact: !!p.do_not_contact, hasEmail: !!p.email, emailStatus: p.email_status ?? null, updatedAt: iso(p.updated_at) })),
+    personas: (personas as Row[]).map((p) => ({ id: p.id, name: p.name, title: p.title ?? null, doNotContact: !!p.do_not_contact, hasEmail: !!p.email, emailStatus: p.email_status ?? null, updatedAt: iso(p.updated_at), hubspotContactId: p.hubspot_contact_id ?? null, location: p.hubspot_contact_id ? hsById.get(String(p.hubspot_contact_id))?.location ?? null : null })),
+    hubspotPeople: hsPeople,
     candidates: (candidates as Row[]).map((c) => ({ id: c.id, name: c.full_name, title: c.title ?? null, state: c.state, seenAt: iso(c.last_seen_at) })),
     // A member whose Persona is do-not-contact is never a way in (relationship context is never consent).
     memberships: (members as Row[]).map((m) => ({ sourceName: m.work_source?.name ?? 'a source', sourceType: m.work_source?.source_type ?? 'other', relationshipContext: m.relationship_context ?? null, personName: m.kind === 'person' ? m.name ?? null : null, addedAt: iso(m.ingested_at), doNotContact: !!(m.persona_id && (personas as Row[]).some((p) => p.id === m.persona_id && p.do_not_contact)) })),

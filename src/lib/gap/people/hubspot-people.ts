@@ -1,0 +1,74 @@
+/**
+ * THE ACCOUNT'S PEOPLE IN HUBSPOT (V2, 2026-10-03). GAP's personas are a small slice of what HubSpot holds (PepsiCo:
+ * 19 personas, 542 HubSpot contacts, among them the PBNA and Frito-Lay transportation directors GAP called
+ * "missing"). This is a LIVE, READ-ONLY projection of the contacts associated with the account's HubSpot company:
+ * name, title, person-level location (city / state / country, set per contact), and whether an email exists (never
+ * the address). Nothing is copied into a table; nobody is created, merged or contacted. A persona is the same
+ * person only through its stored hubspot_contact_id (an explicit link).
+ *
+ * Fails soft: a read error returns null and the page carries on with the personas alone.
+ */
+import { getHubSpotClient, withHubSpotRetry } from '@/lib/hubspot/client';
+
+export interface HubSpotPerson {
+  id: string;
+  name: string;
+  title: string | null;
+  /** "Chicago, Illinois, United States" from the contact's own city / state / country, else null. */
+  location: string | null;
+  hasEmail: boolean;
+  /** HubSpot says they opted out of email (hs_email_optout): never a WHO pick. */
+  optedOut: boolean;
+}
+
+export interface HubSpotPeopleReads {
+  contactIdsForCompany(companyId: string, cap: number): Promise<{ ids: string[]; truncated: boolean }>;
+  readContacts(ids: string[]): Promise<Array<{ id: string; properties: Record<string, string | null | undefined> }>>;
+}
+
+const PROPS = ['firstname', 'lastname', 'jobtitle', 'city', 'state', 'country', 'email', 'hs_email_optout'];
+
+export const hubspotPeopleReads: HubSpotPeopleReads = {
+  async contactIdsForCompany(companyId, cap) {
+    const client = getHubSpotClient();
+    const ids: string[] = [];
+    let after: string | undefined;
+    for (;;) {
+      const res = (await withHubSpotRetry(() => client.crm.associations.v4.basicApi.getPage('companies', companyId, 'contacts', after, 500), `gap-people company contacts (${companyId})`)) as { results?: Array<{ toObjectId: string | number }>; paging?: { next?: { after?: string } } };
+      for (const r of res.results ?? []) ids.push(String(r.toObjectId));
+      after = res.paging?.next?.after;
+      if (!after) return { ids, truncated: false };
+      if (ids.length >= cap) return { ids: ids.slice(0, cap), truncated: true };
+    }
+  },
+  async readContacts(ids) {
+    const client = getHubSpotClient();
+    const out: Array<{ id: string; properties: Record<string, string | null | undefined> }> = [];
+    for (let i = 0; i < ids.length; i += 100) {
+      const chunk = ids.slice(i, i + 100);
+      const res = await withHubSpotRetry(() => client.crm.contacts.batchApi.read({ inputs: chunk.map((id) => ({ id })), properties: PROPS, propertiesWithHistory: [] }), `gap-people contact read (${chunk.length})`);
+      for (const r of res.results ?? []) out.push({ id: String(r.id), properties: (r.properties ?? {}) as Record<string, string | null> });
+    }
+    return out;
+  },
+};
+
+const clean = (v: string | null | undefined) => (typeof v === 'string' && v.trim() ? v.trim() : null);
+
+/** The people HubSpot associates with this company (capped), or null when it cannot be read. */
+export async function loadHubSpotPeople(companyId: string | null, reads: HubSpotPeopleReads = hubspotPeopleReads, cap = 1000): Promise<{ people: HubSpotPerson[]; truncated: boolean } | null> {
+  if (!companyId) return null;
+  try {
+    const { ids, truncated } = await reads.contactIdsForCompany(companyId, cap);
+    if (!ids.length) return { people: [], truncated };
+    const rows = await reads.readContacts(ids);
+    const people = rows.map(({ id, properties: p }) => {
+      const name = [clean(p.firstname), clean(p.lastname)].filter(Boolean).join(' ') || '(no name in HubSpot)';
+      const location = [clean(p.city), clean(p.state), clean(p.country)].filter(Boolean).join(', ') || null;
+      return { id, name, title: clean(p.jobtitle), location, hasEmail: !!clean(p.email), optedOut: String(p.hs_email_optout ?? '').toLowerCase() === 'true' };
+    });
+    return { people, truncated };
+  } catch {
+    return null;
+  }
+}
