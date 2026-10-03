@@ -124,7 +124,7 @@ export async function loadAccountInputs(
     skip(() => prisma.canonicalAccountLink.findUnique({ where: { account_name: accountName }, select: { canonical_company_id: true, status: true } }).catch(() => null), null as Row | null),
     skip(() => namesStartingLike(prisma, accountName), [] as string[]),
     skip(() => loadWatchProfilesCached(prisma).catch(() => []), []),
-    skip(() => prisma.gapSignal.findMany({ where: { account_name: accountName, resolution: 'resolved' }, select: { id: true, title: true, url: true, published_at: true, research_status: true, note: true, captured_at: true }, orderBy: { created_at: 'desc' }, take: 15 }).catch(() => []), []),
+    skip(() => prisma.gapSignal.findMany({ where: { account_name: accountName, resolution: 'resolved' }, select: { id: true, title: true, url: true, published_at: true, research_status: true, note: true, created_at: true }, orderBy: { created_at: 'desc' }, take: 15 }).catch(() => []), []),
     prisma.prospectingSignal.findMany({ where: { account_name: accountName, source_kind: 'evidence_record' }, select: { id: true, title: true, evidence_text: true, evidence_url: true, observed_at: true, freshness_expires_at: true, metadata: true }, orderBy: { observed_at: 'desc' }, take: 200 }),
     skip(() => prisma.researchRun.findFirst({ where: { account_name: accountName, run_key: { startsWith: 'gap_research:' } }, orderBy: { created_at: 'desc' }, select: { created_at: true, provider_status: true } }).catch(() => null), null as Row | null),
     soft(prisma.prospectingHypothesis.findMany({
@@ -244,7 +244,7 @@ export async function loadAccountInputs(
     watched: !!profile,
     watchReasons: profile?.reasons ?? [],
     facts: [...byQuote.values()],
-    signals: (signalRows as Row[]).map((s) => ({ id: s.id, title: s.title ?? null, url: s.url ?? null, publishedAt: s.published_at ? new Date(s.published_at).toISOString() : null, researchStatus: s.research_status, note: s.note ?? null, capturedAt: iso(s.captured_at) })),
+    signals: (signalRows as Row[]).map((s) => ({ id: s.id, title: s.title ?? null, url: s.url ?? null, publishedAt: s.published_at ? new Date(s.published_at).toISOString() : null, researchStatus: s.research_status, note: s.note ?? null, capturedAt: iso(s.created_at) })),
     lastResearch: lastRun ? { at: new Date(lastRun.created_at).toISOString(), outcome: String((lastRun.provider_status as Record<string, unknown> | null)?.outcome ?? 'unknown') } : null,
     hypotheses: (hyps as Row[]).map((h) => ({
       id: h.id,
