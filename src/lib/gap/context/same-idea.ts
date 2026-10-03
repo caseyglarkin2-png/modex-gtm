@@ -15,7 +15,12 @@ const proper = (t: string, account: string) => {
 /** Names and numbers: what makes two otherwise similar lines different events (Reno vs Dallas, site 1 vs site 2). */
 const marks = (t: string, account: string) => new Set([...proper(t, account), ...(t.match(/\b\d+(?:[.,]\d+)?\b/g) ?? [])]);
 
-export function sameIdea(a: string, b: string, accountName: string): boolean {
+/** The claim only: a section label ("ONGOING CONDITION:") and a "(current as of ...)" stamp are not the idea. */
+const claim = (t: string) => t.replace(/^[A-Z][A-Z /]+:\s*/, '').replace(/\s*\(current as of [^)]*\)\s*$/i, '');
+
+export function sameIdea(rawA: string, rawB: string, accountName: string): boolean {
+  const a = claim(rawA);
+  const b = claim(rawB);
   const wa = words(a);
   const wb = words(b);
   if (!wa.size || !wb.size) return false;
