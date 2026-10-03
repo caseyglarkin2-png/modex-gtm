@@ -214,7 +214,7 @@ export function WorkQueueClient({ defaultTab, initialItems }: WorkQueueClientPro
             Unified executable work across follow-ups, captures, approvals, and system jobs.
           </p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <Link href="/capture">
             <Button size="sm" className="gap-1.5">
               <Smartphone className="h-3.5 w-3.5" />

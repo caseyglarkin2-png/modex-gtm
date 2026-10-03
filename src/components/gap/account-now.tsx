@@ -51,7 +51,7 @@ export function AccountNowView({ v, nextHref, nextLabel, links }: { v: NowView; 
       <div className="space-y-1">
         <div className="flex items-start justify-between gap-2">
           <p className="min-w-0 break-words text-sm text-[var(--muted-foreground)]" data-testid="now-state">{v.stateLine}</p>
-          <VoicePreviewButton text={v.listen} label="Listen" className="shrink-0" />
+          <VoicePreviewButton text={v.listen} label="Listen" className="min-h-11 shrink-0 px-4" />
         </div>
         <p className="text-xs text-[var(--muted-foreground)]" data-testid="now-last-touch">
           {v.lastTouch}
@@ -72,7 +72,7 @@ export function AccountNowView({ v, nextHref, nextLabel, links }: { v: NowView; 
         <p className="text-xs font-semibold uppercase tracking-wide text-[var(--primary)]">Next</p>
         <p className="text-sm font-medium">{v.next.text}</p>
         {nextHref && nextLabel ? (
-          <Link href={nextHref} className="mt-1 inline-block text-sm font-semibold underline" data-testid="now-next-control">
+          <Link href={nextHref} className="mt-1 inline-flex min-h-11 items-center text-sm font-semibold underline" data-testid="now-next-control">
             {nextLabel}
           </Link>
         ) : null}
@@ -194,14 +194,14 @@ export function AccountNowView({ v, nextHref, nextLabel, links }: { v: NowView; 
       ) : null}
 
       {links.length ? (
-        <nav className="flex flex-wrap gap-x-3 gap-y-1 border-t border-[var(--border)] pt-2 text-xs" data-testid="now-links">
+        <nav aria-label="Account tools" className="flex flex-wrap gap-x-2 border-t border-[var(--border)] pt-2 text-sm" data-testid="now-links">
           {links.map((l) =>
             l.external ? (
-              <a key={l.href} href={l.href} target="_blank" rel="noreferrer" className="underline">
+              <a key={l.href} href={l.href} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center px-1 underline">
                 {l.label}
               </a>
             ) : (
-              <Link key={l.href} href={l.href} className="underline">
+              <Link key={l.href} href={l.href} className="inline-flex min-h-11 items-center px-1 underline">
                 {l.label}
               </Link>
             ),
