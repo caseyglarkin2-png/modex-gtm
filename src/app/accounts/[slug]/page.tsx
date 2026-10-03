@@ -43,6 +43,9 @@ import { EditablePersonaStatus } from '@/components/editable-persona-status';
 import { VoiceScriptButton } from '@/components/voice-script-button';
 import type { RecentMicrositeSession } from '@/lib/microsites/analytics';
 import { prisma } from '@/lib/prisma';
+import { isGapOsEnabled } from '@/lib/gap/flags';
+import { loadAccountBrief } from '@/lib/gap/account-intel/load';
+import { accountHref } from '@/lib/gap/account-intel/href';
 import { buildAccountTags } from '@/lib/research/account-tags';
 import { evaluateContentQuality } from '@/lib/content-quality';
 import { resolveContentQaChecklist } from '@/lib/revops/content-qa-checklist';
@@ -113,6 +116,13 @@ export default async function AccountDetailPage({
   const matchedAccount = accounts.find((candidate) => slugify(candidate.name) === slug);
   const account = matchedAccount ? await dbGetAccountByName(matchedAccount.name) : null;
   if (!account) notFound();
+  // ONE TASK AUTHORITY (GAP V2): GAP's NEXT is this account's next step; the legacy next best action below is shown
+  // only as a labelled legacy suggestion. A GAP read that fails leaves the legacy card as it was, said so.
+  const gapNext = isGapOsEnabled()
+    ? await loadAccountBrief(prisma, slug, new Date(), { live: true, name: account.name })
+        .then((b) => (b && 'glance' in b ? { next: b.glance.nextAction, motion: b.glance.motion } : null))
+        .catch(() => null)
+    : null;
 
   const {
     accountScope,
@@ -846,9 +856,23 @@ export default async function AccountDetailPage({
 
         {/* Brief Tab — account thesis, NBA, microsite engagement, intro path */}
         <TabsContent value="brief" className="space-y-4">
-          <Card>
+          {gapNext ? (
+            <Card data-testid="gap-next-card">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm">Next step (GAP)</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <p className="font-medium">{gapNext.next}</p>
+                <p className="text-xs text-[var(--muted-foreground)]">{gapNext.motion}</p>
+                <Link href={accountHref(account.name)}>
+                  <Button size="sm">Open in GAP</Button>
+                </Link>
+              </CardContent>
+            </Card>
+          ) : null}
+          <Card data-testid="legacy-nba-card">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm">Next Best Action</CardTitle>
+              <CardTitle className="text-sm">{gapNext ? 'Legacy suggestion (not the next step; GAP decides above)' : 'Next Best Action'}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex flex-wrap items-start justify-between gap-3">
@@ -912,7 +936,7 @@ export default async function AccountDetailPage({
           {latestOutcomeRecommendation ? (
             <Card>
               <CardHeader className="pb-2">
-                <CardTitle className="text-sm">Learning Loop Recommendation</CardTitle>
+                <CardTitle className="text-sm">{gapNext ? 'Learning Loop Recommendation (legacy, not the next step)' : 'Learning Loop Recommendation'}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex flex-wrap items-center gap-2">

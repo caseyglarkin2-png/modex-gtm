@@ -1,5 +1,7 @@
 import { prisma } from '@/lib/prisma';
-import { buildWorkQueueItems, parseWorkQueueTab } from '@/lib/work-queue';
+import { applyGapAuthority, buildWorkQueueItems, parseWorkQueueTab } from '@/lib/work-queue';
+import { isGapOsEnabled } from '@/lib/gap/flags';
+import { restrictionForName } from '@/lib/gap/policy/restriction';
 import { auditOperatorOutcomeQuality } from '@/lib/revops/operator-outcomes';
 import { dbGetMicrositeAnalytics } from '@/lib/db';
 import { WorkQueueClient } from './work-queue-client';
@@ -231,7 +233,7 @@ export default async function QueuePage({
   ];
   const outcomeAudits = auditOperatorOutcomeQuality(operatorOutcomes);
 
-  const initialItems = buildWorkQueueItems({
+  const built = buildWorkQueueItems({
     activities,
     captures,
     approvals,
@@ -241,6 +243,17 @@ export default async function QueuePage({
     outcomeAudits,
     messageEvolutions,
   });
+  // GAP is the one task authority for the accounts it manages (a thesis, a work-source member, or a restriction).
+  // A failed read leaves the queue as it was (nothing is hidden either way).
+  const gapManaged = isGapOsEnabled()
+    ? await Promise.all([
+        prisma.prospectingHypothesis.findMany({ distinct: ['account_name'], select: { account_name: true } }),
+        prisma.gapWorkSourceMember.findMany({ where: { account_name: { not: null } }, distinct: ['account_name'], select: { account_name: true } }),
+      ])
+        .then(([h, m]) => new Set<string>([...h.map((r) => r.account_name), ...m.map((r) => r.account_name).filter((n): n is string => !!n)]))
+        .catch(() => null)
+    : null;
+  const initialItems = gapManaged ? applyGapAuthority(built, (name) => gapManaged.has(name) || !!restrictionForName(name)) : built;
 
   return <WorkQueueClient initialItems={initialItems} defaultTab={defaultTab} />;
 }

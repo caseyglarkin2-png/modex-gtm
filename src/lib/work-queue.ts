@@ -29,7 +29,8 @@ export type WorkQueueItemTypeId =
   | 'send-job'
   | 'stuck-job'
   | 'outcome-audit'
-  | 'learning-review';
+  | 'learning-review'
+  | 'gap-next';
 
 export type WorkQueueItemType = {
   id: WorkQueueItemTypeId;
@@ -266,6 +267,13 @@ export const workQueueItemTypes: WorkQueueItemType[] = [
     source: 'Message evolution registry',
     displayBehavior: 'Tracks proposal/review/approval/deploy/rollback with owner and SLA.',
     canonicalTab: 'learning-review',
+  },
+  {
+    id: 'gap-next',
+    label: 'GAP decides the next step',
+    source: 'GAP (one task authority)',
+    displayBehavior: 'One row per GAP-managed account, standing in for its legacy follow-ups; opens the GAP account (NOW).',
+    canonicalTab: 'follow-ups',
   },
 ];
 
@@ -552,6 +560,50 @@ export function buildWorkQueueItems(input: WorkQueueSources): WorkQueueItem[] {
 
   return [...activityItems, ...captureItems, ...approvalItems, ...micrositeIntentItems, ...generationItems, ...sendItems, ...stuckItems, ...outcomeAuditItems, ...learningReviewItems]
     .sort((left, right) => right.createdAt.getTime() - left.createdAt.getTime());
+}
+
+/** Outbound-shaped work: a legacy follow-up, an operator action or a microsite-intent nudge (a second next step). */
+const OUTBOUND_SHAPED: ReadonlySet<WorkQueueItemTypeId> = new Set(['follow-up', 'operator-action', 'microsite-intent']);
+
+/**
+ * ONE TASK AUTHORITY (GAP V2, 2026-10-02). For an account GAP manages, its outbound-shaped legacy items (follow-ups,
+ * operator actions, microsite-intent nudges: drip tasks among them) are a second next-step list that can contradict
+ * GAP's NEXT. They are never hidden: they collapse into ONE row per account that says how many there are, shows the
+ * first, and opens the GAP account, where the one next step lives. Ops items (approvals, captures, jobs, content
+ * revisions, audits) are untouched. A microsite-intent nudge never brings its heat score or recommendation along.
+ */
+export function applyGapAuthority(items: WorkQueueItem[], isGapManaged: (accountName: string) => boolean): WorkQueueItem[] {
+  const out: WorkQueueItem[] = [];
+  const byAccount = new Map<string, WorkQueueItem[]>();
+  for (const item of items) {
+    if (item.accountName && OUTBOUND_SHAPED.has(item.itemType) && isGapManaged(item.accountName)) {
+      byAccount.set(item.accountName, [...(byAccount.get(item.accountName) ?? []), item]);
+    } else out.push(item);
+  }
+  for (const [accountName, legacy] of byAccount) {
+    const slug = slugify(accountName);
+    const newest = [...legacy].sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())[0];
+    const first = legacy.find((x) => x.itemType !== 'microsite-intent') ?? null;
+    out.push({
+      id: `gap-next-${slug}`,
+      itemType: 'gap-next',
+      sourceId: slug,
+      accountName,
+      accountSlug: slug,
+      title: 'GAP decides the next step',
+      detail: `${legacy.length} legacy item${legacy.length === 1 ? '' : 's'} on this account${first ? ` (newest: ${first.detail})` : ''}. They are not the next step; open the account in GAP.`,
+      createdAt: newest.createdAt,
+      statusLabel: 'GAP',
+      severity: 'medium',
+      sourceTab: 'follow-ups',
+      quickActions: {
+        completeKey: `gap-next-${slug}-complete`,
+        snoozeKey: `gap-next-${slug}-snooze`,
+        accountHref: `/gap/accounts/${slug}`,
+      },
+    });
+  }
+  return out;
 }
 
 export function getMyWorkItems(items: WorkQueueItem[]): WorkQueueItem[] {
