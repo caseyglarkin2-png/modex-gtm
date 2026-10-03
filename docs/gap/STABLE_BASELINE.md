@@ -199,7 +199,23 @@ SHIPPED BUT NEEDED FIX: #384 (tokens, status colors, Tailwind dark variant bound
 BLOCKED EXTERNALLY on McKay (production `connection_limit=1`, last changed 2026-05-02; server max_connections 500,
 8 in use at check; no application code encodes the limit; nothing built around it).
 
+Amendment review (fresh adversarial reviewer, 2026-10-03; PRs #384 dark mode, #385 geography / Apollo). BLOCKER B1
+(a Chicago-based Director, European Logistics became WHO and Apollo treated them as the owner): FIXED, a stated
+other-region remit precedes the lane and never becomes the default WHO; pinned at WHO level. SHOULD FIX, all FIXED:
+SF1 research ranking counted Canada as abroad; SF2 re-clicking enrich re-spent on already-matched people; SF3 the human
+actor was a literal "Casey" (now the session; none, nothing runs); SF4 FIND_OWNER proposed while HubSpot was unread;
+SF5 an injected env could bypass the test refusal; SF6 the automation number was named a budget but is a per-run cap.
+NICE TO HAVE: "Toronto, ON, CA" read as US and "Americas" claimed a NA remit: FIXED. Mexico is OTHER_REGION everywhere:
+Casey's call (the amendment names Canada only). ~30 `text-amber-700 dark:text-amber-400` pairs instead of semantic
+text tokens: accepted (the existing badge-variant convention; a guard test keeps them paired). `/discovery` puts
+`text-white` on `--primary` (3.68:1 in dark): pre-existing, outside the GAP seller flows. The schema comment at
+`prisma/schema.prisma` mentioning `connection_limit=1` is a comment only. REJECTED (verified clean): other Apollo call
+paths, the candidate UI, company-HQ contamination of person geography, Apollo content on NOW, duplication of McKay's
+DB work, the app-wide `@custom-variant dark`, primary-foreground on non-primary fills.
+
 V2 debt (recorded, not built):
+- GitHub Actions does not run: "The job was not started because your account is locked due to a billing issue"
+  (every PR since at least #383). Local vitest / tsc / eslint / the 17 E2Es are the gate until Casey clears billing.
 - Tailwind token utilities (`text-muted-foreground`, `bg-background`, `ring-ring`; 345+ uses) map to nothing (no
   `@theme`), so focus rings on the shared UI primitives do not render. Mapping them restyles the whole app: Casey's call.
 - Apollo candidates are per account; no cross-account batch view yet.
