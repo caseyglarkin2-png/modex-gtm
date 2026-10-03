@@ -99,3 +99,12 @@ describe('HubSpot is checked before any credit is proposed (review SF4)', () => 
     expect(r.candidates[0]?.checkedFirst).toContain('HubSpot contacts (no HubSpot company)');
   });
 });
+
+describe('names are said the way NOW says them', () => {
+  it('a lowercase CRM name is title-cased in the decision and target', () => {
+    const memberships = [{ sourceName: 'Inland26 · Chicago', sourceType: 'conference', relationshipContext: 'x', personName: 'ryan heman', title: null, company: 'Acme Foods' }];
+    const r = run({ facts: [], memberships, personas: [persona(2, 'rick barrett', 'director of transportation')] });
+    expect(r.candidates[0].decision).toBe('Whether Ryan Heman leads WHO, or Rick Barrett does');
+    expect(r.candidates[0].target).toBe('Ryan Heman (Acme Foods; met at Inland26 · Chicago)');
+  });
+});

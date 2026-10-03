@@ -12,6 +12,7 @@
  * unresolved gap is the same key on every evaluation: one request, never five. The credit cost is UNKNOWN until run.
  */
 import type { AccountInputs, AccountIntelligenceBrief } from '../account-intel/build';
+import { displayName } from './display-name';
 import { readPerson } from './person-prior';
 
 export type ApolloCandidateKind = 'FIND_OWNER' | 'FIND_EMAIL' | 'CONFIRM_TITLE';
@@ -86,9 +87,9 @@ export function apolloCandidates(brief: AccountIntelligenceBrief, i: AccountInpu
     if (prior) notNeeded = `${owner.name} already has an Apollo result (${day(prior.apolloEnrichedAt!)}): no credit spent twice.`;
     else add({
       kind: 'FIND_EMAIL',
-      target: `${owner.name}${owner.title ? `, ${owner.title}` : ''}`,
-      missing: `No email on record for ${owner.name}.`,
-      whyItMatters: `${owner.name} is the transportation operating owner on record; the first touch cannot reach them.`,
+      target: `${displayName(owner.name)}${owner.title ? `, ${owner.title}` : ''}`,
+      missing: `No email on record for ${displayName(owner.name)}.`,
+      whyItMatters: `${displayName(owner.name)} is the transportation operating owner on record; the first touch cannot reach them.`,
       decision: 'Whether the first touch can go to the owner by email',
       possibleMatch: null,
     }, owner.name);
@@ -96,14 +97,15 @@ export function apolloCandidates(brief: AccountIntelligenceBrief, i: AccountInpu
 
   // Someone Casey met leads WHO: their title decides whether they should.
   if (m.type === 'RELATIONSHIP_LED' && m.met && !m.met.title) {
-    const met = m.met;
+    // Said the way NOW says it (a lowercase CRM name is title-cased).
+    const met = { ...m.met, name: displayName(m.met.name) };
     const known = [...i.personas.map((x) => ({ name: x.name, title: x.title })), ...(hs?.people ?? [])].find((x) => sameName(x.name, met.name) && x.title);
     if (!known) add({
       kind: 'CONFIRM_TITLE',
       target: `${met.name}${met.company ? ` (${met.company}; met at ${met.source})` : ` (met at ${met.source})`}`,
       missing: `No title on record for ${met.name}.`,
       whyItMatters: 'Casey met them, so they lead WHO; without a title GAP cannot tell whether they run the freight network.',
-      decision: `Whether ${met.name} leads WHO${owner ? `, or ${owner.name} does` : ''}`,
+      decision: `Whether ${met.name} leads WHO${owner ? `, or ${displayName(owner.name)} does` : ''}`,
       possibleMatch: null,
     }, met.name);
   }
