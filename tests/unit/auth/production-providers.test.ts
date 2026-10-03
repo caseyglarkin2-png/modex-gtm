@@ -66,6 +66,7 @@ describe('sessions minted before the fix end (T1 review)', () => {
     const { isAdminEmail } = await import('@/lib/auth-providers');
     expect(isAdminEmail('casey@freightroll.com')).toBe(true);
     expect(isAdminEmail('Casey@FreightRoll.com')).toBe(true);
+    expect(isAdminEmail('casey@yardflow.ai')).toBe(true);
     expect(isAdminEmail('jake@freightroll.com')).toBe(false);
     expect(isAdminEmail(null)).toBe(false);
   });
@@ -77,6 +78,8 @@ describe('ops closeout: a Google sign-in needs a verified email', () => {
     ['allowlisted but Google email_verified false', { email: 'casey@freightroll.com', provider: 'google', profile: { email_verified: false } }, false],
     ['allowlisted but Google says nothing about verification', { email: 'casey@freightroll.com', provider: 'google', profile: {} }, false],
     ['allowlisted, verified as the STRING "true" (not the boolean)', { email: 'casey@freightroll.com', provider: 'google', profile: { email_verified: 'true' } }, false],
+    ['Casey on yardflow.ai, Google verified (2026-10-04: was denied)', { email: 'casey@yardflow.ai', provider: 'google', profile: { email_verified: true } }, true],
+    ['another yardflow.ai address is not allowlisted', { email: 'someone@yardflow.ai', provider: 'google', profile: { email_verified: true } }, false],
     ['verified but not allowlisted', { email: 'stranger@example.com', provider: 'google', profile: { email_verified: true } }, false],
     ['no email', { email: null, provider: 'google', profile: { email_verified: true } }, false],
     ['development credentials (no Google profile) on the allowlist', { email: 'casey@freightroll.com', provider: 'credentials', profile: undefined }, true],
