@@ -360,6 +360,16 @@ const auditAsOf = (i: AccountInputs) => {
   return dates[0] ?? i.pack?.builtAt ?? null;
 };
 const splitCite = ({ cite, ...rest }: ReturnType<typeof auditTruth>) => ({ cite, rest });
+/**
+ * The imagery dates behind a count over several sites (operator review, V2): one date when they agree, else the range
+ * (a sum across dates is not one snapshot), and imagery over two years old is flagged on the line itself.
+ */
+export function imagerySpan(dates: ReadonlyArray<string | null | undefined>, now: Date): string {
+  const d = dates.filter((x): x is string => !!x && !Number.isNaN(new Date(x).getTime())).map((x) => x.slice(0, 10)).sort();
+  if (!d.length) return 'imagery date not recorded';
+  const old = now.getTime() - new Date(d[0]).getTime() > 730 * 86_400_000 ? ' (imagery over two years old: may not be current)' : '';
+  return d[0] === d[d.length - 1] ? `on imagery dated ${d[0]}${old}` : `on imagery dated ${d[0]} to ${d[d.length - 1]} (different dates: a sum, not one snapshot)${old}`;
+}
 
 // ---------------------------------------------------------------- sections
 
@@ -414,7 +424,7 @@ function footprintSection(i: AccountInputs, now: Date): Section {
     // VERIFIED only when every counted site carries a cited, confirmed verification (one cited site is not enough).
     const allCited = a.kept.length > 0 && cited.length === a.kept.length;
     st.push({
-      text: `${plural(a.all.length, 'site')} audited: ${entityTypeOf(i) === '3pl' ? `${a.self.length + a.threePl.length} operated by ${i.account.name} (a 3PL: its own sites)` : `${a.self.length} self-operated, ${a.threePl.length} run by a 3PL (not counted as theirs to decide)`}${a.jv.length ? `, ${a.jv.length} joint venture` : ''}${a.unknownOperator.length ? `, ${a.unknownOperator.length} operator unknown` : ''}${a.unverified.length ? `, ${a.unverified.length} not yet verified` : ''}; ${a.rejected.length} rejected by verification (excluded)`,
+      text: `${plural(a.all.length, 'site')} audited: ${entityTypeOf(i) === '3pl' ? `${a.self.length + a.threePl.length} operated by ${i.account.name} (a 3PL: its own sites)` : `${a.self.length} self-operated, ${a.threePl.length} run by a 3PL (a shared decision through the 3PL contract)`}${a.jv.length ? `, ${a.jv.length} joint venture` : ''}${a.unknownOperator.length ? `, ${a.unknownOperator.length} operator unknown` : ''}${a.unverified.length ? `, ${a.unverified.length} not yet verified` : ''}; ${a.rejected.length} rejected by verification (excluded)`,
       truth: allCited ? 'VERIFIED_PUBLIC' : 'INFERENCE',
       sources: [auditSrc('satellite + source audit', p!.builtAt, cited[0]?.verification?.citations[0]?.url ?? null)],
       asOf: cited[0]?.verification?.verifiedAt ?? p!.builtAt,
@@ -468,15 +478,16 @@ function volumeSection(i: AccountInputs, now: Date): Section {
   const doors = a.self.reduce((n, s) => n + (s.yardMetrics.dockDoorCount ?? 0), 0);
   if (doors > 0) {
     st.push({
-      text: `Roughly ${doors}-${doors * 3} door turns a day across the ${plural(a.self.length, 'self-operated audited site')}`,
+      text: `Theoretical door capacity: roughly ${doors}-${doors * 6} door turns a day if every door at the ${plural(a.self.length, 'self-operated audited site')} is active (not measured)`,
       truth: 'MODELED_ESTIMATE',
       sources: [auditSrc('satellite audit dock counts', i.pack!.builtAt)],
-      model: { inputs: { auditedDockDoors: doors, auditedSites: a.self.length }, formula: 'audited dock doors at self-operated sites x 1 to 3 turns per door per day', range: [doors, doors * 3], unit: 'door turns/day across self-operated audited sites', assumptions: ['1 to 3 turns per door per day (not measured)', 'Each turn is at least two yard moves (in and out)', 'Self-operated audited sites only; 3PL-run sites and the rest of the network are not counted'] },
+      model: { inputs: { auditedDockDoors: doors, auditedSites: a.self.length }, formula: 'audited dock doors at self-operated sites x 1 to 6 turns per door per day', range: [doors, doors * 6], unit: 'door turns/day (theoretical capacity) across self-operated audited sites', assumptions: ['1 to 6 turns per door per day (not measured; a two-shift DC with live loads often runs 4 to 8)', 'Every door active (doors hidden in imagery or covered by trailers are not counted)', 'Yard moves per turn depend on drop vs live loading (unknown): a dropped trailer needs hostler moves, a live load at the door may need none', 'Self-operated audited sites only; 3PL-run sites and the rest of the network are not counted'] },
     });
     const trailers = a.kept.reduce((n, s) => n + (s.yardMetrics.trailersVisible ?? 0), 0);
     if (trailers) {
       const { cite, rest } = splitCite(auditTruth(i, 'Newer imagery or the sites show a different count.'));
-      st.push({ text: `${trailers} trailers visible across audited sites on the imagery date`, ...rest, sources: [auditSrc('satellite imagery count', auditAsOf(i), cite)], asOf: auditAsOf(i) });
+      // A count of trailers seen, never yard size, utilization or congestion (it includes storage, empties and carriers' drop pools).
+      st.push({ text: `${trailers} trailers visible across ${plural(a.kept.filter((s) => s.yardMetrics.trailersVisible != null).length, 'audited site')} ${imagerySpan(a.kept.filter((s) => s.yardMetrics.trailersVisible != null).map((s) => s.verification?.imageryDate ?? null), now)} (trailers seen, not yard utilization)`, ...rest, sources: [auditSrc('satellite imagery count', auditAsOf(i), cite)], asOf: auditAsOf(i) });
     }
   }
   if (i.microsite?.network?.dailyTrailerMoves) st.push({ text: `${i.microsite.network.dailyTrailerMoves} daily trailer moves (hand-authored, undated)`, truth: 'INFERENCE', sources: [MICROSITE], falsifiableBy: 'Their yard or TMS data shows a different volume.' });
@@ -492,10 +503,13 @@ function yardSection(i: AccountInputs, now: Date): Section {
   if (a.kept.length && !recorded.length) unknowns.push(`Yard features: the audit recorded none for these ${plural(a.kept.length, 'site')} (unknown, not zero)`);
   else if (a.kept.length) {
     const c = (f: (s: PackSite) => boolean) => a.kept.filter(f).length;
-    const { cite, rest } = splitCite(auditTruth(i, 'A site visit shows different yard features.'));
+    const { cite } = splitCite(auditTruth(i, 'A site visit shows different yard features.'));
+    // A drop yard, guard shack, gate or staging area read off imagery is an INTERPRETATION (operator review, V2),
+    // never a direct observation, however well the sites are cited.
     st.push({
-      text: `Across ${plural(a.kept.length, 'audited site')}: ${c((s) => s.classification.dropYard)} with a drop yard, ${c((s) => s.classification.guardShack)} with a guard shack, ${c((s) => s.classification.truckGate)} with a truck gate, ${c((s) => s.classification.preGateStaging)} with pre-gate staging`,
-      ...rest,
+      text: `Read from imagery across ${plural(a.kept.length, 'audited site')}: ${c((s) => s.classification.dropYard)} with a drop yard, ${c((s) => s.classification.guardShack)} with a guard shack, ${c((s) => s.classification.truckGate)} with a truck gate, ${c((s) => s.classification.preGateStaging)} with pre-gate staging`,
+      truth: 'INFERENCE',
+      falsifiableBy: 'A site visit or the site team shows different yard features.',
       sources: [auditSrc('satellite audit', i.pack!.builtAt, cite)],
       asOf: i.pack!.builtAt,
     });
@@ -786,7 +800,7 @@ function siteWedge(i: AccountInputs): Wedge {
     name: s.name,
     whyThisSite: features(s),
     whatWeKnow: [`Audit verdict ${s.verification?.verdict}${s.verification?.citations.length ? ` with ${plural(s.verification.citations.length, 'citation')}` : ''}`, `Operator: ${s.verification?.operator ?? 'self'}; tenancy: ${s.verification?.tenancy ?? 'unknown'}`, ...(s.verification?.imageryDate ? [`Imagery ${s.verification.imageryDate}`] : [])],
-    whatWeModel: s.yardMetrics.dockDoorCount ? [`${s.yardMetrics.dockDoorCount}-${s.yardMetrics.dockDoorCount * 3} trailer moves a day (1 to 3 turns per door; not measured)`] : [],
+    whatWeModel: s.yardMetrics.dockDoorCount ? [`${s.yardMetrics.dockDoorCount}-${s.yardMetrics.dockDoorCount * 6} door turns a day if every door is active (theoretical capacity; drop vs live unknown; not measured)`] : [],
     whyPilot: `A typical self-operated site of this kind (${s.archetypeName}), with ${features(s).slice(0, 2).join(' and ') || 'visible yard activity'}: results there would say something about the others (inference; a willing site leader matters more than any feature).`,
     mustVerify: ['The current yard process (gate, check-in, trailer checks)', 'The system in use, if any', 'Who runs yard operations at this site', ...(s.verification?.tenancy === 'unknown' ? ['Tenancy'] : []), ...(s.verification?.verdict === 'probable' ? ['That the site is theirs and active (verification is probable)'] : [])],
   }));

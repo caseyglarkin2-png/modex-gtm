@@ -57,7 +57,8 @@ describe('footprint: ownership is never inflated', () => {
   it('3PL-operated sites are not counted as owned; rejected sites are excluded and said so', () => {
     const f = buildAccountBrief(base(), NOW).sections.footprint;
     const text = f.statements.map((s) => s.text).join('\n');
-    expect(text).toMatch(/2 self-operated, 1 run by a 3PL \(not counted as theirs to decide\)/);
+    // V2 operator review: a 3PL-run yard is a shared decision through the 3PL contract, never "not theirs".
+    expect(text).toMatch(/2 self-operated, 1 run by a 3PL \(a shared decision through the 3PL contract\)/);
     expect(text).toMatch(/1 rejected by verification \(excluded\)/);
     // a named filing without a link is a lead, said so (red team: never VERIFIED without the source)
     expect(f.statements.find((s) => /38 facilities/.test(s.text))).toMatchObject({ truth: 'INFERENCE', text: 'About 38 facilities (per FY25 10-K Item 2, not linked)' });
@@ -71,10 +72,22 @@ describe('footprint: ownership is never inflated', () => {
 });
 
 describe('volume: modeled ranges, never fake precision', () => {
-  it('daily trailer moves are a range from audited dock doors, with inputs, formula and assumptions', () => {
-    const v = buildAccountBrief(base(), NOW).sections.volume.statements.find((s) => s.truth === 'MODELED_ESTIMATE');
-    expect(v?.model).toMatchObject({ inputs: { auditedDockDoors: 120, auditedSites: 2 }, unit: 'door turns/day across self-operated audited sites' });
-    expect(v!.model!.range[0]).toBeLessThan(v!.model!.range[1]);
+  it('door turns are ONE unit, theoretical capacity, with the live-vs-drop assumption stated (V2 operator review)', () => {
+    const b = buildAccountBrief(base(), NOW);
+    const v = b.sections.volume.statements.find((s) => s.truth === 'MODELED_ESTIMATE');
+    expect(v?.model).toMatchObject({ inputs: { auditedDockDoors: 120, auditedSites: 2 }, unit: 'door turns/day (theoretical capacity) across self-operated audited sites', range: [120, 720] });
+    expect(v!.text).toMatch(/^Theoretical door capacity: roughly 120-720 door turns a day if every door .* is active \(not measured\)$/);
+    expect(v!.model!.assumptions.join(' ')).toMatch(/drop vs live loading \(unknown\)/);
+    expect(v!.model!.assumptions.join(' ')).not.toMatch(/at least two yard moves/);
+    // The wedge never calls the same arithmetic "trailer moves".
+    expect(JSON.stringify(b.wedge)).not.toMatch(/trailer moves a day/);
+  });
+  it('a trailer count over sites names its imagery dates (a range when they differ) and flags imagery over two years old', async () => {
+    const { imagerySpan } = await import('@/lib/gap/account-intel/build');
+    expect(imagerySpan(['2026-05-01', '2026-05-01'], NOW)).toBe('on imagery dated 2026-05-01');
+    expect(imagerySpan(['2026-05-01', '2025-09-12'], NOW)).toBe('on imagery dated 2025-09-12 to 2026-05-01 (different dates: a sum, not one snapshot)');
+    expect(imagerySpan(['2023-04-01'], NOW)).toMatch(/imagery over two years old/);
+    expect(imagerySpan([null], NOW)).toBe('imagery date not recorded');
   });
 });
 
@@ -224,7 +237,7 @@ describe('review fixes (Release A reviewer)', () => {
     const p = base().pack!;
     const sites = [site('01-a'), site('02-b', { verification: undefined }), site('03-c', { verification: { ...site('x').verification, operator: 'unknown' } })];
     const f = buildAccountBrief(base({ pack: { ...p, network: { ...p.network, sites } } as never }), NOW).sections.footprint;
-    expect(f.statements.map((s) => s.text).join('\n')).toMatch(/3 sites audited: 1 self-operated, 0 run by a 3PL \(not counted as theirs to decide\), 1 operator unknown, 1 not yet verified; 0 rejected/);
+    expect(f.statements.map((s) => s.text).join('\n')).toMatch(/3 sites audited: 1 self-operated, 0 run by a 3PL \(a shared decision through the 3PL contract\), 1 operator unknown, 1 not yet verified; 0 rejected/);
   });
 
   it('uncited audit data is INFERENCE, not Verified (rail, yard features, trailers)', () => {
