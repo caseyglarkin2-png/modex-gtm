@@ -109,7 +109,7 @@ export function NextUp({ items }: { items: NextUpItem[] }) {
         <p className="mt-1 text-lg font-semibold" data-testid="next-up-title">{first.title}</p>
         <p className="text-[var(--muted-foreground)]">{first.detail}</p>
       </div>
-      <PendingLink href={first.href} data-testid="do-this-next" className="inline-flex min-h-11 items-center rounded-md bg-blue-700 px-4 py-2 text-sm font-medium text-white hover:opacity-90">
+      <PendingLink href={first.href} data-testid="do-this-next" className="inline-flex min-h-11 items-center rounded-md bg-[var(--primary)] px-4 py-2 text-sm font-medium text-[var(--primary-foreground)] hover:opacity-90">
         Do this next
       </PendingLink>
       {rest.length ? (

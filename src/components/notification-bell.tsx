@@ -110,12 +110,12 @@ export function NotificationBell({ align = 'right' }: { align?: 'left' | 'right'
   };
 
   const typeBadgeColor: Record<string, string> = {
-    reply: 'bg-green-100 text-green-800',
-    open: 'bg-blue-100 text-blue-800',
-    click: 'bg-purple-100 text-purple-800',
-    bounce: 'bg-red-100 text-red-800',
-    meeting_booked: 'bg-yellow-100 text-yellow-800',
-    hot_engagement: 'bg-orange-100 text-orange-800',
+    reply: 'bg-green-100 text-green-800 dark:bg-green-500/15 dark:text-green-300',
+    open: 'bg-blue-100 text-blue-800 dark:bg-blue-500/15 dark:text-blue-300',
+    click: 'bg-purple-100 text-purple-800 dark:bg-purple-500/15 dark:text-purple-300',
+    bounce: 'bg-red-100 text-red-800 dark:bg-red-500/15 dark:text-red-300',
+    meeting_booked: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-500/15 dark:text-yellow-300',
+    hot_engagement: 'bg-orange-100 text-orange-800 dark:bg-orange-500/15 dark:text-orange-300',
   };
 
   return (
@@ -127,7 +127,7 @@ export function NotificationBell({ align = 'right' }: { align?: 'left' | 'right'
       >
         <Bell className="h-5 w-5" />
         {unreadCount > 0 && (
-          <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-bold text-white">
+          <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-[var(--destructive)] px-1 text-[10px] font-bold text-[var(--destructive-foreground)]">
             {unreadCount > 99 ? '99+' : unreadCount}
           </span>
         )}

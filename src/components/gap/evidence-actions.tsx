@@ -109,7 +109,7 @@ export function EvidenceActions({
     <div className="space-y-1" data-testid="evidence-actions">
       <div className="flex flex-wrap items-center gap-2">
         {contradicted ? (
-          <span className="text-xs text-amber-700">Contradicted: ignore the side you do not believe, then use the other.</span>
+          <span className="text-xs text-amber-700 dark:text-amber-400">Contradicted: ignore the side you do not believe, then use the other.</span>
         ) : usable.length > 0 ? (
           <>
             {usable.length > 1 ? (

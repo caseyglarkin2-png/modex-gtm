@@ -50,7 +50,7 @@ export function HealthStrip({ initial = null }: { initial?: HealthReport | null 
   }
   if (state.kind === 'failed') {
     return (
-      <p data-testid="health-strip" data-state="unknown" role="status" className="text-xs text-amber-700">
+      <p data-testid="health-strip" data-state="unknown" role="status" className="text-xs text-amber-700 dark:text-amber-400">
         GAP health could not be checked ({state.reason}). Every outbound click still re-checks its own gates.
       </p>
     );

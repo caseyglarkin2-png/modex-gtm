@@ -125,7 +125,7 @@ const ACTION_CHIP_CLASS: Record<string, string> = {
   research_required: 'border-transparent bg-slate-500/15 text-slate-700 dark:text-slate-300',
   nurture: 'border-transparent bg-emerald-500/15 text-emerald-700 dark:text-emerald-400',
   linkedin_manual_task: 'border-transparent bg-sky-500/15 text-sky-700 dark:text-sky-400',
-  do_not_contact: 'border-transparent bg-[var(--destructive)] text-white',
+  do_not_contact: 'border-transparent bg-[var(--destructive)] text-[var(--destructive-foreground)]',
 };
 
 export const TARGET_LABEL: Record<EnrollTarget, string> = {

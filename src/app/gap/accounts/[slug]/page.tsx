@@ -82,7 +82,7 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
   const tabs = (
     <nav aria-label="Account views" className="sticky top-14 z-30 -mx-4 flex gap-1 border-b border-[var(--border)] bg-[var(--background)] px-4 py-1.5 md:top-0" data-testid="account-view-tabs">
       {VIEWS.map((t) => (
-        <PendingLink key={t.v} href={hrefFor(t.v)} aria-current={view === t.v ? 'page' : undefined} className={`inline-flex min-h-11 min-w-16 items-center justify-center rounded px-4 text-sm ${view === t.v ? 'bg-blue-700 font-semibold text-white' : 'text-[var(--muted-foreground)]'}`} data-testid={`account-view-${t.v}`}>
+        <PendingLink key={t.v} href={hrefFor(t.v)} aria-current={view === t.v ? 'page' : undefined} className={`inline-flex min-h-11 min-w-16 items-center justify-center rounded px-4 text-sm ${view === t.v ? 'bg-[var(--primary)] font-semibold text-[var(--primary-foreground)]' : 'text-[var(--muted-foreground)]'}`} data-testid={`account-view-${t.v}`}>
           {t.label}
         </PendingLink>
       ))}
@@ -171,12 +171,12 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
           <>
             {brief.family?.hold ? <SeparateMotion accountName={brief.accountName} detail={brief.family.hold.detail} relatedAccounts={brief.family.hold.accounts.filter((a) => !brief.family?.members.some((m) => m.accountName === a && m.relation === 'same_company'))} /> : null}
             {brief.dealState === 'ACTIVE' ? (
-              dealBrief ? <DealBriefView brief={dealBrief} deals={brief.deals.map((x) => ({ name: x.name, stage: x.stage ?? 'stage not given', lastActivityAt: null }))} /> : <p className="text-sm text-amber-700">The deal brief could not be read just now.</p>
+              dealBrief ? <DealBriefView brief={dealBrief} deals={brief.deals.map((x) => ({ name: x.name, stage: x.stage ?? 'stage not given', lastActivityAt: null }))} /> : <p className="text-sm text-amber-700 dark:text-amber-400">The deal brief could not be read just now.</p>
             ) : null}
             {sources ? (
               <AccountSourcesSection sources={sources} limit={3} viewAllHref={`/gap/accounts/${slug}/sources${q.name ? `?name=${encodeURIComponent(q.name)}` : ''}`} researchHref="#research-plan" />
             ) : (
-              <p className="text-sm text-amber-700" data-testid="account-sources-unavailable">
+              <p className="text-sm text-amber-700 dark:text-amber-400" data-testid="account-sources-unavailable">
                 Sources could not be read just now.
               </p>
             )}

@@ -19,7 +19,7 @@ function Row({ id, label, children }: { id: string; label: string; children: Rea
   );
 }
 
-const Unknown = () => <p className="font-semibold text-amber-600 dark:text-amber-400">UNKNOWN</p>;
+const Unknown = () => <p className="font-semibold text-amber-700 dark:text-amber-400">UNKNOWN</p>;
 
 export function DealBriefView({ brief, deals, editable = false }: { brief: DealBrief; deals: Array<{ name: string | null; stage: string; lastActivityAt: string | null }>; editable?: boolean }) {
   return (

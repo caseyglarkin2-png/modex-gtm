@@ -25,7 +25,7 @@ function NavContent({ pathname, onNavigate }: { pathname: string; onNavigate?: (
     <>
       <div className="flex h-14 items-center justify-between border-b border-[var(--border)] px-4">
         <Link href="/" className="flex items-center gap-2 font-semibold text-lg" onClick={onNavigate}>
-          <div className="flex h-8 w-8 items-center justify-center rounded-md bg-[var(--primary)] text-white text-sm font-bold">
+          <div className="flex h-8 w-8 items-center justify-center rounded-md bg-[var(--primary)] text-[var(--primary-foreground)] text-sm font-bold">
             Y
           </div>
           <span>YardFlow by FreightRoll</span>
@@ -82,7 +82,7 @@ function CollapsedNav({ pathname }: { pathname: string }) {
     <>
       <div className="flex h-14 items-center justify-center border-b border-[var(--border)]">
         <Link href="/">
-          <div className="flex h-8 w-8 items-center justify-center rounded-md bg-[var(--primary)] text-white text-sm font-bold">
+          <div className="flex h-8 w-8 items-center justify-center rounded-md bg-[var(--primary)] text-[var(--primary-foreground)] text-sm font-bold">
             Y
           </div>
         </Link>
@@ -154,7 +154,7 @@ export function Sidebar() {
           <Menu className="h-5 w-5" />
         </Button>
         <Link href="/" className="ml-2 flex items-center gap-2 font-semibold text-lg">
-          <div className="flex h-7 w-7 items-center justify-center rounded-md bg-[var(--primary)] text-white text-xs font-bold">
+          <div className="flex h-7 w-7 items-center justify-center rounded-md bg-[var(--primary)] text-[var(--primary-foreground)] text-xs font-bold">
             Y
           </div>
           <span className="truncate">{pageLabel}</span>

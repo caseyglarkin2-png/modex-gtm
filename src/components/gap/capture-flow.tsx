@@ -128,7 +128,7 @@ function Candidates({ capture, onChange }: { capture: CaptureView; onChange: (c:
             </select>
           </label>
           {multiSpeaker ? (
-            <p className="text-xs text-amber-700">This note has more than one speaker: choose who said each line.</p>
+            <p className="text-xs text-amber-700 dark:text-amber-400">This note has more than one speaker: choose who said each line.</p>
           ) : null}
         </div>
       ) : null}
@@ -137,7 +137,7 @@ function Candidates({ capture, onChange }: { capture: CaptureView; onChange: (c:
           <blockquote className="break-words border-l-2 border-[var(--primary)] pl-2 text-sm">&ldquo;{c.quote}&rdquo;</blockquote>
           {c.speaker ? <p className="text-xs text-[var(--muted-foreground)]">In the note: {c.speaker}</p> : null}
           {c.decision?.kind === 'confirmed' ? (
-            <p className="text-xs font-medium text-emerald-700">Confirmed as {words(c.decision.type)}. Recorded as buyer truth.</p>
+            <p className="text-xs font-medium text-emerald-700 dark:text-emerald-400">Confirmed as {words(c.decision.type)}. Recorded as buyer truth.</p>
           ) : c.decision?.kind === 'rejected' ? (
             <p className="text-xs text-[var(--muted-foreground)]">Rejected. Not buyer truth.</p>
           ) : (
@@ -243,7 +243,7 @@ function MeetingOutcomeForm({ capture, onChange }: { capture: CaptureView; onCha
         ))}
       </select>
       {hyp && (outcome === 'qualified_problem' || outcome === 'disqualified_problem') ? (
-        <p className="text-xs text-amber-700">This resolves the {words(hyp.problem_family)} thesis as {outcome === 'qualified_problem' ? 'confirmed' : 'rejected'}.</p>
+        <p className="text-xs text-amber-700 dark:text-amber-400">This resolves the {words(hyp.problem_family)} thesis as {outcome === 'qualified_problem' ? 'confirmed' : 'rejected'}.</p>
       ) : null}
       <select aria-label="Main attendee" className={input} value={personaId ?? ''} onChange={(e) => setPersonaId(e.target.value ? Number(e.target.value) : null)}>
         <option value="">Choose the main attendee</option>

@@ -108,7 +108,7 @@ export function ReplyList({ items, expandedId, onToggle, renderExpanded, loading
               <span className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-[var(--muted-foreground)]">
                 <span data-testid="reply-contact">{item.contactEmail}</span>
                 {item.accountLevel ? (
-                  <span data-testid="reply-account-level" className="rounded border border-amber-500/50 bg-amber-500/10 px-1 text-[10px] font-semibold uppercase tracking-wide text-amber-700">
+                  <span data-testid="reply-account-level" className="rounded border border-amber-500/50 bg-amber-500/10 px-1 text-[10px] font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-400">
                     Account-level / colleague reply
                   </span>
                 ) : null}

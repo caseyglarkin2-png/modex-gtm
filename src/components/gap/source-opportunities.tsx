@@ -34,7 +34,7 @@ export function SourceOpportunities({ items }: { items: Opportunity[] }) {
               {o.person.name ?? '(no name)'}
               {o.person.title ? <span className="font-normal text-[var(--muted-foreground)]"> · {o.person.title}</span> : null}
             </p>
-            <span className={`rounded px-1.5 py-0.5 text-xs ${o.approach === 'fact_led' ? 'bg-emerald-600/10 text-emerald-800' : 'bg-[var(--muted)]'}`}>{APPROACH_LABEL[o.approach]}</span>
+            <span className={`rounded px-1.5 py-0.5 text-xs ${o.approach === 'fact_led' ? 'bg-emerald-600/10 text-emerald-800 dark:text-emerald-300' : 'bg-[var(--muted)]'}`}>{APPROACH_LABEL[o.approach]}</span>
           </div>
           <dl className="space-y-1">
             <Line label="Account">{o.account}</Line>
@@ -57,7 +57,7 @@ export function SourceOpportunities({ items }: { items: Opportunity[] }) {
             {o.learn ? <Line label="Learn">{o.learn}</Line> : null}
             {o.wrongIf ? <Line label="Wrong if">{o.wrongIf}</Line> : null}
             <Line label="Safety" testId="opportunity-safety">
-              <span className={o.safety.state === 'caution' ? 'text-amber-700' : ''}>{o.safety.lines.join(' ')}</span>
+              <span className={o.safety.state === 'caution' ? 'text-amber-700 dark:text-amber-400' : ''}>{o.safety.lines.join(' ')}</span>
             </Line>
           </dl>
           <div className="flex flex-wrap items-center gap-2">

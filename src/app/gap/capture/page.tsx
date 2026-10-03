@@ -42,7 +42,7 @@ export default async function CapturePage({ searchParams }: { searchParams?: Pro
           <ul className="space-y-1 text-sm">
             {recent.map((r) => (
               <li key={r.id} className="flex flex-wrap items-center gap-2">
-                <span className={r.accountName ? '' : 'font-medium text-amber-700'}>{r.accountName ?? `Unlinked${r.accountHint ? ` ("${r.accountHint}")` : ''}`}</span>
+                <span className={r.accountName ? '' : 'font-medium text-amber-700 dark:text-amber-400'}>{r.accountName ?? `Unlinked${r.accountHint ? ` ("${r.accountHint}")` : ''}`}</span>
                 <span className="text-xs text-[var(--muted-foreground)]">
                   {r.context} · {r.createdAt.slice(0, 10)} · {r.pending} candidate{r.pending === 1 ? '' : 's'} waiting
                 </span>
