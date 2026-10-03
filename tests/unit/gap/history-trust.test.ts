@@ -37,7 +37,7 @@ describe('what an activity row is', () => {
       meetings: [], captures: [], outcomes: [], sends: [], now: NOW,
     });
     expect(h.map((x) => x.kind)).toEqual(['reply', 'activity']);
-    expect(h[0].text).toBe('Reply from Avinash Rao <avinash.rao@gxo.com>: Good afternoon Casey & Jake, I apologize in advance');
+    expect(h[0].text).toBe('Reply from Avinash Rao: Good afternoon Casey & Jake, I apologize in advance');
     expect(JSON.stringify(h)).not.toMatch(/Agent Action|smoke|Page View|&amp;/);
   });
 });
@@ -79,7 +79,7 @@ describe('NOW: last touch, latest reply, deal close date', () => {
 
   it('the latest buyer reply is on NOW, dated, however old', () => {
     const r = v(inputs(), [{ at: '2026-05-27T16:48:44Z', kind: 'reply', visibility: 'seller', text: 'Reply from Avinash Rao: I apologize in advance' }]);
-    expect(r.lastReply).toBe('Latest buyer reply May 27, 2026 (128 days ago): Reply from Avinash Rao: I apologize in advance');
+    expect(r.lastReply).toBe('Latest buyer reply May 27, 2026 (128 days ago): Avinash Rao: I apologize in advance');
     expect(v(inputs()).lastReply).toBeNull();
   });
   it('GAP\'s own first touch counts as the last touch when it is newer than the email log', () => {

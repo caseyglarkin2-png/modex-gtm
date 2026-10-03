@@ -1217,7 +1217,12 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
   };
   const motion = accountMotion(i, hypotheses, now, persona);
   const fragment = persona && /^\S+$|\s\S\.?$/.test(persona.name.trim()) ? ' (name incomplete in the CRM)' : '';
-  const owner = persona
+  // The likely owner is the buyer map's best operator (GAP contacts and HubSpot-only people, one prior): Sources
+  // named an older GAP-only pick while NOW and the buyer map named someone else (round 4, PepsiCo).
+  const bestOp = people.primary && !people.primary.doNotContact ? people.primary : null;
+  const owner = bestOp
+    ? `${bestOp.name}${/^\S+$|\s\S\.?$/.test(bestOp.name.trim()) ? ' (name incomplete in the CRM)' : ''}${bestOp.title ? `, ${bestOp.title}` : ''} (LIKELY; ownership never assumed${bestOp.source === 'hubspot' ? '; in HubSpot, not yet a GAP contact' : ''})`
+    : persona
     ? `${persona.name}${fragment}${persona.title ? `, ${persona.title}` : ''} (LIKELY; ownership never assumed)${persona.doNotContact ? ' (do not contact)' : ''}`
     : i.personas.length ? `Unknown: nobody on record has an operations title (${plural(i.personas.length, 'person', 'people')} on record).` : 'Unknown: no person at this account yet.';
   const biggestUnknown = discovery[0] ? `${discovery[0].type.replace(/_/g, ' ').toLowerCase()}: ${discovery[0].why}` : 'None open.';
@@ -1231,7 +1236,8 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
     topHypothesis: top ? hedge(top) : noHypothesis,
     currentTech,
     likelyOwner: owner,
-    relationship: sections.relationships.statements[0]?.text ?? 'None recorded',
+    // Intake relationships only; email history is not read here, so "None recorded" would contradict NOW (round 4).
+    relationship: sections.relationships.statements[0]?.text ?? (i.conversation?.who ? `In a thread with ${i.conversation.who}` : 'No introduction or meeting on record (email history: NOW)'),
     commercialState: dealStatement?.text ?? 'HubSpot deal state not read',
     biggestUnknown,
     nextQuestion: discovery[0]?.question ?? null,

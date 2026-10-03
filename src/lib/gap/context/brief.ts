@@ -2,6 +2,7 @@
  * BRIEF (V2, 2026-10-02): the one-page meeting brief. Each section shows 3-5 seller lines (tag + basis) and how many
  * more SOURCES holds. Projected from the same brief and context as NOW; nothing new is decided here.
  */
+import { sameIdea } from './same-idea';
 import type { AccountInputs, AccountIntelligenceBrief, SectionKey } from '../account-intel/build';
 import { sensitivityOf } from '../research/sensitivity';
 import { displayName, sellerLine, type NowLine } from './now';
@@ -48,7 +49,7 @@ export function briefListenText(accountName: string, sections: readonly BriefSec
     .slice(0, 4800);
 }
 
-export function projectBrief(brief: AccountIntelligenceBrief, ctx: AccountContext, i: Pick<AccountInputs, 'facts' | 'domains' | 'account'> & { bids?: AccountInputs['bids'] }, now: Date): BriefSection[] {
+export function projectBrief(brief: AccountIntelligenceBrief, ctx: AccountContext, i: Pick<AccountInputs, 'facts' | 'domains' | 'account'> & { bids?: AccountInputs['bids']; firstTouches?: AccountInputs['firstTouches'] }, now: Date): BriefSection[] {
   const live = i.facts.filter((f) => !f.expiresAt || new Date(f.expiresAt).getTime() > now.getTime());
   const lx = { domains: i.domains, accountName: i.account.name, citable: new Set(live.filter((f) => !sensitivityOf(f.quote)).flatMap((f) => [f.id, ...(f.sameQuoteIds ?? [])])) };
   const intel = (key: string, title: string, keys: SectionKey[]): BriefSection => {
@@ -75,7 +76,12 @@ export function projectBrief(brief: AccountIntelligenceBrief, ctx: AccountContex
     ...rel.sources.filter((s) => s.context || s.person).map((s) => `${s.person ? `${s.person}: ` : ''}${s.context ?? s.type} (${s.source})`),
     rel.meetings.upcoming ? `Upcoming meeting: ${rel.meetings.upcoming.at.slice(0, 10)}, ${rel.meetings.upcoming.what}` : null,
     rel.meetings.last ? `Last meeting: ${rel.meetings.last.at.slice(0, 10)} (${rel.meetings.last.status})` : null,
-    rel.lastThread ? `Last email: ${rel.lastThread.at.slice(0, 10)} to ${rel.lastThread.to}${rel.lastThread.replied ? ' (they have replied on the account)' : ''}` : null,
+    // The newest email, GAP's own first touches included (round 4: Kroger's Sep 25 GAP send vs "Last email Mar 30").
+    (() => {
+      const gap = [...(i.firstTouches ?? [])].filter((t) => t.sentAt && t.state !== 'draft outstanding').sort((a, b) => String(b.sentAt).localeCompare(String(a.sentAt)))[0];
+      if (gap && (!rel.lastThread || String(gap.sentAt) > rel.lastThread.at)) return `Last email: ${String(gap.sentAt).slice(0, 10)} to ${gap.recipient} (GAP first touch)`;
+      return rel.lastThread ? `Last email: ${rel.lastThread.at.slice(0, 10)} to ${rel.lastThread.to}${rel.lastThread.replied ? ' (they have replied on the account)' : ''}` : null;
+    })(),
     rel.owner ? `Account owner: ${rel.owner}` : null,
   ].filter((x): x is string => !!x);
   const e = ctx.engagement;
@@ -118,7 +124,15 @@ export function projectBrief(brief: AccountIntelligenceBrief, ctx: AccountContex
     const k = t.replace(/^[A-Z][A-Z /]+:\s*/, '').replace(/^\(\d+\)\s+/, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
     return k.length >= 80 ? [k, `tail:${k.slice(-80)}`] : [k];
   };
-  const once = (t: string) => { const ks = keys(t); if (ks.some((k) => seen.has(k))) return false; ks.forEach((k) => seen.add(k)); return true; };
+  // ... and the same idea in different words once (round 4: Giant Eagle three times, Gatik four times).
+  const said: string[] = [];
+  const once = (t: string) => {
+    const ks = keys(t);
+    if (ks.some((k) => seen.has(k)) || said.some((x) => sameIdea(x, t, i.account.name))) return false;
+    ks.forEach((k) => seen.add(k));
+    said.push(t);
+    return true;
+  };
   for (const s of sections) {
     s.lines = s.lines.filter((l) => once(l.text));
     s.notes = s.notes.filter((n) => once(n));
