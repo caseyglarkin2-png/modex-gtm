@@ -50,7 +50,7 @@ describe('location and remit are separate facts', () => {
     expect(u.regionWhy).toBe('location and remit not on record');
   });
   it('each state has a plain label', () => {
-    expect(GEO_LABEL).toEqual({ NA_REMIT: 'North America remit confirmed', US_CONFIRMED: 'US confirmed', CANADA_CONFIRMED: 'Canada confirmed', OTHER_REGION: 'Other region', UNKNOWN: 'Location / remit unknown' });
+    expect(GEO_LABEL).toEqual({ NA_REMIT: 'North America remit confirmed', US_CONFIRMED: 'US confirmed', CANADA_CONFIRMED: 'Canada confirmed', MEXICO_CONFIRMED: 'Mexico confirmed', OTHER_REGION: 'Other region', UNKNOWN: 'Location / remit unknown' });
   });
 });
 
@@ -149,5 +149,42 @@ describe('Canada in the research ranking and the edge cases (review SF1, nice-to
   it('"Americas" alone does not claim a North America remit (it includes Latin America)', () => {
     expect(readPerson('VP Logistics, Americas', { location: 'Sao Paulo, State of Sao Paulo, Brazil' }).geo).toBe('OTHER_REGION');
     expect(readPerson('VP Logistics, Americas').geo).toBe('UNKNOWN');
+  });
+});
+
+describe('Mexico is North America (Casey, 2026-10-03); generic Latin America is not', () => {
+  it('location: Mexico, never New Mexico', () => {
+    expect(personLocation('Monterrey, Nuevo Leon, Mexico')).toBe('MEXICO');
+    expect(personLocation('Mexico City, CDMX')).toBe('MEXICO');
+    expect(personLocation('Guadalajara, Jalisco, México')).toBe('MEXICO');
+    expect(personLocation('Santa Fe, New Mexico')).toBe('US');
+    expect(personLocation('Albuquerque, NM')).toBe('US');
+  });
+  it('VP, Mexico Transportation is a North America remit', () => {
+    expect(readPerson('VP, Mexico Transportation')).toMatchObject({ remit: 'NORTH_AMERICA', geo: 'NA_REMIT', region: 'US_NA' });
+  });
+  it('a Monterrey-based Director of Transportation is MEXICO CONFIRMED, North America tier', () => {
+    const r = readPerson('Director of Transportation', { location: 'Monterrey, Nuevo Leon, Mexico' });
+    expect(r).toMatchObject({ location: 'MEXICO', remit: null, geo: 'MEXICO_CONFIRMED', region: 'US_NA' });
+    expect(r.regionWhy).toBe('Mexico-based (Monterrey, Nuevo Leon, Mexico); remit not stated');
+  });
+  it('a Mexico City-based Director, European Logistics is another region: the stated remit wins', () => {
+    expect(readPerson('Director, European Logistics', { location: 'Mexico City, CDMX, Mexico' })).toMatchObject({ location: 'MEXICO', remit: 'OTHER_REGION', geo: 'OTHER_REGION' });
+  });
+  it('VP, Latin America Transportation is NOT North America (LATAM is broader than Mexico)', () => {
+    expect(readPerson('VP, Latin America Transportation')).toMatchObject({ remit: 'OTHER_REGION', geo: 'OTHER_REGION' });
+    expect(readPerson('Director of Logistics LATAM', { location: 'Mexico City, CDMX, Mexico' })).toMatchObject({ geo: 'OTHER_REGION' });
+  });
+  it('WHO: a Mexico-based owner ties a US-based one on geography; ownership still outranks geography', () => {
+    const c = (key: string, title: string, location: string | null) => ({ key, name: key, title, reachable: true, location });
+    expect(rankWho([c('b-us', 'Director of Transportation', 'Chicago, IL'), c('a-mx', 'Director of Transportation', 'Monterrey, Nuevo Leon, Mexico')]).map((x) => x.candidate.key)).toEqual(['a-mx', 'b-us']);
+    expect(rankWho([c('adj', 'VP Supply Chain', 'Monterrey, Nuevo Leon, Mexico'), c('owner', 'Director of Transportation', null)])[0].candidate.key).toBe('owner');
+    const [top] = rankWho([c('m', 'Director of Transportation', 'Monterrey, Nuevo Leon, Mexico')]);
+    expect(top.why).toBe('Primary operator: title says they run transportation, freight or fleet; Mexico-based; network scope.');
+  });
+  it('a Mexican plant is a North America network change in WHY NOW', async () => {
+    const { sellerRelevance } = await import('@/lib/gap/research/continuity');
+    expect(sellerRelevance('Acme Foods opens a new distribution center in Monterrey, Mexico.').rank).toBe(2);
+    expect(sellerRelevance('Acme Foods opens a new plant in Sao Paulo, Brazil.').rank).toBe(8);
   });
 });

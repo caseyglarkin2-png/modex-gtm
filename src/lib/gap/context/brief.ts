@@ -3,7 +3,7 @@
  * more SOURCES holds. Projected from the same brief and context as NOW; nothing new is decided here.
  */
 /** Which North America fact holds, as a short tag (location and remit kept apart; unknown and other carry none). */
-const GEO_TAG: Record<string, string> = { NA_REMIT: ' [North America remit]', US_CONFIRMED: ' [US]', CANADA_CONFIRMED: ' [Canada]' };
+const GEO_TAG: Record<string, string> = { NA_REMIT: ' [North America remit]', US_CONFIRMED: ' [US]', CANADA_CONFIRMED: ' [Canada]', MEXICO_CONFIRMED: ' [Mexico]' };
 import { sameIdea } from './same-idea';
 import type { AccountInputs, AccountIntelligenceBrief, SectionKey } from '../account-intel/build';
 import { sensitivityOf } from '../research/sensitivity';

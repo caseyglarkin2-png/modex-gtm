@@ -184,6 +184,7 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
             )}
             <ResearchPlanView accountName={brief.accountName} plan={planResearch(brief, history, now)} />
             <ApolloCandidatesView view={apolloCandidates(brief, inputs)} />
+            <Link href={`/gap/apollo?a=${slug}`} className="inline-flex min-h-11 items-center text-sm underline" data-testid="apollo-review-link">Review Apollo lookups across accounts</Link>
           </>
         }
       />
