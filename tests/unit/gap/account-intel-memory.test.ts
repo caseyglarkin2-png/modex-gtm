@@ -53,7 +53,7 @@ describe('THESIS NEEDS REVIEW', () => {
     expect(buildAccountBrief(inputs({ bids: [bid({ type: 'business_problem' })] }), NOW).hypotheses[0].needsReview).toEqual([]);
   });
 
-  it('a weak newer fact (outside the US network, a divestiture) does not flag it', () => {
+  it('a weak newer fact (outside the North America network, a divestiture) does not flag it', () => {
     const weak = fact({ id: 'f3', quote: 'Acme Foods agreed to sell its business in Brazil.', publishedAt: '2026-09-25T00:00:00Z' });
     expect(buildAccountBrief(inputs({ facts: [fact(), weak] }), NOW).hypotheses[0].needsReview).toEqual([]);
   });

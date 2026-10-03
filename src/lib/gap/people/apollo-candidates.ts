@@ -63,7 +63,8 @@ export function apolloCandidates(brief: AccountIntelligenceBrief, i: AccountInpu
   // A live deal, a buyer thread or an intro-only account: the next step is set; an Apollo lookup would not change it.
   if (m.type === 'IN_DEAL' || m.type === 'FOLLOW_UP' || m.type === 'INTRO_ONLY' || i.conversation) return { candidates: [], notNeeded: null, unknownIsFine: null };
 
-  const owner = p?.primary && p.primary.lane === 'PRIMARY_OPERATOR' && !p.primary.doNotContact ? p.primary : null;
+  // The owner is a North America (or unstated) transportation operator: another region's owner is not ours (review B1).
+  const owner = p?.primary && p.primary.lane === 'PRIMARY_OPERATOR' && p.primary.geo !== 'OTHER_REGION' && !p.primary.doNotContact ? p.primary : null;
   if (!owner) {
     const staged = i.candidates.find((c) => readPerson(c.title).lane === 'PRIMARY_OPERATOR');
     if (staged) notNeeded = `Review the staged contact candidate ${staged.name}${staged.title ? ` (${staged.title})` : ''} first: already found, no credit needed.`;

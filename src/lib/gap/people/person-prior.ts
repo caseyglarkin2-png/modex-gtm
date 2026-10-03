@@ -9,6 +9,7 @@
  *     buyer truth (the person who answered, a confirmed champion)
  *     > relationship (an introduction, someone Casey met)
  *     > explicit initiative ownership in a live signal (a named yard-modernization leader)
+ *     > not another region's stated remit (a title that says they run Europe owns Europe, not North America)
  *     > LANE  (primary operator > adjacent operator > facility operator > executive sponsor
  *              > transformation / tech > needs review > procurement / commercial > non-operating)
  *     > region (North America: a NA remit, or located in the US or Canada > unknown > another region)
@@ -118,7 +119,7 @@ const OUTSIDE_LINE = /\b(board|former|retired|ex-|advisor|adviser|investor|busin
 // Running stores or a retail field organization is not running the freight network.
 const STORE_OPS = /\b(store|stores|retail|field|restaurant|branch sales) operations\b/;
 const SUPPORT_ROLE = /\b(analyst|coordinator|specialist|planner|planning|project manager|assistant|associate)\b/;
-const US_NA = /\b(na|n\.a\.|north america|north american|us|u\.s\.|usa|united states|domestic|nala|americas|canada|canadian)\b/;
+const US_NA = /\b(na|n\.a\.|north america|north american|us|u\.s\.|usa|united states|domestic|nala|canada|canadian)\b/;
 const OTHER_REGION = /\b(europe|european|emea|latam|latin america|china|hong kong|india|asia|apac|middle east|africa|japan|uk|germany|france|mexico|brazil)\b/;
 const US_STATES = new Set(['alabama', 'alaska', 'arizona', 'arkansas', 'california', 'colorado', 'connecticut', 'delaware', 'florida', 'georgia', 'hawaii', 'idaho', 'illinois', 'indiana', 'iowa', 'kansas', 'kentucky', 'louisiana', 'maine', 'maryland', 'massachusetts', 'michigan', 'minnesota', 'mississippi', 'missouri', 'montana', 'nebraska', 'nevada', 'new hampshire', 'new jersey', 'new mexico', 'new york', 'north carolina', 'north dakota', 'ohio', 'oklahoma', 'oregon', 'pennsylvania', 'rhode island', 'south carolina', 'south dakota', 'tennessee', 'texas', 'utah', 'vermont', 'virginia', 'washington', 'west virginia', 'wisconsin', 'wyoming', 'district of columbia', 'al', 'ak', 'az', 'ar', 'ca', 'co', 'ct', 'de', 'fl', 'ga', 'hi', 'id', 'il', 'in', 'ia', 'ks', 'ky', 'la', 'me', 'md', 'ma', 'mi', 'mn', 'ms', 'mo', 'mt', 'ne', 'nv', 'nh', 'nj', 'nm', 'ny', 'nc', 'nd', 'oh', 'ok', 'or', 'pa', 'ri', 'sc', 'sd', 'tn', 'tx', 'ut', 'vt', 'va', 'wa', 'wv', 'wi', 'wy', 'dc']);
 const US_COUNTRY = new Set(['united states', 'united states of america', 'usa', 'us', 'u.s.', 'u.s.a.']);
@@ -133,6 +134,8 @@ export function personLocation(location: string | null | undefined): PersonLocat
   const last = parts[parts.length - 1];
   if (US_COUNTRY.has(last)) return 'US';
   if (last === 'canada') return 'CANADA';
+  // "Toronto, ON, CA": CA is Canada's country code after a province, not California.
+  if (last === 'ca' && parts.length >= 3 && CA_PROVINCES.has(parts[parts.length - 2])) return 'CANADA';
   // A recognised state or province without a country decides; a lone city or an unknown region says nothing.
   if (parts.length >= 2 && US_STATES.has(last)) return 'US';
   if (parts.length >= 2 && (CA_PROVINCES.has(last) || CA_COUNTRY.has(last))) return 'CANADA';
@@ -272,11 +275,12 @@ export interface WhoPick<C extends WhoCandidate = WhoCandidate> {
 const rank = <T>(order: T[], v: T) => order.length - order.indexOf(v);
 
 /** The prior's own part of the order (lane, region, scope), for callers that add their own tie-breaks. */
-export const priorKey = (read: PersonRead): number[] => [rank(LANE_ORDER, read.lane), rank(REGION_ORDER, read.region), rank(SCOPE_ORDER, read.scope)];
+export const priorKey = (read: PersonRead): number[] => [read.remit === 'OTHER_REGION' ? 0 : 1, rank(LANE_ORDER, read.lane), rank(REGION_ORDER, read.region), rank(SCOPE_ORDER, read.scope)];
 
 /** The ordered comparison key (first difference wins). Exposed for tests; never shown as a number. */
 export function whoKey(c: WhoCandidate, read: PersonRead): number[] {
-  return [c.doNotContact ? 0 : 1, c.buyerTruth ? 1 : 0, c.relationship ? 1 : 0, c.initiative ? 1 : 0, rank(LANE_ORDER, read.lane), rank(REGION_ORDER, read.region), rank(SCOPE_ORDER, read.scope), read.ownership, read.seniority, c.reachable ? 1 : 0];
+  // A stated other-region remit is a fact about what they OWN (review B1): it comes before the lane, not as a tie-break.
+  return [c.doNotContact ? 0 : 1, c.buyerTruth ? 1 : 0, c.relationship ? 1 : 0, c.initiative ? 1 : 0, read.remit === 'OTHER_REGION' ? 0 : 1, rank(LANE_ORDER, read.lane), rank(REGION_ORDER, read.region), rank(SCOPE_ORDER, read.scope), read.ownership, read.seniority, c.reachable ? 1 : 0];
 }
 
 /** The geography fact that decided, in a few words (WHO's why, the motion factors). */
@@ -308,3 +312,6 @@ export function rankWho<C extends WhoCandidate>(cands: readonly C[], opts: { ent
 
 /** A person worth leading with: an operating lane, never procurement, non-operating or an unread title by default. */
 export const isDefaultWhoLane = (lane: PersonLane) => lane === 'PRIMARY_OPERATOR' || lane === 'ADJACENT_OPERATOR' || lane === 'FACILITY_OPERATOR';
+
+/** The default WHO: an operating lane, and never a person whose title says they run another region (review B1). */
+export const isDefaultWho = (read: Pick<PersonRead, 'lane' | 'remit'>) => isDefaultWhoLane(read.lane) && read.remit !== 'OTHER_REGION';

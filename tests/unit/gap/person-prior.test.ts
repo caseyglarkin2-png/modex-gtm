@@ -108,6 +108,6 @@ describe('WHO order: buyer truth > relationship > initiative > lane > region > s
     const [top] = rankWho([p('na', 'NA Transportation Operations Director')]);
     expect(top.why).toBe('Primary operator: title says they run transportation, freight or fleet; North America remit stated; network scope.');
     expect(top.why).not.toMatch(/\d/);
-    expect(whoKey(top.candidate, top.read).length).toBe(10);
+    expect(whoKey(top.candidate, top.read).length).toBe(11);
   });
 });
