@@ -143,7 +143,7 @@ V2 contracts (do not change without a new design decision):
   The buyer map tags `[North America remit]`, `[US]`, `[Canada]`.
 - **Apollo: zero autonomous spend** (amendment 2026-10-03; `src/lib/enrichment/apollo-policy.ts`,
   `tests/unit/apollo-policy.test.ts`). Every credit-capable Apollo call takes an initiator. Automation (crons, agents,
-  dogfood, golden runs) is refused unless Casey sets `APOLLO_AUTOMATED_CREDIT_BUDGET` (default 0) and is capped at it;
+  dogfood, golden runs) is refused unless Casey sets `APOLLO_AUTOMATED_CREDITS_PER_RUN` (default 0; a per-run cap, not a cumulative budget);
   a human-initiated action (Casey clicks enrich on /contacts) is allowed; under the test runner every live call is
   refused whoever asks. The reenrich-contacts cron skips with the reason. Reading Casey's saved Apollo lists costs no
   credits and is not gated. Clawd (separate repo): the committee-enrichment job's paid `people/match` path is capped by

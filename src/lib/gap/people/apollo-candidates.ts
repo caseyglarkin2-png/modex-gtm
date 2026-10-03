@@ -48,7 +48,7 @@ export function apolloCandidates(brief: AccountIntelligenceBrief, i: AccountInpu
   const hs = i.hubspotPeople ?? null;
   const checkedFirst = [
     `GAP contacts (${i.personas.length})`,
-    `HubSpot contacts (${hs ? hs.people.length : 'not read'})`,
+    `HubSpot contacts (${hs ? hs.people.length : i.account.hubspotCompanyId ? 'not read' : 'no HubSpot company'})`,
     `staged contact candidates (${i.candidates.length})`,
     `relationships (${i.memberships.length})`,
   ];
@@ -68,6 +68,8 @@ export function apolloCandidates(brief: AccountIntelligenceBrief, i: AccountInpu
   if (!owner) {
     const staged = i.candidates.find((c) => readPerson(c.title).lane === 'PRIMARY_OPERATOR');
     if (staged) notNeeded = `Review the staged contact candidate ${staged.name}${staged.title ? ` (${staged.title})` : ''} first: already found, no credit needed.`;
+    // The owner may already be in HubSpot: an unread HubSpot is checked before any credit is proposed (review SF4).
+    else if (!hs && i.account.hubspotCompanyId) notNeeded = 'HubSpot contacts could not be read just now: check HubSpot for the transportation owner first (no Apollo lookup proposed until it is read).';
     else {
       const near = p?.primary && !p.primary.doNotContact ? p.primary : null;
       add({

@@ -34,8 +34,8 @@ vi.mock('@/lib/enrichment/config', () => ({
 }));
 vi.mock('@/lib/hubspot/contacts', () => ({ getContactById: mockedGetContactById }));
 vi.mock('@/lib/enrichment/apollo-enrichment', () => ({ enrichPersonaFromHubSpotContact: mockedEnrichPersonaFromHubSpotContact }));
-// The runs below model a budget Casey set (40 credits); Apollo itself is mocked, nothing reaches the network.
-vi.mock('@/lib/enrichment/apollo-policy', () => ({ apolloLiveDecision: () => ({ allowed: true, reason: 'test budget' }), automatedApolloCreditBudget: () => 40 }));
+// The runs below model a per-run cap Casey set (40 credits); Apollo itself is mocked, nothing reaches the network.
+vi.mock('@/lib/enrichment/apollo-policy', () => ({ apolloLiveDecision: () => ({ allowed: true, reason: 'test budget' }), automatedApolloCreditsPerRun: () => 40 }));
 
 describe('reenrich contacts runner', () => {
   beforeEach(() => {

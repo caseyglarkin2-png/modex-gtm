@@ -9,6 +9,8 @@ export type ApolloEnrichmentOutcome =
   | { status: 'matched'; personaId: number; apolloPersonId: string; confidence: number }
   | { status: 'no_match'; personaId: number; confidence: number }
   | { status: 'no_local_persona' }
+  /** Apollo already enriched this person: not searched again unless the click forces it (review SF2). */
+  | { status: 'already_enriched'; personaId: number; at: string | null }
   /** Casey's Apollo policy refused the call (automation with no budget, or a test): nothing was searched or written. */
   | { status: 'blocked'; reason: string };
 
@@ -18,7 +20,7 @@ function normalizeDomain(urlOrDomain: string | undefined): string | null {
   return value.split('/')[0] || null;
 }
 
-export async function enrichPersonaFromHubSpotContact(contact: HubSpotContact, initiator: ApolloInitiator, env?: Record<string, string | undefined>): Promise<ApolloEnrichmentOutcome> {
+export async function enrichPersonaFromHubSpotContact(contact: HubSpotContact, initiator: ApolloInitiator, env?: Record<string, string | undefined>, opts: { force?: boolean } = {}): Promise<ApolloEnrichmentOutcome> {
   // Asked before anything else: a refused run searches nothing and stamps no "last enriched" date.
   const decision = apolloLiveDecision(initiator, env);
   if (!decision.allowed) return { status: 'blocked', reason: decision.reason };
@@ -35,10 +37,13 @@ export async function enrichPersonaFromHubSpotContact(contact: HubSpotContact, i
       title: true,
       email: true,
       account_name: true,
+      enrichment: { select: { apollo_person_id: true, last_enriched_at: true } },
     },
   });
 
   if (!persona) return { status: 'no_local_persona' };
+  // Never pay twice for a person Apollo already matched (a re-click on the same contacts).
+  if (persona.enrichment?.apollo_person_id && !opts.force) return { status: 'already_enriched', personaId: persona.id, at: persona.enrichment.last_enriched_at ? persona.enrichment.last_enriched_at.toISOString() : null };
 
   const { firstName, lastName } = splitName(persona.name);
   const query = [contact.email, persona.name, contact.company, persona.title].filter(Boolean).join(' ');

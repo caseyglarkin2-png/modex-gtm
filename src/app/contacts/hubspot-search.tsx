@@ -108,7 +108,7 @@ export function HubSpotSearch() {
     startBulkEnrich(async () => {
       const result = await enrichHubSpotContactsBulk(ids);
       toast.success(
-        `Enriched ${result.matched} matched, ${result.noMatch} no-match, ${result.noLocalPersona} no-local, ${result.errors} errors`,
+        `Enriched ${result.matched} matched, ${result.noMatch} no-match, ${result.noLocalPersona} no-local, ${result.alreadyEnriched} already enriched (no credit spent), ${result.errors} errors`,
       );
       const refreshed = await listRecentHubSpotContacts();
       setResults(refreshed);

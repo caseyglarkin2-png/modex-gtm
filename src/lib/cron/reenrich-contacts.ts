@@ -4,7 +4,7 @@ import { isApolloConfigured } from '@/lib/enrichment/apollo-client';
 import { getEnrichmentBatchPolicy, getEnrichmentThresholds } from '@/lib/enrichment/config';
 import { getContactById } from '@/lib/hubspot/contacts';
 import { enrichPersonaFromHubSpotContact } from '@/lib/enrichment/apollo-enrichment';
-import { apolloLiveDecision, automatedApolloCreditBudget, type ApolloInitiator } from '@/lib/enrichment/apollo-policy';
+import { apolloLiveDecision, automatedApolloCreditsPerRun, type ApolloInitiator } from '@/lib/enrichment/apollo-policy';
 
 const CRON_INITIATOR: ApolloInitiator = { kind: 'automation', job: 'reenrich-contacts' };
 
@@ -90,8 +90,8 @@ export async function runReenrichContactsCron(): Promise<ReenrichRunResult> {
       errors: 0,
     };
 
-    // Never more contacts than the credit budget Casey set (one search per contact).
-    const toProcess = stale.slice(0, Math.min(policy.batchSize, automatedApolloCreditBudget()));
+    // Never more contacts than the per-run credit cap Casey set (one search per contact).
+    const toProcess = stale.slice(0, Math.min(policy.batchSize, automatedApolloCreditsPerRun()));
     const started = Date.now();
     for (const persona of toProcess) {
       try {
@@ -103,7 +103,7 @@ export async function runReenrichContactsCron(): Promise<ReenrichRunResult> {
         const result = await enrichPersonaFromHubSpotContact(contact, CRON_INITIATOR);
         if (result.status === 'matched') stats.matched++;
         else if (result.status === 'no_match') stats.noMatch++;
-        else stats.noLocal++;
+        else if (result.status === 'no_local_persona') stats.noLocal++;
       } catch {
         stats.errors++;
       }

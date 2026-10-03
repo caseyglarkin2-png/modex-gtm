@@ -16,6 +16,7 @@ const inputs = (over: Partial<AccountInputs> = {}): AccountInputs => ({
   aliases: [], domains: ['acmefoods.com'], siblings: [], watched: true, watchReasons: ['priority'],
   facts: [fact], signals: [], lastResearch: null, hypotheses: [], bids: [], personas: [persona(1, 'Sam Chain', 'VP Supply Chain')], candidates: [], memberships: [], firstTouches: [], conversation: null,
   opportunity: { status: 'CLEAR', detail: '', deals: [] }, pack: null, microsite: null, facilityFact: null, roi: null,
+  hubspotPeople: { truncated: false, people: [] },
   ...over,
 });
 const run = (over: Partial<AccountInputs> = {}) => { const i = inputs(over); return apolloCandidates(buildAccountBrief(i, NOW), i); };
@@ -34,7 +35,7 @@ describe('find the transportation operating owner', () => {
       decision: 'WHO and the first touch',
       possibleMatch: 'Sam Chain, VP Supply Chain (adjacent operator, on record)',
       creditCost: 'UNKNOWN',
-      checkedFirst: ['GAP contacts (1)', 'HubSpot contacts (not read)', 'staged contact candidates (0)', 'relationships (0)'],
+      checkedFirst: ['GAP contacts (1)', 'HubSpot contacts (0)', 'staged contact candidates (0)', 'relationships (0)'],
     });
     expect(r.unknownIsFine).toBe('Until Casey decides, WHO stays unknown: GAP does not guess and does not spend.');
   });
@@ -84,5 +85,17 @@ describe('never for geography alone; idempotent', () => {
     const a = run().candidates.map((c) => c.key);
     expect(run().candidates.map((c) => c.key)).toEqual(a);
     expect(new Set(a).size).toBe(a.length);
+  });
+});
+
+describe('HubSpot is checked before any credit is proposed (review SF4)', () => {
+  it('HubSpot unread for a linked company: no FIND_OWNER, and the page says check HubSpot first', () => {
+    const r = run({ hubspotPeople: null });
+    expect(r.candidates).toEqual([]);
+    expect(r.notNeeded).toBe('HubSpot contacts could not be read just now: check HubSpot for the transportation owner first (no Apollo lookup proposed until it is read).');
+  });
+  it('no HubSpot company at all: the proposal stands and says so', () => {
+    const r = run({ hubspotPeople: null, account: { name: 'Acme Foods', tier: null, priorityBand: null, vertical: 'cpg', parentBrand: null, hubspotCompanyId: null } });
+    expect(r.candidates[0]?.checkedFirst).toContain('HubSpot contacts (no HubSpot company)');
   });
 });

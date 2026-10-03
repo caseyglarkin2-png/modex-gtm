@@ -12,6 +12,8 @@ vi.mock('@/lib/enrichment/apollo-client', () => ({ searchApolloPeople: mockedSea
 
 describe('apollo enrichment persistence', () => {
   beforeEach(() => {
+    // Apollo is mocked (searchApolloPeople) and fetch is a mock: the human path runs, nothing reaches the network.
+    vi.stubGlobal('fetch', vi.fn());
     vi.clearAllMocks();
   });
 
