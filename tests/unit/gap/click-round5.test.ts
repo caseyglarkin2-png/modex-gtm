@@ -27,7 +27,7 @@ describe('WHY NOW keeps a network transformation for its program window', () => 
     const redesign = { ...base, id: 'f1', quote: 'General Mills will redesign the plant and warehouse network behind Cheerios, Blue Buffalo and Pillsbury, as part of a plan to cut $3 billion in costs by fiscal 2030.', publishedAt: '2026-07-02T00:00:00Z' };
     const closure = { ...base, id: 'f2', quote: 'General Mills announced this week that it will close its plant in Eagle Mountain.', publishedAt: '2026-08-14T00:00:00Z' };
     const t = whyNow([redesign, closure]);
-    expect(t).toMatch(/redesign the plant and warehouse network/);
+    expect(t).toMatch(/^ONGOING PROGRAM: General Mills will redesign the plant and warehouse network/);
     expect(t).not.toMatch(/Eagle Mountain/);
   });
   it('not past 180 days', () => {
