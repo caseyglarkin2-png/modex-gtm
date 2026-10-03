@@ -3,7 +3,7 @@
 STATUS: ACTIVE. GAP is in SELLER DOGFOOD MODE (V2 shipped 2026-10-02; the freeze rule below applies again).
 <!-- verified:2026-10-02 (V2) -->
 
-Production SHA: `a507551f` (GAP V2 click-test rounds 1-3, #368-#376; READY, production-verified 2026-10-03). Update this line when a change ships.
+Production SHA: `11e26869` (GAP V2 click-test rounds 1-7, #368-#381; READY, production-verified 2026-10-03; all three adversarial click reviewers (phone, trust, UX) signed off YES on NOW). Update this line when a change ships.
 <!-- verified:2026-10-03 -->
 
 ## The rule for future changes
@@ -154,7 +154,14 @@ division question (607777e5) · #369 deal truth from HubSpot + last touch (e7ae5
 Listen to the brief (86dada39) · #371 buyer map from HubSpot with person location (a4faf511) · #372 faster account
 page, WHO tie-breaks (33cba7c5) · #373 real history, latest reply, passed close dates, relevant WHY NOW (4e48cf19) ·
 #374 one first-touch answer, honest labels (e8ab3e85) · #375 accessibility + phone UX (4518814a) · #376 honest queue
-actions, who Casey met, 45-day WHY NOW window, instant click feedback (a507551f).
+actions, who Casey met, 45-day WHY NOW window, instant click feedback (a507551f). · #378 an unanswered reply leads,
+one last-touch answer, one idea once (55a5ab48) · #379 network program stays WHY NOW 180 days, cockpit title-case
+(5d5072e7) · #380 the transportation owner leads over a ready adjacent card, reply opens in Gmail (01813263) · #381
+one idea once ignores section labels (11e26869).
+Fast-follow debt from the sign-off (none blocking): Kroger WHO names a cold HubSpot contact during a live deal; BRIEF
+links 16px; card shows "review_required: critic_review"; Karen Jordan twice in PepsiCo's buyer map; browser title
+casing from the slug ("Pepsico"); garbled "Not modeled from public data ... daily trailer moves" YARD line; buyer
+maps include non-US / non-company people (Kroger Europe, AWG, Walmart China); queue E2E debris.
 Named debt (not fixed): General Mills "Caf Tr s Cora es" is stored mojibake from a filing extraction (repair the
 extractor, then re-extract); PepsiCo economics "230 facilities" vs the 105-site footprint; account page 3-25s cold
 because production DATABASE_URL has connection_limit=1 (Casey decision); dark-mode --primary contrast (3.68:1) is a
