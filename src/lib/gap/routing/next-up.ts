@@ -14,6 +14,7 @@
  * UNKNOWN; never an item the caller marked as failing its actionability gate.
  * Pure: the page builds the candidates, this orders and filters them.
  */
+import { displayName } from '../people/display-name';
 import type { CockpitLane, NextUpItem } from '@/components/gap/gap-cockpit';
 
 export const LANE_RANK: Record<CockpitLane, number> = { replies: 0, follow_up: 1, ready: 2, review: 3, research: 4, deals: 5 };
@@ -96,7 +97,8 @@ export interface NextUpInput {
   openHref: (lane: 'ready' | 'follow_up', decisionId: string) => string;
 }
 
-const who = (p: Person) => p.displayName ?? p.email ?? 'someone';
+// Said the way NOW says it (round 5: the cockpit read "Contact michelle schlie").
+const who = (p: Person) => (p.displayName ? displayName(p.displayName) : p.email ?? 'someone');
 
 export function buildNextUpCandidates(input: NextUpInput): NextCandidate[] {
   const tier = (a: string) => tierKey(input.tiers.get(a));
