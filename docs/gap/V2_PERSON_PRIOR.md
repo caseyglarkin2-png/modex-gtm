@@ -50,6 +50,17 @@ America, transportation and warehousing, the private fleet, distribution transpo
 execution. It looks in HubSpot contacts and candidates first, then public sources. Candidates surface for Casey, and
 no contact is created automatically.
 
+## Geography (amendment 2026-10-03)
+
+Canada is North America. A person's LOCATION (their own record) and OPERATING REMIT (the region their title says they
+run) are separate facts; the geography state is NA_REMIT / US_CONFIRMED / CANADA_CONFIRMED / OTHER_REGION / UNKNOWN.
+The remit decides when stated, else the location, else unknown (never a company HQ). The three North America states
+are one ranking tier after the lane, so a located-in-North-America adjacent operator never beats a transportation
+owner whose location is unknown. Golden WHO re-run on the new comparator (production read-only, 2026-10-03): the same
+best person and alternate on all eight GAP accounts below (their GAP records carry no location; geography reads
+"location / remit unknown" and never decides). UNKNOWN is a valid state: the Apollo candidate list proposes, Casey
+decides, GAP never spends.
+
 ## Dogfood: Casey's 78-contact HubSpot sample (read-only, nothing written back)
 
 `npx tsx scripts/gap/person-prior-dogfood.ts <export.json> --rows`. The export's City / Country columns are the
