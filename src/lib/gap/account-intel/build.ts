@@ -81,6 +81,10 @@ export interface PersonaInput {
   emailStatus: string | null;
   /** The CRM contact's last update (first-party freshness); null shows undated. */
   updatedAt?: string | null;
+  /** The explicit link to the HubSpot contact (the only way a persona and a HubSpot person are the same). */
+  hubspotContactId?: string | null;
+  /** The person's own location from their HubSpot contact ("Chicago, Illinois, United States"), when read. */
+  location?: string | null;
 }
 
 interface PackSite {
@@ -145,6 +149,8 @@ export interface AccountInputs {
     hold: { detail: string; accounts: string[]; unknown: boolean } | null;
   } | null;
   /** What Scout found when this company was a candidate: cited, never verified at source (leads, not facts). */
+  /** The account's people in HubSpot (people/hubspot-people.ts): live, read-only; null when not read. */
+  hubspotPeople?: { people: Array<{ id: string; name: string; title: string | null; location: string | null; hasEmail: boolean; optedOut?: boolean }>; truncated: boolean } | null;
   scout?: { domain: string | null; what: string | null; entityType: string | null; network: Array<{ claim: string; url: string }>; freight: Array<{ claim: string; url: string }>; at: string | null; basis?: 'web' | 'name_rules' | null; ambiguous?: boolean } | null;
 }
 
@@ -290,6 +296,10 @@ export interface MappedPerson {
   doNotContact: boolean;
   /** The division the person's own title names (never inferred from the email domain), else null. */
   division?: string | null;
+  /** Where the person is on record (their own HubSpot contact), else null. */
+  location?: string | null;
+  /** 'gap': a GAP contact (persona). 'hubspot': in HubSpot only, not yet a GAP contact (never auto-created). */
+  source?: 'gap' | 'hubspot';
 }
 
 export interface BuyerMap {
@@ -986,6 +996,19 @@ function familyLine(i: AccountInputs): string {
   return `${shape} · ${activity}${f.separate ? ` · Separate buying motion confirmed by ${f.separate.actor} until ${f.separate.expiresAt.slice(0, 10)}` : ''}`;
 }
 
+/**
+ * When the prior's best person is in HubSpot but not yet a GAP contact, NEXT says so first (a first touch can only
+ * go to a GAP contact, and GAP never creates one). Only for a first touch or a "nobody reachable" hold.
+ */
+function hubspotFirst(people: BuyerMap, m: Motion, next: string): string {
+  const p = people.primary;
+  if (!p || p.source !== 'hubspot') return next;
+  const who = `${p.name}${p.title ? `, ${p.title}` : ''}${p.location ? ` (${p.location})` : ''}`;
+  if (m.type === 'FACT_LED') return `Add ${who} from HubSpot as a GAP contact (the best transportation owner on record), then review the thesis and use the verified fact in a first touch to them (every gate runs at the click).`;
+  if (m.type === 'NO_GOOD_MOTION' && /nobody reachable/i.test(m.why)) return `Nobody in GAP is reachable, but HubSpot has ${who}: add them as a GAP contact first.`;
+  return next;
+}
+
 /** The divisions the evidence names for a multi-division parent, and the open question (people/division.ts). */
 function divisionView(i: AccountInputs): AccountIntelligenceBrief['division'] {
   const v = divisionsFor(i.account.name);
@@ -1136,19 +1159,34 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
   // (functional ownership, then US / North America remit, then network scope, then seniority); procurement, finance,
   // R&D, sales, generic IT and unread titles are never the default. Nobody in an operating lane is Unknown, never
   // "the first contact on record".
-  const ranked = rankWho(i.personas.map((p) => ({ key: String(p.id), name: p.name, title: p.title, reachable: !p.doNotContact && p.hasEmail, doNotContact: p.doNotContact, persona: p })), { entityType: fit.entityType });
+  const ranked = rankWho(i.personas.map((p) => ({ key: String(p.id), name: p.name, title: p.title, location: p.location ?? null, reachable: !p.doNotContact && p.hasEmail, doNotContact: p.doNotContact, persona: p })), { entityType: fit.entityType });
   const operating = ranked.filter((r) => isDefaultWhoLane(r.read.lane) && !r.candidate.doNotContact);
   const pick = operating.find((r) => r.candidate.reachable) ?? operating[0] ?? null;
   // The OWNER line still names a do-not-contact operating owner, flagged (never silently skipped); WHO never picks them.
   const persona = pick?.candidate.persona ?? ranked.find((r) => isDefaultWhoLane(r.read.lane))?.candidate.persona;
-  const mapped = (r: (typeof ranked)[number]): MappedPerson => ({ name: r.candidate.name, title: r.candidate.title, lane: r.read.lane, laneLabel: LANE_LABEL[r.read.lane], region: r.read.region, why: r.why, reachable: r.candidate.reachable, doNotContact: !!r.candidate.doNotContact, division: divisionOf(i.account.name, r.candidate.title) });
+  // THE BUYER MAP spans GAP's contacts AND the account's people in HubSpot (live, read-only): a HubSpot person who
+  // is not a GAP contact (no persona carries their hubspot_contact_id) is ranked by the same prior and marked so.
+  const linked = new Set(i.personas.map((p) => p.hubspotContactId).filter((x): x is string => !!x));
+  const hsOnly = (i.hubspotPeople?.people ?? []).filter((h) => !linked.has(h.id));
+  const everyone = rankWho(
+    [
+      ...i.personas.map((p) => ({ key: `gap:${p.id}`, name: p.name, title: p.title, location: p.location ?? null, reachable: !p.doNotContact && p.hasEmail, doNotContact: p.doNotContact, source: 'gap' as const })),
+      ...hsOnly.map((h) => ({ key: `hubspot:${h.id}`, name: h.name, title: h.title, location: h.location, reachable: false, doNotContact: !!h.optedOut, source: 'hubspot' as const })),
+    ],
+    { entityType: fit.entityType },
+  );
+  const mapped = (r: (typeof everyone)[number]): MappedPerson => ({ name: r.candidate.name, title: r.candidate.title, lane: r.read.lane, laneLabel: LANE_LABEL[r.read.lane], region: r.read.region, why: r.why, reachable: r.candidate.reachable, doNotContact: !!r.candidate.doNotContact, division: divisionOf(i.account.name, r.candidate.title), location: r.candidate.location ?? null, source: r.candidate.source });
+  const opAll = everyone.filter((r) => isDefaultWhoLane(r.read.lane) && !r.candidate.doNotContact);
+  // The prior's best across both: a reachable GAP contact wins a tie (it can be worked today); a HubSpot-only person
+  // wins when the prior ranks them higher (a better-fit owner).
+  const best = opAll[0] ?? null;
   const people: BuyerMap = {
-    primary: pick ? mapped(pick) : null,
+    primary: best ? mapped(best) : null,
     alternate: (() => {
-      const alt = operating.find((r) => r !== pick) ?? ranked.find((r) => r !== pick && !r.candidate.doNotContact && r.read.lane !== 'NON_OPERATING' && r.read.lane !== 'NEEDS_REVIEW') ?? null;
+      const alt = opAll.find((r) => r !== best) ?? everyone.find((r) => r !== best && !r.candidate.doNotContact && r.read.lane !== 'NON_OPERATING' && r.read.lane !== 'NEEDS_REVIEW') ?? null;
       return alt ? mapped(alt) : null;
     })(),
-    lanes: [...new Set(ranked.map((r) => r.read.lane))].map((lane) => ({ lane, label: LANE_LABEL[lane], people: ranked.filter((r) => r.read.lane === lane).map(mapped) })),
+    lanes: [...new Set(everyone.map((r) => r.read.lane))].map((lane) => ({ lane, label: LANE_LABEL[lane], people: everyone.filter((r) => r.read.lane === lane).map(mapped) })),
   };
   const motion = accountMotion(i, hypotheses, now, persona);
   const fragment = persona && /^\S+$|\s\S\.?$/.test(persona.name.trim()) ? ' (name incomplete in the CRM)' : '';
@@ -1170,7 +1208,7 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
     commercialState: dealStatement?.text ?? 'HubSpot deal state not read',
     biggestUnknown,
     nextQuestion: discovery[0]?.question ?? null,
-    nextAction: nextAction(i, motion, now),
+    nextAction: hubspotFirst(people, motion, nextAction(i, motion, now)),
     motion: motionLine(motion),
     fit: `${fit.entityType ? ENTITY_LABEL[fit.entityType] : 'Type unknown'} · ${FIT_LABEL[fit.fit]}`,
     family: familyLine(i),

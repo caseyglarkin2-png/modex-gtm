@@ -93,6 +93,21 @@ const STORE_OPS = /\b(store|stores|retail|field|restaurant|branch sales) operati
 const SUPPORT_ROLE = /\b(analyst|coordinator|specialist|planner|planning|project manager|assistant|associate)\b/;
 const US_NA = /\b(na|n\.a\.|north america|north american|us|u\.s\.|usa|united states|domestic|nala|americas)\b/;
 const OTHER_REGION = /\b(europe|european|emea|latam|latin america|china|hong kong|india|asia|apac|middle east|africa|japan|uk|germany|france|mexico|brazil)\b/;
+const US_STATES = new Set(['alabama', 'alaska', 'arizona', 'arkansas', 'california', 'colorado', 'connecticut', 'delaware', 'florida', 'georgia', 'hawaii', 'idaho', 'illinois', 'indiana', 'iowa', 'kansas', 'kentucky', 'louisiana', 'maine', 'maryland', 'massachusetts', 'michigan', 'minnesota', 'mississippi', 'missouri', 'montana', 'nebraska', 'nevada', 'new hampshire', 'new jersey', 'new mexico', 'new york', 'north carolina', 'north dakota', 'ohio', 'oklahoma', 'oregon', 'pennsylvania', 'rhode island', 'south carolina', 'south dakota', 'tennessee', 'texas', 'utah', 'vermont', 'virginia', 'washington', 'west virginia', 'wisconsin', 'wyoming', 'district of columbia', 'al', 'ak', 'az', 'ar', 'ca', 'co', 'ct', 'de', 'fl', 'ga', 'hi', 'id', 'il', 'in', 'ia', 'ks', 'ky', 'la', 'me', 'md', 'ma', 'mi', 'mn', 'ms', 'mo', 'mt', 'ne', 'nv', 'nh', 'nj', 'nm', 'ny', 'nc', 'nd', 'oh', 'ok', 'or', 'pa', 'ri', 'sc', 'sd', 'tn', 'tx', 'ut', 'vt', 'va', 'wa', 'wv', 'wi', 'wy', 'dc']);
+const US_COUNTRY = new Set(['united states', 'united states of america', 'usa', 'us', 'u.s.', 'u.s.a.']);
+
+/** Where a person record says they are: 'US', 'OTHER' (a non-US country), or null (nothing usable). */
+export function personCountry(location: string | null | undefined): 'US' | 'OTHER' | null {
+  const parts = String(location ?? '').split(',').map((p) => p.trim().toLowerCase()).filter(Boolean);
+  if (!parts.length) return null;
+  const last = parts[parts.length - 1];
+  if (US_COUNTRY.has(last)) return 'US';
+  // A recognised state without a country is US; a lone city or an unknown region says nothing.
+  if (parts.length >= 2 && US_STATES.has(last)) return 'US';
+  if (parts.length >= 2 && !US_STATES.has(last) && /^[a-z .'-]{3,}$/.test(last) && !parts.slice(0, -1).some((p) => US_STATES.has(p))) return 'OTHER';
+  return null;
+}
+
 const NETWORK = /\b(global|network|enterprise|corporate|corp\.|north america|national|regional|region|americas|na|nala|all sites|multi-site|domestic)\b/;
 const SITE = /\b(plant|site|facility|dc manager|distribution center manager|yard manager|warehouse manager)\b/;
 
@@ -159,15 +174,22 @@ export function readPerson(title: string | null | undefined, opts: { entityType?
     laneWhy = 'the title does not say what they operate';
   }
 
-  const loc = String(opts.location ?? '').toLowerCase();
+  // The person's own record ("Chicago, Illinois, United States"): the country decides; without one, a US state does.
+  const where = personCountry(opts.location);
   let region: PersonRegion;
   let regionWhy: string;
-  if (has(t, US_NA) || /united states|\busa?\b|\b(al|ak|az|ar|ca|co|ct|de|fl|ga|il|in|ia|ks|ky|la|ma|md|mi|mn|mo|nc|nj|ny|oh|ok|or|pa|sc|tn|tx|ut|va|wa|wi)\b/.test(loc)) {
+  if (has(t, US_NA)) {
     region = 'US_NA';
-    regionWhy = has(t, US_NA) ? 'US / North America remit in the title' : 'US location on the person record';
-  } else if (has(t, OTHER_REGION) || (loc && !/united states/.test(loc))) {
+    regionWhy = 'US / North America remit in the title';
+  } else if (has(t, OTHER_REGION)) {
     region = 'OTHER_REGION';
-    regionWhy = has(t, OTHER_REGION) ? 'another region named in the title' : 'located outside the US';
+    regionWhy = 'another region named in the title';
+  } else if (where === 'US') {
+    region = 'US_NA';
+    regionWhy = `US-based (${String(opts.location).trim()})`;
+  } else if (where === 'OTHER') {
+    region = 'OTHER_REGION';
+    regionWhy = `based outside the US (${String(opts.location).trim()})`;
   } else {
     region = 'UNKNOWN';
     regionWhy = /\bglobal\b/.test(t) ? 'US location unknown (global remit; US responsibility not stated)' : 'US location unknown (no remit stated; the company\'s country is not the person\'s)';

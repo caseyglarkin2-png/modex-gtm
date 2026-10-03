@@ -44,7 +44,7 @@ export interface NowView {
   /** "Last touch Sep 3, 2026 (29 days ago): Email to ..." or "No touch on record." */
   lastTouch: string;
   next: { text: string; source: 'meeting' | 'deal' | 'conversation' | 'restriction' | 'motion' };
-  who: { name: string; title: string | null; why: string; route: string | null } | null;
+  who: { name: string; title: string | null; why: string; route: string | null; location?: string | null; inHubSpotOnly?: boolean } | null;
   whoUnknown: string | null;
   alternate: { name: string; title: string | null; why: string } | null;
   whyNow: NowLine[];
@@ -137,7 +137,7 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   if (m.type === 'INTRO_ONLY' && restriction) who = { name: restriction.introducer, title: null, why: `Holds the introduction to ${restriction.route}; this account is reached only through them.`, route: ctx.relationship.routes[0]?.route ?? null };
   else if (m.type === 'FOLLOW_UP' && m.who) who = { name: m.who, title: null, why: 'They are already talking to you: continue that thread.', route: null };
   else if ((m.type === 'REFERRAL_LED' || m.type === 'RELATIONSHIP_LED') && m.who) who = { name: m.who, title: null, why: `You have a way in: ${m.why.split(':')[0]}.`, route: null };
-  else if (p?.primary && !p.primary.doNotContact) who = { name: displayName(p.primary.name), title: p.primary.title, why: p.primary.why, route: null };
+  else if (p?.primary && !p.primary.doNotContact) who = { name: displayName(p.primary.name), title: p.primary.title, why: p.primary.why, route: null, location: p.primary.location ?? null, inHubSpotOnly: p.primary.source === 'hubspot' };
   const whoUnknown = who ? null : brief.glance.likelyOwner.startsWith('Unknown') ? `${brief.glance.likelyOwner} Find the US / North America transportation operations owner (BRIEF: buyer map).` : brief.glance.likelyOwner;
   // When the motion names the person (a relationship, a thread, an introducer), the prior's best operator is the
   // alternate; otherwise the prior's own second choice.
