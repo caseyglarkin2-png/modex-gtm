@@ -189,6 +189,22 @@ describe('Dannon (warm intro only)', () => {
   });
 });
 
+describe('deal truth and last touch (seller review MUSTs)', () => {
+  it('in a deal: the state line carries stage, amount and close date; NEXT is the deal\'s own next step when HubSpot has one', () => {
+    const deal = { name: 'YardFlow - Acme', stage: 'appointmentscheduled', amount: '250000', closeDate: '2026-11-30T00:00:00Z', nextStep: 'Send the pilot scope to Dana by Friday' };
+    const v = now({ opportunity: { status: 'ACTIVE', detail: '', deals: [deal] } });
+    expect(v.stateLine).toMatch(/In a deal \(appointment scheduled, \$250K, closes Nov 30, 2026\)/);
+    expect(v.next).toEqual({ text: 'Deal next step (HubSpot): Send the pilot scope to Dana by Friday', source: 'deal' });
+    const noStep = now({ opportunity: { status: 'ACTIVE', detail: '', deals: [{ ...deal, nextStep: null }] } });
+    expect(noStep.next.text).toMatch(/^Work the deal from In Deals/);
+  });
+  it('last touch: the newest seller-visible event and how long ago; none is said plainly', () => {
+    const history = projectHistory({ activities: [], emails: [{ to_email: 'dana@acmefoods.com', subject: 'Yard question', sent_at: '2026-09-02T12:00:00Z', reply_count: 0 }], meetings: [], captures: [], outcomes: [], sends: [], now: NOW });
+    expect(now({}, emptyCtx({ history })).lastTouch).toBe('Last touch Sep 2, 2026 (30 days ago): Email to dana@acmefoods.com: "Yard question"');
+    expect(now().lastTouch).toBe('No touch on record.');
+  });
+});
+
 describe('final review fixes (2026-10-02)', () => {
   it('P1: "their own publication" only on the account\'s own domain, never a name match', () => {
     const y = { domains: ['thehersheycompany.com'], accountName: 'The Hershey Company', citable: new Set<string>() };

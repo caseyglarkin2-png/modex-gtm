@@ -41,6 +41,8 @@ export interface NowView {
   stateLine: string;
   /** A multi-division parent: which division owns the yard decision is the first unknown (the operating unit). */
   unit: string | null;
+  /** "Last touch Sep 3, 2026 (29 days ago): Email to ..." or "No touch on record." */
+  lastTouch: string;
   next: { text: string; source: 'meeting' | 'deal' | 'conversation' | 'restriction' | 'motion' };
   who: { name: string; title: string | null; why: string; route: string | null } | null;
   whoUnknown: string | null;
@@ -120,9 +122,13 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   // NEXT: an upcoming meeting (within 14 days) is the next thing; otherwise GAP's own next action, unchanged.
   const meeting = ctx.relationship.meetings.upcoming;
   const soon = meeting && new Date(meeting.at).getTime() - now.getTime() <= 14 * 86_400_000;
+  // In a deal, the deal's own next step (HubSpot) is NEXT when someone wrote one; otherwise GAP's deal guidance.
+  const dealNext = m.type === 'IN_DEAL' ? brief.deals.find((d) => d.nextStep?.trim())?.nextStep?.trim() ?? null : null;
   const next: NowView['next'] = soon
     ? { text: `Prepare for the meeting on ${day(meeting!.at)}: ${meeting!.what}. Read BRIEF before you go.`, source: 'meeting' }
-    : { text: m.who ? brief.glance.nextAction.split(m.who).join(displayName(m.who)) : brief.glance.nextAction, source: m.type === 'IN_DEAL' ? 'deal' : m.type === 'FOLLOW_UP' ? 'conversation' : m.type === 'INTRO_ONLY' ? 'restriction' : 'motion' };
+    : dealNext
+      ? { text: `Deal next step (HubSpot): ${dealNext}`, source: 'deal' }
+      : { text: m.who ? brief.glance.nextAction.split(m.who).join(displayName(m.who)) : brief.glance.nextAction, source: m.type === 'IN_DEAL' ? 'deal' : m.type === 'FOLLOW_UP' ? 'conversation' : m.type === 'INTRO_ONLY' ? 'restriction' : 'motion' };
 
   // WHO: the motion's person when it has one (buyer truth, a relationship, the introducer), else the person prior.
   const p = brief.people;
@@ -209,10 +215,18 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
 
   const owner = ctx.relationship.owner && !/^(unassigned|none|n\/a|tbd)$/i.test(ctx.relationship.owner) ? ctx.relationship.owner : null;
   const stage = brief.deals[0]?.stage && !/^\d+$/.test(brief.deals[0].stage) ? brief.deals[0].stage.replace(/([a-z])(scheduled|qualified|presented|sent|won|lost)\b/g, '$1 $2').replace(/[_-]+/g, ' ') : null;
-  const stateLine = [brief.glance.fit, m.type === 'IN_DEAL' && stage ? `In a deal (${stage})` : STATE[m.type], owner ? `Owner: ${owner}` : null].filter(Boolean).join(' · ');
+  const d0 = brief.deals[0];
+  const money = d0?.amount && Number.isFinite(Number(d0.amount)) && Number(d0.amount) > 0 ? `$${Number(d0.amount) >= 1e6 ? `${(Number(d0.amount) / 1e6).toFixed(1)}M` : `${Math.round(Number(d0.amount) / 1e3)}K`}` : null;
+  const closes = d0?.closeDate && !Number.isNaN(new Date(d0.closeDate).getTime()) ? `closes ${day(d0.closeDate)}` : null;
+  const dealBits = [stage, money, closes].filter(Boolean).join(', ');
+  const stateLine = [brief.glance.fit, m.type === 'IN_DEAL' ? (dealBits ? `In a deal (${dealBits})` : STATE[m.type]) : STATE[m.type], owner ? `Owner: ${owner}` : null].filter(Boolean).join(' · ');
+  // LAST TOUCH: the newest thing that happened (a sent email, a reply, a meeting, a field note), and how long ago.
+  const lt = ctx.history.find((h) => h.visibility === 'seller' && h.kind !== 'outcome');
+  const lastTouch = lt ? `Last touch ${day(lt.at)} (${Math.max(0, Math.floor((now.getTime() - new Date(lt.at).getTime()) / 86_400_000))} days ago): ${lt.text}` : 'No touch on record.';
   const view: NowView = {
     name: brief.accountName,
     stateLine,
+    lastTouch,
     unit: brief.division ? `Division: unknown. ${brief.division.question}` : null,
     next,
     who,

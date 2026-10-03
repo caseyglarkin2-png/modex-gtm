@@ -26,6 +26,12 @@ describe('resolveOpportunity (HubSpot is the truth, account level)', () => {
     });
   });
 
+  it('V2: amount, close date and the deal\'s next step ride along for display (only when HubSpot has them)', async () => {
+    const hs = fakeHubSpot({ companyDeals: { 'c-kroger': ['d1'] }, deals: [{ id: 'd1', closed: 'false', name: 'YardFlow - Kroger', amount: '250000', closedate: '2026-11-30T00:00:00Z', nextStep: 'Pilot scope review' }] });
+    const t = await resolveOpportunity(kroger, hs);
+    expect(t.status === 'ACTIVE' && t.deals[0]).toMatchObject({ amount: '250000', closeDate: '2026-11-30T00:00:00Z', nextStep: 'Pilot scope review' });
+  });
+
   it('a closed deal (hs_is_closed true) is not active: CLEAR', async () => {
     const hs = fakeHubSpot({ companyDeals: { 'c-kroger': ['d1'] }, deals: [{ id: 'd1', closed: 'true' }] });
     expect(await resolveOpportunity(kroger, hs)).toEqual({ status: 'CLEAR', companyIds: ['c-kroger'] });
