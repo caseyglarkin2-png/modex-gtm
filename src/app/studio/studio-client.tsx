@@ -81,6 +81,8 @@ interface AssetPackResult {
 }
 
 interface StudioClientProps {
+  /** The account Studio was opened for (?account=), if any. */
+  initialAccount?: string | null;
   accounts: StudioAccount[];
   personasByAccount: Record<string, StudioPersona[]>;
   recipientsByAccount: Record<string, AssetSendRecipient[]>;
@@ -94,7 +96,7 @@ function slugifyAccountName(value: string): string {
     .replace(/^-+|-+$/g, '');
 }
 
-export function StudioClient({ accounts, personasByAccount, recipientsByAccount }: StudioClientProps) {
+export function StudioClient({ accounts, personasByAccount, recipientsByAccount, initialAccount }: StudioClientProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -103,7 +105,8 @@ export function StudioClient({ accounts, personasByAccount, recipientsByAccount 
   const [tab, setTabState] = useState<Tab>(
     STUDIO_SUB_TABS.includes(subParam as Tab) ? (subParam as Tab) : 'assets',
   );
-  const [selectedAccount, setSelectedAccount] = useState(accounts[0]?.name ?? '');
+  // Opened from an account (?account=): that account, when it is in the list (click test: PepsiCo opened on Dannon).
+  const [selectedAccount, setSelectedAccount] = useState((initialAccount && accounts.some((a) => a.name === initialAccount) ? initialAccount : null) ?? accounts[0]?.name ?? '');
   const [selectedPersona, setSelectedPersona] = useState('');
   const [latestPack, setLatestPack] = useState<AssetPackResult | null>(null);
 

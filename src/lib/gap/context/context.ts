@@ -83,6 +83,9 @@ const monthDay = (s: string) => new Date(s).toLocaleDateString('en-US', { month:
 const monthOf = (s: string) => new Date(s).toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' });
 const DAY = 86_400_000;
 
+/** Our own mailboxes (a send to ourselves is a test or a copy, never a touch with the account). */
+export const isInternalRecipient = (email: string) => /@(freightroll\.com|yardflow\.ai)$/i.test(email.trim()) || /^casey[a-z0-9.]*@gmail\.com$/i.test(email.trim());
+
 /** A route names a person or an introduction ("Mark Shaughnessy -> Danone CSCO intro"), not a channel or a topic. */
 export function isRoute(text: string | null | undefined): boolean {
   const t = String(text ?? '').trim();
@@ -109,7 +112,7 @@ export function projectRelationship(x: {
   const dated = x.meetings.map((m) => ({ at: iso(m.meeting_date) ?? iso(m.created_at), status: m.meeting_status, what: m.objective ?? m.meeting_status })).filter((m): m is { at: string; status: string; what: string } => !!m.at);
   const upcoming = dated.filter((m) => new Date(m.at).getTime() >= x.now.getTime() && !/cancel/i.test(m.status)).sort((a, b) => a.at.localeCompare(b.at))[0] ?? null;
   const last = dated.filter((m) => new Date(m.at).getTime() < x.now.getTime()).sort((a, b) => b.at.localeCompare(a.at))[0] ?? null;
-  const mail = [...x.emails].sort((a, b) => String(iso(b.sent_at)).localeCompare(String(iso(a.sent_at))))[0];
+  const mail = [...x.emails].filter((e) => !isInternalRecipient(e.to_email)).sort((a, b) => String(iso(b.sent_at)).localeCompare(String(iso(a.sent_at))))[0];
   const lastThread = mail && iso(mail.sent_at) ? { at: iso(mail.sent_at)!, to: mail.to_email, subject: mail.subject, replied: x.emails.some((e) => e.reply_count > 0) } : null;
   const owner = x.account?.owner?.trim() || null;
 
@@ -221,8 +224,8 @@ export function projectHistory(x: {
   for (const e of x.emails) {
     const at = iso(e.sent_at);
     if (!at) continue;
-    // A smoke test or a send proof is not a touch.
-    if (/\b(smoke|send proof|test send|production final)\b/i.test(e.subject)) continue;
+    // A smoke test, a send proof or a send to ourselves is not a touch.
+    if (/\b(smoke|send proof|test send|production final)\b/i.test(e.subject) || isInternalRecipient(e.to_email)) continue;
     // Opens and clicks are tracking, not history: never shown as something the buyer did.
     items.push({ at, kind: 'email_sent', visibility: 'seller', text: `Email to ${e.to_email}: "${e.subject}"` });
     if (e.reply_count > 0) items.push({ at, kind: 'reply', visibility: 'seller', text: `Reply on "${e.subject}" (${e.to_email})` });

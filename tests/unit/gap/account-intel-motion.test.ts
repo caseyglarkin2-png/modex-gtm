@@ -91,7 +91,7 @@ describe('account motion', () => {
     expect(planResearch(owner, [], NOW).tasks.find((t) => t.section === 'org')?.focus).not.toContain('Find the transportation operating owner');
   });
   it('the glance names the motion', () => {
-    expect(buildAccountBrief(inputs(), NOW).glance.motion).toBe('Fact-led: Dana Ops, on the verified fact.');
+    expect(buildAccountBrief(inputs(), NOW).glance.motion).toBe('Fact-led, on the verified fact.'); // the card shows its person; NOW shows WHO (click test: four names for one account)
   });
 });
 

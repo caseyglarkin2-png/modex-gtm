@@ -46,6 +46,7 @@ import { prisma } from '@/lib/prisma';
 import { isGapOsEnabled } from '@/lib/gap/flags';
 import { loadAccountBrief } from '@/lib/gap/account-intel/load';
 import { accountHref } from '@/lib/gap/account-intel/href';
+import { restrictionForName } from '@/lib/gap/policy/restriction';
 import { buildAccountTags } from '@/lib/research/account-tags';
 import { evaluateContentQuality } from '@/lib/content-quality';
 import { resolveContentQaChecklist } from '@/lib/revops/content-qa-checklist';
@@ -355,9 +356,24 @@ export default async function AccountDetailPage({
     })
     .filter((persona) => persona.blockerBadges.length > 0);
 
+  // Warm-intro-only (gap/policy/restriction.ts): this page's send and generate controls would burn the intro
+  // (click test P0); the sends are refused at the wire anyway, and the page says so first.
+  const restricted = restrictionForName(account.name);
   return (
     <div className="space-y-6">
       <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Accounts', href: '/accounts' }, { label: account.name }]} />
+      {restricted ? (
+        <div role="alert" className="rounded-md border border-amber-600 bg-amber-50 px-4 py-3 text-sm text-amber-900 dark:bg-amber-950 dark:text-amber-100" data-testid="legacy-restriction-banner">
+          <p className="font-semibold">{restricted.reason}</p>
+          <p className="mt-1">
+            Ignore this page&apos;s send, generate and outreach suggestions for {account.name}: any cold send is refused. The next step is in GAP:{' '}
+            <Link href={accountHref(account.name)} className="underline">
+              ask {restricted.introducer} for the introduction
+            </Link>
+            .
+          </p>
+        </div>
+      ) : null}
 
       {/* Hero Card */}
       <Card>

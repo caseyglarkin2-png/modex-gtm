@@ -86,7 +86,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
   // The draft and send paths are for an email card opened from its routing card.
   const isEmailCard = decision != null && EMAIL_ACTIONS.has(decision.action) && decision.lane !== 'blocked' && pack.personaSource === 'decision';
   const draftIneligible = !decision || pack.personaSource !== 'decision'
-    ? 'Open this from a card on /gap to email that person.'
+    ? 'Email goes out from the person\'s card in the cockpit (Ready lane), where every gate runs.'
     : !isEmailCard
       ? 'This card does not recommend email.'
       : !persona?.email
@@ -328,7 +328,17 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
               Sending is blocked: the copy check rejected this exact email. The reasons are in System details on the full action pack. Nothing can be sent until the copy is rewritten.
             </p>
           ) : !sendable && blockedReason ? (
-            <p data-testid="send-unavailable" className="text-xs text-[var(--muted-foreground)]">{blockedReason}</p>
+            <p data-testid="send-unavailable" className="text-xs text-[var(--muted-foreground)]">
+              {blockedReason}
+              {blockedReason === draftIneligible && (!decision || pack.personaSource !== 'decision') ? (
+                <>
+                  {' '}
+                  <a href="/gap?lane=ready" className="underline" data-testid="open-ready-lane">
+                    Open the Ready lane
+                  </a>
+                </>
+              ) : null}
+            </p>
           ) : null}
           {copyable && decision ? <GovernedCopyButton decisionId={decision.id} stepIndex={touchStep} /> : null}
         </section>
