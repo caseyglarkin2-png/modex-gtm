@@ -76,3 +76,12 @@ describe('market pieces are never WHY NOW', () => {
     expect(v.whyNow.map((l) => l.text).join(' ')).not.toMatch(/GF Value|Quote & History/);
   });
 });
+
+describe('labels are not part of the idea', () => {
+  it('the live PepsiCo Gatik pair (labelled ONGOING CONDITION / RECENT EVENT) is one idea', async () => {
+    const { sameIdea } = await import('@/lib/gap/context/same-idea');
+    const a = 'ONGOING CONDITION: June 8, 2026 PepsiCo and Gatik announced a multi-year strategic partnership to bring autonomous freight into PepsiCo’s North America food and beverage supply chain, marking the largest commercial autonomous freight deployment to date. (current as of 2026-08-25)';
+    const b = 'RECENT EVENT: This agreement builds on PepsiCo’s experience running one of North America’s largest private fleets and brings Gatik’s autonomous freight capabilities into real, day-to-day supply chain operations.';
+    expect(sameIdea(a, b, 'PepsiCo')).toBe(true);
+  });
+});
