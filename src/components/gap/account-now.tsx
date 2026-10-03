@@ -10,6 +10,7 @@ import { VoicePreviewButton } from '@/components/voice-preview-button';
 const TAG_TONE: Record<NowLine['tag'], string> = {
   'Buyer said': 'border-emerald-600 text-emerald-700 dark:text-emerald-400',
   Checked: 'border-sky-600 text-sky-700 dark:text-sky-400',
+  Unverified: 'border-dashed border-[var(--border)] text-[var(--muted-foreground)]',
   'Our read': 'border-[var(--border)] text-[var(--muted-foreground)]',
   Unknown: 'border-[var(--border)] text-[var(--muted-foreground)]',
   Contradicted: 'border-red-600 text-red-700 dark:text-red-400',

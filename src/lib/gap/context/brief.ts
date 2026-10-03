@@ -4,7 +4,7 @@
  */
 import type { AccountInputs, AccountIntelligenceBrief, SectionKey } from '../account-intel/build';
 import { sensitivityOf } from '../research/sensitivity';
-import { sellerLine, type NowLine } from './now';
+import { displayName, sellerLine, type NowLine } from './now';
 import type { AccountContext } from './context';
 
 export interface BriefSection {
@@ -39,7 +39,7 @@ export function projectBrief(brief: AccountIntelligenceBrief, ctx: AccountContex
 
   const p = brief.people;
   const people = p?.lanes.length
-    ? p.lanes.map((l) => `${l.label}: ${l.people.slice(0, 3).map((x) => `${x.name}${x.title ? ` (${x.title})` : ''}${x.doNotContact ? ' [do not contact]' : ''}${x.region === 'US_NA' ? ' [US / NA]' : ''}`).join('; ')}${l.people.length > 3 ? ` and ${l.people.length - 3} more` : ''}`)
+    ? p.lanes.map((l) => `${l.label}: ${l.people.slice(0, 3).map((x) => `${displayName(x.name)}${x.title ? ` (${x.title})` : ''}${x.doNotContact ? ' [do not contact]' : ''}${x.region === 'US_NA' ? ' [US / NA]' : ''}`).join('; ')}${l.people.length > 3 ? ` and ${l.people.length - 3} more` : ''}`)
     : [];
   const rel = ctx.relationship;
   const relationship = [

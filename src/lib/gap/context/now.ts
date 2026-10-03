@@ -18,7 +18,11 @@ import { sensitivityOf } from '../research/sensitivity';
 import { readPerson } from '../people/person-prior';
 import type { AccountContext } from './context';
 
-export type SellerTag = 'Buyer said' | 'Checked' | 'Our read' | 'Unknown' | 'Contradicted';
+/** "Unverified": a third party's report GAP has not checked (a signal); not our inference, not checked. */
+export type SellerTag = 'Buyer said' | 'Checked' | 'Unverified' | 'Our read' | 'Unknown' | 'Contradicted';
+
+/** Names stored all lower case ("adel ghanem") read as names. Anything with a capital is left as written. */
+export const displayName = (n: string) => (n && n === n.toLowerCase() ? n.replace(/(^|[\s'-])([a-z])/g, (_m, p: string, c: string) => p + c.toUpperCase()) : n);
 
 export interface NowLine {
   /** Identity for deduplication (a fact id, a BID id, else the text). */
@@ -125,12 +129,12 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   if (m.type === 'INTRO_ONLY' && restriction) who = { name: restriction.introducer, title: null, why: `Holds the introduction to ${restriction.route}; this account is reached only through them.`, route: ctx.relationship.routes[0]?.route ?? null };
   else if (m.type === 'FOLLOW_UP' && m.who) who = { name: m.who, title: null, why: 'They are already talking to you: continue that thread.', route: null };
   else if ((m.type === 'REFERRAL_LED' || m.type === 'RELATIONSHIP_LED') && m.who) who = { name: m.who, title: null, why: `You have a way in: ${m.why.split(':')[0]}.`, route: null };
-  else if (p?.primary && !p.primary.doNotContact) who = { name: p.primary.name, title: p.primary.title, why: p.primary.why, route: null };
+  else if (p?.primary && !p.primary.doNotContact) who = { name: displayName(p.primary.name), title: p.primary.title, why: p.primary.why, route: null };
   const whoUnknown = who ? null : brief.glance.likelyOwner.startsWith('Unknown') ? `${brief.glance.likelyOwner} Find the US / North America transportation operations owner (BRIEF: buyer map).` : brief.glance.likelyOwner;
   // When the motion names the person (a relationship, a thread, an introducer), the prior's best operator is the
   // alternate; otherwise the prior's own second choice.
-  const altSrc = who && p?.primary && who.name !== p.primary.name && !p.primary.doNotContact ? p.primary : p?.alternate ?? null;
-  const alt = altSrc && altSrc.name !== who?.name ? { name: altSrc.name, title: altSrc.title, why: altSrc.why } : null;
+  const altSrc = who && p?.primary && who.name !== displayName(p.primary.name) && !p.primary.doNotContact ? p.primary : p?.alternate ?? null;
+  const alt = altSrc && displayName(altSrc.name) !== who?.name ? { name: displayName(altSrc.name), title: altSrc.title, why: altSrc.why } : null;
   const ownerMissing = !!who && p?.primary?.lane !== 'PRIMARY_OPERATOR' && m.type !== 'INTRO_ONLY' && m.type !== 'FOLLOW_UP' && m.type !== 'IN_DEAL';
 
   // WHY NOW: dated catalysts (checked first, then unverified signals); never private engagement.
@@ -144,13 +148,15 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   let checked = 0;
   for (const s of rankedCat) {
     const isSignal = s.sources[0]?.kind === 'signal';
-    if (isSignal && signals >= 1) continue;
+    // An undated signal is not a reason to act now.
+    if (isSignal && (signals >= 1 || !s.sources[0]?.at)) continue;
     if (!isSignal && hasSignal && checked >= 2) continue;
-    if (!isSignal) checked += 1;
     const l = sellerLine(s, 'catalysts', lx);
+    // A slot is spent only by a line that is shown (a duplicate or an unsayable line spends nothing).
     if (l && whyNow.length < 3 && take(l)) {
       if (isSignal) signals += 1;
-      whyNow.push(isSignal ? { ...l, tag: 'Our read', basis: `a signal, not verified, ${day(s.sources[0].at)}` } : l);
+      else checked += 1;
+      whyNow.push(isSignal ? { ...l, text: l.text.replace(/^Signal, not verified:\s*/, '').replace(/\s*\((?:shared )?[0-9a-z ,-]+\)$/i, ''), tag: 'Unverified', basis: `a third party's report, not checked; ${/^\d{4}-/.test(String(s.sources[0].at)) && s.text.includes('(shared ') ? 'shared' : 'published'} ${day(s.sources[0].at)}` } : l);
     }
   }
 

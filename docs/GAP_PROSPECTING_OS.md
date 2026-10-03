@@ -1,7 +1,7 @@
 # YardFlow GAP Prospecting OS: production build specification
 
-STATUS: ACTIVE (GO received 2026-09-23; Sprints 1 to 5 SHIPPED and merged to main via PR #249 2026-09-24; the GAP OS FINISH pass (Opus adversarial review of the merged diff) is in progress on branch feat/gap-os-finish, worktree C:\Users\casey\wt-gap-os-finish; see the Resume point above section 12)
-<!-- verified:2026-09-24 -->
+STATUS: ACTIVE. Current state lives in `docs/gap/STABLE_BASELINE.md` (seller dogfood mode; V2 decision compression + resource convergence SHIPPED 2026-10-02, #357 to #364). This file is the historical build spec and ticket ledger; the FINISH pass it once tracked on feat/gap-os-finish is long merged.
+<!-- verified:2026-10-03 -->
 
 Supersedes the draft `Downloads/YardFlow_GAP_Prospecting_OS_Spec.md` (2026-09-23), which named `caseyglarkin2-png/GTM-YardFlow` as the host. Reconnaissance showed that repo is an abandoned prototype; this document is the single master plan and lives in the repo that hosts the build. There is no second plan. Every accepted implementation or reviewer finding that changes work is folded back into this file in the same commit.
 
