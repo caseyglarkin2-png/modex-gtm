@@ -151,6 +151,7 @@ describe('work queue contract', () => {
       'stuck-job',
       'outcome-audit',
       'learning-review',
+      'gap-next',
     ]);
   });
 

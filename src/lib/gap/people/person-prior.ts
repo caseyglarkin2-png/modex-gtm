@@ -216,7 +216,7 @@ export function whoKey(c: WhoCandidate, read: PersonRead): number[] {
 export function whyThem(c: WhoCandidate, read: PersonRead): string {
   const lead = c.buyerTruth ? `They are already talking to you (${c.buyerTruth})` : c.relationship ? `You have a way in (${c.relationship})` : c.initiative ? `A live signal names them on the initiative (${c.initiative})` : null;
   const role = `${LANE_LABEL[read.lane]}: ${read.laneWhy}`;
-  const where = read.region === 'US_NA' ? 'US / North America remit stated' : read.regionWhy;
+  const where = read.region === 'US_NA' ? 'US / North America remit stated' : read.region === 'UNKNOWN' ? 'US location unknown' : read.regionWhy;
   return `${lead ? `${lead}. ` : ''}${role}; ${where}${read.scope === 'NETWORK' ? '; network scope' : read.scope === 'SITE' ? '; one site' : ''}.`;
 }
 
