@@ -92,6 +92,15 @@ describe('NOW: the decision, once', () => {
     expect(v.whyNow[0].basis).toMatch(/^a signal, not verified/);
     expect(v.stateLine).not.toMatch(/Owner/);
   });
+  it('a slot is kept for the newest signal when checked facts would fill WHY NOW; a titleless signal shows Casey\'s note, never a bare URL', () => {
+    const f = (n: number) => ({ ...fact, id: `f${n}`, quote: `Acme Foods opens site number ${n} in 2027.`, url: `https://news.example/${n}`, publishedAt: `2026-09-1${n}T00:00:00Z` });
+    const hire = { id: 'sh', title: null, url: 'https://careers.walmart.com/us/en/jobs/R-2545651', publishedAt: null, researchStatus: 'queued', note: 'Hiring signal: Transportation Engineering, yard modernization initiatives. Posting may be closed.', capturedAt: '2026-10-02T20:00:00Z' };
+    const v = now({ facts: [f(1), f(2), f(3)], hypotheses: [], signals: [hire] });
+    expect(v.whyNow).toHaveLength(3);
+    expect(v.whyNow.filter((l) => l.tag === 'Checked')).toHaveLength(2);
+    expect(v.whyNow[2].text).toBe('Signal, not verified: Hiring signal: Transportation Engineering, yard modernization initiatives. (careers.walmart.com) (shared 2026-10-02)');
+    expect(v.whyNow[2].text).not.toMatch(/https?:/);
+  });
   it('NEXT is an upcoming meeting within 14 days', () => {
     const ctx = emptyCtx({ relationship: projectRelationship({ restriction: null, account: null, personas: [], memberships: [], meetings: [{ meeting_status: 'Booked', meeting_date: '2026-10-06T15:00:00Z', objective: 'Yard walk-through', created_at: '2026-09-30' }], emails: [], now: NOW }) });
     expect(now({}, ctx).next).toEqual({ text: 'Prepare for the meeting on Oct 6, 2026: Yard walk-through. Read BRIEF before you go.', source: 'meeting' });
