@@ -120,7 +120,10 @@ describe('NOW: the decision, once', () => {
     expect(displayName('adel ghanem')).toBe('Adel Ghanem');
     expect(displayName("mary o'neil-smith")).toBe("Mary O'Neil-Smith");
     expect(displayName('Chris McAndrew')).toBe('Chris McAndrew');
-    expect(now({ personas: [{ ...person, name: 'dana trans' }] }).who?.name).toBe('Dana Trans');
+    const lower = now({ personas: [{ ...person, name: 'dana trans' }] });
+    expect(lower.who?.name).toBe('Dana Trans');
+    expect(lower.next.text).toMatch(/to Dana Trans \(every gate runs at the click\)/);
+    expect(lower.next.text).not.toMatch(/dana trans/);
   });
   it('NEXT is an upcoming meeting within 14 days', () => {
     const ctx = emptyCtx({ relationship: projectRelationship({ restriction: null, account: null, personas: [], memberships: [], meetings: [{ meeting_status: 'Booked', meeting_date: '2026-10-06T15:00:00Z', objective: 'Yard walk-through', created_at: '2026-09-30' }], emails: [], now: NOW }) });

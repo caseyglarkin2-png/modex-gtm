@@ -120,7 +120,7 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   const soon = meeting && new Date(meeting.at).getTime() - now.getTime() <= 14 * 86_400_000;
   const next: NowView['next'] = soon
     ? { text: `Prepare for the meeting on ${day(meeting!.at)}: ${meeting!.what}. Read BRIEF before you go.`, source: 'meeting' }
-    : { text: brief.glance.nextAction, source: m.type === 'IN_DEAL' ? 'deal' : m.type === 'FOLLOW_UP' ? 'conversation' : m.type === 'INTRO_ONLY' ? 'restriction' : 'motion' };
+    : { text: m.who ? brief.glance.nextAction.split(m.who).join(displayName(m.who)) : brief.glance.nextAction, source: m.type === 'IN_DEAL' ? 'deal' : m.type === 'FOLLOW_UP' ? 'conversation' : m.type === 'INTRO_ONLY' ? 'restriction' : 'motion' };
 
   // WHO: the motion's person when it has one (buyer truth, a relationship, the introducer), else the person prior.
   const p = brief.people;
