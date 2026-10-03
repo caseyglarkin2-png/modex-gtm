@@ -280,7 +280,7 @@ export function ContactsTable({ contacts, savedViews }: { contacts: ContactRow[]
           return <span className="flex items-center gap-1 text-xs text-red-700 dark:text-red-400"><XCircle className="h-3 w-3" /> DNC</span>;
         }
         if (!c.emailValid) {
-          return <span className="flex items-center gap-1 text-xs text-amber-500"><AlertTriangle className="h-3 w-3" /> Invalid</span>;
+          return <span className="flex items-center gap-1 text-xs text-amber-800 dark:text-amber-400"><AlertTriangle className="h-3 w-3" /> Invalid</span>;
         }
         if (c.hubspotContactId) {
           return (
@@ -428,10 +428,10 @@ function ContactDetailPanel({ contact }: { contact: ContactRow | null }) {
           <p className="mt-1 text-xs text-[var(--muted-foreground)]">Contact id: {contact.canonicalContactId ?? 'not resolved'}</p>
           <p className="mt-1 text-xs text-[var(--muted-foreground)]">Company id: {contact.canonicalCompanyId ?? 'not resolved'}</p>
           {contact.canonicalConflicts.length > 0 ? (
-            <p className="mt-1 text-xs text-amber-700">Issues: {contact.canonicalConflicts.join(', ')}</p>
+            <p className="mt-1 text-xs text-amber-700 dark:text-amber-400">Issues: {contact.canonicalConflicts.join(', ')}</p>
           ) : null}
           {contact.canonicalBlockedReason ? (
-            <p className="mt-1 text-xs text-red-700">{contact.canonicalBlockedReason}</p>
+            <p className="mt-1 text-xs text-red-700 dark:text-red-400">{contact.canonicalBlockedReason}</p>
           ) : null}
         </div>
 

@@ -52,8 +52,8 @@ no contact is created automatically.
 
 ## Geography (amendment 2026-10-03)
 
-Canada is North America. A person's LOCATION (their own record) and OPERATING REMIT (the region their title says they
-run) are separate facts; the geography state is NA_REMIT / US_CONFIRMED / CANADA_CONFIRMED / OTHER_REGION / UNKNOWN.
+North America is the United States, Canada and Mexico (generic Latin America is not). A person's LOCATION (their own record) and OPERATING REMIT (the region their title says they
+run) are separate facts; the geography state is NA_REMIT / US_CONFIRMED / CANADA_CONFIRMED / MEXICO_CONFIRMED / OTHER_REGION / UNKNOWN.
 The remit decides when stated, else the location, else unknown (never a company HQ). The three North America states
 are one ranking tier after the lane, so a located-in-North-America adjacent operator never beats a transportation
 owner whose location is unknown. Golden WHO re-run on the new comparator (production read-only, 2026-10-03): the same
