@@ -105,8 +105,9 @@ describe('one line per person on NOW', () => {
     const hubspotPeople = { truncated: false, people: [{ id: '9', name: 'Isaac Scott', title: 'Sr Director of Transportation', location: 'Plano, Texas, United States', hasEmail: true, optedOut: false }] };
     const i = inputs({ opportunity: { status: 'CLEAR', detail: '', deals: [] }, personas: [michelle], hubspotPeople, hypotheses: [{ id: 'h1', status: 'approved', observation: fact.quote, problem: 'My guess is arrivals pile up at the gate.', rootCauses: [], impacts: [], falsification: [], whatANoMeans: 'No queue.', primarySignalId: 'f1' }] as never });
     const v = projectNow(buildAccountBrief(i, NOW), ctxWith(), i, NOW, { ready: { name: 'Michelle Schlie', title: 'Vice President Supply Chain', href: '/gap?lane=ready&open=c1', headline: 'x' } });
-    expect(v.who?.name).toBe('Michelle Schlie');
-    expect(v.betterFit).toMatch(/Isaac Scott/);
-    expect(v.alternate?.name ?? '').not.toBe('Isaac Scott');
+    // Round 6: the owner leads and the ready person is the alternate; each named once.
+    const named = [v.who?.name, v.alternate?.name, v.betterFit].filter(Boolean).join(' | ');
+    expect(named.match(/Isaac Scott/g)).toHaveLength(1);
+    expect(named.match(/Michelle Schlie/g)).toHaveLength(1);
   });
 });

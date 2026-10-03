@@ -130,8 +130,11 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
     const control: { href: string; label: string } | null =
       v.next.source === 'meeting' ? { href: hrefFor('brief'), label: 'Open the meeting brief' }
       : v.next.source === 'deal' ? { href: hrefFor('brief'), label: 'Open the deal brief' }
+      // An unanswered reply opens its thread in Gmail (round 6: "Open replies" was an empty lane for GXO).
+      : v.replyThread ? { href: `https://mail.google.com/mail/u/0/#search/${encodeURIComponent(`from:"${v.replyThread}"`)}`, label: `Open ${v.replyThread}'s thread in Gmail` }
       : v.next.source === 'conversation' ? { href: '/gap/replies', label: 'Open replies' }
       : v.next.source === 'restriction' ? { href: `/gap/capture?account=${encodeURIComponent(brief.accountName)}`, label: 'Log the intro ask' }
+      : brief.motion.type === 'FACT_LED' && ready && v.ownerFirst ? { href: ready.href, label: `Or open the ready card for ${v.ownerFirst.ready} now` }
       : brief.motion.type === 'FACT_LED' && ready ? { href: ready.href, label: `Open the first-touch card for ${v.who?.name ?? ready.name}` }
       : brief.motion.type === 'FACT_LED' && top ? { href: `/gap/preview/${top.id}`, label: 'Review the thesis' }
       : brief.motion.type === 'RELATIONSHIP_LED' || brief.motion.type === 'REFERRAL_LED' ? { href: `/gap/capture?account=${encodeURIComponent(brief.accountName)}`, label: 'Log the touch' }

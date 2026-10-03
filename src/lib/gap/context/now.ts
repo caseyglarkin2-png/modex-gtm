@@ -62,6 +62,10 @@ export interface NowView {
   think: { text: string; wrongIf: string | null; testedBy: string | null } | null;
   impact: string;
   ask: string | null;
+  /** The transportation owner leads and the ready card is the alternative (round 6, PepsiCo). */
+  ownerFirst?: { owner: string; ready: string } | null;
+  /** Whose unanswered reply NEXT answers (the control opens that thread in Gmail). */
+  replyThread?: string | null;
   relationship: string | null;
   /** "Private: interest signal, never mention to the buyer. ..." (only when material). */
   private: string | null;
@@ -95,7 +99,7 @@ const host = (u: string | null) => {
 const CATALYST_WINDOW_MS = 45 * 86_400_000;
 const PROGRAM_WINDOW_MS = 180 * 86_400_000;
 /** A market piece (a stock forecast, a fair-value take) is not a trigger (click test round 4: PFG, GXO). */
-const MARKET_PIECE = /\b(stock forecasts?|price target|fair value|shares (?:rose|fell|jump|drop)|stock (?:price|rating)|dividend|buy rating|sell rating|analyst(?:s)? (?:say|rating))\b/i;
+const MARKET_PIECE = /\b(stock forecasts?|price target|fair value|gf value|\d+(?:\.\d+)?% (?:gain|drop|rise|fall|decline|jump)|stock price|quote & history|stock quote|shares (?:rose|fell|jump|drop)|stock (?:price|rating)|dividend|buy rating|sell rating|analyst(?:s)? (?:say|rating))\b/i;
 const SOURCE_KIND: Record<string, string> = { conference: 'a conference', event: 'an event', meeting: 'a meeting', referral: 'a referral' };
 
 const norm = (s: string) => s.replace(/^[A-Z][A-Z /]+:\s*/, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
@@ -176,11 +180,24 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   // yet a GAP contact; NEXT opens that card.
   const ready = m.type === 'FACT_LED' ? opts.ready ?? null : null;
   let betterFit: string | null = null;
+  let ownerFirst: NowView['ownerFirst'] = null;
+  let readyAlt: NowView['alternate'] = null;
   if (ready) {
     const all = p?.lanes.flatMap((l) => l.people) ?? [];
     const rp = all.find((x) => displayName(x.name) === displayName(ready.name));
-    if (p?.primary && displayName(p.primary.name) !== displayName(ready.name)) betterFit = `Better fit on record: ${displayName(p.primary.name)}${p.primary.title ? `, ${p.primary.title}` : ''}${p.primary.source === 'hubspot' ? ' (in HubSpot, not yet a GAP contact: add them)' : ''}.`;
-    who = { name: displayName(ready.name), title: ready.title, why: rp?.why ?? 'The person the cockpit has a ready first touch for.', route: null, location: rp?.location ?? null, inHubSpotOnly: false };
+    const owner = p?.primary && !p.primary.doNotContact && displayName(p.primary.name) !== displayName(ready.name) ? p.primary : null;
+    if (owner && owner.lane === 'PRIMARY_OPERATOR' && rp?.lane !== 'PRIMARY_OPERATOR') {
+      // The lane outranks readiness (Casey's order; round 6, PepsiCo: the card went to a VP Supply Chain whose
+      // ownership is not stated while a transportation owner was on record). The ready card stays one tap away.
+      const n = displayName(owner.name);
+      ownerFirst = { owner: n, ready: displayName(ready.name) };
+      next = { text: `${owner.source === 'hubspot' ? `Add ${n}${owner.title ? ` (${owner.title})` : ''} from HubSpot as a GAP contact, then first-touch them` : `First-touch ${n}${owner.title ? ` (${owner.title})` : ''}`}: the transportation owner on record. Ready now instead: the first-touch card for ${displayName(ready.name)} (ask who owns the yards).`, source: 'motion' };
+      who = { name: n, title: owner.title, why: owner.why, route: null, location: owner.location ?? null, inHubSpotOnly: owner.source === 'hubspot' };
+      readyAlt = { name: displayName(ready.name), title: ready.title, why: 'Ready now: a first-touch card exists. Ask who owns the yards.' };
+    } else {
+      if (owner) betterFit = `Better fit on record: ${displayName(owner.name)}${owner.title ? `, ${owner.title}` : ''}${owner.source === 'hubspot' ? ' (in HubSpot, not yet a GAP contact: add them)' : ''}.`;
+      who = { name: displayName(ready.name), title: ready.title, why: rp?.why ?? 'The person the cockpit has a ready first touch for.', route: null, location: rp?.location ?? null, inHubSpotOnly: false };
+    }
   }
   // AN UNANSWERED REPLY is the next thing (click test round 4, GXO: the only live buyer thread sat under "work the
   // deal"). The buyer wrote last and nothing was sent after: answer it, to its writer. A meeting soon still leads.
@@ -194,13 +211,15 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
     const known = p?.lanes.flatMap((l) => l.people).find((x) => displayName(x.name) === unanswered.who);
     who = { name: unanswered.who, title: known?.title ?? null, why: `They wrote last (${day(unanswered.at)}); the thread is waiting on you.`, route: null, location: known?.location ?? null, inHubSpotOnly: false };
     betterFit = null;
+    ownerFirst = null;
+    readyAlt = null;
   }
   const whoUnknown = who ? null : brief.glance.likelyOwner.startsWith('Unknown') ? `${brief.glance.likelyOwner} Find the US / North America transportation operations owner (BRIEF: buyer map).` : brief.glance.likelyOwner;
   // When the motion names the person (a relationship, a thread, an introducer), the prior's best operator is the
   // alternate; otherwise the prior's own second choice.
   const altSrc = who && p?.primary && who.name !== displayName(p.primary.name) && !p.primary.doNotContact ? p.primary : p?.alternate ?? null;
   // Never the same person as both "add next" and "alternate" (round 4: Isaac Scott twice on PepsiCo).
-  const alt = altSrc && displayName(altSrc.name) !== who?.name && !betterFit?.includes(displayName(altSrc.name)) ? { name: displayName(altSrc.name), title: altSrc.title, why: altSrc.why } : null;
+  const alt = readyAlt ?? (altSrc && displayName(altSrc.name) !== who?.name && !betterFit?.includes(displayName(altSrc.name)) ? { name: displayName(altSrc.name), title: altSrc.title, why: altSrc.why } : null);
   const ownerMissing = !!who && p?.primary?.lane !== 'PRIMARY_OPERATOR' && m.type !== 'INTRO_ONLY' && m.type !== 'FOLLOW_UP' && m.type !== 'IN_DEAL';
 
   // WHY NOW: dated catalysts (checked first, then unverified signals); never private engagement.
@@ -277,6 +296,8 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   let ask: string | null = qs[0]?.question ?? null;
   if (ask && qs[0].type === 'CURRENT_PROCESS' && vp) ask = 'Does every site check trailers in and find them the same way, or does each site run its own process?';
   if (m.type === 'INTRO_ONLY') ask = null;
+  // While a buyer's reply waits, the reply is the conversation: no discovery question beside it (round 6, GXO).
+  if (unanswered && !soon) ask = null;
 
   // WEDGE: the pitch conclusion, only after the buyer confirmed a problem or impact.
   const wedge = bidOf('business_problem') || imp ? brief.thesis.whereYardFlowMayFit : null;
@@ -323,6 +344,8 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
     think,
     impact,
     ask,
+    ownerFirst,
+    replyThread: unanswered && !soon ? unanswered.who : null,
     // "Last email" is the Last touch line's job; a second, older answer beside it contradicted it (round 4, Kroger).
     relationship: m.type === 'INTRO_ONLY' || /^Last email /.test(ctx.relationship.line ?? '') ? null : ctx.relationship.line,
     private: ctx.engagement.material ? ctx.engagement.line : null,

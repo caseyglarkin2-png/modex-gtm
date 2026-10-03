@@ -28,13 +28,16 @@ const inputs = (over: Partial<AccountInputs> = {}): AccountInputs => ({
 const ctx = (over: Partial<AccountContext> = {}): AccountContext => ({ relationship: projectRelationship({ restriction: null, account: null, personas: [], memberships: [], meetings: [], emails: [], now: NOW }), engagement: projectEngagement([], NOW), history: [], assets: [], legacyNote: null, ...over });
 
 describe('one first-touch answer', () => {
-  it('with a ready card, NOW names the card\'s person, NEXT opens that card, and the better fit is said beside it', () => {
+  // Round 6 (Casey's order: the lane before readiness): a ready card for an adjacent operator no longer outranks a
+  // transportation owner on record. The owner leads; the ready card is named as the alternative, one tap away.
+  it('with a ready card for an adjacent operator, the transportation owner leads and the card is the stated alternative', () => {
     const i = inputs();
     const ready = { name: 'michelle schlie', title: 'Director, Supply Chain Operations', href: '/gap?lane=ready&open=d9#card-d9', headline: 'Suggested primary: michelle schlie.' };
     const v = projectNow(buildAccountBrief(i, NOW), ctx(), i, NOW, { ready });
-    expect(v.who).toMatchObject({ name: 'Michelle Schlie', inHubSpotOnly: false });
-    expect(v.next.text).toBe('Review the thesis, then open the first-touch card for Michelle Schlie (every gate runs at the click).');
-    expect(v.betterFit).toBe('Better fit on record: Isaac Scott, Sr Director of Transportation - Frito-Lay (in HubSpot, not yet a GAP contact: add them).');
+    expect(v.who).toMatchObject({ name: 'Isaac Scott', inHubSpotOnly: true });
+    expect(v.next.text).toBe('Add Isaac Scott (Sr Director of Transportation - Frito-Lay) from HubSpot as a GAP contact, then first-touch them: the transportation owner on record. Ready now instead: the first-touch card for Michelle Schlie (ask who owns the yards).');
+    expect(v.alternate).toMatchObject({ name: 'Michelle Schlie' });
+    expect(v.betterFit).toBeNull();
   });
   it('without a ready card, NOW keeps its own WHO and says nothing about a card', () => {
     const i = inputs();
