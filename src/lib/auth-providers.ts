@@ -4,6 +4,7 @@ import type { Provider } from 'next-auth/providers';
 
 export const ALLOWED_EMAILS = [
   'casey@freightroll.com',
+  'casey@yardflow.ai',
   'caseyglarkin2@gmail.com',
   'jake@freightroll.com',
 ];
@@ -49,6 +50,8 @@ export function authProviders(nodeEnv: string | undefined): Provider[] {
 /** Owners: the only people who may approve a send or press CONFIRM + SEND (HUMAN_APPROVED_1TO1 means Casey). */
 export const ADMINS = [
   'casey@freightroll.com',
+  // Casey's YardFlow address (the GAP sending mailbox): the same owner, not a second person.
+  'casey@yardflow.ai',
   'caseyglarkin2@gmail.com',
 ];
 
