@@ -1,7 +1,7 @@
 # GAP V2 person prior: who Casey sells to best
 
 STATUS: ACTIVE (V2, 2026-10-02; OPERATOR-FIRST COLD WHO correction 2026-10-04, below)
-<!-- verified:2026-10-04 -->
+<!-- verified:2026-10-05 -->
 
 Casey's seller learning from live selling (JOC: Sub-Zero, World Market): the strongest person is the **US / North
 America leader who operates transportation and the physical freight network** at an enterprise shipper. That leader
@@ -128,7 +128,7 @@ seniority helper); a transportation safety manager read as the freight owner; st
 
 ## Operator-first cold WHO (seller dogfood correction, 2026-10-04)
 
-STATUS: SHIPPED in this branch (PR pending merge). Driver: Casey using GAP on PepsiCo, which recommended Michelle
+STATUS: SHIPPED 2026-10-05 (#394, merge 87128cc2; production deployment READY and verified live: the NOW sponsor / alternate line renders on /gap/accounts/john-deere/). Driver: Casey using GAP on PepsiCo, which recommended Michelle
 Schlie (Vice President Supply Chain). Correction: **functional ownership beats generic supply-chain seniority.** The
 cold first touch goes to whoever runs physical freight execution across facilities. Persona seeds (never hard-coded):
 Mark Marshall, Transportation Operations Manager, Sub-Zero Group (Madison, WI); Jarrod Black, Director, Logistics,

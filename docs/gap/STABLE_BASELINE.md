@@ -3,7 +3,7 @@
 STATUS: ACTIVE. GAP V2 is STRUCTURALLY COMPLETE (2026-10-03) and back in SELLER DOGFOOD / FREEZE MODE: the rule below
 applies. No V2.1: future changes come from real selling evidence, repeated Casey feedback, production defects, or an
 explicit new-version decision. The 2026-10-04 operator-first WHO correction (below) is seller evidence (rule 3), not V3.
-<!-- verified:2026-10-04 -->
+<!-- verified:2026-10-05 -->
 <!-- verified:2026-10-02 (V2) -->
 
 Production SHA: see "V2 finish" below (the code release is the #392 merge; this doc lands after it). Update this line when a change ships. Update this line when a change ships.
@@ -307,7 +307,7 @@ rule); mixed compliance / safety titles only when joined by a conjunction; freig
 re-finds an email HubSpot holds; the read-only `scripts/gap/operator-contact-audit.ts`. A fresh adversarial review's
 blocker and every SHOULD FIX are fixed (one documented: the initiative / site-scoped cold-WHO branches are not yet
 wired). Doctrine, root cause, PepsiCo result and the 18-account dogfood:
-`docs/gap/V2_PERSON_PRIOR.md`. Production SHA: pending merge (update when shipped). The outstanding first-touch draft to
+`docs/gap/V2_PERSON_PRIOR.md`. Production SHA: 87128cc2 (#394, shipped and verified live 2026-10-05). The outstanding first-touch draft to
 Michelle Schlie (created 2026-10-05 00:26 UTC) still holds PepsiCo: sending or deleting it is Casey's decision.
 
 ## Soak (2026-10-02)
