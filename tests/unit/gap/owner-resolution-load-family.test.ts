@@ -99,7 +99,7 @@ describe('the loader reads the verified family', () => {
     expect(r.family.excluded.some((e) => /FedEx Supply Chain: divested/.test(e))).toBe(true);
     expect(r.resolution.eligible.map((c) => c.name)).not.toContain('Scott Temple');
     // The total cap (2) is hit by the primary company; the family read is cut and the resolution says so.
-    expect(r.family.capHit || r.resolution.hubspot === undefined || r.hubspot.detail.includes('cap hit')).toBe(true);
+    expect(r.family.capHit).toBe(true);
     expect(r.resolution.headline).toMatch(/HubSpot returned only the first 2 associated contacts/);
   });
   it('a separate operating company member (FedEx Freight) is read, and its people are a caution, never preselected', async () => {

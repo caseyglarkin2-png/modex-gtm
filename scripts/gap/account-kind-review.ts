@@ -39,18 +39,29 @@ function parseArgs(argv: string[]) {
   const flags = new Set<string>();
   const accounts: string[] = [];
   const apply: string[] = [];
-  let bucket: 'accounts' | 'apply' | null = null;
+  // --evidence "Name=what the lead verified (URL)": external evidence Casey or the lead verified for an --apply row,
+  // recorded in the audit beside what GAP itself holds (the classifier's own evidence may be thin for a carrier
+  // whose GAP contacts are few).
+  const evidence: string[] = [];
+  let bucket: 'accounts' | 'apply' | 'evidence' | null = null;
   for (const a of argv) {
     if (a === '--accounts') bucket = 'accounts';
     else if (a === '--apply') bucket = 'apply';
+    else if (a === '--evidence') bucket = 'evidence';
     else if (a.startsWith('--')) {
       flags.add(a);
       bucket = null;
     } else if (bucket === 'accounts') accounts.push(a);
     else if (bucket === 'apply') apply.push(a);
+    else if (bucket === 'evidence') evidence.push(a);
     else accounts.push(a);
   }
-  return { flags, accounts, apply };
+  return { flags, accounts, apply, evidence };
+}
+
+/** The external evidence lines for one account from --evidence "Name=line" arguments. */
+function externalEvidence(evidence: readonly string[], name: string): string[] {
+  return evidence.filter((e) => e.startsWith(`${name}=`)).map((e) => e.slice(name.length + 1).trim()).filter(Boolean);
 }
 
 async function gather(names: string[] | null): Promise<AccountKindEvidence[]> {
@@ -85,7 +96,7 @@ async function gather(names: string[] | null): Promise<AccountKindEvidence[]> {
 
 const hasEvidence = (e: AccountKindEvidence) => !!e.scout || !!e.sites || e.titles.some((t) => t.trim());
 
-async function applyRows(pairs: string[], proposals: Map<string, AccountKindProposal>) {
+async function applyRows(pairs: string[], proposals: Map<string, AccountKindProposal>, external: readonly string[]) {
   const now = new Date();
   let failed = 0;
   for (const pair of pairs) {
@@ -119,7 +130,7 @@ async function applyRows(pairs: string[], proposals: Map<string, AccountKindProp
       continue;
     }
     const audit = (await prisma.gapAuditEvent.create({
-      data: { kind: 'account.vertical_corrected', actor: ACTOR, subject_type: 'account', subject_id: name, payload: { before: 'Unknown', after: vertical as Vertical, proposed: proposal.proposed, strength: proposal.strength, evidence: proposal.evidence, doctrine: proposal.doctrine, actor: ACTOR, at: now.toISOString(), hubspotWritten: false } },
+      data: { kind: 'account.vertical_corrected', actor: ACTOR, subject_type: 'account', subject_id: name, payload: { before: 'Unknown', after: vertical as Vertical, proposed: proposal.proposed, strength: proposal.strength, evidence: proposal.evidence, externalEvidence: externalEvidence(external, name), doctrine: proposal.doctrine, actor: ACTOR, at: now.toISOString(), hubspotWritten: false } },
       select: { id: true },
     })) as { id: string };
     console.log(`  ${name}: Unknown -> ${vertical} (audit ${audit.id})${proposal.proposed !== vertical ? ` [note: the classifier proposed ${proposal.proposed ?? 'no change'}; Casey's value stands]` : ''}`);
@@ -128,7 +139,7 @@ async function applyRows(pairs: string[], proposals: Map<string, AccountKindProp
 }
 
 async function main() {
-  const { flags, accounts, apply } = parseArgs(process.argv.slice(2));
+  const { flags, accounts, apply, evidence: externalLines } = parseArgs(process.argv.slice(2));
   const names = accounts.length ? accounts : apply.length ? apply.map((p) => p.split('=')[0].trim()).filter(Boolean) : null;
   const evidence = await gather(names);
   const proposals = new Map(evidence.map((e) => [e.accountName, proposeAccountKind(e)]));
@@ -148,7 +159,7 @@ async function main() {
   }
   if (apply.length) {
     console.log(`\nAPPLY (${apply.length} row${apply.length === 1 ? '' : 's'}, actor ${ACTOR}):`);
-    await applyRows(apply, proposals);
+    await applyRows(apply, proposals, externalLines);
   }
 }
 

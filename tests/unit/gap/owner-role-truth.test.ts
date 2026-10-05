@@ -8,7 +8,7 @@
  * a person read from a verified child company carries it; a separate operating company is a caution. Pure.
  */
 import { describe, expect, it } from 'vitest';
-import { resolveOwner, type OwnerCandidateInput, type OwnerResolutionInput } from '@/lib/gap/people/owner-resolution';
+import { resolveOwner, type OwnerCandidateInput, type OwnerResolutionInput, type RoleInput } from '@/lib/gap/people/owner-resolution';
 import type { EmploymentRead } from '@/lib/gap/people/employment';
 
 const NOW = new Date('2026-10-05T15:00:00Z');
@@ -27,10 +27,10 @@ const base = (over: Partial<OwnerResolutionInput> = {}): OwnerResolutionInput =>
   ...over,
 });
 const STORED = 'Sr Director - West Transportation Command Center';
-const changedUnknown = { state: 'ROLE_CHANGED_CONFIRMED', label: 'Role changed (confirmed)', why: 'Christian Burton now leads the West Transportation Command Center (his own profile, 2026-10-05); she was promoted and her new title is not established.', effectiveTitle: null, priorTitle: STORED, usableForRanking: false };
-const changedKnown = (title: string) => ({ state: 'ROLE_CHANGED_CONFIRMED', label: 'Role changed (confirmed)', why: `Her own profile now reads ${title}.`, effectiveTitle: title, priorTitle: STORED, usableForRanking: true });
-const roleConflict = { state: 'ROLE_CONFLICT', label: 'Role conflict: verify current role', why: 'Two current sources name different titles.', effectiveTitle: null, priorTitle: STORED, usableForRanking: false };
-const roleConfirmed = (title: string) => ({ state: 'ROLE_CURRENT_CONFIRMED', label: 'Role current (confirmed)', why: `Their own profile, 2026-10-01, reads ${title}.`, effectiveTitle: title, priorTitle: null, usableForRanking: true });
+const changedUnknown: RoleInput = { state: 'ROLE_CHANGED_CONFIRMED', label: 'Role changed (confirmed)', why: 'Christian Burton now leads the West Transportation Command Center (his own profile, 2026-10-05); she was promoted and her new title is not established.', effectiveTitle: null, priorTitle: STORED, usableForRanking: false };
+const changedKnown = (title: string): RoleInput => ({ state: 'ROLE_CHANGED_CONFIRMED', label: 'Role changed (confirmed)', why: `Her own profile now reads ${title}.`, effectiveTitle: title, priorTitle: STORED, usableForRanking: true });
+const roleConflict: RoleInput = { state: 'ROLE_CONFLICT', label: 'Role conflict: verify current role', why: 'Two current sources name different titles.', effectiveTitle: null, priorTitle: STORED, usableForRanking: false };
+const roleConfirmed = (title: string): RoleInput => ({ state: 'ROLE_CURRENT_CONFIRMED', label: 'Role current (confirmed)', why: `Their own profile, 2026-10-01, reads ${title}.`, effectiveTitle: title, priorTitle: null, usableForRanking: true });
 
 describe('2. same employer, verified promotion, new role unknown: the old title is not usable for ranking', () => {
   const people = [hs('1', 'Christina Mannella', STORED, { employment: likely, role: changedUnknown }), hs('2', 'Doug Estrada', 'Senior Director - Regional Transportation - Logistics')];
