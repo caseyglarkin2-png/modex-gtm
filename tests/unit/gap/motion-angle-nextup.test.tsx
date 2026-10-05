@@ -161,6 +161,9 @@ describe('loadCockpitMotions', () => {
     expect(r.motions[0].primary?.name).toBe('Z Dallas');
     const down = await loadCockpitMotions(prisma, items as never, new Date('2026-09-30T15:00:00Z'), { thesisCurrent: async () => ({ current: true as const }), locations: async () => { throw new Error('hubspot down'); } });
     expect(down.motions[0].state).toBe('ready');
+    // A stalled read never hangs the cockpit: it gives up after the timeout and ranks without location.
+    const stalled = await loadCockpitMotions(prisma, items as never, new Date('2026-09-30T15:00:00Z'), { thesisCurrent: async () => ({ current: true as const }), locations: () => new Promise(() => {}), locationTimeoutMs: 20 });
+    expect(stalled.motions[0].state).toBe('ready');
   });
 });
 

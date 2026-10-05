@@ -39,7 +39,7 @@ export async function loadCockpitMotions(
   prisma: PrismaLike,
   items: readonly QueueItem[],
   now: Date,
-  deps: { thesisCurrent?: ThesisCurrentnessCheck; locations?: (hubspotContactIds: string[]) => Promise<Map<string, string | null>> } = {},
+  deps: { thesisCurrent?: ThesisCurrentnessCheck; locations?: (hubspotContactIds: string[]) => Promise<Map<string, string | null>>; locationTimeoutMs?: number } = {},
 ): Promise<CockpitMotions> {
   // Execution acceptance: the SAME current-actionable-thesis check the click runs, once per thesis on a READY card.
   const readyWithThesis = items.filter((i) => sellerLaneOf(i) === 'ready' && i.hypothesis?.id);
@@ -73,7 +73,18 @@ export async function loadCockpitMotions(
   // US-first needs each person's own location, as the brief reads it (review S3): only where an account has more than
   // one ready email card to rank, from HubSpot, fail-soft (no location: the prior treats it as unknown).
   const hsIds = [...new Set([...byAccount.values()].filter((cs) => cs.length > 1).flat().map((c) => c.persona.hubspotContactId).filter((x): x is string => !!x))];
-  const locations: Map<string, string | null> = hsIds.length ? await (deps.locations ?? loadContactLocations)(hsIds).catch(() => new Map()) : new Map();
+  // A stalled HubSpot read never hangs the cockpit: after the timeout it ranks without location (re-review).
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const locations: Map<string, string | null> = hsIds.length
+    ? await Promise.race([
+        Promise.resolve().then(() => (deps.locations ?? loadContactLocations)(hsIds)),
+        new Promise<Map<string, string | null>>((resolve) => {
+          timer = setTimeout(() => resolve(new Map()), deps.locationTimeoutMs ?? 3000);
+        }),
+      ])
+        .catch(() => new Map<string, string | null>())
+        .finally(() => clearTimeout(timer))
+    : new Map();
   const hypIds = [...new Set(readyEmail.map((c) => c.hypothesis?.id).filter((x): x is string => !!x))];
   const thesisRole = new Map<string, string | null>(
     hypIds.length ? ((await prisma.prospectingHypothesis.findMany({ where: { id: { in: hypIds } }, select: { id: true, persona: true } })) as Array<{ id: string; persona: string | null }>).map((h) => [h.id, h.persona]) : [],

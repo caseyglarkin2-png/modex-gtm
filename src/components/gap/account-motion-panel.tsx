@@ -11,6 +11,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { CockpitAngle, CockpitMotion } from '@/lib/gap/motion/cockpit';
+import { confirmChoiceBody } from '@/lib/gap/motion/account-motion';
 import { AccountLink } from './account-link';
 
 /** One person's angle: owned (edit), suggested (accept / edit) or missing (write). `bare` omits the label (the brief supplies it). */
@@ -126,12 +127,14 @@ export function AccountMotionPanel({ motion }: { motion: CockpitMotion }) {
   }
 
   async function confirm() {
-    if (!motion.primary) return;
+    // A NEXT person who is not a direct operator is never recorded by confirming someone else (re-review C2).
+    const body = confirmChoiceBody(motion);
+    if (!body) return;
     setBusy(true);
     const res = await fetch('/api/gap/accounts/motion', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ accountName: motion.accountName, primaryPersonaId: motion.primary.personaId, nextPersonaId: motion.next?.personaId ?? null }),
+      body: JSON.stringify(body),
     });
     setBusy(false);
     if (res.ok) router.refresh();

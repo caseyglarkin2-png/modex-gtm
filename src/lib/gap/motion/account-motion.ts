@@ -75,7 +75,8 @@ export interface AccountMotion {
   accountName: string;
   state: MotionState;
   primary: (MotionPerson & { chosen: boolean }) | null;
-  next: (MotionPerson & { unlock: string; unlockAt: string | null }) | null;
+  /** `byChoiceOnly`: not a direct operator, so they never unlock on their own and a confirm never records them (re-review C2). */
+  next: (MotionPerson & { unlock: string; unlockAt: string | null; byChoiceOnly?: boolean }) | null;
   /** Everyone else waiting at the account (review C P1: no held person is ever invisible). */
   alsoWaiting: MotionPerson[];
   /** Email cards that are NOT the account's motion right now: never READY. */
@@ -131,7 +132,17 @@ function needsOwner(accountName: string, ranked: ReturnType<typeof rankCandidate
 }
 
 /** A next person who is not a cold WHO never unlocks on their own: the line says so (review N1). */
-const byChoiceOnly = (r: { read: PersonRead }, chosen: boolean) => (chosen || isColdWho(r.read) ? '' : ', then only by your choice (not a direct transportation operator)');
+const needsChoice = (r: { read: PersonRead }, chosen: boolean) => !chosen && !isColdWho(r.read);
+const byChoiceOnly = (r: { read: PersonRead }, chosen: boolean) => (needsChoice(r, chosen) ? ', then only by your choice (not a direct transportation operator)' : '');
+
+/**
+ * What "Confirm X as primary" records (re-review C2): the primary, and the shown NEXT person only when they would unlock
+ * on their own. Confirming the operator never silently records a VP Supply Chain as Casey's chosen next person.
+ */
+export function confirmChoiceBody(m: Pick<AccountMotion, 'accountName' | 'primary' | 'next'>): { accountName: string; primaryPersonaId: number; nextPersonaId: number | null } | null {
+  if (!m.primary) return null;
+  return { accountName: m.accountName, primaryPersonaId: m.primary.personaId, nextPersonaId: m.next && !m.next.byChoiceOnly ? m.next.personaId : null };
+}
 
 const nameOf = (c: MotionCard) => c.persona.displayName?.trim() || c.persona.email || `person ${c.persona.id}`;
 const person = (c: MotionCard, factors: string[]): MotionPerson => ({ personaId: c.persona.id as number, name: nameOf(c), title: c.persona.title, cardId: c.id, factors });
@@ -195,7 +206,9 @@ export function computeAccountMotion(input: {
     const waiting = ranked.filter((r) => r.card.persona.id !== live.personaId);
     // Casey's choice of who comes next: the recorded next person, or (from the needs_owner panel, review S1) the person
     // chosen as primary when they are still waiting.
-    const chosenNext = choice ? waiting.find((r) => r.card.persona.id === choice.nextPersonaId) ?? waiting.find((r) => r.card.persona.id === choice.primaryPersonaId) ?? null : null;
+    // The primary-choice fallback counts only when it was made after this touch (the needs_owner panel's choice), never
+    // an older choice that predates it (re-review).
+    const chosenNext = choice ? waiting.find((r) => r.card.persona.id === choice.nextPersonaId) ?? (choice.at > live.sentAt ? waiting.find((r) => r.card.persona.id === choice.primaryPersonaId) : undefined) ?? null : null;
     const nextPick = chosenNext ?? waiting[0] ?? null;
     if (now.getTime() < unlockAt.getTime()) {
       return {
@@ -209,6 +222,7 @@ export function computeAccountMotion(input: {
                 ? `after the outstanding first-touch draft to ${owner ? nameOf(owner) : live.recipient} is sent (then ${MOTION_UNLOCK_BUSINESS_DAYS} business days) or deleted`
                 : `after ${day(unlockAt)} with no response (${MOTION_UNLOCK_BUSINESS_DAYS} business days), or at once if ${owner ? nameOf(owner) : live.recipient}'s address fails${byChoiceOnly(nextPick, !!chosenNext)}`,
               unlockAt: live.outstanding ? null : unlockAt.toISOString(),
+              byChoiceOnly: needsChoice(nextPick, !!chosenNext),
             }
           : null,
         alsoWaiting: waiting.filter((r) => r !== nextPick).map((x) => person(x.card, x.factors)),
@@ -246,7 +260,7 @@ export function computeAccountMotion(input: {
     accountName,
     state: 'ready',
     primary: { ...person(primary.card, primary.factors), chosen: !!chosen },
-    next: nextPick ? { ...person(nextPick.card, nextPick.factors), unlock: `after ${MOTION_UNLOCK_BUSINESS_DAYS} business days with no response to ${nameOf(primary.card)}, or at once if that address fails${byChoiceOnly(nextPick, choice?.nextPersonaId === nextPick.card.persona.id)}`, unlockAt: null } : null,
+    next: nextPick ? { ...person(nextPick.card, nextPick.factors), unlock: `after ${MOTION_UNLOCK_BUSINESS_DAYS} business days with no response to ${nameOf(primary.card)}, or at once if that address fails${byChoiceOnly(nextPick, choice?.nextPersonaId === nextPick.card.persona.id)}`, unlockAt: null, byChoiceOnly: needsChoice(nextPick, choice?.nextPersonaId === nextPick.card.persona.id) } : null,
     alsoWaiting: rest.filter((r) => r !== nextPick).map((x) => person(x.card, x.factors)),
     heldCardIds: allIds.filter((id) => id !== primary.card.id),
     headline: chosen ? `Primary: ${nameOf(primary.card)} (your choice).` : `Suggested primary: ${nameOf(primary.card)}.${released ? ' An earlier address failed, so the motion moved on.' : ''}`,

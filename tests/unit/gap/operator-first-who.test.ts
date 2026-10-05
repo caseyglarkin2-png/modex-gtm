@@ -12,7 +12,7 @@
  */
 import { describe, expect, it } from 'vitest';
 import { buildAccountBrief, type AccountInputs } from '@/lib/gap/account-intel/build';
-import { computeAccountMotion, type MotionCard } from '@/lib/gap/motion/account-motion';
+import { computeAccountMotion, confirmChoiceBody, type MotionCard } from '@/lib/gap/motion/account-motion';
 import { apolloCandidates } from '@/lib/gap/people/apollo-candidates';
 import { projectEngagement, projectHistory, projectRelationship, type AccountContext } from '@/lib/gap/context/context';
 import { projectNow } from '@/lib/gap/context/now';
@@ -51,6 +51,21 @@ describe('the cockpit never suggests a sponsor as the cold first touch', () => {
     expect(m.next?.name).toBe('vp person');
     // Review N1: the display never promises an unlock that would not happen.
     expect(m.next?.unlock).toMatch(/then only by your choice \(not a direct transportation operator\)$/);
+  });
+  it('re-review C2: confirming the operator never records the non-operator NEXT as Casey\'s choice', () => {
+    const m = computeAccountMotion({ ...base, readyEmailCards: [card('vp', 1, 'Vice President Supply Chain'), card('tom', 2, 'Transportation Operations Manager')] });
+    expect(m.next).toMatchObject({ name: 'vp person', byChoiceOnly: true });
+    expect(confirmChoiceBody(m)).toEqual({ accountName: 'Acme Foods', primaryPersonaId: 2, nextPersonaId: null });
+    const ops = computeAccountMotion({ ...base, readyEmailCards: [card('a', 1, 'Director of Transportation'), card('tom', 2, 'Transportation Operations Manager')] });
+    expect(confirmChoiceBody(ops)).toEqual({ accountName: 'Acme Foods', primaryPersonaId: 1, nextPersonaId: 2 });
+  });
+  it('re-review: an old choice never unlocks a non-operator after a touch sent later', () => {
+    const sent = new Date(NOW.getTime() - 20 * 86_400_000).toISOString();
+    const old = new Date(NOW.getTime() - 40 * 86_400_000).toISOString();
+    const cards = [card('vp', 1, 'Vice President Supply Chain'), card('tom', 2, 'Transportation Operations Manager')];
+    const touches = [{ personaId: 2, recipient: 'tom@acme.com', sentAt: sent, released: false }];
+    expect(computeAccountMotion({ ...base, choice: { primaryPersonaId: 1, nextPersonaId: null, by: 'casey', at: old }, firstTouches: touches, readyEmailCards: cards }).state).toBe('needs_owner');
+    expect(computeAccountMotion({ ...base, choice: { primaryPersonaId: 1, nextPersonaId: null, by: 'casey', at: NOW.toISOString() }, firstTouches: touches, readyEmailCards: cards }).state).toBe('ready');
   });
   it('review S2: the headline names a sponsor only by the sponsor rule', () => {
     const m = computeAccountMotion({ ...base, readyEmailCards: [card('cat', 1, 'Transportation Category Manager'), card('fs', 2, 'Fleet Safety Manager')] });
