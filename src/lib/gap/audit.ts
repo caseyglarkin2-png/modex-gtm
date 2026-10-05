@@ -73,7 +73,18 @@ export type GapAuditKind =
   | 'person.employment_corrected'
   | 'person.employment_verified'
   | 'person.imported_from_hubspot'
-  | 'hypothesis.persona_assigned';
+  | 'hypothesis.persona_assigned'
+  // WHO truth maintenance (2026-10-05): a role verified against a public source (a persona, or a HubSpot-only
+  // contact keyed by its id); an account alias proposed from employment evidence and confirmed or rejected by
+  // Casey; an account's vertical corrected after verification; a legacy local suppression flag reviewed and, on
+  // Casey's explicit confirmed click, cleared (never a real unsubscribe, opt-out or hard bounce).
+  | 'person.role_verified'
+  | 'account.alias_confirmed'
+  | 'account.alias_rejected'
+  | 'account.vertical_corrected'
+  | 'suppression.reviewed'
+  | 'suppression.corrected'
+  | 'suppression.correction_refused';
 
 export interface HypothesisEventInput {
   hypothesisId: string;
