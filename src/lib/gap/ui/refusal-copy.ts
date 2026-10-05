@@ -83,6 +83,32 @@ const COPY: Record<string, RefusalCopy> = {
     why: 'GAP could not check whether this thesis is still current.',
     next: 'Retry in a moment.',
   },
+  // Owner resolution (2026-10-05): the raw machine words a seller must never be left with.
+  no_persona: {
+    what: 'Approved. GAP needs a person to test this with before it can route.',
+    why: 'This is an account-level hypothesis: the fact is about the company, and nobody has been chosen to test it with yet.',
+    next: 'Choose the owner below (Needs an owner), or find the operator.',
+  },
+  persona_left_account: {
+    what: 'Nothing was routed, drafted or sent.',
+    why: 'Current-employer evidence says this person is no longer at this account (a historical contact).',
+    next: 'Choose the current operator instead (owner resolution), or correct the record if you know otherwise.',
+  },
+  persona_employment_conflict: {
+    what: 'Nothing was routed, drafted or sent.',
+    why: 'Sources disagree about where this person works now, so GAP will not rely on them at this account.',
+    next: 'Verify the current role (one click), or choose another owner.',
+  },
+  persona_not_at_account: {
+    what: 'Nothing was attached.',
+    why: 'That person is a GAP contact at another account, not this one.',
+    next: 'Choose someone at this account, or add the right person from HubSpot.',
+  },
+  hypothesis_in_use: {
+    what: 'Nothing was changed.',
+    why: 'The hypothesis is already in use with its person; an active motion is not retargeted casually.',
+    next: 'Work it from the ready card, or close and revise the thesis.',
+  },
   opportunity_unknown: {
     what: 'Nothing was drafted or sent.',
     why: "Can't verify whether this account already has an active opportunity.",

@@ -67,6 +67,12 @@ export interface HypothesisSnapshot {
   reviewedBy: string | null;
   primaryPersonaId: number | null;
   personaSuppressed: boolean;
+  /**
+   * Owner resolution (2026-10-05): the primary person's contact currentness at this account, when it blocks.
+   * A person who left, or whose employer is in conflict, never activates (they are not do-not-contact: this is
+   * its own guard, with its own reason). Absent reads as not blocked.
+   */
+  personaEmploymentBlocked?: 'persona_left_account' | 'persona_employment_conflict' | null;
   version: HypothesisVersionSnapshot | null;
   expiresAt: Date | null;
   confirmedDispositions: Array<{ responseClass: string; createdAt: Date }>;
@@ -222,6 +228,7 @@ function activateGuard(snapshot: HypothesisSnapshot, now: Date): string | null {
   if (fact) return fact;
   if (snapshot.primaryPersonaId === null) return 'no_persona';
   if (snapshot.personaSuppressed) return 'suppressed';
+  if (snapshot.personaEmploymentBlocked) return snapshot.personaEmploymentBlocked;
   if (snapshot.version) {
     if (snapshot.version.status === 'retired') return 'version_retired';
     if (snapshot.version.firstTouchProductProof) return 'first_touch_proof';

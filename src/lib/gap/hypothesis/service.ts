@@ -34,6 +34,8 @@ import {
   type TransitionContext,
 } from './machine';
 import { extractCitationIds, validateObservation } from './observation';
+import { employmentRefusal } from '../people/employment';
+import { loadPersonaEmployment } from '../people/employment-store';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -350,6 +352,13 @@ export async function loadSnapshot(prisma: any, id: string): Promise<LoadedSnaps
     const hit = await prisma.unsubscribedEmail.findUnique({ where: { email }, select: { id: true } });
     unsubscribed = Boolean(hit);
   }
+  // Owner resolution (2026-10-05): the primary person's contact currentness at this account (a departed or
+  // conflicted person never activates). Read from the database only; a fake without the delegate reads as not blocked.
+  let personaEmploymentBlocked: 'persona_left_account' | 'persona_employment_conflict' | null = null;
+  if (typeof row.primary_persona_id === 'number' && typeof prisma.persona?.findMany === 'function') {
+    const emp = await loadPersonaEmployment(prisma, row.primary_persona_id, { now: new Date() });
+    personaEmploymentBlocked = emp ? employmentRefusal(emp.state) : null;
+  }
 
   const linkedSignals: LoadedSignal[] = (row.signals ?? []).map((link: any) => ({
     id: link.signal?.id ?? link.signal_id,
@@ -385,6 +394,7 @@ export async function loadSnapshot(prisma: any, id: string): Promise<LoadedSnaps
     linkedSignals,
     reviewedBy: row.reviewed_by ?? null,
     personaSuppressed: Boolean(persona?.do_not_contact) || unsubscribed,
+    personaEmploymentBlocked,
     version,
     expiresAt: row.expires_at ?? null,
     confirmedDispositions: (row.dispositions ?? []).map((d: any) => ({
