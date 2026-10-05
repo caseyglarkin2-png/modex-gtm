@@ -349,7 +349,7 @@ change: a role changed with no established title, or a role conflict, never rank
 direct fit; nobody is preselected on a recommendation; family members are read only through their own linked
 company; aliases are never auto-created; Unknown stays Unknown on thin evidence; the clear needs confirmed, the
 expected email and a live LEGACY_CONFLICT; no file under `src/lib/gap` writes `do_not_contact`. Production SHA:
-c86c24d7 (#397 59c20e1a plus the #398 follow-up), then 4ad8b81c (#399: the debt closed and the rep-facing surfaces; `docs/gap/OWNER_RESOLUTION.md`, last section) and the #400 follow-up <POLISH2_SHA>, all shipped and verified live 2026-10-05.
+c86c24d7 (#397 59c20e1a plus the #398 follow-up), then 4ad8b81c (#399: the debt closed and the rep-facing surfaces; `docs/gap/OWNER_RESOLUTION.md`, last section) and the #400 follow-up 3da77d1e (Vercel READY on 3da77d1e311f105eda698b29c938ec9bc1464927), all shipped and verified live 2026-10-05.
 
 ## Soak (2026-10-02)
 
