@@ -26,6 +26,23 @@ export interface HubSpotPerson {
   /** clawd's Apollo free sweep writes these (hubspot-ops): supporting employment evidence. */
   apolloEmploymentStatus?: string | null;
   apolloVerifiedAt?: string | null;
+  /**
+   * A non-reversible key of the lowercase address (FNV-1a, 8 hex chars), so a corporate-family read can tell one
+   * person held at two companies apart from two people (enterprise graph, 2026-10-05). Never the address; absent
+   * when HubSpot holds no email.
+   */
+  emailKey?: string;
+}
+
+/** FNV-1a (32-bit) over the trimmed lowercase address: cheap, deterministic, not reversible. */
+export function emailKey(email: string): string {
+  const s = email.trim().toLowerCase();
+  let h = 0x811c9dc5;
+  for (let i = 0; i < s.length; i += 1) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 0x01000193) >>> 0;
+  }
+  return h.toString(16).padStart(8, '0');
 }
 
 export interface HubSpotPeopleReads {
@@ -118,6 +135,8 @@ async function readPeople(companyId: string, reads: HubSpotPeopleReads, cap: num
       if (clean(p.lastmodifieddate)) person.lastModifiedAt = clean(p.lastmodifieddate);
       if (clean(p.apollo_employment_status)) person.apolloEmploymentStatus = clean(p.apollo_employment_status);
       if (clean(p.apollo_verified_at)) person.apolloVerifiedAt = clean(p.apollo_verified_at);
+      const email = clean(p.email);
+      if (email) person.emailKey = emailKey(email);
       return person;
     });
     return { people, truncated };

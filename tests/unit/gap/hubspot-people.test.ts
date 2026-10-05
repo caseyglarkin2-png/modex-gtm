@@ -5,7 +5,7 @@
  * person location comes from the contact's own record.
  */
 import { describe, expect, it } from 'vitest';
-import { loadContactLocations, loadHubSpotPeople, type HubSpotPeopleReads } from '@/lib/gap/people/hubspot-people';
+import { emailKey, loadContactLocations, loadHubSpotPeople, type HubSpotPeopleReads } from '@/lib/gap/people/hubspot-people';
 import { personCountry, readPerson } from '@/lib/gap/people/person-prior';
 import { buildAccountBrief, type AccountInputs } from '@/lib/gap/account-intel/build';
 
@@ -20,7 +20,8 @@ describe('loadHubSpotPeople', () => {
   it('maps name, title, the person\'s own location, email presence (never the address) and opt-out', async () => {
     const r = await loadHubSpotPeople('c1', reads([{ id: '1', properties: { firstname: 'Karen', lastname: 'Darling', jobtitle: 'Senior Director - PBNA Transportation', city: 'Chicago', state: 'Illinois', country: 'United States', email: 'k@pepsico.com', hs_email_optout: null } }, { id: '2', properties: { firstname: 'Opt', lastname: 'Out', jobtitle: 'Director of Transportation', city: null, state: null, country: null, email: null, hs_email_optout: 'true' } }]));
     expect(r?.people).toEqual([
-      { id: '1', name: 'Karen Darling', title: 'Senior Director - PBNA Transportation', location: 'Chicago, Illinois, United States', hasEmail: true, optedOut: false },
+      // emailKey (2026-10-05): a non-reversible hash of the lowercase address, the only addition to the shape.
+      { id: '1', name: 'Karen Darling', title: 'Senior Director - PBNA Transportation', location: 'Chicago, Illinois, United States', hasEmail: true, optedOut: false, emailKey: emailKey('k@pepsico.com') },
       { id: '2', name: 'Opt Out', title: 'Director of Transportation', location: null, hasEmail: false, optedOut: true },
     ]);
     expect(JSON.stringify(r)).not.toMatch(/@/);
@@ -131,5 +132,21 @@ describe('loadContactLocations (the cockpit ranks ready cards with the same pers
   it('a read error throws, so the cockpit falls back to no location', async () => {
     const reads: HubSpotPeopleReads = { contactIdsForCompany: async () => ({ ids: [], truncated: false }), readContacts: async () => { throw new Error('429'); } };
     await expect(loadContactLocations(['1'], reads)).rejects.toThrow('429');
+  });
+});
+
+describe('emailKey (enterprise graph, 2026-10-05): a non-reversible key for cross-company dedupe, never the address', () => {
+  it('is derived from the lowercase address, equal for case variants, different for different addresses, and carries no "@"', () => {
+    const a = emailKey('Karen.Darling@PepsiCo.com');
+    expect(a).toBe(emailKey(' karen.darling@pepsico.com '));
+    expect(a).toMatch(/^[0-9a-f]{8}$/);
+    expect(a).not.toBe(emailKey('karen.darling@fritolay.com'));
+    expect(a).not.toMatch(/@|pepsico/);
+  });
+  it('a read person with an email carries the key; one without does not; the address is still never exposed', async () => {
+    const r = await loadHubSpotPeople('c1', reads([{ id: '1', properties: { firstname: 'A', lastname: 'B', email: 'a.b@acme.com' } }, { id: '2', properties: { firstname: 'C', lastname: 'D', email: null } }]));
+    expect(r?.people[0].emailKey).toBe(emailKey('a.b@acme.com'));
+    expect(r?.people[1]).not.toHaveProperty('emailKey');
+    expect(JSON.stringify(r)).not.toMatch(/@|acme/);
   });
 });
