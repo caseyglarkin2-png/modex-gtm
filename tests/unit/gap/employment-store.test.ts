@@ -5,7 +5,7 @@
  * asserts nothing.
  */
 import { describe, expect, it, vi } from 'vitest';
-import { evidenceFromFields, loadEmployment, recordEmploymentCorrection, recordEmploymentVerification, type HubSpotEmploymentProps } from '@/lib/gap/people/employment-store';
+import { accountEmploymentContext, evidenceFromFields, loadEmployment, readHubSpotOnlyEmployment, recordEmploymentCorrection, recordEmploymentVerification, type HubSpotEmploymentProps } from '@/lib/gap/people/employment-store';
 import { buildEmploymentPrompt, parseEmploymentAnswer, verifyEmployment } from '@/lib/gap/people/employment-verify';
 
 const NOW = new Date('2026-10-05T12:00:00Z');
@@ -190,15 +190,49 @@ describe('employer spellings in the live HubSpot row and the Apollo intake never
     const r = (await loadEmployment(prisma, [77], { now: NOW, hubspot: hs })).get(77)!;
     expect(r.state).toBe('CURRENT_LIKELY');
   });
-  it('"Genmills" in HubSpot is General Mills through the person\'s own genmills.com address', async () => {
+  it('"Genmills" in HubSpot is General Mills through the ACCOUNT domain (domainsFor), never through the person\'s own address', async () => {
     const { prisma } = db({ personas: [{ id: 78, account_name: 'General Mills', name: 'j ness', title: 'chief supply chain officer', email: 'j.ness@genmills.com', hubspot_contact_id: '556', do_not_contact: false, email_status: 'unverified' }] });
     const hs = new Map<string, HubSpotEmploymentProps>([['556', { company: 'Genmills', title: 'Chief Supply Chain Officer', email: 'j.ness@genmills.com', lastModifiedAt: null, apolloEmploymentStatus: null, apolloVerifiedAt: null }]]);
-    const r = (await loadEmployment(prisma, [78], { now: NOW, hubspot: hs })).get(78)!;
-    expect(r.state).not.toBe('EMPLOYMENT_CONFLICT');
+    expect((await loadEmployment(prisma, [78], { now: NOW, hubspot: hs, domainsFor: () => ['genmills.com'] })).get(78)!.state).not.toBe('EMPLOYMENT_CONFLICT');
+    expect((await loadEmployment(prisma, [78], { now: NOW, hubspot: hs })).get(78)!.state).toBe('EMPLOYMENT_CONFLICT');
+  });
+  it('review B2: a record refreshed to the new employer\'s address still reads the departure as a conflict', async () => {
+    const { prisma } = db({
+      personas: [{ id: 1306, account_name: 'H-E-B', name: 'dakota socha', title: 'Director Transportation', email: 'dakota.socha@adusa.com', hubspot_contact_id: '218964806213', do_not_contact: false, email_status: 'unverified' }],
+      fields: { 1306: [{ field_name: 'company_name', field_value: 'ADUSA Distribution', source: 'apollo', source_timestamp: new Date('2026-09-20T00:00:00Z'), confidence: null, last_writer: 'apollo' }] },
+    });
+    const hs = new Map<string, HubSpotEmploymentProps>([['218964806213', { company: 'ADUSA Distribution', title: 'Director Transportation', email: 'dakota.socha@adusa.com', lastModifiedAt: '2026-09-01T00:00:00Z', apolloEmploymentStatus: null, apolloVerifiedAt: null }]]);
+    expect((await loadEmployment(prisma, [1306], { now: NOW, hubspot: hs, domainsFor: () => ['heb.com'] })).get(1306)!.state).toBe('EMPLOYMENT_CONFLICT');
+    expect((await loadEmployment(prisma, [1306], { now: NOW, domainsFor: () => ['heb.com'] })).get(1306)!.state).toBe('EMPLOYMENT_CONFLICT');
   });
   it('a different employer in the same shape still conflicts: ADUSA Distribution beside the H-E-B record', async () => {
     const { prisma } = db({ fields: { 1306: [{ field_name: 'company_name', field_value: 'ADUSA Distribution', source: 'apollo', source_timestamp: new Date('2026-09-20T00:00:00Z'), confidence: null, last_writer: 'apollo' }] } });
     const r = (await loadEmployment(prisma, [1306], { now: NOW })).get(1306)!;
     expect(r.state).toBe('EMPLOYMENT_CONFLICT');
+  });
+});
+
+describe('accountEmploymentContext: the account side of every employment read', () => {
+  it('aliases from the alias table and the parent brand; domains from canonical links and a domain two contacts share, never one address', async () => {
+    const prisma = {
+      account: { findUnique: vi.fn(async () => ({ parent_brand: 'PepsiCo' })) },
+      gapAccountAlias: { findMany: vi.fn(async () => [{ alias: 'Frito Lay' }, { alias: 'FLNA' }]) },
+      canonicalAccountLink: { findMany: vi.fn(async () => [{ canonical_company_id: 'domain:fritolay.com' }, { canonical_company_id: 'hubspot:123' }]) },
+      persona: { findMany: vi.fn(async () => [{ email: 'a@pepsico.com' }, { email: 'b@pepsico.com' }, { email: 'moved@adusa.com' }, { email: null }]) },
+    };
+    const ctx = await accountEmploymentContext(prisma as any, 'Frito-Lay');
+    expect(ctx.aliases).toEqual(['Frito Lay', 'FLNA', 'PepsiCo']);
+    expect(ctx.domains).toEqual(['fritolay.com', 'pepsico.com']);
+  });
+  it('a fake without the tables answers empty, never throws', async () => {
+    expect(await accountEmploymentContext({} as any, 'X')).toEqual({ aliases: [], domains: [] });
+  });
+});
+
+describe('readHubSpotOnlyEmployment: a HubSpot-only person is read like a persona (review S3)', () => {
+  const props = (over: Partial<HubSpotEmploymentProps> = {}): HubSpotEmploymentProps => ({ company: 'Walmart', title: 'Senior Director Transportation', email: null, lastModifiedAt: '2026-10-01T00:00:00Z', apolloEmploymentStatus: null, apolloVerifiedAt: null, ...over });
+  it('the CRM alone is unverified; Apollo moved_out is a conflict; a modified date proves nothing', () => {
+    expect(readHubSpotOnlyEmployment({ accountName: 'Walmart Inc.', aliases: [], domains: [], props: props(), now: NOW }).state).toBe('CURRENT_UNVERIFIED');
+    expect(readHubSpotOnlyEmployment({ accountName: 'Walmart Inc.', aliases: [], domains: [], props: props({ apolloEmploymentStatus: 'moved_out', apolloVerifiedAt: '2026-09-11T00:00:00Z' }), now: NOW }).state).toBe('EMPLOYMENT_CONFLICT');
   });
 });

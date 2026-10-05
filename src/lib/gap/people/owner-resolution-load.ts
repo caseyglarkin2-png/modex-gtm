@@ -13,7 +13,7 @@
 import { typeFromVertical } from '../account-intel/build';
 import type { EntityType } from '../entity/fit';
 import { resolveAccountHubSpotCompanies, type AccountCompanyDeps } from './account-company';
-import { loadEmployment, type HubSpotEmploymentProps } from './employment-store';
+import { accountEmploymentContext, loadEmployment, readHubSpotOnlyEmployment, type HubSpotEmploymentProps } from './employment-store';
 import { loadHubSpotPeopleForCompanies, type HubSpotPeopleReads, type HubSpotPerson } from './hubspot-people';
 import { resolveOwner, type OwnerCandidateInput, type OwnerPurpose, type OwnerResolution } from './owner-resolution';
 
@@ -84,8 +84,10 @@ export async function loadOwnerResolution(prisma: PrismaLike, input: LoadOwnerRe
   // Contact currentness for every GAP persona, with the live HubSpot properties where the person is linked.
   const hsProps = new Map<string, HubSpotEmploymentProps>();
   for (const p of hsPeople) hsProps.set(p.id, { company: p.company ?? null, title: p.title, email: null, lastModifiedAt: p.lastModifiedAt ?? null, apolloEmploymentStatus: p.apolloEmploymentStatus ?? null, apolloVerifiedAt: p.apolloVerifiedAt ?? null });
-  const aliasList = [...new Set([...(aliases as Row[]).map((a) => String(a.alias)), ...(account.parent_brand ? [account.parent_brand] : [])])];
-  const employment = await loadEmployment(prisma, personas.map((p) => p.id as number), { now: input.now, hubspot: hsProps, aliasesFor: () => aliasList });
+  // The account's own names and domains (the same context the decision-time gate reads, so the two never disagree).
+  const ctx = await accountEmploymentContext(prisma, account.name).catch(() => ({ aliases: [] as string[], domains: [] as string[] }));
+  const aliasList = [...new Set([...(aliases as Row[]).map((a) => String(a.alias)), ...(account.parent_brand ? [account.parent_brand] : []), ...ctx.aliases])];
+  const employment = await loadEmployment(prisma, personas.map((p) => p.id as number), { now: input.now, hubspot: hsProps, aliasesFor: () => aliasList, domainsFor: () => ctx.domains });
 
   const bounced = (s: unknown) => /bounce|invalid/i.test(String(s ?? ''));
   const inputs: OwnerCandidateInput[] = [
@@ -120,8 +122,9 @@ export async function loadOwnerResolution(prisma: PrismaLike, input: LoadOwnerRe
       company: h.company ?? null,
       hasEmail: h.hasEmail,
       optedOut: h.optedOut,
-      // A HubSpot-only person: the CRM is the only claim (unverified), unless Apollo's sweep says they moved.
-      employment: null,
+      // A HubSpot-only person: the CRM company field and Apollo's sweep, read like a persona's (review S3): the CRM
+      // alone is unverified; Apollo's moved_out sets them aside; the row's modified date proves nothing.
+      employment: readHubSpotOnlyEmployment({ accountName: account.name, aliases: aliasList, domains: ctx.domains, props: hsProps.get(h.id) ?? { company: h.company ?? null, title: h.title, email: null, lastModifiedAt: h.lastModifiedAt ?? null, apolloEmploymentStatus: h.apolloEmploymentStatus ?? null, apolloVerifiedAt: h.apolloVerifiedAt ?? null }, now: input.now }),
     })),
     ...candidates.map((c): OwnerCandidateInput => ({ key: `staged:${c.id}`, source: 'staged', name: String(c.full_name ?? ''), title: c.title ?? null, hasEmail: !!c.email })),
     ...members.filter((m) => m.kind === 'person' && typeof m.persona_id !== 'number' && m.name).map((m): OwnerCandidateInput => ({ key: `member:${m.id}`, source: 'relationship', name: String(m.name), title: m.title ?? null, hasEmail: false, relationship: m.relationship_context ?? `from ${m.work_source?.name ?? 'a source'}` })),

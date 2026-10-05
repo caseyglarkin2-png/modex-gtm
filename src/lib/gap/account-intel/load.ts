@@ -19,7 +19,7 @@ import { getFacilityFact } from '@/lib/research/facility-fact-registry';
 import type { AccountMicrositeData, AccountROIModel } from '@/lib/microsites/schema';
 import { buildAccountBrief, type AccountInputs, type AccountIntelligenceBrief, type FactInput, type PackInput } from './build';
 import { loadHubSpotPeople, loadHubSpotPeopleForCompanies, type HubSpotPeopleReads } from '../people/hubspot-people';
-import { loadEmployment, type HubSpotEmploymentProps } from '../people/employment-store';
+import { accountEmploymentContext, loadEmployment, readHubSpotOnlyEmployment, type HubSpotEmploymentProps } from '../people/employment-store';
 import { stageLabels, type StageLabelRead } from '../opportunity/stage-labels';
 import { fetchAccountContextRows, loadAccountContext, projectAccountContext } from '../context/load';
 import type { AccountContext } from '../context/context';
@@ -268,7 +268,13 @@ export async function loadAccountInputs(
   // Contact currentness for the GAP contacts (database evidence plus the live HubSpot properties where linked).
   const hsProps = new Map<string, HubSpotEmploymentProps>();
   for (const h of hsPeople?.people ?? []) hsProps.set(h.id, { company: h.company ?? null, title: h.title, email: null, lastModifiedAt: h.lastModifiedAt ?? null, apolloEmploymentStatus: h.apolloEmploymentStatus ?? null, apolloVerifiedAt: h.apolloVerifiedAt ?? null });
-  const employment = lean || !(personas as Row[]).length ? new Map() : await loadEmployment(prisma, (personas as Row[]).map((p) => p.id as number), { now, hubspot: hsProps, aliasesFor: () => [...aliasList, ...(account.parent_brand ? [account.parent_brand] : [])] }).catch(() => new Map());
+  const empCtx = lean ? { aliases: [] as string[], domains: [] as string[] } : await accountEmploymentContext(prisma, accountName).catch(() => ({ aliases: [] as string[], domains: [] as string[] }));
+  const empAliases = [...new Set([...aliasList, ...(account.parent_brand ? [account.parent_brand] : []), ...empCtx.aliases])];
+  const employment = lean || !(personas as Row[]).length ? new Map() : await loadEmployment(prisma, (personas as Row[]).map((p) => p.id as number), { now, hubspot: hsProps, aliasesFor: () => empAliases, domainsFor: () => empCtx.domains }).catch(() => new Map());
+  // HubSpot-only people carry the same read (the CRM field and Apollo's sweep), so a moved person never becomes WHO.
+  const hsWithEmployment = hsPeople && !lean
+    ? { ...hsPeople, people: hsPeople.people.map((h) => { const e = readHubSpotOnlyEmployment({ accountName, aliases: empAliases, domains: empCtx.domains, props: hsProps.get(h.id)!, now }); return { ...h, employment: { state: e.state, why: e.why, elsewhere: e.elsewhere ? { company: e.elsewhere.company, title: e.elsewhere.title } : null } }; }) }
+    : hsPeople;
 
   return {
     account: { name: account.name, tier: account.tier ?? null, priorityBand: account.priority_band ?? null, vertical: account.vertical ?? null, parentBrand: account.parent_brand ?? null, hubspotCompanyId: account.hubspot_company_id ?? null, recordUpdatedAt: iso(account.updated_at) },
@@ -301,7 +307,7 @@ export async function loadAccountInputs(
       const emp = employment.get(p.id) ?? null;
       return { id: p.id, name: p.name, title: p.title ?? null, doNotContact: !!p.do_not_contact, hasEmail: !!p.email, emailStatus: p.email_status ?? null, updatedAt: iso(p.updated_at), hubspotContactId: p.hubspot_contact_id ?? null, apolloEnrichedAt: p.enrichment?.apollo_person_id ? iso(p.enrichment.last_enriched_at) : null, location: p.hubspot_contact_id ? hsById.get(String(p.hubspot_contact_id))?.location ?? null : null, employment: emp ? { state: emp.state, why: emp.why, elsewhere: emp.elsewhere ? { company: emp.elsewhere.company, title: emp.elsewhere.title } : null } : null };
     }),
-    hubspotPeople: hsPeople,
+    hubspotPeople: hsWithEmployment,
     candidates: (candidates as Row[]).map((c) => ({ id: c.id, name: c.full_name, title: c.title ?? null, state: c.state, seenAt: iso(c.last_seen_at) })),
     // A member whose Persona is do-not-contact is never a way in (relationship context is never consent).
     memberships: (members as Row[]).map((m) => ({ sourceName: m.work_source?.name ?? 'a source', sourceType: m.work_source?.source_type ?? 'other', relationshipContext: m.relationship_context ?? null, personName: m.kind === 'person' ? m.name ?? null : null, title: m.kind === 'person' ? m.title ?? null : null, company: m.company ?? null, addedAt: iso(m.ingested_at), doNotContact: !!(m.persona_id && (personas as Row[]).some((p) => p.id === m.persona_id && p.do_not_contact)) })),

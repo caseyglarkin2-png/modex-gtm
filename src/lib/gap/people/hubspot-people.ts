@@ -150,3 +150,38 @@ export async function loadContactLocations(ids: readonly string[], reads: HubSpo
   }
   return out;
 }
+
+/** The employment-relevant properties of one HubSpot contact (the decision-time gate reads the person's linked row). */
+export interface HubSpotContactEmployment {
+  company: string | null;
+  title: string | null;
+  email: string | null;
+  lastModifiedAt: string | null;
+  apolloEmploymentStatus: string | null;
+  apolloVerifiedAt: string | null;
+}
+
+/**
+ * The employment properties of specific contacts, so the decision-time gate sees the same live evidence the owner
+ * panel does (Apollo's sweep writes apollo_employment_status on the HubSpot row; review B1). One batch read per 100
+ * ids, cached per id for 15 minutes; a read error throws (the caller decides on the record alone and says so).
+ */
+const employmentCache = new Map<string, { at: number; props: HubSpotContactEmployment }>();
+export async function loadHubSpotEmploymentProps(ids: readonly string[], reads: HubSpotPeopleReads = hubspotPeopleReads, now = Date.now()): Promise<Map<string, HubSpotContactEmployment>> {
+  const out = new Map<string, HubSpotContactEmployment>();
+  const cacheable = reads === hubspotPeopleReads;
+  const missing: string[] = [];
+  for (const id of new Set(ids.map((x) => String(x ?? '').trim()).filter(Boolean))) {
+    const hit = cacheable ? employmentCache.get(id) : undefined;
+    if (hit && now - hit.at < CACHE_MS) out.set(id, hit.props);
+    else missing.push(id);
+  }
+  if (missing.length) {
+    for (const { id, properties: p } of await reads.readContacts(missing)) {
+      const props: HubSpotContactEmployment = { company: clean(p.company), title: clean(p.jobtitle), email: clean(p.email), lastModifiedAt: clean(p.lastmodifieddate), apolloEmploymentStatus: clean(p.apollo_employment_status), apolloVerifiedAt: clean(p.apollo_verified_at) };
+      out.set(id, props);
+      if (cacheable) employmentCache.set(id, { at: now, props });
+    }
+  }
+  return out;
+}

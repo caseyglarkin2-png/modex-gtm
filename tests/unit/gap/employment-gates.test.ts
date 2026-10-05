@@ -81,3 +81,35 @@ describe('a cold call or LinkedIn touch refuses a departed person with seller wo
     expect(!r.ok && r.message).toMatch(/no longer at H-E-B: a historical contact\. Choose the current operator instead\./);
   });
 });
+
+describe('review B1: the gate reads the same live HubSpot evidence the panel does', () => {
+  const prisma = (rows: any[], enrich: any[]) => ({ persona: { findMany: vi.fn(async () => rows) }, contactEnrichment: { findMany: vi.fn(async () => enrich) }, conversationDisposition: { findMany: vi.fn(async () => []) } });
+  const dakota = { id: 1306, account_name: 'H-E-B', title: 'transportation & reverse logistics', email: 'socha.dakota@heb.com', hubspot_contact_id: '218964806213' };
+  const hs = (status: string | null) => ({
+    contactIdsForCompany: async () => ({ ids: [], truncated: false }),
+    readContacts: async (ids: string[]) => ids.map((id) => ({ id, properties: { company: 'Heb', jobtitle: 'transportation & reverse logistics', email: 'socha.dakota@heb.com', lastmodifieddate: '2026-08-18T17:45:54Z', apollo_employment_status: status, apollo_verified_at: status ? '2026-09-11T00:00:00Z' : null } })),
+  });
+  it('Apollo moved_out on the linked row: persona_employment_conflict at the gate (the panel sets the same person aside)', async () => {
+    const r = await employmentGate(prisma([dakota], []), 1306, NOW, { hubspot: hs('moved_out') });
+    expect(r).toMatchObject({ reason: 'persona_employment_conflict', state: 'EMPLOYMENT_CONFLICT' });
+    expect(r?.detail).toMatch(/Apollo/);
+  });
+  it('Apollo current, or no Apollo verdict: not blocked (a modified date is still not proof)', async () => {
+    expect(await employmentGate(prisma([dakota], []), 1306, NOW, { hubspot: hs('current') })).toBeNull();
+    expect(await employmentGate(prisma([dakota], []), 1306, NOW, { hubspot: hs(null) })).toBeNull();
+  });
+  it('HubSpot unreadable or slow: the gate decides on the record and says so, never throws, never blocks on the failure alone', async () => {
+    const broken = { contactIdsForCompany: async () => ({ ids: [], truncated: false }), readContacts: async () => { throw new Error('503'); } };
+    expect(await employmentGate(prisma([dakota], []), 1306, NOW, { hubspot: broken })).toBeNull();
+    const slow = { contactIdsForCompany: async () => ({ ids: [], truncated: false }), readContacts: () => new Promise<never>(() => undefined) };
+    expect(await employmentGate(prisma([dakota], []), 1306, NOW, { hubspot: slow, timeoutMs: 20 })).toBeNull();
+    const r = await employmentGate(prisma([dakota], [LEFT(1306)]), 1306, NOW, { hubspot: broken });
+    expect(r).toMatchObject({ reason: 'persona_left_account' });
+    expect(r?.detail).toMatch(/HubSpot could not be read just now: decided on the record alone/);
+  });
+  it('a persona with no linked HubSpot row never triggers the read', async () => {
+    const reads = { contactIdsForCompany: vi.fn(), readContacts: vi.fn() };
+    expect(await employmentGate(prisma([{ ...dakota, hubspot_contact_id: null }], []), 1306, NOW, { hubspot: reads as any })).toBeNull();
+    expect(reads.readContacts).not.toHaveBeenCalled();
+  });
+});

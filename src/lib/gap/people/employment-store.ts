@@ -112,7 +112,49 @@ export interface PersonaEmployment extends EmploymentRead {
  * passes). One query per table; no network. A persona with nothing on record reads CURRENT_UNVERIFIED.
  */
 const emailDomain = (e: string | null | undefined): string | null => (e && e.includes('@') ? e.split('@')[1].trim().toLowerCase() || null : null);
-const hsEmailOf = (id: string | null, opts: LoadEmploymentOptions): string | null => (id ? (opts.hubspot?.get(id)?.email ?? null) : null);
+
+/**
+ * The account-side context every employment read needs: the names the account goes by (its aliases and parent
+ * brand) and the account's own domains (canonical `domain:` links, and an email domain two or more of its GAP
+ * contacts share). One person's address is never an account domain (review B2). Every caller passes this: the two
+ * loaders and the decision-time gate, so the panel and the gate read the same spellings.
+ */
+export async function accountEmploymentContext(prisma: PrismaLike, accountName: string): Promise<{ aliases: string[]; domains: string[] }> {
+  const [account, aliasRows, links, people] = await Promise.all([
+    typeof prisma?.account?.findUnique === 'function' ? prisma.account.findUnique({ where: { name: accountName }, select: { parent_brand: true } }).catch(() => null) : null,
+    typeof prisma?.gapAccountAlias?.findMany === 'function' ? prisma.gapAccountAlias.findMany({ where: { account_name: accountName }, select: { alias: true } }).catch(() => []) : [],
+    typeof prisma?.canonicalAccountLink?.findMany === 'function' ? prisma.canonicalAccountLink.findMany({ where: { account_name: accountName }, select: { canonical_company_id: true } }).catch(() => []) : [],
+    typeof prisma?.persona?.findMany === 'function' ? prisma.persona.findMany({ where: { account_name: accountName }, select: { email: true } }).catch(() => []) : [],
+  ]);
+  const aliases = [...new Set([...((aliasRows ?? []) as Array<{ alias: string }>).map((a) => String(a.alias ?? '').trim()), ...(account?.parent_brand ? [String(account.parent_brand).trim()] : [])])].filter(Boolean);
+  const domains = new Set<string>();
+  for (const l of (links ?? []) as Array<{ canonical_company_id: string }>) {
+    const id = String(l.canonical_company_id ?? '');
+    if (!id.startsWith('domain:')) continue;
+    const d = id.slice('domain:'.length).trim().toLowerCase().replace(/^www\./, '');
+    if (d) domains.add(d);
+  }
+  const counts = new Map<string, number>();
+  for (const p of (people ?? []) as Array<{ email: string | null }>) {
+    const d = emailDomain(p.email);
+    if (d) counts.set(d, (counts.get(d) ?? 0) + 1);
+  }
+  for (const [d, n] of counts) if (n >= 2) domains.add(d);
+  return { aliases, domains: [...domains].sort() };
+}
+
+/**
+ * A HubSpot-only person (no GAP record): the CRM company field and Apollo's sweep are the evidence, read with the
+ * same account context as a GAP contact. Apollo's moved_out sets them aside in the panel exactly as it would a
+ * persona (review S3); the row's modified date and its address prove nothing.
+ */
+export function readHubSpotOnlyEmployment(input: { accountName: string; aliases: readonly string[]; domains: readonly string[]; props: HubSpotEmploymentProps; now: Date }): EmploymentRead {
+  const evidence: EmploymentEvidence[] = [
+    ...crmEvidence({ company: input.props.company, title: input.props.title, email: input.props.email, lastModifiedAt: input.props.lastModifiedAt }),
+    ...apolloEvidence({ status: input.props.apolloEmploymentStatus, verifiedAt: input.props.apolloVerifiedAt, accountName: input.accountName, title: input.props.title }),
+  ];
+  return readEmployment({ accountName: input.accountName, aliases: input.aliases, domains: input.domains, evidence, now: input.now });
+}
 
 export async function loadEmployment(prisma: PrismaLike, personaIds: readonly number[], opts: LoadEmploymentOptions): Promise<Map<number, PersonaEmployment>> {
   const out = new Map<number, PersonaEmployment>();
@@ -135,9 +177,10 @@ export async function loadEmployment(prisma: PrismaLike, personaIds: readonly nu
 
   for (const p of personas) {
     const aliases = opts.aliasesFor?.(p.account_name) ?? [];
-    // The account's domains plus the person's own email domains: their labels count as spellings of the employer
-    // ("Genmills" is General Mills through genmills.com). A domain still proves nothing about currentness.
-    const domains = [...(opts.domainsFor?.(p.account_name) ?? []), ...[p.email, hsEmailOf(p.hubspot_contact_id, opts)].map(emailDomain).filter((d): d is string => !!d)];
+    // The ACCOUNT's domains (accountEmploymentContext): their labels count as spellings of the employer ("Genmills"
+    // is General Mills through genmills.com). Never the person's own address: a record refreshed to the new
+    // employer's address would read the departure as "here" (review B2). A domain proves nothing about currentness.
+    const domains = opts.domainsFor?.(p.account_name) ?? [];
     const evidence: EmploymentEvidence[] = [];
     const hs = p.hubspot_contact_id ? opts.hubspot?.get(p.hubspot_contact_id) ?? null : null;
     if (hs) {

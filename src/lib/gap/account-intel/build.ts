@@ -155,7 +155,7 @@ export interface AccountInputs {
   } | null;
   /** What Scout found when this company was a candidate: cited, never verified at source (leads, not facts). */
   /** The account's people in HubSpot (people/hubspot-people.ts): live, read-only; null when not read. */
-  hubspotPeople?: { people: Array<{ id: string; name: string; title: string | null; location: string | null; hasEmail: boolean; optedOut?: boolean }>; truncated: boolean } | null;
+  hubspotPeople?: { people: Array<{ id: string; name: string; title: string | null; location: string | null; hasEmail: boolean; optedOut?: boolean; employment?: PersonaInput['employment'] }>; truncated: boolean } | null;
   scout?: { domain: string | null; what: string | null; entityType: string | null; network: Array<{ claim: string; url: string }>; freight: Array<{ claim: string; url: string }>; at: string | null; basis?: 'web' | 'name_rules' | null; ambiguous?: boolean } | null;
 }
 
@@ -1225,7 +1225,7 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
   const everyone = rankWho(
     [
       ...i.personas.map((p) => ({ key: `gap:${p.id}`, name: p.name, title: p.title, location: p.location ?? null, reachable: !p.doNotContact && p.hasEmail, doNotContact: p.doNotContact, source: 'gap' as const, personaId: p.id, hubspotContactId: p.hubspotContactId ?? null, employment: p.employment ?? null })),
-      ...hsOnly.map((h) => ({ key: `hubspot:${h.id}`, name: h.name, title: h.title, location: h.location, reachable: false, doNotContact: !!h.optedOut, source: 'hubspot' as const, personaId: null, hubspotContactId: h.id, employment: null })),
+      ...hsOnly.map((h) => ({ key: `hubspot:${h.id}`, name: h.name, title: h.title, location: h.location, reachable: false, doNotContact: !!h.optedOut, source: 'hubspot' as const, personaId: null, hubspotContactId: h.id, employment: h.employment ?? null })),
     ],
     { entityType: fit.entityType },
   );

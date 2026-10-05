@@ -82,7 +82,10 @@ describe('loadOwnerResolution', () => {
     expect(await loadOwnerResolution(prisma as any, { accountName: 'Nope', purpose: 'COLD_FIRST_TOUCH', now: NOW })).toEqual({ ok: false, reason: 'account_not_found' });
     const ok = await loadOwnerResolution(prisma as any, { accountName: 'Walmart Inc.', purpose: 'COLD_FIRST_TOUCH', now: NOW }, { hubspotPeople: reads(HS, { '8536615003': ['100'] }) });
     expect(ok.ok && ok.hubspot.via).toBe('linked');
-    expect(ok.ok && ok.resolution.eligible.map((c) => c.key)).toEqual(['hubspot:100']);
+    // The fixture row's CRM company is "Heb" at a Walmart account: read like a persona (review S3), that is a
+    // conflict, so the person is set aside with the reason rather than eligible.
+    expect(ok.ok && ok.resolution.eligible.map((c) => c.key)).toEqual([]);
+    expect(ok.ok && ok.resolution.excluded.find((e) => e.candidate.key === 'hubspot:100')?.code).toBe('employment_conflict');
   });
 
   it('with no HubSpot company and no domain, the answer says so and still reads GAP contacts, staged candidates and relationships', async () => {
@@ -99,5 +102,31 @@ describe('loadOwnerResolution', () => {
     expect(r.resolution.eligible.map((c) => c.key)).toEqual(['gap:7']);
     expect(r.resolution.others.flatMap((o) => o.names)).toEqual(expect.arrayContaining(['Stan Staged (staged candidate)', 'Ryan Heman (relationship, not a contact)']));
     expect(r.resolution.checked[1]).toBe('HubSpot contacts (no HubSpot company resolves)');
+  });
+});
+
+describe('review S3: a HubSpot-only person Apollo marked moved_out is set aside, never eligible, never preselected', () => {
+  it('sole HubSpot operator with apollo_employment_status=moved_out', async () => {
+    const prisma = {
+      account: { findUnique: vi.fn(async () => ({ name: 'Walmart Inc.', vertical: 'Retail', hubspot_company_id: '8536615003', parent_brand: null })) },
+      persona: { findMany: vi.fn(async () => []) },
+      gapAccountAlias: { findMany: vi.fn(async () => []) },
+      accountContactCandidate: { findMany: vi.fn(async () => []) },
+      gapWorkSourceMember: { findMany: vi.fn(async () => []) },
+      unsubscribedEmail: { findMany: vi.fn(async () => []) },
+      contactEnrichment: { findMany: vi.fn(async () => []) },
+      conversationDisposition: { findMany: vi.fn(async () => []) },
+    };
+    const rows = [
+      { id: '777', properties: { firstname: 'Gone', lastname: 'Person', jobtitle: 'Senior Director Transportation', email: 'g@walmart.com', hs_email_optout: null, company: 'Walmart', apollo_employment_status: 'moved_out', apollo_verified_at: '2026-09-11T00:00:00Z', city: 'Bentonville', state: 'Arkansas', country: 'United States' } },
+      { id: '778', properties: { firstname: 'Here', lastname: 'Person', jobtitle: 'Director of Transportation', email: 'h@walmart.com', hs_email_optout: null, company: 'Walmart', apollo_employment_status: null, apollo_verified_at: null, city: 'Bentonville', state: 'Arkansas', country: 'United States' } },
+    ];
+    const hubspotPeople = { contactIdsForCompany: async () => ({ ids: rows.map((r) => r.id), truncated: false }), readContacts: async (ids: string[]) => rows.filter((r) => ids.includes(r.id)) };
+    const r = await loadOwnerResolution(prisma as any, { accountName: 'Walmart Inc.', purpose: 'COLD_FIRST_TOUCH', now: NOW }, { hubspotPeople });
+    expect(r.ok).toBe(true);
+    if (!r.ok) return;
+    expect(r.resolution.excluded.find((e) => e.candidate.key === 'hubspot:777')).toMatchObject({ code: 'employment_conflict' });
+    expect(r.resolution.eligible.map((c) => c.key)).toEqual(['hubspot:778']);
+    expect(r.resolution.preselected).toBe('hubspot:778');
   });
 });
