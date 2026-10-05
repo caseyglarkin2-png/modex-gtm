@@ -36,6 +36,7 @@
  *
  * House `prisma: any` glue.
  */
+import { CLEAR_LEGACY_FLAG_SQL, clearLegacyLocalFlagRow } from '@/lib/email/suppression-correction';
 import { CLAWD_CONTRACT_PATH } from '../../email/suppression-gate';
 import { HARD_INVALID_STATUSES, MODEX_LEG, SOFT_HISTORICAL_STATUSES } from './provenance';
 import { CLEAR_TOUCHES, clearWhy, SOURCE_LABEL, whatWouldClearLines, whyBlockedLines, type ReviewFacts } from './legacy-review-copy';
@@ -471,13 +472,11 @@ export interface ClearLegacyLocalFlagInput {
 }
 
 /**
- * The SAME statement as scripts/gap/correct-historical-suppression.ts, widened to the stale status alone
- * (do_not_contact may already be false) and narrowed to never touch a hard status. No updated_at.
+ * The statement itself lives beside the consent writer (src/lib/email/suppression-correction.ts): the structural
+ * invariant keeps every file under src/lib/gap from writing the column, and this module only decides WHEN the one
+ * governed clear may run. Re-exported for the tests and the audit payload.
  */
-export const CLEAR_LEGACY_FLAG_SQL = `update personas set do_not_contact = false, email_status = 'unverified'
-  where id = $1 and lower(email) = lower($2)
-    and (do_not_contact = true or email_status = 'bounced')
-    and email_status not in ('hard_bounce', 'hard_bounced', 'invalid')`;
+export { CLEAR_LEGACY_FLAG_SQL };
 
 const CLASS_PAYLOAD: Record<SuppressionReviewClass, string> = { CONFIRMED_SUPPRESSION: 'confirmed_suppression', LEGACY_CONFLICT: 'legacy_conflict', UNRESOLVED: 'unresolved', CLEAR: 'clear' };
 
@@ -533,7 +532,7 @@ export async function clearLegacyLocalFlag(prisma: PrismaLike, input: ClearLegac
   let auditId: string | null = null;
   try {
     auditId = await prisma.$transaction(async (tx: PrismaLike) => {
-      const n: number = await tx.$executeRawUnsafe(CLEAR_LEGACY_FLAG_SQL, persona.id, review.email);
+      const n: number = await clearLegacyLocalFlagRow(tx, persona.id, review.email ?? '');
       if (n !== 1) throw new RowChanged(n);
       const row = await tx.gapAuditEvent.create({
         data: {

@@ -20,8 +20,10 @@ import { typeFromVertical } from '../account-intel/build';
 import type { EntityType } from '../entity/fit';
 import type { AccountCompanyDeps } from './account-company';
 import { loadRejectedAliases, proposeAliases, type AliasConflictEvidence, type AliasProposal } from './alias-review';
-import { accountEmploymentContext, loadEmployment, readHubSpotOnlyEmployment, type HubSpotEmploymentProps } from './employment-store';
+import { apolloEvidence, crmEvidence, type EmploymentEvidence } from './employment';
+import { accountEmploymentContext, loadEmployment, loadHubSpotContactRoleEvidence, personaRole, readHubSpotOnlyEmployment, type HubSpotEmploymentProps } from './employment-store';
 import { loadFamilyPeople, type FamilyPeopleDeps, type FamilyPeopleRead } from './family-people';
+import { readRole, ROLE_LABEL, type RoleRead } from './role-currentness';
 import type { HubSpotPeopleReads, HubSpotPerson } from './hubspot-people';
 import { resolveOwner, type OwnerCandidateInput, type OwnerPurpose, type OwnerResolution } from './owner-resolution';
 
@@ -109,6 +111,12 @@ export async function loadOwnerResolution(prisma: PrismaLike, input: LoadOwnerRe
   const ctx = await accountEmploymentContext(prisma, account.name).catch(() => ({ aliases: [] as string[], domains: [] as string[] }));
   const aliasList = [...new Set([...(aliases as Row[]).map((a) => String(a.alias)), ...(account.parent_brand ? [account.parent_brand] : []), ...ctx.aliases])];
   const employment = await loadEmployment(prisma, personas.map((p) => p.id as number), { now: input.now, hubspot: hsProps, aliasesFor: () => aliasList, domainsFor: () => ctx.domains });
+  // ROLE currentness evidence recorded against a HubSpot contact id (VERIFY CURRENT ROLE on a HubSpot-only person, or
+  // on a person before they became a GAP contact): one batch read of the audit rows, keyed by contact id.
+  const contactIds = [...new Set([...hsPeople.map((h) => h.id), ...personas.map((p) => (p.hubspot_contact_id ? String(p.hubspot_contact_id) : '')).filter(Boolean)])];
+  const roleEvidence = contactIds.length ? await loadHubSpotContactRoleEvidence(prisma, contactIds).catch(() => new Map<string, EmploymentEvidence[]>()) : new Map<string, EmploymentEvidence[]>();
+  const asInput = (r: RoleRead): NonNullable<OwnerCandidateInput['role']> => ({ state: r.state, label: ROLE_LABEL[r.state], why: r.why, effectiveTitle: r.effectiveTitle, priorTitle: r.priorTitle, usableForRanking: r.usableForRanking });
+  const roleOf = (storedTitle: string | null, evidence: readonly EmploymentEvidence[], crmTitle: string | null) => asInput(readRole({ accountName: account.name, aliases: aliasList, domains: ctx.domains, storedTitle, crmTitle, evidence, now: input.now }));
 
   const bounced = (s: unknown) => /bounce|invalid/i.test(String(s ?? ''));
   const inputs: OwnerCandidateInput[] = [
@@ -130,6 +138,14 @@ export async function loadOwnerResolution(prisma: PrismaLike, input: LoadOwnerRe
         unsubscribed: unsubscribed.has(String(p.email ?? '').trim().toLowerCase()),
         emailBounced: bounced(p.email_status),
         employment: employment.get(p.id) ?? null,
+        // The CURRENT role: the record's evidence plus anything verified against the linked HubSpot contact.
+        role: (() => {
+          const emp = employment.get(p.id);
+          if (!emp) return null;
+          const extra = p.hubspot_contact_id ? roleEvidence.get(String(p.hubspot_contact_id)) ?? [] : [];
+          const storedTitle = p.title ?? h?.title ?? null;
+          return extra.length ? roleOf(storedTitle, [...emp.evidence, ...extra], h?.title ?? null) : asInput(personaRole(emp, storedTitle, { now: input.now, aliases: aliasList, domains: ctx.domains }));
+        })(),
         relationship: m?.relationship_context ?? null,
       };
     }),
@@ -144,6 +160,9 @@ export async function loadOwnerResolution(prisma: PrismaLike, input: LoadOwnerRe
       hasEmail: h.hasEmail,
       optedOut: h.optedOut,
       provenance: { accountName: h.provenance.accountName, relation: h.provenance.relation, companyId: h.provenance.companyId, separate: h.provenance.boundary?.note ?? null },
+      // The CURRENT role for a HubSpot-only person: the CRM row, Apollo's sweep and any verification recorded against
+      // the contact id. With nothing verified the stored title stands, unverified.
+      role: roleOf(h.title, [...crmEvidence({ company: h.company ?? null, title: h.title, email: null, lastModifiedAt: h.lastModifiedAt ?? null }), ...apolloEvidence({ status: h.apolloEmploymentStatus ?? null, verifiedAt: h.apolloVerifiedAt ?? null, accountName: account.name, title: h.title }), ...(roleEvidence.get(h.id) ?? [])], h.title),
       // A HubSpot-only person: the CRM company field and Apollo's sweep, read like a persona's (review S3): the CRM
       // alone is unverified; Apollo's moved_out sets them aside; the row's modified date proves nothing.
       employment: readHubSpotOnlyEmployment({ accountName: account.name, aliases: aliasList, domains: ctx.domains, props: hsProps.get(h.id) ?? { company: h.company ?? null, title: h.title, email: null, lastModifiedAt: h.lastModifiedAt ?? null, apolloEmploymentStatus: h.apolloEmploymentStatus ?? null, apolloVerifiedAt: h.apolloVerifiedAt ?? null }, now: input.now }),

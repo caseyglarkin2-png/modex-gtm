@@ -90,6 +90,17 @@ export interface PersonaInput {
   apolloEnrichedAt?: string | null;
   /** Contact currentness at this account (people/employment.ts): LEFT or CONFLICT never fills a slot. */
   employment?: { state: EmploymentState; why: string; elsewhere: { company: string | null; title: string | null } | null } | null;
+  /** ROLE currentness (people/role-currentness.ts): a changed role with no known title, or a conflict, never fills a slot; a verified new title is read instead of the stored one. */
+  role?: RoleView | null;
+}
+
+/** The role read the brief carries (a projection of RoleRead). */
+export interface RoleView {
+  state: 'ROLE_CURRENT_CONFIRMED' | 'ROLE_CURRENT_LIKELY' | 'ROLE_UNVERIFIED' | 'ROLE_CHANGED_CONFIRMED' | 'ROLE_CONFLICT';
+  why: string;
+  effectiveTitle: string | null;
+  priorTitle: string | null;
+  usableForRanking: boolean;
 }
 
 interface PackSite {
@@ -155,7 +166,7 @@ export interface AccountInputs {
   } | null;
   /** What Scout found when this company was a candidate: cited, never verified at source (leads, not facts). */
   /** The account's people in HubSpot (people/hubspot-people.ts): live, read-only; null when not read. */
-  hubspotPeople?: { people: Array<{ id: string; name: string; title: string | null; location: string | null; hasEmail: boolean; optedOut?: boolean; employment?: PersonaInput['employment'] }>; truncated: boolean } | null;
+  hubspotPeople?: { people: Array<{ id: string; name: string; title: string | null; location: string | null; hasEmail: boolean; optedOut?: boolean; employment?: PersonaInput['employment']; role?: RoleView | null }>; truncated: boolean } | null;
   scout?: { domain: string | null; what: string | null; entityType: string | null; network: Array<{ claim: string; url: string }>; freight: Array<{ claim: string; url: string }>; at: string | null; basis?: 'web' | 'name_rules' | null; ambiguous?: boolean } | null;
 }
 
@@ -315,6 +326,8 @@ export interface MappedPerson {
   hubspotContactId?: string | null;
   /** Contact currentness at this account; a LEFT or CONFLICT person is shown as historical and fills no slot. */
   employment?: PersonaInput['employment'];
+  /** Role currentness; a changed role with no known title, or a conflict, fills no slot (verify before using). */
+  role?: RoleView | null;
 }
 
 export interface BuyerMap {
@@ -1212,8 +1225,12 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
   // contacts, never a VP Supply Chain or another adjacent role merely because no operator is a GAP contact yet.
   // Contact currentness (owner resolution, 2026-10-05): a person who left this account, or whose employer is in
   // conflict, is never WHO, never a slot, never the motion's person; they stay in the buyer map as historical.
-  const gone = (p: Pick<PersonaInput, 'employment'> | null | undefined) => !!p?.employment && employmentBlocksOutreach(p.employment.state);
-  const ranked = rankWho(i.personas.map((p) => ({ key: String(p.id), name: p.name, title: p.title, location: p.location ?? null, reachable: !p.doNotContact && p.hasEmail, doNotContact: p.doNotContact, persona: p })), { entityType: fit.entityType });
+  // Role currentness (WHO truth maintenance, 2026-10-05): a role that changed with no established new title, or a
+  // role conflict, fills no slot either ("still here, verify the current remit"); a verified new title is the title
+  // the prior reads, never the contradicted stored one.
+  const gone = (p: Pick<PersonaInput, 'employment' | 'role'> | null | undefined) => (!!p?.employment && employmentBlocksOutreach(p.employment.state)) || (!!p?.role && !p.role.usableForRanking);
+  const titleOf = (p: Pick<PersonaInput, 'title' | 'role'>) => (p.role?.usableForRanking && p.role.effectiveTitle ? p.role.effectiveTitle : p.title);
+  const ranked = rankWho(i.personas.map((p) => ({ key: String(p.id), name: p.name, title: titleOf(p), location: p.location ?? null, reachable: !p.doNotContact && p.hasEmail, doNotContact: p.doNotContact, persona: p })), { entityType: fit.entityType });
   const operating = ranked.filter((r) => isColdWho(r.read) && !r.candidate.doNotContact && !gone(r.candidate.persona));
   const pick = operating.find((r) => r.candidate.reachable) ?? operating[0] ?? null;
   // The OWNER line still names a do-not-contact operating owner, flagged (never silently skipped); WHO never picks them.
@@ -1224,12 +1241,12 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
   const hsOnly = (i.hubspotPeople?.people ?? []).filter((h) => !linked.has(h.id));
   const everyone = rankWho(
     [
-      ...i.personas.map((p) => ({ key: `gap:${p.id}`, name: p.name, title: p.title, location: p.location ?? null, reachable: !p.doNotContact && p.hasEmail, doNotContact: p.doNotContact, source: 'gap' as const, personaId: p.id, hubspotContactId: p.hubspotContactId ?? null, employment: p.employment ?? null })),
-      ...hsOnly.map((h) => ({ key: `hubspot:${h.id}`, name: h.name, title: h.title, location: h.location, reachable: false, doNotContact: !!h.optedOut, source: 'hubspot' as const, personaId: null, hubspotContactId: h.id, employment: h.employment ?? null })),
+      ...i.personas.map((p) => ({ key: `gap:${p.id}`, name: p.name, title: titleOf(p), location: p.location ?? null, reachable: !p.doNotContact && p.hasEmail, doNotContact: p.doNotContact, source: 'gap' as const, personaId: p.id, hubspotContactId: p.hubspotContactId ?? null, employment: p.employment ?? null, role: p.role ?? null })),
+      ...hsOnly.map((h) => ({ key: `hubspot:${h.id}`, name: h.name, title: titleOf(h), location: h.location, reachable: false, doNotContact: !!h.optedOut, source: 'hubspot' as const, personaId: null, hubspotContactId: h.id, employment: h.employment ?? null, role: h.role ?? null })),
     ],
     { entityType: fit.entityType },
   );
-  const mapped = (r: (typeof everyone)[number]): MappedPerson => ({ name: r.candidate.name, title: r.candidate.title, lane: r.read.lane, laneLabel: LANE_LABEL[r.read.lane], region: r.read.region, geo: r.read.geo, why: r.why, reachable: r.candidate.reachable, doNotContact: !!r.candidate.doNotContact, division: divisionOf(i.account.name, r.candidate.title), location: r.candidate.location ?? null, source: r.candidate.source, personaId: r.candidate.personaId, hubspotContactId: r.candidate.hubspotContactId, employment: r.candidate.employment });
+  const mapped = (r: (typeof everyone)[number]): MappedPerson => ({ name: r.candidate.name, title: r.candidate.title, lane: r.read.lane, laneLabel: LANE_LABEL[r.read.lane], region: r.read.region, geo: r.read.geo, why: r.why, reachable: r.candidate.reachable, doNotContact: !!r.candidate.doNotContact, division: divisionOf(i.account.name, r.candidate.title), location: r.candidate.location ?? null, source: r.candidate.source, personaId: r.candidate.personaId, hubspotContactId: r.candidate.hubspotContactId, employment: r.candidate.employment, role: r.candidate.role ?? null });
   // A HubSpot record with no name ("(no name in HubSpot)") stays in the lanes but fills no slot: nobody to address.
   // A departed or conflicted GAP contact fills no slot either (shown in the lanes as historical).
   const contactable = everyone.filter((r) => !r.candidate.doNotContact && r.read.remit !== 'OTHER_REGION' && !/^\(no name/.test(r.candidate.name) && !gone(r.candidate));

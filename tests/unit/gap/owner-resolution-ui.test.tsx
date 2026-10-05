@@ -147,6 +147,24 @@ describe('the owner-resolution panel', () => {
     expect(screen.queryByTestId('owner-use')).toBeNull();
     expect(screen.getByText(/The recommendation is a reason, not a selection: GAP does not pick/)).toBeInTheDocument();
   });
+  it('the panel mounts the seller controls: VERIFY CURRENT ROLE on the top unverified candidates, Review the legacy flag on a do-not-contact GAP contact, and the alias proposals', async () => {
+    const dnc = { ...RESOLUTION.excluded[0], candidate: { ...RESOLUTION.excluded[0].candidate, key: 'gap:13', personaId: 13, name: 'Isaac Scott', title: 'Sr Director of Transportation - Frito-Lay' }, code: 'do_not_contact' as const, reason: 'Marked do not contact in GAP.' };
+    vi.spyOn(globalThis, 'fetch').mockImplementation(async (url) => {
+      if (String(url).includes('/suppression-review')) return jsonResponse({ personaId: 13, name: 'Isaac Scott', accountName: 'FedEx', email: 'i@x.com', class: 'LEGACY_CONFLICT', sources: [], whyBlocked: ['Only the local flag.'], whatWouldClear: [], laterDeliveries: [], lastBounceAt: null, humanDecisions: [], clear: { allowed: true, touches: ['do_not_contact', 'email_status'], why: 'Only the stale local flag blocks.' }, readAt: '2026-10-05T15:00:00Z' });
+      return jsonResponse({ resolution: { ...RESOLUTION, excluded: [RESOLUTION.excluded[0], dnc] }, hubspot: { via: 'identity' }, aliasProposals: [{ company: 'Central Market', canonical: 'FedEx', evidence: ['Central Market: 2 HubSpot contacts'], key: 'central market' }] });
+    });
+    render(<OwnerResolutionPanel hypothesisId="h1" accountName="FedEx" />);
+    await waitFor(() => expect(screen.getAllByTestId('owner-candidate')).toHaveLength(2));
+    // Both top candidates are unverified: each row carries the verify control (a GAP contact and a HubSpot-only person).
+    expect(screen.getAllByTestId('employment-verify')).toHaveLength(2);
+    expect(screen.getByTestId('owner-alias-proposals')).toHaveTextContent('Central Market');
+    expect(screen.getByTestId('alias-confirm')).toBeInTheDocument();
+    fireEvent.click(screen.getByTestId('owner-excluded-toggle'));
+    fireEvent.click(screen.getByTestId('owner-review-suppression'));
+    await waitFor(() => expect(screen.getByTestId('suppression-review')).toBeInTheDocument());
+    // Nothing is cleared by rendering: the clear needs the confirm step.
+    expect(screen.queryByTestId('suppression-confirm-button')).toBeNull();
+  });
   it('set-aside people are listed with the reason when asked; nobody eligible shows Owner not resolved and FIND OPERATOR', async () => {
     vi.spyOn(globalThis, 'fetch').mockImplementation(async (url, init) => {
       if (init?.method === 'POST' && String(url).endsWith('/find-operator')) return jsonResponse({ ok: true, found: [], staged: [{ name: 'New Person', title: 'Director of Transportation' }], alreadyOnRecord: [], note: '1 direct-operator candidate staged for your review.' });

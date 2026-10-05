@@ -19,6 +19,7 @@ import { sensitivityOf } from '../research/sensitivity';
 import { sellerRelevance } from '../research/continuity';
 import { readPerson } from '../people/person-prior';
 import { EMPLOYMENT_LABEL } from '../people/employment';
+import { ROLE_LABEL } from '../people/role-currentness';
 import type { AccountContext } from './context';
 import type { ReadyTarget } from './send-target';
 
@@ -51,7 +52,7 @@ export interface NowView {
   /** The newest buyer reply on record, dated, else null. */
   lastReply: string | null;
   next: { text: string; source: 'meeting' | 'deal' | 'conversation' | 'restriction' | 'motion' };
-  who: { name: string; title: string | null; why: string; route: string | null; location?: string | null; inHubSpotOnly?: boolean; hubspotContactId?: string | null; personaId?: number | null; employment?: { state: string; label: string; why: string } | null } | null;
+  who: { name: string; title: string | null; why: string; route: string | null; location?: string | null; inHubSpotOnly?: boolean; hubspotContactId?: string | null; personaId?: number | null; employment?: { state: string; label: string; why: string } | null; role?: { state: string; label: string; why: string } | null } | null;
   /** A better-fit person on record who is not yet a GAP contact (shown beside the ready-card person). */
   betterFit: string | null;
   /** The HubSpot contact behind `betterFit` or a HubSpot-only WHO: the ADD TO GAP control (owner resolution). */
@@ -181,7 +182,7 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   else if (m.type === 'FOLLOW_UP' && m.who) who = { name: m.who, title: null, why: 'They are already talking to you: continue that thread.', route: null };
   else if (m.type === 'RELATIONSHIP_LED' && m.met) who = { name: displayName(m.met.name), title: m.met.title, why: `You met them at ${m.met.source} (${SOURCE_KIND[m.met.sourceType] ?? m.met.sourceType.replace(/_/g, ' ')})${m.met.company ? `; works at ${m.met.company}` : ''}.${m.met.title ? '' : ' Title not on record: confirm it before you write.'}`, route: null };
   else if ((m.type === 'REFERRAL_LED' || m.type === 'RELATIONSHIP_LED') && m.who) who = { name: m.who, title: null, why: `You have a way in: ${m.why.split(':')[0]}.`, route: null };
-  else if (p?.primary && !p.primary.doNotContact) who = { name: displayName(p.primary.name), title: p.primary.title, why: p.primary.why, route: null, location: p.primary.location ?? null, inHubSpotOnly: p.primary.source === 'hubspot', hubspotContactId: p.primary.hubspotContactId ?? null, personaId: p.primary.personaId ?? null, employment: p.primary.employment ? { state: p.primary.employment.state, label: EMPLOYMENT_LABEL[p.primary.employment.state], why: p.primary.employment.why } : null };
+  else if (p?.primary && !p.primary.doNotContact) who = { name: displayName(p.primary.name), title: p.primary.title, why: p.primary.why, route: null, location: p.primary.location ?? null, inHubSpotOnly: p.primary.source === 'hubspot', hubspotContactId: p.primary.hubspotContactId ?? null, personaId: p.primary.personaId ?? null, employment: p.primary.employment ? { state: p.primary.employment.state, label: EMPLOYMENT_LABEL[p.primary.employment.state], why: p.primary.employment.why } : null, role: p.primary.role && p.primary.role.state !== 'ROLE_UNVERIFIED' ? { state: p.primary.role.state, label: ROLE_LABEL[p.primary.role.state], why: p.primary.role.why } : null };
   // ONE ANSWER (click test P0): a first touch can only go where a READY card is. When the cockpit has one for this
   // account, NOW names that person (the cockpit's own pick, by the same prior) and says who is a better fit but not
   // yet a GAP contact; NEXT opens that card.

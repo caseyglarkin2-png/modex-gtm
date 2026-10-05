@@ -19,7 +19,9 @@ import { getFacilityFact } from '@/lib/research/facility-fact-registry';
 import type { AccountMicrositeData, AccountROIModel } from '@/lib/microsites/schema';
 import { buildAccountBrief, type AccountInputs, type AccountIntelligenceBrief, type FactInput, type PackInput } from './build';
 import { loadHubSpotPeople, loadHubSpotPeopleForCompanies, type HubSpotPeopleReads } from '../people/hubspot-people';
-import { accountEmploymentContext, loadEmployment, readHubSpotOnlyEmployment, type HubSpotEmploymentProps } from '../people/employment-store';
+import { apolloEvidence, crmEvidence, type EmploymentEvidence } from '../people/employment';
+import { accountEmploymentContext, loadEmployment, loadHubSpotContactRoleEvidence, personaRole, readHubSpotOnlyEmployment, type HubSpotEmploymentProps } from '../people/employment-store';
+import { readRole, type RoleRead } from '../people/role-currentness';
 import { stageLabels, type StageLabelRead } from '../opportunity/stage-labels';
 import { fetchAccountContextRows, loadAccountContext, projectAccountContext } from '../context/load';
 import type { AccountContext } from '../context/context';
@@ -271,9 +273,24 @@ export async function loadAccountInputs(
   const empCtx = lean ? { aliases: [] as string[], domains: [] as string[] } : await accountEmploymentContext(prisma, accountName).catch(() => ({ aliases: [] as string[], domains: [] as string[] }));
   const empAliases = [...new Set([...aliasList, ...(account.parent_brand ? [account.parent_brand] : []), ...empCtx.aliases])];
   const employment = lean || !(personas as Row[]).length ? new Map() : await loadEmployment(prisma, (personas as Row[]).map((p) => p.id as number), { now, hubspot: hsProps, aliasesFor: () => empAliases, domainsFor: () => empCtx.domains }).catch(() => new Map());
+  // ROLE currentness (WHO truth maintenance, 2026-10-05): the stored title against current evidence, for GAP contacts
+  // (the record plus anything verified against the linked HubSpot contact) and for HubSpot-only people (the CRM row,
+  // Apollo's sweep, anything verified against the contact id). A changed role with no known title, or a role
+  // conflict, never fills a slot; a verified new title is the title the buyer map reads.
+  const roleIds = lean ? [] : [...new Set([...(hsPeople?.people ?? []).map((h) => h.id), ...(personas as Row[]).map((p) => (p.hubspot_contact_id ? String(p.hubspot_contact_id) : '')).filter(Boolean)])];
+  const roleEvidence = roleIds.length ? await loadHubSpotContactRoleEvidence(prisma, roleIds).catch(() => new Map<string, EmploymentEvidence[]>()) : new Map<string, EmploymentEvidence[]>();
+  const roleView = (r: RoleRead) => ({ state: r.state, why: r.why, effectiveTitle: r.effectiveTitle, priorTitle: r.priorTitle, usableForRanking: r.usableForRanking });
+  const personaRoleOf = (p: Row) => {
+    const emp = employment.get(p.id);
+    if (!emp) return null;
+    const extra = p.hubspot_contact_id ? roleEvidence.get(String(p.hubspot_contact_id)) ?? [] : [];
+    const storedTitle = (p.title as string | null) ?? null;
+    const r = extra.length ? readRole({ accountName, aliases: empAliases, domains: empCtx.domains, storedTitle, evidence: [...emp.evidence, ...extra], now }) : personaRole(emp, storedTitle, { now, aliases: empAliases, domains: empCtx.domains });
+    return roleView(r);
+  };
   // HubSpot-only people carry the same read (the CRM field and Apollo's sweep), so a moved person never becomes WHO.
   const hsWithEmployment = hsPeople && !lean
-    ? { ...hsPeople, people: hsPeople.people.map((h) => { const e = readHubSpotOnlyEmployment({ accountName, aliases: empAliases, domains: empCtx.domains, props: hsProps.get(h.id)!, now }); return { ...h, employment: { state: e.state, why: e.why, elsewhere: e.elsewhere ? { company: e.elsewhere.company, title: e.elsewhere.title } : null } }; }) }
+    ? { ...hsPeople, people: hsPeople.people.map((h) => { const e = readHubSpotOnlyEmployment({ accountName, aliases: empAliases, domains: empCtx.domains, props: hsProps.get(h.id)!, now }); const role = readRole({ accountName, aliases: empAliases, domains: empCtx.domains, storedTitle: h.title, crmTitle: h.title, evidence: [...crmEvidence({ company: h.company ?? null, title: h.title, email: null, lastModifiedAt: h.lastModifiedAt ?? null }), ...apolloEvidence({ status: h.apolloEmploymentStatus ?? null, verifiedAt: h.apolloVerifiedAt ?? null, accountName, title: h.title }), ...(roleEvidence.get(h.id) ?? [])], now }); return { ...h, employment: { state: e.state, why: e.why, elsewhere: e.elsewhere ? { company: e.elsewhere.company, title: e.elsewhere.title } : null }, role: roleView(role) }; }) }
     : hsPeople;
 
   return {
@@ -305,7 +322,7 @@ export async function loadAccountInputs(
     bids: confirmed.map((b) => ({ id: b.id, type: b.type, summary: b.normalized_summary ?? b.raw_buyer_language, quote: b.raw_buyer_language, who: b.contact_email ?? null, at: new Date(b.confirmed_at ?? b.captured_at).toISOString(), hypothesisId: b.hypothesis_id ?? null })),
     personas: (personas as Row[]).map((p) => {
       const emp = employment.get(p.id) ?? null;
-      return { id: p.id, name: p.name, title: p.title ?? null, doNotContact: !!p.do_not_contact, hasEmail: !!p.email, emailStatus: p.email_status ?? null, updatedAt: iso(p.updated_at), hubspotContactId: p.hubspot_contact_id ?? null, apolloEnrichedAt: p.enrichment?.apollo_person_id ? iso(p.enrichment.last_enriched_at) : null, location: p.hubspot_contact_id ? hsById.get(String(p.hubspot_contact_id))?.location ?? null : null, employment: emp ? { state: emp.state, why: emp.why, elsewhere: emp.elsewhere ? { company: emp.elsewhere.company, title: emp.elsewhere.title } : null } : null };
+      return { id: p.id, name: p.name, title: p.title ?? null, doNotContact: !!p.do_not_contact, hasEmail: !!p.email, emailStatus: p.email_status ?? null, updatedAt: iso(p.updated_at), hubspotContactId: p.hubspot_contact_id ?? null, apolloEnrichedAt: p.enrichment?.apollo_person_id ? iso(p.enrichment.last_enriched_at) : null, location: p.hubspot_contact_id ? hsById.get(String(p.hubspot_contact_id))?.location ?? null : null, employment: emp ? { state: emp.state, why: emp.why, elsewhere: emp.elsewhere ? { company: emp.elsewhere.company, title: emp.elsewhere.title } : null } : null, role: personaRoleOf(p) };
     }),
     hubspotPeople: hsWithEmployment,
     candidates: (candidates as Row[]).map((c) => ({ id: c.id, name: c.full_name, title: c.title ?? null, state: c.state, seenAt: iso(c.last_seen_at) })),

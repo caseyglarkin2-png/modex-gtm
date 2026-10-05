@@ -84,7 +84,8 @@ export type GapAuditKind =
   | 'account.vertical_corrected'
   | 'suppression.reviewed'
   | 'suppression.corrected'
-  | 'suppression.correction_refused';
+  | 'suppression.correction_refused'
+  | 'suppression.correction_reverted';
 
 export interface HypothesisEventInput {
   hypothesisId: string;

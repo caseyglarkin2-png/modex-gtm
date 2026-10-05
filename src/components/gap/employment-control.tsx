@@ -47,7 +47,7 @@ export function verifyOutcomeText(v: Verification | undefined, input: { name: st
   return `No source-backed answer${v?.summary ? ` (${v.summary})` : ''}. Nothing was asserted.`;
 }
 
-export function EmploymentControl({ personaId, hubspotContactId, name, accountName, title, state, compact = false }: { personaId?: number; /** A HubSpot-only person: verify only, through /api/gap/people/verify-role. */ hubspotContactId?: string; name: string; accountName: string; /** The stored title, for the sentence and the HubSpot-only body. */ title?: string | null; state?: { label: string; why: string } | null; compact?: boolean }) {
+export function EmploymentControl({ personaId, hubspotContactId, name, accountName, title, state, compact = false, onDone }: { personaId?: number; /** A HubSpot-only person: verify only, through /api/gap/people/verify-role. */ hubspotContactId?: string; name: string; accountName: string; /** The stored title, for the sentence and the HubSpot-only body. */ title?: string | null; state?: { label: string; why: string } | null; compact?: boolean; /** After a recorded correction or verification (the owner panel refetches its resolution). */ onDone?: () => void }) {
   const router = useRouter();
   const [mode, setMode] = useState<null | 'left' | 'role_changed'>(null);
   const [company, setCompany] = useState('');
@@ -71,6 +71,7 @@ export function EmploymentControl({ personaId, hubspotContactId, name, accountNa
       setOutcome({ ok: true, text: done(b) });
       setMode(null);
       router.refresh();
+      onDone?.();
     } catch (e) {
       setOutcome({ ok: false, text: e instanceof Error ? e.message : 'network error' });
     } finally {

@@ -10,9 +10,13 @@
  */
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
+import type { AliasProposal } from '@/lib/gap/people/alias-review';
 import type { OwnerCandidate, OwnerResolution } from '@/lib/gap/people/owner-resolution';
 import type { UseOwnerResult } from '@/lib/gap/people/owner-action';
 import { refusalCopy, refusalSentence } from '@/lib/gap/ui/refusal-copy';
+import { AliasProposalControl } from './alias-proposal-control';
+import { EmploymentControl } from './employment-control';
+import { LegacySuppressionReview } from './legacy-suppression-review';
 import { UseOutcome, type UseOutcomeResponse } from './use-outcome';
 
 export interface OwnerResolutionPanelProps {
@@ -22,7 +26,10 @@ export interface OwnerResolutionPanelProps {
   onChanged?: (result: { to: string | null }) => void;
 }
 
-type Load = { state: 'loading' } | { state: 'error'; text: string } | { state: 'ready'; resolution: OwnerResolution };
+type Load = { state: 'loading' } | { state: 'error'; text: string } | { state: 'ready'; resolution: OwnerResolution; aliasProposals: AliasProposal[] };
+
+/** Only the top candidates whose role nobody has verified offer VERIFY CURRENT ROLE: never on render, one click, one bounded check. */
+const VERIFY_TOP = 3;
 
 const STEP_LABEL: Record<string, string> = { import: 'Add to GAP', check: 'Check', assign: 'Attach', activate: 'Use in routing', route: 'Route' };
 
@@ -41,17 +48,18 @@ export function OwnerResolutionPanel({ hypothesisId, accountName, onChanged }: O
   const [result, setResult] = useState<UseOwnerResult | null>(null);
   const [research, setResearch] = useState<string | null>(null);
   const [showExcluded, setShowExcluded] = useState(false);
+  const [reviewing, setReviewing] = useState<number | null>(null);
 
   async function fetchResolution() {
     setLoad({ state: 'loading' });
     try {
       const res = await fetch(`/api/gap/hypotheses/${encodeURIComponent(hypothesisId)}/owner`, { cache: 'no-store' });
-      const body = (await res.json().catch(() => ({}))) as { resolution?: OwnerResolution; error?: string };
+      const body = (await res.json().catch(() => ({}))) as { resolution?: OwnerResolution; aliasProposals?: AliasProposal[]; error?: string };
       if (!res.ok || !body.resolution) {
         setLoad({ state: 'error', text: `Could not read the people on record (${body.error ?? res.status}).` });
         return;
       }
-      setLoad({ state: 'ready', resolution: body.resolution });
+      setLoad({ state: 'ready', resolution: body.resolution, aliasProposals: body.aliasProposals ?? [] });
       setChosen(body.resolution.preselected);
     } catch (e) {
       setLoad({ state: 'error', text: e instanceof Error ? e.message : 'network error' });
@@ -139,6 +147,13 @@ export function OwnerResolutionPanel({ hypothesisId, accountName, onChanged }: O
                       Role: {c.role.label}. {c.role.why}
                     </p>
                   ) : null}
+                  {i < VERIFY_TOP && (!c.role || c.role.state === 'ROLE_UNVERIFIED') ? (
+                    c.personaId !== null ? (
+                      <EmploymentControl personaId={c.personaId} name={c.name} title={c.title} accountName={accountName} compact onDone={() => void fetchResolution()} />
+                    ) : c.hubspotContactId ? (
+                      <EmploymentControl hubspotContactId={c.hubspotContactId} name={c.name} title={c.title} accountName={accountName} compact onDone={() => void fetchResolution()} />
+                    ) : null
+                  ) : null}
                   {c.location ? <p className="text-xs text-[var(--muted-foreground)]">{c.location}</p> : null}
                   <ul className="mt-1 space-y-0.5 text-xs text-[var(--muted-foreground)]">
                     {c.reasons.map((why) => (
@@ -209,10 +224,34 @@ export function OwnerResolutionPanel({ hypothesisId, accountName, onChanged }: O
                 <li key={e.candidate.key} data-code={e.code}>
                   <span className="font-medium">{e.candidate.name}</span>
                   {e.candidate.title ? <span className="text-[var(--muted-foreground)]">, {e.candidate.title}</span> : null}: {e.reason}
+                  {e.code === 'do_not_contact' && e.candidate.personaId !== null ? (
+                    <>
+                      {' '}
+                      <button type="button" className="underline" onClick={() => setReviewing((v) => (v === e.candidate.personaId ? null : e.candidate.personaId))} data-testid="owner-review-suppression" data-persona={e.candidate.personaId}>
+                        {reviewing === e.candidate.personaId ? 'Hide the review' : 'Review the legacy flag'}
+                      </button>
+                      {reviewing === e.candidate.personaId ? <LegacySuppressionReview personaId={e.candidate.personaId} name={e.candidate.name} accountName={accountName} onCleared={() => void fetchResolution()} /> : null}
+                    </>
+                  ) : null}
+                  {e.code === 'role_changed' || e.code === 'role_conflict' ? (
+                    e.candidate.personaId !== null ? (
+                      <EmploymentControl personaId={e.candidate.personaId} name={e.candidate.name} title={e.candidate.title} accountName={accountName} compact onDone={() => void fetchResolution()} />
+                    ) : e.candidate.hubspotContactId ? (
+                      <EmploymentControl hubspotContactId={e.candidate.hubspotContactId} name={e.candidate.name} title={e.candidate.title} accountName={accountName} compact onDone={() => void fetchResolution()} />
+                    ) : null
+                  ) : null}
                 </li>
               ))}
             </ul>
           ) : null}
+        </div>
+      ) : null}
+      {load.aliasProposals.length ? (
+        <div className="space-y-1 text-xs" data-testid="owner-alias-proposals">
+          <p className="font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Possible account aliases (confirm or reject; nothing changes until you do)</p>
+          {load.aliasProposals.map((p) => (
+            <AliasProposalControl key={p.key} proposal={p} onDecided={() => void fetchResolution()} />
+          ))}
         </div>
       ) : null}
       <p className="text-[11px] text-[var(--muted-foreground)]">Checked first: {r.checked.join(' · ')}. {r.apollo.note}</p>

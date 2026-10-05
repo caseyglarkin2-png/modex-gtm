@@ -334,6 +334,8 @@ describe('recordUnsubscribe helper', () => {
  */
 const SCAN_ROOTS = ['src/lib/gap', 'src/app/api/gap'];
 const WRITER = 'src/lib/email/unsubscribe.ts';
+/** The one governed CLEAR (WHO truth maintenance, 2026-10-05): Casey's confirmed click after a live legacy review; also outside the scan roots. */
+const CLEARER = 'src/lib/email/suppression-correction.ts';
 
 function walk(dir: string, out: string[] = []): string[] {
   if (!existsSync(dir)) return out;
@@ -380,6 +382,13 @@ describe('structural invariant: the helper is the only GAP writer of Persona.do_
 
   it('positive control: the detector flags the helper in src/lib/email', () => {
     expect(writesDoNotContact(readFileSync(path.join(root, WRITER), 'utf8'))).toBe(true);
+  });
+
+  it('positive control: the detector flags the one governed clear in src/lib/email, which only ever sets the column false', () => {
+    const src = readFileSync(path.join(root, CLEARER), 'utf8');
+    expect(writesDoNotContact(src)).toBe(true);
+    expect(src).toMatch(/set do_not_contact = false/);
+    expect(src).not.toMatch(/set do_not_contact = true/);
   });
 
   it('no file under src/lib/gap or src/app/api/gap writes do_not_contact', () => {
