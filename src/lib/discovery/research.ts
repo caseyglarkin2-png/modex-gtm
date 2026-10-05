@@ -15,20 +15,25 @@
  * Only imported from the `'use server'` discovery actions (server-side).
  */
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import { rankWho, readPerson, type PersonLane } from '@/lib/gap/people/person-prior';
+import { isSponsor, rankWho, readPerson, type PersonLane } from '@/lib/gap/people/person-prior';
 
 /** The responsibility slot a researched person fills, in the order research asks for them. */
 export type ResearchSlot = 'DIRECT_OPERATOR' | 'TRANSPORTATION_TECH' | 'EXECUTIVE_SPONSOR' | 'SITE_OPERATOR' | 'OTHER';
 export const SLOT_ORDER: ResearchSlot[] = ['DIRECT_OPERATOR', 'TRANSPORTATION_TECH', 'EXECUTIVE_SPONSOR', 'SITE_OPERATOR', 'OTHER'];
 
-/** The slot from the GAP person prior's reading of the title (never the model's own label). */
+/**
+ * The slot from the GAP person prior's reading of the title (never the model's own label). The sponsor is the one
+ * sponsor rule; any other supply chain, warehouse, DC, plant or regional operations leader is a SITE / regional
+ * operator (the local leaders /discovery asks for near a facility; review S7).
+ */
 export function slotForTitle(title: string | null | undefined): { slot: ResearchSlot; lane: PersonLane } {
   const r = readPerson(title);
   const slot: ResearchSlot =
     r.lane === 'PRIMARY_OPERATOR' ? 'DIRECT_OPERATOR'
     : r.lane === 'TRANSFORMATION_TECH' && r.ownership > 0 ? 'TRANSPORTATION_TECH'
-    : r.lane === 'ADJACENT_OPERATOR' || r.lane === 'EXECUTIVE_SPONSOR' ? 'EXECUTIVE_SPONSOR'
-    : r.lane === 'FACILITY_OPERATOR' ? 'SITE_OPERATOR'
+    : isSponsor(r, title) ? 'EXECUTIVE_SPONSOR'
+    : r.lane === 'FACILITY_OPERATOR' || r.lane === 'ADJACENT_OPERATOR' ? 'SITE_OPERATOR'
+    : r.lane === 'NEEDS_REVIEW' && /\b(plant|manufacturing|production)\b/i.test(String(title ?? '')) ? 'SITE_OPERATOR'
     : 'OTHER';
   return { slot, lane: r.lane };
 }
@@ -191,7 +196,7 @@ export function buildContactResearchPrompt(company: string, loc?: ResearchLocati
     `2. "TRANSPORTATION_TECH": who owns transportation / logistics / fleet technology or transformation (TMS, control tower,`,
     `   visibility, yard technology, fleet transformation). A generic innovation, IT or digital title does NOT qualify.`,
     `3. "EXECUTIVE_SPONSOR": the supply chain executive over them (VP Supply Chain, Chief Supply Chain Officer, COO). One person.`,
-    place ? `4. "SITE_OPERATOR": the site, plant, DC or yard leader at their facility near ${place}${region}. Optional.` : `4. "SITE_OPERATOR": a site, plant, DC or yard leader. Optional; only if clearly useful.`,
+    place ? `4. "SITE_OPERATOR": the site, plant, DC, yard or regional operations leaders for their facility near ${place}${region} (up to 3).` : `4. "SITE_OPERATOR": a site, plant, DC or yard leader. Optional; only if clearly useful.`,
     ``,
     `Do NOT return procurement, sourcing, transportation finance, compliance-only, safety-only, sustainability-only, HR,`,
     `communications, sales or marketing people.`,
@@ -211,11 +216,13 @@ export function buildContactResearchPrompt(company: string, loc?: ResearchLocati
  * Keep only source-backed people in a relevant slot, ordered by slot (operator first) and, inside a slot, by the GAP
  * person prior (named transportation ownership, scope, US market, seniority); at most 2 per slot.
  */
-export function sourceBackedBySlot(people: ResearchedContact[]): ResearchedContact[] {
+export function sourceBackedBySlot(people: ResearchedContact[], opts: { siteCap?: number } = {}): ResearchedContact[] {
   const kept = people.filter((p) => p.sourceUrl && p.slot && p.slot !== 'OTHER');
-  const ranked = rankWho(kept.map((p, i) => ({ key: String(i), name: p.name, title: p.title ?? null, location: p.location ?? null, reachable: false, person: p }))).map((r) => r.candidate.person);
+  const ranked = rankWho(kept.map((p, i) => ({ key: String(i), name: p.name, title: p.title ?? null, location: p.location ?? null, reachable: false, person: p })));
+  // Someone based outside North America never takes a place from someone in it (review N2): they go last in their slot.
+  const ordered = [...ranked.filter((r) => r.read.region !== 'OTHER_REGION'), ...ranked.filter((r) => r.read.region === 'OTHER_REGION')].map((r) => r.candidate.person);
   const out: ResearchedContact[] = [];
-  for (const slot of SLOT_ORDER) out.push(...ranked.filter((p) => p.slot === slot).slice(0, 2));
+  for (const slot of SLOT_ORDER) out.push(...ordered.filter((p) => p.slot === slot).slice(0, slot === 'SITE_OPERATOR' ? opts.siteCap ?? 2 : 2));
   return out;
 }
 
@@ -236,7 +243,8 @@ export async function researchDecisionMakers(company: string, loc?: ResearchLoca
       generationConfig: { temperature: 0.2, maxOutputTokens: 2048 },
     });
     const result = await model.generateContent(buildContactResearchPrompt(company, loc));
-    return sourceBackedBySlot(parseResearchedContacts(result.response.text()));
+    // Near a facility, /discovery wants the local leaders too: up to 3 site / regional operators.
+    return sourceBackedBySlot(parseResearchedContacts(result.response.text()), { siteCap: loc?.city || loc?.state ? 3 : 2 });
   } catch {
     return [];
   }

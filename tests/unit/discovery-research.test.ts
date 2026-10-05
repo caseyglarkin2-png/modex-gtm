@@ -97,4 +97,20 @@ describe('operator-first contact research (GAP seller correction, 2026-10-04)', 
     expect(a.email).toBeUndefined();
     expect(b).toMatchObject({ email: 'pub@acme.com', emailSourceUrl: 'https://acme.com/contact' });
   });
+  it('review S7: /discovery keeps local site and regional leaders (site slot, up to 3 near a facility); the sponsor is the sponsor rule', async () => {
+    const { parseResearchedContacts, sourceBackedBySlot } = await import('@/lib/discovery/research');
+    const people = parseResearchedContacts(JSON.stringify(['Plant Director', 'DC Director', 'Director of Manufacturing', 'Operations Manager', 'Warehouse Operations Manager', 'Regional Logistics Manager', 'VP Supply Chain'].map((title, i) => ({ name: `P${i} Person`, title, sourceUrl: `https://x.example/${i}` }))));
+    expect(people.map((p) => p.slot)).toEqual(['SITE_OPERATOR', 'SITE_OPERATOR', 'SITE_OPERATOR', 'SITE_OPERATOR', 'SITE_OPERATOR', 'SITE_OPERATOR', 'EXECUTIVE_SPONSOR']);
+    expect(sourceBackedBySlot(people, { siteCap: 3 }).filter((p) => p.slot === 'SITE_OPERATOR')).toHaveLength(3);
+    expect(sourceBackedBySlot(people).filter((p) => p.slot === 'SITE_OPERATOR')).toHaveLength(2);
+  });
+  it('review N2: operators based outside North America never push out one in it', async () => {
+    const { parseResearchedContacts, sourceBackedBySlot } = await import('@/lib/discovery/research');
+    const people = parseResearchedContacts(JSON.stringify([
+      { name: 'De Op', title: 'Director of Transportation', location: 'Hamburg, Germany', sourceUrl: 'https://x.example/1' },
+      { name: 'Sg Op', title: 'Director of Transportation', location: 'Singapore, Singapore', sourceUrl: 'https://x.example/2' },
+      { name: 'Us Op', title: 'Director, Logistics', location: 'Dallas, Texas, United States', sourceUrl: 'https://x.example/3' },
+    ]));
+    expect(sourceBackedBySlot(people).map((p) => p.name)[0]).toBe('Us Op');
+  });
 });

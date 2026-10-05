@@ -76,14 +76,19 @@ async function main() {
         if (flags.has('--stage')) {
           for (const f of stage) {
             const key = `${normalizeName(f.name)}::${normalizeTitle(f.title ?? '')}`;
-            await prisma.accountContactCandidate.upsert({
-              where: { account_name_candidate_key: { account_name: a.account, candidate_key: key } },
-              update: { last_seen_at: new Date(), source_payload: { ...f } as never },
-              create: {
+            // A row already on record (staged, deferred, promoted or replaced) is Casey's: never re-staged or overwritten.
+            const existing = await prisma.accountContactCandidate.findUnique({ where: { account_name_candidate_key: { account_name: a.account, candidate_key: key } }, select: { state: true } });
+            if (existing) {
+              console.log(`    already on record (state ${existing.state}): ${f.name}; nothing written`);
+              continue;
+            }
+            await prisma.accountContactCandidate.create({
+              data: {
                 account_name: a.account, candidate_key: key, full_name: f.name, normalized_name: normalizeName(f.name), title: f.title ?? null,
                 email: f.email ?? null, email_valid: false, linkedin_url: f.linkedinUrl ?? null, source: 'web_research', source_action: 'operator_contact_audit',
-                source_provider: 'gemini_grounded_search', source_payload: { ...f } as never, recommended: true,
-                recommendation_reason: `Direct operator from public research (${f.sourceUrl}); verify the current role before promoting.`, state: 'staged',
+                // Never recommended by default: a model-found person is verified by Casey before anything else (review N3).
+                source_provider: 'gemini_grounded_search', source_payload: { ...f } as never, recommended: false,
+                recommendation_reason: `Possible direct operator from public research (${f.sourceUrl}${f.sourceUrl === f.linkedinUrl ? ', a profile link the model returned' : ''}); verify the current role and the source before promoting.`, state: 'staged',
               },
             });
             console.log(`    STAGED for review: ${f.name} (${f.title})`);
