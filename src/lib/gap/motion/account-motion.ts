@@ -59,6 +59,9 @@ export interface FirstTouch {
   released: boolean;
   /** A first-touch Gmail draft not yet sent or deleted: it holds the account until it is (review C P1). */
   outstanding?: boolean;
+  /** The routing decision and the Gmail draft behind an outstanding draft (owner resolution: the remediation control). */
+  decisionId?: string;
+  gmailDraftId?: string;
 }
 
 export interface MotionPerson {

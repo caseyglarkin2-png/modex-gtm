@@ -42,6 +42,7 @@ import { extractCitationIds } from '@/lib/gap/hypothesis/observation';
 import type { Actionability } from '@/lib/gap/hypothesis/actionability';
 import { refusalCopy, refusalSentence } from '@/lib/gap/ui/refusal-copy';
 import { AddFactForm } from './add-fact-form';
+import { OwnerResolutionPanel } from './owner-resolution-panel';
 import { FactBlock, HypothesisBlock, type FactSignal } from './fact-hypothesis-blocks';
 import { UseOutcome, type UseOutcomeResponse } from './use-outcome';
 
@@ -79,6 +80,8 @@ export interface HypothesisRow {
   problem_family: string;
   persona: string;
   status: HypothesisStatus;
+  /** The person the hypothesis is tested with; null on an account-level row (owner resolution fills it). */
+  primary_persona_id?: number | null;
   confidence: number;
   observation: string;
   problem_hypothesis: string;
@@ -228,16 +231,24 @@ export function HypothesisDrawer({ hypothesis, onClose, onTransition, onChanged,
   const [error, setError] = useState<string | null>(null);
   const [justActivated, setJustActivated] = useState(false);
   const [routing, setRouting] = useState<UseOutcomeResponse | null>(null);
+  // Owner resolution (2026-10-05): an approved hypothesis with nobody to test it with never dead-ends on the
+  // machine's `no_persona`; the seller sees the people on record and chooses. Opened by the row's state, or by a
+  // use / approve + use that the machine refused for that one reason.
+  const [ownerNotice, setOwnerNotice] = useState<string | null>(null);
 
   // A fresh hypothesis in the drawer (Previous/Next, or opening a new row)
   // never inherits the previous one's "just activated" banner.
   useEffect(() => {
     setJustActivated(false);
     setRouting(null);
+    setOwnerNotice(null);
   }, [hypothesis.id]);
 
   const status = hypothesis.status;
   const terminal = isTerminalStatus(status);
+  // Only an explicitly loaded null person (the GET row carries the column; a list row may not) or the machine's own
+  // no_persona answer opens owner resolution; an unknown column never hides the ordinary buttons.
+  const needsOwner = (status === 'approved' && hypothesis.primary_persona_id === null) || ownerNotice !== null;
   const actions = terminal ? [] : legalActionsFor(status);
   const evidenced = hasCitedFact(hypothesis);
   const needsReasonInput = actions.some((action) => REASON_ACTIONS.has(action));
@@ -248,13 +259,14 @@ export function HypothesisDrawer({ hypothesis, onClose, onTransition, onChanged,
   // The server knows the observation is not ready for outreach: approve / use would be refused.
   const blockedByEvidence = hypothesis.actionability ? !hypothesis.actionability.canApprove && !hypothesis.actionability.canUse && (status === 'draft' || status === 'review_required' || status === 'approved') : false;
   const evidenceCopy = blockedByEvidence ? refusalCopy(hypothesis.actionability?.reason ?? 'evidence_insufficient') : null;
-  const primaryAction = blockedByEvidence ? undefined : PRIMARY_ACTION[status];
+  // With no person attached, the primary action IS owner resolution (its panel carries the use buttons).
+  const primaryAction = blockedByEvidence || needsOwner ? undefined : PRIMARY_ACTION[status];
   const secondaryActions = actions.filter((action) => action !== primaryAction);
   // When a primary action exists, the sticky decision area above already
   // renders it plus every non-reason secondary action; this lower section
   // then carries only the reason-requiring actions (which need the Reason
   // input right here) so no button renders twice with the same name.
-  const lowerActions = primaryAction || blockedByEvidence ? actions.filter((action) => REASON_ACTIONS.has(action)) : actions;
+  const lowerActions = primaryAction || blockedByEvidence || needsOwner ? actions.filter((action) => REASON_ACTIONS.has(action)) : actions;
   const showFastReview = Boolean(onPrevious || onNext);
 
   async function run(action: HypothesisAction) {
@@ -277,6 +289,10 @@ export function HypothesisDrawer({ hypothesis, onClose, onTransition, onChanged,
       }
       const payload = (json && typeof json === 'object' ? json : {}) as Record<string, unknown>;
       if (!res.ok) {
+        if (payload.error === 'no_persona') {
+          setOwnerNotice(describeRefusal('no_persona'));
+          return;
+        }
         setError(typeof payload.error === 'string' ? describeRefusal(payload.error) : `HTTP ${res.status}`);
         return;
       }
@@ -308,7 +324,14 @@ export function HypothesisDrawer({ hypothesis, onClose, onTransition, onChanged,
       });
       const payload = ((await res.json().catch(() => ({}))) ?? {}) as Record<string, unknown>;
       if (!res.ok) {
-        const code = typeof payload.detail === 'string' ? payload.detail.replace(/^.*refused: /, '') : typeof payload.error === 'string' ? payload.error : `HTTP ${res.status}`;
+        const code = typeof payload.reason === 'string' ? payload.reason : typeof payload.detail === 'string' ? payload.detail.replace(/^.*refused: /, '') : typeof payload.error === 'string' ? payload.error : `HTTP ${res.status}`;
+        // Approved, but not in use for want of a person: owner resolution, not a refusal. The approval stands and
+        // the list refreshes to the new status.
+        if (code === 'no_persona') {
+          setOwnerNotice(describeRefusal('no_persona'));
+          if (payload.to === 'approved' && status !== 'approved') onTransition({ from: status, to: 'approved', effects: [] });
+          return;
+        }
         setError(describeRefusal(code));
         return;
       }
@@ -353,6 +376,26 @@ export function HypothesisDrawer({ hypothesis, onClose, onTransition, onChanged,
           <div data-testid="hypothesis-activated-banner" className="mt-3">
             <UseOutcome approved={1} inUse={1} routing={routing} />
           </div>
+        ) : null}
+
+        {needsOwner && !terminal ? (
+          <>
+            {ownerNotice ? (
+              <p data-testid="hypothesis-owner-notice" role="status" className="mt-3 text-sm font-medium">
+                {ownerNotice}
+              </p>
+            ) : null}
+            <OwnerResolutionPanel
+              hypothesisId={hypothesis.id}
+              accountName={hypothesis.account_name}
+              onChanged={(r) => {
+                setOwnerNotice(null);
+                if (r.to === 'active') setJustActivated(true);
+                if (onChanged) onChanged();
+                else onTransition({ from: status, to: (r.to as HypothesisStatus | null) ?? status, effects: ['owner_resolved'] });
+              }}
+            />
+          </>
         ) : null}
 
         {blockedByEvidence ? (

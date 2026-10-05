@@ -21,6 +21,7 @@ import { decideApproach } from '../motion/approach';
 import { restrictionFor } from '../policy/restriction';
 import { computeAccountMotion } from '../motion/account-motion';
 import { isColdWho, isDefaultWho, isSponsor, LANE_LABEL, rankWho, type PersonLane, type PersonRegion, GeoStatus } from '../people/person-prior';
+import { employmentBlocksOutreach, type EmploymentState } from '../people/employment';
 import { divisionOf, divisionsFor, sitesByDivision } from '../people/division';
 
 // ---------------------------------------------------------------- inputs (what load.ts gathers)
@@ -87,6 +88,8 @@ export interface PersonaInput {
   location?: string | null;
   /** When Apollo last enriched this person (a prior result: never spend on them again by accident). */
   apolloEnrichedAt?: string | null;
+  /** Contact currentness at this account (people/employment.ts): LEFT or CONFLICT never fills a slot. */
+  employment?: { state: EmploymentState; why: string; elsewhere: { company: string | null; title: string | null } | null } | null;
 }
 
 interface PackSite {
@@ -131,7 +134,7 @@ export interface AccountInputs {
   personas: PersonaInput[];
   candidates: Array<{ id: number; name: string; title: string | null; state: string; seenAt?: string | null }>;
   memberships: Array<{ sourceName: string; sourceType: string; relationshipContext: string | null; personName: string | null; doNotContact?: boolean; addedAt?: string | null; title?: string | null; company?: string | null }>;
-  firstTouches: Array<{ recipient: string; sentAt: string | null; state: string }>;
+  firstTouches: Array<{ recipient: string; sentAt: string | null; state: string; personaId?: number | null; decisionId?: string; gmailDraftId?: string }>;
   conversation: { who: string; responseClass: string; at: string } | null;
   /** null = not read this time (the section says so). */
   opportunity: { status: 'CLEAR' | 'ACTIVE' | 'UNKNOWN'; detail: string; deals: Array<{ name: string | null; stage: string | null; amount?: string | null; closeDate?: string | null; nextStep?: string | null }>; unlinked?: boolean } | null;
@@ -306,6 +309,12 @@ export interface MappedPerson {
   location?: string | null;
   /** 'gap': a GAP contact (persona). 'hubspot': in HubSpot only, not yet a GAP contact (never auto-created). */
   source?: 'gap' | 'hubspot';
+  /** The GAP persona id (a GAP contact), for the seller controls. */
+  personaId?: number | null;
+  /** The HubSpot contact id (a HubSpot person, or a linked GAP contact), for ADD TO GAP. */
+  hubspotContactId?: string | null;
+  /** Contact currentness at this account; a LEFT or CONFLICT person is shown as historical and fills no slot. */
+  employment?: PersonaInput['employment'];
 }
 
 export interface BuyerMap {
@@ -1201,25 +1210,29 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
   // "the first contact on record".
   // COLD WHO (seller correction, 2026-10-04): the fact-led motion's person is a direct freight operator among the GAP
   // contacts, never a VP Supply Chain or another adjacent role merely because no operator is a GAP contact yet.
+  // Contact currentness (owner resolution, 2026-10-05): a person who left this account, or whose employer is in
+  // conflict, is never WHO, never a slot, never the motion's person; they stay in the buyer map as historical.
+  const gone = (p: Pick<PersonaInput, 'employment'> | null | undefined) => !!p?.employment && employmentBlocksOutreach(p.employment.state);
   const ranked = rankWho(i.personas.map((p) => ({ key: String(p.id), name: p.name, title: p.title, location: p.location ?? null, reachable: !p.doNotContact && p.hasEmail, doNotContact: p.doNotContact, persona: p })), { entityType: fit.entityType });
-  const operating = ranked.filter((r) => isColdWho(r.read) && !r.candidate.doNotContact);
+  const operating = ranked.filter((r) => isColdWho(r.read) && !r.candidate.doNotContact && !gone(r.candidate.persona));
   const pick = operating.find((r) => r.candidate.reachable) ?? operating[0] ?? null;
   // The OWNER line still names a do-not-contact operating owner, flagged (never silently skipped); WHO never picks them.
-  const persona = pick?.candidate.persona ?? ranked.find((r) => isColdWho(r.read))?.candidate.persona;
+  const persona = pick?.candidate.persona ?? ranked.find((r) => isColdWho(r.read) && !gone(r.candidate.persona))?.candidate.persona;
   // THE BUYER MAP spans GAP's contacts AND the account's people in HubSpot (live, read-only): a HubSpot person who
   // is not a GAP contact (no persona carries their hubspot_contact_id) is ranked by the same prior and marked so.
   const linked = new Set(i.personas.map((p) => p.hubspotContactId).filter((x): x is string => !!x));
   const hsOnly = (i.hubspotPeople?.people ?? []).filter((h) => !linked.has(h.id));
   const everyone = rankWho(
     [
-      ...i.personas.map((p) => ({ key: `gap:${p.id}`, name: p.name, title: p.title, location: p.location ?? null, reachable: !p.doNotContact && p.hasEmail, doNotContact: p.doNotContact, source: 'gap' as const })),
-      ...hsOnly.map((h) => ({ key: `hubspot:${h.id}`, name: h.name, title: h.title, location: h.location, reachable: false, doNotContact: !!h.optedOut, source: 'hubspot' as const })),
+      ...i.personas.map((p) => ({ key: `gap:${p.id}`, name: p.name, title: p.title, location: p.location ?? null, reachable: !p.doNotContact && p.hasEmail, doNotContact: p.doNotContact, source: 'gap' as const, personaId: p.id, hubspotContactId: p.hubspotContactId ?? null, employment: p.employment ?? null })),
+      ...hsOnly.map((h) => ({ key: `hubspot:${h.id}`, name: h.name, title: h.title, location: h.location, reachable: false, doNotContact: !!h.optedOut, source: 'hubspot' as const, personaId: null, hubspotContactId: h.id, employment: null })),
     ],
     { entityType: fit.entityType },
   );
-  const mapped = (r: (typeof everyone)[number]): MappedPerson => ({ name: r.candidate.name, title: r.candidate.title, lane: r.read.lane, laneLabel: LANE_LABEL[r.read.lane], region: r.read.region, geo: r.read.geo, why: r.why, reachable: r.candidate.reachable, doNotContact: !!r.candidate.doNotContact, division: divisionOf(i.account.name, r.candidate.title), location: r.candidate.location ?? null, source: r.candidate.source });
+  const mapped = (r: (typeof everyone)[number]): MappedPerson => ({ name: r.candidate.name, title: r.candidate.title, lane: r.read.lane, laneLabel: LANE_LABEL[r.read.lane], region: r.read.region, geo: r.read.geo, why: r.why, reachable: r.candidate.reachable, doNotContact: !!r.candidate.doNotContact, division: divisionOf(i.account.name, r.candidate.title), location: r.candidate.location ?? null, source: r.candidate.source, personaId: r.candidate.personaId, hubspotContactId: r.candidate.hubspotContactId, employment: r.candidate.employment });
   // A HubSpot record with no name ("(no name in HubSpot)") stays in the lanes but fills no slot: nobody to address.
-  const contactable = everyone.filter((r) => !r.candidate.doNotContact && r.read.remit !== 'OTHER_REGION' && !/^\(no name/.test(r.candidate.name));
+  // A departed or conflicted GAP contact fills no slot either (shown in the lanes as historical).
+  const contactable = everyone.filter((r) => !r.candidate.doNotContact && r.read.remit !== 'OTHER_REGION' && !/^\(no name/.test(r.candidate.name) && !gone(r.candidate));
   const opAll = contactable.filter((r) => isColdWho(r.read));
   // The prior's best across both: a reachable GAP contact wins a tie (it can be worked today); a HubSpot-only person
   // wins when the prior ranks them higher (a better-fit owner). Only a direct operator is the primary.

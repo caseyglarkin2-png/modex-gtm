@@ -144,7 +144,8 @@ export async function loadAccountFirstTouches(prisma: PrismaLike, accountNames: 
     if (Number(r.payload?.stepIndex ?? 0) !== 0) return;
     if (!outstanding && new Date(sentAt).getTime() < since) return;
     const pid = Number(r.payload?.personaId);
-    touches.push({ account, personaId: Number.isInteger(pid) ? pid : null, recipient: String(r.payload?.recipient ?? '').toLowerCase(), sentAt, released: false, ...(outstanding ? { outstanding: true } : {}) });
+    const draftId = String(r.payload?.gmailDraftId ?? '');
+    touches.push({ account, personaId: Number.isInteger(pid) ? pid : null, recipient: String(r.payload?.recipient ?? '').toLowerCase(), sentAt, released: false, ...(outstanding ? { outstanding: true } : {}), ...(outstanding && draftId ? { decisionId: r.subject_id, gmailDraftId: draftId } : {}) });
   };
   for (const r of rows) {
     if (r.kind === DIRECT_SENT || r.kind === MANUAL_SENT) push(r, String(r.payload?.sentAt ?? new Date(r.created_at).toISOString()), false);
@@ -190,7 +191,7 @@ export async function loadAccountFirstTouches(prisma: PrismaLike, accountNames: 
   for (const t of touches) {
     t.released = (t.personaId !== null && failed.has(t.personaId)) || unsubscribed.has(t.recipient);
     const list = out.get(t.account) ?? [];
-    list.push({ personaId: t.personaId, recipient: t.recipient, sentAt: t.sentAt, released: t.released, ...(t.outstanding ? { outstanding: true } : {}) });
+    list.push({ personaId: t.personaId, recipient: t.recipient, sentAt: t.sentAt, released: t.released, ...(t.outstanding ? { outstanding: true } : {}), ...(t.decisionId && t.gmailDraftId ? { decisionId: t.decisionId, gmailDraftId: t.gmailDraftId } : {}) });
     out.set(t.account, list);
   }
   return out;

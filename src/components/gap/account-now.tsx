@@ -7,6 +7,9 @@ import Link from 'next/link';
 import { PendingLink } from '@/components/gap/pending-link';
 import type { NowLine, NowView } from '@/lib/gap/context/now';
 import { VoicePreviewButton } from '@/components/voice-preview-button';
+import { AddToGapButton } from '@/components/gap/add-to-gap-button';
+import { EmploymentControl } from '@/components/gap/employment-control';
+import { OutstandingDraftPanel } from '@/components/gap/outstanding-draft-panel';
 
 const TAG_TONE: Record<NowLine['tag'], string> = {
   'Buyer said': 'border-emerald-600 text-emerald-700 dark:text-emerald-400',
@@ -46,7 +49,7 @@ function Slot({ label, children, testId }: { label: string; children: React.Reac
   );
 }
 
-export function AccountNowView({ v, nextHref, nextLabel, links }: { v: NowView; nextHref: string | null; nextLabel: string | null; links: Array<{ label: string; href: string; external?: boolean }> }) {
+export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null }: { v: NowView; nextHref: string | null; nextLabel: string | null; links: Array<{ label: string; href: string; external?: boolean }>; mailbox?: string | null }) {
   return (
     <div className="space-y-4" data-testid="account-now">
       <div className="space-y-1">
@@ -92,13 +95,20 @@ export function AccountNowView({ v, nextHref, nextLabel, links }: { v: NowView; 
                 In HubSpot, not yet a GAP contact: add them before any touch.
               </p>
             ) : null}
+            {v.who.inHubSpotOnly && v.addToGap && v.addToGap.hubspotContactId === v.who.hubspotContactId ? (
+              <AddToGapButton accountName={v.name} hubspotContactId={v.addToGap.hubspotContactId} name={v.addToGap.name} title={v.addToGap.title} />
+            ) : null}
             <p className="text-xs text-[var(--muted-foreground)]">{v.who.why}</p>
+            {v.who.personaId ? <EmploymentControl personaId={v.who.personaId} name={v.who.name} accountName={v.name} state={v.who.employment ? { label: v.who.employment.label, why: v.who.employment.why } : null} compact /> : null}
             {v.who.route ? <p className="text-xs text-[var(--muted-foreground)]">Route: {v.who.route}</p> : null}
             {v.whoUnknown ? <p className="mt-1 text-xs text-amber-700 dark:text-amber-400" data-testid="now-owner-missing">{v.whoUnknown}</p> : null}
             {v.betterFit ? (
               <p className="mt-1 text-xs text-amber-700 dark:text-amber-400" data-testid="now-better-fit">
                 {v.betterFit}
               </p>
+            ) : null}
+            {v.betterFit && v.addToGap && !v.who.inHubSpotOnly ? (
+              <AddToGapButton accountName={v.name} hubspotContactId={v.addToGap.hubspotContactId} name={v.addToGap.name} title={v.addToGap.title} />
             ) : null}
             {v.alternate ? (
               <p className="mt-1 text-xs" data-testid="now-alternate">
@@ -118,7 +128,20 @@ export function AccountNowView({ v, nextHref, nextLabel, links }: { v: NowView; 
             ) : null}
           </div>
         )}
+        {v.historical?.length ? (
+          <ul className="mt-2 space-y-1 text-xs" data-testid="now-historical">
+            {v.historical.map((h) => (
+              <li key={`${h.name}-${h.personaId ?? ''}`} className="rounded-md border border-dashed border-[var(--border)] px-2 py-1">
+                <span className="font-medium">{h.name}</span>
+                {h.title ? <span className="text-[var(--muted-foreground)]">, {h.title}</span> : null}
+                <span className="text-[var(--muted-foreground)]">. Historical {v.name} contact. Current-employer evidence now points to {h.elsewhere ?? 'another employer'}. Not eligible for {v.name} outreach.</span>
+              </li>
+            ))}
+          </ul>
+        ) : null}
       </Slot>
+
+      {v.outstandingDraft ? <OutstandingDraftPanel recipient={v.outstandingDraft.recipient} name={v.outstandingDraft.name} decisionId={v.outstandingDraft.decisionId} gmailDraftId={v.outstandingDraft.gmailDraftId} createdAt={v.outstandingDraft.createdAt} mailbox={mailbox} /> : null}
 
       {v.whyNow[0] ? (
         <Slot label="Why now" testId="now-why-now">

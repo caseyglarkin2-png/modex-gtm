@@ -147,7 +147,7 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
         <GapSubnav />
         {header}
         {tabs}
-        <AccountNowView v={v} nextHref={control?.href ?? null} nextLabel={control?.label ?? null} links={links} />
+        <AccountNowView v={v} nextHref={control?.href ?? null} nextLabel={control?.label ?? null} links={links} mailbox={process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() || null} />
       </div>
     );
   }
