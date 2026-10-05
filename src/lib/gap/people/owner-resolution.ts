@@ -155,11 +155,13 @@ function rankKey(c: OwnerCandidate, input: OwnerCandidateInput): number[] {
     LANE_ORDER.length - LANE_ORDER.indexOf(r.lane),
     r.ownership,
     c.relevance ? RELEVANCE_RANK[c.relevance.tier] : 0,
-    c.employment ? EMPLOYMENT_RANK[c.employment.state] : 1,
     r.region === 'OTHER_REGION' ? 0 : 1,
     SCOPE_RANK[r.scope],
     MARKET_RANK[r.market],
     r.seniority,
+    // Currentness is a tie-break among the eligible: the departed and the conflicted were set aside upstream, and a
+    // likely-current manager never outranks an unverified network owner on it (carrier dogfood 2026-10-05).
+    c.employment ? EMPLOYMENT_RANK[c.employment.state] : 1,
     c.source === 'gap' && c.hasEmail ? 2 : c.hasEmail ? 1 : 0,
   ];
 }

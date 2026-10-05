@@ -190,3 +190,19 @@ describe('the human choice boundary', () => {
     expect(cut.headline).toMatch(/only the first 1000 associated contacts/);
   });
 });
+
+describe('currentness ranks AFTER scope and seniority among eligible people (carrier dogfood 2026-10-05)', () => {
+  // At NFI and J.B. Hunt, GAP transportation managers (Apollo and the CRM agree: likely current) ranked above a
+  // Senior Vice President of Transportation Services from HubSpot (nobody has checked yet). The departed and the
+  // conflicted are already set aside upstream; among the eligible, the network owner leads and currentness only
+  // breaks a tie.
+  const likely: EmploymentRead = { state: 'CURRENT_LIKELY', why: 'Apollo and the CRM agree.', decidedBy: [], elsewhere: null, verifyNeeded: false };
+  it('an SVP of transportation nobody has verified outranks a likely-current transportation manager', () => {
+    const r = resolveOwner(base({ account: { name: 'NFI Industries', entityType: '3pl' }, purpose: 'COLD_FIRST_TOUCH', hypothesis: null, candidates: [gap(1, 'Mia Mgr', 'Transportation Manager', { employment: likely, location: 'Orlando, Florida, United States' }), hs('2', 'Sam Svp', 'Senior Vice President of Transportation Services', { location: 'Cherry Hill, New Jersey, United States' })] }));
+    expect(r.eligible.map((c) => c.name)).toEqual(['Sam Svp', 'Mia Mgr']);
+  });
+  it('between two directors of transportation that tie on everything else, the likely-current one leads', () => {
+    const r = resolveOwner(base({ account: { name: 'NFI Industries', entityType: '3pl' }, purpose: 'COLD_FIRST_TOUCH', hypothesis: null, candidates: [gap(1, 'Una Unverified', 'Director of Transportation Operations', { employment: unverified, location: 'Dallas, Texas, United States' }), gap(2, 'Lee Likely', 'Director of Transportation Operations', { employment: likely, location: 'Dallas, Texas, United States' })] }));
+    expect(r.eligible.map((c) => c.name)).toEqual(['Lee Likely', 'Una Unverified']);
+  });
+});
