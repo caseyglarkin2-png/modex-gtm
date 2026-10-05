@@ -114,19 +114,21 @@ export interface PersonaEmployment extends EmploymentRead {
 const emailDomain = (e: string | null | undefined): string | null => (e && e.includes('@') ? e.split('@')[1].trim().toLowerCase() || null : null);
 
 /**
- * The account-side context every employment read needs: the names the account goes by (its aliases and parent
- * brand) and the account's own domains (canonical `domain:` links, and an email domain two or more of its GAP
+ * The account-side context every employment read needs: the names the account goes by (its aliases, its parent
+ * brand and its child accounts) and the account's own domains (canonical `domain:` links, and an email domain two or more of its GAP
  * contacts share). One person's address is never an account domain (review B2). Every caller passes this: the two
  * loaders and the decision-time gate, so the panel and the gate read the same spellings.
  */
 export async function accountEmploymentContext(prisma: PrismaLike, accountName: string): Promise<{ aliases: string[]; domains: string[] }> {
-  const [account, aliasRows, links, people] = await Promise.all([
+  const [account, aliasRows, links, people, children] = await Promise.all([
     typeof prisma?.account?.findUnique === 'function' ? prisma.account.findUnique({ where: { name: accountName }, select: { parent_brand: true } }).catch(() => null) : null,
     typeof prisma?.gapAccountAlias?.findMany === 'function' ? prisma.gapAccountAlias.findMany({ where: { account_name: accountName }, select: { alias: true } }).catch(() => []) : [],
     typeof prisma?.canonicalAccountLink?.findMany === 'function' ? prisma.canonicalAccountLink.findMany({ where: { account_name: accountName }, select: { canonical_company_id: true } }).catch(() => []) : [],
     typeof prisma?.persona?.findMany === 'function' ? prisma.persona.findMany({ where: { account_name: accountName }, select: { email: true } }).catch(() => []) : [],
+    // The family's child accounts (Frito-Lay under PepsiCo) are spellings of the same employer.
+    typeof prisma?.account?.findMany === 'function' ? prisma.account.findMany({ where: { parent_brand: accountName }, select: { name: true }, take: 50 }).catch(() => []) : [],
   ]);
-  const aliases = [...new Set([...((aliasRows ?? []) as Array<{ alias: string }>).map((a) => String(a.alias ?? '').trim()), ...(account?.parent_brand ? [String(account.parent_brand).trim()] : [])])].filter(Boolean);
+  const aliases = [...new Set([...((aliasRows ?? []) as Array<{ alias: string }>).map((a) => String(a.alias ?? '').trim()), ...(account?.parent_brand ? [String(account.parent_brand).trim()] : []), ...((children ?? []) as Array<{ name: string }>).map((c) => String(c.name ?? '').trim())])].filter(Boolean);
   const domains = new Set<string>();
   for (const l of (links ?? []) as Array<{ canonical_company_id: string }>) {
     const id = String(l.canonical_company_id ?? '');

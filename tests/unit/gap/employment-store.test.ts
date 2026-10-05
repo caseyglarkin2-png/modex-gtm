@@ -213,15 +213,15 @@ describe('employer spellings in the live HubSpot row and the Apollo intake never
 });
 
 describe('accountEmploymentContext: the account side of every employment read', () => {
-  it('aliases from the alias table and the parent brand; domains from canonical links and a domain two contacts share, never one address', async () => {
+  it('aliases from the alias table, the parent brand and the child accounts; domains from canonical links and a domain two contacts share, never one address', async () => {
     const prisma = {
-      account: { findUnique: vi.fn(async () => ({ parent_brand: 'PepsiCo' })) },
+      account: { findUnique: vi.fn(async () => ({ parent_brand: 'PepsiCo' })), findMany: vi.fn(async () => [{ name: 'Frito-Lay North America' }]) },
       gapAccountAlias: { findMany: vi.fn(async () => [{ alias: 'Frito Lay' }, { alias: 'FLNA' }]) },
       canonicalAccountLink: { findMany: vi.fn(async () => [{ canonical_company_id: 'domain:fritolay.com' }, { canonical_company_id: 'hubspot:123' }]) },
       persona: { findMany: vi.fn(async () => [{ email: 'a@pepsico.com' }, { email: 'b@pepsico.com' }, { email: 'moved@adusa.com' }, { email: null }]) },
     };
     const ctx = await accountEmploymentContext(prisma as any, 'Frito-Lay');
-    expect(ctx.aliases).toEqual(['Frito Lay', 'FLNA', 'PepsiCo']);
+    expect(ctx.aliases).toEqual(['Frito Lay', 'FLNA', 'PepsiCo', 'Frito-Lay North America']);
     expect(ctx.domains).toEqual(['fritolay.com', 'pepsico.com']);
   });
   it('a fake without the tables answers empty, never throws', async () => {

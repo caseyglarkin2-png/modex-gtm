@@ -141,6 +141,10 @@ describe('employer spellings: a provider or CRM variant of the same employer is 
     ['UPS Supply Chain Solutions', 'UPS'],
     ['3M Health Care', '3M'],
     ['Kenco Logistics Services', 'Kenco'],
+    ['Pepsi - Gatorade Division', 'PepsiCo'],
+    ['PepsiCo Beverages North America', 'PepsiCo'],
+    ['NFI Logistics', 'NFI Industries'],
+    ['Estes Forwarding Worldwide', 'Estes Express Lines'],
   ])('"%s" is the same employer as %s', (company, account) => {
     expect(sameEmployer(company, account)).toBe(true);
   });
@@ -149,7 +153,9 @@ describe('employer spellings: a provider or CRM variant of the same employer is 
     ['General Electric', 'General Mills'],
     ['American Axle', 'American Airlines'],
     ['Upstream Logistics', 'UPS'],
-    ['Estes Forwarding Worldwide', 'Estes Express Lines'],
+    ['Delta Faucet', 'Delta Air Lines'],
+    ['Pioneer Natural Resources', 'Pioneer Foods'],
+    ['Cost Plus', 'Costco'],
     ['Marsh McLennan', 'Mars'],
     ['Marshalls', 'Mars'],
     ['Amazonia Foods', 'Amazon'],
@@ -158,7 +164,11 @@ describe('employer spellings: a provider or CRM variant of the same employer is 
   ])('"%s" is NOT the same employer as %s (a partial word never matches)', (company, account) => {
     expect(sameEmployer(company, account)).toBe(false);
   });
-  it('a hyphenated family needs its aliases, which every caller passes (the gate included)', () => {
+  it('a hyphenated family or a banner with its own name needs its aliases, which every caller passes (the gate included)', () => {
+    expect(sameEmployer('Central Market', 'H-E-B')).toBe(false);
+    expect(sameEmployer('Central Market', 'H-E-B', ['Central Market'])).toBe(true);
+    expect(sameEmployer('Frito-Lay', 'PepsiCo')).toBe(false);
+    expect(sameEmployer('Frito-Lay', 'PepsiCo', ['Frito-Lay'])).toBe(true);
     expect(sameEmployer('Swift Transportation', 'Knight-Swift')).toBe(false);
     expect(sameEmployer('Swift Transportation', 'Knight-Swift', ['Swift Transportation', 'Knight Transportation'])).toBe(true);
     expect(sameEmployer('ABF Freight', 'ArcBest', ['ABF Freight'])).toBe(true);

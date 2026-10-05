@@ -95,7 +95,7 @@ const time = (iso: string | null | undefined) => (iso ? new Date(iso).getTime() 
 const day = (iso: string | null | undefined) => (iso && !Number.isNaN(time(iso)) ? iso.slice(0, 10) : 'undated');
 
 /** Generic words that never identify an employer on their own: "General" is not General Mills, "American" is not American Axle. */
-const GENERIC_EMPLOYER_WORDS = new Set(['american', 'national', 'united', 'general', 'global', 'international', 'first', 'new', 'north', 'south', 'east', 'west', 'universal', 'standard', 'pacific', 'atlantic', 'central', 'western', 'eastern', 'southern', 'northern', 'great', 'royal', 'allied', 'premier', 'advanced', 'consolidated', 'continental', 'federal', 'the', 'services', 'logistics', 'transport', 'transportation', 'distribution', 'industries', 'foods', 'supply', 'chain']);
+const GENERIC_EMPLOYER_WORDS = new Set(['american', 'national', 'united', 'general', 'global', 'international', 'first', 'new', 'north', 'south', 'east', 'west', 'universal', 'standard', 'pacific', 'atlantic', 'central', 'western', 'eastern', 'southern', 'northern', 'northwest', 'southwest', 'midwest', 'great', 'royal', 'allied', 'premier', 'advanced', 'consolidated', 'continental', 'federal', 'the', 'services', 'logistics', 'transport', 'transportation', 'distribution', 'industries', 'foods', 'supply', 'chain', 'delta', 'sun', 'star', 'crown', 'eagle', 'liberty', 'pioneer', 'summit', 'apex', 'alpha', 'omega', 'prime', 'elite', 'imperial', 'metro', 'capital', 'atlas', 'phoenix', 'titan', 'horizon', 'frontier', 'heritage', 'legacy', 'keystone', 'cornerstone', 'bay', 'golden', 'silver', 'blue', 'red', 'green', 'black', 'white', 'mid', 'tri', 'one', 'city', 'state', 'home', 'family', 'group']);
 const LEGAL_WORDS = /\b(inc|incorporated|corp|corporation|llc|ltd|limited|plc|lp|llp|co|company|holdings|group|the)\b/g;
 const TLD_LABELS = new Set(['com', 'net', 'org', 'co', 'uk', 'us', 'ca', 'mx', 'io', 'ai', 'biz', 'info', 'de', 'fr', 'eu', 'au', 'nl', 'br', 'in', 'jp', 'cn']);
 
@@ -121,13 +121,20 @@ export function domainLabel(domain: string | null | undefined): string | null {
  * one word made of it plus a legal tail ("pepsi" + "co"). A partial word never matches ("Mars" is not "Marsh
  * McLennan" or "Marshalls", "Ford" is not "Fordham", "Amazon" is not "Amazonia"), a generic word never matches alone
  * ("General", "American"), and the account's own domain label counts as a spelling ("Genmills" through
- * genmills.com). Known limit, accepted: a different company that shares the whole first word ("Target
- * Hospitality" at Target) reads as the same employer; a departure to one is caught by strong evidence or by Casey,
- * never by this rule. Hyphenated families ("Knight-Swift") need their aliases, which every caller passes.
+ * genmills.com). A division, subsidiary or banner that keeps the group's distinctive first word is the same employer
+ * ("Pepsi - Gatorade Division" at PepsiCo, "NFI Logistics" at NFI Industries, "Estes Forwarding" at Estes Express).
+ * Known limit, accepted: an unrelated company that shares that whole first word ("Target Hospitality" at Target)
+ * reads as the same employer; a departure to one is caught by strong evidence or by Casey, never by this rule, and
+ * the common brand words ("Delta", "Pioneer", "Summit") never match alone. Hyphenated families ("Knight-Swift") and
+ * banners with their own name ("Central Market" at H-E-B) need their aliases, which every caller passes.
  */
 const LEGAL_TAIL = /^(co|corp|inc|llc|group|holdings)$/;
 const squashWords = (words: readonly string[]) => words.join('');
-/** `short` is the squash of `long`'s leading words, or `long` is one word made of `short` plus a legal tail. */
+/**
+ * `short` is the squash of `long`'s leading words ("fedex" leads "fed ex freight"), or `long` is one word made of
+ * `short` plus a legal tail ("pepsico" from "pepsi"), or `short` is one word made of `long`'s first word plus a
+ * legal tail ("pepsico" against "pepsi gatorade division": the division names the parent without its "Co").
+ */
 function leads(short: string, long: readonly string[]): boolean {
   let acc = '';
   for (const w of long) {
@@ -135,9 +142,13 @@ function leads(short: string, long: readonly string[]): boolean {
     if (acc === short) return true;
     if (acc.length >= short.length) break;
   }
-  return long.length === 1 && long[0].length > short.length && long[0].startsWith(short) && LEGAL_TAIL.test(long[0].slice(short.length));
+  if (long.length === 1 && long[0].length > short.length && long[0].startsWith(short) && LEGAL_TAIL.test(long[0].slice(short.length))) return true;
+  const first = long[0] ?? '';
+  return first.length >= 5 && short.length > first.length && short.startsWith(first) && LEGAL_TAIL.test(short.slice(first.length));
 }
 const usableSpelling = (s: string) => (s.length >= 3 || /\d/.test(s)) && !GENERIC_EMPLOYER_WORDS.has(s);
+/** Two spellings whose first word is the same distinctive name ("NFI Logistics" / "NFI Industries", "Estes Forwarding" / "Estes Express"): a division, a subsidiary or a banner of the same group. */
+const sameFirstWord = (a: readonly string[], b: readonly string[]) => !!a[0] && a[0] === b[0] && usableSpelling(a[0]);
 
 export function sameEmployer(company: string, accountName: string, aliases: readonly string[] = [], domains: readonly string[] = []): boolean {
   const names = [accountName, ...aliases].filter((n) => !!n?.trim());
@@ -149,7 +160,7 @@ export function sameEmployer(company: string, accountName: string, aliases: read
   for (const sw of sides) {
     const sq = squashWords(sw);
     if (!sq || GENERIC_EMPLOYER_WORDS.has(sq)) continue;
-    if ((usableSpelling(sq) && leads(sq, cw)) || (usableSpelling(c) && leads(c, sw))) return true;
+    if ((usableSpelling(sq) && leads(sq, cw)) || (usableSpelling(c) && leads(c, sw)) || sameFirstWord(sw, cw)) return true;
   }
   return false;
 }
