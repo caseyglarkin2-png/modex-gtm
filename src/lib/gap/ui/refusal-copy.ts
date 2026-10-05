@@ -99,6 +99,17 @@ const COPY: Record<string, RefusalCopy> = {
     why: 'Sources disagree about where this person works now, so GAP will not rely on them at this account.',
     next: 'Verify the current role (one click), or choose another owner.',
   },
+  // WHO truth maintenance (2026-10-05): the ROLE changed while the employer did not; sources disagree about the role.
+  persona_role_changed: {
+    what: 'Nothing was routed, drafted or sent.',
+    why: 'This person is still at the company, but the stored role GAP relied on has changed and the current remit is not established.',
+    next: 'Verify the current role (one click), record the correct title if you know it, or choose another owner.',
+  },
+  persona_role_conflict: {
+    what: 'Nothing was routed, drafted or sent.',
+    why: 'Sources disagree about the current role of this person, so GAP will not rank them on the stored title.',
+    next: 'Verify the current role (one click), or choose another owner.',
+  },
   persona_not_at_account: {
     what: 'Nothing was attached.',
     why: 'That person is a GAP contact at another account, not this one.',

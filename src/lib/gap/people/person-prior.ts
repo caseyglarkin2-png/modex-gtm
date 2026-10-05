@@ -127,7 +127,7 @@ const COMMERCIAL_WORDS = /\b(sourcing|procurement|purchas\w*|category|buyer|fina
 // Buying, pricing, paying, contracting or funding freight: never the operator, whatever function sits beside it
 // (review S5: freight audit / payment, transportation contracts, rate management). "Contract logistics" (a 3PL's
 // operation) and a carrier's "dedicated contracts" (its dedicated fleet business, re-review) are not "contracts".
-const COMMERCIAL_STRONG = /\b(sourcing|procurement|purchas\w*|category|buyer|finance|financial|cost|controller|accounting|tax|pricing|audit|payments?|(?<!dedicated )contracts|contracting|contract management|rate management|rates|indirect)\b/;
+const COMMERCIAL_STRONG = /\b(sourcing|procurement|purchas\w*|category|buyer|finance|financial|cost|controller|accounting|tax|pricing|audit|payments?|payables?|(?<!dedicated )contracts|contracting|contract management|rate management|rates|indirect)\b/;
 // Budget or spend: commercial on their own ("Director of Transportation Spend"), a second hat beside a freight
 // operations remit ("Director Transportation Budget & Operations", re-review 2026-10-05).
 const BUDGET_WORDS = /\b(budget|spend)\b/;

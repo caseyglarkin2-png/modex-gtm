@@ -123,7 +123,22 @@ export function OwnerResolutionPanel({ hypothesisId, accountName, onChanged }: O
                   <p className="font-medium">
                     {i + 1}. {c.name}
                     {c.title ? <span className="font-normal text-[var(--muted-foreground)]">, {c.title}</span> : null}
+                    {r.recommended?.key === c.key ? (
+                      <span className="ml-2 rounded-sm border border-[var(--primary)] px-1 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[var(--primary)]" data-testid="owner-recommended">
+                        Recommended for {r.purpose === 'HYPOTHESIS_ACTIVATION' ? 'this hypothesis' : r.purpose === 'SITE_PILOT' ? 'a site pilot' : 'this initiative'}
+                      </span>
+                    ) : null}
                   </p>
+                  {r.recommended?.key === c.key ? (
+                    <p className="mt-0.5 text-xs" data-testid="owner-recommended-why">
+                      {r.recommended.why}
+                    </p>
+                  ) : null}
+                  {c.role && c.role.state !== 'ROLE_UNVERIFIED' ? (
+                    <p className="mt-0.5 text-xs text-[var(--muted-foreground)]" data-testid="owner-role">
+                      Role: {c.role.label}. {c.role.why}
+                    </p>
+                  ) : null}
                   {c.location ? <p className="text-xs text-[var(--muted-foreground)]">{c.location}</p> : null}
                   <ul className="mt-1 space-y-0.5 text-xs text-[var(--muted-foreground)]">
                     {c.reasons.map((why) => (
@@ -155,7 +170,7 @@ export function OwnerResolutionPanel({ hypothesisId, accountName, onChanged }: O
             </Button>
           </>
         ) : r.eligible.length ? (
-          <p className="text-xs text-[var(--muted-foreground)]">Choose one person above. GAP does not pick.</p>
+          <p className="text-xs text-[var(--muted-foreground)]">{r.recommended ? 'Choose one person above. The recommendation is a reason, not a selection: GAP does not pick.' : 'Choose one person above. GAP does not pick.'}</p>
         ) : null}
         <Button type="button" variant={r.eligible.length ? 'ghost' : 'default'} size="sm" disabled={busy !== null} onClick={() => void findOperator()} data-testid="owner-find">
           {busy === 'research' ? 'Researching...' : 'Find operator'}
