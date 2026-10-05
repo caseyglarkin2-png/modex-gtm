@@ -79,3 +79,14 @@ describe('discardGapDraft', () => {
     expect(ledger).toHaveLength(1);
   });
 });
+
+describe('the client bundle never reaches node:crypto through the discard reasons (build trap, 2026-10-05)', () => {
+  it('the reasons module has no imports, and the panel reads only that module', async () => {
+    const { readFileSync } = await import('node:fs');
+    const reasons = readFileSync('src/lib/gap/execution/draft-discard-reasons.ts', 'utf8');
+    expect(reasons).not.toMatch(/^\s*import /m);
+    const panel = readFileSync('src/components/gap/outstanding-draft-panel.tsx', 'utf8');
+    expect(panel).toMatch(/from '@\/lib\/gap\/execution\/draft-discard-reasons'/);
+    expect(panel).not.toMatch(/from '@\/lib\/gap\/execution\/draft-discard'/);
+  });
+});

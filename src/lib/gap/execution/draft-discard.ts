@@ -21,15 +21,8 @@ import type { GmailDraftState } from '@/lib/email/gmail-inbox';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
 
-export const DISCARD_REASONS = ['stale_pre_operator_who_draft', 'wrong_person', 'copy_outdated', 'seller_discard'] as const;
-export type DiscardReason = (typeof DISCARD_REASONS)[number];
-
-export const DISCARD_REASON_LABEL: Record<DiscardReason, string> = {
-  stale_pre_operator_who_draft: 'Stale: drafted before operator-first WHO; a better owner is on record',
-  wrong_person: 'Wrong person for this account',
-  copy_outdated: 'The copy is outdated',
-  seller_discard: 'Discarded by the seller',
-};
+export { DISCARD_REASONS, DISCARD_REASON_LABEL, type DiscardReason } from './draft-discard-reasons';
+import { DISCARD_REASONS, type DiscardReason } from './draft-discard-reasons';
 
 export interface DiscardDraftInput {
   decisionId: string;

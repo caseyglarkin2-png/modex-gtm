@@ -9,7 +9,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { DISCARD_REASON_LABEL, DISCARD_REASONS, type DiscardReason } from '@/lib/gap/execution/draft-discard';
+import { DISCARD_REASON_LABEL, DISCARD_REASONS, type DiscardReason } from '@/lib/gap/execution/draft-discard-reasons';
 import { refusalSentence } from '@/lib/gap/ui/refusal-copy';
 
 export interface OutstandingDraftProps {
