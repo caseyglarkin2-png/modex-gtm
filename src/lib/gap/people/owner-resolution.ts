@@ -164,8 +164,11 @@ function rankKey(c: OwnerCandidate, input: OwnerCandidateInput): number[] {
   ];
 }
 
-/** Two candidates are PLAUSIBLE peers when they tie on function (lane, named ownership) and thesis relevance. */
-const plausibleKey = (c: OwnerCandidate) => `${c.lane}|${c.read.ownership}|${c.relevance?.tier ?? 'none'}`;
+/**
+ * Every eligible person is a PLAUSIBLE owner. A title-word difference (a Managing Director of transportation against
+ * a VP of network planning) never makes the first one "overwhelming": with two or more eligible people the seller
+ * chooses from the ranked list, and nobody is preselected.
+ */
 
 function describe(c: OwnerCandidateInput, read: PersonRead, relevance: ThesisRelevance | null, employment: EmploymentRead | null | undefined, entity: EntityBoundary | null): string[] {
   const out: string[] = [];
@@ -296,19 +299,15 @@ export function resolveOwner(input: OwnerResolutionInput): OwnerResolution {
   const tech = contactable.find((r) => r.c.read.lane === 'TRANSFORMATION_TECH' && r.c.read.ownership > 0)?.c ?? null;
   const site = contactable.find((r) => r.c.read.lane === 'FACILITY_OPERATOR')?.c ?? null;
 
-  // The decision: one clear owner, a choice, or nobody.
+  // The decision: one clear owner, a choice, or nobody. Only a person who is the ONLY eligible owner is preselected
+  // (and never behind a separate-entity caution); Casey still presses the button.
   let nextStep: OwnerNextStep;
   let preselected: string | null = null;
   if (eligible.length === 0) nextStep = 'find_operator';
-  else {
-    const top = eligible[0];
-    const peers = eligible.filter((c) => plausibleKey(c) === plausibleKey(top));
-    const overwhelming = peers.length === 1 && !top.caution;
-    if (overwhelming) {
-      preselected = top.key;
-      nextStep = top.action === 'use' ? 'use' : 'add_and_use';
-    } else nextStep = 'choose';
-  }
+  else if (eligible.length === 1 && !eligible[0].caution) {
+    preselected = eligible[0].key;
+    nextStep = eligible[0].action === 'use' ? 'use' : 'add_and_use';
+  } else nextStep = 'choose';
   const top = eligible[0] ?? null;
   const who = (c: OwnerCandidate) => `${c.name}${c.title ? `, ${c.title}` : ''}`;
   const hubspotNote = input.hubspot.via === 'none' ? ' HubSpot people were not read (no HubSpot company resolves for this account).' : input.hubspot.via === 'unreadable' ? ' HubSpot people could not be read just now.' : input.hubspot.truncated ? ` HubSpot returned only the first ${input.hubspot.count} associated contacts: the owner may be beyond them.` : '';
@@ -318,7 +317,7 @@ export function resolveOwner(input: OwnerResolutionInput): OwnerResolution {
       : nextStep === 'add_and_use'
         ? `Best person on record for ${label} is in HubSpot, not yet a GAP contact: ${who(top!)}. Add them to GAP and use them, or choose someone else.`
         : nextStep === 'choose'
-          ? `${eligible.filter((c) => plausibleKey(c) === plausibleKey(top!)).length} plausible owners for ${label}: choose one. GAP does not pick.`
+          ? `${eligible.length} plausible owners for ${label}: choose one. GAP does not pick.`
           : `No current direct ${carrier ? 'network' : 'transportation'} operator on record for ${label} (${built.length} ${built.length === 1 ? 'person' : 'people'} considered${excluded.length ? `, ${excluded.length} set aside` : ''}).${hubspotNote} Find the operator.`;
 
   const slots = carrier
