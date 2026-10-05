@@ -313,7 +313,7 @@ own governed routes in the rig, and read back from the database.
 
 ## WHO truth maintenance and enterprise coverage (second seller-dogfood correction, 2026-10-05)
 
-STATUS: SHIPPED 2026-10-05 (PR #397, merge 59c20e1a; Vercel production deployment dpl_9S2EDJcUHfF521G7zcGofT6nArhU READY on 59c20e1a3faeb1e04a29f3acf1968156207250d2; read-only production smoke in the receipt below). Builds on everything above; nothing above is redesigned. Driver: four classes of
+STATUS: SHIPPED 2026-10-05 (PR #397, merge 59c20e1a, Vercel READY on 59c20e1a3faeb1e04a29f3acf1968156207250d2; follow-up PR #398, merge c86c24d7, Vercel READY on c86c24d72f0e273ef5319c20ab5f3b6480a67989: a title tail that spells the employer or one of its units is a company name, not a role change, and the panel says the role line once; read-only production smoke in the receipt below). Builds on everything above; nothing above is redesigned. Driver: four classes of
 friction the #396 dogfood left: a person still at the company whose stored title is no longer true (Walmart), a
 hypothesis whose owner should depend on what the fact is (FedEx), enterprise families read through one company record
 (PepsiCo / Frito-Lay, Kroger banners, carrier subsidiaries), and legacy local suppression flags with no governed review
@@ -568,6 +568,8 @@ legacy review available, the family line naming the three unlinked FedEx child r
 answers LEGACY_CONFLICT with the clear allowed and every plane listed in sentences. The hypotheses page and the FedEx
 drawer's owner panel (the RECOMMENDED badge and its sentence, the choice line) render in light and dark at desktop and
 390px with no horizontal overflow (screenshots kept in the session's scratch folder).
+After #398 the same smoke reads Glen Chaffee ROLE_CURRENT_CONFIRMED under his verified title (the FedEx Ground tail no
+longer reads as a change) and one role line per candidate.
 Not done, by the boundary: no FedEx or Walmart owner selected; Isaac's flag not cleared (LEGACY_CONFLICT, Casey's
 click from the panel); no HubSpot rewrite; nobody deleted; no speculative account (Sub-Zero and World Market have no
 GAP account and were not created).
