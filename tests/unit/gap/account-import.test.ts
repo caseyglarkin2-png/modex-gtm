@@ -67,7 +67,7 @@ describe('the association assert and the account assert', () => {
     const d = deps(reads({ [ISAAC.id]: ISAAC }, { [ISAAC.id]: ['56630459299', '54772621360'] }));
     const r = await importHubSpotContactToAccount(prisma, { accountName: 'PepsiCo', hubspotContactId: ISAAC.id, actor: 'casey@yardflow.ai', now: NOW }, d);
     expect(r).toMatchObject({ ok: true, status: 'created', accountName: 'PepsiCo', name: 'Isaac Scott', title: 'Sr Director of Transportation - Frito-Lay', hasEmail: true });
-    expect(created[0]).toMatchObject({ account_name: 'PepsiCo', hubspot_contact_id: ISAAC.id, email: 'isaac.scott@pepsico.com', persona_id: 'hs-219885493392', is_contact_ready: true, do_not_contact: false, source_type: 'hubspot' });
+    expect(created[0]).toMatchObject({ account_name: 'PepsiCo', hubspot_contact_id: ISAAC.id, email: 'isaac.scott@pepsico.com', persona_id: 'hs-219885493392', is_contact_ready: true, source_type: 'hubspot' });
     expect(audit[0]).toMatchObject({ kind: 'person.imported_from_hubspot', actor: 'casey@yardflow.ai', subject_type: 'persona', payload: { status: 'created', accountName: 'PepsiCo', hubspotContactId: ISAAC.id, hubspotWritten: false, apolloSpent: 0, accountCreated: false } });
     expect(prisma.account.create).not.toHaveBeenCalled();
     expect(d.sync).toHaveBeenCalledWith({ accountNames: ['PepsiCo'], personaIds: [7000] });
@@ -140,11 +140,32 @@ describe('boundaries the code itself keeps', () => {
     expect(code).not.toMatch(/from ['"][^'"]*apollo|apollo-(client|enrichment)|enrichPersona|searchApollo|apolloPolicy|people\/match/i);
     expect(code).not.toMatch(/account\.create|upsertContact|updateContact|basicApi\.(create|update)|batchApi\.(create|update)/);
   });
-  it('an opted-out contact is added as do not contact, with the note', async () => {
+  it('an opted-out contact is refused with the reason in a sentence, and nothing is created', async () => {
     const { prisma, created } = db({ accounts: [PEPSI] });
     const c = { ...ISAAC, properties: { ...ISAAC.properties, hs_email_optout: 'true' } };
     const r = await importHubSpotContactToAccount(prisma, { accountName: 'PepsiCo', hubspotContactId: ISAAC.id, actor: 'c', now: NOW }, deps(reads({ [ISAAC.id]: c }, { [ISAAC.id]: ['56630459299'] })));
-    expect(r.ok && r.notes[0]).toMatch(/Opted out of email in HubSpot/);
-    expect(created[0]).toMatchObject({ do_not_contact: true, is_contact_ready: false });
+    expect(r).toMatchObject({ ok: false, reason: 'contact_opted_out' });
+    expect(!r.ok && r.detail).toMatch(/Isaac Scott opted out of email in HubSpot\. GAP will not add them as a contact to act on; nothing was written\./);
+    expect(created).toEqual([]);
+  });
+});
+
+describe('an opted-out HubSpot contact is refused, never created as do-not-contact (the unsubscribe helper is the only DNC writer)', () => {
+  it('hs_email_optout true: refused as contact_opted_out; no persona row, no audit, nothing written', async () => {
+    const { prisma, audit, created, updates } = db({ accounts: [PEPSI] });
+    const OUT = { ...ISAAC, properties: { ...ISAAC.properties, hs_email_optout: 'true' } };
+    const d = deps(reads({ [OUT.id]: OUT }, { [OUT.id]: ['56630459299'] }));
+    const r = await importHubSpotContactToAccount(prisma, { accountName: 'PepsiCo', hubspotContactId: OUT.id, actor: 'casey@yardflow.ai', now: NOW }, d);
+    expect(r).toMatchObject({ ok: false, reason: 'contact_opted_out' });
+    expect(created).toEqual([]);
+    expect(updates).toEqual([]);
+    expect(audit).toEqual([]);
+    expect(d.sync).not.toHaveBeenCalled();
+  });
+  it('the created row never carries a do_not_contact value (the column keeps its default)', async () => {
+    const { prisma, created } = db({ accounts: [PEPSI] });
+    const d = deps(reads({ [ISAAC.id]: ISAAC }, { [ISAAC.id]: ['56630459299'] }));
+    await importHubSpotContactToAccount(prisma, { accountName: 'PepsiCo', hubspotContactId: ISAAC.id, actor: 'casey@yardflow.ai', now: NOW }, d);
+    expect(created[0]).not.toHaveProperty('do_not_contact');
   });
 });

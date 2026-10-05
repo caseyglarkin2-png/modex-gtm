@@ -67,7 +67,7 @@ export type AccountImportStatus = 'created' | 'linked' | 'already' | 'rehomed';
 
 export type AccountImportResult =
   | { ok: true; status: AccountImportStatus; personaId: number; accountName: string; name: string; title: string | null; hasEmail: boolean; from?: string; auditId: string; notes: string[] }
-  | { ok: false; reason: 'account_not_found' | 'account_not_linked' | 'contact_not_found' | 'contact_not_associated' | 'blocked_domain' | 'persona_at_other_account' | 'no_email_and_no_id' | 'hubspot_unreadable'; detail?: string };
+  | { ok: false; reason: 'account_not_found' | 'account_not_linked' | 'contact_not_found' | 'contact_not_associated' | 'blocked_domain' | 'contact_opted_out' | 'persona_at_other_account' | 'no_email_and_no_id' | 'hubspot_unreadable'; detail?: string };
 
 export interface AccountImportInput {
   accountName: string;
@@ -149,7 +149,9 @@ export async function importHubSpotContactToAccount(prisma: PrismaLike, input: A
   const optedOut = String(p.hs_email_optout ?? '').toLowerCase() === 'true';
   const linkedin = clean(p.hs_linkedin_url) ?? clean(p.linkedin_url);
   const notes: string[] = [];
-  if (optedOut) notes.push('Opted out of email in HubSpot: added as do not contact.');
+  // An opted-out contact is never imported or linked by this action: the unsubscribe helper is the only writer of
+  // do_not_contact, and owner resolution already sets an opted-out HubSpot person aside with the reason.
+  if (optedOut) return { ok: false, reason: 'contact_opted_out', detail: `${name} opted out of email in HubSpot. GAP will not add them as a contact to act on; nothing was written.` };
 
   // Match an existing persona: by HubSpot id first (an explicit link), then by email at this account, then anywhere.
   const byId: Row | null = await prisma.persona.findFirst({ where: { hubspot_contact_id: id }, select: PERSONA_SELECT });
@@ -219,8 +221,7 @@ export async function importHubSpotContactToAccount(prisma: PrismaLike, input: A
         linkedin_confidence: quality.linkedinConfidence,
         quality_band: quality.band,
         quality_score: quality.score,
-        is_contact_ready: !!email && !optedOut,
-        do_not_contact: optedOut,
+        is_contact_ready: !!email,
         persona_status: 'Not started',
         source_type: 'hubspot',
         source_url: linkedin,

@@ -109,6 +109,42 @@ const COPY: Record<string, RefusalCopy> = {
     why: 'The hypothesis is already in use with its person; an active motion is not retargeted casually.',
     next: 'Work it from the ready card, or close and revise the thesis.',
   },
+  // ADD TO GAP (the account-scoped HubSpot import): every refusal in seller words.
+  account_not_linked: {
+    what: 'Nothing was added.',
+    why: 'This account resolves to no HubSpot company, so GAP cannot assert the contact belongs here.',
+    next: 'Link the account to its HubSpot company first, then add the person.',
+  },
+  contact_not_associated: {
+    what: 'Nothing was added.',
+    why: 'In HubSpot this contact is not associated with the company this account is linked to, so adding them here would be a guess.',
+    next: 'Open the contact in HubSpot and confirm the company before adding them.',
+  },
+  contact_not_found: {
+    what: 'Nothing was added.',
+    why: 'HubSpot has no contact with that id any more.',
+    next: 'Refresh the page; if the person is still named, find them in HubSpot by email.',
+  },
+  blocked_domain: {
+    what: 'Nothing was added.',
+    why: 'That email domain is one GAP never contacts.',
+    next: 'Choose another owner.',
+  },
+  contact_opted_out: {
+    what: 'Nothing was added.',
+    why: 'This person opted out of email in HubSpot, so GAP will not add them as a contact to act on.',
+    next: 'Choose another owner, or reach them by phone outside GAP.',
+  },
+  persona_at_other_account: {
+    what: 'Nothing was moved or duplicated.',
+    why: 'This person is already a GAP contact at another account with history there, or at an unrelated company.',
+    next: 'Work them from that account, or ask for a deliberate move.',
+  },
+  hubspot_unreadable: {
+    what: 'Nothing was added.',
+    why: 'HubSpot could not be read just now.',
+    next: 'Retry in a moment.',
+  },
   opportunity_unknown: {
     what: 'Nothing was drafted or sent.',
     why: "Can't verify whether this account already has an active opportunity.",
