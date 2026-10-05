@@ -36,7 +36,7 @@ export function AliasProposalControl({ proposal, onDecided }: { proposal: AliasP
           decision === 'confirm'
             ? b.status === 'ALREADY_MATCHED'
               ? `${proposal.company} was already an alias of ${proposal.canonical}. Nothing new was written.`
-              : `Confirmed: ${proposal.company} is now an alias of ${proposal.canonical}. People at that spelling read as current here from the next read. HubSpot was not changed.`
+              : `Confirmed: ${proposal.company} is now an alias of ${proposal.canonical}. From the next read, people at that spelling read as current here, and signals, intake and research that name that spelling resolve to this account. HubSpot was not changed.`
             : `Recorded: ${proposal.company} is not the same family as ${proposal.canonical}. It will not be proposed again.`,
       });
       setDone(true);

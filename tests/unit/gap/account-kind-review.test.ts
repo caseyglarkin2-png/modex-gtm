@@ -21,8 +21,10 @@ describe('the vocabulary', () => {
 
 describe('carrierNetworkTitleShare', () => {
   it('counts linehaul, hub, terminal, sortation, dedicated fleet, network operations, drivers, intermodal, brokerage and pickup and delivery; never a bare logistics or DC title', () => {
+    // Review S8: a shipper's private fleet also has fleet, driver, dedicated-fleet and intermodal titles, so they
+    // never count; only titles the physical network as a product has do.
     const r = carrierNetworkTitleShare(['Director of Linehaul Operations', 'Hub Manager', 'Terminal Manager', 'VP Sortation', 'Dedicated Fleet Manager', 'Director Network Operations', 'Driver Manager', 'VP Intermodal', 'Brokerage Operations Lead', 'Pickup and Delivery Supervisor', 'Logistics Manager', 'Director DC Operations', 'VP Finance', '', '  ']);
-    expect(r).toEqual({ total: 13, carrier: 10, matched: ['Director of Linehaul Operations', 'Hub Manager', 'Terminal Manager', 'VP Sortation', 'Dedicated Fleet Manager', 'Director Network Operations', 'Driver Manager', 'VP Intermodal', 'Brokerage Operations Lead', 'Pickup and Delivery Supervisor'] });
+    expect(r).toEqual({ total: 13, carrier: 7, matched: ['Director of Linehaul Operations', 'Hub Manager', 'Terminal Manager', 'VP Sortation', 'Director Network Operations', 'Brokerage Operations Lead', 'Pickup and Delivery Supervisor'] });
   });
 });
 
@@ -40,9 +42,9 @@ describe('proposeAccountKind', () => {
     expect(proposeAccountKind(base({ scout: scout('carrier', 'web', true) }))).toMatchObject({ proposed: null, strength: 'thin' });
   });
   it('a majority of carrier-network titles among at least five proposes the carrier value; a minority, or fewer than five, leaves Unknown', () => {
-    const majority = proposeAccountKind(base({ accountName: 'J.B. Hunt', titles: ['VP Intermodal Operations', 'Director Linehaul', 'Driver Manager', 'Terminal Manager', 'VP Finance', 'HR Director'] }));
+    const majority = proposeAccountKind(base({ accountName: 'J.B. Hunt', titles: ['VP Truckload Operations', 'Director Linehaul', 'Brokerage Operations Manager', 'Terminal Manager', 'VP Finance', 'HR Director'] }));
     expect(majority).toMatchObject({ proposed: '3PL / Logistics', strength: 'strong' });
-    expect(majority.evidence).toContain('GAP persona titles: 4 of 6 are carrier-network roles (VP Intermodal Operations, Director Linehaul, Driver Manager, Terminal Manager)');
+    expect(majority.evidence).toContain('GAP persona titles: 4 of 6 are carrier-network roles (VP Truckload Operations, Director Linehaul, Brokerage Operations Manager, Terminal Manager)');
     expect(proposeAccountKind(base({ titles: ['VP Intermodal Operations', 'Director Linehaul', 'VP Finance', 'HR Director', 'Controller', 'CFO'] }))).toMatchObject({ proposed: null, strength: 'thin' });
     expect(proposeAccountKind(base({ titles: ['VP Intermodal Operations', 'Director Linehaul', 'Driver Manager', 'Terminal Manager'] }))).toMatchObject({ proposed: null, strength: 'thin' });
   });

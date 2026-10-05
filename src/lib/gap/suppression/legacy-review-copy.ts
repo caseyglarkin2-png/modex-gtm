@@ -49,7 +49,7 @@ export const CLASS_COPY: Record<SuppressionReviewClass, { title: string; body: s
 /** The inline confirmation the seller reads before the click. Names exactly what the clear touches. */
 export const CLEAR_CONFIRMATION = 'Clears only the local do-not-contact flag and the historical bounced status on this GAP record. It never touches an unsubscribe, a HubSpot opt-out, a hard bounce or clawd.';
 
-export const CLEAR_TOUCHES = ['personas.do_not_contact', 'personas.email_status'] as const;
+export const CLEAR_TOUCHES = ['the local do-not-contact flag on the GAP record', 'the historical bounced email status on the GAP record'] as const;
 
 const day = (iso: string | null | undefined): string => (iso ? iso.slice(0, 10) : 'an unknown date');
 
@@ -100,11 +100,11 @@ export function whyBlockedLines(cls: SuppressionReviewClass, sources: Suppressio
 
   if (f.localFlag) {
     const parts: string[] = [];
-    if (f.doNotContact) parts.push('do_not_contact is true');
+    if (f.doNotContact) parts.push('the record is marked do not contact');
     if ((f.emailStatus ?? '').toLowerCase() === 'bounced') parts.push("the email status reads 'bounced'");
     out.push(`The local GAP flag is set: ${parts.join(' and ')} on this record, written by the March 2026 Resend-era wave whose bounce type was never recorded.`);
     const contract = by.get('clawd_contract');
-    if (contract?.verdict === 'hit' && !contract.hard) out.push('clawd blocks for exactly one reason, modex_do_not_contact, which is this record echoed back through its modex leg.');
+    if (contract?.verdict === 'hit' && !contract.hard) out.push('clawd blocks for exactly one reason: this record\'s own local flag, echoed back through its modex leg. No other plane says stop.');
     if (contract?.verdict === 'clear' && f.doNotContact) out.push('clawd answers clear while the local do-not-contact flag is set: the planes disagree, so nothing is cleared until they agree.');
     const bounces = by.get('email_log_bounces');
     if (bounces?.verdict === 'hit' && !bounces.hard && f.lastBounceAt) out.push(`The email log shows ${bounces.detail}.`);
@@ -164,7 +164,7 @@ export function clearWhy(cls: SuppressionReviewClass): string {
 
 /** The outcome sentence after the click. */
 export function clearOutcomeSentence(r: { ok: true; name: string; email: string } | { ok: false; reason: string; detail: string }): string {
-  if (r.ok) return `Cleared the legacy local flag on ${r.name}'s GAP record (${r.email}): do_not_contact is now false and the email status reads unverified. Nothing else was touched; the send-time gate still re-reads every plane before any email.`;
+  if (r.ok) return `Cleared the legacy local flag on ${r.name}'s GAP record (${r.email}): the record is no longer marked do not contact and the email status reads unverified. Nothing else was touched; the send-time gate still re-reads every plane before any email.`;
   switch (r.reason) {
     case 'hard_suppression':
       return `Kept blocked: ${r.detail}`;

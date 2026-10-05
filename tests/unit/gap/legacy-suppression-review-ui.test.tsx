@@ -114,7 +114,7 @@ describe('LegacySuppressionReview', () => {
     render(<LegacySuppressionReview personaId={13} name="Isaac Scott" accountName="PepsiCo" onCleared={onCleared} />);
     fireEvent.click(await screen.findByTestId('suppression-clear'));
     fireEvent.click(screen.getByTestId('suppression-confirm-button'));
-    await waitFor(() => expect(screen.getByTestId('suppression-outcome')).toHaveTextContent(/Cleared the legacy local flag on Isaac Scott's GAP record \(isaac\.scott@pepsico\.com\): do_not_contact is now false and the email status reads unverified\. Nothing else was touched/));
+    await waitFor(() => expect(screen.getByTestId('suppression-outcome')).toHaveTextContent(/Cleared the legacy local flag on Isaac Scott's GAP record \(isaac\.scott@pepsico\.com\): the record is no longer marked do not contact and the email status reads unverified\. Nothing else was touched/));
     await waitFor(() => expect(screen.getByTestId('suppression-class')).toHaveTextContent(/^Clear/));
     expect(onCleared).toHaveBeenCalledTimes(1);
     expect(screen.queryByTestId('suppression-clear')).toBeNull();

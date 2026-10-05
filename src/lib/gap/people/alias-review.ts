@@ -84,7 +84,12 @@ export function proposeAliases(input: ProposeAliasesInput): AliasProposal[] {
     groups.set(key, g);
   }
   const out: AliasProposal[] = [];
+  const stem = normalizeCompanyName(input.accountName).split(' ')[0] ?? '';
   for (const [key, g] of groups) {
+    // One contact's CRM field is a departure or a vendor as often as a banner (review S9): propose only when two or
+    // more people carry the spelling, or it shares the account's own first word ("NFI SDR Distribution").
+    const sharesStem = !!stem && stem.length >= 3 && key.split(' ').includes(stem);
+    if (g.rows.length < 2 && !sharesStem) continue;
     const crm = g.rows.filter((r) => isHubSpot(r.source));
     const other = g.rows.filter((r) => !isHubSpot(r.source));
     const parts: string[] = [];

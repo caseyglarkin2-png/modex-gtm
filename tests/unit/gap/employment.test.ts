@@ -117,7 +117,9 @@ describe('URL tiers: a profile or the employer page is strong; an aggregator or 
     expect(tierForUrl('https://www.linkedin.com/in/someone/')).toBe('strong');
     expect(tierForUrl('https://www.linkedin.com/company/adusa')).toBe('supporting');
     expect(tierForUrl('https://www.heb.com/leadership', ['heb.com'])).toBe('strong');
-    expect(tierForUrl('https://www.zoominfo.com/pic/x')).toBe('supporting');
+    // A people directory is weak (review S3): it restates a CRM-shaped record and never decides a role.
+    expect(tierForUrl('https://www.zoominfo.com/pic/x')).toBe('weak');
+    expect(tierForUrl('https://theorg.com/org/walmart/org-chart/x')).toBe('weak');
     expect(tierForUrl('https://news.example/story')).toBe('supporting');
     expect(tierForUrl('not a url')).toBe('weak');
     expect(tierForUrl(null)).toBe('weak');

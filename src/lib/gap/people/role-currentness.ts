@@ -213,7 +213,10 @@ export function readRole(input: { accountName: string; aliases?: readonly string
   // 3. Strong evidence: the newest titled source decides; a promotion without a title stands until a newer title.
   const strong = ev.filter((e) => e.tier === 'strong' && e.kind !== 'human');
   const titled = strong.filter((e) => !!e.title);
-  const moved = newest(ev.filter((e) => e.roleChanged && !e.title && e.kind !== 'human'));
+  // A promotion with no title confirms a change only from a STRONG source (their own profile, the employer's page, a
+  // colleague's announcement); a supporting source saying so is a reason to verify, never a confirmation (review S3).
+  const moved = newest(strong.filter((e) => e.roleChanged && !e.title));
+  const movedWeakly = newest(ev.filter((e) => e.roleChanged && !e.title && e.kind !== 'human' && e.tier !== 'strong'));
   if (titled.length >= 2) {
     const [a, b] = [...titled].sort((x, y) => (time(y.at) || 0) - (time(x.at) || 0));
     if (!sameRole(a.title, b.title)) {
@@ -226,20 +229,32 @@ export function readRole(input: { accountName: string; aliases?: readonly string
   if (moved && (!n || !dated(n) || (dated(moved) && time(moved.at) >= time(n.at)))) return changedUnknown(moved, says(moved));
   if (n) {
     const title = n.title!;
-    if (!sameRole(title, storedTitle)) return changedTo(n, title, 'verified', says(n));
+    // A supporting source saying the role moved, against a strong titled source: the strong one decides, and the
+    // disagreement is a reason to verify.
+    const verifyNeeded = !!movedWeakly;
+    if (!sameRole(title, storedTitle)) return { ...changedTo(n, title, 'verified', says(n)), verifyNeeded };
     const recent = dated(n) && now.getTime() - time(n.at) <= RECENT_DAYS * DAY;
     return recent
-      ? { state: 'ROLE_CURRENT_CONFIRMED', why: `Recent evidence confirms their role at ${accountName}: ${says(n)}.`, ...base, effectiveTitle: title, titleSource: 'verified', usableForRanking: true, decidedBy: [n], verifyNeeded: false }
-      : { state: 'ROLE_CURRENT_LIKELY', why: `Evidence names the stored role at ${accountName}, but it is ${n.at ? `older than ${RECENT_DAYS} days` : 'undated'}: ${says(n)}.`, ...base, effectiveTitle: title, titleSource: 'verified', usableForRanking: true, decidedBy: [n], verifyNeeded: false };
+      ? { state: 'ROLE_CURRENT_CONFIRMED', why: `Recent evidence confirms their role at ${accountName}: ${says(n)}.${verifyNeeded ? ` A weaker source (${says(movedWeakly!)}) says the role moved: verify.` : ''}`, ...base, effectiveTitle: title, titleSource: 'verified', usableForRanking: true, decidedBy: [n], verifyNeeded }
+      : { state: 'ROLE_CURRENT_LIKELY', why: `Evidence names the stored role at ${accountName}, but it is ${n.at ? `older than ${RECENT_DAYS} days` : 'undated'}: ${says(n)}.${verifyNeeded ? ` A weaker source (${says(movedWeakly!)}) says the role moved: verify.` : ''}`, ...base, effectiveTitle: title, titleSource: 'verified', usableForRanking: true, decidedBy: [n], verifyNeeded };
   }
+  if (movedWeakly) return conflict([movedWeakly], `${says(movedWeakly)} says the role at ${accountName} changed, but it is not a strong source and nothing stronger speaks. Verify the current role before ranking on it.`);
   if (humanCurrentNoTitle) return unverified([human!], `Casey confirmed them at ${accountName} on ${day(human!.at)} without a title; the stored role (${quoted(fallbackTitle)}) stands unverified.`);
 
-  // 4. Supporting evidence: another title from a provider or the CRM is a conflict to verify; the same title corroborates.
+  // 4. Supporting evidence never blocks (review S6: five GAP contacts were set aside for a GAP-title versus
+  // HubSpot-title wording difference). A differing CRM title is read as the current CRM title, unverified, with
+  // verify suggested; a differing provider title keeps the stored title, unverified, with verify suggested; the same
+  // title from a provider corroborates (likely).
   const supporting = ev.filter((e) => e.tier === 'supporting' && !!e.title);
-  const differing = newest(supporting.filter((e) => fallbackTitle && !sameRole(e.title, fallbackTitle)));
-  if (differing) return conflict([differing], `${says(differing)} names a different role from the stored ${quoted(fallbackTitle)} at ${accountName}. Verify the current role before ranking on it.`);
+  const crm = supporting.find((e) => e.kind === 'crm') ?? null;
+  const liveCrmTitle = crmTitle ?? crm?.title ?? null;
+  const crmDiffers = !!crm && !!liveCrmTitle && !!storedTitle && !sameRole(liveCrmTitle, storedTitle);
+  if (crmDiffers) {
+    return { state: 'ROLE_UNVERIFIED', why: `The CRM reads "${liveCrmTitle}" while GAP holds "${storedTitle}"; neither is verified (a wording difference, not a change). Verify the current role when it matters.`, ...base, priorTitle: null, effectiveTitle: liveCrmTitle, titleSource: 'crm', usableForRanking: true, decidedBy: [crm], verifyNeeded: true };
+  }
+  const differing = newest(supporting.filter((e) => e.kind !== 'crm' && fallbackTitle && !sameRole(e.title, fallbackTitle)));
+  if (differing) return { ...unverified([differing], `${says(differing)} names a different role from the stored ${quoted(fallbackTitle)} at ${accountName}; a provider row alone neither confirms nor blocks. Verify the current role before ranking on it.`), verifyNeeded: true };
   const agreeing = newest(supporting.filter((e) => e.kind !== 'crm' && fallbackTitle && sameRole(e.title, fallbackTitle)));
   if (agreeing) return { state: 'ROLE_CURRENT_LIKELY', why: `Supporting evidence agrees with the stored role at ${accountName}: ${says(agreeing)}.`, ...base, effectiveTitle: fallbackTitle, titleSource: fallbackSource, usableForRanking: true, decidedBy: [agreeing], verifyNeeded: false };
-  const crm = supporting.find((e) => e.kind === 'crm') ?? null;
   return unverified(crm ? [crm] : []);
 }

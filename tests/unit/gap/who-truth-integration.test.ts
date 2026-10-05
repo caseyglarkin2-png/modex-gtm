@@ -8,6 +8,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { loadOwnerResolution } from '@/lib/gap/people/owner-resolution-load';
 import type { HubSpotPeopleReads } from '@/lib/gap/people/hubspot-people';
 import { buildAccountBrief, type AccountInputs } from '@/lib/gap/account-intel/build';
+import { importHubSpotContactToAccount } from '@/lib/gap/people/account-import';
 
 const NOW = new Date('2026-10-05T15:00:00Z');
 const STORED = 'Sr Director - West Transportation Command Center';
@@ -88,6 +89,50 @@ describe('the owner loader reads role evidence recorded against a HubSpot contac
     expect(r.resolution.excluded.find((x) => x.candidate.key === 'gap:50')?.candidate.employment?.state).not.toBe('LEFT_COMPANY_CONFIRMED');
     const linkedRow = await loadOwnerResolution(prismaWith({ personas: [{ ...personas[0], id: 51 }], roleRows: [{ subject_id: '700', payload: rolePayload() }] }) as never, { accountName: 'Walmart Inc.', purpose: 'COLD_FIRST_TOUCH', now: NOW }, { hubspotPeople: reads });
     expect(linkedRow.ok && linkedRow.resolution.excluded.find((x) => x.candidate.key === 'gap:51')?.code).toBe('role_changed');
+  });
+});
+
+describe('the account-scoped import accepts a verified family company only when the owner action names it (review S7)', () => {
+  const accounts = [
+    { name: 'PepsiCo', hubspot_company_id: 'P1', parent_brand: null },
+    { name: 'Frito-Lay', hubspot_company_id: 'F1', parent_brand: 'PepsiCo' },
+    { name: 'FedEx Supply Chain', hubspot_company_id: 'D1', parent_brand: 'FedEx' },
+  ];
+  const calls: string[] = [];
+  const tx = {
+    persona: { create: vi.fn(async () => { calls.push('persona.create'); return { id: 9 }; }), update: vi.fn(async () => ({})) },
+    contactEnrichment: { upsert: vi.fn(async () => ({ id: 1 })) },
+    contactEnrichmentField: { upsert: vi.fn(async () => ({})) },
+    gapAuditEvent: { create: vi.fn(async ({ data }: { data: { payload: Record<string, unknown> } }) => { calls.push(`audit:${JSON.stringify(data.payload.viaFamily ?? null)}`); return { id: 'a1' }; }) },
+  };
+  const prisma = {
+    account: {
+      findUnique: vi.fn(async ({ where }: { where: { name: string } }) => accounts.find((a) => a.name === where.name) ?? null),
+      findMany: vi.fn(async ({ where }: { where: Record<string, unknown> }) => {
+        if ('parent_brand' in where) return accounts.filter((a) => a.parent_brand);
+        if ('name' in where) return accounts.filter((a) => a.name.toLowerCase().startsWith(String((where.name as { startsWith: string }).startsWith).toLowerCase()));
+        return [];
+      }),
+    },
+    persona: { findFirst: vi.fn(async () => null) },
+    $transaction: vi.fn(async (fn: (t: typeof tx) => Promise<unknown>) => fn(tx)),
+  };
+  const reads = { readContact: async () => ({ id: 'C1', properties: { firstname: 'Fran', lastname: 'Frito', jobtitle: 'Senior Director, Transportation', email: 'fran@pepsico.com' } }), companyIdsForContact: async () => ['F1'] };
+  it('refuses without the family company; accepts with it and records where the person was read from', async () => {
+    const without = await importHubSpotContactToAccount(prisma as never, { accountName: 'PepsiCo', hubspotContactId: 'C1', actor: 'casey@freightroll.com', now: NOW }, { reads, sync: async () => undefined });
+    expect(without).toMatchObject({ ok: false, reason: 'contact_not_associated' });
+    const withFamily = await importHubSpotContactToAccount(prisma as never, { accountName: 'PepsiCo', hubspotContactId: 'C1', actor: 'casey@freightroll.com', now: NOW, familyCompanyId: 'F1' }, { reads, sync: async () => undefined });
+    expect(withFamily).toMatchObject({ ok: true, status: 'created', personaId: 9 });
+    expect(withFamily.ok && withFamily.notes.join(' ')).toMatch(/Read from the Frito-Lay record \(a PepsiCo family company\)/);
+    expect(calls).toContain('audit:{"accountName":"Frito-Lay","companyId":"F1"}');
+  });
+  it('a company id that is not a verified family member is refused, and a divested unit never qualifies', async () => {
+    const stranger = await importHubSpotContactToAccount(prisma as never, { accountName: 'PepsiCo', hubspotContactId: 'C1', actor: 'casey@freightroll.com', now: NOW, familyCompanyId: 'ZZZ' }, { reads: { ...reads, companyIdsForContact: async () => ['ZZZ'] }, sync: async () => undefined });
+    expect(stranger).toMatchObject({ ok: false, reason: 'contact_not_associated' });
+    expect(stranger.ok === false && stranger.detail).toMatch(/ZZZ is not a verified family company of PepsiCo/);
+    const fedex = { ...prisma, account: { ...prisma.account, findUnique: vi.fn(async ({ where }: { where: { name: string } }) => (where.name === 'FedEx' ? { name: 'FedEx', hubspot_company_id: 'X1', parent_brand: null } : accounts.find((a) => a.name === where.name) ?? null)) } };
+    const divested = await importHubSpotContactToAccount(fedex as never, { accountName: 'FedEx', hubspotContactId: 'C1', actor: 'casey@freightroll.com', now: NOW, familyCompanyId: 'D1' }, { reads: { ...reads, companyIdsForContact: async () => ['D1'] }, sync: async () => undefined });
+    expect(divested).toMatchObject({ ok: false, reason: 'contact_not_associated' });
   });
 });
 

@@ -331,7 +331,7 @@ async function reviewPersona(prisma: PrismaLike, persona: PersonaRow, deps: Supp
 
   const sources: SuppressionSourceRead[] = [];
 
-  sources.push({ source: 'modex_flag', verdict: doNotContact ? 'hit' : 'clear', detail: doNotContact ? 'do_not_contact is true on the GAP record' : 'do_not_contact is false on the GAP record', hard: false });
+  sources.push({ source: 'modex_flag', verdict: doNotContact ? 'hit' : 'clear', detail: doNotContact ? 'the GAP record is marked do not contact' : 'the GAP record is not marked do not contact', hard: false });
 
   sources.push({
     source: 'modex_email_status',
@@ -414,7 +414,10 @@ async function reviewPersona(prisma: PrismaLike, persona: PersonaRow, deps: Supp
 
   const overrides = ledger.filter((e) => e.kind === 'suppression.corrected' || e.kind === 'suppression.correction_reverted');
   const lastOverride = overrides[overrides.length - 1];
-  sources.push({ source: 'override_history', verdict: 'clear', detail: overrides.length ? `${overrides.length} prior clear${overrides.length === 1 ? '' : 's'} or revert${overrides.length === 1 ? '' : 's'}; the latest is ${lastOverride.kind === 'suppression.correction_reverted' ? 'a clear that was reverted (the flag was restored on purpose)' : 'a clear'} by ${lastOverride.actor} on ${iso(lastOverride.created_at)?.slice(0, 10)}` : 'the flag was never cleared or reverted before', at: lastOverride ? iso(lastOverride.created_at) : null, hard: false });
+  // A clear that was reverted on purpose holds until a newer reason exists: the review reads it as unresolved, never
+  // as clear-again (review N11).
+  const reverted = !!lastOverride && lastOverride.kind === 'suppression.correction_reverted';
+  sources.push({ source: 'override_history', verdict: reverted ? 'unknown' : 'clear', detail: overrides.length ? `${overrides.length} prior clear${overrides.length === 1 ? '' : 's'} or revert${overrides.length === 1 ? '' : 's'}; the latest is ${reverted ? 'a clear that was reverted (the flag was restored on purpose, so it holds until a newer reason is recorded)' : 'a clear'} by ${lastOverride.actor} on ${iso(lastOverride.created_at)?.slice(0, 10)}` : 'the flag was never cleared or reverted before', at: lastOverride ? iso(lastOverride.created_at) : null, hard: false });
 
   sources.push(
     dsn === 'not_read'

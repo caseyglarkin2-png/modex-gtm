@@ -49,13 +49,14 @@ describe('proposeAliases', () => {
   ];
   it('one proposal per normalized spelling, with the evidence lines, canonical = the account, never an alias row', () => {
     const p = proposeAliases({ accountName: 'H-E-B', aliases: ['HEB Grocery Company'], domains: ['heb.com'], conflicts, rejected: [] });
-    expect(p.map((x) => [x.company, x.canonical, x.key])).toEqual([
-      ['Central Market', 'H-E-B', 'central market'],
-      ['ADUSA Distribution', 'H-E-B', 'adusa distribution'],
-    ]);
+    // One person's departure (ADUSA Distribution, one row) is never a banner proposal (review S9): two or more
+    // people, or the account's own first word, are needed.
+    expect(p.map((x) => [x.company, x.canonical, x.key])).toEqual([['Central Market', 'H-E-B', 'central market']]);
     expect(p[0].evidence).toEqual(["Central Market: 3 HubSpot contacts' CRM company field; Apollo intake 2026-05-04 for Jane Doe", 'HubSpot: Jess Bess, Ana Ruiz, Tom Hale']);
-    expect(p[1].evidence).toEqual(['ADUSA Distribution: LinkedIn profile 2026-10-05 for Dakota Socha']);
     expect(JSON.stringify(p)).not.toMatch(/"status"|created/);
+    // A single row with no shared stem is not proposed; a spelling the employer rule already reads as the account is never proposed.
+    expect(proposeAliases({ accountName: 'NFI Industries', aliases: [], domains: [], conflicts: [{ personName: 'Sam Roe', company: 'SDR Distribution', source: 'HubSpot', at: null }], rejected: [] })).toEqual([]);
+    expect(proposeAliases({ accountName: 'Kroger', aliases: [], domains: [], conflicts: [{ personName: 'Sam Roe', company: 'Kroger Delivery', source: 'HubSpot', at: null }], rejected: [] }).map((x) => x.company)).toEqual([]);
   });
   it('a spelling already an alias, already the account (by the employer rule), or already rejected is never proposed', () => {
     const p = proposeAliases({
@@ -78,6 +79,7 @@ describe('proposeAliases', () => {
         { personName: 'Pat Lee', company: 'KS', source: 'HubSpot', at: null },
         { personName: 'Pat Lee', company: 'Self-employed', source: 'HubSpot', at: null },
         { personName: 'Pat Lee', company: 'King Soopers', source: 'HubSpot', at: null },
+        { personName: 'Kim Roe', company: 'King Soopers', source: 'HubSpot', at: null },
       ],
       rejected: [],
     });

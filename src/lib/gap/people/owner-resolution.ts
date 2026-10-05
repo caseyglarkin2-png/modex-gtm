@@ -230,7 +230,9 @@ function rankDimensions(c: OwnerCandidate, input: OwnerCandidateInput, purpose: 
   const reach: RankDimension = { name: 'reachability', value: c.source === 'gap' && c.hasEmail ? 2 : c.hasEmail ? 1 : 0 };
   // The CURRENT role: a verified or likely-current role (or a verified new title) above one nobody has checked.
   // A changed role with no known title and a role conflict never reach the ranking (set aside upstream).
-  const role: RankDimension = { name: 'current role', value: c.role ? ROLE_RANK[c.role.state] ?? 1 : 1 };
+  // A role that is not usable (a changed role with no title, kept eligible by a relationship) never ranks above an
+  // unverified one (review S5).
+  const role: RankDimension = { name: 'current role', value: c.role ? (c.role.usableForRanking ? ROLE_RANK[c.role.state] ?? 1 : 0) : 1 };
   if (purpose === 'COLD_FIRST_TOUCH') return [...lead, lane, ownership, relevance, region, scope, market, seniority, currentness, reach];
   if (purpose === 'SITE_PILOT') {
     const siteFit: RankDimension = { name: 'site fit', value: r.lane === 'FACILITY_OPERATOR' || r.scope === 'SITE' ? 1 : 0 };
@@ -259,6 +261,9 @@ function recommend(rows: ReadonlyArray<{ c: OwnerCandidate; input: OwnerCandidat
   const b = rankDimensions(rows[1].c, rows[1].input, purpose);
   const i = a.findIndex((d, k) => d.value !== b[k].value);
   if (i < 0 || !STRONG_DIMENSIONS.has(a[i].name)) return null;
+  // "Current role" recommends only when the leader's role is CONFIRMED by strong evidence; leading merely because
+  // the runner-up's role is unusable (or unverified against likely) is a plain choice (review Q1).
+  if (a[i].name === 'current role' && a[i].value < 2) return null;
   const top = rows[0].c;
   const second = rows[1].c;
   const reason = (() => {
@@ -382,17 +387,12 @@ export function resolveOwner(input: OwnerResolutionInput): OwnerResolution {
       });
       continue;
     }
-    // The ROLE changed or is in question while the employer did not: set aside from role-dependent WHO with the
-    // verify sentence (never do-not-contact, never "left"); buyer truth or a relationship is not role-dependent, so
-    // that person stays eligible with the caution.
-    if (c.role && !c.role.usableForRanking && !ci.buyerTruth && !ci.relationship) {
-      excluded.push({ candidate: c, code: c.role.state === 'ROLE_CONFLICT' ? 'role_conflict' : 'role_changed', reason: c.caution ?? `Still at ${account.name}, but the stored role changed. Verify current remit before using.` });
-      continue;
-    }
     if (c.entity?.status === 'divested') {
       excluded.push({ candidate: c, code: 'divested_entity', reason: c.entity.note });
       continue;
     }
+    // Contactability before the role: a do-not-contact person is shown under that reason (with the legacy review
+    // control), whatever their role reads (review B1: the Pepsi Isaac workflow must stay reachable).
     if (ci.doNotContact) {
       excluded.push({ candidate: c, code: 'do_not_contact', reason: 'Marked do not contact in GAP.' });
       continue;
@@ -403,6 +403,13 @@ export function resolveOwner(input: OwnerResolutionInput): OwnerResolution {
     }
     if (ci.optedOut) {
       excluded.push({ candidate: c, code: 'opted_out', reason: 'Opted out of email in HubSpot.' });
+      continue;
+    }
+    // The ROLE changed or is in question while the employer did not: set aside from role-dependent WHO with the
+    // verify sentence (never do-not-contact, never "left"); buyer truth or a relationship is not role-dependent, so
+    // that person stays eligible with the caution.
+    if (c.role && !c.role.usableForRanking && !ci.buyerTruth && !ci.relationship) {
+      excluded.push({ candidate: c, code: c.role.state === 'ROLE_CONFLICT' ? 'role_conflict' : 'role_changed', reason: c.caution ?? `Still at ${account.name}, but the stored role changed. Verify current remit before using.` });
       continue;
     }
     if (c.read.remit === 'OTHER_REGION' || c.read.region === 'OTHER_REGION') {
@@ -434,8 +441,9 @@ export function resolveOwner(input: OwnerResolutionInput): OwnerResolution {
   // Sponsor, tech and site slots from everyone contactable and here, in the ONE prior's order (the brief's buyer
   // map picks its slots the same way, so the two never disagree).
   const order = new Map(rankWho(built.map((r) => ({ key: r.c.key, name: r.c.name, title: r.c.title, reachable: r.c.hasEmail, doNotContact: !!r.input.doNotContact, location: r.c.location, buyerTruth: r.input.buyerTruth, relationship: r.input.relationship, initiative: r.input.initiative })), { entityType: account.entityType }).map((x, i) => [x.candidate.key, i]));
+  // A person whose role is not usable fills no slot either (their stored title is the contradicted one; review N16).
   const contactable = built
-    .filter((r) => !excluded.some((e) => e.candidate.key === r.c.key) && r.c.read.region !== 'OTHER_REGION' && r.c.read.remit !== 'OTHER_REGION' && r.c.source !== 'staged')
+    .filter((r) => !excluded.some((e) => e.candidate.key === r.c.key) && r.c.read.region !== 'OTHER_REGION' && r.c.read.remit !== 'OTHER_REGION' && r.c.source !== 'staged' && !(r.c.role && !r.c.role.usableForRanking))
     .sort((a, b) => (order.get(a.c.key) ?? 0) - (order.get(b.c.key) ?? 0));
   const sponsor = contactable.find((r) => isSponsor(r.c.read, r.c.title))?.c ?? null;
   const tech = contactable.find((r) => r.c.read.lane === 'TRANSFORMATION_TECH' && r.c.read.ownership > 0)?.c ?? null;

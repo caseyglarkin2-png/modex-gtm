@@ -147,14 +147,13 @@ describe('16/19. alias proposals come from employment conflicts, never from name
     expect(r.resolution.eligible.map((c) => c.name)).toEqual(expect.arrayContaining(['Cara Market', 'Dan Market']));
     expect(r.aliasProposals.map((p) => p.company)).not.toContain('Central Market');
   });
-  it('a rejected spelling is not proposed again; "Delta Dental" is a conflict, proposed only on its evidence, never on the shared word', async () => {
+  it('a rejected spelling is not proposed again; "Delta Dental" (one contact) stays a conflict and is not proposed: one CRM field is a departure as often as a banner', async () => {
     const prisma = prismaWith(HEB, [], ['Central Market']);
     const r = await loadOwnerResolution(prisma as never, { accountName: 'H-E-B', purpose: 'COLD_FIRST_TOUCH', now: NOW }, { hubspotPeople: hs.reads });
     expect(r.ok).toBe(true);
     if (!r.ok) return;
     expect(r.aliasProposals.map((p) => p.company)).not.toContain('Central Market');
-    const dd = r.aliasProposals.find((p) => p.company === 'Delta Dental');
-    expect(dd?.evidence.join(' ')).toMatch(/1 HubSpot contact/);
+    expect(r.aliasProposals.map((p) => p.company)).not.toContain('Delta Dental');
     expect(r.resolution.excluded.find((e) => e.candidate.name === 'Dee Delta')?.code).toBe('employment_conflict');
   });
 });

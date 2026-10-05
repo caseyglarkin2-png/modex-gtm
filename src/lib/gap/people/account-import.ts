@@ -18,8 +18,9 @@
 import { getHubSpotClient, withHubSpotRetry } from '@/lib/hubspot/client';
 import { normalizeName, normalizeTitle, parseDomainFromEmail, scoreContactQuality, splitName } from '@/lib/contact-standard';
 import { isBlockedRecipientDomain } from '@/lib/contacts/blocked-domains';
-import { sameCompany } from '../family/family';
+import { loadCorporateFamily, sameCompany } from '../family/family';
 import { resolveAccountHubSpotCompanies, type AccountCompanyDeps } from './account-company';
+import { entityBoundaryFor } from './entity-boundary';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -74,6 +75,12 @@ export interface AccountImportInput {
   hubspotContactId: string;
   actor: string;
   now: Date;
+  /**
+   * The verified family company the person was READ from (owner resolution's family read, 2026-10-05): the contact
+   * may be associated with that company instead of the account's own. Accepted only when the id is the linked
+   * HubSpot company of a verified corporate-family member that is not a divested unit; recorded in the audit.
+   */
+  familyCompanyId?: string | null;
 }
 
 export interface AccountImportDeps {
@@ -136,8 +143,26 @@ export async function importHubSpotContactToAccount(prisma: PrismaLike, input: A
   } catch (e) {
     return { ok: false, reason: 'hubspot_unreadable', detail: e instanceof Error ? e.message : String(e) };
   }
-  const match = associated.filter((c) => companies.ids.includes(c));
-  if (!match.length) return { ok: false, reason: 'contact_not_associated', detail: `HubSpot contact ${id} is associated with ${associated.length ? `compan${associated.length === 1 ? 'y' : 'ies'} ${associated.join(', ')}` : 'no company'}, not with ${account.name} (${companies.ids.join(', ')}).` };
+  const notes: string[] = [];
+  // A verified family company (the owner panel read the person there): accepted only when it is the linked company
+  // of a corporate-family member that is not divested; never a guess from the contact's own company field.
+  const familyId = String(input.familyCompanyId ?? '').trim();
+  let viaFamily: { accountName: string; companyId: string } | null = null;
+  if (familyId && !companies.ids.includes(familyId)) {
+    const family = await loadCorporateFamily(prisma, account.name).catch(() => ({ accountName: account.name, parentName: null, members: [] as Array<{ accountName: string; relation: string }> }));
+    for (const m of family.members) {
+      if (entityBoundaryFor(account.name, { company: m.accountName })?.status === 'divested') continue;
+      const row: { hubspot_company_id: string | null } | null = await prisma.account.findUnique({ where: { name: m.accountName }, select: { hubspot_company_id: true } }).catch(() => null);
+      if (String(row?.hubspot_company_id ?? '').trim() === familyId) {
+        viaFamily = { accountName: m.accountName, companyId: familyId };
+        break;
+      }
+    }
+  }
+  const accepted = viaFamily ? [...companies.ids, viaFamily.companyId] : companies.ids;
+  const match = associated.filter((c) => accepted.includes(c));
+  if (!match.length) return { ok: false, reason: 'contact_not_associated', detail: `HubSpot contact ${id} is associated with ${associated.length ? `compan${associated.length === 1 ? 'y' : 'ies'} ${associated.join(', ')}` : 'no company'}, not with ${account.name} (${companies.ids.join(', ')})${familyId && !viaFamily ? `; ${familyId} is not a verified family company of ${account.name}` : ''}.` };
+  if (viaFamily) notes.push(`Read from the ${viaFamily.accountName} record (a ${account.name} family company) and linked into ${account.name} at your click.`);
 
   const p = contact.properties;
   const email = cleanEmail(p.email);
@@ -148,7 +173,6 @@ export async function importHubSpotContactToAccount(prisma: PrismaLike, input: A
   const title = clean(p.jobtitle);
   const optedOut = String(p.hs_email_optout ?? '').toLowerCase() === 'true';
   const linkedin = clean(p.hs_linkedin_url) ?? clean(p.linkedin_url);
-  const notes: string[] = [];
   // Match an existing persona: by HubSpot id first (an explicit link), then by email at this account (a legacy
   // duplicate that is do-not-contact or bounced never wins over the live row), then anywhere.
   const byId: Row | null = await prisma.persona.findFirst({ where: { hubspot_contact_id: id }, select: PERSONA_SELECT });
@@ -231,7 +255,7 @@ export async function importHubSpotContactToAccount(prisma: PrismaLike, input: A
         persona_status: 'Not started',
         source_type: 'hubspot',
         source_url: linkedin,
-        source_evidence: { source: 'hubspot', sourceContactId: id, via: 'owner_resolution', importedBy: input.actor, companyIds: match },
+        source_evidence: { source: 'hubspot', sourceContactId: id, via: 'owner_resolution', importedBy: input.actor, companyIds: match, ...(viaFamily ? { viaFamily } : {}) },
         last_enriched_at: input.now,
       },
       select: { id: true },
@@ -246,7 +270,7 @@ export async function importHubSpotContactToAccount(prisma: PrismaLike, input: A
         create: { contact_enrichment_id: enrichment.id, field_name, field_value, source: 'hubspot', source_timestamp: input.now, last_writer: 'owner_resolution_import' },
       });
     }
-    const auditId = await auditRow(tx, input, { personaId: persona.id, hubspotContactId: id, accountName: account.name, status: 'created', matchedBy: null, companyIds: match });
+    const auditId = await auditRow(tx, input, { personaId: persona.id, hubspotContactId: id, accountName: account.name, status: 'created', matchedBy: null, companyIds: match, ...(viaFamily ? { viaFamily } : {}) });
     return { personaId: persona.id as number, auditId };
   });
   await (deps.sync ?? defaultSync)({ accountNames: [account.name], personaIds: [created.personaId] }).catch(() => undefined);
@@ -257,7 +281,7 @@ export async function importHubSpotContactToAccount(prisma: PrismaLike, input: A
 type Row = Record<string, any>;
 const PERSONA_SELECT = { id: true, account_name: true, name: true, title: true, email: true, email_status: true, do_not_contact: true, hubspot_contact_id: true } as const;
 
-async function auditRow(tx: PrismaLike, input: AccountImportInput, payload: { personaId: number; hubspotContactId: string; accountName: string; status: AccountImportStatus; matchedBy: string | null; from?: string; companyIds: string[] }): Promise<string> {
+async function auditRow(tx: PrismaLike, input: AccountImportInput, payload: { personaId: number; hubspotContactId: string; accountName: string; status: AccountImportStatus; matchedBy: string | null; from?: string; companyIds: string[]; viaFamily?: { accountName: string; companyId: string } }): Promise<string> {
   const row = await tx.gapAuditEvent.create({
     data: { kind: IMPORTED_FROM_HUBSPOT, actor: input.actor, subject_type: 'persona', subject_id: String(payload.personaId), payload: { ...payload, at: input.now.toISOString(), hubspotWritten: false, apolloSpent: 0, accountCreated: false } },
     select: { id: true },

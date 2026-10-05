@@ -126,8 +126,8 @@ describe('loadSuppressionReview: every source listed with its verdict', () => {
     expect(r.lastBounceAt).toBe('2026-03-27T10:05:00.000Z');
     expect(r.laterDeliveries).toHaveLength(3);
     expect(r.laterDeliveries[0]).toEqual({ at: '2026-03-27T15:00:00.000Z', subject: 'Re: Frito-Lay yards', status: 'delivered' });
-    expect(r.clear).toEqual({ allowed: true, touches: ['personas.do_not_contact', 'personas.email_status'], why: expect.stringMatching(/only block is the stale local flag/i) });
-    expect(r.whyBlocked.join(' ')).toMatch(/do_not_contact is true/);
+    expect(r.clear).toEqual({ allowed: true, touches: ['the local do-not-contact flag on the GAP record', 'the historical bounced email status on the GAP record'], why: expect.stringMatching(/only block is the stale local flag/i) });
+    expect(r.whyBlocked.join(' ')).toMatch(/the record is marked do not contact/);
     expect(r.whyBlocked.join(' ')).toMatch(/3 messages were delivered to the same address after the last bounce/);
     expect(r.whatWouldClear).toEqual([expect.stringMatching(/Casey's confirmed click/)]);
     expect(r.whyBlocked.join(' ') + r.whatWouldClear.join(' ')).not.toMatch(/—/);

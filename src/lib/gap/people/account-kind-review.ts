@@ -30,7 +30,11 @@ const VOCABULARY_NOTE = 'the vocabulary has no separate carrier value, so a carr
  * "Logistics" or "DC operations" title is NOT one: shippers have both, and a keyword coincidence must never flip a
  * shipper.
  */
-export const CARRIER_NETWORK_ROLE = /\b(line ?haul|hub (operations|manager|director|leader)|hubs? (and|&) networks?|terminal(s)? (operations|manager|director|leader)?|sortation|sort operations|dedicated (fleet|contract carriage|transportation|services)|network operations|drivers?( (recruit\w*|manager|services|relations|development))?|intermodal|brokerage|pickup (and|&) delivery|p&d|drayage|fleet (services|maintenance|operations)|owner[- ]operators?|cross ?dock operations)\b/i;
+/**
+ * Titles only a carrier or 3PL has: a shipper's private fleet also has fleet, driver and dedicated-fleet titles, so
+ * those never count (review S8); the network words below name the physical network as the product.
+ */
+export const CARRIER_NETWORK_ROLE = /\b(line ?haul|hub (operations|manager|director|leader)|hubs? (and|&) networks?|terminal(s)? (operations|manager|director|leader)|sortation|sort operations|dedicated contract carriage|network operations|brokerage|pickup (and|&) delivery|p&d|drayage|owner[- ]operators?|cross ?dock operations|less[- ]than[- ]truckload|ltl operations|truckload operations|final mile operations|parcel operations)\b/i;
 
 export interface AccountKindEvidence {
   accountName: string;

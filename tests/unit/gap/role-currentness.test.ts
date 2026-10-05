@@ -140,12 +140,15 @@ describe('(5) the CRM alone, however recently modified, is ROLE_UNVERIFIED', () 
     const apollo = (title: string): EmploymentEvidence => ({ kind: 'apollo', tier: 'supporting', company: ACCOUNT, title, at: '2026-09-11T00:00:00Z', source: 'Apollo employment check', note: 'Title refreshed by Apollo.' });
     expect(read([...crm(), apollo('Senior Director, West Transportation Command Center')])).toMatchObject({ state: 'ROLE_CURRENT_LIKELY', usableForRanking: true, effectiveTitle: STORED });
     const c = read([...crm(), apollo('Director, Transportation Command Center')]);
-    expect(c.state).toBe('ROLE_CONFLICT');
-    expect(c.usableForRanking).toBe(false);
+    // Review S6: a provider title that differs is a reason to verify, never a block (five real contacts were set aside
+    // for a wording difference); only strong sources that disagree are a conflict.
+    expect(c.state).toBe('ROLE_UNVERIFIED');
+    expect(c.usableForRanking).toBe(true);
     expect(c.verifyNeeded).toBe(true);
-    expect(roleBlocksRanking(c.state)).toBe(true);
-    // The CRM's own title differing from the stored title is the same conflict.
-    expect(read(crm('Director, Transportation Command Center')).state).toBe('ROLE_CONFLICT');
+    expect(roleBlocksRanking(c.state)).toBe(false);
+    // The CRM title differing from the stored title is a wording difference, read as the current CRM title, unverified.
+    const crmDiff = read(crm('Director, Transportation Command Center'));
+    expect(crmDiff).toMatchObject({ state: 'ROLE_UNVERIFIED', effectiveTitle: 'Director, Transportation Command Center', titleSource: 'crm', usableForRanking: true, verifyNeeded: true });
   });
 });
 

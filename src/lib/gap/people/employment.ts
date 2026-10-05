@@ -156,7 +156,16 @@ function leads(short: string, long: readonly string[]): boolean {
 }
 const usableSpelling = (s: string) => (s.length >= 3 || /\d/.test(s)) && !GENERIC_EMPLOYER_WORDS.has(s);
 /** Two spellings whose first word is the same distinctive name ("NFI Logistics" / "NFI Industries", "Estes Forwarding" / "Estes Express"): a division, a subsidiary or a banner of the same group. */
-const sameFirstWord = (a: readonly string[], b: readonly string[]) => !!a[0] && a[0] === b[0] && usableSpelling(a[0]);
+/** Words that describe a unit of the same group without naming another company: "NFI Logistics" / "NFI Industries", "Estes Forwarding" / "Estes Express". */
+const FAMILY_DESCRIPTORS = new Set(['logistics', 'industries', 'express', 'forwarding', 'transport', 'transportation', 'services', 'service', 'group', 'distribution', 'freight', 'trucking', 'holdings', 'international', 'global', 'national', 'america', 'americas', 'north', 'usa', 'us', 'company', 'corporation', 'division', 'enterprises', 'systems', 'solutions', 'supply', 'chain', 'brands', 'foods', 'beverages', 'worldwide', 'intermodal', 'dedicated', 'warehousing', 'fulfillment', 'lines', 'line', 'ground', 'air', 'cargo', 'shipping', 'motor']);
+/**
+ * Two spellings whose first word is the same distinctive name AND whose remaining words only describe a unit of the
+ * group ("NFI Logistics" / "NFI Industries"): a division, a subsidiary or a banner. A remaining word that names
+ * something else ("Dollar Tree" / "Dollar General", "Schneider Electric" / "Schneider National", "Old Dominion
+ * University" / "Old Dominion Freight Line", "Performance Team" / "Performance Food Group") is another company,
+ * so a strong placement there reads as a departure (review S4).
+ */
+const sameFirstWord = (a: readonly string[], b: readonly string[]) => !!a[0] && a[0] === b[0] && usableSpelling(a[0]) && a.slice(1).every((w) => FAMILY_DESCRIPTORS.has(w)) && b.slice(1).every((w) => FAMILY_DESCRIPTORS.has(w));
 
 export function sameEmployer(company: string, accountName: string, aliases: readonly string[] = [], domains: readonly string[] = []): boolean {
   const names = [accountName, ...aliases].filter((n) => !!n?.trim());
@@ -283,6 +292,8 @@ export function interactionEvidence(input: { at: string | null; what: string; ac
 }
 
 /** The tier a web source earns from its URL: a profile or the employer's own page is strong, anything else supporting. */
+const AGGREGATOR_HOST = /\b(zoominfo|rocketreach|contactout|signalhire|apollo|lusha|crunchbase|datanyze|leadiq|seamless|wiza|theorg|spokeo|sprouts|muraena|theofficialboard|equilar|comparably|craft)\b/;
+
 export function tierForUrl(url: string | null | undefined, companyDomains: readonly string[] = []): EvidenceTier {
   let host = '';
   let path = '';
@@ -296,7 +307,8 @@ export function tierForUrl(url: string | null | undefined, companyDomains: reado
   if (!host) return 'weak';
   if (host === 'linkedin.com' && path.startsWith('/in/')) return 'strong';
   if (companyDomains.some((d) => host === d || host.endsWith(`.${d}`))) return 'strong';
-  if (/\b(zoominfo|rocketreach|contactout|signalhire|apollo|lusha|crunchbase|datanyze|leadiq|seamless|wiza)\b/.test(host)) return 'supporting';
+  // A people directory or aggregator is weak: it restates a CRM-shaped record and never decides a role (review S3).
+  if (AGGREGATOR_HOST.test(host)) return 'weak';
   return 'supporting';
 }
 
@@ -307,7 +319,7 @@ export function kindForUrl(url: string | null | undefined, companyDomains: reado
     const host = u.hostname.replace(/^www\./, '').toLowerCase();
     if (host === 'linkedin.com' && u.pathname.toLowerCase().startsWith('/in/')) return 'profile';
     if (companyDomains.some((d) => host === d || host.endsWith(`.${d}`))) return 'employer_page';
-    if (/\b(zoominfo|rocketreach|contactout|signalhire|apollo|lusha|datanyze|leadiq|seamless|wiza)\b/.test(host)) return 'aggregator';
+    if (AGGREGATOR_HOST.test(host)) return 'aggregator';
   } catch {
     // not a URL
   }

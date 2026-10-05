@@ -476,8 +476,10 @@ export async function loadHubSpotContactRoleEvidence(prisma: PrismaLike, contact
   for (const r of rows) {
     if (!r.payload || typeof r.payload !== 'object') continue;
     const list = out.get(r.subject_id) ?? [];
-    if (list.length >= ROLE_EVIDENCE_PER_CONTACT) continue;
-    list.push(evidenceFromRolePayload(r.payload as Record<string, unknown>, r.created_at));
+    const e = evidenceFromRolePayload(r.payload as Record<string, unknown>, r.created_at);
+    // Casey's own row never drops out behind automation rows (review N14).
+    if (list.length >= ROLE_EVIDENCE_PER_CONTACT && e.kind !== 'human') continue;
+    list.push(e);
     out.set(r.subject_id, list);
   }
   return out;

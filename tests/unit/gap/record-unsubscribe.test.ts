@@ -398,5 +398,13 @@ describe('structural invariant: the helper is the only GAP writer of Persona.do_
       .filter((f) => writesDoNotContact(readFileSync(f, 'utf8')))
       .map((f) => path.relative(root, f).replace(/\\/g, '/'));
     expect(offenders, `files writing do_not_contact outside ${WRITER}: ${offenders.join(', ')}`).toStrictEqual([]);
-  });
+  }, 20_000);
+
+  it('exactly one GAP file imports the governed clear, and it is the legacy review service (an import-and-call is a write the detector cannot see)', () => {
+    const files = SCAN_ROOTS.flatMap((r) => walk(path.join(root, r)));
+    const importers = files
+      .filter((f) => /suppression-correction/.test(stripComments(readFileSync(f, 'utf8'))))
+      .map((f) => path.relative(root, f).replace(/\\/g, '/'));
+    expect(importers).toStrictEqual(['src/lib/gap/suppression/legacy-review.ts']);
+  }, 20_000);
 });

@@ -18,10 +18,10 @@ type Verification = { verdict?: string; company?: string | null; title?: string 
 type RoleReadLike = { state?: string; effectiveTitle?: string | null; usableForRanking?: boolean };
 
 /** The remit word in a stored title ("transportation" in "Sr Director - West Transportation Command Center"), for the sentence. */
-const REMIT_WORDS = ['transportation', 'logistics', 'supply chain', 'distribution', 'fleet', 'warehouse', 'network', 'yard', 'terminal', 'operations'];
+const REMIT_WORDS = ['transportation', 'logistics', 'supply chain', 'distribution', 'fleet', 'warehouse', 'network', 'yards', 'terminal', 'operations'];
 export function remitWord(title: string | null | undefined): string | null {
   const t = (title ?? '').toLowerCase();
-  return REMIT_WORDS.find((w) => t.includes(w)) ?? null;
+  return REMIT_WORDS.find((w) => t.includes(w === 'yards' ? 'yard' : w)) ?? null;
 }
 
 const host = (url: string | null | undefined): string => {
@@ -85,7 +85,7 @@ export function EmploymentControl({ personaId, hubspotContactId, name, accountNa
       const role = b.role as RoleReadLike | undefined;
       if (status === 'left') return `Recorded: ${name} left ${accountName}${company.trim() ? ` (now ${company.trim()})` : ''}. Not eligible for ${accountName} outreach; not do-not-contact.`;
       if (status === 'role_changed') return newTitle.trim() ? `Recorded: ${name}'s role at ${accountName} is now "${newTitle.trim()}". Usable for ranking under the new title.` : `Recorded: ${name}'s stored role at ${accountName} is no longer theirs; the new title is not known. Verify current remit before using.`;
-      return `Recorded (${String(read?.state ?? 'current').replace(/_/g, ' ').toLowerCase()}${role?.state ? `; ${String(role.state).replace(/_/g, ' ').toLowerCase()}` : ''}).`;
+      return `Recorded. Employment now reads ${String(read?.state ?? 'current').replace(/_/g, ' ').toLowerCase()}${role?.state ? ` and the role reads ${String(role.state).replace(/^ROLE_/, '').replace(/_/g, ' ').toLowerCase()}` : ''}.`;
     });
   const verify = () => {
     const path = hubspotOnly ? '/api/gap/people/verify-role' : `/api/gap/personas/${personaId}/employment/verify`;

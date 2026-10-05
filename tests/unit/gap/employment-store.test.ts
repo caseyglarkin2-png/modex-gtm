@@ -162,7 +162,7 @@ describe('verifyEmployment: the prompt asks for a source; the parse asserts noth
   it('parses a fenced JSON answer and tiers it by the URL', () => {
     const text = 'Here is what I found:\n```json\n{"verdict":"left","company":"ADUSA Distribution","title":"Director of Distribution Operations","sourceUrl":"https://www.linkedin.com/in/dakota-x","sourceDate":"2026-09","confidence":"high","summary":"Profile headline shows ADUSA."}\n```';
     expect(parseEmploymentAnswer(text, {})).toMatchObject({ verdict: 'left', company: 'ADUSA Distribution', tier: 'strong', sourceDate: '2026-09' });
-    expect(parseEmploymentAnswer('{"verdict":"left","company":"X","sourceUrl":"https://www.zoominfo.com/p/x","confidence":"high"}', {}).tier).toBe('supporting');
+    expect(parseEmploymentAnswer('{"verdict":"left","company":"X","sourceUrl":"https://www.zoominfo.com/p/x","confidence":"high"}', {}).tier).toBe('weak');
   });
   it('no URL, a bad URL, prose, or an unknown verdict is unknown', () => {
     expect(parseEmploymentAnswer('{"verdict":"left","company":"X","sourceUrl":null,"confidence":"high","summary":"I think so"}', {})).toMatchObject({ verdict: 'unknown', summary: 'I think so' });

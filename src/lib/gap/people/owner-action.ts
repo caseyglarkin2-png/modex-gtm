@@ -69,11 +69,15 @@ export async function applyOwnerToHypothesis(prisma: PrismaLike, input: UseOwner
     return stop(null, null, null);
   }
 
-  // 1. import (HubSpot-only)
+  // 1. import (HubSpot-only). The person may have been read from a verified family company (the panel showed
+  // where): the resolution says so, and the import accepts that company only after re-verifying the family.
   let personaId = typeof input.candidate.personaId === 'number' ? input.candidate.personaId : null;
   let personaName: string | null = null;
   if (personaId === null && input.candidate.hubspotContactId) {
-    const imp = await (deps.import ?? importHubSpotContactToAccount)(prisma, { accountName: row.account_name, hubspotContactId: input.candidate.hubspotContactId, actor: input.actor, now: input.now }, deps.importDeps);
+    const pre = await (deps.resolve ?? loadOwnerResolution)(prisma, { accountName: row.account_name, purpose: 'HYPOTHESIS_ACTIVATION', hypothesisId: row.id, now: input.now }, deps.resolveDeps).catch(() => null);
+    const shown = pre && pre.ok ? [...pre.resolution.eligible, ...pre.resolution.excluded.map((e) => e.candidate)].find((c) => c.key === `hubspot:${input.candidate.hubspotContactId}`) : null;
+    const familyCompanyId = shown?.provenance && shown.provenance.relation !== 'primary' ? shown.provenance.companyId : null;
+    const imp = await (deps.import ?? importHubSpotContactToAccount)(prisma, { accountName: row.account_name, hubspotContactId: input.candidate.hubspotContactId, actor: input.actor, now: input.now, familyCompanyId }, deps.importDeps);
     if (!imp.ok) {
       steps.push({ step: 'import', ok: false, reason: imp.reason, detail: imp.detail });
       return stop(row.status, null, null);
