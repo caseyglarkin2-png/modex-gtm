@@ -341,7 +341,9 @@ export function resolveOwner(input: OwnerResolutionInput): OwnerResolution {
     const relevance = thesis ? thesisRelevance(title, thesis) : null;
     const entity = entityBoundaryFor(account.name, { title, company: ci.company ?? null });
     const employment = ci.employment ?? null;
-    const roleCaution = role && !role.usableForRanking ? `Still at ${account.name}, but the stored ${roleWord(ci.title)} role${role.priorTitle ?? ci.title ? ` (${role.priorTitle ?? ci.title})` : ''} ${role.state === 'ROLE_CONFLICT' ? 'is in question' : 'changed'}: ${role.why} Verify current ${role.state === 'ROLE_CONFLICT' ? 'role' : 'remit'} before using.` : null;
+    // The role read's own sentence already says "Still at ..." when it decided a change; the resolver wraps only a
+    // sentence that does not, so the seller never reads the same clause twice.
+    const roleCaution = role && !role.usableForRanking ? (/^Still at /.test(role.why) ? role.why : `Still at ${account.name}, but the stored ${roleWord(ci.title)} role${role.priorTitle ?? ci.title ? ` (${role.priorTitle ?? ci.title})` : ''} ${role.state === 'ROLE_CONFLICT' ? 'is in question' : 'changed'}: ${role.why} Verify current ${role.state === 'ROLE_CONFLICT' ? 'role' : 'remit'} before using.`) : null;
     const c: OwnerCandidate = {
       key: ci.key,
       source: ci.source,

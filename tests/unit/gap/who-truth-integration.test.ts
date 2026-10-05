@@ -53,8 +53,10 @@ describe('the owner loader reads role evidence recorded against a HubSpot contac
     if (!withRow.ok) return;
     const e = withRow.resolution.excluded.find((x) => x.candidate.name === 'Christina Mannella');
     expect(e?.code).toBe('role_changed');
-    expect(e?.reason).toMatch(/^Still at Walmart Inc\., but the stored transportation role \(Sr Director - West Transportation Command Center\) changed: /);
+    // The role read's own sentence stands once; the resolver never wraps "Still at ..." inside "Still at ...".
+    expect(e?.reason).toMatch(/^Still at Walmart Inc\., but the stored role \("Sr Director - West Transportation Command Center"\) changed per /);
     expect(e?.reason).toMatch(/Verify current remit before using\.$/);
+    expect(e?.reason.match(/Still at /g)).toHaveLength(1);
     expect(withRow.resolution.eligible.map((c) => c.name)).toEqual(['Doug Estrada']);
     expect(withRow.resolution.checked).toContain('role currentness (1 set aside)');
 
