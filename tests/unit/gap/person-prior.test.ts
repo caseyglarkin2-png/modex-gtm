@@ -19,8 +19,10 @@ describe('lanes: operating ownership, not the bare word "transportation"', () =>
       'VP Logistics',
     ]) expect([t, lane(t)]).toEqual([t, 'PRIMARY_OPERATOR']);
   });
+  // "Director, Transportation & Trade Compliance" moved to the operator lane (seller correction 2026-10-04: compliance
+  // beside a transportation function is a second remit; person-prior-operator.test.ts).
   it('procurement / commercial: buys, prices, funds or governs transportation', () => {
-    for (const t of ['Director of Transportation Strategic Sourcing', 'Global Transportation Category Director', 'Director, Transportation & Trade Compliance', 'Finance Director, North America Transportation & Warehousing Forecast Operations', 'Director PS Transportation Sustainability at Procter & Gamble', 'Director Purchases Transportation and Warehousing', 'Global Transportation Cost Director', 'Senior Director of Transportation & Operations Purchasing'])
+    for (const t of ['Director of Transportation Strategic Sourcing', 'Global Transportation Category Director', 'Finance Director, North America Transportation & Warehousing Forecast Operations', 'Director PS Transportation Sustainability at Procter & Gamble', 'Director Purchases Transportation and Warehousing', 'Global Transportation Cost Director', 'Senior Director of Transportation & Operations Purchasing'])
       expect([t, lane(t)]).toEqual([t, 'PROCUREMENT_COMMERCIAL']);
   });
   it('non-operating: a product market, business unit, R&D, sales or generic IT', () => {
@@ -108,6 +110,6 @@ describe('WHO order: buyer truth > relationship > initiative > lane > region > s
     const [top] = rankWho([p('na', 'NA Transportation Operations Director')]);
     expect(top.why).toBe('Primary operator: title says they run transportation, freight or fleet; North America remit stated; network scope.');
     expect(top.why).not.toMatch(/\d/);
-    expect(whoKey(top.candidate, top.read).length).toBe(11);
+    expect(whoKey(top.candidate, top.read).length).toBe(12);
   });
 });

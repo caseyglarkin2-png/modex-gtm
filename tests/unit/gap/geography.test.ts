@@ -56,11 +56,13 @@ describe('location and remit are separate facts', () => {
 
 describe('ranking: North America is one tier, and never outranks ownership', () => {
   const c = (key: string, title: string, location: string | null) => ({ key, name: key, title, reachable: true, location });
-  it('a Canada-based transportation owner ties a US-based one on geography and beats an unknown one', () => {
+  // US-first (seller correction 2026-10-04): among equal owners the US market wins Casey's current cold motion; Canada
+  // and Mexico stay North America (they beat unknown) and never outrank ownership.
+  it('a Canada-based transportation owner follows a US-based one, and beats an unknown one', () => {
     const r = rankWho([c('unknown', 'Director of Transportation', null), c('toronto', 'Director of Transportation', 'Toronto, Ontario, Canada')]);
     expect(r[0].candidate.key).toBe('toronto');
     const tie = rankWho([c('b-us', 'Director of Transportation', 'Chicago, IL'), c('a-ca', 'Director of Transportation', 'Toronto, ON')]);
-    expect(tie.map((x) => x.candidate.key)).toEqual(['a-ca', 'b-us']);
+    expect(tie.map((x) => x.candidate.key)).toEqual(['b-us', 'a-ca']);
   });
   it('a located-in-NA adjacent operator never beats a transportation owner whose location is unknown', () => {
     const r = rankWho([c('adj', 'VP Supply Chain', 'Toronto, Ontario, Canada'), c('owner', 'Director of Transportation', null)]);
@@ -175,9 +177,9 @@ describe('Mexico is North America (Casey, 2026-10-03); generic Latin America is 
     expect(readPerson('VP, Latin America Transportation')).toMatchObject({ remit: 'OTHER_REGION', geo: 'OTHER_REGION' });
     expect(readPerson('Director of Logistics LATAM', { location: 'Mexico City, CDMX, Mexico' })).toMatchObject({ geo: 'OTHER_REGION' });
   });
-  it('WHO: a Mexico-based owner ties a US-based one on geography; ownership still outranks geography', () => {
+  it('WHO: a Mexico-based owner follows a US-based one (US-first, 2026-10-04); ownership still outranks geography', () => {
     const c = (key: string, title: string, location: string | null) => ({ key, name: key, title, reachable: true, location });
-    expect(rankWho([c('b-us', 'Director of Transportation', 'Chicago, IL'), c('a-mx', 'Director of Transportation', 'Monterrey, Nuevo Leon, Mexico')]).map((x) => x.candidate.key)).toEqual(['a-mx', 'b-us']);
+    expect(rankWho([c('b-us', 'Director of Transportation', 'Chicago, IL'), c('a-mx', 'Director of Transportation', 'Monterrey, Nuevo Leon, Mexico')]).map((x) => x.candidate.key)).toEqual(['b-us', 'a-mx']);
     expect(rankWho([c('adj', 'VP Supply Chain', 'Monterrey, Nuevo Leon, Mexico'), c('owner', 'Director of Transportation', null)])[0].candidate.key).toBe('owner');
     const [top] = rankWho([c('m', 'Director of Transportation', 'Monterrey, Nuevo Leon, Mexico')]);
     expect(top.why).toBe('Primary operator: title says they run transportation, freight or fleet; Mexico-based; network scope.');

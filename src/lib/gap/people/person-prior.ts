@@ -12,9 +12,18 @@
  *     > not another region's stated remit (a title that says they run Europe owns Europe, not North America)
  *     > LANE  (primary operator > adjacent operator > facility operator > executive sponsor
  *              > transformation / tech > needs review > procurement / commercial > non-operating)
- *     > region (North America: a NA remit, or located in the US or Canada > unknown > another region)
+ *     > named ownership (transportation / fleet / freight by name > logistics or distribution)
+ *     > not based outside North America
  *     > scope  (network > not stated > one site)
+ *     > US market (a US / NA remit or US-based > Canada or Mexico only > unknown; Casey's current cold motion)
  *     > seniority
+ *
+ * OPERATOR-FIRST COLD WHO (seller dogfood correction, 2026-10-04): the buyer map shows every lane; the DEFAULT COLD
+ * FIRST TOUCH (isColdWho) is narrower: a direct freight operator, a transportation tech / transformation owner only
+ * when a live signal names their initiative, a site operator only for a site-scoped motion. A VP Supply Chain is a
+ * sponsor or alternate, never the cold default: with no direct operator on record WHO says "transportation owner not
+ * yet identified, research required" instead of promoting the broadest senior title. Buyer truth, a relationship and
+ * a named initiative still override (they lead whoKey, and their motions name their own person).
  *
  * Operating ownership beats the bare word "transportation": sourcing, purchasing, category, finance, compliance,
  * sustainability, R&D, sales, a product market or business unit named "Transportation", and generic IT are never the
@@ -64,6 +73,8 @@ export const GEO_LABEL: Record<GeoStatus, string> = {
   UNKNOWN: 'Location / remit unknown',
 };
 export type PersonScope = 'NETWORK' | 'UNKNOWN' | 'SITE';
+/** US-first among comparable people (Casey's current cold motion); never outranks the lane or named ownership. */
+export type PersonMarket = 'US' | 'NA_OTHER' | 'UNKNOWN' | 'OUTSIDE';
 
 export const LANE_LABEL: Record<PersonLane, string> = {
   PRIMARY_OPERATOR: 'Primary operator',
@@ -78,8 +89,8 @@ export const LANE_LABEL: Record<PersonLane, string> = {
 };
 
 const LANE_ORDER: PersonLane[] = ['PRIMARY_OPERATOR', 'ADJACENT_OPERATOR', 'FACILITY_OPERATOR', 'EXECUTIVE_SPONSOR', 'TRANSFORMATION_TECH', 'SECURITY_RISK', 'NEEDS_REVIEW', 'PROCUREMENT_COMMERCIAL', 'NON_OPERATING'];
-const REGION_ORDER: PersonRegion[] = ['US_NA', 'UNKNOWN', 'OTHER_REGION'];
 const SCOPE_ORDER: PersonScope[] = ['NETWORK', 'UNKNOWN', 'SITE'];
+const MARKET_ORDER: PersonMarket[] = ['US', 'NA_OTHER', 'UNKNOWN', 'OUTSIDE'];
 
 export interface PersonRead {
   lane: PersonLane;
@@ -95,8 +106,14 @@ export interface PersonRead {
   geo: GeoStatus;
   scope: PersonScope;
   seniority: number;
-  /** Inside the primary lane: 2 = owns transportation / fleet / freight by name, 1 = logistics or distribution, 0 = other. */
+  /**
+   * Primary lane: 2 = owns transportation / fleet / freight by name, 1 = logistics or distribution.
+   * Transformation / tech lane: 2 = explicit transportation, fleet, logistics or yard scope, 0 = generic.
+   * 0 otherwise.
+   */
   ownership: number;
+  /** Casey's current cold market: 'US' (a US / NA remit, or US-based), 'NA_OTHER' (Canada or Mexico only), and so on. */
+  market: PersonMarket;
 }
 
 const has = (t: string, re: RegExp) => re.test(t);
@@ -105,9 +122,19 @@ const has = (t: string, re: RegExp) => re.test(t);
 const PRODUCT_TRANSPORTATION = /transportation (markets?|product|platform|(&|and) (energy|electronics)|sbu|business|vertical|division)|(business|r&d|research|branding)[^,;]*transportation|industrial (&|and) transportation|transportation[^,;]*(business group|division|vertical)/;
 const NON_OPERATING_WORDS = /\b(r&d|research|sales|marketing|branding|regulatory|quality|legal|counsel|human resources|talent|recruit|communications|investor)\b/;
 const COMMERCIAL_WORDS = /\b(sourcing|procurement|purchas\w*|category|buyer|finance|financial|cost|controller|accounting|pricing|compliance|sustainability)\b/;
+// Buying, pricing or funding freight: never the operator, whatever function sits beside it.
+const COMMERCIAL_STRONG = /\b(sourcing|procurement|purchas\w*|category|buyer|finance|financial|cost|controller|accounting|pricing)\b/;
+// A governance or safety remit with the function it modifies ("transportation compliance", "fleet safety"). Removed, it
+// leaves what else the title runs: "VP Global Transportation and Compliance" still runs transportation; "Transportation
+// Compliance Manager" runs nothing else.
+const GOVERNANCE_PHRASE = /\b(?:(?:transportation|transport|fleet|freight|logistics|trade|dot|regulatory|carrier)\s+)?(?:compliance|sustainability|safety)\b/g;
 const TECH_WORDS = /\b(it|software|engineering|digital|technology|technologies|systems?|tms|wms|sap|automation|innovation|data|transformation|analytics|product area|visibility|orchestration|rtls|modernization|solutions architect|identity)\b/;
 const GENERIC_IT = /\b(identity and access|access management|cyber|security engineer|infrastructure|help ?desk|end user)\b/;
-const FREIGHT_WORDS = /\b(transportation|transport|transporte|freight|fleet|otr|over the road|dedicated|trucking|traffic|carrier management|inbound|outbound|intersite|line ?haul|shipping|distribution (&|and) transportation|transportation (&|and) (warehous\w*|distribution|logistics))\b/;
+const FREIGHT_WORDS = /\b(transportation|transport|transporte|freight|fleet|otr|over the road|dedicated|trucking|traffic|carrier management|inbound|outbound|intersite|line ?haul|middle[- ]mile|shipping|distribution (&|and) transportation|transportation (&|and) (warehous\w*|distribution|logistics))\b|\bld&t\b/;
+// Logistics that names the freight network itself: a direct operator at any seniority.
+const LOGISTICS_DIRECT = /\b(logistics operations|network logistics|physical distribution|logistics,? distribution,? (?:&|and) transportation)\b/;
+// Technology scoped to freight, fleet, logistics or the yard (transportation tech), never generic transformation.
+const FREIGHT_TECH_SCOPE = /\b(transportation|transport|freight|fleet|logistics|yard|tms|yms|rtls|autogate|gate automation|machine vision|control tower|visibility|orchestration)\b/;
 const LOGISTICS_OPS = /\b(logistics|distribution|warehous\w*|fulfil\w*|network operations|physical distribution|supply chain operations|operations)\b/;
 const FACILITY_WORDS = /\b(plant manager|site (manager|director|leader)|dc manager|distribution center manager|yard (manager|supervisor|lead)|warehouse manager|general manager|facility (manager|director))\b/;
 const EXEC_WORDS = /\b(chief|csco|coo)\b|(?<!vice[ -])\bpresident\b/;
@@ -160,6 +187,19 @@ export function personCountry(location: string | null | undefined): 'US' | 'OTHE
 const NETWORK = /\b(global|network|enterprise|corporate|corp\.|north america|national|regional|region|americas|na|nala|all sites|multi-site|domestic)\b/;
 const SITE = /\b(plant|site|facility|dc manager|distribution center manager|yard manager|warehouse manager)\b/;
 
+const GOVERNANCE_PHRASE_CI = new RegExp(GOVERNANCE_PHRASE.source, 'gi');
+
+/** The title without its compliance / sustainability / safety remit ("VP Global Transportation and Compliance" -> "VP Global Transportation"). */
+function stripGovernance(title: string): string {
+  return title.replace(GOVERNANCE_PHRASE_CI, ' ').replace(/\s*(?:&|\band\b)\s*(?=$|[,;)-])/gi, ' ').replace(/\s{2,}/g, ' ').trim();
+}
+
+/** A transportation or logistics operating function remains once the governance remit is removed. */
+function operatesBeside(t: string): boolean {
+  const rest = t.replace(GOVERNANCE_PHRASE, ' ');
+  return has(rest, FREIGHT_WORDS) || has(rest, LOGISTICS_DIRECT) || /\blogistics\b/.test(rest);
+}
+
 /** Read one person's title (and the account's entity type) into lane, region, scope and seniority, with reasons. */
 export function readPerson(title: string | null | undefined, opts: { entityType?: string | null; location?: string | null } = {}): PersonRead {
   const raw = String(title ?? '').trim();
@@ -179,9 +219,15 @@ export function readPerson(title: string | null | undefined, opts: { entityType?
   } else if (has(t, PRODUCT_TRANSPORTATION) || (has(t, NON_OPERATING_WORDS) && !has(t, /\boperations? (director|leader|manager)\b/))) {
     lane = 'NON_OPERATING';
     laneWhy = has(t, PRODUCT_TRANSPORTATION) ? '"transportation" names a product, market or business unit here, not freight they move' : 'a non-operating function (R&D, sales, regulatory, quality and the like)';
-  } else if (has(t, COMMERCIAL_WORDS)) {
+  } else if (has(t, COMMERCIAL_STRONG) || (has(t, COMMERCIAL_WORDS) && !operatesBeside(t))) {
     lane = 'PROCUREMENT_COMMERCIAL';
     laneWhy = 'buys, prices, funds or governs transportation (sourcing, purchasing, category, finance, compliance, sustainability); it does not run it';
+  } else if (has(t, COMMERCIAL_WORDS) || (/\bsafety\b/.test(t) && !/\b(security|risk|ehs|hse|claims|loss prevention|asset protection)\b/.test(t) && operatesBeside(t))) {
+    // A MIXED title (seller correction, 2026-10-04): compliance, sustainability or safety BESIDE a transportation or
+    // logistics function. The operating function decides the lane; the governance remit is a second hat.
+    const op = readPerson(stripGovernance(raw), { entityType: opts.entityType });
+    lane = op.lane;
+    laneWhy = `${op.laneWhy} (${/\bsafety\b/.test(t) && !has(t, COMMERCIAL_WORDS) ? 'safety' : 'compliance'} is a second remit beside the operating function, not procurement)`;
   } else if (has(t, EXEC_TECH)) {
     lane = 'TRANSFORMATION_TECH';
     laneWhy = 'the technology executive (a sponsor for systems, never the operating owner)';
@@ -209,9 +255,9 @@ export function readPerson(title: string | null | undefined, opts: { entityType?
   } else if (has(t, FACILITY_WORDS)) {
     lane = 'FACILITY_OPERATOR';
     laneWhy = 'runs a site (plant, DC, warehouse or yard)';
-  } else if (has(t, FREIGHT_WORDS) || (carrierLike && has(t, /\b(operations|terminal|yard|network)\b/))) {
+  } else if (has(t, FREIGHT_WORDS) || has(t, LOGISTICS_DIRECT) || (carrierLike && has(t, /\b(operations|terminal|yard|network)\b/))) {
     lane = 'PRIMARY_OPERATOR';
-    laneWhy = carrierLike && !has(t, FREIGHT_WORDS) ? 'runs the operation at a carrier, 3PL or terminal (the physical network is their product)' : 'title says they run transportation, freight or fleet';
+    laneWhy = has(t, FREIGHT_WORDS) ? 'title says they run transportation, freight or fleet' : has(t, LOGISTICS_DIRECT) ? 'title says they run logistics operations (the freight network)' : 'runs the operation at a carrier, 3PL or terminal (the physical network is their product)';
   } else if (/\blogistics\b/.test(t) && /\b(global|director|vp|vice president|head|senior director)\b/.test(t) && !/\bsupply chain manager\b/.test(t)) {
     lane = 'PRIMARY_OPERATOR';
     laneWhy = 'title says they run logistics (the freight network)';
@@ -256,8 +302,15 @@ export function readPerson(title: string | null | undefined, opts: { entityType?
   // A director-or-above who runs transportation, logistics or fleet runs a network unless a site is named.
   const leadsFreight = seniority >= 3 && (lane === 'PRIMARY_OPERATOR' || lane === 'ADJACENT_OPERATOR');
   const scope: PersonScope = has(t, SITE) && !has(t, NETWORK) ? 'SITE' : has(t, NETWORK) || (leadsFreight && !has(t, SITE)) ? 'NETWORK' : 'UNKNOWN';
-  const ownership = lane === 'PRIMARY_OPERATOR' ? (/\b(transportation|transport|fleet|freight|otr|dedicated|trucking|line ?haul|intersite)\b/.test(t) ? 2 : 1) : 0;
-  return { lane, laneWhy, region, regionWhy, location, remit, geo, scope, seniority, ownership };
+  const ownership =
+    lane === 'PRIMARY_OPERATOR' ? (/\b(transportation|transport|fleet|freight|otr|dedicated|trucking|line ?haul|intersite|middle[- ]mile)\b|\bld&t\b/.test(t) ? 2 : 1)
+    : lane === 'TRANSFORMATION_TECH' ? (has(t, FREIGHT_TECH_SCOPE) ? 2 : 0)
+    : 0;
+  // US-first (Casey's current cold motion): a title naming the US or North America is the US market, one naming only
+  // Canada or Mexico is not; with no remit stated the person's own location decides; unknown is not foreign.
+  const usRemit = /\b(na|n\.a\.|north america|north american|us|u\.s\.|usa|united states|domestic|nala)\b/.test(t);
+  const market: PersonMarket = geo === 'OTHER_REGION' ? 'OUTSIDE' : remit === 'NORTH_AMERICA' ? (usRemit ? 'US' : 'NA_OTHER') : location === 'US' ? 'US' : location === 'CANADA' || location === 'MEXICO' ? 'NA_OTHER' : 'UNKNOWN';
+  return { lane, laneWhy, region, regionWhy, location, remit, geo, scope, seniority, ownership, market };
 }
 
 export interface WhoCandidate {
@@ -286,12 +339,14 @@ export interface WhoPick<C extends WhoCandidate = WhoCandidate> {
 const rank = <T>(order: T[], v: T) => order.length - order.indexOf(v);
 
 /** The prior's own part of the order (lane, region, scope), for callers that add their own tie-breaks. */
-export const priorKey = (read: PersonRead): number[] => [read.remit === 'OTHER_REGION' ? 0 : 1, rank(LANE_ORDER, read.lane), rank(REGION_ORDER, read.region), rank(SCOPE_ORDER, read.scope)];
+// Function first (lane, then named ownership), then out-of-market, then network scope, then the US market (seller
+// correction 2026-10-04: an exact Transportation Operations Manager outranks a generic VP; geography never leads).
+export const priorKey = (read: PersonRead): number[] => [read.remit === 'OTHER_REGION' ? 0 : 1, rank(LANE_ORDER, read.lane), read.ownership, read.region === 'OTHER_REGION' ? 0 : 1, rank(SCOPE_ORDER, read.scope), rank(MARKET_ORDER, read.market)];
 
 /** The ordered comparison key (first difference wins). Exposed for tests; never shown as a number. */
 export function whoKey(c: WhoCandidate, read: PersonRead): number[] {
   // A stated other-region remit is a fact about what they OWN (review B1): it comes before the lane, not as a tie-break.
-  return [c.doNotContact ? 0 : 1, c.buyerTruth ? 1 : 0, c.relationship ? 1 : 0, c.initiative ? 1 : 0, read.remit === 'OTHER_REGION' ? 0 : 1, rank(LANE_ORDER, read.lane), rank(REGION_ORDER, read.region), rank(SCOPE_ORDER, read.scope), read.ownership, read.seniority, c.reachable ? 1 : 0];
+  return [c.doNotContact ? 0 : 1, c.buyerTruth ? 1 : 0, c.relationship ? 1 : 0, c.initiative ? 1 : 0, ...priorKey(read), read.seniority, c.reachable ? 1 : 0];
 }
 
 /** The geography fact that decided, in a few words (WHO's why, the motion factors). */
@@ -321,7 +376,21 @@ export function rankWho<C extends WhoCandidate>(cands: readonly C[], opts: { ent
     .map(({ candidate, read, why }) => ({ candidate, read, why }));
 }
 
-/** A person worth leading with: an operating lane, never procurement, non-operating or an unread title by default. */
+/**
+ * THE DEFAULT COLD FIRST TOUCH (seller correction, 2026-10-04): a direct freight operator; a transportation tech /
+ * transformation owner with freight scope only when a live signal names their initiative; a site operator only for a
+ * site-scoped motion. Never another region's remit, never someone based outside North America. A VP Supply Chain, an
+ * executive sponsor or a bare "operations" title is buyer map, never the cold default.
+ */
+export function isColdWho(read: Pick<PersonRead, 'lane' | 'remit' | 'region' | 'ownership'>, ctx: { initiative?: string | null; siteScoped?: boolean } = {}): boolean {
+  if (read.remit === 'OTHER_REGION' || read.region === 'OTHER_REGION') return false;
+  if (read.lane === 'PRIMARY_OPERATOR') return true;
+  if (read.lane === 'TRANSFORMATION_TECH') return !!ctx.initiative && read.ownership > 0;
+  if (read.lane === 'FACILITY_OPERATOR') return !!ctx.siteScoped;
+  return false;
+}
+
+/** Worth showing in the buying committee as an operating lane (the buyer map); NOT the cold default (isColdWho). */
 export const isDefaultWhoLane = (lane: PersonLane) => lane === 'PRIMARY_OPERATOR' || lane === 'ADJACENT_OPERATOR' || lane === 'FACILITY_OPERATOR';
 
 /** The default WHO: an operating lane, and never a person whose title says they run another region (review B1). */
