@@ -229,7 +229,8 @@ export function readPerson(title: string | null | undefined, opts: { entityType?
     // logistics function. The operating function decides the lane; the governance remit is a second hat.
     const op = readPerson(stripGovernance(raw), { entityType: opts.entityType });
     lane = op.lane;
-    laneWhy = `${op.laneWhy} (${/\bsafety\b/.test(t) && !has(t, COMMERCIAL_WORDS) ? 'safety' : 'compliance'} is a second remit beside the operating function, not procurement)`;
+    const remitWord = /\bsafety\b/.test(t) && !has(t, COMMERCIAL_WORDS) ? 'safety' : 'compliance';
+    laneWhy = `${op.laneWhy} (${remitWord} is a second remit beside the ${op.lane === 'PRIMARY_OPERATOR' ? 'operating function, not procurement' : 'function'})`;
   } else if (has(t, EXEC_TECH)) {
     lane = 'TRANSFORMATION_TECH';
     laneWhy = 'the technology executive (a sponsor for systems, never the operating owner)';

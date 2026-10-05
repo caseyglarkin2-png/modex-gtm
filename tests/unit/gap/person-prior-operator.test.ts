@@ -60,6 +60,7 @@ describe('transportation technology / transformation needs explicit freight scop
     const r = readPerson('Sr Director, S&T North America Deployment - Transportation, Safety & Equipment Service');
     expect(r.lane).toBe('TRANSFORMATION_TECH');
     expect(r.ownership).toBe(2);
+    expect(r.laneWhy).toMatch(/\(safety is a second remit beside the function\)$/);
     expect(lane('Sr. Director, Strategy and Transformation for PepsiCo Global Transportation')).toBe('TRANSFORMATION_TECH');
   });
   it('transportation tech is cold WHO only with a named initiative', () => {
