@@ -108,7 +108,15 @@ export function AccountNowView({ v, nextHref, nextLabel, links }: { v: NowView; 
             ) : null}
           </div>
         ) : (
-          <p className="text-sm text-amber-700 dark:text-amber-400">{v.whoUnknown}</p>
+          <div className="text-sm">
+            <p className="text-amber-700 dark:text-amber-400">{v.whoUnknown}</p>
+            {v.alternate ? (
+              <p className="mt-1 text-xs" data-testid="now-alternate">
+                Sponsor / alternate: {v.alternate.name}
+                {v.alternate.title ? `, ${v.alternate.title}` : ''}
+              </p>
+            ) : null}
+          </div>
         )}
       </Slot>
 

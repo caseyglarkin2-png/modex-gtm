@@ -88,3 +88,28 @@ async function readPeople(companyId: string, reads: HubSpotPeopleReads, cap: num
     return null;
   }
 }
+
+/**
+ * The person-level location of specific HubSpot contacts (city, state, country), for the cockpit's ranking of ready
+ * cards: the brief applies US-first with this same location, so the cockpit must too (review S3, 2026-10-04). One
+ * batch read per 100 ids, cached per id for 15 minutes; a read error throws (the caller falls back to no location).
+ */
+const locationCache = new Map<string, { at: number; location: string | null }>();
+export async function loadContactLocations(ids: readonly string[], reads: HubSpotPeopleReads = hubspotPeopleReads, now = Date.now()): Promise<Map<string, string | null>> {
+  const out = new Map<string, string | null>();
+  const cacheable = reads === hubspotPeopleReads;
+  const missing: string[] = [];
+  for (const id of new Set(ids)) {
+    const hit = cacheable ? locationCache.get(id) : undefined;
+    if (hit && now - hit.at < CACHE_MS) out.set(id, hit.location);
+    else missing.push(id);
+  }
+  if (missing.length) {
+    for (const { id, properties: p } of await reads.readContacts(missing)) {
+      const location = [clean(p.city), clean(p.state), clean(p.country)].filter(Boolean).join(', ') || null;
+      out.set(id, location);
+      if (cacheable) locationCache.set(id, { at: now, location });
+    }
+  }
+  return out;
+}

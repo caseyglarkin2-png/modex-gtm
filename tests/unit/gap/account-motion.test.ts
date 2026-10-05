@@ -22,6 +22,10 @@ const vp = card('vp', 1, 'VP Supply Chain', 'supply_chain', { phone: '+155500000
 const dir = card('dir', 2, 'Director of DC Operations', 'distribution');
 const mgr = card('mgr', 3, 'Supply Chain Manager', 'supply_chain');
 const base = { accountName: 'PepsiCo', choice: null, firstTouches: [], replyHold: null, now: NOW };
+// The mechanics below need a cold-WHO primary (a direct operator; operator-first, 2026-10-04): the cockpit no longer
+// suggests a VP Supply Chain or a DC director (operator-first-who.test.ts).
+const vpT = card('vp', 1, 'VP Transportation', 'supply_chain', { phone: '+15550000000' });
+const dirT = card('dir', 2, 'Director of Transportation Operations', 'distribution');
 
 describe('titleSeniority / rankCandidates: visible factors, no score', () => {
   // V2 (Casey's person prior, 2026-10-02): the same order as the account brief's WHO. Operating lane, US / North
@@ -40,7 +44,7 @@ describe('titleSeniority / rankCandidates: visible factors, no score', () => {
 
 describe('computeAccountMotion', () => {
   it('READY: exactly one primary; every other email card is held as NEXT with its unlock condition', () => {
-    const m = computeAccountMotion({ ...base, readyEmailCards: [mgr, dir, vp] });
+    const m = computeAccountMotion({ ...base, readyEmailCards: [mgr, dir, vpT] });
     expect(m.state).toBe('ready');
     expect(m.primary).toMatchObject({ personaId: 1, chosen: false });
     expect(m.heldCardIds.sort()).toEqual(['dir', 'mgr']);
@@ -77,14 +81,14 @@ describe('computeAccountMotion', () => {
 
   it('after 5 business days with no response the next person unlocks as the primary', () => {
     const sentAt = new Date('2026-09-21T14:00:00.000Z').toISOString();
-    const m = computeAccountMotion({ ...base, readyEmailCards: [dir, mgr], firstTouches: [{ personaId: 1, recipient: 'vp@pepsico.com', sentAt, released: false }] });
+    const m = computeAccountMotion({ ...base, readyEmailCards: [dirT, mgr], firstTouches: [{ personaId: 1, recipient: 'vp@pepsico.com', sentAt, released: false }] });
     expect(m.state).toBe('ready');
     expect(m.primary!.factors.join(' ')).toContain('unlocked: no response since 2026-09-21');
     expect(m.heldCardIds).toHaveLength(1);
   });
 
   it("a failed address releases the motion at once (Next if primary is invalid)", () => {
-    const m = computeAccountMotion({ ...base, readyEmailCards: [dir, mgr], firstTouches: [{ personaId: 1, recipient: 'vp@pepsico.com', sentAt: NOW.toISOString(), released: true }] });
+    const m = computeAccountMotion({ ...base, readyEmailCards: [dirT, mgr], firstTouches: [{ personaId: 1, recipient: 'vp@pepsico.com', sentAt: NOW.toISOString(), released: true }] });
     expect(m.state).toBe('ready');
     expect(m.headline).toContain('An earlier address failed');
   });

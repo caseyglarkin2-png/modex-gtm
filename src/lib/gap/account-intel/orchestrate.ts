@@ -46,8 +46,11 @@ const HUMAN: Partial<Record<SectionKey, string>> = {
   yard: 'How do trailers get checked in and found today? (ask; the satellite audit cannot see process)',
 };
 
-/** Contact discovery that follows the person prior (V2): the questions, then where to look; never an auto-created contact. */
-export const CONTACT_DISCOVERY = 'Find the transportation operating owner: who owns transportation operations in the US / North America, transportation and warehousing, the private fleet, distribution transportation or network logistics execution? Look in HubSpot contacts and the contact candidates first, then public sources; surface candidates for Casey (no contact is created automatically).';
+/**
+ * Contact discovery that follows the person prior: responsibility slots in order (operator-first, 2026-10-04), then
+ * where to look; never an auto-created contact, never an Apollo credit without Casey.
+ */
+export const CONTACT_DISCOVERY = 'Find the transportation operating owner, by responsibility, in order: (1) the direct transportation / logistics / freight / fleet operator for the US / North America network (the shared function and each operating unit); (2) the transportation technology / transformation owner; (3) the supply chain sponsor; (4) a site operator if useful. Look in HubSpot contacts and the contact candidates first, then public sources with a source URL; surface candidates for Casey (no contact is created automatically; Apollo only when Casey decides).';
 
 // What each section unblocks, in order. The order IS the priority; there is no weight.
 const ORDER: Array<{ section: SectionKey; why: string }> = [
@@ -144,7 +147,9 @@ export function planResearch(brief: AccountIntelligenceBrief, history: readonly 
     } else if (section === 'org' && brief.people && brief.people.primary?.lane !== 'PRIMARY_OPERATOR') {
       // The person prior (people/person-prior.ts): no transportation operating owner on record, so contact discovery
       // looks for that person first. Candidates surface for Casey; GAP never creates a contact.
-      tasks.push({ section, depth: 'DEEPEN', provider: 'human', focus: `${CONTACT_DISCOVERY}${brief.people.primary ? ` Best on record now: ${brief.people.primary.name}${brief.people.primary.title ? `, ${brief.people.primary.title}` : ''} (${brief.people.primary.laneLabel.toLowerCase()}).` : ''}${brief.division ? ` ${brief.division.question} Find that division's transportation owner.` : ''} Then ask: ${HUMAN.org}`, why: 'No US / North America transportation operating owner on record: the person Casey sells to best.' });
+      // Nobody is a direct operator, so the nearest on record is the sponsor (operator-first WHO, 2026-10-04).
+      const near = brief.people.primary ?? brief.people.sponsor ?? null;
+      tasks.push({ section, depth: 'DEEPEN', provider: 'human', focus: `${CONTACT_DISCOVERY}${near ? ` Best on record now: ${near.name}${near.title ? `, ${near.title}` : ''} (${near.laneLabel.toLowerCase()}).` : ''}${brief.division ? ` ${brief.division.question} Find that division's transportation owner.` : ''} Then ask: ${HUMAN.org}`, why: 'No US / North America transportation operating owner on record: the person Casey sells to best.' });
     } else if (HUMAN[section]) {
       tasks.push({ section, depth: 'DEEPEN', provider: 'human', focus: HUMAN[section]!, why });
     }

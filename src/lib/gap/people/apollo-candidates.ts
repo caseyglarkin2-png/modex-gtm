@@ -72,7 +72,8 @@ export function apolloCandidates(brief: AccountIntelligenceBrief, i: AccountInpu
     // The owner may already be in HubSpot: an unread HubSpot is checked before any credit is proposed (review SF4).
     else if (!hs && i.account.hubspotCompanyId) notNeeded = 'HubSpot contacts could not be read just now: check HubSpot for the transportation owner first (no Apollo lookup proposed until it is read).';
     else {
-      const near = p?.primary && !p.primary.doNotContact ? p.primary : null;
+      // Nobody is a direct operator: the nearest person on record is the sponsor (operator-first WHO, 2026-10-04).
+      const near = p?.primary && !p.primary.doNotContact ? p.primary : p?.sponsor && !p.sponsor.doNotContact ? p.sponsor : null;
       add({
         kind: 'FIND_OWNER',
         target: `The North America transportation operating owner at ${account} (a search, not a known person)`,
@@ -84,7 +85,10 @@ export function apolloCandidates(brief: AccountIntelligenceBrief, i: AccountInpu
     }
   } else if (!owner.reachable) {
     const prior = i.personas.find((x) => sameName(x.name, owner.name) && x.apolloEnrichedAt);
-    if (prior) notNeeded = `${owner.name} already has an Apollo result (${day(prior.apolloEnrichedAt!)}): no credit spent twice.`;
+    // A HubSpot-only owner whose HubSpot record already has an email is added, never re-found (operator-first, 2026-10-04).
+    const inHubSpot = owner.source === 'hubspot' && (hs?.people ?? []).some((x) => sameName(x.name, owner.name) && x.hasEmail && !x.optedOut);
+    if (inHubSpot) notNeeded = `${displayName(owner.name)} already has an email in HubSpot: add them as a GAP contact (no credit needed).`;
+    else if (prior) notNeeded = `${owner.name} already has an Apollo result (${day(prior.apolloEnrichedAt!)}): no credit spent twice.`;
     else add({
       kind: 'FIND_EMAIL',
       target: `${displayName(owner.name)}${owner.title ? `, ${owner.title}` : ''}`,

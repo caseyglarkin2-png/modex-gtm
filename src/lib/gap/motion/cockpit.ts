@@ -9,6 +9,7 @@ import { sellerLaneOf } from '../routing/card-readiness';
 import { computeAccountMotion, EMAIL_ACTIONS, type AccountMotion } from './account-motion';
 import { loadAccountConversations, loadAccountFirstTouches, loadMotionChoices, loadReplyHolds } from './load';
 import { loadAngles, suggestAngle, type PersonaAngle } from './persona-angle';
+import { loadContactLocations } from '../people/hubspot-people';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -38,7 +39,7 @@ export async function loadCockpitMotions(
   prisma: PrismaLike,
   items: readonly QueueItem[],
   now: Date,
-  deps: { thesisCurrent?: ThesisCurrentnessCheck } = {},
+  deps: { thesisCurrent?: ThesisCurrentnessCheck; locations?: (hubspotContactIds: string[]) => Promise<Map<string, string | null>>; locationTimeoutMs?: number } = {},
 ): Promise<CockpitMotions> {
   // Execution acceptance: the SAME current-actionable-thesis check the click runs, once per thesis on a READY card.
   const readyWithThesis = items.filter((i) => sellerLaneOf(i) === 'ready' && i.hypothesis?.id);
@@ -69,6 +70,21 @@ export async function loadCockpitMotions(
     loadAccountConversations(prisma, accounts, now),
   ]);
   const angles = await loadAngles(prisma, readyEmail.map((c) => c.persona.id as number));
+  // US-first needs each person's own location, as the brief reads it (review S3): only where an account has more than
+  // one ready email card to rank, from HubSpot, fail-soft (no location: the prior treats it as unknown).
+  const hsIds = [...new Set([...byAccount.values()].filter((cs) => cs.length > 1).flat().map((c) => c.persona.hubspotContactId).filter((x): x is string => !!x))];
+  // A stalled HubSpot read never hangs the cockpit: after the timeout it ranks without location (re-review).
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const locations: Map<string, string | null> = hsIds.length
+    ? await Promise.race([
+        Promise.resolve().then(() => (deps.locations ?? loadContactLocations)(hsIds)),
+        new Promise<Map<string, string | null>>((resolve) => {
+          timer = setTimeout(() => resolve(new Map()), deps.locationTimeoutMs ?? 3000);
+        }),
+      ])
+        .catch(() => new Map<string, string | null>())
+        .finally(() => clearTimeout(timer))
+    : new Map();
   const hypIds = [...new Set(readyEmail.map((c) => c.hypothesis?.id).filter((x): x is string => !!x))];
   const thesisRole = new Map<string, string | null>(
     hypIds.length ? ((await prisma.prospectingHypothesis.findMany({ where: { id: { in: hypIds } }, select: { id: true, persona: true } })) as Array<{ id: string; persona: string | null }>).map((h) => [h.id, h.persona]) : [],
@@ -80,7 +96,7 @@ export async function loadCockpitMotions(
     const cards = byAccount.get(account)!;
     const m = computeAccountMotion({
       accountName: account,
-      readyEmailCards: cards.map((c) => ({ id: c.id, action: c.action, account: c.account, persona: c.persona, hypothesis: c.hypothesis ? { ...c.hypothesis, persona: thesisRole.get(c.hypothesis.id) ?? null } : null, createdAt: c.createdAt })),
+      readyEmailCards: cards.map((c) => ({ id: c.id, action: c.action, account: c.account, persona: { ...c.persona, location: c.persona.hubspotContactId ? locations.get(c.persona.hubspotContactId) ?? null : null }, hypothesis: c.hypothesis ? { ...c.hypothesis, persona: thesisRole.get(c.hypothesis.id) ?? null } : null, createdAt: c.createdAt })),
       choice: choices.get(account) ?? null,
       firstTouches: touches.get(account) ?? [],
       replyHold: holds.get(account) ?? null,
@@ -94,7 +110,7 @@ export async function loadCockpitMotions(
       a[String(pid)] = { personaId: pid, angle: angles.get(pid) ?? null, suggested: angles.has(pid) ? null : suggestAngle({ title: c.persona.title, personaKey: c.persona.personaKey, accountName: account }) };
     }
     // Only accounts where the motion changes what Casey sees (more than one person, a pause, or a live motion).
-    if (cards.length > 1 || m.state === 'paused_reply' || m.state === 'in_conversation' || m.state === 'in_motion') motions.push({ ...m, angles: a });
+    if (cards.length > 1 || m.state === 'paused_reply' || m.state === 'in_conversation' || m.state === 'in_motion' || m.state === 'needs_owner') motions.push({ ...m, angles: a });
   }
   return { motions, heldCardIds: held, thesisHeldCardIds };
 }

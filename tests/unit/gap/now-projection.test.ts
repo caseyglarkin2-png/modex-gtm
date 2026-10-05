@@ -225,9 +225,11 @@ describe('final review fixes (2026-10-02)', () => {
     const rel = now({ facts: [], memberships: [{ sourceName: 'Inland26', sourceType: 'conference', relationshipContext: 'Met at Inland26', personName: 'Ryan Rel' }] });
     expect(rel.who?.name).toBe('Ryan Rel');
     expect(rel.alternate?.name).toBe('Dana Trans');
+    // Operator-first (2026-10-04): an adjacent pick is never WHO; the owner is research, the VP the alternate.
     const adj = now({ personas: [{ ...person, name: 'Vic VP', title: 'VP Supply Chain' }] });
-    expect(adj.who?.name).toBe('Vic VP');
-    expect(adj.whoUnknown).toBe('No US / North America transportation operations owner on record yet: find them (BRIEF: buyer map).');
+    expect(adj.who).toBeNull();
+    expect(adj.whoUnknown).toMatch(/^Unknown: transportation owner not yet identified: research required\. Sponsor on record: Vic VP/);
+    expect(adj.alternate?.name).toBe('Vic VP');
     expect(now().whoUnknown).toBeNull();
   });
   it('a raw HubSpot stage id never reaches the state line; internal stage names read as words', () => {

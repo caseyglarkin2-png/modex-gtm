@@ -15,7 +15,8 @@ import { buildAccountBrief, type AccountInputs } from '@/lib/gap/account-intel/b
 const NOW = new Date('2026-09-29T12:00:00Z');
 const fact = { id: 'f1', quote: 'Acme Foods will open a new distribution center in Reno in 2027.', url: 'https://news.example/reno', title: 'news', publishedAt: '2026-09-10T00:00:00Z', expiresAt: '2027-01-08T00:00:00Z', continuity: 'event' as const, currentness: null };
 const hyp = { id: 'h1', status: 'draft', observation: fact.quote, problem: 'My guess is that inbound arrivals pile up at the gate.', rootCauses: [], impacts: [], falsification: ['How are arrivals staged?'], whatANoMeans: 'Arrivals flow.', primarySignalId: 'f1' };
-const person = { id: 1, name: 'Dana Ops', title: 'VP Distribution', doNotContact: false, hasEmail: true, emailStatus: 'valid' };
+// A direct operator: the fact-led WHO (operator-first, 2026-10-04; a "VP Distribution" is now a sponsor).
+const person = { id: 1, name: 'Dana Ops', title: 'VP Distribution & Transportation', doNotContact: false, hasEmail: true, emailStatus: 'valid' };
 const inputs = (over: Partial<AccountInputs> = {}): AccountInputs => ({
   account: { name: 'Acme Foods', tier: 'Tier 1', priorityBand: 'A', vertical: 'cpg', parentBrand: null, hubspotCompanyId: '42' },
   aliases: [], domains: [], siblings: [], watched: true, watchReasons: ['priority'],

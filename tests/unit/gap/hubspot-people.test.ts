@@ -5,7 +5,7 @@
  * person location comes from the contact's own record.
  */
 import { describe, expect, it } from 'vitest';
-import { loadHubSpotPeople, type HubSpotPeopleReads } from '@/lib/gap/people/hubspot-people';
+import { loadContactLocations, loadHubSpotPeople, type HubSpotPeopleReads } from '@/lib/gap/people/hubspot-people';
 import { personCountry, readPerson } from '@/lib/gap/people/person-prior';
 import { buildAccountBrief, type AccountInputs } from '@/lib/gap/account-intel/build';
 
@@ -95,7 +95,9 @@ describe('the buyer map spans GAP and HubSpot', () => {
     const b = buildAccountBrief(inputs(), NOW);
     expect(b.people.primary).toMatchObject({ name: 'Karen Darling', source: 'hubspot', region: 'US_NA', location: 'Chicago, Illinois, United States' });
     expect(b.glance.nextAction).toMatch(/^Add Karen Darling, Senior Director - PBNA Transportation \(Chicago, Illinois, United States\) from HubSpot as a GAP contact/);
-    expect(b.motion.who).toBe('Vic VP'); // the send target stays a GAP contact until Casey adds her
+    // Operator-first (2026-10-04): a VP Supply Chain is never the cold send target; she is added first.
+    expect(b.motion.who).toBeNull();
+    expect(b.people.sponsor).toMatchObject({ name: 'Vic VP' });
   });
   it('a persona and its HubSpot contact are ONE person (joined by the stored id, never by name)', () => {
     const b = buildAccountBrief(inputs(), NOW);
@@ -104,7 +106,30 @@ describe('the buyer map spans GAP and HubSpot', () => {
   });
   it('with no HubSpot read, nothing changes', () => {
     const b = buildAccountBrief(inputs({ hubspotPeople: null }), NOW);
-    expect(b.people.primary).toMatchObject({ name: 'Vic VP', source: 'gap' });
+    // Operator-first (2026-10-04): no direct operator, so no primary; Vic VP is the sponsor and alternate.
+    expect(b.people.primary).toBeNull();
+    expect(b.people.alternate).toMatchObject({ name: 'Vic VP', source: 'gap' });
     expect(b.glance.nextAction).not.toMatch(/HubSpot/);
+  });
+});
+
+describe('loadContactLocations (the cockpit ranks ready cards with the same person location as the brief)', () => {
+  it('reads only the asked ids, builds city / state / country, and a contact with none is null', async () => {
+    const asked: string[][] = [];
+    const reads: HubSpotPeopleReads = {
+      contactIdsForCompany: async () => ({ ids: [], truncated: false }),
+      readContacts: async (ids) => {
+        asked.push([...ids]);
+        return ids.map((id) => ({ id, properties: id === '1' ? { city: 'Dallas', state: 'Texas', country: 'United States' } : {} }));
+      },
+    };
+    const m = await loadContactLocations(['1', '2', '1'], reads);
+    expect(asked).toEqual([['1', '2']]);
+    expect(m.get('1')).toBe('Dallas, Texas, United States');
+    expect(m.get('2')).toBeNull();
+  });
+  it('a read error throws, so the cockpit falls back to no location', async () => {
+    const reads: HubSpotPeopleReads = { contactIdsForCompany: async () => ({ ids: [], truncated: false }), readContacts: async () => { throw new Error('429'); } };
+    await expect(loadContactLocations(['1'], reads)).rejects.toThrow('429');
   });
 });

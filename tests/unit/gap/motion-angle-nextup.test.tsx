@@ -137,12 +137,33 @@ describe('loadCockpitMotions', () => {
   };
 
   it('holds every email card but the primary; call and LinkedIn cards are human judgment and never held', async () => {
-    const items = [item('e1', 1, 'one_off_email', 'VP Supply Chain'), item('e2', 2, 'enroll_gap_sequence', 'Supply Chain Manager'), item('c3', 3, 'call_now', 'Director DC'), item('l4', 4, 'linkedin_manual_task', 'Director DC')];
+    // The suggested primary is a cold WHO (a direct operator; operator-first, 2026-10-04).
+    const items = [item('e1', 1, 'one_off_email', 'VP Transportation'), item('e2', 2, 'enroll_gap_sequence', 'Supply Chain Manager'), item('c3', 3, 'call_now', 'Director DC'), item('l4', 4, 'linkedin_manual_task', 'Director DC')];
     const r = await loadCockpitMotions(prisma, items as never, new Date('2026-09-30T15:00:00Z'), { thesisCurrent: async () => ({ current: true as const }) });
     expect(r.heldCardIds).toEqual(['e2']);
     expect(r.motions).toHaveLength(1);
     expect(r.motions[0]).toMatchObject({ state: 'ready', primary: { personaId: 1 }, next: { personaId: 2 } });
     expect(r.motions[0].angles['1'].suggested).toMatch(/PepsiCo/);
+  });
+
+  it('PepsiCo 2026-10-04: with only VP Supply Chain cards nobody is suggested and every email card is held', async () => {
+    const items = [item('e1', 1, 'one_off_email', 'VP Supply Chain'), item('e2', 2, 'one_off_email', 'Vice President Supply Chain')];
+    const r = await loadCockpitMotions(prisma, items as never, new Date('2026-09-30T15:00:00Z'), { thesisCurrent: async () => ({ current: true as const }) });
+    expect(r.heldCardIds.sort()).toEqual(['e1', 'e2']);
+    expect(r.motions[0]).toMatchObject({ state: 'needs_owner', primary: null });
+  });
+
+  it('review S3: card holders\' HubSpot locations reach the ranking (US-first), fail-soft', async () => {
+    const located = (id: string, pid: number, hs: string) => ({ ...item(id, pid, 'one_off_email', 'Director of Transportation'), persona: { ...item(id, pid, 'one_off_email', 'Director of Transportation').persona, displayName: id, hubspotContactId: hs } });
+    const items = [located('A Toronto', 1, '101'), located('Z Dallas', 2, '102')];
+    const locations = async (ids: string[]) => new Map(ids.map((x) => [x, x === '101' ? 'Toronto, Ontario, Canada' : 'Dallas, Texas, United States']));
+    const r = await loadCockpitMotions(prisma, items as never, new Date('2026-09-30T15:00:00Z'), { thesisCurrent: async () => ({ current: true as const }), locations });
+    expect(r.motions[0].primary?.name).toBe('Z Dallas');
+    const down = await loadCockpitMotions(prisma, items as never, new Date('2026-09-30T15:00:00Z'), { thesisCurrent: async () => ({ current: true as const }), locations: async () => { throw new Error('hubspot down'); } });
+    expect(down.motions[0].state).toBe('ready');
+    // A stalled read never hangs the cockpit: it gives up after the timeout and ranks without location.
+    const stalled = await loadCockpitMotions(prisma, items as never, new Date('2026-09-30T15:00:00Z'), { thesisCurrent: async () => ({ current: true as const }), locations: () => new Promise(() => {}), locationTimeoutMs: 20 });
+    expect(stalled.motions[0].state).toBe('ready');
   });
 });
 

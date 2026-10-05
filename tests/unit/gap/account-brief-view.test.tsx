@@ -44,7 +44,8 @@ describe('account intelligence view', () => {
     render(<AccountBriefView brief={buildAccountBrief(inputs(), NOW)} />);
     expect(within(screen.getByTestId('brief-next-action')).getByText(/Review the thesis/)).toBeTruthy();
     for (const k of ['motion', 'icpState', 'whyNow', 'network', 'freight', 'bestFact', 'topHypothesis', 'currentTech', 'likelyOwner', 'relationship', 'commercialState', 'biggestUnknown', 'nextQuestion']) expect(screen.getByTestId(`glance-${k}`)).toBeTruthy();
-    expect(screen.getByTestId('glance-likelyOwner').textContent).toMatch(/Dana Ops, VP Distribution \(LIKELY/);
+    // Operator-first (2026-10-04): a VP Distribution is the sponsor; the owner is research.
+    expect(screen.getByTestId('glance-likelyOwner').textContent).toMatch(/Unknown: transportation owner not yet identified: research required\. Sponsor on record: Dana Ops, VP Distribution/);
   });
 
   it('shows the truth class and source on each statement, and a model as a range with its formula', () => {
