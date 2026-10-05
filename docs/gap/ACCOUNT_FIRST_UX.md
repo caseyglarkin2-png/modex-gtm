@@ -441,13 +441,39 @@ names are recorded beside the ticket. Nothing here weakens a contract in `STABLE
 | Wrong role / Left the company / Verify role | role and employment currentness | nothing | the existing human corrections (`person.role_verified` with provider human; the employment correction) |
 | Use a different story | the outreach anchor for this person | the outreach evidence gate (only eligible facts are offered) | the persona angle row carries the chosen anchor id |
 
-Rules: every control states its scope and effect in one line ("Matt is next at PepsiCo only. Nothing is sent. Undo.")
-and offers Undo in place; a preference changes ORDER only, never eligibility upward; the resolver applies safety
-exclusions before preferences, so a preferred person who is set aside upstream stays set aside with the reason;
-every row is audited with the actor and read back on NOW as "your last decision" (HAX G12). Voice never triggers
-any of these.
+Rules (trust review, adopted): eligibility is computed from safety first and never reads a preference; preferences
+only reorder the eligible. Choose writes the motion primary (on a hypothesis, the audited persona assignment plus the
+routing step; a HubSpot-only person goes through ADD TO GAP first). Make next writes the motion next. I know this
+person writes a work-source member with relationship context, tagged "You said", never Buyer said. Verify role
+writes a verification only with a URL. Wrong role and Left company remove only, never add. Not a fit and Not now
+need the one genuinely new row, `person.seller_preference` (append-only, account-scoped, newest wins, Undo appends a
+reversal; it never writes `do_not_contact`): the motion row holds only primary and next, the persona angle is a
+positive line, and not-now exists only on work-source members. Never overridable by any control: unsubscribe,
+opt-out, hard bounce, clawd suppression, hard DNC (the legacy review stays the only clear path, on confirm), LEFT or
+CONFLICT employment, a divested entity, an open HubSpot deal, a paused reply, a live conversation, an outstanding
+draft, a family hold. A preference on a held person is recorded and shown as "Next once the reply is triaged"; the
+click still runs every gate. Every control states its scope and effect in one line ("Matt is next at PepsiCo only.
+Nothing is sent. Undo.") with Undo in place, and NOW reads back the last decision (HAX G12). With two or more
+eligible people the Work card offers "Choose who (4)" and opens the stack; a one-name [Choose Karen] button is a de
+facto preselection and breaks the "nobody preselected" contract. Voice never triggers any of these.
 
-### 5.7 Voice (candidate tickets UX-11 to UX-13; built only if the measured seller loop is otherwise clear)
+### 5.7 Private intelligence (guards)
+
+Private engagement (microsite sessions, ROI reads, person-named `/for/<account>/<person>` paths), field notes and
+clawd reply-intent rows inform strategy and never become quotable or spoken: one typed allow-list feeds every spoken
+surface (NOW listen, story listen, Listen to today, Ask GAP) and the compiler; engagement is never a rank dimension
+or a reason string (a closed set of dimension names); person-named paths never leave the private block; a capture
+note is never an anchor or a spoken line unless Casey marks it sayable; the "Do not use" exclusion note carries no
+content (it says "private interest excluded", not what it was); the Best Opening picker calls the existing
+`outreachFactRefusal` gate, never a parallel picker; only verbatim text that passed the gate may appear in an
+opening; the persona angle is never read by the compiler and is flagged on save when it carries engagement words
+(visited, viewed, ROI, /for/, /demo/).
+
+Account Story additions from the same review: the YARD OPPORTUNITY line is always Our read with its Wrong if beside
+it, Buyer said only on a confirmed buyer input quoting the buyer's words and date, never Checked; the proof carries
+"Our proof, measured" (48 to 24) and "Our model" ($1M+/site) as separate tags.
+
+### 5.8 Voice (candidate tickets UX-11 to UX-13; built only if the measured seller loop is otherwise clear)
 
 - Listen to today and Listen to account start only on a press (WCAG 1.4.2); one global player survives navigation
   with pause, resume, skip by account, 1.5x speed and Media Session support; the current Listen is replaced (it has
@@ -614,9 +640,41 @@ source (the resolver names Brad Stroup, the Ready lane names Michelle Schlie); G
 split Gatik (OK to cite) from Maryland (not for outreach); "autonomous linehaul into DCs" conflicts with the Checked
 line (Gatik serves about 250 retail locations in three states) and is dropped; PROOF is YardFlow proof, not Checked.
 
+### 8.6 Adversarial findings against the plan, each with the regression test that catches it (trust review, adopted)
+
+1. **Holds become secondary (live today).** Walmart NOW "Ready for a first touch" over a "stop" reply; FedEx's
+   out-of-office driving NEXT and a CFO WHO with no entity note. Test: fixtures for paused_reply (snippet "stop"),
+   in_conversation, IN_DEAL, outstanding draft, family hold; assert the Work card state, the NOW state line, the NEXT
+   source and the first spoken sentence agree, and no Prepare email is enabled.
+2. **Recommendation outruns evidence** ("Role: verified", "Best fit" for a HubSpot-only unverified person). Test:
+   render a ROLE_UNVERIFIED cold-first-touch stack; assert "verified" appears only as "not verified", no Best fit or
+   Recommended label, no percentage anywhere in the seller path.
+3. **Preference bypasses safety.** Test: a property test over random safety flags and preference rows: eligible
+   after is a subset of eligible before, gate refusal reasons unchanged, Make next on a DNC persona refuses with
+   do_not_contact; the existing no-`do_not_contact`-writer check covers the new row.
+4. **Private intelligence leaks.** Test: seed an engagement page `/for/acme/SENTINEL-PRIV` and a capture
+   "SENTINEL-NOTE"; assert absence from NOW listen, story listen, Listen to today, Best Opening, the compiled email
+   and call opener, the angle suggestion and every reason line; present only in the private block.
+5. **The story is concatenated inference.** Test: a PepsiCo story fixture; every line has a tag and basis ids, the
+   tag equals the weakest basis class, a line containing an Unverified signal's text is Unverified, Goal / Network /
+   Yard are never Checked without a buyer input or a verified fact id, Proof is Our proof or Our model.
+
+Also live and carried as SHOULD: machine words remain on the seller path; the analyst drawer the plan keeps must
+read the same capped stack (53 cards nowhere by default, including the drawer).
+
 ## 9. Validation record
 
-(filled per ticket)
+| Ticket | Validation | Result |
+|---|---|---|
+| UX-01 | GAP unit suite baseline at 54c11c57 (`vitest run tests/unit/gap`) | 318 files, 4,983 tests, 0 failures, 128 s |
+| UX-01 | production captures: 18 pages at 1440, 6 pages at 390 and 768 in light and dark, 4 drawers, 4 click paths; no write action triggered | metrics in the scratch packet; summarized in sections 3 and 7 |
+| UX-01 / UX-02 | safety during the audit | emails sent 0; enrollments 0; Apollo credits 0; HubSpot writes 0 (one read: the Kroger deal); suppression clears 0 |
+| UX-02 | this document: em dashes | 0 |
+| UX-02 | five independent reviewers, read-only, stopped after their reports | all five chose Direction A |
+
+Screenshots: the scratch packet (not committed) holds `desk2/`, `mobile2/`, `drawer2/`, `path-*/`; the `drawer2`
+set is full-frame and valid, the `desk2` and `mobile2` PNGs are zoom-magnified crops (N15) and must be re-shot at
+DPR 1 before UX-15 compares against this baseline. The text dumps and JS metrics from every capture are valid.
 
 ## 10. Debt classification (recorded debt audited 2026-10-05)
 
