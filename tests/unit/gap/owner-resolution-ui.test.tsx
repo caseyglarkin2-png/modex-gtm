@@ -130,7 +130,7 @@ describe('the owner-resolution panel', () => {
     expect(screen.getAllByTestId('owner-candidate')).toHaveLength(2);
     expect(screen.queryByTestId('owner-use')).toBeNull();
     expect(screen.getByText(/Thesis fit: runs operations planning and engineering/)).toBeInTheDocument();
-    fireEvent.click(screen.getByLabelText('Choose Glen Chaffee'));
+    fireEvent.click(screen.getByLabelText(/^Choose Glen Chaffee/));
     expect(screen.getByTestId('owner-use')).toHaveTextContent('Add Glen Chaffee to GAP + use in routing');
     fireEvent.click(screen.getByTestId('owner-use'));
     await waitFor(() => expect(screen.getByTestId('owner-result')).toHaveAttribute('data-ok', 'true'));
@@ -146,7 +146,7 @@ describe('the owner-resolution panel', () => {
     expect(screen.getByTestId('owner-recommended-why')).toHaveTextContent(/on thesis relevance: runs operations planning and engineering/);
     // The badge sits on one row only; no radio is checked; USE is absent until a click.
     expect(screen.getAllByTestId('owner-recommended')).toHaveLength(1);
-    expect((screen.getByLabelText('Choose Jeffrey Tallman') as HTMLInputElement).checked).toBe(false);
+    expect((screen.getByLabelText(/^Choose Jeffrey Tallman/) as HTMLInputElement).checked).toBe(false);
     expect(screen.queryByTestId('owner-use')).toBeNull();
     expect(screen.getByText(/The recommendation is a reason, not a selection: GAP does not pick/)).toBeInTheDocument();
   });
@@ -194,7 +194,7 @@ describe('the owner-resolution panel', () => {
     expect(screen.getByTestId('owner-glossary')).toHaveTextContent('Recommended: the first strong difference between the top two people, in words. A reason, never a selection.');
     expect(container.textContent).not.toMatch(/\u2014/);
     // The action help says what the click does and that no email is sent.
-    fireEvent.click(screen.getByLabelText('Choose Glen Chaffee'));
+    fireEvent.click(screen.getByLabelText(/^Choose Glen Chaffee/));
     expect(screen.getByTestId('owner-action-help')).toHaveTextContent('Adds them to GAP, attaches them to this hypothesis and starts routing (shadow). No email is sent by this click');
   });
   it('set-aside people are listed with the reason when asked; nobody eligible shows Owner not resolved and FIND OPERATOR', async () => {

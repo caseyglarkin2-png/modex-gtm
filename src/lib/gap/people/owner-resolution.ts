@@ -128,6 +128,12 @@ export interface OwnerCandidate {
   reasons: string[];
   /** A 'separate' entity flag: selectable, never preselected, said plainly. */
   caution: string | null;
+  /**
+   * The resolver's own order key for this purpose (UX-03, account-first). Two eligible people with equal keys are a
+   * TIE: a surface may show them without ordinals and must say so. Set on eligible people only; never re-ranked
+   * elsewhere (the resolver stays the one recommendation authority).
+   */
+  rank?: number[];
 }
 
 export interface OwnerExclusion {
@@ -432,9 +438,10 @@ export function resolveOwner(input: OwnerResolutionInput): OwnerResolution {
     eligibleRows.push(row);
   }
 
+  for (const row of eligibleRows) row.c.rank = rankKey(row.c, row.input, purpose);
   eligibleRows.sort((a, b) => {
-    const ka = rankKey(a.c, a.input, purpose);
-    const kb = rankKey(b.c, b.input, purpose);
+    const ka = a.c.rank as number[];
+    const kb = b.c.rank as number[];
     for (let i = 0; i < ka.length; i += 1) if (ka[i] !== kb[i]) return kb[i] - ka[i];
     return a.c.name.localeCompare(b.c.name) || a.c.key.localeCompare(b.c.key);
   });

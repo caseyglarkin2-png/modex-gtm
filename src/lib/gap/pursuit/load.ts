@@ -1,0 +1,111 @@
+/**
+ * PURSUIT STATE loader (account-first UX, UX-03, 2026-10-05): gathers what the pure projection (state.ts) decides on,
+ * from readers GAP already has and nothing else: the account brief and inputs (motion type, opportunity truth, first
+ * touches, family hold), the account context (restriction, history), the cockpit's own queue and account motion (the
+ * same read the Ready lane uses), the newest motion choice and audited persona assignment, the reply list, and the ONE
+ * owner-resolution read for the cold first touch. Every read is soft: a failed read leaves its slot empty and the page
+ * still renders (the send gates fail closed on their own). Nothing is written. House `prisma: any` glue.
+ */
+import type { AccountIntelligenceBrief, AccountInputs } from '../account-intel/build';
+import type { AccountContext } from '../context/context';
+import { listQueue } from '../routing/queue';
+import { cockpitOpenHref } from '../routing/card-readiness';
+import { laneWithMotion, loadCockpitMotions } from '../motion/cockpit';
+import { loadMotionChoices } from '../motion/load';
+import { listReplies } from '../replies/list';
+import { loadOwnerResolution } from '../people/owner-resolution-load';
+import type { OwnerResolution } from '../people/owner-resolution';
+import { buildPeopleStack, type PeopleStack } from '../people/stack';
+import { projectPursuitState, type PursuitInput, type PursuitReply, type PursuitState } from './state';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type PrismaLike = any;
+
+const soft = <T,>(p: Promise<T>, fallback: T): Promise<T> => p.catch(() => fallback);
+
+export interface PursuitView {
+  state: PursuitState;
+  resolution: OwnerResolution | null;
+  stack: PeopleStack | null;
+  /** The top grounded hypothesis the first touch would run on (the action pack's hypothesis), if any. */
+  hypothesisId: string | null;
+}
+
+/** "Reply from Courtney Keen: I am in the office but ..." (context/context.ts projectHistory). */
+const HISTORY_REPLY = /^Reply from\s+([^:<]+?)\s*(?:<[^>]*>)?\s*:\s*([\s\S]*)$/;
+
+export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountIntelligenceBrief; inputs: AccountInputs; ctx: AccountContext; now: Date }): Promise<PursuitView> {
+  const { brief, inputs, ctx, now } = args;
+  const accountName = inputs.account.name;
+
+  const [resolutionRes, queue, choices, assigned, repliesPage] = await Promise.all([
+    soft(loadOwnerResolution(prisma, { accountName, purpose: 'COLD_FIRST_TOUCH', now }), null),
+    soft(listQueue(prisma, { accountName, limit: 200 }), { items: [], asOf: null } as unknown as Awaited<ReturnType<typeof listQueue>>),
+    soft(loadMotionChoices(prisma, [accountName]), new Map()),
+    soft(loadAssignedPersona(prisma, accountName), null),
+    soft(listReplies(prisma, { state: 'all', limit: 200 }), { items: [], nextCursor: null }),
+  ]);
+  const resolution = resolutionRes && 'ok' in resolutionRes && resolutionRes.ok ? resolutionRes.resolution : null;
+
+  // The cockpit's account motion and lanes, from the same read the Ready lane uses.
+  const motions = queue.items.length ? await soft(loadCockpitMotions(prisma, queue.items, now), null) : null;
+  const mine = motions?.motions.find((m) => m.accountName === accountName) ?? null;
+  const held = new Set(motions?.heldCardIds ?? []);
+  const thesisHeld = new Set(motions?.thesisHeldCardIds ?? []);
+  const due = queue.items.find((it) => laneWithMotion(it, held, thesisHeld) === 'follow_up') ?? null;
+
+  // Replies: the GAP mailbox list (with its triage state) and the account history's reply rows (older threads).
+  const replies: PursuitReply[] = [];
+  for (const r of repliesPage.items.filter((x) => x.accountName === accountName)) {
+    replies.push({ from: r.contactEmail, name: null, at: r.receivedAt, subject: r.subject, snippet: r.snippet, triaged: !!r.dispositionId });
+  }
+  const lastSend = ctx.history.filter((h) => h.kind === 'email_sent' || h.kind === 'asset_sent').sort((a, b) => b.at.localeCompare(a.at))[0] ?? null;
+  for (const h of ctx.history.filter((x) => x.kind === 'reply')) {
+    const m = h.text.match(HISTORY_REPLY);
+    if (!m) continue;
+    if (replies.some((r) => Math.abs(new Date(r.at).getTime() - new Date(h.at).getTime()) < 60_000)) continue;
+    // Answered (a later send) counts as handled; otherwise the thread is still open.
+    const answered = !!lastSend && lastSend.at > h.at;
+    replies.push({ from: m[1].trim(), name: m[1].trim(), at: h.at, subject: null, snippet: m[2].trim(), triaged: answered });
+  }
+
+  const choice = choices.get(accountName) ?? null;
+  const od = inputs.firstTouches.find((t) => t.state === 'draft outstanding') ?? null;
+  const restriction = ctx.relationship.restriction;
+  const top = brief.hypotheses.find((h) => h.grounded && h.truth !== 'CONTRADICTED') ?? null;
+
+  const input: PursuitInput = {
+    accountName,
+    now,
+    motionType: brief.motion.type,
+    opportunity: inputs.opportunity ?? { status: 'UNKNOWN', detail: 'opportunity truth not read', deals: [] },
+    restriction: restriction ? { kind: restriction.kind, introducer: restriction.introducer, route: restriction.route } : null,
+    familyHold: brief.family?.hold ? { detail: brief.family.hold.detail } : null,
+    motion: mine ? { state: mine.state, primary: mine.primary ? { personaId: mine.primary.personaId, name: mine.primary.name, title: mine.primary.title } : null, next: mine.next ? { personaId: mine.next.personaId, name: mine.next.name, title: mine.next.title, unlock: mine.next.unlock } : null, headline: mine.headline } : null,
+    choice: choice ? { personaId: choice.primaryPersonaId, by: choice.by, at: choice.at, source: 'motion' } : null,
+    activePersona: assigned,
+    replies,
+    lastOutbound: lastSend ? { to: lastSend.text.replace(/^.*?\bto\s+/, '').slice(0, 80), at: lastSend.at, what: lastSend.text, source: 'GAP history' } : null,
+    outstandingDraft: od ? { recipient: od.recipient, name: null, decisionId: od.decisionId ?? '' } : null,
+    followUpDue: due ? { personaId: due.persona.id, name: due.persona.displayName ?? due.persona.email ?? 'the person', dueAt: due.touch?.dueAt ?? now.toISOString(), cardHref: cockpitOpenHref('follow_up', due.id) } : null,
+    eligible: (resolution?.eligible ?? []).map((c) => ({ key: c.key, personaId: c.personaId, hubspotContactId: c.hubspotContactId, name: c.name, title: c.title })),
+  };
+  const state = projectPursuitState(input);
+  const chosenKey = state.person && (resolution?.eligible ?? []).some((c) => c.key === state.person!.key) ? state.person.key : null;
+  const stack = resolution ? buildPeopleStack(resolution, { chosenKey, chosenBy: state.person?.chosenBy ?? null }) : null;
+  return { state, resolution, stack, hypothesisId: top?.id ?? null };
+}
+
+/** The newest audited HUMAN persona assignment on one of the account's active hypotheses (owner resolution USE). */
+async function loadAssignedPersona(prisma: PrismaLike, accountName: string): Promise<PursuitInput['activePersona']> {
+  const hyps: Array<{ id: string }> = await prisma.prospectingHypothesis.findMany({ where: { account_name: accountName, status: 'active' }, select: { id: true }, take: 50 });
+  if (!hyps.length) return null;
+  const row: { actor: string; payload: Record<string, unknown>; created_at: Date } | null = await prisma.gapAuditEvent.findFirst({
+    where: { kind: 'hypothesis.persona_assigned', subject_type: 'hypothesis', subject_id: { in: hyps.map((h) => h.id) } },
+    select: { actor: true, payload: true, created_at: true },
+    orderBy: { created_at: 'desc' },
+  });
+  const pid = Number(row?.payload?.primaryPersonaId);
+  if (!row || !Number.isInteger(pid)) return null;
+  return { personaId: pid, at: new Date(row.created_at).toISOString(), by: row.actor };
+}

@@ -33,6 +33,8 @@ import { briefListenText, projectBrief } from '@/lib/gap/context/brief';
 import { accountSlug, accountTitle, gmailThreadHref } from '@/lib/gap/account-intel/href';
 import { OpenHashDetails } from '@/components/gap/open-hash-details';
 import { PendingLink } from '@/components/gap/pending-link';
+import { loadPursuit } from '@/lib/gap/pursuit/load';
+import { nextFromPursuit } from '@/lib/gap/pursuit/next';
 
 export const dynamic = 'force-dynamic';
 /** The browser title names the account (click test round 3: every tab read "GAP account"). From the slug: no read. */
@@ -126,11 +128,21 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
       );
     }
     // The cockpit's ready first-touch card for this account (fails soft): the one person NOW and the cockpit share.
-    const ready = brief.motion.type === 'FACT_LED' ? await loadReadyTarget(prisma, brief.accountName, now) : null;
+    const [ready, pursuit] = await Promise.all([
+      brief.motion.type === 'FACT_LED' ? loadReadyTarget(prisma, brief.accountName, now) : Promise.resolve(null),
+      // UX-03 (account-first): ONE pursuit state per account and the People Stack over the one owner-resolution read.
+      loadPursuit(prisma, { brief, inputs, ctx, now }).catch(() => null),
+    ]);
     const v = projectNow(brief, ctx, inputs, now, { ready });
     const top = brief.hypotheses.find((h) => h.grounded && h.truth !== 'CONTRADICTED');
+    // NEXT from the pursuit state (the chosen person and the action agree by construction); a meeting within 14 days
+    // still leads (projectNow's own rule).
+    const pursuitNext = pursuit && v.next.source !== 'meeting'
+      ? nextFromPursuit(pursuit.state, { hypothesisId: pursuit.hypothesisId, accountSlugHref: (view) => hrefFor(view), replyThreadHref: v.replyThread ? gmailThreadHref(v.replyThread, session.user.email) : null, captureHref: `/gap/capture?account=${encodeURIComponent(brief.accountName)}` })
+      : null;
     const control: { href: string; label: string } | null =
-      v.next.source === 'meeting' ? { href: hrefFor('brief'), label: 'Open the meeting brief' }
+      pursuitNext ? pursuitNext.control
+      : v.next.source === 'meeting' ? { href: hrefFor('brief'), label: 'Open the meeting brief' }
       : v.next.source === 'deal' ? { href: hrefFor('brief'), label: 'Open the deal brief' }
       // An unanswered reply opens its thread in Gmail (round 6: "Open replies" was an empty lane for GXO).
       : v.replyThread ? { href: gmailThreadHref(v.replyThread, session.user.email), label: `Open ${v.replyThread}'s thread in Gmail` }
@@ -147,7 +159,15 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
         <GapSubnav />
         {header}
         {tabs}
-        <AccountNowView v={v} nextHref={control?.href ?? null} nextLabel={control?.label ?? null} links={links} mailbox={process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() || null} />
+        <AccountNowView
+          v={v}
+          nextHref={control?.href ?? null}
+          nextLabel={control?.label ?? null}
+          nextText={pursuitNext?.text ?? null}
+          links={links}
+          mailbox={process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() || null}
+          pursuit={pursuit ? { state: pursuit.state, stack: pursuit.stack, hypothesisId: pursuit.hypothesisId, excluded: pursuit.resolution?.excluded ?? [] } : null}
+        />
       </div>
     );
   }
