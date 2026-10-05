@@ -2,8 +2,8 @@
 
 STATUS: ACTIVE. GAP V2 is STRUCTURALLY COMPLETE (2026-10-03) and back in SELLER DOGFOOD / FREEZE MODE: the rule below
 applies. No V2.1: future changes come from real selling evidence, repeated Casey feedback, production defects, or an
-explicit new-version decision.
-<!-- verified:2026-10-03 -->
+explicit new-version decision. The 2026-10-04 operator-first WHO correction (below) is seller evidence (rule 3), not V3.
+<!-- verified:2026-10-04 -->
 <!-- verified:2026-10-02 (V2) -->
 
 Production SHA: see "V2 finish" below (the code release is the #392 merge; this doc lands after it). Update this line when a change ships. Update this line when a change ships.
@@ -133,9 +133,14 @@ V2 contracts (do not change without a new design decision):
   and AT THE WIRE in the Gmail sender (`src/lib/email/restriction-gate.ts`: TO, CC, BCC; only an operator alert or a
   genuine reply to the buyer's own message passes). Account.best_intro_path, warm_intro, outreach_status and
   Persona.intro_route are display only.
-- **One WHO comparator** (`src/lib/gap/people/person-prior.ts`): buyer truth > relationship > initiative owner > lane
-  > North America (one tier) > network scope > seniority. Lanes and reasons, never a score. The brief, the buyer map
-  and the cockpit read it.
+- **One WHO comparator** (`src/lib/gap/people/person-prior.ts`): buyer truth > relationship > initiative owner > not
+  another region's remit > lane > named ownership > not outside North America > network scope > US market > seniority.
+  Lanes and reasons, never a score. The brief, the buyer map and the cockpit read it. **Cold WHO is narrower than the
+  buyer map** (2026-10-04, `isColdWho`): the default cold first touch is a direct freight operator (a transportation
+  tech / transformation owner only with a named initiative; a site operator only for a site-scoped motion). A VP
+  Supply Chain is a sponsor / alternate; with no operator on record WHO is "transportation owner not yet identified:
+  research required", and the cockpit suggests nobody (`needs_owner`; Casey's choice still decides).
+  `docs/gap/V2_PERSON_PRIOR.md` "Operator-first cold WHO" is canonical.
 - **Geography is two facts about the PERSON** (amendment 2026-10-03; `tests/unit/gap/geography.test.ts`): LOCATION
   (their own record: US / Canada / Mexico / elsewhere / unknown; a company HQ never fills it) and OPERATING REMIT (the
   region the title says they run). North America = the United States, Canada and Mexico; generic Latin America / LATAM,
@@ -144,7 +149,9 @@ V2 contracts (do not change without a new design decision):
   North America). States: NA_REMIT (North America remit confirmed), US_CONFIRMED, CANADA_CONFIRMED, MEXICO_CONFIRMED,
   OTHER_REGION, UNKNOWN. "NL" / "BC" with no country are ambiguous (Canadian province or Mexican state) and say nothing. The remit decides when stated (a Chicago-based Director, European Logistics
   is another region; a Toronto-based VP, North America Transportation is NA remit), else the location, else unknown.
-  The three North America states rank as one tier after the lane: geography never outranks operating ownership.
+  The three North America states rank after the lane and named ownership: geography never outranks operating
+  ownership. Since 2026-10-04 US-first breaks ties among otherwise comparable people (US / NA remit or US-based >
+  Canada or Mexico only > unknown).
   The buyer map tags `[North America remit]`, `[US]`, `[Canada]`, `[Mexico]`. WHY NOW treats a Mexican or Canadian
   site as a North America network change.
 - **Apollo: zero autonomous spend** (amendment 2026-10-03; `src/lib/enrichment/apollo-policy.ts`,
@@ -287,6 +294,17 @@ production build, and production-verified. Production code verified at the #392 
   Apollo review error logging, stale schema comment. REJECTED (verified clean): any autonomous Apollo path, test spend,
   client bundle, dedupe, page load, code assuming limit 1 (advisory locks are transaction-scoped), New Mexico,
   WHY NOW for Mexico, NOW / FACT / HYPOTHESIS / BID untouched, no new source of truth.
+
+## Operator-first WHO correction (2026-10-04)
+
+Seller evidence: on PepsiCo GAP recommended a VP Supply Chain while 26 direct transportation / logistics operators sat
+in the account's 542 HubSpot contacts. Root cause: the cockpit ranks only READY cards (GAP contacts that pass the legacy
+role gate), and the brief's fact-led WHO read GAP contacts in any operating lane. Fix: cold WHO = a direct operator
+(`isColdWho`); the cockpit's `needs_owner` state; brief sponsor / tech / site slots; mixed compliance / safety titles;
+US-first tie-break; operator-first, source-backed contact discovery; Apollo never re-finds an email HubSpot holds; the
+read-only `scripts/gap/operator-contact-audit.ts`. Doctrine, root cause, PepsiCo result and the 18-account dogfood:
+`docs/gap/V2_PERSON_PRIOR.md`. Production SHA: pending merge (update when shipped). The outstanding first-touch draft to
+Michelle Schlie (created 2026-10-05 00:26 UTC) still holds PepsiCo: sending or deleting it is Casey's decision.
 
 ## Soak (2026-10-02)
 
