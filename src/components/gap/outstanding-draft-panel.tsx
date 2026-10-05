@@ -42,7 +42,7 @@ export function OutstandingDraftPanel({ recipient, name, decisionId, gmailDraftI
       const body = (await res.json().catch(() => ({}))) as Record<string, unknown>;
       if (!res.ok) {
         const code = typeof body.error === 'string' ? body.error : `HTTP ${res.status}`;
-        setOutcome({ ok: false, text: refusalSentence(code) ?? `Not discarded: ${code.replace(/_/g, ' ')}.${typeof body.detail === 'string' ? ` ${body.detail}` : ''} Nothing in Gmail was touched.` });
+        setOutcome({ ok: false, text: `${refusalSentence(code, typeof body.detail === 'string' ? body.detail : null) ?? (typeof body.detail === 'string' && body.detail ? `Not discarded. ${body.detail}` : 'Not discarded. Reload and try again.')} Nothing in Gmail was touched.` });
         return;
       }
       const action = String(body.action);

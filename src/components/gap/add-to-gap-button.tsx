@@ -31,7 +31,7 @@ export function AddToGapButton({ accountName, hubspotContactId, name, title, lab
       const body = (await res.json().catch(() => ({}))) as Record<string, unknown>;
       if (!res.ok) {
         const code = typeof body.error === 'string' ? body.error : `HTTP ${res.status}`;
-        setResult({ ok: false, text: refusalSentence(code) ?? `Not added: ${code.replace(/_/g, ' ')}.${typeof body.detail === 'string' ? ` ${body.detail}` : ''}`, notes: [] });
+        setResult({ ok: false, text: refusalSentence(code, typeof body.detail === 'string' ? body.detail : null) ?? (typeof body.detail === 'string' && body.detail ? `Not added. ${body.detail}` : 'Not added. Reload and try again.'), notes: [] });
         return;
       }
       setResult({ ok: true, text: `${STATUS_COPY[String(body.status)] ?? 'Done.'} ${name} is now available to routing at ${accountName}.`, notes: Array.isArray(body.notes) ? (body.notes as string[]) : [] });

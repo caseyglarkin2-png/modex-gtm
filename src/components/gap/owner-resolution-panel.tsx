@@ -29,8 +29,9 @@ const STEP_LABEL: Record<string, string> = { import: 'Add to GAP', check: 'Check
 function stepText(s: UseOwnerResult['steps'][number]): string {
   if (s.ok) return s.status === 'skipped' ? 'skipped' : s.detail ? s.detail : s.status ?? 'done';
   const code = String(s.reason ?? '');
-  const base = code.replace(/^candidate_not_eligible:/, '');
-  return refusalSentence(base) ?? `${code.replace(/_/g, ' ')}${s.detail ? `: ${s.detail}` : ''}`;
+  // Every step reason has seller copy (review S7); a suffixed code reads through its prefix and the exclusion's own
+  // sentence stands in as the why. The fallback never shows a token: it shows the detail sentence or a plain line.
+  return refusalSentence(code, s.detail) ?? (s.detail ? s.detail : 'This step did not complete. Reload and try again.');
 }
 
 export function OwnerResolutionPanel({ hypothesisId, accountName, onChanged }: OwnerResolutionPanelProps) {

@@ -150,14 +150,155 @@ const COPY: Record<string, RefusalCopy> = {
     why: "Can't verify whether this account already has an active opportunity.",
     next: 'Check HubSpot before contacting them.',
   },
+  // The owner action (USE / ADD + USE / attach): every step's refusal in seller words (review S7). A code with a
+  // suffix ("candidate_not_eligible:left_company", "not_approved:draft") reads through its prefix; where the detail
+  // is the reason itself (the exclusion's own sentence), it stands in for the why.
+  candidate_not_eligible: {
+    what: 'Nothing was attached or routed.',
+    why: 'This person is not eligible as the owner any more (the record changed since the list was read).',
+    next: 'Reload the owners, choose another person, or correct the record if you know otherwise.',
+  },
+  no_candidate: {
+    what: 'Nothing happened.',
+    why: 'No person was chosen.',
+    next: 'Choose a person (a GAP contact or a HubSpot contact) and press the button again.',
+  },
+  not_found: {
+    what: 'Nothing happened.',
+    why: 'This hypothesis no longer exists.',
+    next: 'Reload the page.',
+  },
+  hypothesis_closed: {
+    what: 'Nothing was attached or routed.',
+    why: 'This hypothesis is closed (rejected, expired or resolved), so nothing routes from it.',
+    next: 'Revise it on a current fact, or open a new one.',
+  },
+  not_approved: {
+    what: 'The person is attached; nothing was activated.',
+    why: 'The hypothesis is not approved yet, and only an approved hypothesis goes into routing.',
+    next: 'Approve it, then use it in routing.',
+  },
+  already_active: {
+    what: 'Nothing changed.',
+    why: 'The hypothesis is already in use.',
+    next: 'Work it from the ready card.',
+  },
+  stale_status: {
+    what: 'Nothing was attached.',
+    why: 'The hypothesis changed while the list was open.',
+    next: 'Reload and choose again.',
+  },
+  same_person: {
+    what: 'Nothing changed.',
+    why: 'That person is already the owner of this hypothesis.',
+    next: 'Use it in routing, or choose someone else.',
+  },
+  persona_do_not_contact: {
+    what: 'Nothing was attached, drafted or sent.',
+    why: 'This person is marked do not contact in GAP.',
+    next: 'Choose another owner; if the flag is a legacy one, review it deliberately (the suppression correction path), never here.',
+  },
+  routing_failed: {
+    what: 'The person is attached and the hypothesis is in use, but the targeted routing did not run.',
+    why: 'Routing answered with an error; nothing was sent.',
+    next: 'Run routing from the cockpit, or retry in a moment.',
+  },
+  no_people: {
+    what: 'Nothing was routed.',
+    why: 'There was nobody to route.',
+    next: 'Choose an owner first.',
+  },
+  // The outstanding-draft discard: only the draft the ledger proves, reconciled, never inferred.
+  decision_not_found: {
+    what: 'Nothing was discarded.',
+    why: 'GAP has no decision by that id any more.',
+    next: 'Reload the page.',
+  },
+  draft_not_found: {
+    what: 'Nothing was discarded.',
+    why: 'The ledger holds no GAP-created draft for this decision.',
+    next: 'If a draft exists in Gmail, it was not created by GAP: handle it in Gmail.',
+  },
+  draft_mismatch: {
+    what: 'Nothing was discarded.',
+    why: 'The draft on the ledger is not the one on screen.',
+    next: 'Reload the page; if it persists, note it in /gap/feedback.',
+  },
+  recipient_mismatch: {
+    what: 'Nothing was discarded.',
+    why: 'The recipient on screen is not the one the ledger recorded for this draft.',
+    next: 'Reload the page; if it persists, note it in /gap/feedback.',
+  },
+  sender_mailbox_mismatch: {
+    what: 'Nothing was discarded.',
+    why: 'The GAP mailbox configured here is not the mailbox that holds this draft.',
+    next: 'Open it in Gmail and discard it there.',
+  },
+  gap_sender_unconfigured: {
+    what: 'Nothing was discarded.',
+    why: 'The GAP mailbox is not configured in this environment.',
+    next: 'Open it in Gmail and discard it there.',
+  },
+  gmail_unreadable: {
+    what: 'Nothing was discarded.',
+    why: 'Gmail could not be read just now.',
+    next: 'Retry in a moment.',
+  },
+  reconcile_failed: {
+    what: 'The draft is gone from Gmail, but the ledger could not be reconciled.',
+    why: 'The reconcile step answered with an error.',
+    next: 'Retry in a moment; the account motion stays held until the ledger agrees.',
+  },
+  invalid_reason: {
+    what: 'Nothing was discarded.',
+    why: 'The reason is not one of the four GAP records.',
+    next: 'Pick a reason from the list.',
+  },
+  // Employment corrections and verification.
+  invalid_url: {
+    what: 'Nothing was recorded.',
+    why: 'The source must be a web address (a profile or an announcement).',
+    next: 'Paste the URL and save again.',
+  },
+  missing_company: {
+    what: 'Nothing was recorded.',
+    why: 'THIS PERSON LEFT needs the new company.',
+    next: 'Name where they went (or leave the title blank if unknown) and save again.',
+  },
+  human_correction_stands: {
+    what: 'Nothing was recorded.',
+    why: 'Your own correction already stands; an automated verification never overrides it.',
+    next: 'Use CURRENT ROLE IS WRONG to change it.',
+  },
+  persona_not_found: {
+    what: 'Nothing was recorded.',
+    why: 'GAP has no contact by that id any more.',
+    next: 'Reload the page.',
+  },
+  account_not_found: {
+    what: 'Nothing was added.',
+    why: 'GAP has no account by that name.',
+    next: 'Open the account page again.',
+  },
 };
 
+/** Codes whose detail IS the reason (the exclusion's own sentence): the detail stands in for the why. */
+const DETAIL_IS_WHY = new Set(['candidate_not_eligible']);
+
 export function refusalCopy(code: string | null | undefined): RefusalCopy | null {
-  return code ? (COPY[code] ?? null) : null;
+  if (!code) return null;
+  const exact = COPY[code];
+  if (exact) return exact;
+  // A suffixed code ("candidate_not_eligible:left_company", "not_approved:draft") reads through its prefix.
+  const prefix = code.split(':')[0];
+  return COPY[prefix] ?? null;
 }
 
-/** One line: what happened, why, next. Null for an unknown code. */
-export function refusalSentence(code: string | null | undefined): string | null {
+/** One line: what happened, why, next. Null for an unknown code. The detail replaces the why where it is the reason. */
+export function refusalSentence(code: string | null | undefined, detail?: string | null): string | null {
   const c = refusalCopy(code);
-  return c ? `${c.what} ${c.why} Next: ${c.next}` : null;
+  if (!c) return null;
+  const prefix = String(code ?? '').split(':')[0];
+  const why = DETAIL_IS_WHY.has(prefix) && detail?.trim() ? detail.trim() : c.why;
+  return `${c.what} ${why} Next: ${c.next}`;
 }
