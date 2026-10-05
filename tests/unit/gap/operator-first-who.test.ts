@@ -90,6 +90,11 @@ describe('PepsiCo pattern: the HubSpot Director of Transportation leads, the VP 
     expect(b.motion.who).toBeNull();
     expect(b.glance.nextAction).toMatch(/^Add Himanshu Gupta, Director of Transportation from HubSpot as a GAP contact/);
   });
+  it('Apollo never spends a credit to re-find an email HubSpot already holds for the operator', () => {
+    const a = apolloCandidates(b, i);
+    expect(a.candidates).toEqual([]);
+    expect(a.notNeeded).toBe('Himanshu Gupta already has an email in HubSpot: add them as a GAP contact (no credit needed).');
+  });
   it('NOW: WHO is the operator, the sponsor is the alternate', () => {
     const v = projectNow(b, ctx(), i, NOW);
     expect(v.who).toMatchObject({ name: 'Himanshu Gupta', inHubSpotOnly: true });
@@ -128,6 +133,12 @@ describe('the buyer map keeps its richness: tech / transformation and site opera
     expect(b.people?.tech?.name).toBe('Tess Tech');
     expect(b.people?.site?.name).toBe('Sam Site');
     expect(b.people?.lanes.find((l) => l.lane === 'NON_OPERATING')?.people.map((p) => p.name)).toContain('Ivy Innov');
+  });
+  it('dogfood 2026-10-04: a director of warehouse operations is not the sponsor; a nameless record fills no slot', () => {
+    const i = inputs({ personas: [], hubspotPeople: hs([{ id: '1', name: 'Matt Whse', title: 'Director of Warehouse Operations' }, { id: '2', name: '(no name in HubSpot)', title: 'Head of Global Operations' }, { id: '3', name: '(no name in HubSpot)', title: 'Director of Transportation' }, { id: '4', name: 'Dee Sc', title: 'Director, Supply Chain' }]) });
+    const b = buildAccountBrief(i, NOW);
+    expect(b.people?.primary).toBeNull();
+    expect(b.people?.sponsor?.name).toBe('Dee Sc');
   });
   it('a GAP-contact operator is the motion WHO', () => {
     const tom = { id: 5, name: 'Tom Ops', title: 'Transportation Operations Manager', location: 'Madison, Wisconsin, United States', doNotContact: false, hasEmail: true, emailStatus: 'valid' };

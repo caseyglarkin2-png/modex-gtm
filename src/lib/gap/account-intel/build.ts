@@ -1218,13 +1218,15 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
     { entityType: fit.entityType },
   );
   const mapped = (r: (typeof everyone)[number]): MappedPerson => ({ name: r.candidate.name, title: r.candidate.title, lane: r.read.lane, laneLabel: LANE_LABEL[r.read.lane], region: r.read.region, geo: r.read.geo, why: r.why, reachable: r.candidate.reachable, doNotContact: !!r.candidate.doNotContact, division: divisionOf(i.account.name, r.candidate.title), location: r.candidate.location ?? null, source: r.candidate.source });
-  const contactable = everyone.filter((r) => !r.candidate.doNotContact && r.read.remit !== 'OTHER_REGION');
+  // A HubSpot record with no name ("(no name in HubSpot)") stays in the lanes but fills no slot: nobody to address.
+  const contactable = everyone.filter((r) => !r.candidate.doNotContact && r.read.remit !== 'OTHER_REGION' && !/^\(no name/.test(r.candidate.name));
   const opAll = contactable.filter((r) => isColdWho(r.read));
   // The prior's best across both: a reachable GAP contact wins a tie (it can be worked today); a HubSpot-only person
   // wins when the prior ranks them higher (a better-fit owner). Only a direct operator is the primary.
   const best = opAll[0] ?? null;
-  // The sponsor: the supply chain / operations executive or VP (adjacent or executive lane), never the cold default.
-  const sponsorPick = contactable.find((r) => r.read.lane === 'ADJACENT_OPERATOR' || r.read.lane === 'EXECUTIVE_SPONSOR') ?? null;
+  // The sponsor: the executive over operations or supply chain (CSCO, COO), a VP in an adjacent lane, or a director
+  // whose title says supply chain or network; never a warehouse or DC director, never the cold default.
+  const sponsorPick = contactable.find((r) => r.read.lane === 'EXECUTIVE_SPONSOR' || (r.read.lane === 'ADJACENT_OPERATOR' && (r.read.seniority >= 4 || (r.read.seniority >= 3 && /supply chain|network/i.test(r.candidate.title ?? ''))))) ?? null;
   const techPick = contactable.find((r) => r.read.lane === 'TRANSFORMATION_TECH' && r.read.ownership > 0) ?? null;
   const sitePick = contactable.find((r) => r.read.lane === 'FACILITY_OPERATOR') ?? null;
   const people: BuyerMap = {

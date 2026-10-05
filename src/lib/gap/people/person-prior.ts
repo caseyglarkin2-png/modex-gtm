@@ -128,7 +128,9 @@ const COMMERCIAL_STRONG = /\b(sourcing|procurement|purchas\w*|category|buyer|fin
 // leaves what else the title runs: "VP Global Transportation and Compliance" still runs transportation; "Transportation
 // Compliance Manager" runs nothing else.
 const GOVERNANCE_PHRASE = /\b(?:(?:transportation|transport|fleet|freight|logistics|trade|dot|regulatory|carrier)\s+)?(?:compliance|sustainability|safety)\b/g;
-const TECH_WORDS = /\b(it|software|engineering|digital|technology|technologies|systems?|tms|wms|sap|automation|innovation|data|transformation|analytics|product area|visibility|orchestration|rtls|modernization|solutions architect|identity)\b/;
+// "S&T" is PepsiCo's strategy and transformation function (dogfood 2026-10-04: its "S&T North America Deployment -
+// Transportation" director is transformation, not the freight operator).
+const TECH_WORDS = /\b(it|software|engineering|digital|technology|technologies|systems?|tms|wms|sap|automation|innovation|data|transformation|analytics|product area|visibility|orchestration|rtls|modernization|solutions architect|identity)\b|\bs&t\b/;
 const GENERIC_IT = /\b(identity and access|access management|cyber|security engineer|infrastructure|help ?desk|end user)\b/;
 const FREIGHT_WORDS = /\b(transportation|transport|transporte|freight|fleet|otr|over the road|dedicated|trucking|traffic|carrier management|inbound|outbound|intersite|line ?haul|middle[- ]mile|shipping|distribution (&|and) transportation|transportation (&|and) (warehous\w*|distribution|logistics))\b|\bld&t\b/;
 // Logistics that names the freight network itself: a direct operator at any seniority.

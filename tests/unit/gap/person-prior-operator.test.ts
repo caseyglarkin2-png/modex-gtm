@@ -56,6 +56,12 @@ describe('transportation technology / transformation needs explicit freight scop
     expect(r.ownership).toBe(2);
     expect(readPerson('Director, Transportation Systems (TMS)').ownership).toBe(2);
   });
+  it('PepsiCo dogfood 2026-10-04: "S&T" (strategy and transformation) deployment of transportation is transformation, not the operator', () => {
+    const r = readPerson('Sr Director, S&T North America Deployment - Transportation, Safety & Equipment Service');
+    expect(r.lane).toBe('TRANSFORMATION_TECH');
+    expect(r.ownership).toBe(2);
+    expect(lane('Sr. Director, Strategy and Transformation for PepsiCo Global Transportation')).toBe('TRANSFORMATION_TECH');
+  });
   it('transportation tech is cold WHO only with a named initiative', () => {
     const r = readPerson('VP Strategy & Transformation, Global Transportation & Fleet');
     expect(isColdWho(r)).toBe(false);

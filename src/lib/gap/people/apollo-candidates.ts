@@ -85,7 +85,10 @@ export function apolloCandidates(brief: AccountIntelligenceBrief, i: AccountInpu
     }
   } else if (!owner.reachable) {
     const prior = i.personas.find((x) => sameName(x.name, owner.name) && x.apolloEnrichedAt);
-    if (prior) notNeeded = `${owner.name} already has an Apollo result (${day(prior.apolloEnrichedAt!)}): no credit spent twice.`;
+    // A HubSpot-only owner whose HubSpot record already has an email is added, never re-found (operator-first, 2026-10-04).
+    const inHubSpot = owner.source === 'hubspot' && (hs?.people ?? []).some((x) => sameName(x.name, owner.name) && x.hasEmail && !x.optedOut);
+    if (inHubSpot) notNeeded = `${displayName(owner.name)} already has an email in HubSpot: add them as a GAP contact (no credit needed).`;
+    else if (prior) notNeeded = `${owner.name} already has an Apollo result (${day(prior.apolloEnrichedAt!)}): no credit spent twice.`;
     else add({
       kind: 'FIND_EMAIL',
       target: `${displayName(owner.name)}${owner.title ? `, ${owner.title}` : ''}`,
