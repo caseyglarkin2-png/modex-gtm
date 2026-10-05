@@ -299,10 +299,14 @@ production build, and production-verified. Production code verified at the #392 
 
 Seller evidence: on PepsiCo GAP recommended a VP Supply Chain while 26 direct transportation / logistics operators sat
 in the account's 542 HubSpot contacts. Root cause: the cockpit ranks only READY cards (GAP contacts that pass the legacy
-role gate), and the brief's fact-led WHO read GAP contacts in any operating lane. Fix: cold WHO = a direct operator
-(`isColdWho`); the cockpit's `needs_owner` state; brief sponsor / tech / site slots; mixed compliance / safety titles;
-US-first tie-break; operator-first, source-backed contact discovery; Apollo never re-finds an email HubSpot holds; the
-read-only `scripts/gap/operator-contact-audit.ts`. Doctrine, root cause, PepsiCo result and the 18-account dogfood:
+role gate; at PepsiCo four identical VP Supply Chain titles, so Michelle Schlie won on name order), and the brief's
+fact-led WHO read GAP contacts in any operating lane. Fix: cold WHO = a direct operator (`isColdWho`); the cockpit's
+`needs_owner` state, ranked with each person's HubSpot location; brief sponsor / tech / site slots (one `isSponsor`
+rule); mixed compliance / safety titles only when joined by a conjunction; freight finance, HR and non-freight
+"operations" never the operator; US-first tie-break; operator-first, source-backed contact discovery; Apollo never
+re-finds an email HubSpot holds; the read-only `scripts/gap/operator-contact-audit.ts`. A fresh adversarial review's
+blocker and every SHOULD FIX are fixed (one documented: the initiative / site-scoped cold-WHO branches are not yet
+wired). Doctrine, root cause, PepsiCo result and the 18-account dogfood:
 `docs/gap/V2_PERSON_PRIOR.md`. Production SHA: pending merge (update when shipped). The outstanding first-touch draft to
 Michelle Schlie (created 2026-10-05 00:26 UTC) still holds PepsiCo: sending or deleting it is Casey's decision.
 

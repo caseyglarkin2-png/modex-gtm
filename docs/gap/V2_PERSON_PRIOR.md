@@ -140,10 +140,11 @@ The account brief already read all 542 PepsiCo HubSpot people (not truncated; ca
 Transportation first. Two other paths did not:
 
 1. **The cockpit** (`motion/account-motion.ts`) ranks only READY cards, and cards exist only for GAP contacts that
-   pass the legacy generic routing role gate (`routing/inputs.ts roleGateFor`). At PepsiCo those were five
-   "vice president supply chain" personas and a specialist. Its "Suggested primary" was Michelle Schlie (the only one
-   with a US location), and a first-touch Gmail draft to her was created on 2026-10-05 00:26 UTC and is still
-   outstanding (it now holds the account; send or delete is Casey's call).
+   pass the legacy generic routing role gate (`routing/inputs.ts roleGateFor`). At PepsiCo those were four
+   "vice president supply chain" personas and a specialist. The cockpit read no person location, so the four
+   identical titles tied and Michelle Schlie won on NAME ORDER ("michelle" before "mohamed"); a first-touch Gmail
+   draft to her was created on 2026-10-05 00:26 UTC and is still outstanding (it now holds the account; send or delete
+   is Casey's call).
 2. **The brief's fact-led motion WHO** chose among GAP contacts only, in any operating lane (`isDefaultWho`), so it
    also named the VP Supply Chain.
 
@@ -157,24 +158,31 @@ US-confirmed peers rank first.
 |---|---|---|
 | DIRECT OPERATOR | PRIMARY_OPERATOR: transportation, freight, fleet, OTR, dedicated, linehaul, middle mile, inbound / outbound, LD&T, logistics operations, network logistics, physical distribution, "transportation & warehousing / distribution / logistics"; "logistics" alone at director / VP / head. Manager to SVP; seniority never decides the lane. At a carrier / 3PL / terminal, whoever runs the physical network. | **Yes** (the default) |
 | TRANSPORTATION TECH / TRANSFORMATION | TRANSFORMATION_TECH with explicit freight, fleet, logistics or yard scope (`ownership 2`). Generic innovation, IT, digital or "Supply Chain Transformation" is not. | Only with a named initiative (a live signal) |
-| SPONSOR | EXECUTIVE_SPONSOR (CSCO, COO), a VP in an adjacent lane (VP Supply Chain, VP Operations), or a director whose title says supply chain or network | No: buyer map, alternate |
+| SPONSOR | `isSponsor` (one rule for the brief, the cockpit and research): EXECUTIVE_SPONSOR (CSCO, COO), a VP in an adjacent lane (VP Supply Chain, VP Operations), or a director whose title says supply chain or network; never a warehouse / DC director or a non-freight "operations" title | No: buyer map, alternate |
 | FACILITY OPERATOR | plant, DC, warehouse, yard, site | Only for a site-scoped motion |
-| NOT A TARGET | procurement, sourcing, category, finance, compliance-only, safety-only, sustainability-only, HR, communications, legal, marketing, store operations, generic IT, generic innovation, R&D | No |
+| NOT A TARGET | procurement, sourcing, category, finance, freight audit / payment, transportation contracts, rate management, spend, budget, compliance-only, safety-only, sustainability-only, HR, recruiting, attorneys, communications, legal, marketing, store operations, "operations" of another function (people, revenue, commercial, customer), generic IT, generic innovation, R&D | No |
 
 `isColdWho(read, { initiative, siteScoped })` encodes the right column; it also refuses another region's stated remit
 and anyone based outside North America (they stay in the buyer map; Apollo proposes the NA owner). The buyer map
-(`isDefaultWhoLane`, the lanes) is unchanged.
+(`isDefaultWhoLane`, the lanes) is unchanged. **Not yet wired:** no caller supplies `initiative` or `siteScoped` today
+(the brief has no per-person initiative evidence and no site-scoped motion flag), so in production only a direct
+operator is cold WHO; a transportation tech owner or a site operator leads only by Casey's explicit choice in the
+cockpit (a Plant Manager GAP contact that used to be the fact-led WHO is now "research required" with them in the
+buyer map). Wiring either branch is a deliberate next decision, not a default.
 
 **With no direct operator on record** WHO says "Transportation owner not yet identified: research required" and names
 the sponsor as the alternate. It never promotes the broadest senior title.
 
-**Mixed titles.** Compliance, sustainability or safety BESIDE a transportation or logistics function is a second remit:
-the operating function decides ("VP Global Transportation and Compliance", "Director Transportation Operations &
-Compliance", "VP Logistics and Transportation Compliance", "VP Transportation & Safety" are direct operators; the
-2026-10-02 rule that put "Director, Transportation & Trade Compliance" in procurement is superseded). Sourcing,
-procurement, purchasing, category, finance, cost and pricing always win ("VP Transportation Procurement" stays
-procurement). A governance remit that only modifies the function ("Transportation Compliance Manager", "Director Trade
-Compliance", "Transportation Safety Manager", "Director, Fleet Safety") is not an operator.
+**Mixed titles.** Compliance, sustainability or safety JOINED to a transportation or logistics function by a
+conjunction or list is a second remit, and the operating function decides ("VP Global Transportation and Compliance",
+"Director Transportation Operations & Compliance", "VP Logistics and Transportation Compliance", "VP Transportation &
+Safety", "VP Fleet Safety & Operations", "Senior Director, Transportation Compliance & Operations" are direct
+operators; the 2026-10-02 rule that put "Director, Transportation & Trade Compliance" in procurement is superseded).
+Sourcing, procurement, purchasing, category, finance, cost, pricing, audit, payment, contracts, rates, spend and budget
+always win ("VP Transportation Procurement", "Director, Freight Audit & Payment" stay commercial). A governance remit
+that only MODIFIES the function ("Transportation Compliance Manager", "Transportation Safety Manager", "Director, Fleet
+Safety") or names it as a trailing DEPARTMENT ("Safety Manager - Fleet", "VP Safety, Transportation", "Compliance
+Director, Logistics", "Director, Trade Compliance - Transportation") is not an operator (review B1).
 
 **US-first** among comparable people, for Casey's current cold motion: function, then named ownership, then not
 outside North America, then scope, then the US market (a US / NA remit or US-based > Canada or Mexico only > unknown),
@@ -188,23 +196,31 @@ referral, someone Casey met or an intro-only route is its own motion and names i
 ### Where it is enforced
 
 - Cockpit (`motion/account-motion.ts`): new state `needs_owner`. No card whose person is a cold WHO: nobody is
-  suggested, every email card is held (never READY, so no "Contact X" task), the sponsor is named, and only Casey's
-  explicit choice ("Make X the primary") makes one primary, including after an unanswered touch unlocks the next person.
+  suggested, every email card is held (never READY, so no "Contact X" task), the sponsor (by `isSponsor`) is named,
+  the headline points at the BRIEF buyer map (it may name a HubSpot operator to add), and only Casey's explicit choice
+  ("Make X the primary") makes one primary, including after an unanswered touch unlocks the next person. A NEXT person
+  who is not a direct operator says "then only by your choice". The cockpit ranks cards with each person's own HubSpot
+  location (`loadCockpitMotions` batch-reads it where an account has more than one ready card; cached 15 minutes;
+  fail-soft to unknown), so US-first is the same as in the brief.
 - Brief (`account-intel/build.ts`): `people.primary` is a cold WHO or null; new `sponsor`, `tech`, `site`,
-  `ownerMissing`; the fact-led motion WHO is a GAP-contact operator only; a nameless HubSpot record fills no slot.
+  `ownerMissing`; the fact-led motion WHO is a GAP-contact operator only; a nameless HubSpot record fills no slot; no
+  slot is filled by someone based outside North America; when HubSpot returned only the first 1000 (capped) contacts,
+  "research required" says the owner may be beyond them.
 - NOW shows the sponsor / alternate when WHO is unknown; the research plan names the sponsor as "best on record now".
 - Apollo (`people/apollo-candidates.ts`): FIND_OWNER names the sponsor as the nearest person on record; a HubSpot-only
   operator whose HubSpot record already has an email is "add them as a GAP contact (no credit needed)", never
   FIND_EMAIL. Automated spend stays zero (`apollo-policy.ts`, unchanged).
 - Contact discovery (`src/lib/discovery/research.ts`): the prompt fills explicit slots in order (direct operator,
   transportation tech / transformation, one sponsor, optional site operator); every person needs a source URL; the
-  slot is re-read by the person prior, never the model; the prior ranks within a slot; at most 2 per slot; an email
-  survives only with the page that published it.
+  slot is re-read by the person prior, never the model; the prior ranks within a slot (anyone based outside North
+  America last); at most 2 per slot (3 site / regional operators near a facility, for /discovery's local leaders); an
+  email survives only with the page that published it.
 - Diagnostic: `npx tsx --env-file=<.env.local> scripts/gap/operator-contact-audit.ts "PepsiCo" ...`
   (`people/operator-audit.ts`): a view over the same buyer map and Apollo projection, never a second authority.
   `--research` runs the grounded discovery above for an account with no operator (no Apollo, no writes); `--stage`
-  stages a sourced, not-already-known DIRECT operator as an AccountContactCandidate (`state: staged`) for Casey to
-  review and promote. Never a Persona, a HubSpot contact, a send or an enrollment.
+  stages a sourced, not-already-known DIRECT operator as a NEW AccountContactCandidate (`state: staged`,
+  `recommended: false`; an existing row in any state is reported, never overwritten) for Casey to verify and promote.
+  Never a Persona, a HubSpot contact, a send or an enrollment.
 
 ### PepsiCo after the fix (production, read-only, 2026-10-04)
 
@@ -212,7 +228,8 @@ HubSpot people read 542 (not truncated), 19 GAP contacts, 0 staged. Direct-opera
 or unknown, 6 outside it). Primary **Isaac Scott, Sr Director of Transportation - Frito-Lay** (US; HubSpot only: add
 him as a GAP contact; his HubSpot record has an email, so no Apollo). Alternate Karen Darling, Senior Director - PBNA
 Transportation. Tech / transformation Amy Lewis, Sr Director, S&T North America Deployment - Transportation (NA remit).
-Sponsor Jeremy Johnson, VP Supply Chain (GAP). Site Brian Angus, Supply Chain Senior Site Director. Michelle Schlie is
+Sponsor Jeremy Johnson, VP Supply Chain (GAP). Site Andrew Sippy, Supply Chain Manufacturing Plant Director - Tulsa.
+Michelle Schlie is
 adjacent (VP Supply Chain, transportation ownership not stated): not cold WHO, buyer map / sponsor. Himanshu Gupta is
 present, 15th of 26 operators (location unknown). Divisions evidenced among the operators: Frito-Lay and PBNA (from
 their own titles). The cockpit for the same five cards, without the outstanding draft: `needs_owner`.
@@ -230,9 +247,9 @@ their own titles). The cockpit for the same five cards, without the outstanding 
 | Walmart Inc. | Christina Mannella | Sr Director - West Transportation Command Center | US | HubSpot | Jason Horn (Operations & Automation, Global Logistics) | Adam Dunbar, VP Supply Chain Operations Support | none | none (email in HubSpot) |
 | The Home Depot | Ryan Holden | Director, Transportation | US | HubSpot | Samuel Garduno Carrasquedo (IT Supply Chain, Transportation) | John Deaton, EVP Supply Chain | none | none (email in HubSpot) |
 | Niagara Bottling | Ryan Kieczykowski | Sr. Director of Logistics | US | HubSpot | none | Bhaskar Tatke, VP Supply Chain Planning | tech | none (email in HubSpot) |
-| Frito-Lay | Beth Mars | Transportation Director | US | HubSpot | none | none | tech, sponsor | none (email in HubSpot) |
+| Frito-Lay | Beth Mars | Transportation Director | US | HubSpot | none | Brian Watson, VP Supply Chain | tech | none (email in HubSpot) |
 | UNFI | David Wolf | Sr. Director Transportation | US | HubSpot | none | Brien Craft, Regional VP Operations | tech | none (email in HubSpot) |
-| Kraft Heinz | Nicholas Riolo | Transportation Manager | US | HubSpot | Adam Roth (Logistics Projects and Technology) | none named (a nameless HubSpot record is skipped) | none | none |
+| Kraft Heinz | Nicholas Riolo | Transportation Manager | US | HubSpot | Adam Roth (Logistics Projects and Technology) | Rachel Pugliese, Director of Supply Chain Operations (a nameless HubSpot record is skipped) | none | none |
 | Procter & Gamble | Emily Rampe | Senior Manager NA PHC Transportation & Warehousing Leader | NA remit | GAP | none | none | tech, sponsor; no HubSpot company link | none |
 | Sysco | Jack Garland | Director Transportation | unknown | GAP | none | John Archibald, VP Supply Chain | tech; no HubSpot company link | none |
 | John Deere | none | (35 HubSpot people: operations, warehouse and a "Logistics Manager", none a direct operator) | | | none | Zachary Wenzel, VP Supply Chain | direct operator | FIND_OWNER |
@@ -259,4 +276,25 @@ was staged. Research source dates are model-reported and unverified (Conagra's e
   operator does not become WHO until Casey promotes it.
 - The legacy routing role gate still creates cards for VP Supply Chain personas; the cockpit now holds them
   (`needs_owner`) instead of suggesting them.
+- A bare "Manager, Transportation Planning" is NEEDS_REVIEW (a planning role) while a director of it is an operator,
+  and director-and-above get network scope inferred: scope ranks before the US market, so between two operators a
+  director outranks a manager before geography does. Seniority never moves a title INTO the operator lane except for
+  bare "logistics" (above).
+- The HubSpot people read is the one company record, capped at 1000 in association order; contacts on child-company
+  records are not read. The brief now says when the cap was hit; it does not yet read child records.
 
+### Adversarial review (fresh reviewer, 2026-10-04)
+
+BLOCKER B1 (a trailing department made compliance / safety / sustainability-only titles operators): FIXED, conjunction
+rule above, mutation-proven. SHOULD FIX, all FIXED: S1 the needs_owner choice after an unlock was a no-op; S2 the
+headline called any card the sponsor; S3 the cockpit ranked without location while the brief applied US-first; S5
+freight audit / payment / contracts / spend / budget, HR, recruiting and attorneys read as operators; S6 any
+"operations" title at a carrier or 3PL was the operator, and "VP Commercial Operations" could be the sponsor; S7 the
+/discovery slot filter dropped local plant / DC leaders and filed regional operations managers as the sponsor. S4 (the
+initiative and site-scoped branches are unreachable) is DOCUMENTED above as not yet wired, deliberately. NICE TO HAVE
+fixed: N1 the NEXT unlock promise, N2 out-of-market research ordering, N3 staging is never "recommended", N4 "S&T" and
+visibility / orchestration scope, N6 labels, out-of-market slots, the staged-row message and the doc's EOF; the cap
+warning (question 8). Recorded, not fixed: N5 above. REJECTED by the reviewer after checking (no defect): a VP Supply
+Chain beating a Director of Transportation on any path except Casey's own choice; bare "operations" or "innovation" as
+cold WHO; procurement masquerading; hard-coded names; US preference over function; any Apollo spend; any create /
+send / enroll without Casey; regressions in the relationship, referral, follow-up, in-deal and intro-only motions.
