@@ -17,6 +17,7 @@
  * already happened (inbound, or completed) does not come through here.
  */
 import { checkActiveOpportunityNow, type ActionTimeOpportunityCheck } from '../enroll/service';
+import { employmentGate } from '../people/employment-gate';
 import { OPPORTUNITY_UNKNOWN_COPY } from '../opportunity/active-opportunity';
 import { telHref } from '../routing/seller-action';
 import { checkThesisCurrent, type ThesisCurrentnessCheck } from './thesis-currentness';
@@ -33,6 +34,8 @@ export type ColdOutboundRefusal =
   | 'active_opportunity'
   | 'opportunity_unknown'
   | 'persona_do_not_contact'
+  | 'persona_left_account'
+  | 'persona_employment_conflict'
   | 'decision_blocked'
   | 'decision_superseded'
   | 'thesis_needs_review'
@@ -77,6 +80,9 @@ export async function checkColdOutbound(
   });
   if (!persona) return { ok: false, reason: 'decision_not_found', message: 'This card has no person to contact.' };
   if (persona.do_not_contact) return { ok: false, reason: 'persona_do_not_contact', message: 'This person is marked do not contact.' };
+  // Owner resolution (2026-10-05): a departed or conflicted person is not called or messaged at this account either.
+  const employment = await employmentGate(prisma, decision.persona_id, input.now);
+  if (employment) return { ok: false, reason: employment.reason, message: employment.reason === 'persona_left_account' ? `Current-employer evidence says this person is no longer at ${decision.account_name}: a historical contact. Choose the current operator instead.` : `Sources disagree about where this person works now (${employment.detail}). Verify the current role before any outreach.` };
   if (decision.hypothesis_id) {
     const tc = await (deps.thesisCurrent ?? checkThesisCurrent)(prisma, decision.account_name, decision.hypothesis_id, input.now);
     if (tc.current === false) return { ok: false, reason: 'thesis_needs_review', message: `Review the thesis first: ${tc.reason}${tc.bestFact ? ` Current best fact: "${tc.bestFact}"` : ''}` };

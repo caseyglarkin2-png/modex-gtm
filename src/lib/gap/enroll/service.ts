@@ -105,6 +105,7 @@
  * no network here except the injected autonomy reader. Voice: no em dashes.
  */
 import { accountMotionRefusal } from '@/lib/gap/motion/load';
+import { employmentGate } from '../people/employment-gate';
 import { personSendHistory } from '../execution/person-history';
 import { autonomyHalted } from '@/lib/email/autonomy-gate';
 import { isOutreachPaused } from '@/lib/feature-flags';
@@ -244,6 +245,8 @@ export type EnrollServiceRefusal =
   | 'autonomy_halted'
   | 'hypothesis_not_found'
   | 'persona_not_found'
+  | 'persona_left_account'
+  | 'persona_employment_conflict'
   | 'no_email'
   | 'gap_history_exists'
   | 'account_replied'
@@ -736,6 +739,9 @@ export async function enrollFromDecision(
     select: { id: true, name: true, email: true, account_name: true, hubspot_contact_id: true, do_not_contact: true, email_status: true },
   });
   if (!persona) return refuse('persona_not_found');
+  // Owner resolution (2026-10-05): a departed or conflicted person is never enrolled at this account (shadow or live).
+  const employment = await employmentGate(prisma, persona.id, input.now);
+  if (employment) return refuse(employment.reason, { detail: employment.detail });
   const email = (persona.email ?? '').trim().toLowerCase();
   if (!email) return refuse('no_email');
 

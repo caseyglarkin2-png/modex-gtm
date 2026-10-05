@@ -40,6 +40,7 @@ import { accountRepliedRecently } from '../replies/account-reply';
 import { getGmailSignature, gmailSenderAddress } from '@/lib/email/gmail-sender';
 import { COMPANY_POSTAL_ADDRESS, oneClickUnsubscribeUrl, unsubscribePageUrl } from '@/lib/email/compliance';
 import { personMovedSince } from './stale-card';
+import { employmentGate } from '../people/employment-gate';
 import { isHardBounceStatus } from '@/lib/email/bounce';
 import { requestApproval } from '../compiler/approval';
 import { compile as defaultCompile } from '../compiler/compile';
@@ -94,6 +95,8 @@ export type SellerDraftRefusal =
   | 'no_email'
   | 'email_invalid'
   | 'persona_do_not_contact'
+  | 'persona_left_account'
+  | 'persona_employment_conflict'
   | 'no_version'
   | 'copy_version_outdated'
   | 'no_step0_copy'
@@ -372,6 +375,10 @@ export async function prepareSellerEmail(
   if (!email) return refuse(prisma, actor, decisionId, { ok: false, reason: 'no_email' });
   if (!persona.email_valid || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return refuse(prisma, actor, decisionId, { ok: false, reason: 'email_invalid' });
   if (persona.do_not_contact) return refuse(prisma, actor, decisionId, { ok: false, reason: 'persona_do_not_contact' });
+  // Owner resolution (2026-10-05): contact currentness at decision time. A person who left this account, or whose
+  // employer is in conflict, gets no draft, no send and no copy, whatever the card said when it was minted.
+  const employment = await employmentGate(prisma, persona.id ?? null, now);
+  if (employment) return refuse(prisma, actor, decisionId, { ok: false, reason: employment.reason, detail: employment.detail });
   // Ops closeout 14: the one bounce vocabulary (a historical `bounced` is a bounce too).
   if (isHardBounceStatus(persona.email_status)) return refuse(prisma, actor, decisionId, { ok: false, reason: 'email_bounced', detail: `email_status ${persona.email_status}` });
   // The unsubscribe table is the recipient's own decision; do_not_contact is
