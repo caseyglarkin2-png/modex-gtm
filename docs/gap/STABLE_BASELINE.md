@@ -310,6 +310,27 @@ wired). Doctrine, root cause, PepsiCo result and the 18-account dogfood:
 `docs/gap/V2_PERSON_PRIOR.md`. Production SHA: 87128cc2 (#394, shipped and verified live 2026-10-05). The outstanding first-touch draft to
 Michelle Schlie (created 2026-10-05 00:26 UTC) still holds PepsiCo: sending or deleting it is Casey's decision.
 
+## Owner resolution + contact currentness (2026-10-05)
+
+Seller evidence: on PepsiCo GAP named the better operator (Isaac Scott, HubSpot-only) with an instruction and no
+control, and the stale first-touch draft to Michelle Schlie held the account with no way to discard it; on FedEx and
+Walmart an approved account-level hypothesis (no person) answered Approve + use with the raw word `no_persona`; on
+H-E-B a person who had left (Dakota Socha, now ADUSA Distribution) ranked as the operator because a HubSpot modified
+date read as currentness. Fix: ONE owner-resolution read (`people/owner-resolution.ts`, loaded by
+`owner-resolution-load.ts`) for NOW, hypothesis activation and Research Next; an account-type-aware prior (carrier /
+3PL network roles are primary operators); thesis-aware relevance with reasons, never a number; HubSpot first, Apollo
+proposed only; ADD TO GAP (account-scoped import: asserts association and the account, dedupes, links, never creates
+an account, never writes HubSpot, never calls Apollo, refuses an opted-out contact); audited persona assignment on an
+APPROVED hypothesis; contact currentness as a WHO dimension (five states, an evidence hierarchy, decision-time gates on
+draft / cold outbound / enroll / routing / assign, human corrections first-class, verification only with a URL,
+employer spellings read as the same employer); the outstanding-draft remediation (discard only the proven GAP draft;
+reconcile, never infer); the owner panel in the drawer (ranked choice; one eligible person preselected; two or more is
+Casey's choice). Contracts that MUST NOT change: owner resolution never picks among two or more; never creates an
+account or a web-researched persona; never writes a HubSpot contact; never spends Apollo; the departed and the
+conflicted are set aside upstream with the reason, never by do-not-contact; the discard touches only the draft the
+ledger proves. Doctrine, root causes, the 11-account dogfood and the FedEx fact stated truthfully:
+`docs/gap/OWNER_RESOLUTION.md`.
+
 ## Soak (2026-10-02)
 
 Production soak of the baseline: health HEALTHY on every read over ~11h; crons ok with 0 consecutive failures; no

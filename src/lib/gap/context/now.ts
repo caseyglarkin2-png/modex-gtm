@@ -18,6 +18,7 @@ import type { Source, Statement } from '../account-intel/truth';
 import { sensitivityOf } from '../research/sensitivity';
 import { sellerRelevance } from '../research/continuity';
 import { readPerson } from '../people/person-prior';
+import { EMPLOYMENT_LABEL } from '../people/employment';
 import type { AccountContext } from './context';
 import type { ReadyTarget } from './send-target';
 
@@ -50,9 +51,15 @@ export interface NowView {
   /** The newest buyer reply on record, dated, else null. */
   lastReply: string | null;
   next: { text: string; source: 'meeting' | 'deal' | 'conversation' | 'restriction' | 'motion' };
-  who: { name: string; title: string | null; why: string; route: string | null; location?: string | null; inHubSpotOnly?: boolean } | null;
+  who: { name: string; title: string | null; why: string; route: string | null; location?: string | null; inHubSpotOnly?: boolean; hubspotContactId?: string | null; personaId?: number | null; employment?: { state: string; label: string; why: string } | null } | null;
   /** A better-fit person on record who is not yet a GAP contact (shown beside the ready-card person). */
   betterFit: string | null;
+  /** The HubSpot contact behind `betterFit` or a HubSpot-only WHO: the ADD TO GAP control (owner resolution). */
+  addToGap?: { name: string; title: string | null; hubspotContactId: string } | null;
+  /** A GAP-created first-touch draft still outstanding (it holds the account): the remediation control. */
+  outstandingDraft?: { recipient: string; name: string | null; decisionId: string; gmailDraftId: string; createdAt: string } | null;
+  /** People on record who left the company (contact currentness): historical, never WHO, never do-not-contact. */
+  historical?: Array<{ name: string; title: string | null; personaId: number | null; elsewhere: string | null }>;
   whoUnknown: string | null;
   alternate: { name: string; title: string | null; why: string } | null;
   whyNow: NowLine[];
@@ -174,7 +181,7 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   else if (m.type === 'FOLLOW_UP' && m.who) who = { name: m.who, title: null, why: 'They are already talking to you: continue that thread.', route: null };
   else if (m.type === 'RELATIONSHIP_LED' && m.met) who = { name: displayName(m.met.name), title: m.met.title, why: `You met them at ${m.met.source} (${SOURCE_KIND[m.met.sourceType] ?? m.met.sourceType.replace(/_/g, ' ')})${m.met.company ? `; works at ${m.met.company}` : ''}.${m.met.title ? '' : ' Title not on record: confirm it before you write.'}`, route: null };
   else if ((m.type === 'REFERRAL_LED' || m.type === 'RELATIONSHIP_LED') && m.who) who = { name: m.who, title: null, why: `You have a way in: ${m.why.split(':')[0]}.`, route: null };
-  else if (p?.primary && !p.primary.doNotContact) who = { name: displayName(p.primary.name), title: p.primary.title, why: p.primary.why, route: null, location: p.primary.location ?? null, inHubSpotOnly: p.primary.source === 'hubspot' };
+  else if (p?.primary && !p.primary.doNotContact) who = { name: displayName(p.primary.name), title: p.primary.title, why: p.primary.why, route: null, location: p.primary.location ?? null, inHubSpotOnly: p.primary.source === 'hubspot', hubspotContactId: p.primary.hubspotContactId ?? null, personaId: p.primary.personaId ?? null, employment: p.primary.employment ? { state: p.primary.employment.state, label: EMPLOYMENT_LABEL[p.primary.employment.state], why: p.primary.employment.why } : null };
   // ONE ANSWER (click test P0): a first touch can only go where a READY card is. When the cockpit has one for this
   // account, NOW names that person (the cockpit's own pick, by the same prior) and says who is a better fit but not
   // yet a GAP contact; NEXT opens that card.
@@ -192,7 +199,7 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
       const n = displayName(owner.name);
       ownerFirst = { owner: n, ready: displayName(ready.name) };
       next = { text: `${owner.source === 'hubspot' ? `Add ${n}${owner.title ? ` (${owner.title})` : ''} from HubSpot as a GAP contact, then first-touch them` : `First-touch ${n}${owner.title ? ` (${owner.title})` : ''}`}: the transportation owner on record. Ready now instead: the first-touch card for ${displayName(ready.name)} (ask who owns the yards).`, source: 'motion' };
-      who = { name: n, title: owner.title, why: owner.why, route: null, location: owner.location ?? null, inHubSpotOnly: owner.source === 'hubspot' };
+      who = { name: n, title: owner.title, why: owner.why, route: null, location: owner.location ?? null, inHubSpotOnly: owner.source === 'hubspot', hubspotContactId: owner.hubspotContactId ?? null, personaId: owner.personaId ?? null };
       readyAlt = { name: displayName(ready.name), title: ready.title, why: 'Ready now: a first-touch card exists. Ask who owns the yards.' };
     } else {
       if (owner) betterFit = `Better fit on record: ${displayName(owner.name)}${owner.title ? `, ${owner.title}` : ''}${owner.source === 'hubspot' ? ' (in HubSpot, not yet a GAP contact: add them)' : ''}.`;
@@ -215,6 +222,15 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
     readyAlt = null;
   }
   const whoUnknown = who ? null : brief.glance.likelyOwner.startsWith('Unknown') ? `${brief.glance.likelyOwner} Find the US / North America transportation operations owner (BRIEF: buyer map).` : brief.glance.likelyOwner;
+  // The ADD TO GAP control: the HubSpot-only person NOW names (WHO, or the better fit beside a ready card).
+  const hsOwner = p?.primary && p.primary.source === 'hubspot' && p.primary.hubspotContactId && !p.primary.doNotContact ? p.primary : null;
+  const addToGap: NowView['addToGap'] = hsOwner && (who?.inHubSpotOnly || betterFit) ? { name: displayName(hsOwner.name), title: hsOwner.title, hubspotContactId: hsOwner.hubspotContactId! } : null;
+  // A GAP-created first-touch draft still outstanding holds the account: the seller gets a control, not an instruction.
+  const od = (i.firstTouches ?? []).find((t) => t.state === 'draft outstanding' && t.decisionId && t.gmailDraftId) ?? null;
+  const odName = od ? p?.lanes.flatMap((l) => l.people).find((x) => x.personaId != null && x.personaId === od.personaId)?.name ?? null : null;
+  const outstandingDraft: NowView['outstandingDraft'] = od ? { recipient: od.recipient, name: odName ? displayName(odName) : null, decisionId: od.decisionId!, gmailDraftId: od.gmailDraftId!, createdAt: od.sentAt ?? '' } : null;
+  // Historical contacts: people the evidence says left (never WHO, never an alternate, never do-not-contact).
+  const historical: NowView['historical'] = (p?.lanes.flatMap((l) => l.people) ?? []).filter((x) => x.employment?.state === 'LEFT_COMPANY_CONFIRMED').map((x) => ({ name: displayName(x.name), title: x.title, personaId: x.personaId ?? null, elsewhere: x.employment?.elsewhere?.company ? `${x.employment.elsewhere.company}${x.employment.elsewhere.title ? ` (${x.employment.elsewhere.title})` : ''}` : null }));
   // When the motion names the person (a relationship, a thread, an introducer), the prior's best operator is the
   // alternate; otherwise the prior's own second choice.
   const altSrc = who && p?.primary && who.name !== displayName(p.primary.name) && !p.primary.doNotContact ? p.primary : p?.alternate ?? null;
@@ -337,6 +353,9 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
     next,
     who,
     betterFit,
+    addToGap,
+    outstandingDraft,
+    historical,
     whoUnknown: ownerMissing ? 'No US / North America transportation operations owner on record yet: find them (BRIEF: buyer map).' : whoUnknown,
     alternate: alt,
     whyNow,

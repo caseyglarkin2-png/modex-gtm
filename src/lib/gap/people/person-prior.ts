@@ -122,12 +122,12 @@ const has = (t: string, re: RegExp) => re.test(t);
 const PRODUCT_TRANSPORTATION = /transportation (markets?|product|platform|(&|and) (energy|electronics)|sbu|business|vertical|division)|(business|r&d|research|branding)[^,;]*transportation|industrial (&|and) transportation|transportation[^,;]*(business group|division|vertical)/;
 // HR, recruiting and legal (review S5, 2026-10-04: "Transportation Recruiter", "Director Transportation HR",
 // "Transportation Attorney" read as operators).
-const NON_OPERATING_WORDS = /\b(r&d|research|sales|marketing|branding|regulatory|quality|legal|counsel|attorney|paralegal|human resources|hr|people operations|talent|recruit\w*|communications|investor)\b/;
+const NON_OPERATING_WORDS = /\b(r&d|research|sales|marketing|branding|brokerage|regulatory|quality|legal|counsel|attorney|paralegal|human resources|hr|people operations|talent|recruit\w*|communications|investor|customer experience|customer service|customer success)\b/;
 const COMMERCIAL_WORDS = /\b(sourcing|procurement|purchas\w*|category|buyer|finance|financial|cost|controller|accounting|pricing|compliance|sustainability)\b/;
 // Buying, pricing, paying, contracting or funding freight: never the operator, whatever function sits beside it
 // (review S5: freight audit / payment, transportation contracts, rate management). "Contract logistics" (a 3PL's
 // operation) and a carrier's "dedicated contracts" (its dedicated fleet business, re-review) are not "contracts".
-const COMMERCIAL_STRONG = /\b(sourcing|procurement|purchas\w*|category|buyer|finance|financial|cost|controller|accounting|pricing|audit|payments?|(?<!dedicated )contracts|contracting|contract management|rate management|rates|indirect)\b/;
+const COMMERCIAL_STRONG = /\b(sourcing|procurement|purchas\w*|category|buyer|finance|financial|cost|controller|accounting|tax|pricing|audit|payments?|(?<!dedicated )contracts|contracting|contract management|rate management|rates|indirect)\b/;
 // Budget or spend: commercial on their own ("Director of Transportation Spend"), a second hat beside a freight
 // operations remit ("Director Transportation Budget & Operations", re-review 2026-10-05).
 const BUDGET_WORDS = /\b(budget|spend)\b/;
@@ -166,6 +166,23 @@ const NON_FREIGHT_OPS = /\b(people|revenue|commercial|hr|human resources|custome
 // A freight function JOINED to that other operations is a second remit ("Director, Logistics & Customer Operations",
 // re-review); a trailing department ("Director Customer Operations - Transportation") is not.
 const FREIGHT_JOINED_OPS = /\b(transportation|logistics|freight|fleet|distribution)\s*(?:&|\band\b)\s*(?:\w+\s+)?operations\b|\boperations\s*(?:&|\band\b)\s*(transportation|logistics|freight|fleet|distribution)\b/;
+// CARRIER / PARCEL / 3PL NETWORK DOCTRINE (owner resolution, 2026-10-05): at a carrier transportation IS the company,
+// so the equivalent of a shipper's transportation owner runs the physical NETWORK: network, hub, terminal, station,
+// linehaul, surface or ground operations, sortation, operations planning and engineering, network planning, facility
+// operations. Operations technology at a carrier is the freight-scoped technology owner. The air side (aircraft,
+// flight operations) is not the ground network of hubs and yards; "air network operations" runs the hubs that sort
+// air freight and counts, with less named ownership than a ground network title.
+const CARRIER_NETWORK = /\b(network operations|hub operations|hubs? (?:&|and) networks?|terminal operations|station operations|line ?haul|surface operations|ground operations|air network|sortation|sort operations|operations planning|planning (?:&|and) engineering|network planning|network engineering|operations engineering|facility operations|dock operations|pickup (?:&|and) delivery|p&d operations|road network|surface network|ground network|network execution)\b/;
+const CARRIER_NETWORK_GROUND = /\b(network operations|hub operations|hubs? (?:&|and) networks?|terminal operations|station operations|line ?haul|surface operations|ground operations|sortation|sort operations|operations planning|planning (?:&|and) engineering|network planning|network engineering|operations engineering|facility operations|dock operations|pickup (?:&|and) delivery|p&d operations|road network|surface network|ground network|network execution)\b/;
+const CARRIER_OPS_TECH = /\b(operations technology|ops technology|network technology|operations systems|hub automation|sort(?:ation)? automation|network automation)\b/;
+const AIR_ONLY = /\b(flight|aircraft|airline|aviation|pilots?|aircraft maintenance|air operations)\b/;
+// Ground-specific network words: beside an air word they still name the ground network ("Hub Operations and Flight").
+const GROUND_SPECIFIC = /\b(line ?haul|hub operations|hubs? (?:&|and) networks?|terminal operations|station operations|surface operations|ground operations|sortation|sort operations|facility operations|dock operations|pickup (?:&|and) delivery|p&d operations|road network|surface network|ground network)\b/;
+// One station, district, depot or city: a local operating leader at a network of thousands, never the network owner.
+const CARRIER_LOCAL = /\b(station|district|depot|branch|city|local|ramp|sort|service center|gateway|cross ?dock|hub manager|terminal manager|station manager|facility manager)\b/;
+const CARRIER_SITE_OPS = /\b(hub|station|ramp|sort|gateway|service center|depot) operations\b/;
+/** A carrier's station leaders: one hub, station, ramp, sort, gateway, depot or service center of the physical network (review S6). */
+const CARRIER_SITE_LEADER = /\b(hub|station|ramp|sort|service center|gateway|depot|cross ?dock|terminal|yard)\s+(?:operations\s+)?(?:general\s+)?(?:manager|director|leader|supervisor|lead|superintendent)\b/;
 const EXEC_WORDS = /\b(chief|csco|coo)\b|(?<!vice[ -])\bpresident\b/;
 // Executive technology roles: a technology partner at the top, never the operating owner.
 const EXEC_TECH = /\b(cio|cto|cdo|cdio|chief (information|technology|digital|data) officer)\b/;
@@ -256,9 +273,24 @@ export function readPerson(title: string | null | undefined, opts: { entityType?
   } else if (has(t, RISK_WORDS)) {
     lane = 'SECURITY_RISK';
     laneWhy = 'safety, security or risk (a committee voice on the gate and the yard; does not run the freight)';
+  } else if (carrierLike && has(t, CARRIER_OPS_TECH) && !has(t, NON_FREIGHT_OPS)) {
+    // Before the generic-IT read: a carrier's "assets, infrastructure and ops technology" is the physical network's technology.
+    lane = 'TRANSFORMATION_TECH';
+    laneWhy = 'operations technology at a carrier / 3PL (the technology owner of the physical network: a co-buyer, or the owner when a signal names their initiative)';
   } else if (has(t, GENERIC_IT)) {
     lane = 'NON_OPERATING';
     laneWhy = 'generic IT, not supply chain or transportation systems';
+  } else if (carrierLike && has(t, AIR_ONLY) && !has(t, GROUND_SPECIFIC) && !has(t, FREIGHT_WORDS) && !has(t, TECH_WORDS)) {
+    lane = 'ADJACENT_OPERATOR';
+    laneWhy = 'runs the air side (aircraft, flight operations), not the ground network of hubs, terminals and yards';
+  } else if (carrierLike && has(t, CARRIER_SITE_LEADER) && !has(t, NON_FREIGHT_OPS) && !has(t, NON_OPERATING_WORDS)) {
+    lane = 'PRIMARY_OPERATOR';
+    laneWhy = "runs one station, hub, ramp, sort or service center of the carrier's network (site scope)";
+  } else if (carrierLike && has(t, CARRIER_NETWORK) && !has(t, NON_FREIGHT_OPS) && !(has(t, SUPPORT_ROLE) && seniority <= 2)) {
+    lane = 'PRIMARY_OPERATOR';
+    laneWhy = /\bair network\b/.test(t)
+      ? 'runs the air network at a carrier (the hubs that sort air freight; the ground yards are part of it)'
+      : "runs the carrier's physical network (network, hub, terminal, linehaul, sortation, operations planning and engineering)";
   } else if (has(t, TECH_WORDS)) {
     // Automation, TMS / WMS, RTLS, visibility, orchestration and yard modernization are supply chain technology in
     // themselves; IT, software, data or "digital" with no supply chain remit is generic.
@@ -326,10 +358,17 @@ export function readPerson(title: string | null | undefined, opts: { entityType?
 
   // A director-or-above who runs transportation, logistics or fleet runs a network unless a site is named.
   const leadsFreight = seniority >= 3 && (lane === 'PRIMARY_OPERATOR' || lane === 'ADJACENT_OPERATOR');
-  const scope: PersonScope = has(t, SITE) && !has(t, NETWORK) ? 'SITE' : has(t, NETWORK) || (leadsFreight && !has(t, SITE)) ? 'NETWORK' : 'UNKNOWN';
+  // At a carrier a bare "operations" title (no network function named) is one of thousands of operating leaders:
+  // its scope is what the title says (a station or district is a site; enterprise / North America / regional / hub is
+  // the network), never inferred from seniority (owner resolution, 2026-10-05).
+  const bareCarrierOps = carrierLike && lane === 'PRIMARY_OPERATOR' && !has(t, FREIGHT_WORDS) && !has(t, LOGISTICS_DIRECT) && !has(t, CARRIER_NETWORK);
+  // A hub, station, ramp, sort or gateway operations role below director runs one site; a director and above runs the network of them.
+  const local = carrierLike && (has(t, CARRIER_LOCAL) || (has(t, CARRIER_SITE_OPS) && seniority < 3));
+  const scope: PersonScope = (has(t, SITE) || local) && !has(t, NETWORK) ? 'SITE' : has(t, NETWORK) || (leadsFreight && !has(t, SITE) && !bareCarrierOps) ? 'NETWORK' : 'UNKNOWN';
+  if (bareCarrierOps && scope === 'UNKNOWN') laneWhy += ' (scope not stated: may be one station or district)';
   const ownership =
-    lane === 'PRIMARY_OPERATOR' ? (/\b(transportation|transport|fleet|freight|otr|dedicated|trucking|line ?haul|intersite|middle[- ]mile)\b|\bld&t\b/.test(t) ? 2 : 1)
-    : lane === 'TRANSFORMATION_TECH' ? (has(t, FREIGHT_TECH_SCOPE) ? 2 : 0)
+    lane === 'PRIMARY_OPERATOR' ? (/\b(transportation|transport|fleet|freight|otr|dedicated|trucking|line ?haul|intersite|middle[- ]mile)\b|\bld&t\b/.test(t) || (carrierLike && has(t, CARRIER_NETWORK_GROUND) && !/\bair network\b/.test(t)) ? 2 : 1)
+    : lane === 'TRANSFORMATION_TECH' ? (has(t, FREIGHT_TECH_SCOPE) || (carrierLike && has(t, CARRIER_OPS_TECH)) ? 2 : 0)
     : 0;
   // US-first (Casey's current cold motion): a title naming the US or North America is the US market, one naming only
   // Canada or Mexico is not; with no remit stated the person's own location decides; unknown is not foreign.

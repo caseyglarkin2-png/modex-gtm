@@ -32,6 +32,7 @@
  */
 
 import { createLimiter, type Limiter } from './bounded';
+import { employmentGate } from '../people/employment-gate';
 import { sendableEvidence } from '../research/evidence-gate';
 import { personSendHistory } from '../execution/person-history';
 import { parseSteps } from '../sequence/steps';
@@ -533,6 +534,10 @@ export async function assembleRoutingInputs(
       prisma.persona.findUnique({ where: { id: args.personaId } }),
     )) as PersonaRow | null;
     if (!persona || persona.account_name !== account.name) return { skip: 'persona_not_found' };
+    // Owner resolution (2026-10-05): a departed or conflicted person is not routed at this account. Ranking fails
+    // early, with the reason, instead of letting a stale card reach the send gate.
+    const employment = await read('employment', () => employmentGate(prisma, persona.id, now));
+    if (employment) return { skip: employment.reason };
 
     return await assembleLoaded(prisma, account, persona, { now, freshness, snapshot, top100: args.top100, suppression: args.suppression });
   } catch (err) {
