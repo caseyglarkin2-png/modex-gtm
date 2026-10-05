@@ -331,6 +331,26 @@ conflicted are set aside upstream with the reason, never by do-not-contact; the 
 ledger proves. Doctrine, root causes, the 11-account dogfood, the adversarial review and the production repair receipt:
 `docs/gap/OWNER_RESOLUTION.md`. Production SHA: 71188379 (#396, shipped and verified live 2026-10-05).
 
+**WHO truth maintenance and enterprise coverage (second correction, 2026-10-05; `docs/gap/OWNER_RESOLUTION.md`, last
+section).** Role currentness is its own dimension beside employment currentness (`people/role-currentness.ts`: five
+states, never a score; a contradicted stored title is never the ranking title; a verified new title is read instead;
+`Persona.title` is never rewritten by automation). Ranking is purpose-specific (`owner-resolution.ts`): the cold
+first touch stays operator-first; a hypothesis ranks buyer truth, a role CONFIRMED by strong evidence, thesis
+relevance, then lane; RECOMMENDED FOR THIS HYPOTHESIS is a first-difference reason, never a selection. The owner
+read covers the verified corporate family's linked companies (`family-people.ts`: never by domain or name, never a
+divested unit, caps said), and the account-scoped import accepts that family company only after re-verifying it.
+Aliases are a governed workflow over `GapAccountAlias` (`alias-review.ts`: proposed from conflict evidence of two or
+more people or the account's stem, confirmed or rejected by Casey, never from name similarity). Account kind comes
+from the existing vertical (`account-kind-review.ts`, "3PL / Logistics" for carriers and 3PLs). The legacy
+suppression review (`suppression/legacy-review.ts`) explains why a person is blocked and clears, on Casey's confirmed
+click only, the stale local flag alone (`src/lib/email/suppression-correction.ts`, the one clearer beside the one
+setter); a real unsubscribe, opt-out, hard bounce or clawd suppression is never cleared. Contracts that MUST NOT
+change: a role changed with no established title, or a role conflict, never ranks; a likely role never outranks a
+direct fit; nobody is preselected on a recommendation; family members are read only through their own linked
+company; aliases are never auto-created; Unknown stays Unknown on thin evidence; the clear needs confirmed, the
+expected email and a live LEGACY_CONFLICT; no file under `src/lib/gap` writes `do_not_contact`. Production SHA:
+recorded in docs/gap/OWNER_RESOLUTION.md once Vercel is READY (2026-10-05).
+
 ## Soak (2026-10-02)
 
 Production soak of the baseline: health HEALTHY on every read over ~11h; crons ok with 0 consecutive failures; no

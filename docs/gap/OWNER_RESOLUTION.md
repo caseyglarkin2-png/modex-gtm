@@ -1,9 +1,10 @@
 # GAP owner resolution: make the right WHO actionable
 
-STATUS: ACTIVE (seller dogfood correction, 2026-10-05). Canonical for owner resolution, contact currentness, ADD TO
-GAP, the outstanding-draft remediation and the FedEx / Walmart / PepsiCo / H-E-B acceptance. Prior doctrine:
-`docs/gap/V2_PERSON_PRIOR.md`. Rules that must not change: `docs/gap/STABLE_BASELINE.md`. Ledger line:
-`docs/GAP_PROSPECTING_OS.md`.
+STATUS: ACTIVE (seller dogfood correction, 2026-10-05; second correction, WHO truth maintenance, the same day: the
+last section). Canonical for owner resolution, contact currentness, role currentness, purpose-specific ranking,
+corporate-family coverage, aliases, account kind, legacy suppression review, ADD TO GAP, the outstanding-draft
+remediation and the FedEx / Walmart / PepsiCo / H-E-B acceptance. Prior doctrine: `docs/gap/V2_PERSON_PRIOR.md`. Rules
+that must not change: `docs/gap/STABLE_BASELINE.md`. Ledger line: `docs/GAP_PROSPECTING_OS.md`.
 <!-- verified:2026-10-05 -->
 
 Driver: Casey using GAP on PepsiCo and FedEx, then Walmart and H-E-B. GAP could name the better operator and could
@@ -254,16 +255,18 @@ Receipt: the "Production repair receipt" section at the end of this document.
   draft / review_required / approved.
 - Account rows for PepsiCo, Tyson Foods, Kroger, NFI Industries, J.B. Hunt and UPS carry vertical "Unknown", so they
   read under shipper rules in the product; the carrier doctrine applies when the row says carrier / 3PL (FedEx does).
-  Set the vertical on the carrier rows (an account write, not authorized here).
+  Closed for NFI Industries, J.B. Hunt and UPS in the WHO truth maintenance section below.
 - GAP contact "Jeffrey" at FedEx has no last name on record.
 - H-E-B holds legacy duplicate personas for Dakota Socha (43) and Troy Shaw (45) beside the current rows (1306, 1318):
   shown as set aside, not merged.
-- Child-company HubSpot records are not read; the identity rule reads one company per account.
+- Child-company HubSpot records are not read; the identity rule reads one company per account. Closed in the WHO
+  truth maintenance section below (the verified family's linked companies are read).
 - The sponsor slot follows the one prior (`isSponsor` by `rankWho`); at PepsiCo that is Brad Stroup, and Michelle
   Schlie stays an adjacent operator on the record.
 - Employment verification is bounded to one grounded search per click and records only with a URL.
 - Banners and subsidiaries with their own name read as a conflict ("verify") until an alias exists: Central Market
-  (H-E-B), King Soopers and City Market (Kroger), SDR Distribution (NFI). Add them through the alias table.
+  (H-E-B), King Soopers and City Market (Kroger), SDR Distribution (NFI). Closed below: seeded after verification,
+  and future banners go through the governed alias workflow.
 - The call brief (`/api/gap/call/[personaId]`) does not display the employment state; the call action is gated.
 
 ## Production repair receipt (2026-10-05, under Casey's session, after PR #396 merged as 71188379 and Vercel READY)
@@ -306,4 +309,274 @@ own governed routes in the rig, and read back from the database.
 - **VERDICT.** Shipped and verified live. Open for Casey: choose the FedEx and Walmart owners from the panels;
   decide the legacy flag on Isaac's record; add banner aliases (Central Market, King Soopers / City Market, SDR
   Distribution) and the carrier verticals (NFI Industries, J.B. Hunt, UPS) when convenient.
+<!-- verified:2026-10-05 -->
+
+## WHO truth maintenance and enterprise coverage (second seller-dogfood correction, 2026-10-05)
+
+STATUS: SHIPPED 2026-10-05 (branch feat/gap-who-truth; the merge and production SHAs are recorded in the receipt below once Vercel is READY). Builds on everything above; nothing above is redesigned. Driver: four classes of
+friction the #396 dogfood left: a person still at the company whose stored title is no longer true (Walmart), a
+hypothesis whose owner should depend on what the fact is (FedEx), enterprise families read through one company record
+(PepsiCo / Frito-Lay, Kroger banners, carrier subsidiaries), and legacy local suppression flags with no governed review
+(Isaac Scott). Not V3: one truth-maintenance layer over the read above, governed seller controls where scripts stood.
+
+### Role currentness is its own dimension (`people/role-currentness.ts`)
+
+Employment currentness (the five states above) says WHERE a person is; role currentness says whether the TITLE GAP
+ranks on is still true there. Five states, never a score: `ROLE_CURRENT_CONFIRMED` (strong evidence names the same
+role recently), `ROLE_CURRENT_LIKELY` (strong but old, or consistent support), `ROLE_UNVERIFIED` (the CRM title and
+nothing independent; the common case), `ROLE_CHANGED_CONFIRMED` (current evidence says the role moved: a promotion,
+another person now leading the function), `ROLE_CONFLICT` (current sources name different roles). A human row (Casey)
+decides; strong evidence (their own profile, the employer's page, an announcement, a speaker bio, a verification whose
+URL earned strong) decides next; supporting evidence (an Apollo title refresh, the CRM) corroborates or conflicts; weak
+evidence (a modified date, an email domain, an aggregator) never counts. Apollo's bare `current` confirms the employer,
+never the role (it carries a title only when Apollo refreshed the title itself), so the CRM title is never counted
+twice.
+
+The seller-facing EFFECTIVE TITLE is the verified current title, else Casey's stated title, else the CRM title when not
+contradicted, else the stored title when not contradicted, else UNKNOWN. A contradicted stored title is never the
+ranking title: a changed role with no established new title, or a role conflict, is set aside from role-dependent WHO
+(`role_changed` / `role_conflict`) with the sentence "Still at Walmart Inc., but the stored transportation role (Sr
+Director - West Transportation Command Center) changed: ... Verify current remit before using." It is never
+do-not-contact, never "left", never deleted; buyer truth or a relationship keeps the person eligible with the caution,
+because a relationship is not role-dependent. A verified new title is read instead of the stored one, with the prior
+title named. `Persona.title` is never rewritten by automation: the projection is the truth, with provenance (company,
+title, prior title, source URL, source date, retrieved date, evidence class, tier, actor, provider, confidence) in the
+existing enrichment fields for a GAP contact and in one `person.role_verified` audit row for a HubSpot-only person
+(subject_type `hubspot_contact`), which the loaders read back (`loadHubSpotContactRoleEvidence`).
+
+VERIFY CURRENT ROLE (`employment-verify.ts`, `POST /api/gap/personas/[id]/employment/verify`, and the new
+`POST /api/gap/people/verify-role` for a persona or a HubSpot-only person) answers five cases: same role, different
+role (new title may be unknown), left, conflict, unresolved; an answer without a source URL asserts nothing; a human
+correction is never overwritten. It runs only on a click, never on render: the owner panel offers it on the top three
+unverified candidates and on a role set-aside. The brief and NOW read the same role truth (`account-intel/load.ts`,
+`build.ts`, `context/now.ts`): a person set aside for their role fills no slot and NOW names the next operator.
+
+### Purpose-specific ranking and RECOMMENDED FOR THIS HYPOTHESIS (`people/owner-resolution.ts`)
+
+The cold first touch keeps the operator-first order above. A hypothesis ranks buyer truth, relationship, a named
+initiative, then the CURRENT role (a role confirmed by strong evidence or a verified new title above every other; a
+merely likely role ranks with the unverified, so one provider row can never vault a person over a direct fit), then
+thesis relevance, then lane, named ownership, scope, region, market, seniority, currentness, reachability. A site pilot
+puts site fit (a site or regional operator) before the lane; a transformation initiative puts explicit freight or yard
+technology ownership before the lane (generic technology and innovation never qualify). When the top two eligible
+people differ first on a strong dimension (buyer truth, relationship, initiative, the current role, thesis relevance,
+lane, named ownership, site fit, technology ownership) the panel shows RECOMMENDED FOR THIS HYPOTHESIS on that person
+with the first difference in words ("on thesis relevance: runs operations planning and engineering: the fact is a
+network program. Glen Chaffee is next. You choose."). It is a reason, not a selection: nobody is preselected unless
+they are the only eligible person, and Casey still clicks. A difference only in scope, geography, seniority,
+currentness or reachability is a plain choice.
+
+Thesis relevance reads the FACT: the hypothesis text stands in only when the fact names no family (every hidden-capacity
+guess says "gates, yards and docks", which made every transportation title "direct" on every hypothesis); a bare
+"facilities" is not a site opening ("consolidate sortation facilities" is a network program); the air side of a ground
+network program is related, not direct. No person is named in the code: the FedEx test uses the Network 2.0 sentence
+and a Tricolor sentence and expects the planning and engineering owner for the first and the air network president for
+the second, with the recommendation naming the first difference each time.
+
+### Corporate-family contact coverage (`people/family-people.ts`)
+
+Owner resolution reads the account's own HubSpot company (the linked one, else the account identity) PLUS its verified
+corporate family's linked companies: members come only from `loadCorporateFamily` (a `parent_brand` that names a
+different GAP account, HubSpot's parent / child / sibling hierarchy when readable, a duplicate record of the same
+company); a member is read only through its own `hubspot_company_id` (never by a domain or a name guess); a member
+whose name is a divested unit for the account (`entity-boundary.ts`) never enters; a separate operating company is read
+and its people carry the caution. People are deduplicated by HubSpot id, then by a non-reversible email key (the address
+itself is never carried); the primary company's row wins. Caps: 400 per family company, 1000 in total, 8 family
+companies, deterministic (parent, subsidiary, sibling, duplicate, then name). Every person carries where they were read
+("Source: HubSpot (Frito-Lay, a PepsiCo subsidiary)"); the checked line says the family companies searched, who was not
+read and why ("Gatorade: no linked HubSpot company (never read by a domain or name guess)"), and when the cap was hit,
+and the choose headline then says the owner may be beyond the cut. Live: PepsiCo reads Frito-Lay (5 more people);
+Frito-Lay reads PepsiCo as its parent (541); FedEx's child rows (FedEx Ground, Services, Logistics, Corporation) carry
+no linked company and are named as not read; FedEx Supply Chain is divested and never read.
+
+### Aliases are a governed data workflow (`people/alias-review.ts`, `POST /api/gap/accounts/alias-review`)
+
+An employment conflict whose CRM or provider spelling is not the account's becomes a POSSIBLE ACCOUNT ALIAS proposal
+beside the resolution ("Central Market -> H-E-B? Evidence: 2 HubSpot contacts' CRM company field"), never an alias by
+itself: Casey confirms (`registerAlias` source `manual`, one `account.alias_confirmed` audit row, idempotent, refused
+when the spelling already maps to another account or is itself another GAP account's name) or rejects (one
+`account.alias_rejected` row; the spelling is not proposed again). Name similarity alone never proposes or creates
+anything ("Delta" / "Delta Dental" needs conflict evidence and a click). A confirmed alias changes the employment read
+at once (the people stop reading as conflicts) with no code change. Seeded after verification (`scripts/gap/
+seed-verified-aliases.ts`, dry run by default): Central Market -> H-E-B (an H-E-B-owned banner), King Soopers and City
+Market -> Kroger (Kroger's Colorado division since the 1999 Dillon merger), SDR Distribution / SDR Distribution Services
+/ NFI SDR Distribution Services -> NFI Industries (acquired 2023). The dogfood also proposed what Casey should reject
+(a Walmart contact whose CRM company reads "Paypal"; "The Duracell Company" at P&G, divested to Berkshire in 2016;
+vendors' people associated with PepsiCo's company): the proposal is the point, the click is Casey's.
+
+### Account kind through the existing vertical (`people/account-kind-review.ts`, `scripts/gap/account-kind-review.ts`)
+
+The read-only diagnostic lists accounts whose vertical is Unknown with the evidence GAP already holds (the Scout web
+read of the right company, the audited site mix, the share of carrier-network titles among GAP contacts) and proposes
+a value only from the live vocabulary and only on strong evidence (a Scout carrier / 3PL read, or a carrier-network
+title majority among five or more); thin evidence leaves Unknown alone, keywords never flip a shipper, a set vertical
+never changes. The vocabulary has no separate carrier value: carriers and 3PLs both take "3PL / Logistics" (FedEx and
+Kenco carry it; `typeFromVertical` reads it as 3pl, the carrier doctrine). `--apply "Name=Vertical"` corrects only the
+named rows still Unknown, one guarded update each, one `account.vertical_corrected` audit row with the internal and
+the external evidence. Applied 2026-10-05 after verification (audits `cmuvnjtno…`, `cmuvnju03…`, `cmuvnju9f…`): NFI Industries (the classifier
+proposed it from the Scout 3pl read), J.B. Hunt and UPS (the classifier found GAP's own evidence thin: 3 of 25 and 0
+titles; Casey's value stands on the external evidence recorded in the audit: the J.B. Hunt 10-K and the UPS company
+profile) all read "3PL / Logistics" now, so the carrier doctrine applies from the canonical field, not a dogfood
+override. The diagnostic also proposed Kroger = Retail (a Scout retailer read; not applied, outside the named rows).
+
+### Legacy suppression review (`suppression/legacy-review.ts`, `GET/POST /api/gap/personas/[id]/suppression-review`)
+
+One read collects every plane for a person: the local flag and email status, the unsubscribe table, HubSpot (opt-out,
+bad address, hard bounce reason, quarantine), the clawd contract (live, 12 s, fail closed), the email log (bounces,
+and deliveries to the exact same address after the last bounce), the GAP ledger, prior override decisions, and Gmail
+DSN (reported as not read: the March sends went through Resend). It renders WHY THIS PERSON IS BLOCKED and WHAT WOULD
+HAVE TO BE TRUE TO CLEAR IT and classifies: CONFIRMED_SUPPRESSION (any hard hit: an unsubscribe, a HubSpot opt-out or
+bad address, a clawd key other than the modex echo, a hard bounce no later delivery contradicts), UNRESOLVED (an
+authority unreadable, or the local flag with no later delivery evidence), LEGACY_CONFLICT (the local flag only, every
+hard plane clean, at least one delivery to the same address after the last bounce), CLEAR. Only LEGACY_CONFLICT shows
+CLEAR LEGACY LOCAL FLAG; the click is explicit and confirmed, re-runs the review live, and clears only the local
+do-not-contact flag and the historical bounced status (the statement lives beside the consent writer in
+`src/lib/email/suppression-correction.ts`, never touches `updated_at`, so the HubSpot sync never sees it); one
+`suppression.corrected` audit row carries the whole receipt; every refusal is audited (`suppression.correction_refused`).
+A real unsubscribe, a hard bounce, a clawd hard suppression or a HubSpot opt-out can never be cleared here. The
+structural invariant (`tests/unit/gap/record-unsubscribe.test.ts`) still holds: no file under `src/lib/gap` writes
+`do_not_contact`; the two writers under `src/lib/email` (the consent helper sets it, the governed clear only ever
+sets it false) are both positive controls.
+
+Isaac Scott (persona 13, PepsiCo), reconstructed read-only on 2026-10-05: do_not_contact true and email_status
+bounced from the March 2026 Resend-era wave (two bounces on 2026-03-27, bounce type never recorded); no unsubscribe
+row; HubSpot opt-out, bad address, hard bounce reason and quarantine all unset; the clawd contract blocked for exactly
+one key, `modex_do_not_contact` (the local flag echoed back), all five legs read; three messages delivered to the same
+address after the last bounce (2026-03-27, 03-28, 03-30, two of them replies in a thread); Gmail holds no thread (Resend
+era); no prior override. Classification: LEGACY_CONFLICT. Cleared automatically: NO. The read wrote no audit row (one
+row before and after). Casey's action available: CLEAR LEGACY LOCAL FLAG from the owner panel's set-aside list
+("Review the legacy flag") with the receipt; nothing else on any plane would change.
+
+### Seller controls (no script needed for recurring truth maintenance)
+
+Verify current role (persona or HubSpot-only, from the owner panel's top candidates, a role set-aside, or NOW); this
+person left; current role is wrong; confirm or reject an account alias (the owner panel); choose the owner (the panel,
+with the recommendation as a reason); review and clear a legacy suppression flag (the panel's set-aside list). Scripts
+remain for diagnostics and one-off evidence: `who-truth-dogfood.ts` (the 20-account receipt), `account-kind-review.ts`,
+`seed-verified-aliases.ts`, `record-role-evidence.ts` (one human-read verification, dry run by default),
+`stage-sourced-candidate.ts` (one source-backed candidate for review, never a persona, never HubSpot).
+
+### Tests
+
+New and extended suites under `tests/unit/gap/`: `role-currentness` (33), `employment-verify-role` (17),
+`verify-role-route` (8), `employment-control` (12), `owner-ranking-purpose` (11), `owner-role-truth` (11),
+`owner-resolution-load-family` (6), `who-truth-integration` (10), `family-people` (7), `alias-review` (7),
+`alias-proposal-control` (3), `account-kind-review` (9), `legacy-suppression-review` (30),
+`legacy-suppression-route` (5), `legacy-suppression-review-ui` (6), `review-who-truth` (the reviewer's 14
+failing-input cases, kept green), plus the extended `employment`, `employment-store`, `hubspot-people`,
+`owner-resolution-ui`, `record-unsubscribe` (the invariant pins both writers and the single importer) suites. Every
+numbered case in the brief (role currentness 1 to 6, purpose ranking 7 to 10, family 11 to 15, aliases 16 to 19,
+account kind 20 to 22, suppression 23 to 30) has a named test. Mutation proofs recorded in the commits: the
+hypothesis order reverted to cold (RED), the role exclusion skipped (RED), the effective title ignored (RED), the
+divested exclusion disabled (RED), the alias-is-account refusal disabled (RED), the five-title floor lowered (RED),
+usableForRanking forced true (RED), the human-correction guard disabled (RED), the HubSpot body unstrictened (RED), an
+unsubscribe row read as soft (RED), the confirmed flag ignored (RED), LEGACY_CONFLICT without a later delivery (RED),
+the clear button shown regardless (RED), the route without a session (RED). Full suite at the tip: 643 files, 7,249
+tests, 0 failures, 1 skipped; `tsc --noEmit` clean; eslint clean on every changed file; production build green.
+
+### Dogfood (production, read-only, 2026-10-05; nobody contacted, nothing written, no credit spent)
+
+`scripts/gap/who-truth-dogfood.ts --hypotheses`, run after the production writes above (each account's newest approved
+person-less hypothesis, else the cold first touch). Every account with people is a ranked choice; the only
+recommendation is FedEx (Lisa Lisson on thesis relevance: the stored fact is the Tricolor air-network sentence, and
+her role is confirmed by the fedex.com leadership page); nobody is preselected or chosen. After the aliases: no
+Central Market, King Soopers, City Market or SDR Distribution conflict remains (before: 4 false conflicts). After the
+verticals: NFI Industries, J.B. Hunt and UPS read under the carrier doctrine from the canonical field (133, 175 and
+65 eligible network owners; 57, 41 and 19 under shipper rules). Walmart: Christina Mannella is set aside
+`role_changed` (43 eligible, Doug Estrada at the top of the choice); Christian Burton is staged candidate 49. PepsiCo
+reads Frito-Lay (5 more people) and names Gatorade as not read; Frito-Lay reads PepsiCo as its parent (541). The only
+alias still proposed is "The Duracell Company" at P&G (two contacts' CRM field; divested to Berkshire in 2016: Casey
+rejects it, which is the workflow). Isaac Scott shows under do-not-contact at PepsiCo with the legacy review
+available; the "suppression issue" column counts every do-not-contact GAP contact the review can now explain.
+Sub-Zero and World Market have no GAP account under those names and nothing was created.
+
+| account | kind | owner / recommendation | current role state | family coverage | alias issue | suppression issue | next action |
+|---|---|---|---|---|---|---|---|
+| PepsiCo | unknown | top of the choice: Karen Darling (Senior Director - PBNA Transportation) | ROLE_UNVERIFIED | 5 from family; not read: Gatorade: no linked HubSpot company (never read by a domain or name guess) | none | 1 do-not-contact GAP contact with a legacy review available (Dr. Isaac Scott) | Casey chooses among 21 |
+| FedEx | carrier_3pl (3pl) | RECOMMENDED Lisa Lisson (President, Air Network Operations) | ROLE_CURRENT_CONFIRMED | 0 from family; not read: FedEx Corporation: no linked HubSpot company (never read by a domain or name guess); FedEx Logistics: no linked HubSpot company (never read by a domain or name guess); FedEx Services: no linked HubSpot company (never read by a domain or name guess) | none | 3 do-not-contact GAP contacts with a legacy review available (Douglas Spamer, Jose A. Touzon, Jake Pyke) | Casey chooses among 35 (one recommended) |
+| Walmart Inc. | shipper (retailer) | top of the choice: Doug Estrada (Senior Director - Regional Transportation - Logistics) | ROLE_UNVERIFIED | 0 from family | none | none | Casey chooses among 43 |
+| General Mills | shipper (manufacturer) | top of the choice: Phillip West (Senior Director, North America Logistics) | ROLE_UNVERIFIED | 0 from family | none | 3 do-not-contact GAP contacts with a legacy review available (Zoe Bracey, Lars Stolpestad, Paul Gallagher) | Casey chooses among 5 |
+| Tyson Foods | unknown | top of the choice: Justin Kissinger (Senior Director Transportation) | ROLE_UNVERIFIED | 0 from family | none | none | Casey chooses among 11 |
+| Kroger | unknown | top of the choice: Ranor Relatores (Senior Director of Transportation) | ROLE_UNVERIFIED | 0 from family | none | none | Casey chooses among 13 |
+| H-E-B | shipper (retailer) | top of the choice: Jess Bess (Director, Transportation Strategy & Planning) | ROLE_UNVERIFIED | 0 from family | none | 4 do-not-contact GAP contacts with a legacy review available (Troy Shaw, Dakota Socha, Craig Stucker, ...) | Casey chooses among 6 |
+| NFI Industries | carrier_3pl (3pl) | top of the choice: James Oleary (Vice President of Fleet Services) | ROLE_UNVERIFIED | 0 from family | none | none | Casey chooses among 133 |
+| J.B. Hunt | carrier_3pl (3pl) | top of the choice: Cecilia Gann (Vice President of Transportation) | ROLE_UNVERIFIED | 0 from family | none | none | Casey chooses among 175 |
+| UPS | carrier_3pl (3pl) | top of the choice: Amir Hafizovic (Director of Florida Transportation) | ROLE_UNVERIFIED | 0 from family | none | none | Casey chooses among 65 |
+| Sub-Zero | no account |  |  |  |  |  | create the account deliberately, or spell it as GAP does |
+| World Market | no account |  |  |  |  |  | create the account deliberately, or spell it as GAP does |
+| The Home Depot | shipper (retailer) | top of the choice: Ryan Holden (Director, Transportation) | ROLE_UNVERIFIED | 0 from family | none | 4 do-not-contact GAP contacts with a legacy review available (John Drake, Amit Kalra, Erin Donnelly, ...) | Casey chooses among 11 |
+| Niagara Bottling | shipper (manufacturer) | top of the choice: Ryan Kieczykowski (Sr. Director of Logistics) | ROLE_UNVERIFIED | 0 from family | none | 10 do-not-contact GAP contacts with a legacy review available (Andrew Peykoff, Brian Hess, David Zucker, ...) | Casey chooses among 3 |
+| Frito-Lay | shipper (manufacturer) | top of the choice: Isaac Scott (Sr Director of Transportation - Frito-Lay) | ROLE_UNVERIFIED | 541 from family; not read: Gatorade: no linked HubSpot company (never read by a domain or name guess) | none | 2 do-not-contact GAP contacts with a legacy review available (David Chambers, Bob Fanslow) | Casey chooses among 23 |
+| Unfi | unknown | top of the choice: David Wolf (Sr. Director Transportation) | ROLE_UNVERIFIED | 0 from family | none | none | Casey chooses among 5 |
+| Kraft Heinz | shipper (manufacturer) | top of the choice: Nicholas Riolo (Transportation Manager) | ROLE_UNVERIFIED | 0 from family; not read: Kraftheinz: no linked HubSpot company (never read by a domain or name guess) | none | none | Casey chooses among 5 |
+| Procter & Gamble | unknown | top of the choice: Louay Mishu (Senior Director- NA Transportation, Warehousing, Private Fleet) | ROLE_UNVERIFIED | 0 from family | The Duracell Company -> Procter & Gamble? | none | Casey chooses among 32 |
+| Sysco | unknown | top of the choice: Joe Bennett (Vice President of Transportation - Global Operations) | ROLE_UNVERIFIED | 0 from family | none | none | Casey chooses among 58 |
+| John Deere | shipper (manufacturer) | none (find the operator) | ROLE_UNVERIFIED (nothing read) | 0 from family | none | 4 do-not-contact GAP contacts with a legacy review available (Gia Duke, Catherine Pham, David Panjwani, ...) | Find the operator (research) |
+
+### Adversarial review (fresh reviewer, separate worktree, 2026-10-05)
+
+Fifteen attack questions, a failing-input file of 15 cases (14 red at the reviewed tip), every finding resolved:
+BLOCKER B1 (the Pepsi Isaac legacy review was unreachable: a do-not-contact person with a role read was set aside as
+`role_conflict` first, and the panel keys the review on `do_not_contact`): FIXED, contactability is read before the
+role. SHOULD FIX, all FIXED: S2 one Apollo title refresh vaulted a person over a direct fit on "current role" (a
+likely role now ranks with the unverified; only a role confirmed by strong evidence outranks); S3 a supporting-tier
+source confirmed a role change over a strong profile, and aggregators graded supporting (a change with no title
+needs a strong source; a people directory is weak); S4 `sameFirstWord` collapsed Dollar Tree into Dollar General,
+Schneider Electric into Schneider National, Old Dominion University into Old Dominion Freight Line, Performance Team
+into Performance Food Group, and strong evidence could not catch the departure (the remaining words must describe a
+unit of the group); S5 an unusable role scored 3 on "current role" (now 0, and never a recommendation); S6 five real
+GAP contacts were set aside for a GAP-title versus HubSpot-title wording difference (a differing CRM title is read as
+the current CRM title, unverified, never a block); S7 a family-provenance person was offered ADD + USE and the import
+refused the click (the import accepts the verified family company the panel read them from, re-verified, audited);
+S8 shipper private-fleet titles proposed carrier doctrine (only titles a carrier has count); S9 one contact's CRM
+field proposed an alias ("Paypal", a vendor, a departure) and the copy did not say an alias governs intake (two or
+more people or the account's stem; the control says so); S10 the invariant could not see an import-and-call (it pins
+the single importer). NICE TO HAVE, FIXED: N11 a reverted clear read as clear-again (now unresolved until a newer
+reason); N12 "yard" singular in a remit word; N13 column names reached the seller; N14 Casey's own row could drop
+behind five automation rows; N16 slots read the stale title of a role-changed person. Recorded, not fixed: N15 the
+divestiture constant is FedEx-only (a stale `parent_brand` reads as family); the Pilot Company / Pilot Freight
+Services namesake (a one-word spelling that leads a longer one is the #396 rule that makes "NFI" read as NFI
+Industries). REJECTED by the reviewer after checking: Q2 (Apollo current carries no title; weak tiers filtered), Q8
+(no prospect name in src; the air fact recommends the air president, Network 2.0 the planning VP), Q10 and Q11 (an
+unsubscribe is hard and refused; the clear needs confirmed, the email, a live LEGACY_CONFLICT re-read; 1 audit row
+before and after Isaac's read), Q12 to Q14 (no Apollo client, no send or enroll, no HubSpot contact creation in the
+diff), Q15 (no account-specific branch beyond the entity-boundary constant).
+
+### Production receipt (2026-10-05)
+
+Authorized GAP-internal writes, each audited, no HubSpot write, no send, no enrollment, no Apollo credit, no
+Persona created, no Account created:
+- Aliases (`account.alias_confirmed`): Central Market -> H-E-B; King Soopers -> Kroger; City Market -> Kroger; SDR
+  Distribution, SDR Distribution Services, NFI SDR Distribution Services -> NFI Industries (6 created, 0 refused).
+- Verticals (`account.vertical_corrected`): NFI Industries, J.B. Hunt, UPS: Unknown -> "3PL / Logistics".
+- Role evidence (`person.role_verified`): Christina Mannella (HubSpot 220050715039, Walmart): `different_role`, new
+  title not established, source Christian Burton's own profile (strong), retrieved 2026-10-05, provider web_search,
+  actor `who-truth:lead-web-verification`; Lisa Lisson (220052467520, FedEx): `same_role`, the fedex.com leadership
+  page (strong); Glen Chaffee (219887402128, FedEx): `same_role`, own profile (strong); Jeffrey Tallman (persona 2187,
+  FedEx): `same_role`, the Northwestern BAC bio (supporting). The live Walmart hypothesis now reads 43 eligible with
+  Christina set aside: "Still at Walmart Inc., but the stored role ("Sr Director - West Transportation Command Center")
+  changed per verified at linkedin.com, 2026-10-05; the new title is not established. Verify current remit before
+  using." Doug Estrada tops the choice; nobody is preselected.
+- Staged candidate (`AccountContactCandidate` 49, Walmart Inc.): Christian Burton, Senior Director, West
+  Transportation Command Center, source his own profile, `recommended: false`, for Casey's review. Not in HubSpot (0
+  results); no Persona.
+Not done, by the boundary: no FedEx or Walmart owner selected; Isaac's flag not cleared (LEGACY_CONFLICT, Casey's
+click from the panel); no HubSpot rewrite; nobody deleted; no speculative account (Sub-Zero and World Market have no
+GAP account and were not created).
+
+### Remaining genuine debt
+
+- The divestiture constant (`entity-boundary.ts`) is FedEx-only; a stale `parent_brand` on another account would
+  read as family. Add units as they are verified; a table was not warranted for one family.
+- A one-word account spelling that leads a longer namesake ("Pilot" / "Pilot Freight Services") is the same employer
+  by the #396 rule; Casey, an alias or identity catches it.
+- A supporting-tier source with a title and no stored title leaves the effective title null in the pure read; the
+  loaders pass the HubSpot title as the stored title, so the owner panel reads it (Jeffrey Tallman reads
+  CURRENT_LIKELY / ROLE_UNVERIFIED on the persona alone, likely in the panel).
+- Gmail DSN evidence is reported as not read in the suppression review (the March sends went through Resend).
+- The HubSpot-only verify path has no "current role is wrong" correction (a human correction needs a GAP contact).
+- Sub-Zero and World Market have no GAP account under those names; the dogfood says so and creates nothing.
+- The vocabulary has no separate carrier value; carriers and 3PLs both read "3PL / Logistics" (one doctrine).
+- `scripts/gap/correct-historical-suppression.ts` remains for the manifest-driven one-off; the seller path is the
+  panel's review.
 <!-- verified:2026-10-05 -->
