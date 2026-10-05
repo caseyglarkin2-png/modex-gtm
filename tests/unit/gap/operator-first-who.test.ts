@@ -36,7 +36,7 @@ describe('the cockpit never suggests a sponsor as the cold first touch', () => {
     expect(m.state).toBe('needs_owner');
     expect(m.primary).toBeNull();
     expect(m.heldCardIds.sort()).toEqual(['spec', 'vp1', 'vp2']);
-    expect(m.headline).toBe('Transportation owner not identified among the GAP contacts with a ready card: research required (BRIEF buyer map, then HubSpot). Sponsor on record: vp1 person (Vice President Supply Chain). Make them primary only by your choice.');
+    expect(m.headline).toBe('No ready card is for a direct transportation operator: check the BRIEF buyer map (it may name one in HubSpot to add as a GAP contact), else research. Sponsor on record: vp1 person (Vice President Supply Chain). A card leads only by your choice.');
     expect(m.alsoWaiting.map((p) => p.name)).toEqual(['vp1 person', 'vp2 person', 'spec person']);
   });
   it("Casey's explicit choice still makes the sponsor primary", () => {
@@ -49,6 +49,24 @@ describe('the cockpit never suggests a sponsor as the cold first touch', () => {
     expect(m.state).toBe('ready');
     expect(m.primary).toMatchObject({ name: 'tom person', chosen: false });
     expect(m.next?.name).toBe('vp person');
+    // Review N1: the display never promises an unlock that would not happen.
+    expect(m.next?.unlock).toMatch(/then only by your choice \(not a direct transportation operator\)$/);
+  });
+  it('review S2: the headline names a sponsor only by the sponsor rule', () => {
+    const m = computeAccountMotion({ ...base, readyEmailCards: [card('cat', 1, 'Transportation Category Manager'), card('fs', 2, 'Fleet Safety Manager')] });
+    expect(m.state).toBe('needs_owner');
+    expect(m.headline).not.toMatch(/Sponsor on record/);
+  });
+  it('review S1: after an unlock, choosing someone (primaryPersonaId) makes them primary', () => {
+    const sent = new Date(NOW.getTime() - 20 * 86_400_000).toISOString();
+    const m = computeAccountMotion({ ...base, choice: { primaryPersonaId: 1, nextPersonaId: null, by: 'casey', at: NOW.toISOString() }, firstTouches: [{ personaId: 2, recipient: 'tom@acme.com', sentAt: sent, released: false }], readyEmailCards: [card('vp', 1, 'Vice President Supply Chain'), card('tom', 2, 'Transportation Operations Manager')] });
+    expect(m.state).toBe('ready');
+    expect(m.primary).toMatchObject({ name: 'vp person', chosen: true });
+  });
+  it('review S3: with locations on the cards, the cockpit applies US-first like the brief', () => {
+    const at = (c: MotionCard, location: string): MotionCard => ({ ...c, persona: { ...c.persona, location } });
+    const m = computeAccountMotion({ ...base, readyEmailCards: [at(card('a-toronto', 1, 'Director of Transportation'), 'Toronto, Ontario, Canada'), at(card('z-dallas', 2, 'Director of Transportation'), 'Dallas, Texas, United States')] });
+    expect(m.primary?.name).toBe('z-dallas person');
   });
   it('after an unanswered first touch, a sponsor is not unlocked as the next primary without a choice', () => {
     const sent = new Date(NOW.getTime() - 20 * 86_400_000).toISOString();
@@ -139,6 +157,12 @@ describe('the buyer map keeps its richness: tech / transformation and site opera
     const b = buildAccountBrief(i, NOW);
     expect(b.people?.primary).toBeNull();
     expect(b.people?.sponsor?.name).toBe('Dee Sc');
+  });
+  it('review N6 / Q8: no slot is filled from outside North America; a truncated HubSpot read is said', () => {
+    const i = inputs({ personas: [], hubspotPeople: { truncated: true, people: [{ id: '1', name: 'Uwe Euro', title: 'VP Supply Chain', location: 'Munich, Bavaria, Germany', hasEmail: true, optedOut: false }] } });
+    const b = buildAccountBrief(i, NOW);
+    expect(b.people?.sponsor).toBeNull();
+    expect(b.people?.ownerMissing).toMatch(/HubSpot returned only the first 1 associated contacts: the owner may be beyond them\.$/);
   });
   it('a GAP-contact operator is the motion WHO', () => {
     const tom = { id: 5, name: 'Tom Ops', title: 'Transportation Operations Manager', location: 'Madison, Wisconsin, United States', doNotContact: false, hasEmail: true, emailStatus: 'valid' };

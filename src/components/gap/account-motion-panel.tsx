@@ -187,7 +187,7 @@ export function AccountMotionPanel({ motion }: { motion: CockpitMotion }) {
                 <AngleLine a={motion.angles[String(p.personaId)]} personaId={p.personaId} />
                 {(motion.state === 'ready' && motion.primary) || motion.state === 'needs_owner' ? (
                   <button type="button" data-testid="motion-make-primary" disabled={busy} onClick={() => void makePrimary(p.personaId)} className="mt-1 text-xs underline">
-                    Make {p.name} the primary instead
+                    Make {p.name} the primary{motion.state === 'needs_owner' ? '' : ' instead'}
                   </button>
                 ) : null}
               </li>

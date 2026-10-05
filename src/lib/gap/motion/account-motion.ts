@@ -27,7 +27,7 @@
  * Calls and LinkedIn are human judgment: this only governs EMAIL cards.
  */
 import { addBusinessDays } from '../sequence/business-days';
-import { LANE_LABEL, isColdWho, priorKey, readPerson, titleSeniority, geoPhrase, type PersonRead } from '../people/person-prior';
+import { LANE_LABEL, isColdWho, isSponsor, priorKey, readPerson, titleSeniority, geoPhrase, type PersonRead } from '../people/person-prior';
 
 export const MOTION_UNLOCK_BUSINESS_DAYS = 5;
 export const ACCOUNT_MOTION = 'account.motion' as const;
@@ -37,7 +37,8 @@ export interface MotionCard {
   id: string;
   action: string;
   account: { name: string };
-  persona: { id: number | null; displayName: string | null; title: string | null; email: string | null; personaKey: string | null; phone?: string | null };
+  /** `location`: the person's own HubSpot city / state / country when the cockpit could read it (US-first, review S3). */
+  persona: { id: number | null; displayName: string | null; title: string | null; email: string | null; personaKey: string | null; phone?: string | null; location?: string | null };
   /** `persona`: the THESIS role (the hypothesis persona key), what "relevant" is measured against. */
   hypothesis: { id: string; status: string; family?: string; persona?: string | null } | null;
   createdAt: Date | string;
@@ -97,7 +98,7 @@ export function rankCandidates(cards: readonly MotionCard[], thesisKeys: Readonl
       const reachable = (card.persona.email ? 1 : 0) + (card.persona.phone ? 1 : 0);
       // THE PERSON PRIOR (people/person-prior.ts), the same order the account brief's WHO uses: operating lane, then
       // US / North America remit, then network scope; then the thesis role, seniority and reachability.
-      const read = readPerson(card.persona.title);
+      const read = readPerson(card.persona.title, { location: card.persona.location ?? null });
       const factors = [
         `${LANE_LABEL[read.lane]}${card.persona.title ? ` (${card.persona.title})` : ''}`,
         read.region === 'US_NA' ? geoPhrase(read) : read.regionWhy,
@@ -115,7 +116,9 @@ export function rankCandidates(cards: readonly MotionCard[], thesisKeys: Readonl
  * best sponsor is named, and Casey's explicit choice (Make X the primary) is the only way one of them leads.
  */
 function needsOwner(accountName: string, ranked: ReturnType<typeof rankCandidates>, allIds: string[]): AccountMotion {
-  const sponsor = ranked[0];
+  // The sponsor by the one sponsor rule (the brief uses it too), never simply the first card (review S2). The cockpit
+  // sees only GAP contacts with a card, so it points at the buyer map rather than claiming nobody exists.
+  const sponsor = ranked.find((r) => isSponsor(r.read, r.card.persona.title)) ?? null;
   return {
     accountName,
     state: 'needs_owner',
@@ -123,9 +126,12 @@ function needsOwner(accountName: string, ranked: ReturnType<typeof rankCandidate
     next: null,
     alsoWaiting: ranked.map((x) => person(x.card, x.factors)),
     heldCardIds: allIds,
-    headline: `Transportation owner not identified among the GAP contacts with a ready card: research required (BRIEF buyer map, then HubSpot).${sponsor ? ` Sponsor on record: ${nameOf(sponsor.card)}${sponsor.card.persona.title ? ` (${sponsor.card.persona.title})` : ''}. Make them primary only by your choice.` : ''}`,
+    headline: `No ready card is for a direct transportation operator: check the BRIEF buyer map (it may name one in HubSpot to add as a GAP contact), else research.${sponsor ? ` Sponsor on record: ${nameOf(sponsor.card)}${sponsor.card.persona.title ? ` (${sponsor.card.persona.title})` : ''}.` : ''} A card leads only by your choice.`,
   };
 }
+
+/** A next person who is not a cold WHO never unlocks on their own: the line says so (review N1). */
+const byChoiceOnly = (r: { read: PersonRead }, chosen: boolean) => (chosen || isColdWho(r.read) ? '' : ', then only by your choice (not a direct transportation operator)');
 
 const nameOf = (c: MotionCard) => c.persona.displayName?.trim() || c.persona.email || `person ${c.persona.id}`;
 const person = (c: MotionCard, factors: string[]): MotionPerson => ({ personaId: c.persona.id as number, name: nameOf(c), title: c.persona.title, cardId: c.id, factors });
@@ -187,7 +193,10 @@ export function computeAccountMotion(input: {
     const unlockAt = live.outstanding ? new Date(8.64e15) : addBusinessDays(new Date(live.sentAt), MOTION_UNLOCK_BUSINESS_DAYS);
     const owner = cards.find((c) => c.persona.id === live.personaId) ?? null;
     const waiting = ranked.filter((r) => r.card.persona.id !== live.personaId);
-    const nextPick = (choice?.nextPersonaId ? waiting.find((r) => r.card.persona.id === choice.nextPersonaId) : null) ?? waiting[0] ?? null;
+    // Casey's choice of who comes next: the recorded next person, or (from the needs_owner panel, review S1) the person
+    // chosen as primary when they are still waiting.
+    const chosenNext = choice ? waiting.find((r) => r.card.persona.id === choice.nextPersonaId) ?? waiting.find((r) => r.card.persona.id === choice.primaryPersonaId) ?? null : null;
+    const nextPick = chosenNext ?? waiting[0] ?? null;
     if (now.getTime() < unlockAt.getTime()) {
       return {
         accountName,
@@ -198,7 +207,7 @@ export function computeAccountMotion(input: {
               ...person(nextPick.card, nextPick.factors),
               unlock: live.outstanding
                 ? `after the outstanding first-touch draft to ${owner ? nameOf(owner) : live.recipient} is sent (then ${MOTION_UNLOCK_BUSINESS_DAYS} business days) or deleted`
-                : `after ${day(unlockAt)} with no response (${MOTION_UNLOCK_BUSINESS_DAYS} business days), or at once if ${owner ? nameOf(owner) : live.recipient}'s address fails`,
+                : `after ${day(unlockAt)} with no response (${MOTION_UNLOCK_BUSINESS_DAYS} business days), or at once if ${owner ? nameOf(owner) : live.recipient}'s address fails${byChoiceOnly(nextPick, !!chosenNext)}`,
               unlockAt: live.outstanding ? null : unlockAt.toISOString(),
             }
           : null,
@@ -210,12 +219,12 @@ export function computeAccountMotion(input: {
       };
     }
     // Unlock window passed with no response: the next person becomes the primary, if they are a cold WHO or chosen.
-    if (nextPick && !isColdWho(nextPick.read) && choice?.nextPersonaId !== nextPick.card.persona.id) return needsOwner(accountName, waiting, allIds);
+    if (nextPick && !isColdWho(nextPick.read) && !chosenNext) return needsOwner(accountName, waiting, allIds);
     if (nextPick) {
       return {
         accountName,
         state: 'ready',
-        primary: { ...person(nextPick.card, [...nextPick.factors, `unlocked: no response since ${live.sentAt.slice(0, 10)}`]), chosen: choice?.nextPersonaId === nextPick.card.persona.id },
+        primary: { ...person(nextPick.card, [...nextPick.factors, `unlocked: no response since ${live.sentAt.slice(0, 10)}`]), chosen: !!chosenNext },
         next: null,
         alsoWaiting: waiting.filter((r) => r !== nextPick).map((x) => person(x.card, x.factors)),
         heldCardIds: allIds.filter((id) => id !== nextPick.card.id),
@@ -237,7 +246,7 @@ export function computeAccountMotion(input: {
     accountName,
     state: 'ready',
     primary: { ...person(primary.card, primary.factors), chosen: !!chosen },
-    next: nextPick ? { ...person(nextPick.card, nextPick.factors), unlock: `after ${MOTION_UNLOCK_BUSINESS_DAYS} business days with no response to ${nameOf(primary.card)}, or at once if that address fails`, unlockAt: null } : null,
+    next: nextPick ? { ...person(nextPick.card, nextPick.factors), unlock: `after ${MOTION_UNLOCK_BUSINESS_DAYS} business days with no response to ${nameOf(primary.card)}, or at once if that address fails${byChoiceOnly(nextPick, choice?.nextPersonaId === nextPick.card.persona.id)}`, unlockAt: null } : null,
     alsoWaiting: rest.filter((r) => r !== nextPick).map((x) => person(x.card, x.factors)),
     heldCardIds: allIds.filter((id) => id !== primary.card.id),
     headline: chosen ? `Primary: ${nameOf(primary.card)} (your choice).` : `Suggested primary: ${nameOf(primary.card)}.${released ? ' An earlier address failed, so the motion moved on.' : ''}`,

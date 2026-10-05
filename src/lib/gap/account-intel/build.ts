@@ -20,7 +20,7 @@ import { sensitivityOf } from '../research/sensitivity';
 import { decideApproach } from '../motion/approach';
 import { restrictionFor } from '../policy/restriction';
 import { computeAccountMotion } from '../motion/account-motion';
-import { isColdWho, isDefaultWho, LANE_LABEL, rankWho, type PersonLane, type PersonRegion, GeoStatus } from '../people/person-prior';
+import { isColdWho, isDefaultWho, isSponsor, LANE_LABEL, rankWho, type PersonLane, type PersonRegion, GeoStatus } from '../people/person-prior';
 import { divisionOf, divisionsFor, sitesByDivision } from '../people/division';
 
 // ---------------------------------------------------------------- inputs (what load.ts gathers)
@@ -1224,11 +1224,12 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
   // The prior's best across both: a reachable GAP contact wins a tie (it can be worked today); a HubSpot-only person
   // wins when the prior ranks them higher (a better-fit owner). Only a direct operator is the primary.
   const best = opAll[0] ?? null;
-  // The sponsor: the executive over operations or supply chain (CSCO, COO), a VP in an adjacent lane, or a director
-  // whose title says supply chain or network; never a warehouse or DC director, never the cold default.
-  const sponsorPick = contactable.find((r) => r.read.lane === 'EXECUTIVE_SPONSOR' || (r.read.lane === 'ADJACENT_OPERATOR' && (r.read.seniority >= 4 || (r.read.seniority >= 3 && /supply chain|network/i.test(r.candidate.title ?? ''))))) ?? null;
-  const techPick = contactable.find((r) => r.read.lane === 'TRANSFORMATION_TECH' && r.read.ownership > 0) ?? null;
-  const sitePick = contactable.find((r) => r.read.lane === 'FACILITY_OPERATOR') ?? null;
+  // The sponsor, tech and site slots: the one sponsor rule (person-prior isSponsor), freight-scoped tech, a site
+  // operator; never someone based outside North America (review N6).
+  const inMarket = contactable.filter((r) => r.read.region !== 'OTHER_REGION');
+  const sponsorPick = inMarket.find((r) => isSponsor(r.read, r.candidate.title)) ?? null;
+  const techPick = inMarket.find((r) => r.read.lane === 'TRANSFORMATION_TECH' && r.read.ownership > 0) ?? null;
+  const sitePick = inMarket.find((r) => r.read.lane === 'FACILITY_OPERATOR') ?? null;
   const people: BuyerMap = {
     primary: best ? mapped(best) : null,
     alternate: (() => {
@@ -1238,7 +1239,8 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
     sponsor: sponsorPick ? mapped(sponsorPick) : null,
     tech: techPick ? mapped(techPick) : null,
     site: sitePick ? mapped(sitePick) : null,
-    ownerMissing: best ? null : 'Transportation owner not yet identified: research required (direct transportation / logistics / fleet operator).',
+    // A HubSpot list cut at the cap may hide the owner: said, never silently asserted absent (review Q8).
+    ownerMissing: best ? null : `Transportation owner not yet identified: research required (direct transportation / logistics / fleet operator).${i.hubspotPeople?.truncated ? ` HubSpot returned only the first ${i.hubspotPeople.people.length} associated contacts: the owner may be beyond them.` : ''}`,
     lanes: [...new Set(everyone.map((r) => r.read.lane))].map((lane) => ({ lane, label: LANE_LABEL[lane], people: everyone.filter((r) => r.read.lane === lane).map(mapped) })),
   };
   const motion = accountMotion(i, hypotheses, now, persona);

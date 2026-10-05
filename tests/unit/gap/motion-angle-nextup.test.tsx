@@ -152,6 +152,16 @@ describe('loadCockpitMotions', () => {
     expect(r.heldCardIds.sort()).toEqual(['e1', 'e2']);
     expect(r.motions[0]).toMatchObject({ state: 'needs_owner', primary: null });
   });
+
+  it('review S3: card holders\' HubSpot locations reach the ranking (US-first), fail-soft', async () => {
+    const located = (id: string, pid: number, hs: string) => ({ ...item(id, pid, 'one_off_email', 'Director of Transportation'), persona: { ...item(id, pid, 'one_off_email', 'Director of Transportation').persona, displayName: id, hubspotContactId: hs } });
+    const items = [located('A Toronto', 1, '101'), located('Z Dallas', 2, '102')];
+    const locations = async (ids: string[]) => new Map(ids.map((x) => [x, x === '101' ? 'Toronto, Ontario, Canada' : 'Dallas, Texas, United States']));
+    const r = await loadCockpitMotions(prisma, items as never, new Date('2026-09-30T15:00:00Z'), { thesisCurrent: async () => ({ current: true as const }), locations });
+    expect(r.motions[0].primary?.name).toBe('Z Dallas');
+    const down = await loadCockpitMotions(prisma, items as never, new Date('2026-09-30T15:00:00Z'), { thesisCurrent: async () => ({ current: true as const }), locations: async () => { throw new Error('hubspot down'); } });
+    expect(down.motions[0].state).toBe('ready');
+  });
 });
 
 describe('<AccountMotionPanel>', () => {
