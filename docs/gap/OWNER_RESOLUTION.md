@@ -590,3 +590,86 @@ GAP account and were not created).
 - `scripts/gap/correct-historical-suppression.ts` remains for the manifest-driven one-off; the seller path is the
   panel's review.
 <!-- verified:2026-10-05 -->
+
+## Debt closed and the rep-facing surfaces (2026-10-05, after Casey chose the FedEx and Walmart owners)
+
+STATUS: SHIPPED 2026-10-05 (PR #399, merge 4ad8b81c, Vercel production deployment dpl_xUYxTEiuvNCr21frndK8XJ8ZSQvH READY; the #400 follow-up gives a HubSpot-only WHO the same checks on NOW and makes the call brief read the role evidence recorded against the linked HubSpot contact; its SHA is in the baseline). Casey asked what was missing, to close the debt that should be closed, and to make
+the WHO surfaces usable by a new BDR or rep. Not a redesign of GAP: the owner panel, the person checks, NOW and the
+pre-call brief, with the same contracts.
+
+What Casey did first, through the product (audited): chose Glen Chaffee for the FedEx hypothesis (ADD + USE,
+persona 2234, activated 20:41Z) and Doug Estrada for the Walmart hypothesis (persona 2235, activated 20:46Z). Isaac
+Scott's flag is still set (LEGACY_CONFLICT, Casey's click).
+
+### Debt closed here
+
+- A supporting title now stands as the effective title when nothing is stored (a GAP record with no title plus a
+  verification from an industry bio reads that title, unverified, instead of none).
+- A HubSpot-only person can be corrected by Casey: ROLE IS WRONG, LEFT THE COMPANY and CURRENT post a `correction` to
+  `POST /api/gap/people/verify-role`, recorded as a human row (`person.role_verified`, provider human), never a
+  search, never HubSpot.
+- The legacy suppression review reads the GAP mailbox's delivery failure notices (`countDeliveryFailures` in
+  `src/lib/email/gmail-inbox.ts`, mailer-daemon notices naming the address, metadata only); not configured or
+  unreadable stays "not read", never a hit and never a reason to wait.
+- The pre-call brief says employment and role currentness before a call (`BriefPersona.employment`,
+  `roleCurrentness`; the client type and the contract-parity test carry them).
+- The FedEx GAP contact "Jeffrey" (persona 2187) is "Jeffrey Tallman", completed from its own linked HubSpot
+  contact by `scripts/gap/correct-persona-name-from-hubspot.ts` (reads HubSpot, writes the name fields with raw SQL
+  that never touches `updated_at`, one `person.record_corrected` audit row; refuses when the first names disagree).
+
+### Debt kept, with the reason
+
+- The divestiture constant stays FedEx-only (one verified family; a table is not warranted yet).
+- A one-word spelling that leads a longer namesake ("Pilot") reads as the same employer by the #396 rule.
+- H-E-B's legacy duplicate personas (43, 45) stay set aside, not merged (no person merge is a frozen contract).
+- Sub-Zero and World Market have no GAP account; creating one is Casey's deliberate decision.
+- The vocabulary has no separate carrier value; carriers and 3PLs share "3PL / Logistics".
+- The baseline's P2 / P3 list (source-class filter, redirect resolver, note dialog a11y, feedback-list silence) is
+  outside WHO and stays recorded for a real selling day.
+
+### The rep-facing surfaces
+
+Audit basis: live screenshots of the FedEx and Walmart drawers (owner panel), the H-E-B, Walmart and PepsiCo NOW
+pages, the hypotheses list and the cockpit, light and dark, desktop and 390px, plus the components themselves. What a
+new rep hit: six to seven lines of reasons per candidate before any choice; three underlined checks per person that
+read as body links; the set-aside list as one flat wall; "Use X in routing" with nothing saying what the click does;
+the vocabulary (primary operator, thesis fit, currentness, HubSpot only) unexplained; the legacy review reachable only
+through a hypothesis drawer; the call brief silent on a changed role.
+
+Shipped (`owner-resolution-panel.tsx`, `employment-control.tsx`, `blocked-people.tsx`, `account-now.tsx`,
+`pre-call-brief.tsx`):
+- The panel opens with the question ("Who should test this hypothesis?"), the headline, and one sentence on the
+  rule: GAP ranks and says why; you choose; nothing starts until you click; no email is sent by choosing.
+- A candidate card is compact: name, title, a HubSpot-only tag when adding is part of the click, the RECOMMENDED badge
+  and its sentence, the lane and the thesis fit. Details (with the location) opens geography, employment, role and
+  source. The top three unverified people carry the checks.
+- The checks are small buttons with a title each: Verify role (one source-backed check; nothing asserted without a
+  source), Role is wrong, Left the company; the same three for a GAP contact and a HubSpot-only person.
+- Under the action buttons, one line says what the click does ("Adds them to GAP, attaches them to this hypothesis
+  and starts routing (shadow). No email is sent by this click; every send still runs its own gates.").
+- The set-aside toggle carries the counts by reason ("Show 32 set aside (do not contact 3, divested unit 2, another
+  region 26, ...)") and the list is grouped under plain labels (Do not contact, Unsubscribed, Opted out in HubSpot,
+  Left the company, Employer in question, Role changed, Role in question, Divested unit, Another region, No name).
+- "What these terms mean" opens a glossary: primary operator, adjacent operator, thesis fit, employment, role,
+  recommended, HubSpot only, set aside.
+- NOW names the account's do-not-contact GAP contacts ("Not contacted (do not contact): ...") with the legacy review
+  one click away, so the review no longer depends on a person-less hypothesis.
+- The pre-call brief shows employment and role lines when they are not plain "unverified", amber when they set the
+  person aside.
+
+Tests: `owner-resolution-ui` (compact card, Details, grouped set-aside with counts, glossary, action help, no em dash),
+`employment-control` (the HubSpot-only correction posts to verify-role), `account-now-view` (the blocked list and its
+review control), `call-brief` and `contract-parity` (the brief's currentness fields). GAP folder suite at the tip: 318 files, 4,983 tests, 0 failures; `tsc --noEmit` clean; eslint clean on the changed files (the pre-existing `any` glue in `replies/brief.ts` carries its house disable on the new function only); production build green.
+
+### Receipt (read-only production smoke after the deploy)
+
+H-E-B NOW, light and dark, desktop and 390px, no horizontal overflow: the WHO block (Jess Bess, HubSpot only, ADD TO
+GAP), the alternate, then "Not contacted (do not contact): Craig Stucker, Dakota Socha, Jeffrey Matthews, Troy Shaw.
+Each flag can be reviewed; a real unsubscribe or opt-out is never cleared." with one review link per person, then the
+historical Dakota Socha line. The pre-call brief for Glen Chaffee (persona 2234, the FedEx owner Casey chose) renders
+his name, title, email, account and the active hypothesis; its role line appears once the #400 follow-up is live
+(the role evidence for Glen is recorded against his HubSpot contact id). The owner panel itself has no live
+person-less approved hypothesis to render today (Casey chose both owners); its redesign is pinned by the UI suite.
+Safety unchanged: emails sent 0, enrollments 0, Apollo credits 0, HubSpot writes 0, Accounts created 0, Personas
+created 0 (the two owner personas were created by Casey's own clicks through ADD + USE).
+<!-- verified:2026-10-05 -->
