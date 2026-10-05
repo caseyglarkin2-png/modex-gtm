@@ -53,6 +53,14 @@ export interface EmploymentEvidence {
   note?: string | null;
   /** The evidence explicitly says they LEFT this account (a departure), whatever company it names. */
   left?: boolean;
+  /**
+   * The evidence says the stored ROLE is no longer theirs (promoted, the role moved to someone else) while they stay
+   * at the company; `title` is the new title when the source names it, else null. Read by role-currentness.ts;
+   * for the employment read it is a plain placement at `company`.
+   */
+  roleChanged?: boolean;
+  /** A verification found sources that disagree about the role: says nothing about the company; the role read conflicts. */
+  conflict?: boolean;
 }
 
 export interface EmploymentRead {
@@ -168,7 +176,8 @@ export function sameEmployer(company: string, accountName: string, aliases: read
 /** Does the evidence place them at THIS account (the account, one of its names, or its own domain label)? */
 function here(e: EmploymentEvidence, accountName: string, aliases: readonly string[], domains: readonly string[] = []): boolean | null {
   if (e.left) return false;
-  if (!e.company) return null;
+  // A role conflict says nothing about the company; a row with no company says nothing either.
+  if (e.conflict || !e.company) return null;
   return sameEmployer(e.company, accountName, aliases, domains);
 }
 

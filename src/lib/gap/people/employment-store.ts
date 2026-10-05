@@ -26,7 +26,8 @@ export const EMPLOYMENT_FIELDS = ['employment_status', 'employment_company', 'em
 export const EMPLOYMENT_CORRECTED = 'person.employment_corrected' as const;
 export const EMPLOYMENT_VERIFIED = 'person.employment_verified' as const;
 
-export type EmploymentStatusValue = 'left' | 'current' | 'role_changed';
+/** 'conflict' is written by a verification only (derived): the sources disagree about the role. */
+export type EmploymentStatusValue = 'left' | 'current' | 'role_changed' | 'conflict';
 
 interface FieldRow {
   field_name: string;
@@ -65,12 +66,15 @@ export function evidenceFromFields(fields: readonly FieldRow[], accountName: str
     const url = by.get('employment_source_url')?.field_value ?? null;
     const note = by.get('employment_note')?.field_value ?? null;
     const at = iso(status.source_timestamp);
+    // 'role_changed' (Casey or a verification): still here, the stored role is no longer theirs; the title is the
+    // new one when known. 'conflict' (a verification only): the sources disagree about the role; nothing about the company.
+    const flags = { ...(v === 'role_changed' ? { roleChanged: true } : {}), ...(v === 'conflict' && status.source !== 'manual' ? { conflict: true } : {}) };
     if (status.source === 'manual') {
-      out.push({ kind: 'human', tier: 'strong', company: v === 'left' ? company : accountName, title, at, source: `Casey${status.last_writer ? ` (${status.last_writer})` : ''}`, url, note, left: v === 'left' });
+      out.push({ kind: 'human', tier: 'strong', company: v === 'left' ? company : accountName, title, at, source: `Casey${status.last_writer ? ` (${status.last_writer})` : ''}`, url, note, left: v === 'left', ...flags });
     } else {
       // A derived (web) verification: the tier is the URL's, never the writer's say-so.
       const tier = tierForUrl(url, companyDomains);
-      out.push({ kind: kindForUrl(url, companyDomains), tier: tier === 'weak' ? 'supporting' : tier, company: v === 'left' ? company : accountName, title, at, source: `verified at ${url ? safeHost(url) : 'an unnamed source'}`, url, note, left: v === 'left' });
+      out.push({ kind: kindForUrl(url, companyDomains), tier: tier === 'weak' ? 'supporting' : tier, company: v === 'left' ? company : accountName, title, at, source: `verified at ${url ? safeHost(url) : 'an unnamed source'}`, url, note, left: v === 'left', ...flags });
     }
   }
   // The intakes' company fields: supporting evidence about where a provider or the CRM placed them, dated by the write.
