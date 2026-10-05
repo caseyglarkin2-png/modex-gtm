@@ -95,7 +95,9 @@ describe('the buyer map spans GAP and HubSpot', () => {
     const b = buildAccountBrief(inputs(), NOW);
     expect(b.people.primary).toMatchObject({ name: 'Karen Darling', source: 'hubspot', region: 'US_NA', location: 'Chicago, Illinois, United States' });
     expect(b.glance.nextAction).toMatch(/^Add Karen Darling, Senior Director - PBNA Transportation \(Chicago, Illinois, United States\) from HubSpot as a GAP contact/);
-    expect(b.motion.who).toBe('Vic VP'); // the send target stays a GAP contact until Casey adds her
+    // Operator-first (2026-10-04): a VP Supply Chain is never the cold send target; she is added first.
+    expect(b.motion.who).toBeNull();
+    expect(b.people.sponsor).toMatchObject({ name: 'Vic VP' });
   });
   it('a persona and its HubSpot contact are ONE person (joined by the stored id, never by name)', () => {
     const b = buildAccountBrief(inputs(), NOW);
@@ -104,7 +106,9 @@ describe('the buyer map spans GAP and HubSpot', () => {
   });
   it('with no HubSpot read, nothing changes', () => {
     const b = buildAccountBrief(inputs({ hubspotPeople: null }), NOW);
-    expect(b.people.primary).toMatchObject({ name: 'Vic VP', source: 'gap' });
+    // Operator-first (2026-10-04): no direct operator, so no primary; Vic VP is the sponsor and alternate.
+    expect(b.people.primary).toBeNull();
+    expect(b.people.alternate).toMatchObject({ name: 'Vic VP', source: 'gap' });
     expect(b.glance.nextAction).not.toMatch(/HubSpot/);
   });
 });

@@ -108,13 +108,14 @@ export function AccountMotionPanel({ motion }: { motion: CockpitMotion }) {
   }
 
   async function makePrimary(personaId: number) {
-    if (!motion.primary) return;
+    // needs_owner (no cold WHO among the cards): Casey's choice is the only way one of them leads.
+    if (!motion.primary && motion.state !== 'needs_owner') return;
     setBusy(true);
     setError(null);
     const res = await fetch('/api/gap/accounts/motion', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ accountName: motion.accountName, primaryPersonaId: personaId, nextPersonaId: motion.primary.personaId > 0 && motion.primary.personaId !== personaId ? motion.primary.personaId : null }),
+      body: JSON.stringify({ accountName: motion.accountName, primaryPersonaId: personaId, nextPersonaId: motion.primary && motion.primary.personaId > 0 && motion.primary.personaId !== personaId ? motion.primary.personaId : null }),
     });
     setBusy(false);
     if (!res.ok) {
@@ -139,7 +140,7 @@ export function AccountMotionPanel({ motion }: { motion: CockpitMotion }) {
   return (
     <section data-testid="account-motion" data-account={motion.accountName} data-state={motion.state} className="space-y-2 rounded-md border border-[var(--border)] bg-[var(--muted)]/30 p-3 text-sm">
       <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]"><AccountLink name={motion.accountName} /> · account motion</p>
-      <p data-testid="motion-headline" className={motion.state === 'paused_reply' || motion.state === 'in_conversation' ? 'font-medium text-amber-700 dark:text-amber-400' : ''}>
+      <p data-testid="motion-headline" className={motion.state === 'paused_reply' || motion.state === 'in_conversation' || motion.state === 'needs_owner' ? 'font-medium text-amber-700 dark:text-amber-400' : ''}>
         {motion.headline}
       </p>
       {motion.primary ? (
@@ -175,7 +176,7 @@ export function AccountMotionPanel({ motion }: { motion: CockpitMotion }) {
       ) : null}
       {motion.alsoWaiting.length ? (
         <div data-testid="motion-also-waiting" className="border-t border-[var(--border)] pt-2">
-          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Also waiting (after the next person)</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">{motion.state === 'needs_owner' ? 'On record (none is the transportation owner)' : 'Also waiting (after the next person)'}</p>
           <ul className="mt-1 space-y-2">
             {motion.alsoWaiting.map((p) => (
               <li key={p.personaId} data-testid="motion-waiting-person">
@@ -184,7 +185,7 @@ export function AccountMotionPanel({ motion }: { motion: CockpitMotion }) {
                   <span className="ml-1 text-xs text-[var(--muted-foreground)]">({p.factors.join(' · ')})</span>
                 </p>
                 <AngleLine a={motion.angles[String(p.personaId)]} personaId={p.personaId} />
-                {motion.state === 'ready' && motion.primary ? (
+                {(motion.state === 'ready' && motion.primary) || motion.state === 'needs_owner' ? (
                   <button type="button" data-testid="motion-make-primary" disabled={busy} onClick={() => void makePrimary(p.personaId)} className="mt-1 text-xs underline">
                     Make {p.name} the primary instead
                   </button>

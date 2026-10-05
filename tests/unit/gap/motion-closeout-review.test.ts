@@ -58,7 +58,7 @@ describe('OWNER: never a board member, a former executive, a non-operations titl
       { id: 2, name: 'Ted Meyers', title: 'Business Development/AI Project Manager', doNotContact: false, hasEmail: true, emailStatus: 'valid' },
       { id: 3, name: 'Celine Ning', title: 'Operations Manager, CEO Office', doNotContact: false, hasEmail: true, emailStatus: 'valid' },
     ]), new Date('2026-09-30T12:00:00Z'));
-    expect(b.glance.likelyOwner).toBe('Unknown: nobody on record has an operations title (3 people on record).');
+    expect(b.glance.likelyOwner).toBe('Unknown: transportation owner not yet identified: research required (3 people on record, none a direct transportation / logistics operator).');
   });
   it('Hormel: a do-not-contact owner is flagged on the OWNER line', () => {
     const b = buildAccountBrief(acct([{ id: 1, name: 'Will Bonifant', title: 'Director of Logistics', doNotContact: true, hasEmail: true, emailStatus: 'valid' }]), new Date('2026-09-30T12:00:00Z'));
@@ -69,7 +69,7 @@ describe('OWNER: never a board member, a former executive, a non-operations titl
     const h = { id: 'h1', status: 'draft', observation: fact.quote, problem: 'Arrivals pile up.', rootCauses: [], impacts: [], falsification: [], whatANoMeans: null, primarySignalId: 'f1' };
     const b = buildAccountBrief({ ...acct([{ id: 1, name: 'Francesca Debiase', title: 'Board Director / Former EVP Supply Chain', doNotContact: false, hasEmail: true, emailStatus: 'valid' }]), facts: [fact], hypotheses: [h] } as never, new Date('2026-09-30T12:00:00Z'));
     expect(b.motion.type).toBe('FACT_LED');
-    expect(b.glance.nextAction).toBe('Review the thesis, then find the operations owner first: nobody reachable on record has an operations title.');
+    expect(b.glance.nextAction).toBe('Review the thesis, then find the transportation owner first: no reachable GAP contact is a direct transportation / logistics operator (research; a sponsor is an alternate, never the cold default).');
   });
   it('Caterpillar: a name fragment in the CRM is said as such', () => {
     const b = buildAccountBrief(acct([{ id: 1, name: 'Poorman S', title: 'VP Integrated Logistics', doNotContact: false, hasEmail: true, emailStatus: 'valid' }]), new Date('2026-09-30T12:00:00Z'));

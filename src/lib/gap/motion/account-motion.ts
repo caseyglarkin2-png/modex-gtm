@@ -17,6 +17,9 @@
  *                 days without a response, or at once if the address failed
  *   ready         no motion yet: ONE primary is READY (Casey's choice, else a
  *                 suggestion from visible factors); the rest wait as NEXT
+ *   needs_owner   cards exist, but nobody on them is a COLD WHO (a direct freight operator; seller correction
+ *                 2026-10-04): no suggested primary, every card held; the sponsor is named and Casey's explicit
+ *                 choice still makes anyone primary
  *   idle          nobody to email at the account
  *
  * Suggestion factors are shown, never hidden behind a score: seniority from
@@ -24,7 +27,7 @@
  * Calls and LinkedIn are human judgment: this only governs EMAIL cards.
  */
 import { addBusinessDays } from '../sequence/business-days';
-import { LANE_LABEL, priorKey, readPerson, titleSeniority, geoPhrase } from '../people/person-prior';
+import { LANE_LABEL, isColdWho, priorKey, readPerson, titleSeniority, geoPhrase, type PersonRead } from '../people/person-prior';
 
 export const MOTION_UNLOCK_BUSINESS_DAYS = 5;
 export const ACCOUNT_MOTION = 'account.motion' as const;
@@ -65,7 +68,7 @@ export interface MotionPerson {
   factors: string[];
 }
 
-export type MotionState = 'in_conversation' | 'paused_reply' | 'in_motion' | 'ready' | 'idle';
+export type MotionState = 'in_conversation' | 'paused_reply' | 'in_motion' | 'ready' | 'needs_owner' | 'idle';
 
 export interface AccountMotion {
   accountName: string;
@@ -86,7 +89,7 @@ export { titleSeniority } from '../people/person-prior';
 const SENIORITY_WORD: Record<number, string> = { 5: 'executive', 4: 'VP', 3: 'director', 2: 'manager', 1: 'individual contributor' };
 
 /** Ranking for a suggestion, with the factors that produced it (shown to Casey). */
-export function rankCandidates(cards: readonly MotionCard[], thesisKeys: ReadonlySet<string>): Array<{ card: MotionCard; factors: string[]; key: number[] }> {
+export function rankCandidates(cards: readonly MotionCard[], thesisKeys: ReadonlySet<string>): Array<{ card: MotionCard; factors: string[]; key: number[]; read: PersonRead }> {
   return cards
     .map((card) => {
       const sen = titleSeniority(card.persona.title);
@@ -102,9 +105,26 @@ export function rankCandidates(cards: readonly MotionCard[], thesisKeys: Readonl
         relevant ? `matches the thesis role (${String(card.persona.personaKey).replace(/_/g, ' ')})` : 'outside the thesis role',
         reachable === 2 ? 'email and phone' : card.persona.email ? 'email only' : 'no email',
       ];
-      return { card, factors, key: [...priorKey(read), relevant ? 1 : 0, sen, reachable] };
+      return { card, factors, key: [...priorKey(read), relevant ? 1 : 0, sen, reachable], read };
     })
     .sort((x, y) => x.key.reduce((d, _, k) => d || y.key[k] - x.key[k], 0) || String(x.card.persona.displayName ?? '').localeCompare(String(y.card.persona.displayName ?? '')) || x.card.id.localeCompare(y.card.id));
+}
+
+/**
+ * No cold WHO among the cards (seller correction, 2026-10-04): the cockpit suggests nobody. Every card is held, the
+ * best sponsor is named, and Casey's explicit choice (Make X the primary) is the only way one of them leads.
+ */
+function needsOwner(accountName: string, ranked: ReturnType<typeof rankCandidates>, allIds: string[]): AccountMotion {
+  const sponsor = ranked[0];
+  return {
+    accountName,
+    state: 'needs_owner',
+    primary: null,
+    next: null,
+    alsoWaiting: ranked.map((x) => person(x.card, x.factors)),
+    heldCardIds: allIds,
+    headline: `Transportation owner not identified among the GAP contacts with a ready card: research required (BRIEF buyer map, then HubSpot).${sponsor ? ` Sponsor on record: ${nameOf(sponsor.card)}${sponsor.card.persona.title ? ` (${sponsor.card.persona.title})` : ''}. Make them primary only by your choice.` : ''}`,
+  };
 }
 
 const nameOf = (c: MotionCard) => c.persona.displayName?.trim() || c.persona.email || `person ${c.persona.id}`;
@@ -189,7 +209,8 @@ export function computeAccountMotion(input: {
           : `In motion: ${owner ? nameOf(owner) : live.recipient} got a first touch on ${live.sentAt.slice(0, 10)}. One cold email motion at a time.`,
       };
     }
-    // Unlock window passed with no response: the next person becomes the primary.
+    // Unlock window passed with no response: the next person becomes the primary, if they are a cold WHO or chosen.
+    if (nextPick && !isColdWho(nextPick.read) && choice?.nextPersonaId !== nextPick.card.persona.id) return needsOwner(accountName, waiting, allIds);
     if (nextPick) {
       return {
         accountName,
@@ -206,6 +227,8 @@ export function computeAccountMotion(input: {
   if (ranked.length === 0) return { accountName, state: 'idle', primary: null, next: null, alsoWaiting: [], heldCardIds: [], headline: 'Nobody to email here right now.' };
 
   const chosen = choice ? ranked.find((r) => r.card.persona.id === choice.primaryPersonaId) ?? null : null;
+  // The cockpit SUGGESTS only a cold WHO; a sponsor or adjacent role leads only by Casey's choice.
+  if (!chosen && !isColdWho(ranked[0].read)) return needsOwner(accountName, ranked, allIds);
   const primary = chosen ?? ranked[0];
   const rest = ranked.filter((r) => r !== primary);
   const nextPick = (choice?.nextPersonaId ? rest.find((r) => r.card.persona.id === choice.nextPersonaId) : null) ?? rest[0] ?? null;

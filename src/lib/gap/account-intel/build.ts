@@ -20,7 +20,7 @@ import { sensitivityOf } from '../research/sensitivity';
 import { decideApproach } from '../motion/approach';
 import { restrictionFor } from '../policy/restriction';
 import { computeAccountMotion } from '../motion/account-motion';
-import { isDefaultWho, LANE_LABEL, rankWho, type PersonLane, type PersonRegion, GeoStatus } from '../people/person-prior';
+import { isColdWho, isDefaultWho, LANE_LABEL, rankWho, type PersonLane, type PersonRegion, GeoStatus } from '../people/person-prior';
 import { divisionOf, divisionsFor, sitesByDivision } from '../people/division';
 
 // ---------------------------------------------------------------- inputs (what load.ts gathers)
@@ -309,8 +309,17 @@ export interface MappedPerson {
 }
 
 export interface BuyerMap {
+  /** The cold WHO: a direct freight operator (person-prior isColdWho), else null (owner not yet identified). */
   primary: MappedPerson | null;
   alternate: MappedPerson | null;
+  /** The executive / supply-chain sponsor (VP Supply Chain, CSCO, COO): buyer map, never the cold default. */
+  sponsor?: MappedPerson | null;
+  /** Transportation technology / transformation with explicit freight scope (a co-buyer). */
+  tech?: MappedPerson | null;
+  /** A site operator (plant, DC, yard): pilots and local validation. */
+  site?: MappedPerson | null;
+  /** The role still missing for a cold first touch, in words, else null. */
+  ownerMissing?: string | null;
   /** Everyone on record, by lane (lanes with nobody are absent). */
   lanes: Array<{ lane: PersonLane; label: string; people: MappedPerson[] }>;
 }
@@ -916,7 +925,7 @@ function nextAction(i: AccountInputs, m: Motion, now: Date): string {
       // not what Casey should work from: review it on the better fact first. Nothing is rewritten.
       const weak = inferiorOpener(i, now);
       if (weak) return `Review the thesis before any first touch: it opens on ${weak.reason} ("${weak.opener}"), but the best current fact is "${weak.best}". Revise it on that fact (Research: use this fact), or reject it.`;
-      return m.who ? `Review the thesis, then use the verified fact in a first touch to ${m.who} (every gate runs at the click).` : 'Review the thesis, then find the operations owner first: nobody reachable on record has an operations title.';
+      return m.who ? `Review the thesis, then use the verified fact in a first touch to ${m.who} (every gate runs at the click).` : 'Review the thesis, then find the transportation owner first: no reachable GAP contact is a direct transportation / logistics operator (research; a sponsor is an alternate, never the cold default).';
     }
     case 'INTRO_ONLY': {
       const r = restrictionFor({ name: i.account.name, aliases: i.aliases, domains: i.domains });
@@ -1190,11 +1199,13 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
   // (functional ownership, then US / North America remit, then network scope, then seniority); procurement, finance,
   // R&D, sales, generic IT and unread titles are never the default. Nobody in an operating lane is Unknown, never
   // "the first contact on record".
+  // COLD WHO (seller correction, 2026-10-04): the fact-led motion's person is a direct freight operator among the GAP
+  // contacts, never a VP Supply Chain or another adjacent role merely because no operator is a GAP contact yet.
   const ranked = rankWho(i.personas.map((p) => ({ key: String(p.id), name: p.name, title: p.title, location: p.location ?? null, reachable: !p.doNotContact && p.hasEmail, doNotContact: p.doNotContact, persona: p })), { entityType: fit.entityType });
-  const operating = ranked.filter((r) => isDefaultWho(r.read) && !r.candidate.doNotContact);
+  const operating = ranked.filter((r) => isColdWho(r.read) && !r.candidate.doNotContact);
   const pick = operating.find((r) => r.candidate.reachable) ?? operating[0] ?? null;
   // The OWNER line still names a do-not-contact operating owner, flagged (never silently skipped); WHO never picks them.
-  const persona = pick?.candidate.persona ?? ranked.find((r) => isDefaultWho(r.read))?.candidate.persona;
+  const persona = pick?.candidate.persona ?? ranked.find((r) => isColdWho(r.read))?.candidate.persona;
   // THE BUYER MAP spans GAP's contacts AND the account's people in HubSpot (live, read-only): a HubSpot person who
   // is not a GAP contact (no persona carries their hubspot_contact_id) is ranked by the same prior and marked so.
   const linked = new Set(i.personas.map((p) => p.hubspotContactId).filter((x): x is string => !!x));
@@ -1207,16 +1218,25 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
     { entityType: fit.entityType },
   );
   const mapped = (r: (typeof everyone)[number]): MappedPerson => ({ name: r.candidate.name, title: r.candidate.title, lane: r.read.lane, laneLabel: LANE_LABEL[r.read.lane], region: r.read.region, geo: r.read.geo, why: r.why, reachable: r.candidate.reachable, doNotContact: !!r.candidate.doNotContact, division: divisionOf(i.account.name, r.candidate.title), location: r.candidate.location ?? null, source: r.candidate.source });
-  const opAll = everyone.filter((r) => isDefaultWho(r.read) && !r.candidate.doNotContact);
+  const contactable = everyone.filter((r) => !r.candidate.doNotContact && r.read.remit !== 'OTHER_REGION');
+  const opAll = contactable.filter((r) => isColdWho(r.read));
   // The prior's best across both: a reachable GAP contact wins a tie (it can be worked today); a HubSpot-only person
-  // wins when the prior ranks them higher (a better-fit owner).
+  // wins when the prior ranks them higher (a better-fit owner). Only a direct operator is the primary.
   const best = opAll[0] ?? null;
+  // The sponsor: the supply chain / operations executive or VP (adjacent or executive lane), never the cold default.
+  const sponsorPick = contactable.find((r) => r.read.lane === 'ADJACENT_OPERATOR' || r.read.lane === 'EXECUTIVE_SPONSOR') ?? null;
+  const techPick = contactable.find((r) => r.read.lane === 'TRANSFORMATION_TECH' && r.read.ownership > 0) ?? null;
+  const sitePick = contactable.find((r) => r.read.lane === 'FACILITY_OPERATOR') ?? null;
   const people: BuyerMap = {
     primary: best ? mapped(best) : null,
     alternate: (() => {
-      const alt = opAll.find((r) => r !== best) ?? everyone.find((r) => r !== best && !r.candidate.doNotContact && r.read.lane !== 'NON_OPERATING' && r.read.lane !== 'NEEDS_REVIEW') ?? null;
+      const alt = opAll.find((r) => r !== best) ?? sponsorPick ?? contactable.find((r) => r !== best && isDefaultWho(r.read)) ?? null;
       return alt ? mapped(alt) : null;
     })(),
+    sponsor: sponsorPick ? mapped(sponsorPick) : null,
+    tech: techPick ? mapped(techPick) : null,
+    site: sitePick ? mapped(sitePick) : null,
+    ownerMissing: best ? null : 'Transportation owner not yet identified: research required (direct transportation / logistics / fleet operator).',
     lanes: [...new Set(everyone.map((r) => r.read.lane))].map((lane) => ({ lane, label: LANE_LABEL[lane], people: everyone.filter((r) => r.read.lane === lane).map(mapped) })),
   };
   const motion = accountMotion(i, hypotheses, now, persona);
@@ -1228,7 +1248,9 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
     ? `${bestOp.name}${/^\S+$|\s\S\.?$/.test(bestOp.name.trim()) ? ' (name incomplete in the CRM)' : ''}${bestOp.title ? `, ${bestOp.title}` : ''} (LIKELY; ownership never assumed${bestOp.source === 'hubspot' ? '; in HubSpot, not yet a GAP contact' : ''})`
     : persona
     ? `${persona.name}${fragment}${persona.title ? `, ${persona.title}` : ''} (LIKELY; ownership never assumed)${persona.doNotContact ? ' (do not contact)' : ''}`
-    : i.personas.length ? `Unknown: nobody on record has an operations title (${plural(i.personas.length, 'person', 'people')} on record).` : 'Unknown: no person at this account yet.';
+    : people.sponsor
+    ? `Unknown: transportation owner not yet identified: research required. Sponsor on record: ${people.sponsor.name}${people.sponsor.title ? `, ${people.sponsor.title}` : ''} (${people.sponsor.laneLabel.toLowerCase()}).`
+    : i.personas.length || everyone.length ? `Unknown: transportation owner not yet identified: research required (${plural(everyone.length, 'person', 'people')} on record, none a direct transportation / logistics operator).` : 'Unknown: no person at this account yet.';
   const biggestUnknown = discovery[0] ? `${discovery[0].type.replace(/_/g, ' ').toLowerCase()}: ${discovery[0].why}` : 'None open.';
   const glance: Glance = {
     account: i.account.name,

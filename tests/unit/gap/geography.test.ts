@@ -111,9 +111,11 @@ describe('another region\'s remit never becomes the North America owner (review 
     } as never;
     return { b: buildAccountBrief(i, NOW), i };
   };
-  it('a Chicago-based Director, European Logistics is not WHO; a Toronto VP Supply Chain is; Apollo proposes finding the NA owner', async () => {
+  // Operator-first (2026-10-04): the Toronto VP Supply Chain is the sponsor, never the cold primary.
+  it('a Chicago-based Director, European Logistics is not WHO; a Toronto VP Supply Chain is the sponsor; Apollo proposes finding the NA owner', async () => {
     const { b, i } = await brief([p(1, 'Eve Euro', 'Director, European Logistics', 'Chicago, Illinois, United States'), p(2, 'Tom Toronto', 'VP Supply Chain', 'Toronto, Ontario, Canada')]);
-    expect(b.people.primary?.name).toBe('Tom Toronto');
+    expect(b.people.primary).toBeNull();
+    expect(b.people.sponsor?.name).toBe('Tom Toronto');
     expect(b.people.lanes.flatMap((l) => l.people).find((x) => x.name === 'Eve Euro')).toMatchObject({ geo: 'OTHER_REGION' });
     const { apolloCandidates } = await import('@/lib/gap/people/apollo-candidates');
     expect(apolloCandidates(b, i).candidates.map((c) => c.kind)).toEqual(['FIND_OWNER']);
@@ -124,13 +126,15 @@ describe('another region\'s remit never becomes the North America owner (review 
     const { apolloCandidates } = await import('@/lib/gap/people/apollo-candidates');
     expect(apolloCandidates(b, i).candidates.map((c) => c.kind)).toEqual(['FIND_OWNER']);
   });
-  it('an operator located outside North America (no remit stated) can be WHO, but Apollo still proposes the NA owner', async () => {
+  // Operator-first (2026-10-04): cold WHO is Casey's North America motion; an operator based outside it stays in the
+  // buyer map (never the cold primary) and Apollo proposes the NA owner.
+  it('an operator located outside North America (no remit stated) is buyer map, not cold WHO; Apollo proposes the NA owner', async () => {
     const { b, i } = await brief([p(1, 'Wiktor Warsaw', 'Director of Transportation', 'Warsaw, Masovian Voivodeship, Poland')]);
-    expect(b.people.primary).toMatchObject({ name: 'Wiktor Warsaw', geo: 'OTHER_REGION' });
+    expect(b.people.primary).toBeNull();
+    expect(b.people.lanes.flatMap((l) => l.people).find((x) => x.name === 'Wiktor Warsaw')).toMatchObject({ geo: 'OTHER_REGION', lane: 'PRIMARY_OPERATOR' });
     const { apolloCandidates } = await import('@/lib/gap/people/apollo-candidates');
     const c = apolloCandidates(b, i).candidates;
     expect(c.map((x) => x.kind)).toEqual(['FIND_OWNER']);
-    expect(c[0].possibleMatch).toBe('Wiktor Warsaw, Director of Transportation (primary operator, on record)');
   });
   it('rankWho puts a stated other-region remit after every North America or unstated person in the default lanes', () => {
     const r = rankWho([{ key: 'eu', name: 'eu', title: 'Director of Transportation, Europe', reachable: true, location: 'Chicago, IL' }, { key: 'adj', name: 'adj', title: 'Supply Chain Manager', reachable: true, location: null }]);

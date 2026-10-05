@@ -47,7 +47,9 @@ describe('an unanswered buyer reply is the next thing', () => {
   it('a reply already answered by a later send is history, not NEXT', () => {
     const v = view({}, ctxWith({ activities: [replyRow('2026-05-27T16:48:44Z', 'Reply from Avinash Rao <avinash.rao@acmefoods.com>: Thanks, talk soon.')], emails: [{ to_email: 'avinash.rao@acmefoods.com', subject: 'Re: Pilot', sent_at: '2026-06-02T10:00:00Z', reply_count: 0 }] }));
     expect(v.next.source).not.toBe('conversation');
-    expect(v.who?.name).toBe('Lukasz Wojcik');
+    // Operator-first (2026-10-04): a Regional Operations Manager is buyer map (the alternate), not the cold WHO.
+    expect(v.who).toBeNull();
+    expect(v.alternate?.name).toBe('Lukasz Wojcik');
   });
 });
 

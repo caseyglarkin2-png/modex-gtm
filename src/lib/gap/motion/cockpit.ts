@@ -94,7 +94,7 @@ export async function loadCockpitMotions(
       a[String(pid)] = { personaId: pid, angle: angles.get(pid) ?? null, suggested: angles.has(pid) ? null : suggestAngle({ title: c.persona.title, personaKey: c.persona.personaKey, accountName: account }) };
     }
     // Only accounts where the motion changes what Casey sees (more than one person, a pause, or a live motion).
-    if (cards.length > 1 || m.state === 'paused_reply' || m.state === 'in_conversation' || m.state === 'in_motion') motions.push({ ...m, angles: a });
+    if (cards.length > 1 || m.state === 'paused_reply' || m.state === 'in_conversation' || m.state === 'in_motion' || m.state === 'needs_owner') motions.push({ ...m, angles: a });
   }
   return { motions, heldCardIds: held, thesisHeldCardIds };
 }

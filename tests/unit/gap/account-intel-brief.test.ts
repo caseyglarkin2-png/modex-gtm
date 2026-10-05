@@ -338,7 +338,8 @@ describe('red team fixes (Release I)', () => {
       { id: 2, name: 'Mia Manager', title: 'Distribution Manager', doNotContact: false, hasEmail: true, emailStatus: 'valid' },
       { id: 3, name: 'Val VP', title: 'VP Supply Chain Operations', doNotContact: false, hasEmail: true, emailStatus: 'valid' },
     ];
-    expect(buildAccountBrief(base({ personas }), NOW).glance.likelyOwner).toMatch(/^Val VP/);
+    // Operator-first (2026-10-04): a VP Supply Chain Operations is the sponsor, never the likely owner.
+    expect(buildAccountBrief(base({ personas }), NOW).glance.likelyOwner).toBe('Unknown: transportation owner not yet identified: research required. Sponsor on record: Val VP, VP Supply Chain Operations (adjacent operator).');
   });
   it('a software vendor record is never a direct buyer: a partner when it serves logistics, else not a fit', () => {
     const vendor = base({ account: { ...base().account, vertical: 'Software' }, pack: null, facts: [], scout: { domain: null, what: 'Yard management software', entityType: 'vendor', network: [], freight: [], at: null } });
@@ -465,7 +466,7 @@ describe('closeout: General Mills and RXO', () => {
     expect(b.glance.nextAction).toMatch(/^Review the thesis before any first touch: it opens on activity outside the North America network/);
     expect(b.glance.nextAction).toMatch(/the best current fact is "General Mills will redesign the plant and warehouse network/);
     // a thesis on the best fact keeps the ordinary next action
-    const good = buildAccountBrief(base({ facts: [brazil, redesign], hypotheses: [{ ...h, observation: redesign.quote, primarySignalId: 'fr' }] }), NOW);
+    const good = buildAccountBrief(base({ personas: [{ ...base().personas[0], title: 'VP Transportation' }], facts: [brazil, redesign], hypotheses: [{ ...h, observation: redesign.quote, primarySignalId: 'fr' }] }), NOW);
     expect(good.glance.nextAction).toMatch(/^Review the thesis, then use the verified fact/);
   });
   it('RXO: no HubSpot company link is said as the blocker, not a failed deal read', () => {
