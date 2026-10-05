@@ -120,25 +120,44 @@ const has = (t: string, re: RegExp) => re.test(t);
 
 // "Transportation" names a product market, business unit or research area here, not freight the person moves.
 const PRODUCT_TRANSPORTATION = /transportation (markets?|product|platform|(&|and) (energy|electronics)|sbu|business|vertical|division)|(business|r&d|research|branding)[^,;]*transportation|industrial (&|and) transportation|transportation[^,;]*(business group|division|vertical)/;
-const NON_OPERATING_WORDS = /\b(r&d|research|sales|marketing|branding|regulatory|quality|legal|counsel|human resources|talent|recruit|communications|investor)\b/;
+// HR, recruiting and legal (review S5, 2026-10-04: "Transportation Recruiter", "Director Transportation HR",
+// "Transportation Attorney" read as operators).
+const NON_OPERATING_WORDS = /\b(r&d|research|sales|marketing|branding|regulatory|quality|legal|counsel|attorney|paralegal|human resources|hr|talent|recruit\w*|communications|investor)\b/;
 const COMMERCIAL_WORDS = /\b(sourcing|procurement|purchas\w*|category|buyer|finance|financial|cost|controller|accounting|pricing|compliance|sustainability)\b/;
-// Buying, pricing or funding freight: never the operator, whatever function sits beside it.
-const COMMERCIAL_STRONG = /\b(sourcing|procurement|purchas\w*|category|buyer|finance|financial|cost|controller|accounting|pricing)\b/;
-// A governance or safety remit with the function it modifies ("transportation compliance", "fleet safety"). Removed, it
-// leaves what else the title runs: "VP Global Transportation and Compliance" still runs transportation; "Transportation
-// Compliance Manager" runs nothing else.
-const GOVERNANCE_PHRASE = /\b(?:(?:transportation|transport|fleet|freight|logistics|trade|dot|regulatory|carrier)\s+)?(?:compliance|sustainability|safety)\b/g;
-// "S&T" is PepsiCo's strategy and transformation function (dogfood 2026-10-04: its "S&T North America Deployment -
-// Transportation" director is transformation, not the freight operator).
-const TECH_WORDS = /\b(it|software|engineering|digital|technology|technologies|systems?|tms|wms|sap|automation|innovation|data|transformation|analytics|product area|visibility|orchestration|rtls|modernization|solutions architect|identity)\b|\bs&t\b/;
+// Buying, pricing, paying, contracting or funding freight: never the operator, whatever function sits beside it
+// (review S5: freight audit / payment, transportation contracts, rate management, spend and budget). "Contract
+// logistics" (a 3PL's operation) is not "contracts".
+const COMMERCIAL_STRONG = /\b(sourcing|procurement|purchas\w*|category|buyer|finance|financial|cost|controller|accounting|pricing|audit|payments?|contracts|contracting|contract management|rate management|rates|spend|budget|indirect)\b/;
+// A MIXED title: a transportation / logistics function JOINED by a conjunction or list to a compliance, sustainability
+// or safety remit ("VP Global Transportation and Compliance", "VP Logistics and Transportation Compliance", "VP Fleet
+// Safety & Operations"). A function that only modifies the remit ("Transportation Compliance Manager") or trails it as
+// a department ("Safety Manager - Fleet", "Compliance Director, Logistics") is not mixed (review B1, 2026-10-04).
+const FN = '(?:transportation|transport|freight|fleet|logistics|distribution|line ?haul|otr|shipping|traffic|warehousing)(?:\\s+operations?)?';
+const GOV = '(?:compliance|sustainability|safety)';
+const GOV_MOD = '(?:(?:trade|dot|regulatory|carrier|hazmat|transportation|transport|fleet|freight|logistics)\\s+)?';
+const MIXED_GOVERNANCE = new RegExp(
+  [
+    `\\b${FN}\\s*(?:,|&|\\band\\b)\\s*${GOV_MOD}${GOV}\\b`,
+    `\\b${GOV}\\s*(?:&|\\band\\b)\\s*${FN}\\b`,
+    `\\b(?:transportation|transport|fleet|freight|logistics)\\s+${GOV}\\s*(?:&|\\band\\b)\\s*operations?\\b`,
+  ].join('|'),
+);
+// The governance words (and their non-function modifiers) removed from a mixed title, so the operating function decides.
+const GOVERNANCE_WORDS = /\b(?:(?:trade|dot|regulatory|hazmat)\s+)?(?:compliance|sustainability|safety)\b/gi;
+// "S&T" is transformation only beside a deployment / program / strategy word (PepsiCo's strategy and transformation
+// function, dogfood 2026-10-04); at energy and chemical shippers "S&T" is supply and transportation (review N4).
+const TECH_WORDS = /\b(it|software|engineering|digital|technology|technologies|systems?|tms|wms|sap|automation|innovation|data|transformation|analytics|product area|visibility|orchestration|rtls|modernization|solutions architect|identity)\b|\bs&t\b(?=.*\b(deployment|programs?|capabilit\w*|strategy|transformation)\b)/;
 const GENERIC_IT = /\b(identity and access|access management|cyber|security engineer|infrastructure|help ?desk|end user)\b/;
 const FREIGHT_WORDS = /\b(transportation|transport|transporte|freight|fleet|otr|over the road|dedicated|trucking|traffic|carrier management|inbound|outbound|intersite|line ?haul|middle[- ]mile|shipping|distribution (&|and) transportation|transportation (&|and) (warehous\w*|distribution|logistics))\b|\bld&t\b/;
 // Logistics that names the freight network itself: a direct operator at any seniority.
 const LOGISTICS_DIRECT = /\b(logistics operations|network logistics|physical distribution|logistics,? distribution,? (?:&|and) transportation)\b/;
 // Technology scoped to freight, fleet, logistics or the yard (transportation tech), never generic transformation.
-const FREIGHT_TECH_SCOPE = /\b(transportation|transport|freight|fleet|logistics|yard|tms|yms|rtls|autogate|gate automation|machine vision|control tower|visibility|orchestration)\b/;
+// (Visibility or orchestration alone is not freight scope: "Director, Order Orchestration", review N4.)
+const FREIGHT_TECH_SCOPE = /\b(transportation|transport|freight|fleet|logistics|yard|tms|yms|rtls|autogate|gate automation|machine vision|control tower)\b/;
 const LOGISTICS_OPS = /\b(logistics|distribution|warehous\w*|fulfil\w*|network operations|physical distribution|supply chain operations|operations)\b/;
-const FACILITY_WORDS = /\b(plant manager|site (manager|director|leader)|dc manager|distribution center manager|yard (manager|supervisor|lead)|warehouse manager|general manager|facility (manager|director))\b/;
+const FACILITY_WORDS = /\b(plant (manager|director)|site (manager|director|leader)|dc (manager|director)|distribution center (manager|director)|yard (manager|supervisor|lead)|warehouse (manager|director)|general manager|facility (manager|director))\b/;
+// "Operations" of a function other than freight: never the network operator, at a carrier or anywhere (review S6).
+const NON_FREIGHT_OPS = /\b(people|revenue|commercial|hr|human resources|customer|sales|finance|financial|marketing|it|business|legal|pricing|talent|technology|data|product|accounting|clinical|medical|merchandis\w*)\s+operations\b/;
 const EXEC_WORDS = /\b(chief|csco|coo)\b|(?<!vice[ -])\bpresident\b/;
 // Executive technology roles: a technology partner at the top, never the operating owner.
 const EXEC_TECH = /\b(cio|cto|cdo|cdio|chief (information|technology|digital|data) officer)\b/;
@@ -187,19 +206,11 @@ export function personCountry(location: string | null | undefined): 'US' | 'OTHE
 }
 
 const NETWORK = /\b(global|network|enterprise|corporate|corp\.|north america|national|regional|region|americas|na|nala|all sites|multi-site|domestic)\b/;
-const SITE = /\b(plant|site|facility|dc manager|distribution center manager|yard manager|warehouse manager)\b/;
+const SITE = /\b(plant|site|facility|dc manager|dc director|distribution center (manager|director)|yard manager|warehouse manager)\b/;
 
-const GOVERNANCE_PHRASE_CI = new RegExp(GOVERNANCE_PHRASE.source, 'gi');
-
-/** The title without its compliance / sustainability / safety remit ("VP Global Transportation and Compliance" -> "VP Global Transportation"). */
+/** A mixed title without its governance words ("VP Fleet Safety & Operations" -> "VP Fleet & Operations"). */
 function stripGovernance(title: string): string {
-  return title.replace(GOVERNANCE_PHRASE_CI, ' ').replace(/\s*(?:&|\band\b)\s*(?=$|[,;)-])/gi, ' ').replace(/\s{2,}/g, ' ').trim();
-}
-
-/** A transportation or logistics operating function remains once the governance remit is removed. */
-function operatesBeside(t: string): boolean {
-  const rest = t.replace(GOVERNANCE_PHRASE, ' ');
-  return has(rest, FREIGHT_WORDS) || has(rest, LOGISTICS_DIRECT) || /\blogistics\b/.test(rest);
+  return title.replace(GOVERNANCE_WORDS, ' ').replace(/\s*(?:&|\band\b|,)\s*(?=$|[,;)&-])/gi, ' ').replace(/\s{2,}/g, ' ').trim();
 }
 
 /** Read one person's title (and the account's entity type) into lane, region, scope and seniority, with reasons. */
@@ -221,11 +232,11 @@ export function readPerson(title: string | null | undefined, opts: { entityType?
   } else if (has(t, PRODUCT_TRANSPORTATION) || (has(t, NON_OPERATING_WORDS) && !has(t, /\boperations? (director|leader|manager)\b/))) {
     lane = 'NON_OPERATING';
     laneWhy = has(t, PRODUCT_TRANSPORTATION) ? '"transportation" names a product, market or business unit here, not freight they move' : 'a non-operating function (R&D, sales, regulatory, quality and the like)';
-  } else if (has(t, COMMERCIAL_STRONG) || (has(t, COMMERCIAL_WORDS) && !operatesBeside(t))) {
+  } else if (has(t, COMMERCIAL_STRONG) || (has(t, COMMERCIAL_WORDS) && !has(t, MIXED_GOVERNANCE))) {
     lane = 'PROCUREMENT_COMMERCIAL';
     laneWhy = 'buys, prices, funds or governs transportation (sourcing, purchasing, category, finance, compliance, sustainability); it does not run it';
-  } else if (has(t, COMMERCIAL_WORDS) || (/\bsafety\b/.test(t) && !/\b(security|risk|ehs|hse|claims|loss prevention|asset protection)\b/.test(t) && operatesBeside(t))) {
-    // A MIXED title (seller correction, 2026-10-04): compliance, sustainability or safety BESIDE a transportation or
+  } else if (has(t, MIXED_GOVERNANCE) && (has(t, COMMERCIAL_WORDS) || !/\b(security|risk|ehs|hse|claims|loss prevention|asset protection)\b/.test(t))) {
+    // A MIXED title (seller correction, 2026-10-04): compliance, sustainability or safety JOINED to a transportation or
     // logistics function. The operating function decides the lane; the governance remit is a second hat.
     const op = readPerson(stripGovernance(raw), { entityType: opts.entityType });
     lane = op.lane;
@@ -255,6 +266,9 @@ export function readPerson(title: string | null | undefined, opts: { entityType?
   } else if (has(t, SUPPORT_ROLE) && seniority <= 2) {
     lane = 'NEEDS_REVIEW';
     laneWhy = 'a support, analyst or planning role (may know the work; rarely owns the decision)';
+  } else if (has(t, NON_FREIGHT_OPS) && !has(t, FREIGHT_WORDS) && !has(t, LOGISTICS_DIRECT)) {
+    lane = 'NEEDS_REVIEW';
+    laneWhy = 'runs the operations of another function (people, revenue, commercial, customer and the like), not the freight network';
   } else if (has(t, FACILITY_WORDS)) {
     lane = 'FACILITY_OPERATOR';
     laneWhy = 'runs a site (plant, DC, warehouse or yard)';
@@ -391,6 +405,17 @@ export function isColdWho(read: Pick<PersonRead, 'lane' | 'remit' | 'region' | '
   if (read.lane === 'TRANSFORMATION_TECH') return !!ctx.initiative && read.ownership > 0;
   if (read.lane === 'FACILITY_OPERATOR') return !!ctx.siteScoped;
   return false;
+}
+
+/**
+ * THE SPONSOR (one rule for the brief, the cockpit and contact research): the executive over operations or supply chain
+ * (CSCO, COO), a VP in an adjacent lane, or a director whose title says supply chain or network. Never a warehouse or
+ * DC director, never a non-freight "operations" title, never the cold default.
+ */
+export function isSponsor(read: Pick<PersonRead, 'lane' | 'seniority'>, title: string | null | undefined): boolean {
+  if (read.lane === 'EXECUTIVE_SPONSOR') return true;
+  if (read.lane !== 'ADJACENT_OPERATOR') return false;
+  return read.seniority >= 4 || (read.seniority >= 3 && /supply chain|network/i.test(String(title ?? '')));
 }
 
 /** Worth showing in the buying committee as an operating lane (the buyer map); NOT the cold default (isColdWho). */

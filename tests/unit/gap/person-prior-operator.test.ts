@@ -9,7 +9,7 @@
  *                               a named initiative; a site operator only for a site-scoped motion
  */
 import { describe, expect, it } from 'vitest';
-import { isColdWho, rankWho, readPerson, type WhoCandidate } from '@/lib/gap/people/person-prior';
+import { isColdWho, isSponsor, rankWho, readPerson, type WhoCandidate } from '@/lib/gap/people/person-prior';
 
 const lane = (t: string, entityType?: string) => readPerson(t, { entityType }).lane;
 const p = (key: string, title: string, over: Partial<WhoCandidate> = {}): WhoCandidate => ({ key, name: key, title, reachable: true, ...over });
@@ -41,6 +41,63 @@ describe('mixed titles: compliance or safety beside a transportation function do
       expect([t, lane(t)]).toEqual([t, 'PROCUREMENT_COMMERCIAL']);
     expect(lane('Transportation Safety Manager')).toBe('SECURITY_RISK');
     expect(lane('Director, Fleet Safety')).toBe('SECURITY_RISK');
+  });
+});
+
+describe('review B1 (2026-10-04): a governance remit with a trailing department is not an operator', () => {
+  it('compliance, safety or sustainability with the function only as a suffix stays governance', () => {
+    for (const [t, want] of [
+      ['Safety Manager - Fleet', 'SECURITY_RISK'], ['VP Safety, Transportation', 'SECURITY_RISK'], ['Safety Director, Private Fleet', 'SECURITY_RISK'],
+      ['Director Environmental Health and Safety Transportation', 'SECURITY_RISK'], ['Compliance Manager, Transportation', 'PROCUREMENT_COMMERCIAL'],
+      ['Director Safety and Compliance - Transportation', 'PROCUREMENT_COMMERCIAL'], ['Hazmat Compliance Manager - Transportation', 'PROCUREMENT_COMMERCIAL'],
+      ['Director Sustainability - Transportation', 'PROCUREMENT_COMMERCIAL'], ['Director, Trade Compliance - Transportation', 'PROCUREMENT_COMMERCIAL'],
+      ['Compliance Director, Logistics', 'PROCUREMENT_COMMERCIAL'],
+    ] as const) expect([t, lane(t)]).toEqual([t, want]);
+  });
+  it('a governance remit joined to operations by a conjunction keeps the operator', () => {
+    for (const t of ['Senior Director, Transportation Compliance & Operations', 'VP Fleet Safety & Operations', 'VP Fleet Operations & Safety', 'VP Safety and Transportation'])
+      expect([t, lane(t)]).toEqual([t, 'PRIMARY_OPERATOR']);
+  });
+});
+
+describe('review S5 (2026-10-04): freight finance, contracts, HR and legal are never the operator', () => {
+  it('audit, payment, contracts, rates, spend and budget are commercial', () => {
+    for (const t of ['Director, Freight Audit', 'Freight Payment Manager', 'Director Transportation Contracts', 'Director, Freight Contracting', 'Director Transportation Rate Management', 'Director of Transportation Spend', 'Director Transportation Budget', 'Director Indirect Spend - Logistics', 'Director, Freight Audit & Payment'])
+      expect([t, lane(t)]).toEqual([t, 'PROCUREMENT_COMMERCIAL']);
+  });
+  it('HR, recruiting and legal are not operating roles', () => {
+    for (const t of ['Director Transportation HR', 'Transportation Recruiter', 'Driver Recruiting Manager - Fleet', 'Transportation Attorney'])
+      expect([t, lane(t)]).toEqual([t, 'NON_OPERATING']);
+  });
+  it('contract logistics at a 3PL is still the operation', () => {
+    expect(lane('Director, Contract Logistics', '3pl')).toBe('PRIMARY_OPERATOR');
+  });
+});
+
+describe('review S6 (2026-10-04): a non-freight "operations" is never the operator or the sponsor', () => {
+  it('at a carrier or 3PL, people / revenue / commercial / HR / customer operations are not the network', () => {
+    for (const t of ['VP People Operations', 'Director Revenue Operations', 'VP Commercial Operations', 'Director HR Operations', 'Director Customer Operations'])
+      expect([t, lane(t, '3pl')]).not.toEqual([t, 'PRIMARY_OPERATOR']);
+    expect(lane('VP Operations', 'carrier')).toBe('PRIMARY_OPERATOR');
+    expect(lane('Director, Terminal Operations', 'carrier')).toBe('PRIMARY_OPERATOR');
+  });
+  it('at a shipper, a VP Commercial Operations is not the sponsor', () => {
+    expect(isSponsor(readPerson('VP Commercial Operations'), 'VP Commercial Operations')).toBe(false);
+    expect(isSponsor(readPerson('Vice President Supply Chain'), 'Vice President Supply Chain')).toBe(true);
+    expect(isSponsor(readPerson('Director of Warehouse Operations'), 'Director of Warehouse Operations')).toBe(false);
+    expect(isSponsor(readPerson('Chief Supply Chain Officer'), 'Chief Supply Chain Officer')).toBe(true);
+  });
+});
+
+describe('review N4 (2026-10-04): tech scope words are freight words, not generic ones', () => {
+  it('"S&T" is transformation only beside a deployment / program / strategy word; elsewhere it is supply and transportation', () => {
+    expect(lane('Director, S&T Marine Transportation')).toBe('PRIMARY_OPERATOR');
+    expect(lane('Sr Director, S&T North America Deployment - Transportation, Safety & Equipment Service')).toBe('TRANSFORMATION_TECH');
+  });
+  it('order orchestration or customer visibility is not transportation tech', () => {
+    expect(readPerson('Director, Order Orchestration').ownership).toBe(0);
+    expect(readPerson('Director Customer Visibility').ownership).toBe(0);
+    expect(readPerson('Director, Transportation Visibility').ownership).toBe(2);
   });
 });
 
