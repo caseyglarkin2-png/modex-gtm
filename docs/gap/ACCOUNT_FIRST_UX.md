@@ -351,9 +351,11 @@ Rejected: Direction B's three-pane shell (a second sidebar; collapses into A at 
 ignorable); Direction C (the lanes stay the mental model, the drawer stays the only choose control, NOW grows past
 four screens on a phone).
 
-Open question for Casey, not blocking: the rig Chrome profile renders modex-gtm at about 175 % zoom. If that is
-Casey's own working zoom, a 1440 px laptop lays out at about 820 CSS px and the one-column layout is his real
-desktop; the two-column desktop grid is then a tablet-and-up enhancement, not the primary design.
+Resolved with Casey (2026-10-05): the 175 % zoom is his real working setting on his desktop monitor ("old and
+wacky"), so his desktop renders modex-gtm at about 820 CSS px. Design consequence: the ONE-COLUMN layout is the
+primary desktop design and must carry the whole decision (state, next action, chosen person, stack top 3, actions)
+in the first two screens; the two-column grid is an enhancement at 1100 CSS px and wider. Every post-change
+measurement is taken at 820 CSS px (his view) as well as 1440 and 390.
 
 ## 5. Contracts
 
