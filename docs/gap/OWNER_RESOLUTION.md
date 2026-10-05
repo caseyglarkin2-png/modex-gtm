@@ -313,7 +313,7 @@ own governed routes in the rig, and read back from the database.
 
 ## WHO truth maintenance and enterprise coverage (second seller-dogfood correction, 2026-10-05)
 
-STATUS: SHIPPED 2026-10-05 (branch feat/gap-who-truth; the merge and production SHAs are recorded in the receipt below once Vercel is READY). Builds on everything above; nothing above is redesigned. Driver: four classes of
+STATUS: SHIPPED 2026-10-05 (PR #397, merge 59c20e1a; Vercel production deployment dpl_9S2EDJcUHfF521G7zcGofT6nArhU READY on 59c20e1a3faeb1e04a29f3acf1968156207250d2; read-only production smoke in the receipt below). Builds on everything above; nothing above is redesigned. Driver: four classes of
 friction the #396 dogfood left: a person still at the company whose stored title is no longer true (Walmart), a
 hypothesis whose owner should depend on what the fact is (FedEx), enterprise families read through one company record
 (PepsiCo / Frito-Lay, Kroger banners, carrier subsidiaries), and legacy local suppression flags with no governed review
@@ -560,6 +560,14 @@ Persona created, no Account created:
 - Staged candidate (`AccountContactCandidate` 49, Walmart Inc.): Christian Burton, Senior Director, West
   Transportation Command Center, source his own profile, `recommended: false`, for Casey's review. Not in HubSpot (0
   results); no Persona.
+Production smoke after deploy (read-only, through Casey's session in the rig, GET routes only): the Walmart hypothesis
+answers 43 eligible, Doug Estrada at the top, Christina Mannella set aside `role_changed` with the verify sentence,
+`role currentness (1 set aside)` in the checked line, nobody preselected; the FedEx hypothesis answers 35 eligible
+with Lisa Lisson RECOMMENDED on thesis relevance (the air fact), the three do-not-contact GAP contacts listed with the
+legacy review available, the family line naming the three unlinked FedEx child rows as not read; Isaac Scott's review
+answers LEGACY_CONFLICT with the clear allowed and every plane listed in sentences. The hypotheses page and the FedEx
+drawer's owner panel (the RECOMMENDED badge and its sentence, the choice line) render in light and dark at desktop and
+390px with no horizontal overflow (screenshots kept in the session's scratch folder).
 Not done, by the boundary: no FedEx or Walmart owner selected; Isaac's flag not cleared (LEGACY_CONFLICT, Casey's
 click from the panel); no HubSpot rewrite; nobody deleted; no speculative account (Sub-Zero and World Market have no
 GAP account and were not created).
