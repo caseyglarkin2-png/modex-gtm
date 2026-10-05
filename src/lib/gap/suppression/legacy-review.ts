@@ -287,6 +287,22 @@ async function readPersona(prisma: PrismaLike, personaId: number): Promise<Perso
   return p ? (p as PersonaRow) : null;
 }
 
+/**
+ * The GAP mailbox's delivery failure notices for the address (read only through the existing Gmail helper). Not
+ * configured, or unreadable: 'not_read' (never a hit, never a reason to wait: Gmail is evidence, not an authority).
+ */
+async function defaultGmailDsnRead(email: string): Promise<{ found: number; newestAt: string | null } | 'not_read'> {
+  try {
+    const { gapGmailSender } = await import('../execution/gap-sender');
+    const sender = gapGmailSender();
+    if (!sender) return 'not_read';
+    const { countDeliveryFailures } = await import('@/lib/email/gmail-inbox');
+    return await countDeliveryFailures(sender, email);
+  } catch {
+    return 'not_read';
+  }
+}
+
 export async function loadSuppressionReview(prisma: PrismaLike, personaId: number, deps: SuppressionReviewDeps = {}): Promise<SuppressionReview | null> {
   const persona = await readPersona(prisma, personaId);
   if (!persona) return null;
@@ -299,7 +315,7 @@ async function reviewPersona(prisma: PrismaLike, persona: PersonaRow, deps: Supp
   const contactId = String(persona.hubspot_contact_id ?? '').trim() || null;
   const readContract = deps.contract ?? createClawdContractRead();
   const readHubSpot = deps.hubspot ?? createHubSpotSuppressionRead();
-  const readDsn = deps.gmailDsn ?? (async () => 'not_read' as const);
+  const readDsn = deps.gmailDsn ?? defaultGmailDsnRead;
 
   const [unsub, logs, ledger, contract, hubspot, dsn] = await Promise.all([
     email ? (prisma.unsubscribedEmail.findFirst({ where: { email: { equals: email, mode: 'insensitive' } }, select: { email: true, unsubscribed_at: true, reason: true } }) as Promise<{ email: string; unsubscribed_at: Date | string; reason: string | null } | null>) : Promise.resolve(null),
@@ -421,7 +437,7 @@ async function reviewPersona(prisma: PrismaLike, persona: PersonaRow, deps: Supp
 
   sources.push(
     dsn === 'not_read'
-      ? { source: 'gmail_dsn', verdict: 'not_read', detail: 'Gmail was not read for this review (the March sends went through Resend, not Gmail)', hard: false }
+      ? { source: 'gmail_dsn', verdict: 'not_read', detail: 'The GAP mailbox was not read for this review (not configured here, or it could not be read); the March 2026 sends went through Resend, not Gmail', hard: false }
       : dsn.found > 0
         ? { source: 'gmail_dsn', verdict: 'hit', detail: `${dsn.found} delivery failure notice${dsn.found === 1 ? '' : 's'} in Gmail`, at: dsn.newestAt, hard: false }
         : { source: 'gmail_dsn', verdict: 'clear', detail: 'no delivery failure notice in Gmail', hard: false },

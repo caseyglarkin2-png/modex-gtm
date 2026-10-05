@@ -85,7 +85,9 @@ export type GapAuditKind =
   | 'suppression.reviewed'
   | 'suppression.corrected'
   | 'suppression.correction_refused'
-  | 'suppression.correction_reverted';
+  | 'suppression.correction_reverted'
+  // A GAP record's name fragment completed from its own linked HubSpot contact (never a HubSpot write).
+  | 'person.record_corrected';
 
 export interface HypothesisEventInput {
   hypothesisId: string;

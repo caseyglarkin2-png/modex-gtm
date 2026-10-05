@@ -33,6 +33,10 @@ export interface BriefPersona {
   phone: string | null;
   role: string | null;
   doNotContact: boolean;
+  /** Contact currentness at the account (owner resolution): a departed or conflicted person is said before the call. */
+  employment?: { state: string; label: string; why: string } | null;
+  /** Role currentness: a changed or disputed role is said before the call; the effective title is the one to use. */
+  roleCurrentness?: { state: string; label: string; why: string; effectiveTitle: string | null } | null;
 }
 
 export interface BriefAccount {
@@ -102,6 +106,24 @@ export interface CallBrief {
 }
 
 export const LAST_DISPOSITIONS = 3;
+
+/** The employment and role reads for the call (read only; a read failure says nothing rather than failing the brief). */
+async function personaCurrentness(prisma: any, personaId: number, accountName: string, storedTitle: string | null): Promise<Pick<BriefPersona, 'employment' | 'roleCurrentness'>> {
+  try {
+    const [{ accountEmploymentContext, loadPersonaEmployment, personaRole }, { EMPLOYMENT_LABEL }, { ROLE_LABEL }] = await Promise.all([import('../people/employment-store'), import('../people/employment'), import('../people/role-currentness')]);
+    const now = new Date();
+    const ctx = await accountEmploymentContext(prisma, accountName).catch(() => ({ aliases: [] as string[], domains: [] as string[] }));
+    const emp = await loadPersonaEmployment(prisma, personaId, { now, aliasesFor: () => ctx.aliases, domainsFor: () => ctx.domains });
+    if (!emp) return { employment: null, roleCurrentness: null };
+    const role = personaRole(emp, storedTitle, { now, aliases: ctx.aliases, domains: ctx.domains });
+    return {
+      employment: { state: emp.state, label: EMPLOYMENT_LABEL[emp.state], why: emp.why },
+      roleCurrentness: { state: role.state, label: ROLE_LABEL[role.state], why: role.why, effectiveTitle: role.effectiveTitle },
+    };
+  } catch {
+    return { employment: null, roleCurrentness: null };
+  }
+}
 
 function asStringArray(value: unknown): string[] {
   return Array.isArray(value) ? value.filter((v): v is string => typeof v === 'string' && v.trim().length > 0) : [];
@@ -302,6 +324,7 @@ export async function callBrief(prisma: any, personaId: number, opts: { hypothes
       phone: nonBlank(persona.phone) ? persona.phone : null,
       role: nonBlank(persona.role_in_deal) ? persona.role_in_deal : null,
       doNotContact: persona.do_not_contact === true,
+      ...(await personaCurrentness(prisma, persona.id, persona.account_name, nonBlank(persona.title) ? persona.title : null)),
     },
     account: {
       name: persona.account?.name ?? persona.account_name,

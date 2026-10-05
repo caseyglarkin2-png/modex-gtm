@@ -261,5 +261,9 @@ export function readRole(input: { accountName: string; aliases?: readonly string
   if (differing) return { ...unverified([differing], `${says(differing)} names a different role from the stored ${quoted(fallbackTitle)} at ${accountName}; a provider row alone neither confirms nor blocks. Verify the current role before ranking on it.`), verifyNeeded: true };
   const agreeing = newest(supporting.filter((e) => e.kind !== 'crm' && fallbackTitle && same(e.title, fallbackTitle)));
   if (agreeing) return { state: 'ROLE_CURRENT_LIKELY', why: `Supporting evidence agrees with the stored role at ${accountName}: ${says(agreeing)}.`, ...base, effectiveTitle: fallbackTitle, titleSource: fallbackSource, usableForRanking: true, decidedBy: [agreeing], verifyNeeded: false };
+  // Nothing stored and nothing in the CRM, but a supporting source names a title (a GAP record with no title and a
+  // verification from an industry bio): that title is the effective one, unverified, rather than no title at all.
+  const onlySupporting = !fallbackTitle ? newest(supporting.filter((e) => e.kind !== 'crm' && !!e.title)) : null;
+  if (onlySupporting) return { state: 'ROLE_UNVERIFIED', why: `No role is stored for them at ${accountName}; a supporting source names one (${says(onlySupporting)}). Verify when it matters.`, ...base, effectiveTitle: onlySupporting.title, titleSource: 'crm', usableForRanking: true, decidedBy: [onlySupporting], verifyNeeded: true };
   return unverified(crm ? [crm] : []);
 }
