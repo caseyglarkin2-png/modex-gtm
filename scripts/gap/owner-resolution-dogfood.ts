@@ -6,10 +6,12 @@
  *
  *   npx tsx --env-file=<.env.local> scripts/gap/owner-resolution-dogfood.ts "PepsiCo" "FedEx" ...
  *   npx tsx --env-file=<.env.local> scripts/gap/owner-resolution-dogfood.ts --hypothesis cmuuii2n80002l504refjy0od "FedEx"
+ *   ... --entity-type 3pl    read the account under that kind (read-only; the row's vertical is unchanged)
  *   ... --json    the raw resolutions
  */
 import { PrismaClient } from '@prisma/client';
 import { loadOwnerResolution } from '../../src/lib/gap/people/owner-resolution-load';
+import type { EntityType } from '../../src/lib/gap/entity/fit';
 
 const prisma = new PrismaClient();
 
@@ -24,10 +26,13 @@ async function resolveName(q: string): Promise<string | null> {
 
 async function main() {
   const argv = process.argv.slice(2);
-  const flags = new Set(argv.filter((a) => a.startsWith('--') && a !== '--hypothesis'));
+  const flags = new Set(argv.filter((a) => a.startsWith('--') && a !== '--hypothesis' && a !== '--entity-type'));
   const hi = argv.indexOf('--hypothesis');
   const hypothesisId = hi >= 0 ? argv[hi + 1] : null;
-  const names = argv.filter((a, i) => !a.startsWith('--') && !(hi >= 0 && i === hi + 1));
+  const ei = argv.indexOf('--entity-type');
+  const entityType = ei >= 0 ? (argv[ei + 1] as EntityType) : null;
+  const valued = new Set([hi, ei].filter((i) => i >= 0).map((i) => i + 1));
+  const names = argv.filter((a, i) => !a.startsWith('--') && !valued.has(i));
   const now = new Date();
   const out: unknown[] = [];
   try {
@@ -38,7 +43,7 @@ async function main() {
         continue;
       }
       const t0 = Date.now();
-      const r = await loadOwnerResolution(prisma, { accountName: name, purpose: hypothesisId ? 'HYPOTHESIS_ACTIVATION' : 'COLD_FIRST_TOUCH', hypothesisId, now });
+      const r = await loadOwnerResolution(prisma, { accountName: name, purpose: hypothesisId ? 'HYPOTHESIS_ACTIVATION' : 'COLD_FIRST_TOUCH', hypothesisId, now, entityType });
       if (!r.ok) {
         console.log(`\n## ${name}: ${r.reason}`);
         continue;
@@ -46,7 +51,7 @@ async function main() {
       const x = r.resolution;
       out.push({ account: name, hubspot: r.hubspot, resolution: x });
       if (flags.has('--json')) continue;
-      console.log(`\n## ${name} (${x.account.kind}${x.account.entityType ? `, ${x.account.entityType}` : ''}) · ${Date.now() - t0}ms`);
+      console.log(`\n## ${name} (${x.account.kind}${x.account.entityType ? `, ${x.account.entityType}` : ''}${entityType ? ', read under the dogfood override' : ''}) · ${Date.now() - t0}ms`);
       console.log(`  HubSpot: ${r.hubspot.via} (${r.hubspot.detail}); people read ${r.people.length}`);
       console.log(`  checked: ${x.checked.join(' · ')}`);
       if (x.hypothesis) console.log(`  hypothesis ${x.hypothesis.id} (${x.hypothesis.status}, person ${x.hypothesis.primaryPersonaId ?? 'none'}): the fact is ${x.hypothesis.factLabel}`);

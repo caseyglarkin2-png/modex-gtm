@@ -11,6 +11,7 @@
  * House `prisma: any` glue.
  */
 import { typeFromVertical } from '../account-intel/build';
+import type { EntityType } from '../entity/fit';
 import { resolveAccountHubSpotCompanies, type AccountCompanyDeps } from './account-company';
 import { loadEmployment, type HubSpotEmploymentProps } from './employment-store';
 import { loadHubSpotPeopleForCompanies, type HubSpotPeopleReads, type HubSpotPerson } from './hubspot-people';
@@ -26,6 +27,11 @@ export interface LoadOwnerResolutionInput {
   purpose: OwnerPurpose;
   hypothesisId?: string | null;
   now: Date;
+  /**
+   * Read-only dogfood override of the account kind (the row's vertical is the truth the UI reads; many carrier and
+   * 3PL rows still carry "Unknown"). The routes never pass it; the dogfood script does, to show the carrier doctrine.
+   */
+  entityType?: EntityType | null;
 }
 
 export interface LoadOwnerResolutionDeps {
@@ -122,7 +128,7 @@ export async function loadOwnerResolution(prisma: PrismaLike, input: LoadOwnerRe
   ];
 
   const resolution = resolveOwner({
-    account: { name: account.name, entityType: typeFromVertical(account.vertical), aliases: aliasList },
+    account: { name: account.name, entityType: input.entityType ?? typeFromVertical(account.vertical), aliases: aliasList },
     purpose: input.purpose,
     hypothesis: hypothesis ? { id: hypothesis.id, status: hypothesis.status, primaryPersonaId: hypothesis.primary_persona_id ?? null, observation: hypothesis.observation ?? '', problemHypothesis: hypothesis.problem_hypothesis ?? null, problemFamily: hypothesis.problem_family ?? null } : null,
     candidates: inputs,
