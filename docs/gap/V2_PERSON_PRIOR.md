@@ -311,3 +311,20 @@ mixed titles ("Director, Transportation (Safety & Compliance)", "Director Transp
 commercial; "Director, Fleet & Transportation Compliance" (function and function-scoped compliance) reads as an
 operator, the same shape as "VP Logistics and Transportation Compliance", for Casey to rule on; the brief reads a
 persona's location only through the company's associated contacts while the cockpit reads it by contact id.
+
+## Owner resolution, the carrier doctrine and contact currentness (2026-10-05)
+
+STATUS: see `docs/gap/OWNER_RESOLUTION.md` (canonical). Two amendments to this prior landed there:
+
+- **Account-type-aware lanes.** For a carrier, 3PL or terminal operator the physical network is the product: network,
+  hub, terminal, station, linehaul, surface, ground, air network, operations planning and engineering, network
+  planning, sortation, facility operations and operations engineering are PRIMARY operators; operations technology
+  with a freight scope is TRANSFORMATION TECH; a bare "Operations" title counts only with a stated scope (district or
+  station is SITE); enterprise, North America and network scope rank above a local station; the air side sits behind
+  the ground network owners on named ownership. Shipper rules are unchanged. A reviewed constant sets divested
+  entities aside (FedEx Supply Chain) and flags separate operating companies with a caution.
+- **Currentness is a WHO dimension.** WHO eligibility = responsibility fit AND current employment at the account; the
+  departed and the conflicted are set aside before the ranking with the reason, and among the eligible, currentness
+  breaks ties after scope and seniority. A HubSpot modified date and an email domain never prove currentness.
+
+<!-- verified:2026-10-05 -->
