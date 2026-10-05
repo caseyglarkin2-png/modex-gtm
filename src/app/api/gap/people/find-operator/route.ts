@@ -36,6 +36,7 @@ export async function POST(request: NextRequest) {
     ...slots.map((c) => c.name),
     ...res.people.map((p) => p.name),
     ...res.resolution.others.flatMap((o) => o.names.map(bareName)),
+    ...(res.resolution.knownNames ?? []),
   ];
   const r = await findOperator(prisma, { accountName: parsed.data.accountName, known, actor: g.email, now });
   return NextResponse.json(r);

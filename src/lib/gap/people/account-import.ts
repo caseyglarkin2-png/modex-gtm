@@ -149,16 +149,20 @@ export async function importHubSpotContactToAccount(prisma: PrismaLike, input: A
   const optedOut = String(p.hs_email_optout ?? '').toLowerCase() === 'true';
   const linkedin = clean(p.hs_linkedin_url) ?? clean(p.linkedin_url);
   const notes: string[] = [];
-  // An opted-out contact is never imported or linked by this action: the unsubscribe helper is the only writer of
-  // do_not_contact, and owner resolution already sets an opted-out HubSpot person aside with the reason.
-  if (optedOut) return { ok: false, reason: 'contact_opted_out', detail: `${name} opted out of email in HubSpot. GAP will not add them as a contact to act on; nothing was written.` };
-
-  // Match an existing persona: by HubSpot id first (an explicit link), then by email at this account, then anywhere.
+  // Match an existing persona: by HubSpot id first (an explicit link), then by email at this account (a legacy
+  // duplicate that is do-not-contact or bounced never wins over the live row), then anywhere.
   const byId: Row | null = await prisma.persona.findFirst({ where: { hubspot_contact_id: id }, select: PERSONA_SELECT });
-  const byEmailHere: Row | null = !byId && email ? await prisma.persona.findFirst({ where: { account_name: account.name, email: { equals: email, mode: 'insensitive' } }, select: PERSONA_SELECT }) : null;
+  const byEmailHere: Row | null = !byId && email ? await prisma.persona.findFirst({ where: { account_name: account.name, email: { equals: email, mode: 'insensitive' } }, select: PERSONA_SELECT, orderBy: [{ do_not_contact: 'asc' }, { updated_at: 'desc' }] }) : null;
   const byEmailAnywhere: Row | null = !byId && !byEmailHere && email ? await prisma.persona.findFirst({ where: { email: { equals: email, mode: 'insensitive' } }, select: PERSONA_SELECT, orderBy: { id: 'asc' } }) : null;
   const existing = byId ?? byEmailHere ?? byEmailAnywhere;
   const matchedBy = byId ? 'hubspot_contact_id' : byEmailHere ? 'email at the account' : byEmailAnywhere ? 'email at another account' : null;
+  // An opted-out contact is never imported or linked by this action: the unsubscribe helper is the only writer of
+  // do_not_contact, and owner resolution already sets an opted-out HubSpot person aside with the reason. A contact
+  // that is ALREADY this account's linked GAP contact still answers `already` (the second click stays idempotent),
+  // with the opt-out noted.
+  const alreadyLinkedHere = !!existing && existing.account_name === account.name && String(existing.hubspot_contact_id ?? '') === id;
+  if (optedOut && !alreadyLinkedHere) return { ok: false, reason: 'contact_opted_out', detail: `${name} opted out of email in HubSpot. GAP will not add them as a contact to act on; nothing was written.` };
+  if (optedOut) notes.push('Opted out of email in HubSpot since they were linked (left as it is: GAP will not contact them).');
 
   if (existing) {
     if (existing.account_name !== account.name) {
@@ -173,6 +177,7 @@ export async function importHubSpotContactToAccount(prisma: PrismaLike, input: A
       });
       await (deps.sync ?? defaultSync)({ accountNames: [account.name, existing.account_name], personaIds: [existing.id] }).catch(() => undefined);
       notes.push(`Moved from the ${existing.account_name} account (a ${account.name} family account) with no history there.`);
+      if (existing.hubspot_contact_id && String(existing.hubspot_contact_id) !== id) notes.push(`The GAP record is linked to a different HubSpot contact (${existing.hubspot_contact_id}); the one you clicked (${id}) was not linked over it.`);
       if (existing.do_not_contact) notes.push('The GAP record carries do not contact (left as it is: review it deliberately).');
       if (/bounce|invalid/i.test(String(existing.email_status ?? ''))) notes.push(`The GAP record's email status is ${existing.email_status} (left as it is).`);
       return { ok: true, status: 'rehomed', personaId: existing.id, accountName: account.name, name: existing.name, title: existing.title ?? title, hasEmail: !!(existing.email ?? email), from: existing.account_name, auditId, notes };
@@ -188,6 +193,7 @@ export async function importHubSpotContactToAccount(prisma: PrismaLike, input: A
       return auditRow(tx, input, { personaId: existing.id, hubspotContactId: id, accountName: account.name, status: already ? 'already' : 'linked', matchedBy, companyIds: match });
     });
     if (!already) await (deps.sync ?? defaultSync)({ accountNames: [account.name], personaIds: [existing.id] }).catch(() => undefined);
+    if (existing.hubspot_contact_id && String(existing.hubspot_contact_id) !== id) notes.push(`The GAP record is linked to a different HubSpot contact (${existing.hubspot_contact_id}); the one you clicked (${id}) was not linked over it.`);
     if (existing.do_not_contact) notes.push('The GAP record carries do not contact (left as it is: review it deliberately).');
     return { ok: true, status: already ? 'already' : 'linked', personaId: existing.id, accountName: account.name, name: existing.name, title: existing.title ?? title, hasEmail: !!(existing.email ?? email), auditId, notes };
   }

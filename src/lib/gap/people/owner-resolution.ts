@@ -116,6 +116,8 @@ export interface OwnerResolution {
   headline: string;
   /** People considered and set aside, with the exact reason (a departed favorite is shown here, never silently dropped). */
   excluded: OwnerExclusion[];
+  /** Every name on record (GAP, HubSpot, staged, relationships), for research dedupe: never re-stage a known person. */
+  knownNames: string[];
   /** Everyone else on record who is not an eligible owner for this purpose, by lane (the buyer map, compact). */
   others: Array<{ lane: PersonLane; label: string; count: number; names: string[] }>;
   sponsor: OwnerCandidate | null;
@@ -315,9 +317,9 @@ export function resolveOwner(input: OwnerResolutionInput): OwnerResolution {
   const hubspotNote = input.hubspot.via === 'none' ? ' HubSpot people were not read (no HubSpot company resolves for this account).' : input.hubspot.via === 'unreadable' ? ' HubSpot people could not be read just now.' : input.hubspot.truncated ? ` HubSpot returned only the first ${input.hubspot.count} associated contacts: the owner may be beyond them.` : '';
   const headline =
     nextStep === 'use'
-      ? `Best person on record for ${label}: ${who(top!)}. Use them, or choose someone else.`
+      ? `Best person on record for ${label}: ${who(top!)}. Use them, or choose someone else.${hubspotNote}`
       : nextStep === 'add_and_use'
-        ? `Best person on record for ${label} is in HubSpot, not yet a GAP contact: ${who(top!)}. Add them to GAP and use them, or choose someone else.`
+        ? `Best person on record for ${label} is in HubSpot, not yet a GAP contact: ${who(top!)}. Add them to GAP and use them, or choose someone else.${hubspotNote}`
         : nextStep === 'choose'
           ? `${eligible.length} plausible owners for ${label}: choose one. GAP does not pick.`
           : `No current direct ${carrier ? 'network' : 'transportation'} operator on record for ${label} (${built.length} ${built.length === 1 ? 'person' : 'people'} considered${excluded.length ? `, ${excluded.length} set aside` : ''}).${hubspotNote} Find the operator.`;
@@ -342,6 +344,7 @@ export function resolveOwner(input: OwnerResolutionInput): OwnerResolution {
     nextStep,
     headline,
     excluded,
+    knownNames: [...new Set(built.map((r) => r.c.name).filter((n) => n && !/^\(no name/.test(n)))],
     others: [...othersByLane.entries()].sort((a, b) => LANE_ORDER.indexOf(a[0]) - LANE_ORDER.indexOf(b[0])).map(([lane, names]) => ({ lane, label: LANE_LABEL[lane], count: names.length, names: names.slice(0, 6) })),
     sponsor,
     tech,

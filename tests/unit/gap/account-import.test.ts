@@ -169,3 +169,28 @@ describe('an opted-out HubSpot contact is refused, never created as do-not-conta
     expect(created[0]).not.toHaveProperty('do_not_contact');
   });
 });
+
+describe('review NICE: the match order, idempotence under a later opt-out, and a different linked id are all said', () => {
+  it('an email match at the account prefers a live row over a legacy do-not-contact duplicate (the order is asked of the database)', async () => {
+    const { prisma } = db({ accounts: [PEPSI], personas: [{ id: 43, account_name: 'PepsiCo', name: 'Dr. Isaac Scott', email: 'isaac.scott@pepsico.com', do_not_contact: true, email_status: 'bounced', hubspot_contact_id: null }] });
+    const d = deps(reads({ [ISAAC.id]: ISAAC }, { [ISAAC.id]: ['56630459299'] }));
+    await importHubSpotContactToAccount(prisma, { accountName: 'PepsiCo', hubspotContactId: ISAAC.id, actor: 'c', now: NOW }, d);
+    const emailCall = prisma.persona.findFirst.mock.calls.find((c: any[]) => c[0]?.where?.account_name === 'PepsiCo');
+    expect(emailCall?.[0]?.orderBy).toEqual([{ do_not_contact: 'asc' }, { updated_at: 'desc' }]);
+  });
+  it('a contact that is already this account\'s linked GAP contact and has since opted out still answers `already`, with the note', async () => {
+    const { prisma, created } = db({ accounts: [PEPSI], personas: [{ id: 13, account_name: 'PepsiCo', name: 'Isaac Scott', email: 'isaac.scott@pepsico.com', do_not_contact: false, email_status: 'unverified', hubspot_contact_id: ISAAC.id }] });
+    const OUT = { ...ISAAC, properties: { ...ISAAC.properties, hs_email_optout: 'true' } };
+    const r = await importHubSpotContactToAccount(prisma, { accountName: 'PepsiCo', hubspotContactId: OUT.id, actor: 'c', now: NOW }, deps(reads({ [OUT.id]: OUT }, { [OUT.id]: ['56630459299'] })));
+    expect(r).toMatchObject({ ok: true, status: 'already', personaId: 13 });
+    expect(r.ok && r.notes.join(' ')).toMatch(/Opted out of email in HubSpot since they were linked/);
+    expect(created).toEqual([]);
+  });
+  it('a persona matched by email that is linked to a different HubSpot contact keeps its link, and the note says which id was not linked', async () => {
+    const { prisma, updates } = db({ accounts: [PEPSI], personas: [{ id: 13, account_name: 'PepsiCo', name: 'Isaac Scott', email: 'isaac.scott@pepsico.com', do_not_contact: false, email_status: 'unverified', hubspot_contact_id: '999' }] });
+    const r = await importHubSpotContactToAccount(prisma, { accountName: 'PepsiCo', hubspotContactId: ISAAC.id, actor: 'c', now: NOW }, deps(reads({ [ISAAC.id]: ISAAC }, { [ISAAC.id]: ['56630459299'] })));
+    expect(r).toMatchObject({ ok: true, status: 'already', personaId: 13 });
+    expect(r.ok && r.notes.join(' ')).toMatch(/linked to a different HubSpot contact \(999\); the one you clicked \(219885493392\) was not linked over it/);
+    expect(updates.map((u: any) => u.data.hubspot_contact_id).filter(Boolean)).toEqual([]);
+  });
+});
