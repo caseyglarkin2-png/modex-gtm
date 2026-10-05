@@ -5,7 +5,7 @@
  * asserts nothing.
  */
 import { describe, expect, it, vi } from 'vitest';
-import { evidenceFromFields, loadEmployment, recordEmploymentCorrection, recordEmploymentVerification } from '@/lib/gap/people/employment-store';
+import { evidenceFromFields, loadEmployment, recordEmploymentCorrection, recordEmploymentVerification, type HubSpotEmploymentProps } from '@/lib/gap/people/employment-store';
 import { buildEmploymentPrompt, parseEmploymentAnswer, verifyEmployment } from '@/lib/gap/people/employment-verify';
 
 const NOW = new Date('2026-10-05T12:00:00Z');
@@ -65,7 +65,7 @@ describe('loadEmployment: the CRM alone is unverified; HubSpot props and disposi
   });
   it('live HubSpot props: a last-modified date does not confirm; an Apollo moved_out raises a conflict', async () => {
     const { prisma } = db();
-    const hs = new Map([['218964806213', { company: 'Heb', title: 'transportation & reverse logistics', email: 'socha.dakota@heb.com', lastModifiedAt: '2026-08-18T17:45:54Z', apolloEmploymentStatus: null, apolloVerifiedAt: null }]]);
+    const hs = new Map<string, HubSpotEmploymentProps>([['218964806213', { company: 'Heb', title: 'transportation & reverse logistics', email: 'socha.dakota@heb.com', lastModifiedAt: '2026-08-18T17:45:54Z', apolloEmploymentStatus: null, apolloVerifiedAt: null }]]);
     expect((await loadEmployment(prisma, [1306], { now: NOW, hubspot: hs })).get(1306)!.state).toBe('CURRENT_UNVERIFIED');
     hs.set('218964806213', { ...hs.get('218964806213')!, apolloEmploymentStatus: 'moved_out', apolloVerifiedAt: '2026-09-11T00:00:00Z' });
     expect((await loadEmployment(prisma, [1306], { now: NOW, hubspot: hs })).get(1306)!.state).toBe('EMPLOYMENT_CONFLICT');

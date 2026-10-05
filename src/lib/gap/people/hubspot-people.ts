@@ -19,6 +19,13 @@ export interface HubSpotPerson {
   hasEmail: boolean;
   /** HubSpot says they opted out of email (hs_email_optout): never a WHO pick. */
   optedOut: boolean;
+  /** The CRM company field (for the entity boundary and the currentness read; never identity). Absent when unset. */
+  company?: string | null;
+  /** HubSpot lastmodifieddate: shown as weak evidence, never proof of current employment. */
+  lastModifiedAt?: string | null;
+  /** clawd's Apollo free sweep writes these (hubspot-ops): supporting employment evidence. */
+  apolloEmploymentStatus?: string | null;
+  apolloVerifiedAt?: string | null;
 }
 
 export interface HubSpotPeopleReads {
@@ -26,7 +33,7 @@ export interface HubSpotPeopleReads {
   readContacts(ids: string[]): Promise<Array<{ id: string; properties: Record<string, string | null | undefined> }>>;
 }
 
-const PROPS = ['firstname', 'lastname', 'jobtitle', 'city', 'state', 'country', 'email', 'hs_email_optout'];
+const PROPS = ['firstname', 'lastname', 'jobtitle', 'city', 'state', 'country', 'email', 'hs_email_optout', 'company', 'lastmodifieddate', 'apollo_employment_status', 'apollo_verified_at'];
 
 export const hubspotPeopleReads: HubSpotPeopleReads = {
   async contactIdsForCompany(companyId, cap) {
@@ -73,6 +80,30 @@ export async function loadHubSpotPeople(companyId: string | null, reads: HubSpot
   return value;
 }
 
+/**
+ * The people of several HubSpot companies (an account whose identity resolves to the linked company plus HubSpot's
+ * own duplicates of it), deduplicated by contact id, under one total cap. Null when every read failed.
+ */
+export async function loadHubSpotPeopleForCompanies(companyIds: readonly string[], reads: HubSpotPeopleReads = hubspotPeopleReads, cap = 1000, now = Date.now()): Promise<{ people: HubSpotPerson[]; truncated: boolean } | null> {
+  const ids = [...new Set(companyIds.map((x) => String(x ?? '').trim()).filter(Boolean))];
+  if (!ids.length) return null;
+  const seen = new Map<string, HubSpotPerson>();
+  let truncated = false;
+  let any = false;
+  for (const id of ids) {
+    const r = await loadHubSpotPeople(id, reads, Math.max(1, cap - seen.size), now);
+    if (!r) continue;
+    any = true;
+    truncated = truncated || r.truncated;
+    for (const p of r.people) if (!seen.has(p.id)) seen.set(p.id, p);
+    if (seen.size >= cap) {
+      truncated = true;
+      break;
+    }
+  }
+  return any ? { people: [...seen.values()], truncated } : null;
+}
+
 async function readPeople(companyId: string, reads: HubSpotPeopleReads, cap: number): Promise<{ people: HubSpotPerson[]; truncated: boolean } | null> {
   try {
     const { ids, truncated } = await reads.contactIdsForCompany(companyId, cap);
@@ -81,7 +112,13 @@ async function readPeople(companyId: string, reads: HubSpotPeopleReads, cap: num
     const people = rows.map(({ id, properties: p }) => {
       const name = [clean(p.firstname), clean(p.lastname)].filter(Boolean).join(' ') || '(no name in HubSpot)';
       const location = [clean(p.city), clean(p.state), clean(p.country)].filter(Boolean).join(', ') || null;
-      return { id, name, title: clean(p.jobtitle), location, hasEmail: !!clean(p.email), optedOut: String(p.hs_email_optout ?? '').toLowerCase() === 'true' };
+      const person: HubSpotPerson = { id, name, title: clean(p.jobtitle), location, hasEmail: !!clean(p.email), optedOut: String(p.hs_email_optout ?? '').toLowerCase() === 'true' };
+      // Only when HubSpot carried them (the shape stays exactly what the older readers expect otherwise).
+      if (clean(p.company)) person.company = clean(p.company);
+      if (clean(p.lastmodifieddate)) person.lastModifiedAt = clean(p.lastmodifieddate);
+      if (clean(p.apollo_employment_status)) person.apolloEmploymentStatus = clean(p.apollo_employment_status);
+      if (clean(p.apollo_verified_at)) person.apolloVerifiedAt = clean(p.apollo_verified_at);
+      return person;
     });
     return { people, truncated };
   } catch {
