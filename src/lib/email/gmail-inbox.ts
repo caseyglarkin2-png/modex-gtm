@@ -627,6 +627,31 @@ export async function listMailboxIds(
 }
 
 /**
+ * Delivery failure notices for one address in this mailbox (the legacy suppression review, 2026-10-05): Gmail's
+ * mailer-daemon bounces that name the address, metadata only, at most `max`. Read only; throws on a read failure
+ * (the caller reports the plane as not read).
+ */
+export async function countDeliveryFailures(sender: GmailSender, address: string, max = 5): Promise<{ found: number; newestAt: string | null }> {
+  const accessToken = await accessTokenForSender(sender);
+  const mailbox = sender.userEmail.toLowerCase();
+  const email = address.trim().toLowerCase();
+  const listUrl = new URL(`${GMAIL_API}/users/${encodeURIComponent(mailbox)}/messages`);
+  listUrl.searchParams.set('q', `from:mailer-daemon "${email}"`);
+  listUrl.searchParams.set('includeSpamTrash', 'true');
+  listUrl.searchParams.set('maxResults', String(max));
+  const res = await fetch(listUrl.toString(), { headers: { Authorization: `Bearer ${accessToken}` }, signal: AbortSignal.timeout(15_000) });
+  if (!res.ok) throw new Error(`Gmail delivery-failure list failed (${res.status})`);
+  const data = (await res.json()) as { messages?: GmailMessage[]; resultSizeEstimate?: number };
+  const ids = (data.messages ?? []).map((m) => m.id);
+  if (!ids.length) return { found: 0, newestAt: null };
+  const first = await fetch(`${GMAIL_API}/users/${encodeURIComponent(mailbox)}/messages/${encodeURIComponent(ids[0])}?format=minimal`, { headers: { Authorization: `Bearer ${accessToken}` }, signal: AbortSignal.timeout(15_000) });
+  if (!first.ok) throw new Error(`Gmail delivery-failure read failed (${first.status})`);
+  const m = (await first.json()) as { internalDate?: string };
+  const newestAt = m.internalDate ? new Date(Number(m.internalDate)).toISOString() : null;
+  return { found: ids.length, newestAt };
+}
+
+/**
  * Ops closeout 13B: messages in this mailbox's Sent addressed to `recipient`
  * between two epochs (at most 10, metadata only). Used to reconcile a direct
  * send whose Gmail answer was lost. Throws on any read failure.

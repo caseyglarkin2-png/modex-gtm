@@ -21,8 +21,28 @@ import { badBody, intakeGuard } from '@/lib/gap/intake/route-helpers';
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
 
+const Correction = z
+  .object({
+    status: z.enum(['role_changed', 'current', 'left']),
+    newTitle: z.string().trim().max(200).nullable().optional(),
+    newCompany: z.string().trim().max(200).nullable().optional(),
+    sourceUrl: z.string().trim().max(500).nullable().optional(),
+    note: z.string().trim().max(1000).nullable().optional(),
+  })
+  .strict();
+
 const Body = z.union([
   z.object({ personaId: z.number().int().positive() }).strict(),
+  // Casey's own word about a HubSpot-only person (no GAP record): recorded as a human row, never a search.
+  z
+    .object({
+      hubspotContactId: z.string().trim().regex(/^\d{1,40}$/),
+      accountName: z.string().trim().min(1).max(200),
+      name: z.string().trim().min(1).max(200),
+      title: z.string().trim().max(200).nullable(),
+      correction: Correction,
+    })
+    .strict(),
   z
     .object({
       hubspotContactId: z.string().trim().regex(/^\d{1,40}$/),
@@ -54,6 +74,26 @@ export async function POST(request: NextRequest) {
   const { hubspotContactId, accountName, name, title } = parsed.data;
   const ctx = await accountEmploymentContext(prisma, accountName);
   const companyDomains = ctx.domains;
+  if ('correction' in parsed.data) {
+    const c = parsed.data.correction;
+    const url = (c.sourceUrl ?? '').trim() || null;
+    if (url && !/^https?:\/\/\S+\.\S+/i.test(url)) return NextResponse.json({ error: 'invalid_url' }, { status: 400 });
+    const human = {
+      verdict: (c.status === 'role_changed' ? 'different_role' : c.status === 'left' ? 'left' : 'same_role') as 'different_role' | 'left' | 'same_role',
+      company: c.status === 'left' ? (c.newCompany ?? '').trim() || null : accountName,
+      title: (c.newTitle ?? '').trim() || (c.status === 'current' ? title : null),
+      priorTitle: c.status === 'role_changed' ? title : null,
+      sourceUrl: url,
+      sourceDate: null,
+      confidence: 'high' as const,
+      summary: (c.note ?? '').trim() || null,
+      provider: 'human' as const,
+    };
+    const rec = await recordHubSpotContactRoleVerification(prisma, { hubspotContactId, accountName, name, storedTitle: title, actor: g.email, now, verification: human, companyDomains });
+    const evidence = (await loadHubSpotContactRoleEvidence(prisma, [hubspotContactId])).get(hubspotContactId) ?? [];
+    const read = readRole({ accountName, aliases: ctx.aliases, domains: ctx.domains, storedTitle: title, evidence, now });
+    return NextResponse.json({ correction: c, read, recorded: rec.recorded, auditId: rec.auditId }, { status: 201 });
+  }
   const v = await verifyEmployment({ name, title, company: accountName, companyDomains });
   const rec = await recordHubSpotContactRoleVerification(prisma, { hubspotContactId, accountName, name, storedTitle: title, actor: g.email, now, verification: v, companyDomains });
   const evidence = (await loadHubSpotContactRoleEvidence(prisma, [hubspotContactId])).get(hubspotContactId) ?? [];

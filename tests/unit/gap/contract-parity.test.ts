@@ -396,7 +396,7 @@ describe('a callBrief satisfies the client CallBrief', () => {
   it('runtime: the persona, account, hypothesis, disposition and BID keys are exactly the client keys', async () => {
     const brief = (await callBrief(briefPrisma(), 7)) as ServiceCallBrief;
     expect(Object.keys(brief).sort()).toEqual(['account', 'afterAcknowledgementQuestions', 'hypothesis', 'lastDispositions', 'openBids', 'persona', 'suggestedQuestions']);
-    expect(Object.keys(brief.persona).sort()).toEqual(['doNotContact', 'email', 'id', 'name', 'personaKey', 'phone', 'role', 'title']);
+    expect(Object.keys(brief.persona).sort()).toEqual(['doNotContact', 'email', 'employment', 'id', 'name', 'personaKey', 'phone', 'role', 'roleCurrentness', 'title']);
     expect(Object.keys(brief.account).sort()).toEqual(['hubspotCompanyId', 'name', 'tier', 'vertical']);
     expect(Object.keys(brief.hypothesis!).sort()).toEqual([
       'confidence', 'contraryEvidence', 'falsificationQuestions', 'id', 'impactHypotheses', 'observation', 'predictedBuyerLanguage',

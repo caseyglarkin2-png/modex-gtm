@@ -62,6 +62,16 @@ export function PreCallBrief({ brief, hideContact = false }: PreCallBriefProps) 
             {personaName}
             {persona?.title ? <span className="ml-2 text-sm font-normal text-[var(--muted-foreground)]">{persona.title}</span> : null}
           </p>
+          {persona?.employment && persona.employment.state !== 'CURRENT_UNVERIFIED' ? (
+            <p className={`text-xs ${/LEFT|CONFLICT/.test(persona.employment.state) ? 'text-amber-700 dark:text-amber-400' : 'text-[var(--muted-foreground)]'}`} data-testid="brief-employment">
+              {persona.employment.label}. {persona.employment.why}
+            </p>
+          ) : null}
+          {persona?.roleCurrentness && persona.roleCurrentness.state !== 'ROLE_UNVERIFIED' ? (
+            <p className={`text-xs ${/CHANGED|CONFLICT/.test(persona.roleCurrentness.state) ? 'text-amber-700 dark:text-amber-400' : 'text-[var(--muted-foreground)]'}`} data-testid="brief-role">
+              {persona.roleCurrentness.label}. {persona.roleCurrentness.why}
+            </p>
+          ) : null}
           <p className="text-xs text-[var(--muted-foreground)]">
             {hideContact ? (
               <span data-testid="brief-contact-hidden">Contact details show after GAP clears a call</span>

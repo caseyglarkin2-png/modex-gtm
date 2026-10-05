@@ -105,7 +105,7 @@ describe('callBrief', () => {
     const brief = await callBrief(prisma, 7);
     expect(brief).not.toBeNull();
     expect(brief!.persona).toEqual({
-      id: 7, personaKey: 'acme:jordan', name: 'Jordan Lee', title: 'Director of Yard Ops', email: 'jordan@acme.example', phone: '+1 555 0100', role: 'champion', doNotContact: false,
+      id: 7, personaKey: 'acme:jordan', name: 'Jordan Lee', title: 'Director of Yard Ops', email: 'jordan@acme.example', phone: '+1 555 0100', role: 'champion', doNotContact: false, employment: null, roleCurrentness: null,
     });
     expect(brief!.account).toEqual({ name: 'Acme Logistics', hubspotCompanyId: 'c-1', tier: 'Tier 1', vertical: 'CPG' });
     expect(brief!.hypothesis).toMatchObject({

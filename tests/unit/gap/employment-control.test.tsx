@@ -114,10 +114,10 @@ describe('CURRENT ROLE IS WRONG stays: status role_changed with the corrected ti
 });
 
 describe('a HubSpot-only person mounts with hubspotContactId + title and verifies through /api/gap/people/verify-role', () => {
-  it('shows only VERIFY CURRENT ROLE, posts the HubSpot body, and reads the outcome from read', async () => {
+  it('offers VERIFY, ROLE IS WRONG and LEFT; verify posts the HubSpot body and reads the outcome from read', async () => {
     render(<EmploymentControl hubspotContactId="7001" name="C M" accountName={WALMART} title={STORED} />);
-    expect(screen.queryByTestId('employment-left')).toBeNull();
-    expect(screen.queryByTestId('employment-wrong-role')).toBeNull();
+    expect(screen.getByTestId('employment-left')).toBeInTheDocument();
+    expect(screen.getByTestId('employment-wrong-role')).toBeInTheDocument();
     expect(screen.getByTestId('employment-control')).toHaveAttribute('data-hubspot-contact', '7001');
     answer({ verification: verification({}), read: { state: 'ROLE_CHANGED_CONFIRMED', effectiveTitle: null, usableForRanking: false }, recorded: true, auditId: 'a' });
     fireEvent.click(screen.getByTestId('employment-verify'));
@@ -125,6 +125,16 @@ describe('a HubSpot-only person mounts with hubspotContactId + title and verifie
     const { url, body } = lastCall();
     expect(url).toBe('/api/gap/people/verify-role');
     expect(body).toEqual({ hubspotContactId: '7001', accountName: WALMART, name: 'C M', title: STORED });
+  });
+  it('ROLE IS WRONG on a HubSpot-only person posts a correction to verify-role (a human row, never a search) and says the role is out of ranking until verified', async () => {
+    render(<EmploymentControl hubspotContactId="7001" name="C M" accountName={WALMART} title={STORED} />);
+    fireEvent.click(screen.getByTestId('employment-wrong-role'));
+    answer({ correction: { status: 'role_changed' }, read: { state: 'ROLE_CHANGED_CONFIRMED', effectiveTitle: null, usableForRanking: false }, recorded: true, auditId: 'a' });
+    fireEvent.click(screen.getByTestId('employment-save'));
+    expect(await outcome()).toMatch(/stored role at Walmart Inc\. is no longer theirs; the new title is not known/);
+    const { url, body } = lastCall();
+    expect(url).toBe('/api/gap/people/verify-role');
+    expect(body).toEqual({ hubspotContactId: '7001', accountName: WALMART, name: 'C M', title: STORED, correction: { status: 'role_changed', newCompany: null, newTitle: null, sourceUrl: null, note: null } });
   });
   it('the verify button is disabled while the check runs', async () => {
     render(<EmploymentControl hubspotContactId="7001" name="C M" accountName={WALMART} title={STORED} />);

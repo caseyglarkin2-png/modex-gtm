@@ -49,6 +49,9 @@ export function OwnerResolutionPanel({ hypothesisId, accountName, onChanged }: O
   const [research, setResearch] = useState<string | null>(null);
   const [showExcluded, setShowExcluded] = useState(false);
   const [reviewing, setReviewing] = useState<number | null>(null);
+  const [open, setOpen] = useState<Set<string>>(new Set());
+  const [glossary, setGlossary] = useState(false);
+  const toggleOpen = (key: string) => setOpen((prev) => { const next = new Set(prev); if (next.has(key)) next.delete(key); else next.add(key); return next; });
 
   async function fetchResolution() {
     setLoad({ state: 'loading' });
@@ -111,26 +114,48 @@ export function OwnerResolutionPanel({ hypothesisId, accountName, onChanged }: O
   const selected = r.eligible.find((c) => c.key === chosen) ?? null;
   const actionLabel = (c: OwnerCandidate) => (c.action === 'add_then_use' ? `Add ${c.name} to GAP + use in routing` : `Use ${c.name} in routing`);
   const routing: UseOutcomeResponse | null = result?.routing ? (result.routing as unknown as UseOutcomeResponse) : null;
+  const purposeWord = r.purpose === 'HYPOTHESIS_ACTIVATION' ? 'this hypothesis' : r.purpose === 'SITE_PILOT' ? 'a site pilot' : r.purpose === 'TRANSFORMATION_INITIATIVE' ? 'this initiative' : 'the first touch';
+  // The one-line summary a rep reads first: the recommendation's reason, else the lane sentence; the thesis fit beside it.
+  const summaryOf = (c: OwnerCandidate) => c.reasons.filter((why) => /^(Primary operator|Adjacent operator|Facility \/ yard operator|Executive sponsor|Transformation \/ technology|Thesis fit)/.test(why));
+  const detailsOf = (c: OwnerCandidate) => c.reasons.filter((why) => !summaryOf(c).includes(why));
+  const groups = groupExcluded(r.excluded);
 
   return (
     <section data-testid="owner-resolution" data-next-step={r.nextStep} className="mt-4 space-y-3 rounded-md border border-[var(--primary)] p-3 text-sm">
       <div>
-        <p className="text-xs font-semibold uppercase tracking-wide text-[var(--primary)]">Needs an owner before routing</p>
+        <p className="text-xs font-semibold uppercase tracking-wide text-[var(--primary)]">Who should test {purposeWord}?</p>
         <p className="mt-1" data-testid="owner-resolution-headline">{r.headline}</p>
-        {r.hypothesis ? <p className="text-xs text-[var(--muted-foreground)]">The fact is {r.hypothesis.factLabel}; candidates are ranked for it ({r.account.kind === 'carrier_3pl' ? 'a carrier / 3PL: network, hub, terminal, linehaul, planning and engineering owners' : 'a shipper: transportation, logistics, freight and fleet owners'}).</p> : null}
+        <p className="text-xs text-[var(--muted-foreground)]">
+          GAP ranks the people on record and says why. You choose; nothing starts until you click, and no email is sent by choosing.
+          {r.hypothesis ? ` The fact is ${r.hypothesis.factLabel}; people are ranked for it (${r.account.kind === 'carrier_3pl' ? 'a carrier / 3PL: network, hub, terminal, linehaul, planning and engineering owners' : 'a shipper: transportation, logistics, freight and fleet owners'}).` : ''}
+        </p>
+        <button type="button" className="mt-1 text-[11px] underline text-[var(--muted-foreground)]" onClick={() => setGlossary((v) => !v)} data-testid="owner-glossary-toggle">
+          {glossary ? 'Hide what these terms mean' : 'What these terms mean'}
+        </button>
+        {glossary ? (
+          <dl className="mt-1 grid grid-cols-1 gap-x-4 gap-y-0.5 text-[11px] text-[var(--muted-foreground)] sm:grid-cols-2" data-testid="owner-glossary">
+            {GLOSSARY.map(([term, meaning]) => (
+              <div key={term}>
+                <dt className="inline font-medium text-[var(--foreground)]">{term}: </dt>
+                <dd className="inline">{meaning}</dd>
+              </div>
+            ))}
+          </dl>
+        ) : null}
       </div>
 
       {r.eligible.length ? (
         <fieldset className="space-y-2" data-testid="owner-candidates">
-          <legend className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Best people on record</legend>
+          <legend className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Best people on record ({r.eligible.length})</legend>
           {r.eligible.map((c, i) => (
-            <label key={c.key} className={`block cursor-pointer rounded-md border p-2 ${chosen === c.key ? 'border-[var(--primary)]' : 'border-[var(--border)]'}`} data-testid="owner-candidate" data-key={c.key}>
+            <label key={c.key} className={`block cursor-pointer rounded-md border p-2 ${chosen === c.key ? 'border-[var(--primary)] bg-[var(--muted)]/40' : 'border-[var(--border)]'}`} data-testid="owner-candidate" data-key={c.key}>
               <div className="flex items-start gap-2">
                 <input type="radio" name={`owner-${hypothesisId}`} value={c.key} checked={chosen === c.key} onChange={() => setChosen(c.key)} className="mt-1" aria-label={`Choose ${c.name}`} />
-                <div className="min-w-0">
+                <div className="min-w-0 flex-1">
                   <p className="font-medium">
                     {i + 1}. {c.name}
                     {c.title ? <span className="font-normal text-[var(--muted-foreground)]">, {c.title}</span> : null}
+                    {c.action === 'add_then_use' ? <span className="ml-2 rounded-sm border border-[var(--border)] px-1 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--muted-foreground)]">HubSpot only</span> : null}
                     {r.recommended?.key === c.key ? (
                       <span className="ml-2 rounded-sm border border-[var(--primary)] px-1 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[var(--primary)]" data-testid="owner-recommended">
                         Recommended for {r.purpose === 'HYPOTHESIS_ACTIVATION' ? 'this hypothesis' : r.purpose === 'SITE_PILOT' ? 'a site pilot' : 'this initiative'}
@@ -142,6 +167,25 @@ export function OwnerResolutionPanel({ hypothesisId, accountName, onChanged }: O
                       {r.recommended.why}
                     </p>
                   ) : null}
+                  <ul className="mt-0.5 space-y-0.5 text-xs text-[var(--muted-foreground)]">
+                    {summaryOf(c).map((why) => (
+                      <li key={why}>{why}</li>
+                    ))}
+                  </ul>
+                  {c.caution ? <p className="mt-1 text-xs text-amber-700 dark:text-amber-400">{c.caution}</p> : null}
+                  <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">
+                    <button type="button" className="text-[11px] underline text-[var(--muted-foreground)]" onClick={(e) => { e.preventDefault(); toggleOpen(c.key); }} data-testid="owner-candidate-details">
+                      {open.has(c.key) ? 'Hide details' : `Details${c.location ? ` (${c.location})` : ''}`}
+                    </button>
+                  </div>
+                  {open.has(c.key) ? (
+                    <ul className="mt-1 space-y-0.5 text-xs text-[var(--muted-foreground)]" data-testid="owner-candidate-detail-list">
+                      {c.location ? <li>{c.location}</li> : null}
+                      {detailsOf(c).map((why) => (
+                        <li key={why}>{why}</li>
+                      ))}
+                    </ul>
+                  ) : null}
                   {i < VERIFY_TOP && (!c.role || c.role.state === 'ROLE_UNVERIFIED') ? (
                     c.personaId !== null ? (
                       <EmploymentControl personaId={c.personaId} name={c.name} title={c.title} accountName={accountName} compact onDone={() => void fetchResolution()} />
@@ -149,13 +193,6 @@ export function OwnerResolutionPanel({ hypothesisId, accountName, onChanged }: O
                       <EmploymentControl hubspotContactId={c.hubspotContactId} name={c.name} title={c.title} accountName={accountName} compact onDone={() => void fetchResolution()} />
                     ) : null
                   ) : null}
-                  {c.location ? <p className="text-xs text-[var(--muted-foreground)]">{c.location}</p> : null}
-                  <ul className="mt-1 space-y-0.5 text-xs text-[var(--muted-foreground)]">
-                    {c.reasons.map((why) => (
-                      <li key={why}>{why}</li>
-                    ))}
-                  </ul>
-                  {c.caution ? <p className="mt-1 text-xs text-amber-700 dark:text-amber-400">{c.caution}</p> : null}
                 </div>
               </div>
             </label>
@@ -169,22 +206,30 @@ export function OwnerResolutionPanel({ hypothesisId, accountName, onChanged }: O
         </div>
       )}
 
-      <div className="flex flex-wrap items-center gap-2">
+      <div className="space-y-1">
+        <div className="flex flex-wrap items-center gap-2">
+          {selected ? (
+            <>
+              <Button type="button" disabled={busy !== null} onClick={() => void act(selected, true)} data-testid="owner-use">
+                {busy === `${selected.key}:use` ? 'Working...' : actionLabel(selected)}
+              </Button>
+              <Button type="button" variant="outline" size="sm" disabled={busy !== null} onClick={() => void act(selected, false)} data-testid="owner-attach">
+                {busy === `${selected.key}:attach` ? 'Working...' : selected.action === 'add_then_use' ? 'Add + attach only' : 'Attach only'}
+              </Button>
+            </>
+          ) : r.eligible.length ? (
+            <p className="text-xs text-[var(--muted-foreground)]">{r.recommended ? 'Choose one person above. The recommendation is a reason, not a selection: GAP does not pick.' : 'Choose one person above. GAP does not pick.'}</p>
+          ) : null}
+          <Button type="button" variant={r.eligible.length ? 'ghost' : 'default'} size="sm" disabled={busy !== null} onClick={() => void findOperator()} data-testid="owner-find">
+            {busy === 'research' ? 'Researching...' : 'Find operator'}
+          </Button>
+        </div>
         {selected ? (
-          <>
-            <Button type="button" disabled={busy !== null} onClick={() => void act(selected, true)} data-testid="owner-use">
-              {busy === `${selected.key}:use` ? 'Working...' : actionLabel(selected)}
-            </Button>
-            <Button type="button" variant="outline" size="sm" disabled={busy !== null} onClick={() => void act(selected, false)} data-testid="owner-attach">
-              {busy === `${selected.key}:attach` ? 'Working...' : selected.action === 'add_then_use' ? 'Add + attach only' : 'Attach only'}
-            </Button>
-          </>
-        ) : r.eligible.length ? (
-          <p className="text-xs text-[var(--muted-foreground)]">{r.recommended ? 'Choose one person above. The recommendation is a reason, not a selection: GAP does not pick.' : 'Choose one person above. GAP does not pick.'}</p>
+          <p className="text-[11px] text-[var(--muted-foreground)]" data-testid="owner-action-help">
+            {selected.action === 'add_then_use' ? 'Adds them to GAP, attaches them to this hypothesis and starts routing (shadow). ' : 'Attaches them to this hypothesis and starts routing (shadow). '}
+            No email is sent by this click; every send still runs its own gates. Attach only keeps the hypothesis approved for later.
+          </p>
         ) : null}
-        <Button type="button" variant={r.eligible.length ? 'ghost' : 'default'} size="sm" disabled={busy !== null} onClick={() => void findOperator()} data-testid="owner-find">
-          {busy === 'research' ? 'Researching...' : 'Find operator'}
-        </Button>
       </div>
       {research ? <p className="text-xs" role="status" data-testid="owner-research-note">{research}</p> : null}
 
@@ -202,42 +247,50 @@ export function OwnerResolutionPanel({ hypothesisId, accountName, onChanged }: O
         </div>
       ) : null}
 
-      {r.sponsor || r.tech ? (
+      {r.sponsor || r.tech || r.site ? (
         <p className="text-xs text-[var(--muted-foreground)]" data-testid="owner-slots">
-          {r.sponsor ? `Sponsor: ${r.sponsor.name}${r.sponsor.title ? ` (${r.sponsor.title})` : ''}. ` : ''}
-          {r.tech ? `Technology: ${r.tech.name}${r.tech.title ? ` (${r.tech.title})` : ''}.` : ''}
+          Also on record:{r.sponsor ? ` sponsor ${r.sponsor.name}${r.sponsor.title ? ` (${r.sponsor.title})` : ''}.` : ''}
+          {r.tech ? ` technology ${r.tech.name}${r.tech.title ? ` (${r.tech.title})` : ''}.` : ''}
+          {r.site ? ` site operator ${r.site.name}${r.site.title ? ` (${r.site.title})` : ''}.` : ''}
         </p>
       ) : null}
       {r.excluded.length ? (
         <div className="text-xs">
           <button type="button" className="underline" onClick={() => setShowExcluded((v) => !v)} data-testid="owner-excluded-toggle">
-            {showExcluded ? 'Hide' : 'Show'} {r.excluded.length} set aside
+            {showExcluded ? 'Hide' : 'Show'} {r.excluded.length} set aside ({groups.map((g) => `${g.label.toLowerCase()} ${g.items.length}`).join(', ')})
           </button>
           {showExcluded ? (
-            <ul className="mt-1 space-y-1" data-testid="owner-excluded">
-              {r.excluded.map((e) => (
-                <li key={e.candidate.key} data-code={e.code}>
-                  <span className="font-medium">{e.candidate.name}</span>
-                  {e.candidate.title ? <span className="text-[var(--muted-foreground)]">, {e.candidate.title}</span> : null}: {e.reason}
-                  {e.code === 'do_not_contact' && e.candidate.personaId !== null ? (
-                    <>
-                      {' '}
-                      <button type="button" className="underline" onClick={() => setReviewing((v) => (v === e.candidate.personaId ? null : e.candidate.personaId))} data-testid="owner-review-suppression" data-persona={e.candidate.personaId}>
-                        {reviewing === e.candidate.personaId ? 'Hide the review' : 'Review the legacy flag'}
-                      </button>
-                      {reviewing === e.candidate.personaId ? <LegacySuppressionReview personaId={e.candidate.personaId} name={e.candidate.name} accountName={accountName} onCleared={() => void fetchResolution()} /> : null}
-                    </>
-                  ) : null}
-                  {e.code === 'role_changed' || e.code === 'role_conflict' ? (
-                    e.candidate.personaId !== null ? (
-                      <EmploymentControl personaId={e.candidate.personaId} name={e.candidate.name} title={e.candidate.title} accountName={accountName} compact onDone={() => void fetchResolution()} />
-                    ) : e.candidate.hubspotContactId ? (
-                      <EmploymentControl hubspotContactId={e.candidate.hubspotContactId} name={e.candidate.name} title={e.candidate.title} accountName={accountName} compact onDone={() => void fetchResolution()} />
-                    ) : null
-                  ) : null}
-                </li>
+            <div className="mt-1 space-y-2" data-testid="owner-excluded">
+              {groups.map((g) => (
+                <div key={g.code} data-group={g.code}>
+                  <p className="font-semibold text-[var(--muted-foreground)]">{g.label} ({g.items.length})</p>
+                  <ul className="mt-0.5 space-y-1">
+                    {g.items.map((e) => (
+                      <li key={e.candidate.key} data-code={e.code}>
+                        <span className="font-medium">{e.candidate.name}</span>
+                        {e.candidate.title ? <span className="text-[var(--muted-foreground)]">, {e.candidate.title}</span> : null}: {e.reason}
+                        {e.code === 'do_not_contact' && e.candidate.personaId !== null ? (
+                          <>
+                            {' '}
+                            <button type="button" className="underline" onClick={() => setReviewing((v) => (v === e.candidate.personaId ? null : e.candidate.personaId))} data-testid="owner-review-suppression" data-persona={e.candidate.personaId}>
+                              {reviewing === e.candidate.personaId ? 'Hide the review' : 'Review the legacy flag'}
+                            </button>
+                            {reviewing === e.candidate.personaId ? <LegacySuppressionReview personaId={e.candidate.personaId} name={e.candidate.name} accountName={accountName} onCleared={() => void fetchResolution()} /> : null}
+                          </>
+                        ) : null}
+                        {e.code === 'role_changed' || e.code === 'role_conflict' ? (
+                          e.candidate.personaId !== null ? (
+                            <EmploymentControl personaId={e.candidate.personaId} name={e.candidate.name} title={e.candidate.title} accountName={accountName} compact onDone={() => void fetchResolution()} />
+                          ) : e.candidate.hubspotContactId ? (
+                            <EmploymentControl hubspotContactId={e.candidate.hubspotContactId} name={e.candidate.name} title={e.candidate.title} accountName={accountName} compact onDone={() => void fetchResolution()} />
+                          ) : null
+                        ) : null}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
-            </ul>
+            </div>
           ) : null}
         </div>
       ) : null}
@@ -253,3 +306,41 @@ export function OwnerResolutionPanel({ hypothesisId, accountName, onChanged }: O
     </section>
   );
 }
+
+/** The set-aside reasons in the order a rep asks about them, each with a plain label. */
+const EXCLUSION_LABEL: Array<[string, string]> = [
+  ['do_not_contact', 'Do not contact'],
+  ['unsubscribed', 'Unsubscribed'],
+  ['opted_out', 'Opted out in HubSpot'],
+  ['left_company', 'Left the company'],
+  ['employment_conflict', 'Employer in question'],
+  ['role_changed', 'Role changed'],
+  ['role_conflict', 'Role in question'],
+  ['divested_entity', 'Divested unit'],
+  ['other_region', 'Another region'],
+  ['no_name', 'No name on record'],
+];
+
+function groupExcluded(excluded: OwnerResolution['excluded']): Array<{ code: string; label: string; items: OwnerResolution['excluded'] }> {
+  const out: Array<{ code: string; label: string; items: OwnerResolution['excluded'] }> = [];
+  for (const [code, label] of EXCLUSION_LABEL) {
+    const items = excluded.filter((e) => e.code === code);
+    if (items.length) out.push({ code, label, items });
+  }
+  const known = new Set(EXCLUSION_LABEL.map(([c]) => c));
+  const rest = excluded.filter((e) => !known.has(e.code));
+  if (rest.length) out.push({ code: 'other', label: 'Other', items: rest });
+  return out;
+}
+
+/** Plain words for a rep who is new to GAP's vocabulary. */
+const GLOSSARY: Array<[string, string]> = [
+  ['Primary operator', 'runs transportation, freight or the fleet (at a carrier: the physical network). The person we sell to first.'],
+  ['Adjacent operator', 'runs supply chain, distribution or warehousing; transportation ownership not stated. A sponsor or alternate.'],
+  ['Thesis fit', 'whether the fact behind this hypothesis lands on what this person runs (direct, related, or not).'],
+  ['Employment', 'whether current evidence says they still work here. The CRM alone is "not verified".'],
+  ['Role', 'whether the title GAP ranks on is still theirs. A changed or disputed role is set aside until verified.'],
+  ['Recommended', 'the first strong difference between the top two people, in words. A reason, never a selection.'],
+  ['HubSpot only', 'in HubSpot but not yet a GAP contact; choosing them adds them to GAP first.'],
+  ['Set aside', 'people considered and excluded, each with the exact reason. Nobody is dropped silently.'],
+];
