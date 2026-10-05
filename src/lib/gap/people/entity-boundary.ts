@@ -52,5 +52,7 @@ export function entityBoundaryFor(accountName: string, person: { title?: string 
   const set = BOUNDARIES.find((b) => b.account.test(accountName.trim()));
   if (!set) return null;
   const text = `${person.title ?? ''} | ${person.company ?? ''}`;
-  return set.boundaries.find((b) => b.match.test(text)) ?? null;
+  // A boundary never fires on its own account: at an account named "FedEx Freight", its own people are not a
+  // separate entity (review S5).
+  return set.boundaries.find((b) => !b.match.test(accountName) && b.match.test(text)) ?? null;
 }

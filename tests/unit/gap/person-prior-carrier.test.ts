@@ -117,3 +117,11 @@ describe('entity boundary: a known corporate transaction outranks stale CRM data
     expect(entityBoundaryFor('FedEx', { title: 'Vice President Network Operations', company: null })).toBeNull();
   });
 });
+
+describe('review S5: the entity boundary never fires on its own account', () => {
+  it('at an account named "FedEx Freight" its own people are not a separate entity; at FedEx they still are', () => {
+    expect(entityBoundaryFor('FedEx Freight', { title: 'VP Linehaul Operations', company: 'FedEx Freight' })).toBeNull();
+    expect(entityBoundaryFor('FedEx Freight', { title: 'VP Operations', company: 'FedEx Supply Chain' })?.status).toBe('divested');
+    expect(entityBoundaryFor('FedEx', { title: 'VP Linehaul Operations', company: 'FedEx Freight' })?.status).toBe('separate');
+  });
+});
