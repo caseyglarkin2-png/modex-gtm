@@ -94,11 +94,55 @@ const DAY = 86_400_000;
 const time = (iso: string | null | undefined) => (iso ? new Date(iso).getTime() : NaN);
 const day = (iso: string | null | undefined) => (iso && !Number.isNaN(time(iso)) ? iso.slice(0, 10) : 'undated');
 
-/** Does the evidence place them at THIS account (the account, or one of its names)? */
-function here(e: EmploymentEvidence, accountName: string, aliases: readonly string[]): boolean | null {
+/** Generic words that never identify an employer on their own: "General" is not General Mills, "American" is not American Axle. */
+const GENERIC_EMPLOYER_WORDS = new Set(['american', 'national', 'united', 'general', 'global', 'international', 'first', 'new', 'north', 'south', 'east', 'west', 'universal', 'standard', 'pacific', 'atlantic', 'central', 'western', 'eastern', 'southern', 'northern', 'great', 'royal', 'allied', 'premier', 'advanced', 'consolidated', 'continental', 'federal', 'the', 'services', 'logistics', 'transport', 'transportation', 'distribution', 'industries', 'foods', 'supply', 'chain']);
+const LEGAL_WORDS = /\b(inc|incorporated|corp|corporation|llc|ltd|limited|plc|lp|llp|co|company|holdings|group|the)\b/g;
+const TLD_LABELS = new Set(['com', 'net', 'org', 'co', 'uk', 'us', 'ca', 'mx', 'io', 'ai', 'biz', 'info', 'de', 'fr', 'eu', 'au', 'nl', 'br', 'in', 'jp', 'cn']);
+
+/** Lowercase words with accents, punctuation and legal suffixes dropped: "J.B. Hunt Transport Services, Inc." is j b hunt transport services. */
+const employerWords = (v: string): string[] => v.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').replace(LEGAL_WORDS, ' ').trim().split(/\s+/).filter(Boolean);
+
+/** The registrable label of a domain: "genmills.com" is "genmills", "www.jbhunt.co.uk" is "jbhunt". */
+export function domainLabel(domain: string | null | undefined): string | null {
+  if (!domain) return null;
+  const parts = domain.trim().toLowerCase().replace(/^https?:\/\//, '').split('/')[0].split('.').filter(Boolean);
+  while (parts.length > 1 && TLD_LABELS.has(parts[parts.length - 1])) parts.pop();
+  const label = (parts[parts.length - 1] ?? '').replace(/[^a-z0-9]/g, '');
+  return label.length >= 2 ? label : null;
+}
+
+/**
+ * Is this company spelling the same employer as the account? Deliberately looser than canonical account identity:
+ * a provider or the CRM writes "NFI", "Pepsi", "Fed Ex Freight" or "J.B. Hunt Transport Services, Inc." for people
+ * who are at NFI Industries, PepsiCo, FedEx and J.B. Hunt, and reading those as another employer set every GAP
+ * contact at those accounts aside (dogfood 2026-10-05). The account's own domain label ("genmills") counts as a
+ * name. One side a prefix of the other needs four letters ("pepsi" / "pepsico"); a shorter name must be one whole
+ * word equal to the other side's first word ("NFI" / "NFI Industries", never "UPS" / "Upstream Logistics", never
+ * "Estes Forwarding Worldwide" / "Estes Express Lines"); a generic word ("General", "American") never matches alone.
+ */
+export function sameEmployer(company: string, accountName: string, aliases: readonly string[] = [], domains: readonly string[] = []): boolean {
+  const names = [accountName, ...aliases].filter((n) => !!n?.trim());
+  if (names.some((n) => sameCompany(company, n))) return true;
+  const cw = employerWords(company);
+  const c = cw.join('');
+  if (c.length < 3 || GENERIC_EMPLOYER_WORDS.has(c)) return false;
+  const sides: Array<{ words: string[] }> = [...names.map((n) => ({ words: employerWords(n) })), ...domains.map((d) => domainLabel(d)).filter((l): l is string => !!l).map((l) => ({ words: [l] }))];
+  for (const side of sides) {
+    const joined = side.words.join('');
+    if (!joined || GENERIC_EMPLOYER_WORDS.has(joined)) continue;
+    const [short, long] = joined.length <= c.length ? [joined, c] : [c, joined];
+    if (short.length >= 4 && long.startsWith(short)) return true;
+    const [sw, lw] = cw.length <= side.words.length ? [cw, side.words] : [side.words, cw];
+    if (sw.length === 1 && sw[0].length >= 3 && sw[0] === lw[0] && !GENERIC_EMPLOYER_WORDS.has(sw[0])) return true;
+  }
+  return false;
+}
+
+/** Does the evidence place them at THIS account (the account, one of its names, or its own domain label)? */
+function here(e: EmploymentEvidence, accountName: string, aliases: readonly string[], domains: readonly string[] = []): boolean | null {
   if (e.left) return false;
   if (!e.company) return null;
-  return sameCompany(e.company, accountName) || aliases.some((a) => sameCompany(e.company!, a));
+  return sameEmployer(e.company, accountName, aliases, domains);
 }
 
 const newest = (rows: EmploymentEvidence[]) => [...rows].sort((a, b) => (time(b.at) || 0) - (time(a.at) || 0))[0] ?? null;
@@ -109,14 +153,15 @@ const elsewhereOf = (e: EmploymentEvidence | null): EmploymentRead['elsewhere'] 
  * Read one person's employment at `accountName` from the evidence on record. Deterministic: the same evidence always
  * reads the same way. The CRM alone is CURRENT_UNVERIFIED; weak evidence never changes the answer.
  */
-export function readEmployment(input: { accountName: string; aliases?: readonly string[]; evidence: readonly EmploymentEvidence[]; now: Date }): EmploymentRead {
+export function readEmployment(input: { accountName: string; aliases?: readonly string[]; /** The account's domains: their labels count as spellings of the employer. */ domains?: readonly string[]; evidence: readonly EmploymentEvidence[]; now: Date }): EmploymentRead {
   const { accountName, now } = input;
   const aliases = input.aliases ?? [];
+  const domains = input.domains ?? [];
   const ev = input.evidence.filter((e) => e.tier !== 'weak');
   const human = newest(ev.filter((e) => e.kind === 'human'));
   // 1. A human correction decides, whatever automation says.
   if (human) {
-    const h = here(human, accountName, aliases);
+    const h = here(human, accountName, aliases, domains);
     if (h === false) {
       return { state: 'LEFT_COMPANY_CONFIRMED', why: `Casey marked them as no longer at ${accountName}${human.company ? ` (now ${human.company}${human.title ? `, ${human.title}` : ''})` : ''} on ${day(human.at)}.`, decidedBy: [human], elsewhere: human.company ? elsewhereOf(human) : null, verifyNeeded: false };
     }
@@ -124,8 +169,8 @@ export function readEmployment(input: { accountName: string; aliases?: readonly 
   }
   // 2. Strong evidence: the newest placement decides; two strong sources within a month that disagree conflict.
   const strong = ev.filter((e) => e.tier === 'strong');
-  const strongHere = newest(strong.filter((e) => here(e, accountName, aliases) === true));
-  const strongAway = newest(strong.filter((e) => here(e, accountName, aliases) === false));
+  const strongHere = newest(strong.filter((e) => here(e, accountName, aliases, domains) === true));
+  const strongAway = newest(strong.filter((e) => here(e, accountName, aliases, domains) === false));
   if (strongAway || strongHere) {
     if (strongAway && strongHere) {
       const ta = time(strongAway.at);
@@ -150,8 +195,8 @@ export function readEmployment(input: { accountName: string; aliases?: readonly 
   }
   // 3. Supporting evidence: another employer from a provider is a conflict to verify; consistent support is likely.
   const supporting = ev.filter((e) => e.tier === 'supporting');
-  const away = newest(supporting.filter((e) => here(e, accountName, aliases) === false));
-  const hereRows = supporting.filter((e) => here(e, accountName, aliases) === true);
+  const away = newest(supporting.filter((e) => here(e, accountName, aliases, domains) === false));
+  const hereRows = supporting.filter((e) => here(e, accountName, aliases, domains) === true);
   if (away) {
     return { state: 'EMPLOYMENT_CONFLICT', why: `${says(away)} says they are no longer at ${accountName}, while the CRM says they are. Verify the current role before relying on them.`, decidedBy: [away, ...hereRows.slice(0, 1)], elsewhere: elsewhereOf(away), verifyNeeded: true };
   }

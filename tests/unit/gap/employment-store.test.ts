@@ -179,3 +179,26 @@ describe('verifyEmployment: the prompt asks for a source; the parse asserts noth
     expect((await verifyEmployment({ name: 'D', title: null, company: 'H-E-B' }, { search: async () => { throw new Error('down'); } })).verdict).toBe('unknown');
   });
 });
+
+describe('employer spellings in the live HubSpot row and the Apollo intake never set a current person aside (dogfood 2026-10-05)', () => {
+  it('"J.B. Hunt Transport Services, Inc." from Apollo beside "JB Hunt" in HubSpot is consistent support at J.B. Hunt, not a conflict', async () => {
+    const { prisma } = db({
+      personas: [{ id: 77, account_name: 'J.B. Hunt', name: 'mark hall', title: 'senior director of transportation', email: 'mark.hall@jbhunt.com', hubspot_contact_id: '555', do_not_contact: false, email_status: 'unverified' }],
+      fields: { 77: [{ field_name: 'company_name', field_value: 'J.B. Hunt Transport Services, Inc.', source: 'apollo', source_timestamp: new Date('2026-05-04T00:00:00Z'), confidence: null, last_writer: 'apollo' }] },
+    });
+    const hs = new Map<string, HubSpotEmploymentProps>([['555', { company: 'JB Hunt', title: 'Senior Director of Transportation', email: 'mark.hall@jbhunt.com', lastModifiedAt: '2026-08-01T00:00:00Z', apolloEmploymentStatus: null, apolloVerifiedAt: null }]]);
+    const r = (await loadEmployment(prisma, [77], { now: NOW, hubspot: hs })).get(77)!;
+    expect(r.state).toBe('CURRENT_LIKELY');
+  });
+  it('"Genmills" in HubSpot is General Mills through the person\'s own genmills.com address', async () => {
+    const { prisma } = db({ personas: [{ id: 78, account_name: 'General Mills', name: 'j ness', title: 'chief supply chain officer', email: 'j.ness@genmills.com', hubspot_contact_id: '556', do_not_contact: false, email_status: 'unverified' }] });
+    const hs = new Map<string, HubSpotEmploymentProps>([['556', { company: 'Genmills', title: 'Chief Supply Chain Officer', email: 'j.ness@genmills.com', lastModifiedAt: null, apolloEmploymentStatus: null, apolloVerifiedAt: null }]]);
+    const r = (await loadEmployment(prisma, [78], { now: NOW, hubspot: hs })).get(78)!;
+    expect(r.state).not.toBe('EMPLOYMENT_CONFLICT');
+  });
+  it('a different employer in the same shape still conflicts: ADUSA Distribution beside the H-E-B record', async () => {
+    const { prisma } = db({ fields: { 1306: [{ field_name: 'company_name', field_value: 'ADUSA Distribution', source: 'apollo', source_timestamp: new Date('2026-09-20T00:00:00Z'), confidence: null, last_writer: 'apollo' }] } });
+    const r = (await loadEmployment(prisma, [1306], { now: NOW })).get(1306)!;
+    expect(r.state).toBe('EMPLOYMENT_CONFLICT');
+  });
+});

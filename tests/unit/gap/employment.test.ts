@@ -4,7 +4,7 @@
  * while their own profile and a directory place them at another distributor. Patterns, never people.
  */
 import { describe, expect, it } from 'vitest';
-import { apolloEvidence, crmEvidence, employmentBlocksOutreach, employmentRefusal, interactionEvidence, kindForUrl, readEmployment, tierForUrl, type EmploymentEvidence } from '@/lib/gap/people/employment';
+import { apolloEvidence, crmEvidence, domainLabel, employmentBlocksOutreach, employmentRefusal, interactionEvidence, kindForUrl, readEmployment, sameEmployer, tierForUrl, type EmploymentEvidence } from '@/lib/gap/people/employment';
 
 const NOW = new Date('2026-10-05T12:00:00Z');
 const ACCOUNT = 'H-E-B';
@@ -125,5 +125,52 @@ describe('URL tiers: a profile or the employer page is strong; an aggregator or 
     expect(kindForUrl('https://careers.heb.com/x', ['heb.com'])).toBe('employer_page');
     expect(kindForUrl('https://rocketreach.co/x')).toBe('aggregator');
     expect(kindForUrl('https://news.example/story')).toBe('web');
+  });
+});
+
+describe('employer spellings: a provider or CRM variant of the same employer is HERE, never elsewhere (dogfood 2026-10-05)', () => {
+  // Every GAP contact at NFI Industries and J.B. Hunt was set aside because Apollo wrote "NFI" and
+  // "J.B. Hunt Transport Services, Inc."; PepsiCo's sponsor because HubSpot wrote "Pepsi". Patterns, never people.
+  it.each([
+    ['NFI', 'NFI Industries'],
+    ['J.B. Hunt Transport Services, Inc.', 'J.B. Hunt'],
+    ['Pepsi', 'PepsiCo'],
+    ['Tyson', 'Tyson Foods'],
+    ['Fed Ex Freight', 'FedEx'],
+    ['The Kroger Co.', 'Kroger'],
+    ['Heb', 'H-E-B'],
+    ['UPS Supply Chain Solutions', 'UPS'],
+  ])('"%s" is the same employer as %s', (company, account) => {
+    expect(sameEmployer(company, account)).toBe(true);
+  });
+  it.each([
+    ['ADUSA Distribution', 'H-E-B'],
+    ['General Electric', 'General Mills'],
+    ['American Axle', 'American Airlines'],
+    ['Upstream Logistics', 'UPS'],
+    ['Estes Forwarding Worldwide', 'Estes Express Lines'],
+  ])('"%s" is NOT the same employer as %s', (company, account) => {
+    expect(sameEmployer(company, account)).toBe(false);
+  });
+  it('a spelling that only the account domain explains ("Genmills") matches through the domain label', () => {
+    expect(domainLabel('genmills.com')).toBe('genmills');
+    expect(domainLabel('www.jbhunt.co.uk')).toBe('jbhunt');
+    expect(sameEmployer('Genmills', 'General Mills')).toBe(false);
+    expect(sameEmployer('Genmills', 'General Mills', [], ['genmills.com'])).toBe(true);
+  });
+  it('Apollo "NFI" beside the GAP record at NFI Industries is consistent support: CURRENT_LIKELY, not a conflict', () => {
+    const evidence: EmploymentEvidence[] = [
+      ...crmEvidence({ company: 'NFI Industries', title: 'Director of Transportation Operations', email: 'x@nfiindustries.com', lastModifiedAt: null, source: 'GAP record' }),
+      { kind: 'apollo', tier: 'supporting', company: 'NFI', title: 'Director of Transportation Operations', at: '2026-05-04T00:00:00Z', source: 'Apollo intake' },
+    ];
+    const r = read(evidence, 'NFI Industries');
+    expect(r.state).toBe('CURRENT_LIKELY');
+    expect(employmentBlocksOutreach(r.state)).toBe(false);
+  });
+  it('a genuinely different employer in the same shape is still a conflict (ADUSA beside the H-E-B record)', () => {
+    const evidence: EmploymentEvidence[] = [...crm(), { kind: 'apollo', tier: 'supporting', company: 'ADUSA Distribution', title: 'Director of Distribution Operations', at: '2026-09-20T00:00:00Z', source: 'Apollo intake' }];
+    const r = read(evidence);
+    expect(r.state).toBe('EMPLOYMENT_CONFLICT');
+    expect(employmentBlocksOutreach(r.state)).toBe(true);
   });
 });

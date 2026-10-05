@@ -111,6 +111,9 @@ export interface PersonaEmployment extends EmploymentRead {
  * The employment read for each persona, from what the database holds (plus the live HubSpot properties the caller
  * passes). One query per table; no network. A persona with nothing on record reads CURRENT_UNVERIFIED.
  */
+const emailDomain = (e: string | null | undefined): string | null => (e && e.includes('@') ? e.split('@')[1].trim().toLowerCase() || null : null);
+const hsEmailOf = (id: string | null, opts: LoadEmploymentOptions): string | null => (id ? (opts.hubspot?.get(id)?.email ?? null) : null);
+
 export async function loadEmployment(prisma: PrismaLike, personaIds: readonly number[], opts: LoadEmploymentOptions): Promise<Map<number, PersonaEmployment>> {
   const out = new Map<number, PersonaEmployment>();
   const ids = [...new Set(personaIds)];
@@ -132,7 +135,9 @@ export async function loadEmployment(prisma: PrismaLike, personaIds: readonly nu
 
   for (const p of personas) {
     const aliases = opts.aliasesFor?.(p.account_name) ?? [];
-    const domains = opts.domainsFor?.(p.account_name) ?? [];
+    // The account's domains plus the person's own email domains: their labels count as spellings of the employer
+    // ("Genmills" is General Mills through genmills.com). A domain still proves nothing about currentness.
+    const domains = [...(opts.domainsFor?.(p.account_name) ?? []), ...[p.email, hsEmailOf(p.hubspot_contact_id, opts)].map(emailDomain).filter((d): d is string => !!d)];
     const evidence: EmploymentEvidence[] = [];
     const hs = p.hubspot_contact_id ? opts.hubspot?.get(p.hubspot_contact_id) ?? null : null;
     if (hs) {
@@ -145,7 +150,7 @@ export async function loadEmployment(prisma: PrismaLike, personaIds: readonly nu
     evidence.push(...evidenceFromFields(fieldsOf.get(p.id) ?? [], p.account_name, domains));
     const d = newestDisposition.get(p.id);
     if (d) evidence.push(...interactionEvidence({ at: iso(d.created_at), what: `a confirmed ${d.channel ? `${d.channel} ` : ''}answer (${d.response_class.replace(/_/g, ' ')})`, accountName: p.account_name }));
-    const read = readEmployment({ accountName: p.account_name, aliases, evidence, now: opts.now });
+    const read = readEmployment({ accountName: p.account_name, aliases, domains, evidence, now: opts.now });
     out.set(p.id, { personaId: p.id, accountName: p.account_name, evidence, ...read });
   }
   return out;
