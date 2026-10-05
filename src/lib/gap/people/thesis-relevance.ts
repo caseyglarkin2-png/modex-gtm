@@ -33,7 +33,9 @@ export type ResponsibilityTag =
 
 const FAMILY_WORDS: Array<[FactFamily, RegExp]> = [
   ['NETWORK_PROGRAM', /\b(line ?haul|sortation|sort(?:ation)? (?:facilit|cent)\w*|hubs?\b|network (?:2\.0|optimi\w+|redesign\w*|modern\w+|consolidat\w+|transformation)|consolidat\w+ (?:of )?(?:sortation|facilit)\w*|pickup[- ]and[- ]delivery routes?|end[- ]to[- ]end optimi\w+ network|optimi\w+ (?:the |our )?(?:enterprise )?network)\b/i],
-  ['SITE_OPENING', /\b(fulfil+ment cent\w+|distribution cent\w+|warehouses?|plants?|facilit(?:y|ies)|\bDCs?\b|open(?:s|ed|ing)? (?:a |its |the )?(?:new )?(?:facility|plant|center|centre|site|dc)|build(?:s|ing)? (?:a |its )?(?:new )?(?:facility|plant|center|centre|site|dc)|expan(?:d|sion)\w*|invest\w* (?:more than |over )?\$)\b/i],
+  // A bare "facility" or "facilities" is not a site opening ("consolidate sortation facilities" is a network program):
+  // the family needs a site noun or an opening, building, expansion or investment verb.
+  ['SITE_OPENING', /\b(fulfil+ment cent\w+|distribution cent\w+|warehouses?|plants?|new facilit(?:y|ies)|\bDCs?\b|open(?:s|ed|ing)?(?:a |its |the )?(?:new )?(?:facility|plant|center|centre|site|dc)|build(?:s|ing)? (?:a |its )?(?:new )?(?:facility|plant|center|centre|site|dc)|expan(?:d|sion)\w*|invest\w* (?:more than |over )?\$)\b/i],
   ['AUTOMATION_TECH', /\b(autonomous|automat\w+|robot\w*|autogate|rtls|yard management|yms|tms|telematics|control tower|machine vision|digital|technology|dexterity)\b/i],
   ['FLEET', /\b(private fleet|dedicated fleet|fleets?|tractors?|trailers?|trucks?|drivers?)\b/i],
   ['AIR_NETWORK', /\b(air network|aircraft|flights?|airline|tricolor|air cargo|air freight)\b/i],
@@ -118,6 +120,9 @@ const TAG_LABEL: Record<ResponsibilityTag, string> = {
   generic_ops: 'operations',
 };
 
+/** Ground network functions: beside an air word they still name the ground network. */
+const GROUND_TAGS: ResponsibilityTag[] = ['linehaul', 'hub_terminal', 'sortation', 'planning_engineering'];
+
 export interface ThesisContext {
   observation: string;
   problemHypothesis?: string | null;
@@ -134,17 +139,25 @@ export interface ThesisRelevance {
 }
 
 /**
- * How a title relates to what the hypothesis says changed. The fact (the observation) names the families first; the
- * hypothesis text adds its own (a yard-execution hypothesis over a network fact lands on both).
+ * How a title relates to what the hypothesis says changed. The fact (the observation) names the families; the
+ * hypothesis text stands in only when the fact names none.
  */
 export function thesisRelevance(title: string | null | undefined, thesis: ThesisContext | null | undefined): ThesisRelevance {
   if (!thesis) return { tier: 'none', why: 'no hypothesis context', families: [], factLabel: 'no fact' };
-  const families = [...new Set([...factFamilies(thesis.observation), ...factFamilies(thesis.problemHypothesis ?? '')])].filter((f, _i, all) => f !== 'GENERIC' || all.length === 1);
+  // The FACT decides what changed. The hypothesis text (every hidden-capacity guess says "gates, yards and docks")
+  // adds its families only when the fact itself names none: otherwise every transportation title would read
+  // direct on every hypothesis and nothing would be thesis-specific (WHO truth maintenance, 2026-10-05).
+  const fromFact = factFamilies(thesis.observation);
+  const families = fromFact.length === 1 && fromFact[0] === 'GENERIC' ? factFamilies(thesis.problemHypothesis ?? '') : fromFact;
   const tags = responsibilityTags(title);
   const factLabel = families.map((f) => FAMILY_LABEL[f]).join('; ');
   if (!tags.size) return { tier: 'none', why: `the title names no operating responsibility; the fact is ${factLabel}`, families, factLabel };
+  // The air side of a GROUND network program (an air network operations title names "network operations" too):
+  // related, not direct, unless the title also names a ground function (linehaul, hubs, sortation, planning).
+  const airOnly = tags.has('air') && !GROUND_TAGS.some((t) => tags.has(t));
   for (const f of families) {
     const hit = FAMILY_TAGS[f].direct.filter((t) => tags.has(t));
+    if (hit.length && f === 'NETWORK_PROGRAM' && airOnly) return { tier: 'related', why: `runs the air network, beside ${FAMILY_LABEL[f]} on the ground`, families, factLabel };
     if (hit.length) return { tier: 'direct', why: `runs ${hit.map((t) => TAG_LABEL[t]).join(' and ')}: the fact is ${FAMILY_LABEL[f]}`, families, factLabel };
   }
   for (const f of families) {

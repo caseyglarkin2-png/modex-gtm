@@ -15,8 +15,20 @@
  *
  * Eligible owner = right responsibility (the prior, purpose-aware) AND currently at this account (not LEFT, not a
  * CONFLICT) AND not another region's remit AND not a divested unit AND contactable (not do-not-contact, not opted
- * out). Ranking among the eligible: buyer truth > relationship > named initiative > lane > named ownership > thesis
- * relevance > employment confidence > not outside North America > scope > US market > seniority > reachability.
+ * out). Ranking among the eligible is PURPOSE-SPECIFIC (WHO truth maintenance, 2026-10-05), first difference wins:
+ *
+ *   COLD_FIRST_TOUCH          buyer truth > relationship > named initiative > lane > named ownership > region > scope
+ *                             > US market > seniority > currentness > reachability (operator-first, unchanged)
+ *   HYPOTHESIS_ACTIVATION     buyer truth > relationship > named initiative > CURRENT role validity > thesis relevance
+ *                             > lane > named ownership > scope > region > US market > seniority > currentness > reach
+ *   SITE_PILOT                ... > current role > site fit (a site or regional operator) > lane > ...
+ *   TRANSFORMATION_INITIATIVE ... > current role > explicit freight / yard technology ownership > lane > ...
+ *
+ * When the top two eligible people differ first on a STRONG dimension (buyer truth, relationship, initiative, the
+ * current role, thesis relevance, lane, named ownership, site fit, technology ownership) the resolver names one
+ * RECOMMENDED FOR THIS PURPOSE with that first difference in words. It is not a selection: nobody is preselected
+ * unless they are the only eligible person, and Casey still clicks. A difference only in scope, geography,
+ * seniority, currentness or reachability is a choice, said as such. Never a number.
  * Pure. The loader (owner-resolution-load.ts) gathers the inputs.
  */
 import type { EntityType } from '../entity/fit';
@@ -86,6 +98,8 @@ export interface OwnerCandidate {
   read: PersonRead;
   relevance: ThesisRelevance | null;
   employment: { state: EmploymentState; label: string; why: string; elsewhere: EmploymentRead['elsewhere'] } | null;
+  /** ROLE currentness at this account (the stored title against current evidence); null when nothing was read. */
+  role: { state: string; label: string; why: string; effectiveTitle: string | null; priorTitle: string | null; usableForRanking: boolean } | null;
   entity: EntityBoundary | null;
   hasEmail: boolean;
   /** 'use' a GAP contact; 'add_then_use' a HubSpot-only person; 'review_staged' a staged candidate; 'relationship_only' a work-source member. */
@@ -112,6 +126,11 @@ export interface OwnerResolution {
   eligible: OwnerCandidate[];
   /** The one GAP (or HubSpot-only) person preselected in the UI when nobody else is plausible; Casey still clicks. */
   preselected: string | null;
+  /**
+   * RECOMMENDED FOR THIS PURPOSE: the top person when the first difference against the runner-up is a strong
+   * dimension, with that difference in words. Not a selection: the choice stays Casey's. Null for a cold touch.
+   */
+  recommended: { key: string; firstDifference: string; why: string } | null;
   nextStep: OwnerNextStep;
   headline: string;
   /** People considered and set aside, with the exact reason (a departed favorite is shown here, never silently dropped). */
@@ -148,24 +167,91 @@ export function eligibleForPurpose(read: PersonRead, purpose: OwnerPurpose, ctx:
   return isColdWho(read, { initiative: ctx.initiative ?? techInitiative });
 }
 
-function rankKey(c: OwnerCandidate, input: OwnerCandidateInput): number[] {
+/** One ranking dimension: its name (for the first-difference sentence) and its value (higher first). */
+type RankDimension = { name: string; value: number };
+
+/** The dimensions whose first difference makes one person a RECOMMENDED owner; the rest only order a choice. */
+const STRONG_DIMENSIONS = new Set(['buyer truth', 'relationship', 'named initiative', 'current role', 'thesis relevance', 'lane', 'named ownership', 'site fit', 'technology ownership']);
+
+/** How the person's CURRENT role reads for ranking: a verified or likely-current role above an unverified one. */
+const ROLE_RANK: Record<string, number> = { ROLE_CURRENT_CONFIRMED: 3, ROLE_CURRENT_LIKELY: 2, ROLE_UNVERIFIED: 1, ROLE_CHANGED_CONFIRMED: 3 };
+
+function rankDimensions(c: OwnerCandidate, input: OwnerCandidateInput, purpose: OwnerPurpose): RankDimension[] {
   const r = c.read;
-  return [
-    input.buyerTruth ? 1 : 0,
-    input.relationship ? 1 : 0,
-    input.initiative ? 1 : 0,
-    LANE_ORDER.length - LANE_ORDER.indexOf(r.lane),
-    r.ownership,
-    c.relevance ? RELEVANCE_RANK[c.relevance.tier] : 0,
-    r.region === 'OTHER_REGION' ? 0 : 1,
-    SCOPE_RANK[r.scope],
-    MARKET_RANK[r.market],
-    r.seniority,
-    // Currentness is a tie-break among the eligible: the departed and the conflicted were set aside upstream, and a
-    // likely-current manager never outranks an unverified network owner on it (carrier dogfood 2026-10-05).
-    c.employment ? EMPLOYMENT_RANK[c.employment.state] : 1,
-    c.source === 'gap' && c.hasEmail ? 2 : c.hasEmail ? 1 : 0,
+  const lead: RankDimension[] = [
+    { name: 'buyer truth', value: input.buyerTruth ? 1 : 0 },
+    { name: 'relationship', value: input.relationship ? 1 : 0 },
+    { name: 'named initiative', value: input.initiative ? 1 : 0 },
   ];
+  const lane: RankDimension = { name: 'lane', value: LANE_ORDER.length - LANE_ORDER.indexOf(r.lane) };
+  const ownership: RankDimension = { name: 'named ownership', value: r.ownership };
+  const relevance: RankDimension = { name: 'thesis relevance', value: c.relevance ? RELEVANCE_RANK[c.relevance.tier] : 0 };
+  const region: RankDimension = { name: 'region', value: r.region === 'OTHER_REGION' ? 0 : 1 };
+  const scope: RankDimension = { name: 'scope', value: SCOPE_RANK[r.scope] };
+  const market: RankDimension = { name: 'US market', value: MARKET_RANK[r.market] };
+  const seniority: RankDimension = { name: 'seniority', value: r.seniority };
+  // Currentness is a tie-break among the eligible: the departed and the conflicted were set aside upstream, and a
+  // likely-current manager never outranks an unverified network owner on it (carrier dogfood 2026-10-05).
+  const currentness: RankDimension = { name: 'currentness', value: c.employment ? EMPLOYMENT_RANK[c.employment.state] : 1 };
+  const reach: RankDimension = { name: 'reachability', value: c.source === 'gap' && c.hasEmail ? 2 : c.hasEmail ? 1 : 0 };
+  // The CURRENT role: a verified or likely-current role (or a verified new title) above one nobody has checked.
+  // A changed role with no known title and a role conflict never reach the ranking (set aside upstream).
+  const role: RankDimension = { name: 'current role', value: c.role ? ROLE_RANK[c.role.state] ?? 1 : 1 };
+  if (purpose === 'COLD_FIRST_TOUCH') return [...lead, lane, ownership, relevance, region, scope, market, seniority, currentness, reach];
+  if (purpose === 'SITE_PILOT') {
+    const siteFit: RankDimension = { name: 'site fit', value: r.lane === 'FACILITY_OPERATOR' || r.scope === 'SITE' ? 1 : 0 };
+    return [...lead, role, siteFit, lane, ownership, relevance, region, market, seniority, currentness, reach];
+  }
+  if (purpose === 'TRANSFORMATION_INITIATIVE') {
+    const tech: RankDimension = { name: 'technology ownership', value: r.lane === 'TRANSFORMATION_TECH' && r.ownership > 0 ? 1 : 0 };
+    return [...lead, role, tech, lane, ownership, relevance, region, scope, market, seniority, currentness, reach];
+  }
+  // HYPOTHESIS_ACTIVATION: the current role, then what the fact lands on, then the lane and named ownership.
+  return [...lead, role, relevance, lane, ownership, scope, region, market, seniority, currentness, reach];
+}
+
+function rankKey(c: OwnerCandidate, input: OwnerCandidateInput, purpose: OwnerPurpose): number[] {
+  return rankDimensions(c, input, purpose).map((d) => d.value);
+}
+
+/**
+ * RECOMMENDED FOR THIS PURPOSE: the first dimension on which the top two eligible people differ, when it is a strong
+ * one. The sentence names the dimension and the leader's own reason for it. Null for a cold first touch (the
+ * operator-first list is the answer), for fewer than two eligible people, and when the first difference is weak.
+ */
+function recommend(rows: ReadonlyArray<{ c: OwnerCandidate; input: OwnerCandidateInput }>, purpose: OwnerPurpose): OwnerResolution['recommended'] {
+  if (purpose === 'COLD_FIRST_TOUCH' || rows.length < 2) return null;
+  const a = rankDimensions(rows[0].c, rows[0].input, purpose);
+  const b = rankDimensions(rows[1].c, rows[1].input, purpose);
+  const i = a.findIndex((d, k) => d.value !== b[k].value);
+  if (i < 0 || !STRONG_DIMENSIONS.has(a[i].name)) return null;
+  const top = rows[0].c;
+  const second = rows[1].c;
+  const reason = (() => {
+    switch (a[i].name) {
+      case 'buyer truth':
+        return `they are already talking to you (${rows[0].input.buyerTruth})`;
+      case 'relationship':
+        return `you have a way in (${rows[0].input.relationship})`;
+      case 'named initiative':
+        return `a live signal names them on the initiative (${rows[0].input.initiative})`;
+      case 'current role':
+        return `their current role is ${top.role ? top.role.label.toLowerCase() : 'verified'} while ${second.name}'s is ${second.role ? second.role.label.toLowerCase() : 'unverified'}`;
+      case 'thesis relevance':
+        return top.relevance ? top.relevance.why : 'the fact lands on their responsibility';
+      case 'lane':
+        return `${top.laneLabel.toLowerCase()} (${top.read.laneWhy}) against ${second.laneLabel.toLowerCase()} for ${second.name}`;
+      case 'named ownership':
+        return `their title names the freight or network ownership (${top.read.laneWhy}) where ${second.name}'s names ${second.read.ownership > 0 ? 'less of it' : 'logistics or distribution'}`;
+      case 'site fit':
+        return `they run the site or region (${top.read.laneWhy}) while ${second.name} runs the network`;
+      case 'technology ownership':
+        return `they own the freight or yard technology (${top.read.laneWhy}) while ${second.name} does not`;
+      default:
+        return top.read.laneWhy;
+    }
+  })();
+  return { key: top.key, firstDifference: a[i].name, why: `Recommended for ${PURPOSE_LABEL[purpose]} on ${a[i].name}: ${reason}. ${second.name} is next. You choose.` };
 }
 
 /**
@@ -221,6 +307,7 @@ export function resolveOwner(input: OwnerResolutionInput): OwnerResolution {
       read,
       relevance,
       employment: employment ? { state: employment.state, label: EMPLOYMENT_LABEL[employment.state], why: employment.why, elsewhere: employment.elsewhere } : null,
+      role: null,
       entity,
       hasEmail: ci.hasEmail,
       action: ci.source === 'gap' ? 'use' : ci.source === 'hubspot' ? 'add_then_use' : ci.source === 'staged' ? 'review_staged' : 'relationship_only',
@@ -286,8 +373,8 @@ export function resolveOwner(input: OwnerResolutionInput): OwnerResolution {
   }
 
   eligibleRows.sort((a, b) => {
-    const ka = rankKey(a.c, a.input);
-    const kb = rankKey(b.c, b.input);
+    const ka = rankKey(a.c, a.input, purpose);
+    const kb = rankKey(b.c, b.input, purpose);
     for (let i = 0; i < ka.length; i += 1) if (ka[i] !== kb[i]) return kb[i] - ka[i];
     return a.c.name.localeCompare(b.c.name) || a.c.key.localeCompare(b.c.key);
   });
@@ -341,6 +428,7 @@ export function resolveOwner(input: OwnerResolutionInput): OwnerResolution {
     hypothesis: thesis ? { id: thesis.id, status: thesis.status, primaryPersonaId: thesis.primaryPersonaId, factLabel: thesisRelevance(null, thesis).factLabel } : null,
     eligible,
     preselected,
+    recommended: recommend(eligibleRows, purpose),
     nextStep,
     headline,
     excluded,
