@@ -312,7 +312,7 @@ export interface RoleVerificationInput {
   confidence?: 'high' | 'medium' | 'low';
   summary: string | null;
   /** 'gemini_grounded_search' (the default) for the bounded search; 'human' when the statement is Casey's own. */
-  provider?: 'gemini_grounded_search' | 'human';
+  provider?: 'gemini_grounded_search' | 'web_search' | 'human';
 }
 
 const VALID_URL = /^https?:\/\/\S+\.\S+/i;

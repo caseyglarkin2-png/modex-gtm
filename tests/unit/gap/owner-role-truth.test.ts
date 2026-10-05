@@ -84,6 +84,17 @@ describe('4. same employer, verified new irrelevant title: not an owner for that
   });
 });
 
+describe('a role that is only LIKELY (one supporting source) never vaults over a direct thesis fit', () => {
+  it('an Apollo-intake-likely EVP of supply chain operations does not outrank the directly relevant air network president on an air fact', () => {
+    const air = { ...fulfillment, id: 'h-air', observation: 'With Tricolor, we are redesigning our international air network by deploying our aircraft strategically.' };
+    const likelyRole: RoleInput = { state: 'ROLE_CURRENT_LIKELY', label: 'Role current (likely)', why: 'Apollo intake 2026-05-04 agrees with the CRM.', effectiveTitle: 'enterprise vice president supply chain operations', priorTitle: null, usableForRanking: true };
+    const r = resolveOwner(base({ account: { name: 'FedEx', entityType: '3pl' }, hypothesis: air, candidates: [hs('1', 'Tracci Schultz', 'enterprise vice president supply chain operations', { employment: likely, role: likelyRole }), hs('2', 'Lisa Lisson', 'President Air Network Operations', { employment: likely })] }));
+    expect(r.eligible.map((c) => c.name)).toEqual(['Lisa Lisson', 'Tracci Schultz']);
+    expect(r.recommended?.key).toBe('hubspot:2');
+    expect(r.recommended?.firstDifference).toBe('thesis relevance');
+  });
+});
+
 describe('a confirmed current role ranks above an unverified one for a hypothesis, and is only a tie-break for the cold touch', () => {
   const people = [hs('1', 'Una Unverified', 'Senior Director of Transportation'), hs('2', 'Vera Verified', 'Director of Transportation', { role: roleConfirmed('Director of Transportation'), employment: likely })];
   it('hypothesis: the verified director leads the unverified senior director; cold: seniority leads', () => {

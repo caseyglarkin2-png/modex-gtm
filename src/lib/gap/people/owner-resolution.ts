@@ -202,8 +202,13 @@ type RankDimension = { name: string; value: number };
 /** The dimensions whose first difference makes one person a RECOMMENDED owner; the rest only order a choice. */
 const STRONG_DIMENSIONS = new Set(['buyer truth', 'relationship', 'named initiative', 'current role', 'thesis relevance', 'lane', 'named ownership', 'site fit', 'technology ownership']);
 
-/** How the person's CURRENT role reads for ranking: a verified or likely-current role above an unverified one. */
-const ROLE_RANK: Record<string, number> = { ROLE_CURRENT_CONFIRMED: 3, ROLE_CURRENT_LIKELY: 2, ROLE_UNVERIFIED: 1, ROLE_CHANGED_CONFIRMED: 3 };
+/**
+ * How the person's CURRENT role reads for ranking: a role CONFIRMED by strong evidence (their own profile, the
+ * employer's page, a verification, Casey) or a verified new title ranks above every other; a role that is only
+ * LIKELY (one supporting source such as an Apollo intake agreeing with the CRM) ranks with the unverified, so a
+ * single provider row can never vault a person over a direct thesis fit (FedEx dogfood 2026-10-05).
+ */
+const ROLE_RANK: Record<string, number> = { ROLE_CURRENT_CONFIRMED: 2, ROLE_CURRENT_LIKELY: 1, ROLE_UNVERIFIED: 1, ROLE_CHANGED_CONFIRMED: 2 };
 
 function rankDimensions(c: OwnerCandidate, input: OwnerCandidateInput, purpose: OwnerPurpose): RankDimension[] {
   const r = c.read;
@@ -265,7 +270,7 @@ function recommend(rows: ReadonlyArray<{ c: OwnerCandidate; input: OwnerCandidat
       case 'named initiative':
         return `a live signal names them on the initiative (${rows[0].input.initiative})`;
       case 'current role':
-        return `their current role is ${top.role ? top.role.label.toLowerCase() : 'verified'} while ${second.name}'s is ${second.role ? second.role.label.toLowerCase() : 'unverified'}`;
+        return `their current role is confirmed by strong evidence (${top.role ? top.role.label.toLowerCase() : 'verified'}) while ${second.name}'s is ${second.role ? second.role.label.toLowerCase() : 'not verified'}`;
       case 'thesis relevance':
         return top.relevance ? top.relevance.why : 'the fact lands on their responsibility';
       case 'lane':
