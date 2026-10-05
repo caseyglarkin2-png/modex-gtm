@@ -12,6 +12,8 @@ import { buildEmploymentPrompt, parseEmploymentAnswer, roleVerifyPrompt, verifyE
 import { readRole } from '@/lib/gap/people/role-currentness';
 
 const NOW = new Date('2026-10-05T12:00:00Z');
+/** The character the voice rules forbid, built without writing it. */
+const EM_DASH = String.fromCharCode(0x2014);
 const WALMART = 'Walmart Inc.';
 const STORED = 'Sr Director - West Transportation Command Center';
 const POST = 'https://www.linkedin.com/in/christian-burton-57161518b/';
@@ -109,7 +111,7 @@ describe('(8) parseEmploymentAnswer: five verdicts, and no URL asserts nothing',
     expect(p).toMatch(/old conference bios/i);
     for (const v of ['same_role', 'different_role', 'left', 'conflict', 'unknown']) expect(p).toContain(`"${v}"`);
     expect(p).toMatch(/Never invent a URL/);
-    expect(p).not.toMatch(/—/);
+    expect(p).not.toContain(EM_DASH);
     expect(buildEmploymentPrompt({ name: 'C M', title: STORED, company: WALMART })).toBe(roleVerifyPrompt({ name: 'C M', title: STORED, company: WALMART }));
   });
   it('verifyEmployment runs one injected search and carries the compatibility field', async () => {

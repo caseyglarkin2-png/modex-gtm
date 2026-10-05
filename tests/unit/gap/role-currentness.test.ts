@@ -11,6 +11,8 @@ import { evidenceFromFields } from '@/lib/gap/people/employment-store';
 import { CONFLICT_WINDOW_DAYS, RECENT_DAYS, ROLE_LABEL, readRole, roleBlocksRanking, sameRole, type RoleRead } from '@/lib/gap/people/role-currentness';
 
 const NOW = new Date('2026-10-05T12:00:00Z');
+/** The character the voice rules forbid, built without writing it. */
+const EM_DASH = String.fromCharCode(0x2014);
 const ACCOUNT = 'Walmart Inc.';
 const STORED = 'Sr Director - West Transportation Command Center';
 const crm = (title = STORED) => crmEvidence({ company: 'Walmart', title, email: 'x@walmart.com', lastModifiedAt: '2026-09-30T00:00:00Z' });
@@ -28,7 +30,7 @@ describe('(1) same employer, same role: ROLE_CURRENT_CONFIRMED and usable', () =
     expect(r.priorTitle).toBeNull();
     expect(r.verifyNeeded).toBe(false);
     expect(r.decidedBy[0].kind).toBe('profile');
-    expect(r.why).not.toMatch(/—/);
+    expect(r.why).not.toContain(EM_DASH);
   });
   it('the same strong source older than RECENT_DAYS is likely, not confirmed', () => {
     const r = read([...crm(), profile({ at: '2025-09-01T00:00:00Z' })]);
@@ -226,7 +228,7 @@ describe('sameRole: a normalized title comparison', () => {
     expect(sameRole(null, 'Director')).toBe(false);
     expect(sameRole('', '')).toBe(false);
     expect(sameRole(undefined, undefined)).toBe(false);
-    expect(Object.values(ROLE_LABEL).join(' ')).not.toMatch(/—/);
+    expect(Object.values(ROLE_LABEL).join(' ')).not.toContain(EM_DASH);
     expect(Object.keys(ROLE_LABEL).sort()).toEqual(['ROLE_CHANGED_CONFIRMED', 'ROLE_CONFLICT', 'ROLE_CURRENT_CONFIRMED', 'ROLE_CURRENT_LIKELY', 'ROLE_UNVERIFIED']);
   });
 });

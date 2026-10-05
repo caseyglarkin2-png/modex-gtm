@@ -13,6 +13,8 @@ vi.mock('next/navigation', () => ({ useRouter: () => ({ refresh: vi.fn() }) }));
 const WALMART = 'Walmart Inc.';
 const STORED = 'Sr Director - West Transportation Command Center';
 const POST_URL = 'https://www.linkedin.com/in/christian-burton-57161518b/';
+/** The character the voice rules forbid, built without writing it. */
+const EM_DASH = String.fromCharCode(0x2014);
 const fetchMock = vi.fn();
 const answer = (body: unknown, status = 200) => fetchMock.mockResolvedValueOnce({ ok: status < 400, status, json: async () => body });
 const verification = (over: Record<string, unknown>) => ({ verdict: 'different_role', employmentVerdict: 'current', company: WALMART, title: null, priorTitle: STORED, sourceUrl: POST_URL, sourceDate: '2026-10-05', confidence: 'high', tier: 'strong', summary: 'A colleague was promoted into the role.', ...over });
@@ -77,7 +79,7 @@ describe('VERIFY CURRENT ROLE: five outcomes in seller words', () => {
     answer({ error: 'human_correction_stands' }, 409);
     fireEvent.click(screen.getByTestId('employment-verify'));
     expect(await outcome()).toMatch(/Not recorded: human correction stands/);
-    expect(container.textContent).not.toMatch(/—/);
+    expect(container.textContent).not.toContain(EM_DASH);
   });
   it('without a stored title the sentence says "the stored role"', async () => {
     render(<EmploymentControl personaId={42} name="C M" accountName={WALMART} />);
