@@ -30,6 +30,11 @@ engine: one read service, a few governed actions, and the controls where the ins
    officers were set aside as employment conflicts. Fixed before ship (below). Also found: the FedEx owner panel
    preselected a HubSpot-only Managing Director over 34 other eligible people, and likely-current transportation
    managers outranked an unverified Senior Vice President of Transportation Services. Both fixed before ship.
+5. **Found by the fresh adversarial review (below).** The decision-time gate read less evidence than the panel (no
+   live Apollo status), a person's own email domain counted as a spelling of the account, a HubSpot-only person
+   Apollo marked moved out stayed eligible, a four-letter prefix could hide a departure ("Mars" / "Marsh McLennan"),
+   an entity boundary fired on its own account, a carrier's hub and station managers read as "needs review", and a
+   stale panel could still show a machine token. All fixed before ship.
 
 ## The contract
 
@@ -59,8 +64,10 @@ PRIMARY operators: network, hub, terminal, station, linehaul, surface, ground, a
 engineering, network planning, sortation, facility operations, operations engineering; operations technology with a
 freight scope is TRANSFORMATION TECH. A bare "Operations" title counts only with a stated scope: district or station
 is SITE scope; "scope not stated: may be one station or district" otherwise, with no seniority inference. Enterprise,
-North America and network scope rank above a local station. Air-side roles are direct operators of the air network
-and sit behind the ground network owners on named ownership; the reasons say which. A reviewed constant
+North America and network scope rank above a local station. A hub, station, ramp, sort, gateway, depot or service
+center manager, director or supervisor is a primary operator of one site of the network (site scope; a director and
+above of hub or station operations runs the network of them). Air-side roles ("Air Operations", flight, aircraft) are
+the air side, behind the ground network owners; brokerage runs no hubs or yards. The reasons say which. A reviewed constant
 (`people/entity-boundary.ts`) sets FedEx Supply Chain (the former GENCO, sold to CMA CGM 2026-10-01) aside as
 divested and flags FedEx Logistics and FedEx Freight as separate operating companies: selectable with a caution, never
 preselected.
@@ -127,15 +134,26 @@ likely; the CRM alone is unverified. A HubSpot `lastmodifieddate` never proves a
 `ContactEnrichment` / `ContactEnrichmentField` (`employment_status`, `employment_company`, `employment_title`,
 `employment_source_url`, `employment_note`; source manual for Casey, derived for a verification, apollo / hubspot
 for the intakes). Verified at decision time, fail closed on LEFT / CONFLICT: the seller draft, cold outbound, enroll,
-routing inputs (`skip`), persona assignment and the owner action. Stale employment changes the ranking upstream
-(set aside before the list), not only the send gate.
+routing inputs (`skip`), persona assignment and the owner action. The gate reads the SAME evidence the owner panel
+reads: the record, the account's own names and domains (`accountEmploymentContext`: aliases, the parent brand, the
+child accounts, canonical domain links and an email domain two or more of the account's contacts share; one person's
+address never counts), and the person's linked HubSpot row where Apollo's sweep writes `apollo_employment_status`
+(one cached batch read, 3 s timeout; unreadable means decided on the record, and the refusal says so). A HubSpot-only
+person is read the same way, so Apollo's moved_out sets them aside in the panel and in the brief. Stale employment
+changes the ranking upstream (set aside before the list), not only the send gate.
 
-Employer spellings: a provider or CRM variant of the same employer is HERE (`sameEmployer`): the canonical match,
-or one side a four-letter prefix of the other ("Pepsi" / "PepsiCo", "Fed Ex Freight" / "FedEx", "J.B. Hunt Transport
-Services, Inc." / "J.B. Hunt"), or a one-word name equal to the other side's first word ("NFI" / "NFI Industries",
-never "UPS" / "Upstream Logistics", never "Estes Forwarding Worldwide" / "Estes Express Lines"), or the account's own
-domain label and the person's own email domain label ("Genmills" through genmills.com). A generic word ("General",
-"American") never matches alone. "ADUSA Distribution" beside an H-E-B record is still a conflict.
+Employer spellings: a provider or CRM variant of the same employer is HERE (`sameEmployer`): the canonical match;
+the shorter spelling (three letters, or any length with a digit) exactly the LEADING WORDS of the other ("NFI" /
+"NFI Industries", "fed ex" / "FedEx", "j b hunt" / "J.B. Hunt Transport Services", "heb" / "HEB Grocery Company",
+"3M" / "3M Health Care"); one word made of the other plus a legal tail ("pepsi" + "co", and "PepsiCo" against
+"Pepsi - Gatorade Division"); the same distinctive first word (a division, subsidiary or banner: "NFI Logistics",
+"Estes Forwarding" under Estes Express); or the account's own domain label ("Genmills" through genmills.com). A partial
+word never matches ("Mars" is not "Marsh McLennan" or "Marshalls", "Ford" is not "Fordham", "Amazon" is not
+"Amazonia"), a generic or common brand word never matches alone ("General", "American", "Delta", "Pioneer"), and
+hyphenated families or banners with their own name ("Knight-Swift", "Central Market" at H-E-B) match through aliases.
+Known limit, stated in the tests: an unrelated company sharing the whole first word ("Target Hospitality" at Target)
+reads as the same employer; a departure to one is caught by strong evidence or by Casey. "ADUSA Distribution" beside
+an H-E-B record is still a conflict, whatever address the record carries.
 
 Human feedback is first-class: THIS PERSON LEFT and CURRENT ROLE IS WRONG (`components/gap/employment-control.tsx`,
 `POST /api/gap/personas/[id]/employment`) record an audited correction (actor, timestamp, old account and title, new
@@ -157,16 +175,21 @@ agree), records `execution.gmail_discarded`, and never unsubscribes anyone. Gmai
 ### Seller UX
 
 No machine tokens reach Casey: `no_persona` reads "Approved. GAP needs a person to test this with before it can
-route."; `persona_left_account`, `persona_employment_conflict`, `persona_not_at_account`, `hypothesis_in_use` and
-every import refusal have copy (`ui/refusal-copy.ts`). A departed person reads as a historical contact in NOW and in
+route."; every refusal the owner action, the import, the discard and the employment controls can answer has a
+sentence (`ui/refusal-copy.ts`, pinned by `refusal-copy-coverage.test.ts`); a suffixed code reads through its prefix
+and the exclusion's own sentence stands in as the why, so a USE click after the person was corrected in another tab
+reads "Nothing was attached or routed. Historical H-E-B contact ..." and never a token. A departed person reads as a historical contact in NOW and in
 the owner panel's set-aside list, never as WHO, never as the alternate, never as the motion person.
 
 ## Dogfood (production, read-only, 2026-10-05; nobody contacted, nothing written, no credit spent)
 
 `scripts/gap/owner-resolution-dogfood.ts`. Every account below answered `choose` (two or more eligible): GAP does not
-pick. Contact currentness set nobody aside after the employer-spelling fix (before it: 35 at NFI, 25 at J.B. Hunt, 11
-at PepsiCo, 2 at General Mills, 1 at Tyson, 2 at FedEx, all false). Set aside across the run: 24 other region, 13
-do-not-contact, 13 no name, 4 divested entity, 1 opted out.
+pick. Final run after the review fixes: 8 currentness set-asides across the ten accounts, all substantive: 4 where
+Apollo's sweep says the person moved (a PepsiCo Latam CSCO, a Tyson SVP, two Walmart people) and 4 where the CRM
+company names a banner or subsidiary with its own name and no alias yet (SDR Distribution at NFI, Central Market at
+H-E-B, King Soopers / City Market at Kroger), which fail closed as "verify the current role". Before the fixes the
+same read set 35 of 35 NFI contacts, 25 of 25 J.B. Hunt contacts, 11 PepsiCo and 2 General Mills people aside, all
+false. Also set aside: 17 other region, 10 do-not-contact, 11 no name, 2 divested entity, 1 opted out.
 
 | Account | Row kind | Operator (top of the ranked choice) | Source | GAP contact? | Tech / transformation | Sponsor | Eligible / notes |
 |---|---|---|---|---|---|---|---|
@@ -192,6 +215,30 @@ planning and engineering VP (Jeffrey, a GAP contact) and the transportation Mana
 plausible owners with the reasons that say which part each one runs. The choice is Casey's; no FedEx person is
 auto-selected. A better ground-network owner needs a Network 2.0 fact, not this one.
 
+## Adversarial review (fresh reviewer, separate worktree, 2026-10-05)
+
+BLOCKERS, both FIXED and mutation-proven: B1 the decision-time gate read the record only while the panel also read
+the linked HubSpot row (Apollo's sweep), so a person the panel set aside could still be drafted, sent, enrolled,
+routed or assigned (the gate now reads that row with the account context, cached, 3 s timeout, decided on the record
+and said so when unreadable); B2 a person's own email domain counted as a spelling of the account, so a record
+refreshed to the new employer's address read the departure as "here" (the account side is now
+`accountEmploymentContext`, and one address never counts). SHOULD FIX, all FIXED: S3 a HubSpot-only person Apollo
+marked moved out stayed eligible and preselected; S4 the four-letter prefix rule ("Mars" / "Marsh McLennan") and the
+hyphenated families (aliases now reach the gate); S5 an entity boundary fired on its own account ("FedEx Freight");
+S6 a carrier's hub and station managers read "needs review"; S7 a stale panel could show "candidate not
+eligible:employment conflict" (every code has copy; the exclusion's sentence is the why). NICE TO HAVE, FIXED: yards
+plural in two sentences; "Air Operations" is the air side and brokerage is not an operator; the headline says when
+HubSpot was not read; the import prefers a live row over a legacy do-not-contact duplicate, stays `already` after a
+later opt-out, and says when a different HubSpot id is already linked; research dedupes against every name on record.
+Recorded, not fixed: the call brief shows no employment state (display only; the call action itself is gated).
+REJECTED by the reviewer after checking: the frozen-hypothesis trigger does not cover `primary_persona_id`; the
+sole-eligible preselect and first-difference ranking; batch routing and targeted routing both run through the gate;
+enroll and copy share the gates; the import never creates an account, writes HubSpot or calls Apollo; the discard
+touches one proven draft and a vanish is reconciled, never inferred; a human correction stands over verification;
+weak evidence is filtered; the client bundle reaches no server module; the routes are session-only, validated and
+secret-free; FIND OPERATOR stages candidates only; no em dash or "throughput" in new strings. The reviewer's
+failing-input file stays in the review worktree as evidence (18 red before the fixes).
+
 ## Production repair (authorized scope only; recorded after deploy)
 
 Authorized: discard / reconcile the exact stale Pepsi / Michelle GAP draft; link the existing Isaac Scott HubSpot
@@ -215,3 +262,6 @@ Receipt: see the "Production repair receipt" section once it is appended below.
 - The sponsor slot follows the one prior (`isSponsor` by `rankWho`); at PepsiCo that is Brad Stroup, and Michelle
   Schlie stays an adjacent operator on the record.
 - Employment verification is bounded to one grounded search per click and records only with a URL.
+- Banners and subsidiaries with their own name read as a conflict ("verify") until an alias exists: Central Market
+  (H-E-B), King Soopers and City Market (Kroger), SDR Distribution (NFI). Add them through the alias table.
+- The call brief (`/api/gap/call/[personaId]`) does not display the employment state; the call action is gated.
