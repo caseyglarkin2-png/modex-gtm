@@ -108,6 +108,7 @@ export interface CallBrief {
 export const LAST_DISPOSITIONS = 3;
 
 /** The employment and role reads for the call (read only; a read failure says nothing rather than failing the brief). */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function personaCurrentness(prisma: any, personaId: number, accountName: string, storedTitle: string | null): Promise<Pick<BriefPersona, 'employment' | 'roleCurrentness'>> {
   try {
     const [{ accountEmploymentContext, loadPersonaEmployment, personaRole }, { EMPLOYMENT_LABEL }, { ROLE_LABEL }] = await Promise.all([import('../people/employment-store'), import('../people/employment'), import('../people/role-currentness')]);

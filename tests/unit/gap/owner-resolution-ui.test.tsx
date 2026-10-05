@@ -84,8 +84,11 @@ describe('NOW: controls, not instructions', () => {
       name: 'H-E-B',
       historical: [{ name: 'Dakota Socha', title: 'transportation & reverse logistics', personaId: 1306, elsewhere: 'ADUSA Distribution (Director of Distribution Operations)' }],
     });
-    const { container } = render(<AccountNowView v={v} nextHref={null} nextLabel={null} links={[]} />);
+    const { container } = render(<AccountNowView v={{ ...v, blocked: [{ name: 'Troy Shaw', title: 'director global logistics', personaId: 45 }] }} nextHref={null} nextLabel={null} links={[]} />);
     expect(screen.getByTestId('now-historical')).toHaveTextContent('Dakota Socha, transportation & reverse logistics. Historical H-E-B contact. Current-employer evidence now points to ADUSA Distribution (Director of Distribution Operations). Not eligible for H-E-B outreach.');
+    // A do-not-contact GAP contact is said on NOW with the legacy review one click away (never silently skipped).
+    expect(screen.getByTestId('now-blocked')).toHaveTextContent('Not contacted (do not contact): Troy Shaw. Each flag can be reviewed; a real unsubscribe or opt-out is never cleared.');
+    expect(screen.getByTestId('now-review-suppression')).toHaveTextContent('Review the flag on Troy Shaw');
     expect(screen.getByTestId('employment-left')).toBeInTheDocument();
     expect(container.textContent).not.toMatch(/stale_persona|LEFT_COMPANY_CONFIRMED|persona_left_account|no_persona/);
     expect(screen.queryByTestId('add-to-gap')).toBeNull();
@@ -164,6 +167,35 @@ describe('the owner-resolution panel', () => {
     await waitFor(() => expect(screen.getByTestId('suppression-review')).toBeInTheDocument());
     // Nothing is cleared by rendering: the clear needs the confirm step.
     expect(screen.queryByTestId('suppression-confirm-button')).toBeNull();
+  });
+  it('a rep reads a compact card first (name, title, the lane and thesis fit), opens Details for the rest, sees the set-aside list grouped by reason, and can open the glossary', async () => {
+    const dnc = { ...RESOLUTION.excluded[0], candidate: { ...RESOLUTION.excluded[0].candidate, key: 'gap:13', personaId: 13, name: 'Isaac Scott', title: 'Sr Director of Transportation - Frito-Lay' }, code: 'do_not_contact' as const, reason: 'Marked do not contact in GAP.' };
+    const other = { ...RESOLUTION.excluded[0], candidate: { ...RESOLUTION.excluded[0].candidate, key: 'hubspot:9', personaId: null, name: 'Alun Cornish', title: 'Vice President Network Operations' }, code: 'other_region' as const, reason: 'another region: not the North America owner.' };
+    const jeff = { ...RESOLUTION.eligible[0], location: 'Plano, Texas, United States', reasons: ['Primary operator: runs the carrier network.', 'North America remit stated; network scope.', 'Thesis fit: runs operations planning and engineering: the fact is a network program.', 'Employment: Current per the CRM (not verified). The CRM says FedEx.', 'Source: GAP contact, email on record.'] };
+    vi.spyOn(globalThis, 'fetch').mockImplementation(async () => jsonResponse({ resolution: { ...RESOLUTION, eligible: [jeff, RESOLUTION.eligible[1]], excluded: [RESOLUTION.excluded[0], dnc, other] }, hubspot: { via: 'identity' }, aliasProposals: [] }));
+    const { container } = render(<OwnerResolutionPanel hypothesisId="h1" accountName="FedEx" />);
+    await waitFor(() => expect(screen.getAllByTestId('owner-candidate')).toHaveLength(2));
+    const card = screen.getAllByTestId('owner-candidate')[0];
+    // The summary shows the lane and the thesis fit; geography, employment and source wait behind Details.
+    expect(card).toHaveTextContent('Primary operator: runs the carrier network.');
+    expect(card).toHaveTextContent('Thesis fit: runs operations planning and engineering');
+    expect(card).not.toHaveTextContent('Employment: Current per the CRM');
+    fireEvent.click(within(card).getByTestId('owner-candidate-details'));
+    expect(within(card).getByTestId('owner-candidate-detail-list')).toHaveTextContent('Plano, Texas, United States');
+    expect(within(card).getByTestId('owner-candidate-detail-list')).toHaveTextContent('Employment: Current per the CRM');
+    // The set-aside toggle says the counts by reason; the list is grouped with plain labels.
+    expect(screen.getByTestId('owner-excluded-toggle')).toHaveTextContent('Show 3 set aside (do not contact 1, divested unit 1, another region 1)');
+    fireEvent.click(screen.getByTestId('owner-excluded-toggle'));
+    const groups = screen.getByTestId('owner-excluded').querySelectorAll('[data-group]');
+    expect([...groups].map((g) => g.getAttribute('data-group'))).toEqual(['do_not_contact', 'divested_entity', 'other_region']);
+    expect(screen.getByTestId('owner-excluded')).toHaveTextContent('Do not contact (1)');
+    // The glossary opens on request and explains the vocabulary in plain words; nothing here carries an em dash.
+    fireEvent.click(screen.getByTestId('owner-glossary-toggle'));
+    expect(screen.getByTestId('owner-glossary')).toHaveTextContent('Recommended: the first strong difference between the top two people, in words. A reason, never a selection.');
+    expect(container.textContent).not.toMatch(/\u2014/);
+    // The action help says what the click does and that no email is sent.
+    fireEvent.click(screen.getByLabelText('Choose Glen Chaffee'));
+    expect(screen.getByTestId('owner-action-help')).toHaveTextContent('Adds them to GAP, attaches them to this hypothesis and starts routing (shadow). No email is sent by this click');
   });
   it('set-aside people are listed with the reason when asked; nobody eligible shows Owner not resolved and FIND OPERATOR', async () => {
     vi.spyOn(globalThis, 'fetch').mockImplementation(async (url, init) => {

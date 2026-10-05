@@ -8,6 +8,7 @@ import { PendingLink } from '@/components/gap/pending-link';
 import type { NowLine, NowView } from '@/lib/gap/context/now';
 import { VoicePreviewButton } from '@/components/voice-preview-button';
 import { AddToGapButton } from '@/components/gap/add-to-gap-button';
+import { BlockedPeople } from '@/components/gap/blocked-people';
 import { EmploymentControl } from '@/components/gap/employment-control';
 import { OutstandingDraftPanel } from '@/components/gap/outstanding-draft-panel';
 
@@ -133,6 +134,7 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null }
             ) : null}
           </div>
         )}
+        {v.blocked?.length ? <BlockedPeople accountName={v.name} people={v.blocked} /> : null}
         {v.historical?.length ? (
           <ul className="mt-2 space-y-1 text-xs" data-testid="now-historical">
             {v.historical.map((h) => (

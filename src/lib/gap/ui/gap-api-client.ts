@@ -237,6 +237,10 @@ export interface BriefPersona {
   phone: string | null;
   role: string | null;
   doNotContact: boolean;
+  /** Contact currentness at the account (owner resolution): a departed or conflicted person is said before the call. */
+  employment?: { state: string; label: string; why: string } | null;
+  /** Role currentness: a changed or disputed role is said before the call. */
+  roleCurrentness?: { state: string; label: string; why: string; effectiveTitle: string | null } | null;
 }
 
 export interface BriefAccount {

@@ -80,13 +80,19 @@ export function EmploymentControl({ personaId, hubspotContactId, name, accountNa
   }
 
   const correct = (status: 'left' | 'role_changed' | 'current') =>
-    post(`/api/gap/personas/${personaId}/employment`, { status, newCompany: company.trim() || null, newTitle: newTitle.trim() || null, sourceUrl: url.trim() || null, note: note.trim() || null }, (b) => {
+    post(
+      hubspotOnly ? '/api/gap/people/verify-role' : `/api/gap/personas/${personaId}/employment`,
+      hubspotOnly
+        ? { hubspotContactId, accountName, name, title: title ?? null, correction: { status, newCompany: company.trim() || null, newTitle: newTitle.trim() || null, sourceUrl: url.trim() || null, note: note.trim() || null } }
+        : { status, newCompany: company.trim() || null, newTitle: newTitle.trim() || null, sourceUrl: url.trim() || null, note: note.trim() || null },
+      (b) => {
       const read = b.read as { state?: string } | undefined;
       const role = b.role as RoleReadLike | undefined;
       if (status === 'left') return `Recorded: ${name} left ${accountName}${company.trim() ? ` (now ${company.trim()})` : ''}. Not eligible for ${accountName} outreach; not do-not-contact.`;
       if (status === 'role_changed') return newTitle.trim() ? `Recorded: ${name}'s role at ${accountName} is now "${newTitle.trim()}". Usable for ranking under the new title.` : `Recorded: ${name}'s stored role at ${accountName} is no longer theirs; the new title is not known. Verify current remit before using.`;
       return `Recorded. Employment now reads ${String(read?.state ?? 'current').replace(/_/g, ' ').toLowerCase()}${role?.state ? ` and the role reads ${String(role.state).replace(/^ROLE_/, '').replace(/_/g, ' ').toLowerCase()}` : ''}.`;
-    });
+      },
+    );
   const verify = () => {
     const path = hubspotOnly ? '/api/gap/people/verify-role' : `/api/gap/personas/${personaId}/employment/verify`;
     const body = hubspotOnly ? { hubspotContactId, accountName, name, title: title ?? null } : {};
@@ -101,21 +107,17 @@ export function EmploymentControl({ personaId, hubspotContactId, name, accountNa
         </p>
       ) : null}
       {mode === null ? (
-        <p className="flex flex-wrap gap-x-3 gap-y-1">
-          {!hubspotOnly ? (
-            <button type="button" className="underline" onClick={() => setMode('left')} data-testid="employment-left">
-              This person left
-            </button>
-          ) : null}
-          {!hubspotOnly ? (
-            <button type="button" className="underline" onClick={() => setMode('role_changed')} data-testid="employment-wrong-role">
-              Current role is wrong
-            </button>
-          ) : null}
-          <button type="button" className="underline" disabled={busy !== null} onClick={() => void verify()} data-testid="employment-verify">
-            {busy?.endsWith('verify') || busy?.endsWith('verify-role') ? 'Verifying...' : 'Verify current role'}
+        <div className="flex flex-wrap items-center gap-1.5" role="group" aria-label={`Check ${name}`}>
+          <button type="button" className={chip} disabled={busy !== null} onClick={() => void verify()} data-testid="employment-verify" title="One source-backed public check of their current role. Nothing is asserted without a source.">
+            {busy?.endsWith('verify') || busy?.endsWith('verify-role') ? 'Verifying...' : 'Verify role'}
           </button>
-        </p>
+          <button type="button" className={chip} onClick={() => setMode('role_changed')} data-testid="employment-wrong-role" title="You know their role is different now. Records your word; never changes HubSpot.">
+            Role is wrong
+          </button>
+          <button type="button" className={chip} onClick={() => setMode('left')} data-testid="employment-left" title="You know they no longer work here. Removes them from this account's outreach at once; never do-not-contact.">
+            Left the company
+          </button>
+        </div>
       ) : (
         <div className="space-y-1 rounded-md border border-[var(--border)] p-2" data-testid="employment-form">
           <p className="font-medium">{mode === 'left' ? `${name} left ${accountName}.` : `${name}'s role is wrong.`} Add what you know (optional).</p>
@@ -142,3 +144,6 @@ export function EmploymentControl({ personaId, hubspotContactId, name, accountNa
     </div>
   );
 }
+
+/** A small secondary button: the three checks sit beside a name without reading as body links. */
+const chip = 'rounded-md border border-[var(--border)] px-2 py-0.5 text-[11px] font-medium text-[var(--foreground)] hover:bg-[var(--muted)] disabled:opacity-60';

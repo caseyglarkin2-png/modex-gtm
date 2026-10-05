@@ -61,6 +61,8 @@ export interface NowView {
   outstandingDraft?: { recipient: string; name: string | null; decisionId: string; gmailDraftId: string; createdAt: string } | null;
   /** People on record who left the company (contact currentness): historical, never WHO, never do-not-contact. */
   historical?: Array<{ name: string; title: string | null; personaId: number | null; elsewhere: string | null }>;
+  /** GAP contacts marked do not contact: never WHO; the legacy suppression review explains each flag. */
+  blocked?: Array<{ name: string; title: string | null; personaId: number }>;
   whoUnknown: string | null;
   alternate: { name: string; title: string | null; why: string } | null;
   whyNow: NowLine[];
@@ -231,6 +233,7 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   const odName = od ? p?.lanes.flatMap((l) => l.people).find((x) => x.personaId != null && x.personaId === od.personaId)?.name ?? null : null;
   const outstandingDraft: NowView['outstandingDraft'] = od ? { recipient: od.recipient, name: odName ? displayName(odName) : null, decisionId: od.decisionId!, gmailDraftId: od.gmailDraftId!, createdAt: od.sentAt ?? '' } : null;
   // Historical contacts: people the evidence says left (never WHO, never an alternate, never do-not-contact).
+  const blocked: NowView['blocked'] = (p?.lanes.flatMap((l) => l.people) ?? []).filter((x) => x.doNotContact && x.source === 'gap' && typeof x.personaId === 'number').map((x) => ({ name: displayName(x.name), title: x.title, personaId: x.personaId as number }));
   const historical: NowView['historical'] = (p?.lanes.flatMap((l) => l.people) ?? []).filter((x) => x.employment?.state === 'LEFT_COMPANY_CONFIRMED').map((x) => ({ name: displayName(x.name), title: x.title, personaId: x.personaId ?? null, elsewhere: x.employment?.elsewhere?.company ? `${x.employment.elsewhere.company}${x.employment.elsewhere.title ? ` (${x.employment.elsewhere.title})` : ''}` : null }));
   // When the motion names the person (a relationship, a thread, an introducer), the prior's best operator is the
   // alternate; otherwise the prior's own second choice.
@@ -357,6 +360,7 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
     addToGap,
     outstandingDraft,
     historical,
+    blocked,
     whoUnknown: ownerMissing ? 'No US / North America transportation operations owner on record yet: find them (BRIEF: buyer map).' : whoUnknown,
     alternate: alt,
     whyNow,
