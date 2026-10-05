@@ -39,7 +39,7 @@ export async function GET(_request: NextRequest, { params }: RouteContext) {
   if (!row) return NextResponse.json({ error: 'not_found' }, { status: 404 });
   const r = await loadOwnerResolution(prisma, { accountName: row.account_name, purpose: 'HYPOTHESIS_ACTIVATION', hypothesisId: id, now: new Date() });
   if (!r.ok) return NextResponse.json({ error: r.reason }, { status: 404 });
-  return NextResponse.json({ resolution: r.resolution, hubspot: r.hubspot });
+  return NextResponse.json({ resolution: r.resolution, hubspot: r.hubspot, family: r.family, aliasProposals: r.aliasProposals });
 }
 
 export async function POST(request: NextRequest, { params }: RouteContext) {

@@ -53,6 +53,14 @@ export interface EmploymentEvidence {
   note?: string | null;
   /** The evidence explicitly says they LEFT this account (a departure), whatever company it names. */
   left?: boolean;
+  /**
+   * The evidence says the stored ROLE is no longer theirs (promoted, the role moved to someone else) while they stay
+   * at the company; `title` is the new title when the source names it, else null. Read by role-currentness.ts;
+   * for the employment read it is a plain placement at `company`.
+   */
+  roleChanged?: boolean;
+  /** A verification found sources that disagree about the role: says nothing about the company; the role read conflicts. */
+  conflict?: boolean;
 }
 
 export interface EmploymentRead {
@@ -148,7 +156,16 @@ function leads(short: string, long: readonly string[]): boolean {
 }
 const usableSpelling = (s: string) => (s.length >= 3 || /\d/.test(s)) && !GENERIC_EMPLOYER_WORDS.has(s);
 /** Two spellings whose first word is the same distinctive name ("NFI Logistics" / "NFI Industries", "Estes Forwarding" / "Estes Express"): a division, a subsidiary or a banner of the same group. */
-const sameFirstWord = (a: readonly string[], b: readonly string[]) => !!a[0] && a[0] === b[0] && usableSpelling(a[0]);
+/** Words that describe a unit of the same group without naming another company: "NFI Logistics" / "NFI Industries", "Estes Forwarding" / "Estes Express". */
+const FAMILY_DESCRIPTORS = new Set(['logistics', 'industries', 'express', 'forwarding', 'transport', 'transportation', 'services', 'service', 'group', 'distribution', 'freight', 'trucking', 'holdings', 'international', 'global', 'national', 'america', 'americas', 'north', 'usa', 'us', 'company', 'corporation', 'division', 'enterprises', 'systems', 'solutions', 'supply', 'chain', 'brands', 'foods', 'beverages', 'worldwide', 'intermodal', 'dedicated', 'warehousing', 'fulfillment', 'lines', 'line', 'ground', 'air', 'cargo', 'shipping', 'motor']);
+/**
+ * Two spellings whose first word is the same distinctive name AND whose remaining words only describe a unit of the
+ * group ("NFI Logistics" / "NFI Industries"): a division, a subsidiary or a banner. A remaining word that names
+ * something else ("Dollar Tree" / "Dollar General", "Schneider Electric" / "Schneider National", "Old Dominion
+ * University" / "Old Dominion Freight Line", "Performance Team" / "Performance Food Group") is another company,
+ * so a strong placement there reads as a departure (review S4).
+ */
+const sameFirstWord = (a: readonly string[], b: readonly string[]) => !!a[0] && a[0] === b[0] && usableSpelling(a[0]) && a.slice(1).every((w) => FAMILY_DESCRIPTORS.has(w)) && b.slice(1).every((w) => FAMILY_DESCRIPTORS.has(w));
 
 export function sameEmployer(company: string, accountName: string, aliases: readonly string[] = [], domains: readonly string[] = []): boolean {
   const names = [accountName, ...aliases].filter((n) => !!n?.trim());
@@ -168,7 +185,8 @@ export function sameEmployer(company: string, accountName: string, aliases: read
 /** Does the evidence place them at THIS account (the account, one of its names, or its own domain label)? */
 function here(e: EmploymentEvidence, accountName: string, aliases: readonly string[], domains: readonly string[] = []): boolean | null {
   if (e.left) return false;
-  if (!e.company) return null;
+  // A role conflict says nothing about the company; a row with no company says nothing either.
+  if (e.conflict || !e.company) return null;
   return sameEmployer(e.company, accountName, aliases, domains);
 }
 
@@ -260,7 +278,9 @@ export function apolloEvidence(input: { status: string | null; verifiedAt: strin
   const s = String(input.status ?? '').trim().toLowerCase();
   if (!s || s === 'unverified') return [];
   const source = `Apollo employment check${input.verifiedAt ? '' : ' (undated)'}`;
-  if (s === 'current' || s === 'current_title_updated') return [{ kind: 'apollo', tier: 'supporting', company: input.accountName, title: input.title ?? null, at: input.verifiedAt, source, note: s === 'current_title_updated' ? 'Title refreshed by Apollo.' : null }];
+  // Apollo's "current" confirms the employer, not the role: it carries a title only when Apollo refreshed the title
+  // itself (current_title_updated), so the ROLE read never counts the CRM title twice (WHO truth, 2026-10-05).
+  if (s === 'current' || s === 'current_title_updated') return [{ kind: 'apollo', tier: 'supporting', company: input.accountName, title: s === 'current_title_updated' ? input.title ?? null : null, at: input.verifiedAt, source, note: s === 'current_title_updated' ? 'Title refreshed by Apollo.' : null }];
   if (s === 'moved_out' || s === 'departed' || s === 'moved_to_lookalike') return [{ kind: 'apollo', tier: 'supporting', company: null, title: null, at: input.verifiedAt, source, left: true, note: `Apollo reads them as ${s.replace(/_/g, ' ')}.` }];
   return [];
 }
@@ -272,6 +292,8 @@ export function interactionEvidence(input: { at: string | null; what: string; ac
 }
 
 /** The tier a web source earns from its URL: a profile or the employer's own page is strong, anything else supporting. */
+const AGGREGATOR_HOST = /\b(zoominfo|rocketreach|contactout|signalhire|apollo|lusha|crunchbase|datanyze|leadiq|seamless|wiza|theorg|spokeo|sprouts|muraena|theofficialboard|equilar|comparably|craft)\b/;
+
 export function tierForUrl(url: string | null | undefined, companyDomains: readonly string[] = []): EvidenceTier {
   let host = '';
   let path = '';
@@ -285,7 +307,8 @@ export function tierForUrl(url: string | null | undefined, companyDomains: reado
   if (!host) return 'weak';
   if (host === 'linkedin.com' && path.startsWith('/in/')) return 'strong';
   if (companyDomains.some((d) => host === d || host.endsWith(`.${d}`))) return 'strong';
-  if (/\b(zoominfo|rocketreach|contactout|signalhire|apollo|lusha|crunchbase|datanyze|leadiq|seamless|wiza)\b/.test(host)) return 'supporting';
+  // A people directory or aggregator is weak: it restates a CRM-shaped record and never decides a role (review S3).
+  if (AGGREGATOR_HOST.test(host)) return 'weak';
   return 'supporting';
 }
 
@@ -296,7 +319,7 @@ export function kindForUrl(url: string | null | undefined, companyDomains: reado
     const host = u.hostname.replace(/^www\./, '').toLowerCase();
     if (host === 'linkedin.com' && u.pathname.toLowerCase().startsWith('/in/')) return 'profile';
     if (companyDomains.some((d) => host === d || host.endsWith(`.${d}`))) return 'employer_page';
-    if (/\b(zoominfo|rocketreach|contactout|signalhire|apollo|lusha|datanyze|leadiq|seamless|wiza)\b/.test(host)) return 'aggregator';
+    if (AGGREGATOR_HOST.test(host)) return 'aggregator';
   } catch {
     // not a URL
   }

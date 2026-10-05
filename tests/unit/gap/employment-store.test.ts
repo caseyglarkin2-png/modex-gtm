@@ -4,6 +4,7 @@
  * overwritten by automation; it never touches suppression, the email or HubSpot. A verification without a source URL
  * asserts nothing.
  */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, expect, it, vi } from 'vitest';
 import { accountEmploymentContext, evidenceFromFields, loadEmployment, readHubSpotOnlyEmployment, recordEmploymentCorrection, recordEmploymentVerification, type HubSpotEmploymentProps } from '@/lib/gap/people/employment-store';
 import { buildEmploymentPrompt, parseEmploymentAnswer, verifyEmployment } from '@/lib/gap/people/employment-verify';
@@ -146,7 +147,9 @@ describe('recordEmploymentVerification: derived evidence never overwrites Casey;
     const r2 = await recordEmploymentVerification(prisma, { personaId: 1306, actor: 'casey', now: NOW, verdict: 'left', company: 'X', title: null, sourceUrl: null, sourceDate: null, summary: null });
     expect(r2.ok && r2.recorded).toBe(false);
     expect(fields.get(1306) ?? []).toEqual([]);
-    expect(audit).toHaveLength(2);
+    // Each attempt records its employment row and its role row; nothing is asserted on either.
+    expect(audit.map((a) => a.kind)).toEqual(['person.employment_verified', 'person.role_verified', 'person.employment_verified', 'person.role_verified']);
+    expect(audit.every((a) => a.payload.recorded === false)).toBe(true);
   });
   it('a human correction stands: automation is refused', async () => {
     const { prisma, audit } = db({ fields: { 1306: [{ field_name: 'employment_status', field_value: 'left', source: 'manual', source_timestamp: NOW, confidence: 1, last_writer: 'casey' }] } });
@@ -159,7 +162,7 @@ describe('verifyEmployment: the prompt asks for a source; the parse asserts noth
   it('parses a fenced JSON answer and tiers it by the URL', () => {
     const text = 'Here is what I found:\n```json\n{"verdict":"left","company":"ADUSA Distribution","title":"Director of Distribution Operations","sourceUrl":"https://www.linkedin.com/in/dakota-x","sourceDate":"2026-09","confidence":"high","summary":"Profile headline shows ADUSA."}\n```';
     expect(parseEmploymentAnswer(text, {})).toMatchObject({ verdict: 'left', company: 'ADUSA Distribution', tier: 'strong', sourceDate: '2026-09' });
-    expect(parseEmploymentAnswer('{"verdict":"left","company":"X","sourceUrl":"https://www.zoominfo.com/p/x","confidence":"high"}', {}).tier).toBe('supporting');
+    expect(parseEmploymentAnswer('{"verdict":"left","company":"X","sourceUrl":"https://www.zoominfo.com/p/x","confidence":"high"}', {}).tier).toBe('weak');
   });
   it('no URL, a bad URL, prose, or an unknown verdict is unknown', () => {
     expect(parseEmploymentAnswer('{"verdict":"left","company":"X","sourceUrl":null,"confidence":"high","summary":"I think so"}', {})).toMatchObject({ verdict: 'unknown', summary: 'I think so' });
@@ -174,7 +177,8 @@ describe('verifyEmployment: the prompt asks for a source; the parse asserts noth
     expect(prompt).toMatch(/Never invent a URL/);
     const search = vi.fn(async () => '{"verdict":"current","company":"H-E-B","title":"Director","sourceUrl":"https://www.heb.com/leadership","confidence":"medium"}');
     const r = await verifyEmployment({ name: 'D', title: null, company: 'H-E-B', companyDomains: ['heb.com'] }, { search });
-    expect(r).toMatchObject({ verdict: 'current', tier: 'strong', kind: 'employer_page' });
+    // The older "current" answer is same_role; old callers read the compatibility field.
+    expect(r).toMatchObject({ verdict: 'same_role', employmentVerdict: 'current', tier: 'strong', kind: 'employer_page' });
     expect(search).toHaveBeenCalledTimes(1);
     expect((await verifyEmployment({ name: 'D', title: null, company: 'H-E-B' }, { search: async () => { throw new Error('down'); } })).verdict).toBe('unknown');
   });

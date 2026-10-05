@@ -97,13 +97,14 @@ const RESOLUTION: OwnerResolution = {
   account: { name: 'FedEx', entityType: '3pl', kind: 'carrier_3pl' },
   hypothesis: { id: 'h1', status: 'approved', primaryPersonaId: null, factLabel: 'a network program (linehaul, sortation, hubs, network optimization)' },
   eligible: [
-    { key: 'gap:2187', source: 'gap', personaId: 2187, hubspotContactId: '219922589799', name: 'Jeffrey Tallman', title: 'Vice President - Operations Planning and Engineering - North America', location: 'Plano, Texas, United States', lane: 'PRIMARY_OPERATOR', laneLabel: 'Primary operator', read: {} as never, relevance: { tier: 'direct', why: 'runs operations planning and engineering: the fact is a network program', families: ['NETWORK_PROGRAM'], factLabel: '' }, employment: null, entity: null, hasEmail: true, action: 'use', reasons: ['Primary operator: runs the carrier network.', 'Thesis fit: runs operations planning and engineering: the fact is a network program.'], caution: null },
-    { key: 'hubspot:1', source: 'hubspot', personaId: null, hubspotContactId: '1', name: 'Glen Chaffee', title: 'Managing Director - Transportation & Logistics', location: 'Mars, Pennsylvania, United States', lane: 'PRIMARY_OPERATOR', laneLabel: 'Primary operator', read: {} as never, relevance: { tier: 'related', why: 'runs transportation, adjacent to a network program', families: ['NETWORK_PROGRAM'], factLabel: '' }, employment: null, entity: null, hasEmail: true, action: 'add_then_use', reasons: ['Primary operator: title says they run transportation.'], caution: null },
+    { key: 'gap:2187', source: 'gap', personaId: 2187, hubspotContactId: '219922589799', name: 'Jeffrey Tallman', title: 'Vice President - Operations Planning and Engineering - North America', location: 'Plano, Texas, United States', lane: 'PRIMARY_OPERATOR', laneLabel: 'Primary operator', read: {} as never, relevance: { tier: 'direct', why: 'runs operations planning and engineering: the fact is a network program', families: ['NETWORK_PROGRAM'], factLabel: '' }, employment: null, role: null, entity: null, hasEmail: true, action: 'use', reasons: ['Primary operator: runs the carrier network.', 'Thesis fit: runs operations planning and engineering: the fact is a network program.'], caution: null },
+    { key: 'hubspot:1', source: 'hubspot', personaId: null, hubspotContactId: '1', name: 'Glen Chaffee', title: 'Managing Director - Transportation & Logistics', location: 'Mars, Pennsylvania, United States', lane: 'PRIMARY_OPERATOR', laneLabel: 'Primary operator', read: {} as never, relevance: { tier: 'related', why: 'runs transportation, adjacent to a network program', families: ['NETWORK_PROGRAM'], factLabel: '' }, employment: null, role: null, entity: null, hasEmail: true, action: 'add_then_use', reasons: ['Primary operator: title says they run transportation.'], caution: null },
   ],
   preselected: null,
+  recommended: { key: 'gap:2187', firstDifference: 'thesis relevance', why: 'Recommended for this hypothesis on thesis relevance: runs operations planning and engineering: the fact is a network program. Glen Chaffee is next. You choose.' },
   nextStep: 'choose',
   headline: '2 plausible owners for this hypothesis: choose one. GAP does not pick.',
-  excluded: [{ candidate: { key: 'gap:71', source: 'gap', personaId: 71, hubspotContactId: null, name: 'Scott Temple', title: 'President, FedEx Supply Chain', location: null, lane: 'EXECUTIVE_SPONSOR', laneLabel: 'Executive sponsor', read: {} as never, relevance: null, employment: null, entity: null, hasEmail: true, action: 'use', reasons: [], caution: null }, code: 'divested_entity', reason: 'FedEx Supply Chain was sold to CMA CGM on 2026-10-01.' }],
+  excluded: [{ candidate: { key: 'gap:71', source: 'gap', personaId: 71, hubspotContactId: null, name: 'Scott Temple', title: 'President, FedEx Supply Chain', location: null, lane: 'EXECUTIVE_SPONSOR', laneLabel: 'Executive sponsor', read: {} as never, relevance: null, employment: null, role: null, entity: null, hasEmail: true, action: 'use', reasons: [], caution: null }, code: 'divested_entity', reason: 'FedEx Supply Chain was sold to CMA CGM on 2026-10-01.' }],
   others: [],
   sponsor: null,
   tech: null,
@@ -133,6 +134,36 @@ describe('the owner-resolution panel', () => {
     expect(screen.getByTestId('owner-result')).toHaveTextContent(/Add to GAP: created/);
     expect(onChanged).toHaveBeenCalledWith({ to: 'active' });
     expect(fetchMock.mock.calls.some(([, init]) => init?.method === 'POST')).toBe(true);
+  });
+  it('RECOMMENDED FOR THIS HYPOTHESIS is a badge with the first difference in words, never a selection: nobody is chosen until Casey clicks', async () => {
+    vi.spyOn(globalThis, 'fetch').mockImplementation(async () => jsonResponse({ resolution: RESOLUTION, hubspot: { via: 'identity' } }));
+    render(<OwnerResolutionPanel hypothesisId="h1" accountName="FedEx" />);
+    await waitFor(() => expect(screen.getByTestId('owner-recommended')).toBeInTheDocument());
+    expect(screen.getByTestId('owner-recommended')).toHaveTextContent('Recommended for this hypothesis');
+    expect(screen.getByTestId('owner-recommended-why')).toHaveTextContent(/on thesis relevance: runs operations planning and engineering/);
+    // The badge sits on one row only; no radio is checked; USE is absent until a click.
+    expect(screen.getAllByTestId('owner-recommended')).toHaveLength(1);
+    expect((screen.getByLabelText('Choose Jeffrey Tallman') as HTMLInputElement).checked).toBe(false);
+    expect(screen.queryByTestId('owner-use')).toBeNull();
+    expect(screen.getByText(/The recommendation is a reason, not a selection: GAP does not pick/)).toBeInTheDocument();
+  });
+  it('the panel mounts the seller controls: VERIFY CURRENT ROLE on the top unverified candidates, Review the legacy flag on a do-not-contact GAP contact, and the alias proposals', async () => {
+    const dnc = { ...RESOLUTION.excluded[0], candidate: { ...RESOLUTION.excluded[0].candidate, key: 'gap:13', personaId: 13, name: 'Isaac Scott', title: 'Sr Director of Transportation - Frito-Lay' }, code: 'do_not_contact' as const, reason: 'Marked do not contact in GAP.' };
+    vi.spyOn(globalThis, 'fetch').mockImplementation(async (url) => {
+      if (String(url).includes('/suppression-review')) return jsonResponse({ personaId: 13, name: 'Isaac Scott', accountName: 'FedEx', email: 'i@x.com', class: 'LEGACY_CONFLICT', sources: [], whyBlocked: ['Only the local flag.'], whatWouldClear: [], laterDeliveries: [], lastBounceAt: null, humanDecisions: [], clear: { allowed: true, touches: ['do_not_contact', 'email_status'], why: 'Only the stale local flag blocks.' }, readAt: '2026-10-05T15:00:00Z' });
+      return jsonResponse({ resolution: { ...RESOLUTION, excluded: [RESOLUTION.excluded[0], dnc] }, hubspot: { via: 'identity' }, aliasProposals: [{ company: 'Central Market', canonical: 'FedEx', evidence: ['Central Market: 2 HubSpot contacts'], key: 'central market' }] });
+    });
+    render(<OwnerResolutionPanel hypothesisId="h1" accountName="FedEx" />);
+    await waitFor(() => expect(screen.getAllByTestId('owner-candidate')).toHaveLength(2));
+    // Both top candidates are unverified: each row carries the verify control (a GAP contact and a HubSpot-only person).
+    expect(screen.getAllByTestId('employment-verify')).toHaveLength(2);
+    expect(screen.getByTestId('owner-alias-proposals')).toHaveTextContent('Central Market');
+    expect(screen.getByTestId('alias-confirm')).toBeInTheDocument();
+    fireEvent.click(screen.getByTestId('owner-excluded-toggle'));
+    fireEvent.click(screen.getByTestId('owner-review-suppression'));
+    await waitFor(() => expect(screen.getByTestId('suppression-review')).toBeInTheDocument());
+    // Nothing is cleared by rendering: the clear needs the confirm step.
+    expect(screen.queryByTestId('suppression-confirm-button')).toBeNull();
   });
   it('set-aside people are listed with the reason when asked; nobody eligible shows Owner not resolved and FIND OPERATOR', async () => {
     vi.spyOn(globalThis, 'fetch').mockImplementation(async (url, init) => {

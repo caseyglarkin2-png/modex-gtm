@@ -99,7 +99,12 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null }
               <AddToGapButton accountName={v.name} hubspotContactId={v.addToGap.hubspotContactId} name={v.addToGap.name} title={v.addToGap.title} />
             ) : null}
             <p className="text-xs text-[var(--muted-foreground)]">{v.who.why}</p>
-            {v.who.personaId ? <EmploymentControl personaId={v.who.personaId} name={v.who.name} accountName={v.name} state={v.who.employment ? { label: v.who.employment.label, why: v.who.employment.why } : null} compact /> : null}
+            {v.who.role ? (
+              <p className="text-xs text-[var(--muted-foreground)]" data-testid="now-who-role">
+                Role: {v.who.role.label}. {v.who.role.why}
+              </p>
+            ) : null}
+            {v.who.personaId ? <EmploymentControl personaId={v.who.personaId} name={v.who.name} title={v.who.title} accountName={v.name} state={v.who.employment ? { label: v.who.employment.label, why: v.who.employment.why } : null} compact /> : null}
             {v.who.route ? <p className="text-xs text-[var(--muted-foreground)]">Route: {v.who.route}</p> : null}
             {v.whoUnknown ? <p className="mt-1 text-xs text-amber-700 dark:text-amber-400" data-testid="now-owner-missing">{v.whoUnknown}</p> : null}
             {v.betterFit ? (

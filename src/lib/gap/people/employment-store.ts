@@ -17,7 +17,9 @@
  * Never touches do_not_contact, email, email_status or HubSpot: leaving a company is not suppression.
  * House `prisma: any` glue.
  */
-import { apolloEvidence, crmEvidence, interactionEvidence, kindForUrl, readEmployment, tierForUrl, type EmploymentEvidence, type EmploymentRead } from './employment';
+import { apolloEvidence, crmEvidence, interactionEvidence, kindForUrl, readEmployment, tierForUrl, type EmploymentEvidence, type EmploymentRead, type EvidenceTier } from './employment';
+import type { RoleVerdict } from './employment-verify';
+import { readRole, type RoleRead } from './role-currentness';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -25,8 +27,13 @@ type PrismaLike = any;
 export const EMPLOYMENT_FIELDS = ['employment_status', 'employment_company', 'employment_title', 'employment_source_url', 'employment_note'] as const;
 export const EMPLOYMENT_CORRECTED = 'person.employment_corrected' as const;
 export const EMPLOYMENT_VERIFIED = 'person.employment_verified' as const;
+/** One row per VERIFY CURRENT ROLE answer, for a persona (beside the fields) and for a HubSpot-only person (the whole record). */
+export const ROLE_VERIFIED = 'person.role_verified' as const;
+/** A HubSpot-only person keeps at most this many role verifications in play (newest first). */
+export const ROLE_EVIDENCE_PER_CONTACT = 5;
 
-export type EmploymentStatusValue = 'left' | 'current' | 'role_changed';
+/** 'conflict' is written by a verification only (derived): the sources disagree about the role. */
+export type EmploymentStatusValue = 'left' | 'current' | 'role_changed' | 'conflict';
 
 interface FieldRow {
   field_name: string;
@@ -65,12 +72,15 @@ export function evidenceFromFields(fields: readonly FieldRow[], accountName: str
     const url = by.get('employment_source_url')?.field_value ?? null;
     const note = by.get('employment_note')?.field_value ?? null;
     const at = iso(status.source_timestamp);
+    // 'role_changed' (Casey or a verification): still here, the stored role is no longer theirs; the title is the
+    // new one when known. 'conflict' (a verification only): the sources disagree about the role; nothing about the company.
+    const flags = { ...(v === 'role_changed' ? { roleChanged: true } : {}), ...(v === 'conflict' && status.source !== 'manual' ? { conflict: true } : {}) };
     if (status.source === 'manual') {
-      out.push({ kind: 'human', tier: 'strong', company: v === 'left' ? company : accountName, title, at, source: `Casey${status.last_writer ? ` (${status.last_writer})` : ''}`, url, note, left: v === 'left' });
+      out.push({ kind: 'human', tier: 'strong', company: v === 'left' ? company : accountName, title, at, source: `Casey${status.last_writer ? ` (${status.last_writer})` : ''}`, url, note, left: v === 'left', ...flags });
     } else {
       // A derived (web) verification: the tier is the URL's, never the writer's say-so.
       const tier = tierForUrl(url, companyDomains);
-      out.push({ kind: kindForUrl(url, companyDomains), tier: tier === 'weak' ? 'supporting' : tier, company: v === 'left' ? company : accountName, title, at, source: `verified at ${url ? safeHost(url) : 'an unnamed source'}`, url, note, left: v === 'left' });
+      out.push({ kind: kindForUrl(url, companyDomains), tier: tier === 'weak' ? 'supporting' : tier, company: v === 'left' ? company : accountName, title, at, source: `verified at ${url ? safeHost(url) : 'an unnamed source'}`, url, note, left: v === 'left', ...flags });
     }
   }
   // The intakes' company fields: supporting evidence about where a provider or the CRM placed them, dated by the write.
@@ -219,8 +229,13 @@ export interface EmploymentCorrectionInput {
 }
 
 export type EmploymentCorrectionResult =
-  | { ok: true; personaId: number; accountName: string; read: EmploymentRead; auditId: string }
+  | { ok: true; personaId: number; accountName: string; read: EmploymentRead; role: RoleRead; auditId: string }
   | { ok: false; reason: 'persona_not_found' | 'invalid_url' | 'missing_company' };
+
+/** The role read for a persona whose employment was just loaded: the stored title is the persona's own. */
+export function personaRole(pe: PersonaEmployment, storedTitle: string | null, opts: { now: Date; aliases?: readonly string[]; domains?: readonly string[] }): RoleRead {
+  return readRole({ accountName: pe.accountName, aliases: opts.aliases, domains: opts.domains, storedTitle, evidence: pe.evidence, now: opts.now });
+}
 
 async function upsertFields(prisma: PrismaLike, tx: PrismaLike, personaId: number, rows: Array<{ field: string; value: string | null }>, write: { source: 'manual' | 'derived'; at: Date; confidence: number; writer: string }): Promise<void> {
   const enrichment = await tx.contactEnrichment.upsert({ where: { persona_id: personaId }, update: {}, create: { persona_id: personaId }, select: { id: true } });
@@ -278,32 +293,90 @@ export async function recordEmploymentCorrection(prisma: PrismaLike, input: Empl
     return row.id as string;
   });
   const read = (await loadPersonaEmployment(prisma, persona.id, { now: input.now }))!;
-  return { ok: true, personaId: persona.id, accountName: persona.account_name, read, auditId };
+  return { ok: true, personaId: persona.id, accountName: persona.account_name, read, role: personaRole(read, persona.title, { now: input.now }), auditId };
 }
 
-export interface EmploymentVerificationInput {
-  personaId: number;
-  actor: string;
-  now: Date;
-  verdict: 'current' | 'left' | 'unknown';
+// ---------------------------------------------------------------- verifications (persona and HubSpot-only)
+
+/** What one VERIFY CURRENT ROLE answer carries (employment-verify.ts), or Casey's own word when `provider` is 'human'. */
+export interface RoleVerificationInput {
+  /** 'current' is the older spelling of same_role. */
+  verdict: RoleVerdict | 'current';
   company: string | null;
+  /** The current title per the source; null when the source does not establish it. */
   title: string | null;
+  priorTitle?: string | null;
   sourceUrl: string | null;
   /** The source's own date, when the page shows one. */
   sourceDate: string | null;
+  confidence?: 'high' | 'medium' | 'low';
   summary: string | null;
+  /** 'gemini_grounded_search' (the default) for the bounded search; 'human' when the statement is Casey's own. */
+  provider?: 'gemini_grounded_search' | 'web_search' | 'human';
+}
+
+const VALID_URL = /^https?:\/\/\S+\.\S+/i;
+const normalizeVerdict = (v: RoleVerificationInput['verdict']): RoleVerdict => (v === 'current' ? 'same_role' : v);
+/** The employment_status a verdict writes; null for unknown (audit only). */
+export const statusForVerdict = (v: RoleVerdict): EmploymentStatusValue | null => (v === 'same_role' ? 'current' : v === 'different_role' ? 'role_changed' : v === 'left' ? 'left' : v === 'conflict' ? 'conflict' : null);
+const dateOrNow = (sourceDate: string | null | undefined, now: Date): Date => (sourceDate && !Number.isNaN(new Date(sourceDate).getTime()) ? new Date(sourceDate) : now);
+
+/**
+ * The full provenance one 'person.role_verified' row carries. The same shape for a persona and a HubSpot-only person;
+ * a HubSpot-only person's evidence is rebuilt from it (evidenceFromRolePayload), so everything a reader needs is here.
+ */
+function roleAuditPayload(input: { accountName: string; name: string; storedTitle: string | null; actor: string; now: Date; verification: RoleVerificationInput; companyDomains: readonly string[]; recorded: boolean; personaId?: number; hubspotContactId?: string }): Record<string, unknown> {
+  const v = input.verification;
+  const verdict = normalizeVerdict(v.verdict);
+  const human = v.provider === 'human';
+  const url = v.sourceUrl && VALID_URL.test(v.sourceUrl) ? v.sourceUrl : null;
+  const tier: EvidenceTier | null = human ? 'strong' : url ? tierForUrl(url, input.companyDomains) : null;
+  return {
+    ...(input.personaId != null ? { personaId: input.personaId } : {}),
+    ...(input.hubspotContactId ? { hubspotContactId: input.hubspotContactId } : {}),
+    accountName: input.accountName,
+    name: input.name,
+    storedTitle: input.storedTitle,
+    verdict,
+    status: statusForVerdict(verdict),
+    company: v.company,
+    title: v.title,
+    priorTitle: v.priorTitle ?? null,
+    sourceUrl: url,
+    sourceDate: v.sourceDate,
+    retrievedAt: input.now.toISOString(),
+    evidenceClass: human ? 'human' : url ? kindForUrl(url, input.companyDomains) : null,
+    tier,
+    companyDomains: [...input.companyDomains],
+    actor: input.actor,
+    provider: human ? input.actor : 'gemini_grounded_search',
+    confidence: v.confidence ?? null,
+    summary: v.summary,
+    recorded: input.recorded,
+    suppressionTouched: false,
+    hubspotWritten: false,
+    apolloSpent: 0,
+  };
+}
+
+export interface EmploymentVerificationInput extends RoleVerificationInput {
+  personaId: number;
+  actor: string;
+  now: Date;
   /** The account's own domains (an employer page on them is strong). */
   companyDomains?: readonly string[];
 }
 
 export type EmploymentVerificationResult =
-  | { ok: true; personaId: number; recorded: boolean; read: EmploymentRead; auditId: string }
+  | { ok: true; personaId: number; recorded: boolean; read: EmploymentRead; role: RoleRead; auditId: string }
   | { ok: false; reason: 'persona_not_found' | 'human_correction_stands' };
 
 /**
- * A bounded, source-backed verification (employment-verify.ts) lands here as DERIVED evidence. It never overwrites a
- * human correction (`human_correction_stands`), never writes without a source URL, and an unknown verdict records only
- * the audit row (nothing is asserted).
+ * A bounded, source-backed verification (employment-verify.ts) lands here as DERIVED evidence: same_role writes
+ * status current with the title; different_role writes role_changed with the new title (null when not established);
+ * left writes left; conflict writes conflict; unknown asserts nothing. It never overwrites a human correction
+ * (`human_correction_stands`), never writes a field without a source URL, and always records the attempt: the
+ * 'person.employment_verified' row and a 'person.role_verified' row with the full provenance.
  */
 export async function recordEmploymentVerification(prisma: PrismaLike, input: EmploymentVerificationInput): Promise<EmploymentVerificationResult> {
   const persona: { id: number; account_name: string; name: string; title: string | null; enrichment?: { fields?: FieldRow[] } | null } | null = await prisma.persona.findUnique({
@@ -313,15 +386,19 @@ export async function recordEmploymentVerification(prisma: PrismaLike, input: Em
   if (!persona) return { ok: false, reason: 'persona_not_found' };
   const existing = (persona.enrichment?.fields ?? []).find((f) => f.field_name === 'employment_status');
   if (existing?.source === 'manual') return { ok: false, reason: 'human_correction_stands' };
-  const url = input.sourceUrl && /^https?:\/\/\S+\.\S+/i.test(input.sourceUrl) ? input.sourceUrl : null;
-  const assert = input.verdict !== 'unknown' && !!url;
-  const tier = tierForUrl(url, input.companyDomains ?? []);
-  const at = input.sourceDate && !Number.isNaN(new Date(input.sourceDate).getTime()) ? new Date(input.sourceDate) : input.now;
+  const verdict = normalizeVerdict(input.verdict);
+  const status = statusForVerdict(verdict);
+  const url = input.sourceUrl && VALID_URL.test(input.sourceUrl) ? input.sourceUrl : null;
+  const assert = status !== null && !!url;
+  const companyDomains = input.companyDomains ?? [];
+  const tier = tierForUrl(url, companyDomains);
+  const at = dateOrNow(input.sourceDate, input.now);
+  const rolePayload = roleAuditPayload({ accountName: persona.account_name, name: persona.name, storedTitle: persona.title, actor: input.actor, now: input.now, verification: input, companyDomains, recorded: assert, personaId: persona.id });
   const auditId: string = await prisma.$transaction(async (tx: PrismaLike) => {
     if (assert) {
       await upsertFields(prisma, tx, persona.id, [
-        { field: 'employment_status', value: input.verdict },
-        { field: 'employment_company', value: input.verdict === 'left' ? input.company : persona.account_name },
+        { field: 'employment_status', value: status },
+        { field: 'employment_company', value: verdict === 'left' ? input.company : persona.account_name },
         { field: 'employment_title', value: input.title },
         { field: 'employment_source_url', value: url },
         { field: 'employment_note', value: input.summary },
@@ -333,12 +410,77 @@ export async function recordEmploymentVerification(prisma: PrismaLike, input: Em
         actor: input.actor,
         subject_type: 'persona',
         subject_id: String(persona.id),
-        payload: { personaId: persona.id, name: persona.name, accountName: persona.account_name, verdict: input.verdict, company: input.company, title: input.title, sourceUrl: url, sourceDate: input.sourceDate, tier: url ? tier : null, recorded: assert, summary: input.summary, at: input.now.toISOString(), suppressionTouched: false },
+        payload: { personaId: persona.id, name: persona.name, accountName: persona.account_name, verdict, status, company: input.company, title: input.title, priorTitle: input.priorTitle ?? null, sourceUrl: url, sourceDate: input.sourceDate, tier: url ? tier : null, recorded: assert, summary: input.summary, at: input.now.toISOString(), suppressionTouched: false },
       },
       select: { id: true },
     });
+    await tx.gapAuditEvent.create({ data: { kind: ROLE_VERIFIED, actor: input.actor, subject_type: 'persona', subject_id: String(persona.id), payload: rolePayload }, select: { id: true } });
     return row.id as string;
   });
-  const read = (await loadPersonaEmployment(prisma, persona.id, { now: input.now, domainsFor: () => input.companyDomains ?? [] }))!;
-  return { ok: true, personaId: persona.id, recorded: assert, read, auditId };
+  const read = (await loadPersonaEmployment(prisma, persona.id, { now: input.now, domainsFor: () => companyDomains }))!;
+  return { ok: true, personaId: persona.id, recorded: assert, read, role: personaRole(read, persona.title, { now: input.now, domains: companyDomains }), auditId };
+}
+
+export interface HubSpotContactRoleVerificationInput {
+  hubspotContactId: string;
+  accountName: string;
+  name: string;
+  /** The title HubSpot holds for them. */
+  storedTitle: string | null;
+  actor: string;
+  now: Date;
+  verification: RoleVerificationInput;
+  companyDomains?: readonly string[];
+}
+
+/**
+ * A HubSpot-only person (no GAP record) has no enrichment fields: the 'person.role_verified' audit row IS the record.
+ * Writes exactly that one row (subject_type 'hubspot_contact') and nothing else: no Persona, no HubSpot write, no
+ * Apollo. A source-backed verdict is `recorded`; an unsourced automation verdict is kept as history and reads weak.
+ */
+export async function recordHubSpotContactRoleVerification(prisma: PrismaLike, input: HubSpotContactRoleVerificationInput): Promise<{ ok: true; auditId: string; recorded: boolean; evidence: EmploymentEvidence }> {
+  const v = input.verification;
+  const url = v.sourceUrl && VALID_URL.test(v.sourceUrl) ? v.sourceUrl : null;
+  const recorded = statusForVerdict(normalizeVerdict(v.verdict)) !== null && (v.provider === 'human' || !!url);
+  const payload = roleAuditPayload({ accountName: input.accountName, name: input.name, storedTitle: input.storedTitle, actor: input.actor, now: input.now, verification: v, companyDomains: input.companyDomains ?? [], recorded, hubspotContactId: input.hubspotContactId });
+  const row = await prisma.gapAuditEvent.create({ data: { kind: ROLE_VERIFIED, actor: input.actor, subject_type: 'hubspot_contact', subject_id: input.hubspotContactId, payload }, select: { id: true } });
+  return { ok: true, auditId: row.id as string, recorded, evidence: evidenceFromRolePayload(payload, input.now) };
+}
+
+/** One 'person.role_verified' payload back into evidence (pure, exported for tests). Unsourced automation reads weak: ignored by every reader. */
+export function evidenceFromRolePayload(payload: Record<string, unknown>, createdAt: Date | string | null): EmploymentEvidence {
+  const str = (k: string) => (typeof payload[k] === 'string' ? (payload[k] as string) : null);
+  const verdict = (str('verdict') ?? 'unknown') as RoleVerdict;
+  const human = payload.evidenceClass === 'human';
+  const url = str('sourceUrl');
+  const domains = Array.isArray(payload.companyDomains) ? (payload.companyDomains as unknown[]).filter((d): d is string => typeof d === 'string') : [];
+  const accountName = str('accountName') ?? '';
+  const says = verdict !== 'unknown';
+  const at = iso(str('sourceDate')) ?? iso(str('retrievedAt')) ?? iso(createdAt);
+  const flags = { left: verdict === 'left', roleChanged: verdict === 'different_role', conflict: verdict === 'conflict' };
+  const company = says ? (verdict === 'left' ? str('company') : accountName || null) : null;
+  const title = says ? str('title') : null;
+  if (human) return { kind: 'human', tier: 'strong', company, title, at, source: `Casey${str('actor') ? ` (${str('actor')})` : ''}`, url, note: str('summary'), ...flags };
+  const tier = tierForUrl(url, domains);
+  return { kind: url ? kindForUrl(url, domains) : 'web', tier, company: tier === 'weak' ? null : company, title: tier === 'weak' ? null : title, at, source: `verified at ${url ? safeHost(url) : 'an unnamed source'}`, url, note: str('summary'), ...flags };
+}
+
+/** The role evidence on record for HubSpot-only people: newest first, at most ROLE_EVIDENCE_PER_CONTACT per contact. One query, no network. */
+export async function loadHubSpotContactRoleEvidence(prisma: PrismaLike, contactIds: readonly string[]): Promise<Map<string, EmploymentEvidence[]>> {
+  const out = new Map<string, EmploymentEvidence[]>();
+  const ids = [...new Set(contactIds.map(String).filter(Boolean))];
+  if (ids.length === 0 || typeof prisma?.gapAuditEvent?.findMany !== 'function') return out;
+  const rows: Array<{ subject_id: string; payload: unknown; created_at: Date | string | null }> = await prisma.gapAuditEvent
+    .findMany({ where: { kind: ROLE_VERIFIED, subject_type: 'hubspot_contact', subject_id: { in: ids } }, orderBy: { created_at: 'desc' }, select: { subject_id: true, payload: true, created_at: true } })
+    .catch(() => []);
+  for (const r of rows) {
+    if (!r.payload || typeof r.payload !== 'object') continue;
+    const list = out.get(r.subject_id) ?? [];
+    const e = evidenceFromRolePayload(r.payload as Record<string, unknown>, r.created_at);
+    // Casey's own row never drops out behind automation rows (review N14).
+    if (list.length >= ROLE_EVIDENCE_PER_CONTACT && e.kind !== 'human') continue;
+    list.push(e);
+    out.set(r.subject_id, list);
+  }
+  return out;
 }

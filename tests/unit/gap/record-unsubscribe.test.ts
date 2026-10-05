@@ -334,6 +334,8 @@ describe('recordUnsubscribe helper', () => {
  */
 const SCAN_ROOTS = ['src/lib/gap', 'src/app/api/gap'];
 const WRITER = 'src/lib/email/unsubscribe.ts';
+/** The one governed CLEAR (WHO truth maintenance, 2026-10-05): Casey's confirmed click after a live legacy review; also outside the scan roots. */
+const CLEARER = 'src/lib/email/suppression-correction.ts';
 
 function walk(dir: string, out: string[] = []): string[] {
   if (!existsSync(dir)) return out;
@@ -382,6 +384,13 @@ describe('structural invariant: the helper is the only GAP writer of Persona.do_
     expect(writesDoNotContact(readFileSync(path.join(root, WRITER), 'utf8'))).toBe(true);
   });
 
+  it('positive control: the detector flags the one governed clear in src/lib/email, which only ever sets the column false', () => {
+    const src = readFileSync(path.join(root, CLEARER), 'utf8');
+    expect(writesDoNotContact(src)).toBe(true);
+    expect(src).toMatch(/set do_not_contact = false/);
+    expect(src).not.toMatch(/set do_not_contact = true/);
+  });
+
   it('no file under src/lib/gap or src/app/api/gap writes do_not_contact', () => {
     const files = SCAN_ROOTS.flatMap((r) => walk(path.join(root, r)));
     expect(files.length).toBeGreaterThan(20);
@@ -389,5 +398,13 @@ describe('structural invariant: the helper is the only GAP writer of Persona.do_
       .filter((f) => writesDoNotContact(readFileSync(f, 'utf8')))
       .map((f) => path.relative(root, f).replace(/\\/g, '/'));
     expect(offenders, `files writing do_not_contact outside ${WRITER}: ${offenders.join(', ')}`).toStrictEqual([]);
-  });
+  }, 20_000);
+
+  it('exactly one GAP file imports the governed clear, and it is the legacy review service (an import-and-call is a write the detector cannot see)', () => {
+    const files = SCAN_ROOTS.flatMap((r) => walk(path.join(root, r)));
+    const importers = files
+      .filter((f) => /suppression-correction/.test(stripComments(readFileSync(f, 'utf8'))))
+      .map((f) => path.relative(root, f).replace(/\\/g, '/'));
+    expect(importers).toStrictEqual(['src/lib/gap/suppression/legacy-review.ts']);
+  }, 20_000);
 });
