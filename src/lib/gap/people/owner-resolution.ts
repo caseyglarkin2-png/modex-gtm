@@ -203,7 +203,7 @@ export function resolveOwner(input: OwnerResolutionInput): OwnerResolution {
   const excluded: OwnerExclusion[] = [];
   for (const ci of input.candidates) {
     const read = readPerson(ci.title, { entityType: account.entityType, location: ci.location ?? null });
-    const relevance = thesis ? thesisRelevance(ci.title, thesis, account.entityType) : null;
+    const relevance = thesis ? thesisRelevance(ci.title, thesis) : null;
     const entity = entityBoundaryFor(account.name, { title: ci.title, company: ci.company ?? null });
     const employment = ci.employment ?? null;
     const c: OwnerCandidate = {

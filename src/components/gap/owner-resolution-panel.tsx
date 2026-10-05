@@ -61,7 +61,7 @@ export function OwnerResolutionPanel({ hypothesisId, accountName, onChanged }: O
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hypothesisId]);
 
-  async function use(c: OwnerCandidate, activate: boolean) {
+  async function act(c: OwnerCandidate, activate: boolean) {
     setBusy(`${c.key}:${activate ? 'use' : 'attach'}`);
     setResult(null);
     try {
@@ -100,7 +100,7 @@ export function OwnerResolutionPanel({ hypothesisId, accountName, onChanged }: O
   if (load.state === 'error') return <section data-testid="owner-resolution" role="alert" className="mt-4 rounded-md border border-[var(--destructive)] p-3 text-sm">{load.text}</section>;
   const r = load.resolution;
   const selected = r.eligible.find((c) => c.key === chosen) ?? null;
-  const useLabel = (c: OwnerCandidate) => (c.action === 'add_then_use' ? `Add ${c.name} to GAP + use in routing` : `Use ${c.name} in routing`);
+  const actionLabel = (c: OwnerCandidate) => (c.action === 'add_then_use' ? `Add ${c.name} to GAP + use in routing` : `Use ${c.name} in routing`);
   const routing: UseOutcomeResponse | null = result?.routing ? (result.routing as unknown as UseOutcomeResponse) : null;
 
   return (
@@ -146,10 +146,10 @@ export function OwnerResolutionPanel({ hypothesisId, accountName, onChanged }: O
       <div className="flex flex-wrap items-center gap-2">
         {selected ? (
           <>
-            <Button type="button" disabled={busy !== null} onClick={() => void use(selected, true)} data-testid="owner-use">
-              {busy === `${selected.key}:use` ? 'Working...' : useLabel(selected)}
+            <Button type="button" disabled={busy !== null} onClick={() => void act(selected, true)} data-testid="owner-use">
+              {busy === `${selected.key}:use` ? 'Working...' : actionLabel(selected)}
             </Button>
-            <Button type="button" variant="outline" size="sm" disabled={busy !== null} onClick={() => void use(selected, false)} data-testid="owner-attach">
+            <Button type="button" variant="outline" size="sm" disabled={busy !== null} onClick={() => void act(selected, false)} data-testid="owner-attach">
               {busy === `${selected.key}:attach` ? 'Working...' : selected.action === 'add_then_use' ? 'Add + attach only' : 'Attach only'}
             </Button>
           </>

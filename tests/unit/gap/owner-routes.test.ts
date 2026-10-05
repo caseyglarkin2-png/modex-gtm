@@ -9,7 +9,7 @@ const { session, mocks, prisma } = vi.hoisted(() => ({
   session: { value: null as null | { user: { email: string } } },
   mocks: {
     loadOwnerResolution: vi.fn(),
-    useOwnerForHypothesis: vi.fn(),
+    applyOwnerToHypothesis: vi.fn(),
     importHubSpotContactToAccount: vi.fn(),
     findOperator: vi.fn(),
     loadPersonaEmployment: vi.fn(),
@@ -26,7 +26,7 @@ const { session, mocks, prisma } = vi.hoisted(() => ({
 vi.mock('@/lib/auth', () => ({ auth: vi.fn(async () => session.value) }));
 vi.mock('@/lib/prisma', () => ({ prisma }));
 vi.mock('@/lib/gap/people/owner-resolution-load', () => ({ loadOwnerResolution: mocks.loadOwnerResolution }));
-vi.mock('@/lib/gap/people/owner-action', () => ({ useOwnerForHypothesis: mocks.useOwnerForHypothesis }));
+vi.mock('@/lib/gap/people/owner-action', () => ({ applyOwnerToHypothesis: mocks.applyOwnerToHypothesis }));
 vi.mock('@/lib/gap/people/account-import', () => ({ importHubSpotContactToAccount: mocks.importHubSpotContactToAccount }));
 vi.mock('@/lib/gap/people/find-operator', () => ({ findOperator: mocks.findOperator }));
 vi.mock('@/lib/gap/people/employment-store', () => ({ loadPersonaEmployment: mocks.loadPersonaEmployment, recordEmploymentCorrection: mocks.recordEmploymentCorrection, recordEmploymentVerification: mocks.recordEmploymentVerification }));
@@ -68,14 +68,14 @@ describe('GET / POST /api/gap/hypotheses/[id]/owner', () => {
   it('POST needs exactly one of personaId / hubspotContactId; hands the session actor to the action; 200 ok, 409 stopped, 404 unknown', async () => {
     expect((await ownerPOST(req('https://x/o', {}), ctx('h1'))).status).toBe(400);
     expect((await ownerPOST(req('https://x/o', { personaId: 1, hubspotContactId: '2' }), ctx('h1'))).status).toBe(400);
-    mocks.useOwnerForHypothesis.mockResolvedValue({ ok: true, steps: [], hypothesisId: 'h1' });
+    mocks.applyOwnerToHypothesis.mockResolvedValue({ ok: true, steps: [], hypothesisId: 'h1' });
     const ok = await ownerPOST(req('https://x/o', { hubspotContactId: '219922589799' }), ctx('h1'));
     expect(ok.status).toBe(200);
-    expect(mocks.useOwnerForHypothesis.mock.calls[0][1]).toMatchObject({ hypothesisId: 'h1', candidate: { personaId: null, hubspotContactId: '219922589799' }, activate: true, actor: 'casey@yardflow.ai' });
-    mocks.useOwnerForHypothesis.mockResolvedValue({ ok: false, steps: [{ step: 'check', ok: false, reason: 'candidate_not_eligible:left_company' }], hypothesisId: 'h1' });
+    expect(mocks.applyOwnerToHypothesis.mock.calls[0][1]).toMatchObject({ hypothesisId: 'h1', candidate: { personaId: null, hubspotContactId: '219922589799' }, activate: true, actor: 'casey@yardflow.ai' });
+    mocks.applyOwnerToHypothesis.mockResolvedValue({ ok: false, steps: [{ step: 'check', ok: false, reason: 'candidate_not_eligible:left_company' }], hypothesisId: 'h1' });
     expect((await ownerPOST(req('https://x/o', { personaId: 1306, activate: false }), ctx('h1'))).status).toBe(409);
-    expect(mocks.useOwnerForHypothesis.mock.calls[1][1]).toMatchObject({ activate: false });
-    mocks.useOwnerForHypothesis.mockResolvedValue({ ok: false, steps: [{ step: 'check', ok: false, reason: 'not_found' }], hypothesisId: 'nope' });
+    expect(mocks.applyOwnerToHypothesis.mock.calls[1][1]).toMatchObject({ activate: false });
+    mocks.applyOwnerToHypothesis.mockResolvedValue({ ok: false, steps: [{ step: 'check', ok: false, reason: 'not_found' }], hypothesisId: 'nope' });
     expect((await ownerPOST(req('https://x/o', { personaId: 1 }), ctx('nope'))).status).toBe(404);
   });
 });

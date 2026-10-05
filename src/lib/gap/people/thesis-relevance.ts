@@ -8,7 +8,6 @@
  * Explainable: fact FAMILIES (from the fact and the hypothesis text) meet responsibility TAGS (from the title), and
  * the answer is a tier with its reason in words. Never a hidden numeric score. Pure.
  */
-import type { EntityType } from '../entity/fit';
 
 export type FactFamily = 'NETWORK_PROGRAM' | 'SITE_OPENING' | 'AUTOMATION_TECH' | 'FLEET' | 'AIR_NETWORK' | 'YARD' | 'GENERIC';
 export type RelevanceTier = 'direct' | 'related' | 'none';
@@ -138,7 +137,7 @@ export interface ThesisRelevance {
  * How a title relates to what the hypothesis says changed. The fact (the observation) names the families first; the
  * hypothesis text adds its own (a yard-execution hypothesis over a network fact lands on both).
  */
-export function thesisRelevance(title: string | null | undefined, thesis: ThesisContext | null | undefined, _entityType?: EntityType | null): ThesisRelevance {
+export function thesisRelevance(title: string | null | undefined, thesis: ThesisContext | null | undefined): ThesisRelevance {
   if (!thesis) return { tier: 'none', why: 'no hypothesis context', families: [], factLabel: 'no fact' };
   const families = [...new Set([...factFamilies(thesis.observation), ...factFamilies(thesis.problemHypothesis ?? '')])].filter((f, _i, all) => f !== 'GENERIC' || all.length === 1);
   const tags = responsibilityTags(title);

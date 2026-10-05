@@ -13,7 +13,7 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { loadOwnerResolution } from '@/lib/gap/people/owner-resolution-load';
-import { useOwnerForHypothesis } from '@/lib/gap/people/owner-action';
+import { applyOwnerToHypothesis } from '@/lib/gap/people/owner-action';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 300;
@@ -50,7 +50,7 @@ export async function POST(request: NextRequest, { params }: RouteContext) {
   const parsed = Body.safeParse(await request.json().catch(() => ({})));
   if (!parsed.success) return NextResponse.json({ error: 'invalid_body', field: parsed.error.issues[0]?.path.join('.') || 'body' }, { status: 400 });
   const { id } = await params;
-  const r = await useOwnerForHypothesis(prisma, { hypothesisId: id, candidate: { personaId: parsed.data.personaId ?? null, hubspotContactId: parsed.data.hubspotContactId ?? null }, activate: parsed.data.activate ?? true, actor, now: new Date() });
+  const r = await applyOwnerToHypothesis(prisma, { hypothesisId: id, candidate: { personaId: parsed.data.personaId ?? null, hubspotContactId: parsed.data.hubspotContactId ?? null }, activate: parsed.data.activate ?? true, actor, now: new Date() });
   const notFound = r.steps[0]?.step === 'check' && r.steps[0].reason === 'not_found';
   return NextResponse.json(r, { status: notFound ? 404 : r.ok ? 200 : 409 });
 }

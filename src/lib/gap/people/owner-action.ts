@@ -60,7 +60,7 @@ export interface UseOwnerDeps {
   resolveDeps?: LoadOwnerResolutionDeps;
 }
 
-export async function useOwnerForHypothesis(prisma: PrismaLike, input: UseOwnerInput, deps: UseOwnerDeps = {}): Promise<UseOwnerResult> {
+export async function applyOwnerToHypothesis(prisma: PrismaLike, input: UseOwnerInput, deps: UseOwnerDeps = {}): Promise<UseOwnerResult> {
   const steps: UseOwnerStep[] = [];
   const stop = (hypothesisStatus: string | null, personaId: number | null, personaName: string | null): UseOwnerResult => ({ ok: false, hypothesisId: input.hypothesisId, hypothesisStatus, personaId, personaName, steps, routing: null });
   const row: { id: string; account_name: string; status: string; primary_persona_id: number | null } | null = await prisma.prospectingHypothesis.findUnique({ where: { id: input.hypothesisId }, select: { id: true, account_name: true, status: true, primary_persona_id: true } });

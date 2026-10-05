@@ -64,7 +64,7 @@ export function OutstandingDraftPanel({ recipient, name, decisionId, gmailDraftI
         {name ? ' ' : null}
         <span className="text-[var(--muted-foreground)]">{recipient}</span>
       </p>
-      <p className="text-xs text-[var(--muted-foreground)]">Drafted {when}. It holds this account's cold motion until it is sent or discarded.</p>
+      <p className="text-xs text-[var(--muted-foreground)]">Drafted {when}. It holds the cold motion at this account until it is sent or discarded.</p>
       <div className="flex flex-wrap items-center gap-2">
         <a href={gmailHref} target="_blank" rel="noreferrer noopener" className="inline-flex min-h-11 items-center text-sm underline" data-testid="outstanding-draft-open">
           Open in Gmail
