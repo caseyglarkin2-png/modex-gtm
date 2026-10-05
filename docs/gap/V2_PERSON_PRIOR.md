@@ -298,3 +298,16 @@ warning (question 8). Recorded, not fixed: N5 above. REJECTED by the reviewer af
 Chain beating a Director of Transportation on any path except Casey's own choice; bare "operations" or "innovation" as
 cold WHO; procurement masquerading; hard-coded names; US preference over function; any Apollo spend; any create /
 send / enroll without Casey; regressions in the relationship, referral, follow-up, in-deal and intro-only motions.
+
+Re-verification by the same reviewer (2026-10-05): **no blockers**; B1 confirmed fixed. Its SHOULD FIX items, all
+FIXED: C1 two governance remits with a function word on the second ("Safety & Fleet Compliance Manager") still read as
+operators; C2 "Confirm X as primary" also recorded the shown non-operator NEXT as Casey's choice (NEXT now carries
+`byChoiceOnly`, and `confirmChoiceBody` records it only when they would unlock on their own; an older primary choice
+never unlocks anyone after a later touch); real operators the first fixes demoted (logistics joined to customer
+operations, budget or spend beside a freight operations remit, a carrier's dedicated contracts). Also fixed: the
+cockpit's location read times out after 3 s; "people operations" is not an operating role; intermodal and rail
+operations are freight. Recorded, not fixed (they fail closed, never as wrong outreach): parenthesised or slashed
+mixed titles ("Director, Transportation (Safety & Compliance)", "Director Transportation/Compliance") read as
+commercial; "Director, Fleet & Transportation Compliance" (function and function-scoped compliance) reads as an
+operator, the same shape as "VP Logistics and Transportation Compliance", for Casey to rule on; the brief reads a
+persona's location only through the company's associated contacts while the cockpit reads it by contact id.
