@@ -128,9 +128,7 @@ describe('URL tiers: a profile or the employer page is strong; an aggregator or 
   });
 });
 
-describe('employer spellings: a provider or CRM variant of the same employer is HERE, never elsewhere (dogfood 2026-10-05)', () => {
-  // Every GAP contact at NFI Industries and J.B. Hunt was set aside because Apollo wrote "NFI" and
-  // "J.B. Hunt Transport Services, Inc."; PepsiCo's sponsor because HubSpot wrote "Pepsi". Patterns, never people.
+describe('employer spellings: a provider or CRM variant of the same employer is HERE, never elsewhere (dogfood + review, 2026-10-05)', () => {
   it.each([
     ['NFI', 'NFI Industries'],
     ['J.B. Hunt Transport Services, Inc.', 'J.B. Hunt'],
@@ -139,7 +137,10 @@ describe('employer spellings: a provider or CRM variant of the same employer is 
     ['Fed Ex Freight', 'FedEx'],
     ['The Kroger Co.', 'Kroger'],
     ['Heb', 'H-E-B'],
+    ['HEB Grocery Company, LP', 'H-E-B'],
     ['UPS Supply Chain Solutions', 'UPS'],
+    ['3M Health Care', '3M'],
+    ['Kenco Logistics Services', 'Kenco'],
   ])('"%s" is the same employer as %s', (company, account) => {
     expect(sameEmployer(company, account)).toBe(true);
   });
@@ -149,14 +150,29 @@ describe('employer spellings: a provider or CRM variant of the same employer is 
     ['American Axle', 'American Airlines'],
     ['Upstream Logistics', 'UPS'],
     ['Estes Forwarding Worldwide', 'Estes Express Lines'],
-  ])('"%s" is NOT the same employer as %s', (company, account) => {
+    ['Marsh McLennan', 'Mars'],
+    ['Marshalls', 'Mars'],
+    ['Amazonia Foods', 'Amazon'],
+    ['Fordham University', 'Ford'],
+    ['GE Appliances', 'GE'],
+  ])('"%s" is NOT the same employer as %s (a partial word never matches)', (company, account) => {
     expect(sameEmployer(company, account)).toBe(false);
+  });
+  it('a hyphenated family needs its aliases, which every caller passes (the gate included)', () => {
+    expect(sameEmployer('Swift Transportation', 'Knight-Swift')).toBe(false);
+    expect(sameEmployer('Swift Transportation', 'Knight-Swift', ['Swift Transportation', 'Knight Transportation'])).toBe(true);
+    expect(sameEmployer('ABF Freight', 'ArcBest', ['ABF Freight'])).toBe(true);
+    expect(sameEmployer('AB InBev', 'Anheuser-Busch', ['AB InBev'])).toBe(true);
   });
   it('a spelling that only the account domain explains ("Genmills") matches through the domain label', () => {
     expect(domainLabel('genmills.com')).toBe('genmills');
     expect(domainLabel('www.jbhunt.co.uk')).toBe('jbhunt');
     expect(sameEmployer('Genmills', 'General Mills')).toBe(false);
     expect(sameEmployer('Genmills', 'General Mills', [], ['genmills.com'])).toBe(true);
+  });
+  it('known limit, stated: a different company sharing the whole first word reads as the same employer (strong evidence or Casey catches that departure)', () => {
+    expect(sameEmployer('Target Hospitality', 'Target')).toBe(true);
+    expect(sameEmployer('Coca-Cola Consolidated', 'Coca-Cola')).toBe(true);
   });
   it('Apollo "NFI" beside the GAP record at NFI Industries is consistent support: CURRENT_LIKELY, not a conflict', () => {
     const evidence: EmploymentEvidence[] = [

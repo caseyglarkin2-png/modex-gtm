@@ -115,25 +115,41 @@ export function domainLabel(domain: string | null | undefined): string | null {
  * Is this company spelling the same employer as the account? Deliberately looser than canonical account identity:
  * a provider or the CRM writes "NFI", "Pepsi", "Fed Ex Freight" or "J.B. Hunt Transport Services, Inc." for people
  * who are at NFI Industries, PepsiCo, FedEx and J.B. Hunt, and reading those as another employer set every GAP
- * contact at those accounts aside (dogfood 2026-10-05). The account's own domain label ("genmills") counts as a
- * name. One side a prefix of the other needs four letters ("pepsi" / "pepsico"); a shorter name must be one whole
- * word equal to the other side's first word ("NFI" / "NFI Industries", never "UPS" / "Upstream Logistics", never
- * "Estes Forwarding Worldwide" / "Estes Express Lines"); a generic word ("General", "American") never matches alone.
+ * contact at those accounts aside (dogfood 2026-10-05). Two spellings are the same employer when the shorter one
+ * (three letters, or any length with a digit) is exactly the LEADING WORDS of the other ("NFI" / "NFI Industries",
+ * "fed ex" / "FedEx", "j b hunt" / "J.B. Hunt Transport Services", "heb" / "HEB Grocery Company"), or the other is
+ * one word made of it plus a legal tail ("pepsi" + "co"). A partial word never matches ("Mars" is not "Marsh
+ * McLennan" or "Marshalls", "Ford" is not "Fordham", "Amazon" is not "Amazonia"), a generic word never matches alone
+ * ("General", "American"), and the account's own domain label counts as a spelling ("Genmills" through
+ * genmills.com). Known limit, accepted: a different company that shares the whole first word ("Target
+ * Hospitality" at Target) reads as the same employer; a departure to one is caught by strong evidence or by Casey,
+ * never by this rule. Hyphenated families ("Knight-Swift") need their aliases, which every caller passes.
  */
+const LEGAL_TAIL = /^(co|corp|inc|llc|group|holdings)$/;
+const squashWords = (words: readonly string[]) => words.join('');
+/** `short` is the squash of `long`'s leading words, or `long` is one word made of `short` plus a legal tail. */
+function leads(short: string, long: readonly string[]): boolean {
+  let acc = '';
+  for (const w of long) {
+    acc += w;
+    if (acc === short) return true;
+    if (acc.length >= short.length) break;
+  }
+  return long.length === 1 && long[0].length > short.length && long[0].startsWith(short) && LEGAL_TAIL.test(long[0].slice(short.length));
+}
+const usableSpelling = (s: string) => (s.length >= 3 || /\d/.test(s)) && !GENERIC_EMPLOYER_WORDS.has(s);
+
 export function sameEmployer(company: string, accountName: string, aliases: readonly string[] = [], domains: readonly string[] = []): boolean {
   const names = [accountName, ...aliases].filter((n) => !!n?.trim());
   if (names.some((n) => sameCompany(company, n))) return true;
   const cw = employerWords(company);
-  const c = cw.join('');
-  if (c.length < 3 || GENERIC_EMPLOYER_WORDS.has(c)) return false;
-  const sides: Array<{ words: string[] }> = [...names.map((n) => ({ words: employerWords(n) })), ...domains.map((d) => domainLabel(d)).filter((l): l is string => !!l).map((l) => ({ words: [l] }))];
-  for (const side of sides) {
-    const joined = side.words.join('');
-    if (!joined || GENERIC_EMPLOYER_WORDS.has(joined)) continue;
-    const [short, long] = joined.length <= c.length ? [joined, c] : [c, joined];
-    if (short.length >= 4 && long.startsWith(short)) return true;
-    const [sw, lw] = cw.length <= side.words.length ? [cw, side.words] : [side.words, cw];
-    if (sw.length === 1 && sw[0].length >= 3 && sw[0] === lw[0] && !GENERIC_EMPLOYER_WORDS.has(sw[0])) return true;
+  const c = squashWords(cw);
+  if (!c || GENERIC_EMPLOYER_WORDS.has(c)) return false;
+  const sides = [...names.map((n) => employerWords(n)), ...domains.map((d) => domainLabel(d)).filter((l): l is string => !!l).map((l) => [l])];
+  for (const sw of sides) {
+    const sq = squashWords(sw);
+    if (!sq || GENERIC_EMPLOYER_WORDS.has(sq)) continue;
+    if ((usableSpelling(sq) && leads(sq, cw)) || (usableSpelling(c) && leads(c, sw))) return true;
   }
   return false;
 }
