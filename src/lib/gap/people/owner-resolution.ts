@@ -455,7 +455,7 @@ export function resolveOwner(input: OwnerResolutionInput): OwnerResolution {
       : nextStep === 'add_and_use'
         ? `Best person on record for ${label} is in HubSpot, not yet a GAP contact: ${who(top!)}. Add them to GAP and use them, or choose someone else.${hubspotNote}`
         : nextStep === 'choose'
-          ? `${eligible.length} plausible owners for ${label}: choose one. GAP does not pick.`
+          ? `${eligible.length} plausible owners for ${label}: choose one. GAP does not pick.${hubspotNote}`
           : `No current direct ${carrier ? 'network' : 'transportation'} operator on record for ${label} (${built.length} ${built.length === 1 ? 'person' : 'people'} considered${excluded.length ? `, ${excluded.length} set aside` : ''}).${hubspotNote} Find the operator.`;
 
   const slots = carrier
