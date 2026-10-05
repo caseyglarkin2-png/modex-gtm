@@ -49,6 +49,16 @@ export const PURPOSE_LABEL: Record<OwnerPurpose, string> = {
 
 export type CandidateSource = 'gap' | 'hubspot' | 'staged' | 'relationship';
 
+/** The role read the resolver consumes (structurally the RoleRead of people/role-currentness.ts). */
+export interface RoleInput {
+  state: 'ROLE_CURRENT_CONFIRMED' | 'ROLE_CURRENT_LIKELY' | 'ROLE_UNVERIFIED' | 'ROLE_CHANGED_CONFIRMED' | 'ROLE_CONFLICT';
+  label: string;
+  why: string;
+  effectiveTitle: string | null;
+  priorTitle: string | null;
+  usableForRanking: boolean;
+}
+
 export interface OwnerCandidateInput {
   /** 'gap:<personaId>' | 'hubspot:<contactId>' | 'staged:<id>' | 'member:<id>' */
   key: string;
@@ -67,6 +77,14 @@ export interface OwnerCandidateInput {
   emailBounced?: boolean;
   /** Contact currentness at THIS account (GAP contacts; a HubSpot-only person reads CURRENT_UNVERIFIED). */
   employment?: EmploymentRead | null;
+  /**
+   * ROLE currentness at this account (people/role-currentness.ts, projected by the loader): the stored title against
+   * current evidence. A role that changed with no established new title, or a role conflict, is not usable for
+   * ranking; a verified new title is the title GAP reads. Null: nothing read (the stored title stands, unverified).
+   */
+  role?: RoleInput | null;
+  /** Where a HubSpot person was read: the account's own company, or a verified family company (with the relation). */
+  provenance?: { accountName: string; relation: 'primary' | 'parent' | 'subsidiary' | 'sibling' | 'same_company'; companyId: string; /** A separate operating company's note: selectable with a caution. */ separate?: string | null } | null;
   buyerTruth?: string | null;
   relationship?: string | null;
   initiative?: string | null;
@@ -77,12 +95,12 @@ export interface OwnerResolutionInput {
   purpose: OwnerPurpose;
   hypothesis?: ({ id: string; status: string; primaryPersonaId: number | null } & ThesisContext) | null;
   candidates: readonly OwnerCandidateInput[];
-  /** What the HubSpot read looked like (so the answer says what it could not see). */
-  hubspot: { read: boolean; count: number; truncated: boolean; via: 'linked' | 'identity' | 'none' | 'unreadable' };
+  /** What the HubSpot read looked like (so the answer says what it could not see), and the family read when there was one. */
+  hubspot: { read: boolean; count: number; truncated: boolean; via: 'linked' | 'identity' | 'none' | 'unreadable'; family?: { companies: number; count: number; capHit: boolean; searched: string[]; excluded: string[] } | null };
   now: Date;
 }
 
-export type ExclusionCode = 'left_company' | 'employment_conflict' | 'divested_entity' | 'do_not_contact' | 'opted_out' | 'unsubscribed' | 'other_region' | 'no_name';
+export type ExclusionCode = 'left_company' | 'employment_conflict' | 'role_changed' | 'role_conflict' | 'divested_entity' | 'do_not_contact' | 'opted_out' | 'unsubscribed' | 'other_region' | 'no_name';
 export type CandidateAction = 'use' | 'add_then_use' | 'review_staged' | 'relationship_only';
 
 export interface OwnerCandidate {
@@ -99,7 +117,9 @@ export interface OwnerCandidate {
   relevance: ThesisRelevance | null;
   employment: { state: EmploymentState; label: string; why: string; elsewhere: EmploymentRead['elsewhere'] } | null;
   /** ROLE currentness at this account (the stored title against current evidence); null when nothing was read. */
-  role: { state: string; label: string; why: string; effectiveTitle: string | null; priorTitle: string | null; usableForRanking: boolean } | null;
+  role: RoleInput | null;
+  /** Where a HubSpot person was read (a family company carries the relation). */
+  provenance: OwnerCandidateInput['provenance'];
   entity: EntityBoundary | null;
   hasEmail: boolean;
   /** 'use' a GAP contact; 'add_then_use' a HubSpot-only person; 'review_staged' a staged candidate; 'relationship_only' a work-source member. */
@@ -165,6 +185,15 @@ export function eligibleForPurpose(read: PersonRead, purpose: OwnerPurpose, ctx:
   // slot, a co-buyer), and seniority never does.
   const techInitiative = purpose === 'HYPOTHESIS_ACTIVATION' && read.lane === 'TRANSFORMATION_TECH' && ctx.relevance?.tier === 'direct' && ctx.relevance.families.includes('AUTOMATION_TECH') ? 'the hypothesis is a technology change on their remit' : null;
   return isColdWho(read, { initiative: ctx.initiative ?? techInitiative });
+}
+
+/** "transportation", "logistics", "network" or "operating": the function the stored title named, for the set-aside sentence. */
+function roleWord(title: string | null): string {
+  const t = String(title ?? '').toLowerCase();
+  if (/transportation|transport|freight|fleet|line ?haul/.test(t)) return 'transportation';
+  if (/logistics|distribution|warehous/.test(t)) return 'logistics';
+  if (/network|hub|terminal|sortation|planning/.test(t)) return 'network';
+  return 'operating';
 }
 
 /** One ranking dimension: its name (for the first-difference sentence) and its value (higher first). */
@@ -260,18 +289,22 @@ function recommend(rows: ReadonlyArray<{ c: OwnerCandidate; input: OwnerCandidat
  * chooses from the ranked list, and nobody is preselected.
  */
 
-function describe(c: OwnerCandidateInput, read: PersonRead, relevance: ThesisRelevance | null, employment: EmploymentRead | null | undefined, entity: EntityBoundary | null): string[] {
+const RELATION_WORD: Record<string, string> = { parent: 'parent', subsidiary: 'subsidiary', sibling: 'sister company', same_company: 'duplicate record' };
+
+function describe(c: OwnerCandidateInput, read: PersonRead, relevance: ThesisRelevance | null, employment: EmploymentRead | null | undefined, entity: EntityBoundary | null, accountName: string): string[] {
   const out: string[] = [];
   out.push(`${LANE_LABEL[read.lane]}: ${read.laneWhy}.`);
   out.push(`${geoPhrase(read)}${read.scope === 'NETWORK' ? '; network scope' : read.scope === 'SITE' ? '; one site' : '; scope not stated'}.`);
   if (relevance) out.push(`Thesis fit: ${relevance.why}.`);
   if (employment) out.push(`Employment: ${EMPLOYMENT_LABEL[employment.state]}. ${employment.why}`);
+  if (c.role && c.role.state !== 'ROLE_UNVERIFIED') out.push(`Role: ${c.role.label}. ${c.role.why}${c.role.priorTitle && c.role.effectiveTitle && c.role.priorTitle !== c.role.effectiveTitle ? ` (was ${c.role.priorTitle})` : ''}`);
   if (entity) out.push(`Entity: ${entity.note}`);
+  const where = c.provenance && c.provenance.relation !== 'primary' ? ` (${c.provenance.accountName}, a ${accountName} ${RELATION_WORD[c.provenance.relation] ?? c.provenance.relation})` : '';
   out.push(
     c.source === 'gap'
       ? `Source: GAP contact${c.hasEmail ? ', email on record' : ', no email on record'}${c.emailBounced ? ' (the address bounced before)' : ''}.`
       : c.source === 'hubspot'
-        ? `Source: HubSpot, not yet a GAP contact${c.hasEmail ? '; HubSpot holds an email (no Apollo needed)' : '; no email in HubSpot'}.`
+        ? `Source: HubSpot${where}, not yet a GAP contact${c.hasEmail ? '; HubSpot holds an email (no Apollo needed)' : '; no email in HubSpot'}.`
         : c.source === 'staged'
           ? 'Source: a staged contact candidate (review and promote before any touch).'
           : `Source: a relationship (${c.relationship ?? 'on record'}), not yet a GAP contact.`,
@@ -290,29 +323,35 @@ export function resolveOwner(input: OwnerResolutionInput): OwnerResolution {
   const built: Array<{ c: OwnerCandidate; input: OwnerCandidateInput }> = [];
   const excluded: OwnerExclusion[] = [];
   for (const ci of input.candidates) {
-    const read = readPerson(ci.title, { entityType: account.entityType, location: ci.location ?? null });
-    const relevance = thesis ? thesisRelevance(ci.title, thesis) : null;
-    const entity = entityBoundaryFor(account.name, { title: ci.title, company: ci.company ?? null });
+    // The title GAP reads is the CURRENT one: a verified new title replaces a contradicted stored title; a stored
+    // title that current evidence contradicts with nothing established in its place is never read as if current.
+    const role = ci.role ?? null;
+    const title = role?.usableForRanking && role.effectiveTitle ? role.effectiveTitle : ci.title;
+    const read = readPerson(title, { entityType: account.entityType, location: ci.location ?? null });
+    const relevance = thesis ? thesisRelevance(title, thesis) : null;
+    const entity = entityBoundaryFor(account.name, { title, company: ci.company ?? null });
     const employment = ci.employment ?? null;
+    const roleCaution = role && !role.usableForRanking ? `Still at ${account.name}, but the stored ${roleWord(ci.title)} role${role.priorTitle ?? ci.title ? ` (${role.priorTitle ?? ci.title})` : ''} ${role.state === 'ROLE_CONFLICT' ? 'is in question' : 'changed'}: ${role.why} Verify current ${role.state === 'ROLE_CONFLICT' ? 'role' : 'remit'} before using.` : null;
     const c: OwnerCandidate = {
       key: ci.key,
       source: ci.source,
       personaId: ci.personaId ?? null,
       hubspotContactId: ci.hubspotContactId ?? null,
       name: displayName(ci.name),
-      title: ci.title,
+      title,
       location: ci.location ?? null,
       lane: read.lane,
       laneLabel: LANE_LABEL[read.lane],
       read,
       relevance,
       employment: employment ? { state: employment.state, label: EMPLOYMENT_LABEL[employment.state], why: employment.why, elsewhere: employment.elsewhere } : null,
-      role: null,
+      role,
+      provenance: ci.provenance ?? null,
       entity,
       hasEmail: ci.hasEmail,
       action: ci.source === 'gap' ? 'use' : ci.source === 'hubspot' ? 'add_then_use' : ci.source === 'staged' ? 'review_staged' : 'relationship_only',
-      reasons: describe(ci, read, relevance, employment, entity),
-      caution: entity?.status === 'separate' ? entity.note : null,
+      reasons: describe({ ...ci, title }, read, relevance, employment, entity, account.name),
+      caution: entity?.status === 'separate' ? entity.note : ci.provenance?.separate ? ci.provenance.separate : roleCaution,
     };
     built.push({ c, input: ci });
   }
@@ -336,6 +375,13 @@ export function resolveOwner(input: OwnerResolutionInput): OwnerResolution {
             ? `Historical ${account.name} contact. Current-employer evidence now points to ${c.employment.elsewhere?.company ?? 'another employer'}${c.employment.elsewhere?.title ? ` (${c.employment.elsewhere.title})` : ''}. Not eligible for ${account.name} outreach.`
             : `Employment conflict: ${c.employment.why} Not eligible until the current role is verified.`,
       });
+      continue;
+    }
+    // The ROLE changed or is in question while the employer did not: set aside from role-dependent WHO with the
+    // verify sentence (never do-not-contact, never "left"); buyer truth or a relationship is not role-dependent, so
+    // that person stays eligible with the caution.
+    if (c.role && !c.role.usableForRanking && !ci.buyerTruth && !ci.relationship) {
+      excluded.push({ candidate: c, code: c.role.state === 'ROLE_CONFLICT' ? 'role_conflict' : 'role_changed', reason: c.caution ?? `Still at ${account.name}, but the stored role changed. Verify current remit before using.` });
       continue;
     }
     if (c.entity?.status === 'divested') {
@@ -401,7 +447,8 @@ export function resolveOwner(input: OwnerResolutionInput): OwnerResolution {
   } else nextStep = 'choose';
   const top = eligible[0] ?? null;
   const who = (c: OwnerCandidate) => `${c.name}${c.title ? `, ${c.title}` : ''}`;
-  const hubspotNote = input.hubspot.via === 'none' ? ' HubSpot people were not read (no HubSpot company resolves for this account).' : input.hubspot.via === 'unreadable' ? ' HubSpot people could not be read just now.' : input.hubspot.truncated ? ` HubSpot returned only the first ${input.hubspot.count} associated contacts: the owner may be beyond them.` : '';
+  const fam = input.hubspot.family ?? null;
+  const hubspotNote = input.hubspot.via === 'none' ? ' HubSpot people were not read (no HubSpot company resolves for this account).' : input.hubspot.via === 'unreadable' ? ' HubSpot people could not be read just now.' : input.hubspot.truncated || fam?.capHit ? ` HubSpot returned only the first ${input.hubspot.count} associated contacts: the owner may be beyond them.` : '';
   const headline =
     nextStep === 'use'
       ? `Best person on record for ${label}: ${who(top!)}. Use them, or choose someone else.${hubspotNote}`
@@ -416,10 +463,11 @@ export function resolveOwner(input: OwnerResolutionInput): OwnerResolution {
     : ['transportation / logistics / freight / fleet operator (US / North America)', 'transportation technology / transformation owner'];
   const checked = [
     `GAP contacts (${input.candidates.filter((c) => c.source === 'gap').length})`,
-    `HubSpot contacts (${input.hubspot.read ? `${input.hubspot.count}${input.hubspot.truncated ? ', truncated' : ''}, via ${input.hubspot.via === 'linked' ? 'the linked company' : 'the account identity'}` : input.hubspot.via === 'none' ? 'no HubSpot company resolves' : 'could not be read'})`,
+    `HubSpot contacts (${input.hubspot.read ? `${input.hubspot.count}${input.hubspot.truncated ? ', truncated' : ''}, via ${input.hubspot.via === 'linked' ? 'the linked company' : 'the account identity'}${fam ? `; ${fam.count} from ${fam.companies} family ${fam.companies === 1 ? 'company' : 'companies'}${fam.capHit ? ', cap hit' : ''}${fam.searched.length ? `; family companies searched: ${fam.searched.join(', ')}` : ''}${fam.excluded.length ? `; not read: ${fam.excluded.join('; ')}` : ''}` : ''}` : input.hubspot.via === 'none' ? 'no HubSpot company resolves' : 'could not be read'})`,
     `staged contact candidates (${input.candidates.filter((c) => c.source === 'staged').length})`,
     `relationships (${input.candidates.filter((c) => c.source === 'relationship' || c.relationship).length})`,
     `contact currentness (${input.candidates.filter((c) => c.employment && employmentBlocksOutreach(c.employment.state)).length} set aside)`,
+    `role currentness (${excluded.filter((e) => e.code === 'role_changed' || e.code === 'role_conflict').length} set aside)`,
   ];
   void now;
   return {
