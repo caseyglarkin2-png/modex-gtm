@@ -136,7 +136,8 @@ describe('boundaries the code itself keeps', () => {
   it('the module never imports Apollo or a HubSpot write, and never creates an account', () => {
     const src = readFileSync('src/lib/gap/people/account-import.ts', 'utf8');
     const code = src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
-    expect(code).not.toMatch(/apollo/i);
+    // Imports and calls only (the audit payload records apolloSpent: 0 on purpose).
+    expect(code).not.toMatch(/from ['"][^'"]*apollo|apollo-(client|enrichment)|enrichPersona|searchApollo|apolloPolicy|people\/match/i);
     expect(code).not.toMatch(/account\.create|upsertContact|updateContact|basicApi\.(create|update)|batchApi\.(create|update)/);
   });
   it('an opted-out contact is added as do not contact, with the note', async () => {
