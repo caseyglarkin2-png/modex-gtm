@@ -67,7 +67,13 @@ export type GapAuditKind =
   | 'execution.gmail_direct_claimed'
   | 'execution.gmail_direct_sent'
   | 'execution.gmail_direct_released'
-  | 'execution.gmail_direct_refused';
+  | 'execution.gmail_direct_refused'
+  // Owner resolution (2026-10-05): a person's employment corrected by Casey or verified against a public source;
+  // a HubSpot contact linked into a GAP account on Casey's click; a person attached to an approved hypothesis.
+  | 'person.employment_corrected'
+  | 'person.employment_verified'
+  | 'person.imported_from_hubspot'
+  | 'hypothesis.persona_assigned';
 
 export interface HypothesisEventInput {
   hypothesisId: string;
