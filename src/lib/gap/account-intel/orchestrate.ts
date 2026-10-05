@@ -46,8 +46,11 @@ const HUMAN: Partial<Record<SectionKey, string>> = {
   yard: 'How do trailers get checked in and found today? (ask; the satellite audit cannot see process)',
 };
 
-/** Contact discovery that follows the person prior (V2): the questions, then where to look; never an auto-created contact. */
-export const CONTACT_DISCOVERY = 'Find the transportation operating owner: who owns transportation operations in the US / North America, transportation and warehousing, the private fleet, distribution transportation or network logistics execution? Look in HubSpot contacts and the contact candidates first, then public sources; surface candidates for Casey (no contact is created automatically).';
+/**
+ * Contact discovery that follows the person prior: responsibility slots in order (operator-first, 2026-10-04), then
+ * where to look; never an auto-created contact, never an Apollo credit without Casey.
+ */
+export const CONTACT_DISCOVERY = 'Find the transportation operating owner, by responsibility, in order: (1) the direct transportation / logistics / freight / fleet operator for the US / North America network (the shared function and each operating unit); (2) the transportation technology / transformation owner; (3) the supply chain sponsor; (4) a site operator if useful. Look in HubSpot contacts and the contact candidates first, then public sources with a source URL; surface candidates for Casey (no contact is created automatically; Apollo only when Casey decides).';
 
 // What each section unblocks, in order. The order IS the priority; there is no weight.
 const ORDER: Array<{ section: SectionKey; why: string }> = [
