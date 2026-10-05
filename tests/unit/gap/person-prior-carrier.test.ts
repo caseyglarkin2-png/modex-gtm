@@ -125,3 +125,23 @@ describe('review S5: the entity boundary never fires on its own account', () => 
     expect(entityBoundaryFor('FedEx', { title: 'VP Linehaul Operations', company: 'FedEx Freight' })?.status).toBe('separate');
   });
 });
+
+describe('review S6: a carrier\'s station leaders run the physical network at site scope', () => {
+  it.each(['Hub Manager', 'Station Manager', 'Ramp Manager', 'Sort Manager', 'Service Center Manager', 'Senior Manager, Hub Operations', 'Terminal Manager', 'Gateway Operations Supervisor'])('"%s" at a 3PL is a primary operator at site scope', (title) => {
+    const r = readPerson(title, { entityType: '3pl' });
+    expect(r.lane).toBe('PRIMARY_OPERATOR');
+    expect(r.scope).toBe('SITE');
+  });
+  it('the same words at a shipper are not a transportation operator, and a network title at a carrier keeps network scope', () => {
+    expect(readPerson('Hub Manager', { entityType: 'manufacturer' }).lane).not.toBe('PRIMARY_OPERATOR');
+    expect(readPerson('Director of Hub Operations', { entityType: '3pl' })).toMatchObject({ lane: 'PRIMARY_OPERATOR', scope: 'NETWORK' });
+    expect(readPerson('Customer Service Manager', { entityType: '3pl' }).lane).not.toBe('PRIMARY_OPERATOR');
+  });
+});
+
+describe('review NICE: air operations is the air side; brokerage runs no hubs or yards', () => {
+  it('"Air Operations Manager" at a carrier is adjacent (air side), "VP Brokerage Operations" at a 3PL is not an operator', () => {
+    expect(readPerson('Air Operations Manager', { entityType: 'carrier' }).lane).toBe('ADJACENT_OPERATOR');
+    expect(readPerson('VP Brokerage Operations', { entityType: '3pl' }).lane).not.toBe('PRIMARY_OPERATOR');
+  });
+});

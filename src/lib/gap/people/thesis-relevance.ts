@@ -114,7 +114,7 @@ const TAG_LABEL: Record<ResponsibilityTag, string> = {
   transportation_tech: 'transportation technology',
   ops_tech: 'operations technology',
   air: 'the air network',
-  yard: 'the yard and gate',
+  yard: 'the yards and gates',
   generic_ops: 'operations',
 };
 

@@ -122,7 +122,7 @@ const has = (t: string, re: RegExp) => re.test(t);
 const PRODUCT_TRANSPORTATION = /transportation (markets?|product|platform|(&|and) (energy|electronics)|sbu|business|vertical|division)|(business|r&d|research|branding)[^,;]*transportation|industrial (&|and) transportation|transportation[^,;]*(business group|division|vertical)/;
 // HR, recruiting and legal (review S5, 2026-10-04: "Transportation Recruiter", "Director Transportation HR",
 // "Transportation Attorney" read as operators).
-const NON_OPERATING_WORDS = /\b(r&d|research|sales|marketing|branding|regulatory|quality|legal|counsel|attorney|paralegal|human resources|hr|people operations|talent|recruit\w*|communications|investor|customer experience|customer service|customer success)\b/;
+const NON_OPERATING_WORDS = /\b(r&d|research|sales|marketing|branding|brokerage|regulatory|quality|legal|counsel|attorney|paralegal|human resources|hr|people operations|talent|recruit\w*|communications|investor|customer experience|customer service|customer success)\b/;
 const COMMERCIAL_WORDS = /\b(sourcing|procurement|purchas\w*|category|buyer|finance|financial|cost|controller|accounting|pricing|compliance|sustainability)\b/;
 // Buying, pricing, paying, contracting or funding freight: never the operator, whatever function sits beside it
 // (review S5: freight audit / payment, transportation contracts, rate management). "Contract logistics" (a 3PL's
@@ -175,11 +175,14 @@ const FREIGHT_JOINED_OPS = /\b(transportation|logistics|freight|fleet|distributi
 const CARRIER_NETWORK = /\b(network operations|hub operations|hubs? (?:&|and) networks?|terminal operations|station operations|line ?haul|surface operations|ground operations|air network|sortation|sort operations|operations planning|planning (?:&|and) engineering|network planning|network engineering|operations engineering|facility operations|dock operations|pickup (?:&|and) delivery|p&d operations|road network|surface network|ground network|network execution)\b/;
 const CARRIER_NETWORK_GROUND = /\b(network operations|hub operations|hubs? (?:&|and) networks?|terminal operations|station operations|line ?haul|surface operations|ground operations|sortation|sort operations|operations planning|planning (?:&|and) engineering|network planning|network engineering|operations engineering|facility operations|dock operations|pickup (?:&|and) delivery|p&d operations|road network|surface network|ground network|network execution)\b/;
 const CARRIER_OPS_TECH = /\b(operations technology|ops technology|network technology|operations systems|hub automation|sort(?:ation)? automation|network automation)\b/;
-const AIR_ONLY = /\b(flight|aircraft|airline|aviation|pilots?|aircraft maintenance)\b/;
+const AIR_ONLY = /\b(flight|aircraft|airline|aviation|pilots?|aircraft maintenance|air operations)\b/;
 // Ground-specific network words: beside an air word they still name the ground network ("Hub Operations and Flight").
 const GROUND_SPECIFIC = /\b(line ?haul|hub operations|hubs? (?:&|and) networks?|terminal operations|station operations|surface operations|ground operations|sortation|sort operations|facility operations|dock operations|pickup (?:&|and) delivery|p&d operations|road network|surface network|ground network)\b/;
 // One station, district, depot or city: a local operating leader at a network of thousands, never the network owner.
-const CARRIER_LOCAL = /\b(station|district|depot|branch|city|local|hub manager|terminal manager|station manager|facility manager)\b/;
+const CARRIER_LOCAL = /\b(station|district|depot|branch|city|local|ramp|sort|service center|gateway|cross ?dock|hub manager|terminal manager|station manager|facility manager)\b/;
+const CARRIER_SITE_OPS = /\b(hub|station|ramp|sort|gateway|service center|depot) operations\b/;
+/** A carrier's station leaders: one hub, station, ramp, sort, gateway, depot or service center of the physical network (review S6). */
+const CARRIER_SITE_LEADER = /\b(hub|station|ramp|sort|service center|gateway|depot|cross ?dock|terminal|yard)\s+(?:operations\s+)?(?:general\s+)?(?:manager|director|leader|supervisor|lead|superintendent)\b/;
 const EXEC_WORDS = /\b(chief|csco|coo)\b|(?<!vice[ -])\bpresident\b/;
 // Executive technology roles: a technology partner at the top, never the operating owner.
 const EXEC_TECH = /\b(cio|cto|cdo|cdio|chief (information|technology|digital|data) officer)\b/;
@@ -280,10 +283,13 @@ export function readPerson(title: string | null | undefined, opts: { entityType?
   } else if (carrierLike && has(t, AIR_ONLY) && !has(t, GROUND_SPECIFIC) && !has(t, FREIGHT_WORDS) && !has(t, TECH_WORDS)) {
     lane = 'ADJACENT_OPERATOR';
     laneWhy = 'runs the air side (aircraft, flight operations), not the ground network of hubs, terminals and yards';
+  } else if (carrierLike && has(t, CARRIER_SITE_LEADER) && !has(t, NON_FREIGHT_OPS) && !has(t, NON_OPERATING_WORDS)) {
+    lane = 'PRIMARY_OPERATOR';
+    laneWhy = "runs one station, hub, ramp, sort or service center of the carrier's network (site scope)";
   } else if (carrierLike && has(t, CARRIER_NETWORK) && !has(t, NON_FREIGHT_OPS) && !(has(t, SUPPORT_ROLE) && seniority <= 2)) {
     lane = 'PRIMARY_OPERATOR';
     laneWhy = /\bair network\b/.test(t)
-      ? 'runs the air network at a carrier (the hubs that sort air freight; the ground yard is part of it)'
+      ? 'runs the air network at a carrier (the hubs that sort air freight; the ground yards are part of it)'
       : "runs the carrier's physical network (network, hub, terminal, linehaul, sortation, operations planning and engineering)";
   } else if (has(t, TECH_WORDS)) {
     // Automation, TMS / WMS, RTLS, visibility, orchestration and yard modernization are supply chain technology in
@@ -356,7 +362,8 @@ export function readPerson(title: string | null | undefined, opts: { entityType?
   // its scope is what the title says (a station or district is a site; enterprise / North America / regional / hub is
   // the network), never inferred from seniority (owner resolution, 2026-10-05).
   const bareCarrierOps = carrierLike && lane === 'PRIMARY_OPERATOR' && !has(t, FREIGHT_WORDS) && !has(t, LOGISTICS_DIRECT) && !has(t, CARRIER_NETWORK);
-  const local = carrierLike && has(t, CARRIER_LOCAL);
+  // A hub, station, ramp, sort or gateway operations role below director runs one site; a director and above runs the network of them.
+  const local = carrierLike && (has(t, CARRIER_LOCAL) || (has(t, CARRIER_SITE_OPS) && seniority < 3));
   const scope: PersonScope = (has(t, SITE) || local) && !has(t, NETWORK) ? 'SITE' : has(t, NETWORK) || (leadsFreight && !has(t, SITE) && !bareCarrierOps) ? 'NETWORK' : 'UNKNOWN';
   if (bareCarrierOps && scope === 'UNKNOWN') laneWhy += ' (scope not stated: may be one station or district)';
   const ownership =
