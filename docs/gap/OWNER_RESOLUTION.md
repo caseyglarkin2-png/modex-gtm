@@ -245,7 +245,7 @@ Authorized: discard / reconcile the exact stale Pepsi / Michelle GAP draft; link
 contact into PepsiCo; assign a Casey-selected person to the FedEx hypothesis through the UI; targeted shadow routing;
 deploy this fix. Not authorized and not done: sends, enrollments, Apollo spend, bulk imports, arbitrary HubSpot
 writes, deleting Michelle, broad routing, auto-selecting a FedEx person, auto-creating web-researched personas.
-Receipt: see the "Production repair receipt" section once it is appended below.
+Receipt: the "Production repair receipt" section at the end of this document.
 
 ## Deliberate boundaries and named debt
 
@@ -265,3 +265,45 @@ Receipt: see the "Production repair receipt" section once it is appended below.
 - Banners and subsidiaries with their own name read as a conflict ("verify") until an alias exists: Central Market
   (H-E-B), King Soopers and City Market (Kroger), SDR Distribution (NFI). Add them through the alias table.
 - The call brief (`/api/gap/call/[personaId]`) does not display the employment state; the call action is gated.
+
+## Production repair receipt (2026-10-05, under Casey's session, after PR #396 merged as 71188379 and Vercel READY)
+
+Deploy verified by markers unique to this diff on the live app: the Add to GAP button and the outstanding-draft panel
+on /gap/accounts/pepsico/, the owner panel in the FedEx and Walmart drawers ("35 plausible owners ... GAP does not
+pick", "45 plausible owners ..."), nobody preselected. Everything below was clicked or posted through the product's
+own governed routes in the rig, and read back from the database.
+
+- **PEPSI AFTER.** The stale first-touch draft to michelle.schlie@pepsico.com (decision `cmurhhob4001wjq04nv3iysa8`,
+  Gmail draft `r7108052208134565800`) was discarded through the panel with reason `stale_pre_operator_who_draft`:
+  ledger `execution.gmail_draft_discarded` at 17:50:08Z by casey@freightroll.com, status `discarded`, nobody
+  unsubscribed. Isaac Scott (HubSpot 219885493392, isaac.scott@pepsico.com, Sr Director of Transportation -
+  Frito-Lay, verified live) was added through ADD TO GAP: `rehomed`, persona 13 moved from the Frito-Lay family
+  account (no history there) to PepsiCo, linked by HubSpot id; audit `person.imported_from_hubspot` with
+  `apolloSpent: 0, accountCreated: false, hubspotWritten: false`. The record still carries the legacy do-not-contact
+  and bounced status from the March blast, reported and not cleared (not in the authorization), so NOW names Karen
+  Darling (Senior Director - PBNA Transportation, HubSpot-only) as WHO with ADD TO GAP, and Isaac as a GAP contact on
+  the record. Clearing that flag is Casey's decision through `scripts/gap/correct-historical-suppression.ts`.
+  Michelle Schlie remains a GAP contact (adjacent operator), never deleted. The account motion is released.
+- **FEDEX AFTER.** The approved hypothesis `cmuuii2n80002l504refjy0od` still has no person. Its drawer shows the
+  owner panel: 35 eligible, ranked with reasons (Glen Chaffee, then Jeffrey, then Lisa Lisson), the set-aside list
+  (FedEx Supply Chain divested, do-not-contact, other region), nobody preselected. No FedEx person was assigned: that
+  is Casey's click.
+- **WALMART.** The approved hypothesis `cmuuij14l0006l504js050uwz` still has no person; its panel shows 45 eligible,
+  ranked, nobody preselected. Same rule, same answer: no_persona is systemic and is now a choice, not a refusal.
+- **H-E-B / DAKOTA.** Before the correction the record read CURRENT_LIKELY (an Apollo intake of 2026-05-04 and the
+  CRM agreed; no evidence of the departure was on the record). THIS PERSON LEFT was recorded through
+  `POST /api/gap/personas/1306/employment` under Casey's session: strong human evidence, ADUSA Distribution, Director
+  of Distribution Operations, source http://www.linkedin.com/in/dakota-socha-9635ba61, audit
+  `person.employment_corrected`. The gate now answers `persona_left_account` ("Casey marked them as no longer at
+  H-E-B (now ADUSA Distribution, Director of Distribution Operations) on 2026-10-05"). NOW on /gap/accounts/h-e-b/
+  reads: "Dakota Socha, transportation & reverse logistics. Historical H-E-B contact. Current-employer evidence now
+  points to ADUSA Distribution (Director of Distribution Operations). Not eligible for H-E-B outreach." WHO is Jess
+  Bess (Director, Transportation Strategy & Planning, HubSpot-only, ADD TO GAP), alternate Jose Huerta. Nothing in
+  HubSpot was changed; nothing was deleted; no do-not-contact was written. ADUSA Distribution was not created.
+- **SAFETY (database, since 14:00Z today).** Emails sent 0. Enrollments 0. Apollo credits 0. HubSpot contacts
+  created 0. Accounts created 0 (1,708 before and after). Audit rows from this work: one discard, one import, one
+  employment correction.
+- **VERDICT.** Shipped and verified live. Open for Casey: choose the FedEx and Walmart owners from the panels;
+  decide the legacy flag on Isaac's record; add banner aliases (Central Market, King Soopers / City Market, SDR
+  Distribution) and the carrier verticals (NFI Industries, J.B. Hunt, UPS) when convenient.
+<!-- verified:2026-10-05 -->

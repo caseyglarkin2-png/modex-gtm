@@ -328,8 +328,8 @@ reconcile, never infer); the owner panel in the drawer (ranked choice; one eligi
 Casey's choice). Contracts that MUST NOT change: owner resolution never picks among two or more; never creates an
 account or a web-researched persona; never writes a HubSpot contact; never spends Apollo; the departed and the
 conflicted are set aside upstream with the reason, never by do-not-contact; the discard touches only the draft the
-ledger proves. Doctrine, root causes, the 11-account dogfood and the FedEx fact stated truthfully:
-`docs/gap/OWNER_RESOLUTION.md`.
+ledger proves. Doctrine, root causes, the 11-account dogfood, the adversarial review and the production repair receipt:
+`docs/gap/OWNER_RESOLUTION.md`. Production SHA: 71188379 (#396, shipped and verified live 2026-10-05).
 
 ## Soak (2026-10-02)
 
