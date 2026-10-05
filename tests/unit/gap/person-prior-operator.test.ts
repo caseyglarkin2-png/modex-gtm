@@ -60,6 +60,38 @@ describe('review B1 (2026-10-04): a governance remit with a trailing department 
   });
 });
 
+describe('re-review C1 (2026-10-05): two governance remits are governance, even with a function word on the second', () => {
+  it('safety plus fleet / transportation compliance is not an operator', () => {
+    for (const t of ['Safety & Fleet Compliance Manager', 'Director, Safety and Transportation Compliance', 'Director Compliance and Fleet Safety', 'Compliance & Fleet Safety Manager', 'Director, Fleet Safety and Operations Compliance'])
+      expect([t, lane(t)]).not.toEqual([t, 'PRIMARY_OPERATOR']);
+  });
+  it('a governance remit joined to a bare function stays the operator', () => {
+    for (const t of ['Safety & Transportation Manager', 'Director of Transportation & Safety', 'VP Global Transportation and Compliance', 'VP Fleet Safety & Operations'])
+      expect([t, lane(t)]).toEqual([t, 'PRIMARY_OPERATOR']);
+  });
+});
+
+describe('re-review (d) (2026-10-05): a second hat never demotes a real operator; a trailing department never rescues another function', () => {
+  it('logistics joined to customer / commercial operations, budget or spend beside operations, and dedicated contracts are operators', () => {
+    for (const t of ['Director, Logistics & Customer Operations', 'Director Customer Operations & Logistics', 'VP Commercial Operations & Logistics', 'Director Transportation Budget & Operations', 'Director Transportation Operations (Budget Owner)', 'Director, Transportation Operations and Spend', 'Director of Operations, Dedicated Contracts'])
+      expect([t, lane(t)]).toEqual([t, 'PRIMARY_OPERATOR']);
+    expect(lane('VP Dedicated Contracts', 'carrier')).toBe('PRIMARY_OPERATOR');
+  });
+  it('spend, budget and contracts alone stay commercial', () => {
+    for (const t of ['Director of Transportation Spend', 'Director Transportation Budget', 'Director Transportation Contracts'])
+      expect([t, lane(t)]).toEqual([t, 'PROCUREMENT_COMMERCIAL']);
+  });
+  it('people / customer / business operations with a trailing freight department are not operators', () => {
+    expect(lane('Director People Operations, Fleet')).toBe('NON_OPERATING');
+    expect(lane('Director Customer Operations - Transportation')).not.toBe('PRIMARY_OPERATOR');
+    expect(lane('Director Business Operations, Transportation')).not.toBe('PRIMARY_OPERATOR');
+  });
+  it('rail and intermodal operations are freight', () => {
+    expect(lane('Director, Rail & Intermodal Operations')).toBe('PRIMARY_OPERATOR');
+    expect(lane('Director, Intermodal')).toBe('PRIMARY_OPERATOR');
+  });
+});
+
 describe('review S5 (2026-10-04): freight finance, contracts, HR and legal are never the operator', () => {
   it('audit, payment, contracts, rates, spend and budget are commercial', () => {
     for (const t of ['Director, Freight Audit', 'Freight Payment Manager', 'Director Transportation Contracts', 'Director, Freight Contracting', 'Director Transportation Rate Management', 'Director of Transportation Spend', 'Director Transportation Budget', 'Director Indirect Spend - Logistics', 'Director, Freight Audit & Payment'])
