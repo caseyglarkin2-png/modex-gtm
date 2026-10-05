@@ -269,7 +269,9 @@ export function apolloEvidence(input: { status: string | null; verifiedAt: strin
   const s = String(input.status ?? '').trim().toLowerCase();
   if (!s || s === 'unverified') return [];
   const source = `Apollo employment check${input.verifiedAt ? '' : ' (undated)'}`;
-  if (s === 'current' || s === 'current_title_updated') return [{ kind: 'apollo', tier: 'supporting', company: input.accountName, title: input.title ?? null, at: input.verifiedAt, source, note: s === 'current_title_updated' ? 'Title refreshed by Apollo.' : null }];
+  // Apollo's "current" confirms the employer, not the role: it carries a title only when Apollo refreshed the title
+  // itself (current_title_updated), so the ROLE read never counts the CRM title twice (WHO truth, 2026-10-05).
+  if (s === 'current' || s === 'current_title_updated') return [{ kind: 'apollo', tier: 'supporting', company: input.accountName, title: s === 'current_title_updated' ? input.title ?? null : null, at: input.verifiedAt, source, note: s === 'current_title_updated' ? 'Title refreshed by Apollo.' : null }];
   if (s === 'moved_out' || s === 'departed' || s === 'moved_to_lookalike') return [{ kind: 'apollo', tier: 'supporting', company: null, title: null, at: input.verifiedAt, source, left: true, note: `Apollo reads them as ${s.replace(/_/g, ' ')}.` }];
   return [];
 }

@@ -91,6 +91,20 @@ describe('the owner loader reads role evidence recorded against a HubSpot contac
   });
 });
 
+describe('Apollo "current" confirms the employer, never the role', () => {
+  it('a HubSpot-only person Apollo marks current reads CURRENT_LIKELY for employment and ROLE_UNVERIFIED for the role (the CRM title is never counted twice)', async () => {
+    const apolloReads: HubSpotPeopleReads = {
+      contactIdsForCompany: async () => ({ ids: ['702'], truncated: false }),
+      readContacts: async () => [{ id: '702', properties: { firstname: 'Darryl', lastname: 'Phillips', jobtitle: 'Regional Vice President-Logistics', email: 'x@walmart.com', company: 'Walmart', apollo_employment_status: 'current', apollo_verified_at: '2026-09-11T00:00:00Z', city: 'Bentonville', state: 'Arkansas', country: 'United States' } }],
+    };
+    const r = await loadOwnerResolution(prismaWith() as never, { accountName: 'Walmart Inc.', purpose: 'COLD_FIRST_TOUCH', now: NOW }, { hubspotPeople: apolloReads });
+    expect(r.ok).toBe(true);
+    if (!r.ok) return;
+    expect(r.resolution.eligible[0]?.employment?.state).toBe('CURRENT_LIKELY');
+    expect(r.resolution.eligible[0]?.role?.state).toBe('ROLE_UNVERIFIED');
+  });
+});
+
 describe('the brief reads the same role truth: NOW never names a person on a contradicted title', () => {
   const base = (over: Partial<AccountInputs> = {}): AccountInputs => ({
     account: { name: 'Walmart Inc.', tier: null, priorityBand: null, vertical: 'Retail', parentBrand: null, hubspotCompanyId: '8536615003', recordUpdatedAt: null },
