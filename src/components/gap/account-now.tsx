@@ -105,7 +105,11 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null }
                 Role: {v.who.role.label}. {v.who.role.why}
               </p>
             ) : null}
-            {v.who.personaId ? <EmploymentControl personaId={v.who.personaId} name={v.who.name} title={v.who.title} accountName={v.name} state={v.who.employment ? { label: v.who.employment.label, why: v.who.employment.why } : null} compact /> : null}
+            {v.who.personaId ? (
+              <EmploymentControl personaId={v.who.personaId} name={v.who.name} title={v.who.title} accountName={v.name} state={v.who.employment ? { label: v.who.employment.label, why: v.who.employment.why } : null} compact />
+            ) : v.who.hubspotContactId ? (
+              <EmploymentControl hubspotContactId={v.who.hubspotContactId} name={v.who.name} title={v.who.title} accountName={v.name} compact />
+            ) : null}
             {v.who.route ? <p className="text-xs text-[var(--muted-foreground)]">Route: {v.who.route}</p> : null}
             {v.whoUnknown ? <p className="mt-1 text-xs text-amber-700 dark:text-amber-400" data-testid="now-owner-missing">{v.whoUnknown}</p> : null}
             {v.betterFit ? (

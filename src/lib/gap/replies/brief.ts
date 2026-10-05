@@ -111,12 +111,16 @@ export const LAST_DISPOSITIONS = 3;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function personaCurrentness(prisma: any, personaId: number, accountName: string, storedTitle: string | null): Promise<Pick<BriefPersona, 'employment' | 'roleCurrentness'>> {
   try {
-    const [{ accountEmploymentContext, loadPersonaEmployment, personaRole }, { EMPLOYMENT_LABEL }, { ROLE_LABEL }] = await Promise.all([import('../people/employment-store'), import('../people/employment'), import('../people/role-currentness')]);
+    const [{ accountEmploymentContext, loadPersonaEmployment, loadHubSpotContactRoleEvidence, personaRole }, { EMPLOYMENT_LABEL }, { ROLE_LABEL, readRole }] = await Promise.all([import('../people/employment-store'), import('../people/employment'), import('../people/role-currentness')]);
     const now = new Date();
     const ctx = await accountEmploymentContext(prisma, accountName).catch(() => ({ aliases: [] as string[], domains: [] as string[] }));
     const emp = await loadPersonaEmployment(prisma, personaId, { now, aliasesFor: () => ctx.aliases, domainsFor: () => ctx.domains });
     if (!emp) return { employment: null, roleCurrentness: null };
-    const role = personaRole(emp, storedTitle, { now, aliases: ctx.aliases, domains: ctx.domains });
+    // Role evidence recorded against the linked HubSpot contact (a verification before the person became a GAP
+    // contact) counts here as it does in the owner panel.
+    const linked: { hubspot_contact_id: string | null } | null = await prisma.persona.findUnique({ where: { id: personaId }, select: { hubspot_contact_id: true } }).catch(() => null);
+    const extra = linked?.hubspot_contact_id ? (await loadHubSpotContactRoleEvidence(prisma, [String(linked.hubspot_contact_id)]).catch(() => new Map())).get(String(linked.hubspot_contact_id)) ?? [] : [];
+    const role = extra.length ? readRole({ accountName, aliases: ctx.aliases, domains: ctx.domains, storedTitle, evidence: [...emp.evidence, ...extra], now }) : personaRole(emp, storedTitle, { now, aliases: ctx.aliases, domains: ctx.domains });
     return {
       employment: { state: emp.state, label: EMPLOYMENT_LABEL[emp.state], why: emp.why },
       roleCurrentness: { state: role.state, label: ROLE_LABEL[role.state], why: role.why, effectiveTitle: role.effectiveTitle },
