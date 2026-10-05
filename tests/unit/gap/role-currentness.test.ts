@@ -235,3 +235,18 @@ describe('sameRole: a normalized title comparison', () => {
     expect(Object.keys(ROLE_LABEL).sort()).toEqual(['ROLE_CHANGED_CONFIRMED', 'ROLE_CONFLICT', 'ROLE_CURRENT_CONFIRMED', 'ROLE_CURRENT_LIKELY', 'ROLE_UNVERIFIED']);
   });
 });
+
+describe('a trailing segment that spells the employer or one of its units is a company name, not a role change (FedEx dogfood 2026-10-05)', () => {
+  it('"Managing Director, Transportation & Logistics, FedEx Ground" is the same role as "Managing Director - Transportation & Logistics" at FedEx', () => {
+    expect(sameRole('Managing Director, Transportation & Logistics, FedEx Ground', 'Managing Director - Transportation & Logistics', ['FedEx'])).toBe(true);
+    expect(sameRole('President, Air Network Operations', 'President Air Network Operations, FedEx', ['FedEx'])).toBe(true);
+    // Without the account's spellings the "ground" tail still reads as a remit word: the account context decides.
+    expect(sameRole('Managing Director, Transportation & Logistics, FedEx Ground', 'Managing Director - Transportation & Logistics')).toBe(false);
+    expect(sameRole('Director, Ground Operations', 'Director, Transportation', ['FedEx'])).toBe(false);
+  });
+  it('readRole reads a strong verification with the unit tail as ROLE_CURRENT_CONFIRMED, not a change', () => {
+    const r = readRole({ accountName: 'FedEx', storedTitle: 'Managing Director - Transportation & Logistics', evidence: [{ kind: 'profile', tier: 'strong', company: 'FedEx', title: 'Managing Director, Transportation & Logistics, FedEx Ground', at: '2026-10-05T00:00:00Z', source: 'verified at linkedin.com' }], now: new Date('2026-10-05T15:00:00Z') });
+    expect(r.state).toBe('ROLE_CURRENT_CONFIRMED');
+    expect(r.priorTitle).toBeNull();
+  });
+});

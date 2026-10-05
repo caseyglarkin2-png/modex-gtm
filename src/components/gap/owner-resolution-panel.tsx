@@ -142,11 +142,6 @@ export function OwnerResolutionPanel({ hypothesisId, accountName, onChanged }: O
                       {r.recommended.why}
                     </p>
                   ) : null}
-                  {c.role && c.role.state !== 'ROLE_UNVERIFIED' ? (
-                    <p className="mt-0.5 text-xs text-[var(--muted-foreground)]" data-testid="owner-role">
-                      Role: {c.role.label}. {c.role.why}
-                    </p>
-                  ) : null}
                   {i < VERIFY_TOP && (!c.role || c.role.state === 'ROLE_UNVERIFIED') ? (
                     c.personaId !== null ? (
                       <EmploymentControl personaId={c.personaId} name={c.name} title={c.title} accountName={accountName} compact onDone={() => void fetchResolution()} />

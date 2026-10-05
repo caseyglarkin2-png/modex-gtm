@@ -107,11 +107,14 @@ function titleWords(title: string): string[] {
  * Drop one trailing segment that reads as a company name ("..., FedEx", "... at FedEx", "... | Walmart"): a segment
  * with no role or remit word in it. "Director, Transportation" keeps its segment; "Director, Walmart" drops it.
  */
-function withoutTrailingCompany(title: string): string {
+function withoutTrailingCompany(title: string, companies: readonly string[] = []): string {
   const m = /^(.*\S)\s*(?:,|\|| at | @ |\s-\s)\s*([^,|]+?)\s*$/i.exec(title);
   if (!m) return title;
-  const tail = m[2].toLowerCase();
-  return ROLE_WORDS.test(tail) ? title : m[1];
+  const tail = m[2].trim();
+  // A tail that spells the employer or one of its units ("FedEx Ground" at FedEx) is a company name even when it
+  // carries a network word ("ground"): the account's own spellings decide before the role words do.
+  if (companies.some((c) => c && sameEmployer(tail, c))) return m[1];
+  return ROLE_WORDS.test(tail.toLowerCase()) ? title : m[1];
 }
 
 const normalizeTitle = (t: string) => titleWords(t).join(' ');
@@ -120,7 +123,7 @@ const normalizeTitle = (t: string) => titleWords(t).join(' ');
  * A normalized title comparison: case, punctuation, "Sr" / "Senior", "&" / "and", "VP" / "Vice President" and a
  * trailing company name ("..., FedEx") do not differ; a different function or remit does. Null or empty never match.
  */
-export function sameRole(a: string | null | undefined, b: string | null | undefined): boolean {
+export function sameRole(a: string | null | undefined, b: string | null | undefined, companies: readonly string[] = []): boolean {
   const ta = (a ?? '').trim();
   const tb = (b ?? '').trim();
   if (!ta || !tb) return false;
@@ -128,8 +131,8 @@ export function sameRole(a: string | null | undefined, b: string | null | undefi
   const nb = normalizeTitle(tb);
   if (!na || !nb) return false;
   if (na === nb) return true;
-  const ca = normalizeTitle(withoutTrailingCompany(ta));
-  const cb = normalizeTitle(withoutTrailingCompany(tb));
+  const ca = normalizeTitle(withoutTrailingCompany(ta, companies));
+  const cb = normalizeTitle(withoutTrailingCompany(tb, companies));
   return !!ca && !!cb && (ca === nb || na === cb || ca === cb);
 }
 
@@ -149,6 +152,8 @@ export function readRole(input: { accountName: string; aliases?: readonly string
   const domains = input.domains ?? [];
   const storedTitle = (input.storedTitle ?? '').trim() || null;
   const crmTitle = (input.crmTitle ?? '').trim() || null;
+  const names = [accountName, ...aliases];
+  const same = (x: string | null | undefined, y: string | null | undefined) => sameRole(x, y, names);
   const fallbackTitle = storedTitle ?? crmTitle;
   const fallbackSource: RoleRead['titleSource'] = storedTitle ? 'stored' : crmTitle ? 'crm' : 'unknown';
   const base = { storedTitle, priorTitle: null as string | null };
@@ -219,7 +224,7 @@ export function readRole(input: { accountName: string; aliases?: readonly string
   const movedWeakly = newest(ev.filter((e) => e.roleChanged && !e.title && e.kind !== 'human' && e.tier !== 'strong'));
   if (titled.length >= 2) {
     const [a, b] = [...titled].sort((x, y) => (time(y.at) || 0) - (time(x.at) || 0));
-    if (!sameRole(a.title, b.title)) {
+    if (!same(a.title, b.title)) {
       const both = dated(a) && dated(b);
       if (both && Math.abs(time(a.at) - time(b.at)) <= CONFLICT_WINDOW_DAYS * DAY) return conflict([a, b], `Credible sources disagree about their role at ${accountName} within a month: ${says(a)} versus ${says(b)}. Verify the current role.`);
       if (!both) return conflict([a, b], `Credible sources disagree about their role at ${accountName} and one is undated: ${says(a)} versus ${says(b)}. Verify the current role.`);
@@ -232,7 +237,7 @@ export function readRole(input: { accountName: string; aliases?: readonly string
     // A supporting source saying the role moved, against a strong titled source: the strong one decides, and the
     // disagreement is a reason to verify.
     const verifyNeeded = !!movedWeakly;
-    if (!sameRole(title, storedTitle)) return { ...changedTo(n, title, 'verified', says(n)), verifyNeeded };
+    if (!same(title, storedTitle)) return { ...changedTo(n, title, 'verified', says(n)), verifyNeeded };
     const recent = dated(n) && now.getTime() - time(n.at) <= RECENT_DAYS * DAY;
     return recent
       ? { state: 'ROLE_CURRENT_CONFIRMED', why: `Recent evidence confirms their role at ${accountName}: ${says(n)}.${verifyNeeded ? ` A weaker source (${says(movedWeakly!)}) says the role moved: verify.` : ''}`, ...base, effectiveTitle: title, titleSource: 'verified', usableForRanking: true, decidedBy: [n], verifyNeeded }
@@ -248,13 +253,13 @@ export function readRole(input: { accountName: string; aliases?: readonly string
   const supporting = ev.filter((e) => e.tier === 'supporting' && !!e.title);
   const crm = supporting.find((e) => e.kind === 'crm') ?? null;
   const liveCrmTitle = crmTitle ?? crm?.title ?? null;
-  const crmDiffers = !!crm && !!liveCrmTitle && !!storedTitle && !sameRole(liveCrmTitle, storedTitle);
+  const crmDiffers = !!crm && !!liveCrmTitle && !!storedTitle && !same(liveCrmTitle, storedTitle);
   if (crmDiffers) {
     return { state: 'ROLE_UNVERIFIED', why: `The CRM reads "${liveCrmTitle}" while GAP holds "${storedTitle}"; neither is verified (a wording difference, not a change). Verify the current role when it matters.`, ...base, priorTitle: null, effectiveTitle: liveCrmTitle, titleSource: 'crm', usableForRanking: true, decidedBy: [crm], verifyNeeded: true };
   }
-  const differing = newest(supporting.filter((e) => e.kind !== 'crm' && fallbackTitle && !sameRole(e.title, fallbackTitle)));
+  const differing = newest(supporting.filter((e) => e.kind !== 'crm' && fallbackTitle && !same(e.title, fallbackTitle)));
   if (differing) return { ...unverified([differing], `${says(differing)} names a different role from the stored ${quoted(fallbackTitle)} at ${accountName}; a provider row alone neither confirms nor blocks. Verify the current role before ranking on it.`), verifyNeeded: true };
-  const agreeing = newest(supporting.filter((e) => e.kind !== 'crm' && fallbackTitle && sameRole(e.title, fallbackTitle)));
+  const agreeing = newest(supporting.filter((e) => e.kind !== 'crm' && fallbackTitle && same(e.title, fallbackTitle)));
   if (agreeing) return { state: 'ROLE_CURRENT_LIKELY', why: `Supporting evidence agrees with the stored role at ${accountName}: ${says(agreeing)}.`, ...base, effectiveTitle: fallbackTitle, titleSource: fallbackSource, usableForRanking: true, decidedBy: [agreeing], verifyNeeded: false };
   return unverified(crm ? [crm] : []);
 }
