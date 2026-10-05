@@ -68,8 +68,9 @@ async function main() {
       if (flags.has('--research') && !a.direct && !a.stagedOperator) {
         const { researchDecisionMakers } = await import('../../src/lib/discovery/research');
         const found: ResearchedContact[] = await researchDecisionMakers(a.account);
-        console.log(`  WEB RESEARCH (source-backed, ${found.length}):`);
-        for (const f of found) console.log(`    ${String(f.slot).padEnd(20)} ${f.name} | ${f.title ?? ''} | ${f.location ?? 'location not stated'}${f.division ? ` | ${f.division}` : ''} | ${f.sourceUrl}${f.sourceDate ? ` (${f.sourceDate})` : ''} | ${f.confidence ?? 'confidence not stated'}`);
+        // Research never becomes WHO: a find is at most a STAGED candidate (with --stage), promoted only by Casey.
+        console.log(`  WEB RESEARCH (source-backed, ${found.length}; verify each source before promoting):`);
+        for (const f of found) console.log(`    ${String(f.slot).padEnd(20)} ${f.name} | ${f.title ?? ''} | ${f.location ?? 'location not stated'}${f.division ? ` | ${f.division}` : ''} | ${f.sourceUrl}${f.sourceDate ? ` (date as the model reported it, unverified: ${f.sourceDate})` : ''} | ${f.confidence ?? 'confidence not stated'}`);
         const known = [...v.inputs.personas.map((p) => p.name), ...(v.inputs.hubspotPeople?.people ?? []).map((p) => p.name), ...v.inputs.candidates.map((c) => c.name)];
         const stage = stageableResearch(found, known);
         if (flags.has('--stage')) {
