@@ -739,6 +739,69 @@ line (Gatik serves about 250 retail locations in three states) and is dropped; P
 Also live and carried as SHOULD: machine words remain on the seller path; the analyst drawer the plan keeps must
 read the same capped stack (53 cards nowhere by default, including the drawer).
 
+### 8.7 UX-03 fresh review (four read-only reviewers on the local preview captures, 2026-10-06)
+
+Reviewers: enterprise AE (task: choose the FedEx person), product designer / IA (contract conformance and hierarchy),
+human factors / HAI (trust, safety, explainability, with the code traced), accessibility / mobile (pending at the time
+of writing; its findings are appended when received).
+
+Task result (AE): FedEx owner selection went from about 8 to 10 minutes, 3 clicks and 10 screens of scrolling through 53
+identical cards, to about 90 seconds, 5 cards and 1 click; the choice (Glen Chaffee, Jeffrey Tallman second) was the
+same the resolver and Casey had reached. The three acceptance questions scored PARTLY, PARTLY, PARTLY before the fix
+batch; the specific reasons are below with their dispositions.
+
+| Finding | Reviewer | Severity | Disposition |
+|---|---|---|---|
+| "No touch on record." beside an opt-out reply (someone emailed Walmart; GAP has no record of the send) | AE, product, HAI | BLOCKER | FIXED (presentation): "No GAP touch on record; the reply below answers an earlier email GAP did not send." The missing outbound reader (Resend-era and clawd sends) is UX-05 F11 work |
+| NFI "Relationship-led: Sandra Richards" rests on a newsletter subscription; Tyson's Ryan Heman named with no control; the stack's first row contradicts NEXT | AE, product, HAI | BLOCKER | FIXED: a subscriber, list member or follower is never a relationship (`isRealRelationship`); a real relationship person leads as a Relationship route row with Log the touch |
+| The Walmart analyst drawer says "53 plausible owners: choose one" while NOW says "Chosen by you" | product, HAI | BLOCKER (reviewer) | NOT A DEFECT of the slice: production holds two Walmart theses, one active with Doug Estrada (the audited choice NOW reads) and one approved with no person (the drawer). Recorded as debt: a duplicate thesis at an account should show the account's chosen person in the drawer headline (UX-07) |
+| A recorded opt-out or a triaged human reply flipped the account back to Ready because the state read only `in_motion` from the cockpit motion | HAI | BLOCKER | FIXED: `paused_reply`, `in_conversation` and `needs_owner` are read from the cockpit motion into the pursuit state; pinned by tests |
+| Listen spoke the old NOW ("Ready for a first touch") over a page that said "Opted out" | HAI | BLOCKER | FIXED: `pursuitListenText` speaks the page's state line, NEXT and person; nobody is spoken as next under a hold |
+| "Chosen by you" on GAP's single eligible pick (the loader passed the lone person as chosen) | HAI | BLOCKER | FIXED: only a human choice is passed as chosen; a lone person reads as GAP's preselection |
+| Kroger under a deal showed "1." ordinals and "Choose who (13)"; Call prep offered under holds | AE, product, HAI | SHOULD | FIXED: no ordinals, choose label, tie line or call prep unless the state allows choosing or calling |
+| "NEXT OPERATOR" pinned by position on a name-order tie; "SECOND OPERATOR" on a Head of Commercialization | AE, product, HAI | SHOULD | FIXED: "Next operator" only for the chosen or lone person; everyone else "Eligible operator" |
+| Sponsor / tech / site rendered as full cards ("TOP 6 OF 46"), level 2 for a first touch | product, HAI | SHOULD | FIXED: compact slot lines below the rows with Why?; rows are eligible people only, at most 4 |
+| Name-echo "(Kelly Kruse)" and "nothing else on record sets them apart" dressed as a reason; reasons that are only a city | AE, product | SHOULD | FIXED: the title's own distinguishing words are used before an honest shared-row note; no name suffix. A city remains the discriminator when titles and remits are identical (honest); the division question is UX-05 |
+| "ranked lower on evidence" under a tie; the tie line did not name the tied people; "name order" unexplained | AE, product, HAI | SHOULD | FIXED: the tie line names the tied people and says first-name order is not a ranking; the parenthetical appears only when the order is evidence |
+| "the account waits 14 days" promised, not built | HAI | REMOVE | FIXED: the opt-out text promises only what exists |
+| "Out of office: Courtney Keen" for "I am in the office but my responses will be delayed" | AE | NICE | FIXED: the class label is "Automatic reply" |
+| Screen-reader duplicate of the reason (sr-only span) and aria-describedby pointing at the hidden copy | HAI | SHOULD | FIXED: the Choose button is described by the visible reason; the Why section is hidden, not removed |
+| Verify role / Role is wrong / Left removed from NOW | HAI | SHOULD | FIXED: the three checks live inside Why this person? (the existing control) |
+| Choose under research outranked "Do not contact yet" and silently added a HubSpot person | HAI | SHOULD | FIXED: outline control reading "Choose X (adds them to GAP) for when an angle exists"; no call prep under research |
+| Likely roles render "verified at" and green | HAI | SHOULD | PARTLY: confirmed and likely both read calm (not amber) by design; the "verified at" wording is the employment store's and is carried as debt |
+| Lisa Lisson (President) cold-eligible; Justin Brownlee / Becky Crane / Barry Vincent as sponsors from the wrong function | AE, product | SHOULD | CARRIED to the resolver (owner-resolution sponsor and carrier rules), outside this slice; recorded in section 10 |
+| Past contacts missing from the stack (Joey Maggard on Kroger's deal, Troy Retzloff, Laura Maxwell, Niccole Pippin) | AE, product | SHOULD | CARRIED to UX-05 / UX-07: a relationship-history row ("people you have touched") beside the stack |
+| "Why this person?" explains why listed, not why ahead of #2 | product, HAI | SHOULD | CARRIED to UX-06: the first rank difference against the next row, with dated bases, is computable from the rank keys |
+| THE GAP block, finance headlines, never-cite rows, "Email: Email sent:", five 16 px flag links | product, AE | REMOVE / NICE | CARRIED to UX-04 (hierarchy) |
+| Call mode checks only the person's do-not-contact flag, never the account hold | HAI | SHOULD | CARRIED to UX-06 (call prep reads the pursuit state) |
+
+Accessibility review (received after the table above; re-measured at 390 and 820 against the running local build):
+
+| Finding | Criterion | Severity | Disposition |
+|---|---|---|---|
+| Shift+Tab onto Log a touch or Prepare email left the control fully under the sticky view tabs at 390 and 820; no scroll padding anywhere | 2.4.11 | BLOCKER | FIXED: global `scroll-padding-top` (120 px, 64 px from md) and `scroll-padding-bottom` (88 px) in `globals.css`, the exact rule the reviewer verified by injection |
+| After Choose the button unmounts (the row re-renders chosen at the top): focus falls to the body | 2.4.3 | SHOULD | FIXED: focus moves to the chosen person's name after the refresh |
+| NEXT is a paragraph, so heading navigation skips the decision | 1.3.1 | SHOULD | FIXED: NEXT is an h2 |
+| The ordered list announces "1 of 5" under a tie the page says it cannot rank | 1.3.1 | SHOULD | FIXED: an unordered list with `role="list"`; order is said in words only |
+| The status note mounts with its text, so screen readers often skip it | 4.1.3 | SHOULD | FIXED: one always-mounted polite status region whose text changes; refusals are a separate alert |
+| Two of five "Review the flag" buttons and the drawer's Details fail the 24 px spacing test | 2.5.8 | SHOULD | FIXED: both carry a 24 px minimum height |
+| The Note and Compose pills cover parts of Log a touch and Call prep at page load | 2.4.11 | SHOULD (AA passes) | CARRIED to UX-04 (hide the pills on account pages) |
+| Drawer candidate labels wrap buttons (invalid nesting) | 4.1.2 | SHOULD | CARRIED to UX-04 (the drawer card becomes a div with the label on the name) |
+| Identical "Why this person?" names | 4.1.2 | NICE | FIXED: each carries the person's name as its accessible name |
+| Contrast (amber 4.9 to 5.0 light, 11 dark; muted 5.2 / 7.6; "Chosen by you" 6.5 / 5.2) | 1.4.3 | KEEP | |
+| Keyboard operation and focus visibility | 2.1.1, 2.4.7 | KEEP | |
+
+390 px (reviewer's measurements on the pre-batch build): 3.9 to 4.2 screens; the NEXT control at 495 to 531 px, the
+stack at 564 to 600 px, the chosen person's first action at 791 to 877 px (inside the first 844 px screen on FedEx and
+PepsiCo, 9 px past it on Walmart); no horizontal overflow; 20 Tab presses from the top to the first stack action (14
+after the skip link). The reviewer's three gates for calling mobile done (zero covered focus points with the sticky
+bar engaged; every control at the 24 px floor with the primary action wholly in the first screen; a keyboard and
+VoiceOver run of Choose on a scratch database) are carried to UX-04.
+
+Kept as-is on all reviews: the hold in the state line ("Opted out: timothy.cooper@walmart.com, Oct 5"), the reply
+class ("An automatic notice, not an answer"), the readback ("Chosen by you, Oct 5"), "Make Jeffrey first instead",
+"Nothing is sent by choosing", no Best fit without a recommendation, no ordinals on a tie, "Not a cold first touch".
+
 ## 9. Validation record
 
 | Ticket | Validation | Result |
@@ -778,4 +841,8 @@ DPR 1 before UX-15 compares against this baseline. The text dumps and JS metrics
 | New (this audit) F1: NOW's WHO and the preview pack's person differ | FIX NOW (UX-03 / UX-06) | contradictory UI on the seller loop; the pack must be built for the chosen person |
 | New F11: GAP does not read clawd outreach history or the vault for the account picture | FIX AS PART OF UX (UX-05, as a reader only) | internal-intelligence-first; no new store |
 | New: Ready lane lower-cases names | FIX AS PART OF UX (UX-08) | `displayName` exists; the lane bypasses it |
-| New: two Walmart hypotheses, one active with Doug, one approved with a 53-person panel | OBSOLETE once UX-03 lands (the account's pursuit stack supersedes per-hypothesis owner panels for the seller) | the panel stays for the analyst view |
+| New: two Walmart hypotheses, one active with Doug, one approved with a 53-person panel | FIX AS PART OF UX (UX-07): the drawer headline reads the account's chosen person when a sibling thesis already has one | the panel stays for the analyst view |
+| New (UX-03 review): the resolver's sponsor slot names people from the wrong function (SVP Live Operations at Tyson, International Supply Chain Officer at General Mills, an air-side SVP at FedEx); a President is cold-eligible at a carrier | FIX AS PART OF UX (resolver rules, with the owner-resolution contracts) | the stack shows what the resolver says; the fix belongs in `people/person-prior.ts` sponsor and carrier rules, with tests |
+| New (UX-03 review): the employment store prefixes every verification tier with "verified at", so a likely role reads as verified | FIX AS PART OF UX (UX-06 or the next WHO truth pass) | truth wording |
+| New (UX-03 review): call mode checks only the person's do-not-contact flag, never the account hold | FIX AS PART OF UX (UX-06) | call prep must read the pursuit state |
+| New (UX-03 review): GAP's history has no row for the email the Walmart opt-out answered (a Resend-era or clawd send) | FIX AS PART OF UX (UX-05 readers: clawd outreach history, Resend sends) | "No GAP touch on record" says so honestly meanwhile |
