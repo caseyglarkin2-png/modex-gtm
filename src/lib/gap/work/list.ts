@@ -24,6 +24,7 @@ import { LANE_RANK, type NextCandidate } from '../routing/next-up';
 import type { PursuitSummary } from '../pursuit/summary';
 import type { PursuitStateKind } from '../pursuit/state';
 import { outcomeLine, type WorkOutcome } from './outcome';
+import { MOTION_UNLOCK_BUSINESS_DAYS } from '../motion/account-motion';
 import type { CockpitLane } from '@/components/gap/gap-cockpit';
 
 export type WorkStateKind = 'replied' | 'opted_out' | 'bounced' | 'follow_up' | 'ready' | 'decide' | 'research' | 'in_deal' | 'unknown_deal' | 'held';
@@ -80,6 +81,12 @@ export interface WorkInput {
    * reply or an opt-out is never hidden by an outcome: the buyer's own move outranks the seller's note.
    */
   outcomes?: ReadonlyMap<string, WorkOutcome>;
+  /**
+   * R14: accounts with a proven GAP first touch or an outstanding GAP draft in the window (the send ledger alone),
+   * with the person when known. An in-motion account is on Work as a motion in flight (never a cold READY, never
+   * dropped because its card was acted), ranked with the follow-ups.
+   */
+  inMotion?: ReadonlyMap<string, { state: 'sent' | 'drafted'; at: string; person: { name: string; title: string | null } | null }>;
 }
 
 const STATE_TEXT: Record<WorkStateKind, string> = {
@@ -232,6 +239,28 @@ export function buildWorkList(i: WorkInput): WorkCard[] {
     if (have && (have.card.stateKind === 'replied' || have.card.stateKind === 'opted_out' || have.card.stateKind === 'follow_up')) continue;
     if (i.held.has(name) || dealAccountNames.has(name)) continue;
     offer({ rank: LANE_RANK.ready, sortKey: [0, name], card: { accountName: name, lane: 'ready', stateKind: 'ready', state: `Ready for a first touch: ${db.chosen.name}`, why: `Prepare the first touch to ${db.chosen.name}.`, person: db.chosen, next: { label: 'Prepare the first touch', href: accountHref(name) }, blocker: null } });
+  }
+  // R14: a motion in flight (the ledger's proven send or outstanding draft) is the account's card unless a reply, a
+  // hold or a follow-up outranks it; it replaces any cold READY the lanes or the database offered.
+  for (const [name, m] of i.inMotion ?? []) {
+    if (i.held.has(name) || dealAccountNames.has(name)) continue;
+    const have = best.get(name);
+    if (have && (have.card.stateKind === 'follow_up' || have.rank <= 1)) continue;
+    const who = m.person?.name ?? 'the person';
+    best.set(name, {
+      rank: PURSUIT_RANK.in_motion,
+      sortKey: [new Date(m.at).getTime() || 0],
+      card: {
+        accountName: name,
+        lane: 'ready',
+        stateKind: 'ready',
+        state: m.state === 'sent' ? `First touch in motion: ${who}` : `A GAP draft to ${who} is outstanding`,
+        why: m.state === 'sent' ? `${who} got the first touch on ${day(m.at)}. The next person unlocks after ${MOTION_UNLOCK_BUSINESS_DAYS} business days without a response.` : `A GAP draft to ${who} is still in the mailbox: send or discard it before anyone else here is touched.`,
+        person: m.person,
+        next: { label: 'Open the account', href: accountHref(name) },
+        blocker: null,
+      },
+    });
   }
   // The reply card wins the account outright (a bounce only when nothing ranks above research).
   for (const r of replyCards) {

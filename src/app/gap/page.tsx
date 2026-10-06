@@ -47,7 +47,7 @@ import { buildWorkList, snoozedWork, type WorkCard, type WorkInput } from '@/lib
 import { loadWorkOutcomes } from '@/lib/gap/work/outcome';
 import { loadPursuitSummaries, warmPursuitSummaries } from '@/lib/gap/pursuit/summary';
 import { loadSendableTheses } from '@/lib/gap/pursuit/load';
-import { loadMotionChoices } from '@/lib/gap/motion/load';
+import { loadMotionChoices, loadRecentFirstTouchAccounts } from '@/lib/gap/motion/load';
 import { agoText as readAgo, cachedRead } from '@/lib/gap/work/cache';
 import { todayListenText } from '@/lib/gap/voice/today';
 import { WorkList } from '@/components/gap/work-list';
@@ -163,11 +163,13 @@ async function loadCockpit() {
     if (it.ruleId === 'opportunity_unknown') heldWhy.set(it.account.name, 'opportunity_unknown');
     else if (it.ruleId === 'active_opportunity' && !heldWhy.has(it.account.name)) heldWhy.set(it.account.name, 'active_opportunity');
   }
-  const workAccounts = [...new Set([...candidates.map((c) => c.accountName).filter((x): x is string => !!x), ...repliesPage.items.map((r) => r.accountName), ...inDeals.accounts.map((a) => a.accountName)])];
+  // R14: an account GAP touched (a proven send, an outstanding draft) is Work even when the lanes hold no card for it.
+  const recentTouches = await loadRecentFirstTouchAccounts(prisma, now).catch(() => new Map());
+  const workAccounts = [...new Set([...candidates.map((c) => c.accountName).filter((x): x is string => !!x), ...repliesPage.items.map((r) => r.accountName), ...inDeals.accounts.map((a) => a.accountName), ...recentTouches.keys()])];
   // What the database alone says per Work account, on every load (no HubSpot): a usable thesis exists; the recorded
   // chosen person. A cold instance then still agrees with the workspace on READY and on research (Pass A blocker).
   const choicesAll = await loadMotionChoices(prisma, workAccounts).catch(() => new Map());
-  const chosenIds = [...choicesAll.values()].map((c) => c.primaryPersonaId);
+  const chosenIds = [...new Set([...[...choicesAll.values()].map((c) => c.primaryPersonaId), ...[...recentTouches.values()].map((t) => t.personaId).filter((x): x is number => typeof x === 'number')])];
   const personaRows = chosenIds.length ? ((await prisma.persona.findMany({ where: { id: { in: chosenIds } }, select: { id: true, name: true, title: true } }).catch(() => [])) as Array<{ id: number; name: string | null; title: string | null }>) : [];
   const personaById = new Map(personaRows.map((p) => [p.id, p]));
   const dbState = new Map<string, { sendable: boolean; chosen: { name: string; title: string | null } | null }>();
@@ -179,10 +181,16 @@ async function loadCockpit() {
     dbState.set(name, { sendable: sendable.size > 0, chosen: p?.name ? { name: p.name, title: p.title } : null });
   }
   // The pieces the Work cards are built from; the cards themselves are built at render over the live pursuit summaries.
+  const inMotion = new Map<string, { state: 'sent' | 'drafted'; at: string; person: { name: string; title: string | null } | null }>();
+  for (const [name, t] of recentTouches) {
+    const p = t.personaId != null ? personaById.get(t.personaId) : undefined;
+    inMotion.set(name, { state: t.state, at: t.at, person: p?.name ? { name: p.name, title: p.title } : t.recipient ? { name: t.recipient, title: null } : null });
+  }
   const workInput: Omit<WorkInput, 'summaries'> = {
     now,
     candidates,
     dbState,
+    inMotion,
     replies: repliesPage.items.map((r) => ({ accountName: r.accountName, contactEmail: r.contactEmail, subject: r.subject, snippet: r.snippet, receivedAt: r.receivedAt })),
     motions: motion.motions.map((m) => ({ accountName: m.accountName, state: m.state, primary: m.primary ? { name: m.primary.name, title: m.primary.title } : null, next: m.next ? { name: m.next.name, title: m.next.title, unlock: m.next.unlock } : null })),
     inDeals: { status: inDeals.status, accounts: inDeals.accounts.map((a) => ({ accountName: a.accountName, deals: a.deals.map((d) => ({ name: d.name, stage: d.stage })) })) },

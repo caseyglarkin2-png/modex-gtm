@@ -242,3 +242,46 @@ export async function accountMotionRefusal(
   }
   return null;
 }
+
+export interface RecentFirstTouch {
+  accountName: string;
+  personaId: number | null;
+  recipient: string;
+  /** 'sent': a proven send; 'drafted': a GAP draft still outstanding in the mailbox. */
+  state: 'sent' | 'drafted';
+  at: string;
+}
+
+/** Accounts touched by GAP in the window, from the send ledger alone (R14): newest touch per account. */
+export async function loadRecentFirstTouchAccounts(prisma: PrismaLike, now: Date, lookbackMs = FIRST_TOUCH_LOOKBACK_MS): Promise<Map<string, RecentFirstTouch>> {
+  const out = new Map<string, RecentFirstTouch>();
+  if (typeof prisma?.gapAuditEvent?.findMany !== 'function') return out;
+  const rows: Array<{ kind: string; payload: Record<string, unknown> | null; created_at: Date }> = await prisma.gapAuditEvent.findMany({
+    where: { kind: { in: [DIRECT_SENT, MANUAL_SENT, DRAFT_SENT, DRAFTED, DRAFT_DISCARDED] }, subject_type: DRAFT_SUBJECT_TYPE, created_at: { gte: new Date(now.getTime() - lookbackMs) } },
+    select: { kind: true, payload: true, created_at: true },
+    orderBy: { created_at: 'desc' },
+  });
+  const discarded = new Set<string>();
+  const sentDrafts = new Set<string>();
+  for (const r of rows) {
+    const draftId = String(r.payload?.gmailDraftId ?? '');
+    if (r.kind === DRAFT_DISCARDED && draftId) discarded.add(draftId);
+    if (r.kind === DRAFT_SENT && draftId) sentDrafts.add(draftId);
+  }
+  for (const r of rows) {
+    const account = String(r.payload?.accountName ?? '').trim();
+    if (!account || out.has(account)) continue;
+    if (r.kind === DRAFT_DISCARDED) continue;
+    const draftId = String(r.payload?.gmailDraftId ?? '');
+    if (r.kind === DRAFTED && (discarded.has(draftId) || sentDrafts.has(draftId))) continue;
+    const pid = Number(r.payload?.personaId);
+    out.set(account, {
+      accountName: account,
+      personaId: Number.isInteger(pid) ? pid : null,
+      recipient: String(r.payload?.recipient ?? ''),
+      state: r.kind === DRAFTED ? 'drafted' : 'sent',
+      at: String(r.payload?.sentAt ?? r.created_at.toISOString()),
+    });
+  }
+  return out;
+}

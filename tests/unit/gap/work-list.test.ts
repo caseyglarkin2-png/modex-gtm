@@ -218,3 +218,31 @@ describe('outcomes on the Work list (R14)', () => {
     expect(buildWorkList(input()).map((c) => c.outcome)).toEqual(buildWorkList(input()).map(() => undefined));
   });
 });
+
+describe('a motion in flight on the Work list (R14)', () => {
+  it('a proven send puts the account on Work as FIRST TOUCH IN MOTION with the person, above ready and below a reply or a follow-up; it replaces a cold READY and never a hold', () => {
+    const inMotion = new Map([
+      ['PepsiCo', { state: 'sent' as const, at: '2026-10-06T14:00:00Z', person: { name: 'Karen Darling', title: 'Senior Director - PBNA Transportation' } }],
+      ['Mondelez', { state: 'drafted' as const, at: '2026-10-06T13:00:00Z', person: { name: 'Pat Lee', title: null } }],
+      ['Kroger', { state: 'sent' as const, at: '2026-10-05T14:00:00Z', person: null }],
+      ['NFI Industries', { state: 'sent' as const, at: '2026-10-05T14:00:00Z', person: null }],
+    ]);
+    const cards = buildWorkList(input({ inMotion }));
+    const names = cards.map((c) => c.accountName);
+    const pepsi = cards.find((c) => c.accountName === 'PepsiCo')!;
+    expect(pepsi.state).toBe('First touch in motion: Karen Darling');
+    expect(pepsi.why).toMatch(/got the first touch on Oct 6\. The next person unlocks after 5 business days/);
+    expect(pepsi.stateKind).toBe('ready');
+    expect(pepsi.next).toEqual({ label: 'Open the account', href: '/gap/accounts/pepsico' });
+    const mondelez = cards.find((c) => c.accountName === 'Mondelez')!;
+    expect(mondelez.state).toBe('A GAP draft to Pat Lee is outstanding');
+    // Above the lanes' ready cards and the follow-up? Below: the follow-up (H-E-B) and the human reply (NFI) keep their place.
+    expect(names.indexOf('NFI Industries')).toBe(0);
+    expect(names.indexOf('H-E-B')).toBeLessThan(names.indexOf('PepsiCo'));
+    expect(names.indexOf('PepsiCo')).toBeLessThan(names.indexOf('General Mills'));
+    // Kroger is held by its deal: the motion never lifts the hold.
+    expect(cards.find((c) => c.accountName === 'Kroger')?.stateKind).toBe('in_deal');
+    // The reply at NFI wins over the motion.
+    expect(cards.find((c) => c.accountName === 'NFI Industries')?.stateKind).toBe('replied');
+  });
+});
