@@ -14,10 +14,15 @@
  *                    allowance cannot meet them, the report says so with the one quantified choice (never a silent
  *                    change of spend, cadence or cap)
  *
- * The rotation order (discoveryOrder) is also decided here, pure: priority accounts first, each least-recently
- * asked, with STARVATION PROTECTION: an account whose last turn failed within the backoff window goes behind every
- * account that has not failed, so one hard account never takes a slot run after run. Pinned by
- * tests/unit/gap/coverage.test.ts.
+ * The rotation order (discoveryOrder) is also decided here, pure: priority accounts DUE for their daily pass first,
+ * then everyone least-recently asked, with STARVATION PROTECTION: an account whose last turn failed within the backoff
+ * window goes behind every account that has not failed, so one hard account never takes a slot run after run; and a
+ * priority account already asked within its day waits its turn by recency, so the priorities never take every turn.
+ *
+ * The ROTATING POPULATION is bounded too (R20 follow-up; the lead's decision on 2026-10-06: no spend increase, no
+ * cron change): every priority account rotates, and beside them only as many accounts as the rest of the allowance
+ * covers in seven days (groundedRotationSlots), chosen by tier, then band, then name (groundedRotation). The others
+ * stay watched for NEWS only and the Coverage page says so per account. Pinned by tests/unit/gap/coverage.test.ts.
  */
 import { GROUNDED_ACCOUNTS_PER_RUN, GROUNDED_DISCOVERY_AUDIT, SOURCE_CLASS_BUNDLES, SOURCE_CLASS_COVERAGE } from './grounded-discovery';
 import { BACKGROUND_AUDIT } from '../research/background';
@@ -38,6 +43,10 @@ export const FAILURE_BACKOFF_MS = 6 * 60 * 60_000;
 export const NEWS_AUDIT = 'signal.discovery';
 
 export type ClassState = 'covered' | 'stale' | 'never' | 'failed';
+/** Where an account stands in the grounded rotation: a priority (a daily pass), rotating (every bundle within seven days), or news only. */
+export type RotationRole = 'priority' | 'rotating' | 'news_only';
+/** The recorded capacity decision (the lead, 2026-10-06): the allowance stays; the rotation is bounded instead. */
+export const ROTATION_DECISION = 'Decided 2026-10-06: no spend increase, no cadence change; the rotation is bounded instead.';
 
 export interface AccountCoverage {
   accountName: string;
@@ -52,6 +61,8 @@ export interface AccountCoverage {
   bundles: Array<{ classes: string[]; lastAt: string | null; state: ClassState }>;
   /** Against the objective for THIS account (a day for a priority account, the class target otherwise). */
   state: 'covered' | 'stale' | 'never' | 'failed';
+  /** R20 follow-up: in the grounded rotation (as a priority or a rotating account) or watched for news only. */
+  rotation: RotationRole;
 }
 
 export interface CapacityStatement {
@@ -61,14 +72,26 @@ export interface CapacityStatement {
   accountsPerRun: number;
   runsPerDay: number;
   turnsPerDay: number;
-  fullRotationDays: number;
-  /** Turns per day the seven-day objective needs for every bundle of every account. */
-  requiredTurnsPerDay: number;
-  meetsSevenDayTarget: boolean;
   /** The daily pass for priority accounts leaves this many turns a day for the rotation (negative: the priorities alone exceed the allowance). */
   rotationTurnsPerDay: number;
+  /** How many non-priority accounts the rotation can carry so each gets every bundle within seven days. */
+  rotationSlots: number;
+  /** Non-priority accounts in the grounded rotation (at most rotationSlots). */
+  rotatingAccounts: number;
+  /** Watched accounts outside the grounded rotation: the news pass only. */
+  newsOnlyAccounts: number;
+  /** Days for the BOUNDED rotation to ask every bundle of every rotating account (null: no turns left beside the priorities). */
+  fullRotationDays: number | null;
+  /** Days the same allowance would take to rotate EVERY watched account (the alternative the decision declined). */
+  uncappedRotationDays: number | null;
+  /** Turns per day covering every watched account in seven days needs (a daily turn per priority plus every bundle of the rest). */
+  requiredTurnsPerDay: number;
+  /** The bounded rotation meets the seven-day objective. */
+  meetsSevenDayTarget: boolean;
+  /** Every watched account is in the grounded rotation. */
+  coversAllWatched: boolean;
   meetsPriorityDailyTarget: boolean;
-  /** The one quantified choice when an objective is not met (never applied here). */
+  /** The decision and its quantified alternative, when the allowance cannot cover every watched account (never applied here). */
   choice: string | null;
 }
 
@@ -89,7 +112,7 @@ export interface GroundedTurn {
 
 export interface CoverageInput {
   now: Date;
-  profiles: ReadonlyArray<Pick<WatchProfile, 'accountName' | 'reasons'>>;
+  profiles: ReadonlyArray<Pick<WatchProfile, 'accountName' | 'reasons'> & Partial<Pick<WatchProfile, 'tier' | 'band'>>>;
   /** Every grounded turn on record (newest first or any order). */
   grounded: readonly GroundedTurn[];
   /** The newest news pass per account. */
@@ -110,10 +133,57 @@ const bundleIndexOf = (classes: readonly string[]): number => {
 
 const newer = (a: string | null, b: string | null): string | null => (!a ? b : !b ? a : a > b ? a : b);
 
+/**
+ * R20 follow-up: how many non-priority accounts the grounded rotation can carry. Each priority account takes one turn
+ * a day (its daily pass); what is left over seven days, divided by the bundles each rotating account needs, is the
+ * number of accounts that get every bundle within seven days. Never negative. Pure.
+ */
+export function groundedRotationSlots(i: { turnsPerDay: number; bundles: number; priorityCount: number }): number {
+  if (i.bundles <= 0) return 0;
+  return Math.max(0, Math.floor((7 * (i.turnsPerDay - i.priorityCount)) / i.bundles));
+}
+
+/** Tier 1 before Tier 2 before Tier 3; no tier last. */
+const tierRank = (t: string | null | undefined): number => {
+  const m = /(\d+)/.exec(t ?? '');
+  return m ? Number(m[1]) : 99;
+};
+/** Band A before B before C; no band last. */
+const bandRank = (b: string | null | undefined): number => {
+  const c = (b ?? '').trim().toUpperCase();
+  return /^[A-Z]$/.test(c) ? c.charCodeAt(0) - 64 : 99;
+};
+
+/**
+ * R20 follow-up: the bounded, deterministic rotating population. Every priority account rotates; the rest are ordered
+ * by tier, then band, then name, and the first `slots` rotate; everyone else is watched for news only. The input order
+ * never changes the choice. Pure.
+ */
+export function groundedRotation<T extends { accountName: string; tier?: string | null; band?: string | null }>(
+  profiles: readonly T[],
+  i: { priority: ReadonlySet<string>; slots: number },
+): { priority: T[]; rotating: T[]; newsOnly: T[] } {
+  const ranked = [...profiles].sort((a, b) => tierRank(a.tier) - tierRank(b.tier) || bandRank(a.band) - bandRank(b.band) || a.accountName.localeCompare(b.accountName));
+  const priority = ranked.filter((p) => i.priority.has(p.accountName));
+  const rest = ranked.filter((p) => !i.priority.has(p.accountName));
+  const slots = Math.max(0, Math.floor(i.slots));
+  return { priority, rotating: rest.slice(0, slots), newsOnly: rest.slice(slots) };
+}
+
 export function coverageReport(i: CoverageInput): CoverageReport {
   const now = i.now.getTime();
   const perRun = i.accountsPerRun ?? GROUNDED_ACCOUNTS_PER_RUN;
   const runsPerDay = i.runsPerDay ?? GROUNDED_RUNS_PER_DAY;
+  const turnsPerDay = perRun * runsPerDay;
+  const bundles = SOURCE_CLASS_BUNDLES.length;
+  const prioritySet = new Set(i.profiles.filter((p) => (i.priority.get(p.accountName) ?? []).length > 0).map((p) => p.accountName));
+  const rotationSlots = groundedRotationSlots({ turnsPerDay, bundles, priorityCount: prioritySet.size });
+  const rotation = groundedRotation(i.profiles, { priority: prioritySet, slots: rotationSlots });
+  const roleOf = new Map<string, RotationRole>([
+    ...rotation.priority.map((p) => [p.accountName, 'priority'] as const),
+    ...rotation.rotating.map((p) => [p.accountName, 'rotating'] as const),
+    ...rotation.newsOnly.map((p) => [p.accountName, 'news_only'] as const),
+  ]);
   const byAccount = new Map<string, GroundedTurn[]>();
   for (const t of i.grounded) byAccount.set(t.accountName, [...(byAccount.get(t.accountName) ?? []), t]);
   const accounts: AccountCoverage[] = i.profiles.map((p) => {
@@ -144,6 +214,7 @@ export function coverageReport(i: CoverageInput): CoverageReport {
       lastResearchAt: i.researchAt.get(p.accountName) ?? null,
       bundles,
       state,
+      rotation: roleOf.get(p.accountName) ?? 'news_only',
     };
   });
   const counts = { covered: 0, stale: 0, never: 0, failed: 0, priority: 0 };
@@ -151,30 +222,47 @@ export function coverageReport(i: CoverageInput): CoverageReport {
     counts[a.state] += 1;
     if (a.priority) counts.priority += 1;
   }
-  const turnsPerDay = perRun * runsPerDay;
-  const bundles = SOURCE_CLASS_BUNDLES.length;
-  const fullRotationDays = accounts.length ? (accounts.length * bundles) / turnsPerDay : 0;
-  const requiredTurnsPerDay = Math.ceil((accounts.length * bundles) / 7);
   const rotationTurnsPerDay = turnsPerDay - counts.priority;
   const meetsPriorityDailyTarget = counts.priority <= turnsPerDay;
-  const meetsSevenDayTarget = accounts.length === 0 || fullRotationDays <= 7;
+  const rotatingAccounts = rotation.rotating.length;
+  const newsOnlyAccounts = rotation.newsOnly.length;
+  const nonPriority = accounts.length - counts.priority;
+  // Days for a rotation: the turns its accounts need over the turns a day left beside the priorities' daily passes.
+  const daysFor = (n: number): number | null => (rotationTurnsPerDay <= 0 ? null : n === 0 ? 0 : Number(((n * bundles) / rotationTurnsPerDay).toFixed(2)));
+  const fullRotationDays = daysFor(rotatingAccounts);
+  const uncappedRotationDays = daysFor(nonPriority);
+  const requiredTurnsPerDay = counts.priority + Math.ceil((nonPriority * bundles) / 7);
+  const meetsSevenDayTarget = fullRotationDays !== null && fullRotationDays <= 7;
+  const coversAllWatched = newsOnlyAccounts === 0;
+  const hourly = perRun * 24;
   const choice =
-    meetsSevenDayTarget && meetsPriorityDailyTarget
+    coversAllWatched && meetsPriorityDailyTarget
       ? null
-      : `At ${perRun} accounts a run and ${runsPerDay} runs a day (${turnsPerDay} turns a day), ${accounts.length} watched accounts x ${bundles} bundles take ${fullRotationDays.toFixed(1)} days per full rotation${counts.priority ? `, and ${counts.priority} priority accounts need ${counts.priority} of those turns every day` : ''}. The seven-day objective needs ${requiredTurnsPerDay} turns a day: either the grounded cron runs hourly (${perRun * 24} turns a day, about ${Math.round(((perRun * 24) / turnsPerDay) * 100 - 100)}% more grounded-search calls), or the watched population is cut to about ${Math.max(0, Math.floor((turnsPerDay * 7) / bundles) - counts.priority)} rotating accounts beside the priorities. Nothing is changed here; this is the choice.`;
+      : [
+          `At ${perRun} accounts a run and ${runsPerDay} runs a day (${turnsPerDay} turns a day)`,
+          counts.priority ? `, and ${counts.priority} priority accounts need ${counts.priority} turns a day for their daily pass` : '',
+          meetsPriorityDailyTarget
+            ? `, the grounded rotation is capped at ${rotatingAccounts} accounts beside the ${counts.priority} priority accounts (every bundle within seven days, chosen by tier, then band, then name); the other ${newsOnlyAccounts} watched accounts are checked by the news pass only. `
+            : `: the priorities alone exceed the allowance, so no other account rotates and ${newsOnlyAccounts} watched accounts are checked by the news pass only. `,
+          uncappedRotationDays !== null ? `Rotating every watched account at this allowance would take ${uncappedRotationDays.toFixed(1)} days per full rotation. ` : '',
+          `Covering every watched account within seven days needs ${requiredTurnsPerDay} turns a day (the grounded cron runs hourly (${hourly} turns a day, about ${Math.round((hourly / turnsPerDay) * 100 - 100)}% more grounded-search calls)${requiredTurnsPerDay > hourly ? ', and even that falls short' : ''}). `,
+          ROTATION_DECISION,
+        ].join('');
   return {
     at: i.now.toISOString(),
     accounts,
     counts,
-    capacity: { accounts: accounts.length, priorityAccounts: counts.priority, bundles, accountsPerRun: perRun, runsPerDay, turnsPerDay, fullRotationDays: Number(fullRotationDays.toFixed(2)), requiredTurnsPerDay, meetsSevenDayTarget, rotationTurnsPerDay, meetsPriorityDailyTarget, choice },
+    capacity: { accounts: accounts.length, priorityAccounts: counts.priority, bundles, accountsPerRun: perRun, runsPerDay, turnsPerDay, rotationTurnsPerDay, rotationSlots, rotatingAccounts, newsOnlyAccounts, fullRotationDays, uncappedRotationDays, requiredTurnsPerDay, meetsSevenDayTarget, coversAllWatched, meetsPriorityDailyTarget, choice },
     classes: SOURCE_CLASS_COVERAGE,
   };
 }
 
 /**
- * The grounded rotation order: priority accounts first, then the rest, each least-recently asked first; an account
- * whose last turn FAILED within the backoff window goes behind every account that has not failed (starvation
- * protection: one hard account never holds a slot run after run). Deterministic (name as the final key). Pure.
+ * The grounded rotation order: priority accounts DUE for their daily pass first, then everyone least-recently asked;
+ * an account whose last turn FAILED within the backoff window goes behind every account that has not failed
+ * (starvation protection: one hard account never holds a slot run after run). A priority account asked within its
+ * daily target is not ahead of the rotation: it waits its turn by recency, so the priorities never take every turn
+ * of the day. Deterministic (name as the final key). Pure.
  */
 export function discoveryOrder<T extends { accountName: string }>(
   profiles: readonly T[],
@@ -186,7 +274,11 @@ export function discoveryOrder<T extends { accountName: string }>(
     const f = i.lastFailedAt?.get(name);
     return f !== undefined && now - f < backoff ? 1 : 0;
   };
-  const tier = (name: string) => (i.priority?.has(name) ? 0 : 1);
+  const due = (name: string) => {
+    const last = i.lastAt.get(name);
+    return last === undefined || now - last >= PRIORITY_TARGET_MS;
+  };
+  const tier = (name: string) => (i.priority?.has(name) && due(name) ? 0 : 1);
   return [...profiles].sort((a, b) => penalized(a.accountName) - penalized(b.accountName) || tier(a.accountName) - tier(b.accountName) || (i.lastAt.get(a.accountName) ?? 0) - (i.lastAt.get(b.accountName) ?? 0) || a.accountName.localeCompare(b.accountName));
 }
 

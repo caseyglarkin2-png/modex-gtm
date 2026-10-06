@@ -142,6 +142,19 @@ describe('grounded source discovery', () => {
     expect((rows.find((x) => x.url === 'https://pepsico.com/news/a')?.metadata as { grounded: { queuedAt: string } }).grounded.queuedAt).toBe(NOW.toISOString());
   });
 
+  it('R20 follow-up: only the bounded rotating population is asked; an account outside it (news only at the current allowance) never takes a grounded turn, however long since it was asked', async () => {
+    // 50 watched, no priorities: the allowance (2 a run x 12 runs x 7 days / 4 bundles) carries 42; the last 8 by tier, band, name are news only.
+    const watched = Array.from({ length: 50 }, (_, k) => ({ ...profile(`Acct ${String(k).padStart(2, '0')}`), tier: k < 42 ? 'Tier 1' : null }));
+    // The news-only accounts were never asked; every rotating account was asked recently: recency alone would pick the news-only ones.
+    const asked = watched.slice(0, 42).map((p) => ({ subject_id: p.accountName, created_at: new Date(NOW.getTime() - 3_600_000) }));
+    const { prisma } = db(asked);
+    const ask = vi.fn(async () => ({ pages: [], citations: [], citedHosts: [] }));
+    const r = await runGroundedDiscovery(prisma as never, { now: NOW, accounts: 2 }, { ask, profiles: async () => watched, priority: async () => new Map() });
+    expect(r.newsOnly).toBe(8);
+    expect(r.accounts.map((a) => a.accountName).every((n) => Number(n.slice(-2)) < 42)).toBe(true);
+    expect(r.accounts).toHaveLength(2);
+  });
+
   it('the coverage map is honest: social is manual only', () => {
     expect(SOURCE_CLASS_COVERAGE.find((c) => /linkedin/i.test(c.cls))).toMatchObject({ mode: 'manual_only' });
     expect(SOURCE_CLASS_COVERAGE.filter((c) => c.mode === 'automated').length).toBe(1 + SOURCE_CLASS_BUNDLES.flat().length);

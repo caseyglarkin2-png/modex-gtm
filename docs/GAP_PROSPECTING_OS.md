@@ -998,6 +998,29 @@ refuses a job-led thesis with `approach_copy_unsupported` / the stated detail (f
 ships; a job-led thesis is prepared and reviewed, never mailed in the physical-change words. Post-R30 regression:
 the full GAP suite 352 files / 5,253 green.
 
+R20 **follow-up: the bounded grounded rotation (DONE; the capacity choice decided).** The lead decided on 2026-10-06:
+NO spend increase and no cron change; the rotation is bounded instead. `signals/coverage.ts` now owns, pure:
+`groundedRotationSlots` (each priority account takes one turn a day for its daily pass; what the allowance leaves over
+seven days, divided by the four bundles, is how many other accounts get every bundle within seven days:
+floor(7 x (turnsPerDay - priorities) / bundles)) and `groundedRotation` (every priority rotates; the rest are ordered
+by tier, then band, then name, and the first `slots` rotate; the input order never changes the choice).
+`grounded-discovery.ts` asks only that population; the others stay watched for NEWS only, and `/gap/coverage` says
+so on each such row ("news only: outside the grounded rotation at the current allowance") and counts them beside the
+capacity with the decision and its alternative. Defect fixed on the way (same surface, it blocked the bound):
+`discoveryOrder` put every priority account first on every run, so twelve priorities at two accounts a run took all
+24 daily turns and no other account would ever rotate; a priority account now leads only while DUE (not asked within
+its one-day target) and otherwise waits its turn by recency. The arithmetic the earlier choice text used
+(floor(turns x 7 / bundles) - priorities = 30) ignored that the priorities' daily pass costs seven turns a week each,
+not four; with it the "30 rotating" rotation would take ten days, not seven, so the honest bound is 21. Production,
+read only, 2026-10-06: 75 watched, 12 priority, 21 rotating (every bundle every 7 days), 42 news only; covering
+every watched account in seven days needs 48 turns a day (the hourly cron), the alternative declined. Pinned by
+`coverage.test.ts` (slots, the deterministic choice, the capacity statement, the due-priority order),
+`coverage-page.test.tsx` (the page line on exactly the news-only rows) and `grounded-discovery.test.ts` (a news-only
+account never takes a grounded turn even when it is the least recently asked; mutating the runner to ask every
+watched account turns it red). Rollback: revert the commit; nothing persisted changes. Debt: tier and band are the
+only ranking inputs (no seller override of the rotating set yet; a seller-priority account enters through the
+priority reasons).
+
 ## 12. Migration, backfill and rollback
 
 Order of commits inside Sprint 1 and 3: schema + SQL first (no reader), then pure core, then importers (Top100 before PIC before modex legacy), then runtime pin, then services, then queue actions under the flag, then `GAP_OS_ENABLED=true` in Vercel after `verify-triggers.ts` passes against prod (env is snapshot at deploy; redeploy after setting). Before the prod `db push`, preview it with `prisma migrate diff --from-url <prod> --to-schema-datamodel prisma/schema.prisma --script` and confirm the script is additive only; also confirm the prod role can `CREATE FUNCTION` (not yet verified). Rollback: the flag off restores byte-identical behavior instantly; full removal is the rollback SQL plus reverting the runtime, service and queue-action commits; `sequences` is never modified; the only two pre-existing tables GAP OS's schema touches at all are `draft_queue_items` (one nullable `sequence_version_id` stamp, S1-T2) and `inbound_messages` (`source String @default("gmail")` and `hubspot_engagement_id String?`, S2-T1, needed so the reply cron and the HubSpot poller can tell a Gmail-sourced row from a HubSpot-engagement-sourced one and attribute the engagement id idempotently) — both additive-only, both confirmed by the production preflight below; the lane and PIC files are read, never written.

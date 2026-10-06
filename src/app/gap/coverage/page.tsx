@@ -40,11 +40,12 @@ export default async function CoveragePage() {
       <section className="rounded-md border border-[var(--border)] p-3 text-sm" data-testid="coverage-capacity">
         <h2 className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Capacity against the objectives</h2>
         <p className="mt-1">
-          {c.accounts} watched accounts ({c.priorityAccounts} priority: in motion, chosen, in a deal, a meeting within 14 days) x {c.bundles} source-class bundles. Grounded search runs {c.runsPerDay} times a day, {c.accountsPerRun} accounts a run: {c.turnsPerDay} turns a day, a full rotation every {c.fullRotationDays} days. News runs with the same cron for every watched account.
+          {c.accounts} watched accounts ({c.priorityAccounts} priority: in motion, chosen, in a deal, a meeting within 14 days) x {c.bundles} source-class bundles. Grounded search runs {c.runsPerDay} times a day, {c.accountsPerRun} accounts a run: {c.turnsPerDay} turns a day. In the grounded rotation: the {c.priorityAccounts} priority accounts and {c.rotatingAccounts} others{c.fullRotationDays !== null ? `, every bundle every ${c.fullRotationDays} days` : ''}. News runs with the same cron for every watched account.
         </p>
         <ul className="mt-1 list-disc pl-5 text-xs">
-          <li>Every bundle within seven days: {c.meetsSevenDayTarget ? 'met' : `not met (needs ${c.requiredTurnsPerDay} turns a day)`}.</li>
+          <li>Every bundle within seven days for the rotating accounts: {c.meetsSevenDayTarget ? 'met' : 'not met'}.</li>
           <li>A daily pass for priority accounts: {c.meetsPriorityDailyTarget ? `met (${c.rotationTurnsPerDay} turns a day are left for the rotation)` : 'not met'}.</li>
+          <li data-testid="coverage-news-only-count">Watched for news only (outside the grounded rotation at the current allowance): {c.newsOnlyAccounts}{c.coversAllWatched ? '' : ` (every watched account in seven days needs ${c.requiredTurnsPerDay} turns a day)`}.</li>
         </ul>
         {c.choice ? <p className="mt-2 rounded-md border border-amber-500/40 bg-amber-500/10 p-2 text-xs" data-testid="coverage-choice">{c.choice}</p> : null}
       </section>
@@ -67,10 +68,11 @@ export default async function CoveragePage() {
             </thead>
             <tbody>
               {r.accounts.map((a) => (
-                <tr key={a.accountName} className="border-t border-[var(--border)]" data-testid="coverage-row" data-state={a.state}>
+                <tr key={a.accountName} className="border-t border-[var(--border)]" data-testid="coverage-row" data-state={a.state} data-rotation={a.rotation}>
                   <td className="py-1 pr-2">
                     <AccountLink name={a.accountName} />
                     {a.priority ? <span className="ml-1 rounded border border-[var(--primary)] px-1 text-[10px] uppercase text-[var(--primary)]" title={a.priorityWhy.join('; ')}>priority</span> : null}
+                    {a.rotation === 'news_only' ? <span className="block text-[11px] text-[var(--muted-foreground)]" data-testid="coverage-news-only">news only: outside the grounded rotation at the current allowance</span> : null}
                   </td>
                   <td className={`py-1 pr-2 font-medium ${TONE[a.state]}`}>{a.state}{a.lastGroundedFailed ? ' (last turn failed)' : ''}</td>
                   <td className="py-1 pr-2">{ago(a.lastNewsAt, now)}</td>

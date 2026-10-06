@@ -20,7 +20,7 @@ import { SEARCH_REDIRECT } from '../sources/source-copy';
 import { MARKET_CHATTER } from './discovery';
 import { captureSignal, parseSignalMeta } from './intake';
 import { loadWatchProfiles, type WatchProfile } from './watch';
-import { discoveryOrder, loadDiscoveryPriority } from './coverage';
+import { discoveryOrder, groundedRotation, groundedRotationSlots, GROUNDED_RUNS_PER_DAY, loadDiscoveryPriority } from './coverage';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -147,7 +147,7 @@ export async function runGroundedDiscovery(
   prisma: PrismaLike,
   opts: { now: Date; accounts?: number; timeBudgetMs?: number; clock?: () => number },
   deps: { ask?: (prompt: string, budgetMs: number) => Promise<{ pages: GroundedPage[]; citations: string[]; citedHosts: string[] } | { error: string }>; profiles?: () => Promise<WatchProfile[]>; providers?: ScoutProvider[]; fetchPage?: FetchPage; /** R20: the priority accounts (test seam; the database read by default). */ priority?: () => Promise<Map<string, string[]>> } = {},
-): Promise<{ accounts: GroundedAccountResult[]; skipped: string[] }> {
+): Promise<{ accounts: GroundedAccountResult[]; skipped: string[]; newsOnly: number }> {
   const clock = opts.clock ?? Date.now;
   const started = clock();
   const ask =
@@ -162,7 +162,7 @@ export async function runGroundedDiscovery(
       return r.ok ? { pages: r.value, ...meta } : { error: r.attempts.map((x) => `${x.provider} ${x.outcome}`).join('; ') || 'no grounded provider' };
     });
   const profiles = await (deps.profiles ?? (() => loadWatchProfiles(prisma)))();
-  const out = { accounts: [] as GroundedAccountResult[], skipped: [] as string[] };
+  const out = { accounts: [] as GroundedAccountResult[], skipped: [] as string[], newsOnly: 0 };
   if (!profiles.length) return out;
 
   // Rotation: least recently asked first; the bundle is the account's turn count, so every class comes round.
@@ -186,7 +186,13 @@ export async function runGroundedDiscovery(
   // R20: priority accounts (in motion, chosen, in a deal, a meeting soon) first, each least recently asked; a failing
   // account waits behind every account that has not failed (starvation protection). Pure order (signals/coverage.ts).
   const priority = deps.priority ? await deps.priority() : await loadDiscoveryPriority(prisma, opts.now).catch(() => new Map<string, string[]>());
-  const order = discoveryOrder(profiles, { now: opts.now, lastAt, lastFailedAt, priority: new Set(priority.keys()) });
+  // R20 follow-up (no spend increase, no cron change): only the bounded rotating population is asked; the rest of
+  // the watched accounts are covered by the news pass only. Same pure choice the Coverage page shows.
+  const prioritySet = new Set(profiles.filter((p) => (priority.get(p.accountName) ?? []).length > 0).map((p) => p.accountName));
+  const slots = groundedRotationSlots({ turnsPerDay: GROUNDED_ACCOUNTS_PER_RUN * GROUNDED_RUNS_PER_DAY, bundles: SOURCE_CLASS_BUNDLES.length, priorityCount: prioritySet.size });
+  const rotation = groundedRotation(profiles, { priority: prioritySet, slots });
+  out.newsOnly = rotation.newsOnly.length;
+  const order = discoveryOrder([...rotation.priority, ...rotation.rotating], { now: opts.now, lastAt, lastFailedAt, priority: prioritySet });
   // R25: today's grounded queue budget, from the signals themselves (metadata.grounded.queuedAt in the last day).
   let queuedToday = 0;
   try {
