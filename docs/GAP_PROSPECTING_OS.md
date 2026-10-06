@@ -1112,6 +1112,14 @@ explanation read as a request) each turn their owning test red; adjacent 10 file
 the commit. Debt: the research proposal does not read the plan first (the deepen route refuses an unplanned section
 with its reason, said on the button); intents are English patterns over the question, not a model classification.
 
+**Sprint 3 batch gate (2026-10-06; R20 follow-up, R32, R34, R35).** The full GAP suite 356 files / 5,304 tests
+green; the rest of the repository 325 files / 2,284 green (one skipped); typecheck clean; eslint clean on every
+changed line (the remaining errors in `enroll/service.ts`, `sequence/enrollment.ts`, `hypothesis/thesis-groups.ts`
+and `outreach-anchor.tsx` are identical at the pre-batch commit). Scratch, on a freshly reset database, in sequence:
+`anchor-draft`, `job-led-send` and `send-spine` 19 / 19 (the global EmailLog count in `anchor-draft` holds only on a
+fresh database; run the scratch files one at a time). Production stays as it was: no write, no flag change; the
+approach families are not seeded there yet (the R34 entry says how).
+
 ## 12. Migration, backfill and rollback
 
 Order of commits inside Sprint 1 and 3: schema + SQL first (no reader), then pure core, then importers (Top100 before PIC before modex legacy), then runtime pin, then services, then queue actions under the flag, then `GAP_OS_ENABLED=true` in Vercel after `verify-triggers.ts` passes against prod (env is snapshot at deploy; redeploy after setting). Before the prod `db push`, preview it with `prisma migrate diff --from-url <prod> --to-schema-datamodel prisma/schema.prisma --script` and confirm the script is additive only; also confirm the prod role can `CREATE FUNCTION` (not yet verified). Rollback: the flag off restores byte-identical behavior instantly; full removal is the rollback SQL plus reverting the runtime, service and queue-action commits; `sequences` is never modified; the only two pre-existing tables GAP OS's schema touches at all are `draft_queue_items` (one nullable `sequence_version_id` stamp, S1-T2) and `inbound_messages` (`source String @default("gmail")` and `hubspot_engagement_id String?`, S2-T1, needed so the reply cron and the HubSpot poller can tell a Gmail-sourced row from a HubSpot-engagement-sourced one and attribute the engagement id idempotently) — both additive-only, both confirmed by the production preflight below; the lane and PIC files are read, never written.
