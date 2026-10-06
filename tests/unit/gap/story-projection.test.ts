@@ -272,12 +272,17 @@ describe('story: a broken number, an incidental headline, the Wrong if clause', 
     const changing = story.rows.find((r) => r.key === 'changing')!;
     expect(changing.sentences[0].text).toMatch(/San Antonio/);
   });
-  it('a merger leads a uniform story; "Wrong if" never doubles the if', () => {
-    const inputs = fedexInputs({ account: { name: 'Kroger', tier: 'Tier 1', priorityBand: 'A', vertical: 'grocery', parentBrand: null, hubspotCompanyId: '3' }, domains: ['kroger.com'], facts: krogerFacts, signals: [], hypotheses: [{ ...fedexHyp, id: 'h-k', observation: krogerFacts[1].quote, primarySignalId: 'f-merge', whatANoMeans: 'If trailers do not wait longer at the sites that remain, the change moved no load onto the yard. A no closes it.' }] });
+  it('a merger leads a uniform story; the same deal under a signal is told once; a long filing sentence is cut at a word; "Wrong if" never doubles the if', () => {
+    const inputs = fedexInputs({ account: { name: 'Kroger', tier: 'Tier 1', priorityBand: 'A', vertical: 'grocery', parentBrand: null, hubspotCompanyId: '3' }, domains: ['kroger.com'], facts: krogerFacts, signals: [{ id: 's-ge', title: 'Kroger Announces Agreement to Acquire Giant Eagle', url: 'https://news.example/ge', publishedAt: '2026-09-21T00:00:00Z', researchStatus: 'pending' }], hypotheses: [{ ...fedexHyp, id: 'h-k', observation: krogerFacts[1].quote, primarySignalId: 'f-merge', whatANoMeans: 'If trailers do not wait longer at the sites that remain, the change moved no load onto the yard. A no closes it.' }] });
     const { story } = build(inputs, ctxFor(), fedexState(inputs, { replies: [] }), { touches: [] });
     const changing = story.rows.find((r) => r.key === 'changing')!;
     expect(changing.sentences[0].text).toMatch(/Giant Eagle/);
     expect(changing.sentences.some((s) => /outfits/.test(s.text))).toBe(false);
+    expect(story.rows.flatMap((r) => r.sentences).filter((s) => /Giant Eagle/.test(s.text))).toHaveLength(1);
+    const long = fedexInputs({ facts: [{ ...fedexFact, id: 'f-long', quote: 'These milestones reflect continued progress during a period of significant network transformation, closely aligned with our broader network redesign, which is reshaping how fleets and infrastructure are deployed across our operations and markets worldwide.' }], hypotheses: [] });
+    const cut = build(long, ctxFor(), fedexState(long, { replies: [] }), { touches: [] }).story.rows.find((r) => r.key === 'changing')!.sentences[0].text;
+    expect(cut.length).toBeLessThanOrEqual(220);
+    expect(cut).toMatch(/\.\.\./);
     expect(story.rows.find((r) => r.key === 'yard')!.wrongIf).toMatch(/^if trailers do not wait longer/);
   });
 });

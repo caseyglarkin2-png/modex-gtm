@@ -108,8 +108,11 @@ const sentence = (t: string) => {
     .replace(/\s+/g, ' ')
     .trim();
   const cap = s.charAt(0).toUpperCase() + s.slice(1);
-  return /[.!?]$/.test(cap) ? cap : `${cap}.`;
+  // A story sentence is a summary line: a long filing sentence is cut at a word (the full text stays in SOURCES).
+  const cut = cap.length > STORY_SENTENCE_MAX ? `${cap.slice(0, STORY_SENTENCE_MAX).replace(/\s+\S*$/, '').replace(/[,;:]$/, '')}...` : cap;
+  return /[.!?]$/.test(cut) ? cut : `${cut}.`;
 };
+export const STORY_SENTENCE_MAX = 200;
 /** The same money and a shared name is the same project however the two sources word it ("$300 million ... Greater Cincinnati" and "$300M project in Cincinnati-Dayton"). */
 const money = (t: string) => (t.match(/\$\s?(\d+(?:\.\d+)?)\s*(m\b|million|b\b|billion)/gi) ?? []).map((m) => m.toLowerCase().replace(/\s+/g, '').replace(/million/, 'm').replace(/billion/, 'b'));
 const properNouns = (t: string, account: string) => {
@@ -121,6 +124,21 @@ const sameProject = (a: string, b: string, account: string) => {
   if (!ma.length || !ma.some((m) => money(b).includes(m))) return false;
   const pb = properNouns(b, account);
   return [...properNouns(a, account)].some((w) => pb.has(w));
+};
+/** The same deal named by the same counterparty ("acquire Giant Eagle" and "Agreement to Acquire Giant Eagle") is one idea. */
+const DEAL_WORD = /\b(acqui|merg|sell|sale|sold|divest|spin|buy|purchas|partner|agreement)/i;
+const properPairs = (t: string, account: string) => {
+  const own = new Set(account.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean));
+  // Every adjacent pair of capitalised words (overlapping: "Acquire Giant Eagle" yields "giant eagle" too).
+  const words = t.replace(/[^A-Za-z&.\s-]/g, ' ').split(/\s+/).filter(Boolean);
+  const pairs: string[] = [];
+  for (let k = 0; k + 1 < words.length; k += 1) if (/^[A-Z][A-Za-z&.-]{2,}$/.test(words[k]) && /^[A-Z][A-Za-z&.-]{2,}$/.test(words[k + 1])) pairs.push(`${words[k]} ${words[k + 1]}`.toLowerCase());
+  return new Set(pairs.filter((p) => !p.split(/\s+/).every((w) => own.has(w))));
+};
+const sameDeal = (a: string, b: string, account: string) => {
+  if (!DEAL_WORD.test(a) || !DEAL_WORD.test(b)) return false;
+  const pb = properPairs(b, account);
+  return [...properPairs(a, account)].some((p) => pb.has(p));
 };
 const sameText = (a: string, b: string) => a.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim() === b.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 const row = (key: StoryRowKey, sentences: StorySentence[], over: Partial<StoryRow> = {}): StoryRow => ({ key, label: STORY_LABEL[key], tag: weakestTag(sentences.map((s) => s.tag)), sentences, wrongIf: null, collapsed: false, ...over });
@@ -181,7 +199,7 @@ export function projectStory(i: StoryInput): AccountStory {
   const used = new Set<string>();
   const said: string[] = [];
   const take = (id: string, text = '') => {
-    if (used.has(id) || (text && said.some((t) => sameIdea(t, text, i.accountName) || sameProject(t, text, i.accountName)))) return false;
+    if (used.has(id) || (text && said.some((t) => sameIdea(t, text, i.accountName) || sameProject(t, text, i.accountName) || sameDeal(t, text, i.accountName)))) return false;
     used.add(id);
     if (text) said.push(text);
     return true;
