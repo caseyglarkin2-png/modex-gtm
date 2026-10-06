@@ -917,6 +917,22 @@ corpus deal) reach a persisted outcome through the UI with no REVIEW-lane repair
   repaired by Casey answering the family question on the PepsiCo page after deploy (the service adopts it; no
   script needed, R64 records it).
 
+**Sprint 2. R20 Monitored coverage and capacity (DONE; the choice is Casey's).** `signals/coverage.ts` reads the
+ledgers the jobs already write (`signal.grounded_discovery` with the classes it asked and its error,
+`signal.discovery`, `research.background_run`) and says per watched account and per source-class bundle: covered
+(asked within seven days), stale, never, failed (the last turn failed and nothing fresh stands: never read as "no
+news"); priority accounts (in motion, a chosen person, a thesis in use, an open deal, a meeting within 14 days) are
+marked and the rotation (`discoveryOrder`, now used by grounded discovery) asks them first, least-recently asked,
+with starvation protection: an account whose last turn failed within six hours waits behind every account that has
+not failed. `/gap/coverage` (under More) renders it with the capacity statement. Production, read only, 2026-10-06:
+75 watched accounts, 12 priority; the news pass covers every account (every two hours); grounded bundle 1
+(newsroom / SEC / earnings / leadership) covered for 74, bundle 2 (jobs / WARN / security / government) for 40 with
+34 never, bundles 3 (procurement / case studies / technology / 3PL) and 4 (M&A / capex / fleet / trade press) NEVER
+for all 75: at 2 accounts a run, 12 runs a day (24 turns), 75 x 4 bundles take 12.5 days per rotation and the
+twelve priorities need 12 of those turns daily. The seven-day objective needs 43 turns a day. THE CHOICE (nothing
+changed): run the grounded cron hourly (48 turns a day, about twice the grounded-search calls) or cut the rotation to
+about 30 accounts beside the priorities. Not done here: no spend raised, no cadence changed, no cap raised.
+
 ## 12. Migration, backfill and rollback
 
 Order of commits inside Sprint 1 and 3: schema + SQL first (no reader), then pure core, then importers (Top100 before PIC before modex legacy), then runtime pin, then services, then queue actions under the flag, then `GAP_OS_ENABLED=true` in Vercel after `verify-triggers.ts` passes against prod (env is snapshot at deploy; redeploy after setting). Before the prod `db push`, preview it with `prisma migrate diff --from-url <prod> --to-schema-datamodel prisma/schema.prisma --script` and confirm the script is additive only; also confirm the prod role can `CREATE FUNCTION` (not yet verified). Rollback: the flag off restores byte-identical behavior instantly; full removal is the rollback SQL plus reverting the runtime, service and queue-action commits; `sequences` is never modified; the only two pre-existing tables GAP OS's schema touches at all are `draft_queue_items` (one nullable `sequence_version_id` stamp, S1-T2) and `inbound_messages` (`source String @default("gmail")` and `hubspot_engagement_id String?`, S2-T1, needed so the reply cron and the HubSpot poller can tell a Gmail-sourced row from a HubSpot-engagement-sourced one and attribute the engagement id idempotently) — both additive-only, both confirmed by the production preflight below; the lane and PIC files are read, never written.

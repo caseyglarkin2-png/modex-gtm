@@ -28,6 +28,7 @@ export const MORE_TABS = [
   { label: 'Signals', href: '/gap/signals' },
   { label: 'All hypotheses', href: '/gap/hypotheses' },
   { label: 'Learning', href: '/gap/learning' },
+  { label: 'Coverage', href: '/gap/coverage' },
   { label: 'Notes', href: '/gap/feedback' },
 ] as const;
 

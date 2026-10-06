@@ -20,6 +20,7 @@ import { SEARCH_REDIRECT } from '../sources/source-copy';
 import { MARKET_CHATTER } from './discovery';
 import { captureSignal, parseSignalMeta } from './intake';
 import { loadWatchProfiles, type WatchProfile } from './watch';
+import { discoveryOrder, loadDiscoveryPriority } from './coverage';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -110,7 +111,7 @@ const TRANSIENT = /quota|cooling|unavailable|timeout|timed out|rate|429|5\d\d/i;
 export async function runGroundedDiscovery(
   prisma: PrismaLike,
   opts: { now: Date; accounts?: number; timeBudgetMs?: number; clock?: () => number },
-  deps: { ask?: (prompt: string, budgetMs: number) => Promise<{ pages: GroundedPage[]; citations: string[]; citedHosts: string[] } | { error: string }>; profiles?: () => Promise<WatchProfile[]>; providers?: ScoutProvider[]; fetchPage?: FetchPage } = {},
+  deps: { ask?: (prompt: string, budgetMs: number) => Promise<{ pages: GroundedPage[]; citations: string[]; citedHosts: string[] } | { error: string }>; profiles?: () => Promise<WatchProfile[]>; providers?: ScoutProvider[]; fetchPage?: FetchPage; /** R20: the priority accounts (test seam; the database read by default). */ priority?: () => Promise<Map<string, string[]>> } = {},
 ): Promise<{ accounts: GroundedAccountResult[]; skipped: string[] }> {
   const clock = opts.clock ?? Date.now;
   const started = clock();
@@ -132,17 +133,25 @@ export async function runGroundedDiscovery(
   // Rotation: least recently asked first; the bundle is the account's turn count, so every class comes round.
   const asked: Array<{ subject_id: string; created_at: Date }> = await prisma.gapAuditEvent.findMany({
     where: { kind: GROUNDED_DISCOVERY_AUDIT, subject_type: 'account', subject_id: { in: profiles.map((p) => p.accountName) } },
-    select: { subject_id: true, created_at: true },
+    select: { subject_id: true, created_at: true, payload: true },
     orderBy: { created_at: 'desc' },
     take: 5_000,
   });
   const lastAt = new Map<string, number>();
+  const lastFailedAt = new Map<string, number>();
   const turns = new Map<string, number>();
   for (const a of asked) {
-    if (!lastAt.has(a.subject_id)) lastAt.set(a.subject_id, new Date(a.created_at).getTime());
+    if (!lastAt.has(a.subject_id)) {
+      lastAt.set(a.subject_id, new Date(a.created_at).getTime());
+      // The newest row's error (a content failure took the turn): the account backs off behind the others (R20).
+      if (typeof (a as { payload?: Record<string, unknown> }).payload?.error === 'string') lastFailedAt.set(a.subject_id, new Date(a.created_at).getTime());
+    }
     turns.set(a.subject_id, (turns.get(a.subject_id) ?? 0) + 1);
   }
-  const order = [...profiles].sort((a, b) => (lastAt.get(a.accountName) ?? 0) - (lastAt.get(b.accountName) ?? 0) || a.accountName.localeCompare(b.accountName));
+  // R20: priority accounts (in motion, chosen, in a deal, a meeting soon) first, each least recently asked; a failing
+  // account waits behind every account that has not failed (starvation protection). Pure order (signals/coverage.ts).
+  const priority = deps.priority ? await deps.priority() : await loadDiscoveryPriority(prisma, opts.now).catch(() => new Map<string, string[]>());
+  const order = discoveryOrder(profiles, { now: opts.now, lastAt, lastFailedAt, priority: new Set(priority.keys()) });
 
   for (const p of order.slice(0, Math.max(1, Math.min(opts.accounts ?? GROUNDED_ACCOUNTS_PER_RUN, 10)))) {
     if (clock() - started > (opts.timeBudgetMs ?? GROUNDED_TIME_BUDGET_MS)) {
