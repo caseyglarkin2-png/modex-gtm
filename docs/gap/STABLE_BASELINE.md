@@ -372,6 +372,18 @@ a lone eligible person is GAP's preselection, never "chosen by you"; a newslette
 a relationship that leads an account; choosing writes only the existing append-only motion choice (a HubSpot-only
 person through the existing account-scoped import) and never sends, drafts, enrolls, writes HubSpot or spends Apollo.
 Production SHA: 132958e7 (Vercel receipt in `ACCOUNT_FIRST_UX.md` section 9).
+
+**UX-04, the account workspace hierarchy (PR #402, merge 5c321ac6, 2026-10-06).** The account page reads as DECISION
+(the state line in its hold colour, the inbound line, NEXT with the one primary control, the People Stack with the
+chosen person first, the relationship route, the do-not-contact names as one line with one disclosure) then CONTEXT
+(why now with market chatter and bracketed tickers never shown, know without imagery rows, think, ask, the private
+line, tools). THE GAP shows only on buyer-confirmed input; IMPACT only on a known cost. One column is the primary
+design (about 820 CSS px on Casey's display); from 1100 px the context sits beside the decision with DOM order
+unchanged. Phone: no sticky view tabs, a one-row subnav, the Note and Compose pills hidden on account pages, one
+bottom bar (Listen plus the NEXT control, else Log a touch). Listen: one player, pause and resume, cleanup on
+unmount. Added contracts that MUST NOT change: a name set aside as do not contact, unsubscribed, opted out or left at
+an account is never offered as a row under another record of the same person; a hold shows no cold-touch control;
+reading order equals DOM order at every width. Production SHA: 5c321ac6 (receipt in `ACCOUNT_FIRST_UX.md` section 9).
 <!-- verified:2026-10-06 -->
 
 ## Soak (2026-10-02)
