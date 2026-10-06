@@ -54,8 +54,15 @@ export function PreCallBrief({ brief, hideContact = false }: PreCallBriefProps) 
   const dispositions = Array.isArray(brief.lastDispositions) ? brief.lastDispositions : [];
   const bids = Array.isArray(brief.openBids) ? brief.openBids : [];
 
+  // UX-06: the SAME account state NOW shows, said first; under a hold no opener is offered.
+  const hold = brief.pursuit?.holdsCall ? brief.pursuit : null;
   return (
     <section data-testid="pre-call-brief" className="space-y-4 text-sm">
+      {hold ? (
+        <p role="status" className="rounded-md border border-amber-500/40 bg-amber-500/10 p-3 text-sm" data-testid="brief-hold" data-pursuit-state={hold.state}>
+          <span className="font-semibold">{hold.stateLine}.</span> {hold.blocker ?? 'No cold call right now: work it from the account page.'}
+        </p>
+      ) : null}
       <header className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <p data-testid="brief-persona" className="text-lg font-semibold">
@@ -103,9 +110,11 @@ export function PreCallBrief({ brief, hideContact = false }: PreCallBriefProps) 
         ) : null}
       </header>
 
-      {hypothesis ? (
+      {hold ? (
+        <p className="italic text-[var(--muted-foreground)]" data-testid="brief-no-opener">No opener while the account is {hold.state.replace(/_/g, ' ')}: record what you learn below.</p>
+      ) : hypothesis ? (
         <>
-          <FactBlock observation={hypothesis.observation ?? ''} signals={Array.isArray(hypothesis.signals) ? hypothesis.signals : []} />
+          <FactBlock observation={hypothesis.observation ?? ''} signals={Array.isArray(hypothesis.signals) ? hypothesis.signals : []} verifiedFact={hypothesis.verifiedFact !== false} />
           <HypothesisBlock
             problemHypothesis={hypothesis.problemHypothesis ?? ''}
             rootCauseHypotheses={strings(hypothesis.rootCauseHypotheses)}

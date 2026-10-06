@@ -42,6 +42,13 @@ export function SixLineBriefView({ brief, personaId, accountName }: { brief: Six
             <p className="text-[var(--destructive)]">{k.reason}</p>
           )}
         </Row>
+        <Row label="Proof" testId="brief-proof">
+          <p>
+            <span className="mr-2 inline-block rounded border border-[var(--primary)] px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[var(--primary)]">{brief.proof.tag}</span>
+            {brief.proof.text}
+          </p>
+          <p className="text-xs text-[var(--muted-foreground)]">YardFlow&apos;s own number, never theirs.</p>
+        </Row>
         <Row label="Think" testId="brief-think">
           {brief.think ? (
             <p>

@@ -52,6 +52,52 @@ export async function loadAngles(prisma: PrismaLike, personaIds: readonly number
 
 export type AngleRefusal = 'empty' | 'too_long' | 'persona_not_found';
 
+export interface AnchorChoice {
+  personaId: number;
+  hypothesisId: string;
+  by: string;
+  at: string;
+}
+
+/** UX-06 (Option A): the newest anchor choice per person (a `persona.angle` row carrying `anchorHypothesisId`). */
+export async function loadAnchorChoices(prisma: PrismaLike, personaIds: readonly number[]): Promise<Map<number, AnchorChoice>> {
+  const ids = [...new Set(personaIds.filter((id) => Number.isInteger(id)))];
+  const out = new Map<number, AnchorChoice>();
+  if (ids.length === 0) return out;
+  const rows: Array<{ subject_id: string; actor: string; payload: Record<string, unknown>; created_at: Date }> = await prisma.gapAuditEvent.findMany({
+    where: { kind: PERSONA_ANGLE, subject_type: 'persona', subject_id: { in: ids.map(String) } },
+    select: { subject_id: true, actor: true, payload: true, created_at: true },
+    orderBy: { created_at: 'desc' },
+  });
+  for (const r of rows) {
+    const id = Number(r.subject_id);
+    if (out.has(id)) continue;
+    const hypothesisId = typeof r.payload?.anchorHypothesisId === 'string' ? r.payload.anchorHypothesisId.trim() : '';
+    if (!hypothesisId) continue;
+    out.set(id, { personaId: id, hypothesisId, by: r.actor, at: new Date(r.created_at).toISOString() });
+  }
+  return out;
+}
+
+export type AnchorRefusal = 'persona_not_found' | 'hypothesis_not_open_here';
+
+/**
+ * UX-06 (Option A): record which approved or active thesis at the person's account is their outreach anchor.
+ * Append-only; the newest wins. The thesis must be an open one at the SAME account; nothing else is checked here
+ * (the pack, the compiler and the approval run their own gates when the email is built).
+ */
+export async function setAnchor(prisma: PrismaLike, input: { personaId: number; hypothesisId: string; actor: string }): Promise<{ ok: true; anchor: AnchorChoice } | { ok: false; reason: AnchorRefusal }> {
+  const persona: { id: number; account_name: string } | null = await prisma.persona.findUnique({ where: { id: input.personaId }, select: { id: true, account_name: true } });
+  if (!persona) return { ok: false, reason: 'persona_not_found' };
+  const h: { id: string; account_name: string; status: string } | null = await prisma.prospectingHypothesis.findUnique({ where: { id: input.hypothesisId }, select: { id: true, account_name: true, status: true } });
+  if (!h || h.account_name !== persona.account_name || !['approved', 'active', 'confirmed', 'partially_confirmed'].includes(h.status)) return { ok: false, reason: 'hypothesis_not_open_here' };
+  const row = await prisma.gapAuditEvent.create({
+    data: { kind: PERSONA_ANGLE, actor: input.actor, subject_type: 'persona', subject_id: String(input.personaId), payload: { accountName: persona.account_name, anchorHypothesisId: h.id, source: 'human' } },
+    select: { created_at: true },
+  });
+  return { ok: true, anchor: { personaId: input.personaId, hypothesisId: h.id, by: input.actor, at: new Date(row?.created_at ?? Date.now()).toISOString() } };
+}
+
 /** Record Casey's angle (append-only). */
 export async function setAngle(
   prisma: PrismaLike,

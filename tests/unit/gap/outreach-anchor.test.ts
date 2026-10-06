@@ -106,7 +106,7 @@ describe('the outreach anchor (Option A)', () => {
     const { anchor } = anchorFor(inputs({ hypotheses: [hypA] }), 1);
     const denver = anchor.draftable.find((d) => d.factId === 'f-denver');
     expect(denver).toBeDefined();
-    expect(denver!.proposedObservation).toBe(`${factB.quote.replace(/\.$/, '')} [S:f-denver].`);
+    expect(denver!.proposedObservation).toMatch(/: "PepsiCo is building a 1\.2 million square foot distribution center in Denver, opening in 2027" \[S:f-denver\]\.$/);
     expect(validateObservation(denver!.proposedObservation, ['f-denver']).ok).toBe(true);
     expect(denver!.sourceUrl).toBe(factB.url);
     expect(denver!.sourceLabel).toMatch(/news\.example, Sep 20, 2026/);

@@ -24,6 +24,7 @@
 import type { AccountInputs, AccountIntelligenceBrief, HypothesisView } from '../account-intel/build';
 import { thesisRelevance } from '../people/thesis-relevance';
 import { sensitivityOf } from '../research/sensitivity';
+import { citedQuote } from '../research/propose';
 import type { AccountStory, StorySentence, StoryTag } from './story';
 
 export interface AnchorPerson {
@@ -174,7 +175,7 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
       const fact = live.find((f) => f.id === factId || (f.sameQuoteIds ?? []).includes(factId))!;
       if (groundedFactIds.has(fact.id) || (fact.sameQuoteIds ?? []).some((id) => groundedFactIds.has(id))) continue;
       if (draftable.some((d) => d.factId === fact.id)) continue;
-      draftable.push({ story: s.text, sourceLabel: `${host(fact.url) ?? (fact.title || 'source')}, ${day(fact.publishedAt)}`, sourceUrl: fact.url, factId: fact.id, proposedObservation: `${fact.quote.trim().replace(/\s+/g, ' ').replace(/[.!?]+$/, '')} [S:${fact.id}].` });
+      draftable.push({ story: s.text, sourceLabel: `${host(fact.url) ?? (fact.title || 'source')}, ${day(fact.publishedAt)}`, sourceUrl: fact.url, factId: fact.id, proposedObservation: citedQuote(fact.title || host(fact.url) || 'source', fact.quote.trim().replace(/\s+/g, ' '), fact.id, i.accountName) });
     }
   }
 

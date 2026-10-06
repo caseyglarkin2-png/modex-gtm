@@ -20,6 +20,7 @@
  * House convention for DB glue is `prisma: any`. Voice: no em dashes.
  */
 
+import { hypothesisSendable } from '../research/evidence-gate';
 import { QUANTIFYING } from '../sequence/call-pack';
 import { supersededIds } from '../bid/select';
 import { PROBLEM_FAMILY_CATALOG, isProblemFamily } from '../taxonomy';
@@ -74,6 +75,8 @@ export interface BriefHypothesis {
   predictedBuyerLanguage: string | null;
   /** what_a_no_means and contrary_evidence, the non-empty ones. */
   wouldProveWrong: string[];
+  /** UX-06: does the observation rest on a verified outreach fact? A keyword hit is false. */
+  verifiedFact?: boolean;
 }
 
 export interface BriefDisposition {
@@ -235,6 +238,8 @@ function toBriefHypothesis(row: any): BriefHypothesis {
     contraryEvidence,
     predictedBuyerLanguage: nonBlank(row.predicted_buyer_language) ? row.predicted_buyer_language : null,
     wouldProveWrong: [whatANoMeans, contraryEvidence].filter((v): v is string => v !== null),
+    // UX-06: a keyword hit is never captioned as an observed fact (soak P2).
+    verifiedFact: hypothesisSendable(row, new Date()),
   };
 }
 

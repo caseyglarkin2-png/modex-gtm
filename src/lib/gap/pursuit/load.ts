@@ -12,6 +12,7 @@ import { listQueue } from '../routing/queue';
 import { cockpitOpenHref } from '../routing/card-readiness';
 import { laneWithMotion, loadCockpitMotions } from '../motion/cockpit';
 import { loadMotionChoices } from '../motion/load';
+import { loadAnchorChoices } from '../motion/persona-angle';
 import { listReplies } from '../replies/list';
 import { loadOwnerResolution } from '../people/owner-resolution-load';
 import type { OwnerResolution } from '../people/owner-resolution';
@@ -28,8 +29,10 @@ export interface PursuitView {
   state: PursuitState;
   resolution: OwnerResolution | null;
   stack: PeopleStack | null;
-  /** The top grounded hypothesis the first touch would run on (the action pack's hypothesis), if any. */
+  /** The hypothesis the first touch runs on: the chosen person's recorded anchor (UX-06, Option A) when it is a grounded open thesis here, else the top grounded one. */
   hypothesisId: string | null;
+  /** The chosen person's recorded anchor choice, if any (even when no longer usable). */
+  anchorChoice: string | null;
   /** The cockpit's ready first-touch card for this account (what loadReadyTarget returns), from the same queue read. */
   ready: ReadyTarget | null;
 }
@@ -106,7 +109,13 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
   // reads "GAP: the only eligible person", never "Chosen by you" (trust review).
   const chosenKey = state.person?.chosenBy && (resolution?.eligible ?? []).some((c) => c.key === state.person!.key) ? state.person.key : null;
   const stack = resolution ? buildPeopleStack(resolution, { chosenKey, chosenBy: state.person?.chosenBy ?? null }) : null;
-  return { state, resolution, stack, hypothesisId: top?.id ?? null, ready: readyTargetOf(mine) };
+  // UX-06 (Option A): a recorded anchor choice switches the thesis the pack opens on, only to a grounded open thesis.
+  const anchors = state.person?.personaId ? await soft(loadAnchorChoices(prisma, [state.person.personaId]), new Map()) : new Map();
+  const anchorChoice: string | null = state.person?.personaId ? (anchors.get(state.person.personaId)?.hypothesisId ?? null) : null;
+  const openStatuses = new Set(['approved', 'active', 'confirmed', 'partially_confirmed']);
+  const anchored = anchorChoice ? brief.hypotheses.find((h) => h.id === anchorChoice && h.grounded && h.truth !== 'CONTRADICTED') ?? null : null;
+  const anchoredOpen = anchored && openStatuses.has(inputs.hypotheses.find((h) => h.id === anchored.id)?.status ?? '') ? anchored : null;
+  return { state, resolution, stack, hypothesisId: anchoredOpen?.id ?? top?.id ?? null, anchorChoice, ready: readyTargetOf(mine) };
 }
 
 /** The newest audited HUMAN persona assignment on one of the account's active hypotheses (owner resolution USE). */

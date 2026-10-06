@@ -16,6 +16,25 @@ import { prisma } from '@/lib/prisma';
 import { isAuthorizedQueueAgent } from '@/lib/queue/agent-auth';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { callBrief } from '@/lib/gap/replies/brief';
+import { loadAccountInputs } from '@/lib/gap/account-intel/load';
+import { buildAccountBrief } from '@/lib/gap/account-intel/build';
+import { loadAccountContext } from '@/lib/gap/context/load';
+import { loadPursuit } from '@/lib/gap/pursuit/load';
+
+/** UX-06: the account's pursuit state, bounded and soft (a slow read is no state, never a slow brief). */
+async function pursuitFor(accountName: string): Promise<{ state: string; stateLine: string; blocker: string | null; holdsCall: boolean } | null> {
+  const now = new Date();
+  const read = (async () => {
+    const inputs = await loadAccountInputs(prisma, accountName, now, { live: true });
+    if (!inputs) return null;
+    const brief = buildAccountBrief(inputs, now);
+    const ctx = await loadAccountContext(prisma, inputs, now);
+    const p = await loadPursuit(prisma, { brief, inputs, ctx, now });
+    const holdsCall = ['replied', 'opted_out', 'in_deal', 'held'].includes(p.state.state);
+    return { state: p.state.state, stateLine: p.state.stateLine, blocker: p.state.blocker, holdsCall };
+  })();
+  return Promise.race([read, new Promise<null>((r) => setTimeout(() => r(null), 8_000))]).catch(() => null);
+}
 
 export const dynamic = 'force-dynamic';
 
@@ -51,5 +70,6 @@ export async function GET(request: NextRequest, context: { params: Promise<{ per
   const hypothesisId = request.nextUrl.searchParams.get('hypothesisId')?.trim() || null;
   const brief = await callBrief(prisma, Number(raw), { hypothesisId });
   if (!brief) return NextResponse.json({ error: 'not_found' }, { status: 404 });
-  return NextResponse.json(brief);
+  const pursuit = await pursuitFor(brief.account.name);
+  return NextResponse.json({ ...brief, pursuit });
 }

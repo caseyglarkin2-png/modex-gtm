@@ -279,6 +279,8 @@ export interface BriefHypothesis {
   predictedBuyerLanguage: string | null;
   /** what_a_no_means and contrary_evidence, the non-empty ones. */
   wouldProveWrong: string[];
+  /** UX-06: does the observation rest on a verified outreach fact (the evidence gate)? A keyword hit is false. */
+  verifiedFact?: boolean;
 }
 
 export interface BriefDisposition {
@@ -304,6 +306,12 @@ export interface CallBrief {
   persona: BriefPersona;
   account: BriefAccount;
   hypothesis: BriefHypothesis | null;
+  /**
+   * UX-06: the SAME account pursuit state NOW shows (lib/gap/pursuit/state.ts). Under a reply, an opt-out, a deal or
+   * a hold the call page says so first and offers no opener. Absent when the account read failed (then nothing is
+   * claimed either way).
+   */
+  pursuit?: { state: string; stateLine: string; blocker: string | null; holdsCall: boolean } | null;
   lastDispositions: BriefDisposition[];
   openBids: BriefBid[];
   suggestedQuestions: string[];

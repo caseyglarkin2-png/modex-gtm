@@ -400,7 +400,7 @@ describe('a callBrief satisfies the client CallBrief', () => {
     expect(Object.keys(brief.account).sort()).toEqual(['hubspotCompanyId', 'name', 'tier', 'vertical']);
     expect(Object.keys(brief.hypothesis!).sort()).toEqual([
       'confidence', 'contraryEvidence', 'falsificationQuestions', 'id', 'impactHypotheses', 'observation', 'predictedBuyerLanguage',
-      'problemFamily', 'problemHypothesis', 'rootCauseHypotheses', 'signals', 'status', 'whatANoMeans', 'whyNow', 'wouldProveWrong',
+      'problemFamily', 'problemHypothesis', 'rootCauseHypotheses', 'signals', 'status', 'verifiedFact', 'whatANoMeans', 'whyNow', 'wouldProveWrong',
     ]);
     expect(Object.keys(brief.hypothesis!.signals[0]).sort()).toEqual(['evidence_text', 'evidence_url', 'id', 'observed_at', 'source_kind', 'title']);
     expect(Object.keys(brief.lastDispositions[0]).sort()).toEqual(['buyerLanguage', 'channel', 'createdAt', 'humanConfirmed', 'id', 'responseClass']);

@@ -1,0 +1,171 @@
+/**
+ * UX-06 at render: the outreach anchor block (primary, why they care, supporting, BEST PROOF as ours, DO NOT USE
+ * collapsed, a different story is one click and records the choice, a draft is prefilled and submitted through the
+ * hypothesis authority); the chosen card says why #1 over #2 or that GAP cannot separate them; the pre-call brief
+ * says the account hold first and offers no opener; a keyword hit is never captioned as an observed fact; the
+ * six-line brief carries BEST PROOF as YardFlow's.
+ */
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+
+const refresh = vi.fn();
+vi.mock('next/navigation', () => ({ useRouter: () => ({ refresh }) }));
+vi.mock('sonner', () => ({ toast: { error: vi.fn(), success: vi.fn() } }));
+import { OutreachAnchorView, personaKeyFor } from '@/components/gap/outreach-anchor';
+import { PreCallBrief } from '@/components/gap/pre-call-brief';
+import { SixLineBriefView } from '@/components/gap/six-line-brief';
+import { PeopleStackView } from '@/components/gap/people-stack';
+import type { OutreachAnchor } from '@/lib/gap/story/anchor';
+import { BEST_PROOF_MEASURED } from '@/lib/gap/story/anchor';
+import type { CallBrief } from '@/lib/gap/ui/gap-api-client';
+import type { SixLineBrief } from '@/lib/gap/execution/six-line-brief';
+import { resolveOwner, type OwnerCandidateInput } from '@/lib/gap/people/owner-resolution';
+import { buildPeopleStack } from '@/lib/gap/people/stack';
+import { projectPursuitState } from '@/lib/gap/pursuit/state';
+
+const NOW = new Date('2026-10-06T12:00:00Z');
+const anchor: OutreachAnchor = {
+  person: { personaId: 1, name: 'Karen Darling', title: 'Senior Director - PBNA Transportation' },
+  primary: { hypothesisId: 'h-denver', status: 'approved', observation: 'PepsiCo is building a 1.2 million square foot distribution center in Denver, opening in 2027.', factIds: ['f-denver'], basis: 'news.example, Sep 20, 2026', relevance: { tier: 'direct', why: 'runs transportation: the fact is a site opening' }, problem: 'My guess is that a new DC opens on the old yard habits.' },
+  primaryBy: 'their remit',
+  whyTheyCare: { text: 'Karen runs transportation: the fact is a site opening.', tag: 'Our read' },
+  supporting: { text: 'PepsiCo and Gatik announced a multi-year partnership.', tag: 'Checked', basis: 'pepsico.com, Aug 25, 2026', basisIds: ['evidence:f-gatik'], cite: 'OK to cite to the buyer' },
+  bestProof: { text: BEST_PROOF_MEASURED, tag: 'Our proof, measured' },
+  doNotUse: [{ text: 'Their visits to our pages and ROI reads', reason: 'private engagement: interest, never a reason to write' }, { text: 'PepsiCo said to weigh sale of Quaker Foods unit.', reason: 'unverified: a third party said it and nobody checked' }],
+  alternatives: [{ hypothesisId: 'h-gatik', status: 'active', observation: 'PepsiCo and Gatik announced a multi-year partnership.', factIds: ['f-gatik'], basis: 'pepsico.com, Aug 25, 2026', relevance: { tier: 'related', why: 'runs transportation, adjacent to an automation change' }, problem: 'My guess is that autonomous linehaul lands trailers on a schedule.' }],
+  draftable: [{ story: 'PepsiCo is ceasing operations at a bottling plant in Maryland.', sourceLabel: 'fooddive.com, Sep 16, 2026', sourceUrl: 'https://fooddive.com/x', factId: 'f-plant', proposedObservation: 'fooddive.com: "PepsiCo is ceasing operations at a bottling plant in Maryland" [S:f-plant].' }],
+};
+
+beforeEach(() => {
+  refresh.mockReset();
+  vi.restoreAllMocks();
+});
+
+describe('the outreach anchor block', () => {
+  it('shows the primary anchor, why they care as Our read, the supporting fact, BEST PROOF as ours, DO NOT USE collapsed', () => {
+    render(<OutreachAnchorView accountName="PepsiCo" anchor={anchor} coldTouchAllowed />);
+    expect(screen.getByTestId('anchor-primary')).toHaveAttribute('data-hypothesis', 'h-denver');
+    expect(screen.getByTestId('anchor-primary').textContent).toMatch(/Denver.*chosen by their remit/s);
+    expect(screen.getByTestId('anchor-why').textContent).toMatch(/Our read.*Karen runs transportation/s);
+    expect(screen.getByTestId('anchor-supporting').textContent).toMatch(/Checked.*Gatik/s);
+    expect(screen.getByTestId('anchor-proof').textContent).toMatch(/Our proof, measured.*48 to 24 minutes, measured.*YardFlow's own number, never theirs/s);
+    expect(screen.getByTestId('anchor-proof').textContent).not.toMatch(/Checked/);
+    const dnu = screen.getByTestId('anchor-do-not-use');
+    expect(dnu.tagName).toBe('DETAILS');
+    expect(dnu).not.toHaveAttribute('open');
+    expect(dnu.textContent).toMatch(/Do not use \(2\)/);
+    expect(dnu.textContent).toMatch(/private engagement/);
+  });
+  it('Use this story posts the anchor choice for the person and refreshes; it never sends', async () => {
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue({ ok: true, status: 201, json: async () => ({ personaId: 1, hypothesisId: 'h-gatik' }) } as Response);
+    render(<OutreachAnchorView accountName="PepsiCo" anchor={anchor} coldTouchAllowed />);
+    fireEvent.click(screen.getByTestId('anchor-use-story'));
+    await waitFor(() => expect(screen.getByRole('status').textContent).toMatch(/opening now builds on that thesis. Nothing is sent/));
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(fetchMock.mock.calls[0][0]).toBe('/api/gap/personas/1/anchor');
+    expect(JSON.parse(String(fetchMock.mock.calls[0][1]!.body))).toEqual({ hypothesisId: 'h-gatik' });
+    expect(refresh).toHaveBeenCalled();
+  });
+  it('under a hold no story can be switched; the alternatives still read', () => {
+    render(<OutreachAnchorView accountName="PepsiCo" anchor={anchor} coldTouchAllowed={false} />);
+    expect(screen.queryByTestId('anchor-use-story')).toBeNull();
+    expect(screen.getByTestId('anchor-alternative')).toBeInTheDocument();
+  });
+  it('Draft + review opens a prefilled form (story, source, proposed observation) and submits through the hypothesis authority, then submit for review', async () => {
+    const fetchMock = vi.spyOn(globalThis, 'fetch')
+      .mockResolvedValueOnce({ ok: true, status: 201, json: async () => ({ id: 'h-new', status: 'draft' }) } as Response)
+      .mockResolvedValueOnce({ ok: true, status: 200, json: async () => ({ id: 'h-new', status: 'review_required' }) } as Response);
+    render(<OutreachAnchorView accountName="PepsiCo" anchor={anchor} coldTouchAllowed />);
+    fireEvent.click(screen.getByTestId('anchor-draft-open'));
+    const form = screen.getByTestId('anchor-draft-form');
+    expect(form.textContent).toMatch(/Story.*Maryland.*Source.*fooddive\.com/s);
+    expect((screen.getByTestId('anchor-draft-observation') as HTMLTextAreaElement).value).toMatch(/\[S:f-plant\]\.$/);
+    expect((screen.getByTestId('anchor-draft-problem') as HTMLTextAreaElement).value).toMatch(/^My guess is that/);
+    fireEvent.click(screen.getByTestId('anchor-draft-submit'));
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(2));
+    expect(fetchMock.mock.calls[0][0]).toBe('/api/gap/hypotheses');
+    const body = JSON.parse(String(fetchMock.mock.calls[0][1]!.body));
+    expect(body).toMatchObject({ accountName: 'PepsiCo', primaryPersonaId: 1, persona: 'transportation', problemFamily: 'unmapped', signalIds: ['f-plant'] });
+    expect(body.observation).toMatch(/\[S:f-plant\]\.$/);
+    expect(fetchMock.mock.calls[1][0]).toBe('/api/gap/hypotheses/h-new');
+    expect(JSON.parse(String(fetchMock.mock.calls[1][1]!.body))).toEqual({ action: 'submit' });
+    await waitFor(() => expect(screen.getByTestId('anchor-drafted').textContent).toMatch(/submitted for review/));
+    expect(screen.getByTestId('anchor-drafted').querySelector('a')).toHaveAttribute('href', '/gap?lane=review');
+  });
+  it('a title-shaped observation is refused in plain words and nothing is submitted', async () => {
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce({ ok: false, status: 422, json: async () => ({ error: 'title_shaped_observation' }) } as Response);
+    render(<OutreachAnchorView accountName="PepsiCo" anchor={anchor} coldTouchAllowed />);
+    fireEvent.click(screen.getByTestId('anchor-draft-open'));
+    fireEvent.click(screen.getByTestId('anchor-draft-submit'));
+    await waitFor(() => expect(screen.getByRole('alert').textContent).toMatch(/reads like a headline/));
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(screen.queryByTestId('anchor-drafted')).toBeNull();
+  });
+  it('with no approved thesis it says so and offers the draftable story; the persona key follows the title', () => {
+    render(<OutreachAnchorView accountName="PepsiCo" anchor={{ ...anchor, primary: null, primaryBy: null, whyTheyCare: null, supporting: null, alternatives: [] }} coldTouchAllowed />);
+    expect(screen.getByTestId('anchor-none').textContent).toMatch(/No approved thesis at PepsiCo yet/);
+    expect(screen.getByTestId('anchor-draftable')).toBeInTheDocument();
+    expect(personaKeyFor('Senior Director - PBNA Transportation')).toBe('transportation');
+    expect(personaKeyFor('VP Supply Chain')).toBe('supply_chain');
+    expect(personaKeyFor('Chief Operating Officer')).toBe('executive_ops');
+  });
+});
+
+describe('why #1 over #2 on the chosen card', () => {
+  const gap = (id: number, name: string, title: string): OwnerCandidateInput => ({ key: `gap:${id}`, source: 'gap', personaId: id, name, title, hasEmail: true, employment: { state: 'CURRENT_UNVERIFIED', why: 'CRM only.', decidedBy: [], elsewhere: null, verifyNeeded: false } });
+  const state = (eligible: Array<{ key: string; personaId: number | null; name: string; title: string | null }>, personaId: number) =>
+    projectPursuitState({ accountName: 'FedEx', now: NOW, motionType: 'FACT_LED', opportunity: { status: 'CLEAR', detail: '', deals: [] }, restriction: null, familyHold: null, motion: null, choice: { personaId, by: 'casey@yardflow.ai', at: '2026-10-05T14:00:00Z', source: 'motion' }, activePersona: null, replies: [], lastOutbound: null, outstandingDraft: null, followUpDue: null, eligible });
+  it('names the first dimension the chosen person leads on, or says GAP cannot separate them', () => {
+    const r = resolveOwner({ account: { name: 'FedEx', entityType: 'carrier' }, purpose: 'COLD_FIRST_TOUCH', hypothesis: null, candidates: [gap(7, 'Glen Chaffee', 'Managing Director, Transportation & Logistics'), gap(3, 'Pat Ops', 'Director, Logistics')], hubspot: { read: true, count: 2, truncated: false, via: 'linked' }, now: NOW });
+    const eligible = r.eligible.map((c) => ({ key: c.key, personaId: c.personaId, name: c.name, title: c.title }));
+    const s = state(eligible, 7);
+    render(<PeopleStackView accountName="FedEx" stack={buildPeopleStack(r, { chosenKey: s.person!.key, chosenBy: s.person!.chosenBy })} state={s} hypothesisId="h1" excluded={[]} />);
+    const lead = screen.getByTestId('people-stack-lead-over');
+    expect(lead).toHaveAttribute('data-tie', 'false');
+    expect(lead.textContent).toMatch(/^Why Glen over Pat\? Glen/);
+    const tie = resolveOwner({ account: { name: 'Walmart Inc.', entityType: 'retailer' }, purpose: 'COLD_FIRST_TOUCH', hypothesis: null, candidates: [gap(1, 'Doug Estrada', 'Regional Transportation Director'), gap(2, 'Kelly Kruse', 'Regional Transportation Director')], hubspot: { read: true, count: 2, truncated: false, via: 'linked' }, now: NOW });
+    const te = tie.eligible.map((c) => ({ key: c.key, personaId: c.personaId, name: c.name, title: c.title }));
+    const ts = state(te, 1);
+    const { unmount } = render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(tie, { chosenKey: ts.person!.key, chosenBy: ts.person!.chosenBy })} state={ts} hypothesisId="h1" excluded={[]} />);
+    expect(screen.getAllByTestId('people-stack-lead-over').pop()!.textContent).toMatch(/GAP cannot separate these two on current evidence\./);
+    unmount();
+  });
+});
+
+describe('call prep on the pursuit state', () => {
+  const brief: CallBrief = {
+    persona: { id: 1, personaKey: null, name: 'Timothy Cooper', title: 'Director', email: 't@walmart.com', phone: null, role: null, doNotContact: false } as CallBrief['persona'],
+    account: { name: 'Walmart Inc.', hubspotCompanyId: null, tier: '1', vertical: 'retail' } as CallBrief['account'],
+    hypothesis: { id: 'h1', status: 'active', problemFamily: 'hidden_capacity', confidence: 50, observation: 'Walmart is overhauling its network [S:s1].', signals: [{ id: 's1', title: 'x', source_kind: 'evidence_record', evidence_url: 'https://x', evidence_text: 'Walmart is overhauling its network', observed_at: null }], problemHypothesis: 'My guess is that...', rootCauseHypotheses: [], impactHypotheses: [], whyNow: null, falsificationQuestions: [], whatANoMeans: null, contraryEvidence: null, predictedBuyerLanguage: null, wouldProveWrong: [], verifiedFact: true },
+    lastDispositions: [], openBids: [], suggestedQuestions: [], afterAcknowledgementQuestions: [],
+  };
+  it('says the hold first and offers no opener when the account is opted out, in a deal, held or on a reply', () => {
+    render(<PreCallBrief brief={{ ...brief, pursuit: { state: 'opted_out', stateLine: 'Opted out: timothy.cooper@walmart.com, Oct 5', blocker: 'Timothy Cooper replied "stop" on Oct 5: record it as do not contact.', holdsCall: true } }} />);
+    const hold = screen.getByTestId('brief-hold');
+    expect(hold).toHaveAttribute('data-pursuit-state', 'opted_out');
+    expect(hold.textContent).toMatch(/^Opted out: timothy.cooper@walmart.com, Oct 5\. Timothy Cooper replied "stop"/);
+    expect(screen.queryByTestId('fact-block')).toBeNull();
+    expect(screen.getByTestId('brief-no-opener').textContent).toMatch(/No opener while the account is opted out/);
+    // The hold precedes everything else in reading order.
+    expect(document.body.innerHTML.indexOf('data-testid="brief-hold"')).toBeLessThan(document.body.innerHTML.indexOf('data-testid="brief-persona"'));
+  });
+  it('without a hold the FACT block renders; a keyword hit is captioned as such, never as an observed fact', () => {
+    const { unmount } = render(<PreCallBrief brief={{ ...brief, pursuit: { state: 'ready', stateLine: 'Ready for a first touch', blocker: null, holdsCall: false } }} />);
+    expect(screen.queryByTestId('brief-hold')).toBeNull();
+    expect(screen.getByTestId('fact-block').textContent).toMatch(/FACT.*Observed, cited/s);
+    unmount();
+    render(<PreCallBrief brief={{ ...brief, hypothesis: { ...brief.hypothesis!, verifiedFact: false } }} />);
+    expect(screen.getByTestId('fact-block').textContent).toMatch(/KEYWORD HIT.*Not a verified fact: never read aloud as one/s);
+    expect(screen.getByTestId('fact-block').textContent).not.toMatch(/Observed, cited/);
+  });
+});
+
+describe('the six-line brief carries BEST PROOF as ours', () => {
+  it('renders the proof row with the canon phrasing and the ownership line', () => {
+    const b: SixLineBrief = { know: { fact: null, reason: 'No fact is linked to this thesis.' }, proof: { text: BEST_PROOF_MEASURED, tag: 'Our proof, measured' }, think: null, learn: null, whyYou: null, history: [], historyState: 'clear', wrongIf: null, context: [], account: null };
+    render(<SixLineBriefView brief={b} personaId={null} accountName="PepsiCo" />);
+    const row = screen.getByTestId('brief-proof');
+    expect(row.textContent).toMatch(/Our proof, measured.*48 to 24 minutes, measured.*YardFlow's own number, never theirs/s);
+    expect(document.body.innerHTML.indexOf('data-testid="brief-know"')).toBeLessThan(document.body.innerHTML.indexOf('data-testid="brief-proof"'));
+  });
+});

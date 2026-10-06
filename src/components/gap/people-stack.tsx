@@ -251,6 +251,11 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
             <li key={row.key} className="my-2 rounded-md border border-[var(--primary)] bg-[var(--muted)]/30 p-3" data-testid="people-stack-row" data-key={row.key} data-chosen="true" data-slot={row.slot} data-compact="false">
               {head(row)}
               <p id={`reason-${row.key}`} className="mt-0.5 text-sm" data-testid="people-stack-reason">{row.reason}</p>
+              {row.leadOver ? (
+                <p className={`mt-0.5 text-xs ${row.leadOver.tie ? 'text-[var(--muted-foreground)]' : ''}`} data-testid="people-stack-lead-over" data-tie={row.leadOver.tie ? 'true' : 'false'}>
+                  <span className="font-semibold">Why {row.name.split(' ')[0]} over {row.leadOver.over.split(' ')[0]}?</span> {row.leadOver.text}
+                </p>
+              ) : null}
               {row.currentness ? (
                 <p className={`mt-0.5 text-xs ${/conflict|changed|in question|left|separate|divested/i.test(row.currentness) ? 'text-amber-700 dark:text-amber-400' : 'text-emerald-700 dark:text-emerald-400'}`} data-testid="people-stack-currentness">
                   {row.currentness}
