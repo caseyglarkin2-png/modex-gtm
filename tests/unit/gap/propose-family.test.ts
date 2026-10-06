@@ -11,6 +11,14 @@ describe('proposeFamilyFor', () => {
     const p = proposeFamilyFor('PepsiCo will close its warehouse operations at its Tulsa, Oklahoma, production facility and shift duties to a new site in the area.');
     expect(p).toEqual({ family: 'hidden_capacity', via: 'change', basis: expect.stringMatching(/closure or consolidation moves load/) });
   });
+  it('a plant that is "ceasing" operations is a closure too: the ceasing / shut down / idled wording reaches the closure class', () => {
+    // The owning regex once held a literal backspace byte where \b belonged, so this wording never matched.
+    // The fact classifier files this sentence under "investment"; only the closure wording regex makes it a closure.
+    const p = proposeFamilyFor('PepsiCo is ceasing manufacturing and warehouse operations at a bottling plant in Maryland, which will result in 143 layoffs, according to a WARN notice and statement from the beverage giant.');
+    expect(p).toEqual({ family: 'hidden_capacity', via: 'change', basis: expect.stringMatching(/closure or consolidation moves load/) });
+    const idled = proposeFamilyFor('Acme Foods idled the distribution center at its Reno plant for the season.');
+    expect(idled?.family).toBe('hidden_capacity');
+  });
   it('an autonomous freight agreement derives automation readiness from the fact words', () => {
     const p = proposeFamilyFor('PepsiCo and Gatik announced a multi-year agreement to deploy autonomous freight across its North America distribution network.');
     expect(p.family).toBe('automation_readiness');

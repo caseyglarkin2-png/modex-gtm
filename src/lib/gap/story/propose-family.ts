@@ -46,7 +46,7 @@ export function proposeFamilyFor(factText: string): FamilyProposal {
   }
   if (isPhysicalOpsFact(text)) {
     // "ceasing", "shut down", "idled", "wind down" are closures the fact classifier files under a generic change.
-    const change: FactChange = /(ceas(?:e|ed|es|ing)|shut(?:s|ting)? down|shutdown|idl(?:e|ed|es|ing)|mothball|wind(?:s|ing)? down|discontinu)/i.test(text) ? 'closure' : classifyFact(text).change;
+    const change: FactChange = /\b(ceas(?:e|ed|es|ing)|shut(?:s|ting)? down|shutdown|idl(?:e|ed|es|ing)|mothball|wind(?:s|ing)? down|discontinu)/i.test(text) ? 'closure' : classifyFact(text).change;
     const mapped = CHANGE_FAMILY[change];
     if (mapped) return { family: mapped.family, via: 'change', basis: mapped.basis };
   }
