@@ -1242,9 +1242,11 @@ page height 1,250 to 3,150 px (1.4 to 3.5 screens at 820):
 | Boston Beer Company | held: HubSpot could not be checked | 11.4 s | 0 | hidden | none (the hold is NEXT) |
 
 Read honestly: the account read is the long pole (10 to 49 s cold; PepsiCo's 19-person map and live HubSpot reads
-are the slowest). UX-14's shell paints the name and, when a summary is at most 15 minutes old, the last known state
-and NEXT at once; the first harness measured the shell at the end of the stream (DOMContentLoaded), so the shell
-number is re-taken at the gate with the corrected probe. Nothing on these pages is clickable into a write by the
+are the slowest). UX-14's shell paints the name and, when a summary is at most 15 minutes old (a visit or the Work
+warmer), the last known state and NEXT at once. Re-measured with the corrected probe (navigation to the shell, then
+to the full page): FedEx shell 4.9 s with "As read 10 min ago: Ready for a first touch: Glen Chaffee. Next: Prepare
+the first touch", full 42.4 s; PepsiCo shell 0.3 s, full 26.1 s; General Mills shell 0.3 s, full 19.4 s; Kraft Heinz
+shell 0.3 s, full 11.8 s. Work repeat: shell 75 ms, cards 82 ms. Nothing on these pages is clickable into a write by the
 harness; nothing was.
 
 **T1 to T8 after Train B (the loop as built), against the 7.1 baseline (a novice: 21 pages, about 80 minutes, 5
@@ -1678,6 +1680,8 @@ DPR 1 before UX-15 compares against this baseline. The text dumps and JS metrics
 | Train B (UX-11, UX-12, UX-13) | browser check (local build, 820 and 390; the TTS request captured, never played) | Listen to today beside the Work heading (103 words: "Today. 27 accounts need you: 11 in a deal or held. First, PepsiCo: research..."); Listen on PepsiCo 137 words, FedEx 213, NFI 110, each opening on the state and the last touch with the tags spoken; Ask GAP on NFI answered in 12 s with the trust words; Dictate off on Capture ("Dictate is off until transcription spend is approved..."); no overflow at either width | two defects found and fixed before the review: a question ran the full account read (PepsiCo and FedEx answered nothing inside 30 s; the page now remembers its context), and NFI's answer attributed words to an empty buyer record (a prompt line and a guard now drop an invented "the buyer said") |
 
 | Train A | production smoke (rig Chrome, Casey's live session, read-only, 820) | Work: "27 accounts need you, in order. Counts are what the list holds."; Accounts: "657 accounts, the first 60 shown: type to find one"; a FedEx deep link without the order: "Opened from Work." with Back to Work only; the subnav reads Work, Accounts, Capture, More | f2fc7e32 in production (dpl_7JowKM8pUGM8wwZgsMoQV7dZ16Pq; the first production build sat BUILDING for 23 minutes with no events and was cancelled and redeployed by API) |
+
+| Train C (UX-14 to UX-17) | the one heavy validation on the final code (9ec804b3 plus one test alignment, 67520a94) | production build green; the full GAP suite 344 files, 5,209 tests (one NEXT test aligned to the new people control, then green); the rest of the repository's unit suite: the row below; tsc clean; eslint clean on every changed file; 54 gate captures on the final build (9 pages at 390/820/1440, light and dark): 0 obscured focused controls, 0 overflow; Ask GAP answered in 0.6 to 0.9 s from the remembered context on PepsiCo, FedEx and NFI; Listen to today 208 words, the account briefs 97 to 244 words | |
 
 ## 10. Debt classification (recorded debt audited 2026-10-05)
 
