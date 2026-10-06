@@ -32,6 +32,8 @@ export interface SetAsidePerson {
   title: string | null;
   code: string;
   reason: string;
+  /** divested_entity: the company's own release behind the set-aside (serializable), when it has one. */
+  source?: { url: string; publisher: string; quote: string; publishedAt: string } | null;
 }
 
 export interface PeopleStackViewProps {
@@ -249,6 +251,20 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
             <li key={row.key} className="my-2 rounded-md border border-[var(--primary)] bg-[var(--muted)]/30 p-3" data-testid="people-stack-row" data-key={row.key} data-chosen="true" data-slot={row.slot} data-compact="false">
               {head(row)}
               <p id={`reason-${row.key}`} className="mt-0.5 text-sm" data-testid="people-stack-reason">{row.reason}</p>
+              {row.leadOver ? (
+                <p className={`mt-0.5 text-xs ${row.leadOver.tie || !row.leadOver.leads ? 'text-[var(--muted-foreground)]' : ''}`} data-testid="people-stack-lead-over" data-tie={row.leadOver.tie ? 'true' : 'false'} data-leads={row.leadOver.leads ? 'true' : 'false'}>
+                  {row.chosenBy && !/^GAP:/.test(row.chosenBy) ? (
+                    <>
+                      <span className="font-semibold">You chose {row.name.split(' ')[0]} ({row.chosenBy}).</span>{' '}
+                      {row.leadOver.tie ? `On evidence GAP cannot separate ${row.name.split(' ')[0]} and ${row.leadOver.over.split(' ')[0]}.` : row.leadOver.leads ? `On evidence ${row.name.split(' ')[0]} also leads ${row.leadOver.over.split(' ')[0]}: ${row.leadOver.text}` : `On evidence GAP ranks ${row.leadOver.over.split(' ')[0]} ahead: ${row.leadOver.text}`}
+                    </>
+                  ) : (
+                    <>
+                      <span className="font-semibold">Why {row.name.split(' ')[0]} over {row.leadOver.over.split(' ')[0]}?</span> {row.leadOver.text}
+                    </>
+                  )}
+                </p>
+              ) : null}
               {row.currentness ? (
                 <p className={`mt-0.5 text-xs ${/conflict|changed|in question|left|separate|divested/i.test(row.currentness) ? 'text-amber-700 dark:text-amber-400' : 'text-emerald-700 dark:text-emerald-400'}`} data-testid="people-stack-currentness">
                   {row.currentness}

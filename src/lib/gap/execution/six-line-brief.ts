@@ -21,6 +21,7 @@ import { accountRepliedRecently } from '../replies/account-reply';
 import { FREEMAIL_DOMAINS, OWN_DOMAINS } from '../replies/domains';
 import { resolveAccountOpportunity, type OpportunityTruth } from '../opportunity/active-opportunity';
 import { accountHref } from '../account-intel/href';
+import { BEST_PROOF_MEASURED } from '../story/anchor';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -43,6 +44,8 @@ export interface BriefHistory {
 
 export interface SixLineBrief {
   know: { fact: BriefFact; verified: true; supporting: number } | { fact: null; reason: string };
+  /** UX-06: BEST PROOF, YardFlow's own number in the canon phrasing; never Checked, never the buyer's. */
+  proof: { text: string; tag: 'Our proof, measured' };
   think: string | null;
   learn: string | null;
   whyYou: { text: string; owned: true } | { text: string; owned: false } | null;
@@ -142,6 +145,8 @@ export function buildBrief(input: {
       input.contradicted === null
         ? { fact: null, reason: 'Could not check this fact against the other evidence just now. Every send re-checks before anything goes out.' }
         : knowOf(h, input.now ?? new Date(), input.contradicted ?? new Map()),
+    // UX-06: BEST PROOF is YardFlow's own number, beside the opening, never the buyer's.
+    proof: { text: BEST_PROOF_MEASURED, tag: 'Our proof, measured' },
     think: typeof h?.problem_hypothesis === 'string' && h.problem_hypothesis.trim() ? h.problem_hypothesis.trim() : null,
     // The thesis's own question first; else the account's discovery plan (the same plan the account page shows).
     learn: falsify[0] ?? input.account?.firstDiscoveryQuestion ?? null,

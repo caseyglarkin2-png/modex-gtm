@@ -59,7 +59,7 @@ function Citation({ number, signal }: { number: number; signal: FactSignal | und
   );
 }
 
-export function FactBlock({ observation, signals }: FactBlockProps) {
+export function FactBlock({ observation, signals, verifiedFact = true }: FactBlockProps & { verifiedFact?: boolean }) {
   const sentences = splitSentences(observation ?? '');
   const order = extractCitationIds(observation ?? '');
   const numberOf = new Map<string, number>(order.map((id, index) => [id, index + 1]));
@@ -71,10 +71,10 @@ export function FactBlock({ observation, signals }: FactBlockProps) {
       data-testid="fact-block"
       data-block="fact"
       {...(unsupported ? { 'data-state': 'unsupported' } : {})}
-      className={`${BLOCK_BASE} border border-l-4 border-[var(--border)] border-l-emerald-600 bg-[var(--muted)]/60`}
+      className={`${BLOCK_BASE} border border-l-4 border-[var(--border)] ${verifiedFact ? 'border-l-emerald-600' : 'border-l-amber-600'} bg-[var(--muted)]/60`}
     >
-      <h3 className="text-xs font-bold tracking-[0.2em] text-emerald-700 dark:text-emerald-400">FACT</h3>
-      <Caption>Observed, cited</Caption>
+      <h3 className={`text-xs font-bold tracking-[0.2em] ${verifiedFact ? 'text-emerald-700 dark:text-emerald-400' : 'text-amber-700 dark:text-amber-400'}`}>{verifiedFact ? 'FACT' : 'KEYWORD HIT'}</h3>
+      <Caption>{verifiedFact ? 'Observed, cited' : 'Not a verified fact: never read aloud as one'}</Caption>
       {unsupported ? (
         <p className="mt-3 italic text-[var(--muted-foreground)]">No cited facts yet</p>
       ) : (

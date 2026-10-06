@@ -24,10 +24,11 @@ function Sentence({ s }: { s: StorySentence }) {
 function Row({ r }: { r: StoryRow }) {
   if (r.collapsed) {
     return (
-      <details className="rounded-md border border-[var(--border)] px-3 py-2" data-testid="story-row" data-key={r.key} data-tag={r.tag}>
+      <details className="group rounded-md border border-[var(--border)] px-3 py-2" data-testid="story-row" data-key={r.key} data-tag={r.tag}>
         <summary className="min-h-11 cursor-pointer py-2 text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]" data-testid="story-row-summary">
           <h3 className="inline">{r.label} ({r.sentences.length})</h3>
-          <span className="ml-2 font-normal normal-case underline">Show</span>
+          <span className="ml-2 font-normal normal-case underline group-open:hidden">Show</span>
+          <span className="ml-2 hidden font-normal normal-case underline group-open:inline">Hide</span>
         </summary>
         <ul className="mt-1 space-y-2">
           {r.sentences.map((s, i) => (

@@ -20,6 +20,7 @@
  * House convention for DB glue is `prisma: any`. Voice: no em dashes.
  */
 
+import { hypothesisSendable } from '../research/evidence-gate';
 import { QUANTIFYING } from '../sequence/call-pack';
 import { supersededIds } from '../bid/select';
 import { PROBLEM_FAMILY_CATALOG, isProblemFamily } from '../taxonomy';
@@ -74,6 +75,8 @@ export interface BriefHypothesis {
   predictedBuyerLanguage: string | null;
   /** what_a_no_means and contrary_evidence, the non-empty ones. */
   wouldProveWrong: string[];
+  /** UX-06: does the observation rest on a verified outreach fact? A keyword hit is false. */
+  verifiedFact?: boolean;
 }
 
 export interface BriefDisposition {
@@ -184,6 +187,7 @@ export function afterAcknowledgementQuestionsFor(hypothesis: { problemFamily: st
 
 const HYPOTHESIS_SELECT = {
   id: true,
+  account_name: true,
   status: true,
   problem_family: true,
   confidence: true,
@@ -200,7 +204,8 @@ const HYPOTHESIS_SELECT = {
   signals: {
     select: {
       role: true,
-      signal: { select: { id: true, title: true, source_kind: true, evidence_url: true, evidence_text: true, observed_at: true } },
+      // UX-06: the fields the send gate reads (research/evidence-gate.ts), so the FACT caption tells the truth.
+      signal: { select: { id: true, title: true, source_kind: true, source_type: true, evidence_url: true, evidence_text: true, observed_at: true, external_ok: true, metadata: true, account_name: true, freshness_expires_at: true } },
     },
   },
 } as const;
@@ -235,6 +240,8 @@ function toBriefHypothesis(row: any): BriefHypothesis {
     contraryEvidence,
     predictedBuyerLanguage: nonBlank(row.predicted_buyer_language) ? row.predicted_buyer_language : null,
     wouldProveWrong: [whatANoMeans, contraryEvidence].filter((v): v is string => v !== null),
+    // UX-06: a keyword hit is never captioned as an observed fact (soak P2).
+    verifiedFact: typeof row.account_name === 'string' ? hypothesisSendable(row, new Date()) : false,
   };
 }
 

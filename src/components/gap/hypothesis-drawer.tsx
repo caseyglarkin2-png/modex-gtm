@@ -192,6 +192,7 @@ const PRIMARY_ACTION: Partial<Record<HypothesisStatus, HypothesisAction>> = {
 /** Server refusal reasons (machine error codes), translated to plain English. Unknown codes fall back to the raw string, never hidden. */
 const REFUSAL_TEXT: Record<string, string> = {
   no_evidence: NEEDS_CITED_FACT,
+  title_shaped_observation: 'The observation reads like a headline. Write it as a sentence about what changed, with the date and the source\'s own words, and keep the citation.',
   GAP_HYPOTHESIS_FROZEN: 'This hypothesis is frozen and can no longer be edited.',
   invalid_transition: 'That action is not available from the current status.',
   reason_required: 'A reason is required for this action.',

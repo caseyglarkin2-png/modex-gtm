@@ -512,7 +512,7 @@ its own; none is a foundation-only sprint (UX-03 ships the Walmart header and st
 | UX-03 | Pursuit state (5.1) + reply classification + People Stack (5.2) on NOW, reading the chosen person; the pack built for that person (F1, N1, N2, N8) | Walmart: "Opted out" leads, Doug Estrada chosen with the hold shown, 4 rows of 46; FedEx: "Ready for a first touch: Glen Chaffee" (chosen by Casey, Oct 5) with Prepare email beside him, 4 rows of 37; Kroger: "In a deal", no choose; the analyst drawer: top 5 of 53, no ordinals on the tie | REVIEWED, merging (PR open) | 1291b5b5, 0b6de260, d7cb350f, 03704bbb, d96ce769, 6e473da3, 3ec49699 | reply-classify, people-stack, pursuit-state, pursuit-next, people-stack-view, account-now-pursuit, owner-panel-cap, ready-target-of (65 tests); GAP suite green |
 | UX-04 | Account workspace hierarchy: one decision block, context column, one-column 390, no sticky tabs at 390, scroll padding, 44 px bar, Listen cleanup (N9, N10, N11, N12) | FedEx at 820: state (green), one automatic-reply line, NEXT with one filled control, Glen chosen with Call prep and Log a touch, three eligible rows, compact sponsor and tech lines, one flags disclosure, then WHY NOW; the decision ends at 1.07 to 1.34 screens on six accounts; zero covered focus points | REVIEWED, merged (PR #402, 5c321ac6) | 7065fc24, caa5380a, 189eb183, 49e276f7, 7131b5a0 | now-hierarchy, blocked-people, voice-preview-button, the market-chatter and never-cite filters, the review-fix tests (GAP suite 329 files / 5,069 tests green) |
 | UX-05 | Account Story (5.4) with per-sentence tags, internal readers (clawd history, vault note) (F11, N5, N6) | PepsiCo story answers goal / changing / network / yard / proof / unknown; NFI shows the May 28 send | SHIPPED 2026-10-06 (6e, 7.3, 8.9) | | tag rule (weakest class); no private row; unverified employer item rises |
-| UX-06 | Outreach anchor + angle suggestion from the story + pack copy without pasted headlines, signed by the rep (5.5, N13) | one anchor per person with Do not use; a different story is one click | CONTRACT DRAFTED (6f); one decision open for Casey | | anchor never cites private / imagery / not-for-outreach |
+| UX-06 | Outreach anchor + angle suggestion from the story + pack copy without pasted headlines, signed by the rep (5.5, N13) | one anchor per person with Do not use; a different story is one click | SHIPPED 2026-10-06 (6g, 7.4, 8.10) | | anchor never cites private / imagery / not-for-outreach |
 | UX-07 | Pursuit slots + human-priority controls on the stack (5.3, 5.6) | Make next / Not a fit / Not now recorded, audited, reversible, never over a hold | | | preference never clears DNC / employment / deal / reply |
 | UX-08 | Work surface: accounts needing attention, one card each, lane chips as filters, reply classes, search (F3, F12, N4) | /gap answers which account, why, state, person, next in one screen | | | card = pursuit state parity; opt-out never heads the list |
 | UX-09 | Done, next: outcome or snooze, frozen order, Back, Back to Work (F9) | work five accounts without returning to the cockpit | | | URL state; Back restores |
@@ -703,7 +703,7 @@ the changed files; five local production builds green. Measurements and the fres
 
 ## 6f. UX-06 contract draft (the outreach anchor, BEST PROOF, call prep on the pursuit state), drafted 2026-10-06 from 5.5, N13 and the UX-03 to UX-05 carried items
 
-STATUS: DRAFT, one product decision open for Casey (item 2) before implementation starts.
+STATUS: ACCEPTED 2026-10-06 (Casey: Option A, the approved-thesis model; Option B is not implemented in this program; C01, the compiler's evidence scope and approval semantics stay as they are). Implementation record in 6g.
 
 What the code does today (read 2026-10-06): step 0 of every seed family (`sequences/families.ts`) carries the slot
 `{{observation}}`, filled per person by `sequence/render.ts` from the HYPOTHESIS observation (a cited sentence whose
@@ -756,6 +756,74 @@ never the account's pursuit state.
 7. **Validation:** the UX-05 recipe (local preview against the production database, read-only; 820 / 390 / 1440 light
    and dark; a fresh AE, product and accessibility review on the captures); the pack's copy bytes for an unchanged
    hypothesis are byte-identical before and after (pinned), so nothing outbound changes until Casey chooses A or B.
+
+## 6g. UX-06 implementation record (2026-10-06), with the two UX-05 calls
+
+Casey's calls on the UX-05 open items, both landed in this slice: the People Stack shows THREE full people by default
+(never padded; a hidden eligible person with a currentness caution is counted in the Show-more label; the named
+sponsor / tech / site slots stay compact lines), and the FedEx entity boundaries now carry their FIRST-PARTY sources
+(`people/entity-boundary.ts`: the FedEx newsroom releases of Oct 1, 2026 for the FedEx Supply Chain sale to CMA CGM
+Group at an enterprise value of $1.4B, and Jun 1, 2026 for the FedEx Freight spin-off, NYSE: FDXF); the resolver's
+set-aside carries the source, the story says a divested-unit set-aside stands on the company's own release (Checked)
+and never tells the same deal from a third party beside it. `scripts/gap/store-first-party-entity-facts.ts` offered
+both releases to the one research contract, which refused them as non-physical-network facts (as designed: they are
+provenance for a boundary, not outreach); the constant is the provenance.
+
+Commits 2e184cdb through cf0fa7a1 on `feat/gap-account-first-ux` (the pure modules, the wiring, two dogfood batches,
+the fresh-review batch). What shipped, against 6f under Option A:
+
+1. **The outreach anchor** (`src/lib/gap/story/anchor.ts`, pure): for the chosen person, ONE usable thesis (approved
+   or active, grounded, not contradicted, not needing review, and one the send gate would let out: the loader reads
+   `hypothesisSendable` over each open thesis's linked signals; an unread gate makes nothing usable) chosen by the
+   person's recorded choice, else the thesis whose fact lands on their remit (thesis relevance), else the top usable
+   one; WHY THIS PERSON CARES (Our read from the remit; a person the fact misses is told to ask who owns it); one
+   SUPPORTING FACT (checked, citable, parsable, not the anchor's); BEST PROOF in the canon phrasing, tagged "Our
+   proof, measured", never Checked; DO NOT USE named with reasons (private engagement, our modeled value, unverified
+   items, imagery, not-for-outreach, a broken number); the other theses as USE A DIFFERENT STORY (a thesis the gate
+   would refuse, or one needing review, is listed as not usable with the reason and no button); a checked, citable
+   story line no thesis is grounded on as DRAFT + REVIEW (one entry per deal).
+2. **A different story switches the thesis** (`POST /api/gap/personas/[id]/anchor`, `setAnchor` /
+   `loadAnchorChoices` in `motion/persona-angle.ts`): an append-only `persona.angle` row carrying
+   `anchorHypothesisId`; the loader (`pursuit/load.ts`) opens the pack on that thesis when it is grounded and open
+   here; nothing sends, nothing bypasses approval, the renderer, the compiler and the approval are untouched
+   (`tests/unit/gap/copy-bytes.test.ts` pins every seed family's step-0 bytes for an unchanged observation).
+3. **Draft + review, low friction**: the block prefills STORY / SOURCE / PROPOSED OUTREACH OBSERVATION (the house
+   cited-quote form: source label, the quote, the citation before the period) and OUR GUESS (hedged), proposes
+   through `POST /api/gap/hypotheses` and submits through the existing transition; approval stays a human click in
+   the REVIEW lane. When nothing is usable the draft path is open by default (the way out of research).
+4. **Title-shaped observations are refused** (`hypothesis/observation.ts` `titleShapedReason`, inside
+   `validateObservation`, so propose, draft edits and submit all refuse it) with plain language
+   (`OBSERVATION_REFUSAL_TEXT`; the drawer and the draft form word it); a sentence in the source's words with its
+   citation passes; attribution is preserved.
+5. **Why #1 over #2** (`owner-resolution.ts` `leadOver` and `rankDimensionNames`, `stack.ts` `leadOver` on the first
+   row): the first rank dimension on which the chosen person leads the next visible row, in words from the two reads;
+   a tie reads "GAP cannot separate these two on current evidence."; never invented.
+6. **Call prep reads the pursuit state** (`replies/call-pursuit.ts`, `GET /api/gap/call/[personaId]/pursuit`, a second
+   request beside the brief so the brief stays fast): under a reply, an opt-out, a deal or a hold the page says the
+   hold first and offers no opener; while the state is being read, or when it could not be read, no opener either
+   (fail closed). The FACT caption tells the truth: the call brief now selects the fields the send gate reads (it
+   selected six, so every thesis had captioned as a keyword hit); a real keyword hit reads "KEYWORD HIT, not a
+   verified fact: never read aloud as one".
+7. **The six-line brief carries BEST PROOF** (a Proof row under KNOW, "YardFlow's own number, never theirs").
+8. **Placement**: the "Opening story for Glen" block sits after NEXT and before the stack, compact (the opening and
+   why they care in the open; best proof, supporting fact and the do-not-use list behind one disclosure; the other
+   stories, or "Draft a thesis from a checked fact", behind another, closed by default).
+9. **The fresh-review batch** (8.10): the pack opens only on a thesis the block calls usable (an unread gate opens
+   nothing); a remit mismatch travels to NEXT as a caution naming the eligible person the fact fits (FedEx: the air
+   network thesis against Glen Chaffee names Lisa Lisson, President, Air Network Operations); the story is told once
+   beside the anchor (its own fact becomes "The opening story, above."); the chosen card reads the human choice first
+   and says a lower-ranked choice as what it is ("You chose Glen (you, Oct 5). On evidence GAP ranks Jeffrey
+   ahead: ..."), never as a tie; a thesis of any live status is never offered again as a draft; the tie line names
+   the people on screen first; a broken dollar figure renders as "[figure unverified]"; the title-shaped rule accepts
+   an honest Title Case sentence with an ordinary verb; focus moves to the status line after a switch or a submit;
+   the textareas are labelled and described; a keyword hit loses the green border; the call-prep timer is cleared;
+   the client block imports its text from a client-safe module (the anchor projection reaches node:fs).
+
+Validation: GAP folder suite 335 files / 5,124 tests green at a56c2a5f (the later batches re-ran their files green:
+outreach-anchor, ux06-views, copy-bytes, call-route, contract-parity, call-brief, call-truth); `tsc --noEmit`
+clean; eslint clean on every changed file except `replies/brief.ts`, whose 10 `any` errors pre-date this slice
+(house glue, recorded in section 10); five local production builds green. Measurements and the fresh review follow
+in 7.4 and 8.10.
 
 ## 7. Task baselines and post-change measurements
 
@@ -878,6 +946,32 @@ story; clawd's sends merged on FedEx (Aug 7 to Michael Jeannotte), PepsiCo (29 e
 and Tyson once the domain fallback landed. Keyboard, with the sticky elements engaged: 40 Tabs at 820, 390 and 1440 in
 light and dark found zero obscured focused controls; no page overflows horizontally. Page load on the local preview:
 13 to 27 s (unchanged from UX-04; the brief read is the long pole; the story readers add under 1 s in parallel).
+
+### 7.4 UX-06 measurement: the anchor on the dogfood accounts (local preview of cf0fa7a1 against the production database, read-only, DPR 1, 2026-10-06; the e3dba3e5 run gave the same numbers)
+
+| Account | state | stack | opening story | decision ends (third row action) | story's first three rows end |
+|---|---|---|---|---|---|
+| PepsiCo | research | 3 rows, no card | no usable thesis; one draftable story (the Gatik partnership, once); NEXT: open the research plan | 1,116 px (1.24 screens) | 1,868 px (2.08) |
+| FedEx | ready, Glen chosen | 3 rows, 1 card | the active Network 2.0 thesis, basis the highest-ranked usable thesis; why: the fact is an air network change and may not land on Glen's remit, Lisa Lisson (President, Air Network Operations) fits it; NEXT carries the same caution; a supporting fact; "You chose Glen (you, Oct 5). On evidence GAP ranks Jeffrey ahead: Jeffrey is the more senior title; the remits read the same." | 1,383 px (1.54) | 2,313 px (2.57) |
+| Walmart | opted out | 3 rows, no card | none (a hold shows no opening story) | 809 px (0.90) | 1,624 px (1.80) |
+| H-E-B | research | 3 rows, no card | no usable thesis, nothing draftable ("Open the research plan to find a fact") | 988 px (1.10) | 1,514 px (1.68) |
+| NFI | choose person | 3 rows, no card | no usable thesis, nothing draftable | 1,004 px (1.12) | 1,371 px (1.52) |
+| General Mills | research | 3 rows, no card | no usable thesis: "The open thesis would be refused by the send gate: the angle needs your review: It opens on activity outside the North America network, but a better current fact exists."; one draftable fact, not the refused one | 1,096 px (1.22) | 1,726 px (1.92) |
+| Kroger | in a deal | 3 rows, no card | none | 785 px (0.87) | 1,353 px (1.50) |
+| Tyson Foods (`tyson-foods`) | relationship-led | 3 rows, no card | none | 887 px (0.99) | 1,370 px (1.52) |
+| Tyson (`tyson`, an empty duplicate account: no people, no HubSpot id, no domain link) | held: HubSpot could not be checked (identity_unresolved) | none | none (a hold shows no opening story) | n/a | 537 px (0.60) |
+
+Read honestly: the three-row default brought the decision end down to 0.87 to 1.54 screens on every account (1.09 to
+1.16 before, with four rows and no opening story); the block costs 150 to 380 px; the story's first three rows end
+inside the second screen on six of eight, and at 2.1 and 2.6 on PepsiCo and FedEx. No private fact, unverified item
+or modeled value reached an anchor on any account (the probe checked the block's text against the private pages
+and the DO NOT USE list); the anchor, NEXT and the call page agree with the send gate on every account. Call prep:
+Walmart (opted out) says the hold first and offers no opener; General Mills says "Research: the angle needs your
+review" and its FACT block is captioned as a fact (the brief's select carries the gate's fields now); FedEx says
+"Ready for a first touch: Glen Chaffee." and shows the brief. Keyboard: 40 Tabs at 820 and 390 in light and dark on
+24 pages found zero obscured focused controls; no page overflows. The empty `Tyson` account row is the fail-safe
+working as designed (UX-04: an unreadable HubSpot identity is a hold, never a cold touch), recorded here so nobody
+reads it as a UX-06 defect; the duplicate itself is dedup debt (section 10).
 
 ## 8. Reviewer findings (UX-01 / UX-02 pass, 2026-10-05)
 
@@ -1121,6 +1215,34 @@ amber 5.1 / 11.5 in light / dark).
 | "YOUR NOTE" tagged "OUR READ" mixes voice | product | NICE | CARRIED: the tag vocabulary is fixed (contract 5.4); the basis line says "your vault note" |
 | " · " separators are read as "middle dot" at high punctuation levels; uppercase tags may be read as initialisms | a11y | NICE | FIXED the separators (commas); the tag transform stays (text is lowercase in the DOM) |
 
+### 8.10 UX-06 fresh review (three read-only reviewers: AE, trust, product + accessibility, 2026-10-06; a re-check on captures with every disclosure opened)
+
+| Finding | Reviewer | Severity | Disposition |
+|---|---|---|---|
+| The call captures the reviewers saw answered 500 (the brief's select lacked the hypothesis account name the gate reads) | AE, product | BLOCKER | FIXED and recaptured: Walmart's call page says the opt-out first and offers no opener; FedEx reads "Ready for a first touch"; General Mills reads "Research: the angle needs your review" |
+| FedEx's anchor is an air-network thesis for a FedEx Ground transportation MD; the block admitted the mismatch while NEXT said "Prepare the email to Glen" with no caution; Lisa Lisson (air network) was on the page | AE | BLOCKER | FIXED: the caution travels to NEXT and names the eligible person the fact fits; the block says it in one sentence |
+| The anchor's sentence repeated verbatim in WHAT IS CHANGING (three Tricolor blocks on one page) | AE, product | BLOCKER | FIXED: the story is told once; the anchor's own fact becomes "The opening story, above." |
+| "Why Glen over Jeffrey? GAP cannot separate these two" sat under "Chosen by you, Oct 5" and read as empty; a seller's choice of the resolver's #2 was reported as a tie | AE, trust | BLOCKER | FIXED: `leadOver` reports the leader's side; the card reads "You chose Glen (you, Oct 5). On evidence GAP ranks Jeffrey ahead: ..." (or cannot separate, or also leads) |
+| General Mills: doubly parenthesised, garbled refusal text, and "Draft + review" offered on the exact fact just marked not usable | AE, product | BLOCKER | FIXED: one plain sentence; a fact any live thesis is grounded on is never offered as a draft |
+| The pack and the block could disagree on the thesis (the loader opened on a recorded choice without the gate; the fallback ignored status and sendability) | trust | SHOULD | FIXED: the pack opens only on the usable set the block shows; an unread gate opens nothing |
+| The supporting fact skipped the gate's rules (ended continuity, physical-network) and hardcoded citable | trust | SHOULD | FIXED: live, not ended, physical-network, sensitivity and number checks |
+| The title-shaped rule's second branch made the first dead and refused honest Title Case sentences with an unlisted verb | trust | SHOULD | FIXED: Title Case with no ordinary verb is a headline; more verbs listed; a headline with a listed verb is the reviewer's call (said so in the caption) |
+| PepsiCo offered the same Gatik deal as three draftable stories | AE | SHOULD | FIXED: one entry per counterparty |
+| H-E-B rendered "$175 new refrigerated facility" | AE | SHOULD | FIXED: "[figure unverified]" |
+| General Mills' tie line named a hidden person while a visible one was tied | AE | SHOULD | FIXED: the people on screen first |
+| "chosen by the top grounded thesis" read as circular | AE, product | SHOULD | FIXED: "basis: the highest-ranked usable thesis" / "it lands on their remit" / "your choice" |
+| Nested parentheses in the refusal text; the disclosure count misread as the item total; "Review + use" overpromised; "Outreach anchor" is internal vocabulary; 390 draftable rows squeezed the text; Show never became Hide | product | SHOULD | FIXED: one plain sentence; "Best proof, supporting fact and the do-not-use list (N)"; "Submit for review"; "Opening story for Glen"; rows stack below sm; Show / Hide |
+| Focus lost after Use this story and Submit for review; the textarea helper sat inside the label; KEYWORD HIT kept the green border | a11y | SHOULD | FIXED: focus moves to the status line; labels with aria-describedby; amber border |
+| The call-prep race timer was never cleared | trust | NICE | FIXED |
+| The draft list open by default on research accounts pushed the people a screen down | AE | SHOULD | FIXED: closed by default, the summary says what it holds |
+| PepsiCo's division warning ignores "PBNA Transportation" on the page | AE | SHOULD | CARRIED (section 10): the division read is the brief's (UX-04 surface), not the anchor's |
+| "Story" reads as a press item; suggested "Draft a thesis from this fact (goes to review)" | AE | NICE | FIXED: "Draft a thesis from this fact" with "(it goes to review)" in the line above |
+| Re-check (seller): Walmart's call page said the hold first but still offered a suggested question and the outcome row; General Mills' call page presented the thesis the account page said the send gate would refuse; FedEx's call page dropped the remit caution NEXT carries | AE | BLOCKER | FIXED: the pursuit read carries the usable set and the caution; under a hold, an unusable thesis, or an unread state the brief withholds every opener element (fact, thesis, questions, after-acknowledgement); the outcome recorder and the history stay; the caution renders above the opener, never under a hold |
+| Re-check (seller): the Memphis/Indianapolis hub fact read three times (supporting fact, a different story, stories that matter); PepsiCo's Maryland layoffs listed twice in do-not-use; "$1202M a year"; "Would prove wrong" twice on the call page | AE | SHOULD | FIXED: the supporting fact prefers a fact no other usable thesis is grounded on and an alternative on the same fact says so; the story points at the supporting fact once; one do-not-use line per fact with every reason; $1.2B; "Would prove wrong" once, inside the HYPOTHESIS block |
+| Re-check (seller): the call page tags FedEx "3PL / Logistics" while the account page says carrier; "Caf Tr s Cora es S.A" on both surfaces | AE | SHOULD | CARRIED (section 10): the call brief's vertical is the accounts table's old column (UX-04 header surface); the accents were dropped at ingest (the stored evidence text already reads "Caf Tr s", a research-extractor defect, not a render one) |
+| Re-check (product + a11y): every original item fixed; NICE: the "Not usable" line repeated the refusal; the "Conversation" button clips at 820 under the floating buttons; no visible focus ring on the status line | product | NICE | FIXED: "The reason above."; a focus-visible ring on the status line; the clipped button is carried (section 10, pre-existing call-page layout) |
+| A client without the pursuit method renders the brief as before (fail-open for mocked clients only) | trust | NICE | LEAVE: the default client always has it; recorded |
+
 ## 9. Validation record
 
 | Ticket | Validation | Result |
@@ -1155,6 +1277,12 @@ amber 5.1 / 11.5 in light / dark).
 | UX-05 | production | Vercel deployment dpl_5BeQk1FAdLqAHsaoj3iC6Mf2SbEJ READY on 5b1d2f26 (2026-10-06 04:15 local) |
 | UX-05 | production smoke at 820 CSS px (read-only, the rig's live session, nothing clicked) | all eight golden accounts 200, no render error, no private leak, no overflow, every story sentence tagged; the header carries no last-touch or inbound line on any account (the story's between-us row has them); FedEx [ready] story between us / changing / yard / learn / stories / note, "Last email to Michael Jeannotte, Chief Operating Officer, Aug 7 ... No answer on record" (clawd ledger), one card and three plain rows, first three rows end 2,081 px (2.31 screens), 15.0 s; Walmart [opted_out] "Timothy Cooper opted out on Oct 5 ("stop"). The email it answered is not in GAP's ledgers.", no card, the hold said once, 1,751 px (1.95), 10.6 s; PepsiCo [research] "Last email to Santosh Gupta ... Aug 17. No answer on record." (clawd), 1,768 px (1.96), 10.1 s; H-E-B [research] 1,510 px (1.68), 10.0 s; Kroger [in_deal] "(a GAP first touch)", the hold said once, 1,544 px (1.72), 8.9 s; NFI [choose_person] "No touch on record between us", 1,343 px (1.49), 7.2 s; General Mills [research] 1,672 px (1.86), 7.7 s; Tyson [ready, relationship-led] 1,537 px (1.71), 6.6 s; pages 2.0 to 3.0 screens |
 | UX-05 | production smoke at 390 | FedEx first three rows end 2,366 px (2.80 screens), 3.7 screens; Walmart 2,164 px (2.56), 3.2 screens; no overflow |
+| UX-06 | GAP folder suite | 335 files, 5,128 tests, 0 failures at da421115 (50 new: `outreach-anchor`, `ux06-views`, `copy-bytes`); `tsc --noEmit` clean; eslint clean on the changed files (the call brief's 10 pre-existing `any` errors excepted) |
+| UX-06 | production build | eight local `npm run build` runs green (one refused the client bundle for a node:fs reach, fixed in e3dba3e5); Vercel previews READY on a56c2a5f, a4bba645, cb2e6d77, ce684402, fbf55665 and the later tips recorded at merge |
+| UX-06 | three fresh read-only reviewers on the captures (AE, trust, product + accessibility), then a re-check on captures with every disclosure opened | five BLOCKERs and twelve SHOULDs fixed before the PR (section 8.10); carried items in section 10 |
+| UX-06 | dogfood (local preview, production database, read-only; nothing clicked that writes) | eight accounts at 820, the six dogfood accounts at 820 and 390 light and dark, PepsiCo and FedEx at 1440, three call pages; measurements in 7.4 |
+| UX-06 | live clawd readers | unchanged from UX-05 |
+| UX-06 | safety during build and review | emails sent 0; enrollments 0; Apollo credits 0; HubSpot writes 0; suppression clears 0; no Choose, Use this story or Draft clicked against production; the two first-party entity facts were offered to the research contract (two context signals created, both refused as non-physical-network facts, nothing quotable) |
 | UX-03 | production smoke (read-only, the rig's live session, nothing clicked) | FedEx "Ready for a first touch: Glen Chaffee" [ready], 4 rows, 2 slots, Prepare email present, 15.0 s; Walmart "Opted out: timothy.cooper@walmart.com, Oct 5" [opted_out], 4 rows, no Choose, 11.2 s; PepsiCo and H-E-B "Research: a verified fact, no angle grounded on it yet" [research], tie named, 10.5 s / 9.5 s; Kroger "In a deal: YardFlow - Kroger (Discovery)" [in_deal], no Choose, 9.1 s; NFI "Choose who hears this first (133 eligible)" [choose_person], 8.7 s; General Mills "Research: the angle needs your review before it is used", 9.6 s; Tyson "Relationship-led: Ryan Heman", 6.9 s; no horizontal overflow, no ordinals on any tie, no render errors |
 
 Screenshots: the scratch packet (not committed) holds `desk2/`, `mobile2/`, `drawer2/`, `path-*/`; the `drawer2`
@@ -1198,6 +1326,14 @@ DPR 1 before UX-15 compares against this baseline. The text dumps and JS metrics
 | New (UX-05 review): the yard opportunity and the vault note read in the second person ("the gates, yards and docks you run") on a page the seller reads | FIX AS PART OF UX (hypothesis authoring pass): the problem text is authored in the buyer's voice | the story shows the angle as approved; rewriting voice there would be a second authority |
 | New (UX-05 review): the relationship route ("Chris Anderson: Inland26 contact") is a UX-04 block between the stack and the story | OPEN (UX-06): fold it into WHAT HAS HAPPENED BETWEEN US when the outreach anchor lands | |
 | New (UX-05 review): FedEx's between-us row holds three sentences and two long filing quotes, so its first three story rows end at 2.3 screens at 820 | LEAVE INTENTIONALLY for now: seven of eight accounts meet the placement; the lever is the stack's default row count (UX-03 contract allows 3) | Casey's call, not the slice's |
+| New (UX-06 dogfood): `Tyson` is an empty duplicate of `Tyson Foods` in `accounts` (no personas, no HubSpot id, a self-referential canonical link); it renders as a permanent identity hold | DEDUP DEBT (revops canonical engine), not a GAP UX item | |
+| New (UX-06 re-check): the call brief's account header reads `accounts.vertical` ("3PL / Logistics" for FedEx) while NOW says carrier (the GAP account kind) | FIX AS PART OF UX (the brief header, UX-04 surface): read the account kind, drop the old column | |
+| New (UX-06 re-check): the research extractor drops accented letters from SEC filings at ingest (General Mills' buyer stored as "Caf Tr s Cora es S.A.", two evidence rows) | RESEARCH DEBT: fix the HTML entity decode in the extractor, then re-verify the two rows; never patch the text by hand | |
+| New (UX-06 re-check): the call page's fourth disposition button clips under the floating Note and mail buttons at 820 | FIX AS PART OF UX-09 (the Done/Next loop touches the recorder) | |
+| New (UX-06 review): PepsiCo's header asks which division owns the yard decision while the chosen person's title says PBNA Transportation | FIX AS PART OF UX (the brief's division read, UX-04 surface): read the chosen person's division before asking | |
+| New (UX-06): `replies/brief.ts` carries 10 pre-existing `@typescript-eslint/no-explicit-any` errors (house glue over the getHypothesis row) | LEAVE INTENTIONALLY | outside the slice; the file is typed by its contract tests |
+| New (UX-06): the anchor's DRAFT + REVIEW proposes with `problemFamily: 'unmapped'` and a generic hedged guess; the reviewer sets the family and sharpens the guess in REVIEW | LEAVE INTENTIONALLY (by design: the draft is a prefilled start, the review is the authority) | |
+| New (UX-06): the research contract refuses a first-party corporate-transaction release as a non-physical-network fact, so provenance for an entity boundary lives in the reviewed constant, not in a quotable fact row | LEAVE INTENTIONALLY | the rule is right for outreach; the constant carries the source |
 | New (UX-05): the reply classifier reads "Please stop emailing me" as a human reply (the opt-out rule wants the whole message to be the refusal, or "do not email me" / "remove me from" / "unsubscribe me") | FIX AS PART OF UX (the next reply pass): a human reply still holds the account, so it fails safe; the state line just says "Someone replied" instead of "Opted out" | the UX-03 classifier contract was left alone in UX-05 |
 | New (UX-05): the brief builder sets an angle's inference to its problem, so NETWORK IMPLICATION never differs from YARD OPPORTUNITY on live data | LEAVE INTENTIONALLY (the story shows the row only when it adds a sentence) | a distinct inference belongs to the hypothesis authoring pass, not the story |
 | New (UX-05): FedEx's company row carries no domain, so clawd is asked by the domain the account's own addresses share | FIX AS PART OF UX (account record hygiene): set the domain on the record | the fallback is tested and honest |

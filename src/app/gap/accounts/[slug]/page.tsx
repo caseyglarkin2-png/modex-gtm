@@ -38,6 +38,8 @@ import { nextFromPursuit, pursuitListenText } from '@/lib/gap/pursuit/next';
 import { accountDomainFor, loadStoryReaders } from '@/lib/gap/story/load';
 import { mergeTouches } from '@/lib/gap/story/touches';
 import { projectStory, storyListenText } from '@/lib/gap/story/story';
+import { projectAnchor, storyBesideAnchor } from '@/lib/gap/story/anchor';
+import { remitCaution } from '@/lib/gap/story/anchor-text';
 import { listenText } from '@/lib/gap/context/now';
 
 export const dynamic = 'force-dynamic';
@@ -165,7 +167,7 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
       : { href: `${hrefFor('sources')}#research-plan`, label: 'Open the research plan' };
     // UX-05: the derived Account Story over the brief, the context history, the reply class, clawd's sends, the vault
     // note and the pursuit state (pure; never stored). Listen reads it with its tags, after the state and NEXT.
-    const excluded = (pursuit?.resolution?.excluded ?? []).map((e) => ({ key: e.candidate.key, name: e.candidate.name, title: e.candidate.title, code: e.code, reason: e.reason }));
+    const excluded = (pursuit?.resolution?.excluded ?? []).map((e) => ({ key: e.candidate.key, name: e.candidate.name, title: e.candidate.title, code: e.code, reason: e.reason, source: e.source ?? null }));
     const story = pursuit
       ? projectStory({
           accountName: brief.accountName,
@@ -188,9 +190,21 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
           excluded,
         })
       : null;
+    // UX-06 (Option A): the outreach anchor for the chosen person over the story and the account's open theses.
+    const rawStory = story;
+    const anchor = pursuit && rawStory
+      ? projectAnchor({ accountName: brief.accountName, person: pursuit.state.person ? { personaId: pursuit.state.person.personaId, name: pursuit.state.person.name, title: pursuit.state.person.title } : null, people: [...(pursuit.stack?.rows ?? []), ...(pursuit.stack?.more ?? [])].map((r) => ({ personaId: r.personaId, name: r.name, title: r.title })), brief, inputs, story: rawStory, anchorChoice: pursuit.anchorChoice, privateLine: v.private, sendable: pursuit.sendableTheses, now })
+      : null;
+    // The story is told once: the anchor's own fact is a pointer in the story, never a repeat.
+    const storyShown = rawStory && anchor ? storyBesideAnchor(rawStory, anchor) : rawStory;
+    // The remit caution travels to NEXT: a cold first touch never asks the buyer who owns it.
+    if (pursuitNext && anchor?.primary && anchor.primary.relevance.tier === 'none' && pursuit?.state.person) {
+      const first = pursuit.state.person.name.split(' ')[0];
+      pursuitNext.text = `${pursuitNext.text} ${remitCaution(first, anchor.primary.factLabel, anchor.fitsBetter)}`;
+    }
     const listen = pursuit && pursuitNext
-      ? story
-        ? `${pursuitListenText({ ...v, listen: listenText({ ...v, whyNow: [], think: null, currentState: '', impact: '' }) }, pursuit.state, pursuitNext.text)} ${storyListenText(story)}`.replace(/\s+/g, ' ').slice(0, 4800)
+      ? storyShown
+        ? `${pursuitListenText({ ...v, listen: listenText({ ...v, whyNow: [], think: null, currentState: '', impact: '' }) }, pursuit.state, pursuitNext.text)} ${storyListenText(storyShown!)}`.replace(/\s+/g, ' ').slice(0, 4800)
         : pursuitListenText(v, pursuit.state, pursuitNext.text)
       : v.listen;
     return (
@@ -207,7 +221,7 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
           nextText={pursuitNext?.text ?? null}
           links={links}
           mailbox={process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() || null}
-          pursuit={pursuit ? { state: pursuit.state, stack: pursuit.stack, hypothesisId: pursuit.hypothesisId, excluded, story } : null}
+          pursuit={pursuit ? { state: pursuit.state, stack: pursuit.stack, hypothesisId: pursuit.hypothesisId, excluded, story: storyShown, anchor } : null}
         />
       </div>
     );

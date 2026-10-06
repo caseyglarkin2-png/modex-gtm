@@ -9,10 +9,10 @@
  * transportation"), which is the same sentence on 43 Walmart cards. The deeper evidence (every resolver reason) stays
  * behind "Why this person?". Pure; pinned by tests/unit/gap/people-stack.test.ts.
  */
-import type { OwnerCandidate, OwnerResolution } from './owner-resolution';
+import { leadOver, type OwnerCandidate, type OwnerResolution } from './owner-resolution';
 import { geoPhrase, isSponsor } from './person-prior';
 
-export const STACK_DEFAULT_MAX = 4;
+export const STACK_DEFAULT_MAX = 3;
 export const STACK_MIN = 3;
 
 export type PursuitSlot = 'Next operator' | 'Eligible operator' | 'Tech / transformation' | 'Executive sponsor' | 'Site / regional operator' | 'Relationship route';
@@ -36,6 +36,11 @@ export interface StackRow {
   reachability: string;
   /** The resolver's full reasons, the recommendation sentence first when it applies: "Why this person?". */
   why: string[];
+  /**
+   * UX-06, on the chosen (or first) row only: why this person over the next one, from the resolver's own rank keys
+   * ("Why Glen over Jeffrey?"); "GAP cannot separate these two on current evidence." on a tie; null when alone.
+   */
+  leadOver: { over: string; text: string; tie: boolean; /** false when the seller chose a lower-ranked person: GAP ranks the other ahead. */ leads: boolean } | null;
   /** The seller's current choice, read from the pursuit state (never a preselection by the stack). */
   chosen: boolean;
   chosenBy: string | null;
@@ -215,6 +220,7 @@ function toRow(c: OwnerCandidate, r: OwnerResolution, reason: string, ordinal: n
     reachability: reachabilityOf(c),
     // Everything the resolver says, minus the line already visible as the reason.
     why: [...(rec ? [rec.why] : []), ...c.reasons].filter((w) => !norm(w).includes(norm(reason)) && !norm(reason).includes(norm(w).replace(/^[a-z /]+: /, ''))),
+    leadOver: null,
     chosen: chosen.key === c.key,
     chosenBy: chosen.key === c.key ? chosen.by : null,
     action: c.action,
@@ -252,18 +258,27 @@ export function buildPeopleStack(r: OwnerResolution, opts: { chosenKey: string |
   // rows share a key). Any tie among them removes every ordinal: a "1" above unnumbered rows claims an order.
   const tie = visible.length >= 2 && visible.some((c, i, a) => i > 0 && sameKey(a[i - 1].rank, c.rank));
   const tiedKey = tie ? visible.find((c, i, a) => i > 0 && sameKey(a[i - 1].rank, c.rank))!.rank : null;
-  const tied = tiedKey ? eligible.filter((c) => sameKey(c.rank, tiedKey)) : [];
+  // The tie line names the people on screen first (General Mills named a hidden person while a visible one was tied).
+  const tiedAll = tiedKey ? eligible.filter((c) => sameKey(c.rank, tiedKey)) : [];
+  const tied = [...tiedAll.filter((c) => visibleKeys.has(c.key)), ...tiedAll.filter((c) => !visibleKeys.has(c.key))];
   const reasons = distinguish(visible);
   const rows = visible.map((c, i) => {
     const evidenceBacked = !tie && !chosenKey;
     return toRow(c, r, reasons[i], evidenceBacked ? i + 1 : null, { key: chosenKey, by: chosenBy });
   });
+  // WHY #1 OVER #2: on the first row, against the next visible eligible row, from the rank keys; never invented.
+  if (rows.length >= 2 && visible[0] && visible[1]) {
+    const lead = leadOver(visible[0], visible[1], r.purpose);
+    rows[0].leadOver = lead ? { over: visible[1].name, text: lead.text, tie: false, leads: lead.leads } : { over: visible[1].name, text: 'GAP cannot separate these two on current evidence.', tie: true, leads: false };
+  }
   const moreReasons = distinguish(rest);
   const more = rest.map((c, i) => toRow(c, r, moreReasons[i], null, { key: chosenKey, by: chosenBy }));
   const slotReasons = distinguish(slotPeople);
   const slots = slotPeople.map((c, i) => toRow(c, r, slotReasons[i], null, { key: chosenKey, by: chosenBy }));
 
   const hidden = rest.length;
+  // A hidden eligible person with a material currentness caution is said in the Show-more label, never silently hidden.
+  const hiddenCautions = rest.filter((c) => (c.role && ['ROLE_CHANGED_CONFIRMED', 'ROLE_CONFLICT'].includes(c.role.state)) || (c.employment && ['EMPLOYMENT_CONFLICT', 'LEFT_COMPANY_CONFIRMED'].includes(c.employment.state)) || !!c.caution).length;
   const setAsideCount = r.excluded.length + nameClash.length;
   // Nameless records are counted, never listed by a non-name ("(no name in HubSpot) (no name on record)").
   const setAsideNames = [...nameClash.map((c) => `${c.name} (another record of a set-aside name)`), ...r.excluded.filter((e) => e.code !== 'no_name').map((e) => `${e.candidate.name} (${SET_ASIDE_LABEL[e.code] ?? e.code.replace(/_/g, ' ')})`)];
@@ -278,7 +293,7 @@ export function buildPeopleStack(r: OwnerResolution, opts: { chosenKey: string |
     rows,
     hidden,
     // "Ranked lower on evidence" only when the order IS evidence; under a tie the rest are simply the rest.
-    showAllLabel: hidden ? (tie ? `Show ${hidden} more on record` : `Show ${hidden} more on record (ranked lower on evidence)`) : null,
+    showAllLabel: hidden ? `${tie ? `Show ${hidden} more on record` : `Show ${hidden} more on record (ranked lower on evidence)`}${hiddenCautions ? `, ${hiddenCautions} with a caution` : ''}` : null,
     tie,
     tieLine: tie ? `GAP could not separate ${tieWho} on evidence (the same responsibility, market and reachability); their order here is first-name order, not a ranking. Choose on what you know.` : null,
     chooseLabel: !chosenKey && eligible.length >= 2 ? `Choose who (${eligible.length})` : null,

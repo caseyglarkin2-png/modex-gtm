@@ -12,6 +12,9 @@ import { listQueue } from '../routing/queue';
 import { cockpitOpenHref } from '../routing/card-readiness';
 import { laneWithMotion, loadCockpitMotions } from '../motion/cockpit';
 import { loadMotionChoices } from '../motion/load';
+import { loadAnchorChoices } from '../motion/persona-angle';
+import { hypothesisSendable } from '../research/evidence-gate';
+import { EVIDENCE_SIGNAL_SELECT } from '../sequence/render';
 import { listReplies } from '../replies/list';
 import { loadOwnerResolution } from '../people/owner-resolution-load';
 import type { OwnerResolution } from '../people/owner-resolution';
@@ -28,8 +31,14 @@ export interface PursuitView {
   state: PursuitState;
   resolution: OwnerResolution | null;
   stack: PeopleStack | null;
-  /** The top grounded hypothesis the first touch would run on (the action pack's hypothesis), if any. */
+  /** The hypothesis the first touch runs on: the chosen person's recorded anchor (UX-06, Option A) when it is a grounded open thesis here, else the top grounded one. */
   hypothesisId: string | null;
+  /** The chosen person's recorded anchor choice, if any (even when no longer usable). */
+  anchorChoice: string | null;
+  /** The open theses whose opening the send gate would let out (null when the read failed: nothing is called usable). */
+  sendableTheses: Set<string> | null;
+  /** The usable theses (open, grounded, not under review, and ones the send gate would let out): the only openers. */
+  usableTheses: string[];
   /** The cockpit's ready first-touch card for this account (what loadReadyTarget returns), from the same queue read. */
   ready: ReadyTarget | null;
 }
@@ -75,7 +84,6 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
   const choice = choices.get(accountName) ?? null;
   const od = inputs.firstTouches.find((t) => t.state === 'draft outstanding') ?? null;
   const restriction = ctx.relationship.restriction;
-  const top = brief.hypotheses.find((h) => h.grounded && h.truth !== 'CONTRADICTED') ?? null;
 
   const input: PursuitInput = {
     accountName,
@@ -106,7 +114,29 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
   // reads "GAP: the only eligible person", never "Chosen by you" (trust review).
   const chosenKey = state.person?.chosenBy && (resolution?.eligible ?? []).some((c) => c.key === state.person!.key) ? state.person.key : null;
   const stack = resolution ? buildPeopleStack(resolution, { chosenKey, chosenBy: state.person?.chosenBy ?? null }) : null;
-  return { state, resolution, stack, hypothesisId: top?.id ?? null, ready: readyTargetOf(mine) };
+  // UX-06 (Option A): a recorded anchor choice switches the thesis the pack opens on, only to a grounded open thesis.
+  const anchors = state.person?.personaId ? await soft(loadAnchorChoices(prisma, [state.person.personaId]), new Map()) : new Map();
+  const anchorChoice: string | null = state.person?.personaId ? (anchors.get(state.person.personaId)?.hypothesisId ?? null) : null;
+  const openStatuses = new Set(['approved', 'active', 'confirmed', 'partially_confirmed']);
+  const anchored = anchorChoice ? brief.hypotheses.find((h) => h.id === anchorChoice && h.grounded && h.truth !== 'CONTRADICTED') ?? null : null;
+  const sendableTheses = await soft(loadSendableTheses(prisma, accountName, now), null);
+  // The pack opens on a USABLE thesis only (open, grounded, not under review, and one the send gate would let out),
+  // the same set the anchor block shows; the recorded choice wins when it is usable. An unread gate opens nothing.
+  const usable = (h: (typeof brief.hypotheses)[number] | null) => !!h && !!sendableTheses && sendableTheses.has(h.id) && h.needsReview.length === 0 && openStatuses.has(inputs.hypotheses.find((x) => x.id === h.id)?.status ?? '');
+  const anchoredOpen = usable(anchored) ? anchored : null;
+  const usableTheses = brief.hypotheses.filter((h) => h.grounded && h.truth !== 'CONTRADICTED' && usable(h)).map((h) => h.id);
+  const topUsable = brief.hypotheses.find((h) => usableTheses.includes(h.id)) ?? null;
+  return { state, resolution, stack, hypothesisId: anchoredOpen?.id ?? topUsable?.id ?? null, anchorChoice, sendableTheses, usableTheses, ready: readyTargetOf(mine) };
+}
+
+/** UX-06: the account's open theses whose opening the send gate would let out (the pack's own rule over the linked signals). */
+async function loadSendableTheses(prisma: PrismaLike, accountName: string, now: Date): Promise<Set<string>> {
+  const rows: Array<{ id: string; account_name: string; observation: string | null; signals: Array<{ role: string | null; signal: Record<string, unknown> | null }> }> = await prisma.prospectingHypothesis.findMany({
+    where: { account_name: accountName, superseded_by: { is: null }, status: { in: ['approved', 'active', 'confirmed', 'partially_confirmed', 'review_required'] } },
+    select: { id: true, account_name: true, observation: true, signals: { select: { role: true, signal: { select: EVIDENCE_SIGNAL_SELECT } } } },
+    take: 50,
+  });
+  return new Set(rows.filter((r) => hypothesisSendable(r as never, now)).map((r) => r.id));
 }
 
 /** The newest audited HUMAN persona assignment on one of the account's active hypotheses (owner resolution USE). */

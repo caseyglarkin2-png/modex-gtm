@@ -16,7 +16,6 @@ import { prisma } from '@/lib/prisma';
 import { isAuthorizedQueueAgent } from '@/lib/queue/agent-auth';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { callBrief } from '@/lib/gap/replies/brief';
-
 export const dynamic = 'force-dynamic';
 
 async function sessionEmail(): Promise<string | null> {

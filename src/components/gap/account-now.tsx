@@ -25,6 +25,8 @@ import { NoteControl } from '@/components/gap/note-control';
 import { AccountStoryView } from '@/components/gap/account-story';
 import { Tag } from '@/components/gap/seller-tag';
 import type { AccountStory } from '@/lib/gap/story/story';
+import type { OutreachAnchor } from '@/lib/gap/story/anchor';
+import { OutreachAnchorView } from '@/components/gap/outreach-anchor';
 import type { PeopleStack } from '@/lib/gap/people/stack';
 import type { PursuitState } from '@/lib/gap/pursuit/state';
 
@@ -39,6 +41,8 @@ export interface NowPursuit {
   excluded: SetAsidePerson[];
   /** UX-05: the derived Account Story (null when the page did not build one). */
   story?: AccountStory | null;
+  /** UX-06: the outreach anchor for the chosen person (null when the page did not build one). */
+  anchor?: OutreachAnchor | null;
 }
 
 const day = (s: string) => new Date(s).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' });
@@ -150,6 +154,10 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, 
             </PendingLink>
           ) : null}
         </div>
+
+        {pursuit?.anchor && (pursuit.state.coldTouchAllowed || pursuit.state.state === 'research' || pursuit.state.state === 'choose_person') ? (
+          <OutreachAnchorView accountName={v.name} anchor={pursuit.anchor} coldTouchAllowed={pursuit.state.coldTouchAllowed} />
+        ) : null}
 
         {pursuit?.story?.checkBeforeContacting.length ? (
           <ul className="space-y-1" data-testid="now-check-before" aria-label="Check before contacting">

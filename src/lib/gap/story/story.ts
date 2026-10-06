@@ -82,8 +82,8 @@ export interface StoryInput {
   clawdRead: 'ok' | 'unavailable' | 'not_configured';
   /** The vault's account note, when one exists (seller-visible, never quotable, never read aloud). */
   vaultNote: { text: string; at: string | null } | null;
-  /** The resolver's set-aside people (serializable), for the divested-unit rise. */
-  excluded: Array<{ key: string; name: string; title: string | null; code: string; reason: string }>;
+  /** The resolver's set-aside people (serializable), for the divested-unit rise; a first-party source when the company announced it. */
+  excluded: Array<{ key: string; name: string; title: string | null; code: string; reason: string; source?: { url: string; publisher: string; quote: string; publishedAt: string } | null }>;
 }
 
 export const STORY_LABEL: Record<StoryRowKey, string> = {
@@ -157,6 +157,7 @@ function fromLine(l: NowLine, accountName: string): StorySentence {
   if (tag === 'Checked' && BROKEN_MONEY.test(text)) {
     tag = 'Unverified';
     basis = `${basis}; the dollar figure does not parse, check the source before using it`;
+    text = text.replace(/\$\s?\d{1,3}(?:\.\d+)?(?=\s)/, '[figure unverified]');
   }
   return { text, tag, basis, basisIds: [l.id], cite: tag === 'Unverified' ? null : l.cite };
 }
@@ -236,11 +237,17 @@ export function projectStory(i: StoryInput): AccountStory {
     .map((l) => ({ l, s: line(l) }))
     .sort((a, b) => STRENGTH[a.s.tag] - STRENGTH[b.s.tag] || rank(a.l) - rank(b.l));
   const relevantExists = candidates.some((c) => rank(c.l) <= 4);
+  // What the company itself announced (the entity boundaries' first-party releases) and every checked line: an
+  // unverified report of the same deal is never told beside or instead of them.
+  const firstParty = i.excluded.map((e) => e.source?.quote).filter((q): q is string => !!q);
+  const checkedTexts = [...firstParty, ...catalysts.filter((x) => x.l.tag === 'Checked').map((x) => x.l.text)];
+  const reportedChecked = (text: string) => checkedTexts.some((t) => sameDeal(t, text, i.accountName) || sameProject(t, text, i.accountName));
   const changing: StorySentence[] = [];
   for (const c of candidates) {
     if (changing.length >= 2) break;
     // An incidental item (rank 5 and up: a uniform story, legal text) never leads over a network or site change.
     if (relevantExists && rank(c.l) >= 5) continue;
+    if (c.s.tag === 'Unverified' && reportedChecked(c.l.text)) continue;
     if (take(c.l.id, c.l.text)) changing.push(c.s);
   }
   if (changing.length) rows.push(row('changing', changing));
@@ -283,19 +290,40 @@ export function projectStory(i: StoryInput): AccountStory {
   // CHECK BEFORE CONTACTING: an Unverified sale or divestiture that names the chosen person's unit, and any
   // set-aside that rests on it.
   const checkBeforeContacting: StorySentence[] = [];
-  const divestSignals = catalysts.filter((x) => x.l.tag === 'Unverified' && DIVEST.test(x.l.text));
+  // A sale or divestiture on record: a checked line (or the company's own release) outranks a third party's report.
+  const divestLines = catalysts.filter((x) => DIVEST.test(x.l.text) && (x.l.tag === 'Unverified' || x.l.tag === 'Checked')).sort((a, b) => STRENGTH[a.l.tag] - STRENGTH[b.l.tag]);
   const p = i.state.person;
-  if (p && p.title && divestSignals.length) {
+  if (p && p.title && divestLines.length) {
     const phrases = unitPhrases(p.title, i.accountName);
-    for (const x of divestSignals) {
-      if (!names(x.l.text, phrases)) continue;
-      checkBeforeContacting.push({ text: `Check before contacting ${p.name}: ${sentence(x.l.text)} It names their unit (${p.title}) and is not verified.`, tag: 'Unverified', basis: x.l.basis, basisIds: [x.l.id] });
+    const hits = divestLines.filter((x) => names(x.l.text, phrases));
+    const best = hits.find((x) => x.l.tag === 'Checked') ?? hits[0];
+    if (best) {
+      const checked = best.l.tag === 'Checked';
+      checkBeforeContacting.push({ text: `Check before contacting ${p.name}: ${sentence(best.l.text)} It names their unit (${p.title})${checked ? '; confirm their employer before any touch' : ' and is not verified'}.`, tag: checked ? 'Checked' : 'Unverified', basis: best.l.basis, basisIds: [best.l.id] });
     }
   }
   const setAsideCaveats: StorySentence[] = [];
-  const byBacking = new Map<string, { backing: (typeof divestSignals)[number]; people: typeof i.excluded }>();
-  for (const e of i.excluded.filter((e) => e.code === 'divested_entity')) {
-    const backing = divestSignals.find((x) => names(x.l.text, unitPhrases(e.title, i.accountName)) || names(e.reason, unitPhrases(e.title, i.accountName)));
+  const named = (people: typeof i.excluded) => {
+    const n = people.slice(0, 3).map((e) => `${e.name}${e.title && people.length === 1 ? `, ${e.title}` : ''}`);
+    return people.length > 3 ? `${n.join(', ')} and ${people.length - 3} more` : n.length > 1 ? `${n.slice(0, -1).join(', ')} and ${n[n.length - 1]}` : n[0];
+  };
+  const divested = i.excluded.filter((e) => e.code === 'divested_entity');
+  // The company's own release: one Checked sentence per release, the set-aside stands on it.
+  const bySource = new Map<string, { source: NonNullable<(typeof divested)[number]['source']>; people: typeof i.excluded }>();
+  for (const e of divested) {
+    if (!e.source) continue;
+    const g = bySource.get(e.source.url) ?? { source: e.source, people: [] };
+    g.people.push(e);
+    bySource.set(e.source.url, g);
+  }
+  for (const { source, people } of bySource.values()) {
+    setAsideCaveats.push({ text: `${named(people)} ${people.length === 1 ? 'is' : 'are'} set aside as a divested unit: ${sentence(source.quote.replace(/\s*\((?:NYSE|NASDAQ)[^)]*\)/g, '').replace(/\btoday announced\b/, `announced on ${day(source.publishedAt)}`))}`, tag: 'Checked', basis: `${source.publisher}, ${day(source.publishedAt)}`, basisIds: [`first-party:${source.url}`, ...people.map((e) => `set-aside:${e.key}`)] });
+  }
+  // A set-aside with no first-party source: it rests on whatever report names the unit, said with that report's tag.
+  const unverifiedDivest = divestLines.filter((x) => x.l.tag === 'Unverified');
+  const byBacking = new Map<string, { backing: (typeof divestLines)[number]; people: typeof i.excluded }>();
+  for (const e of divested.filter((e) => !e.source)) {
+    const backing = unverifiedDivest.find((x) => names(x.l.text, unitPhrases(e.title, i.accountName)) || names(e.reason, unitPhrases(e.title, i.accountName)));
     if (!backing) continue;
     const g = byBacking.get(backing.l.id) ?? { backing, people: [] };
     g.people.push(e);
@@ -303,9 +331,7 @@ export function projectStory(i: StoryInput): AccountStory {
   }
   // People set aside on the same report are one sentence, never one per person.
   for (const { backing, people } of byBacking.values()) {
-    const named = people.slice(0, 3).map((e) => `${e.name}${e.title && people.length === 1 ? `, ${e.title}` : ''}`);
-    const who = people.length > 3 ? `${named.join(', ')} and ${people.length - 3} more` : named.length > 1 ? `${named.slice(0, -1).join(', ')} and ${named[named.length - 1]}` : named[0];
-    setAsideCaveats.push({ text: `${who} ${people.length === 1 ? 'is' : 'are'} set aside as a divested unit; that rests on an unverified report (${sentence(backing.l.text).replace(/\.$/, '')}).`, tag: 'Unverified', basis: backing.l.basis, basisIds: [backing.l.id, ...people.map((e) => `set-aside:${e.key}`)] });
+    setAsideCaveats.push({ text: `${named(people)} ${people.length === 1 ? 'is' : 'are'} set aside as a divested unit; that rests on an unverified report (${sentence(backing.l.text).replace(/\.$/, '')}).`, tag: 'Unverified', basis: backing.l.basis, basisIds: [backing.l.id, ...people.map((e) => `set-aside:${e.key}`)] });
   }
 
   const order: StoryRowKey[] = ['between_us', 'changing', 'yard'];

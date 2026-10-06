@@ -100,9 +100,14 @@ describe('<PreCallBrief>', () => {
 
   it('renders would-prove-wrong, last dispositions, open BIDs and suggested questions under their labels', () => {
     render(<PreCallBrief brief={brief()} />);
-    const proveWrong = screen.getByTestId('brief-prove-wrong');
-    expect(within(proveWrong).getByText(BRIEF_LABELS.wouldProveWrong)).toBeInTheDocument();
-    expect(within(proveWrong).getAllByRole('listitem')).toHaveLength(2);
+    // UX-06 re-check: "Would prove wrong" is said ONCE, inside the HYPOTHESIS block, with the thesis's own questions
+    // and the brief's statements together; the standalone block shows only when there is no hypothesis block.
+    expect(screen.queryByTestId('brief-prove-wrong')).toBeNull();
+    const block = screen.getByTestId('hypothesis-block');
+    expect(block.textContent?.match(/Would prove wrong/g)).toHaveLength(1);
+    expect(block).toHaveTextContent('Does Reno run its own gate with no dwell problem?');
+    expect(block).toHaveTextContent('Reno runs a separate gate with no queue.');
+    expect(block).toHaveTextContent('Detention is already near zero.');
 
     const dispositions = screen.getByTestId('brief-dispositions');
     expect(within(dispositions).getByText(BRIEF_LABELS.lastDispositions)).toBeInTheDocument();

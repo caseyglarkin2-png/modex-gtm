@@ -75,7 +75,7 @@ describe('FedEx pattern: a carrier ranks its network owners by the carrier doctr
   });
   it('a divested unit is set aside with the transaction named; a UK network VP is another region; finance and sales are never owners', () => {
     expect(r.excluded.find((e) => e.candidate.name === 'Scott Temple')).toMatchObject({ code: 'divested_entity' });
-    expect(r.excluded.find((e) => e.candidate.name === 'Scott Temple')?.reason).toMatch(/sold to CMA CGM on 2026-10-01/);
+    expect(r.excluded.find((e) => e.candidate.name === 'Scott Temple')?.reason).toMatch(/sale of FedEx Supply Chain .* to CMA CGM Group on October 1, 2026/);
     expect(r.excluded.find((e) => e.candidate.name === 'Alun Cornish')).toMatchObject({ code: 'other_region' });
     expect(r.eligible.map((c) => c.name)).not.toContain('Courtney Keen');
     expect(r.eligible.map((c) => c.name)).not.toContain('Chris Nichols');
