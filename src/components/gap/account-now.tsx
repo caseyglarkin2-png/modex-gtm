@@ -11,6 +11,22 @@ import { AddToGapButton } from '@/components/gap/add-to-gap-button';
 import { BlockedPeople } from '@/components/gap/blocked-people';
 import { EmploymentControl } from '@/components/gap/employment-control';
 import { OutstandingDraftPanel } from '@/components/gap/outstanding-draft-panel';
+import { PeopleStackView, type SetAsidePerson } from '@/components/gap/people-stack';
+import type { PeopleStack } from '@/lib/gap/people/stack';
+import type { PursuitState } from '@/lib/gap/pursuit/state';
+
+/**
+ * UX-03 (account-first): the pursuit state and the People Stack, when the page loaded them. The header, NEXT and the
+ * people read from this one state; the old WHO slot renders only when it is absent (older callers and tests).
+ */
+export interface NowPursuit {
+  state: PursuitState;
+  stack: PeopleStack | null;
+  hypothesisId: string | null;
+  excluded: SetAsidePerson[];
+}
+
+const day = (s: string) => new Date(s).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' });
 
 const TAG_TONE: Record<NowLine['tag'], string> = {
   'Buyer said': 'border-emerald-600 text-emerald-700 dark:text-emerald-400',
@@ -50,18 +66,29 @@ function Slot({ label, children, testId }: { label: string; children: React.Reac
   );
 }
 
-export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null }: { v: NowView; nextHref: string | null; nextLabel: string | null; links: Array<{ label: string; href: string; external?: boolean }>; mailbox?: string | null }) {
+export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, pursuit = null, nextText = null }: { v: NowView; nextHref: string | null; nextLabel: string | null; links: Array<{ label: string; href: string; external?: boolean }>; mailbox?: string | null; pursuit?: NowPursuit | null; nextText?: string | null }) {
+  // The state line keeps the entity and buyer type from the brief and takes the pursuit state for the rest.
+  const stateLine = pursuit ? [...v.stateLine.split(' · ').slice(0, 2), pursuit.state.stateLine, ...v.stateLine.split(' · ').filter((s) => /^Owner:/.test(s))].join(' · ') : v.stateLine;
+  const inbound = pursuit?.state.lastInbound ?? null;
   return (
     <div className="space-y-4" data-testid="account-now">
       <div className="space-y-1">
         <div className="flex items-start justify-between gap-2">
-          <p className="min-w-0 break-words text-sm text-[var(--muted-foreground)]" data-testid="now-state">{v.stateLine}</p>
+          <p className="min-w-0 break-words text-sm text-[var(--muted-foreground)]" data-testid="now-state" data-pursuit-state={pursuit?.state.state ?? undefined}>{stateLine}</p>
           <VoicePreviewButton text={v.listen} label="Listen" className="min-h-11 shrink-0 px-4" />
         </div>
         <p className="text-xs text-[var(--muted-foreground)]" data-testid="now-last-touch">
-          {v.lastTouch}
+          {inbound && inbound.kind !== 'human' && /their reply, below\.$/.test(v.lastTouch)
+            ? v.lastTouch.replace(/their reply, below\.$/, 'an automatic notice, below.')
+            : inbound && /^No touch on record\.?$/.test(v.lastTouch)
+              ? 'No GAP touch on record; the reply below answers an earlier email GAP did not send.'
+              : v.lastTouch}
         </p>
-        {v.lastReply ? (
+        {inbound ? (
+          <p className={`text-xs font-medium ${inbound.kind === 'human' ? 'text-sky-800 dark:text-sky-300' : inbound.kind === 'opt_out' ? 'text-red-700 dark:text-red-400' : 'text-[var(--muted-foreground)]'}`} data-testid="now-last-inbound" data-reply-class={inbound.kind}>
+            {inbound.label}: {inbound.who}, {day(inbound.at)}{pursuit?.state.replyClass && inbound.kind !== 'human' ? `. ${pursuit.state.replyClass.consequence}` : ''}
+          </p>
+        ) : v.lastReply ? (
           <p className="text-xs font-medium text-sky-800 dark:text-sky-300" data-testid="now-last-reply">
             {v.lastReply}
           </p>
@@ -74,8 +101,11 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null }
       </div>
 
       <div className="rounded-md border border-[var(--primary)] px-3 py-2" data-testid="now-next">
-        <p className="text-xs font-semibold uppercase tracking-wide text-[var(--primary)]">Next</p>
-        <p className="text-sm font-medium">{v.next.text}</p>
+        <h2 className="text-xs font-semibold uppercase tracking-wide text-[var(--primary)]">Next</h2>
+        <p className="text-sm font-medium">{nextText ?? v.next.text}</p>
+        {pursuit?.state.blocker && pursuit.state.state !== 'research' && pursuit.state.state !== 'replied' && pursuit.state.state !== 'opted_out' ? (
+          <p className="mt-1 text-xs text-amber-700 dark:text-amber-400" data-testid="now-blocker">{pursuit.state.blocker}</p>
+        ) : null}
         {nextHref && nextLabel ? (
           <PendingLink href={nextHref} className="mt-1 inline-flex min-h-11 items-center text-sm font-semibold underline" data-testid="now-next-control">
             {nextLabel}
@@ -83,6 +113,12 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null }
         ) : null}
       </div>
 
+      {pursuit?.stack ? (
+        <>
+          <PeopleStackView accountName={v.name} stack={pursuit.stack} state={pursuit.state} hypothesisId={pursuit.hypothesisId} excluded={pursuit.excluded} />
+          {v.blocked?.length ? <BlockedPeople accountName={v.name} people={v.blocked} /> : null}
+        </>
+      ) : (
       <Slot label="Who" testId="now-who">
         {v.who ? (
           <div className="text-sm">
@@ -151,6 +187,7 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null }
           </ul>
         ) : null}
       </Slot>
+      )}
 
       {v.outstandingDraft ? <OutstandingDraftPanel recipient={v.outstandingDraft.recipient} name={v.outstandingDraft.name} decisionId={v.outstandingDraft.decisionId} gmailDraftId={v.outstandingDraft.gmailDraftId} createdAt={v.outstandingDraft.createdAt} mailbox={mailbox} /> : null}
 

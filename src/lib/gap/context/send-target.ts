@@ -21,15 +21,19 @@ export interface ReadyTarget {
   headline: string;
 }
 
+/** The ready target from an already-loaded account motion (UX-03: the pursuit loader reads the queue once for both). */
+export function readyTargetOf(mine: { state: string; primary: { name: string; title: string | null; cardId: string | null } | null; headline: string } | null | undefined): ReadyTarget | null {
+  const p = mine?.state === 'ready' ? mine.primary : null;
+  if (!p?.cardId) return null;
+  return { name: p.name, title: p.title, href: cockpitOpenHref('ready', p.cardId), headline: mine!.headline };
+}
+
 export async function loadReadyTarget(prisma: PrismaLike, accountName: string, now: Date, deps: { motions?: typeof loadCockpitMotions; list?: typeof listQueue } = {}): Promise<ReadyTarget | null> {
   try {
     const q = await (deps.list ?? listQueue)(prisma, { accountName, limit: 200 });
     if (!q.items.length) return null;
     const m = await (deps.motions ?? loadCockpitMotions)(prisma, q.items, now);
-    const mine = m.motions.find((x) => x.accountName === accountName);
-    const p = mine?.state === 'ready' ? mine.primary : null;
-    if (!p?.cardId) return null;
-    return { name: p.name, title: p.title, href: cockpitOpenHref('ready', p.cardId), headline: mine!.headline };
+    return readyTargetOf(m.motions.find((x) => x.accountName === accountName));
   } catch {
     return null;
   }

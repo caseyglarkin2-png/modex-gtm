@@ -30,6 +30,8 @@ type Load = { state: 'loading' } | { state: 'error'; text: string } | { state: '
 
 /** Only the top candidates whose role nobody has verified offer VERIFY CURRENT ROLE: never on render, one click, one bounded check. */
 const VERIFY_TOP = 3;
+/** UX-03: the default rows before "Show N more" (the People Stack's default plus one, the analyst path). */
+const PANEL_DEFAULT_ROWS = 5;
 
 const STEP_LABEL: Record<string, string> = { import: 'Add to GAP', check: 'Check', assign: 'Attach', activate: 'Use in routing', route: 'Route' };
 
@@ -51,6 +53,8 @@ export function OwnerResolutionPanel({ hypothesisId, accountName, onChanged }: O
   const [reviewing, setReviewing] = useState<number | null>(null);
   const [open, setOpen] = useState<Set<string>>(new Set());
   const [glossary, setGlossary] = useState(false);
+  // UX-03 (account-first): the top few by default, the rest one labelled, counted step away; never a wall of 53.
+  const [showAllEligible, setShowAllEligible] = useState(false);
   const toggleOpen = (key: string) => setOpen((prev) => { const next = new Set(prev); if (next.has(key)) next.delete(key); else next.add(key); return next; });
 
   async function fetchResolution() {
@@ -119,6 +123,12 @@ export function OwnerResolutionPanel({ hypothesisId, accountName, onChanged }: O
   const summaryOf = (c: OwnerCandidate) => c.reasons.filter((why) => /^(Primary operator|Adjacent operator|Facility \/ yard operator|Executive sponsor|Transformation \/ technology|Thesis fit)/.test(why));
   const detailsOf = (c: OwnerCandidate) => c.reasons.filter((why) => !summaryOf(c).includes(why));
   const groups = groupExcluded(r.excluded);
+  // The default rows (the chosen person always among them) and the tie rule from the resolver's own rank keys.
+  const chosenRow = chosen ? r.eligible.find((c) => c.key === chosen) ?? null : null;
+  const head = r.eligible.slice(0, PANEL_DEFAULT_ROWS);
+  const shown = showAllEligible ? r.eligible : chosenRow && !head.some((c) => c.key === chosenRow.key) ? [...head, chosenRow] : head;
+  const sameRank = (a?: number[], b?: number[]) => !!a && !!b && a.length === b.length && a.every((v, k) => v === b[k]);
+  const tie = shown.some((c, i, a) => i > 0 && sameRank(a[i - 1].rank, c.rank));
 
   return (
     <section data-testid="owner-resolution" data-next-step={r.nextStep} className="mt-4 space-y-3 rounded-md border border-[var(--primary)] p-3 text-sm">
@@ -146,14 +156,21 @@ export function OwnerResolutionPanel({ hypothesisId, accountName, onChanged }: O
 
       {r.eligible.length ? (
         <fieldset className="space-y-2" data-testid="owner-candidates">
-          <legend className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Best people on record ({r.eligible.length})</legend>
-          {r.eligible.map((c, i) => (
+          <legend className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">
+            {shown.length < r.eligible.length ? `Best people on record (top ${shown.length} of ${r.eligible.length})` : `Best people on record (${r.eligible.length})`}
+          </legend>
+          {tie ? (
+            <p className="text-xs text-[var(--muted-foreground)]" data-testid="owner-tie">
+              GAP could not separate these people on evidence (the same responsibility, market and reachability); the order is name order. Choose on what you know.
+            </p>
+          ) : null}
+          {shown.map((c, i) => (
             <label key={c.key} className={`block cursor-pointer rounded-md border p-2 ${chosen === c.key ? 'border-[var(--primary)] bg-[var(--muted)]/40' : 'border-[var(--border)]'}`} data-testid="owner-candidate" data-key={c.key}>
               <div className="flex items-start gap-2">
-                <input type="radio" name={`owner-${hypothesisId}`} value={c.key} checked={chosen === c.key} onChange={() => setChosen(c.key)} className="mt-1" aria-label={`Choose ${c.name}`} />
+                <input type="radio" name={`owner-${hypothesisId}`} value={c.key} checked={chosen === c.key} onChange={() => setChosen(c.key)} className="mt-1 h-6 w-6" aria-label={`Choose ${c.name}${c.title ? `, ${c.title}` : ''}`} aria-describedby={`owner-why-${c.key}`} />
                 <div className="min-w-0 flex-1">
                   <p className="font-medium">
-                    {i + 1}. {c.name}
+                    {tie ? '' : `${i + 1}. `}{c.name}
                     {c.title ? <span className="font-normal text-[var(--muted-foreground)]">, {c.title}</span> : null}
                     {c.action === 'add_then_use' ? <span className="ml-2 rounded-sm border border-[var(--border)] px-1 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--muted-foreground)]">HubSpot only</span> : null}
                     {r.recommended?.key === c.key ? (
@@ -167,14 +184,14 @@ export function OwnerResolutionPanel({ hypothesisId, accountName, onChanged }: O
                       {r.recommended.why}
                     </p>
                   ) : null}
-                  <ul className="mt-0.5 space-y-0.5 text-xs text-[var(--muted-foreground)]">
+                  <ul id={`owner-why-${c.key}`} className="mt-0.5 space-y-0.5 text-xs text-[var(--muted-foreground)]">
                     {summaryOf(c).map((why) => (
                       <li key={why}>{why}</li>
                     ))}
                   </ul>
                   {c.caution ? <p className="mt-1 text-xs text-amber-700 dark:text-amber-400">{c.caution}</p> : null}
                   <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">
-                    <button type="button" className="text-[11px] underline text-[var(--muted-foreground)]" onClick={(e) => { e.preventDefault(); toggleOpen(c.key); }} data-testid="owner-candidate-details">
+                    <button type="button" className="inline-flex min-h-6 items-center text-[11px] underline text-[var(--muted-foreground)]" onClick={(e) => { e.preventDefault(); toggleOpen(c.key); }} data-testid="owner-candidate-details">
                       {open.has(c.key) ? 'Hide details' : `Details${c.location ? ` (${c.location})` : ''}`}
                     </button>
                   </div>
@@ -197,6 +214,11 @@ export function OwnerResolutionPanel({ hypothesisId, accountName, onChanged }: O
               </div>
             </label>
           ))}
+          {r.eligible.length > shown.length || showAllEligible ? (
+            <button type="button" className="inline-flex min-h-9 items-center text-xs underline" aria-expanded={showAllEligible} onClick={() => setShowAllEligible((v) => !v)} data-testid="owner-show-all">
+              {showAllEligible ? 'Show fewer' : `Show ${r.eligible.length - shown.length} more on record (ranked lower on evidence)`}
+            </button>
+          ) : null}
         </fieldset>
       ) : (
         <div className="rounded-md border border-dashed border-[var(--border)] p-2" data-testid="owner-not-resolved">
