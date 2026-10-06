@@ -11,11 +11,12 @@
  */
 import { leadOver, type OwnerCandidate, type OwnerResolution } from './owner-resolution';
 import { geoPhrase, isSponsor } from './person-prior';
+import { preferenceLine, type PreferenceKind, type SellerPreference } from './seller-preference';
 
 export const STACK_DEFAULT_MAX = 3;
 export const STACK_MIN = 3;
 
-export type PursuitSlot = 'Next operator' | 'Eligible operator' | 'Tech / transformation' | 'Executive sponsor' | 'Site / regional operator' | 'Relationship route';
+export type PursuitSlot = 'Next operator' | 'Next if no response' | 'Eligible operator' | 'Tech / transformation' | 'Executive sponsor' | 'Site / regional operator' | 'Relationship route';
 
 export interface StackRow {
   key: string;
@@ -52,6 +53,12 @@ export interface StackRow {
    * not: it unlocks by a meeting, a referral or the seller's explicit choice, never as a cold first touch.
    */
   coldEligible: boolean;
+  /** UX-07: the seller set this person aside here (not a fit / not now until a date); they live in "Show more". */
+  preference: { kind: PreferenceKind; line: string } | null;
+  /** UX-07: the motion's NEXT IF NO RESPONSE person (the seller's Make next, or the motion's own pick). */
+  isNext: boolean;
+  /** UX-07: the motion can line this person up as next (they hold a ready email card at the account). */
+  canBeNext: boolean;
 }
 
 /** Plain words for the set-aside reasons (the same vocabulary the owner panel groups by). */
@@ -102,7 +109,7 @@ const sameKey = (a: number[] | undefined, b: number[] | undefined) => !!a && !!b
  * single preselection); every other eligible person is "Eligible operator", never a positional "second" that claims
  * an order the evidence may not hold.
  */
-function slotOf(c: OwnerCandidate, r: OwnerResolution, chosenKey: string | null): PursuitSlot {
+function slotOf(c: OwnerCandidate, r: OwnerResolution, chosenKey: string | null, isNext = false): PursuitSlot {
   if (r.sponsor && r.sponsor.key === c.key) return 'Executive sponsor';
   if (r.tech && r.tech.key === c.key) return 'Tech / transformation';
   if (r.site && r.site.key === c.key) return 'Site / regional operator';
@@ -110,7 +117,7 @@ function slotOf(c: OwnerCandidate, r: OwnerResolution, chosenKey: string | null)
   if (c.read.lane === 'TRANSFORMATION_TECH') return 'Tech / transformation';
   if (c.read.lane === 'FACILITY_OPERATOR') return 'Site / regional operator';
   if (isSponsor(c.read, c.title)) return 'Executive sponsor';
-  return chosenKey === c.key ? 'Next operator' : 'Eligible operator';
+  return chosenKey === c.key ? 'Next operator' : isNext ? 'Next if no response' : 'Eligible operator';
 }
 
 const shortLocation = (s: string | null) => (s ? s.replace(/,\s*United States$/i, '') : null);
@@ -203,16 +210,25 @@ function currentnessOf(c: OwnerCandidate): string | null {
   return parts.length ? parts.join('. ') : null;
 }
 
-function toRow(c: OwnerCandidate, r: OwnerResolution, reason: string, ordinal: number | null, chosen: { key: string | null; by: string | null }): StackRow {
+interface RowContext {
+  nextPersonaId: number | null;
+  preferences: ReadonlyMap<number, SellerPreference>;
+  nextCandidates: ReadonlySet<number>;
+}
+
+function toRow(c: OwnerCandidate, r: OwnerResolution, reason: string, ordinal: number | null, chosen: { key: string | null; by: string | null }, ctx: RowContext): StackRow {
   const rec = r.recommended && r.recommended.key === c.key ? r.recommended : null;
   const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  const pref = c.personaId !== null ? ctx.preferences.get(c.personaId) ?? null : null;
+  const isNext = c.personaId !== null && c.personaId === ctx.nextPersonaId && chosen.key !== c.key && !pref;
+  const canBeNext = c.personaId !== null && chosen.key !== c.key && !pref && ctx.nextCandidates.has(c.personaId);
   return {
     key: c.key,
     personaId: c.personaId,
     hubspotContactId: c.hubspotContactId,
     name: c.name,
     title: c.title,
-    slot: slotOf(c, r, chosen.key),
+    slot: slotOf(c, r, chosen.key, isNext),
     ordinal,
     badge: rec ? `Recommended: ${rec.firstDifference}` : null,
     reason,
@@ -226,11 +242,18 @@ function toRow(c: OwnerCandidate, r: OwnerResolution, reason: string, ordinal: n
     action: c.action,
     caution: c.caution,
     coldEligible: r.eligible.some((e) => e.key === c.key),
+    preference: pref ? { kind: pref.kind, line: preferenceLine(pref) } : null,
+    isNext,
+    canBeNext,
   };
 }
 
-export function buildPeopleStack(r: OwnerResolution, opts: { chosenKey: string | null; chosenBy?: string | null; max?: number }): PeopleStack {
+export function buildPeopleStack(
+  r: OwnerResolution,
+  opts: { chosenKey: string | null; chosenBy?: string | null; max?: number; /** UX-07 */ preferences?: ReadonlyMap<number, SellerPreference>; nextPersonaId?: number | null; /** UX-07: the people the motion could line up as next (its waiting ready cards). */ nextCandidates?: ReadonlySet<number> },
+): PeopleStack {
   const max = Math.max(STACK_MIN, opts.max ?? STACK_DEFAULT_MAX);
+  const ctx: RowContext = { nextPersonaId: opts.nextPersonaId ?? null, preferences: opts.preferences ?? new Map(), nextCandidates: opts.nextCandidates ?? new Set() };
   // A name set aside as do not contact, unsubscribed, opted out or left at this account is never offered as a row
   // under another record of the same person (H-E-B: a duplicate Troy Shaw record was eligible beside the flagged
   // one). The send gates would refuse; the page must not offer it either. The hidden record is said in the set-aside.
@@ -241,8 +264,14 @@ export function buildPeopleStack(r: OwnerResolution, opts: { chosenKey: string |
   const chosenBy = opts.chosenKey && chosenKey === opts.chosenKey ? opts.chosenBy ?? 'you' : chosenKey ? 'GAP: the only eligible person' : null;
   const chosenMissing = opts.chosenKey && !eligible.some((c) => c.key === opts.chosenKey) ? `Your chosen person is no longer among the eligible people at ${r.account.name} (set aside or left). Choose again.` : null;
 
+  // UX-07: a person the seller set aside here (not a fit / not now) leaves the default rows for "Show more", with
+  // the seller's own line; the chosen person is never parked under their own choice. Eligibility itself is untouched:
+  // a preference reorders or hides among the eligible and never loosens a safety set-aside.
+  const parked = eligible.filter((c) => c.personaId !== null && ctx.preferences.has(c.personaId) && c.key !== chosenKey);
+  const parkedKeys = new Set(parked.map((c) => c.key));
+  const active = eligible.filter((c) => !parkedKeys.has(c.key));
   // The chosen person leads; everyone else keeps the resolver's order.
-  const ordered = chosenKey ? [eligible.find((c) => c.key === chosenKey)!, ...eligible.filter((c) => c.key !== chosenKey)] : [...eligible];
+  const ordered = chosenKey ? [active.find((c) => c.key === chosenKey)!, ...active.filter((c) => c.key !== chosenKey)] : [...active];
   // Slots the resolver named (sponsor / tech / site) are worth a row when they are not already in the top rows and
   // when the default rows have room: never a manufactured slot, never beyond the cap.
   // The default rows are eligible people only (the resolver's order, the chosen person first). The named slots
@@ -264,7 +293,7 @@ export function buildPeopleStack(r: OwnerResolution, opts: { chosenKey: string |
   const reasons = distinguish(visible);
   const rows = visible.map((c, i) => {
     const evidenceBacked = !tie && !chosenKey;
-    return toRow(c, r, reasons[i], evidenceBacked ? i + 1 : null, { key: chosenKey, by: chosenBy });
+    return toRow(c, r, reasons[i], evidenceBacked ? i + 1 : null, { key: chosenKey, by: chosenBy }, ctx);
   });
   // WHY #1 OVER #2: on the first row, against the next visible eligible row, from the rank keys; never invented.
   if (rows.length >= 2 && visible[0] && visible[1]) {
@@ -272,11 +301,12 @@ export function buildPeopleStack(r: OwnerResolution, opts: { chosenKey: string |
     rows[0].leadOver = lead ? { over: visible[1].name, text: lead.text, tie: false, leads: lead.leads } : { over: visible[1].name, text: 'GAP cannot separate these two on current evidence.', tie: true, leads: false };
   }
   const moreReasons = distinguish(rest);
-  const more = rest.map((c, i) => toRow(c, r, moreReasons[i], null, { key: chosenKey, by: chosenBy }));
+  const parkedReasons = distinguish(parked);
+  const more = [...rest.map((c, i) => toRow(c, r, moreReasons[i], null, { key: chosenKey, by: chosenBy }, ctx)), ...parked.map((c, i) => toRow(c, r, parkedReasons[i], null, { key: chosenKey, by: chosenBy }, ctx))];
   const slotReasons = distinguish(slotPeople);
-  const slots = slotPeople.map((c, i) => toRow(c, r, slotReasons[i], null, { key: chosenKey, by: chosenBy }));
+  const slots = slotPeople.map((c, i) => toRow(c, r, slotReasons[i], null, { key: chosenKey, by: chosenBy }, ctx));
 
-  const hidden = rest.length;
+  const hidden = rest.length + parked.length;
   // A hidden eligible person with a material currentness caution is said in the Show-more label, never silently hidden.
   const hiddenCautions = rest.filter((c) => (c.role && ['ROLE_CHANGED_CONFIRMED', 'ROLE_CONFLICT'].includes(c.role.state)) || (c.employment && ['EMPLOYMENT_CONFLICT', 'LEFT_COMPANY_CONFIRMED'].includes(c.employment.state)) || !!c.caution).length;
   const setAsideCount = r.excluded.length + nameClash.length;
@@ -293,10 +323,10 @@ export function buildPeopleStack(r: OwnerResolution, opts: { chosenKey: string |
     rows,
     hidden,
     // "Ranked lower on evidence" only when the order IS evidence; under a tie the rest are simply the rest.
-    showAllLabel: hidden ? `${tie ? `Show ${hidden} more on record` : `Show ${hidden} more on record (ranked lower on evidence)`}${hiddenCautions ? `, ${hiddenCautions} with a caution` : ''}` : null,
+    showAllLabel: !hidden ? null : rest.length === 0 ? `Show ${parked.length} set aside by you` : `${tie ? `Show ${hidden} more on record` : `Show ${rest.length} more on record (ranked lower on evidence)`}${hiddenCautions ? `, ${hiddenCautions} with a caution` : ''}${parked.length ? `, ${parked.length} set aside by you` : ''}`,
     tie,
     tieLine: tie ? `GAP could not separate ${tieWho} on evidence (the same responsibility, market and reachability); their order here is first-name order, not a ranking. Choose on what you know.` : null,
-    chooseLabel: !chosenKey && eligible.length >= 2 ? `Choose who (${eligible.length})` : null,
+    chooseLabel: !chosenKey && active.length >= 2 ? `Choose who (${active.length})` : null,
     chosenMissing,
     setAside: { count: setAsideCount, line: setAsideLine },
     more,

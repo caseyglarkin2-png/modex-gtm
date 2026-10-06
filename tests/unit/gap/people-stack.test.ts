@@ -172,3 +172,46 @@ describe('UX-04 review: the currentness cue is short', () => {
     expect(s.rows[0].currentness).not.toMatch(/Recent evidence confirms/);
   });
 });
+
+describe('UX-07: the seller preference and the next person', () => {
+  const r = resolveOwner(base({ candidates: [gap(1, 'Doug Estrada', 'Senior Director - Regional Transportation - Logistics'), gap(2, 'Kelly Kruse', 'Regional Transportation Director'), gap(3, 'Sam Ortiz', 'Director, Transportation Maintenance'), gap(4, 'Pat Lee', 'Senior Director - Regional Transportation')] }));
+  const pref = (personaId: number, kind: 'not_a_fit' | 'not_now', until: string | null = null) => ({ personaId, accountName: 'Acme Retail', kind, reason: 'buys software', until, by: 'casey@freightroll.com', at: '2026-10-05T00:00:00Z' });
+  it('a person set aside by the seller leaves the default rows for Show more with the seller line; eligibility is untouched', () => {
+    const s = buildPeopleStack(r, { chosenKey: null, preferences: new Map([[3, pref(3, 'not_a_fit')]]) });
+    expect(s.rows.map((x) => x.name)).not.toContain('Sam Ortiz');
+    const parked = s.more.find((x) => x.name === 'Sam Ortiz')!;
+    expect(parked.preference).toEqual({ kind: 'not_a_fit', line: 'Not a fit here (buys software), you, Oct 4.' });
+    expect(parked.coldEligible).toBe(true);
+    expect(s.hidden).toBe(1);
+    expect(s.showAllLabel).toMatch(/1 set aside by you$/);
+    expect(s.chooseLabel).toBe('Choose who (3)');
+    expect(s.rows.every((x) => x.preference === null)).toBe(true);
+  });
+  it('the chosen person is never parked under their own preference; Not now carries its date', () => {
+    const s = buildPeopleStack(r, { chosenKey: 'gap:1', chosenBy: 'you, Oct 5', preferences: new Map([[1, pref(1, 'not_now', '2026-11-05T12:00:00Z')], [2, pref(2, 'not_now', '2026-11-05T12:00:00Z')]]) });
+    expect(s.rows[0].name).toBe('Doug Estrada');
+    expect(s.rows[0].chosen).toBe(true);
+    expect(s.rows[0].preference?.line).toBe('Not now until Nov 5 (buys software), you, Oct 4.');
+    expect(s.more.find((x) => x.name === 'Kelly Kruse')?.preference?.kind).toBe('not_now');
+  });
+  it('Make next is offered only where the motion can line the person up; a parked person is never next nor a candidate', () => {
+    const s = buildPeopleStack(r, { chosenKey: 'gap:1', chosenBy: 'you, Oct 5', nextCandidates: new Set([2, 3]), preferences: new Map([[3, pref(3, 'not_a_fit')]]), nextPersonaId: 3 });
+    const by = (n: string) => [...s.rows, ...s.more].find((x) => x.name === n)!;
+    expect(by('Kelly Kruse').canBeNext).toBe(true);
+    expect(by('Pat Lee').canBeNext).toBe(false);
+    expect(by('Sam Ortiz').canBeNext).toBe(false);
+    expect(by('Sam Ortiz').isNext).toBe(false);
+    expect(by('Doug Estrada').canBeNext).toBe(false);
+    expect(s.showAllLabel).toBe('Show 1 set aside by you');
+  });
+  it('the motion next person reads Next if no response, never on the chosen person; nobody else claims it', () => {
+    const s = buildPeopleStack(r, { chosenKey: 'gap:1', chosenBy: 'you, Oct 5', nextPersonaId: 2 });
+    const kelly = [...s.rows, ...s.more].find((x) => x.name === 'Kelly Kruse')!;
+    expect(kelly.isNext).toBe(true);
+    expect(kelly.slot).toBe('Next if no response');
+    expect(s.rows[0].slot).toBe('Next operator');
+    expect([...s.rows, ...s.more].filter((x) => x.isNext)).toHaveLength(1);
+    const same = buildPeopleStack(r, { chosenKey: 'gap:1', chosenBy: 'you, Oct 5', nextPersonaId: 1 });
+    expect(same.rows[0].isNext).toBe(false);
+  });
+});

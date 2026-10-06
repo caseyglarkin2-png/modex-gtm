@@ -87,7 +87,9 @@ export type GapAuditKind =
   | 'suppression.correction_refused'
   | 'suppression.correction_reverted'
   // A GAP record's name fragment completed from its own linked HubSpot contact (never a HubSpot write).
-  | 'person.record_corrected';
+  | 'person.record_corrected'
+  // UX-07 (contract 5.6): the seller's own priority at one account (not a fit / not now / clear), stricter never looser.
+  | 'person.seller_preference';
 
 export interface HypothesisEventInput {
   hypothesisId: string;

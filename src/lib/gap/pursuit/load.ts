@@ -13,6 +13,7 @@ import { cockpitOpenHref } from '../routing/card-readiness';
 import { laneWithMotion, loadCockpitMotions } from '../motion/cockpit';
 import { loadMotionChoices } from '../motion/load';
 import { loadAnchorChoices } from '../motion/persona-angle';
+import { loadSellerPreferences } from '../people/seller-preference';
 import { hypothesisSendable } from '../research/evidence-gate';
 import { EVIDENCE_SIGNAL_SELECT } from '../sequence/render';
 import { listReplies } from '../replies/list';
@@ -50,12 +51,13 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
   const { brief, inputs, ctx, now } = args;
   const accountName = inputs.account.name;
 
-  const [resolutionRes, queue, choices, assigned, repliesPage] = await Promise.all([
+  const [resolutionRes, queue, choices, assigned, repliesPage, preferences] = await Promise.all([
     soft(loadOwnerResolution(prisma, { accountName, purpose: 'COLD_FIRST_TOUCH', now }), null),
     soft(listQueue(prisma, { accountName, limit: 200 }), { items: [], asOf: null } as unknown as Awaited<ReturnType<typeof listQueue>>),
     soft(loadMotionChoices(prisma, [accountName]), new Map()),
     soft(loadAssignedPersona(prisma, accountName), null),
     soft(listReplies(prisma, { state: 'all', limit: 200 }), { items: [], nextCursor: null }),
+    soft(loadSellerPreferences(prisma, accountName, now), new Map()),
   ]);
   const resolution = resolutionRes && 'ok' in resolutionRes && resolutionRes.ok ? resolutionRes.resolution : null;
 
@@ -113,7 +115,9 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
   // Only a HUMAN choice is passed as chosen (chosenBy set); a lone eligible person is the resolver's preselection and
   // reads "GAP: the only eligible person", never "Chosen by you" (trust review).
   const chosenKey = state.person?.chosenBy && (resolution?.eligible ?? []).some((c) => c.key === state.person!.key) ? state.person.key : null;
-  const stack = resolution ? buildPeopleStack(resolution, { chosenKey, chosenBy: state.person?.chosenBy ?? null }) : null;
+  // UX-07: the seller's set-asides and the motion's NEXT IF NO RESPONSE person travel with the stack.
+  const nextCandidates = new Set<number>([...(mine?.alsoWaiting ?? []).map((p) => p.personaId), ...(mine?.next ? [mine.next.personaId] : [])]);
+  const stack = resolution ? buildPeopleStack(resolution, { chosenKey, chosenBy: state.person?.chosenBy ?? null, preferences, nextPersonaId: mine?.next?.personaId ?? null, nextCandidates }) : null;
   // UX-06 (Option A): a recorded anchor choice switches the thesis the pack opens on, only to a grounded open thesis.
   const anchors = state.person?.personaId ? await soft(loadAnchorChoices(prisma, [state.person.personaId]), new Map()) : new Map();
   const anchorChoice: string | null = state.person?.personaId ? (anchors.get(state.person.personaId)?.hypothesisId ?? null) : null;
