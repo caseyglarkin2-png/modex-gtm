@@ -42,6 +42,14 @@ export const GROUNDED_PAGES_PER_ASK = 8;
  */
 export const GROUNDED_QUEUE_PER_RUN = 4;
 export const GROUNDED_QUEUE_PER_DAY = 40;
+/** R21: the signal row's source class (GapSignal.source_class vocabulary) a grounded class implies, when the host alone could not say. */
+export const SOURCE_CLASS_OF_GROUNDED: Readonly<Record<string, string>> = {
+  'company newsroom': 'company_site',
+  'SEC filing': 'sec_filing',
+  'job posting or hiring': 'job_posting',
+  'procurement or RFP': 'procurement',
+  'vendor or customer case study': 'vendor',
+};
 export const MATERIAL_CLASSES: ReadonlySet<string> = new Set([
   'company newsroom',
   'SEC filing',
@@ -250,13 +258,17 @@ export async function runGroundedDiscovery(
       // The class it was found for and the search's date CLAIM (never a publication date) ride on the signal.
       const named = textNamesAccount(realTitle ?? '', key) || p.aliases.some((a) => textNamesAccount(realTitle ?? '', normalizeCompany(a)));
       if (!named) res.mayBeRelevant += 1;
-      const row: { metadata: Record<string, unknown> | null } | null = await prisma.gapSignal.findUnique({ where: { id: r.signal.id }, select: { metadata: true } }).catch(() => null);
+      const row: { metadata: Record<string, unknown> | null; source_class?: string | null } | null = await prisma.gapSignal.findUnique({ where: { id: r.signal.id }, select: { metadata: true, source_class: true } }).catch(() => null);
       // R25: material, named, dated by the page itself, within this run's and today's budget: queued for the bounded
       // background research. Everything else stays a signal Casey sees.
       const cls = page.cls || classes[0];
+      // R21: the source class the page was found AS (a job board, a procurement notice, a filing, the company's own
+      // site, a vendor page) is kept on the row itself when the host alone could only say "news".
+      const mappedClass = SOURCE_CLASS_OF_GROUNDED[cls] ?? null;
+      const sourceClass = mappedClass && (!row?.source_class || row.source_class === 'news' || row.source_class === 'other') ? mappedClass : null;
       const queue = named && !unread && live.ok && !!live.publishedAt && MATERIAL_CLASSES.has(cls) && res.queued < GROUNDED_QUEUE_PER_RUN && queuedToday < GROUNDED_QUEUE_PER_DAY;
       await prisma.gapSignal
-        .update({ where: { id: r.signal.id }, data: { ...(queue ? { research_status: 'queued' } : {}), metadata: { ...((row?.metadata ?? {}) as Record<string, unknown>), grounded: { cls, claimedDate: live.ok && live.publishedAt ? null : page.date, mayBeRelevant: !named, ...(unread ? { unread: true } : {}), ...(queue ? { queuedAt: opts.now.toISOString() } : {}) } } } })
+        .update({ where: { id: r.signal.id }, data: { ...(queue ? { research_status: 'queued' } : {}), ...(sourceClass ? { source_class: sourceClass } : {}), metadata: { ...((row?.metadata ?? {}) as Record<string, unknown>), grounded: { cls, claimedDate: live.ok && live.publishedAt ? null : page.date, mayBeRelevant: !named, ...(unread ? { unread: true } : {}), ...(queue ? { queuedAt: opts.now.toISOString() } : {}) } } } })
         .catch(() => undefined);
       if (queue) {
         res.queued += 1;

@@ -942,6 +942,32 @@ three-attempt dead letter (`no_usable_fact` with `researchAttempts`); bounded he
 "may be relevant" page, an unread page and a search-dated page are never queued. Pinned in
 `grounded-discovery.test.ts`. No automatic communication, no contact enrichment, no spend beyond the research the
 cron already runs.
+R21 **Source provenance and identity (VERIFIED, one addition).** Intake already keeps the canonical final URL
+(`url_hash`), the page's own title and publication date, the retrieval time, the origin, the resolution basis
+(explicit, named in source, alias, domain, discovery query, human), the grounded class and the search's date claim
+apart from the page's date; a claim keeps its verbatim span, its speaker (`speakerOrg`), its event date when stated
+and its account/division mapping through the governed aliases and family links (owner resolution). Added: a grounded
+page found AS a job board, a procurement notice, a filing, the company's own site or a vendor page keeps that
+`source_class` on its row when the host alone could only say "news". Family research (PBNA / Frito-Lay with PepsiCo)
+runs through the existing alias and family-people reads; namesakes and sold subsidiaries stay unresolved by the
+existing identity rules; no frozen fact is rewritten.
+R22 / R23 **Job, procurement and other claims as their own types (DONE at the verifier).**
+`research/claim-types.ts` classifies a verified sentence as physical_change (the existing first-touch path),
+job_posting (role; open / closed / reposted / unknown only when stated), procurement (due date and issuer when
+stated), technology, partnership, leadership (appointed / departed) or financial / other, each with its permitted
+interpretation and forbidden leap (the mandate's table). The verifier (`research/run.ts`) now admits a job,
+procurement, technology, partnership or leadership sentence that is verbatim at its source, dated and the account's
+own statement (the speaker rule and the account-as-subject rule unchanged), and mints it with its `claim_class` and
+`claimType` / `claimAttributes`; a finance line and an unclassified sentence are not minted. The outreach evidence
+gate is unchanged: only a physical-network change is first-touch evidence (`not_a_physical_network_change` for the
+rest), so nothing widens until R30's purpose policy says what each type may support. Pinned by `claim-types.test.ts`
+and `research-claim-admission.test.ts`; the twelve existing research and evidence suites stay green (206 tests).
+R24 **Events and temporal meaning (VERIFIED existing, recorded).** `signals/cluster.ts` already groups a press
+release, a wire copy and a trade rewrite into one event (`event_id`) at the same account within four days by shared
+specific words, keeping every source; `research/continuity.ts` tracks ongoing / event / ended and a newer contrary
+source marks a fact superseded (the gate refuses it); contradictions are recorded by `research/conflicts.ts`. Not
+built: an explicit pending / announced / active / completed state machine over events (carried as debt; the
+continuity read covers ended and contradicted).
 
 ## 12. Migration, backfill and rollback
 
