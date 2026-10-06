@@ -267,8 +267,10 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
           {stack.slots.map((row) => (
             <li key={row.key} className="flex flex-wrap items-baseline gap-x-2" data-testid="people-stack-slot" data-slot={row.slot}>
               <span className="rounded-sm border border-[var(--border)] px-1 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--muted-foreground)]">{row.slot}</span>
-              <span className="font-medium">{row.name}</span>
-              {row.title ? <span className="text-[var(--muted-foreground)]">, {row.title}</span> : null}
+              <span>
+                <span className="font-medium">{row.name}</span>
+                {row.title ? <span className="text-[var(--muted-foreground)]">, {row.title}</span> : null}
+              </span>
               <span className="text-[var(--muted-foreground)]">(not a cold first touch)</span>
               <button type="button" className={TEXT} aria-expanded={open.has(row.key)} aria-controls={`why-${row.key}`} aria-label={open.has(row.key) ? `Hide why ${row.name}` : `Why ${row.name}?`} onClick={() => toggle(row.key)} data-testid="people-stack-why">
                 {open.has(row.key) ? 'Hide why' : 'Why?'}
