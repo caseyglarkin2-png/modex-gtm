@@ -33,10 +33,14 @@ export function VoicePreviewButton({ text, label = 'Listen', className, wrapperC
   const [loading, setLoading] = useState(false);
   const [state, setState] = useState<'idle' | 'playing' | 'paused'>('idle');
   const mine = useRef<{ audio: HTMLAudioElement; url: string } | null>(null);
+  // A load that finishes after the button unmounted (a route change mid-load) never plays with no control.
+  const alive = useRef(true);
 
   // Unmount: stop and release this button's audio; never leave playback with no control.
   useEffect(() => {
+    alive.current = true;
     return () => {
+      alive.current = false;
       if (mine.current) {
         if (current && current.audio === mine.current.audio) current = null;
         release(mine.current);
@@ -70,6 +74,7 @@ export function VoicePreviewButton({ text, label = 'Listen', className, wrapperC
         throw new Error(err.error || 'Voice preview failed');
       }
       const blob = await res.blob();
+      if (!alive.current) return;
       const url = URL.createObjectURL(blob);
       const audio = new Audio(url);
       // One player: stop whatever else is playing before this starts.

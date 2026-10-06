@@ -15,6 +15,7 @@ import { assertGapEnabled } from '@/lib/gap/flags';
 import { listRecentCaptures } from '@/lib/gap/capture/store';
 import { GapSubnav } from '@/components/gap/gap-subnav';
 import { CaptureFlow } from '@/components/gap/capture-flow';
+import { transcriptionProvider } from '@/lib/gap/voice/transcribe';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Capture' };
@@ -35,7 +36,7 @@ export default async function CapturePage({ searchParams }: { searchParams?: Pro
         <h1 className="text-2xl font-semibold tracking-tight">Capture buyer truth</h1>
         <p className="mt-1 text-sm text-[var(--muted-foreground)]">Right after the conversation. GAP keeps your note as written and suggests what might be buyer truth; only what you confirm counts.</p>
       </div>
-      <CaptureFlow initialAccount={initialAccount} />
+      <CaptureFlow initialAccount={initialAccount} dictate={transcriptionProvider() !== 'disabled'} />
       {recent.length ? (
         <section className="space-y-2" data-testid="capture-recent">
           <h2 className="text-sm font-semibold">Recent notes</h2>

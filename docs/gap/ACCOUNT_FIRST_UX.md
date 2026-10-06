@@ -1026,6 +1026,29 @@ Validation: `tests/unit/gap/ask-gap.test.tsx` (the context's contents and exclus
 action pattern answered by the control, plain questions not, the answer tidy, the box's POST and rendering, the
 outage line); tsc and eslint clean. Live answers on PepsiCo, FedEx and NFI: section 9 (Train B).
 
+## 6o. UX-14 implementation record (2026-10-06): usability, accessibility and perceived speed
+
+What shipped (the measured long pole is the account read: 25 to 65 s on a cold account; Work's cockpit read is
+about 25 s):
+
+1. **Work remembers its read** (`lib/gap/work/cache.ts`): the cockpit read is kept per instance for two minutes
+   (one in-flight read shared; Refresh at `?fresh=1` bypasses); the cards are built at render over the live pursuit
+   summaries, so a workspace visit shows on the next Work load without a re-read; the heading says "Read 40s ago.
+   Refresh". `src/app/gap/loading.tsx` says what is loading at once.
+2. **The account page streams** (`accounts/[slug]/page.tsx`): the shell answers at once with the name and, when a
+   pursuit summary is at most 15 minutes old (a visit or the Work warmer), the last known state, NEXT and the person
+   ("As read 3 min ago; the full page is loading."), then the full read streams in below (`Suspense`). Navigation to
+   decision-grade content is immediate on a warm account and unchanged on a cold one.
+3. **390 collisions and targets**: the Work list clears the floating Note and mail pills; the chips are 44 px tall on
+   a phone; the Done/Next position sits on its own line; the searches take their own row (Train A).
+4. **Not in UX-14**: splitting the brief read itself (the long pole stays a single HubSpot-live read; an
+   infrastructure change the policy excludes); skip-by-account and speed in the player.
+
+Validation: `tests/unit/gap/work-cache.test.ts` (one read inside the TTL, a shared in-flight read, Refresh, a failed
+read leaves nothing, the age words); the Work and account view suites green; tsc and eslint clean. The measured
+numbers (navigation to first useful content, to decision-grade content, Work first and repeat load) are in 7.5 with
+the Train C gate.
+
 ## 7. Task baselines and post-change measurements
 
 Baseline measured on production 2026-10-05 (SHA 54c11c57) through the rig; clicks counted on the shortest path a seller
@@ -1471,6 +1494,21 @@ amber 5.1 / 11.5 in light / dark).
 | FedEx NEXT printed its family-hold paragraph twice | NICE | FIXED: a held account's blocker is NEXT already, never repeated |
 | The head of the list moved across loads as the warmer rewrote states (cockpit lanes then the canonical read) | NICE | LEAVE, said in 6i.6: the canonical read wins as it arrives (at most two accounts a minute); the frozen order keeps Done/Next stable for the seller |
 | 390: the Note pill and the mail button sit over card buttons | NICE | CARRIED to UX-14 (fixed-element collisions) |
+| Re-check: the workspace remembered its summary before NEXT was computed (why line missing on the main path); a summary up to 15 minutes old could overwrite a reply that landed after it; why and blocker could be the same sentence | SHOULD | FIXED before the merge: NEXT is remembered with the state; the reply card stands unless the summary itself says replied or opted out; the blocker is never the why |
+
+### 8.13 Train B review (one fresh read-only seller + trust reviewer for voice, Dictate and Ask GAP, 2026-10-06)
+
+| Finding | Severity | Disposition |
+|---|---|---|
+| A fact marked not for outreach (or from imagery, unverified, contradicted, or under DO NOT USE) reached the ear and Ask GAP as "checked": PepsiCo's Maryland layoffs were about to be spoken after the Gatik opening | BLOCKER | FIXED: a fact row speaks, and reaches Ask's context, only when it may be cited to the buyer; the DO NOT USE texts are excluded by name; pinned with not-for-outreach, imagery and unverified lines in both suites |
+| Ask decided "no buyer input" from buyer inputs alone, so a replied account with no recorded input was told the buyer had not spoken, and the guard then stripped the true sentence | BLOCKER | FIXED: a human reply is buyer input in the context; the prompt line and the guard stand down when any is present; the guard now catches "Jenny said" and "they told us" too, and judges sentence by sentence |
+| The "Still unknown" trim deleted the sentence after it (Next lost; an orphan Caution); the caution was said twice (why they care and NEXT); "Role likely" was spoken as verified; a tie was spoken as a ranking; Today's headline counted 11 of 27 | SHOULD | FIXED: sections are dropped whole and Next always stays; NEXT drops the caution when why they care carries it; only a confirmed role is verified; a tie reads "GAP could not separate the first people on evidence; in first-name order"; every kind is counted |
+| The player could play with no control when the audio arrived after a route change mid-load | SHOULD | FIXED: a load that finishes after unmount never plays |
+| Dictate's Confirm and Edit replaced words already typed; leaving the page mid-recording posted the audio (a paid call once enabled) | SHOULD | FIXED: the transcript is added after the typed words; unmount discards and the stop handler never posts; pinned |
+| Plain reads matched the action patterns ("What did we send them?", "Who is flagged do not contact?") | SHOULD | FIXED: a question word opens a read (unless "can you send ..."); pinned |
+| Ask GAP sat between NEXT and the opening story (285 px at 390) | SHOULD | FIXED: after the people; collapsed behind one line on a phone |
+| A quote the screen cut mid-sentence was spoken as a finished fact; "cards" and "below" are screen talk; spokenPerson hard-coded FedEx and PepsiCo; the API fallback context lacked the story beside the anchor | NICE | FIXED: a cut quote ends at its last full sentence; people, not cards; "follow", not "below"; the company suffix is stripped by the account's own name; the fallback uses the story beside the anchor |
+| Dictate's aria-pressed is always false; "Read it back" is not built; no Media Session; nothing was played on a phone | NICE | CARRIED (section 10): aria-pressed reads true while transcribing; Read it back and Media Session wait for the ear test on a phone |
 
 ## 9. Validation record
 
@@ -1522,6 +1560,12 @@ DPR 1 before UX-15 compares against this baseline. The text dumps and JS metrics
 | UX-06 | production smoke (rig Chrome, Casey's live session, read-only, 820) | FedEx account: NEXT carries the remit caution naming Lisa Lisson; the opening story is the active Network 2.0 thesis; two draftable facts. Walmart call 2235: the opt-out said first, no opener, no questions, the recorder stays. General Mills call 7: "Research: the angle needs your review" and "No opener until the thesis is usable". FedEx call 2234: the caution above the FACT block, questions shown | 4 of 4 pages agree with the send gate and NEXT; no overflow |
 
 | UX-07 | production smoke (rig Chrome, read-only, 820) | FedEx: the eligible row carries "Set aside or correct" and the Next-if-silent control where the motion can honour it; Walmart (opted out): no control | 3b3a063f in production |
+
+| Train A (UX-08, UX-09, UX-10) | merge | PR #406 merged 2026-10-06 as f2fc7e32 (tip 6817cc47; the READY preview is dpl_CZJy6iFKBMmRb3EfgrcH9vVoFdXp on b9d2926a and dpl_HfQR6v9gHzKbPCbxkdSEJdHsrFZP on b9a671f6; the tip's own build sat BUILDING with no events for 21 minutes and differs by one test file) | production receipt below |
+| Train A | browser check (local build, 820 and 390; two Work loads so the parity warmer shows) | Work: 27 cards, the chips are the contents, Open carries the order; Done/Next: "Account 1 of 27", Next account, Back to Work focuses the card; Accounts: 760 GAP accounts, the first 60 shown, "gen mills" finds General Mills, focus on arrival; deep links fall back to Back to Work; no overflow at either width | the first check found the opt-out heading the list, FedEx reading research on its card and a 1,708-row index; all fixed (8.12) |
+| Train A | one fresh seller + product review, then one focused re-check | two BLOCKERs and seven SHOULDs fixed (8.12); the re-check: SHIP with two follow-ups (the workspace's summary carries NEXT; a stale summary never overwrites a later reply), both landed before the merge | |
+
+| Train B (UX-11, UX-12, UX-13) | browser check (local build, 820 and 390; the TTS request captured, never played) | Listen to today beside the Work heading (103 words: "Today. 27 accounts need you: 11 in a deal or held. First, PepsiCo: research..."); Listen on PepsiCo 137 words, FedEx 213, NFI 110, each opening on the state and the last touch with the tags spoken; Ask GAP on NFI answered in 12 s with the trust words; Dictate off on Capture ("Dictate is off until transcription spend is approved..."); no overflow at either width | two defects found and fixed before the review: a question ran the full account read (PepsiCo and FedEx answered nothing inside 30 s; the page now remembers its context), and NFI's answer attributed words to an empty buyer record (a prompt line and a guard now drop an invented "the buyer said") |
 
 ## 10. Debt classification (recorded debt audited 2026-10-05)
 

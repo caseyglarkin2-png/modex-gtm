@@ -11,6 +11,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { filterWork, WORK_FILTER_LABEL, WORK_FILTERS, workCounts, type WorkCard, type WorkFilter } from '@/lib/gap/work/list';
 import { saveWorkOrder } from '@/lib/gap/work/order';
+import { VoicePreviewButton } from '@/components/voice-preview-button';
 import { accountHref, accountSlug } from '@/lib/gap/account-intel/href';
 
 const BTN = 'inline-flex min-h-11 items-center justify-center rounded-md px-3 text-sm font-medium';
@@ -33,7 +34,7 @@ function isFilter(v: string | null): v is WorkFilter {
   return !!v && (WORK_FILTERS as readonly string[]).includes(v);
 }
 
-export function WorkList({ cards, focus }: { cards: WorkCard[]; /** The account (slug) to focus on arrival (Back to Work). */ focus?: string | null }) {
+export function WorkList({ cards, focus, listenText = null }: { cards: WorkCard[]; /** The account (slug) to focus on arrival (Back to Work). */ focus?: string | null; /** UX-11: the spoken brief for today (lib/gap/voice/today.ts), played on a press only. */ listenText?: string | null }) {
   const router = useRouter();
   const params = useSearchParams();
   const [filter, setFilter] = useState<WorkFilter>(isFilter(params.get('filter')) ? (params.get('filter') as WorkFilter) : 'all');
@@ -64,7 +65,10 @@ export function WorkList({ cards, focus }: { cards: WorkCard[]; /** The account 
   return (
     <section className="space-y-3" data-testid="work-list" aria-labelledby="work-heading">
       <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-        <h2 id="work-heading" className="text-lg font-semibold">Work</h2>
+        <div className="flex items-center gap-3">
+          <h2 id="work-heading" className="text-lg font-semibold">Work</h2>
+          {listenText ? <VoicePreviewButton text={listenText} label="Listen to today" className="min-h-11 px-4" /> : null}
+        </div>
         <p className="text-xs text-[var(--muted-foreground)]">{cards.length === 1 ? '1 account needs you' : `${cards.length} accounts need you`}, in order. Counts are what the list holds.</p>
       </div>
       <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Filter the work by state">

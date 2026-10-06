@@ -16,6 +16,7 @@ import { useEffect, useState } from 'react';
 import { BID_TYPES } from '@/lib/gap/taxonomy';
 import type { CaptureView } from '@/lib/gap/capture/store';
 import { buyerSpeakers } from '@/lib/gap/capture/extract';
+import { Dictate } from './dictate';
 
 const OFFLINE = 'no connection. Try again when you have signal.';
 const NOTE_DRAFT_KEY = 'gap-capture-unsaved-note';
@@ -309,8 +310,10 @@ function LinkNote({ capture, onChange }: { capture: CaptureView; onChange: (c: C
   );
 }
 
-export function CaptureFlow({ initial = null, initialAccount = null }: { initial?: CaptureView | null; initialAccount?: string | null }) {
+export function CaptureFlow({ initial = null, initialAccount = null, dictate = false }: { initial?: CaptureView | null; initialAccount?: string | null; /** UX-12: transcription is on for this deployment (off until the spend is approved). */ dictate?: boolean }) {
   const [capture, setCapture] = useState<CaptureView | null>(initial);
+  // UX-12: what GAP heard, editable, confirmed before anything is written.
+  const [heard, setHeard] = useState<string | null>(null);
   const [q, setQ] = useState('');
   const [found, setFound] = useState<{ accounts: string[]; people: Person[] }>({ accounts: [], people: [] });
   // Opened from an account page ("Log what happened"): the account is already chosen (Casey can still clear it).
@@ -351,7 +354,7 @@ export function CaptureFlow({ initial = null, initialAccount = null }: { initial
     }
   }, [text]);
 
-  async function save() {
+  async function save(rawText: string = text) {
     setSaving(true);
     setError(null);
     let res: Response;
@@ -359,7 +362,7 @@ export function CaptureFlow({ initial = null, initialAccount = null }: { initial
       res = await fetch('/api/gap/captures', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ accountName: account, accountHint: account ? null : q.trim() || null, personaId, context, rawText: text }),
+        body: JSON.stringify({ accountName: account, accountHint: account ? null : q.trim() || null, personaId, context, rawText }),
       });
     } catch {
       setSaving(false);
@@ -448,6 +451,29 @@ export function CaptureFlow({ initial = null, initialAccount = null }: { initial
           </button>
         ))}
       </div>
+      {/* UX-12: Dictate records and transcribes; nothing is written until Confirm below (the existing Save). */}
+      <Dictate enabled={dictate} onTranscript={(t) => setHeard(t)} />
+      {heard !== null ? (
+        <section className="space-y-2 rounded-md border border-[var(--primary)] p-3" data-testid="dictate-review" aria-labelledby="dictate-heard-label">
+          <label id="dictate-heard-label" htmlFor="dictate-heard" className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">I heard</label>
+          <textarea id="dictate-heard" data-testid="dictate-heard" className={`${input} min-h-[8rem]`} value={heard} onChange={(e) => setHeard(e.target.value)} />
+          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">I am about to record</p>
+          <ul className="text-sm" data-testid="dictate-about">
+            <li>Account: {account ?? (q.trim() ? `unlinked (hint "${q.trim()}")` : 'unlinked')}</li>
+            <li>Person: {personaId !== null ? (acctCtx?.people.find((p) => p.id === personaId)?.name ?? `person ${personaId}`) : 'account level'}</li>
+            <li>Conversation: {CONTEXTS.find(([k]) => k === context)?.[1] ?? context}</li>
+            <li>Note: {heard.trim() ? `"${heard.trim().slice(0, 160)}${heard.trim().length > 160 ? '...' : ''}"` : 'empty'}</li>
+          </ul>
+          <p className="text-xs text-[var(--muted-foreground)]">Confirm saves this as the note, exactly as it reads above{text.trim() ? ', after what you already typed' : ''}, through the same path as Save. Nothing is sent to anyone.</p>
+          <div className="flex flex-wrap gap-2">
+            <button type="button" className={primary} disabled={saving || !heard.trim()} data-testid="dictate-confirm" onClick={() => { const t = text.trim() ? `${text.trim()}\n${heard.trim()}` : heard.trim(); setText(t); setHeard(null); void save(t); }}>
+              {saving ? 'Saving...' : 'Confirm'}
+            </button>
+            <button type="button" className={btn} data-testid="dictate-edit" onClick={() => { setText((t) => (t.trim() ? `${t.trim()}\n${heard}` : heard)); setHeard(null); document.querySelector<HTMLTextAreaElement>('[data-testid="capture-text"]')?.focus(); }}>Edit in the note</button>
+            <button type="button" className={btn} data-testid="dictate-discard" onClick={() => setHeard(null)}>Discard</button>
+          </div>
+        </section>
+      ) : null}
       <textarea
         aria-label="What the buyer said"
         data-testid="capture-text"
