@@ -23,7 +23,7 @@ export function DoneNext({ slug, index }: { slug: string; index: number | null }
   }, [index, slug]);
   return (
     <nav className="flex flex-wrap items-center gap-2 rounded-md border border-[var(--border)] px-3 py-2" aria-label="Work order" data-testid="done-next" data-position={links.position ? `${links.position.n}/${links.position.of}` : 'none'}>
-      <p className="min-w-0 flex-1 text-xs text-[var(--muted-foreground)]" data-testid="done-next-position">
+      <p className="min-w-0 basis-full text-xs text-[var(--muted-foreground)] sm:basis-auto sm:flex-1" data-testid="done-next-position">
         {links.position ? `Account ${links.position.n} of ${links.position.of} in Work.${links.next ? '' : ' The last one.'}` : 'Opened from Work.'}
       </p>
       {links.back ? (

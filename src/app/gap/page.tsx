@@ -43,8 +43,9 @@ import { Breadcrumb } from '@/components/breadcrumb';
 import { GapSubnav } from '@/components/gap/gap-subnav';
 import { GapCockpit, NextUp, type CockpitLane } from '@/components/gap/gap-cockpit';
 import { buildNextUpCandidates, heldAccountsOf, pickNextUpV2 } from '@/lib/gap/routing/next-up';
-import { buildWorkList, type WorkCard } from '@/lib/gap/work/list';
+import { buildWorkList, type WorkCard, type WorkInput } from '@/lib/gap/work/list';
 import { readPursuitSummaries, warmPursuitSummaries } from '@/lib/gap/pursuit/summary';
+import { agoText as readAgo, cachedRead } from '@/lib/gap/work/cache';
 import { todayListenText } from '@/lib/gap/voice/today';
 import { WorkList } from '@/components/gap/work-list';
 import { laneWithMotion, loadCockpitMotions, type CockpitMotions } from '@/lib/gap/motion/cockpit';
@@ -160,16 +161,15 @@ async function loadCockpit() {
     else if (it.ruleId === 'active_opportunity' && !heldWhy.has(it.account.name)) heldWhy.set(it.account.name, 'active_opportunity');
   }
   const workAccounts = [...new Set([...candidates.map((c) => c.accountName).filter((x): x is string => !!x), ...repliesPage.items.map((r) => r.accountName), ...inDeals.accounts.map((a) => a.accountName)])];
-  const work: WorkCard[] = buildWorkList({
+  // The pieces the Work cards are built from; the cards themselves are built at render over the live pursuit summaries.
+  const workInput: Omit<WorkInput, 'summaries'> = {
     now,
     candidates,
-    // The canonical pursuit state where it was read recently (the workspace, or the warmer below); else the lanes.
-    summaries: readPursuitSummaries(workAccounts, now),
     replies: repliesPage.items.map((r) => ({ accountName: r.accountName, contactEmail: r.contactEmail, subject: r.subject, snippet: r.snippet, receivedAt: r.receivedAt })),
     motions: motion.motions.map((m) => ({ accountName: m.accountName, state: m.state, primary: m.primary ? { name: m.primary.name, title: m.primary.title } : null, next: m.next ? { name: m.next.name, title: m.next.title, unlock: m.next.unlock } : null })),
     inDeals: { status: inDeals.status, accounts: inDeals.accounts.map((a) => ({ accountName: a.accountName, deals: a.deals.map((d) => ({ name: d.name, stage: d.stage })) })) },
     held: heldWhy,
-  });
+  };
 
   const routableHypotheses = 'tooLarge' in routableScope ? 0 : routableScope.hypothesesCount;
   const routableAccounts = 'tooLarge' in routableScope ? routableScope.accountCount : routableScope.accountNames.length;
@@ -184,7 +184,8 @@ async function loadCockpit() {
     },
     inDeals,
     next,
-    work,
+    workInput,
+    workAccounts,
     groups: reviewGroups,
     readyOneOffIds,
     researchGroups,
@@ -337,7 +338,7 @@ async function InDealsLane({ summary, open }: { summary: InDealsSummary; open: s
   );
 }
 
-export default async function GapCockpitPage({ searchParams }: { searchParams?: Promise<{ lane?: string; open?: string; account?: string; filter?: string; q?: string; focus?: string }> }) {
+export default async function GapCockpitPage({ searchParams }: { searchParams?: Promise<{ lane?: string; open?: string; account?: string; filter?: string; q?: string; focus?: string; fresh?: string }> }) {
   if (assertGapEnabled('GAP_ROUTING_ENABLED')) notFound();
 
   const session = await auth();
@@ -346,11 +347,17 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
   const params = (await searchParams) ?? {};
   const lane = (params.lane && LANES.has(params.lane) ? params.lane : null) as CockpitLane | null;
   const openId = params.open?.trim() || null;
-  const data = await loadCockpit();
+  // UX-14: the cockpit read is remembered for two minutes per instance (Refresh bypasses); the Work cards are built
+  // now over the live pursuit summaries, so a workspace visit shows on the next Work load without a re-read.
+  const fresh = params.fresh === '1';
+  const read = await cachedRead('cockpit', loadCockpit, { fresh });
+  const data = read.value;
+  const now = new Date();
+  const work: WorkCard[] = buildWorkList({ ...data.workInput, now, summaries: readPursuitSummaries(data.workAccounts, now) });
   // UX-08 parity: after the response is sent, read the canonical pursuit state for the first few Work accounts
   // that have none remembered (serial, bounded, never blocking a render), so the next Work load says what the
   // workspace says.
-  if (!lane) after(() => warmPursuitSummaries(prisma, data.work.filter((c) => c.source === 'cockpit').map((c) => c.accountName)).catch(() => []));
+  if (!lane) after(() => warmPursuitSummaries(prisma, work.filter((c) => c.source === 'cockpit').map((c) => c.accountName)).catch(() => []));
 
   // The opened card's action pack, built on the server from the same component as the deep link.
   let openPanel: React.ReactNode = null;
@@ -409,8 +416,8 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
       ) : (
         <>
           {/* UX-08: WORK is the landing: the accounts that need the seller, one card each, the lanes as filters. */}
-          <WorkList cards={data.work} focus={/^[a-z0-9-]{1,120}$/.test(params.focus ?? '') ? (params.focus as string) : null} listenText={todayListenText(data.work)} />
-          {data.work.length === 0 ? <NextUp items={data.next} /> : null}
+          <WorkList cards={work} focus={/^[a-z0-9-]{1,120}$/.test(params.focus ?? '') ? (params.focus as string) : null} listenText={todayListenText(work)} readAt={{ at: read.at, label: read.fromCache ? `Read ${readAgo(read.at, now)}` : 'Read just now' }} />
+          {work.length === 0 ? <NextUp items={data.next} /> : null}
         </>
       )}
 
