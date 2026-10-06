@@ -87,7 +87,7 @@ function Slot({ label, children, testId }: { label: string; children: React.Reac
   );
 }
 
-export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, pursuit = null, nextText = null, doneNext = null, askGap = null }: { v: NowView; nextHref: string | null; nextLabel: string | null; links: Array<{ label: string; href: string; external?: boolean }>; mailbox?: string | null; pursuit?: NowPursuit | null; nextText?: string | null; /** UX-09: the Done, next bar when the account was opened from Work. */ doneNext?: React.ReactNode; /** UX-13: the read-only Ask GAP box, after the people. */ askGap?: React.ReactNode }) {
+export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, pursuit = null, nextText = null, doneNext = null, askGap = null, workItems = null }: { v: NowView; nextHref: string | null; nextLabel: string | null; links: Array<{ label: string; href: string; external?: boolean }>; mailbox?: string | null; pursuit?: NowPursuit | null; nextText?: string | null; /** UX-09: the Done, next bar when the account was opened from Work. */ doneNext?: React.ReactNode; /** UX-13: the read-only Ask GAP box, after the people. */ askGap?: React.ReactNode; /** R42: the incoming message with its prepared notes and the account's obligations, right after NEXT. */ workItems?: React.ReactNode }) {
   // The state line keeps the entity and buyer type from the brief and takes the pursuit state for the rest.
   const stateLine = pursuit ? [...v.stateLine.split(' · ').slice(0, 2), pursuit.state.stateLine, ...v.stateLine.split(' · ').filter((s) => /^Owner:/.test(s))].join(' · ') : v.stateLine;
   // UX-05: when the story's between-us row carries the last email and the reply, the header does not say them again
@@ -154,6 +154,8 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, 
             </PendingLink>
           ) : null}
         </div>
+        {/* R42: the message to answer and every obligation here, right after NEXT. */}
+        {workItems}
         {/* UX-09: Done, next (only when opened from Work): the order, Back, Next account, Back to Work. */}
         {doneNext}
 

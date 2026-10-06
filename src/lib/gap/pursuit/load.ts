@@ -17,7 +17,7 @@ import { loadAnchorChoices } from '../motion/persona-angle';
 import { loadSellerPreferences } from '../people/seller-preference';
 import { hypothesisSendable } from '../research/evidence-gate';
 import { EVIDENCE_SIGNAL_SELECT } from '../sequence/render';
-import { listReplies } from '../replies/list';
+import { listReplies, type ReplyItem } from '../replies/list';
 import { loadOwnerResolution } from '../people/owner-resolution-load';
 import type { OwnerResolution } from '../people/owner-resolution';
 import { buildPeopleStack, type PeopleStack } from '../people/stack';
@@ -43,6 +43,8 @@ export interface PursuitView {
   usableTheses: string[];
   /** The cockpit's ready first-touch card for this account (what loadReadyTarget returns), from the same queue read. */
   ready: ReadyTarget | null;
+  /** R42: the account's replies from the reply list (newest first, twins collapsed), for the reply panel. */
+  replyItems: ReplyItem[];
 }
 
 /** "Reply from Courtney Keen: I am in the office but ..." (context/context.ts projectHistory). */
@@ -165,7 +167,7 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
     ? queue.items.find((it) => EMAIL_ACTIONS.has(it.action) && it.persona?.id === state.person!.personaId && laneWithMotion(it, held, thesisHeld) === 'ready') ?? null
     : null;
   const ready = readyTargetOf(mine) ?? (readyCard ? { name: state.person!.name, title: state.person!.title, href: cockpitOpenHref('ready', readyCard.id), headline: `Ready: ${state.person!.name}.` } : null);
-  return { state, resolution, stack, hypothesisId: anchoredOpen?.id ?? topUsable?.id ?? null, anchorChoice, sendableTheses, usableTheses, ready };
+  return { state, resolution, stack, hypothesisId: anchoredOpen?.id ?? topUsable?.id ?? null, anchorChoice, sendableTheses, usableTheses, ready, replyItems: repliesPage.items.filter((x) => x.accountName === accountName) };
 }
 
 /** UX-06: the account's open theses whose opening the send gate would let out (the pack's own rule over the linked signals). */

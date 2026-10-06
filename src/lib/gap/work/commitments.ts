@@ -29,7 +29,8 @@ import { parseSteps } from '../sequence/steps';
 import { SEED_DELAYS_BUSINESS_DAYS } from '../sequences/families';
 import { DIRECT_SENT, DRAFT_SENT, DRAFT_SUBJECT_TYPE, DRAFTED, MANUAL_SENT } from '../execution/draft-ledger';
 import { personStepKey } from '../execution/person-history';
-import { nyDay, nyDayAt } from './dates';
+import { dayLabel, nyDay, nyDayAt, parseReturnDate } from './dates';
+import { classifyReply } from '../replies/classify';
 import {
   COMMITMENT_EVENT,
   COMMITMENT_KINDS,
@@ -479,6 +480,50 @@ export async function syncFollowUpsFromLedger(prisma: PrismaLike, now: Date, opt
       const t = await transitionCommitment(prisma, { commitmentId: c.commitmentId, to: 'done', proof: { kind: 'ledger', id: s.eventId, note: `Touch ${s.stepIndex + 1} went out ${nyDay(s.sentAt)}.` }, actor: 'gap:work', now }).catch(() => null);
       if (t?.ok) out.closed += 1;
     }
+  }
+  return out;
+}
+
+/**
+ * An out-of-office notice that names a return day adjusts the proposed reminder (R42): the waiting follow-up for that
+ * person moves to the day they are back (never earlier than it was); with no follow-up waiting, ONE reminder is
+ * created, snoozed until that day. Keyed by the person and the day, so the same notice imported twice (the mailbox
+ * and HubSpot) or read on every Work load makes one record. A notice with no return day changes nothing.
+ */
+export async function syncReturnRemindersFromReplies(
+  prisma: PrismaLike,
+  replies: ReadonlyArray<{ accountName: string; contactEmail: string; subject: string | null; snippet: string; receivedAt: string; fromName?: string | null }>,
+  now: Date,
+): Promise<{ adjusted: number; created: number }> {
+  const out = { adjusted: 0, created: 0 };
+  if (!ledgerReadable(prisma)) return out;
+  const notices = replies
+    .filter((r) => r.accountName && classifyReply({ snippet: r.snippet, subject: r.subject, from: r.contactEmail }).kind === 'out_of_office')
+    .map((r) => ({ r, back: parseReturnDate(r.snippet, now) }))
+    .filter((x): x is { r: (typeof replies)[number]; back: NonNullable<ReturnType<typeof parseReturnDate>> } => !!x.back);
+  if (notices.length === 0) return out;
+  const existing = await loadCommitments(prisma, { accountNames: [...new Set(notices.map((x) => x.r.accountName))] });
+  for (const { r, back } of notices) {
+    const email = r.contactEmail.trim().toLowerCase();
+    const returnAt = nyDayAt(back.day);
+    const who = r.fromName?.trim() || email;
+    const fu = existing.find((c) => c.kind === 'follow_up' && !TERMINAL_STATUSES.includes(c.status) && c.accountName === r.accountName && c.person?.email === email);
+    if (fu) {
+      if (!fu.dueAt || new Date(fu.dueAt).getTime() < returnAt.getTime()) {
+        const t = await transitionCommitment(prisma, { commitmentId: fu.commitmentId, to: 'waiting', dependency: `${first(who) ?? who} is out of the office until ${dayLabel(back.day, now)}`, dueAt: returnAt, actor: 'gap:work', now }).catch(() => null);
+        if (t?.ok) {
+          out.adjusted += 1;
+          fu.dueAt = t.commitment.dueAt;
+        }
+      }
+      continue;
+    }
+    const made = await ensureCommitment(
+      prisma,
+      { accountName: r.accountName, kind: 'reminder', status: 'snoozed', snoozeUntil: returnAt, dueAt: returnAt, title: `Follow up with ${who} when they are back`.slice(0, TITLE_MAX), basis: `Out of office: "${r.snippet.replace(/\s+/g, ' ').trim().slice(0, 200)}"`, person: { personaId: null, name: r.fromName?.trim() || null, email }, source: { kind: 'reply', id: `ooo:${email}:${back.day}` } },
+      { actor: 'gap:work', now },
+    ).catch(() => null);
+    if (made?.ok && made.created) out.created += 1;
   }
   return out;
 }

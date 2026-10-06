@@ -193,7 +193,8 @@ async function loadCockpit() {
     candidates,
     dbState,
     inMotion,
-    replies: repliesPage.items.map((r) => ({ accountName: r.accountName, contactEmail: r.contactEmail, subject: r.subject, snippet: r.snippet, receivedAt: r.receivedAt })),
+    replies: repliesPage.items.map((r) => ({ accountName: r.accountName, contactEmail: r.contactEmail, subject: r.subject, snippet: r.snippet, receivedAt: r.receivedAt, id: r.id, threadId: r.threadId ?? null, fromName: r.fromName ?? null })),
+    mailbox: process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() || null,
     motions: motion.motions.map((m) => ({ accountName: m.accountName, state: m.state, primary: m.primary ? { name: m.primary.name, title: m.primary.title } : null, next: m.next ? { name: m.next.name, title: m.next.title, unlock: m.next.unlock } : null })),
     inDeals: { status: inDeals.status, accounts: inDeals.accounts.map((a) => ({ accountName: a.accountName, deals: a.deals.map((d) => ({ name: d.name, stage: d.stage })) })) },
     held: heldWhy,
@@ -389,7 +390,7 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
   const [summaries, outcomes, commitments, meetings] = await Promise.all([
     loadPursuitSummaries(prisma, data.workAccounts, now),
     loadWorkOutcomes(prisma, data.workAccounts, now).catch(() => new Map()),
-    lane ? Promise.resolve([]) : loadWorkCommitments(prisma, now).catch(() => []),
+    lane ? Promise.resolve([]) : loadWorkCommitments(prisma, now, { replies: data.workInput.replies }).catch(() => []),
     lane ? Promise.resolve([]) : loadUpcomingMeetings(prisma, now).catch(() => []),
   ]);
   const priorities = await loadAccountPriorities(prisma, [...new Set([...data.workAccounts, ...commitments.map((c) => c.accountName)])]).catch(() => new Map());

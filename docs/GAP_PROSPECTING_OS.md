@@ -1188,6 +1188,44 @@ returning on an older reply, an obligation-only account omitted) each turn their
 `account.priority`). Debt: Work reads every commitment row on each render (fine at today's volume; the indexed
 projection named in R40 is the step when it grows); a meeting row with no time is placed at 9 am New York on its day.
 
+R42 **Reply triage through reply execution (DONE; the copy fails closed).** `replies/classify.ts` now says what a
+HUMAN reply is without changing its kind (`human`: a real reply, a referral, an objection; each still pauses the
+account and stops every cold follow-up there; an opt-out inside a longer message stays an opt-out). NEW
+`replies/prepare.ts` (pure) + `components/gap/reply-prep.tsx`: on the Work reply card and on the account page right
+after NEXT, the incoming message (who, when, subject, their words), its kind, prepared notes read off their words
+(what they asked, the day they named in New York, who they named, the objection quoted), "Answer in Gmail" (the
+thread in the GAP mailbox, else a search for the sender there) and "Record what they said" (the triage form). NO reply
+copy family exists (the compiler and governed copy have first-touch families only), so it fails closed: `copyFamily`
+is always null, the panel says "No reply copy family yet: GAP does not write this reply. Answer it yourself in the
+thread.", there is no send, draft or preview control and no model is asked for words. A referral: the card reads
+"They named someone" with "Record who they named"; the disposition form now carries who they named (and, for a
+not-now, the day to come back), prefilled from the message's words for the seller to confirm; the R40 referral
+obligation records the NAMED person, "named by" the one who named them, with no cold action and no implied consent or
+relationship, and the account page lists it under "Obligations here" (every open obligation at the account, each its
+own row with Done, Snooze and Skip). An out-of-office notice with a return day (`dates.ts` `parseReturnDate`; an
+explicit date now beats a weekday in the same phrase) moves the person's waiting follow-up to that day, never earlier,
+or with none waiting makes ONE reminder snoozed until then, keyed by the person and the day. Duplicate imports: the
+same Gmail id and the same HubSpot engagement were already stored once; the remaining duplicate, the same reply from
+the GAP mailbox AND HubSpot's connected inbox, is now one reply (`replies/twins.ts`: same sender, subject, opening
+words, within ten minutes); the list keeps the Gmail copy, names the others (`twinIds`), and a HUMAN-confirmed
+disposition on ANY copy, on the page or not, settles it (an AI suggestion never does). The reply item gains
+`threadId`, `fromName` and `twinIds`, added to the client type on purpose (contract parity). Proof: `reply-prep.test.ts`
+(9: the kinds; the prepared reply with no copy family and no send path; referral, objection, opt-out, automatic notice
+and bounce notes; a real reply, a referral and an objection all read replied with no cold touch and block the follow-up
+there; the out-of-office move and the one reminder; twins and their settlement, inside and outside the page; the form
+body) and `reply-prep-view.test.tsx` (the panel offers exactly two ways out); eight deliberate mutations (a send in
+the prepared reply, every human reply read as plain, a follow-up offered over a reply, the out-of-office move re-applied
+on every read, a weekday beating the explicit date, a twin's disposition ignored, an AI suggestion settling a twin, the
+referral naming the referrer) each turn their owning test red. Adjacent: the whole GAP suite 360 files / 5,331 green
+(the three scratch files skipped without the scratch URL); typecheck clean. Rollback: revert the commit (no stored
+shape changes; reminders already written stay inert rows). Debt: the referral name and the asked question are pattern
+reads of the message (the seller confirms the name in the form); a reply copy family (a governed answer in the thread)
+does not exist and is a deliberate next-version decision. Found on the way, OUTSIDE this sprint's surfaces and not
+fixed here (named debt for the lead): earlier heredoc edits left literal backspace characters where a word boundary was
+meant in three files, so `story/propose-family.ts` line 49 (the closure cue for the problem family) can never match,
+`entity/providers.ts` `modelGone` never matches the "404" alternative, and three guard assertions in
+`tests/unit/gap/hubspot-poller.test.ts` (lines 708 to 710) pass vacuously.
+
 ## 12. Migration, backfill and rollback
 
 Order of commits inside Sprint 1 and 3: schema + SQL first (no reader), then pure core, then importers (Top100 before PIC before modex legacy), then runtime pin, then services, then queue actions under the flag, then `GAP_OS_ENABLED=true` in Vercel after `verify-triggers.ts` passes against prod (env is snapshot at deploy; redeploy after setting). Before the prod `db push`, preview it with `prisma migrate diff --from-url <prod> --to-schema-datamodel prisma/schema.prisma --script` and confirm the script is additive only; also confirm the prod role can `CREATE FUNCTION` (not yet verified). Rollback: the flag off restores byte-identical behavior instantly; full removal is the rollback SQL plus reverting the runtime, service and queue-action commits; `sequences` is never modified; the only two pre-existing tables GAP OS's schema touches at all are `draft_queue_items` (one nullable `sequence_version_id` stamp, S1-T2) and `inbound_messages` (`source String @default("gmail")` and `hubspot_engagement_id String?`, S2-T1, needed so the reply cron and the HubSpot poller can tell a Gmail-sourced row from a HubSpot-engagement-sourced one and attribute the engagement id idempotently) — both additive-only, both confirmed by the production preflight below; the lane and PIC files are read, never written.

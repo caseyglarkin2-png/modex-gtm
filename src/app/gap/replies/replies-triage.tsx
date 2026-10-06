@@ -20,6 +20,8 @@ import { Button } from '@/components/ui/button';
 import { defaultGapApiClient, type GapApiClient, type ReplyItem, type RepliesState } from '@/lib/gap/ui/gap-api-client';
 import { DispositionForm } from '@/components/gap/disposition-form';
 import { ReplyList } from '@/components/gap/reply-list';
+import { detectNamed } from '@/lib/gap/replies/prepare';
+import { parseDuePhrase } from '@/lib/gap/work/dates';
 
 const SELECT_CLASS = 'h-9 rounded-md border border-[var(--border)] bg-transparent px-2 text-sm shadow-sm';
 
@@ -107,6 +109,9 @@ export function RepliesTriage({ client = defaultGapApiClient, inCockpit = false 
               source: { kind: item.source.kind, id: item.source.id },
               problemFamily: item.hypothesisTitle ?? null,
               aiSuggestionId: item.suggestion?.id ?? null,
+              // R42: who their words name and the day they name, read from the message; the seller confirms or corrects.
+              referralHint: detectNamed(item.snippet),
+              resumeHint: parseDuePhrase(item.snippet, new Date())?.day ?? null,
             }}
             suggestion={item.suggestion ?? null}
             onSubmitted={() => {

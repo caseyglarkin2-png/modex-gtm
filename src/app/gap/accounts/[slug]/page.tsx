@@ -41,6 +41,11 @@ import { projectStory } from '@/lib/gap/story/story';
 import { projectAnchor, storyBesideAnchor } from '@/lib/gap/story/anchor';
 import { remitCaution } from '@/lib/gap/story/anchor-text';
 import { DoneNext } from '@/components/gap/done-next';
+import { ReplyPrepPanel } from '@/components/gap/reply-prep';
+import { AccountObligations } from '@/components/gap/account-obligations';
+import { prepareReply } from '@/lib/gap/replies/prepare';
+import { loadCommitments, withPhases } from '@/lib/gap/work/commitments';
+import { buyerMoves } from '@/lib/gap/work/commitment-model';
 import { AskGap } from '@/components/gap/ask-gap';
 import { compactContext, rememberAskContext } from '@/lib/gap/ask/grounding';
 import { loadPursuitSummaries, PURSUIT_SUMMARY_SHELL_MAX_MS, rememberPursuitSummary, type PursuitSummary } from '@/lib/gap/pursuit/summary';
@@ -196,10 +201,17 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
     // the ready card comes from the same queue read (loadReadyTarget stays the fallback when the pursuit read fails).
     // UX-05: the story's two extra readers (clawd's outreach history, the vault note) run beside the pursuit read; both
     // are soft and bounded, so a slow clawd never costs the page.
-    const [pursuit, readers] = await Promise.all([
+    const [pursuit, readers, commitments] = await Promise.all([
       loadPursuit(prisma, { brief, inputs, ctx, now }).catch(() => null),
       loadStoryReaders({ accountName: brief.accountName, domain: accountDomainFor({ domains: inputs.domains, addresses: [...ctx.history.map((h) => h.text.match(/[\w.+-]+@[\w.-]+\.[a-z]{2,}/i)?.[0] ?? ''), ...inputs.firstTouches.map((t) => t.recipient)] }) }).catch(() => ({ clawd: { read: 'unavailable' as const, sends: [] }, vaultNote: null })),
+      // R40 / R42: every obligation at this account, each on its own row.
+      loadCommitments(prisma, { accountNames: [brief.accountName] }).catch(() => []),
     ]);
+    // R42: the newest reply nobody has recorded, with its prepared notes (never copy, never a send).
+    const mailboxId = process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() || null;
+    const replyItem = pursuit?.replyItems.find((r) => !r.dispositionId) ?? null;
+    const replyPrep = replyItem ? prepareReply({ id: replyItem.id, from: replyItem.contactEmail, fromName: replyItem.fromName ?? null, subject: replyItem.subject, snippet: replyItem.snippet, receivedAt: replyItem.receivedAt, threadId: replyItem.threadId ?? null, accountName: brief.accountName }, { mailbox: mailboxId, now }) : null;
+    const obligations = withPhases(commitments, now, buyerMoves((pursuit?.replyItems ?? []).filter((r) => !r.dispositionId)));
     const ready = pursuit ? (brief.motion.type === 'FACT_LED' ? pursuit.ready : null) : brief.motion.type === 'FACT_LED' ? await loadReadyTarget(prisma, brief.accountName, now) : null;
     const v = projectNow(brief, ctx, inputs, now, { ready });
     const top = brief.hypotheses.find((h) => h.grounded && h.truth !== 'CONTRADICTED');
@@ -310,6 +322,7 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
           pursuit={pursuit ? { state: pursuit.state, stack: pursuit.stack, hypothesisId: pursuit.hypothesisId, excluded, story: storyShown, anchor } : null}
           doneNext={q.from === 'work' ? <DoneNext slug={slug} index={/^\d+$/.test(q.i ?? '') ? Number(q.i) : null} accountName={brief.accountName} /> : null}
           askGap={pursuit ? <AskGap accountName={brief.accountName} /> : null}
+          workItems={replyPrep || obligations.length ? <>{replyPrep ? <ReplyPrepPanel prep={replyPrep} /> : null}<AccountObligations items={obligations} /></> : null}
         />
       </div>
     );

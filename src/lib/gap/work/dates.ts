@@ -189,7 +189,10 @@ export function parseDuePhrase(text: string, now: Date): ParsedDay | null {
     } else add(m.index, { day: coming, phrase: m[0].trim(), ambiguous: false });
   }
   if (!hits.length) return null;
-  hits.sort((a, b) => a.at - b.at);
+  // An explicit date beats a weekday or a relative word ("Wednesday, October 14" is October 14, never the coming
+  // Wednesday); among equals, the first one written.
+  const explicit = (r: ParsedDay) => /\d/.test(r.phrase);
+  hits.sort((a, b) => Number(explicit(b.r)) - Number(explicit(a.r)) || a.at - b.at);
   return hits[0].r;
 }
 

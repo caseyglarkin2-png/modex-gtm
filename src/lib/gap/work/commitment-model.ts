@@ -18,6 +18,7 @@
  * upcoming, waiting, blocked, snoozed, done or skipped; the stored status never changes by itself.
  */
 import { dayLabel, endOfNyDay, nyDay } from './dates';
+import { classifyReply } from '../replies/classify';
 
 export const COMMITMENT_EVENT = 'account.commitment' as const;
 export const COMMITMENT_STATUSES = ['open', 'waiting', 'blocked', 'snoozed', 'done', 'skipped'] as const;
@@ -108,6 +109,27 @@ export interface PhaseRead {
 export type BuyerMoveSince = (c: Commitment, since: string) => string | null;
 
 const who = (c: Commitment) => c.person?.name ?? c.person?.email ?? 'them';
+
+/**
+ * "The buyer moved since" from the replies a surface already holds: a person (a reply or an opt-out, never an
+ * automatic notice or a bounce) at the commitment's account after `since`. Work and the account page read it the
+ * same way, so a snooze returns early and a follow-up blocks on the same reply everywhere.
+ */
+export function buyerMoves(replies: ReadonlyArray<{ accountName: string; contactEmail: string; subject: string | null; snippet: string; receivedAt: string }>): BuyerMoveSince {
+  const at = new Map<string, Array<{ at: number; who: string }>>();
+  for (const r of replies) {
+    const k = classifyReply({ snippet: r.snippet, subject: r.subject, from: r.contactEmail }).kind;
+    if (k !== 'human' && k !== 'opt_out') continue;
+    const list = at.get(r.accountName) ?? [];
+    list.push({ at: new Date(r.receivedAt).getTime() || 0, who: r.contactEmail });
+    at.set(r.accountName, list);
+  }
+  return (c, since) => {
+    const t = new Date(since).getTime();
+    const hit = (at.get(c.accountName) ?? []).filter((r) => r.at > t).sort((a, b) => b.at - a.at)[0];
+    return hit ? `${hit.who} replied ${new Date(hit.at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' })}.` : null;
+  };
+}
 
 /**
  * The phase of a commitment at `now`. Due means due before the end of the New York day. A snooze returns on its date

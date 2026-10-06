@@ -208,6 +208,12 @@ export interface ReplyItem {
   dispositionId?: string | null;
   /** Phase 2 D5: an account-level / colleague reply (the sender is not a known GAP recipient). */
   accountLevel?: boolean;
+  /** R42: the Gmail thread of the message (Gmail rows only), for answering it in the thread. */
+  threadId?: string | null;
+  /** R42: the sender's display name, when the mailbox gave one. */
+  fromName?: string | null;
+  /** R42: the other imports of this same message (a Gmail copy and a HubSpot copy are one reply). */
+  twinIds?: string[];
 }
 
 export interface RepliesPage {

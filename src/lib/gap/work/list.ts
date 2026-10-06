@@ -26,13 +26,14 @@
  * tests/unit/gap/work-list.test.ts and tests/unit/gap/work-rank.test.ts.
  */
 import { accountHref } from '../account-intel/href';
-import { classifyReply, type ReplyClassKind } from '../replies/classify';
+import { classifyReply, HUMAN_REPLY_LABEL, type ReplyClassKind } from '../replies/classify';
+import { prepareReply, type ReplyPrep } from '../replies/prepare';
 import { LANE_RANK, type NextCandidate } from '../routing/next-up';
 import type { PursuitSummary } from '../pursuit/summary';
 import type { PursuitStateKind } from '../pursuit/state';
 import { outcomeLine, type WorkOutcome } from './outcome';
 import { MOTION_UNLOCK_BUSINESS_DAYS } from '../motion/account-motion';
-import { commitmentPhase, commitmentTier, KIND_TEXT, type Commitment, type CommitmentKind } from './commitment-model';
+import { buyerMoves, commitmentPhase, commitmentTier, KIND_TEXT, type Commitment, type CommitmentKind } from './commitment-model';
 import { dayLabel, nyDay } from './dates';
 import type { CockpitLane } from '@/components/gap/gap-cockpit';
 
@@ -102,14 +103,18 @@ export interface WorkCard {
   obligations?: WorkObligation[];
   /** R41: the seller's explicit priority on the account. */
   priority?: { reason: string; by: string; at: string } | null;
+  /** R42: the incoming message this card is about and its prepared notes (never copy, never a send). */
+  reply?: ReplyPrep | null;
 }
 
 export interface WorkInput {
   now: Date;
   /** Every NEXT UP candidate (all lanes), from buildNextUpCandidates. */
   candidates: readonly NextCandidate[];
-  /** Undispositioned replies, the raw rows (classified here). */
-  replies: ReadonlyArray<{ accountName: string; contactEmail: string; subject: string | null; snippet: string; receivedAt: string }>;
+  /** Undispositioned replies, the raw rows (classified here; twins already collapsed by the reply list). */
+  replies: ReadonlyArray<{ accountName: string; contactEmail: string; subject: string | null; snippet: string; receivedAt: string; id?: string; threadId?: string | null; fromName?: string | null }>;
+  /** R42: the GAP mailbox, for the thread link on a reply card. */
+  mailbox?: string | null;
   /** The account motions the cockpit read (primary and next per account). */
   motions: ReadonlyArray<{ accountName: string; state: string; primary: { name: string; title: string | null } | null; next: { name: string; title: string | null; unlock: string } | null }>;
   /** The In Deals summary: complete, or unavailable (then nothing is claimed about deals). */
@@ -292,6 +297,7 @@ export function workDay(i: WorkInput): WorkDay {
     if (rank === null) continue; // an automatic reply is not work
     const kind: WorkStateKind = c.kind === 'human' ? 'replied' : c.kind === 'opt_out' ? 'opted_out' : 'bounced';
     const quote = (r.subject ?? r.snippet).replace(/\s+/g, ' ').trim().slice(0, 90);
+    const humanNext = c.human === 'referral' ? 'Record who they named' : c.human === 'objection' ? 'Record the objection' : 'Read the reply and record what they said';
     offerReply({
       rank,
       sortKey: [at || Number.MAX_SAFE_INTEGER],
@@ -299,11 +305,13 @@ export function workDay(i: WorkInput): WorkDay {
         accountName: r.accountName,
         lane: c.kind === 'bounce' ? 'research' : 'replies',
         stateKind: kind,
-        state: STATE_TEXT[kind],
+        state: c.human ? HUMAN_REPLY_LABEL[c.human] : STATE_TEXT[kind],
         why: `${r.contactEmail} wrote ${day(r.receivedAt)}: "${quote}". ${c.consequence}`,
         person: { name: r.contactEmail, title: null },
-        next: { label: c.kind === 'human' ? 'Read the reply and record what they said' : c.kind === 'opt_out' ? 'Record the opt-out' : 'Find a working address', href: c.kind === 'bounce' ? accountHref(r.accountName) : '/gap?lane=replies' },
+        next: { label: c.kind === 'human' ? humanNext : c.kind === 'opt_out' ? 'Record the opt-out' : 'Find a working address', href: c.kind === 'bounce' ? accountHref(r.accountName) : '/gap?lane=replies' },
         blocker: c.kind === 'human' ? 'No cold email to anyone here until it is recorded.' : c.kind === 'opt_out' ? 'They asked not to be contacted: no cold work here until it is recorded.' : null,
+        // R42: the message itself and the prepared notes ride on the card (never copy, never a send).
+        reply: prepareReply({ id: r.id ?? `${r.contactEmail}:${r.receivedAt}`, from: r.contactEmail, fromName: r.fromName ?? null, subject: r.subject, snippet: r.snippet, receivedAt: r.receivedAt, threadId: r.threadId ?? null, accountName: r.accountName }, { mailbox: i.mailbox ?? null, now: i.now }),
       },
     });
   }
@@ -436,20 +444,7 @@ export function workDay(i: WorkInput): WorkDay {
 
   // R40 / R41: the obligations. Due today -> on the account's card (a card is made when the account has none, so no
   // task is ever silently omitted); waiting, upcoming or blocked -> the Waiting footer; snoozed -> the Snoozed footer.
-  const repliesAt = new Map<string, Array<{ email: string; at: number; who: string }>>();
-  for (const r of i.replies) {
-    const c = classifyReply({ snippet: r.snippet, subject: r.subject, from: r.contactEmail });
-    if (c.kind !== 'human' && c.kind !== 'opt_out') continue;
-    const list = repliesAt.get(r.accountName) ?? [];
-    list.push({ email: r.contactEmail.toLowerCase(), at: new Date(r.receivedAt).getTime() || 0, who: r.contactEmail });
-    repliesAt.set(r.accountName, list);
-  }
-  /** The buyer moved after `since` at this commitment's account (a person, any class but automatic). */
-  const moved = (c: Commitment, since: string) => {
-    const t = new Date(since).getTime();
-    const hit = (repliesAt.get(c.accountName) ?? []).filter((r) => r.at > t).sort((a, b) => b.at - a.at)[0];
-    return hit ? `${hit.who} replied ${day(new Date(hit.at).toISOString())}.` : null;
-  };
+  const moved = buyerMoves(i.replies);
   const obligations = new Map<string, WorkObligation[]>();
   const snoozed: WorkDay['snoozed'] = [];
   const outcomeSnoozed = new Set([...(i.outcomes ?? []).values()].filter((o) => o.kind === 'snoozed').map((o) => o.accountName));

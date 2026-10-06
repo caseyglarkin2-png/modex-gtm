@@ -8,7 +8,7 @@
  *
  * Soft: an unreadable store reads as nothing and never fails the page (the send gates fail closed on their own).
  */
-import { loadCommitments, syncFollowUpsFromLedger } from './commitments';
+import { loadCommitments, syncFollowUpsFromLedger, syncReturnRemindersFromReplies } from './commitments';
 import type { Commitment } from './commitment-model';
 import { nyDay, nyDayAt } from './dates';
 
@@ -19,10 +19,12 @@ type PrismaLike = any;
 export const SWEEP_MIN_INTERVAL_MS = 60_000;
 let lastSweep = 0;
 
-export async function loadWorkCommitments(prisma: PrismaLike, now: Date, opts: { sweep?: boolean } = {}): Promise<Commitment[]> {
+export async function loadWorkCommitments(prisma: PrismaLike, now: Date, opts: { sweep?: boolean; replies?: Parameters<typeof syncReturnRemindersFromReplies>[1] } = {}): Promise<Commitment[]> {
   if (opts.sweep !== false && now.getTime() - lastSweep >= SWEEP_MIN_INTERVAL_MS) {
     lastSweep = now.getTime();
     await syncFollowUpsFromLedger(prisma, now).catch(() => null);
+    // R42: an out-of-office return day moves the follow-up (after the sweep, so a fresh follow-up is moved too).
+    if (opts.replies?.length) await syncReturnRemindersFromReplies(prisma, opts.replies, now).catch(() => null);
   }
   return loadCommitments(prisma).catch(() => []);
 }

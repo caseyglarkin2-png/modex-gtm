@@ -315,8 +315,12 @@ const REPLY_ITEM_CHECKS: Record<keyof ClientReplyItem, (v: unknown) => boolean> 
   enrollmentStatus: (v) => v === null || typeof v === 'string',
   suggestion: (v) => v === undefined || v === null || (typeof (v as any).id === 'string' && typeof (v as any).responseClass === 'string' && Array.isArray((v as any).bids) && typeof (v as any).why === 'string'),
   dispositionId: (v) => v === undefined || v === null || typeof v === 'string',
+  // R42: the thread to answer in, the sender's name, and the other imports of the same message.
+  threadId: (v) => v === undefined || v === null || typeof v === 'string',
+  fromName: (v) => v === undefined || v === null || typeof v === 'string',
+  twinIds: (v) => v === undefined || (Array.isArray(v) && v.every((x) => typeof x === 'string')),
 };
-const OPTIONAL_REPLY_ITEM_KEYS: ReadonlySet<keyof ClientReplyItem> = new Set(['suggestion', 'dispositionId']);
+const OPTIONAL_REPLY_ITEM_KEYS: ReadonlySet<keyof ClientReplyItem> = new Set(['suggestion', 'dispositionId', 'threadId', 'fromName', 'twinIds']);
 
 describe('a listReplies item satisfies the client ReplyItem', () => {
   it('undispositioned with an AI suggestion: every client key is present with the right shape, and the source id is the inbound id', async () => {
