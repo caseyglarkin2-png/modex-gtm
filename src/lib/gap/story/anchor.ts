@@ -61,13 +61,8 @@ export interface AnchorThesis {
   unusableWhy: string | null;
 }
 
-export type PrimaryBy = 'your choice' | 'their remit' | 'the highest-ranked usable thesis';
-
-export const PRIMARY_BY_TEXT: Record<PrimaryBy, string> = {
-  'your choice': 'your choice',
-  'their remit': 'it lands on their remit',
-  'the highest-ranked usable thesis': 'the highest-ranked usable thesis',
-};
+export { PRIMARY_BY_TEXT, type PrimaryBy } from './anchor-text';
+import type { PrimaryBy } from './anchor-text';
 
 export interface OutreachAnchor {
   person: AnchorPerson | null;

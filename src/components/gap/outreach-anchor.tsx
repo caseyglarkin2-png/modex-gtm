@@ -18,7 +18,8 @@
 import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { PRIMARY_BY_TEXT, type OutreachAnchor } from '@/lib/gap/story/anchor';
+import type { OutreachAnchor } from '@/lib/gap/story/anchor';
+import { PRIMARY_BY_TEXT } from '@/lib/gap/story/anchor-text';
 import { OBSERVATION_REFUSAL_TEXT } from '@/lib/gap/hypothesis/observation';
 import { Tag } from './seller-tag';
 
