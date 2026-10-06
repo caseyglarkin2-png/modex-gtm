@@ -384,6 +384,24 @@ bottom bar (Listen plus the NEXT control, else Log a touch). Listen: one player,
 unmount. Added contracts that MUST NOT change: a name set aside as do not contact, unsubscribed, opted out or left at
 an account is never offered as a row under another record of the same person; a hold shows no cold-touch control;
 reading order equals DOM order at every width. Production SHA: 5c321ac6 (receipt in `ACCOUNT_FIRST_UX.md` section 9).
+
+**UX-05, the derived Account Story (PR #403, merge 5b1d2f26, 2026-10-06).** `src/lib/gap/story/*` projects ONE
+story per account over readers GAP already has (the brief, buyer inputs, the context history, GAP's first-touch
+ledger, clawd `/api/outreach/history` by address, the classified replies, the pursuit state, the resolver's set-aside
+list, the vault note from a local vault file or clawd's intel snapshot); no table, no model call. Rows, each only with
+a basis: WHAT HAS HAPPENED BETWEEN US (the last email to a named person with their title, the silence judged against
+that email, what came back by reply class, the count), THEIR GOAL (only in the buyer's words), WHAT IS CHANGING,
+NETWORK IMPLICATION (only when it adds a sentence), YARD OPPORTUNITY (Our read with its Wrong if unless the buyer
+confirmed it), WHAT WE NEED TO LEARN (one line), STORIES THAT MATTER (collapsed), YOUR NOTE (never quoted, never
+read aloud). The story leads the context column (WHY NOW, KNOW and THINK hide under it; the header says no last touch
+or inbound line when the story carries them); from 1100 px it sits beside NEXT. The stack is a card for the chosen
+person only, plain rows for the alternatives with their reachability, no card under a hold or a deal, the hold said
+once. Added contracts that MUST NOT change: every story sentence carries a trust tag with basis ids and a row takes
+the weakest class; a source speaking as itself is attributed, never GAP's claim; a Checked line whose dollar figure
+does not parse is Unverified and never citable; the same project or deal under two sources is one sentence with the
+stronger tag; an unverified sale that names the chosen person's unit rises beside the person; private engagement is
+never a story row and never read aloud; the story readers are GETs, bounded and soft, and the story says when clawd
+could not be read. Production SHA: 5b1d2f26 (receipt in `ACCOUNT_FIRST_UX.md` section 9).
 <!-- verified:2026-10-06 -->
 
 ## Soak (2026-10-02)
