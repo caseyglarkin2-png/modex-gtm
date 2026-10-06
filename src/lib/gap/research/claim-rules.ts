@@ -99,6 +99,15 @@ export type LiveFactFailure = 'not_a_physical_operations_fact' | 'quoted_third_p
  * null. The claim stays a verified fact (true at its source); only its outreach eligibility is withdrawn. A claim
  * stored on a search-redirect link has no publisher Casey can open, so it is never outreach evidence.
  */
+/** R30: the stored-claim rules for a job, procurement or other admitted claim: the publisher and the speaker, not the physical rule. */
+export function liveClaimFailure(text: string, accountName: string, url?: string | null): LiveFactFailure | null {
+  if (url && SEARCH_REDIRECT.test(url)) return 'redirect_unresolved';
+  if (url && WEAK_SOURCE.test(url)) return 'source_too_weak';
+  const speaker = speakerOrg(text, url);
+  if (speaker && !textNamesAccount(speaker, normalizeCompany(accountName))) return 'quoted_third_party';
+  return null;
+}
+
 export function liveFactFailure(text: string, accountName: string, url?: string | null): LiveFactFailure | null {
   if (url && SEARCH_REDIRECT.test(url)) return 'redirect_unresolved';
   // An aggregator or mirror is never the page outreach evidence links to (the same rule a new fact must pass).

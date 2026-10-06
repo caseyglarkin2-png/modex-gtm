@@ -36,6 +36,7 @@ import {
 import { extractCitationIds, validateObservation } from './observation';
 import { employmentRefusal } from '../people/employment';
 import { loadPersonaEmployment } from '../people/employment-store';
+import { approachOfHypothesis } from '../research/approach-policy';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -364,7 +365,7 @@ export async function loadSnapshot(prisma: any, id: string): Promise<LoadedSnaps
     id: link.signal?.id ?? link.signal_id,
     hasEvidence: Boolean(link.signal?.evidence_url || link.signal?.evidence_text),
     // Red team T6: the one evidence rule (research/evidence-gate.ts), re-judged at every transition.
-    outreachFact: link.signal ? outreachFactRefusal(link.signal, row.account_name) === null : false,
+    outreachFact: link.signal ? outreachFactRefusal(link.signal, row.account_name, { approach: approachOfHypothesis(row) }) === null : false,
     expiresAt: link.signal?.freshness_expires_at ?? null,
     title: typeof link.signal?.title === 'string' ? link.signal.title : '',
     evidenceUrl: link.signal?.evidence_url ?? null,

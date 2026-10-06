@@ -969,6 +969,30 @@ source marks a fact superseded (the gate refuses it); contradictions are recorde
 built: an explicit pending / announced / active / completed state machine over events (carried as debt; the
 continuity read covers ended and contradicted).
 
+**Sprint 2 gate (2026-10-06).** Full GAP suite 351 files / 5,247 tests green on the Sprint 2 tree (before R30);
+typecheck and lint clean on every changed file; the coverage read run read-only against production (the receipt
+under R20). Exit met in part: every supported source class has a measured path to a checked claim (R22/R23 at the
+verifier) and a no-action outcome (not minted, or verified-not-eligible), and coverage is measured; the seven-day
+objective is NOT met at the current allowance (the choice is Casey's, R20). Carried: an explicit event state
+machine (R24), job-board and procurement connectors beyond grounded search (the classes are reached through grounded
+search today), the first-touch copy family for a job-led thesis (R34).
+
+**Sprint 3. R30 Approach-specific evidence policy (DONE at the gate; the copy and the UI paths follow in R31-R35).**
+`research/approach-policy.ts`: event_led (the existing physical-change path, unchanged), job_procurement_led (a
+verified posting with yard / dock / trailer / gate / fleet duties not known closed, or a notice the account issued;
+the copy may state only its own text and must ask whether it is still open; never "they lack a system",
+"understaffed", "budget", "the contract is open"), report_led (NOT ENABLED; refused with its reason, never a bypass),
+fit_led (a stable operating fact, a transparent fit question, no why-now), and the three that need no thesis:
+warm_intro, existing_thread_reply, active_deal_follow_up, each with what it requires and forbids. The gate
+(`evidence-gate.ts`) reads the thesis's declared approach (`metadata.approach`, default event_led) at approval,
+activation, the pursuit read and the wire: under event_led nothing changed; under job_procurement_led a JOB_POSTING
+or PROCUREMENT claim passes the verified / dated / own-account / publisher / speaker rules without the physical
+rule, a closed posting is refused, and every other class is refused as not admitted. `draft-from-fact.ts` declares
+job_procurement_led on a thesis drafted from a job or procurement claim. Pinned by `approach-policy.test.ts`; the
+evidence-gate, machine, service, actionability and thesis-group suites stay green. Not done yet: the account read
+(`account-intel/load.ts`) still keeps only physical facts as story facts, so a job claim is draftable through the
+API, not yet from the opening story (R31/R33); the compiler's first-touch copy family for a job-led thesis (R34).
+
 ## 12. Migration, backfill and rollback
 
 Order of commits inside Sprint 1 and 3: schema + SQL first (no reader), then pure core, then importers (Top100 before PIC before modex legacy), then runtime pin, then services, then queue actions under the flag, then `GAP_OS_ENABLED=true` in Vercel after `verify-triggers.ts` passes against prod (env is snapshot at deploy; redeploy after setting). Before the prod `db push`, preview it with `prisma migrate diff --from-url <prod> --to-schema-datamodel prisma/schema.prisma --script` and confirm the script is additive only; also confirm the prod role can `CREATE FUNCTION` (not yet verified). Rollback: the flag off restores byte-identical behavior instantly; full removal is the rollback SQL plus reverting the runtime, service and queue-action commits; `sequences` is never modified; the only two pre-existing tables GAP OS's schema touches at all are `draft_queue_items` (one nullable `sequence_version_id` stamp, S1-T2) and `inbound_messages` (`source String @default("gmail")` and `hubspot_engagement_id String?`, S2-T1, needed so the reply cron and the HubSpot poller can tell a Gmail-sourced row from a HubSpot-engagement-sourced one and attribute the engagement id idempotently) — both additive-only, both confirmed by the production preflight below; the lane and PIC files are read, never written.

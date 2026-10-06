@@ -170,7 +170,7 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
 export async function loadSendableTheses(prisma: PrismaLike, accountName: string, now: Date): Promise<Set<string>> {
   const rows: Array<{ id: string; account_name: string; observation: string | null; signals: Array<{ role: string | null; signal: Record<string, unknown> | null }> }> = await prisma.prospectingHypothesis.findMany({
     where: { account_name: accountName, superseded_by: { is: null }, status: { in: ['approved', 'active', 'confirmed', 'partially_confirmed', 'review_required'] } },
-    select: { id: true, account_name: true, observation: true, signals: { select: { role: true, signal: { select: EVIDENCE_SIGNAL_SELECT } } } },
+    select: { id: true, account_name: true, observation: true, metadata: true, signals: { select: { role: true, signal: { select: EVIDENCE_SIGNAL_SELECT } } } },
     take: 50,
   });
   return new Set(rows.filter((r) => hypothesisSendable(r as never, now)).map((r) => r.id));

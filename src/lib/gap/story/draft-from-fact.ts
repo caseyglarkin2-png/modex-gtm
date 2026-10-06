@@ -19,6 +19,7 @@ import { proposeHypothesis, transitionHypothesis, updateDraftNarrative } from '.
 import { GATE_SIGNAL_SELECT, outreachFactRefusal, type GateSignal, type OutreachFactRefusal } from '../research/evidence-gate';
 import { isProblemFamily, type ProblemFamily } from '../taxonomy';
 import { proposeFamilyFor } from './propose-family';
+import type { EvidenceApproach } from '../research/approach-policy';
 import { sensitivityOf } from '../research/sensitivity';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -69,7 +70,9 @@ export async function draftThesisFromFact(prisma: PrismaLike, input: DraftFromFa
   if (!fact) return { ok: false, reason: 'fact_not_found' };
   if ((fact.account_name ?? '').trim().toLowerCase() !== input.accountName.trim().toLowerCase()) return { ok: false, reason: 'signal_account_mismatch' };
   if (fact.freshness_expires_at && new Date(fact.freshness_expires_at).getTime() <= input.now.getTime()) return { ok: false, reason: 'fact_not_outreach_evidence', detail: 'expired' };
-  const refusal: OutreachFactRefusal | null = outreachFactRefusal(fact, input.accountName);
+  // R30: the claim's class decides the approach the thesis will carry; the gate runs under that approach.
+  const approach: EvidenceApproach = fact.claim_class === 'JOB_POSTING' || fact.claim_class === 'PROCUREMENT' ? 'job_procurement_led' : 'event_led';
+  const refusal: OutreachFactRefusal | null = outreachFactRefusal(fact, input.accountName, { approach });
   if (refusal) return { ok: false, reason: 'fact_not_outreach_evidence', detail: refusal };
   // The page never offers a sensitive fact (layoffs, a lawsuit) as the hook; the service refuses it the same way.
   const sensitive = sensitivityOf(fact.evidence_text ?? '');
@@ -140,7 +143,7 @@ export async function draftThesisFromFact(prisma: PrismaLike, input: DraftFromFa
       signalIds: [fact.id],
       primarySignalId: fact.id,
       sourceRef,
-      metadata: { proposedFrom: ANCHOR_DRAFT_SOURCE, factId: fact.id, familyBasis, familyVia: familyBasis === 'chosen by you' ? 'seller' : family === 'unmapped' ? 'none' : 'derived' },
+      metadata: { proposedFrom: ANCHOR_DRAFT_SOURCE, factId: fact.id, familyBasis, familyVia: familyBasis === 'chosen by you' ? 'seller' : family === 'unmapped' ? 'none' : 'derived', approach },
       createdBy: input.actor,
     });
     if (!r.ok) {

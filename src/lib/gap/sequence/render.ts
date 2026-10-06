@@ -142,6 +142,7 @@ export type EvidenceSignalRow = SignalRow;
 export const EVIDENCE_SIGNAL_SELECT = {
   id: true,
   title: true,
+  claim_class: true,
   evidence_url: true,
   external_ok: true,
   observed_at: true,

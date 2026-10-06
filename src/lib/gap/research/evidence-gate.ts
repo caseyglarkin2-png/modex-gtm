@@ -22,9 +22,10 @@
  * not a public, verifiable fact, so it cannot be the first-touch fact either.
  */
 import { isPhysicalOpsFact, splitSentencesAware } from './facts';
-import { factUrl, liveFactFailure } from './claim-rules';
+import { factUrl, liveClaimFailure, liveFactFailure } from './claim-rules';
 import { extractCitationIds } from '../hypothesis/observation';
 import { sourceLabelVariants } from './source-label';
+import { approachOfHypothesis, claimAdmittedFor, type EvidenceApproach } from './approach-policy';
 
 export interface GateSignal {
   id: string;
@@ -38,6 +39,13 @@ export interface GateSignal {
   metadata?: unknown;
   /** The source's title; its label is the only prose an observation may add around a quote (ops closeout 16). */
   title?: string | null;
+  /** R30: the claim's class (FACT, JOB_POSTING, PROCUREMENT, ...); absent reads as FACT. */
+  claim_class?: string | null;
+}
+
+/** R30: the gate's approach context (default: the physical-change path). */
+export interface GateOptions {
+  approach?: EvidenceApproach;
 }
 
 export type OutreachFactRefusal =
@@ -56,7 +64,15 @@ export type OutreachFactRefusal =
   /** Stabilization A: stored on a search-redirect link; no publisher page Casey can open. */
   | 'redirect_source'
   /** Final review: linked to an aggregator or mirror, not the publisher's page. */
-  | 'weak_source';
+  | 'weak_source'
+  /** R30: the claim's class is not one this approach may open on (a job claim under the event-led path, and the reverse). */
+  | 'claim_not_admitted_for_approach'
+  /** R30: a posting the source says is closed is not a live job claim. */
+  | 'posting_closed'
+  /** R30: an approach the policy does not enable (an attributed report). */
+  | 'approach_not_enabled'
+  /** R30: the fit-led approach needs a stable operating fact, not a fresh event. */
+  | 'not_an_ongoing_state';
 
 /** The verification stamp research writes when the excerpt was found in the fetched source (research/run.ts). */
 export const VERIFIED_EXCERPT = 'excerpt_found_at_source';
@@ -70,7 +86,7 @@ export function isKeywordOnly(s: GateSignal): boolean {
 }
 
 /** Why this signal is not an outreach fact, or null when it is one. */
-export function outreachFactRefusal(s: GateSignal, accountName: string): OutreachFactRefusal | null {
+export function outreachFactRefusal(s: GateSignal, accountName: string, opts: GateOptions = {}): OutreachFactRefusal | null {
   if (s.source_kind === 'operator_knowledge' || s.source_kind === 'manual') return 'operator_knowledge';
   const text = (s.evidence_text ?? '').trim();
   if (!text) return 'keyword_only';
@@ -80,11 +96,25 @@ export function outreachFactRefusal(s: GateSignal, accountName: string): Outreac
   const observed = s.observed_at instanceof Date ? s.observed_at : s.observed_at ? new Date(s.observed_at) : null;
   if (!observed || Number.isNaN(observed.getTime())) return 'undated';
   if (s.account_name != null && s.account_name.trim().toLowerCase() !== accountName.trim().toLowerCase()) return 'other_account';
-  if (!isPhysicalOpsFact(text)) return 'not_a_physical_network_change';
   const continuity = isObj(s.metadata) && isObj(s.metadata.continuity) ? s.metadata.continuity : null;
+  const approach = opts.approach ?? 'event_led';
+  // R30: the approach decides which claim classes may open; the event-led path is exactly the physical-change rule.
+  const physical = isPhysicalOpsFact(text);
+  const claimClass = typeof s.claim_class === 'string' && s.claim_class ? s.claim_class : physical ? 'FACT' : null;
+  if (approach === 'event_led') {
+    if (!physical) return 'not_a_physical_network_change';
+  } else {
+    const attrs = isObj(s.metadata) && isObj(s.metadata.claimAttributes) ? (s.metadata.claimAttributes as { postingStatus?: 'open' | 'closed' | 'reposted' | 'unknown' }) : null;
+    const kind = continuity && typeof continuity.kind === 'string' ? (continuity.kind as 'event' | 'ongoing_state' | 'ended') : null;
+    const admitted = claimAdmittedFor(approach, { claimClass, attributes: attrs, continuity: kind });
+    if (!admitted.ok) return admitted.reason;
+    // A physical fact cited under another approach still passes the physical rules; a job or procurement claim passes
+    // the attribution and publisher rules only.
+    if (claimClass === 'FACT' && !physical) return 'not_a_physical_network_change';
+  }
   if (continuity && continuity.kind === 'ended') return 'superseded';
   // The same stored-claim rules the brief applies: attribution and a real publisher link.
-  const live = liveFactFailure(text, accountName, factUrl(s));
+  const live = claimClass === 'FACT' ? liveFactFailure(text, accountName, factUrl(s)) : liveClaimFailure(text, accountName, factUrl(s));
   if (live === 'redirect_unresolved') return 'redirect_source';
   if (live === 'source_too_weak') return 'weak_source';
   if (live === 'quoted_third_party') return 'third_party_statement';
@@ -100,13 +130,13 @@ export interface OutreachEvidence {
 }
 
 /** The outreach tier of a hypothesis from its linked signals. */
-export function outreachEvidence(signals: readonly GateSignal[], accountName: string): OutreachEvidence {
+export function outreachEvidence(signals: readonly GateSignal[], accountName: string, opts: GateOptions = {}): OutreachEvidence {
   const facts: string[] = [];
   const keywordOnly: string[] = [];
   const refused: Array<{ id: string; reason: OutreachFactRefusal }> = [];
   for (const s of signals) {
     if (!s || typeof s.id !== 'string') continue;
-    const why = outreachFactRefusal(s, accountName);
+    const why = outreachFactRefusal(s, accountName, opts);
     if (why === null) facts.push(s.id);
     else {
       refused.push({ id: s.id, reason: why });
@@ -191,8 +221,8 @@ export function observationSupportGap(
  * live outreach fact. Pass only live (unexpired) signals, so a cited expired
  * fact counts as a non-fact citation.
  */
-export function sendableEvidence(observation: string | null | undefined, signals: readonly GateSignal[], accountName: string): SendableEvidence {
-  const base = outreachEvidence(signals, accountName);
+export function sendableEvidence(observation: string | null | undefined, signals: readonly GateSignal[], accountName: string, opts: GateOptions = {}): SendableEvidence {
+  const base = outreachEvidence(signals, accountName, opts);
   const facts = new Set(base.facts);
   const cited = extractCitationIds(observation ?? '');
   const nonFactCitations = cited.filter((id) => !facts.has(id));
@@ -216,6 +246,7 @@ export const GATE_SIGNAL_SELECT = {
   external_ok: true,
   metadata: true,
   title: true,
+  claim_class: true,
 } as const;
 
 /**
@@ -224,11 +255,11 @@ export const GATE_SIGNAL_SELECT = {
  * never makes a hypothesis sendable, and is never read aloud as an opener.
  */
 export function hypothesisSendable(
-  h: { observation?: string | null; account_name: string; signals?: ReadonlyArray<{ signal?: (GateSignal & { freshness_expires_at?: Date | string | null }) | null }> | null },
+  h: { observation?: string | null; account_name: string; metadata?: unknown; signals?: ReadonlyArray<{ signal?: (GateSignal & { freshness_expires_at?: Date | string | null }) | null }> | null },
   now: Date,
 ): boolean {
   const live = (h.signals ?? [])
     .map((l) => l.signal)
     .filter((s): s is GateSignal & { freshness_expires_at?: Date | string | null } => !!s && (!s.freshness_expires_at || new Date(s.freshness_expires_at).getTime() > now.getTime()));
-  return sendableEvidence(h.observation, live, h.account_name).tier === 'VERIFIED_FACT';
+  return sendableEvidence(h.observation, live, h.account_name, { approach: approachOfHypothesis(h) }).tier === 'VERIFIED_FACT';
 }
