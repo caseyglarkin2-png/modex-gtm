@@ -36,16 +36,26 @@ describe('<WorkList>', () => {
     expect(rows[1].querySelector('[data-testid="work-card-person"]')).toHaveTextContent('Karen Darling, Senior Director');
     expect(rows[1].querySelector('[data-testid="work-card-next"]')).toHaveAttribute('href', '/gap?lane=ready');
     expect(rows[1].querySelector('[data-testid="work-card-open"]')).toHaveAttribute('href', '/gap/accounts/pepsico?from=work&i=1');
+    expect(screen.getByTestId('work-filter-deals')).toHaveTextContent('Held or in a deal 1');
     expect(rows[2].querySelector('[data-testid="work-card-next"]')).toBeNull();
     expect(screen.getByTestId('work-filter-all')).toHaveTextContent('All 3');
     expect(screen.getByTestId('work-filter-replies')).toHaveTextContent('Replied 1');
-    expect(screen.getByTestId('work-filter-deals')).toHaveTextContent('In a deal 1');
+  });
+  it('the shown list is the Work order: after a chip the hrefs count from zero and the saved order is what the seller sees', () => {
+    window.sessionStorage.clear();
+    render(<WorkList cards={cards} />);
+    fireEvent.click(screen.getByTestId('work-filter-ready'));
+    expect(screen.getByTestId('work-card-open')).toHaveAttribute('href', '/gap/accounts/pepsico?from=work&i=0');
+    const saved = JSON.parse(window.sessionStorage.getItem('gap.work.order') ?? '{}') as { accounts: Array<{ name: string }>; filter: string };
+    expect(saved.accounts.map((a) => a.name)).toEqual(['PepsiCo']);
+    expect(saved.filter).toBe('ready');
   });
   it('a chip filters to its own count and writes the URL; the search narrows by name; both restore from the URL', () => {
     render(<WorkList cards={cards} />);
     fireEvent.click(screen.getByTestId('work-filter-ready'));
     expect(screen.getAllByTestId('work-card').map((r) => r.getAttribute('data-account'))).toEqual(['PepsiCo']);
     expect(screen.getByTestId('work-filter-ready')).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByTestId('work-card')).toHaveAttribute('data-slug', 'pepsico');
     expect(replace).toHaveBeenLastCalledWith('/gap?filter=ready', { scroll: false });
     fireEvent.change(screen.getByTestId('work-search'), { target: { value: 'kro' } });
     expect(screen.getByTestId('work-empty')).toHaveTextContent('No account matches this filter.');

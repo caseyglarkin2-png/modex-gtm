@@ -49,8 +49,11 @@ export function doneNextLinks(order: WorkOrder | null, index: number | null, slu
   const p = new URLSearchParams();
   if (order?.filter && order.filter !== 'all') p.set('filter', order.filter);
   if (order?.q) p.set('q', order.q);
-  const hit = order && index !== null && index >= 0 && index < order.accounts.length && order.accounts[index].slug === slug ? index : null;
-  if (hit !== null) p.set('focus', String(hit));
+  // The index is a hint; the account itself is the key (the list behind the order may have moved).
+  const byIndex = order && index !== null && index >= 0 && index < order.accounts.length && order.accounts[index].slug === slug ? index : null;
+  const bySlug = order ? order.accounts.findIndex((a) => a.slug === slug) : -1;
+  const hit = byIndex ?? (bySlug >= 0 ? bySlug : null);
+  if (hit !== null) p.set('focus', slug);
   const backToWork = `/gap${p.toString() ? `?${p.toString()}` : ''}`;
   if (hit === null || !order) return { position: null, back: null, next: null, backToWork };
   const at = (i: number) => ({ name: order.accounts[i].name, href: `${accountHref(order.accounts[i].name)}?from=work&i=${i}` });

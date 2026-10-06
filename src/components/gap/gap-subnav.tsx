@@ -31,7 +31,9 @@ export const MORE_TABS = [
   { label: 'Notes', href: '/gap/feedback' },
 ] as const;
 
-function isActive(pathname: string, href: string): boolean {
+function isActive(rawPathname: string, href: string): boolean {
+  // next.config has trailingSlash: true, so the live pathname reads '/gap/'.
+  const pathname = rawPathname.length > 1 ? rawPathname.replace(/\/+$/, '') : rawPathname;
   if (href === '/gap') return pathname === '/gap';
   if (href === '/gap/accounts') return pathname === '/gap/accounts' || pathname.startsWith('/gap/accounts/');
   return pathname === href || pathname.startsWith(`${href}/`);

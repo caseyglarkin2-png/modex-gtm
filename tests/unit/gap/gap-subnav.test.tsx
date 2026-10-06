@@ -12,8 +12,8 @@ vi.mock('next/navigation', () => ({
 }));
 
 describe('<GapSubnav>', () => {
-  it('renders Work, Accounts and Capture as the only top-level links; every other tool sits under More', () => {
-    pathname = '/gap';
+  it('renders Work, Accounts and Capture as the only top-level links; every other tool sits under More; the live trailing slash still marks Work current', () => {
+    pathname = '/gap/';
     render(<GapSubnav />);
     expect(screen.getByRole('link', { name: 'Work' })).toHaveAttribute('href', '/gap');
     expect(screen.getByRole('link', { name: 'Accounts' })).toHaveAttribute('href', '/gap/accounts');
@@ -23,6 +23,7 @@ describe('<GapSubnav>', () => {
     expect(within(more).getByRole('link', { name: 'All hypotheses' })).toHaveAttribute('href', '/gap/hypotheses');
     expect(PRIMARY_TABS.map((t) => t.label)).toEqual(['Work', 'Accounts', 'Capture']);
     expect(screen.getAllByRole('link')).toHaveLength(PRIMARY_TABS.length + MORE_TABS.length);
+    expect(screen.getByRole('link', { name: 'Work' })).toHaveAttribute('aria-current', 'page');
   });
 
   it('marks the current item with aria-current, and only that one; an account workspace counts as Accounts', () => {

@@ -26,13 +26,14 @@ export function AccountsIndex({ rows, initialQuery = '' }: { rows: AccountIndexR
   return (
     <section className="space-y-3" data-testid="accounts-index" aria-labelledby="accounts-heading">
       <form
-        className="flex flex-wrap items-center gap-2"
+        className="flex flex-col gap-2 sm:flex-row sm:items-center"
         onSubmit={(e) => {
           e.preventDefault();
-          if (shown[0]) router.push(shown[0].href);
+          // Enter opens the first MATCH of a typed query, never the first row of the whole index.
+          if (query.trim() && shown[0]) router.push(shown[0].href);
         }}
       >
-        <label className="flex min-w-0 flex-1 items-center gap-2 text-sm sm:max-w-md">
+        <label className="flex w-full min-w-0 items-center gap-2 text-sm sm:max-w-md sm:flex-1">
           <span className="sr-only">Search accounts</span>
           <input ref={box} type="search" value={query} placeholder="Type an account name; Enter opens the first match" className="min-h-11 w-full rounded-md border border-[var(--border)] bg-transparent px-3 text-sm" onChange={(e) => setQuery(e.target.value)} data-testid="accounts-search" />
         </label>

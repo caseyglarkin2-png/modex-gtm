@@ -11,7 +11,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { filterWork, WORK_FILTER_LABEL, WORK_FILTERS, workCounts, type WorkCard, type WorkFilter } from '@/lib/gap/work/list';
 import { saveWorkOrder } from '@/lib/gap/work/order';
-import { accountSlug } from '@/lib/gap/account-intel/href';
+import { accountHref, accountSlug } from '@/lib/gap/account-intel/href';
 
 const BTN = 'inline-flex min-h-11 items-center justify-center rounded-md px-3 text-sm font-medium';
 const PRIMARY = `${BTN} bg-[var(--primary)] text-[var(--primary-foreground)] hover:opacity-90`;
@@ -26,27 +26,29 @@ const STATE_TONE: Record<WorkCard['stateKind'], string> = {
   research: 'text-[var(--muted-foreground)]',
   in_deal: 'text-[var(--muted-foreground)]',
   unknown_deal: 'text-amber-700 dark:text-amber-400',
+  held: 'text-amber-700 dark:text-amber-400',
 };
 
 function isFilter(v: string | null): v is WorkFilter {
   return !!v && (WORK_FILTERS as readonly string[]).includes(v);
 }
 
-export function WorkList({ cards, focus }: { cards: WorkCard[]; /** The card index to focus on arrival (Back to Work). */ focus?: number | null }) {
+export function WorkList({ cards, focus }: { cards: WorkCard[]; /** The account (slug) to focus on arrival (Back to Work). */ focus?: string | null }) {
   const router = useRouter();
   const params = useSearchParams();
   const [filter, setFilter] = useState<WorkFilter>(isFilter(params.get('filter')) ? (params.get('filter') as WorkFilter) : 'all');
   const [query, setQuery] = useState(params.get('q') ?? '');
   const counts = workCounts(cards);
-  const shown = filterWork(cards, filter, query);
-  // UX-09: the order Work holds now is what Next account walks, frozen with the filter and the search for Back to Work.
+  // The shown list IS the Work order: its hrefs carry its own positions, and Next account walks what the seller saw.
+  const shown = filterWork(cards, filter, query).map((c, k) => ({ ...c, index: k, href: `${accountHref(c.accountName)}?from=work&i=${k}` }));
   useEffect(() => {
-    saveWorkOrder({ at: new Date().toISOString(), filter, q: query, accounts: cards.map((c) => ({ name: c.accountName, slug: accountSlug(c.accountName) })) });
+    saveWorkOrder({ at: new Date().toISOString(), filter, q: query, accounts: shown.map((c) => ({ name: c.accountName, slug: accountSlug(c.accountName) })) });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cards, filter, query]);
   const focused = useRef(false);
   useEffect(() => {
-    if (focused.current || focus === null || focus === undefined) return;
-    const el = document.getElementById(`work-card-${focus}`);
+    if (focused.current || !focus) return;
+    const el = document.querySelector<HTMLElement>(`[data-testid="work-card"][data-slug="${focus}"]`);
     if (el) {
       focused.current = true;
       el.focus();
@@ -81,7 +83,7 @@ export function WorkList({ cards, focus }: { cards: WorkCard[]; /** The card ind
             {WORK_FILTER_LABEL[f]} {counts[f]}
           </button>
         ))}
-        <label className="flex min-w-0 flex-1 items-center gap-2 text-xs sm:max-w-xs">
+        <label className="flex min-w-0 basis-full items-center gap-2 text-xs sm:basis-auto sm:flex-1 sm:max-w-xs">
           <span className="sr-only">Search accounts</span>
           <input
             type="search"
@@ -103,7 +105,7 @@ export function WorkList({ cards, focus }: { cards: WorkCard[]; /** The card ind
       ) : (
         <ol className="space-y-2" data-testid="work-cards">
           {shown.map((c) => (
-            <li key={c.accountName} id={`work-card-${c.index}`} tabIndex={-1} className="rounded-md border border-[var(--border)] p-3 outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]" data-testid="work-card" data-account={c.accountName} data-state={c.stateKind} data-lane={c.lane}>
+            <li key={c.accountName} id={`work-card-${c.index}`} tabIndex={-1} className="rounded-md border border-[var(--border)] p-3 outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]" data-testid="work-card" data-account={c.accountName} data-slug={accountSlug(c.accountName)} data-state={c.stateKind} data-lane={c.lane}>
               <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
                 <p className="text-base font-semibold">
                   <Link href={c.href} className="underline decoration-dotted underline-offset-2 hover:decoration-solid" data-testid="work-card-account">{c.accountName}</Link>

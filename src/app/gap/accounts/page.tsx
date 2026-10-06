@@ -33,7 +33,9 @@ async function loadIndex(): Promise<AccountIndexRow[]> {
     return t ?? null;
   };
   const withThesis = new Set((theses as Array<{ account_name: string }>).map((t) => t.account_name));
-  const gapAccounts = accounts.filter((a) => (peopleBy.get(a.name) ?? 0) > 0 || withThesis.has(a.name) || (touches.get(a.name)?.length ?? 0) > 0);
+  // Test fixtures (E2E) and bare-domain rows are not seller accounts.
+  const isFixture = (name: string) => /\bE2E\b/i.test(name) || /^[a-z0-9.-]+\.[a-z]{2,}$/i.test(name.trim());
+  const gapAccounts = accounts.filter((a) => !isFixture(a.name) && ((peopleBy.get(a.name) ?? 0) > 0 || withThesis.has(a.name) || (touches.get(a.name)?.length ?? 0) > 0));
   return orderAccounts(gapAccounts.map((a) => toIndexRow(a, peopleBy.get(a.name) ?? 0, lastTouch(a.name))));
 }
 

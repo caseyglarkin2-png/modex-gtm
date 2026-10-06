@@ -20,15 +20,17 @@ describe('doneNextLinks', () => {
     expect(l.position).toEqual({ n: 2, of: 3 });
     expect(l.back).toEqual({ name: 'NFI Industries', href: '/gap/accounts/nfi-industries?from=work&i=0' });
     expect(l.next).toEqual({ name: 'Kroger', href: '/gap/accounts/kroger?from=work&i=2' });
-    expect(l.backToWork).toBe('/gap?filter=ready&q=pe&focus=1');
+    expect(l.backToWork).toBe('/gap?filter=ready&q=pe&focus=pepsico');
   });
   it('the first has no Back, the last has no Next; a mismatch (the order moved, or a deep link) offers Back to Work only', () => {
     expect(doneNextLinks(order, 0, 'nfi-industries').back).toBeNull();
     expect(doneNextLinks(order, 2, 'kroger').next).toBeNull();
     const stale = doneNextLinks(order, 1, 'walmart-inc');
     expect(stale).toEqual({ position: null, back: null, next: null, backToWork: '/gap?filter=ready&q=pe' });
+    // The list moved under the seller: the account itself is the key, the index only a hint.
+    expect(doneNextLinks(order, 0, 'pepsico').position).toEqual({ n: 2, of: 3 });
     expect(doneNextLinks(null, 1, 'pepsico')).toEqual({ position: null, back: null, next: null, backToWork: '/gap' });
-    expect(doneNextLinks({ ...order, filter: 'all', q: '' }, 1, 'pepsico').backToWork).toBe('/gap?focus=1');
+    expect(doneNextLinks({ ...order, filter: 'all', q: '' }, 1, 'pepsico').backToWork).toBe('/gap?focus=pepsico');
   });
   it('the order survives a round trip through session storage and a broken value reads as none', () => {
     saveWorkOrder(order);
@@ -50,7 +52,7 @@ describe('<DoneNext>', () => {
     expect(screen.getByTestId('done-next-back')).toHaveAttribute('aria-label', 'Back to NFI Industries');
     expect(screen.getByTestId('done-next-next')).toHaveAttribute('href', '/gap/accounts/kroger?from=work&i=2');
     expect(screen.getByTestId('done-next-next')).toHaveAttribute('aria-label', 'Next account: Kroger');
-    expect(screen.getByTestId('done-next-work')).toHaveAttribute('href', '/gap?filter=ready&q=pe&focus=1');
+    expect(screen.getByTestId('done-next-work')).toHaveAttribute('href', '/gap?filter=ready&q=pe&focus=pepsico');
     expect(screen.getAllByRole('link')).toHaveLength(3);
     expect(screen.queryByRole('button')).toBeNull();
   });

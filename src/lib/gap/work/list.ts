@@ -7,7 +7,8 @@
  * class decided before anything ranks (replies/classify.ts). Each card answers: account, why now, state, next person,
  * next action, blocker. Rules pinned by tests/unit/gap/work-list.test.ts:
  *
- *   - one card per account: its highest-ranked work
+ *   - one card per account: its highest-ranked work; a reply at the account (human, opt-out, bounce) IS the card,
+ *     whatever else the lanes hold (a review one-off never erases yesterday's "stop")
  *   - replies are classified first: only a HUMAN reply heads the list; an opt-out is "Opted out: record it" and
  *     ranks after RESEARCH (quick admin, never cold work, never at the head); an automatic reply is not work
  *     (dropped); a bounce is research (find a working address)
@@ -24,7 +25,7 @@ import type { PursuitSummary } from '../pursuit/summary';
 import type { PursuitStateKind } from '../pursuit/state';
 import type { CockpitLane } from '@/components/gap/gap-cockpit';
 
-export type WorkStateKind = 'replied' | 'opted_out' | 'bounced' | 'follow_up' | 'ready' | 'decide' | 'research' | 'in_deal' | 'unknown_deal';
+export type WorkStateKind = 'replied' | 'opted_out' | 'bounced' | 'follow_up' | 'ready' | 'decide' | 'research' | 'in_deal' | 'unknown_deal' | 'held';
 
 export interface WorkCard {
   accountName: string;
@@ -73,14 +74,42 @@ const STATE_TEXT: Record<WorkStateKind, string> = {
   research: 'Research',
   in_deal: 'In a deal',
   unknown_deal: 'Held: HubSpot could not be checked',
+  held: 'Held',
 };
+
+/** The action a pursuit-sourced card offers: the workspace carries the real control, so the card points there. */
+function pursuitAction(state: PursuitStateKind, accountName: string): { label: string; href: string } | null {
+  const page = accountHref(accountName);
+  switch (state) {
+    case 'replied':
+      return { label: 'Open the reply', href: '/gap?lane=replies' };
+    case 'opted_out':
+      return { label: 'Record the opt-out', href: '/gap?lane=replies' };
+    case 'in_deal':
+      return { label: 'Open the deal brief', href: `${page}?view=brief` };
+    case 'held':
+      return null;
+    case 'follow_up_due':
+      return { label: 'Open the follow-up', href: page };
+    case 'in_motion':
+      return { label: 'Open the account', href: page };
+    case 'ready':
+      return { label: 'Prepare the first touch', href: page };
+    case 'choose_person':
+      return { label: 'Choose who hears this first', href: `${page}#people-stack-heading` };
+    case 'research':
+      return { label: 'Open the research plan', href: `${page}?view=sources#research-plan` };
+    default:
+      return { label: 'Open the account', href: page };
+  }
+}
 
 /** The rank a classified reply takes: a human reply first of all; an opt-out after READY; a bounce with research. */
 const REPLY_RANK: Record<ReplyClassKind, number | null> = { human: LANE_RANK.replies, opt_out: LANE_RANK.research + 0.5, bounce: LANE_RANK.research, out_of_office: null };
 
 /** The canonical pursuit state's rank and card words (contract 5.1 order: reply, hold, follow up, in motion, ready, choose, research). */
 const PURSUIT_RANK: Record<PursuitStateKind, number> = { replied: 0, opted_out: LANE_RANK.research + 0.5, in_deal: LANE_RANK.deals, held: LANE_RANK.deals - 0.5, follow_up_due: 1, in_motion: 1.5, ready: 2, choose_person: 2.5, research: 4, idle: 4.5 };
-const PURSUIT_KIND: Record<PursuitStateKind, WorkStateKind> = { replied: 'replied', opted_out: 'opted_out', in_deal: 'in_deal', held: 'unknown_deal', follow_up_due: 'follow_up', in_motion: 'ready', ready: 'ready', choose_person: 'ready', research: 'research', idle: 'research' };
+const PURSUIT_KIND: Record<PursuitStateKind, WorkStateKind> = { replied: 'replied', opted_out: 'opted_out', in_deal: 'in_deal', held: 'held', follow_up_due: 'follow_up', in_motion: 'ready', ready: 'ready', choose_person: 'ready', research: 'research', idle: 'research' };
 const PURSUIT_LANE: Record<PursuitStateKind, CockpitLane> = { replied: 'replies', opted_out: 'replies', in_deal: 'deals', held: 'deals', follow_up_due: 'follow_up', in_motion: 'ready', ready: 'ready', choose_person: 'ready', research: 'research', idle: 'research' };
 
 function cmpKeys(a: Array<number | string>, b: Array<number | string>): number {
@@ -117,17 +146,24 @@ export function buildWorkList(i: WorkInput): WorkCard[] {
     if (!have || r.rank < have.rank || (r.rank === have.rank && cmpKeys(r.sortKey, have.sortKey) < 0)) best.set(r.card.accountName, r);
   };
 
-  // Replies, classified before they rank (the candidates' reply rows are replaced by these).
-  const repliedAccounts = new Set<string>();
+  // Replies, classified before they rank. A reply IS the account's card: it is collected here and set after the
+  // lanes, so a review one-off or a research chore never erases it (Walmart's "stop" read "Decide the angle").
+  const replyCards: Ranked[] = [];
+  const offerReply = (r: Ranked) => {
+    const have = replyCards.find((x) => x.card.accountName === r.card.accountName);
+    if (!have || r.rank < have.rank || (r.rank === have.rank && cmpKeys(r.sortKey, have.sortKey) < 0)) {
+      if (have) replyCards.splice(replyCards.indexOf(have), 1);
+      replyCards.push(r);
+    }
+  };
   for (const r of i.replies) {
     if (!r.accountName) continue;
     const c = classifyReply({ snippet: r.snippet, subject: r.subject, from: r.contactEmail });
     const rank = REPLY_RANK[c.kind];
     if (rank === null) continue; // an automatic reply is not work
-    repliedAccounts.add(r.accountName);
     const kind: WorkStateKind = c.kind === 'human' ? 'replied' : c.kind === 'opt_out' ? 'opted_out' : 'bounced';
     const quote = (r.subject ?? r.snippet).replace(/\s+/g, ' ').trim().slice(0, 90);
-    offer({
+    offerReply({
       rank,
       sortKey: [new Date(r.receivedAt).getTime() || Number.MAX_SAFE_INTEGER],
       card: {
@@ -138,7 +174,7 @@ export function buildWorkList(i: WorkInput): WorkCard[] {
         why: `${r.contactEmail} wrote ${day(r.receivedAt)}: "${quote}". ${c.consequence}`,
         person: { name: r.contactEmail, title: null },
         next: { label: c.kind === 'human' ? 'Read the reply and record what they said' : c.kind === 'opt_out' ? 'Record the opt-out' : 'Find a working address', href: c.kind === 'bounce' ? accountHref(r.accountName) : '/gap?lane=replies' },
-        blocker: c.kind === 'human' ? 'No cold email to anyone here until it is recorded.' : null,
+        blocker: c.kind === 'human' ? 'No cold email to anyone here until it is recorded.' : c.kind === 'opt_out' ? 'They asked not to be contacted: no cold work here until it is recorded.' : null,
       },
     });
   }
@@ -160,9 +196,14 @@ export function buildWorkList(i: WorkInput): WorkCard[] {
         why: c.detail,
         person: p,
         next: { label: c.title, href: c.href },
-        blocker: repliedAccounts.has(c.accountName) ? null : null,
+        blocker: null,
       },
     });
+  }
+  // The reply card wins the account outright (a bounce only when nothing ranks above research).
+  for (const r of replyCards) {
+    if (r.card.stateKind === 'bounced') offer(r);
+    else best.set(r.card.accountName, r);
   }
 
   // Held accounts: in a deal (the summary) or UNKNOWN (a card's read), last, never a cold action.
@@ -182,7 +223,7 @@ export function buildWorkList(i: WorkInput): WorkCard[] {
     const have = best.get(name);
     if (!have) continue;
     const kind = PURSUIT_KIND[s.state];
-    const held = s.state === 'in_deal' || s.state === 'held';
+    const action = pursuitAction(s.state, name);
     best.set(name, {
       rank: PURSUIT_RANK[s.state],
       sortKey: have.sortKey,
@@ -193,9 +234,10 @@ export function buildWorkList(i: WorkInput): WorkCard[] {
         stateKind: kind,
         state: s.stateLine,
         person: s.person ?? (have.card.stateKind === kind ? have.card.person : null),
-        blocker: s.blocker ?? have.card.blocker,
-        // A cold action never survives a hold the canonical read found; a cold lane's action stands otherwise.
-        next: held && have.card.next && !/deal brief/i.test(have.card.next.label) ? { label: 'Open the deal brief', href: `${accountHref(name)}?view=brief` } : have.card.next,
+        // The card says what the workspace says, all of it: the why is NEXT, the action is the workspace's control.
+        why: s.nextText ?? s.blocker ?? have.card.why,
+        blocker: s.state === 'held' || s.state === 'in_deal' || s.state === 'replied' || s.state === 'opted_out' ? (s.blocker ?? have.card.blocker) : null,
+        next: action,
       },
     });
   }
@@ -212,7 +254,7 @@ export const WORK_FILTER_LABEL: Record<WorkFilter, string> = {
   ready: 'Ready',
   review: 'Decide',
   research: 'Research',
-  deals: 'In a deal',
+  deals: 'Held or in a deal',
 };
 export const WORK_FILTERS: readonly WorkFilter[] = ['all', 'replies', 'follow_up', 'ready', 'review', 'research', 'deals'];
 

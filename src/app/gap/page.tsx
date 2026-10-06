@@ -376,7 +376,8 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
       <GapSubnav />
       {/* Phase 2 A3: can the cockpit be trusted right now (mailbox, HubSpot, suppression, sender, routing). */}
       <HealthStrip />
-      <GapCockpit data={{ ...data.counts, active: lane }} />
+      {/* UX-10: the six lane tiles are the analyst's lanes; on Work the chips carry the counts, so the tiles show only inside a lane. */}
+      {lane ? <GapCockpit data={{ ...data.counts, active: lane }} /> : null}
 
       {data.unrouted > 0 ? (
         <section data-testid="unrouted-notice" className="space-y-2 rounded-md border border-amber-500/40 bg-amber-500/10 p-3 text-sm">
@@ -407,7 +408,7 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
       ) : (
         <>
           {/* UX-08: WORK is the landing: the accounts that need the seller, one card each, the lanes as filters. */}
-          <WorkList cards={data.work} focus={/^\d+$/.test(params.focus ?? '') ? Number(params.focus) : null} />
+          <WorkList cards={data.work} focus={/^[a-z0-9-]{1,120}$/.test(params.focus ?? '') ? (params.focus as string) : null} />
           {data.work.length === 0 ? <NextUp items={data.next} /> : null}
         </>
       )}

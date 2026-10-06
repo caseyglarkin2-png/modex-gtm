@@ -55,9 +55,13 @@ describe('<AccountsIndex>', () => {
     fireEvent.change(screen.getByTestId('accounts-search'), { target: { value: 'account 1' } });
     expect(screen.getAllByTestId('accounts-row').length).toBeGreaterThan(INDEX_PAGE);
   });
-  it('says so when nothing matches and opens nothing on Enter', () => {
-    render(<AccountsIndex rows={rows} initialQuery="zzz" />);
+  it('says so when nothing matches and opens nothing on Enter; an empty box opens nothing either', () => {
+    const { unmount } = render(<AccountsIndex rows={rows} initialQuery="zzz" />);
     expect(screen.getByTestId('accounts-empty')).toBeInTheDocument();
+    fireEvent.submit(screen.getByTestId('accounts-search').closest('form')!);
+    expect(push).not.toHaveBeenCalled();
+    unmount();
+    render(<AccountsIndex rows={rows} />);
     fireEvent.submit(screen.getByTestId('accounts-search').closest('form')!);
     expect(push).not.toHaveBeenCalled();
   });

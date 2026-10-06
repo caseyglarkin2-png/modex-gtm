@@ -51,6 +51,15 @@ describe('buildWorkList', () => {
     expect(cards.map((c) => c.index)).toEqual([0, 1, 2, 3, 4, 5, 6, 7]);
     expect(cards[0].href).toBe('/gap/accounts/nfi-industries?from=work&i=0');
   });
+  it('a reply IS the account card: a review one-off at Walmart never erases yesterday\'s stop, and the human reply at NFI beats its research chore', () => {
+    const cards = buildWorkList(input({ candidates: [...input().candidates, cand('review', 'Walmart Inc.', 'Decide the Walmart Inc. hypothesis', [-1, 1]), cand('research', 'NFI Industries', 'Research NFI Industries', [-1, 1])] }));
+    const walmart = cards.find((c) => c.accountName === 'Walmart Inc.')!;
+    expect(walmart.stateKind).toBe('opted_out');
+    expect(walmart.next?.label).toBe('Record the opt-out');
+    expect(walmart.blocker).toMatch(/no cold work here until it is recorded/);
+    expect(cards.filter((c) => c.accountName === 'Walmart Inc.')).toHaveLength(1);
+    expect(cards[0]).toMatchObject({ accountName: 'NFI Industries', stateKind: 'replied' });
+  });
   it('replies are classified before they rank: the opt-out never heads the list, even when nothing else is ready, and says what to do; the automatic reply is not work', () => {
     const cards = buildWorkList(input());
     const walmart = cards.find((c) => c.accountName === 'Walmart Inc.')!;
@@ -96,18 +105,24 @@ describe('buildWorkList', () => {
 });
 
 describe('the canonical pursuit state overrides the cockpit lane on the card', () => {
-  it('FedEx reads READY with Glen from a fresh summary while the cockpit only had research; a hold from the read removes the cold action', () => {
-    const base = input({ candidates: [cand('research', 'FedEx', 'Research FedEx', [-1, 1]), cand('ready', 'PepsiCo', 'Contact Karen Darling', [Number.MAX_SAFE_INTEGER, 1, 5])] });
+  it('a fresh summary rewrites the whole card (state, why from NEXT, person, action to the workspace): FedEx READY with Glen, PepsiCo in a deal, H-E-B held with no action', () => {
+    const base = input({ candidates: [cand('research', 'FedEx', 'Research FedEx', [-1, 1]), cand('ready', 'PepsiCo', 'Contact Karen Darling', [Number.MAX_SAFE_INTEGER, 1, 5]), cand('research', 'H-E-B', 'Judge 2 verified facts at H-E-B', [-2, 1])] });
     const summaries = new Map([
-      ['FedEx', { accountName: 'FedEx', state: 'ready' as const, stateLine: 'Ready for a first touch: Glen Chaffee', person: { name: 'Glen Chaffee', title: 'Managing Director' }, blocker: null, coldTouchAllowed: true, at: NOW.toISOString() }],
-      ['PepsiCo', { accountName: 'PepsiCo', state: 'in_deal' as const, stateLine: 'In a deal', person: null, blocker: 'Work the deal.', coldTouchAllowed: false, at: NOW.toISOString() }],
+      ['FedEx', { accountName: 'FedEx', state: 'ready' as const, stateLine: 'Ready for a first touch: Glen Chaffee', person: { name: 'Glen Chaffee', title: 'Managing Director' }, blocker: null, coldTouchAllowed: true, nextText: 'Prepare the first touch to Glen Chaffee.', at: NOW.toISOString() }],
+      ['PepsiCo', { accountName: 'PepsiCo', state: 'in_deal' as const, stateLine: 'In a deal', person: null, blocker: 'Work the deal.', coldTouchAllowed: false, nextText: 'Work the deal (Pilot), never a cold first touch.', at: NOW.toISOString() }],
+      ['H-E-B', { accountName: 'H-E-B', state: 'held' as const, stateLine: 'Held: family hold', person: null, blocker: 'A sibling account is in motion: no cold touch here until it clears.', coldTouchAllowed: false, nextText: null, at: NOW.toISOString() }],
     ]);
     const cards = buildWorkList({ ...base, summaries });
     const fedex = cards.find((c) => c.accountName === 'FedEx')!;
-    expect(fedex).toMatchObject({ stateKind: 'ready', lane: 'ready', state: 'Ready for a first touch: Glen Chaffee', person: { name: 'Glen Chaffee', title: 'Managing Director' }, source: 'pursuit' });
+    expect(fedex).toMatchObject({ stateKind: 'ready', lane: 'ready', state: 'Ready for a first touch: Glen Chaffee', why: 'Prepare the first touch to Glen Chaffee.', person: { name: 'Glen Chaffee', title: 'Managing Director' }, source: 'pursuit', blocker: null });
+    expect(fedex.next).toEqual({ label: 'Prepare the first touch', href: '/gap/accounts/fedex' });
+    expect(fedex.why).not.toMatch(/missing evidence|Research FedEx/);
     const pepsi = cards.find((c) => c.accountName === 'PepsiCo')!;
-    expect(pepsi).toMatchObject({ stateKind: 'in_deal', lane: 'deals', source: 'pursuit' });
+    expect(pepsi).toMatchObject({ stateKind: 'in_deal', lane: 'deals', source: 'pursuit', why: 'Work the deal (Pilot), never a cold first touch.' });
     expect(pepsi.next).toEqual({ label: 'Open the deal brief', href: '/gap/accounts/pepsico?view=brief' });
+    const heb = cards.find((c) => c.accountName === 'H-E-B')!;
+    expect(heb).toMatchObject({ stateKind: 'held', lane: 'deals', state: 'Held: family hold', why: 'A sibling account is in motion: no cold touch here until it clears.' });
+    expect(heb.next).toBeNull();
     expect(cards.findIndex((c) => c.accountName === 'FedEx')).toBeLessThan(cards.findIndex((c) => c.accountName === 'PepsiCo'));
   });
 });

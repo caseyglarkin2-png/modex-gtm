@@ -11,6 +11,8 @@ import { loadAccountInputs } from '../account-intel/load';
 import { buildAccountBrief } from '../account-intel/build';
 import { loadAccountContext } from '../context/load';
 import { loadPursuit } from './load';
+import { nextFromPursuit } from './next';
+import { accountHref } from '../account-intel/href';
 import type { PursuitState } from './state';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -30,13 +32,15 @@ export interface PursuitSummary {
   person: { name: string; title: string | null } | null;
   blocker: string | null;
   coldTouchAllowed: boolean;
+  /** NEXT as the workspace says it (the card's why now), when known. */
+  nextText: string | null;
   /** When this read happened (ISO). */
   at: string;
 }
 
 const cache = new Map<string, PursuitSummary>();
 
-export function rememberPursuitSummary(s: PursuitState, now: Date = new Date()): PursuitSummary {
+export function rememberPursuitSummary(s: PursuitState, now: Date = new Date(), nextText: string | null = null): PursuitSummary {
   const out: PursuitSummary = {
     accountName: s.accountName,
     state: s.state,
@@ -44,6 +48,7 @@ export function rememberPursuitSummary(s: PursuitState, now: Date = new Date()):
     person: s.person ? { name: s.person.name, title: s.person.title } : null,
     blocker: s.blocker,
     coldTouchAllowed: s.coldTouchAllowed,
+    nextText,
     at: now.toISOString(),
   };
   cache.set(s.accountName, out);
@@ -79,7 +84,9 @@ export async function summarizePursuit(prisma: PrismaLike, accountName: string, 
     const brief = buildAccountBrief(inputs, now);
     const ctx = await loadAccountContext(prisma, inputs, now);
     const p = await loadPursuit(prisma, { brief, inputs, ctx, now });
-    return rememberPursuitSummary(p.state, now);
+    const href = accountHref(accountName);
+    const next = nextFromPursuit(p.state, { hypothesisId: p.hypothesisId, accountSlugHref: (view) => `${href}?view=${view}`, replyThreadHref: null, captureHref: `/gap/capture?account=${encodeURIComponent(accountName)}` });
+    return rememberPursuitSummary(p.state, now, next.text);
   })();
   const cap = new Promise<null>((r) => {
     timer = setTimeout(() => r(null), timeoutMs);
