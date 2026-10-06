@@ -6,6 +6,11 @@
    Dark on a light OS gets text-amber-700 on the near-black page. */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* WCAG 2.2 SC 2.4.11 (account-first UX, UX-03 review): a focused control is never hidden under the fixed header plus
+   the sticky view tabs (about 112px on a phone, 56px from md up) or the fixed Note / Compose pills at the bottom. */
+html { scroll-padding-top: 120px; scroll-padding-bottom: 88px; }
+@media (min-width: 768px) { html { scroll-padding-top: 64px; } }
+
 :root {
   --background: #ffffff;
   --foreground: #0a0a0a;

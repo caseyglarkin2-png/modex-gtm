@@ -101,7 +101,7 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, 
       </div>
 
       <div className="rounded-md border border-[var(--primary)] px-3 py-2" data-testid="now-next">
-        <p className="text-xs font-semibold uppercase tracking-wide text-[var(--primary)]">Next</p>
+        <h2 className="text-xs font-semibold uppercase tracking-wide text-[var(--primary)]">Next</h2>
         <p className="text-sm font-medium">{nextText ?? v.next.text}</p>
         {pursuit?.state.blocker && pursuit.state.state !== 'research' && pursuit.state.state !== 'replied' && pursuit.state.state !== 'opted_out' ? (
           <p className="mt-1 text-xs text-amber-700 dark:text-amber-400" data-testid="now-blocker">{pursuit.state.blocker}</p>

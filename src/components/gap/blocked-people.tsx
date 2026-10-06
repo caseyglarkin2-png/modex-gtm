@@ -17,7 +17,7 @@ export function BlockedPeople({ accountName, people }: { accountName: string; pe
       </p>
       <div className="mt-0.5 flex flex-wrap gap-x-3 gap-y-1">
         {people.map((b) => (
-          <button key={b.personaId} type="button" className="underline" onClick={() => setReviewing((v) => (v === b.personaId ? null : b.personaId))} data-testid="now-review-suppression" data-persona={b.personaId}>
+          <button key={b.personaId} type="button" className="inline-flex min-h-6 items-center underline" onClick={() => setReviewing((v) => (v === b.personaId ? null : b.personaId))} data-testid="now-review-suppression" data-persona={b.personaId}>
             {reviewing === b.personaId ? `Hide the review for ${b.name}` : `Review the flag on ${b.name}`}
           </button>
         ))}

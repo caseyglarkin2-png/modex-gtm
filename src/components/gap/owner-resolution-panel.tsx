@@ -191,7 +191,7 @@ export function OwnerResolutionPanel({ hypothesisId, accountName, onChanged }: O
                   </ul>
                   {c.caution ? <p className="mt-1 text-xs text-amber-700 dark:text-amber-400">{c.caution}</p> : null}
                   <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">
-                    <button type="button" className="text-[11px] underline text-[var(--muted-foreground)]" onClick={(e) => { e.preventDefault(); toggleOpen(c.key); }} data-testid="owner-candidate-details">
+                    <button type="button" className="inline-flex min-h-6 items-center text-[11px] underline text-[var(--muted-foreground)]" onClick={(e) => { e.preventDefault(); toggleOpen(c.key); }} data-testid="owner-candidate-details">
                       {open.has(c.key) ? 'Hide details' : `Details${c.location ? ` (${c.location})` : ''}`}
                     </button>
                   </div>

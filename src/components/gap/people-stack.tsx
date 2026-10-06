@@ -14,7 +14,7 @@
  * person is added to GAP first (POST /api/gap/people/import, the existing account-scoped import). Nothing here
  * drafts, sends, enrolls, writes HubSpot or spends Apollo; every send still runs its own gates. Voice: no em dashes.
  */
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import type { PeopleStack, StackRow } from '@/lib/gap/people/stack';
@@ -55,6 +55,17 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
   const [busy, setBusy] = useState<Busy>(null);
   const [note, setNote] = useState<{ kind: 'status' | 'alert'; text: string } | null>(null);
   const toggle = (key: string) => setOpen((prev) => { const n = new Set(prev); if (n.has(key)) n.delete(key); else n.add(key); return n; });
+  // After a choice the chosen row re-renders at the top and the Choose button unmounts: focus follows the person
+  // (WCAG 2.4.3), never falls to the page body.
+  const justChose = useRef<string | null>(null);
+  useEffect(() => {
+    const key = justChose.current;
+    if (!key) return;
+    const row = stack.rows.find((r) => r.chosen && r.key === key);
+    if (!row) return;
+    justChose.current = null;
+    document.getElementById(`row-${key}`)?.focus();
+  }, [stack]);
 
   async function choose(row: StackRow) {
     setNote(null);
@@ -82,6 +93,7 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
         return;
       }
       setNote({ kind: 'status', text: `${row.name} is first at ${accountName.replace(/\.$/, '')}. Nothing is sent by choosing; every send runs its own gates.` });
+      justChose.current = row.key;
       router.refresh();
     } catch (e) {
       setNote({ kind: 'alert', text: e instanceof Error ? e.message : 'network error' });
@@ -137,12 +149,13 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
         </p>
       ) : null}
 
-      <ol className="space-y-2" data-testid="people-stack-rows">
+      {/* An unordered list with the role restated: the order is said in words (ordinals or the tie line), never implied by the list. */}
+      <ul role="list" className="space-y-2" data-testid="people-stack-rows">
         {rows.map((row) => (
           <li key={row.key} className={`rounded-md border p-3 ${row.chosen ? 'border-[var(--primary)] bg-[var(--muted)]/30' : 'border-[var(--border)]'}`} data-testid="people-stack-row" data-key={row.key} data-chosen={row.chosen ? 'true' : 'false'} data-slot={row.slot}>
             <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
               {row.ordinal !== null && choosing ? <span className="text-xs font-semibold tabular-nums text-[var(--muted-foreground)]" data-testid="people-stack-ordinal">{row.ordinal}.</span> : null}
-              <p className="font-medium">
+              <p id={`row-${row.key}`} tabIndex={-1} className="font-medium outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]">
                 {row.name}
                 {row.title ? <span className="font-normal text-[var(--muted-foreground)]">, {row.title}</span> : null}
               </p>
@@ -208,7 +221,7 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
               ) : (
                 <span className="text-xs text-[var(--muted-foreground)]" data-testid="people-stack-slot-only">Not a cold first touch: unlocks by a meeting, a referral or your explicit choice.</span>
               )}
-              <button type="button" className={TEXT} aria-expanded={open.has(row.key)} aria-controls={`why-${row.key}`} onClick={() => toggle(row.key)} data-testid="people-stack-why">
+              <button type="button" className={TEXT} aria-expanded={open.has(row.key)} aria-controls={`why-${row.key}`} aria-label={open.has(row.key) ? `Hide why ${row.name}` : `Why ${row.name}?`} onClick={() => toggle(row.key)} data-testid="people-stack-why">
                 {open.has(row.key) ? 'Hide why' : 'Why this person?'}
               </button>
             </div>
@@ -230,13 +243,17 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
             </div>
           </li>
         ))}
-      </ol>
+      </ul>
       {!showAll && stack.setAside.line ? (
         <p className="text-xs text-[var(--muted-foreground)]" data-testid="people-stack-set-aside-line">{stack.setAside.line}</p>
       ) : null}
 
-      {note ? (
-        <p role={note.kind} className={`text-xs ${note.kind === 'alert' ? 'text-red-700 dark:text-red-400' : ''}`} data-testid="people-stack-note">
+      {/* One always-mounted status region (its text changes, so screen readers announce it); an alert only when something refused. */}
+      <p role="status" aria-live="polite" className="text-xs" data-testid="people-stack-note">
+        {note?.kind === 'status' ? note.text : ''}
+      </p>
+      {note?.kind === 'alert' ? (
+        <p role="alert" className="text-xs text-red-700 dark:text-red-400" data-testid="people-stack-alert">
           {note.text}
         </p>
       ) : null}
@@ -249,7 +266,7 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
               <span className="font-medium">{row.name}</span>
               {row.title ? <span className="text-[var(--muted-foreground)]">, {row.title}</span> : null}
               <span className="text-[var(--muted-foreground)]">(not a cold first touch)</span>
-              <button type="button" className={TEXT} aria-expanded={open.has(row.key)} aria-controls={`why-${row.key}`} onClick={() => toggle(row.key)} data-testid="people-stack-why">
+              <button type="button" className={TEXT} aria-expanded={open.has(row.key)} aria-controls={`why-${row.key}`} aria-label={open.has(row.key) ? `Hide why ${row.name}` : `Why ${row.name}?`} onClick={() => toggle(row.key)} data-testid="people-stack-why">
                 {open.has(row.key) ? 'Hide why' : 'Why?'}
               </button>
               <ul id={`why-${row.key}`} hidden={!open.has(row.key)} className="basis-full space-y-0.5 pl-2 text-[var(--muted-foreground)]" data-testid={open.has(row.key) ? 'people-stack-why-list' : undefined}>
