@@ -101,7 +101,7 @@ export function WorkList({ cards, focus, listenText = null, readAt = null }: { c
             type="search"
             value={query}
             placeholder="Search accounts"
-            className="min-h-9 w-full rounded-md border border-[var(--border)] bg-transparent px-2 text-sm"
+            className="min-h-11 w-full rounded-md border border-[var(--border)] bg-transparent px-2 text-sm sm:min-h-9"
             onChange={(e) => {
               setQuery(e.target.value);
               setUrl(filter, e.target.value);
@@ -120,7 +120,7 @@ export function WorkList({ cards, focus, listenText = null, readAt = null }: { c
             <li key={c.accountName} id={`work-card-${c.index}`} tabIndex={-1} className="rounded-md border border-[var(--border)] p-3 outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]" data-testid="work-card" data-account={c.accountName} data-slug={accountSlug(c.accountName)} data-state={c.stateKind} data-lane={c.lane}>
               <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
                 <p className="text-base font-semibold">
-                  <Link href={c.href} className="underline decoration-dotted underline-offset-2 hover:decoration-solid" data-testid="work-card-account">{c.accountName}</Link>
+                  <Link href={c.href} className="inline-flex min-h-11 items-center underline decoration-dotted underline-offset-2 hover:decoration-solid" data-testid="work-card-account">{c.accountName}</Link>
                 </p>
                 <p className={`text-sm font-medium ${STATE_TONE[c.stateKind]}`} data-testid="work-card-state">{c.state}</p>
               </div>

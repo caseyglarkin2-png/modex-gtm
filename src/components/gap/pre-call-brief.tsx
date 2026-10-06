@@ -110,7 +110,7 @@ export function PreCallBrief({ brief, hideContact = false, checking = false, sta
             ) : (
               <>
                 {persona?.email ?? 'no email'}
-                {persona?.phone ? <span className="ml-2">{persona.phone}</span> : null}
+                {persona?.phone ? <span className="ml-2">{persona.phone}</span> : <span className="ml-2 text-amber-700 dark:text-amber-400" data-testid="brief-no-phone">no phone on file: find a number, or email</span>}
               </>
             )}
             {persona?.personaKey ? <span className="ml-2">{words(persona.personaKey)}</span> : null}

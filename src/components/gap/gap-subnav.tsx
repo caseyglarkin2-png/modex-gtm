@@ -52,7 +52,7 @@ export function GapSubnav() {
   }, [pathname]);
   const moreActive = MORE_TABS.some((t) => isActive(pathname, t.href));
   return (
-    <nav aria-label="GAP OS" data-testid="gap-subnav" className="flex flex-nowrap items-center gap-x-1 overflow-x-auto border-b border-[var(--border)] sm:flex-wrap sm:overflow-visible">
+    <nav aria-label="GAP OS" data-testid="gap-subnav" className="flex flex-wrap items-center gap-x-1 border-b border-[var(--border)]">
       {PRIMARY_TABS.map((tab) => {
         const active = isActive(pathname, tab.href);
         return (
@@ -61,11 +61,11 @@ export function GapSubnav() {
           </Link>
         );
       })}
-      <details ref={more} className="relative shrink-0" data-testid="gap-subnav-more">
+      <details ref={more} className="shrink-0 sm:relative" data-testid="gap-subnav-more">
         <summary className={cn(ITEM, 'cursor-pointer list-none marker:content-none', moreActive ? ACTIVE : QUIET)} aria-label="More GAP tools">
           More
         </summary>
-        <ul className="absolute left-0 z-20 mt-1 min-w-44 rounded-md border border-[var(--border)] bg-[var(--background)] p-1 shadow-md" aria-label="More GAP tools">
+        <ul className="mt-1 min-w-44 rounded-md border border-[var(--border)] bg-[var(--background)] p-1 shadow-md sm:absolute sm:left-0 sm:z-20" aria-label="More GAP tools">
           {MORE_TABS.map((tab) => {
             const active = isActive(pathname, tab.href);
             return (

@@ -111,7 +111,7 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
         : null,
     briefNext: brief.glance.nextAction,
   };
-  const state = projectPursuitState(input);
+  let state = projectPursuitState(input);
   // Only a HUMAN choice is passed as chosen (chosenBy set); a lone eligible person is the resolver's preselection and
   // reads "GAP: the only eligible person", never "Chosen by you" (trust review).
   const chosenKey = state.person?.chosenBy && (resolution?.eligible ?? []).some((c) => c.key === state.person!.key) ? state.person.key : null;
@@ -129,12 +129,17 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
   const usable = (h: (typeof brief.hypotheses)[number] | null) => !!h && !!sendableTheses && sendableTheses.has(h.id) && h.needsReview.length === 0 && openStatuses.has(inputs.hypotheses.find((x) => x.id === h.id)?.status ?? '');
   const anchoredOpen = usable(anchored) ? anchored : null;
   const usableTheses = brief.hypotheses.filter((h) => h.grounded && h.truth !== 'CONTRADICTED' && usable(h)).map((h) => h.id);
+  // Nobody is asked to choose who hears a first touch that nothing could open: without a usable thesis the account is
+  // research (the people stand); a chosen person keeps READY, and NEXT says to review the angle first.
+  if (state.state === 'choose_person' && sendableTheses && usableTheses.length === 0) {
+    state = { ...state, state: 'research', stateLine: `Research: no usable angle to open on yet${state.stateLine.includes('eligible') ? ` (${state.stateLine.replace(/^.*\((\d+ eligible)\).*$/, '$1')})` : ''}`, coldTouchAllowed: false, blocker: `No thesis the send gate would let out grounds a first touch at ${accountName} yet. The people below stand; the angle is what is missing.`, unlock: 'A verified fact and an approved angle.' };
+  }
   const topUsable = brief.hypotheses.find((h) => usableTheses.includes(h.id)) ?? null;
   return { state, resolution, stack, hypothesisId: anchoredOpen?.id ?? topUsable?.id ?? null, anchorChoice, sendableTheses, usableTheses, ready: readyTargetOf(mine) };
 }
 
 /** UX-06: the account's open theses whose opening the send gate would let out (the pack's own rule over the linked signals). */
-async function loadSendableTheses(prisma: PrismaLike, accountName: string, now: Date): Promise<Set<string>> {
+export async function loadSendableTheses(prisma: PrismaLike, accountName: string, now: Date): Promise<Set<string>> {
   const rows: Array<{ id: string; account_name: string; observation: string | null; signals: Array<{ role: string | null; signal: Record<string, unknown> | null }> }> = await prisma.prospectingHypothesis.findMany({
     where: { account_name: accountName, superseded_by: { is: null }, status: { in: ['approved', 'active', 'confirmed', 'partially_confirmed', 'review_required'] } },
     select: { id: true, account_name: true, observation: true, signals: { select: { role: true, signal: { select: EVIDENCE_SIGNAL_SELECT } } } },

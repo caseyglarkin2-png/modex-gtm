@@ -67,7 +67,8 @@ type AccountQuery = { name?: string; view?: string; from?: string; i?: string };
 
 /** The account's name from its slug with one cheap read (the full read follows in the streamed body). */
 async function quickAccountName(slug: string, name?: string): Promise<string | null> {
-  const token = slug.split('-')[0];
+  // The longest word of the slug (never "the" or an initial) keeps the read small and the hit likely.
+  const token = slug.split('-').filter((w) => w.length >= 3).sort((a, b) => b.length - a.length)[0] ?? slug.split('-')[0];
   const rows = (await prisma.account.findMany({ where: { name: { contains: token, mode: 'insensitive' } }, select: { name: true }, take: 50 }).catch(() => [])) as Array<{ name: string }>;
   if (name && rows.some((r) => r.name === name)) return name;
   return rows.find((r) => accountSlug(r.name) === slug)?.name ?? null;
@@ -254,7 +255,13 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
     // The remit caution travels to NEXT: a cold first touch never asks the buyer who owns it.
     if (pursuitNext && anchor?.primary && anchor.primary.relevance.tier === 'none' && pursuit?.state.person) {
       const first = pursuit.state.person.name.split(' ')[0];
-      pursuitNext.text = `${pursuitNext.text} ${remitCaution(first, anchor.primary.factLabel, anchor.fitsBetter)}`;
+      pursuitNext.text = `${pursuitNext.text} ${remitCaution(first, anchor.primary.factLabel, anchor.fitsBetter)}${anchor.fitsBetter ? ` Use a different story below, or make ${anchor.fitsBetter.name.split(' ')[0]} first.` : ' Use a different story below.'}`;
+    }
+    // A research account with a checked fact and no thesis: the unblocking move is the draft on this page, not the
+    // analyst's research plan (the review: NEXT left the workspace while the draft sat collapsed on it).
+    if (pursuitNext && pursuit?.state.state === 'research' && anchor && anchor.draftable.length > 0) {
+      pursuitNext.text = `${anchor.draftable.length === 1 ? 'One checked fact' : `${anchor.draftable.length} checked facts`} can become a thesis: draft it from the opening story below; review grounds it, then the first touch is prepared.`;
+      pursuitNext.control = { href: '#outreach-anchor', label: 'Draft a thesis from the checked fact' };
     }
     // UX-11: Listen to account is written for the ear (60 to 90 s) over the same projections the page renders; it
     // never carries the private line, the do-not-use list, an address, a URL or a machine word. The older screen-read

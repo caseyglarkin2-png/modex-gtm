@@ -49,7 +49,7 @@ export function AccountsIndex({ rows, initialQuery = '' }: { rows: AccountIndexR
             <li key={r.name} className="flex flex-wrap items-baseline gap-x-3 gap-y-0.5 py-2" data-testid="accounts-row" data-account={r.name}>
               <Link href={r.href} className="min-h-9 font-medium underline decoration-dotted underline-offset-2 hover:decoration-solid" data-testid="accounts-row-link">{r.name}</Link>
               <span className="text-xs text-[var(--muted-foreground)]">
-                {[r.tier, r.vertical?.replace(/_/g, ' '), `${r.people} ${r.people === 1 ? 'person' : 'people'} on record`, r.lastTouchAt ? `last first touch ${day(r.lastTouchAt)}` : 'no GAP touch yet'].filter(Boolean).join(' · ')}
+                {[r.tier, r.vertical?.replace(/_/g, ' '), `${r.people} GAP ${r.people === 1 ? 'contact' : 'contacts'}`, r.lastTouchAt ? `last first touch ${day(r.lastTouchAt)}` : 'no GAP touch yet'].filter(Boolean).join(' · ')}
               </span>
             </li>
           ))}

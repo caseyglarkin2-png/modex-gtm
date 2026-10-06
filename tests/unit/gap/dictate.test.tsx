@@ -79,6 +79,7 @@ describe('<Dictate>', () => {
     fireEvent.click(screen.getByTestId('dictate-start'));
     await waitFor(() => expect(screen.getByTestId('dictate')).toHaveAttribute('data-phase', 'recording'));
     expect(screen.getByTestId('dictate-recording')).toHaveTextContent('Recording');
+    expect(document.activeElement).toBe(screen.getByTestId('dictate-stop')); // focus follows the state
     act(() => {
       vi.advanceTimersByTime(2000);
     });
@@ -86,6 +87,7 @@ describe('<Dictate>', () => {
     fireEvent.click(screen.getByTestId('dictate-cancel'));
     await waitFor(() => expect(screen.getByTestId('dictate')).toHaveAttribute('data-phase', 'idle'));
     expect(screen.getByTestId('dictate-status')).toHaveTextContent('Discarded. Nothing was recorded.');
+    expect(document.activeElement).toBe(screen.getByTestId('dictate-start'));
     expect(fetchSpy).not.toHaveBeenCalled();
     expect(onTranscript).not.toHaveBeenCalled();
     expect(tracks.stop).toHaveBeenCalled();

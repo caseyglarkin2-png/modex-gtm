@@ -1581,6 +1581,45 @@ amber 5.1 / 11.5 in light / dark).
 | A quote the screen cut mid-sentence was spoken as a finished fact; "cards" and "below" are screen talk; spokenPerson hard-coded FedEx and PepsiCo; the API fallback context lacked the story beside the anchor | NICE | FIXED: a cut quote ends at its last full sentence; people, not cards; "follow", not "below"; the company suffix is stripped by the account's own name; the fallback uses the story beside the anchor |
 | Dictate's aria-pressed is always false; "Read it back" is not built; no Media Session; nothing was played on a phone | NICE | CARRIED (section 10): aria-pressed reads true while transcribing; Read it back and Media Session wait for the ear test on a phone |
 
+### 8.14 UX-16 Pass A: enterprise seller, product, human factors (one fresh read-only reviewer with tasks, 2026-10-06)
+
+T1 to T8 as the reviewer counted them from the captures: T1 1 click, 1 screen, a backtrack only when cold; T2 1 click
+then the read, 2.6 to 3.5 screens at 820 with NEXT on screen 1; T3 0 clicks; T4 0 to 1; T5 1 to 2; T6 1 (a backtrack
+on the call page); T7 1; T8 1 and no new screen. Verdicts: Casey can run his day on it (with the habit of opening the
+account before trusting a cold card, now removed); a new seller not yet, because cold Work pointed at the wrong
+account and the research cards need the machinery explained.
+
+| Finding | Severity | Disposition |
+|---|---|---|
+| Cold Work contradicts the workspace and cold is the normal state: "Ready 0", FedEx "Research FedEx" while its page says READY with Glen; Kraft Heinz and Kroger (in deals) "Judge 1 verified fact"; the summaries live in process memory and the warmer could not keep up | BLOCKER | FIXED: on every load the Work page reads what the database alone says per account (a recorded chosen person; a usable thesis) and the hold card is the account's card whatever the lanes hold; a cold card is READY from the recorded choice with a usable thesis, research when no usable thesis exists (never "choose who"), and a deal from the In Deals read; the warmer reads three accounts a load with a 70 s budget |
+| Research is the dominant card and its NEXT leaves the workspace ("Open the research plan") while the unblocking draft sits collapsed on the page | SHOULD | FIXED: on a research account with a checked fact NEXT reads "One checked fact can become a thesis: draft it from the opening story below" and scrolls to the draft |
+| "Choose who hears this first" ranked above accounts that could be touched while no usable thesis existed (The Home Depot, NFI) | SHOULD | FIXED: without a usable thesis the account is research (the people stand), on the workspace and the card |
+| Tyson's NEXT ("Add Ryan Heman to GAP, then prepare the first touch") had no control and contradicted the warm touch | SHOULD | FIXED: a relationship-led account's NEXT is "Log the warm touch" with its control; a HubSpot-only person's NEXT points at the people |
+| FedEx offered only "Prepare the email to Glen" under a caution that the fact fits Lisa | SHOULD | FIXED: the caution ends "Use a different story below, or make Lisa first." |
+| Not a fit and Not now exist only for GAP contacts | SHOULD | FIXED as a plain line: "Set aside or correct after Choose adds them to GAP." (a preference needs a GAP record) |
+| Call mode says "dial" with no number; the fourth button clips at 820; machine words on the brief | SHOULD | FIXED in part: "no phone on file: find a number, or email" is said; the page clears the floating buttons; the brief's machine words are carried (the call page's next pass) |
+| Boston Beer's cold card shows a deal while the warm card and the page show a HubSpot identity hold | SHOULD | CARRIED: two HubSpot reads disagree on one account; the hold is the safe one and the card never offers a cold action |
+| Ask GAP on NFI said "Transportation ownership is not stated" over three Transportation titles | SHOULD | FIXED: the prompt says a person's title and reason state their remit |
+| The captures predate HEAD | SHOULD | FIXED: the gate is re-taken on the final build (UX-17) |
+| The ear says "3 flagged" where the page says 5; sidebar names; the index's first 60 and "no GAP touch yet" | NICE | FIXED in part: the index lists the accounts GAP has worked most first and counts GAP contacts; the rest carried |
+
+### 8.15 UX-16 Pass B: accessibility, trust, engineering regression (one fresh read-only reviewer, 2026-10-06)
+
+| Finding | Severity | Disposition |
+|---|---|---|
+| A READY summary up to 15 minutes old could rewrite a held or in-deal card into "Prepare the first touch" | BLOCKER | FIXED: a hold card is never lifted by a summary unless the summary is itself a hold; pinned |
+| The gate captures predate HEAD; the keyboard probe stops at 40 Tabs | SHOULD | FIXED: the gate is re-taken on the final build |
+| Listen to today said "ready for a first touch" for in motion, choose person and relationship-led | SHOULD | FIXED: a canonical card speaks its own state line; a held card names no next person |
+| UX-14's cache served every lane two minutes stale | SHOULD | FIXED: an open lane always reads fresh; Work alone may serve the remembered read |
+| The More menu was clipped below 640 px | SHOULD | FIXED: the subnav wraps and the menu flows inline on a phone |
+| A relationship-led card offered "Prepare the first touch" while the workspace offered no control | SHOULD | FIXED: the card's action is the warm touch, as the workspace's NEXT |
+| Focus dropped after Dictate's Stop/Cancel and after the stack's decisions | SHOULD | FIXED: focus moves to Stop while recording and back to Dictate after; a decision moves focus to its read-back line |
+| Ask GAP would write email copy on "draft an email to Glen" | SHOULD | FIXED: draft, write, compose and the rest are answered by naming the compiler; the prompt forbids copy and subject lines |
+| Cold-start parity where the cockpit's In Deals read misses deals the brief sees | SHOULD | CARRIED, said in 6p: the card never offers a cold action on those accounts (research), and the summary corrects it as it arrives |
+| Ask GAP mounted twice (a duplicate id); a held card kept its chosen person; phone targets under 44 px; the shell's name lookup keyed on "the"; "their address replied"; a recorder throw left the microphone open | NICE | FIXED: one collapsible box open on a desktop; no person on a held card; 44 px card titles, search and example chips on a phone; the slug's longest word; a name before the @; the recorder's throw releases the stream |
+| Label in name contained, not equal ("Pause" vs "Pause: Listen to today") | NICE | LEAVE: passes WCAG 2.5.3; the 5.8 wording is a stretch goal |
+| Writes, outbound, leaks | REJECTED by the reviewer | nothing on these surfaces sends, enrolls, writes HubSpot, spends Apollo or clears a suppression; transcription answers 503 without the flags; the vault note and the private line stay out |
+
 ## 9. Validation record
 
 | Ticket | Validation | Result |

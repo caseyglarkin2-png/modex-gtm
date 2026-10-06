@@ -45,6 +45,8 @@ import { GapCockpit, NextUp, type CockpitLane } from '@/components/gap/gap-cockp
 import { buildNextUpCandidates, heldAccountsOf, pickNextUpV2 } from '@/lib/gap/routing/next-up';
 import { buildWorkList, type WorkCard, type WorkInput } from '@/lib/gap/work/list';
 import { readPursuitSummaries, warmPursuitSummaries } from '@/lib/gap/pursuit/summary';
+import { loadSendableTheses } from '@/lib/gap/pursuit/load';
+import { loadMotionChoices } from '@/lib/gap/motion/load';
 import { agoText as readAgo, cachedRead } from '@/lib/gap/work/cache';
 import { todayListenText } from '@/lib/gap/voice/today';
 import { WorkList } from '@/components/gap/work-list';
@@ -161,10 +163,25 @@ async function loadCockpit() {
     else if (it.ruleId === 'active_opportunity' && !heldWhy.has(it.account.name)) heldWhy.set(it.account.name, 'active_opportunity');
   }
   const workAccounts = [...new Set([...candidates.map((c) => c.accountName).filter((x): x is string => !!x), ...repliesPage.items.map((r) => r.accountName), ...inDeals.accounts.map((a) => a.accountName)])];
+  // What the database alone says per Work account, on every load (no HubSpot): a usable thesis exists; the recorded
+  // chosen person. A cold instance then still agrees with the workspace on READY and on research (Pass A blocker).
+  const choicesAll = await loadMotionChoices(prisma, workAccounts).catch(() => new Map());
+  const chosenIds = [...choicesAll.values()].map((c) => c.primaryPersonaId);
+  const personaRows = chosenIds.length ? ((await prisma.persona.findMany({ where: { id: { in: chosenIds } }, select: { id: true, name: true, title: true } }).catch(() => [])) as Array<{ id: number; name: string | null; title: string | null }>) : [];
+  const personaById = new Map(personaRows.map((p) => [p.id, p]));
+  const dbState = new Map<string, { sendable: boolean; chosen: { name: string; title: string | null } | null }>();
+  for (const name of workAccounts) {
+    const sendable = await loadSendableTheses(prisma, name, now).catch(() => null);
+    if (sendable === null) continue;
+    const choice = choicesAll.get(name);
+    const p = choice ? personaById.get(choice.primaryPersonaId) : undefined;
+    dbState.set(name, { sendable: sendable.size > 0, chosen: p?.name ? { name: p.name, title: p.title } : null });
+  }
   // The pieces the Work cards are built from; the cards themselves are built at render over the live pursuit summaries.
   const workInput: Omit<WorkInput, 'summaries'> = {
     now,
     candidates,
+    dbState,
     replies: repliesPage.items.map((r) => ({ accountName: r.accountName, contactEmail: r.contactEmail, subject: r.subject, snippet: r.snippet, receivedAt: r.receivedAt })),
     motions: motion.motions.map((m) => ({ accountName: m.accountName, state: m.state, primary: m.primary ? { name: m.primary.name, title: m.primary.title } : null, next: m.next ? { name: m.next.name, title: m.next.title, unlock: m.next.unlock } : null })),
     inDeals: { status: inDeals.status, accounts: inDeals.accounts.map((a) => ({ accountName: a.accountName, deals: a.deals.map((d) => ({ name: d.name, stage: d.stage })) })) },
@@ -349,7 +366,8 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
   const openId = params.open?.trim() || null;
   // UX-14: the cockpit read is remembered for two minutes per instance (Refresh bypasses); the Work cards are built
   // now over the live pursuit summaries, so a workspace visit shows on the next Work load without a re-read.
-  const fresh = params.fresh === '1';
+  // Work may serve a two-minute-old read; an open lane (the analyst's decisions) always reads fresh.
+  const fresh = params.fresh === '1' || !!lane;
   const read = await cachedRead('cockpit', loadCockpit, { fresh });
   const data = read.value;
   const now = new Date();

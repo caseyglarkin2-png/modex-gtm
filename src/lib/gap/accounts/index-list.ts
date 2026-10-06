@@ -26,13 +26,13 @@ export function filterAccounts(rows: readonly AccountIndexRow[], query: string):
   });
 }
 
-/** Tier 1 first, then priority band, then name: the order the seller scans in. */
+/** The accounts GAP has worked most (people on record) first, then Tier 1, then band, then name. */
 export function orderAccounts(rows: readonly AccountIndexRow[]): AccountIndexRow[] {
   const tierKey = (t: string | null) => {
     const m = /(\d)/.exec(t ?? '');
     return m ? Number(m[1]) : 9;
   };
-  return [...rows].sort((a, b) => tierKey(a.tier) - tierKey(b.tier) || (a.priorityBand ?? 'Z').localeCompare(b.priorityBand ?? 'Z') || a.name.localeCompare(b.name));
+  return [...rows].sort((a, b) => Math.min(b.people, 5) - Math.min(a.people, 5) || tierKey(a.tier) - tierKey(b.tier) || (a.priorityBand ?? 'Z').localeCompare(b.priorityBand ?? 'Z') || a.name.localeCompare(b.name));
 }
 
 export function toIndexRow(r: { name: string; tier: string | null; vertical: string | null; priority_band: string | null }, people: number, lastTouchAt: string | null): AccountIndexRow {

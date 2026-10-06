@@ -146,7 +146,7 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
   }
 
   return (
-    <section className="space-y-2 rounded-md border border-[var(--border)] px-3 py-2" data-testid="outreach-anchor" aria-labelledby="outreach-anchor-heading">
+    <section id="outreach-anchor" className="space-y-2 rounded-md border border-[var(--border)] px-3 py-2 scroll-mt-20" data-testid="outreach-anchor" aria-labelledby="outreach-anchor-heading">
       <h2 id="outreach-anchor-heading" className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">
         Opening story{first ? ` for ${first}` : ''}
       </h2>

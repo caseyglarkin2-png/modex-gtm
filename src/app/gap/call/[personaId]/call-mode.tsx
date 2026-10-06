@@ -96,7 +96,7 @@ export function CallMode({
   const contactEmail = brief.persona?.email ?? '';
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 pb-24 sm:pb-0">
       <PreCallBrief brief={{ ...brief, pursuit: pursuit ?? null }} hideContact={hideContact} checking={!pursuitChecked} stateUnreadable={pursuitChecked && !!client.getCallPursuit && pursuit === null} />
       {(hypothesis ?? brief.hypothesis) && contactEmail ? (
         <DispositionForm

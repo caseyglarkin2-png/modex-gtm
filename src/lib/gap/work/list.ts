@@ -62,6 +62,13 @@ export interface WorkInput {
   held: ReadonlyMap<string, 'active_opportunity' | 'opportunity_unknown'>;
   /** Fresh canonical pursuit summaries by account (pursuit/summary.ts), when any. */
   summaries?: ReadonlyMap<string, PursuitSummary>;
+  /**
+   * What the database alone says per account, read on every load (no HubSpot, no process memory): whether a usable
+   * (sendable, grounded, open) thesis exists, and the recorded chosen person. A cold load is the normal state, so a
+   * cold card must not contradict the workspace: a recorded choice with a usable thesis is READY; a cold-touch lane
+   * card with no usable thesis is research (nothing to open on), never "choose who".
+   */
+  dbState?: ReadonlyMap<string, { sendable: boolean; chosen: { name: string; title: string | null } | null }>;
 }
 
 const STATE_TEXT: Record<WorkStateKind, string> = {
@@ -78,8 +85,10 @@ const STATE_TEXT: Record<WorkStateKind, string> = {
 };
 
 /** The action a pursuit-sourced card offers: the workspace carries the real control, so the card points there. */
-function pursuitAction(state: PursuitStateKind, accountName: string): { label: string; href: string } | null {
+function pursuitAction(state: PursuitStateKind, accountName: string, stateLine = ''): { label: string; href: string } | null {
   const page = accountHref(accountName);
+  // A relationship-led account's move is the warm touch, as the workspace says (never "Prepare the first touch").
+  if (state === 'ready' && /^Relationship-led/.test(stateLine)) return { label: 'Log the warm touch', href: `/gap/capture?account=${encodeURIComponent(accountName)}` };
   switch (state) {
     case 'replied':
       return { label: 'Open the reply', href: '/gap?lane=replies' };
@@ -179,26 +188,39 @@ export function buildWorkList(i: WorkInput): WorkCard[] {
     });
   }
 
+  const dealAccountNames = new Set(i.inDeals.status === 'complete' ? i.inDeals.accounts.map((a) => a.accountName) : []);
   for (const c of i.candidates) {
     if (!c.accountName || c.failsGate || c.lane === 'replies' || c.lane === 'deals') continue;
-    if (i.held.has(c.accountName)) continue; // never a cold action on a held account
-    const kind: WorkStateKind = c.lane === 'follow_up' ? 'follow_up' : c.lane === 'ready' ? 'ready' : c.lane === 'review' ? 'decide' : 'research';
+    if (i.held.has(c.accountName) || dealAccountNames.has(c.accountName)) continue; // never a cold action on a held account
+    let kind: WorkStateKind = c.lane === 'follow_up' ? 'follow_up' : c.lane === 'ready' ? 'ready' : c.lane === 'review' ? 'decide' : 'research';
     const m = motion.get(c.accountName);
+    const db = i.dbState?.get(c.accountName);
+    // A cold-touch card with no usable thesis is research: nothing to open on, so nobody is asked to choose.
+    const noAngle = kind === 'ready' && db !== undefined && !db.sendable;
+    if (noAngle) kind = 'research';
     const p = kind === 'ready' || kind === 'follow_up' ? person(c.accountName) : null;
     offer({
-      rank: LANE_RANK[c.lane],
+      rank: noAngle ? LANE_RANK.research : LANE_RANK[c.lane],
       sortKey: c.sortKey,
       card: {
         accountName: c.accountName,
-        lane: c.lane,
+        lane: noAngle ? 'research' : c.lane,
         stateKind: kind,
-        state: kind === 'ready' && m?.state === 'needs_owner' ? 'Choose who hears this first' : STATE_TEXT[kind],
-        why: c.detail,
+        state: noAngle ? 'Research: no usable angle to open on yet' : kind === 'ready' && m?.state === 'needs_owner' ? 'Choose who hears this first' : STATE_TEXT[kind],
+        why: noAngle ? 'The people stand; no thesis the send gate would let out grounds a first touch yet.' : c.detail,
         person: p,
-        next: { label: c.title, href: c.href },
+        next: noAngle ? { label: 'Open the account', href: accountHref(c.accountName) } : { label: c.title, href: c.href },
         blocker: null,
       },
     });
+  }
+  // The database's own READY: a recorded chosen person with a usable thesis, on every load, however cold the instance.
+  for (const [name, db] of i.dbState ?? []) {
+    if (!db.chosen || !db.sendable) continue;
+    const have = best.get(name);
+    if (have && (have.card.stateKind === 'replied' || have.card.stateKind === 'opted_out' || have.card.stateKind === 'follow_up')) continue;
+    if (i.held.has(name) || dealAccountNames.has(name)) continue;
+    offer({ rank: LANE_RANK.ready, sortKey: [0, name], card: { accountName: name, lane: 'ready', stateKind: 'ready', state: `Ready for a first touch: ${db.chosen.name}`, why: `Prepare the first touch to ${db.chosen.name}.`, person: db.chosen, next: { label: 'Prepare the first touch', href: accountHref(name) }, blocker: null } });
   }
   // The reply card wins the account outright (a bounce only when nothing ranks above research).
   for (const r of replyCards) {
@@ -206,15 +228,18 @@ export function buildWorkList(i: WorkInput): WorkCard[] {
     else best.set(r.card.accountName, r);
   }
 
-  // Held accounts: in a deal (the summary) or UNKNOWN (a card's read), last, never a cold action.
+  // Held accounts: in a deal (the summary) or UNKNOWN (a card's read), last, never a cold action. The hold card IS
+  // the account's card: a research chore at a deal account never outranks it (Kraft Heinz read "Judge 1 verified fact").
   const dealAccounts = new Map(i.inDeals.status === 'complete' ? i.inDeals.accounts.map((a) => [a.accountName, a]) : []);
   for (const [name, a] of dealAccounts) {
     const stages = a.deals.map((d) => `${d.name ? `"${d.name}"` : 'an unnamed deal'} (${d.stage})`).join(', ');
+    best.delete(name);
     offer({ rank: LANE_RANK.deals, sortKey: [name], card: { accountName: name, lane: 'deals', stateKind: 'in_deal', state: STATE_TEXT.in_deal, why: `Open HubSpot ${a.deals.length === 1 ? 'deal' : 'deals'}: ${stages}.`, person: null, next: { label: 'Open the deal brief', href: `${accountHref(name)}?view=brief` }, blocker: 'No cold first touch while the deal is open: work it from the deal.' } });
   }
   for (const [name, why] of i.held) {
     if (dealAccounts.has(name)) continue;
     const unknown = why === 'opportunity_unknown';
+    best.delete(name);
     offer({ rank: LANE_RANK.deals, sortKey: [unknown ? 0 : 1, name], card: { accountName: name, lane: 'deals', stateKind: unknown ? 'unknown_deal' : 'in_deal', state: STATE_TEXT[unknown ? 'unknown_deal' : 'in_deal'], why: unknown ? 'HubSpot could not say whether this account is in a deal: no cold touch until it can.' : 'A current card holds this account for an open deal.', person: null, next: unknown ? null : { label: 'Open the deal brief', href: `${accountHref(name)}?view=brief` }, blocker: unknown ? 'Check HubSpot directly before contacting anyone.' : 'No cold first touch while the deal is open.' } });
   }
 
@@ -223,10 +248,14 @@ export function buildWorkList(i: WorkInput): WorkCard[] {
     const have = best.get(name);
     if (!have) continue;
     // A reply that landed after the summary was read is never overwritten by it: the reply card stands unless the
-    // summary itself says replied or opted out.
+    // summary itself says replied or opted out. A hold (a deal, an unknown or held read) is never lifted by a summary
+    // either, unless the summary is itself a hold: a stale READY must never turn a held card into a cold action.
+    const holdCard = have.card.stateKind === 'in_deal' || have.card.stateKind === 'unknown_deal' || have.card.stateKind === 'held';
+    const summaryHolds = s.state === 'in_deal' || s.state === 'held' || s.state === 'replied' || s.state === 'opted_out';
     if ((have.card.stateKind === 'replied' || have.card.stateKind === 'opted_out') && s.state !== 'replied' && s.state !== 'opted_out') continue;
+    if (holdCard && !summaryHolds) continue;
     const kind = PURSUIT_KIND[s.state];
-    const action = pursuitAction(s.state, name);
+    const action = pursuitAction(s.state, name, s.stateLine);
     best.set(name, {
       rank: PURSUIT_RANK[s.state],
       sortKey: have.sortKey,
