@@ -64,6 +64,10 @@ export interface PursuitInput {
   followUpDue: { personaId: number | null; name: string; dueAt: string; cardHref: string } | null;
   /** The resolver's eligible people for the cold first touch, in its order. */
   eligible: Array<{ key: string; personaId: number | null; hubspotContactId?: string | null; name: string; title: string | null }>;
+  /** A relationship-led motion's person (met at an event, an introducer, a referral), from the brief's motion. */
+  relationship?: { name: string; title: string | null; why: string } | null;
+  /** The brief's own next-action sentence, used when the angle, not the person, is what blocks (research). */
+  briefNext?: string | null;
 }
 
 export interface PursuitState {
@@ -75,6 +79,8 @@ export interface PursuitState {
   blocker: string | null;
   unlock: string | null;
   coldTouchAllowed: boolean;
+  /** May the seller choose or re-order people right now (never under a reply, an opt-out, a deal or a hold)? */
+  chooseAllowed: boolean;
   replyClass: ReplyClass | null;
   lastInbound: { who: string; at: string; kind: ReplyClass['kind']; label: string } | null;
   lastOutbound: PursuitInput['lastOutbound'];
@@ -126,6 +132,7 @@ export function projectPursuitState(i: PursuitInput): PursuitState {
     blocker: null,
     unlock: null,
     coldTouchAllowed: false,
+    chooseAllowed: false,
     replyClass,
     lastInbound,
     lastOutbound: i.lastOutbound,
@@ -201,22 +208,42 @@ export function projectPursuitState(i: PursuitInput): PursuitState {
     return base('in_motion', {
       person: { key: `persona:${i.motion.primary.personaId}`, personaId: i.motion.primary.personaId, name: i.motion.primary.name, title: i.motion.primary.title, chosenBy: null },
       stateLine: `${STATE_LINE.in_motion}: ${i.motion.primary.name}`,
+      chooseAllowed: true,
       unlock: i.motion.next ? `${i.motion.next.name} unlocks ${i.motion.next.unlock}.` : 'The next person unlocks when this one answers or the window passes.',
     });
   }
 
-  // 5. Ready, choose, research.
-  if (i.motionType === 'NO_GOOD_MOTION' || i.motionType === 'FOLLOW_UP' || i.motionType === 'RELATIONSHIP_LED' || i.motionType === 'REFERRAL_LED') {
-    if (i.motionType === 'NO_GOOD_MOTION') return base('research', { blocker: `No direct transportation operator is on record at ${i.accountName}, or no verified fact grounds a first touch yet.`, unlock: 'Find the operator (source-backed research) or a verified fact.' });
+  // 5. A relationship-led account: the person you met or the introducer leads; no cold email, a warm touch instead.
+  if ((i.motionType === 'RELATIONSHIP_LED' || i.motionType === 'REFERRAL_LED') && i.relationship) {
+    return base('ready', {
+      person: { key: `relationship:${i.relationship.name}`, personaId: null, name: i.relationship.name, title: i.relationship.title, chosenBy: null },
+      stateLine: `Relationship-led: ${i.relationship.name}`,
+      blocker: null,
+      chooseAllowed: true,
+      unlock: 'Log the warm touch; a cold email to anyone else waits for their answer.',
+    });
   }
+
+  // 6. Research: nobody eligible, or no angle grounds a first touch yet (the people may be fine).
   if (i.eligible.length === 0) {
     return base('research', { person: null, blocker: `Nobody on record runs transportation, logistics, freight or the fleet at ${i.accountName}. Find the operator.`, unlock: 'A source-backed operator is added to GAP.' });
   }
+  if (i.motionType === 'NO_GOOD_MOTION') {
+    return base('research', {
+      stateLine: 'Research: no angle to open on yet',
+      blocker: i.briefNext?.trim() || `No approved angle grounds a first touch at ${i.accountName} yet. The people below stand; the angle is what is missing.`,
+      chooseAllowed: true,
+      unlock: 'A verified fact and an approved angle.',
+    });
+  }
+
+  // 7. Ready or choose.
   if (chosen || only) {
     return base('ready', {
       person: chosen ?? only,
       stateLine: `${STATE_LINE.ready}: ${(chosen ?? only)!.name}`,
       coldTouchAllowed: true,
+      chooseAllowed: true,
       unlock: i.motion?.next ? `${i.motion.next.name} unlocks ${i.motion.next.unlock}.` : null,
     });
   }
@@ -224,6 +251,7 @@ export function projectPursuitState(i: PursuitInput): PursuitState {
     person: null,
     stateLine: `${STATE_LINE.choose_person} (${i.eligible.length} eligible)`,
     coldTouchAllowed: true,
+    chooseAllowed: true,
     unlock: 'Choose one person; the first touch is prepared for them.',
   });
 }

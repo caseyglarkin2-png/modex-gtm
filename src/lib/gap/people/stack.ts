@@ -104,7 +104,7 @@ function facets(c: OwnerCandidate): Array<{ name: string; text: string | null }>
   const emp = c.employment && EMPLOYMENT_MATERIAL.has(c.employment.state) ? c.employment.label : null;
   const relationship = c.reasons.find((x) => /^Source: a relationship/.test(x)) ?? null;
   const family = c.provenance && c.provenance.relation !== 'primary' ? `Read through ${c.provenance.accountName}` : null;
-  const remit = c.read.laneWhy ? `Runs ${c.read.laneWhy}` : null;
+  const remit = c.read.laneWhy ? `${c.read.laneWhy.charAt(0).toUpperCase()}${c.read.laneWhy.slice(1)}` : null;
   const geo = `${geoPhrase(c.read)}${c.read.scope === 'NETWORK' ? ', network scope' : c.read.scope === 'SITE' ? ', one site' : ''}`;
   const where = c.location ? `Based in ${c.location}` : null;
   return [
@@ -116,7 +116,6 @@ function facets(c: OwnerCandidate): Array<{ name: string; text: string | null }>
     { name: 'geo', text: geo },
     { name: 'family', text: family },
     { name: 'location', text: where },
-    { name: 'title', text: c.title },
   ];
 }
 
@@ -135,7 +134,8 @@ function distinguish(rows: OwnerCandidate[]): string[] {
       const shared = all.some((other, j) => j !== i && other.find((g) => g.name === f.name)?.text === f.text);
       if (!shared) { pick = f.text; break; }
     }
-    if (!pick) pick = [rows[i].title, rows[i].location].filter(Boolean).join(', ') || rows[i].name;
+    // Nothing on record sets them apart: say so (never repeat the title as if it were a reason).
+    if (!pick) pick = rows[i].location ? `Based in ${rows[i].location}; nothing else on record sets them apart` : 'Nothing on record sets them apart from the next row (CRM title only)';
     while (out.includes(pick)) pick = `${pick} (${rows[i].name})`;
     out.push(pick);
   }

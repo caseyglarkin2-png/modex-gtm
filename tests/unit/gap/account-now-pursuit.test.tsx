@@ -27,7 +27,7 @@ const eligible = r.eligible.map((c) => ({ key: c.key, personaId: c.personaId, hu
 describe('NOW with a pursuit state', () => {
   it('an opt-out reply: the state line says Opted out (never Ready, never replied), the inbound line carries the class, the stack offers no Choose', () => {
     const state = projectPursuitState({ accountName: 'Walmart Inc.', now: NOW, motionType: 'FACT_LED', opportunity: { status: 'CLEAR', detail: '', deals: [] }, restriction: null, familyHold: null, motion: null, choice: null, activePersona: null, replies: [{ from: 'timothy.cooper@walmart.com', name: null, at: '2026-10-05T13:58:00Z', subject: 'Re: Leaving this with you', snippet: 'stop', triaged: false }], lastOutbound: null, outstandingDraft: null, followUpDue: null, eligible });
-    render(<AccountNowView v={v} nextHref="/gap?lane=replies" nextLabel="Record the opt-out" nextText="Record the opt-out as do not contact." links={[]} pursuit={{ state, stack: buildPeopleStack(r, { chosenKey: null }), hypothesisId: 'h1', excluded: r.excluded }} />);
+    render(<AccountNowView v={v} nextHref="/gap?lane=replies" nextLabel="Record the opt-out" nextText="Record the opt-out as do not contact." links={[]} pursuit={{ state, stack: buildPeopleStack(r, { chosenKey: null }), hypothesisId: 'h1', excluded: r.excluded.map((e) => ({ key: e.candidate.key, name: e.candidate.name, title: e.candidate.title, code: e.code, reason: e.reason })) }} />);
     const line = screen.getByTestId('now-state');
     expect(line.textContent).toMatch(/^retailer · Direct buyer · Opted out: timothy.cooper@walmart.com, Oct 5 · Owner: Casey$/);
     expect(line.textContent).not.toMatch(/Ready for a first touch/);
@@ -42,7 +42,7 @@ describe('NOW with a pursuit state', () => {
   it('a chosen person: the state line names them, the stack puts them first with Prepare email, NEXT opens the same person\'s pack', () => {
     const state = projectPursuitState({ accountName: 'Walmart Inc.', now: NOW, motionType: 'FACT_LED', opportunity: { status: 'CLEAR', detail: '', deals: [] }, restriction: null, familyHold: null, motion: null, choice: { personaId: 2, by: 'casey@yardflow.ai', at: '2026-10-05T14:00:00Z', source: 'motion' }, activePersona: null, replies: [], lastOutbound: null, outstandingDraft: null, followUpDue: null, eligible });
     const stack = buildPeopleStack(r, { chosenKey: state.person!.key, chosenBy: state.person!.chosenBy });
-    render(<AccountNowView v={v} nextHref="/gap/preview/h1?personaId=2" nextLabel="Prepare the email to Kelly" nextText="Prepare the first touch to Kelly Kruse." links={[]} pursuit={{ state, stack, hypothesisId: 'h1', excluded: r.excluded }} />);
+    render(<AccountNowView v={v} nextHref="/gap/preview/h1?personaId=2" nextLabel="Prepare the email to Kelly" nextText="Prepare the first touch to Kelly Kruse." links={[]} pursuit={{ state, stack, hypothesisId: 'h1', excluded: r.excluded.map((e) => ({ key: e.candidate.key, name: e.candidate.name, title: e.candidate.title, code: e.code, reason: e.reason })) }} />);
     expect(screen.getByTestId('now-state').textContent).toMatch(/Ready for a first touch: Kelly Kruse/);
     expect(screen.getAllByTestId('people-stack-row')[0].textContent).toMatch(/Kelly Kruse/);
     expect(screen.getByTestId('people-stack-prepare')).toHaveAttribute('href', '/gap/preview/h1?personaId=2');

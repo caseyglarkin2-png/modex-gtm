@@ -23,6 +23,7 @@ const hs = (id: string, name: string, title: string, over: Partial<OwnerCandidat
 const base = (over: Partial<OwnerResolutionInput> = {}): OwnerResolutionInput => ({ account: { name: 'Walmart Inc.', entityType: 'retailer' }, purpose: 'COLD_FIRST_TOUCH', hypothesis: null, candidates: [], hubspot: { read: true, count: 0, truncated: false, via: 'linked' }, now: NOW, ...over });
 const wall = Array.from({ length: 40 }, (_, k) => hs(String(100 + k), `Person ${k}`, k % 2 ? 'Regional Transportation Director' : 'Director, Transportation Maintenance'));
 const r = resolveOwner(base({ candidates: [gap(1, 'Doug Estrada', 'Senior Director - Regional Transportation - Logistics', { location: 'Bentonville, Arkansas, United States' }), gap(45, 'Dakota Socha', 'transportation & reverse logistics', { employment: left }), ...wall] }));
+const excluded = r.excluded.map((e) => ({ key: e.candidate.key, name: e.candidate.name, title: e.candidate.title, code: e.code, reason: e.reason }));
 const eligibleRows = r.eligible.map((c) => ({ key: c.key, personaId: c.personaId, hubspotContactId: c.hubspotContactId, name: c.name, title: c.title }));
 const stateFor = (over: Parameters<typeof projectPursuitState>[0] extends infer T ? Partial<T> : never) =>
   projectPursuitState({ accountName: 'Walmart Inc.', now: NOW, motionType: 'FACT_LED', opportunity: { status: 'CLEAR', detail: '', deals: [] }, restriction: null, familyHold: null, motion: null, choice: null, activePersona: null, replies: [], lastOutbound: null, outstandingDraft: null, followUpDue: null, eligible: eligibleRows, ...over });
@@ -36,7 +37,7 @@ describe('the default view', () => {
   it('shows at most five rows of forty-one eligible, no ordinals on the tie, the tie in words, and no Best fit', () => {
     const state = stateFor({});
     const stack = buildPeopleStack(r, { chosenKey: null });
-    render(<PeopleStackView accountName="Walmart Inc." stack={stack} state={state} hypothesisId="h1" excluded={r.excluded} />);
+    render(<PeopleStackView accountName="Walmart Inc." stack={stack} state={state} hypothesisId="h1" excluded={excluded} />);
     expect(screen.getAllByTestId('people-stack-row').length).toBeLessThanOrEqual(5);
     expect(screen.queryAllByTestId('people-stack-ordinal')).toHaveLength(0);
     expect(screen.getByTestId('people-stack-tie').textContent).toMatch(/could not separate/);
@@ -47,14 +48,14 @@ describe('the default view', () => {
     expect(screen.getByTestId('people-stack-show-all').textContent).toMatch(/1 set aside/);
   });
   it('the departed person is not a row; Show all opens the rest and names them under set aside with the plain reason', () => {
-    render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(r, { chosenKey: null })} state={stateFor({})} hypothesisId="h1" excluded={r.excluded} />);
+    render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(r, { chosenKey: null })} state={stateFor({})} hypothesisId="h1" excluded={excluded} />);
     expect(screen.queryByText(/Dakota Socha/)).toBeNull();
     fireEvent.click(screen.getByTestId('people-stack-show-all'));
     expect(screen.getAllByTestId('people-stack-row').length).toBe(r.eligible.length);
     expect(screen.getByTestId('people-stack-set-aside').textContent).toMatch(/Dakota Socha.*left the company/);
   });
   it('Why this person? is a disclosure (aria-expanded) that reveals every resolver reason and hides it again', () => {
-    render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(r, { chosenKey: null })} state={stateFor({})} hypothesisId="h1" excluded={r.excluded} />);
+    render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(r, { chosenKey: null })} state={stateFor({})} hypothesisId="h1" excluded={excluded} />);
     const why = screen.getAllByTestId('people-stack-why')[0];
     expect(why).toHaveAttribute('aria-expanded', 'false');
     fireEvent.click(why);
@@ -69,7 +70,7 @@ describe('the chosen person carries the action; the others carry Choose', () => 
   it('the chosen row is first with Prepare email built for THAT person, Call prep and Log a touch; no scrolling past anyone', () => {
     const state = stateFor({ choice: { personaId: 1, by: 'casey@yardflow.ai', at: '2026-10-05T14:00:00Z', source: 'motion' } });
     const stack = buildPeopleStack(r, { chosenKey: state.person!.key, chosenBy: state.person!.chosenBy });
-    render(<PeopleStackView accountName="Walmart Inc." stack={stack} state={state} hypothesisId="h1" excluded={r.excluded} />);
+    render(<PeopleStackView accountName="Walmart Inc." stack={stack} state={state} hypothesisId="h1" excluded={excluded} />);
     const rows = screen.getAllByTestId('people-stack-row');
     expect(rows[0]).toHaveAttribute('data-chosen', 'true');
     expect(rows[0].textContent).toMatch(/Doug Estrada/);
@@ -81,7 +82,7 @@ describe('the chosen person carries the action; the others carry Choose', () => 
   });
   it('Choose on a GAP contact posts the motion choice and says nothing is sent; the page refreshes', async () => {
     const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue({ ok: true, status: 201, json: async () => ({ ok: true }) } as Response);
-    render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(r, { chosenKey: null })} state={stateFor({})} hypothesisId="h1" excluded={r.excluded} />);
+    render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(r, { chosenKey: null })} state={stateFor({})} hypothesisId="h1" excluded={excluded} />);
     const doug = screen.getAllByTestId('people-stack-row').find((el) => el.textContent?.includes('Doug Estrada'))!;
     fireEvent.click(doug.querySelector('[data-testid="people-stack-choose"]')!);
     await waitFor(() => expect(screen.getByRole('status').textContent).toMatch(/Doug Estrada is first at Walmart Inc\. Nothing is sent/));
@@ -94,7 +95,7 @@ describe('the chosen person carries the action; the others carry Choose', () => 
     const fetchMock = vi.spyOn(globalThis, 'fetch')
       .mockResolvedValueOnce({ ok: true, status: 201, json: async () => ({ ok: true, personaId: 777, status: 'created' }) } as Response)
       .mockResolvedValueOnce({ ok: true, status: 201, json: async () => ({ ok: true }) } as Response);
-    render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(r, { chosenKey: null })} state={stateFor({})} hypothesisId="h1" excluded={r.excluded} />);
+    render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(r, { chosenKey: null })} state={stateFor({})} hypothesisId="h1" excluded={excluded} />);
     const hsRow = screen.getAllByTestId('people-stack-row').find((el) => el.getAttribute('data-key')?.startsWith('hubspot:'))!;
     fireEvent.click(hsRow.querySelector('[data-testid="people-stack-choose"]')!);
     await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(2));
@@ -103,7 +104,7 @@ describe('the chosen person carries the action; the others carry Choose', () => 
   });
   it('a refused choice is an alert that says nothing changed', async () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue({ ok: false, status: 409, json: async () => ({ error: 'persona_not_at_account' }) } as Response);
-    render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(r, { chosenKey: null })} state={stateFor({})} hypothesisId="h1" excluded={r.excluded} />);
+    render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(r, { chosenKey: null })} state={stateFor({})} hypothesisId="h1" excluded={excluded} />);
     fireEvent.click(screen.getAllByTestId('people-stack-choose')[0]);
     await waitFor(() => expect(screen.getByRole('alert').textContent).toMatch(/Nothing changed/));
     expect(refresh).not.toHaveBeenCalled();
@@ -113,8 +114,8 @@ describe('the chosen person carries the action; the others carry Choose', () => 
 describe('holds dominate the actions', () => {
   it('under a human reply, no row offers Choose: the blocker reads instead', () => {
     const state = stateFor({ replies: [{ from: 'x@walmart.com', name: 'Tim', at: '2026-10-05T13:58:00Z', subject: null, snippet: 'Call me Tuesday.', triaged: false }] });
-    render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(r, { chosenKey: null })} state={state} hypothesisId="h1" excluded={r.excluded} />);
+    render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(r, { chosenKey: null })} state={state} hypothesisId="h1" excluded={excluded} />);
     expect(screen.queryAllByTestId('people-stack-choose')).toHaveLength(0);
-    expect(screen.getAllByTestId('people-stack-held')[0].textContent).toMatch(/No cold email to anyone at Walmart Inc\./);
+    expect(screen.getAllByTestId('people-stack-held')[0].textContent).toMatch(/No cold touch right now/);
   });
 });

@@ -19,8 +19,16 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import type { PeopleStack, StackRow } from '@/lib/gap/people/stack';
 import { SET_ASIDE_LABEL } from '@/lib/gap/people/stack';
-import type { OwnerResolution } from '@/lib/gap/people/owner-resolution';
 import type { PursuitState } from '@/lib/gap/pursuit/state';
+
+/** A set-aside person, serializable (the resolver's exclusion carries regexes and reads that never cross to the client). */
+export interface SetAsidePerson {
+  key: string;
+  name: string;
+  title: string | null;
+  code: string;
+  reason: string;
+}
 
 export interface PeopleStackViewProps {
   accountName: string;
@@ -29,7 +37,7 @@ export interface PeopleStackViewProps {
   /** The hypothesis the first touch runs on (the action pack); null when no grounded angle exists yet. */
   hypothesisId: string | null;
   /** The set-aside people with their reasons (the resolver's own list), for the expanded view. */
-  excluded: OwnerResolution['excluded'];
+  excluded: SetAsidePerson[];
 }
 
 type Busy = { key: string; step: 'adding' | 'choosing' } | null;
@@ -121,7 +129,21 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
             <p className="mt-0.5 text-xs text-[var(--muted-foreground)]">{row.reachability}</p>
 
             <div className="mt-2 flex flex-wrap items-center gap-2">
-              {row.chosen ? (
+              {row.chosen && !state.coldTouchAllowed ? (
+                <>
+                  <span className="text-xs text-amber-700 dark:text-amber-400" data-testid="people-stack-held">
+                    {state.state === 'in_motion' ? 'First touch sent; waiting.' : 'No cold touch right now (see Next).'}
+                  </span>
+                  {row.personaId !== null ? (
+                    <Link href={`/gap/call/${row.personaId}`} className={OUTLINE} data-testid="people-stack-call">
+                      Call prep
+                    </Link>
+                  ) : null}
+                  <Link href={`/gap/capture?account=${encodeURIComponent(accountName)}`} className={OUTLINE} data-testid="people-stack-log">
+                    Log a touch
+                  </Link>
+                </>
+              ) : row.chosen ? (
                 <>
                   {hypothesisId && row.personaId !== null ? (
                     <Link href={`/gap/preview/${hypothesisId}?personaId=${row.personaId}`} className={PRIMARY} data-testid="people-stack-prepare">
@@ -143,12 +165,12 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
                     Log a touch
                   </Link>
                 </>
-              ) : row.coldEligible && state.coldTouchAllowed ? (
+              ) : row.coldEligible && state.chooseAllowed ? (
                 <button type="button" className={chosenRow ? OUTLINE : PRIMARY} disabled={busy !== null} onClick={() => void choose(row)} data-testid="people-stack-choose" aria-describedby={`why-${row.key}`}>
                   {busy?.key === row.key ? (busy.step === 'adding' ? 'Adding to GAP...' : 'Choosing...') : chosenRow ? `Make ${row.name.split(' ')[0]} first instead` : `Choose ${row.name.split(' ')[0]}`}
                 </button>
               ) : row.coldEligible ? (
-                <span className="text-xs text-[var(--muted-foreground)]" data-testid="people-stack-held">{state.blocker ?? 'No cold touch right now.'}</span>
+                <span className="text-xs text-[var(--muted-foreground)]" data-testid="people-stack-held">No cold touch right now (see Next).</span>
               ) : (
                 <span className="text-xs text-[var(--muted-foreground)]" data-testid="people-stack-slot-only">Not a cold first touch: unlocks by a meeting, a referral or your explicit choice.</span>
               )}
@@ -185,9 +207,9 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
               <p className="font-semibold text-[var(--muted-foreground)]">Set aside ({excluded.length})</p>
               <ul className="mt-0.5 space-y-0.5 text-[var(--muted-foreground)]">
                 {excluded.map((e) => (
-                  <li key={e.candidate.key} data-code={e.code}>
-                    <span className="font-medium text-[var(--foreground)]">{e.candidate.name}</span>
-                    {e.candidate.title ? `, ${e.candidate.title}` : ''}: {SET_ASIDE_LABEL[e.code] ?? e.code.replace(/_/g, ' ')}. {e.reason}
+                  <li key={e.key} data-code={e.code}>
+                    <span className="font-medium text-[var(--foreground)]">{e.name}</span>
+                    {e.title ? `, ${e.title}` : ''}: {SET_ASIDE_LABEL[e.code] ?? e.code.replace(/_/g, ' ')}. {e.reason}
                   </li>
                 ))}
               </ul>

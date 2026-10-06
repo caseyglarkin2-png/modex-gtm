@@ -525,6 +525,39 @@ its own; none is a foundation-only sprint (UX-03 ships the Walmart header and st
 | UX-16 | Two fresh adversarial passes on the integrated experience | | | | |
 | UX-17 | Production ship + STABLE_BASELINE reconciliation | | | | |
 
+## 6a. UX-03 implementation record (2026-10-05)
+
+Commit 1291b5b5 on `feat/gap-account-first-ux` (plus the follow-up fixes below). What shipped:
+
+- `lib/gap/replies/classify.ts`: the reply class (human, opt_out, out_of_office, bounce), decided before anything
+  ranks; only a human reply pauses the account.
+- `lib/gap/pursuit/state.ts` + `load.ts`: ONE pursuit state per account from readers GAP already has (brief, context,
+  the cockpit's queue and account motion, the motion choice and the audited persona assignment, the reply list, the
+  one owner-resolution read); fixed priority reply > deal / hold > follow up > in motion > ready > choose > research;
+  the chosen person is the newest audited human choice, read everywhere.
+- `lib/gap/pursuit/next.ts`: NEXT projected from the state, so the pack is built for the person NOW names.
+- `lib/gap/people/stack.ts` + `components/gap/people-stack.tsx`: the People Stack (top 3 to 5, one distinguishing
+  reason, no ordinals on a tie with the tie said, a badge only on a resolver recommendation, named sponsor / tech /
+  site rows only when the resolver fills them, Why this person?, Show N more with the set-aside reasons, Choose beside
+  each eligible person, Prepare email / Call prep / Log a touch beside the chosen one; nothing sends).
+- `owner-resolution.ts`: the resolver exposes its rank key on each eligible person (ties are detected from the
+  resolver's own order, never re-ranked).
+- `account-now.tsx`, `accounts/[slug]/page.tsx`: the state line, the inbound line (reply class) and NEXT read from the
+  pursuit state; the stack replaces the WHO slot; the old WHO path remains for callers without a pursuit.
+- `owner-resolution-panel.tsx`: the analyst panel caps its list (top 5, Show N more), drops ordinals on a tie, names
+  each radio by name and title and describes it by its reasons.
+
+First local run against the production database (read-only, `next start`, headless Chrome at DPR 1) found four
+defects, all fixed before the receipt: the FedEx page failed to render because the set-aside list carried a RegExp
+across the server/client boundary (now a serializable projection); a chosen person still showed Prepare email under
+an opt-out hold (the chosen row now shows the hold and keeps Call prep / Log a touch); "Runs runs ..." and the title
+repeated as a reason (the fallback now says nothing on record sets them apart); research and relationship-led accounts
+read as "find the operator" or "choose who" when the angle, not the person, was missing (distinct lines now).
+
+Process note: the rebuild-and-capture job was stopped once by the harness under system memory pressure (the rig
+Chrome holds about 9 GB; two `next build` workers about 7 GB); the orphaned build was allowed to finish and the
+capture resumed with one headless browser at a time.
+
 ## 7. Task baselines and post-change measurements
 
 Baseline measured on production 2026-10-05 (SHA 54c11c57) through the rig; clicks counted on the shortest path a seller

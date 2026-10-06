@@ -166,7 +166,7 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
           nextText={pursuitNext?.text ?? null}
           links={links}
           mailbox={process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() || null}
-          pursuit={pursuit ? { state: pursuit.state, stack: pursuit.stack, hypothesisId: pursuit.hypothesisId, excluded: pursuit.resolution?.excluded ?? [] } : null}
+          pursuit={pursuit ? { state: pursuit.state, stack: pursuit.stack, hypothesisId: pursuit.hypothesisId, excluded: (pursuit.resolution?.excluded ?? []).map((e) => ({ key: e.candidate.key, name: e.candidate.name, title: e.candidate.title, code: e.code, reason: e.reason })) } : null}
         />
       </div>
     );

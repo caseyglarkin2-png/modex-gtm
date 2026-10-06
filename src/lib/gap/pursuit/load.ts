@@ -89,6 +89,8 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
     outstandingDraft: od ? { recipient: od.recipient, name: null, decisionId: od.decisionId ?? '' } : null,
     followUpDue: due ? { personaId: due.persona.id, name: due.persona.displayName ?? due.persona.email ?? 'the person', dueAt: due.touch?.dueAt ?? now.toISOString(), cardHref: cockpitOpenHref('follow_up', due.id) } : null,
     eligible: (resolution?.eligible ?? []).map((c) => ({ key: c.key, personaId: c.personaId, hubspotContactId: c.hubspotContactId, name: c.name, title: c.title })),
+    relationship: brief.motion.met ? { name: brief.motion.met.name, title: brief.motion.met.title ?? null, why: `met at ${brief.motion.met.source}` } : brief.motion.who && (brief.motion.type === 'RELATIONSHIP_LED' || brief.motion.type === 'REFERRAL_LED') ? { name: brief.motion.who, title: null, why: brief.motion.why } : null,
+    briefNext: brief.glance.nextAction,
   };
   const state = projectPursuitState(input);
   const chosenKey = state.person && (resolution?.eligible ?? []).some((c) => c.key === state.person!.key) ? state.person.key : null;

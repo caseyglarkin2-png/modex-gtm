@@ -11,9 +11,8 @@ import { AddToGapButton } from '@/components/gap/add-to-gap-button';
 import { BlockedPeople } from '@/components/gap/blocked-people';
 import { EmploymentControl } from '@/components/gap/employment-control';
 import { OutstandingDraftPanel } from '@/components/gap/outstanding-draft-panel';
-import { PeopleStackView } from '@/components/gap/people-stack';
+import { PeopleStackView, type SetAsidePerson } from '@/components/gap/people-stack';
 import type { PeopleStack } from '@/lib/gap/people/stack';
-import type { OwnerResolution } from '@/lib/gap/people/owner-resolution';
 import type { PursuitState } from '@/lib/gap/pursuit/state';
 
 /**
@@ -24,7 +23,7 @@ export interface NowPursuit {
   state: PursuitState;
   stack: PeopleStack | null;
   hypothesisId: string | null;
-  excluded: OwnerResolution['excluded'];
+  excluded: SetAsidePerson[];
 }
 
 const day = (s: string) => new Date(s).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' });
