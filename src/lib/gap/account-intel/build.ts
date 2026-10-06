@@ -60,6 +60,8 @@ export interface HypothesisInput {
   problemFamily?: string | null;
   /** The primary person the thesis is written for, when assigned. */
   personaId?: number | null;
+  /** R32: the thesis's declared evidence approach (metadata.approach); absent reads as event-led. */
+  approach?: string | null;
   /** When Casey approved it (reviewed_at on an approved or active thesis); null for a draft. */
   reviewedAt?: string | null;
   /** Casey's latest explicit "Reviewed, keep it" on this thesis (thesis.review_ack), if any. */
@@ -154,7 +156,7 @@ export interface AccountInputs {
   firstTouches: Array<{ recipient: string; sentAt: string | null; state: string; personaId?: number | null; decisionId?: string; gmailDraftId?: string }>;
   conversation: { who: string; responseClass: string; at: string } | null;
   /** null = not read this time (the section says so). */
-  opportunity: { status: 'CLEAR' | 'ACTIVE' | 'UNKNOWN'; detail: string; deals: Array<{ name: string | null; stage: string | null; amount?: string | null; closeDate?: string | null; nextStep?: string | null }>; unlinked?: boolean } | null;
+  opportunity: { status: 'CLEAR' | 'ACTIVE' | 'UNKNOWN'; detail: string; deals: Array<{ name: string | null; stage: string | null; amount?: string | null; closeDate?: string | null; nextStep?: string | null; /** R32: the deal's HubSpot contacts, when HubSpot returned them. */ contactIds?: string[] }>; unlinked?: boolean } | null;
   pack: PackInput | null;
   microsite: MicrositeInput | null;
   facilityFact: { facilityCount: string; status: 'verified' | 'provisional'; summary: string; updatedAt: string; sources: Array<{ label: string; url?: string }> } | null;

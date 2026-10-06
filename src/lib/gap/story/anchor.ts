@@ -26,7 +26,8 @@
  * tests/unit/gap/outreach-anchor.test.ts.
  */
 import type { AccountInputs, AccountIntelligenceBrief, HypothesisView } from '../account-intel/build';
-import { thesisRelevance } from '../people/thesis-relevance';
+import { thesisRelevance, type ThesisContext } from '../people/thesis-relevance';
+import { postingRoleOf } from '../research/claim-types';
 import { sensitivityOf } from '../research/sensitivity';
 import { isPhysicalOpsFact } from '../research/facts';
 import { citedQuote } from '../research/propose';
@@ -168,10 +169,20 @@ function sharedCounterparty(a: string, b: string, account: string): boolean {
   return [...nouns(a)].some((w) => nb.has(w));
 }
 
-function thesisOf(h: HypothesisView, raw: AccountInputs['hypotheses'][number] | undefined, facts: AccountInputs['facts'], person: AnchorPerson | null, sendable: ReadonlySet<string> | null | undefined): AnchorThesis {
+/**
+ * R32: what the person match reads from a thesis: the observation, the guess, the declared approach and, for a job or
+ * procurement-led thesis, the role its cited posting names (so the remit is the posting's function, not its words).
+ */
+function thesisContextOf(h: HypothesisView, raw: AccountInputs['hypotheses'][number] | undefined, first: AccountInputs['facts'][number] | undefined): ThesisContext {
+  const approach = raw?.approach ?? null;
+  return { observation: h.observation.text, problemHypothesis: h.problem, approach, postingRole: approach === 'job_procurement_led' && first ? postingRoleOf(first.quote) : null };
+}
+
+function thesisOf(h: HypothesisView, raw: AccountInputs['hypotheses'][number] | undefined, facts: AccountInputs['facts'], person: AnchorPerson | null, sendable: ReadonlySet<string> | null | undefined, accountName: string): AnchorThesis & { context: ThesisContext } {
   const factIds = raw ? [...new Set([...raw.observation.matchAll(CITATION)].map((m) => m[1]))] : [];
   const first = facts.find((f) => factIds.includes(f.id) || (f.sameQuoteIds ?? []).some((id) => factIds.includes(id)));
-  const rel = thesisRelevance(person?.title ?? null, { observation: h.observation.text, problemHypothesis: h.problem });
+  const context = thesisContextOf(h, raw, first);
+  const rel = thesisRelevance(person?.title ?? null, context, { accountName });
   const gateRead = !!sendable;
   const gateOk = !!sendable && sendable.has(h.id);
   const needsReview = h.needsReview.length > 0;
@@ -186,6 +197,7 @@ function thesisOf(h: HypothesisView, raw: AccountInputs['hypotheses'][number] | 
     problem: h.problem,
     usable: gateRead && gateOk && !needsReview,
     unusableWhy: !gateRead ? 'the send gate could not be read just now' : !gateOk ? 'its observation is a keyword hit or not a verified outreach fact, so the send gate would refuse the opening' : needsReview ? `the angle needs your review: ${h.needsReview[0].replace(/\.$/, '')}` : null,
+    context,
   };
 }
 
@@ -195,8 +207,11 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
   const live = i.inputs.facts.filter((f) => !f.expiresAt || new Date(f.expiresAt).getTime() > i.now.getTime());
   const theses = i.brief.hypotheses
     .filter((h) => h.grounded && h.truth !== 'CONTRADICTED')
-    .map((h) => thesisOf(h, rawById.get(h.id), live, i.person, i.sendable))
+    .map((h) => thesisOf(h, rawById.get(h.id), live, i.person, i.sendable, i.accountName))
     .filter((t) => OPEN_STATUSES.has(t.status) || REVIEW_STATUSES.has(t.status));
+  // The person-match context stays internal (the anchor's public shape is unchanged).
+  const contextOf = new Map(theses.map((t) => [t.hypothesisId, t.context]));
+  for (const t of theses) delete (t as Partial<typeof t>).context;
   // Only a usable open thesis can be the anchor: the same gate the email runs (General Mills' active thesis opens on a
   // Brazil divestiture that needs review; the call page says so, and the anchor must never contradict it).
   const open = theses.filter((t) => OPEN_STATUSES.has(t.status) && t.usable);
@@ -223,7 +238,9 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
   if (primary && i.person && primary.relevance.tier === 'none') {
     const t = primary;
     const others = (i.people ?? []).filter((p) => p.name !== i.person!.name);
-    const tierOf = (p: AnchorPerson) => thesisRelevance(p.title, { observation: t.observation, problemHypothesis: t.problem }).tier;
+    // R32: the same context the primary was read on (a job-led thesis: the posting's function), never the bare text.
+    const ctx = contextOf.get(t.hypothesisId) ?? { observation: t.observation, problemHypothesis: t.problem };
+    const tierOf = (p: AnchorPerson) => thesisRelevance(p.title, ctx, { accountName: i.accountName }).tier;
     fitsBetter = others.find((p) => tierOf(p) === 'direct') ?? others.find((p) => tierOf(p) === 'related') ?? null;
   }
   const first = i.person ? i.person.name.split(' ')[0] : '';

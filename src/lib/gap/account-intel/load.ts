@@ -26,6 +26,7 @@ import { stageLabels, type StageLabelRead } from '../opportunity/stage-labels';
 import { fetchAccountContextRows, loadAccountContext, projectAccountContext } from '../context/load';
 import type { AccountContext } from '../context/context';
 import { accountSlug } from './href';
+import { approachOfHypothesis } from '../research/approach-policy';
 /** R30/R31: the non-physical claim classes the read keeps as story facts of their own kind. */
 const CLAIM_FACT_CLASSES: ReadonlySet<string> = new Set(['JOB_POSTING', 'PROCUREMENT']);
 
@@ -164,7 +165,7 @@ export async function loadAccountInputs(
     skip(() => prisma.researchRun.findFirst({ where: { account_name: accountName, run_key: { startsWith: 'gap_research:' } }, orderBy: { created_at: 'desc' }, select: { created_at: true, provider_status: true } }).catch(() => null), null as Row | null),
     soft(prisma.prospectingHypothesis.findMany({
       where: { account_name: accountName, superseded_by: { is: null }, status: { in: ['draft', 'review_required', 'approved', 'active', 'confirmed', 'partially_confirmed', 'rejected'] } },
-      select: { id: true, status: true, reviewed_at: true, activated_at: true, observation: true, problem_hypothesis: true, root_cause_hypotheses: true, impact_hypotheses: true, falsification_questions: true, what_a_no_means: true, problem_family: true, primary_persona_id: true, signals: { where: { role: 'primary' }, select: { signal_id: true } } },
+      select: { id: true, status: true, reviewed_at: true, activated_at: true, observation: true, problem_hypothesis: true, root_cause_hypotheses: true, impact_hypotheses: true, falsification_questions: true, what_a_no_means: true, problem_family: true, primary_persona_id: true, metadata: true, signals: { where: { role: 'primary' }, select: { signal_id: true } } },
       orderBy: { updated_at: 'desc' },
       take: 10,
     })
@@ -173,7 +174,7 @@ export async function loadAccountInputs(
         if (!opts.hypothesisId || rows.some((r) => r.id === opts.hypothesisId)) return rows;
         const extra: Row[] = await prisma.prospectingHypothesis.findMany({
           where: { id: opts.hypothesisId, account_name: accountName, superseded_by: { is: null }, status: { in: ['draft', 'review_required', 'approved', 'active', 'confirmed', 'partially_confirmed', 'rejected'] } },
-          select: { id: true, status: true, reviewed_at: true, activated_at: true, observation: true, problem_hypothesis: true, root_cause_hypotheses: true, impact_hypotheses: true, falsification_questions: true, what_a_no_means: true, problem_family: true, primary_persona_id: true, signals: { where: { role: 'primary' }, select: { signal_id: true } } },
+          select: { id: true, status: true, reviewed_at: true, activated_at: true, observation: true, problem_hypothesis: true, root_cause_hypotheses: true, impact_hypotheses: true, falsification_questions: true, what_a_no_means: true, problem_family: true, primary_persona_id: true, metadata: true, signals: { where: { role: 'primary' }, select: { signal_id: true } } },
         });
         return [...rows, ...extra];
       }), [] as Row[]),
@@ -259,7 +260,7 @@ export async function loadAccountInputs(
     const o: OpportunityTruth = await oppP;
     // The stage's NAME from the pipeline (display only; the id when the label cannot be read).
     const labels = await stagesP;
-    opportunity = o.status === 'ACTIVE' ? { status: 'ACTIVE', detail: '', deals: o.deals.map((d) => ({ name: d.name, stage: d.stage ? labels.get(d.stage) ?? d.stage : d.stage, amount: d.amount ?? null, closeDate: d.closeDate ?? null, nextStep: d.nextStep ?? null })) } : o.status === 'UNKNOWN' ? { status: 'UNKNOWN', detail: o.reason, deals: [], ...(o.reason === 'identity_unresolved' && /^no HubSpot company/.test(o.detail ?? '') ? { unlinked: true } : {}) } : { status: 'CLEAR', detail: '', deals: [] };
+    opportunity = o.status === 'ACTIVE' ? { status: 'ACTIVE', detail: '', deals: o.deals.map((d) => ({ name: d.name, stage: d.stage ? labels.get(d.stage) ?? d.stage : d.stage, amount: d.amount ?? null, closeDate: d.closeDate ?? null, nextStep: d.nextStep ?? null, contactIds: [...(d.contactIds ?? [])] })) } : o.status === 'UNKNOWN' ? { status: 'UNKNOWN', detail: o.reason, deals: [], ...(o.reason === 'identity_unresolved' && /^no HubSpot company/.test(o.detail ?? '') ? { unlinked: true } : {}) } : { status: 'CLEAR', detail: '', deals: [] };
   }
   const conv = (convs as Map<string, { who: string; responseClass: string; at: string }>).get(accountName) ?? null;
   // The account's HubSpot people: the linked company; else (owner resolution, 2026-10-05) the companies the account's
@@ -321,6 +322,8 @@ export async function loadAccountInputs(
       whatANoMeans: h.what_a_no_means ?? null,
       primarySignalId: h.signals?.[0]?.signal_id ?? null,
       problemFamily: typeof h.problem_family === 'string' ? h.problem_family : null,
+      // R32: the declared evidence approach (metadata.approach; default event-led), for the person match.
+      approach: approachOfHypothesis(h),
       personaId: typeof h.primary_persona_id === 'number' ? h.primary_persona_id : null,
       buyerRejected: buyerRejected.has(h.id),
       // The last time Casey looked: approval, activation, or an explicit "reviewed" after a flag.

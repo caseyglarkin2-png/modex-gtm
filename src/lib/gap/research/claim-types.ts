@@ -101,6 +101,14 @@ export function classifyClaim(sentence: string): ClaimClassification {
   return build('other');
 }
 
+/** R32: the role a job posting names ("a Yard Operations Manager"), when the sentence names one; else null. */
+export function postingRoleOf(sentence: string | null | undefined): string | null {
+  const m = JOB_ROLE.exec(String(sentence ?? ''));
+  if (!m?.[1]) return null;
+  // Title case for the seller ("yard operations manager" -> "Yard Operations Manager"); "DC" stays upper case.
+  return m[1].trim().split(/\s+/).map((w) => (/^dc$/i.test(w) ? 'DC' : w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())).join(' ');
+}
+
 /** The proper noun after "with" / "from" / "by" / "selected", when one is stated. */
 function counterpartyOf(s: string): string | null {
   const m = /\b(?:with|from|by|selected|chose|partnered with|agreement with)\s+((?:[A-Z][\w&.'-]*\s?){1,4})/.exec(s);

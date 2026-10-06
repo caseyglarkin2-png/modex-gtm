@@ -1021,6 +1021,35 @@ watched account turns it red). Rollback: revert the commit; nothing persisted ch
 only ranking inputs (no seller override of the rotating set yet; a seller-priority account enters through the
 priority reasons).
 
+R32 **The person matched to the motion and its scope (DONE).** One authority, extended: `people/thesis-relevance.ts`
+now reads the thesis's APPROACH and SCOPE beside the title. A job or procurement-led thesis whose posting names a
+role is matched on that role's function (the hiring manager's remit; the role comes from the claim attributes, else
+the posting sentence), never on every yard or trailer word in the posting: on "hiring a Yard Operations Manager at its
+Tulsa distribution center to manage trailer moves", transportation is direct and the fleet is adjacent (the event-led
+reading of the same text would call the fleet direct). A fact that names a site (`factSite`: "its Tulsa distribution
+center", "in Tulsa, Oklahoma"; never a state, region or month) makes a person who runs ANOTHER site related, never
+direct (`personSite` from the title or, for a site-level title only, the CRM location; a network remit is never
+capped). At a multi-division parent a fact one division states is never attributed to another division's contact
+(a PBNA fact reads related for a Frito-Lay title or CRM company; a contact with no division on record keeps the tier
+and the reason says whose fact it is). `people/owner-resolution.ts`: a contact on the account's open HubSpot deal
+ranks right after a relationship and ahead of every cold alternative (a strong dimension, said in words); under a
+job or procurement-led thesis only, the site operator AT the site the posting names is eligible and leads the direct
+fits on thesis relevance (the hiring manager; event-led stays operator-first); `focus` says what the owner must own.
+`people/stack.ts`: a genuine tie asks ONE concrete question ("Who owns the Yard Operations Manager posting at Tulsa
+at PepsiCo: Ann or Bob?") only when nobody is chosen and choosing is the next action (`pursuit/load.ts` passes the
+state after its research downgrades); the view renders it. The loader carries `metadata.approach`, the primary
+claim's role and the open deals' contacts from the account read already made (no new HubSpot read; the account
+read's deals now keep their contact ids). The anchor's "fits better" caution reads the same job-led context. Kept:
+the resolver selects nobody; Tom's recorded choice leads the stack while the recommendation is a badge on Ana, and
+only a material invalidation (left, set aside) drops it, said by `chosenMissing`; a large map shows three rows with
+distinct reasons and the rest one counted step away. Pinned by `owner-motion-scope.test.ts` (13) and
+`people-stack-view.test.tsx`; six deliberate mutations (site cap, division cap, the posting-role path, the open-deal
+dimension, the hiring-site eligibility, the blocking condition) each turn their owning test red. Adjacent: 37 files /
+420 green. Rollback: revert the commit; nothing persisted changes. Debt: the site read is a pattern over the fact
+text and the title (no site entity table); the open-deal dimension is read only where the account read has the
+deal's contacts (the hypothesis owner route has none and says nothing about deals); division vocabulary exists for
+PepsiCo only (`people/division.ts`).
+
 ## 12. Migration, backfill and rollback
 
 Order of commits inside Sprint 1 and 3: schema + SQL first (no reader), then pure core, then importers (Top100 before PIC before modex legacy), then runtime pin, then services, then queue actions under the flag, then `GAP_OS_ENABLED=true` in Vercel after `verify-triggers.ts` passes against prod (env is snapshot at deploy; redeploy after setting). Before the prod `db push`, preview it with `prisma migrate diff --from-url <prod> --to-schema-datamodel prisma/schema.prisma --script` and confirm the script is additive only; also confirm the prod role can `CREATE FUNCTION` (not yet verified). Rollback: the flag off restores byte-identical behavior instantly; full removal is the rollback SQL plus reverting the runtime, service and queue-action commits; `sequences` is never modified; the only two pre-existing tables GAP OS's schema touches at all are `draft_queue_items` (one nullable `sequence_version_id` stamp, S1-T2) and `inbound_messages` (`source String @default("gmail")` and `hubspot_engagement_id String?`, S2-T1, needed so the reply cron and the HubSpot poller can tell a Gmail-sourced row from a HubSpot-engagement-sourced one and attribute the engagement id idempotently) — both additive-only, both confirmed by the production preflight below; the lane and PIC files are read, never written.

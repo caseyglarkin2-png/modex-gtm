@@ -8,6 +8,11 @@
  * employment currentness, relationship, source), never the shared title rule ("Primary operator: title says they run
  * transportation"), which is the same sentence on 43 Walmart cards. The deeper evidence (every resolver reason) stays
  * behind "Why this person?". Pure; pinned by tests/unit/gap/people-stack.test.ts.
+ *
+ * R32: a genuine tie asks ONE concrete question ("Who owns the Yard Operations Manager posting at Tulsa at PepsiCo:
+ * Ana or Ben?") only when it blocks action: nobody is chosen (by the seller, or as the only eligible person) and the
+ * caller says the choice is the next step. A recorded choice is never replaced: the chosen person leads while
+ * eligible, and when they are not, `chosenMissing` says so.
  */
 import { leadOver, type OwnerCandidate, type OwnerResolution } from './owner-resolution';
 import { geoPhrase, isSponsor } from './person-prior';
@@ -87,6 +92,8 @@ export interface PeopleStack {
   chooseLabel: string | null;
   /** The seller's chosen person is not among the eligible any more: said, never silently dropped. */
   chosenMissing: string | null;
+  /** R32: the one concrete question a genuine tie asks, only when choosing blocks the next action; else null. */
+  question: string | null;
   /** The set-aside people, one line with the count and the reasons (the full grouped list stays in the resolution). */
   setAside: { count: number; line: string | null };
   /** The eligible list beyond the default rows, in the resolver's order (the "Show all" path). */
@@ -134,6 +141,7 @@ function facets(c: OwnerCandidate): Array<{ name: string; text: string | null }>
   const where = c.location ? `Based in ${shortLocation(c.location)}` : null;
   return [
     { name: 'relationship', text: relationship ? relationship.replace(/^Source: a relationship \((.*?)\).*$/, 'You have a way in: $1') : null },
+    { name: 'deal', text: c.openDeal ? `On the open deal: ${c.openDeal}` : null },
     { name: 'relevance', text: rel },
     { name: 'role', text: role },
     { name: 'employment', text: emp },
@@ -250,7 +258,7 @@ function toRow(c: OwnerCandidate, r: OwnerResolution, reason: string, ordinal: n
 
 export function buildPeopleStack(
   r: OwnerResolution,
-  opts: { chosenKey: string | null; chosenBy?: string | null; max?: number; /** UX-07 */ preferences?: ReadonlyMap<number, SellerPreference>; nextPersonaId?: number | null; /** UX-07: the people the motion could line up as next (its waiting ready cards). */ nextCandidates?: ReadonlySet<number> },
+  opts: { chosenKey: string | null; chosenBy?: string | null; max?: number; /** UX-07 */ preferences?: ReadonlyMap<number, SellerPreference>; nextPersonaId?: number | null; /** UX-07: the people the motion could line up as next (its waiting ready cards). */ nextCandidates?: ReadonlySet<number>; /** R32: choosing is the next action (the pursuit state is choose-person); default true. */ choiceBlocks?: boolean },
 ): PeopleStack {
   const max = Math.max(STACK_MIN, opts.max ?? STACK_DEFAULT_MAX);
   const ctx: RowContext = { nextPersonaId: opts.nextPersonaId ?? null, preferences: opts.preferences ?? new Map(), nextCandidates: opts.nextCandidates ?? new Set() };
@@ -316,6 +324,9 @@ export function buildPeopleStack(
   const shownNames = setAsideNames.slice(0, 3);
   const unshown = setAsideCount - shownNames.length;
   const setAsideLine = !setAsideCount ? null : shownNames.length ? `${setAsideCount} set aside: ${shownNames.join(', ')}${unshown > 0 ? ` and ${unshown} more` : ''}.` : `${setAsideCount} set aside, none with a name on record.`;
+  // R32: one concrete question when the top two cannot be separated and nobody is chosen, only if it blocks action.
+  const topTie = !chosenKey && opts.choiceBlocks !== false && rows.length >= 2 && sameKey(visible[0]?.rank, visible[1]?.rank);
+  const question = topTie ? `Who owns ${r.focus} at ${r.account.name}: ${visible[0].name} or ${visible[1].name}?` : null;
   const tiedNames = tied.slice(0, 3).map((c) => c.name);
   const tieWho = tied.length > 3 ? `${tiedNames.join(', ')} and ${tied.length - 3} more` : tiedNames.length > 1 ? `${tiedNames.slice(0, -1).join(', ')} and ${tiedNames[tiedNames.length - 1]}` : tiedNames.join('');
 
@@ -328,6 +339,7 @@ export function buildPeopleStack(
     tieLine: tie ? `GAP could not separate ${tieWho} on evidence (the same responsibility, market and reachability); their order here is first-name order, not a ranking. Choose on what you know.` : null,
     chooseLabel: !chosenKey && active.length >= 2 ? `Choose who (${active.length})` : null,
     chosenMissing,
+    question,
     setAside: { count: setAsideCount, line: setAsideLine },
     more,
     slots,

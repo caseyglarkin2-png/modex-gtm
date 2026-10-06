@@ -331,6 +331,11 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
           <span className="font-semibold">Next if no response:</span> {state.next.name}{state.next.title ? `, ${state.next.title}` : ''}. {state.next.unlock}.
         </p>
       ) : null}
+      {stack.question && choosing ? (
+        <p className="text-sm font-medium" data-testid="people-stack-question">
+          {stack.question}
+        </p>
+      ) : null}
       {stack.tieLine && choosing ? (
         <p className="text-xs text-[var(--muted-foreground)]" data-testid="people-stack-tie">
           {stack.tieLine}

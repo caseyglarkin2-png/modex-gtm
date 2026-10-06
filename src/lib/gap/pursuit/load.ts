@@ -53,7 +53,8 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
   const accountName = inputs.account.name;
 
   const [resolutionRes, queue, choices, assigned, repliesPage, preferences] = await Promise.all([
-    soft(loadOwnerResolution(prisma, { accountName, purpose: 'COLD_FIRST_TOUCH', now }), null),
+    // R32: the open deals' contacts from the account read already made (a deal contact precedes a cold alternative).
+    soft(loadOwnerResolution(prisma, { accountName, purpose: 'COLD_FIRST_TOUCH', now, openDeals: inputs.opportunity?.status === 'ACTIVE' ? inputs.opportunity.deals : null }), null),
     soft(listQueue(prisma, { accountName, limit: 200 }), { items: [], asOf: null } as unknown as Awaited<ReturnType<typeof listQueue>>),
     soft(loadMotionChoices(prisma, [accountName]), new Map()),
     soft(loadAssignedPersona(prisma, accountName), null),
@@ -132,7 +133,6 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
   const chosenKey = state.person?.chosenBy && (resolution?.eligible ?? []).some((c) => c.key === state.person!.key) ? state.person.key : null;
   // UX-07: the seller's set-asides and the motion's NEXT IF NO RESPONSE person travel with the stack.
   const nextCandidates = new Set<number>([...(mine?.alsoWaiting ?? []).map((p) => p.personaId), ...(mine?.next ? [mine.next.personaId] : [])]);
-  const stack = resolution ? buildPeopleStack(resolution, { chosenKey, chosenBy: state.person?.chosenBy ?? null, preferences, nextPersonaId: mine?.next?.personaId ?? null, nextCandidates }) : null;
   // UX-06 (Option A): a recorded anchor choice switches the thesis the pack opens on, only to a grounded open thesis.
   const anchors = state.person?.personaId ? await soft(loadAnchorChoices(prisma, [state.person.personaId]), new Map()) : new Map();
   const anchorChoice: string | null = state.person?.personaId ? (anchors.get(state.person.personaId)?.hypothesisId ?? null) : null;
@@ -155,6 +155,8 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
     const underReview = inputs.hypotheses.some((h) => h.status === 'review_required' || h.status === 'draft');
     state = { ...state, state: 'research', stateLine: underReview ? `Research: a proposal is under review for ${state.person.name}` : `Research: no usable angle to open on yet for ${state.person.name}`, coldTouchAllowed: false, blocker: underReview ? `A thesis for ${state.person.name} is waiting for your review on this page; the first touch is prepared once it is approved.` : `No thesis the send gate would let out grounds a first touch at ${accountName} yet. ${state.person.name} stands; the angle is what is missing.`, unlock: underReview ? 'Approve the proposal on this page.' : 'A verified fact and an approved angle.' };
   }
+  // R32: a genuine tie asks its one question only when choosing is the next action (after the research downgrades).
+  const stack = resolution ? buildPeopleStack(resolution, { chosenKey, chosenBy: state.person?.chosenBy ?? null, preferences, nextPersonaId: mine?.next?.personaId ?? null, nextCandidates, choiceBlocks: state.state === 'choose_person' }) : null;
   const topUsable = brief.hypotheses.find((h) => usableTheses.includes(h.id)) ?? null;
   // R12: the cockpit records a motion only where it changes what the seller sees (two or more cards, a pause, a live
   // motion), so a one-card READY account has no motion and, before this, no ready target: NEXT then pointed at a
