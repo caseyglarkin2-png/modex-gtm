@@ -99,7 +99,7 @@ export function compactContext(i: {
       ? { fact: scrub(i.anchor.primary.observation), basis: scrub(i.anchor.primary.basis), whyTheyCare: i.anchor.whyTheyCare ? scrub(i.anchor.whyTheyCare.text) : null, supporting: i.anchor.supporting ? scrub(i.anchor.supporting.text) : null, proof: i.anchor.bestProof.text }
       : null,
     otherStories: (i.anchor?.alternatives ?? []).slice(0, 4).map((t) => ({ fact: scrub(t.observation), usable: t.usable, why: t.unusableWhy ? scrub(t.unusableWhy) : null })),
-    buyerSaid: buyerSaid.slice(0, 8).map((b) => ({ text: scrub(b.text), who: b.who, at: b.at })),
+    buyerSaid: buyerSaid.slice(0, 8).map((b) => ({ text: scrub(b.text), who: b.who ? scrub(b.who) : null, at: b.at })),
   };
 }
 
