@@ -124,6 +124,7 @@ describe('the canonical pursuit state overrides the cockpit lane on the card', (
     expect(heb).toMatchObject({ stateKind: 'held', lane: 'deals', state: 'Held: family hold', why: 'A sibling account is in motion: no cold touch here until it clears.' });
     expect(heb.next).toBeNull();
     expect(heb.blocker).toBeNull(); // said once
+    expect(cards.findIndex((c) => c.accountName === 'FedEx')).toBeLessThan(cards.findIndex((c) => c.accountName === 'PepsiCo'));
   });
   it('a stale READY summary never overwrites a reply that landed after it; a replied summary does', () => {
     const base = input({ candidates: [cand('research', 'Walmart Inc.', 'Research Walmart Inc.', [-1, 1])] });
@@ -134,7 +135,6 @@ describe('the canonical pursuit state overrides the cockpit lane on the card', (
     const replied = { ...ready, state: 'replied' as const, stateLine: 'Someone replied', nextText: 'Read the reply and record what they said.' };
     const fresh = buildWorkList({ ...base, summaries: new Map([['Walmart Inc.', replied]]) }).find((c) => c.accountName === 'Walmart Inc.')!;
     expect(fresh).toMatchObject({ stateKind: 'replied', source: 'pursuit', why: 'Read the reply and record what they said.' });
-    expect(cards.findIndex((c) => c.accountName === 'FedEx')).toBeLessThan(cards.findIndex((c) => c.accountName === 'PepsiCo'));
   });
 });
 
