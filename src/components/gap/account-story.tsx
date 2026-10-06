@@ -15,7 +15,7 @@ function Sentence({ s }: { s: StorySentence }) {
       </div>
       <p className="ml-1 text-xs text-[var(--muted-foreground)]">
         {s.basis}
-        {s.cite ? ` · ${s.cite}` : ''}
+        {s.cite ? `, ${s.cite}` : ''}
       </p>
     </li>
   );
@@ -25,8 +25,9 @@ function Row({ r }: { r: StoryRow }) {
   if (r.collapsed) {
     return (
       <details className="rounded-md border border-[var(--border)] px-3 py-2" data-testid="story-row" data-key={r.key} data-tag={r.tag}>
-        <summary className="flex min-h-11 cursor-pointer items-center text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]" data-testid="story-row-summary">
-          {r.label} ({r.sentences.length})
+        <summary className="min-h-11 cursor-pointer py-2 text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]" data-testid="story-row-summary">
+          <h3 className="inline">{r.label} ({r.sentences.length})</h3>
+          <span className="ml-2 font-normal normal-case underline">Show</span>
         </summary>
         <ul className="mt-1 space-y-2">
           {r.sentences.map((s, i) => (

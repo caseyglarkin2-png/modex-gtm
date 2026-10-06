@@ -267,7 +267,10 @@ export function buildPeopleStack(r: OwnerResolution, opts: { chosenKey: string |
   const setAsideCount = r.excluded.length + nameClash.length;
   // Nameless records are counted, never listed by a non-name ("(no name in HubSpot) (no name on record)").
   const setAsideNames = [...nameClash.map((c) => `${c.name} (another record of a set-aside name)`), ...r.excluded.filter((e) => e.code !== 'no_name').map((e) => `${e.candidate.name} (${SET_ASIDE_LABEL[e.code] ?? e.code.replace(/_/g, ' ')})`)];
-  const setAsideLine = setAsideCount ? `${setAsideCount} set aside: ${setAsideNames.slice(0, 3).join(', ')}${setAsideCount > 3 ? ` and ${setAsideCount - 3} more` : ''}.` : null;
+  // Nameless records are counted, never listed; the "more" count is what is not shown, and a line with no names says so.
+  const shownNames = setAsideNames.slice(0, 3);
+  const unshown = setAsideCount - shownNames.length;
+  const setAsideLine = !setAsideCount ? null : shownNames.length ? `${setAsideCount} set aside: ${shownNames.join(', ')}${unshown > 0 ? ` and ${unshown} more` : ''}.` : `${setAsideCount} set aside, none with a name on record.`;
   const tiedNames = tied.slice(0, 3).map((c) => c.name);
   const tieWho = tied.length > 3 ? `${tiedNames.join(', ')} and ${tied.length - 3} more` : tiedNames.length > 1 ? `${tiedNames.slice(0, -1).join(', ')} and ${tiedNames[tiedNames.length - 1]}` : tiedNames.join('');
 

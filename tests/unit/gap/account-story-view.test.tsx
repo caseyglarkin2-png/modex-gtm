@@ -58,7 +58,8 @@ describe('the story view', () => {
     const stories = rows.find((el) => el.getAttribute('data-key') === 'stories')!;
     expect(stories.tagName).toBe('DETAILS');
     expect(stories).not.toHaveAttribute('open');
-    expect(screen.getByTestId('story-row-summary').textContent).toBe('Stories that matter (1)');
+    expect(screen.getByTestId('story-row-summary').textContent).toBe('Stories that matter (1)Show');
+    expect(screen.getByTestId('story-row-summary').querySelector('h3')!.textContent).toBe('Stories that matter (1)');
     expect(screen.getAllByTestId('story-sentence').find((el) => /vault note/.test(el.textContent ?? ''))!.textContent).toMatch(/never quote it to the buyer/);
   });
   it('renders nothing for an empty story', () => {
@@ -73,12 +74,15 @@ describe('NOW with the story', () => {
     const stack = buildPeopleStack(r, { chosenKey: state.person!.key, chosenBy: state.person!.chosenBy });
     const { container } = render(<AccountNowView v={v} nextHref="/gap/preview/h1?personaId=7" nextLabel="Prepare the email to Glen" nextText="Prepare the first touch to Glen Chaffee." links={[]} pursuit={{ state, stack, hypothesisId: 'h1', excluded: [], story }} />);
     const idx = (id: string) => container.innerHTML.indexOf(`data-testid="${id}"`);
-    const order = ['now-next', 'now-next-control', 'now-check-before', 'people-stack', 'now-set-aside-caveats', 'now-context', 'account-story', 'now-ask', 'now-private'].map(idx);
+    const order = ['now-next', 'now-next-control', 'now-check-before', 'people-stack', 'people-stack-set-aside-caveats', 'now-context', 'account-story', 'now-ask', 'now-private'].map(idx);
     expect(order.every((x, k) => x > -1 && (k === 0 || x > order[k - 1]))).toBe(true);
     expect(screen.queryByTestId('now-why-now')).toBeNull();
     expect(screen.queryByTestId('now-know')).toBeNull();
     expect(screen.queryByTestId('now-think')).toBeNull();
-    expect(screen.getByTestId('now-set-aside-caveats').textContent).toMatch(/^Ray Hatton.*unverified report/);
+    expect(screen.getByTestId('people-stack-set-aside-caveats').textContent).toMatch(/^Ray Hatton.*unverified report/);
+    // The story carries the last email and the reply: the header says neither again.
+    expect(screen.queryByTestId('now-last-touch')).toBeNull();
+    expect(screen.queryByTestId('now-last-inbound')).toBeNull();
     expect(screen.getByTestId('now-check-before').textContent).toMatch(/^Check before contacting Courtney Keen/);
     expect(screen.getByTestId('account-story').textContent).not.toContain(PRIVATE_SENTINEL);
     expect(screen.getByTestId('now-private').textContent).toContain(PRIVATE_SENTINEL);
@@ -101,11 +105,17 @@ describe('the compact stack', () => {
     expect(rows[0].textContent).toMatch(/Email on record/);
     for (const row of rows.slice(1)) {
       expect(row).toHaveAttribute('data-compact', 'true');
-      expect(row.textContent).not.toMatch(/Email on record/);
+      expect(row.querySelector('[data-testid="people-stack-cue"]')!.textContent).toMatch(/email on record/);
       expect(row.querySelector('[data-testid="people-stack-choose"]')!.textContent).toMatch(/first instead/);
       expect(row.querySelector('[data-testid="people-stack-why"]')).not.toBeNull();
       expect(row.querySelector('[data-testid="people-stack-log"]')).toBeNull();
     }
+  });
+  it('a compact row carries no hold sentence of its own; the heading says it once', () => {
+    const state = stateFor({ motionType: 'IN_DEAL', opportunity: { status: 'ACTIVE', detail: '', deals: [{ name: 'YardFlow - FedEx', stage: 'Discovery' }] } });
+    render(<AccountNowView v={v} nextHref={null} nextLabel={null} links={[]} pursuit={{ state, stack: buildPeopleStack(r, { chosenKey: null }), hypothesisId: 'h1', excluded: [], story }} />);
+    expect(document.body.textContent!.match(/no cold touch right now/gi)).toHaveLength(1);
+    for (const row of screen.getAllByTestId('people-stack-row')) expect(row.querySelector('[data-testid="people-stack-cue"]')!.textContent).toMatch(/email on record/);
   });
   it('under a deal or an opt-out no row is a card, the chosen person included', () => {
     for (const state of [
@@ -124,6 +134,6 @@ describe('the compact stack', () => {
     const state = stateFor({ eligible: noEmail.eligible.map((c) => ({ key: c.key, personaId: c.personaId, hubspotContactId: c.hubspotContactId, name: c.name, title: c.title })) });
     render(<AccountNowView v={v} nextHref={null} nextLabel={null} links={[]} pursuit={{ state, stack: buildPeopleStack(noEmail, { chosenKey: state.person!.key, chosenBy: state.person!.chosenBy }), hypothesisId: 'h1', excluded: [], story }} />);
     const kym = screen.getAllByTestId('people-stack-row').find((el) => /Kym White/.test(el.textContent ?? ''))!;
-    expect(kym.querySelector('[data-testid="people-stack-cue"]')!.textContent).toMatch(/In HubSpot, not yet a GAP contact/);
+    expect(kym.querySelector('[data-testid="people-stack-cue"]')!.textContent).toMatch(/in HubSpot, not yet a GAP contact/i);
   });
 });

@@ -78,9 +78,19 @@ describe('story: tags and bases', () => {
     const inputs = fedexInputs();
     const { story } = build(inputs, ctxFor(fedexHistory), fedexState(inputs));
     const row = (k: string) => story.rows.find((r) => r.key === k);
-    const goal = row('goal')!;
-    expect(goal.sentences.every((s) => s.tag !== 'Checked' || s.basisIds.some((id) => /^(evidence:|bid:)/.test(id)))).toBe(true);
-    expect(goal.sentences[0].basisIds).toContain('evidence:f-n2');
+    expect(row('goal')).toBeUndefined();
+    const changing = row('changing')!;
+    expect(changing.sentences.every((s) => s.tag !== 'Checked' || s.basisIds.some((id) => /^(evidence:|bid:)/.test(id)))).toBe(true);
+    expect(changing.sentences[0].basisIds).toContain('evidence:f-n2');
+    // A source speaking as itself is attributed, never read as GAP's claim; a third-person fact is not.
+    expect(changing.sentences[0].text).toMatch(/^FedEx is consolidating/);
+    const firstPerson = fedexInputs({ facts: [{ ...fedexFact, id: 'f-we', quote: 'With Tricolor, we are redesigning our international air network by deploying our aircraft strategically.' }], hypotheses: [] });
+    const fp = build(firstPerson, ctxFor(), fedexState(firstPerson, { replies: [] })).story.rows.find((r) => r.key === 'changing')!;
+    expect(fp.sentences[0].text).toBe('FedEx says: "With Tricolor, we are redesigning our international air network by deploying our aircraft strategically."');
+    expect(fp.sentences[0].tag).toBe('Checked');
+    const withGoal = build(fedexInputs({ bids: [{ id: 'b9', type: 'future_state', summary: 'We want one process at every hub by 2027.', quote: 'x', who: 'glen@fedex.com', at: '2026-10-01T00:00:00Z', hypothesisId: null }] }), ctxFor(), fedexState(inputs)).story;
+    expect(withGoal.rows.find((r) => r.key === 'goal')!.tag).toBe('Buyer said');
+    expect(withGoal.rows.map((r) => r.key).indexOf('goal')).toBe(1);
     // The brief builder sets an angle's inference to its problem, so NETWORK is absent here (YARD says it once).
     expect(row('network')).toBeUndefined();
     const distinct = projectStory({ accountName: 'FedEx', now: NOW, state: fedexState(inputs), brief: { ...buildAccountBrief(inputs, NOW), hypotheses: buildAccountBrief(inputs, NOW).hypotheses.map((h) => ({ ...h, inference: 'Rerouted volume lands on fewer, larger hubs.' })) }, inputs, whyNow: [], know: [], touches: [], clawdRead: 'ok', vaultNote: null, excluded: [] });
@@ -131,6 +141,13 @@ describe('story: what has happened between us', () => {
     expect(text).toMatch(/Jun 1/);
     expect(text).toMatch(/automatic reply/i);
     expect(row.sentences.find((s) => /automatic reply/i.test(s.text))!.tag).toBe('Checked');
+    // The June notice answers the June email: no silence claimed.
+    expect(text).not.toMatch(/No answer on record/);
+    // A newer send after that notice is unanswered: the silence is said against the LAST email.
+    const later = mergeTouches({ history: fedexHistory, firstTouches: [], clawd: { read: 'ok', sends: [{ type: 'send', date: '2026-08-07T20:05:38+00:00', subject: 'Network 2.0', status: 'sent', to: 'michael.jeannotte@fedex.com' }] }, replies: [{ from: 'courtney.keen@fedex.com', at: '2026-06-02T12:00:00Z', snippet: 'I am in the office but my responses will be delayed.', kind: 'out_of_office', label: 'Automatic reply' }], people: inputs.personas, now: NOW });
+    const t2 = build(inputs, ctxFor(fedexHistory), fedexState(inputs), { touches: later }).story.rows.find((r) => r.key === 'between_us')!.sentences.map((s) => s.text).join(' ');
+    expect(t2).toMatch(/Last email to Michael Jeannotte, VP, Ground Operations, Aug 7: "Network 2.0"\. No answer on record\./);
+    expect(t2).toMatch(/Courtney Keen.*automatic reply on Jun 2/);
     // The story's first rows for the 820 second screen: between us, what is changing, the yard opportunity.
     expect(story.first.map((r) => r.key)).toEqual(['between_us', 'changing', 'yard']);
   });
@@ -154,6 +171,10 @@ describe('story: what has happened between us', () => {
     expect(text).toMatch(/opted out/i);
     expect(row.sentences.find((s) => /opted out/i.test(s.text))!.tag).toBe('Buyer said');
     expect(text).toMatch(/2 emails to 2 people/);
+    // The opt-out answered an email GAP sent (Aug 7): no orphan note. An opt-out with no prior send says so.
+    expect(text).not.toMatch(/not in GAP's ledgers/);
+    const orphan = build(inputs, ctxFor(), state, { touches: mergeTouches({ history: [], firstTouches: [], clawd: { read: 'ok', sends: [] }, replies: [{ from: 'michael.jeannotte@fedex.com', at: '2026-08-08T12:00:00Z', snippet: 'stop', kind: 'opt_out', label: 'Opted out' }], people: inputs.personas, now: NOW }) }).story;
+    expect(orphan.rows.find((r) => r.key === 'between_us')!.sentences[0].text).toMatch(/opted out on Aug 8 \("stop"\)\. The email it answered is not in GAP's ledgers\./);
     expect(row.sentences.find((s) => /2 emails/.test(s.text))!.basis).toMatch(/clawd/);
   });
   it('nothing on record is said as Checked when every ledger answered, and as Unknown when clawd could not be read', () => {
@@ -216,6 +237,51 @@ describe('story: check before contacting and the private guard', () => {
   });
 });
 
+describe('story: seller prose and one idea once', () => {
+  it('strips a press-release dateline and a currentness note; the same idea in two sources is told once, the checked one', () => {
+    const inputs = fedexInputs({
+      facts: [
+        fedexFact,
+        { id: 'f-cin', quote: 'CINCINNATI -- FedEx plans to invest more than $300 million in a new hub in Turtlecreek Township, creating 300 jobs and expanding its investment in Greater Cincinnati.', url: 'https://jobsohio.com/x', title: 'press', publishedAt: '2026-09-28T00:00:00Z', expiresAt: null, continuity: 'ongoing_state' as const, currentness: { url: 'https://jobsohio.com/x', publishedAt: '2026-10-01T00:00:00Z' } },
+      ],
+      signals: [{ id: 's-cin', title: 'FedEx commits to $300M project in Cincinnati-Dayton corridor', url: 'https://news.example/cin', publishedAt: '2026-09-28T00:00:00Z', researchStatus: 'pending' }],
+      hypotheses: [],
+    });
+    const { story } = build(inputs, ctxFor(), fedexState(inputs, { replies: [] }), { touches: [] });
+    const all = story.rows.flatMap((r) => r.sentences.map((s) => s.text));
+    expect(all.some((t) => /^CINCINNATI/.test(t))).toBe(false);
+    expect(all.some((t) => /current as of/i.test(t))).toBe(false);
+    expect(all.filter((t) => /\$300/.test(t))).toHaveLength(1);
+    expect(story.rows.flatMap((r) => r.sentences).find((s) => /\$300/.test(s.text))!.tag).toBe('Checked');
+  });
+});
+
+describe('story: a broken number, an incidental headline, the Wrong if clause', () => {
+  const krogerFacts = [
+    { id: 'f-uni', quote: 'Kroger has rolled out new outfits, based on customer feedback, for its in-store staff members.', url: 'https://news.example/uniforms', title: 'news', publishedAt: '2026-09-30T00:00:00Z', expiresAt: null, continuity: 'event' as const, currentness: null },
+    { id: 'f-merge', quote: 'Kroger and Giant Eagle announced a definitive merger agreement that will combine and consolidate their distribution networks across the Midwest.', url: 'https://sec.gov/kroger-8k', title: '8-K', publishedAt: '2026-09-20T00:00:00Z', expiresAt: null, continuity: 'ongoing_state' as const, currentness: null },
+  ];
+  it('a Checked line whose dollar figure does not parse is downgraded to Unverified and never leads', () => {
+    const heb = fedexInputs({ account: { name: 'H-E-B', tier: 'Tier 1', priorityBand: 'A', vertical: 'grocery', parentBrand: null, hubspotCompanyId: '4' }, domains: ['heb.com'], facts: [{ id: 'f-175', quote: 'H-E-B plans to build a $175 new refrigerated facility at its campus.', url: 'https://news.example/heb', title: 'news', publishedAt: '2026-09-25T00:00:00Z', expiresAt: null, continuity: 'event' as const, currentness: null }, { id: 'f-ok', quote: 'H-E-B is opening a 1 million square foot distribution center in San Antonio in 2027.', url: 'https://news.example/sa', title: 'news', publishedAt: '2026-09-26T00:00:00Z', expiresAt: null, continuity: 'event' as const, currentness: null }], signals: [], hypotheses: [] });
+    const { story } = build(heb, ctxFor(), fedexState(heb, { replies: [] }), { touches: [] });
+    const all = story.rows.flatMap((r) => r.sentences);
+    const broken = all.find((s) => /\$175/.test(s.text))!;
+    expect(broken.tag).toBe('Unverified');
+    expect(broken.basis).toMatch(/does not parse/);
+    expect(broken.cite ?? null).toBeNull();
+    const changing = story.rows.find((r) => r.key === 'changing')!;
+    expect(changing.sentences[0].text).toMatch(/San Antonio/);
+  });
+  it('a merger leads a uniform story; "Wrong if" never doubles the if', () => {
+    const inputs = fedexInputs({ account: { name: 'Kroger', tier: 'Tier 1', priorityBand: 'A', vertical: 'grocery', parentBrand: null, hubspotCompanyId: '3' }, domains: ['kroger.com'], facts: krogerFacts, signals: [], hypotheses: [{ ...fedexHyp, id: 'h-k', observation: krogerFacts[1].quote, primarySignalId: 'f-merge', whatANoMeans: 'If trailers do not wait longer at the sites that remain, the change moved no load onto the yard. A no closes it.' }] });
+    const { story } = build(inputs, ctxFor(), fedexState(inputs, { replies: [] }), { touches: [] });
+    const changing = story.rows.find((r) => r.key === 'changing')!;
+    expect(changing.sentences[0].text).toMatch(/Giant Eagle/);
+    expect(changing.sentences.some((s) => /outfits/.test(s.text))).toBe(false);
+    expect(story.rows.find((r) => r.key === 'yard')!.wrongIf).toMatch(/^if trailers do not wait longer/);
+  });
+});
+
 describe('story: PepsiCo (research, nothing between us, a verified fact with no grounded angle)', () => {
   const pepsiFact = { id: 'f-pep', quote: 'PepsiCo is building a 1.2 million square foot distribution center in Denver, opening in 2027.', url: 'https://news.example/pep', title: 'news', publishedAt: '2026-09-20T00:00:00Z', expiresAt: '2027-03-01T00:00:00Z', continuity: 'event' as const, currentness: null };
   const pepsi = fedexInputs({ account: { name: 'PepsiCo', tier: 'Tier 1', priorityBand: 'A', vertical: 'cpg', parentBrand: null, hubspotCompanyId: '2' }, domains: ['pepsico.com'], facts: [pepsiFact], signals: [], hypotheses: [], personas: [{ id: 1, name: 'Karen Darling', title: 'Sr Director PBNA Transportation', doNotContact: false, hasEmail: true, emailStatus: 'valid' }, { id: 2, name: 'Shawn Pierce', title: 'Sr Director Transportation Strategy', doNotContact: false, hasEmail: true, emailStatus: 'valid' }] });
@@ -227,7 +293,10 @@ describe('story: PepsiCo (research, nothing between us, a verified fact with no 
     expect(changing.sentences[0].text).toMatch(/Denver/);
     expect(changing.sentences[0].cite).toBe('OK to cite to the buyer');
     expect(changing.sentences[0].basisIds).toContain('evidence:f-pep');
-    expect(story.rows.find((r) => r.key === 'learn')!.tag).toBe('Unknown');
+    const learn = story.rows.find((r) => r.key === 'learn')!;
+    expect(learn.tag).toBe('Unknown');
+    expect(learn.sentences).toHaveLength(1);
+    expect(learn.sentences[0].text).toBe('Nothing from the buyer yet on how they run the yards today, what it costs them or why it happens.');
     expect(story.rows.find((r) => r.key === 'network')).toBeUndefined();
     expect(story.rows.find((r) => r.key === 'yard')).toBeUndefined();
     expect(story.rows.find((r) => r.key === 'between_us')!.sentences[0].text).toMatch(/No touch on record/);
@@ -236,6 +305,8 @@ describe('story: PepsiCo (research, nothing between us, a verified fact with no 
     const okRow = build(pepsi, ctxFor(), state, { touches: sent, clawdRead: 'ok' }).story.rows.find((r) => r.key === 'between_us')!;
     expect(okRow.sentences).toHaveLength(1);
     expect(okRow.sentences[0].text).toBe('Last email to Laura Maxwell, SVP Supply Chain, Jun 10: "One live view across your yards". No answer on record.');
+    const gapTouch = build(pepsi, ctxFor(), state, { touches: [{ ...sent[0], what: 'GAP first touch', source: 'GAP ledger' }], clawdRead: 'ok' }).story.rows.find((r) => r.key === 'between_us')!;
+    expect(gapTouch.sentences[0].text).toBe('Last email to Laura Maxwell, SVP Supply Chain, Jun 10 (a GAP first touch). No answer on record.');
     expect(okRow.tag).toBe('Checked');
     const downRow = build(pepsi, ctxFor(), state, { touches: sent, clawdRead: 'unavailable' }).story.rows.find((r) => r.key === 'between_us')!;
     expect(downRow.tag).toBe('Unknown');

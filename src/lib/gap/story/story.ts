@@ -4,11 +4,16 @@
  * projection over readers GAP already has (the brief, buyer inputs, the context history, the reply class, clawd's
  * outreach history, the vault note, the pursuit state): no table, no model call, no second recommendation authority.
  *
- *   rows        WHAT HAS HAPPENED BETWEEN US, GOAL, WHAT IS CHANGING, NETWORK IMPLICATION, YARD OPPORTUNITY,
- *               WHAT WE NEED TO LEARN, STORIES THAT MATTER (collapsed), YOUR NOTE; each present only with a basis
+ *   rows        WHAT HAS HAPPENED BETWEEN US, THEIR GOAL (only in the buyer's words), WHAT IS CHANGING (program
+ *               statements and catalysts, the relevant ones first), NETWORK IMPLICATION (only when it adds a
+ *               sentence), YARD OPPORTUNITY, WHAT WE NEED TO LEARN (one line), STORIES THAT MATTER (collapsed),
+ *               YOUR NOTE; each present only with a basis
  *   tags        every SENTENCE carries Buyer said / Checked / Unverified / Our read / Unknown / Contradicted and its
  *               basis ids; a row takes the WEAKEST class of its sentences; a line with no basis is Our read or
- *               Unknown; YARD OPPORTUNITY is Our read with its Wrong if unless the buyer confirmed it
+ *               Unknown; YARD OPPORTUNITY is Our read with its Wrong if unless the buyer confirmed it; a Checked
+ *               line whose money figure does not parse ("$175 new facility") is downgraded to Unverified
+ *   voice       a source's first-person sentence is attributed ("FedEx says: ..."), never read as GAP's claim; no
+ *               dateline, no machine note; one idea once across the rows
  *   rise        an Unverified item that names the chosen person's unit or a divestiture rises beside the person as
  *               "check before contacting" (FedEx: the CMA CGM sale of FedEx Supply Chain against Courtney Keen)
  *   never       private engagement (microsite sessions, ROI reads) is not a row and is not read aloud; the story
@@ -20,6 +25,7 @@ import type { AccountInputs, AccountIntelligenceBrief } from '../account-intel/b
 import type { Statement } from '../account-intel/truth';
 import { sellerLine, type NowLine, type SellerTag } from '../context/now';
 import { sensitivityOf } from '../research/sensitivity';
+import { sameIdea } from '../context/same-idea';
 import { sellerRelevance } from '../research/continuity';
 import type { PursuitState } from '../pursuit/state';
 import type { StoryTouch } from './touches';
@@ -93,17 +99,52 @@ export const STORY_LABEL: Record<StoryRowKey, string> = {
 
 const day = (s: string | null | undefined) => (s && !Number.isNaN(new Date(s).getTime()) ? new Date(s).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' }) : 'undated');
 const dayYear = (s: string | null | undefined) => (s && !Number.isNaN(new Date(s).getTime()) ? new Date(s).toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' }) : 'undated');
+/** Seller prose: no machine label, no press-release dateline ("CINCINNATI -- "), no "(current as of ...)" note. */
 const sentence = (t: string) => {
-  const s = t.replace(/^[A-Z][A-Z /]+:\s*/, '').replace(/\s+/g, ' ').trim();
+  const s = t
+    .replace(/^[A-Z][A-Z /]+:\s*/, '')
+    .replace(/^\s*[A-Z][A-Z .,'-]{2,40}(?:--|\s[-–—]\s?)(?:\(\s*[\w ]+\s*\)\s*-*)?\s*/, '')
+    .replace(/\s*\(current as of [^)]*\)\.?/gi, '')
+    .replace(/\s+/g, ' ')
+    .trim();
   const cap = s.charAt(0).toUpperCase() + s.slice(1);
   return /[.!?]$/.test(cap) ? cap : `${cap}.`;
 };
+/** The same money and a shared name is the same project however the two sources word it ("$300 million ... Greater Cincinnati" and "$300M project in Cincinnati-Dayton"). */
+const money = (t: string) => (t.match(/\$\s?(\d+(?:\.\d+)?)\s*(m\b|million|b\b|billion)/gi) ?? []).map((m) => m.toLowerCase().replace(/\s+/g, '').replace(/million/, 'm').replace(/billion/, 'b'));
+const properNouns = (t: string, account: string) => {
+  const own = new Set(account.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean));
+  return new Set((t.match(/\b[A-Z][a-zA-Z]{3,}\b/g) ?? []).map((w) => w.toLowerCase()).filter((w) => !own.has(w)));
+};
+const sameProject = (a: string, b: string, account: string) => {
+  const ma = money(a);
+  if (!ma.length || !ma.some((m) => money(b).includes(m))) return false;
+  const pb = properNouns(b, account);
+  return [...properNouns(a, account)].some((w) => pb.has(w));
+};
 const sameText = (a: string, b: string) => a.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim() === b.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 const row = (key: StoryRowKey, sentences: StorySentence[], over: Partial<StoryRow> = {}): StoryRow => ({ key, label: STORY_LABEL[key], tag: weakestTag(sentences.map((s) => s.tag)), sentences, wrongIf: null, collapsed: false, ...over });
-const fromLine = (l: NowLine): StorySentence => ({ text: sentence(l.text), tag: l.tag, basis: l.basis, basisIds: [l.id], cite: l.cite });
+
+/** A dollar figure with no magnitude and no thousands ("$175 new refrigerated facility"): the quote lost a word. */
+const BROKEN_MONEY = /\$\s?\d{1,3}(?:\.\d+)?\s+(?!(?:m|b|k|mm|bn|million|billion|thousand|per|a|an|each|to)\b)[a-z]/i;
+/** A source speaking in the first person ("we are redesigning our network"): attributed, never GAP's own claim. */
+const FIRST_PERSON = /\b(we|we're|our|ours|us)\b/i;
+
+/** A seller sentence from a NOW line: attributed when the source speaks as itself; downgraded when its number is broken. */
+function fromLine(l: NowLine, accountName: string): StorySentence {
+  let text = sentence(l.text);
+  let tag = l.tag;
+  let basis = l.basis;
+  if (FIRST_PERSON.test(text)) text = `${accountName} says: "${text.replace(/\.$/, '')}."`;
+  if (tag === 'Checked' && BROKEN_MONEY.test(text)) {
+    tag = 'Unverified';
+    basis = `${basis}; the dollar figure does not parse, check the source before using it`;
+  }
+  return { text, tag, basis, basisIds: [l.id], cite: tag === 'Unverified' ? null : l.cite };
+}
 
 /** A program or a stated goal, not a one-day event. */
-const GOAL = /\b(program|programme|initiative|plan(?:s|ned|ning)?|redesign|moderni[sz]|transform|invest(?:s|ing|ment)?|expan(?:d|sion)|consolidat|roadmap|strategy|target(?:s|ing)?|goal|aims?|commit(?:s|ted|ment)|network 2\.0|optimi[sz])\b/i;
+const GOAL = /\b(program|programme|initiative|plan(?:s|ned|ning)?|redesign|moderni[sz]|transform|invest(?:s|ing|ment)?|expan(?:d|sion)|consolidat|roadmap|strategy|target(?:s|ing)?|goal|aims?|commit(?:s|ted|ment)|network 2\.0|optimi[sz]|merger|acqui(?:re|sition))\b/i;
 /** A sale, a divestiture, an acquisition: the item a person's unit may be named by. */
 const DIVEST = /\b(sell|sale|sold|divest(?:s|ed|iture|ing)?|spin[- ]?off|acqui(?:re|res|red|sition)|merg(?:e|er|ed)|carve[- ]?out|transfer(?:s|red)?)\b/i;
 const GENERIC = new Set(['the', 'and', 'inc', 'corp', 'llc', 'group', 'company', 'director', 'managing', 'senior', 'vice', 'president', 'head', 'chief', 'officer', 'manager', 'vp', 'svp', 'evp', 'north', 'america', 'global', 'operations', 'transportation', 'logistics', 'supply', 'chain', 'with', 'from', 'into', 'for']);
@@ -135,30 +176,55 @@ export function projectStory(i: StoryInput): AccountStory {
   const live = i.inputs.facts.filter((f) => !f.expiresAt || new Date(f.expiresAt).getTime() > i.now.getTime());
   const citable = new Set(live.filter((f) => !sensitivityOf(f.quote)).flatMap((f) => [f.id, ...(f.sameQuoteIds ?? [])]));
   const lx = { domains: i.inputs.domains, accountName: i.inputs.account.name, citable };
+  // Each idea once across the rows, also when two sources say it in different words (Walmart: the $300M Cincinnati
+  // center as a checked goal and as an unverified signal).
   const used = new Set<string>();
-  const take = (id: string) => (used.has(id) ? false : (used.add(id), true));
+  const said: string[] = [];
+  const take = (id: string, text = '') => {
+    if (used.has(id) || (text && said.some((t) => sameIdea(t, text, i.accountName) || sameProject(t, text, i.accountName)))) return false;
+    used.add(id);
+    if (text) said.push(text);
+    return true;
+  };
+  const line = (l: NowLine) => fromLine(l, i.accountName);
   const rows: StoryRow[] = [];
 
   // WHAT HAS HAPPENED BETWEEN US: the last person touched with their title, what came back, the count.
   rows.push(betweenUs(i));
 
-  // GOAL: what they say they are doing: a buyer input first, else a verified program statement, else an unverified one.
+  // THEIR GOAL: only in the buyer's words (a future-state or priority input); a program statement is a change.
   const goalBid = i.inputs.bids.find((b) => b.type === 'future_state' || b.type === 'priority');
+  if (goalBid) {
+    rows.push(row('goal', [{ text: sentence(goalBid.summary), tag: 'Buyer said', basis: `buyer said, ${goalBid.who ?? 'the buyer'}, ${day(goalBid.at)}`, basisIds: [`bid:${goalBid.id}`] }]));
+    used.add(`bid:${goalBid.id}`);
+  }
+
+  // WHAT IS CHANGING: the program statements and NOW's why-now lines, checked before unverified, the relevant before
+  // the incidental (a merger before a uniform story), two sentences, each with its own tag.
   const catalysts: Array<{ s: Statement; l: NowLine }> = i.brief.sections.catalysts.statements
     .filter((s) => s.truth !== 'CONTRADICTED' && !/^ENDED/.test(s.text))
     .map((s) => ({ s, l: sellerLine(s, 'catalysts', lx) }))
     .filter((x): x is { s: Statement; l: NowLine } => !!x.l)
     .map((x) => (x.s.sources[0]?.kind === 'signal' ? { s: x.s, l: { ...x.l, id: `signal:${x.s.sources[0].ref ?? x.l.id}`, tag: 'Unverified' as const, text: x.l.text.replace(/^Signal, not verified:\s*/, '').replace(/\s*\((?:shared )?[0-9a-z ,-]+\)$/i, ''), basis: `a third party's report, not checked; ${day(x.s.sources[0].at)}` } } : x));
-  const programs = catalysts.filter((x) => GOAL.test(x.l.text) && sellerRelevance(x.l.text).rank <= 6).sort((a, b) => STRENGTH[a.l.tag] - STRENGTH[b.l.tag]);
-  if (goalBid) {
-    rows.push(row('goal', [{ text: sentence(goalBid.summary), tag: 'Buyer said', basis: `buyer said, ${goalBid.who ?? 'the buyer'}, ${day(goalBid.at)}`, basisIds: [`bid:${goalBid.id}`] }]));
-    used.add(`bid:${goalBid.id}`);
-  } else if (programs[0] && take(programs[0].l.id)) {
-    rows.push(row('goal', [fromLine(programs[0].l)]));
+  const rawRank = (l: NowLine) => sellerRelevance(l.text.replace(/^[A-Z][A-Z /]+:\s*/, '')).rank;
+  const programs = catalysts.map((x) => x.l).filter((l) => GOAL.test(l.text) && rawRank(l) <= 6);
+  // A program statement (a merger that combines networks, a multi-year investment) is a change worth telling even
+  // when the relevance heuristic files it as broad corporate context; an incidental headline never outranks it.
+  const programIds = new Set(programs.map((l) => l.id));
+  const rank = (l: NowLine) => (programIds.has(l.id) ? Math.min(rawRank(l), 4) : rawRank(l));
+  // The seller sentence is built first, so a Checked line downgraded for a broken number sorts as Unverified.
+  const candidates = [...programs, ...i.whyNow]
+    .filter((l, k, a) => a.findIndex((y) => y.id === l.id) === k)
+    .map((l) => ({ l, s: line(l) }))
+    .sort((a, b) => STRENGTH[a.s.tag] - STRENGTH[b.s.tag] || rank(a.l) - rank(b.l));
+  const relevantExists = candidates.some((c) => rank(c.l) <= 4);
+  const changing: StorySentence[] = [];
+  for (const c of candidates) {
+    if (changing.length >= 2) break;
+    // An incidental item (rank 5 and up: a uniform story, legal text) never leads over a network or site change.
+    if (relevantExists && rank(c.l) >= 5) continue;
+    if (take(c.l.id, c.l.text)) changing.push(c.s);
   }
-
-  // WHAT IS CHANGING: NOW's why-now lines (checked first, at most one unverified), each with its own tag.
-  const changing = i.whyNow.filter((l) => take(l.id)).slice(0, 2).map(fromLine);
   if (changing.length) rows.push(row('changing', changing));
 
   // NETWORK IMPLICATION and YARD OPPORTUNITY: the top grounded angle (never an ungrounded draft), or the buyer's words.
@@ -176,19 +242,21 @@ export function projectStory(i: StoryInput): AccountStory {
     if (impactBid) s.push({ text: sentence(impactBid.summary), tag: 'Buyer said', basis: `buyer said, ${impactBid.who ?? 'the buyer'}, ${day(impactBid.at)}`, basisIds: [`bid:${impactBid.id}`] });
     rows.push(row('yard', s));
   } else if (top) {
-    rows.push(row('yard', [{ text: sentence(top.problem), tag: 'Our read', basis: 'our read; not confirmed by the buyer', basisIds: [`hypothesis:${top.id}`] }], { wrongIf: top.wrongIf ? top.wrongIf.split(/(?<=\.)\s/)[0] : null }));
+    // "Wrong if: If trailers..." doubles the word; the clause starts after it.
+    const wrongIf = top.wrongIf ? top.wrongIf.split(/(?<=\.)\s/)[0].replace(/^If\s+/i, (m) => m.toLowerCase()) : null;
+    rows.push(row('yard', [{ text: sentence(top.problem), tag: 'Our read', basis: 'our read; not confirmed by the buyer', basisIds: [`hypothesis:${top.id}`] }], { wrongIf }));
   }
 
-  // WHAT WE NEED TO LEARN: the unknowns, in discovery order, as Unknown sentences.
+  // WHAT WE NEED TO LEARN: one Unknown line naming what the buyer has not said (the ASK slot carries the question).
   const bid = (t: string) => i.inputs.bids.some((b) => b.type === t);
-  const learn: StorySentence[] = [];
-  if (!bid('current_state')) learn.push({ text: 'How they run the yards today: not confirmed by the buyer.', tag: 'Unknown', basis: 'no buyer input on the current state', basisIds: [] });
-  if (!bid('impact')) learn.push({ text: 'What it costs them: no cost named by the buyer.', tag: 'Unknown', basis: 'no buyer input on impact', basisIds: [] });
-  if (!bid('root_cause') && !top?.rootCause) learn.push({ text: 'Why it happens: unknown.', tag: 'Unknown', basis: 'no root cause on record', basisIds: [] });
-  if (learn.length) rows.push(row('learn', learn.slice(0, 3)));
+  const missing = [!bid('current_state') ? 'how they run the yards today' : null, !bid('impact') ? 'what it costs them' : null, !bid('root_cause') && !top?.rootCause ? 'why it happens' : null].filter((x): x is string => !!x);
+  if (missing.length) {
+    const list = missing.length === 1 ? missing[0] : `${missing.slice(0, -1).join(', ')} or ${missing[missing.length - 1]}`;
+    rows.push(row('learn', [{ text: `Nothing from the buyer yet on ${list}.`, tag: 'Unknown', basis: 'no buyer input on record', basisIds: [] }]));
+  }
 
   // STORIES THAT MATTER: the checked lines not already told, with their cite status, collapsed.
-  const stories = [...i.know, ...catalysts.map((x) => x.l).filter((l) => l.tag === 'Checked')].filter((l) => take(l.id)).slice(0, 4).map(fromLine);
+  const stories = [...i.know, ...catalysts.map((x) => x.l).filter((l) => l.tag === 'Checked')].filter((l) => take(l.id, l.text)).slice(0, 4).map(line);
   if (stories.length) rows.push(row('stories', stories, { collapsed: true }));
 
   // YOUR NOTE: the vault's account note (seller-visible, never quotable, never read aloud).
@@ -223,8 +291,9 @@ export function projectStory(i: StoryInput): AccountStory {
   }
 
   const order: StoryRowKey[] = ['between_us', 'changing', 'yard'];
-  // Reading order: the three rows the 820 second screen must hold, then the goal and the network read, then the rest.
-  const ROW_ORDER: StoryRowKey[] = ['between_us', 'changing', 'yard', 'goal', 'network', 'learn', 'stories', 'note'];
+  // Reading order: between us, the buyer's own goal, what is changing, the network read, the yard opportunity, what
+  // to learn, the stories, the note.
+  const ROW_ORDER: StoryRowKey[] = ['between_us', 'goal', 'changing', 'network', 'yard', 'learn', 'stories', 'note'];
   rows.sort((a, b) => ROW_ORDER.indexOf(a.key) - ROW_ORDER.indexOf(b.key));
   return { rows, first: order.map((k) => rows.find((r) => r.key === k)).filter((r): r is StoryRow => !!r), checkBeforeContacting, setAsideCaveats };
 }
@@ -241,19 +310,25 @@ function betweenUs(i: StoryInput): StoryRow {
   const sends = t.filter((x) => x.kind === 'send' || x.kind === 'asset');
   const last = sends[0] ?? null;
   const lastReply = t.find((x) => x.kind === 'reply') ?? null;
+  // Silence is judged against the LAST email: an older reply (FedEx: a June automatic notice before an August send)
+  // does not answer it.
+  const answered = !!lastReply && (!last || lastReply.at > last.at);
   if (last) {
     const subject = last.what.replace(/^Re:\s*/i, '').replace(/^["“]+|["”]+$/g, '').trim();
-    // The silence after the last email is said in the same sentence (one tag line, not two, at 820).
-    const silence = !lastReply ? (i.clawdRead === 'ok' ? ' No answer on record.' : " No answer in GAP's records (clawd's history could not be read).") : '';
-    s.push({ text: `Last email to ${who(last)}, ${day(last.at)}${subject && subject !== 'email' ? `: "${subject}"` : ''}.${silence}`, tag: !lastReply && i.clawdRead !== 'ok' ? 'Unknown' : 'Checked', basis: `${last.source}, ${day(last.at)}${!lastReply && i.clawdRead === 'ok' ? '; GAP, clawd and the account history for the silence' : ''}`, basisIds: [`touch:${last.at}`] });
+    const what = subject === 'GAP first touch' ? ' (a GAP first touch)' : subject && subject !== 'email' ? `: "${subject}"` : '';
+    const silence = !answered ? (i.clawdRead === 'ok' ? ' No answer on record.' : " No answer in GAP's records (clawd's history could not be read).") : '';
+    s.push({ text: `Last email to ${who(last)}, ${day(last.at)}${what}.${silence}`, tag: !answered && i.clawdRead !== 'ok' ? 'Unknown' : 'Checked', basis: `${last.source}, ${day(last.at)}${!answered && i.clawdRead === 'ok' ? '; GAP, clawd and the account history for the silence' : ''}`, basisIds: [`touch:${last.at}`] });
   }
   if (lastReply) {
     const k = lastReply.replyKind ?? 'human';
+    // The email a reply answered is not always in GAP's ledgers (Walmart's opt-out answered a Resend-era send).
+    const sentTo = sends.some((x) => x.name.toLowerCase() === lastReply.name.toLowerCase() && x.at < lastReply.at);
+    const orphan = sentTo ? '' : " The email it answered is not in GAP's ledgers.";
     const text =
-      k === 'opt_out' ? `${who(lastReply)} opted out on ${day(lastReply.at)}${lastReply.what ? ` ("${lastReply.what}")` : ''}.`
+      k === 'opt_out' ? `${who(lastReply)} opted out on ${day(lastReply.at)}${lastReply.what ? ` ("${lastReply.what}")` : ''}.${orphan}`
       : k === 'out_of_office' ? `${who(lastReply)} sent an automatic reply on ${day(lastReply.at)}: not an answer.`
       : k === 'bounce' ? `The address for ${who(lastReply)} failed on ${day(lastReply.at)}.`
-      : `${who(lastReply)} replied on ${day(lastReply.at)}: "${lastReply.what}".`;
+      : `${who(lastReply)} replied on ${day(lastReply.at)}: "${lastReply.what}".${orphan}`;
     s.push({ text, tag: k === 'opt_out' || k === 'human' ? 'Buyer said' : 'Checked', basis: `${lastReply.source}, ${day(lastReply.at)}`, basisIds: [`touch:${lastReply.at}`] });
   }
   const people = new Set(sends.map((x) => x.name.toLowerCase()));
@@ -267,11 +342,17 @@ function betweenUs(i: StoryInput): StoryRow {
   return row('between_us', s);
 }
 
-/** What Listen reads for the story: the rows with their tags in words; never the vault note, never the private line. */
+/**
+ * What Listen reads for the story: the rows with their tags in words; never the vault note, never the private line.
+ * A sentence that already says it is unverified or unknown does not get the tag repeated after it.
+ */
 export function storyListenText(story: AccountStory): string {
-  const parts = story.rows
-    .filter((r) => r.key !== 'note')
-    .map((r) => `${r.label}: ${r.sentences.map((s) => `${s.text.replace(/\.$/, '')} (${s.tag.toLowerCase()}).`).join(' ')}`);
-  const check = [...story.checkBeforeContacting, ...story.setAsideCaveats].map((s) => `${s.text.replace(/\.$/, '')} (unverified).`);
+  const spoken = (s: StorySentence) => {
+    const bare = s.text.replace(/\.$/, '');
+    const saysIt = (s.tag === 'Unverified' && /not verified|unverified/i.test(bare)) || (s.tag === 'Unknown' && /unknown|nothing from the buyer|not confirmed/i.test(bare));
+    return saysIt ? `${bare}.` : `${bare} (${s.tag.toLowerCase()}).`;
+  };
+  const parts = story.rows.filter((r) => r.key !== 'note').map((r) => `${r.label}: ${r.sentences.map(spoken).join(' ')}`);
+  const check = [...story.checkBeforeContacting, ...story.setAsideCaveats].map(spoken);
   return ['Account story.', ...parts, ...check].join(' ').replace(/\s+/g, ' ').trim();
 }

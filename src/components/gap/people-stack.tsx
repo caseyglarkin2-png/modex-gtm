@@ -44,6 +44,8 @@ export interface PeopleStackViewProps {
   excluded: SetAsidePerson[];
   /** UX-04: NEXT already carries the one primary control for the chosen person, so the row shows no second one. */
   primaryInNext?: boolean;
+  /** UX-05: set-asides that rest on an unverified report, said under the set-aside line (the story computes them). */
+  setAsideCaveats?: Array<{ text: string; tag: string }>;
 }
 
 type Busy = { key: string; step: 'adding' | 'choosing' } | null;
@@ -53,13 +55,12 @@ const PRIMARY = `${BTN} bg-[var(--primary)] text-[var(--primary-foreground)] hov
 const OUTLINE = `${BTN} border border-[var(--border)] hover:bg-[var(--muted)] disabled:opacity-60`;
 const TEXT = 'inline-flex min-h-9 items-center text-xs underline text-[var(--muted-foreground)]';
 
-/** The compact row's one cue: a material currentness, or a reachability that is not the plain "Email on record". */
-function cueOf(row: StackRow): string | null {
-  if (row.currentness) return row.currentness;
-  return row.reachability === 'Email on record' ? null : row.reachability;
+/** The compact row's cue: a material currentness, then the reachability (always; a seller choosing needs it). */
+function cueOf(row: StackRow): string {
+  return [row.currentness, row.reachability.charAt(0).toLowerCase() + row.reachability.slice(1)].filter(Boolean).join(', ');
 }
 
-export function PeopleStackView({ accountName, stack, state, hypothesisId, excluded, primaryInNext = false }: PeopleStackViewProps) {
+export function PeopleStackView({ accountName, stack, state, hypothesisId, excluded, primaryInNext = false, setAsideCaveats = [] }: PeopleStackViewProps) {
   const router = useRouter();
   const [open, setOpen] = useState<Set<string>>(new Set());
   const [showAll, setShowAll] = useState(false);
@@ -148,8 +149,9 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
       ) : null}
     </div>
   );
+  // Under a hold the heading already says "no cold touch right now": a row never repeats it (Kroger said it five times).
   const chooseControl = (row: StackRow) =>
-    row.coldEligible && state.chooseAllowed ? (
+    !state.chooseAllowed ? null : row.coldEligible ? (
       <button type="button" className={chosenRow || quietChoose ? OUTLINE : PRIMARY} disabled={busy !== null} onClick={() => void choose(row)} data-testid="people-stack-choose" aria-describedby={`reason-${row.key}`}>
         {busy?.key === row.key
           ? busy.step === 'adding' ? 'Adding to GAP...' : 'Choosing...'
@@ -157,8 +159,6 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
             ? `Make ${row.name.split(' ')[0]} first instead`
             : `Choose ${row.name.split(' ')[0]}${row.personaId === null ? ' (adds them to GAP)' : ''}${quietChoose ? ' for when an angle exists' : ''}`}
       </button>
-    ) : row.coldEligible ? (
-      <span className="text-xs text-[var(--muted-foreground)]" data-testid="people-stack-held">No cold touch right now (see Next).</span>
     ) : (
       <span className="text-xs text-[var(--muted-foreground)]" data-testid="people-stack-slot-only">Not a cold first touch: unlocks by a meeting, a referral or your explicit choice.</span>
     );
@@ -215,7 +215,7 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
       ) : null}
 
       {/* An unordered list with the role restated: the order is said in words (ordinals or the tie line), never implied by the list. */}
-      <ul role="list" className="space-y-2" data-testid="people-stack-rows">
+      <ul role="list" className="divide-y divide-[var(--border)]" data-testid="people-stack-rows">
         {rows.map((row) => {
           // UX-05: a card only for the chosen person while a cold touch is a live choice; everyone else, and everyone
           // under a hold or a deal, is one compact row.
@@ -223,27 +223,22 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
           if (!card) {
             const cue = cueOf(row);
             return (
-              <li key={row.key} className={`rounded-md border px-3 py-2 ${row.chosen ? 'border-[var(--primary)]' : 'border-[var(--border)]'}`} data-testid="people-stack-row" data-key={row.key} data-chosen={row.chosen ? 'true' : 'false'} data-slot={row.slot} data-compact="true">
+              <li key={row.key} className="py-2" data-testid="people-stack-row" data-key={row.key} data-chosen={row.chosen ? 'true' : 'false'} data-slot={row.slot} data-compact="true">
                 {head(row)}
                 <div className="mt-0.5 flex flex-wrap items-center gap-x-3 gap-y-1">
-                  <p id={`reason-${row.key}`} className="min-w-0 text-sm" data-testid="people-stack-reason">
+                  <p id={`reason-${row.key}`} className="min-w-0 text-sm text-[var(--muted-foreground)]" data-testid="people-stack-reason">
                     {row.reason}
-                    {cue ? <span className={`text-xs ${/conflict|changed|in question|left|separate|divested|no email/i.test(cue) ? 'text-amber-700 dark:text-amber-400' : 'text-[var(--muted-foreground)]'}`} data-testid="people-stack-cue"> · {cue}</span> : null}
+                    <span className={`text-xs ${/conflict|changed|in question|left|separate|divested|no email/i.test(cue) ? 'text-amber-700 dark:text-amber-400' : ''}`} data-testid="people-stack-cue">, {cue}</span>
                   </p>
-                  {row.chosen ? (
-                    <>
-                      <span className="text-xs text-amber-700 dark:text-amber-400" data-testid="people-stack-held">
-                        {state.state === 'in_motion' ? 'First touch sent; waiting.' : 'No cold touch right now (see Next).'}
-                      </span>
-                      {row.personaId !== null && callAllowed ? (
-                        <Link href={`/gap/call/${row.personaId}`} className={OUTLINE} data-testid="people-stack-call">
-                          Call prep
-                        </Link>
-                      ) : null}
-                    </>
-                  ) : (
-                    chooseControl(row)
-                  )}
+                  {row.chosen && state.state === 'in_motion' ? (
+                    <span className="text-xs text-amber-700 dark:text-amber-400" data-testid="people-stack-held">First touch sent; waiting.</span>
+                  ) : null}
+                  {row.chosen && row.personaId !== null && callAllowed ? (
+                    <Link href={`/gap/call/${row.personaId}`} className={OUTLINE} data-testid="people-stack-call">
+                      Call prep
+                    </Link>
+                  ) : null}
+                  {!row.chosen ? chooseControl(row) : null}
                   {whyButton(row)}
                 </div>
                 {whyPanel(row)}
@@ -251,7 +246,7 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
             );
           }
           return (
-            <li key={row.key} className="rounded-md border border-[var(--primary)] bg-[var(--muted)]/30 p-3" data-testid="people-stack-row" data-key={row.key} data-chosen="true" data-slot={row.slot} data-compact="false">
+            <li key={row.key} className="my-2 rounded-md border border-[var(--primary)] bg-[var(--muted)]/30 p-3" data-testid="people-stack-row" data-key={row.key} data-chosen="true" data-slot={row.slot} data-compact="false">
               {head(row)}
               <p id={`reason-${row.key}`} className="mt-0.5 text-sm" data-testid="people-stack-reason">{row.reason}</p>
               {row.currentness ? (
@@ -322,7 +317,7 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
       {stack.slots.length ? (
         <ul className="space-y-1 text-xs" data-testid="people-stack-slots" aria-label="Also on record">
           {stack.slots.map((row) => (
-            <li key={row.key} className="flex flex-wrap items-baseline gap-x-2" data-testid="people-stack-slot" data-slot={row.slot}>
+            <li key={row.key} className="flex flex-wrap items-baseline gap-x-2 gap-y-0" data-testid="people-stack-slot" data-slot={row.slot}>
               <span className="rounded-sm border border-[var(--border)] px-1 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--muted-foreground)]">{row.slot}</span>
               <span>
                 <span className="font-medium">{row.name}</span>
@@ -344,6 +339,13 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
 
       {!showAll && stack.setAside.line ? (
         <p className="text-xs text-[var(--muted-foreground)]" data-testid="people-stack-set-aside-line">{stack.setAside.line}</p>
+      ) : null}
+      {setAsideCaveats.length ? (
+        <ul className="space-y-0.5 text-xs text-[var(--muted-foreground)]" data-testid="people-stack-set-aside-caveats" aria-label="Set aside on an unverified report">
+          {setAsideCaveats.map((s, k) => (
+            <li key={k} data-tag={s.tag}>{s.text}</li>
+          ))}
+        </ul>
       ) : null}
 
       {stack.hidden || stack.setAside.count ? (

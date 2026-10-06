@@ -86,15 +86,19 @@ function Slot({ label, children, testId }: { label: string; children: React.Reac
 export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, pursuit = null, nextText = null }: { v: NowView; nextHref: string | null; nextLabel: string | null; links: Array<{ label: string; href: string; external?: boolean }>; mailbox?: string | null; pursuit?: NowPursuit | null; nextText?: string | null }) {
   // The state line keeps the entity and buyer type from the brief and takes the pursuit state for the rest.
   const stateLine = pursuit ? [...v.stateLine.split(' · ').slice(0, 2), pursuit.state.stateLine, ...v.stateLine.split(' · ').filter((s) => /^Owner:/.test(s))].join(' · ') : v.stateLine;
-  const inbound = pursuit?.state.lastInbound ?? null;
+  // UX-05: when the story's between-us row carries the last email and the reply, the header does not say them again
+  // (PepsiCo showed two "last" facts that disagreed; Walmart said the opt-out four times).
+  const storyBetweenUs = !!pursuit?.story?.rows.some((r) => r.key === 'between_us');
+  const inbound = storyBetweenUs ? null : pursuit?.state.lastInbound ?? null;
   const tone = pursuit ? STATE_TONE[pursuit.state.state] ?? 'text-[var(--muted-foreground)]' : 'text-[var(--muted-foreground)]';
   // NEXT carries the one primary control; the chosen row in the stack shows no second one (UX-04).
   const primaryInNext = !!(nextHref && nextLabel);
   const buyerSaidSomething = v.gap.some((g) => g.state === 'Buyer said');
   const impactKnown = !/^Impact: unknown/.test(v.impact);
   // One line about one inbound: when the last touch IS the automatic notice shown below, the touch line is dropped.
-  const lastTouch =
-    inbound && inbound.kind !== 'human' && /their reply, below\.$/.test(v.lastTouch)
+  const lastTouch = storyBetweenUs
+    ? null
+    : inbound && inbound.kind !== 'human' && /their reply, below\.$/.test(v.lastTouch)
       ? null
       : inbound && /^No touch on record\.?$/.test(v.lastTouch)
         ? 'No GAP touch on record; the reply below answers an earlier email GAP did not send.'
@@ -122,7 +126,7 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, 
             <p className={`text-xs font-medium ${inbound.kind === 'human' ? 'text-sky-800 dark:text-sky-300' : inbound.kind === 'opt_out' ? 'text-red-700 dark:text-red-400' : 'text-[var(--muted-foreground)]'}`} data-testid="now-last-inbound" data-reply-class={inbound.kind}>
               {inbound.label}: {inbound.who}, {day(inbound.at)}.{inboundConsequence}
             </p>
-          ) : v.lastReply ? (
+          ) : v.lastReply && !storyBetweenUs ? (
             <p className="text-xs font-medium text-sky-800 dark:text-sky-300" data-testid="now-last-reply">
               {v.lastReply}
             </p>
@@ -159,14 +163,7 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, 
 
         {pursuit?.stack ? (
           <>
-            <PeopleStackView accountName={v.name} stack={pursuit.stack} state={pursuit.state} hypothesisId={pursuit.hypothesisId} excluded={pursuit.excluded} primaryInNext={primaryInNext && pursuit.state.coldTouchAllowed} />
-            {pursuit.story?.setAsideCaveats.length ? (
-              <ul className="space-y-0.5 text-xs text-[var(--muted-foreground)]" data-testid="now-set-aside-caveats" aria-label="Set aside on an unverified report">
-                {pursuit.story.setAsideCaveats.map((s, i) => (
-                  <li key={i} data-tag={s.tag}>{s.text}</li>
-                ))}
-              </ul>
-            ) : null}
+            <PeopleStackView accountName={v.name} stack={pursuit.stack} state={pursuit.state} hypothesisId={pursuit.hypothesisId} excluded={pursuit.excluded} primaryInNext={primaryInNext && pursuit.state.coldTouchAllowed} setAsideCaveats={pursuit.story?.setAsideCaveats ?? []} />
             {v.blocked?.length ? <BlockedPeople accountName={v.name} people={v.blocked} /> : null}
           </>
         ) : (
@@ -309,12 +306,6 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, 
           </Slot>
         ) : null}
 
-        {v.private ? (
-          <p className="rounded-md border border-dashed border-amber-600 px-3 py-2 text-xs text-amber-800 dark:text-amber-300" data-testid="now-private">
-            {v.private}
-          </p>
-        ) : null}
-
         {v.wedge ? (
           <Slot label="Wedge" testId="now-wedge">
             <p className="text-sm">{v.wedge}</p>
@@ -331,6 +322,12 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, 
               <p className="text-sm">{v.asset.label}</p>
             )}
           </Slot>
+        ) : null}
+
+        {v.private ? (
+          <p className="rounded-md border border-dashed border-amber-600 px-3 py-2 text-xs text-amber-800 dark:text-amber-300" data-testid="now-private">
+            {v.private}
+          </p>
         ) : null}
 
         {links.length ? (
