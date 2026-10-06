@@ -87,7 +87,7 @@ function Slot({ label, children, testId }: { label: string; children: React.Reac
   );
 }
 
-export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, pursuit = null, nextText = null }: { v: NowView; nextHref: string | null; nextLabel: string | null; links: Array<{ label: string; href: string; external?: boolean }>; mailbox?: string | null; pursuit?: NowPursuit | null; nextText?: string | null }) {
+export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, pursuit = null, nextText = null, doneNext = null, askGap = null }: { v: NowView; nextHref: string | null; nextLabel: string | null; links: Array<{ label: string; href: string; external?: boolean }>; mailbox?: string | null; pursuit?: NowPursuit | null; nextText?: string | null; /** UX-09: the Done, next bar when the account was opened from Work. */ doneNext?: React.ReactNode; /** UX-13: the read-only Ask GAP box, after the people. */ askGap?: React.ReactNode }) {
   // The state line keeps the entity and buyer type from the brief and takes the pursuit state for the rest.
   const stateLine = pursuit ? [...v.stateLine.split(' · ').slice(0, 2), pursuit.state.stateLine, ...v.stateLine.split(' · ').filter((s) => /^Owner:/.test(s))].join(' · ') : v.stateLine;
   // UX-05: when the story's between-us row carries the last email and the reply, the header does not say them again
@@ -145,7 +145,7 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, 
         <div className="rounded-md border border-[var(--primary)] px-3 py-2" data-testid="now-next">
           <h2 className="text-xs font-semibold uppercase tracking-wide text-[var(--primary)]">Next</h2>
           <p className="text-sm font-medium">{nextText ?? v.next.text}</p>
-          {pursuit?.state.blocker && !['research', 'replied', 'opted_out', 'in_deal'].includes(pursuit.state.state) ? (
+          {pursuit?.state.blocker && !['research', 'replied', 'opted_out', 'in_deal', 'held'].includes(pursuit.state.state) ? (
             <p className="mt-1 text-xs text-amber-700 dark:text-amber-400" data-testid="now-blocker">{pursuit.state.blocker}</p>
           ) : null}
           {nextHref && nextLabel ? (
@@ -154,6 +154,10 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, 
             </PendingLink>
           ) : null}
         </div>
+        {/* UX-09: Done, next (only when opened from Work): the order, Back, Next account, Back to Work. */}
+        {doneNext}
+        {/* UX-13: Ask GAP, read-only, over this page's own projections. */}
+        {askGap}
 
         {pursuit?.anchor && (pursuit.state.coldTouchAllowed || pursuit.state.state === 'research' || pursuit.state.state === 'choose_person') ? (
           <OutreachAnchorView accountName={v.name} anchor={pursuit.anchor} coldTouchAllowed={pursuit.state.coldTouchAllowed} />
