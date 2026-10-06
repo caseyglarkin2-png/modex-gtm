@@ -198,9 +198,9 @@ describe('the outreach anchor (Option A)', () => {
     const job = { id: 'f-job', quote: 'PepsiCo is now hiring a Transportation Coordinator in Dallas; apply by October 30.', url: 'https://jobs.pepsico.com/yard-ops-dallas', title: 'PepsiCo Careers', publishedAt: '2026-09-20T00:00:00Z', expiresAt: null, continuity: 'ongoing_state' as const, currentness: null, claimClass: 'JOB_POSTING' };
     const { anchor } = anchorFor(inputs({ facts: [factA, factB, job], hypotheses: [hypA, hypB] }), 1);
     expect(anchor.draftable.map((d) => d.factId)).toContain('f-job');
-    // Without the class the same sentence is not a physical fact and never draftable.
-    const { anchor: plain } = anchorFor(inputs({ facts: [factA, factB, { ...job, claimClass: null }], hypotheses: [hypA, hypB] }), 1);
-    expect(plain.draftable.map((d) => d.factId)).not.toContain('f-job');
+    // The class is what admits it as a story fact at all: without it the read (account-intel/load.ts, pinned in
+    // account-intel-regate.test.ts) never hands the sentence to the story, so there is nothing to draft.
+    expect(anchor.draftable.find((d) => d.factId === 'f-job')?.proposedObservation).toMatch(/\[S:f-job\]\.$/);
   });
   it('a thesis the send gate would refuse is never the anchor and is listed as not usable; with the gate unread nothing is usable', () => {
     const gated = { ...inputs(), unsendable: ['h-denver'] } as AccountInputs & { unsendable: string[] };
