@@ -84,7 +84,8 @@ export function compactContext(i: {
   const dnu = new Set((i.anchor?.doNotUse ?? []).map((d) => d.text.trim().toLowerCase()));
   // A human reply is buyer input too (the review: a replied account with no BID read as "the buyer has not told us").
   const buyerSaid = [...(i.buyerSaid ?? [])];
-  if (i.state.lastInbound && i.state.lastInbound.kind === 'human' && i.state.lastInbound.snippet.trim()) buyerSaid.unshift({ text: i.state.lastInbound.snippet, who: i.state.lastInbound.who, at: i.state.lastInbound.at });
+  // An opt-out is the buyer's word too ("stop"): never "the buyer has not told us" over it.
+  if (i.state.lastInbound && (i.state.lastInbound.kind === 'human' || i.state.lastInbound.kind === 'opt_out') && i.state.lastInbound.snippet.trim()) buyerSaid.unshift({ text: i.state.lastInbound.kind === 'opt_out' ? `Asked not to be contacted: "${i.state.lastInbound.snippet.trim()}"` : i.state.lastInbound.snippet, who: i.state.lastInbound.who, at: i.state.lastInbound.at });
   return {
     accountName: i.accountName,
     state: { state: i.state.state, stateLine: scrub(i.state.stateLine), blocker: i.state.blocker ? scrub(i.state.blocker) : null, next: scrub(i.nextText), coldTouchAllowed: i.state.coldTouchAllowed },

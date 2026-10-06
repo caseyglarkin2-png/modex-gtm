@@ -86,6 +86,11 @@ describe('compactContext and askPrompt', () => {
     expect(replied.buyerSaid[0]).toEqual({ text: 'Send me the two-site comparison and we can talk Thursday.', who: 'Jenny Wilson', at: '2026-10-06T09:00:00Z' });
     expect(askPrompt(replied, 'What did they say?')).not.toMatch(/NO buyer input/);
     expect(guardBuyerSaid('The buyer said to send the comparison.', replied)).toBe('The buyer said to send the comparison.');
+    // An opt-out is the buyer's word too: Walmart's "stop" is input, and the guard stands down.
+    const opted = compactContext({ accountName: 'Walmart Inc.', state: { ...state, state: 'opted_out', lastInbound: { who: 'timothy.cooper@walmart.com', at: '2026-10-05T14:00:00Z', kind: 'opt_out', label: 'Opted out', snippet: 'stop' } } as unknown as PursuitState, nextText: 'Record the opt-out.', story: null, anchor: null, stack: null, buyerSaid: [] });
+    expect(opted.buyerSaid[0]).toMatchObject({ text: 'Asked not to be contacted: "stop"', who: 'their address' });
+    expect(askPrompt(opted, 'What did they say?')).not.toMatch(/NO buyer input/);
+    expect(guardBuyerSaid('They said not to contact them.', opted)).toBe('They said not to contact them.');
     const withInput = compactContext({ accountName: 'NFI Industries', state, nextText: 'x', story: null, anchor: null, stack: null, buyerSaid: [{ text: 'Trucks wait an hour.', who: 'Jenny', at: null }] });
     expect(guardBuyerSaid('The buyer said trucks wait an hour.', withInput)).toBe('The buyer said trucks wait an hour.');
   });
