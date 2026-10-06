@@ -178,7 +178,7 @@ describe('UX-07: human priority controls', () => {
     render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(two, { chosenKey: 'gap:1', chosenBy: 'you, Oct 5', nextCandidates: new Set([2]) })} state={state} hypothesisId="h1" excluded={[]} />);
     expect(screen.getByTestId('people-stack-make-next')).toHaveTextContent('Next if Doug is silent');
     fireEvent.click(screen.getByTestId('people-stack-make-next'));
-    await waitFor(() => expect(screen.getByTestId('people-stack-note').textContent).toMatch(/^Kelly is next at Walmart Inc only, after Doug if no response: Next if Doug is silent\. Nothing is sent\./));
+    await waitFor(() => expect(screen.getByTestId('people-stack-note').textContent).toMatch(/^Kelly is next at Walmart Inc only: next if Doug is silent\. Nothing is sent\./));
     expect(fetchSpy).toHaveBeenCalledWith('/api/gap/accounts/motion', expect.objectContaining({ method: 'POST', body: JSON.stringify({ accountName: 'Walmart Inc.', primaryPersonaId: 1, nextPersonaId: 2 }) }));
     expect(refresh).toHaveBeenCalled();
     fireEvent.click(screen.getByTestId('people-stack-undo'));

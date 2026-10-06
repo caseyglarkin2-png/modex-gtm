@@ -176,6 +176,22 @@ describe('UX-07: a parked person is out of the running', () => {
     expect(parked.next).toBeNull();
     expect(parked.alsoWaiting.map((p) => p.personaId)).toEqual([]);
   });
+  it('a parked card is HELD in every state, never READY: ready, in motion, paused on a reply, and when everyone is parked', () => {
+    const ready = computeAccountMotion({ accountName: 'Acme', readyEmailCards: [a, b, c], choice: null, firstTouches: [], replyHold: null, parked: new Set([3]), now: NOW2 });
+    expect(ready.heldCardIds).toContain('c3');
+    expect(ready.primary?.personaId).not.toBe(3);
+    const inMotion = computeAccountMotion({ accountName: 'Acme', readyEmailCards: [a, b, c], choice: null, firstTouches: [{ personaId: 1, recipient: '1@acme.test', sentAt: NOW2.toISOString(), released: false }], replyHold: null, parked: new Set([3]), now: NOW2 });
+    expect(inMotion.state).toBe('in_motion');
+    expect(inMotion.heldCardIds).toContain('c3');
+    expect(inMotion.next?.personaId).not.toBe(3);
+    const paused = computeAccountMotion({ accountName: 'Acme', readyEmailCards: [a, b, c], choice: null, firstTouches: [], replyHold: { from: 'x@acme.test', receivedAt: NOW2.toISOString() }, parked: new Set([3]), now: NOW2 });
+    expect(paused.state).toBe('paused_reply');
+    expect(paused.heldCardIds).toContain('c3');
+    const all = computeAccountMotion({ accountName: 'Acme', readyEmailCards: [a, b, c], choice: null, firstTouches: [], replyHold: null, parked: new Set([1, 2, 3]), now: NOW2 });
+    expect(all.state).toBe('idle');
+    expect(all.heldCardIds).toEqual(['c1', 'c2', 'c3']);
+    expect(all.headline).toMatch(/set aside by you/);
+  });
   it('a recorded next who is parked is not lined up; the chosen primary is never parked by the filter', () => {
     const m = computeAccountMotion({ accountName: 'Acme', readyEmailCards: [a, b, c], choice: { primaryPersonaId: 2, nextPersonaId: 1, by: 'casey', at: NOW2.toISOString() }, firstTouches: [], replyHold: null, parked: new Set([1, 2]), now: NOW2 });
     expect(m.primary?.personaId).toBe(2);

@@ -153,7 +153,7 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
   const makeNext = (row: StackRow) => {
     const primary = state.person?.personaId;
     if (!primary || row.personaId === null) return;
-    return decide(row, 'next', '/api/gap/accounts/motion', { accountName, primaryPersonaId: primary, nextPersonaId: row.personaId }, `${first(row.name)} is next at ${account} only, after ${state.person ? first(state.person.name) : 'the chosen person'} if no response${state.person ? `: Next if ${first(state.person.name)} is silent` : ''}.`, { label: 'Undo', url: '/api/gap/accounts/motion', body: { accountName, primaryPersonaId: primary, nextPersonaId: null } }, 'make next');
+    return decide(row, 'next', '/api/gap/accounts/motion', { accountName, primaryPersonaId: primary, nextPersonaId: row.personaId }, `${first(row.name)} is next at ${account} only: next if ${state.person ? first(state.person.name) : 'the chosen person'} is silent.`, { label: 'Undo', url: '/api/gap/accounts/motion', body: { accountName, primaryPersonaId: primary, nextPersonaId: null } }, 'make next');
   };
   const prefer = (row: StackRow, kind: 'not_a_fit' | 'not_now', reason: string, until: string | null) => {
     if (row.personaId === null) return;

@@ -171,11 +171,13 @@ export function computeAccountMotion(input: {
   const { accountName, readyEmailCards, choice, now } = input;
   const parked = input.parked ?? new Set<number>();
   // A parked person is out of the motion's running; the seller's own chosen primary is never parked by this filter.
-  const cards = readyEmailCards.filter((c) => typeof c.persona.id === 'number' && (!parked.has(c.persona.id as number) || c.persona.id === choice?.primaryPersonaId));
+  const emailCards = readyEmailCards.filter((c) => typeof c.persona.id === 'number');
+  const cards = emailCards.filter((c) => !parked.has(c.persona.id as number) || c.persona.id === choice?.primaryPersonaId);
   // Relevance is to the THESIS role (the hypothesis persona key), never to the candidates' own roles.
   const thesisKeys = new Set(cards.map((c) => c.hypothesis?.persona).filter((k): k is string => !!k));
   const ranked = rankCandidates(cards, thesisKeys);
-  const allIds = cards.map((c) => c.id);
+  // Every email card at the account, the parked ones included: a parked card is never the motion, so it stays HELD.
+  const allIds = emailCards.map((c) => c.id);
 
   if (input.conversation) {
     const c = input.conversation;
@@ -254,7 +256,7 @@ export function computeAccountMotion(input: {
     }
   }
 
-  if (ranked.length === 0) return { accountName, state: 'idle', primary: null, next: null, alsoWaiting: [], heldCardIds: [], headline: 'Nobody to email here right now.' };
+  if (ranked.length === 0) return { accountName, state: 'idle', primary: null, next: null, alsoWaiting: [], heldCardIds: allIds, headline: allIds.length ? 'Nobody to email here right now: everyone on a card is set aside by you.' : 'Nobody to email here right now.' };
 
   const chosen = choice ? ranked.find((r) => r.card.persona.id === choice.primaryPersonaId) ?? null : null;
   // The cockpit SUGGESTS only a cold WHO; a sponsor or adjacent role leads only by Casey's choice.
