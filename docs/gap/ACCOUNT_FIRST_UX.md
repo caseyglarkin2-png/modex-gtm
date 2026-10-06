@@ -618,6 +618,40 @@ Commit 7065fc24 on `feat/gap-account-first-ux`. What shipped, against the 6b con
 Validation: GAP folder suite 329 files / 5,059 tests green; `tsc --noEmit` clean; eslint clean on the changed files;
 production build green. Measurements and the fresh review follow in 7.2 and 8.8.
 
+## 6d. UX-05 contract (the derived Account Story), drafted from the UX-03 and UX-04 reviews
+
+Goal: the seller reads what is going on at the account, what has already happened between us and them, and why that
+leads to this person now, in a few tagged lines above or beside NEXT. One DERIVED projection (`gap/story/*`) over
+readers GAP already has; no new table, no model call, no second recommendation authority.
+
+1. **Rows** (each present only when it has a basis; nothing manufactured): WHAT HAS HAPPENED BETWEEN US (the last
+   person touched with their title and what came back: Courtney Keen's automatic reply, Timothy Cooper's opt-out,
+   Laura Maxwell's June email with no answer; read from the context history, the reply class and clawd's outreach
+   history), GOAL, WHAT IS CHANGING, PHYSICAL-NETWORK IMPLICATION, YARD OPPORTUNITY, WHAT WE NEED TO LEARN, and
+   STORIES THAT MATTER (top 2 to 4, collapsed). BEST PROOF is UX-06's (it belongs beside the opening, tagged
+   "Our proof, measured" or "Our model", never Checked).
+2. **Trust per sentence**: Buyer said, Checked, Unverified, Our read, Unknown, Contradicted; a line takes the weakest
+   class of its inputs; a line with no basis is Our read or Unknown; YARD OPPORTUNITY is always Our read with its
+   Wrong if beside it unless the buyer confirmed it; an UNVERIFIED item that names the chosen person's employer,
+   division or a divestiture rises beside the person as "check before contacting" (FedEx: the CMA CGM sale against
+   Courtney Keen; Ray Hatton "divested unit" rests on that unverified sale and the story must say so).
+3. **Readers**: the brief's sections and hypotheses, buyer inputs, the context history, the reply class, clawd
+   `/api/outreach/history` and `/api/yardflow/intel/account` (sends, reply intent; never engagement as a reason), the
+   vault's account note when one exists (seller-visible, never quotable), the pursuit state. Private engagement is
+   never a story row and never spoken.
+4. **Placement**: at 820 the story's first three lines (what happened between us, what is changing, yard opportunity)
+   sit inside the second screen, above WHY NOW; at 1100+ the story sits beside NEXT in the right column, replacing the
+   raw WHY NOW list (the checked lines move under STORIES THAT MATTER with their cite status). To make room, the
+   stack compacts: a card only for the chosen person, one-line rows (name, title, reason, Make first, Why) for the
+   alternatives, no cards under a hold or a deal.
+5. **Listen** reads the story rows with their tags ("checked", "our read"), never the private line.
+6. **Tests**: the PepsiCo and FedEx fixtures: every line has a tag and basis ids, the tag equals the weakest basis
+   class, Goal / Network / Yard are never Checked without a buyer input or a verified fact id, a line containing an
+   Unverified signal's text is Unverified, the "what happened between us" row names the last person touched and the
+   reply class, the sentinel private page never appears in any story or listen text.
+7. **Out of scope**: the outreach anchor and "why #1 over #2" (UX-06), human-priority controls beyond Choose (UX-07),
+   the worklist (UX-08), voice beyond Listen (UX-11+).
+
 ## 7. Task baselines and post-change measurements
 
 Baseline measured on production 2026-10-05 (SHA 54c11c57) through the rig; clicks counted on the shortest path a seller
@@ -976,3 +1010,7 @@ DPR 1 before UX-15 compares against this baseline. The text dumps and JS metrics
 | New (UX-03 review): the employment store prefixes every verification tier with "verified at", so a likely role reads as verified | FIX AS PART OF UX (UX-06 or the next WHO truth pass) | truth wording |
 | New (UX-03 review): call mode checks only the person's do-not-contact flag, never the account hold | FIX AS PART OF UX (UX-06) | call prep must read the pursuit state |
 | New (UX-03 review): GAP's history has no row for the email the Walmart opt-out answered (a Resend-era or clawd send) | FIX AS PART OF UX (UX-05 readers: clawd outreach history, Resend sends) | "No GAP touch on record" says so honestly meanwhile |
+| New (UX-04 review): a stored fact reads "H-E-B plans to build a $175 new refrigerated facility" and is marked OK to cite | FIX NOW (truth layer): a quote with a broken number must not be outreach evidence; re-verify at the source | the claim re-gate (`claim-rules.ts`) should refuse a currency amount with no magnitude |
+| New (UX-04 review): the app sidebar takes about 257 px at 820, leaving about 517 px for the account page | OPEN QUESTION for Casey: collapse the sidebar on account pages below 1100 px (a shell change for every page) | |
+| New (UX-04 review): the Note control opens the shared non-modal feedback dialog with no Escape and no focus return | FIX AS PART OF UX (UX-14), the baseline P3 note-dialog item | |
+| New (UX-04 review): the tab title carries the notification count ("(840) Fedex"); "Email: Email sent:" in the last-touch line; "Role current (likely)" twice on H-E-B | NICE, carried to UX-14 | |
