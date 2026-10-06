@@ -95,7 +95,7 @@ describe('loadFamilyPeople', () => {
     expect(hs.asked).not.toContain('901');
     expect(r.excluded).toEqual([
       { accountName: 'FedEx Ground', why: 'no linked HubSpot company (never read by a domain or name guess)' },
-      { accountName: 'GENCO, A FedEx Company', why: 'divested: FedEx Supply Chain (the former GENCO) was sold to CMA CGM on 2026-10-01 and joins CEVA Logistics: this role no longer belongs to FedEx.' },
+      { accountName: 'GENCO, A FedEx Company', why: 'divested: FedEx completed the sale of FedEx Supply Chain (the former GENCO) to CMA CGM Group on October 1, 2026 for $1.4 billion; it joins CEVA Logistics, so this role no longer belongs to FedEx (FedEx newsroom, Oct 1, 2026).' },
     ]);
     const ltl = r.people.find((p) => p.id === '12');
     expect(ltl?.provenance).toMatchObject({ accountName: 'FedEx Freight', relation: 'subsidiary', companyId: '902', boundary: { unit: 'FedEx Freight', status: 'separate' } });

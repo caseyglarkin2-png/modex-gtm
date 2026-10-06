@@ -140,6 +140,8 @@ export interface OwnerExclusion {
   candidate: OwnerCandidate;
   code: ExclusionCode;
   reason: string;
+  /** divested_entity: the company's own release behind the boundary (people/entity-boundary.ts), when it has one. */
+  source?: { url: string; publisher: string; quote: string; publishedAt: string };
 }
 
 export type OwnerNextStep = 'use' | 'add_and_use' | 'choose' | 'find_operator';
@@ -254,6 +256,76 @@ function rankDimensions(c: OwnerCandidate, input: OwnerCandidateInput, purpose: 
 
 function rankKey(c: OwnerCandidate, input: OwnerCandidateInput, purpose: OwnerPurpose): number[] {
   return rankDimensions(c, input, purpose).map((d) => d.value);
+}
+
+/** The dimension names in rank-key order for a purpose (the same order `rankDimensions` returns; pinned by a test). */
+export function rankDimensionNames(purpose: OwnerPurpose): string[] {
+  const lead = ['buyer truth', 'relationship', 'named initiative'];
+  if (purpose === 'COLD_FIRST_TOUCH') return [...lead, 'lane', 'named ownership', 'thesis relevance', 'region', 'scope', 'US market', 'seniority', 'currentness', 'reachability'];
+  if (purpose === 'SITE_PILOT') return [...lead, 'current role', 'site fit', 'lane', 'named ownership', 'thesis relevance', 'region', 'US market', 'seniority', 'currentness', 'reachability'];
+  if (purpose === 'TRANSFORMATION_INITIATIVE') return [...lead, 'current role', 'technology ownership', 'lane', 'named ownership', 'thesis relevance', 'region', 'scope', 'US market', 'seniority', 'currentness', 'reachability'];
+  return [...lead, 'current role', 'thesis relevance', 'lane', 'named ownership', 'scope', 'region', 'US market', 'seniority', 'currentness', 'reachability'];
+}
+
+export interface LeadOver {
+  /** The first dimension on which `top` leads `second` (rank-key order). */
+  dimension: string;
+  /** One sentence for the seller, built from the two people's own reads; never invented. */
+  text: string;
+}
+
+/**
+ * WHY #1 OVER #2 (UX-06): the FIRST dimension on which the top person's rank key beats the runner-up's, said in
+ * words from the two reads. Null when the keys are equal (a tie: the caller says GAP cannot separate them) or when
+ * either person carries no rank key. Pure over the resolver's own keys; nothing here re-ranks.
+ */
+export function leadOver(top: OwnerCandidate, second: OwnerCandidate, purpose: OwnerPurpose): LeadOver | null {
+  const a = top.rank;
+  const b = second.rank;
+  if (!a || !b || a.length !== b.length) return null;
+  const names = rankDimensionNames(purpose);
+  const i = a.findIndex((v, k) => v !== b[k]);
+  if (i < 0 || a[i] < b[i]) return null;
+  const dimension = names[i] ?? 'rank';
+  const t = top.name.split(' ')[0];
+  const s = second.name.split(' ')[0];
+  const text = (() => {
+    switch (dimension) {
+      case 'buyer truth':
+        return `${t} is already talking to you; ${s} is not.`;
+      case 'relationship':
+        return `You have a way in to ${t}; none on record for ${s}.`;
+      case 'named initiative':
+        return `A live signal names ${t} on the initiative; none names ${s}.`;
+      case 'current role':
+        return `${t}'s current role is ${top.role ? top.role.label.toLowerCase() : 'verified'}; ${s}'s is ${second.role ? second.role.label.toLowerCase() : 'not verified'}.`;
+      case 'thesis relevance':
+        return `${t} ${top.relevance?.why ?? 'runs what the fact lands on'}; ${s} ${second.relevance?.why ?? 'does not'}.`;
+      case 'lane':
+        return `${t} ${top.read.laneWhy} (${top.laneLabel.toLowerCase()}); ${s} ${second.read.laneWhy} (${second.laneLabel.toLowerCase()}).`;
+      case 'named ownership':
+        return `${t}'s title names the ownership (${top.read.laneWhy}); ${s}'s names ${second.read.ownership > 0 ? 'less of it' : 'logistics or distribution'}.`;
+      case 'site fit':
+        return `${t} runs the site or region (${top.read.laneWhy}); ${s} runs the network.`;
+      case 'technology ownership':
+        return `${t} owns the freight or yard technology (${top.read.laneWhy}); ${s} does not.`;
+      case 'region':
+        return `${t} is the North America owner; ${s} reads as another region (${second.read.regionWhy}).`;
+      case 'scope':
+        return `${t} carries ${top.read.scope === 'NETWORK' ? 'network' : top.read.scope === 'SITE' ? 'one site' : 'unstated'} scope; ${s} carries ${second.read.scope === 'NETWORK' ? 'network' : second.read.scope === 'SITE' ? 'one site' : 'unstated'} scope.`;
+      case 'US market':
+        return `${t} reads as the US market; ${s} does not.`;
+      case 'seniority':
+        return `${t} is the more senior title; the remits read the same.`;
+      case 'currentness':
+        return `${t}'s employment is ${top.employment ? top.employment.label.toLowerCase() : 'on record'}; ${s}'s is ${second.employment ? second.employment.label.toLowerCase() : 'unverified'}.`;
+      case 'reachability':
+        return `${t} is a GAP contact with an email; ${s} is ${second.source === 'hubspot' ? 'in HubSpot only' : 'without an email'}.`;
+      default:
+        return `${t} ranks ahead of ${s} on ${dimension}.`;
+    }
+  })();
+  return { dimension, text };
 }
 
 /**
@@ -396,7 +468,7 @@ export function resolveOwner(input: OwnerResolutionInput): OwnerResolution {
       continue;
     }
     if (c.entity?.status === 'divested') {
-      excluded.push({ candidate: c, code: 'divested_entity', reason: c.entity.note });
+      excluded.push({ candidate: c, code: 'divested_entity', reason: c.entity.note, ...(c.entity.source ? { source: c.entity.source } : {}) });
       continue;
     }
     // Contactability before the role: a do-not-contact person is shown under that reason (with the legacy review

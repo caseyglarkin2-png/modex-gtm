@@ -112,7 +112,7 @@ describe('the loader reads the verified family', () => {
     expect(r.ok).toBe(true);
     if (!r.ok) return;
     expect(r.resolution.eligible[0]?.name).toBe('Lou Ltl');
-    expect(r.resolution.eligible[0]?.caution).toMatch(/FedEx Freight is the LTL company/);
+    expect(r.resolution.eligible[0]?.caution).toMatch(/FedEx Freight completed its spin-off/);
     expect(r.resolution.preselected).toBeNull();
   });
 });

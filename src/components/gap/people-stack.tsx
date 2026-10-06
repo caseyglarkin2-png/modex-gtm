@@ -32,6 +32,8 @@ export interface SetAsidePerson {
   title: string | null;
   code: string;
   reason: string;
+  /** divested_entity: the company's own release behind the set-aside (serializable), when it has one. */
+  source?: { url: string; publisher: string; quote: string; publishedAt: string } | null;
 }
 
 export interface PeopleStackViewProps {

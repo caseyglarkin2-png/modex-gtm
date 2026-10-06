@@ -215,6 +215,18 @@ describe('story: check before contacting and the private guard', () => {
     expect(two.setAsideCaveats[0].text).toMatch(/^Ray Hatton and Scott Temple are set aside as a divested unit/);
     expect(two.setAsideCaveats[0].basisIds).toEqual(['signal:s-cma', 'set-aside:gap:11', 'set-aside:gap:12']);
   });
+  it('a set-aside backed by the company\'s own release is Checked and names the release; the same deal from a third party is never told beside it', () => {
+    const inputs = fedexInputs();
+    const source = { url: 'https://newsroom.fedex.com/fedex-completes-sale-of-fedex-supply-chain-to-cma-cgm-group', publisher: 'FedEx newsroom', quote: 'FedEx Corp. (NYSE: FDX) today announced the completion of its sale of FedEx Supply Chain, a subsidiary of FedEx Corp., to CMA CGM Group for an enterprise value of $1.4 billion.', publishedAt: '2026-10-01' };
+    const { story } = build(inputs, ctxFor(), fedexState(inputs, { replies: [] }), { excluded: [{ key: 'gap:11', name: 'Ray Hatton', title: 'Director, FedEx Supply Chain', code: 'divested_entity', reason: 'sold', source }, { key: 'gap:12', name: 'Scott Temple', title: 'President, FedEx Supply Chain', code: 'divested_entity', reason: 'sold', source }] });
+    expect(story.setAsideCaveats).toHaveLength(1);
+    expect(story.setAsideCaveats[0].tag).toBe('Checked');
+    expect(story.setAsideCaveats[0].text).toBe('Ray Hatton and Scott Temple are set aside as a divested unit: FedEx Corp. announced on Oct 1 the completion of its sale of FedEx Supply Chain, a subsidiary of FedEx Corp., to CMA CGM Group for an enterprise value of $1.4 billion.');
+    expect(story.setAsideCaveats[0].basis).toBe('FedEx newsroom, Oct 1');
+    expect(story.setAsideCaveats[0].basisIds).toContain('first-party:https://newsroom.fedex.com/fedex-completes-sale-of-fedex-supply-chain-to-cma-cgm-group');
+    // The third party's "FedEx to sell FedEx Supply Chain to CMA CGM" is the same deal: not a story line any more.
+    expect(story.rows.flatMap((r) => r.sentences).some((s) => /CMA CGM/.test(s.text))).toBe(false);
+  });
   it('the sentinel private page never appears in any story or listen text; private engagement is never a row', () => {
     const inputs = fedexInputs();
     const { story, v } = build(inputs, ctxFor(fedexHistory), fedexState(inputs));

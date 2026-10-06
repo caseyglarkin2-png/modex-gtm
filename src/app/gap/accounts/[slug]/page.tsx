@@ -165,7 +165,7 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
       : { href: `${hrefFor('sources')}#research-plan`, label: 'Open the research plan' };
     // UX-05: the derived Account Story over the brief, the context history, the reply class, clawd's sends, the vault
     // note and the pursuit state (pure; never stored). Listen reads it with its tags, after the state and NEXT.
-    const excluded = (pursuit?.resolution?.excluded ?? []).map((e) => ({ key: e.candidate.key, name: e.candidate.name, title: e.candidate.title, code: e.code, reason: e.reason }));
+    const excluded = (pursuit?.resolution?.excluded ?? []).map((e) => ({ key: e.candidate.key, name: e.candidate.name, title: e.candidate.title, code: e.code, reason: e.reason, source: e.source ?? null }));
     const story = pursuit
       ? projectStory({
           accountName: brief.accountName,
