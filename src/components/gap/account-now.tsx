@@ -334,12 +334,19 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, 
         ) : null}
       </div>
 
-      {/* 390: one opaque bottom bar with Listen and Log a touch (44 px each); scroll-padding-bottom keeps focus clear of it. */}
+      {/* 390: one opaque bottom bar (44 px controls): Listen, and the NEXT control when there is one (the primary scrolls
+          away with the page), else Log a touch; scroll-padding-bottom keeps focus clear of it. */}
       <div className="fixed inset-x-0 bottom-0 z-40 flex items-center justify-between gap-2 border-t border-[var(--border)] bg-[var(--background)] px-4 py-2 md:hidden" data-testid="now-bottom-bar" role="toolbar" aria-label="Account actions">
         <VoicePreviewButton text={v.listen} label="Listen" className="min-h-11 px-4" />
-        <Link href={`/gap/capture?account=${encodeURIComponent(v.name)}`} className="inline-flex min-h-11 items-center justify-center rounded-md border border-[var(--border)] px-4 text-sm font-medium" data-testid="now-bottom-log">
-          Log a touch
-        </Link>
+        {nextHref && nextLabel ? (
+          <PendingLink href={nextHref} className="inline-flex min-h-11 max-w-[60%] items-center justify-center truncate rounded-md bg-[var(--primary)] px-4 text-sm font-semibold text-[var(--primary-foreground)]" data-testid="now-bottom-next">
+            {nextLabel}
+          </PendingLink>
+        ) : (
+          <Link href={`/gap/capture?account=${encodeURIComponent(v.name)}`} className="inline-flex min-h-11 items-center justify-center rounded-md border border-[var(--border)] px-4 text-sm font-medium" data-testid="now-bottom-log">
+            Log a touch
+          </Link>
+        )}
       </div>
     </div>
   );

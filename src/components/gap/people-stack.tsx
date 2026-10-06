@@ -118,7 +118,9 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
     <section className="space-y-2" data-testid="people-stack" aria-labelledby="people-stack-heading">
       <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
         <h2 id="people-stack-heading" className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">
-          People{stack.hidden ? ` (${stack.rows.length} of ${stack.rows.length + stack.hidden} eligible for a first touch)` : ' (eligible for a first touch)'}
+          {choosing
+            ? `People${stack.hidden ? ` (${stack.rows.length} of ${stack.rows.length + stack.hidden} eligible for a first touch)` : ' (eligible for a first touch)'}`
+            : `People on record${stack.hidden ? ` (${stack.rows.length} of ${stack.rows.length + stack.hidden})` : ''}${state.state === 'in_deal' ? ': in a deal, work it from the deal' : ''}`}
         </h2>
         {stack.chooseLabel && choosing ? <p className="text-xs font-medium" data-testid="people-stack-choose-label">{stack.chooseLabel}: GAP does not pick.</p> : null}
         {!choosing ? <p className="text-xs text-[var(--muted-foreground)]" data-testid="people-stack-on-record">On record; no cold touch right now (see Next).</p> : null}

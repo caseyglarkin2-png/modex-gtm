@@ -132,18 +132,24 @@ function facets(c: OwnerCandidate): Array<{ name: string; text: string | null }>
   ];
 }
 
+/** Rank and filler words never make a reason on their own ("Title: Senior" says nothing about what they run). */
+const GENERIC_TITLE_WORDS = new Set(['senior', 'sr', 'jr', 'director', 'vice', 'president', 'vp', 'svp', 'evp', 'manager', 'head', 'chief', 'officer', 'global', 'north', 'america', 'inc', 'and', 'the', 'of', 'for', 'ii', 'iii', 'lead', 'leader', 'principal', 'associate', 'executive', 'enterprise', 'group', 'corporate']);
+
 /** The title's own distinguishing fragment ("Inbound Logistics" against "Transportation Strategy & Planning"). */
 function titleFragment(title: string | null, others: Array<string | null>): string | null {
   if (!title) return null;
   const words = (t: string) => new Set(t.toLowerCase().split(/[^a-z0-9&]+/).filter((w) => w.length > 2));
   const mine = words(title);
   const shared = new Set(others.filter((o): o is string => !!o).flatMap((o) => [...words(o)]));
-  const own = [...mine].filter((w) => !shared.has(w));
+  const own = [...mine].filter((w) => !shared.has(w) && !GENERIC_TITLE_WORDS.has(w));
   if (!own.length) return null;
-  // Keep the title's own order and capitalisation for the distinguishing words.
+  // Keep the title's own order and capitalisation for the distinguishing words; a lone generic word is no reason.
   const kept = title.split(/\s+/).filter((w) => own.includes(w.toLowerCase().replace(/[^a-z0-9&]/g, '')));
-  return kept.length ? `Title: ${kept.join(' ')}` : null;
+  return kept.length ? `Title names ${kept.join(' ')}` : null;
 }
+
+const nameKey = (s: string) => s.toLowerCase().replace(/^(dr|mr|mrs|ms)\.?\s+/, '').replace(/[^a-z]+/g, ' ').trim();
+const HARD_SET_ASIDE = new Set(['do_not_contact', 'unsubscribed', 'opted_out', 'left_company']);
 
 /**
  * One distinguishing sentence per visible row: the most specific facet whose value no other visible row shares, then
@@ -206,7 +212,12 @@ function toRow(c: OwnerCandidate, r: OwnerResolution, reason: string, ordinal: n
 
 export function buildPeopleStack(r: OwnerResolution, opts: { chosenKey: string | null; chosenBy?: string | null; max?: number }): PeopleStack {
   const max = Math.max(STACK_MIN, opts.max ?? STACK_DEFAULT_MAX);
-  const eligible = r.eligible;
+  // A name set aside as do not contact, unsubscribed, opted out or left at this account is never offered as a row
+  // under another record of the same person (H-E-B: a duplicate Troy Shaw record was eligible beside the flagged
+  // one). The send gates would refuse; the page must not offer it either. The hidden record is said in the set-aside.
+  const hardNames = new Set(r.excluded.filter((e) => HARD_SET_ASIDE.has(e.code)).map((e) => nameKey(e.candidate.name)));
+  const nameClash = r.eligible.filter((c) => hardNames.has(nameKey(c.name)));
+  const eligible = r.eligible.filter((c) => !hardNames.has(nameKey(c.name)));
   const chosenKey = opts.chosenKey && eligible.some((c) => c.key === opts.chosenKey) ? opts.chosenKey : r.preselected && !opts.chosenKey ? r.preselected : null;
   const chosenBy = opts.chosenKey && chosenKey === opts.chosenKey ? opts.chosenBy ?? 'you' : chosenKey ? 'GAP: the only eligible person' : null;
   const chosenMissing = opts.chosenKey && !eligible.some((c) => c.key === opts.chosenKey) ? `Your chosen person is no longer among the eligible people at ${r.account.name} (set aside or left). Choose again.` : null;
@@ -240,10 +251,9 @@ export function buildPeopleStack(r: OwnerResolution, opts: { chosenKey: string |
   const slots = slotPeople.map((c, i) => toRow(c, r, slotReasons[i], null, { key: chosenKey, by: chosenBy }));
 
   const hidden = rest.length;
-  const setAsideCount = r.excluded.length;
-  const setAsideLine = setAsideCount
-    ? `${setAsideCount} set aside: ${r.excluded.slice(0, 3).map((e) => `${e.candidate.name} (${SET_ASIDE_LABEL[e.code] ?? e.code.replace(/_/g, ' ')})`).join(', ')}${setAsideCount > 3 ? ` and ${setAsideCount - 3} more` : ''}.`
-    : null;
+  const setAsideCount = r.excluded.length + nameClash.length;
+  const setAsideNames = [...nameClash.map((c) => `${c.name} (another record of a set-aside name)`), ...r.excluded.map((e) => `${e.candidate.name} (${SET_ASIDE_LABEL[e.code] ?? e.code.replace(/_/g, ' ')})`)];
+  const setAsideLine = setAsideCount ? `${setAsideCount} set aside: ${setAsideNames.slice(0, 3).join(', ')}${setAsideCount > 3 ? ` and ${setAsideCount - 3} more` : ''}.` : null;
   const tiedNames = tied.slice(0, 3).map((c) => c.name);
   const tieWho = tied.length > 3 ? `${tiedNames.join(', ')} and ${tied.length - 3} more` : tiedNames.length > 1 ? `${tiedNames.slice(0, -1).join(', ')} and ${tiedNames[tiedNames.length - 1]}` : tiedNames.join('');
 

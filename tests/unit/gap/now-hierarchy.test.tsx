@@ -79,3 +79,17 @@ describe('UX-04 hierarchy', () => {
     expect(screen.queryAllByTestId('people-stack-choose')).toHaveLength(0);
   });
 });
+
+describe('UX-04 review fixes', () => {
+  it('under a deal the people heading says on record and in a deal, never "eligible for a first touch"', () => {
+    const inDeal = projectPursuitState({ accountName: 'Kroger', now: NOW, motionType: 'IN_DEAL', opportunity: { status: 'ACTIVE', detail: '', deals: [{ name: 'YardFlow - Kroger', stage: 'Discovery' }] }, restriction: null, familyHold: null, motion: null, choice: null, activePersona: null, replies: [], lastOutbound: null, outstandingDraft: null, followUpDue: null, eligible });
+    render(<AccountNowView v={{ ...v, name: 'Kroger' }} nextHref="/gap/accounts/kroger?view=brief" nextLabel="Open the deal brief" nextText="Work the deal." links={[]} pursuit={{ ...pursuit, state: inDeal, stack: buildPeopleStack(r, { chosenKey: null }) }} />);
+    expect(screen.getByTestId('people-stack').querySelector('h2')!.textContent).toMatch(/People on record.*in a deal/);
+    expect(screen.getByTestId('people-stack').querySelector('h2')!.textContent).not.toMatch(/eligible for a first touch/);
+  });
+  it('the phone bar carries the NEXT control when there is one, else Log a touch', () => {
+    render(<AccountNowView v={v} nextHref="/gap/preview/h1?personaId=7" nextLabel="Prepare the email to Glen" nextText="Prepare." links={[]} pursuit={pursuit} />);
+    expect(screen.getByTestId('now-bottom-next')).toHaveAttribute('href', '/gap/preview/h1?personaId=7');
+    expect(screen.queryByTestId('now-bottom-log')).toBeNull();
+  });
+});
