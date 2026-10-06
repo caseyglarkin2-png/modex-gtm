@@ -16,6 +16,7 @@ import { listReplies } from '../replies/list';
 import { loadOwnerResolution } from '../people/owner-resolution-load';
 import type { OwnerResolution } from '../people/owner-resolution';
 import { buildPeopleStack, type PeopleStack } from '../people/stack';
+import { readyTargetOf, type ReadyTarget } from '../context/send-target';
 import { projectPursuitState, type PursuitInput, type PursuitReply, type PursuitState } from './state';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -29,6 +30,8 @@ export interface PursuitView {
   stack: PeopleStack | null;
   /** The top grounded hypothesis the first touch would run on (the action pack's hypothesis), if any. */
   hypothesisId: string | null;
+  /** The cockpit's ready first-touch card for this account (what loadReadyTarget returns), from the same queue read. */
+  ready: ReadyTarget | null;
 }
 
 /** "Reply from Courtney Keen: I am in the office but ..." (context/context.ts projectHistory). */
@@ -95,7 +98,7 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
   const state = projectPursuitState(input);
   const chosenKey = state.person && (resolution?.eligible ?? []).some((c) => c.key === state.person!.key) ? state.person.key : null;
   const stack = resolution ? buildPeopleStack(resolution, { chosenKey, chosenBy: state.person?.chosenBy ?? null }) : null;
-  return { state, resolution, stack, hypothesisId: top?.id ?? null };
+  return { state, resolution, stack, hypothesisId: top?.id ?? null, ready: readyTargetOf(mine) };
 }
 
 /** The newest audited HUMAN persona assignment on one of the account's active hypotheses (owner resolution USE). */

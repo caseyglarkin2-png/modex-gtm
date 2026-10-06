@@ -583,7 +583,49 @@ Walmart 9.6 s; H-E-B 7.5 s; General Mills 5.1 s; NFI 6.5 s; Kroger 6.0 s; Tyson 
 Walmart drawer open to owner panel 6.1 s; PepsiCo preview 6.3 s. The reads are live HubSpot calls; nothing here
 needs an infrastructure project, but every account open must show a skeleton and keep the loaded context.
 
-Post-change measurements: filled by UX-15 against the same tasks.
+### 7.1 UX-03 measurement: the owner-selection task (local preview of 0b6de260 against the production database, read-only, headless Chrome at DPR 1, 2026-10-05)
+
+The task: "choose the person you would work for this account". Before = the shipped product (the account NOW plus the
+hypothesis drawer's owner panel, the only choose control). After = the People Stack on NOW.
+
+| | Before (FedEx NOW + Walmart owner panel) | After (FedEx NOW, People Stack) |
+|---|---|---|
+| Visible people before the choose control | NOW: 1 WHO + 1 alternate + 5 do-not-contact; panel: 53 cards | 5 rows (of 37 on record), the chosen person first |
+| Scrolling to the first action for person 1 | panel: 12 sheet-screens to USE | action at 655 px from the top (inside the first screen at 1440; second screen at 390) |
+| Clicks to choose | 3 (All hypotheses, the row, scroll, USE) | 1 (Choose) or 0 (already chosen: Prepare email) |
+| Where the action lives | a drawer reached from a table of hypotheses | beside the chosen person, on the account page |
+| Who is named | NOW: Courtney Keen (CFO, on a June out-of-office); panel: nobody preselected | Glen Chaffee, "Chosen by you, Oct 5" (the audited assignment), with Prepare email / Call prep / Log a touch |
+| Reasons | the same two title-rule lines on 43 of 53 cards | one distinguishing line per row; ties said in words with no ordinals |
+| Uncertainty | "53 plausible owners: choose one" | "Choose who (21): GAP does not pick" plus the tie line; "Research: no angle yet" when the angle, not the person, blocks |
+| Confusions / backtracks | the preview page drafted to a different person (Shawn) | none on the FedEx path; PepsiCo reads research because its primary fact expired in production since the audit |
+
+Other golden accounts on the new build (1440): Walmart "Opted out: timothy.cooper@walmart.com, Oct 5" leads; the chosen
+person (Doug Estrada) shows the hold, not Prepare email; 6 rows of 46. H-E-B "Research: no angle to open on yet",
+Dakota Socha (left) is not a row; Jess Bess leads. Kroger "In a deal: YardFlow - Kroger (Discovery)", no Choose.
+NFI "Relationship-led: Sandra Richards". General Mills "Research: no angle" with Phillip West leading. The analyst
+drawer (Walmart approved hypothesis): "Best people on record (top 5 of 53)", the tie line, no ordinals, 3 sheet-screens
+(was 12), "Show 48 more on record".
+
+Widths and themes: no horizontal overflow at 1440, 1024, 820, 390 in light and dark; NOW length 2.1 to 2.9 screens at
+1440, 3.1 to 3.3 at 820, 3.9 to 4.2 at 390 (the story column below the stack is UX-04's hierarchy work).
+
+Timing, read-only probe from the workstation (`scripts/gap/time-pursuit.ts`, PepsiCo; the database is in us-west2,
+so every read carries workstation latency and the absolute numbers are 2-3x what Vercel sees):
+
+| Read | ms |
+|---|---|
+| loadAccountView (brief + inputs + context, pre-existing) | 26,612 |
+| loadReadyTarget (pre-existing, NOW) | 6,876 |
+| loadPursuit (new; queue, motions, choices, replies, owner resolution, in parallel) | 9,519 |
+| of which loadOwnerResolution (547 HubSpot people, cached 15 min) | 4,459 (3,062 warm) |
+| of which loadCockpitMotions | 4,230 |
+
+The pursuit read runs in parallel with the pre-existing ready-target read, so the added wall time on the page is
+about 3 s on top of a page that already took 5 to 12 s on Vercel. Local page loads measured 15 to 30 s end to end.
+Carried to UX-04 / UX-14: stream the stack after the header (a skeleton), and share the queue read between
+loadReadyTarget and loadPursuit (they read the same queue twice).
+
+Post-change measurements for the full task set: filled by UX-15 against the same tasks.
 
 ## 8. Reviewer findings (UX-01 / UX-02 pass, 2026-10-05)
 

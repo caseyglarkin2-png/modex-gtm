@@ -128,11 +128,10 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
       );
     }
     // The cockpit's ready first-touch card for this account (fails soft): the one person NOW and the cockpit share.
-    const [ready, pursuit] = await Promise.all([
-      brief.motion.type === 'FACT_LED' ? loadReadyTarget(prisma, brief.accountName, now) : Promise.resolve(null),
-      // UX-03 (account-first): ONE pursuit state per account and the People Stack over the one owner-resolution read.
-      loadPursuit(prisma, { brief, inputs, ctx, now }).catch(() => null),
-    ]);
+    // UX-03 (account-first): ONE pursuit state per account and the People Stack over the one owner-resolution read;
+    // the ready card comes from the same queue read (loadReadyTarget stays the fallback when the pursuit read fails).
+    const pursuit = await loadPursuit(prisma, { brief, inputs, ctx, now }).catch(() => null);
+    const ready = pursuit ? (brief.motion.type === 'FACT_LED' ? pursuit.ready : null) : brief.motion.type === 'FACT_LED' ? await loadReadyTarget(prisma, brief.accountName, now) : null;
     const v = projectNow(brief, ctx, inputs, now, { ready });
     const top = brief.hypotheses.find((h) => h.grounded && h.truth !== 'CONTRADICTED');
     // NEXT from the pursuit state (the chosen person and the action agree by construction); a meeting within 14 days
