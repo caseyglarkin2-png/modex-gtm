@@ -203,7 +203,8 @@ const HYPOTHESIS_SELECT = {
   signals: {
     select: {
       role: true,
-      signal: { select: { id: true, title: true, source_kind: true, evidence_url: true, evidence_text: true, observed_at: true } },
+      // UX-06: the fields the send gate reads (research/evidence-gate.ts), so the FACT caption tells the truth.
+      signal: { select: { id: true, title: true, source_kind: true, source_type: true, evidence_url: true, evidence_text: true, observed_at: true, external_ok: true, metadata: true, account_name: true, freshness_expires_at: true } },
     },
   },
 } as const;

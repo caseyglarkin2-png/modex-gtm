@@ -128,6 +128,22 @@ describe('the outreach anchor (Option A)', () => {
     expect(unread.primary).toBeNull();
     expect(unread.alternatives.every((t) => !t.usable && /could not be read/.test(t.unusableWhy ?? ''))).toBe(true);
   });
+  it('a thesis that needs review is not usable; draftable stories about the same deal are one entry', () => {
+    const i = inputs();
+    const brief = buildAccountBrief(i, NOW);
+    const review = { ...brief, hypotheses: brief.hypotheses.map((h) => (h.id === 'h-denver' ? { ...h, needsReview: ['the fact it opens on expired'] } : h)) };
+    const a = projectAnchor({ accountName: 'PepsiCo', person: { personaId: 1, name: 'Karen Darling', title: 'Senior Director - PBNA Transportation' }, brief: review, inputs: i, story: { rows: [] }, anchorChoice: null, privateLine: null, sendable: new Set(['h-denver', 'h-gatik']), now: NOW });
+    expect(a.primary?.hypothesisId).toBe('h-gatik');
+    expect(a.alternatives.find((t) => t.hypothesisId === 'h-denver')?.unusableWhy).toMatch(/needs your review/);
+    const twice = { rows: [{ key: 'changing' as const, label: 'x', tag: 'Checked' as const, collapsed: false, wrongIf: null, sentences: [
+      { text: 'PepsiCo and Gatik announced a multi-year partnership for autonomous freight.', tag: 'Checked' as const, basis: 'pepsico.com', basisIds: ['evidence:f-gatik'], cite: 'OK to cite to the buyer' as const },
+      { text: 'Gatik moves freight for PepsiCo under a new multi-year agreement.', tag: 'Checked' as const, basis: 'freightwaves.com', basisIds: ['evidence:f-gatik2'], cite: 'OK to cite to the buyer' as const },
+    ] }] };
+    const i2 = inputs({ hypotheses: [], facts: [factA, { ...factA, id: 'f-gatik2', quote: 'Gatik moves freight for PepsiCo under a new multi-year agreement.', url: 'https://freightwaves.com/g' }] });
+    const b = projectAnchor({ accountName: 'PepsiCo', person: null, brief: buildAccountBrief(i2, NOW), inputs: i2, story: twice, anchorChoice: null, privateLine: null, sendable: new Set(), now: NOW });
+    expect(b.draftable).toHaveLength(1);
+    expect(b.draftable[0].factId).toBe('f-gatik');
+  });
   it('without a person there is no primary by remit and no why-they-care; without an open thesis there is no primary at all', () => {
     const none = anchorFor(inputs(), null).anchor;
     expect(none.person).toBeNull();

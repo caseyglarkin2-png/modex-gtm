@@ -25,6 +25,7 @@ import type { AccountInputs, AccountIntelligenceBrief, HypothesisView } from '..
 import { thesisRelevance } from '../people/thesis-relevance';
 import { sensitivityOf } from '../research/sensitivity';
 import { citedQuote } from '../research/propose';
+import { sameIdea } from '../context/same-idea';
 import type { AccountStory, StorySentence, StoryTag } from './story';
 
 export interface AnchorPerson {
@@ -104,6 +105,24 @@ const host = (u: string | null) => {
   }
 };
 const BROKEN_MONEY = /\$\s?\d{1,3}(?:\.\d+)?\s+(?!(?:m|b|k|mm|bn|million|billion|thousand|per|a|an|each|to)\b)[a-z]/i;
+/** The same deal named by the same counterparty is one story (the story module's rule, repeated here for the draft list). */
+const DEAL_WORD = /\b(acqui|merg|sell|sale|sold|divest|spin|buy|purchas|partner|agreement)/i;
+function sameDeal(a: string, b: string, account: string): boolean {
+  if (!DEAL_WORD.test(a) || !DEAL_WORD.test(b)) return false;
+  const own = new Set(account.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean));
+  const pairs = (t: string) => {
+    const words = t.replace(/[^A-Za-z&.\s-]/g, ' ').split(/\s+/).filter(Boolean);
+    const out = new Set<string>();
+    for (let k = 0; k + 1 < words.length; k += 1) if (/^[A-Z][A-Za-z&.-]{2,}$/.test(words[k]) && /^[A-Z][A-Za-z&.-]{2,}$/.test(words[k + 1])) out.add(`${words[k]} ${words[k + 1]}`.toLowerCase());
+    const single = words.filter((w) => /^[A-Z][a-z]{3,}$/.test(w) && !own.has(w.toLowerCase())).map((w) => w.toLowerCase());
+    return { pairs: [...out].filter((p) => !p.split(' ').every((w) => own.has(w))), single: new Set(single) };
+  };
+  const pa = pairs(a);
+  const pb = pairs(b);
+  if (pa.pairs.some((p) => pb.pairs.includes(p))) return true;
+  // One shared counterparty name beside a deal word ("Gatik" on both sides).
+  return [...pa.single].some((w) => pb.single.has(w) && w.length >= 5 && !/^(north|america|supply|chain|group|company|inc|corp)$/.test(w));
+}
 
 function thesisOf(h: HypothesisView, raw: AccountInputs['hypotheses'][number] | undefined, facts: AccountInputs['facts'], person: AnchorPerson | null, sendable: ReadonlySet<string> | null | undefined): AnchorThesis {
   const factIds = raw ? [...new Set([...(raw.observation.matchAll(CITATION))].map((m) => m[1]))] : [];
@@ -117,8 +136,8 @@ function thesisOf(h: HypothesisView, raw: AccountInputs['hypotheses'][number] | 
     basis: first ? `${host(first.url) ?? 'source'}, ${day(first.publishedAt)}` : 'the thesis observation',
     relevance: { tier: rel.tier, why: rel.why },
     problem: h.problem,
-    usable: !!sendable && sendable.has(h.id),
-    unusableWhy: !sendable ? 'the send gate could not be read just now' : sendable.has(h.id) ? null : 'its observation is a keyword hit or not a verified outreach fact; the send gate would refuse the opening',
+    usable: !!sendable && sendable.has(h.id) && h.needsReview.length === 0,
+    unusableWhy: !sendable ? 'the send gate could not be read just now' : !sendable.has(h.id) ? 'its observation is a keyword hit or not a verified outreach fact; the send gate would refuse the opening' : h.needsReview.length ? `the angle needs your review (${h.needsReview[0]})` : null,
   };
 }
 
@@ -187,7 +206,7 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
       if (!factId) continue;
       const fact = live.find((f) => f.id === factId || (f.sameQuoteIds ?? []).includes(factId))!;
       if (groundedFactIds.has(fact.id) || (fact.sameQuoteIds ?? []).some((id) => groundedFactIds.has(id))) continue;
-      if (draftable.some((d) => d.factId === fact.id)) continue;
+      if (draftable.some((d) => d.factId === fact.id || sameIdea(d.story, s.text, i.accountName) || sameDeal(d.story, s.text, i.accountName))) continue;
       draftable.push({ story: s.text, sourceLabel: `${host(fact.url) ?? (fact.title || 'source')}, ${day(fact.publishedAt)}`, sourceUrl: fact.url, factId: fact.id, proposedObservation: citedQuote(fact.title || host(fact.url) || 'source', fact.quote.trim().replace(/\s+/g, ' '), fact.id, i.accountName) });
     }
   }

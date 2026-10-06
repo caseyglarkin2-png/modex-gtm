@@ -245,7 +245,7 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
           {anchor.draftable.length ? (
             <ul className="space-y-2">
               {anchor.draftable.map((d) => (
-                <li key={d.factId} className="space-y-2 rounded-md border border-dashed border-[var(--border)] p-2" data-testid="anchor-draftable" data-fact={d.factId}>
+                <li key={d.factId} className="space-y-2 border-t border-[var(--border)] pt-2 first:border-t-0 first:pt-0" data-testid="anchor-draftable" data-fact={d.factId}>
                   <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
                     <p className="min-w-0 flex-1 text-sm">
                       {d.story}
