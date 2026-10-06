@@ -34,15 +34,15 @@ import { accountSlug, accountTitle, gmailThreadHref } from '@/lib/gap/account-in
 import { OpenHashDetails } from '@/components/gap/open-hash-details';
 import { PendingLink } from '@/components/gap/pending-link';
 import { loadPursuit } from '@/lib/gap/pursuit/load';
-import { nextFromPursuit, pursuitListenText } from '@/lib/gap/pursuit/next';
+import { nextFromPursuit } from '@/lib/gap/pursuit/next';
 import { accountDomainFor, loadStoryReaders } from '@/lib/gap/story/load';
 import { mergeTouches } from '@/lib/gap/story/touches';
-import { projectStory, storyListenText } from '@/lib/gap/story/story';
+import { projectStory } from '@/lib/gap/story/story';
 import { projectAnchor, storyBesideAnchor } from '@/lib/gap/story/anchor';
 import { remitCaution } from '@/lib/gap/story/anchor-text';
 import { DoneNext } from '@/components/gap/done-next';
 import { rememberPursuitSummary } from '@/lib/gap/pursuit/summary';
-import { listenText } from '@/lib/gap/context/now';
+import { accountListenText } from '@/lib/gap/voice/account';
 
 export const dynamic = 'force-dynamic';
 /** The browser title names the account (click test round 3: every tab read "GAP account"). From the slug: no read. */
@@ -145,8 +145,6 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
       loadPursuit(prisma, { brief, inputs, ctx, now }).catch(() => null),
       loadStoryReaders({ accountName: brief.accountName, domain: accountDomainFor({ domains: inputs.domains, addresses: [...ctx.history.map((h) => h.text.match(/[\w.+-]+@[\w.-]+\.[a-z]{2,}/i)?.[0] ?? ''), ...inputs.firstTouches.map((t) => t.recipient)] }) }).catch(() => ({ clawd: { read: 'unavailable' as const, sends: [] }, vaultNote: null })),
     ]);
-    // UX-08 parity: the Work card says what this page says (remembered in process memory, nothing written).
-    if (pursuit) rememberPursuitSummary(pursuit.state, now);
     const ready = pursuit ? (brief.motion.type === 'FACT_LED' ? pursuit.ready : null) : brief.motion.type === 'FACT_LED' ? await loadReadyTarget(prisma, brief.accountName, now) : null;
     const v = projectNow(brief, ctx, inputs, now, { ready });
     const top = brief.hypotheses.find((h) => h.grounded && h.truth !== 'CONTRADICTED');
@@ -206,10 +204,13 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
       const first = pursuit.state.person.name.split(' ')[0];
       pursuitNext.text = `${pursuitNext.text} ${remitCaution(first, anchor.primary.factLabel, anchor.fitsBetter)}`;
     }
+    // UX-11: Listen to account is written for the ear (60 to 90 s) over the same projections the page renders; it
+    // never carries the private line, the do-not-use list, an address, a URL or a machine word. The older screen-read
+    // text stays only when the pursuit read failed.
+    // UX-08 parity: the Work card says what this page says, NEXT included (process memory, nothing written).
+    if (pursuit) rememberPursuitSummary(pursuit.state, now, pursuitNext?.text ?? null);
     const listen = pursuit && pursuitNext
-      ? storyShown
-        ? `${pursuitListenText({ ...v, listen: listenText({ ...v, whyNow: [], think: null, currentState: '', impact: '' }) }, pursuit.state, pursuitNext.text)} ${storyListenText(storyShown!)}`.replace(/\s+/g, ' ').slice(0, 4800)
-        : pursuitListenText(v, pursuit.state, pursuitNext.text)
+      ? accountListenText({ accountName: brief.accountName, state: pursuit.state, story: storyShown, anchor, stack: pursuit.stack, nextText: pursuitNext.text, doNotContactCount: excluded.filter((e) => e.code === 'do_not_contact' || e.code === 'unsubscribed' || e.code === 'opted_out').length })
       : v.listen;
     return (
       // UX-04: one column is the primary design (about 820 CSS px on Casey's display); from 1100 px the context sits

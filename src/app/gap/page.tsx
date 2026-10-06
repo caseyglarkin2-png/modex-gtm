@@ -45,6 +45,7 @@ import { GapCockpit, NextUp, type CockpitLane } from '@/components/gap/gap-cockp
 import { buildNextUpCandidates, heldAccountsOf, pickNextUpV2 } from '@/lib/gap/routing/next-up';
 import { buildWorkList, type WorkCard } from '@/lib/gap/work/list';
 import { readPursuitSummaries, warmPursuitSummaries } from '@/lib/gap/pursuit/summary';
+import { todayListenText } from '@/lib/gap/voice/today';
 import { WorkList } from '@/components/gap/work-list';
 import { laneWithMotion, loadCockpitMotions, type CockpitMotions } from '@/lib/gap/motion/cockpit';
 import { ThesisGroupReview } from '@/components/gap/thesis-group-review';
@@ -408,7 +409,7 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
       ) : (
         <>
           {/* UX-08: WORK is the landing: the accounts that need the seller, one card each, the lanes as filters. */}
-          <WorkList cards={data.work} focus={/^[a-z0-9-]{1,120}$/.test(params.focus ?? '') ? (params.focus as string) : null} />
+          <WorkList cards={data.work} focus={/^[a-z0-9-]{1,120}$/.test(params.focus ?? '') ? (params.focus as string) : null} listenText={todayListenText(data.work)} />
           {data.work.length === 0 ? <NextUp items={data.next} /> : null}
         </>
       )}
