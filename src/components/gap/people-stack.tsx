@@ -125,7 +125,11 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
               {row.chosen ? <span className="text-xs font-medium text-[var(--primary)]" data-testid="people-stack-chosen">Chosen{row.chosenBy ? ` by ${row.chosenBy}` : ''}</span> : null}
             </div>
             <p className="mt-0.5 text-sm" data-testid="people-stack-reason">{row.reason}</p>
-            {row.currentness ? <p className="mt-0.5 text-xs text-amber-700 dark:text-amber-400" data-testid="people-stack-currentness">{row.currentness}</p> : null}
+            {row.currentness ? (
+              <p className={`mt-0.5 text-xs ${/conflict|changed|in question|left|separate|divested/i.test(row.currentness) ? 'text-amber-700 dark:text-amber-400' : 'text-emerald-700 dark:text-emerald-400'}`} data-testid="people-stack-currentness">
+                {row.currentness}
+              </p>
+            ) : null}
             <p className="mt-0.5 text-xs text-[var(--muted-foreground)]">{row.reachability}</p>
 
             <div className="mt-2 flex flex-wrap items-center gap-2">
