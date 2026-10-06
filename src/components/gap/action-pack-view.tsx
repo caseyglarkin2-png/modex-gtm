@@ -38,6 +38,7 @@ import { buildBrief, loadBriefHistory } from '@/lib/gap/execution/six-line-brief
 import { loadAngles, suggestAngle } from '@/lib/gap/motion/persona-angle';
 import { GovernedCopyButton } from './governed-copy-button';
 import { FactBlock, HypothesisBlock } from './fact-hypothesis-blocks';
+import { approachOfHypothesis } from '@/lib/gap/research/approach-policy';
 import { SellerDraftPanel, type DraftRow } from './seller-draft-panel';
 import { SendFromYardflow } from './send-from-yardflow';
 import { loadRelationshipContext } from '@/lib/gap/intake/context';
@@ -163,6 +164,8 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
           problemHypothesis: hypothesis.problem_hypothesis ?? '',
           diagnosticQuestion: asStringList(hypothesis.falsification_questions)[0] ?? null,
           title: persona.title ?? null,
+          // R34: the call opening follows the thesis's approach, as the email does.
+          approach: approachOfHypothesis(hypothesis),
         })
       : null;
 

@@ -34,8 +34,24 @@
  * the `acquisition` and `new_site` signal types there) and it differs from the
  * Network Standardization family by trigger and persona, not by problem.
  *
+ * R34 (GAP OS execution recovery, 2026-10-06): the APPROACH FAMILIES. The four families above are the event-led
+ * path (a dated physical-network change) and stay byte-identical. A thesis of another evidence approach
+ * (research/approach-policy.ts) renders from its own family, never in the physical-change words:
+ *
+ *   job_procurement_led  the posting's or notice's own words through the `{{observation}}` slot (the verified quote
+ *                        with its citation, exactly as the event-led step 0 carries its fact), one hedged sentence
+ *                        that says a posting is not a diagnosis, and ONE question: is it still open, and are the
+ *                        yards where the day gets lost. No ROI, no engagement, no layoff hook, no familiarity.
+ *   fit_led              a stable operating fact through the slot, a sentence that says nothing new prompted the
+ *                        note (no invented why-now), and ONE question whether the yards are where the day gets lost.
+ *
+ * An approach family belongs to no problem family (its `problemFamily` is null) and carries its own program
+ * (APPROACH_PROGRAM), so the problem-family lookup of the event-led path never reaches it and the approach lookup
+ * never reaches an event-led family (execution/action-pack.ts resolvePackVersion; the enroll gates check the same).
+ *
  * Voice: no em dashes.
  */
+import type { EvidenceApproach } from '@/lib/gap/research/approach-policy';
 import { STEPS_SCHEMA, type StepsV2, type StepV2 } from '@/lib/gap/sequence/steps';
 import type { LanePurpose, Persona, ProblemFamily, SignalType, StepPurpose } from '@/lib/gap/taxonomy';
 
@@ -72,6 +88,18 @@ export interface SeedFamily {
   persona: Persona;
   steps: StepsV2;
   /** Per step, the fixture evidence ids the body cites. */
+  evidence: string[][];
+}
+
+/** R34: a copy family for one evidence approach other than event-led (no problem family; its own program). */
+export interface ApproachFamily {
+  key: string;
+  name: string;
+  approach: Exclude<EvidenceApproach, 'event_led' | 'report_led'>;
+  program: string;
+  problemFamily: null;
+  persona: Persona;
+  steps: StepsV2;
   evidence: string[][];
 }
 
@@ -181,6 +209,66 @@ const NEW_SITES_ACQUISITIONS: SeedStepCopy[] = [
     evidence: [],
   },
 ];
+
+// ---------------------------------------------------------------------------
+// R34: the approach families (job / procurement-led, fit-led)
+// ---------------------------------------------------------------------------
+
+/** One program per approach: how a stored SequenceFamily says which approach its copy is for. */
+export const APPROACH_PROGRAM = {
+  job_procurement_led: 'gap-approach-2026-10:job_procurement_led',
+  fit_led: 'gap-approach-2026-10:fit_led',
+} as const satisfies Record<ApproachFamily['approach'], string>;
+
+/** The approach a stored family's copy is for: an approach program says so; every other family is the event-led path. */
+export function approachOfFamilyProgram(program: string | null | undefined): EvidenceApproach {
+  for (const [approach, prog] of Object.entries(APPROACH_PROGRAM)) if (program === prog) return approach as EvidenceApproach;
+  return 'event_led';
+}
+
+const JOB_PROCUREMENT_LED: SeedStepCopy[] = [
+  {
+    subject: 'A question on the posting',
+    paragraphs: [
+      '{{observation}}',
+      'A posting says what a role covers, not how the day actually goes, so I might be reading too much into it.',
+      'Is the posting still open, and are the yards where the day gets lost at {{account}}?',
+    ],
+    askType: 'question',
+    requiredEvidenceTypes: [],
+    claimsUsed: [],
+    evidence: [],
+  },
+];
+
+const FIT_LED: SeedStepCopy[] = [
+  {
+    subject: 'A question on the yards',
+    paragraphs: [
+      '{{observation}}',
+      'Nothing new prompted this note. A network run that way usually has the yards somewhere in the day, but that might not be true at {{account}}.',
+      'Are the yards where the day gets lost for your team, or do they run well?',
+    ],
+    askType: 'question',
+    requiredEvidenceTypes: [],
+    claimsUsed: [],
+    evidence: [],
+  },
+];
+
+function approachFamily(key: ApproachFamily['approach'], name: string, persona: Persona, copy: readonly SeedStepCopy[]): ApproachFamily {
+  return { key, name, approach: key, program: APPROACH_PROGRAM[key], problemFamily: null, persona, steps: buildSteps(copy), evidence: copy.map((c) => [...c.evidence]) };
+}
+
+export const APPROACH_FAMILIES: readonly ApproachFamily[] = [
+  approachFamily('job_procurement_led', 'Job or Procurement Posting', 'transportation', JOB_PROCUREMENT_LED),
+  approachFamily('fit_led', 'Operating Fit', 'transportation', FIT_LED),
+];
+
+/** The approach family for an evidence approach, when its copy exists. */
+export function approachFamilyFor(approach: EvidenceApproach): ApproachFamily | undefined {
+  return APPROACH_FAMILIES.find((f) => f.approach === approach);
+}
 
 // ---------------------------------------------------------------------------
 // Roster

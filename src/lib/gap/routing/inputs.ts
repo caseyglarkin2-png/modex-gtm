@@ -34,6 +34,7 @@
 import { createLimiter, type Limiter } from './bounded';
 import { employmentGate } from '../people/employment-gate';
 import { sendableEvidence } from '../research/evidence-gate';
+import { approachOfHypothesis } from '../research/approach-policy';
 import { personSendHistory } from '../execution/person-history';
 import { parseSteps } from '../sequence/steps';
 import { normalizeScore } from '../../pounce/fit';
@@ -452,11 +453,14 @@ function buildHypothesis(h: HypothesisRow | null, now: Date, hasNewerVersion: bo
     evidenceFresh,
     // Red team T6: thin = no LIVE outreach fact (research/evidence-gate.ts), the
     // same rule approval, activation, the compiler and the send gate apply.
+    // R34: under the thesis's declared approach, as those gates read it (a
+    // job-led thesis on a live posting is not thin for want of a physical fact).
     evidenceThin:
       sendableEvidence(
         h.observation,
         signals.filter((s) => s.freshness_expires_at == null || s.freshness_expires_at.getTime() > now.getTime()),
         h.account_name ?? '',
+        { approach: approachOfHypothesis(h) },
       ).tier !== 'VERIFIED_FACT',
     hasNewerVersion,
     expiresAt: h.expires_at ?? null,

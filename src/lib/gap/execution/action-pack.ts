@@ -25,6 +25,8 @@ import { getHypothesis } from '../hypothesis/service';
 import { resolveEnrollTarget } from '../routing/rules';
 import type { EnrollTarget, RoutingInputs, RoutingTop100Input } from '../routing/types';
 import { parseSteps, type StepsV2 } from '../sequence/steps';
+import { APPROACH_PROGRAM, approachOfFamilyProgram } from '../sequences/families';
+import { approachOfHypothesis, type EvidenceApproach } from '../research/approach-policy';
 import { firstNameOf, renderStepCopy, type RenderedCopy } from '../sequence/render';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -161,30 +163,40 @@ async function newestVersionOfFamily(prisma: PrismaLike, familyId: string): Prom
   });
 }
 
-/** The version the action pack renders (unchanged from the S3-T12 preview rule). */
+/**
+ * The version the action pack renders (the S3-T12 preview rule), for the thesis's evidence APPROACH (R34): an
+ * event-led thesis renders from its problem family's copy, a job / procurement-led or fit-led thesis from its
+ * approach family's copy (sequences/families.ts APPROACH_FAMILIES). A version whose family is for another approach
+ * is never used, wherever it came from (a pinned version, a pinned family or the lookup): no approach is ever sent
+ * in another's words. Null when the approach has no copy here.
+ */
 export async function resolvePackVersion(
   prisma: PrismaLike,
-  hypothesis: { sequence_version_id: string | null; sequence_family_id: string | null; problem_family: string },
+  hypothesis: { sequence_version_id: string | null; sequence_family_id: string | null; problem_family: string; metadata?: unknown },
   target: EnrollTarget,
 ): Promise<PackVersion | null> {
+  const approach: EvidenceApproach = approachOfHypothesis(hypothesis);
+  const fits = (v: PackVersion | null): v is PackVersion => !!v && approachOfFamilyProgram(v.family?.program ?? null) === approach;
   if (hypothesis.sequence_version_id) {
     const own = await prisma.sequenceVersion.findUnique({ where: { id: hypothesis.sequence_version_id }, select: VERSION_SELECT });
-    if (own) return own;
+    if (fits(own)) return own;
   }
   if (hypothesis.sequence_family_id) {
     const v = await newestVersionOfFamily(prisma, hypothesis.sequence_family_id);
-    if (v) return v;
+    if (fits(v)) return v;
   }
   const engine = ENGINE_FOR_TARGET[target];
+  const program = approach === 'event_led' ? null : (APPROACH_PROGRAM as Record<string, string>)[approach] ?? null;
+  if (approach !== 'event_led' && !program) return null;
   const families: Array<{ id: string }> = await prisma.sequenceFamily.findMany({
-    where: { problem_family: hypothesis.problem_family, archived_at: null, ...(engine ? { engine } : {}) },
+    where: program ? { program, archived_at: null, ...(engine ? { engine } : {}) } : { problem_family: hypothesis.problem_family, archived_at: null, ...(engine ? { engine } : {}) },
     orderBy: { created_at: 'desc' },
     select: { id: true },
     take: 5,
   });
   for (const f of families) {
     const v = await newestVersionOfFamily(prisma, f.id);
-    if (v) return v;
+    if (fits(v)) return v;
   }
   return null;
 }

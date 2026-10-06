@@ -1050,6 +1050,44 @@ text and the title (no site entity table); the open-deal dimension is read only 
 deal's contacts (the hypothesis owner route has none and says nothing about deals); division vocabulary exists for
 PepsiCo only (`people/division.ts`).
 
+R34 **Channel-specific copy per approach (DONE; sent through the sink).** `sequences/families.ts` keeps the four
+event-led seed families byte-identical (their steps hashes and rendered bytes pinned to the pre-R34 values; on the
+scratch database the seeder found every stored event-led version unchanged and created none) and adds
+APPROACH_FAMILIES, each under its own program (`gap-approach-2026-10:<approach>`) with no problem family:
+**job / procurement-led** ("A question on the posting": the posting's or notice's own words through the
+`{{observation}}` slot, the verified quote with its citation exactly as the event-led step 0 carries its fact; one
+hedged sentence, "A posting says what a role covers, not how the day actually goes, so I might be reading too much
+into it."; ONE question, "Is the posting still open, and are the yards where the day gets lost at {{account}}?") and
+**fit-led** ("Nothing new prompted this note.", a hedged fit sentence, one question). Neither carries the
+physical-change words, ROI, an engagement reference, a layoff hook or familiarity; both pass all sixteen compiler
+checks. `copyFamilySupports` now opens for event-led, job / procurement-led and fit-led (report-led stays closed;
+the list is pinned equal to the families). One authority picks the copy: `execution/action-pack.ts`
+`resolvePackVersion` renders a thesis from ITS approach's family and never uses a version written for another
+approach, wherever it came from (a pinned version, a pinned family or the lookup); `enroll/service.ts` and
+`sequence/enrollment.ts` refuse a version of another approach, and an approach family never runs without its thesis;
+`sequences/seed-drift.ts` judges approach versions against their family's current copy; `scripts/gap/seed-families.ts`
+seeds both lists. The call opening follows the approach too (`sequence/call-pack.ts`: the posting question, no
+guess; the event-led opening byte-identical). Compiler: the singular-"yard" voice warning (C14) now judges our prose
+only; a verified cited quote and its source label (a posting titled "Yard Operations Manager") are the source's
+words, set aside the way C07 and C08 already set the quote aside; an unverified quote is still judged. **Defect found
+by the scratch run and fixed (R30 omission, blocking):** routing judged a thesis's evidence without its approach
+(`routing/inputs.ts` evidenceThin), so a job-led thesis could only ever route to research_required; the readiness
+read (`hypothesis/actionability.ts`, its four callers) had the same omission. Both now read `metadata.approach`.
+Proof: `approach-copy.test.ts` (18; eight deliberate mutations each turn their owning test red);
+`tests/unit/gap/scratch/job-led-send.scratch.test.ts` (5, real routes / services / machine / compiler / gates /
+ledger / Postgres; a new corpus account, Tyson Scratch Co, carries a JOB_POSTING claim and a chosen person): draft
+from the posting (job_procurement_led, submitted) -> APPROVE AND USE -> a routed card -> the preview renders from
+the job family with the posting's exact quote and one question, none of the physical-change words -> CONFIRM +
+SEND writes exactly one message to the sink with that copy in its MIME body; an event-led thesis at another account
+still renders from its event-led family. Before the routing fix the same run stopped at the preview with
+`not_an_email_action: research_required` (receipt: scratchpad `r34/preview.txt`). All three scratch files pass in
+sequence on a freshly reset database (19). Adjacent: 43 files / 817 and 32 files / 808 green. Rollback: revert the
+commit; the two approach families stay inert rows (archive them, or leave them: nothing resolves to them once the
+gate closes). Production: the approach families need `seed-families.ts --apply --remote` before a job-led thesis can
+render there (until then the pack answers `no_version` and nothing goes out). Debt: the job-led copy says "posting"
+for a procurement notice too; no follow-up steps exist for either approach family (single touch, as the event-led
+seeds); `hypothesis/thesis-groups.ts` group readiness reads the first member's metadata only.
+
 ## 12. Migration, backfill and rollback
 
 Order of commits inside Sprint 1 and 3: schema + SQL first (no reader), then pure core, then importers (Top100 before PIC before modex legacy), then runtime pin, then services, then queue actions under the flag, then `GAP_OS_ENABLED=true` in Vercel after `verify-triggers.ts` passes against prod (env is snapshot at deploy; redeploy after setting). Before the prod `db push`, preview it with `prisma migrate diff --from-url <prod> --to-schema-datamodel prisma/schema.prisma --script` and confirm the script is additive only; also confirm the prod role can `CREATE FUNCTION` (not yet verified). Rollback: the flag off restores byte-identical behavior instantly; full removal is the rollback SQL plus reverting the runtime, service and queue-action commits; `sequences` is never modified; the only two pre-existing tables GAP OS's schema touches at all are `draft_queue_items` (one nullable `sequence_version_id` stamp, S1-T2) and `inbound_messages` (`source String @default("gmail")` and `hubspot_engagement_id String?`, S2-T1, needed so the reply cron and the HubSpot poller can tell a Gmail-sourced row from a HubSpot-engagement-sourced one and attribute the engagement id idempotently) — both additive-only, both confirmed by the production preflight below; the lane and PIC files are read, never written.

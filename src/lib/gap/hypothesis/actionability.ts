@@ -19,6 +19,7 @@
  */
 import { sendableEvidence, type GateSignal } from '../research/evidence-gate';
 import { openerFits } from '../research/opener';
+import { approachOfHypothesis } from '../research/approach-policy';
 
 export type ReadinessReason = 'no_evidence' | 'evidence_expired' | 'evidence_insufficient' | 'opener_too_long';
 
@@ -48,6 +49,8 @@ export interface ActionabilityInput {
   observation?: string | null;
   account_name: string;
   signals: ReadonlyArray<ActionSignal | null | undefined>;
+  /** R34: the thesis's metadata, so readiness is judged under its declared approach (absent: event-led). */
+  metadata?: unknown;
 }
 
 const EDITABLE = new Set(['draft', 'review_required']);
@@ -57,14 +60,15 @@ const live = (s: ActionSignal, now: Date) => !s.freshness_expires_at || new Date
 /** Outreach readiness of the observation + linked signals, and why not. */
 export function outreachReadiness(input: Omit<ActionabilityInput, 'status'>, now: Date): { ready: boolean; reason: ReadinessReason | null } {
   const signals = input.signals.filter((s): s is ActionSignal => !!s && typeof s.id === 'string');
-  if (sendableEvidence(input.observation, signals.filter((s) => live(s, now)), input.account_name).tier === 'VERIFIED_FACT') {
+  const opts = { approach: approachOfHypothesis(input) };
+  if (sendableEvidence(input.observation, signals.filter((s) => live(s, now)), input.account_name, opts).tier === 'VERIFIED_FACT') {
     // Final Monday P1: verified, but quoting more than one first touch can carry. It would only fail at Send.
     return openerFits(input.observation) ? { ready: true, reason: null } : { ready: false, reason: 'opener_too_long' };
   }
   const evidenced = signals.filter((s) => (s.evidence_text ?? '').trim() || (s.evidence_url ?? '').trim());
   if (evidenced.length === 0) return { ready: false, reason: 'no_evidence' };
   // It would be sendable but for the clock: the facts behind it expired.
-  if (sendableEvidence(input.observation, signals, input.account_name).tier === 'VERIFIED_FACT') return { ready: false, reason: 'evidence_expired' };
+  if (sendableEvidence(input.observation, signals, input.account_name, opts).tier === 'VERIFIED_FACT') return { ready: false, reason: 'evidence_expired' };
   return { ready: false, reason: 'evidence_insufficient' };
 }
 

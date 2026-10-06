@@ -153,11 +153,16 @@ export function contextApproachOf(motionKind: string): ContextApproach | null {
 }
 
 /**
- * R34 (not yet built): the compiler's first-touch copy family exists for the physical-change path only. A thesis of
- * another evidence approach is prepared and reviewed but NOT rendered into an email until its family exists, so no
- * job-led thesis ever goes out in the physical-change words. Fail closed, with the reason.
+ * R34: the evidence approaches that have first-touch copy of their own: the event-led seed families, and the
+ * job / procurement-led and fit-led approach families (sequences/families.ts APPROACH_FAMILIES, pinned equal by
+ * tests/unit/gap/approach-copy.test.ts). A thesis of any other approach (report-led) is prepared and reviewed but
+ * never rendered into an email, so nothing goes out in another approach's words. Fail closed, with the reason.
+ * Kept as data here (no import of the families module, which reaches node:crypto through the step hash).
  */
+export const COPY_FAMILY_APPROACHES: ReadonlySet<EvidenceApproach> = new Set<EvidenceApproach>(['event_led', 'job_procurement_led', 'fit_led']);
 export function copyFamilySupports(approach: EvidenceApproach): boolean {
-  return approach === 'event_led';
+  return COPY_FAMILY_APPROACHES.has(approach);
 }
-export const COPY_UNSUPPORTED_DETAIL = (approach: EvidenceApproach) => `No first-touch copy exists yet for a ${approach.replace(/_/g, ' ')} thesis: GAP prepares and reviews it, but no email is rendered until that copy family ships (R34). Nothing goes out.`;
+export const COPY_UNSUPPORTED_DETAIL = (approach: EvidenceApproach) => `No first-touch copy exists yet for a ${approach.replace(/_/g, ' ')} thesis: GAP prepares and reviews it, but no email is rendered until that copy family ships. Nothing goes out.`;
+/** R34: a sequence version whose copy is for another approach than the thesis's (an event-led version for a job-led thesis, or the reverse). */
+export const COPY_FAMILY_MISMATCH_DETAIL = (thesis: EvidenceApproach, family: EvidenceApproach) => `This copy is written for a ${family.replace(/_/g, ' ')} thesis and the thesis is ${thesis.replace(/_/g, ' ')}: GAP never sends one approach in another's words. Nothing goes out.`;

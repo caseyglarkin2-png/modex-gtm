@@ -75,7 +75,7 @@ export async function loadThesisRows(prisma: PrismaLike, where: Record<string, u
     personaName: r.primary_persona?.name ?? null,
     personaTitle: r.primary_persona?.title ?? null,
     signals: (r.signals ?? []).map((l: any) => l.signal).filter(Boolean),
-    next: actionabilityOf({ status: r.status, observation: r.observation, account_name: r.account_name, signals: (r.signals ?? []).map((l: any) => l.signal) }, now).next,
+    next: actionabilityOf({ status: r.status, observation: r.observation, account_name: r.account_name, metadata: r.metadata, signals: (r.signals ?? []).map((l: any) => l.signal) }, now).next,
   }));
 }
 

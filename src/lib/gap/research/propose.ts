@@ -93,7 +93,7 @@ async function frozenToSupersede(prisma: PrismaLike, accountName: string, person
     include: { signals: { include: { signal: { select: { ...GATE_SIGNAL_SELECT, freshness_expires_at: true } } } } },
   });
   if (!row || row.status !== 'approved') return null;
-  const next = actionabilityOf({ status: row.status, observation: row.observation, account_name: row.account_name, signals: (row.signals ?? []).map((l: { signal?: unknown }) => l.signal as never) }, now).next;
+  const next = actionabilityOf({ status: row.status, observation: row.observation, account_name: row.account_name, metadata: row.metadata, signals: (row.signals ?? []).map((l: { signal?: unknown }) => l.signal as never) }, now).next;
   return next === 'revise' ? row.id : null;
 }
 

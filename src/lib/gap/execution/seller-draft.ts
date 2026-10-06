@@ -365,7 +365,7 @@ export async function prepareSellerEmail(
     return refuse(prisma, actor, decisionId, {
       ok: false,
       reason: 'evidence_insufficient',
-      detail: 'The observation does not rest only on verified, dated, quoted facts about a physical-network change at this account. Research it before any email.',
+      detail: approach === 'event_led' ? 'The observation does not rest only on verified, dated, quoted facts about a physical-network change at this account. Research it before any email.' : `The observation does not rest only on verified, dated, quoted claims a ${approach.replace(/_/g, ' ')} thesis may cite at this account. Research it before any email.`,
     });
   }
   // Final review P1: a linked fact that another verified fact at the account contradicts is never quoted.

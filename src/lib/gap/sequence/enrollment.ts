@@ -55,6 +55,7 @@ import { HARD_BOUNCE_STATUSES, isHardBounceStatus } from '../../email/bounce';
 import { sendableEvidence } from '@/lib/gap/research/evidence-gate';
 import { EVIDENCE_SIGNAL_SELECT } from '@/lib/gap/sequence/render';
 import { approachOfHypothesis, copyFamilySupports } from '../research/approach-policy';
+import { approachOfFamilyProgram } from '../sequences/families';
 
 export const TERMINAL_STATUSES = ['stopped', 'completed'] as const;
 export const HYPOTHESIS_READY_STATUSES = ['approved', 'active'] as const;
@@ -204,7 +205,7 @@ export async function enroll(prisma: any, input: EnrollInput, opts: SuppressionO
 
   const version = await prisma.sequenceVersion.findUnique({
     where: { id: input.versionId },
-    select: { id: true, family_id: true, status: true },
+    select: { id: true, family_id: true, status: true, family: { select: { program: true } } },
   });
   if (!version) return { ok: false, reason: 'version_not_found' };
   if (version.status === 'retired') return { ok: false, reason: 'version_retired' };
@@ -231,10 +232,15 @@ export async function enroll(prisma: any, input: EnrollInput, opts: SuppressionO
     const live = links.map((l) => l.signal).filter((s) => s && (!s.freshness_expires_at || new Date(s.freshness_expires_at).getTime() > nowMs));
     const approach = approachOfHypothesis(hyp);
     if (!copyFamilySupports(approach)) return { ok: false, reason: 'evidence_insufficient' };
+    // R34: the version's copy is for this thesis's approach, never another's.
+    if (approachOfFamilyProgram(version.family?.program ?? null) !== approach) return { ok: false, reason: 'family_mismatch' };
     if (sendableEvidence(hyp.observation, live, String(hyp.account_name ?? ''), { approach }).tier !== 'VERIFIED_FACT') {
       return { ok: false, reason: 'evidence_insufficient' };
     }
   }
+
+  // R34: an approach family's copy carries the thesis's own fact; it never runs without its thesis.
+  if (!input.hypothesisId && approachOfFamilyProgram(version.family?.program ?? null) !== 'event_led') return { ok: false, reason: 'family_mismatch' };
 
   const id = randomUUID();
   const isTest = isInternalRecipient(email);

@@ -15,13 +15,15 @@
  * C14 warns on three habits: singular "yard" outside a compound (yard network,
  * yard management, yard system, yard state, yard check, yard truck, yard move,
  * yard spotting, spaced or hyphenated), consecutive sentences opening with the same word, and a
- * sentence opening with "I" (Casey does not start sentences with I).
+ * sentence opening with "I" (Casey does not start sentences with I). R34: the singular-"yard" scan judges our prose
+ * only: a verified cited quote and its source label are the source's words (a posting titled "Yard Operations
+ * Manager"), set aside the way C07 and C08 set the quote aside.
  */
 
 import { BANNED_PHRASES, POST_PIVOT_BANNED } from '../../../ai/voice-guardrails';
 import { splitSentences, stripGreetingAndSignature, stripMarkers } from '../text';
-import type { Check, CheckSpan } from '../types';
-import { isLastStep } from './c07-structure';
+import type { Check, CheckSpan, CompileContext } from '../types';
+import { isLastStep, withoutVerifiedSourceText } from './c07-structure';
 
 export const C11_CODE = 'C11';
 export const C14_CODE = 'C14';
@@ -172,11 +174,11 @@ function firstWord(sentence: string): string {
   return m ? m[0].toLowerCase() : '';
 }
 
-export function voiceWarnings(body: string): Array<{ warning: string; span: CheckSpan | null }> {
+export function voiceWarnings(body: string, ctx?: CompileContext): Array<{ warning: string; span: CheckSpan | null }> {
   const out: Array<{ warning: string; span: CheckSpan | null }> = [];
   const content = stripGreetingAndSignature(body);
 
-  const yard = SINGULAR_YARD_RE.exec(content);
+  const yard = SINGULAR_YARD_RE.exec(ctx ? withoutVerifiedSourceText(content, ctx) : content);
   if (yard) {
     const start = body.indexOf(yard[0], Math.max(0, body.indexOf(content)));
     out.push({
@@ -200,8 +202,8 @@ export function voiceWarnings(body: string): Array<{ warning: string; span: Chec
   return out;
 }
 
-export const checkVoiceWarn: Check = (draft) => {
-  const warnings = voiceWarnings(draft.body);
+export const checkVoiceWarn: Check = (draft, ctx) => {
+  const warnings = voiceWarnings(draft.body, ctx);
   if (warnings.length > 0) {
     return {
       code: C14_CODE,

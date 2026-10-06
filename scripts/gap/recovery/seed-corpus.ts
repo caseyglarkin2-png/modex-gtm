@@ -16,6 +16,8 @@
  *   Dannon Scratch Co    one person, no source, no fact, no thesis -> Research, nothing to draft
  *   Mills Scratch Co     an approved thesis whose only fact is a sale abroad -> the gate refuses it (not usable)
  *   Heb Scratch Co       the only operator on record LEFT the account -> Research: find the operator
+ *   Tyson Scratch Co     a verified JOB POSTING (claim class JOB_POSTING) and a chosen person, no thesis (R34): a
+ *                        job-led opening in the posting's own words, prepared and reviewed, then sent from the job family
  *
  * Expected useful outcome per account is asserted by tests/unit/gap/scratch/*.scratch.test.ts, never assumed Ready.
  * Idempotent per tag: rerun with --tag to add a second corpus beside the first. Nothing here sends, drafts or
@@ -91,7 +93,7 @@ export async function seedCorpus(prisma: PrismaClient, opts: { tag?: string; now
     return row;
   }
   /** A verified, dated, quoted, external-ok fact on a publisher page: what the evidence gate admits (research/evidence-gate.ts). */
-  async function fact(a: CorpusAccount, key: string, text: string, over: { title?: string; observedAt?: string; type?: string; host?: string } = {}) {
+  async function fact(a: CorpusAccount, key: string, text: string, over: { title?: string; observedAt?: string; type?: string; host?: string; claimClass?: string; claimAttributes?: Record<string, unknown> } = {}) {
     const title = over.title ?? `${a.name} news (${key})`;
     const r = await registerSignal(prisma, {
       accountName: a.name,
@@ -105,7 +107,9 @@ export async function seedCorpus(prisma: PrismaClient, opts: { tag?: string; now
       externalOk: true,
       observedAt: new Date(over.observedAt ?? '2026-09-16T00:00:00Z'),
       confidence: 80,
-      metadata: { verified: VERIFIED_EXCERPT },
+      // R22/R34: a claim of its own type keeps its class and attributes (research/claim-types.ts), as the verifier mints it.
+      ...(over.claimClass ? { claimClass: over.claimClass } : {}),
+      metadata: { verified: VERIFIED_EXCERPT, ...(over.claimClass ? { claimType: over.claimClass.toLowerCase(), claimAttributes: over.claimAttributes ?? {} } : {}) },
       registeredBy: ACTOR,
     });
     a.facts.push({ id: r.id, label: key });
@@ -225,6 +229,14 @@ export async function seedCorpus(prisma: PrismaClient, opts: { tag?: string; now
     await fact(a, 'expansion', `${a.name} is expanding its San Antonio distribution campus with a new 500,000 square foot warehouse.`, { title: `${a.name} expands San Antonio campus`, observedAt: '2026-09-18T00:00:00Z' });
     const left = await recordEmploymentCorrection(prisma, { personaId: d.id, actor: ACTOR, now, status: 'left', newCompany: null, note: 'corpus: left the account' });
     if (!left.ok) throw new Error(`employment at ${a.name}: ${left.reason}`);
+  }
+  // ---- Tyson Scratch Co: a job-led opening (R34) ----
+  {
+    const a = await account('Tyson Scratch Co', { vertical: 'food' });
+    a.expected = "A job-led opening: the posting's own words and one question (still open? are the yards where the day gets lost?); drafted, reviewed, then sent from the job family, never in the physical-change words";
+    const rae = await person(a, 'Rae', 'Director of Transportation');
+    await fact(a, 'yard-ops-posting', `${a.name} is hiring a Yard Operations Manager at its Amarillo distribution center to manage trailer moves and dock appointments.`, { title: `Yard Operations Manager - Amarillo | ${a.name} Careers`, observedAt: '2026-09-30T00:00:00Z', type: 'job_posting', host: `careers.${a.slug}.example.com`, claimClass: 'JOB_POSTING', claimAttributes: { role: 'Yard Operations Manager', postingStatus: 'open' } });
+    await choose(a, rae.id);
   }
 
   return out;

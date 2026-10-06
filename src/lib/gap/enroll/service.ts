@@ -141,7 +141,8 @@ import { materializeSequence, type MaterializeRefusal } from '@/lib/gap/sequence
 import type { RoutingAction } from '@/lib/gap/taxonomy';
 import { restrictionForAccount } from '@/lib/gap/policy/restriction';
 import type { QueueAddInput } from '@/lib/validations';
-import { approachOfHypothesis, COPY_UNSUPPORTED_DETAIL, copyFamilySupports } from '../research/approach-policy';
+import { approachOfHypothesis, COPY_FAMILY_MISMATCH_DETAIL, COPY_UNSUPPORTED_DETAIL, copyFamilySupports } from '../research/approach-policy';
+import { approachOfFamilyProgram } from '../sequences/families';
 
 export const ENROLL_ACTION: RoutingAction = 'enroll_gap_sequence';
 export const DEFAULT_OWNER = 'casey@freightroll.com';
@@ -734,8 +735,12 @@ export async function enrollFromDecision(
     .filter((s): s is EvidenceSignalRow => s !== null && (!s.freshness_expires_at || new Date(s.freshness_expires_at).getTime() > input.now.getTime()));
   const approach = approachOfHypothesis(hypothesis as { metadata?: unknown });
   if (!copyFamilySupports(approach)) return refuse('evidence_insufficient', { detail: COPY_UNSUPPORTED_DETAIL(approach) });
+  // R34: the version's copy is for the thesis's approach, never another's (a job-led thesis never enrolls on an
+  // event-led version, nor the reverse).
+  const familyApproach = approachOfFamilyProgram((version as { family?: { program?: string | null } | null }).family?.program ?? null);
+  if (familyApproach !== approach) return refuse('evidence_insufficient', { detail: COPY_FAMILY_MISMATCH_DETAIL(approach, familyApproach) });
   if (sendableEvidence(hypothesis.observation, liveSignals, hypothesis.account_name, { approach }).tier !== 'VERIFIED_FACT') {
-    return refuse('evidence_insufficient', { detail: 'No verified, dated, quoted fact about a physical-network change at this account.' });
+    return refuse('evidence_insufficient', { detail: approach === 'event_led' ? 'No verified, dated, quoted fact about a physical-network change at this account.' : `No verified, dated, quoted claim a ${approach.replace(/_/g, ' ')} thesis may cite at this account.` });
   }
 
   const persona: PersonaRow | null = await prisma.persona.findUnique({
