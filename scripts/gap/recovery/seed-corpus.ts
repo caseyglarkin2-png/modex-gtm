@@ -52,6 +52,13 @@ export interface Corpus {
 }
 
 const slugOf = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+/** The HubSpot company id the stub (scripts/gap/recovery/stubs.mjs) derives for a name: the same hash, so the real company reads find it. */
+export function stubCompanyId(name: string): string {
+  const key = name.trim().toLowerCase();
+  let h = 0;
+  for (const c of key) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+  return String(900000000 + (h % 100000000));
+}
 
 export async function seedCorpus(prisma: PrismaClient, opts: { tag?: string; now?: Date } = {}): Promise<Corpus> {
   const now = opts.now ?? new Date();
@@ -63,7 +70,9 @@ export async function seedCorpus(prisma: PrismaClient, opts: { tag?: string; now
 
   async function account(base: string, over: { vertical?: string; tier?: string; band?: string } = {}) {
     const name = nameOf(base);
-    await prisma.account.upsert({ where: { name }, update: {}, create: { rank: (rank += 1), name, vertical: over.vertical ?? 'cpg', tier: over.tier ?? 'Tier 1', priority_band: over.band ?? 'A' } });
+    // The HubSpot company id the stub answers for (TAM in, no deals unless the deals file names it), so routing's own
+    // company read and the people read run for real against the controlled boundary.
+    await prisma.account.upsert({ where: { name }, update: { hubspot_company_id: stubCompanyId(name) }, create: { rank: (rank += 1), name, vertical: over.vertical ?? 'cpg', tier: over.tier ?? 'Tier 1', priority_band: over.band ?? 'A', hubspot_company_id: stubCompanyId(name) } });
     const entry: CorpusAccount = { name, slug: slugOf(name), expected: '', people: [], facts: [], hypotheses: [], chosenPersonaId: null };
     out.accounts.push(entry);
     out.stub.companies.push(name);

@@ -27,7 +27,7 @@ function companyFor(name) {
   if (!companies.has(key)) {
     let h = 0;
     for (const c of key) h = (h * 31 + c.charCodeAt(0)) >>> 0;
-    companies.set(key, { id: String(900000000 + (h % 100000000)), name: name.trim(), domain: `${key.replace(/[^a-z0-9]+/g, '-')}.example.com` });
+    companies.set(key, { id: String(900000000 + (h % 100000000)), name: name.trim(), domain: `${key.replace(/[^a-z0-9]+/g, '-')}.example.com`, yardflow_tam: 'in', tam_tier: 'A' });
   }
   return companies.get(key);
 }
@@ -91,8 +91,14 @@ const server = http.createServer((req, res) => {
       }
       return json(res, 200, { total: results.length, results });
     }
+    let single = /^\/crm\/v3\/objects\/companies\/(\d+)$/.exec(path);
+    if (single && req.method === 'GET') {
+      const c = byId(single[1]);
+      if (!c) return json(res, 404, { status: 'error', message: 'not found' });
+      return json(res, 200, { id: c.id, properties: { name: c.name, domain: c.domain, yardflow_tam: c.yardflow_tam, tam_tier: c.tam_tier, hs_lastmodifieddate: '2026-10-01T00:00:00Z' } });
+    }
     if (path === '/crm/v3/objects/companies/batch/read') {
-      const results = (parsed.inputs ?? []).map((i) => byId(i.id)).filter(Boolean).map((c) => ({ id: c.id, properties: { name: c.name, domain: c.domain } }));
+      const results = (parsed.inputs ?? []).map((i) => byId(i.id)).filter(Boolean).map((c) => ({ id: c.id, properties: { name: c.name, domain: c.domain, yardflow_tam: c.yardflow_tam, tam_tier: c.tam_tier } }));
       return json(res, 200, { status: 'COMPLETE', results });
     }
     if (path === '/crm/v3/objects/deals/batch/read') {
