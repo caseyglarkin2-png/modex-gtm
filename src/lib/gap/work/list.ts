@@ -28,6 +28,7 @@
 import { accountHref } from '../account-intel/href';
 import { classifyReply, HUMAN_REPLY_LABEL, type ReplyClassKind } from '../replies/classify';
 import { prepareReply, type ReplyPrep } from '../replies/prepare';
+import type { FollowUpPlan } from '../execution/follow-up-plan';
 import { LANE_RANK, type NextCandidate } from '../routing/next-up';
 import type { PursuitSummary } from '../pursuit/summary';
 import type { PursuitStateKind } from '../pursuit/state';
@@ -138,6 +139,8 @@ export interface WorkInput {
   meetings?: ReadonlyArray<{ accountName: string; at: string; what: string; personaId?: number | null }>;
   /** R41: the seller's explicit priority per account (work/priority.ts). */
   priorities?: ReadonlyMap<string, { reason: string; by: string; at: string }>;
+  /** R43: the plan for each follow-up due today, by commitment id (execution/follow-up-plan.ts). */
+  followUpPlans?: ReadonlyMap<string, FollowUpPlan>;
 }
 
 export interface WorkDay {
@@ -460,11 +463,15 @@ export function workDay(i: WorkInput): WorkDay {
       waiting.push({ key: c.commitmentId, accountName: c.accountName, kind: c.kind, title: c.title, line: p.line, dueDay: p.dueDay, commitmentId: c.commitmentId });
       continue;
     }
-    const action = obligationAction(c);
-    // A snooze coming back keeps the account's own place (it never promotes the account); every other kind ranks.
-    const tier: WorkTier = c.source.kind === 'snooze' ? 'later' : commitmentTier(c);
+    // R43: a follow-up says what its plan says: prepare it, follow up by hand, a saved draft, an unknown send, a hold.
+    const plan = c.kind === 'follow_up' ? i.followUpPlans?.get(c.commitmentId) ?? null : null;
+    if (plan?.action === 'complete') continue;
+    const action = plan ? (plan.href && plan.label ? { href: plan.href, label: plan.label } : { href: null, label: null }) : obligationAction(c);
+    // A snooze coming back keeps the account's own place (it never promotes the account); a held follow-up never
+    // promotes a held account either; every other kind ranks.
+    const tier: WorkTier = c.source.kind === 'snooze' || plan?.action === 'held' ? 'later' : commitmentTier(c);
     const list = obligations.get(c.accountName) ?? [];
-    list.push({ key: c.commitmentId, commitmentId: c.commitmentId, kind: c.kind, tier, title: c.title, line: p.line, dueAt: c.dueAt, dueDay: p.dueDay, person: c.person ? { name: c.person.name, email: c.person.email } : null, basis: c.basis, href: action.href, label: action.label, canComplete: true });
+    list.push({ key: c.commitmentId, commitmentId: c.commitmentId, kind: c.kind, tier, title: c.title, line: plan?.line ?? p.line, dueAt: c.dueAt, dueDay: p.dueDay, person: c.person ? { name: c.person.name, email: c.person.email } : null, basis: c.basis, href: action.href, label: action.label, canComplete: true });
     obligations.set(c.accountName, list);
   }
   const horizon = i.now.getTime() + 24 * 3_600_000;

@@ -429,6 +429,24 @@ export async function prepareSellerEmail(
         return refuse(prisma, actor, decisionId, { ok: false, reason: 'emailed_outside_gap', detail: `casey@yardflow.ai already emailed this person on ${p.internalDate.toISOString().slice(0, 10)} ("${p.subject}"), and GAP has no record of it. Record it as a manual send before anything else goes out.` });
       }
     }
+  } else {
+    // R43: a follow-up never goes out over one already sent by hand from the GAP mailbox. Sent after the last recorded
+    // touch, minus every message GAP recorded, must hold nothing to this person. Unreadable is unknown, never "nothing".
+    const lastAt = history.sent.filter((s) => s.stepIndex < stepIndex).map((s) => new Date(s.sentAt).getTime()).sort((a, b) => b - a)[0];
+    const sentTo = deps.mailboxSentTo ?? defaultMailboxSentTo((deps.gapSender ?? gapGmailSender)());
+    if (sentTo && lastAt) {
+      const recorded = new Set(history.sent.map((s) => s.gmailSentMessageId));
+      let after: Array<{ id: string; internalDate: Date; subject: string }>;
+      try {
+        after = (await sentTo(email, Math.floor((lastAt + 60_000) / 1000), Math.ceil(now.getTime() / 1000) + 86_400)).filter((m) => m.internalDate.getTime() > lastAt + 60_000 && !recorded.has(m.id));
+      } catch (e) {
+        return refuse(prisma, actor, decisionId, { ok: false, reason: 'mailbox_sent_unreadable', detail: `Could not read the GAP mailbox's Sent folder (${e instanceof Error ? e.message : String(e)}). No follow-up goes out until it can be read.` });
+      }
+      if (after.length > 0) {
+        const p = after[0];
+        return refuse(prisma, actor, decisionId, { ok: false, reason: 'emailed_outside_gap', detail: `casey@yardflow.ai emailed this person on ${p.internalDate.toISOString().slice(0, 10)} ("${p.subject}") after the last recorded touch, and GAP has no record of it. That was the follow-up: mark it done; nothing else goes out now.` });
+      }
+    }
   }
   // Execution acceptance: an active thesis Account Intelligence says needs review (a better current fact, a
   // revision, a stale primary fact) is not actionable, whatever card or old link reached this click.

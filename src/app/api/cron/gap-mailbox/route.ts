@@ -6,6 +6,7 @@ import { gapGmailSender } from '@/lib/gap/execution/gap-sender';
 import { classifyMailboxMessage, GAP_MAILBOX_WATERMARK_KEY, loadGapSendContext, MAILBOX_FIRST_LOOKBACK_SECONDS, MAILBOX_OVERLAP_SECONDS, pollGapMailbox } from '@/lib/gap/replies/gap-mailbox';
 import { getMailboxMessage, listMailboxIds, listSentTo } from '@/lib/email/gmail-inbox';
 import { reconcileUnknownSends } from '@/lib/gap/execution/unknown-send-reconcile';
+import { reconcileFollowUpsFromSent } from '@/lib/gap/execution/follow-up-load';
 import { prisma } from '@/lib/prisma';
 
 export const dynamic = 'force-dynamic';
@@ -79,6 +80,8 @@ export async function GET(request: Request) {
       // Ops closeout 13B: direct sends whose Gmail answer was lost, reconciled against Sent.
       // Still-unknown ones stay visible in the report; they are never read as not sent.
       report.unknownSends = await reconcileUnknownSends(prisma, { now }, { listSent: (rcpt, a, b) => listSentTo(sender, rcpt, a, b), mailbox: sender.userEmail });
+      // R43: a follow-up sent by hand from this mailbox closes its obligation (Sent is the proof; nothing else is written).
+      report.followUpsFromSent = await reconcileFollowUpsFromSent(prisma, { now }, { listSent: (rcpt, a, b) => listSentTo(sender, rcpt, a, b) }).catch((e) => ({ error: e instanceof Error ? e.message : String(e) }));
       // Release C review S2: a failed or quarantined message, an unattributable
       // delivery notice or a truncated listing is never a quiet success.
       const errors = Array.isArray(report.errors) ? (report.errors as string[]) : [];

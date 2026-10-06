@@ -467,7 +467,7 @@ export async function syncFollowUpsFromLedger(prisma: PrismaLike, now: Date, opt
         dependency: `${first(who) ?? who}'s reply`,
         person: { personaId: s.personaId, name, email: s.recipient },
         source: { kind: 'send', id: personStepKey(s.personaId, s.recipient, s.stepIndex) },
-        detail: { stepIndex: s.stepIndex + 1, decisionId: s.decisionId, ...(next ? {} : { noFollowUpCopy: true }) },
+        detail: { stepIndex: s.stepIndex + 1, decisionId: s.decisionId, sentAt: s.sentAt, ...(next ? {} : { noFollowUpCopy: true }) },
         owner: s.actor,
       },
       { actor: 'gap:work', now },

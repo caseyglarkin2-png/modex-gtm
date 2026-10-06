@@ -46,6 +46,7 @@ import { buildNextUpCandidates, heldAccountsOf, pickNextUpV2 } from '@/lib/gap/r
 import { workDay, type WorkCard, type WorkInput } from '@/lib/gap/work/list';
 import { loadUpcomingMeetings, loadWorkCommitments } from '@/lib/gap/work/day-load';
 import { loadAccountPriorities } from '@/lib/gap/work/priority';
+import { loadFollowUpPlans } from '@/lib/gap/execution/follow-up-load';
 import { loadWorkOutcomes } from '@/lib/gap/work/outcome';
 import { loadPursuitSummaries, warmPursuitSummaries } from '@/lib/gap/pursuit/summary';
 import { loadSendableTheses } from '@/lib/gap/pursuit/load';
@@ -393,8 +394,13 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
     lane ? Promise.resolve([]) : loadWorkCommitments(prisma, now, { replies: data.workInput.replies }).catch(() => []),
     lane ? Promise.resolve([]) : loadUpcomingMeetings(prisma, now).catch(() => []),
   ]);
-  const priorities = await loadAccountPriorities(prisma, [...new Set([...data.workAccounts, ...commitments.map((c) => c.accountName)])]).catch(() => new Map());
-  const day = workDay({ ...data.workInput, now, summaries, outcomes, commitments, meetings, priorities });
+  const mailbox = process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() || null;
+  const [priorities, followUpPlans] = await Promise.all([
+    loadAccountPriorities(prisma, [...new Set([...data.workAccounts, ...commitments.map((c) => c.accountName)])]).catch(() => new Map()),
+    // R43: each follow-up due today, read off the person's own history (prepare, by hand, a saved draft, unknown, held).
+    loadFollowUpPlans(prisma, commitments, { now, mailbox, held: data.workInput.held, dealAccounts: new Set(data.workInput.inDeals.status === 'complete' ? data.workInput.inDeals.accounts.map((a) => a.accountName) : []) }).catch(() => new Map()),
+  ]);
+  const day = workDay({ ...data.workInput, now, summaries, outcomes, commitments, meetings, priorities, followUpPlans });
   const work: WorkCard[] = day.cards;
   // UX-08 parity: after the response is sent, read the canonical pursuit state for the first few Work accounts
   // that have none remembered (serial, bounded, never blocking a render), so the next Work load says what the

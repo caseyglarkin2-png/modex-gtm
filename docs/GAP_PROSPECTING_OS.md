@@ -1226,6 +1226,42 @@ meant in three files, so `story/propose-family.ts` line 49 (the closure cue for 
 `entity/providers.ts` `modelGone` never matches the "404" alternative, and three guard assertions in
 `tests/unit/gap/hubspot-poller.test.ts` (lines 708 to 710) pass vacuously.
 
+R43 **Follow-up execution and recovery (DONE; through the real send route on scratch).** NEW `execution/follow-up-
+plan.ts` (pure): a follow-up due today says what to do from the PERSON's actual history (person-history.ts: every
+proven send, every Gmail draft and its fate, every send whose outcome is unknown), the obligation's due day and the
+holds: held (an open or unreadable deal, an opt-out; no follow-up while it stands, and it never promotes a held
+account), outcome unknown (a send of the next touch was started and its answer lost: check Gmail Sent, never resend),
+complete (the next touch already went out), draft saved (a Gmail draft of the next touch is SAVED, not sent; GAP counts
+it only once Gmail shows it sent), a justified wait (when, and since which touch), prepare (the family has copy for
+the next step: the existing card and its seller-send preview) or by hand (no follow-up copy, which is every seeded
+family today: follow up in the same thread, then mark it done). `execution/follow-up-load.ts` reads the plans for the
+follow-ups due on Work (bounded) and `reconcileFollowUpsFromSent` (run by the `gap-mailbox` cron after the unknown-send
+reconcile) closes a follow-up sent by hand from the GAP mailbox: Sent after the last recorded touch, minus every
+message GAP recorded, holding a message to that person, is the proof (`mailbox_sent`); no ledger send is fabricated
+for copy GAP did not render; an unreadable mailbox writes nothing. At the click (`seller-draft.ts`, the one send
+authority, stricter only): a follow-up is now refused `emailed_outside_gap` when Sent holds an unrecorded message to
+the person after the last recorded touch (`mailbox_sent_unreadable` when Sent cannot be read), as the first touch
+already was. Harness only: `GAP_SINK_FAULT=timeout_after_write` makes the sink keep the message and then lose the
+answer, the way a provider timeout after acceptance looks (the sink never runs in production). Proof:
+`follow-up.test.ts` (5: prepare versus by hand; the justified wait, a saved draft never a send, a sent draft complete,
+the unknown send, the hold; the plan on Work and a held follow-up not promoting a held account; the Sent reconcile
+closing the obligation with the message, ignoring GAP's own recorded send and writing nothing on an unreadable read;
+the click refusing a follow-up over one sent by hand) and the sprint's scratch file
+`tests/unit/gap/scratch/work-day.scratch.test.ts` (real routes, gates, ledger, Postgres; the sink as the mailbox):
+three tabs press CONFIRM + SEND on one email together and exactly one leaves (one sink message, one DIRECT_SENT, one
+EmailLog row), every other tab refused by whichever gate first sees the winner (the open claim, the ledger, the
+stale-card read of the EmailLog, the mailbox Sent read) or answered ALREADY SENT (stressed ten runs, green); the provider
+accepts and the answer is lost: the claim stays open, the retry is refused `send_in_progress_or_unknown` and writes
+nothing, and the Sent read reconciles it so the next press answers ALREADY SENT; a deal opens between preview and send:
+the confirm is refused `active_opportunity` and nothing leaves; every proven send leaves one waiting follow-up and a
+re-read makes no second. Six deliberate mutations (a follow-up over one sent by hand, a saved draft read as sent, the
+Sent reconcile counting GAP's own send, an unknown send offered again, a lost answer read as not sent so the claim is
+released, an open deal ignored at the click) each turn their owning test red, the last two on the scratch database.
+Adjacent: 21 files / 278 green; typecheck clean. Rollback: revert the commit (the cron report gains one key; the
+reconcile writes only commitment rows). Debt: no next follow-up is proposed after a by-hand follow-up (the obligation
+closes; the next touch waits for a new send or the seller's own task); the follow-up copy family (step 1+) does not
+exist, so "prepare" is reachable only for legacy multi-step versions.
+
 ## 12. Migration, backfill and rollback
 
 Order of commits inside Sprint 1 and 3: schema + SQL first (no reader), then pure core, then importers (Top100 before PIC before modex legacy), then runtime pin, then services, then queue actions under the flag, then `GAP_OS_ENABLED=true` in Vercel after `verify-triggers.ts` passes against prod (env is snapshot at deploy; redeploy after setting). Before the prod `db push`, preview it with `prisma migrate diff --from-url <prod> --to-schema-datamodel prisma/schema.prisma --script` and confirm the script is additive only; also confirm the prod role can `CREATE FUNCTION` (not yet verified). Rollback: the flag off restores byte-identical behavior instantly; full removal is the rollback SQL plus reverting the runtime, service and queue-action commits; `sequences` is never modified; the only two pre-existing tables GAP OS's schema touches at all are `draft_queue_items` (one nullable `sequence_version_id` stamp, S1-T2) and `inbound_messages` (`source String @default("gmail")` and `hubspot_engagement_id String?`, S2-T1, needed so the reply cron and the HubSpot poller can tell a Gmail-sourced row from a HubSpot-engagement-sourced one and attribute the engagement id idempotently) — both additive-only, both confirmed by the production preflight below; the lane and PIC files are read, never written.

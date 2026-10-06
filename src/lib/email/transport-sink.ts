@@ -105,6 +105,12 @@ export function sinkAttempt(
   };
   writeFileSync(join(cfg.dir, `${id}.json`), JSON.stringify(record, null, 2));
   if (refused.length) throw new SinkRefusal(refused[0], cfg.allowedDomains);
+  // R43 harness fault (sink only, never production): the message LEFT (it is in the sink's Sent) and then the answer
+  // was lost, the way a provider timeout after acceptance looks. The send path must leave its claim open (outcome
+  // unknown), never resend, and reconcile from Sent.
+  if (kind === 'send' && (process.env.GAP_SINK_FAULT ?? '').trim() === 'timeout_after_write') {
+    throw new Error('Gmail send answer lost after the request went out (timeout; sink fault)');
+  }
   return record;
 }
 

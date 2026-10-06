@@ -86,7 +86,7 @@ export interface Commitment {
   /** What created it; the commitment id is derived from this, so the same source can never make a second one. */
   source: { kind: CommitmentSourceKind; id: string };
   /** Facts the surfaces need: the follow-up step and card, whether a copy family exists for it, an ambiguous date. */
-  detail: { stepIndex?: number; decisionId?: string; noFollowUpCopy?: boolean; ambiguousDate?: string; meetingAt?: string } | null;
+  detail: { stepIndex?: number; decisionId?: string; noFollowUpCopy?: boolean; ambiguousDate?: string; meetingAt?: string; sentAt?: string } | null;
   createdAt: string;
   createdBy: string;
   updatedAt: string;
