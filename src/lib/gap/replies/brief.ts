@@ -187,6 +187,7 @@ export function afterAcknowledgementQuestionsFor(hypothesis: { problemFamily: st
 
 const HYPOTHESIS_SELECT = {
   id: true,
+  account_name: true,
   status: true,
   problem_family: true,
   confidence: true,
@@ -240,7 +241,7 @@ function toBriefHypothesis(row: any): BriefHypothesis {
     predictedBuyerLanguage: nonBlank(row.predicted_buyer_language) ? row.predicted_buyer_language : null,
     wouldProveWrong: [whatANoMeans, contraryEvidence].filter((v): v is string => v !== null),
     // UX-06: a keyword hit is never captioned as an observed fact (soak P2).
-    verifiedFact: hypothesisSendable(row, new Date()),
+    verifiedFact: typeof row.account_name === 'string' ? hypothesisSendable(row, new Date()) : false,
   };
 }
 
