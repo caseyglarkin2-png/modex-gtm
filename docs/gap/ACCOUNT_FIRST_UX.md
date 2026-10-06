@@ -590,6 +590,34 @@ the wide two-column enhancement. No new state, no new reader; presentation and o
 Out of scope for UX-04: the Account Story (UX-05), the outreach anchor and "why #1 over #2" (UX-06), human-priority
 controls beyond Choose (UX-07), the worklist (UX-08).
 
+## 6c. UX-04 implementation record (2026-10-06)
+
+Commit 7065fc24 on `feat/gap-account-first-ux`. What shipped, against the 6b contract:
+
+1. One decision block: the state line in its hold colour (red opt-out, sky reply or follow-up, amber deal or hold,
+   green ready); the inbound line; NEXT with the ONE primary control (a filled button; the chosen person's row no
+   longer carries a second Prepare email, keeping Call prep and Log a touch); the People Stack unchanged from UX-03
+   with the chosen person first; the relationship route directly after the stack; the do-not-contact names as one
+   line with one "Review N flags" disclosure.
+2. Context after the decision, in order: WHY NOW (a fund-holdings, stake or ticker headline is market chatter and
+   never a line), KNOW (imagery facts marked never cite stay in SOURCES), THINK, ASK, the private line, WEDGE, ASSET,
+   the tools row with an inline Note. THE GAP shows only when the buyer confirmed something; IMPACT only when a cost
+   is known (pinned by `now-hierarchy.test.tsx`; the old "Unknown · Our read · Unknown · Our read" line is gone).
+3. One column is the primary design; from 1100 CSS px the context sits beside the decision (a 7:5 grid) with DOM
+   order unchanged (decision, then context), so reading order and Tab order are the same at every width.
+4. Phone: the view tabs are no longer sticky (they stay sticky from md up, with the UX-03 scroll padding); the GAP
+   subnav is one horizontally scrolling row; the Note and Compose pills are hidden on account pages; one opaque bottom
+   bar carries Listen and Log a touch at 44 px, with `scroll-padding-bottom` already set for it.
+5. Listen cleanup: one player on the page (a second Listen stops the first), pause and resume in place, the audio
+   stops and its object URL is released on unmount, the state is announced through a polite status region
+   (`voice-preview-button.test.tsx`).
+6. Not done in this slice, by the contract: streaming the stack under a skeleton (the pursuit read already shares the
+   queue read; the page-level Suspense is carried to UX-14 with the perceived-speed pass, because the brief read,
+   not the pursuit read, is the long pole).
+
+Validation: GAP folder suite 329 files / 5,059 tests green; `tsc --noEmit` clean; eslint clean on the changed files;
+production build green. Measurements and the fresh review follow in 7.2 and 8.8.
+
 ## 7. Task baselines and post-change measurements
 
 Baseline measured on production 2026-10-05 (SHA 54c11c57) through the rig; clicks counted on the shortest path a seller
@@ -656,6 +684,28 @@ The pursuit read runs in parallel with the pre-existing ready-target read, so th
 about 3 s on top of a page that already took 5 to 12 s on Vercel. Local page loads measured 15 to 30 s end to end.
 Carried to UX-04 / UX-14: stream the stack after the header (a skeleton), and share the queue read between
 loadReadyTarget and loadPursuit (they read the same queue twice).
+
+### 7.2 UX-04 measurement: where the decision ends (local preview of 7065fc24 against the production database, read-only, DPR 1, 2026-10-06)
+
+The contract: at about 820 CSS px (Casey's real desktop) the first two screens hold the full decision (state, NEXT,
+the chosen or next person, the People Stack top 3, the primary actions). Measured as the bottom pixel of the NEXT
+control or the third stack row's action, whichever is lower, over the viewport height (900 at 820 and 1440; 844 at 390).
+
+| Account | 820 px: decision ends | context starts | page | 390 px: decision ends | page | 1440 px: layout |
+|---|---|---|---|---|---|---|
+| FedEx | 1,203 px (1.34 screens) | 1,770 px | 2.9 screens | 1,343 px (1.59) | 3.6 | grid; context beside the decision from 200 px |
+| Walmart | 1,026 px (1.14) | 1,631 px | 2.8 | 1,249 px (1.48) | 3.7 | grid |
+| PepsiCo | 1,182 px (1.31) | 1,792 px | 2.8 | 1,301 px (1.54) | 3.5 | |
+| H-E-B | 996 px (1.11) | 1,446 px | 2.3 | | | |
+| Kroger | 960 px (1.07) | 1,433 px | 2.3 | | | |
+| NFI | 1,042 px (1.16) | 1,556 px | 2.2 | | | |
+
+Before UX-04 (UX-03 captures of the same build family): pages 2.5 to 2.9 screens at 1440 (one column), 3.1 to 3.3 at
+820 and 3.9 to 4.2 at 390; THE GAP, IMPACT "unknown", finance headlines and imagery rows were on every page.
+
+Keyboard, with the sticky elements engaged: 60 Tab and 60 Shift+Tab presses at 820, 390 and 1440 found zero NOW
+controls fully covered (the UX-03 review's blocker was five of five sample points covered). The view tabs are static at
+390 (sticky from md up), the bottom bar is present at 390 only, and no page overflows horizontally.
 
 Post-change measurements for the full task set: filled by UX-15 against the same tasks.
 
