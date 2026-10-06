@@ -825,6 +825,46 @@ clean; eslint clean on every changed file except `replies/brief.ts`, whose 10 `a
 (house glue, recorded in section 10); five local production builds green. Measurements and the fresh review follow
 in 7.4 and 8.10.
 
+## 6h. UX-07 implementation record (2026-10-06): human priority on the stack
+
+Validation policy from here (Casey, 2026-10-06): risk-tiered. UX-07 to UX-10 run focused tests, adjacent module
+tests, one typecheck, the Vercel preview build, two to four representative account smokes, one browser check at 820
+(390 as a guard), and ONE fresh seller/product review per slice; the full suite, the broad capture and the full review
+team run once at the integration gate after UX-10. A machine restart is not a code change.
+
+What shipped, against 5.3 and 5.6:
+
+1. **The one new state**: `person.seller_preference`, an append-only audit row (`lib/gap/people/seller-preference.ts`,
+   no new table): `not_a_fit` or `not_now` (until a date within a year) with an optional reason; newest row per
+   person at the account wins; `clear` is Undo (a reversal row, never a delete); a lapsed Not now reads as none. It
+   never writes `do_not_contact` and no send path reads it. `POST /api/gap/personas/[id]/preference`, session only.
+2. **Stricter, never looser**: the stack (`people/stack.ts`) parks a preferred-aside person out of the default rows
+   into "Show more" with the seller's own line ("Not a fit here (buys software), you, Oct 4."); eligibility is the
+   resolver's and untouched; the chosen person is never parked under their own preference; the Show-more label counts
+   "N set aside by you"; "Choose who (N)" counts the active people.
+3. **Make next**: records the motion's NEXT IF NO RESPONSE person on the existing motion row with the chosen primary
+   (`POST /api/gap/accounts/motion`, append-only); Undo clears the explicit next (the motion's own pick returns). The
+   row reads "Next if no response"; the heading line says who is next and what unlocks them (the 5 business days, or
+   at once on a failed address), from the pursuit state.
+4. **Wrong role / Left the company / Verify role**: the existing human corrections (`POST .../employment` with
+   `left` or `role_changed`, Undo posts `current`) and the public role check (`POST .../employment/verify`, verdict
+   read back); nothing new is written.
+5. **Read-back**: every decision reads back in one line with its scope and effect ("Kelly is next at Walmart Inc
+   only, after Doug if no response. Nothing is sent.") with Undo in place; failures say nothing changed.
+6. **Never over a hold**: no priority control renders under a reply, an opt-out, a deal or a hold (`chooseAllowed`
+   false), and none on the chosen person, a HubSpot-only person (Choose adds them first) or a non-eligible slot.
+7. **Not in UX-07**: "I know this person" (the relationship route through capture; deferred, section 10); a
+   preference recorded on a held person shown as "Next once the reply is triaged" (the controls are hidden under a
+   hold instead; deferred); the Work card's "Choose who (4)" (UX-08).
+
+Validation: `tests/unit/gap/seller-preference.test.ts` (newest wins, clear, lapse, account scope, the payload never
+carries do_not_contact, the date and reason bounds), `people-stack.test.ts` (parking, the chosen person, the next
+tag), `people-stack-view.test.tsx` (the next line and tag, Make next and its Undo bodies, Not a fit and Not now
+bodies, the parked line with Undo, the employment and verify posts, nothing under a hold; every POST url checked
+against send, enroll, draft, HubSpot and Apollo); adjacent suites (motion routes, contract parity, owner resolution
+family, pursuit state) green; tsc clean; eslint clean on the changed files (`audit.ts` carries three pre-existing
+`any` errors). Browser check and the fresh review: section 9.
+
 ## 7. Task baselines and post-change measurements
 
 Baseline measured on production 2026-10-05 (SHA 54c11c57) through the rig; clicks counted on the shortest path a seller
