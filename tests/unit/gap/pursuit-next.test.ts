@@ -37,3 +37,14 @@ describe('nextFromPursuit', () => {
     expect(nextFromPursuit(base({ eligible: [] }), opts).control?.label).toBe('Open the research plan');
   });
 });
+
+describe('pursuitListenText: Listen speaks the page\'s state, never the old one', () => {
+  it('an opt-out page reads Opted out and the next step, not Ready for a first touch', async () => {
+    const { pursuitListenText } = await import('@/lib/gap/pursuit/next');
+    const s = base({ replies: [{ from: 'tim@acme.com', name: null, at: '2026-10-05T13:58:00Z', subject: null, snippet: 'stop', triaged: false }] });
+    const text = pursuitListenText({ name: 'Acme', stateLine: 'retailer · Direct buyer · Ready for a first touch · Owner: Casey', unit: null, listen: 'Acme. retailer · Direct buyer · Ready for a first touch · Owner: Casey. Next: Review the thesis. Who: Karen Darling. Why now: a new DC. Our read: handoffs constrain capacity. Ask: how do trailers get found?' }, s, 'Record the opt-out.');
+    expect(text).toMatch(/^Acme\. retailer\. Direct buyer\. Opted out: tim@acme.com, Oct 5\. Opted out: tim@acme.com\. Next: Record the opt-out\./);
+    expect(text).not.toMatch(/Ready for a first touch|Karen Darling/);
+    expect(text).toMatch(/Why now: a new DC/);
+  });
+});

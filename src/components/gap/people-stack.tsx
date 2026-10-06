@@ -20,6 +20,7 @@ import { useRouter } from 'next/navigation';
 import type { PeopleStack, StackRow } from '@/lib/gap/people/stack';
 import { SET_ASIDE_LABEL } from '@/lib/gap/people/stack';
 import type { PursuitState } from '@/lib/gap/pursuit/state';
+import { EmploymentControl } from './employment-control';
 
 /** A set-aside person, serializable (the resolver's exclusion carries regexes and reads that never cross to the client). */
 export interface SetAsidePerson {
@@ -95,7 +96,9 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
   const lead = state.person && /^(relationship|intro):/.test(state.person.key) ? state.person : null;
   // Under a hold or a deal no ordinal and no "choose who": the list is the people on record, not a cold-touch choice.
   const choosing = state.chooseAllowed;
-  const callAllowed = state.state !== 'opted_out' && state.state !== 'in_deal' && state.state !== 'held';
+  const callAllowed = state.state !== 'opted_out' && state.state !== 'in_deal' && state.state !== 'held' && state.state !== 'research';
+  // Under research (no angle yet) choosing is allowed but quiet: an outline control that says what it is for.
+  const quietChoose = state.state === 'research';
 
   return (
     <section className="space-y-2" data-testid="people-stack" aria-labelledby="people-stack-heading">
@@ -147,7 +150,7 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
               {row.badge ? <span className="rounded-sm border border-[var(--primary)] px-1 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[var(--primary)]" data-testid="people-stack-badge">{row.badge}</span> : null}
               {row.chosen ? <span className="text-xs font-medium text-[var(--primary)]" data-testid="people-stack-chosen">Chosen{row.chosenBy ? ` by ${row.chosenBy}` : ''}</span> : null}
             </div>
-            <p className="mt-0.5 text-sm" data-testid="people-stack-reason">{row.reason}</p>
+            <p id={`reason-${row.key}`} className="mt-0.5 text-sm" data-testid="people-stack-reason">{row.reason}</p>
             {row.currentness ? (
               <p className={`mt-0.5 text-xs ${/conflict|changed|in question|left|separate|divested/i.test(row.currentness) ? 'text-amber-700 dark:text-amber-400' : 'text-emerald-700 dark:text-emerald-400'}`} data-testid="people-stack-currentness">
                 {row.currentness}
@@ -193,8 +196,12 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
                   </Link>
                 </>
               ) : row.coldEligible && state.chooseAllowed ? (
-                <button type="button" className={chosenRow ? OUTLINE : PRIMARY} disabled={busy !== null} onClick={() => void choose(row)} data-testid="people-stack-choose" aria-describedby={`why-${row.key}`}>
-                  {busy?.key === row.key ? (busy.step === 'adding' ? 'Adding to GAP...' : 'Choosing...') : chosenRow ? `Make ${row.name.split(' ')[0]} first instead` : `Choose ${row.name.split(' ')[0]}`}
+                <button type="button" className={chosenRow || quietChoose ? OUTLINE : PRIMARY} disabled={busy !== null} onClick={() => void choose(row)} data-testid="people-stack-choose" aria-describedby={`reason-${row.key}`}>
+                  {busy?.key === row.key
+                    ? busy.step === 'adding' ? 'Adding to GAP...' : 'Choosing...'
+                    : chosenRow
+                      ? `Make ${row.name.split(' ')[0]} first instead`
+                      : `Choose ${row.name.split(' ')[0]}${row.personaId === null ? ' (adds them to GAP)' : ''}${quietChoose ? ' for when an angle exists' : ''}`}
                 </button>
               ) : row.coldEligible ? (
                 <span className="text-xs text-[var(--muted-foreground)]" data-testid="people-stack-held">No cold touch right now (see Next).</span>
@@ -205,18 +212,28 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
                 {open.has(row.key) ? 'Hide why' : 'Why this person?'}
               </button>
             </div>
-            {open.has(row.key) ? (
-              <ul id={`why-${row.key}`} className="mt-2 space-y-0.5 border-t border-[var(--border)] pt-2 text-xs text-[var(--muted-foreground)]" data-testid="people-stack-why-list">
-                {row.why.map((w) => (
-                  <li key={w}>{w}</li>
-                ))}
-              </ul>
-            ) : (
-              <span id={`why-${row.key}`} className="sr-only">{row.reason}</span>
-            )}
+            <div id={`why-${row.key}`} hidden={!open.has(row.key)} className="mt-2 space-y-1 border-t border-[var(--border)] pt-2 text-xs text-[var(--muted-foreground)]">
+              {open.has(row.key) ? (
+                <>
+                  <ul className="space-y-0.5" data-testid="people-stack-why-list">
+                    {row.why.map((w) => (
+                      <li key={w}>{w}</li>
+                    ))}
+                  </ul>
+                  {row.personaId !== null ? (
+                    <EmploymentControl personaId={row.personaId} name={row.name} title={row.title} accountName={accountName} compact onDone={() => router.refresh()} />
+                  ) : row.hubspotContactId ? (
+                    <EmploymentControl hubspotContactId={row.hubspotContactId} name={row.name} title={row.title} accountName={accountName} compact onDone={() => router.refresh()} />
+                  ) : null}
+                </>
+              ) : null}
+            </div>
           </li>
         ))}
       </ol>
+      {!showAll && stack.setAside.line ? (
+        <p className="text-xs text-[var(--muted-foreground)]" data-testid="people-stack-set-aside-line">{stack.setAside.line}</p>
+      ) : null}
 
       {note ? (
         <p role={note.kind} className={`text-xs ${note.kind === 'alert' ? 'text-red-700 dark:text-red-400' : ''}`} data-testid="people-stack-note">
@@ -235,15 +252,11 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
               <button type="button" className={TEXT} aria-expanded={open.has(row.key)} aria-controls={`why-${row.key}`} onClick={() => toggle(row.key)} data-testid="people-stack-why">
                 {open.has(row.key) ? 'Hide why' : 'Why?'}
               </button>
-              {open.has(row.key) ? (
-                <ul id={`why-${row.key}`} className="basis-full space-y-0.5 pl-2 text-[var(--muted-foreground)]" data-testid="people-stack-why-list">
-                  {[row.reason, ...row.why].map((w) => (
-                    <li key={w}>{w}</li>
-                  ))}
-                </ul>
-              ) : (
-                <span id={`why-${row.key}`} className="sr-only">{row.reason}</span>
-              )}
+              <ul id={`why-${row.key}`} hidden={!open.has(row.key)} className="basis-full space-y-0.5 pl-2 text-[var(--muted-foreground)]" data-testid={open.has(row.key) ? 'people-stack-why-list' : undefined}>
+                {[row.reason, ...row.why].map((w) => (
+                  <li key={w}>{w}</li>
+                ))}
+              </ul>
             </li>
           ))}
         </ul>

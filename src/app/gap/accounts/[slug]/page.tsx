@@ -34,7 +34,7 @@ import { accountSlug, accountTitle, gmailThreadHref } from '@/lib/gap/account-in
 import { OpenHashDetails } from '@/components/gap/open-hash-details';
 import { PendingLink } from '@/components/gap/pending-link';
 import { loadPursuit } from '@/lib/gap/pursuit/load';
-import { nextFromPursuit } from '@/lib/gap/pursuit/next';
+import { nextFromPursuit, pursuitListenText } from '@/lib/gap/pursuit/next';
 
 export const dynamic = 'force-dynamic';
 /** The browser title names the account (click test round 3: every tab read "GAP account"). From the slug: no read. */
@@ -159,7 +159,7 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
         {header}
         {tabs}
         <AccountNowView
-          v={v}
+          v={pursuit && pursuitNext ? { ...v, listen: pursuitListenText(v, pursuit.state, pursuitNext.text) } : v}
           nextHref={control?.href ?? null}
           nextLabel={control?.label ?? null}
           nextText={pursuitNext?.text ?? null}

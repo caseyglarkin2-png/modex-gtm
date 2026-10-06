@@ -49,7 +49,8 @@ describe('the default view', () => {
   });
   it('the departed person is not a row; Show all opens the rest and names them under set aside with the plain reason', () => {
     render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(r, { chosenKey: null })} state={stateFor({})} hypothesisId="h1" excluded={excluded} />);
-    expect(screen.queryByText(/Dakota Socha/)).toBeNull();
+    expect(screen.getAllByTestId('people-stack-row').every((el) => !/Dakota Socha/.test(el.textContent ?? ''))).toBe(true);
+    expect(screen.getByTestId('people-stack-set-aside-line').textContent).toMatch(/Dakota Socha \(left the company\)/);
     fireEvent.click(screen.getByTestId('people-stack-show-all'));
     expect(screen.getAllByTestId('people-stack-row').length).toBe(r.eligible.length);
     expect(screen.getByTestId('people-stack-set-aside').textContent).toMatch(/Dakota Socha.*left the company/);

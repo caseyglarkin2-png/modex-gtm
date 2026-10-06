@@ -14,6 +14,23 @@ export interface NextAction {
 const day = (s: string) => new Date(s).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' });
 const first = (name: string) => name.split(' ')[0];
 
+/**
+ * What Listen reads when the page carries a pursuit state: the same state line, NEXT and person the page shows (the
+ * trust review: Listen must never speak "Ready for a first touch" over a page that says "Opted out"). Never the
+ * private line; the rest of NOW follows as before.
+ */
+export function pursuitListenText(v: { name: string; listen: string; stateLine: string; unit: string | null }, s: PursuitState, nextText: string): string {
+  const head = `${v.name}. ${[...v.stateLine.split(' · ').slice(0, 2), s.stateLine].join('. ')}.`;
+  const inbound = s.lastInbound ? ` ${s.lastInbound.label}: ${s.lastInbound.who}.` : '';
+  // The person is spoken only when they are the next move (a first touch, a follow-up, the motion in flight, the
+  // person who replied); under an opt-out, a deal or a hold nobody is named as if they were next.
+  const speakWho = s.coldTouchAllowed || s.state === 'replied' || s.state === 'follow_up_due' || s.state === 'in_motion';
+  const who = speakWho && s.person ? ` Who: ${s.person.name}${s.person.title ? `, ${s.person.title}` : ''}${s.person.chosenBy ? `, chosen by ${s.person.chosenBy}` : ''}.` : s.state === 'choose_person' ? ' Who: choose one of the people on the page; GAP does not pick.' : '';
+  // Drop the old opening (name, state line, unit, NEXT, WHO) from the previous listen text; keep the rest (why now, our read, ask).
+  const rest = v.listen.replace(/^[\s\S]*?(?=Why now:|Current state|Our read:|Impact|Ask:|Relationship:|$)/, '').trim();
+  return `${head}${inbound} Next: ${nextText}${who}${rest ? ` ${rest}` : ''}`.replace(/\s+/g, ' ').trim();
+}
+
 export function nextFromPursuit(
   s: PursuitState,
   opts: { hypothesisId: string | null; accountSlugHref: (view: 'brief' | 'sources') => string; replyThreadHref: string | null; captureHref: string },

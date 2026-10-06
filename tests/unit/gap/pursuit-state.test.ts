@@ -167,3 +167,22 @@ describe('review fixes (UX-03 fresh review)', () => {
     expect(`${s.blocker} ${s.unlock}`).not.toMatch(/14 days|cools/);
   });
 });
+
+describe('the cockpit motion\'s own holds are read, never recomputed away (trust review blocker)', () => {
+  it('a paused_reply or in_conversation motion is REPLIED even when the reply list holds nothing untriaged', () => {
+    const paused = projectPursuitState(base({ accountName: 'Walmart Inc.', choice: { personaId: 1, by: 'casey@yardflow.ai', at: '2026-10-05T14:00:00Z', source: 'motion' }, motion: { state: 'paused_reply', primary: null, next: { personaId: 1, name: 'Doug Estrada', title: null, unlock: 'after the reply is triaged' }, headline: 'Paused: timothy.cooper@walmart.com at Walmart Inc. wrote in on 2026-10-05. Triage it in Replies before anyone there gets a cold email.' } }));
+    expect(paused.state).toBe('replied');
+    expect(paused.coldTouchAllowed).toBe(false);
+    expect(paused.chooseAllowed).toBe(false);
+    expect(paused.person?.name).toBe('timothy.cooper@walmart.com');
+    const conv = projectPursuitState(base({ motion: { state: 'in_conversation', primary: null, next: null, headline: 'In a conversation: dana@acmefoods.com answered (problem confirmed, 2026-10-04). No cold email to anyone else at Acme Foods; work it from that conversation.' } }));
+    expect(conv.state).toBe('replied');
+    expect(conv.person?.name).toBe('dana@acmefoods.com');
+  });
+  it('a needs_owner motion is CHOOSE PERSON unless a human already chose', () => {
+    const s = projectPursuitState(base({ motion: { state: 'needs_owner', primary: null, next: null, headline: 'No ready card is for a direct transportation operator.' }, eligible: [{ key: 'gap:1', personaId: 1, name: 'A', title: 'VP Transportation' }, { key: 'gap:2', personaId: 2, name: 'B', title: 'Director Transportation' }] }));
+    expect(s.state).toBe('choose_person');
+    const chosen = projectPursuitState(base({ motion: { state: 'needs_owner', primary: null, next: null, headline: 'x' }, choice: { personaId: 1, by: 'casey@yardflow.ai', at: '2026-10-05T14:00:00Z', source: 'motion' } }));
+    expect(chosen.state).toBe('ready');
+  });
+});

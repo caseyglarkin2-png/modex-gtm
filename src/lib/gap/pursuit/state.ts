@@ -173,6 +173,18 @@ export function projectPursuitState(i: PursuitInput): PursuitState {
     // out_of_office and bounce: noted on the inbound line, never a state of their own.
   }
 
+  // 1b. The cockpit's own motion already knows a conversation or an untriaged reply at the account (its readers see
+  // addresses the reply list may not): the same hold, never a surface that recomputes it away.
+  if (i.motion?.state === 'in_conversation' || i.motion?.state === 'paused_reply') {
+    const who = i.motion.headline.match(/^(?:In a conversation|Paused): (.+?) (?:answered|at )/)?.[1] ?? 'someone at the account';
+    return base('replied', {
+      person: { key: `reply:${who}`, personaId: null, name: who, title: null, chosenBy: null },
+      stateLine: `${STATE_LINE.replied}: ${who}`,
+      blocker: i.motion.headline,
+      unlock: i.motion.state === 'paused_reply' ? 'Read the reply and record what they said; the next person unlocks after that.' : 'Work it from that conversation; a cold email to anyone else here is your call, not the queue\'s.',
+    });
+  }
+
   // 2. Holds: a deal, unknown opportunity truth, a restriction, a family hold, an outstanding draft.
   if (i.motionType === 'IN_DEAL' || i.opportunity.status === 'OPEN' || i.opportunity.status === 'ACTIVE') {
     const d = i.opportunity.deals[0];
@@ -214,6 +226,16 @@ export function projectPursuitState(i: PursuitInput): PursuitState {
   }
 
   // 4. The motion in flight.
+  if (i.motion?.state === 'needs_owner' && !chosen) {
+    return base('choose_person', {
+      person: null,
+      stateLine: `${STATE_LINE.choose_person}${i.eligible.length ? ` (${i.eligible.length} eligible)` : ''}`,
+      coldTouchAllowed: i.eligible.length > 0,
+      chooseAllowed: true,
+      blocker: i.eligible.length ? null : i.motion.headline,
+      unlock: 'Choose one person; the first touch is prepared for them.',
+    });
+  }
   if (i.motion?.state === 'in_motion' && i.motion.primary) {
     return base('in_motion', {
       person: { key: `persona:${i.motion.primary.personaId}`, personaId: i.motion.primary.personaId, name: i.motion.primary.name, title: i.motion.primary.title, chosenBy: null },
