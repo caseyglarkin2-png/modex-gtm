@@ -43,7 +43,8 @@ import { remitCaution } from '@/lib/gap/story/anchor-text';
 import { DoneNext } from '@/components/gap/done-next';
 import { AskGap } from '@/components/gap/ask-gap';
 import { compactContext, rememberAskContext } from '@/lib/gap/ask/grounding';
-import { readPursuitSummaries, rememberPursuitSummary, type PursuitSummary } from '@/lib/gap/pursuit/summary';
+import { loadPursuitSummaries, PURSUIT_SUMMARY_SHELL_MAX_MS, rememberPursuitSummary, type PursuitSummary } from '@/lib/gap/pursuit/summary';
+import { actionableFromPursuit } from '@/lib/gap/pursuit/actionable';
 import { agoText as readAgo } from '@/lib/gap/work/cache';
 import { Suspense } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -109,7 +110,8 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
   const q = (await searchParams) ?? {};
   const now = new Date();
   const name = await quickAccountName(slug, q.name);
-  const quick = name ? (readPursuitSummaries([name], now).get(name) ?? null) : null;
+  // R15: the last known state from memory or the durable row (up to a day old, labeled with its age).
+  const quick = name ? ((await loadPursuitSummaries(prisma, [name], now, PURSUIT_SUMMARY_SHELL_MAX_MS)).get(name) ?? null) : null;
   return (
     <Suspense fallback={<AccountShell name={name} quick={quick} now={now} />}>
       <AccountBody slug={slug} q={q} email={session.user.email} now={now} />
@@ -274,7 +276,10 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
     // never carries the private line, the do-not-use list, an address, a URL or a machine word. The older screen-read
     // text stays only when the pursuit read failed.
     // UX-08 parity: the Work card says what this page says, NEXT included (process memory, nothing written).
-    if (pursuit) rememberPursuitSummary(pursuit.state, now, pursuitNext?.text ?? null);
+    // R10: ONE actionable result (intent, the allowed action, preparation, completion) derived here and remembered
+    // durably (R15), so Work's card and this page say the same move.
+    const actionable = pursuit && pursuitNext ? actionableFromPursuit(pursuit.state, pursuitNext, { hypothesisId: pursuit.hypothesisId, usableTheses: pursuit.usableTheses, pendingProposals: anchor?.pending.length ?? 0, incompleteProposals: anchor?.pending.filter((x) => !x.familyKnown).length ?? 0 }) : null;
+    if (pursuit) rememberPursuitSummary(pursuit.state, now, pursuitNext?.text ?? null, { prisma, actionable });
     // UX-13: Ask GAP answers over exactly these projections; remembered here so a question costs the model, not the read.
     if (pursuit && pursuitNext) rememberAskContext(compactContext({ accountName: brief.accountName, state: pursuit.state, nextText: pursuitNext.text, story: storyShown, anchor, stack: pursuit.stack, buyerSaid: inputs.bids.map((b) => ({ text: b.summary, who: b.who ?? null, at: b.at ?? null })) }), now);
     const listen = pursuit && pursuitNext
@@ -295,7 +300,7 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
           links={links}
           mailbox={process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() || null}
           pursuit={pursuit ? { state: pursuit.state, stack: pursuit.stack, hypothesisId: pursuit.hypothesisId, excluded, story: storyShown, anchor } : null}
-          doneNext={q.from === 'work' ? <DoneNext slug={slug} index={/^\d+$/.test(q.i ?? '') ? Number(q.i) : null} /> : null}
+          doneNext={q.from === 'work' ? <DoneNext slug={slug} index={/^\d+$/.test(q.i ?? '') ? Number(q.i) : null} accountName={brief.accountName} /> : null}
           askGap={pursuit ? <AskGap accountName={brief.accountName} /> : null}
         />
       </div>

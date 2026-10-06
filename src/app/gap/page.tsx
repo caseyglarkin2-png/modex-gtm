@@ -43,8 +43,9 @@ import { Breadcrumb } from '@/components/breadcrumb';
 import { GapSubnav } from '@/components/gap/gap-subnav';
 import { GapCockpit, NextUp, type CockpitLane } from '@/components/gap/gap-cockpit';
 import { buildNextUpCandidates, heldAccountsOf, pickNextUpV2 } from '@/lib/gap/routing/next-up';
-import { buildWorkList, type WorkCard, type WorkInput } from '@/lib/gap/work/list';
-import { readPursuitSummaries, warmPursuitSummaries } from '@/lib/gap/pursuit/summary';
+import { buildWorkList, snoozedWork, type WorkCard, type WorkInput } from '@/lib/gap/work/list';
+import { loadWorkOutcomes } from '@/lib/gap/work/outcome';
+import { loadPursuitSummaries, warmPursuitSummaries } from '@/lib/gap/pursuit/summary';
 import { loadSendableTheses } from '@/lib/gap/pursuit/load';
 import { loadMotionChoices } from '@/lib/gap/motion/load';
 import { agoText as readAgo, cachedRead } from '@/lib/gap/work/cache';
@@ -371,7 +372,11 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
   const read = await cachedRead('cockpit', loadCockpit, { fresh });
   const data = read.value;
   const now = new Date();
-  const work: WorkCard[] = buildWorkList({ ...data.workInput, now, summaries: readPursuitSummaries(data.workAccounts, now) });
+  // R15: the summaries come from this instance's memory, then the durable rows (one read), so a cold instance says
+  // what the last workspace read said instead of falling back to the lanes.
+  const [summaries, outcomes] = await Promise.all([loadPursuitSummaries(prisma, data.workAccounts, now), loadWorkOutcomes(prisma, data.workAccounts, now).catch(() => new Map())]);
+  const work: WorkCard[] = buildWorkList({ ...data.workInput, now, summaries, outcomes });
+  const snoozed = snoozedWork(outcomes, work, now);
   // UX-08 parity: after the response is sent, read the canonical pursuit state for the first few Work accounts
   // that have none remembered (serial, bounded, never blocking a render), so the next Work load says what the
   // workspace says.
@@ -434,7 +439,7 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
       ) : (
         <>
           {/* UX-08: WORK is the landing: the accounts that need the seller, one card each, the lanes as filters. */}
-          <WorkList cards={work} focus={/^[a-z0-9-]{1,120}$/.test(params.focus ?? '') ? (params.focus as string) : null} listenText={todayListenText(work)} readAt={{ at: read.at, label: read.fromCache ? `Read ${readAgo(read.at, now)}` : 'Read just now' }} />
+          <WorkList cards={work} snoozed={snoozed} focus={/^[a-z0-9-]{1,120}$/.test(params.focus ?? '') ? (params.focus as string) : null} listenText={todayListenText(work)} readAt={{ at: read.at, label: read.fromCache ? `Read ${readAgo(read.at, now)}` : 'Read just now' }} />
           {work.length === 0 ? <NextUp items={data.next} /> : null}
         </>
       )}

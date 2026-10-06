@@ -23,6 +23,7 @@ import { classifyReply, type ReplyClassKind } from '../replies/classify';
 import { LANE_RANK, type NextCandidate } from '../routing/next-up';
 import type { PursuitSummary } from '../pursuit/summary';
 import type { PursuitStateKind } from '../pursuit/state';
+import { outcomeLine, type WorkOutcome } from './outcome';
 import type { CockpitLane } from '@/components/gap/gap-cockpit';
 
 export type WorkStateKind = 'replied' | 'opted_out' | 'bounced' | 'follow_up' | 'ready' | 'decide' | 'research' | 'in_deal' | 'unknown_deal' | 'held';
@@ -42,6 +43,10 @@ export interface WorkCard {
   /** The next action and where it runs; null when the only move is to open the account. */
   next: { label: string; href: string } | null;
   blocker: string | null;
+  /** R10: how far GAP prepared the move, when the workspace said (ready, under_review, incomplete, none). */
+  preparation?: 'ready' | 'under_review' | 'incomplete' | 'none' | null;
+  /** R14: the seller's recorded outcome on this account, when it still holds (skipped today, logged outside GAP). */
+  outcome?: { kind: WorkOutcome['kind']; line: string; until: string } | null;
   /** Position in the Work order (0-based), frozen into the href. */
   index: number;
   /** Where the state came from: the canonical pursuit read (fresh), or the cockpit's lanes. */
@@ -69,6 +74,12 @@ export interface WorkInput {
    * card with no usable thesis is research (nothing to open on), never "choose who".
    */
   dbState?: ReadonlyMap<string, { sendable: boolean; chosen: { name: string; title: string | null } | null }>;
+  /**
+   * R14: what the seller recorded on an account (work/outcome.ts): a snoozed account leaves Work until its date
+   * (listed under `snoozed`); a skipped or logged-outside-GAP account drops to the end for today with its line. A
+   * reply or an opt-out is never hidden by an outcome: the buyer's own move outranks the seller's note.
+   */
+  outcomes?: ReadonlyMap<string, WorkOutcome>;
 }
 
 const STATE_TEXT: Record<WorkStateKind, string> = {
@@ -255,7 +266,9 @@ export function buildWorkList(i: WorkInput): WorkCard[] {
     if ((have.card.stateKind === 'replied' || have.card.stateKind === 'opted_out') && s.state !== 'replied' && s.state !== 'opted_out') continue;
     if (holdCard && !summaryHolds) continue;
     const kind = PURSUIT_KIND[s.state];
-    const action = pursuitAction(s.state, name, s.stateLine);
+    // R10: the workspace's own allowed action (the actionable result) is the card's action; the lane mapping only
+    // when the summary predates it. A proposal under review opens the page at the proposal.
+    const action = s.actionable?.allowed ? { label: s.actionable.allowed.label, href: /^#/.test(s.actionable.allowed.href) ? `${accountHref(name)}${s.actionable.allowed.href}` : s.actionable.allowed.href } : pursuitAction(s.state, name, s.stateLine);
     best.set(name, {
       rank: PURSUIT_RANK[s.state],
       sortKey: have.sortKey,
@@ -271,11 +284,31 @@ export function buildWorkList(i: WorkInput): WorkCard[] {
         // The blocker is said once: never the same sentence as the why.
         blocker: (s.state === 'held' || s.state === 'in_deal' || s.state === 'replied' || s.state === 'opted_out') && (s.blocker ?? have.card.blocker) !== (s.nextText ?? s.blocker ?? have.card.why) ? (s.blocker ?? have.card.blocker) : null,
         next: action,
+        preparation: s.actionable?.preparation ?? null,
       },
     });
   }
+  // R14: the seller's recorded outcomes. A snoozed account leaves the list; a skipped or logged one drops to the end
+  // for today with its line. The buyer's own move (a reply, an opt-out) is never hidden by a seller note.
+  const OUTCOME_RANK = LANE_RANK.research + 1;
+  for (const [name, o] of i.outcomes ?? []) {
+    const have = best.get(name);
+    if (!have) continue;
+    if (have.card.stateKind === 'replied' || have.card.stateKind === 'opted_out') continue;
+    if (o.kind === 'snoozed') {
+      best.delete(name);
+      continue;
+    }
+    best.set(name, { ...have, rank: Math.max(have.rank, OUTCOME_RANK), card: { ...have.card, outcome: { kind: o.kind, line: outcomeLine(o, i.now), until: o.until } } });
+  }
   const ordered = [...best.values()].sort((a, b) => a.rank - b.rank || cmpKeys(a.sortKey, b.sortKey) || a.card.accountName.localeCompare(b.card.accountName));
   return ordered.map((r, index) => ({ ...r.card, index, source: r.source ?? 'cockpit', href: `${accountHref(r.card.accountName)}?from=work&i=${index}` }));
+}
+
+/** R14: the accounts snoozed out of Work, with their lines, for the list's footer. */
+export function snoozedWork(outcomes: ReadonlyMap<string, WorkOutcome> | undefined, cards: readonly WorkCard[], now: Date): Array<{ accountName: string; line: string; until: string }> {
+  const shown = new Set(cards.map((c) => c.accountName));
+  return [...(outcomes ?? []).values()].filter((o) => o.kind === 'snoozed' && !shown.has(o.accountName)).sort((a, b) => a.until.localeCompare(b.until)).map((o) => ({ accountName: o.accountName, line: outcomeLine(o, now), until: o.until }));
 }
 
 export type WorkFilter = 'all' | CockpitLane;
