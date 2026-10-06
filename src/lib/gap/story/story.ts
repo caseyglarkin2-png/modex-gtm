@@ -157,6 +157,7 @@ function fromLine(l: NowLine, accountName: string): StorySentence {
   if (tag === 'Checked' && BROKEN_MONEY.test(text)) {
     tag = 'Unverified';
     basis = `${basis}; the dollar figure does not parse, check the source before using it`;
+    text = text.replace(/\$\s?\d{1,3}(?:\.\d+)?(?=\s)/, '[figure unverified]');
   }
   return { text, tag, basis, basisIds: [l.id], cite: tag === 'Unverified' ? null : l.cite };
 }

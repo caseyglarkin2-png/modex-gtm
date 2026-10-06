@@ -252,8 +252,17 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
               {head(row)}
               <p id={`reason-${row.key}`} className="mt-0.5 text-sm" data-testid="people-stack-reason">{row.reason}</p>
               {row.leadOver ? (
-                <p className={`mt-0.5 text-xs ${row.leadOver.tie ? 'text-[var(--muted-foreground)]' : ''}`} data-testid="people-stack-lead-over" data-tie={row.leadOver.tie ? 'true' : 'false'}>
-                  <span className="font-semibold">Why {row.name.split(' ')[0]} over {row.leadOver.over.split(' ')[0]}?</span> {row.leadOver.text}
+                <p className={`mt-0.5 text-xs ${row.leadOver.tie || !row.leadOver.leads ? 'text-[var(--muted-foreground)]' : ''}`} data-testid="people-stack-lead-over" data-tie={row.leadOver.tie ? 'true' : 'false'} data-leads={row.leadOver.leads ? 'true' : 'false'}>
+                  {row.chosenBy && !/^GAP:/.test(row.chosenBy) ? (
+                    <>
+                      <span className="font-semibold">You chose {row.name.split(' ')[0]} ({row.chosenBy}).</span>{' '}
+                      {row.leadOver.tie ? `On evidence GAP cannot separate ${row.name.split(' ')[0]} and ${row.leadOver.over.split(' ')[0]}.` : row.leadOver.leads ? `On evidence ${row.name.split(' ')[0]} also leads ${row.leadOver.over.split(' ')[0]}: ${row.leadOver.text}` : `On evidence GAP ranks ${row.leadOver.over.split(' ')[0]} ahead: ${row.leadOver.text}`}
+                    </>
+                  ) : (
+                    <>
+                      <span className="font-semibold">Why {row.name.split(' ')[0]} over {row.leadOver.over.split(' ')[0]}?</span> {row.leadOver.text}
+                    </>
+                  )}
                 </p>
               ) : null}
               {row.currentness ? (

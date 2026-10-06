@@ -34,7 +34,7 @@ export const OBSERVATION_REFUSAL_TEXT: Record<Extract<ObservationValidation, { o
 };
 
 const SMALL_WORDS = new Set(['a', 'an', 'the', 'of', 'to', 'in', 'on', 'at', 'for', 'and', 'or', 'with', 'by', 'as', 'its', 'from', 'into', 'over', 'vs', 'after', 'before']);
-const PAST_OR_PRESENT_VERB = /\b(?:is|are|was|were|has|have|had|will|announced|completed|opened|opens|opening|closed|closes|closing|plans|planned|planning|said|says|began|begins|started|starts|signed|signs|acquired|acquires|sold|sells|invested|invests|investing|expanded|expands|expanding|moved|moves|moving|launched|launches|launching|built|builds|building|cut|cuts|cutting|added|adds|adding|reported|reports|filed|files|agreed|agrees|committed|commits|hired|hires|hiring|consolidat(?:ed|es|ing)|redesign(?:ed|s|ing)|roll(?:ed|s|ing) out|broke ground|breaks ground)\b/i;
+const PAST_OR_PRESENT_VERB = /\b(?:is|are|was|were|has|have|had|will|owns?|operates?|runs?|uses?|includes?|employs?|serves?|holds?|now|announced|completed|opened|opens|opening|closed|closes|closing|plans|planned|planning|said|says|began|begins|started|starts|signed|signs|acquired|acquires|sold|sells|invested|invests|investing|expanded|expands|expanding|moved|moves|moving|launched|launches|launching|built|builds|building|cut|cuts|cutting|added|adds|adding|reported|reports|filed|files|agreed|agrees|committed|commits|hired|hires|hiring|consolidat(?:ed|es|ing)|redesign(?:ed|s|ing)|roll(?:ed|s|ing) out|broke ground|breaks ground)\b/i;
 
 /**
  * UX-06: a TITLE-SHAPED observation (a pasted headline such as "FedEx Completes Sale of FedEx Supply Chain to CMA CGM
@@ -52,9 +52,8 @@ export function titleShapedReason(observation: string): string | null {
     const meaningful = words.filter((w, k) => k === 0 || !SMALL_WORDS.has(w.toLowerCase()));
     const capitalised = meaningful.filter((w) => /^[A-Z]/.test(w) || /^[A-Z0-9&.$-]+$/.test(w)).length;
     const titleCase = capitalised / meaningful.length >= 0.8;
-    const endsAsSentence = /[.!?]$/.test(s);
     const hasVerb = PAST_OR_PRESENT_VERB.test(s);
-    if (titleCase && !endsAsSentence && !hasVerb) return `"${s.slice(0, 80)}${s.length > 80 ? '...' : ''}" reads like a headline, not a sentence about what changed`;
+    // A nudge, not the gate: the reviewer is the semantic check. Title Case with no ordinary verb is a headline.
     if (titleCase && !hasVerb) return `"${s.slice(0, 80)}${s.length > 80 ? '...' : ''}" reads like a headline, not a sentence about what changed`;
   }
   return null;

@@ -82,7 +82,6 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
   const choice = choices.get(accountName) ?? null;
   const od = inputs.firstTouches.find((t) => t.state === 'draft outstanding') ?? null;
   const restriction = ctx.relationship.restriction;
-  const top = brief.hypotheses.find((h) => h.grounded && h.truth !== 'CONTRADICTED') ?? null;
 
   const input: PursuitInput = {
     accountName,
@@ -118,9 +117,13 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
   const anchorChoice: string | null = state.person?.personaId ? (anchors.get(state.person.personaId)?.hypothesisId ?? null) : null;
   const openStatuses = new Set(['approved', 'active', 'confirmed', 'partially_confirmed']);
   const anchored = anchorChoice ? brief.hypotheses.find((h) => h.id === anchorChoice && h.grounded && h.truth !== 'CONTRADICTED') ?? null : null;
-  const anchoredOpen = anchored && openStatuses.has(inputs.hypotheses.find((h) => h.id === anchored.id)?.status ?? '') ? anchored : null;
   const sendableTheses = await soft(loadSendableTheses(prisma, accountName, now), null);
-  return { state, resolution, stack, hypothesisId: anchoredOpen?.id ?? top?.id ?? null, anchorChoice, sendableTheses, ready: readyTargetOf(mine) };
+  // The pack opens on a USABLE thesis only (open, grounded, not under review, and one the send gate would let out),
+  // the same set the anchor block shows; the recorded choice wins when it is usable. An unread gate opens nothing.
+  const usable = (h: (typeof brief.hypotheses)[number] | null) => !!h && !!sendableTheses && sendableTheses.has(h.id) && h.needsReview.length === 0 && openStatuses.has(inputs.hypotheses.find((x) => x.id === h.id)?.status ?? '');
+  const anchoredOpen = usable(anchored) ? anchored : null;
+  const topUsable = brief.hypotheses.find((h) => h.grounded && h.truth !== 'CONTRADICTED' && usable(h)) ?? null;
+  return { state, resolution, stack, hypothesisId: anchoredOpen?.id ?? topUsable?.id ?? null, anchorChoice, sendableTheses, ready: readyTargetOf(mine) };
 }
 
 /** UX-06: the account's open theses whose opening the send gate would let out (the pack's own rule over the linked signals). */

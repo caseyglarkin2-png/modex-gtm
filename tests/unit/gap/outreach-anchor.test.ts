@@ -10,7 +10,7 @@ import { projectEngagement, projectRelationship, type AccountContext } from '@/l
 import { projectNow } from '@/lib/gap/context/now';
 import { projectPursuitState } from '@/lib/gap/pursuit/state';
 import { projectStory } from '@/lib/gap/story/story';
-import { BEST_PROOF_MEASURED, projectAnchor } from '@/lib/gap/story/anchor';
+import { BEST_PROOF_MEASURED, projectAnchor, storyBesideAnchor } from '@/lib/gap/story/anchor';
 import { OBSERVATION_REFUSAL_TEXT, titleShapedReason, validateObservation } from '@/lib/gap/hypothesis/observation';
 import { leadOver, rankDimensionNames, resolveOwner, type OwnerCandidateInput } from '@/lib/gap/people/owner-resolution';
 import { buildPeopleStack } from '@/lib/gap/people/stack';
@@ -81,6 +81,13 @@ describe('the outreach anchor (Option A)', () => {
     expect(anchor.whyTheyCare?.text).toMatch(/^Karen /);
     const cfo = anchorFor(inputs({ personas: [{ id: 9, name: 'Pat Finance', title: 'Chief Financial Officer', doNotContact: false, hasEmail: true, emailStatus: 'valid' }] }), 9).anchor;
     expect(cfo.whyTheyCare?.text).toMatch(/ask who owns it/);
+    expect(cfo.primaryBy).toBe('the highest-ranked usable thesis');
+    // With an eligible person the fact lands on, the read names them (the caution travels to NEXT).
+    const i9 = inputs({ personas: [{ id: 9, name: 'Pat Finance', title: 'Chief Financial Officer', doNotContact: false, hasEmail: true, emailStatus: 'valid' }, ...personas] });
+    const brief9 = buildAccountBrief(i9, NOW);
+    const fits = projectAnchor({ accountName: 'PepsiCo', person: { personaId: 9, name: 'Pat Finance', title: 'Chief Financial Officer' }, people: i9.personas.map((p) => ({ personaId: p.id, name: p.name, title: p.title })), brief: brief9, inputs: i9, story: { rows: [] }, anchorChoice: null, privateLine: null, sendable: new Set(['h-denver', 'h-gatik']), now: NOW });
+    expect(fits.fitsBetter?.name).toBe('Karen Darling');
+    expect(fits.whyTheyCare?.text).toMatch(/Karen Darling \(Senior Director - PBNA Transportation\) fits it/);
   });
   it('nothing private, unverified, modeled or imagery-sourced can be the anchor or the supporting fact; each is named under DO NOT USE', () => {
     const { anchor, story } = anchorFor(inputs(), 1);
@@ -128,13 +135,25 @@ describe('the outreach anchor (Option A)', () => {
     expect(unread.primary).toBeNull();
     expect(unread.alternatives.every((t) => !t.usable && /could not be read/.test(t.unusableWhy ?? ''))).toBe(true);
   });
+  it('the story is told once beside the anchor: the anchor\'s own sentence becomes a pointer, never a repeat', () => {
+    const { anchor, story } = anchorFor(inputs(), 1);
+    const before = story.rows.find((r) => r.key === 'changing')!;
+    expect(before.sentences.some((s) => /Denver/.test(s.text))).toBe(true);
+    const shown = storyBesideAnchor(story, anchor);
+    const changing = shown.rows.find((r) => r.key === 'changing')!;
+    expect(changing.sentences[0].text).toBe('The opening story, above.');
+    expect(shown.rows.flatMap((r) => r.sentences).filter((s) => /Denver/.test(s.text))).toHaveLength(0);
+    expect(storyBesideAnchor(story, null)).toBe(story);
+  });
   it('a thesis that needs review is not usable; draftable stories about the same deal are one entry', () => {
     const i = inputs();
     const brief = buildAccountBrief(i, NOW);
     const review = { ...brief, hypotheses: brief.hypotheses.map((h) => (h.id === 'h-denver' ? { ...h, needsReview: ['the fact it opens on expired'] } : h)) };
     const a = projectAnchor({ accountName: 'PepsiCo', person: { personaId: 1, name: 'Karen Darling', title: 'Senior Director - PBNA Transportation' }, brief: review, inputs: i, story: { rows: [] }, anchorChoice: null, privateLine: null, sendable: new Set(['h-denver', 'h-gatik']), now: NOW });
     expect(a.primary?.hypothesisId).toBe('h-gatik');
-    expect(a.alternatives.find((t) => t.hypothesisId === 'h-denver')?.unusableWhy).toMatch(/needs your review/);
+    expect(a.alternatives.find((t) => t.hypothesisId === 'h-denver')?.unusableWhy).toMatch(/^the angle needs your review: the fact it opens on expired$/);
+    // A fact an existing thesis (any live status) is grounded on is never offered as a new draft.
+    expect(a.draftable.some((d) => d.factId === 'f-denver')).toBe(false);
     const twice = { rows: [{ key: 'changing' as const, label: 'x', tag: 'Checked' as const, collapsed: false, wrongIf: null, sentences: [
       { text: 'PepsiCo and Gatik announced a multi-year partnership for autonomous freight.', tag: 'Checked' as const, basis: 'pepsico.com', basisIds: ['evidence:f-gatik'], cite: 'OK to cite to the buyer' as const },
       { text: 'Gatik moves freight for PepsiCo under a new multi-year agreement.', tag: 'Checked' as const, basis: 'freightwaves.com', basisIds: ['evidence:f-gatik2'], cite: 'OK to cite to the buyer' as const },
@@ -148,7 +167,7 @@ describe('the outreach anchor (Option A)', () => {
     const none = anchorFor(inputs(), null).anchor;
     expect(none.person).toBeNull();
     expect(none.whyTheyCare).toBeNull();
-    expect(none.primaryBy).toBe('the top grounded thesis');
+    expect(none.primaryBy).toBe('the highest-ranked usable thesis');
     const bare = anchorFor(inputs({ hypotheses: [hypDraft] }), 1).anchor;
     expect(bare.primary).toBeNull();
     expect(bare.alternatives).toHaveLength(0);
@@ -162,6 +181,8 @@ describe('the title-shaped observation rule', () => {
     expect(titleShapedReason('FedEx completed the sale of FedEx Supply Chain to CMA CGM on October 1 [S:a].')).toBeNull();
     expect(titleShapedReason('PepsiCo and Gatik announced a multi-year strategic partnership to bring autonomous freight into the PepsiCo North America supply chain [S:a].')).toBeNull();
     expect(titleShapedReason('Walmart is accelerating a broad overhaul of its U.S. distribution network [S:a].')).toBeNull();
+    // An honest Title Case sentence with an ordinary verb passes; a bare headline with a verb is the reviewer's call.
+    expect(titleShapedReason('CMA CGM Group Now Owns FedEx Supply Chain [S:a].')).toBeNull();
     expect(validateObservation('FedEx Completes Sale of FedEx Supply Chain to CMA CGM Group [S:a].', ['a'])).toEqual({ ok: false, reason: 'title_shaped_observation' });
     expect(validateObservation('FedEx completed the sale of FedEx Supply Chain to CMA CGM on October 1 [S:a].', ['a']).ok).toBe(true);
     expect(validateObservation('They opened a second DC in Ohio [S:S1]. Trailer counts doubled [S:S2].', ['S1', 'S2']).ok).toBe(true);
@@ -185,7 +206,14 @@ describe('why #1 over #2 from the rank keys', () => {
     const tie = resolveOwner({ account: { name: 'Walmart Inc.', entityType: 'retailer' }, purpose: 'COLD_FIRST_TOUCH', hypothesis: null, candidates: [gap(1, 'Doug Estrada', 'Regional Transportation Director'), gap(2, 'Kelly Kruse', 'Regional Transportation Director')], hubspot: { read: true, count: 2, truncated: false, via: 'linked' }, now: NOW });
     expect(leadOver(tie.eligible[0], tie.eligible[1], 'COLD_FIRST_TOUCH')).toBeNull();
     const stack = buildPeopleStack(tie, { chosenKey: null });
-    expect(stack.rows[0].leadOver).toEqual({ over: expect.any(String), text: 'GAP cannot separate these two on current evidence.', tie: true });
+    expect(stack.rows[0].leadOver).toEqual({ over: expect.any(String), text: 'GAP cannot separate these two on current evidence.', tie: true, leads: false });
+    // The seller's choice of the lower-ranked person is said as what it is, never as a tie.
+    const behind = leadOver(r.eligible[1], r.eligible[0], 'COLD_FIRST_TOUCH');
+    expect(behind?.leads).toBe(false);
+    expect(behind?.text).toMatch(/^Glen/);
+    const chosePat = buildPeopleStack(r, { chosenKey: r.eligible[1].key, chosenBy: 'you, Oct 5' });
+    expect(chosePat.rows[0].name).toBe('Pat Ops');
+    expect(chosePat.rows[0].leadOver).toMatchObject({ over: 'Glen Chaffee', tie: false, leads: false });
     const led = buildPeopleStack(r, { chosenKey: 'gap:7', chosenBy: 'you' });
     expect(led.rows[0].leadOver?.tie).toBe(false);
     expect(led.rows[0].leadOver?.over).toBe('Pat Ops');

@@ -30,5 +30,13 @@ export async function callPursuit(prisma: PrismaLike, accountName: string, now: 
     const p = await loadPursuit(prisma, { brief, inputs, ctx, now });
     return { state: p.state.state, stateLine: p.state.stateLine, blocker: p.state.blocker, holdsCall: CALL_HOLD_STATES.has(p.state.state) };
   })();
-  return Promise.race([read, new Promise<null>((r) => setTimeout(() => r(null), timeoutMs))]).catch(() => null);
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const cap = new Promise<null>((r) => {
+    timer = setTimeout(() => r(null), timeoutMs);
+  });
+  return Promise.race([read, cap])
+    .catch(() => null)
+    .finally(() => {
+      if (timer) clearTimeout(timer);
+    });
 }

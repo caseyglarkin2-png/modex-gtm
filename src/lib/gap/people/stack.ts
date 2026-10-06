@@ -40,7 +40,7 @@ export interface StackRow {
    * UX-06, on the chosen (or first) row only: why this person over the next one, from the resolver's own rank keys
    * ("Why Glen over Jeffrey?"); "GAP cannot separate these two on current evidence." on a tie; null when alone.
    */
-  leadOver: { over: string; text: string; tie: boolean } | null;
+  leadOver: { over: string; text: string; tie: boolean; /** false when the seller chose a lower-ranked person: GAP ranks the other ahead. */ leads: boolean } | null;
   /** The seller's current choice, read from the pursuit state (never a preselection by the stack). */
   chosen: boolean;
   chosenBy: string | null;
@@ -258,7 +258,9 @@ export function buildPeopleStack(r: OwnerResolution, opts: { chosenKey: string |
   // rows share a key). Any tie among them removes every ordinal: a "1" above unnumbered rows claims an order.
   const tie = visible.length >= 2 && visible.some((c, i, a) => i > 0 && sameKey(a[i - 1].rank, c.rank));
   const tiedKey = tie ? visible.find((c, i, a) => i > 0 && sameKey(a[i - 1].rank, c.rank))!.rank : null;
-  const tied = tiedKey ? eligible.filter((c) => sameKey(c.rank, tiedKey)) : [];
+  // The tie line names the people on screen first (General Mills named a hidden person while a visible one was tied).
+  const tiedAll = tiedKey ? eligible.filter((c) => sameKey(c.rank, tiedKey)) : [];
+  const tied = [...tiedAll.filter((c) => visibleKeys.has(c.key)), ...tiedAll.filter((c) => !visibleKeys.has(c.key))];
   const reasons = distinguish(visible);
   const rows = visible.map((c, i) => {
     const evidenceBacked = !tie && !chosenKey;
@@ -267,7 +269,7 @@ export function buildPeopleStack(r: OwnerResolution, opts: { chosenKey: string |
   // WHY #1 OVER #2: on the first row, against the next visible eligible row, from the rank keys; never invented.
   if (rows.length >= 2 && visible[0] && visible[1]) {
     const lead = leadOver(visible[0], visible[1], r.purpose);
-    rows[0].leadOver = lead ? { over: visible[1].name, text: lead.text, tie: false } : { over: visible[1].name, text: 'GAP cannot separate these two on current evidence.', tie: true };
+    rows[0].leadOver = lead ? { over: visible[1].name, text: lead.text, tie: false, leads: lead.leads } : { over: visible[1].name, text: 'GAP cannot separate these two on current evidence.', tie: true, leads: false };
   }
   const moreReasons = distinguish(rest);
   const more = rest.map((c, i) => toRow(c, r, moreReasons[i], null, { key: chosenKey, by: chosenBy }));

@@ -26,15 +26,16 @@ import { projectPursuitState } from '@/lib/gap/pursuit/state';
 const NOW = new Date('2026-10-06T12:00:00Z');
 const anchor: OutreachAnchor = {
   person: { personaId: 1, name: 'Karen Darling', title: 'Senior Director - PBNA Transportation' },
-  primary: { hypothesisId: 'h-denver', status: 'approved', observation: 'PepsiCo is building a 1.2 million square foot distribution center in Denver, opening in 2027.', factIds: ['f-denver'], basis: 'news.example, Sep 20, 2026', relevance: { tier: 'direct', why: 'runs transportation: the fact is a site opening' }, problem: 'My guess is that a new DC opens on the old yard habits.', usable: true, unusableWhy: null },
+  primary: { hypothesisId: 'h-denver', status: 'approved', observation: 'PepsiCo is building a 1.2 million square foot distribution center in Denver, opening in 2027.', factIds: ['f-denver'], basis: 'news.example, Sep 20, 2026', relevance: { tier: 'direct', why: 'runs transportation: the fact is a site opening' }, factLabel: 'a site opening or expansion', problem: 'My guess is that a new DC opens on the old yard habits.', usable: true, unusableWhy: null },
   primaryBy: 'their remit',
+  fitsBetter: null,
   whyTheyCare: { text: 'Karen runs transportation: the fact is a site opening.', tag: 'Our read' },
   supporting: { text: 'PepsiCo and Gatik announced a multi-year partnership.', tag: 'Checked', basis: 'pepsico.com, Aug 25, 2026', basisIds: ['evidence:f-gatik'], cite: 'OK to cite to the buyer' },
   bestProof: { text: BEST_PROOF_MEASURED, tag: 'Our proof, measured' },
   doNotUse: [{ text: 'Their visits to our pages and ROI reads', reason: 'private engagement: interest, never a reason to write' }, { text: 'PepsiCo said to weigh sale of Quaker Foods unit.', reason: 'unverified: a third party said it and nobody checked' }],
   alternatives: [
-    { hypothesisId: 'h-gatik', status: 'active', observation: 'PepsiCo and Gatik announced a multi-year partnership.', factIds: ['f-gatik'], basis: 'pepsico.com, Aug 25, 2026', relevance: { tier: 'related', why: 'runs transportation, adjacent to an automation change' }, problem: 'My guess is that autonomous linehaul lands trailers on a schedule.', usable: true, unusableWhy: null },
-    { hypothesisId: 'h-brazil', status: 'active', observation: 'General Mills entered into an agreement to sell its business in Brazil.', factIds: ['f-brazil'], basis: 'sec.gov, Sep 23, 2026', relevance: { tier: 'none', why: 'runs transportation, which the fact does not touch' }, problem: 'My guess is that...', usable: false, unusableWhy: 'its observation is a keyword hit or not a verified outreach fact; the send gate would refuse the opening' },
+    { hypothesisId: 'h-gatik', status: 'active', observation: 'PepsiCo and Gatik announced a multi-year partnership.', factIds: ['f-gatik'], basis: 'pepsico.com, Aug 25, 2026', relevance: { tier: 'related', why: 'runs transportation, adjacent to an automation change' }, factLabel: 'an automation or technology change', problem: 'My guess is that autonomous linehaul lands trailers on a schedule.', usable: true, unusableWhy: null },
+    { hypothesisId: 'h-brazil', status: 'active', observation: 'General Mills entered into an agreement to sell its business in Brazil.', factIds: ['f-brazil'], basis: 'sec.gov, Sep 23, 2026', relevance: { tier: 'none', why: 'runs transportation, which the fact does not touch' }, factLabel: 'a divestiture', problem: 'My guess is that...', usable: false, unusableWhy: 'the angle needs your review: it opens on activity outside the North America network' },
   ],
   draftable: [{ story: 'PepsiCo is ceasing operations at a bottling plant in Maryland.', sourceLabel: 'fooddive.com, Sep 16, 2026', sourceUrl: 'https://fooddive.com/x', factId: 'f-plant', proposedObservation: 'fooddive.com: "PepsiCo is ceasing operations at a bottling plant in Maryland" [S:f-plant].' }],
 };
@@ -48,12 +49,14 @@ describe('the outreach anchor block', () => {
   it('shows the primary anchor and why they care in the open; the supporting fact, BEST PROOF (ours) and DO NOT USE sit behind one disclosure; an unusable thesis has no Use button', () => {
     render(<OutreachAnchorView accountName="PepsiCo" anchor={anchor} coldTouchAllowed />);
     expect(screen.getByTestId('anchor-primary')).toHaveAttribute('data-hypothesis', 'h-denver');
-    expect(screen.getByTestId('anchor-primary').textContent).toMatch(/Denver.*chosen by their remit/s);
+    expect(screen.getByTestId('anchor-primary').textContent).toMatch(/Denver.*basis: it lands on their remit/s);
+    expect(screen.getByRole('heading', { level: 2, name: 'Opening story for Karen' })).toBeInTheDocument();
     expect(screen.getByTestId('anchor-why').textContent).toMatch(/Our read.*Karen runs transportation/s);
     const more = screen.getByTestId('anchor-more');
     expect(more.tagName).toBe('DETAILS');
     expect(more).not.toHaveAttribute('open');
-    expect(more.textContent).toMatch(/do not use \(2\)/i);
+    expect(more.textContent).toMatch(/the do-not-use list \(2\)/i);
+    expect(more.textContent).toMatch(/Show/);
     expect(screen.getByTestId('anchor-supporting').textContent).toMatch(/Checked.*Gatik/s);
     expect(screen.getByTestId('anchor-proof').textContent).toMatch(/Our proof, measured.*48 to 24 minutes, measured.*YardFlow's own number, never theirs/s);
     expect(screen.getByTestId('anchor-proof').textContent).not.toMatch(/Checked/);
@@ -62,13 +65,16 @@ describe('the outreach anchor block', () => {
     expect(alts.tagName).toBe('DETAILS');
     expect(alts).not.toHaveAttribute('open');
     expect(screen.getAllByTestId('anchor-use-story')).toHaveLength(1);
-    expect(screen.getByTestId('anchor-unusable').textContent).toMatch(/Not usable: General Mills.*keyword hit/s);
+    expect(screen.getByTestId('anchor-unusable').textContent).toMatch(/Not usable: General Mills.*\. the angle needs your review: it opens on activity outside the North America network\./s);
+    expect(screen.getByTestId('anchor-unusable').textContent).not.toMatch(/\(\(/);
   });
   it('Use this story posts the anchor choice for the person and refreshes; it never sends', async () => {
     const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue({ ok: true, status: 201, json: async () => ({ personaId: 1, hypothesisId: 'h-gatik' }) } as Response);
     render(<OutreachAnchorView accountName="PepsiCo" anchor={anchor} coldTouchAllowed />);
     fireEvent.click(screen.getByTestId('anchor-use-story'));
     await waitFor(() => expect(screen.getByRole('status').textContent).toMatch(/opening now builds on that thesis. Nothing is sent/));
+    // Focus moves to the status line (the clicked control unmounts on refresh).
+    await waitFor(() => expect(document.activeElement).toBe(screen.getByTestId('anchor-note')));
     expect(fetchMock).toHaveBeenCalledTimes(1);
     expect(fetchMock.mock.calls[0][0]).toBe('/api/gap/personas/1/anchor');
     expect(JSON.parse(String(fetchMock.mock.calls[0][1]!.body))).toEqual({ hypothesisId: 'h-gatik' });
@@ -89,6 +95,11 @@ describe('the outreach anchor block', () => {
     expect(form.textContent).toMatch(/Story.*Maryland.*Source.*fooddive\.com/s);
     expect((screen.getByTestId('anchor-draft-observation') as HTMLTextAreaElement).value).toMatch(/\[S:f-plant\]\.$/);
     expect((screen.getByTestId('anchor-draft-problem') as HTMLTextAreaElement).value).toMatch(/^My guess is that/);
+    // Each textarea is labelled and described (the helper is not part of the name).
+    const obs = screen.getByLabelText('Proposed outreach observation');
+    expect(obs).toHaveAttribute('aria-describedby');
+    expect(screen.getByLabelText('Our guess (hedged)')).toHaveAttribute('aria-describedby');
+    expect(screen.getByTestId('anchor-draft-submit').textContent).toBe('Submit for review');
     fireEvent.click(screen.getByTestId('anchor-draft-submit'));
     await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(2));
     expect(fetchMock.mock.calls[0][0]).toBe('/api/gap/hypotheses');
@@ -112,10 +123,11 @@ describe('the outreach anchor block', () => {
   it('with no approved thesis it says so and offers the draftable story; the persona key follows the title', () => {
     render(<OutreachAnchorView accountName="PepsiCo" anchor={{ ...anchor, primary: null, primaryBy: null, whyTheyCare: null, supporting: null, alternatives: [] }} coldTouchAllowed />);
     expect(screen.getByTestId('anchor-none').textContent).toMatch(/No usable thesis at PepsiCo yet/);
-    // With nothing to open on, the draft path is open by default: it is the way out of research.
-    expect(screen.getByTestId('anchor-alternatives')).toHaveAttribute('open');
-    expect(screen.getByTestId('anchor-alternatives').textContent).toMatch(/Draft and review a story \(1\)/);
+    // The draft path reads as what it is and stays closed (the seller opens it); NEXT carries the state.
+    expect(screen.getByTestId('anchor-alternatives')).not.toHaveAttribute('open');
+    expect(screen.getByTestId('anchor-alternatives').textContent).toMatch(/Draft a thesis from a checked fact \(1\)/);
     expect(screen.getByTestId('anchor-draftable')).toBeInTheDocument();
+    expect(screen.getByTestId('anchor-draft-open').textContent).toBe('Draft a thesis from this fact');
     expect(personaKeyFor('Senior Director - PBNA Transportation')).toBe('transportation');
     expect(personaKeyFor('VP Supply Chain')).toBe('supply_chain');
     expect(personaKeyFor('Chief Operating Officer')).toBe('executive_ops');
@@ -133,12 +145,13 @@ describe('why #1 over #2 on the chosen card', () => {
     render(<PeopleStackView accountName="FedEx" stack={buildPeopleStack(r, { chosenKey: s.person!.key, chosenBy: s.person!.chosenBy })} state={s} hypothesisId="h1" excluded={[]} />);
     const lead = screen.getByTestId('people-stack-lead-over');
     expect(lead).toHaveAttribute('data-tie', 'false');
-    expect(lead.textContent).toMatch(/^Why Glen over Pat\? Glen/);
+    // A human choice reads as the choice first, then what the evidence says.
+    expect(lead.textContent).toMatch(/^You chose Glen \(you, Oct 5\)\. On evidence Glen also leads Pat: Glen/);
     const tie = resolveOwner({ account: { name: 'Walmart Inc.', entityType: 'retailer' }, purpose: 'COLD_FIRST_TOUCH', hypothesis: null, candidates: [gap(1, 'Doug Estrada', 'Regional Transportation Director'), gap(2, 'Kelly Kruse', 'Regional Transportation Director')], hubspot: { read: true, count: 2, truncated: false, via: 'linked' }, now: NOW });
     const te = tie.eligible.map((c) => ({ key: c.key, personaId: c.personaId, name: c.name, title: c.title }));
     const ts = state(te, 1);
     const { unmount } = render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(tie, { chosenKey: ts.person!.key, chosenBy: ts.person!.chosenBy })} state={ts} hypothesisId="h1" excluded={[]} />);
-    expect(screen.getAllByTestId('people-stack-lead-over').pop()!.textContent).toMatch(/GAP cannot separate these two on current evidence\./);
+    expect(screen.getAllByTestId('people-stack-lead-over').pop()!.textContent).toMatch(/^You chose Doug \(you, Oct 5\)\. On evidence GAP cannot separate Doug and Kelly\./);
     unmount();
   });
 });
@@ -177,6 +190,7 @@ describe('call prep on the pursuit state', () => {
     unmount();
     render(<PreCallBrief brief={{ ...brief, hypothesis: { ...brief.hypothesis!, verifiedFact: false } }} />);
     expect(screen.getByTestId('fact-block').textContent).toMatch(/KEYWORD HIT.*Not a verified fact: never read aloud as one/s);
+    expect(screen.getByTestId('fact-block').className).toMatch(/border-l-amber-600/);
     expect(screen.getByTestId('fact-block').textContent).not.toMatch(/Observed, cited/);
   });
 });

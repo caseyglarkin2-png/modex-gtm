@@ -268,10 +268,12 @@ export function rankDimensionNames(purpose: OwnerPurpose): string[] {
 }
 
 export interface LeadOver {
-  /** The first dimension on which `top` leads `second` (rank-key order). */
+  /** The first dimension on which the two differ (rank-key order). */
   dimension: string;
   /** One sentence for the seller, built from the two people's own reads; never invented. */
   text: string;
+  /** true when `top` leads `second`; false when `second` leads (the seller chose a lower-ranked person). */
+  leads: boolean;
 }
 
 /**
@@ -280,15 +282,20 @@ export interface LeadOver {
  * either person carries no rank key. Pure over the resolver's own keys; nothing here re-ranks.
  */
 export function leadOver(top: OwnerCandidate, second: OwnerCandidate, purpose: OwnerPurpose): LeadOver | null {
-  const a = top.rank;
-  const b = second.rank;
-  if (!a || !b || a.length !== b.length) return null;
+  const a0 = top.rank;
+  const b0 = second.rank;
+  if (!a0 || !b0 || a0.length !== b0.length) return null;
   const names = rankDimensionNames(purpose);
-  const i = a.findIndex((v, k) => v !== b[k]);
-  if (i < 0 || a[i] < b[i]) return null;
+  const i = a0.findIndex((v, k) => v !== b0[k]);
+  if (i < 0) return null;
+  const leads = a0[i] > b0[i];
+  // The sentence always reads from the leader's side; `leads` says which side that is.
+  const [lead, trail] = leads ? [top, second] : [second, top];
   const dimension = names[i] ?? 'rank';
-  const t = top.name.split(' ')[0];
-  const s = second.name.split(' ')[0];
+  const t = lead.name.split(' ')[0];
+  const s = trail.name.split(' ')[0];
+  top = lead;
+  second = trail;
   const text = (() => {
     switch (dimension) {
       case 'buyer truth':
@@ -325,7 +332,7 @@ export function leadOver(top: OwnerCandidate, second: OwnerCandidate, purpose: O
         return `${t} ranks ahead of ${s} on ${dimension}.`;
     }
   })();
-  return { dimension, text };
+  return { dimension, text, leads };
 }
 
 /**

@@ -38,7 +38,7 @@ import { nextFromPursuit, pursuitListenText } from '@/lib/gap/pursuit/next';
 import { accountDomainFor, loadStoryReaders } from '@/lib/gap/story/load';
 import { mergeTouches } from '@/lib/gap/story/touches';
 import { projectStory, storyListenText } from '@/lib/gap/story/story';
-import { projectAnchor } from '@/lib/gap/story/anchor';
+import { projectAnchor, storyBesideAnchor } from '@/lib/gap/story/anchor';
 import { listenText } from '@/lib/gap/context/now';
 
 export const dynamic = 'force-dynamic';
@@ -190,12 +190,20 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
         })
       : null;
     // UX-06 (Option A): the outreach anchor for the chosen person over the story and the account's open theses.
-    const anchor = pursuit && story
-      ? projectAnchor({ accountName: brief.accountName, person: pursuit.state.person ? { personaId: pursuit.state.person.personaId, name: pursuit.state.person.name, title: pursuit.state.person.title } : null, brief, inputs, story, anchorChoice: pursuit.anchorChoice, privateLine: v.private, sendable: pursuit.sendableTheses, now })
+    const rawStory = story;
+    const anchor = pursuit && rawStory
+      ? projectAnchor({ accountName: brief.accountName, person: pursuit.state.person ? { personaId: pursuit.state.person.personaId, name: pursuit.state.person.name, title: pursuit.state.person.title } : null, people: [...(pursuit.stack?.rows ?? []), ...(pursuit.stack?.more ?? [])].map((r) => ({ personaId: r.personaId, name: r.name, title: r.title })), brief, inputs, story: rawStory, anchorChoice: pursuit.anchorChoice, privateLine: v.private, sendable: pursuit.sendableTheses, now })
       : null;
+    // The story is told once: the anchor's own fact is a pointer in the story, never a repeat.
+    const storyShown = rawStory && anchor ? storyBesideAnchor(rawStory, anchor) : rawStory;
+    // The remit caution travels to NEXT: a cold first touch never asks the buyer who owns it.
+    if (pursuitNext && anchor?.primary && anchor.primary.relevance.tier === 'none' && pursuit?.state.person) {
+      const first = pursuit.state.person.name.split(' ')[0];
+      pursuitNext.text = `${pursuitNext.text} Caution: the opening fact (${anchor.primary.factLabel}) may not land on ${first}'s remit${anchor.fitsBetter ? `; ${anchor.fitsBetter.name}${anchor.fitsBetter.title ? ` (${anchor.fitsBetter.title})` : ''} fits it` : ''}.`;
+    }
     const listen = pursuit && pursuitNext
-      ? story
-        ? `${pursuitListenText({ ...v, listen: listenText({ ...v, whyNow: [], think: null, currentState: '', impact: '' }) }, pursuit.state, pursuitNext.text)} ${storyListenText(story)}`.replace(/\s+/g, ' ').slice(0, 4800)
+      ? storyShown
+        ? `${pursuitListenText({ ...v, listen: listenText({ ...v, whyNow: [], think: null, currentState: '', impact: '' }) }, pursuit.state, pursuitNext.text)} ${storyListenText(storyShown!)}`.replace(/\s+/g, ' ').slice(0, 4800)
         : pursuitListenText(v, pursuit.state, pursuitNext.text)
       : v.listen;
     return (
@@ -212,7 +220,7 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
           nextText={pursuitNext?.text ?? null}
           links={links}
           mailbox={process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() || null}
-          pursuit={pursuit ? { state: pursuit.state, stack: pursuit.stack, hypothesisId: pursuit.hypothesisId, excluded, story, anchor } : null}
+          pursuit={pursuit ? { state: pursuit.state, stack: pursuit.stack, hypothesisId: pursuit.hypothesisId, excluded, story: storyShown, anchor } : null}
         />
       </div>
     );

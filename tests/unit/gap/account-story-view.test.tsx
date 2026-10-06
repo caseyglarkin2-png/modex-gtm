@@ -58,7 +58,8 @@ describe('the story view', () => {
     const stories = rows.find((el) => el.getAttribute('data-key') === 'stories')!;
     expect(stories.tagName).toBe('DETAILS');
     expect(stories).not.toHaveAttribute('open');
-    expect(screen.getByTestId('story-row-summary').textContent).toBe('Stories that matter (1)Show');
+    expect(screen.getByTestId('story-row-summary').textContent).toMatch(/^Stories that matter \(1\)Show/);
+    expect(screen.getByTestId('story-row-summary').textContent).toMatch(/Hide$/);
     expect(screen.getByTestId('story-row-summary').querySelector('h3')!.textContent).toBe('Stories that matter (1)');
     expect(screen.getAllByTestId('story-sentence').find((el) => /vault note/.test(el.textContent ?? ''))!.textContent).toMatch(/never quote it to the buyer/);
   });

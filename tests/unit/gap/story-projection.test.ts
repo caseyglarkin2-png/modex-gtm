@@ -277,8 +277,10 @@ describe('story: a broken number, an incidental headline, the Wrong if clause', 
     const heb = fedexInputs({ account: { name: 'H-E-B', tier: 'Tier 1', priorityBand: 'A', vertical: 'grocery', parentBrand: null, hubspotCompanyId: '4' }, domains: ['heb.com'], facts: [{ id: 'f-175', quote: 'H-E-B plans to build a $175 new refrigerated facility at its campus.', url: 'https://news.example/heb', title: 'news', publishedAt: '2026-09-25T00:00:00Z', expiresAt: null, continuity: 'event' as const, currentness: null }, { id: 'f-ok', quote: 'H-E-B is opening a 1 million square foot distribution center in San Antonio in 2027.', url: 'https://news.example/sa', title: 'news', publishedAt: '2026-09-26T00:00:00Z', expiresAt: null, continuity: 'event' as const, currentness: null }], signals: [], hypotheses: [] });
     const { story } = build(heb, ctxFor(), fedexState(heb, { replies: [] }), { touches: [] });
     const all = story.rows.flatMap((r) => r.sentences);
-    const broken = all.find((s) => /\$175/.test(s.text))!;
+    const broken = all.find((s) => /figure unverified/.test(s.text))!;
     expect(broken.tag).toBe('Unverified');
+    expect(broken.text).toMatch(/plans to build a \[figure unverified\] new refrigerated facility/);
+    expect(broken.text).not.toMatch(/\$175/);
     expect(broken.basis).toMatch(/does not parse/);
     expect(broken.cite ?? null).toBeNull();
     const changing = story.rows.find((r) => r.key === 'changing')!;
