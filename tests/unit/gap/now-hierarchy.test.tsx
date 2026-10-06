@@ -64,7 +64,7 @@ describe('UX-04 hierarchy', () => {
   it('the phone bottom bar carries Listen and Log a touch at 44 px, and the context column is a sibling after the decision (never reordered)', () => {
     const { container } = render(<AccountNowView v={v} nextHref={null} nextLabel={null} links={[]} pursuit={pursuit} />);
     const bar = screen.getByTestId('now-bottom-bar');
-    expect(bar).toHaveAttribute('role', 'toolbar');
+    expect(bar).toHaveAttribute('role', 'group');
     expect(screen.getByTestId('now-bottom-log')).toHaveAttribute('href', '/gap/capture?account=FedEx');
     expect(screen.getByTestId('now-bottom-log').className).toMatch(/min-h-11/);
     const root = container.querySelector('[data-testid="account-now"]')!;
@@ -109,5 +109,21 @@ describe('UX-04 review: no duplicated lines', () => {
     const inDeal = projectPursuitState({ accountName: 'Kroger', now: NOW, motionType: 'IN_DEAL', opportunity: { status: 'ACTIVE', detail: '', deals: [{ name: 'YardFlow - Kroger', stage: 'Discovery' }] }, restriction: null, familyHold: null, motion: null, choice: null, activePersona: null, replies: [], lastOutbound: null, outstandingDraft: null, followUpDue: null, eligible });
     render(<AccountNowView v={{ ...v, name: 'Kroger' }} nextHref="/x" nextLabel="Open the deal brief" nextText="Work the deal." links={[]} pursuit={{ ...pursuit, state: inDeal, stack: buildPeopleStack(r, { chosenKey: null }) }} />);
     expect(screen.queryByTestId('now-blocker')).toBeNull();
+  });
+});
+
+describe('UX-04 accessibility review fixes', () => {
+  it('the Why button\'s accessible name starts with its visible text (WCAG 2.5.3) and names the person', () => {
+    render(<AccountNowView v={v} nextHref={null} nextLabel={null} links={[]} pursuit={pursuit} />);
+    const why = screen.getAllByTestId('people-stack-why')[0];
+    expect(why.textContent).toBe('Why this person?');
+    expect(why.getAttribute('aria-label')).toMatch(/^Why this person\? Glen Chaffee$/);
+  });
+  it('no "Eligible operator" chip on plain eligible rows; the chosen person keeps Next operator', () => {
+    render(<AccountNowView v={v} nextHref={null} nextLabel={null} links={[]} pursuit={pursuit} />);
+    const rows = screen.getAllByTestId('people-stack-row');
+    expect(rows[0].textContent).toMatch(/Next operator/i);
+    expect(rows.slice(1).every((el) => !/Eligible operator/i.test(el.textContent ?? ''))).toBe(true);
+    expect(document.body.textContent).not.toMatch(/Choosing records your choice/);
   });
 });

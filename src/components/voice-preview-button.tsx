@@ -15,6 +15,8 @@ interface Props {
   text: string;
   label?: string;
   className?: string;
+  /** Visibility wrapper (the button AND its status region hide together, so no empty live region stays exposed). */
+  wrapperClassName?: string;
 }
 
 /** The one player on the page: starting another stops this one. */
@@ -27,7 +29,7 @@ function release(p: { audio: HTMLAudioElement; url: string } | null) {
   URL.revokeObjectURL(p.url);
 }
 
-export function VoicePreviewButton({ text, label = 'Listen', className }: Props) {
+export function VoicePreviewButton({ text, label = 'Listen', className, wrapperClassName }: Props) {
   const [loading, setLoading] = useState(false);
   const [state, setState] = useState<'idle' | 'playing' | 'paused'>('idle');
   const mine = useRef<{ audio: HTMLAudioElement; url: string } | null>(null);
@@ -97,12 +99,12 @@ export function VoicePreviewButton({ text, label = 'Listen', className }: Props)
 
   const name = loading ? `Loading: ${label}` : state === 'playing' ? `Pause: ${label}` : state === 'paused' ? `Resume: ${label}` : label;
   return (
-    <>
-      <Button type="button" variant="outline" size="sm" className={className} disabled={loading} onClick={() => void handleClick()} aria-pressed={state === 'playing'} aria-busy={loading} aria-label={name}>
+    <span className={wrapperClassName}>
+      <Button type="button" variant="outline" size="sm" className={className} disabled={loading} onClick={() => void handleClick()} aria-busy={loading} aria-label={name}>
         {loading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : state === 'playing' ? <Pause className="h-3.5 w-3.5" /> : state === 'paused' ? <Play className="h-3.5 w-3.5" /> : <Volume2 className="h-3.5 w-3.5" />}
         <span className="ml-1.5 text-xs">{loading ? 'Loading' : state === 'playing' ? 'Pause' : state === 'paused' ? 'Resume' : label}</span>
       </Button>
       <span role="status" aria-live="polite" className="sr-only">{loading ? 'Loading the audio.' : state === 'playing' ? 'Playing.' : state === 'paused' ? 'Paused.' : ''}</span>
-    </>
+    </span>
   );
 }

@@ -163,3 +163,12 @@ describe('UX-04 review fixes', () => {
     expect(s2.rows.map((row) => row.reason).join(' | ')).toMatch(/Title names Inbound Logistics|Title names Transportation Strategy & Planning/);
   });
 });
+
+describe('UX-04 review: the currentness cue is short', () => {
+  it('"Role current (confirmed): ... verified at linkedin.com, 2026-10-05: ..." reads as "Role confirmed Oct 5 (linkedin.com)"', () => {
+    const r = resolveOwner(base({ candidates: [gap(7, 'Glen Chaffee', 'Managing Director, Transportation & Logistics', { role: { state: 'ROLE_CURRENT_CONFIRMED', label: 'Role current (confirmed)', why: 'Recent evidence confirms their role at FedEx: verified at linkedin.com, 2026-10-05: Managing Director, Transportation & Logistics, FedEx Ground.', effectiveTitle: 'Managing Director, Transportation & Logistics', priorTitle: null, usableForRanking: true } })] }));
+    const s = buildPeopleStack(r, { chosenKey: null });
+    expect(s.rows[0].currentness).toBe('Role confirmed Oct 5 (linkedin.com)');
+    expect(s.rows[0].currentness).not.toMatch(/Recent evidence confirms/);
+  });
+});

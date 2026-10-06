@@ -884,6 +884,45 @@ Kept as-is on all reviews: the hold in the state line ("Opted out: timothy.coope
 class ("An automatic notice, not an answer"), the readback ("Chosen by you, Oct 5"), "Make Jeffrey first instead",
 "Nothing is sent by choosing", no Best fit without a recommendation, no ordinals on a tie, "Not a cold first touch".
 
+### 8.8 UX-04 fresh review (three read-only reviewers on the 820 / 390 / 1440 captures, 2026-10-06)
+
+Reviewers: enterprise AE (five accounts, first two screens at 820), product designer / IA (contract conformance and
+hierarchy), accessibility / mobile (the three gates from the UX-03 review plus WCAG 2.2 on the new page).
+
+Task result (AE, first two screens at 820): FedEx, Walmart and PepsiCo answered state, next step, control and who in
+10 to 20 seconds; H-E-B stopped on a contradiction (a Troy Shaw record offered as eligible beside a flagged Troy Shaw);
+Kroger answered state and control but not who (the deal's contacts are not on the page). Product: clauses 1, 2 and 5
+of the 6b contract MET; 3 PARTLY (two bracketed-ticker headlines still showed); 4 PARTLY (no Next account control,
+which is UX-09); 6 deferred as declared; 7 and 8 PARTLY (no screen-reader run recorded; fewer than eight accounts
+in the table). Accessibility: gates 1 and 2 PASS on the measurements; gate 3 FAIL on one path inferred from code.
+
+| Finding | Reviewer | Severity | Disposition |
+|---|---|---|---|
+| H-E-B offers Choose for a Troy Shaw record while another Troy Shaw record is set aside as do not contact | AE | BLOCKER | FIXED: a name set aside as do not contact, unsubscribed, opted out or left is never a row under another record of the same person; said in the set-aside line |
+| "Walmart (WMT) Delivers..." and "Kroger (KR) Stock Looks..." still show in WHY NOW (bracketed tickers) | product | BLOCKER | FIXED: a case-sensitive ticker-in-brackets rule beside the market-chatter rule, pinned by test |
+| Focus after Choose is lost on the import path (the row's key changes from hubspot: to gap:) | a11y | BLOCKER | FIXED: focus follows the imported person's new key |
+| The Why button's accessible name ("Why Glen Chaffee?") does not contain its visible text (WCAG 2.5.3) | a11y | BLOCKER | FIXED: "Why this person? Glen Chaffee" |
+| "Title: Senior", "Title: Inbound", "Based in Seattle" as reasons; "Same responsibility ... as the row above" read false beside a different job | AE, product | SHOULD | FIXED: rank and filler words never make a reason; the honest line no longer claims the row above is the same |
+| Kroger under a deal: heading "4 of 13 eligible for a first touch" over full cards; the deal sentence twice under NEXT; "(no name in HubSpot) (no name on record)" listed three times | AE, product | SHOULD | FIXED: "People on record: in a deal, work it from the deal"; no blocker line under a deal; nameless records counted, never listed |
+| FedEx: two lines about one June out-of-office; Glen named four times; "(every gate runs when you send)" | product | SHOULD | FIXED: one inbound line; NEXT names the person once without the title; the gate phrase removed |
+| The opt-out said three times on Walmart | product | SHOULD | FIXED: the inbound line says only who and when under an opted-out state |
+| The set-aside line before the slot lines; the show-more label repeats the set-aside count | product | SHOULD | FIXED |
+| "ELIGIBLE OPERATOR" chip and the static "Choosing records your choice" footnote | product | REMOVE | FIXED: removed |
+| The role line is a sentence ("Role current (confirmed): Recent evidence confirms ... verified at linkedin.com, 2026-10-05: ...") | product | SHOULD | FIXED: "Role confirmed Oct 5 (linkedin.com)"; the sentence stays behind Why this person? |
+| The phone bar's second control: Log a touch while the page says no cold touch; the primary scrolls away | AE | SHOULD | FIXED: the bar carries the NEXT control when there is one, else Log a touch |
+| The phone bar's toolbar role promises arrow-key navigation it does not have; Listen's name change plus pressed state double-signals; the hidden Listen copy leaves an empty live region exposed | a11y | SHOULD | FIXED: role group; no pressed state (the name carries it); the status region hides with its button |
+| The Note control opens the shared non-modal dialog (no Escape, no focus return) | a11y | SHOULD | CARRIED: the dialog is the pre-existing feedback form (baseline P3 note-dialog a11y, already in the debt table) |
+| The last person touched never appears as a person (Courtney Keen, timothy.cooper, laura.maxwell, troy.retzloff, joey.maggard); FedEx has no ASK; Kroger's deal contacts are absent; interest is buried at 820 | AE | SHOULD | CARRIED to UX-05 (the story's "what has already happened between us and this account" row) and UX-07 (a relationship-history row); the private line stays private by contract |
+| H-E-B "$175 new refrigerated facility" marked OK to cite | AE | SHOULD | CARRIED: a stored fact text defect (truth layer), recorded in section 10 |
+| The app sidebar takes about 257 px at 820, leaving about 517 px for content | product | SHOULD | OPEN QUESTION for Casey: collapsing the sidebar on account pages below 1100 px is a shell change for every page |
+| Compact the stack: a card only for the chosen person, one-line rows for the alternatives, no cards under a hold or deal | product | NICE (the one change for UX-05) | CARRIED into the UX-05 contract |
+| "(840) Fedex" tab title (the notification count prefix), "Email: Email sent:", "Role current (likely)" twice on H-E-B | AE | NICE | CARRIED |
+
+Kept as-is on all reviews: one primary control in NEXT, the hold colours, the dropped THE GAP and IMPACT lines, the one
+flags disclosure, the tie line, "Wrong if", "OK to cite to the buyer" against "Checked, not for outreach", the 1440
+right column, DOM order equal to reading order, the contrast table (emerald 5.4 / 10.2, red 6.4 / 6.9, sky 7.5 / 11.9,
+amber 5.1 / 11.5 in light / dark).
+
 ## 9. Validation record
 
 | Ticket | Validation | Result |

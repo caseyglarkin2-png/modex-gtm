@@ -35,7 +35,7 @@ describe('VoicePreviewButton', () => {
     await waitFor(() => expect(screen.getByRole('button', { name: 'Pause: Listen' })).toBeInTheDocument());
     expect(FakeAudio.instances).toHaveLength(1);
     expect(FakeAudio.instances[0].paused).toBe(false);
-    expect(screen.getByRole('button')).toHaveAttribute('aria-pressed', 'true');
+
     fireEvent.click(screen.getByRole('button'));
     expect(FakeAudio.instances[0].paused).toBe(true);
     expect(screen.getByRole('button', { name: 'Resume: Listen' })).toBeInTheDocument();

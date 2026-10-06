@@ -117,7 +117,7 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, 
             <p className={`min-w-0 break-words text-sm font-medium ${tone}`} data-testid="now-state" data-pursuit-state={pursuit?.state.state ?? undefined}>
               {stateLine}
             </p>
-            <VoicePreviewButton text={v.listen} label="Listen" className="hidden min-h-11 shrink-0 px-4 md:inline-flex" />
+            <VoicePreviewButton text={v.listen} label="Listen" className="min-h-11 shrink-0 px-4" wrapperClassName="hidden md:block" />
           </div>
           {lastTouch ? (
             <p className="text-xs text-[var(--muted-foreground)]" data-testid="now-last-touch">
@@ -341,7 +341,7 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, 
 
       {/* 390: one opaque bottom bar (44 px controls): Listen, and the NEXT control when there is one (the primary scrolls
           away with the page), else Log a touch; scroll-padding-bottom keeps focus clear of it. */}
-      <div className="fixed inset-x-0 bottom-0 z-40 flex items-center justify-between gap-2 border-t border-[var(--border)] bg-[var(--background)] px-4 py-2 md:hidden" data-testid="now-bottom-bar" role="toolbar" aria-label="Account actions">
+      <div className="fixed inset-x-0 bottom-0 z-40 flex items-center justify-between gap-2 border-t border-[var(--border)] bg-[var(--background)] px-4 py-2 md:hidden" data-testid="now-bottom-bar" role="group" aria-label="Account actions">
         <VoicePreviewButton text={v.listen} label="Listen" className="min-h-11 px-4" />
         {nextHref && nextLabel ? (
           <PendingLink href={nextHref} className="inline-flex min-h-11 max-w-[60%] items-center justify-center truncate rounded-md bg-[var(--primary)] px-4 text-sm font-semibold text-[var(--primary-foreground)]" data-testid="now-bottom-next">

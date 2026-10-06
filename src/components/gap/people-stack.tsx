@@ -87,6 +87,8 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
         setNote({ kind: 'alert', text: `${row.name} is not a GAP contact and has no HubSpot record to add from. Nothing changed.` });
         return;
       }
+      // After an import the person comes back as a GAP contact (key gap:<id>): focus follows that key, not the old one.
+      const chosenKey = row.personaId === null ? `gap:${personaId}` : row.key;
       setBusy({ key: row.key, step: 'choosing' });
       const res = await fetch('/api/gap/accounts/motion', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ accountName, primaryPersonaId: personaId }) });
       const body = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
@@ -95,7 +97,7 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
         return;
       }
       setNote({ kind: 'status', text: `${row.name} is first at ${accountName.replace(/\.$/, '')}. Nothing is sent by choosing; every send runs its own gates.` });
-      justChose.current = row.key;
+      justChose.current = chosenKey;
       router.refresh();
     } catch (e) {
       setNote({ kind: 'alert', text: e instanceof Error ? e.message : 'network error' });
@@ -163,7 +165,7 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
                 {row.name}
                 {row.title ? <span className="font-normal text-[var(--muted-foreground)]">, {row.title}</span> : null}
               </p>
-              <span className="rounded-sm border border-[var(--border)] px-1 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--muted-foreground)]">{row.slot}</span>
+              {row.slot !== 'Eligible operator' ? <span className="rounded-sm border border-[var(--border)] px-1 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--muted-foreground)]">{row.slot}</span> : null}
               {row.badge ? <span className="rounded-sm border border-[var(--primary)] px-1 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[var(--primary)]" data-testid="people-stack-badge">{row.badge}</span> : null}
               {row.chosen ? <span className="text-xs font-medium text-[var(--primary)]" data-testid="people-stack-chosen">Chosen{row.chosenBy ? ` by ${row.chosenBy}` : ''}</span> : null}
             </div>
@@ -227,7 +229,7 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
               ) : (
                 <span className="text-xs text-[var(--muted-foreground)]" data-testid="people-stack-slot-only">Not a cold first touch: unlocks by a meeting, a referral or your explicit choice.</span>
               )}
-              <button type="button" className={TEXT} aria-expanded={open.has(row.key)} aria-controls={`why-${row.key}`} aria-label={open.has(row.key) ? `Hide why ${row.name}` : `Why ${row.name}?`} onClick={() => toggle(row.key)} data-testid="people-stack-why">
+              <button type="button" className={TEXT} aria-expanded={open.has(row.key)} aria-controls={`why-${row.key}`} aria-label={open.has(row.key) ? `Hide why: ${row.name}` : `Why this person? ${row.name}`} onClick={() => toggle(row.key)} data-testid="people-stack-why">
                 {open.has(row.key) ? 'Hide why' : 'Why this person?'}
               </button>
             </div>
@@ -271,7 +273,7 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
                 {row.title ? <span className="text-[var(--muted-foreground)]">, {row.title}</span> : null}
               </span>
               <span className="text-[var(--muted-foreground)]">(not a cold first touch)</span>
-              <button type="button" className={TEXT} aria-expanded={open.has(row.key)} aria-controls={`why-${row.key}`} aria-label={open.has(row.key) ? `Hide why ${row.name}` : `Why ${row.name}?`} onClick={() => toggle(row.key)} data-testid="people-stack-why">
+              <button type="button" className={TEXT} aria-expanded={open.has(row.key)} aria-controls={`why-${row.key}`} aria-label={open.has(row.key) ? `Hide why: ${row.name}` : `Why this person? ${row.name}`} onClick={() => toggle(row.key)} data-testid="people-stack-why">
                 {open.has(row.key) ? 'Hide why' : 'Why?'}
               </button>
               <ul id={`why-${row.key}`} hidden={!open.has(row.key)} className="basis-full space-y-0.5 pl-2 text-[var(--muted-foreground)]" data-testid={open.has(row.key) ? 'people-stack-why-list' : undefined}>
@@ -308,7 +310,6 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
           ) : null}
         </div>
       ) : null}
-      <p className="text-[11px] text-[var(--muted-foreground)]">Choosing records your choice for this account only. Nothing is sent by choosing; every send runs its own gates.</p>
     </section>
   );
 }

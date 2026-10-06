@@ -177,12 +177,25 @@ function distinguish(rows: OwnerCandidate[]): string[] {
 const reachabilityOf = (c: OwnerCandidate) =>
   c.source === 'hubspot' ? (c.hasEmail ? 'In HubSpot, not yet a GAP contact; email on record' : 'In HubSpot, not yet a GAP contact; no email') : c.hasEmail ? 'Email on record' : 'No email on record';
 
+/** "verified at linkedin.com, 2026-10-05: Managing Director..." -> "Oct 5 (linkedin.com)"; anything else stays as written, short. */
+function shortEvidence(why: string): string {
+  const m = why.match(/verified at ([a-z0-9.-]+\.[a-z]{2,}),\s*(\d{4}-\d{2}-\d{2})/i);
+  if (m) {
+    const d = new Date(`${m[2]}T12:00:00Z`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
+    return `${d} (${m[1]})`;
+  }
+  const a = why.match(/(Apollo[^,.:]*|HubSpot[^,.:]*|human[^,.:]*),?\s*(\d{4}-\d{2}-\d{2})?/i);
+  if (a) return a[2] ? `${new Date(`${a[2]}T12:00:00Z`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' })} (${a[1].trim()})` : a[1].trim();
+  return why.length > 90 ? `${why.slice(0, 87).trim()}...` : why;
+}
+
+/** The currentness cue, short: "Role confirmed Oct 5 (linkedin.com)"; the full sentence stays behind Why this person?. */
 function currentnessOf(c: OwnerCandidate): string | null {
   const parts: string[] = [];
-  if (c.role && ROLE_MATERIAL.has(c.role.state)) parts.push(`${c.role.label}: ${c.role.why}`);
-  if (c.employment && EMPLOYMENT_MATERIAL.has(c.employment.state)) parts.push(`${c.employment.label}: ${c.employment.why}`);
+  if (c.role && ROLE_MATERIAL.has(c.role.state)) parts.push(`${c.role.label.replace(/^Role current \((confirmed|likely)\)$/, 'Role $1')} ${shortEvidence(c.role.why)}`.replace(/\s+/g, ' ').trim());
+  if (c.employment && EMPLOYMENT_MATERIAL.has(c.employment.state)) parts.push(`${c.employment.label}: ${shortEvidence(c.employment.why)}`);
   if (c.caution) parts.push(c.caution);
-  return parts.length ? parts.join(' ') : null;
+  return parts.length ? parts.join('. ') : null;
 }
 
 function toRow(c: OwnerCandidate, r: OwnerResolution, reason: string, ordinal: number | null, chosen: { key: string | null; by: string | null }): StackRow {
