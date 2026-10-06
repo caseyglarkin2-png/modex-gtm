@@ -5,7 +5,7 @@
  */
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import { actionRequest, askPrompt, compactContext, tidyAnswer } from '@/lib/gap/ask/grounding';
+import { actionRequest, askPrompt, clearAskContexts, compactContext, guardBuyerSaid, recallAskContext, rememberAskContext, tidyAnswer } from '@/lib/gap/ask/grounding';
 import { AskGap } from '@/components/gap/ask-gap';
 import type { PursuitState } from '@/lib/gap/pursuit/state';
 import type { AccountStory } from '@/lib/gap/story/story';
@@ -66,6 +66,23 @@ describe('compactContext and askPrompt', () => {
     expect(actionRequest('make Shawn next')).toMatch(/cannot choose or reorder people/);
     expect(actionRequest('Why Karen over Shawn?')).toBeNull();
     expect(actionRequest('What do we still need to learn here?')).toBeNull();
+  });
+  it('with no buyer input the prompt says so and an invented "the buyer said" is dropped from the answer, the truth said first', () => {
+    const ctx = compactContext({ accountName: 'NFI Industries', state, nextText: 'See the people.', story: null, anchor: null, stack: null, buyerSaid: [] });
+    expect(askPrompt(ctx, 'Who owns transportation?')).toMatch(/There is NO buyer input on record at this account: never write "the buyer said"/);
+    expect(guardBuyerSaid('The buyer said no one else owns transportation. Our read is that Jenny Wilson runs network operations. Transportation ownership is not stated.', ctx)).toBe('Nothing from the buyer is on record here, so GAP cannot say what they said. Our read is that Jenny Wilson runs network operations. Transportation ownership is not stated.');
+    expect(guardBuyerSaid('Our read is that Jenny runs it.', ctx)).toBe('Our read is that Jenny runs it.');
+    const withInput = compactContext({ accountName: 'NFI Industries', state, nextText: 'x', story: null, anchor: null, stack: null, buyerSaid: [{ text: 'Trucks wait an hour.', who: 'Jenny', at: null }] });
+    expect(guardBuyerSaid('The buyer said trucks wait an hour.', withInput)).toBe('The buyer said trucks wait an hour.');
+  });
+  it('the page remembers its context for a short while and the route recalls it; a stale one is dropped', () => {
+    clearAskContexts();
+    const ctx = compactContext({ accountName: 'PepsiCo', state, nextText: 'x', story: null, anchor: null, stack: null });
+    const t0 = new Date('2026-10-06T15:00:00Z');
+    rememberAskContext(ctx, t0);
+    expect(recallAskContext('PepsiCo', new Date(t0.getTime() + 60_000))).toBe(ctx);
+    expect(recallAskContext('PepsiCo', new Date(t0.getTime() + 16 * 60_000))).toBeNull();
+    expect(recallAskContext('Kroger', t0)).toBeNull();
   });
   it('tidyAnswer drops a leading Answer label, em dashes and runaway length', () => {
     expect(tidyAnswer('Answer: Karen leads — checked.')).toBe('Karen leads , checked.');

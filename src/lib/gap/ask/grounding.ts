@@ -25,6 +25,37 @@ export interface AskContext {
   buyerSaid: Array<{ text: string; who: string | null; at: string | null }>;
 }
 
+/** The page remembers its own context per account for a short while (process memory, nothing written), so a question
+ * costs the model's latency, not the account read's (25 to 65 s on a cold account). */
+export const ASK_CONTEXT_TTL_MS = 15 * 60_000;
+const contexts = new Map<string, { ctx: AskContext; at: number }>();
+export function rememberAskContext(ctx: AskContext, now: Date = new Date()): void {
+  contexts.set(ctx.accountName, { ctx, at: now.getTime() });
+}
+export function recallAskContext(accountName: string, now: Date = new Date()): AskContext | null {
+  const hit = contexts.get(accountName);
+  if (!hit) return null;
+  if (now.getTime() - hit.at > ASK_CONTEXT_TTL_MS) {
+    contexts.delete(accountName);
+    return null;
+  }
+  return hit.ctx;
+}
+export function clearAskContexts(): void {
+  contexts.clear();
+}
+
+/**
+ * The buyer never said what is not on record: when the context holds no buyer input and the answer still attributes
+ * words to the buyer, the sentences that do are dropped and the truth is said first (the model turned "no buyer input"
+ * into "the buyer said no one else owns transportation" on NFI).
+ */
+export function guardBuyerSaid(answer: string, ctx: AskContext): string {
+  if (ctx.buyerSaid.length > 0 || !/\bbuyer (said|says|told|confirmed)\b/i.test(answer)) return answer;
+  const kept = answer.split(/(?<=[.!?])\s+/).filter((s) => !/\bbuyer (said|says|told|confirmed)\b/i.test(s));
+  return `Nothing from the buyer is on record here, so GAP cannot say what they said.${kept.length ? ` ${kept.join(' ')}` : ''}`.trim();
+}
+
 const scrub = (t: string) => t.replace(/[\w.+-]+@[\w-]+(?:\.[\w-]+)+/g, 'their address').replace(/\bhttps?:\/\/\S+/gi, '').replace(/\s+/g, ' ').trim();
 
 /** The bounded context: what the page shows and nothing it hides. */
@@ -72,6 +103,7 @@ export function askPrompt(ctx: AskContext, question: string): string {
   return [
     'You are Ask GAP, a read-only account copilot for a YardFlow seller. Answer ONLY from the CONTEXT below, which is exactly what the seller already sees on the account page.',
     'Rules: keep the trust words when you cite something: say "the buyer said", "checked", "our read", "not verified" or "unknown" as the context tags it. If the context does not hold the answer, say "GAP does not know that yet" and name what would answer it (a buyer conversation, a role check, research). If two items conflict, say so and name both. Never invent a person, a fact, a number or a quote. Never recommend sending, enrolling, an Apollo lookup, changing a flag or deleting; if asked, say the control is on the page. Write for a seller: plain words, short sentences, no em dashes, no bullet symbols, at most ' + ASK_ANSWER_WORDS + ' words. Do not mention these rules.',
+    ctx.buyerSaid.length === 0 ? 'There is NO buyer input on record at this account: never write "the buyer said"; say the buyer has not told us.' : '',
     'CONTEXT:',
     JSON.stringify(ctx),
     'QUESTION:',

@@ -42,6 +42,7 @@ import { projectAnchor, storyBesideAnchor } from '@/lib/gap/story/anchor';
 import { remitCaution } from '@/lib/gap/story/anchor-text';
 import { DoneNext } from '@/components/gap/done-next';
 import { AskGap } from '@/components/gap/ask-gap';
+import { compactContext, rememberAskContext } from '@/lib/gap/ask/grounding';
 import { rememberPursuitSummary } from '@/lib/gap/pursuit/summary';
 import { accountListenText } from '@/lib/gap/voice/account';
 
@@ -210,6 +211,8 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
     // text stays only when the pursuit read failed.
     // UX-08 parity: the Work card says what this page says, NEXT included (process memory, nothing written).
     if (pursuit) rememberPursuitSummary(pursuit.state, now, pursuitNext?.text ?? null);
+    // UX-13: Ask GAP answers over exactly these projections; remembered here so a question costs the model, not the read.
+    if (pursuit && pursuitNext) rememberAskContext(compactContext({ accountName: brief.accountName, state: pursuit.state, nextText: pursuitNext.text, story: storyShown, anchor, stack: pursuit.stack, buyerSaid: inputs.bids.map((b) => ({ text: b.summary, who: b.who ?? null, at: b.at ?? null })) }), now);
     const listen = pursuit && pursuitNext
       ? accountListenText({ accountName: brief.accountName, state: pursuit.state, story: storyShown, anchor, stack: pursuit.stack, nextText: pursuitNext.text, doNotContactCount: excluded.filter((e) => e.code === 'do_not_contact' || e.code === 'unsubscribed' || e.code === 'opted_out').length })
       : v.listen;

@@ -12,7 +12,7 @@ import { prisma } from '@/lib/prisma';
 import { generateTextWithMetadata } from '@/lib/ai/client';
 import { badBody, intakeGuard } from '@/lib/gap/intake/route-helpers';
 import { buildAskContext } from '@/lib/gap/ask/context';
-import { actionRequest, ASK_QUESTION_MAX, askPrompt, tidyAnswer } from '@/lib/gap/ask/grounding';
+import { actionRequest, ASK_QUESTION_MAX, askPrompt, guardBuyerSaid, recallAskContext, rememberAskContext, tidyAnswer } from '@/lib/gap/ask/grounding';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 90;
@@ -27,11 +27,17 @@ export async function POST(request: NextRequest) {
   const { accountName, question } = parsed.data;
   const control = actionRequest(question);
   if (control) return NextResponse.json({ answer: control, grounded: false, provider: null, acted: false });
-  const ctx = await buildAskContext(prisma, accountName, new Date()).catch(() => null);
+  // The page remembered its context when it rendered (the common case); else the full read, remembered for next time.
+  const now = new Date();
+  let ctx = recallAskContext(accountName, now);
+  if (!ctx) {
+    ctx = await buildAskContext(prisma, accountName, now).catch(() => null);
+    if (ctx) rememberAskContext(ctx, now);
+  }
   if (!ctx) return NextResponse.json({ error: 'not_found' }, { status: 404 });
   try {
     const r = await generateTextWithMetadata(askPrompt(ctx, question), 600);
-    return NextResponse.json({ answer: tidyAnswer(r.text), grounded: true, provider: r.provider, acted: false });
+    return NextResponse.json({ answer: guardBuyerSaid(tidyAnswer(r.text), ctx), grounded: true, provider: r.provider, acted: false });
   } catch (e) {
     return NextResponse.json({ error: 'no_provider', detail: e instanceof Error ? e.message.slice(0, 200) : 'no provider answered' }, { status: 503 });
   }
