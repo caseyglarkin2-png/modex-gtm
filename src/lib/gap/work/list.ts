@@ -106,6 +106,8 @@ export interface WorkCard {
   priority?: { reason: string; by: string; at: string } | null;
   /** R42: the incoming message this card is about and its prepared notes (never copy, never a send). */
   reply?: ReplyPrep | null;
+  /** R44: Capture, opened with the account, person, deal and conversation this card is about already filled in. */
+  capture?: { href: string; label: string } | null;
 }
 
 export interface WorkInput {
@@ -113,7 +115,7 @@ export interface WorkInput {
   /** Every NEXT UP candidate (all lanes), from buildNextUpCandidates. */
   candidates: readonly NextCandidate[];
   /** Undispositioned replies, the raw rows (classified here; twins already collapsed by the reply list). */
-  replies: ReadonlyArray<{ accountName: string; contactEmail: string; subject: string | null; snippet: string; receivedAt: string; id?: string; threadId?: string | null; fromName?: string | null }>;
+  replies: ReadonlyArray<{ accountName: string; contactEmail: string; subject: string | null; snippet: string; receivedAt: string; id?: string; threadId?: string | null; fromName?: string | null; personaId?: number | null }>;
   /** R42: the GAP mailbox, for the thread link on a reply card. */
   mailbox?: string | null;
   /** The account motions the cockpit read (primary and next per account). */
@@ -527,6 +529,28 @@ export function workDay(i: WorkInput): WorkDay {
     return { r, tier, lane, list, dueMs, act, prio };
   });
   ranked.sort((a, b) => TIER_RANK[a.tier] - TIER_RANK[b.tier] || a.dueMs - b.dueMs || b.act - a.act || Number(!a.prio) - Number(!b.prio) || a.r.rank - b.r.rank || cmpKeys(a.r.sortKey, b.r.sortKey) || a.r.card.accountName.localeCompare(b.r.card.accountName));
+  /** R44: Capture opened from this card: the account, the person who wrote, the deal, the conversation, the source. */
+  const replyPersona = new Map(i.replies.filter((r) => r.personaId != null).map((r) => [`${r.accountName}|${r.contactEmail.toLowerCase()}`, r.personaId as number]));
+  const captureFor = (card: Omit<WorkCard, 'href' | 'index' | 'source'>, list: WorkObligation[]): { href: string; label: string } => {
+    const q = new URLSearchParams({ account: card.accountName });
+    const deal = dealAccounts.get(card.accountName)?.deals;
+    if (deal && deal.length === 1 && deal[0].name) q.set('deal', deal[0].name);
+    if (card.reply && (card.stateKind === 'replied' || card.stateKind === 'opted_out')) {
+      const pid = replyPersona.get(`${card.accountName}|${card.reply.from.toLowerCase()}`);
+      if (pid) q.set('person', String(pid));
+      q.set('context', 'email');
+      q.set('from', `reply:${card.reply.messageId}`);
+      return { href: `/gap/capture?${q.toString()}`, label: 'Log what they said' };
+    }
+    const meeting = list.find((o) => o.kind === 'meeting' || o.kind === 'prepare_meeting');
+    if (meeting) {
+      q.set('context', 'meeting');
+      q.set('from', meeting.commitmentId ? `commitment:${meeting.commitmentId}` : `meeting:${card.accountName}`);
+      return { href: `/gap/capture?${q.toString()}`, label: 'Log the meeting' };
+    }
+    q.set('from', `work:${card.accountName}`);
+    return { href: `/gap/capture?${q.toString()}`, label: 'Log a conversation' };
+  };
   const cards: WorkCard[] = ranked.map(({ r, tier, lane, list, dueMs, act, prio }, index) => {
     const top = list.find((o) => o.tier === tier);
     const phrase = (line: string) => line.replace(/\.$/, '').replace(/^\w/, (ch) => ch.toLowerCase());
@@ -541,6 +565,7 @@ export function workDay(i: WorkInput): WorkDay {
       rankWhy: `${bits.join('; ')}.`,
       obligations: list,
       priority: prio,
+      capture: captureFor(r.card, list),
       index,
       source: r.source ?? 'cockpit',
       href: `${accountHref(r.card.accountName)}?from=work&i=${index}`,

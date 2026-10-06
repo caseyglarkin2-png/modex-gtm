@@ -176,7 +176,8 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
     const links = [
       { label: 'Account history', href: `${legacyHref}` },
       { label: 'Content Studio', href: `/studio?account=${encodeURIComponent(brief.accountName)}` },
-      { label: 'Log what happened', href: `/gap/capture?account=${encodeURIComponent(brief.accountName)}` },
+      // R44: Capture opens with the account, the deal (when there is exactly one open) and where it came from.
+      { label: 'Log what happened', href: `/gap/capture?${new URLSearchParams({ account: brief.accountName, from: `account:${accountSlug(brief.accountName)}`, ...((inputs.opportunity?.deals ?? []).length === 1 && inputs.opportunity?.deals[0].name ? { deal: inputs.opportunity.deals[0].name as string } : {}) }).toString()}` },
       ...(inputs.account.hubspotCompanyId ? [{ label: 'HubSpot record', href: `https://app.hubspot.com/contacts/3819073/record/0-2/${inputs.account.hubspotCompanyId}`, external: true }] : []),
     ];
     if (view === 'brief') {
@@ -317,7 +318,7 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
           nextHref={(pursuitNext?.control ?? control)?.href ?? null}
           nextLabel={(pursuitNext?.control ?? control)?.label ?? null}
           nextText={pursuitNext?.text ?? null}
-          links={links}
+          links={pursuit?.state.person?.personaId != null ? links.map((l) => (l.label === 'Log what happened' ? { ...l, href: `${l.href}&person=${pursuit.state.person!.personaId}` } : l)) : links}
           mailbox={process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() || null}
           pursuit={pursuit ? { state: pursuit.state, stack: pursuit.stack, hypothesisId: pursuit.hypothesisId, excluded, story: storyShown, anchor } : null}
           doneNext={q.from === 'work' ? <DoneNext slug={slug} index={/^\d+$/.test(q.i ?? '') ? Number(q.i) : null} accountName={brief.accountName} /> : null}

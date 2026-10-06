@@ -12,7 +12,7 @@ import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
-import { listRecentCaptures } from '@/lib/gap/capture/store';
+import { CAPTURE_CONTEXTS, listRecentCaptures } from '@/lib/gap/capture/store';
 import { GapSubnav } from '@/components/gap/gap-subnav';
 import { CaptureFlow } from '@/components/gap/capture-flow';
 import { transcriptionProvider } from '@/lib/gap/voice/transcribe';
@@ -20,14 +20,23 @@ import { transcriptionProvider } from '@/lib/gap/voice/transcribe';
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Capture' };
 
-export default async function CapturePage({ searchParams }: { searchParams?: Promise<{ account?: string }> }) {
+export default async function CapturePage({ searchParams }: { searchParams?: Promise<{ account?: string; person?: string; deal?: string; from?: string; context?: string }> }) {
   if (assertGapEnabled('GAP_HYPOTHESIS_ENABLED')) notFound();
   const session = await auth();
   if (!session?.user?.email) redirect('/login');
   const recent = await listRecentCaptures(prisma, 8).catch(() => []);
   // ?account= from an account page: prefilled only when it names a real account (never a free-text guess).
-  const wanted = ((await searchParams) ?? {}).account?.trim() ?? '';
+  const q = (await searchParams) ?? {};
+  const wanted = q.account?.trim() ?? '';
   const initialAccount = wanted ? ((await prisma.account.findUnique({ where: { name: wanted }, select: { name: true } }).catch(() => null))?.name ?? null) : null;
+  // R44: the action that opened Capture prefills the person (only one at that account), the deal and the conversation.
+  const personId = /^\d{1,9}$/.test(q.person ?? '') ? Number(q.person) : null;
+  const person = initialAccount && personId ? await prisma.persona.findUnique({ where: { id: personId }, select: { id: true, name: true, account_name: true } }).catch(() => null) : null;
+  const initialPersona = person && person.account_name === initialAccount ? { id: person.id, name: person.name ?? `person ${person.id}` } : null;
+  const initialDeal = initialAccount && q.deal?.trim() ? q.deal.trim().slice(0, 200) : null;
+  const from = /^(work|reply|commitment|account|meeting):(.{1,200})$/.exec(q.from ?? '');
+  const source = initialAccount && from ? { kind: from[1], id: from[2] } : null;
+  const initialContext = (CAPTURE_CONTEXTS as readonly string[]).includes(q.context ?? '') ? (q.context as string) : null;
 
   return (
     <div className="mx-auto max-w-2xl space-y-5">
@@ -36,7 +45,7 @@ export default async function CapturePage({ searchParams }: { searchParams?: Pro
         <h1 className="text-2xl font-semibold tracking-tight">Capture buyer truth</h1>
         <p className="mt-1 text-sm text-[var(--muted-foreground)]">Right after the conversation. GAP keeps your note as written and suggests what might be buyer truth; only what you confirm counts.</p>
       </div>
-      <CaptureFlow initialAccount={initialAccount} dictate={transcriptionProvider() !== 'disabled'} />
+      <CaptureFlow initialAccount={initialAccount} initialPersona={initialPersona} initialDeal={initialDeal} initialContext={initialContext} source={source} dictate={transcriptionProvider() !== 'disabled'} />
       {recent.length ? (
         <section className="space-y-2" data-testid="capture-recent">
           <h2 className="text-sm font-semibold">Recent notes</h2>

@@ -4,6 +4,9 @@
  *   op link       `{ accountName, personaId? }`                 resolve an unlinked note
  *   op decide     `{ candidateId, decision: confirm|reject, type?, quote?, summary?, hypothesisId?, personaId?, contactEmail? }`
  *   op meeting    `{ outcome, hypothesisId, personaId?, contactEmail?, buyerQuote?, nextLearningObjective? }`
+ *   op commitment `{ candidateId, decision, title?, dueDay?, personaId? }`  an obligation the note states -> a commitment (R44)
+ *   op batch      `{ hypothesisId?, items: [{ candidateId, decision, type?, quote?, personaId?, title?, dueDay? }] }`
+ *                 ONE review of the whole note, each item corrected on its own; the answer says per item what happened
  *
  * CONFIRM is the only way a candidate becomes Buyer Input Data: a human-
  * confirmed BID through the existing service, with the exact quote (re-checked
@@ -15,7 +18,7 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { BID_TYPES } from '@/lib/gap/taxonomy';
-import { MEETING_OUTCOMES, decideCandidate, linkCapture, loadCapture, recordMeetingOutcome } from '@/lib/gap/capture/store';
+import { MEETING_OUTCOMES, decideBatch, decideCandidate, decideCommitmentCandidate, linkCapture, loadCapture, recordMeetingOutcome } from '@/lib/gap/capture/store';
 
 export const dynamic = 'force-dynamic';
 
@@ -43,6 +46,38 @@ const Body = z.discriminatedUnion('op', [
       contactEmail: z.string().email().optional(),
       buyerQuote: z.string().max(2000).optional(),
       nextLearningObjective: z.string().max(300).optional(),
+    })
+    .strict(),
+  z
+    .object({
+      op: z.literal('commitment'),
+      candidateId: z.string().regex(/^k\d{1,2}$/),
+      decision: z.enum(['confirm', 'reject']),
+      title: z.string().max(200).optional(),
+      dueDay: z.string().max(10).optional(),
+      personaId: z.number().int().positive().nullable().optional(),
+    })
+    .strict(),
+  z
+    .object({
+      op: z.literal('batch'),
+      hypothesisId: z.string().min(1).max(64).optional(),
+      items: z
+        .array(
+          z
+            .object({
+              candidateId: z.string().min(1).max(20),
+              decision: z.enum(['confirm', 'reject']),
+              type: z.enum(BID_TYPES).optional(),
+              quote: z.string().max(2000).optional(),
+              personaId: z.number().int().positive().nullable().optional(),
+              title: z.string().max(200).optional(),
+              dueDay: z.string().max(10).optional(),
+            })
+            .strict(),
+        )
+        .min(1)
+        .max(20),
     })
     .strict(),
 ]);
@@ -78,7 +113,11 @@ export async function POST(request: NextRequest, context: { params: Promise<{ id
       ? await linkCapture(prisma, { captureId: id, accountName: b.accountName, personaId: b.personaId ?? null, actor: email })
       : b.op === 'decide'
         ? await decideCandidate(prisma, { captureId: id, ...b, actor: email, now })
-        : await recordMeetingOutcome(prisma, { captureId: id, ...b, actor: email, now });
+        : b.op === 'commitment'
+          ? await decideCommitmentCandidate(prisma, { captureId: id, ...b, actor: email, now })
+          : b.op === 'batch'
+            ? await decideBatch(prisma, { captureId: id, hypothesisId: b.hypothesisId ?? null, items: b.items, actor: email, now })
+            : await recordMeetingOutcome(prisma, { captureId: id, ...b, actor: email, now });
   if (!r.ok) return NextResponse.json({ error: r.reason, detail: r.detail }, { status: STATUS[r.reason] ?? 409 });
   return NextResponse.json(r, { status: 200 });
 }

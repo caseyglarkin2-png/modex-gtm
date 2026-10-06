@@ -11,7 +11,7 @@ import { z } from 'zod';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
-import { CAPTURE_CONTEXTS, RAW_TEXT_MAX, createCapture, listRecentCaptures } from '@/lib/gap/capture/store';
+import { CAPTURE_CONTEXTS, CAPTURE_SOURCE_KINDS, RAW_TEXT_MAX, createCapture, listRecentCaptures } from '@/lib/gap/capture/store';
 
 export const dynamic = 'force-dynamic';
 
@@ -20,6 +20,9 @@ const Body = z
     accountName: z.string().max(200).nullable().optional(),
     accountHint: z.string().max(200).nullable().optional(),
     personaId: z.number().int().positive().nullable().optional(),
+    // R44: the deal and the action that opened Capture (a Work card, a reply, an obligation, the account page).
+    dealId: z.string().trim().max(200).nullable().optional(),
+    source: z.object({ kind: z.enum(CAPTURE_SOURCE_KINDS), id: z.string().trim().min(1).max(200) }).strict().nullable().optional(),
     context: z.enum(CAPTURE_CONTEXTS),
     rawText: z.string().max(RAW_TEXT_MAX),
   })

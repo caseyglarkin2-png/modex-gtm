@@ -126,6 +126,39 @@ describe.skipIf(!RUN)('Sprint 4: execute a day and remember what happened (scrat
     return { status: res.status, body: (await res.json()) as { error?: string; detail?: string; alreadySent?: boolean; sent?: { gmailSentMessageId: string } } };
   }
 
+  describe('R44: capture a conversation once', () => {
+    it('a note saved through the route with the account, person, deal and source; one batch review confirms the obligation into a commitment due Friday (New York) and rejects the rest; a second press records nothing twice', async () => {
+      const pepsi = account(corpus, 'Pepsi');
+      const tom = pepsi.people.find((p) => p.name.startsWith('Tom'))!;
+      const { POST: save } = await import('@/app/api/gap/captures/route');
+      const note = `Tom: Can you send me the dock schedule template by Friday?\nTom: We lose about 3 hours per shift hunting for trailers at the gate.\nI think they are underreporting it.\nCasey: I will send the pilot plan Monday.`;
+      const res = await save(req('/api/gap/captures', 'POST', { accountName: pepsi.name, personaId: tom.id, dealId: 'Pepsi yard pilot', source: { kind: 'work', id: pepsi.name }, context: 'call', rawText: note }));
+      const view = (await res.json()) as { id: string; commitments: Array<{ id: string; title: string; due: { day: string } | null }>; candidates: Array<{ id: string }>; excluded: Array<{ text: string }>; rawText: string; dealId: string; source: { kind: string } };
+      expect(res.status, JSON.stringify(view)).toBe(201);
+      expect(view).toMatchObject({ rawText: note, dealId: 'Pepsi yard pilot', source: { kind: 'work' } });
+      expect(view.excluded.map((x) => x.text)).toEqual(['I think they are underreporting it.']);
+      const ask = view.commitments.find((c) => /dock schedule/.test(c.title))!;
+      const mine = view.commitments.find((c) => /pilot plan/.test(c.title))!;
+      const { POST: decide } = await import('@/app/api/gap/captures/[id]/route');
+      const batch = { op: 'batch', items: [{ candidateId: ask.id, decision: 'confirm', title: 'Send Tom the dock schedule template', personaId: tom.id }, { candidateId: mine.id, decision: 'reject' }, ...view.candidates.map((c) => ({ candidateId: c.id, decision: 'reject' }))] };
+      const r1 = await decide(req(`/api/gap/captures/${view.id}`, 'POST', batch), ctx(view.id));
+      const b1 = (await r1.json()) as { results: Array<{ ok: boolean }> };
+      expect(r1.status, JSON.stringify(b1)).toBe(200);
+      expect(b1.results.every((x) => x.ok)).toBe(true);
+      const r2 = await decide(req(`/api/gap/captures/${view.id}`, 'POST', batch), ctx(view.id));
+      expect(((await r2.json()) as { results: Array<{ ok: boolean; reason?: string }> }).results.every((x) => !x.ok && x.reason === 'already_decided')).toBe(true);
+      const { GET } = await import('@/app/api/gap/commitments/route');
+      const list = (await (await GET(req(`/api/gap/commitments?account=${encodeURIComponent(pepsi.name)}`, 'GET'))).json()) as { items: Array<{ kind: string; title: string; dueAt: string; dealId: string; person: { personaId: number }; source: { kind: string } }> };
+      const owed = list.items.filter((c) => c.source.kind === 'capture');
+      expect(owed).toHaveLength(1);
+      expect(owed[0]).toMatchObject({ kind: 'deliverable', title: 'Send Tom the dock schedule template', dealId: 'Pepsi yard pilot', person: { personaId: tom.id } });
+      // Due on the Friday the words name, read in New York from when the note was saved, at 9 am New York.
+      const { nyDayAt, weekdayOf } = await import('@/lib/gap/work/dates');
+      expect(ask.due && weekdayOf(ask.due.day)).toBe(5);
+      expect(owed[0].dueAt).toBe(nyDayAt(ask.due!.day).toISOString());
+    }, 120_000);
+  });
+
   describe('R43: follow-up execution and recovery', () => {
     it('two browsers confirm the same email at the same moment: exactly one message leaves, one ledger row, one EmailLog row', async () => {
       const fedex = account(corpus, 'Fedex');

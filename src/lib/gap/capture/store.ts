@@ -22,7 +22,9 @@ import { randomUUID } from 'node:crypto';
 import { recordBid } from '../bid/service';
 import { recordDisposition } from '../disposition/service';
 import { BID_TYPES, type BidType } from '../taxonomy';
-import { buyerSpeakers, extractCandidates, quoteInSource, quoteWithinSentence, sentencesWithSpeaker, type CandidateBid } from './extract';
+import { buyerSpeakers, excludedLines, extractCandidates, extractCommitments, quoteInSource, quoteWithinSentence, sentencesWithSpeaker, type CandidateBid, type CandidateCommitment } from './extract';
+import { ensureCommitment } from '../work/commitments';
+import { isDay, nyDayAt } from '../work/dates';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -62,7 +64,18 @@ export interface CaptureView {
   createdBy: string;
   candidates: Array<CandidateBid & { decision: null | { kind: 'confirmed'; bidId: string; type: string; by: string } | { kind: 'rejected'; by: string } }>;
   meetings: Array<{ outcome: MeetingOutcome; dispositionId: string | null; nextLearningObjective: string | null; at: string }>;
+  /** R44: the deal the action that opened Capture named, when it did. */
+  dealId: string | null;
+  /** R44: what opened Capture (a Work card, a reply, an obligation, the account page), when known. */
+  source: { kind: string; id: string } | null;
+  /** R44: the obligations the note states (who owes what by when), each confirmed into a commitment or rejected. */
+  commitments: Array<CandidateCommitment & { decision: null | { kind: 'confirmed'; commitmentId: string; by: string } | { kind: 'rejected'; by: string } }>;
+  /** R44: the lines never proposed as buyer words (a pasted summary, the seller's own read), with why. */
+  excluded: Array<{ text: string; reason: string }>;
 }
+
+/** R44: what opened Capture, from the link's `from` (a Work card, a reply, an obligation, the account page). */
+export const CAPTURE_SOURCE_KINDS = ['work', 'reply', 'commitment', 'account', 'meeting'] as const;
 
 export type CaptureRefusal =
   | 'empty_note'
@@ -81,7 +94,9 @@ export type CaptureRefusal =
   | 'bad_outcome'
   | 'quote_required'
   | 'speaker_required'
-  | 'contact_not_at_account';
+  | 'contact_not_at_account'
+  | 'bad_due'
+  | 'title_required';
 
 type Ok<T> = { ok: true } & T;
 type Refused = { ok: false; reason: CaptureRefusal; detail?: string };
@@ -93,7 +108,7 @@ async function audit(prisma: PrismaLike, kind: string, actor: string, captureId:
 /** Save a raw note and propose candidates once. Unknown account text is kept as an unlinked hint, never guessed. */
 export async function createCapture(
   prisma: PrismaLike,
-  input: { accountName?: string | null; accountHint?: string | null; personaId?: number | null; context: string; rawText: string; actor: string; now: Date },
+  input: { accountName?: string | null; accountHint?: string | null; personaId?: number | null; dealId?: string | null; source?: { kind: string; id: string } | null; context: string; rawText: string; actor: string; now: Date },
 ): Promise<Ok<{ capture: CaptureView }> | Refused> {
   const raw = String(input.rawText ?? '');
   if (!raw.trim()) return { ok: false, reason: 'empty_note' };
@@ -114,6 +129,7 @@ export async function createCapture(
   }
   const id = randomUUID();
   const candidates = extractCandidates(raw);
+  const source = input.source && (CAPTURE_SOURCE_KINDS as readonly string[]).includes(input.source.kind) && input.source.id?.trim() ? { kind: input.source.kind, id: input.source.id.trim().slice(0, 200) } : null;
   await audit(prisma, CAPTURE_NOTE, input.actor, id, {
     accountName,
     accountHint: accountName ? null : input.accountHint?.trim() || null,
@@ -122,6 +138,11 @@ export async function createCapture(
     rawText: raw,
     candidates,
     capturedAt: input.now.toISOString(),
+    // R44: the deal and the action that opened Capture, the obligations the note states and what is never buyer words.
+    dealId: input.dealId?.trim() || null,
+    source,
+    commitments: extractCommitments(raw, input.now),
+    excluded: excludedLines(raw),
   });
   const view = await loadCapture(prisma, id);
   return view ? { ok: true, capture: view } : { ok: false, reason: 'capture_not_found' };
@@ -143,12 +164,20 @@ export async function loadCapture(prisma: PrismaLike, id: string): Promise<Captu
     personaId = typeof r.payload.personaId === 'number' ? r.payload.personaId : personaId;
   }
   const decisions = new Map<string, CaptureView['candidates'][number]['decision']>();
+  const commitmentDecisions = new Map<string, CaptureView['commitments'][number]['decision']>();
   for (const r of rows.filter((x) => x.kind === CAPTURE_CANDIDATE)) {
     const cid = String(r.payload.candidateId ?? '');
-    if (!cid || decisions.has(cid)) continue;
+    if (!cid) continue;
+    if (typeof r.payload.commitmentCandidate === 'boolean' && r.payload.commitmentCandidate) {
+      if (commitmentDecisions.has(cid)) continue;
+      commitmentDecisions.set(cid, r.payload.decision === 'confirmed' ? { kind: 'confirmed', commitmentId: String(r.payload.commitmentId), by: r.actor } : { kind: 'rejected', by: r.actor });
+      continue;
+    }
+    if (decisions.has(cid)) continue;
     decisions.set(cid, r.payload.decision === 'confirmed' ? { kind: 'confirmed', bidId: String(r.payload.bidId), type: String(r.payload.type), by: r.actor } : { kind: 'rejected', by: r.actor });
   }
   const candidates = (Array.isArray(p.candidates) ? (p.candidates as CandidateBid[]) : []).map((c) => ({ ...c, decision: decisions.get(c.id) ?? null }));
+  const commitments = (Array.isArray(p.commitments) ? (p.commitments as CandidateCommitment[]) : []).map((c) => ({ ...c, decision: commitmentDecisions.get(c.id) ?? null }));
   return {
     id,
     accountName,
@@ -162,7 +191,107 @@ export async function loadCapture(prisma: PrismaLike, id: string): Promise<Captu
     meetings: rows
       .filter((r) => r.kind === CAPTURE_MEETING)
       .map((r) => ({ outcome: r.payload.outcome as MeetingOutcome, dispositionId: (r.payload.dispositionId as string | null) ?? null, nextLearningObjective: (r.payload.nextLearningObjective as string | null) ?? null, at: new Date(r.created_at).toISOString() })),
+    dealId: typeof p.dealId === 'string' ? p.dealId : null,
+    source: p.source && typeof (p.source as { kind?: unknown }).kind === 'string' ? (p.source as { kind: string; id: string }) : null,
+    commitments,
+    excluded: Array.isArray(p.excluded) ? (p.excluded as Array<{ text: string; reason: string }>) : [],
   };
+}
+
+/**
+ * R44: the seller's decision on one obligation the note states. CONFIRM makes it an R40 commitment (one-shot: its id
+ * is this capture and candidate, so a double tap or a retry makes one), with the edited title and day, the person
+ * (who asked, or who promised) and the deal from the note; its basis is the verbatim sentence with its speaker (the
+ * seller's own words say "You", never a buyer quote). REJECT records the rejection. Either way, once.
+ */
+export async function decideCommitmentCandidate(
+  prisma: PrismaLike,
+  input: { captureId: string; candidateId: string; decision: 'confirm' | 'reject'; title?: string | null; dueDay?: string | null; personaId?: number | null; actor: string; now: Date },
+): Promise<Ok<{ commitmentId: string | null; capture: CaptureView }> | Refused> {
+  const run = async (tx: PrismaLike): Promise<Ok<{ commitmentId: string | null; capture: CaptureView }> | Refused> => {
+    const view = await loadCapture(tx, input.captureId);
+    if (!view) return { ok: false, reason: 'capture_not_found' };
+    const cand = view.commitments.find((c) => c.id === input.candidateId);
+    if (!cand) return { ok: false, reason: 'candidate_not_found' };
+    if (cand.decision) return { ok: false, reason: 'already_decided' };
+    if (input.decision === 'reject') {
+      await audit(tx, CAPTURE_CANDIDATE, input.actor, input.captureId, { candidateId: cand.id, commitmentCandidate: true, decision: 'rejected', quote: cand.quote });
+      return { ok: true, commitmentId: null, capture: (await loadCapture(tx, input.captureId))! };
+    }
+    if (!view.accountName) return { ok: false, reason: 'capture_unlinked' };
+    if (!quoteInSource(cand.quote, view.rawText)) return { ok: false, reason: 'quote_not_in_source' };
+    const title = (input.title ?? cand.title).replace(/\s+/g, ' ').trim();
+    if (!title) return { ok: false, reason: 'title_required' };
+    const day = input.dueDay === undefined || input.dueDay === null ? cand.due?.day ?? null : input.dueDay.trim() || null;
+    if (day && !isDay(day)) return { ok: false, reason: 'bad_due' };
+    const pid = input.personaId ?? view.personaId;
+    let person: { personaId: number | null; name: string | null; email: string | null } | null = null;
+    if (pid != null) {
+      const p = await tx.persona.findUnique({ where: { id: pid }, select: { id: true, name: true, email: true, account_name: true } });
+      if (!p || p.account_name !== view.accountName) return { ok: false, reason: 'persona_not_at_account' };
+      person = { personaId: p.id, name: p.name ?? null, email: p.email ?? null };
+    }
+    const r = await ensureCommitment(
+      tx,
+      {
+        accountName: view.accountName,
+        kind: cand.kind,
+        title: title.slice(0, 200),
+        basis: `${cand.speaker ?? 'In the note'}: "${cand.quote}"`,
+        dueAt: day ? nyDayAt(day) : null,
+        person,
+        dealId: view.dealId,
+        status: cand.kind === 'buyer_promise' ? 'waiting' : 'open',
+        dependency: cand.kind === 'buyer_promise' ? `${person?.name ?? cand.speaker ?? 'their'} delivery` : null,
+        source: { kind: 'capture', id: `${view.id}:${cand.id}` },
+        detail: cand.due?.ambiguous ? { ambiguousDate: cand.due.phrase } : null,
+      },
+      { actor: input.actor, now: input.now },
+    );
+    if (!r.ok) return { ok: false, reason: r.reason === 'account_not_found' ? 'account_not_found' : r.reason === 'bad_due' ? 'bad_due' : 'title_required', detail: r.reason };
+    await audit(tx, CAPTURE_CANDIDATE, input.actor, input.captureId, { candidateId: cand.id, commitmentCandidate: true, decision: 'confirmed', commitmentId: r.commitment.commitmentId, title, dueDay: day, quote: cand.quote });
+    return { ok: true, commitmentId: r.commitment.commitmentId, capture: (await loadCapture(tx, input.captureId))! };
+  };
+  if (typeof prisma.$transaction !== 'function' || typeof prisma.$executeRaw !== 'function') return run(prisma);
+  return prisma.$transaction(async (tx: PrismaLike) => {
+    await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${`gap_capture:${input.captureId}`}))`;
+    return run(tx);
+  });
+}
+
+export interface BatchItem {
+  candidateId: string;
+  decision: 'confirm' | 'reject';
+  type?: string | null;
+  quote?: string | null;
+  personaId?: number | null;
+  title?: string | null;
+  dueDay?: string | null;
+}
+
+/**
+ * R44: ONE review of the whole note: every buyer statement and every obligation, each kept or rejected, each with
+ * its own correction (a relabelled type, a shortened quote, who said it, an edited title or day). Each item runs
+ * through the same single decision (so the gates are the same and nothing is recorded twice); one refusal never
+ * blocks the others, and the answer says, per item, what happened.
+ */
+export async function decideBatch(
+  prisma: PrismaLike,
+  input: { captureId: string; hypothesisId?: string | null; items: BatchItem[]; actor: string; now: Date },
+): Promise<Ok<{ results: Array<{ candidateId: string; ok: boolean; reason?: string; detail?: string; bidId?: string | null; commitmentId?: string | null }>; capture: CaptureView }> | Refused> {
+  const view = await loadCapture(prisma, input.captureId);
+  if (!view) return { ok: false, reason: 'capture_not_found' };
+  const results: Array<{ candidateId: string; ok: boolean; reason?: string; detail?: string; bidId?: string | null; commitmentId?: string | null }> = [];
+  for (const item of input.items) {
+    if (/^k\d+$/.test(item.candidateId)) {
+      const r = await decideCommitmentCandidate(prisma, { captureId: input.captureId, candidateId: item.candidateId, decision: item.decision, title: item.title, dueDay: item.dueDay, personaId: item.personaId, actor: input.actor, now: input.now });
+      results.push(r.ok ? { candidateId: item.candidateId, ok: true, commitmentId: r.commitmentId } : { candidateId: item.candidateId, ok: false, reason: r.reason, detail: r.detail });
+    } else {
+      const r = await decideCandidate(prisma, { captureId: input.captureId, candidateId: item.candidateId, decision: item.decision, type: item.type, quote: item.quote, hypothesisId: input.hypothesisId ?? null, personaId: item.personaId, actor: input.actor, now: input.now });
+      results.push(r.ok ? { candidateId: item.candidateId, ok: true, bidId: r.bidId } : { candidateId: item.candidateId, ok: false, reason: r.reason, detail: r.detail });
+    }
+  }
+  return { ok: true, results, capture: (await loadCapture(prisma, input.captureId))! };
 }
 
 /** Resolve an unlinked note to an account (and optionally a person). Append-only. */

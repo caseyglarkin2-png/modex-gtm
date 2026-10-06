@@ -1262,6 +1262,42 @@ reconcile writes only commitment rows). Debt: no next follow-up is proposed afte
 closes; the next touch waits for a new send or the seller's own task); the follow-up copy family (step 1+) does not
 exist, so "prepare" is reachable only for legacy multi-step versions.
 
+R44 **Capture a conversation once (DONE; dictation stays off).** The note is kept verbatim WITH its source: Capture
+opened from a Work card, a reply, an obligation, a meeting or the account page carries the account, the person (only
+one at that account, checked by the page and the store), the deal (its name: the account read holds no deal id) and
+the conversation in the link (`/gap/capture?account=&person=&deal=&context=&from=kind:id`), and the note stores
+`dealId` and `source` (an unknown source kind is dropped, never trusted). Each Work card offers it ("Log what they
+said" on a reply, as an email with the person who wrote; "Log the meeting" with a meeting due; "Log a conversation"
+otherwise, with the deal on a deal card); the account page's "Log what happened" carries the deal and the chosen
+person. `capture/extract.ts` now reads every sentence with its speaker and whether the seller said it
+(`noteSentences`): a pasted summary (a "Summary:", "AI summary:", "TL;DR:", "Key takeaways:", "Action items:" or
+note-taker block, to the next blank line) and the seller's own read on an unlabelled line ("I think", "my guess",
+"probably") are NEVER proposed as buyer words and are listed with why; a labelled buyer line saying "I think" is still
+theirs; a bullet marker is layout, not words. NEW `extractCommitments`: a buyer asking the seller for something (the
+seller owes a deliverable), the seller promising something (the seller's own words, recorded as "You", never a buyer
+quote), a buyer promising something (waiting on them, then a chase), a meeting named with a day (prepare it); the day
+is read in New York from when the note was saved, the thing owed without the day words, and an ambiguous day ("next
+Friday") is flagged for the seller to check. The review is ONE concise press (`decideBatch`, op `batch`): every
+statement and every obligation kept by default or rejected, each corrected on its own (a relabelled type, a shortened
+quote that must stay inside its sentence, who said it, what is owed, the day), each item through the same single
+decision (a statement becomes a human-confirmed BID only with its exact words and its speaker, as before; an obligation
+becomes an R40 commitment with the note and candidate as its one-shot source, the deal from the note, the verbatim
+sentence and its speaker as its basis), one refusal never blocking the others and each answer said per item; the
+single Confirm / Reject per statement stays for a one-off correction. Dictation: unchanged and off (transcription spend
+not authorized; a press shows why and records nothing). Proof: `capture-once.test.tsx` (7: speakers, owners, kinds and
+New York days of the four obligations in one note saved late in the evening; summaries and the seller's own read never
+proposed, a seller line that sounds like data never a statement, a buyer's "I think" kept; the note keeps its source,
+deal and person; confirm all, correct one, reject one in one press, the commitments with the edited title and day and
+the right status, a second press recording nothing twice; one refusal not blocking the others and a seller promise in
+the seller's own words; Capture opened prefilled from a reply, a deal and a meeting; the screen saving the prefill and
+dictation recording nothing) and the scratch file (the note through the real routes, one batch, the commitment due on
+that Friday at 9 am New York, a second press recording nothing); seven deliberate mutations (the seller's read as a
+quote, a summary as quotes, a seller line as a statement, an obligation decided twice, a refusal stopping the batch, a
+buyer promise made the seller's, Capture forgetting what opened it) each turn their owning test red. Adjacent: 26 files
+/ 367 green; typecheck and lint clean. Rollback: revert the commit (older notes read with no obligations; the
+commitments already written stay). Debt: the obligation and object reads are patterns over the sentence (the seller
+edits the title and the day in the review); a deal is referenced by name.
+
 ## 12. Migration, backfill and rollback
 
 Order of commits inside Sprint 1 and 3: schema + SQL first (no reader), then pure core, then importers (Top100 before PIC before modex legacy), then runtime pin, then services, then queue actions under the flag, then `GAP_OS_ENABLED=true` in Vercel after `verify-triggers.ts` passes against prod (env is snapshot at deploy; redeploy after setting). Before the prod `db push`, preview it with `prisma migrate diff --from-url <prod> --to-schema-datamodel prisma/schema.prisma --script` and confirm the script is additive only; also confirm the prod role can `CREATE FUNCTION` (not yet verified). Rollback: the flag off restores byte-identical behavior instantly; full removal is the rollback SQL plus reverting the runtime, service and queue-action commits; `sequences` is never modified; the only two pre-existing tables GAP OS's schema touches at all are `draft_queue_items` (one nullable `sequence_version_id` stamp, S1-T2) and `inbound_messages` (`source String @default("gmail")` and `hubspot_engagement_id String?`, S2-T1, needed so the reply cron and the HubSpot poller can tell a Gmail-sourced row from a HubSpot-engagement-sourced one and attribute the engagement id idempotently) — both additive-only, both confirmed by the production preflight below; the lane and PIC files are read, never written.

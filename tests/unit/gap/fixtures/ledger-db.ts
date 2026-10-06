@@ -49,6 +49,7 @@ export interface LedgerSeed {
   dispositions?: Row[];
   routingDecisions?: Row[];
   unsubscribed?: Row[];
+  hypotheses?: Row[];
 }
 
 /** A fresh client over shared rows; `tick` advances the ledger clock so newest-row-wins is deterministic. */
@@ -63,6 +64,7 @@ export function ledgerDb(seed: LedgerSeed = {}, start = new Date('2026-10-06T14:
     conversationDisposition: [...(seed.dispositions ?? [])],
     routingDecision: [...(seed.routingDecisions ?? [])],
     unsubscribedEmail: [...(seed.unsubscribed ?? [])],
+    prospectingHypothesis: [...(seed.hypotheses ?? [])],
   };
   let t = start.getTime();
   const clock = () => new Date((t += 1000));
@@ -76,6 +78,7 @@ export function ledgerDb(seed: LedgerSeed = {}, start = new Date('2026-10-06T14:
     conversationDisposition: table(store.conversationDisposition, clock, 'd'),
     routingDecision: table(store.routingDecision, clock, 'rd'),
     unsubscribedEmail: table(store.unsubscribedEmail, clock, 'u'),
+    prospectingHypothesis: table(store.prospectingHypothesis, clock, 'h'),
   });
   return { store, client, setClock: (d: Date) => (t = d.getTime()) };
 }

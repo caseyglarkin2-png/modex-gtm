@@ -222,6 +222,7 @@ export function WorkList({
                   <Link href={c.next.href} className={PRIMARY} data-testid="work-card-next">{c.next.label}</Link>
                 ) : null}
                 <Link href={c.href} className={OUTLINE} data-testid="work-card-open">Open {c.accountName}</Link>
+                {c.capture ? <Link href={c.capture.href} className="inline-flex min-h-11 items-center text-sm underline" data-testid="work-card-capture">{c.capture.label}</Link> : null}
               </div>
               {c.tier !== undefined ? <div className="mt-1"><PriorityControl c={c} /></div> : null}
             </li>
