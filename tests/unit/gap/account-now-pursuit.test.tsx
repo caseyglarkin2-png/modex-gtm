@@ -45,8 +45,10 @@ describe('NOW with a pursuit state', () => {
     render(<AccountNowView v={v} nextHref="/gap/preview/h1?personaId=2" nextLabel="Prepare the email to Kelly" nextText="Prepare the first touch to Kelly Kruse." links={[]} pursuit={{ state, stack, hypothesisId: 'h1', excluded: r.excluded.map((e) => ({ key: e.candidate.key, name: e.candidate.name, title: e.candidate.title, code: e.code, reason: e.reason })) }} />);
     expect(screen.getByTestId('now-state').textContent).toMatch(/Ready for a first touch: Kelly Kruse/);
     expect(screen.getAllByTestId('people-stack-row')[0].textContent).toMatch(/Kelly Kruse/);
-    expect(screen.getByTestId('people-stack-prepare')).toHaveAttribute('href', '/gap/preview/h1?personaId=2');
+    // UX-04: NEXT carries the one primary control for the chosen person; the row keeps Call prep and Log a touch.
     expect(screen.getByTestId('now-next-control')).toHaveAttribute('href', '/gap/preview/h1?personaId=2');
+    expect(screen.queryByTestId('people-stack-prepare')).toBeNull();
+    expect(screen.getByTestId('people-stack-call')).toHaveAttribute('href', '/gap/call/2');
   });
   it('without a pursuit the WHO slot still renders', () => {
     render(<AccountNowView v={v} nextHref={null} nextLabel={null} links={[]} />);

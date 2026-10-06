@@ -84,7 +84,8 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
   const hrefFor = (v: View) => `/gap/accounts/${slug}${v === 'now' ? (nameQ ? `?${nameQ}` : '') : `?view=${v}${nameQ ? `&${nameQ}` : ''}`}`;
 
   const tabs = (
-    <nav aria-label="Account views" className="sticky top-14 z-30 -mx-4 flex gap-1 border-b border-[var(--border)] bg-[var(--background)] px-4 py-1.5 md:top-0" data-testid="account-view-tabs">
+    // UX-04: never sticky on a phone (a sticky bar hid focused controls, WCAG 2.4.11); sticky from md up with scroll padding set.
+    <nav aria-label="Account views" className="-mx-4 flex gap-1 border-b border-[var(--border)] bg-[var(--background)] px-4 py-1.5 md:sticky md:top-0 md:z-30" data-testid="account-view-tabs">
       {VIEWS.map((t) => (
         <PendingLink key={t.v} href={hrefFor(t.v)} aria-current={view === t.v ? 'page' : undefined} className={`inline-flex min-h-11 min-w-16 items-center justify-center rounded px-4 text-sm ${view === t.v ? 'bg-[var(--primary)] font-semibold text-[var(--primary-foreground)]' : 'text-[var(--muted-foreground)]'}`} data-testid={`account-view-${t.v}`}>
           {t.label}
@@ -154,7 +155,9 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
       : brief.hypotheses.some((h) => h.needsReview.length) ? { href: `${hrefFor('sources')}#brief-hypotheses`, label: 'Review the thesis' }
       : { href: `${hrefFor('sources')}#research-plan`, label: 'Open the research plan' };
     return (
-      <div className="mx-auto max-w-2xl space-y-4 pb-28">
+      // UX-04: one column is the primary design (about 820 CSS px on Casey's display); from 1100 px the context sits
+      // beside the decision, so the container widens only there. Bottom padding clears the phone action bar.
+      <div className="mx-auto max-w-2xl space-y-4 pb-32 min-[1100px]:max-w-6xl md:pb-28">
         <GapSubnav />
         {header}
         {tabs}

@@ -35,8 +35,11 @@ describe('NOW render', () => {
     const brief = buildAccountBrief(i, NOW);
     const v = projectNow(brief, ctx, i, NOW);
     const { container } = render(<AccountNowView v={v} nextHref="/gap/preview/h1" nextLabel="Review the thesis and first touch" links={[]} />);
-    const order = ['now-state', 'now-next', 'now-who', 'now-why-now', 'now-gap', 'now-ask'].map((id) => container.innerHTML.indexOf(`data-testid="${id}"`));
+    // UX-04: THE GAP shows only when the buyer confirmed something (nothing here), so it is absent, never out of order.
+    const order = ['now-state', 'now-next', 'now-who', 'now-why-now', 'now-ask'].map((id) => container.innerHTML.indexOf(`data-testid="${id}"`));
     expect(order.every((x, k) => x > -1 && (k === 0 || x > order[k - 1]))).toBe(true);
+    expect(screen.queryByTestId('now-gap')).toBeNull();
+    expect(screen.queryByTestId('now-impact')).toBeNull();
     expect(screen.getByTestId('now-next-control').getAttribute('href')).toBe('/gap/preview/h1');
     expect(screen.getByTestId('now-private').textContent).toMatch(/^Private: interest signal, never mention to the buyer/);
     const text = container.textContent ?? '';

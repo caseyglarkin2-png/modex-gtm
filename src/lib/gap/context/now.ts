@@ -109,7 +109,7 @@ const host = (u: string | null) => {
 const CATALYST_WINDOW_MS = 45 * 86_400_000;
 const PROGRAM_WINDOW_MS = 180 * 86_400_000;
 /** A market piece (a stock forecast, a fair-value take) is not a trigger (click test round 4: PFG, GXO). */
-const MARKET_PIECE = /\b(stock forecasts?|price target|fair value|gf value|\d+(?:\.\d+)?% (?:gain|drop|rise|fall|decline|jump)|stock price|quote & history|stock quote|shares (?:rose|fell|jump|drop)|stock (?:price|rating)|dividend|buy rating|sell rating|analyst(?:s)? (?:say|rating))\b/i;
+const MARKET_PIECE = /\b(stock forecasts?|price target|fair value|gf value|\d+(?:\.\d+)?% (?:gain|drop|rise|fall|decline|jump)|stock price|quote & history|stock quote|shares (?:rose|fell|jump|drop)|stock (?:price|rating)|dividend|buy rating|sell rating|analyst(?:s)? (?:say|rating)|(?:purchases?|acquires?|buys?|sells?|reduces?|increases?|trims?|raises?|lowers?|boosts?|cuts?) (?:new )?(?:holdings?|stake|position|shares)|holdings? in|shares of [A-Z][\w.&' -]+ (?:inc|corp|co)\b|\$[A-Z]{1,5}\b|13F|institutional investor)\b/i;
 const SOURCE_KIND: Record<string, string> = { conference: 'a conference', event: 'an event', meeting: 'a meeting', referral: 'a referral' };
 
 const norm = (s: string) => s.replace(/^[A-Z][A-Z /]+:\s*/, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
@@ -304,7 +304,8 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   candidates.sort((a, b) => Number(b.s.truth === 'BUYER_CONFIRMED') - Number(a.s.truth === 'BUYER_CONFIRMED'));
   for (const { s, k } of candidates) {
     const l = sellerLine(s, k, lx);
-    if (l && know.length < 3 && take(l)) know.push(l);
+    // UX-04: an imagery fact ("never cite") is SOURCES depth, not a line a seller reads before a first touch.
+    if (l && l.cite !== 'Never cite (from imagery)' && know.length < 3 && take(l)) know.push(l);
   }
 
   // THINK: one hedged problem, its short "wrong if", and the ASK that tests it.

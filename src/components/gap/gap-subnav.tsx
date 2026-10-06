@@ -34,7 +34,7 @@ function isActive(pathname: string, href: string): boolean {
 export function GapSubnav() {
   const pathname = usePathname();
   return (
-    <nav aria-label="GAP OS" data-testid="gap-subnav" className="flex flex-wrap items-center gap-x-1 border-b border-[var(--border)]">
+    <nav aria-label="GAP OS" data-testid="gap-subnav" className="flex flex-nowrap items-center gap-x-1 overflow-x-auto border-b border-[var(--border)] sm:flex-wrap sm:overflow-visible">
       {TABS.map((tab) => {
         const active = isActive(pathname, tab.href);
         return (
@@ -44,7 +44,7 @@ export function GapSubnav() {
             aria-current={active ? 'page' : undefined}
             data-testid={`gap-subnav-${tab.label.toLowerCase().replace(/\s+/g, '-')}`}
             className={cn(
-              'border-b-2 px-3 py-2 text-sm font-medium transition-colors',
+              'shrink-0 whitespace-nowrap border-b-2 px-3 py-2 text-sm font-medium transition-colors',
               active
                 ? 'border-[var(--primary)] text-[var(--primary)]'
                 : 'border-transparent text-[var(--muted-foreground)] hover:text-[var(--foreground)]',

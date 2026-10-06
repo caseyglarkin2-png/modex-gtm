@@ -39,6 +39,8 @@ export interface PeopleStackViewProps {
   hypothesisId: string | null;
   /** The set-aside people with their reasons (the resolver's own list), for the expanded view. */
   excluded: SetAsidePerson[];
+  /** UX-04: NEXT already carries the one primary control for the chosen person, so the row shows no second one. */
+  primaryInNext?: boolean;
 }
 
 type Busy = { key: string; step: 'adding' | 'choosing' } | null;
@@ -48,7 +50,7 @@ const PRIMARY = `${BTN} bg-[var(--primary)] text-[var(--primary-foreground)] hov
 const OUTLINE = `${BTN} border border-[var(--border)] hover:bg-[var(--muted)] disabled:opacity-60`;
 const TEXT = 'inline-flex min-h-9 items-center text-xs underline text-[var(--muted-foreground)]';
 
-export function PeopleStackView({ accountName, stack, state, hypothesisId, excluded }: PeopleStackViewProps) {
+export function PeopleStackView({ accountName, stack, state, hypothesisId, excluded, primaryInNext = false }: PeopleStackViewProps) {
   const router = useRouter();
   const [open, setOpen] = useState<Set<string>>(new Set());
   const [showAll, setShowAll] = useState(false);
@@ -189,9 +191,11 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
               ) : row.chosen ? (
                 <>
                   {hypothesisId && row.personaId !== null ? (
-                    <Link href={`/gap/preview/${hypothesisId}?personaId=${row.personaId}`} className={PRIMARY} data-testid="people-stack-prepare">
-                      Prepare email
-                    </Link>
+                    primaryInNext ? null : (
+                      <Link href={`/gap/preview/${hypothesisId}?personaId=${row.personaId}`} className={PRIMARY} data-testid="people-stack-prepare">
+                        Prepare email
+                      </Link>
+                    )
                   ) : row.personaId === null && row.hubspotContactId ? (
                     <button type="button" className={PRIMARY} disabled={busy !== null} onClick={() => void choose(row)} data-testid="people-stack-add">
                       {busy?.key === row.key ? 'Adding...' : `Add ${row.name.split(' ')[0]} to GAP`}

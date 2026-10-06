@@ -29,6 +29,8 @@ export function GlobalComposeButton() {
   const [hits, setHits] = useState<PersonaHit[]>([]);
   const [picked, setPicked] = useState<PersonaHit | null>(null);
 
+  // UX-04: the GAP account workspace carries its own actions; the fixed pill covered Log a touch and Call prep at 390.
+  const onGapAccount = /^\/gap\/accounts\//.test(pathname);
   const accountSlug = pathname.match(/^\/accounts\/([^/]+)/)?.[1];
   const accountName = accountSlug
     ? accountSlug
@@ -89,6 +91,7 @@ export function GlobalComposeButton() {
     setComposerOpen(true);
   }
 
+  if (onGapAccount) return null;
   return (
     <>
       <Button

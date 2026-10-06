@@ -113,7 +113,9 @@ export function FeedbackButton() {
           setOpen(true);
         }}
         // Left of the global Compose button (fixed bottom-6 right-6, 48px): never under it.
-        className="fixed bottom-6 right-20 z-40 rounded-full border border-[var(--border)] bg-[var(--background)] px-3 py-2 text-xs font-semibold shadow-md hover:bg-[var(--muted)]"
+        // UX-04: on the GAP account workspace the pill is hidden (it covered Log a touch and Call prep at 390); the
+        // workspace's own tools row carries a Note control that opens this same dialog (openFeedback).
+        className={`fixed bottom-6 right-20 z-40 rounded-full border border-[var(--border)] bg-[var(--background)] px-3 py-2 text-xs font-semibold shadow-md hover:bg-[var(--muted)] ${/^\/gap\/accounts\//.test(pathname) ? 'hidden' : ''}`}
         data-testid="feedback-open"
         aria-label="Write a note about GAP"
       >

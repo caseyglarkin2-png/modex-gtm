@@ -267,3 +267,15 @@ describe('context projections', () => {
     expect(a.find((x) => x.kind === 'legacy_meeting_brief')).toMatchObject({ legacy: true });
   });
 });
+
+describe('UX-04 context filters', () => {
+  it('a fund-holdings, stake or ticker headline is market chatter: never a WHY NOW line, even when nothing else is on record', () => {
+    const chatter = (n: number, title: string) => ({ id: `m${n}`, title, url: `https://marketbeat.example/${n}`, publishedAt: `2026-10-0${n}T00:00:00Z`, researchStatus: 'pending' });
+    const v = now({ facts: [], hypotheses: [], signals: [chatter(1, 'Polaris Financial Partners Purchases New Holdings in Walmart Inc. $WMT'), chatter(2, 'Corient Private Wealth LP Reduces Holdings in Flowers Foods, Inc. $FLO'), chatter(3, 'Nykredit A S Acquires New Shares in Constellation Brands Inc $STZ')] });
+    expect(v.whyNow).toHaveLength(0);
+    const real = now({ facts: [], hypotheses: [], signals: [chatter(1, 'Polaris Financial Partners Purchases New Holdings in Walmart Inc. $WMT'), { id: 's9', title: 'Walmart to build a 1.5-million-square-foot automated fulfillment center in Georgia', url: 'https://supplychaindive.example/georgia', publishedAt: '2026-10-02T00:00:00Z', researchStatus: 'pending' }] });
+    expect(v.whyNow.map((l) => l.text).join(' ')).not.toMatch(/Polaris/);
+    expect(real.whyNow).toHaveLength(1);
+    expect(real.whyNow[0].text).toMatch(/fulfillment center/);
+  });
+});
