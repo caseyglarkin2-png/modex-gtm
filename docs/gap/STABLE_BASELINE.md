@@ -1,7 +1,8 @@
 # GAP stable baseline
 
-STATUS: ACTIVE. GAP V2 is STRUCTURALLY COMPLETE (2026-10-03) and back in SELLER DOGFOOD / FREEZE MODE: the rule below
-applies. No V2.1: future changes come from real selling evidence, repeated Casey feedback, production defects, or an
+STATUS: ACTIVE. GAP V2 is STRUCTURALLY COMPLETE (2026-10-03). The 2026-10-06 EXECUTION RECOVERY program (Casey's
+mandate; amendments below; ledger in `docs/GAP_PROSPECTING_OS.md`) is the deliberate next-version decision: the rule below
+applies to everything outside it. No V2.1: future changes come from real selling evidence, repeated Casey feedback, production defects, or an
 explicit new-version decision. The 2026-10-04 operator-first WHO correction (below) is seller evidence (rule 3), not V3.
 <!-- verified:2026-10-05 -->
 <!-- verified:2026-10-02 (V2) -->
@@ -106,6 +107,39 @@ a Claude session. A future session starts from the Open notes, applies the rule 
   label; Scout citations have no titles.
 - Pre-existing, outside GAP: lint errors in `signals/registry.ts`; GitHub Actions do not start (local suite + typecheck
   are the gate).
+
+## Execution-recovery amendments (2026-10-06; owner-approved, scoped)
+<!-- verified:2026-10-06 -->
+
+Casey approved the GAP OS execution-recovery mandate on 2026-10-06 (the program ledger: `docs/GAP_PROSPECTING_OS.md`,
+"GAP OS EXECUTION RECOVERY"). Three contracts above are AMENDED for that bounded program; everything else in this
+file stands, and the amendments never weaken a truth, approval or external-action boundary.
+
+1. **Preparation may be automatic; external action stays deliberate.** The "No automatic seller actions" contract is
+   split. Automatic, reversible, INTERNAL preparation within approved provider budgets is allowed: source collection,
+   claim extraction, attribution checks, event grouping, proposed account associations, internal problem
+   classification, proposed people, DRAFT hypotheses and internal message previews. These are proposals, never
+   buyer-confirmed truth, a selected target, an approved message, a Gmail draft, an enrollment or a send. Still human
+   and explicit: an actual send, a sequence enrollment, an external mailbox draft where the current contract requires
+   it, a material CRM write, a suppression correction, a destructive merge and a buying commitment. One intelligible
+   review may approve several internal transitions; every required audit event is still recorded (the hypothesis
+   events `propose`, `edit`, `submit`, `approve`, `activate` stay separate rows). An LLM verdict never clears
+   suppression, certifies identity or replaces the send gate.
+2. **Evidence is admitted by purpose, not by one universal physical-change prerequisite.** The physical-change
+   first-touch path stays valid with its negative regressions intact ("The outreach evidence gate only gets
+   stricter" applies to THAT path). Beside it, explicit, tested admissibility per approach is added as it ships
+   (R30): event-led, job or procurement-led, attributed-report-led where allowed, fit-led, warm introduction,
+   existing-thread reply, active-deal follow-up. Verified, relevant and usable-for-this-purpose are separate
+   meanings; a reply or a deal never needs a fabricated physical-change thesis. No approach falls through to a
+   permissive bypass. Until R30 ships, the only outreach admission is the existing physical-change gate.
+3. **The day centers on buyer commitments and conversations.** Work is one surface ranked by due buyer commitments,
+   actionable replies, imminent meetings, deal work, follow-ups, then prepared prospecting; account research is
+   background unless a question needs Casey's knowledge. Grouping by account never hides a second independently
+   due obligation (R40/R41). Unknown deal or suppression state blocks outreach, never notes, reading or preparation.
+
+Not amended: attribution, quote integrity, the private boundary, account and division identity, current-person
+checks, opt-outs, family restrictions, actual-send proof, action-time validation, frozen facts, "Notes never change
+the product", and "the rule for future changes" (this program IS the deliberate decision, rule 4).
 
 ## Release
 

@@ -1,7 +1,7 @@
 # YardFlow GAP Prospecting OS: production build specification
 
-STATUS: ACTIVE. Current state lives in `docs/gap/STABLE_BASELINE.md` (seller dogfood mode; V2 decision compression + resource convergence SHIPPED 2026-10-02, #357 to #364). This file is the historical build spec and ticket ledger; the FINISH pass it once tracked on feat/gap-os-finish is long merged.
-<!-- verified:2026-10-03 -->
+STATUS: ACTIVE. Current state lives in `docs/gap/STABLE_BASELINE.md` (seller dogfood mode; V2 SHIPPED 2026-10-02; the account-first UX SHIPPED 2026-10-06, `docs/gap/ACCOUNT_FIRST_UX.md`). The live ticket ledger is the "GAP OS EXECUTION RECOVERY" section near the end of section 11 (2026-10-06, in progress). This file is the historical build spec and ticket ledger; the FINISH pass it once tracked on feat/gap-os-finish is long merged.
+<!-- verified:2026-10-06 -->
 
 Supersedes the draft `Downloads/YardFlow_GAP_Prospecting_OS_Spec.md` (2026-09-23), which named `caseyglarkin2-png/GTM-YardFlow` as the host. Reconnaissance showed that repo is an abandoned prototype; this document is the single master plan and lives in the repo that hosts the build. There is no second plan. Every accepted implementation or reviewer finding that changes work is folded back into this file in the same commit.
 
@@ -768,6 +768,93 @@ Branch `feat/gap-os-final`. Closes the gap between "GAP produced a recommendatio
 - Proof: the suites named in the canonical doc (every numbered case of the brief), 14 mutation proofs, the reviewer's 14 failing-input cases kept green; full suite 643 files / 7,249 tests / 0 failures; typecheck, lint and production build clean. Fresh adversarial review: 1 blocker (the Pepsi Isaac review unreachable) and 9 should-fix items, all fixed; 6 nice items, 5 fixed and 1 recorded.
 - Production (GAP tables only, audited): 6 aliases (Central Market, King Soopers, City Market, SDR Distribution x3); NFI Industries, J.B. Hunt, UPS = "3PL / Logistics"; role evidence for Christina Mannella (changed, title unknown), Lisa Lisson, Glen Chaffee, Jeffrey Tallman; Christian Burton staged as candidate 49. Not done: no owner selected, Isaac's flag not cleared (LEGACY_CONFLICT, Casey's click), no HubSpot write, no send, no enrollment, no Apollo credit, no Account or Persona created.
 - Same day, after Casey chose the FedEx (Glen Chaffee) and Walmart (Doug Estrada) owners through the panel: PR #399 (merge 4ad8b81c) closed the debt that should close (a supporting title stands when nothing is stored; a HubSpot-only person can be corrected by Casey; the suppression review reads the GAP mailbox's delivery failures; the pre-call brief says employment and role currentness; the FedEx GAP contact "Jeffrey" completed to "Jeffrey Tallman" from its linked HubSpot contact) and made the owner panel, the person checks, NOW and the brief rep-friendly (plain-language frame, compact cards with Details, grouped set-aside with counts, a glossary, action help that says no email is sent, buttons instead of links, do-not-contact contacts named on NOW with the legacy review one click away). The #400 follow-up gives a HubSpot-only WHO the same checks and merges contact-id role evidence into the call brief. Canonical: `docs/gap/OWNER_RESOLUTION.md`, last section.
+
+### GAP OS EXECUTION RECOVERY (2026-10-06, in progress)
+<!-- verified:2026-10-06 -->
+Mandate: Casey's "GAP OS: execution recovery mandate and atomic sprint plan" (2026-10-06; evidence inspected at
+672570ed, production READY on 672570ed, dpl_5tW92dBWDxnL8VquojbfBedmu8MP, and on c7fbf4ef before it). The operating
+promise: GAP finds and checks relevant information, prepares a defensible commercial move, puts the right work in
+front of Casey, helps him execute it, remembers the result, and brings back the next commitment when it is due.
+Product-policy amendments (preparation may be automatic; evidence by purpose; the day centers on commitments) are
+recorded in `docs/gap/STABLE_BASELINE.md`, "Execution-recovery amendments". Branch `feat/gap-account-first-ux`
+(the worktree `wt-gap-account-first-ux`), one writer. This section is the ticket ledger (R00..R65); each ticket
+records ownership, dependency, positive and negative proof, rollback and the observed result.
+
+**R00 Reconcile live and local state (DONE).** main 672570ed = production (READY, auto-deployed after c7fbf4ef);
+branch at main; no open GAP PRs; worktrees of other sessions untouched. Capability matrix: hypothesis / routing /
+compiler / reply classification ENABLED in production (the GAP CORE LIVE block); background research and grounded
+discovery ENABLED on the cron schedule (every 2 h / hourly / 30 min, `docs/gap/STABLE_BASELINE.md` "Health
+dependencies"); auto-enroll, sequence publish and the HubSpot mirror OFF; transcription DISABLED (spend); the
+transport sink and the HubSpot base-path override (R05) are CODE ONLY, unset in production. Production read-only
+observation: exactly ONE stranded `unmapped` draft exists (PepsiCo, `cmux0uu7r0003jw0450gb4kno`, persona 2236 "Tom",
+created 2026-10-06T18:38Z by the recording, source_ref null, the Tulsa fact linked as `supporting`, one `propose`
+event); PepsiCo holds 15 theses (5 active Gatik, 5 approved and 4 unresolved keyword-only 10-Q rows, the draft).
+Nothing was rerun or written in production.
+
+**R01 Authority map and policy amendments (DONE).** One owning service per concept: source -> `signals/registry.ts`
+(registerSignal); claim -> `research/run.ts` + `research/claim-rules.ts`; outreach admission -> `research/evidence-
+gate.ts` (outreachFactRefusal / sendableEvidence / hypothesisSendable); thesis -> `hypothesis/service.ts` +
+`hypothesis/machine.ts` (the only transitions) with `hypothesis/current-revision.ts` (one revision per person and
+family) and `research/propose.ts` (the research proposal path); the draft from a checked fact -> NEW
+`story/draft-from-fact.ts` (R11) on top of those; person -> `people/owner-resolution*.ts` + `motion/load.ts`
+(recordMotionChoice); the account read -> `pursuit/load.ts` + `pursuit/state.ts`; the Work card -> `work/list.ts`;
+message -> `compiler/*` + `sequence/render.ts`; execution -> `execution/seller-send.ts` / `seller-draft.ts` /
+`gmail-adapter.ts` behind `email/gmail-sender.ts` (the one wire, every gate); reply -> `replies/list.ts` +
+`replies/classify.ts` + dispositions; capture -> `capture/*`; opportunity -> `opportunity/active-opportunity.ts`
+(the page) and `deals/in-deals.ts` (the cockpit tile; a second READ of the same HubSpot truth, reconciled in R10).
+Legacy routes left in place: `/gap?lane=review` and All hypotheses still work; the normal path no longer needs them.
+Changed invariants with before/after tests: "no auto hypothesis / draft" -> internal proposals allowed (R11 tests;
+R33 later); "physical change only" -> kept for the first-touch path (`research-facts`, `evidence-gate` suites
+unchanged) and widened by purpose in R30 with its own positive/negative cases.
+
+**R02 Representative corpus (DONE, scratch only).** `scripts/gap/recovery/seed-corpus.ts` seeds, through the real
+intake and hypothesis authorities, eight test-safe accounts on the embedded scratch Postgres (55432/gap_finish_e2e;
+rebuild: db push + the eight forward `prisma/sql` files + `verify-triggers` 33/33 + `seed-families`): Pepsi Scratch Co
+(the recording: Tom chosen, closure + partner + sensitive facts, no thesis), Fedex (chosen + approved thesis: Ready),
+Walmart (an approved thesis and a "stop" reply: Opted out), Kroger (an open deal in the stub: In a deal), Nfi (a 3PL,
+six eligible, an approved thesis: Choose), Dannon (nothing), Mills (a legacy ACTIVE thesis on a sale abroad: the gate
+refuses it), Heb (the only operator left). Each carries its expected useful outcome; none is assumed Ready.
+
+**R03 Pepsi reproduction (DONE).** `tests/unit/gap/scratch/anchor-draft.scratch.test.ts` (real routes, service,
+machine and Postgres; only the session mocked; skipped without GAP_SCRATCH_DATABASE_URL). BEFORE the fix, with the
+component's exact payload: POST /api/gap/hypotheses 201 then PATCH {action: submit} answered **409
+{"error":"unmapped_family"}** (the recording's "Drafted (unmapped_family); submit it from the REVIEW lane"), and the
+page's own projection dropped the warehouse closure from the draft list (the recording's fact count 2 -> 1). The
+browser journey on the scratch server (headless Chrome, the visible control, `journey-pepsi-draft.mjs`, receipts
+`r03/pre_*`) showed the same note, "Draft a thesis from a checked fact (2)" -> "(1)", and the fact gone after refresh;
+NEXT read "draft it from the opening story below" while its button read "Open the research plan". Duplicate-click
+and retry variants are in the same file.
+
+**R04 Baseline tasks and latency (DONE, carried from the account-first record).** `docs/gap/ACCOUNT_FIRST_UX.md`
+7.5: Work 21.4 s cold / 78 ms repeat; the account read 10 to 49 s cold; the shell 0.3 to 4.9 s warm. New: the draft
+transaction on the scratch server, 7.5 s from click to the note (pre-fix) and 4.7 s (post-fix, incl. the family
+question); approve and use 4.8 s incl. routing. Targets (section 8 of the mandate) are not met yet; R15/R61 own them.
+
+**R05 Safety harness (DONE).** `src/lib/email/transport-sink.ts` behind every gate in `gmail-sender.ts`
+(GAP_SEND_TRANSPORT=sink; a real address refused before any network call, the attempt recorded; proven by
+`tests/unit/gap/transport-sink.test.ts`), `HUBSPOT_API_BASE_PATH` on the SDK singleton, `scripts/gap/recovery/
+stubs.mjs` (HubSpot + clawd, every request logged), the scratch database rebuild, the corpus. The local server runs
+with no production credential (scratch-env). Rollback: the variables are unset in production; the code paths are
+inert without them.
+
+**Sprint 1, the account-to-action spine.** R11 **Proposal creation recoverable and idempotent (DONE):**
+`story/propose-family.ts` derives the problem family from the fact (a clear cue wins; a tie is decided by the change
+class with its basis; nothing derivable asks the seller ONE question, never `unmapped` on the submit path);
+`story/draft-from-fact.ts` + `POST /api/gap/story/draft` gate the fact (the outreach gate and sensitivity), keep one
+draft per fact and person (`source_ref anchor:<fact>:p<persona>`; a stranded legacy draft that cites the fact is
+ADOPTED and stamped, never twinned), return a person's existing open thesis in the family instead of a twin, edit an
+existing draft (audited `edit`) and submit a complete one in the same call; a refused submit leaves the draft
+recoverable and says why. Proof: `propose-family.test.ts`, the scratch transaction (6 cases: start, submit, retry,
+approve and use, adopt, sensitive refused), `ux06-views` and `outreach-anchor` suites. R12 **Review where the action
+lives (DONE):** `AnchorPending` in `story/anchor.ts` (an open draft or a thesis under review grounded on a checked
+fact stays visible with its status, the exact opening sentence, the guess, the person, what would prove it wrong,
+the family and the gate read); the panel in `outreach-anchor.tsx` with ONE labeled control, APPROVE AND USE (the
+existing audited `advance: approve_and_use`: submit if needed, approve, activate, route), NOT THIS STORY (withdraw
+with a reason) and the family question; NEXT names the proposal; `pursuit/load.ts` no longer reads a chosen person
+with only a thesis under review as Ready (parity with Work's cold card). Observed: on the scratch server the whole
+loop ran through the browser (set the family -> under review -> Approve and use -> "Ready for a first touch: Tom
+Scratch", "Prepare the email to Tom"; the second story drafted lands under review and is NOT approved: one motion per
+account) and the Work card read Ready. R10, R13, R14, R15: next.
 
 ## 12. Migration, backfill and rollback
 
