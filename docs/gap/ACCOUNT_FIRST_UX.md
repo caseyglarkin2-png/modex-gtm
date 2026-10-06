@@ -1049,6 +1049,30 @@ read leaves nothing, the age words); the Work and account view suites green; tsc
 numbers (navigation to first useful content, to decision-grade content, Work first and repeat load) are in 7.5 with
 the Train C gate.
 
+## 6p. UX-15 dogfood record (2026-10-06): what real use exposed, classified
+
+The run: Work plus the first 18 accounts in its order (PepsiCo, FedEx, General Mills, Kraft Heinz, Coca-Cola,
+Frito-Lay, H-E-B, Keurig Dr Pepper, The Home Depot, Kroger, Lineage, The Coca-Cola Company, Tyson Foods, UNFI,
+Vulcan Materials, Walmart, Boston Beer Company, Crowley) covering ready, opted out, in a deal (three), held,
+choose person (11 eligible), research (eleven, a verified fact with no angle or an angle under review), relationship-led
+and a large buyer map (PepsiCo 19, The Home Depot 11, NFI 133 in the Train B check); numbers in 7.5; the named debt
+classified:
+
+| Item | Class | Call |
+|---|---|---|
+| The account read takes 10 to 49 s cold (PepsiCo 49 s) | BLOCKS DAILY USE | ADDRESSED within policy (UX-14): the shell paints at once with the last known state and NEXT when a summary is fresh; the Work warmer keeps the first accounts warm; the read itself is a HubSpot-live brief the policy keeps out of scope |
+| Work's cold read is 21 s | CONFUSES SELLER | FIXED (UX-14): remembered two minutes per instance, 78 ms on repeat, "Read 40s ago. Refresh" |
+| A research account ends at "Open the research plan" (15 of 27 today): a novice asks what to do | CONFUSES SELLER | DEFERRED, said: the research plan is the analyst path; the Work card's why says what is missing; a seller-facing "what research is running" line is next-version work |
+| "Held: HubSpot could not be checked" with no people (Boston Beer Company; the empty Tyson duplicate) | TRUTH / SAFETY | KEEP: the hold is the fail-safe; the empty duplicate is dedup debt (revops), recorded |
+| The call brief's "3PL / Logistics" against the account page's "carrier" | CONFUSES SELLER (mildly) | DEFERRED: the brief header reads the old accounts column; one line of work in the call brief, not on the daily path |
+| General Mills' "Caf Tr s Cora es S.A." | COSMETIC (data) | DEFERRED: the extractor drops accents at ingest; a research-side fix, two rows |
+| The old app-wide Ctrl+K reads the static accounts JSON | ADMIN ONLY | DEFERRED: the GAP Accounts search is the seller's fast path |
+| The call page's fourth disposition button clips under the floating buttons at 820 | COSMETIC | DEFERRED to the call page's next pass |
+| The Note pill over the last card's buttons at 390 | CONFUSES SELLER | FIXED (UX-14): the list clears the pills |
+| The Done/Next bar wrapped into four lines at 390 | COSMETIC | FIXED (UX-14) |
+| Dictate's Read it back, Media Session, aria-pressed while recording | NICE | DEFERRED until the ear test on a phone with transcription approved |
+| Ask GAP push-to-talk | NICE | DEFERRED (typed first; Dictate's recorder is the piece to reuse) |
+
 ## 7. Task baselines and post-change measurements
 
 Baseline measured on production 2026-10-05 (SHA 54c11c57) through the rig; clicks counted on the shortest path a seller
@@ -1196,6 +1220,53 @@ review" and its FACT block is captioned as a fact (the brief's select carries th
 24 pages found zero obscured focused controls; no page overflows. The empty `Tyson` account row is the fail-safe
 working as designed (UX-04: an unreadable HubSpot identity is a hold, never a cold touch), recorded here so nobody
 reads it as a UX-06 defect; the duplicate itself is dedup debt (section 10).
+
+### 7.5 Train C measurements: the finished loop on the production database (local build of the Train C tree, read-only, DPR 1, 820, 2026-10-06)
+
+Work: the cold read 21.4 s to the cards; the repeat load 78 ms (the two-minute cache, "Read just now. Refresh"); 27
+cards, the chips the contents. The first 18 accounts in the Work order, each opened from its card (the Done/Next bar
+reads "Account n of 27"), every one with three people rows, a story of 3 to 6 rows, Ask GAP and no overflow; the
+page height 1,250 to 3,150 px (1.4 to 3.5 screens at 820):
+
+| Account | state | full read | rows | anchor | NEXT control |
+|---|---|---|---|---|---|
+| PepsiCo | research: a verified fact, no angle grounded on it yet | 49.0 s | 3 | none; one draftable | Open the research plan |
+| FedEx | ready for a first touch: Glen Chaffee | 25.8 s | 3, 1 card | the Network 2.0 thesis | Prepare the email to Glen |
+| General Mills | research: the angle needs your review | 16.6 s | 3 | none; one draftable | Open the research plan |
+| Kraft Heinz | in a deal (Pilot) | 10.7 s | 3 | hidden under the deal | Open the deal brief |
+| Coca-Cola, Frito-Lay, H-E-B, Keurig Dr Pepper, Lineage, The Coca-Cola Company, UNFI, Vulcan Materials | research | 13.1 to 17.2 s | 3 | none | Open the research plan |
+| The Home Depot | choose who hears this first (11 eligible) | 13.7 s | 3 | none | See the people |
+| Kroger, Crowley | in a deal | 14.2 s, 14.9 s | 3 | hidden | Open the deal brief |
+| Tyson Foods | relationship-led: Ryan Heman | 14.0 s | 3 | hidden | Log the touch (the relationship card) |
+| Walmart | opted out (timothy.cooper, Oct 5) | 24.7 s | 3 | hidden | Record the opt-out |
+| Boston Beer Company | held: HubSpot could not be checked | 11.4 s | 0 | hidden | none (the hold is NEXT) |
+
+Read honestly: the account read is the long pole (10 to 49 s cold; PepsiCo's 19-person map and live HubSpot reads
+are the slowest). UX-14's shell paints the name and, when a summary is at most 15 minutes old, the last known state
+and NEXT at once; the first harness measured the shell at the end of the stream (DOMContentLoaded), so the shell
+number is re-taken at the gate with the corrected probe. Nothing on these pages is clickable into a write by the
+harness; nothing was.
+
+**T1 to T8 after Train B (the loop as built), against the 7.1 baseline (a novice: 21 pages, about 80 minutes, 5
+backtracks, 7 manager questions):**
+
+| Task | Clicks | Screens | Backtracks | Where it lives |
+|---|---|---|---|---|
+| T1 What account should I work? | 1 (Work) | 1 (the first card is the answer; 27 cards, chips as filters) | 0 | /gap |
+| T2 Understand the account | 1 (Open) | 1 to 2 at 820 (state, NEXT, the opening story, the people) | 0 | the workspace |
+| T3 See the few people who matter | 0 | the same screen (3 rows; Show more for the rest) | 0 | the stack |
+| T4 Understand why | 0 to 1 (Why this person?) | the same screen (one reason per row, why #1 over #2, why they care) | 0 | the stack and the opening story |
+| T5 Choose / override | 1 (Choose; Next if silent; Not a fit; Not now; Correct their record) | the same screen, one read-back line with Undo | 0 | the stack |
+| T6 Prepare outreach | 1 (Prepare the email) or 1 (Call prep) | 1 | 0 | NEXT; the call page |
+| T7 Capture what happened | 1 (Log a touch) | 1 (Capture; Dictate off until the spend is approved) | 0 | /gap/capture |
+| T8 Move to the next account | 1 (Next account) | 0 new screens | 0 (Back to Work returns to the card) | the Done/Next bar |
+
+Six pages carry the whole loop (Work, the workspace, the pack, the call page, Capture, back to Work). The time is
+the reads: about 21 s for the first Work load and 10 to 49 s per account on this machine, so five accounts cost
+two to four minutes of waiting plus the reading. Manager questions a novice would still ask: what to do on a
+research account beyond "Open the research plan" (15 of 27 today), and what "Held: HubSpot could not be checked"
+means for the day (answered by the NEXT text). Show more was needed on no golden account; the recommendation was
+overridden by Casey on FedEx (Glen over Jeffrey), said on the card.
 
 ## 8. Reviewer findings (UX-01 / UX-02 pass, 2026-10-05)
 
@@ -1566,6 +1637,8 @@ DPR 1 before UX-15 compares against this baseline. The text dumps and JS metrics
 | Train A | one fresh seller + product review, then one focused re-check | two BLOCKERs and seven SHOULDs fixed (8.12); the re-check: SHIP with two follow-ups (the workspace's summary carries NEXT; a stale summary never overwrites a later reply), both landed before the merge | |
 
 | Train B (UX-11, UX-12, UX-13) | browser check (local build, 820 and 390; the TTS request captured, never played) | Listen to today beside the Work heading (103 words: "Today. 27 accounts need you: 11 in a deal or held. First, PepsiCo: research..."); Listen on PepsiCo 137 words, FedEx 213, NFI 110, each opening on the state and the last touch with the tags spoken; Ask GAP on NFI answered in 12 s with the trust words; Dictate off on Capture ("Dictate is off until transcription spend is approved..."); no overflow at either width | two defects found and fixed before the review: a question ran the full account read (PepsiCo and FedEx answered nothing inside 30 s; the page now remembers its context), and NFI's answer attributed words to an empty buyer record (a prompt line and a guard now drop an invented "the buyer said") |
+
+| Train A | production smoke (rig Chrome, Casey's live session, read-only, 820) | Work: "27 accounts need you, in order. Counts are what the list holds."; Accounts: "657 accounts, the first 60 shown: type to find one"; a FedEx deep link without the order: "Opened from Work." with Back to Work only; the subnav reads Work, Accounts, Capture, More | f2fc7e32 in production (dpl_7JowKM8pUGM8wwZgsMoQV7dZ16Pq; the first production build sat BUILDING for 23 minutes with no events and was cancelled and redeployed by API) |
 
 ## 10. Debt classification (recorded debt audited 2026-10-05)
 
