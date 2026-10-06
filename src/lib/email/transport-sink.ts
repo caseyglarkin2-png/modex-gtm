@@ -12,7 +12,7 @@
  * Off by default. Any value other than exactly `sink` means the real transport. In production the variable is
  * unset, so this module never runs there. Pure apart from the file write.
  */
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 export const SINK_DEFAULT_DOMAINS = ['example.com', 'example.net', 'example.org'] as const;
@@ -23,7 +23,7 @@ export interface SinkConfig {
 }
 
 /** The sink configuration, or null when the real transport is in force. */
-export function sinkConfig(env: NodeJS.ProcessEnv = process.env): SinkConfig | null {
+export function sinkConfig(env: Record<string, string | undefined> = process.env): SinkConfig | null {
   if ((env.GAP_SEND_TRANSPORT ?? '').trim() !== 'sink') return null;
   const dir = (env.GAP_SINK_DIR ?? '').trim();
   if (!dir) throw new Error('GAP_SEND_TRANSPORT=sink needs GAP_SINK_DIR');
@@ -53,8 +53,10 @@ const domainOf = (address: string): string => {
 /** Every recipient not on the allowed domains, in order. Pure. */
 export function refusedRecipients(recipients: { to: string; cc?: string[]; bcc?: string }, allowedDomains: readonly string[]): string[] {
   const all = [recipients.to, ...(recipients.cc ?? []), ...(recipients.bcc ? [recipients.bcc] : [])].filter((r) => typeof r === 'string' && r.trim());
-  const allowed = new Set(allowedDomains.map((d) => d.toLowerCase()));
-  return all.filter((r) => !allowed.has(domainOf(r)));
+  const allowed = allowedDomains.map((d) => d.toLowerCase());
+  // A subdomain of an allowed domain is allowed too: the reserved example.com space includes its subdomains.
+  const ok = (domain: string) => allowed.some((d) => domain === d || domain.endsWith(`.${d}`));
+  return all.filter((r) => !ok(domainOf(r)));
 }
 
 export interface SinkRecord {
@@ -104,4 +106,36 @@ export function sinkAttempt(
   writeFileSync(join(cfg.dir, `${id}.json`), JSON.stringify(record, null, 2));
   if (refused.length) throw new SinkRefusal(refused[0], cfg.allowedDomains);
   return record;
+}
+
+const addressOf = (a: string): string => {
+  const m = /<([^>]+)>/.exec(a);
+  return (m ? m[1] : a).trim().toLowerCase();
+};
+
+/**
+ * The sink as the harness mailbox's SENT folder: what left through it to `recipient` in the epoch window (seconds),
+ * newest first. The seller-draft gate reads Gmail Sent for a first touch GAP did not record; under the sink that read
+ * must see what the sink sent, so a harness first touch is reconciled the same way a real one is.
+ */
+export function sinkSentTo(cfg: SinkConfig, recipient: string, afterEpoch: number, beforeEpoch: number): Array<{ id: string; threadId: string | null; internalDate: Date; to: string; subject: string }> {
+  if (!existsSync(cfg.dir)) return [];
+  const want = addressOf(recipient);
+  const out: Array<{ id: string; threadId: string | null; internalDate: Date; to: string; subject: string }> = [];
+  for (const f of readdirSync(cfg.dir)) {
+    if (!f.endsWith('.json')) continue;
+    let rec: SinkRecord | null = null;
+    try {
+      rec = JSON.parse(readFileSync(join(cfg.dir, f), 'utf8')) as SinkRecord;
+    } catch {
+      rec = null;
+    }
+    if (!rec || rec.outcome !== 'written' || (rec.kind !== 'send' && rec.kind !== 'draft_send')) continue;
+    if (addressOf(rec.to) !== want) continue;
+    const at = new Date(rec.at);
+    const epoch = Math.floor(at.getTime() / 1000);
+    if (epoch < afterEpoch || epoch >= beforeEpoch) continue;
+    out.push({ id: rec.id, threadId: null, internalDate: at, to: rec.to, subject: rec.subject ?? '' });
+  }
+  return out.sort((a, b) => b.internalDate.getTime() - a.internalDate.getTime());
 }

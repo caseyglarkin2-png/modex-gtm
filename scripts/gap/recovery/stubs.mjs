@@ -71,7 +71,13 @@ const server = http.createServer((req, res) => {
       const emails = Array.isArray(parsed.emails) ? parsed.emails : parsed.email ? [parsed.email] : parsed.to ? [parsed.to] : [];
       return json(res, 200, { ok: true, results: emails.map((email) => ({ email, blocked: blocked.has(String(email).toLowerCase()), reason: blocked.has(String(email).toLowerCase()) ? 'do_not_send' : null })) });
     }
-    if (path === '/api/autonomy/state') return json(res, 200, { global: false, motions: { outreach: false, actuator: false, social: false, content: false }, updated_by: 'stub', reason: null });
+    if (path === '/api/autonomy/state') return json(res, 200, { global: true, motions: { outreach: true, actuator: true, social: true, content: true }, updated_by: 'stub', reason: null });
+    // The congruence critic (critic-client.ts): a controlled PASS so the compiler's deterministic checks decide; a
+    // harness wanting a block sets STUB_CRITIC=block.
+    if (path === '/api/critic/score') {
+      const verdict = process.env.STUB_CRITIC === 'block' ? 'block' : 'pass';
+      return json(res, 200, { verdict, hard_block: verdict === 'block', score: verdict === 'block' ? 20 : 96, counts: { block: verdict === 'block' ? 1 : 0, warn: 0 }, violations: verdict === 'block' ? [{ rule: 'stub', severity: 'block', message: 'blocked by the harness' }] : [], artifact_type: 'email', used_llm: false, edge: { verdict, hard_block: verdict === 'block', score: verdict === 'block' ? 20 : 96, violations: [] } });
+    }
     if (path.startsWith('/api/')) return json(res, 200, { ok: true, results: [], items: [], threads: [], contacts: [] });
 
     // ---- HubSpot ----
@@ -112,7 +118,7 @@ const server = http.createServer((req, res) => {
     if (m) {
       const companyOfDeal = (dealId) => [...companies.values()].find((c) => dealsOf(c.id).some((d) => String(d.id) === String(dealId)));
       const results = (parsed.inputs ?? []).map((i) => ({
-        _from: { id: String(i.id) },
+        from: { id: String(i.id) },
         to:
           m[1] === 'companies' && m[2] === 'deals'
             ? dealsOf(String(i.id)).map((d) => ({ toObjectId: String(d.id), associationTypes: [] }))

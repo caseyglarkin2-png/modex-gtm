@@ -4,6 +4,7 @@
  */
 import * as Sentry from '@sentry/nextjs';
 import { accessTokenForSender, type GmailSender } from './gmail-sender';
+import { sinkConfig, sinkSentTo } from './transport-sink';
 
 const GMAIL_API = 'https://gmail.googleapis.com/gmail/v1';
 
@@ -662,6 +663,10 @@ export async function listSentTo(
   afterEpoch: number,
   beforeEpoch: number,
 ): Promise<Array<{ id: string; threadId: string | null; internalDate: Date; to: string; subject: string }>> {
+  // The transport sink (./transport-sink.ts, GAP_SEND_TRANSPORT=sink, unset in production) is the harness mailbox:
+  // its Sent folder is what it wrote. Real Gmail is never read under it.
+  const sink = sinkConfig();
+  if (sink) return sinkSentTo(sink, recipient, afterEpoch, beforeEpoch);
   const accessToken = await accessTokenForSender(sender);
   const mailbox = sender.userEmail.toLowerCase();
   const listUrl = new URL(`${GMAIL_API}/users/${encodeURIComponent(mailbox)}/messages`);

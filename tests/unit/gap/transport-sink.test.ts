@@ -35,6 +35,8 @@ describe('transport sink', () => {
     const cfg = { dir: d, allowedDomains: ['example.com'] };
     const fetchSpy = vi.spyOn(globalThis, 'fetch');
     expect(refusedRecipients({ to: 'tom@example.com', cc: ['Karen <karen@pepsico.com>'] }, ['example.com'])).toEqual(['Karen <karen@pepsico.com>']);
+    // A subdomain of an allowed domain is allowed; a look-alike is not.
+    expect(refusedRecipients({ to: 'glen@fedex-scratch-co.example.com', cc: ['x@notexample.com'] }, ['example.com'])).toEqual(['x@notexample.com']);
     expect(() => sinkAttempt(cfg, 'send', { to: 'someone@pepsico.com', subject: 's', raw: 'x' })).toThrow(SinkRefusal);
     expect(() => sinkAttempt(cfg, 'send', { to: 'tom@example.com', bcc: 'me@gmail.com', subject: 's', raw: 'x' })).toThrow(/refused me@gmail.com/);
     expect(fetchSpy).not.toHaveBeenCalled();

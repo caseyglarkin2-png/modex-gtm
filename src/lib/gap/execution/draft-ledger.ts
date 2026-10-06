@@ -105,6 +105,8 @@ export const DRAFT_CLAIMED = 'execution.gmail_draft_claimed' as const;
 
 /** Refusals that provably happened before anything reached Gmail, so a claim may be released. */
 export const DEFINITELY_NOT_SENT: readonly RegExp[] = [
+  // The harness transport sink (email/transport-sink.ts) refuses before any network call: nothing could have left.
+  /transport sink refused/i,
   /^Canonical autonomy refused/,
   /^HUMAN_APPROVED_1TO1 refused/,
   /^Cross-plane suppression refused/,
