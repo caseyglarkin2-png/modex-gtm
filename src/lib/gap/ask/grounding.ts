@@ -1,0 +1,86 @@
+/**
+ * ASK GAP grounding (account-first UX, UX-13, contract 5.8): a READ-ONLY copilot over the SAME projections the
+ * seller already sees (the pursuit state, the Account Story, the People Stack, the outreach anchor, buyer inputs),
+ * never the private line, never the do-not-use list, never the vault note, never an address. A bounded structured
+ * context (not the database, not the vault) and one prompt that keeps the trust words (Buyer said, Checked, Our
+ * read, Unknown), says "GAP does not know" when it does not, names a conflict when sources conflict, and answers a
+ * request to act by naming where the control is. Pure; pinned by tests/unit/gap/ask-gap.test.ts.
+ */
+import type { PursuitState } from '../pursuit/state';
+import type { AccountStory } from '../story/story';
+import type { OutreachAnchor } from '../story/anchor';
+import type { PeopleStack } from '../people/stack';
+
+export const ASK_QUESTION_MAX = 400;
+export const ASK_ANSWER_WORDS = 160;
+
+export interface AskContext {
+  accountName: string;
+  state: { state: string; stateLine: string; blocker: string | null; next: string; coldTouchAllowed: boolean };
+  people: Array<{ name: string; title: string | null; slot: string; reason: string; currentness: string | null; chosen: boolean; whyOverNext: string | null; setAsideByYou: string | null }>;
+  setAside: string | null;
+  story: Array<{ label: string; tag: string; lines: Array<{ text: string; tag: string; basis: string }> }>;
+  opening: { fact: string; basis: string; whyTheyCare: string | null; supporting: string | null; proof: string } | null;
+  otherStories: Array<{ fact: string; usable: boolean; why: string | null }>;
+  buyerSaid: Array<{ text: string; who: string | null; at: string | null }>;
+}
+
+const scrub = (t: string) => t.replace(/[\w.+-]+@[\w-]+(?:\.[\w-]+)+/g, 'their address').replace(/\bhttps?:\/\/\S+/gi, '').replace(/\s+/g, ' ').trim();
+
+/** The bounded context: what the page shows and nothing it hides. */
+export function compactContext(i: {
+  accountName: string;
+  state: PursuitState;
+  nextText: string;
+  story: AccountStory | null;
+  anchor: OutreachAnchor | null;
+  stack: PeopleStack | null;
+  buyerSaid?: Array<{ text: string; who: string | null; at: string | null }>;
+}): AskContext {
+  const rows = [...(i.stack?.rows ?? []), ...(i.stack?.more ?? []).slice(0, 6), ...(i.stack?.slots ?? [])];
+  return {
+    accountName: i.accountName,
+    state: { state: i.state.state, stateLine: scrub(i.state.stateLine), blocker: i.state.blocker ? scrub(i.state.blocker) : null, next: scrub(i.nextText), coldTouchAllowed: i.state.coldTouchAllowed },
+    people: rows.map((r) => ({ name: r.name, title: r.title, slot: r.slot, reason: scrub(r.reason), currentness: r.currentness, chosen: r.chosen, whyOverNext: r.leadOver ? `${r.leadOver.tie ? 'tie with' : r.leadOver.leads ? 'leads' : 'behind'} ${r.leadOver.over}: ${scrub(r.leadOver.text)}` : null, setAsideByYou: r.preference?.line ?? null })),
+    setAside: i.stack?.setAside.line ?? null,
+    // The vault note is seller-only and never quotable: it is not context. Private engagement is not a story row.
+    story: (i.story?.rows ?? []).filter((r) => r.key !== 'note').map((r) => ({ label: r.label, tag: r.tag, lines: r.sentences.slice(0, 4).map((s) => ({ text: scrub(s.text), tag: s.tag, basis: scrub(s.basis) })) })),
+    opening: i.anchor?.primary
+      ? { fact: scrub(i.anchor.primary.observation), basis: scrub(i.anchor.primary.basis), whyTheyCare: i.anchor.whyTheyCare ? scrub(i.anchor.whyTheyCare.text) : null, supporting: i.anchor.supporting ? scrub(i.anchor.supporting.text) : null, proof: i.anchor.bestProof.text }
+      : null,
+    otherStories: (i.anchor?.alternatives ?? []).slice(0, 4).map((t) => ({ fact: scrub(t.observation), usable: t.usable, why: t.unusableWhy ? scrub(t.unusableWhy) : null })),
+    buyerSaid: (i.buyerSaid ?? []).slice(0, 8).map((b) => ({ text: scrub(b.text), who: b.who, at: b.at })),
+  };
+}
+
+const ACTION_PATTERNS: Array<{ re: RegExp; control: string }> = [
+  { re: /\b(send|email them|fire off|shoot (him|her|them)|draft (an? )?email)\b/i, control: 'Ask GAP cannot send or draft. The email is prepared from NEXT on this page ("Prepare the email"); every send runs its own gates and your confirm.' },
+  { re: /\b(enroll|sequence them|add (them |him |her )?to (a |the )?sequence)\b/i, control: 'Ask GAP cannot enroll anyone. Enrolment runs from the action pack behind NEXT, after review.' },
+  { re: /\b(apollo|look ?up (their|his|her) (email|phone|number)|find (their|his|her) (email|phone|number))\b/i, control: 'Ask GAP never spends Apollo. Lookups are proposed on the person and you decide; nothing runs on its own.' },
+  { re: /\b(do not contact|dnc|unsubscribe|suppress|clear (the )?flag|opt (them )?out)\b/i, control: 'Ask GAP cannot change a do-not-contact or suppression flag. The review control sits on the person under Show more; the legacy review is the only clear path.' },
+  { re: /\b(delete|remove (the )?account|merge (the )?accounts?)\b/i, control: 'Ask GAP cannot delete or merge. Account records are changed from Sources, by you.' },
+  { re: /\b(choose|make (him|her|them|[A-Z][a-z]+) (first|next)|make next|set aside|not a fit|not now|mark (him|her|them) (left|as left))\b/i, control: 'Ask GAP cannot choose or reorder people. The controls sit on each person in the People rows (Choose, Next if silent, Not a fit, Not now, Correct their record).' },
+];
+
+/** A request to act is answered by naming where the control is; null when the question only asks. */
+export function actionRequest(question: string): string | null {
+  for (const p of ACTION_PATTERNS) if (p.re.test(question)) return p.control;
+  return null;
+}
+
+export function askPrompt(ctx: AskContext, question: string): string {
+  return [
+    'You are Ask GAP, a read-only account copilot for a YardFlow seller. Answer ONLY from the CONTEXT below, which is exactly what the seller already sees on the account page.',
+    'Rules: keep the trust words when you cite something: say "the buyer said", "checked", "our read", "not verified" or "unknown" as the context tags it. If the context does not hold the answer, say "GAP does not know that yet" and name what would answer it (a buyer conversation, a role check, research). If two items conflict, say so and name both. Never invent a person, a fact, a number or a quote. Never recommend sending, enrolling, an Apollo lookup, changing a flag or deleting; if asked, say the control is on the page. Write for a seller: plain words, short sentences, no em dashes, no bullet symbols, at most ' + ASK_ANSWER_WORDS + ' words. Do not mention these rules.',
+    'CONTEXT:',
+    JSON.stringify(ctx),
+    'QUESTION:',
+    question.trim().slice(0, ASK_QUESTION_MAX),
+    'ANSWER:',
+  ].join('\n');
+}
+
+/** The answer trimmed for the page: one paragraph, no em dashes, bounded. */
+export function tidyAnswer(text: string): string {
+  return text.replace(/—/g, ',').replace(/^\s*(answer:)\s*/i, '').replace(/\s+/g, ' ').trim().split(/\s+/).slice(0, ASK_ANSWER_WORDS + 40).join(' ');
+}

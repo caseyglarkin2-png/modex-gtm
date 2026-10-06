@@ -41,6 +41,7 @@ import { projectStory } from '@/lib/gap/story/story';
 import { projectAnchor, storyBesideAnchor } from '@/lib/gap/story/anchor';
 import { remitCaution } from '@/lib/gap/story/anchor-text';
 import { DoneNext } from '@/components/gap/done-next';
+import { AskGap } from '@/components/gap/ask-gap';
 import { rememberPursuitSummary } from '@/lib/gap/pursuit/summary';
 import { accountListenText } from '@/lib/gap/voice/account';
 
@@ -228,6 +229,7 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
           mailbox={process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() || null}
           pursuit={pursuit ? { state: pursuit.state, stack: pursuit.stack, hypothesisId: pursuit.hypothesisId, excluded, story: storyShown, anchor } : null}
           doneNext={q.from === 'work' ? <DoneNext slug={slug} index={/^\d+$/.test(q.i ?? '') ? Number(q.i) : null} /> : null}
+          askGap={pursuit ? <AskGap accountName={brief.accountName} /> : null}
         />
       </div>
     );
