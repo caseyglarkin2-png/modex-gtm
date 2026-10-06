@@ -192,7 +192,7 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
   const whyTheyCare = primary && i.person
     ? {
         text: primary.relevance.tier === 'none'
-          ? `${first} ${primary.relevance.why.replace(/, which the fact.*$/, '')}; the fact (${primary.factLabel}) may not land on their remit${fitsBetter ? `, and ${fitsBetter.name}${fitsBetter.title ? ` (${fitsBetter.title})` : ''} fits it` : ', so ask who owns it'}.`
+          ? `${first} ${primary.relevance.why.replace(/, which the fact.*$/, '')}; the fact is ${primary.factLabel} and may not land on their remit${fitsBetter ? `, and ${fitsBetter.name}${fitsBetter.title ? ` (${fitsBetter.title})` : ''} fits it` : ', so ask who owns it'}.`
           : `${first} ${primary.relevance.why}.`,
         tag: 'Our read' as const,
       }

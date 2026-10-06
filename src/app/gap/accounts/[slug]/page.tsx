@@ -199,7 +199,7 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
     // The remit caution travels to NEXT: a cold first touch never asks the buyer who owns it.
     if (pursuitNext && anchor?.primary && anchor.primary.relevance.tier === 'none' && pursuit?.state.person) {
       const first = pursuit.state.person.name.split(' ')[0];
-      pursuitNext.text = `${pursuitNext.text} Caution: the opening fact (${anchor.primary.factLabel}) may not land on ${first}'s remit${anchor.fitsBetter ? `; ${anchor.fitsBetter.name}${anchor.fitsBetter.title ? ` (${anchor.fitsBetter.title})` : ''} fits it` : ''}.`;
+      pursuitNext.text = `${pursuitNext.text} Caution: the opening fact is ${anchor.primary.factLabel} and may not land on ${first}'s remit${anchor.fitsBetter ? `; ${anchor.fitsBetter.name}${anchor.fitsBetter.title ? `, ${anchor.fitsBetter.title},` : ''} fits it` : ''}.`;
     }
     const listen = pursuit && pursuitNext
       ? storyShown
