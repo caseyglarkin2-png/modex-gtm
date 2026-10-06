@@ -37,6 +37,8 @@ export interface PursuitView {
   anchorChoice: string | null;
   /** The open theses whose opening the send gate would let out (null when the read failed: nothing is called usable). */
   sendableTheses: Set<string> | null;
+  /** The usable theses (open, grounded, not under review, and ones the send gate would let out): the only openers. */
+  usableTheses: string[];
   /** The cockpit's ready first-touch card for this account (what loadReadyTarget returns), from the same queue read. */
   ready: ReadyTarget | null;
 }
@@ -122,8 +124,9 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
   // the same set the anchor block shows; the recorded choice wins when it is usable. An unread gate opens nothing.
   const usable = (h: (typeof brief.hypotheses)[number] | null) => !!h && !!sendableTheses && sendableTheses.has(h.id) && h.needsReview.length === 0 && openStatuses.has(inputs.hypotheses.find((x) => x.id === h.id)?.status ?? '');
   const anchoredOpen = usable(anchored) ? anchored : null;
-  const topUsable = brief.hypotheses.find((h) => h.grounded && h.truth !== 'CONTRADICTED' && usable(h)) ?? null;
-  return { state, resolution, stack, hypothesisId: anchoredOpen?.id ?? topUsable?.id ?? null, anchorChoice, sendableTheses, ready: readyTargetOf(mine) };
+  const usableTheses = brief.hypotheses.filter((h) => h.grounded && h.truth !== 'CONTRADICTED' && usable(h)).map((h) => h.id);
+  const topUsable = brief.hypotheses.find((h) => usableTheses.includes(h.id)) ?? null;
+  return { state, resolution, stack, hypothesisId: anchoredOpen?.id ?? topUsable?.id ?? null, anchorChoice, sendableTheses, usableTheses, ready: readyTargetOf(mine) };
 }
 
 /** UX-06: the account's open theses whose opening the send gate would let out (the pack's own rule over the linked signals). */

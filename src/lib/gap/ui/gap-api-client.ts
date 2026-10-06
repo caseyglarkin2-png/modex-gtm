@@ -311,7 +311,7 @@ export interface CallBrief {
    * a hold the call page says so first and offers no opener. Absent when the account read failed (then nothing is
    * claimed either way).
    */
-  pursuit?: { state: string; stateLine: string; blocker: string | null; holdsCall: boolean } | null;
+  pursuit?: { state: string; stateLine: string; blocker: string | null; holdsCall: boolean; hypothesisId: string | null; usableTheses: string[]; caution: string | null } | null;
   lastDispositions: BriefDisposition[];
   openBids: BriefBid[];
   suggestedQuestions: string[];

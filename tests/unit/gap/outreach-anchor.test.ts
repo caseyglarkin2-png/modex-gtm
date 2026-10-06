@@ -10,7 +10,8 @@ import { projectEngagement, projectRelationship, type AccountContext } from '@/l
 import { projectNow } from '@/lib/gap/context/now';
 import { projectPursuitState } from '@/lib/gap/pursuit/state';
 import { projectStory } from '@/lib/gap/story/story';
-import { BEST_PROOF_MEASURED, projectAnchor, storyBesideAnchor } from '@/lib/gap/story/anchor';
+import { BEST_PROOF_MEASURED, moneyShort, projectAnchor, storyBesideAnchor } from '@/lib/gap/story/anchor';
+import { openerCaution } from '@/lib/gap/replies/call-pursuit';
 import { OBSERVATION_REFUSAL_TEXT, titleShapedReason, validateObservation } from '@/lib/gap/hypothesis/observation';
 import { leadOver, rankDimensionNames, resolveOwner, type OwnerCandidateInput } from '@/lib/gap/people/owner-resolution';
 import { buildPeopleStack } from '@/lib/gap/people/stack';
@@ -52,6 +53,63 @@ function anchorFor(i: AccountInputs, personaId: number | null, anchorChoice: str
   const sendable = new Set(i.hypotheses.filter((h) => h.status !== 'draft' && !(i as AccountInputs & { unsendable?: string[] }).unsendable?.includes(h.id)).map((h) => h.id));
   return { anchor: projectAnchor({ accountName: 'PepsiCo', person: p ? { personaId: p.id, name: p.name, title: p.title } : null, brief, inputs: i, story, anchorChoice, privateLine: v.private, sendable, now: NOW }), story, brief };
 }
+
+describe('the seller re-check batch: one fact is one item', () => {
+  it('the supporting fact prefers a fact no other usable thesis is grounded on; when none exists, the alternative says it is the same fact', () => {
+    // Karen: Denver is the anchor; Gatik grounds the only alternative; Maryland is sensitive. The supporting fact can
+    // only be Gatik, and the alternative is flagged as the same fact (never three items on one page).
+    const { anchor } = anchorFor(inputs(), 1);
+    expect(anchor.supporting?.text).toBe(factA.quote);
+    expect(anchor.alternatives.map((t) => [t.hypothesisId, t.sameAsSupporting === true])).toEqual([['h-gatik', true]]);
+    // With a checked fact of its own, the supporting fact is that one and the alternative is not flagged.
+    const factD = { ...factB, id: 'f-ohio', quote: 'PepsiCo is opening a new distribution center in Columbus, Ohio in 2027.', url: 'https://news.example/ohio' };
+    const withD = anchorFor(inputs({ facts: [factA, factB, factC, factD] }), 1);
+    expect(withD.anchor.supporting?.text).toBe(factD.quote);
+    expect(withD.anchor.alternatives[0].sameAsSupporting).toBeUndefined();
+  });
+  it('the story beside the anchor tells the supporting fact once too (a pointer, never the sentence again)', () => {
+    const { anchor, story } = anchorFor(inputs(), 1);
+    const beside = storyBesideAnchor(story, anchor);
+    const all = beside.rows.flatMap((r) => r.sentences.map((s) => s.text));
+    expect(all.filter((t) => t === factA.quote)).toHaveLength(0);
+    expect(all.filter((t) => t === factB.quote)).toHaveLength(0);
+    expect(all).toContain('The opening story, above.');
+    expect(all).toContain('The supporting fact, above.');
+    // Nothing is told twice.
+    expect(new Set(all).size).toBe(all.length);
+  });
+  it('DO NOT USE names each fact once, with every reason it carries', () => {
+    const { anchor } = anchorFor(inputs(), 1);
+    const texts = anchor.doNotUse.map((d) => d.text.trim().toLowerCase());
+    expect(new Set(texts).size).toBe(texts.length);
+    const maryland = anchor.doNotUse.filter((d) => d.text === factC.quote);
+    expect(maryland).toHaveLength(1);
+    expect(maryland[0].reason).toMatch(/sensitive \(people lost their jobs\)/);
+  });
+  it('a modeled dollar figure reads as a seller would say it', () => {
+    expect(moneyShort(1_202_000_000)).toBe('$1.2B');
+    expect(moneyShort(2_000_000_000)).toBe('$2B');
+    expect(moneyShort(950_000_000)).toBe('$950M');
+    expect(moneyShort(6_000_000)).toBe('$6M');
+    expect(moneyShort(420_000)).toBe('$420K');
+    const { anchor } = anchorFor(inputs({ roi: { hardSavingsAnnual: 2_000_000, totalValueAnnual: 1_202_000_000, facilities: 1250, calculatorVersion: 'v1', assumptions: [] } }), 1);
+    expect(anchor.doNotUse.find((d) => d.text.startsWith('Our modeled value'))?.text).toBe('Our modeled value (about $1.2B a year across 1250 sites)');
+  });
+  it('the call page carries the same remit caution NEXT does, naming the eligible person the fact fits; none when the fact lands', () => {
+    const glen = { name: 'Glen Chaffee', title: 'Managing Director, Transportation & Logistics, FedEx Ground' };
+    const lisa = { name: 'Lisa Lisson', title: 'President, Air Network Operations' };
+    const jeff = { name: 'Jeffrey Smith', title: 'Chief Operating Officer' };
+    const air = { observation: { text: 'With Tricolor, we are redesigning our international air network by deploying our aircraft strategically to optimize asset utilization.' }, problem: 'My guess is that the air network redesign lands freight on ground yards on a new rhythm.' };
+    const caution = openerCaution(glen, air, [glen, jeff, lisa]);
+    expect(caution).toMatch(/^Caution: the opening fact is an air network change \(aircraft, flights\)[^;]* and may not land on Glen's remit; Lisa Lisson, President, Air Network Operations, fits it\.$/);
+    // Lisa herself: the fact lands (related or direct), no caution; no opener, no caution.
+    expect(openerCaution(lisa, air, [glen, lisa])).toBeNull();
+    expect(openerCaution(glen, null, [lisa])).toBeNull();
+    expect(openerCaution(null, air, [lisa])).toBeNull();
+    // Nobody eligible fits: the caution still says the fact may not land, naming no one.
+    expect(openerCaution(glen, air, [glen, jeff])).toMatch(/may not land on Glen's remit\.$/);
+  });
+});
 
 describe('the outreach anchor (Option A)', () => {
   it('the primary anchor is one approved grounded thesis; the other open thesis is the alternative; the draft is neither', () => {

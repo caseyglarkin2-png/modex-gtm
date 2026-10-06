@@ -61,7 +61,17 @@ export function PreCallBrief({ brief, hideContact = false, checking = false, sta
   // UX-06: the SAME account state NOW shows, said first; under a hold no opener is offered; while the state is being
   // read, or when it could not be read, no opener either (fail closed).
   const hold = brief.pursuit?.holdsCall ? brief.pursuit : null;
-  const noOpener = !!hold || checking || stateUnreadable;
+  // A thesis the send gate would refuse, or one that needs review, is no opener either: the account page says
+  // "no usable thesis" and the call page must not hand the seller the refused angle to say out loud.
+  const unusable = !!brief.pursuit && !hold && !!hypothesis && !(Array.isArray(brief.pursuit.usableTheses) ? brief.pursuit.usableTheses : []).includes(hypothesis.id);
+  const noOpener = !!hold || checking || stateUnreadable || unusable;
+  const noOpenerText = hold
+    ? `No opener while the account is ${hold.state.replace(/_/g, ' ')}: record what you learn below.`
+    : checking
+      ? 'The opener shows once the account state is known.'
+      : stateUnreadable
+        ? 'No opener without the account state.'
+        : 'No opener until the thesis is usable: the send gate would refuse it or it needs review. Record what you learn below.';
   return (
     <section data-testid="pre-call-brief" className="space-y-4 text-sm">
       {hold ? (
@@ -74,6 +84,9 @@ export function PreCallBrief({ brief, hideContact = false, checking = false, sta
         <p role="status" className="rounded-md border border-amber-500/40 bg-amber-500/10 p-3 text-sm" data-testid="brief-state-unreadable">The account state could not be read just now: no opener is offered. Record what you learn; the account page says where things stand.</p>
       ) : brief.pursuit ? (
         <p className="text-xs text-[var(--muted-foreground)]" data-testid="brief-state">{brief.pursuit.stateLine}.</p>
+      ) : null}
+      {!noOpener && brief.pursuit?.caution ? (
+        <p className="rounded-md border border-amber-500/40 bg-amber-500/10 p-3 text-sm" data-testid="brief-caution">{brief.pursuit.caution}</p>
       ) : null}
       <header className="flex flex-wrap items-start justify-between gap-3">
         <div>
@@ -123,7 +136,7 @@ export function PreCallBrief({ brief, hideContact = false, checking = false, sta
       </header>
 
       {noOpener ? (
-        <p className="italic text-[var(--muted-foreground)]" data-testid="brief-no-opener">{hold ? `No opener while the account is ${hold.state.replace(/_/g, ' ')}: record what you learn below.` : checking ? 'The opener shows once the account state is known.' : 'No opener without the account state.'}</p>
+        <p className="italic text-[var(--muted-foreground)]" data-testid="brief-no-opener">{noOpenerText}</p>
       ) : hypothesis ? (
         <>
           <FactBlock observation={hypothesis.observation ?? ''} signals={Array.isArray(hypothesis.signals) ? hypothesis.signals : []} verifiedFact={hypothesis.verifiedFact !== false} />
@@ -132,7 +145,7 @@ export function PreCallBrief({ brief, hideContact = false, checking = false, sta
             rootCauseHypotheses={strings(hypothesis.rootCauseHypotheses)}
             impactHypotheses={strings(hypothesis.impactHypotheses)}
             whyNow={hypothesis.whyNow}
-            falsificationQuestions={strings(hypothesis.falsificationQuestions)}
+            falsificationQuestions={[...strings(hypothesis.falsificationQuestions), ...proveWrong.filter((line) => !strings(hypothesis.falsificationQuestions).includes(line))]}
             whatANoMeans={hypothesis.whatANoMeans}
             confidence={typeof hypothesis.confidence === 'number' ? hypothesis.confidence : 0}
           />
@@ -143,6 +156,7 @@ export function PreCallBrief({ brief, hideContact = false, checking = false, sta
         </p>
       )}
 
+      {noOpener || hypothesis ? null : (
       <div data-testid="brief-prove-wrong" className="rounded-md border border-[var(--border)] p-3">
         <Heading>{BRIEF_LABELS.wouldProveWrong}</Heading>
         {proveWrong.length > 0 ? (
@@ -155,6 +169,7 @@ export function PreCallBrief({ brief, hideContact = false, checking = false, sta
           <p className="mt-2 italic text-[var(--muted-foreground)]">Nothing named yet</p>
         )}
       </div>
+      )}
 
       <div className="grid gap-3 sm:grid-cols-2">
         <div data-testid="brief-dispositions" className="rounded-md border border-[var(--border)] p-3">
@@ -199,6 +214,7 @@ export function PreCallBrief({ brief, hideContact = false, checking = false, sta
         </div>
       </div>
 
+      {noOpener ? null : (
       <div data-testid="brief-questions" className="rounded-md border border-[var(--border)] p-3">
         <Heading>{BRIEF_LABELS.suggestedQuestions}</Heading>
         {questions.length > 0 ? (
@@ -211,8 +227,9 @@ export function PreCallBrief({ brief, hideContact = false, checking = false, sta
           <p className="mt-2 italic text-[var(--muted-foreground)]">No questions suggested</p>
         )}
       </div>
+      )}
 
-      {afterAck.length > 0 ? (
+      {afterAck.length > 0 && !noOpener ? (
         <div data-testid="brief-after-acknowledgement" className="rounded-md border border-dashed border-[var(--border)] p-3">
           <Heading>{BRIEF_LABELS.afterAcknowledgement}</Heading>
           <ol className="mt-2 list-decimal space-y-1 pl-5">

@@ -59,6 +59,8 @@ export interface AnchorThesis {
   usable: boolean;
   /** Why not, when not usable. */
   unusableWhy: string | null;
+  /** Its fact is the supporting fact above (said, so the page never reads one fact as three items). */
+  sameAsSupporting?: boolean;
 }
 
 export { PRIMARY_BY_TEXT, type PrimaryBy } from './anchor-text';
@@ -119,6 +121,14 @@ const host = (u: string | null) => {
     return null;
   }
 };
+/** A dollar figure a seller would say: $1.2B, $420M, $900K. */
+export function moneyShort(n: number): string {
+  if (!Number.isFinite(n) || n <= 0) return '$0';
+  if (n >= 1e9) return `$${(n / 1e9).toFixed(1).replace(/\.0$/, '')}B`;
+  if (n >= 1e6) return `$${Math.round(n / 1e6)}M`;
+  return `$${Math.round(n / 1e3)}K`;
+}
+
 const BROKEN_MONEY = /\$\s?\d{1,3}(?:\.\d+)?\s+(?!(?:m|b|k|mm|bn|million|billion|thousand|per|a|an|each|to)\b)[a-z]/i;
 const GENERIC_NOUN = /^(north|america|american|supply|chain|group|company|inc|corp|logistics|transportation|distribution|network|center|centre|county|township|united|states|texas|ohio)$/i;
 
@@ -200,7 +210,11 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
 
   // SUPPORTING FACT: one more checked, citable, live, physical-network fact that is not the anchor's (the gate's rules).
   const citable = (f: AccountInputs['facts'][number]) => f.continuity !== 'ended' && !sensitivityOf(f.quote) && !BROKEN_MONEY.test(f.quote) && isPhysicalOpsFact(f.quote);
-  const supportingFact = primary ? live.find((f) => !primary.factIds.includes(f.id) && !(f.sameQuoteIds ?? []).some((id) => primary.factIds.includes(id)) && citable(f)) ?? null : null;
+  // A fact that grounds another usable thesis is already offered as a different story; another fact is preferred, and
+  // when none exists the thesis is flagged as the same fact so the page never reads it as three items.
+  const altFactIds = new Set(theses.filter((t) => t.hypothesisId !== primary?.hypothesisId && t.usable).flatMap((t) => t.factIds));
+  const notAnchor = (f: AccountInputs['facts'][number]) => !!primary && !primary.factIds.includes(f.id) && !(f.sameQuoteIds ?? []).some((id) => primary.factIds.includes(id)) && citable(f);
+  const supportingFact = primary ? live.find((f) => notAnchor(f) && !altFactIds.has(f.id)) ?? live.find(notAnchor) ?? null : null;
   const supporting: StorySentence | null = supportingFact
     ? { text: supportingFact.quote, tag: 'Checked' as StoryTag, basis: `${host(supportingFact.url) ?? 'source'}, ${day(supportingFact.publishedAt)}`, basisIds: [`evidence:${supportingFact.id}`], cite: 'OK to cite to the buyer' }
     : null;
@@ -208,7 +222,7 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
   // DO NOT USE: named so the seller never reaches for them.
   const doNotUse: OutreachAnchor['doNotUse'] = [];
   if (i.privateLine) doNotUse.push({ text: 'Their visits to our pages and ROI reads', reason: 'private engagement: interest, never a reason to write' });
-  if (i.inputs.roi) doNotUse.push({ text: `Our modeled value (about $${Math.round(i.inputs.roi.totalValueAnnual / 1e6)}M a year across ${i.inputs.roi.facilities} sites)`, reason: 'our model, never their pain until they say it' });
+  if (i.inputs.roi) doNotUse.push({ text: `Our modeled value (about ${moneyShort(i.inputs.roi.totalValueAnnual)} a year across ${i.inputs.roi.facilities} sites)`, reason: 'our model, never their pain until they say it' });
   for (const r of i.story.rows) {
     for (const s of r.sentences) {
       if (s.tag === 'Unverified') doNotUse.push({ text: s.text, reason: s.basis.includes('does not parse') ? 'the number does not parse; check the source first' : 'unverified: a third party said it and nobody checked' });
@@ -217,10 +231,18 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
     }
   }
   for (const f of live) if (sensitivityOf(f.quote)) doNotUse.push({ text: f.quote, reason: `sensitive (${sensitivityOf(f.quote)}): never the hook` });
+  // One line per fact: a sensitive fact that is also marked not for outreach carries both reasons (PepsiCo's Maryland
+  // layoffs read as two items).
+  const merged: OutreachAnchor['doNotUse'] = [];
+  for (const d of doNotUse) {
+    const hit = merged.find((m) => m.text.trim().toLowerCase() === d.text.trim().toLowerCase());
+    if (!hit) merged.push({ ...d });
+    else if (!hit.reason.includes(d.reason)) hit.reason = `${hit.reason}; ${d.reason}`;
+  }
 
   // USE A DIFFERENT STORY: the other theses; DRAFT A THESIS: checked, citable story lines with no live thesis at all
   // (a thesis that needs review is still a thesis: review it, do not draft its twin).
-  const alternatives = theses.filter((t) => t.hypothesisId !== primary?.hypothesisId);
+  const alternatives = theses.filter((t) => t.hypothesisId !== primary?.hypothesisId).map((t) => (supportingFact && t.factIds.includes(supportingFact.id) ? { ...t, sameAsSupporting: true } : t));
   const groundedFactIds = new Set(
     i.brief.hypotheses
       .filter((h) => LIVE_STATUSES.has(rawById.get(h.id)?.status ?? ''))
@@ -249,7 +271,7 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
     fitsBetter,
     supporting,
     bestProof: { text: BEST_PROOF_MEASURED, tag: 'Our proof, measured' },
-    doNotUse,
+    doNotUse: merged,
     alternatives,
     draftable,
   };
@@ -262,20 +284,26 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
 export function storyBesideAnchor(story: AccountStory, anchor: OutreachAnchor | null): AccountStory {
   const p = anchor?.primary;
   if (!p) return story;
-  const key = p.observation.replace(/^[^:]{0,80}:\s*"?/, '').replace(/"?\.?$/, '').toLowerCase().slice(0, 80);
+  const keyOf = (text: string) => text.replace(/^[^:]{0,80}:\s*"?/, '').replace(/"?\.?$/, '').toLowerCase().slice(0, 80);
+  const key = keyOf(p.observation);
   const same = (text: string) => sameIdea(p.observation, text, '') || (key.length >= 40 && text.toLowerCase().includes(key));
+  const sKey = anchor?.supporting ? keyOf(anchor.supporting.text) : '';
+  const sameSupporting = (text: string) => !!anchor?.supporting && (text === anchor.supporting.text || (sKey.length >= 40 && text.toLowerCase().includes(sKey)));
   const rows: StoryRow[] = [];
   for (const r of story.rows) {
     if (r.key !== 'changing' && r.key !== 'stories') {
       rows.push(r);
       continue;
     }
-    const kept = r.sentences.filter((s) => !same(s.text));
+    const kept = r.sentences.filter((s) => !same(s.text) && !sameSupporting(s.text));
     if (kept.length === r.sentences.length) {
       rows.push(r);
       continue;
     }
-    if (r.key === 'changing') kept.unshift({ text: 'The opening story, above.', tag: 'Checked', basis: `the anchor: ${p.basis}`, basisIds: p.factIds.map((id) => `evidence:${id}`) });
+    const droppedAnchor = r.sentences.some((s) => same(s.text));
+    const droppedSupporting = r.sentences.some((s) => !same(s.text) && sameSupporting(s.text));
+    if (r.key === 'changing' && droppedSupporting) kept.unshift({ text: 'The supporting fact, above.', tag: 'Checked', basis: `the anchor: ${anchor!.supporting!.basis}`, basisIds: anchor!.supporting!.basisIds ?? [] });
+    if (r.key === 'changing' && droppedAnchor) kept.unshift({ text: 'The opening story, above.', tag: 'Checked', basis: `the anchor: ${p.basis}`, basisIds: p.factIds.map((id) => `evidence:${id}`) });
     if (kept.length) rows.push({ ...r, sentences: kept });
   }
   return { ...story, rows, first: story.first.map((f) => rows.find((r) => r.key === f.key)).filter((r): r is StoryRow => !!r) };

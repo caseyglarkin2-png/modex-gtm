@@ -229,7 +229,7 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
                 {usableAlternatives.map((t) => (
                   <li key={t.hypothesisId} className="flex flex-col gap-1 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3" data-testid="anchor-alternative" data-hypothesis={t.hypothesisId}>
                     <p className="min-w-0 flex-1 text-sm">
-                      {t.observation}
+                      {t.sameAsSupporting ? 'The supporting fact above, as its own story. ' : ''}{t.observation}
                       <span className="text-xs text-[var(--muted-foreground)]"> ({t.basis}; {t.status === 'review_required' ? 'under review' : t.status}; {t.relevance.tier === 'none' ? 'off their remit' : `${t.relevance.tier} on their remit`})</span>
                     </p>
                     {t.status === 'review_required' ? (
@@ -247,7 +247,7 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
               <ul className="space-y-1 text-xs text-[var(--muted-foreground)]" data-testid="anchor-unusable">
                 {unusable.map((t) => (
                   <li key={t.hypothesisId} data-hypothesis={t.hypothesisId}>
-                    Not usable: {t.observation.slice(0, 120)}{t.observation.length > 120 ? '...' : ''}. {t.unusableWhy}.
+                    Not usable: {t.observation.slice(0, 120)}{t.observation.length > 120 ? '...' : ''}. {!anchor.primary && t.hypothesisId === unusable[0].hypothesisId ? 'The reason above.' : `${t.unusableWhy}.`}
                   </li>
                 ))}
               </ul>
@@ -311,7 +311,7 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
         </details>
       ) : null}
 
-      <p ref={noteRef} tabIndex={-1} role="status" aria-live="polite" className="text-xs outline-none" data-testid="anchor-note">
+      <p ref={noteRef} tabIndex={-1} role="status" aria-live="polite" className="rounded text-xs outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]" data-testid="anchor-note">
         {note?.kind === 'status' ? note.text : ''}
       </p>
       {note?.kind === 'alert' ? (

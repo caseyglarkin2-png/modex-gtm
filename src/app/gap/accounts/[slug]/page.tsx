@@ -39,6 +39,7 @@ import { accountDomainFor, loadStoryReaders } from '@/lib/gap/story/load';
 import { mergeTouches } from '@/lib/gap/story/touches';
 import { projectStory, storyListenText } from '@/lib/gap/story/story';
 import { projectAnchor, storyBesideAnchor } from '@/lib/gap/story/anchor';
+import { remitCaution } from '@/lib/gap/story/anchor-text';
 import { listenText } from '@/lib/gap/context/now';
 
 export const dynamic = 'force-dynamic';
@@ -199,7 +200,7 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
     // The remit caution travels to NEXT: a cold first touch never asks the buyer who owns it.
     if (pursuitNext && anchor?.primary && anchor.primary.relevance.tier === 'none' && pursuit?.state.person) {
       const first = pursuit.state.person.name.split(' ')[0];
-      pursuitNext.text = `${pursuitNext.text} Caution: the opening fact is ${anchor.primary.factLabel} and may not land on ${first}'s remit${anchor.fitsBetter ? `; ${anchor.fitsBetter.name}${anchor.fitsBetter.title ? `, ${anchor.fitsBetter.title},` : ''} fits it` : ''}.`;
+      pursuitNext.text = `${pursuitNext.text} ${remitCaution(first, anchor.primary.factLabel, anchor.fitsBetter)}`;
     }
     const listen = pursuit && pursuitNext
       ? storyShown

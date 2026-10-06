@@ -164,12 +164,20 @@ describe('call prep on the pursuit state', () => {
     lastDispositions: [], openBids: [], suggestedQuestions: [], afterAcknowledgementQuestions: [],
   };
   it('says the hold first and offers no opener when the account is opted out, in a deal, held or on a reply', () => {
-    render(<PreCallBrief brief={{ ...brief, pursuit: { state: 'opted_out', stateLine: 'Opted out: timothy.cooper@walmart.com, Oct 5', blocker: 'Timothy Cooper replied "stop" on Oct 5: record it as do not contact.', holdsCall: true } }} />);
+    render(<PreCallBrief brief={{ ...brief, suggestedQuestions: ['Did the change above add trailer volume?'], afterAcknowledgementQuestions: ['How many trailers wait?'], pursuit: { state: 'opted_out', stateLine: 'Opted out: timothy.cooper@walmart.com, Oct 5', blocker: 'Timothy Cooper replied "stop" on Oct 5: record it as do not contact.', holdsCall: true, hypothesisId: null, usableTheses: [], caution: null } }} />);
     const hold = screen.getByTestId('brief-hold');
     expect(hold).toHaveAttribute('data-pursuit-state', 'opted_out');
     expect(hold.textContent).toMatch(/^Opted out: timothy.cooper@walmart.com, Oct 5\. Timothy Cooper replied "stop"/);
     expect(screen.queryByTestId('fact-block')).toBeNull();
     expect(screen.getByTestId('brief-no-opener').textContent).toMatch(/No opener while the account is opted out/);
+    // Seller re-check: a question to ask the buyer is an opener too; under a hold none shows, nor the thesis's own
+    // "would prove wrong"; the history and the outcome recorder stay.
+    expect(screen.queryByTestId('brief-questions')).toBeNull();
+    expect(screen.queryByTestId('brief-after-acknowledgement')).toBeNull();
+    expect(screen.queryByTestId('brief-prove-wrong')).toBeNull();
+    expect(screen.queryByTestId('hypothesis-block')).toBeNull();
+    expect(screen.getByTestId('brief-dispositions')).toBeInTheDocument();
+    expect(screen.getByTestId('brief-bids')).toBeInTheDocument();
     // The hold precedes everything else in reading order.
     expect(document.body.innerHTML.indexOf('data-testid="brief-hold"')).toBeLessThan(document.body.innerHTML.indexOf('data-testid="brief-persona"'));
   });
@@ -184,14 +192,51 @@ describe('call prep on the pursuit state', () => {
     expect(screen.queryByTestId('fact-block')).toBeNull();
   });
   it('without a hold the FACT block renders; a keyword hit is captioned as such, never as an observed fact', () => {
-    const { unmount } = render(<PreCallBrief brief={{ ...brief, pursuit: { state: 'ready', stateLine: 'Ready for a first touch', blocker: null, holdsCall: false } }} />);
+    const { unmount } = render(<PreCallBrief brief={{ ...brief, suggestedQuestions: ['Did the change above add trailer volume?'], pursuit: { state: 'ready', stateLine: 'Ready for a first touch', blocker: null, holdsCall: false, hypothesisId: 'h1', usableTheses: ['h1'], caution: null } }} />);
     expect(screen.queryByTestId('brief-hold')).toBeNull();
+    expect(screen.getByTestId('brief-questions')).toHaveTextContent('Did the change above add trailer volume?');
     expect(screen.getByTestId('fact-block').textContent).toMatch(/FACT.*Observed, cited/s);
     unmount();
     render(<PreCallBrief brief={{ ...brief, hypothesis: { ...brief.hypothesis!, verifiedFact: false } }} />);
     expect(screen.getByTestId('fact-block').textContent).toMatch(/KEYWORD HIT.*Not a verified fact: never read aloud as one/s);
     expect(screen.getByTestId('fact-block').className).toMatch(/border-l-amber-600/);
     expect(screen.getByTestId('fact-block').textContent).not.toMatch(/Observed, cited/);
+  });
+});
+
+describe('call prep agrees with the send gate and NEXT (seller re-check)', () => {
+  const brief: CallBrief = {
+    persona: { id: 7, personaKey: null, name: 'Ryan Dixon', title: 'Director Logistics', email: 'r@generalmills.com', phone: null, role: null, doNotContact: false } as CallBrief['persona'],
+    account: { name: 'General Mills', hubspotCompanyId: null, tier: '1', vertical: 'cpg' } as CallBrief['account'],
+    hypothesis: { id: 'h-brazil', status: 'active', problemFamily: 'hidden_capacity', confidence: 50, observation: 'General Mills agreed to sell its business in Brazil [S:s1].', signals: [{ id: 's1', title: 'x', source_kind: 'evidence_record', evidence_url: 'https://x', evidence_text: 'y', confidence: 1, external_ok: true, kind: 'network_change' }], problemHypothesis: 'My guess is that the network change moves volume.', rootCauseHypotheses: [], impactHypotheses: [], whyNow: null, falsificationQuestions: ['Does the Brazil sale touch a North America yard?'], whatANoMeans: null, wouldProveWrong: [] } as unknown as CallBrief['hypothesis'],
+    lastDispositions: [], openBids: [], suggestedQuestions: ['Did the change above add trailer volume or dwell at the sites that remain?'], afterAcknowledgementQuestions: [],
+  };
+  it('a thesis the send gate would refuse (not in the usable set) is no opener: no fact, no thesis, no question; the recorder stays', () => {
+    render(<PreCallBrief brief={{ ...brief, pursuit: { state: 'research', stateLine: 'Research: the angle needs your review before it is used', blocker: null, holdsCall: false, hypothesisId: null, usableTheses: [], caution: null } }} />);
+    expect(screen.getByTestId('brief-state')).toHaveTextContent('Research: the angle needs your review before it is used.');
+    expect(screen.getByTestId('brief-no-opener').textContent).toMatch(/^No opener until the thesis is usable: the send gate would refuse it or it needs review\./);
+    expect(screen.queryByTestId('fact-block')).toBeNull();
+    expect(screen.queryByTestId('hypothesis-block')).toBeNull();
+    expect(screen.queryByTestId('brief-questions')).toBeNull();
+    expect(screen.getByTestId('brief-dispositions')).toBeInTheDocument();
+  });
+  it('a usable thesis opens; a missing usable set reads as nothing usable (fail closed)', () => {
+    const { unmount } = render(<PreCallBrief brief={{ ...brief, pursuit: { state: 'ready', stateLine: 'Ready for a first touch: Ryan Dixon', blocker: null, holdsCall: false, hypothesisId: 'h-brazil', usableTheses: ['h-brazil'], caution: null } }} />);
+    expect(screen.getByTestId('fact-block')).toBeInTheDocument();
+    expect(screen.getByTestId('brief-questions')).toBeInTheDocument();
+    unmount();
+    render(<PreCallBrief brief={{ ...brief, pursuit: { state: 'ready', stateLine: 'Ready for a first touch: Ryan Dixon', blocker: null, holdsCall: false } as unknown as NonNullable<CallBrief['pursuit']> }} />);
+    expect(screen.queryByTestId('fact-block')).toBeNull();
+    expect(screen.getByTestId('brief-no-opener').textContent).toMatch(/No opener until the thesis is usable/);
+  });
+  it('the remit caution NEXT carries shows on the call page with the opener, and never under a hold', () => {
+    const caution = "Caution: the opening fact is an air network change (aircraft, flights) and may not land on Glen's remit; Lisa Lisson, President, Air Network Operations, fits it.";
+    const { unmount } = render(<PreCallBrief brief={{ ...brief, pursuit: { state: 'ready', stateLine: 'Ready for a first touch: Glen Chaffee', blocker: null, holdsCall: false, hypothesisId: 'h-brazil', usableTheses: ['h-brazil'], caution } }} />);
+    expect(screen.getByTestId('brief-caution')).toHaveTextContent(caution);
+    expect(document.body.innerHTML.indexOf('data-testid="brief-caution"')).toBeLessThan(document.body.innerHTML.indexOf('data-testid="fact-block"'));
+    unmount();
+    render(<PreCallBrief brief={{ ...brief, pursuit: { state: 'in_deal', stateLine: 'In a deal', blocker: 'Work the deal.', holdsCall: true, hypothesisId: null, usableTheses: [], caution } }} />);
+    expect(screen.queryByTestId('brief-caution')).toBeNull();
   });
 });
 
