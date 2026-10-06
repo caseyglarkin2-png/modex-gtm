@@ -3,8 +3,11 @@
  * Work restores the filter, the search and the card; a deep link or a stale order still offers Back to Work and
  * never a wrong Next; the bar records nothing.
  */
-import { render, screen, waitFor } from '@testing-library/react';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+
+const push = vi.fn();
+vi.mock('next/navigation', () => ({ useRouter: () => ({ push, refresh: vi.fn() }) }));
 import { DoneNext } from '@/components/gap/done-next';
 import { doneNextLinks, readWorkOrder, saveWorkOrder, WORK_ORDER_KEY, type WorkOrder } from '@/lib/gap/work/order';
 
@@ -12,6 +15,8 @@ const order: WorkOrder = { at: '2026-10-06T15:00:00Z', filter: 'ready', q: 'pe',
 
 beforeEach(() => {
   window.sessionStorage.clear();
+  push.mockReset();
+  vi.restoreAllMocks();
 });
 
 describe('doneNextLinks', () => {
@@ -69,5 +74,56 @@ describe('<DoneNext>', () => {
     expect(screen.queryByTestId('done-next-next')).toBeNull();
     expect(screen.queryByTestId('done-next-back')).toBeNull();
     expect(screen.getByTestId('done-next-work')).toHaveAttribute('href', '/gap');
+  });
+});
+
+describe('<DoneNext> records an outcome, never a navigation (R14)', () => {
+  it('without the account name the bar is links only (nothing to record); with it the three outcome controls show and the plain links still post nothing', async () => {
+    const fetchMock = vi.spyOn(globalThis, 'fetch');
+    saveWorkOrder(order);
+    render(<DoneNext slug="pepsico" index={1} accountName="PepsiCo" />);
+    await waitFor(() => expect(screen.getByTestId('done-next')).toHaveAttribute('data-position', '2/3'));
+    expect(screen.getByTestId('done-next-skip')).toBeInTheDocument();
+    expect(screen.getByTestId('done-next-snooze')).toBeInTheDocument();
+    expect(screen.getByTestId('done-next-logged')).toBeInTheDocument();
+    // Next account is a link: following it records nothing and posts nothing.
+    expect(screen.getByTestId('done-next-next').tagName).toBe('A');
+    expect(fetchMock).not.toHaveBeenCalled();
+    expect(push).not.toHaveBeenCalled();
+  });
+  it('Skip today posts the outcome and only then moves to the next account; a refusal says so and stays', async () => {
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce({ ok: true, status: 201, json: async () => ({ ok: true, line: 'Skipped for today, you, today.' }) } as Response);
+    saveWorkOrder(order);
+    render(<DoneNext slug="pepsico" index={1} accountName="PepsiCo" />);
+    await waitFor(() => expect(screen.getByTestId('done-next')).toHaveAttribute('data-position', '2/3'));
+    fireEvent.click(screen.getByTestId('done-next-skip'));
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(1));
+    expect(fetchMock.mock.calls[0][0]).toBe('/api/gap/accounts/outcome');
+    expect(JSON.parse(String(fetchMock.mock.calls[0][1]!.body))).toEqual({ accountName: 'PepsiCo', kind: 'skipped' });
+    await waitFor(() => expect(push).toHaveBeenCalledWith('/gap/accounts/kroger?from=work&i=2'));
+    expect(screen.getByTestId('done-next-status').textContent).toMatch(/Skipped for today.*Moving to the next account/);
+    fetchMock.mockResolvedValueOnce({ ok: false, status: 404, json: async () => ({ error: 'account_not_found' }) } as Response);
+    fireEvent.click(screen.getByTestId('done-next-skip'));
+    await waitFor(() => expect(screen.getByRole('alert').textContent).toMatch(/Could not record it \(account_not_found\)/));
+    expect(push).toHaveBeenCalledTimes(1);
+  });
+  it('Snooze asks for the date and posts it; Logged outside GAP posts the note; on the last account both return to Work', async () => {
+    const fetchMock = vi.spyOn(globalThis, 'fetch')
+      .mockResolvedValueOnce({ ok: true, status: 201, json: async () => ({ ok: true, line: 'Snoozed until Oct 13, you, today.' }) } as Response)
+      .mockResolvedValueOnce({ ok: true, status: 201, json: async () => ({ ok: true, line: 'Logged outside GAP (called Joey), you, today.' }) } as Response);
+    saveWorkOrder(order);
+    render(<DoneNext slug="kroger" index={2} accountName="Kroger" />);
+    await waitFor(() => expect(screen.getByTestId('done-next-position')).toHaveTextContent('The last one.'));
+    fireEvent.click(screen.getByTestId('done-next-snooze'));
+    fireEvent.change(screen.getByTestId('done-next-snooze-until'), { target: { value: '2026-10-13' } });
+    fireEvent.click(screen.getByTestId('done-next-snooze-confirm'));
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(1));
+    expect(JSON.parse(String(fetchMock.mock.calls[0][1]!.body))).toEqual({ accountName: 'Kroger', kind: 'snoozed', until: '2026-10-13T12:00:00.000Z' });
+    await waitFor(() => expect(push).toHaveBeenCalledWith('/gap?filter=ready&q=pe&focus=kroger'));
+    fireEvent.click(screen.getByTestId('done-next-logged'));
+    fireEvent.change(screen.getByTestId('done-next-logged-note'), { target: { value: 'called Joey' } });
+    fireEvent.click(screen.getByTestId('done-next-logged-confirm'));
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(2));
+    expect(JSON.parse(String(fetchMock.mock.calls[1][1]!.body))).toEqual({ accountName: 'Kroger', kind: 'logged', reason: 'called Joey' });
   });
 });

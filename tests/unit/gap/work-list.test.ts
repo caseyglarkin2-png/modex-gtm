@@ -4,7 +4,8 @@
  * lists last under In a deal; the chip counts are the filtered contents (N4); search keeps the order.
  */
 import { describe, expect, it } from 'vitest';
-import { buildWorkList, filterWork, workCounts, type WorkInput } from '@/lib/gap/work/list';
+import { buildWorkList, filterWork, snoozedWork, workCounts, type WorkInput } from '@/lib/gap/work/list';
+import type { WorkOutcome } from '@/lib/gap/work/outcome';
 import type { NextCandidate } from '@/lib/gap/routing/next-up';
 
 const NOW = new Date('2026-10-06T15:00:00Z');
@@ -191,5 +192,29 @@ describe('counts and filters', () => {
     expect(filterWork(cards, 'all', 'pep').map((c) => c.accountName)).toEqual(['PepsiCo']);
     expect(filterWork(cards, 'replies', 'WAL').map((c) => c.accountName)).toEqual(['Walmart Inc.']);
     expect(filterWork(cards, 'all', '').map((c) => c.index)).toEqual([0, 1, 2, 3, 4, 5, 6, 7]);
+  });
+});
+
+describe('outcomes on the Work list (R14)', () => {
+  const o = (accountName: string, kind: WorkOutcome['kind'], until: string, reason: string | null = null): [string, WorkOutcome] => [accountName, { accountName, kind, reason, until, by: 'casey@freightroll.com', at: '2026-10-06T14:00:00Z' }];
+  it('a snoozed account leaves the list and is counted in the footer; a skipped or logged one drops to the end with its line; a reply or an opt-out is never hidden by a seller note', () => {
+    const outcomes = new Map([o('PepsiCo', 'snoozed', '2026-10-09T12:00:00Z', 'travel'), o('H-E-B', 'skipped', '2026-10-07T04:00:00Z'), o('General Mills', 'logged', '2026-10-07T04:00:00Z', 'called Jo'), o('NFI Industries', 'snoozed', '2026-10-20T12:00:00Z'), o('Walmart Inc.', 'skipped', '2026-10-07T04:00:00Z')]);
+    const cards = buildWorkList(input({ outcomes }));
+    const names = cards.map((c) => c.accountName);
+    expect(names).not.toContain('PepsiCo');
+    // The reply (NFI) and the opt-out (Walmart) stay where the buyer's move puts them.
+    expect(names[0]).toBe('NFI Industries');
+    expect(cards.find((c) => c.accountName === 'Walmart Inc.')?.outcome).toBeUndefined();
+    // Skipped and logged accounts come after research, before the deals, with their lines.
+    const heb = cards.find((c) => c.accountName === 'H-E-B')!;
+    const mills = cards.find((c) => c.accountName === 'General Mills')!;
+    expect(heb.outcome?.line).toBe('Skipped for today, you, today.');
+    expect(mills.outcome?.line).toBe('Logged outside GAP (called Jo), you, today.');
+    expect(names.indexOf('Tyson Foods')).toBeLessThan(names.indexOf('H-E-B'));
+    expect(names.indexOf('H-E-B')).toBeLessThan(names.indexOf('Kroger'));
+    // The footer lists the snoozed accounts that left, by date.
+    expect(snoozedWork(outcomes, cards, NOW)).toEqual([{ accountName: 'PepsiCo', line: 'Snoozed until Oct 9 (travel), you, today.', until: '2026-10-09T12:00:00Z' }]);
+    // Without outcomes nothing changes.
+    expect(buildWorkList(input()).map((c) => c.outcome)).toEqual(buildWorkList(input()).map(() => undefined));
   });
 });

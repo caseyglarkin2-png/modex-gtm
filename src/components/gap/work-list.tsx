@@ -34,7 +34,7 @@ function isFilter(v: string | null): v is WorkFilter {
   return !!v && (WORK_FILTERS as readonly string[]).includes(v);
 }
 
-export function WorkList({ cards, focus, listenText = null, readAt = null }: { cards: WorkCard[]; /** The account (slug) to focus on arrival (Back to Work). */ focus?: string | null; /** UX-11: the spoken brief for today (lib/gap/voice/today.ts), played on a press only. */ listenText?: string | null; /** UX-14: when the read happened, with Refresh to read again. */ readAt?: { at: string; label: string } | null }) {
+export function WorkList({ cards, focus, listenText = null, readAt = null, snoozed = [] }: { cards: WorkCard[]; /** The account (slug) to focus on arrival (Back to Work). */ focus?: string | null; /** UX-11: the spoken brief for today (lib/gap/voice/today.ts), played on a press only. */ listenText?: string | null; /** UX-14: when the read happened, with Refresh to read again. */ readAt?: { at: string; label: string } | null; /** R14: the accounts snoozed out of Work, with their lines. */ snoozed?: Array<{ accountName: string; line: string; until: string }> }) {
   const router = useRouter();
   const params = useSearchParams();
   const [filter, setFilter] = useState<WorkFilter>(isFilter(params.get('filter')) ? (params.get('filter') as WorkFilter) : 'all');
@@ -132,6 +132,7 @@ export function WorkList({ cards, focus, listenText = null, readAt = null }: { c
                 </p>
               ) : null}
               {c.blocker ? <p className="mt-0.5 text-xs text-amber-700 dark:text-amber-400" data-testid="work-card-blocker">{c.blocker}</p> : null}
+              {c.outcome ? <p className="mt-0.5 text-xs text-[var(--muted-foreground)]" data-testid="work-card-outcome">{c.outcome.line}</p> : null}
               <div className="mt-2 flex flex-wrap items-center gap-2">
                 {c.next ? (
                   <Link href={c.next.href} className={PRIMARY} data-testid="work-card-next">{c.next.label}</Link>
@@ -142,6 +143,18 @@ export function WorkList({ cards, focus, listenText = null, readAt = null }: { c
           ))}
         </ol>
       )}
+      {snoozed.length ? (
+        <details className="rounded-md border border-[var(--border)] px-3 py-2 text-sm" data-testid="work-snoozed">
+          <summary className="min-h-11 cursor-pointer text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Snoozed ({snoozed.length}): back on their dates</summary>
+          <ul className="mt-1 space-y-1 text-xs">
+            {snoozed.map((s) => (
+              <li key={s.accountName}>
+                <Link href={accountHref(s.accountName)} className="underline">{s.accountName}</Link>: {s.line}
+              </li>
+            ))}
+          </ul>
+        </details>
+      ) : null}
     </section>
   );
 }
