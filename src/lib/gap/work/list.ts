@@ -222,6 +222,9 @@ export function buildWorkList(i: WorkInput): WorkCard[] {
   for (const [name, s] of i.summaries ?? []) {
     const have = best.get(name);
     if (!have) continue;
+    // A reply that landed after the summary was read is never overwritten by it: the reply card stands unless the
+    // summary itself says replied or opted out.
+    if ((have.card.stateKind === 'replied' || have.card.stateKind === 'opted_out') && s.state !== 'replied' && s.state !== 'opted_out') continue;
     const kind = PURSUIT_KIND[s.state];
     const action = pursuitAction(s.state, name);
     best.set(name, {
@@ -236,7 +239,8 @@ export function buildWorkList(i: WorkInput): WorkCard[] {
         person: s.person ?? (have.card.stateKind === kind ? have.card.person : null),
         // The card says what the workspace says, all of it: the why is NEXT, the action is the workspace's control.
         why: s.nextText ?? s.blocker ?? have.card.why,
-        blocker: s.state === 'held' || s.state === 'in_deal' || s.state === 'replied' || s.state === 'opted_out' ? (s.blocker ?? have.card.blocker) : null,
+        // The blocker is said once: never the same sentence as the why.
+        blocker: (s.state === 'held' || s.state === 'in_deal' || s.state === 'replied' || s.state === 'opted_out') && (s.blocker ?? have.card.blocker) !== (s.nextText ?? s.blocker ?? have.card.why) ? (s.blocker ?? have.card.blocker) : null,
         next: action,
       },
     });

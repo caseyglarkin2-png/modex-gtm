@@ -123,6 +123,17 @@ describe('the canonical pursuit state overrides the cockpit lane on the card', (
     const heb = cards.find((c) => c.accountName === 'H-E-B')!;
     expect(heb).toMatchObject({ stateKind: 'held', lane: 'deals', state: 'Held: family hold', why: 'A sibling account is in motion: no cold touch here until it clears.' });
     expect(heb.next).toBeNull();
+    expect(heb.blocker).toBeNull(); // said once
+  });
+  it('a stale READY summary never overwrites a reply that landed after it; a replied summary does', () => {
+    const base = input({ candidates: [cand('research', 'Walmart Inc.', 'Research Walmart Inc.', [-1, 1])] });
+    const ready = { accountName: 'Walmart Inc.', state: 'ready' as const, stateLine: 'Ready for a first touch: Doug Estrada', person: { name: 'Doug Estrada', title: null }, blocker: null, coldTouchAllowed: true, nextText: 'Prepare the first touch to Doug Estrada.', at: NOW.toISOString() };
+    const stale = buildWorkList({ ...base, summaries: new Map([['Walmart Inc.', ready]]) }).find((c) => c.accountName === 'Walmart Inc.')!;
+    expect(stale.stateKind).toBe('opted_out');
+    expect(stale.next?.label).toBe('Record the opt-out');
+    const replied = { ...ready, state: 'replied' as const, stateLine: 'Someone replied', nextText: 'Read the reply and record what they said.' };
+    const fresh = buildWorkList({ ...base, summaries: new Map([['Walmart Inc.', replied]]) }).find((c) => c.accountName === 'Walmart Inc.')!;
+    expect(fresh).toMatchObject({ stateKind: 'replied', source: 'pursuit', why: 'Read the reply and record what they said.' });
     expect(cards.findIndex((c) => c.accountName === 'FedEx')).toBeLessThan(cards.findIndex((c) => c.accountName === 'PepsiCo'));
   });
 });
