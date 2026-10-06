@@ -101,7 +101,17 @@ export async function recordWorkOutcome(prisma: PrismaLike, input: RecordOutcome
     until = nextDayBoundary(now, 1);
   }
   const payload = input.kind === 'clear' ? { kind: 'clear', reason } : { kind: input.kind, reason, until: until!.toISOString() };
-  await prisma.gapAuditEvent.create({ data: { kind: WORK_OUTCOME, actor: input.actor, subject_type: 'account', subject_id: account.name, payload } });
+  const row = await prisma.gapAuditEvent.create({ data: { kind: WORK_OUTCOME, actor: input.actor, subject_type: 'account', subject_id: account.name, payload } });
+  // R40: a snooze is a durable reminder that returns on its date; a newer outcome settles the older ones. Fail-open.
+  // Loaded on demand: this module is reachable from the Work list's client component, the commitment store is not.
+  if (row?.id) {
+    try {
+      const { commitmentsFromOutcome } = await import('./commitments');
+      await commitmentsFromOutcome(prisma, { outcomeId: String(row.id), accountName: account.name, kind: input.kind, until: until ? until.toISOString() : null, reason, actor: input.actor, now });
+    } catch {
+      // The reminder never gates the outcome.
+    }
+  }
   const outcome: WorkOutcome | null = input.kind === 'clear' ? null : { accountName: account.name, kind: input.kind, reason, until: until!.toISOString(), by: input.actor, at: now.toISOString() };
   return { ok: true, outcome, line: outcome ? outcomeLine(outcome, now) : null, slug: accountSlug(account.name) };
 }

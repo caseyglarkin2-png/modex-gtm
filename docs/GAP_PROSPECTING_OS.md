@@ -1120,6 +1120,40 @@ and `outreach-anchor.tsx` are identical at the pre-batch commit). Scratch, on a 
 fresh database; run the scratch files one at a time). Production stays as it was: no write, no flag change; the
 approach families are not seeded there yet (the R34 entry says how).
 
+**Sprint 4. R40 Commitment identity and lifecycle (DONE).** `work/commitment-model.ts` (pure, client-safe),
+`work/commitments.ts` (the store) and `work/dates.ts` (New York days): ONE durable record per obligation, an
+append-only `account.commitment` ledger row (subject the account; each row a full snapshot keyed by
+`payload.commitmentId`; the newest row wins) carrying the owner, the due time (a date-only obligation is due at 9 am
+New York that day), the account, person, deal and thread, the status (open, waiting, blocked, snoozed, done,
+skipped), the dependency in words, the completion proof (the ledger row, the disposition, the capture, the mailbox
+message, the outcome, or the seller's own recorded note) and its source. The id IS the source (`disposition:<id>`,
+`send:<person + step key>`, `snooze:<outcome row>`, `capture:<note>:<candidate>`, `seller:<uuid>`) and the create is
+one-shot under an advisory lock, so a duplicate event, a retry, a refresh or another instance finds the record and
+writes nothing; done and skipped are terminal (the writer refuses every transition and the fold ignores any later
+row), so nothing resurrects a completed item. Sources: a human-confirmed disposition (`disposition/service.ts` step
+7, fail-open, injectable: request_information -> answer the request; meeting_accepted -> prepare the meeting; timing
+with a date -> a reminder snoozed until then; referral -> decide how to approach the NAMED person, recorded as that
+person and never as the referrer; any stopping answer closes that person's waiting follow-ups with the disposition as
+proof), a snooze (`work/outcome.ts`, loaded on demand because the outcome module is reachable from the Work list's
+client component: a reminder that returns on its date; a newer outcome settles the older ones, done when they had
+come back, skipped when replaced or cleared) and every proven send of the last 30 days (`syncFollowUpsFromLedger`,
+run on the Work read: one waiting follow-up per person, due when the pinned version's next step is, else the house
+four-business-day interval flagged `noFollowUpCopy`, because every seeded family is single-touch today; a newer send
+closes the older follow-up with its ledger row). `GET / POST /api/gap/commitments` lists an account's obligations with
+their phase and records the seller's own obligations and transitions (done needs proof, waiting and blocked need the
+dependency, a snooze a future date within 90 days). The phase at `now` (due before the end of the New York day,
+upcoming, waiting, blocked, snoozed, done, skipped) is derived, never stored: a snooze returns on its date or early
+when the buyer moves; a follow-up the buyer answered is blocked by the answer; a buyer promise past its day becomes a
+chase. Storage decision: no new table; one indexed read by kind (every obligation) or by subject (one account); the
+additive (status, due_at) projection is the next step if the rows pass about ten thousand (owner: this module; rebuild:
+the rows). Proof: `commitments.test.ts` (9: the New York calendar across a late evening and daylight saving, the
+one-shot create, proof and terminal states across a reload, the five statuses, two obligations at one account, the
+three sources); six deliberate mutations (the one-shot create, the terminal refusal, the fold's terminal guard, done
+without proof, a UTC day, the referral naming the referrer) each turn it red. Adjacent: disposition, outcome, capture,
+BID and Work suites 8 files / 188 green; typecheck clean. Rollback: revert the commit; the rows stay inert (nothing
+else reads the kind). Debt: a meeting accepted by email has no time on record, so its preparation is due at once
+until the seller adds the time.
+
 ## 12. Migration, backfill and rollback
 
 Order of commits inside Sprint 1 and 3: schema + SQL first (no reader), then pure core, then importers (Top100 before PIC before modex legacy), then runtime pin, then services, then queue actions under the flag, then `GAP_OS_ENABLED=true` in Vercel after `verify-triggers.ts` passes against prod (env is snapshot at deploy; redeploy after setting). Before the prod `db push`, preview it with `prisma migrate diff --from-url <prod> --to-schema-datamodel prisma/schema.prisma --script` and confirm the script is additive only; also confirm the prod role can `CREATE FUNCTION` (not yet verified). Rollback: the flag off restores byte-identical behavior instantly; full removal is the rollback SQL plus reverting the runtime, service and queue-action commits; `sequences` is never modified; the only two pre-existing tables GAP OS's schema touches at all are `draft_queue_items` (one nullable `sequence_version_id` stamp, S1-T2) and `inbound_messages` (`source String @default("gmail")` and `hubspot_engagement_id String?`, S2-T1, needed so the reply cron and the HubSpot poller can tell a Gmail-sourced row from a HubSpot-engagement-sourced one and attribute the engagement id idempotently) — both additive-only, both confirmed by the production preflight below; the lane and PIC files are read, never written.
