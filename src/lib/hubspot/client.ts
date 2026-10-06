@@ -12,7 +12,11 @@ export function getHubSpotClient(): Client {
     throw new Error('HUBSPOT_ACCESS_TOKEN environment variable is not set');
   }
 
-  _client = new Client({ accessToken: token });
+  // Controlled boundary (GAP OS execution recovery, R05): a non-production harness may point the SDK at a local stub
+  // so the REAL opportunity, people and deal readers run against controlled answers. Read once, when the singleton is
+  // built; unset (production) means HubSpot's own base path. Never a bypass: the readers and their gates are unchanged.
+  const basePath = process.env.HUBSPOT_API_BASE_PATH?.trim();
+  _client = new Client({ accessToken: token, ...(basePath ? { basePath } : {}) });
   return _client;
 }
 

@@ -12,6 +12,7 @@ import { assertUnderDailyCap } from './daily-cap';
 import { assertAutonomyPermitsSend, assertHumanApprovedOneToOne, type HumanConfirmation, type SendPurpose } from './autonomy-gate';
 import { assertRestrictionPermitsSend } from './restriction-gate';
 import { assertSuppressionPermitsSend } from './suppression-gate';
+import { sinkAttempt, sinkConfig } from './transport-sink';
 
 // Read at call time, not module load time, so dynamically-set values work
 function getGmailConfig() {
@@ -320,6 +321,14 @@ export async function sendViaGmail(
   // See src/lib/email/daily-cap.ts for why this guard alone does that.
   await assertUnderDailyCap();
 
+  // THE TRANSPORT SINK (./transport-sink.ts): only with GAP_SEND_TRANSPORT=sink, after every gate above, before any
+  // token or network call. A non-test recipient is refused here; an allowed one is written to a file, never sent.
+  const sink = sinkConfig();
+  if (sink) {
+    const rec = sinkAttempt(sink, 'send', { to: payload.to, cc: payload.cc, bcc: payload.bcc, subject: payload.subject, purpose: payload.purpose ?? null, raw: base64Url(buildMimeMessage(payload)) });
+    return { provider: 'gmail', id: rec.id, threadId: payload.threadId ?? null };
+  }
+
   // Per-identity send: when payload.sender is set, mint the access token from
   // the sender's refresh token and address the mailbox URL to the sender.
   // Otherwise send via the env/Casey identity exactly as before.
@@ -422,6 +431,12 @@ export async function createGmailDraft(
   assertRestrictionPermitsSend({ to: payload.to, cc: payload.cc, bcc: payload.bcc }, payload.purpose, { inReplyTo: payload.headers?.['In-Reply-To'] ?? null });
   await assertSuppressionPermitsSend({ to: payload.to, cc: payload.cc, bcc: payload.bcc }, payload.purpose);
 
+  const sink = sinkConfig();
+  if (sink) {
+    const rec = sinkAttempt(sink, 'draft', { to: payload.to, cc: payload.cc, bcc: payload.bcc, subject: payload.subject, purpose: payload.purpose ?? null, raw: base64Url(buildMimeMessage(payload)) });
+    return { provider: 'gmail', draftId: rec.id, messageId: `${rec.id}-m`, threadId: payload.threadId ?? null };
+  }
+
   const userEmail = payload.sender?.userEmail ?? getGmailConfig().userEmail;
   const accessToken = await accessTokenForSender(payload.sender);
   const raw = base64Url(buildMimeMessage(payload));
@@ -458,6 +473,12 @@ export async function sendGmailDraft(
   await assertAutonomyPermitsSend(opts.purpose);
   await assertSuppressionPermitsSend(recipients, opts.purpose);
   await assertUnderDailyCap();
+
+  const sink = sinkConfig();
+  if (sink) {
+    const rec = sinkAttempt(sink, 'draft_send', { to: recipients.to, cc: recipients.cc, bcc: recipients.bcc, subject: null, purpose: opts.purpose ?? null, raw: null });
+    return { provider: 'gmail', id: `${rec.id}-sent`, threadId: null };
+  }
 
   const userEmail = opts.sender?.userEmail ?? opts.userEmail ?? getGmailConfig().userEmail;
   const accessToken = await accessTokenForSender(opts.sender);
