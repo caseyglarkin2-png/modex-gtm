@@ -865,6 +865,86 @@ against send, enroll, draft, HubSpot and Apollo); adjacent suites (motion routes
 family, pursuit state) green; tsc clean; eslint clean on the changed files (`audit.ts` carries three pre-existing
 `any` errors). Browser check and the fresh review: section 9.
 
+## 6i. UX-08 implementation record (2026-10-06): the account-first Work surface
+
+What shipped, against Direction A (4.1) and F3 / F12 / N4:
+
+1. **WORK is the landing** (`/gap` with no lane): the accounts that need the seller, ONE card per account, in the
+   existing NEXT UP order (reply, follow up, ready, decide, research, then the held accounts). Each card answers
+   account, state, why now, next person, next action, blocker, with Open to the workspace carrying the Work order
+   (`?from=work&i=n`, the hook UX-09 uses). NEXT UP's panel shows only when the list is empty.
+2. **Not a second state engine**: `lib/gap/work/list.ts` projects the cards from the candidates the cockpit already
+   builds (`routing/next-up.ts`, now returned in full, with `pickNextUpV2` still picking the four for NEXT UP), the
+   account motions it already reads (the next person is the motion's primary), the In Deals summary it already shows,
+   and the reply class decided before anything ranks (`replies/classify.ts`).
+3. **Replies classified before they rank** (Direction A change 2): a human reply heads the list with "No cold email
+   to anyone here until it is recorded"; an opt-out is "Opted out: record it" and ranks after READY (quick admin,
+   never a conversation); an automatic reply is not work and does not list; a bounce is research (find a working
+   address). Walmart's "stop" can no longer head the list.
+4. **A held account is never a cold action**: an account in a deal (the summary, when complete) or held by a card
+   for an open deal lists last under In a deal with "Open the deal brief" and the blocker; an UNKNOWN opportunity
+   read is a caution with no action ("Check HubSpot directly"). Its READY card is dropped from the list.
+5. **Lanes as filters, counts as contents** (N4): the chips (All, Replied, Follow up, Ready, Decide, Research, In a
+   deal) filter the one list and their counts are what the list holds; a name search narrows it; both live in the
+   URL (`?filter=`, `?q=`) so Back to Work can restore them, and `?focus=n` focuses a card on return (UX-09). The
+   old lane tiles and lane views stay (the analyst path) until UX-10 moves them out of the seller's way.
+6. **Not in UX-08**: parity with the full pursuit read per account (the account page's read runs the resolver and
+   HubSpot and takes seconds per account; the Work card renders from the cockpit's cheaper reads and names its state
+   in the same words); the integration gate after UX-10 measures the two against each other on the golden accounts
+   and records any disagreement as a defect of the card.
+
+Validation: `tests/unit/gap/work-list.test.ts` (one card per account in order, the human reply first, the opt-out
+never first and what it says, the automatic reply dropped, the held account last with no cold action and its READY
+card dropped, UNKNOWN as a caution, the gate-failing candidate skipped, an unavailable deals read claims nothing,
+counts equal contents, search keeps the order); `work-list-view.test.tsx` (every card field, Open carries the order,
+chips and search filter and write the URL, restore from the URL, the empty state); `next-up.test.tsx` green; tsc and
+eslint clean. Browser check: section 9.
+
+## 6j. UX-09 implementation record (2026-10-06): Done, next
+
+What shipped, against Direction A change 3 and F9:
+
+1. **The frozen order**: when Work renders it saves the order it shows (every card, with the filter and the search)
+   to the browser's session storage (`lib/gap/work/order.ts`); the account hrefs carry `?from=work&i=n` into it.
+   No server state, no new table: the order is the seller's own view at the moment Work was opened.
+2. **The bar** (`components/gap/done-next.tsx`), under NEXT on the account page only when opened from Work: "Account
+   3 of 14 in Work.", Back (the previous account), Next account (the next one), Back to Work (restores the filter
+   and the search and focuses this card, `/gap?filter=&q=&focus=n`). Plain links only, with the account names for
+   assistive tech; the seller can leave at any point. It records nothing: the outcome is whatever the seller did
+   above (the email, the call, the touch, the disposition), and the list drops the account on its own.
+3. **Fail-safe**: a deep link, a private window or an order that moved (the account at `i` is no longer this one)
+   renders "Opened from Work." with Back to Work only, never a wrong Next. The last account says "The last one." and
+   makes Back to Work the primary.
+4. **Not in UX-09**: a snooze control (Not now exists per person; an account-level snooze is a UX-10+ call if the
+   seller asks for it); the 390 bottom bar does not carry Next account yet (the bar sits under NEXT, inside the first
+   screen).
+
+Validation: `tests/unit/gap/done-next.test.tsx` (the links in order, Back to Work with filter, search and focus, the
+first and the last, the stale order and the deep link, the storage round trip and a broken value, the rendered bar
+with names for assistive tech, no buttons); the account-now and ux06 view suites green; tsc and eslint clean.
+Browser check: section 9.
+
+## 6k. UX-10 implementation record (2026-10-06): navigation and fast account access
+
+What shipped, against Direction A (4.1):
+
+1. **Three seller items**: the GAP subnav reads WORK (`/gap`), ACCOUNTS (`/gap/accounts`), CAPTURE (`/gap/capture`)
+   and More (Add to GAP, Sources, Signals, All hypotheses, Learning, Notes). Nothing is deleted: the intelligence and
+   admin tools live under More, out of the normal path; a current More item marks the menu; the menu closes on
+   navigation; an account workspace counts as Accounts.
+2. **ACCOUNTS** (`/gap/accounts`, new): every GAP account on one line (name, tier, vertical, people on record, the
+   newest proven GAP first touch from the same loader the motion reads), Tier 1 first, then band, then name. The
+   search box has focus on arrival, narrows as you type (tokens in any order, by name or vertical), shows a live
+   count, and Enter opens the first match. Three cheap reads; no pursuit read here (that is the workspace's job).
+3. **Not in UX-10**: the app-wide Ctrl+K palette still reads the static account JSON and routes to the old
+   intelligence pages; teaching it GAP accounts is recorded in section 10 (the ACCOUNTS search is the fast path
+   inside GAP for now); a Work state column on the index waits for a cheap per-account state read.
+
+Validation: `tests/unit/gap/gap-subnav.test.tsx` (three top-level links and every tool under More, the current
+item, the workspace under Accounts, a More item marking the menu), `accounts-index.test.tsx` (the order, the token
+search, focus on arrival, the live count, Enter opens the first match, the empty state); tsc and eslint clean.
+Browser check: section 9.
+
 ## 7. Task baselines and post-change measurements
 
 Baseline measured on production 2026-10-05 (SHA 54c11c57) through the rig; clicks counted on the shortest path a seller
@@ -1283,6 +1363,17 @@ amber 5.1 / 11.5 in light / dark).
 | Re-check (product + a11y): every original item fixed; NICE: the "Not usable" line repeated the refusal; the "Conversation" button clips at 820 under the floating buttons; no visible focus ring on the status line | product | NICE | FIXED: "The reason above."; a focus-visible ring on the status line; the clipped button is carried (section 10, pre-existing call-page layout) |
 | A client without the pursuit method renders the brief as before (fail-open for mocked clients only) | trust | NICE | LEAVE: the default client always has it; recorded |
 
+### 8.11 UX-07 review (one fresh read-only seller + product reviewer, 2026-10-06; one focused re-check)
+
+| Finding | Severity | Disposition |
+|---|---|---|
+| Undo after Left the company / Wrong role posted `status: current`, a permanent human correction that stands over later evidence and that a role check never overwrites: a loosening in the seller's name | BLOCKER | FIXED (ef569173): no Undo on the two corrections; they sit under "Correct their record" with the consequence said; the read-back says to reverse with a new correction; pinned (no POST ever carries `status: current`) |
+| Make next was offered on any eligible contact while the motion lines up a next only from its waiting ready cards: a recorded wish the motion ignores ("is next" untrue) | BLOCKER | FIXED (ef569173): offered only where the motion can honour it (`canBeNext` from the motion's waiting cards); the button and the read-back say "next if Glen is silent" |
+| A parked person could still be the motion's next (and promoted after 5 business days by the cockpit and the Work list) | SHOULD | FIXED (ef569173): the cockpit reads the seller preferences for every account and the motion ranks without parked people; the stack never tags a parked person next |
+| Re-check: the parked filter also dropped parked cards from the held ids, so a set-aside person's card read READY in the lane (the opposite of the decision) | BLOCKER | FIXED (the commit after ef569173): ranked without the parked cards, held ids keep them; a parked card is HELD in ready, in motion, paused and all-parked states (pinned) |
+| "a set-aside never loosens a safety rule" is internal language; the row carried two employment sets; the read-back said next twice; the Show-more label said "ranked lower on evidence" over a parked person; Not now showed a day off outside Eastern time | NICE | FIXED: plain words; one disclosure for the record corrections; said once; the label counts only the set-aside when nothing else is hidden; noon UTC on the chosen day |
+| Preference Undo also clears an older preference; the chosen person's own live preference never renders | NICE | LEAVE: append-only and recorded; the controls are hidden on the chosen person |
+
 ## 9. Validation record
 
 | Ticket | Validation | Result |
@@ -1370,6 +1461,7 @@ DPR 1 before UX-15 compares against this baseline. The text dumps and JS metrics
 | New (UX-05 review): the relationship route ("Chris Anderson: Inland26 contact") is a UX-04 block between the stack and the story | OPEN (UX-06): fold it into WHAT HAS HAPPENED BETWEEN US when the outreach anchor lands | |
 | New (UX-05 review): FedEx's between-us row holds three sentences and two long filing quotes, so its first three story rows end at 2.3 screens at 820 | LEAVE INTENTIONALLY for now: seven of eight accounts meet the placement; the lever is the stack's default row count (UX-03 contract allows 3) | Casey's call, not the slice's |
 | New (UX-06 dogfood): `Tyson` is an empty duplicate of `Tyson Foods` in `accounts` (no personas, no HubSpot id, a self-referential canonical link); it renders as a permanent identity hold | DEDUP DEBT (revops canonical engine), not a GAP UX item | |
+| New (UX-10): the app-wide Ctrl+K palette reads `lib/data/accounts.json` and routes to `/accounts/<slug>`, not the GAP workspace | FIX AS PART OF UX (after the integration gate): a GAP accounts group in the palette over the same index read | |
 | New (UX-06 re-check): the call brief's account header reads `accounts.vertical` ("3PL / Logistics" for FedEx) while NOW says carrier (the GAP account kind) | FIX AS PART OF UX (the brief header, UX-04 surface): read the account kind, drop the old column | |
 | New (UX-06 re-check): the research extractor drops accented letters from SEC filings at ingest (General Mills' buyer stored as "Caf Tr s Cora es S.A.", two evidence rows) | RESEARCH DEBT: fix the HTML entity decode in the extractor, then re-verify the two rows; never patch the text by hand | |
 | New (UX-06 re-check): the call page's fourth disposition button clips under the floating Note and mail buttons at 820 | FIX AS PART OF UX-09 (the Done/Next loop touches the recorder) | |
