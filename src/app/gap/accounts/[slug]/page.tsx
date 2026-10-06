@@ -40,6 +40,7 @@ import { mergeTouches } from '@/lib/gap/story/touches';
 import { projectStory, storyListenText } from '@/lib/gap/story/story';
 import { projectAnchor, storyBesideAnchor } from '@/lib/gap/story/anchor';
 import { remitCaution } from '@/lib/gap/story/anchor-text';
+import { DoneNext } from '@/components/gap/done-next';
 import { listenText } from '@/lib/gap/context/now';
 
 export const dynamic = 'force-dynamic';
@@ -56,7 +57,7 @@ const VIEWS: Array<{ v: View; label: string }> = [
   { v: 'sources', label: 'Sources' },
 ];
 
-export default async function AccountPage({ params, searchParams }: { params: Promise<{ slug: string }>; searchParams?: Promise<{ name?: string; view?: string }> }) {
+export default async function AccountPage({ params, searchParams }: { params: Promise<{ slug: string }>; searchParams?: Promise<{ name?: string; view?: string; from?: string; i?: string }> }) {
   if (assertGapEnabled('GAP_ROUTING_ENABLED')) notFound();
   const session = await auth();
   if (!session?.user?.email) redirect('/login');
@@ -222,6 +223,7 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
           links={links}
           mailbox={process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() || null}
           pursuit={pursuit ? { state: pursuit.state, stack: pursuit.stack, hypothesisId: pursuit.hypothesisId, excluded, story: storyShown, anchor } : null}
+          doneNext={q.from === 'work' ? <DoneNext slug={slug} index={/^\d+$/.test(q.i ?? '') ? Number(q.i) : null} /> : null}
         />
       </div>
     );
