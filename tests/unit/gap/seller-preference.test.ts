@@ -3,7 +3,7 @@
  * reversal row, "Not now" lapses on its date; it never writes do_not_contact and is stricter, never looser.
  */
 import { describe, expect, it } from 'vitest';
-import { loadSellerPreferences, NOT_NOW_MAX_DAYS, PERSON_SELLER_PREFERENCE, preferenceLine, setSellerPreference } from '@/lib/gap/people/seller-preference';
+import { loadSellerPreferences, loadSellerPreferencesForAccounts, NOT_NOW_MAX_DAYS, PERSON_SELLER_PREFERENCE, preferenceLine, setSellerPreference } from '@/lib/gap/people/seller-preference';
 
 const NOW = new Date('2026-10-06T15:00:00Z');
 type Row = { subject_id: string; actor: string; payload: Record<string, unknown>; created_at: Date; kind: string; subject_type: string };
@@ -14,9 +14,9 @@ function fakePrisma(rows: Row[]) {
     created,
     persona: { findUnique: async ({ where }: { where: { id: number } }) => (where.id === 7 || where.id === 8 ? { id: where.id, account_name: 'PepsiCo' } : null) },
     gapAuditEvent: {
-      findMany: async ({ where }: { where: { kind: string; payload: { path: string[]; equals: string } } }) =>
+      findMany: async ({ where }: { where: { kind: string; payload?: { path: string[]; equals: string } } }) =>
         rows
-          .filter((r) => r.kind === where.kind && r.payload.accountName === where.payload.equals)
+          .filter((r) => r.kind === where.kind && (!where.payload || r.payload.accountName === where.payload.equals))
           .sort((a, b) => b.created_at.getTime() - a.created_at.getTime())
           .map((r) => ({ subject_id: r.subject_id, actor: r.actor, payload: r.payload, created_at: r.created_at })),
       create: async ({ data }: { data: Record<string, unknown> }) => {
@@ -34,18 +34,29 @@ describe('loadSellerPreferences', () => {
       row(7, { kind: 'not_a_fit', reason: 'procurement, not operations' }, '2026-10-01T00:00:00Z'),
       row(7, { kind: 'clear' }, '2026-10-02T00:00:00Z'),
       row(8, { kind: 'not_now', until: '2026-10-03T00:00:00Z', reason: 'on leave' }, '2026-09-20T00:00:00Z'),
-      row(9, { kind: 'not_now', until: '2026-11-05T00:00:00Z', reason: null }, '2026-10-05T00:00:00Z'),
+      row(9, { kind: 'not_now', until: '2026-11-05T12:00:00Z', reason: null }, '2026-10-05T00:00:00Z'),
     ]);
     const m = await loadSellerPreferences(p, 'PepsiCo', NOW);
     expect(m.has(7)).toBe(false);
     expect(m.has(8)).toBe(false);
-    expect(m.get(9)).toMatchObject({ personaId: 9, accountName: 'PepsiCo', kind: 'not_now', until: '2026-11-05T00:00:00Z', reason: null, by: 'casey@freightroll.com' });
-    expect(preferenceLine(m.get(9)!)).toBe('Not now until Nov 4, you, Oct 4.');
+    expect(m.get(9)).toMatchObject({ personaId: 9, accountName: 'PepsiCo', kind: 'not_now', until: '2026-11-05T12:00:00Z', reason: null, by: 'casey@freightroll.com' });
+    expect(preferenceLine(m.get(9)!)).toBe('Not now until Nov 5, you, Oct 4.');
   });
   it('a later not-a-fit after a clear stands again, with its reason in the line', async () => {
     const p = fakePrisma([row(7, { kind: 'clear' }, '2026-10-02T00:00:00Z'), row(7, { kind: 'not_a_fit', reason: 'buys software, not yards' }, '2026-10-04T12:00:00Z')]);
     const m = await loadSellerPreferences(p, 'PepsiCo', NOW);
     expect(preferenceLine(m.get(7)!)).toBe('Not a fit here (buys software, not yards), you, Oct 4.');
+  });
+  it('the multi-account read groups the live preferences by account with the same rules', async () => {
+    const p = fakePrisma([
+      row(7, { kind: 'not_a_fit' }, '2026-10-01T00:00:00Z'),
+      { ...row(7, { kind: 'not_a_fit' }, '2026-10-03T00:00:00Z'), payload: { accountName: 'Kroger', kind: 'not_now', until: '2026-12-01T12:00:00Z', source: 'human' } },
+      row(8, { kind: 'clear' }, '2026-10-02T00:00:00Z'),
+    ]);
+    const all = await loadSellerPreferencesForAccounts(p, ['PepsiCo', 'Kroger', 'H-E-B'], NOW);
+    expect([...all.get('PepsiCo')!.keys()]).toEqual([7]);
+    expect(all.get('Kroger')!.get(7)?.kind).toBe('not_now');
+    expect(all.has('H-E-B')).toBe(false);
   });
   it('is scoped to the account: a preference at another account never reads here', async () => {
     const p = fakePrisma([{ ...row(7, { kind: 'not_a_fit' }, '2026-10-01T00:00:00Z'), payload: { accountName: 'Kroger', kind: 'not_a_fit' } }]);

@@ -65,6 +65,35 @@ export async function loadSellerPreferences(prisma: PrismaLike, accountName: str
   return out;
 }
 
+/** The live preferences for several accounts at once (the cockpit's motions): one read by kind, grouped here. */
+export async function loadSellerPreferencesForAccounts(prisma: PrismaLike, accountNames: readonly string[], now: Date = new Date()): Promise<Map<string, Map<number, SellerPreference>>> {
+  const out = new Map<string, Map<number, SellerPreference>>();
+  const wanted = new Set(accountNames);
+  if (wanted.size === 0) return out;
+  const rows: Array<{ subject_id: string; actor: string; payload: Record<string, unknown>; created_at: Date }> = await prisma.gapAuditEvent.findMany({
+    where: { kind: PERSON_SELLER_PREFERENCE, subject_type: 'persona' },
+    select: { subject_id: true, actor: true, payload: true, created_at: true },
+    orderBy: { created_at: 'desc' },
+  });
+  const seen = new Set<string>();
+  for (const r of rows) {
+    const accountName = typeof r.payload?.accountName === 'string' ? r.payload.accountName : '';
+    const id = Number(r.subject_id);
+    if (!wanted.has(accountName) || !Number.isInteger(id)) continue;
+    const key = `${accountName}:${id}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    const kind = r.payload?.kind;
+    if (kind !== 'not_a_fit' && kind !== 'not_now') continue;
+    const until = typeof r.payload?.until === 'string' ? r.payload.until : null;
+    if (kind === 'not_now' && (!until || new Date(until).getTime() <= now.getTime())) continue;
+    const reason = typeof r.payload?.reason === 'string' && r.payload.reason.trim() ? r.payload.reason.trim() : null;
+    if (!out.has(accountName)) out.set(accountName, new Map());
+    out.get(accountName)!.set(id, { personaId: id, accountName, kind, reason, until: kind === 'not_now' ? until : null, by: r.actor, at: new Date(r.created_at).toISOString() });
+  }
+  return out;
+}
+
 export type PreferenceRefusal = 'persona_not_found' | 'reason_too_long' | 'until_required' | 'until_in_past' | 'until_too_far';
 
 /**

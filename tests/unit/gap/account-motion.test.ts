@@ -161,3 +161,24 @@ describe('accountMotionRefusal (send gate, step 0)', () => {
     expect(touches.get('PepsiCo') ?? []).toEqual([]);
   });
 });
+
+describe('UX-07: a parked person is out of the running', () => {
+  const NOW2 = new Date('2026-10-06T15:00:00Z');
+  const card = (id: number, name: string, title: string): MotionCard => ({ id: `c${id}`, action: 'enroll_gap_sequence', account: { name: 'Acme' }, persona: { id, displayName: name, title, email: `${id}@acme.test`, personaKey: 'transportation_leader' }, hypothesis: { id: 'h1', status: 'active', persona: 'transportation_leader' }, createdAt: NOW2 });
+  const a = card(1, 'Ann Ops', 'Director of Transportation');
+  const b = card(2, 'Bo Ops', 'Senior Director of Transportation');
+  const c = card(3, 'Cy Ops', 'VP Transportation');
+  it('never suggests a parked person as primary or next; the others fill in', () => {
+    const open = computeAccountMotion({ accountName: 'Acme', readyEmailCards: [a, b, c], choice: null, firstTouches: [], replyHold: null, now: NOW2 });
+    const parked = computeAccountMotion({ accountName: 'Acme', readyEmailCards: [a, b, c], choice: null, firstTouches: [], replyHold: null, parked: new Set([open.primary!.personaId, open.next!.personaId]), now: NOW2 });
+    expect(parked.primary?.personaId).not.toBe(open.primary!.personaId);
+    expect(parked.primary?.personaId).not.toBe(open.next!.personaId);
+    expect(parked.next).toBeNull();
+    expect(parked.alsoWaiting.map((p) => p.personaId)).toEqual([]);
+  });
+  it('a recorded next who is parked is not lined up; the chosen primary is never parked by the filter', () => {
+    const m = computeAccountMotion({ accountName: 'Acme', readyEmailCards: [a, b, c], choice: { primaryPersonaId: 2, nextPersonaId: 1, by: 'casey', at: NOW2.toISOString() }, firstTouches: [], replyHold: null, parked: new Set([1, 2]), now: NOW2 });
+    expect(m.primary?.personaId).toBe(2);
+    expect(m.next?.personaId).toBe(3);
+  });
+});

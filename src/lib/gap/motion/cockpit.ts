@@ -4,6 +4,7 @@
  * a reply, and the angles for everyone shown. Read only.
  */
 import { checkThesisCurrent, type ThesisCurrentnessCheck } from '../execution/thesis-currentness';
+import { loadSellerPreferencesForAccounts } from '../people/seller-preference';
 import type { QueueItem } from '../routing/queue';
 import { sellerLaneOf } from '../routing/card-readiness';
 import { computeAccountMotion, EMAIL_ACTIONS, type AccountMotion } from './account-motion';
@@ -63,11 +64,13 @@ export async function loadCockpitMotions(
     const e = cards.map((c) => c.persona.email).find((x): x is string => !!x);
     if (e) emails.set(a, e);
   }
-  const [choices, touches, holds, conversations] = await Promise.all([
+  const [choices, touches, holds, conversations, parkedByAccount] = await Promise.all([
     loadMotionChoices(prisma, accounts),
     loadAccountFirstTouches(prisma, accounts, now),
     loadReplyHolds(prisma, emails, now),
     loadAccountConversations(prisma, accounts, now),
+    // UX-07: a person the seller set aside (not a fit / not now) is out of the motion's running (fail-soft: none).
+    loadSellerPreferencesForAccounts(prisma, accounts, now).catch(() => new Map<string, Map<number, unknown>>()),
   ]);
   const angles = await loadAngles(prisma, readyEmail.map((c) => c.persona.id as number));
   // US-first needs each person's own location, as the brief reads it (review S3): only where an account has more than
@@ -101,6 +104,7 @@ export async function loadCockpitMotions(
       firstTouches: touches.get(account) ?? [],
       replyHold: holds.get(account) ?? null,
       conversation: conversations.get(account) ?? null,
+      parked: new Set([...(parkedByAccount.get(account)?.keys() ?? [])]),
       now,
     });
     held.push(...m.heldCardIds);

@@ -153,7 +153,7 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
   const makeNext = (row: StackRow) => {
     const primary = state.person?.personaId;
     if (!primary || row.personaId === null) return;
-    return decide(row, 'next', '/api/gap/accounts/motion', { accountName, primaryPersonaId: primary, nextPersonaId: row.personaId }, `${first(row.name)} is next at ${account} only, after ${state.person ? first(state.person.name) : 'the chosen person'} if no response.`, { label: 'Undo', url: '/api/gap/accounts/motion', body: { accountName, primaryPersonaId: primary, nextPersonaId: null } }, 'make next');
+    return decide(row, 'next', '/api/gap/accounts/motion', { accountName, primaryPersonaId: primary, nextPersonaId: row.personaId }, `${first(row.name)} is next at ${account} only, after ${state.person ? first(state.person.name) : 'the chosen person'} if no response${state.person ? `: Next if ${first(state.person.name)} is silent` : ''}.`, { label: 'Undo', url: '/api/gap/accounts/motion', body: { accountName, primaryPersonaId: primary, nextPersonaId: null } }, 'make next');
   };
   const prefer = (row: StackRow, kind: 'not_a_fit' | 'not_now', reason: string, until: string | null) => {
     if (row.personaId === null) return;
@@ -165,7 +165,9 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
   const employment = (row: StackRow, status: 'left' | 'role_changed') => {
     if (row.personaId === null) return;
     const url = `/api/gap/personas/${row.personaId}/employment`;
-    return decide(row, 'employment', url, { status }, status === 'left' ? `${first(row.name)} is recorded as having left ${account}: no first touch to them.` : `${first(row.name)}'s role is recorded as changed at ${account}: verify before any first touch.`, { label: 'Undo', url, body: { status: 'current' } }, 'record that');
+    // No Undo here: a reversal would record a human "current" that stands over later evidence and that a role
+    // check never overwrites (review). The read-back says how to reverse: a new correction on their record.
+    return decide(row, 'employment', url, { status }, status === 'left' ? `${first(row.name)} is recorded as having left ${account}: no first touch to them. This correction stands over later evidence; reverse it only with a new correction on their record.` : `${first(row.name)}'s role is recorded as changed at ${account}: verify before any first touch. This correction stands over later evidence; reverse it only with a new correction on their record.`, undefined, 'record that');
   };
   const verifyRole = (row: StackRow) => (row.personaId === null ? undefined : decide(row, 'verify', `/api/gap/personas/${row.personaId}/employment/verify`, null, `Role check for ${first(row.name)}:`, undefined, 'verify the role'));
 
@@ -220,12 +222,14 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
   const priorityControls = (row: StackRow) => {
     if (!choosing || row.chosen || row.personaId === null || !row.coldEligible) return null;
     const b = busy?.key === row.key ? busy.step : null;
-    const canNext = !!state.person?.personaId && !row.isNext && !row.preference;
+    // Make next only where the motion can line the person up (a ready email card at the account): the read-back
+    // "is next" must be true, never a recorded wish the motion ignores (review).
+    const canNext = !!state.person?.personaId && !row.isNext && !row.preference && row.canBeNext;
     return (
       <>
         {canNext ? (
           <button type="button" className={TEXT} disabled={busy !== null} onClick={() => void makeNext(row)} data-testid="people-stack-make-next" aria-describedby={`reason-${row.key}`}>
-            {b === 'next' ? 'Recording...' : 'Make next'}
+            {b === 'next' ? 'Recording...' : `Next if ${state.person ? first(state.person.name) : 'the chosen person'} is silent`}
           </button>
         ) : null}
         {row.preference ? (
@@ -248,7 +252,8 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
                   e.preventDefault();
                   const f = new FormData(e.currentTarget);
                   const until = String(f.get('until') ?? '');
-                  void prefer(row, 'not_now', String(f.get('reason') ?? '').trim(), until ? new Date(`${until}T23:59:59`).toISOString() : null);
+                  // Noon UTC on the chosen day: the same calendar day in every US zone, however the line is rendered.
+                  void prefer(row, 'not_now', String(f.get('reason') ?? '').trim(), until ? new Date(`${until}T12:00:00Z`).toISOString() : null);
                 }}
                 data-testid="people-stack-not-now"
               >
@@ -277,12 +282,16 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
                 </label>
                 <button type="submit" className={OUTLINE} disabled={busy !== null}>Not a fit</button>
               </form>
-              <div className="flex flex-wrap items-center gap-2">
-                <button type="button" className={OUTLINE} disabled={busy !== null} onClick={() => void employment(row, 'left')} data-testid="people-stack-left">{b === 'employment' ? 'Recording...' : 'Left the company'}</button>
-                <button type="button" className={OUTLINE} disabled={busy !== null} onClick={() => void employment(row, 'role_changed')} data-testid="people-stack-wrong-role">Wrong role</button>
-                <button type="button" className={OUTLINE} disabled={busy !== null} onClick={() => void verifyRole(row)} data-testid="people-stack-verify-role">{b === 'verify' ? 'Checking...' : 'Verify role'}</button>
-              </div>
-              <p className="basis-full text-[var(--muted-foreground)]">At {account} only. Nothing is sent by any of these; a set-aside never loosens a safety rule, and Undo stays in place.</p>
+              <p className="basis-full text-[var(--muted-foreground)]">At {account} only. Nothing is sent. A set-aside hides nobody from you and clears no safety rule; Undo stays in place.</p>
+              <details className="basis-full" data-testid="people-stack-record-controls">
+                <summary className="inline-flex min-h-9 cursor-pointer list-none items-center text-xs text-[var(--muted-foreground)] underline marker:content-none">Correct their record (left, wrong role, verify)</summary>
+                <div className="mt-1 flex flex-wrap items-center gap-2">
+                  <button type="button" className={OUTLINE} disabled={busy !== null} onClick={() => void employment(row, 'left')} data-testid="people-stack-left">{b === 'employment' ? 'Recording...' : 'Left the company'}</button>
+                  <button type="button" className={OUTLINE} disabled={busy !== null} onClick={() => void employment(row, 'role_changed')} data-testid="people-stack-wrong-role">Wrong role</button>
+                  <button type="button" className={OUTLINE} disabled={busy !== null} onClick={() => void verifyRole(row)} data-testid="people-stack-verify-role">{b === 'verify' ? 'Checking...' : 'Verify role'}</button>
+                </div>
+                <p className="mt-1 text-[var(--muted-foreground)]">Left and Wrong role go on their record everywhere, as your correction: they stand over later evidence and a role check never overwrites them, so there is no Undo; reverse one with a new correction. Verify role runs one public check and records what it finds.</p>
+              </details>
             </div>
           </details>
         )}

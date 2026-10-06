@@ -162,19 +162,23 @@ describe('UX-07: human priority controls', () => {
 
   it('shows NEXT IF NO RESPONSE from the pursuit state and tags that row; the chosen row offers no priority controls', () => {
     const state = chosenState();
-    render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(two, { chosenKey: 'gap:1', chosenBy: 'you, Oct 5', nextPersonaId: 2 })} state={state} hypothesisId="h1" excluded={[]} />);
+    render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(two, { chosenKey: 'gap:1', chosenBy: 'you, Oct 5', nextPersonaId: 2, nextCandidates: new Set([2]) })} state={state} hypothesisId="h1" excluded={[]} />);
     expect(screen.getByTestId('people-stack-next').textContent).toBe('Next if no response: Kelly Kruse, Regional Transportation Director. after 5 business days with no response to Doug.');
     const kelly = screen.getAllByTestId('people-stack-row').find((el) => /Kelly Kruse/.test(el.textContent ?? ''))!;
     expect(kelly.getAttribute('data-slot')).toBe('Next if no response');
     expect(screen.queryByTestId('people-stack-make-next')).toBeNull(); // Kelly IS next; Doug is chosen: nobody to make next
     expect(screen.getAllByTestId('people-stack-more-controls')).toHaveLength(1); // on Kelly only
   });
-  it('Make next records the motion next person with the chosen primary, reads back with scope and Undo, and sends nothing', async () => {
+  it('Make next is offered only where the motion can line the person up; it records the next person with the chosen primary, reads back with scope and Undo, and sends nothing', async () => {
     const state = chosenState();
     const fetchSpy = okFetch();
-    render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(two, { chosenKey: 'gap:1', chosenBy: 'you, Oct 5' })} state={state} hypothesisId="h1" excluded={[]} />);
+    const { unmount } = render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(two, { chosenKey: 'gap:1', chosenBy: 'you, Oct 5' })} state={state} hypothesisId="h1" excluded={[]} />);
+    expect(screen.queryByTestId('people-stack-make-next')).toBeNull(); // no ready card for Kelly: no promise the motion would not keep
+    unmount();
+    render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(two, { chosenKey: 'gap:1', chosenBy: 'you, Oct 5', nextCandidates: new Set([2]) })} state={state} hypothesisId="h1" excluded={[]} />);
+    expect(screen.getByTestId('people-stack-make-next')).toHaveTextContent('Next if Doug is silent');
     fireEvent.click(screen.getByTestId('people-stack-make-next'));
-    await waitFor(() => expect(screen.getByTestId('people-stack-note').textContent).toMatch(/^Kelly is next at Walmart Inc only, after Doug if no response\. Nothing is sent\./));
+    await waitFor(() => expect(screen.getByTestId('people-stack-note').textContent).toMatch(/^Kelly is next at Walmart Inc only, after Doug if no response: Next if Doug is silent\. Nothing is sent\./));
     expect(fetchSpy).toHaveBeenCalledWith('/api/gap/accounts/motion', expect.objectContaining({ method: 'POST', body: JSON.stringify({ accountName: 'Walmart Inc.', primaryPersonaId: 1, nextPersonaId: 2 }) }));
     expect(refresh).toHaveBeenCalled();
     fireEvent.click(screen.getByTestId('people-stack-undo'));
@@ -197,8 +201,7 @@ describe('UX-07: human priority controls', () => {
     fireEvent.submit(notNow);
     await waitFor(() => expect(screen.getByTestId('people-stack-note').textContent).toMatch(/^Kelly is set aside at Walmart Inc until Nov 5\. Nothing is sent\./));
     const last = fetchSpy.mock.calls[fetchSpy.mock.calls.length - 1];
-    expect(JSON.parse(String((last[1] as RequestInit).body))).toMatchObject({ kind: 'not_now', reason: null });
-    expect(JSON.parse(String((last[1] as RequestInit).body)).until).toMatch(/^2026-11-0[56]T/);
+    expect(JSON.parse(String((last[1] as RequestInit).body))).toMatchObject({ kind: 'not_now', reason: null, until: '2026-11-05T12:00:00.000Z' });
     unmount();
     // A parked person reads the seller line in Show more, with Undo in place, and stays choosable.
     const parked = buildPeopleStack(two, { chosenKey: 'gap:1', chosenBy: 'you, Oct 5', preferences: new Map([[2, { personaId: 2, accountName: 'Walmart Inc.', kind: 'not_a_fit' as const, reason: 'maintenance', until: null, by: 'casey@freightroll.com', at: '2026-10-05T00:00:00Z' }]]) });
@@ -208,13 +211,16 @@ describe('UX-07: human priority controls', () => {
     expect(screen.getByTestId('people-stack-preference').textContent).toMatch(/^Not a fit here \(maintenance\), you, Oct 4\. Undo$/);
     expect(screen.getByTestId('people-stack-choose')).toBeInTheDocument();
   });
-  it('Left the company and Wrong role post the existing employment correction; Verify role posts the public check and reads the verdict back', async () => {
+  it('Left the company and Wrong role post the existing employment correction with NO Undo (a reversal would record a permanent current); Verify role posts the public check and reads the verdict back', async () => {
     const state = chosenState();
     const fetchSpy = okFetch({ verification: { verdict: 'same_role', title: 'Regional Transportation Director', company: 'Walmart' } });
     render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(two, { chosenKey: 'gap:1', chosenBy: 'you, Oct 5' })} state={state} hypothesisId="h1" excluded={[]} />);
+    expect(screen.getByTestId('people-stack-record-controls')).toHaveTextContent(/there is no Undo/);
     fireEvent.click(screen.getByTestId('people-stack-left'));
     await waitFor(() => expect(fetchSpy).toHaveBeenCalledWith('/api/gap/personas/2/employment', expect.objectContaining({ body: JSON.stringify({ status: 'left' }) })));
-    expect(screen.getByTestId('people-stack-note').textContent).toMatch(/^Kelly is recorded as having left Walmart Inc: no first touch to them\./);
+    expect(screen.getByTestId('people-stack-note').textContent).toMatch(/^Kelly is recorded as having left Walmart Inc: no first touch to them\. This correction stands over later evidence; reverse it only with a new correction on their record\./);
+    expect(screen.queryByTestId('people-stack-undo')).toBeNull();
+    expect(fetchSpy.mock.calls.every(([, init]) => !/"status":"current"/.test(String((init as RequestInit).body ?? '')))).toBe(true);
     fireEvent.click(screen.getByTestId('people-stack-wrong-role'));
     await waitFor(() => expect(fetchSpy).toHaveBeenLastCalledWith('/api/gap/personas/2/employment', expect.objectContaining({ body: JSON.stringify({ status: 'role_changed' }) })));
     fireEvent.click(screen.getByTestId('people-stack-verify-role'));

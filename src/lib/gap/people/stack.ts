@@ -57,6 +57,8 @@ export interface StackRow {
   preference: { kind: PreferenceKind; line: string } | null;
   /** UX-07: the motion's NEXT IF NO RESPONSE person (the seller's Make next, or the motion's own pick). */
   isNext: boolean;
+  /** UX-07: the motion can line this person up as next (they hold a ready email card at the account). */
+  canBeNext: boolean;
 }
 
 /** Plain words for the set-aside reasons (the same vocabulary the owner panel groups by). */
@@ -211,13 +213,15 @@ function currentnessOf(c: OwnerCandidate): string | null {
 interface RowContext {
   nextPersonaId: number | null;
   preferences: ReadonlyMap<number, SellerPreference>;
+  nextCandidates: ReadonlySet<number>;
 }
 
 function toRow(c: OwnerCandidate, r: OwnerResolution, reason: string, ordinal: number | null, chosen: { key: string | null; by: string | null }, ctx: RowContext): StackRow {
   const rec = r.recommended && r.recommended.key === c.key ? r.recommended : null;
   const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
   const pref = c.personaId !== null ? ctx.preferences.get(c.personaId) ?? null : null;
-  const isNext = c.personaId !== null && c.personaId === ctx.nextPersonaId && chosen.key !== c.key;
+  const isNext = c.personaId !== null && c.personaId === ctx.nextPersonaId && chosen.key !== c.key && !pref;
+  const canBeNext = c.personaId !== null && chosen.key !== c.key && !pref && ctx.nextCandidates.has(c.personaId);
   return {
     key: c.key,
     personaId: c.personaId,
@@ -240,15 +244,16 @@ function toRow(c: OwnerCandidate, r: OwnerResolution, reason: string, ordinal: n
     coldEligible: r.eligible.some((e) => e.key === c.key),
     preference: pref ? { kind: pref.kind, line: preferenceLine(pref) } : null,
     isNext,
+    canBeNext,
   };
 }
 
 export function buildPeopleStack(
   r: OwnerResolution,
-  opts: { chosenKey: string | null; chosenBy?: string | null; max?: number; /** UX-07 */ preferences?: ReadonlyMap<number, SellerPreference>; nextPersonaId?: number | null },
+  opts: { chosenKey: string | null; chosenBy?: string | null; max?: number; /** UX-07 */ preferences?: ReadonlyMap<number, SellerPreference>; nextPersonaId?: number | null; /** UX-07: the people the motion could line up as next (its waiting ready cards). */ nextCandidates?: ReadonlySet<number> },
 ): PeopleStack {
   const max = Math.max(STACK_MIN, opts.max ?? STACK_DEFAULT_MAX);
-  const ctx: RowContext = { nextPersonaId: opts.nextPersonaId ?? null, preferences: opts.preferences ?? new Map() };
+  const ctx: RowContext = { nextPersonaId: opts.nextPersonaId ?? null, preferences: opts.preferences ?? new Map(), nextCandidates: opts.nextCandidates ?? new Set() };
   // A name set aside as do not contact, unsubscribed, opted out or left at this account is never offered as a row
   // under another record of the same person (H-E-B: a duplicate Troy Shaw record was eligible beside the flagged
   // one). The send gates would refuse; the page must not offer it either. The hidden record is said in the set-aside.
@@ -318,7 +323,7 @@ export function buildPeopleStack(
     rows,
     hidden,
     // "Ranked lower on evidence" only when the order IS evidence; under a tie the rest are simply the rest.
-    showAllLabel: hidden ? `${tie ? `Show ${hidden} more on record` : `Show ${hidden} more on record (ranked lower on evidence)`}${hiddenCautions ? `, ${hiddenCautions} with a caution` : ''}${parked.length ? `, ${parked.length} set aside by you` : ''}` : null,
+    showAllLabel: !hidden ? null : rest.length === 0 ? `Show ${parked.length} set aside by you` : `${tie ? `Show ${hidden} more on record` : `Show ${rest.length} more on record (ranked lower on evidence)`}${hiddenCautions ? `, ${hiddenCautions} with a caution` : ''}${parked.length ? `, ${parked.length} set aside by you` : ''}`,
     tie,
     tieLine: tie ? `GAP could not separate ${tieWho} on evidence (the same responsibility, market and reachability); their order here is first-name order, not a ranking. Choose on what you know.` : null,
     chooseLabel: !chosenKey && active.length >= 2 ? `Choose who (${active.length})` : null,

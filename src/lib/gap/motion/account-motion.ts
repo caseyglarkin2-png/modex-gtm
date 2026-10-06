@@ -164,10 +164,14 @@ export function computeAccountMotion(input: {
   replyHold: { from: string; receivedAt: string } | null;
   /** The newest buyer answer at the account (motion/load.ts loadAccountConversations). */
   conversation?: { who: string; responseClass: string; at: string } | null;
+  /** UX-07: people the seller set aside here (not a fit / not now): never suggested, never lined up as next. */
+  parked?: ReadonlySet<number>;
   now: Date;
 }): AccountMotion {
   const { accountName, readyEmailCards, choice, now } = input;
-  const cards = readyEmailCards.filter((c) => typeof c.persona.id === 'number');
+  const parked = input.parked ?? new Set<number>();
+  // A parked person is out of the motion's running; the seller's own chosen primary is never parked by this filter.
+  const cards = readyEmailCards.filter((c) => typeof c.persona.id === 'number' && (!parked.has(c.persona.id as number) || c.persona.id === choice?.primaryPersonaId));
   // Relevance is to the THESIS role (the hypothesis persona key), never to the candidates' own roles.
   const thesisKeys = new Set(cards.map((c) => c.hypothesis?.persona).filter((k): k is string => !!k));
   const ranked = rankCandidates(cards, thesisKeys);
