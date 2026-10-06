@@ -162,7 +162,7 @@ export async function loadAccountInputs(
     skip(() => prisma.researchRun.findFirst({ where: { account_name: accountName, run_key: { startsWith: 'gap_research:' } }, orderBy: { created_at: 'desc' }, select: { created_at: true, provider_status: true } }).catch(() => null), null as Row | null),
     soft(prisma.prospectingHypothesis.findMany({
       where: { account_name: accountName, superseded_by: { is: null }, status: { in: ['draft', 'review_required', 'approved', 'active', 'confirmed', 'partially_confirmed', 'rejected'] } },
-      select: { id: true, status: true, reviewed_at: true, activated_at: true, observation: true, problem_hypothesis: true, root_cause_hypotheses: true, impact_hypotheses: true, falsification_questions: true, what_a_no_means: true, signals: { where: { role: 'primary' }, select: { signal_id: true } } },
+      select: { id: true, status: true, reviewed_at: true, activated_at: true, observation: true, problem_hypothesis: true, root_cause_hypotheses: true, impact_hypotheses: true, falsification_questions: true, what_a_no_means: true, problem_family: true, primary_persona_id: true, signals: { where: { role: 'primary' }, select: { signal_id: true } } },
       orderBy: { updated_at: 'desc' },
       take: 10,
     })
@@ -171,7 +171,7 @@ export async function loadAccountInputs(
         if (!opts.hypothesisId || rows.some((r) => r.id === opts.hypothesisId)) return rows;
         const extra: Row[] = await prisma.prospectingHypothesis.findMany({
           where: { id: opts.hypothesisId, account_name: accountName, superseded_by: { is: null }, status: { in: ['draft', 'review_required', 'approved', 'active', 'confirmed', 'partially_confirmed', 'rejected'] } },
-          select: { id: true, status: true, reviewed_at: true, activated_at: true, observation: true, problem_hypothesis: true, root_cause_hypotheses: true, impact_hypotheses: true, falsification_questions: true, what_a_no_means: true, signals: { where: { role: 'primary' }, select: { signal_id: true } } },
+          select: { id: true, status: true, reviewed_at: true, activated_at: true, observation: true, problem_hypothesis: true, root_cause_hypotheses: true, impact_hypotheses: true, falsification_questions: true, what_a_no_means: true, problem_family: true, primary_persona_id: true, signals: { where: { role: 'primary' }, select: { signal_id: true } } },
         });
         return [...rows, ...extra];
       }), [] as Row[]),
@@ -314,6 +314,8 @@ export async function loadAccountInputs(
       falsification: Array.isArray(h.falsification_questions) ? h.falsification_questions.map(String) : [],
       whatANoMeans: h.what_a_no_means ?? null,
       primarySignalId: h.signals?.[0]?.signal_id ?? null,
+      problemFamily: typeof h.problem_family === 'string' ? h.problem_family : null,
+      personaId: typeof h.primary_persona_id === 'number' ? h.primary_persona_id : null,
       buyerRejected: buyerRejected.has(h.id),
       // The last time Casey looked: approval, activation, or an explicit "reviewed" after a flag.
       reviewedAt: (h.status === 'approved' || h.status === 'active') && h.reviewed_at ? lastReview(h, acks.get(h.id)) : null,

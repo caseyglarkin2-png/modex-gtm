@@ -54,6 +54,10 @@ export interface HypothesisInput {
   falsification: string[];
   whatANoMeans: string | null;
   primarySignalId: string | null;
+  /** The stored problem family ('unmapped' when none); absent when the loader predates it. */
+  problemFamily?: string | null;
+  /** The primary person the thesis is written for, when assigned. */
+  personaId?: number | null;
   /** When Casey approved it (reviewed_at on an approved or active thesis); null for a draft. */
   reviewedAt?: string | null;
   /** Casey's latest explicit "Reviewed, keep it" on this thesis (thesis.review_ack), if any. */

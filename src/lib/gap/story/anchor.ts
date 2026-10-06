@@ -81,6 +81,34 @@ export interface OutreachAnchor {
   alternatives: AnchorThesis[];
   /** Checked, citable story lines no thesis is grounded on: a prefilled draft each. */
   draftable: Array<{ story: string; sourceLabel: string; sourceUrl: string | null; factId: string; proposedObservation: string }>;
+  /**
+   * PROPOSALS IN PROGRESS (R11/R12): the open drafts and theses under review grounded on a checked fact here, with
+   * what the reviewer decides on (the exact opening sentence, the guess, the person, what would prove it wrong, the
+   * family and whether it is known). A draft never consumes its fact silently: it is listed here with its status and
+   * the one review control; review happens where the action lives, never in a lane.
+   */
+  pending: AnchorPending[];
+}
+
+export interface AnchorPending {
+  hypothesisId: string;
+  status: 'draft' | 'review_required';
+  factId: string;
+  story: string;
+  sourceLabel: string;
+  sourceUrl: string | null;
+  /** The observation without citation tokens: the sentence the opening is built on. */
+  observation: string;
+  /** The stored observation with its citation tokens, for an edit that must keep them. */
+  observationRaw: string;
+  problem: string;
+  wouldProveWrong: string[];
+  family: string;
+  familyKnown: boolean;
+  personaId: number | null;
+  personName: string | null;
+  /** Would the send gate let it out (read from the loader's sendable set; a draft is not judged until review). */
+  gate: 'sendable' | 'refused' | 'not_judged';
 }
 
 export interface AnchorInput {
@@ -263,6 +291,35 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
     }
   }
 
+  // PROPOSALS IN PROGRESS: an open draft or a thesis under review grounded on a live checked fact here. Listed with
+  // its status so the seller never loses the fact (the recording: a failed submit made the fact vanish).
+  const pending: AnchorPending[] = [];
+  for (const raw of i.inputs.hypotheses) {
+    if (raw.status !== 'draft' && raw.status !== 'review_required') continue;
+    const cited = [...new Set([...raw.observation.matchAll(CITATION)].map((m) => m[1]))];
+    const fact = live.find((f) => cited.includes(f.id) || (f.sameQuoteIds ?? []).some((id) => cited.includes(id)));
+    if (!fact) continue;
+    const family = raw.problemFamily ?? 'unmapped';
+    const who = raw.personaId != null ? (i.people ?? []).find((p) => p.personaId === raw.personaId) ?? (i.person?.personaId === raw.personaId ? i.person : null) : null;
+    pending.push({
+      hypothesisId: raw.id,
+      status: raw.status,
+      factId: fact.id,
+      story: fact.quote,
+      sourceLabel: `${host(fact.url) ?? (fact.title || 'source')}, ${day(fact.publishedAt)}`,
+      sourceUrl: fact.url,
+      observation: stripCitations(raw.observation),
+      observationRaw: raw.observation,
+      problem: raw.problem,
+      wouldProveWrong: raw.falsification,
+      family,
+      familyKnown: family !== 'unmapped',
+      personaId: raw.personaId ?? null,
+      personName: who?.name ?? null,
+      gate: raw.status === 'draft' || !i.sendable ? 'not_judged' : i.sendable.has(raw.id) ? 'sendable' : 'refused',
+    });
+  }
+
   return {
     person: i.person,
     primary,
@@ -274,6 +331,7 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
     doNotUse: merged,
     alternatives,
     draftable,
+    pending,
   };
 }
 

@@ -51,7 +51,7 @@ function anchorFor(i: AccountInputs, personaId: number | null, anchorChoice: str
   const story = projectStory({ accountName: 'PepsiCo', now: NOW, state, brief, inputs: i, whyNow: v.whyNow, know: v.know, touches: [], clawdRead: 'ok', vaultNote: null, excluded: [] });
   const p = personaId ? i.personas.find((x) => x.id === personaId)! : null;
   const sendable = new Set(i.hypotheses.filter((h) => h.status !== 'draft' && !(i as AccountInputs & { unsendable?: string[] }).unsendable?.includes(h.id)).map((h) => h.id));
-  return { anchor: projectAnchor({ accountName: 'PepsiCo', person: p ? { personaId: p.id, name: p.name, title: p.title } : null, brief, inputs: i, story, anchorChoice, privateLine: v.private, sendable, now: NOW }), story, brief };
+  return { anchor: projectAnchor({ accountName: 'PepsiCo', person: p ? { personaId: p.id, name: p.name, title: p.title } : null, people: i.personas.map((x) => ({ personaId: x.id, name: x.name, title: x.title })), brief, inputs: i, story, anchorChoice, privateLine: v.private, sendable, now: NOW }), story, brief };
 }
 
 describe('the seller re-check batch: one fact is one item', () => {
@@ -179,6 +179,20 @@ describe('the outreach anchor (Option A)', () => {
     expect(anchor.draftable.some((d) => d.factId === 'f-gatik')).toBe(false);
     // Not for outreach (the WARN notice is checked but not citable): never draftable.
     expect(anchor.draftable.some((d) => d.factId === 'f-plant')).toBe(false);
+  });
+  it('an open draft grounded on a checked fact is a PENDING proposal (status, family known or not, the person); its fact is not offered as a draft again (R11/R12)', () => {
+    const { anchor } = anchorFor(inputs({ hypotheses: [hypA, hypB, { ...hypDraft, problemFamily: 'unmapped', personaId: 1 }] }), 1);
+    expect(anchor.pending).toEqual([
+      expect.objectContaining({ hypothesisId: 'h-draft', status: 'draft', factId: 'f-plant', story: factC.quote, family: 'unmapped', familyKnown: false, personaId: 1, personName: 'Karen Darling', gate: 'not_judged', observation: expect.stringMatching(/^PepsiCo is ceasing manufacturing/) }),
+    ]);
+    expect(anchor.pending[0].observation).not.toMatch(/\[S:/);
+    expect(anchor.pending[0].observationRaw).toMatch(/\[S:f-plant\]/);
+    expect(anchor.draftable.map((d) => d.factId)).not.toContain('f-plant');
+    // A proposal under review with its family set reads as such; the gate is read from the loader's sendable set.
+    const under = anchorFor(inputs({ hypotheses: [hypA, hypB, { ...hypDraft, status: 'review_required', problemFamily: 'hidden_capacity', personaId: 2 }] }), 1).anchor;
+    expect(under.pending[0]).toMatchObject({ status: 'review_required', family: 'hidden_capacity', familyKnown: true, personName: 'Shawn Pierce', gate: 'sendable' });
+    // An approved thesis is never pending; an account with no open draft has none.
+    expect(anchorFor(inputs({ hypotheses: [hypA, hypB] }), 1).anchor.pending).toEqual([]);
   });
   it('a thesis the send gate would refuse is never the anchor and is listed as not usable; with the gate unread nothing is usable', () => {
     const gated = { ...inputs(), unsendable: ['h-denver'] } as AccountInputs & { unsendable: string[] };
