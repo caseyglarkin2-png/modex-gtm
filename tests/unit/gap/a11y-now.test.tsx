@@ -22,8 +22,9 @@ const v: NowView = {
 describe('NOW accessibility', () => {
   it('Listen has a name and a pressed state; NEXT and tool links are 44px targets in a labelled nav', () => {
     render(<AccountNowView v={v} nextHref="/gap?lane=ready" nextLabel="Open the first-touch card for Dana" links={[{ label: 'Log what happened', href: '/gap/capture?account=Acme' }, { label: 'HubSpot record', href: 'https://app.hubspot.com/x', external: true }]} />);
-    const listen = screen.getByRole('button', { name: 'Listen' });
-    expect(listen.getAttribute('aria-pressed')).toBe('false');
+    // UX-04: Listen renders twice (the header from md up, the phone bottom bar below md); both carry the name and state.
+    const listen = screen.getAllByRole('button', { name: 'Listen' })[0];
+    expect(listen.getAttribute('aria-label')).toBe('Listen');
     expect(listen.className).toMatch(/min-h-11/);
     expect(screen.getByTestId('now-next-control').className).toMatch(/min-h-11/);
     const nav = screen.getByRole('navigation', { name: 'Account tools' });

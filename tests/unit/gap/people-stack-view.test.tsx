@@ -45,7 +45,7 @@ describe('the default view', () => {
     expect(document.body.textContent).not.toMatch(/Best fit|Recommended/);
     expect(screen.getByTestId('people-stack-choose-label').textContent).toMatch(/Choose who \(\d+\)/);
     expect(screen.getByTestId('people-stack-show-all').textContent).toMatch(/Show \d+ more on record/);
-    expect(screen.getByTestId('people-stack-show-all').textContent).toMatch(/1 set aside/);
+    expect(screen.getByTestId('people-stack-set-aside-line').textContent).toMatch(/1 set aside/);
   });
   it('the departed person is not a row; Show all opens the rest and names them under set aside with the plain reason', () => {
     render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(r, { chosenKey: null })} state={stateFor({})} hypothesisId="h1" excluded={excluded} />);

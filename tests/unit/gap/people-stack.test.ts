@@ -51,8 +51,8 @@ describe('the wall becomes a stack', () => {
   });
   it('no visible reason is the shared title rule; a row with nothing to set it apart says so honestly instead of dressing it up', () => {
     for (const row of s.rows) expect(row.reason).not.toMatch(/^Primary operator: title says/);
-    const honest = s.rows.filter((row) => /nothing on record sets them apart/.test(row.reason));
-    const specific = s.rows.filter((row) => !/nothing on record sets them apart/.test(row.reason)).map((row) => row.reason);
+    const honest = s.rows.filter((row) => /nothing on record sets them apart/i.test(row.reason));
+    const specific = s.rows.filter((row) => !/nothing on record sets them apart/i.test(row.reason)).map((row) => row.reason);
     expect(new Set(specific).size).toBe(specific.length);
     expect(honest.length + specific.length).toBe(s.rows.length);
     expect(JSON.stringify(s.rows.map((row) => row.reason))).not.toMatch(/\(Person \d+\)/);
@@ -137,5 +137,38 @@ describe('the chosen person leads and the action sits with them', () => {
     const s2 = buildPeopleStack(r, { chosenKey: 'gap:99', chosenBy: 'you' });
     expect(s2.rows.some((row) => row.chosen)).toBe(false);
     expect(s2.chosenMissing).toMatch(/no longer/);
+  });
+});
+
+describe('UX-04 review fixes', () => {
+  it('a name set aside as do not contact is never offered as a row under another record of the same person; it is said in the set-aside', () => {
+    const r = resolveOwner(base({ account: { name: 'H-E-B', entityType: 'retailer' }, candidates: [
+      gap(43, 'Troy Shaw', 'director global logistics', { doNotContact: true }),
+      hs('9', 'Troy Shaw', 'Director Global Logistics'),
+      hs('10', 'Jess Bess', 'Director, Transportation Strategy & Planning'),
+    ] }));
+    expect(r.excluded.some((e) => e.code === 'do_not_contact' && e.candidate.name === 'Troy Shaw')).toBe(true);
+    const s = buildPeopleStack(r, { chosenKey: null });
+    expect(s.rows.map((row) => row.name)).not.toContain('Troy Shaw');
+    expect(s.more.map((row) => row.name)).not.toContain('Troy Shaw');
+    expect(s.setAside.line).toMatch(/Troy Shaw \(another record of a set-aside name\)/);
+    expect(s.setAside.count).toBe(r.excluded.length + 1);
+  });
+  it('a lone rank word never becomes a reason ("Title: Senior"); the honest shared-row line stands instead', () => {
+    const r = resolveOwner(base({ candidates: [gap(1, 'A Person', 'Senior Director - Regional Transportation - Logistics', { location: 'Bentonville, Arkansas, United States' }), gap(2, 'B Person', 'Director - Regional Transportation - Logistics', { location: 'Bentonville, Arkansas, United States' })] }));
+    const s = buildPeopleStack(r, { chosenKey: null });
+    for (const row of s.rows) expect(row.reason).not.toMatch(/^Title names (Senior|Director|Vice|President)$/);
+    const inbound = resolveOwner(base({ candidates: [gap(1, 'A Person', 'Sr. Director Inbound Logistics', { location: 'San Antonio, Texas, United States' }), gap(2, 'B Person', 'Director, Transportation Strategy & Planning', { location: 'San Antonio, Texas, United States' })] }));
+    const s2 = buildPeopleStack(inbound, { chosenKey: null });
+    expect(s2.rows.map((row) => row.reason).join(' | ')).toMatch(/Title names Inbound Logistics|Title names Transportation Strategy & Planning/);
+  });
+});
+
+describe('UX-04 review: the currentness cue is short', () => {
+  it('"Role current (confirmed): ... verified at linkedin.com, 2026-10-05: ..." reads as "Role confirmed Oct 5 (linkedin.com)"', () => {
+    const r = resolveOwner(base({ candidates: [gap(7, 'Glen Chaffee', 'Managing Director, Transportation & Logistics', { role: { state: 'ROLE_CURRENT_CONFIRMED', label: 'Role current (confirmed)', why: 'Recent evidence confirms their role at FedEx: verified at linkedin.com, 2026-10-05: Managing Director, Transportation & Logistics, FedEx Ground.', effectiveTitle: 'Managing Director, Transportation & Logistics', priorTitle: null, usableForRanking: true } })] }));
+    const s = buildPeopleStack(r, { chosenKey: null });
+    expect(s.rows[0].currentness).toBe('Role confirmed Oct 5 (linkedin.com)');
+    expect(s.rows[0].currentness).not.toMatch(/Recent evidence confirms/);
   });
 });

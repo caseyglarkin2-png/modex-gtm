@@ -87,8 +87,11 @@ describe('NOW: controls, not instructions', () => {
     const { container } = render(<AccountNowView v={{ ...v, blocked: [{ name: 'Troy Shaw', title: 'director global logistics', personaId: 45 }] }} nextHref={null} nextLabel={null} links={[]} />);
     expect(screen.getByTestId('now-historical')).toHaveTextContent('Dakota Socha, transportation & reverse logistics. Historical H-E-B contact. Current-employer evidence now points to ADUSA Distribution (Director of Distribution Operations). Not eligible for H-E-B outreach.');
     // A do-not-contact GAP contact is said on NOW with the legacy review one click away (never silently skipped).
-    expect(screen.getByTestId('now-blocked')).toHaveTextContent('Not contacted (do not contact): Troy Shaw. Each flag can be reviewed; a real unsubscribe or opt-out is never cleared.');
-    expect(screen.getByTestId('now-review-suppression')).toHaveTextContent('Review the flag on Troy Shaw');
+    // UX-04: one line with the name (or a count) and one disclosure; the per-person review control opens inside it.
+    expect(screen.getByTestId('now-blocked')).toHaveTextContent('Not contacted (do not contact): Troy Shaw.');
+    expect(screen.getByTestId('now-review-flags')).toHaveTextContent('Review the flag');
+    fireEvent.click(screen.getByTestId('now-review-flags'));
+    expect(screen.getByTestId('now-review-suppression')).toHaveTextContent('Troy Shaw');
     expect(screen.getByTestId('employment-left')).toBeInTheDocument();
     expect(container.textContent).not.toMatch(/stale_persona|LEFT_COMPANY_CONFIRMED|persona_left_account|no_persona/);
     expect(screen.queryByTestId('add-to-gap')).toBeNull();

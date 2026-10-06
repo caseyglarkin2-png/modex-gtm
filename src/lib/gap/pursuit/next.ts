@@ -57,7 +57,8 @@ export function nextFromPursuit(
       if (!p) return { text: 'Ready for a first touch.', control: null, source: 'pursuit' };
       if (p.personaId === null) return { text: `Add ${p.name}${p.title ? ` (${p.title})` : ''} to GAP, then prepare the first touch to them.`, control: null, source: 'pursuit' };
       if (!opts.hypothesisId) return { text: `Prepare the first touch to ${p.name}: no grounded angle yet, so review the angle first.`, control: { href: `${opts.accountSlugHref('sources')}#brief-hypotheses`, label: 'Review the angle' }, source: 'pursuit' };
-      return { text: `Prepare the first touch to ${p.name}${p.title ? `, ${p.title}` : ''} (every gate runs when you send).`, control: { href: `/gap/preview/${opts.hypothesisId}?personaId=${p.personaId}`, label: `Prepare the email to ${first(p.name)}` }, source: 'pursuit' };
+      // The title lives on the person's row directly below; NEXT says the name once (UX-04 review: Glen named four times).
+      return { text: `Prepare the first touch to ${p.name}.`, control: { href: `/gap/preview/${opts.hypothesisId}?personaId=${p.personaId}`, label: `Prepare the email to ${first(p.name)}` }, source: 'pursuit' };
     case 'choose_person':
       return { text: `Choose who hears this first. GAP ranks the people below and says why; it does not pick.`, control: { href: '#people-stack-heading', label: 'See the people' }, source: 'pursuit' };
     case 'research':

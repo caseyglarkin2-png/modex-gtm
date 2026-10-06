@@ -590,6 +590,68 @@ the wide two-column enhancement. No new state, no new reader; presentation and o
 Out of scope for UX-04: the Account Story (UX-05), the outreach anchor and "why #1 over #2" (UX-06), human-priority
 controls beyond Choose (UX-07), the worklist (UX-08).
 
+## 6c. UX-04 implementation record (2026-10-06)
+
+Commit 7065fc24 on `feat/gap-account-first-ux`. What shipped, against the 6b contract:
+
+1. One decision block: the state line in its hold colour (red opt-out, sky reply or follow-up, amber deal or hold,
+   green ready); the inbound line; NEXT with the ONE primary control (a filled button; the chosen person's row no
+   longer carries a second Prepare email, keeping Call prep and Log a touch); the People Stack unchanged from UX-03
+   with the chosen person first; the relationship route directly after the stack; the do-not-contact names as one
+   line with one "Review N flags" disclosure.
+2. Context after the decision, in order: WHY NOW (a fund-holdings, stake or ticker headline is market chatter and
+   never a line), KNOW (imagery facts marked never cite stay in SOURCES), THINK, ASK, the private line, WEDGE, ASSET,
+   the tools row with an inline Note. THE GAP shows only when the buyer confirmed something; IMPACT only when a cost
+   is known (pinned by `now-hierarchy.test.tsx`; the old "Unknown · Our read · Unknown · Our read" line is gone).
+3. One column is the primary design; from 1100 CSS px the context sits beside the decision (a 7:5 grid) with DOM
+   order unchanged (decision, then context), so reading order and Tab order are the same at every width.
+4. Phone: the view tabs are no longer sticky (they stay sticky from md up, with the UX-03 scroll padding); the GAP
+   subnav is one horizontally scrolling row; the Note and Compose pills are hidden on account pages; one opaque bottom
+   bar carries Listen and Log a touch at 44 px, with `scroll-padding-bottom` already set for it.
+5. Listen cleanup: one player on the page (a second Listen stops the first), pause and resume in place, the audio
+   stops and its object URL is released on unmount, the state is announced through a polite status region
+   (`voice-preview-button.test.tsx`).
+6. Not done in this slice, by the contract: streaming the stack under a skeleton (the pursuit read already shares the
+   queue read; the page-level Suspense is carried to UX-14 with the perceived-speed pass, because the brief read,
+   not the pursuit read, is the long pole).
+
+Validation: GAP folder suite 329 files / 5,059 tests green; `tsc --noEmit` clean; eslint clean on the changed files;
+production build green. Measurements and the fresh review follow in 7.2 and 8.8.
+
+## 6d. UX-05 contract (the derived Account Story), drafted from the UX-03 and UX-04 reviews
+
+Goal: the seller reads what is going on at the account, what has already happened between us and them, and why that
+leads to this person now, in a few tagged lines above or beside NEXT. One DERIVED projection (`gap/story/*`) over
+readers GAP already has; no new table, no model call, no second recommendation authority.
+
+1. **Rows** (each present only when it has a basis; nothing manufactured): WHAT HAS HAPPENED BETWEEN US (the last
+   person touched with their title and what came back: Courtney Keen's automatic reply, Timothy Cooper's opt-out,
+   Laura Maxwell's June email with no answer; read from the context history, the reply class and clawd's outreach
+   history), GOAL, WHAT IS CHANGING, PHYSICAL-NETWORK IMPLICATION, YARD OPPORTUNITY, WHAT WE NEED TO LEARN, and
+   STORIES THAT MATTER (top 2 to 4, collapsed). BEST PROOF is UX-06's (it belongs beside the opening, tagged
+   "Our proof, measured" or "Our model", never Checked).
+2. **Trust per sentence**: Buyer said, Checked, Unverified, Our read, Unknown, Contradicted; a line takes the weakest
+   class of its inputs; a line with no basis is Our read or Unknown; YARD OPPORTUNITY is always Our read with its
+   Wrong if beside it unless the buyer confirmed it; an UNVERIFIED item that names the chosen person's employer,
+   division or a divestiture rises beside the person as "check before contacting" (FedEx: the CMA CGM sale against
+   Courtney Keen; Ray Hatton "divested unit" rests on that unverified sale and the story must say so).
+3. **Readers**: the brief's sections and hypotheses, buyer inputs, the context history, the reply class, clawd
+   `/api/outreach/history` and `/api/yardflow/intel/account` (sends, reply intent; never engagement as a reason), the
+   vault's account note when one exists (seller-visible, never quotable), the pursuit state. Private engagement is
+   never a story row and never spoken.
+4. **Placement**: at 820 the story's first three lines (what happened between us, what is changing, yard opportunity)
+   sit inside the second screen, above WHY NOW; at 1100+ the story sits beside NEXT in the right column, replacing the
+   raw WHY NOW list (the checked lines move under STORIES THAT MATTER with their cite status). To make room, the
+   stack compacts: a card only for the chosen person, one-line rows (name, title, reason, Make first, Why) for the
+   alternatives, no cards under a hold or a deal.
+5. **Listen** reads the story rows with their tags ("checked", "our read"), never the private line.
+6. **Tests**: the PepsiCo and FedEx fixtures: every line has a tag and basis ids, the tag equals the weakest basis
+   class, Goal / Network / Yard are never Checked without a buyer input or a verified fact id, a line containing an
+   Unverified signal's text is Unverified, the "what happened between us" row names the last person touched and the
+   reply class, the sentinel private page never appears in any story or listen text.
+7. **Out of scope**: the outreach anchor and "why #1 over #2" (UX-06), human-priority controls beyond Choose (UX-07),
+   the worklist (UX-08), voice beyond Listen (UX-11+).
+
 ## 7. Task baselines and post-change measurements
 
 Baseline measured on production 2026-10-05 (SHA 54c11c57) through the rig; clicks counted on the shortest path a seller
@@ -656,6 +718,28 @@ The pursuit read runs in parallel with the pre-existing ready-target read, so th
 about 3 s on top of a page that already took 5 to 12 s on Vercel. Local page loads measured 15 to 30 s end to end.
 Carried to UX-04 / UX-14: stream the stack after the header (a skeleton), and share the queue read between
 loadReadyTarget and loadPursuit (they read the same queue twice).
+
+### 7.2 UX-04 measurement: where the decision ends (local preview of 7065fc24 against the production database, read-only, DPR 1, 2026-10-06)
+
+The contract: at about 820 CSS px (Casey's real desktop) the first two screens hold the full decision (state, NEXT,
+the chosen or next person, the People Stack top 3, the primary actions). Measured as the bottom pixel of the NEXT
+control or the third stack row's action, whichever is lower, over the viewport height (900 at 820 and 1440; 844 at 390).
+
+| Account | 820 px: decision ends | context starts | page | 390 px: decision ends | page | 1440 px: layout |
+|---|---|---|---|---|---|---|
+| FedEx | 1,203 px (1.34 screens) | 1,770 px | 2.9 screens | 1,343 px (1.59) | 3.6 | grid; context beside the decision from 200 px |
+| Walmart | 1,026 px (1.14) | 1,631 px | 2.8 | 1,249 px (1.48) | 3.7 | grid |
+| PepsiCo | 1,182 px (1.31) | 1,792 px | 2.8 | 1,301 px (1.54) | 3.5 | |
+| H-E-B | 996 px (1.11) | 1,446 px | 2.3 | | | |
+| Kroger | 960 px (1.07) | 1,433 px | 2.3 | | | |
+| NFI | 1,042 px (1.16) | 1,556 px | 2.2 | | | |
+
+Before UX-04 (UX-03 captures of the same build family): pages 2.5 to 2.9 screens at 1440 (one column), 3.1 to 3.3 at
+820 and 3.9 to 4.2 at 390; THE GAP, IMPACT "unknown", finance headlines and imagery rows were on every page.
+
+Keyboard, with the sticky elements engaged: 60 Tab and 60 Shift+Tab presses at 820, 390 and 1440 found zero NOW
+controls fully covered (the UX-03 review's blocker was five of five sample points covered). The view tabs are static at
+390 (sticky from md up), the bottom bar is present at 390 only, and no page overflows horizontally.
 
 Post-change measurements for the full task set: filled by UX-15 against the same tasks.
 
@@ -834,6 +918,45 @@ Kept as-is on all reviews: the hold in the state line ("Opted out: timothy.coope
 class ("An automatic notice, not an answer"), the readback ("Chosen by you, Oct 5"), "Make Jeffrey first instead",
 "Nothing is sent by choosing", no Best fit without a recommendation, no ordinals on a tie, "Not a cold first touch".
 
+### 8.8 UX-04 fresh review (three read-only reviewers on the 820 / 390 / 1440 captures, 2026-10-06)
+
+Reviewers: enterprise AE (five accounts, first two screens at 820), product designer / IA (contract conformance and
+hierarchy), accessibility / mobile (the three gates from the UX-03 review plus WCAG 2.2 on the new page).
+
+Task result (AE, first two screens at 820): FedEx, Walmart and PepsiCo answered state, next step, control and who in
+10 to 20 seconds; H-E-B stopped on a contradiction (a Troy Shaw record offered as eligible beside a flagged Troy Shaw);
+Kroger answered state and control but not who (the deal's contacts are not on the page). Product: clauses 1, 2 and 5
+of the 6b contract MET; 3 PARTLY (two bracketed-ticker headlines still showed); 4 PARTLY (no Next account control,
+which is UX-09); 6 deferred as declared; 7 and 8 PARTLY (no screen-reader run recorded; fewer than eight accounts
+in the table). Accessibility: gates 1 and 2 PASS on the measurements; gate 3 FAIL on one path inferred from code.
+
+| Finding | Reviewer | Severity | Disposition |
+|---|---|---|---|
+| H-E-B offers Choose for a Troy Shaw record while another Troy Shaw record is set aside as do not contact | AE | BLOCKER | FIXED: a name set aside as do not contact, unsubscribed, opted out or left is never a row under another record of the same person; said in the set-aside line |
+| "Walmart (WMT) Delivers..." and "Kroger (KR) Stock Looks..." still show in WHY NOW (bracketed tickers) | product | BLOCKER | FIXED: a case-sensitive ticker-in-brackets rule beside the market-chatter rule, pinned by test |
+| Focus after Choose is lost on the import path (the row's key changes from hubspot: to gap:) | a11y | BLOCKER | FIXED: focus follows the imported person's new key |
+| The Why button's accessible name ("Why Glen Chaffee?") does not contain its visible text (WCAG 2.5.3) | a11y | BLOCKER | FIXED: "Why this person? Glen Chaffee" |
+| "Title: Senior", "Title: Inbound", "Based in Seattle" as reasons; "Same responsibility ... as the row above" read false beside a different job | AE, product | SHOULD | FIXED: rank and filler words never make a reason; the honest line no longer claims the row above is the same |
+| Kroger under a deal: heading "4 of 13 eligible for a first touch" over full cards; the deal sentence twice under NEXT; "(no name in HubSpot) (no name on record)" listed three times | AE, product | SHOULD | FIXED: "People on record: in a deal, work it from the deal"; no blocker line under a deal; nameless records counted, never listed |
+| FedEx: two lines about one June out-of-office; Glen named four times; "(every gate runs when you send)" | product | SHOULD | FIXED: one inbound line; NEXT names the person once without the title; the gate phrase removed |
+| The opt-out said three times on Walmart | product | SHOULD | FIXED: the inbound line says only who and when under an opted-out state |
+| The set-aside line before the slot lines; the show-more label repeats the set-aside count | product | SHOULD | FIXED |
+| "ELIGIBLE OPERATOR" chip and the static "Choosing records your choice" footnote | product | REMOVE | FIXED: removed |
+| The role line is a sentence ("Role current (confirmed): Recent evidence confirms ... verified at linkedin.com, 2026-10-05: ...") | product | SHOULD | FIXED: "Role confirmed Oct 5 (linkedin.com)"; the sentence stays behind Why this person? |
+| The phone bar's second control: Log a touch while the page says no cold touch; the primary scrolls away | AE | SHOULD | FIXED: the bar carries the NEXT control when there is one, else Log a touch |
+| The phone bar's toolbar role promises arrow-key navigation it does not have; Listen's name change plus pressed state double-signals; the hidden Listen copy leaves an empty live region exposed | a11y | SHOULD | FIXED: role group; no pressed state (the name carries it); the status region hides with its button |
+| The Note control opens the shared non-modal dialog (no Escape, no focus return) | a11y | SHOULD | CARRIED: the dialog is the pre-existing feedback form (baseline P3 note-dialog a11y, already in the debt table) |
+| The last person touched never appears as a person (Courtney Keen, timothy.cooper, laura.maxwell, troy.retzloff, joey.maggard); FedEx has no ASK; Kroger's deal contacts are absent; interest is buried at 820 | AE | SHOULD | CARRIED to UX-05 (the story's "what has already happened between us and this account" row) and UX-07 (a relationship-history row); the private line stays private by contract |
+| H-E-B "$175 new refrigerated facility" marked OK to cite | AE | SHOULD | CARRIED: a stored fact text defect (truth layer), recorded in section 10 |
+| The app sidebar takes about 257 px at 820, leaving about 517 px for content | product | SHOULD | OPEN QUESTION for Casey: collapsing the sidebar on account pages below 1100 px is a shell change for every page |
+| Compact the stack: a card only for the chosen person, one-line rows for the alternatives, no cards under a hold or deal | product | NICE (the one change for UX-05) | CARRIED into the UX-05 contract |
+| "(840) Fedex" tab title (the notification count prefix), "Email: Email sent:", "Role current (likely)" twice on H-E-B | AE | NICE | CARRIED |
+
+Kept as-is on all reviews: one primary control in NEXT, the hold colours, the dropped THE GAP and IMPACT lines, the one
+flags disclosure, the tie line, "Wrong if", "OK to cite to the buyer" against "Checked, not for outreach", the 1440
+right column, DOM order equal to reading order, the contrast table (emerald 5.4 / 10.2, red 6.4 / 6.9, sky 7.5 / 11.9,
+amber 5.1 / 11.5 in light / dark).
+
 ## 9. Validation record
 
 | Ticket | Validation | Result |
@@ -887,3 +1010,7 @@ DPR 1 before UX-15 compares against this baseline. The text dumps and JS metrics
 | New (UX-03 review): the employment store prefixes every verification tier with "verified at", so a likely role reads as verified | FIX AS PART OF UX (UX-06 or the next WHO truth pass) | truth wording |
 | New (UX-03 review): call mode checks only the person's do-not-contact flag, never the account hold | FIX AS PART OF UX (UX-06) | call prep must read the pursuit state |
 | New (UX-03 review): GAP's history has no row for the email the Walmart opt-out answered (a Resend-era or clawd send) | FIX AS PART OF UX (UX-05 readers: clawd outreach history, Resend sends) | "No GAP touch on record" says so honestly meanwhile |
+| New (UX-04 review): a stored fact reads "H-E-B plans to build a $175 new refrigerated facility" and is marked OK to cite | FIX NOW (truth layer): a quote with a broken number must not be outreach evidence; re-verify at the source | the claim re-gate (`claim-rules.ts`) should refuse a currency amount with no magnitude |
+| New (UX-04 review): the app sidebar takes about 257 px at 820, leaving about 517 px for the account page | OPEN QUESTION for Casey: collapse the sidebar on account pages below 1100 px (a shell change for every page) | |
+| New (UX-04 review): the Note control opens the shared non-modal feedback dialog with no Escape and no focus return | FIX AS PART OF UX (UX-14), the baseline P3 note-dialog item | |
+| New (UX-04 review): the tab title carries the notification count ("(840) Fedex"); "Email: Email sent:" in the last-touch line; "Role current (likely)" twice on H-E-B | NICE, carried to UX-14 | |
