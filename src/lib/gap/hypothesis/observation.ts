@@ -20,10 +20,45 @@ export type ObservationValidation =
   | { ok: true; sentences: number; citedIds: string[] }
   | {
       ok: false;
-      reason: 'empty_observation' | 'uncited_sentence' | 'unlinked_citation';
+      reason: 'empty_observation' | 'uncited_sentence' | 'unlinked_citation' | 'title_shaped_observation';
       sentenceIndex?: number;
       signalId?: string;
     };
+
+/** Plain words for each refusal, for any surface that shows one. */
+export const OBSERVATION_REFUSAL_TEXT: Record<Extract<ObservationValidation, { ok: false }>['reason'], string> = {
+  empty_observation: 'Write what changed, in one or two sentences, before the thesis can advance.',
+  uncited_sentence: 'Every sentence of the observation must cite a linked fact ([S:id]).',
+  unlinked_citation: 'A cited fact is not linked to this thesis. Link it, or cite one that is.',
+  title_shaped_observation: 'The observation reads like a headline. Write it as a sentence about what changed, with the date and the source\'s own words, for example: "FedEx completed the sale of FedEx Supply Chain to CMA CGM on October 1." Keep the citation.',
+};
+
+const SMALL_WORDS = new Set(['a', 'an', 'the', 'of', 'to', 'in', 'on', 'at', 'for', 'and', 'or', 'with', 'by', 'as', 'its', 'from', 'into', 'over', 'vs', 'after', 'before']);
+const PAST_OR_PRESENT_VERB = /\b(?:is|are|was|were|has|have|had|will|announced|completed|opened|opens|opening|closed|closes|closing|plans|planned|planning|said|says|began|begins|started|starts|signed|signs|acquired|acquires|sold|sells|invested|invests|investing|expanded|expands|expanding|moved|moves|moving|launched|launches|launching|built|builds|building|cut|cuts|cutting|added|adds|adding|reported|reports|filed|files|agreed|agrees|committed|commits|hired|hires|hiring|consolidat(?:ed|es|ing)|redesign(?:ed|s|ing)|roll(?:ed|s|ing) out|broke ground|breaks ground)\b/i;
+
+/**
+ * UX-06: a TITLE-SHAPED observation (a pasted headline such as "FedEx Completes Sale of FedEx Supply Chain to CMA CGM
+ * Group") is refused with plain language. A headline is Title Case (most words capitalised), carries no sentence
+ * punctuation and no ordinary past- or present-tense verb. A sentence in the source's own words with its citation
+ * ("FedEx completed the sale of FedEx Supply Chain to CMA CGM on October 1. [S:x]") passes. Pure.
+ */
+export function titleShapedReason(observation: string): string | null {
+  const text = stripCitations(observation).trim();
+  if (!text) return null;
+  const sentences = splitSentences(text).map((s) => stripCitations(s).trim()).filter(Boolean);
+  for (const s of sentences) {
+    const words = s.replace(/[“”"'’]/g, '').split(/\s+/).filter((w) => /[A-Za-z]/.test(w));
+    if (words.length < 4) continue;
+    const meaningful = words.filter((w, k) => k === 0 || !SMALL_WORDS.has(w.toLowerCase()));
+    const capitalised = meaningful.filter((w) => /^[A-Z]/.test(w) || /^[A-Z0-9&.$-]+$/.test(w)).length;
+    const titleCase = capitalised / meaningful.length >= 0.8;
+    const endsAsSentence = /[.!?]$/.test(s);
+    const hasVerb = PAST_OR_PRESENT_VERB.test(s);
+    if (titleCase && !endsAsSentence && !hasVerb) return `"${s.slice(0, 80)}${s.length > 80 ? '...' : ''}" reads like a headline, not a sentence about what changed`;
+    if (titleCase && !hasVerb) return `"${s.slice(0, 80)}${s.length > 80 ? '...' : ''}" reads like a headline, not a sentence about what changed`;
+  }
+  return null;
+}
 
 /** Distinct citation ids in order of first appearance. */
 export function extractCitationIds(text: string): string[] {
@@ -74,6 +109,10 @@ export function validateObservation(
   const sentences = splitSentences(observation);
   if (sentences.length === 0) {
     return { ok: false, reason: 'empty_observation' };
+  }
+  // UX-06: a pasted headline is not an observation (the opening is built on it verbatim).
+  if (titleShapedReason(observation)) {
+    return { ok: false, reason: 'title_shaped_observation' };
   }
 
   for (let index = 0; index < sentences.length; index += 1) {
