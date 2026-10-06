@@ -558,6 +558,38 @@ Process note: the rebuild-and-capture job was stopped once by the harness under 
 Chrome holds about 9 GB; two `next build` workers about 7 GB); the orphaned build was allowed to finish and the
 capture resumed with one headless browser at a time.
 
+## 6b. UX-04 contract (the account workspace hierarchy), drafted from the UX-03 reviews
+
+Goal: the account page reads as one decision block then context, on Casey's 820 px desktop first, then 390, then
+the wide two-column enhancement. No new state, no new reader; presentation and order only.
+
+1. **One decision block at the top**: the state line with the hold colour (red opt-out, sky reply, amber deal /
+   hold, green ready); the inbound line; NEXT as the only primary button (the chosen person's Prepare email IS the
+   NEXT control, rendered once); the chosen person's row directly under it. The duplicate "Prepare the email to Glen"
+   link and "Prepare email" button become one control.
+2. **The stack under the decision**: eligible rows only (UX-03), the slot lines, the set-aside line, Show more. The
+   do-not-contact list becomes one line with a count and one "Review N flags" disclosure (today: five 16 px links).
+3. **Context below, in this order**: WHY NOW (checked lines first; an unverified finance or market headline never
+   shows; the UX-05 story replaces this block later), RELATIONSHIP (today the last line on the page; a real route
+   rises to the decision block), KNOW (rows marked "Never cite" move to SOURCES), THINK, ASK. THE GAP block is removed
+   from NOW when every value is Unknown (it stays in BRIEF); IMPACT "unknown" is folded into the story's Unknown row.
+4. **390 px**: no sticky view tabs (Brief and Sources become two links under the h1); one opaque bottom bar with
+   Listen, Log a touch and Next account at 44 px each, with `scroll-padding-bottom` set for it; the Note and Compose
+   pills hidden on account pages; the subnav collapses to one scrolling row. The chosen person's primary action sits
+   wholly in the first 844 px.
+5. **1100 px and wider**: two columns (decision + stack left, context right), DOM order unchanged (2.4.3).
+6. **Perceived speed**: the page streams the header and NEXT first and the stack under a skeleton (Suspense around
+   the pursuit read); the ready target and the pursuit share one queue read (done in UX-03).
+7. **Gates** (the accessibility reviewer's three): Tab and Shift+Tab sweeps at 390 and 820 with the sticky bar engaged
+   show zero covered focus points on any NOW control; every control at the 24 px floor and the chosen person's primary
+   action wholly in the first screen, clear of the pills; a keyboard and VoiceOver run of Choose on a scratch database
+   keeps focus on the chosen row, announces the result, finds NEXT in the heading list, announces no rank under a tie.
+8. **Measurement**: the same eight accounts at 820, 390 and 1440, light and dark, before and after; screens, the
+   pixel offset of the first action, Tab count to the first action, covered focus points.
+
+Out of scope for UX-04: the Account Story (UX-05), the outreach anchor and "why #1 over #2" (UX-06), human-priority
+controls beyond Choose (UX-07), the worklist (UX-08).
+
 ## 7. Task baselines and post-change measurements
 
 Baseline measured on production 2026-10-05 (SHA 54c11c57) through the rig; clicks counted on the shortest path a seller
