@@ -423,7 +423,7 @@ yet"; a request to act is answered by naming the control with no model call; a q
 "the buyer said" is dropped when nothing from the buyer is on record; `POST /api/gap/ask` through the existing
 `lib/ai/client.ts` chain, session only, writes nothing.
 
-**Train C, hardening and ship (PR #408, merge TBD, 2026-10-06).** UX-14: the Work read is remembered two minutes
+**Train C, hardening and ship (PR #408, merge c7fbf4ef, production dpl_7ybDtwenUSPNEztugksdKdaBrVju, 2026-10-06).** UX-14: the Work read is remembered two minutes
 per instance (`lib/gap/work/cache.ts`; an open lane always reads fresh; Refresh bypasses); the account page streams a
 shell with the name and the last known state and NEXT ahead of the full read; on every Work load the database alone
 decides READY (a recorded chosen person with a usable thesis), research (no usable thesis: never "choose who") and the

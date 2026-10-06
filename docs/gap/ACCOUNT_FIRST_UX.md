@@ -1624,6 +1624,14 @@ account and the research cards need the machinery explained.
 
 ## 9. Validation record
 
+**Program status (2026-10-06): SHIPPED through UX-17.** Trains: A (UX-07 PR #405 3b3a063f; UX-08/09/10 PR #406
+f2fc7e32), B (UX-11/12/13 PR #407 e05c4098), C (UX-14 to UX-17 PR #408 c7fbf4ef), all in production. The one heavy
+validation ran once on the final code (this section's Train C rows). What is genuinely still worth building is in
+section 10 (deferred rows) and 6p: a seller-facing "what research is running" line on research accounts, the brief
+read's own speed, the transcription spend decision, Read it back and Media Session on a phone, push-to-talk for Ask
+GAP, the call page's next pass, the extractor's accents, the empty Tyson duplicate, Ctrl+K for GAP accounts.
+
+
 | Ticket | Validation | Result |
 |---|---|---|
 | UX-01 | GAP unit suite baseline at 54c11c57 (`vitest run tests/unit/gap`) | 318 files, 4,983 tests, 0 failures, 128 s |
@@ -1682,6 +1690,9 @@ DPR 1 before UX-15 compares against this baseline. The text dumps and JS metrics
 | Train A | production smoke (rig Chrome, Casey's live session, read-only, 820) | Work: "27 accounts need you, in order. Counts are what the list holds."; Accounts: "657 accounts, the first 60 shown: type to find one"; a FedEx deep link without the order: "Opened from Work." with Back to Work only; the subnav reads Work, Accounts, Capture, More | f2fc7e32 in production (dpl_7JowKM8pUGM8wwZgsMoQV7dZ16Pq; the first production build sat BUILDING for 23 minutes with no events and was cancelled and redeployed by API) |
 
 | Train C (UX-14 to UX-17) | the one heavy validation on the final code (9ec804b3 plus one test alignment, 67520a94) | production build green; the full GAP suite 344 files, 5,209 tests (one NEXT test aligned to the new people control, then green); the rest of the repository's unit suite: the row below; tsc clean; eslint clean on all 33 source files the program changed since 3b3a063f (the repository-wide lint carries 1,047 pre-existing errors, almost all `any`, in files this program did not touch); the rest of the repository's unit suite 325 files, 2,283 tests, 1 skipped, 0 failures; 54 gate captures on the final build (9 pages at 390/820/1440, light and dark): 0 obscured focused controls, 0 overflow; Ask GAP answered in 0.6 to 0.9 s from the remembered context on PepsiCo, FedEx and NFI; Listen to today 208 words, the account briefs 97 to 244 words | |
+
+| Train C (UX-14 to UX-17) | merge and ship | PR #408 merged 2026-10-06 as c7fbf4ef (tip e90564f4; READY previews on 9ec804b3 and 2b346d29); production READY dpl_7ybDtwenUSPNEztugksdKdaBrVju on c7fbf4ef | the whole program is in production |
+| Train C | production smoke (rig Chrome, Casey's live session, read-only, 820) | Work: "27 accounts need you, in order. Counts are what the list holds. Read just now. Refresh" with Listen to today beside the heading; Accounts: 657 GAP accounts, the first 60 shown; FedEx from a deep link: "Ready for a first touch: Glen Chaffee", "Opened from Work."; Capture: "Dictate is off until transcription spend is approved..."; call 2234: "Ready for a first touch: Glen Chaffee." and "no phone on file: find a number, or email" | 5 of 5 pages as built; nothing clicked that writes |
 
 ## 10. Debt classification (recorded debt audited 2026-10-05)
 
