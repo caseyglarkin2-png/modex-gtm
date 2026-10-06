@@ -114,6 +114,23 @@ async function defaultReadFile(path: string): Promise<string | null> {
   }
 }
 
+/**
+ * The domain clawd is asked about: the account record's domain when it has one, else the domain most of the account's
+ * own addresses share (the history's sends, the replies). An account with no domain on record and no addresses is not
+ * asked (FedEx's company row carried no domain on 2026-10-06, and clawd's ledger matches by address domain only).
+ */
+export function accountDomainFor(x: { domains: readonly string[]; addresses: readonly string[] }): string | null {
+  const own = x.domains.map((d) => d.trim().toLowerCase().replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/.*$/, '')).find(Boolean);
+  if (own) return own;
+  const counts = new Map<string, number>();
+  for (const a of x.addresses) {
+    const d = a.toLowerCase().match(/@([a-z0-9.-]+\.[a-z]{2,})/)?.[1];
+    if (!d || /^(gmail|yahoo|outlook|hotmail|freightroll|yardflow)\./.test(d)) continue;
+    counts.set(d, (counts.get(d) ?? 0) + 1);
+  }
+  return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))[0]?.[0] ?? null;
+}
+
 /** Both readers at once, each soft: the page never waits past the reader timeout and never fails on a reader. */
 export async function loadStoryReaders(args: { accountName: string; domain: string | null }, deps: StoryReaderDeps = {}): Promise<StoryReaders> {
   const [clawd, local] = await Promise.all([fetchClawdOutreach(args.domain, deps), readLocalVaultNote(args.accountName, deps)]);

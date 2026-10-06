@@ -35,6 +35,7 @@ const story: AccountStory = {
     { key: 'note', label: 'Your note', tag: 'Our read', collapsed: false, wrongIf: null, sentences: [{ text: 'Consolidation makes the yards the constraint.', tag: 'Our read', basis: 'your vault note, Jul 10; never quote it to the buyer', basisIds: ['vault:account-note'] }] },
   ],
   first: [],
+  setAsideCaveats: [{ text: 'Ray Hatton, Vice President, FedEx Supply Chain is set aside as a divested unit; that rests on an unverified report (FedEx to sell FedEx Supply Chain to CMA CGM).', tag: 'Unverified', basis: "a third party's report, not checked; Sep 25", basisIds: ['signal:s1', 'set-aside:gap:11'] }],
   checkBeforeContacting: [{ text: 'Check before contacting Courtney Keen: FedEx to sell FedEx Supply Chain to CMA CGM. It names their unit and is not verified.', tag: 'Unverified', basis: "a third party's report, not checked; Sep 25", basisIds: ['signal:s1'] }],
 };
 const gap = (id: number, name: string, title: string): OwnerCandidateInput => ({ key: `gap:${id}`, source: 'gap', personaId: id, name, title, hasEmail: true, employment: { state: 'CURRENT_UNVERIFIED', why: 'CRM only.', decidedBy: [], elsewhere: null, verifyNeeded: false } });
@@ -61,7 +62,7 @@ describe('the story view', () => {
     expect(screen.getAllByTestId('story-sentence').find((el) => /vault note/.test(el.textContent ?? ''))!.textContent).toMatch(/never quote it to the buyer/);
   });
   it('renders nothing for an empty story', () => {
-    const { container } = render(<AccountStoryView story={{ rows: [], first: [], checkBeforeContacting: [] }} />);
+    const { container } = render(<AccountStoryView story={{ rows: [], first: [], checkBeforeContacting: [], setAsideCaveats: [] }} />);
     expect(container.innerHTML).toBe('');
   });
 });
@@ -72,9 +73,12 @@ describe('NOW with the story', () => {
     const stack = buildPeopleStack(r, { chosenKey: state.person!.key, chosenBy: state.person!.chosenBy });
     const { container } = render(<AccountNowView v={v} nextHref="/gap/preview/h1?personaId=7" nextLabel="Prepare the email to Glen" nextText="Prepare the first touch to Glen Chaffee." links={[]} pursuit={{ state, stack, hypothesisId: 'h1', excluded: [], story }} />);
     const idx = (id: string) => container.innerHTML.indexOf(`data-testid="${id}"`);
-    const order = ['now-next', 'now-next-control', 'now-check-before', 'people-stack', 'now-context', 'account-story', 'now-ask', 'now-private'].map(idx);
+    const order = ['now-next', 'now-next-control', 'now-check-before', 'people-stack', 'now-set-aside-caveats', 'now-context', 'account-story', 'now-ask', 'now-private'].map(idx);
     expect(order.every((x, k) => x > -1 && (k === 0 || x > order[k - 1]))).toBe(true);
     expect(screen.queryByTestId('now-why-now')).toBeNull();
+    expect(screen.queryByTestId('now-know')).toBeNull();
+    expect(screen.queryByTestId('now-think')).toBeNull();
+    expect(screen.getByTestId('now-set-aside-caveats').textContent).toMatch(/^Ray Hatton.*unverified report/);
     expect(screen.getByTestId('now-check-before').textContent).toMatch(/^Check before contacting Courtney Keen/);
     expect(screen.getByTestId('account-story').textContent).not.toContain(PRIVATE_SENTINEL);
     expect(screen.getByTestId('now-private').textContent).toContain(PRIVATE_SENTINEL);

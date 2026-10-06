@@ -5,7 +5,7 @@
  * the vault wedge is read from the intel snapshot with its date.
  */
 import { describe, expect, it, vi } from 'vitest';
-import { fetchClawdOutreach, fetchClawdVaultNote, loadStoryReaders, readLocalVaultNote } from '@/lib/gap/story/load';
+import { accountDomainFor, fetchClawdOutreach, fetchClawdVaultNote, loadStoryReaders, readLocalVaultNote } from '@/lib/gap/story/load';
 
 const env = { CLAWD_CONTROL_PLANE_URL: 'https://clawd.example/', CLAWD_CONTROL_PLANE_TOKEN: 'tok' };
 const json = (body: unknown, ok = true, status = 200) => ({ ok, status, json: async () => body }) as unknown as Response;
@@ -35,6 +35,15 @@ describe('fetchClawdOutreach', () => {
     const fetchImpl = vi.fn();
     expect(await fetchClawdOutreach(null, { env, fetchImpl })).toEqual({ read: 'ok', sends: [] });
     expect(fetchImpl).not.toHaveBeenCalled();
+  });
+});
+
+describe('accountDomainFor', () => {
+  it('takes the record domain first, else the domain most of the account addresses share, never our own; null with neither', () => {
+    expect(accountDomainFor({ domains: ['https://www.FedEx.com/'], addresses: [] })).toBe('fedex.com');
+    expect(accountDomainFor({ domains: [], addresses: ['Email to scott.temple@fedex.com: x', 'courtney.keen@fedex.com', 'kym@fxg.fedex.com', 'casey@freightroll.com', 'x@gmail.com'] })).toBe('fedex.com');
+    expect(accountDomainFor({ domains: [], addresses: ['casey@freightroll.com'] })).toBeNull();
+    expect(accountDomainFor({ domains: [''], addresses: [] })).toBeNull();
   });
 });
 

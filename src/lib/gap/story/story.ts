@@ -57,8 +57,10 @@ export interface AccountStory {
   rows: StoryRow[];
   /** The rows the 820 second screen must hold (between us, what is changing, the yard opportunity), in order. */
   first: StoryRow[];
-  /** Unverified items that name the chosen person's unit or a set-aside that rests on one: beside the person. */
+  /** Unverified items that name the chosen person's unit: beside the person, before the stack. */
   checkBeforeContacting: StorySentence[];
+  /** A set-aside (divested unit) that rests on an unverified report: said under the stack's set-aside line. */
+  setAsideCaveats: StorySentence[];
 }
 
 export interface StoryInput {
@@ -93,10 +95,10 @@ const day = (s: string | null | undefined) => (s && !Number.isNaN(new Date(s).ge
 const dayYear = (s: string | null | undefined) => (s && !Number.isNaN(new Date(s).getTime()) ? new Date(s).toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' }) : 'undated');
 const sentence = (t: string) => {
   const s = t.replace(/^[A-Z][A-Z /]+:\s*/, '').replace(/\s+/g, ' ').trim();
-  return /[.!?]$/.test(s) ? s : `${s}.`;
+  const cap = s.charAt(0).toUpperCase() + s.slice(1);
+  return /[.!?]$/.test(cap) ? cap : `${cap}.`;
 };
-const lower = (t: string) => t.charAt(0).toLowerCase() + t.slice(1);
-const first = (name: string) => name.split(' ')[0];
+const sameText = (a: string, b: string) => a.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim() === b.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 const row = (key: StoryRowKey, sentences: StorySentence[], over: Partial<StoryRow> = {}): StoryRow => ({ key, label: STORY_LABEL[key], tag: weakestTag(sentences.map((s) => s.tag)), sentences, wrongIf: null, collapsed: false, ...over });
 const fromLine = (l: NowLine): StorySentence => ({ text: sentence(l.text), tag: l.tag, basis: l.basis, basisIds: [l.id], cite: l.cite });
 
@@ -162,7 +164,8 @@ export function projectStory(i: StoryInput): AccountStory {
   // NETWORK IMPLICATION and YARD OPPORTUNITY: the top grounded angle (never an ungrounded draft), or the buyer's words.
   const top = i.brief.hypotheses.find((h) => h.grounded && h.truth !== 'CONTRADICTED') ?? null;
   const obs = top ? sentence(top.observation.text).replace(/\.$/, '') : '';
-  if (top) {
+  // The inference and the problem are often one sentence in an approved angle: NETWORK shows only when it adds one.
+  if (top && !sameText(top.inference, top.problem)) {
     const review = top.needsReview.length ? '; the angle needs your review' : '';
     rows.push(row('network', [{ text: sentence(top.inference), tag: 'Our read', basis: `our inference from: ${obs.length > 110 ? `${obs.slice(0, 107).trimEnd()}...` : obs}${review}`, basisIds: [`hypothesis:${top.id}`, ...(top.observation.verified && i.inputs.facts.some((f) => f.quote === top.observation.text) ? [`evidence:${i.inputs.facts.find((f) => f.quote === top.observation.text)!.id}`] : [])] }]));
   }
@@ -182,7 +185,6 @@ export function projectStory(i: StoryInput): AccountStory {
   if (!bid('current_state')) learn.push({ text: 'How they run the yards today: not confirmed by the buyer.', tag: 'Unknown', basis: 'no buyer input on the current state', basisIds: [] });
   if (!bid('impact')) learn.push({ text: 'What it costs them: no cost named by the buyer.', tag: 'Unknown', basis: 'no buyer input on impact', basisIds: [] });
   if (!bid('root_cause') && !top?.rootCause) learn.push({ text: 'Why it happens: unknown.', tag: 'Unknown', basis: 'no root cause on record', basisIds: [] });
-  if (i.brief.discovery[0] && learn.length < 3) learn.push({ text: `Ask: ${i.brief.discovery[0].question}`, tag: 'Unknown', basis: 'the first discovery question', basisIds: [] });
   if (learn.length) rows.push(row('learn', learn.slice(0, 3)));
 
   // STORIES THAT MATTER: the checked lines not already told, with their cite status, collapsed.
@@ -201,17 +203,30 @@ export function projectStory(i: StoryInput): AccountStory {
     const phrases = unitPhrases(p.title, i.accountName);
     for (const x of divestSignals) {
       if (!names(x.l.text, phrases)) continue;
-      checkBeforeContacting.push({ text: `Check before contacting ${p.name}: ${lower(sentence(x.l.text))} It names their unit (${p.title}) and is not verified.`, tag: 'Unverified', basis: x.l.basis, basisIds: [x.l.id] });
+      checkBeforeContacting.push({ text: `Check before contacting ${p.name}: ${sentence(x.l.text)} It names their unit (${p.title}) and is not verified.`, tag: 'Unverified', basis: x.l.basis, basisIds: [x.l.id] });
     }
   }
+  const setAsideCaveats: StorySentence[] = [];
+  const byBacking = new Map<string, { backing: (typeof divestSignals)[number]; people: typeof i.excluded }>();
   for (const e of i.excluded.filter((e) => e.code === 'divested_entity')) {
     const backing = divestSignals.find((x) => names(x.l.text, unitPhrases(e.title, i.accountName)) || names(e.reason, unitPhrases(e.title, i.accountName)));
     if (!backing) continue;
-    checkBeforeContacting.push({ text: `${e.name}${e.title ? `, ${e.title}` : ''} is set aside as a divested unit; that rests on an unverified report (${lower(sentence(backing.l.text)).replace(/\.$/, '')}).`, tag: 'Unverified', basis: backing.l.basis, basisIds: [backing.l.id, `set-aside:${e.key}`] });
+    const g = byBacking.get(backing.l.id) ?? { backing, people: [] };
+    g.people.push(e);
+    byBacking.set(backing.l.id, g);
+  }
+  // People set aside on the same report are one sentence, never one per person.
+  for (const { backing, people } of byBacking.values()) {
+    const named = people.slice(0, 3).map((e) => `${e.name}${e.title && people.length === 1 ? `, ${e.title}` : ''}`);
+    const who = people.length > 3 ? `${named.join(', ')} and ${people.length - 3} more` : named.length > 1 ? `${named.slice(0, -1).join(', ')} and ${named[named.length - 1]}` : named[0];
+    setAsideCaveats.push({ text: `${who} ${people.length === 1 ? 'is' : 'are'} set aside as a divested unit; that rests on an unverified report (${sentence(backing.l.text).replace(/\.$/, '')}).`, tag: 'Unverified', basis: backing.l.basis, basisIds: [backing.l.id, ...people.map((e) => `set-aside:${e.key}`)] });
   }
 
   const order: StoryRowKey[] = ['between_us', 'changing', 'yard'];
-  return { rows, first: order.map((k) => rows.find((r) => r.key === k)).filter((r): r is StoryRow => !!r), checkBeforeContacting };
+  // Reading order: the three rows the 820 second screen must hold, then the goal and the network read, then the rest.
+  const ROW_ORDER: StoryRowKey[] = ['between_us', 'changing', 'yard', 'goal', 'network', 'learn', 'stories', 'note'];
+  rows.sort((a, b) => ROW_ORDER.indexOf(a.key) - ROW_ORDER.indexOf(b.key));
+  return { rows, first: order.map((k) => rows.find((r) => r.key === k)).filter((r): r is StoryRow => !!r), checkBeforeContacting, setAsideCaveats };
 }
 
 function betweenUs(i: StoryInput): StoryRow {
@@ -227,18 +242,19 @@ function betweenUs(i: StoryInput): StoryRow {
   const last = sends[0] ?? null;
   const lastReply = t.find((x) => x.kind === 'reply') ?? null;
   if (last) {
-    s.push({ text: `Last email to ${who(last)}, ${day(last.at)}${last.what && last.what !== 'email' ? `: "${last.what.replace(/^Re:\s*/i, '')}"` : ''}.`, tag: 'Checked', basis: `${last.source}, ${day(last.at)}`, basisIds: [`touch:${last.at}`] });
+    const subject = last.what.replace(/^Re:\s*/i, '').replace(/^["“]+|["”]+$/g, '').trim();
+    // The silence after the last email is said in the same sentence (one tag line, not two, at 820).
+    const silence = !lastReply ? (i.clawdRead === 'ok' ? ' No answer on record.' : " No answer in GAP's records (clawd's history could not be read).") : '';
+    s.push({ text: `Last email to ${who(last)}, ${day(last.at)}${subject && subject !== 'email' ? `: "${subject}"` : ''}.${silence}`, tag: !lastReply && i.clawdRead !== 'ok' ? 'Unknown' : 'Checked', basis: `${last.source}, ${day(last.at)}${!lastReply && i.clawdRead === 'ok' ? '; GAP, clawd and the account history for the silence' : ''}`, basisIds: [`touch:${last.at}`] });
   }
   if (lastReply) {
     const k = lastReply.replyKind ?? 'human';
     const text =
-      k === 'opt_out' ? `${who(lastReply)} opted out on ${day(lastReply.at)} ("${lastReply.what}").`
+      k === 'opt_out' ? `${who(lastReply)} opted out on ${day(lastReply.at)}${lastReply.what ? ` ("${lastReply.what}")` : ''}.`
       : k === 'out_of_office' ? `${who(lastReply)} sent an automatic reply on ${day(lastReply.at)}: not an answer.`
       : k === 'bounce' ? `The address for ${who(lastReply)} failed on ${day(lastReply.at)}.`
       : `${who(lastReply)} replied on ${day(lastReply.at)}: "${lastReply.what}".`;
     s.push({ text, tag: k === 'opt_out' || k === 'human' ? 'Buyer said' : 'Checked', basis: `${lastReply.source}, ${day(lastReply.at)}`, basisIds: [`touch:${lastReply.at}`] });
-  } else if (last) {
-    s.push({ text: `No answer on record from ${first(last.name)}.`, tag: i.clawdRead === 'ok' ? 'Checked' : 'Unknown', basis: i.clawdRead === 'ok' ? 'GAP, clawd and the account history' : "GAP and the account history; clawd's history could not be read", basisIds: [] });
   }
   const people = new Set(sends.map((x) => x.name.toLowerCase()));
   if (sends.length >= 2) {
@@ -256,6 +272,6 @@ export function storyListenText(story: AccountStory): string {
   const parts = story.rows
     .filter((r) => r.key !== 'note')
     .map((r) => `${r.label}: ${r.sentences.map((s) => `${s.text.replace(/\.$/, '')} (${s.tag.toLowerCase()}).`).join(' ')}`);
-  const check = story.checkBeforeContacting.map((s) => `${s.text.replace(/\.$/, '')} (unverified).`);
+  const check = [...story.checkBeforeContacting, ...story.setAsideCaveats].map((s) => `${s.text.replace(/\.$/, '')} (unverified).`);
   return ['Account story.', ...parts, ...check].join(' ').replace(/\s+/g, ' ').trim();
 }

@@ -35,7 +35,7 @@ import { OpenHashDetails } from '@/components/gap/open-hash-details';
 import { PendingLink } from '@/components/gap/pending-link';
 import { loadPursuit } from '@/lib/gap/pursuit/load';
 import { nextFromPursuit, pursuitListenText } from '@/lib/gap/pursuit/next';
-import { loadStoryReaders } from '@/lib/gap/story/load';
+import { accountDomainFor, loadStoryReaders } from '@/lib/gap/story/load';
 import { mergeTouches } from '@/lib/gap/story/touches';
 import { projectStory, storyListenText } from '@/lib/gap/story/story';
 import { listenText } from '@/lib/gap/context/now';
@@ -139,7 +139,7 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
     // are soft and bounded, so a slow clawd never costs the page.
     const [pursuit, readers] = await Promise.all([
       loadPursuit(prisma, { brief, inputs, ctx, now }).catch(() => null),
-      loadStoryReaders({ accountName: brief.accountName, domain: inputs.domains[0] ?? null }).catch(() => ({ clawd: { read: 'unavailable' as const, sends: [] }, vaultNote: null })),
+      loadStoryReaders({ accountName: brief.accountName, domain: accountDomainFor({ domains: inputs.domains, addresses: [...ctx.history.map((h) => h.text.match(/[\w.+-]+@[\w.-]+\.[a-z]{2,}/i)?.[0] ?? ''), ...inputs.firstTouches.map((t) => t.recipient)] }) }).catch(() => ({ clawd: { read: 'unavailable' as const, sends: [] }, vaultNote: null })),
     ]);
     const ready = pursuit ? (brief.motion.type === 'FACT_LED' ? pursuit.ready : null) : brief.motion.type === 'FACT_LED' ? await loadReadyTarget(prisma, brief.accountName, now) : null;
     const v = projectNow(brief, ctx, inputs, now, { ready });
@@ -179,7 +179,7 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
             history: ctx.history,
             firstTouches: inputs.firstTouches,
             clawd: readers.clawd,
-            replies: pursuit.state.lastInbound && pursuit.state.replyClass ? [{ from: pursuit.state.lastInbound.who, at: pursuit.state.lastInbound.at, snippet: v.lastReply?.replace(/^.*?: /, '') ?? '', kind: pursuit.state.replyClass.kind, label: pursuit.state.replyClass.label }] : [],
+            replies: pursuit.state.lastInbound && pursuit.state.replyClass ? [{ from: pursuit.state.lastInbound.who, at: pursuit.state.lastInbound.at, snippet: pursuit.state.lastInbound.snippet, kind: pursuit.state.replyClass.kind, label: pursuit.state.replyClass.label }] : [],
             people: [...inputs.personas.map((p) => ({ name: p.name, title: p.title })), ...(inputs.hubspotPeople?.people ?? []).map((p) => ({ name: p.name, title: p.title }))],
             now,
           }),

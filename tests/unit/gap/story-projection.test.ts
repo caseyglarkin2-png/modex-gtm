@@ -81,13 +81,23 @@ describe('story: tags and bases', () => {
     const goal = row('goal')!;
     expect(goal.sentences.every((s) => s.tag !== 'Checked' || s.basisIds.some((id) => /^(evidence:|bid:)/.test(id)))).toBe(true);
     expect(goal.sentences[0].basisIds).toContain('evidence:f-n2');
-    const network = row('network')!;
+    // The brief builder sets an angle's inference to its problem, so NETWORK is absent here (YARD says it once).
+    expect(row('network')).toBeUndefined();
+    const distinct = projectStory({ accountName: 'FedEx', now: NOW, state: fedexState(inputs), brief: { ...buildAccountBrief(inputs, NOW), hypotheses: buildAccountBrief(inputs, NOW).hypotheses.map((h) => ({ ...h, inference: 'Rerouted volume lands on fewer, larger hubs.' })) }, inputs, whyNow: [], know: [], touches: [], clawdRead: 'ok', vaultNote: null, excluded: [] });
+    const network = distinct.rows.find((r) => r.key === 'network')!;
     expect(network.tag).toBe('Our read');
     expect(network.sentences[0].basisIds).toContain('hypothesis:h-fedex');
+    expect(network.sentences[0].basisIds).toContain('evidence:f-n2');
     const yard = row('yard')!;
     expect(yard.tag).toBe('Our read');
     expect(yard.wrongIf).toMatch(/Volume moved without yard strain/);
     expect(yard.sentences[0].text).toMatch(/surviving hubs absorb rerouted volume/);
+    // An angle whose inference is its problem in the same words shows YARD once, never NETWORK too (FedEx live data).
+    const same = fedexInputs({ hypotheses: [{ ...fedexHyp, problem: 'The surviving hubs absorb rerouted volume.' }] });
+    const b2 = buildAccountBrief(same, NOW);
+    const sameStory = projectStory({ accountName: 'FedEx', now: NOW, state: fedexState(same), brief: { ...b2, hypotheses: b2.hypotheses.map((h) => ({ ...h, inference: 'the surviving hubs absorb rerouted volume' })) }, inputs: same, whyNow: [], know: [], touches: [], clawdRead: 'ok', vaultNote: null, excluded: [] });
+    expect(sameStory.rows.find((r) => r.key === 'network')).toBeUndefined();
+    expect(sameStory.rows.find((r) => r.key === 'yard')!.sentences[0].text).toBe('The surviving hubs absorb rerouted volume.');
     // Without a grounded hypothesis and without a BID, NETWORK and YARD are absent, never manufactured.
     const bare = fedexInputs({ hypotheses: [] });
     const { story: s2 } = build(bare, ctxFor(), fedexState(bare));
@@ -173,15 +183,21 @@ describe('story: check before contacting and the private guard', () => {
   it('a person set aside as a divested unit on the strength of that unverified sale is said so', () => {
     const inputs = fedexInputs();
     const { story } = build(inputs, ctxFor(), fedexState(inputs, { replies: [] }), { excluded: [{ key: 'gap:11', name: 'Ray Hatton', title: 'Director, FedEx Supply Chain', code: 'divested_entity', reason: 'FedEx Supply Chain is being sold to CMA CGM.' }] });
-    const ray = story.checkBeforeContacting.find((s) => /Ray Hatton/.test(s.text));
+    expect(story.checkBeforeContacting).toHaveLength(0);
+    const ray = story.setAsideCaveats.find((s) => /Ray Hatton/.test(s.text));
     expect(ray).toBeDefined();
     expect(ray!.tag).toBe('Unverified');
-    expect(ray!.text).toMatch(/set aside as a divested unit.*rests on an unverified report/);
+    expect(ray!.text).toMatch(/^Ray Hatton, Director, FedEx Supply Chain is set aside as a divested unit; that rests on an unverified report \(FedEx to sell FedEx Supply Chain to CMA CGM\)\.$/);
+    // Two people on the same report are one sentence, never two.
+    const two = build(inputs, ctxFor(), fedexState(inputs, { replies: [] }), { excluded: [{ key: 'gap:11', name: 'Ray Hatton', title: 'Director, FedEx Supply Chain', code: 'divested_entity', reason: 'sold' }, { key: 'gap:12', name: 'Scott Temple', title: 'President, FedEx Supply Chain', code: 'divested_entity', reason: 'sold' }] }).story;
+    expect(two.setAsideCaveats).toHaveLength(1);
+    expect(two.setAsideCaveats[0].text).toMatch(/^Ray Hatton and Scott Temple are set aside as a divested unit/);
+    expect(two.setAsideCaveats[0].basisIds).toEqual(['signal:s-cma', 'set-aside:gap:11', 'set-aside:gap:12']);
   });
   it('the sentinel private page never appears in any story or listen text; private engagement is never a row', () => {
     const inputs = fedexInputs();
     const { story, v } = build(inputs, ctxFor(fedexHistory), fedexState(inputs));
-    const all = [...story.rows.flatMap((r) => r.sentences.map((s) => `${s.text} ${s.basis}`)), ...story.checkBeforeContacting.map((s) => s.text), storyListenText(story)].join(' ');
+    const all = [...story.rows.flatMap((r) => r.sentences.map((s) => `${s.text} ${s.basis}`)), ...story.checkBeforeContacting.map((s) => s.text), ...story.setAsideCaveats.map((s) => s.text), storyListenText(story)].join(' ');
     expect(all).not.toContain(PRIVATE_SENTINEL);
     expect(all).not.toMatch(/deep session|ROI read|interest signal/i);
     expect(story.rows.map((r) => r.key)).not.toContain('private');
@@ -215,6 +231,15 @@ describe('story: PepsiCo (research, nothing between us, a verified fact with no 
     expect(story.rows.find((r) => r.key === 'network')).toBeUndefined();
     expect(story.rows.find((r) => r.key === 'yard')).toBeUndefined();
     expect(story.rows.find((r) => r.key === 'between_us')!.sentences[0].text).toMatch(/No touch on record/);
+    // A send with no reply is one sentence, Checked when every ledger answered, Unknown when clawd could not be read.
+    const sent = [{ kind: 'send' as const, at: '2026-06-10T12:00:00Z', name: 'Laura Maxwell', title: 'SVP Supply Chain', address: 'laura.maxwell@pepsico.com', what: 'One live view across your yards', source: 'account history' as const }];
+    const okRow = build(pepsi, ctxFor(), state, { touches: sent, clawdRead: 'ok' }).story.rows.find((r) => r.key === 'between_us')!;
+    expect(okRow.sentences).toHaveLength(1);
+    expect(okRow.sentences[0].text).toBe('Last email to Laura Maxwell, SVP Supply Chain, Jun 10: "One live view across your yards". No answer on record.');
+    expect(okRow.tag).toBe('Checked');
+    const downRow = build(pepsi, ctxFor(), state, { touches: sent, clawdRead: 'unavailable' }).story.rows.find((r) => r.key === 'between_us')!;
+    expect(downRow.tag).toBe('Unknown');
+    expect(downRow.sentences[0].text).toMatch(/could not be read/);
     // Nothing in the story is email copy: no greeting, no sign-off, no "I ... you".
     for (const r of story.rows) for (const s of r.sentences) expect(s.text).not.toMatch(/^(Hi|Hello|Dear)\b|\bI\b .*\byou\b/);
   });

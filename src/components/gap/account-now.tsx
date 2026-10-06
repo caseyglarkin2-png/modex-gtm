@@ -160,6 +160,13 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, 
         {pursuit?.stack ? (
           <>
             <PeopleStackView accountName={v.name} stack={pursuit.stack} state={pursuit.state} hypothesisId={pursuit.hypothesisId} excluded={pursuit.excluded} primaryInNext={primaryInNext && pursuit.state.coldTouchAllowed} />
+            {pursuit.story?.setAsideCaveats.length ? (
+              <ul className="space-y-0.5 text-xs text-[var(--muted-foreground)]" data-testid="now-set-aside-caveats" aria-label="Set aside on an unverified report">
+                {pursuit.story.setAsideCaveats.map((s, i) => (
+                  <li key={i} data-tag={s.tag}>{s.text}</li>
+                ))}
+              </ul>
+            ) : null}
             {v.blocked?.length ? <BlockedPeople accountName={v.name} people={v.blocked} /> : null}
           </>
         ) : (
@@ -270,7 +277,7 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, 
           </Slot>
         ) : null}
 
-        {v.know.length ? (
+        {v.know.length && !pursuit?.story ? (
           <Slot label="Know" testId="now-know">
             <ul className="space-y-2">
               {v.know.map((l) => (
@@ -280,7 +287,7 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, 
           </Slot>
         ) : null}
 
-        {v.think ? (
+        {v.think && !pursuit?.story ? (
           <Slot label="Think" testId="now-think">
             <div className="flex items-start gap-2">
               <Tag tag="Our read" />
