@@ -8,7 +8,7 @@ import { loadWatchProfilesCached } from '../signals/watch';
 import { loadAccountConversations, loadAccountFirstTouches } from '../motion/load';
 import { resolveAccountOpportunity, type OpportunityTruth } from '../opportunity/active-opportunity';
 import { classifyContinuity } from '../research/continuity';
-import { factUrl, liveFactFailure } from '../research/claim-rules';
+import { factUrl, liveClaimFailure, liveFactFailure } from '../research/claim-rules';
 import { contradictedFactIds } from '../research/conflicts';
 import { selectConfirmedBids } from '../bid/select';
 import { getAllAccountMicrositeData } from '@/lib/microsites/accounts';
@@ -26,6 +26,8 @@ import { stageLabels, type StageLabelRead } from '../opportunity/stage-labels';
 import { fetchAccountContextRows, loadAccountContext, projectAccountContext } from '../context/load';
 import type { AccountContext } from '../context/context';
 import { accountSlug } from './href';
+/** R30/R31: the non-physical claim classes the read keeps as story facts of their own kind. */
+const CLAIM_FACT_CLASSES: ReadonlySet<string> = new Set(['JOB_POSTING', 'PROCUREMENT']);
 
 export { accountSlug };
 
@@ -158,7 +160,7 @@ export async function loadAccountInputs(
     skip(() => namesStartingLike(prisma, accountName), [] as string[]),
     skip(() => loadWatchProfilesCached(prisma).catch(() => []), []),
     skip(() => prisma.gapSignal.findMany({ where: { account_name: accountName, resolution: 'resolved' }, select: { id: true, title: true, url: true, published_at: true, research_status: true, note: true, created_at: true }, orderBy: { created_at: 'desc' }, take: 15 }).catch(() => []), []),
-    prisma.prospectingSignal.findMany({ where: { account_name: accountName, source_kind: 'evidence_record' }, select: { id: true, title: true, evidence_text: true, evidence_url: true, observed_at: true, freshness_expires_at: true, metadata: true }, orderBy: { observed_at: 'desc' }, take: 200 }),
+    prisma.prospectingSignal.findMany({ where: { account_name: accountName, source_kind: 'evidence_record' }, select: { id: true, title: true, evidence_text: true, evidence_url: true, observed_at: true, freshness_expires_at: true, metadata: true, claim_class: true }, orderBy: { observed_at: 'desc' }, take: 200 }),
     skip(() => prisma.researchRun.findFirst({ where: { account_name: accountName, run_key: { startsWith: 'gap_research:' } }, orderBy: { created_at: 'desc' }, select: { created_at: true, provider_status: true } }).catch(() => null), null as Row | null),
     soft(prisma.prospectingHypothesis.findMany({
       where: { account_name: accountName, superseded_by: { is: null }, status: { in: ['draft', 'review_required', 'approved', 'active', 'confirmed', 'partially_confirmed', 'rejected'] } },
@@ -216,11 +218,15 @@ export async function loadAccountInputs(
     // Re-gated on read: a fact stored before a rule tightened (a software rollout, a 10-K description, an acquired
     // company's exhibit) stops being live. The row stays for audit; nothing is deleted.
     // A quote attributed to another organization (a vendor's CEO about this account) is that organization's fact.
-    if (liveFactFailure(r.evidence_text, accountName, factUrl(r))) continue;
+    // R30/R31: a job or procurement claim is re-gated by the claim rules (publisher, speaker), a physical fact by the
+    // fact rules; the class rides on the fact so the story and the anchor know which approach it may open.
+    const claimClass = typeof r.claim_class === 'string' && CLAIM_FACT_CLASSES.has(r.claim_class) ? r.claim_class : null;
+    if (claimClass ? liveClaimFailure(r.evidence_text, accountName, factUrl(r)) : liveFactFailure(r.evidence_text, accountName, factUrl(r))) continue;
     if (contradicted.has(r.id)) continue;
     const k = meta.continuity?.kind;
     const f: FactInput = {
       id: r.id,
+      claimClass,
       quote: r.evidence_text,
       url: factUrl(r),
       title: r.title ?? '',

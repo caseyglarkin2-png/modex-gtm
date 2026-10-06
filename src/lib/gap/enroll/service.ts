@@ -141,6 +141,7 @@ import { materializeSequence, type MaterializeRefusal } from '@/lib/gap/sequence
 import type { RoutingAction } from '@/lib/gap/taxonomy';
 import { restrictionForAccount } from '@/lib/gap/policy/restriction';
 import type { QueueAddInput } from '@/lib/validations';
+import { approachOfHypothesis, COPY_UNSUPPORTED_DETAIL, copyFamilySupports } from '../research/approach-policy';
 
 export const ENROLL_ACTION: RoutingAction = 'enroll_gap_sequence';
 export const DEFAULT_OWNER = 'casey@freightroll.com';
@@ -705,6 +706,7 @@ export async function enrollFromDecision(
   const hypothesis: HypothesisRow | null = await prisma.prospectingHypothesis.findUnique({
     where: { id: input.hypothesisId },
     select: {
+      metadata: true,
       id: true,
       status: true,
       account_name: true,
@@ -730,7 +732,9 @@ export async function enrollFromDecision(
   const liveSignals = (hypothesis.signals ?? [])
     .map((link) => link.signal)
     .filter((s): s is EvidenceSignalRow => s !== null && (!s.freshness_expires_at || new Date(s.freshness_expires_at).getTime() > input.now.getTime()));
-  if (sendableEvidence(hypothesis.observation, liveSignals, hypothesis.account_name).tier !== 'VERIFIED_FACT') {
+  const approach = approachOfHypothesis(hypothesis as { metadata?: unknown });
+  if (!copyFamilySupports(approach)) return refuse('evidence_insufficient', { detail: COPY_UNSUPPORTED_DETAIL(approach) });
+  if (sendableEvidence(hypothesis.observation, liveSignals, hypothesis.account_name, { approach }).tier !== 'VERIFIED_FACT') {
     return refuse('evidence_insufficient', { detail: 'No verified, dated, quoted fact about a physical-network change at this account.' });
   }
 

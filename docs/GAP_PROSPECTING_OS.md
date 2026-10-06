@@ -990,8 +990,13 @@ or PROCUREMENT claim passes the verified / dated / own-account / publisher / spe
 rule, a closed posting is refused, and every other class is refused as not admitted. `draft-from-fact.ts` declares
 job_procurement_led on a thesis drafted from a job or procurement claim. Pinned by `approach-policy.test.ts`; the
 evidence-gate, machine, service, actionability and thesis-group suites stay green. Not done yet: the account read
-(`account-intel/load.ts`) still keeps only physical facts as story facts, so a job claim is draftable through the
-API, not yet from the opening story (R31/R33); the compiler's first-touch copy family for a job-led thesis (R34).
+(`account-intel/load.ts`) kept only physical facts as story facts; now (R31/R33, same day) a JOB_POSTING or
+PROCUREMENT claim is a live story fact of its own class (re-gated by the publisher and speaker rules), the opening
+story offers it as a draftable story, and the draft the service makes declares job_procurement_led. R34 is NOT
+built: the compiler's first-touch copy exists for the physical-change path only, so every send and enroll gate
+refuses a job-led thesis with `approach_copy_unsupported` / the stated detail (fail closed) until that copy family
+ships; a job-led thesis is prepared and reviewed, never mailed in the physical-change words. Post-R30 regression:
+the full GAP suite 352 files / 5,253 green.
 
 ## 12. Migration, backfill and rollback
 

@@ -57,6 +57,7 @@ import { claimSendKey, personSendHistoryForDecision, personStepKey } from './per
 import { getGmailMessageHeaders } from '@/lib/email/gmail-inbox';
 import type { GmailSender } from '@/lib/email/gmail-sender';
 import type { ExecutionIntent } from './contract';
+import { approachOfHypothesis, COPY_UNSUPPORTED_DETAIL, copyFamilySupports } from '../research/approach-policy';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -106,6 +107,8 @@ export type SellerDraftRefusal =
   | 'unsubscribe_link_unavailable'
   | 'gmail_refused'
   | 'suppression_unreadable'
+  /** R34: the thesis's approach has no first-touch copy family yet; nothing is rendered or sent. */
+  | 'approach_copy_unsupported'
   | 'recipient_suppressed'
   | 'thesis_needs_review'
   | 'thesis_currentness_unknown'
@@ -352,7 +355,13 @@ export async function prepareSellerEmail(
   // change) or no email; a keyword hit can only send this card to research.
   const linked = Array.isArray(pack.hypothesis.signals) ? pack.hypothesis.signals.map((l: { signal?: unknown }) => l.signal).filter(Boolean) : [];
   const live = linked.filter((sig: { freshness_expires_at?: Date | string | null }) => !sig.freshness_expires_at || new Date(sig.freshness_expires_at).getTime() > now.getTime());
-  if (sendableEvidence(pack.hypothesis.observation, live, pack.hypothesis.account_name).tier !== 'VERIFIED_FACT') {
+  // R30: the gate judges the thesis under its declared approach; R34: only the event-led path has copy today.
+  const hypRow: { metadata?: unknown } | null = await prisma.prospectingHypothesis.findUnique({ where: { id: pack.hypothesis.id }, select: { metadata: true } }).catch(() => null);
+  const approach = approachOfHypothesis(hypRow);
+  if (!copyFamilySupports(approach)) {
+    return refuse(prisma, actor, decisionId, { ok: false, reason: 'approach_copy_unsupported', detail: COPY_UNSUPPORTED_DETAIL(approach) });
+  }
+  if (sendableEvidence(pack.hypothesis.observation, live, pack.hypothesis.account_name, { approach }).tier !== 'VERIFIED_FACT') {
     return refuse(prisma, actor, decisionId, {
       ok: false,
       reason: 'evidence_insufficient',

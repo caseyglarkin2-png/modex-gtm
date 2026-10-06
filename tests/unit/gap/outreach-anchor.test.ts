@@ -194,6 +194,14 @@ describe('the outreach anchor (Option A)', () => {
     // An approved thesis is never pending; an account with no open draft has none.
     expect(anchorFor(inputs({ hypotheses: [hypA, hypB] }), 1).anchor.pending).toEqual([]);
   });
+  it('R30/R31: a job claim (its class on the fact) is a draftable story; the draft the service makes of it carries the job/procurement approach, never the physical words', () => {
+    const job = { id: 'f-job', quote: 'PepsiCo is now hiring a Transportation Coordinator in Dallas; apply by October 30.', url: 'https://jobs.pepsico.com/yard-ops-dallas', title: 'PepsiCo Careers', publishedAt: '2026-09-20T00:00:00Z', expiresAt: null, continuity: 'ongoing_state' as const, currentness: null, claimClass: 'JOB_POSTING' };
+    const { anchor } = anchorFor(inputs({ facts: [factA, factB, job], hypotheses: [hypA, hypB] }), 1);
+    expect(anchor.draftable.map((d) => d.factId)).toContain('f-job');
+    // Without the class the same sentence is not a physical fact and never draftable.
+    const { anchor: plain } = anchorFor(inputs({ facts: [factA, factB, { ...job, claimClass: null }], hypotheses: [hypA, hypB] }), 1);
+    expect(plain.draftable.map((d) => d.factId)).not.toContain('f-job');
+  });
   it('a thesis the send gate would refuse is never the anchor and is listed as not usable; with the gate unread nothing is usable', () => {
     const gated = { ...inputs(), unsendable: ['h-denver'] } as AccountInputs & { unsendable: string[] };
     const { anchor } = anchorFor(gated, 1);

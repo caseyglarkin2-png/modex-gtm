@@ -237,7 +237,8 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
     : null;
 
   // SUPPORTING FACT: one more checked, citable, live, physical-network fact that is not the anchor's (the gate's rules).
-  const citable = (f: AccountInputs['facts'][number]) => f.continuity !== 'ended' && !sensitivityOf(f.quote) && !BROKEN_MONEY.test(f.quote) && isPhysicalOpsFact(f.quote);
+  // R30/R31: a physical fact, or a job / procurement claim (its own approach), may open a thesis.
+  const citable = (f: AccountInputs['facts'][number]) => f.continuity !== 'ended' && !sensitivityOf(f.quote) && !BROKEN_MONEY.test(f.quote) && (isPhysicalOpsFact(f.quote) || f.claimClass === 'JOB_POSTING' || f.claimClass === 'PROCUREMENT');
   // A fact that grounds another usable thesis is already offered as a different story; another fact is preferred, and
   // when none exists the thesis is flagged as the same fact so the page never reads it as three items.
   const altFactIds = new Set(theses.filter((t) => t.hypothesisId !== primary?.hypothesisId && t.usable).flatMap((t) => t.factIds));

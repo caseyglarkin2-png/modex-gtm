@@ -151,3 +151,13 @@ export function contextApproachOf(motionKind: string): ContextApproach | null {
       return null;
   }
 }
+
+/**
+ * R34 (not yet built): the compiler's first-touch copy family exists for the physical-change path only. A thesis of
+ * another evidence approach is prepared and reviewed but NOT rendered into an email until its family exists, so no
+ * job-led thesis ever goes out in the physical-change words. Fail closed, with the reason.
+ */
+export function copyFamilySupports(approach: EvidenceApproach): boolean {
+  return approach === 'event_led';
+}
+export const COPY_UNSUPPORTED_DETAIL = (approach: EvidenceApproach) => `No first-touch copy exists yet for a ${approach.replace(/_/g, ' ')} thesis: GAP prepares and reviews it, but no email is rendered until that copy family ships (R34). Nothing goes out.`;

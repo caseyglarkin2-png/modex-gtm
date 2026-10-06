@@ -37,6 +37,8 @@ export interface FactInput {
   currentness: { url: string | null; publishedAt: string } | null;
   /** Other stored rows of this exact quote (the same fact registered once per person): the same fact. */
   sameQuoteIds?: string[];
+  /** R30/R31: JOB_POSTING or PROCUREMENT when the fact is a claim of that kind (null: a physical-network fact). */
+  claimClass?: string | null;
 }
 
 /** Every stored id of one fact (a thesis may cite any of them). */
