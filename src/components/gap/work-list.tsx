@@ -1,15 +1,17 @@
 'use client';
 
 /**
- * WORK (account-first UX, UX-08): the accounts that need the seller, one card each, in the Work order; the lanes as
- * filter chips whose counts are the contents; a name search. Each card: account, state, why now, next person, next
- * action, blocker, Open. Pure presentation over lib/gap/work/list.ts; the filter and search live in the URL
- * (`?filter=`, `?q=`) so Back to Work restores them (UX-09).
+ * WORK (account-first UX, UX-08; ranked by commercial obligations, R41): the accounts that need the seller today, one
+ * card each, every obligation due today visible on its card with its own Done, Snooze and Skip; why each card sits
+ * where it does; the lanes as filter chips whose counts are the contents; a name search; the seller's explicit
+ * priority per account; and the Waiting and Snoozed footers, counted, so "needs you" is only what needs the seller
+ * today. Pure presentation over lib/gap/work/list.ts plus three recorded actions (commitment status, the account
+ * priority), each a session route that writes one append-only row; the filter and search live in the URL (UX-09).
  */
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { filterWork, WORK_FILTER_LABEL, WORK_FILTERS, workCounts, type WorkCard, type WorkFilter } from '@/lib/gap/work/list';
+import { filterWork, WORK_FILTER_LABEL, WORK_FILTERS, workCounts, type WaitingItem, type WorkCard, type WorkFilter, type WorkObligation } from '@/lib/gap/work/list';
 import { saveWorkOrder } from '@/lib/gap/work/order';
 import { VoicePreviewButton } from '@/components/voice-preview-button';
 import { accountHref, accountSlug } from '@/lib/gap/account-intel/href';
@@ -17,6 +19,8 @@ import { accountHref, accountSlug } from '@/lib/gap/account-intel/href';
 const BTN = 'inline-flex min-h-11 items-center justify-center rounded-md px-3 text-sm font-medium';
 const PRIMARY = `${BTN} bg-[var(--primary)] text-[var(--primary-foreground)] hover:opacity-90`;
 const OUTLINE = `${BTN} border border-[var(--border)] hover:bg-[var(--muted)]`;
+const SMALL = 'inline-flex min-h-11 items-center justify-center rounded-md border border-[var(--border)] px-2.5 text-xs hover:bg-[var(--muted)] disabled:opacity-60 sm:min-h-9';
+const INPUT = 'min-h-11 rounded-md border border-[var(--border)] bg-transparent px-2 text-sm sm:min-h-9';
 const STATE_TONE: Record<WorkCard['stateKind'], string> = {
   replied: 'text-[var(--primary)]',
   opted_out: 'text-amber-700 dark:text-amber-400',
@@ -28,18 +32,140 @@ const STATE_TONE: Record<WorkCard['stateKind'], string> = {
   in_deal: 'text-[var(--muted-foreground)]',
   unknown_deal: 'text-amber-700 dark:text-amber-400',
   held: 'text-amber-700 dark:text-amber-400',
+  committed: 'text-[var(--primary)]',
+  meeting: 'text-[var(--primary)]',
 };
 
 function isFilter(v: string | null): v is WorkFilter {
   return !!v && (WORK_FILTERS as readonly string[]).includes(v);
 }
 
-export function WorkList({ cards, focus, listenText = null, readAt = null, snoozed = [] }: { cards: WorkCard[]; /** The account (slug) to focus on arrival (Back to Work). */ focus?: string | null; /** UX-11: the spoken brief for today (lib/gap/voice/today.ts), played on a press only. */ listenText?: string | null; /** UX-14: when the read happened, with Refresh to read again. */ readAt?: { at: string; label: string } | null; /** R14: the accounts snoozed out of Work, with their lines. */ snoozed?: Array<{ accountName: string; line: string; until: string }> }) {
+async function post(url: string, body: unknown): Promise<{ ok: boolean; error: string | null }> {
+  try {
+    const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    if (res.ok) return { ok: true, error: null };
+    const j = (await res.json().catch(() => ({}))) as { error?: string };
+    return { ok: false, error: j.error ?? `HTTP ${res.status}` };
+  } catch {
+    return { ok: false, error: 'no connection' };
+  }
+}
+
+const REFUSAL_TEXT: Record<string, string> = {
+  terminal: 'it is already closed',
+  until_in_past: 'that date has passed',
+  until_too_far: 'that is more than 90 days out',
+  until_required: 'choose a date',
+  reason_required: 'say why in a few words',
+};
+
+/** Done, Snooze and Skip on one obligation: each records the status (append-only), then Work reloads. */
+function ObligationActions({ o }: { o: WorkObligation }) {
+  const router = useRouter();
+  const [mode, setMode] = useState<'none' | 'done' | 'snooze' | 'skip'>('none');
+  const [text, setText] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [status, setStatus] = useState<string | null>(null);
+  if (!o.commitmentId) return null;
+  async function record(to: 'done' | 'snoozed' | 'skipped') {
+    setBusy(true);
+    setStatus(null);
+    const r = await post('/api/gap/commitments', { op: 'status', commitmentId: o.commitmentId, to, ...(to === 'done' && text.trim() ? { note: text.trim() } : {}), ...(to === 'snoozed' ? { until: text.trim() } : {}), ...(to === 'skipped' && text.trim() ? { reason: text.trim() } : {}) });
+    setBusy(false);
+    if (!r.ok) {
+      setStatus(`Not recorded: ${REFUSAL_TEXT[r.error ?? ''] ?? r.error}.`);
+      return;
+    }
+    setStatus(to === 'done' ? 'Recorded as done.' : to === 'snoozed' ? 'Snoozed.' : 'Skipped.');
+    setMode('none');
+    router.refresh();
+  }
+  return (
+    <div className="mt-1 flex flex-wrap items-center gap-2">
+      {mode === 'none' ? (
+        <>
+          <button type="button" className={SMALL} data-testid="obligation-done" onClick={() => { setMode('done'); setText(''); }}>Done</button>
+          <button type="button" className={SMALL} data-testid="obligation-snooze" onClick={() => { setMode('snooze'); setText(''); }}>Snooze</button>
+          <button type="button" className={SMALL} data-testid="obligation-skip" onClick={() => { setMode('skip'); setText(''); }}>Skip</button>
+        </>
+      ) : (
+        <>
+          <label className="flex min-w-0 flex-1 items-center gap-2 text-xs">
+            <span className="shrink-0">{mode === 'done' ? 'What happened (optional)' : mode === 'snooze' ? 'Back on' : 'Why not (optional)'}</span>
+            <input className={`${INPUT} min-w-0 flex-1`} type={mode === 'snooze' ? 'date' : 'text'} maxLength={240} value={text} onChange={(e) => setText(e.target.value)} data-testid="obligation-input" />
+          </label>
+          <button type="button" className={SMALL} disabled={busy || (mode === 'snooze' && !text)} data-testid="obligation-confirm" onClick={() => void record(mode === 'done' ? 'done' : mode === 'snooze' ? 'snoozed' : 'skipped')}>
+            {mode === 'done' ? 'Record done' : mode === 'snooze' ? 'Snooze' : 'Skip it'}
+          </button>
+          <button type="button" className={SMALL} onClick={() => setMode('none')}>Cancel</button>
+        </>
+      )}
+      {status ? <span role="status" className="text-xs text-[var(--muted-foreground)]" data-testid="obligation-status">{status}</span> : null}
+    </div>
+  );
+}
+
+/** The seller's explicit priority on the account, with a one-line reason. */
+function PriorityControl({ c }: { c: WorkCard }) {
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
+  const [reason, setReason] = useState('');
+  const [status, setStatus] = useState<string | null>(null);
+  async function save(level: 'high' | 'clear') {
+    const r = await post('/api/gap/accounts/priority', { accountName: c.accountName, level, ...(level === 'high' ? { reason: reason.trim() } : {}) });
+    if (!r.ok) {
+      setStatus(`Not recorded: ${REFUSAL_TEXT[r.error ?? ''] ?? r.error}.`);
+      return;
+    }
+    setOpen(false);
+    setStatus(null);
+    router.refresh();
+  }
+  if (c.priority) {
+    return (
+      <p className="mt-0.5 flex flex-wrap items-center gap-2 text-xs text-[var(--muted-foreground)]" data-testid="work-card-priority">
+        <span>Your priority: {c.priority.reason}</span>
+        <button type="button" className="underline" onClick={() => void save('clear')} data-testid="work-priority-clear">Clear</button>
+        {status ? <span role="status">{status}</span> : null}
+      </p>
+    );
+  }
+  if (!open) return <button type="button" className="text-xs underline text-[var(--muted-foreground)]" onClick={() => setOpen(true)} data-testid="work-priority-open">Prioritize</button>;
+  return (
+    <div className="mt-1 flex flex-wrap items-center gap-2 text-xs">
+      <label className="flex min-w-0 flex-1 items-center gap-2">
+        <span className="shrink-0">Why first?</span>
+        <input className={`${INPUT} min-w-0 flex-1`} maxLength={140} value={reason} onChange={(e) => setReason(e.target.value)} data-testid="work-priority-reason" />
+      </label>
+      <button type="button" className={SMALL} disabled={!reason.trim()} onClick={() => void save('high')} data-testid="work-priority-save">Save</button>
+      <button type="button" className={SMALL} onClick={() => setOpen(false)}>Cancel</button>
+      {status ? <span role="status">{status}</span> : null}
+    </div>
+  );
+}
+
+export function WorkList({
+  cards,
+  focus,
+  listenText = null,
+  readAt = null,
+  snoozed = [],
+  waiting = [],
+  counts = null,
+}: {
+  cards: WorkCard[];
+  /** The account (slug) to focus on arrival (Back to Work). */ focus?: string | null;
+  /** UX-11: the spoken brief for today (lib/gap/voice/today.ts), played on a press only. */ listenText?: string | null;
+  /** UX-14: when the read happened, with Refresh to read again. */ readAt?: { at: string; label: string } | null;
+  /** R14 / R41: what the seller put away until a date (accounts and obligations), with their lines. */ snoozed?: Array<{ key?: string; accountName: string; line: string; until: string }>;
+  /** R41: not today: waiting on someone, or due on a later day. Counted, never cards. */ waiting?: WaitingItem[];
+  /** R41: the counts (needs you = the cards; the footers count what they list). */ counts?: { needsYou: number; obligationsDue: number; waiting: number; snoozed: number } | null;
+}) {
   const router = useRouter();
   const params = useSearchParams();
   const [filter, setFilter] = useState<WorkFilter>(isFilter(params.get('filter')) ? (params.get('filter') as WorkFilter) : 'all');
   const [query, setQuery] = useState(params.get('q') ?? '');
-  const counts = workCounts(cards);
+  const chips = workCounts(cards);
   // The shown list IS the Work order: its hrefs carry its own positions, and Next account walks what the seller saw.
   const shown = filterWork(cards, filter, query).map((c, k) => ({ ...c, index: k, href: `${accountHref(c.accountName)}?from=work&i=${k}` }));
   useEffect(() => {
@@ -62,6 +188,7 @@ export function WorkList({ cards, focus, listenText = null, readAt = null, snooz
     if (q.trim()) p.set('q', q.trim());
     router.replace(`/gap${p.toString() ? `?${p.toString()}` : ''}`, { scroll: false });
   };
+  const due = counts?.obligationsDue ?? cards.reduce((n, c) => n + (c.obligations?.length ?? 0), 0);
   return (
     <section className="space-y-3" data-testid="work-list" aria-labelledby="work-heading">
       <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
@@ -69,8 +196,8 @@ export function WorkList({ cards, focus, listenText = null, readAt = null, snooz
           <h2 id="work-heading" className="text-lg font-semibold">Work</h2>
           {listenText ? <VoicePreviewButton text={listenText} label="Listen to today" className="min-h-11 px-4" /> : null}
         </div>
-        <p className="text-xs text-[var(--muted-foreground)]">
-          {cards.length === 1 ? '1 account needs you' : `${cards.length} accounts need you`}, in order. Counts are what the list holds.
+        <p className="text-xs text-[var(--muted-foreground)]" data-testid="work-needs-you">
+          {cards.length === 1 ? '1 account needs you' : `${cards.length} accounts need you`} today, in order{due ? `; ${due} ${due === 1 ? 'obligation' : 'obligations'} due on them` : ''}. Counts are what the list holds.
           {readAt ? (
             <>
               {' '}
@@ -92,7 +219,7 @@ export function WorkList({ cards, focus, listenText = null, readAt = null, snooz
             }}
             data-testid={`work-filter-${f}`}
           >
-            {WORK_FILTER_LABEL[f]} {counts[f]}
+            {WORK_FILTER_LABEL[f]} {chips[f]}
           </button>
         ))}
         <label className="flex min-w-0 basis-full items-center gap-2 text-xs sm:basis-auto sm:flex-1 sm:max-w-xs">
@@ -117,13 +244,14 @@ export function WorkList({ cards, focus, listenText = null, readAt = null, snooz
       ) : (
         <ol className="space-y-2 pb-24 sm:pb-0" data-testid="work-cards">
           {shown.map((c) => (
-            <li key={c.accountName} id={`work-card-${c.index}`} tabIndex={-1} className="rounded-md border border-[var(--border)] p-3 outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]" data-testid="work-card" data-account={c.accountName} data-slug={accountSlug(c.accountName)} data-state={c.stateKind} data-lane={c.lane}>
+            <li key={c.accountName} id={`work-card-${c.index}`} tabIndex={-1} className="rounded-md border border-[var(--border)] p-3 outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]" data-testid="work-card" data-account={c.accountName} data-slug={accountSlug(c.accountName)} data-state={c.stateKind} data-lane={c.lane} data-tier={c.tier ?? undefined}>
               <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
                 <p className="text-base font-semibold">
                   <Link href={c.href} className="inline-flex min-h-11 items-center underline decoration-dotted underline-offset-2 hover:decoration-solid" data-testid="work-card-account">{c.accountName}</Link>
                 </p>
                 <p className={`text-sm font-medium ${STATE_TONE[c.stateKind]}`} data-testid="work-card-state">{c.state}</p>
               </div>
+              {c.rankWhy ? <p className="text-xs text-[var(--muted-foreground)]" data-testid="work-card-rank">{c.rankWhy}</p> : null}
               <p className="mt-1 text-sm" data-testid="work-card-why">{c.why}</p>
               {c.person ? (
                 <p className="mt-0.5 text-sm text-[var(--muted-foreground)]" data-testid="work-card-person">
@@ -133,22 +261,53 @@ export function WorkList({ cards, focus, listenText = null, readAt = null, snooz
               ) : null}
               {c.blocker ? <p className="mt-0.5 text-xs text-amber-700 dark:text-amber-400" data-testid="work-card-blocker">{c.blocker}</p> : null}
               {c.outcome ? <p className="mt-0.5 text-xs text-[var(--muted-foreground)]" data-testid="work-card-outcome">{c.outcome.line}</p> : null}
+              {c.obligations?.length ? (
+                <ul className="mt-2 space-y-2 border-l-2 border-[var(--primary)] pl-3" data-testid="work-obligations" aria-label={`Due at ${c.accountName}`}>
+                  {c.obligations.map((o) => (
+                    <li key={o.key} data-testid="work-obligation" data-commitment-id={o.commitmentId ?? undefined} data-kind={o.kind}>
+                      <p className="text-sm font-medium">{o.title}</p>
+                      <p className="text-xs text-[var(--muted-foreground)]">
+                        {o.line}
+                        {o.person?.name || o.person?.email ? ` ${o.person.name ?? o.person.email}.` : ''}
+                      </p>
+                      {o.basis ? <p className="break-words text-xs italic text-[var(--muted-foreground)]">{o.basis}</p> : null}
+                      <div className="flex flex-wrap items-center gap-2">
+                        {o.href && o.label ? <Link href={o.href} className="inline-flex min-h-11 items-center text-xs underline sm:min-h-9" data-testid="obligation-open">{o.label}</Link> : null}
+                      </div>
+                      <ObligationActions o={o} />
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
               <div className="mt-2 flex flex-wrap items-center gap-2">
                 {c.next ? (
                   <Link href={c.next.href} className={PRIMARY} data-testid="work-card-next">{c.next.label}</Link>
                 ) : null}
                 <Link href={c.href} className={OUTLINE} data-testid="work-card-open">Open {c.accountName}</Link>
               </div>
+              {c.tier !== undefined ? <div className="mt-1"><PriorityControl c={c} /></div> : null}
             </li>
           ))}
         </ol>
       )}
+      {waiting.length ? (
+        <details className="rounded-md border border-[var(--border)] px-3 py-2 text-sm" data-testid="work-waiting">
+          <summary className="min-h-11 cursor-pointer text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Waiting ({waiting.length}): not today</summary>
+          <ul className="mt-1 space-y-1 text-xs">
+            {waiting.map((w) => (
+              <li key={w.key} data-testid="work-waiting-item">
+                <Link href={accountHref(w.accountName)} className="underline">{w.accountName}</Link>: {w.title}. {w.line}
+              </li>
+            ))}
+          </ul>
+        </details>
+      ) : null}
       {snoozed.length ? (
         <details className="rounded-md border border-[var(--border)] px-3 py-2 text-sm" data-testid="work-snoozed">
           <summary className="min-h-11 cursor-pointer text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Snoozed ({snoozed.length}): back on their dates</summary>
           <ul className="mt-1 space-y-1 text-xs">
             {snoozed.map((s) => (
-              <li key={s.accountName}>
+              <li key={s.key ?? s.accountName}>
                 <Link href={accountHref(s.accountName)} className="underline">{s.accountName}</Link>: {s.line}
               </li>
             ))}

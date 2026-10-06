@@ -1,22 +1,29 @@
 /**
- * WORK LIST (account-first UX, UX-08, Direction A): the accounts that need the seller, ONE card each, in the
- * existing NEXT UP order (reply, follow up, ready, decide, research) with the lanes as filters and counts.
+ * WORK LIST (account-first UX, UX-08; ranked by commercial obligations, GAP OS execution recovery R41, 2026-10-06):
+ * the accounts that need the seller TODAY, one card each, every independently due obligation visible on its card,
+ * in the order the buyer's obligations put them:
  *
- * Not a second state engine: the cards are projected from the candidates the cockpit already builds
- * (routing/next-up.ts), the account motions it already reads, the In Deals summary it already shows, and the reply
- * class decided before anything ranks (replies/classify.ts). Each card answers: account, why now, state, next person,
- * next action, blocker. Rules pinned by tests/unit/gap/work-list.test.ts:
+ *   1 commitment   a buyer commitment due today (the seller promised a deliverable, the buyer asked for something)
+ *   2 reply        an actionable reply (a person wrote back; a referral to decide on)
+ *   3 meeting      a meeting within 24 hours (prepare it)
+ *   4 deal         opportunity work: an open deal with a step due
+ *   5 follow_up    a follow-up due (the interval passed with no reply; a reminder came back)
+ *   6 ready        prepared prospecting (a first touch ready; a GAP draft to send or discard)
+ *   7 review       a proposal to review (decide the angle)
+ *   8 research     research (and a failed address)
+ *   then the admin (an opt-out to record), the seller's own "not today" (skipped, logged elsewhere) and the holds (in a
+ *   deal with nothing due, HubSpot unknown), never a cold action.
  *
- *   - one card per account: its highest-ranked work; a reply at the account (human, opt-out, bounce) IS the card,
- *     whatever else the lanes hold (a review one-off never erases yesterday's "stop")
- *   - replies are classified first: only a HUMAN reply heads the list; an opt-out is "Opted out: record it" and
- *     ranks after RESEARCH (quick admin, never cold work, never at the head); an automatic reply is not work
- *     (dropped); a bounce is research (find a working address)
- *   - the one canonical pursuit state, when the workspace or the warmer read it recently (pursuit/summary.ts),
- *     overrides the cockpit lane's state, person and rank on the card (FedEx: READY with Glen, not research)
- *   - an account in a deal, or whose opportunity truth is UNKNOWN, is never a cold action: it lists under In a deal
- *     with "work it from the deal" (or the HubSpot caution), last
- *   - counts are the filtered contents, never a separate tally (N4)
+ * Inside a tier the order is explainable and said on the card (`rankWhy`): the due time, then the newest buyer
+ * activity, then the seller's explicit priority (work/priority.ts), then the lane's own order. Waiting work (a first
+ * touch out and its follow-up not due, an obligation due on a later day, something blocked) is NOT a card: it is the
+ * Waiting footer, counted, so "needs you" counts only what needs the seller today. A snoozed item leaves until its date
+ * or until the buyer moves. The counts are the contents (N4): needs you = the cards; the footers list what they count.
+ *
+ * Not a second state engine: the cards are projected from the cockpit's candidates, the account motions, the In Deals
+ * summary, the reply class (replies/classify.ts), the canonical pursuit summaries (whose actionable result wins over
+ * a lane card), the ledger's touches, the seller's outcomes and the commitments (work/commitment-model.ts). Pinned by
+ * tests/unit/gap/work-list.test.ts and tests/unit/gap/work-rank.test.ts.
  */
 import { accountHref } from '../account-intel/href';
 import { classifyReply, type ReplyClassKind } from '../replies/classify';
@@ -25,15 +32,51 @@ import type { PursuitSummary } from '../pursuit/summary';
 import type { PursuitStateKind } from '../pursuit/state';
 import { outcomeLine, type WorkOutcome } from './outcome';
 import { MOTION_UNLOCK_BUSINESS_DAYS } from '../motion/account-motion';
+import { commitmentPhase, commitmentTier, KIND_TEXT, type Commitment, type CommitmentKind } from './commitment-model';
+import { dayLabel, nyDay } from './dates';
 import type { CockpitLane } from '@/components/gap/gap-cockpit';
 
-export type WorkStateKind = 'replied' | 'opted_out' | 'bounced' | 'follow_up' | 'ready' | 'decide' | 'research' | 'in_deal' | 'unknown_deal' | 'held';
+export type WorkStateKind = 'replied' | 'opted_out' | 'bounced' | 'follow_up' | 'ready' | 'decide' | 'research' | 'in_deal' | 'unknown_deal' | 'held' | 'committed' | 'meeting';
+export type WorkTier = 'commitment' | 'reply' | 'meeting' | 'deal' | 'follow_up' | 'ready' | 'review' | 'research' | 'admin' | 'later' | 'held';
+export const TIER_RANK: Record<WorkTier, number> = { commitment: 0, reply: 1, meeting: 2, deal: 3, follow_up: 4, ready: 5, review: 6, research: 7, admin: 7.5, later: 8, held: 9 };
+/** The Work filters: the analyst lanes plus "due" (buyer commitments, meetings and deal steps due today). */
+export type WorkLane = CockpitLane | 'commitments';
+
+export interface WorkObligation {
+  /** The commitment id, or `meeting:<account>:<at>` for a meeting on the calendar. */
+  key: string;
+  commitmentId: string | null;
+  kind: CommitmentKind | 'meeting';
+  tier: WorkTier;
+  title: string;
+  /** The phase in words: "Due today", "Overdue since Oct 9", "Back today", "Meeting tomorrow 10:00". */
+  line: string;
+  dueAt: string | null;
+  dueDay: string | null;
+  person: { name: string | null; email: string | null } | null;
+  basis: string | null;
+  /** Where the work runs, when the account page is not the place. */
+  href: string | null;
+  label: string | null;
+  /** A commitment record: the seller can mark it done, snooze it or skip it from the card. */
+  canComplete: boolean;
+}
+
+export interface WaitingItem {
+  key: string;
+  accountName: string;
+  kind: CommitmentKind | 'motion';
+  title: string;
+  line: string;
+  dueDay: string | null;
+  commitmentId: string | null;
+}
 
 export interface WorkCard {
   accountName: string;
   /** The account workspace, carrying the Work order (`?from=work&i=n`) so the workspace can offer Next account. */
   href: string;
-  lane: CockpitLane;
+  lane: WorkLane;
   stateKind: WorkStateKind;
   /** The seller words for the state ("Someone replied", "Ready for a first touch", "In a deal"). */
   state: string;
@@ -52,6 +95,13 @@ export interface WorkCard {
   index: number;
   /** Where the state came from: the canonical pursuit read (fresh), or the cockpit's lanes. */
   source: 'pursuit' | 'cockpit';
+  /** R41: the tier that placed the card, and why it sits where it does, in words. */
+  tier?: WorkTier;
+  rankWhy?: string;
+  /** R41: every obligation due today at this account, each separately (two due commitments stay two). */
+  obligations?: WorkObligation[];
+  /** R41: the seller's explicit priority on the account. */
+  priority?: { reason: string; by: string; at: string } | null;
 }
 
 export interface WorkInput {
@@ -70,23 +120,28 @@ export interface WorkInput {
   summaries?: ReadonlyMap<string, PursuitSummary>;
   /**
    * What the database alone says per account, read on every load (no HubSpot, no process memory): whether a usable
-   * (sendable, grounded, open) thesis exists, and the recorded chosen person. A cold load is the normal state, so a
-   * cold card must not contradict the workspace: a recorded choice with a usable thesis is READY; a cold-touch lane
-   * card with no usable thesis is research (nothing to open on), never "choose who".
+   * (sendable, grounded, open) thesis exists, and the recorded chosen person.
    */
   dbState?: ReadonlyMap<string, { sendable: boolean; chosen: { name: string; title: string | null } | null }>;
-  /**
-   * R14: what the seller recorded on an account (work/outcome.ts): a snoozed account leaves Work until its date
-   * (listed under `snoozed`); a skipped or logged-outside-GAP account drops to the end for today with its line. A
-   * reply or an opt-out is never hidden by an outcome: the buyer's own move outranks the seller's note.
-   */
+  /** R14: what the seller recorded on an account (work/outcome.ts). */
   outcomes?: ReadonlyMap<string, WorkOutcome>;
-  /**
-   * R14: accounts with a proven GAP first touch or an outstanding GAP draft in the window (the send ledger alone),
-   * with the person when known. An in-motion account is on Work as a motion in flight (never a cold READY, never
-   * dropped because its card was acted), ranked with the follow-ups.
-   */
+  /** R14: accounts with a proven GAP first touch or an outstanding GAP draft in the window (the send ledger alone). */
   inMotion?: ReadonlyMap<string, { state: 'sent' | 'drafted'; at: string; person: { name: string; title: string | null } | null }>;
+  /** R40/R41: every commitment at the Work accounts (and beyond), as stored; the phase is read here at `now`. */
+  commitments?: readonly Commitment[];
+  /** R41: meetings on the calendar (the Meeting table), any within the next 24 hours become an obligation. */
+  meetings?: ReadonlyArray<{ accountName: string; at: string; what: string; personaId?: number | null }>;
+  /** R41: the seller's explicit priority per account (work/priority.ts). */
+  priorities?: ReadonlyMap<string, { reason: string; by: string; at: string }>;
+}
+
+export interface WorkDay {
+  cards: WorkCard[];
+  /** Not today: the obligations waiting on someone or due on a later day, and the first touches out. Counted, not cards. */
+  waiting: WaitingItem[];
+  /** Put away by the seller until a date (accounts and obligations). */
+  snoozed: Array<{ key: string; accountName: string; line: string; until: string }>;
+  counts: { needsYou: number; obligationsDue: number; waiting: number; snoozed: number };
 }
 
 const STATE_TEXT: Record<WorkStateKind, string> = {
@@ -100,12 +155,13 @@ const STATE_TEXT: Record<WorkStateKind, string> = {
   in_deal: 'In a deal',
   unknown_deal: 'Held: HubSpot could not be checked',
   held: 'Held',
+  committed: 'Due to the buyer',
+  meeting: 'Meeting to prepare',
 };
 
-/** The action a pursuit-sourced card offers: the workspace carries the real control, so the card points there. */
+/** The action a pursuit-sourced card offers when the summary predates the actionable result (R10). */
 function pursuitAction(state: PursuitStateKind, accountName: string, stateLine = ''): { label: string; href: string } | null {
   const page = accountHref(accountName);
-  // A relationship-led account's move is the warm touch, as the workspace says (never "Prepare the first touch").
   if (state === 'ready' && /^Relationship-led/.test(stateLine)) return { label: 'Log the warm touch', href: `/gap/capture?account=${encodeURIComponent(accountName)}` };
   switch (state) {
     case 'replied':
@@ -139,6 +195,24 @@ const PURSUIT_RANK: Record<PursuitStateKind, number> = { replied: 0, opted_out: 
 const PURSUIT_KIND: Record<PursuitStateKind, WorkStateKind> = { replied: 'replied', opted_out: 'opted_out', in_deal: 'in_deal', held: 'held', follow_up_due: 'follow_up', in_motion: 'ready', ready: 'ready', choose_person: 'ready', research: 'research', idle: 'research' };
 const PURSUIT_LANE: Record<PursuitStateKind, CockpitLane> = { replied: 'replies', opted_out: 'replies', in_deal: 'deals', held: 'deals', follow_up_due: 'follow_up', in_motion: 'ready', ready: 'ready', choose_person: 'ready', research: 'research', idle: 'research' };
 
+/** The tier a card's own state places it in (before any obligation). */
+const STATE_TIER: Record<WorkStateKind, WorkTier> = { replied: 'reply', opted_out: 'admin', bounced: 'research', follow_up: 'follow_up', ready: 'ready', decide: 'review', research: 'research', in_deal: 'held', unknown_deal: 'held', held: 'held', committed: 'commitment', meeting: 'meeting' };
+const TIER_LANE: Partial<Record<WorkTier, WorkLane>> = { commitment: 'commitments', meeting: 'commitments', deal: 'commitments', follow_up: 'follow_up', reply: 'replies' };
+
+const TIER_WHY: Record<WorkTier, string> = {
+  commitment: 'A buyer commitment is due',
+  reply: 'A buyer replied',
+  meeting: 'A meeting within 24 hours',
+  deal: 'An open deal has a step due',
+  follow_up: 'A follow-up is due',
+  ready: 'A prepared first touch',
+  review: 'A proposal to review',
+  research: 'Research',
+  admin: 'Admin: record it',
+  later: 'You set it aside for today',
+  held: 'Held: nothing cold here',
+};
+
 function cmpKeys(a: Array<number | string>, b: Array<number | string>): number {
   for (let i = 0; i < Math.max(a.length, b.length); i += 1) {
     const x = a[i];
@@ -153,6 +227,7 @@ function cmpKeys(a: Array<number | string>, b: Array<number | string>): number {
 }
 
 const day = (s: string) => new Date(s).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' });
+const time = (s: string) => new Date(s).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/New_York' });
 
 interface Ranked {
   rank: number;
@@ -161,7 +236,29 @@ interface Ranked {
   source?: 'pursuit' | 'cockpit';
 }
 
-export function buildWorkList(i: WorkInput): WorkCard[] {
+/** Where an obligation's work runs (the account page unless a better place exists). */
+function obligationAction(c: Commitment): { href: string; label: string } {
+  const page = accountHref(c.accountName);
+  switch (c.kind) {
+    case 'answer_request':
+      return { href: page, label: 'Open the account' };
+    case 'referral':
+      return { href: `${page}#people-stack-heading`, label: `Decide on ${c.person?.name ?? 'the person they named'}` };
+    case 'prepare_meeting':
+      return c.person?.personaId ? { href: `/gap/call/${c.person.personaId}`, label: 'Prepare the meeting' } : { href: page, label: 'Prepare the meeting' };
+    case 'follow_up':
+      return c.detail?.decisionId && !c.detail.noFollowUpCopy ? { href: `/gap?lane=follow_up&open=${encodeURIComponent(c.detail.decisionId)}`, label: `Prepare touch ${(c.detail.stepIndex ?? 1) + 1}` } : { href: page, label: 'Open the follow-up' };
+    case 'deal_step':
+      return { href: `${page}?view=brief`, label: 'Open the deal brief' };
+    case 'buyer_promise':
+      return { href: page, label: 'Chase it' };
+    default:
+      return { href: page, label: 'Open the account' };
+  }
+}
+
+/** Build the day: the cards (needs you), the waiting footer and the snoozed footer, every count their contents. */
+export function workDay(i: WorkInput): WorkDay {
   const motion = new Map(i.motions.map((m) => [m.accountName, m]));
   const person = (account: string) => {
     const m = motion.get(account);
@@ -172,9 +269,10 @@ export function buildWorkList(i: WorkInput): WorkCard[] {
     const have = best.get(r.card.accountName);
     if (!have || r.rank < have.rank || (r.rank === have.rank && cmpKeys(r.sortKey, have.sortKey) < 0)) best.set(r.card.accountName, r);
   };
+  const waiting: WaitingItem[] = [];
+  const motionWaiting = new Map<string, { at: string; person: { name: string; title: string | null } | null }>();
 
-  // Replies, classified before they rank. A reply IS the account's card: it is collected here and set after the
-  // lanes, so a review one-off or a research chore never erases it (Walmart's "stop" read "Decide the angle").
+  // Replies, classified before they rank. A reply IS the account's card unless a buyer obligation outranks it.
   const replyCards: Ranked[] = [];
   const offerReply = (r: Ranked) => {
     const have = replyCards.find((x) => x.card.accountName === r.card.accountName);
@@ -183,16 +281,20 @@ export function buildWorkList(i: WorkInput): WorkCard[] {
       replyCards.push(r);
     }
   };
+  /** The newest buyer activity per account (a person, not a machine): the second tie-break. */
+  const activity = new Map<string, number>();
   for (const r of i.replies) {
     if (!r.accountName) continue;
     const c = classifyReply({ snippet: r.snippet, subject: r.subject, from: r.contactEmail });
+    const at = new Date(r.receivedAt).getTime() || 0;
+    if (c.kind === 'human' || c.kind === 'opt_out') activity.set(r.accountName, Math.max(activity.get(r.accountName) ?? 0, at));
     const rank = REPLY_RANK[c.kind];
     if (rank === null) continue; // an automatic reply is not work
     const kind: WorkStateKind = c.kind === 'human' ? 'replied' : c.kind === 'opt_out' ? 'opted_out' : 'bounced';
     const quote = (r.subject ?? r.snippet).replace(/\s+/g, ' ').trim().slice(0, 90);
     offerReply({
       rank,
-      sortKey: [new Date(r.receivedAt).getTime() || Number.MAX_SAFE_INTEGER],
+      sortKey: [at || Number.MAX_SAFE_INTEGER],
       card: {
         accountName: r.accountName,
         lane: c.kind === 'bounce' ? 'research' : 'replies',
@@ -240,64 +342,76 @@ export function buildWorkList(i: WorkInput): WorkCard[] {
     if (i.held.has(name) || dealAccountNames.has(name)) continue;
     offer({ rank: LANE_RANK.ready, sortKey: [0, name], card: { accountName: name, lane: 'ready', stateKind: 'ready', state: `Ready for a first touch: ${db.chosen.name}`, why: `Prepare the first touch to ${db.chosen.name}.`, person: db.chosen, next: { label: 'Prepare the first touch', href: accountHref(name) }, blocker: null } });
   }
-  // R14: a motion in flight (the ledger's proven send or outstanding draft) is the account's card unless a reply, a
-  // hold or a follow-up outranks it; it replaces any cold READY the lanes or the database offered.
+  // R14 / R41: a motion in flight. An outstanding GAP draft is work (send or discard it); a first touch that went out
+  // is WAITING (on their reply, then the follow-up's interval), never a card that inflates "needs you".
   for (const [name, m] of i.inMotion ?? []) {
     if (i.held.has(name) || dealAccountNames.has(name)) continue;
     const have = best.get(name);
     if (have && (have.card.stateKind === 'follow_up' || have.rank <= 1)) continue;
     const who = m.person?.name ?? 'the person';
+    if (m.state === 'sent') {
+      best.delete(name);
+      motionWaiting.set(name, { at: m.at, person: m.person });
+      continue;
+    }
     best.set(name, {
       rank: PURSUIT_RANK.in_motion,
       sortKey: [new Date(m.at).getTime() || 0],
-      card: {
-        accountName: name,
-        lane: 'ready',
-        stateKind: 'ready',
-        state: m.state === 'sent' ? `First touch in motion: ${who}` : `A GAP draft to ${who} is outstanding`,
-        why: m.state === 'sent' ? `${who} got the first touch on ${day(m.at)}. The next person unlocks after ${MOTION_UNLOCK_BUSINESS_DAYS} business days without a response.` : `A GAP draft to ${who} is still in the mailbox: send or discard it before anyone else here is touched.`,
-        person: m.person,
-        next: { label: 'Open the account', href: accountHref(name) },
-        blocker: null,
-      },
+      card: { accountName: name, lane: 'ready', stateKind: 'ready', state: `A GAP draft to ${who} is outstanding`, why: `A GAP draft to ${who} is still in the mailbox: send or discard it before anyone else here is touched.`, person: m.person, next: { label: 'Open the account', href: accountHref(name) }, blocker: null },
     });
   }
   // The reply card wins the account outright (a bounce only when nothing ranks above research).
   for (const r of replyCards) {
     if (r.card.stateKind === 'bounced') offer(r);
-    else best.set(r.card.accountName, r);
+    else {
+      best.set(r.card.accountName, r);
+      motionWaiting.delete(r.card.accountName);
+    }
   }
 
-  // Held accounts: in a deal (the summary) or UNKNOWN (a card's read), last, never a cold action. The hold card IS
-  // the account's card: a research chore at a deal account never outranks it (Kraft Heinz read "Judge 1 verified fact").
+  // Held accounts: in a deal (the summary) or UNKNOWN (a card's read), never a cold action.
   const dealAccounts = new Map(i.inDeals.status === 'complete' ? i.inDeals.accounts.map((a) => [a.accountName, a]) : []);
   for (const [name, a] of dealAccounts) {
     const stages = a.deals.map((d) => `${d.name ? `"${d.name}"` : 'an unnamed deal'} (${d.stage})`).join(', ');
     best.delete(name);
+    motionWaiting.delete(name);
     offer({ rank: LANE_RANK.deals, sortKey: [name], card: { accountName: name, lane: 'deals', stateKind: 'in_deal', state: STATE_TEXT.in_deal, why: `Open HubSpot ${a.deals.length === 1 ? 'deal' : 'deals'}: ${stages}.`, person: null, next: { label: 'Open the deal brief', href: `${accountHref(name)}?view=brief` }, blocker: 'No cold first touch while the deal is open: work it from the deal.' } });
   }
   for (const [name, why] of i.held) {
     if (dealAccounts.has(name)) continue;
     const unknown = why === 'opportunity_unknown';
     best.delete(name);
+    motionWaiting.delete(name);
     offer({ rank: LANE_RANK.deals, sortKey: [unknown ? 0 : 1, name], card: { accountName: name, lane: 'deals', stateKind: unknown ? 'unknown_deal' : 'in_deal', state: STATE_TEXT[unknown ? 'unknown_deal' : 'in_deal'], why: unknown ? 'HubSpot could not say whether this account is in a deal: no cold touch until it can.' : 'A current card holds this account for an open deal.', person: null, next: unknown ? null : { label: 'Open the deal brief', href: `${accountHref(name)}?view=brief` }, blocker: unknown ? 'Check HubSpot directly before contacting anyone.' : 'No cold first touch while the deal is open.' } });
   }
 
   // The canonical pursuit state wins where it is fresh: the card says what the workspace says, and ranks by it.
   for (const [name, s] of i.summaries ?? []) {
-    const have = best.get(name);
-    if (!have) continue;
-    // A reply that landed after the summary was read is never overwritten by it: the reply card stands unless the
-    // summary itself says replied or opted out. A hold (a deal, an unknown or held read) is never lifted by a summary
-    // either, unless the summary is itself a hold: a stale READY must never turn a held card into a cold action.
-    const holdCard = have.card.stateKind === 'in_deal' || have.card.stateKind === 'unknown_deal' || have.card.stateKind === 'held';
-    const summaryHolds = s.state === 'in_deal' || s.state === 'held' || s.state === 'replied' || s.state === 'opted_out';
-    if ((have.card.stateKind === 'replied' || have.card.stateKind === 'opted_out') && s.state !== 'replied' && s.state !== 'opted_out') continue;
-    if (holdCard && !summaryHolds) continue;
-    // R14: a summary read BEFORE the ledger's touch is stale against it: the proven send stands (a READY summary from
-    // ten minutes ago must not say "prepare the first touch" over a touch that went out since).
+    let have = best.get(name);
+    const waitingTouch = motionWaiting.get(name);
+    if (!have && !waitingTouch) continue;
+    // A first touch moved to Waiting is still the account's card for a newer summary that says something else (a
+    // conversation the motion saw, a hold): rebuild its base card so the summary can speak.
+    if (!have && waitingTouch && s.state !== 'in_motion' && new Date(s.at).getTime() >= new Date(waitingTouch.at).getTime()) {
+      have = { rank: PURSUIT_RANK.in_motion, sortKey: [new Date(waitingTouch.at).getTime() || 0], card: { accountName: name, lane: 'ready', stateKind: 'ready', state: STATE_TEXT.ready, why: '', person: waitingTouch.person, next: null, blocker: null } };
+      motionWaiting.delete(name);
+    }
+    if (have) {
+      const holdCard = have.card.stateKind === 'in_deal' || have.card.stateKind === 'unknown_deal' || have.card.stateKind === 'held';
+      const summaryHolds = s.state === 'in_deal' || s.state === 'held' || s.state === 'replied' || s.state === 'opted_out';
+      if ((have.card.stateKind === 'replied' || have.card.stateKind === 'opted_out') && s.state !== 'replied' && s.state !== 'opted_out') continue;
+      if (holdCard && !summaryHolds) continue;
+    }
+    // R14: a summary read BEFORE the ledger's touch is stale against it: the proven send stands.
     const touch = i.inMotion?.get(name);
     if (touch && new Date(s.at).getTime() < new Date(touch.at).getTime()) continue;
+    // R41: the workspace says the first touch is out and nothing is due: waiting, not a card.
+    if (s.state === 'in_motion') {
+      best.delete(name);
+      motionWaiting.set(name, { at: touch?.at ?? s.at, person: s.person });
+      continue;
+    }
+    if (!have) continue;
     const kind = PURSUIT_KIND[s.state];
     // R10: the workspace's own allowed action (the actionable result) is the card's action; the lane mapping only
     // when the summary predates it. A proposal under review opens the page at the proposal.
@@ -312,30 +426,135 @@ export function buildWorkList(i: WorkInput): WorkCard[] {
         stateKind: kind,
         state: s.stateLine,
         person: s.person ?? (have.card.stateKind === kind ? have.card.person : null),
-        // The card says what the workspace says, all of it: the why is NEXT, the action is the workspace's control.
         why: s.nextText ?? s.blocker ?? have.card.why,
-        // The blocker is said once: never the same sentence as the why.
         blocker: (s.state === 'held' || s.state === 'in_deal' || s.state === 'replied' || s.state === 'opted_out') && (s.blocker ?? have.card.blocker) !== (s.nextText ?? s.blocker ?? have.card.why) ? (s.blocker ?? have.card.blocker) : null,
         next: action,
         preparation: s.actionable?.preparation ?? null,
       },
     });
   }
-  // R14: the seller's recorded outcomes. A snoozed account leaves the list; a skipped or logged one drops to the end
-  // for today with its line. The buyer's own move (a reply, an opt-out) is never hidden by a seller note.
-  const OUTCOME_RANK = LANE_RANK.research + 1;
+
+  // R40 / R41: the obligations. Due today -> on the account's card (a card is made when the account has none, so no
+  // task is ever silently omitted); waiting, upcoming or blocked -> the Waiting footer; snoozed -> the Snoozed footer.
+  const repliesAt = new Map<string, Array<{ email: string; at: number; who: string }>>();
+  for (const r of i.replies) {
+    const c = classifyReply({ snippet: r.snippet, subject: r.subject, from: r.contactEmail });
+    if (c.kind !== 'human' && c.kind !== 'opt_out') continue;
+    const list = repliesAt.get(r.accountName) ?? [];
+    list.push({ email: r.contactEmail.toLowerCase(), at: new Date(r.receivedAt).getTime() || 0, who: r.contactEmail });
+    repliesAt.set(r.accountName, list);
+  }
+  /** The buyer moved after `since` at this commitment's account (a person, any class but automatic). */
+  const moved = (c: Commitment, since: string) => {
+    const t = new Date(since).getTime();
+    const hit = (repliesAt.get(c.accountName) ?? []).filter((r) => r.at > t).sort((a, b) => b.at - a.at)[0];
+    return hit ? `${hit.who} replied ${day(new Date(hit.at).toISOString())}.` : null;
+  };
+  const obligations = new Map<string, WorkObligation[]>();
+  const snoozed: WorkDay['snoozed'] = [];
+  const outcomeSnoozed = new Set([...(i.outcomes ?? []).values()].filter((o) => o.kind === 'snoozed').map((o) => o.accountName));
+  for (const c of i.commitments ?? []) {
+    const p = commitmentPhase(c, i.now, moved);
+    if (p.phase === 'done' || p.phase === 'skipped') continue;
+    if (p.phase === 'snoozed') {
+      // An account snooze is listed once, as the account (its reminder is the same thing).
+      if (!(c.source.kind === 'snooze' && outcomeSnoozed.has(c.accountName))) snoozed.push({ key: c.commitmentId, accountName: c.accountName, line: `${c.title}: ${p.line}`, until: c.snoozeUntil ?? c.dueAt ?? '' });
+      continue;
+    }
+    if (p.phase !== 'due') {
+      waiting.push({ key: c.commitmentId, accountName: c.accountName, kind: c.kind, title: c.title, line: p.line, dueDay: p.dueDay, commitmentId: c.commitmentId });
+      continue;
+    }
+    const action = obligationAction(c);
+    // A snooze coming back keeps the account's own place (it never promotes the account); every other kind ranks.
+    const tier: WorkTier = c.source.kind === 'snooze' ? 'later' : commitmentTier(c);
+    const list = obligations.get(c.accountName) ?? [];
+    list.push({ key: c.commitmentId, commitmentId: c.commitmentId, kind: c.kind, tier, title: c.title, line: p.line, dueAt: c.dueAt, dueDay: p.dueDay, person: c.person ? { name: c.person.name, email: c.person.email } : null, basis: c.basis, href: action.href, label: action.label, canComplete: true });
+    obligations.set(c.accountName, list);
+  }
+  const horizon = i.now.getTime() + 24 * 3_600_000;
+  for (const m of i.meetings ?? []) {
+    const at = new Date(m.at).getTime();
+    if (!(at >= i.now.getTime() - 30 * 60_000 && at <= horizon)) continue;
+    const list = obligations.get(m.accountName) ?? [];
+    list.push({ key: `meeting:${m.accountName}:${m.at}`, commitmentId: null, kind: 'meeting', tier: 'meeting', title: `Meeting ${dayLabel(nyDay(m.at), i.now)} ${time(m.at)}: ${m.what}`, line: 'Prepare it: within 24 hours.', dueAt: m.at, dueDay: nyDay(m.at), person: null, basis: null, href: m.personaId ? `/gap/call/${m.personaId}` : accountHref(m.accountName), label: 'Prepare the meeting', canComplete: false });
+    obligations.set(m.accountName, list);
+  }
+  // A first touch out with no follow-up record waiting: the Waiting footer says it (one line per account).
+  const waitingAccounts = new Set(waiting.filter((w) => w.kind === 'follow_up').map((w) => w.accountName));
+  for (const [name, m] of motionWaiting) {
+    if (obligations.get(name)?.some((o) => o.kind === 'follow_up') || waitingAccounts.has(name)) continue;
+    const who = m.person?.name ?? 'the person';
+    waiting.push({ key: `motion:${name}`, accountName: name, kind: 'motion', title: `First touch out to ${who}`, line: `Sent ${day(m.at)}; waiting on their reply. The next person unlocks after ${MOTION_UNLOCK_BUSINESS_DAYS} business days without one.`, dueDay: null, commitmentId: null });
+  }
+  // Accounts whose only work today is an obligation get a card of their own.
+  for (const [name, list] of obligations) {
+    if (best.has(name)) continue;
+    const top = [...list].sort((a, b) => TIER_RANK[a.tier] - TIER_RANK[b.tier])[0];
+    const stateKind: WorkStateKind = top.tier === 'meeting' ? 'meeting' : top.tier === 'follow_up' || top.tier === 'later' ? 'follow_up' : 'committed';
+    best.set(name, { rank: 0, sortKey: [name], card: { accountName: name, lane: 'commitments', stateKind, state: `${top.kind === 'meeting' ? 'Meeting' : KIND_TEXT[top.kind]}: ${top.title}`, why: top.line, person: top.person?.name ? { name: top.person.name, title: null } : null, next: top.href && top.label ? { label: top.label, href: top.href } : null, blocker: null } });
+  }
+
+  // R14: the seller's recorded outcomes. A snoozed account leaves the list (unless a buyer obligation is due there:
+  // that is never hidden by a seller note); a skipped or logged one drops to "later" with its line.
+  const later = new Set<string>();
   for (const [name, o] of i.outcomes ?? []) {
     const have = best.get(name);
     if (!have) continue;
     if (have.card.stateKind === 'replied' || have.card.stateKind === 'opted_out') continue;
-    if (o.kind === 'snoozed') {
+    const due = (obligations.get(name) ?? []).filter((x) => x.tier !== 'later');
+    if (o.kind === 'snoozed' && due.length === 0) {
       best.delete(name);
       continue;
     }
-    best.set(name, { ...have, rank: Math.max(have.rank, OUTCOME_RANK), card: { ...have.card, outcome: { kind: o.kind, line: outcomeLine(o, i.now), until: o.until } } });
+    later.add(name);
+    best.set(name, { ...have, card: { ...have.card, outcome: { kind: o.kind, line: outcomeLine(o, i.now), until: o.until } } });
   }
-  const ordered = [...best.values()].sort((a, b) => a.rank - b.rank || cmpKeys(a.sortKey, b.sortKey) || a.card.accountName.localeCompare(b.card.accountName));
-  return ordered.map((r, index) => ({ ...r.card, index, source: r.source ?? 'cockpit', href: `${accountHref(r.card.accountName)}?from=work&i=${index}` }));
+
+  // Tiers, lanes, the obligations on each card, the tie-break keys and the words that explain the position.
+  const ranked = [...best.values()].map((r) => {
+    const name = r.card.accountName;
+    const list = [...(obligations.get(name) ?? [])].sort((a, b) => TIER_RANK[a.tier] - TIER_RANK[b.tier] || String(a.dueAt ?? '').localeCompare(String(b.dueAt ?? '')));
+    const own: WorkTier = later.has(name) && r.card.stateKind !== 'replied' && r.card.stateKind !== 'opted_out' ? 'later' : STATE_TIER[r.card.stateKind];
+    const fromObligation = list.filter((o) => o.tier !== 'later').sort((a, b) => TIER_RANK[a.tier] - TIER_RANK[b.tier])[0];
+    const tier: WorkTier = fromObligation && TIER_RANK[fromObligation.tier] < TIER_RANK[own] ? fromObligation.tier : own;
+    const lane: WorkLane = tier !== own ? TIER_LANE[tier] ?? r.card.lane : r.card.lane;
+    const dueMs = Math.min(...list.filter((o) => o.tier === tier).map((o) => (o.dueAt ? new Date(o.dueAt).getTime() : Number.MAX_SAFE_INTEGER)), tier === 'reply' ? (typeof r.sortKey[0] === 'number' ? (r.sortKey[0] as number) : Number.MAX_SAFE_INTEGER) : Number.MAX_SAFE_INTEGER);
+    const act = activity.get(name) ?? 0;
+    const prio = i.priorities?.get(name) ?? null;
+    return { r, tier, lane, list, dueMs, act, prio };
+  });
+  ranked.sort((a, b) => TIER_RANK[a.tier] - TIER_RANK[b.tier] || a.dueMs - b.dueMs || b.act - a.act || Number(!a.prio) - Number(!b.prio) || a.r.rank - b.r.rank || cmpKeys(a.r.sortKey, b.r.sortKey) || a.r.card.accountName.localeCompare(b.r.card.accountName));
+  const cards: WorkCard[] = ranked.map(({ r, tier, lane, list, dueMs, act, prio }, index) => {
+    const top = list.find((o) => o.tier === tier);
+    const phrase = (line: string) => line.replace(/\.$/, '').replace(/^\w/, (ch) => ch.toLowerCase());
+    const bits = [top ? `${TIER_WHY[tier]}: ${top.title}${top.dueDay && top.kind !== 'meeting' ? ` (${phrase(top.line)})` : ''}` : TIER_WHY[tier]];
+    if (!top && dueMs < Number.MAX_SAFE_INTEGER && tier === 'reply') bits[0] = `${TIER_WHY.reply} ${day(new Date(dueMs).toISOString())}`;
+    else if (act && tier !== 'reply') bits.push(`buyer activity ${day(new Date(act).toISOString())}`);
+    if (prio) bits.push(`you prioritized it (${prio.reason})`);
+    return {
+      ...r.card,
+      lane,
+      tier,
+      rankWhy: `${bits.join('; ')}.`,
+      obligations: list,
+      priority: prio,
+      index,
+      source: r.source ?? 'cockpit',
+      href: `${accountHref(r.card.accountName)}?from=work&i=${index}`,
+    };
+  });
+  for (const [, o] of i.outcomes ?? []) {
+    if (o.kind === 'snoozed' && !cards.some((c) => c.accountName === o.accountName)) snoozed.push({ key: `outcome:${o.accountName}`, accountName: o.accountName, line: outcomeLine(o, i.now), until: o.until });
+  }
+  snoozed.sort((a, b) => a.until.localeCompare(b.until) || a.accountName.localeCompare(b.accountName));
+  waiting.sort((a, b) => String(a.dueDay ?? '9999').localeCompare(String(b.dueDay ?? '9999')) || a.accountName.localeCompare(b.accountName));
+  return { cards, waiting, snoozed, counts: { needsYou: cards.length, obligationsDue: cards.reduce((n, c) => n + (c.obligations?.length ?? 0), 0), waiting: waiting.length, snoozed: snoozed.length } };
+}
+
+/** The cards alone (the order Work shows). */
+export function buildWorkList(i: WorkInput): WorkCard[] {
+  return workDay(i).cards;
 }
 
 /** R14: the accounts snoozed out of Work, with their lines, for the list's footer. */
@@ -344,10 +563,11 @@ export function snoozedWork(outcomes: ReadonlyMap<string, WorkOutcome> | undefin
   return [...(outcomes ?? []).values()].filter((o) => o.kind === 'snoozed' && !shown.has(o.accountName)).sort((a, b) => a.until.localeCompare(b.until)).map((o) => ({ accountName: o.accountName, line: outcomeLine(o, now), until: o.until }));
 }
 
-export type WorkFilter = 'all' | CockpitLane;
+export type WorkFilter = 'all' | WorkLane;
 
 export const WORK_FILTER_LABEL: Record<WorkFilter, string> = {
   all: 'All',
+  commitments: 'Due',
   replies: 'Replied',
   follow_up: 'Follow up',
   ready: 'Ready',
@@ -355,11 +575,11 @@ export const WORK_FILTER_LABEL: Record<WorkFilter, string> = {
   research: 'Research',
   deals: 'Held or in a deal',
 };
-export const WORK_FILTERS: readonly WorkFilter[] = ['all', 'replies', 'follow_up', 'ready', 'review', 'research', 'deals'];
+export const WORK_FILTERS: readonly WorkFilter[] = ['all', 'commitments', 'replies', 'follow_up', 'ready', 'review', 'research', 'deals'];
 
 /** The chip counts ARE the filtered contents (N4). */
 export function workCounts(cards: readonly WorkCard[]): Record<WorkFilter, number> {
-  const out = { all: cards.length, replies: 0, follow_up: 0, ready: 0, review: 0, research: 0, deals: 0 };
+  const out = { all: cards.length, commitments: 0, replies: 0, follow_up: 0, ready: 0, review: 0, research: 0, deals: 0 };
   for (const c of cards) out[c.lane] += 1;
   return out;
 }

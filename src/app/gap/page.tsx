@@ -43,7 +43,9 @@ import { Breadcrumb } from '@/components/breadcrumb';
 import { GapSubnav } from '@/components/gap/gap-subnav';
 import { GapCockpit, NextUp, type CockpitLane } from '@/components/gap/gap-cockpit';
 import { buildNextUpCandidates, heldAccountsOf, pickNextUpV2 } from '@/lib/gap/routing/next-up';
-import { buildWorkList, snoozedWork, type WorkCard, type WorkInput } from '@/lib/gap/work/list';
+import { workDay, type WorkCard, type WorkInput } from '@/lib/gap/work/list';
+import { loadUpcomingMeetings, loadWorkCommitments } from '@/lib/gap/work/day-load';
+import { loadAccountPriorities } from '@/lib/gap/work/priority';
 import { loadWorkOutcomes } from '@/lib/gap/work/outcome';
 import { loadPursuitSummaries, warmPursuitSummaries } from '@/lib/gap/pursuit/summary';
 import { loadSendableTheses } from '@/lib/gap/pursuit/load';
@@ -382,9 +384,17 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
   const now = new Date();
   // R15: the summaries come from this instance's memory, then the durable rows (one read), so a cold instance says
   // what the last workspace read said instead of falling back to the lanes.
-  const [summaries, outcomes] = await Promise.all([loadPursuitSummaries(prisma, data.workAccounts, now), loadWorkOutcomes(prisma, data.workAccounts, now).catch(() => new Map())]);
-  const work: WorkCard[] = buildWorkList({ ...data.workInput, now, summaries, outcomes });
-  const snoozed = snoozedWork(outcomes, work, now);
+  // R41: the obligations (after the bounded follow-up sweep), the next day's meetings and the seller's priorities are
+  // read on every render, never cached with the lanes, so a write shows on the next load.
+  const [summaries, outcomes, commitments, meetings] = await Promise.all([
+    loadPursuitSummaries(prisma, data.workAccounts, now),
+    loadWorkOutcomes(prisma, data.workAccounts, now).catch(() => new Map()),
+    lane ? Promise.resolve([]) : loadWorkCommitments(prisma, now).catch(() => []),
+    lane ? Promise.resolve([]) : loadUpcomingMeetings(prisma, now).catch(() => []),
+  ]);
+  const priorities = await loadAccountPriorities(prisma, [...new Set([...data.workAccounts, ...commitments.map((c) => c.accountName)])]).catch(() => new Map());
+  const day = workDay({ ...data.workInput, now, summaries, outcomes, commitments, meetings, priorities });
+  const work: WorkCard[] = day.cards;
   // UX-08 parity: after the response is sent, read the canonical pursuit state for the first few Work accounts
   // that have none remembered (serial, bounded, never blocking a render), so the next Work load says what the
   // workspace says.
@@ -447,7 +457,7 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
       ) : (
         <>
           {/* UX-08: WORK is the landing: the accounts that need the seller, one card each, the lanes as filters. */}
-          <WorkList cards={work} snoozed={snoozed} focus={/^[a-z0-9-]{1,120}$/.test(params.focus ?? '') ? (params.focus as string) : null} listenText={todayListenText(work)} readAt={{ at: read.at, label: read.fromCache ? `Read ${readAgo(read.at, now)}` : 'Read just now' }} />
+          <WorkList cards={work} snoozed={day.snoozed} waiting={day.waiting} counts={day.counts} focus={/^[a-z0-9-]{1,120}$/.test(params.focus ?? '') ? (params.focus as string) : null} listenText={todayListenText(work)} readAt={{ at: read.at, label: read.fromCache ? `Read ${readAgo(read.at, now)}` : 'Read just now' }} />
           {work.length === 0 ? <NextUp items={data.next} /> : null}
         </>
       )}

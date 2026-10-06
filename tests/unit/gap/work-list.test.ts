@@ -4,7 +4,7 @@
  * lists last under In a deal; the chip counts are the filtered contents (N4); search keeps the order.
  */
 import { describe, expect, it } from 'vitest';
-import { buildWorkList, filterWork, snoozedWork, workCounts, type WorkInput } from '@/lib/gap/work/list';
+import { buildWorkList, filterWork, snoozedWork, workCounts, workDay, type WorkInput } from '@/lib/gap/work/list';
 import type { WorkOutcome } from '@/lib/gap/work/outcome';
 import type { NextCandidate } from '@/lib/gap/routing/next-up';
 
@@ -187,8 +187,8 @@ describe('counts and filters', () => {
   it('the chip counts are the filtered contents; the filter and the search keep the Work order', () => {
     const cards = buildWorkList(input());
     const counts = workCounts(cards);
-    expect(counts).toEqual({ all: 8, replies: 2, follow_up: 1, ready: 1, review: 1, research: 1, deals: 2 });
-    for (const f of ['replies', 'follow_up', 'ready', 'review', 'research', 'deals'] as const) expect(filterWork(cards, f, '')).toHaveLength(counts[f]);
+    expect(counts).toEqual({ all: 8, commitments: 0, replies: 2, follow_up: 1, ready: 1, review: 1, research: 1, deals: 2 });
+    for (const f of ['commitments', 'replies', 'follow_up', 'ready', 'review', 'research', 'deals'] as const) expect(filterWork(cards, f, '')).toHaveLength(counts[f]);
     expect(filterWork(cards, 'all', 'pep').map((c) => c.accountName)).toEqual(['PepsiCo']);
     expect(filterWork(cards, 'replies', 'WAL').map((c) => c.accountName)).toEqual(['Walmart Inc.']);
     expect(filterWork(cards, 'all', '').map((c) => c.index)).toEqual([0, 1, 2, 3, 4, 5, 6, 7]);
@@ -219,35 +219,39 @@ describe('outcomes on the Work list (R14)', () => {
   });
 });
 
-describe('a motion in flight on the Work list (R14)', () => {
-  it('a proven send puts the account on Work as FIRST TOUCH IN MOTION with the person, above ready and below a reply or a follow-up; it replaces a cold READY and never a hold', () => {
+describe('a motion in flight on the Work list (R14, as ranked by R41)', () => {
+  // R41 changed one R14 rule on purpose: a first touch that WENT OUT is waiting on the buyer (then on the follow-up's
+  // interval), so it is listed under Waiting, counted, and no longer a card that inflates "needs you". An outstanding
+  // GAP draft is still work (send or discard it) and stays a card.
+  it('a proven send is WAITING (never a cold READY, never dropped); an outstanding draft is a card; a reply or a hold still wins the account', () => {
     const inMotion = new Map([
       ['PepsiCo', { state: 'sent' as const, at: '2026-10-06T14:00:00Z', person: { name: 'Karen Darling', title: 'Senior Director - PBNA Transportation' } }],
       ['Mondelez', { state: 'drafted' as const, at: '2026-10-06T13:00:00Z', person: { name: 'Pat Lee', title: null } }],
       ['Kroger', { state: 'sent' as const, at: '2026-10-05T14:00:00Z', person: null }],
       ['NFI Industries', { state: 'sent' as const, at: '2026-10-05T14:00:00Z', person: null }],
     ]);
-    const cards = buildWorkList(input({ inMotion }));
-    const names = cards.map((c) => c.accountName);
-    const pepsi = cards.find((c) => c.accountName === 'PepsiCo')!;
-    expect(pepsi.state).toBe('First touch in motion: Karen Darling');
-    expect(pepsi.why).toMatch(/got the first touch on Oct 6\. The next person unlocks after 5 business days/);
-    expect(pepsi.stateKind).toBe('ready');
-    expect(pepsi.next).toEqual({ label: 'Open the account', href: '/gap/accounts/pepsico' });
-    const mondelez = cards.find((c) => c.accountName === 'Mondelez')!;
+    const day = workDay(input({ inMotion }));
+    const names = day.cards.map((c) => c.accountName);
+    expect(names).not.toContain('PepsiCo');
+    expect(day.waiting.find((w) => w.accountName === 'PepsiCo')).toMatchObject({ kind: 'motion', title: 'First touch out to Karen Darling', line: 'Sent Oct 6; waiting on their reply. The next person unlocks after 5 business days without one.' });
+    const mondelez = day.cards.find((c) => c.accountName === 'Mondelez')!;
     expect(mondelez.state).toBe('A GAP draft to Pat Lee is outstanding');
-    // Above the lanes' ready cards and the follow-up? Below: the follow-up (H-E-B) and the human reply (NFI) keep their place.
+    expect(mondelez.tier).toBe('ready');
+    // The reply at NFI wins over the motion; Kroger is held by its deal: the motion never lifts the hold.
     expect(names.indexOf('NFI Industries')).toBe(0);
-    expect(names.indexOf('H-E-B')).toBeLessThan(names.indexOf('PepsiCo'));
-    expect(names.indexOf('PepsiCo')).toBeLessThan(names.indexOf('General Mills'));
-    // Kroger is held by its deal: the motion never lifts the hold.
-    expect(cards.find((c) => c.accountName === 'Kroger')?.stateKind).toBe('in_deal');
-    // The reply at NFI wins over the motion.
-    expect(cards.find((c) => c.accountName === 'NFI Industries')?.stateKind).toBe('replied');
-    // A READY summary read before the touch is stale against it; one read after it says what the page says.
+    expect(day.cards.find((c) => c.accountName === 'NFI Industries')?.stateKind).toBe('replied');
+    expect(day.cards.find((c) => c.accountName === 'Kroger')?.stateKind).toBe('in_deal');
+    expect(day.waiting.map((w) => w.accountName)).toEqual(['PepsiCo']);
+    expect(day.counts).toMatchObject({ needsYou: day.cards.length, waiting: 1 });
+    // A READY summary read before the touch is stale against it: still waiting. One read after it agrees: waiting.
     const stale = new Map([['PepsiCo', { accountName: 'PepsiCo', state: 'ready' as const, stateLine: 'Ready for a first touch: Karen Darling', person: { name: 'Karen Darling', title: null }, blocker: null, coldTouchAllowed: true, nextText: 'Prepare the first touch to Karen Darling.', at: '2026-10-06T13:50:00Z' }]]);
-    expect(buildWorkList(input({ inMotion, summaries: stale })).find((c) => c.accountName === 'PepsiCo')?.state).toBe('First touch in motion: Karen Darling');
+    expect(workDay(input({ inMotion, summaries: stale })).cards.map((c) => c.accountName)).not.toContain('PepsiCo');
     const fresh = new Map([['PepsiCo', { ...stale.get('PepsiCo')!, state: 'in_motion' as const, stateLine: 'First touch in motion: Karen Darling', nextText: 'Karen Darling has the first touch.', at: '2026-10-06T14:10:00Z' }]]);
-    expect(buildWorkList(input({ inMotion, summaries: fresh })).find((c) => c.accountName === 'PepsiCo')?.why).toBe('Karen Darling has the first touch.');
+    expect(workDay(input({ inMotion, summaries: fresh })).waiting.map((w) => w.accountName)).toEqual(['PepsiCo']);
+    // A newer summary that says the account is held (a conversation the motion saw) brings the card back.
+    const heldNow = new Map([['PepsiCo', { ...stale.get('PepsiCo')!, state: 'replied' as const, stateLine: 'Someone replied: Karen Darling', blocker: 'Paused: Karen Darling answered.', at: '2026-10-06T15:00:00Z' }]]);
+    const back = workDay(input({ inMotion, summaries: heldNow }));
+    expect(back.cards.find((c) => c.accountName === 'PepsiCo')?.stateKind).toBe('replied');
+    expect(back.waiting.map((w) => w.accountName)).toEqual([]);
   });
 });

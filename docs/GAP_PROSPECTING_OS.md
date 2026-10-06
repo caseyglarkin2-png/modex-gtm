@@ -1154,6 +1154,40 @@ BID and Work suites 8 files / 188 green; typecheck clean. Rollback: revert the c
 else reads the kind). Debt: a meeting accepted by email has no time on record, so its preparation is due at once
 until the seller adds the time.
 
+R41 **Today's work ranked by commercial obligations (DONE).** `work/list.ts` now builds the DAY (`workDay`: cards,
+the Waiting footer, the Snoozed footer and their counts; `buildWorkList` is its cards): the tiers are a buyer
+commitment due today (a deliverable the seller promised, a request the buyer made), an actionable reply (and a
+referral to decide on), a meeting within 24 hours (the Meeting table, read in New York; prepare it), an open deal with
+a step due (deal work on the same card that still says no cold first touch), a follow-up due (and a reminder that came
+back), prepared prospecting (a first touch ready, a GAP draft to send or discard), a proposal to review, research,
+then the admin (an opt-out to record), the seller's own "not today" and the holds. Inside a tier: the due time, then
+the newest buyer activity, then the seller's explicit priority (NEW `work/priority.ts` + `POST /api/gap/accounts/
+priority`: an append-only `account.priority` row with a one-line reason, newest wins, `clear` ends it; it never lifts
+a hold and never puts cold work above a buyer's obligation), then the lane's own order; each card says why it sits
+where it does (`rankWhy`: "A buyer commitment is due: Send the comparison (due today)", "A prepared first touch; you
+prioritized it (their CFO asked)"). Every obligation due today is its own row on its account's card with Done (the
+seller's note is the proof), Snooze (a date) and Skip (a reason) through `/api/gap/commitments`; an account whose only
+work is an obligation gets a card of its own, so no task is silently omitted. Waiting work is counted, never a card:
+an obligation due on a later day, one waiting on someone, a blocked one, and (the one R14 rule changed on purpose) a
+first touch that WENT OUT, which now waits on the buyer and then on its follow-up instead of inflating "needs you"
+(an outstanding GAP draft is still a card). A snooze returns on its date, or early when the buyer moves after it was
+set (a reply before it is not a change); the seller's snooze of an account never hides a buyer obligation due there.
+The counts are the contents: needs you = the cards; obligations due = the rows on them; Waiting and Snoozed count what
+they list; a new "Due" chip filters the cards a commitment, meeting or deal step placed. The Work page reads the
+commitments (after the bounded follow-up sweep, at most once a minute per instance), the next two days' meetings and
+the priorities on every render (`work/day-load.ts`), never cached with the lanes. Proof: `work-rank.test.ts` (6: a
+customer-promised deliverable outranks a new article and the full tier order; the three tie-breaks in order, said on
+the card; waiting never inflates needs you; a snooze returns only when due or materially changed; two obligations on
+one account stay two and every open obligation appears exactly once; a seller snooze never hides a buyer obligation),
+`work-list.test.ts` (the R14 motion case rewritten to the waiting rule, the counts with the Due chip) and
+`work-list-view.test.tsx` (the rank line, the obligation rows with their actions, Done through the route, the Waiting
+footer, the priority); seven deliberate mutations (a research card above a commitment, an upcoming obligation as a
+card, the priority tie-break dropped, a sent touch kept as a card, a snooze hiding a buyer obligation, a snooze
+returning on an older reply, an obligation-only account omitted) each turn their owning test red. Adjacent: 9 files /
+67 green; typecheck clean. Rollback: revert the commit (the commitment and priority rows stay; nothing else reads
+`account.priority`). Debt: Work reads every commitment row on each render (fine at today's volume; the indexed
+projection named in R40 is the step when it grows); a meeting row with no time is placed at 9 am New York on its day.
+
 ## 12. Migration, backfill and rollback
 
 Order of commits inside Sprint 1 and 3: schema + SQL first (no reader), then pure core, then importers (Top100 before PIC before modex legacy), then runtime pin, then services, then queue actions under the flag, then `GAP_OS_ENABLED=true` in Vercel after `verify-triggers.ts` passes against prod (env is snapshot at deploy; redeploy after setting). Before the prod `db push`, preview it with `prisma migrate diff --from-url <prod> --to-schema-datamodel prisma/schema.prisma --script` and confirm the script is additive only; also confirm the prod role can `CREATE FUNCTION` (not yet verified). Rollback: the flag off restores byte-identical behavior instantly; full removal is the rollback SQL plus reverting the runtime, service and queue-action commits; `sequences` is never modified; the only two pre-existing tables GAP OS's schema touches at all are `draft_queue_items` (one nullable `sequence_version_id` stamp, S1-T2) and `inbound_messages` (`source String @default("gmail")` and `hubspot_engagement_id String?`, S2-T1, needed so the reply cron and the HubSpot poller can tell a Gmail-sourced row from a HubSpot-engagement-sourced one and attribute the engagement id idempotently) — both additive-only, both confirmed by the production preflight below; the lane and PIC files are read, never written.

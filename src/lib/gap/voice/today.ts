@@ -21,6 +21,8 @@ const STATE_SPOKEN: Record<WorkCard['stateKind'], string> = {
   in_deal: 'in a deal',
   unknown_deal: 'held, HubSpot could not be checked',
   held: 'held',
+  committed: 'a commitment to the buyer is due',
+  meeting: 'a meeting to prepare',
 };
 
 function whyForTheEar(c: WorkCard): string {
@@ -32,13 +34,15 @@ function whyForTheEar(c: WorkCard): string {
 export function todayListenText(cards: readonly WorkCard[], opts: { max?: number; now?: Date } = {}): string {
   const max = opts.max ?? TODAY_MAX_ACCOUNTS;
   if (cards.length === 0) return 'Today. Nothing needs you right now. Replies, follow ups, ready accounts and new angles show up here.';
-  const counts = { replied: 0, opted_out: 0, bounced: 0, follow_up: 0, ready: 0, decide: 0, research: 0, hold: 0 };
+  const counts = { committed: 0, meeting: 0, replied: 0, opted_out: 0, bounced: 0, follow_up: 0, ready: 0, decide: 0, research: 0, hold: 0 };
   for (const c of cards) {
     if (c.stateKind === 'in_deal' || c.stateKind === 'unknown_deal' || c.stateKind === 'held') counts.hold += 1;
     else counts[c.stateKind] += 1;
   }
   // Every kind is counted, so the headline adds up to the list.
   const headline = [
+    counts.committed ? `${counts.committed} buyer ${counts.committed === 1 ? 'commitment' : 'commitments'} due` : null,
+    counts.meeting ? `${counts.meeting} ${counts.meeting === 1 ? 'meeting' : 'meetings'} to prepare` : null,
     counts.replied ? `${counts.replied} ${counts.replied === 1 ? 'reply' : 'replies'} to read` : null,
     counts.opted_out ? `${counts.opted_out} opt-out${counts.opted_out === 1 ? '' : 's'} to record` : null,
     counts.bounced ? `${counts.bounced} failed address${counts.bounced === 1 ? '' : 'es'}` : null,
