@@ -11,6 +11,7 @@ import type { AccountContext } from '../context/context';
 import { listQueue } from '../routing/queue';
 import { cockpitOpenHref } from '../routing/card-readiness';
 import { laneWithMotion, loadCockpitMotions } from '../motion/cockpit';
+import { MOTION_UNLOCK_BUSINESS_DAYS } from '../motion/account-motion';
 import { loadMotionChoices } from '../motion/load';
 import { loadAnchorChoices } from '../motion/persona-angle';
 import { loadSellerPreferences } from '../people/seller-preference';
@@ -85,6 +86,20 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
 
   const choice = choices.get(accountName) ?? null;
   const od = inputs.firstTouches.find((t) => t.state === 'draft outstanding') ?? null;
+  // R10 parity: a proven GAP first touch inside the unlock window IS the motion, cockpit card or not (after a send the
+  // card is acted and the queue read may hold nothing for the account, while the ledger holds the touch). The brief
+  // already says "In motion" from the same ledger; the pursuit state must not read research over it.
+  let motion = mine;
+  if ((!motion || motion.state === 'idle') && !od) {
+    const windowMs = (MOTION_UNLOCK_BUSINESS_DAYS + 2) * 86_400_000;
+    const sent = inputs.firstTouches
+      .filter((t) => t.state === 'sent' && t.sentAt && now.getTime() - new Date(t.sentAt).getTime() < windowMs)
+      .sort((a, b) => String(b.sentAt).localeCompare(String(a.sentAt)))[0];
+    if (sent && typeof sent.personaId === 'number') {
+      const who = inputs.personas.find((p) => p.id === sent.personaId);
+      if (who) motion = { accountName, state: 'in_motion', primary: { cardId: '', personaId: who.id, name: who.name, title: who.title ?? null, email: sent.recipient, reason: 'the first touch was sent to them' }, next: null, alsoWaiting: [], heldCardIds: [], headline: `In motion: ${who.name} got a first touch on ${String(sent.sentAt).slice(0, 10)}. One cold email motion at a time.` } as unknown as typeof mine;
+    }
+  }
   const restriction = ctx.relationship.restriction;
 
   const input: PursuitInput = {
@@ -94,7 +109,7 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
     opportunity: inputs.opportunity ?? { status: 'UNKNOWN', detail: 'opportunity truth not read', deals: [] },
     restriction: restriction ? { kind: restriction.kind, introducer: restriction.introducer, route: restriction.route } : null,
     familyHold: brief.family?.hold ? { detail: brief.family.hold.detail } : null,
-    motion: mine ? { state: mine.state, primary: mine.primary ? { personaId: mine.primary.personaId, name: mine.primary.name, title: mine.primary.title } : null, next: mine.next ? { personaId: mine.next.personaId, name: mine.next.name, title: mine.next.title, unlock: mine.next.unlock } : null, headline: mine.headline } : null,
+    motion: motion ? { state: motion.state, primary: motion.primary ? { personaId: motion.primary.personaId, name: motion.primary.name, title: motion.primary.title } : null, next: motion.next ? { personaId: motion.next.personaId, name: motion.next.name, title: motion.next.title, unlock: motion.next.unlock } : null, headline: motion.headline } : null,
     choice: choice ? { personaId: choice.primaryPersonaId, by: choice.by, at: choice.at, source: 'motion' } : null,
     activePersona: assigned,
     replies,

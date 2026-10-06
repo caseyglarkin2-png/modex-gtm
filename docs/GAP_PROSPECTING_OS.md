@@ -854,7 +854,42 @@ with a reason) and the family question; NEXT names the proposal; `pursuit/load.t
 with only a thesis under review as Ready (parity with Work's cold card). Observed: on the scratch server the whole
 loop ran through the browser (set the family -> under review -> Approve and use -> "Ready for a first touch: Tom
 Scratch", "Prepare the email to Tom"; the second story drafted lands under review and is NOT approved: one motion per
-account) and the Work card read Ready. R10, R13, R14, R15: next.
+account) and the Work card read Ready.
+
+R10 **The shared actionable result (DONE):** `pursuit/actionable.ts` derives from the one pursuit state and its NEXT
+the intent (reply, opt-out, deal, hold, follow-up, in motion, warm touch, cold first touch, review a proposal,
+choose, research), the person, the one allowed action, the blocker, the preparation (ready, under review,
+incomplete, none) and the completion event; the account page derives it once and remembers it with the summary;
+Work's card takes the summary's allowed action and preparation. Identical state yields the identical move on both
+surfaces; a held account carries no cold action anywhere (`actionable.test.ts`); the cold-card rule stays
+conservative (never READY without the database's own chosen person and usable thesis; never a cold action on a
+held account). Two HubSpot reads remain (the page's resolver; the cockpit's In Deals summary) and now agree on the
+corpus once the summary serves both legs (the stub's deal associations use HubSpot's `from` key).
+R13 **Approval bound across the right boundaries (DONE, verified):** `tests/unit/gap/scratch/send-spine.scratch.
+test.ts` runs the real send route, gates, compiler, ledger and Postgres with the boundaries controlled (the sink as
+the mailbox, an in-process clawd stub for autonomy, suppression and the critic, the scratch opportunity reader): the
+preview binds the recipient and the exact rendered copy (a content hash, so a refresh never demands a second
+approval); a changed recipient or copy is refused; a suppressed recipient is refused at the wire; a buyer reply
+between preview and confirm makes the card stale and the confirm is refused; a real address is refused by the sink
+before any network call and recorded; CONFIRM + SEND writes exactly one message, one DIRECT_SENT row and one
+EmailLog row; a replayed confirm answers ALREADY SENT and writes nothing. All send paths share the wire
+(`gmail-sender.ts`). Under the sink, the Sent-folder read for a first touch GAP did not record reads the sink.
+R14 **An outcome, not a navigation event (DONE):** `work/outcome.ts` + `POST /api/gap/accounts/outcome` record
+skipped (until tomorrow), snoozed (until the seller's date, within 90 days) and logged outside GAP as append-only
+`account.work_outcome` rows; Work drops a snoozed account to a footer and ranks a skipped or logged one last with
+its line; a reply or an opt-out is never hidden by a seller note; the Done/Next bar keeps its plain links (Next
+account records nothing, pinned) and adds the three controls that record first, then move on. Sent, drafted, failed
+and unknown sends stay with the execution ledger (a lost answer leaves the claim open: outcome unknown, never a
+resend; `unknown-send-reconcile` reads Sent for truth). Observed on the scratch server through the browser: Skip ->
+"Skipped for today, you, today. Moving to the next account." -> Work shows the card last with the line; Snooze ->
+the footer "Snoozed (1): back on their dates".
+R15 **The working panel without the blocking read (DONE, measured on the production build at the gate):**
+`pursuit/summary.ts` now keeps the summaries in memory AND one durable `system_config` row per account
+(`gap:pursuit:<account>`; source: the page's own pursuit read; rebuild: any visit or the warmer; owner: that
+module), read on a miss, so a cold instance's Work says what the last read said and the account shell shows the
+last-known state (up to a day old, labeled with its age); `forgetPursuitSummary` drops both layers after an
+outcome, a decision or a choice. Display state only: no send, draft or enroll path reads it. The full account read
+itself is unchanged (R61 owns its speed).
 
 ## 12. Migration, backfill and rollback
 
