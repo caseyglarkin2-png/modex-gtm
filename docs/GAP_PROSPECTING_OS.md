@@ -1335,6 +1335,24 @@ removed on the scratch database) each turn their owning test red. Rollback: reve
 Debt: the preview carries no pursuit summaries (they are fresh for 15 minutes of the real clock), so its cards speak
 the lanes' words; "owed to buyers" lists every open buyer obligation, not only those due this week.
 
+**Sprint 4 batch gate (2026-10-06; R40 to R45).** Exit met on the scratch harness: replies, follow-ups, meetings,
+buyer obligations and prepared prospecting form one persistent, explainable daily queue, and a mixed session resumes
+correctly the next day. The full GAP suite 363 files / 5,350 tests green; the rest of the repository 325 files /
+2,288 green (one skipped); typecheck clean; eslint on the 51 changed TypeScript files: the 20 remaining errors are
+identical at the pre-batch commit (the house `prisma: any` signatures in `disposition/service.ts` and
+`replies/list.ts`, the mock generics in `contract-parity.test.ts`). Scratch, on a freshly rebuilt database, one file at
+a time: `anchor-draft` 6, `job-led-send` 5, `send-spine` 8, `work-day` 6 (25 / 25). Browser receipt: scratchpad
+`r45-journey/` (Work -> reply -> Capture -> the obligation -> tomorrow). Deliberate mutations across the batch: 39,
+each turning its owning test red (two on the scratch database). Production: nothing written, no flag changed, no
+send, no paid call. Deploy notes: no schema change and no new table (the new ledger kinds are `account.commitment`
+and `account.priority`); the `gap-mailbox` cron report gains `followUpsFromSent`; the first Work load after deploy
+runs the follow-up sweep over the last 30 days of proven sends (it creates waiting follow-ups, writes nothing else).
+Carried debt (each recorded in its entry): the indexed commitment projection when the rows grow; pattern reads for
+names, asks and obligations in replies and notes (the seller confirms them); no reply copy family and no follow-up copy
+family (both fail closed); no next follow-up proposed after a by-hand one; the tomorrow preview speaks the lanes' words;
+a meeting accepted by email has no time on record; three pre-existing backspace-mangled patterns outside this sprint
+(`story/propose-family.ts` line 49, `entity/providers.ts` `modelGone`, `hubspot-poller.test.ts` lines 708 to 710).
+
 ## 12. Migration, backfill and rollback
 
 Order of commits inside Sprint 1 and 3: schema + SQL first (no reader), then pure core, then importers (Top100 before PIC before modex legacy), then runtime pin, then services, then queue actions under the flag, then `GAP_OS_ENABLED=true` in Vercel after `verify-triggers.ts` passes against prod (env is snapshot at deploy; redeploy after setting). Before the prod `db push`, preview it with `prisma migrate diff --from-url <prod> --to-schema-datamodel prisma/schema.prisma --script` and confirm the script is additive only; also confirm the prod role can `CREATE FUNCTION` (not yet verified). Rollback: the flag off restores byte-identical behavior instantly; full removal is the rollback SQL plus reverting the runtime, service and queue-action commits; `sequences` is never modified; the only two pre-existing tables GAP OS's schema touches at all are `draft_queue_items` (one nullable `sequence_version_id` stamp, S1-T2) and `inbound_messages` (`source String @default("gmail")` and `hubspot_engagement_id String?`, S2-T1, needed so the reply cron and the HubSpot poller can tell a Gmail-sourced row from a HubSpot-engagement-sourced one and attribute the engagement id idempotently) — both additive-only, both confirmed by the production preflight below; the lane and PIC files are read, never written.
