@@ -11,7 +11,7 @@ import { loadPursuit } from '../pursuit/load';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
 
-export const CALL_PURSUIT_TIMEOUT_MS = 25_000;
+export const CALL_PURSUIT_TIMEOUT_MS = 45_000;
 export const CALL_HOLD_STATES: ReadonlySet<string> = new Set(['replied', 'opted_out', 'in_deal', 'held']);
 
 export interface CallPursuit {
