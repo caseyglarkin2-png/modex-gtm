@@ -259,7 +259,14 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
     }
     // A research account with a checked fact and no thesis: the unblocking move is the draft on this page, not the
     // analyst's research plan (the review: NEXT left the workspace while the draft sat collapsed on it).
-    if (pursuitNext && pursuit?.state.state === 'research' && anchor && anchor.draftable.length > 0) {
+    if (pursuitNext && pursuit?.state.state === 'research' && anchor && anchor.pending.length > 0) {
+      // R12: a proposal in progress is reviewed where the action lives, never in a lane.
+      const incomplete = anchor.pending.filter((x) => !x.familyKnown).length;
+      pursuitNext.text = incomplete
+        ? `${incomplete === 1 ? 'One proposal' : `${incomplete} proposals`} below ${incomplete === 1 ? 'needs' : 'need'} one answer: which problem the fact points at. Set it and the thesis goes to review; approve it and the first touch is prepared.`
+        : `${anchor.pending.length === 1 ? 'One proposal' : `${anchor.pending.length} proposals`} below ${anchor.pending.length === 1 ? 'is' : 'are'} waiting for your review: approve it and the first touch is prepared, or set it aside.`;
+      pursuitNext.control = { href: '#outreach-anchor', label: incomplete ? 'Complete the proposal' : 'Review the proposal' };
+    } else if (pursuitNext && pursuit?.state.state === 'research' && anchor && anchor.draftable.length > 0) {
       pursuitNext.text = `${anchor.draftable.length === 1 ? 'One checked fact' : `${anchor.draftable.length} checked facts`} can become a thesis: draft it from the opening story below; review grounds it, then the first touch is prepared.`;
       pursuitNext.control = { href: '#outreach-anchor', label: 'Draft a thesis from the checked fact' };
     }

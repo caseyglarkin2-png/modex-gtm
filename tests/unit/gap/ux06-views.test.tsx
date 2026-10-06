@@ -38,7 +38,9 @@ const anchor: OutreachAnchor = {
     { hypothesisId: 'h-brazil', status: 'active', observation: 'General Mills entered into an agreement to sell its business in Brazil.', factIds: ['f-brazil'], basis: 'sec.gov, Sep 23, 2026', relevance: { tier: 'none', why: 'runs transportation, which the fact does not touch' }, factLabel: 'a divestiture', problem: 'My guess is that...', usable: false, unusableWhy: 'the angle needs your review: it opens on activity outside the North America network' },
   ],
   draftable: [{ story: 'PepsiCo is ceasing operations at a bottling plant in Maryland.', sourceLabel: 'fooddive.com, Sep 16, 2026', sourceUrl: 'https://fooddive.com/x', factId: 'f-plant', proposedObservation: 'fooddive.com: "PepsiCo is ceasing operations at a bottling plant in Maryland" [S:f-plant].' }],
+  pending: [],
 };
+const pendingItem = { hypothesisId: 'h-pend', status: 'review_required' as const, factId: 'f-tulsa', story: 'PepsiCo will close its warehouse operations at its Tulsa production facility.', sourceLabel: 'supplychaindive.com, Jul 23, 2026', sourceUrl: 'https://supplychaindive.com/t', observation: 'PepsiCo to cease warehouse operations: "PepsiCo will close its warehouse operations at its Tulsa production facility".', observationRaw: 'PepsiCo to cease warehouse operations: "PepsiCo will close its warehouse operations at its Tulsa production facility" [S:f-tulsa].', problem: 'My guess is that the closure moves load onto the sites that remain.', wouldProveWrong: ['Did dwell at the remaining sites change?'], family: 'hidden_capacity', familyKnown: true, personaId: 1, personName: 'Karen Darling', gate: 'sendable' as const };
 
 beforeEach(() => {
   refresh.mockReset();
@@ -85,10 +87,9 @@ describe('the outreach anchor block', () => {
     expect(screen.queryByTestId('anchor-use-story')).toBeNull();
     expect(screen.getByTestId('anchor-alternative')).toBeInTheDocument();
   });
-  it('Draft + review opens a prefilled form (story, source, proposed observation) and submits through the hypothesis authority, then submit for review', async () => {
+  it('Draft + review opens a prefilled form (story, source, proposed observation) and posts ONE call to the draft service, which derives the family and submits; the proposal then reads as under review here', async () => {
     const fetchMock = vi.spyOn(globalThis, 'fetch')
-      .mockResolvedValueOnce({ ok: true, status: 201, json: async () => ({ id: 'h-new', status: 'draft' }) } as Response)
-      .mockResolvedValueOnce({ ok: true, status: 200, json: async () => ({ id: 'h-new', status: 'review_required' }) } as Response);
+      .mockResolvedValueOnce({ ok: true, status: 201, json: async () => ({ ok: true, hypothesisId: 'h-new', status: 'review_required', existing: false, existingVia: null, family: 'hidden_capacity', familyBasis: 'a site closure or consolidation moves load onto the physical handoffs that remain', preparation: 'submitted', missing: [], submitRefusal: null }) } as Response);
     render(<OutreachAnchorView accountName="PepsiCo" anchor={anchor} coldTouchAllowed />);
     fireEvent.click(screen.getByTestId('anchor-draft-open'));
     const form = screen.getByTestId('anchor-draft-form');
@@ -101,18 +102,80 @@ describe('the outreach anchor block', () => {
     expect(screen.getByLabelText('Our guess (hedged)')).toHaveAttribute('aria-describedby');
     expect(screen.getByTestId('anchor-draft-submit').textContent).toBe('Submit for review');
     fireEvent.click(screen.getByTestId('anchor-draft-submit'));
-    await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(2));
-    expect(fetchMock.mock.calls[0][0]).toBe('/api/gap/hypotheses');
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(1));
+    expect(fetchMock.mock.calls[0][0]).toBe('/api/gap/story/draft');
     const body = JSON.parse(String(fetchMock.mock.calls[0][1]!.body));
-    expect(body).toMatchObject({ accountName: 'PepsiCo', primaryPersonaId: 1, persona: 'transportation', problemFamily: 'unmapped', signalIds: ['f-plant'] });
+    // Never `problemFamily: 'unmapped'` on the submit path: the service derives it or asks.
+    expect(body).toMatchObject({ accountName: 'PepsiCo', factId: 'f-plant', personaId: 1, persona: 'transportation', problemFamily: null });
     expect(body.observation).toMatch(/\[S:f-plant\]\.$/);
-    expect(fetchMock.mock.calls[1][0]).toBe('/api/gap/hypotheses/h-new');
-    expect(JSON.parse(String(fetchMock.mock.calls[1][1]!.body))).toEqual({ action: 'submit' });
-    await waitFor(() => expect(screen.getByTestId('anchor-drafted').textContent).toMatch(/submitted for review/));
-    expect(screen.getByTestId('anchor-drafted').querySelector('a')).toHaveAttribute('href', '/gap?lane=review');
+    expect(body.falsificationQuestions.length).toBeGreaterThan(0);
+    await waitFor(() => expect(screen.getByTestId('anchor-drafted').textContent).toMatch(/under review above/));
+    expect(screen.getByTestId('anchor-note').textContent).toMatch(/Drafted and under review below for Karen.*Nothing is sent/);
+    expect(screen.getByTestId('anchor-drafted').querySelector('a')).toHaveAttribute('href', '#outreach-anchor');
+    expect(refresh).toHaveBeenCalled();
+  });
+  it('an incomplete proposal asks the one question (the problem family) and submits through the same service; a refused fact drafts nothing', async () => {
+    const fetchMock = vi.spyOn(globalThis, 'fetch')
+      .mockResolvedValueOnce({ ok: true, status: 201, json: async () => ({ ok: true, hypothesisId: 'h-inc', status: 'draft', existing: false, family: 'unmapped', familyBasis: null, preparation: 'incomplete', missing: ['problem_family'], submitRefusal: null }) } as Response);
+    const { rerender } = render(<OutreachAnchorView accountName="PepsiCo" anchor={anchor} coldTouchAllowed />);
+    fireEvent.click(screen.getByTestId('anchor-draft-open'));
+    fireEvent.click(screen.getByTestId('anchor-draft-submit'));
+    await waitFor(() => expect(screen.getByTestId('anchor-note').textContent).toMatch(/One thing is missing: which problem this fact points at/));
+    // The page re-renders with the proposal in progress: the family chooser, no approve button.
+    rerender(<OutreachAnchorView accountName="PepsiCo" anchor={{ ...anchor, pending: [{ ...pendingItem, hypothesisId: 'h-inc', status: 'draft', family: 'unmapped', familyKnown: false, gate: 'not_judged' }] }} coldTouchAllowed />);
+    const item = screen.getByTestId('anchor-pending');
+    expect(item.textContent).toMatch(/Proposal: one thing missing/);
+    expect(screen.queryByTestId('anchor-pending-approve')).toBeNull();
+    fetchMock.mockResolvedValueOnce({ ok: true, status: 200, json: async () => ({ ok: true, hypothesisId: 'h-inc', status: 'review_required', existing: true, family: 'hidden_capacity', familyBasis: 'chosen by you', preparation: 'submitted', missing: [], submitRefusal: null }) } as Response);
+    fireEvent.change(screen.getByTestId('anchor-pending-family-select'), { target: { value: 'hidden_capacity' } });
+    fireEvent.click(screen.getByTestId('anchor-pending-set-family'));
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(2));
+    const body = JSON.parse(String(fetchMock.mock.calls[1][1]!.body));
+    expect(body).toMatchObject({ factId: 'f-tulsa', problemFamily: 'hidden_capacity' });
+    expect(body.observation).toMatch(/\[S:f-tulsa\]\.$/);
+    await waitFor(() => expect(screen.getByTestId('anchor-note').textContent).toMatch(/under review below/));
+    // A fact the send gate refuses: nothing drafted, said in words.
+    fetchMock.mockResolvedValueOnce({ ok: false, status: 409, json: async () => ({ error: 'fact_not_outreach_evidence', detail: 'third_party_statement' }) } as Response);
+    fireEvent.click(screen.getByTestId('anchor-draft-open'));
+    fireEvent.click(screen.getByTestId('anchor-draft-submit'));
+    await waitFor(() => expect(screen.getByRole('alert').textContent).toMatch(/would be refused by the send gate \(third_party_statement\): nothing was drafted/));
+  });
+  it('a proposal under review is reviewed where the action lives: the opening sentence, the guess, the person, the family and the gate read; APPROVE AND USE runs the audited advance; NOT THIS STORY withdraws with a reason', async () => {
+    const fetchMock = vi.spyOn(globalThis, 'fetch')
+      .mockResolvedValueOnce({ ok: true, status: 200, json: async () => ({ hypothesisId: 'h-pend', ok: true, from: 'review_required', to: 'active', detail: 'approved and in use' }) } as Response)
+      .mockResolvedValueOnce({ ok: true, status: 200, json: async () => ({ from: 'review_required', to: 'rejected', effects: [] }) } as Response);
+    render(<OutreachAnchorView accountName="PepsiCo" anchor={{ ...anchor, primary: null, primaryBy: null, whyTheyCare: null, pending: [pendingItem] }} coldTouchAllowed />);
+    expect(screen.getByTestId('anchor-none').textContent).toMatch(/A proposal below is waiting for your review/);
+    const item = screen.getByTestId('anchor-pending');
+    expect(item).toHaveAttribute('data-status', 'review_required');
+    expect(item.textContent).toMatch(/Proposal under review/);
+    expect(screen.getByTestId('anchor-pending-observation').textContent).toMatch(/Tulsa production facility/);
+    expect(item.textContent).toMatch(/For.*Karen Darling/s);
+    expect(screen.getByTestId('anchor-pending-family').textContent).toBe('hidden capacity');
+    expect(item.textContent).toMatch(/Send gate.*would let this opening out/s);
+    expect(item.textContent).toMatch(/Would prove wrong.*remaining sites/s);
+    expect(item.textContent).toMatch(/Nothing is sent/);
+    fireEvent.click(screen.getByTestId('anchor-pending-approve'));
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(1));
+    expect(fetchMock.mock.calls[0][0]).toBe('/api/gap/hypotheses/h-pend');
+    expect(JSON.parse(String(fetchMock.mock.calls[0][1]!.body))).toEqual({ advance: 'approve_and_use' });
+    await waitFor(() => expect(screen.getByTestId('anchor-note').textContent).toMatch(/Approved and in use for Karen.*separate step/));
+    fireEvent.click(screen.getByTestId('anchor-pending-withdraw'));
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(2));
+    expect(JSON.parse(String(fetchMock.mock.calls[1][1]!.body))).toMatchObject({ action: 'withdraw', reason: expect.stringMatching(/not this story/) });
+    await waitFor(() => expect(screen.getByTestId('anchor-note').textContent).toMatch(/Set aside/));
+  });
+  it('a refused approval says why in words and changes nothing; under a hold the approve control is disabled', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce({ ok: false, status: 409, json: async () => ({ hypothesisId: 'h-pend', ok: false, from: 'review_required', to: 'review_required', detail: 'approve refused: evidence_insufficient', reason: 'evidence_insufficient' }) } as Response);
+    const { unmount } = render(<OutreachAnchorView accountName="PepsiCo" anchor={{ ...anchor, pending: [pendingItem] }} coldTouchAllowed />);
+    fireEvent.click(screen.getByTestId('anchor-pending-approve'));
+    await waitFor(() => expect(screen.getByRole('alert').textContent).toMatch(/Not approved: The send gate would refuse this opening/));
+    unmount();
+    render(<OutreachAnchorView accountName="PepsiCo" anchor={{ ...anchor, pending: [pendingItem] }} coldTouchAllowed={false} />);
+    expect(screen.getByTestId('anchor-pending-approve')).toBeDisabled();
   });
   it('a title-shaped observation is refused in plain words and nothing is submitted', async () => {
-    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce({ ok: false, status: 422, json: async () => ({ error: 'title_shaped_observation' }) } as Response);
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce({ ok: false, status: 409, json: async () => ({ error: 'title_shaped_observation' }) } as Response);
     render(<OutreachAnchorView accountName="PepsiCo" anchor={anchor} coldTouchAllowed />);
     fireEvent.click(screen.getByTestId('anchor-draft-open'));
     fireEvent.click(screen.getByTestId('anchor-draft-submit'));

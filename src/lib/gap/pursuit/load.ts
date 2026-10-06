@@ -134,6 +134,12 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
   if (state.state === 'choose_person' && sendableTheses && usableTheses.length === 0) {
     state = { ...state, state: 'research', stateLine: `Research: no usable angle to open on yet${state.stateLine.includes('eligible') ? ` (${state.stateLine.replace(/^.*\((\d+ eligible)\).*$/, '$1')})` : ''}`, coldTouchAllowed: false, blocker: `No thesis the send gate would let out grounds a first touch at ${accountName} yet. The people below stand; the angle is what is missing.`, unlock: 'A verified fact and an approved angle.' };
   }
+  // Execution recovery R10/R12: a chosen GAP person with NO usable thesis is not Ready either (Work's cold card never
+  // says Ready without one): the account is research with the person kept, and a proposal under review is the move.
+  if (state.state === 'ready' && state.person?.personaId != null && !/^Relationship-led/.test(state.stateLine) && sendableTheses && usableTheses.length === 0) {
+    const underReview = inputs.hypotheses.some((h) => h.status === 'review_required' || h.status === 'draft');
+    state = { ...state, state: 'research', stateLine: underReview ? `Research: a proposal is under review for ${state.person.name}` : `Research: no usable angle to open on yet for ${state.person.name}`, coldTouchAllowed: false, blocker: underReview ? `A thesis for ${state.person.name} is waiting for your review on this page; the first touch is prepared once it is approved.` : `No thesis the send gate would let out grounds a first touch at ${accountName} yet. ${state.person.name} stands; the angle is what is missing.`, unlock: underReview ? 'Approve the proposal on this page.' : 'A verified fact and an approved angle.' };
+  }
   const topUsable = brief.hypotheses.find((h) => usableTheses.includes(h.id)) ?? null;
   return { state, resolution, stack, hypothesisId: anchoredOpen?.id ?? topUsable?.id ?? null, anchorChoice, sendableTheses, usableTheses, ready: readyTargetOf(mine) };
 }
