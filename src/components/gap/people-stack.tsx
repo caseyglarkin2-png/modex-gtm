@@ -50,7 +50,12 @@ export interface PeopleStackViewProps {
   setAsideCaveats?: Array<{ text: string; tag: string }>;
 }
 
-type Busy = { key: string; step: 'adding' | 'choosing' } | null;
+type Busy = { key: string; step: 'adding' | 'choosing' | 'next' | 'preference' | 'employment' | 'verify' } | null;
+/** UX-07: every seller decision reads back in one line with Undo in place; nothing is sent by any of them. */
+type Note = { kind: 'status' | 'alert'; text: string; undo?: { label: string; run: () => Promise<void> } };
+const NOT_NOW_DEFAULT_DAYS = 30;
+const dateInput = (d: Date) => d.toISOString().slice(0, 10);
+const sayDate = (s: string) => new Date(s).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' });
 
 const BTN = 'inline-flex min-h-11 items-center justify-center rounded-md px-3 text-sm font-medium';
 const PRIMARY = `${BTN} bg-[var(--primary)] text-[var(--primary-foreground)] hover:opacity-90 disabled:opacity-60`;
@@ -67,7 +72,7 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
   const [open, setOpen] = useState<Set<string>>(new Set());
   const [showAll, setShowAll] = useState(false);
   const [busy, setBusy] = useState<Busy>(null);
-  const [note, setNote] = useState<{ kind: 'status' | 'alert'; text: string } | null>(null);
+  const [note, setNote] = useState<Note | null>(null);
   const toggle = (key: string) => setOpen((prev) => { const n = new Set(prev); if (n.has(key)) n.delete(key); else n.add(key); return n; });
   // After a choice the chosen row re-renders at the top and the Choose button unmounts: focus follows the person
   // (WCAG 2.4.3), never falls to the page body.
@@ -118,6 +123,52 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
     }
   }
 
+  /** One POST, one read-back line, Undo in place. Nothing here sends: every control is a recorded decision. */
+  async function decide(row: StackRow, step: NonNullable<Busy>['step'], url: string, body: Record<string, unknown> | null, said: string, undo?: { label: string; url: string; body: Record<string, unknown> | null }, what = 'record that') {
+    setNote(null);
+    setBusy({ key: row.key, step });
+    try {
+      const res = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: body ? JSON.stringify(body) : undefined });
+      const answer = (await res.json().catch(() => ({}))) as { error?: string; verification?: { verdict?: string; company?: string | null; title?: string | null } };
+      if (!res.ok) {
+        setNote({ kind: 'alert', text: `Could not ${what} for ${row.name} (${answer.error ?? res.status}). Nothing changed.` });
+        return;
+      }
+      const verdict = answer.verification?.verdict ? ` ${answer.verification.verdict.replace(/_/g, ' ')}${answer.verification.title ? ` (${answer.verification.title}${answer.verification.company ? `, ${answer.verification.company}` : ''})` : ''}.` : '';
+      setNote({
+        kind: 'status',
+        text: `${said}${verdict} Nothing is sent.`,
+        undo: undo ? { label: undo.label, run: () => decide(row, step, undo.url, undo.body, `Undone: ${said.replace(/\.$/, '')} no longer stands.`) } : undefined,
+      });
+      router.refresh();
+    } catch (e) {
+      setNote({ kind: 'alert', text: e instanceof Error ? e.message : 'network error' });
+    } finally {
+      setBusy(null);
+    }
+  }
+  const account = accountName.replace(/\.$/, '');
+  const first = (name: string) => name.split(' ')[0];
+  /** Make next: the motion's NEXT IF NO RESPONSE person, recorded on the motion row with the chosen primary. */
+  const makeNext = (row: StackRow) => {
+    const primary = state.person?.personaId;
+    if (!primary || row.personaId === null) return;
+    return decide(row, 'next', '/api/gap/accounts/motion', { accountName, primaryPersonaId: primary, nextPersonaId: row.personaId }, `${first(row.name)} is next at ${account} only, after ${state.person ? first(state.person.name) : 'the chosen person'} if no response.`, { label: 'Undo', url: '/api/gap/accounts/motion', body: { accountName, primaryPersonaId: primary, nextPersonaId: null } }, 'make next');
+  };
+  const prefer = (row: StackRow, kind: 'not_a_fit' | 'not_now', reason: string, until: string | null) => {
+    if (row.personaId === null) return;
+    const url = `/api/gap/personas/${row.personaId}/preference`;
+    const said = kind === 'not_now' && until ? `${first(row.name)} is set aside at ${account} until ${sayDate(until)}${reason ? ` (${reason})` : ''}.` : `${first(row.name)} is set aside at ${account} as not a fit${reason ? ` (${reason})` : ''}.`;
+    return decide(row, 'preference', url, { kind, reason: reason || null, until }, said, { label: 'Undo', url, body: { kind: 'clear' } }, 'set aside');
+  };
+  const clearPreference = (row: StackRow) => (row.personaId === null ? undefined : decide(row, 'preference', `/api/gap/personas/${row.personaId}/preference`, { kind: 'clear' }, `${first(row.name)} is back among the eligible people at ${account}.`, undefined, 'undo the set-aside'));
+  const employment = (row: StackRow, status: 'left' | 'role_changed') => {
+    if (row.personaId === null) return;
+    const url = `/api/gap/personas/${row.personaId}/employment`;
+    return decide(row, 'employment', url, { status }, status === 'left' ? `${first(row.name)} is recorded as having left ${account}: no first touch to them.` : `${first(row.name)}'s role is recorded as changed at ${account}: verify before any first touch.`, { label: 'Undo', url, body: { status: 'current' } }, 'record that');
+  };
+  const verifyRole = (row: StackRow) => (row.personaId === null ? undefined : decide(row, 'verify', `/api/gap/personas/${row.personaId}/employment/verify`, null, `Role check for ${first(row.name)}:`, undefined, 'verify the role'));
+
   const chosenRow = stack.rows.find((r) => r.chosen) ?? null;
   const rows = showAll ? [...stack.rows, ...stack.more] : stack.rows;
   // A relationship-led account: the person you met or the introducer leads, and they are not an owner-resolution row.
@@ -164,6 +215,80 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
     ) : (
       <span className="text-xs text-[var(--muted-foreground)]" data-testid="people-stack-slot-only">Not a cold first touch: unlocks by a meeting, a referral or your explicit choice.</span>
     );
+  // UX-07: the seller's priority controls on an eligible GAP contact who is not the chosen person, only while a cold
+  // touch is a live choice (never under a reply, an opt-out, a deal or a hold: the heading already says so).
+  const priorityControls = (row: StackRow) => {
+    if (!choosing || row.chosen || row.personaId === null || !row.coldEligible) return null;
+    const b = busy?.key === row.key ? busy.step : null;
+    const canNext = !!state.person?.personaId && !row.isNext && !row.preference;
+    return (
+      <>
+        {canNext ? (
+          <button type="button" className={TEXT} disabled={busy !== null} onClick={() => void makeNext(row)} data-testid="people-stack-make-next" aria-describedby={`reason-${row.key}`}>
+            {b === 'next' ? 'Recording...' : 'Make next'}
+          </button>
+        ) : null}
+        {row.preference ? (
+          <span className="text-xs text-amber-700 dark:text-amber-400" data-testid="people-stack-preference">
+            {row.preference.line}{' '}
+            <button type="button" className={TEXT} disabled={busy !== null} onClick={() => void clearPreference(row)} data-testid="people-stack-preference-undo">
+              {b === 'preference' ? 'Undoing...' : 'Undo'}
+            </button>
+          </span>
+        ) : (
+          <details className="group basis-full text-xs" data-testid="people-stack-more-controls">
+            <summary className="inline-flex min-h-9 cursor-pointer list-none items-center text-xs text-[var(--muted-foreground)] underline marker:content-none">
+              <span className="group-open:hidden">Set aside or correct</span>
+              <span className="hidden group-open:inline">Hide set aside or correct</span>
+            </summary>
+            <div className="mt-1 flex flex-col gap-2 rounded-md border border-[var(--border)] p-2 sm:flex-row sm:flex-wrap sm:items-end">
+              <form
+                className="flex flex-wrap items-end gap-2"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const f = new FormData(e.currentTarget);
+                  const until = String(f.get('until') ?? '');
+                  void prefer(row, 'not_now', String(f.get('reason') ?? '').trim(), until ? new Date(`${until}T23:59:59`).toISOString() : null);
+                }}
+                data-testid="people-stack-not-now"
+              >
+                <label className="flex flex-col gap-0.5">
+                  <span>Not now until</span>
+                  <input name="until" type="date" required defaultValue={dateInput(new Date(Date.now() + NOT_NOW_DEFAULT_DAYS * 86_400_000))} className="min-h-9 rounded-md border border-[var(--border)] bg-transparent px-2" />
+                </label>
+                <label className="flex flex-col gap-0.5">
+                  <span>Why (optional)</span>
+                  <input name="reason" type="text" maxLength={240} className="min-h-9 w-40 rounded-md border border-[var(--border)] bg-transparent px-2" />
+                </label>
+                <button type="submit" className={OUTLINE} disabled={busy !== null}>{b === 'preference' ? 'Recording...' : 'Not now'}</button>
+              </form>
+              <form
+                className="flex flex-wrap items-end gap-2"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const f = new FormData(e.currentTarget);
+                  void prefer(row, 'not_a_fit', String(f.get('reason') ?? '').trim(), null);
+                }}
+                data-testid="people-stack-not-a-fit"
+              >
+                <label className="flex flex-col gap-0.5">
+                  <span>Not a fit: why (optional)</span>
+                  <input name="reason" type="text" maxLength={240} className="min-h-9 w-40 rounded-md border border-[var(--border)] bg-transparent px-2" />
+                </label>
+                <button type="submit" className={OUTLINE} disabled={busy !== null}>Not a fit</button>
+              </form>
+              <div className="flex flex-wrap items-center gap-2">
+                <button type="button" className={OUTLINE} disabled={busy !== null} onClick={() => void employment(row, 'left')} data-testid="people-stack-left">{b === 'employment' ? 'Recording...' : 'Left the company'}</button>
+                <button type="button" className={OUTLINE} disabled={busy !== null} onClick={() => void employment(row, 'role_changed')} data-testid="people-stack-wrong-role">Wrong role</button>
+                <button type="button" className={OUTLINE} disabled={busy !== null} onClick={() => void verifyRole(row)} data-testid="people-stack-verify-role">{b === 'verify' ? 'Checking...' : 'Verify role'}</button>
+              </div>
+              <p className="basis-full text-[var(--muted-foreground)]">At {account} only. Nothing is sent by any of these; a set-aside never loosens a safety rule, and Undo stays in place.</p>
+            </div>
+          </details>
+        )}
+      </>
+    );
+  };
   const head = (row: StackRow) => (
     <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
       {row.ordinal !== null && choosing ? <span className="text-xs font-semibold tabular-nums text-[var(--muted-foreground)]" data-testid="people-stack-ordinal">{row.ordinal}.</span> : null}
@@ -188,6 +313,11 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
         {stack.chooseLabel && choosing ? <p className="text-xs font-medium" data-testid="people-stack-choose-label">{stack.chooseLabel}: GAP does not pick.</p> : null}
         {!choosing ? <p className="text-xs text-[var(--muted-foreground)]" data-testid="people-stack-on-record">On record; no cold touch right now (see Next).</p> : null}
       </div>
+      {state.next && choosing ? (
+        <p className="text-xs" data-testid="people-stack-next">
+          <span className="font-semibold">Next if no response:</span> {state.next.name}{state.next.title ? `, ${state.next.title}` : ''}. {state.next.unlock}.
+        </p>
+      ) : null}
       {stack.tieLine && choosing ? (
         <p className="text-xs text-[var(--muted-foreground)]" data-testid="people-stack-tie">
           {stack.tieLine}
@@ -242,6 +372,7 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
                   ) : null}
                   {!row.chosen ? chooseControl(row) : null}
                   {whyButton(row)}
+                  {priorityControls(row)}
                 </div>
                 {whyPanel(row)}
               </li>
@@ -323,6 +454,14 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
       {/* One always-mounted status region (its text changes, so screen readers announce it); an alert only when something refused. */}
       <p role="status" aria-live="polite" className="text-xs" data-testid="people-stack-note">
         {note?.kind === 'status' ? note.text : ''}
+        {note?.kind === 'status' && note.undo ? (
+          <>
+            {' '}
+            <button type="button" className={TEXT} disabled={busy !== null} onClick={() => void note.undo!.run()} data-testid="people-stack-undo">
+              {note.undo.label}
+            </button>
+          </>
+        ) : null}
       </p>
       {note?.kind === 'alert' ? (
         <p role="alert" className="text-xs text-red-700 dark:text-red-400" data-testid="people-stack-alert">

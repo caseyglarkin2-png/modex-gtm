@@ -153,3 +153,80 @@ describe('review fixes (UX-03 fresh review)', () => {
     expect(slot.textContent).toMatch(/Executive sponsor.*Adam Dunbar.*not a cold first touch/);
   });
 });
+
+describe('UX-07: human priority controls', () => {
+  const two = resolveOwner(base({ candidates: [gap(1, 'Doug Estrada', 'Senior Director - Regional Transportation - Logistics', { location: 'Bentonville, Arkansas, United States' }), gap(2, 'Kelly Kruse', 'Regional Transportation Director', { location: 'Bentonville, Arkansas, United States' })] }));
+  const rows2 = two.eligible.map((c) => ({ key: c.key, personaId: c.personaId, hubspotContactId: c.hubspotContactId, name: c.name, title: c.title }));
+  const chosenState = () => projectPursuitState({ accountName: 'Walmart Inc.', now: NOW, motionType: 'FACT_LED', opportunity: { status: 'CLEAR', detail: '', deals: [] }, restriction: null, familyHold: null, motion: { state: 'ready', primary: { personaId: 1, name: 'Doug Estrada', title: null }, next: { personaId: 2, name: 'Kelly Kruse', title: 'Regional Transportation Director', unlock: 'after 5 business days with no response to Doug' }, headline: '' }, choice: { personaId: 1, by: 'casey@freightroll.com', at: '2026-10-05T14:00:00Z', source: 'motion' }, activePersona: null, replies: [], lastOutbound: null, outstandingDraft: null, followUpDue: null, eligible: rows2 });
+  const okFetch = (body: Record<string, unknown> = { ok: true }) => vi.spyOn(globalThis, 'fetch').mockResolvedValue({ ok: true, status: 201, json: async () => body } as unknown as Response);
+
+  it('shows NEXT IF NO RESPONSE from the pursuit state and tags that row; the chosen row offers no priority controls', () => {
+    const state = chosenState();
+    render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(two, { chosenKey: 'gap:1', chosenBy: 'you, Oct 5', nextPersonaId: 2 })} state={state} hypothesisId="h1" excluded={[]} />);
+    expect(screen.getByTestId('people-stack-next').textContent).toBe('Next if no response: Kelly Kruse, Regional Transportation Director. after 5 business days with no response to Doug.');
+    const kelly = screen.getAllByTestId('people-stack-row').find((el) => /Kelly Kruse/.test(el.textContent ?? ''))!;
+    expect(kelly.getAttribute('data-slot')).toBe('Next if no response');
+    expect(screen.queryByTestId('people-stack-make-next')).toBeNull(); // Kelly IS next; Doug is chosen: nobody to make next
+    expect(screen.getAllByTestId('people-stack-more-controls')).toHaveLength(1); // on Kelly only
+  });
+  it('Make next records the motion next person with the chosen primary, reads back with scope and Undo, and sends nothing', async () => {
+    const state = chosenState();
+    const fetchSpy = okFetch();
+    render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(two, { chosenKey: 'gap:1', chosenBy: 'you, Oct 5' })} state={state} hypothesisId="h1" excluded={[]} />);
+    fireEvent.click(screen.getByTestId('people-stack-make-next'));
+    await waitFor(() => expect(screen.getByTestId('people-stack-note').textContent).toMatch(/^Kelly is next at Walmart Inc only, after Doug if no response\. Nothing is sent\./));
+    expect(fetchSpy).toHaveBeenCalledWith('/api/gap/accounts/motion', expect.objectContaining({ method: 'POST', body: JSON.stringify({ accountName: 'Walmart Inc.', primaryPersonaId: 1, nextPersonaId: 2 }) }));
+    expect(refresh).toHaveBeenCalled();
+    fireEvent.click(screen.getByTestId('people-stack-undo'));
+    await waitFor(() => expect(fetchSpy).toHaveBeenLastCalledWith('/api/gap/accounts/motion', expect.objectContaining({ body: JSON.stringify({ accountName: 'Walmart Inc.', primaryPersonaId: 1, nextPersonaId: null }) })));
+    expect(fetchSpy.mock.calls.every(([url]) => !/send|enroll|draft|hubspot|apollo/i.test(String(url)))).toBe(true);
+  });
+  it('Not a fit and Not now post the preference with its reason and date; Undo posts clear; a parked row shows the line with Undo', async () => {
+    const state = chosenState();
+    const fetchSpy = okFetch();
+    const { unmount } = render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(two, { chosenKey: 'gap:1', chosenBy: 'you, Oct 5' })} state={state} hypothesisId="h1" excluded={[]} />);
+    const fit = screen.getByTestId('people-stack-not-a-fit');
+    fireEvent.change(fit.querySelector('input[name="reason"]')!, { target: { value: 'maintenance, not yards' } });
+    fireEvent.submit(fit);
+    await waitFor(() => expect(screen.getByTestId('people-stack-note').textContent).toMatch(/^Kelly is set aside at Walmart Inc as not a fit \(maintenance, not yards\)\. Nothing is sent\./));
+    expect(fetchSpy).toHaveBeenCalledWith('/api/gap/personas/2/preference', expect.objectContaining({ body: JSON.stringify({ kind: 'not_a_fit', reason: 'maintenance, not yards', until: null }) }));
+    fireEvent.click(screen.getByTestId('people-stack-undo'));
+    await waitFor(() => expect(fetchSpy).toHaveBeenLastCalledWith('/api/gap/personas/2/preference', expect.objectContaining({ body: JSON.stringify({ kind: 'clear' }) })));
+    const notNow = screen.getByTestId('people-stack-not-now');
+    fireEvent.change(notNow.querySelector('input[name="until"]')!, { target: { value: '2026-11-05' } });
+    fireEvent.submit(notNow);
+    await waitFor(() => expect(screen.getByTestId('people-stack-note').textContent).toMatch(/^Kelly is set aside at Walmart Inc until Nov 5\. Nothing is sent\./));
+    const last = fetchSpy.mock.calls[fetchSpy.mock.calls.length - 1];
+    expect(JSON.parse(String((last[1] as RequestInit).body))).toMatchObject({ kind: 'not_now', reason: null });
+    expect(JSON.parse(String((last[1] as RequestInit).body)).until).toMatch(/^2026-11-0[56]T/);
+    unmount();
+    // A parked person reads the seller line in Show more, with Undo in place, and stays choosable.
+    const parked = buildPeopleStack(two, { chosenKey: 'gap:1', chosenBy: 'you, Oct 5', preferences: new Map([[2, { personaId: 2, accountName: 'Walmart Inc.', kind: 'not_a_fit' as const, reason: 'maintenance', until: null, by: 'casey@freightroll.com', at: '2026-10-05T00:00:00Z' }]]) });
+    render(<PeopleStackView accountName="Walmart Inc." stack={parked} state={state} hypothesisId="h1" excluded={[]} />);
+    expect(screen.getAllByTestId('people-stack-row')).toHaveLength(1);
+    fireEvent.click(screen.getByTestId('people-stack-show-all'));
+    expect(screen.getByTestId('people-stack-preference').textContent).toMatch(/^Not a fit here \(maintenance\), you, Oct 4\. Undo$/);
+    expect(screen.getByTestId('people-stack-choose')).toBeInTheDocument();
+  });
+  it('Left the company and Wrong role post the existing employment correction; Verify role posts the public check and reads the verdict back', async () => {
+    const state = chosenState();
+    const fetchSpy = okFetch({ verification: { verdict: 'same_role', title: 'Regional Transportation Director', company: 'Walmart' } });
+    render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(two, { chosenKey: 'gap:1', chosenBy: 'you, Oct 5' })} state={state} hypothesisId="h1" excluded={[]} />);
+    fireEvent.click(screen.getByTestId('people-stack-left'));
+    await waitFor(() => expect(fetchSpy).toHaveBeenCalledWith('/api/gap/personas/2/employment', expect.objectContaining({ body: JSON.stringify({ status: 'left' }) })));
+    expect(screen.getByTestId('people-stack-note').textContent).toMatch(/^Kelly is recorded as having left Walmart Inc: no first touch to them\./);
+    fireEvent.click(screen.getByTestId('people-stack-wrong-role'));
+    await waitFor(() => expect(fetchSpy).toHaveBeenLastCalledWith('/api/gap/personas/2/employment', expect.objectContaining({ body: JSON.stringify({ status: 'role_changed' }) })));
+    fireEvent.click(screen.getByTestId('people-stack-verify-role'));
+    await waitFor(() => expect(fetchSpy).toHaveBeenLastCalledWith('/api/gap/personas/2/employment/verify', expect.objectContaining({ method: 'POST' })));
+    expect(screen.getByTestId('people-stack-note').textContent).toMatch(/^Role check for Kelly: same role \(Regional Transportation Director, Walmart\)\. Nothing is sent\./);
+  });
+  it('under a hold no priority control shows at all (never over a reply, an opt-out, a deal or a hold)', () => {
+    const held = projectPursuitState({ accountName: 'Walmart Inc.', now: NOW, motionType: 'FACT_LED', opportunity: { status: 'CLEAR', detail: '', deals: [] }, restriction: null, familyHold: null, motion: null, choice: { personaId: 1, by: 'casey@freightroll.com', at: '2026-10-05T14:00:00Z', source: 'motion' }, activePersona: null, replies: [{ from: 'kelly@walmart.com', name: 'Kelly Kruse', at: '2026-10-05T16:00:00Z', subject: 'Re: yards', snippet: 'stop', triaged: false }], lastOutbound: null, outstandingDraft: null, followUpDue: null, eligible: rows2 });
+    expect(held.chooseAllowed).toBe(false);
+    render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(two, { chosenKey: 'gap:1', chosenBy: 'you, Oct 5', nextPersonaId: 2 })} state={held} hypothesisId="h1" excluded={[]} />);
+    expect(screen.queryByTestId('people-stack-make-next')).toBeNull();
+    expect(screen.queryByTestId('people-stack-more-controls')).toBeNull();
+    expect(screen.queryByTestId('people-stack-next')).toBeNull();
+  });
+});
