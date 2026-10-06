@@ -1,12 +1,15 @@
 'use client';
 
 /**
- * PEOPLE STACK (account-first UX, UX-03, 2026-10-05): the few people who matter at one account, with the action beside
- * the decision. Renders the pure stack (lib/gap/people/stack.ts) over the one owner-resolution read; never ranks.
+ * PEOPLE STACK (account-first UX, UX-03, 2026-10-05; compacted in UX-05, 2026-10-06): the few people who matter at one
+ * account, with the action beside the decision. Renders the pure stack (lib/gap/people/stack.ts) over the one
+ * owner-resolution read; never ranks.
  *
  *   - 3 to 5 rows by default; "Show N more on record" opens the rest and the set-aside people with their reasons
  *   - no ordinals on a tie, and the tie is said in words; a badge only when the resolver recommends
- *   - each row: name, title, slot, ONE distinguishing reason, currentness only when material, reachability, action
+ *   - a CARD only for the chosen person (name, title, slot, reason, currentness, reachability, actions); every other
+ *     row is compact: name and title, one reason with its material cue, Choose and Why on the same line; under a
+ *     hold or a deal no row is a card (UX-05: the Account Story takes the room the cards used)
  *   - the chosen person carries the primary actions (Prepare email, Call prep, Log a touch); the others carry Choose
  *   - "Why this person?" opens every resolver reason (the evidence is disclosed, never deleted)
  *
@@ -49,6 +52,12 @@ const BTN = 'inline-flex min-h-11 items-center justify-center rounded-md px-3 te
 const PRIMARY = `${BTN} bg-[var(--primary)] text-[var(--primary-foreground)] hover:opacity-90 disabled:opacity-60`;
 const OUTLINE = `${BTN} border border-[var(--border)] hover:bg-[var(--muted)] disabled:opacity-60`;
 const TEXT = 'inline-flex min-h-9 items-center text-xs underline text-[var(--muted-foreground)]';
+
+/** The compact row's one cue: a material currentness, or a reachability that is not the plain "Email on record". */
+function cueOf(row: StackRow): string | null {
+  if (row.currentness) return row.currentness;
+  return row.reachability === 'Email on record' ? null : row.reachability;
+}
 
 export function PeopleStackView({ accountName, stack, state, hypothesisId, excluded, primaryInNext = false }: PeopleStackViewProps) {
   const router = useRouter();
@@ -116,6 +125,56 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
   // Under research (no angle yet) choosing is allowed but quiet: an outline control that says what it is for.
   const quietChoose = state.state === 'research';
 
+  const whyButton = (row: StackRow) => (
+    <button type="button" className={TEXT} aria-expanded={open.has(row.key)} aria-controls={`why-${row.key}`} aria-label={open.has(row.key) ? `Hide why: ${row.name}` : `Why this person? ${row.name}`} onClick={() => toggle(row.key)} data-testid="people-stack-why">
+      {open.has(row.key) ? 'Hide why' : 'Why this person?'}
+    </button>
+  );
+  const whyPanel = (row: StackRow) => (
+    <div id={`why-${row.key}`} hidden={!open.has(row.key)} className="mt-2 space-y-1 border-t border-[var(--border)] pt-2 text-xs text-[var(--muted-foreground)]">
+      {open.has(row.key) ? (
+        <>
+          <ul className="space-y-0.5" data-testid="people-stack-why-list">
+            {[...(row.chosen ? [] : [row.reachability]), ...row.why].map((w) => (
+              <li key={w}>{w}</li>
+            ))}
+          </ul>
+          {row.personaId !== null ? (
+            <EmploymentControl personaId={row.personaId} name={row.name} title={row.title} accountName={accountName} compact onDone={() => router.refresh()} />
+          ) : row.hubspotContactId ? (
+            <EmploymentControl hubspotContactId={row.hubspotContactId} name={row.name} title={row.title} accountName={accountName} compact onDone={() => router.refresh()} />
+          ) : null}
+        </>
+      ) : null}
+    </div>
+  );
+  const chooseControl = (row: StackRow) =>
+    row.coldEligible && state.chooseAllowed ? (
+      <button type="button" className={chosenRow || quietChoose ? OUTLINE : PRIMARY} disabled={busy !== null} onClick={() => void choose(row)} data-testid="people-stack-choose" aria-describedby={`reason-${row.key}`}>
+        {busy?.key === row.key
+          ? busy.step === 'adding' ? 'Adding to GAP...' : 'Choosing...'
+          : chosenRow
+            ? `Make ${row.name.split(' ')[0]} first instead`
+            : `Choose ${row.name.split(' ')[0]}${row.personaId === null ? ' (adds them to GAP)' : ''}${quietChoose ? ' for when an angle exists' : ''}`}
+      </button>
+    ) : row.coldEligible ? (
+      <span className="text-xs text-[var(--muted-foreground)]" data-testid="people-stack-held">No cold touch right now (see Next).</span>
+    ) : (
+      <span className="text-xs text-[var(--muted-foreground)]" data-testid="people-stack-slot-only">Not a cold first touch: unlocks by a meeting, a referral or your explicit choice.</span>
+    );
+  const head = (row: StackRow) => (
+    <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+      {row.ordinal !== null && choosing ? <span className="text-xs font-semibold tabular-nums text-[var(--muted-foreground)]" data-testid="people-stack-ordinal">{row.ordinal}.</span> : null}
+      <p id={`row-${row.key}`} tabIndex={-1} className="font-medium outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]">
+        {row.name}
+        {row.title ? <span className="font-normal text-[var(--muted-foreground)]">, {row.title}</span> : null}
+      </p>
+      {row.slot !== 'Eligible operator' ? <span className="rounded-sm border border-[var(--border)] px-1 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--muted-foreground)]">{row.slot}</span> : null}
+      {row.badge ? <span className="rounded-sm border border-[var(--primary)] px-1 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[var(--primary)]" data-testid="people-stack-badge">{row.badge}</span> : null}
+      {row.chosen ? <span className="text-xs font-medium text-[var(--primary)]" data-testid="people-stack-chosen">Chosen{row.chosenBy ? ` by ${row.chosenBy}` : ''}</span> : null}
+    </div>
+  );
+
   return (
     <section className="space-y-2" data-testid="people-stack" aria-labelledby="people-stack-heading">
       <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
@@ -157,100 +216,97 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
 
       {/* An unordered list with the role restated: the order is said in words (ordinals or the tie line), never implied by the list. */}
       <ul role="list" className="space-y-2" data-testid="people-stack-rows">
-        {rows.map((row) => (
-          <li key={row.key} className={`rounded-md border p-3 ${row.chosen ? 'border-[var(--primary)] bg-[var(--muted)]/30' : 'border-[var(--border)]'}`} data-testid="people-stack-row" data-key={row.key} data-chosen={row.chosen ? 'true' : 'false'} data-slot={row.slot}>
-            <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
-              {row.ordinal !== null && choosing ? <span className="text-xs font-semibold tabular-nums text-[var(--muted-foreground)]" data-testid="people-stack-ordinal">{row.ordinal}.</span> : null}
-              <p id={`row-${row.key}`} tabIndex={-1} className="font-medium outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]">
-                {row.name}
-                {row.title ? <span className="font-normal text-[var(--muted-foreground)]">, {row.title}</span> : null}
-              </p>
-              {row.slot !== 'Eligible operator' ? <span className="rounded-sm border border-[var(--border)] px-1 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--muted-foreground)]">{row.slot}</span> : null}
-              {row.badge ? <span className="rounded-sm border border-[var(--primary)] px-1 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[var(--primary)]" data-testid="people-stack-badge">{row.badge}</span> : null}
-              {row.chosen ? <span className="text-xs font-medium text-[var(--primary)]" data-testid="people-stack-chosen">Chosen{row.chosenBy ? ` by ${row.chosenBy}` : ''}</span> : null}
-            </div>
-            <p id={`reason-${row.key}`} className="mt-0.5 text-sm" data-testid="people-stack-reason">{row.reason}</p>
-            {row.currentness ? (
-              <p className={`mt-0.5 text-xs ${/conflict|changed|in question|left|separate|divested/i.test(row.currentness) ? 'text-amber-700 dark:text-amber-400' : 'text-emerald-700 dark:text-emerald-400'}`} data-testid="people-stack-currentness">
-                {row.currentness}
-              </p>
-            ) : null}
-            <p className="mt-0.5 text-xs text-[var(--muted-foreground)]">{row.reachability}</p>
-
-            <div className="mt-2 flex flex-wrap items-center gap-2">
-              {row.chosen && !state.coldTouchAllowed ? (
-                <>
-                  <span className="text-xs text-amber-700 dark:text-amber-400" data-testid="people-stack-held">
-                    {state.state === 'in_motion' ? 'First touch sent; waiting.' : 'No cold touch right now (see Next).'}
-                  </span>
-                  {row.personaId !== null && callAllowed ? (
-                    <Link href={`/gap/call/${row.personaId}`} className={OUTLINE} data-testid="people-stack-call">
-                      Call prep
-                    </Link>
-                  ) : null}
-                  <Link href={`/gap/capture?account=${encodeURIComponent(accountName)}`} className={OUTLINE} data-testid="people-stack-log">
-                    Log a touch
-                  </Link>
-                </>
-              ) : row.chosen ? (
-                <>
-                  {hypothesisId && row.personaId !== null ? (
-                    primaryInNext ? null : (
-                      <Link href={`/gap/preview/${hypothesisId}?personaId=${row.personaId}`} className={PRIMARY} data-testid="people-stack-prepare">
-                        Prepare email
-                      </Link>
-                    )
-                  ) : row.personaId === null && row.hubspotContactId ? (
-                    <button type="button" className={PRIMARY} disabled={busy !== null} onClick={() => void choose(row)} data-testid="people-stack-add">
-                      {busy?.key === row.key ? 'Adding...' : `Add ${row.name.split(' ')[0]} to GAP`}
-                    </button>
+        {rows.map((row) => {
+          // UX-05: a card only for the chosen person while a cold touch is a live choice; everyone else, and everyone
+          // under a hold or a deal, is one compact row.
+          const card = row.chosen && choosing;
+          if (!card) {
+            const cue = cueOf(row);
+            return (
+              <li key={row.key} className={`rounded-md border px-3 py-2 ${row.chosen ? 'border-[var(--primary)]' : 'border-[var(--border)]'}`} data-testid="people-stack-row" data-key={row.key} data-chosen={row.chosen ? 'true' : 'false'} data-slot={row.slot} data-compact="true">
+                {head(row)}
+                <div className="mt-0.5 flex flex-wrap items-center gap-x-3 gap-y-1">
+                  <p id={`reason-${row.key}`} className="min-w-0 text-sm" data-testid="people-stack-reason">
+                    {row.reason}
+                    {cue ? <span className={`text-xs ${/conflict|changed|in question|left|separate|divested|no email/i.test(cue) ? 'text-amber-700 dark:text-amber-400' : 'text-[var(--muted-foreground)]'}`} data-testid="people-stack-cue"> · {cue}</span> : null}
+                  </p>
+                  {row.chosen ? (
+                    <>
+                      <span className="text-xs text-amber-700 dark:text-amber-400" data-testid="people-stack-held">
+                        {state.state === 'in_motion' ? 'First touch sent; waiting.' : 'No cold touch right now (see Next).'}
+                      </span>
+                      {row.personaId !== null && callAllowed ? (
+                        <Link href={`/gap/call/${row.personaId}`} className={OUTLINE} data-testid="people-stack-call">
+                          Call prep
+                        </Link>
+                      ) : null}
+                    </>
                   ) : (
-                    <span className="text-xs text-[var(--muted-foreground)]" data-testid="people-stack-no-angle">No verified angle to prepare a first touch on yet.</span>
+                    chooseControl(row)
                   )}
-                  {row.personaId !== null ? (
-                    <Link href={`/gap/call/${row.personaId}`} className={OUTLINE} data-testid="people-stack-call">
-                      Call prep
-                    </Link>
-                  ) : null}
-                  <Link href={`/gap/capture?account=${encodeURIComponent(accountName)}`} className={OUTLINE} data-testid="people-stack-log">
-                    Log a touch
-                  </Link>
-                </>
-              ) : row.coldEligible && state.chooseAllowed ? (
-                <button type="button" className={chosenRow || quietChoose ? OUTLINE : PRIMARY} disabled={busy !== null} onClick={() => void choose(row)} data-testid="people-stack-choose" aria-describedby={`reason-${row.key}`}>
-                  {busy?.key === row.key
-                    ? busy.step === 'adding' ? 'Adding to GAP...' : 'Choosing...'
-                    : chosenRow
-                      ? `Make ${row.name.split(' ')[0]} first instead`
-                      : `Choose ${row.name.split(' ')[0]}${row.personaId === null ? ' (adds them to GAP)' : ''}${quietChoose ? ' for when an angle exists' : ''}`}
-                </button>
-              ) : row.coldEligible ? (
-                <span className="text-xs text-[var(--muted-foreground)]" data-testid="people-stack-held">No cold touch right now (see Next).</span>
-              ) : (
-                <span className="text-xs text-[var(--muted-foreground)]" data-testid="people-stack-slot-only">Not a cold first touch: unlocks by a meeting, a referral or your explicit choice.</span>
-              )}
-              <button type="button" className={TEXT} aria-expanded={open.has(row.key)} aria-controls={`why-${row.key}`} aria-label={open.has(row.key) ? `Hide why: ${row.name}` : `Why this person? ${row.name}`} onClick={() => toggle(row.key)} data-testid="people-stack-why">
-                {open.has(row.key) ? 'Hide why' : 'Why this person?'}
-              </button>
-            </div>
-            <div id={`why-${row.key}`} hidden={!open.has(row.key)} className="mt-2 space-y-1 border-t border-[var(--border)] pt-2 text-xs text-[var(--muted-foreground)]">
-              {open.has(row.key) ? (
-                <>
-                  <ul className="space-y-0.5" data-testid="people-stack-why-list">
-                    {row.why.map((w) => (
-                      <li key={w}>{w}</li>
-                    ))}
-                  </ul>
-                  {row.personaId !== null ? (
-                    <EmploymentControl personaId={row.personaId} name={row.name} title={row.title} accountName={accountName} compact onDone={() => router.refresh()} />
-                  ) : row.hubspotContactId ? (
-                    <EmploymentControl hubspotContactId={row.hubspotContactId} name={row.name} title={row.title} accountName={accountName} compact onDone={() => router.refresh()} />
-                  ) : null}
-                </>
+                  {whyButton(row)}
+                </div>
+                {whyPanel(row)}
+              </li>
+            );
+          }
+          return (
+            <li key={row.key} className="rounded-md border border-[var(--primary)] bg-[var(--muted)]/30 p-3" data-testid="people-stack-row" data-key={row.key} data-chosen="true" data-slot={row.slot} data-compact="false">
+              {head(row)}
+              <p id={`reason-${row.key}`} className="mt-0.5 text-sm" data-testid="people-stack-reason">{row.reason}</p>
+              {row.currentness ? (
+                <p className={`mt-0.5 text-xs ${/conflict|changed|in question|left|separate|divested/i.test(row.currentness) ? 'text-amber-700 dark:text-amber-400' : 'text-emerald-700 dark:text-emerald-400'}`} data-testid="people-stack-currentness">
+                  {row.currentness}
+                </p>
               ) : null}
-            </div>
-          </li>
-        ))}
+              <p className="mt-0.5 text-xs text-[var(--muted-foreground)]">{row.reachability}</p>
+
+              <div className="mt-2 flex flex-wrap items-center gap-2">
+                {!state.coldTouchAllowed ? (
+                  <>
+                    <span className="text-xs text-amber-700 dark:text-amber-400" data-testid="people-stack-held">
+                      {state.state === 'in_motion' ? 'First touch sent; waiting.' : 'No cold touch right now (see Next).'}
+                    </span>
+                    {row.personaId !== null && callAllowed ? (
+                      <Link href={`/gap/call/${row.personaId}`} className={OUTLINE} data-testid="people-stack-call">
+                        Call prep
+                      </Link>
+                    ) : null}
+                    <Link href={`/gap/capture?account=${encodeURIComponent(accountName)}`} className={OUTLINE} data-testid="people-stack-log">
+                      Log a touch
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    {hypothesisId && row.personaId !== null ? (
+                      primaryInNext ? null : (
+                        <Link href={`/gap/preview/${hypothesisId}?personaId=${row.personaId}`} className={PRIMARY} data-testid="people-stack-prepare">
+                          Prepare email
+                        </Link>
+                      )
+                    ) : row.personaId === null && row.hubspotContactId ? (
+                      <button type="button" className={PRIMARY} disabled={busy !== null} onClick={() => void choose(row)} data-testid="people-stack-add">
+                        {busy?.key === row.key ? 'Adding...' : `Add ${row.name.split(' ')[0]} to GAP`}
+                      </button>
+                    ) : (
+                      <span className="text-xs text-[var(--muted-foreground)]" data-testid="people-stack-no-angle">No verified angle to prepare a first touch on yet.</span>
+                    )}
+                    {row.personaId !== null ? (
+                      <Link href={`/gap/call/${row.personaId}`} className={OUTLINE} data-testid="people-stack-call">
+                        Call prep
+                      </Link>
+                    ) : null}
+                    <Link href={`/gap/capture?account=${encodeURIComponent(accountName)}`} className={OUTLINE} data-testid="people-stack-log">
+                      Log a touch
+                    </Link>
+                  </>
+                )}
+                {whyButton(row)}
+              </div>
+              {whyPanel(row)}
+            </li>
+          );
+        })}
       </ul>
 
       {/* One always-mounted status region (its text changes, so screen readers announce it); an alert only when something refused. */}

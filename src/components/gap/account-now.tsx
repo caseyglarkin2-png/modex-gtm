@@ -3,8 +3,9 @@
  *
  *   DECISION   the state line (its hold colour), the inbound line, NEXT with the ONE primary control, the People
  *              Stack with the chosen person first (UX-03), the relationship route, the do-not-contact line
- *   CONTEXT    WHY NOW (checked lines; market and finance chatter never), KNOW, THINK, ASK, the private line, WEDGE,
- *              ASSET, the tools row
+ *   CONTEXT    the ACCOUNT STORY (UX-05: what happened between us, the goal, what is changing, the network and yard
+ *              read, what to learn, the stories that matter; it takes WHY NOW's place when built), KNOW, THINK, ASK,
+ *              the private line, WEDGE, ASSET, the tools row
  *
  * One column is the PRIMARY desktop design (Casey's display runs at about 820 CSS px); from 1100 px the context
  * sits beside the decision in a second column, DOM order unchanged (WCAG 2.4.3). THE GAP block shows only when the
@@ -21,6 +22,9 @@ import { EmploymentControl } from '@/components/gap/employment-control';
 import { OutstandingDraftPanel } from '@/components/gap/outstanding-draft-panel';
 import { PeopleStackView, type SetAsidePerson } from '@/components/gap/people-stack';
 import { NoteControl } from '@/components/gap/note-control';
+import { AccountStoryView } from '@/components/gap/account-story';
+import { Tag } from '@/components/gap/seller-tag';
+import type { AccountStory } from '@/lib/gap/story/story';
 import type { PeopleStack } from '@/lib/gap/people/stack';
 import type { PursuitState } from '@/lib/gap/pursuit/state';
 
@@ -33,18 +37,12 @@ export interface NowPursuit {
   stack: PeopleStack | null;
   hypothesisId: string | null;
   excluded: SetAsidePerson[];
+  /** UX-05: the derived Account Story (null when the page did not build one). */
+  story?: AccountStory | null;
 }
 
 const day = (s: string) => new Date(s).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' });
 
-const TAG_TONE: Record<NowLine['tag'], string> = {
-  'Buyer said': 'border-emerald-600 text-emerald-700 dark:text-emerald-400',
-  Checked: 'border-sky-600 text-sky-700 dark:text-sky-400',
-  Unverified: 'border-dashed border-[var(--border)] text-[var(--muted-foreground)]',
-  'Our read': 'border-[var(--border)] text-[var(--muted-foreground)]',
-  Unknown: 'border-[var(--border)] text-[var(--muted-foreground)]',
-  Contradicted: 'border-red-600 text-red-700 dark:text-red-400',
-};
 const GAP_TONE: Record<string, string> = { 'Buyer said': 'text-emerald-700 dark:text-emerald-400', 'Our read': 'text-[var(--muted-foreground)]', Unknown: 'text-amber-700 dark:text-amber-400' };
 
 /** The hold colour of the state line (UX-04): a hold reads as one at a glance. */
@@ -60,10 +58,6 @@ const STATE_TONE: Record<string, string> = {
   research: 'text-[var(--muted-foreground)]',
   idle: 'text-[var(--muted-foreground)]',
 };
-
-function Tag({ tag }: { tag: NowLine['tag'] }) {
-  return <span className={`inline-block shrink-0 whitespace-nowrap rounded border px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${TAG_TONE[tag]}`}>{tag}</span>;
-}
 
 function Line({ l, testId }: { l: NowLine; testId: string }) {
   return (
@@ -153,6 +147,16 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, 
           ) : null}
         </div>
 
+        {pursuit?.story?.checkBeforeContacting.length ? (
+          <ul className="space-y-1" data-testid="now-check-before" aria-label="Check before contacting">
+            {pursuit.story.checkBeforeContacting.map((s, i) => (
+              <li key={i} className="rounded-md border border-dashed border-amber-600 px-3 py-2 text-xs text-amber-800 dark:text-amber-300" data-tag={s.tag}>
+                {s.text} <span className="text-[var(--muted-foreground)]">({s.basis})</span>
+              </li>
+            ))}
+          </ul>
+        ) : null}
+
         {pursuit?.stack ? (
           <>
             <PeopleStackView accountName={v.name} stack={pursuit.stack} state={pursuit.state} hypothesisId={pursuit.hypothesisId} excluded={pursuit.excluded} primaryInNext={primaryInNext && pursuit.state.coldTouchAllowed} />
@@ -241,7 +245,8 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, 
 
       {/* CONTEXT: why now and what we know, after the decision. */}
       <div className="mt-6 space-y-4 min-[1100px]:mt-0" data-testid="now-context">
-        {v.whyNow[0] ? (
+        {pursuit?.story ? <AccountStoryView story={pursuit.story} /> : null}
+        {v.whyNow[0] && !pursuit?.story ? (
           <Slot label="Why now" testId="now-why-now">
             <ul className="space-y-2">
               {v.whyNow.map((l) => (

@@ -35,6 +35,10 @@ import { OpenHashDetails } from '@/components/gap/open-hash-details';
 import { PendingLink } from '@/components/gap/pending-link';
 import { loadPursuit } from '@/lib/gap/pursuit/load';
 import { nextFromPursuit, pursuitListenText } from '@/lib/gap/pursuit/next';
+import { loadStoryReaders } from '@/lib/gap/story/load';
+import { mergeTouches } from '@/lib/gap/story/touches';
+import { projectStory, storyListenText } from '@/lib/gap/story/story';
+import { listenText } from '@/lib/gap/context/now';
 
 export const dynamic = 'force-dynamic';
 /** The browser title names the account (click test round 3: every tab read "GAP account"). From the slug: no read. */
@@ -131,7 +135,12 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
     // The cockpit's ready first-touch card for this account (fails soft): the one person NOW and the cockpit share.
     // UX-03 (account-first): ONE pursuit state per account and the People Stack over the one owner-resolution read;
     // the ready card comes from the same queue read (loadReadyTarget stays the fallback when the pursuit read fails).
-    const pursuit = await loadPursuit(prisma, { brief, inputs, ctx, now }).catch(() => null);
+    // UX-05: the story's two extra readers (clawd's outreach history, the vault note) run beside the pursuit read; both
+    // are soft and bounded, so a slow clawd never costs the page.
+    const [pursuit, readers] = await Promise.all([
+      loadPursuit(prisma, { brief, inputs, ctx, now }).catch(() => null),
+      loadStoryReaders({ accountName: brief.accountName, domain: inputs.domains[0] ?? null }).catch(() => ({ clawd: { read: 'unavailable' as const, sends: [] }, vaultNote: null })),
+    ]);
     const ready = pursuit ? (brief.motion.type === 'FACT_LED' ? pursuit.ready : null) : brief.motion.type === 'FACT_LED' ? await loadReadyTarget(prisma, brief.accountName, now) : null;
     const v = projectNow(brief, ctx, inputs, now, { ready });
     const top = brief.hypotheses.find((h) => h.grounded && h.truth !== 'CONTRADICTED');
@@ -154,6 +163,36 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
       : brief.motion.type === 'RELATIONSHIP_LED' || brief.motion.type === 'REFERRAL_LED' ? { href: `/gap/capture?account=${encodeURIComponent(brief.accountName)}`, label: 'Log the touch' }
       : brief.hypotheses.some((h) => h.needsReview.length) ? { href: `${hrefFor('sources')}#brief-hypotheses`, label: 'Review the thesis' }
       : { href: `${hrefFor('sources')}#research-plan`, label: 'Open the research plan' };
+    // UX-05: the derived Account Story over the brief, the context history, the reply class, clawd's sends, the vault
+    // note and the pursuit state (pure; never stored). Listen reads it with its tags, after the state and NEXT.
+    const excluded = (pursuit?.resolution?.excluded ?? []).map((e) => ({ key: e.candidate.key, name: e.candidate.name, title: e.candidate.title, code: e.code, reason: e.reason }));
+    const story = pursuit
+      ? projectStory({
+          accountName: brief.accountName,
+          now,
+          state: pursuit.state,
+          brief,
+          inputs,
+          whyNow: v.whyNow,
+          know: v.know,
+          touches: mergeTouches({
+            history: ctx.history,
+            firstTouches: inputs.firstTouches,
+            clawd: readers.clawd,
+            replies: pursuit.state.lastInbound && pursuit.state.replyClass ? [{ from: pursuit.state.lastInbound.who, at: pursuit.state.lastInbound.at, snippet: v.lastReply?.replace(/^.*?: /, '') ?? '', kind: pursuit.state.replyClass.kind, label: pursuit.state.replyClass.label }] : [],
+            people: [...inputs.personas.map((p) => ({ name: p.name, title: p.title })), ...(inputs.hubspotPeople?.people ?? []).map((p) => ({ name: p.name, title: p.title }))],
+            now,
+          }),
+          clawdRead: readers.clawd.read,
+          vaultNote: readers.vaultNote,
+          excluded,
+        })
+      : null;
+    const listen = pursuit && pursuitNext
+      ? story
+        ? `${pursuitListenText({ ...v, listen: listenText({ ...v, whyNow: [], think: null, currentState: '', impact: '' }) }, pursuit.state, pursuitNext.text)} ${storyListenText(story)}`.replace(/\s+/g, ' ').slice(0, 4800)
+        : pursuitListenText(v, pursuit.state, pursuitNext.text)
+      : v.listen;
     return (
       // UX-04: one column is the primary design (about 820 CSS px on Casey's display); from 1100 px the context sits
       // beside the decision, so the container widens only there. Bottom padding clears the phone action bar.
@@ -162,13 +201,13 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
         {header}
         {tabs}
         <AccountNowView
-          v={pursuit && pursuitNext ? { ...v, listen: pursuitListenText(v, pursuit.state, pursuitNext.text) } : v}
+          v={{ ...v, listen }}
           nextHref={control?.href ?? null}
           nextLabel={control?.label ?? null}
           nextText={pursuitNext?.text ?? null}
           links={links}
           mailbox={process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() || null}
-          pursuit={pursuit ? { state: pursuit.state, stack: pursuit.stack, hypothesisId: pursuit.hypothesisId, excluded: (pursuit.resolution?.excluded ?? []).map((e) => ({ key: e.candidate.key, name: e.candidate.name, title: e.candidate.title, code: e.code, reason: e.reason })) } : null}
+          pursuit={pursuit ? { state: pursuit.state, stack: pursuit.stack, hypothesisId: pursuit.hypothesisId, excluded, story } : null}
         />
       </div>
     );
