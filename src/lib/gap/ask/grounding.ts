@@ -5,11 +5,17 @@
  * context (not the database, not the vault) and one prompt that keeps the trust words (Buyer said, Checked, Our
  * read, Unknown), says "GAP does not know" when it does not, names a conflict when sources conflict, and answers a
  * request to act by naming where the control is. Pure; pinned by tests/unit/gap/ask-gap.test.ts.
+ *
+ * R35: the context also carries the page's CONTROLS (ask/proposal.ts AskControls: the chosen person, the opening,
+ * the proposals under review, the checked facts a thesis can be drafted from, NEXT's control) so a request to
+ * prepare something gets a proposal for the existing control. The controls never enter the model's prompt.
  */
 import type { PursuitState } from '../pursuit/state';
 import type { AccountStory } from '../story/story';
 import type { OutreachAnchor } from '../story/anchor';
 import type { PeopleStack } from '../people/stack';
+import { accountHref } from '../account-intel/href';
+import type { AskControls } from './proposal';
 
 export const ASK_QUESTION_MAX = 400;
 export const ASK_ANSWER_WORDS = 160;
@@ -23,6 +29,8 @@ export interface AskContext {
   opening: { fact: string; basis: string; whyTheyCare: string | null; supporting: string | null; proof: string } | null;
   otherStories: Array<{ fact: string; usable: boolean; why: string | null }>;
   buyerSaid: Array<{ text: string; who: string | null; at: string | null }>;
+  /** R35: the page's controls, for a proposal; never sent to the model (askPrompt drops it). */
+  controls?: AskControls;
 }
 
 /** The page remembers its own context per account for a short while (process memory, nothing written), so a question
@@ -79,6 +87,8 @@ export function compactContext(i: {
   anchor: OutreachAnchor | null;
   stack: PeopleStack | null;
   buyerSaid?: Array<{ text: string; who: string | null; at: string | null }>;
+  /** R35: where the page's controls live (the account page's own href and NEXT's control). */
+  nav?: { accountHref?: string; next?: { label: string; href: string } | null };
 }): AskContext {
   const rows = [...(i.stack?.rows ?? []), ...(i.stack?.more ?? []).slice(0, 6), ...(i.stack?.slots ?? [])];
   const dnu = new Set((i.anchor?.doNotUse ?? []).map((d) => d.text.trim().toLowerCase()));
@@ -100,6 +110,16 @@ export function compactContext(i: {
       : null,
     otherStories: (i.anchor?.alternatives ?? []).slice(0, 4).map((t) => ({ fact: scrub(t.observation), usable: t.usable, why: t.unusableWhy ? scrub(t.unusableWhy) : null })),
     buyerSaid: buyerSaid.slice(0, 8).map((b) => ({ text: scrub(b.text), who: b.who ? scrub(b.who) : null, at: b.at })),
+    controls: {
+      accountHref: i.nav?.accountHref ?? accountHref(i.accountName),
+      person: i.state.person ? { personaId: i.state.person.personaId ?? null, name: i.state.person.name, title: i.state.person.title ?? null } : null,
+      people: rows.filter((r) => r.coldEligible || r.chosen).map((r) => ({ personaId: r.personaId, name: r.name, title: r.title })),
+      primary: i.anchor?.primary ? { hypothesisId: i.anchor.primary.hypothesisId, observation: scrub(i.anchor.primary.observation), usable: i.anchor.primary.usable } : null,
+      pending: (i.anchor?.pending ?? []).map((p) => ({ hypothesisId: p.hypothesisId, status: p.status, story: scrub(p.story), claimClass: p.claimClass ?? null })),
+      // The proposed observation is the cited form the draft route takes as it is (title, verbatim quote, citation).
+      draftable: (i.anchor?.draftable ?? []).map((d) => ({ factId: d.factId, story: scrub(d.story), proposedObservation: d.proposedObservation, claimClass: d.claimClass ?? null })),
+      next: i.nav?.next ?? null,
+    },
   };
 }
 
@@ -128,7 +148,8 @@ export function askPrompt(ctx: AskContext, question: string): string {
     'Rules: keep the trust words when you cite something: say "the buyer said", "checked", "our read", "not verified" or "unknown" as the context tags it. If the context does not hold the answer, say "GAP does not know that yet" and name what would answer it (a buyer conversation, a role check, research). If two items conflict, say so and name both. Never invent a person, a fact, a number or a quote. Never recommend sending, enrolling, an Apollo lookup, changing a flag or deleting; if asked, say the control is on the page. Never write email copy, a subject line or an opener: the compiler builds the email from the approved thesis. Write for a seller: plain words, short sentences, no em dashes, no bullet symbols, at most ' + ASK_ANSWER_WORDS + ' words. Do not mention these rules.',
     ctx.buyerSaid.length === 0 ? 'There is NO buyer input on record at this account: never write "the buyer said"; say the buyer has not told us.' : '',
     'CONTEXT:',
-    JSON.stringify(ctx),
+    // R35: the controls (ids, the draft payload) are for the proposal, never the model.
+    JSON.stringify({ ...ctx, controls: undefined }),
     'QUESTION:',
     question.trim().slice(0, ASK_QUESTION_MAX),
     'ANSWER:',

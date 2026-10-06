@@ -5,6 +5,11 @@
  * provider abstraction (lib/ai/client.ts: the AI gateway, then Gemini, then OpenAI, then the control plane, as
  * configured). A request to act is answered by naming the control, without a model call. Nothing is written, sent,
  * enrolled or looked up. Session only; 404 unknown account; 400 a bad body; 503 when no provider answered.
+ *
+ * R35: a request to PREPARE something ("help me approach this person", "draft an angle from the job posting",
+ * "research their footprint deeper") answers with a typed `proposal` built from the page's own controls
+ * (lib/gap/ask/proposal.ts): the exact payload for an existing route (the opening story's draft, the research
+ * plan's deepen) or a link to the control. No model call; the seller's press runs that route's own gates.
  */
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
@@ -13,6 +18,7 @@ import { generateTextWithMetadata } from '@/lib/ai/client';
 import { badBody, intakeGuard } from '@/lib/gap/intake/route-helpers';
 import { buildAskContext } from '@/lib/gap/ask/context';
 import { actionRequest, ASK_QUESTION_MAX, askPrompt, guardBuyerSaid, recallAskContext, rememberAskContext, tidyAnswer } from '@/lib/gap/ask/grounding';
+import { proposalFor, proposalIntent } from '@/lib/gap/ask/proposal';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 90;
@@ -25,7 +31,9 @@ export async function POST(request: NextRequest) {
   const parsed = Body.safeParse(await request.json().catch(() => ({})));
   if (!parsed.success) return badBody(parsed.error.issues);
   const { accountName, question } = parsed.data;
-  const control = actionRequest(question);
+  // R35: a request to prepare is read first (it needs the page's controls); a request to act names its control.
+  const intent = proposalIntent(question);
+  const control = intent ? null : actionRequest(question);
   if (control) return NextResponse.json({ answer: control, grounded: false, provider: null, acted: false });
   // The page remembered its context when it rendered (the common case); else the full read, remembered for next time.
   const now = new Date();
@@ -35,6 +43,10 @@ export async function POST(request: NextRequest) {
     if (ctx) rememberAskContext(ctx, now);
   }
   if (!ctx) return NextResponse.json({ error: 'not_found' }, { status: 404 });
+  if (intent && ctx.controls) {
+    const r = proposalFor(intent, ctx.accountName, ctx.controls);
+    return NextResponse.json({ answer: r.answer, grounded: false, provider: null, acted: false, proposal: r.proposal });
+  }
   try {
     const r = await generateTextWithMetadata(askPrompt(ctx, question), 600);
     return NextResponse.json({ answer: guardBuyerSaid(tidyAnswer(r.text), ctx), grounded: true, provider: r.provider, acted: false });

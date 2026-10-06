@@ -81,7 +81,7 @@ export interface OutreachAnchor {
   /** The other theses (approved, active or under review, grounded, not contradicted), the primary excluded. */
   alternatives: AnchorThesis[];
   /** Checked, citable story lines no thesis is grounded on: a prefilled draft each. */
-  draftable: Array<{ story: string; sourceLabel: string; sourceUrl: string | null; factId: string; proposedObservation: string }>;
+  draftable: Array<{ story: string; sourceLabel: string; sourceUrl: string | null; factId: string; proposedObservation: string; /** R35: JOB_POSTING / PROCUREMENT for a claim of its own class (its own draft text); null for a physical fact. */ claimClass?: string | null }>;
   /**
    * PROPOSALS IN PROGRESS (R11/R12): the open drafts and theses under review grounded on a checked fact here, with
    * what the reviewer decides on (the exact opening sentence, the guess, the person, what would prove it wrong, the
@@ -110,6 +110,8 @@ export interface AnchorPending {
   personName: string | null;
   /** Would the send gate let it out (read from the loader's sendable set; a draft is not judged until review). */
   gate: 'sendable' | 'refused' | 'not_judged';
+  /** R35: the cited fact's claim class (a posting keeps its own draft text on a resubmit). */
+  claimClass?: string | null;
 }
 
 export interface AnchorInput {
@@ -305,7 +307,7 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
       if (groundedFactIds.has(fact.id) || (fact.sameQuoteIds ?? []).some((id) => groundedFactIds.has(id))) continue;
       if (theses.some((t) => sameIdea(t.observation, s.text, i.accountName) || sharedCounterparty(t.observation, s.text, i.accountName))) continue;
       if (draftable.some((d) => d.factId === fact.id || sameIdea(d.story, s.text, i.accountName) || sharedCounterparty(d.story, s.text, i.accountName))) continue;
-      draftable.push({ story: s.text, sourceLabel: `${host(fact.url) ?? (fact.title || 'source')}, ${day(fact.publishedAt)}`, sourceUrl: fact.url, factId: fact.id, proposedObservation: citedQuote(fact.title || host(fact.url) || 'source', fact.quote.trim().replace(/\s+/g, ' '), fact.id, i.accountName) });
+      draftable.push({ story: s.text, sourceLabel: `${host(fact.url) ?? (fact.title || 'source')}, ${day(fact.publishedAt)}`, sourceUrl: fact.url, factId: fact.id, proposedObservation: citedQuote(fact.title || host(fact.url) || 'source', fact.quote.trim().replace(/\s+/g, ' '), fact.id, i.accountName), claimClass: fact.claimClass ?? null });
     }
   }
 
@@ -335,6 +337,7 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
       personaId: raw.personaId ?? null,
       personName: who?.name ?? null,
       gate: raw.status === 'draft' || !i.sendable ? 'not_judged' : i.sendable.has(raw.id) ? 'sendable' : 'refused',
+      claimClass: fact.claimClass ?? null,
     });
   }
 

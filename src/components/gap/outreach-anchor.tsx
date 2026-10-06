@@ -29,6 +29,7 @@ import { PRIMARY_BY_TEXT } from '@/lib/gap/story/anchor-text';
 import { familyChoices, label as familyLabel } from '@/lib/gap/story/propose-family';
 import { OBSERVATION_REFUSAL_TEXT } from '@/lib/gap/hypothesis/observation';
 import { Tag } from './seller-tag';
+import { draftDefaultsFor, storyDraftPayload } from '@/lib/gap/story/draft-defaults';
 
 const BTN = 'inline-flex min-h-11 items-center justify-center rounded-md px-3 text-sm font-medium';
 const OUTLINE = `${BTN} border border-[var(--border)] hover:bg-[var(--muted)] disabled:opacity-60`;
@@ -37,19 +38,8 @@ const TEXT = 'inline-flex min-h-9 items-center text-xs underline text-[var(--mut
 const SUMMARY = 'group-open:hidden';
 const SUMMARY_OPEN = 'hidden group-open:inline';
 
-/** The seller's persona key for a title (the propose API's enum); a title that names nothing is supply_chain. */
-export function personaKeyFor(title: string | null): string {
-  const t = (title ?? '').toLowerCase();
-  if (/\b(chief|coo|cso|csco|evp|executive vice)\b/.test(t)) return 'executive_ops';
-  if (/automation|robotic|engineering/.test(t)) return 'automation';
-  if (/transport|freight|fleet|carrier|linehaul|line haul/.test(t)) return 'transportation';
-  if (/distribution|warehous|fulfil|\bdc\b/.test(t)) return 'distribution';
-  if (/plant|site|facility|yard|gate|dock/.test(t)) return 'site_ops';
-  if (/security|compliance|safety/.test(t)) return 'security';
-  if (/finance|procure|sourcing/.test(t)) return 'finance_procurement';
-  if (/technology|systems|digital|it\b/.test(t)) return 'technology';
-  return 'supply_chain';
-}
+// R35: the persona key and the draft text live in one lib module, so Ask GAP's proposal posts the same payload.
+export { personaKeyFor } from '@/lib/gap/story/draft-defaults';
 
 /** Plain words for a refused transition (the machine's stable reasons). */
 export const TRANSITION_REFUSAL_TEXT: Record<string, string> = {
@@ -67,9 +57,6 @@ export const TRANSITION_REFUSAL_TEXT: Record<string, string> = {
   stale_status: 'The thesis moved under you: the page is refreshed.',
 };
 
-const DEFAULT_GUESS = 'My guess is that this change moves load onto the gates, yards and docks they run, and that is where site capacity is won or lost.';
-const DEFAULT_FALSIFICATION = 'How do trailers get checked in and found at the sites this change touches today?';
-const DEFAULT_NO_MEANS = 'If trailers do not wait longer at those sites since the change, it moved no load onto the yard: this thesis is closed for them.';
 
 export interface OutreachAnchorViewProps {
   accountName: string;
@@ -149,25 +136,15 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
     setNote(null);
     setDrafting(d.factId);
     setObservation(d.proposedObservation);
-    setProblem(DEFAULT_GUESS);
+    setProblem(draftDefaultsFor(d.claimClass).problem);
   }
 
   /** The one draft call: gates the fact, derives or takes the family, one draft per fact and person, submits when complete. */
-  async function postDraft(factId: string, text: { observation: string; problem: string }, problemFamily: string | null): Promise<DraftResponse | null> {
+  async function postDraft(factId: string, text: { observation: string; problem: string }, problemFamily: string | null, claimClass: string | null | undefined): Promise<DraftResponse | null> {
     const res = await fetch('/api/gap/story/draft', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({
-        accountName,
-        factId,
-        personaId: person?.personaId ?? null,
-        persona: personaKeyFor(person?.title ?? null),
-        observation: text.observation,
-        problemHypothesis: text.problem,
-        falsificationQuestions: [DEFAULT_FALSIFICATION],
-        whatANoMeans: DEFAULT_NO_MEANS,
-        problemFamily,
-      }),
+      body: JSON.stringify(storyDraftPayload({ accountName, factId, claimClass, proposedObservation: text.observation, person: person ? { personaId: person.personaId ?? null, title: person.title ?? null } : null, problem: text.problem, problemFamily })),
     });
     const body = (await res.json().catch(() => ({}))) as DraftResponse;
     if (!res.ok || !body.hypothesisId) {
@@ -189,7 +166,7 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
     setNote(null);
     setBusy({ kind: 'draft', id: d.factId });
     try {
-      const body = await postDraft(d.factId, { observation, problem }, null);
+      const body = await postDraft(d.factId, { observation, problem }, null, d.claimClass);
       if (!body) return;
       setDrafted({ id: body.hypothesisId!, preparation: body.preparation ?? 'draft' });
       setDrafting(null);
@@ -212,7 +189,7 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
     setNote(null);
     setBusy({ kind: 'family', id: item.hypothesisId });
     try {
-      const body = await postDraft(item.factId, { observation: item.observationRaw, problem: item.problem }, family);
+      const body = await postDraft(item.factId, { observation: item.observationRaw, problem: item.problem }, family, item.claimClass);
       if (!body) return;
       announce('status', describe(body));
       router.refresh();

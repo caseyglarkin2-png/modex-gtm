@@ -1088,6 +1088,30 @@ render there (until then the pack answers `no_version` and nothing goes out). De
 for a procurement notice too; no follow-up steps exist for either approach family (single touch, as the event-led
 seeds); `hypothesis/thesis-groups.ts` group readiness reads the first member's metadata only.
 
+R35 **Ask GAP requests use the same preparation service (DONE).** A request to PREPARE something now comes back
+with ONE typed `proposal` built from the page's own controls (`lib/gap/ask/proposal.ts`, pure): "help me approach
+this person" (or "how should I approach Ana") returns the link to NEXT's prepared email when an approved opening is
+usable, the review panel when a proposal waits, else the opening story's DRAFT A THESIS on a checked fact for that
+person, else one research pass; "draft an angle from the job posting" returns the draft on the checked posting
+(the posting's own draft text) or says there is none and links Coverage; "research their footprint deeper" returns
+the research plan's DEEPEN on that section. Kinds: `draft_thesis` (POST /api/gap/story/draft with the exact payload
+the page's control posts: the defaults and the persona key moved to `story/draft-defaults.ts`, one module for both
+callers; the event-led draft text is unchanged, a posting gets its own), `research` (POST /api/gap/accounts/deepen,
+which re-plans and refuses an unplanned section) and `open_control` (a link). The route reads the intent before
+anything else and answers a proposal with NO model call; the controls ride in the remembered context and are dropped
+from the model's prompt; an explanation ("Why this approach?", "What research has been done?") stays a read-only
+answer, and a request to send, enroll, look up, suppress, choose or write copy is still answered by naming its
+control. The component renders the proposal as a button that calls only that route with that payload (or a plain
+link) and says what happened; the press is the seller's and the route runs its own gates. Ask GAP still cannot
+send, choose permanently, spend, suppress or write the CRM. The people stack section gained the anchor the links
+land on. Pinned by `ask-proposal.test.tsx` (10: the intents and the non-intents, each proposal against the page's
+controls, the prompt without the controls, the real route with only the session and the model provider replaced,
+the component's button and link); six deliberate mutations (the route asking the model, the controls reaching the
+model, a payload that is not the page's, a copy request read as a proposal, the button posting elsewhere, an
+explanation read as a request) each turn their owning test red; adjacent 10 files / 131 green. Rollback: revert
+the commit. Debt: the research proposal does not read the plan first (the deepen route refuses an unplanned section
+with its reason, said on the button); intents are English patterns over the question, not a model classification.
+
 ## 12. Migration, backfill and rollback
 
 Order of commits inside Sprint 1 and 3: schema + SQL first (no reader), then pure core, then importers (Top100 before PIC before modex legacy), then runtime pin, then services, then queue actions under the flag, then `GAP_OS_ENABLED=true` in Vercel after `verify-triggers.ts` passes against prod (env is snapshot at deploy; redeploy after setting). Before the prod `db push`, preview it with `prisma migrate diff --from-url <prod> --to-schema-datamodel prisma/schema.prisma --script` and confirm the script is additive only; also confirm the prod role can `CREATE FUNCTION` (not yet verified). Rollback: the flag off restores byte-identical behavior instantly; full removal is the rollback SQL plus reverting the runtime, service and queue-action commits; `sequences` is never modified; the only two pre-existing tables GAP OS's schema touches at all are `draft_queue_items` (one nullable `sequence_version_id` stamp, S1-T2) and `inbound_messages` (`source String @default("gmail")` and `hubspot_engagement_id String?`, S2-T1, needed so the reply cron and the HubSpot poller can tell a Gmail-sourced row from a HubSpot-engagement-sourced one and attribute the engagement id idempotently) — both additive-only, both confirmed by the production preflight below; the lane and PIC files are read, never written.

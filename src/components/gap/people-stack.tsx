@@ -316,7 +316,7 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
   );
 
   return (
-    <section className="space-y-2" data-testid="people-stack" aria-labelledby="people-stack-heading">
+    <section id="people-stack" className="scroll-mt-20 space-y-2" data-testid="people-stack" aria-labelledby="people-stack-heading">
       <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
         <h2 id="people-stack-heading" className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">
           {choosing

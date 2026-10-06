@@ -72,5 +72,6 @@ export async function buildAskContext(prisma: PrismaLike, accountName: string, n
     anchor,
     stack: pursuit.stack,
     buyerSaid: inputs.bids.map((b) => ({ text: b.summary, who: b.who ?? null, at: b.at ?? null })),
+    nav: { accountHref: href, next: next.control },
   });
 }

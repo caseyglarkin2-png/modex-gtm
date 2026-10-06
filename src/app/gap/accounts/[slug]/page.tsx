@@ -288,7 +288,8 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
     const actionable = pursuit && pursuitNext ? actionableFromPursuit(pursuit.state, pursuitNext, { hypothesisId: pursuit.hypothesisId, usableTheses: pursuit.usableTheses, pendingProposals: anchor?.pending.length ?? 0, incompleteProposals: anchor?.pending.filter((x) => !x.familyKnown).length ?? 0 }) : null;
     if (pursuit) rememberPursuitSummary(pursuit.state, now, pursuitNext?.text ?? null, { prisma, actionable });
     // UX-13: Ask GAP answers over exactly these projections; remembered here so a question costs the model, not the read.
-    if (pursuit && pursuitNext) rememberAskContext(compactContext({ accountName: brief.accountName, state: pursuit.state, nextText: pursuitNext.text, story: storyShown, anchor, stack: pursuit.stack, buyerSaid: inputs.bids.map((b) => ({ text: b.summary, who: b.who ?? null, at: b.at ?? null })) }), now);
+    // R35: with the page's controls (NEXT's control), so a request to prepare gets a proposal for that control.
+    if (pursuit && pursuitNext) rememberAskContext(compactContext({ accountName: brief.accountName, state: pursuit.state, nextText: pursuitNext.text, story: storyShown, anchor, stack: pursuit.stack, buyerSaid: inputs.bids.map((b) => ({ text: b.summary, who: b.who ?? null, at: b.at ?? null })), nav: { next: pursuitNext.control } }), now);
     const listen = pursuit && pursuitNext
       ? accountListenText({ accountName: brief.accountName, state: pursuit.state, story: storyShown, anchor, stack: pursuit.stack, nextText: pursuitNext.text, doNotContactCount: excluded.filter((e) => e.code === 'do_not_contact' || e.code === 'unsubscribed' || e.code === 'opted_out').length })
       : v.listen;
