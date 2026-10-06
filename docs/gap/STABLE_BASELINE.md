@@ -385,6 +385,54 @@ unmount. Added contracts that MUST NOT change: a name set aside as do not contac
 an account is never offered as a row under another record of the same person; a hold shows no cold-touch control;
 reading order equals DOM order at every width. Production SHA: 5c321ac6 (receipt in `ACCOUNT_FIRST_UX.md` section 9).
 
+**Train A, the core seller loop (PR #405 UX-07 merge 3b3a063f; PR #406 UX-08, UX-09, UX-10 merge f2fc7e32; 2026-10-06).**
+UX-07 human priority: `person.seller_preference` (append-only audit row; not a fit / not now until a date; newest
+wins; Undo appends a reversal; never do_not_contact; stricter never looser: a parked person leaves the default rows
+for Show more and stays choosable; the motion ranks without parked people and keeps their cards HELD); Make next
+only where the motion can line the person up (its waiting ready cards); Left / Wrong role / Verify role through the
+existing corrections, with no Undo on the two corrections (a reversal would record a permanent human current); no
+control under a reply, an opt-out, a deal or a hold. UX-08 Work: `/gap` lands on the accounts that need the seller,
+one card each in the NEXT UP order, projected from the cockpit's own candidates, motions, In Deals summary and the
+reply class (`lib/gap/work/list.ts`); a reply IS the account's card; an opt-out is admin after research and never
+heads the list; a held account is never a cold action; the canonical pursuit state, remembered per instance when the
+workspace renders or the Work warmer reads it (`lib/gap/pursuit/summary.ts`, `after()`, two accounts a minute),
+rewrites the card (state, NEXT as the why, the workspace's control); chips are the contents; the shown list is the
+Work order. UX-09 Done/Next: the frozen order in session storage; Back, Next account, Back to Work by account; plain
+links, nothing recorded. UX-10: Work, Accounts, Capture and More; `/gap/accounts` lists GAP accounts (people, a
+thesis or a first touch on record; no fixtures), Tier 1 first, search with focus, Enter opens a typed match. Contracts
+that must not change: eligibility is the resolver's and never reads a preference; a preference is read by the stack
+and the motion only; the Work card never offers a cold action on a held, replied or opted-out account; no surface
+writes on render.
+
+**Train B, the auditory layer and the copilot (PR #407, merge e05c4098, 2026-10-06).** UX-11 Listen to today and
+Listen to account on the existing player (`VoicePreviewButton`, `/api/voice/preview`, ElevenLabs TTS; one player,
+pause and resume, a route change or a load that finishes after unmount never plays with no control): spoken
+projections written for the ear (`lib/gap/voice/*`): never an address, a number, a link, a citation token, an id, a
+machine word, the private line, the vault note, a do-not-use fact or a fact that may not be cited to the buyer; the
+trust tag spoken as an aside; a tie spoken as a tie; only a confirmed role as verified; Next always kept. UX-12
+Dictate (`getUserMedia` + `MediaRecorder`; never SpeechRecognition as the path): Recording with a timer and Cancel,
+Escape and unmount discard with no post, Stop posts to `POST /api/gap/voice/transcribe`; I heard (editable) and I am
+about to record; only Confirm writes, through the existing capture route, after the words already typed. The
+transcription provider is a capability: paid ElevenLabs Scribe only with `GAP_TRANSCRIPTION_ENABLED=true` and
+`GAP_TRANSCRIPTION_PROVIDER=elevenlabs` plus the key (NOT set: production transcription is disabled pending Casey's
+spend approval; the page says so); a mock outside production; OpenAI never. UX-13 Ask GAP: a read-only copilot over
+the page's own projections as one bounded context (`lib/gap/ask/grounding.ts`; never the vault note, the private
+line, the do-not-use list, an uncitable fact or an address; a human reply or an opt-out counts as buyer input;
+remembered per instance when the page renders); the prompt keeps the trust words and says "GAP does not know that
+yet"; a request to act is answered by naming the control with no model call; a question word is a read; an invented
+"the buyer said" is dropped when nothing from the buyer is on record; `POST /api/gap/ask` through the existing
+`lib/ai/client.ts` chain, session only, writes nothing.
+
+**Train C, hardening and ship (PR #408, merge TBD, 2026-10-06).** UX-14: the Work read is remembered two minutes
+per instance (`lib/gap/work/cache.ts`; an open lane always reads fresh; Refresh bypasses); the account page streams a
+shell with the name and the last known state and NEXT ahead of the full read; on every Work load the database alone
+decides READY (a recorded chosen person with a usable thesis), research (no usable thesis: never "choose who") and the
+holds (the In Deals read), so a cold instance agrees with the workspace; a stale summary never lifts a hold or a
+reply. UX-15: the dogfood of the loop on the production database (docs 7.5, 6p). UX-16: two adversarial passes
+(8.14, 8.15), blockers fixed. UX-17: the one heavy validation and the ship (docs section 9). Contracts that must not
+change: nothing on the seller surfaces writes on render (process-memory caches only); a Work card never offers a cold
+action on a held, replied or opted-out account; Ask GAP never writes copy and never acts.
+
 **UX-06, the outreach anchor under Option A (PR #404, merge 8ff5623c, 2026-10-06).** `src/lib/gap/story/anchor.ts`
 projects ONE opening story for the chosen person: a usable thesis (approved or active, grounded, not under review,
 and one `hypothesisSendable` would let out; an unread gate makes nothing usable), chosen by the person's recorded
