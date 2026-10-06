@@ -98,12 +98,15 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, 
   const primaryInNext = !!(nextHref && nextLabel);
   const buyerSaidSomething = v.gap.some((g) => g.state === 'Buyer said');
   const impactKnown = !/^Impact: unknown/.test(v.impact);
+  // One line about one inbound: when the last touch IS the automatic notice shown below, the touch line is dropped.
   const lastTouch =
     inbound && inbound.kind !== 'human' && /their reply, below\.$/.test(v.lastTouch)
-      ? v.lastTouch.replace(/their reply, below\.$/, 'an automatic notice, below.')
+      ? null
       : inbound && /^No touch on record\.?$/.test(v.lastTouch)
         ? 'No GAP touch on record; the reply below answers an earlier email GAP did not send.'
         : v.lastTouch;
+  // The state line and NEXT already carry an opt-out or a reply; the inbound line then says only who and when.
+  const inboundConsequence = inbound && pursuit?.state.replyClass && inbound.kind !== 'human' && pursuit.state.state !== 'opted_out' ? ` ${pursuit.state.replyClass.consequence}` : '';
 
   return (
     <div className="min-[1100px]:grid min-[1100px]:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] min-[1100px]:items-start min-[1100px]:gap-x-10" data-testid="account-now">
@@ -116,12 +119,14 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, 
             </p>
             <VoicePreviewButton text={v.listen} label="Listen" className="hidden min-h-11 shrink-0 px-4 md:inline-flex" />
           </div>
-          <p className="text-xs text-[var(--muted-foreground)]" data-testid="now-last-touch">
-            {lastTouch}
-          </p>
+          {lastTouch ? (
+            <p className="text-xs text-[var(--muted-foreground)]" data-testid="now-last-touch">
+              {lastTouch}
+            </p>
+          ) : null}
           {inbound ? (
             <p className={`text-xs font-medium ${inbound.kind === 'human' ? 'text-sky-800 dark:text-sky-300' : inbound.kind === 'opt_out' ? 'text-red-700 dark:text-red-400' : 'text-[var(--muted-foreground)]'}`} data-testid="now-last-inbound" data-reply-class={inbound.kind}>
-              {inbound.label}: {inbound.who}, {day(inbound.at)}{pursuit?.state.replyClass && inbound.kind !== 'human' ? `. ${pursuit.state.replyClass.consequence}` : ''}
+              {inbound.label}: {inbound.who}, {day(inbound.at)}.{inboundConsequence}
             </p>
           ) : v.lastReply ? (
             <p className="text-xs font-medium text-sky-800 dark:text-sky-300" data-testid="now-last-reply">
@@ -138,7 +143,7 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, 
         <div className="rounded-md border border-[var(--primary)] px-3 py-2" data-testid="now-next">
           <h2 className="text-xs font-semibold uppercase tracking-wide text-[var(--primary)]">Next</h2>
           <p className="text-sm font-medium">{nextText ?? v.next.text}</p>
-          {pursuit?.state.blocker && pursuit.state.state !== 'research' && pursuit.state.state !== 'replied' && pursuit.state.state !== 'opted_out' ? (
+          {pursuit?.state.blocker && !['research', 'replied', 'opted_out', 'in_deal'].includes(pursuit.state.state) ? (
             <p className="mt-1 text-xs text-amber-700 dark:text-amber-400" data-testid="now-blocker">{pursuit.state.blocker}</p>
           ) : null}
           {nextHref && nextLabel ? (

@@ -51,8 +51,8 @@ describe('the wall becomes a stack', () => {
   });
   it('no visible reason is the shared title rule; a row with nothing to set it apart says so honestly instead of dressing it up', () => {
     for (const row of s.rows) expect(row.reason).not.toMatch(/^Primary operator: title says/);
-    const honest = s.rows.filter((row) => /nothing on record sets them apart/.test(row.reason));
-    const specific = s.rows.filter((row) => !/nothing on record sets them apart/.test(row.reason)).map((row) => row.reason);
+    const honest = s.rows.filter((row) => /nothing on record sets them apart/i.test(row.reason));
+    const specific = s.rows.filter((row) => !/nothing on record sets them apart/i.test(row.reason)).map((row) => row.reason);
     expect(new Set(specific).size).toBe(specific.length);
     expect(honest.length + specific.length).toBe(s.rows.length);
     expect(JSON.stringify(s.rows.map((row) => row.reason))).not.toMatch(/\(Person \d+\)/);

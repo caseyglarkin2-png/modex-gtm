@@ -168,7 +168,7 @@ function distinguish(rows: OwnerCandidate[]): string[] {
       if (!shared) { pick = f.text; break; }
     }
     if (!pick) pick = titleFragment(rows[i].title, rows.filter((_, j) => j !== i).map((x) => x.title));
-    if (!pick) pick = 'Same responsibility and location as the row above; nothing on record sets them apart';
+    if (!pick) pick = 'Nothing on record sets them apart from the other eligible people here (the title and location say the same)';
     out.push(pick);
   }
   return out;
@@ -252,7 +252,8 @@ export function buildPeopleStack(r: OwnerResolution, opts: { chosenKey: string |
 
   const hidden = rest.length;
   const setAsideCount = r.excluded.length + nameClash.length;
-  const setAsideNames = [...nameClash.map((c) => `${c.name} (another record of a set-aside name)`), ...r.excluded.map((e) => `${e.candidate.name} (${SET_ASIDE_LABEL[e.code] ?? e.code.replace(/_/g, ' ')})`)];
+  // Nameless records are counted, never listed by a non-name ("(no name in HubSpot) (no name on record)").
+  const setAsideNames = [...nameClash.map((c) => `${c.name} (another record of a set-aside name)`), ...r.excluded.filter((e) => e.code !== 'no_name').map((e) => `${e.candidate.name} (${SET_ASIDE_LABEL[e.code] ?? e.code.replace(/_/g, ' ')})`)];
   const setAsideLine = setAsideCount ? `${setAsideCount} set aside: ${setAsideNames.slice(0, 3).join(', ')}${setAsideCount > 3 ? ` and ${setAsideCount - 3} more` : ''}.` : null;
   const tiedNames = tied.slice(0, 3).map((c) => c.name);
   const tieWho = tied.length > 3 ? `${tiedNames.join(', ')} and ${tied.length - 3} more` : tiedNames.length > 1 ? `${tiedNames.slice(0, -1).join(', ')} and ${tiedNames[tiedNames.length - 1]}` : tiedNames.join('');

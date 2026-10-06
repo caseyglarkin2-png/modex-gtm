@@ -250,9 +250,6 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
           </li>
         ))}
       </ul>
-      {!showAll && stack.setAside.line ? (
-        <p className="text-xs text-[var(--muted-foreground)]" data-testid="people-stack-set-aside-line">{stack.setAside.line}</p>
-      ) : null}
 
       {/* One always-mounted status region (its text changes, so screen readers announce it); an alert only when something refused. */}
       <p role="status" aria-live="polite" className="text-xs" data-testid="people-stack-note">
@@ -287,10 +284,14 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
         </ul>
       ) : null}
 
+      {!showAll && stack.setAside.line ? (
+        <p className="text-xs text-[var(--muted-foreground)]" data-testid="people-stack-set-aside-line">{stack.setAside.line}</p>
+      ) : null}
+
       {stack.hidden || stack.setAside.count ? (
         <div className="space-y-1 text-xs">
           <button type="button" className={TEXT} aria-expanded={showAll} onClick={() => setShowAll((v) => !v)} data-testid="people-stack-show-all">
-            {showAll ? 'Show fewer' : `${stack.showAllLabel ?? 'Show everyone on record'}${stack.setAside.count ? ` and ${stack.setAside.count} set aside` : ''}`}
+            {showAll ? 'Show fewer' : stack.showAllLabel ?? `Show the ${stack.setAside.count} set aside`}
           </button>
           {showAll && excluded.length ? (
             <div data-testid="people-stack-set-aside">

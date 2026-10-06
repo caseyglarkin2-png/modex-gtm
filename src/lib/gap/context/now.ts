@@ -109,7 +109,10 @@ const host = (u: string | null) => {
 const CATALYST_WINDOW_MS = 45 * 86_400_000;
 const PROGRAM_WINDOW_MS = 180 * 86_400_000;
 /** A market piece (a stock forecast, a fair-value take) is not a trigger (click test round 4: PFG, GXO). */
-const MARKET_PIECE = /\b(stock forecasts?|price target|fair value|gf value|\d+(?:\.\d+)?% (?:gain|drop|rise|fall|decline|jump)|stock price|quote & history|stock quote|shares (?:rose|fell|jump|drop)|stock (?:price|rating)|dividend|buy rating|sell rating|analyst(?:s)? (?:say|rating)|(?:purchases?|acquires?|buys?|sells?|reduces?|increases?|trims?|raises?|lowers?|boosts?|cuts?) (?:new )?(?:holdings?|stake|position|shares)|holdings? in|shares of [A-Z][\w.&' -]+ (?:inc|corp|co)\b|\$[A-Z]{1,5}\b|13F|institutional investor)\b/i;
+const MARKET_PIECE = /\b(stock forecasts?|price target|fair value|gf value|\d+(?:\.\d+)?% (?:gain|drop|rise|fall|decline|jump)|stock price|quote & history|stock quote|shares (?:rose|fell|jump|drop)|stock (?:price|rating)|dividend|buy rating|sell rating|analyst(?:s)? (?:say|rating)|(?:purchases?|acquires?|buys?|sells?|reduces?|increases?|trims?|raises?|lowers?|boosts?|cuts?) (?:new )?(?:holdings?|stake|position|shares)|holdings? in|shares of [A-Z][\w.&' -]+ (?:inc|corp|co)\b|\$[A-Z]{1,5}\b|13F|institutional investor|earnings (?:in focus|call|preview|beat|miss)|stock looks)\b/i;
+/** A ticker in brackets ("Walmart (WMT) Delivers...", "(NYSE: KR)"): case-sensitive, so "(and)" never matches. */
+const TICKER_IN_BRACKETS = /\((?:NYSE:?|NASDAQ:?)?\s*[A-Z]{1,5}\)/;
+const isMarketPiece = (t: string) => MARKET_PIECE.test(t) || TICKER_IN_BRACKETS.test(t);
 const SOURCE_KIND: Record<string, string> = { conference: 'a conference', event: 'an event', meeting: 'a meeting', referral: 'a referral' };
 
 const norm = (s: string) => s.replace(/^[A-Z][A-Z /]+:\s*/, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
@@ -263,7 +266,7 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
     // An undated signal is not a reason to act now.
     if (isSignal && (signals >= 1 || !s.sources[0]?.at)) continue;
     // An unverified report about activity abroad, a divestiture or a market piece is not their US yard network.
-    if (isSignal && (rel(s) >= 7 || MARKET_PIECE.test(s.text))) continue;
+    if (isSignal && (rel(s) >= 7 || isMarketPiece(s.text))) continue;
     // Nor is an event past the 45-day catalyst window (Sources says the same; Tyson led on a 50-day-old "this week").
     const at = Date.parse(String(s.asOf ?? s.sources[0]?.at ?? ''));
     // A physical network transformation is a multi-year program, not a one-day event: it stays a reason for 180

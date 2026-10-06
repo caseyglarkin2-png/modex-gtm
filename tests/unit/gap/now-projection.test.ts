@@ -279,3 +279,11 @@ describe('UX-04 context filters', () => {
     expect(real.whyNow[0].text).toMatch(/fulfillment center/);
   });
 });
+
+describe('UX-04 review: ticker-in-brackets headlines', () => {
+  it('a "(WMT)" or "(KR) Stock Looks" headline is market chatter', () => {
+    const chatter = (n: number, title: string) => ({ id: `t${n}`, title, url: `https://finance.example/${n}`, publishedAt: `2026-10-0${n}T00:00:00Z`, researchStatus: 'pending' });
+    const v = now({ facts: [], hypotheses: [], signals: [chatter(1, 'Walmart (WMT) Delivers Forgotten Groceries Fast. Can Small Orders Make Money?'), chatter(2, 'Kroger (KR) Stock Looks About Right With Earnings In Focus')] });
+    expect(v.whyNow).toHaveLength(0);
+  });
+});

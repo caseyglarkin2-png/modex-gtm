@@ -40,7 +40,8 @@ describe('UX-04 hierarchy', () => {
     expect(order.every((x, k) => x > -1 && (k === 0 || x > order[k - 1]))).toBe(true);
     expect(screen.getByTestId('now-state').textContent).toMatch(/Ready for a first touch: Glen Chaffee/);
     expect(screen.getByTestId('now-state').className).toMatch(/emerald/);
-    expect(screen.getByTestId('now-last-touch').textContent).toMatch(/an automatic notice, below\./);
+    expect(screen.queryByTestId('now-last-touch')).toBeNull();
+    expect(screen.getByTestId('now-last-inbound').textContent).toMatch(/^Automatic reply: Courtney Keen/);
     const control = screen.getByTestId('now-next-control');
     expect(control).toHaveAttribute('href', '/gap/preview/h1?personaId=7');
     expect(control.className).toMatch(/bg-\[var\(--primary\)\]/);
@@ -91,5 +92,22 @@ describe('UX-04 review fixes', () => {
     render(<AccountNowView v={v} nextHref="/gap/preview/h1?personaId=7" nextLabel="Prepare the email to Glen" nextText="Prepare." links={[]} pursuit={pursuit} />);
     expect(screen.getByTestId('now-bottom-next')).toHaveAttribute('href', '/gap/preview/h1?personaId=7');
     expect(screen.queryByTestId('now-bottom-log')).toBeNull();
+  });
+});
+
+describe('UX-04 review: no duplicated lines', () => {
+  it('an automatic notice is one line, not a touch line plus an inbound line; an opt-out consequence is not repeated under an opted-out state', () => {
+    render(<AccountNowView v={v} nextHref={null} nextLabel={null} links={[]} pursuit={pursuit} />);
+    expect(screen.queryByTestId('now-last-touch')).toBeNull();
+    expect(screen.getByTestId('now-last-inbound').textContent).toMatch(/^Automatic reply: Courtney Keen, Jun 2, 2026\. An automatic notice/);
+    const held = projectPursuitState({ accountName: 'Walmart Inc.', now: NOW, motionType: 'FACT_LED', opportunity: { status: 'CLEAR', detail: '', deals: [] }, restriction: null, familyHold: null, motion: null, choice: null, activePersona: null, replies: [{ from: 'tim@walmart.com', name: null, at: '2026-10-05T13:58:00Z', subject: null, snippet: 'stop', triaged: false }], lastOutbound: null, outstandingDraft: null, followUpDue: null, eligible });
+    render(<AccountNowView v={{ ...v, name: 'Walmart Inc.', lastTouch: 'No touch on record.' }} nextHref="/gap?lane=replies" nextLabel="Record the opt-out" nextText="Record the opt-out." links={[]} pursuit={{ ...pursuit, state: held, stack: buildPeopleStack(r, { chosenKey: null }) }} />);
+    const inbound = screen.getAllByTestId('now-last-inbound')[1];
+    expect(inbound.textContent).toBe('Opted out: tim@walmart.com, Oct 5, 2026.');
+  });
+  it('under a deal NEXT does not repeat the deal sentence as a blocker', () => {
+    const inDeal = projectPursuitState({ accountName: 'Kroger', now: NOW, motionType: 'IN_DEAL', opportunity: { status: 'ACTIVE', detail: '', deals: [{ name: 'YardFlow - Kroger', stage: 'Discovery' }] }, restriction: null, familyHold: null, motion: null, choice: null, activePersona: null, replies: [], lastOutbound: null, outstandingDraft: null, followUpDue: null, eligible });
+    render(<AccountNowView v={{ ...v, name: 'Kroger' }} nextHref="/x" nextLabel="Open the deal brief" nextText="Work the deal." links={[]} pursuit={{ ...pursuit, state: inDeal, stack: buildPeopleStack(r, { chosenKey: null }) }} />);
+    expect(screen.queryByTestId('now-blocker')).toBeNull();
   });
 });
