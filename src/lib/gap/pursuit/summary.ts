@@ -17,7 +17,10 @@ import type { PursuitState } from './state';
 type PrismaLike = any;
 
 export const PURSUIT_SUMMARY_TTL_MS = 15 * 60_000;
-export const WARM_PER_REQUEST = 3;
+export const WARM_PER_REQUEST = 2;
+/** Warming hits HubSpot: never more often than this per instance (a burst of Work loads must not throttle the reads). */
+export const WARM_MIN_INTERVAL_MS = 60_000;
+let lastWarmAt = 0;
 export const WARM_TIMEOUT_MS = 40_000;
 
 export interface PursuitSummary {
@@ -90,6 +93,8 @@ export async function summarizePursuit(prisma: PrismaLike, accountName: string, 
 
 /** Warm the first few accounts that have no fresh summary, one after another (never in parallel: one heavy read at a time). */
 export async function warmPursuitSummaries(prisma: PrismaLike, accountNames: readonly string[], now: Date = new Date(), limit = WARM_PER_REQUEST): Promise<string[]> {
+  if (now.getTime() - lastWarmAt < WARM_MIN_INTERVAL_MS) return [];
+  lastWarmAt = now.getTime();
   const fresh = readPursuitSummaries(accountNames, now);
   const todo = accountNames.filter((n) => !fresh.has(n)).slice(0, limit);
   const done: string[] = [];
