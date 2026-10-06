@@ -512,7 +512,7 @@ its own; none is a foundation-only sprint (UX-03 ships the Walmart header and st
 | UX-03 | Pursuit state (5.1) + reply classification + People Stack (5.2) on NOW, reading the chosen person; the pack built for that person (F1, N1, N2, N8) | Walmart: "Opted out" leads, Doug Estrada chosen with the hold shown, 4 rows of 46; FedEx: "Ready for a first touch: Glen Chaffee" (chosen by Casey, Oct 5) with Prepare email beside him, 4 rows of 37; Kroger: "In a deal", no choose; the analyst drawer: top 5 of 53, no ordinals on the tie | REVIEWED, merging (PR open) | 1291b5b5, 0b6de260, d7cb350f, 03704bbb, d96ce769, 6e473da3, 3ec49699 | reply-classify, people-stack, pursuit-state, pursuit-next, people-stack-view, account-now-pursuit, owner-panel-cap, ready-target-of (65 tests); GAP suite green |
 | UX-04 | Account workspace hierarchy: one decision block, context column, one-column 390, no sticky tabs at 390, scroll padding, 44 px bar, Listen cleanup (N9, N10, N11, N12) | FedEx at 820: state (green), one automatic-reply line, NEXT with one filled control, Glen chosen with Call prep and Log a touch, three eligible rows, compact sponsor and tech lines, one flags disclosure, then WHY NOW; the decision ends at 1.07 to 1.34 screens on six accounts; zero covered focus points | REVIEWED, merged (PR #402, 5c321ac6) | 7065fc24, caa5380a, 189eb183, 49e276f7, 7131b5a0 | now-hierarchy, blocked-people, voice-preview-button, the market-chatter and never-cite filters, the review-fix tests (GAP suite 329 files / 5,069 tests green) |
 | UX-05 | Account Story (5.4) with per-sentence tags, internal readers (clawd history, vault note) (F11, N5, N6) | PepsiCo story answers goal / changing / network / yard / proof / unknown; NFI shows the May 28 send | SHIPPED 2026-10-06 (6e, 7.3, 8.9) | | tag rule (weakest class); no private row; unverified employer item rises |
-| UX-06 | Outreach anchor + angle suggestion from the story + pack copy without pasted headlines, signed by the rep (5.5, N13) | one anchor per person with Do not use; a different story is one click | | | anchor never cites private / imagery / not-for-outreach |
+| UX-06 | Outreach anchor + angle suggestion from the story + pack copy without pasted headlines, signed by the rep (5.5, N13) | one anchor per person with Do not use; a different story is one click | CONTRACT DRAFTED (6f); one decision open for Casey | | anchor never cites private / imagery / not-for-outreach |
 | UX-07 | Pursuit slots + human-priority controls on the stack (5.3, 5.6) | Make next / Not a fit / Not now recorded, audited, reversible, never over a hold | | | preference never clears DNC / employment / deal / reply |
 | UX-08 | Work surface: accounts needing attention, one card each, lane chips as filters, reply classes, search (F3, F12, N4) | /gap answers which account, why, state, person, next in one screen | | | card = pursuit state parity; opt-out never heads the list |
 | UX-09 | Done, next: outcome or snooze, frozen order, Back, Back to Work (F9) | work five accounts without returning to the cockpit | | | URL state; Back restores |
@@ -700,6 +700,62 @@ Commits c55a2125, 52066d84, 1e9e194d and 8173e19e on `feat/gap-account-first-ux`
 Validation: GAP folder suite 332 files / 5,101 tests green (35 new across 3 files); full unit suite green on the
 first slice (657 files / 7,371 tests) and the GAP folder on every batch since; `tsc --noEmit` clean; eslint clean on
 the changed files; five local production builds green. Measurements and the fresh review follow in 7.3 and 8.9.
+
+## 6f. UX-06 contract draft (the outreach anchor, BEST PROOF, call prep on the pursuit state), drafted 2026-10-06 from 5.5, N13 and the UX-03 to UX-05 carried items
+
+STATUS: DRAFT, one product decision open for Casey (item 2) before implementation starts.
+
+What the code does today (read 2026-10-06): step 0 of every seed family (`sequences/families.ts`) carries the slot
+`{{observation}}`, filled per person by `sequence/render.ts` from the HYPOTHESIS observation (a cited sentence whose
+`[S:<signal id>]` tokens become compile markers); the compiler's C01 resolves every cited sentence against that
+hypothesis's own linked signals; the evidence gate (`research/evidence-gate.ts`) requires one verified, dated, quoted,
+account-specific outreach fact; the action pack (`execution/action-pack.ts`) is built for the routing decision's
+person, else an explicit `personaId`, else the hypothesis primary (UX-03 fixed the card-to-pack mismatch, F1); the
+draft service replaces the template sign-off with the sender's real Gmail signature at the click (`seller-draft.ts`),
+so N13's "signed Casey for any rep" is already the sender's signature in the draft and only the preview shows the
+template line; call prep (`replies/brief.ts` `callBrief`) reads the person's do-not-contact flag and the hypothesis,
+never the account's pursuit state.
+
+1. **Anchor selection (no decision needed).** A pure projection `story/anchor.ts` for the chosen person: ONE anchor
+   (the hypothesis's verified outreach fact when it lands on the person's remit; else the newest checked, dated,
+   citable fact whose text names their remit, by the story's relevance order), WHY THEY CARE (Our read, one sentence
+   from the person's lane and the fact), one optional SUPPORTING FACT, and DO NOT USE with reasons (private
+   engagement, modeled dollars as their pain, imagery facts, unverified items, facts marked not for outreach, a
+   Checked line whose number does not parse). Rendered beside the opening in the action pack and in the six-line
+   brief's KNOW line. Tests: PepsiCo and FedEx fixtures; the anchor is never private, imagery, unverified or
+   not-for-outreach; a person with no eligible anchor shows "No fact on their remit is citable yet" and the pack
+   stays unsendable as today.
+2. **"Use a different story" (DECISION for Casey).** The anchor is keyed to the person (5.5) but the opening is keyed
+   to the hypothesis. Two honest ways to give the seller "a different story is one click":
+   - **Option A (recommended): switch the thesis, keep the pipeline.** A different story means a different grounded
+     hypothesis at the account (one observation each); the control opens the pack for that hypothesis and records
+     the choice on the person's angle row (`persona.angle`, existing mechanism: `{ anchorHypothesisId }`). The
+     opening stays the approved observation; the compiler, the evidence gate and the approval flow are untouched.
+     Cost: a story that has no approved hypothesis yet is "draft and review one", not a click.
+   - **Option B: a per-person anchor slot in the copy.** The renderer fills `{{observation}}` from the chosen anchor
+     fact (any citable signal at the account) and the compiler resolves markers against the account's signals, not
+     only the hypothesis's. Cost: C01's contract widens, the approval row no longer proves the exact sentence a human
+     read, and the "pasted headline" (N13) is still the signal's own text; this is the architecture expansion the
+     program said to pause on.
+   N13 itself (the opening pastes a headline) is an authoring rule, not a renderer change: an observation must be a
+   sentence about the change in the account's own words with its citation, never a title; enforce it at thesis
+   review (a title-shaped observation is refused with the reason) and in the story's attribution rule ("PepsiCo
+   says: ...").
+3. **BEST PROOF.** One canon line beside the opening (`compiler/canon.ts` phrasing only: 48 to 24 minutes measured,
+   about 5 % observed, 24 sites live, 260 sites under contract; Primo Brands the only named customer), tagged "Our
+   proof, measured" or "Our model", never Checked, never a story row (5.4).
+4. **"Why #1 over #2" (UX-03 carried).** The stack's chosen card shows the first rank dimension on which the chosen
+   person leads the next row, from the resolver's rank keys (`owner-resolution.ts` `rankDimensions`), with dated
+   bases; null on a tie (the tie line already says so); never a badge for a cold first touch.
+5. **Call prep reads the pursuit state (UX-03 carried).** `/gap/call/[personaId]` loads `loadPursuit` for the
+   person's account; under a reply, an opt-out, a deal or a hold the call page says the hold first and offers no
+   opener (the same rule as the stack's Call prep control); the "FACT OBSERVED" label on a keyword hit reads
+   "keyword hit, not a fact" (soak P2).
+6. **Not in UX-06:** human-priority controls beyond Choose (UX-07), the worklist (UX-08), voice (UX-11+), the
+   hypothesis authoring UI beyond the title-shaped refusal.
+7. **Validation:** the UX-05 recipe (local preview against the production database, read-only; 820 / 390 / 1440 light
+   and dark; a fresh AE, product and accessibility review on the captures); the pack's copy bytes for an unchanged
+   hypothesis are byte-identical before and after (pinned), so nothing outbound changes until Casey chooses A or B.
 
 ## 7. Task baselines and post-change measurements
 
