@@ -119,3 +119,34 @@ describe('holds dominate the actions', () => {
     expect(screen.getAllByTestId('people-stack-held')[0].textContent).toMatch(/No cold touch right now/);
   });
 });
+
+describe('review fixes (UX-03 fresh review)', () => {
+  it('under an open deal: no ordinals, no "Choose who", an on-record note instead; Call prep hidden', () => {
+    const state = stateFor({ motionType: 'IN_DEAL', opportunity: { status: 'ACTIVE', detail: '', deals: [{ name: 'YardFlow - Walmart', stage: 'Discovery' }] } });
+    render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(r, { chosenKey: null })} state={state} hypothesisId="h1" excluded={excluded} />);
+    expect(screen.queryAllByTestId('people-stack-ordinal')).toHaveLength(0);
+    expect(screen.queryByTestId('people-stack-choose-label')).toBeNull();
+    expect(screen.queryByTestId('people-stack-tie')).toBeNull();
+    expect(screen.getByTestId('people-stack-on-record').textContent).toMatch(/no cold touch right now/i);
+    expect(screen.queryAllByTestId('people-stack-choose')).toHaveLength(0);
+    expect(screen.queryAllByTestId('people-stack-call')).toHaveLength(0);
+  });
+  it('a relationship-led account: the person you met leads as a Relationship route with Log the touch, and is not confused with the operators', () => {
+    const state = stateFor({ motionType: 'RELATIONSHIP_LED', relationship: { name: 'Ryan Heman', title: null, why: 'met at Inland26 · Chicago' } });
+    render(<PeopleStackView accountName="Tyson Foods" stack={buildPeopleStack(r, { chosenKey: null })} state={state} hypothesisId="h1" excluded={excluded} />);
+    const lead = screen.getByTestId('people-stack-lead');
+    expect(lead.textContent).toMatch(/Ryan Heman/);
+    expect(lead.textContent).toMatch(/Relationship route/);
+    expect(screen.getByTestId('people-stack-lead-log')).toHaveAttribute('href', '/gap/capture?account=Tyson%20Foods');
+    expect(screen.getAllByTestId('people-stack-row').every((el) => el.getAttribute('data-slot') !== 'Next operator')).toBe(true);
+  });
+  it('named sponsor / tech / site people are compact slot lines below the rows, never cards, with Why?', () => {
+    const sponsorRes = resolveOwner(base({ candidates: [gap(1, 'Doug Estrada', 'Senior Director - Regional Transportation - Logistics'), gap(2, 'Kelly Kruse', 'Regional Transportation Senior Director'), gap(7, 'Adam Dunbar', 'VP, Supply Chain Operations Support, Fulfillment and Reverse')] }));
+    const stack = buildPeopleStack(sponsorRes, { chosenKey: null });
+    expect(stack.slots.map((s) => s.name)).toContain('Adam Dunbar');
+    render(<PeopleStackView accountName="Walmart Inc." stack={stack} state={stateFor({})} hypothesisId="h1" excluded={[]} />);
+    expect(screen.getAllByTestId('people-stack-row').map((el) => el.textContent)).not.toContainEqual(expect.stringMatching(/Adam Dunbar/));
+    const slot = screen.getByTestId('people-stack-slot');
+    expect(slot.textContent).toMatch(/Executive sponsor.*Adam Dunbar.*not a cold first touch/);
+  });
+});

@@ -30,7 +30,7 @@ export interface ReplyClass {
 export const REPLY_CLASS_LABEL: Record<ReplyClassKind, string> = {
   human: 'Someone replied',
   opt_out: 'Opted out',
-  out_of_office: 'Out of office',
+  out_of_office: 'Automatic reply',
   bounce: 'Address failed',
 };
 

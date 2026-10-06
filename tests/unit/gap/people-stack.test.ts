@@ -41,18 +41,21 @@ describe('the wall becomes a stack', () => {
   it('never claims an order the evidence does not hold: no ordinals and a plain tie sentence when the top rows share a rank', () => {
     expect(s.tie).toBe(true);
     expect(s.rows.every((row) => row.ordinal === null)).toBe(true);
-    expect(s.tieLine).toMatch(/could not separate \d+ people on evidence/);
-    expect(s.tieLine).toMatch(/tie-break/i);
+    expect(s.tieLine).toMatch(/could not separate .+ on evidence/);
+    expect(s.tieLine).toMatch(/first-name order, not a ranking/);
   });
   it('no row is labelled Best fit or Recommended when the resolver has no recommendation', () => {
     expect(r.recommended).toBeNull();
     expect(s.rows.every((row) => row.badge === null)).toBe(true);
     expect(JSON.stringify(s)).not.toMatch(/Best fit|Recommended/);
   });
-  it('every visible reason sets the person apart from the next row (no two rows share a reason)', () => {
-    const reasons = s.rows.map((row) => row.reason);
-    expect(new Set(reasons).size).toBe(reasons.length);
+  it('no visible reason is the shared title rule; a row with nothing to set it apart says so honestly instead of dressing it up', () => {
     for (const row of s.rows) expect(row.reason).not.toMatch(/^Primary operator: title says/);
+    const honest = s.rows.filter((row) => /nothing on record sets them apart/.test(row.reason));
+    const specific = s.rows.filter((row) => !/nothing on record sets them apart/.test(row.reason)).map((row) => row.reason);
+    expect(new Set(specific).size).toBe(specific.length);
+    expect(honest.length + specific.length).toBe(s.rows.length);
+    expect(JSON.stringify(s.rows.map((row) => row.reason))).not.toMatch(/\(Person \d+\)/);
   });
 });
 
@@ -101,12 +104,19 @@ describe('pursuit slots are offered only when the resolver fills them; the depar
     expect(s.setAside.line).toMatch(/Dakota Socha/);
     expect(s.setAside.line).toMatch(/left the company/i);
   });
-  it('slots: NEXT OPERATOR from the eligible list, SPONSOR and TECH only when the resolver names them, no manufactured slot', () => {
-    expect(s.rows[0].slot).toBe('Next operator');
-    const slots = s.rows.map((row) => row.slot);
+  it('slots: eligible rows are operators (Next only when chosen or alone), SPONSOR and TECH are compact slot lines only when the resolver names them, no manufactured slot', () => {
+    expect(['Next operator', 'Eligible operator']).toContain(s.rows[0].slot);
+    expect(s.rows.every((row) => row.coldEligible)).toBe(true);
+    const slots = s.slots.map((row) => row.slot);
     if (r.sponsor) expect(slots).toContain('Executive sponsor');
     if (r.tech) expect(slots).toContain('Tech / transformation');
     expect(slots).not.toContain('Site / regional operator');
+    expect(s.slots.every((row) => !row.coldEligible || !s.rows.some((x) => x.key === row.key))).toBe(true);
+  });
+  it('the chosen person alone carries Next operator; everyone else eligible reads Eligible operator', () => {
+    const chosen = buildPeopleStack(r, { chosenKey: r.eligible[0].key, chosenBy: 'you' });
+    expect(chosen.rows[0].slot).toBe('Next operator');
+    expect(chosen.rows.slice(1).every((row) => row.slot === 'Eligible operator' || !['Next operator'].includes(row.slot))).toBe(true);
   });
   it('currentness shows on a row only when material; a verified role reads as a cue, HubSpot-only reads as reachability', () => {
     const jess = s.rows.find((row) => row.name === 'Jess Bess')!;

@@ -143,3 +143,27 @@ describe('priority is fixed: reply > deal/hold > follow up > in motion > ready >
     expect(d.state).toBe('in_deal');
   });
 });
+
+describe('review fixes (UX-03 fresh review)', () => {
+  it('a newsletter subscriber or list member is never a relationship that leads the account; a conference, intro or referral is', async () => {
+    const { isRealRelationship } = await import('@/lib/gap/pursuit/state');
+    expect(isRealRelationship('newsletter', 'MMYQB LinkedIn subscribers · Sep 2026')).toBe(false);
+    expect(isRealRelationship('list', 'Shippers among MMYQB subscribers')).toBe(false);
+    expect(isRealRelationship('conference', 'Inland26 · Chicago')).toBe(true);
+    expect(isRealRelationship('referral', 'Mark Shaughnessy')).toBe(true);
+    expect(isRealRelationship('meeting', 'MODEX 2026')).toBe(true);
+  });
+  it('a lone eligible person is GAP\'s preselection, never "chosen by you"', () => {
+    const s = projectPursuitState(base());
+    expect(s.person).toMatchObject({ name: 'Doug Estrada', chosenBy: null });
+  });
+  it('the research line mirrors the brief: an approved angle that needs review, or a fact with no angle grounded yet', () => {
+    expect(projectPursuitState(base({ motionType: 'NO_GOOD_MOTION', briefNext: 'Do not contact yet: the approved thesis needs review before it is used.' })).stateLine).toMatch(/angle needs your review/);
+    expect(projectPursuitState(base({ motionType: 'NO_GOOD_MOTION', briefNext: 'Do not contact yet: a verified fact, but no thesis grounded in it yet (draft and review one first).' })).stateLine).toMatch(/no angle grounded on it yet/);
+    expect(projectPursuitState(base({ motionType: 'NO_GOOD_MOTION' })).chooseAllowed).toBe(true);
+  });
+  it('an opt-out promises only what exists: the person is set aside when recorded; no 14-day cool-down is claimed', () => {
+    const s = projectPursuitState(base({ replies: [{ from: 'tim@acme.com', name: null, at: '2026-10-05T13:58:00Z', subject: null, snippet: 'stop', triaged: false }] }));
+    expect(`${s.blocker} ${s.unlock}`).not.toMatch(/14 days|cools/);
+  });
+});

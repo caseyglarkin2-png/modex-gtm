@@ -91,6 +91,16 @@ export interface PursuitState {
   deals: PursuitInput['opportunity']['deals'];
 }
 
+/**
+ * A relationship is real when you met them, were introduced or referred (a conference, an event, a meeting, a call, a
+ * referral, a customer or partner). A newsletter subscriber, a list member, a follower or a page visitor is a signal
+ * (contract 5.3), never a relationship that leads the account.
+ */
+export function isRealRelationship(sourceType: string | null | undefined, source: string | null | undefined): boolean {
+  const text = `${sourceType ?? ''} ${source ?? ''}`;
+  return /conference|event|meeting|referral|intro|customer|partner|call/i.test(text) && !/newsletter|subscriber|subscription|follower|list\b|visitor|webinar/i.test(text);
+}
+
 export const STATE_LINE: Record<PursuitStateKind, string> = {
   replied: 'Someone replied',
   opted_out: 'Opted out',
@@ -156,8 +166,8 @@ export function projectPursuitState(i: PursuitInput): PursuitState {
     if (replyClass.kind === 'opt_out') {
       return base('opted_out', {
         stateLine: `${STATE_LINE.opted_out}: ${newestReply.name ?? newestReply.from}, ${day(newestReply.at)}`,
-        blocker: `${newestReply.name ?? newestReply.from} replied "${newestReply.snippet.slice(0, 40)}" on ${day(newestReply.at)}: record it as do not contact. No reply goes back; the account cools before anyone else is touched.`,
-        unlock: 'Record the opt-out; GAP then sets that person aside and the account waits 14 days.',
+        blocker: `${newestReply.name ?? newestReply.from} replied "${newestReply.snippet.slice(0, 40)}" on ${day(newestReply.at)}: record it as do not contact. No reply goes back, and nobody at ${i.accountName} gets a cold email until it is recorded.`,
+        unlock: 'Record the opt-out; GAP then sets that person aside. Anyone else here is your call afterwards, not the queue\'s.',
       });
     }
     // out_of_office and bounce: noted on the inbound line, never a state of their own.
@@ -229,9 +239,10 @@ export function projectPursuitState(i: PursuitInput): PursuitState {
     return base('research', { person: null, blocker: `Nobody on record runs transportation, logistics, freight or the fleet at ${i.accountName}. Find the operator.`, unlock: 'A source-backed operator is added to GAP.' });
   }
   if (i.motionType === 'NO_GOOD_MOTION') {
+    const why = i.briefNext?.trim() ?? '';
     return base('research', {
-      stateLine: 'Research: no angle to open on yet',
-      blocker: i.briefNext?.trim() || `No approved angle grounds a first touch at ${i.accountName} yet. The people below stand; the angle is what is missing.`,
+      stateLine: /needs review/i.test(why) ? 'Research: the angle needs your review before it is used' : /no thesis grounded|draft and review/i.test(why) ? 'Research: a verified fact, no angle grounded on it yet' : 'Research: no angle to open on yet',
+      blocker: why || `No approved angle grounds a first touch at ${i.accountName} yet. The people below stand; the angle is what is missing.`,
       chooseAllowed: true,
       unlock: 'A verified fact and an approved angle.',
     });

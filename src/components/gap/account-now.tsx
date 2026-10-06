@@ -78,7 +78,11 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, 
           <VoicePreviewButton text={v.listen} label="Listen" className="min-h-11 shrink-0 px-4" />
         </div>
         <p className="text-xs text-[var(--muted-foreground)]" data-testid="now-last-touch">
-          {v.lastTouch}
+          {inbound && inbound.kind !== 'human' && /their reply, below\.$/.test(v.lastTouch)
+            ? v.lastTouch.replace(/their reply, below\.$/, 'an automatic notice, below.')
+            : inbound && /^No touch on record\.?$/.test(v.lastTouch)
+              ? 'No GAP touch on record; the reply below answers an earlier email GAP did not send.'
+              : v.lastTouch}
         </p>
         {inbound ? (
           <p className={`text-xs font-medium ${inbound.kind === 'human' ? 'text-sky-800 dark:text-sky-300' : inbound.kind === 'opt_out' ? 'text-red-700 dark:text-red-400' : 'text-[var(--muted-foreground)]'}`} data-testid="now-last-inbound" data-reply-class={inbound.kind}>

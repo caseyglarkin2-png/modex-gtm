@@ -15,7 +15,7 @@ import { geoPhrase, isSponsor } from './person-prior';
 export const STACK_DEFAULT_MAX = 4;
 export const STACK_MIN = 3;
 
-export type PursuitSlot = 'Next operator' | 'Second operator' | 'Tech / transformation' | 'Executive sponsor' | 'Site / regional operator' | 'Relationship route';
+export type PursuitSlot = 'Next operator' | 'Eligible operator' | 'Tech / transformation' | 'Executive sponsor' | 'Site / regional operator' | 'Relationship route';
 
 export interface StackRow {
   key: string;
@@ -79,6 +79,12 @@ export interface PeopleStack {
   setAside: { count: number; line: string | null };
   /** The eligible list beyond the default rows, in the resolver's order (the "Show all" path). */
   more: StackRow[];
+  /**
+   * The named pursuit slots the resolver filled (executive sponsor, tech / transformation, site operator) when they are
+   * not already a default row: level 2 for a first touch, shown as one compact line each, never a full card and never
+   * a cold first touch.
+   */
+  slots: StackRow[];
 }
 
 const EMPLOYMENT_MATERIAL = new Set(['CURRENT_CONFIRMED', 'EMPLOYMENT_CONFLICT', 'LEFT_COMPANY_CONFIRMED']);
@@ -86,7 +92,12 @@ const ROLE_MATERIAL = new Set(['ROLE_CURRENT_CONFIRMED', 'ROLE_CURRENT_LIKELY', 
 
 const sameKey = (a: number[] | undefined, b: number[] | undefined) => !!a && !!b && a.length === b.length && a.every((v, i) => v === b[i]);
 
-function slotOf(c: OwnerCandidate, index: number, r: OwnerResolution): PursuitSlot {
+/**
+ * The slot a row carries. "Next operator" only for the person who IS next (chosen by the seller, or the resolver's
+ * single preselection); every other eligible person is "Eligible operator", never a positional "second" that claims
+ * an order the evidence may not hold.
+ */
+function slotOf(c: OwnerCandidate, r: OwnerResolution, chosenKey: string | null): PursuitSlot {
   if (r.sponsor && r.sponsor.key === c.key) return 'Executive sponsor';
   if (r.tech && r.tech.key === c.key) return 'Tech / transformation';
   if (r.site && r.site.key === c.key) return 'Site / regional operator';
@@ -94,8 +105,10 @@ function slotOf(c: OwnerCandidate, index: number, r: OwnerResolution): PursuitSl
   if (c.read.lane === 'TRANSFORMATION_TECH') return 'Tech / transformation';
   if (c.read.lane === 'FACILITY_OPERATOR') return 'Site / regional operator';
   if (isSponsor(c.read, c.title)) return 'Executive sponsor';
-  return index === 0 ? 'Next operator' : 'Second operator';
+  return chosenKey === c.key ? 'Next operator' : 'Eligible operator';
 }
+
+const shortLocation = (s: string | null) => (s ? s.replace(/,\s*United States$/i, '') : null);
 
 /** The facets a reason can be built from, most specific first. Each is one short sentence or null. */
 function facets(c: OwnerCandidate): Array<{ name: string; text: string | null }> {
@@ -106,7 +119,7 @@ function facets(c: OwnerCandidate): Array<{ name: string; text: string | null }>
   const family = c.provenance && c.provenance.relation !== 'primary' ? `Read through ${c.provenance.accountName}` : null;
   const remit = c.read.laneWhy ? `${c.read.laneWhy.charAt(0).toUpperCase()}${c.read.laneWhy.slice(1)}` : null;
   const geo = `${geoPhrase(c.read)}${c.read.scope === 'NETWORK' ? ', network scope' : c.read.scope === 'SITE' ? ', one site' : ''}`;
-  const where = c.location ? `Based in ${c.location}` : null;
+  const where = c.location ? `Based in ${shortLocation(c.location)}` : null;
   return [
     { name: 'relationship', text: relationship ? relationship.replace(/^Source: a relationship \((.*?)\).*$/, 'You have a way in: $1') : null },
     { name: 'relevance', text: rel },
@@ -119,9 +132,23 @@ function facets(c: OwnerCandidate): Array<{ name: string; text: string | null }>
   ];
 }
 
+/** The title's own distinguishing fragment ("Inbound Logistics" against "Transportation Strategy & Planning"). */
+function titleFragment(title: string | null, others: Array<string | null>): string | null {
+  if (!title) return null;
+  const words = (t: string) => new Set(t.toLowerCase().split(/[^a-z0-9&]+/).filter((w) => w.length > 2));
+  const mine = words(title);
+  const shared = new Set(others.filter((o): o is string => !!o).flatMap((o) => [...words(o)]));
+  const own = [...mine].filter((w) => !shared.has(w));
+  if (!own.length) return null;
+  // Keep the title's own order and capitalisation for the distinguishing words.
+  const kept = title.split(/\s+/).filter((w) => own.includes(w.toLowerCase().replace(/[^a-z0-9&]/g, '')));
+  return kept.length ? `Title: ${kept.join(' ')}` : null;
+}
+
 /**
- * One distinguishing sentence per visible row: the most specific facet whose value no other visible row shares; when
- * every facet is shared (the Walmart wall), the title and location make the row readable and unique.
+ * One distinguishing sentence per visible row: the most specific facet whose value no other visible row shares, then
+ * the title's own distinguishing words, then an honest "same as the row above" (which may repeat; it is said once in
+ * the tie line and never dressed up as a reason).
  */
 function distinguish(rows: OwnerCandidate[]): string[] {
   const all = rows.map(facets);
@@ -134,9 +161,8 @@ function distinguish(rows: OwnerCandidate[]): string[] {
       const shared = all.some((other, j) => j !== i && other.find((g) => g.name === f.name)?.text === f.text);
       if (!shared) { pick = f.text; break; }
     }
-    // Nothing on record sets them apart: say so (never repeat the title as if it were a reason).
-    if (!pick) pick = rows[i].location ? `Based in ${rows[i].location}; nothing else on record sets them apart` : 'Nothing on record sets them apart from the next row (CRM title only)';
-    while (out.includes(pick)) pick = `${pick} (${rows[i].name})`;
+    if (!pick) pick = titleFragment(rows[i].title, rows.filter((_, j) => j !== i).map((x) => x.title));
+    if (!pick) pick = 'Same responsibility and location as the row above; nothing on record sets them apart';
     out.push(pick);
   }
   return out;
@@ -153,21 +179,23 @@ function currentnessOf(c: OwnerCandidate): string | null {
   return parts.length ? parts.join(' ') : null;
 }
 
-function toRow(c: OwnerCandidate, index: number, r: OwnerResolution, reason: string, ordinal: number | null, chosen: { key: string | null; by: string | null }): StackRow {
+function toRow(c: OwnerCandidate, r: OwnerResolution, reason: string, ordinal: number | null, chosen: { key: string | null; by: string | null }): StackRow {
   const rec = r.recommended && r.recommended.key === c.key ? r.recommended : null;
+  const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
   return {
     key: c.key,
     personaId: c.personaId,
     hubspotContactId: c.hubspotContactId,
     name: c.name,
     title: c.title,
-    slot: slotOf(c, index, r),
+    slot: slotOf(c, r, chosen.key),
     ordinal,
     badge: rec ? `Recommended: ${rec.firstDifference}` : null,
     reason,
     currentness: currentnessOf(c),
     reachability: reachabilityOf(c),
-    why: [...(rec ? [rec.why] : []), ...c.reasons],
+    // Everything the resolver says, minus the line already visible as the reason.
+    why: [...(rec ? [rec.why] : []), ...c.reasons].filter((w) => !norm(w).includes(norm(reason)) && !norm(reason).includes(norm(w).replace(/^[a-z /]+: /, ''))),
     chosen: chosen.key === c.key,
     chosenBy: chosen.key === c.key ? chosen.by : null,
     action: c.action,
@@ -187,47 +215,49 @@ export function buildPeopleStack(r: OwnerResolution, opts: { chosenKey: string |
   const ordered = chosenKey ? [eligible.find((c) => c.key === chosenKey)!, ...eligible.filter((c) => c.key !== chosenKey)] : [...eligible];
   // Slots the resolver named (sponsor / tech / site) are worth a row when they are not already in the top rows and
   // when the default rows have room: never a manufactured slot, never beyond the cap.
-  // The named slots (sponsor / tech / site) are worth a row of their own when they are not already in the top rows:
-  // the resolver filled them from everyone contactable and here, so they may not be cold-eligible. They never push
-  // an eligible operator out of the default rows and never exceed the cap; nothing is manufactured.
+  // The default rows are eligible people only (the resolver's order, the chosen person first). The named slots
+  // (sponsor / tech / site) are level 2 for a first touch: one compact line each, below the rows, never a card and
+  // never a cold first touch; nothing is manufactured when the resolver names nobody.
   const named = [r.sponsor, r.tech, r.site].filter((x, i, a): x is OwnerCandidate => !!x && a.findIndex((y) => y?.key === x.key) === i);
-  const topEligible = ordered.filter((c) => !named.some((n) => n.key === c.key)).slice(0, Math.max(STACK_MIN, max - named.length));
-  const visible = [...topEligible];
-  for (const n of named) if (visible.length < max + named.length && !visible.some((c) => c.key === n.key)) visible.push(n);
+  const visible = ordered.slice(0, max);
   const visibleKeys = new Set(visible.map((c) => c.key));
   const rest = ordered.filter((c) => !visibleKeys.has(c.key));
+  const slotPeople = named.filter((n) => !visibleKeys.has(n.key));
 
-  // Ordinals only when the resolver's order among the visible eligible rows is evidence-backed everywhere (no two
-  // adjacent rows share a key). Any tie among them removes every ordinal: a "1" above unnumbered rows claims an order.
-  const eligibleVisible = visible.filter((c) => eligible.some((e) => e.key === c.key) && !named.some((n) => n.key === c.key));
-  const tie = eligibleVisible.length >= 2 && eligibleVisible.some((c, i, a) => i > 0 && sameKey(a[i - 1].rank, c.rank));
-  const tiedKey = tie ? eligibleVisible.find((c, i, a) => i > 0 && sameKey(a[i - 1].rank, c.rank))!.rank : null;
-  const tiedCount = tiedKey ? eligible.filter((c) => sameKey(c.rank, tiedKey)).length : 0;
+  // Ordinals only when the resolver's order among the visible rows is evidence-backed everywhere (no two adjacent
+  // rows share a key). Any tie among them removes every ordinal: a "1" above unnumbered rows claims an order.
+  const tie = visible.length >= 2 && visible.some((c, i, a) => i > 0 && sameKey(a[i - 1].rank, c.rank));
+  const tiedKey = tie ? visible.find((c, i, a) => i > 0 && sameKey(a[i - 1].rank, c.rank))!.rank : null;
+  const tied = tiedKey ? eligible.filter((c) => sameKey(c.rank, tiedKey)) : [];
   const reasons = distinguish(visible);
   const rows = visible.map((c, i) => {
-    const isNamedSlot = named.some((n) => n.key === c.key) && !eligible.some((e) => e.key === c.key);
-    const evidenceBacked = !tie && !chosenKey && !isNamedSlot;
-    const ordinal = evidenceBacked ? eligibleVisible.findIndex((e) => e.key === c.key) + 1 : 0;
-    return toRow(c, i, r, reasons[i], ordinal > 0 ? ordinal : null, { key: chosenKey, by: chosenBy });
+    const evidenceBacked = !tie && !chosenKey;
+    return toRow(c, r, reasons[i], evidenceBacked ? i + 1 : null, { key: chosenKey, by: chosenBy });
   });
   const moreReasons = distinguish(rest);
-  const more = rest.map((c, i) => toRow(c, rows.length + i, r, moreReasons[i], null, { key: chosenKey, by: chosenBy }));
+  const more = rest.map((c, i) => toRow(c, r, moreReasons[i], null, { key: chosenKey, by: chosenBy }));
+  const slotReasons = distinguish(slotPeople);
+  const slots = slotPeople.map((c, i) => toRow(c, r, slotReasons[i], null, { key: chosenKey, by: chosenBy }));
 
   const hidden = rest.length;
   const setAsideCount = r.excluded.length;
   const setAsideLine = setAsideCount
     ? `${setAsideCount} set aside: ${r.excluded.slice(0, 3).map((e) => `${e.candidate.name} (${SET_ASIDE_LABEL[e.code] ?? e.code.replace(/_/g, ' ')})`).join(', ')}${setAsideCount > 3 ? ` and ${setAsideCount - 3} more` : ''}.`
     : null;
+  const tiedNames = tied.slice(0, 3).map((c) => c.name);
+  const tieWho = tied.length > 3 ? `${tiedNames.join(', ')} and ${tied.length - 3} more` : tiedNames.length > 1 ? `${tiedNames.slice(0, -1).join(', ')} and ${tiedNames[tiedNames.length - 1]}` : tiedNames.join('');
 
   return {
     rows,
     hidden,
-    showAllLabel: hidden ? `Show ${hidden} more on record (ranked lower on evidence)` : null,
+    // "Ranked lower on evidence" only when the order IS evidence; under a tie the rest are simply the rest.
+    showAllLabel: hidden ? (tie ? `Show ${hidden} more on record` : `Show ${hidden} more on record (ranked lower on evidence)`) : null,
     tie,
-    tieLine: tie ? `GAP could not separate ${tiedCount} people on evidence: the same responsibility, market and reachability. Tie-break: name order. Choose on what you know.` : null,
+    tieLine: tie ? `GAP could not separate ${tieWho} on evidence (the same responsibility, market and reachability); their order here is first-name order, not a ranking. Choose on what you know.` : null,
     chooseLabel: !chosenKey && eligible.length >= 2 ? `Choose who (${eligible.length})` : null,
     chosenMissing,
     setAside: { count: setAsideCount, line: setAsideLine },
     more,
+    slots,
   };
 }

@@ -17,7 +17,7 @@ import { loadOwnerResolution } from '../people/owner-resolution-load';
 import type { OwnerResolution } from '../people/owner-resolution';
 import { buildPeopleStack, type PeopleStack } from '../people/stack';
 import { readyTargetOf, type ReadyTarget } from '../context/send-target';
-import { projectPursuitState, type PursuitInput, type PursuitReply, type PursuitState } from './state';
+import { isRealRelationship, projectPursuitState, type PursuitInput, type PursuitReply, type PursuitState } from './state';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -92,11 +92,19 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
     outstandingDraft: od ? { recipient: od.recipient, name: null, decisionId: od.decisionId ?? '' } : null,
     followUpDue: due ? { personaId: due.persona.id, name: due.persona.displayName ?? due.persona.email ?? 'the person', dueAt: due.touch?.dueAt ?? now.toISOString(), cardHref: cockpitOpenHref('follow_up', due.id) } : null,
     eligible: (resolution?.eligible ?? []).map((c) => ({ key: c.key, personaId: c.personaId, hubspotContactId: c.hubspotContactId, name: c.name, title: c.title })),
-    relationship: brief.motion.met ? { name: brief.motion.met.name, title: brief.motion.met.title ?? null, why: `met at ${brief.motion.met.source}` } : brief.motion.who && (brief.motion.type === 'RELATIONSHIP_LED' || brief.motion.type === 'REFERRAL_LED') ? { name: brief.motion.who, title: null, why: brief.motion.why } : null,
+    // A relationship is real when you met them, were introduced or referred; a newsletter subscriber or a list
+    // membership is a signal (contract 5.3), never a relationship that leads the account.
+    relationship: brief.motion.met && isRealRelationship(brief.motion.met.sourceType, brief.motion.met.source)
+      ? { name: brief.motion.met.name, title: brief.motion.met.title ?? null, why: `met at ${brief.motion.met.source}` }
+      : brief.motion.type === 'REFERRAL_LED' && brief.motion.who
+        ? { name: brief.motion.who, title: null, why: brief.motion.why }
+        : null,
     briefNext: brief.glance.nextAction,
   };
   const state = projectPursuitState(input);
-  const chosenKey = state.person && (resolution?.eligible ?? []).some((c) => c.key === state.person!.key) ? state.person.key : null;
+  // Only a HUMAN choice is passed as chosen (chosenBy set); a lone eligible person is the resolver's preselection and
+  // reads "GAP: the only eligible person", never "Chosen by you" (trust review).
+  const chosenKey = state.person?.chosenBy && (resolution?.eligible ?? []).some((c) => c.key === state.person!.key) ? state.person.key : null;
   const stack = resolution ? buildPeopleStack(resolution, { chosenKey, chosenBy: state.person?.chosenBy ?? null }) : null;
   return { state, resolution, stack, hypothesisId: top?.id ?? null, ready: readyTargetOf(mine) };
 }

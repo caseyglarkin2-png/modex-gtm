@@ -91,19 +91,42 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
 
   const chosenRow = stack.rows.find((r) => r.chosen) ?? null;
   const rows = showAll ? [...stack.rows, ...stack.more] : stack.rows;
+  // A relationship-led account: the person you met or the introducer leads, and they are not an owner-resolution row.
+  const lead = state.person && /^(relationship|intro):/.test(state.person.key) ? state.person : null;
+  // Under a hold or a deal no ordinal and no "choose who": the list is the people on record, not a cold-touch choice.
+  const choosing = state.chooseAllowed;
+  const callAllowed = state.state !== 'opted_out' && state.state !== 'in_deal' && state.state !== 'held';
 
   return (
     <section className="space-y-2" data-testid="people-stack" aria-labelledby="people-stack-heading">
       <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
         <h2 id="people-stack-heading" className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">
-          People{stack.hidden ? ` (top ${stack.rows.length} of ${stack.rows.length + stack.hidden} on record)` : ''}
+          People{stack.hidden ? ` (${stack.rows.length} of ${stack.rows.length + stack.hidden} eligible for a first touch)` : ' (eligible for a first touch)'}
         </h2>
-        {stack.chooseLabel ? <p className="text-xs font-medium" data-testid="people-stack-choose-label">{stack.chooseLabel}: GAP does not pick.</p> : null}
+        {stack.chooseLabel && choosing ? <p className="text-xs font-medium" data-testid="people-stack-choose-label">{stack.chooseLabel}: GAP does not pick.</p> : null}
+        {!choosing ? <p className="text-xs text-[var(--muted-foreground)]" data-testid="people-stack-on-record">On record; no cold touch right now (see Next).</p> : null}
       </div>
-      {stack.tieLine ? (
+      {stack.tieLine && choosing ? (
         <p className="text-xs text-[var(--muted-foreground)]" data-testid="people-stack-tie">
           {stack.tieLine}
         </p>
+      ) : null}
+      {lead ? (
+        <div className="rounded-md border border-[var(--primary)] bg-[var(--muted)]/30 p-3" data-testid="people-stack-lead">
+          <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+            <p className="font-medium">
+              {lead.name}
+              {lead.title ? <span className="font-normal text-[var(--muted-foreground)]">, {lead.title}</span> : null}
+            </p>
+            <span className="rounded-sm border border-[var(--border)] px-1 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--muted-foreground)]">Relationship route</span>
+          </div>
+          <p className="mt-0.5 text-sm">{state.stateLine}. {state.unlock ?? ''}</p>
+          <div className="mt-2 flex flex-wrap items-center gap-2">
+            <Link href={`/gap/capture?account=${encodeURIComponent(accountName)}`} className={PRIMARY} data-testid="people-stack-lead-log">
+              Log the touch
+            </Link>
+          </div>
+        </div>
       ) : null}
       {stack.chosenMissing || state.chosenMissing ? (
         <p className="rounded-md border border-amber-500/40 bg-amber-500/10 p-2 text-xs" role="status" data-testid="people-stack-chosen-missing">
@@ -115,7 +138,7 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
         {rows.map((row) => (
           <li key={row.key} className={`rounded-md border p-3 ${row.chosen ? 'border-[var(--primary)] bg-[var(--muted)]/30' : 'border-[var(--border)]'}`} data-testid="people-stack-row" data-key={row.key} data-chosen={row.chosen ? 'true' : 'false'} data-slot={row.slot}>
             <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
-              {row.ordinal !== null ? <span className="text-xs font-semibold tabular-nums text-[var(--muted-foreground)]" data-testid="people-stack-ordinal">{row.ordinal}.</span> : null}
+              {row.ordinal !== null && choosing ? <span className="text-xs font-semibold tabular-nums text-[var(--muted-foreground)]" data-testid="people-stack-ordinal">{row.ordinal}.</span> : null}
               <p className="font-medium">
                 {row.name}
                 {row.title ? <span className="font-normal text-[var(--muted-foreground)]">, {row.title}</span> : null}
@@ -138,7 +161,7 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
                   <span className="text-xs text-amber-700 dark:text-amber-400" data-testid="people-stack-held">
                     {state.state === 'in_motion' ? 'First touch sent; waiting.' : 'No cold touch right now (see Next).'}
                   </span>
-                  {row.personaId !== null ? (
+                  {row.personaId !== null && callAllowed ? (
                     <Link href={`/gap/call/${row.personaId}`} className={OUTLINE} data-testid="people-stack-call">
                       Call prep
                     </Link>
@@ -199,6 +222,31 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
         <p role={note.kind} className={`text-xs ${note.kind === 'alert' ? 'text-red-700 dark:text-red-400' : ''}`} data-testid="people-stack-note">
           {note.text}
         </p>
+      ) : null}
+
+      {stack.slots.length ? (
+        <ul className="space-y-1 text-xs" data-testid="people-stack-slots" aria-label="Also on record">
+          {stack.slots.map((row) => (
+            <li key={row.key} className="flex flex-wrap items-baseline gap-x-2" data-testid="people-stack-slot" data-slot={row.slot}>
+              <span className="rounded-sm border border-[var(--border)] px-1 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--muted-foreground)]">{row.slot}</span>
+              <span className="font-medium">{row.name}</span>
+              {row.title ? <span className="text-[var(--muted-foreground)]">, {row.title}</span> : null}
+              <span className="text-[var(--muted-foreground)]">(not a cold first touch)</span>
+              <button type="button" className={TEXT} aria-expanded={open.has(row.key)} aria-controls={`why-${row.key}`} onClick={() => toggle(row.key)} data-testid="people-stack-why">
+                {open.has(row.key) ? 'Hide why' : 'Why?'}
+              </button>
+              {open.has(row.key) ? (
+                <ul id={`why-${row.key}`} className="basis-full space-y-0.5 pl-2 text-[var(--muted-foreground)]" data-testid="people-stack-why-list">
+                  {[row.reason, ...row.why].map((w) => (
+                    <li key={w}>{w}</li>
+                  ))}
+                </ul>
+              ) : (
+                <span id={`why-${row.key}`} className="sr-only">{row.reason}</span>
+              )}
+            </li>
+          ))}
+        </ul>
       ) : null}
 
       {stack.hidden || stack.setAside.count ? (
