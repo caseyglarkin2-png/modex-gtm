@@ -42,6 +42,8 @@ import { Breadcrumb } from '@/components/breadcrumb';
 import { GapSubnav } from '@/components/gap/gap-subnav';
 import { GapCockpit, NextUp, type CockpitLane } from '@/components/gap/gap-cockpit';
 import { buildNextUpCandidates, heldAccountsOf, pickNextUpV2 } from '@/lib/gap/routing/next-up';
+import { buildWorkList, type WorkCard } from '@/lib/gap/work/list';
+import { WorkList } from '@/components/gap/work-list';
 import { laneWithMotion, loadCockpitMotions, type CockpitMotions } from '@/lib/gap/motion/cockpit';
 import { ThesisGroupReview } from '@/components/gap/thesis-group-review';
 import { ActionPackView } from '@/components/gap/action-pack-view';
@@ -134,8 +136,7 @@ async function loadCockpit() {
     (expiryRows as Array<{ hypothesis_id: string; signal: { freshness_expires_at: Date | null } | null }>).map((r) => [r.hypothesis_id, r.signal?.freshness_expires_at ? new Date(r.signal.freshness_expires_at).toISOString() : null]),
   );
   const oneOffAccount = new Map(groups.flatMap((g) => g.members.map((m) => [m.id, g.accountName] as const)));
-  const next = pickNextUpV2(
-    buildNextUpCandidates({
+  const candidates = buildNextUpCandidates({
       replies: repliesPage.items,
       followUps: followUp,
       ready,
@@ -147,9 +148,22 @@ async function loadCockpit() {
       inbox: inbox.map((a) => ({ accountName: a.accountName, ready: a.ready.length, people: Math.max(0, ...a.theses.map((t) => t.people)) })),
       tiers,
       openHref: cockpitOpenHref,
-    }),
-    heldAccountsOf(queue.items),
-  );
+    });
+  const next = pickNextUpV2(candidates, heldAccountsOf(queue.items));
+  // UX-08: WORK, one card per account in the same order, over the same reads (never a second state engine).
+  const heldWhy = new Map<string, 'active_opportunity' | 'opportunity_unknown'>();
+  for (const it of queue.items) {
+    if (it.ruleId === 'opportunity_unknown') heldWhy.set(it.account.name, 'opportunity_unknown');
+    else if (it.ruleId === 'active_opportunity' && !heldWhy.has(it.account.name)) heldWhy.set(it.account.name, 'active_opportunity');
+  }
+  const work: WorkCard[] = buildWorkList({
+    now,
+    candidates,
+    replies: repliesPage.items.map((r) => ({ accountName: r.accountName, contactEmail: r.contactEmail, subject: r.subject, snippet: r.snippet, receivedAt: r.receivedAt })),
+    motions: motion.motions.map((m) => ({ accountName: m.accountName, state: m.state, primary: m.primary ? { name: m.primary.name, title: m.primary.title } : null, next: m.next ? { name: m.next.name, title: m.next.title, unlock: m.next.unlock } : null })),
+    inDeals: { status: inDeals.status, accounts: inDeals.accounts.map((a) => ({ accountName: a.accountName, deals: a.deals.map((d) => ({ name: d.name, stage: d.stage })) })) },
+    held: heldWhy,
+  });
 
   const routableHypotheses = 'tooLarge' in routableScope ? 0 : routableScope.hypothesesCount;
   const routableAccounts = 'tooLarge' in routableScope ? routableScope.accountCount : routableScope.accountNames.length;
@@ -164,6 +178,7 @@ async function loadCockpit() {
     },
     inDeals,
     next,
+    work,
     groups: reviewGroups,
     readyOneOffIds,
     researchGroups,
@@ -316,7 +331,7 @@ async function InDealsLane({ summary, open }: { summary: InDealsSummary; open: s
   );
 }
 
-export default async function GapCockpitPage({ searchParams }: { searchParams?: Promise<{ lane?: string; open?: string; account?: string }> }) {
+export default async function GapCockpitPage({ searchParams }: { searchParams?: Promise<{ lane?: string; open?: string; account?: string; filter?: string; q?: string; focus?: string }> }) {
   if (assertGapEnabled('GAP_ROUTING_ENABLED')) notFound();
 
   const session = await auth();
@@ -381,7 +396,11 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
           )}
         </section>
       ) : (
-        <NextUp items={data.next} />
+        <>
+          {/* UX-08: WORK is the landing: the accounts that need the seller, one card each, the lanes as filters. */}
+          <WorkList cards={data.work} focus={/^\d+$/.test(params.focus ?? '') ? Number(params.focus) : null} />
+          {data.work.length === 0 ? <NextUp items={data.next} /> : null}
+        </>
       )}
 
       {data.unrouted === 0 ? (
