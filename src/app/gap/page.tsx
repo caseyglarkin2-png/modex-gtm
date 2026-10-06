@@ -29,6 +29,7 @@
  */
 
 import { notFound, redirect } from 'next/navigation';
+import { after } from 'next/server';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
@@ -43,6 +44,7 @@ import { GapSubnav } from '@/components/gap/gap-subnav';
 import { GapCockpit, NextUp, type CockpitLane } from '@/components/gap/gap-cockpit';
 import { buildNextUpCandidates, heldAccountsOf, pickNextUpV2 } from '@/lib/gap/routing/next-up';
 import { buildWorkList, type WorkCard } from '@/lib/gap/work/list';
+import { readPursuitSummaries, warmPursuitSummaries } from '@/lib/gap/pursuit/summary';
 import { WorkList } from '@/components/gap/work-list';
 import { laneWithMotion, loadCockpitMotions, type CockpitMotions } from '@/lib/gap/motion/cockpit';
 import { ThesisGroupReview } from '@/components/gap/thesis-group-review';
@@ -156,9 +158,12 @@ async function loadCockpit() {
     if (it.ruleId === 'opportunity_unknown') heldWhy.set(it.account.name, 'opportunity_unknown');
     else if (it.ruleId === 'active_opportunity' && !heldWhy.has(it.account.name)) heldWhy.set(it.account.name, 'active_opportunity');
   }
+  const workAccounts = [...new Set([...candidates.map((c) => c.accountName).filter((x): x is string => !!x), ...repliesPage.items.map((r) => r.accountName), ...inDeals.accounts.map((a) => a.accountName)])];
   const work: WorkCard[] = buildWorkList({
     now,
     candidates,
+    // The canonical pursuit state where it was read recently (the workspace, or the warmer below); else the lanes.
+    summaries: readPursuitSummaries(workAccounts, now),
     replies: repliesPage.items.map((r) => ({ accountName: r.accountName, contactEmail: r.contactEmail, subject: r.subject, snippet: r.snippet, receivedAt: r.receivedAt })),
     motions: motion.motions.map((m) => ({ accountName: m.accountName, state: m.state, primary: m.primary ? { name: m.primary.name, title: m.primary.title } : null, next: m.next ? { name: m.next.name, title: m.next.title, unlock: m.next.unlock } : null })),
     inDeals: { status: inDeals.status, accounts: inDeals.accounts.map((a) => ({ accountName: a.accountName, deals: a.deals.map((d) => ({ name: d.name, stage: d.stage })) })) },
@@ -341,6 +346,10 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
   const lane = (params.lane && LANES.has(params.lane) ? params.lane : null) as CockpitLane | null;
   const openId = params.open?.trim() || null;
   const data = await loadCockpit();
+  // UX-08 parity: after the response is sent, read the canonical pursuit state for the first few Work accounts
+  // that have none remembered (serial, bounded, never blocking a render), so the next Work load says what the
+  // workspace says.
+  if (!lane) after(() => warmPursuitSummaries(prisma, data.work.filter((c) => c.source === 'cockpit').map((c) => c.accountName)).catch(() => []));
 
   // The opened card's action pack, built on the server from the same component as the deep link.
   let openPanel: React.ReactNode = null;

@@ -41,6 +41,7 @@ import { projectStory, storyListenText } from '@/lib/gap/story/story';
 import { projectAnchor, storyBesideAnchor } from '@/lib/gap/story/anchor';
 import { remitCaution } from '@/lib/gap/story/anchor-text';
 import { DoneNext } from '@/components/gap/done-next';
+import { rememberPursuitSummary } from '@/lib/gap/pursuit/summary';
 import { listenText } from '@/lib/gap/context/now';
 
 export const dynamic = 'force-dynamic';
@@ -144,6 +145,8 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
       loadPursuit(prisma, { brief, inputs, ctx, now }).catch(() => null),
       loadStoryReaders({ accountName: brief.accountName, domain: accountDomainFor({ domains: inputs.domains, addresses: [...ctx.history.map((h) => h.text.match(/[\w.+-]+@[\w.-]+\.[a-z]{2,}/i)?.[0] ?? ''), ...inputs.firstTouches.map((t) => t.recipient)] }) }).catch(() => ({ clawd: { read: 'unavailable' as const, sends: [] }, vaultNote: null })),
     ]);
+    // UX-08 parity: the Work card says what this page says (remembered in process memory, nothing written).
+    if (pursuit) rememberPursuitSummary(pursuit.state, now);
     const ready = pursuit ? (brief.motion.type === 'FACT_LED' ? pursuit.ready : null) : brief.motion.type === 'FACT_LED' ? await loadReadyTarget(prisma, brief.accountName, now) : null;
     const v = projectNow(brief, ctx, inputs, now, { ready });
     const top = brief.hypotheses.find((h) => h.grounded && h.truth !== 'CONTRADICTED');

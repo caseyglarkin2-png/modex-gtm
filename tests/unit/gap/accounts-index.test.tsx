@@ -7,7 +7,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const push = vi.fn();
 vi.mock('next/navigation', () => ({ useRouter: () => ({ push }) }));
-import { AccountsIndex } from '@/components/gap/accounts-index';
+import { AccountsIndex, INDEX_PAGE } from '@/components/gap/accounts-index';
 import { filterAccounts, orderAccounts, toIndexRow, type AccountIndexRow } from '@/lib/gap/accounts/index-list';
 
 const rows: AccountIndexRow[] = orderAccounts([
@@ -37,6 +37,7 @@ describe('<AccountsIndex>', () => {
     render(<AccountsIndex rows={rows} />);
     expect(document.activeElement).toBe(screen.getByTestId('accounts-search'));
     expect(screen.getByTestId('accounts-count')).toHaveTextContent('4 accounts');
+    expect(screen.getByTestId('accounts-count')).not.toHaveTextContent('type to find one');
     expect(screen.getAllByTestId('accounts-row')[0]).toHaveTextContent('PepsiCo');
     expect(screen.getAllByTestId('accounts-row')[0]).toHaveTextContent('Tier 1 · cpg · 19 people on record · last first touch Jun 10');
     fireEvent.change(screen.getByTestId('accounts-search'), { target: { value: 'kro' } });
@@ -45,6 +46,14 @@ describe('<AccountsIndex>', () => {
     expect(screen.getByTestId('accounts-row')).toHaveTextContent('no GAP touch yet');
     fireEvent.submit(screen.getByTestId('accounts-search').closest('form')!);
     expect(push).toHaveBeenCalledWith('/gap/accounts/kroger');
+  });
+  it('a long index shows its first page and says to type; a query shows every match', () => {
+    const many = orderAccounts(Array.from({ length: 150 }, (_, k) => toIndexRow({ name: `Account ${String(k).padStart(3, '0')}`, tier: 'Tier 3', vertical: 'retail', priority_band: 'C' }, 1, null)));
+    render(<AccountsIndex rows={many} />);
+    expect(screen.getAllByTestId('accounts-row')).toHaveLength(INDEX_PAGE);
+    expect(screen.getByTestId('accounts-count')).toHaveTextContent(`150 accounts, the first ${INDEX_PAGE} shown: type to find one`);
+    fireEvent.change(screen.getByTestId('accounts-search'), { target: { value: 'account 1' } });
+    expect(screen.getAllByTestId('accounts-row').length).toBeGreaterThan(INDEX_PAGE);
   });
   it('says so when nothing matches and opens nothing on Enter', () => {
     render(<AccountsIndex rows={rows} initialQuery="zzz" />);

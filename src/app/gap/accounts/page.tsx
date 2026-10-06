@@ -20,8 +20,10 @@ async function loadIndex(): Promise<AccountIndexRow[]> {
   const now = new Date();
   const accounts = (await prisma.account.findMany({ select: { name: true, tier: true, vertical: true, priority_band: true }, orderBy: { name: 'asc' } })) as Array<{ name: string; tier: string | null; vertical: string | null; priority_band: string | null }>;
   const names = accounts.map((a) => a.name);
-  const [people, touches] = await Promise.all([
+  const [people, theses, touches] = await Promise.all([
     prisma.persona.groupBy({ by: ['account_name'], _count: { _all: true } }).catch(() => [] as Array<{ account_name: string; _count: { _all: number } }>),
+    // GAP accounts are the ones GAP has worked: people, a thesis or a first touch on record (the TAM universe stays in Sources).
+    prisma.prospectingHypothesis.groupBy({ by: ['account_name'] }).catch(() => [] as Array<{ account_name: string }>),
     // The same proven first touches the motion reads (Gmail-proven sends, drafts in flight): the newest per account.
     loadAccountFirstTouches(prisma, names, now).catch(() => new Map<string, Array<{ sentAt: string }>>()),
   ]);
@@ -30,7 +32,9 @@ async function loadIndex(): Promise<AccountIndexRow[]> {
     const t = [...(touches.get(name) ?? [])].map((x) => x.sentAt).sort().pop();
     return t ?? null;
   };
-  return orderAccounts(accounts.map((a) => toIndexRow(a, peopleBy.get(a.name) ?? 0, lastTouch(a.name))));
+  const withThesis = new Set((theses as Array<{ account_name: string }>).map((t) => t.account_name));
+  const gapAccounts = accounts.filter((a) => (peopleBy.get(a.name) ?? 0) > 0 || withThesis.has(a.name) || (touches.get(a.name)?.length ?? 0) > 0);
+  return orderAccounts(gapAccounts.map((a) => toIndexRow(a, peopleBy.get(a.name) ?? 0, lastTouch(a.name))));
 }
 
 export default async function GapAccountsPage({ searchParams }: { searchParams?: Promise<{ q?: string }> }) {

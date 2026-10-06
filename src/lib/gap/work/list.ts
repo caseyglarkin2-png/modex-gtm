@@ -9,8 +9,10 @@
  *
  *   - one card per account: its highest-ranked work
  *   - replies are classified first: only a HUMAN reply heads the list; an opt-out is "Opted out: record it" and
- *     ranks after READY (quick admin, never a conversation); an automatic reply is not work (dropped); a bounce is
- *     research (find a working address)
+ *     ranks after RESEARCH (quick admin, never cold work, never at the head); an automatic reply is not work
+ *     (dropped); a bounce is research (find a working address)
+ *   - the one canonical pursuit state, when the workspace or the warmer read it recently (pursuit/summary.ts),
+ *     overrides the cockpit lane's state, person and rank on the card (FedEx: READY with Glen, not research)
  *   - an account in a deal, or whose opportunity truth is UNKNOWN, is never a cold action: it lists under In a deal
  *     with "work it from the deal" (or the HubSpot caution), last
  *   - counts are the filtered contents, never a separate tally (N4)
@@ -18,6 +20,8 @@
 import { accountHref } from '../account-intel/href';
 import { classifyReply, type ReplyClassKind } from '../replies/classify';
 import { LANE_RANK, type NextCandidate } from '../routing/next-up';
+import type { PursuitSummary } from '../pursuit/summary';
+import type { PursuitStateKind } from '../pursuit/state';
 import type { CockpitLane } from '@/components/gap/gap-cockpit';
 
 export type WorkStateKind = 'replied' | 'opted_out' | 'bounced' | 'follow_up' | 'ready' | 'decide' | 'research' | 'in_deal' | 'unknown_deal';
@@ -39,6 +43,8 @@ export interface WorkCard {
   blocker: string | null;
   /** Position in the Work order (0-based), frozen into the href. */
   index: number;
+  /** Where the state came from: the canonical pursuit read (fresh), or the cockpit's lanes. */
+  source: 'pursuit' | 'cockpit';
 }
 
 export interface WorkInput {
@@ -53,6 +59,8 @@ export interface WorkInput {
   inDeals: { status: 'complete' | 'unavailable'; accounts: ReadonlyArray<{ accountName: string; deals: ReadonlyArray<{ name: string | null; stage: string }> }> };
   /** Accounts a current card holds for an open deal or an UNKNOWN opportunity read (never a cold action). */
   held: ReadonlyMap<string, 'active_opportunity' | 'opportunity_unknown'>;
+  /** Fresh canonical pursuit summaries by account (pursuit/summary.ts), when any. */
+  summaries?: ReadonlyMap<string, PursuitSummary>;
 }
 
 const STATE_TEXT: Record<WorkStateKind, string> = {
@@ -68,7 +76,12 @@ const STATE_TEXT: Record<WorkStateKind, string> = {
 };
 
 /** The rank a classified reply takes: a human reply first of all; an opt-out after READY; a bounce with research. */
-const REPLY_RANK: Record<ReplyClassKind, number | null> = { human: LANE_RANK.replies, opt_out: LANE_RANK.ready + 0.5, bounce: LANE_RANK.research, out_of_office: null };
+const REPLY_RANK: Record<ReplyClassKind, number | null> = { human: LANE_RANK.replies, opt_out: LANE_RANK.research + 0.5, bounce: LANE_RANK.research, out_of_office: null };
+
+/** The canonical pursuit state's rank and card words (contract 5.1 order: reply, hold, follow up, in motion, ready, choose, research). */
+const PURSUIT_RANK: Record<PursuitStateKind, number> = { replied: 0, opted_out: LANE_RANK.research + 0.5, in_deal: LANE_RANK.deals, held: LANE_RANK.deals - 0.5, follow_up_due: 1, in_motion: 1.5, ready: 2, choose_person: 2.5, research: 4, idle: 4.5 };
+const PURSUIT_KIND: Record<PursuitStateKind, WorkStateKind> = { replied: 'replied', opted_out: 'opted_out', in_deal: 'in_deal', held: 'in_deal', follow_up_due: 'follow_up', in_motion: 'ready', ready: 'ready', choose_person: 'ready', research: 'research', idle: 'research' };
+const PURSUIT_LANE: Record<PursuitStateKind, CockpitLane> = { replied: 'replies', opted_out: 'replies', in_deal: 'deals', held: 'deals', follow_up_due: 'follow_up', in_motion: 'ready', ready: 'ready', choose_person: 'ready', research: 'research', idle: 'research' };
 
 function cmpKeys(a: Array<number | string>, b: Array<number | string>): number {
   for (let i = 0; i < Math.max(a.length, b.length); i += 1) {
@@ -88,7 +101,8 @@ const day = (s: string) => new Date(s).toLocaleDateString('en-US', { month: 'sho
 interface Ranked {
   rank: number;
   sortKey: Array<number | string>;
-  card: Omit<WorkCard, 'href' | 'index'>;
+  card: Omit<WorkCard, 'href' | 'index' | 'source'>;
+  source?: 'pursuit' | 'cockpit';
 }
 
 export function buildWorkList(i: WorkInput): WorkCard[] {
@@ -163,8 +177,30 @@ export function buildWorkList(i: WorkInput): WorkCard[] {
     offer({ rank: LANE_RANK.deals, sortKey: [unknown ? 0 : 1, name], card: { accountName: name, lane: 'deals', stateKind: unknown ? 'unknown_deal' : 'in_deal', state: STATE_TEXT[unknown ? 'unknown_deal' : 'in_deal'], why: unknown ? 'HubSpot could not say whether this account is in a deal: no cold touch until it can.' : 'A current card holds this account for an open deal.', person: null, next: unknown ? null : { label: 'Open the deal brief', href: `${accountHref(name)}?view=brief` }, blocker: unknown ? 'Check HubSpot directly before contacting anyone.' : 'No cold first touch while the deal is open.' } });
   }
 
+  // The canonical pursuit state wins where it is fresh: the card says what the workspace says, and ranks by it.
+  for (const [name, s] of i.summaries ?? []) {
+    const have = best.get(name);
+    if (!have) continue;
+    const kind = PURSUIT_KIND[s.state];
+    const held = s.state === 'in_deal' || s.state === 'held';
+    best.set(name, {
+      rank: PURSUIT_RANK[s.state],
+      sortKey: have.sortKey,
+      source: 'pursuit',
+      card: {
+        ...have.card,
+        lane: PURSUIT_LANE[s.state],
+        stateKind: kind,
+        state: s.stateLine,
+        person: s.person ?? (have.card.stateKind === kind ? have.card.person : null),
+        blocker: s.blocker ?? have.card.blocker,
+        // A cold action never survives a hold the canonical read found; a cold lane's action stands otherwise.
+        next: held && have.card.next && !/deal brief/i.test(have.card.next.label) ? { label: 'Open the deal brief', href: `${accountHref(name)}?view=brief` } : have.card.next,
+      },
+    });
+  }
   const ordered = [...best.values()].sort((a, b) => a.rank - b.rank || cmpKeys(a.sortKey, b.sortKey) || a.card.accountName.localeCompare(b.card.accountName));
-  return ordered.map((r, index) => ({ ...r.card, index, href: `${accountHref(r.card.accountName)}?from=work&i=${index}` }));
+  return ordered.map((r, index) => ({ ...r.card, index, source: r.source ?? 'cockpit', href: `${accountHref(r.card.accountName)}?from=work&i=${index}` }));
 }
 
 export type WorkFilter = 'all' | CockpitLane;

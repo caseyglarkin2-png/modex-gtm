@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { filterAccounts, type AccountIndexRow } from '@/lib/gap/accounts/index-list';
 
+export const INDEX_PAGE = 60;
 const day = (s: string) => new Date(s).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' });
 
 export function AccountsIndex({ rows, initialQuery = '' }: { rows: AccountIndexRow[]; initialQuery?: string }) {
@@ -18,7 +19,10 @@ export function AccountsIndex({ rows, initialQuery = '' }: { rows: AccountIndexR
   useEffect(() => {
     box.current?.focus();
   }, []);
-  const shown = filterAccounts(rows, query);
+  const matched = filterAccounts(rows, query);
+  // A long index renders its first page until a query narrows it (the whole list is never a 90,000 px page).
+  const shown = query.trim() ? matched : matched.slice(0, INDEX_PAGE);
+  const more = matched.length - shown.length;
   return (
     <section className="space-y-3" data-testid="accounts-index" aria-labelledby="accounts-heading">
       <form
@@ -33,10 +37,10 @@ export function AccountsIndex({ rows, initialQuery = '' }: { rows: AccountIndexR
           <input ref={box} type="search" value={query} placeholder="Type an account name; Enter opens the first match" className="min-h-11 w-full rounded-md border border-[var(--border)] bg-transparent px-3 text-sm" onChange={(e) => setQuery(e.target.value)} data-testid="accounts-search" />
         </label>
         <p className="text-xs text-[var(--muted-foreground)]" data-testid="accounts-count" aria-live="polite">
-          {shown.length === rows.length ? `${rows.length} accounts` : `${shown.length} of ${rows.length}`}
+          {matched.length === rows.length ? `${rows.length} accounts${more ? `, the first ${shown.length} shown: type to find one` : ''}` : `${matched.length} of ${rows.length}`}
         </p>
       </form>
-      {shown.length === 0 ? (
+      {matched.length === 0 ? (
         <p className="text-sm italic text-[var(--muted-foreground)]" data-testid="accounts-empty">No account matches. Add one from Add to GAP.</p>
       ) : (
         <ul className="divide-y divide-[var(--border)]" data-testid="accounts-rows">

@@ -34,26 +34,29 @@ const input = (over: Partial<WorkInput> = {}): WorkInput => ({
 });
 
 describe('buildWorkList', () => {
-  it('one card per account, the human reply first, then follow up, ready, the opt-out after ready, decide, research, deals last', () => {
+  it('one card per account, the human reply first, then follow up, ready, decide, research, the opt-out after research (admin, never cold work), deals last', () => {
     const cards = buildWorkList(input());
     expect(cards.map((c) => [c.accountName, c.stateKind])).toEqual([
       ['NFI Industries', 'replied'],
       ['H-E-B', 'follow_up'],
       ['PepsiCo', 'ready'],
-      ['Walmart Inc.', 'opted_out'],
       ['General Mills', 'decide'],
       ['Tyson Foods', 'research'],
+      ['Walmart Inc.', 'opted_out'],
       ['Dollar General', 'unknown_deal'],
       ['Kroger', 'in_deal'],
     ]);
+    expect(cards.every((c) => c.source === 'cockpit')).toBe(true);
     expect(new Set(cards.map((c) => c.accountName)).size).toBe(cards.length);
     expect(cards.map((c) => c.index)).toEqual([0, 1, 2, 3, 4, 5, 6, 7]);
     expect(cards[0].href).toBe('/gap/accounts/nfi-industries?from=work&i=0');
   });
-  it('replies are classified before they rank: the opt-out never heads the list and says what to do; the automatic reply is not work', () => {
+  it('replies are classified before they rank: the opt-out never heads the list, even when nothing else is ready, and says what to do; the automatic reply is not work', () => {
     const cards = buildWorkList(input());
     const walmart = cards.find((c) => c.accountName === 'Walmart Inc.')!;
     expect(cards[0].accountName).not.toBe('Walmart Inc.');
+    const onlyAdmin = buildWorkList(input({ candidates: [cand('research', 'Tyson Foods', 'Research Tyson Foods', [-1, 2])], replies: [{ accountName: 'Walmart Inc.', contactEmail: 'timothy.cooper@walmart.com', subject: null, snippet: 'stop', receivedAt: '2026-10-05T14:00:00Z' }] }));
+    expect(onlyAdmin.map((c) => c.accountName)).toEqual(['Tyson Foods', 'Walmart Inc.', 'Dollar General', 'Kroger']);
     expect(walmart.state).toBe('Opted out');
     expect(walmart.why).toMatch(/^timothy\.cooper@walmart\.com wrote Oct 5: "stop"\. They asked not to be contacted: record it as do not contact\./);
     expect(walmart.next).toEqual({ label: 'Record the opt-out', href: '/gap?lane=replies' });
@@ -89,6 +92,23 @@ describe('buildWorkList', () => {
     const kroger = cards.find((c) => c.accountName === 'Kroger')!;
     expect(kroger.stateKind).toBe('in_deal');
     expect(kroger.why).toBe('A current card holds this account for an open deal.');
+  });
+});
+
+describe('the canonical pursuit state overrides the cockpit lane on the card', () => {
+  it('FedEx reads READY with Glen from a fresh summary while the cockpit only had research; a hold from the read removes the cold action', () => {
+    const base = input({ candidates: [cand('research', 'FedEx', 'Research FedEx', [-1, 1]), cand('ready', 'PepsiCo', 'Contact Karen Darling', [Number.MAX_SAFE_INTEGER, 1, 5])] });
+    const summaries = new Map([
+      ['FedEx', { accountName: 'FedEx', state: 'ready' as const, stateLine: 'Ready for a first touch: Glen Chaffee', person: { name: 'Glen Chaffee', title: 'Managing Director' }, blocker: null, coldTouchAllowed: true, at: NOW.toISOString() }],
+      ['PepsiCo', { accountName: 'PepsiCo', state: 'in_deal' as const, stateLine: 'In a deal', person: null, blocker: 'Work the deal.', coldTouchAllowed: false, at: NOW.toISOString() }],
+    ]);
+    const cards = buildWorkList({ ...base, summaries });
+    const fedex = cards.find((c) => c.accountName === 'FedEx')!;
+    expect(fedex).toMatchObject({ stateKind: 'ready', lane: 'ready', state: 'Ready for a first touch: Glen Chaffee', person: { name: 'Glen Chaffee', title: 'Managing Director' }, source: 'pursuit' });
+    const pepsi = cards.find((c) => c.accountName === 'PepsiCo')!;
+    expect(pepsi).toMatchObject({ stateKind: 'in_deal', lane: 'deals', source: 'pursuit' });
+    expect(pepsi.next).toEqual({ label: 'Open the deal brief', href: '/gap/accounts/pepsico?view=brief' });
+    expect(cards.findIndex((c) => c.accountName === 'FedEx')).toBeLessThan(cards.findIndex((c) => c.accountName === 'PepsiCo'));
   });
 });
 
