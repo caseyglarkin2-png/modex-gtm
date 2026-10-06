@@ -5,7 +5,7 @@
  * people on this page only, keeps the trust words, says when GAP does not know, and names the control when asked to
  * act. It never acts. Typed only here (push-to-talk rides on Dictate later if the seller asks for it).
  */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const BTN = 'inline-flex min-h-11 items-center justify-center rounded-md px-3 text-sm font-medium';
 const PRIMARY = `${BTN} bg-[var(--primary)] text-[var(--primary-foreground)] hover:opacity-90 disabled:opacity-60`;
@@ -13,6 +13,15 @@ const PRIMARY = `${BTN} bg-[var(--primary)] text-[var(--primary-foreground)] hov
 const EXAMPLES = ['Why this person over the next one?', 'Who else here owns transportation?', 'What do we already know from them?', 'Give me the 60-second story.', 'What do we still need to learn?'];
 
 export function AskGap({ accountName }: { accountName: string }) {
+  // One box: open on a desktop, behind one line on a phone (a third of the screen there).
+  const [open, setOpen] = useState(true);
+  useEffect(() => {
+    try {
+      setOpen(window.matchMedia('(min-width: 640px)').matches);
+    } catch {
+      /* keep open */
+    }
+  }, []);
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState<{ text: string; grounded: boolean; provider: string | null } | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -40,8 +49,9 @@ export function AskGap({ accountName }: { accountName: string }) {
   }
 
   return (
-    <section className="space-y-2 rounded-md border border-[var(--border)] p-3" data-testid="ask-gap" aria-labelledby="ask-gap-heading">
-      <h2 id="ask-gap-heading" className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Ask GAP about {accountName}</h2>
+    <details open={open} onToggle={(e) => setOpen((e.currentTarget as HTMLDetailsElement).open)} className="group rounded-md border border-[var(--border)] p-3" data-testid="ask-gap">
+      <summary className="min-h-11 cursor-pointer list-none text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)] marker:content-none" id="ask-gap-heading">Ask GAP about {accountName} <span className="ml-1 font-normal normal-case group-open:hidden">(show)</span></summary>
+      <div className="mt-2 space-y-2">
       <form
         className="flex flex-col gap-2 sm:flex-row sm:items-end"
         onSubmit={(e) => {
@@ -57,7 +67,7 @@ export function AskGap({ accountName }: { accountName: string }) {
       </form>
       <div className="flex flex-wrap gap-1.5" aria-label="Example questions">
         {EXAMPLES.slice(1).map((q) => (
-          <button key={q} type="button" className="rounded-md border border-[var(--border)] px-2 py-1 text-xs hover:bg-[var(--muted)]" disabled={busy} onClick={() => { setQuestion(q); void ask(q); }} data-testid="ask-gap-example">
+          <button key={q} type="button" className="min-h-11 rounded-md border border-[var(--border)] px-2 py-1 text-xs hover:bg-[var(--muted)] sm:min-h-8" disabled={busy} onClick={() => { setQuestion(q); void ask(q); }} data-testid="ask-gap-example">
             {q}
           </button>
         ))}
@@ -72,6 +82,7 @@ export function AskGap({ accountName }: { accountName: string }) {
         ) : null}
       </div>
       {error ? <p role="alert" className="text-xs text-red-700 dark:text-red-400" data-testid="ask-gap-error">{error}</p> : null}
-    </section>
+      </div>
+    </details>
   );
 }

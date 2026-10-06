@@ -17,7 +17,7 @@ export function forTheEar(text: string): string {
   return text
     .replace(CITATION_RE, '')
     .replace(URL_RE, '')
-    .replace(EMAIL_RE, 'their address')
+    .replace(EMAIL_RE, (m) => m.split('@')[0].replace(/[._-]+/g, ' ').replace(/\d+/g, '').trim() || 'someone')
     .replace(PHONE_RE, '')
     .replace(BASIS_PAREN_RE, '')
     .replace(ID_RE, '')

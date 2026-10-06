@@ -52,8 +52,11 @@ export function todayListenText(cards: readonly WorkCard[], opts: { max?: number
   const spoken = cards.slice(0, max);
   spoken.forEach((c, i) => {
     const lead = i === 0 ? 'First' : i === spoken.length - 1 && spoken.length > 1 ? 'Then' : 'Next';
-    const bits = [`${lead}, ${c.accountName}: ${STATE_SPOKEN[c.stateKind]}.`, whyForTheEar(c)];
-    if (c.person && c.stateKind !== 'replied' && c.stateKind !== 'opted_out') bits.push(`Next person: ${spokenPerson(c.person.name, c.person.title, c.accountName)}.`);
+    // A canonical card speaks its own state line ("First touch in motion: Glen Chaffee"), never a folded kind.
+    const stateSpoken = c.source === 'pursuit' ? forTheEar(c.state).replace(/[.!?]+$/, '').replace(/^\w/, (m) => m.toLowerCase()) : STATE_SPOKEN[c.stateKind];
+    const bits = [`${lead}, ${c.accountName}: ${stateSpoken}.`, whyForTheEar(c)];
+    const held = c.stateKind === 'in_deal' || c.stateKind === 'unknown_deal' || c.stateKind === 'held';
+    if (c.person && !held && c.stateKind !== 'replied' && c.stateKind !== 'opted_out') bits.push(`Next person: ${spokenPerson(c.person.name, c.person.title, c.accountName)}.`);
     if (c.next) bits.push(`Next action: ${forTheEar(c.next.label).replace(/[.!?]+$/, '')}.`);
     if (c.blocker) bits.push(forTheEar(c.blocker));
     parts.push(bits.filter(Boolean).join(' '));

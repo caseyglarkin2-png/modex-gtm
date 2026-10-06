@@ -176,15 +176,7 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, 
             {/* UX-13: Ask GAP, read-only, over this page's own projections; after the people, collapsed on a phone. */}
             <PeopleStackView accountName={v.name} stack={pursuit.stack} state={pursuit.state} hypothesisId={pursuit.hypothesisId} excluded={pursuit.excluded} primaryInNext={primaryInNext && pursuit.state.coldTouchAllowed} setAsideCaveats={pursuit.story?.setAsideCaveats ?? []} />
             {v.blocked?.length ? <BlockedPeople accountName={v.name} people={v.blocked} /> : null}
-            {askGap ? (
-              <>
-                <details className="sm:hidden" data-testid="ask-gap-phone">
-                  <summary className="min-h-11 cursor-pointer text-sm underline">Ask GAP about this account</summary>
-                  {askGap}
-                </details>
-                <div className="hidden sm:block">{askGap}</div>
-              </>
-            ) : null}
+            {askGap}
           </>
         ) : (
           <Slot label="Who" testId="now-who">

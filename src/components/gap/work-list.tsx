@@ -34,7 +34,7 @@ function isFilter(v: string | null): v is WorkFilter {
   return !!v && (WORK_FILTERS as readonly string[]).includes(v);
 }
 
-export function WorkList({ cards, focus, listenText = null }: { cards: WorkCard[]; /** The account (slug) to focus on arrival (Back to Work). */ focus?: string | null; /** UX-11: the spoken brief for today (lib/gap/voice/today.ts), played on a press only. */ listenText?: string | null }) {
+export function WorkList({ cards, focus, listenText = null, readAt = null }: { cards: WorkCard[]; /** The account (slug) to focus on arrival (Back to Work). */ focus?: string | null; /** UX-11: the spoken brief for today (lib/gap/voice/today.ts), played on a press only. */ listenText?: string | null; /** UX-14: when the read happened, with Refresh to read again. */ readAt?: { at: string; label: string } | null }) {
   const router = useRouter();
   const params = useSearchParams();
   const [filter, setFilter] = useState<WorkFilter>(isFilter(params.get('filter')) ? (params.get('filter') as WorkFilter) : 'all');
@@ -69,7 +69,15 @@ export function WorkList({ cards, focus, listenText = null }: { cards: WorkCard[
           <h2 id="work-heading" className="text-lg font-semibold">Work</h2>
           {listenText ? <VoicePreviewButton text={listenText} label="Listen to today" className="min-h-11 px-4" /> : null}
         </div>
-        <p className="text-xs text-[var(--muted-foreground)]">{cards.length === 1 ? '1 account needs you' : `${cards.length} accounts need you`}, in order. Counts are what the list holds.</p>
+        <p className="text-xs text-[var(--muted-foreground)]">
+          {cards.length === 1 ? '1 account needs you' : `${cards.length} accounts need you`}, in order. Counts are what the list holds.
+          {readAt ? (
+            <>
+              {' '}
+              <span data-testid="work-read-at">{readAt.label}.</span> <Link href="/gap?fresh=1" className="underline" data-testid="work-refresh">Refresh</Link>
+            </>
+          ) : null}
+        </p>
       </div>
       <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Filter the work by state">
         {WORK_FILTERS.map((f) => (
@@ -77,7 +85,7 @@ export function WorkList({ cards, focus, listenText = null }: { cards: WorkCard[
             key={f}
             type="button"
             aria-pressed={filter === f}
-            className={`${BTN} min-h-9 border px-2.5 text-xs ${filter === f ? 'border-[var(--primary)] bg-[var(--primary)] text-[var(--primary-foreground)]' : 'border-[var(--border)] hover:bg-[var(--muted)]'}`}
+            className={`${BTN} min-h-11 border px-2.5 text-xs sm:min-h-9 ${filter === f ? 'border-[var(--primary)] bg-[var(--primary)] text-[var(--primary-foreground)]' : 'border-[var(--border)] hover:bg-[var(--muted)]'}`}
             onClick={() => {
               setFilter(f);
               setUrl(f, query);
@@ -93,7 +101,7 @@ export function WorkList({ cards, focus, listenText = null }: { cards: WorkCard[
             type="search"
             value={query}
             placeholder="Search accounts"
-            className="min-h-9 w-full rounded-md border border-[var(--border)] bg-transparent px-2 text-sm"
+            className="min-h-11 w-full rounded-md border border-[var(--border)] bg-transparent px-2 text-sm sm:min-h-9"
             onChange={(e) => {
               setQuery(e.target.value);
               setUrl(filter, e.target.value);
@@ -107,12 +115,12 @@ export function WorkList({ cards, focus, listenText = null }: { cards: WorkCard[
           {cards.length === 0 ? 'Nothing needs you right now. Replies, follow ups, ready accounts and new angles show up here.' : 'No account matches this filter.'}
         </p>
       ) : (
-        <ol className="space-y-2" data-testid="work-cards">
+        <ol className="space-y-2 pb-24 sm:pb-0" data-testid="work-cards">
           {shown.map((c) => (
             <li key={c.accountName} id={`work-card-${c.index}`} tabIndex={-1} className="rounded-md border border-[var(--border)] p-3 outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]" data-testid="work-card" data-account={c.accountName} data-slug={accountSlug(c.accountName)} data-state={c.stateKind} data-lane={c.lane}>
               <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
                 <p className="text-base font-semibold">
-                  <Link href={c.href} className="underline decoration-dotted underline-offset-2 hover:decoration-solid" data-testid="work-card-account">{c.accountName}</Link>
+                  <Link href={c.href} className="inline-flex min-h-11 items-center underline decoration-dotted underline-offset-2 hover:decoration-solid" data-testid="work-card-account">{c.accountName}</Link>
                 </p>
                 <p className={`text-sm font-medium ${STATE_TONE[c.stateKind]}`} data-testid="work-card-state">{c.state}</p>
               </div>

@@ -14,10 +14,11 @@ describe('nextFromPursuit', () => {
     expect(n.text).toMatch(/Prepare the first touch to Karen Darling/);
     expect(n.control).toEqual({ href: '/gap/preview/h1?personaId=1', label: 'Prepare the email to Karen' });
   });
-  it('READY with a HubSpot-only person says add them first and offers no pack link', () => {
+  it('READY with a HubSpot-only person says add them first and points at the people, never at a pack', () => {
     const n = nextFromPursuit(base({ eligible: [{ key: 'hubspot:9', personaId: null, hubspotContactId: '9', name: 'Karen Darling', title: 'Sr Director' }] }), opts);
     expect(n.text).toMatch(/Add Karen Darling/);
-    expect(n.control).toBeNull();
+    expect(n.control).toEqual({ href: '#people-stack-heading', label: 'Add Karen from the people below' });
+    expect(n.control?.href).not.toMatch(/preview/);
   });
   it('CHOOSE PERSON points at the stack, never at a hypothesis preview', () => {
     const n = nextFromPursuit(base({ eligible: [{ key: 'gap:1', personaId: 1, name: 'A', title: null }, { key: 'gap:2', personaId: 2, name: 'B', title: null }] }), opts);

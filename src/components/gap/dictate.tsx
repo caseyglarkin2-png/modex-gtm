@@ -40,6 +40,19 @@ export function Dictate({ enabled, onTranscript, maxSeconds = DICTATE_MAX_SECOND
   const kept = useRef<Blob | null>(null);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
   const cancelled = useRef(false);
+  const startBtn = useRef<HTMLButtonElement>(null);
+  const stopBtn = useRef<HTMLButtonElement>(null);
+  const wasRecording = useRef(false);
+  // Focus follows the state: Stop while recording, the Dictate button again after a stop or a cancel (WCAG 2.4.3).
+  useEffect(() => {
+    if (phase === 'recording') {
+      wasRecording.current = true;
+      stopBtn.current?.focus();
+    } else if (wasRecording.current && (phase === 'idle' || phase === 'failed')) {
+      wasRecording.current = false;
+      startBtn.current?.focus();
+    }
+  }, [phase]);
 
   function releaseStream() {
     stream.current?.getTracks().forEach((t) => t.stop());
@@ -102,7 +115,14 @@ export function Dictate({ enabled, onTranscript, maxSeconds = DICTATE_MAX_SECOND
       return;
     }
     const mime = pickMime();
-    const rec = new MediaRecorder(stream.current, mime ? { mimeType: mime } : undefined);
+    let rec: MediaRecorder;
+    try {
+      rec = new MediaRecorder(stream.current, mime ? { mimeType: mime } : undefined);
+    } catch {
+      releaseStream();
+      setError('This browser could not start a recorder. Type the note, or use the keyboard microphone.');
+      return;
+    }
     recorder.current = rec;
     chunks.current = [];
     cancelled.current = false;
@@ -172,12 +192,12 @@ export function Dictate({ enabled, onTranscript, maxSeconds = DICTATE_MAX_SECOND
             <span aria-hidden="true" className="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-red-600" />
             Recording <span className="tabular-nums" data-testid="dictate-timer">{mm}:{ss}</span> of {Math.floor(maxSeconds / 60)}:{String(maxSeconds % 60).padStart(2, '0')}
           </span>
-          <button type="button" className={PRIMARY} onClick={stop} data-testid="dictate-stop">Stop</button>
+          <button ref={stopBtn} type="button" className={PRIMARY} onClick={stop} data-testid="dictate-stop">Stop</button>
           <button type="button" className={OUTLINE} onClick={cancel} data-testid="dictate-cancel">Cancel</button>
         </>
       ) : (
         <>
-          <button type="button" className={OUTLINE} aria-pressed={phase === 'transcribing'} disabled={phase === 'transcribing'} onClick={() => void start()} data-testid="dictate-start" title={enabled ? undefined : DISABLED_MESSAGE}>
+          <button ref={startBtn} type="button" className={OUTLINE} aria-pressed={phase === 'transcribing'} disabled={phase === 'transcribing'} onClick={() => void start()} data-testid="dictate-start" title={enabled ? undefined : DISABLED_MESSAGE}>
             {phase === 'transcribing' ? 'Transcribing...' : 'Dictate'}
           </button>
           {phase === 'failed' && kept.current ? (

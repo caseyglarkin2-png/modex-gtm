@@ -73,6 +73,7 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
   const [showAll, setShowAll] = useState(false);
   const [busy, setBusy] = useState<Busy>(null);
   const [note, setNote] = useState<Note | null>(null);
+  const noteRef = useRef<HTMLParagraphElement>(null);
   const toggle = (key: string) => setOpen((prev) => { const n = new Set(prev); if (n.has(key)) n.delete(key); else n.add(key); return n; });
   // After a choice the chosen row re-renders at the top and the Choose button unmounts: focus follows the person
   // (WCAG 2.4.3), never falls to the page body.
@@ -140,6 +141,8 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
         text: `${said}${verdict} Nothing is sent.`,
         undo: undo ? { label: undo.label, run: () => decide(row, step, undo.url, undo.body, `Undone: ${said.replace(/\.$/, '')} no longer stands.`) } : undefined,
       });
+      // The control that was pressed may unmount on refresh: focus moves to the read-back line (WCAG 2.4.3).
+      requestAnimationFrame(() => noteRef.current?.focus());
       router.refresh();
     } catch (e) {
       setNote({ kind: 'alert', text: e instanceof Error ? e.message : 'network error' });
@@ -220,7 +223,8 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
   // UX-07: the seller's priority controls on an eligible GAP contact who is not the chosen person, only while a cold
   // touch is a live choice (never under a reply, an opt-out, a deal or a hold: the heading already says so).
   const priorityControls = (row: StackRow) => {
-    if (!choosing || row.chosen || row.personaId === null || !row.coldEligible) return null;
+    if (!choosing || row.chosen || !row.coldEligible) return null;
+    if (row.personaId === null) return <span className="text-xs text-[var(--muted-foreground)]" data-testid="people-stack-hubspot-only">Set aside or correct after Choose adds them to GAP.</span>;
     const b = busy?.key === row.key ? busy.step : null;
     // Make next only where the motion can line the person up (a ready email card at the account): the read-back
     // "is next" must be true, never a recorded wish the motion ignores (review).
@@ -461,7 +465,7 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
       </ul>
 
       {/* One always-mounted status region (its text changes, so screen readers announce it); an alert only when something refused. */}
-      <p role="status" aria-live="polite" className="text-xs" data-testid="people-stack-note">
+      <p ref={noteRef} tabIndex={-1} role="status" aria-live="polite" className="rounded text-xs outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]" data-testid="people-stack-note">
         {note?.kind === 'status' ? note.text : ''}
         {note?.kind === 'status' && note.undo ? (
           <>

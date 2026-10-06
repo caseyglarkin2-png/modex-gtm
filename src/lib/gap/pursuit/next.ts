@@ -55,7 +55,8 @@ export function nextFromPursuit(
       return { text: `${p?.name ?? 'The first person'} has the first touch. ${s.unlock ?? ''}`.trim(), control: p?.personaId ? { href: `/gap/call/${p.personaId}`, label: `Call prep for ${first(p.name)}` } : null, source: 'pursuit' };
     case 'ready':
       if (!p) return { text: 'Ready for a first touch.', control: null, source: 'pursuit' };
-      if (p.personaId === null) return { text: `Add ${p.name}${p.title ? ` (${p.title})` : ''} to GAP, then prepare the first touch to them.`, control: null, source: 'pursuit' };
+      if (/^Relationship-led/.test(s.stateLine)) return { text: `Log the warm touch with ${p.name}; a cold email to anyone else waits for their answer.`, control: { href: opts.captureHref, label: 'Log the warm touch' }, source: 'pursuit' };
+      if (p.personaId === null) return { text: `Add ${p.name}${p.title ? ` (${p.title})` : ''} to GAP, then prepare the first touch to them.`, control: { href: '#people-stack-heading', label: `Add ${first(p.name)} from the people below` }, source: 'pursuit' };
       if (!opts.hypothesisId) return { text: `Prepare the first touch to ${p.name}: no grounded angle yet, so review the angle first.`, control: { href: `${opts.accountSlugHref('sources')}#brief-hypotheses`, label: 'Review the angle' }, source: 'pursuit' };
       // The title lives on the person's row directly below; NEXT says the name once (UX-04 review: Glen named four times).
       return { text: `Prepare the first touch to ${p.name}.`, control: { href: `/gap/preview/${opts.hypothesisId}?personaId=${p.personaId}`, label: `Prepare the email to ${first(p.name)}` }, source: 'pursuit' };

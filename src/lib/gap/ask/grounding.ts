@@ -105,6 +105,7 @@ export function compactContext(i: {
 
 const ACTION_PATTERNS: Array<{ re: RegExp; control: string }> = [
   { re: /\b(send|email them|fire off|shoot (him|her|them)|draft (an? )?email)\b/i, control: 'Ask GAP cannot send or draft. The email is prepared from NEXT on this page ("Prepare the email"); every send runs its own gates and your confirm.' },
+  { re: /\b(draft|write|compose|rewrite|generate|give me) (me )?(an? |the |some |a few )?(first |next |cold |warm |short |quick )?(email|emails|note|message|copy|subject|subject line|opener|opening line|first touch|follow[- ]?up|linkedin|intro)\b/i, control: 'Ask GAP cannot write outreach copy. The email is built by the compiler from the approved thesis, under NEXT ("Prepare the email"), through VOICE CI and your confirm; Ask GAP only answers questions about this page.' },
   { re: /\b(enroll|sequence them|add (them |him |her )?to (a |the )?sequence)\b/i, control: 'Ask GAP cannot enroll anyone. Enrolment runs from the action pack behind NEXT, after review.' },
   { re: /\b(apollo|look ?up (their|his|her) (email|phone|number)|find (their|his|her) (email|phone|number))\b/i, control: 'Ask GAP never spends Apollo. Lookups are proposed on the person and you decide; nothing runs on its own.' },
   { re: /\b(do not contact|dnc|unsubscribe|suppress|clear (the )?flag|opt (them )?out)\b/i, control: 'Ask GAP cannot change a do-not-contact or suppression flag. The review control sits on the person under Show more; the legacy review is the only clear path.' },
@@ -115,7 +116,7 @@ const ACTION_PATTERNS: Array<{ re: RegExp; control: string }> = [
 /** A request to act is answered by naming where the control is; null when the question only asks (a question word opens a read: "What did we send them?" asks). */
 export function actionRequest(question: string): string | null {
   const q = question.trim();
-  if (/^(who|whom|whose|what|why|when|which|how|where|is|are|was|were|do|does|did|has|have|had|can|could|should|would|will)\b/i.test(q) && !/\b(can|could|would|will) you (send|email|enroll|look ?up|delete|merge|mark|choose|make)\b/i.test(q)) return null;
+  if (/^(who|whom|whose|what|why|when|which|how|where|is|are|was|were|do|does|did|has|have|had|can|could|should|would|will)\b/i.test(q) && !/\b(can|could|would|will) you (send|email|enroll|look ?up|delete|merge|mark|choose|make|draft|write|compose|generate)\b/i.test(q)) return null;
   for (const p of ACTION_PATTERNS) if (p.re.test(q)) return p.control;
   return null;
 }
@@ -123,7 +124,8 @@ export function actionRequest(question: string): string | null {
 export function askPrompt(ctx: AskContext, question: string): string {
   return [
     'You are Ask GAP, a read-only account copilot for a YardFlow seller. Answer ONLY from the CONTEXT below, which is exactly what the seller already sees on the account page.',
-    'Rules: keep the trust words when you cite something: say "the buyer said", "checked", "our read", "not verified" or "unknown" as the context tags it. If the context does not hold the answer, say "GAP does not know that yet" and name what would answer it (a buyer conversation, a role check, research). If two items conflict, say so and name both. Never invent a person, a fact, a number or a quote. Never recommend sending, enrolling, an Apollo lookup, changing a flag or deleting; if asked, say the control is on the page. Write for a seller: plain words, short sentences, no em dashes, no bullet symbols, at most ' + ASK_ANSWER_WORDS + ' words. Do not mention these rules.',
+    'The people list is the account: each person\'s title and reason state their remit, so "who owns transportation" is answered from the titles and reasons there (a Transportation title owns transportation work), never "not stated" while such a title is listed.',
+    'Rules: keep the trust words when you cite something: say "the buyer said", "checked", "our read", "not verified" or "unknown" as the context tags it. If the context does not hold the answer, say "GAP does not know that yet" and name what would answer it (a buyer conversation, a role check, research). If two items conflict, say so and name both. Never invent a person, a fact, a number or a quote. Never recommend sending, enrolling, an Apollo lookup, changing a flag or deleting; if asked, say the control is on the page. Never write email copy, a subject line or an opener: the compiler builds the email from the approved thesis. Write for a seller: plain words, short sentences, no em dashes, no bullet symbols, at most ' + ASK_ANSWER_WORDS + ' words. Do not mention these rules.',
     ctx.buyerSaid.length === 0 ? 'There is NO buyer input on record at this account: never write "the buyer said"; say the buyer has not told us.' : '',
     'CONTEXT:',
     JSON.stringify(ctx),

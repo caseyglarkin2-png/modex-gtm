@@ -19,11 +19,11 @@ import type { PursuitState } from './state';
 type PrismaLike = any;
 
 export const PURSUIT_SUMMARY_TTL_MS = 15 * 60_000;
-export const WARM_PER_REQUEST = 2;
+export const WARM_PER_REQUEST = 3;
 /** Warming hits HubSpot: never more often than this per instance (a burst of Work loads must not throttle the reads). */
 export const WARM_MIN_INTERVAL_MS = 60_000;
 let lastWarmAt = 0;
-export const WARM_TIMEOUT_MS = 40_000;
+export const WARM_TIMEOUT_MS = 70_000;
 
 export interface PursuitSummary {
   accountName: string;

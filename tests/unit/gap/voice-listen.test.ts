@@ -13,7 +13,8 @@ describe('forTheEar', () => {
   it('drops URLs, emails, phone numbers, citation tokens, provenance ids and basis parentheses; machine words become words', () => {
     const t = forTheEar('Call Glen at 901-555-0100 or glen@fedex.com; see https://sec.gov/x [S:cmuwktaz300037kz08pc55j7o] (sec.gov, Jul 20, 2026); evidence:f-denver; transportation_leader.');
     expect(t).not.toMatch(/https?:|@|555|\[S:|evidence:|sec\.gov|_/);
-    expect(t).toMatch(/their address/);
+    expect(t).toMatch(/\bglen\b/);
+    expect(forTheEar('timothy.cooper@walmart.com replied')).toBe('timothy cooper replied');
     expect(t).toMatch(/transportation leader/);
   });
   it('a spoken sentence carries its tag as an aside unless the words already say it; a person is said with a plain title', () => {
@@ -48,6 +49,16 @@ describe('todayListenText', () => {
     expect(t).not.toMatch(/@|https?:/);
     expect(t.length).toBeLessThanOrEqual(TODAY_MAX_CHARS);
     expect(t.indexOf('NFI')).toBeLessThan(t.indexOf('PepsiCo'));
+  });
+  it('a canonical card speaks its own state line and a held card names no next person', () => {
+    const cards = [
+      card(0, 'FedEx', 'ready', { source: 'pursuit', state: 'First touch in motion: Glen Chaffee', why: 'Glen Chaffee has the first touch.', person: { name: 'Glen Chaffee', title: 'Managing Director' }, next: { label: 'Open the account', href: '/x' } }),
+      card(1, 'Kroger', 'in_deal', { source: 'pursuit', state: 'In a deal: YardFlow - Kroger', why: 'Work the deal.', person: { name: 'Joey Maggard', title: null }, next: { label: 'Open the deal brief', href: '/x' } }),
+    ];
+    const t = todayListenText(cards);
+    expect(t).toMatch(/First, FedEx: first touch in motion: Glen Chaffee\. Glen Chaffee has the first touch\. Next person: Glen Chaffee, Managing Director\./);
+    expect(t).toMatch(/Then, Kroger: in a deal: YardFlow - Kroger\. Work the deal\. Next action: Open the deal brief\./);
+    expect(t).not.toMatch(/Next person: Joey/);
   });
   it('says plainly when nothing needs the seller', () => {
     expect(todayListenText([])).toMatch(/^Today\. Nothing needs you right now\./);
@@ -137,7 +148,7 @@ describe('accountListenText', () => {
     i.state = { ...i.state, state: 'opted_out', stateLine: 'Opted out: timothy.cooper@walmart.com, Oct 5', coldTouchAllowed: false, chooseAllowed: false } as AccountListenInput['state'];
     i.nextText = 'Record the opt-out as do not contact.';
     const t = accountListenText(i);
-    expect(t).toMatch(/^PepsiCo\. Opted out: their address, Oct 5\./);
+    expect(t).toMatch(/^PepsiCo\. Opted out: timothy cooper, Oct 5\./);
     expect(t).not.toMatch(/First: Karen|If no reply|The opening:/);
     expect(t).toMatch(/Next: Record the opt-out as do not contact\.$/);
   });

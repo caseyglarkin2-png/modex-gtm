@@ -43,7 +43,10 @@ import { remitCaution } from '@/lib/gap/story/anchor-text';
 import { DoneNext } from '@/components/gap/done-next';
 import { AskGap } from '@/components/gap/ask-gap';
 import { compactContext, rememberAskContext } from '@/lib/gap/ask/grounding';
-import { rememberPursuitSummary } from '@/lib/gap/pursuit/summary';
+import { readPursuitSummaries, rememberPursuitSummary, type PursuitSummary } from '@/lib/gap/pursuit/summary';
+import { agoText as readAgo } from '@/lib/gap/work/cache';
+import { Suspense } from 'react';
+import { Skeleton } from '@/components/ui/skeleton';
 import { accountListenText } from '@/lib/gap/voice/account';
 
 export const dynamic = 'force-dynamic';
@@ -60,14 +63,62 @@ const VIEWS: Array<{ v: View; label: string }> = [
   { v: 'sources', label: 'Sources' },
 ];
 
-export default async function AccountPage({ params, searchParams }: { params: Promise<{ slug: string }>; searchParams?: Promise<{ name?: string; view?: string; from?: string; i?: string }> }) {
+type AccountQuery = { name?: string; view?: string; from?: string; i?: string };
+
+/** The account's name from its slug with one cheap read (the full read follows in the streamed body). */
+async function quickAccountName(slug: string, name?: string): Promise<string | null> {
+  // The longest word of the slug (never "the" or an initial) keeps the read small and the hit likely.
+  const token = slug.split('-').filter((w) => w.length >= 3).sort((a, b) => b.length - a.length)[0] ?? slug.split('-')[0];
+  const rows = (await prisma.account.findMany({ where: { name: { contains: token, mode: 'insensitive' } }, select: { name: true }, take: 50 }).catch(() => [])) as Array<{ name: string }>;
+  if (name && rows.some((r) => r.name === name)) return name;
+  return rows.find((r) => accountSlug(r.name) === slug)?.name ?? null;
+}
+
+/**
+ * UX-14 (perceived speed): the shell answers at once with the name and the last known state and NEXT (the pursuit
+ * summary remembered by a visit or the Work warmer, at most 15 minutes old) while the full read streams below.
+ */
+function AccountShell({ name, quick, now }: { name: string | null; quick: PursuitSummary | null; now: Date }) {
+  return (
+    <div className="mx-auto max-w-2xl space-y-4 pb-28" aria-busy="true" data-testid="account-shell">
+      <GapSubnav />
+      <h1 className="text-2xl font-semibold tracking-tight">{name ?? 'Account'}</h1>
+      {quick ? (
+        <div className="rounded-md border border-[var(--border)] p-3 text-sm" data-testid="account-quick">
+          <p className="text-xs text-[var(--muted-foreground)]">As read {readAgo(quick.at, now)}; the full page is loading.</p>
+          <p className="mt-1 font-medium">{quick.stateLine}.</p>
+          {quick.nextText ? <p className="mt-1">Next: {quick.nextText}</p> : null}
+          {quick.person ? <p className="mt-1 text-xs text-[var(--muted-foreground)]">{quick.person.name}{quick.person.title ? `, ${quick.person.title}` : ''}</p> : null}
+        </div>
+      ) : (
+        <p role="status" className="text-sm text-[var(--muted-foreground)]">Reading the account (the state, NEXT, the people, the story)...</p>
+      )}
+      <Skeleton className="h-11 w-64" />
+      <Skeleton className="h-24 w-full" />
+      <Skeleton className="h-16 w-full" />
+      <Skeleton className="h-16 w-full" />
+    </div>
+  );
+}
+
+export default async function AccountPage({ params, searchParams }: { params: Promise<{ slug: string }>; searchParams?: Promise<AccountQuery> }) {
   if (assertGapEnabled('GAP_ROUTING_ENABLED')) notFound();
   const session = await auth();
   if (!session?.user?.email) redirect('/login');
   const { slug } = await params;
   const q = (await searchParams) ?? {};
-  const view: View = q.view === 'brief' || q.view === 'sources' ? q.view : 'now';
   const now = new Date();
+  const name = await quickAccountName(slug, q.name);
+  const quick = name ? (readPursuitSummaries([name], now).get(name) ?? null) : null;
+  return (
+    <Suspense fallback={<AccountShell name={name} quick={quick} now={now} />}>
+      <AccountBody slug={slug} q={q} email={session.user.email} now={now} />
+    </Suspense>
+  );
+}
+
+async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQuery; email: string; now: Date }) {
+  const view: View = q.view === 'brief' || q.view === 'sources' ? q.view : 'now';
   // NOW and BRIEF read the account context too: its reads run alongside the inputs (V2 speed).
   const loaded = await loadAccountView(prisma, slug, now, { live: true, name: q.name, context: view !== 'sources' });
   if (!loaded) notFound();
@@ -153,14 +204,14 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
     // NEXT from the pursuit state (the chosen person and the action agree by construction); a meeting within 14 days
     // still leads (projectNow's own rule).
     const pursuitNext = pursuit && v.next.source !== 'meeting'
-      ? nextFromPursuit(pursuit.state, { hypothesisId: pursuit.hypothesisId, accountSlugHref: (view) => hrefFor(view), replyThreadHref: v.replyThread ? gmailThreadHref(v.replyThread, session.user.email) : null, captureHref: `/gap/capture?account=${encodeURIComponent(brief.accountName)}` })
+      ? nextFromPursuit(pursuit.state, { hypothesisId: pursuit.hypothesisId, accountSlugHref: (view) => hrefFor(view), replyThreadHref: v.replyThread ? gmailThreadHref(v.replyThread, email) : null, captureHref: `/gap/capture?account=${encodeURIComponent(brief.accountName)}` })
       : null;
     const control: { href: string; label: string } | null =
       pursuitNext ? pursuitNext.control
       : v.next.source === 'meeting' ? { href: hrefFor('brief'), label: 'Open the meeting brief' }
       : v.next.source === 'deal' ? { href: hrefFor('brief'), label: 'Open the deal brief' }
       // An unanswered reply opens its thread in Gmail (round 6: "Open replies" was an empty lane for GXO).
-      : v.replyThread ? { href: gmailThreadHref(v.replyThread, session.user.email), label: `Open ${v.replyThread}'s thread in Gmail` }
+      : v.replyThread ? { href: gmailThreadHref(v.replyThread, email), label: `Open ${v.replyThread}'s thread in Gmail` }
       : v.next.source === 'conversation' ? { href: '/gap/replies', label: 'Open replies' }
       : v.next.source === 'restriction' ? { href: `/gap/capture?account=${encodeURIComponent(brief.accountName)}`, label: 'Log the intro ask' }
       : brief.motion.type === 'FACT_LED' && ready && v.ownerFirst ? { href: ready.href, label: `Or open the ready card for ${v.ownerFirst.ready} now` }
@@ -204,7 +255,13 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
     // The remit caution travels to NEXT: a cold first touch never asks the buyer who owns it.
     if (pursuitNext && anchor?.primary && anchor.primary.relevance.tier === 'none' && pursuit?.state.person) {
       const first = pursuit.state.person.name.split(' ')[0];
-      pursuitNext.text = `${pursuitNext.text} ${remitCaution(first, anchor.primary.factLabel, anchor.fitsBetter)}`;
+      pursuitNext.text = `${pursuitNext.text} ${remitCaution(first, anchor.primary.factLabel, anchor.fitsBetter)}${anchor.fitsBetter ? ` Use a different story below, or make ${anchor.fitsBetter.name.split(' ')[0]} first.` : ' Use a different story below.'}`;
+    }
+    // A research account with a checked fact and no thesis: the unblocking move is the draft on this page, not the
+    // analyst's research plan (the review: NEXT left the workspace while the draft sat collapsed on it).
+    if (pursuitNext && pursuit?.state.state === 'research' && anchor && anchor.draftable.length > 0) {
+      pursuitNext.text = `${anchor.draftable.length === 1 ? 'One checked fact' : `${anchor.draftable.length} checked facts`} can become a thesis: draft it from the opening story below; review grounds it, then the first touch is prepared.`;
+      pursuitNext.control = { href: '#outreach-anchor', label: 'Draft a thesis from the checked fact' };
     }
     // UX-11: Listen to account is written for the ear (60 to 90 s) over the same projections the page renders; it
     // never carries the private line, the do-not-use list, an address, a URL or a machine word. The older screen-read

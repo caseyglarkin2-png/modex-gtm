@@ -56,6 +56,8 @@ describe('compactContext and askPrompt', () => {
     expect(prompt).toMatch(/GAP does not know that yet/);
     expect(prompt).toMatch(/If two items conflict, say so/);
     expect(prompt).toMatch(/Never recommend sending, enrolling, an Apollo lookup, changing a flag or deleting/);
+    expect(prompt).toMatch(/Never write email copy, a subject line or an opener/);
+    expect(prompt).toMatch(/title and reason state their remit/);
     expect(prompt).toMatch(/QUESTION:\nWhy Karen over Shawn\?\nANSWER:$/);
     expect(prompt).not.toMatch(/VAULT SECRET|DO-NOT-USE-SENTINEL/);
   });
@@ -73,6 +75,12 @@ describe('compactContext and askPrompt', () => {
     expect(actionRequest('Who is flagged do not contact?')).toBeNull();
     expect(actionRequest('Did we enroll anyone here?')).toBeNull();
     expect(actionRequest('Can you send Karen the email?')).toMatch(/cannot send/);
+    // Copy is never written here: the compiler builds the email from the approved thesis.
+    expect(actionRequest('Draft an email to Glen about Network 2.0')).toMatch(/cannot/);
+    expect(actionRequest('Write the first email to Glen')).toMatch(/cannot write outreach copy/);
+    expect(actionRequest('Can you draft an email to Glen?')).toMatch(/cannot/);
+    expect(actionRequest('give me a subject line for Karen')).toMatch(/cannot write outreach copy/);
+    expect(actionRequest('What did the email we sent say?')).toBeNull();
   });
   it('with no buyer input the prompt says so and an invented "the buyer said" is dropped from the answer, the truth said first', () => {
     const ctx = compactContext({ accountName: 'NFI Industries', state, nextText: 'See the people.', story: null, anchor: null, stack: null, buyerSaid: [] });

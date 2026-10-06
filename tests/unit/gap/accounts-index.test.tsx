@@ -20,8 +20,8 @@ const rows: AccountIndexRow[] = orderAccounts([
 beforeEach(() => push.mockReset());
 
 describe('the index order and search', () => {
-  it('orders Tier 1 first, then band, then name; an unknown tier last', () => {
-    expect(rows.map((r) => r.name)).toEqual(['PepsiCo', 'General Mills', 'Tyson Foods', 'Kroger']);
+  it('orders the accounts GAP has worked most first (people on record, capped), then Tier 1, then band, then name', () => {
+    expect(rows.map((r) => r.name)).toEqual(['PepsiCo', 'Tyson Foods', 'Kroger', 'General Mills']);
     expect(rows[0].href).toBe('/gap/accounts/pepsico');
   });
   it('finds by any tokens in any order, by name or vertical, keeping the order', () => {
@@ -39,7 +39,8 @@ describe('<AccountsIndex>', () => {
     expect(screen.getByTestId('accounts-count')).toHaveTextContent('4 accounts');
     expect(screen.getByTestId('accounts-count')).not.toHaveTextContent('type to find one');
     expect(screen.getAllByTestId('accounts-row')[0]).toHaveTextContent('PepsiCo');
-    expect(screen.getAllByTestId('accounts-row')[0]).toHaveTextContent('Tier 1 · cpg · 19 people on record · last first touch Jun 10');
+    expect(screen.getAllByTestId('accounts-row')[0]).toHaveTextContent('PepsiCo');
+    expect(screen.getAllByTestId('accounts-row')[0]).toHaveTextContent('Tier 1 · cpg · 19 GAP contacts · last first touch Jun 10');
     fireEvent.change(screen.getByTestId('accounts-search'), { target: { value: 'kro' } });
     expect(screen.getByTestId('accounts-count')).toHaveTextContent('1 of 4');
     expect(screen.getAllByTestId('accounts-row')).toHaveLength(1);
