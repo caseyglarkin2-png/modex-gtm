@@ -32,6 +32,31 @@ export const GROUNDED_ACCOUNTS_PER_RUN = 2;
 export const GROUNDED_TIME_BUDGET_MS = 120_000;
 /** Pages kept per question, at most. */
 export const GROUNDED_PAGES_PER_ASK = 8;
+/**
+ * R25: a MATERIAL grounded page (its class below, its title naming the account, the page's OWN date read, not the
+ * search's claim) is queued for the existing bounded background research (research/background.ts consumes
+ * `research_status: 'queued'` under its own cap, cooldown and three-attempt dead letter), so an ordinary relevant
+ * discovery progresses without Casey pressing Verify. Bounded here too: per run and per day. A page the search
+ * dated itself, a MAY BE RELEVANT page, an unread page, leadership / labor / security pages (context, never a
+ * physical fact to verify) are never queued.
+ */
+export const GROUNDED_QUEUE_PER_RUN = 4;
+export const GROUNDED_QUEUE_PER_DAY = 40;
+export const MATERIAL_CLASSES: ReadonlySet<string> = new Set([
+  'company newsroom',
+  'SEC filing',
+  'earnings call or executive remarks',
+  'job posting or hiring',
+  'government, economic development, permit or facility announcement',
+  'procurement or RFP',
+  'vendor or customer case study',
+  'technology implementation',
+  '3PL, carrier or partner relationship',
+  'merger, acquisition or divestiture',
+  'capital spending or restructuring',
+  'fleet or transportation change',
+  'trade press news',
+]);
 
 /** The source classes, bundled so one question stays focused; an account's turns rotate through the bundles. */
 export const SOURCE_CLASS_BUNDLES: ReadonlyArray<ReadonlyArray<string>> = [
@@ -87,6 +112,8 @@ export interface GroundedAccountResult {
   captured: number;
   duplicates: number;
   mayBeRelevant: number;
+  /** R25: pages queued for the bounded background research this turn. */
+  queued: number;
   dropped: { notCited: number; garbage: number; dead: number };
   error: string | null;
 }
@@ -152,6 +179,17 @@ export async function runGroundedDiscovery(
   // account waits behind every account that has not failed (starvation protection). Pure order (signals/coverage.ts).
   const priority = deps.priority ? await deps.priority() : await loadDiscoveryPriority(prisma, opts.now).catch(() => new Map<string, string[]>());
   const order = discoveryOrder(profiles, { now: opts.now, lastAt, lastFailedAt, priority: new Set(priority.keys()) });
+  // R25: today's grounded queue budget, from the signals themselves (metadata.grounded.queuedAt in the last day).
+  let queuedToday = 0;
+  try {
+    const recent: Array<{ metadata: Record<string, unknown> | null }> = typeof prisma.gapSignal?.findMany === 'function'
+      ? await prisma.gapSignal.findMany({ where: { origin: 'discovery', updated_at: { gte: new Date(opts.now.getTime() - 86_400_000) } }, select: { metadata: true }, take: 2_000 })
+      : [];
+    const since = opts.now.getTime() - 86_400_000;
+    queuedToday = recent.filter((r) => { const g = (r.metadata as { grounded?: { queuedAt?: string } } | null)?.grounded; return typeof g?.queuedAt === 'string' && new Date(g.queuedAt).getTime() >= since; }).length;
+  } catch {
+    queuedToday = 0;
+  }
 
   for (const p of order.slice(0, Math.max(1, Math.min(opts.accounts ?? GROUNDED_ACCOUNTS_PER_RUN, 10)))) {
     if (clock() - started > (opts.timeBudgetMs ?? GROUNDED_TIME_BUDGET_MS)) {
@@ -159,7 +197,7 @@ export async function runGroundedDiscovery(
       continue;
     }
     const classes = [...SOURCE_CLASS_BUNDLES[(turns.get(p.accountName) ?? 0) % SOURCE_CLASS_BUNDLES.length]];
-    const res: GroundedAccountResult = { accountName: p.accountName, classes, proposed: 0, kept: 0, captured: 0, duplicates: 0, mayBeRelevant: 0, dropped: { notCited: 0, garbage: 0, dead: 0 }, error: null };
+    const res: GroundedAccountResult = { accountName: p.accountName, classes, proposed: 0, kept: 0, captured: 0, duplicates: 0, mayBeRelevant: 0, queued: 0, dropped: { notCited: 0, garbage: 0, dead: 0 }, error: null };
     // The whole turn shares the time budget: one slow answer never runs the cron past its limit.
     const left = (opts.timeBudgetMs ?? GROUNDED_TIME_BUDGET_MS) - (clock() - started);
     const answer = await ask(groundedPrompt(p.accountName, classes, p.aliases), Math.max(10_000, left)).catch((e: unknown) => ({ error: e instanceof Error ? e.message : String(e) }));
@@ -213,9 +251,17 @@ export async function runGroundedDiscovery(
       const named = textNamesAccount(realTitle ?? '', key) || p.aliases.some((a) => textNamesAccount(realTitle ?? '', normalizeCompany(a)));
       if (!named) res.mayBeRelevant += 1;
       const row: { metadata: Record<string, unknown> | null } | null = await prisma.gapSignal.findUnique({ where: { id: r.signal.id }, select: { metadata: true } }).catch(() => null);
+      // R25: material, named, dated by the page itself, within this run's and today's budget: queued for the bounded
+      // background research. Everything else stays a signal Casey sees.
+      const cls = page.cls || classes[0];
+      const queue = named && !unread && live.ok && !!live.publishedAt && MATERIAL_CLASSES.has(cls) && res.queued < GROUNDED_QUEUE_PER_RUN && queuedToday < GROUNDED_QUEUE_PER_DAY;
       await prisma.gapSignal
-        .update({ where: { id: r.signal.id }, data: { metadata: { ...((row?.metadata ?? {}) as Record<string, unknown>), grounded: { cls: page.cls || classes[0], claimedDate: live.ok && live.publishedAt ? null : page.date, mayBeRelevant: !named, ...(unread ? { unread: true } : {}) } } } })
+        .update({ where: { id: r.signal.id }, data: { ...(queue ? { research_status: 'queued' } : {}), metadata: { ...((row?.metadata ?? {}) as Record<string, unknown>), grounded: { cls, claimedDate: live.ok && live.publishedAt ? null : page.date, mayBeRelevant: !named, ...(unread ? { unread: true } : {}), ...(queue ? { queuedAt: opts.now.toISOString() } : {}) } } } })
         .catch(() => undefined);
+      if (queue) {
+        res.queued += 1;
+        queuedToday += 1;
+      }
     }
     await prisma.gapAuditEvent.create({ data: { kind: GROUNDED_DISCOVERY_AUDIT, actor: GROUNDED_DISCOVERY_ACTOR, subject_type: 'account', subject_id: p.accountName, created_at: opts.now, payload: JSON.parse(JSON.stringify(res)) } }).catch(() => undefined);
     out.accounts.push(res);

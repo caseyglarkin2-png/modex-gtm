@@ -932,6 +932,16 @@ for all 75: at 2 accounts a run, 12 runs a day (24 turns), 75 x 4 bundles take 1
 twelve priorities need 12 of those turns daily. The seven-day objective needs 43 turns a day. THE CHOICE (nothing
 changed): run the grounded cron hourly (48 turns a day, about twice the grounded-search calls) or cut the rotation to
 about 30 accounts beside the priorities. Not done here: no spend raised, no cadence changed, no cap raised.
+R25 **Discovery connected to bounded research (DONE for grounded pages).** News discovery already queued headlines
+that classify as a physical-network change; grounded pages were never queued ("the date is the search's claim").
+Now a grounded page that is MATERIAL (newsroom, SEC, earnings, jobs, government/permits, procurement, case study,
+technology, 3PL/partner, M&A, capex, fleet, trade press; never leadership, labor or security), whose title names the
+account, that the reader could open and that carries the page's OWN date is queued (`research_status: queued`,
+`metadata.grounded.queuedAt`) for the existing background research, which keeps its cap, its cooldown and its
+three-attempt dead letter (`no_usable_fact` with `researchAttempts`); bounded here too: 4 a run, 40 a day. A
+"may be relevant" page, an unread page and a search-dated page are never queued. Pinned in
+`grounded-discovery.test.ts`. No automatic communication, no contact enrichment, no spend beyond the research the
+cron already runs.
 
 ## 12. Migration, backfill and rollback
 
