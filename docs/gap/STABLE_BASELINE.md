@@ -351,6 +351,29 @@ company; aliases are never auto-created; Unknown stays Unknown on thin evidence;
 expected email and a live LEGACY_CONFLICT; no file under `src/lib/gap` writes `do_not_contact`. Production SHA:
 c86c24d7 (#397 59c20e1a plus the #398 follow-up), then 4ad8b81c (#399: the debt closed and the rep-facing surfaces; `docs/gap/OWNER_RESOLUTION.md`, last section) and the #400 follow-up 3da77d1e (Vercel READY on 3da77d1e311f105eda698b29c938ec9bc1464927), all shipped and verified live 2026-10-05.
 
+## Account-first UX, first slice (UX-03, 2026-10-06)
+
+Casey's explicit next-version decision (rule 4), 2026-10-05: GAP becomes account-first (Direction A: an account
+worklist, an account workspace, lanes as filters). The program, its audit, reviewer findings, contracts and tickets
+live in ONE document, `docs/gap/ACCOUNT_FIRST_UX.md`; this baseline records only what shipped and the contracts it
+adds. UX-03 (PR #401, merge 132958e7): ONE pursuit state per account (`lib/gap/pursuit/state.ts`, loaded by
+`pursuit/load.ts` from readers GAP already has, with a fixed priority reply > deal / hold > follow up > in motion >
+ready > choose > research); replies classified before they rank (`replies/classify.ts`: only a human reply pauses the
+account, "stop" is an opt-out, an automatic reply or a bounce is never a conversation); the chosen person is the
+newest audited human choice (the motion choice or the owner-resolution assignment), read everywhere; NEXT and Listen
+projected from the same state; the People Stack on NOW (`people/stack.ts`, `components/gap/people-stack.tsx`: 3 to 4
+eligible people from the one owner-resolution read, one distinguishing reason each, no ordinals on a tie with the
+tie named, a badge only on a resolver recommendation, sponsor / tech / site as compact slot lines, Why this person?
+with the person checks, Show N more with the set-aside reasons, Choose beside each eligible person, Prepare email /
+Call prep / Log a touch beside the chosen one); the analyst drawer capped the same way. Contracts that MUST NOT
+change: no surface computes its own account state (every seller surface renders from `loadPursuit`); a hold (reply,
+opt-out, deal, restriction, family, outstanding draft, unknown opportunity truth) disables every cold-touch control;
+a lone eligible person is GAP's preselection, never "chosen by you"; a newsletter subscriber or list member is never
+a relationship that leads an account; choosing writes only the existing append-only motion choice (a HubSpot-only
+person through the existing account-scoped import) and never sends, drafts, enrolls, writes HubSpot or spends Apollo.
+Production SHA: 132958e7 (Vercel receipt in `ACCOUNT_FIRST_UX.md` section 9).
+<!-- verified:2026-10-06 -->
+
 ## Soak (2026-10-02)
 
 Production soak of the baseline: health HEALTHY on every read over ~11h; crons ok with 0 consecutive failures; no

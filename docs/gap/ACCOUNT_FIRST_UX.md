@@ -843,6 +843,15 @@ class ("An automatic notice, not an answer"), the readback ("Chosen by you, Oct 
 | UX-01 / UX-02 | safety during the audit | emails sent 0; enrollments 0; Apollo credits 0; HubSpot writes 0 (one read: the Kroger deal); suppression clears 0 |
 | UX-02 | this document: em dashes | 0 |
 | UX-02 | five independent reviewers, read-only, stopped after their reports | all five chose Direction A |
+| UX-03 | GAP folder suite on the merged state (`vitest run tests/unit/gap`) | 326 files, 5,048 tests, 0 failures (65 new across 8 files) |
+| UX-03 | `tsc --noEmit`; eslint on the changed files | 0 errors; 0 problems |
+| UX-03 | production build | Vercel preview READY on the branch tip 19902f18 (the same build pipeline as production); local builds green except one EPERM when a local server still held Prisma's engine (operator error, re-run clean) |
+| UX-03 | local preview (production database, read-only, DPR 1): 8 golden accounts at 1440, FedEx / Walmart / PepsiCo at 820 and 390 light and dark, the Walmart drawer | no horizontal overflow anywhere; 4 rows by default; states as in section 7.1; captures in the scratch packet |
+| UX-03 | four fresh read-only reviewers on the preview (AE, product / IA, HAI, accessibility) | every BLOCKER fixed before merge (section 8.7); carried items in section 10 |
+| UX-03 | safety during build and review | emails sent 0; enrollments 0; Apollo credits 0; HubSpot writes 0; suppression clears 0; no Choose clicked against production |
+| UX-03 | merge | PR #401, merge commit 132958e7 on main (2026-10-06) |
+| UX-03 | production | Vercel deployment dpl_HuoDYqdgUFbipivj4d5UxtsBwUKf READY on 132958e7 (2026-10-06 01:05 local) |
+| UX-03 | production smoke (read-only, the rig's live session, nothing clicked) | FedEx "Ready for a first touch: Glen Chaffee" [ready], 4 rows, 2 slots, Prepare email present, 15.0 s; Walmart "Opted out: timothy.cooper@walmart.com, Oct 5" [opted_out], 4 rows, no Choose, 11.2 s; PepsiCo and H-E-B "Research: a verified fact, no angle grounded on it yet" [research], tie named, 10.5 s / 9.5 s; Kroger "In a deal: YardFlow - Kroger (Discovery)" [in_deal], no Choose, 9.1 s; NFI "Choose who hears this first (133 eligible)" [choose_person], 8.7 s; General Mills "Research: the angle needs your review before it is used", 9.6 s; Tyson "Relationship-led: Ryan Heman", 6.9 s; no horizontal overflow, no ordinals on any tie, no render errors |
 
 Screenshots: the scratch packet (not committed) holds `desk2/`, `mobile2/`, `drawer2/`, `path-*/`; the `drawer2`
 set is full-frame and valid, the `desk2` and `mobile2` PNGs are zoom-magnified crops (N15) and must be re-shot at
