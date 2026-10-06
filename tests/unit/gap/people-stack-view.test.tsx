@@ -117,7 +117,9 @@ describe('holds dominate the actions', () => {
     const state = stateFor({ replies: [{ from: 'x@walmart.com', name: 'Tim', at: '2026-10-05T13:58:00Z', subject: null, snippet: 'Call me Tuesday.', triaged: false }] });
     render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(r, { chosenKey: null })} state={state} hypothesisId="h1" excluded={excluded} />);
     expect(screen.queryAllByTestId('people-stack-choose')).toHaveLength(0);
-    expect(screen.getAllByTestId('people-stack-held')[0].textContent).toMatch(/No cold touch right now/);
+    // UX-05: the hold is said once, in the heading line, never once per row (Kroger said it five times).
+    expect(screen.getByTestId('people-stack-on-record').textContent).toMatch(/No cold touch right now/i);
+    expect(screen.queryAllByTestId('people-stack-held')).toHaveLength(0);
   });
 });
 

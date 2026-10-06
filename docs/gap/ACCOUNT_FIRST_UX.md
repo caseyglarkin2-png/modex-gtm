@@ -511,7 +511,7 @@ its own; none is a foundation-only sprint (UX-03 ships the Walmart header and st
 | UX-02 | IA alternatives + five-reviewer comparison + design contract | sections 4, 5 | DONE 2026-10-05 (5.6, 5.7 pending the trust remainder) | | |
 | UX-03 | Pursuit state (5.1) + reply classification + People Stack (5.2) on NOW, reading the chosen person; the pack built for that person (F1, N1, N2, N8) | Walmart: "Opted out" leads, Doug Estrada chosen with the hold shown, 4 rows of 46; FedEx: "Ready for a first touch: Glen Chaffee" (chosen by Casey, Oct 5) with Prepare email beside him, 4 rows of 37; Kroger: "In a deal", no choose; the analyst drawer: top 5 of 53, no ordinals on the tie | REVIEWED, merging (PR open) | 1291b5b5, 0b6de260, d7cb350f, 03704bbb, d96ce769, 6e473da3, 3ec49699 | reply-classify, people-stack, pursuit-state, pursuit-next, people-stack-view, account-now-pursuit, owner-panel-cap, ready-target-of (65 tests); GAP suite green |
 | UX-04 | Account workspace hierarchy: one decision block, context column, one-column 390, no sticky tabs at 390, scroll padding, 44 px bar, Listen cleanup (N9, N10, N11, N12) | FedEx at 820: state (green), one automatic-reply line, NEXT with one filled control, Glen chosen with Call prep and Log a touch, three eligible rows, compact sponsor and tech lines, one flags disclosure, then WHY NOW; the decision ends at 1.07 to 1.34 screens on six accounts; zero covered focus points | REVIEWED, merged (PR #402, 5c321ac6) | 7065fc24, caa5380a, 189eb183, 49e276f7, 7131b5a0 | now-hierarchy, blocked-people, voice-preview-button, the market-chatter and never-cite filters, the review-fix tests (GAP suite 329 files / 5,069 tests green) |
-| UX-05 | Account Story (5.4) with per-sentence tags, internal readers (clawd history, vault note) (F11, N5, N6) | PepsiCo story answers goal / changing / network / yard / proof / unknown; NFI shows the May 28 send | | | tag rule (weakest class); no private row; unverified employer item rises |
+| UX-05 | Account Story (5.4) with per-sentence tags, internal readers (clawd history, vault note) (F11, N5, N6) | PepsiCo story answers goal / changing / network / yard / proof / unknown; NFI shows the May 28 send | SHIPPED 2026-10-06 (6e, 7.3, 8.9) | | tag rule (weakest class); no private row; unverified employer item rises |
 | UX-06 | Outreach anchor + angle suggestion from the story + pack copy without pasted headlines, signed by the rep (5.5, N13) | one anchor per person with Do not use; a different story is one click | | | anchor never cites private / imagery / not-for-outreach |
 | UX-07 | Pursuit slots + human-priority controls on the stack (5.3, 5.6) | Make next / Not a fit / Not now recorded, audited, reversible, never over a hold | | | preference never clears DNC / employment / deal / reply |
 | UX-08 | Work surface: accounts needing attention, one card each, lane chips as filters, reply classes, search (F3, F12, N4) | /gap answers which account, why, state, person, next in one screen | | | card = pursuit state parity; opt-out never heads the list |
@@ -652,6 +652,55 @@ readers GAP already has; no new table, no model call, no second recommendation a
 7. **Out of scope**: the outreach anchor and "why #1 over #2" (UX-06), human-priority controls beyond Choose (UX-07),
    the worklist (UX-08), voice beyond Listen (UX-11+).
 
+## 6e. UX-05 implementation record (2026-10-06)
+
+Commits c55a2125, 52066d84, 1e9e194d and 8173e19e on `feat/gap-account-first-ux`. What shipped, against the 6d contract:
+
+1. One pure projection, `src/lib/gap/story/story.ts` (`projectStory`), over readers GAP already has: the brief's
+   sections and hypotheses, the buyer inputs, NOW's own why-now and know lines, the merged touches
+   (`story/touches.ts`: the account history, GAP's first-touch ledger, clawd's outreach history by address, the
+   classified replies), the pursuit state, the resolver's set-aside list, the vault note. No table, no model call,
+   no second recommendation authority.
+2. Rows, each present only with a basis: WHAT HAS HAPPENED BETWEEN US (the last email to a named person with their
+   title and subject, the silence or what came back by reply class, the count of emails and people, a meeting),
+   WHAT IS CHANGING (NOW's why-now lines), YARD OPPORTUNITY (the buyer's words when a problem BID exists, else the
+   top grounded angle's problem as Our read with its Wrong if), THEIR GOAL (a future-state or priority BID, else a
+   verified program statement, else an unverified one), NETWORK IMPLICATION (the angle's inference, only when it adds
+   a sentence to YARD; the brief builder sets both to the problem, so it is usually absent), WHAT WE NEED TO LEARN
+   (the unknown gap elements), STORIES THAT MATTER (checked lines not already told, with their cite status,
+   collapsed), YOUR NOTE (the vault wedge, marked never to quote).
+3. Trust per sentence: Buyer said, Checked, Unverified, Our read, Unknown, Contradicted, with basis ids
+   (`evidence:`, `bid:`, `hypothesis:`, `signal:`, `touch:`, `vault:`); a row takes the weakest class
+   (`weakestTag`); a sentence with no basis is Our read or Unknown; a line carrying an unverified signal's text is
+   Unverified; a divested-unit set-aside that rests on an unverified report is said so, one sentence per report.
+4. Check before contacting: an unverified sale or divestiture that names the chosen person's unit rises beside the
+   person, after NEXT and before the stack (FedEx: the CMA CGM sale against a FedEx Supply Chain title; nothing rises
+   for Glen Chaffee).
+5. Readers (`story/load.ts`): clawd `GET /api/outreach/history?domain=` and the intel snapshot's vault wedge, each
+   bounded at 4 s and soft ('not_configured' when the pair is absent, 'unavailable' on a failed read, and the story
+   says which); the local vault file when `GAP_VAULT_DIR` is set (Casey's machine). clawd is asked by the record
+   domain, else the domain the account's own addresses share (FedEx's company row carried no domain).
+6. Placement: the story leads the context column and takes WHY NOW's place; KNOW and THINK hide under a story (the
+   stories row and the yard row tell them); from 1100 px it sits beside NEXT. The stack compacts: a card only for the
+   chosen person while a cold touch is a live choice, one compact row per alternative (name, title, reason with its
+   material cue, Make first, Why), no cards under a hold or a deal.
+7. Listen reads the story rows with their tags in words after the state, NEXT and the person; never the vault note,
+   never the private line.
+8. The fresh-review batch (8.9): the header says the last touch and the reply once (the story's between-us row
+   carries them); the same project or deal under two sources is one sentence with the stronger tag; a Checked line
+   whose dollar figure does not parse is Unverified and never leads; a program statement (a merger, a multi-year
+   investment) is a change and outranks an incidental headline; a source speaking as itself is attributed ("FedEx
+   says: ..."); THEIR GOAL only in the buyer's words; one Unknown line for what to learn; the silence is judged
+   against the last email and an orphan reply says so; alternatives are plain rows with their reachability and the
+   hold sentence is said once; the divested-unit caveat sits under the set-aside line inside the stack; the collapsed
+   stories row keeps a heading and a visible Show; the private line sits after ASSET; a story sentence is cut at a
+   word past 200 characters.
+9. Not done, by the contract: the outreach anchor and BEST PROOF (UX-06), human priority beyond Choose (UX-07).
+
+Validation: GAP folder suite 332 files / 5,101 tests green (35 new across 3 files); full unit suite green on the
+first slice (657 files / 7,371 tests) and the GAP folder on every batch since; `tsc --noEmit` clean; eslint clean on
+the changed files; five local production builds green. Measurements and the fresh review follow in 7.3 and 8.9.
+
 ## 7. Task baselines and post-change measurements
 
 Baseline measured on production 2026-10-05 (SHA 54c11c57) through the rig; clicks counted on the shortest path a seller
@@ -742,6 +791,37 @@ controls fully covered (the UX-03 review's blocker was five of five sample point
 390 (sticky from md up), the bottom bar is present at 390 only, and no page overflows horizontally.
 
 Post-change measurements for the full task set: filled by UX-15 against the same tasks.
+
+### 7.3 UX-05 measurement: where the story sits (local preview of 8173e19e against the production database, read-only, DPR 1, 2026-10-06)
+
+The contract: at 820 the story's first three rows (between us, what is changing, the yard opportunity) sit inside the
+second screen, above where WHY NOW was; at 1100+ the story sits beside NEXT. Measured as the bottom pixel of the row
+over the viewport height (900 at 820 and 1440; 844 at 390). The decision end is measured as in 7.2.
+
+| Account | 820: decision ends | story starts | first three rows end | page (UX-04) | 1440: first three rows end | 390: first three rows end |
+|---|---|---|---|---|---|---|
+| FedEx [ready] | 977 px (1.09 screens) | 1,458 px (1.62) | 2,081 px (2.31) | 3.0 screens (3.2) | 823 px (0.91), beside NEXT | 2,359 px (2.80) |
+| Walmart [opted out] | 809 px (0.90) | 1,298 px (1.44) | 1,727 px (1.92) | 2.4 (2.8) | | 2,156 px (2.55) |
+| PepsiCo [research] | 906 px (1.01) | 1,418 px (1.58) | 1,768 px (1.96) | 2.6 (2.8) | 590 px (0.66) | |
+| H-E-B [research] | 830 px (0.92) | 1,204 px (1.34) | 1,511 px (1.68) | 2.4 (2.3) | | |
+| Kroger [in deal] | 805 px (0.89) | 1,190 px (1.32) | 1,520 px (1.69) | 2.4 (2.3) | | |
+| NFI [choose] | 846 px (0.94) | 1,256 px (1.40) | 1,343 px (1.49) | 2.1 (2.2) | | |
+| General Mills [research] | 866 px (0.96) | 1,252 px (1.39) | 1,673 px (1.86) | 2.5 | | |
+| Tyson [relationship] | 943 px (1.05) | 1,273 px (1.41) | 1,537 px (1.71) | 2.4 | | |
+
+Before the review batch (52066d84): the first three rows ended at 1.57 to 2.32 screens with two accounts past the
+second screen; the compact stack still drew a bordered card per alternative and repeated the hold sentence per row.
+
+Read honestly: on every account the story starts inside the second screen and the decision ends inside the first
+(0.89 to 1.09, down from 0.96 to 1.16); on seven of eight the first three rows also end inside the second screen; on
+FedEx they end at 2.3 because its between-us row holds three sentences (the August send, the June automatic reply, the
+count) and its two filing quotes are long. The stack's default row count stays at 4 (the UX-03 contract allows 3 to 5;
+the product reviewer measured that 3 rows would save about a tenth of a screen, not the three tenths FedEx needs).
+Every sentence on every page carried a tag (0 untagged of 4 to 10 per page); the private sentinel never appeared in a
+story; clawd's sends merged on FedEx (Aug 7 to Michael Jeannotte), PepsiCo (29 emails to 20 people), General Mills
+and Tyson once the domain fallback landed. Keyboard, with the sticky elements engaged: 40 Tabs at 820, 390 and 1440 in
+light and dark found zero obscured focused controls; no page overflows horizontally. Page load on the local preview:
+13 to 27 s (unchanged from UX-04; the brief read is the long pole; the story readers add under 1 s in parallel).
 
 ## 8. Reviewer findings (UX-01 / UX-02 pass, 2026-10-05)
 
@@ -957,6 +1037,34 @@ flags disclosure, the tie line, "Wrong if", "OK to cite to the buyer" against "C
 right column, DOM order equal to reading order, the contrast table (emerald 5.4 / 10.2, red 6.4 / 6.9, sky 7.5 / 11.9,
 amber 5.1 / 11.5 in light / dark).
 
+### 8.9 UX-05 fresh review (three read-only reviewers on the 820 / 390 / 1440 captures, 2026-10-06)
+
+| Finding | Reviewer | Severity | Disposition |
+|---|---|---|---|
+| PepsiCo showed two "last" facts that disagreed: the header "Last touch Jun 10 ... laura.maxwell@pepsico.com" (GAP only) and the story "Last email to Santosh Gupta, Aug 17" (GAP plus clawd) | AE, product | BLOCKER | FIXED: when the story's between-us row exists the header says neither the last touch nor the inbound line again; one reader feeds the answer |
+| Walmart carried the same $300M Cincinnati project as Unverified under WHAT IS CHANGING and as Checked under THEIR GOAL, the Checked one with a press-release dateline | AE, product | BLOCKER | FIXED: the same project (same money and a shared name) or the same deal (same counterparty) is one sentence with the stronger tag; the dateline is stripped |
+| Kroger and Walmart under a hold still drew four bordered cards each repeating "No cold touch right now (see Next)" (five times on Kroger) | product | BLOCKER | FIXED: alternatives are plain rows separated by a rule; the hold is said once in the heading line |
+| H-E-B "plans to build a $175 new refrigerated facility" was Checked and OK to cite; the vault note says $700M | AE | BLOCKER | FIXED at the story: a Checked line whose dollar figure does not parse is Unverified, never leads and is never marked citable; the truth-layer fix stays recorded in section 10 |
+| Kroger's WHAT IS CHANGING was a staff-uniform story while the Giant Eagle merger sat under THEIR GOAL | AE, product | BLOCKER | FIXED: a program statement (a merger, a multi-year investment) is a change and outranks an incidental headline; THEIR GOAL only in the buyer's words |
+| First-person filing quotes ("With Tricolor, we are redesigning our international air network...") read as GAP's claims | AE, product | BLOCKER | FIXED: a source speaking as itself is attributed, "FedEx says: ..." |
+| Three identical boilerplate Unknown rows on every account; ASK asked the first one again | AE, product | SHOULD | FIXED: one Unknown line ("Nothing from the buyer yet on how they run the yards today, what it costs them or why it happens."); ASK keeps the question |
+| FedEx's first row claimed no silence after the August send because a June automatic reply existed | AE | SHOULD | FIXED: the silence is judged against the last email; an older notice does not answer it |
+| Walmart's opt-out named no email it answered | AE | SHOULD | FIXED: "The email it answered is not in GAP's ledgers." when no send to that person precedes the reply |
+| Kroger quoted the placeholder subject "GAP first touch" | AE, product | SHOULD | FIXED: "(a GAP first touch)" without quotes |
+| Kroger's set-aside line read "4 set aside: and 1 more." | AE | SHOULD | FIXED in the stack: "4 set aside, none with a name on record." |
+| The private line sat visually inside the story column | AE, product | SHOULD | FIXED: it sits after ASSET, before the tools |
+| The divested-unit caveat was said twice (the set-aside line and a separate list after the stack) and sat between regions | product, a11y | SHOULD | FIXED: one sentence per report, rendered inside the stack directly under the set-aside line |
+| FedEx alternatives lost the reachability cue ("Email on record") | product | SHOULD | FIXED: every compact row carries its reachability after its reason |
+| The collapsed "Stories that matter" summary lost the native marker (flex) and had no h3, so heading navigation skipped it | a11y, product | SHOULD | FIXED: the summary carries an h3 and a visible "Show" |
+| Listen read "...is not verified (unverified)" and "unknown (unknown)" | a11y | SHOULD | FIXED: a sentence that already says it is unverified or unknown gets no tag suffix |
+| "Wrong if: If trailers..." doubles the word | product | NICE | FIXED |
+| "(current as of 2026-08-25)." and "CINCINNATI -" leaked into sentences | AE, product | NICE | FIXED |
+| The yard opportunity and the vault note read in the second person ("the yards you run") | AE | SHOULD | CARRIED (section 10): the hypothesis problem text is authored in the buyer's voice; rewriting it is the hypothesis authoring pass, not the story |
+| Reduce the stack to 3 rows to fix the 820 placement miss | product (against) | SHOULD | NOT DONE, by the product reviewer's own measurement (a tenth of a screen); the compact rows were made true rows instead |
+| Walmart's RELATIONSHIP line belongs in the between-us row | product | NICE | CARRIED: the relationship route is a UX-04 placement; folding it into the story is a UX-06 question |
+| "YOUR NOTE" tagged "OUR READ" mixes voice | product | NICE | CARRIED: the tag vocabulary is fixed (contract 5.4); the basis line says "your vault note" |
+| " · " separators are read as "middle dot" at high punctuation levels; uppercase tags may be read as initialisms | a11y | NICE | FIXED the separators (commas); the tag transform stays (text is lowercase in the DOM) |
+
 ## 9. Validation record
 
 | Ticket | Validation | Result |
@@ -981,6 +1089,12 @@ amber 5.1 / 11.5 in light / dark).
 | UX-04 | production | Vercel deployment dpl_CbeT3Z9VJQATVFdToXKQut2H4EcS READY on 5c321ac6 (2026-10-06 02:25 local) |
 | UX-04 | production smoke at 820 CSS px (read-only, the rig's live session, nothing clicked) | FedEx [ready] "Ready for a first touch: Glen Chaffee", 4 rows, 2 slot lines, decision ends 1,075 px (1.19 screens), 15.6 s; Walmart [opted_out], no Choose, 985 px (1.09), 11.2 s; PepsiCo and H-E-B [research] "a verified fact, no angle grounded on it yet", tie named, 1,158 / 1,058 px, 11.8 / 7.4 s; Kroger [in_deal] no Choose, 954 px, 6.4 s; NFI [choose_person] "133 eligible", 1,018 px, 10.0 s; General Mills [research] "the angle needs your review", 1,030 px, 7.1 s; Tyson [ready] "Relationship-led: Ryan Heman", 1,085 px, 9.1 s; pages 2.1 to 2.8 screens; no horizontal overflow; no ordinals on any tie; no render errors |
 | UX-04 | production smoke at 390 | FedEx decision ends 1,156 px (1.37 screens), 3.3 screens; Walmart 1,198 px (1.42), 3.6 screens; no overflow |
+| UX-05 | GAP folder suite on the final state (8173e19e) | 332 files, 5,101 tests, 0 failures (35 new: `story-projection`, `story-readers`, `account-story-view`); full unit suite 657 files, 7,371 tests, 0 failures on the first slice; `tsc --noEmit` clean; eslint clean on the changed files |
+| UX-05 | production build | five local `npm run build` runs green (c55a2125 through 8173e19e); Vercel preview dpl_7P8Aw9WW3BLJqVq348Z3YYR5uwJB READY on 52066d84 and the branch tip's preview recorded at merge (the same pipeline as production) |
+| UX-05 | local preview (production database, read-only, DPR 1): 8 golden accounts at 820; FedEx / Walmart / PepsiCo / Kroger / H-E-B at 820 and 390 light and dark; FedEx / PepsiCo / Walmart at 1440 light and dark, before and after the review batch | measurements in 7.3; every sentence tagged; no private leak; no overflow; zero obscured focus |
+| UX-05 | three fresh read-only reviewers on the captures (AE, product / IA, accessibility) | six BLOCKERs and eleven SHOULDs fixed before the PR (section 8.9); carried items in section 10 |
+| UX-05 | live clawd readers (read-only GETs with the token from the local env; nothing written) | outreach history answered for fedex.com (4 sends), walmart.com (8), pepsico.com (26); the intel snapshot carried the vault wedge for FedEx (2026-07-10) |
+| UX-05 | safety during build and review | emails sent 0; enrollments 0; Apollo credits 0; HubSpot writes 0; suppression clears 0; no Choose clicked against production |
 | UX-03 | production smoke (read-only, the rig's live session, nothing clicked) | FedEx "Ready for a first touch: Glen Chaffee" [ready], 4 rows, 2 slots, Prepare email present, 15.0 s; Walmart "Opted out: timothy.cooper@walmart.com, Oct 5" [opted_out], 4 rows, no Choose, 11.2 s; PepsiCo and H-E-B "Research: a verified fact, no angle grounded on it yet" [research], tie named, 10.5 s / 9.5 s; Kroger "In a deal: YardFlow - Kroger (Discovery)" [in_deal], no Choose, 9.1 s; NFI "Choose who hears this first (133 eligible)" [choose_person], 8.7 s; General Mills "Research: the angle needs your review before it is used", 9.6 s; Tyson "Relationship-led: Ryan Heman", 6.9 s; no horizontal overflow, no ordinals on any tie, no render errors |
 
 Screenshots: the scratch packet (not committed) holds `desk2/`, `mobile2/`, `drawer2/`, `path-*/`; the `drawer2`
@@ -1021,3 +1135,10 @@ DPR 1 before UX-15 compares against this baseline. The text dumps and JS metrics
 | New (UX-04 review): the app sidebar takes about 257 px at 820, leaving about 517 px for the account page | OPEN QUESTION for Casey: collapse the sidebar on account pages below 1100 px (a shell change for every page) | |
 | New (UX-04 review): the Note control opens the shared non-modal feedback dialog with no Escape and no focus return | FIX AS PART OF UX (UX-14), the baseline P3 note-dialog item | |
 | New (UX-04 review): the tab title carries the notification count ("(840) Fedex"); "Email: Email sent:" in the last-touch line; "Role current (likely)" twice on H-E-B | NICE, carried to UX-14 | |
+| New (UX-05 review): the yard opportunity and the vault note read in the second person ("the gates, yards and docks you run") on a page the seller reads | FIX AS PART OF UX (hypothesis authoring pass): the problem text is authored in the buyer's voice | the story shows the angle as approved; rewriting voice there would be a second authority |
+| New (UX-05 review): the relationship route ("Chris Anderson: Inland26 contact") is a UX-04 block between the stack and the story | OPEN (UX-06): fold it into WHAT HAS HAPPENED BETWEEN US when the outreach anchor lands | |
+| New (UX-05 review): FedEx's between-us row holds three sentences and two long filing quotes, so its first three story rows end at 2.3 screens at 820 | LEAVE INTENTIONALLY for now: seven of eight accounts meet the placement; the lever is the stack's default row count (UX-03 contract allows 3) | Casey's call, not the slice's |
+| New (UX-05): the reply classifier reads "Please stop emailing me" as a human reply (the opt-out rule wants the whole message to be the refusal, or "do not email me" / "remove me from" / "unsubscribe me") | FIX AS PART OF UX (the next reply pass): a human reply still holds the account, so it fails safe; the state line just says "Someone replied" instead of "Opted out" | the UX-03 classifier contract was left alone in UX-05 |
+| New (UX-05): the brief builder sets an angle's inference to its problem, so NETWORK IMPLICATION never differs from YARD OPPORTUNITY on live data | LEAVE INTENTIONALLY (the story shows the row only when it adds a sentence) | a distinct inference belongs to the hypothesis authoring pass, not the story |
+| New (UX-05): FedEx's company row carries no domain, so clawd is asked by the domain the account's own addresses share | FIX AS PART OF UX (account record hygiene): set the domain on the record | the fallback is tested and honest |
+| New (UX-05): the resolver's FedEx Supply Chain divestiture rule is hard-coded with a date (2026-10-01) while GAP's own facts hold only an unverified report of the sale, so the story says the set-aside rests on an unverified report | OPEN QUESTION for Casey: verify the sale at its source and store the fact, or keep the rule and the caveat | truth layer |
