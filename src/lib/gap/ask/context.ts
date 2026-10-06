@@ -11,7 +11,7 @@ import { nextFromPursuit } from '../pursuit/next';
 import { projectStory } from '../story/story';
 import { mergeTouches } from '../story/touches';
 import { accountDomainFor, loadStoryReaders } from '../story/load';
-import { projectAnchor } from '../story/anchor';
+import { projectAnchor, storyBesideAnchor } from '../story/anchor';
 import { accountHref } from '../account-intel/href';
 import { compactContext, type AskContext } from './grounding';
 
@@ -68,7 +68,7 @@ export async function buildAskContext(prisma: PrismaLike, accountName: string, n
     accountName: brief.accountName,
     state: pursuit.state,
     nextText: next.text,
-    story,
+    story: storyBesideAnchor(story, anchor),
     anchor,
     stack: pursuit.stack,
     buyerSaid: inputs.bids.map((b) => ({ text: b.summary, who: b.who ?? null, at: b.at ?? null })),

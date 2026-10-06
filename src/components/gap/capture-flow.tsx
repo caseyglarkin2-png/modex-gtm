@@ -464,12 +464,12 @@ export function CaptureFlow({ initial = null, initialAccount = null, dictate = f
             <li>Conversation: {CONTEXTS.find(([k]) => k === context)?.[1] ?? context}</li>
             <li>Note: {heard.trim() ? `"${heard.trim().slice(0, 160)}${heard.trim().length > 160 ? '...' : ''}"` : 'empty'}</li>
           </ul>
-          <p className="text-xs text-[var(--muted-foreground)]">Confirm saves this as the note, exactly as it reads above, through the same path as Save. Nothing is sent to anyone.</p>
+          <p className="text-xs text-[var(--muted-foreground)]">Confirm saves this as the note, exactly as it reads above{text.trim() ? ', after what you already typed' : ''}, through the same path as Save. Nothing is sent to anyone.</p>
           <div className="flex flex-wrap gap-2">
-            <button type="button" className={primary} disabled={saving || !heard.trim()} data-testid="dictate-confirm" onClick={() => { const t = heard.trim(); setText(t); setHeard(null); void save(t); }}>
+            <button type="button" className={primary} disabled={saving || !heard.trim()} data-testid="dictate-confirm" onClick={() => { const t = text.trim() ? `${text.trim()}\n${heard.trim()}` : heard.trim(); setText(t); setHeard(null); void save(t); }}>
               {saving ? 'Saving...' : 'Confirm'}
             </button>
-            <button type="button" className={btn} data-testid="dictate-edit" onClick={() => { setText(heard); setHeard(null); document.querySelector<HTMLTextAreaElement>('[data-testid="capture-text"]')?.focus(); }}>Edit in the note</button>
+            <button type="button" className={btn} data-testid="dictate-edit" onClick={() => { setText((t) => (t.trim() ? `${t.trim()}\n${heard}` : heard)); setHeard(null); document.querySelector<HTMLTextAreaElement>('[data-testid="capture-text"]')?.focus(); }}>Edit in the note</button>
             <button type="button" className={btn} data-testid="dictate-discard" onClick={() => setHeard(null)}>Discard</button>
           </div>
         </section>

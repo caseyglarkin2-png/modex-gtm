@@ -47,7 +47,16 @@ export function Dictate({ enabled, onTranscript, maxSeconds = DICTATE_MAX_SECOND
     if (timer.current) clearInterval(timer.current);
     timer.current = null;
   }
-  useEffect(() => () => releaseStream(), []);
+  useEffect(
+    () => () => {
+      // Leaving mid-recording discards: the stop handler must never post (a paid call once enabled).
+      cancelled.current = true;
+      const rec = recorder.current;
+      if (rec && rec.state !== 'inactive') rec.stop();
+      releaseStream();
+    },
+    [],
+  );
 
   async function send(blob: Blob) {
     setPhase('transcribing');
@@ -168,7 +177,7 @@ export function Dictate({ enabled, onTranscript, maxSeconds = DICTATE_MAX_SECOND
         </>
       ) : (
         <>
-          <button type="button" className={OUTLINE} aria-pressed={false} disabled={phase === 'transcribing'} onClick={() => void start()} data-testid="dictate-start" title={enabled ? undefined : DISABLED_MESSAGE}>
+          <button type="button" className={OUTLINE} aria-pressed={phase === 'transcribing'} disabled={phase === 'transcribing'} onClick={() => void start()} data-testid="dictate-start" title={enabled ? undefined : DISABLED_MESSAGE}>
             {phase === 'transcribing' ? 'Transcribing...' : 'Dictate'}
           </button>
           {phase === 'failed' && kept.current ? (

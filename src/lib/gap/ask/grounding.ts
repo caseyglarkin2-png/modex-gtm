@@ -50,10 +50,22 @@ export function clearAskContexts(): void {
  * words to the buyer, the sentences that do are dropped and the truth is said first (the model turned "no buyer input"
  * into "the buyer said no one else owns transportation" on NFI).
  */
+const SAID = /\b(?:[Tt]he buyer|buyer|[Tt]hey|[Hh]e|[Ss]he|[A-Z][a-z]+(?: [A-Z][a-z]+)?) (?:said|says|told (?:us|GAP)|confirmed|mentioned|asked for)\b/;
+const saidByBuyer = (s: string) => SAID.test(s) && !/\bGAP (said|says)\b/.test(s) && !/\b(our read|we think|GAP thinks)\b/i.test(s);
 export function guardBuyerSaid(answer: string, ctx: AskContext): string {
-  if (ctx.buyerSaid.length > 0 || !/\bbuyer (said|says|told|confirmed)\b/i.test(answer)) return answer;
-  const kept = answer.split(/(?<=[.!?])\s+/).filter((s) => !/\bbuyer (said|says|told|confirmed)\b/i.test(s));
+  if (ctx.buyerSaid.length > 0) return answer;
+  const sentences = answer.split(/(?<=[.!?])\s+/);
+  if (!sentences.some(saidByBuyer)) return answer;
+  const kept = sentences.filter((s) => !saidByBuyer(s));
   return `Nothing from the buyer is on record here, so GAP cannot say what they said.${kept.length ? ` ${kept.join(' ')}` : ''}`.trim();
+}
+
+const FACT_ROWS = new Set(['changing', 'network', 'stories', 'between_us']);
+function contextable(s: { text: string; tag: string; cite?: string | null }, key: string, dnu: ReadonlySet<string>): boolean {
+  if (dnu.has(s.text.trim().toLowerCase())) return false;
+  if (s.tag === 'Unverified' || s.tag === 'Contradicted') return false;
+  if (!FACT_ROWS.has(key) || s.tag !== 'Checked') return true;
+  return s.cite === undefined || s.cite === 'OK to cite to the buyer' || /^The (opening story|supporting fact), above\.$/.test(s.text);
 }
 
 const scrub = (t: string) => t.replace(/[\w.+-]+@[\w-]+(?:\.[\w-]+)+/g, 'their address').replace(/\bhttps?:\/\/\S+/gi, '').replace(/\s+/g, ' ').trim();
@@ -69,18 +81,24 @@ export function compactContext(i: {
   buyerSaid?: Array<{ text: string; who: string | null; at: string | null }>;
 }): AskContext {
   const rows = [...(i.stack?.rows ?? []), ...(i.stack?.more ?? []).slice(0, 6), ...(i.stack?.slots ?? [])];
+  const dnu = new Set((i.anchor?.doNotUse ?? []).map((d) => d.text.trim().toLowerCase()));
+  // A human reply is buyer input too (the review: a replied account with no BID read as "the buyer has not told us").
+  const buyerSaid = [...(i.buyerSaid ?? [])];
+  if (i.state.lastInbound && i.state.lastInbound.kind === 'human' && i.state.lastInbound.snippet.trim()) buyerSaid.unshift({ text: i.state.lastInbound.snippet, who: i.state.lastInbound.who, at: i.state.lastInbound.at });
   return {
     accountName: i.accountName,
     state: { state: i.state.state, stateLine: scrub(i.state.stateLine), blocker: i.state.blocker ? scrub(i.state.blocker) : null, next: scrub(i.nextText), coldTouchAllowed: i.state.coldTouchAllowed },
     people: rows.map((r) => ({ name: r.name, title: r.title, slot: r.slot, reason: scrub(r.reason), currentness: r.currentness, chosen: r.chosen, whyOverNext: r.leadOver ? `${r.leadOver.tie ? 'tie with' : r.leadOver.leads ? 'leads' : 'behind'} ${r.leadOver.over}: ${scrub(r.leadOver.text)}` : null, setAsideByYou: r.preference?.line ?? null })),
     setAside: i.stack?.setAside.line ?? null,
-    // The vault note is seller-only and never quotable: it is not context. Private engagement is not a story row.
-    story: (i.story?.rows ?? []).filter((r) => r.key !== 'note').map((r) => ({ label: r.label, tag: r.tag, lines: r.sentences.slice(0, 4).map((s) => ({ text: scrub(s.text), tag: s.tag, basis: scrub(s.basis) })) })),
+    // The vault note is seller-only and never quotable: it is not context. Private engagement is not a story row. A
+    // fact line marked not for outreach, from imagery, unverified or contradicted, or one under DO NOT USE, is not
+    // context either: Ask must never hand it back as "checked" (the review found Maryland's layoffs about to be).
+    story: (i.story?.rows ?? []).filter((r) => r.key !== 'note').map((r) => ({ label: r.label, tag: r.tag, lines: r.sentences.filter((s) => contextable(s, r.key, dnu)).slice(0, 4).map((s) => ({ text: scrub(s.text), tag: s.tag, basis: scrub(s.basis) })) })).filter((r) => r.lines.length > 0),
     opening: i.anchor?.primary
       ? { fact: scrub(i.anchor.primary.observation), basis: scrub(i.anchor.primary.basis), whyTheyCare: i.anchor.whyTheyCare ? scrub(i.anchor.whyTheyCare.text) : null, supporting: i.anchor.supporting ? scrub(i.anchor.supporting.text) : null, proof: i.anchor.bestProof.text }
       : null,
     otherStories: (i.anchor?.alternatives ?? []).slice(0, 4).map((t) => ({ fact: scrub(t.observation), usable: t.usable, why: t.unusableWhy ? scrub(t.unusableWhy) : null })),
-    buyerSaid: (i.buyerSaid ?? []).slice(0, 8).map((b) => ({ text: scrub(b.text), who: b.who, at: b.at })),
+    buyerSaid: buyerSaid.slice(0, 8).map((b) => ({ text: scrub(b.text), who: b.who, at: b.at })),
   };
 }
 
@@ -93,9 +111,11 @@ const ACTION_PATTERNS: Array<{ re: RegExp; control: string }> = [
   { re: /\b(choose|make (him|her|them|[A-Z][a-z]+) (first|next)|make next|set aside|not a fit|not now|mark (him|her|them) (left|as left))\b/i, control: 'Ask GAP cannot choose or reorder people. The controls sit on each person in the People rows (Choose, Next if silent, Not a fit, Not now, Correct their record).' },
 ];
 
-/** A request to act is answered by naming where the control is; null when the question only asks. */
+/** A request to act is answered by naming where the control is; null when the question only asks (a question word opens a read: "What did we send them?" asks). */
 export function actionRequest(question: string): string | null {
-  for (const p of ACTION_PATTERNS) if (p.re.test(question)) return p.control;
+  const q = question.trim();
+  if (/^(who|whom|whose|what|why|when|which|how|where|is|are|was|were|do|does|did|has|have|had|can|could|should|would|will)\b/i.test(q) && !/\b(can|could|would|will) you (send|email|enroll|look ?up|delete|merge|mark|choose|make)\b/i.test(q)) return null;
+  for (const p of ACTION_PATTERNS) if (p.re.test(q)) return p.control;
   return null;
 }
 

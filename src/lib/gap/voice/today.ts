@@ -25,24 +25,27 @@ const STATE_SPOKEN: Record<WorkCard['stateKind'], string> = {
 
 function whyForTheEar(c: WorkCard): string {
   // The card's why already reads as a sentence; drop a leading account name repeat and anything machine.
-  const why = forTheEar(c.why).replace(new RegExp(`^${c.accountName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[:,]?\\s*`, 'i'), '');
+  const why = forTheEar(c.why).replace(new RegExp(`^${c.accountName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[:,]?\\s*`, 'i'), '').replace(/\b(\d+) cards? missing evidence( or contact data)?\b/i, '$1 people missing evidence$2').replace(/\bFound and verified in the background\. Use or ignore\.?/i, 'Verified facts are waiting for your judgment');
   return why ? `${why.charAt(0).toUpperCase()}${why.slice(1).replace(/[.!?]+$/, '')}.` : '';
 }
 
 export function todayListenText(cards: readonly WorkCard[], opts: { max?: number; now?: Date } = {}): string {
   const max = opts.max ?? TODAY_MAX_ACCOUNTS;
   if (cards.length === 0) return 'Today. Nothing needs you right now. Replies, follow ups, ready accounts and new angles show up here.';
-  const counts = { replied: 0, follow_up: 0, ready: 0, hold: 0 };
+  const counts = { replied: 0, opted_out: 0, bounced: 0, follow_up: 0, ready: 0, decide: 0, research: 0, hold: 0 };
   for (const c of cards) {
-    if (c.stateKind === 'replied') counts.replied += 1;
-    else if (c.stateKind === 'follow_up') counts.follow_up += 1;
-    else if (c.stateKind === 'ready') counts.ready += 1;
-    else if (c.stateKind === 'in_deal' || c.stateKind === 'unknown_deal' || c.stateKind === 'held') counts.hold += 1;
+    if (c.stateKind === 'in_deal' || c.stateKind === 'unknown_deal' || c.stateKind === 'held') counts.hold += 1;
+    else counts[c.stateKind] += 1;
   }
+  // Every kind is counted, so the headline adds up to the list.
   const headline = [
     counts.replied ? `${counts.replied} ${counts.replied === 1 ? 'reply' : 'replies'} to read` : null,
+    counts.opted_out ? `${counts.opted_out} opt-out${counts.opted_out === 1 ? '' : 's'} to record` : null,
+    counts.bounced ? `${counts.bounced} failed address${counts.bounced === 1 ? '' : 'es'}` : null,
     counts.follow_up ? `${counts.follow_up} follow ${counts.follow_up === 1 ? 'up' : 'ups'} due` : null,
     counts.ready ? `${counts.ready} ready for a first touch` : null,
+    counts.decide ? `${counts.decide} angle${counts.decide === 1 ? '' : 's'} to decide` : null,
+    counts.research ? `${counts.research} in research` : null,
     counts.hold ? `${counts.hold} in a deal or held` : null,
   ].filter(Boolean);
   const parts: string[] = [`Today. ${cards.length} ${cards.length === 1 ? 'account needs' : 'accounts need'} you${headline.length ? `: ${headline.join(', ')}` : ''}.`];
@@ -50,11 +53,11 @@ export function todayListenText(cards: readonly WorkCard[], opts: { max?: number
   spoken.forEach((c, i) => {
     const lead = i === 0 ? 'First' : i === spoken.length - 1 && spoken.length > 1 ? 'Then' : 'Next';
     const bits = [`${lead}, ${c.accountName}: ${STATE_SPOKEN[c.stateKind]}.`, whyForTheEar(c)];
-    if (c.person && c.stateKind !== 'replied' && c.stateKind !== 'opted_out') bits.push(`Next person: ${spokenPerson(c.person.name, c.person.title)}.`);
+    if (c.person && c.stateKind !== 'replied' && c.stateKind !== 'opted_out') bits.push(`Next person: ${spokenPerson(c.person.name, c.person.title, c.accountName)}.`);
     if (c.next) bits.push(`Next action: ${forTheEar(c.next.label).replace(/[.!?]+$/, '')}.`);
     if (c.blocker) bits.push(forTheEar(c.blocker));
     parts.push(bits.filter(Boolean).join(' '));
   });
-  if (cards.length > spoken.length) parts.push(`${cards.length - spoken.length} more wait below, in order.`);
+  if (cards.length > spoken.length) parts.push(`${cards.length - spoken.length} more follow, in order.`);
   return parts.join(' ').replace(/\s+/g, ' ').trim().slice(0, TODAY_MAX_CHARS);
 }

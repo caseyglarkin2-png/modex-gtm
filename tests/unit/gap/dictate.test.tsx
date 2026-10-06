@@ -99,6 +99,16 @@ describe('<Dictate>', () => {
     expect((fetchSpy.mock.calls[0][1] as RequestInit).body).toBeInstanceOf(FormData);
     expect(screen.getByTestId('dictate-status')).toHaveTextContent(/confirm before anything is recorded/);
   });
+  it('leaving the page mid-recording discards: the stop handler never posts', async () => {
+    const fetchSpy = vi.spyOn(globalThis, 'fetch');
+    const { unmount } = render(<Dictate enabled onTranscript={vi.fn()} />);
+    fireEvent.click(screen.getByTestId('dictate-start'));
+    await waitFor(() => expect(screen.getByTestId('dictate')).toHaveAttribute('data-phase', 'recording'));
+    unmount();
+    expect(FakeRecorder.instances[0].state).toBe('inactive');
+    expect(fetchSpy).not.toHaveBeenCalled();
+    expect(tracks.stop).toHaveBeenCalled();
+  });
   it('Escape while recording discards and says so', async () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch');
     render(<Dictate enabled onTranscript={vi.fn()} />);
@@ -162,11 +172,13 @@ describe('the confirmation boundary in the capture flow', () => {
     fireEvent.click(screen.getByTestId('dictate-stop'));
     await waitFor(() => expect(screen.getByTestId('dictate-review')).toBeInTheDocument());
     fireEvent.change(screen.getByTestId('dictate-heard'), { target: { value: 'Trailers wait an hour on Mondays at the north gate.' } });
+    // Words already typed in the note are kept: Confirm adds the transcript after them.
+    fireEvent.change(screen.getByTestId('capture-text'), { target: { value: 'Met Karen at the gate.' } });
     fireEvent.click(screen.getByTestId('dictate-confirm'));
     await waitFor(() => expect(screen.getByTestId('capture-review')).toBeInTheDocument());
     const writes = fetchSpy.mock.calls.filter(([u]) => String(u) === '/api/gap/captures');
     expect(writes).toHaveLength(1);
-    expect(JSON.parse(String((writes[0][1] as RequestInit).body))).toMatchObject({ accountName: 'PepsiCo', context: 'meeting', rawText: 'Trailers wait an hour on Mondays at the north gate.' });
+    expect(JSON.parse(String((writes[0][1] as RequestInit).body))).toMatchObject({ accountName: 'PepsiCo', context: 'meeting', rawText: 'Met Karen at the gate.\nTrailers wait an hour on Mondays at the north gate.' });
     expect(fetchSpy.mock.calls.every(([u]) => !/send|enroll|suppress|do-not-contact|delete/i.test(String(u)))).toBe(true);
   });
 });

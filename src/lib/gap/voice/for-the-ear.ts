@@ -51,9 +51,17 @@ export function wordCount(text: string): number {
   return text.split(/\s+/).filter(Boolean).length;
 }
 
+/** A quote the screen cut short ends at its last full sentence for the ear (never "marking the largest commercial, checked"). */
+export function completeSentence(text: string): string {
+  const t = text.replace(/\s*(\.\.\.|\u2026)\s*"?\s*$/, '').trim();
+  if (/[.!?]["\u201d]?$/.test(t)) return t;
+  const cut = Math.max(t.lastIndexOf('. '), t.lastIndexOf('." '), t.lastIndexOf('! '), t.lastIndexOf('? '));
+  return cut > 40 ? t.slice(0, cut + 1).trim() : t;
+}
+
 /** One sentence, ending in a period, with the tag aside when it is not already in the words. */
 export function spokenSentence(text: string, tag?: StoryTag): string {
-  const bare = forTheEar(text).replace(/[.!?]+$/, '');
+  const bare = forTheEar(completeSentence(text)).replace(/[.!?]+$/, '');
   if (!bare) return '';
   if (!tag) return `${bare}.`;
   const saysIt = (tag === 'Unverified' && /not verified|unverified/i.test(bare)) || (tag === 'Unknown' && /unknown|nothing from the buyer|not confirmed/i.test(bare)) || (tag === 'Buyer said' && /\bsays?\b|\bsaid\b/i.test(bare));
@@ -61,7 +69,12 @@ export function spokenSentence(text: string, tag?: StoryTag): string {
 }
 
 /** A name said naturally: "Glen Chaffee, Managing Director" (no machine words, no trailing company). */
-export function spokenPerson(name: string, title: string | null): string {
-  const t = title ? forTheEar(title).replace(/\s*[,|]\s*(?:FedEx|PepsiCo)\b.*$/i, '') : '';
+export function spokenPerson(name: string, title: string | null, accountName?: string): string {
+  let t = title ? forTheEar(title) : '';
+  // A title that ends in the company's own name says nothing new to the ear ("..., FedEx Ground").
+  if (t && accountName) {
+    const head = accountName.split(/\s+/)[0];
+    if (head.length >= 3) t = t.replace(new RegExp(`\\s*[,|]\\s*${head.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b.*$`, 'i'), '');
+  }
   return t ? `${name}, ${t}` : name;
 }

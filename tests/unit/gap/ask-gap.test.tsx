@@ -17,7 +17,7 @@ const state = { accountName: 'PepsiCo', state: 'ready', stateLine: 'Ready for a 
 const story = {
   rows: [
     { key: 'goal', label: 'Their goal', tag: 'Buyer said', sentences: [{ text: 'PepsiCo says: "network modernization".', tag: 'Buyer said', basis: 'sec.gov, Jul 20', basisIds: [] }], wrongIf: null, collapsed: false },
-    { key: 'changing', label: 'What is changing', tag: 'Checked', sentences: [{ text: 'PepsiCo is building a DC in Denver; contact ops@pepsico.com.', tag: 'Checked', basis: 'news.example, Sep 20', basisIds: [] }], wrongIf: null, collapsed: false },
+    { key: 'changing', label: 'What is changing', tag: 'Checked', sentences: [{ text: 'PepsiCo is building a DC in Denver; contact ops@pepsico.com.', tag: 'Checked', basis: 'news.example, Sep 20', basisIds: [], cite: 'OK to cite to the buyer' }, { text: 'DO-NOT-USE-SENTINEL layoffs fact', tag: 'Checked', basis: 'sec.gov', basisIds: [], cite: 'Checked, not for outreach' }, { text: 'NOT-FOR-OUTREACH-LINE: a plant audit photo shows 40 trailers.', tag: 'Checked', basis: 'imagery', basisIds: [], cite: 'Never cite (from imagery)' }, { text: 'UNVERIFIED-LINE: a rumor.', tag: 'Unverified', basis: 'rumor', basisIds: [] }], wrongIf: null, collapsed: false },
     { key: 'note', label: 'Your note', tag: 'Our read', sentences: [{ text: 'VAULT SECRET: Casey met the CFO at a bar.', tag: 'Our read', basis: 'vault', basisIds: [] }], wrongIf: null, collapsed: false },
   ],
   first: [], checkBeforeContacting: [], setAsideCaveats: [],
@@ -43,6 +43,8 @@ describe('compactContext and askPrompt', () => {
     expect(ctx.people[1].setAsideByYou).toBe('Not now until Nov 5, you, Oct 6.');
     expect(ctx.story.map((r) => r.label)).toEqual(['Their goal', 'What is changing']);
     expect(ctx.story[0].lines[0]).toEqual({ text: 'PepsiCo says: "network modernization".', tag: 'Buyer said', basis: 'sec.gov, Jul 20' });
+    expect(ctx.story[1].lines).toHaveLength(1); // the citable Denver line only
+    expect(json).not.toMatch(/NOT-FOR-OUTREACH-LINE|UNVERIFIED-LINE/);
     expect(ctx.opening).toMatchObject({ fact: 'PepsiCo is building a DC in Denver.', whyTheyCare: 'Karen runs transportation: a new DC opens on her network.', proof: 'Primo Brands: trailer turns 48 to 24 minutes, measured.' });
     expect(ctx.otherStories).toEqual([{ fact: 'PepsiCo and Gatik announced a partnership.', usable: true, why: null }]);
     expect(ctx.buyerSaid[0].text).toBe('Trucks wait an hour at the gate.');
@@ -66,12 +68,24 @@ describe('compactContext and askPrompt', () => {
     expect(actionRequest('make Shawn next')).toMatch(/cannot choose or reorder people/);
     expect(actionRequest('Why Karen over Shawn?')).toBeNull();
     expect(actionRequest('What do we still need to learn here?')).toBeNull();
+    // A question word opens a read, never an action: these ask.
+    expect(actionRequest('What did we send them?')).toBeNull();
+    expect(actionRequest('Who is flagged do not contact?')).toBeNull();
+    expect(actionRequest('Did we enroll anyone here?')).toBeNull();
+    expect(actionRequest('Can you send Karen the email?')).toMatch(/cannot send/);
   });
   it('with no buyer input the prompt says so and an invented "the buyer said" is dropped from the answer, the truth said first', () => {
     const ctx = compactContext({ accountName: 'NFI Industries', state, nextText: 'See the people.', story: null, anchor: null, stack: null, buyerSaid: [] });
     expect(askPrompt(ctx, 'Who owns transportation?')).toMatch(/There is NO buyer input on record at this account: never write "the buyer said"/);
     expect(guardBuyerSaid('The buyer said no one else owns transportation. Our read is that Jenny Wilson runs network operations. Transportation ownership is not stated.', ctx)).toBe('Nothing from the buyer is on record here, so GAP cannot say what they said. Our read is that Jenny Wilson runs network operations. Transportation ownership is not stated.');
     expect(guardBuyerSaid('Our read is that Jenny runs it.', ctx)).toBe('Our read is that Jenny runs it.');
+    // Other attributions are caught too; GAP's own words and our read are not.
+    expect(guardBuyerSaid('Jenny said the yard is fine. They told us Mondays are worst. GAP says the fact is checked.', ctx)).toBe('Nothing from the buyer is on record here, so GAP cannot say what they said. GAP says the fact is checked.');
+    // A human reply IS buyer input: the context carries it and the guard stands down.
+    const replied = compactContext({ accountName: 'NFI Industries', state: { ...state, state: 'replied', lastInbound: { who: 'Jenny Wilson', at: '2026-10-06T09:00:00Z', kind: 'human', label: 'Someone replied', snippet: 'Send me the two-site comparison and we can talk Thursday.' } } as unknown as PursuitState, nextText: 'Read the reply.', story: null, anchor: null, stack: null, buyerSaid: [] });
+    expect(replied.buyerSaid[0]).toEqual({ text: 'Send me the two-site comparison and we can talk Thursday.', who: 'Jenny Wilson', at: '2026-10-06T09:00:00Z' });
+    expect(askPrompt(replied, 'What did they say?')).not.toMatch(/NO buyer input/);
+    expect(guardBuyerSaid('The buyer said to send the comparison.', replied)).toBe('The buyer said to send the comparison.');
     const withInput = compactContext({ accountName: 'NFI Industries', state, nextText: 'x', story: null, anchor: null, stack: null, buyerSaid: [{ text: 'Trucks wait an hour.', who: 'Jenny', at: null }] });
     expect(guardBuyerSaid('The buyer said trucks wait an hour.', withInput)).toBe('The buyer said trucks wait an hour.');
   });

@@ -156,8 +156,6 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, 
         </div>
         {/* UX-09: Done, next (only when opened from Work): the order, Back, Next account, Back to Work. */}
         {doneNext}
-        {/* UX-13: Ask GAP, read-only, over this page's own projections. */}
-        {askGap}
 
         {pursuit?.anchor && (pursuit.state.coldTouchAllowed || pursuit.state.state === 'research' || pursuit.state.state === 'choose_person') ? (
           <OutreachAnchorView accountName={v.name} anchor={pursuit.anchor} coldTouchAllowed={pursuit.state.coldTouchAllowed} />
@@ -175,8 +173,18 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, 
 
         {pursuit?.stack ? (
           <>
+            {/* UX-13: Ask GAP, read-only, over this page's own projections; after the people, collapsed on a phone. */}
             <PeopleStackView accountName={v.name} stack={pursuit.stack} state={pursuit.state} hypothesisId={pursuit.hypothesisId} excluded={pursuit.excluded} primaryInNext={primaryInNext && pursuit.state.coldTouchAllowed} setAsideCaveats={pursuit.story?.setAsideCaveats ?? []} />
             {v.blocked?.length ? <BlockedPeople accountName={v.name} people={v.blocked} /> : null}
+            {askGap ? (
+              <>
+                <details className="sm:hidden" data-testid="ask-gap-phone">
+                  <summary className="min-h-11 cursor-pointer text-sm underline">Ask GAP about this account</summary>
+                  {askGap}
+                </details>
+                <div className="hidden sm:block">{askGap}</div>
+              </>
+            ) : null}
           </>
         ) : (
           <Slot label="Who" testId="now-who">

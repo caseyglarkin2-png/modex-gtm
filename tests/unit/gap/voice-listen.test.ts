@@ -4,7 +4,7 @@
  * line, the do-not-use list, an address or a URL, and names the first and second person only when a touch is live.
  */
 import { describe, expect, it } from 'vitest';
-import { forTheEar, spokenPerson, spokenSentence, wordCount } from '@/lib/gap/voice/for-the-ear';
+import { completeSentence, forTheEar, spokenPerson, spokenSentence, wordCount } from '@/lib/gap/voice/for-the-ear';
 import { todayListenText, TODAY_MAX_CHARS } from '@/lib/gap/voice/today';
 import { accountListenText, ACCOUNT_LISTEN_WORDS, type AccountListenInput } from '@/lib/gap/voice/account';
 import type { WorkCard } from '@/lib/gap/work/list';
@@ -20,7 +20,12 @@ describe('forTheEar', () => {
     expect(spokenSentence('PepsiCo is building a DC in Denver.', 'Checked')).toBe('PepsiCo is building a DC in Denver, checked.');
     expect(spokenSentence('Not verified: a sale said to be weighed.', 'Unverified')).toBe('Not verified: a sale said to be weighed.');
     expect(spokenSentence('PepsiCo says: "we will grow".', 'Buyer said')).toBe('PepsiCo says: "we will grow".');
-    expect(spokenPerson('Glen Chaffee', 'Managing Director, Transportation & Logistics, FedEx Ground')).toBe('Glen Chaffee, Managing Director, Transportation & Logistics');
+    expect(spokenPerson('Glen Chaffee', 'Managing Director, Transportation & Logistics, FedEx Ground', 'FedEx')).toBe('Glen Chaffee, Managing Director, Transportation & Logistics');
+    expect(spokenPerson('Karen Darling', 'Senior Director - PBNA Transportation', 'PepsiCo')).toBe('Karen Darling, Senior Director - PBNA Transportation');
+    // A quote the screen cut mid-sentence ends at its last full sentence for the ear.
+    expect(completeSentence('PepsiCo and Gatik announced a partnership. It marks the largest commercial...')).toBe('PepsiCo and Gatik announced a partnership.');
+    expect(completeSentence('A whole sentence.')).toBe('A whole sentence.');
+    expect(spokenSentence('PepsiCo and Gatik announced a partnership to bring autonomous freight into the supply chain, marking the largest commercial', 'Checked')).toBe('PepsiCo and Gatik announced a partnership to bring autonomous freight into the supply chain, marking the largest commercial, checked.');
   });
 });
 
@@ -35,10 +40,11 @@ describe('todayListenText', () => {
       ...Array.from({ length: 6 }, (_, k) => card(3 + k, `Account ${k}`, 'research', { why: `Account ${k}: 2 cards missing evidence.`, next: { label: `Research Account ${k}`, href: '/x' } })),
     ];
     const t = todayListenText(cards);
-    expect(t).toMatch(/^Today\. 9 accounts need you: 1 reply to read, 1 ready for a first touch, 1 in a deal or held\. First, NFI Industries: someone replied\./);
+    expect(t).toMatch(/^Today\. 9 accounts need you: 1 reply to read, 1 ready for a first touch, 6 in research, 1 in a deal or held\. First, NFI Industries: someone replied\./);
     expect(t).toMatch(/Next, PepsiCo: ready for a first touch\. Contact Karen Darling\. Next person: Karen Darling, Senior Director - PBNA Transportation\. Next action: Contact Karen Darling\./);
     expect(t).toMatch(/Kroger: in a deal\. Open HubSpot deal: "Kroger yard pilot" \(Proposal\)\. Next action: Open the deal brief\. No cold first touch while the deal is open: work it from the deal\./);
-    expect(t).toMatch(/4 more wait below, in order\.$/);
+    expect(t).toMatch(/4 more follow, in order\.$/);
+    expect(t).not.toMatch(/\bcards?\b|below/);
     expect(t).not.toMatch(/@|https?:/);
     expect(t.length).toBeLessThanOrEqual(TODAY_MAX_CHARS);
     expect(t.indexOf('NFI')).toBeLessThan(t.indexOf('PepsiCo'));
@@ -56,7 +62,7 @@ const base = (): AccountListenInput => ({
     rows: [
       { key: 'between_us', label: 'What has happened between us', tag: 'Checked', sentences: [{ text: 'Last email to Karen Darling, Senior Director, Jun 10: "Network 2.0 and the math on consolidated yards". No answer on record.', tag: 'Checked', basis: 'GAP ledger', basisIds: ['touch:2026-06-10'] }], wrongIf: null, collapsed: false },
       { key: 'goal', label: 'Their goal', tag: 'Buyer said', sentences: [{ text: 'PepsiCo says: "productivity and network modernization across PBNA and Frito-Lay".', tag: 'Buyer said', basis: 'sec.gov, Jul 20, 2026', basisIds: ['evidence:f1'] }], wrongIf: null, collapsed: false },
-      { key: 'changing', label: 'What is changing', tag: 'Checked', sentences: [{ text: 'The opening story, above.', tag: 'Checked', basis: 'the anchor', basisIds: [] }, { text: 'PepsiCo is ceasing operations at a bottling plant in Maryland (sec.gov, Sep 2, 2026).', tag: 'Checked', basis: 'sec.gov', basisIds: ['evidence:f3'] }], wrongIf: null, collapsed: false },
+      { key: 'changing', label: 'What is changing', tag: 'Checked', sentences: [{ text: 'The opening story, above.', tag: 'Checked', basis: 'the anchor', basisIds: [] }, { text: 'PepsiCo is ceasing manufacturing at a bottling plant in Maryland, which will result in 143 layoffs', tag: 'Checked', basis: 'sec.gov', basisIds: ['evidence:f3'], cite: 'Checked, not for outreach' }, { text: 'PepsiCo is building a 1.2 million square foot distribution center in Denver (sec.gov, Sep 20, 2026).', tag: 'Checked', basis: 'sec.gov', basisIds: ['evidence:f4'], cite: 'OK to cite to the buyer' }, { text: 'A rumor: PepsiCo said to weigh a sale of Quaker.', tag: 'Unverified', basis: 'rumor.example', basisIds: [] }], wrongIf: null, collapsed: false },
       { key: 'yard', label: 'Yard opportunity', tag: 'Our read', sentences: [{ text: 'Gate and dock handoffs become the constraint before doors do.', tag: 'Our read', basis: 'our read', basisIds: [] }], wrongIf: 'if trailers do not wait', collapsed: false },
       { key: 'learn', label: 'What we need to learn', tag: 'Unknown', sentences: [{ text: 'Which division owns the yard decision is unknown.', tag: 'Unknown', basis: 'no buyer input', basisIds: [] }], wrongIf: null, collapsed: false },
       { key: 'note', label: 'Your note', tag: 'Our read', sentences: [{ text: PRIVATE, tag: 'Our read', basis: 'vault', basisIds: [] }], wrongIf: null, collapsed: false },
@@ -89,7 +95,7 @@ describe('accountListenText', () => {
     expect(n).toBeLessThanOrEqual(ACCOUNT_LISTEN_WORDS.max);
     expect(t).toMatch(/^PepsiCo\. Ready for a first touch: Karen Darling\. Last email to Karen Darling, Senior Director, Jun 10/);
     expect(t).toMatch(/Their goal: PepsiCo says: "productivity and network modernization across PBNA and Frito-Lay"\./);
-    expect(t).toMatch(/What is changing: PepsiCo is ceasing operations at a bottling plant in Maryland, checked\./);
+    expect(t).toMatch(/What is changing: PepsiCo is building a 1\.2 million square foot distribution center in Denver, checked\./);
     expect(t).toMatch(/Where the yard fits: Gate and dock handoffs become the constraint before doors do, our read\./);
     expect(t).toMatch(/Our proof, measured: Primo Brands: trailer turns 48 to 24 minutes/);
     expect(t).toMatch(/First: Karen Darling, Senior Director - PBNA Transportation\. Runs PBNA transportation; the Gatik program lands on her network\. Their role is verified\. If no reply, Shawn Pierce, Sr Director Transportation Strategy\./);
@@ -101,8 +107,30 @@ describe('accountListenText', () => {
   it('never speaks the private line, the do-not-use list, an address, a URL or a citation token', () => {
     const t = accountListenText(base());
     expect(t).not.toMatch(/private|deep sessions|pepsico-private-sentinel/i);
-    expect(t).not.toMatch(/visits to our pages|layoffs|ROI reads/);
+    expect(t).not.toMatch(/visits to our pages|layoffs|ROI reads|Maryland|rumor|Quaker/);
     expect(t).not.toMatch(/@|https?:|\[S:|sec\.gov|pepsico\.com/);
+  });
+  it('Next always stays when the brief is trimmed, the caution is said once, only a confirmed role is verified, and a tie is spoken as a tie', () => {
+    const i = base();
+    i.nextText = 'Prepare the first touch to Karen Darling. Caution: the opening fact is a network program and may not land on Karen\'s remit; Shawn Pierce, Sr Director, fits it.';
+    i.anchor = { ...i.anchor!, whyTheyCare: { text: 'Karen runs transportation; the fact is a network program and may not land on their remit, and Shawn Pierce (Sr Director) fits it.', tag: 'Our read' } };
+    // Pad the goal so the brief runs long: the trim drops whole sections and keeps Next.
+    i.story = { ...i.story!, rows: i.story!.rows.map((r) => (r.key === 'goal' ? { ...r, sentences: [{ ...r.sentences[0], text: `PepsiCo says: "${'productivity and modernization '.repeat(12).trim()}".` }] } : r)) } as typeof i.story;
+    const t = accountListenText(i);
+    expect(t).toMatch(/Next: Prepare the first touch to Karen Darling\.$/);
+    expect(t.match(/Caution:/g) ?? []).toHaveLength(0);
+    expect(t).not.toMatch(/Their goal:/);
+    expect(t).toMatch(/Still unknown:/);
+    // A likely role is not a verification.
+    const likely = base();
+    likely.stack!.rows[0].currentness = 'Role likely Oct 5 (northwestern.edu)';
+    expect(accountListenText(likely)).not.toMatch(/Their role is verified/);
+    // A tie reads as one.
+    const tie = base();
+    tie.stack = { ...tie.stack!, tie: true, rows: tie.stack!.rows.map((r) => ({ ...r, chosen: false, chosenBy: null })) } as typeof tie.stack;
+    tie.state = { ...tie.state, person: null } as typeof tie.state;
+    expect(accountListenText(tie)).toMatch(/GAP could not separate the first people on evidence; in first-name order: Karen Darling/);
+    expect(accountListenText(tie)).toMatch(/Then Shawn Pierce, Sr Director Transportation Strategy, on the same evidence\./);
   });
   it('under a hold nobody is named as if they were next and no opening is spoken', () => {
     const i = base();
