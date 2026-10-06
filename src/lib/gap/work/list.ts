@@ -294,6 +294,10 @@ export function buildWorkList(i: WorkInput): WorkCard[] {
     const summaryHolds = s.state === 'in_deal' || s.state === 'held' || s.state === 'replied' || s.state === 'opted_out';
     if ((have.card.stateKind === 'replied' || have.card.stateKind === 'opted_out') && s.state !== 'replied' && s.state !== 'opted_out') continue;
     if (holdCard && !summaryHolds) continue;
+    // R14: a summary read BEFORE the ledger's touch is stale against it: the proven send stands (a READY summary from
+    // ten minutes ago must not say "prepare the first touch" over a touch that went out since).
+    const touch = i.inMotion?.get(name);
+    if (touch && new Date(s.at).getTime() < new Date(touch.at).getTime()) continue;
     const kind = PURSUIT_KIND[s.state];
     // R10: the workspace's own allowed action (the actionable result) is the card's action; the lane mapping only
     // when the summary predates it. A proposal under review opens the page at the proposal.

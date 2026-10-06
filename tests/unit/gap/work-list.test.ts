@@ -244,5 +244,10 @@ describe('a motion in flight on the Work list (R14)', () => {
     expect(cards.find((c) => c.accountName === 'Kroger')?.stateKind).toBe('in_deal');
     // The reply at NFI wins over the motion.
     expect(cards.find((c) => c.accountName === 'NFI Industries')?.stateKind).toBe('replied');
+    // A READY summary read before the touch is stale against it; one read after it says what the page says.
+    const stale = new Map([['PepsiCo', { accountName: 'PepsiCo', state: 'ready' as const, stateLine: 'Ready for a first touch: Karen Darling', person: { name: 'Karen Darling', title: null }, blocker: null, coldTouchAllowed: true, nextText: 'Prepare the first touch to Karen Darling.', at: '2026-10-06T13:50:00Z' }]]);
+    expect(buildWorkList(input({ inMotion, summaries: stale })).find((c) => c.accountName === 'PepsiCo')?.state).toBe('First touch in motion: Karen Darling');
+    const fresh = new Map([['PepsiCo', { ...stale.get('PepsiCo')!, state: 'in_motion' as const, stateLine: 'First touch in motion: Karen Darling', nextText: 'Karen Darling has the first touch.', at: '2026-10-06T14:10:00Z' }]]);
+    expect(buildWorkList(input({ inMotion, summaries: fresh })).find((c) => c.accountName === 'PepsiCo')?.why).toBe('Karen Darling has the first touch.');
   });
 });

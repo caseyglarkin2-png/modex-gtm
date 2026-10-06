@@ -891,6 +891,32 @@ last-known state (up to a day old, labeled with its age); `forgetPursuitSummary`
 outcome, a decision or a choice. Display state only: no send, draft or enroll path reads it. The full account read
 itself is unchanged (R61 owns its speed).
 
+**Sprint 1 gate (2026-10-06).** Exit met: Pepsi and two other conditions (Fedex ready, the corpus opt-out, the
+corpus deal) reach a persisted outcome through the UI with no REVIEW-lane repair. Receipts:
+- Unit: the full GAP suite 348 files / 5,232 tests green; the rest of the repository 325 files / 2,283 green (one
+  skipped); tsc clean; eslint clean on every changed file.
+- Scratch (real routes, services, machine, Postgres; boundaries controlled): `anchor-draft.scratch.test.ts` 6/6
+  (the Pepsi transaction: start, submit, retry, approve and use, adopt a stranded draft, a sensitive fact refused);
+  `send-spine.scratch.test.ts` 8/8 (route, preview binding, suppression, confirm + sink, replay, in motion, a real
+  address refused by the sink, a reply between preview and confirm).
+- Browser (headless Chrome against the scratch server, the sink as the mailbox): the Pepsi loop (set the missing
+  family -> under review -> Approve and use -> Ready for Tom -> the email control; the second story lands under
+  review, not approved); the outcomes loop (Skip today -> the next account; Snooze -> the footer; Work reflects both);
+  the send loop (account -> Put the story in use -> NEXT "Prepare the email to Glen" -> the card -> Send email -> the
+  final check from casey@yardflow.ai to the person with the exact copy -> confirm -> exactly one message written to
+  the sink -> Work reads "First touch in motion: Glen Scratch"). Receipts: scratchpad `r03/`, `r14/`, `send/`.
+- Defects found and fixed on the way (all in this sprint's commits): a stranded legacy draft twinned instead of
+  adopted; a chosen person with only a thesis under review read Ready; a proven send read research when the queue
+  held no card; a one-card READY account had no ready target so NEXT pointed at a preview that pointed at the lane;
+  the rendered NEXT control was derived before the page's overrides; an in-motion account vanished from Work after
+  its card was acted; a READY summary older than the ledger's touch overrode the touch; the send route left the
+  remembered summary in place.
+- Carried into Sprint 2+: the dev server rendered the Work list twice in one headless probe (the served HTML holds
+  one list; re-check on the production build, R60); the full account read's own speed (R61); the Work page's own
+  heavy cockpit read behind `cachedRead` (R61); the production stranded draft (`cmux0uu7r0003jw0450gb4kno`) is
+  repaired by Casey answering the family question on the PepsiCo page after deploy (the service adopts it; no
+  script needed, R64 records it).
+
 ## 12. Migration, backfill and rollback
 
 Order of commits inside Sprint 1 and 3: schema + SQL first (no reader), then pure core, then importers (Top100 before PIC before modex legacy), then runtime pin, then services, then queue actions under the flag, then `GAP_OS_ENABLED=true` in Vercel after `verify-triggers.ts` passes against prod (env is snapshot at deploy; redeploy after setting). Before the prod `db push`, preview it with `prisma migrate diff --from-url <prod> --to-schema-datamodel prisma/schema.prisma --script` and confirm the script is additive only; also confirm the prod role can `CREATE FUNCTION` (not yet verified). Rollback: the flag off restores byte-identical behavior instantly; full removal is the rollback SQL plus reverting the runtime, service and queue-action commits; `sequences` is never modified; the only two pre-existing tables GAP OS's schema touches at all are `draft_queue_items` (one nullable `sequence_version_id` stamp, S1-T2) and `inbound_messages` (`source String @default("gmail")` and `hubspot_engagement_id String?`, S2-T1, needed so the reply cron and the HubSpot poller can tell a Gmail-sourced row from a HubSpot-engagement-sourced one and attribute the engagement id idempotently) — both additive-only, both confirmed by the production preflight below; the lane and PIC files are read, never written.

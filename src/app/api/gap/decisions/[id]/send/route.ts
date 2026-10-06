@@ -19,6 +19,7 @@ import { isAdminEmail } from '@/lib/auth-providers';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { sendSellerEmail } from '@/lib/gap/execution/seller-send';
+import { forgetPursuitSummary } from '@/lib/gap/pursuit/summary';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
@@ -55,5 +56,12 @@ export async function POST(request: NextRequest, context: { params: Promise<{ id
     return NextResponse.json({ error: reason, ...rest }, { status: reason === 'decision_not_found' ? 404 : 409 });
   }
   if ('preview' in result || result.alreadySent) return NextResponse.json(result, { status: 200 });
+  // R15: a proven send changes the account's state; the remembered summary must not outlive it.
+  try {
+    const d = await prisma.routingDecision.findUnique({ where: { id: id.trim() }, select: { account_name: true } });
+    if (d?.account_name) await forgetPursuitSummary(prisma, d.account_name);
+  } catch {
+    /* the summary ages out */
+  }
   return NextResponse.json(result, { status: 201 });
 }
