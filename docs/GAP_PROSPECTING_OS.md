@@ -1298,6 +1298,43 @@ buyer promise made the seller's, Capture forgetting what opened it) each turn th
 commitments already written stay). Debt: the obligation and object reads are patterns over the sentence (the seller
 edits the title and the day in the review); a deal is referenced by name.
 
+R45 **Close the day and retain tomorrow (DONE).** NEW `work/today.ts` (pure) + `components/gap/work-today.tsx`: a small
+"Today" panel on Work, derived from actual state with NO new storage: done today (the New York day; read from the
+ledger and the dispositions by `loadCompletedToday`: sends GAP proved, answers recorded by a person, obligations done or
+skipped, notes saved, the seller's outcomes; an AI suggestion is never "done"), owed to buyers (every open buyer
+obligation, whatever its day), waiting on them (follow-ups not due, a buyer's promise not due, a first touch out) and
+tomorrow (what becomes due at any time tomorrow that is not due today: an obligation's day, a snooze coming back, a
+meeting on tomorrow's calendar), each group counted and listed (the count is its list). "See tomorrow"
+(`/gap?day=tomorrow`) shows Work as it will stand at 8 am New York tomorrow, read only and labelled (every write
+still happens at the real time; the follow-up sweep never writes in the future; every gate re-runs at the press).
+Legacy competition removed from the Work surface, the actionable result wins: a fresh pursuit summary's actionable
+result IS the card's action, its ABSENCE included (before, a summary that allowed nothing fell back to the lane's
+mapping, so a follow-up state the workspace held could still offer "Open the follow-up"; the lane mapping now speaks
+only for a summary written before R10), and the legacy NEXT UP list no longer renders beside an empty Work list (its
+pick is no longer computed). Proof: `work-today.test.tsx` (7: done is today only in New York at 11:30 pm, owed, waiting
+and tomorrow including a 9 am snooze return and a meeting; the panel's counts equal its lists; done read from the
+ledger with yesterday's rows and an unconfirmed disposition left out; the actionable result's absence wins where the
+lane mapping would offer an action; Work renders no NEXT UP; a pure mixed session read today and the next day with
+no omitted task, the Friday obligation still on Friday, the snooze away until its day, the reply still waiting, the
+meeting tomorrow's work) and the sprint's scratch file: a mixed session through the real routes (a reply, two sends,
+a snooze through the outcome route, a captured obligation due Friday, a meeting tomorrow as the meetings table stores
+it) read today, then the next morning and a day later by ANOTHER database client (a restart, another instance): no
+task omitted on any read (every open obligation is on a card, in Waiting or in Snoozed), nothing done by itself and no
+phantom Done the next day, the Friday obligation still due that Friday at 9 am New York and every follow-up's due time
+unchanged, the snooze away until its own day, the reply still waiting until recorded, the meeting an obligation the
+next morning. Browser receipt (headless Chrome on the scratch server; scratchpad `r45-journey/`: `journey.json` and six
+step screenshots plus the card, the Today panel and the tomorrow preview): Work shows Jo's reply as the card with the
+message, the prepared notes ("They asked...", "They named a day: Friday (Oct 9)"), the no-copy line and exactly two
+ways out -> "Log what they said" opens Capture with the account, Jo, Email and "Opened from a reply" -> the note's
+obligation "Send Jo the two-site comparison" due Oct 9, the statement with Jo as speaker and the "I think" line never
+proposed -> one press records both -> Work's Today panel owes it ("Due Oct 9") and lists the note as done, the reply
+still the card -> tomorrow's preview ("Tomorrow, Wed, Oct 7") still owes it on Oct 9 with nothing done. Five
+deliberate mutations (yesterday read as done today, the done read from UTC midnight, a lane card competing with the
+actionable result, tomorrow read in the morning so a 9 am return is missed, and both layers of the done-today filter
+removed on the scratch database) each turn their owning test red. Rollback: revert the commit (nothing stored).
+Debt: the preview carries no pursuit summaries (they are fresh for 15 minutes of the real clock), so its cards speak
+the lanes' words; "owed to buyers" lists every open buyer obligation, not only those due this week.
+
 ## 12. Migration, backfill and rollback
 
 Order of commits inside Sprint 1 and 3: schema + SQL first (no reader), then pure core, then importers (Top100 before PIC before modex legacy), then runtime pin, then services, then queue actions under the flag, then `GAP_OS_ENABLED=true` in Vercel after `verify-triggers.ts` passes against prod (env is snapshot at deploy; redeploy after setting). Before the prod `db push`, preview it with `prisma migrate diff --from-url <prod> --to-schema-datamodel prisma/schema.prisma --script` and confirm the script is additive only; also confirm the prod role can `CREATE FUNCTION` (not yet verified). Rollback: the flag off restores byte-identical behavior instantly; full removal is the rollback SQL plus reverting the runtime, service and queue-action commits; `sequences` is never modified; the only two pre-existing tables GAP OS's schema touches at all are `draft_queue_items` (one nullable `sequence_version_id` stamp, S1-T2) and `inbound_messages` (`source String @default("gmail")` and `hubspot_engagement_id String?`, S2-T1, needed so the reply cron and the HubSpot poller can tell a Gmail-sourced row from a HubSpot-engagement-sourced one and attribute the engagement id idempotently) — both additive-only, both confirmed by the production preflight below; the lane and PIC files are read, never written.

@@ -9,8 +9,11 @@
  * Soft: an unreadable store reads as nothing and never fails the page (the send gates fail closed on their own).
  */
 import { loadCommitments, syncFollowUpsFromLedger, syncReturnRemindersFromReplies } from './commitments';
-import type { Commitment } from './commitment-model';
-import { nyDay, nyDayAt } from './dates';
+import { COMMITMENT_EVENT, type Commitment } from './commitment-model';
+import { dayLabel, nyDay, nyDayAt } from './dates';
+import type { DoneItem } from './today';
+import { DIRECT_SENT, DRAFT_SENT, DRAFT_SUBJECT_TYPE, MANUAL_SENT } from '../execution/draft-ledger';
+import { WORK_OUTCOME } from './outcome';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -61,6 +64,51 @@ export async function loadUpcomingMeetings(prisma: PrismaLike, now: Date, horizo
     const calendarDay = d.getUTCHours() === 0 && d.getUTCMinutes() === 0 ? d.toISOString().slice(0, 10) : nyDay(d);
     const at = t ? nyDayAt(calendarDay, t[0], t[1]) : d.getUTCHours() === 0 && d.getUTCMinutes() === 0 ? nyDayAt(calendarDay, 9) : d;
     out.push({ accountName: r.account_name, at: at.toISOString(), what: r.objective?.trim() || r.meeting_status });
+  }
+  return out;
+}
+
+const words = (s: unknown) => String(s ?? '').replace(/_/g, ' ');
+const isObj = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v);
+
+/**
+ * R45: what was completed TODAY (the New York day of `now`), read from the ledger and the dispositions, never from a
+ * screen: sends GAP proved (direct, manual, a sent draft), answers recorded by a person, obligations done or skipped,
+ * notes saved, the seller's own outcomes. Nothing is stored for it; tomorrow it reads as yesterday's, never as done
+ * again. Soft: an unreadable ledger reads as nothing done (and says so nowhere as success).
+ */
+export async function loadCompletedToday(prisma: PrismaLike, now: Date): Promise<DoneItem[]> {
+  if (typeof prisma?.gapAuditEvent?.findMany !== 'function') return [];
+  const start = nyDayAt(nyDay(now), 0);
+  const rows: Array<{ kind: string; subject_type: string; subject_id: string; payload: unknown; created_at: Date }> = await prisma.gapAuditEvent
+    .findMany({
+      where: { created_at: { gte: start, lte: now }, kind: { in: [DIRECT_SENT, MANUAL_SENT, DRAFT_SENT, 'disposition.recorded', COMMITMENT_EVENT, 'capture.note', WORK_OUTCOME] } },
+      select: { kind: true, subject_type: true, subject_id: true, payload: true, created_at: true },
+      orderBy: { created_at: 'asc' },
+      take: 500,
+    })
+    .catch(() => []);
+  const out: DoneItem[] = [];
+  for (const r of rows) {
+    const p = isObj(r.payload) ? r.payload : {};
+    const at = new Date(r.created_at).toISOString();
+    if ((r.kind === DIRECT_SENT || r.kind === MANUAL_SENT) && r.subject_type === DRAFT_SUBJECT_TYPE) {
+      out.push({ at, accountName: typeof p.accountName === 'string' ? p.accountName : null, line: `Sent touch ${Number(p.stepIndex ?? 0) + 1} to ${String(p.recipient ?? 'them')}${p.reconciledFromSent ? ' (found in Sent)' : ''}.` });
+    } else if (r.kind === DRAFT_SENT) {
+      out.push({ at, accountName: null, line: 'A GAP draft was sent from Gmail.' });
+    } else if (r.kind === 'disposition.recorded' && p.humanConfirmed === true) {
+      out.push({ at, accountName: typeof p.accountName === 'string' ? p.accountName : null, line: `Recorded ${String(p.contactEmail ?? 'their')}'s answer (${words(p.responseClass)}).` });
+    } else if (r.kind === COMMITMENT_EVENT && p.op === 'status' && isObj(p.commitment)) {
+      const c = p.commitment as unknown as Commitment;
+      if (c.status === 'done') out.push({ at, accountName: c.accountName, line: `Done: ${c.title}.` });
+      else if (c.status === 'skipped') out.push({ at, accountName: c.accountName, line: `Skipped: ${c.title}${c.reason ? ` (${c.reason})` : ''}.` });
+    } else if (r.kind === 'capture.note') {
+      out.push({ at, accountName: typeof p.accountName === 'string' ? p.accountName : null, line: `Saved a note (${words(p.context)}).` });
+    } else if (r.kind === WORK_OUTCOME) {
+      const kind = p.kind;
+      const line = kind === 'skipped' ? 'Set aside for today.' : kind === 'snoozed' && typeof p.until === 'string' ? `Snoozed until ${dayLabel(nyDay(p.until), now)}.` : kind === 'logged' ? `Logged outside GAP${p.reason ? ` (${String(p.reason)})` : ''}.` : null;
+      if (line) out.push({ at, accountName: r.subject_id, line });
+    }
   }
   return out;
 }

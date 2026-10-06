@@ -41,10 +41,15 @@ import { loadThesisGroups, splitThesisWork, orderGroupsForReview, toThesisCard, 
 import { resolveRoutableHypothesisScope } from '@/lib/gap/routing/run';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { GapSubnav } from '@/components/gap/gap-subnav';
-import { GapCockpit, NextUp, type CockpitLane } from '@/components/gap/gap-cockpit';
-import { buildNextUpCandidates, heldAccountsOf, pickNextUpV2 } from '@/lib/gap/routing/next-up';
+import { GapCockpit, type CockpitLane } from '@/components/gap/gap-cockpit';
+import Link from 'next/link';
+import { WorkToday } from '@/components/gap/work-today';
+import { todaySummary } from '@/lib/gap/work/today';
+import { buyerMoves } from '@/lib/gap/work/commitment-model';
+import { addDays, nyDay, nyDayAt } from '@/lib/gap/work/dates';
+import { buildNextUpCandidates } from '@/lib/gap/routing/next-up';
 import { workDay, type WorkCard, type WorkInput } from '@/lib/gap/work/list';
-import { loadUpcomingMeetings, loadWorkCommitments } from '@/lib/gap/work/day-load';
+import { loadCompletedToday, loadUpcomingMeetings, loadWorkCommitments } from '@/lib/gap/work/day-load';
 import { loadAccountPriorities } from '@/lib/gap/work/priority';
 import { loadFollowUpPlans } from '@/lib/gap/execution/follow-up-load';
 import { loadWorkOutcomes } from '@/lib/gap/work/outcome';
@@ -159,7 +164,6 @@ async function loadCockpit() {
       tiers,
       openHref: cockpitOpenHref,
     });
-  const next = pickNextUpV2(candidates, heldAccountsOf(queue.items));
   // UX-08: WORK, one card per account in the same order, over the same reads (never a second state engine).
   const heldWhy = new Map<string, 'active_opportunity' | 'opportunity_unknown'>();
   for (const it of queue.items) {
@@ -213,7 +217,6 @@ async function loadCockpit() {
       deals: { count: inDeals.count, unresolved: inDeals.unresolved.length, checkedAt: inDeals.checkedAt },
     },
     inDeals,
-    next,
     workInput,
     workAccounts,
     groups: reviewGroups,
@@ -368,7 +371,7 @@ async function InDealsLane({ summary, open }: { summary: InDealsSummary; open: s
   );
 }
 
-export default async function GapCockpitPage({ searchParams }: { searchParams?: Promise<{ lane?: string; open?: string; account?: string; filter?: string; q?: string; focus?: string; fresh?: string }> }) {
+export default async function GapCockpitPage({ searchParams }: { searchParams?: Promise<{ lane?: string; open?: string; account?: string; filter?: string; q?: string; focus?: string; fresh?: string; day?: string }> }) {
   if (assertGapEnabled('GAP_ROUTING_ENABLED')) notFound();
 
   const session = await auth();
@@ -383,7 +386,11 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
   const fresh = params.fresh === '1' || !!lane;
   const read = await cachedRead('cockpit', loadCockpit, { fresh });
   const data = read.value;
-  const now = new Date();
+  const realNow = new Date();
+  // R45: `?day=tomorrow` previews Work as it will stand tomorrow at 8 am New York (read only: every write still happens
+  // at the real time, every gate re-runs at the click). Everything time-dependent below reads `now`.
+  const preview = params.day === 'tomorrow' && !lane;
+  const now = preview ? nyDayAt(addDays(nyDay(realNow), 1), 8) : realNow;
   // R15: the summaries come from this instance's memory, then the durable rows (one read), so a cold instance says
   // what the last workspace read said instead of falling back to the lanes.
   // R41: the obligations (after the bounded follow-up sweep), the next day's meetings and the seller's priorities are
@@ -391,7 +398,8 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
   const [summaries, outcomes, commitments, meetings] = await Promise.all([
     loadPursuitSummaries(prisma, data.workAccounts, now),
     loadWorkOutcomes(prisma, data.workAccounts, now).catch(() => new Map()),
-    lane ? Promise.resolve([]) : loadWorkCommitments(prisma, now, { replies: data.workInput.replies }).catch(() => []),
+    // The sweep writes at the real time only; the phases are read at `now`.
+    lane ? Promise.resolve([]) : loadWorkCommitments(prisma, realNow, { replies: data.workInput.replies }).catch(() => []),
     lane ? Promise.resolve([]) : loadUpcomingMeetings(prisma, now).catch(() => []),
   ]);
   const mailbox = process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() || null;
@@ -402,10 +410,13 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
   ]);
   const day = workDay({ ...data.workInput, now, summaries, outcomes, commitments, meetings, priorities, followUpPlans });
   const work: WorkCard[] = day.cards;
+  // R45: close the day and keep tomorrow, derived from actual state (no new storage).
+  const doneToday = lane || preview ? [] : await loadCompletedToday(prisma, now).catch(() => []);
+  const today = todaySummary({ now, commitments, done: doneToday, waiting: day.waiting, meetings, moved: buyerMoves(data.workInput.replies) });
   // UX-08 parity: after the response is sent, read the canonical pursuit state for the first few Work accounts
   // that have none remembered (serial, bounded, never blocking a render), so the next Work load says what the
   // workspace says.
-  if (!lane) after(() => warmPursuitSummaries(prisma, work.filter((c) => c.source === 'cockpit').map((c) => c.accountName)).catch(() => []));
+  if (!lane && !preview) after(() => warmPursuitSummaries(prisma, work.filter((c) => c.source === 'cockpit').map((c) => c.accountName)).catch(() => []));
 
   // The opened card's action pack, built on the server from the same component as the deep link.
   let openPanel: React.ReactNode = null;
@@ -464,8 +475,15 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
       ) : (
         <>
           {/* UX-08: WORK is the landing: the accounts that need the seller, one card each, the lanes as filters. */}
-          <WorkList cards={work} snoozed={day.snoozed} waiting={day.waiting} counts={day.counts} focus={/^[a-z0-9-]{1,120}$/.test(params.focus ?? '') ? (params.focus as string) : null} listenText={todayListenText(work)} readAt={{ at: read.at, label: read.fromCache ? `Read ${readAgo(read.at, now)}` : 'Read just now' }} />
-          {work.length === 0 ? <NextUp items={data.next} /> : null}
+          {preview ? (
+            <p className="rounded-md border border-amber-500/40 bg-amber-500/10 px-3 py-2 text-sm" data-testid="work-preview">
+              Tomorrow at 8:00 AM New York, as Work will hold it then: a preview. Nothing here happens until then, and every action still runs its checks when you press it. <Link href="/gap" className="underline">Back to today</Link>
+            </p>
+          ) : null}
+          <WorkToday today={today} preview={preview} />
+          {!preview ? <Link href="/gap?day=tomorrow" className="inline-flex min-h-11 items-center text-xs underline" data-testid="work-tomorrow-link">See tomorrow</Link> : null}
+          {/* R45: Work is the one list. The legacy NEXT UP fallback no longer competes with it when it is empty. */}
+          <WorkList cards={work} snoozed={day.snoozed} waiting={day.waiting} counts={day.counts} focus={/^[a-z0-9-]{1,120}$/.test(params.focus ?? '') ? (params.focus as string) : null} listenText={todayListenText(work)} readAt={{ at: read.at, label: read.fromCache ? `Read ${readAgo(read.at, realNow)}` : 'Read just now' }} />
         </>
       )}
 

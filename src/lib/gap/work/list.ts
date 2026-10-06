@@ -426,9 +426,10 @@ export function workDay(i: WorkInput): WorkDay {
     }
     if (!have) continue;
     const kind = PURSUIT_KIND[s.state];
-    // R10: the workspace's own allowed action (the actionable result) is the card's action; the lane mapping only
-    // when the summary predates it. A proposal under review opens the page at the proposal.
-    const action = s.actionable?.allowed ? { label: s.actionable.allowed.label, href: /^#/.test(s.actionable.allowed.href) ? `${accountHref(name)}${s.actionable.allowed.href}` : s.actionable.allowed.href } : pursuitAction(s.state, name, s.stateLine);
+    // R10 / R45: the workspace's own allowed action (the actionable result) IS the card's action, its absence included
+    // (a hold, an in-motion account allow nothing): a lane card never competes with it. The lane mapping only when the
+    // summary predates the actionable result. A proposal under review opens the page at the proposal.
+    const action = s.actionable ? (s.actionable.allowed ? { label: s.actionable.allowed.label, href: /^#/.test(s.actionable.allowed.href) ? `${accountHref(name)}${s.actionable.allowed.href}` : s.actionable.allowed.href } : null) : pursuitAction(s.state, name, s.stateLine);
     best.set(name, {
       rank: PURSUIT_RANK[s.state],
       sortKey: have.sortKey,

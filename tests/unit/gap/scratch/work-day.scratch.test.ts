@@ -235,4 +235,93 @@ describe.skipIf(!RUN)('Sprint 4: execute a day and remember what happened (scrat
       expect(fus[0]).toMatchObject({ status: 'waiting', person: { email: fedex.people.find((p) => p.name.startsWith('Glen'))!.email }, detail: { stepIndex: 1, noFollowUpCopy: true } });
     }, 120_000);
   });
+
+  describe('R45: close the day and retain tomorrow', () => {
+    it('a mixed session (a reply, two sends, a snooze, a captured obligation, a meeting tomorrow) read again the next morning and a day later by another client: no phantom Done, no lost date, no New York shift, no omitted task', async () => {
+      const { PrismaClient } = await import('@prisma/client');
+      const { workDay } = await import('@/lib/gap/work/list');
+      const { todaySummary } = await import('@/lib/gap/work/today');
+      const { loadWorkCommitments, loadUpcomingMeetings, loadCompletedToday, resetWorkSweep } = await import('@/lib/gap/work/day-load');
+      const { loadWorkOutcomes } = await import('@/lib/gap/work/outcome');
+      const { loadRecentFirstTouchAccounts } = await import('@/lib/gap/motion/load');
+      const { listReplies } = await import('@/lib/gap/replies/list');
+      const { addDays, nyDay, nyDayAt, weekdayOf } = await import('@/lib/gap/work/dates');
+      const { TERMINAL_STATUSES } = await import('@/lib/gap/work/commitment-model');
+      const realNow = new Date();
+      const today = nyDay(realNow);
+      const mills = account(corpus, 'Mills');
+      const tyson = account(corpus, 'Tyson');
+      const dannon = account(corpus, 'Dannon');
+      const pepsi = account(corpus, 'Pepsi');
+      const names = new Set(corpus.accounts.map((a) => a.name));
+      // A reply: Jo at Mills writes back (a person, not an automatic notice).
+      const jo = mills.people[0];
+      await prisma.emailThread.create({ data: { id: `s4-thread-${tag}`, account_name: mills.name, persona_email: jo.email, subject: 'Re: the Brazil sale', last_message_at: realNow } });
+      await prisma.inboundMessage.create({ data: { id: `s4-msg-${tag}`, thread_id: `s4-thread-${tag}`, from_email: jo.email, from_name: jo.name, subject: 'Re: the Brazil sale', body_text: 'Can you send the comparison? Thursday works for a call.', snippet: 'Can you send the comparison? Thursday works for a call.', received_at: realNow, source: 'gmail' } });
+      // A snooze through the real outcome route, until the day after tomorrow at 9 am New York.
+      const until = nyDayAt(addDays(today, 2)).toISOString();
+      const { POST: outcome } = await import('@/app/api/gap/accounts/outcome/route');
+      const o = await outcome(req('/api/gap/accounts/outcome', 'POST', { accountName: tyson.name, kind: 'snoozed', until, reason: 'travel' }));
+      expect(o.status, JSON.stringify(await o.clone().json())).toBe(201);
+      // A meeting tomorrow at 10 am New York (a date-only row plus its time, as the meetings table stores them).
+      const tomorrow = addDays(today, 1);
+      await prisma.meeting.create({ data: { account_name: dannon.name, meeting_status: 'Scheduled', meeting_date: new Date(`${tomorrow}T00:00:00.000Z`), meeting_time: '10:00 AM', objective: 'Pilot scoping' } });
+
+      async function readDay(client: import('@prisma/client').PrismaClient, now: Date) {
+        resetWorkSweep();
+        const replies = (await listReplies(client, { state: 'undispositioned', limit: 200 })).items.filter((r) => names.has(r.accountName));
+        const commitments = (await loadWorkCommitments(client, realNow, { replies: replies.map((r) => ({ accountName: r.accountName, contactEmail: r.contactEmail, subject: r.subject, snippet: r.snippet, receivedAt: r.receivedAt })) })).filter((c) => names.has(c.accountName));
+        const meetings = (await loadUpcomingMeetings(client, now)).filter((m) => names.has(m.accountName));
+        const outcomes = await loadWorkOutcomes(client, [...names], now);
+        const touches = await loadRecentFirstTouchAccounts(client, now);
+        const inMotion = new Map([...touches].filter(([n]) => names.has(n)).map(([n, t]) => [n, { state: t.state, at: t.at, person: null }]));
+        const day = workDay({ now, candidates: [], motions: [], inDeals: { status: 'unavailable', accounts: [] }, held: new Map(), replies: replies.map((r) => ({ accountName: r.accountName, contactEmail: r.contactEmail, subject: r.subject, snippet: r.snippet, receivedAt: r.receivedAt, id: r.id })), commitments, meetings, outcomes, inMotion });
+        const done = (await loadCompletedToday(client, now)).filter((d) => d.accountName === null || names.has(d.accountName));
+        return { day, commitments, summary: todaySummary({ now, commitments, done, waiting: day.waiting, meetings }) };
+      }
+      const omitted = (r: Awaited<ReturnType<typeof readDay>>) => {
+        const seen = new Set([...r.day.cards.flatMap((c) => (c.obligations ?? []).map((x) => x.commitmentId)), ...r.day.waiting.map((w) => w.commitmentId), ...r.day.snoozed.map((x) => x.key)]);
+        const snoozedAccounts = new Set(r.day.snoozed.map((x) => x.accountName));
+        return r.commitments.filter((c) => !TERMINAL_STATUSES.includes(c.status) && !seen.has(c.commitmentId) && !snoozedAccounts.has(c.accountName)).map((c) => c.title);
+      };
+
+      // TODAY.
+      const now0 = await readDay(prisma, new Date());
+      expect(omitted(now0)).toEqual([]);
+      expect(now0.day.cards.find((c) => c.accountName === mills.name)?.stateKind).toBe('replied');
+      expect(now0.day.cards.some((c) => c.accountName === tyson.name)).toBe(false);
+      expect(now0.day.snoozed.map((x) => x.accountName)).toContain(tyson.name);
+      expect(now0.summary.tomorrow.map((x) => x.accountName)).toContain(dannon.name);
+      expect(now0.summary.done.some((d) => d.accountName === tyson.name && /^Snoozed until/.test(d.line))).toBe(true);
+      const owedPepsi = now0.commitments.find((c) => c.accountName === pepsi.name && c.source.kind === 'capture')!;
+      const fus = now0.commitments.filter((c) => c.kind === 'follow_up').map((c) => [c.commitmentId, c.dueAt]);
+      expect(fus.length).toBeGreaterThanOrEqual(2);
+
+      // THE NEXT MORNING (8 am New York), read by ANOTHER client (a restart, another instance).
+      const other = new PrismaClient({ datasourceUrl: process.env.GAP_SCRATCH_DATABASE_URL });
+      try {
+        const morning = await readDay(other, nyDayAt(tomorrow, 8));
+        expect(omitted(morning)).toEqual([]);
+        expect(morning.day.cards.find((c) => c.accountName === dannon.name)?.obligations?.find((x) => x.kind === 'meeting')).toMatchObject({ title: 'Meeting today 10:00 AM: Pilot scoping' });
+        expect(morning.day.cards.find((c) => c.accountName === mills.name)?.stateKind).toBe('replied');
+
+        // A DAY LATER (now + 1 day).
+        const later = await readDay(other, new Date(realNow.getTime() + 86_400_000));
+        expect(omitted(later)).toEqual([]);
+        // No phantom Done: yesterday's sends, note and snooze are not "done today", and nothing closed by itself.
+        expect(later.summary.done).toEqual([]);
+        const pepsiLater = later.commitments.find((c) => c.commitmentId === owedPepsi.commitmentId)!;
+        expect(pepsiLater.status).toBe(owedPepsi.status);
+        // No lost date and no New York shift: the Friday obligation is still due on that Friday at 9 am New York.
+        expect(pepsiLater.dueAt).toBe(owedPepsi.dueAt);
+        expect(weekdayOf(nyDay(pepsiLater.dueAt!))).toBe(5);
+        expect(later.commitments.filter((c) => c.kind === 'follow_up').map((c) => [c.commitmentId, c.dueAt])).toEqual(fus);
+        // The snooze holds until its own day (two days out), and the reply still waits until it is recorded.
+        expect(later.day.cards.some((c) => c.accountName === tyson.name)).toBe(false);
+        expect(later.day.cards.find((c) => c.accountName === mills.name)?.stateKind).toBe('replied');
+      } finally {
+        await other.$disconnect();
+      }
+    }, 240_000);
+  });
 });
