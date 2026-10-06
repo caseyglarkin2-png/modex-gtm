@@ -11,7 +11,7 @@ import type { AccountContext } from '../context/context';
 import { listQueue } from '../routing/queue';
 import { cockpitOpenHref } from '../routing/card-readiness';
 import { laneWithMotion, loadCockpitMotions } from '../motion/cockpit';
-import { MOTION_UNLOCK_BUSINESS_DAYS } from '../motion/account-motion';
+import { EMAIL_ACTIONS, MOTION_UNLOCK_BUSINESS_DAYS } from '../motion/account-motion';
 import { loadMotionChoices } from '../motion/load';
 import { loadAnchorChoices } from '../motion/persona-angle';
 import { loadSellerPreferences } from '../people/seller-preference';
@@ -156,7 +156,14 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
     state = { ...state, state: 'research', stateLine: underReview ? `Research: a proposal is under review for ${state.person.name}` : `Research: no usable angle to open on yet for ${state.person.name}`, coldTouchAllowed: false, blocker: underReview ? `A thesis for ${state.person.name} is waiting for your review on this page; the first touch is prepared once it is approved.` : `No thesis the send gate would let out grounds a first touch at ${accountName} yet. ${state.person.name} stands; the angle is what is missing.`, unlock: underReview ? 'Approve the proposal on this page.' : 'A verified fact and an approved angle.' };
   }
   const topUsable = brief.hypotheses.find((h) => usableTheses.includes(h.id)) ?? null;
-  return { state, resolution, stack, hypothesisId: anchoredOpen?.id ?? topUsable?.id ?? null, anchorChoice, sendableTheses, usableTheses, ready: readyTargetOf(mine) };
+  // R12: the cockpit records a motion only where it changes what the seller sees (two or more cards, a pause, a live
+  // motion), so a one-card READY account has no motion and, before this, no ready target: NEXT then pointed at a
+  // preview that pointed at the lane. The ready target is the person's own READY email card, motion or not.
+  const readyCard = state.state === 'ready' && state.person?.personaId != null
+    ? queue.items.find((it) => EMAIL_ACTIONS.has(it.action) && it.persona?.id === state.person!.personaId && laneWithMotion(it, held, thesisHeld) === 'ready') ?? null
+    : null;
+  const ready = readyTargetOf(mine) ?? (readyCard ? { name: state.person!.name, title: state.person!.title, href: cockpitOpenHref('ready', readyCard.id), headline: `Ready: ${state.person!.name}.` } : null);
+  return { state, resolution, stack, hypothesisId: anchoredOpen?.id ?? topUsable?.id ?? null, anchorChoice, sendableTheses, usableTheses, ready };
 }
 
 /** UX-06: the account's open theses whose opening the send gate would let out (the pack's own rule over the linked signals). */

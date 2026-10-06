@@ -33,7 +33,7 @@ export function pursuitListenText(v: { name: string; listen: string; stateLine: 
 
 export function nextFromPursuit(
   s: PursuitState,
-  opts: { hypothesisId: string | null; accountSlugHref: (view: 'brief' | 'sources') => string; replyThreadHref: string | null; captureHref: string },
+  opts: { hypothesisId: string | null; accountSlugHref: (view: 'brief' | 'sources') => string; replyThreadHref: string | null; captureHref: string; /** R12: the cockpit card where SEND FROM YARDFLOW lives (the pursuit view's ready target), so NEXT lands where the email is sent, never a page that points at a lane. */ readyHref?: string | null },
 ): NextAction {
   const p = s.person;
   switch (s.state) {
@@ -59,7 +59,7 @@ export function nextFromPursuit(
       if (p.personaId === null) return { text: `Add ${p.name}${p.title ? ` (${p.title})` : ''} to GAP, then prepare the first touch to them.`, control: { href: '#people-stack-heading', label: `Add ${first(p.name)} from the people below` }, source: 'pursuit' };
       if (!opts.hypothesisId) return { text: `Prepare the first touch to ${p.name}: no grounded angle yet, so review the angle first.`, control: { href: `${opts.accountSlugHref('sources')}#brief-hypotheses`, label: 'Review the angle' }, source: 'pursuit' };
       // The title lives on the person's row directly below; NEXT says the name once (UX-04 review: Glen named four times).
-      return { text: `Prepare the first touch to ${p.name}.`, control: { href: `/gap/preview/${opts.hypothesisId}?personaId=${p.personaId}`, label: `Prepare the email to ${first(p.name)}` }, source: 'pursuit' };
+      return { text: `Prepare the first touch to ${p.name}.`, control: { href: opts.readyHref ?? `/gap/preview/${opts.hypothesisId}?personaId=${p.personaId}`, label: `Prepare the email to ${first(p.name)}` }, source: 'pursuit' };
     case 'choose_person':
       return { text: `Choose who hears this first. GAP ranks the people below and says why; it does not pick.`, control: { href: '#people-stack-heading', label: 'See the people' }, source: 'pursuit' };
     case 'research':

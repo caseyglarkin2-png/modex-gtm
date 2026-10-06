@@ -244,6 +244,27 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
     }
   }
 
+  /** USE THIS STORY: an approved thesis not yet in use is activated and routed through the same audited advance. */
+  async function usePrimary(hypothesisId: string) {
+    setNote(null);
+    setBusy({ kind: 'review', id: hypothesisId });
+    try {
+      const res = await fetch(`/api/gap/hypotheses/${encodeURIComponent(hypothesisId)}`, { method: 'PATCH', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ advance: 'approve_and_use' }) });
+      const body = (await res.json().catch(() => ({}))) as { ok?: boolean; to?: string | null; reason?: string; error?: string };
+      if (!res.ok || body.ok === false) {
+        announce('alert', `Not put in use: ${refusalWords(body.reason ?? body.error)} Nothing changed.`);
+        router.refresh();
+        return;
+      }
+      announce('status', `In use${first ? ` for ${first}` : ''}: the email is prepared on this story. Sending is still a separate step and runs every check.`);
+      router.refresh();
+    } catch (e) {
+      announce('alert', e instanceof Error ? e.message : 'network error');
+    } finally {
+      setBusy(null);
+    }
+  }
+
   async function notThisStory(item: AnchorPending) {
     setNote(null);
     setBusy({ kind: 'withdraw', id: item.hypothesisId });
@@ -276,8 +297,16 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
             <p className="min-w-0 break-words text-sm">{p.observation}</p>
           </div>
           <p className="ml-1 text-xs text-[var(--muted-foreground)]">
-            {p.basis}; {p.status === 'active' ? 'an active thesis' : p.status === 'approved' ? 'an approved thesis' : p.status}; basis: {anchor.primaryBy ? PRIMARY_BY_TEXT[anchor.primaryBy] : 'none'}. The email is built on it and still runs every check.
+            {p.basis}; {p.status === 'active' ? 'an active thesis' : p.status === 'approved' ? 'an approved thesis, not yet in use' : p.status}; basis: {anchor.primaryBy ? PRIMARY_BY_TEXT[anchor.primaryBy] : 'none'}. The email is built on it and still runs every check.
           </p>
+          {p.status === 'approved' && coldTouchAllowed ? (
+            <div className="ml-1 flex flex-wrap items-center gap-2">
+              <button type="button" className={PRIMARY} disabled={busy !== null} onClick={() => void usePrimary(p.hypothesisId)} data-testid="anchor-use-primary">
+                {busy?.kind === 'review' && busy.id === p.hypothesisId ? 'Putting in use...' : 'Put this story in use'}
+              </button>
+              <span className="text-xs text-[var(--muted-foreground)]">Approved stories are put in use here; the email is then prepared on it. Nothing is sent.</span>
+            </div>
+          ) : null}
         </div>
       ) : (
         <p className="text-sm text-amber-700 dark:text-amber-400" data-testid="anchor-none">

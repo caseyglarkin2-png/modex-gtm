@@ -206,7 +206,7 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
     // NEXT from the pursuit state (the chosen person and the action agree by construction); a meeting within 14 days
     // still leads (projectNow's own rule).
     const pursuitNext = pursuit && v.next.source !== 'meeting'
-      ? nextFromPursuit(pursuit.state, { hypothesisId: pursuit.hypothesisId, accountSlugHref: (view) => hrefFor(view), replyThreadHref: v.replyThread ? gmailThreadHref(v.replyThread, email) : null, captureHref: `/gap/capture?account=${encodeURIComponent(brief.accountName)}` })
+      ? nextFromPursuit(pursuit.state, { hypothesisId: pursuit.hypothesisId, accountSlugHref: (view) => hrefFor(view), replyThreadHref: v.replyThread ? gmailThreadHref(v.replyThread, email) : null, captureHref: `/gap/capture?account=${encodeURIComponent(brief.accountName)}`, readyHref: pursuit.ready?.href ?? null })
       : null;
     const control: { href: string; label: string } | null =
       pursuitNext ? pursuitNext.control
@@ -261,6 +261,13 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
     }
     // A research account with a checked fact and no thesis: the unblocking move is the draft on this page, not the
     // analyst's research plan (the review: NEXT left the workspace while the draft sat collapsed on it).
+    // R12: a READY account whose story is approved but not yet in use: the move is on this page (put it in use), never
+    // a preview that points at a lane.
+    if (pursuitNext && pursuit?.state.state === 'ready' && pursuit.state.person?.personaId != null && anchor?.primary && anchor.primary.status === 'approved') {
+      const first = pursuit.state.person.name.split(' ')[0];
+      pursuitNext.text = `The story for ${first} is approved but not yet in use: put it in use below and the email is prepared on it.`;
+      pursuitNext.control = { href: '#outreach-anchor', label: 'Put the story in use' };
+    }
     if (pursuitNext && pursuit?.state.state === 'research' && anchor && anchor.pending.length > 0) {
       // R12: a proposal in progress is reviewed where the action lives, never in a lane.
       const incomplete = anchor.pending.filter((x) => !x.familyKnown).length;
@@ -294,8 +301,8 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
         {tabs}
         <AccountNowView
           v={{ ...v, listen }}
-          nextHref={control?.href ?? null}
-          nextLabel={control?.label ?? null}
+          nextHref={(pursuitNext?.control ?? control)?.href ?? null}
+          nextLabel={(pursuitNext?.control ?? control)?.label ?? null}
           nextText={pursuitNext?.text ?? null}
           links={links}
           mailbox={process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() || null}

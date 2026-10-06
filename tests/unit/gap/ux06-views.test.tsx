@@ -5,7 +5,7 @@
  * says the account hold first and offers no opener; a keyword hit is never captioned as an observed fact; the
  * six-line brief carries BEST PROOF as YardFlow's.
  */
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const refresh = vi.fn();
@@ -164,6 +164,22 @@ describe('the outreach anchor block', () => {
     await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(2));
     expect(JSON.parse(String(fetchMock.mock.calls[1][1]!.body))).toMatchObject({ action: 'withdraw', reason: expect.stringMatching(/not this story/) });
     await waitFor(() => expect(screen.getByTestId('anchor-note').textContent).toMatch(/Set aside/));
+  });
+  it('an approved story not yet in use carries PUT THIS STORY IN USE (the audited advance); an active one does not; under a hold neither', async () => {
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce({ ok: true, status: 200, json: async () => ({ hypothesisId: 'h-denver', ok: true, from: 'approved', to: 'active', detail: 'now in use' }) } as Response);
+    const { unmount } = render(<OutreachAnchorView accountName="PepsiCo" anchor={anchor} coldTouchAllowed />);
+    expect(screen.getByTestId('anchor-primary').textContent).toMatch(/an approved thesis, not yet in use/);
+    fireEvent.click(screen.getByTestId('anchor-use-primary'));
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(1));
+    expect(fetchMock.mock.calls[0][0]).toBe('/api/gap/hypotheses/h-denver');
+    expect(JSON.parse(String(fetchMock.mock.calls[0][1]!.body))).toEqual({ advance: 'approve_and_use' });
+    await waitFor(() => expect(screen.getByTestId('anchor-note').textContent).toMatch(/In use for Karen.*separate step/));
+    unmount();
+    render(<OutreachAnchorView accountName="PepsiCo" anchor={{ ...anchor, primary: { ...anchor.primary!, status: 'active' } }} coldTouchAllowed />);
+    expect(screen.queryByTestId('anchor-use-primary')).toBeNull();
+    cleanup();
+    render(<OutreachAnchorView accountName="PepsiCo" anchor={anchor} coldTouchAllowed={false} />);
+    expect(screen.queryByTestId('anchor-use-primary')).toBeNull();
   });
   it('a refused approval says why in words and changes nothing; under a hold the approve control is disabled', async () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce({ ok: false, status: 409, json: async () => ({ hypothesisId: 'h-pend', ok: false, from: 'review_required', to: 'review_required', detail: 'approve refused: evidence_insufficient', reason: 'evidence_insufficient' }) } as Response);
