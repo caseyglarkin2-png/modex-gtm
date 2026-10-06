@@ -1289,6 +1289,9 @@ Screenshots: the scratch packet (not committed) holds `desk2/`, `mobile2/`, `dra
 set is full-frame and valid, the `desk2` and `mobile2` PNGs are zoom-magnified crops (N15) and must be re-shot at
 DPR 1 before UX-15 compares against this baseline. The text dumps and JS metrics from every capture are valid.
 
+| UX-06 | merge | PR #404 merged 2026-10-06 as 8ff5623c (tip c7d4fae1 after the seller re-check batch; preview READY dpl_BC6ixTF7bkoFEGHKmMcLzQbBvrbv) | production READY dpl_Cdsc6n2ybZUTUaiyNBM3bQw7hDqZ on 8ff5623c |
+| UX-06 | production smoke (rig Chrome, Casey's live session, read-only, 820) | FedEx account: NEXT carries the remit caution naming Lisa Lisson; the opening story is the active Network 2.0 thesis; two draftable facts. Walmart call 2235: the opt-out said first, no opener, no questions, the recorder stays. General Mills call 7: "Research: the angle needs your review" and "No opener until the thesis is usable". FedEx call 2234: the caution above the FACT block, questions shown | 4 of 4 pages agree with the send gate and NEXT; no overflow |
+
 ## 10. Debt classification (recorded debt audited 2026-10-05)
 
 | Debt (where recorded) | Class | Reason |

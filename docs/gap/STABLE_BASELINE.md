@@ -385,6 +385,23 @@ unmount. Added contracts that MUST NOT change: a name set aside as do not contac
 an account is never offered as a row under another record of the same person; a hold shows no cold-touch control;
 reading order equals DOM order at every width. Production SHA: 5c321ac6 (receipt in `ACCOUNT_FIRST_UX.md` section 9).
 
+**UX-06, the outreach anchor under Option A (PR #404, merge 8ff5623c, 2026-10-06).** `src/lib/gap/story/anchor.ts`
+projects ONE opening story for the chosen person: a usable thesis (approved or active, grounded, not under review,
+and one `hypothesisSendable` would let out; an unread gate makes nothing usable), chosen by the person's recorded
+anchor choice, else the fact on their remit, else the top usable thesis. WHY THIS PERSON CARES is Our read from the
+remit; a remit miss is a caution NEXT and the call page both carry, naming the eligible person the fact fits. A
+SUPPORTING FACT only when eligible; BEST PROOF is the canon Primo line, clearly ours; DO NOT USE names private
+engagement, our model, unverified items, imagery, not-for-outreach and sensitive facts (one line per fact). USE A
+DIFFERENT STORY lists the other theses; choosing one records `anchorHypothesisId` on the person's angle audit row
+(`POST /api/gap/personas/[id]/anchor`, append-only) and the pack opens on it; it never sends and never bypasses
+approval. DRAFT A THESIS prefills the hypothesis authority (story, source, a cited observation) and submits for the
+existing review; a pasted headline is refused by `validateObservation` (`title_shaped_observation`). The pursuit read
+(`lib/gap/pursuit/load.ts`) names the usable set; the call page (`replies/call-pursuit.ts`, its own route) reads it
+and withholds every opener element under a hold, an unusable thesis or an unread state (fail closed; the recorder and
+history stay). Seed family copy is byte-identical (`tests/unit/gap/copy-bytes.test.ts`). Contracts that must not
+change: a different story is a different reviewed thesis, never arbitrary evidence; no private, unverified or modeled
+item can become the opening fact; the anchor, NEXT and the call page agree with the send gate.
+
 **UX-05, the derived Account Story (PR #403, merge 5b1d2f26, 2026-10-06).** `src/lib/gap/story/*` projects ONE
 story per account over readers GAP already has (the brief, buyer inputs, the context history, GAP's first-touch
 ledger, clawd `/api/outreach/history` by address, the classified replies, the pursuit state, the resolver's set-aside
