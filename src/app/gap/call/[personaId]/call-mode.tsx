@@ -12,7 +12,7 @@
  */
 
 import { useCallback, useEffect, useState } from 'react';
-import { defaultGapApiClient, type CallBrief, type GapApiClient } from '@/lib/gap/ui/gap-api-client';
+import { defaultGapApiClient, type CallBrief, type CallPursuit, type GapApiClient } from '@/lib/gap/ui/gap-api-client';
 import { DispositionForm } from '@/components/gap/disposition-form';
 import { PreCallBrief } from '@/components/gap/pre-call-brief';
 
@@ -50,6 +50,9 @@ export function CallMode({
   onRecorded?: (responseClass: string) => void;
 }) {
   const [brief, setBrief] = useState<CallBrief | null>(null);
+  // UX-06: undefined while checking, null when unreadable (no opener either way), else the account's state.
+  const [pursuit, setPursuit] = useState<CallPursuit | null | undefined>(client.getCallPursuit ? undefined : null);
+  const [pursuitChecked, setPursuitChecked] = useState(!client.getCallPursuit);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [sourceId, setSourceId] = useState(() => callSourceId(personaId));
@@ -68,6 +71,19 @@ export function CallMode({
     void load();
   }, [load]);
 
+  useEffect(() => {
+    if (!client.getCallPursuit) return;
+    let alive = true;
+    void client.getCallPursuit(personaIdParam(personaId)).then((r) => {
+      if (!alive) return;
+      setPursuit(r.ok ? r.data.pursuit : null);
+      setPursuitChecked(true);
+    });
+    return () => {
+      alive = false;
+    };
+  }, [client, personaId]);
+
   if (loading) return <p className="text-sm italic text-[var(--muted-foreground)]">Loading the brief...</p>;
   if (error || !brief) {
     return (
@@ -81,7 +97,7 @@ export function CallMode({
 
   return (
     <div className="space-y-6">
-      <PreCallBrief brief={brief} hideContact={hideContact} />
+      <PreCallBrief brief={{ ...brief, pursuit: pursuit ?? null }} hideContact={hideContact} checking={!pursuitChecked} stateUnreadable={pursuitChecked && !!client.getCallPursuit && pursuit === null} />
       {(hypothesis ?? brief.hypothesis) && contactEmail ? (
         <DispositionForm
           key={sourceId}

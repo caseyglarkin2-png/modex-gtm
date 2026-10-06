@@ -26,13 +26,16 @@ import { projectPursuitState } from '@/lib/gap/pursuit/state';
 const NOW = new Date('2026-10-06T12:00:00Z');
 const anchor: OutreachAnchor = {
   person: { personaId: 1, name: 'Karen Darling', title: 'Senior Director - PBNA Transportation' },
-  primary: { hypothesisId: 'h-denver', status: 'approved', observation: 'PepsiCo is building a 1.2 million square foot distribution center in Denver, opening in 2027.', factIds: ['f-denver'], basis: 'news.example, Sep 20, 2026', relevance: { tier: 'direct', why: 'runs transportation: the fact is a site opening' }, problem: 'My guess is that a new DC opens on the old yard habits.' },
+  primary: { hypothesisId: 'h-denver', status: 'approved', observation: 'PepsiCo is building a 1.2 million square foot distribution center in Denver, opening in 2027.', factIds: ['f-denver'], basis: 'news.example, Sep 20, 2026', relevance: { tier: 'direct', why: 'runs transportation: the fact is a site opening' }, problem: 'My guess is that a new DC opens on the old yard habits.', usable: true, unusableWhy: null },
   primaryBy: 'their remit',
   whyTheyCare: { text: 'Karen runs transportation: the fact is a site opening.', tag: 'Our read' },
   supporting: { text: 'PepsiCo and Gatik announced a multi-year partnership.', tag: 'Checked', basis: 'pepsico.com, Aug 25, 2026', basisIds: ['evidence:f-gatik'], cite: 'OK to cite to the buyer' },
   bestProof: { text: BEST_PROOF_MEASURED, tag: 'Our proof, measured' },
   doNotUse: [{ text: 'Their visits to our pages and ROI reads', reason: 'private engagement: interest, never a reason to write' }, { text: 'PepsiCo said to weigh sale of Quaker Foods unit.', reason: 'unverified: a third party said it and nobody checked' }],
-  alternatives: [{ hypothesisId: 'h-gatik', status: 'active', observation: 'PepsiCo and Gatik announced a multi-year partnership.', factIds: ['f-gatik'], basis: 'pepsico.com, Aug 25, 2026', relevance: { tier: 'related', why: 'runs transportation, adjacent to an automation change' }, problem: 'My guess is that autonomous linehaul lands trailers on a schedule.' }],
+  alternatives: [
+    { hypothesisId: 'h-gatik', status: 'active', observation: 'PepsiCo and Gatik announced a multi-year partnership.', factIds: ['f-gatik'], basis: 'pepsico.com, Aug 25, 2026', relevance: { tier: 'related', why: 'runs transportation, adjacent to an automation change' }, problem: 'My guess is that autonomous linehaul lands trailers on a schedule.', usable: true, unusableWhy: null },
+    { hypothesisId: 'h-brazil', status: 'active', observation: 'General Mills entered into an agreement to sell its business in Brazil.', factIds: ['f-brazil'], basis: 'sec.gov, Sep 23, 2026', relevance: { tier: 'none', why: 'runs transportation, which the fact does not touch' }, problem: 'My guess is that...', usable: false, unusableWhy: 'its observation is a keyword hit or not a verified outreach fact; the send gate would refuse the opening' },
+  ],
   draftable: [{ story: 'PepsiCo is ceasing operations at a bottling plant in Maryland.', sourceLabel: 'fooddive.com, Sep 16, 2026', sourceUrl: 'https://fooddive.com/x', factId: 'f-plant', proposedObservation: 'fooddive.com: "PepsiCo is ceasing operations at a bottling plant in Maryland" [S:f-plant].' }],
 };
 
@@ -42,19 +45,24 @@ beforeEach(() => {
 });
 
 describe('the outreach anchor block', () => {
-  it('shows the primary anchor, why they care as Our read, the supporting fact, BEST PROOF as ours, DO NOT USE collapsed', () => {
+  it('shows the primary anchor and why they care in the open; the supporting fact, BEST PROOF (ours) and DO NOT USE sit behind one disclosure; an unusable thesis has no Use button', () => {
     render(<OutreachAnchorView accountName="PepsiCo" anchor={anchor} coldTouchAllowed />);
     expect(screen.getByTestId('anchor-primary')).toHaveAttribute('data-hypothesis', 'h-denver');
     expect(screen.getByTestId('anchor-primary').textContent).toMatch(/Denver.*chosen by their remit/s);
     expect(screen.getByTestId('anchor-why').textContent).toMatch(/Our read.*Karen runs transportation/s);
+    const more = screen.getByTestId('anchor-more');
+    expect(more.tagName).toBe('DETAILS');
+    expect(more).not.toHaveAttribute('open');
+    expect(more.textContent).toMatch(/do not use \(2\)/i);
     expect(screen.getByTestId('anchor-supporting').textContent).toMatch(/Checked.*Gatik/s);
     expect(screen.getByTestId('anchor-proof').textContent).toMatch(/Our proof, measured.*48 to 24 minutes, measured.*YardFlow's own number, never theirs/s);
     expect(screen.getByTestId('anchor-proof').textContent).not.toMatch(/Checked/);
-    const dnu = screen.getByTestId('anchor-do-not-use');
-    expect(dnu.tagName).toBe('DETAILS');
-    expect(dnu).not.toHaveAttribute('open');
-    expect(dnu.textContent).toMatch(/Do not use \(2\)/);
-    expect(dnu.textContent).toMatch(/private engagement/);
+    expect(screen.getByTestId('anchor-do-not-use').textContent).toMatch(/private engagement/);
+    const alts = screen.getByTestId('anchor-alternatives');
+    expect(alts.tagName).toBe('DETAILS');
+    expect(alts).not.toHaveAttribute('open');
+    expect(screen.getAllByTestId('anchor-use-story')).toHaveLength(1);
+    expect(screen.getByTestId('anchor-unusable').textContent).toMatch(/Not usable: General Mills.*keyword hit/s);
   });
   it('Use this story posts the anchor choice for the person and refreshes; it never sends', async () => {
     const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue({ ok: true, status: 201, json: async () => ({ personaId: 1, hypothesisId: 'h-gatik' }) } as Response);
@@ -103,7 +111,10 @@ describe('the outreach anchor block', () => {
   });
   it('with no approved thesis it says so and offers the draftable story; the persona key follows the title', () => {
     render(<OutreachAnchorView accountName="PepsiCo" anchor={{ ...anchor, primary: null, primaryBy: null, whyTheyCare: null, supporting: null, alternatives: [] }} coldTouchAllowed />);
-    expect(screen.getByTestId('anchor-none').textContent).toMatch(/No approved thesis at PepsiCo yet/);
+    expect(screen.getByTestId('anchor-none').textContent).toMatch(/No usable thesis at PepsiCo yet/);
+    // With nothing to open on, the draft path is open by default: it is the way out of research.
+    expect(screen.getByTestId('anchor-alternatives')).toHaveAttribute('open');
+    expect(screen.getByTestId('anchor-alternatives').textContent).toMatch(/Draft and review a story \(1\)/);
     expect(screen.getByTestId('anchor-draftable')).toBeInTheDocument();
     expect(personaKeyFor('Senior Director - PBNA Transportation')).toBe('transportation');
     expect(personaKeyFor('VP Supply Chain')).toBe('supply_chain');
@@ -148,6 +159,16 @@ describe('call prep on the pursuit state', () => {
     expect(screen.getByTestId('brief-no-opener').textContent).toMatch(/No opener while the account is opted out/);
     // The hold precedes everything else in reading order.
     expect(document.body.innerHTML.indexOf('data-testid="brief-hold"')).toBeLessThan(document.body.innerHTML.indexOf('data-testid="brief-persona"'));
+  });
+  it('while the state is being read, and when it could not be read, no opener is offered (fail closed)', () => {
+    const { unmount } = render(<PreCallBrief brief={brief} checking />);
+    expect(screen.getByTestId('brief-checking')).toBeInTheDocument();
+    expect(screen.queryByTestId('fact-block')).toBeNull();
+    expect(screen.getByTestId('brief-no-opener').textContent).toMatch(/once the account state is known/);
+    unmount();
+    render(<PreCallBrief brief={brief} stateUnreadable />);
+    expect(screen.getByTestId('brief-state-unreadable').textContent).toMatch(/could not be read just now: no opener/);
+    expect(screen.queryByTestId('fact-block')).toBeNull();
   });
   it('without a hold the FACT block renders; a keyword hit is captioned as such, never as an observed fact', () => {
     const { unmount } = render(<PreCallBrief brief={{ ...brief, pursuit: { state: 'ready', stateLine: 'Ready for a first touch', blocker: null, holdsCall: false } }} />);

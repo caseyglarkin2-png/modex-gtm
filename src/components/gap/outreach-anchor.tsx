@@ -63,7 +63,7 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
   const [drafted, setDrafted] = useState<{ id: string; status: string } | null>(null);
   const person = anchor.person;
 
-  async function useStory(hypothesisId: string) {
+  async function switchStory(hypothesisId: string) {
     if (!person?.personaId) return;
     setNote(null);
     setBusy({ kind: 'switch', id: hypothesisId });
@@ -135,84 +135,88 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
 
   const first = person ? person.name.split(' ')[0] : null;
   const p = anchor.primary;
+  const usableAlternatives = anchor.alternatives.filter((t) => t.usable || t.status === 'review_required');
+  const unusable = anchor.alternatives.filter((t) => !t.usable && t.status !== 'review_required');
+  const storyCount = usableAlternatives.length + anchor.draftable.length;
 
   return (
-    <section className="space-y-3 rounded-md border border-[var(--border)] p-3" data-testid="outreach-anchor" aria-labelledby="outreach-anchor-heading">
-      <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-        <h2 id="outreach-anchor-heading" className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">
-          Outreach anchor{first ? ` for ${first}` : ''}
-        </h2>
-        <p className="text-xs text-[var(--muted-foreground)]">One reviewed story; the email is built on it and still runs every check.</p>
-      </div>
+    <section className="space-y-2 rounded-md border border-[var(--border)] px-3 py-2" data-testid="outreach-anchor" aria-labelledby="outreach-anchor-heading">
+      <h2 id="outreach-anchor-heading" className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">
+        Outreach anchor{first ? ` for ${first}` : ''}
+      </h2>
 
       {p ? (
-        <div className="space-y-1" data-testid="anchor-primary" data-hypothesis={p.hypothesisId}>
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Primary anchor</p>
+        <div className="space-y-0.5" data-testid="anchor-primary" data-hypothesis={p.hypothesisId}>
           <div className="flex items-start gap-2">
             <Tag tag="Checked" />
             <p className="min-w-0 break-words text-sm">{p.observation}</p>
           </div>
           <p className="ml-1 text-xs text-[var(--muted-foreground)]">
-            {p.basis}, {p.status === 'active' ? 'an active thesis' : p.status === 'approved' ? 'an approved thesis' : p.status}; chosen by {anchor.primaryBy}
+            {p.basis}; {p.status === 'active' ? 'an active thesis' : p.status === 'approved' ? 'an approved thesis' : p.status}; chosen by {anchor.primaryBy}. The email is built on it and still runs every check.
           </p>
         </div>
       ) : (
         <p className="text-sm text-amber-700 dark:text-amber-400" data-testid="anchor-none">
-          No approved thesis at {accountName} yet: nothing to open on. {anchor.draftable.length ? 'A checked story below can be drafted and reviewed.' : 'Research finds the fact; review grounds the thesis.'}
+          No usable thesis at {accountName} yet: nothing to open on.{' '}
+          {unusable.length ? `${unusable.length === 1 ? 'The open thesis' : `${unusable.length} open theses`} would be refused by the send gate (${unusable[0].unusableWhy}).` : ''}{' '}
+          {anchor.draftable.length ? 'A checked story below can be drafted and reviewed.' : 'Research finds the fact; review grounds the thesis.'}
         </p>
       )}
 
       {anchor.whyTheyCare ? (
-        <div className="space-y-1" data-testid="anchor-why">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Why this person cares</p>
-          <div className="flex items-start gap-2">
-            <Tag tag="Our read" />
-            <p className="min-w-0 break-words text-sm">{anchor.whyTheyCare.text}</p>
-          </div>
+        <div className="flex items-start gap-2" data-testid="anchor-why">
+          <Tag tag="Our read" />
+          <p className="min-w-0 break-words text-sm">{anchor.whyTheyCare.text}</p>
         </div>
       ) : null}
 
-      {anchor.supporting ? (
-        <div className="space-y-1" data-testid="anchor-supporting">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Supporting fact</p>
-          <div className="flex items-start gap-2">
-            <Tag tag={anchor.supporting.tag} />
-            <p className="min-w-0 break-words text-sm">{anchor.supporting.text}</p>
+      <details className="text-sm" data-testid="anchor-more">
+        <summary className="min-h-11 cursor-pointer py-2 text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">
+          Best proof, supporting fact, do not use ({anchor.doNotUse.length}) <span className="ml-2 font-normal normal-case underline">Show</span>
+        </summary>
+        <div className="mt-1 space-y-3">
+          {anchor.supporting ? (
+            <div className="space-y-0.5" data-testid="anchor-supporting">
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Supporting fact</p>
+              <div className="flex items-start gap-2">
+                <Tag tag={anchor.supporting.tag} />
+                <p className="min-w-0 break-words text-sm">{anchor.supporting.text}</p>
+              </div>
+              <p className="ml-1 text-xs text-[var(--muted-foreground)]">{anchor.supporting.basis}</p>
+            </div>
+          ) : null}
+          <div className="space-y-0.5" data-testid="anchor-proof">
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Best proof</p>
+            <div className="flex items-start gap-2">
+              <span className="inline-block shrink-0 whitespace-nowrap rounded border border-[var(--primary)] px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[var(--primary)]">{anchor.bestProof.tag}</span>
+              <p className="min-w-0 break-words text-sm">{anchor.bestProof.text}</p>
+            </div>
+            <p className="ml-1 text-xs text-[var(--muted-foreground)]">YardFlow&apos;s own number, never theirs.</p>
           </div>
-          <p className="ml-1 text-xs text-[var(--muted-foreground)]">{anchor.supporting.basis}</p>
+          {anchor.doNotUse.length ? (
+            <div className="space-y-0.5" data-testid="anchor-do-not-use">
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Do not use ({anchor.doNotUse.length})</p>
+              <ul className="space-y-1 text-xs">
+                {anchor.doNotUse.map((d, k) => (
+                  <li key={k}>
+                    <span className="text-[var(--foreground)]">{d.text}</span> <span className="text-[var(--muted-foreground)]">({d.reason})</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
         </div>
-      ) : null}
+      </details>
 
-      <div className="space-y-1" data-testid="anchor-proof">
-        <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Best proof</p>
-        <div className="flex items-start gap-2">
-          <span className="inline-block shrink-0 whitespace-nowrap rounded border border-[var(--primary)] px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[var(--primary)]">{anchor.bestProof.tag}</span>
-          <p className="min-w-0 break-words text-sm">{anchor.bestProof.text}</p>
-        </div>
-        <p className="ml-1 text-xs text-[var(--muted-foreground)]">YardFlow&apos;s own number, never theirs.</p>
-      </div>
-
-      {anchor.doNotUse.length ? (
-        <details className="text-sm" data-testid="anchor-do-not-use">
+      {storyCount || unusable.length ? (
+        <details className="text-sm" data-testid="anchor-alternatives" open={!p && anchor.draftable.length > 0 ? true : undefined}>
           <summary className="min-h-11 cursor-pointer py-2 text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">
-            Do not use ({anchor.doNotUse.length}) <span className="ml-2 font-normal normal-case underline">Show</span>
+            {p ? 'Use a different story' : 'Draft and review a story'} ({storyCount}) <span className="ml-2 font-normal normal-case underline">Show</span>
           </summary>
-          <ul className="mt-1 space-y-1 text-xs">
-            {anchor.doNotUse.map((d, k) => (
-              <li key={k}>
-                <span className="text-[var(--foreground)]">{d.text}</span> <span className="text-[var(--muted-foreground)]">({d.reason})</span>
-              </li>
-            ))}
-          </ul>
-        </details>
-      ) : null}
-
-      {anchor.alternatives.length || anchor.draftable.length ? (
-        <div className="space-y-2" data-testid="anchor-alternatives">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Use a different story</p>
-          {anchor.alternatives.length ? (
+          <div className="mt-1 space-y-2">
+          {usableAlternatives.length ? (
             <ul className="space-y-2">
-              {anchor.alternatives.map((t) => (
+              {usableAlternatives.map((t) => (
                 <li key={t.hypothesisId} className="flex flex-wrap items-center gap-x-3 gap-y-1" data-testid="anchor-alternative" data-hypothesis={t.hypothesisId}>
                   <p className="min-w-0 flex-1 text-sm">
                     {t.observation}
@@ -221,10 +225,19 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
                   {t.status === 'review_required' ? (
                     <Link href="/gap?lane=review" className={OUTLINE}>Review it</Link>
                   ) : person?.personaId && coldTouchAllowed ? (
-                    <button type="button" className={OUTLINE} disabled={busy !== null} onClick={() => void useStory(t.hypothesisId)} data-testid="anchor-use-story">
+                    <button type="button" className={OUTLINE} disabled={busy !== null} onClick={() => void switchStory(t.hypothesisId)} data-testid="anchor-use-story">
                       {busy?.kind === 'switch' && busy.id === t.hypothesisId ? 'Switching...' : 'Use this story'}
                     </button>
                   ) : null}
+                </li>
+              ))}
+            </ul>
+          ) : null}
+          {unusable.length ? (
+            <ul className="space-y-1 text-xs text-[var(--muted-foreground)]" data-testid="anchor-unusable">
+              {unusable.map((t) => (
+                <li key={t.hypothesisId} data-hypothesis={t.hypothesisId}>
+                  Not usable: {t.observation.slice(0, 120)}{t.observation.length > 120 ? '...' : ''} ({t.unusableWhy})
                 </li>
               ))}
             </ul>
@@ -283,7 +296,8 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
               <Link href="/gap?lane=review" className="underline">Open the REVIEW lane</Link>
             </p>
           ) : null}
-        </div>
+          </div>
+        </details>
       ) : null}
 
       <p role="status" aria-live="polite" className="text-xs" data-testid="anchor-note">

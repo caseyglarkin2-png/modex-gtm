@@ -64,7 +64,7 @@ describe('GET /api/gap/call/[personaId]', () => {
   it('200 with the brief for a session or a header token, the id parsed as a number', async () => {
     let res = await call('7');
     expect(res.status).toBe(200);
-    expect(await res.json()).toEqual({ ...BRIEF, pursuit: null });
+    expect(await res.json()).toEqual(BRIEF);
     expect(mockedBrief).toHaveBeenCalledWith({ __tag: 'fake-prisma' }, 7, { hypothesisId: null });
     mockedAuth.mockResolvedValue(null);
     res = await call('7', { headers: { 'x-gap-token': 'cron-secret-value' } });

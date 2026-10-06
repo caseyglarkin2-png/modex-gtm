@@ -13,6 +13,8 @@ import { cockpitOpenHref } from '../routing/card-readiness';
 import { laneWithMotion, loadCockpitMotions } from '../motion/cockpit';
 import { loadMotionChoices } from '../motion/load';
 import { loadAnchorChoices } from '../motion/persona-angle';
+import { hypothesisSendable } from '../research/evidence-gate';
+import { EVIDENCE_SIGNAL_SELECT } from '../sequence/render';
 import { listReplies } from '../replies/list';
 import { loadOwnerResolution } from '../people/owner-resolution-load';
 import type { OwnerResolution } from '../people/owner-resolution';
@@ -33,6 +35,8 @@ export interface PursuitView {
   hypothesisId: string | null;
   /** The chosen person's recorded anchor choice, if any (even when no longer usable). */
   anchorChoice: string | null;
+  /** The open theses whose opening the send gate would let out (null when the read failed: nothing is called usable). */
+  sendableTheses: Set<string> | null;
   /** The cockpit's ready first-touch card for this account (what loadReadyTarget returns), from the same queue read. */
   ready: ReadyTarget | null;
 }
@@ -115,7 +119,18 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
   const openStatuses = new Set(['approved', 'active', 'confirmed', 'partially_confirmed']);
   const anchored = anchorChoice ? brief.hypotheses.find((h) => h.id === anchorChoice && h.grounded && h.truth !== 'CONTRADICTED') ?? null : null;
   const anchoredOpen = anchored && openStatuses.has(inputs.hypotheses.find((h) => h.id === anchored.id)?.status ?? '') ? anchored : null;
-  return { state, resolution, stack, hypothesisId: anchoredOpen?.id ?? top?.id ?? null, anchorChoice, ready: readyTargetOf(mine) };
+  const sendableTheses = await soft(loadSendableTheses(prisma, accountName, now), null);
+  return { state, resolution, stack, hypothesisId: anchoredOpen?.id ?? top?.id ?? null, anchorChoice, sendableTheses, ready: readyTargetOf(mine) };
+}
+
+/** UX-06: the account's open theses whose opening the send gate would let out (the pack's own rule over the linked signals). */
+async function loadSendableTheses(prisma: PrismaLike, accountName: string, now: Date): Promise<Set<string>> {
+  const rows: Array<{ id: string; account_name: string; observation: string | null; signals: Array<{ role: string | null; signal: Record<string, unknown> | null }> }> = await prisma.prospectingHypothesis.findMany({
+    where: { account_name: accountName, superseded_by: { is: null }, status: { in: ['approved', 'active', 'confirmed', 'partially_confirmed', 'review_required'] } },
+    select: { id: true, account_name: true, observation: true, signals: { select: { role: true, signal: { select: EVIDENCE_SIGNAL_SELECT } } } },
+    take: 50,
+  });
+  return new Set(rows.filter((r) => hypothesisSendable(r as never, now)).map((r) => r.id));
 }
 
 /** The newest audited HUMAN persona assignment on one of the account's active hypotheses (owner resolution USE). */

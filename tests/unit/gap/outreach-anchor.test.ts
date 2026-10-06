@@ -49,7 +49,8 @@ function anchorFor(i: AccountInputs, personaId: number | null, anchorChoice: str
   const state = projectPursuitState({ accountName: 'PepsiCo', now: NOW, motionType: 'FACT_LED', opportunity: { status: 'CLEAR', detail: '', deals: [] }, restriction: null, familyHold: null, motion: null, choice: personaId ? { personaId, by: 'casey@yardflow.ai', at: '2026-10-05T14:00:00Z', source: 'motion' } : null, activePersona: null, replies: [], lastOutbound: null, outstandingDraft: null, followUpDue: null, eligible });
   const story = projectStory({ accountName: 'PepsiCo', now: NOW, state, brief, inputs: i, whyNow: v.whyNow, know: v.know, touches: [], clawdRead: 'ok', vaultNote: null, excluded: [] });
   const p = personaId ? i.personas.find((x) => x.id === personaId)! : null;
-  return { anchor: projectAnchor({ accountName: 'PepsiCo', person: p ? { personaId: p.id, name: p.name, title: p.title } : null, brief, inputs: i, story, anchorChoice, privateLine: v.private, now: NOW }), story, brief };
+  const sendable = new Set(i.hypotheses.filter((h) => h.status !== 'draft' && !(i as AccountInputs & { unsendable?: string[] }).unsendable?.includes(h.id)).map((h) => h.id));
+  return { anchor: projectAnchor({ accountName: 'PepsiCo', person: p ? { personaId: p.id, name: p.name, title: p.title } : null, brief, inputs: i, story, anchorChoice, privateLine: v.private, sendable, now: NOW }), story, brief };
 }
 
 describe('the outreach anchor (Option A)', () => {
@@ -113,6 +114,19 @@ describe('the outreach anchor (Option A)', () => {
     expect(anchor.draftable.some((d) => d.factId === 'f-gatik')).toBe(false);
     // Not for outreach (the WARN notice is checked but not citable): never draftable.
     expect(anchor.draftable.some((d) => d.factId === 'f-plant')).toBe(false);
+  });
+  it('a thesis the send gate would refuse is never the anchor and is listed as not usable; with the gate unread nothing is usable', () => {
+    const gated = { ...inputs(), unsendable: ['h-denver'] } as AccountInputs & { unsendable: string[] };
+    const { anchor } = anchorFor(gated, 1);
+    expect(anchor.primary?.hypothesisId).toBe('h-gatik');
+    const denver = anchor.alternatives.find((t) => t.hypothesisId === 'h-denver')!;
+    expect(denver.usable).toBe(false);
+    expect(denver.unusableWhy).toMatch(/keyword hit or not a verified outreach fact/);
+    // A recorded choice of an unusable thesis changes nothing.
+    expect(anchorFor(gated, 1, 'h-denver').anchor.primary?.hypothesisId).toBe('h-gatik');
+    const unread = projectAnchor({ accountName: 'PepsiCo', person: { personaId: 1, name: 'Karen Darling', title: 'Senior Director - PBNA Transportation' }, brief: buildAccountBrief(inputs(), NOW), inputs: inputs(), story: { rows: [] }, anchorChoice: null, privateLine: null, sendable: null, now: NOW });
+    expect(unread.primary).toBeNull();
+    expect(unread.alternatives.every((t) => !t.usable && /could not be read/.test(t.unusableWhy ?? ''))).toBe(true);
   });
   it('without a person there is no primary by remit and no why-they-care; without an open thesis there is no primary at all', () => {
     const none = anchorFor(inputs(), null).anchor;

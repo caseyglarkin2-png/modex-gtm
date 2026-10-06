@@ -191,7 +191,7 @@ export default async function AccountPage({ params, searchParams }: { params: Pr
       : null;
     // UX-06 (Option A): the outreach anchor for the chosen person over the story and the account's open theses.
     const anchor = pursuit && story
-      ? projectAnchor({ accountName: brief.accountName, person: pursuit.state.person ? { personaId: pursuit.state.person.personaId, name: pursuit.state.person.name, title: pursuit.state.person.title } : null, brief, inputs, story, anchorChoice: pursuit.anchorChoice, privateLine: v.private, now })
+      ? projectAnchor({ accountName: brief.accountName, person: pursuit.state.person ? { personaId: pursuit.state.person.personaId, name: pursuit.state.person.name, title: pursuit.state.person.title } : null, brief, inputs, story, anchorChoice: pursuit.anchorChoice, privateLine: v.private, sendable: pursuit.sendableTheses, now })
       : null;
     const listen = pursuit && pursuitNext
       ? story

@@ -43,9 +43,13 @@ export interface PreCallBriefProps {
    * recording a call that already happened needs no number, and a refused Call must not sit next to one).
    */
   hideContact?: boolean;
+  /** UX-06: the account state is still being read: no opener until it is known. */
+  checking?: boolean;
+  /** UX-06: the account state could not be read: no opener (fail closed), the rest of the brief stands. */
+  stateUnreadable?: boolean;
 }
 
-export function PreCallBrief({ brief, hideContact = false }: PreCallBriefProps) {
+export function PreCallBrief({ brief, hideContact = false, checking = false, stateUnreadable = false }: PreCallBriefProps) {
   const { persona, account, hypothesis } = brief;
   const personaName = persona?.name?.trim() || persona?.email?.trim() || `persona ${String(persona?.id ?? '')}`;
   const questions = strings(brief.suggestedQuestions);
@@ -54,14 +58,22 @@ export function PreCallBrief({ brief, hideContact = false }: PreCallBriefProps) 
   const dispositions = Array.isArray(brief.lastDispositions) ? brief.lastDispositions : [];
   const bids = Array.isArray(brief.openBids) ? brief.openBids : [];
 
-  // UX-06: the SAME account state NOW shows, said first; under a hold no opener is offered.
+  // UX-06: the SAME account state NOW shows, said first; under a hold no opener is offered; while the state is being
+  // read, or when it could not be read, no opener either (fail closed).
   const hold = brief.pursuit?.holdsCall ? brief.pursuit : null;
+  const noOpener = !!hold || checking || stateUnreadable;
   return (
     <section data-testid="pre-call-brief" className="space-y-4 text-sm">
       {hold ? (
         <p role="status" className="rounded-md border border-amber-500/40 bg-amber-500/10 p-3 text-sm" data-testid="brief-hold" data-pursuit-state={hold.state}>
           <span className="font-semibold">{hold.stateLine}.</span> {hold.blocker ?? 'No cold call right now: work it from the account page.'}
         </p>
+      ) : checking ? (
+        <p role="status" className="text-xs text-[var(--muted-foreground)]" data-testid="brief-checking">Checking the account state before any opener...</p>
+      ) : stateUnreadable ? (
+        <p role="status" className="rounded-md border border-amber-500/40 bg-amber-500/10 p-3 text-sm" data-testid="brief-state-unreadable">The account state could not be read just now: no opener is offered. Record what you learn; the account page says where things stand.</p>
+      ) : brief.pursuit ? (
+        <p className="text-xs text-[var(--muted-foreground)]" data-testid="brief-state">{brief.pursuit.stateLine}.</p>
       ) : null}
       <header className="flex flex-wrap items-start justify-between gap-3">
         <div>
@@ -110,8 +122,8 @@ export function PreCallBrief({ brief, hideContact = false }: PreCallBriefProps) 
         ) : null}
       </header>
 
-      {hold ? (
-        <p className="italic text-[var(--muted-foreground)]" data-testid="brief-no-opener">No opener while the account is {hold.state.replace(/_/g, ' ')}: record what you learn below.</p>
+      {noOpener ? (
+        <p className="italic text-[var(--muted-foreground)]" data-testid="brief-no-opener">{hold ? `No opener while the account is ${hold.state.replace(/_/g, ' ')}: record what you learn below.` : checking ? 'The opener shows once the account state is known.' : 'No opener without the account state.'}</p>
       ) : hypothesis ? (
         <>
           <FactBlock observation={hypothesis.observation ?? ''} signals={Array.isArray(hypothesis.signals) ? hypothesis.signals : []} verifiedFact={hypothesis.verifiedFact !== false} />

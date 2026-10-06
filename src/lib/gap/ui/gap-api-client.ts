@@ -391,6 +391,7 @@ export function repliesUrl(params: ListRepliesParams = {}): string {
   return `/api/gap/replies?${query.toString()}`;
 }
 
+const CALL_BASE = '/api/gap/call';
 export function callBriefUrl(personaId: number | string, hypothesisId?: string | null): string {
   const base = `/api/gap/call/${encodeURIComponent(String(personaId))}`;
   return hypothesisId ? `${base}?hypothesisId=${encodeURIComponent(hypothesisId)}` : base;
@@ -418,6 +419,12 @@ export async function listReplies(params: ListRepliesParams = {}, opts: ClientOp
 
 export function getCallBrief(personaId: number | string, opts: ClientOptions = {}, hypothesisId?: string | null): Promise<ApiResult<CallBrief>> {
   return request<CallBrief>(callBriefUrl(personaId, hypothesisId), { method: 'GET' }, opts);
+}
+
+/** UX-06: the account pursuit state for call prep (`{ pursuit: null }` when it could not be read: no opener then). */
+export type CallPursuit = NonNullable<CallBrief['pursuit']>;
+export function getCallPursuit(personaId: number | string, opts: ClientOptions = {}): Promise<ApiResult<{ pursuit: CallPursuit | null }>> {
+  return request<{ pursuit: CallPursuit | null }>(`${CALL_BASE}/${encodeURIComponent(String(personaId))}/pursuit`, { method: 'GET' }, opts);
 }
 
 export function postDisposition(body: DispositionBody, opts: ClientOptions = {}): Promise<ApiResult<DispositionResult>> {
@@ -487,6 +494,8 @@ export function getRoutingAgreement(
 export interface GapApiClient {
   listReplies(params?: ListRepliesParams): Promise<ApiResult<RepliesPage>>;
   getCallBrief(personaId: number | string, hypothesisId?: string | null): Promise<ApiResult<CallBrief>>;
+  /** UX-06: optional so an older client (tests) renders the brief as before; the default client always has it. */
+  getCallPursuit?: (personaId: number | string) => Promise<ApiResult<{ pursuit: CallPursuit | null }>>;
   postDisposition(body: DispositionBody): Promise<ApiResult<DispositionResult>>;
   postBid(body: BidBody): Promise<ApiResult<BidResult>>;
   suggestReply(replyId: string): Promise<ApiResult<SuggestResult>>;
@@ -498,6 +507,7 @@ export function createGapApiClient(opts: ClientOptions = {}): GapApiClient {
   return {
     listReplies: (params) => listReplies(params, opts),
     getCallBrief: (personaId, hypothesisId) => getCallBrief(personaId, opts, hypothesisId),
+    getCallPursuit: (personaId) => getCallPursuit(personaId, opts),
     postDisposition: (body) => postDisposition(body, opts),
     postBid: (body) => postBid(body, opts),
     suggestReply: (replyId) => suggestReply(replyId, opts),

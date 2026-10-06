@@ -47,6 +47,10 @@ export interface AnchorThesis {
   relevance: { tier: 'direct' | 'related' | 'none'; why: string };
   /** The problem the thesis opens on (Our read). */
   problem: string;
+  /** Would the send gate let this opening out (its observation rests on a verified outreach fact)? The pack's own rule. */
+  usable: boolean;
+  /** Why not, when not usable. */
+  unusableWhy: string | null;
 }
 
 export interface OutreachAnchor {
@@ -74,6 +78,11 @@ export interface AnchorInput {
   anchorChoice: string | null;
   /** The private engagement line, when material (never used, only named under DO NOT USE). */
   privateLine: string | null;
+  /**
+   * The theses whose opening the send gate would let out (research/evidence-gate.ts `hypothesisSendable` over their
+   * linked signals), from the loader. Absent means "not read": then nothing is called usable (fail closed).
+   */
+  sendable?: ReadonlySet<string> | null;
   /** Now, for fact expiry. */
   now: Date;
 }
@@ -96,7 +105,7 @@ const host = (u: string | null) => {
 };
 const BROKEN_MONEY = /\$\s?\d{1,3}(?:\.\d+)?\s+(?!(?:m|b|k|mm|bn|million|billion|thousand|per|a|an|each|to)\b)[a-z]/i;
 
-function thesisOf(h: HypothesisView, raw: AccountInputs['hypotheses'][number] | undefined, facts: AccountInputs['facts'], person: AnchorPerson | null): AnchorThesis {
+function thesisOf(h: HypothesisView, raw: AccountInputs['hypotheses'][number] | undefined, facts: AccountInputs['facts'], person: AnchorPerson | null, sendable: ReadonlySet<string> | null | undefined): AnchorThesis {
   const factIds = raw ? [...new Set([...(raw.observation.matchAll(CITATION))].map((m) => m[1]))] : [];
   const first = facts.find((f) => factIds.includes(f.id) || (f.sameQuoteIds ?? []).some((id) => factIds.includes(id)));
   const rel = thesisRelevance(person?.title ?? null, { observation: h.observation.text, problemHypothesis: h.problem });
@@ -108,6 +117,8 @@ function thesisOf(h: HypothesisView, raw: AccountInputs['hypotheses'][number] | 
     basis: first ? `${host(first.url) ?? 'source'}, ${day(first.publishedAt)}` : 'the thesis observation',
     relevance: { tier: rel.tier, why: rel.why },
     problem: h.problem,
+    usable: !!sendable && sendable.has(h.id),
+    unusableWhy: !sendable ? 'the send gate could not be read just now' : sendable.has(h.id) ? null : 'its observation is a keyword hit or not a verified outreach fact; the send gate would refuse the opening',
   };
 }
 
@@ -117,9 +128,11 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
   const live = i.inputs.facts.filter((f) => !f.expiresAt || new Date(f.expiresAt).getTime() > i.now.getTime());
   const theses = i.brief.hypotheses
     .filter((h) => h.grounded && h.truth !== 'CONTRADICTED')
-    .map((h) => thesisOf(h, rawById.get(h.id), live, i.person))
+    .map((h) => thesisOf(h, rawById.get(h.id), live, i.person, i.sendable))
     .filter((t) => OPEN_STATUSES.has(t.status) || REVIEW_STATUSES.has(t.status));
-  const open = theses.filter((t) => OPEN_STATUSES.has(t.status));
+  // Only a usable open thesis can be the anchor: the same gate the email runs (General Mills' active thesis opens on a
+  // Brazil divestiture keyword hit; the call page says so, and the anchor must never contradict it).
+  const open = theses.filter((t) => OPEN_STATUSES.has(t.status) && t.usable);
   const tierRank = { direct: 0, related: 1, none: 2 } as const;
   const byRemit = [...open].sort((a, b) => tierRank[a.relevance.tier] - tierRank[b.relevance.tier]);
 
@@ -164,7 +177,7 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
 
   // USE A DIFFERENT STORY: the other eligible theses; DRAFT + REVIEW: checked, citable story lines with no thesis.
   const alternatives = theses.filter((t) => t.hypothesisId !== primary?.hypothesisId);
-  const groundedFactIds = new Set(theses.flatMap((t) => t.factIds));
+  const groundedFactIds = new Set(theses.filter((t) => t.usable || REVIEW_STATUSES.has(t.status)).flatMap((t) => t.factIds));
   const draftable: OutreachAnchor['draftable'] = [];
   for (const r of i.story.rows) {
     if (r.key !== 'changing' && r.key !== 'stories' && r.key !== 'goal') continue;
