@@ -21,6 +21,11 @@ type PersonaHit = {
  * else it opens a recipient search so a cold compose can still pick a
  * real person without hand-typing an address.
  */
+/** Every GAP route (/gap and below): the legacy composer is never offered there. */
+export function isGapPath(pathname: string | null | undefined): boolean {
+  return /^\/gap(?:\/|$)/.test(pathname ?? '');
+}
+
 export function GlobalComposeButton() {
   const pathname = usePathname();
   const [pickerOpen, setPickerOpen] = useState(false);
@@ -30,7 +35,9 @@ export function GlobalComposeButton() {
   const [picked, setPicked] = useState<PersonaHit | null>(null);
 
   // UX-04: the GAP account workspace carries its own actions; the fixed pill covered Log a touch and Call prep at 390.
-  const onGapAccount = /^\/gap\/accounts\//.test(pathname);
+  // R63 blocker: no GAP page shows the legacy composer at all. GAP has its own send spine behind its gate (the stop
+  // rules read the buyer's replies); this composer sent to a person whose "stop" reply was on file.
+  const onGap = isGapPath(pathname);
   const accountSlug = pathname.match(/^\/accounts\/([^/]+)/)?.[1];
   const accountName = accountSlug
     ? accountSlug
@@ -91,7 +98,7 @@ export function GlobalComposeButton() {
     setComposerOpen(true);
   }
 
-  if (onGapAccount) return null;
+  if (onGap) return null;
   return (
     <>
       <Button
