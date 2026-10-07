@@ -77,7 +77,10 @@ describe('related account activity holds a cold motion', () => {
   it('an active PepsiCo opportunity is RELATED ACCOUNT ACTIVITY on Frito-Lay, in words', async () => {
     const activity = await loadRelatedActivity(fake(book), family, NOW, { opportunity: async () => ({ status: 'ACTIVE', deals: [{ name: 'YardFlow - PepsiCo', stage: 'discovery' }] }) });
     const h = relatedHold(family, activity, null);
-    expect(h?.detail).toBe('Related account activity. Frito-Lay is part of PepsiCo in GAP. PepsiCo (its parent): active opportunity: YardFlow - PepsiCo (discovery). Confirm this is a separate buying motion before any cold outreach.');
+    // Sprint 5 exit: a stage id ('discovery' is a custom one here) never reaches the seller; a known stage is words.
+    expect(h?.detail).toBe('Related account activity. Frito-Lay is part of PepsiCo in GAP. PepsiCo (its parent): active opportunity: YardFlow - PepsiCo. Confirm this is a separate buying motion before any cold outreach.');
+    const known = await loadRelatedActivity(fake(book), family, NOW, { opportunity: async () => ({ status: 'ACTIVE', deals: [{ name: 'YardFlow - PepsiCo', stage: 'contractsent' }] }) });
+    expect(known[0].activity).toContain('active opportunity: YardFlow - PepsiCo (Contract sent)');
   });
   it('a related deal state that cannot be read holds too (fail closed)', async () => {
     const activity = await loadRelatedActivity(fake(book), family, NOW, { opportunity: async () => ({ status: 'UNKNOWN' }) });

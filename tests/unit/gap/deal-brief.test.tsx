@@ -188,7 +188,8 @@ describe('In Deals', () => {
 
   it('stage ids read as words; a custom stage says so', () => {
     expect(stageLabel('contractsent')).toBe('Contract sent');
-    expect(stageLabel('1417384082')).toBe('Custom stage 1417384082');
+    // Sprint 5 exit: a custom stage says so, never its id.
+    expect(stageLabel('1417384082')).toBe('Custom stage (its name could not be read)');
     expect(stageLabel(null)).toBe('Stage unknown');
   });
 });

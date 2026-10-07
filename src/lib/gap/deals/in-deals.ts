@@ -18,6 +18,7 @@
 import { normalizeCompanyName } from '../identity/normalize';
 import { companyDomain, emailDomain } from '../opportunity/active-opportunity';
 import { BRIEF_BID_SELECT, knownSectionsOf, type BriefBidRow } from './deal-brief';
+import { stageLabel } from './stage-label';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -74,19 +75,8 @@ export function heldDealAccounts(items: ReadonlyArray<{ ruleId: string | null; a
   return [...new Set(items.filter((i) => i.ruleId === 'active_opportunity').map((i) => i.account.name))];
 }
 
-const DEFAULT_STAGES: Record<string, string> = {
-  appointmentscheduled: 'Appointment scheduled',
-  qualifiedtobuy: 'Qualified to buy',
-  presentationscheduled: 'Presentation scheduled',
-  decisionmakerboughtin: 'Decision maker bought in',
-  contractsent: 'Contract sent',
-};
-
-/** A HubSpot stage id in words; a portal's custom stage says so rather than guessing its name. */
-export function stageLabel(stage: string | null | undefined): string {
-  if (!stage) return 'Stage unknown';
-  return DEFAULT_STAGES[stage] ?? `Custom stage ${stage}`;
-}
+// A HubSpot stage id in words lives in the client-safe ./stage-label (a custom stage says so, never its id).
+export { stageLabel };
 
 const lastActivity = (p: Record<string, string | null | undefined>): string | null => {
   const raw = p.notes_last_updated || p.hs_lastmodifieddate;
@@ -193,7 +183,7 @@ async function buildSummary(prisma: PrismaLike, reads: OpenDealReadsLike, now: D
       owners = ownersOf(d, duplicates.filter((c) => c.name && names.has(c.name)));
     }
     if (owners.size === 0) {
-      unresolved.push({ dealName: d.properties.dealname ?? null, stage: stageLabel(d.properties.dealstage), companies: (dealCompanies.get(d.id) ?? []).map((cid) => companyById.get(cid)?.name ?? `HubSpot company ${cid}`) });
+      unresolved.push({ dealName: d.properties.dealname ?? null, stage: stageLabel(d.properties.dealstage), companies: (dealCompanies.get(d.id) ?? []).map((cid) => companyById.get(cid)?.name ?? 'a HubSpot company with no name') });
       continue;
     }
     for (const n of owners) (accountDeals.get(n) ?? accountDeals.set(n, new Set()).get(n)!).add(d.id);

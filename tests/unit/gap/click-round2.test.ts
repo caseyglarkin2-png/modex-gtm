@@ -80,12 +80,16 @@ describe('sends to ourselves, raw URLs, BRIEF repetition, legacy rating', () => 
     const l = sellerLine({ text: 'Walmart operates 42 DCs (https://www.sec.gov/Archives/edgar/data/104169/wmt-20250131.htm).', truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'evidence', ref: 'x', label: 'SEC', url: 'https://www.sec.gov/x', at: '2026-01-31' }] }, 'footprint', { domains: [], accountName: 'Walmart', citable: new Set() });
     expect(l?.text).toBe('Walmart operates 42 DCs.');
   });
-  it('tier / band is a legacy rating (our read), never a verified fact', () => {
-    const b = buildAccountBrief(inputs(), NOW);
-    const s = b.sections.identity.statements.find((x) => /Tier 3/.test(x.text));
-    expect(s).toMatchObject({ truth: 'INFERENCE' });
-    expect(s!.text).toMatch(/^Legacy internal rating: Tier 3 \/ band D/);
-    expect(b.sections.identity.statements.some((x) => x.truth === 'VERIFIED_PUBLIC' && /Tier|band/.test(x.text))).toBe(false);
+  it('tier / band is a legacy rating the seller never reads (Sprint 5 exit), and the HubSpot link is said in words', () => {
+    const i = inputs();
+    expect(i.account.tier || i.account.priorityBand).toBeTruthy();
+    const b = buildAccountBrief(i, NOW);
+    const texts = Object.values(b.sections).flatMap((s) => s.statements.map((x) => x.text)).join('\n');
+    expect(texts).not.toMatch(/Tier 3|band D|internal rating/i);
+    const linked = buildAccountBrief({ ...i, account: { ...i.account, hubspotCompanyId: '30911223344' } }, NOW);
+    const ids = linked.sections.identity.statements.map((x) => x.text);
+    expect(ids).toContain('Linked to its HubSpot company record');
+    expect(ids.join('\n')).not.toContain('30911223344');
   });
   it('BRIEF says each idea once across sections', () => {
     const i = inputs();

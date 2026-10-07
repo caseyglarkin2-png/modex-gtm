@@ -444,11 +444,11 @@ function identitySection(i: AccountInputs, now: Date): Section {
   const st: Statement[] = [
     { text: `${a.name}${a.vertical ? `, ${a.vertical}` : ''}`, truth: 'VERIFIED_PUBLIC', sources: [rec] },
   ];
-  // Tier and band are GAP's own legacy ratings (MODEX era), never a verified fact about the company (click test P0).
-  if (a.tier || a.priorityBand) st.push({ text: `Legacy internal rating: ${[a.tier, a.priorityBand ? `band ${a.priorityBand}` : null].filter(Boolean).join(' / ')} (a GAP rating, not a fact about the company)`, truth: 'INFERENCE', sources: [rec], falsifiableBy: 'Current account research or the buyer shows a different priority.' });
+  // Tier and band are GAP's own legacy ratings (MODEX era): never a fact about the company (click test P0), and since
+  // the Sprint 5 exit never shown at all (a rating word is taxonomy the seller does not use).
   if (i.aliases.length) st.push({ text: `Also known as: ${i.aliases.join(', ')}`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'account', ref: 'aliases', label: 'GAP curated aliases', url: null, at: i.aliasesAddedAt ?? null }] });
   if (i.domains.length) st.push({ text: `Domains: ${i.domains.join(', ')}`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'hubspot', ref: a.hubspotCompanyId ?? 'crm-identity', label: 'CRM identity', url: null, at: null }] });
-  if (a.hubspotCompanyId) st.push({ text: `HubSpot company ${a.hubspotCompanyId}`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'hubspot', ref: a.hubspotCompanyId, label: 'HubSpot', url: null, at: null }] });
+  if (a.hubspotCompanyId) st.push({ text: 'Linked to its HubSpot company record', truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'hubspot', ref: a.hubspotCompanyId, label: 'HubSpot', url: null, at: null }] });
   if (a.parentBrand) st.push({ text: `Parent brand: ${a.parentBrand}`, truth: 'VERIFIED_PUBLIC', sources: [rec] });
   if (i.pack?.account.archetype) {
     const t = i.pack.account.archetype;
