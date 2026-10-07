@@ -48,7 +48,7 @@ export interface PursuitInput {
   now: Date;
   /** The brief's motion type (account-intel/build.ts). */
   motionType: MotionType;
-  opportunity: { status: 'CLEAR' | 'OPEN' | 'UNKNOWN' | string; detail: string; deals: Array<{ name: string | null; stage: string | null }> };
+  opportunity: { status: 'CLEAR' | 'OPEN' | 'UNKNOWN' | string; detail: string; deals: Array<{ name: string | null; stage: string | null }>; closure?: { kind: 'customer' | 'parked'; why: string } | null };
   restriction: { kind: string; introducer: string; route: string } | null;
   familyHold: { detail: string } | null;
   /** The cockpit's account motion for this account, when one exists (motion/account-motion.ts). */
@@ -193,6 +193,11 @@ export function projectPursuitState(i: PursuitInput): PursuitState {
       blocker: `An open HubSpot deal: work it from the deal, never a cold first touch.`,
       unlock: 'The deal closes or the opportunity read changes.',
     });
+  }
+  // R55: a customer (closed won) or parked after a lost deal: held, said plainly; post-sale expansion is context only.
+  if (i.opportunity.status === 'CLEAR' && i.opportunity.closure) {
+    const c = i.opportunity.closure;
+    return base('held', { stateLine: c.kind === 'customer' ? `${STATE_LINE.held}: a customer (closed won)` : `${STATE_LINE.held}: parked after a lost deal`, blocker: c.why, unlock: c.kind === 'customer' ? 'Your explicit decision to work an expansion with the customer.' : 'A material change: a newer verified fact, a buyer reply, or a new open deal.' });
   }
   if (i.opportunity.status === 'UNKNOWN') {
     return base('held', { stateLine: `${STATE_LINE.held}: HubSpot could not be checked`, blocker: `HubSpot could not be read just now (${i.opportunity.detail || 'unknown opportunity truth'}): no cold touch until it can.`, unlock: 'HubSpot answers again.' });

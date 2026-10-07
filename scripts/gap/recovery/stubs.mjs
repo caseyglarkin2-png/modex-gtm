@@ -181,7 +181,8 @@ const server = http.createServer((req, res) => {
       const results = (parsed.inputs ?? [])
         .map((i) => all.find((d) => String(d.id) === String(i.id)))
         .filter(Boolean)
-        .map((d) => ({ id: String(d.id), properties: { dealname: d.dealname, dealstage: d.dealstage ?? 'appointmentscheduled', pipeline: 'default', hs_is_closed: d.hs_is_closed ? 'true' : 'false', createdate: '2026-09-01T00:00:00Z', amount: d.amount ?? null, closedate: null, hs_next_step: nextStepOf(d), notes_last_updated: '2026-10-01T00:00:00Z', hs_lastmodifieddate: '2026-10-01T00:00:00Z' } }));
+        // R55: a closed deal says how it ended (hs_is_closed_won) and when (closedate), as HubSpot does.
+        .map((d) => ({ id: String(d.id), properties: { dealname: d.dealname, dealstage: d.dealstage ?? 'appointmentscheduled', pipeline: 'default', hs_is_closed: d.hs_is_closed ? 'true' : 'false', hs_is_closed_won: d.hs_is_closed && d.hs_is_closed_won ? 'true' : 'false', createdate: '2026-09-01T00:00:00Z', amount: d.amount ?? null, closedate: d.closedate ?? null, hs_next_step: nextStepOf(d), notes_last_updated: '2026-10-01T00:00:00Z', hs_lastmodifieddate: '2026-10-01T00:00:00Z' } }));
       return json(res, 200, { status: 'COMPLETE', results });
     }
     if (path === '/crm/v3/objects/contacts/batch/read') return json(res, 200, { status: 'COMPLETE', results: [] });

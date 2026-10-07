@@ -199,6 +199,11 @@ export function WorkList({
               {c.blocker ? <p className="mt-0.5 text-xs text-amber-700 dark:text-amber-400" data-testid="work-card-blocker">{c.blocker}</p> : null}
               {c.outcome ? <p className="mt-0.5 text-xs text-[var(--muted-foreground)]" data-testid="work-card-outcome">{c.outcome.line}</p> : null}
               {c.reply ? <ReplyPrepPanel prep={c.reply} compact /> : null}
+              {c.stalled?.length ? (
+                <ul className="mt-1 space-y-0.5 text-xs" data-testid="work-card-stalled">
+                  {c.stalled.map((s) => <li key={s}>Stalled: {s}</li>)}
+                </ul>
+              ) : null}
               {c.obligations?.length ? (
                 <ul className="mt-2 space-y-2 border-l-2 border-[var(--primary)] pl-3" data-testid="work-obligations" aria-label={`Due at ${c.accountName}`}>
                   {c.obligations.map((o) => (

@@ -30,6 +30,7 @@ import { DealPlan } from '@/components/gap/deal-plan';
 import { DealArtifacts } from '@/components/gap/deal-artifacts';
 import { CrmSyncPanel } from '@/components/gap/crm-sync';
 import { loadAccountDealWorkspace } from '@/lib/gap/deals/workspace';
+import { syncDealStates } from '@/lib/gap/deals/closure';
 import { commitmentScope, dealRefs, personIndex } from '@/lib/gap/deals/opportunities';
 import { loadAccountSources } from '@/lib/gap/sources/account-sources';
 import { AccountSourcesSection } from '@/components/gap/account-sources';
@@ -158,6 +159,11 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
     );
   }
   const { brief, inputs } = loaded;
+  // R55: reconcile GAP's obligations with HubSpot's deal states (a closed deal's open work is skipped with its reason;
+  // a reopened deal gets one current next step). Never on an UNKNOWN read; soft (the page renders regardless).
+  if (inputs.opportunity && inputs.opportunity.status !== 'UNKNOWN') {
+    await syncDealStates(prisma, { accountName: brief.accountName, open: (inputs.opportunity.deals ?? []).filter((d): d is typeof d & { id: string } => !!d.id).map((d) => ({ id: d.id, name: d.name })), closed: inputs.opportunity.closed ?? [], now }).catch(() => null);
+  }
   const nameQ = q.name ? `name=${encodeURIComponent(q.name)}` : '';
   const hrefFor = (v: View) => `/gap/accounts/${slug}${v === 'now' ? (nameQ ? `?${nameQ}` : '') : `?view=${v}${nameQ ? `&${nameQ}` : ''}`}`;
 
@@ -216,6 +222,11 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
         // R51 / R52: the deal's meetings, then its mutual action plan (agreed milestones and the proposals to review).
         meetingSlots[d.dealId] = (
           <div className="space-y-2">
+            {workspace?.stalled[d.dealId]?.length ? (
+              <ul className="space-y-1 rounded-md border border-amber-600/40 p-2 text-xs" data-testid="deal-stalled" aria-label="Stalled">
+                {workspace.stalled[d.dealId].map((s) => <li key={s}>Stalled: {s}</li>)}
+              </ul>
+            ) : null}
             {own.map((m) => <MeetingPrepView key={m.meetingId} prep={m} />)}
             {workspace?.plans[d.dealId] ? <DealPlan accountName={brief.accountName} dealId={d.dealId} plan={workspace.plans[d.dealId]} /> : null}
             {workspace?.artifacts[d.dealId] ? <DealArtifacts next={workspace.artifacts[d.dealId].next} all={workspace.artifacts[d.dealId].all} /> : null}

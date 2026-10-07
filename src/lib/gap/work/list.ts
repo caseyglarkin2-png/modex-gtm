@@ -36,6 +36,7 @@ import { outcomeLine, type WorkOutcome } from './outcome';
 import { MOTION_UNLOCK_BUSINESS_DAYS } from '../motion/account-motion';
 import { buyerMoves, commitmentPhase, commitmentTier, KIND_TEXT, type Commitment, type CommitmentKind } from './commitment-model';
 import { dayLabel, nyDay } from './dates';
+import { stalledSignals } from '../deals/stalled';
 import type { CockpitLane } from '@/components/gap/gap-cockpit';
 
 export type WorkStateKind = 'replied' | 'opted_out' | 'bounced' | 'follow_up' | 'ready' | 'decide' | 'research' | 'in_deal' | 'unknown_deal' | 'held' | 'committed' | 'meeting';
@@ -112,6 +113,8 @@ export interface WorkCard {
   reply?: ReplyPrep | null;
   /** R44: Capture, opened with the account, person, deal and conversation this card is about already filled in. */
   capture?: { href: string; label: string } | null;
+  /** R55: stalled-deal suggestions on an in-deal card (overdue obligations, no recent activity, a passed close date). */
+  stalled?: string[];
 }
 
 export interface WorkInput {
@@ -396,7 +399,9 @@ export function workDay(i: WorkInput): WorkDay {
     const stages = a.deals.map((d) => `${d.name ? `"${d.name}"` : 'an unnamed deal'} (${d.stage})`).join(', ');
     best.delete(name);
     motionWaiting.delete(name);
-    offer({ rank: LANE_RANK.deals, sortKey: [name], card: { accountName: name, lane: 'deals', stateKind: 'in_deal', state: STATE_TEXT.in_deal, why: `Open HubSpot ${a.deals.length === 1 ? 'deal' : 'deals'}: ${stages}.`, person: null, next: { label: 'Open the deal brief', href: `${accountHref(name)}?view=brief` }, blocker: 'No cold first touch while the deal is open: work it from the deal.' } });
+    // R55: a stalled deal is deal work (derived from overdue obligations and HubSpot's own dates, never a probability).
+    const stalled = a.deals.flatMap((d) => stalledSignals({ now: i.now, deal: { name: d.name, lastActivityAt: d.lastActivityAt ?? null, closeDate: d.closeDate ?? null }, commitments: (i.commitments ?? []).filter((c) => c.accountName === name && !!d.id && c.dealId === d.id) }).map((s) => (a.deals.length > 1 ? `${d.name ?? 'A deal'}: ${s}` : s)));
+    offer({ rank: LANE_RANK.deals, sortKey: [name], card: { accountName: name, lane: 'deals', stateKind: 'in_deal', state: STATE_TEXT.in_deal, why: `Open HubSpot ${a.deals.length === 1 ? 'deal' : 'deals'}: ${stages}.`, person: null, next: { label: 'Open the deal brief', href: `${accountHref(name)}?view=brief` }, blocker: 'No cold first touch while the deal is open: work it from the deal.', ...(stalled.length ? { stalled } : {}) } });
   }
   for (const [name, why] of i.held) {
     if (dealAccounts.has(name)) continue;
@@ -554,7 +559,7 @@ export function workDay(i: WorkInput): WorkDay {
   const ranked = [...best.values()].map((r) => {
     const name = r.card.accountName;
     const list = [...(obligations.get(name) ?? [])].sort((a, b) => TIER_RANK[a.tier] - TIER_RANK[b.tier] || String(a.dueAt ?? '').localeCompare(String(b.dueAt ?? '')));
-    const own: WorkTier = later.has(name) && r.card.stateKind !== 'replied' && r.card.stateKind !== 'opted_out' ? 'later' : STATE_TIER[r.card.stateKind];
+    const own: WorkTier = later.has(name) && r.card.stateKind !== 'replied' && r.card.stateKind !== 'opted_out' ? 'later' : r.card.stalled?.length && r.card.stateKind === 'in_deal' ? 'deal' : STATE_TIER[r.card.stateKind];
     const fromObligation = list.filter((o) => o.tier !== 'later').sort((a, b) => TIER_RANK[a.tier] - TIER_RANK[b.tier])[0];
     const tier: WorkTier = fromObligation && TIER_RANK[fromObligation.tier] < TIER_RANK[own] ? fromObligation.tier : own;
     const lane: WorkLane = tier !== own ? TIER_LANE[tier] ?? r.card.lane : r.card.lane;
@@ -596,7 +601,7 @@ export function workDay(i: WorkInput): WorkDay {
   const cards: WorkCard[] = ranked.map(({ r, tier, lane, list, dueMs, act, prio }, index) => {
     const top = list.find((o) => o.tier === tier);
     const phrase = (line: string) => line.replace(/\.$/, '').replace(/^\w/, (ch) => ch.toLowerCase());
-    const bits = [top ? `${TIER_WHY[tier]}: ${top.title}${top.dueDay && top.kind !== 'meeting' ? ` (${phrase(top.line)})` : ''}` : TIER_WHY[tier]];
+    const bits = [top ? `${TIER_WHY[tier]}: ${top.title}${top.dueDay && top.kind !== 'meeting' ? ` (${phrase(top.line)})` : ''}` : tier === 'deal' && r.card.stalled?.length ? `A stalled deal: ${phrase(r.card.stalled[0])}` : TIER_WHY[tier]];
     if (!top && dueMs < Number.MAX_SAFE_INTEGER && tier === 'reply') bits[0] = `${TIER_WHY.reply} ${day(new Date(dueMs).toISOString())}`;
     else if (act && tier !== 'reply') bits.push(`buyer activity ${day(new Date(act).toISOString())}`);
     if (prio) bits.push(`you prioritized it (${prio.reason})`);

@@ -564,6 +564,9 @@ export const makeActiveOpportunityCheck = (resolveDeps: ResolveForAccountDeps = 
     return { status: 'UNKNOWN', detail: `${OPPORTUNITY_UNKNOWN_COPY} (${e instanceof Error ? e.message : String(e)})` };
   }
   if (inputs.account.opportunity.status === 'ACTIVE') return { status: 'ACTIVE', detail: opportunitySentence(inputs.account.opportunity) };
+  // R55: no open deal, but a closed one makes the account a customer (closed won) or parks it (closed lost, nothing
+  // material since): the same terminal refusal as a live deal, worded as the closure.
+  if (inputs.account.opportunity.status === 'CLEAR' && inputs.account.opportunity.closure) return { status: 'ACTIVE', detail: inputs.account.opportunity.closure.why };
   if (hasActiveOpportunity(inputs)) return { status: 'ACTIVE', detail: 'A booked meeting or a recent positive reply: someone is already in conversation here.' };
   if (opportunityUnknown(inputs)) {
     const o = inputs.account.opportunity;

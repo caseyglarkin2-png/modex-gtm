@@ -23,6 +23,8 @@ export const STOP_CLASSES: ReadonlySet<string> = new Set(['do_not_contact', 'mee
 
 export interface ApproachInput {
   deal: 'ACTIVE' | 'CLEAR' | 'UNKNOWN' | 'NOT_READ';
+  /** R55: no open deal, but a customer (closed won) or parked (closed lost, nothing material since): never cold. */
+  closure?: { kind: 'customer' | 'parked'; why: string } | null;
   /** Why the deal state is unknown, when the cause is specific (an account with no HubSpot company link). */
   dealUnknownWhy?: string;
   /** The buyer contradicted the current story (an objection BID on the thesis). */
@@ -61,6 +63,7 @@ const cls = (c: string) => c.replace(/_/g, ' ');
 
 export function decideApproach(x: ApproachInput): Approach {
   if (x.deal === 'ACTIVE') return { kind: 'IN_DEAL', why: 'An open HubSpot deal: work it from the deal, never cold.' };
+  if (x.deal === 'CLEAR' && x.closure) return { kind: 'NO_GOOD_MOTION', why: x.closure.why };
   // Not a fit (or a partner) is the answer before any HubSpot-link or deal-read hold: nothing to link for.
   if (x.fit?.fit === 'PARTNER') return { kind: 'NO_GOOD_MOTION', why: `Not a direct buyer: ${x.fit.why} Work it as a partnership, never with a buyer pitch.` };
   if (x.fit?.fit === 'NOT_FIT') return { kind: 'NO_GOOD_MOTION', why: `Not a YardFlow fit on the evidence: ${x.fit.why}` };

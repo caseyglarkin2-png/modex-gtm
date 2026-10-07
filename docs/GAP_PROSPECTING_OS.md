@@ -1504,6 +1504,48 @@ production). Debt: a deal task's owner in HubSpot is not set (the portal's defau
 HubSpot's search index to have caught up (a retry inside its indexing delay could still create a second note; the
 mirror row and the claim cover the ordinary retry).
 
+R55 **Stalled, won, lost and reactivated work (DONE).** Closure is read from HubSpot, never from a stage name: the
+deal reads now ask `hs_is_closed_won` with `closedate`, and the ONE opportunity resolver keeps every closed deal with
+how it ended and when (`ClosedDeal`; CLEAR and ACTIVE carry `closed`). With no deal open, `closureOf` (pure) says
+what a closed deal means and `resolveAccountOpportunity` attaches it to CLEAR (`closure`), so every reader gets the
+same answer: a deal closed WON makes a CUSTOMER (whatever else was lost): no first-touch campaign, ever automatically,
+and post-sale expansion is explicit context ("any expansion is your explicit call, worked with the customer, never a
+cold sequence"); otherwise the newest closed deal PARKS the account ("closed lost" or "without an outcome") until
+something material happened after it closed (`materialChangeSince`: a verified fact registered for the account, or a
+reply a PERSON wrote; an automatic notice, a bounce or an opt-out is not; an unreadable store keeps it parked). The
+closure holds everywhere through the existing authorities: the action-time check (`makeActiveOpportunityCheck`, the
+same terminal refusal as a live deal, worded as the closure, so no draft, send or enroll), routing (R3b
+`active_opportunity:closed_won_customer` / `closed_lost_parked`), the approach (`decideApproach`: no cold motion,
+the closure's words), the brief's deal statement and the pursuit state (`held`: "a customer (closed won)" or "parked
+after a lost deal", with what unlocks it). History is preserved and obsolete work stops (NEW `deals/closure.ts`): an
+append-only `deal.state` row per deal per change; when a deal closes, every open obligation on it is SKIPPED with its
+reason ("the deal "X" closed won on Oct 5; kept for history"), terminal and kept, and when no deal is left open the
+account's cold follow-ups stop (a customer: "no cold follow-up"; lost: "parked"); when a deal REOPENS, ONE current next
+step ("Reopened: decide the next step on X", source `deal:reopen:<id>:<day>`) and nothing skipped at the closure comes
+back; first sight records the baseline; an UNKNOWN read changes nothing. It runs on the account page read and in a
+bounded Work sweep (`sweepClosedDeals`: accounts whose deal-scoped work left the portal's open deals, five at most,
+every five minutes per instance, never without the open-deal read). Stalled work (NEW `deals/stalled.ts`, pure) comes
+only from the record, never a probability: an obligation on the deal overdue by more than two days (the seller's, or
+a buyer's promise that did not arrive), no HubSpot activity on the deal for 21 days, a close date that passed while
+the deal is open (a HubSpot date stored at UTC midnight reads as its calendar day); on the account BRIEF inside the
+deal and on Work, where a stalled open deal becomes deal work with "A stalled deal: ..." on its card (a healthy one
+stays held). Contract change, on purpose: a CLEAR read now carries the closed deals, and a closed deal with nothing
+material since parks the account at the gates (three older controls that read "a closed deal does not count, proceed"
+now prove both sides: with a newer verified fact it proceeds; without it is parked). Corpus: Costco Scratch Co (a
+closed-won deal, an approved thesis and a chosen person: held as a customer) and Sysco Scratch Co (closed lost Sep 1,
+only an older fact: parked); the stub reports `hs_is_closed_won` and `closedate`. Proof: `deal-closure.test.ts` (11:
+the resolver's closed deals; customer, parked, unparked, no outcome; the material change; the gate refusing at a
+customer and a parked account and proceeding after a newer fact; routing, the approach and the pursuit state; the won
+closure skipping the deal's work and a re-read changing nothing; the lost closure stopping cold follow-ups; the reopen
+making one next step and reviving nothing; the bounded Work sweep; the stalled lines; Work's stalled card); eight
+deliberate mutations (the gate, routing, a lost deal never unparking, an automatic reply as a change, the pursuit
+state reading a customer as ready, a closed deal's work left open, every re-read making another next step, a healthy
+deal read as stalled) each turn it red. Adjacent: 21 files / 536 and 9 files / 60 green after the three controls were
+restated; typecheck clean. Rollback: revert the commit (the `deal.state` rows go inert; skipped obligations stay
+skipped, their reasons on record). Debt: "paused" has no HubSpot field of its own (a custom open stage still reads as
+an open deal); the Work held card for a closure says the routing hold's generic words until the account's pursuit
+summary is fresh.
+
 ## 12. Migration, backfill and rollback
 
 Order of commits inside Sprint 1 and 3: schema + SQL first (no reader), then pure core, then importers (Top100 before PIC before modex legacy), then runtime pin, then services, then queue actions under the flag, then `GAP_OS_ENABLED=true` in Vercel after `verify-triggers.ts` passes against prod (env is snapshot at deploy; redeploy after setting). Before the prod `db push`, preview it with `prisma migrate diff --from-url <prod> --to-schema-datamodel prisma/schema.prisma --script` and confirm the script is additive only; also confirm the prod role can `CREATE FUNCTION` (not yet verified). Rollback: the flag off restores byte-identical behavior instantly; full removal is the rollback SQL plus reverting the runtime, service and queue-action commits; `sequences` is never modified; the only two pre-existing tables GAP OS's schema touches at all are `draft_queue_items` (one nullable `sequence_version_id` stamp, S1-T2) and `inbound_messages` (`source String @default("gmail")` and `hubspot_engagement_id String?`, S2-T1, needed so the reply cron and the HubSpot poller can tell a Gmail-sourced row from a HubSpot-engagement-sourced one and attribute the engagement id idempotently) — both additive-only, both confirmed by the production preflight below; the lane and PIC files are read, never written.

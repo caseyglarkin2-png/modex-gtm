@@ -156,7 +156,7 @@ export interface AccountInputs {
   firstTouches: Array<{ recipient: string; sentAt: string | null; state: string; personaId?: number | null; decisionId?: string; gmailDraftId?: string }>;
   conversation: { who: string; responseClass: string; at: string } | null;
   /** null = not read this time (the section says so). */
-  opportunity: { status: 'CLEAR' | 'ACTIVE' | 'UNKNOWN'; detail: string; deals: Array<{ /** R50: the HubSpot deal id (scopes work to the deal). */ id?: string; name: string | null; stage: string | null; amount?: string | null; closeDate?: string | null; nextStep?: string | null; /** R32: the deal's HubSpot contacts, when HubSpot returned them. */ contactIds?: string[] }>; unlinked?: boolean } | null;
+  opportunity: { status: 'CLEAR' | 'ACTIVE' | 'UNKNOWN'; detail: string; deals: Array<{ /** R50: the HubSpot deal id (scopes work to the deal). */ id?: string; name: string | null; stage: string | null; amount?: string | null; closeDate?: string | null; nextStep?: string | null; /** R32: the deal's HubSpot contacts, when HubSpot returned them. */ contactIds?: string[] }>; unlinked?: boolean; /** R55: a customer (closed won) or parked (closed lost, nothing material since), when no deal is open. */ closure?: { kind: 'customer' | 'parked'; why: string; dealName: string | null; closedAt: string | null } | null; /** R55: the account's closed deals as HubSpot reports them (won / lost and when). */ closed?: Array<{ id: string; name: string | null; stage: string | null; won: boolean | null; closedAt: string | null }> } | null;
   pack: PackInput | null;
   microsite: MicrositeInput | null;
   facilityFact: { facilityCount: string; status: 'verified' | 'provisional'; summary: string; updatedAt: string; sources: Array<{ label: string; url?: string }> } | null;
@@ -740,7 +740,7 @@ function commercialSection(i: AccountInputs, now: Date): Section {
   const o = i.opportunity;
   if (!o) unknowns.push('HubSpot deal state (not read this time)');
   else if (o.status === 'UNKNOWN') st.push({ text: o.unlinked ? UNLINKED : `HubSpot deal state could not be read (${o.detail || 'unknown'}): held, never cold`, truth: 'UNKNOWN', sources: [] });
-  else st.push({ text: o.status === 'ACTIVE' ? `Open deal: ${o.deals.map((d) => `${d.name ?? 'deal'}${d.stage ? ` (${d.stage})` : ''}`).join('; ')}` : 'No open HubSpot deal', truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'hubspot', ref: 'deal-truth', label: 'HubSpot, read now', url: null, at: now.toISOString() }], asOf: now.toISOString() });
+  else st.push({ text: o.status === 'ACTIVE' ? `Open deal: ${o.deals.map((d) => `${d.name ?? 'deal'}${d.stage ? ` (${d.stage})` : ''}`).join('; ')}` : o.closure ? o.closure.why : 'No open HubSpot deal', truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'hubspot', ref: 'deal-truth', label: 'HubSpot, read now', url: null, at: now.toISOString() }], asOf: now.toISOString() });
   for (const t of i.firstTouches) st.push({ text: `GAP first touch to ${t.recipient}${t.sentAt ? ` on ${day(t.sentAt)}` : ''} (${t.state})`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'ledger', ref: t.recipient, label: 'GAP send ledger', url: null, at: t.sentAt }], asOf: t.sentAt });
   if (i.conversation) st.push({ text: `Conversation with ${i.conversation.who}: ${i.conversation.responseClass.replace(/_/g, ' ')} (${day(i.conversation.at)})`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'ledger', ref: i.conversation.who, label: 'human-confirmed disposition', url: null, at: i.conversation.at }], asOf: i.conversation.at });
   for (const b of i.bids) st.push({ text: `Buyer said (${b.type.replace(/_/g, ' ')}): ${b.summary}`, truth: 'BUYER_CONFIRMED', sources: [bidSrc(b)], asOf: b.at });
@@ -1004,6 +1004,7 @@ function accountMotion(i: AccountInputs, hyps: HypothesisView[], now: Date, prim
   });
   const a = decideApproach({
     deal: i.opportunity ? i.opportunity.status : 'NOT_READ',
+    closure: i.opportunity?.status === 'CLEAR' ? i.opportunity.closure ?? null : null,
     dealUnknownWhy: i.opportunity?.status === 'UNKNOWN' && i.opportunity.unlinked ? 'this GAP account is not linked to a HubSpot company, so the opportunity state cannot be verified (link it in HubSpot, or confirm there is none).' : undefined,
     contradicted: hyps.some((h) => h.truth === 'CONTRADICTED'),
     conversation: i.conversation,

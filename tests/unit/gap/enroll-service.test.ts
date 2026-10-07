@@ -403,11 +403,14 @@ describe('enrollFromDecision guards, in order', () => {
     expect(r).toMatchObject({ ok: false, reason: 'active_opportunity' });
   });
 
-  it('active_opportunity control: a closed HubSpot deal and no positive disposition still enroll normally', async () => {
+  it('active_opportunity control: a deal closed lost with something material since and no positive disposition still enroll normally (R55: without, parked)', async () => {
     const prisma = makePrisma();
-    const hs = fakeHubSpot({ companyDeals: { '111': ['d1'] }, deals: [{ id: 'd1', closed: 'true' }] });
+    const hs = fakeHubSpot({ companyDeals: { '111': ['d1'] }, deals: [{ id: 'd1', closed: 'true', won: 'false', closedate: '2026-01-05T00:00:00Z' }] });
+    (prisma as unknown as { prospectingSignal: unknown }).prospectingSignal = { findFirst: async () => ({ observed_at: new Date('2026-09-01T00:00:00Z') }) };
     const r = await enrollFromDecision(prisma, input(), deps({ opportunity: opportunityVia(hs) }));
     expect(r.ok).toBe(true);
+    const parked = await enrollFromDecision(makePrisma(), input(), deps({ opportunity: opportunityVia(hs) }));
+    expect(parked).toMatchObject({ ok: false, reason: 'active_opportunity' });
   });
 
   it('version_not_found, then version_retired', async () => {

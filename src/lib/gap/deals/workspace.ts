@@ -30,6 +30,7 @@ import { loadPlanDecisions } from './action-plan-store';
 import { nextArtifact, prepareArtifacts, type PreparedArtifact } from './artifacts';
 import { crmCandidates, type CrmChange, type CrmOrigin, type CrmSyncItem } from './crm-model';
 import { loadCrmSync } from './crm-sync';
+import { stalledSignals } from './stalled';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -45,6 +46,8 @@ export interface DealWorkspace {
   plans: Record<string, Milestone[]>;
   /** R53: each open deal's prepared artifacts and the one it needs now, by deal id. */
   artifacts: Record<string, { next: PreparedArtifact; all: PreparedArtifact[] }>;
+  /** R55: each open deal's stalled-work suggestions (overdue obligations, no recent activity, a passed close date). */
+  stalled: Record<string, string[]>;
   /** R54: each open deal's HubSpot change candidates and recorded proposals, by deal id. */
   crm: Record<string, { candidates: Array<{ change: CrmChange; origin: CrmOrigin }>; items: CrmSyncItem[] }>;
   /** The shared scope rule over this account's open deals, for the per-deal briefs. */
@@ -168,5 +171,6 @@ export async function loadDealWorkspace(
       return [d.dealId, { candidates, items: (crmItems as CrmSyncItem[]).filter((it) => it.dealId === d.dealId) }];
     }),
   );
-  return { accountName: x.accountName, opportunities, meetings, plans, artifacts, crm, scopeOfBid: (b) => bidScope({ metadata: b.metadata, contactEmail: b.contact_email }, refs, personOf), unread };
+  const stalled = Object.fromEntries(opportunities.deals.map((d) => [d.dealId, stalledSignals({ now: x.now, deal: { name: d.name, lastActivityAt: d.lastActivityAt, closeDate: d.closeDate, contact: d.contacts[0]?.name ?? null }, commitments: d.commitments.map((c) => ({ title: c.title, kind: c.kind, status: c.status, dueAt: c.dueAt, person: c.person ? { name: c.person.name, email: c.person.email } : null })) })]));
+  return { accountName: x.accountName, opportunities, meetings, plans, artifacts, crm, stalled, scopeOfBid: (b) => bidScope({ metadata: b.metadata, contactEmail: b.contact_email }, refs, personOf), unread };
 }

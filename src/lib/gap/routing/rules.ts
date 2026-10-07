@@ -178,6 +178,11 @@ function hasOpenDeal(i: ActiveOpportunityInputs): boolean {
   return i.account.opportunity.status === 'ACTIVE';
 }
 
+/** R55: no open deal, but a closed one: a customer (closed won) or parked (closed lost, nothing material since). */
+function closureHold(i: ActiveOpportunityInputs) {
+  return i.account.opportunity.status === 'CLEAR' ? i.account.opportunity.closure ?? null : null;
+}
+
 /** R3c: HubSpot could not say whether the account has an open deal. Never treated as clear. */
 export function opportunityUnknown(i: Pick<ActiveOpportunityInputs, 'account'>): boolean {
   return i.account.opportunity.status === 'UNKNOWN';
@@ -196,7 +201,7 @@ function recentPositiveDisposition(i: ActiveOpportunityInputs): RoutingLastDispo
  *  has gone stale (a meeting booked after the decision was made) still
  *  blocks. Same predicate, not a second opportunity model. */
 export function hasActiveOpportunity(i: ActiveOpportunityInputs): boolean {
-  return hasOpenDeal(i) || i.comms.meetingBooked || recentPositiveDisposition(i) != null;
+  return hasOpenDeal(i) || !!closureHold(i) || i.comms.meetingBooked || recentPositiveDisposition(i) != null;
 }
 
 /**
@@ -313,6 +318,8 @@ export const RULES: RoutingRule[] = [
     lane: 'work_queue',
     reason: (i) => {
       if (hasOpenDeal(i)) return 'active_opportunity:hubspot_open_deal';
+      const closure = closureHold(i);
+      if (closure) return closure.kind === 'customer' ? 'active_opportunity:closed_won_customer' : 'active_opportunity:closed_lost_parked';
       if (i.comms.meetingBooked) return 'active_opportunity:meeting_booked';
       return 'active_opportunity:recent_positive_disposition';
     },
@@ -321,6 +328,8 @@ export const RULES: RoutingRule[] = [
         const n = i.account.opportunity.deals.length;
         return `the account has ${n} open HubSpot deal${n === 1 ? '' : 's'}; work it from the deal, not a cold first touch`;
       }
+      const closure = closureHold(i);
+      if (closure) return closure.kind === 'customer' ? `a customer (a deal closed won): no first-touch campaign; expansion is the seller's explicit call` : `parked after a lost deal with nothing material since; no cold outreach until something changes`;
       if (i.comms.meetingBooked) return 'a meeting is booked';
       const d = recentPositiveDisposition(i)!;
       return `a confirmed ${d.responseClass} disposition ${Math.round(ageDays(i.now, d.at))} days ago (within ${i.freshness.cooldownDays})`;

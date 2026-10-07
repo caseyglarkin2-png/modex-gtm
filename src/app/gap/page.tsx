@@ -72,6 +72,8 @@ import { loadEvidenceInbox, researchSections, type InboxAccount } from '@/lib/ga
 import { loadInDealsSummary, type InDealsSummary } from '@/lib/gap/deals/in-deals';
 import { loadDealBrief } from '@/lib/gap/deals/deal-brief';
 import { DealBriefView } from '@/components/gap/deal-brief';
+import { sweepClosedDeals } from '@/lib/gap/deals/closure';
+import { resolveAccountOpportunity } from '@/lib/gap/opportunity/active-opportunity';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'GAP' };
@@ -392,6 +394,12 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
   // at the real time, every gate re-runs at the click). Everything time-dependent below reads `now`.
   const preview = params.day === 'tomorrow' && !lane;
   const now = preview ? nyDayAt(addDays(nyDay(realNow), 1), 8) : realNow;
+  // R55: work scoped to a deal that left the portal's open deals is reconciled with HubSpot's closure (bounded: five
+  // accounts at most, every five minutes per instance; never when the open-deal read is unavailable; real time only).
+  if (!lane && !preview) {
+    const openDealIds = data.workInput.inDeals.status === 'complete' ? new Set(data.workInput.inDeals.accounts.flatMap((a) => a.deals.map((d) => d.id).filter((x): x is string => !!x))) : null;
+    await sweepClosedDeals(prisma, { now: realNow, openDealIds, resolve: (a) => resolveAccountOpportunity(prisma, a, {}, { timeoutMs: 8_000 }) }).catch(() => null);
+  }
   // R15: the summaries come from this instance's memory, then the durable rows (one read), so a cold instance says
   // what the last workspace read said instead of falling back to the lanes.
   // R41: the obligations (after the bounded follow-up sweep), the next day's meetings and the seller's priorities are

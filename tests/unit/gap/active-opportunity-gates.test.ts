@@ -38,10 +38,13 @@ function direct() {
   return vi.fn(async (intent: any): Promise<ExecutionReceipt> => ({ engine: 'gmail_direct', status: 'sent', engineId: 'msg-1', threadId: 'thr-1', createdAt: intent.now, sentAt: intent.now }));
 }
 
-async function draftWith(hs: ReturnType<typeof fakeHubSpot>, opts: { configured?: boolean; hubspotCompanyId?: string | null } = {}) {
+async function draftWith(hs: ReturnType<typeof fakeHubSpot>, opts: { configured?: boolean; hubspotCompanyId?: string | null; factAt?: Date } = {}) {
   const d = db();
   const gmail = gmailFake();
-  const r = await createSellerGmailDraft(prismaWithIdentity(d, opts.hubspotCompanyId === undefined ? KROGER : opts.hubspotCompanyId), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, {
+  const p = prismaWithIdentity(d, opts.hubspotCompanyId === undefined ? KROGER : opts.hubspotCompanyId);
+  // R55: the newest verified fact at the account (a material change after a lost deal unparks it).
+  if (opts.factAt) p.prospectingSignal = { findFirst: vi.fn(async () => ({ observed_at: opts.factAt })) };
+  const r = await createSellerGmailDraft(p, { decisionId: 'dec-joey', actor: 'casey', now: NOW }, {
     ...baseDeps(d, 'pass', gmail),
     activeOpportunity: via(hs, opts.configured ?? true),
   });
@@ -61,10 +64,15 @@ describe('GAP Gmail draft: HubSpot opportunity truth at the click', () => {
     expect(r).toMatchObject({ ok: false, reason: 'active_opportunity' });
   });
 
-  it('a closed deal does not count: the draft proceeds', async () => {
-    const { r, gmail } = await draftWith(fakeHubSpot({ companyDeals: { [KROGER]: [OPEN_DEAL.id] }, deals: [{ ...OPEN_DEAL, closed: 'true' }] }));
+  it('a closed deal is not an open one: with something material since it closed lost, the draft proceeds; without, the account is parked (R55)', async () => {
+    const lost = { ...OPEN_DEAL, closed: 'true', won: 'false', closedate: '2026-01-05T00:00:00Z' };
+    const { r, gmail } = await draftWith(fakeHubSpot({ companyDeals: { [KROGER]: [OPEN_DEAL.id] }, deals: [lost] }), { factAt: new Date('2026-09-01T00:00:00Z') });
     expect(r).toMatchObject({ ok: true });
     expect(gmail.createGmailDraft).toHaveBeenCalledTimes(1);
+    const parked = await draftWith(fakeHubSpot({ companyDeals: { [KROGER]: [OPEN_DEAL.id] }, deals: [lost] }));
+    expect(parked.r).toMatchObject({ ok: false, reason: 'active_opportunity' });
+    expect(String((parked.r as { detail?: string }).detail)).toMatch(/^Parked: "YardFlow - Kroger" closed lost/);
+    expect(parked.gmail.createGmailDraft).not.toHaveBeenCalled();
   });
 
   it("an open deal on ANOTHER company does not block this account", async () => {

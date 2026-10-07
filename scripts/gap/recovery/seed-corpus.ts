@@ -19,6 +19,9 @@
  *   Dannon Scratch Co    one person, no source, no fact, no thesis -> Research, nothing to draft
  *   Mills Scratch Co     an approved thesis whose only fact is a sale abroad -> the gate refuses it (not usable)
  *   Heb Scratch Co       the only operator on record LEFT the account -> Research: find the operator
+ *   Costco Scratch Co    R55: a CLOSED-WON deal (a customer), a chosen person and an approved thesis that would read Ready
+ *                        anywhere else -> Held: a customer; no first-touch campaign; expansion is the seller's call
+ *   Sysco Scratch Co     R55: a CLOSED-LOST deal on Sep 1 and only an older fact -> Parked until something material changes
  *   Tyson Scratch Co     a verified JOB POSTING (claim class JOB_POSTING) and a chosen person, no thesis (R34): a
  *                        job-led opening in the posting's own words, prepared and reviewed, then sent from the job family
  *
@@ -271,6 +274,26 @@ export async function seedCorpus(prisma: PrismaClient, opts: { tag?: string; now
     await fact(a, 'expansion', `${a.name} is expanding its San Antonio distribution campus with a new 500,000 square foot warehouse.`, { title: `${a.name} expands San Antonio campus`, observedAt: '2026-09-18T00:00:00Z' });
     const left = await recordEmploymentCorrection(prisma, { personaId: d.id, actor: ACTOR, now, status: 'left', newCompany: null, note: 'corpus: left the account' });
     if (!left.ok) throw new Error(`employment at ${a.name}: ${left.reason}`);
+  }
+  // ---- Costco Scratch Co: a customer (R55) ----
+  {
+    const a = await account('Costco Scratch Co', { vertical: 'retail' });
+    a.expected = 'Held: a customer (closed won); no first-touch campaign even with an approved thesis and a chosen person; expansion is explicit context';
+    const val = await person(a, 'Val', 'Director of Transportation');
+    const f = await fact(a, 'dc', `${a.name} opened a new cross-dock in Arizona with 90 dock doors.`, { title: `${a.name} opens Arizona cross-dock`, observedAt: '2026-09-25T00:00:00Z' });
+    await thesis(a, val.id, f, 'approved');
+    await choose(a, val.id);
+    out.stub.deals[a.name] = [{ id: taggedId(tag, 7101), dealname: `${a.name} yard network`, dealstage: 'closedwon', hs_is_closed: true, hs_is_closed_won: true, closedate: '2026-09-15T16:00:00.000Z' }];
+  }
+  // ---- Sysco Scratch Co: parked after a lost deal (R55) ----
+  {
+    const a = await account('Sysco Scratch Co', { vertical: 'food' });
+    a.expected = 'Parked: the deal closed lost Sep 1 and nothing material has changed since; a newer verified fact or a buyer reply unparks it';
+    const lee = await person(a, 'Lee', 'VP Transportation');
+    const f = await fact(a, 'terminal', `${a.name} opened a new distribution terminal in Ohio with 60 dock doors.`, { title: `${a.name} opens Ohio terminal`, observedAt: '2026-08-20T00:00:00Z' });
+    await thesis(a, lee.id, f, 'approved');
+    await choose(a, lee.id);
+    out.stub.deals[a.name] = [{ id: taggedId(tag, 7201), dealname: `${a.name} pilot`, dealstage: 'closedlost', hs_is_closed: true, hs_is_closed_won: false, closedate: '2026-09-01T16:00:00.000Z' }];
   }
   // ---- Tyson Scratch Co: a job-led opening (R34) ----
   {

@@ -32,9 +32,9 @@ describe('resolveOpportunity (HubSpot is the truth, account level)', () => {
     expect(t.status === 'ACTIVE' && t.deals[0]).toMatchObject({ amount: '250000', closeDate: '2026-11-30T00:00:00Z', nextStep: 'Pilot scope review' });
   });
 
-  it('a closed deal (hs_is_closed true) is not active: CLEAR', async () => {
+  it('a closed deal (hs_is_closed true) is not active: CLEAR, carrying the closed deal as HubSpot reported it (R55)', async () => {
     const hs = fakeHubSpot({ companyDeals: { 'c-kroger': ['d1'] }, deals: [{ id: 'd1', closed: 'true' }] });
-    expect(await resolveOpportunity(kroger, hs)).toEqual({ status: 'CLEAR', companyIds: ['c-kroger'] });
+    expect(await resolveOpportunity(kroger, hs)).toEqual({ status: 'CLEAR', companyIds: ['c-kroger'], closed: [{ id: 'd1', name: null, stage: 'appointmentscheduled', won: null, closedAt: null }] });
   });
 
   it('an open deal in a custom (non-default) stage is still ACTIVE: hs_is_closed, not a stage list', async () => {
