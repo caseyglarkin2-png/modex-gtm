@@ -1041,7 +1041,8 @@ function accountMotion(i: AccountInputs, hyps: HypothesisView[], now: Date, prim
   return { type: a.kind, who, why: a.why, ...(met ? { met } : {}) };
 }
 
-const motionLine = (m: Motion) => (m.type === 'FACT_LED' ? 'Fact-led, on the verified fact.' : m.type === 'NO_GOOD_MOTION' ? `No good motion yet: ${m.why.replace(/^Do not contact yet: /, '')}` : `${MOTION_LABEL[m.type]}${m.who ? `: ${m.who}` : ''}. ${m.why}`);
+// R63-B S1: a do not contact is said as it is, never "No good motion yet" (it is not temporary).
+const motionLine = (m: Motion) => (m.type === 'FACT_LED' ? 'Fact-led, on the verified fact.' : m.type === 'NO_GOOD_MOTION' && /^Do not contact: /.test(m.why) ? m.why : m.type === 'NO_GOOD_MOTION' ? `No good motion yet: ${m.why.replace(/^Do not contact yet: /, '')}` : `${MOTION_LABEL[m.type]}${m.who ? `: ${m.who}` : ''}. ${m.why}`);
 
 
 /** NETWORK in the 30-second view: a count (filing, registry, audit estimate, microsite), never a news sentence. */

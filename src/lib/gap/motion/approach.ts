@@ -60,6 +60,7 @@ export interface Approach {
 }
 
 const cls = (c: string) => c.replace(/_/g, ' ');
+const dayYear = (iso: string) => (Number.isNaN(new Date(iso).getTime()) ? iso.slice(0, 10) : new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' }));
 
 export function decideApproach(x: ApproachInput): Approach {
   if (x.deal === 'ACTIVE') return { kind: 'IN_DEAL', why: 'An open HubSpot deal: work it from the deal, never cold.' };
@@ -70,7 +71,9 @@ export function decideApproach(x: ApproachInput): Approach {
   if (x.deal === 'UNKNOWN') return { kind: 'NO_GOOD_MOTION', why: `Do not contact yet: ${x.dealUnknownWhy ?? 'the HubSpot deal state could not be read.'}` };
   if (x.deal === 'NOT_READ') return { kind: 'NO_GOOD_MOTION', why: 'Do not contact yet: the HubSpot deal state was not read here.' };
   if (x.relatedHold) return { kind: 'NO_GOOD_MOTION', why: `Do not contact yet: ${x.relatedHold}` };
-  if (x.conversation && STOP_CLASSES.has(x.conversation.responseClass)) return { kind: 'NO_GOOD_MOTION', why: `Do not contact yet: ${x.conversation.who} answered "${cls(x.conversation.responseClass)}" (${x.conversation.at.slice(0, 10)}). No new outreach; learn from that conversation.` };
+  // R63-B S1: a do not contact is not temporary (never "yet"); the date in words.
+  if (x.conversation?.responseClass === 'do_not_contact') return { kind: 'NO_GOOD_MOTION', why: `Do not contact: ${x.conversation.who} asked not to be contacted (${dayYear(x.conversation.at)}). Nothing goes to them from here.` };
+  if (x.conversation && STOP_CLASSES.has(x.conversation.responseClass)) return { kind: 'NO_GOOD_MOTION', why: `Do not contact yet: ${x.conversation.who} answered "${cls(x.conversation.responseClass)}" (${dayYear(x.conversation.at)}). No new outreach; learn from that conversation.` };
   if (x.contradicted) return { kind: 'NO_GOOD_MOTION', why: 'Do not contact yet: the buyer contradicted the current story. Learn what is true first.' };
   if (x.conversation) return { kind: 'FOLLOW_UP', why: `A live conversation with ${x.conversation.who} (${cls(x.conversation.responseClass)}, ${x.conversation.at.slice(0, 10)}): continue that thread, never a cold first touch.` };
   // After every gate that says "not now", before the touch hold and reachability: a restricted account has nobody

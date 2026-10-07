@@ -34,7 +34,9 @@ import { Badge } from '@/components/ui/badge';
 import { ColdOutboundButton } from './cold-outbound-button';
 import { SixLineBriefView } from './six-line-brief';
 import { contradictedFactIds } from '@/lib/gap/research/conflicts';
-import { buildBrief, loadBriefHistory } from '@/lib/gap/execution/six-line-brief';
+import { buildBrief, emailSlot, loadBriefHistory, optOutLine, type BriefOptOut } from '@/lib/gap/execution/six-line-brief';
+import { recordReplyHref } from '@/lib/gap/account-intel/href';
+import { OptedOutEmail } from './opted-out-email';
 import { loadAngles, suggestAngle } from '@/lib/gap/motion/persona-angle';
 import { GovernedCopyButton } from './governed-copy-button';
 import { FactBlock, HypothesisBlock } from './fact-hypothesis-blocks';
@@ -180,6 +182,8 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
       email: persona?.email ?? null,
       sent: touch && 'sent' in touch ? touch.sent.map((t) => ({ sentAt: t.sentAt })) : [],
       now: new Date(),
+      name: persona?.name ?? null,
+      doNotContact: !!persona?.do_not_contact,
     }),
     contradictedFactIds(prisma, hypothesis.account_name, new Date()).catch(() => null),
     // Universal Work Intake: how Casey knows this person (his context, never evidence).
@@ -209,6 +213,10 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
   // the click). An old card or deep link to a thesis that needs review shows the review, never its outreach.
   const thesisState: ThesisCurrentness = hypothesis.status !== 'active' ? { current: true } : await checkThesisCurrent(prisma, hypothesis.account_name, hypothesis.id, new Date());
   const thesisHold = thesisState.current !== true;
+  // R63-B S1: an opt-out on file (their "stop" reply, recorded or not, or a recorded do not contact) means no email is
+  // prepared at all: no subject, no body, no draft, no copy, no call script.
+  const optOut: BriefOptOut | null = briefHistory?.optOut ?? (persona?.do_not_contact ? { email: String(persona.email ?? ''), name: persona.name ?? null, said: null, at: null, recorded: true } : null);
+  const slot = emailSlot({ optedOut: !!optOut, rendered: !!renderedEmail, thesisHold });
   const tel = persona?.phone ? telHref(persona.phone) : null;
   const mailbox = gapGmailSender()?.userEmail ?? gmailSenderAddress();
   const signals = Array.isArray(hypothesis.signals)
@@ -219,7 +227,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
   // not repeat the card's Call button (the number is shown, the card's Call checks HubSpot first).
   const callFirst = decision?.action === 'call_now';
   // A call script reads the thesis aloud: only an ACTIVE (approved and in use) thesis that is current.
-  const callSection = callPack && !thesisHold && hypothesis.status === 'active' ? (
+  const callSection = callPack && !thesisHold && !optOut && hypothesis.status === 'active' ? (
       <section data-testid="call-pack" className="space-y-3 rounded-md border border-[var(--border)] p-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Call</p>
@@ -311,7 +319,9 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
         </p>
       ) : null}
 
-      {renderedEmail && thesisHold ? null : renderedEmail ? (
+      {slot === 'opted_out' && optOut ? (
+        <OptedOutEmail line={optOutLine(optOut)} recordHref={optOut.recorded ? null : recordReplyHref(hypothesis.account_name)} />
+      ) : slot === 'thesis_hold' ? null : renderedEmail ? (
         <section data-testid="rendered-email" className="space-y-3 rounded-md border border-[var(--border)] p-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Email{touchStep > 0 ? ` (touch ${touchStep + 1})` : ''}</p>
@@ -358,7 +368,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
         </section>
       )}
 
-      {renderedEmail && decision && !blockedReason && !rejected && !thesisHold ? (
+      {slot === 'email' && renderedEmail && decision && !blockedReason && !rejected && !thesisHold ? (
         <details className="rounded-md border border-[var(--border)] p-3 text-sm" data-testid="save-draft-details">
           <summary className="cursor-pointer font-medium">Save draft instead (edit and send from Gmail)</summary>
           <div className="mt-3">

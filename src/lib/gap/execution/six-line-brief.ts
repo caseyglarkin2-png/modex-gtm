@@ -23,6 +23,7 @@ import { FREEMAIL_DOMAINS, OWN_DOMAINS } from '../replies/domains';
 import { resolveAccountOpportunity, type OpportunityTruth } from '../opportunity/active-opportunity';
 import { accountHref } from '../account-intel/href';
 import { BEST_PROOF_MEASURED } from '../story/anchor';
+import { optOutReplyOnFile } from '../replies/opt-out';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -41,6 +42,39 @@ export interface BriefHistory {
   accountReply: { from: string; receivedAt: string } | null | 'unknown';
   lastResponse: { responseClass: string; at: string } | null;
   opportunity: { status: 'CLEAR' | 'ACTIVE' | 'UNKNOWN'; detail: string; checkedAt: string };
+  /** R63-B S1: this person opted out (an opt-out reply on file, recorded or not, or a recorded do not contact). */
+  optOut?: BriefOptOut | null;
+}
+
+/** R63-B S1: an opt-out on file for the person the pack is for (replies/opt-out.ts, the send gate's own read). */
+export interface BriefOptOut {
+  email: string;
+  name: string | null;
+  /** Their words, when the opt-out is a reply on file. */
+  said: string | null;
+  at: string | null;
+  /** Recorded as do not contact (the person's flag or a confirmed do-not-contact answer). */
+  recorded: boolean;
+}
+
+const dayYear = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' });
+
+/**
+ * R63-B S1: the opt-out in words, never temporary ("Do not contact yet" read as if it would pass): what they said and
+ * when, that nothing goes to them, and, while it is not recorded, to record it from their reply.
+ */
+export function optOutLine(o: BriefOptOut): string {
+  const who = o.name?.trim() || o.email;
+  if (o.recorded) return `${who} asked not to be contacted${o.at ? ` (${dayYear(o.at)})` : ''}; it is recorded as do not contact. Nothing goes to them from here.`;
+  return `${who} replied "${o.said ?? 'stop'}"${o.at ? ` on ${dayYear(o.at)}` : ''}: an opt-out. Nothing goes to them from here; record it as do not contact from their reply.`;
+}
+
+/** R63-B S1: what the pack's EMAIL slot shows. An opt-out on file shows no draft at all (no subject, no body). */
+export type EmailSlot = 'opted_out' | 'thesis_hold' | 'email' | 'missing';
+export function emailSlot(x: { optedOut: boolean; rendered: boolean; thesisHold: boolean }): EmailSlot {
+  if (x.optedOut) return 'opted_out';
+  if (!x.rendered) return 'missing';
+  return x.thesisHold ? 'thesis_hold' : 'email';
 }
 
 export interface SixLineBrief {
@@ -108,17 +142,23 @@ export function historyLines(firstName: string, accountName: string, h: BriefHis
       ? `No one else at ${accountName} contacted in 30 days`
       : others.map((o) => (o.outstanding ? `a first-touch draft to ${o.recipient} is outstanding` : `${o.recipient} got a first touch ${day(o.sentAt)}`)).join('; '),
   );
+  // R63-B S1: the person's opt-out is said once, in words, in place of their reply's "not triaged yet".
+  const o = h.optOut ?? null;
+  const optOutReply = !!o && !!h.accountReply && h.accountReply !== 'unknown' && h.accountReply.from.toLowerCase() === o.email.toLowerCase();
   lines.push(
-    h.accountReply === 'unknown'
-      ? `Account reply status unknown (no company email at ${accountName} to check)`
-      : h.accountReply
-        ? `${h.accountReply.from} replied ${day(h.accountReply.receivedAt)}, not triaged yet`
-        : 'No account reply waiting',
+    optOutReply && o
+      ? optOutLine(o)
+      : h.accountReply === 'unknown'
+        ? `Account reply status unknown (no company email at ${accountName} to check)`
+        : h.accountReply
+          ? `${h.accountReply.from} replied ${day(h.accountReply.receivedAt)}, not triaged yet`
+          : 'No account reply waiting',
   );
-  if (h.lastResponse) lines.push(`Last buyer response: ${h.lastResponse.responseClass.replace(/_/g, ' ')} (${day(h.lastResponse.at)})`);
+  if (o && !optOutReply) lines.push(optOutLine(o));
+  if (h.lastResponse && !(o && h.lastResponse.responseClass === 'do_not_contact')) lines.push(`Last buyer response: ${h.lastResponse.responseClass.replace(/_/g, ' ')} (${day(h.lastResponse.at)})`);
   lines.push(`HubSpot opportunity ${h.opportunity.status}${h.opportunity.detail ? `: ${h.opportunity.detail}` : ''}, checked moments ago`);
   const state: SixLineBrief['historyState'] =
-    h.opportunity.status !== 'CLEAR' || (h.accountReply && h.accountReply !== 'unknown') ? 'blocked' : others.length || h.accountReply === 'unknown' ? 'caution' : 'clear';
+    o || h.opportunity.status !== 'CLEAR' || (h.accountReply && h.accountReply !== 'unknown') ? 'blocked' : others.length || h.accountReply === 'unknown' ? 'caution' : 'clear';
   return { lines, state };
 }
 
@@ -176,7 +216,7 @@ function opportunityLine(t: OpportunityTruth): BriefHistory['opportunity'] {
 
 export async function loadBriefHistory(
   prisma: PrismaLike,
-  input: { accountName: string; personaId: number | null; email: string | null; sent: Array<{ sentAt: string }>; now: Date },
+  input: { accountName: string; personaId: number | null; email: string | null; sent: Array<{ sentAt: string }>; now: Date; /** R63-B S1 */ name?: string | null; doNotContact?: boolean },
   deps: { opportunity?: (accountName: string, email: string | null) => Promise<OpportunityTruth> } = {},
 ): Promise<BriefHistory | null> {
   try {
@@ -192,14 +232,21 @@ export async function loadBriefHistory(
       : ((await prisma.persona.findMany({ where: { account_name: input.accountName, email: { not: null } }, select: { email: true }, take: 50 })) as Array<{ email: string | null }>)
           .map((p) => String(p.email ?? '').toLowerCase())
           .find(isCompany) ?? null;
-    const [touches, reply, last, opp] = await Promise.all([
+    const [touches, reply, last, opp, optOutReply] = await Promise.all([
       loadAccountFirstTouches(prisma, [input.accountName], input.now),
       replyAddress ? accountRepliedRecently(prisma, replyAddress, input.now, { accountName: input.accountName }) : Promise.resolve('unknown' as const),
       email
         ? prisma.conversationDisposition.findFirst({ where: { contact_email: email, human_confirmed: true }, orderBy: { created_at: 'desc' }, select: { response_class: true, created_at: true } })
         : Promise.resolve(null),
       (deps.opportunity ?? ((a: string, e: string | null) => resolveAccountOpportunity(prisma, a, { email: e }, { timeoutMs: 8_000 })))(input.accountName, email || null),
+      // R63-B S1: the person's opt-out reply on file, recorded or not (the send gate's own read).
+      email ? optOutReplyOnFile(prisma, email).catch(() => null) : Promise.resolve(null),
     ]);
+    const recorded = !!input.doNotContact || last?.response_class === 'do_not_contact';
+    const optOut: BriefOptOut | null =
+      optOutReply || recorded
+        ? { email, name: input.name?.trim() || optOutReply?.fromName || null, said: optOutReply?.said ?? null, at: optOutReply?.receivedAt ?? (last?.response_class === 'do_not_contact' ? new Date(last.created_at).toISOString() : null), recorded }
+        : null;
     const others = (touches.get(input.accountName) ?? []).filter((t) => !t.released && t.personaId !== input.personaId && t.recipient !== email);
     const lastAt = input.sent.length ? input.sent[input.sent.length - 1].sentAt : null;
     return {
@@ -208,6 +255,7 @@ export async function loadBriefHistory(
       accountReply: reply === 'unknown' ? 'unknown' : reply ? { from: reply.from_email, receivedAt: new Date(reply.received_at).toISOString() } : null,
       lastResponse: last ? { responseClass: String(last.response_class), at: new Date(last.created_at).toISOString() } : null,
       opportunity: opportunityLine(opp),
+      optOut,
     };
   } catch {
     return null;

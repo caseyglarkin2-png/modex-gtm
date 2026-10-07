@@ -18,7 +18,8 @@ describe('decideApproach', () => {
     for (const c of ['do_not_contact', 'meeting_declined', 'problem_rejected', 'not_priority']) {
       const a = decideApproach({ ...base, conversation: { who: 'dana@acme.example', responseClass: c, at: '2026-09-20T00:00:00Z' } });
       expect(a.kind).toBe('NO_GOOD_MOTION');
-      expect(a.why).toMatch(/No new outreach/);
+      // R63-B S1: a do not contact is not temporary (no "yet"): nothing goes to them.
+      expect(a.why).toMatch(c === 'do_not_contact' ? /^Do not contact: dana@acme\.example asked not to be contacted \(Sep 19, 2026\)\. Nothing goes to them from here\.$/ : /No new outreach/);
     }
     expect(kind({ conversation: { who: 'dana', responseClass: 'request_information', at: '2026-09-20' } })).toBe('FOLLOW_UP');
   });

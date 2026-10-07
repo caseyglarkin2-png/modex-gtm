@@ -78,7 +78,8 @@ export function proposeOpportunity(i: OpportunityInput): Opportunity {
   const decided = decideApproach({ deal: 'CLEAR', contradicted: !!i.contradicted, conversation: i.conversation, touchHold: null, verifiedFact: !!i.fact, reachable: true, source: { sourceType: i.source.sourceType, context: ctx, name: i.source.name }, groundedThesis: !!i.thesis, sensitiveOnly: i.fact ? sensitivityOf(i.fact.quote) : null, restriction: restrictionForName(m.accountName) });
   if (decided.kind === 'NO_GOOD_MOTION' || decided.kind === 'IN_DEAL' || decided.kind === 'INTRO_ONLY') {
     approach = 'hold';
-    suggested = `Not now. ${decided.why}`;
+    // R63-B S1: a do not contact is not "not now"; it is said as it is.
+    suggested = /^Do not contact: /.test(decided.why) ? decided.why : `Not now. ${decided.why}`;
   } else if (decided.kind === 'FOLLOW_UP' && i.conversation) {
     approach = 'follow_up';
     suggested = `Follow-up: there is a conversation at ${m.accountName} with ${i.conversation.who} (${i.conversation.responseClass.replace(/_/g, ' ')}). Continue it in that thread; this is not a cold first touch.`;

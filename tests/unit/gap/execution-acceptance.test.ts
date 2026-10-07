@@ -227,8 +227,10 @@ describe('the action pack renders from the same rule (an old deep link to a stal
     // the SAME lean click-time check, awaited (no bounded race that can time out to "unknown" on a cold start)
     expect(src).toContain("await checkThesisCurrent(prisma, hypothesis.account_name, hypothesis.id, new Date())");
     expect(src).toContain("const thesisHold = thesisState.current !== true;");
-    expect(src).toContain("const callSection = callPack && !thesisHold && hypothesis.status === 'active' ? (");
-    expect(src).toContain('{renderedEmail && thesisHold ? null : renderedEmail ? (');
+    // R63-B S1: an opt-out on file holds the call script and the email slot too.
+    expect(src).toContain("const callSection = callPack && !thesisHold && !optOut && hypothesis.status === 'active' ? (");
+    expect(src).toContain("{slot === 'opted_out' && optOut ? (");
+    expect(src).toContain(") : slot === 'thesis_hold' ? null : renderedEmail ? (");
     expect(src).toContain('!blockedReason && !rejected && !thesisHold ? (');
     expect(src).toContain('data-testid="thesis-needs-review"');
     // no raw phone number rendered on the page
@@ -279,7 +281,7 @@ describe('PreCallBrief hides contact when asked', () => {
     const src = readFileSync('src/components/gap/pre-call-brief.tsx', 'utf8');
     expect(src).toMatch(/hideContact \? \(\s*<span data-testid="brief-contact-hidden">/);
     const view = readFileSync('src/components/gap/action-pack-view.tsx', 'utf8');
-    expect(view).toContain("const callSection = callPack && !thesisHold && hypothesis.status === 'active' ? (");
+    expect(view).toContain("const callSection = callPack && !thesisHold && !optOut && hypothesis.status === 'active' ? (");
   });
 });
 
