@@ -80,10 +80,14 @@ describe('GET /api/gap/replies', () => {
     let res = await GET(get(BASE));
     expect(res.status).toBe(200);
     expect(await res.json()).toEqual(PAGE);
-    expect(mockedList.mock.calls[0]).toEqual([{ __tag: 'fake-prisma' }, { state: 'undispositioned', cursor: null, limit: undefined }]);
+    expect(mockedList.mock.calls[0]).toEqual([{ __tag: 'fake-prisma' }, { state: 'undispositioned', cursor: null, limit: undefined, accountName: null }]);
 
     res = await GET(get(`${BASE}?state=all&cursor=m5&limit=10`));
-    expect(mockedList.mock.calls[1][1]).toEqual({ state: 'all', cursor: 'm5', limit: 10 });
+    expect(mockedList.mock.calls[1][1]).toEqual({ state: 'all', cursor: 'm5', limit: 10, accountName: null });
+
+    // R60: one account's replies (the account page records them in place).
+    res = await GET(get(`${BASE}?account=${encodeURIComponent('Walmart Inc.')}`));
+    expect(mockedList.mock.calls[2][1]).toEqual({ state: 'undispositioned', cursor: null, limit: undefined, accountName: 'Walmart Inc.' });
   });
 
   it('a header token reads too; a bad state is 400 invalid_query', async () => {
