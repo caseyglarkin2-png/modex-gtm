@@ -73,27 +73,49 @@ export const STORY_SET_ASIDE_DETAIL = 'You set this story aside (Not this story)
 const IN_USE = new Set(['approved', 'active']);
 const CLOSED = new Set(['confirmed', 'partially_confirmed', 'unresolved', 'expired']);
 
-type FactRow = GateSignal & { id: string; title: string | null; evidence_text: string | null; freshness_expires_at: Date | null };
+export type DraftFactRow = GateSignal & { id: string; title: string | null; evidence_text: string | null; freshness_expires_at: Date | null };
+type FactRow = DraftFactRow;
+/** The select a caller uses to read a fact for `draftFactRefusal`. */
+export const DRAFT_FACT_SELECT = { ...GATE_SIGNAL_SELECT, freshness_expires_at: true } as const;
 
-export async function draftThesisFromFact(prisma: PrismaLike, input: DraftFromFactInput): Promise<DraftFromFactResult> {
-  const fact: FactRow | null = await prisma.prospectingSignal.findUnique({ where: { id: input.factId }, select: { ...GATE_SIGNAL_SELECT, freshness_expires_at: true } });
-  if (!fact) return { ok: false, reason: 'fact_not_found' };
-  if ((fact.account_name ?? '').trim().toLowerCase() !== input.accountName.trim().toLowerCase()) return { ok: false, reason: 'signal_account_mismatch' };
+/**
+ * R65: the checks this service runs on a fact before it drafts or adopts anything, in its order (the account, the one
+ * freshness authority, the approach's evidence gate, sensitivity), so the read-only repair dry run says exactly what
+ * the service would do. Null when the fact may carry a draft.
+ */
+export function draftFactRefusal(fact: DraftFactRow | null, accountName: string, now: Date): { reason: 'fact_not_found' | 'signal_account_mismatch' | 'fact_not_outreach_evidence'; detail?: string } | null {
+  if (!fact) return { reason: 'fact_not_found' };
+  if ((fact.account_name ?? '').trim().toLowerCase() !== accountName.trim().toLowerCase()) return { reason: 'signal_account_mismatch' };
   // Item 2a: the one freshness authority; the refusal says why in the seller's words.
-  const currentness = factCurrentness(fact, input.now);
-  if (!currentness.current) return { ok: false, reason: 'fact_not_outreach_evidence', detail: currentnessLine(currentness) };
-  // R30: the claim's class decides the approach the thesis will carry; the gate runs under that approach. Items 4 and 6:
-  // one chooser for the page and the service (story/draft-approach.ts): a posting is job-led, a physical change is
-  // event-led, an ongoing partnership or program (the Gatik agreement) is fit-led; nothing else opens a first touch,
-  // and the event-led gate then says why.
-  const meta = fact.metadata && typeof fact.metadata === 'object' && !Array.isArray(fact.metadata) ? (fact.metadata as Record<string, unknown>) : {};
-  const recorded = meta.continuity && typeof meta.continuity === 'object' ? (meta.continuity as { kind?: string }).kind : undefined;
-  const approach: EvidenceApproach = draftApproachFor({ text: fact.evidence_text ?? '', claimClass: fact.claim_class ?? null, continuity: recorded === 'event' || recorded === 'ongoing_state' || recorded === 'ended' ? recorded : null }) ?? 'event_led';
-  const refusal: OutreachFactRefusal | null = outreachFactRefusal(fact, input.accountName, { approach });
-  if (refusal) return { ok: false, reason: 'fact_not_outreach_evidence', detail: refusal };
+  const currentness = factCurrentness(fact, now);
+  if (!currentness.current) return { reason: 'fact_not_outreach_evidence', detail: currentnessLine(currentness) };
+  const refusal: OutreachFactRefusal | null = outreachFactRefusal(fact, accountName, { approach: draftApproachOf(fact) });
+  if (refusal) return { reason: 'fact_not_outreach_evidence', detail: refusal };
   // The page never offers a sensitive fact (layoffs, a lawsuit) as the hook; the service refuses it the same way.
   const sensitive = sensitivityOf(fact.evidence_text ?? '');
-  if (sensitive) return { ok: false, reason: 'fact_not_outreach_evidence', detail: `sensitive:${sensitive}` };
+  if (sensitive) return { reason: 'fact_not_outreach_evidence', detail: `sensitive:${sensitive}` };
+  return null;
+}
+
+/**
+ * R30: the claim's class decides the approach the thesis will carry; the gate runs under that approach. Items 4 and 6:
+ * one chooser for the page and the service (story/draft-approach.ts): a posting is job-led, a physical change is
+ * event-led, an ongoing partnership or program (the Gatik agreement) is fit-led; nothing else opens a first touch, and
+ * the event-led gate then says why.
+ */
+function draftApproachOf(fact: DraftFactRow): EvidenceApproach {
+  const meta = fact.metadata && typeof fact.metadata === 'object' && !Array.isArray(fact.metadata) ? (fact.metadata as Record<string, unknown>) : {};
+  const recorded = meta.continuity && typeof meta.continuity === 'object' ? (meta.continuity as { kind?: string }).kind : undefined;
+  return draftApproachFor({ text: fact.evidence_text ?? '', claimClass: fact.claim_class ?? null, continuity: recorded === 'event' || recorded === 'ongoing_state' || recorded === 'ended' ? recorded : null }) ?? 'event_led';
+}
+
+export async function draftThesisFromFact(prisma: PrismaLike, input: DraftFromFactInput): Promise<DraftFromFactResult> {
+  const fact: FactRow | null = await prisma.prospectingSignal.findUnique({ where: { id: input.factId }, select: DRAFT_FACT_SELECT });
+  const refused = draftFactRefusal(fact, input.accountName, input.now);
+  if (refused) return { ok: false, ...refused };
+  if (!fact) return { ok: false, reason: 'fact_not_found' };
+  // The fact passed draftFactRefusal above; the approach it carries decides the family question (item 3).
+  const approach: EvidenceApproach = draftApproachOf(fact);
 
   // The family: explicit, else derived with a basis, else missing (incomplete, never unmapped on the submit path).
   let family: ProblemFamily | 'unmapped' = 'unmapped';
