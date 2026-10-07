@@ -234,6 +234,7 @@ export async function loadEvidenceInbox(prisma: PrismaLike, now: Date, opts: { a
     const approach = draftApproachFor({ text: String(s.evidence_text ?? ''), claimClass: s.claim_class ?? null, continuity: recorded === 'event' || recorded === 'ongoing_state' || recorded === 'ended' ? recorded : null }) ?? 'event_led';
     return outreachFactRefusal(s as never, s.account_name, { approach });
   };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- raw rows from a narrow select
   const live = (s: Record<string, any>) => !ignored.has(s.id) && isCurrentFact(s, now) && !refused(s);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- raw rows from a narrow select
   const newestContinuation = new Map<string, Record<string, any>>();

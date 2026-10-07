@@ -84,8 +84,8 @@ describe('USE & CREATE REVISION on the frozen approved PepsiCo thesis', () => {
 
   it('drafts a revision whose observation is rebuilt from the verified physical fact; the approved row is never edited or approved', async () => {
     const prisma = db([hyp('pa1', 'PepsiCo', 'approved', 916), hyp('pa2', 'PepsiCo', 'approved', 928)]);
-    const propose = vi.fn(async (_p: unknown, _i: any) => ({ ok: true as const, id: 'rev-1' }));
-    const r = await useEvidenceForThesis(prisma, { fingerprint: await fpOf(prisma, 'PepsiCo'), hypothesisIds: ['pa1'], signalIds: ['pep-tulsa'], primarySignalId: 'pep-tulsa', actor: 'c', now: NOW }, { propose: propose as any });
+    const propose = vi.fn<(p: unknown, i: Record<string, unknown>) => Promise<{ ok: true; id: string }>>(async () => ({ ok: true as const, id: 'rev-1' }));
+    const r = await useEvidenceForThesis(prisma, { fingerprint: await fpOf(prisma, 'PepsiCo'), hypothesisIds: ['pa1'], signalIds: ['pep-tulsa'], primarySignalId: 'pep-tulsa', actor: 'c', now: NOW }, { propose: propose as never });
     expect(r.ok, JSON.stringify(r)).toBe(true);
     expect(r.results[0]).toMatchObject({ hypothesisId: 'pa1', revisionId: 'rev-1', from: 'approved', to: 'approved' });
     const arg = propose.mock.calls[0][1];
