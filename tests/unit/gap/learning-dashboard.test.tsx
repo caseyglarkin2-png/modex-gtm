@@ -241,3 +241,28 @@ describe('Release D review B2: signal yield obeys the small-N rule', () => {
     expect(screen.getByText('1/1 early')).toBeInTheDocument();
   });
 });
+
+describe('LearningDashboard, R65: Casey sees decisions', () => {
+  it('the decisions waiting, each HubSpot change with its owner and where to act, the outcomes and research cost; no operator failure list', async () => {
+    const crm = (state: string, action: string) => ({ proposalId: `p-${state}`, accountName: 'Kroger Scratch Co', dealName: 'YardFlow - Kroger', kind: 'note', state, owner: 'casey@freightroll.com', since: '2026-10-06T15:00:00.000Z', detail: null, href: '/gap/accounts/kroger-scratch-co?view=brief#deal-workspace', action });
+    const operations = {
+      state: 'DEGRADED',
+      headline: 'x',
+      failures: [{ key: 'drafts_stranded', state: 'DEGRADED', label: '1 draft stranded', count: 1, href: null }],
+      decisions: [{ key: 'theses_waiting_review', state: 'HEALTHY', label: '4 theses waiting for your review', count: 4, href: '/gap/hypotheses?status=review_required' }],
+      outcomes: [{ key: 'replies', state: 'HEALTHY', label: 'Replies in 7 days: 6 received, 5 recorded', count: 6, href: null }],
+      research: [{ key: 'research_cost', state: 'HEALTHY', label: 'Research in 7 days: 14 runs', count: 14, href: '/gap/coverage' }],
+      crm: { readable: true, pendingApproval: [crm('proposed', 'Approve or discard it on the deal')], approvedNotWritten: [], failed: [crm('failed', 'Retry it on the deal')] },
+      inputs: {},
+      checkedAt: '2026-10-07T15:00:00.000Z',
+    };
+    const client = clientWith({ ok: true, status: 200, data: { ...report(), operations } as never });
+    render(<LearningDashboard client={client} />);
+    expect(await screen.findByText('Your decisions and what happened')).toBeInTheDocument();
+    expect(screen.getByText('4 theses waiting for your review').closest('a')).toHaveAttribute('href', '/gap/hypotheses?status=review_required');
+    expect(screen.getByTestId('ops-crm-pending')).toHaveTextContent('Kroger Scratch Co: a note on YardFlow - Kroger, casey@freightroll.com, since Oct 6. Approve or discard it on the deal');
+    expect(screen.getByTestId('ops-crm-failed')).toHaveTextContent('Retry it on the deal');
+    expect(screen.getByText('Replies in 7 days: 6 received, 5 recorded')).toBeInTheDocument();
+    expect(screen.queryByText('1 draft stranded')).not.toBeInTheDocument();
+  });
+});

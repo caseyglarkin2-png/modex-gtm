@@ -25,6 +25,7 @@
 
 import type { BidSource, BidType, Channel, ResponseClass } from '../taxonomy';
 import type { LearningReport } from '../learning/query';
+import type { OperationsReport } from '../health/operations';
 import type { AgreementReport } from '../routing/agreement';
 
 // ---------------------------------------------------------------------------
@@ -466,6 +467,8 @@ export interface LearningFiltersApplied {
 export interface LearningReportResponse extends LearningReport {
   filters: LearningFiltersApplied;
   programs: string[];
+  /** R65: Casey's decisions waiting, the outcomes, research cost and the HubSpot changes (null when unreadable). */
+  operations?: OperationsReport | null;
 }
 
 /** R-A: the UI's filter params. Dates are plain `yyyy-mm-dd` strings, same as an `<input type="date">` value. */

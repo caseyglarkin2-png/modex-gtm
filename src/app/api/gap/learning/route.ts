@@ -15,6 +15,7 @@ import { prisma } from '@/lib/prisma';
 import { isAuthorizedQueueAgent } from '@/lib/queue/agent-auth';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { buildLearningReport, listLearningPrograms, type LearningFilters } from '@/lib/gap/learning/query';
+import { evaluateOperations, loadOperationsInputs } from '@/lib/gap/health/operations';
 
 export const dynamic = 'force-dynamic';
 
@@ -59,6 +60,12 @@ export async function GET(request: NextRequest) {
   if (!email && !isGapAgentRequest(request)) return NextResponse.json({ error: 'unauthenticated' }, { status: 401 });
 
   const filters = parseFilters(request);
-  const [report, programs] = await Promise.all([buildLearningReport(prisma, filters), listLearningPrograms(prisma)]);
-  return NextResponse.json({ ...report, filters, programs });
+  const now = new Date();
+  // R65: Casey's decisions waiting and the outcomes ride with the report (every read soft; never blocks the report).
+  const [report, programs, operations] = await Promise.all([
+    buildLearningReport(prisma, filters),
+    listLearningPrograms(prisma),
+    loadOperationsInputs(prisma, now).then((i) => evaluateOperations(i, now)).catch(() => null),
+  ]);
+  return NextResponse.json({ ...report, filters, programs, operations });
 }

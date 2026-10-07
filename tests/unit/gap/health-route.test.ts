@@ -7,7 +7,10 @@ vi.mock('@/lib/gap/flags', () => ({ assertGapEnabled: () => null }));
 const load = vi.fn();
 vi.mock('@/lib/gap/health/load', () => ({ loadHealthInputs: (...a: unknown[]) => load(...a) }));
 
+import { NextRequest } from 'next/server';
 import { GET } from '@/app/api/gap/health/route';
+
+const healthReq = () => new NextRequest('http://localhost/api/gap/health');
 
 beforeEach(() => {
   load.mockReset();
@@ -17,7 +20,7 @@ beforeEach(() => {
 describe('GET /api/gap/health', () => {
   it('no session: 401, nothing probed', async () => {
     session.value = null;
-    expect((await GET()).status).toBe(401);
+    expect((await GET(healthReq())).status).toBe(401);
     expect(load).not.toHaveBeenCalled();
   });
 
@@ -29,7 +32,7 @@ describe('GET /api/gap/health', () => {
       sender: { configured: true, mailbox: 'casey@yardflow.ai' },
       routing: { lastRunAt: new Date() },
     });
-    const res = await GET();
+    const res = await GET(healthReq());
     expect(res.status).toBe(200);
     expect(res.headers.get('cache-control')).toBe('no-store');
     const body = await res.json();

@@ -75,7 +75,8 @@ describe('GET /api/gap/learning', () => {
   it('a session returns the report plus the applied filters and the program list', async () => {
     const res = await GET(get());
     expect(res.status).toBe(200);
-    expect(await res.json()).toEqual({ ...REPORT, filters: { program: null, from: null, to: null }, programs: [] });
+    // R65: Casey's decisions and outcomes ride with the report (every read soft: unreadable here, never an error).
+    expect(await res.json()).toEqual({ ...REPORT, filters: { program: null, from: null, to: null }, programs: [], operations: expect.objectContaining({ state: expect.any(String), failures: expect.any(Array), decisions: expect.any(Array) }) });
   });
 
   it('an agent bearer token authorizes without a session', async () => {
