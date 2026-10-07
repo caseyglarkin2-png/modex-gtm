@@ -18,7 +18,7 @@ import { existingRevisionFor } from '../hypothesis/current-revision';
 import { proposeHypothesis, transitionHypothesis, updateDraftNarrative } from '../hypothesis/service';
 import { GATE_SIGNAL_SELECT, outreachFactRefusal, type GateSignal, type OutreachFactRefusal } from '../research/evidence-gate';
 import { isProblemFamily, type ProblemFamily } from '../taxonomy';
-import { proposeFamilyFor } from './propose-family';
+import { approachFamilyDefault, proposeFamilyFor } from './propose-family';
 import type { EvidenceApproach } from '../research/approach-policy';
 import { sensitivityOf } from '../research/sensitivity';
 import { currentnessLine, factCurrentness } from '../research/currentness';
@@ -96,6 +96,11 @@ export async function draftThesisFromFact(prisma: PrismaLike, input: DraftFromFa
     if (!isProblemFamily(input.problemFamily)) return { ok: false, reason: 'invalid_family' };
     family = input.problemFamily;
     familyBasis = 'chosen by you';
+  } else if (approach !== 'event_led') {
+    // Item 3: a job- or procurement-led thesis's copy is chosen by its approach program, so the family is never asked.
+    const d = approachFamilyDefault(fact.evidence_text ?? '');
+    family = d.family;
+    familyBasis = d.basis;
   } else {
     const proposed = proposeFamilyFor(fact.evidence_text ?? '');
     if (proposed.family) {
@@ -135,8 +140,10 @@ export async function draftThesisFromFact(prisma: PrismaLike, input: DraftFromFa
       familyBasis = familyBasis ?? 'recorded on the draft';
     }
   } else {
-    // The person already has open thesis work in this family: that is the thesis to review, never a twin.
-    if (family !== 'unmapped') {
+    // The person already has open thesis work in this family: that is the thesis to review, never a twin. Item 3: an
+    // event-led thesis only; a job- or procurement-led thesis's family is recorded, not its story (another posting is
+    // another story, never a twin of an event-led thesis that shares the general family).
+    if (family !== 'unmapped' && approach === 'event_led') {
       const already = await existingRevisionFor(prisma, { accountName: input.accountName, personaId: input.personaId, problemFamily: family });
       if (already && (already.status === 'draft' || already.status === 'review_required')) {
         return { ok: true, hypothesisId: already.hypothesisId, status: already.status, existing: true, existingVia: 'open_work', family, familyBasis, preparation: already.status === 'review_required' ? 'submitted' : 'draft', missing: [], submitRefusal: null };

@@ -56,6 +56,8 @@ describe.skipIf(!RUN)('R03: the Pepsi draft, review and use transaction (scratch
   let stub: http.Server;
   let staleNewsId = '';
   let sinkDir = '';
+  // Counts below are scoped to THIS run (an earlier run of this file on the same database previewed an email).
+  const runStart = new Date();
 
   beforeAll(async () => {
     for (const f of ['GAP_OS_ENABLED', 'GAP_HYPOTHESIS_ENABLED', 'GAP_ROUTING_ENABLED', 'GAP_MESSAGE_COMPILER_ENABLED', 'GAP_REPLY_CLASSIFICATION_ENABLED']) process.env[f] = 'true';
@@ -214,8 +216,8 @@ describe.skipIf(!RUN)('R03: the Pepsi draft, review and use transaction (scratch
     expect(anchor.primary?.observation).toMatch(/Tulsa/);
     expect(anchor.pending).toEqual([]);
     // No email was drafted or sent by any of this.
-    expect(await prisma.emailLog.count()).toBe(0);
-    expect(await prisma.gapAuditEvent.count({ where: { OR: [{ kind: { contains: 'draft' } }, { kind: { contains: 'send' } }] } })).toBe(0);
+    expect(await prisma.emailLog.count({ where: { created_at: { gte: runStart } } })).toBe(0);
+    expect(await prisma.gapAuditEvent.count({ where: { created_at: { gte: runStart }, OR: [{ kind: { contains: 'draft' } }, { kind: { contains: 'send' } }] } })).toBe(0);
   }, 180_000);
 
   it('item 2a: the routed card for Tom on the 75-day-old Tulsa story PREVIEWS through the real send route (the compiler reads the gate\'s clock)', async () => {
@@ -267,6 +269,26 @@ describe.skipIf(!RUN)('R03: the Pepsi draft, review and use transaction (scratch
     expect(events.map((e) => e.action)).toEqual(['propose', 'edit', 'submit']);
   }, 180_000);
 
+  it('item 3: the stranded production shape (no source_ref, unmapped) posted with the page control payload (problemFamily null) is ADOPTED and its family DERIVED, then submitted', async () => {
+    const { proposeHypothesis } = await import('@/lib/gap/hypothesis/service');
+    const { POST } = await import('@/app/api/gap/story/draft/route');
+    const { citedQuote } = await import('@/lib/gap/research/propose');
+    const kay = pepsi.people.find((p) => p.name.startsWith('Kay'))!;
+    const fact = pepsi.facts.find((f) => f.label === 'tulsa')!;
+    const sig = await prisma.prospectingSignal.findUnique({ where: { id: fact.id }, select: { title: true, evidence_text: true } });
+    const observation = citedQuote(sig!.title, sig!.evidence_text!, fact.id, pepsi.name);
+    const legacy = await proposeHypothesis(prisma, { accountName: pepsi.name, primaryPersonaId: kay.id, persona: 'transportation', problemFamily: 'unmapped', observation, problemHypothesis: 'My guess is that this change moves load onto the gates, yards and docks they run.', rootCauseHypotheses: [], impactHypotheses: [], falsificationQuestions: ['How do trailers get checked in today?'], whatANoMeans: null, confidence: 40, signalIds: [fact.id], createdBy: 'casey@yardflow.ai' });
+    if (!legacy.ok) throw new Error(JSON.stringify(legacy));
+    const before = await prisma.prospectingHypothesis.count({ where: { account_name: pepsi.name } });
+    const res = await POST(req('/api/gap/story/draft', 'POST', draftBody(fact.id, kay.id, observation)));
+    const body = (await res.json()) as { hypothesisId?: string; existing?: boolean; preparation?: string; family?: string; familyBasis?: string | null };
+    expect(res.status, JSON.stringify(body)).toBe(200);
+    expect(body).toMatchObject({ hypothesisId: legacy.id, existing: true, preparation: 'submitted', family: 'hidden_capacity', familyBasis: expect.stringMatching(/closure or consolidation/) });
+    expect(await prisma.prospectingHypothesis.count({ where: { account_name: pepsi.name } })).toBe(before);
+    const row = await prisma.prospectingHypothesis.findUnique({ where: { id: legacy.id }, select: { status: true, problem_family: true, source_ref: true } });
+    expect(row).toEqual({ status: 'review_required', problem_family: 'hidden_capacity', source_ref: `anchor:${fact.id}:p${kay.id}` });
+  }, 180_000);
+
   it('a fact the send gate would refuse is never drafted (the layoff story is sensitive and not for outreach)', async () => {
     const { POST } = await import('@/app/api/gap/story/draft/route');
     const tom = pepsi.people.find((p) => p.name.startsWith('Tom'))!;
@@ -292,15 +314,16 @@ describe.skipIf(!RUN)('R03: the Pepsi draft, review and use transaction (scratch
     const { PATCH } = await import('@/app/api/gap/hypotheses/[id]/route');
     const { registerSignal } = await import('@/lib/gap/signals/registry');
     const { VERIFIED_EXCERPT } = await import('@/lib/gap/research/evidence-gate');
-    const kay = pepsi.people.find((p) => p.name.startsWith('Kay'))!;
+    // Tom: his Tulsa thesis is in use (not under review), so the Columbus draft is a new proposal, never his open work.
+    const tom = pepsi.people.find((p) => p.name.startsWith('Tom'))!;
     const columbus = await registerSignal(prisma, { accountName: pepsi.name, sourceKind: 'evidence_record', sourceId: `corpus:${pepsi.slug}:columbus`, type: 'site_expansion' as never, title: `${pepsi.name} to open Columbus distribution center`, sourceType: 'public_secondary', evidenceUrl: `https://news.example.com/${pepsi.slug}/columbus`, evidenceText: `${pepsi.name} is opening a new distribution center in Columbus, Ohio in 2027.`, externalOk: true, observedAt: new Date(Date.now() - 3 * 86_400_000), confidence: 80, metadata: { verified: VERIFIED_EXCERPT }, registeredBy: 'casey@freightroll.com' });
     const { anchor: before } = await pageRead();
     const d = before.draftable.find((x) => x.factId === columbus.id);
     expect(d, JSON.stringify(before.draftable.map((x) => x.story))).toBeDefined();
-    const first = await POST(req('/api/gap/story/draft', 'POST', draftBody(columbus.id, kay.id, d!.proposedObservation)));
+    const first = await POST(req('/api/gap/story/draft', 'POST', draftBody(columbus.id, tom.id, d!.proposedObservation)));
     const drafted = (await first.json()) as { hypothesisId?: string; preparation?: string; error?: string };
     expect(first.status, JSON.stringify(drafted)).toBe(201);
-    const res = await PATCH(req(`/api/gap/hypotheses/${drafted.hypothesisId}`, 'PATCH', { action: 'withdraw', reason: 'not this story: a Columbus opening is not a yard question for Kay' }), ctx(drafted.hypothesisId!));
+    const res = await PATCH(req(`/api/gap/hypotheses/${drafted.hypothesisId}`, 'PATCH', { action: 'withdraw', reason: 'not this story: a Columbus opening is not a yard question for Tom' }), ctx(drafted.hypothesisId!));
     expect(res.status, JSON.stringify(await res.clone().json())).toBe(200);
     expect((await prisma.prospectingHypothesis.findUnique({ where: { id: drafted.hypothesisId! }, select: { status: true } }))?.status).toBe('rejected');
     const { anchor: after } = await pageRead();
@@ -308,7 +331,7 @@ describe.skipIf(!RUN)('R03: the Pepsi draft, review and use transaction (scratch
     expect(after.tooOld.map((x) => x.factId)).not.toContain(columbus.id);
     expect(after.pending.map((x) => x.factId)).not.toContain(columbus.id);
     const countBefore = await prisma.prospectingHypothesis.count({ where: { account_name: pepsi.name } });
-    const again = await POST(req('/api/gap/story/draft', 'POST', draftBody(columbus.id, kay.id, d!.proposedObservation)));
+    const again = await POST(req('/api/gap/story/draft', 'POST', draftBody(columbus.id, tom.id, d!.proposedObservation)));
     const body = (await again.json()) as { preparation?: string; error?: string; detail?: string };
     expect(again.status, JSON.stringify(body)).toBe(409);
     expect(body).toEqual({ error: 'story_set_aside', detail: 'You set this story aside (Not this story): GAP will not draft it again. A newer fact about it is a new story.' });

@@ -38,10 +38,27 @@ describe('proposeFamilyFor', () => {
   it('a divestiture abroad is not everything-is-hidden-capacity: no physical change, no family', () => {
     expect(proposeFamilyFor('General Mills entered into an agreement to sell its business in Brazil.').family).toBeNull();
   });
-  it('the seven choices carry the catalog problem line, for the one question', () => {
+  it('the choices (item 3: only the families with event-led copy) carry the catalog problem line, for the one question', () => {
     const c = familyChoices();
-    expect(c.map((x) => x.family)).toEqual([...PROBLEM_FAMILIES]);
+    expect(c.map((x) => x.family)).toEqual(['network_standardization', 'hidden_capacity', 'automation_readiness']);
+    expect(PROBLEM_FAMILIES.length).toBeGreaterThan(c.length);
     expect(c.find((x) => x.family === 'hidden_capacity')?.problem).toMatch(/Physical handoffs/);
     expect(c.every((x) => !x.label.includes('_'))).toBe(true);
+  });
+});
+
+describe('item 3: no mandatory family selection', () => {
+  it('the choices are exactly the families with event-led copy (parity with the seeded families)', async () => {
+    const { COPY_FAMILIES, familyChoices } = await import('@/lib/gap/story/propose-family');
+    const { SEED_FAMILIES } = await import('@/lib/gap/sequences/families');
+    expect([...COPY_FAMILIES].sort()).toEqual([...new Set(SEED_FAMILIES.map((f) => f.problemFamily))].sort());
+    expect(familyChoices().map((c) => c.family)).toEqual([...COPY_FAMILIES]);
+  });
+  it('the question preselects a suggestion (the derived family, else the general case, with why); a job-led thesis is never asked', async () => {
+    const { suggestedFamilyFor, approachFamilyDefault, DEFAULT_FAMILY } = await import('@/lib/gap/story/propose-family');
+    expect(suggestedFamilyFor('Kroger will close its Dallas distribution center.')).toMatchObject({ family: 'hidden_capacity' });
+    expect(suggestedFamilyFor('Kroger named a new chief financial officer.')).toEqual({ family: DEFAULT_FAMILY, basis: 'GAP could not tell from the fact; hidden capacity is the general case for a physical change. Pick another if it fits better.' });
+    expect(approachFamilyDefault('Tyson is hiring a Yard Operations Supervisor at its Amarillo distribution center.')).toMatchObject({ family: expect.any(String), basis: expect.any(String) });
+    expect(approachFamilyDefault('We are hiring a supervisor.')).toEqual({ family: DEFAULT_FAMILY, basis: 'a job- or procurement-led thesis takes its copy from the posting approach; the family is the general case and is not asked' });
   });
 });

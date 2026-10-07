@@ -77,6 +77,24 @@ describe('item 2: drafting a story that was set aside or is in use', () => {
   });
 });
 
+describe('item 3: the family question is one confirm, posts the person of the proposal, and can be set aside', () => {
+  it('an incomplete proposal preselects the suggestion, offers only families with copy and Not this story, and posts the person of the proposal', async () => {
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce({ ok: true, status: 200, json: async () => ({ ok: true, hypothesisId: 'h-kay', status: 'review_required', existing: true, family: 'hidden_capacity', familyBasis: 'chosen by you', preparation: 'submitted', missing: [], submitRefusal: null }) } as Response);
+    const incomplete = { ...pendingItem, hypothesisId: 'h-kay', status: 'draft' as const, family: 'unmapped', familyKnown: false, gate: 'not_judged' as const, suggestedFamily: 'hidden_capacity', suggestedBasis: 'a site closure or consolidation moves load onto the physical handoffs that remain', personaId: 2, personName: 'Kay Scratch', personTitle: 'Senior Director - Transportation' };
+    render(<OutreachAnchorView accountName="PepsiCo" anchor={{ ...anchor, pending: [incomplete] }} coldTouchAllowed />);
+    const select = screen.getByTestId('anchor-pending-family-select') as HTMLSelectElement;
+    expect(select.value).toBe('hidden_capacity');
+    expect([...select.options].map((o) => o.value)).toEqual(['network_standardization', 'hidden_capacity', 'automation_readiness']);
+    expect(screen.getByTestId('anchor-pending-family-form').textContent).toMatch(/Suggested: hidden capacity \(a site closure/);
+    expect(screen.getByTestId('anchor-pending-withdraw')).toHaveTextContent('Not this story');
+    fireEvent.click(screen.getByTestId('anchor-pending-set-family'));
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(1));
+    const body = JSON.parse(String(fetchMock.mock.calls[0][1]!.body));
+    // The anchor's chosen person is Karen (1); the proposal is Kay's (2): the post carries Kay.
+    expect(body).toMatchObject({ factId: 'f-tulsa', personaId: 2, problemFamily: 'hidden_capacity' });
+  });
+});
+
 describe('the outreach anchor block', () => {
   it('shows the primary anchor and why they care in the open; the supporting fact, BEST PROOF (ours) and DO NOT USE sit behind one disclosure; an unusable thesis has no Use button', () => {
     render(<OutreachAnchorView accountName="PepsiCo" anchor={anchor} coldTouchAllowed />);

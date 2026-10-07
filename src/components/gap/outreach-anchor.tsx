@@ -139,12 +139,17 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
     setProblem(draftDefaultsFor(d.claimClass).problem);
   }
 
-  /** The one draft call: gates the fact, derives or takes the family, one draft per fact and person, submits when complete. */
-  async function postDraft(factId: string, text: { observation: string; problem: string }, problemFamily: string | null, claimClass: string | null | undefined): Promise<DraftResponse | null> {
+  /**
+   * The one draft call: gates the fact, derives or takes the family, one draft per fact and person, submits when
+   * complete. Item 3: a pending proposal posts ITS OWN person (`forPerson`), never the anchor's chosen one, so answering
+   * Kay's question never mints a draft for Tom.
+   */
+  async function postDraft(factId: string, text: { observation: string; problem: string }, problemFamily: string | null, claimClass: string | null | undefined, forPerson?: { personaId: number | null; title: string | null }): Promise<DraftResponse | null> {
+    const who = forPerson ?? (person ? { personaId: person.personaId ?? null, title: person.title ?? null } : null);
     const res = await fetch('/api/gap/story/draft', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(storyDraftPayload({ accountName, factId, claimClass, proposedObservation: text.observation, person: person ? { personaId: person.personaId ?? null, title: person.title ?? null } : null, problem: text.problem, problemFamily })),
+      body: JSON.stringify(storyDraftPayload({ accountName, factId, claimClass, proposedObservation: text.observation, person: who, problem: text.problem, problemFamily })),
     });
     const body = (await res.json().catch(() => ({}))) as DraftResponse;
     if (!res.ok || !body.hypothesisId) {
@@ -183,7 +188,7 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
 
   /** The one question on an incomplete proposal: the problem family. Same service, same draft, then review. */
   async function setFamily(item: AnchorPending) {
-    const family = familyPick[item.hypothesisId];
+    const family = familyPick[item.hypothesisId] ?? item.suggestedFamily ?? '';
     if (!family) {
       announce('alert', 'Choose the problem this fact points at first.');
       return;
@@ -191,7 +196,7 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
     setNote(null);
     setBusy({ kind: 'family', id: item.hypothesisId });
     try {
-      const body = await postDraft(item.factId, { observation: item.observationRaw, problem: item.problem }, family, item.claimClass);
+      const body = await postDraft(item.factId, { observation: item.observationRaw, problem: item.problem }, family, item.claimClass, item.personaId != null ? { personaId: item.personaId, title: item.personTitle ?? null } : undefined);
       if (!body) return;
       announce('status', describe(body));
       router.refresh();
@@ -345,16 +350,19 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
                 ) : !item.familyKnown ? (
                   <div className="flex flex-col gap-2 sm:flex-row sm:items-end" data-testid="anchor-pending-family-form">
                     <label className="flex min-w-0 flex-1 flex-col gap-1 text-xs">
-                      <span>Which problem does this fact point at?</span>
-                      <select className="min-h-11 rounded-md border border-[var(--border)] bg-transparent px-2 text-sm" value={familyPick[item.hypothesisId] ?? ''} onChange={(e) => setFamilyPick((m) => ({ ...m, [item.hypothesisId]: e.target.value }))} data-testid="anchor-pending-family-select">
-                        <option value="">Choose one</option>
+                      <span>Which problem does this fact point at? Suggested: {item.suggestedFamily ? familyLabel(item.suggestedFamily) : 'none'}{item.suggestedBasis ? ` (${item.suggestedBasis})` : ''}</span>
+                      <select className="min-h-11 rounded-md border border-[var(--border)] bg-transparent px-2 text-sm" value={familyPick[item.hypothesisId] ?? item.suggestedFamily ?? ''} onChange={(e) => setFamilyPick((m) => ({ ...m, [item.hypothesisId]: e.target.value }))} data-testid="anchor-pending-family-select">
+                        {item.suggestedFamily ? null : <option value="">Choose one</option>}
                         {familyChoices().map((c) => (
                           <option key={c.family} value={c.family}>{c.label}: {c.problem}</option>
                         ))}
                       </select>
                     </label>
                     <button type="button" className={PRIMARY} disabled={busy !== null} onClick={() => void setFamily(item)} data-testid="anchor-pending-set-family">
-                      {mine && busy?.kind === 'family' ? 'Submitting...' : 'Set the problem and submit for review'}
+                      {mine && busy?.kind === 'family' ? 'Submitting...' : 'Submit for review with this problem'}
+                    </button>
+                    <button type="button" className={OUTLINE} disabled={busy !== null} onClick={() => void notThisStory(item)} data-testid="anchor-pending-withdraw">
+                      {mine && busy?.kind === 'withdraw' ? 'Setting aside...' : 'Not this story'}
                     </button>
                   </div>
                 ) : (

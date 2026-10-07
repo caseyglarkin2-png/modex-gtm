@@ -13,6 +13,12 @@
  *   3. else NO family: preparation is incomplete and the seller is asked ONE question (which problem it points at)
  *      before the thesis can be submitted. Never a silent default, never `unmapped` on an advertised submit path.
  *
+ * Batch item 3 (mandate section 8, no mandatory family selection; audit at 31f09c71): the question offers only the
+ * families that HAVE event-led copy (`COPY_FAMILIES`, the seeded families' problem families; a choice without copy
+ * dead-ended at no_version), with a SUGGESTED default preselected and its basis said, so answering is one confirm,
+ * never a hunt; and a job- or procurement-led thesis is never asked at all (its copy is chosen by its approach
+ * program): it takes the general family with that basis stated (`approachFamilyDefault`).
+ *
  * Pure; pinned by tests/unit/gap/propose-family.test.ts.
  */
 import { classifyFamilies, isProblemFamily, PROBLEM_FAMILY_CATALOG, type ProblemFamily } from '../taxonomy';
@@ -61,7 +67,30 @@ export function label(family: ProblemFamily | string): string {
   return family.replace(/_/g, ' ');
 }
 
-/** The seven families with their one-line problem, for the one question a seller answers when nothing can be derived. */
+/**
+ * The problem families that HAVE event-led copy (sequences/families.ts SEED_FAMILIES' problem families; parity pinned
+ * by tests/unit/gap/propose-family.test.ts). Client-safe: a constant, not the seed module.
+ */
+export const COPY_FAMILIES: readonly ProblemFamily[] = ['network_standardization', 'hidden_capacity', 'automation_readiness'];
+
+/** The general case for a physical change: the default suggested when the fact names no family. */
+export const DEFAULT_FAMILY: ProblemFamily = 'hidden_capacity';
+
+/** The families a seller may choose for an event-led thesis: only those with copy, each with its one-line problem. */
 export function familyChoices(): Array<{ family: ProblemFamily; label: string; problem: string }> {
-  return (Object.keys(PROBLEM_FAMILY_CATALOG) as ProblemFamily[]).map((family) => ({ family, label: label(family), problem: PROBLEM_FAMILY_CATALOG[family].problem }));
+  return COPY_FAMILIES.map((family) => ({ family, label: label(family), problem: PROBLEM_FAMILY_CATALOG[family].problem }));
+}
+
+/** The family preselected on the one question: the derived one, else the general case, with the basis said. */
+export function suggestedFamilyFor(factText: string): { family: ProblemFamily; basis: string } {
+  const p = proposeFamilyFor(factText);
+  if (p.family && COPY_FAMILIES.includes(p.family)) return { family: p.family, basis: p.basis };
+  return { family: DEFAULT_FAMILY, basis: 'GAP could not tell from the fact; hidden capacity is the general case for a physical change. Pick another if it fits better.' };
+}
+
+/** A job- or procurement-led thesis takes its copy from its approach program: the family is recorded, never asked. */
+export function approachFamilyDefault(factText: string): { family: ProblemFamily; basis: string } {
+  const p = proposeFamilyFor(factText);
+  if (p.family) return { family: p.family, basis: p.basis };
+  return { family: DEFAULT_FAMILY, basis: 'a job- or procurement-led thesis takes its copy from the posting approach; the family is the general case and is not asked' };
 }

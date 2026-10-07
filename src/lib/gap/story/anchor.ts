@@ -33,6 +33,7 @@ import { isPhysicalOpsFact } from '../research/facts';
 import { citedQuote } from '../research/propose';
 import { sameIdea } from '../context/same-idea';
 import { currentnessLine } from '../research/currentness';
+import { suggestedFamilyFor } from './propose-family';
 import type { AccountStory, StoryRow, StorySentence, StoryTag } from './story';
 
 export interface AnchorPerson {
@@ -113,8 +114,13 @@ export interface AnchorPending {
   wouldProveWrong: string[];
   family: string;
   familyKnown: boolean;
+  /** Item 3: preselected on the one question (the derived family, else the general case), with why. */
+  suggestedFamily?: string | null;
+  suggestedBasis?: string | null;
   personaId: number | null;
   personName: string | null;
+  /** Item 3: the proposal's own person's title: answering the question posts THIS person, never the anchor's. */
+  personTitle?: string | null;
   /** Would the send gate let it out (read from the loader's sendable set; a draft is not judged until review). */
   gate: 'sendable' | 'refused' | 'not_judged';
   /** R35: the cited fact's claim class (a posting keeps its own draft text on a resubmit). */
@@ -367,8 +373,10 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
       wouldProveWrong: raw.falsification,
       family,
       familyKnown: family !== 'unmapped',
+      ...(family === 'unmapped' ? (() => { const s = suggestedFamilyFor(fact.quote); return { suggestedFamily: s.family, suggestedBasis: s.basis }; })() : { suggestedFamily: null, suggestedBasis: null }),
       personaId: raw.personaId ?? null,
       personName: who?.name ?? null,
+      personTitle: who?.title ?? null,
       gate: stale ? 'refused' : raw.status === 'draft' || !i.sendable ? 'not_judged' : i.sendable.has(raw.id) ? 'sendable' : 'refused',
       claimClass: fact.claimClass ?? null,
       stale,

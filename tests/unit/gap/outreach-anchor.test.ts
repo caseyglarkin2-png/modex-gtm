@@ -219,6 +219,12 @@ describe('the outreach anchor (Option A)', () => {
     const listed = anchorFor(inputs({ hypotheses: [hypA], setAsideFactIds: ['f-denver'] }), 1).anchor;
     expect(listed.draftable.map((d) => d.factId)).not.toContain('f-denver');
   });
+  it('item 3: an incomplete proposal carries a suggested family (preselected, with why) and the title of its OWN person, never that of the anchor person', () => {
+    const { anchor } = anchorFor(inputs({ hypotheses: [hypA, hypB, { ...hypDraft, problemFamily: 'unmapped', personaId: 2 }] }), 1);
+    expect(anchor.pending[0]).toMatchObject({ familyKnown: false, suggestedFamily: 'hidden_capacity', suggestedBasis: expect.any(String), personaId: 2, personName: 'Shawn Pierce', personTitle: 'Sr Director Transportation Strategy' });
+    const known = anchorFor(inputs({ hypotheses: [hypA, hypB, { ...hypDraft, status: 'review_required', problemFamily: 'hidden_capacity', personaId: 2 }] }), 1).anchor;
+    expect(known.pending[0]).toMatchObject({ suggestedFamily: null, suggestedBasis: null });
+  });
   it('R30/R31: a job claim (its class on the fact) is a draftable story; the draft the service makes of it carries the job/procurement approach, never the physical words', () => {
     const job = { id: 'f-job', quote: 'PepsiCo is now hiring a Transportation Coordinator in Dallas; apply by October 30.', url: 'https://jobs.pepsico.com/yard-ops-dallas', title: 'PepsiCo Careers', publishedAt: '2026-09-20T00:00:00Z', expiresAt: null, continuity: 'ongoing_state' as const, currentness: null, claimClass: 'JOB_POSTING' };
     const { anchor } = anchorFor(inputs({ facts: [factA, factB, job], hypotheses: [hypA, hypB] }), 1);

@@ -105,7 +105,7 @@ describe.skipIf(!RUN)('R34: a job-led thesis, posting to sink (scratch database,
 
   const sinkFiles = () => readdirSync(sinkDir).map((f) => JSON.parse(readFileSync(join(sinkDir, f), 'utf8')) as { outcome: string; to: string; subject: string | null; raw: string | null; kind: string });
 
-  it('the draft from the posting is a job-led thesis, submitted for review in one call', async () => {
+  it('the draft from the posting is a job-led thesis, submitted for review in one call, with NO family question (item 3: the page control posts problemFamily null)', async () => {
     const { POST } = await import('@/app/api/gap/story/draft/route');
     const { citedQuote } = await import('@/lib/gap/research/propose');
     const res = await POST(req('/api/gap/story/draft', 'POST', {
@@ -117,11 +117,12 @@ describe.skipIf(!RUN)('R34: a job-led thesis, posting to sink (scratch database,
       problemHypothesis: 'My guess is that the yards are where the day gets lost at the Amarillo distribution center.',
       falsificationQuestions: ['Is the posting still open?'],
       whatANoMeans: 'If the role is filled or about something else, there is no yard question here: the thesis closes.',
-      problemFamily: 'yard_state_integrity',
+      problemFamily: null,
     }));
-    const body = (await res.json()) as { ok?: boolean; hypothesisId?: string; preparation?: string; error?: string; detail?: string };
+    const body = (await res.json()) as { ok?: boolean; hypothesisId?: string; preparation?: string; missing?: string[]; familyBasis?: string | null; error?: string; detail?: string };
     expect(res.status, JSON.stringify(body)).toBeLessThan(300);
-    expect(body.preparation, JSON.stringify(body)).toBe('submitted');
+    expect([body.preparation, body.missing], JSON.stringify(body)).toEqual(['submitted', []]);
+    expect(body.familyBasis).toMatch(/takes its copy from the posting approach|the fact's own words|moves load|adds load|new site/);
     hypothesisId = body.hypothesisId!;
     const h = await prisma.prospectingHypothesis.findUnique({ where: { id: hypothesisId }, select: { status: true, metadata: true } });
     expect(h?.status).toBe('review_required');
