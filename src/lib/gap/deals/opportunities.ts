@@ -106,6 +106,24 @@ export function bidScope(b: Pick<OpportunityBid, 'metadata' | 'contactEmail'>, r
   return readScope(bidScopeInput(b.metadata), refs, { contactId: p?.hubspotContactId ?? null, who: p?.name ?? null }, closed);
 }
 
+/**
+ * Sprint 5 review (R50): the scope label of each buyer input for the account-level views (NOW, the brief, the story):
+ * with a deal at the account (open or closed) every input says its opportunity (the same rule as the deal brief); with
+ * none, or when the deals could not be read, null (nothing to tell apart; nothing claimed).
+ */
+export function bidScopeLabeler(
+  opportunity: { status: string; deals: ReadonlyArray<{ id?: string; name: string | null; stage: string | null; contactIds?: readonly string[] }>; closed?: ReadonlyArray<{ id: string; name: string | null; won: boolean | null; closedAt: string | null }> } | null,
+  people: readonly OpportunityPerson[],
+): (b: { metadata: unknown; contactEmail: string | null }) => string | null {
+  if (!opportunity || opportunity.status === 'UNKNOWN') return () => null;
+  const open = opportunity.deals.filter((d): d is typeof d & { id: string } => !!d.id);
+  const closed = (opportunity.closed ?? []).map((c) => ({ id: c.id, name: c.name, won: c.won, closedAt: c.closedAt }));
+  if (!open.length && !closed.length) return () => null;
+  const refs = dealRefs(open.map((d) => ({ id: d.id, name: d.name, stage: d.stage, contactIds: [...(d.contactIds ?? [])] })));
+  const personOf = personIndex(people);
+  return (b) => bidScope({ metadata: b.metadata, contactEmail: (b.contactEmail ?? '').toLowerCase() }, refs, personOf, closed).label;
+}
+
 export function buildOpportunities(input: {
   accountName: string;
   deals: readonly OpportunityDealInput[];

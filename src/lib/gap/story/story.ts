@@ -29,6 +29,7 @@ import { sameIdea } from '../context/same-idea';
 import { sellerRelevance } from '../research/continuity';
 import type { PursuitState } from '../pursuit/state';
 import type { StoryTouch } from './touches';
+import { isCostBid } from '../bid/cost';
 
 export type StoryTag = SellerTag;
 
@@ -206,6 +207,8 @@ export function projectStory(i: StoryInput): AccountStory {
     return true;
   };
   const line = (l: NowLine) => fromLine(l, i.accountName);
+  // Sprint 5 review (R50): a buyer sentence says whose words and, at an account with deals, which opportunity.
+  const saidBy = (b: { who: string | null; at: string; scope?: string | null }) => `buyer said, ${b.who ?? 'the buyer'}, ${day(b.at)}${b.scope ? `; ${b.scope}` : ''}`;
   const rows: StoryRow[] = [];
 
   // WHAT HAS HAPPENED BETWEEN US: the last person touched with their title, what came back, the count.
@@ -214,7 +217,7 @@ export function projectStory(i: StoryInput): AccountStory {
   // THEIR GOAL: only in the buyer's words (a future-state or priority input); a program statement is a change.
   const goalBid = i.inputs.bids.find((b) => b.type === 'future_state' || b.type === 'priority');
   if (goalBid) {
-    rows.push(row('goal', [{ text: sentence(goalBid.summary), tag: 'Buyer said', basis: `buyer said, ${goalBid.who ?? 'the buyer'}, ${day(goalBid.at)}`, basisIds: [`bid:${goalBid.id}`] }]));
+    rows.push(row('goal', [{ text: sentence(goalBid.summary), tag: 'Buyer said', basis: saidBy(goalBid), basisIds: [`bid:${goalBid.id}`] }]));
     used.add(`bid:${goalBid.id}`);
   }
 
@@ -261,10 +264,11 @@ export function projectStory(i: StoryInput): AccountStory {
     rows.push(row('network', [{ text: sentence(top.inference), tag: 'Our read', basis: `our inference from: ${obs.length > 110 ? `${obs.slice(0, 107).trimEnd()}...` : obs}${review}`, basisIds: [`hypothesis:${top.id}`, ...(top.observation.verified && i.inputs.facts.some((f) => f.quote === top.observation.text) ? [`evidence:${i.inputs.facts.find((f) => f.quote === top.observation.text)!.id}`] : [])] }]));
   }
   const problemBid = i.inputs.bids.find((b) => b.type === 'business_problem');
-  const impactBid = i.inputs.bids.find((b) => b.type === 'impact');
+  // Sprint 5 review: what it costs them is an impact, or a number in money or detention terms (bid/cost.ts).
+  const impactBid = i.inputs.bids.find((b) => b.type === 'impact') ?? i.inputs.bids.find((b) => isCostBid(b));
   if (problemBid) {
-    const s: StorySentence[] = [{ text: sentence(problemBid.summary), tag: 'Buyer said', basis: `buyer said, ${problemBid.who ?? 'the buyer'}, ${day(problemBid.at)}`, basisIds: [`bid:${problemBid.id}`] }];
-    if (impactBid) s.push({ text: sentence(impactBid.summary), tag: 'Buyer said', basis: `buyer said, ${impactBid.who ?? 'the buyer'}, ${day(impactBid.at)}`, basisIds: [`bid:${impactBid.id}`] });
+    const s: StorySentence[] = [{ text: sentence(problemBid.summary), tag: 'Buyer said', basis: saidBy(problemBid), basisIds: [`bid:${problemBid.id}`] }];
+    if (impactBid) s.push({ text: sentence(impactBid.summary), tag: 'Buyer said', basis: saidBy(impactBid), basisIds: [`bid:${impactBid.id}`] });
     rows.push(row('yard', s));
   } else if (top) {
     // "Wrong if: If trailers..." doubles the word; the clause starts after it.
@@ -274,7 +278,7 @@ export function projectStory(i: StoryInput): AccountStory {
 
   // WHAT WE NEED TO LEARN: one Unknown line naming what the buyer has not said (the ASK slot carries the question).
   const bid = (t: string) => i.inputs.bids.some((b) => b.type === t);
-  const missing = [!bid('current_state') ? 'how they run the yards today' : null, !bid('impact') ? 'what it costs them' : null, !bid('root_cause') && !top?.rootCause ? 'why it happens' : null].filter((x): x is string => !!x);
+  const missing = [!bid('current_state') ? 'how they run the yards today' : null, !i.inputs.bids.some((b) => isCostBid(b)) ? 'what it costs them' : null, !bid('root_cause') && !top?.rootCause ? 'why it happens' : null].filter((x): x is string => !!x);
   if (missing.length) {
     const list = missing.length === 1 ? missing[0] : `${missing.slice(0, -1).join(', ')} or ${missing[missing.length - 1]}`;
     rows.push(row('learn', [{ text: `Nothing from the buyer yet on ${list}.`, tag: 'Unknown', basis: 'no buyer input on record', basisIds: [] }]));

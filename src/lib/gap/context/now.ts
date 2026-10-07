@@ -29,6 +29,7 @@ export type SellerTag = 'Buyer said' | 'Checked' | 'Unverified' | 'Our read' | '
 /** Names stored all lower case ("adel ghanem") read as names. Anything with a capital is left as written. */
 export { displayName } from '../people/display-name';
 import { displayName } from '../people/display-name';
+import { isCostBid } from '../bid/cost';
 
 export interface NowLine {
   /** Identity for deduplication (a fact id, a BID id, else the text). */
@@ -291,7 +292,7 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   const gap: NowView['gap'] = [
     { element: 'Current state', state: bidOf('current_state') ? 'Buyer said' : 'Unknown' },
     { element: 'Problem', state: bidOf('business_problem') ? 'Buyer said' : top ? 'Our read' : 'Unknown' },
-    { element: 'Impact', state: bidOf('impact') ? 'Buyer said' : 'Unknown' },
+    { element: 'Impact', state: i.bids.some((b) => isCostBid(b)) ? 'Buyer said' : 'Unknown' },
     { element: 'Root cause', state: bidOf('root_cause') ? 'Buyer said' : top?.rootCause ? 'Our read' : 'Unknown' },
   ];
   const cs = bidOf('current_state');

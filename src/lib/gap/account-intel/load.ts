@@ -24,6 +24,7 @@ import { accountEmploymentContext, loadEmployment, loadHubSpotContactRoleEvidenc
 import { readRole, type RoleRead } from '../people/role-currentness';
 import { stageLabels, type StageLabelRead } from '../opportunity/stage-labels';
 import { stageName } from '../deals/stage-label';
+import { bidScopeLabeler } from '../deals/opportunities';
 import { fetchAccountContextRows, loadAccountContext, projectAccountContext } from '../context/load';
 import type { AccountContext } from '../context/context';
 import { accountSlug } from './href';
@@ -186,7 +187,7 @@ export async function loadAccountInputs(
         });
         return [...rows, ...extra];
       }), [] as Row[]),
-    soft(prisma.buyerInputData.findMany({ where: { account_name: accountName }, select: { id: true, type: true, normalized_summary: true, raw_buyer_language: true, contact_email: true, captured_at: true, human_confirmed: true, supersedes_id: true, confirmed_at: true, hypothesis_id: true } }), [] as Row[]),
+    soft(prisma.buyerInputData.findMany({ where: { account_name: accountName }, select: { id: true, type: true, normalized_summary: true, raw_buyer_language: true, contact_email: true, captured_at: true, human_confirmed: true, supersedes_id: true, confirmed_at: true, hypothesis_id: true, metadata: true } }), [] as Row[]),
     skip(() => prisma.persona.findMany({ where: { account_name: accountName }, select: { id: true, name: true, title: true, do_not_contact: true, email: true, email_status: true, updated_at: true, hubspot_contact_id: true, enrichment: { select: { apollo_person_id: true, last_enriched_at: true } } }, take: 60 }), [] as Row[]),
     skip(() => prisma.accountContactCandidate.findMany({ where: { account_name: accountName, state: 'staged' }, select: { id: true, full_name: true, title: true, state: true, last_seen_at: true }, take: 30 }).catch(() => []), []),
     skip(() => (prisma.gapWorkSourceMember?.findMany ? prisma.gapWorkSourceMember.findMany({ where: { account_name: accountName, status: { notIn: ['ignored', 'not_now'] } }, select: { name: true, kind: true, title: true, company: true, persona_id: true, relationship_context: true, ingested_at: true, work_source: { select: { name: true, source_type: true } } }, take: 30 }).catch(() => []) : Promise.resolve([])), []),
@@ -279,6 +280,10 @@ export async function loadAccountInputs(
     const closed = o.status !== 'UNKNOWN' && o.closed?.length ? { closed: o.closed.map((d) => ({ ...d })) } : {};
     opportunity = o.status === 'ACTIVE' ? { status: 'ACTIVE', detail: '', deals: o.deals.map((d) => ({ id: d.id, name: d.name, stage: stageName(d.stage, labels), amount: d.amount ?? null, closeDate: d.closeDate ?? null, nextStep: d.nextStep ?? null, contactIds: [...(d.contactIds ?? [])] })), ...closed } : o.status === 'UNKNOWN' ? { status: 'UNKNOWN', detail: o.reason, deals: [], ...(o.reason === 'identity_unresolved' && /^no HubSpot company/.test(o.detail ?? '') ? { unlinked: true } : {}) } : { status: 'CLEAR', detail: '', deals: [], ...(closure ? { closure } : {}), ...closed };
   }
+  // Sprint 5 review (R50): with a deal at the account (open or closed), each buyer input carries its opportunity's
+  // label (deals/scope.ts, the same rule as the deal brief), so NOW, the brief and the story never show one deal's words
+  // as the account's. With no deal there is nothing to tell apart.
+  const scopeOfBid = bidScopeLabeler(opportunity, (personas as Row[]).map((p) => ({ personaId: p.id as number, name: (p.name as string | null) ?? `person ${p.id}`, title: (p.title as string | null) ?? null, email: (p.email as string | null) ?? null, hubspotContactId: p.hubspot_contact_id ? String(p.hubspot_contact_id) : null })));
   const conv = (convs as Map<string, { who: string; responseClass: string; at: string }>).get(accountName) ?? null;
   // The account's HubSpot people: the linked company; else (owner resolution, 2026-10-05) the companies the account's
   // identity resolved for deal truth (the one identity rule: FedEx and H-E-B have no linked company but their people
@@ -351,7 +356,7 @@ export async function loadAccountInputs(
       reviewedAt: (h.status === 'approved' || h.status === 'active') && h.reviewed_at ? lastReview(h, acks.get(h.id)) : null,
       reviewAckAt: acks.get(h.id) ? acks.get(h.id)!.toISOString() : null,
     })),
-    bids: confirmed.map((b) => ({ id: b.id, type: b.type, summary: b.normalized_summary ?? b.raw_buyer_language, quote: b.raw_buyer_language, who: b.contact_email ?? null, at: new Date(b.confirmed_at ?? b.captured_at).toISOString(), hypothesisId: b.hypothesis_id ?? null })),
+    bids: confirmed.map((b) => ({ id: b.id, type: b.type, summary: b.normalized_summary ?? b.raw_buyer_language, quote: b.raw_buyer_language, who: b.contact_email ?? null, at: new Date(b.confirmed_at ?? b.captured_at).toISOString(), hypothesisId: b.hypothesis_id ?? null, scope: scopeOfBid({ metadata: b.metadata, contactEmail: b.contact_email ?? null }) })),
     personas: (personas as Row[]).map((p) => {
       const emp = employment.get(p.id) ?? null;
       return { id: p.id, name: p.name, title: p.title ?? null, doNotContact: !!p.do_not_contact, hasEmail: !!p.email, emailStatus: p.email_status ?? null, updatedAt: iso(p.updated_at), hubspotContactId: p.hubspot_contact_id ?? null, apolloEnrichedAt: p.enrichment?.apollo_person_id ? iso(p.enrichment.last_enriched_at) : null, location: p.hubspot_contact_id ? hsById.get(String(p.hubspot_contact_id))?.location ?? null : null, employment: emp ? { state: emp.state, why: emp.why, elsewhere: emp.elsewhere ? { company: emp.elsewhere.company, title: emp.elsewhere.title } : null } : null, role: personaRoleOf(p) };

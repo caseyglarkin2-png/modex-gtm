@@ -79,6 +79,12 @@ export interface BidInput {
   at: string;
   /** The hypothesis this BID was captured against (every BID has one). */
   hypothesisId: string | null;
+  /**
+   * Sprint 5 review (R50): the opportunity it belongs to in seller words (deals/scope.ts: "Deal: Kroger Columbus DC
+   * (through Ben Scratch)", "account-level", a closed deal with its outcome), when the account has a deal; null when
+   * it has none (nothing to tell apart).
+   */
+  scope?: string | null;
 }
 
 export interface PersonaInput {
@@ -377,7 +383,7 @@ const plural = (n: number, one: string, many = `${one}s`) => `${n} ${n === 1 ? o
 const money = (n: number) => `$${(n / 1_000_000).toFixed(1)}M`;
 
 const ev = (f: FactInput): Source => ({ kind: 'evidence', ref: f.id, label: f.title, url: f.url, at: f.publishedAt });
-const bidSrc = (b: BidInput): Source => ({ kind: 'bid', ref: b.id, label: `${b.who ?? 'buyer'}, confirmed`, url: null, at: b.at });
+const bidSrc = (b: BidInput): Source => ({ kind: 'bid', ref: b.id, label: `${b.who ?? 'buyer'}, confirmed${b.scope ? `; ${b.scope}` : ''}`, url: null, at: b.at });
 const SCOUT = (at: string | null): Source => ({ kind: 'signal', ref: 'scout', label: 'Scout (cited web pass, not verified at source)', url: null, at });
 const MICROSITE: Source = { kind: 'microsite', ref: null, label: 'Hand-authored microsite (undated)', url: null, at: null };
 
@@ -745,7 +751,8 @@ function commercialSection(i: AccountInputs, now: Date): Section {
   else st.push({ text: o.status === 'ACTIVE' ? `Open deal: ${o.deals.map((d) => `${d.name ?? 'deal'}${d.stage ? ` (${d.stage})` : ''}`).join('; ')}` : o.closure ? o.closure.why : 'No open HubSpot deal', truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'hubspot', ref: 'deal-truth', label: 'HubSpot, read now', url: null, at: now.toISOString() }], asOf: now.toISOString() });
   for (const t of i.firstTouches) st.push({ text: `GAP first touch to ${t.recipient}${t.sentAt ? ` on ${day(t.sentAt)}` : ''} (${t.state})`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'ledger', ref: t.recipient, label: 'GAP send ledger', url: null, at: t.sentAt }], asOf: t.sentAt });
   if (i.conversation) st.push({ text: `Conversation with ${i.conversation.who}: ${i.conversation.responseClass.replace(/_/g, ' ')} (${day(i.conversation.at)})`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'ledger', ref: i.conversation.who, label: 'human-confirmed disposition', url: null, at: i.conversation.at }], asOf: i.conversation.at });
-  for (const b of i.bids) st.push({ text: `Buyer said (${b.type.replace(/_/g, ' ')}): ${b.summary}`, truth: 'BUYER_CONFIRMED', sources: [bidSrc(b)], asOf: b.at });
+  // Sprint 5 review (R50): each line says which opportunity it belongs to (Ann's pilot words, Ben's Columbus words).
+  for (const b of i.bids) st.push({ text: `Buyer said (${b.type.replace(/_/g, ' ')})${b.scope ? `, ${b.scope}` : ''}: ${b.summary}`, truth: 'BUYER_CONFIRMED', sources: [bidSrc(b)], asOf: b.at });
   unknowns.push('Sends outside GAP (manual HubSpot or other mailboxes) are not visible here');
   return section('commercial', st, unknowns, now);
 }
