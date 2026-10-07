@@ -223,6 +223,12 @@ function pursuitAction(state: PursuitStateKind, accountName: string, stateLine =
   }
 }
 
+/** The hold a reply card states on its own; the reply panel and the card's sentence already say it (R60: said once). */
+export const GENERIC_REPLY_BLOCKERS: ReadonlySet<string> = new Set([
+  'No cold email to anyone here until it is recorded.',
+  'They asked not to be contacted: no cold work here until it is recorded.',
+]);
+
 /** The rank a classified reply takes: a human reply first of all; an opt-out after READY; a bounce with research. */
 const REPLY_RANK: Record<ReplyClassKind, number | null> = { human: LANE_RANK.replies, opt_out: LANE_RANK.research + 0.5, bounce: LANE_RANK.research, out_of_office: null };
 
@@ -337,10 +343,11 @@ export function workDay(i: WorkInput): WorkDay {
         lane: c.kind === 'bounce' ? 'research' : 'replies',
         stateKind: kind,
         state: c.human ? HUMAN_REPLY_LABEL[c.human] : STATE_TEXT[kind],
-        why: `${r.contactEmail} wrote ${day(r.receivedAt)}: "${quote}". ${c.consequence}`,
+        why: `${r.fromName?.trim() || r.contactEmail} wrote ${day(r.receivedAt)}: "${quote}". ${c.consequence}`,
         person: { name: r.contactEmail, title: null },
         next: { label: c.kind === 'human' ? humanNext : c.kind === 'opt_out' ? 'Record the opt-out' : 'Find a working address', href: c.kind === 'bounce' ? accountHref(r.accountName) : recordReplyHref(r.accountName) },
         blocker: c.kind === 'human' ? 'No cold email to anyone here until it is recorded.' : c.kind === 'opt_out' ? 'They asked not to be contacted: no cold work here until it is recorded.' : null,
+        ...(r.fromName?.trim() && c.kind !== 'bounce' ? { person: { name: r.fromName.trim(), title: null } } : {}),
         // R42: the message itself and the prepared notes ride on the card (never copy, never a send).
         reply: prepareReply({ id: r.id ?? `${r.contactEmail}:${r.receivedAt}`, from: r.contactEmail, fromName: r.fromName ?? null, subject: r.subject, snippet: r.snippet, receivedAt: r.receivedAt, threadId: r.threadId ?? null, accountName: r.accountName }, { mailbox: i.mailbox ?? null, now: i.now }),
       },
@@ -471,7 +478,12 @@ export function workDay(i: WorkInput): WorkDay {
     // R10 / R45: the workspace's own allowed action (the actionable result) IS the card's action, its absence included
     // (a hold, an in-motion account allow nothing): a lane card never competes with it. The lane mapping only when the
     // summary predates the actionable result. A proposal under review opens the page at the proposal.
-    const action = s.actionable ? (s.actionable.allowed ? { label: s.actionable.allowed.label, href: /^#/.test(s.actionable.allowed.href) ? `${accountHref(name)}${s.actionable.allowed.href}` : s.actionable.allowed.href } : null) : pursuitAction(s.state, name, s.stateLine);
+    // R60: a summary remembered before the lanes left the seller's path may still hold a lane link: the account's own
+    // action stands in for it (never a lane).
+    const remembered = s.actionable?.allowed && !isCockpitLaneHref(s.actionable.allowed.href) ? s.actionable.allowed : null;
+    const action = s.actionable ? (remembered ? { label: remembered.label, href: /^#/.test(remembered.href) ? `${accountHref(name)}${remembered.href}` : remembered.href } : s.actionable.allowed ? pursuitAction(s.state, name, s.stateLine) : null) : pursuitAction(s.state, name, s.stateLine);
+    // R60: a reply card says the hold once (its sentence and the reply panel); a deal's or HubSpot's hold still shows.
+    const replyCard = (s.state === 'replied' || s.state === 'opted_out') && !!have.card.reply;
     best.set(name, {
       rank: PURSUIT_RANK[s.state],
       sortKey: have.sortKey,
@@ -483,7 +495,9 @@ export function workDay(i: WorkInput): WorkDay {
         state: s.stateLine,
         person: s.person ?? (have.card.stateKind === kind ? have.card.person : null),
         why: s.nextText ?? s.blocker ?? have.card.why,
-        blocker: (s.state === 'held' || s.state === 'in_deal' || s.state === 'replied' || s.state === 'opted_out') && (s.blocker ?? have.card.blocker) !== (s.nextText ?? s.blocker ?? have.card.why) ? (s.blocker ?? have.card.blocker) : null,
+        blocker: replyCard
+          ? have.card.blocker && !GENERIC_REPLY_BLOCKERS.has(have.card.blocker) ? have.card.blocker : null
+          : (s.state === 'held' || s.state === 'in_deal' || s.state === 'replied' || s.state === 'opted_out') && (s.blocker ?? have.card.blocker) !== (s.nextText ?? s.blocker ?? have.card.why) ? (s.blocker ?? have.card.blocker) : null,
         next: action,
         preparation: s.actionable?.preparation ?? null,
       },

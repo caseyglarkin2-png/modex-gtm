@@ -60,7 +60,8 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
     soft(listQueue(prisma, { accountName, limit: 200 }), { items: [], asOf: null } as unknown as Awaited<ReturnType<typeof listQueue>>),
     soft(loadMotionChoices(prisma, [accountName]), new Map()),
     soft(loadAssignedPersona(prisma, accountName), null),
-    soft(listReplies(prisma, { state: 'all', limit: 200 }), { items: [], nextCursor: null }),
+    // R60: this account's replies only (never the newest 200 across every account, which hid an older reply here).
+    soft(listReplies(prisma, { state: 'all', limit: 200, accountName }), { items: [], nextCursor: null }),
     soft(loadSellerPreferences(prisma, accountName, now), new Map()),
   ]);
   const resolution = resolutionRes && 'ok' in resolutionRes && resolutionRes.ok ? resolutionRes.resolution : null;
@@ -76,7 +77,8 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
   const replies: PursuitReply[] = [];
   for (const r of repliesPage.items.filter((x) => x.accountName === accountName)) {
     // Batch item 8: an answer GAP sent in their thread is the record of their reply (handled, never asked again).
-    replies.push({ from: r.contactEmail, name: null, at: r.receivedAt, subject: r.subject, snippet: r.snippet, triaged: !!r.dispositionId || !!r.answeredAt });
+    // R60: the replier by name when the message carries it (the card said "lisa@..." beside "Lisa Scratch").
+    replies.push({ from: r.contactEmail, name: r.fromName?.trim() || null, at: r.receivedAt, subject: r.subject, snippet: r.snippet, triaged: !!r.dispositionId || !!r.answeredAt });
   }
   const lastSend = ctx.history.filter((h) => h.kind === 'email_sent' || h.kind === 'asset_sent').sort((a, b) => b.at.localeCompare(a.at))[0] ?? null;
   for (const h of ctx.history.filter((x) => x.kind === 'reply')) {

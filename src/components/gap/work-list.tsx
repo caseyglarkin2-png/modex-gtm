@@ -11,7 +11,7 @@
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { filterWork, needsYouCard, WORK_FILTER_LABEL, WORK_FILTERS, workCounts, type WaitingItem, type WorkCard, type WorkFilter } from '@/lib/gap/work/list';
+import { filterWork, GENERIC_REPLY_BLOCKERS, needsYouCard, WORK_FILTER_LABEL, WORK_FILTERS, workCounts, type WaitingItem, type WorkCard, type WorkFilter } from '@/lib/gap/work/list';
 import { saveWorkOrder } from '@/lib/gap/work/order';
 import { VoicePreviewButton } from '@/components/voice-preview-button';
 import { accountHref, accountSlug, withWorkContext } from '@/lib/gap/account-intel/href';
@@ -206,13 +206,14 @@ export function WorkList({
               </div>
               {c.rankWhy ? <p className="text-xs text-[var(--muted-foreground)]" data-testid="work-card-rank">{c.rankWhy}</p> : null}
               <p className="mt-1 text-sm" data-testid="work-card-why">{c.why}</p>
-              {c.person ? (
+              {/* R60: a reply's panel names who wrote; the card does not say it twice. */}
+              {c.person && !c.reply ? (
                 <p className="mt-0.5 text-sm text-[var(--muted-foreground)]" data-testid="work-card-person">
                   <span className="font-medium text-[var(--foreground)]">{c.person.name}</span>
                   {c.person.title ? `, ${c.person.title}` : ''}
                 </p>
               ) : null}
-              {c.blocker ? <p className="mt-0.5 text-xs text-amber-700 dark:text-amber-400" data-testid="work-card-blocker">{c.blocker}</p> : null}
+              {c.blocker && !(c.reply && GENERIC_REPLY_BLOCKERS.has(c.blocker)) ? <p className="mt-0.5 text-xs text-amber-700 dark:text-amber-400" data-testid="work-card-blocker">{c.blocker}</p> : null}
               {c.outcome ? <p className="mt-0.5 text-xs text-[var(--muted-foreground)]" data-testid="work-card-outcome">{c.outcome.line}</p> : null}
               {/* R60: every control that opens this account keeps the seller's place in Work (Back to Work, Next account). */}
               {c.reply ? <ReplyPrepPanel prep={c.reply.record ? { ...c.reply, record: { ...c.reply.record, href: withWorkContext(c.reply.record.href, c.accountName, c.index) } } : c.reply} compact /> : null}
