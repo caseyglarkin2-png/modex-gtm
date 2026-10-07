@@ -9,8 +9,16 @@ import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { actionPackHref } from '@/lib/gap/routing/card-readiness';
 import { accountHref, withWorkContext } from '@/lib/gap/account-intel/href';
+import { GAP_NOT_FOUND_TITLE } from '@/components/gap/gap-not-found';
 
 export const dynamic = 'force-dynamic';
+
+/** R63-B S7: a link to no card is titled as not found (a real card redirects to its pack). */
+export async function generateMetadata({ params }: { params: Promise<{ decisionId: string }> }): Promise<{ title: string }> {
+  const { decisionId } = await params;
+  const found = await prisma.routingDecision.findUnique({ where: { id: decisionId }, select: { id: true } }).catch(() => undefined);
+  return { title: found === null ? GAP_NOT_FOUND_TITLE : 'Action pack' };
+}
 
 export default async function PackPage({ params, searchParams }: { params: Promise<{ decisionId: string }>; searchParams?: Promise<{ from?: string; i?: string }> }) {
   if (assertGapEnabled('GAP_ROUTING_ENABLED')) notFound();

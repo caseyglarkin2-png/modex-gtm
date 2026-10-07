@@ -25,6 +25,14 @@ export function callSourceId(personaId: string, now: () => number = Date.now): s
 }
 
 /** The route param as the API expects it: a number when it is one, else the string. */
+/** R63-B S7: why the brief could not be loaded, in the seller's words (never the route's code). */
+export function callBriefErrorWords(code: string | null | undefined): string {
+  if (code === 'not_found') return 'This person is not on your list in GAP, so there is no call brief for them.';
+  if (code === 'invalid_query') return 'This call link does not name a person GAP knows.';
+  if (code === 'unauthenticated') return 'Sign in again to load the call brief.';
+  return 'The call brief could not be loaded just now. Reload the page, or go back to Work.';
+}
+
 export function personaIdParam(raw: string): number | string {
   return /^\d+$/.test(raw) ? Number(raw) : raw;
 }
@@ -86,10 +94,14 @@ export function CallMode({
 
   if (loading) return <p className="text-sm italic text-[var(--muted-foreground)]">Loading the brief...</p>;
   if (error || !brief) {
+    // R63-B S7: the reason in the seller's words, never the route's code ("not_found").
     return (
-      <p role="alert" className="text-sm text-[var(--destructive)]">
-        Could not load the brief: <code className="font-mono">{error ?? 'empty'}</code>
-      </p>
+      <div role="alert" className="space-y-2 text-sm" data-testid="call-brief-error">
+        <p className="text-[var(--destructive)]">{callBriefErrorWords(error)}</p>
+        <a href="/gap" className="inline-flex min-h-11 items-center rounded-md border border-[var(--border)] px-3 hover:bg-[var(--muted)]">
+          Back to Work
+        </a>
+      </div>
     );
   }
 

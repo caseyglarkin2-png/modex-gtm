@@ -12,7 +12,8 @@ import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
-import { loadAccountView } from '@/lib/gap/account-intel/load';
+import { accountNamesForSlug, loadAccountView } from '@/lib/gap/account-intel/load';
+import { GAP_NOT_FOUND_TITLE } from '@/components/gap/gap-not-found';
 import { AccountBriefView } from '@/components/gap/account-brief';
 import { AccountNowView } from '@/components/gap/account-now';
 import { AccountBriefSections } from '@/components/gap/account-brief-sections';
@@ -69,7 +70,9 @@ export const dynamic = 'force-dynamic';
 /** The browser title names the account (click test round 3: every tab read "GAP account"). From the slug: no read. */
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<{ title: string }> {
   const { slug } = await params;
-  return { title: accountTitle(slug) };
+  // R63-B S7: a slug that names no account never echoes itself as the title.
+  const names = await accountNamesForSlug(prisma, slug).catch(() => null);
+  return { title: names && names.length === 0 ? GAP_NOT_FOUND_TITLE : accountTitle(slug) };
 }
 
 type View = 'now' | 'brief' | 'sources';

@@ -42,9 +42,15 @@ import {
 import { EnrollShadowButton } from './enroll-shadow-button';
 import { DoneNext } from '@/components/gap/done-next';
 import { accountSlug } from '@/lib/gap/account-intel/href';
+import { GAP_NOT_FOUND_TITLE } from '@/components/gap/gap-not-found';
 
 export const dynamic = 'force-dynamic';
-export const metadata = { title: 'Action pack' };
+/** R63-B S7: a link to no thesis is titled as not found, never "Action pack". */
+export async function generateMetadata({ params }: { params: Promise<{ hypothesisId: string }> }): Promise<{ title: string }> {
+  const { hypothesisId } = await params;
+  const found = await prisma.prospectingHypothesis.findUnique({ where: { id: hypothesisId }, select: { id: true } }).catch(() => undefined);
+  return { title: found === null ? GAP_NOT_FOUND_TITLE : 'Action pack' };
+}
 
 type Params = { hypothesisId: string };
 type Search = { personaId?: string; decisionId?: string; from?: string; i?: string };
