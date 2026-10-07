@@ -78,6 +78,7 @@ import { loadRecordedClosures, sweepClosedDeals } from '@/lib/gap/deals/closure'
 import { loadRecordedReplyIds, withoutRecordedReplies } from '@/lib/gap/work/recorded-replies';
 import { resolveAccountOpportunity } from '@/lib/gap/opportunity/active-opportunity';
 import { accountsToCheck, loadOpportunityHolds, OPPORTUNITY_HOLD_TIMEOUT_MS } from '@/lib/gap/work/opportunity-holds';
+import { loadAccountConversations } from '@/lib/gap/motion/load';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'GAP' };
@@ -200,6 +201,12 @@ async function loadCockpit() {
   // or makes a customer; the page and the gate already say so). Bounded and remembered per instance; never a write.
   const toCheck = accountsToCheck({ candidates, dbState, held: heldWhy, inDeals });
   const opportunityHolds = toCheck.length ? await loadOpportunityHolds(toCheck, (a) => resolveAccountOpportunity(prisma, a, {}, { timeoutMs: OPPORTUNITY_HOLD_TIMEOUT_MS })) : new Map();
+  // R63-A B3: each Work account's recorded conversation (the page's own reader, DB only), named by the person GAP holds.
+  const convRaw = await loadAccountConversations(prisma, workAccounts, now).catch(() => new Map<string, { who: string; responseClass: string; at: string }>());
+  const convEmails = [...new Set([...convRaw.values()].map((c) => c.who).filter((w) => w.includes('@')))];
+  const convPeople = convEmails.length ? ((await prisma.persona.findMany({ where: { OR: convEmails.map((e) => ({ email: { equals: e, mode: 'insensitive' } })) }, select: { email: true, name: true } }).catch(() => [])) as Array<{ email: string | null; name: string | null }>) : [];
+  const nameByEmail = new Map(convPeople.filter((p) => p.email && p.name).map((p) => [String(p.email).toLowerCase(), String(p.name)]));
+  const conversations = new Map([...convRaw].map(([a, c]) => [a, { ...c, name: nameByEmail.get(c.who.toLowerCase()) ?? null }]));
   // The pieces the Work cards are built from; the cards themselves are built at render over the live pursuit summaries.
   const inMotion = new Map<string, { state: 'sent' | 'drafted'; at: string; person: { name: string; title: string | null } | null }>();
   for (const [name, t] of recentTouches) {
@@ -218,6 +225,7 @@ async function loadCockpit() {
     inDeals: { status: inDeals.status, accounts: inDeals.accounts.map((a) => ({ accountName: a.accountName, deals: a.deals.map((d) => ({ ...(d.id ? { id: d.id } : {}), name: d.name, stage: d.stage, lastActivityAt: d.lastActivityAt ?? null, closeDate: d.closeDate ?? null, contactIds: d.contactIds ?? [] })) })) },
     held: heldWhy,
     opportunityHolds,
+    conversations,
   };
 
   const routableHypotheses = 'tooLarge' in routableScope ? 0 : routableScope.hypothesesCount;
@@ -419,7 +427,9 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
   // read on every render, never cached with the lanes, so a write shows on the next load.
   // R60 capture once: which remembered replies were recorded since the read (one live read, in this same wave).
   const [summariesRead, outcomes, commitments, meetingRowsRaw, recordedReplies] = await Promise.all([
-    loadPursuitSummaries(prisma, data.workAccounts, now),
+    // R63-A B3: the preview starts from what the workspace says NOW (a summary read at tomorrow's time aged out and the
+    // preview fell back to cards that knew nothing of a reply, a do not contact or a hold).
+    loadPursuitSummaries(prisma, data.workAccounts, realNow),
     loadWorkOutcomes(prisma, data.workAccounts, now).catch(() => new Map()),
     // The sweep writes at the real time only; the phases are read at `now`.
     lane ? Promise.resolve([]) : loadWorkCommitments(prisma, realNow, { replies: data.workInput.replies }).catch(() => []),

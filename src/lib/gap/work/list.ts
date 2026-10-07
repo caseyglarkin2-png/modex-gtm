@@ -41,6 +41,7 @@ import { dayLabel, nyDay } from './dates';
 import { stalledSignals } from '../deals/stalled';
 import { closedDealLabel, type ClosedDealRef } from '../deals/scope';
 import type { OpportunityHold } from './opportunity-holds';
+import { isReplyKindClass, REPLY_KIND_WORDS } from '../capture/reply-kind';
 import type { CockpitLane } from '@/components/gap/gap-cockpit';
 
 export type WorkStateKind = 'replied' | 'opted_out' | 'bounced' | 'follow_up' | 'ready' | 'decide' | 'research' | 'in_deal' | 'unknown_deal' | 'held' | 'committed' | 'meeting';
@@ -154,6 +155,13 @@ export interface WorkInput {
    * missed, or HubSpot not answering. Each holds the account in the workspace's words, never a first touch.
    */
   opportunityHolds?: ReadonlyMap<string, OpportunityHold>;
+  /**
+   * R63-A B3: the account's recorded conversation (motion/load.ts loadAccountConversations, the account page's own
+   * reader; DB only), with the person's name when GAP holds it. A conversation holds every cold-work card (ready, decide)
+   * the way the page's approach does: a "no" or a do not contact stops outreach, anything else is worked from that
+   * conversation, never a cold first touch. Today and the tomorrow preview read the same rule.
+   */
+  conversations?: ReadonlyMap<string, { who: string; name?: string | null; responseClass: string; at: string }>;
   /** Fresh canonical pursuit summaries by account (pursuit/summary.ts), when any. */
   summaries?: ReadonlyMap<string, PursuitSummary>;
   /**
@@ -312,6 +320,9 @@ function obligationAction(c: Commitment): { href: string; label: string } {
 }
 
 /** Build the day: the cards (needs you), the waiting footer and the snoozed footer, every count their contents. */
+/** R63-A B3: the answers that stop outreach at the account (motion/approach.ts STOP_CLASSES, read the same way). */
+const CONVERSATION_STOPS: ReadonlySet<string> = new Set(['do_not_contact', 'meeting_declined', 'problem_rejected', 'not_priority']);
+
 export function workDay(i: WorkInput): WorkDay {
   const motion = new Map(i.motions.map((m) => [m.accountName, m]));
   const person = (account: string) => {
@@ -475,6 +486,24 @@ export function workDay(i: WorkInput): WorkDay {
     } else {
       offer({ rank: LANE_RANK.deals, sortKey: [1, name], card: { accountName: name, lane: 'deals', stateKind: 'in_deal', state: STATE_TEXT.in_deal, why, person: null, next: { label: 'Open the deal brief', href: `${accountHref(name)}?view=brief` }, blocker: 'No cold first touch while the deal is open: work it from the deal.' } });
     }
+  }
+
+  // R63-A B3: a recorded conversation holds the cold-work cards (a ready first touch, a thesis to decide "ready for
+  // outreach"); the replies, deals and research cards are untouched.
+  for (const [name, cv] of i.conversations ?? []) {
+    const have = best.get(name);
+    if (!have || (have.card.stateKind !== 'ready' && have.card.stateKind !== 'decide')) continue;
+    const who = cv.name?.trim() || cv.who;
+    const on = new Date(cv.at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' });
+    const said = isReplyKindClass(cv.responseClass) ? REPLY_KIND_WORDS[cv.responseClass].replace(/^They /, 'they ') : 'a recorded answer';
+    const stop = CONVERSATION_STOPS.has(cv.responseClass);
+    const card = cv.responseClass === 'do_not_contact'
+      ? { state: 'Held: do not contact', why: `Do not contact: ${who} asked not to be contacted (${on}). Nothing goes to them from here.` }
+      : stop
+        ? { state: `Held: ${who} said no`, why: `${who}: ${said} (${on}). No new outreach; learn from that conversation.` }
+        : { state: `Held: in conversation with ${who}`, why: `${who}: ${said} (${on}). Work it from that conversation (answer them, keep what you owe), never a cold first touch.` };
+    motionWaiting.delete(name);
+    best.set(name, { rank: PURSUIT_RANK.held, sortKey: [name], card: { accountName: name, lane: 'deals', stateKind: 'held', state: card.state, why: card.why, person: null, next: { label: 'Open the account', href: accountHref(name) }, blocker: null } });
   }
 
   // The canonical pursuit state wins where it is fresh: the card says what the workspace says, and ranks by it.
