@@ -289,7 +289,7 @@ export async function startMatrixHarness(opts: { companies: string[]; deals?: Re
   const realFetch = globalThis.fetch;
   globalThis.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
     const url = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url;
-    if (!/^http:\/\/127\.0\.0\.1:\d+\//.test(url)) {
+    if (!/^http:\/\/127\.0\.0\.1:\d+(?:\/|$)/.test(url)) {
       refusedFetches.push(url);
       throw new Error(`matrix network guard: refused ${url}`);
     }
