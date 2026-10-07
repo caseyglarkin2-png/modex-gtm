@@ -6,8 +6,11 @@
  * own scratch database, 127.0.0.1:55433/gap_matrix), with every external boundary controlled by
  * scripts/gap/recovery/stubs.mjs: HubSpot through the SDK base path (the REAL opportunity resolver, never mocked:
  * an open deal is a row in the stub's deals file), clawd suppression, autonomy and the critic; the Gmail wire is the
- * transport sink. Only the session is mocked. A fetch guard refuses any address that is not the stub. Every refusal
- * asserts its ONE specific reason. Skipped without GAP_SCRATCH_DATABASE_URL pointing at the matrix database.
+ * transport sink. Only the session is mocked (and, for the shell render, next/navigation's client hooks). A fetch
+ * guard refuses any address that is not the stub. Every refusal asserts its ONE specific reason. The legacy send
+ * path (POST /api/email/send) is held to an unrecorded opt-out reply too, and the global compose control stays off
+ * GAP pages (the shell rendered on the server for a path). Skipped without GAP_SCRATCH_DATABASE_URL pointing at the
+ * matrix database.
  */
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { NextRequest } from 'next/server';
@@ -21,6 +24,15 @@ vi.mock('@/lib/prisma', async () => {
   const url = process.env.GAP_SCRATCH_DATABASE_URL ?? '';
   return { prisma: /^postgres/.test(url) ? new PrismaClient({ datasourceUrl: url }) : ({} as never) };
 });
+// The shell's client hooks for a server render at a chosen path (case 12); every other export is the real module.
+const nav = vi.hoisted(() => ({ path: '/' }));
+vi.mock('next/navigation', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('next/navigation')>()),
+  usePathname: () => nav.path,
+  useRouter: () => ({ push: () => undefined, replace: () => undefined, refresh: () => undefined, prefetch: () => undefined, back: () => undefined, forward: () => undefined }),
+  useSearchParams: () => new URLSearchParams(),
+  useParams: () => ({}),
+}));
 
 const req = (url: string, method: string, body?: unknown) => new NextRequest(`http://localhost${url}`, { method, ...(body === undefined ? {} : { body: JSON.stringify(body), headers: { 'content-type': 'application/json' } }) });
 const ctx = (id: string) => ({ params: Promise.resolve({ id }) });
@@ -33,7 +45,7 @@ describe.skipIf(!RUN)('R62 matrix: execution (real routes, real opportunity reso
   const tag = `mx${Date.now().toString(36)}`;
   type Ready = Awaited<ReturnType<import('@/scripts/gap/recovery/seed-matrix').MatrixSeeder['readyAccount']>>;
   const ready: Record<string, Ready> = {};
-  const CASES = ['Double', 'Tabs', 'TabsReason1', 'TabsReason2', 'TabsReason3', 'TabsReason4', 'Recipient', 'Sender', 'Copy', 'Evidence', 'OptOutReply', 'OptOutList', 'Suppressed', 'Deal', 'Role', 'Draft', 'Timeout', 'Outside'];
+  const CASES = ['Double', 'Tabs', 'TabsReason1', 'TabsReason2', 'TabsReason3', 'TabsReason4', 'Recipient', 'Sender', 'Copy', 'Evidence', 'OptOutReply', 'OptOutList', 'Suppressed', 'Deal', 'Role', 'Draft', 'Timeout', 'Outside', 'LegacyStop', 'LegacyHuman'];
 
   beforeAll(async () => {
     prisma = (await import('@/lib/prisma')).prisma as never;
@@ -295,6 +307,67 @@ describe.skipIf(!RUN)('R62 matrix: execution (real routes, real opportunity reso
     expect([res.status, res.body.error], JSON.stringify(res.body)).toEqual([409, 'emailed_outside_gap']);
     expect(h.writtenTo(r.p.email)).toBe(1);
   }, 180_000);
+
+  // R62 case 12 (R63 BLOCKER found by reviewer B): an opt-out written in a reply ("stop", classified opt_out) that
+  // nobody has recorded yet (personas.do_not_contact still false) must also refuse the LEGACY send path,
+  // POST /api/email/send, by personaId and by address, for a reason that names the reply (perform-send.ts, beside
+  // the unsubscribed blocker). A human reply from the same kind of person does not block that path; the GAP gate's
+  // own refusal on the card is unchanged. The global compose control is not rendered on GAP pages.
+  // PIN: the blocker's exact code is in Worker A's commit message; it is pinned here when that SHA lands.
+  it('an unrecorded "stop" reply refuses the legacy send path by person and by address, naming the reply; a human reply does not; the GAP card still answers account_replied; no compose control on GAP pages', async () => {
+    const r = ready.LegacyStop;
+    const d = await use(r);
+    const p = await preview(d);
+    await s.inbound(r.a, r.p, 'stop', { key: 'legacy-stop' });
+    const { classifyReply } = await import('@/lib/gap/replies/classify');
+    expect(classifyReply({ snippet: 'stop', subject: 'Re: trailer turns at your sites', from: r.p.email }).kind).toBe('opt_out');
+    expect((await prisma.persona.findUnique({ where: { id: r.p.id }, select: { do_not_contact: true } }))?.do_not_contact).toBe(false);
+    const { POST: legacySend } = await import('@/app/api/email/send/route');
+    type Blocked = { error?: string; code?: string; message?: string; details?: unknown };
+    const legacy = async (body: Record<string, unknown>) => {
+      const res = await legacySend(req('/api/email/send', 'POST', { subject: 'Following up on the yard', bodyHtml: '<p>Following up on trailer turns at your sites.</p>', ...body }));
+      return { status: res.status, body: (await res.json()) as Blocked };
+    };
+    const namesTheReply = (b: Blocked) => `${b.error ?? ''} ${b.message ?? ''}`;
+    // By person (the route resolves the address from the persona) and by address alone: refused, naming the reply.
+    for (const attempt of [{ to: r.p.email, personaId: r.p.id }, { to: r.p.email, accountName: r.a.name, personaName: r.p.name }]) {
+      const res = await legacy(attempt);
+      expect(res.status, JSON.stringify(res.body)).toBeGreaterThanOrEqual(400);
+      expect(res.status, JSON.stringify(res.body)).toBeLessThan(500);
+      expect(namesTheReply(res.body), JSON.stringify(res.body)).toMatch(/replied/i);
+      expect(namesTheReply(res.body), JSON.stringify(res.body)).toMatch(/\bstop\b/i);
+      expect(res.body.code, JSON.stringify(res.body)).not.toBe('UNSUBSCRIBED');
+    }
+    // The guard phase itself says the same, before any transport.
+    const { evaluateSendGuards } = await import('@/lib/email/perform-send');
+    const guardOf = (x: Ready) => evaluateSendGuards(prisma as never, { to: x.p.email, subject: 'Following up on the yard', bodyHtml: '<p>Following up.</p>', accountName: x.a.name, personaName: x.p.name, personaId: x.p.id });
+    const stopped = await guardOf(r);
+    expect(stopped.ok ? 'clear' : namesTheReply(stopped.block as Blocked)).toMatch(/replied[\s\S]*\bstop\b|\bstop\b[\s\S]*replied/i);
+    // A human reply from the same kind of person: the legacy guards stay clear (no reply-based block).
+    const human = ready.LegacyHuman;
+    await s.inbound(human.a, human.p, 'Thanks, this is timely. Can you send the two-site comparison before Thursday?', { key: 'legacy-human' });
+    expect(classifyReply({ snippet: 'Thanks, this is timely. Can you send the two-site comparison before Thursday?', subject: 'Re: trailer turns', from: human.p.email }).kind).toBe('human');
+    const clear = await guardOf(human);
+    expect(clear.ok ? 'clear' : JSON.stringify(clear.block)).toBe('clear');
+    // The GAP gate on the card prepared before the reply: its own refusal, unchanged. Nothing reached the sink.
+    const gap = await send(d, { contentHash: p.contentHash, recipient: p.to });
+    expect([gap.status, gap.body.error], JSON.stringify(gap.body)).toEqual([409, 'account_replied']);
+    expect(h.writtenTo(r.p.email)).toBe(0);
+    expect(h.sinkFiles().filter((f) => f.to === r.p.email)).toEqual([]);
+
+    // The global compose control: the shell rendered on the server for GAP paths carries no "Compose email"; a
+    // non-GAP internal page still does.
+    const { renderToStaticMarkup } = await import('react-dom/server');
+    const { createElement } = await import('react');
+    const { AppShell } = await import('@/components/app-shell');
+    const composeOn = (path: string) => {
+      nav.path = path;
+      return renderToStaticMarkup(createElement(AppShell, null, createElement('div', null, 'page'))).includes('aria-label="Compose email"');
+    };
+    const gapPaths = ['/gap', '/gap/accounts/acme-co', '/gap/replies', '/gap/capture', '/gap/coverage'];
+    const otherPaths = ['/accounts/acme-co', '/discovery'];
+    expect([...gapPaths, ...otherPaths].map((x) => [x, composeOn(x)])).toEqual([...gapPaths.map((x) => [x, false]), ...otherPaths.map((x) => [x, true])]);
+  }, 240_000);
 
   it('no case reached the network: every external call went to the stub or the sink', () => {
     expect(h.refusedFetches).toEqual([]);
