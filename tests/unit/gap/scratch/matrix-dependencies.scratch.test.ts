@@ -233,12 +233,12 @@ describe.skipIf(!RUN)('R62 matrix: dependencies (each boundary failing on purpos
     expect(await prisma.routingDecision.count({ where: { account_name: r.a.name } })).toBe(0);
   }, 120_000);
 
-  // R62 case added at 4e936a90 (R65): the operator's view counts what this case breaks on purpose (a stranded draft, an
+  // R62 case from the HANDOFF at c00b94ca (R65, the owners at d9902641): the operator's view counts what this case breaks on purpose (a stranded draft, an
   // incomplete proposal, a dead-letter story, a HubSpot change that failed against the stub while it was down), each
   // with its words, owner and where to retry; the plain call the Work strip makes on every load carries none of it.
   it('GET /api/gap/health?operations=1 counts the broken handoffs and the failed HubSpot change with their words, owner and retry path; the plain call carries none', async () => {
     const r = R.Ops;
-    type Line = { key: string; state: string; label: string; count: number | null; href: string | null };
+    type Line = { key: string; state: string; label: string; count: number | null; href: string | null; owner?: string | null; retry?: string | null };
     type Ops = { state: string; failures: Line[]; crm: { failed: Array<Record<string, unknown> & { proposalId: string }> }; inputs: { handoffs: { stranded: number | null; incomplete: number | null; deadLetters: number | null } } };
     const { GET } = await import('@/app/api/gap/health/route');
     const health = async (q: string) => {
@@ -303,12 +303,15 @@ describe.skipIf(!RUN)('R62 matrix: dependencies (each boundary failing on purpos
     expect([a.stranded! - b.stranded!, a.incomplete! - b.incomplete!, a.deadLetters! - b.deadLetters!, moved > 0]).toEqual([1, 1, moved, true]);
     const line = (k: string) => ops.failures.find((l) => l.key === k);
     const many = (c: number, one: string, more: string) => `${c} ${c === 1 ? one : more}`;
-    expect(line('drafts_stranded')).toMatchObject({ state: 'DEGRADED', count: a.stranded, label: `${many(a.stranded!, 'draft', 'drafts')} stranded (no story key; the R11 service adopts each when its fact is drafted): run the repair dry run` });
-    expect(line('dead_letter_signals')).toMatchObject({ state: 'DEGRADED', count: a.deadLetters, href: '/gap/signals', label: `${many(a.deadLetters!, 'signal', 'signals')} in the research dead letter (failed past the last attempt): open Signals to retry or dismiss` });
+    expect(line('drafts_stranded')).toMatchObject({ state: 'DEGRADED', count: a.stranded, owner: 'operator', retry: expect.stringMatching(/^Run scripts\/gap\/recovery\/repair-stranded-drafts\.ts --dry-run; each ADOPT completes when the seller drafts from its fact/), label: `${many(a.stranded!, 'draft', 'drafts')} stranded (no story key; the R11 service adopts each when its fact is drafted): run the repair dry run` });
+    expect(line('proposals_incomplete')).toMatchObject({ owner: 'the seller who drafted it', retry: 'Open the draft thesis: its account page asks for the one missing field, then submit it for review' });
+    expect(line('dead_letter_signals')).toMatchObject({ state: 'DEGRADED', count: a.deadLetters, href: '/gap/signals', owner: 'operator', retry: 'Signals: retry the research or dismiss the signal', label: `${many(a.deadLetters!, 'signal', 'signals')} in the research dead letter (failed past the last attempt): open Signals to retry or dismiss` });
     const { accountHref } = await import('@/lib/gap/account-intel/href');
     expect(ops.crm.failed.length).toBe(failedBefore + 1);
     expect(ops.crm.failed.find((l) => l.proposalId === proposalId)).toMatchObject({ accountName: r.a.name, kind: 'note', state: 'failed', owner: 'casey@freightroll.com', href: `${accountHref(r.a.name)}?view=brief#deal-workspace`, action: 'Retry it on the deal (the text is kept; a retry never writes twice)', detail: expect.stringMatching(/503|unavailable/i) });
-    expect(line('crm_failed')).toMatchObject({ state: 'DEGRADED', count: failedBefore + 1, label: `${many(failedBefore + 1, 'HubSpot change', 'HubSpot changes')} failed or in conflict: each lists its owner and where to retry` });
+    expect(line('crm_failed')).toMatchObject({ state: 'DEGRADED', count: failedBefore + 1, owner: 'casey@freightroll.com', retry: 'The deal brief: Retry (a retry never writes twice) or decide the conflict', label: `${many(failedBefore + 1, 'HubSpot change', 'HubSpot changes')} failed or in conflict: each lists its owner and where to retry` });
+    // Every failure the operator sees names who repairs it and how.
+    expect(ops.failures.filter((f) => !f.owner || !f.retry).map((f) => f.key)).toEqual([]);
     expect(['DEGRADED', 'BLOCKED']).toContain(ops.state);
     // The plain call (the Work strip's, on every Work load) carries none of the operator's view.
     const plain = await health('');

@@ -191,7 +191,7 @@ describe.skipIf(!RUN)('R62 matrix: migration and boundaries (legacy shapes, free
     expect(h.requests().filter((q) => q.path === '/v1/chat/completions').length).toBe(before);
   }, 120_000);
 
-  // R62 case added at 4e936a90 (R60 decision 2): the seller reads "thesis", "what we think is happening" and "what the
+  // R62 case from the HANDOFF at c00b94ca (R60 decision 2): the seller reads "thesis", "what we think is happening" and "what the
   // buyer said"; ids, routes, flags and ledger kinds keep their names. Every heading and label the corpus produces
   // through the page's own read, the routing run route and the work queue route, plus the label tables, is swept.
   it('no seller heading or label says HYPOTHESIS or BID: the corpus through the page read, the routed cards and their labels, and the label tables', async () => {

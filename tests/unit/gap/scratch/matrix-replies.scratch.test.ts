@@ -7,7 +7,8 @@
  * gateway are the stub; the Gmail wire is the sink. Real reply, referral, objection, an opt-out inside a longer
  * message, an out-of-office with a return day, a bounce, and a Gmail plus HubSpot twin each behave distinctly. A reply
  * logged through Capture (POST /api/gap/captures on the reply, then the one review, with the real disposition and BID
- * services) is recorded once and leaves Work; Work's reply card and the account page offer Capture as the only way.
+ * services) is recorded once and leaves Work; Work's reply card and the account page offer Capture as the only way;
+ * Capture opened again on the same reply answers its one note, never a second.
  * Skipped without GAP_SCRATCH_DATABASE_URL pointing at the matrix database (127.0.0.1:55433/gap_matrix).
  */
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
@@ -34,7 +35,7 @@ describe.skipIf(!RUN)('R62 matrix: replies (inbound rows after a real first touc
   const tag = `mr${Date.now().toString(36)}`;
   type Sent = { a: import('@/scripts/gap/recovery/seed-matrix').MatrixAccount; p: { id: number; name: string; email: string; title: string | null }; h: string; decisionId: string };
   const sent: Record<string, Sent> = {};
-  const CASES = ['Reply', 'Referral', 'Objection', 'OptOut', 'Away', 'AwayWeekday', 'Delayed', 'Bounce', 'Twin', 'Capture', 'Offer'];
+  const CASES = ['Reply', 'Referral', 'Objection', 'OptOut', 'Away', 'AwayWeekday', 'Delayed', 'Bounce', 'Twin', 'Capture', 'Offer', 'Again'];
   const names = () => new Set(Object.values(sent).map((x) => x.a.name));
 
   beforeAll(async () => {
@@ -255,7 +256,7 @@ describe.skipIf(!RUN)('R62 matrix: replies (inbound rows after a real first touc
     return loadPursuit(prisma, { brief: loaded.brief, inputs: loaded.inputs, ctx: c, now });
   }
 
-  // R62 case added at 4e936a90 (R60 decision 1, capture once on a reply): Capture with the REAL disposition and BID
+  // R62 case from the HANDOFF at c00b94ca (R60 decision 1, capture once on a reply): Capture with the REAL disposition and BID
   // services (POST /api/gap/captures on the reply, then the one review POST /api/gap/captures/[id] op batch).
   it('a reply logged through Capture: one disposition sourced to the message, the kept statements confirmed and linked to it, the card gone from Work on the next load', async () => {
     const x = sent.Capture;
@@ -306,7 +307,7 @@ describe.skipIf(!RUN)('R62 matrix: replies (inbound rows after a real first touc
     expect(after.day.cards.filter((c) => c.accountName === x.a.name && c.tier === 'reply').map((c) => c.stateKind)).toEqual([]);
   }, 240_000);
 
-  // R62 case added at 4e936a90 (R60 decision 1): one way to record a reply, Capture, from Work and from the account.
+  // R62 case from the HANDOFF at c00b94ca (R60 decision 1): one way to record a reply, Capture, from Work and from the account.
   it('a reply card and the account page offer only Capture: one link into Capture on the message, no second record link, no reply form on the account', async () => {
     const x = sent.Offer;
     const msg = await s.inbound(x.a, x.p, 'Interesting. What would a pilot at one site involve?', { key: 'offer' });
@@ -336,6 +337,40 @@ describe.skipIf(!RUN)('R62 matrix: replies (inbound rows after a real first touc
     const page = readFileSync('src/app/gap/accounts/[slug]/page.tsx', 'utf8');
     expect(page.match(/RepliesTriage|DispositionForm/g) ?? []).toEqual([]);
     expect(page).toContain('<AccountReplies items={waitingReplies}');
+  }, 240_000);
+
+  // R62 case from the HANDOFF at c00b94ca (R60 decision 1 at 16971d2c): ONE capture per reply. Opened again from any
+  // path, the reply answers its one note (200, existing) and never a second; two tabs saving at once make one (the
+  // advisory lock, here on Postgres). Capture's page says so in the seller's words when the answer is existing.
+  it('Capture opened again on the same reply returns that one note (200, existing), never a second; two saves at once make one', async () => {
+    const x = sent.Again;
+    const { POST } = await import('@/app/api/gap/captures/route');
+    type View = { id?: string; existing?: boolean; rawText?: string; reply?: { id: string } | null; error?: string };
+    const open = async (replyId: string, rawText: string) => {
+      const res = await POST(req('/api/gap/captures', 'POST', { accountName: x.a.name, personaId: x.p.id, source: { kind: 'reply', id: replyId }, context: 'email', rawText }));
+      return { status: res.status, body: (await res.json()) as View };
+    };
+    const notesFor = (replyId: string) => prisma.gapAuditEvent.count({ where: { kind: 'capture.note', payload: { path: ['source', 'id'], equals: replyId } } });
+    // From Work's card: the first capture of this reply.
+    const TEXT = 'We cannot see which trailers are loaded until someone walks the yard. Can you show us how others handle it?';
+    const msg = await s.inbound(x.a, x.p, TEXT, { key: 'again' });
+    const first = await open(msg.id, TEXT);
+    expect([first.status, first.body.existing ?? null, first.body.reply?.id], JSON.stringify(first.body)).toEqual([201, null, msg.id]);
+    // From the account page, a second note typed on the same reply: that one note answers, unchanged.
+    const again = await open(msg.id, 'A second note typed on the account page.');
+    expect([again.status, again.body.id, again.body.existing, again.body.rawText, again.body.reply?.id], JSON.stringify(again.body)).toEqual([200, first.body.id, true, TEXT, msg.id]);
+    expect(await notesFor(msg.id)).toBe(1);
+    // Two tabs saving at once on a reply with no capture yet: one note, the other tab answered with it.
+    const race = await s.inbound(x.a, x.p, 'Also, who else at your company has rolled this out across several sites?', { key: 'again-race' });
+    const both = await Promise.all([open(race.id, 'From the first tab.'), open(race.id, 'From the second tab.')]);
+    expect(both.map((r) => r.status).sort()).toEqual([200, 201]);
+    expect(new Set(both.map((r) => r.body.id)).size).toBe(1);
+    expect(both.find((r) => r.status === 200)?.body.existing).toBe(true);
+    expect(await notesFor(race.id)).toBe(1);
+    // The seller's words on Capture when the answer is existing (capture-flow.tsx renders them from that answer).
+    const flow = readFileSync('src/components/gap/capture-flow.tsx', 'utf8');
+    expect(flow).toContain('setExisting(!!body.existing)');
+    expect(flow).toContain("This reply already has its capture{capture.accountName ? ` for ${capture.accountName}` : ''}: one per reply. Its review is below.");
   }, 240_000);
 
   it('no case reached the network', () => {

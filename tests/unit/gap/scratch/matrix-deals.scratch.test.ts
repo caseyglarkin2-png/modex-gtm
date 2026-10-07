@@ -1,6 +1,6 @@
 // @vitest-environment node
 /**
- * R62 MATRIX, DEALS (the Sprint 5 review cases added to the R62 list at 4e936a90): two open deals under one company,
+ * R62 MATRIX, DEALS (the Sprint 5 review cases on the R62 add list, HANDOFF at c00b94ca): two open deals under one company,
  * the words, obligations and meetings recorded through the REAL routes (POST /api/gap/bids, POST /api/gap/commitments,
  * POST /api/gap/crm-sync), HubSpot's deals answered by the stub and read by the REAL opportunity resolver, the deal
  * states reconciled the way the account page does it (syncDealStates over the live read), and the page's own reads

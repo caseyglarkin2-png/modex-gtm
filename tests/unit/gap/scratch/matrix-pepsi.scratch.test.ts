@@ -219,7 +219,7 @@ describe.skipIf(!RUN)('R62 matrix: the Pepsi regression (the page read, the page
     expect((row!.metadata as { approach?: string } | null)?.approach ?? 'event_led').not.toBe('event_led');
   }, 60_000);
 
-  // R62 case added at 4e936a90 (R65 for the R64 repair): the stranded-draft dry run, the very command the release runs
+  // R62 case from the HANDOFF at c00b94ca (R65 for the R64 repair): the stranded-draft dry run, the very command the release runs
   // against production (scripts/gap/recovery/repair-stranded-drafts.ts), here against the matrix database on the
   // production-shaped Pepsiprod row. It names Tom's Tulsa draft ADOPT with the key the R11 service stamps, reads only,
   // and refuses to run without --dry-run. The next case adopts that same id through the page's draft route and checks
