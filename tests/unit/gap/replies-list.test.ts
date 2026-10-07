@@ -203,6 +203,20 @@ describe('batch item 8 (R62 matrix): an open deal’s own contact is a known add
   });
 });
 
+describe('batch item 8 (finding 3): a sent answer is the record of the reply', () => {
+  it('a message GAP answered in its thread is not listed for triage; "all" lists it with when it was answered', async () => {
+    const p: any = makePrisma();
+    p.gapAuditEvent = { findMany: asyncSpy(async (q: any) => (q.where.subject_id.in.includes('m5') ? [{ kind: 'execution.reply_sent', subject_type: 'inbound_message', subject_id: 'm5', created_at: T(8) }] : [])) };
+    const open = await listReplies(p, { state: 'undispositioned' });
+    expect(open.items.map((r) => r.id)).not.toContain('m5');
+    expect(open.items.map((r) => r.id)).toContain('m3');
+    const all = await listReplies(p, { state: 'all' });
+    expect(all.items.find((r) => r.id === 'm5')).toMatchObject({ answeredAt: T(8).toISOString() });
+    expect(all.items.find((r) => r.id === 'm3')?.answeredAt).toBeUndefined();
+    expect(p.gapAuditEvent.findMany).toHaveBeenCalledWith(expect.objectContaining({ where: expect.objectContaining({ kind: 'execution.reply_sent', subject_type: 'inbound_message' }) }));
+  });
+});
+
 describe('loadKnownAddresses', () => {
   it('SF8: two personas sharing an email resolve to the lowest-id persona, deterministically, regardless of DB row order', async () => {
     const shared = 'dup@acme.example';

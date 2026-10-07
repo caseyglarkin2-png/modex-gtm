@@ -567,6 +567,28 @@ export async function syncReturnRemindersFromReplies(
   return out;
 }
 
+/**
+ * Batch item 8 (finding 3): an answer GAP sent in the person's thread completes the obligations it answered: their
+ * request, a follow-up waiting on their reply, a reminder to follow up when they are back. Its proof is the REPLY_SENT
+ * ledger row. A referral (no reply is prepared for one) and a meeting to prepare are never closed by a send.
+ */
+export async function commitmentsAnsweredBySend(
+  prisma: PrismaLike,
+  a: { accountName: string; email: string; proofId: string; at: string; actor: string; now: Date },
+): Promise<number> {
+  if (!ledgerReadable(prisma)) return 0;
+  const email = a.email.trim().toLowerCase();
+  const open = (await loadCommitments(prisma, { accountNames: [a.accountName] })).filter(
+    (c) => !TERMINAL_STATUSES.includes(c.status) && (c.person?.email ?? '').trim().toLowerCase() === email && (c.kind === 'answer_request' || c.kind === 'follow_up' || (c.kind === 'reminder' && c.source.kind === 'reply')),
+  );
+  let done = 0;
+  for (const c of open) {
+    const t = await transitionCommitment(prisma, { commitmentId: c.commitmentId, to: 'done', proof: { kind: 'ledger', id: a.proofId, note: `Answered ${c.person?.name ?? email} in their thread from GAP on ${dayLabel(nyDay(a.at), a.now)}.` }, actor: a.actor, now: a.now }).catch(() => null);
+    if (t?.ok) done += 1;
+  }
+  return done;
+}
+
 /** When a message was written (its received time), else `now` for a row that carries none. */
 export function writtenAt(receivedAt: string | Date | null | undefined, now: Date): Date {
   const t = receivedAt ? new Date(receivedAt).getTime() : Number.NaN;

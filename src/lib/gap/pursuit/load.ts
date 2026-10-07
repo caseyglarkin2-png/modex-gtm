@@ -75,7 +75,8 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
   // Replies: the GAP mailbox list (with its triage state) and the account history's reply rows (older threads).
   const replies: PursuitReply[] = [];
   for (const r of repliesPage.items.filter((x) => x.accountName === accountName)) {
-    replies.push({ from: r.contactEmail, name: null, at: r.receivedAt, subject: r.subject, snippet: r.snippet, triaged: !!r.dispositionId });
+    // Batch item 8: an answer GAP sent in their thread is the record of their reply (handled, never asked again).
+    replies.push({ from: r.contactEmail, name: null, at: r.receivedAt, subject: r.subject, snippet: r.snippet, triaged: !!r.dispositionId || !!r.answeredAt });
   }
   const lastSend = ctx.history.filter((h) => h.kind === 'email_sent' || h.kind === 'asset_sent').sort((a, b) => b.at.localeCompare(a.at))[0] ?? null;
   for (const h of ctx.history.filter((x) => x.kind === 'reply')) {

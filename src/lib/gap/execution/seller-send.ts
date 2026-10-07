@@ -439,11 +439,19 @@ export async function sendSellerReply(
     claimId: claim.claimId,
   };
   let ledgerError: string | undefined;
+  let sentRowId: string | null = null;
   try {
-    await appendReplyLedger(prisma, REPLY_SENT, actor, messageId, sent as unknown as Record<string, unknown>);
+    sentRowId = await appendReplyLedger(prisma, REPLY_SENT, actor, messageId, sent as unknown as Record<string, unknown>);
   } catch (err) {
     // The answer left; the claim stays open, so it can never be re-sent.
     ledgerError = err instanceof Error ? err.message : String(err);
+  }
+  // Batch item 8 (finding 3): the sent answer is the record of their reply and completes what it answered (their
+  // request, the follow-up waiting on them, a return reminder), its proof the REPLY_SENT row. A referral is never
+  // answered here (no reply is prepared for one), so a referral obligation is never closed by a send.
+  if (sentRowId && p.accountName) {
+    const { commitmentsAnsweredBySend } = await import('../work/commitments');
+    await commitmentsAnsweredBySend(prisma, { accountName: p.accountName, email: p.recipient, proofId: sentRowId, at: sentAt, actor, now }).catch(() => 0);
   }
   try {
     await prisma.emailLog.create({ data: { account_name: p.accountName ?? '', persona_name: p.recipientName, to_email: p.recipient, subject: p.subject, body_html: p.html, status: 'sent', provider_message_id: receipt.engineId, thread_id: receipt.threadId ?? null, metadata: { source: 'gap_reply_send', inboundMessageId: messageId }, sent_at: new Date(sentAt) } });

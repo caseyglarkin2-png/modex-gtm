@@ -12,6 +12,9 @@ import { NextRequest } from 'next/server';
 import { prepareAnswer, readAsks, unfilledPlaceholders, type AnswerInput } from '@/lib/gap/replies/answer';
 import { bodyRefusal, createSellerReplyDraft, loadReplyContext, prepareSellerReply, recordReplyCopied } from '@/lib/gap/execution/seller-reply';
 import { sendSellerReply } from '@/lib/gap/execution/seller-send';
+import { ensureCommitment, loadCommitments } from '@/lib/gap/work/commitments';
+import { accountRepliedRecently } from '@/lib/gap/replies/account-reply';
+import { accountMotionRefusal, loadAccountConversations } from '@/lib/gap/motion/load';
 import { REPLY_COPIED, REPLY_DRAFTED, REPLY_SENT } from '@/lib/gap/execution/draft-ledger';
 import { ReplyAnswer } from '@/components/gap/reply-answer';
 import { ledgerDb } from './fixtures/ledger-db';
@@ -139,6 +142,34 @@ describe('three distinct states, the send only through preview and CONFIRM + SEN
     expect(await createSellerReplyDraft(p, { messageId: 'msg-1', body: FILLED, actor: ACTOR, now: NOW }, deps(gmail))).toMatchObject({ ok: false, reason: 'already_answered' });
     const kinds = db.store.gapAuditEvent.filter((r) => r.subject_type === 'inbound_message').map((r) => r.kind);
     expect(kinds).toEqual([REPLY_COPIED, 'execution.reply_claimed', REPLY_SENT]);
+  });
+
+  // Batch item 8 (finding 3): the sent answer is the record of the reply and completes the obligation it answered.
+  it('a sent answer completes her request and the follow-up waiting on her (proof: the REPLY_SENT row), never the referral; it records the reply and holds the account as a conversation', async () => {
+    const db = world();
+    const p = db.client();
+    const gmail = { sent: [] as unknown[], drafts: [] as unknown[] };
+    const mk = (id: string, kind: string, title: string, over: Record<string, unknown> = {}) => ensureCommitment(p, { accountName: ACCOUNT, kind, title, person: { personaId: 41, name: 'Ann Scratch', email: ANN }, source: { kind: 'disposition', id }, ...over } as never, { actor: ACTOR, now: NOW });
+    await mk('d-ask', 'answer_request', "Answer Ann's request: the two-site comparison");
+    await mk('d-ref', 'referral', 'Decide on Bob Lane (named by Ann)');
+    await ensureCommitment(p, { accountName: ACCOUNT, kind: 'follow_up', status: 'waiting', dependency: "Ann's reply", title: 'Follow up with Ann Scratch', person: { personaId: 41, name: 'Ann Scratch', email: ANN }, source: { kind: 'send', id: 'k0' } } as never, { actor: ACTOR, now: NOW });
+    expect(await accountRepliedRecently(p, 'bob@nfi.example.com', NOW, { accountName: ACCOUNT })).toMatchObject({ id: 'msg-1' });
+    const pv = await sendSellerReply(p, { messageId: 'msg-1', body: FILLED, actor: ACTOR, now: NOW }, deps(gmail));
+    const hash = 'preview' in pv && pv.ok ? pv.preview.contentHash : '';
+    expect(await sendSellerReply(p, { messageId: 'msg-1', body: FILLED, actor: ACTOR, now: NOW, confirm: { contentHash: hash, recipient: ANN } }, deps(gmail))).toMatchObject({ ok: true, alreadySent: false });
+    const sentRow = db.store.gapAuditEvent.find((r) => r.kind === REPLY_SENT)!;
+    const all = await loadCommitments(p, { accountNames: [ACCOUNT] });
+    expect(all.map((c) => [c.kind, c.status, c.proof?.kind ?? null, c.proof?.id ?? null])).toEqual([
+      ['answer_request', 'done', 'ledger', sentRow.id],
+      ['referral', 'open', null, null],
+      ['follow_up', 'done', 'ledger', sentRow.id],
+    ]);
+    expect(all[0].proof?.note).toBe('Answered Ann Scratch in their thread from GAP on today.');
+    // The answer is the record of her message: it holds nobody as an unread reply ...
+    expect(await accountRepliedRecently(p, 'bob@nfi.example.com', NOW, { accountName: ACCOUNT })).toBeNull();
+    // ... and the account is in a conversation, so a cold first touch to anyone else there is still refused.
+    expect((await loadAccountConversations(p, [ACCOUNT], NOW)).get(ACCOUNT)).toEqual({ who: ANN, responseClass: 'answered_in_their_thread', at: new Date(sentRow.created_at).toISOString() });
+    expect(await accountMotionRefusal(p, { accountName: ACCOUNT, personaId: 99, email: 'bob@nfi.example.com', now: NOW })).toMatchObject({ owner: ANN, unlockAt: 'never automatically' });
   });
 
   it('the confirm binds the sending mailbox as well as the text and the recipient; a newer message after the preview makes it stale', async () => {

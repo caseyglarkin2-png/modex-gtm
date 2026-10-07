@@ -4,7 +4,7 @@
  * append-only send ledger), and an account reply still waiting for triage.
  * Read only, except `recordMotionChoice` (one append-only audit row).
  */
-import { DIRECT_CLAIMED, DIRECT_RELEASED, DIRECT_SENT, DRAFTED, DRAFT_CLAIMED, DRAFT_DISCARDED, DRAFT_SENT, DRAFT_SUBJECT_TYPE, MANUAL_SENT } from '../execution/draft-ledger';
+import { DIRECT_CLAIMED, DIRECT_RELEASED, DIRECT_SENT, DRAFTED, DRAFT_CLAIMED, DRAFT_DISCARDED, DRAFT_SENT, DRAFT_SUBJECT_TYPE, MANUAL_SENT, REPLY_SENT, REPLY_SUBJECT_TYPE } from '../execution/draft-ledger';
 import { historyFromRows } from '../execution/person-history';
 import { isHardBounceStatus } from '../../email/bounce';
 import { accountRepliedRecently } from '../replies/account-reply';
@@ -49,7 +49,25 @@ export interface AccountConversation {
 /** The newest buyer response at each account in the window (human-confirmed only). */
 export async function loadAccountConversations(prisma: PrismaLike, accountNames: readonly string[], now: Date): Promise<Map<string, AccountConversation>> {
   const out = new Map<string, AccountConversation>();
-  if (accountNames.length === 0 || !prisma.conversationDisposition?.findMany) return out;
+  if (accountNames.length === 0) return out;
+  // Batch item 8 (finding 3): an answer GAP sent in a person's thread is a conversation too (the reply it answered is
+  // recorded by it), so the account stays held for everyone else, exactly as a recorded answer holds it.
+  const keepNewest = (account: string, c: AccountConversation) => {
+    const have = out.get(account);
+    if (!have || c.at > have.at) out.set(account, c);
+  };
+  if (prisma.gapAuditEvent?.findMany) {
+    const wanted = new Set(accountNames);
+    const sent: Array<{ kind?: string; subject_type?: string; payload: Record<string, unknown> | null; created_at: Date }> = await prisma.gapAuditEvent.findMany({ where: { kind: REPLY_SENT, subject_type: REPLY_SUBJECT_TYPE, created_at: { gte: new Date(now.getTime() - ACCOUNT_CONVERSATION_DAYS * 86_400_000) } }, select: { kind: true, subject_type: true, payload: true, created_at: true }, orderBy: { created_at: 'desc' }, take: 500 });
+    for (const r of sent ?? []) {
+      // Belt and braces over the query: only an answer sent in a person's thread counts.
+      if (r.kind !== REPLY_SENT || r.subject_type !== REPLY_SUBJECT_TYPE) continue;
+      const account = typeof r.payload?.accountName === 'string' ? r.payload.accountName : null;
+      const who = typeof r.payload?.recipient === 'string' ? r.payload.recipient.toLowerCase() : null;
+      if (account && who && wanted.has(account) && !Number.isNaN(new Date(r.created_at).getTime())) keepNewest(account, { who, responseClass: 'answered_in_their_thread', at: new Date(r.created_at).toISOString() });
+    }
+  }
+  if (!prisma.conversationDisposition?.findMany) return out;
   const rows: Array<{ account_name: string; contact_email: string; response_class: string; created_at: Date }> = await prisma.conversationDisposition.findMany({
     where: {
       account_name: { in: [...accountNames] },
@@ -63,7 +81,7 @@ export async function loadAccountConversations(prisma: PrismaLike, accountNames:
   for (const r of rows) {
     // Belt and braces over the query: only a real answer with a real date counts.
     if (!CONVERSATION_RESPONSE_CLASSES.has(r.response_class) || !r.created_at || Number.isNaN(new Date(r.created_at).getTime())) continue;
-    if (!out.has(r.account_name)) out.set(r.account_name, { who: String(r.contact_email).toLowerCase(), responseClass: r.response_class, at: new Date(r.created_at).toISOString() });
+    keepNewest(r.account_name, { who: String(r.contact_email).toLowerCase(), responseClass: r.response_class, at: new Date(r.created_at).toISOString() });
   }
   return out;
 }

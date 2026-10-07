@@ -17,6 +17,7 @@
  */
 import { FREEMAIL_DOMAINS, OWN_DOMAINS } from './domains';
 import { classifyReply } from './classify';
+import { REPLY_SENT, REPLY_SUBJECT_TYPE } from '../execution/draft-ledger';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -81,5 +82,12 @@ export async function accountRepliedRecently(prisma: PrismaLike, recipient: stri
       })
     : [];
   const done = new Set(read.map((r) => r.source_id));
+  // Batch item 8 (finding 3): an answer GAP sent in their thread is the record of their message too. The account stays
+  // in a conversation (motion/load.ts loadAccountConversations counts the answer), so nobody else there gets a cold
+  // first touch because of it.
+  if (prisma.gapAuditEvent?.findMany) {
+    const answered: Array<{ kind?: string; subject_type?: string; subject_id: string }> = await prisma.gapAuditEvent.findMany({ where: { kind: REPLY_SENT, subject_type: REPLY_SUBJECT_TYPE, subject_id: { in: human.map((r) => r.id) } }, select: { kind: true, subject_type: true, subject_id: true } });
+    for (const a of answered ?? []) if (a.kind === REPLY_SENT && a.subject_type === REPLY_SUBJECT_TYPE) done.add(String(a.subject_id));
+  }
   return human.find((r) => !done.has(r.id)) ?? null;
 }

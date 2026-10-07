@@ -218,6 +218,8 @@ export interface ReplyItem {
   twinIds?: string[];
   /** Batch item 8: the sender's HubSpot contact id when GAP holds it. */
   hubspotContactId?: string | null;
+  /** Batch item 8: when GAP sent the answer in their thread. */
+  answeredAt?: string | null;
 }
 
 export interface RepliesPage {

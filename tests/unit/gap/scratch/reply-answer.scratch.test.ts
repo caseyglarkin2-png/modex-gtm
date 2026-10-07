@@ -190,6 +190,13 @@ describe.skipIf(!RUN)('R42b: the prepared answer to a reply (scratch database, t
     // Copied, the released claim (the suppression refusal), then the claim that sent: distinct facts.
     expect(await ledgerKinds(ids.ask)).toEqual(['execution.reply_copied', 'execution.reply_claimed', 'execution.reply_released', 'execution.reply_claimed', 'execution.reply_sent']);
     expect((await get(ids.ask)).body.states).toMatchObject({ copied: { by: 'casey@freightroll.com' }, drafted: null, sent: { recipient: glen.email }, openClaim: null });
+    // Batch item 8 (finding 3): the sent answer is the record of the reply: the replies route no longer lists it for
+    // triage (no card asks to record what GAP itself sent), and the full list carries when it was answered.
+    const { GET: listGet } = await import('@/app/api/gap/replies/route');
+    const { NextRequest: Req } = await import('next/server');
+    const list = async (state: string) => ((await (await listGet(new Req(`http://localhost/api/gap/replies?state=${state}&limit=200`))).json()) as { items: Array<{ id: string; answeredAt?: string | null }> }).items;
+    expect((await list('undispositioned')).map((r) => r.id)).not.toContain(ids.ask);
+    expect((await list('all')).find((r) => r.id === ids.ask)?.answeredAt).toEqual(expect.any(String));
   }, 180_000);
 
   it('a Gmail draft is not a send: saved in their thread, then a send while the draft exists is refused', async () => {
