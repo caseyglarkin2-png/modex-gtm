@@ -1696,6 +1696,37 @@ task's HubSpot owner is the portal default and search-before-create depends on H
 no HubSpot field; the Work held card for a closure speaks the routing hold's generic words until the account's
 pursuit summary is fresh.
 
+### ACCEPTANCE B DEFECT BATCH: dispositions by ticket (2026-10-07; base 7ab63c7a)
+
+One line per ticket: fixed (with the commit) or PARTIAL (with the dependency named). Every fix has a focused test and
+a deliberate mutation that turns it red; nothing here sends, enrolls, spends Apollo or writes HubSpot.
+
+- R05 production guard: FIXED f4b3c70f (GAP_SEND_TRANSPORT=sink and HUBSPOT_API_BASE_PATH are refused under VERCEL_ENV=production).
+- R24 / R30 one freshness authority (the Tulsa story): FIXED daa61ff3 (`research/currentness.ts` is the only clock).
+- R33 / section 4 a story set aside comes back: FIXED 5f5e76cf (never offered again; redrafting answers story_set_aside).
+- R11 / R12 / section 8 the family question: FIXED 42b21547 (never asked for job or procurement drafts; a suggested default with its basis).
+- R31 / R23 Gatik is not an event, one guess everywhere: FIXED 4cf3fdb1 (partnership and software claims; fit-led; the guess and falsification read off the fact, editable).
+- R33 automatic reversible preparation: FIXED c0a4e214 (Casey's approved policy; never approved, routed or sent).
+- R34 production dead end until the families are seeded: FIXED 372f6609 (copy read from the seeded rows; never READY without it). Seeding the families stays a release precondition (owner action).
+- R22 / R30 a closed RFP and a reposted posting: FIXED 1b6416a9 (a past due date is not current; a repost is never a job-led trigger).
+- R13 binding: FIXED 1b6416a9 (the confirm binds the sending mailbox; a live enrollment binds the recipient; a losing duplicate tab is told already sent).
+- R10 / R15 state vs anchor on an unread send gate: FIXED 1b6416a9 (research with the reason, no Ready target).
+- R35 copy outside the compiler: FIXED 1b6416a9 (a question asking what to write is answered with the control, never the model).
+- R21 / R23 a vendor announcing news about the account: FIXED 1b6416a9 (the vendor's claim, quoted_third_party).
+- Family hold at routing (R62 matrix): FIXED 1b6416a9 (R3d family_hold, fail closed when unread).
+- R41 / R45 / R40 Work's counts are not completions: FIXED 1e7b4aa4 (parked research and holds; Done counts completions only; a returned reminder is never completed by a skip; Done needs its proof).
+- R42 out-of-office date: FIXED 7f46b334 (read from the received time).
+- R50 / R44 capture scope, R51 rebooking and meeting context, R41 / R51 evening meetings, a deal contact's reply: FIXED 6abad07a.
+- R43 by-hand follow-ups past the first ten, R55 legacy-name closure and sweep starvation: FIXED e2da206e (rotation cursors).
+- R53 the recap is always next: FIXED 5486471f (a copied or written recap is recorded; the deal moves on).
+- R42b finding 3, a sent answer is the record of the reply: FIXED 71b6ff36 (completes what it answered; the account stays in a conversation).
+- R54 approved HubSpot changes bounded to live work: FIXED 280faa5a (origin_closed, one task per obligation, completion, conflict re-proposed, owner and due time, GAP_CRM_APPROVED_WRITES_ENABLED); (f) the cross-account list: FIXED 4dfa32ec.
+- R20 coverage claims: FIXED 71c4c3a8 (the news cap stated; a 15% rotation margin; an outage turn recorded and never counted).
+- R25 dead letter and budget: FIXED 71c4c3a8 (research_failed; an unreadable grounded budget queues nothing) and 0beca6b3 (a news daily budget). "A re-seen signal erases queuedAt" does not reproduce at this tip: a re-seen URL returns created false at capture and the runner never rewrites its metadata.
+- R43 follow-up copy (touch 2 and later): PARTIAL, dependency: every seeded approach family is single-touch; a step-1 copy family must be written and seeded before a prepared follow-up exists.
+- Section 8 generated quality: PARTIAL, dependency: a held-out, human-graded corpus of at least 30 cases with model, prompt and policy versions recorded.
+- R15 / R61 latency: PARTIAL, dependency: 30 navigations per condition measured on the production build.
+
 ## 12. Migration, backfill and rollback
 
 Order of commits inside Sprint 1 and 3: schema + SQL first (no reader), then pure core, then importers (Top100 before PIC before modex legacy), then runtime pin, then services, then queue actions under the flag, then `GAP_OS_ENABLED=true` in Vercel after `verify-triggers.ts` passes against prod (env is snapshot at deploy; redeploy after setting). Before the prod `db push`, preview it with `prisma migrate diff --from-url <prod> --to-schema-datamodel prisma/schema.prisma --script` and confirm the script is additive only; also confirm the prod role can `CREATE FUNCTION` (not yet verified). Rollback: the flag off restores byte-identical behavior instantly; full removal is the rollback SQL plus reverting the runtime, service and queue-action commits; `sequences` is never modified; the only two pre-existing tables GAP OS's schema touches at all are `draft_queue_items` (one nullable `sequence_version_id` stamp, S1-T2) and `inbound_messages` (`source String @default("gmail")` and `hubspot_engagement_id String?`, S2-T1, needed so the reply cron and the HubSpot poller can tell a Gmail-sourced row from a HubSpot-engagement-sourced one and attribute the engagement id idempotently) — both additive-only, both confirmed by the production preflight below; the lane and PIC files are read, never written.
