@@ -95,11 +95,12 @@ function sender(i: HealthInputs['sender']): HealthComponent {
 
 function routing(i: HealthInputs['routing'], now: Date): HealthComponent {
   const base = { key: 'routing' as const, name: 'Routing' };
-  if (!i.lastRunAt) return { ...base, state: 'DEGRADED', label: 'No routing run yet · cards may be missing', detail: 'No completed routing run on record.' };
+  // R60: the health line on Work is read by the seller: the recommendations, never the routing machinery.
+  if (!i.lastRunAt) return { ...base, state: 'DEGRADED', label: 'No recommendations made yet · cards may be missing', detail: 'No completed routing run on record.' };
   const age = now.getTime() - i.lastRunAt.getTime();
   const detail = `Last completed routing run ${i.lastRunAt.toISOString()}. Every outbound click re-checks the card, so an old card cannot send stale.`;
-  if (age > ROUTING_FRESH_MS) return { ...base, state: 'DEGRADED', label: `Routing refreshed ${ago(age)} · cards may be stale`, detail };
-  return { ...base, state: 'HEALTHY', label: `routing refreshed ${ago(age)}`, detail };
+  if (age > ROUTING_FRESH_MS) return { ...base, state: 'DEGRADED', label: `Recommendations refreshed ${ago(age)} · cards may be stale`, detail };
+  return { ...base, state: 'HEALTHY', label: `recommendations refreshed ${ago(age)}`, detail };
 }
 
 export function evaluateHealth(inputs: HealthInputs, now: Date): HealthReport {

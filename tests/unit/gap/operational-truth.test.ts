@@ -34,7 +34,7 @@ describe('routing health means an APPLIED routing run', () => {
     };
     const i = await loadHealthInputs(prisma, { env: {} });
     const r = evaluateHealth(i, NOW);
-    expect(r.components.find((c) => c.key === 'routing')).toMatchObject({ state: 'DEGRADED', label: 'Routing refreshed 3d ago · cards may be stale' });
+    expect(r.components.find((c) => c.key === 'routing')).toMatchObject({ state: 'DEGRADED', label: 'Recommendations refreshed 3d ago · cards may be stale' });
   });
 });
 

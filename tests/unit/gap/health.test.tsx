@@ -26,7 +26,7 @@ describe('evaluateHealth', () => {
   it('everything answering: HEALTHY with the routing freshness in the headline', () => {
     const r = evaluateHealth(healthy(), NOW);
     expect(r.overall).toBe('HEALTHY');
-    expect(r.headline).toBe('Healthy · routing refreshed 12m ago');
+    expect(r.headline).toBe('Healthy · recommendations refreshed 12m ago');
   });
 
   it('HubSpot down: BLOCKED with the fail-closed line, even though every other dependency is fine', () => {
