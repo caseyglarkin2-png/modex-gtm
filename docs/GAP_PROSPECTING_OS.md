@@ -1959,6 +1959,31 @@ d9902641), on the scratch database and the stubs, corpus tag r63.
 - Harness event: the R63 server on 3100 exited (code 127) at about 18:01 local, after reviewer B's double-send attempt. It was restarted once on the same `.next` build, database, stub and session; the lead was told. The dead log is kept in the scratchpad.
 - The analyst tables lower on /gap/learning keep their words (sequence version ids, VERIFIED_FACT, program keys): DECIDED by the lead.
 
+**R63-B dispositions (reviewer B: accessibility, trust, engineering; 2026-10-07).** 1 BLOCKER, 15 SHOULD, 13 NICE on
+c00b94ca; screenshots in the scratchpad `r63-B/`. Each fix is its own commit with focused single-file tests
+(--maxWorkers=1) and one red mutation, restored; no full suite and no rebuild under the lead's load cap.
+- B1 FIXED 8f7c20d5 and 3fe2c39e (above).
+- S12 FIXED 77261d91: a parked account (Sysco, closed lost Sep 1) never carries a first-touch card on Work. Work asks the gate's own resolver for the accounts it would offer cold work (eight at most, in Work's order, remembered five minutes) and holds them in the closure's words; the gate refuses the same touch with the same sentence (pinned).
+- S10 FIXED 66b1e9ce: a proposed plan stays proposed: each milestone starts at Not decided, the button counts only what was chosen, only those are recorded.
+- S9 FIXED 67010fe2: one reader for "has anything happened" (the touches, the buyer's words, a recorded conversation, the open deals, a meeting ahead) feeds both "What has happened between us" and the learn line's basis.
+- S11 FIXED a9f53e3f: a restored skip leaves SET ASIDE OR LOGGED TODAY; the obligation stands once, under OWED; the skip stays in the account's history.
+- S1 FIXED 0fa50dfa: an opt-out on file (their reply, recorded or not, or a recorded do not contact) makes the pack show no draft ("No email: they opted out", no subject, no body, no copy, no call script); the words are not temporary and say what to do. The approach, the motion line and the intake card say "Do not contact: ... Nothing goes to them from here."
+- S2 FIXED 002e4829: an opt-out or a bounce offers no "Answer in Gmail"; an email sent after the opt-out carries it beside the send.
+- S3 FIXED 21331eae: one Work outcome per account per day (a stale tab's second press answers 200 with the existing row, one line on Work); the day boundary no longer carries the press's milliseconds.
+- S7 FIXED IN PART 58b953d6: GAP's own not-found ("This account is not on your list", "This action pack is not on your list", "This page is not in GAP"), one link Back to Work, the title "Not found | GAP", the call page in words. NOT FIXED, the lead's decision: the HTTP status stays 200, because the page streams under the root and GAP loading boundaries before it can know the id is unknown (Next's docs: a real 404 needs the check in the proxy). The fix is a system-wide change: move the root `middleware.ts` to `proxy.ts` (Node runtime) and check the GAP detail ids there, or drop the loading boundaries above the GAP detail pages.
+- S8 FIXED 3967165c: sign-in comes back to the page (every GAP page's fallback carries it; the login page honors the session gate's callbackUrl, same site only). Production's gate already sends the callback (read-only check: GET /gap/ answers 307 to /login/?callbackUrl=...).
+- S4 FIXED 2666398e: Capture keeps one polite live region for the whole flow and says every save, refusal and record in it.
+- S5 FIXED d97fd055: the Note panel is a modal dialog for the keyboard (Escape from anywhere inside, Tab and Shift+Tab wrap, focus returns to the opener); closing keeps the typed note.
+- S6 FIXED a51fd852: real headings: the brief's rows and the pack's sections are h2, each Work card an h3 named by its account.
+- S13 and S14 FIXED 624b9e27 (and the plan's 24 px radios in 66b1e9ce, the citations in e1046642): 24 px targets; at phone width the Note pill sits in the page flow after the content (fixed from 640 px up), so it covers nothing.
+- S15 FIXED c31cab0c: "No open HubSpot deal, checked moments ago" (never "HubSpot opportunity CLEAR"); a thesis row named in the words its cells show ("hidden capacity"); the call page's "not_found" in 58b953d6.
+- NICE fixed: N2 6891aa7b (a stale Record says it was refused); N1 part, N3, N4, N5, N8, N10 6c25eed2 ("7 theses", the composer's em dashes, Escape on "Why this person?", screen-reader spacing, the proof line from the canon's phrases with "260 sites committed" and passing the compiler's nearest-qualifier rule, a canceled meeting never the next step); N11 1f2ce814 (a capture link to a reply GAP does not hold opens a plain note); N12 e1046642 (a citation named "Source 1: title (site)"; an unlinked one never says "evidence_record"); N9 b63f2e69 (a fact's date is one calendar day everywhere).
+- NICE as debt (owners in the debt list below): N1 rest, N6, N7, N13.
+- Decision for Casey (N8): the 5% figure travels with "observed" in GAP (the compiler's canon, top100/CLAIMS.md, forbids "measured" beside it); the repository's prospect canon (CLAUDE.md) says "~5% measured". The proof line keeps "observed" until Casey says which canon is right.
+- Harness finding, not a product defect: the local Windows `next build` registers no middleware (`.next/server/middleware-manifest.json` is empty), so on the R63 server a signed-out page renders its own fallback and an API answers without the session gate; production runs the gate (read-only checks: GET /api/email/send/ answers 401, GET /gap/ 307 with the callback). Signed-out and API probes on the local server do not describe production.
+- Passing (reviewer B): the skip link; 182 focus stops with a visible ring; the keyboard walk completes; no horizontal scroll at 390 on five pages; no unnamed controls; one capture per reply across tabs; a recorded do not contact removes Doug from the composer; direct links load in a fresh signed-in context; a bogus view parameter falls back to Now.
+- Receipts at b63f2e69: the 19 R63 test files run singly with --maxWorkers=1, 59 tests green; each fix's neighboring files run singly at its commit (the tests that pinned old wording or old source lines moved to the new contract in the same commit); eslint and tsc clean on every changed file.
+
 **Consolidated debt (2026-10-07).** Every debt this recovery named, one line each, with its owner and the guard that
 holds today; the entries above keep the detail. Owners: engineering (the GAP engineer of record), Casey (a product or
 spend decision), operator (runs the system), copy (human-written words, Casey's).
@@ -1985,6 +2010,12 @@ spend decision), operator (runs the system), copy (human-written words, Casey's)
 - Two Sprint 5 review NICEs not taken: a raw date in the brief (context/brief.ts), and a canceled meeting's rebook offer with HubSpot's stale next step. Guard: none. Owner: engineering (R62 lists them).
 - The app's main sidebar lists Accounts and Work Queue beside GAP OS. Guard: none (outside GAP). Owner: Casey (a system-wide change).
 - Transcription stays off pending its spend. Guard: `GAP_TRANSCRIPTION_ENABLED` unset. Owner: Casey.
+- R63-B S7: a nonsense GAP id answers HTTP 200 (the not-found body and title are GAP's own). Guard: the body says not found, links back to Work, and Next marks the response noindex. Owner: the lead (a system-wide proxy change).
+- R63-B N1 rest: admin words on the preview page's system details ("review_required to approved", "Emit enroll row (shadow)", "Hidden Capacity v1draft", "{{first_name}}", "Confidence 40%" without a trust word). Guard: they sit in the collapsed System details and the analyst views. Owner: engineering, copy for the words.
+- R63-B N6: Mills reads "active" in the thesis list and "No usable thesis yet" on its page (the list shows the record's state, the page the gate's). Guard: the send gate refuses it. Owner: engineering.
+- R63-B N7: "The opening story, above." can show when the anchor above is not shown (an account on hold). Guard: its basis names the anchor's fact. Owner: engineering.
+- R63-B N13: a first-touch email opens by quoting the raw fact title. Guard: the seller reads every email before it goes. Owner: copy (Casey).
+- R63-B N8 decision: "about 5% ... observed" (GAP's compiler canon) or "~5% measured" (the repository canon). Guard: the compiler's rule holds every email. Owner: Casey.
 
 ### HANDOFF
 
@@ -1994,7 +2025,7 @@ HANDOFF commit: 12050a3e (docs only; the block below describes head_sha 3fe2c39e
 # HANDOFF (this block's own commit SHA is on the ledger line directly above the block)
 branch: feat/gap-account-first-ux
 base_sha: e66a9853
-head_sha: 3fe2c39e
+head_sha: b63f2e69
 production_sha: 672570ed
 tickets:
   R00: {disposition: DONE, evidence: "2113361c: production 672570ed reconciled; the capability matrix and the one stranded PepsiCo draft recorded"}
@@ -2037,7 +2068,7 @@ tickets:
   R61: {disposition: PARTIAL, evidence: "31c44d1f; the p95 re-judgment in the R61 entry", dependency: "cold first byte (platform); Prisma idle SELECT 1 per pooled connection; Work's rebuilt read"}
 later_tickets:
   R62: {disposition: IN PROGRESS, evidence: "acceptB runs the matrix on 55433"}
-  R63: {disposition: IN PROGRESS, evidence: "fresh seller reviewers on the c00b94ca build; reviewer B's blocker (the legacy composer sent to an unrecorded opt-out) fixed by 8f7c20d5 and 3fe2c39e; the other reports pending"}
+  R63: {disposition: IN PROGRESS, evidence: "reviewer B's report dispositioned (the R63-B entry): B1 8f7c20d5 3fe2c39e; S1-S15 fixed (S7 in part); NICE fixed or named debt; reviewer A's list pending", dependency: "S7's HTTP 404 needs the lead's proxy decision; N8's 5% qualifier needs Casey's"}
   R64: {disposition: NOT STARTED, evidence: "needs Casey's authorization for the production write below"}
   R65: {disposition: DONE, evidence: "e5b0b567 the counts, d9902641 owners and retry paths, c72e6a2f the read-only dry run"}
 reopened_unresolved:
@@ -2064,6 +2095,10 @@ r62_cases:
     - "the stranded-draft dry run names ADOPT for the Pepsiprod Tulsa draft; the R11 service then adopts that id"
     - "GET /api/gap/health?operations=1 counts the broken handoffs and HubSpot failures with owners and retry paths; the plain call carries none"
     - "an opt-out reply on file, unrecorded, refuses the legacy composer's send with the reason text; the composer is absent on GAP pages"
+    - "a parked account (closed lost, nothing since) holds on Work's first load in the closure's words; the gate refuses its first touch"
+    - "an opt-out on file shows no draft on the pack page; no Answer in Gmail on an opt-out or a bounce"
+    - "a proposed plan records only what was chosen; a stale Skip today is one row and one line on Work"
+    - "a restored skip leaves the day's set-aside list; Kroger's story says what has happened (deals, their words, the meeting)"
   decide: "DECIDED by the lead 2026-10-07: the analyst tables lower on /gap/learning keep their words (sequence version ids, VERIFIED_FACT, program keys), analyst words by contract (R60)"
 r63_seller_tasks:
   - work today's list
@@ -2122,6 +2157,7 @@ test_receipts:
   latest: {sha: 4e936a90, typecheck: "npx tsc --noEmit -p . (clean)", gap: "npx vitest run tests/unit/gap/<four chunks> --maxWorkers=2: 403 files / 5,653 tests", scratch: "GAP_SCRATCH_DATABASE_URL=<scratch> npx vitest run tests/unit/gap/scratch --maxWorkers=1: 9 files / 50 tests", rest_e5b0b567: "npx vitest run --maxWorkers=2 --exclude tests/unit/gap/**: 326 files / 2,299 passed, 1 skipped", build_e5b0b567: "npm run build: compiled", journeys_a0f6bb77: "r62-exit2/ 12 steps and r62-capture2/ 6 steps, zero internal-text hits, zero HubSpot writes", r65_live_e5b0b567: "r65-live/"}
   after_4e936a90: "16971d2c and d9902641: focused tests only under the load cap (r60-capture-reply 11, capture-once and capture 25, r65-operations and learning-dashboard 19), each with a red mutation"
   r63_fix_3fe2c39e: "8f7c20d5 and 3fe2c39e: eight files run singly with --maxWorkers=1, 41 tests (r63-opt-out-send 4, r63-compose-on-gap 2, email-send-routes 11, queue-send-deps 10, warm-intro-writers 7, perform-send-parity 3, campaign-tag-flow 2, b4-unsubscribe-case-insensitive 2), a red mutation on each fix; eslint and tsc clean"
+  r63_b_b63f2e69: "77261d91..b63f2e69: the 19 R63 test files run singly with --maxWorkers=1, 59 tests green; neighbors run singly at each commit; a red mutation on each fix; eslint and tsc clean; no full suite, no build"
 genuine_blockers: []
 ```
 
