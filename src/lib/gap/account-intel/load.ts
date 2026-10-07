@@ -28,6 +28,7 @@ import type { AccountContext } from '../context/context';
 import { accountSlug } from './href';
 import { approachOfHypothesis } from '../research/approach-policy';
 import { factCurrentness } from '../research/currentness';
+import { draftApproachFor } from '../story/draft-approach';
 /** R30/R31: the non-physical claim classes the read keeps as story facts of their own kind. */
 const CLAIM_FACT_CLASSES: ReadonlySet<string> = new Set(['JOB_POSTING', 'PROCUREMENT']);
 
@@ -225,7 +226,12 @@ export async function loadAccountInputs(
     // R30/R31: a job or procurement claim is re-gated by the claim rules (publisher, speaker), a physical fact by the
     // fact rules; the class rides on the fact so the story and the anchor know which approach it may open.
     const claimClass = typeof r.claim_class === 'string' && CLAIM_FACT_CLASSES.has(r.claim_class) ? r.claim_class : null;
-    if (claimClass ? liveClaimFailure(r.evidence_text, accountName, factUrl(r)) : liveFactFailure(r.evidence_text, accountName, factUrl(r))) continue;
+    // Item 4: an ONGOING partnership or program the account states (the Gatik agreement) opens a fit-led thesis; it is
+    // kept and re-gated by the claim rules (publisher, speaker), like a posting. A one-time software deployment opens
+    // nothing and stays off the page, as before.
+    const recordedKind = meta.continuity?.kind;
+    const fitLed = !claimClass && draftApproachFor({ text: r.evidence_text, claimClass: r.claim_class ?? null, continuity: recordedKind === 'event' || recordedKind === 'ongoing_state' || recordedKind === 'ended' ? recordedKind : null }) === 'fit_led';
+    if (claimClass || fitLed ? liveClaimFailure(r.evidence_text, accountName, factUrl(r)) : liveFactFailure(r.evidence_text, accountName, factUrl(r))) continue;
     if (contradicted.has(r.id)) continue;
     const k = meta.continuity?.kind;
     const f: FactInput = {

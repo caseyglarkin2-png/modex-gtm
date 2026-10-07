@@ -27,6 +27,7 @@ import { extractCitationIds } from '../hypothesis/observation';
 import { sourceLabelVariants } from './source-label';
 import { approachOfHypothesis, claimAdmittedFor, type EvidenceApproach } from './approach-policy';
 import { isCurrentFact } from './currentness';
+import { classifyContinuity } from './continuity';
 
 export interface GateSignal {
   id: string;
@@ -106,15 +107,21 @@ export function outreachFactRefusal(s: GateSignal, accountName: string, opts: Ga
   const physical = isPhysicalOpsFact(text);
   const claimClass = typeof s.claim_class === 'string' && s.claim_class ? s.claim_class : physical ? 'FACT' : null;
   if (approach === 'event_led') {
+    // Item 4: a claim stored as another class (a partnership, a technology program, a posting) never opens an
+    // event-led first touch, whatever its words; and the physical rule refuses a software or partner announcement.
+    if (typeof s.claim_class === 'string' && s.claim_class && s.claim_class !== 'FACT') return 'claim_not_admitted_for_approach';
     if (!physical) return 'not_a_physical_network_change';
   } else {
     const attrs = isObj(s.metadata) && isObj(s.metadata.claimAttributes) ? (s.metadata.claimAttributes as { postingStatus?: 'open' | 'closed' | 'reposted' | 'unknown' }) : null;
-    const kind = continuity && typeof continuity.kind === 'string' ? (continuity.kind as 'event' | 'ongoing_state' | 'ended') : null;
+    // Item 4: no recorded continuity reads the fact's own words (a "multi-year agreement" is an ongoing state). A program
+    // a newer source ended is superseded before any approach question (the seller's reason is that it ended).
+    if (continuity && continuity.kind === 'ended') return 'superseded';
+    const kind = continuity && typeof continuity.kind === 'string' ? (continuity.kind as 'event' | 'ongoing_state' | 'ended') : classifyContinuity(text);
     const admitted = claimAdmittedFor(approach, { claimClass, attributes: attrs, continuity: kind });
     if (!admitted.ok) return admitted.reason;
     // A physical fact cited under another approach still passes the physical rules; a job or procurement claim passes
-    // the attribution and publisher rules only.
-    if (claimClass === 'FACT' && !physical) return 'not_a_physical_network_change';
+    // the attribution and publisher rules only; a fit-led operating fact is a state, not a change.
+    if (claimClass === 'FACT' && !physical && approach !== 'fit_led') return 'not_a_physical_network_change';
   }
   if (continuity && continuity.kind === 'ended') return 'superseded';
   // The same stored-claim rules the brief applies: attribution and a real publisher link.

@@ -29,7 +29,7 @@ import { PRIMARY_BY_TEXT } from '@/lib/gap/story/anchor-text';
 import { familyChoices, label as familyLabel } from '@/lib/gap/story/propose-family';
 import { OBSERVATION_REFUSAL_TEXT } from '@/lib/gap/hypothesis/observation';
 import { Tag } from './seller-tag';
-import { draftDefaultsFor, storyDraftPayload } from '@/lib/gap/story/draft-defaults';
+import { draftDefaultsForFact, storyDraftPayload } from '@/lib/gap/story/draft-defaults';
 
 const BTN = 'inline-flex min-h-11 items-center justify-center rounded-md px-3 text-sm font-medium';
 const OUTLINE = `${BTN} border border-[var(--border)] hover:bg-[var(--muted)] disabled:opacity-60`;
@@ -94,6 +94,7 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
   const [drafting, setDrafting] = useState<string | null>(null);
   const [observation, setObservation] = useState('');
   const [problem, setProblem] = useState('');
+  const [falsification, setFalsification] = useState('');
   const [familyPick, setFamilyPick] = useState<Record<string, string>>({});
   const [drafted, setDrafted] = useState<{ id: string; preparation: string } | null>(null);
   // After a switch or a submit the clicked control unmounts: focus moves to the status line (WCAG 2.4.3).
@@ -136,7 +137,11 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
     setNote(null);
     setDrafting(d.factId);
     setObservation(d.proposedObservation);
-    setProblem(draftDefaultsFor(d.claimClass).problem);
+    // R31: the guess and the falsification are read off this fact (its change, its site, its approach), never one
+    // sentence for every account; both are editable before the draft goes to review.
+    const defaults = draftDefaultsForFact({ text: d.story, claimClass: d.claimClass, approach: d.approach ?? null });
+    setProblem(defaults.problem);
+    setFalsification(defaults.falsification);
   }
 
   /**
@@ -144,12 +149,12 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
    * complete. Item 3: a pending proposal posts ITS OWN person (`forPerson`), never the anchor's chosen one, so answering
    * Kay's question never mints a draft for Tom.
    */
-  async function postDraft(factId: string, text: { observation: string; problem: string }, problemFamily: string | null, claimClass: string | null | undefined, forPerson?: { personaId: number | null; title: string | null }): Promise<DraftResponse | null> {
+  async function postDraft(factId: string, text: { observation: string; problem: string; falsification?: string; factText?: string; approach?: string | null }, problemFamily: string | null, claimClass: string | null | undefined, forPerson?: { personaId: number | null; title: string | null }): Promise<DraftResponse | null> {
     const who = forPerson ?? (person ? { personaId: person.personaId ?? null, title: person.title ?? null } : null);
     const res = await fetch('/api/gap/story/draft', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(storyDraftPayload({ accountName, factId, claimClass, proposedObservation: text.observation, person: who, problem: text.problem, problemFamily })),
+      body: JSON.stringify(storyDraftPayload({ accountName, factId, claimClass, proposedObservation: text.observation, person: who, problem: text.problem, problemFamily, falsification: text.falsification ?? null, factText: text.factText ?? null, approach: (text.approach as never) ?? null })),
     });
     const body = (await res.json().catch(() => ({}))) as DraftResponse;
     if (!res.ok || !body.hypothesisId) {
@@ -173,7 +178,7 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
     setNote(null);
     setBusy({ kind: 'draft', id: d.factId });
     try {
-      const body = await postDraft(d.factId, { observation, problem }, null, d.claimClass);
+      const body = await postDraft(d.factId, { observation, problem, falsification, factText: d.story, approach: d.approach ?? null }, null, d.claimClass);
       if (!body) return;
       setDrafted({ id: body.hypothesisId!, preparation: body.preparation ?? 'draft' });
       setDrafting(null);
@@ -496,6 +501,11 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
                           <textarea id={`anchor-problem-${d.factId}`} aria-describedby={`anchor-problem-help-${d.factId}`} className="mt-1 w-full rounded-md border border-[var(--border)] bg-transparent p-2 text-sm" rows={2} value={problem} onChange={(e) => setProblem(e.target.value)} data-testid="anchor-draft-problem" />
                           <p id={`anchor-problem-help-${d.factId}`} className="text-[var(--muted-foreground)]">What we think the change does to their yards, as a guess the buyer can refute.</p>
                         </div>
+                        <div className="text-xs">
+                          <label htmlFor={`anchor-falsification-${d.factId}`} className="font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">What would prove it wrong</label>
+                          <textarea id={`anchor-falsification-${d.factId}`} aria-describedby={`anchor-falsification-help-${d.factId}`} className="mt-1 w-full rounded-md border border-[var(--border)] bg-transparent p-2 text-sm" rows={2} value={falsification} onChange={(e) => setFalsification(e.target.value)} data-testid="anchor-draft-falsification" />
+                          <p id={`anchor-falsification-help-${d.factId}`} className="text-[var(--muted-foreground)]">The question whose answer would close this thesis.</p>
+                        </div>
                         <div className="flex flex-wrap items-center gap-2">
                           <button type="submit" className={PRIMARY} disabled={busy !== null} data-testid="anchor-draft-submit">
                             {busy?.kind === 'draft' ? 'Drafting...' : 'Submit for review'}
@@ -517,6 +527,16 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
             ) : null}
           </div>
         </details>
+      ) : null}
+      {(anchor.notAnOpening ?? []).length ? (
+        <ul className="space-y-1 text-xs text-[var(--muted-foreground)]" data-testid="anchor-not-an-opening" aria-label="Checked stories that are not an opening">
+          <li className="font-semibold uppercase tracking-wide">Not offered: not an opening</li>
+          {(anchor.notAnOpening ?? []).map((t) => (
+            <li key={t.factId} data-fact={t.factId}>
+              {t.story} ({t.sourceUrl ? <a href={t.sourceUrl} target="_blank" rel="noreferrer" className="underline">{t.sourceLabel}</a> : t.sourceLabel}). {t.line}
+            </li>
+          ))}
+        </ul>
       ) : null}
       {(anchor.tooOld ?? []).length ? (
         <ul className="space-y-1 text-xs text-[var(--muted-foreground)]" data-testid="anchor-too-old" aria-label="Stories too old for a first touch">

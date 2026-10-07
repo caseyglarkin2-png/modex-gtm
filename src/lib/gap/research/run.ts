@@ -408,7 +408,9 @@ export function accountIsSubject(sentence: string, accountKey: string): boolean 
 /** R22/R23: the claim types the verifier mints. A finance line and an unclassified sentence are not minted. */
 const ADMITTED_CLAIM_TYPES: ReadonlySet<ClaimType> = new Set(['physical_change', 'job_posting', 'procurement', 'technology', 'partnership', 'leadership']);
 const admittedClaim = (sentence: string): boolean => ADMITTED_CLAIM_TYPES.has(classifyClaim(sentence).type);
-const SIGNAL_TYPE_OF_CLAIM: Record<ClaimType, SignalType> = { physical_change: 'site_expansion', job_posting: 'job_posting', procurement: 'news', technology: 'technology_signal', partnership: 'news', leadership: 'news', financial: 'news', other: 'other' };
+// Item 4: a partnership is an ongoing program (the Gatik agreement), read with the technology window (90 days), not
+// as a 45-day news item: its currentness is kept by corroboration (continuity-store.ts), not re-searched every run.
+const SIGNAL_TYPE_OF_CLAIM: Record<ClaimType, SignalType> = { physical_change: 'site_expansion', job_posting: 'job_posting', procurement: 'news', technology: 'technology_signal', partnership: 'technology_signal', leadership: 'news', financial: 'news', other: 'other' };
 
 export async function verifyCandidate(c: Candidate, ctx: VerificationContext): Promise<{ ok: true; publishedAt: Date; excerpt: string } | { ok: false; reason: string }> {
   if (!c.excerpt?.trim()) return { ok: false, reason: 'no_excerpt' };

@@ -1,9 +1,11 @@
 /**
  * NEVER CROSS ACCOUNT BOUNDARIES (2026-09-28). The server rechecks
  * signal.account == thesis.account on every USE, both ways, before any write.
- * And the canonical PepsiCo case: the corroborated Gatik fact on the frozen
+ * And the canonical PepsiCo case: a verified physical fact on the frozen
  * approved PepsiCo thesis drafts a REVISION (the approved row is never
- * edited, never approved, never activated).
+ * edited, never approved, never activated). Batch item 4: the Gatik agreement
+ * is a partnership claim, so it is refused as evidence for that event-led
+ * thesis (it opens a fit-led thesis of its own instead).
  */
 import { describe, expect, it, vi } from 'vitest';
 import { hypothesisFindFirst } from './fixtures/hypothesis-table';
@@ -18,6 +20,7 @@ const fact = (id: string, account: string, text: string, over: Record<string, un
 });
 const GM = fact('gm-net', 'General Mills', 'General Mills will redesign the plant and warehouse network behind Cheerios, Blue Buffalo and Pillsbury over the next two years.');
 const PEP = fact('pep-gatik', 'PepsiCo', PRIMARY, { title: 'PepsiCo and Gatik announce multi-year agreement to deploy autonomous freight in North America', observed_at: new Date('2026-06-08'), freshness_expires_at: new Date('2026-12-23'), metadata: { verified: VERIFIED_EXCERPT, continuity: { kind: 'ongoing_state' } } });
+const TULSA = fact('pep-tulsa', 'PepsiCo', 'PepsiCo will close its warehouse operations at its Tulsa, Oklahoma, production facility and shift duties to a new site in the area.', { title: 'PepsiCo to cease warehouse operations at Oklahoma production site', observed_at: new Date('2026-09-10') });
 const KW = { id: 'kw', account_name: 'PepsiCo', source_kind: 'pounce_trigger', source_type: 'public_secondary', evidence_url: null, evidence_text: '', summary: null, title: 'PEP 10-Q mentions: capital expenditure', observed_at: new Date('2026-07-09'), external_ok: null, metadata: null, freshness_expires_at: null };
 
 function hyp(id: string, account: string, status: string, persona: number) {
@@ -30,7 +33,7 @@ function hyp(id: string, account: string, status: string, persona: number) {
 }
 
 function db(rows: any[]) {
-  const signals = [GM, PEP, KW];
+  const signals = [GM, PEP, TULSA, KW];
   return {
     prospectingHypothesis: {
       findMany: vi.fn(async (q: any) => rows.filter((r) => !q?.where?.account_name || r.account_name === q.where.account_name)),
@@ -71,15 +74,23 @@ describe('the server rechecks signal.account == thesis.account on every USE', ()
 });
 
 describe('USE & CREATE REVISION on the frozen approved PepsiCo thesis', () => {
-  it('drafts a revision whose observation is rebuilt from the Gatik fact; the approved row is never edited or approved', async () => {
+  it('item 4: the Gatik partnership is refused as evidence for the event-led thesis, before any write', async () => {
+    const prisma = db([hyp('pa1', 'PepsiCo', 'approved', 916), hyp('pa2', 'PepsiCo', 'approved', 928)]);
+    const propose = vi.fn();
+    const r = await useEvidenceForThesis(prisma, { fingerprint: await fpOf(prisma, 'PepsiCo'), hypothesisIds: ['pa1'], signalIds: ['pep-gatik'], primarySignalId: 'pep-gatik', actor: 'c', now: NOW }, { propose: propose as any });
+    expect(r).toEqual({ ok: false, reason: 'not_verified_evidence:pep-gatik:not_a_physical_network_change', results: [] });
+    expect(propose).not.toHaveBeenCalled();
+  });
+
+  it('drafts a revision whose observation is rebuilt from the verified physical fact; the approved row is never edited or approved', async () => {
     const prisma = db([hyp('pa1', 'PepsiCo', 'approved', 916), hyp('pa2', 'PepsiCo', 'approved', 928)]);
     const propose = vi.fn(async (_p: unknown, _i: any) => ({ ok: true as const, id: 'rev-1' }));
-    const r = await useEvidenceForThesis(prisma, { fingerprint: await fpOf(prisma, 'PepsiCo'), hypothesisIds: ['pa1'], signalIds: ['pep-gatik'], primarySignalId: 'pep-gatik', actor: 'c', now: NOW }, { propose: propose as any });
-    expect(r.ok).toBe(true);
+    const r = await useEvidenceForThesis(prisma, { fingerprint: await fpOf(prisma, 'PepsiCo'), hypothesisIds: ['pa1'], signalIds: ['pep-tulsa'], primarySignalId: 'pep-tulsa', actor: 'c', now: NOW }, { propose: propose as any });
+    expect(r.ok, JSON.stringify(r)).toBe(true);
     expect(r.results[0]).toMatchObject({ hypothesisId: 'pa1', revisionId: 'rev-1', from: 'approved', to: 'approved' });
     const arg = propose.mock.calls[0][1];
-    expect(arg).toMatchObject({ supersedesId: 'pa1', sourceRef: 'revision:pa1', primarySignalId: 'pep-gatik', metadata: { revisionBasis: 'verified_evidence', narrativeIsDraftCandidate: true } });
-    expect(arg.observation).toContain('autonomous freight');
+    expect(arg).toMatchObject({ supersedesId: 'pa1', sourceRef: 'revision:pa1', primarySignalId: 'pep-tulsa', metadata: { revisionBasis: 'verified_evidence', narrativeIsDraftCandidate: true } });
+    expect(arg.observation).toContain('Tulsa');
     // strictly factual: the observation quotes the fact and asserts no yard problem
     expect(arg.observation).not.toMatch(/congest|dwell|gate (?:problem|delay)|YardFlow/i);
     expect(prisma.prospectingHypothesis.update).not.toHaveBeenCalled();

@@ -79,7 +79,12 @@ export const CLAIM_POLICY: Record<ClaimType, { permits: string; forbids: string 
   other: { permits: 'the sentence as verified context', forbids: 'any inference beyond it' },
 };
 
-/** Classify one verified sentence. A physical change wins (the existing first-touch path); the rest by cue. */
+/**
+ * Classify one verified sentence. A physical change wins (the existing first-touch path); the rest by cue. Item 4
+ * (audit at 31f09c71): the physical rule now refuses a partnership announcement and a software deployment
+ * (research/facts.ts), so "a multi-year agreement to deploy autonomous freight" reads as partnership and "deployed a new
+ * warehouse management system across its Ohio DCs" as technology, by the cues below.
+ */
 export function classifyClaim(sentence: string): ClaimClassification {
   const s = sentence.trim();
   const build = (type: ClaimType, attributes: ClaimAttributes = {}): ClaimClassification => ({ type, attributes, ...CLAIM_POLICY[type] });

@@ -7,6 +7,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { classifyContinuity, corroboratesCurrentness, supersedes, programKeys, outreachCurrentUntil, sellerRelevance } from '@/lib/gap/research/continuity';
 import { isPhysicalOpsFact } from '@/lib/gap/research/facts';
+import { classifyClaim } from '@/lib/gap/research/claim-types';
 import { outreachFactRefusal } from '@/lib/gap/research/evidence-gate';
 import { promoteSignal } from '@/lib/gap/signals/promote';
 
@@ -18,9 +19,10 @@ const AUG = 'Gatik moves freight for PepsiCo across roughly 250 retail locations
 const JUNE8 = new Date('2026-06-08T00:00:00Z');
 const AUG25 = new Date('2026-08-25T17:56:46Z');
 
-describe('the Gatik deployment is a physical transportation-network fact', () => {
-  it('the primary partnership sentence and the August corroboration are physical-network facts', () => {
-    expect(isPhysicalOpsFact(PRIMARY)).toBe(true);
+describe('the Gatik program: a partnership claim (item 4, audit at 31f09c71), corroborated as an ongoing state', () => {
+  it('the primary partnership sentence is a partnership claim, never a physical-network change (no event-led opening); the August operating sentence still states the network in operation', () => {
+    expect(isPhysicalOpsFact(PRIMARY)).toBe(false);
+    expect(classifyClaim(PRIMARY).type).toBe('partnership');
     expect(isPhysicalOpsFact(AUG)).toBe(true);
   });
 
@@ -74,7 +76,9 @@ describe('two clocks: trigger freshness vs outreach currentness', () => {
   it('C: a deployment explicitly ended by a newer source is superseded (never current)', () => {
     expect(supersedes(primary, { excerpt: 'PepsiCo ended its autonomous freight deployment with Gatik in Texas.', publishedAt: AUG25 }, 'PepsiCo')).toBe(true);
     const ended = { source_kind: 'evidence_record', source_type: 'public_primary', evidence_text: PRIMARY, metadata: { verified: 'excerpt_found_at_source', continuity: { kind: 'ended' } }, external_ok: true, observed_at: JUNE8, account_name: 'PepsiCo' };
-    expect(outreachFactRefusal(ended as never, 'PepsiCo')).toBe('superseded');
+    // The ended program is superseded under the approach it could open (fit-led); event-led never admitted it.
+    expect(outreachFactRefusal(ended as never, 'PepsiCo', { approach: 'fit_led' })).toBe('superseded');
+    expect(outreachFactRefusal(ended as never, 'PepsiCo')).toBe('not_a_physical_network_change');
   });
 
   it('a corroboration must be NEWER, name the same program, and state the program continues', () => {

@@ -15,7 +15,10 @@
  *   report_led                an attributed third-party report: NOT ENABLED (source access, identity and policy do
  *                             not yet support that phrasing); a request is refused with the reason, never bypassed
  *   fit_led                   no fresh event: a stable operating fact (continuity ongoing_state) and a transparent
- *                             fit question; no invented why-now, no diagnosed pain
+ *                             fit question; no invented why-now, no diagnosed pain. Item 4: an ongoing partnership or
+ *                             technology program the account states (a multi-year agreement, a deployment in
+ *                             operation) is such a fact: attributed context for a complementary-workflow question,
+ *                             never an event and never a diagnosed yard load
  *   warm_intro                a real relationship (met, introduced, referred): no public thesis needed; GAP drafts
  *                             nothing cold
  *   existing_thread_reply     the buyer wrote: answer the thread; no thesis needed
@@ -74,7 +77,7 @@ export const APPROACH_POLICY: Record<Approach, ApproachPolicy> = {
   fit_led: {
     approach: 'fit_led',
     needsThesis: true,
-    admits: ['FACT'],
+    admits: ['FACT', 'PARTNERSHIP', 'TECHNOLOGY'],
     requires: ['a stable operating fact (an ongoing state, not a fresh event)', 'a transparent fit question with no why-now'],
     forbids: ['an invented event or urgency', 'a diagnosed pain'],
     enabled: true,

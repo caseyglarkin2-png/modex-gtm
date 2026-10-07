@@ -39,7 +39,7 @@ export interface AskControls {
   /** Proposals waiting for review on the page. */
   pending: Array<{ hypothesisId: string; status: string; story: string; claimClass: string | null }>;
   /** Checked facts no thesis is grounded on yet (the opening story's draft list). */
-  draftable: Array<{ factId: string; story: string; proposedObservation: string; claimClass: string | null }>;
+  draftable: Array<{ factId: string; story: string; proposedObservation: string; claimClass: string | null; approach?: import('../research/approach-policy').EvidenceApproach }>;
   /** NEXT's control, when it has one (the prepared email lives behind it). */
   next: { label: string; href: string } | null;
 }
@@ -99,7 +99,7 @@ export function proposalFor(intent: AskIntent, accountName: string, c: AskContro
 
   const named = intent.kind === 'approach' && intent.name ? c.people.find((p) => p.name.toLowerCase().startsWith(intent.name!.toLowerCase()) || firstOf(p.name).toLowerCase() === intent.name!.toLowerCase()) ?? null : null;
   const who = named ?? c.person;
-  const draftFor = (d: AskControls['draftable'][number], label: string) => ({ kind: 'draft_thesis' as const, label, route: '/api/gap/story/draft' as const, payload: storyDraftPayload({ accountName, factId: d.factId, claimClass: d.claimClass, proposedObservation: d.proposedObservation, person: who ? { personaId: who.personaId, title: who.title } : null }) });
+  const draftFor = (d: AskControls['draftable'][number], label: string) => ({ kind: 'draft_thesis' as const, label, route: '/api/gap/story/draft' as const, payload: storyDraftPayload({ accountName, factId: d.factId, claimClass: d.claimClass, proposedObservation: d.proposedObservation, person: who ? { personaId: who.personaId, title: who.title } : null, factText: d.story, approach: d.approach ?? null }) });
 
   if (intent.kind === 'draft_from_posting') {
     const posting = c.draftable.find((d) => isPosting(d.claimClass));

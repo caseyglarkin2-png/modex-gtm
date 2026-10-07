@@ -95,6 +95,25 @@ describe('item 3: the family question is one confirm, posts the person of the pr
   });
 });
 
+describe('item 4 and R31: the draft form is read off the fact, and the falsification is editable', () => {
+  it('a fit-led story opens with its own guess and question; the edited falsification is what is posted; a story that opens nothing says so', async () => {
+    const gatik = { story: 'PepsiCo and Gatik announced a multi-year agreement to deploy autonomous freight across its North America distribution network.', sourceLabel: 'pepsico.com, Jun 8, 2026', sourceUrl: 'https://pepsico.com/g', factId: 'f-gatik', proposedObservation: 'pepsico.com: "PepsiCo and Gatik announced a multi-year agreement to deploy autonomous freight across its North America distribution network" [S:f-gatik].', approach: 'fit_led' as const };
+    const view = { ...anchor, draftable: [gatik], notAnOpening: [{ story: 'PepsiCo deployed a new warehouse management system across its Texas distribution centers.', sourceLabel: 'news.example, Sep 20, 2026', sourceUrl: null, factId: 'f-wms', line: 'Checked, but a technology deployment is not an opening for a first touch: context only.' }] } as OutreachAnchor;
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce({ ok: true, status: 201, json: async () => ({ ok: true, hypothesisId: 'h-fit', status: 'review_required', existing: false, family: 'automation_readiness', familyBasis: 'x', preparation: 'submitted', missing: [], submitRefusal: null }) } as Response);
+    render(<OutreachAnchorView accountName="PepsiCo" anchor={view} coldTouchAllowed />);
+    expect(screen.getByTestId('anchor-not-an-opening').textContent).toMatch(/Not offered: not an opening.*warehouse management system.*context only\./s);
+    fireEvent.click(screen.getByTestId('anchor-draft-open'));
+    expect((screen.getByTestId('anchor-draft-problem') as HTMLTextAreaElement).value).toMatch(/^My guess is that the Gatik program sends trailers to the yards/);
+    expect(screen.getByLabelText('What would prove it wrong')).toHaveAttribute('aria-describedby');
+    fireEvent.change(screen.getByTestId('anchor-draft-falsification'), { target: { value: 'Do the Gatik trailers wait at the Dallas yard today?' } });
+    fireEvent.click(screen.getByTestId('anchor-draft-submit'));
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(1));
+    const body = JSON.parse(String(fetchMock.mock.calls[0][1]!.body));
+    expect(body.falsificationQuestions).toEqual(['Do the Gatik trailers wait at the Dallas yard today?']);
+    expect(body.problemHypothesis).toMatch(/Gatik program/);
+  });
+});
+
 describe('the outreach anchor block', () => {
   it('shows the primary anchor and why they care in the open; the supporting fact, BEST PROOF (ours) and DO NOT USE sit behind one disclosure; an unusable thesis has no Use button', () => {
     render(<OutreachAnchorView accountName="PepsiCo" anchor={anchor} coldTouchAllowed />);

@@ -44,10 +44,11 @@ describe('the approach policy', () => {
 });
 
 describe('the gate by approach', () => {
-  it('the event-led path is unchanged: a physical change passes, a job claim is refused as not a physical change', () => {
+  it('the event-led path: a physical change passes; a claim stored as another class is refused by its class (item 4), an unclassed non-physical one as not a physical change', () => {
     expect(outreachFactRefusal(signal({ evidence_text: PHYSICAL, claim_class: 'FACT' }), 'PepsiCo')).toBeNull();
-    expect(outreachFactRefusal(signal({ evidence_text: JOB, claim_class: 'JOB_POSTING' }), 'PepsiCo')).toBe('not_a_physical_network_change');
-    expect(outreachFactRefusal(signal({ evidence_text: JOB, claim_class: 'JOB_POSTING' }), 'PepsiCo', { approach: 'event_led' })).toBe('not_a_physical_network_change');
+    expect(outreachFactRefusal(signal({ evidence_text: JOB, claim_class: 'JOB_POSTING' }), 'PepsiCo')).toBe('claim_not_admitted_for_approach');
+    expect(outreachFactRefusal(signal({ evidence_text: JOB, claim_class: 'JOB_POSTING' }), 'PepsiCo', { approach: 'event_led' })).toBe('claim_not_admitted_for_approach');
+    expect(outreachFactRefusal(signal({ evidence_text: JOB, claim_class: null }), 'PepsiCo', { approach: 'event_led' })).toBe('not_a_physical_network_change');
   });
   it('under the job/procurement approach a verified, own, live job claim passes the attribution and publisher rules; a closed one, a third party\'s and a leadership claim do not', () => {
     expect(outreachFactRefusal(signal({ evidence_text: JOB, claim_class: 'JOB_POSTING' }), 'PepsiCo', { approach: 'job_procurement_led' })).toBeNull();

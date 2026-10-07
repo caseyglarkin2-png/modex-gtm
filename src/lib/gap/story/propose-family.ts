@@ -22,7 +22,7 @@
  * Pure; pinned by tests/unit/gap/propose-family.test.ts.
  */
 import { classifyFamilies, isProblemFamily, PROBLEM_FAMILY_CATALOG, type ProblemFamily } from '../taxonomy';
-import { classifyFact, isPhysicalOpsFact, type FactChange } from '../research/facts';
+import { classifyFact, isPhysicalOpsFact, isSoftwareOrPartnershipClaim, type FactChange } from '../research/facts';
 
 export interface FamilyProposal {
   family: ProblemFamily | null;
@@ -50,7 +50,9 @@ export function proposeFamilyFor(factText: string): FamilyProposal {
   if (clear && isProblemFamily(cue.primary)) {
     return { family: cue.primary, via: 'cue', basis: `the fact's own words point at ${label(cue.primary)}` };
   }
-  if (isPhysicalOpsFact(text)) {
+  // Item 4: a partnership or software claim is no longer physical, but its change words still say what it is about
+  // (an agreement to deploy autonomous freight is an automation program).
+  if (isPhysicalOpsFact(text) || isSoftwareOrPartnershipClaim(text)) {
     // "ceasing", "shut down", "idled", "wind down" are closures the fact classifier files under a generic change.
     const change: FactChange = /\b(ceas(?:e|ed|es|ing)|shut(?:s|ting)? down|shutdown|idl(?:e|ed|es|ing)|mothball|wind(?:s|ing)? down|discontinu)/i.test(text) ? 'closure' : classifyFact(text).change;
     const mapped = CHANGE_FAMILY[change];

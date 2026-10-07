@@ -34,6 +34,8 @@ import { citedQuote } from '../research/propose';
 import { sameIdea } from '../context/same-idea';
 import { currentnessLine } from '../research/currentness';
 import { suggestedFamilyFor } from './propose-family';
+import { draftApproachFor, noOpeningLine } from './draft-approach';
+import type { EvidenceApproach } from '../research/approach-policy';
 import type { AccountStory, StoryRow, StorySentence, StoryTag } from './story';
 
 export interface AnchorPerson {
@@ -83,7 +85,9 @@ export interface OutreachAnchor {
   /** The other theses (approved, active or under review, grounded, not contradicted), the primary excluded. */
   alternatives: AnchorThesis[];
   /** Checked, citable story lines no thesis is grounded on: a prefilled draft each. */
-  draftable: Array<{ story: string; sourceLabel: string; sourceUrl: string | null; factId: string; proposedObservation: string; /** R35: JOB_POSTING / PROCUREMENT for a claim of its own class (its own draft text); null for a physical fact. */ claimClass?: string | null; /** Item 2a: "Current until <date>." by the one freshness authority (null: no end date). */ currentLine?: string | null }>;
+  draftable: Array<{ story: string; sourceLabel: string; sourceUrl: string | null; factId: string; proposedObservation: string; /** R35: JOB_POSTING / PROCUREMENT for a claim of its own class (its own draft text); null for a physical fact. */ claimClass?: string | null; /** Item 2a: "Current until <date>." by the one freshness authority (null: no end date). */ currentLine?: string | null; /** Items 4 and 6: the approach this fact opens (story/draft-approach.ts). */ approach?: EvidenceApproach }>;
+  /** Item 4: checked, citable stories that open NO approach (a one-time software deployment, a leadership change): said, never offered. */
+  notAnOpening: Array<{ story: string; sourceLabel: string; sourceUrl: string | null; factId: string; line: string }>;
   /**
    * Item 2a: checked, citable stories that are TOO OLD for a first touch by the one freshness authority
    * (research/currentness.ts, the clock the gate and the compiler read): never offered as draftable, and the page says
@@ -312,6 +316,7 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
       .flatMap((h) => [...(rawById.get(h.id)?.observation ?? '').matchAll(CITATION)].map((m) => m[1])),
   );
   const draftable: OutreachAnchor['draftable'] = [];
+  const notAnOpening: OutreachAnchor['notAnOpening'] = [];
   // Item 2 (audit at 31f09c71): a story the seller set aside (NOT THIS STORY: a rejected thesis cites it) never returns
   // under DRAFT A THESIS; the page promised GAP would not propose it again. The loader reads every rejected thesis's
   // facts; the loaded theses are read too (a fixture, or a loader without the list).
@@ -333,7 +338,13 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
       if (isSetAside(fact)) continue;
       if (theses.some((t) => sameIdea(t.observation, s.text, i.accountName) || sharedCounterparty(t.observation, s.text, i.accountName))) continue;
       if (draftable.some((d) => d.factId === fact.id || sameIdea(d.story, s.text, i.accountName) || sharedCounterparty(d.story, s.text, i.accountName))) continue;
-      draftable.push({ story: s.text, sourceLabel: `${host(fact.url) ?? (fact.title || 'source')}, ${day(fact.publishedAt)}`, sourceUrl: fact.url, factId: fact.id, proposedObservation: citedQuote(fact.title || host(fact.url) || 'source', fact.quote.trim().replace(/\s+/g, ' '), fact.id, i.accountName), claimClass: fact.claimClass ?? null, currentLine: fact.expiresAt ? currentnessLine({ current: true, until: fact.expiresAt, basis: 'type_window' }) : null });
+      // Items 4 and 6: the approach this fact may open; none means an honest no-action, said on the page.
+      const approach = draftApproachFor({ text: fact.quote, claimClass: fact.claimClass ?? null, continuity: fact.continuity });
+      if (!approach) {
+        if (!notAnOpening.some((n) => n.factId === fact.id)) notAnOpening.push({ story: s.text, sourceLabel: `${host(fact.url) ?? (fact.title || 'source')}, ${day(fact.publishedAt)}`, sourceUrl: fact.url, factId: fact.id, line: noOpeningLine(fact.quote) });
+        continue;
+      }
+      draftable.push({ approach, story: s.text, sourceLabel: `${host(fact.url) ?? (fact.title || 'source')}, ${day(fact.publishedAt)}`, sourceUrl: fact.url, factId: fact.id, proposedObservation: citedQuote(fact.title || host(fact.url) || 'source', fact.quote.trim().replace(/\s+/g, ' '), fact.id, i.accountName), claimClass: fact.claimClass ?? null, currentLine: fact.expiresAt ? currentnessLine({ current: true, until: fact.expiresAt, basis: 'type_window' }) : null });
     }
   }
   // TOO OLD FOR A FIRST TOUCH (item 2a): a checked, citable story no live thesis grounds, past its currentness. Never
@@ -395,6 +406,7 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
     alternatives,
     draftable,
     tooOld,
+    notAnOpening,
     pending,
   };
 }

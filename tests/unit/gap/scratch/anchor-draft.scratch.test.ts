@@ -337,4 +337,36 @@ describe.skipIf(!RUN)('R03: the Pepsi draft, review and use transaction (scratch
     expect(body).toEqual({ error: 'story_set_aside', detail: 'You set this story aside (Not this story): GAP will not draft it again. A newer fact about it is a new story.' });
     expect(await prisma.prospectingHypothesis.count({ where: { account_name: pepsi.name } })).toBe(countBefore);
   }, 180_000);
+  it('item 4: an ongoing partnership (the Gatik shape) drafts a FIT-LED thesis with its own guess (never the Tulsa one); a software deployment is never offered and is refused if posted', async () => {
+    const { POST } = await import('@/app/api/gap/story/draft/route');
+    const { registerSignal } = await import('@/lib/gap/signals/registry');
+    const { VERIFIED_EXCERPT } = await import('@/lib/gap/research/evidence-gate');
+    const { storyDraftPayload } = await import('@/lib/gap/story/draft-defaults');
+    const tom = pepsi.people.find((p) => p.name.startsWith('Tom'))!;
+    // An ongoing partnership of its own (Gatik is already Kay's proposal from the stranded step above).
+    const einride = await registerSignal(prisma, { accountName: pepsi.name, sourceKind: 'evidence_record', sourceId: `corpus:${pepsi.slug}:einride`, type: 'technology_signal' as never, title: `${pepsi.name} and Einride announce partnership`, sourceType: 'public_secondary', evidenceUrl: `https://news.example.com/${pepsi.slug}/einride`, evidenceText: `${pepsi.name} and Einride announced a multi-year partnership to run electric autonomous freight across its Texas distribution network.`, externalOk: true, observedAt: new Date(Date.now() - 6 * 86_400_000), confidence: 80, metadata: { verified: VERIFIED_EXCERPT }, registeredBy: 'casey@freightroll.com' });
+    const wms = await registerSignal(prisma, { accountName: pepsi.name, sourceKind: 'evidence_record', sourceId: `corpus:${pepsi.slug}:wms`, type: 'technology_signal' as never, title: `${pepsi.name} deploys a new WMS`, sourceType: 'public_secondary', evidenceUrl: `https://news.example.com/${pepsi.slug}/wms`, evidenceText: `${pepsi.name} deployed a new warehouse management system across its Texas distribution centers.`, externalOk: true, observedAt: new Date(Date.now() - 4 * 86_400_000), confidence: 80, metadata: { verified: VERIFIED_EXCERPT }, registeredBy: 'casey@freightroll.com' });
+    const { anchor } = await pageRead();
+    const g = anchor.draftable.find((d) => d.factId === einride.id);
+    expect(g, JSON.stringify(anchor.draftable.map((d) => d.story))).toMatchObject({ approach: 'fit_led' });
+    // A one-time software deployment opens nothing: it is never offered as a draft (the page keeps it off the list).
+    expect(anchor.draftable.map((d) => d.factId)).not.toContain(wms.id);
+    // The page control's own payload for the Gatik story.
+    const payload = storyDraftPayload({ accountName: pepsi.name, factId: g!.factId, claimClass: g!.claimClass ?? null, proposedObservation: g!.proposedObservation, person: { personaId: tom.id, title: tom.title }, factText: g!.story, approach: g!.approach ?? null });
+    const res = await POST(req('/api/gap/story/draft', 'POST', payload));
+    const body = (await res.json()) as { hypothesisId?: string; preparation?: string; family?: string; error?: string; detail?: string };
+    expect(res.status, JSON.stringify(body)).toBe(201);
+    expect(body.preparation).toBe('submitted');
+    const row = await prisma.prospectingHypothesis.findUnique({ where: { id: body.hypothesisId! }, select: { metadata: true, problem_hypothesis: true } });
+    expect((row!.metadata as { approach?: string }).approach).toBe('fit_led');
+    expect(row!.problem_hypothesis).toMatch(/^My guess is that the Einride program sends trailers to the yards/);
+    const tulsa = await prisma.prospectingHypothesis.findUnique({ where: { id: hypothesisId }, select: { problem_hypothesis: true } });
+    expect(row!.problem_hypothesis).not.toBe(tulsa!.problem_hypothesis);
+    // The software deployment, posted anyway, is refused for its own reason; nothing is drafted.
+    const before = await prisma.prospectingHypothesis.count({ where: { account_name: pepsi.name } });
+    const { citedQuote } = await import('@/lib/gap/research/propose');
+    const w = await POST(req('/api/gap/story/draft', 'POST', storyDraftPayload({ accountName: pepsi.name, factId: wms.id, claimClass: null, proposedObservation: citedQuote(`${pepsi.name} deploys a new WMS`, `${pepsi.name} deployed a new warehouse management system across its Texas distribution centers.`, wms.id, pepsi.name), person: { personaId: tom.id, title: tom.title } })));
+    expect([w.status, await w.json()]).toEqual([409, { error: 'fact_not_outreach_evidence', detail: 'not_a_physical_network_change' }]);
+    expect(await prisma.prospectingHypothesis.count({ where: { account_name: pepsi.name } })).toBe(before);
+  }, 180_000);
 });

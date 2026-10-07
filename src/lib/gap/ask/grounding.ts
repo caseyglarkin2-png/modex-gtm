@@ -117,7 +117,7 @@ export function compactContext(i: {
       primary: i.anchor?.primary ? { hypothesisId: i.anchor.primary.hypothesisId, observation: scrub(i.anchor.primary.observation), usable: i.anchor.primary.usable } : null,
       pending: (i.anchor?.pending ?? []).map((p) => ({ hypothesisId: p.hypothesisId, status: p.status, story: scrub(p.story), claimClass: p.claimClass ?? null })),
       // The proposed observation is the cited form the draft route takes as it is (title, verbatim quote, citation).
-      draftable: (i.anchor?.draftable ?? []).map((d) => ({ factId: d.factId, story: scrub(d.story), proposedObservation: d.proposedObservation, claimClass: d.claimClass ?? null })),
+      draftable: (i.anchor?.draftable ?? []).map((d) => ({ factId: d.factId, story: scrub(d.story), proposedObservation: d.proposedObservation, claimClass: d.claimClass ?? null, ...(d.approach ? { approach: d.approach } : {}) })),
       next: i.nav?.next ?? null,
     },
   };

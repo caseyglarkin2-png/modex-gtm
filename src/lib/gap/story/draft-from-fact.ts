@@ -22,6 +22,7 @@ import { approachFamilyDefault, proposeFamilyFor } from './propose-family';
 import type { EvidenceApproach } from '../research/approach-policy';
 import { sensitivityOf } from '../research/sensitivity';
 import { currentnessLine, factCurrentness } from '../research/currentness';
+import { draftApproachFor } from './draft-approach';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -81,8 +82,13 @@ export async function draftThesisFromFact(prisma: PrismaLike, input: DraftFromFa
   // Item 2a: the one freshness authority; the refusal says why in the seller's words.
   const currentness = factCurrentness(fact, input.now);
   if (!currentness.current) return { ok: false, reason: 'fact_not_outreach_evidence', detail: currentnessLine(currentness) };
-  // R30: the claim's class decides the approach the thesis will carry; the gate runs under that approach.
-  const approach: EvidenceApproach = fact.claim_class === 'JOB_POSTING' || fact.claim_class === 'PROCUREMENT' ? 'job_procurement_led' : 'event_led';
+  // R30: the claim's class decides the approach the thesis will carry; the gate runs under that approach. Items 4 and 6:
+  // one chooser for the page and the service (story/draft-approach.ts): a posting is job-led, a physical change is
+  // event-led, an ongoing partnership or program (the Gatik agreement) is fit-led; nothing else opens a first touch,
+  // and the event-led gate then says why.
+  const meta = fact.metadata && typeof fact.metadata === 'object' && !Array.isArray(fact.metadata) ? (fact.metadata as Record<string, unknown>) : {};
+  const recorded = meta.continuity && typeof meta.continuity === 'object' ? (meta.continuity as { kind?: string }).kind : undefined;
+  const approach: EvidenceApproach = draftApproachFor({ text: fact.evidence_text ?? '', claimClass: fact.claim_class ?? null, continuity: recorded === 'event' || recorded === 'ongoing_state' || recorded === 'ended' ? recorded : null }) ?? 'event_led';
   const refusal: OutreachFactRefusal | null = outreachFactRefusal(fact, input.accountName, { approach });
   if (refusal) return { ok: false, reason: 'fact_not_outreach_evidence', detail: refusal };
   // The page never offers a sensitive fact (layoffs, a lawsuit) as the hook; the service refuses it the same way.

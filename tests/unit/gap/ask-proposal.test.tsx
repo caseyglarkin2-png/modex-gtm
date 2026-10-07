@@ -68,8 +68,10 @@ describe('R35: the proposal is the page\'s own control', () => {
     const r = proposalFor({ kind: 'approach', name: null }, 'PepsiCo', { ...base, draftable: [eventFact] });
     expect(r.proposal).toEqual({ kind: 'draft_thesis', label: 'Draft the thesis for Tom', route: '/api/gap/story/draft', payload: storyDraftPayload({ accountName: 'PepsiCo', factId: 'f-denver', claimClass: null, proposedObservation: EVENT_OBS, person: { personaId: 1, title: 'Senior Director, Transportation' } }) });
     const payload = (r.proposal as { payload: Record<string, unknown> }).payload;
-    // The same text the page's control posts (unchanged event-led defaults), never model text.
-    expect(payload).toMatchObject({ personaId: 1, persona: 'transportation', observation: EVENT_OBS, problemHypothesis: EVENT_DRAFT_DEFAULTS.problem, falsificationQuestions: [EVENT_DRAFT_DEFAULTS.falsification], whatANoMeans: EVENT_DRAFT_DEFAULTS.noMeans, problemFamily: null });
+    // The same text the page's control posts, read off THIS fact (R31, item 4: the Denver opening), never model text and
+    // never the one generic sentence.
+    expect(payload.problemHypothesis).not.toBe(EVENT_DRAFT_DEFAULTS.problem);
+    expect(payload).toMatchObject({ personaId: 1, persona: 'transportation', observation: EVENT_OBS, problemHypothesis: expect.stringMatching(/Denver opens on gate, yard and dock habits it inherits/), falsificationQuestions: [expect.stringMatching(/Denver when it opens\?$/)], whatANoMeans: expect.stringMatching(/opening adds no yard question/), problemFamily: null });
   });
   it('draft from the job posting: the posting\'s own draft text, for the named person; nothing posted means nothing to draft', () => {
     const r = proposalFor({ kind: 'draft_from_posting' }, 'PepsiCo', { ...base, draftable: [eventFact, jobFact] });
