@@ -1947,8 +1947,17 @@ they were not re-measured.
 - The counts: e5b0b567, `lib/gap/health/operations.ts`, from the ledgers GAP already keeps (no table, no model call, no write). Broken handoffs (drafts stranded, proposals drafted and never submitted, dead-letter signals), the research queue's oldest age and stuck runs, research freshness and cost over seven days (runs, grounded turns, pages queued, facts verified, failures), preparation latency (the remembered summaries' ages), seller corrections, outcomes (obligations, replies, meetings) and the HubSpot changes waiting for approval, approved and not written, or failed, each with its owner and where to decide or retry. Every read stands alone and is soft: a count GAP could not read is unreadable, never zero, and degrades the state. The operator's view is `GET /api/gap/health?operations=1` (the Work strip's call is unchanged, so it stays light); Casey's is the "Your decisions and what happened" section on /gap/learning.
 - The dry run: c72e6a2f, `scripts/gap/recovery/repair-stranded-drafts.ts --dry-run [--json]`. It lists each stranded draft and what the R11 service would do with it, ADOPT (the fact, the key) or why not. It refuses to write twice over (exit 2 without --dry-run before any read; a read-only client that throws on every write, raw SQL and transaction) and names the database without credentials. The service's fact checks are one exported function (`draftFactRefusal`), and on the scratch database the real service then adopts the very draft the plan named and refuses the sensitive one for the same reason (`stranded-repair.scratch.test.ts`).
 - Found by the live check and fixed: 4e936a90, a HubSpot conflict read "changed 2026-10-07 by CRM_UI"; it now says the day and who in words.
-- Observed, not changed: the analyst tables lower on /gap/learning show sequence version ids, the evidence tier name VERIFIED_FACT and campaign program keys. They are kept by contract as the analyst views' own words (R60); listed for the lead's R62 / R63 decision.
+- Observed, not changed: the analyst tables lower on /gap/learning show sequence version ids, the evidence tier name VERIFIED_FACT and campaign program keys. They are kept by contract as the analyst views' own words (R60). DECIDED by the lead (2026-10-07): they keep their words.
 - Live check on the production build (scratchpad `r65-live/`): the operator view listed 4 stranded drafts and 2 HubSpot conflicts with owners and where to act; the strip's call carried no operations; /gap/learning showed the decisions, the approved-not-written note with its retry place, the conflicts, the outcomes and research cost.
+
+**R63 seller review dispositions (2026-10-07).** Fresh seller reviewers on the production build of c00b94ca (code
+d9902641), on the scratch database and the stubs, corpus tag r63.
+- BLOCKER, fixed (found by reviewer B, verified by the lead): the floating "Compose email" button opened the legacy composer on a GAP page, and its send (POST /api/email/send) went to Doug Scratch at Walmart Scratch Co r63, whose "stop" reply was on file but not yet recorded as do not contact. The send was accepted. GAP's own gate stops on that reply; the legacy send never read replies. Two commits:
+  - 8f7c20d5: `performSend`, the one legacy send authority, reads each recipient's replies the way GAP's stop rules do (`lib/gap/replies/opt-out.ts` over `replies/classify.ts`, never a second classifier) and refuses when an opt-out reply from that address is on file, recorded or not: 409 RECIPIENT_OPTED_OUT_BY_REPLY, details.reason recipient_opted_out_by_reply, and the error the composer shows, "Doug Scratch replied "stop" on Oct 5, 2026. Nobody emails them from here. Record it as do not contact from their reply." A person's ordinary reply, an automatic notice and a bounce do not block; a cc is read the same way; internal addresses bypass as they do for unsubscribes; the unsubscribed blocker is unchanged and still checked first. Test: `tests/unit/r63-opt-out-send.test.ts` (4); removing the refusal turned it red, then restored. The six other legacy-send test files mock an empty inbox.
+  - 3fe2c39e: the button renders nothing on every route under /gap (it hid only on the account pages), so GAP's send spine and its gate are the only way to email from GAP; unchanged elsewhere, and a path that merely starts with the letters (/gapfoo) is not GAP. Test: `tests/unit/r63-compose-on-gap.test.tsx` (2, on the component with the pathname); the accounts-only rule turned it red, then restored.
+  - Receipts at 3fe2c39e: the eight files run singly with --maxWorkers=1, 41 tests green; eslint and tsc clean. No full suite and no build under the lead's load cap; the full gates and the rebuild come after the R63 reports.
+- Harness event: the R63 server on 3100 exited (code 127) at about 18:01 local, after reviewer B's double-send attempt. It was restarted once on the same `.next` build, database, stub and session; the lead was told. The dead log is kept in the scratchpad.
+- The analyst tables lower on /gap/learning keep their words (sequence version ids, VERIFIED_FACT, program keys): DECIDED by the lead.
 
 **Consolidated debt (2026-10-07).** Every debt this recovery named, one line each, with its owner and the guard that
 holds today; the entries above keep the detail. Owners: engineering (the GAP engineer of record), Casey (a product or
@@ -1972,7 +1981,7 @@ spend decision), operator (runs the system), copy (human-written words, Casey's)
 - No reply copy family. Guard: the answer is prepared from the buyer's own words and edited before use. Owner: copy.
 - Generated quality has no held-out graded corpus (30 or more cases with model, prompt and policy versions). Guard: every generated line is reviewed by the seller. Owner: Casey and engineering.
 - R42b: a reply seen only in HubSpot's connected inbox is prepared and copyable, not drafted or sent from GAP. Guard: the Gmail thread is required. Owner: engineering.
-- The analyst tables on /gap/learning show sequence version ids, VERIFIED_FACT and campaign program keys. Guard: they are analyst words by contract (R60). Owner: Casey (decision).
+- The analyst tables on /gap/learning show sequence version ids, VERIFIED_FACT and campaign program keys. DECIDED by the lead (2026-10-07): they keep their words, analyst words by contract (R60). Kept here for the record; no longer open.
 - Two Sprint 5 review NICEs not taken: a raw date in the brief (context/brief.ts), and a canceled meeting's rebook offer with HubSpot's stale next step. Guard: none. Owner: engineering (R62 lists them).
 - The app's main sidebar lists Accounts and Work Queue beside GAP OS. Guard: none (outside GAP). Owner: Casey (a system-wide change).
 - Transcription stays off pending its spend. Guard: `GAP_TRANSCRIPTION_ENABLED` unset. Owner: Casey.
@@ -1985,7 +1994,7 @@ HANDOFF commit: d3b6592a (docs only; the block below describes head_sha d9902641
 # HANDOFF (this block's own commit SHA is on the ledger line directly above the block)
 branch: feat/gap-account-first-ux
 base_sha: e66a9853
-head_sha: d9902641
+head_sha: 3fe2c39e
 production_sha: 672570ed
 tickets:
   R00: {disposition: DONE, evidence: "2113361c: production 672570ed reconciled; the capability matrix and the one stranded PepsiCo draft recorded"}
@@ -2028,7 +2037,7 @@ tickets:
   R61: {disposition: PARTIAL, evidence: "31c44d1f; the p95 re-judgment in the R61 entry", dependency: "cold first byte (platform); Prisma idle SELECT 1 per pooled connection; Work's rebuilt read"}
 later_tickets:
   R62: {disposition: IN PROGRESS, evidence: "acceptB runs the matrix on 55433"}
-  R63: {disposition: NOT STARTED}
+  R63: {disposition: IN PROGRESS, evidence: "fresh seller reviewers on the c00b94ca build; reviewer B's blocker (the legacy composer sent to an unrecorded opt-out) fixed by 8f7c20d5 and 3fe2c39e; the other reports pending"}
   R64: {disposition: NOT STARTED, evidence: "needs Casey's authorization for the production write below"}
   R65: {disposition: DONE, evidence: "e5b0b567 the counts, d9902641 owners and retry paths, c72e6a2f the read-only dry run"}
 reopened_unresolved:
@@ -2054,6 +2063,8 @@ r62_cases:
     - "no seller heading or label says HYPOTHESIS or BID"
     - "the stranded-draft dry run names ADOPT for the Pepsiprod Tulsa draft; the R11 service then adopts that id"
     - "GET /api/gap/health?operations=1 counts the broken handoffs and HubSpot failures with owners and retry paths; the plain call carries none"
+    - "an opt-out reply on file, unrecorded, refuses the legacy composer's send with the reason text; the composer is absent on GAP pages"
+  decide: "DECIDED by the lead 2026-10-07: the analyst tables lower on /gap/learning keep their words (sequence version ids, VERIFIED_FACT, program keys), analyst words by contract (R60)"
 r63_seller_tasks:
   - work today's list
   - handle a reply (Log what they said, one capture)
@@ -2110,6 +2121,7 @@ test_receipts:
   r61_run: {sha: e66a9853, source: "as reported at the R61 checkpoint; not repeated in the ledger", typecheck: clean, gap: "390 files / 5,593 tests", scratch: "8 files / 47 tests", rest: "326 files / 2,298 tests, 1 skipped", journeys: "r5-exit/ 11 steps; r60-final/ 7 of 7"}
   latest: {sha: 4e936a90, typecheck: "npx tsc --noEmit -p . (clean)", gap: "npx vitest run tests/unit/gap/<four chunks> --maxWorkers=2: 403 files / 5,653 tests", scratch: "GAP_SCRATCH_DATABASE_URL=<scratch> npx vitest run tests/unit/gap/scratch --maxWorkers=1: 9 files / 50 tests", rest_e5b0b567: "npx vitest run --maxWorkers=2 --exclude tests/unit/gap/**: 326 files / 2,299 passed, 1 skipped", build_e5b0b567: "npm run build: compiled", journeys_a0f6bb77: "r62-exit2/ 12 steps and r62-capture2/ 6 steps, zero internal-text hits, zero HubSpot writes", r65_live_e5b0b567: "r65-live/"}
   after_4e936a90: "16971d2c and d9902641: focused tests only under the load cap (r60-capture-reply 11, capture-once and capture 25, r65-operations and learning-dashboard 19), each with a red mutation"
+  r63_fix_3fe2c39e: "8f7c20d5 and 3fe2c39e: eight files run singly with --maxWorkers=1, 41 tests (r63-opt-out-send 4, r63-compose-on-gap 2, email-send-routes 11, queue-send-deps 10, warm-intro-writers 7, perform-send-parity 3, campaign-tag-flow 2, b4-unsubscribe-case-insensitive 2), a red mutation on each fix; eslint and tsc clean"
 genuine_blockers: []
 ```
 
