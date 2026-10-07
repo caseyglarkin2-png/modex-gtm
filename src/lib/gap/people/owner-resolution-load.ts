@@ -76,29 +76,33 @@ export type LoadOwnerResolutionResult =
 const iso = (d: unknown): string | null => (d instanceof Date || typeof d === 'string' ? (Number.isNaN(new Date(d).getTime()) ? null : new Date(d).toISOString()) : null);
 
 export async function loadOwnerResolution(prisma: PrismaLike, input: LoadOwnerResolutionInput, deps: LoadOwnerResolutionDeps = {}): Promise<LoadOwnerResolutionResult> {
-  const account: { name: string; vertical: string | null; hubspot_company_id: string | null; parent_brand: string | null } | null = await prisma.account.findUnique({
-    where: { name: input.accountName },
-    select: { name: true, vertical: true, hubspot_company_id: true, parent_brand: true },
-  });
+  // R61: everything that needs only the account's name is read at once with the account row (the account is found by
+  // that same name), never one round trip after another; the answer is the same.
+  const name = input.accountName;
+  const [account, hypothesis, personas, aliases, candidates, members, fam, ctx] = await Promise.all([
+    prisma.account.findUnique({
+      where: { name },
+      select: { name: true, vertical: true, hubspot_company_id: true, parent_brand: true },
+    }) as Promise<{ name: string; vertical: string | null; hubspot_company_id: string | null; parent_brand: string | null } | null>,
+    (input.hypothesisId
+      ? prisma.prospectingHypothesis.findUnique({
+          where: { id: input.hypothesisId },
+          select: { id: true, account_name: true, status: true, primary_persona_id: true, observation: true, problem_hypothesis: true, problem_family: true, persona: true, metadata: true, signals: { where: { role: 'primary' }, select: { signal: { select: { claim_class: true, metadata: true } } }, take: 1 } },
+        })
+      : Promise.resolve(null)) as Promise<Row | null>,
+    prisma.persona.findMany({ where: { account_name: name }, select: { id: true, name: true, title: true, email: true, do_not_contact: true, email_status: true, hubspot_contact_id: true } }) as Promise<Row[]>,
+    (prisma.gapAccountAlias?.findMany ? prisma.gapAccountAlias.findMany({ where: { account_name: name }, select: { alias: true } }).catch(() => []) : Promise.resolve([])) as Promise<Row[]>,
+    (prisma.accountContactCandidate?.findMany ? prisma.accountContactCandidate.findMany({ where: { account_name: name, state: 'staged' }, select: { id: true, full_name: true, title: true, email: true }, take: 30 }).catch(() => []) : Promise.resolve([])) as Promise<Row[]>,
+    (prisma.gapWorkSourceMember?.findMany ? prisma.gapWorkSourceMember.findMany({ where: { account_name: name, status: { notIn: ['ignored', 'not_now'] } }, select: { id: true, name: true, kind: true, title: true, persona_id: true, relationship_context: true, work_source: { select: { name: true, source_type: true } } }, take: 30 }).catch(() => []) : Promise.resolve([])) as Promise<Row[]>,
+    loadFamilyPeople(prisma, name, input.now, { hubspotPeople: deps.hubspotPeople, company: deps.company, family: deps.family, caps: deps.cap ? { total: deps.cap, perCompany: deps.cap } : undefined }),
+    // The account's own names and domains (the same context the decision-time gate reads, so the two never disagree).
+    accountEmploymentContext(prisma, name).catch(() => ({ aliases: [] as string[], domains: [] as string[] })),
+  ]);
   if (!account) return { ok: false, reason: 'account_not_found' };
-
-  let hypothesis: Row | null = null;
   if (input.hypothesisId) {
-    hypothesis = await prisma.prospectingHypothesis.findUnique({
-      where: { id: input.hypothesisId },
-      select: { id: true, account_name: true, status: true, primary_persona_id: true, observation: true, problem_hypothesis: true, problem_family: true, persona: true, metadata: true, signals: { where: { role: 'primary' }, select: { signal: { select: { claim_class: true, metadata: true } } }, take: 1 } },
-    });
     if (!hypothesis) return { ok: false, reason: 'hypothesis_not_found' };
     if (hypothesis.account_name !== account.name) return { ok: false, reason: 'hypothesis_not_at_account' };
   }
-
-  const [personas, aliases, candidates, members, fam] = await Promise.all([
-    prisma.persona.findMany({ where: { account_name: account.name }, select: { id: true, name: true, title: true, email: true, do_not_contact: true, email_status: true, hubspot_contact_id: true } }) as Promise<Row[]>,
-    (prisma.gapAccountAlias?.findMany ? prisma.gapAccountAlias.findMany({ where: { account_name: account.name }, select: { alias: true } }).catch(() => []) : Promise.resolve([])) as Promise<Row[]>,
-    (prisma.accountContactCandidate?.findMany ? prisma.accountContactCandidate.findMany({ where: { account_name: account.name, state: 'staged' }, select: { id: true, full_name: true, title: true, email: true }, take: 30 }).catch(() => []) : Promise.resolve([])) as Promise<Row[]>,
-    (prisma.gapWorkSourceMember?.findMany ? prisma.gapWorkSourceMember.findMany({ where: { account_name: account.name, status: { notIn: ['ignored', 'not_now'] } }, select: { id: true, name: true, kind: true, title: true, persona_id: true, relationship_context: true, work_source: { select: { name: true, source_type: true } } }, take: 30 }).catch(() => []) : Promise.resolve([])) as Promise<Row[]>,
-    loadFamilyPeople(prisma, account.name, input.now, { hubspotPeople: deps.hubspotPeople, company: deps.company, family: deps.family, caps: deps.cap ? { total: deps.cap, perCompany: deps.cap } : undefined }),
-  ]);
   const companies = { ids: fam.primary.companyIds, via: fam.primary.via, detail: familyDetail(fam) };
   const hs = fam.read ? { people: fam.people, truncated: fam.primary.truncated || fam.capHit } : null;
   const hsPeople = fam.people;
@@ -110,20 +114,21 @@ export async function loadOwnerResolution(prisma: PrismaLike, input: LoadOwnerRe
 
   // Unsubscribes are the recipient's own decision: read directly, never only the do_not_contact mirror.
   const emails = personas.map((p) => String(p.email ?? '').trim().toLowerCase()).filter(Boolean);
-  const unsub: Row[] = emails.length && prisma.unsubscribedEmail?.findMany ? await prisma.unsubscribedEmail.findMany({ where: { email: { in: emails } }, select: { email: true } }).catch(() => []) : [];
-  const unsubscribed = new Set(unsub.map((u) => String(u.email).toLowerCase()));
 
   // Contact currentness for every GAP persona, with the live HubSpot properties where the person is linked.
   const hsProps = new Map<string, HubSpotEmploymentProps>();
   for (const p of hsPeople) hsProps.set(p.id, { company: p.company ?? null, title: p.title, email: null, lastModifiedAt: p.lastModifiedAt ?? null, apolloEmploymentStatus: p.apolloEmploymentStatus ?? null, apolloVerifiedAt: p.apolloVerifiedAt ?? null });
-  // The account's own names and domains (the same context the decision-time gate reads, so the two never disagree).
-  const ctx = await accountEmploymentContext(prisma, account.name).catch(() => ({ aliases: [] as string[], domains: [] as string[] }));
   const aliasList = [...new Set([...(aliases as Row[]).map((a) => String(a.alias)), ...(account.parent_brand ? [account.parent_brand] : []), ...ctx.aliases])];
-  const employment = await loadEmployment(prisma, personas.map((p) => p.id as number), { now: input.now, hubspot: hsProps, aliasesFor: () => aliasList, domainsFor: () => ctx.domains });
   // ROLE currentness evidence recorded against a HubSpot contact id (VERIFY CURRENT ROLE on a HubSpot-only person, or
   // on a person before they became a GAP contact): one batch read of the audit rows, keyed by contact id.
   const contactIds = [...new Set([...hsPeople.map((h) => h.id), ...personas.map((p) => (p.hubspot_contact_id ? String(p.hubspot_contact_id) : '')).filter(Boolean)])];
-  const roleEvidence = contactIds.length ? await loadHubSpotContactRoleEvidence(prisma, contactIds).catch(() => new Map<string, EmploymentEvidence[]>()) : new Map<string, EmploymentEvidence[]>();
+  // R61: the three reads that need the people run together, never one after another.
+  const [unsub, employment, roleEvidence] = await Promise.all([
+    (emails.length && prisma.unsubscribedEmail?.findMany ? prisma.unsubscribedEmail.findMany({ where: { email: { in: emails } }, select: { email: true } }).catch(() => []) : Promise.resolve([])) as Promise<Row[]>,
+    loadEmployment(prisma, personas.map((p) => p.id as number), { now: input.now, hubspot: hsProps, aliasesFor: () => aliasList, domainsFor: () => ctx.domains }),
+    contactIds.length ? loadHubSpotContactRoleEvidence(prisma, contactIds).catch(() => new Map<string, EmploymentEvidence[]>()) : Promise.resolve(new Map<string, EmploymentEvidence[]>()),
+  ]);
+  const unsubscribed = new Set(unsub.map((u) => String(u.email).toLowerCase()));
   const asInput = (r: RoleRead): NonNullable<OwnerCandidateInput['role']> => ({ state: r.state, label: ROLE_LABEL[r.state], why: r.why, effectiveTitle: r.effectiveTitle, priorTitle: r.priorTitle, usableForRanking: r.usableForRanking });
   const roleOf = (storedTitle: string | null, evidence: readonly EmploymentEvidence[], crmTitle: string | null) => asInput(readRole({ accountName: account.name, aliases: aliasList, domains: ctx.domains, storedTitle, crmTitle, evidence, now: input.now }));
 

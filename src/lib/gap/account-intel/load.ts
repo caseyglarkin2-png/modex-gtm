@@ -143,6 +143,9 @@ export async function loadAccountInputs(
   const hsPeopleP = opts.live && account.hubspot_company_id ? loadHubSpotPeople(account.hubspot_company_id, opts.deps?.hubspotPeople) : Promise.resolve(null);
   const stagesP = opts.live ? stageLabels(opts.deps?.stageLabels) : Promise.resolve(new Map<string, string>());
   const contradictedP = early(soft(contradictedFactIds(prisma, accountName, now), new Map<string, string>()));
+  // R61: the account's names and domains need only its name: read now, beside everything else (it waited for the
+  // HubSpot people before).
+  const empCtxP = opts.lean ? Promise.resolve({ aliases: [] as string[], domains: [] as string[] }) : early(accountEmploymentContext(prisma, accountName).catch(() => ({ aliases: [] as string[], domains: [] as string[] })));
   // Item 2: every fact a REJECTED thesis here cites (the seller set the story aside), not only the ten newest theses.
   const setAsideP: Promise<string[]> = early(skip(() => (prisma.hypothesisSignal?.findMany ? prisma.hypothesisSignal.findMany({ where: { hypothesis: { account_name: accountName, status: 'rejected' } }, select: { signal_id: true }, take: 500 }).then((rows: Row[]) => [...new Set(rows.map((r) => String(r.signal_id)))]).catch(() => [] as string[]) : Promise.resolve([] as string[])), [] as string[]));
   const candidateP: Promise<Row | null> = !lean && prisma.gapAccountCandidate?.findFirst
@@ -291,15 +294,18 @@ export async function loadAccountInputs(
   // Contact currentness for the GAP contacts (database evidence plus the live HubSpot properties where linked).
   const hsProps = new Map<string, HubSpotEmploymentProps>();
   for (const h of hsPeople?.people ?? []) hsProps.set(h.id, { company: h.company ?? null, title: h.title, email: null, lastModifiedAt: h.lastModifiedAt ?? null, apolloEmploymentStatus: h.apolloEmploymentStatus ?? null, apolloVerifiedAt: h.apolloVerifiedAt ?? null });
-  const empCtx = lean ? { aliases: [] as string[], domains: [] as string[] } : await accountEmploymentContext(prisma, accountName).catch(() => ({ aliases: [] as string[], domains: [] as string[] }));
+  const empCtx = await empCtxP;
   const empAliases = [...new Set([...aliasList, ...(account.parent_brand ? [account.parent_brand] : []), ...empCtx.aliases])];
-  const employment = lean || !(personas as Row[]).length ? new Map() : await loadEmployment(prisma, (personas as Row[]).map((p) => p.id as number), { now, hubspot: hsProps, aliasesFor: () => empAliases, domainsFor: () => empCtx.domains }).catch(() => new Map());
   // ROLE currentness (WHO truth maintenance, 2026-10-05): the stored title against current evidence, for GAP contacts
   // (the record plus anything verified against the linked HubSpot contact) and for HubSpot-only people (the CRM row,
   // Apollo's sweep, anything verified against the contact id). A changed role with no known title, or a role
   // conflict, never fills a slot; a verified new title is the title the buyer map reads.
   const roleIds = lean ? [] : [...new Set([...(hsPeople?.people ?? []).map((h) => h.id), ...(personas as Row[]).map((p) => (p.hubspot_contact_id ? String(p.hubspot_contact_id) : '')).filter(Boolean)])];
-  const roleEvidence = roleIds.length ? await loadHubSpotContactRoleEvidence(prisma, roleIds).catch(() => new Map<string, EmploymentEvidence[]>()) : new Map<string, EmploymentEvidence[]>();
+  // R61: the contacts' employment and their role evidence are read together, never one after the other.
+  const [employment, roleEvidence] = await Promise.all([
+    lean || !(personas as Row[]).length ? Promise.resolve(new Map()) : loadEmployment(prisma, (personas as Row[]).map((p) => p.id as number), { now, hubspot: hsProps, aliasesFor: () => empAliases, domainsFor: () => empCtx.domains }).catch(() => new Map()),
+    roleIds.length ? loadHubSpotContactRoleEvidence(prisma, roleIds).catch(() => new Map<string, EmploymentEvidence[]>()) : Promise.resolve(new Map<string, EmploymentEvidence[]>()),
+  ]);
   const roleView = (r: RoleRead) => ({ state: r.state, why: r.why, effectiveTitle: r.effectiveTitle, priorTitle: r.priorTitle, usableForRanking: r.usableForRanking });
   const personaRoleOf = (p: Row) => {
     const emp = employment.get(p.id);

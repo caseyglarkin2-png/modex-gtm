@@ -284,8 +284,11 @@ export interface CurrentDecisions {
  * over three narrow columns. Past tens of thousands of rows, move it into
  * Postgres as DISTINCT ON (account_name, persona_id).
  */
-export async function currentDecisions(prisma: PrismaLike): Promise<CurrentDecisions> {
+export async function currentDecisions(prisma: PrismaLike, scope: { accountName?: string | null } = {}): Promise<CurrentDecisions> {
+  // R61: one account's cards are decided by that account's rows alone (newest per account and person), so an
+  // account-scoped read never pulls every account's decisions (the account page did, on every view).
   const all = (await prisma.routingDecision.findMany({
+    ...(scope.accountName ? { where: { account_name: scope.accountName } } : {}),
     orderBy: [{ created_at: 'desc' }, { id: 'desc' }],
     select: { id: true, run_id: true, account_name: true, persona_id: true, hypothesis_id: true, created_at: true },
   })) as Array<{ id: string; run_id: string; account_name: string; persona_id: number | null; hypothesis_id: string | null; created_at: Date }>;
@@ -335,7 +338,7 @@ export async function listQueue(prisma: PrismaLike, opts: ListQueueOptions = {})
   const limit = Math.min(MAX_QUEUE_LIMIT, Math.max(1, Math.trunc(opts.limit ?? DEFAULT_QUEUE_LIMIT)));
 
   const runId = opts.runId?.trim() || null;
-  const current = runId ? null : await currentDecisions(prisma);
+  const current = runId ? null : await currentDecisions(prisma, { accountName: opts.accountName ?? null });
   if (current && current.ids.length === 0) return { runId: null, asOf: null, items: [], nextCursor: null };
 
   const where: Record<string, unknown> = runId ? { run_id: runId } : { id: { in: current!.ids } };

@@ -17,6 +17,7 @@
  * Never touches do_not_contact, email, email_status or HubSpot: leaving a company is not suppression.
  * House `prisma: any` glue.
  */
+import { cache } from 'react';
 import { apolloEvidence, crmEvidence, interactionEvidence, kindForUrl, readEmployment, tierForUrl, type EmploymentEvidence, type EmploymentRead, type EvidenceTier } from './employment';
 import type { RoleVerdict } from './employment-verify';
 import { readRole, type RoleRead } from './role-currentness';
@@ -129,7 +130,13 @@ const emailDomain = (e: string | null | undefined): string | null => (e && e.inc
  * contacts share). One person's address is never an account domain (review B2). Every caller passes this: the two
  * loaders and the decision-time gate, so the panel and the gate read the same spellings.
  */
-export async function accountEmploymentContext(prisma: PrismaLike, accountName: string): Promise<{ aliases: string[]; domains: string[] }> {
+export const accountEmploymentContext = cache(readAccountEmploymentContext);
+
+/**
+ * R61: read once per request (React's request cache; a plain call outside a server render): the account page's
+ * inputs and its owner resolution both asked for the same five reads.
+ */
+async function readAccountEmploymentContext(prisma: PrismaLike, accountName: string): Promise<{ aliases: string[]; domains: string[] }> {
   const [account, aliasRows, links, people, children] = await Promise.all([
     typeof prisma?.account?.findUnique === 'function' ? prisma.account.findUnique({ where: { name: accountName }, select: { parent_brand: true } }).catch(() => null) : null,
     typeof prisma?.gapAccountAlias?.findMany === 'function' ? prisma.gapAccountAlias.findMany({ where: { account_name: accountName }, select: { alias: true } }).catch(() => []) : [],

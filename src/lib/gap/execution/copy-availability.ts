@@ -50,21 +50,42 @@ export async function copyAvailabilityFor(prisma: PrismaLike, h: CopyThesis): Pr
   return { installed: false, familyName, detail: `No first-touch copy is installed for ${familyName}: seed that copy family before this thesis can open an email. Nothing goes out.` };
 }
 
+/**
+ * R61: the seeded families and versions do not change within a session: one shape's answer is kept a minute per
+ * database client (the queue and the pursuit read asked the same three round trips twice per page), and distinct
+ * shapes are resolved together, never one after another. A failed read is never kept. Seeding a family shows within
+ * the minute; the send re-checks at the click whatever this said.
+ */
+export const COPY_SHAPE_TTL_MS = 60_000;
+const shapeCaches = new WeakMap<object, Map<string, { at: number; value: Promise<CopyAvailability> }>>();
+
 /** Copy availability for many theses, one resolver call per distinct shape. Unread ids are absent (never "installed"). */
-export async function copyAvailabilityMap(prisma: PrismaLike, hypothesisIds: readonly string[]): Promise<Map<string, CopyAvailability>> {
+export async function copyAvailabilityMap(prisma: PrismaLike, hypothesisIds: readonly string[], nowMs: number = Date.now()): Promise<Map<string, CopyAvailability>> {
   const out = new Map<string, CopyAvailability>();
   const ids = [...new Set(hypothesisIds)];
   if (!ids.length) return out;
   const rows: CopyThesis[] = await prisma.prospectingHypothesis.findMany({ where: { id: { in: ids } }, select: COPY_THESIS_SELECT });
-  const cache = new Map<string, CopyAvailability>();
+  let kept = shapeCaches.get(prisma);
+  if (!kept) {
+    kept = new Map();
+    if (prisma && typeof prisma === 'object') shapeCaches.set(prisma, kept);
+  }
+  const byShape = new Map<string, Promise<CopyAvailability>>();
   for (const h of rows) {
     const key = JSON.stringify([approachOfHypothesis(h), h.problem_family, h.sequence_version_id ?? null, h.sequence_family_id ?? null]);
-    let c = cache.get(key);
-    if (!c) {
-      c = await copyAvailabilityFor(prisma, h);
-      cache.set(key, c);
+    if (byShape.has(key)) continue;
+    const hit = kept.get(key);
+    if (hit && nowMs - hit.at < COPY_SHAPE_TTL_MS) {
+      byShape.set(key, hit.value);
+      continue;
     }
-    out.set(h.id!, c);
+    const value = copyAvailabilityFor(prisma, h);
+    const cache = kept;
+    cache.set(key, { at: nowMs, value });
+    value.catch(() => cache.delete(key));
+    byShape.set(key, value);
   }
+  const answers = new Map(await Promise.all([...byShape].map(async ([k, p]) => [k, await p] as const)));
+  for (const h of rows) out.set(h.id!, answers.get(JSON.stringify([approachOfHypothesis(h), h.problem_family, h.sequence_version_id ?? null, h.sequence_family_id ?? null]))!);
   return out;
 }

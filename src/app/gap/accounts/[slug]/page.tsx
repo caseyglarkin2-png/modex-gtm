@@ -162,9 +162,10 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
   const { brief, inputs } = loaded;
   // R55: reconcile GAP's obligations with HubSpot's deal states (a closed deal's open work is skipped with its reason;
   // a reopened deal gets one current next step). Never on an UNKNOWN read; soft (the page renders regardless).
-  if (inputs.opportunity && inputs.opportunity.status !== 'UNKNOWN') {
-    await syncDealStates(prisma, { accountName: brief.accountName, open: (inputs.opportunity.deals ?? []).filter((d): d is typeof d & { id: string } => !!d.id).map((d) => ({ id: d.id, name: d.name })), closed: inputs.opportunity.closed ?? [], now }).catch(() => null);
-  }
+  // R61: it runs beside the page's other reads; only the reads of the obligations wait for it.
+  const dealsSynced: Promise<unknown> = inputs.opportunity && inputs.opportunity.status !== 'UNKNOWN'
+    ? syncDealStates(prisma, { accountName: brief.accountName, open: (inputs.opportunity.deals ?? []).filter((d): d is typeof d & { id: string } => !!d.id).map((d) => ({ id: d.id, name: d.name })), closed: inputs.opportunity.closed ?? [], now }).catch(() => null)
+    : Promise.resolve(null);
   // R60: opened from Work, every view and anchor of this account keeps the seller's place (Back to Work, Next account).
   const workIndex = q.from === 'work' && /^\d+$/.test(q.i ?? '') ? Number(q.i) : null;
   const hrefFor = (v: View) => {
@@ -210,6 +211,7 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
       ...(inputs.account.hubspotCompanyId ? [{ label: 'HubSpot record', href: `https://app.hubspot.com/contacts/3819073/record/0-2/${inputs.account.hubspotCompanyId}`, external: true }] : []),
     ];
     if (view === 'brief') {
+      await dealsSynced;
       // R50: each open deal is worked on its own: its obligations, its confirmed words, its contacts and HubSpot's next
       // step, with the account-level rows labeled; one deal brief per deal (never another deal's words).
       const openDeals = brief.dealState === 'ACTIVE' ? (inputs.opportunity?.deals ?? []).filter((d): d is typeof d & { id: string } => !!d.id) : [];
@@ -279,8 +281,8 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
     const [pursuit, readers, commitments] = await Promise.all([
       loadPursuit(prisma, { brief, inputs, ctx, now }).catch(() => null),
       loadStoryReaders({ accountName: brief.accountName, domain: accountDomainFor({ domains: inputs.domains, addresses: [...ctx.history.map((h) => h.text.match(/[\w.+-]+@[\w.-]+\.[a-z]{2,}/i)?.[0] ?? ''), ...inputs.firstTouches.map((t) => t.recipient)] }) }).catch(() => ({ clawd: { read: 'unavailable' as const, sends: [] }, vaultNote: null })),
-      // R40 / R42: every obligation at this account, each on its own row.
-      loadCommitments(prisma, { accountNames: [brief.accountName] }).catch(() => []),
+      // R40 / R42: every obligation at this account, each on its own row (after the deal states are reconciled).
+      dealsSynced.then(() => loadCommitments(prisma, { accountNames: [brief.accountName] })).catch(() => []),
     ]);
     // R42: the newest reply nobody has recorded, with its prepared notes (never copy, never a send).
     const mailboxId = process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() || null;
@@ -426,6 +428,7 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
   }
 
   // SOURCES: the full analyst layer, as before V2.
+  await dealsSynced;
   const [history, sources, dealBrief] = await Promise.all([
     loadResearchHistory(prisma, brief.accountName, now).catch(() => []),
     loadAccountSources(prisma, brief.accountName, { now }).catch(() => null),

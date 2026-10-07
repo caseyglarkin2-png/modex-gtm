@@ -54,6 +54,15 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
   const { brief, inputs, ctx, now } = args;
   const accountName = inputs.account.name;
 
+  // R61: the send gate and its copy check need only the account, so they start now, beside the reads below (they ran
+  // after all of them, one round trip after another).
+  const sendableP = soft(loadSendableTheses(prisma, accountName, now), null);
+  const copyP: Promise<Map<string, { installed: boolean; familyName: string; detail: string | null }> | null> = sendableP.then(async (s) => {
+    if (!s || !s.size || typeof prisma?.sequenceFamily?.findMany !== 'function') return new Map();
+    const { copyAvailabilityMap } = await import('../execution/copy-availability');
+    return soft(copyAvailabilityMap(prisma, [...s]), null);
+  });
+
   const [resolutionRes, queue, choices, assigned, repliesPage, preferences] = await Promise.all([
     // R32: the open deals' contacts from the account read already made (a deal contact precedes a cold alternative).
     soft(loadOwnerResolution(prisma, { accountName, purpose: 'COLD_FIRST_TOUCH', now, openDeals: inputs.opportunity?.status === 'ACTIVE' ? inputs.opportunity.deals : null }), null),
@@ -143,11 +152,10 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
   const anchorChoice: string | null = state.person?.personaId ? (anchors.get(state.person.personaId)?.hypothesisId ?? null) : null;
   const openStatuses = new Set(['approved', 'active', 'confirmed', 'partially_confirmed']);
   const anchored = anchorChoice ? brief.hypotheses.find((h) => h.id === anchorChoice && h.grounded && h.truth !== 'CONTRADICTED') ?? null : null;
-  const sendableTheses = await soft(loadSendableTheses(prisma, accountName, now), null);
+  const sendableTheses = await sendableP;
   // Batch item 6 (R34): a thesis whose first-touch copy is not installed cannot open an email: it is not usable, and
   // the state says which copy family to seed (an unread copy check opens nothing either).
-  const { copyAvailabilityMap } = await import('../execution/copy-availability');
-  const copyById = sendableTheses && sendableTheses.size && typeof prisma?.sequenceFamily?.findMany === 'function' ? await soft(copyAvailabilityMap(prisma, [...sendableTheses]), null) : new Map<string, { installed: boolean; familyName: string; detail: string | null }>();
+  const copyById = await copyP;
   const copyOk = (id: string) => (typeof prisma?.sequenceFamily?.findMany !== 'function' ? true : copyById?.get(id)?.installed === true);
   // The pack opens on a USABLE thesis only (open, grounded, not under review, one the send gate would let out, and with
   // its copy installed), the same set the anchor block shows; the recorded choice wins when it is usable. An unread
