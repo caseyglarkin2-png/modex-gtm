@@ -36,7 +36,7 @@ import type { PursuitSummary } from '../pursuit/summary';
 import type { PursuitStateKind } from '../pursuit/state';
 import { outcomeLine, type WorkOutcome } from './outcome-model';
 import { MOTION_UNLOCK_BUSINESS_DAYS } from '../motion/account-motion';
-import { buyerMoves, commitmentPhase, commitmentTier, KIND_TEXT, type Commitment, type CommitmentKind } from './commitment-model';
+import { buyerMoves, commitmentPhase, commitmentTier, KIND_TEXT, skippedAtClosureOf, type Commitment, type CommitmentKind, type SkippedAtClosure } from './commitment-model';
 import { dayLabel, nyDay } from './dates';
 import { stalledSignals } from '../deals/stalled';
 import { closedDealLabel, type ClosedDealRef } from '../deals/scope';
@@ -81,6 +81,8 @@ export interface WorkObligation {
   prep?: string | null;
   /** Batch item 8: what proves it done (a plan milestone's own proof), asked when the seller marks it done. */
   proofNeeded?: string | null;
+  /** Sprint 5 review (R55): on a reopened deal's next step, what its closure skipped (each restorable). */
+  skippedAtClosure?: Array<SkippedAtClosure & { restored: boolean }>;
 }
 
 export interface WaitingItem {
@@ -561,7 +563,7 @@ export function workDay(i: WorkInput): WorkDay {
     // promotes a held account either; every other kind ranks.
     const tier: WorkTier = c.source.kind === 'snooze' || plan?.action === 'held' ? 'later' : commitmentTier(c);
     const list = obligations.get(c.accountName) ?? [];
-    list.push({ key: c.commitmentId, commitmentId: c.commitmentId, kind: c.kind, tier, title: c.title, line: plan?.line ?? p.line, dueAt: c.dueAt, dueDay: p.dueDay, person: c.person ? { name: c.person.name, email: c.person.email } : null, basis: c.basis, href: action.href, label: action.label, canComplete: true, scope: dealLabel(c.accountName, c.dealId), proofNeeded: c.detail?.proofNeeded ?? null });
+    list.push({ key: c.commitmentId, commitmentId: c.commitmentId, kind: c.kind, tier, title: c.title, line: plan?.line ?? p.line, dueAt: c.dueAt, dueDay: p.dueDay, person: c.person ? { name: c.person.name, email: c.person.email } : null, basis: c.basis, href: action.href, label: action.label, canComplete: true, scope: dealLabel(c.accountName, c.dealId), proofNeeded: c.detail?.proofNeeded ?? null, ...(c.detail?.skippedAtClosure?.length ? { skippedAtClosure: skippedAtClosureOf(c, i.commitments ?? []) } : {}) });
     obligations.set(c.accountName, list);
   }
   const horizon = i.now.getTime() + 24 * 3_600_000;

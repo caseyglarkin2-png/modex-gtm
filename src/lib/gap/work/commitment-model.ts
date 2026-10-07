@@ -45,6 +45,26 @@ export type ProofKind = (typeof PROOF_KINDS)[number];
 export const SOURCE_KINDS = ['bid', 'disposition', 'send', 'snooze', 'capture', 'reply', 'seller', 'plan', 'deal'] as const;
 export type CommitmentSourceKind = (typeof SOURCE_KINDS)[number];
 
+/** Sprint 5 review (R55): one obligation a deal's closure skipped, as its reopening lists it. */
+export interface SkippedAtClosure {
+  commitmentId: string;
+  title: string;
+  kind: CommitmentKind;
+  dueAt: string | null;
+  person: string | null;
+}
+
+/** The id of the obligation that restores a skipped one (deals/closure.ts restoreSkippedObligation): one per skip. */
+export const restoredIdFor = (skippedId: string): string => `deal:restore:${skippedId}`;
+
+/** A reopened deal's skipped obligations, each with whether it was already restored (read from every commitment). */
+export function skippedAtClosureOf(c: Pick<Commitment, 'detail'>, all: ReadonlyArray<Pick<Commitment, 'commitmentId'>>): Array<SkippedAtClosure & { restored: boolean }> {
+  const items = c.detail?.skippedAtClosure ?? [];
+  if (!items.length) return [];
+  const ids = new Set(all.map((x) => x.commitmentId));
+  return items.map((s) => ({ ...s, restored: ids.has(restoredIdFor(s.commitmentId)) }));
+}
+
 export interface CommitmentPerson {
   personaId: number | null;
   name: string | null;
@@ -104,6 +124,10 @@ export interface Commitment {
     responsible?: { side: 'buyer' | 'seller'; name: string | null } | null;
     /** R52: the buyer agreed to this step: who and on which day, as the seller recorded it (never inferred). */
     buyerAgreed?: { by: string; on: string } | null;
+    /** Sprint 5 review (R55): on a reopened deal's next step, the obligations skipped when the deal closed. */
+    skippedAtClosure?: SkippedAtClosure[];
+    /** Sprint 5 review (R55): the obligation skipped at a closure that this one restores. */
+    restoredFrom?: string;
   } | null;
   createdAt: string;
   createdBy: string;

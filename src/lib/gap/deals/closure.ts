@@ -10,14 +10,16 @@
  *                      (closed won: a customer, no first-touch campaign; closed lost: parked until something material
  *                      changes, which the opportunity resolver reads)
  *   a deal reopens     ONE current next step ("Reopened: decide the next step on X"), once per reopening; the obligations
- *                      skipped at the closure stay skipped, so no historical reminder is revived
+ *                      skipped at the closure stay skipped, so no historical reminder is revived; the step LISTS them
+ *                      with their due dates (Sprint 5 review), and the seller restores the ones that still stand, each
+ *                      as a new open obligation (restoreSkippedObligation; the skipped record stays terminal)
  *   first sight        a deal seen open for the first time is recorded as the baseline, silently
  *
  * An UNKNOWN opportunity read changes nothing (never act on what could not be read). Nothing here sends, writes HubSpot
  * or changes a thesis, a person or a suppression.
  */
-import { ensureCommitment, loadCommitments, transitionCommitment } from '../work/commitments';
-import { TERMINAL_STATUSES, type Commitment } from '../work/commitment-model';
+import { ensureCommitment, loadCommitment, loadCommitments, transitionCommitment, type CommitmentRefusal } from '../work/commitments';
+import { TERMINAL_STATUSES, type Commitment, type SkippedAtClosure } from '../work/commitment-model';
 import { readCursor, rotateFrom, writeCursor } from '../work/cursor';
 import type { ClosedDeal } from '../opportunity/active-opportunity';
 import type { ClosedDealRef } from './scope';
@@ -42,14 +44,57 @@ export function openWorkOn(commitments: readonly Commitment[], deal: { id: strin
   return commitments.filter((c) => !!c.dealId && !TERMINAL_STATUSES.includes(c.status) && (c.dealId === deal.id || (!isDealId(c.dealId) && sameName(c.dealId, deal.name))));
 }
 
-export async function loadDealStates(prisma: PrismaLike, accountName: string): Promise<Map<string, { state: DealState; at: string }>> {
+export async function loadDealStates(prisma: PrismaLike, accountName: string): Promise<Map<string, { state: DealState; at: string; name: string | null }>> {
   const rows: Array<{ payload: Record<string, unknown> | null; created_at: Date }> = await prisma.gapAuditEvent.findMany({ where: { kind: DEAL_STATE, subject_type: 'account', subject_id: accountName }, select: { payload: true, created_at: true }, orderBy: { created_at: 'asc' } });
-  const out = new Map<string, { state: DealState; at: string }>();
+  const out = new Map<string, { state: DealState; at: string; name: string | null }>();
   for (const r of rows) {
     const p = r.payload ?? {};
-    if (typeof p.dealId === 'string' && typeof p.state === 'string') out.set(p.dealId, { state: p.state as DealState, at: new Date(r.created_at).toISOString() });
+    if (typeof p.dealId === 'string' && typeof p.state === 'string') out.set(p.dealId, { state: p.state as DealState, at: new Date(r.created_at).toISOString(), name: typeof p.dealName === 'string' ? p.dealName : null });
   }
   return out;
+}
+
+/** Most a reopening lists (the newest due first is not the point: the earliest due is, so they read in date order). */
+export const SKIPPED_AT_CLOSURE_MAX = 20;
+
+/**
+ * Sprint 5 review (R55): the obligations a deal's closure skipped and nobody restored since, earliest due first, as the
+ * reopening lists them. A skip by the seller is never listed (only the closure's own), nor an earlier reopen step.
+ */
+export function skippedAtClosureOn(commitments: readonly Commitment[], deal: { id: string; name: string | null }): SkippedAtClosure[] {
+  const ids = new Set(commitments.map((c) => c.commitmentId));
+  return commitments
+    .filter((c) => c.status === 'skipped' && c.updatedBy === CLOSURE_ACTOR && !!c.dealId && (c.dealId === deal.id || (!isDealId(c.dealId) && sameName(c.dealId, deal.name))) && !c.source.id.startsWith('reopen:') && !ids.has(`deal:restore:${c.commitmentId}`))
+    .sort((a, b) => String(a.dueAt ?? '9999').localeCompare(String(b.dueAt ?? '9999')) || a.title.localeCompare(b.title))
+    .slice(0, SKIPPED_AT_CLOSURE_MAX)
+    .map((c) => ({ commitmentId: c.commitmentId, title: c.title, kind: c.kind, dueAt: c.dueAt, person: c.person?.name ?? null }));
+}
+
+export type RestoreRefusal = 'not_found' | 'not_skipped_at_closure' | 'deal_closed' | CommitmentRefusal;
+
+/**
+ * Sprint 5 review (R55): restore one obligation a closure skipped, once its deal is open again. The skipped record
+ * stays terminal (nothing reopens it); the restore is a NEW obligation with the same words, person, deal and due date,
+ * keyed by the skipped one, so a double click or a second tab restores it once. Refused for anything the closure did
+ * not skip, and while the deal is still closed (the next closure read would only skip it again).
+ */
+export async function restoreSkippedObligation(prisma: PrismaLike, input: { commitmentId: string; actor: string; now: Date }): Promise<{ ok: true; created: boolean; commitment: Commitment } | { ok: false; reason: RestoreRefusal }> {
+  const c = await loadCommitment(prisma, input.commitmentId);
+  if (!c) return { ok: false, reason: 'not_found' };
+  if (c.status !== 'skipped' || c.updatedBy !== CLOSURE_ACTOR || !c.dealId) return { ok: false, reason: 'not_skipped_at_closure' };
+  const states = await loadDealStates(prisma, c.accountName);
+  const dealId = c.dealId;
+  const state = isDealId(dealId) ? states.get(dealId)?.state : [...states.values()].find((s) => sameName(s.name, dealId))?.state;
+  if (state !== 'open') return { ok: false, reason: 'deal_closed' };
+  const detail = { ...(c.detail ?? {}) };
+  delete detail.skippedAtClosure;
+  const waits = c.kind === 'buyer_promise' || !!c.dependency;
+  const r = await ensureCommitment(
+    prisma,
+    { accountName: c.accountName, kind: c.kind, title: c.title, basis: c.basis, owner: c.owner, dueAt: c.dueAt, person: c.person, dealId: c.dealId, scope: c.scope ?? null, threadId: c.threadId, status: waits ? 'waiting' : 'open', dependency: waits ? c.dependency ?? 'their delivery' : null, source: { kind: 'deal', id: `restore:${c.commitmentId}` }, detail: { ...detail, restoredFrom: c.commitmentId } },
+    { actor: input.actor, now: input.now },
+  );
+  return r.ok ? r : { ok: false, reason: r.reason };
 }
 
 /**
@@ -128,7 +173,9 @@ export async function syncDealStates(
     // Reopened: ONE current next step, keyed by this reopening; nothing skipped at the closure comes back.
     await record(d.id, 'open', d.name);
     out.reopened.push(d.id);
-    const made = await ensureCommitment(prisma, { accountName: input.accountName, kind: 'deal_step', title: `Reopened: decide the next step on "${d.name ?? d.id}"`.slice(0, 200), dueAt: input.now, dealId: d.id, source: { kind: 'deal', id: `reopen:${d.id}:${input.now.toISOString().slice(0, 10)}` }, detail: null }, { actor: CLOSURE_ACTOR, now: input.now }).catch(() => null);
+    // Sprint 5 review: the step lists what the closure skipped (with due dates), so a live promise is not lost.
+    const skippedHere = skippedAtClosureOn(commitments, d);
+    const made = await ensureCommitment(prisma, { accountName: input.accountName, kind: 'deal_step', title: `Reopened: decide the next step on "${d.name ?? d.id}"`.slice(0, 200), dueAt: input.now, dealId: d.id, source: { kind: 'deal', id: `reopen:${d.id}:${input.now.toISOString().slice(0, 10)}` }, detail: skippedHere.length ? { skippedAtClosure: skippedHere } : null }, { actor: CLOSURE_ACTOR, now: input.now }).catch(() => null);
     if (made?.ok && made.created) out.created += 1;
   }
   return out;

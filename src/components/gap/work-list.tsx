@@ -16,7 +16,7 @@ import { saveWorkOrder } from '@/lib/gap/work/order';
 import { VoicePreviewButton } from '@/components/voice-preview-button';
 import { accountHref, accountSlug, withWorkContext } from '@/lib/gap/account-intel/href';
 import { ReplyPrepPanel } from './reply-prep';
-import { ObligationActions, postJson as post, REFUSAL_TEXT } from './obligation-actions';
+import { ObligationActions, postJson as post, REFUSAL_TEXT, SkippedAtClosure } from './obligation-actions';
 import { refreshNow } from '@/components/gap/refresh-now';
 
 const BTN = 'inline-flex min-h-11 items-center justify-center rounded-md px-3 text-sm font-medium';
@@ -238,6 +238,7 @@ export function WorkList({
                       <div className="flex flex-wrap items-center gap-2">
                         {o.href && o.label ? <Link href={withWorkContext(o.href, c.accountName, c.index)} className="inline-flex min-h-11 items-center text-xs underline sm:min-h-9" data-testid="obligation-open">{o.label}</Link> : null}
                       </div>
+                      {o.skippedAtClosure?.length ? <SkippedAtClosure items={o.skippedAtClosure} /> : null}
                       <ObligationActions commitmentId={o.commitmentId} proofNeeded={o.proofNeeded ?? null} />
                     </li>
                   ))}

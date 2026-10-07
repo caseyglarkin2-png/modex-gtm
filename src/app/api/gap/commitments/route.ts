@@ -6,6 +6,9 @@
  *   `{ op: 'status', commitmentId, to, until?, dependency?, reason?, note?, dueDay? }`              done (the seller's
  *        recorded note is the proof), skipped (with the reason), snoozed (until a date), waiting / blocked (on what),
  *        open again (from waiting, blocked or snoozed; never from done or skipped)
+ *   `{ op: 'restore', commitmentId }`   Sprint 5 review (R55): restore an obligation a deal's closure skipped, once the
+ *        deal is open again: a NEW open obligation with the same words, person, deal and due date (the skipped record
+ *        stays terminal); once per skipped obligation
  *
  * GAP OS execution recovery, R40 (2026-10-06). Session only. Everything is an append-only `account.commitment` row
  * (lib/gap/work/commitments.ts). Nothing here sends, enrolls, writes HubSpot or changes a thesis, a person or a
@@ -18,6 +21,7 @@ import { prisma } from '@/lib/prisma';
 import { badBody, intakeGuard } from '@/lib/gap/intake/route-helpers';
 import { ensureCommitment, loadCommitments, NOTE_MAX, TITLE_MAX, transitionCommitment, withPhases } from '@/lib/gap/work/commitments';
 import { COMMITMENT_STATUSES } from '@/lib/gap/work/commitment-model';
+import { restoreSkippedObligation } from '@/lib/gap/deals/closure';
 import { isDay, nyDayAt } from '@/lib/gap/work/dates';
 
 export const dynamic = 'force-dynamic';
@@ -54,9 +58,10 @@ const Body = z.discriminatedUnion('op', [
       dueDay: day.optional(),
     })
     .strict(),
+  z.object({ op: z.literal('restore'), commitmentId: z.string().trim().min(1).max(300) }).strict(),
 ]);
 
-const STATUS: Record<string, number> = { account_not_found: 404, not_found: 404, terminal: 409 };
+const STATUS: Record<string, number> = { account_not_found: 404, not_found: 404, terminal: 409, not_skipped_at_closure: 409, deal_closed: 409 };
 
 export async function GET(request: NextRequest) {
   const g = await intakeGuard();
@@ -87,6 +92,11 @@ export async function POST(request: NextRequest) {
       { accountName: b.accountName, kind: b.kind, title: b.title, basis: b.basis ?? null, dueAt, person, dealId: b.dealId ?? null, scope: b.division || b.site ? { division: b.division ?? null, site: b.site ?? null } : null, status: b.kind === 'buyer_promise' ? 'waiting' : 'open', dependency: b.kind === 'buyer_promise' ? 'their delivery' : null, source: { kind: 'seller', id: randomUUID() } },
       { actor: g.email, now },
     );
+    if (!r.ok) return NextResponse.json({ error: r.reason }, { status: STATUS[r.reason] ?? 400 });
+    return NextResponse.json(r, { status: r.created ? 201 : 200 });
+  }
+  if (b.op === 'restore') {
+    const r = await restoreSkippedObligation(prisma, { commitmentId: b.commitmentId, actor: g.email, now });
     if (!r.ok) return NextResponse.json({ error: r.reason }, { status: STATUS[r.reason] ?? 400 });
     return NextResponse.json(r, { status: r.created ? 201 : 200 });
   }

@@ -11,7 +11,7 @@
  * An open deal blocks a cold first touch (every send gate re-reads it at the click) and is never "nothing to do":
  * each deal carries its own work (its obligations, HubSpot's next step, a conversation logged on it).
  */
-import type { Commitment, PhaseRead } from '../work/commitment-model';
+import { skippedAtClosureOf, type Commitment, type PhaseRead, type SkippedAtClosure } from '../work/commitment-model';
 import { ACCOUNT_LEVEL, bidScopeInput, closedDealLabel, partitionByDeal, readScope, type ClosedDealRef, type DealRef, type ScopeRead } from './scope';
 
 export interface OpportunityDealInput {
@@ -43,7 +43,7 @@ export interface OpportunityBid {
   metadata?: unknown;
 }
 
-export type ScopedCommitment = Commitment & PhaseRead & { scope: ScopeRead };
+export type ScopedCommitment = Commitment & PhaseRead & { scope: ScopeRead; /** Sprint 5 review (R55): a reopened deal's skipped obligations. */ skippedAtClosure?: Array<SkippedAtClosure & { restored: boolean }> };
 export type ScopedNeed = OpportunityBid & { who: string; scope: ScopeRead };
 
 export interface OpportunityView {
@@ -124,7 +124,11 @@ export function buildOpportunities(input: {
   const personOf = personIndex(input.people);
   const ids = input.deals.map((d) => d.id);
   const closed = input.closedDeals ?? [];
-  const c = partitionByDeal(input.commitments.filter(isOpen), (x) => commitmentScope(x, refs, personOf, closed), ids);
+  const c = partitionByDeal(
+    input.commitments.filter(isOpen).map((x) => (x.detail?.skippedAtClosure?.length ? { ...x, skippedAtClosure: skippedAtClosureOf(x, input.commitments) } : x)),
+    (x) => commitmentScope(x, refs, personOf, closed),
+    ids,
+  );
   const who = (email: string) => personOf({ email })?.name ?? email;
   const b = partitionByDeal(input.bids.map((x) => ({ ...x, who: who(x.contactEmail) })), (x) => bidScope(x, refs, personOf, closed), ids);
   const byContact = new Map(input.people.filter((p) => p.hubspotContactId).map((p) => [String(p.hubspotContactId), p]));

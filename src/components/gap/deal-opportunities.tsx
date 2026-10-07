@@ -9,7 +9,7 @@ import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { KIND_TEXT } from '@/lib/gap/work/commitment-model';
 import type { OpportunitiesView, ScopedCommitment, ScopedNeed } from '@/lib/gap/deals/opportunities';
-import { ObligationActions } from './obligation-actions';
+import { ObligationActions, SkippedAtClosure } from './obligation-actions';
 
 const day = (iso: string | null) => (iso ? new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' }) : null);
 const NEED_WORD: Record<string, string> = { current_state: 'How it runs today', business_problem: 'Problem', root_cause: 'Why it happens', impact: 'Impact', metric: 'A number they gave', priority: 'Priority', future_state: 'What good looks like', constraint: 'Requirement', objection: 'Objection' };
@@ -29,6 +29,7 @@ function Obligations({ items, testid }: { items: ScopedCommitment[]; testid: str
             {c.scope.basis !== 'recorded' ? <span data-testid="obligation-scope"> {c.scope.label}.</span> : null}
           </p>
           {c.basis ? <p className="break-words text-xs italic text-[var(--muted-foreground)]">{c.basis}</p> : null}
+          {c.skippedAtClosure?.length ? <SkippedAtClosure items={c.skippedAtClosure} /> : null}
           <ObligationActions commitmentId={c.commitmentId} proofNeeded={c.detail?.proofNeeded ?? null} />
         </li>
       ))}

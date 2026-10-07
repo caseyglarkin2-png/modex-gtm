@@ -8,6 +8,7 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { refreshNow } from '@/components/gap/refresh-now';
+import type { SkippedAtClosure as SkippedItem } from '@/lib/gap/work/commitment-model';
 
 const SMALL = 'inline-flex min-h-11 items-center justify-center rounded-md border border-[var(--border)] px-2.5 text-xs hover:bg-[var(--muted)] disabled:opacity-60 sm:min-h-9';
 const INPUT = 'min-h-11 rounded-md border border-[var(--border)] bg-transparent px-2 text-sm sm:min-h-9';
@@ -31,6 +32,56 @@ export const REFUSAL_TEXT: Record<string, string> = {
   reason_required: 'say why in a few words',
   proof_required: 'say what shows it is done',
 };
+
+const RESTORE_REFUSAL: Record<string, string> = {
+  not_found: 'it is no longer on record',
+  not_skipped_at_closure: 'the closure did not skip it',
+  deal_closed: 'the deal is closed again',
+  account_not_found: 'the account is no longer on record',
+};
+const shortDay = (iso: string | null) => (iso ? new Date(iso).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'America/New_York' }) : null);
+
+/**
+ * Sprint 5 review (R55): a reopened deal's next step lists what its closure skipped, with the due dates; Restore puts
+ * one back as a new open obligation (the skipped record stays as history). Nothing here sends or writes HubSpot.
+ */
+export function SkippedAtClosure({ items }: { items: ReadonlyArray<SkippedItem & { restored: boolean }> }) {
+  const router = useRouter();
+  const [busy, setBusy] = useState<string | null>(null);
+  const [done, setDone] = useState<Record<string, string>>({});
+  if (!items.length) return null;
+  async function restore(id: string) {
+    setBusy(id);
+    const r = await postJson('/api/gap/commitments', { op: 'restore', commitmentId: id });
+    setBusy(null);
+    setDone((m) => ({ ...m, [id]: r.ok ? 'Restored.' : `Not restored: ${RESTORE_REFUSAL[r.error ?? ''] ?? r.error}.` }));
+    if (r.ok) refreshNow(router);
+  }
+  return (
+    <div className="mt-1 space-y-1 rounded-md border border-dashed border-[var(--border)] p-2" data-testid="skipped-at-closure">
+      <p className="text-xs font-medium">Skipped when the deal closed. Restore what still stands:</p>
+      <ul className="space-y-1">
+        {items.map((s) => (
+          <li key={s.commitmentId} className="flex flex-wrap items-center gap-2 text-xs" data-testid="skipped-at-closure-item">
+            <span className="min-w-0 flex-1">
+              {s.title}
+              <span className="text-[var(--muted-foreground)]">{s.dueAt ? `, due ${shortDay(s.dueAt)}` : ', no date set'}</span>
+            </span>
+            {s.restored ? (
+              <span className="text-[var(--muted-foreground)]" data-testid="skipped-restored">Restored</span>
+            ) : done[s.commitmentId] ? (
+              <span role="status" className="text-[var(--muted-foreground)]" data-testid="restore-status">{done[s.commitmentId]}</span>
+            ) : (
+              <button type="button" className={SMALL} disabled={busy === s.commitmentId} data-testid="restore-obligation" onClick={() => void restore(s.commitmentId)}>
+                Restore
+              </button>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 export function ObligationActions({ commitmentId, proofNeeded = null }: { commitmentId: string | null; /** Batch item 8: a milestone's own proof, asked for on Done. */ proofNeeded?: string | null }) {
   const router = useRouter();
