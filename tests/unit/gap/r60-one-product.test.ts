@@ -55,3 +55,16 @@ describe('R60: a reply is recorded on its own account', () => {
     }
   });
 });
+
+describe('R60: the top of Work is the day, never the machine', () => {
+  it('the routing repair sits in System at the foot of Work (only an analyst lane still leads with it), and the subtitle says the loop', () => {
+    const page = src('src/app/gap/page.tsx');
+    const top = page.slice(page.indexOf('<GapSubnav />'), page.indexOf('<WorkToday'));
+    expect(top).toMatch(/\{lane && data\.unrouted > 0 \? \(/);
+    const foot = page.slice(page.indexOf('data-testid="system-details"') - 200);
+    expect(foot).toMatch(/!lane \|\| data\.unrouted === 0/);
+    expect(foot).toMatch(/data-testid="unrouted-notice"/);
+    expect(page).toContain('The accounts that need you today, in order. Open one, do the move, record it, then go to the next.');
+    expect(page).not.toContain('Decide what you believe, contact who GAP marks ready');
+  });
+});

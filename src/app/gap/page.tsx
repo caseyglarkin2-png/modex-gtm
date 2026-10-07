@@ -458,7 +458,7 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
       <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'GAP' }]} />
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">GAP</h1>
-        <p className="mt-1 text-sm text-[var(--muted-foreground)]">Decide what you believe, contact who GAP marks ready, log what buyers tell you.</p>
+        <p className="mt-1 text-sm text-[var(--muted-foreground)]" data-testid="work-subtitle">{lane ? 'An analyst view: every account in one list. Work holds your day.' : 'The accounts that need you today, in order. Open one, do the move, record it, then go to the next.'}</p>
       </div>
       <GapSubnav />
       {/* Phase 2 A3: can the cockpit be trusted right now (mailbox, HubSpot, suppression, sender, routing). */}
@@ -466,7 +466,8 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
       {/* UX-10: the six lane tiles are the analyst's lanes; on Work the chips carry the counts, so the tiles show only inside a lane. */}
       {lane ? <GapCockpit data={{ ...data.counts, active: lane }} /> : null}
 
-      {data.unrouted > 0 ? (
+      {/* R60: the routing repair is the system's, never the top of the seller's day: it lives in System at the foot. */}
+      {lane && data.unrouted > 0 ? (
         <section data-testid="unrouted-notice" className="space-y-2 rounded-md border border-amber-500/40 bg-amber-500/10 p-3 text-sm">
           <p>
             {data.unrouted} {data.unrouted === 1 ? 'person is' : 'people are'} in use without a current recommendation (routing did not
@@ -507,10 +508,17 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
         </>
       )}
 
-      {data.unrouted === 0 ? (
+      {!lane || data.unrouted === 0 ? (
         <details className="rounded-md border border-[var(--border)] p-3 text-xs" data-testid="system-details">
-          <summary className="cursor-pointer text-[var(--muted-foreground)]">System: routing</summary>
-          <div className="mt-3">{routingPanel}</div>
+          <summary className="cursor-pointer text-[var(--muted-foreground)]">{data.unrouted > 0 ? `System: ${data.unrouted} ${data.unrouted === 1 ? 'person needs' : 'people need'} a recommendation` : 'System'}</summary>
+          <div className="mt-3 space-y-2">
+            {data.unrouted > 0 ? (
+              <p data-testid="unrouted-notice">
+                {data.unrouted} {data.unrouted === 1 ? 'person is' : 'people are'} in use without a current recommendation. One routing pass fixes it; it creates cards only and contacts no one.
+              </p>
+            ) : null}
+            {routingPanel}
+          </div>
         </details>
       ) : null}
     </div>
