@@ -157,7 +157,8 @@ describe('the route and the view (R52)', () => {
     expect(agreed).toHaveLength(1);
     expect(within(agreed[0]).getByTestId('plan-milestone-line').textContent).toMatch(/Buyer agreement: not recorded\./);
     expect(screen.getAllByTestId('plan-proposal').map((f) => f.getAttribute('data-step'))).toEqual(['site_validation', 'pilot', 'stakeholder_alignment', 'procurement']);
-    expect(screen.getByTestId('plan-review-submit').textContent).toBe('Record the plan (4 agreed, 0 declined)');
+    // R63-B S10: proposed stays proposed; nothing is pre-agreed.
+    expect(screen.getByTestId('plan-review-submit').textContent).toBe('Record the plan (choose Agree or Decline on a step first)');
     expect(screen.getByTestId('deal-plan-review').textContent).toMatch(/Proposed by GAP, not agreed by anyone yet/);
   });
 });
