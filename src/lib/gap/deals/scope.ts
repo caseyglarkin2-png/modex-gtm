@@ -46,6 +46,21 @@ export interface ScopeRead {
 
 export const ACCOUNT_LEVEL = 'account-level' as const;
 
+/** A deal HubSpot holds as closed at this account (opportunity truth's `closed`): named, never by its id. */
+export interface ClosedDealRef {
+  id: string;
+  name: string | null;
+  won: boolean | null;
+  closedAt: string | null;
+}
+
+/** "Deal: Kroger Columbus DC (closed won, Oct 7, 2026)". */
+export function closedDealLabel(c: ClosedDealRef): string {
+  const day = c.closedAt && !Number.isNaN(new Date(c.closedAt).getTime()) ? new Date(c.closedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' }) : null;
+  const outcome = c.won === true ? 'closed won' : c.won === false ? 'closed lost' : 'closed';
+  return `Deal: ${c.name ?? 'a closed deal'} (${outcome}${day ? `, ${day}` : ''})`;
+}
+
 const clean = (s: string | null | undefined) => (s ?? '').replace(/\s+/g, ' ').trim() || null;
 const isDealId = (s: string) => /^\d{1,24}$/.test(s);
 
@@ -71,13 +86,20 @@ export function dealsOfContact(contactId: string | null | undefined, deals: read
  * The scope of one row. `recorded` wins; else the person's single open deal; else account-level. `who` names the
  * person for the "through" label; `contactId` is their HubSpot contact id when GAP holds it.
  */
-export function readScope(recorded: ScopeInput | null | undefined, deals: readonly DealRef[], person: { contactId?: string | null; who?: string | null } = {}): ScopeRead {
+export function readScope(recorded: ScopeInput | null | undefined, deals: readonly DealRef[], person: { contactId?: string | null; who?: string | null } = {}, closed: readonly ClosedDealRef[] = []): ScopeRead {
   const division = clean(recorded?.division);
   const site = clean(recorded?.site);
   const ref = resolveDealRef(recorded?.dealId, deals);
   const where = [division ? `division ${division}` : null, site ? `site ${site}` : null].filter(Boolean).join(', ');
   if (ref.dealId) return { ...ref, division, site, basis: 'recorded', label: `Deal: ${ref.dealName ?? ref.dealId}${where ? ` (${where})` : ''}` };
-  if (ref.unmatched) return { ...ref, division, site, basis: 'recorded', label: `Deal ${ref.unmatched}, not an open deal here${where ? ` (${where})` : ''}` };
+  if (ref.unmatched) {
+    // Sprint 5 review: a closed deal is named with its outcome, never "Deal deal 392057002"; an unknown HubSpot id is
+    // said in words; a legacy deal name stays its own scope.
+    const rawId = /^deal (\S+)$/.exec(ref.unmatched)?.[1] ?? null;
+    const was = rawId ? closed.find((c) => c.id === rawId) : undefined;
+    const label = was ? closedDealLabel(was) : rawId ? 'Deal: a deal that is not open here' : `Deal ${ref.unmatched}, not an open deal here`;
+    return { ...ref, division, site, basis: 'recorded', label: `${label}${where ? ` (${where})` : ''}` };
+  }
   if (division || site) return { dealId: null, dealName: null, unmatched: null, division, site, basis: 'recorded', label: where.replace(/^\w/, (c) => c.toUpperCase()) };
   const on = dealsOfContact(person.contactId, deals);
   if (on.length === 1) return { dealId: on[0].id, dealName: on[0].name, unmatched: null, division: null, site: null, basis: 'contact', label: `Deal: ${on[0].name ?? on[0].id}${person.who ? ` (through ${person.who})` : ''}` };

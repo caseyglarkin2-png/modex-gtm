@@ -160,7 +160,8 @@ export function prepareMeeting(i: PrepInput): MeetingPrep {
   }
   const newest = [...i.commitments].sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))[0] ?? null;
   const lastCommitment: PrepLine | null = newest ? { text: `${newest.title} (${newest.line.replace(/\.$/, '')})`, trust: 'Recorded', source: newest.scopeLabel } : null;
-  const confirmedNeeds: PrepLine[] = i.needs.map((n) => ({ text: `${NEED_WORD[n.type] ?? n.type}: "${n.quote}"`, trust: 'Buyer confirmed', source: `${n.who}, ${dayOf(n.at)}${n.scopeLabel === 'account-level' ? ', account-level' : ''}` }));
+  // Sprint 5 review: a meeting bound to no deal says which deal each line came from (never two deals' words unlabeled).
+  const confirmedNeeds: PrepLine[] = i.needs.map((n) => ({ text: `${NEED_WORD[n.type] ?? n.type}: "${n.quote}"`, trust: 'Buyer confirmed', source: `${n.who}, ${dayOf(n.at)}${n.scopeLabel === 'account-level' ? ', account-level' : !i.deal ? `, ${n.scopeLabel}` : ''}` }));
   const toTest: PrepLine[] = i.guesses.slice(0, 2).map((g) => ({ text: g, trust: 'Our guess', source: 'the working thesis: ask, never assert' }));
   const publicContext: PrepLine[] = i.publicFacts.slice(0, 2).map((f) => ({ text: `"${f.quote}"`, trust: 'Public source', source: `${f.title}, ${dayOf(f.publishedAt)}; public, not the buyer's words`, href: f.url }));
   const materials: PrepLine[] = i.materials.filter((x) => x.href).slice(0, 3).map((x) => ({ text: x.label, trust: 'Ours', href: x.href }));

@@ -128,9 +128,10 @@ export async function loadMeetingStartingPoints(prisma: PrismaLike, meetings: re
     return typeof s?.dealId === 'string' ? s.dealId : null;
   };
   for (const m of live) {
-    // A meeting on a deal reads that deal's words and the unscoped ones, never another deal's.
-    const own = confirmed.filter((b) => b.account_name === m.accountName && (!m.dealId || !dealOfBid(b) || dealOfBid(b) === m.dealId));
-    const cs = commitments.filter((c) => c.accountName === m.accountName && (!m.dealId || !c.dealId || c.dealId === m.dealId));
+    // A meeting on a deal reads that deal's words and the unscoped ones, never another deal's; a meeting bound to no
+    // deal (Sprint 5 review: a joint one) reads the account-level words only, never a deal's unlabeled.
+    const own = confirmed.filter((b) => b.account_name === m.accountName && (!dealOfBid(b) || (!!m.dealId && dealOfBid(b) === m.dealId)));
+    const cs = commitments.filter((c) => c.accountName === m.accountName && (!c.dealId || (!!m.dealId && c.dealId === m.dealId)));
     const p = prepareMeeting({
       meeting: { id: m.meetingId, at: m.at, status: m.canceled ? 'Canceled' : 'Scheduled', objective: m.objective, attendees: m.attendees, dealId: m.dealId, createdAt: m.createdAt, updatedAt: m.updatedAt },
       now,

@@ -226,6 +226,8 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
         publicFacts: inputs.facts.map((f) => ({ quote: f.quote, title: f.title, url: f.url, publishedAt: f.publishedAt })),
         materials: ctx.assets.filter((a) => !a.legacy && a.href).map((a) => ({ label: a.label, href: a.href })),
         roi: inputs.roi,
+        // Sprint 5 review: a closed deal's kept rows and meetings are named with its outcome, never its id.
+        closedDeals: inputs.opportunity?.closed ?? [],
       }).catch(() => null);
       const dealBriefs = workspace && openDeals.length
         ? await Promise.all(openDeals.map((d) => loadDealBrief(prisma, brief.accountName, { now, deal: { id: d.id, name: d.name }, scopeOf: workspace.scopeOfBid, dealContacts: (d.contactIds ?? []).length }).catch(() => null)))
@@ -293,7 +295,7 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
     // R50: each obligation says which opportunity it belongs to (a deal, through its person's deal, or account-level).
     const nowDeals = (inputs.opportunity?.deals ?? []).filter((d): d is typeof d & { id: string } => !!d.id).map((d) => ({ id: d.id, name: d.name, contactIds: d.contactIds ?? [] }));
     const scopePeople = personIndex(inputs.personas.map((p) => ({ personaId: p.id, name: p.name, title: p.title, email: null, hubspotContactId: p.hubspotContactId ? String(p.hubspotContactId) : null })));
-    const obligations = withPhases(commitments, now, buyerMoves((pursuit?.replyItems ?? []).filter((r) => !r.dispositionId))).map((c) => ({ ...c, scopeLabel: nowDeals.length || c.dealId ? commitmentScope(c, dealRefs(nowDeals.map((d) => ({ ...d, stage: null }))), scopePeople).label : null }));
+    const obligations = withPhases(commitments, now, buyerMoves((pursuit?.replyItems ?? []).filter((r) => !r.dispositionId))).map((c) => ({ ...c, scopeLabel: nowDeals.length || c.dealId ? commitmentScope(c, dealRefs(nowDeals.map((d) => ({ ...d, stage: null }))), scopePeople, inputs.opportunity?.closed ?? []).label : null }));
     const ready = pursuit ? (brief.motion.type === 'FACT_LED' ? pursuit.ready : null) : brief.motion.type === 'FACT_LED' ? await loadReadyTarget(prisma, brief.accountName, now) : null;
     const v = projectNow(brief, ctx, inputs, now, { ready });
     const top = brief.hypotheses.find((h) => h.grounded && h.truth !== 'CONTRADICTED');

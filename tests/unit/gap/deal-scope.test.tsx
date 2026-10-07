@@ -120,7 +120,7 @@ describe('two opportunities under one company (R50 acceptance)', () => {
     expect(columbus.needs.map((b) => b.id)).toEqual(['b-ben-problem']);
     expect(v.accountLevel.commitments.map((c) => [c.title, c.scope.label])).toEqual([['Ask who runs the Atlanta yards', ACCOUNT_LEVEL]]);
     expect(v.accountLevel.needs.map((b) => [b.id, b.scope.label])).toEqual([['b-cal-state', ACCOUNT_LEVEL]]);
-    expect(v.elsewhere.commitments.map((c) => c.scope.label)).toEqual(['Deal deal 69999, not an open deal here']);
+    expect(v.elsewhere.commitments.map((c) => c.scope.label)).toEqual(['Deal: a deal that is not open here']);
     // No row in two places, and done work is no open obligation anywhere.
     const all = [...v.deals.flatMap((d) => d.commitments), ...v.accountLevel.commitments, ...v.elsewhere.commitments].map((c) => c.commitmentId);
     expect(new Set(all).size).toBe(all.length);

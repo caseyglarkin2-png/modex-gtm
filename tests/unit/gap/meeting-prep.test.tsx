@@ -191,8 +191,9 @@ describe('Work follows the calendar (R51)', () => {
     const inDeals = { status: 'complete' as const, accounts: [{ accountName: ACCOUNT, deals: [{ id: '70001', contactIds: ['81'] }, { id: '70002', contactIds: ['82'] }] }] };
     const raw = await loadMeetingRows(db.client(), NOW);
     expect(raw.map((r) => [r.meetingId, r.dealId])).toEqual([[21, null]]);
-    // Unplaced, it reads both deals' words (the defect); placed, only Columbus's.
-    expect((await loadMeetingStartingPoints(db.client(), raw, [], NOW)).get(21)?.prep).toMatch(/2 confirmed needs on record\.$/);
+    // Unplaced, it reads no deal's words (Sprint 5 review: a meeting bound to no deal reads the account-level words
+    // only, never a deal's unlabeled); placed, only Columbus's.
+    expect((await loadMeetingStartingPoints(db.client(), raw, [], NOW)).get(21)?.prep).toMatch(/Nothing confirmed from the buyer yet\.$/);
     const rows = await resolveMeetingDeals(db.client(), raw, inDeals);
     expect(rows.map((r) => [r.meetingId, r.dealId, r.dealBasis])).toEqual([[21, '70002', 'attendees']]);
     expect((await loadMeetingStartingPoints(db.client(), rows, [], NOW)).get(21)?.prep).toMatch(/1 confirmed need on record\.$/);

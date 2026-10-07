@@ -12,7 +12,7 @@
  * each deal carries its own work (its obligations, HubSpot's next step, a conversation logged on it).
  */
 import type { Commitment, PhaseRead } from '../work/commitment-model';
-import { ACCOUNT_LEVEL, bidScopeInput, partitionByDeal, readScope, type DealRef, type ScopeRead } from './scope';
+import { ACCOUNT_LEVEL, bidScopeInput, partitionByDeal, readScope, type ClosedDealRef, type DealRef, type ScopeRead } from './scope';
 
 export interface OpportunityDealInput {
   id: string;
@@ -94,14 +94,14 @@ export function personIndex(people: readonly OpportunityPerson[]) {
     (ref?.personaId != null ? byId.get(ref.personaId) : undefined) ?? (ref?.email ? byEmail.get(ref.email.toLowerCase()) : undefined) ?? null;
 }
 
-export function commitmentScope(c: Pick<Commitment, 'dealId' | 'scope' | 'person'>, refs: readonly DealRef[], personOf: ReturnType<typeof personIndex>): ScopeRead {
+export function commitmentScope(c: Pick<Commitment, 'dealId' | 'scope' | 'person'>, refs: readonly DealRef[], personOf: ReturnType<typeof personIndex>, closed: readonly ClosedDealRef[] = []): ScopeRead {
   const p = personOf(c.person ? { personaId: c.person.personaId, email: c.person.email } : null);
-  return readScope({ dealId: c.dealId, division: c.scope?.division ?? null, site: c.scope?.site ?? null }, refs, { contactId: p?.hubspotContactId ?? null, who: p?.name ?? c.person?.name ?? null });
+  return readScope({ dealId: c.dealId, division: c.scope?.division ?? null, site: c.scope?.site ?? null }, refs, { contactId: p?.hubspotContactId ?? null, who: p?.name ?? c.person?.name ?? null }, closed);
 }
 
-export function bidScope(b: Pick<OpportunityBid, 'metadata' | 'contactEmail'>, refs: readonly DealRef[], personOf: ReturnType<typeof personIndex>): ScopeRead {
+export function bidScope(b: Pick<OpportunityBid, 'metadata' | 'contactEmail'>, refs: readonly DealRef[], personOf: ReturnType<typeof personIndex>, closed: readonly ClosedDealRef[] = []): ScopeRead {
   const p = personOf({ email: b.contactEmail });
-  return readScope(bidScopeInput(b.metadata), refs, { contactId: p?.hubspotContactId ?? null, who: p?.name ?? null });
+  return readScope(bidScopeInput(b.metadata), refs, { contactId: p?.hubspotContactId ?? null, who: p?.name ?? null }, closed);
 }
 
 export function buildOpportunities(input: {
@@ -115,13 +115,16 @@ export function buildOpportunities(input: {
   captureHref: (deal: OpportunityDealInput) => string;
   /** The HubSpot record of a deal, when the portal is known. */
   hubspotDealHref?: (dealId: string) => string | null;
+  /** Sprint 5 review: the deals HubSpot holds as closed here, so their kept rows are named with the outcome. */
+  closedDeals?: readonly ClosedDealRef[];
 }): OpportunitiesView {
   const refs = dealRefs(input.deals);
   const personOf = personIndex(input.people);
   const ids = input.deals.map((d) => d.id);
-  const c = partitionByDeal(input.commitments.filter(isOpen), (x) => commitmentScope(x, refs, personOf), ids);
+  const closed = input.closedDeals ?? [];
+  const c = partitionByDeal(input.commitments.filter(isOpen), (x) => commitmentScope(x, refs, personOf, closed), ids);
   const who = (email: string) => personOf({ email })?.name ?? email;
-  const b = partitionByDeal(input.bids.map((x) => ({ ...x, who: who(x.contactEmail) })), (x) => bidScope(x, refs, personOf), ids);
+  const b = partitionByDeal(input.bids.map((x) => ({ ...x, who: who(x.contactEmail) })), (x) => bidScope(x, refs, personOf, closed), ids);
   const byContact = new Map(input.people.filter((p) => p.hubspotContactId).map((p) => [String(p.hubspotContactId), p]));
   const order = (xs: ScopedCommitment[]) => [...xs].sort((x, y) => String(x.dueAt ?? '9999').localeCompare(String(y.dueAt ?? '9999')) || x.title.localeCompare(y.title));
   return {

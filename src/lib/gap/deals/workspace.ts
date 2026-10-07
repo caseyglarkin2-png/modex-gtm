@@ -23,7 +23,7 @@ import type { Commitment, PhaseRead } from '../work/commitment-model';
 import { accountSlug } from '../account-intel/href';
 import { buildOpportunities, dealRefs, personIndex, bidScope, type OpportunitiesView, type OpportunityBid, type OpportunityDealInput, type OpportunityPerson, type ScopedCommitment, type ScopedNeed } from './opportunities';
 import { DEAL_OBJECTIVE, openQuestionsFor, unknownSectionsOfTypes, type BriefBidRow } from './deal-brief';
-import { ACCOUNT_LEVEL, type ScopeRead } from './scope';
+import { ACCOUNT_LEVEL, closedDealLabel, type ClosedDealRef, type ScopeRead } from './scope';
 import { meetingDeal, meetingInstant, meetingState, prepareMeeting, type MeetingPrep } from './meeting-prep';
 import { planFor, type Milestone } from './action-plan';
 import { loadPlanDecisions } from './action-plan-store';
@@ -66,6 +66,8 @@ export interface WorkspaceContext {
   materials?: ReadonlyArray<{ label: string; href: string | null }>;
   /** R53: the account's ROI model (MODELED), for the business-case inputs. */
   roi?: { hardSavingsAnnual: number; totalValueAnnual: number; facilities: number; calculatorVersion: string | null; assumptions: readonly string[] } | null;
+  /** Sprint 5 review: the deals HubSpot holds as closed here (a meeting on one reads that deal's rows, named). */
+  closedDeals?: readonly ClosedDealRef[];
 }
 
 /** Capture opened on one deal: the HubSpot id binds the note's words and obligations to it; the name is the label. */
@@ -132,6 +134,7 @@ export async function loadDealWorkspace(
     bids,
     captureHref: (d) => captureHrefFor(x.accountName, d),
     hubspotDealHref: (id) => `https://app.hubspot.com/contacts/${HUBSPOT_PORTAL}/record/0-3/${id}`,
+    closedDeals: x.closedDeals ?? [],
   });
   const refs = dealRefs(x.deals);
   const personOf = personIndex(persons);
@@ -148,13 +151,28 @@ export async function loadDealWorkspace(
     const state = meetingState(row, x.now);
     if (/no meeting/i.test(r.meeting_status) || state === 'past' || (state === 'canceled' && at && at.getTime() < x.now.getTime() - 2 * 86_400_000)) continue;
     const own = meetingDeal(row, opportunities.deals.map((d) => ({ ...d, id: d.dealId })));
-    const commitments: ScopedCommitment[] = own ? [...own.commitments, ...opportunities.accountLevel.commitments] : [...opportunities.deals.flatMap((d) => d.commitments), ...opportunities.accountLevel.commitments];
-    const needs: ScopedNeed[] = own ? [...own.needs, ...opportunities.accountLevel.needs] : [...opportunities.deals.flatMap((d) => d.needs), ...opportunities.accountLevel.needs];
+    // Sprint 5 review (R50 / R51): a meeting reads its OWN deal's rows and the account-level ones. A meeting whose row
+    // names a deal that is no longer open reads that deal's kept rows (named with its outcome), never the open deals'.
+    // A meeting bound to no deal (a joint one) reads every deal's rows, each line labeled with its deal.
+    const closedId = !own && row.dealId ? row.dealId : null;
+    const closedRef = closedId ? (x.closedDeals ?? []).find((c) => c.id === closedId) ?? null : null;
+    // A deal id that matches no open deal reads back as `deal <id>` (scope.ts resolveDealRef).
+    const onClosed = <T extends { scope: { unmatched: string | null } }>(xs: readonly T[]) => xs.filter((r) => r.scope.unmatched === `deal ${closedId}`);
+    const commitments: ScopedCommitment[] = own
+      ? [...own.commitments, ...opportunities.accountLevel.commitments]
+      : closedId
+        ? [...onClosed(opportunities.elsewhere.commitments), ...opportunities.accountLevel.commitments]
+        : [...opportunities.deals.flatMap((d) => d.commitments), ...opportunities.accountLevel.commitments];
+    const needs: ScopedNeed[] = own
+      ? [...own.needs, ...opportunities.accountLevel.needs]
+      : closedId
+        ? [...onClosed(opportunities.elsewhere.needs), ...opportunities.accountLevel.needs]
+        : [...opportunities.deals.flatMap((d) => d.needs), ...opportunities.accountLevel.needs];
     meetings.push(
       prepareMeeting({
         meeting: row,
         now: x.now,
-        deal: own ? { id: own.dealId, name: own.name, contacts: own.contacts } : null,
+        deal: own ? { id: own.dealId, name: own.name, contacts: own.contacts } : closedId ? { id: closedId, name: closedRef ? closedDealLabel(closedRef).replace(/^Deal: /, '') : 'a deal that is not open here', contacts: [] } : null,
         people: persons.map((p) => ({ name: p.name, title: p.title })),
         commitments: commitments.map((c) => ({ title: c.title, kind: c.kind, status: c.status, line: c.line, createdAt: c.createdAt, updatedAt: c.updatedAt, person: c.person ? { name: c.person.name } : null, scopeLabel: c.scope.label })),
         needs: needs.map((n) => ({ type: n.type, quote: n.quote, who: n.who, at: n.at, scopeLabel: n.scope.basis === 'none' ? ACCOUNT_LEVEL : n.scope.label })),
@@ -193,5 +211,5 @@ export async function loadDealWorkspace(
     }),
   );
   const stalled = Object.fromEntries(opportunities.deals.map((d) => [d.dealId, stalledSignals({ now: x.now, deal: { name: d.name, lastActivityAt: d.lastActivityAt, closeDate: d.closeDate, contact: d.contacts[0]?.name ?? null }, commitments: d.commitments.map((c) => ({ title: c.title, kind: c.kind, status: c.status, dueAt: c.dueAt, person: c.person ? { name: c.person.name, email: c.person.email } : null })) })]));
-  return { accountName: x.accountName, opportunities, meetings, plans, artifacts, crm, stalled, scopeOfBid: (b) => bidScope({ metadata: b.metadata, contactEmail: b.contact_email }, refs, personOf), unread };
+  return { accountName: x.accountName, opportunities, meetings, plans, artifacts, crm, stalled, scopeOfBid: (b) => bidScope({ metadata: b.metadata, contactEmail: b.contact_email }, refs, personOf, x.closedDeals ?? []), unread };
 }
