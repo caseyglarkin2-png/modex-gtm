@@ -107,9 +107,20 @@ export function DealOpportunities({ view, slots = {} }: { view: OpportunitiesVie
           {view.accountLevel.needs.length ? <Needs items={view.accountLevel.needs} testid="account-level-need" /> : null}
         </div>
       ) : null}
+      {(view.closed ?? []).length ? (
+        // Sprint 5 review: a deal that closed keeps its history line (its name, outcome and date), never vanishes.
+        <div className="space-y-1 border-t border-[var(--border)] pt-3" data-testid="deal-closed-history">
+          <h3 className="text-sm font-semibold">Closed here</h3>
+          <ul className="space-y-1 text-xs text-[var(--muted-foreground)]">
+            {(view.closed ?? []).map((d) => (
+              <li key={d.dealId} data-testid="deal-closed">{d.label}: its words and work are kept below.</li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
       {view.elsewhere.commitments.length || view.elsewhere.needs.length ? (
         <div className="space-y-2 border-t border-[var(--border)] pt-3" data-testid="deal-elsewhere">
-          <h3 className="text-sm font-semibold">Scoped elsewhere</h3>
+          <h3 className="text-sm font-semibold">{(view.closed ?? []).length ? 'From closed deals and other scopes' : 'Scoped elsewhere'}</h3>
           <ul className="space-y-1 text-xs text-[var(--muted-foreground)]">
             {view.elsewhere.commitments.map((c) => (
               <li key={c.commitmentId}>{c.scope.label}: {c.title} ({c.line.replace(/\.$/, '')})</li>

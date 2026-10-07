@@ -73,7 +73,7 @@ import { loadEvidenceInbox, researchSections, type InboxAccount } from '@/lib/ga
 import { loadInDealsSummary, type InDealsSummary } from '@/lib/gap/deals/in-deals';
 import { loadDealBrief } from '@/lib/gap/deals/deal-brief';
 import { DealBriefView } from '@/components/gap/deal-brief';
-import { sweepClosedDeals } from '@/lib/gap/deals/closure';
+import { loadRecordedClosures, sweepClosedDeals } from '@/lib/gap/deals/closure';
 import { resolveAccountOpportunity } from '@/lib/gap/opportunity/active-opportunity';
 
 export const dynamic = 'force-dynamic';
@@ -423,14 +423,19 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
   const mailbox = process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() || null;
   const meetings = meetingRows.filter((m) => !m.canceled).map((m) => ({ accountName: m.accountName, at: m.at, what: m.what, meetingId: m.meetingId, dealId: m.dealId }));
   const canceledMeetings = meetingRows.filter((m) => m.canceled).map((m) => ({ accountName: m.accountName, at: m.at, what: m.what, meetingId: m.meetingId, dealId: m.dealId }));
-  const [priorities, followUpPlans, meetingPreps] = await Promise.all([
+  // Sprint 5 review: a meeting or an obligation on a deal that is not open here is named from GAP's own closure record
+  // (its name, outcome and date), read in this same wave and only for the accounts that hold one.
+  const openIds = data.workInput.inDeals.status === 'complete' ? new Set(data.workInput.inDeals.accounts.flatMap((a) => a.deals.map((d) => d.id).filter((x): x is string => !!x))) : null;
+  const closureAccounts = [...new Set([...meetingRows, ...commitments].filter((x) => !!x.dealId && /^\d+$/.test(x.dealId) && !openIds?.has(x.dealId)).map((x) => x.accountName))];
+  const [priorities, followUpPlans, meetingPreps, closedDeals] = await Promise.all([
     loadAccountPriorities(prisma, [...new Set([...data.workAccounts, ...commitments.map((c) => c.accountName)])]).catch(() => new Map()),
     // R43: each follow-up due today, read off the person's own history (prepare, by hand, a saved draft, unknown, held).
     loadFollowUpPlans(prisma, commitments, { now, mailbox, held: data.workInput.held, dealAccounts: new Set(data.workInput.inDeals.status === 'complete' ? data.workInput.inDeals.accounts.map((a) => a.accountName) : []) }).catch(() => new Map()),
     // R51: each meeting's prepared starting point (objective, first thing to learn, last commitment).
     loadMeetingStartingPoints(prisma, meetingRows.filter((m) => new Date(m.at).getTime() <= now.getTime() + 24 * 3_600_000), commitments, now).catch(() => new Map()),
+    closureAccounts.length ? loadRecordedClosures(prisma, closureAccounts).catch(() => new Map()) : Promise.resolve(new Map()),
   ]);
-  const day = workDay({ ...data.workInput, now, summaries, outcomes, commitments, meetings, canceledMeetings, meetingPreps, priorities, followUpPlans });
+  const day = workDay({ ...data.workInput, now, summaries, outcomes, commitments, meetings, canceledMeetings, meetingPreps, priorities, followUpPlans, closedDeals });
   const work: WorkCard[] = day.cards;
   // R45: close the day and keep tomorrow, derived from actual state (no new storage).
   const doneToday = lane || preview ? [] : await loadCompletedToday(prisma, now).catch(() => []);

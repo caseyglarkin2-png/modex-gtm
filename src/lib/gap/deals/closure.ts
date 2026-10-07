@@ -20,6 +20,7 @@ import { ensureCommitment, loadCommitments, transitionCommitment } from '../work
 import { TERMINAL_STATUSES, type Commitment } from '../work/commitment-model';
 import { readCursor, rotateFrom, writeCursor } from '../work/cursor';
 import type { ClosedDeal } from '../opportunity/active-opportunity';
+import type { ClosedDealRef } from './scope';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -47,6 +48,24 @@ export async function loadDealStates(prisma: PrismaLike, accountName: string): P
   for (const r of rows) {
     const p = r.payload ?? {};
     if (typeof p.dealId === 'string' && typeof p.state === 'string') out.set(p.dealId, { state: p.state as DealState, at: new Date(r.created_at).toISOString() });
+  }
+  return out;
+}
+
+/**
+ * Sprint 5 review: the deals GAP recorded as closed at these accounts (each deal's latest recorded state; a reopened
+ * deal is not closed), named for seller text: one read of the `deal.state` rows, no HubSpot call.
+ */
+export async function loadRecordedClosures(prisma: PrismaLike, accountNames: readonly string[]): Promise<Map<string, ClosedDealRef>> {
+  const out = new Map<string, ClosedDealRef>();
+  const names = [...new Set(accountNames)];
+  if (!names.length || typeof prisma?.gapAuditEvent?.findMany !== 'function') return out;
+  const rows: Array<{ payload: Record<string, unknown> | null }> = await prisma.gapAuditEvent.findMany({ where: { kind: DEAL_STATE, subject_type: 'account', subject_id: { in: names } }, select: { payload: true }, orderBy: { created_at: 'asc' } });
+  for (const r of rows) {
+    const p = r.payload ?? {};
+    if (typeof p.dealId !== 'string') continue;
+    if (p.state === 'won' || p.state === 'lost' || p.state === 'closed') out.set(p.dealId, { id: p.dealId, name: typeof p.dealName === 'string' ? p.dealName : null, won: p.state === 'won' ? true : p.state === 'lost' ? false : null, closedAt: typeof p.closedAt === 'string' ? p.closedAt : null });
+    else out.delete(p.dealId);
   }
   return out;
 }

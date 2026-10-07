@@ -39,6 +39,7 @@ import { MOTION_UNLOCK_BUSINESS_DAYS } from '../motion/account-motion';
 import { buyerMoves, commitmentPhase, commitmentTier, KIND_TEXT, type Commitment, type CommitmentKind } from './commitment-model';
 import { dayLabel, nyDay } from './dates';
 import { stalledSignals } from '../deals/stalled';
+import { closedDealLabel, type ClosedDealRef } from '../deals/scope';
 import type { CockpitLane } from '@/components/gap/gap-cockpit';
 
 export type WorkStateKind = 'replied' | 'opted_out' | 'bounced' | 'follow_up' | 'ready' | 'decide' | 'research' | 'in_deal' | 'unknown_deal' | 'held' | 'committed' | 'meeting';
@@ -167,6 +168,8 @@ export interface WorkInput {
   priorities?: ReadonlyMap<string, { reason: string; by: string; at: string }>;
   /** R43: the plan for each follow-up due today, by commitment id (execution/follow-up-plan.ts). */
   followUpPlans?: ReadonlyMap<string, FollowUpPlan>;
+  /** Sprint 5 review: the deals GAP recorded as closed (deals/closure.ts), by HubSpot id, so a row on one is named. */
+  closedDeals?: ReadonlyMap<string, ClosedDealRef>;
 }
 
 export interface WorkDay {
@@ -519,7 +522,11 @@ export function workDay(i: WorkInput): WorkDay {
   const dealLabel = (accountName: string, dealId: string | null): string | null => {
     if (!dealId) return null;
     const d = (i.inDeals.status === 'complete' ? i.inDeals.accounts.find((a) => a.accountName === accountName)?.deals : undefined)?.find((x) => x.id === dealId || (!/^\d+$/.test(dealId) && x.name === dealId));
-    // R60: a deal no longer among the open deals is said in words, never its HubSpot id.
+    // Sprint 5 review: a deal GAP recorded as closed is named with its outcome and date; R60: any other deal no longer
+    // among the open deals is said in words, never its HubSpot id; when the open deals were not read, nothing is claimed.
+    const was = !d ? i.closedDeals?.get(dealId) : undefined;
+    if (was) return closedDealLabel(was);
+    if (!d && i.inDeals.status !== 'complete' && /^\d+$/.test(dealId)) return 'Deal: a HubSpot deal (its state was not read this time)';
     return `Deal: ${d?.name ?? (/^\d+$/.test(dealId) ? 'a deal that is no longer open in HubSpot' : dealId)}`;
   };
   const obligations = new Map<string, WorkObligation[]>();

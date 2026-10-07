@@ -12,7 +12,7 @@
  * each deal carries its own work (its obligations, HubSpot's next step, a conversation logged on it).
  */
 import type { Commitment, PhaseRead } from '../work/commitment-model';
-import { ACCOUNT_LEVEL, bidScopeInput, partitionByDeal, readScope, type ClosedDealRef, type DealRef, type ScopeRead } from './scope';
+import { ACCOUNT_LEVEL, bidScopeInput, closedDealLabel, partitionByDeal, readScope, type ClosedDealRef, type DealRef, type ScopeRead } from './scope';
 
 export interface OpportunityDealInput {
   id: string;
@@ -74,6 +74,8 @@ export interface OpportunitiesView {
   accountLevel: { commitments: ScopedCommitment[]; needs: ScopedNeed[] };
   /** Scoped to something that is not an open deal here (a closed deal, an unmatched name, a division or site). */
   elsewhere: { commitments: ScopedCommitment[]; needs: ScopedNeed[] };
+  /** Sprint 5 review: each deal HubSpot holds as closed here, with its outcome and date (its history line). */
+  closed?: Array<{ dealId: string; label: string }>;
   /** What an open deal means for outreach, in one sentence. */
   cold: string;
 }
@@ -149,6 +151,7 @@ export function buildOpportunities(input: {
     }),
     accountLevel: { commitments: order(c.accountLevel), needs: b.accountLevel },
     elsewhere: { commitments: order(c.elsewhere), needs: b.elsewhere },
+    closed: closed.map((d) => ({ dealId: d.id, label: closedDealLabel(d).replace(/^Deal: /, '') })),
     cold: COLD_BLOCKED_LINE,
   };
 }
