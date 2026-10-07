@@ -129,7 +129,7 @@ export interface AnchorInput {
   /** The eligible people on the stack (for "fits better"). */
   people?: AnchorPerson[];
   brief: Pick<AccountIntelligenceBrief, 'hypotheses'>;
-  inputs: Pick<AccountInputs, 'facts' | 'hypotheses' | 'roi'>;
+  inputs: Pick<AccountInputs, 'facts' | 'hypotheses' | 'roi' | 'setAsideFactIds'>;
   story: Pick<AccountStory, 'rows'>;
   /** The person's recorded anchor choice (persona.angle row with anchorHypothesisId), if any. */
   anchorChoice: string | null;
@@ -306,6 +306,14 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
       .flatMap((h) => [...(rawById.get(h.id)?.observation ?? '').matchAll(CITATION)].map((m) => m[1])),
   );
   const draftable: OutreachAnchor['draftable'] = [];
+  // Item 2 (audit at 31f09c71): a story the seller set aside (NOT THIS STORY: a rejected thesis cites it) never returns
+  // under DRAFT A THESIS; the page promised GAP would not propose it again. The loader reads every rejected thesis's
+  // facts; the loaded theses are read too (a fixture, or a loader without the list).
+  const setAside = new Set<string>([
+    ...(i.inputs.setAsideFactIds ?? []),
+    ...i.inputs.hypotheses.filter((h) => h.status === 'rejected').flatMap((h) => [...(h.observation ?? '').matchAll(CITATION)].map((m) => m[1])),
+  ]);
+  const isSetAside = (f: AccountInputs['facts'][number]) => setAside.has(f.id) || (f.sameQuoteIds ?? []).some((id) => setAside.has(id));
   // Item 2a: the one freshness authority's words for a fact (the loader computed `expiresAt` with it).
   const staleLine = (f: AccountInputs['facts'][number]) => (f.continuity === 'ended' ? currentnessLine({ current: false, until: null, basis: 'ended' }) : currentnessLine({ current: false, until: f.expiresAt, basis: 'type_window' }));
   for (const r of i.story.rows) {
@@ -316,6 +324,7 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
       if (!factId) continue;
       const fact = live.find((f) => f.id === factId || (f.sameQuoteIds ?? []).includes(factId))!;
       if (groundedFactIds.has(fact.id) || (fact.sameQuoteIds ?? []).some((id) => groundedFactIds.has(id))) continue;
+      if (isSetAside(fact)) continue;
       if (theses.some((t) => sameIdea(t.observation, s.text, i.accountName) || sharedCounterparty(t.observation, s.text, i.accountName))) continue;
       if (draftable.some((d) => d.factId === fact.id || sameIdea(d.story, s.text, i.accountName) || sharedCounterparty(d.story, s.text, i.accountName))) continue;
       draftable.push({ story: s.text, sourceLabel: `${host(fact.url) ?? (fact.title || 'source')}, ${day(fact.publishedAt)}`, sourceUrl: fact.url, factId: fact.id, proposedObservation: citedQuote(fact.title || host(fact.url) || 'source', fact.quote.trim().replace(/\s+/g, ' '), fact.id, i.accountName), claimClass: fact.claimClass ?? null, currentLine: fact.expiresAt ? currentnessLine({ current: true, until: fact.expiresAt, basis: 'type_window' }) : null });
@@ -326,7 +335,7 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
   const tooOld: OutreachAnchor['tooOld'] = [];
   for (const f of i.inputs.facts) {
     if (tooOld.length >= 3) break;
-    if (live.includes(f) || f.continuity === 'ended' || !citable(f)) continue;
+    if (live.includes(f) || f.continuity === 'ended' || !citable(f) || isSetAside(f)) continue;
     if (groundedFactIds.has(f.id) || (f.sameQuoteIds ?? []).some((id) => groundedFactIds.has(id))) continue;
     if (tooOld.some((t) => t.factId === f.id || sameIdea(t.story, f.quote, i.accountName))) continue;
     tooOld.push({ story: f.quote, sourceLabel: `${host(f.url) ?? (f.title || 'source')}, ${day(f.publishedAt)}`, sourceUrl: f.url, factId: f.id, line: staleLine(f) });

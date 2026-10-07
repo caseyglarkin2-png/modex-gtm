@@ -208,6 +208,17 @@ describe('the outreach anchor (Option A)', () => {
     // A current proposal carries no stale line.
     expect(anchorFor(inputs({ hypotheses: [hypA, hypB, { ...hypDraft, status: 'review_required', problemFamily: 'hidden_capacity', personaId: 2 }] }), 1).anchor.pending[0].stale).toBeNull();
   });
+  it('item 2: a story the seller set aside (a rejected thesis cites it, loaded or listed by the loader) is never offered again and never listed as too old', () => {
+    const denverOpen = anchorFor(inputs({ hypotheses: [hypA] }), 1).anchor;
+    expect(denverOpen.draftable.map((d) => d.factId)).toContain('f-denver');
+    // Set aside: the rejected thesis is among the loaded theses.
+    const rejected = anchorFor(inputs({ hypotheses: [hypA, { ...hypB, id: 'h-denver-x', status: 'rejected' }] }), 1).anchor;
+    expect(rejected.draftable.map((d) => d.factId)).not.toContain('f-denver');
+    expect(rejected.tooOld.map((t) => t.factId)).not.toContain('f-denver');
+    // Set aside by an older thesis the ten newest do not include: the loader's list carries it.
+    const listed = anchorFor(inputs({ hypotheses: [hypA], setAsideFactIds: ['f-denver'] }), 1).anchor;
+    expect(listed.draftable.map((d) => d.factId)).not.toContain('f-denver');
+  });
   it('R30/R31: a job claim (its class on the fact) is a draftable story; the draft the service makes of it carries the job/procurement approach, never the physical words', () => {
     const job = { id: 'f-job', quote: 'PepsiCo is now hiring a Transportation Coordinator in Dallas; apply by October 30.', url: 'https://jobs.pepsico.com/yard-ops-dallas', title: 'PepsiCo Careers', publishedAt: '2026-09-20T00:00:00Z', expiresAt: null, continuity: 'ongoing_state' as const, currentness: null, claimClass: 'JOB_POSTING' };
     const { anchor } = anchorFor(inputs({ facts: [factA, factB, job], hypotheses: [hypA, hypB] }), 1);

@@ -75,7 +75,7 @@ type DraftResponse = {
   existingVia?: 'same_fact' | 'open_work' | null;
   family?: string;
   familyBasis?: string | null;
-  preparation?: 'submitted' | 'incomplete' | 'draft';
+  preparation?: 'submitted' | 'incomplete' | 'draft' | 'in_use';
   missing?: string[];
   submitRefusal?: string | null;
   error?: string;
@@ -149,7 +149,8 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
     const body = (await res.json().catch(() => ({}))) as DraftResponse;
     if (!res.ok || !body.hypothesisId) {
       const code = body.detail ?? body.error ?? String(res.status);
-      announce('alert', body.error === 'fact_not_outreach_evidence' ? `This fact would be refused by the send gate (${code}): nothing was drafted.` : `Could not draft the thesis: ${refusalWords(code)} Nothing changed.`);
+      // Item 2: a story set aside (or closed) says so in plain words; it is never reported as under review.
+      announce('alert', body.error === 'story_set_aside' || body.error === 'story_closed' ? `${body.detail ?? 'This story was set aside.'} Nothing was drafted.` : body.error === 'fact_not_outreach_evidence' ? `This fact would be refused by the send gate (${code}): nothing was drafted.` : `Could not draft the thesis: ${refusalWords(code)} Nothing changed.`);
       return null;
     }
     return body;
@@ -159,6 +160,7 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
     const who = first ? ` for ${first}` : '';
     if (body.preparation === 'submitted') return `${body.existing && body.existingVia === 'open_work' ? `${first ?? 'This person'} already had this thesis open: it is` : 'Drafted and'} under review below${who}. Approve it there and the first touch is prepared. Nothing is sent.`;
     if (body.preparation === 'incomplete') return `Drafted${who}. One thing is missing: which problem this fact points at. Choose it below and it goes to review.`;
+    if (body.preparation === 'in_use') return `This story is already approved and in use${who}: nothing new was drafted.`;
     return `Drafted${who}, not yet submitted: ${refusalWords(body.submitRefusal)}`;
   }
 
@@ -501,7 +503,7 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
             ) : null}
             {drafted ? (
               <p className="text-xs" data-testid="anchor-drafted">
-                {drafted.preparation === 'submitted' ? 'Thesis under review above.' : drafted.preparation === 'incomplete' ? 'Thesis drafted; one thing to set above.' : 'Thesis drafted; see the reason above.'}{' '}
+                {drafted.preparation === 'submitted' ? 'Thesis under review above.' : drafted.preparation === 'in_use' ? 'This story is already in use above.' : drafted.preparation === 'incomplete' ? 'Thesis drafted; one thing to set above.' : 'Thesis drafted; see the reason above.'}{' '}
                 <Link href="#outreach-anchor" className="underline">Review it here</Link>
               </p>
             ) : null}

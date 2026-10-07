@@ -60,6 +60,23 @@ describe('item 2a: stories past their currentness on the page', () => {
   });
 });
 
+describe('item 2: drafting a story that was set aside or is in use', () => {
+  it('a set-aside story answers in plain words and nothing is drafted; an in-use story never reads as under review', async () => {
+    const fetchMock = vi.spyOn(globalThis, 'fetch')
+      .mockResolvedValueOnce({ ok: false, status: 409, json: async () => ({ error: 'story_set_aside', detail: 'You set this story aside (Not this story): GAP will not draft it again. A newer fact about it is a new story.' }) } as Response)
+      .mockResolvedValueOnce({ ok: true, status: 200, json: async () => ({ ok: true, hypothesisId: 'h-denver', status: 'active', existing: true, existingVia: 'same_fact', family: 'hidden_capacity', familyBasis: 'recorded on the draft', preparation: 'in_use', missing: [], submitRefusal: null }) } as Response);
+    render(<OutreachAnchorView accountName="PepsiCo" anchor={anchor} coldTouchAllowed />);
+    fireEvent.click(screen.getByTestId('anchor-draft-open'));
+    fireEvent.click(screen.getByTestId('anchor-draft-submit'));
+    await waitFor(() => expect(screen.getByTestId('anchor-alert').textContent).toBe('You set this story aside (Not this story): GAP will not draft it again. A newer fact about it is a new story. Nothing was drafted.'));
+    expect(screen.queryByTestId('anchor-drafted')).toBeNull();
+    fireEvent.click(screen.getByTestId('anchor-draft-submit'));
+    await waitFor(() => expect(screen.getByTestId('anchor-note').textContent).toBe('This story is already approved and in use for Karen: nothing new was drafted.'));
+    expect(screen.getByTestId('anchor-drafted').textContent).not.toMatch(/under review/);
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+  });
+});
+
 describe('the outreach anchor block', () => {
   it('shows the primary anchor and why they care in the open; the supporting fact, BEST PROOF (ours) and DO NOT USE sit behind one disclosure; an unusable thesis has no Use button', () => {
     render(<OutreachAnchorView accountName="PepsiCo" anchor={anchor} coldTouchAllowed />);

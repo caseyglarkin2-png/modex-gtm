@@ -145,6 +145,8 @@ export interface AccountInputs {
   watched: boolean;
   watchReasons: string[];
   facts: FactInput[];
+  /** Item 2: facts a rejected thesis at the account cites (the seller set the story aside): never offered as a draft again. */
+  setAsideFactIds?: string[];
   signals: Array<{ id: string; title: string | null; url: string | null; publishedAt: string | null; researchStatus: string; note?: string | null; capturedAt?: string | null }>;
   lastResearch: { at: string; outcome: string } | null;
   hypotheses: HypothesisInput[];

@@ -57,12 +57,20 @@ export type DraftFromFactResult =
       existingVia: 'same_fact' | 'open_work' | null;
       family: ProblemFamily | 'unmapped';
       familyBasis: string | null;
-      /** submitted: under review now; incomplete: the family is missing; draft: the submit was refused (see submitRefusal). */
-      preparation: 'submitted' | 'incomplete' | 'draft';
+      /**
+       * submitted: under review now; incomplete: the family is missing; draft: the submit was refused (see
+       * submitRefusal); in_use: this story is already approved or in use (item 2: never reported as under review).
+       */
+      preparation: 'submitted' | 'incomplete' | 'draft' | 'in_use';
       missing: string[];
       submitRefusal: string | null;
     }
-  | { ok: false; reason: 'fact_not_found' | 'signal_account_mismatch' | 'fact_not_outreach_evidence' | 'invalid_family' | string; detail?: string };
+  | { ok: false; reason: 'fact_not_found' | 'signal_account_mismatch' | 'fact_not_outreach_evidence' | 'invalid_family' | 'story_set_aside' | 'story_closed' | string; detail?: string };
+
+/** Item 2: what a seller who set a story aside is told when it is drafted again (the page promised it would not return). */
+export const STORY_SET_ASIDE_DETAIL = 'You set this story aside (Not this story): GAP will not draft it again. A newer fact about it is a new story.';
+const IN_USE = new Set(['approved', 'active']);
+const CLOSED = new Set(['confirmed', 'partially_confirmed', 'unresolved', 'expired']);
 
 type FactRow = GateSignal & { id: string; title: string | null; evidence_text: string | null; freshness_expires_at: Date | null };
 
@@ -115,6 +123,10 @@ export async function draftThesisFromFact(prisma: PrismaLike, input: DraftFromFa
   let existing = false;
   let existingVia: 'same_fact' | 'open_work' | null = null;
   if (mine) {
+    // Item 2 (audit at 31f09c71): the same fact for the same person after NOT THIS STORY is the set-aside story, never
+    // a review that does not exist; a story closed by its outcome is closed.
+    if (mine.status === 'rejected') return { ok: false, reason: 'story_set_aside', detail: STORY_SET_ASIDE_DETAIL };
+    if (CLOSED.has(mine.status)) return { ok: false, reason: 'story_closed', detail: `This story's thesis is ${mine.status.replace(/_/g, ' ')}: it is not drafted again.` };
     hypothesisId = mine.id;
     existing = true;
     existingVia = 'same_fact';
@@ -182,7 +194,7 @@ export async function draftThesisFromFact(prisma: PrismaLike, input: DraftFromFa
     return { ok: true, hypothesisId, status, existing, existingVia, family, familyBasis: null, preparation: 'incomplete', missing: ['problem_family'], submitRefusal: null };
   }
   if (status !== 'draft') {
-    return { ok: true, hypothesisId, status, existing, existingVia, family, familyBasis, preparation: 'submitted', missing: [], submitRefusal: null };
+    return { ok: true, hypothesisId, status, existing, existingVia, family, familyBasis, preparation: IN_USE.has(status) ? 'in_use' : 'submitted', missing: [], submitRefusal: null };
   }
   const t = await transitionHypothesis(prisma, hypothesisId, 'submit', { now: input.now, actor: input.actor, reason: 'drafted from a checked fact on the account page' });
   if (!t.ok) {

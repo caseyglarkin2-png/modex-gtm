@@ -22,9 +22,12 @@ const EXAMPLES = ['Why this person over the next one?', 'Who else here owns tran
 
 /** Plain words for the draft and deepen routes' answers (their own stable codes). */
 function draftResult(body: { preparation?: string; detail?: string; error?: string; submitRefusal?: string | null }, ok: boolean): { kind: 'status' | 'alert'; text: string } {
+  // Item 2: a set-aside or closed story says why; it is never reported as under review.
+  if (!ok && (body.error === 'story_set_aside' || body.error === 'story_closed')) return { kind: 'alert', text: `Not drafted: ${body.detail ?? 'this story was set aside'} Nothing changed.` };
   if (!ok) return { kind: 'alert', text: body.error === 'fact_not_outreach_evidence' ? `Not drafted: the send gate would refuse this fact (${body.detail ?? body.error}). Nothing changed.` : `Not drafted (${body.detail ?? body.error ?? 'refused'}). Nothing changed.` };
   if (body.preparation === 'submitted') return { kind: 'status', text: 'Drafted and under review on this page. Approve it there and the opening is prepared. Nothing is sent.' };
   if (body.preparation === 'incomplete') return { kind: 'status', text: 'Drafted. One thing is missing: which problem it points at. Choose it on this page and it goes to review. Nothing is sent.' };
+  if (body.preparation === 'in_use') return { kind: 'status', text: 'This story is already approved and in use on this page: nothing new was drafted. Nothing is sent.' };
   return { kind: 'status', text: `Drafted, not yet submitted${body.submitRefusal ? ` (${body.submitRefusal})` : ''}. Nothing is sent.` };
 }
 

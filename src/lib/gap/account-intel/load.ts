@@ -141,6 +141,8 @@ export async function loadAccountInputs(
   const hsPeopleP = opts.live && account.hubspot_company_id ? loadHubSpotPeople(account.hubspot_company_id, opts.deps?.hubspotPeople) : Promise.resolve(null);
   const stagesP = opts.live ? stageLabels(opts.deps?.stageLabels) : Promise.resolve(new Map<string, string>());
   const contradictedP = early(soft(contradictedFactIds(prisma, accountName, now), new Map<string, string>()));
+  // Item 2: every fact a REJECTED thesis here cites (the seller set the story aside), not only the ten newest theses.
+  const setAsideP: Promise<string[]> = early(skip(() => (prisma.hypothesisSignal?.findMany ? prisma.hypothesisSignal.findMany({ where: { hypothesis: { account_name: accountName, status: 'rejected' } }, select: { signal_id: true }, take: 500 }).then((rows: Row[]) => [...new Set(rows.map((r) => String(r.signal_id)))]).catch(() => [] as string[]) : Promise.resolve([] as string[])), [] as string[]));
   const candidateP: Promise<Row | null> = !lean && prisma.gapAccountCandidate?.findFirst
     ? prisma.gapAccountCandidate.findFirst({ where: { scouted_at: { not: null }, OR: [{ account_name: accountName, decision: { in: ['added', 'mapped'] } }, { company_key: normalizeCompanyName(accountName) }] }, orderBy: { scouted_at: 'desc' } }).catch(() => null)
     : Promise.resolve(null);
@@ -314,6 +316,7 @@ export async function loadAccountInputs(
     watched: !!profile,
     watchReasons: profile?.reasons ?? [],
     facts: [...byQuote.values()],
+    setAsideFactIds: await setAsideP,
     signals: (signalRows as Row[]).map((s) => ({ id: s.id, title: s.title ?? null, url: s.url ?? null, publishedAt: s.published_at ? new Date(s.published_at).toISOString() : null, researchStatus: s.research_status, note: s.note ?? null, capturedAt: iso(s.created_at) })),
     lastResearch: lastRun ? { at: new Date(lastRun.created_at).toISOString(), outcome: String((lastRun.provider_status as Record<string, unknown> | null)?.outcome ?? 'unknown') } : null,
     hypotheses: (hyps as Row[]).map((h) => ({
