@@ -53,7 +53,7 @@ export default async function CoveragePage() {
       </section>
       <section className="space-y-2 rounded-md border border-[var(--border)] p-3 text-sm" data-testid="coverage-crm-off">
         <h2 className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">HubSpot changes approved, not written ({offApprovals.length})</h2>
-        <p className="text-xs text-[var(--muted-foreground)]">Approved while HubSpot writes were off. Retry each once writes are on (GAP_CRM_APPROVED_WRITES_ENABLED); a retry rechecks that its obligation and deal are still open.</p>
+        <p className="text-xs text-[var(--muted-foreground)]">Approved while HubSpot writes were off. Retry each once approved HubSpot writes are turned on; a retry rechecks that its obligation and deal are still open.</p>
         <CrmOffApprovals items={offApprovals} />
       </section>
       <section className="space-y-2" data-testid="coverage-accounts">

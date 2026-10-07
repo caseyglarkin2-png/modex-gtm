@@ -131,12 +131,17 @@ export function withMarker(body: string, externalId: string): string {
   return `${body.replace(/\s+$/, '')}\n\n${MARKER_LINE(externalId)}`;
 }
 
+/** What the page says about the reference line HubSpot keeps on a note or task (the id itself is never shown). */
+export const REFERENCE_NOTE = '(HubSpot also keeps a short GAP reference line on it, so a retry never adds a second one.)';
+
 /** The exact change as the seller reads it on the page. */
 export function changeText(p: Pick<CrmProposal, 'change' | 'dealName' | 'dealId' | 'externalId'>): string {
   const deal = p.dealName ?? `deal ${p.dealId}`;
   const c = p.change;
-  if (c.kind === 'note') return `Add a note to the HubSpot deal "${deal}":\n${withMarker(c.body, p.externalId)}`;
-  if (c.kind === 'task') return `Create a HubSpot task on "${deal}": "${c.subject}"${c.dueAt ? `, due ${new Date(c.dueAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' })}` : ', no due date in GAP (HubSpot needs one: it shows the next business day)'}, owned by the person who approves it.\n${withMarker(c.body, p.externalId)}`;
+  // Sprint 5 exit: the page shows the text the seller approves, never the internal reference id; the line HubSpot
+  // also keeps (so a retry never writes twice) is said in words.
+  if (c.kind === 'note') return `Add a note to the HubSpot deal "${deal}":\n${c.body.replace(/\s+$/, '')}\n${REFERENCE_NOTE}`;
+  if (c.kind === 'task') return `Create a HubSpot task on "${deal}": "${c.subject}"${c.dueAt ? `, due ${new Date(c.dueAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' })}` : ', no due date in GAP (HubSpot needs one: it shows the next business day)'}, owned by the person who approves it.\n${c.body.replace(/\s+$/, '')}\n${REFERENCE_NOTE}`;
   if (c.kind === 'task_complete') return `Mark the HubSpot task "${c.subject}" on "${deal}" completed: it is done in GAP.`;
   return `Change "${deal}" next step in HubSpot from ${c.from ? `"${c.from}"` : 'empty'} to "${c.to}". Not written if HubSpot holds a newer value than "${c.from ?? ''}".`;
 }
@@ -208,9 +213,9 @@ export function crmStateLine(it: Pick<CrmSyncItem, 'state' | 'detail' | 'objectR
     case 'approved':
       return 'Approved: the write was started and has no answer yet. Retry is safe (it never writes twice).';
     case 'off':
-      return `Approved by ${it.approvedBy ?? 'you'}, not written: HubSpot writes are off here${it.detail ? ` (${it.detail})` : ''}. Nothing reached HubSpot.`;
+      return `Approved by ${it.approvedBy ?? 'you'}, not written: ${it.detail ?? 'HubSpot writes are turned off here'}. Nothing reached HubSpot.`;
     case 'written':
-      return `Written to HubSpot${it.objectRef ? ` (record ${it.objectRef})` : ''}.`;
+      return 'Written to HubSpot.';
     case 'failed':
       return `Not written: ${it.detail ?? 'HubSpot did not answer'}. The text is kept here; retry is safe.`;
     case 'conflict':

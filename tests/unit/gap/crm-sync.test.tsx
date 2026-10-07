@@ -10,7 +10,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { NextRequest } from 'next/server';
 import { ledgerDb } from './fixtures/ledger-db';
 import { approveCrmChange, discardCrmChange, loadCrmOffApprovals, loadCrmSync, proposeCrmChange, crmWritesEnabled } from '@/lib/gap/crm-sync';
-import { changeText, crmCandidates, crmStateLine, externalIdFor, proposalIdFor, stableHash, taskExternalIdFor, type CrmChange, type CrmOrigin } from '@/lib/gap/deals/crm-model';
+import { changeText, crmCandidates, crmStateLine, externalIdFor, proposalIdFor, stableHash, taskExternalIdFor, withMarker, type CrmChange, type CrmOrigin } from '@/lib/gap/deals/crm-model';
 import { completionsOf } from '@/lib/gap/deals/workspace';
 import { taskDueTime } from '@/lib/gap/crm-writer';
 import type { CrmWriter } from '@/lib/gap/crm-writer';
@@ -110,18 +110,22 @@ describe('a proposal, an explicit approval, and the write only when allowed (R54
     const id = proposalIdFor(RECAP, NOTE);
     expect(a.ok && a.item).toMatchObject({ proposalId: id, externalId: externalIdFor(id), state: 'proposed', origin: RECAP });
     expect(db.store.gapAuditEvent.filter((r) => r.kind === 'crm.sync_proposed')).toHaveLength(1);
-    expect(changeText({ change: NOTE, dealName: 'YardFlow - Kroger', dealId: DEAL, externalId: externalIdFor(id) })).toBe(`Add a note to the HubSpot deal "YardFlow - Kroger":\n${NOTE.body}\n\nGAP reference ${externalIdFor(id)}`);
+    // Sprint 5 exit: the page shows the approved text and says the reference line in words (never the internal id);
+    // the writer still puts the reference line on the HubSpot record (withMarker).
+    expect(changeText({ change: NOTE, dealName: 'YardFlow - Kroger', dealId: DEAL, externalId: externalIdFor(id) })).toBe(`Add a note to the HubSpot deal "YardFlow - Kroger":\n${NOTE.body}\n(HubSpot also keeps a short GAP reference line on it, so a retry never adds a second one.)`);
+    expect(withMarker(NOTE.body, externalIdFor(id))).toBe(`${NOTE.body}\n\nGAP reference ${externalIdFor(id)}`);
     expect(await propose(db.client(), { ...NOTE, objectId: 'Kroger' } as CrmChange)).toMatchObject({ ok: false, reason: 'bad_change' });
   });
 
   it('writes OFF (production): the approval is recorded and stands, the state says not written and why, HubSpot is never called', async () => {
-    expect(crmWritesEnabled()).toEqual({ ok: false, reason: 'GAP_CRM_APPROVED_WRITES_ENABLED is off' });
+    expect(crmWritesEnabled()).toEqual({ ok: false, reason: 'approved HubSpot writes are turned off here' });
     const db = ledgerDb({ accounts: [ACCOUNT] });
     const hs = fakeHubSpot();
     const p = await propose(db.client());
     const r = await approveCrmChange(db.client(), { proposalId: p.ok ? p.item.proposalId : '', actor: ACTOR, now: NOW }, { writer: hs.writer, assertWriteAllowed: ALLOW });
-    expect(r.ok && r.item).toMatchObject({ state: 'off', approvedBy: ACTOR, detail: 'GAP_CRM_APPROVED_WRITES_ENABLED is off' });
-    expect(r.ok && crmStateLine(r.item)).toBe('Approved by casey@freightroll.com, not written: HubSpot writes are off here (GAP_CRM_APPROVED_WRITES_ENABLED is off). Nothing reached HubSpot.');
+    expect(r.ok && r.item).toMatchObject({ state: 'off', approvedBy: ACTOR, detail: 'approved HubSpot writes are turned off here' });
+    // Sprint 5 exit: in seller words, no flag name, no internal id.
+    expect(r.ok && crmStateLine(r.item)).toBe('Approved by casey@freightroll.com, not written: approved HubSpot writes are turned off here. Nothing reached HubSpot.');
     expect(hs.state.calls).toEqual([]);
     expect(db.store.gapAuditEvent.map((x) => x.kind)).toEqual(['crm.sync_proposed', 'crm.sync_approved', 'crm.sync_attempt', 'crm.sync_result']);
   });
@@ -358,10 +362,10 @@ describe('batch item 9: approved HubSpot changes are bounded to live work', () =
   it('approved writes have their own flag: the mirror flag alone writes nothing, and the approved-writes flag alone does not turn the mirror on', async () => {
     process.env.HUBSPOT_ACCESS_TOKEN = process.env.HUBSPOT_ACCESS_TOKEN ?? '';
     process.env.GAP_HUBSPOT_MIRROR_ENABLED = 'true';
-    expect(crmWritesEnabled()).toEqual({ ok: false, reason: 'GAP_CRM_APPROVED_WRITES_ENABLED is off' });
+    expect(crmWritesEnabled()).toEqual({ ok: false, reason: 'approved HubSpot writes are turned off here' });
     delete process.env.GAP_HUBSPOT_MIRROR_ENABLED;
     process.env.GAP_CRM_APPROVED_WRITES_ENABLED = 'true';
-    expect(crmWritesEnabled().ok === true || crmWritesEnabled().reason !== 'GAP_CRM_APPROVED_WRITES_ENABLED is off').toBe(true);
+    expect(crmWritesEnabled().ok === true || crmWritesEnabled().reason !== 'approved HubSpot writes are turned off here').toBe(true);
     const { gapFlag } = await import('@/lib/gap/flags');
     expect(gapFlag('GAP_HUBSPOT_MIRROR_ENABLED')).toBe(false);
   });
@@ -474,12 +478,15 @@ describe('the candidates, the route and the view (R54)', () => {
   });
 
   it('the view shows the exact change and one approval click; a recorded one shows its state and a retry', async () => {
-    const fetchMock = vi.fn(async () => new Response(JSON.stringify({ ok: true, item: { state: 'off', detail: 'GAP_CRM_APPROVED_WRITES_ENABLED is off', approvedBy: ACTOR, objectRef: null } }), { status: 200 }));
+    const fetchMock = vi.fn(async () => new Response(JSON.stringify({ ok: true, item: { state: 'off', detail: 'approved HubSpot writes are turned off here', approvedBy: ACTOR, objectRef: null } }), { status: 200 }));
     vi.stubGlobal('fetch', fetchMock);
     render(<CrmSyncPanel accountName={ACCOUNT} dealId={DEAL} dealName="YardFlow - Kroger" candidates={[{ change: NOTE, origin: RECAP }]} items={[]} />);
     expect(screen.getByTestId('crm-proposal-text').textContent).toBe(changeText({ change: NOTE, dealName: 'YardFlow - Kroger', dealId: DEAL, externalId: externalIdFor(proposalIdFor(RECAP, NOTE)) }));
     fireEvent.click(screen.getByTestId('crm-approve'));
-    await waitFor(() => expect(screen.getByTestId('crm-status').textContent).toMatch(/not written: HubSpot writes are off here/));
+    await waitFor(() => expect(screen.getByTestId('crm-status').textContent).toMatch(/not written: approved HubSpot writes are turned off here/));
+    // Sprint 5 exit: the proposal never shows the internal reference id; it says the reference line in words.
+    expect(screen.getByTestId('crm-proposal-text').textContent).not.toMatch(/gapcrm/);
+    expect(screen.getByTestId('crm-proposal-text').textContent).toContain('(HubSpot also keeps a short GAP reference line on it, so a retry never adds a second one.)');
     const sent = JSON.parse(String((fetchMock.mock.calls[0] as unknown as [string, { body: string }])[1].body));
     expect(sent).toMatchObject({ op: 'approve', dealId: DEAL, change: NOTE, origin: RECAP });
     vi.unstubAllGlobals();

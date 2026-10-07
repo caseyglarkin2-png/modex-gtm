@@ -68,9 +68,10 @@ export interface CrmDeps {
 }
 
 export function crmWritesEnabled(): { ok: true } | { ok: false; reason: string } {
-  if (!isGapOsEnabled()) return { ok: false, reason: 'GAP_OS_ENABLED is off' };
-  if (!gapFlag('GAP_CRM_APPROVED_WRITES_ENABLED')) return { ok: false, reason: 'GAP_CRM_APPROVED_WRITES_ENABLED is off' };
-  if (!HUBSPOT_SYNC_ENABLED) return { ok: false, reason: 'HUBSPOT_SYNC_ENABLED is off' };
+  // Sprint 5 exit: each reason in seller words (it is shown on the page); the flags stay named in the code and ledger.
+  if (!isGapOsEnabled()) return { ok: false, reason: 'GAP is turned off here' };
+  if (!gapFlag('GAP_CRM_APPROVED_WRITES_ENABLED')) return { ok: false, reason: 'approved HubSpot writes are turned off here' };
+  if (!HUBSPOT_SYNC_ENABLED) return { ok: false, reason: 'HubSpot sync is turned off here' };
   if (!process.env.HUBSPOT_ACCESS_TOKEN?.trim()) return { ok: false, reason: 'no HubSpot token' };
   return { ok: true };
 }
