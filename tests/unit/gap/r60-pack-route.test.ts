@@ -58,7 +58,7 @@ describe('no seller path lands in a cockpit lane', () => {
     for (const h of ['/gap', '/gap?fresh=1', '/gap/accounts/acme?view=brief', '/gap/pack/d1', '/gap/replies', '/gap?focus=lane-co']) expect(isCockpitLaneHref(h), h).toBe(false);
   });
   it('Work, the account page, NEXT, the ready target, follow-ups, replies and the candidates link to an account, a pack or Gmail', () => {
-    for (const f of ['src/lib/gap/work/list.ts', 'src/lib/gap/pursuit/next.ts', 'src/lib/gap/pursuit/load.ts', 'src/lib/gap/context/send-target.ts', 'src/lib/gap/execution/follow-up-plan.ts', 'src/lib/gap/routing/next-up.ts', 'src/lib/gap/replies/prepare.ts', 'src/app/gap/accounts/[slug]/page.tsx', 'src/components/gap/work-list.tsx']) {
+    for (const f of ['src/lib/gap/work/list.ts', 'src/lib/gap/pursuit/next.ts', 'src/lib/gap/pursuit/load.ts', 'src/lib/gap/context/send-target.ts', 'src/lib/gap/execution/follow-up-plan.ts', 'src/lib/gap/routing/next-up.ts', 'src/lib/gap/replies/prepare.ts', 'src/app/gap/accounts/[slug]/page.tsx', 'src/components/gap/work-list.tsx', 'src/lib/gap/intake/opportunities.ts']) {
       expect(readFileSync(f, 'utf8'), f).not.toMatch(/['`"]\/gap\?lane=/);
     }
     expect(readFileSync('src/app/gap/page.tsx', 'utf8')).toMatch(/openHref: \(_lane, decisionId\) => packHref\(decisionId\)/);
