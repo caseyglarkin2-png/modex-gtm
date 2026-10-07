@@ -57,7 +57,7 @@ export function AngleLine({ a, personaId, bare = false }: { a: CockpitAngle | un
     return (
       <p className="mt-1 text-xs" data-testid="angle-current">
         {bare ? null : <span className="font-semibold">Why this person: </span>}{current}{' '}
-        <button type="button" onClick={() => setEditing(true)} className="underline">
+        <button type="button" onClick={() => setEditing(true)} className="inline-flex min-h-6 min-w-6 items-center justify-center px-1 underline">
           edit
         </button>
       </p>
@@ -67,10 +67,11 @@ export function AngleLine({ a, personaId, bare = false }: { a: CockpitAngle | un
     return (
       <p className="mt-1 text-xs" data-testid="angle-suggested">
         <span className="font-semibold">{bare ? 'Suggested (not yours yet):' : 'Suggested why:'}</span> <span className="italic">{a.suggested}</span>{' '}
-        <button type="button" data-testid="angle-accept" onClick={() => void save('accepted_suggestion', a.suggested!)} className="underline">
+        {/* R63-B S13: 24 px targets at phone width. */}
+        <button type="button" data-testid="angle-accept" onClick={() => void save('accepted_suggestion', a.suggested!)} className="inline-flex min-h-6 min-w-6 items-center justify-center px-1 underline">
           accept
         </button>{' '}
-        <button type="button" onClick={() => setEditing(true)} className="underline">
+        <button type="button" data-testid="angle-edit" onClick={() => setEditing(true)} className="inline-flex min-h-6 min-w-6 items-center justify-center px-1 underline">
           edit
         </button>
         {error ? <span role="alert" className="ml-2 text-[var(--destructive)]">{error}</span> : null}

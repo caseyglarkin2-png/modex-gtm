@@ -63,12 +63,13 @@ function PriorityControl({ c }: { c: WorkCard }) {
     return (
       <p className="mt-0.5 flex flex-wrap items-center gap-2 text-xs text-[var(--muted-foreground)]" data-testid="work-card-priority">
         <span>Your priority: {c.priority.reason}</span>
-        <button type="button" className="underline" onClick={() => void save('clear')} data-testid="work-priority-clear">Clear</button>
+        <button type="button" className="inline-flex min-h-6 min-w-6 items-center underline" onClick={() => void save('clear')} data-testid="work-priority-clear">Clear</button>
         {status ? <span role="status">{status}</span> : null}
       </p>
     );
   }
-  if (!open) return <button type="button" className="text-xs underline text-[var(--muted-foreground)]" onClick={() => setOpen(true)} data-testid="work-priority-open">Prioritize</button>;
+  // R63-B S13: every control here is at least a 24 px target at phone width.
+  if (!open) return <button type="button" className="inline-flex min-h-6 min-w-6 items-center text-xs underline text-[var(--muted-foreground)]" onClick={() => setOpen(true)} data-testid="work-priority-open">Prioritize</button>;
   return (
     <div className="mt-1 flex flex-wrap items-center gap-2 text-xs">
       <label className="flex min-w-0 flex-1 items-center gap-2">
@@ -148,7 +149,7 @@ export function WorkList({
           {readAt ? (
             <>
               {' '}
-              <span data-testid="work-read-at">{readAt.label}.</span> <Link href="/gap?fresh=1" className="underline" data-testid="work-refresh">Refresh</Link>
+              <span data-testid="work-read-at">{readAt.label}.</span> <Link href="/gap?fresh=1" className="inline-flex min-h-6 min-w-6 items-center underline" data-testid="work-refresh">Refresh</Link>
             </>
           ) : null}
         </p>
@@ -264,7 +265,7 @@ export function WorkList({
           <ul className="mt-1 space-y-1 text-xs">
             {waiting.map((w) => (
               <li key={w.key} data-testid="work-waiting-item">
-                <Link href={accountHref(w.accountName)} className="underline">{w.accountName}</Link>: {w.title}. {w.line}
+                <Link href={accountHref(w.accountName)} className="inline-flex min-h-6 min-w-6 items-center underline">{w.accountName}</Link>: {w.title}. {w.line}
               </li>
             ))}
           </ul>
@@ -276,7 +277,7 @@ export function WorkList({
           <ul className="mt-1 space-y-1 text-xs">
             {snoozed.map((s) => (
               <li key={s.key ?? s.accountName}>
-                <Link href={accountHref(s.accountName)} className="underline">{s.accountName}</Link>: {s.line}
+                <Link href={accountHref(s.accountName)} className="inline-flex min-h-6 min-w-6 items-center underline">{s.accountName}</Link>: {s.line}
               </li>
             ))}
           </ul>

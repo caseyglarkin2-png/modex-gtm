@@ -152,10 +152,12 @@ export function FeedbackButton() {
           setState('idle');
           setOpen(true);
         }}
-        // Left of the global Compose button (fixed bottom-6 right-6, 48px): never under it.
         // UX-04: on the GAP account workspace the pill is hidden (it covered Log a touch and Call prep at 390); the
         // workspace's own tools row carries a Note control that opens this same dialog (openFeedback).
-        className={`fixed bottom-6 right-20 z-40 rounded-full border border-[var(--border)] bg-[var(--background)] px-3 py-2 text-xs font-semibold shadow-md hover:bg-[var(--muted)] ${/^\/gap\/accounts\//.test(pathname) ? 'hidden' : ''}`}
+        // R63-B S14: at phone width a fixed pill covered the text under it (HISTORY on the pack page), so there it sits
+        // in the page flow after the content; from 640 px up it floats bottom right, left of where the global Compose
+        // button sits elsewhere (it renders nothing on GAP pages since R63).
+        className={`relative z-40 mx-4 mb-6 mt-8 inline-flex min-h-11 items-center rounded-full border border-[var(--border)] bg-[var(--background)] px-3 text-xs font-semibold shadow-md hover:bg-[var(--muted)] sm:fixed sm:bottom-6 sm:right-20 sm:m-0 sm:min-h-9 ${/^\/gap\/accounts\//.test(pathname) ? 'hidden' : ''}`}
         data-testid="feedback-open"
         aria-label="Write a note about GAP"
       >

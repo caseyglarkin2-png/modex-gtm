@@ -21,7 +21,7 @@ function Group({ title, testId, items }: { title: string; testId: string; items:
             <li key={x.key}>
               {x.accountName ? (
                 <>
-                  <Link href={accountHref(x.accountName)} className="underline">{x.accountName}</Link>:{' '}
+                  <Link href={accountHref(x.accountName)} className="inline-flex min-h-6 min-w-6 items-center underline">{x.accountName}</Link>:{' '}
                 </>
               ) : null}
               {x.text}
