@@ -1725,7 +1725,7 @@ a deliberate mutation that turns it red; nothing here sends, enrolls, spends Apo
 - R25 dead letter and budget: FIXED 71c4c3a8 (research_failed; an unreadable grounded budget queues nothing) and 0beca6b3 (a news daily budget). "A re-seen signal erases queuedAt" does not reproduce at this tip: a re-seen URL returns created false at capture and the runner never rewrites its metadata.
 - R43 follow-up copy (touch 2 and later): PARTIAL, dependency: every seeded approach family is single-touch; a step-1 copy family must be written and seeded before a prepared follow-up exists.
 - Section 8 generated quality: PARTIAL, dependency: a held-out, human-graded corpus of at least 30 cases with model, prompt and policy versions recorded.
-- R15 / R61 latency: PARTIAL, dependency: 30 navigations per condition measured on the production build.
+- R15 / R61 latency: measured since (R61, below): 30 navigations per condition on the production build, judged on the full page (no remembered shell counted as content), p50, p90 and p95 recorded.
 - R24 / R30 Tulsa on the production row's own fields (read-only by the lead): the corpus fact now carries them (type site_expansion, observed 2026-07-23T10:17:19Z, explicit expiry 2026-11-20T10:17:19Z, no claim class, public_secondary, metadata.change closure, no continuity key). Result: the page OFFERS it for Tom with "Current until Nov 20, 2026." (anchor-draft scratch, exact line).
 - One reader for "a person wrote back" (the hold, the follow-up stop, learning): FIXED e4b555ed (`replies/classify.ts` isPersonReply; a body-only notice stops nothing and is no reply).
 - DEBT, a closure typed as an expansion: `research/facts.ts:308` classifyFact gives a closure signal type site_expansion with change closure, because the signal type set is a database CHECK with no closure value (`prisma/sql/2026-09-23-gap-os.sql:51`). The change field and the family derivation read closure; anything that words `type` says expansion. The fix needs a new type value in that hand SQL applied to production (an owner-approved schema change), then the readers worded from it. The Tulsa sentence is pinned as a closure change (`continuity-research.test.ts`).
@@ -1774,8 +1774,8 @@ each change. Checklist, what was checked and what changed:
 - Account and deal text: CHANGED a72d4b4b. "HubSpot could not be read just now (identity_unresolved)" in NEXT and in a refused send is said in words with what unlocks it; no "hypothesis <id>" on a reply row; no HubSpot deal id for an unnamed or closed deal; an empty reply list names the account once.
 - Add to GAP (More): CHANGED 329f840a. A result's Review opened the research lane; "Open the account" opens its page.
 - Capture, Ask, Accounts, the replies history: CHECKED, unchanged. Capture opens prefilled from the action (R44); Ask answers over the page's own projections and links no lane; Accounts lists and opens accounts; /gap/replies stays the all-replies history (reachable only as a fallback), its filter and "disposition" words kept there.
-- Capture once on a reply: PARTIAL, dependency: the lead's decision. Work's reply card offers "Log what they said" (Capture, bound to the replier's own deal, R44 and batch item 8, pinned by deal-scope.test.tsx) beside the record form on the account (the disposition with its optional buyer words): two ways to record the same words. Removing either reverses an accepted contract.
-- Kept by contract: "thesis" and HYPOTHESIS / BID (the stable baseline's product and truth vocabulary), "Tier 1" on Accounts (its ordering contract), the analyst views under More (hypotheses, learning, signals, sources, coverage) with their own words; the lanes stay reachable from those views only.
+- Capture once on a reply: DONE 8283a9cc and de14c0fa (the lead's decision 1). Work's reply card offers one entry, "Log what they said" (an opt-out: "Record the opt-out"), into Capture prefilled with the reply itself (its words as the note, the person who wrote it, their own deal, the message as the source); Capture's single review holds what the reply means as one more confirmable item (proposed only where the message says it), and confirming records the disposition through the disposition service once, then each kept statement through the BID human confirmation, linked to it. The account page lists its waiting replies, each with that one link, and shows no reply form; NEXT on a replied account opens the same place. de14c0fa: the walk on the production build found the logged reply's card still on Work (its two-minute remembered read); one live read in Work's wave now drops recorded replies. Pinned by r60-capture-reply.test.tsx and r60-recorded-replies.test.ts; walked on the production build (scratchpad `r62-capture2/`, 6 steps, zero internal-text hits).
+- The vocabulary: CHANGED 216cd80a (the lead's decision 2). Seller-facing headings and labels say "What we think is happening" for the read itself, "thesis" where it names the object (Review, Approve and Reject the thesis; All theses; the Thesis funnel) and "What the buyer said" for buyer inputs; ids, routes, flags, ledger kinds and the CRM note format keep their names (pinned by r60-vocabulary.test.ts). Kept by contract: "Tier 1" on Accounts (its ordering contract) and the analyst views under More with their own words; the lanes stay reachable from those views only.
 - Outside GAP, observed, not changed: the app's main sidebar still lists Accounts and Work Queue beside GAP OS (two account surfaces); a sidebar change is system-wide and needs Casey.
 - Found for R61: after recording a reply the page re-read itself and NEXT moved after 13.2 s with no reload.
 Receipt (production build, the scratch corpus, the HubSpot stub, mirror unset; scratchpad `r60-final/` and `r60-walk-final/`): Work's first card at 641 px with nothing above it but the day and the health line; the opt-out card opened Walmart at its record section (the Work position kept), recorded there, NEXT moved to "Find the operator", Next account went to account 6 of 9; Fedex's NEXT put the approved story in use on the page, then "Prepare the email to Glen" opened the pack (/gap/pack, then the pack page with Back to Work / Next account); Kroger's deal card opened the brief with both deals' stages in words and the bar; Heb's research NEXT said its move. Lane links on Work and every account page: 0. Internal words outside the sanctioned vocabulary: 0. Each change has focused tests and a deliberate mutation that turned its owning test red (6 mutations).
@@ -1930,6 +1930,128 @@ Raw values (ms, in measurement order), decision then full page; production-like 
 
 Serial database waves in one warm corpus account view (the statement log): 56 before, 31 after the account-page fixes, 30 on the final build; executions 147, 108, 95.
 Work's two-minute read rebuilt (`/gap/?fresh=1`, curl, production-like latency, seconds): before 70.8 (the first request), 67.6; after the first two Work fixes 22.7, 16.4, 13.9, 13.6, 16.0; after every fix 17.827296. A cached Work load after every fix: 12.579140.
+
+**R61 re-judged on the full page, with p95 (2026-10-07).** No remembered shell counts as content, so the account's
+"decision" time (the remembered summary at about a third of a second) is not the measure; the full page is. The
+production build, 30 navigations per condition unless said; the raw values are the scratchpad files named here.
+- An account, production-like latency, warm, the same-time A/B (`r61-ab.json` against `r61-ab-head.json`): the corpus account p50 5,174 to 3,130 ms, p90 6,181 to 3,626, p95 6,468 to 3,648; the 100-person account p50 5,172 to 3,110, p90 6,189 to 3,632, p95 6,488 to 3,927.
+- Work, production-like latency, warm (`r61-final-rtt.json`): p50 1,038, p90 1,132, p95 1,357 ms. The A/B measured Work 20 times only (p95 1,231 to 1,062), so it is not the p95 of record.
+- Cold, local (`r61-after-local.json`, a fresh server and browser per navigation): Work p50 2,000, p95 2,557; an account p50 2,578 to 2,615, p95 2,641 to 2,667, of which the first byte is p95 1,692 to 1,773 (the server starting; the sign-in page alone takes 1.47 s).
+- Warm, local: every page p95 206 to 217 ms.
+Verdict: DONE for GAP's own reads on the account page and Work; PARTIAL with the two dependencies recorded above (the
+platform's cold start, Work's rebuilt read). The commits after 31c44d1f add no serial read on these paths (one closure
+read and one recorded-reply read ride Work's existing parallel wave; the account page reuses data it already loaded);
+they were not re-measured.
+
+### HANDOFF a0f6bb77
+
+```yaml
+handoff: a0f6bb77
+written: 2026-10-07
+branch: feat/gap-account-first-ux
+head: a0f6bb77            # the code this block describes; the block itself is the docs commit on top
+base: origin/main 672570ed (production)
+worktree: C:/Users/casey/wt-gap-account-first-ux (one writer)
+schema_delta: none (no prisma change on the branch; the hand SQL is unchanged)
+tickets:
+  R00: {state: DONE, sha: 2113361c, note: production reconciled; one stranded PepsiCo draft observed, nothing written}
+  R01: {state: DONE, sha: 2113361c, note: authority map and the scoped policy amendments}
+  R02: {state: DONE, sha: c0883ca4, note: representative corpus, scratch only}
+  R03: {state: DONE, sha: 2113361c, note: Pepsi reproduction, anchor-draft.scratch.test.ts}
+  R04: {state: DONE, sha: 2113361c, note: carried from docs/gap/ACCOUNT_FIRST_UX.md}
+  R05: {state: DONE, sha: f4b3c70f, note: sink and base path refused under VERCEL_ENV=production}
+  R10: {state: DONE, sha: 1b6416a9}
+  R11: {state: DONE, sha: 42b21547}
+  R12: {state: DONE, sha: 42b21547}
+  R13: {state: DONE, sha: 1b6416a9}
+  R14: {state: DONE, sha: 32a67597}
+  R15: {state: DONE, sha: 31c44d1f, note: measured with R61}
+  R20: {state: DONE, sha: 71c4c3a8, note: the coverage choice stays Casey's}
+  R21: {state: DONE, sha: 1b6416a9}
+  R22: {state: DONE, sha: 1b6416a9}
+  R23: {state: DONE, sha: 4cf3fdb1}
+  R24: {state: DONE, sha: daa61ff3}
+  R25: {state: DONE, sha: 0beca6b3}
+  R30: {state: DONE, sha: 1b6416a9}
+  R31: {state: DONE, sha: 4cf3fdb1}
+  R32: {state: DONE, sha: 6f3fa5eb}
+  R33: {state: DONE, sha: 5f5e76cf}
+  R34: {state: DONE, sha: 372f6609, note: seeding the families in production is an R64 step}
+  R35: {state: DONE, sha: 1b6416a9}
+  R40: {state: DONE, sha: 1e7b4aa4}
+  R41: {state: DONE, sha: 1e7b4aa4}
+  R42: {state: DONE, sha: 71b6ff36, note: "R42b PARTIAL for a reply seen only in HubSpot's inbox; dependency: its Gmail thread"}
+  R43: {state: PARTIAL, sha: e2da206e, dependency: "touch 2 and later copy: every seeded approach family is single-touch; a step-1 family must be written and seeded"}
+  R44: {state: DONE, sha: 8283a9cc, note: capture once now includes a reply's meaning}
+  R45: {state: DONE, sha: 1e7b4aa4}
+  R50: {state: DONE, sha: 6e16babd}
+  R51: {state: DONE, sha: f43d5280}
+  R52: {state: DONE, sha: ea3645f2}
+  R53: {state: DONE, sha: a0f6bb77}
+  R54: {state: DONE, sha: 4834eb2d, note: approved HubSpot writes stay OFF in production}
+  R55: {state: DONE, sha: 8feafd40}
+  R60: {state: DONE, sha: de14c0fa, note: "capture once 8283a9cc + de14c0fa; vocabulary 216cd80a"}
+  R61: {state: PARTIAL, sha: 31c44d1f, dependency: ["the platform's cold start (first byte 1.6 to 1.8 s with no GAP read)", "Work's rebuilt read 10.5 to 12.6 s under production-like latency: routing/inputs.ts readComms and execution/person-history.ts per card"]}
+  R62: {state: NOT STARTED}
+  R63: {state: NOT STARTED}
+  R64: {state: NOT STARTED}
+  R65: {state: NOT STARTED, note: the code is next on this branch}
+sprint5_review: {blocker: f43d5280, should: [9f283f1a, 8feafd40, 4834eb2d, 6e16babd, 20f244a3], nice: [9c0e5b14, 0e06651c, a0f6bb77], not_taken: ["a raw date in the brief (context/brief.ts)", "a canceled meeting's rebook offer and HubSpot's stale next step"]}
+reopened_unresolved:
+  - "Section 8 generated quality: PARTIAL; dependency: a held-out, human-graded corpus of 30 or more cases with model, prompt and policy versions"
+  - "the two Sprint 5 review NICEs not taken (listed for R62)"
+r62_cases:
+  matrix: {branch: origin/feat/gap-matrix, sha: a43b46b3, files: {boundaries: 11, daily: 10, dependencies: 11, execution: 16, identity: 9, pepsi: 11, replies: 12, source: 12}}
+  invalidated: none (no matrix assertion pins a changed control; matrix-replies records through POST /api/gap/dispositions, which stays for calls, meetings and the analyst lane)
+  add:
+    - "a reply logged through Capture on the scratch database with the real disposition and BID services: one disposition sourced to the message, the kept statements confirmed and linked, the card gone from Work on the next load"
+    - "a reply card and the account page offer only Capture; no reply form on the account"
+    - "a deal closed in HubSpot is named with its outcome on its kept rows, in Work and in meeting preparation; never its id"
+    - "a reopened deal lists what its closure skipped; Restore makes one open obligation, refused while the deal is closed"
+    - "a new recap retires the earlier unwritten recap on its deal; the replaced one is refused at retry and absent from Coverage"
+    - "buyer words in NOW, the brief and the story carry their deal; a detention figure counts as cost"
+    - "artifacts in the second person, no CRM deal name in buyer text"
+    - "no seller heading or label says HYPOTHESIS or BID"
+r63_tasks:   # each starts from Work on the production build
+  - log a reply once: the reply card, Capture prefilled, what it means and their words, recorded; Work moves on
+  - record an opt-out from its card
+  - work a deal: the brief, meeting preparation, agree the plan, copy the recap, approve the HubSpot note (not written)
+  - send a ready first touch through the gate to the sink
+  - a follow-up due today: prepare it or send it by hand in the thread
+  - review a thesis and put it in use from the account
+  - a deal closes and reopens: restore what still stands
+  - close the day and preview tomorrow
+r64_release:
+  merge: PR feat/gap-account-first-ux to main on Casey's go; Vercel builds production; verify the live pages after
+  seed_families: "dry run first, then GAP_OS_ENABLED=true npx tsx scripts/gap/seed-families.ts --apply against production; a production write that needs Casey's authorization"
+  flags: no new flag; GAP_HUBSPOT_MIRROR_ENABLED, GAP_CRM_APPROVED_WRITES_ENABLED, GAP_AUTO_ENROLL_ENABLED and GAP_HUBSPOT_SEQUENCE_PUBLISH_ENABLED stay off; GAP_SEND_TRANSPORT and HUBSPOT_API_BASE_PATH stay unset
+  stranded_draft_repair: "scripts/gap/recovery/repair-stranded-drafts.ts --dry-run (R65, read-only) lists what the proposal service would adopt (known: PepsiCo cmux0uu7r0003jw0450gb4kno, Tom); the adoption itself runs through the R11 service with explicit authorization"
+  verify: scripts/gap/verify-triggers.ts read-only after the deploy
+  rollback: promote the previous production deployment (main 672570ed); the flags are the kill switch; no schema or data migration to reverse
+r65_requirements:
+  health_and_learning: [broken handoffs (drafts stranded, proposals incomplete, dead-letter signals), queue age, research freshness and cost (runs, turns, queued, verified, failed), preparation latency (summary age), seller corrections, completion / reply / meeting / commitment outcomes, CRM sync pending and failed with owners and retry paths]
+  audiences: the operator sees failures; Casey sees decisions
+  repair_script: scripts/gap/recovery/repair-stranded-drafts.ts --dry-run, read-only; refuses to write
+capabilities:
+  enabled_in_production: [hypothesis, routing, message compiler, reply classification, background research and grounded discovery on the cron schedule]
+  code_complete_disabled: [auto-enroll, HubSpot sequence publish, HubSpot mirror, approved HubSpot writes, transcription (spend), the transport sink and the HubSpot base-path override (scratch and test only)]
+  ships_with_this_branch_without_a_flag: [capture once on a reply, deal-scoped labels and closed-deal history, restore after reopening, recap retirement, the seller vocabulary]
+environment:   # the harness in five lines
+  - "Postgres: embedded scratch at postgresql://postgres:scratch@127.0.0.1:55432/gap_finish_e2e; reset with scratchpad reset-scratch.sh (schema, hand SQL, 33 guards, families)"
+  - "seed: DATABASE_URL=<scratch> npx tsx <scratchpad>/journey-exit-seed.ts <tag>; copy stub-deals-<tag>.json to r60-deals.json; write the tag to r60-tag.txt"
+  - "stub: bash <scratchpad>/run-r60-stub.sh (HubSpot and clawd on 4545); build: source scratch-env.sh; unset PORT; npm run build"
+  - "serve: bash <scratchpad>/run-r60-server.sh (next start -p 3100); cookie: AUTH_SECRET=$(cat auth-secret.txt) node mint-cookie.mjs"
+  - "walk: node journey-exit.mjs and r60-capture-walk.mjs (playwright-core from the rig); stop the server and the stub after; scratch tests run with --maxWorkers=1 (one shared database)"
+receipts:   # all on a0f6bb77
+  typecheck: {command: npx tsc --noEmit -p ., result: clean}
+  gap_unit: {command: "npx vitest run tests/unit/gap/[a-c|d-l|m-r|s-z0-9]*.test.ts(x) --maxWorkers=2 (four foreground chunks)", files: 401, tests: 5644, failed: 0}
+  gap_scratch: {command: GAP_SCRATCH_DATABASE_URL=<scratch> npx vitest run tests/unit/gap/scratch --maxWorkers=1, files: 8, tests: 47, failed: 0}
+  rest: {command: "npx vitest run --maxWorkers=2 --exclude tests/unit/gap/**", files: 326, tests: 2300, passed: 2299, skipped: 1, failed: 0}
+  build: {command: npm run build, result: compiled}
+  journeys: {exit: "12 steps, zero internal-text hits (r62-exit2/)", reply_capture: "6 steps, zero internal-text hits (r62-capture2/)", hubspot_writes: 0}
+  focused: each fix's own test and a deliberate mutation turned red, then restored (named in each commit and the dispositions above)
+blockers: []
+```
 
 ## 12. Migration, backfill and rollback
 
