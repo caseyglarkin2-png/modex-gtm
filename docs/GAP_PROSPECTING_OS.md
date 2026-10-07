@@ -1747,6 +1747,21 @@ all passed; scratchpad `r5-exit/` holds `journey.json` and the 11 screenshots.
 - Gates, once each, in the foreground on 7cbfaf94: typecheck clean; the GAP suite 382 files / 5,543 tests green (its 8 scratch files skip there and were run against the scratch database: 8 files / 47 tests green); the rest of the repository 326 files / 2,296 tests green (one skipped).
 - Production: nothing written, no flag changed, no send, no paid call, no HubSpot write.
 
+**Sprint 5 review dispositions (2026-10-07).** One line each; every fix landed with focused tests and a deliberate
+mutation that turned its owning test red, then was restored.
+- BLOCKER, meeting preparation mixed two deals' words (R50 / R51): DONE f43d5280. A meeting reads its own deal's rows; one on a deal that has since closed reads that deal's kept rows, named with its outcome; one bound to no deal labels each line with its deal; Work's starting point for an unbound meeting counts the account-level words only.
+- SHOULD, a closed deal showed its raw HubSpot id and the brief dropped it (R50 / R55): DONE f43d5280 (the label) and 9f283f1a (the brief's "Closed here" line with name, outcome and date; Work names a meeting or obligation on a closed deal from the deal.state record and claims nothing when the open deals were not read). The exit journey's internal-text scan now flags any number of six or more digits.
+- SHOULD, closure dropped a live promise (R55): DONE 8feafd40. The reopen step lists what the closure skipped with due dates, on the brief and on Work; Restore makes a new open obligation (the skipped record stays terminal), once per skip, refused while the deal is closed.
+- SHOULD, a stale unwritten recap stayed retryable beside a new one (R54): DONE 4834eb2d. A new recap retires the earlier unwritten recaps on its deal; a replaced recap is refused at approval and at retry, is not offered on Coverage, and shows as replaced with no Retry.
+- SHOULD, account-level sections showed one deal's words unlabeled (R50): DONE 6e16babd. Every buyer input carries its opportunity's label into NOW, the brief and the story; a cost in money or detention terms counts as what it costs them.
+- SHOULD, artifact copy in the third person and with the CRM deal name (R53): DONE 20f244a3. Owed lines in the second person, another person's under "What I owe your team", the pilot question asked of the recipient, the CRM deal name refused in buyer text.
+- NICE, a meeting within 14 days outranked a promise due today: DONE 9c0e5b14 (a meeting within a day still leads).
+- NICE, "1 confirmed statement ... send them back": DONE 9c0e5b14.
+- NICE, a future canceled meeting tagged Checked under What has happened between us: DONE 9c0e5b14.
+- NICE, "Rests on: Ben Scratch, Oct 7" twice: DONE 0e06651c.
+- NICE, a raw "2026-10-08" date in the brief: NOT TAKEN, not in a file the fixes touched (context/brief.ts); listed for R62.
+- NICE, the canceled pilot call offers no rebook and HubSpot's next step still names it: NOT TAKEN, needs a decision on where rebooking runs (GAP holds no calendar write); listed for R62.
+
 **R60 one product from Work (2026-10-07).** The loop Casey runs: see what deserves attention, open the right account,
 get the prepared context, do or approve the move, record the result once, go to the next account, never learning GAP
 internals. Walked first on the accumulated scratch database (201 cards: 1,273 controls and 11,563 words on Work, the
