@@ -22,6 +22,7 @@ import { DROP_REASONS, SEARCH_REDIRECT } from '../sources/source-copy';
 import { factUrl } from './claim-rules';
 import { outreachFactRefusal } from './evidence-gate';
 import { sellerRelevance, type SellerRelevance } from './continuity';
+import { factCurrentness, isCurrentFact } from './currentness';
 import { hostBelongsToAccount } from './providers';
 import { classifyFact, detectConflicts, normalizeForMatch } from './facts';
 import { loadThesisGroups } from '../hypothesis/thesis-groups';
@@ -192,7 +193,7 @@ export async function loadEvidenceInbox(prisma: PrismaLike, now: Date, opts: { a
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- raw rows from a narrow select
   const signals: Array<Record<string, any>> = await prisma.prospectingSignal.findMany({
     where: { ...accountFilter, source_kind: 'evidence_record', ingested_at: { gte: since }, metadata: { path: ['verified'], equals: 'excerpt_found_at_source' } },
-    select: { id: true, account_name: true, source_kind: true, source_type: true, title: true, evidence_text: true, evidence_url: true, external_ok: true, observed_at: true, freshness_expires_at: true, metadata: true },
+    select: { id: true, account_name: true, source_kind: true, source_type: true, title: true, evidence_text: true, evidence_url: true, external_ok: true, observed_at: true, freshness_expires_at: true, metadata: true, type: true },
     orderBy: [{ observed_at: 'desc' }, { id: 'asc' }],
     take: 500,
   });
@@ -224,7 +225,7 @@ export async function loadEvidenceInbox(prisma: PrismaLike, now: Date, opts: { a
   // Evidence continuity: a live continuation shows ONE fact with its chain; the rows it folds in (the
   // original, other copies of the same story, the corroborating report) are shown inside that chain.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- raw rows from a narrow select
-  const live = (s: Record<string, any>) => !ignored.has(s.id) && !(s.freshness_expires_at && new Date(s.freshness_expires_at).getTime() <= now.getTime()) && !outreachFactRefusal(s as never, s.account_name);
+  const live = (s: Record<string, any>) => !ignored.has(s.id) && isCurrentFact(s, now) && !outreachFactRefusal(s as never, s.account_name);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- raw rows from a narrow select
   const newestContinuation = new Map<string, Record<string, any>>();
   for (const s of signals) {
@@ -247,8 +248,10 @@ export async function loadEvidenceInbox(prisma: PrismaLike, now: Date, opts: { a
   }
   for (const s of signals) {
     if (ignored.has(s.id) || folded.has(s.id)) continue;
-    const exp = s.freshness_expires_at ? new Date(s.freshness_expires_at) : null;
-    if (exp && exp.getTime() <= now.getTime()) continue;
+    // Item 2a: the one freshness authority: whether it is current, and until when (the inbox's days left).
+    const cur = factCurrentness(s, now);
+    if (!cur.current) continue;
+    const exp = cur.until ? new Date(cur.until) : null;
     if (outreachFactRefusal(s as never, s.account_name)) continue;
     const meta = isObj(s.metadata) ? s.metadata : {};
     const retrievedAt = typeof meta.retrievedAt === 'string' ? meta.retrievedAt : null;

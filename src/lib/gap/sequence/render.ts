@@ -153,4 +153,6 @@ export const EVIDENCE_SIGNAL_SELECT = {
   evidence_text: true,
   source_kind: true,
   account_name: true,
+  // Item 2a: the one freshness authority (research/currentness.ts) reads the type's window.
+  type: true,
 } as const;

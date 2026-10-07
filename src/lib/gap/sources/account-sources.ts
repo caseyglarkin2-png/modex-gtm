@@ -20,6 +20,7 @@ import { factUrl, liveFactFailure, normalizeCompany, speakerOrg, textNamesAccoun
 import { classifyContinuity } from '../research/continuity';
 import { contradictedFactIds } from '../research/conflicts';
 import { normalizeCompanyName } from '../identity/normalize';
+import { factCurrentness } from '../research/currentness';
 import { DROP_REASONS, SEARCH_REDIRECT, axesOf, sourceReason, type AccountSource, type OutreachState, type SourceClaim, type VerificationState, type WhyFound } from './source-copy';
 
 export { ageLabel, claimLine, OUTREACH_LABEL, sourceReason, VERIFICATION_LABEL } from './source-copy';
@@ -123,7 +124,7 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
       take: 300,
       select: { id: true, url: true, title: true, source_name: true, published_at: true, created_at: true, origin: true, source_class: true, research_status: true, categories: true, feedback: true, account_name: true, resolution_basis: true, event_id: true, metadata: true },
     }),
-    prisma.prospectingSignal.findMany({ where: { account_name: accountName, source_kind: 'evidence_record' }, orderBy: { observed_at: 'desc' }, take: 200, select: { id: true, title: true, evidence_text: true, evidence_url: true, observed_at: true, freshness_expires_at: true, updated_at: true, metadata: true } }),
+    prisma.prospectingSignal.findMany({ where: { account_name: accountName, source_kind: 'evidence_record' }, orderBy: { observed_at: 'desc' }, take: 200, select: { id: true, title: true, evidence_text: true, evidence_url: true, observed_at: true, freshness_expires_at: true, updated_at: true, metadata: true, type: true } }),
     // Scout's cited pages for this company (its verdict is separate; its citations are sources).
     prisma.gapAccountCandidate?.findFirst
       ? prisma.gapAccountCandidate.findFirst({ where: { scouted_at: { not: null }, OR: [{ account_name: accountName, decision: { in: ['added', 'mapped'] } }, { company_key: normalizeCompanyName(accountName) }] }, orderBy: { scouted_at: 'desc' }, select: { scout: true, scouted_at: true } })
@@ -234,7 +235,8 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
     } else {
       const live = liveFactFailure(r.evidence_text, accountName, url);
       const kind = meta.continuity?.kind === 'ended' || meta.continuity?.kind === 'ongoing_state' ? meta.continuity.kind : classifyContinuity(r.evidence_text);
-      const expired = r.freshness_expires_at ? new Date(r.freshness_expires_at).getTime() <= now.getTime() : false;
+      // Item 2a: the one freshness authority (the gate, the compiler and the draftable list read the same clock).
+      const expired = !factCurrentness(r, now).current && meta.continuity?.kind !== 'ended';
       const why = live ?? (kind === 'ended' ? 'fact_ended' : expired ? 'fact_expired' : null);
       if (live === 'redirect_unresolved') verification = 'COULD_NOT_VERIFY';
       if (why) {
@@ -249,7 +251,8 @@ export async function loadAccountSources(prisma: PrismaLike, accountName: string
     if (verification === 'VERIFIED_AT_SOURCE') verifiedQuotes.add(quote);
     if (outreach === 'ELIGIBLE') eligibleQuotes.add(quote);
     else eligibleQuotes.delete(quote);
-    const expires = r.freshness_expires_at ? new Date(r.freshness_expires_at) : null;
+    const untilIso = factCurrentness(r, now).until;
+    const expires = untilIso ? new Date(untilIso) : null;
     const s = make(url, {
       title: r.title ?? null,
       publishedAt: iso(r.observed_at),

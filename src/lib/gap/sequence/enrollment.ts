@@ -54,6 +54,7 @@ import { stopRun } from '@/lib/queue/sequence-runtime';
 import { HARD_BOUNCE_STATUSES, isHardBounceStatus } from '../../email/bounce';
 import { sendableEvidence } from '@/lib/gap/research/evidence-gate';
 import { EVIDENCE_SIGNAL_SELECT } from '@/lib/gap/sequence/render';
+import { isCurrentFact } from '@/lib/gap/research/currentness';
 import { approachOfHypothesis, copyFamilySupports } from '../research/approach-policy';
 import { approachOfFamilyProgram } from '../sequences/families';
 
@@ -229,7 +230,7 @@ export async function enroll(prisma: any, input: EnrollInput, opts: SuppressionO
     // live outreach fact, the same gate as the action pack and the runtime.
     const nowMs = Date.now();
     const links: Array<{ signal: any }> = Array.isArray(hyp.signals) ? hyp.signals : [];
-    const live = links.map((l) => l.signal).filter((s) => s && (!s.freshness_expires_at || new Date(s.freshness_expires_at).getTime() > nowMs));
+    const live = links.map((l) => l.signal).filter((s) => s && isCurrentFact(s, new Date(nowMs)));
     const approach = approachOfHypothesis(hyp);
     if (!copyFamilySupports(approach)) return { ok: false, reason: 'evidence_insufficient' };
     // R34: the version's copy is for this thesis's approach, never another's.

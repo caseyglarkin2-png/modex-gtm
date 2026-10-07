@@ -12,7 +12,17 @@
  * docs/GAP_PROSPECTING_OS.md, R03) the submit route answered 409 unmapped_family and the fact vanished. After it:
  * one call prepares a valid proposal under review, a retry returns the same id, the fact stays visible as the
  * proposal, APPROVE AND USE makes the account Ready for Tom on that story, and the account page agrees.
+ *
+ * Item 2a (2026-10-07, one freshness authority): the corpus Tulsa fact is dated 2026-07-23, 75 days and more before
+ * the run, as in the recording. The page offers it with "Current until ..." (a site change keeps its own window), the
+ * routed card for Tom PREVIEWS through the real send route (the compiler reads the same clock: no "cites stale
+ * evidence" dead end), and a 75-day-old news fact is never offered as draftable: the page lists it as too old.
  */
+import http from 'node:http';
+import type { AddressInfo } from 'node:net';
+import { mkdtempSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { NextRequest } from 'next/server';
 
@@ -28,6 +38,12 @@ vi.mock('@/lib/prisma', async () => {
   return { prisma: /^postgres/.test(url) ? new PrismaClient({ datasourceUrl: url }) : ({} as never) };
 });
 
+// HubSpot opportunity truth at the click: the scratch "no deal" reader (production reads HubSpot; the resolver is unchanged).
+vi.mock('@/lib/gap/enroll/service', async (orig) => {
+  const mod = await orig<Record<string, unknown>>();
+  return { ...mod, checkActiveOpportunityNow: async () => ({ status: 'CLEAR' }) };
+});
+
 const req = (url: string, method: string, body?: unknown) => new NextRequest(`http://localhost${url}`, { method, ...(body === undefined ? {} : { body: JSON.stringify(body), headers: { 'content-type': 'application/json' } }) });
 const ctx = (id: string) => ({ params: Promise.resolve({ id }) });
 
@@ -37,6 +53,9 @@ describe.skipIf(!RUN)('R03: the Pepsi draft, review and use transaction (scratch
   let pepsi: import('@/scripts/gap/recovery/seed-corpus').CorpusAccount;
   const tag = `r03-${Date.now().toString(36)}`;
   let hypothesisId = '';
+  let stub: http.Server;
+  let staleNewsId = '';
+  let sinkDir = '';
 
   beforeAll(async () => {
     for (const f of ['GAP_OS_ENABLED', 'GAP_HYPOTHESIS_ENABLED', 'GAP_ROUTING_ENABLED', 'GAP_MESSAGE_COMPILER_ENABLED', 'GAP_REPLY_CLASSIFICATION_ENABLED']) process.env[f] = 'true';
@@ -45,8 +64,45 @@ describe.skipIf(!RUN)('R03: the Pepsi draft, review and use transaction (scratch
     const { seedCorpus } = await import('@/scripts/gap/recovery/seed-corpus');
     corpus = await seedCorpus(prisma, { tag });
     pepsi = corpus.accounts.find((a) => a.name.startsWith('Pepsi'))!;
+    // Item 2a: a checked, citable fact registered as plain NEWS 75 days back: past its window, never draftable.
+    const { registerSignal } = await import('@/lib/gap/signals/registry');
+    const { VERIFIED_EXCERPT } = await import('@/lib/gap/research/evidence-gate');
+    const news = await registerSignal(prisma, { accountName: pepsi.name, sourceKind: 'evidence_record', sourceId: `corpus:${pepsi.slug}:denver-news`, type: 'news' as never, title: `${pepsi.name} to expand Denver distribution center`, sourceType: 'public_secondary', evidenceUrl: `https://news.example.com/${pepsi.slug}/denver-news`, evidenceText: `${pepsi.name} will expand its Denver, Colorado distribution center with 12 new dock doors.`, externalOk: true, observedAt: new Date(Date.now() - 75 * 86_400_000), confidence: 80, metadata: { verified: VERIFIED_EXCERPT }, registeredBy: 'casey@freightroll.com' });
+    staleNewsId = news.id;
+    // The clawd boundary for the preview step: autonomy not halted, the congruence critic a controlled PASS, nobody suppressed.
+    stub = http.createServer((rq, rs) => {
+      let body = '';
+      rq.on('data', (c) => (body += c));
+      rq.on('end', () => {
+        rs.setHeader('content-type', 'application/json');
+        if (rq.url?.startsWith('/api/autonomy/state')) return rs.end(JSON.stringify({ global: true, motions: { outreach: true, actuator: true, social: true, content: true } }));
+        if (rq.url?.startsWith('/api/critic/score')) return rs.end(JSON.stringify({ verdict: 'pass', hard_block: false, score: 96, counts: { block: 0, warn: 0 }, violations: [], artifact_type: 'email', used_llm: false, edge: { verdict: 'pass', hard_block: false, score: 96, violations: [] } }));
+        let emails: string[] = [];
+        try {
+          const j = JSON.parse(body || '{}');
+          emails = Array.isArray(j.emails) ? j.emails : j.email ? [j.email] : [];
+        } catch {
+          emails = [];
+        }
+        rs.end(JSON.stringify({ ok: true, results: emails.map((email: string) => ({ email, blocked: false, reason: null })) }));
+      });
+    });
+    await new Promise<void>((r) => stub.listen(0, '127.0.0.1', () => r()));
+    process.env.CLAWD_CONTROL_PLANE_URL = `http://127.0.0.1:${(stub.address() as AddressInfo).port}`;
+    process.env.CLAWD_CONTROL_PLANE_TOKEN = 'scratch';
+    process.env.GAP_GMAIL_USER_EMAIL = 'casey@yardflow.ai';
+    process.env.GAP_GOOGLE_DWD_SA_JSON = '{"scratch":true}';
+    process.env.UNSUBSCRIBE_SECRET = 'scratch-unsubscribe-secret';
+    // The mail boundary: the transport sink is the GAP mailbox (its Sent folder is read at preview); nothing is sent here.
+    sinkDir = mkdtempSync(join(tmpdir(), 'gap-r03-sink-'));
+    process.env.GAP_SEND_TRANSPORT = 'sink';
+    process.env.GAP_SINK_DIR = sinkDir;
+    process.env.GAP_SINK_ALLOWED_DOMAINS = 'example.com';
   }, 120_000);
   afterAll(async () => {
+    await new Promise<void>((r) => (stub ? stub.close(() => r()) : r()));
+    if (sinkDir) rmSync(sinkDir, { recursive: true, force: true });
+    delete process.env.GAP_SEND_TRANSPORT;
     await prisma?.$disconnect();
   });
 
@@ -92,6 +148,11 @@ describe.skipIf(!RUN)('R03: the Pepsi draft, review and use transaction (scratch
     expect(anchor.primary).toBeNull();
     expect(anchor.pending).toEqual([]);
     expect(anchor.draftable.map((d) => d.story)).toEqual(expect.arrayContaining([expect.stringMatching(/Tulsa/)]));
+    // Item 2a: the 75-day-old Tulsa site change is offered with its end date; the 75-day-old news item is not offered
+    // and the page says why.
+    expect(anchor.draftable.find((d) => /Tulsa/.test(d.story))?.currentLine).toMatch(/^Current until [A-Z][a-z]{2} \d{1,2}, 2026\.$/);
+    expect(anchor.draftable.map((d) => d.factId)).not.toContain(staleNewsId);
+    expect(anchor.tooOld).toEqual([expect.objectContaining({ factId: staleNewsId, line: expect.stringMatching(/^This story is too old for a first touch: it was current until /) })]);
   }, 120_000);
 
   it('Submit for review from the visible control prepares a valid proposal under review, with a derived family and a basis; the fact stays visible as the proposal', async () => {
@@ -156,6 +217,28 @@ describe.skipIf(!RUN)('R03: the Pepsi draft, review and use transaction (scratch
     expect(await prisma.emailLog.count()).toBe(0);
     expect(await prisma.gapAuditEvent.count({ where: { OR: [{ kind: { contains: 'draft' } }, { kind: { contains: 'send' } }] } })).toBe(0);
   }, 180_000);
+
+  it('item 2a: the routed card for Tom on the 75-day-old Tulsa story PREVIEWS through the real send route (the compiler reads the gate\'s clock)', async () => {
+    const tom = pepsi.people.find((p) => p.name.startsWith('Tom'))!;
+    const { routeAfterUse } = await import('@/lib/gap/routing/interactive');
+    const { runRouting } = await import('@/lib/gap/routing/run');
+    const { createClawdSuppressionReader } = await import('@/lib/gap/routing/suppression-read');
+    const { SCRATCH_NO_DEALS_TRUTH } = await import('@/scripts/gap/scratch-opportunity');
+    const tamIn = async () => ({ tam: 'in' as const, tamTier: 'A', intentScore: 60, lastIntentAt: new Date(), triggerScore: null, lastTriggerAt: null, opportunity: SCRATCH_NO_DEALS_TRUTH });
+    const suppression = createClawdSuppressionReader();
+    const routed = await routeAfterUse(prisma, { actor: 'casey@freightroll.com', now: new Date(), people: [{ personaId: tom.id, name: tom.name }] }, { run: (p, o, d) => runRouting(p, o, { ...d, suppression, hubspotSnapshot: tamIn as never }) });
+    expect(routed.ok, JSON.stringify(routed)).toBe(true);
+    const decision = await prisma.routingDecision.findFirst({ where: { account_name: pepsi.name, persona_id: tom.id }, orderBy: { created_at: 'desc' }, select: { id: true, lane: true, action: true, rule_id: true } });
+    expect(decision, 'no routing decision for Tom').not.toBeNull();
+    expect([decision!.lane, decision!.rule_id], JSON.stringify(decision)).not.toContain('evidence_thin');
+    expect(['one_off_email', 'enroll_gap_sequence', 'call_now'], JSON.stringify(decision)).toContain(decision!.action);
+    const { POST } = await import('@/app/api/gap/decisions/[id]/send/route');
+    const res = await POST(req(`/api/gap/decisions/${decision!.id}/send`, 'POST', {}), ctx(decision!.id));
+    const body = (await res.json()) as { preview?: { to: string; body: string }; error?: string; detail?: string };
+    expect(res.status, JSON.stringify(body)).toBe(200);
+    expect(body.preview?.to).toBe(tom.email);
+    expect(body.preview?.body).toMatch(/Tulsa/);
+  }, 240_000);
 
   it('a stranded draft from the older path (no source_ref, unmapped family) is ADOPTED by the service, never twinned: the production repair shape', async () => {
     const { proposeHypothesis } = await import('@/lib/gap/hypothesis/service');

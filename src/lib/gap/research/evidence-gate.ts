@@ -26,6 +26,7 @@ import { factUrl, liveClaimFailure, liveFactFailure } from './claim-rules';
 import { extractCitationIds } from '../hypothesis/observation';
 import { sourceLabelVariants } from './source-label';
 import { approachOfHypothesis, claimAdmittedFor, type EvidenceApproach } from './approach-policy';
+import { isCurrentFact } from './currentness';
 
 export interface GateSignal {
   id: string;
@@ -41,6 +42,9 @@ export interface GateSignal {
   title?: string | null;
   /** R30: the claim's class (FACT, JOB_POSTING, PROCUREMENT, ...); absent reads as FACT. */
   claim_class?: string | null;
+  /** Item 2a: the signal type and the recorded expiry, which the one freshness authority reads. */
+  type?: string | null;
+  freshness_expires_at?: Date | string | null;
 }
 
 /** R30: the gate's approach context (default: the physical-change path). */
@@ -247,12 +251,17 @@ export const GATE_SIGNAL_SELECT = {
   metadata: true,
   title: true,
   claim_class: true,
+  // Item 2a: what the one freshness authority (research/currentness.ts) reads beside observed_at, the text, metadata.
+  type: true,
+  freshness_expires_at: true,
 } as const;
 
 /**
  * The send decision for a loaded hypothesis row (`signals: [{ signal }]`),
- * with only LIVE signals considered (Release C re-review S8): an expired fact
- * never makes a hypothesis sendable, and is never read aloud as an opener.
+ * with only CURRENT signals considered (Release C re-review S8; item 2a: the one
+ * freshness authority, research/currentness.ts, the clock the compiler reads
+ * too): a fact past its currentness never makes a hypothesis sendable, and is
+ * never read aloud as an opener.
  */
 export function hypothesisSendable(
   h: { observation?: string | null; account_name: string; metadata?: unknown; signals?: ReadonlyArray<{ signal?: (GateSignal & { freshness_expires_at?: Date | string | null }) | null }> | null },
@@ -260,6 +269,6 @@ export function hypothesisSendable(
 ): boolean {
   const live = (h.signals ?? [])
     .map((l) => l.signal)
-    .filter((s): s is GateSignal & { freshness_expires_at?: Date | string | null } => !!s && (!s.freshness_expires_at || new Date(s.freshness_expires_at).getTime() > now.getTime()));
+    .filter((s): s is GateSignal & { freshness_expires_at?: Date | string | null } => !!s && isCurrentFact(s, now));
   return sendableEvidence(h.observation, live, h.account_name, { approach: approachOfHypothesis(h) }).tier === 'VERIFIED_FACT';
 }

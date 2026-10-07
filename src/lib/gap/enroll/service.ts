@@ -137,6 +137,7 @@ import { parseSteps } from '@/lib/gap/sequence/steps';
 import { sendableEvidence } from '@/lib/gap/research/evidence-gate';
 import { seedCopyOutdated } from '@/lib/gap/sequences/seed-drift';
 import { accountRepliedRecently } from '@/lib/gap/replies/account-reply';
+import { isCurrentFact, type CurrentnessFact } from '@/lib/gap/research/currentness';
 import { referralHoldDetail, referralHoldFor } from '@/lib/gap/replies/referral-hold';
 import { materializeSequence, type MaterializeRefusal } from '@/lib/gap/sequences/service';
 import type { RoutingAction } from '@/lib/gap/taxonomy';
@@ -399,21 +400,15 @@ export async function verifyCompiles(
   return null;
 }
 
-export interface EvidenceFreshnessRow {
-  freshness_expires_at: Date | string | null;
-}
+export type EvidenceFreshnessRow = CurrentnessFact;
 
 /**
- * SF14 (6B-T2): a cited signal's `freshness_expires_at`, when set, must not
- * already be past `now`. Same IS-NULL-OR-future predicate
- * `signals/registry.ts`'s `findSignalsForAccount` already uses for "still
- * fresh". Pure; opt-in only (see `EnrollDeps.checkEvidenceFreshness`).
+ * SF14 (6B-T2): every cited signal must still be CURRENT at `now`, by the one
+ * freshness authority (research/currentness.ts, item 2a). Pure; opt-in only
+ * (see `EnrollDeps.checkEvidenceFreshness`).
  */
 export function checkEvidenceFreshness(signals: readonly EvidenceFreshnessRow[], now: Date): 'evidence_expired' | null {
-  for (const s of signals) {
-    if (!s.freshness_expires_at) continue;
-    if (new Date(s.freshness_expires_at).getTime() <= now.getTime()) return 'evidence_expired';
-  }
+  for (const s of signals) if (!isCurrentFact(s, now)) return 'evidence_expired';
   return null;
 }
 
@@ -737,7 +732,7 @@ export async function enrollFromDecision(
   // account, a physical-network change) means no sequence at all.
   const liveSignals = (hypothesis.signals ?? [])
     .map((link) => link.signal)
-    .filter((s): s is EvidenceSignalRow => s !== null && (!s.freshness_expires_at || new Date(s.freshness_expires_at).getTime() > input.now.getTime()));
+    .filter((s): s is EvidenceSignalRow => s !== null && isCurrentFact(s, input.now));
   const approach = approachOfHypothesis(hypothesis as { metadata?: unknown });
   if (!copyFamilySupports(approach)) return refuse('evidence_insufficient', { detail: COPY_UNSUPPORTED_DETAIL(approach) });
   // R34: the version's copy is for the thesis's approach, never another's (a job-led thesis never enrolls on an

@@ -27,6 +27,7 @@ import { fetchAccountContextRows, loadAccountContext, projectAccountContext } fr
 import type { AccountContext } from '../context/context';
 import { accountSlug } from './href';
 import { approachOfHypothesis } from '../research/approach-policy';
+import { factCurrentness } from '../research/currentness';
 /** R30/R31: the non-physical claim classes the read keeps as story facts of their own kind. */
 const CLAIM_FACT_CLASSES: ReadonlySet<string> = new Set(['JOB_POSTING', 'PROCUREMENT']);
 
@@ -161,7 +162,7 @@ export async function loadAccountInputs(
     skip(() => namesStartingLike(prisma, accountName), [] as string[]),
     skip(() => loadWatchProfilesCached(prisma).catch(() => []), []),
     skip(() => prisma.gapSignal.findMany({ where: { account_name: accountName, resolution: 'resolved' }, select: { id: true, title: true, url: true, published_at: true, research_status: true, note: true, created_at: true }, orderBy: { created_at: 'desc' }, take: 15 }).catch(() => []), []),
-    prisma.prospectingSignal.findMany({ where: { account_name: accountName, source_kind: 'evidence_record' }, select: { id: true, title: true, evidence_text: true, evidence_url: true, observed_at: true, freshness_expires_at: true, metadata: true, claim_class: true }, orderBy: { observed_at: 'desc' }, take: 200 }),
+    prisma.prospectingSignal.findMany({ where: { account_name: accountName, source_kind: 'evidence_record' }, select: { id: true, title: true, evidence_text: true, evidence_url: true, observed_at: true, freshness_expires_at: true, metadata: true, claim_class: true, type: true }, orderBy: { observed_at: 'desc' }, take: 200 }),
     skip(() => prisma.researchRun.findFirst({ where: { account_name: accountName, run_key: { startsWith: 'gap_research:' } }, orderBy: { created_at: 'desc' }, select: { created_at: true, provider_status: true } }).catch(() => null), null as Row | null),
     soft(prisma.prospectingHypothesis.findMany({
       where: { account_name: accountName, superseded_by: { is: null }, status: { in: ['draft', 'review_required', 'approved', 'active', 'confirmed', 'partially_confirmed', 'rejected'] } },
@@ -232,7 +233,8 @@ export async function loadAccountInputs(
       url: factUrl(r),
       title: r.title ?? '',
       publishedAt: new Date(r.observed_at).toISOString(),
-      expiresAt: r.freshness_expires_at ? new Date(r.freshness_expires_at).toISOString() : null,
+      // Item 2a: when it stops being current, by the one freshness authority (the gate and the compiler read the same).
+      expiresAt: factCurrentness(r as never, now).until,
       continuity: k === 'ended' ? 'ended' : k === 'ongoing_state' ? 'ongoing_state' : classifyContinuity(r.evidence_text),
       currentness: meta.continuity?.currentness?.publishedAt ? { url: meta.continuity.currentness.url ?? null, publishedAt: meta.continuity.currentness.publishedAt } : null,
     };

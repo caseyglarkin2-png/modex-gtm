@@ -18,6 +18,7 @@ import { factUrl } from '../research/claim-rules';
 import { outreachFactRefusal } from '../research/evidence-gate';
 import { loadAccountFirstTouches } from '../motion/load';
 import { accountRepliedRecently } from '../replies/account-reply';
+import { currentnessLine, factCurrentness, isCurrentFact } from '../research/currentness';
 import { FREEMAIL_DOMAINS, OWN_DOMAINS } from '../replies/domains';
 import { resolveAccountOpportunity, type OpportunityTruth } from '../opportunity/active-opportunity';
 import { accountHref } from '../account-intel/href';
@@ -75,7 +76,7 @@ const day = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- the getHypothesis row (house glue)
 export function knowOf(hypothesis: any, now: Date = new Date(), contradicted: ReadonlyMap<string, string> = new Map()): SixLineBrief['know'] {
   const links: Array<{ role?: string | null; signal?: Record<string, unknown> | null }> = Array.isArray(hypothesis?.signals) ? hypothesis.signals : [];
-  const expired = (sig: Record<string, unknown>) => !!sig.freshness_expires_at && new Date(String(sig.freshness_expires_at)).getTime() <= now.getTime();
+  const expired = (sig: Record<string, unknown>) => !isCurrentFact(sig, now);
   const verifiedAny = links.filter((l) => l.signal && outreachFactRefusal(l.signal as never, String(hypothesis.account_name ?? '')) === null);
   // Review E P1: an expired fact is not known (every send gate drops it too).
   const fresh = verifiedAny.filter((l) => !expired(l.signal!));
@@ -86,7 +87,7 @@ export function knowOf(hypothesis: any, now: Date = new Date(), contradicted: Re
     const clash = fresh.find((l) => contradicted.has(String(l.signal!.id ?? '')));
     if (clash?.signal) return { fact: null, reason: `Verified facts about ${contradicted.get(String(clash.signal.id))} contradict each other: neither can be quoted. Ignore the side you do not believe in Research.` };
     const stale = verifiedAny.find((l) => l.role === 'primary') ?? verifiedAny[0];
-    if (stale?.signal) return { fact: null, reason: `The verified fact expired on ${new Date(String(stale.signal.freshness_expires_at)).toISOString().slice(0, 10)}: it cannot be quoted to a buyer. Find fresh evidence.` };
+    if (stale?.signal) return { fact: null, reason: `${currentnessLine(factCurrentness(stale.signal, now))} It cannot be quoted to a buyer. Find fresh evidence.` };
     return { fact: null, reason: links.length ? 'No verified fact: what is linked is a keyword hit or unverified context.' : 'No fact is linked to this thesis.' };
   }
   const s = primary.signal;

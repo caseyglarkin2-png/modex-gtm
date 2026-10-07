@@ -32,6 +32,7 @@ import { sensitivityOf } from '../research/sensitivity';
 import { isPhysicalOpsFact } from '../research/facts';
 import { citedQuote } from '../research/propose';
 import { sameIdea } from '../context/same-idea';
+import { currentnessLine } from '../research/currentness';
 import type { AccountStory, StoryRow, StorySentence, StoryTag } from './story';
 
 export interface AnchorPerson {
@@ -81,7 +82,13 @@ export interface OutreachAnchor {
   /** The other theses (approved, active or under review, grounded, not contradicted), the primary excluded. */
   alternatives: AnchorThesis[];
   /** Checked, citable story lines no thesis is grounded on: a prefilled draft each. */
-  draftable: Array<{ story: string; sourceLabel: string; sourceUrl: string | null; factId: string; proposedObservation: string; /** R35: JOB_POSTING / PROCUREMENT for a claim of its own class (its own draft text); null for a physical fact. */ claimClass?: string | null }>;
+  draftable: Array<{ story: string; sourceLabel: string; sourceUrl: string | null; factId: string; proposedObservation: string; /** R35: JOB_POSTING / PROCUREMENT for a claim of its own class (its own draft text); null for a physical fact. */ claimClass?: string | null; /** Item 2a: "Current until <date>." by the one freshness authority (null: no end date). */ currentLine?: string | null }>;
+  /**
+   * Item 2a: checked, citable stories that are TOO OLD for a first touch by the one freshness authority
+   * (research/currentness.ts, the clock the gate and the compiler read): never offered as draftable, and the page says
+   * why instead of dropping them silently.
+   */
+  tooOld: Array<{ story: string; sourceLabel: string; sourceUrl: string | null; factId: string; line: string }>;
   /**
    * PROPOSALS IN PROGRESS (R11/R12): the open drafts and theses under review grounded on a checked fact here, with
    * what the reviewer decides on (the exact opening sentence, the guess, the person, what would prove it wrong, the
@@ -112,6 +119,8 @@ export interface AnchorPending {
   gate: 'sendable' | 'refused' | 'not_judged';
   /** R35: the cited fact's claim class (a posting keeps its own draft text on a resubmit). */
   claimClass?: string | null;
+  /** Item 2a: why its fact can no longer open a first touch (too old, or ended), else null. Never approvable then. */
+  stale?: string | null;
 }
 
 export interface AnchorInput {
@@ -297,6 +306,8 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
       .flatMap((h) => [...(rawById.get(h.id)?.observation ?? '').matchAll(CITATION)].map((m) => m[1])),
   );
   const draftable: OutreachAnchor['draftable'] = [];
+  // Item 2a: the one freshness authority's words for a fact (the loader computed `expiresAt` with it).
+  const staleLine = (f: AccountInputs['facts'][number]) => (f.continuity === 'ended' ? currentnessLine({ current: false, until: null, basis: 'ended' }) : currentnessLine({ current: false, until: f.expiresAt, basis: 'type_window' }));
   for (const r of i.story.rows) {
     if (r.key !== 'changing' && r.key !== 'stories' && r.key !== 'goal') continue;
     for (const s of r.sentences) {
@@ -307,8 +318,18 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
       if (groundedFactIds.has(fact.id) || (fact.sameQuoteIds ?? []).some((id) => groundedFactIds.has(id))) continue;
       if (theses.some((t) => sameIdea(t.observation, s.text, i.accountName) || sharedCounterparty(t.observation, s.text, i.accountName))) continue;
       if (draftable.some((d) => d.factId === fact.id || sameIdea(d.story, s.text, i.accountName) || sharedCounterparty(d.story, s.text, i.accountName))) continue;
-      draftable.push({ story: s.text, sourceLabel: `${host(fact.url) ?? (fact.title || 'source')}, ${day(fact.publishedAt)}`, sourceUrl: fact.url, factId: fact.id, proposedObservation: citedQuote(fact.title || host(fact.url) || 'source', fact.quote.trim().replace(/\s+/g, ' '), fact.id, i.accountName), claimClass: fact.claimClass ?? null });
+      draftable.push({ story: s.text, sourceLabel: `${host(fact.url) ?? (fact.title || 'source')}, ${day(fact.publishedAt)}`, sourceUrl: fact.url, factId: fact.id, proposedObservation: citedQuote(fact.title || host(fact.url) || 'source', fact.quote.trim().replace(/\s+/g, ' '), fact.id, i.accountName), claimClass: fact.claimClass ?? null, currentLine: fact.expiresAt ? currentnessLine({ current: true, until: fact.expiresAt, basis: 'type_window' }) : null });
     }
+  }
+  // TOO OLD FOR A FIRST TOUCH (item 2a): a checked, citable story no live thesis grounds, past its currentness. Never
+  // offered as draftable (it could not be sent); listed with the reason, newest first, at most three.
+  const tooOld: OutreachAnchor['tooOld'] = [];
+  for (const f of i.inputs.facts) {
+    if (tooOld.length >= 3) break;
+    if (live.includes(f) || f.continuity === 'ended' || !citable(f)) continue;
+    if (groundedFactIds.has(f.id) || (f.sameQuoteIds ?? []).some((id) => groundedFactIds.has(id))) continue;
+    if (tooOld.some((t) => t.factId === f.id || sameIdea(t.story, f.quote, i.accountName))) continue;
+    tooOld.push({ story: f.quote, sourceLabel: `${host(f.url) ?? (f.title || 'source')}, ${day(f.publishedAt)}`, sourceUrl: f.url, factId: f.id, line: staleLine(f) });
   }
 
   // PROPOSALS IN PROGRESS: an open draft or a thesis under review grounded on a live checked fact here. Listed with
@@ -317,8 +338,11 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
   for (const raw of i.inputs.hypotheses) {
     if (raw.status !== 'draft' && raw.status !== 'review_required') continue;
     const cited = [...new Set([...raw.observation.matchAll(CITATION)].map((m) => m[1]))];
-    const fact = live.find((f) => cited.includes(f.id) || (f.sameQuoteIds ?? []).some((id) => cited.includes(id)));
+    const citedBy = (f: AccountInputs['facts'][number]) => cited.includes(f.id) || (f.sameQuoteIds ?? []).some((id) => cited.includes(id));
+    // Item 2a: a proposal whose fact is past its currentness stays listed (a draft never vanishes) and says why.
+    const fact = live.find(citedBy) ?? i.inputs.facts.find(citedBy);
     if (!fact) continue;
+    const stale = live.includes(fact) ? null : staleLine(fact);
     const family = raw.problemFamily ?? 'unmapped';
     const who = raw.personaId != null ? (i.people ?? []).find((p) => p.personaId === raw.personaId) ?? (i.person?.personaId === raw.personaId ? i.person : null) : null;
     pending.push({
@@ -336,8 +360,9 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
       familyKnown: family !== 'unmapped',
       personaId: raw.personaId ?? null,
       personName: who?.name ?? null,
-      gate: raw.status === 'draft' || !i.sendable ? 'not_judged' : i.sendable.has(raw.id) ? 'sendable' : 'refused',
+      gate: stale ? 'refused' : raw.status === 'draft' || !i.sendable ? 'not_judged' : i.sendable.has(raw.id) ? 'sendable' : 'refused',
       claimClass: fact.claimClass ?? null,
+      stale,
     });
   }
 
@@ -352,6 +377,7 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
     doNotUse: merged,
     alternatives,
     draftable,
+    tooOld,
     pending,
   };
 }

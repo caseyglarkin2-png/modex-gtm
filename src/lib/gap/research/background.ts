@@ -33,6 +33,7 @@ import { runEvidenceResearch, type ResearchDeps, type ResearchResult } from './r
 import { settleSignals, signalCandidates, signalFocus, type ResearchableSignal } from '../signals/research';
 import { loadWatchProfiles } from '../signals/watch';
 import { heldDealAccounts } from '../deals/in-deals';
+import { CURRENTNESS_SELECT, factCurrentness, type CurrentnessFact } from './currentness';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -222,13 +223,14 @@ export async function selectBackgroundTargets(prisma: PrismaLike, now: Date, dep
   }
 
   // 3. Outreach facts on approved / in-use hypotheses nearing expiry.
-  const expiring: Array<{ account_name: string; problem_family: string; signals: Array<{ signal: { freshness_expires_at: Date | null } | null }> }> = await prisma.prospectingHypothesis.findMany({
+  const expiring: Array<{ account_name: string; problem_family: string; signals: Array<{ signal: CurrentnessFact | null }> }> = await prisma.prospectingHypothesis.findMany({
     where: { status: { in: ['approved', 'active'] } },
-    select: { account_name: true, problem_family: true, signals: { where: { role: 'primary' }, select: { signal: { select: { freshness_expires_at: true } } } } },
+    select: { account_name: true, problem_family: true, signals: { where: { role: 'primary' }, select: { signal: { select: CURRENTNESS_SELECT } } } },
     take: 500,
   });
   for (const h of expiring) {
-    const exp = h.signals.map((s) => s.signal?.freshness_expires_at).filter((d): d is Date => !!d).map((d) => new Date(d));
+    // Item 2a: when each primary fact stops being current, by the one freshness authority.
+    const exp = h.signals.map((s) => (s.signal ? factCurrentness(s.signal, now).until : null)).filter((d): d is string => !!d).map((d) => new Date(d));
     const soon = exp.find((d) => d.getTime() > now.getTime() && d.getTime() - now.getTime() <= EXPIRY_HORIZON_MS);
     if (soon) merge(byAccount, { ...base(h.account_name, 'expiring_evidence'), expiresAt: soon.toISOString(), problemFamily: h.problem_family });
   }

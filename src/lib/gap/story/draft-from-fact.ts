@@ -21,6 +21,7 @@ import { isProblemFamily, type ProblemFamily } from '../taxonomy';
 import { proposeFamilyFor } from './propose-family';
 import type { EvidenceApproach } from '../research/approach-policy';
 import { sensitivityOf } from '../research/sensitivity';
+import { currentnessLine, factCurrentness } from '../research/currentness';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -69,7 +70,9 @@ export async function draftThesisFromFact(prisma: PrismaLike, input: DraftFromFa
   const fact: FactRow | null = await prisma.prospectingSignal.findUnique({ where: { id: input.factId }, select: { ...GATE_SIGNAL_SELECT, freshness_expires_at: true } });
   if (!fact) return { ok: false, reason: 'fact_not_found' };
   if ((fact.account_name ?? '').trim().toLowerCase() !== input.accountName.trim().toLowerCase()) return { ok: false, reason: 'signal_account_mismatch' };
-  if (fact.freshness_expires_at && new Date(fact.freshness_expires_at).getTime() <= input.now.getTime()) return { ok: false, reason: 'fact_not_outreach_evidence', detail: 'expired' };
+  // Item 2a: the one freshness authority; the refusal says why in the seller's words.
+  const currentness = factCurrentness(fact, input.now);
+  if (!currentness.current) return { ok: false, reason: 'fact_not_outreach_evidence', detail: currentnessLine(currentness) };
   // R30: the claim's class decides the approach the thesis will carry; the gate runs under that approach.
   const approach: EvidenceApproach = fact.claim_class === 'JOB_POSTING' || fact.claim_class === 'PROCUREMENT' ? 'job_procurement_led' : 'event_led';
   const refusal: OutreachFactRefusal | null = outreachFactRefusal(fact, input.accountName, { approach });

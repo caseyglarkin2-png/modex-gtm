@@ -46,6 +46,7 @@ import type { HypothesisStatus, Persona } from '../taxonomy';
 import type { Top100Manifest, Top100RosterPerson } from '../top100/reader';
 import type { SuppressionReader } from './suppression-read';
 import { referralHoldDetail, referralHoldFor } from '../replies/referral-hold';
+import { isCurrentFact } from '../research/currentness';
 import { DEFAULT_FRESHNESS } from './types';
 import type { OpportunityTruth } from '../opportunity/active-opportunity';
 import type {
@@ -173,6 +174,8 @@ interface SignalRow {
   evidence_url: string | null;
   evidence_text: string | null;
   freshness_expires_at: Date | null;
+  /** Item 2a: the full row is loaded; the freshness authority reads the type (and observed_at, below). */
+  type?: string | null;
   source_kind?: string | null;
   summary?: string | null;
   // The evidence gate's fields (red team T6); loaded with the full signal row.
@@ -444,9 +447,8 @@ function buildHypothesis(h: HypothesisRow | null, now: Date, hasNewerVersion: bo
   const links = h.signals ?? [];
   const signals = links.map((l) => l.signal).filter((s): s is SignalRow => !!s);
   const evidenced = signals.filter(hasEvidence);
-  const evidenceFresh = evidenced.some(
-    (s) => s.freshness_expires_at == null || s.freshness_expires_at.getTime() > now.getTime(),
-  );
+  // Item 2a: the one freshness authority (research/currentness.ts), the clock the gate and the compiler read.
+  const evidenceFresh = evidenced.some((s) => isCurrentFact(s, now));
   const m = meta(h.metadata);
   return {
     id: h.id,
@@ -461,7 +463,7 @@ function buildHypothesis(h: HypothesisRow | null, now: Date, hasNewerVersion: bo
     evidenceThin:
       sendableEvidence(
         h.observation,
-        signals.filter((s) => s.freshness_expires_at == null || s.freshness_expires_at.getTime() > now.getTime()),
+        signals.filter((s) => isCurrentFact(s, now)),
         h.account_name ?? '',
         { approach: approachOfHypothesis(h) },
       ).tier !== 'VERIFIED_FACT',

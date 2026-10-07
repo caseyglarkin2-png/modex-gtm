@@ -20,6 +20,7 @@
 import { sendableEvidence, type GateSignal } from '../research/evidence-gate';
 import { openerFits } from '../research/opener';
 import { approachOfHypothesis } from '../research/approach-policy';
+import { isCurrentFact } from '../research/currentness';
 
 export type ReadinessReason = 'no_evidence' | 'evidence_expired' | 'evidence_insufficient' | 'opener_too_long';
 
@@ -55,7 +56,8 @@ export interface ActionabilityInput {
 
 const EDITABLE = new Set(['draft', 'review_required']);
 
-const live = (s: ActionSignal, now: Date) => !s.freshness_expires_at || new Date(s.freshness_expires_at).getTime() > now.getTime();
+// Item 2a: the one freshness authority (research/currentness.ts).
+const live = (s: ActionSignal, now: Date) => isCurrentFact(s, now);
 
 /** Outreach readiness of the observation + linked signals, and why not. */
 export function outreachReadiness(input: Omit<ActionabilityInput, 'status'>, now: Date): { ready: boolean; reason: ReadinessReason | null } {

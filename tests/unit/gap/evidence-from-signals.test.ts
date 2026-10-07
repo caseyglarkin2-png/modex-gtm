@@ -8,7 +8,8 @@
 import { describe, expect, it } from 'vitest';
 
 import { evidenceRefsFromSignals as fromService } from '@/lib/gap/enroll/service';
-import { EVIDENCE_MAX_AGE_DAYS, evidenceRefsFromSignals } from '@/lib/gap/compiler/evidence-from-signals';
+import { evidenceRefsFromSignals } from '@/lib/gap/compiler/evidence-from-signals';
+import { SIGNAL_TTL_DAYS } from '@/lib/gap/signals/freshness';
 
 const NOW = new Date('2026-09-23T12:00:00.000Z');
 const DAY = 24 * 60 * 60 * 1000;
@@ -42,9 +43,11 @@ describe('evidenceRefsFromSignals', () => {
     ]);
   });
 
-  it('fresh comes from freshness_expires_at when set, else from observed_at within the 45-day window', () => {
+  it('fresh is the one freshness authority (item 2a): the recorded expiry when set, else the type window from observed_at (45 days for a type GAP does not know)', () => {
     expect(evidenceRefsFromSignals([signal({ freshness_expires_at: new Date(NOW.getTime() - DAY) })], NOW)[0].fresh).toBe(false);
-    expect(EVIDENCE_MAX_AGE_DAYS).toBe(45);
+    expect(SIGNAL_TTL_DAYS.other).toBe(45);
+    // A site expansion keeps its own 120-day window: the compiler no longer ages it by a flat 45 days.
+    expect(evidenceRefsFromSignals([signal({ freshness_expires_at: null, type: 'site_expansion', observed_at: new Date(NOW.getTime() - 75 * DAY) })], NOW)[0].fresh).toBe(true);
     const within = signal({ freshness_expires_at: null, observed_at: new Date(NOW.getTime() - 44 * DAY) });
     const beyond = signal({ freshness_expires_at: null, observed_at: new Date(NOW.getTime() - 46 * DAY) });
     expect(evidenceRefsFromSignals([within], NOW)[0].fresh).toBe(true);

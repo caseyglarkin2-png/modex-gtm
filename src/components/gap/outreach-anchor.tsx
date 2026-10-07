@@ -289,7 +289,7 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
         <p className="text-sm text-amber-700 dark:text-amber-400" data-testid="anchor-none">
           No usable thesis at {accountName} yet: nothing to open on.
           {unusable.length ? ` ${unusable.length === 1 ? 'The open thesis' : `${unusable.length} open theses`} would be refused by the send gate: ${unusable[0].unusableWhy}.` : ''}
-          {pending.length ? ` ${pending.length === 1 ? 'A proposal' : `${pending.length} proposals`} below ${pending.length === 1 ? 'is' : 'are'} waiting for your review.` : anchor.draftable.length ? ' A checked fact below can become a thesis (it goes to review).' : ' Open the research plan to find a fact; review grounds the thesis.'}
+          {pending.length ? ` ${pending.length === 1 ? 'A proposal' : `${pending.length} proposals`} below ${pending.length === 1 ? 'is' : 'are'} waiting for your review.` : anchor.draftable.length ? ' A checked fact below can become a thesis (it goes to review).' : (anchor.tooOld ?? []).length ? ' The checked stories here are too old for a first touch (below); open the research plan to find a current fact.' : ' Open the research plan to find a fact; review grounds the thesis.'}
         </p>
       )}
 
@@ -312,6 +312,7 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
                   <Tag tag="Checked" />
                   <p className="min-w-0 break-words text-sm" data-testid="anchor-pending-observation">{item.observation}</p>
                 </div>
+                {item.stale ? <p className="text-xs text-amber-700 dark:text-amber-400" data-testid="anchor-pending-stale">{item.stale} Set it aside; it cannot be approved for a first touch.</p> : null}
                 <p className="ml-1 text-xs text-[var(--muted-foreground)]">
                   {item.sourceUrl ? <a href={item.sourceUrl} target="_blank" rel="noreferrer" className="underline">{item.sourceLabel}</a> : item.sourceLabel}. This is the sentence the opening is built on; nothing else from the source reaches the buyer.
                 </p>
@@ -333,7 +334,13 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
                   <dt className="font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Send gate</dt>
                   <dd>{item.gate === 'sendable' ? 'would let this opening out' : item.gate === 'refused' ? 'would refuse this opening' : 'judged at approval'}</dd>
                 </dl>
-                {!item.familyKnown ? (
+                {item.stale ? (
+                  <div className="flex flex-wrap items-center gap-2">
+                    <button type="button" className={OUTLINE} disabled={busy !== null} onClick={() => void notThisStory(item)} data-testid="anchor-pending-withdraw">
+                      {mine && busy?.kind === 'withdraw' ? 'Setting aside...' : 'Not this story'}
+                    </button>
+                  </div>
+                ) : !item.familyKnown ? (
                   <div className="flex flex-col gap-2 sm:flex-row sm:items-end" data-testid="anchor-pending-family-form">
                     <label className="flex min-w-0 flex-1 flex-col gap-1 text-xs">
                       <span>Which problem does this fact point at?</span>
@@ -450,7 +457,7 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
                     <div className="flex flex-col gap-1 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3">
                       <p className="min-w-0 flex-1 text-sm">
                         {d.story}
-                        <span className="text-xs text-[var(--muted-foreground)]"> ({d.sourceLabel}; no thesis yet)</span>
+                        <span className="text-xs text-[var(--muted-foreground)]"> ({d.sourceLabel}; no thesis yet){d.currentLine ? ` ${d.currentLine}` : ''}</span>
                       </p>
                       {drafting === d.factId ? null : (
                         <button type="button" className={OUTLINE} disabled={busy !== null} onClick={() => openDraft(d)} data-testid="anchor-draft-open">
@@ -500,6 +507,16 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
             ) : null}
           </div>
         </details>
+      ) : null}
+      {(anchor.tooOld ?? []).length ? (
+        <ul className="space-y-1 text-xs text-[var(--muted-foreground)]" data-testid="anchor-too-old" aria-label="Stories too old for a first touch">
+          <li className="font-semibold uppercase tracking-wide">Not offered: too old for a first touch</li>
+          {(anchor.tooOld ?? []).map((t) => (
+            <li key={t.factId} data-fact={t.factId}>
+              {t.story} ({t.sourceUrl ? <a href={t.sourceUrl} target="_blank" rel="noreferrer" className="underline">{t.sourceLabel}</a> : t.sourceLabel}). {t.line}
+            </li>
+          ))}
+        </ul>
       ) : null}
 
       <p ref={noteRef} tabIndex={-1} role="status" aria-live="polite" className="rounded text-xs outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]" data-testid="anchor-note">

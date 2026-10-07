@@ -23,6 +23,7 @@
 import { sourceLabel } from './source-label';
 import { proposeHypothesis } from '../hypothesis/service';
 import { GATE_SIGNAL_SELECT, outreachFactRefusal, type GateSignal } from './evidence-gate';
+import { isCurrentFact } from './currentness';
 import { actionabilityOf } from '../hypothesis/actionability';
 import { existingRevisionFor, type ExistingRevision } from '../hypothesis/current-revision';
 import { factFitsOpener } from './opener';
@@ -139,7 +140,7 @@ export async function proposeFromResearch(
         })
       : [];
   }
-  const fresh = signals.filter((s) => !s.freshness_expires_at || s.freshness_expires_at.getTime() > input.now.getTime());
+  const fresh = signals.filter((s) => isCurrentFact(s, input.now));
   if (fresh.length === 0) return { ok: false, reason: 'no_fresh_evidence' };
   // Red team T6/T7: the observation is built only from evidence that passes
   // the SAME gate approval applies. A verified quote that states no network

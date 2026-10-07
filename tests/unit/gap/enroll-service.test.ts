@@ -546,8 +546,9 @@ describe('enrollFromDecision guards, in order', () => {
   });
 
   describe('SF14: evidence freshness recheck (checkEvidenceFreshness opt-in)', () => {
-    it('null and future freshness_expires_at are both fresh; a past one is expired', () => {
-      expect(checkEvidenceFreshness([{ freshness_expires_at: null }], NOW)).toBeNull();
+    it('item 2a, the one freshness authority: a future expiry, or none with a date inside the type window, is fresh; a past expiry, or an undated row, is not', () => {
+      expect(checkEvidenceFreshness([{ freshness_expires_at: null, observed_at: new Date(NOW.getTime() - 10 * 86_400_000), type: 'news' }], NOW)).toBeNull();
+      expect(checkEvidenceFreshness([{ freshness_expires_at: null }], NOW)).toBe('evidence_expired');
       expect(checkEvidenceFreshness([{ freshness_expires_at: '2026-12-01T00:00:00.000Z' }], NOW)).toBeNull();
       expect(checkEvidenceFreshness([{ freshness_expires_at: '2026-09-01T00:00:00.000Z' }], NOW)).toBe('evidence_expired');
     });
