@@ -17,6 +17,18 @@
 //     `{ dealId, property, value, sourceType }` plays a human editing the deal in HubSpot; GET /__stub/writes lists
 //     what was written. STUB_FAIL_WRITES=1 starts in the failing mode.
 // Every request is appended to STUB_LOG (one JSON line each) so a test can prove what was asked.
+//   R62 matrix controls (additive; with none set, every answer above is byte-for-byte what it was): POST /__stub/matrix
+//     `{ failReads: false | true | 'associations', suppressionFault: false | <status>, provider: null | { mode: 'ok' |
+//     'quota' | 'malformed' | 'error', content? }, pages: { <name>: { status?, contentType?, body } }, companyProps:
+//     { <property>: <value> } }` (each key optional, merged into the current state, the state answered back):
+//     failReads   every HubSpot READ answers 503 (true), or only the v4 association reads ('associations': a partial
+//                 outage where the company reads but its deals cannot be read); writes are untouched
+//     suppressionFault   clawd's suppression contract answers that HTTP status instead of a verdict
+//     provider    the AI gateway (OpenAI-compatible POST /v1/chat/completions, AI_GATEWAY_BASE_URL=<stub>/v1):
+//                 ok answers `content`, quota answers 429, malformed answers a completion whose content is not JSON,
+//                 error answers 500; unset, the path falls through to the old default answer
+//     pages       fixed pages served at GET /__pages/<name> (a fetched page under test, prompt injection included)
+//     companyProps   extra company properties on the company reads (intent_score, last_intent_at, ...)
 //
 //   node scripts/gap/recovery/stubs.mjs [port]
 import http from 'node:http';
@@ -33,6 +45,9 @@ let failWrites = process.env.STUB_FAIL_WRITES === '1' ? true : false;
 let nextObjectId = 500000;
 const blockedFile = process.env.STUB_BLOCKED_FILE || '';
 const readJson = (f, fallback) => (f && existsSync(f) ? JSON.parse(readFileSync(f, 'utf8')) : fallback);
+// R62 matrix controls (POST /__stub/matrix); the defaults leave every existing answer unchanged.
+const matrix = { failReads: false, suppressionFault: false, provider: null, pages: {}, companyProps: {} };
+const isHubSpotRead = (method, path) => path.startsWith('/crm/') && (method === 'GET' || /\/(search|batch\/read)$/.test(path));
 
 // Companies: one HubSpot company per account name the harness seeds; id = a stable hash of the name. Domain
 // `<slug>.example.com` and the name itself both find it, so the real resolver union works unchanged.
@@ -84,6 +99,28 @@ const server = http.createServer((req, res) => {
       parsed = {};
     }
     if (log) appendFileSync(log, JSON.stringify({ at: new Date().toISOString(), method: req.method, path, body: parsed }) + '\n');
+
+    // ---- R62 matrix controls and fixtures (additive) ----
+    if (path === '/__stub/matrix' && req.method === 'POST') {
+      for (const k of Object.keys(matrix)) if (k in parsed) matrix[k] = k === 'pages' || k === 'companyProps' ? { ...matrix[k], ...(parsed[k] ?? {}) } : parsed[k];
+      return json(res, 200, matrix);
+    }
+    const page = path.startsWith('/__pages/') && req.method === 'GET' ? matrix.pages[decodeURIComponent(path.slice('/__pages/'.length))] : undefined;
+    if (page) {
+      res.writeHead(page.status ?? 200, { 'content-type': page.contentType ?? 'text/html; charset=utf-8' });
+      return res.end(page.body ?? '');
+    }
+    if (matrix.provider && path === '/v1/chat/completions' && req.method === 'POST') {
+      const p = matrix.provider;
+      if (p.mode === 'quota') return json(res, 429, { error: { message: 'stub: rate limit exceeded (quota)', type: 'rate_limit_exceeded', code: 'rate_limit_exceeded' } });
+      if (p.mode === 'error') return json(res, 500, { error: { message: 'stub: provider error', type: 'server_error' } });
+      const content = p.mode === 'malformed' ? (p.content ?? 'Sure! Here is what I found: {not json') : (p.content ?? '');
+      return json(res, 200, { id: 'chatcmpl-stub', object: 'chat.completion', created: Math.floor(Date.now() / 1000), model: parsed.model ?? 'stub', choices: [{ index: 0, message: { role: 'assistant', content }, finish_reason: 'stop' }], usage: { prompt_tokens: 1, completion_tokens: 1, total_tokens: 2 } });
+    }
+    if (matrix.suppressionFault && path === '/api/suppression/contract') return json(res, Number(matrix.suppressionFault) || 500, { ok: false, error: 'stub: suppression contract unavailable' });
+    if (matrix.failReads && isHubSpotRead(req.method, path) && (matrix.failReads === true || (matrix.failReads === 'associations' && path.startsWith('/crm/v4/')))) {
+      return json(res, 503, { status: 'error', message: 'stub: HubSpot is unavailable (read)' });
+    }
 
     // ---- clawd ----
     if (path === '/api/suppression/contract') {
@@ -170,10 +207,10 @@ const server = http.createServer((req, res) => {
     if (single && req.method === 'GET') {
       const c = byId(single[1]);
       if (!c) return json(res, 404, { status: 'error', message: 'not found' });
-      return json(res, 200, { id: c.id, properties: { name: c.name, domain: c.domain, yardflow_tam: c.yardflow_tam, tam_tier: c.tam_tier, hs_lastmodifieddate: '2026-10-01T00:00:00Z' } });
+      return json(res, 200, { id: c.id, properties: { name: c.name, domain: c.domain, yardflow_tam: c.yardflow_tam, tam_tier: c.tam_tier, hs_lastmodifieddate: '2026-10-01T00:00:00Z', ...matrix.companyProps } });
     }
     if (path === '/crm/v3/objects/companies/batch/read') {
-      const results = (parsed.inputs ?? []).map((i) => byId(i.id)).filter(Boolean).map((c) => ({ id: c.id, properties: { name: c.name, domain: c.domain, yardflow_tam: c.yardflow_tam, tam_tier: c.tam_tier } }));
+      const results = (parsed.inputs ?? []).map((i) => byId(i.id)).filter(Boolean).map((c) => ({ id: c.id, properties: { name: c.name, domain: c.domain, yardflow_tam: c.yardflow_tam, tam_tier: c.tam_tier, ...matrix.companyProps } }));
       return json(res, 200, { status: 'COMPLETE', results });
     }
     if (path === '/crm/v3/objects/deals/batch/read') {
