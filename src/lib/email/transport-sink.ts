@@ -9,8 +9,9 @@
  * so a harness can never mail a real address by mistake, and it records every attempt (allowed or refused) in the
  * same directory, so a test can prove what was tried.
  *
- * Off by default. Any value other than exactly `sink` means the real transport. In production the variable is
- * unset, so this module never runs there. Pure apart from the file write.
+ * Off by default. Any value other than exactly `sink` means the real transport. REFUSED in production (acceptance
+ * batch, item 1): with VERCEL_ENV=production a `sink` value throws on every read, so a send, a draft or a Sent read
+ * fails loudly instead of recording a "sent" message that never left. Pure apart from the file write.
  */
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -25,6 +26,7 @@ export interface SinkConfig {
 /** The sink configuration, or null when the real transport is in force. */
 export function sinkConfig(env: Record<string, string | undefined> = process.env): SinkConfig | null {
   if ((env.GAP_SEND_TRANSPORT ?? '').trim() !== 'sink') return null;
+  if ((env.VERCEL_ENV ?? '').trim() === 'production') throw new Error('GAP_SEND_TRANSPORT=sink is refused in production (VERCEL_ENV=production): unset it; nothing was sent');
   const dir = (env.GAP_SINK_DIR ?? '').trim();
   if (!dir) throw new Error('GAP_SEND_TRANSPORT=sink needs GAP_SINK_DIR');
   const allowed = (env.GAP_SINK_ALLOWED_DOMAINS ?? '')

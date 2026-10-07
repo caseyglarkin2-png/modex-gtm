@@ -21,6 +21,14 @@ describe('transport sink', () => {
     return d;
   };
 
+  it('acceptance batch item 1: refused in production, whatever else is set; preview and development keep it', () => {
+    expect(() => sinkConfig({ GAP_SEND_TRANSPORT: 'sink', GAP_SINK_DIR: 'x', VERCEL_ENV: 'production' })).toThrow('GAP_SEND_TRANSPORT=sink is refused in production (VERCEL_ENV=production): unset it; nothing was sent');
+    expect(() => sinkConfig({ GAP_SEND_TRANSPORT: ' sink ', GAP_SINK_DIR: 'x', VERCEL_ENV: ' production ' })).toThrow(/refused in production/);
+    expect(sinkConfig({ GAP_SEND_TRANSPORT: 'sink', GAP_SINK_DIR: 'x', VERCEL_ENV: 'preview' })).toEqual({ dir: 'x', allowedDomains: [...SINK_DEFAULT_DOMAINS] });
+    // Production with the variable unset is the real transport, as before.
+    expect(sinkConfig({ VERCEL_ENV: 'production' })).toBeNull();
+  });
+
   it('is off by default and for any value other than exactly sink', () => {
     expect(sinkConfig({})).toBeNull();
     expect(sinkConfig({ GAP_SEND_TRANSPORT: 'true', GAP_SINK_DIR: 'x' })).toBeNull();

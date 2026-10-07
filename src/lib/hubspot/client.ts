@@ -3,6 +3,18 @@ import * as Sentry from '@sentry/nextjs';
 
 let _client: Client | null = null;
 
+/**
+ * The SDK base path: HubSpot's own unless a non-production harness points it at a local stub (GAP OS execution
+ * recovery, R05). REFUSED in production (acceptance batch, item 1): with VERCEL_ENV=production a set
+ * HUBSPOT_API_BASE_PATH throws, so no production read or write ever reaches a stub (or anything else) by configuration.
+ */
+export function hubspotBasePath(env: Record<string, string | undefined> = process.env): string | undefined {
+  const basePath = env.HUBSPOT_API_BASE_PATH?.trim();
+  if (!basePath) return undefined;
+  if ((env.VERCEL_ENV ?? '').trim() === 'production') throw new Error('HUBSPOT_API_BASE_PATH is refused in production (VERCEL_ENV=production): unset it');
+  return basePath;
+}
+
 /** Get the singleton HubSpot API client. Throws if HUBSPOT_ACCESS_TOKEN is not set. */
 export function getHubSpotClient(): Client {
   if (_client) return _client;
@@ -15,7 +27,7 @@ export function getHubSpotClient(): Client {
   // Controlled boundary (GAP OS execution recovery, R05): a non-production harness may point the SDK at a local stub
   // so the REAL opportunity, people and deal readers run against controlled answers. Read once, when the singleton is
   // built; unset (production) means HubSpot's own base path. Never a bypass: the readers and their gates are unchanged.
-  const basePath = process.env.HUBSPOT_API_BASE_PATH?.trim();
+  const basePath = hubspotBasePath();
   _client = new Client({ accessToken: token, ...(basePath ? { basePath } : {}) });
   return _client;
 }
