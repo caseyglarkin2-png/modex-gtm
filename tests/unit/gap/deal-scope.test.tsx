@@ -214,9 +214,11 @@ describe('an open deal blocks cold outreach without suppressing deal work', () =
     expect([ann.stateKind, ann.tier]).toEqual(['replied', 'reply']);
     expect(ann.blocker).toMatch(/^An open HubSpot deal here \(.*\): answer them as deal work, never a cold first touch\.$/);
     expect(ann.obligations?.map((o) => [o.title, o.scope])).toEqual([['Book the Columbus yard walk', 'Deal: Kroger Columbus DC']]);
-    const q = new URL(`http://x${ann.capture!.href}`).searchParams;
+    // R60, capture once: the reply card's one entry (its next move) opens Capture on the reply.
+    expect(ann.capture).toBeNull();
+    const q = new URL(`http://x${ann.next!.href}`).searchParams;
     expect([q.get('deal'), q.get('dealName'), q.get('context'), q.get('from')]).toEqual([PILOT.id, PILOT.name, 'email', 'reply:m1']);
-    const cal = new URL(`http://x${day('cal@kroger.example.com', '83').cards.find((c) => c.accountName === ACCOUNT)!.capture!.href}`).searchParams;
+    const cal = new URL(`http://x${day('cal@kroger.example.com', '83').cards.find((c) => c.accountName === ACCOUNT)!.next!.href}`).searchParams;
     expect([cal.get('deal'), cal.get('context')]).toEqual([null, 'email']);
   });
 

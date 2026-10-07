@@ -5,8 +5,10 @@
  *   op decide     `{ candidateId, decision: confirm|reject, type?, quote?, summary?, hypothesisId?, personaId?, contactEmail? }`
  *   op meeting    `{ outcome, hypothesisId, personaId?, contactEmail?, buyerQuote?, nextLearningObjective? }`
  *   op commitment `{ candidateId, decision, title?, dueDay?, personaId? }`  an obligation the note states -> a commitment (R44)
- *   op batch      `{ hypothesisId?, items: [{ candidateId, decision, type?, quote?, personaId?, title?, dueDay? }] }`
- *                 ONE review of the whole note, each item corrected on its own; the answer says per item what happened
+ *   op batch      `{ hypothesisId?, items: [{ candidateId, decision, type?, quote?, personaId?, title?, dueDay?, responseClass? }] }`
+ *                 ONE review of the whole note, each item corrected on its own; the answer says per item what happened.
+ *                 R60: on a note opened from a reply, the item "reply" is what the reply means: confirming it records
+ *                 the disposition (once), and the statements kept in the same review link to it
  *
  * CONFIRM is the only way a candidate becomes Buyer Input Data: a human-
  * confirmed BID through the existing service, with the exact quote (re-checked
@@ -18,6 +20,7 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { BID_TYPES } from '@/lib/gap/taxonomy';
+import { REPLY_KIND_CLASSES } from '@/lib/gap/capture/reply-kind';
 import { MEETING_OUTCOMES, decideBatch, decideCandidate, decideCommitmentCandidate, linkCapture, loadCapture, recordMeetingOutcome } from '@/lib/gap/capture/store';
 
 export const dynamic = 'force-dynamic';
@@ -73,6 +76,8 @@ const Body = z.discriminatedUnion('op', [
               personaId: z.number().int().positive().nullable().optional(),
               title: z.string().max(200).optional(),
               dueDay: z.string().max(10).optional(),
+              // R60: on the reply item (candidateId "reply"), what the reply means.
+              responseClass: z.enum(REPLY_KIND_CLASSES).optional(),
             })
             .strict(),
         )

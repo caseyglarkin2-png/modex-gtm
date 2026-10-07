@@ -71,13 +71,15 @@ describe('buildWorkList', () => {
     expect(onlyAdmin.map((c) => c.accountName)).toEqual(['Walmart Inc.', 'Tyson Foods', 'Dollar General', 'Kroger']);
     expect(walmart.state).toBe('Opted out');
     expect(walmart.why).toMatch(/^timothy\.cooper@walmart\.com wrote Oct 5: "stop"\. They asked not to be contacted: record it as do not contact\./);
-    // R60: the opt-out is recorded on Walmart's own page, never the all-replies lane.
-    expect(walmart.next).toEqual({ label: 'Record the opt-out', href: '/gap/accounts/walmart-inc#record-reply' });
+    // R60, capture once: the opt-out is recorded in Capture opened on the reply (its one entry), never a lane.
+    expect(walmart.next?.label).toBe('Record the opt-out');
+    expect(walmart.next?.href).toMatch(/^\/gap\/capture\?account=Walmart\+Inc\.&.*context=email&from=reply%3A/);
+    expect(walmart.capture).toBeNull();
     expect(cards.some((c) => c.accountName === 'FedEx')).toBe(false);
     const nfi = cards[0];
     expect(nfi.state).toBe('Someone replied');
     expect(nfi.blocker).toMatch(/No cold email to anyone here until it is recorded/);
-    expect(nfi.next?.label).toBe('Read the reply and record what they said');
+    expect(nfi.next?.label).toBe('Log what they said');
   });
   it('a held account is never a cold action: Kroger lists In a deal with the deal brief, its READY card dropped; UNKNOWN is a caution with no action', () => {
     const cards = buildWorkList(input());

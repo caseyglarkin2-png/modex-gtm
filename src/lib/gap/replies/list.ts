@@ -587,3 +587,51 @@ async function collapseTwins(prisma: any, items: ReplyItem[], state: ReplyState)
   }
   return out;
 }
+
+/**
+ * R60, capture once on a reply: ONE reply as Capture carries it: the message's plain text, who sent it and what GAP
+ * holds for them (the account, the thesis, the person, the source the disposition service records against), any
+ * stored suggestion, and the confirmed disposition when one already exists. Null when the message is not a reply from
+ * a GAP account (a known recipient, or a colleague at a known recipient's domain).
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- house convention for DB glue
+export async function loadReplyForCapture(prisma: any, replyId: string, now: Date = new Date()): Promise<{ item: ReplyItem; text: string; dispositionId: string | null } | null> {
+  const id = replyId.trim();
+  if (!id || typeof prisma?.inboundMessage?.findUnique !== 'function') return null;
+  const row: InboundRow | null = await prisma.inboundMessage.findUnique({
+    where: { id },
+    select: { id: true, source: true, thread_id: true, from_email: true, from_name: true, subject: true, body_text: true, body_html: true, snippet: true, received_at: true },
+  });
+  if (!row) return null;
+  const known = await loadKnownAddresses(prisma);
+  const joined: DispositionJoinRow[] = await prisma.conversationDisposition.findMany({
+    where: { source_kind: { in: ['inbound_message', 'hubspot_engagement'] }, source_id: row.id },
+    select: { id: true, source_kind: true, source_id: true, human_confirmed: true, created_by: true, ai_suggested: true },
+  });
+  const dispositionId = joined.find((d) => d.human_confirmed)?.id ?? null;
+  const suggestion = joined.filter((d) => !d.human_confirmed).map(suggestionFromRow).find((s): s is StoredSuggestion => !!s) ?? null;
+  const address = known.get(normalizeEmail(row.from_email));
+  const item: ReplyItem | null = address
+    ? {
+        id: row.id,
+        source: sourceOfInbound(row),
+        contactEmail: address.email,
+        personaId: address.personaId,
+        accountName: address.accountName ?? '',
+        hypothesisId: address.hypothesisId ?? '',
+        hypothesisTitle: address.hypothesisTitle,
+        subject: row.subject ?? null,
+        snippet: snippetOf(row),
+        receivedAt: row.received_at.toISOString(),
+        enrollmentId: address.enrollmentId,
+        enrollmentStatus: address.enrollmentStatus,
+        suggestion,
+        accountLevel: false,
+        threadId: row.source === 'hubspot' ? null : (row.thread_id ?? null),
+        fromName: row.from_name ?? null,
+        hubspotContactId: address.hubspotContactId ?? null,
+      }
+    : ((await loadColleagueReplies(prisma, known, 'all', now)).find((x) => x.id === row.id) ?? null);
+  if (!item || !item.accountName) return null;
+  return { item: { ...item, suggestion: item.suggestion ?? suggestion }, text: plainTextOf(row), dispositionId };
+}

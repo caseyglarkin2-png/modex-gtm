@@ -9,6 +9,22 @@ export const accountHref = (name: string) => `/gap/accounts/${accountSlug(name)}
 export const RECORD_REPLY_ANCHOR = 'record-reply';
 export const recordReplyHref = (name: string) => `${accountHref(name)}#${RECORD_REPLY_ANCHOR}`;
 
+/**
+ * R60, capture once on a reply: Capture opened on one reply (its account, the person who wrote it, their own single
+ * deal, the message as the source). Capture reviews their words and what the reply means together.
+ */
+export function replyCaptureHref(r: { accountName: string; replyId: string; personaId?: number | null; deal?: { id: string; name: string | null } | null }): string {
+  const q = new URLSearchParams({ account: r.accountName });
+  if (r.personaId) q.set('person', String(r.personaId));
+  if (r.deal?.id) {
+    q.set('deal', r.deal.id);
+    if (r.deal.name) q.set('dealName', r.deal.name);
+  }
+  q.set('context', 'email');
+  q.set('from', `reply:${r.replyId}`);
+  return `/gap/capture?${q.toString()}`;
+}
+
 /** R60: a link into a cockpit lane (every account's cards, analyst words, no Next account): never a seller destination. */
 export const isCockpitLaneHref = (href: string) => /^\/gap\/?\?(?:[^#]*&)?lane=/.test(href);
 

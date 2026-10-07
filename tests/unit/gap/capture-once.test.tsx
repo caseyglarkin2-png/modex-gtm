@@ -166,7 +166,11 @@ describe('Capture is opened from the action, already filled in (R44)', () => {
       meetings: [{ accountName: 'Meet Co', at: '2026-10-07T14:00:00Z', what: 'Pilot scoping' }],
     });
     const by = (n: string) => day.cards.find((c) => c.accountName === n)!.capture!;
-    expect(by('Nfi Scratch Co')).toEqual({ label: 'Log what they said', href: '/gap/capture?account=Nfi+Scratch+Co&person=41&context=email&from=reply%3Agm-1' });
+    // R60, capture once: the reply card's ONE entry is its next move into Capture; no second capture link.
+    const nfi = day.cards.find((c) => c.accountName === 'Nfi Scratch Co')!;
+    expect(nfi.next).toEqual({ label: 'Log what they said', href: '/gap/capture?account=Nfi+Scratch+Co&person=41&context=email&from=reply%3Agm-1' });
+    expect(nfi.capture).toBeNull();
+    expect(nfi.reply?.record).toBeNull();
     expect(by('Kroger Scratch Co')).toEqual({ label: 'Log a conversation', href: '/gap/capture?account=Kroger+Scratch+Co&deal=Kroger+yard+pilot&from=work%3AKroger+Scratch+Co' });
     expect(by('Meet Co')).toEqual({ label: 'Log the meeting', href: '/gap/capture?account=Meet+Co&context=meeting&from=meeting%3AMeet+Co' });
   });

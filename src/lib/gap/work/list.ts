@@ -670,14 +670,19 @@ export function workDay(i: WorkInput): WorkDay {
     if (!top && dueMs < Number.MAX_SAFE_INTEGER && tier === 'reply') bits[0] = `${TIER_WHY.reply} ${day(new Date(dueMs).toISOString())}`;
     else if (act && tier !== 'reply') bits.push(`buyer activity ${day(new Date(act).toISOString())}`);
     if (prio) bits.push(`you prioritized it (${prio.reason})`);
+    const capture = captureFor(r.card, list);
+    // R60, capture once: a reply card offers ONE entry into Capture, which carries the reply's meaning and the buyer's
+    // words in one review; the card's next move and its prepared reply point there, and no second record link shows.
+    const replyCard = !!r.card.reply && (r.card.stateKind === 'replied' || r.card.stateKind === 'opted_out');
     return {
       ...r.card,
+      ...(replyCard ? { next: { label: r.card.stateKind === 'opted_out' ? 'Record the opt-out' : capture.label, href: capture.href }, reply: { ...r.card.reply!, record: null } } : {}),
       lane,
       tier,
       rankWhy: `${bits.join('; ')}.`,
       obligations: list,
       priority: prio,
-      capture: captureFor(r.card, list),
+      capture: replyCard ? null : capture,
       index,
       source: r.source ?? 'cockpit',
       href: `${accountHref(r.card.accountName)}?from=work&i=${index}`,

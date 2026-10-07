@@ -54,9 +54,11 @@ describe('R60: a reply card says it once, by name', () => {
   it('a summary remembered with a lane link opens the account\'s own action instead (records written before R60)', () => {
     const s = replied({ actionable: { intent: 'record_reply', allowed: { label: 'Open the reply', href: '/gap?lane=replies' }, preparation: null, completion: null, hypothesisId: null } as unknown as PursuitSummary['actionable'] });
     const [c] = buildWorkList(input({ summaries: new Map([['Fedex Co', s]]) }));
-    expect(c.next).toEqual({ label: 'Open the reply', href: '/gap/accounts/fedex-co#record-reply' });
+    // R60, capture once: whatever a remembered summary holds, the reply card's one entry is Capture on the reply.
+    const onReply = { label: 'Log what they said', href: '/gap/capture?account=Fedex+Co&context=email&from=reply%3Am1' };
+    expect(c.next).toEqual(onReply);
     const kept = replied({ actionable: { intent: 'record_reply', allowed: { label: 'Open the reply', href: '/gap/accounts/fedex-co#record-reply' }, preparation: null, completion: null, hypothesisId: null } as unknown as PursuitSummary['actionable'] });
-    expect(buildWorkList(input({ summaries: new Map([['Fedex Co', kept]]) }))[0].next?.href).toBe('/gap/accounts/fedex-co#record-reply');
+    expect(buildWorkList(input({ summaries: new Map([['Fedex Co', kept]]) }))[0].next).toEqual(onReply);
   });
   it('the card renders no person line and no generic hold beside the reply panel; a hold of its own still shows', () => {
     const [c] = buildWorkList(input());

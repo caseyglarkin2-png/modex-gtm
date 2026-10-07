@@ -44,10 +44,13 @@ describe('R60: a reply is recorded on its own account', () => {
   it('the record place is the account page anchor', () => {
     expect(recordReplyHref('Walmart Inc.')).toBe(`${accountHref('Walmart Inc.')}#${RECORD_REPLY_ANCHOR}`);
   });
-  it('the account page renders that account\'s waiting replies in place, and its reply panel points at the section', () => {
+  it('the account page lists that account\'s waiting replies in place, each opening Capture on itself, and no reply form', () => {
+    // R60, capture once: the section holds each waiting reply with one link into Capture; the reply panel has no
+    // record control of its own and no disposition form sits beside a reply.
     const page = src('src/app/gap/accounts/[slug]/page.tsx');
-    expect(page).toMatch(/<section id=\{RECORD_REPLY_ANCHOR\}[\s\S]{0,400}<RepliesTriage account=\{brief\.accountName\} \/>/);
-    expect(page).toMatch(/record: \{ \.\.\.replyPrep\.record, href: `#\$\{RECORD_REPLY_ANCHOR\}` \}/);
+    expect(page).toMatch(/<section id=\{RECORD_REPLY_ANCHOR\}[\s\S]{0,400}<AccountReplies items=\{waitingReplies\} accountName=\{brief\.accountName\} \/>/);
+    expect(page).toMatch(/<ReplyPrepPanel prep=\{\{ \.\.\.replyPrep, record: null \}\} \/>/);
+    expect(page).not.toMatch(/RepliesTriage|DispositionForm/);
   });
   it('no seller path sends a reply to the all-replies lane any more', () => {
     for (const f of ['src/lib/gap/work/list.ts', 'src/lib/gap/pursuit/next.ts', 'src/lib/gap/replies/prepare.ts', 'src/lib/gap/routing/card-readiness.ts', 'src/lib/gap/routing/next-up.ts', 'src/app/gap/accounts/[slug]/page.tsx']) {

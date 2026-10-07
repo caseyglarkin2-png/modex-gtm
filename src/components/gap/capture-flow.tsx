@@ -16,6 +16,7 @@ import { useEffect, useState } from 'react';
 import { BID_TYPES } from '@/lib/gap/taxonomy';
 import type { CaptureView } from '@/lib/gap/capture/store';
 import { buyerSpeakers } from '@/lib/gap/capture/extract';
+import { REPLY_KIND_CLASSES, REPLY_KIND_ITEM, REPLY_KIND_WORDS, type ReplyKindClass } from '@/lib/gap/capture/reply-kind';
 import { Dictate } from './dictate';
 
 const OFFLINE = 'no connection. Try again when you have signal.';
@@ -103,7 +104,13 @@ function NoteReview({ capture, onChange }: { capture: CaptureView; onChange: (c:
   const [results, setResults] = useState<Record<string, string>>({});
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const hyp = hypothesisId || onlyHyp;
+  // R60: a note opened from a reply bears on the reply's own thesis unless the seller chooses another.
+  const replyHyp = capture.reply?.hypothesisId && ctx?.hypotheses.some((h) => h.id === capture.reply!.hypothesisId) ? capture.reply.hypothesisId : '';
+  const hyp = hypothesisId || replyHyp || onlyHyp;
+  const reply = capture.reply ?? null;
+  const replyPending = !!reply && !reply.decision;
+  const [replyClass, setReplyClass] = useState<string>(reply?.proposedClass ?? '');
+  const [replyKeep, setReplyKeep] = useState(true);
   const d = (id: string): ItemDraft => drafts[id] ?? { keep: true };
   const set = (id: string, patch: Partial<ItemDraft>) => setDrafts((m) => ({ ...m, [id]: { ...d(id), ...patch } }));
   const personaFor = (id: string) => (d(id).personaId !== undefined ? d(id).personaId : multiSpeaker ? null : capture.personaId);
@@ -112,13 +119,16 @@ function NoteReview({ capture, onChange }: { capture: CaptureView; onChange: (c:
   const excludedList = capture.excluded ?? [];
   const bids = capture.candidates.filter((c) => !c.decision);
   const owed = commitmentList.filter((c) => !c.decision);
-  const kept = bids.filter((c) => d(c.id).keep).length + owed.filter((c) => d(c.id).keep).length;
-  const rejected = bids.length + owed.length - kept;
+  const kept = bids.filter((c) => d(c.id).keep).length + owed.filter((c) => d(c.id).keep).length + (replyPending && replyKeep ? 1 : 0);
+  const rejected = bids.length + owed.length + (replyPending ? 1 : 0) - kept;
+  // R60: what the reply means must be chosen before the review records (or the seller sets it aside for now).
+  const replyUnchosen = replyPending && replyKeep && !replyClass;
 
   async function submit() {
     setBusy(true);
     setError(null);
     const items = [
+      ...(replyPending ? [replyKeep ? { candidateId: REPLY_KIND_ITEM, decision: 'confirm', responseClass: replyClass } : { candidateId: REPLY_KIND_ITEM, decision: 'reject' }] : []),
       ...bids.map((c) =>
         d(c.id).keep
           ? { candidateId: c.id, decision: 'confirm', type: d(c.id).type ?? c.type, ...(d(c.id).quote && d(c.id).quote !== c.quote ? { quote: d(c.id).quote } : {}), ...(personaFor(c.id) != null ? { personaId: personaFor(c.id) } : {}) }
@@ -183,7 +193,36 @@ function NoteReview({ capture, onChange }: { capture: CaptureView; onChange: (c:
   const decided = (label: string, tone: string) => <p className={`text-xs font-medium ${tone}`}>{label}</p>;
   return (
     <section className="space-y-3" data-testid="capture-review-batch">
-      {capture.candidates.length === 0 && commitmentList.length === 0 ? <p className="text-sm text-[var(--muted-foreground)]">No buyer statements or obligations stood out. The note is saved as written.</p> : null}
+      {reply ? (
+        // R60: what the reply means, reviewed with their words and recorded once (the disposition service writes it).
+        <article className="space-y-2 rounded-md border border-[var(--border)] p-3" data-testid="capture-reply-kind" data-state={reply.decision?.kind ?? (replyKeep ? 'keep' : 'reject')}>
+          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">What {reply.from}&apos;s reply means</p>
+          {reply.decision?.kind === 'confirmed' ? (
+            decided(reply.decision.before ? 'Already recorded for this reply. Nothing is recorded twice.' : `Recorded: ${REPLY_KIND_WORDS[reply.decision.responseClass as ReplyKindClass] ?? 'what it means'}. The reply is answered on the account.`, 'text-emerald-700 dark:text-emerald-400')
+          ) : reply.decision?.kind === 'rejected' ? (
+            decided('Set aside. The reply still waits on the account.', 'text-[var(--muted-foreground)]')
+          ) : (
+            <>
+              <select aria-label="What the reply means" data-testid="capture-reply-class" className={input} value={replyClass} onChange={(e) => setReplyClass(e.target.value)} disabled={!replyKeep}>
+                <option value="">Choose what the reply means</option>
+                {REPLY_KIND_CLASSES.map((k) => (
+                  <option key={k} value={k}>
+                    {REPLY_KIND_WORDS[k]}
+                  </option>
+                ))}
+              </select>
+              {reply.proposedClass ? <p className="text-xs text-[var(--muted-foreground)]" data-testid="capture-reply-proposed">The message itself says: {REPLY_KIND_WORDS[reply.proposedClass]}.</p> : null}
+              {reply.suggestedClass && reply.suggestedClass !== reply.proposedClass ? <p className="text-xs text-[var(--muted-foreground)]" data-testid="capture-reply-suggested">Suggested, not confirmed: {REPLY_KIND_WORDS[reply.suggestedClass as ReplyKindClass] ?? words(reply.suggestedClass)}.</p> : null}
+              <label className="inline-flex min-h-11 items-center gap-1 text-xs sm:min-h-9">
+                <input type="checkbox" data-testid="capture-reply-reject-toggle" checked={!replyKeep} onChange={(e) => setReplyKeep(!e.target.checked)} /> Do not record what it means now
+              </label>
+              {results[REPLY_KIND_ITEM] ? <p role="alert" className="text-xs text-[var(--destructive)]">Not recorded: {results[REPLY_KIND_ITEM]}.</p> : null}
+            </>
+          )}
+        </article>
+      ) : null}
+      {!reply && capture.source?.kind === 'reply' ? <p className="text-xs text-[var(--muted-foreground)]" data-testid="capture-reply-unread">GAP could not read that reply here, so what it means is not part of this review.</p> : null}
+      {capture.candidates.length === 0 && commitmentList.length === 0 && !reply ?<p className="text-sm text-[var(--muted-foreground)]">No buyer statements or obligations stood out. The note is saved as written.</p> : null}
       {capture.candidates.length ? (
         <div className="space-y-2" data-testid="capture-candidates">
           <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Candidate buyer truth (not truth until you confirm)</p>
@@ -298,12 +337,13 @@ function NoteReview({ capture, onChange }: { capture: CaptureView; onChange: (c:
           ))}
         </div>
       ) : null}
-      {bids.length + owed.length > 0 ? (
+      {bids.length + owed.length + (replyPending ? 1 : 0) > 0 ? (
         <div className="flex flex-wrap items-center gap-2">
-          <button type="button" data-testid="capture-batch-submit" disabled={busy || !capture.accountName} onClick={() => void submit()} className={primary}>
+          <button type="button" data-testid="capture-batch-submit" disabled={busy || !capture.accountName || replyUnchosen} onClick={() => void submit()} className={primary}>
             {busy ? 'Recording...' : `Record ${kept} kept${rejected ? `, reject ${rejected}` : ''}`}
           </button>
           {!capture.accountName ? <span className="text-xs text-[var(--muted-foreground)]">Link the note to an account first.</span> : null}
+          {replyUnchosen ? <span className="text-xs text-[var(--muted-foreground)]" data-testid="capture-reply-choose">Choose what the reply means first.</span> : null}
           {error ? (
             <p role="alert" className="text-xs text-[var(--destructive)]">
               {error}
@@ -459,6 +499,7 @@ export function CaptureFlow({
   initialDeal = null,
   initialDealName = null,
   initialContext = null,
+  initialText = null,
   source = null,
   dictate = false,
 }: {
@@ -472,6 +513,8 @@ export function CaptureFlow({
   initialDealName?: string | null;
   /** R44: the conversation the action implies (a meeting, a call, an email). */
   initialContext?: string | null;
+  /** R60: the note's starting text (a reply's own words, when Capture was opened from it). */
+  initialText?: string | null;
   /** R44: what opened Capture (a Work card, a reply, an obligation, the account page). */
   source?: { kind: string; id: string } | null;
   /** UX-12: transcription is on for this deployment (off until the spend is approved). */ dictate?: boolean;
@@ -485,7 +528,7 @@ export function CaptureFlow({
   const [account, setAccount] = useState<string | null>(initialAccount);
   const [personaId, setPersonaId] = useState<number | null>(initialPersona?.id ?? null);
   const [context, setContext] = useState<string>(initialContext && CONTEXTS.some(([k]) => k === initialContext) ? initialContext : 'meeting');
-  const [text, setText] = useState('');
+  const [text, setText] = useState(initialText ?? '');
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const acctCtx = useAccountContext(account);
@@ -504,11 +547,13 @@ export function CaptureFlow({
   // Final review P1 (UX lens): the unsaved note survives a dropped connection and a reload on this phone.
   useEffect(() => {
     try {
-      const kept = window.localStorage.getItem(NOTE_DRAFT_KEY);
+      // R60: a note opened from a reply starts as that reply; an unsaved draft from elsewhere never replaces it.
+      const kept = initialText ? null : window.localStorage.getItem(NOTE_DRAFT_KEY);
       if (kept) setText((t) => t || kept);
     } catch {
       // Storage unavailable (private mode): the note stays in the page only.
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- once, on open
   }, []);
   useEffect(() => {
     try {

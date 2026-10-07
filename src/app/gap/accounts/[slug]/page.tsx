@@ -38,8 +38,9 @@ import { loadAccountContext } from '@/lib/gap/context/load';
 import { projectNow } from '@/lib/gap/context/now';
 import { loadReadyTarget } from '@/lib/gap/context/send-target';
 import { briefListenText, projectBrief } from '@/lib/gap/context/brief';
-import { accountSlug, accountTitle, gmailThreadHref, RECORD_REPLY_ANCHOR, withWorkContext } from '@/lib/gap/account-intel/href';
-import { RepliesTriage } from '@/app/gap/replies/replies-triage';
+import { accountSlug, accountTitle, gmailThreadHref, RECORD_REPLY_ANCHOR, replyCaptureHref, withWorkContext } from '@/lib/gap/account-intel/href';
+import { AccountReplies } from '@/components/gap/account-replies';
+import { classifyReply } from '@/lib/gap/replies/classify';
 import { OpenHashDetails } from '@/components/gap/open-hash-details';
 import { PendingLink } from '@/components/gap/pending-link';
 import { loadPursuit } from '@/lib/gap/pursuit/load';
@@ -294,6 +295,14 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
     const replyPrep = replyItem ? prepareReply({ id: replyItem.id, from: replyItem.contactEmail, fromName: replyItem.fromName ?? null, subject: replyItem.subject, snippet: replyItem.snippet, receivedAt: replyItem.receivedAt, threadId: replyItem.threadId ?? null, accountName: brief.accountName }, { mailbox: mailboxId, now }) : null;
     // R50: each obligation says which opportunity it belongs to (a deal, through its person's deal, or account-level).
     const nowDeals = (inputs.opportunity?.deals ?? []).filter((d): d is typeof d & { id: string } => !!d.id).map((d) => ({ id: d.id, name: d.name, contactIds: d.contactIds ?? [] }));
+    // R60, capture once on a reply: each waiting reply opens Capture on itself (their words, the person who wrote it,
+    // their own single deal), where its meaning and their words are recorded in one pass; no second form here.
+    const waitingReplies = (pursuit?.replyItems ?? []).filter((r) => !r.dispositionId).map((r) => {
+      const theirs = r.hubspotContactId ? nowDeals.filter((d) => d.contactIds.map(String).includes(String(r.hubspotContactId))) : [];
+      const kind = classifyReply({ snippet: r.snippet, subject: r.subject, from: r.contactEmail }).kind;
+      return { id: r.id, from: r.fromName?.trim() || r.contactEmail, receivedAt: r.receivedAt, snippet: r.snippet, href: withWorkContext(replyCaptureHref({ accountName: brief.accountName, replyId: r.id, personaId: r.personaId, deal: theirs.length === 1 ? theirs[0] : null }), brief.accountName, workIndex), label: kind === 'opt_out' ? 'Record the opt-out' : 'Log what they said' };
+    });
+    const replyCapture = replyItem ? waitingReplies.find((w) => w.id === replyItem.id)?.href ?? null : null;
     const scopePeople = personIndex(inputs.personas.map((p) => ({ personaId: p.id, name: p.name, title: p.title, email: null, hubspotContactId: p.hubspotContactId ? String(p.hubspotContactId) : null })));
     const obligations = withPhases(commitments, now, buyerMoves((pursuit?.replyItems ?? []).filter((r) => !r.dispositionId))).map((c) => ({ ...c, scopeLabel: nowDeals.length || c.dealId ? commitmentScope(c, dealRefs(nowDeals.map((d) => ({ ...d, stage: null }))), scopePeople, inputs.opportunity?.closed ?? []).label : null }));
     const ready = pursuit ? (brief.motion.type === 'FACT_LED' ? pursuit.ready : null) : brief.motion.type === 'FACT_LED' ? await loadReadyTarget(prisma, brief.accountName, now) : null;
@@ -304,7 +313,7 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
     // NEXT from the pursuit state (the chosen person and the action agree by construction); a meeting within 14 days
     // still leads (projectNow's own rule).
     const pursuitNext = pursuit && v.next.source !== 'meeting' && v.next.source !== 'obligation'
-      ? nextFromPursuit(pursuit.state, { hypothesisId: pursuit.hypothesisId, accountSlugHref: (view) => hrefFor(view), replyThreadHref: v.replyThread ? gmailThreadHref(v.replyThread, email) : null, captureHref: `/gap/capture?account=${encodeURIComponent(brief.accountName)}`, readyHref: pursuit.ready?.href ?? null })
+      ? nextFromPursuit(pursuit.state, { hypothesisId: pursuit.hypothesisId, accountSlugHref: (view) => hrefFor(view), replyThreadHref: v.replyThread ? gmailThreadHref(v.replyThread, email) : null, replyCaptureHref: replyCapture, captureHref: `/gap/capture?account=${encodeURIComponent(brief.accountName)}`, readyHref: pursuit.ready?.href ?? null })
       : null;
     const control: { href: string; label: string } | null =
       pursuitNext ? pursuitNext.control
@@ -416,12 +425,13 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
           workItems={replyPrep || recordReply || obligations.length ? (
             <>
               {/* On this page the record control is the section below (an anchor keeps the Work position). */}
-              {replyPrep ? <ReplyPrepPanel prep={replyPrep.record ? { ...replyPrep, record: { ...replyPrep.record, href: `#${RECORD_REPLY_ANCHOR}` } } : replyPrep} /> : null}
+              {/* R60: the prepared reply reads the message; its one record control is the section below (Capture). */}
+              {replyPrep ? <ReplyPrepPanel prep={{ ...replyPrep, record: null }} /> : null}
               {recordReply ? (
                 // R60: the reply is recorded here, on its own account (never the list of every account's replies).
                 <section id={RECORD_REPLY_ANCHOR} className="scroll-mt-16 space-y-2 rounded-md border border-[var(--border)] p-3" aria-labelledby="record-reply-heading" data-testid="record-reply">
                   <h2 id="record-reply-heading" className="text-sm font-semibold">Record what they said</h2>
-                  <RepliesTriage account={brief.accountName} />
+                  <AccountReplies items={waitingReplies} accountName={brief.accountName} />
                 </section>
               ) : null}
               <AccountObligations items={obligations} />

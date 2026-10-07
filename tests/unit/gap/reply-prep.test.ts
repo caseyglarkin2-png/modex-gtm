@@ -78,7 +78,8 @@ describe('a real reply stops cold follow-up at the account (R42, pinned)', () =>
     const followUp = { commitmentId: 'send:k', accountName: 'Nfi Scratch Co', kind: 'follow_up' as const, title: 'Follow up with Ann Scratch', basis: null, owner: 'x', dueAt: '2026-10-06T13:00:00.000Z', person: { personaId: 1, name: 'Ann Scratch', email: 'ann@nfi.example.com' }, dealId: null, threadId: null, status: 'waiting' as const, snoozeUntil: null, dependency: "Ann's reply", proof: null, reason: null, source: { kind: 'send' as const, id: 'k' }, detail: { stepIndex: 1 }, createdAt: '2026-10-01T13:00:00.000Z', createdBy: 'x', updatedAt: '2026-10-01T13:00:00.000Z', updatedBy: 'x' };
     const day = workDay({ now: NOW, candidates: [], motions: [], inDeals: { status: 'complete', accounts: [] }, held: new Map(), commitments: [followUp], replies: [{ accountName: 'Nfi Scratch Co', contactEmail: 'ann@nfi.example.com', subject: 'Re', snippet: 'You should talk to Bob Lane instead.', receivedAt: '2026-10-06T13:30:00Z', id: 'm9', threadId: 't9' }], mailbox: 'casey@yardflow.ai' });
     const card = day.cards[0];
-    expect([card.stateKind, card.state, card.next?.label]).toEqual(['replied', 'They named someone', 'Record who they named']);
+    // R60, capture once: the card's one entry opens Capture, where who they named is recorded with what it means.
+    expect([card.stateKind, card.state, card.next?.label]).toEqual(['replied', 'They named someone', 'Log what they said']);
     expect(card.obligations).toEqual([]);
     expect(card.reply).toMatchObject({ human: 'referral', named: 'Bob Lane', copyFamily: null });
     expect(day.waiting.map((w) => [w.title, w.line])).toEqual([['Follow up with Ann Scratch', 'ann@nfi.example.com replied Oct 6. Answer that, not a follow-up.']]);
