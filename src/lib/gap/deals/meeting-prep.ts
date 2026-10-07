@@ -108,6 +108,11 @@ export function meetingState(m: Pick<MeetingRowInput, 'at' | 'status'>, now: Dat
 
 const when = (iso: string) => new Date(iso).toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: 'America/New_York' });
 const dayOf = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' });
+/**
+ * R63-B N9: a fact's publication date is a calendar day (stored at midnight UTC), read the way NOW reads it (UTC), so
+ * the brief and the page say the same day (it said Sep 9 here and Sep 10 on the page). Instants stay New York.
+ */
+const factDayOf = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
 const clean = (s: string | null | undefined) => (s ?? '').replace(/\s+/g, ' ').trim();
 
 export interface PrepInput {
@@ -165,7 +170,7 @@ export function prepareMeeting(i: PrepInput): MeetingPrep {
   // Sprint 5 review: a meeting bound to no deal says which deal each line came from (never two deals' words unlabeled).
   const confirmedNeeds: PrepLine[] = i.needs.map((n) => ({ text: `${NEED_WORD[n.type] ?? n.type}: "${n.quote}"`, trust: 'Buyer confirmed', source: `${n.who}, ${dayOf(n.at)}${n.scopeLabel === 'account-level' ? ', account-level' : !i.deal ? `, ${n.scopeLabel}` : ''}` }));
   const toTest: PrepLine[] = i.guesses.slice(0, 2).map((g) => ({ text: g, trust: 'Our guess', source: 'the working thesis: ask, never assert' }));
-  const publicContext: PrepLine[] = i.publicFacts.slice(0, 2).map((f) => ({ text: `"${f.quote}"`, trust: 'Public source', source: `${f.title}, ${dayOf(f.publishedAt)}; public, not the buyer's words`, href: f.url }));
+  const publicContext: PrepLine[] = i.publicFacts.slice(0, 2).map((f) => ({ text: `"${f.quote}"`, trust: 'Public source', source: `${f.title}, ${factDayOf(f.publishedAt)}; public, not the buyer's words`, href: f.url }));
   const materials: PrepLine[] = i.materials.filter((x) => x.href).slice(0, 3).map((x) => ({ text: x.label, trust: 'Ours', href: x.href }));
   const startingPoint = state === 'canceled'
     ? headline

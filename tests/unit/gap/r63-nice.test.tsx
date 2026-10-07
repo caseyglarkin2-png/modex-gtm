@@ -17,6 +17,7 @@ import { CANON_PROOF } from '@/lib/gap/compiler/canon';
 import { canonPhrasingProblems } from '@/lib/gap/compiler/checks/c01-evidence';
 import { BEST_PROOF_MEASURED } from '@/lib/gap/story/anchor';
 import { nextStepLine } from '@/components/gap/deal-opportunities';
+import { prepareMeeting } from '@/lib/gap/deals/meeting-prep';
 import { MeetingPrepView } from '@/components/gap/meeting-prep';
 import { HypothesisList } from '@/app/gap/hypotheses/hypothesis-list';
 import type { HypothesisRow } from '@/components/gap/hypothesis-drawer';
@@ -39,6 +40,11 @@ describe('R63-B NICE', () => {
     expect(nextStepLine('Pilot scope call with Ann', ['Pilot scope'])).toEqual({ kind: 'canceled', text: 'HubSpot still lists "Pilot scope call with Ann" as the next step, but that meeting was canceled: there is no next step until it is rebooked or a new one is set.' });
     expect(nextStepLine('Pilot scope call with Ann', ['Columbus yard walk'])).toEqual({ kind: 'next', text: 'HubSpot next step: Pilot scope call with Ann' });
     expect(nextStepLine(null, ['Pilot scope']).kind).toBe('none');
+  });
+
+  it('N9: a fact\'s date is the same day in the meeting brief as on the page (a calendar day, read in UTC)', () => {
+    const p = prepareMeeting({ meeting: { id: 1, at: '2026-10-08T14:00:00.000Z', status: 'Scheduled', objective: 'Columbus yard walk', attendees: null, dealId: '1', createdAt: '2026-10-01T00:00:00.000Z', updatedAt: '2026-10-01T00:00:00.000Z' }, now: new Date('2026-10-07T15:00:00Z'), deal: null, people: [], commitments: [], needs: [], unknownQuestions: [], learningObjective: null, guesses: [], publicFacts: [{ quote: 'Kroger is automating its Ohio distribution center.', title: 'Kroger Scratch Co r63 automates Ohio DC', url: null, publishedAt: '2026-09-10T00:00:00.000Z' }], materials: [] } as never);
+    expect(p.publicContext[0].source).toBe("Kroger Scratch Co r63 automates Ohio DC, Sep 10; public, not the buyer's words");
   });
 
   it('N3: no em dash in the composer\'s title', () => {
