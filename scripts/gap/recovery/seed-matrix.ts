@@ -48,8 +48,13 @@ export interface MatrixAccount {
 
 export interface FactOptions {
   title?: string;
-  /** null: an undated fact (observed_at null is refused by the schema, so the page date is what goes missing). */
+  /** The fact's date (observed_at; the schema requires one). */
   observedAt?: string;
+  /** A recorded expiry (freshness_expires_at), as production rows carry it. */
+  freshnessExpiresAt?: string;
+  /** The full evidence URL, when a case reproduces a real row's (default: a news.example.com page per fact). */
+  url?: string;
+  confidence?: number;
   type?: string;
   host?: string;
   sourceType?: 'public_primary' | 'public_secondary' | 'first_party_intent' | 'first_party' | 'crm' | 'manual';
@@ -115,11 +120,12 @@ export function createMatrixSeeder(prisma: PrismaClient, tag: string, now: Date 
       type: (over.type ?? 'site_expansion') as never,
       title,
       sourceType: (over.sourceType ?? 'public_secondary') as never,
-      evidenceUrl: `https://${over.host ?? 'news.example.com'}/${a.slug}/${key}-${(accession += 1)}`,
+      evidenceUrl: over.url ?? `https://${over.host ?? 'news.example.com'}/${a.slug}/${key}-${(accession += 1)}`,
       evidenceText: text,
       externalOk: over.externalOk ?? true,
       observedAt: new Date(over.observedAt ?? '2026-09-16T00:00:00Z'),
-      confidence: 80,
+      confidence: over.confidence ?? 80,
+      ...(over.freshnessExpiresAt ? { freshnessExpiresAt: new Date(over.freshnessExpiresAt) } : {}),
       ...(over.claimClass ? { claimClass: over.claimClass } : {}),
       metadata: { ...(over.verified === false ? {} : { verified: VERIFIED_EXCERPT }), ...(over.claimClass ? { claimType: over.claimClass.toLowerCase(), claimAttributes: over.claimAttributes ?? {} } : {}), ...(over.metadata ?? {}) },
       registeredBy: MATRIX_ACTOR,

@@ -38,6 +38,10 @@ describe.skipIf(!RUN)('R62 matrix: the Pepsi regression (the page read, the page
   /** Pepsi-shaped accounts with FRESH dates (the shape, not the calendar): A drafts Tulsa first, B drafts Gatik first. */
   let freshA: Acct;
   let freshB: Acct;
+  /** The PRODUCTION shape of the Tulsa row and its stranded draft (the lead read the row read-only on 2026-10-07). */
+  let prod: Acct;
+  let prodLegacyId = '';
+  const PROD_EXPIRES = '2026-11-20T10:17:19Z';
   const tag = `mp${Date.now().toString(36)}`;
   const state: { tulsaId?: string; tulsaPreview?: { to: string; subject: string; body: string; contentHash: string }; gatikId?: string; withdrawnId?: string } = {};
 
@@ -63,6 +67,34 @@ describe.skipIf(!RUN)('R62 matrix: the Pepsi regression (the page read, the page
     };
     freshA = await pepsiShape('Pepsi Fresh A');
     freshB = await pepsiShape('Pepsi Fresh B');
+    // The production row, field for field: type site_expansion, source_type public_secondary, claim_class null,
+    // external_ok, observed_at 2026-07-23T10:17:19Z, freshness_expires_at 2026-11-20T10:17:19Z, confidence 60, a Supply
+    // Chain Dive URL and its sentence (the account's name in place of PepsiCo), metadata keys change, provider, verified,
+    // retrievedAt, researchRunId and no continuity key. Then the stranded draft R00 found on it: unmapped family, no
+    // source_ref, the fact linked, persona Tom, one propose event (made by the old anchor before R11).
+    {
+      const { proposeHypothesis } = await import('@/lib/gap/hypothesis/service');
+      const { citedQuote } = await import('@/lib/gap/research/propose');
+      const a = await m.account('Pepsiprod');
+      const tom = await m.person(a, 'Tom', 'Senior Director - Logistics, Distribution & Transportation');
+      await m.person(a, 'Kay', 'Senior Director - Transportation');
+      const f = await m.fact(a, 'tulsa', `${a.name} will close its warehouse operations at its Pepsi Beverages' Tulsa, Oklahoma, production facility and shift duties to a new site in the Tulsa area, a spokesperson told Supply Chain Dive.`, {
+        title: `${a.name} to cease warehouse operations at Oklahoma production site`,
+        type: 'site_expansion',
+        sourceType: 'public_secondary',
+        externalOk: true,
+        observedAt: '2026-07-23T10:17:19Z',
+        freshnessExpiresAt: PROD_EXPIRES,
+        confidence: 60,
+        url: `https://www.supplychaindive.com/news/${a.slug}-to-cease-warehouse-operations-at-oklahoma-production-site/825833/`,
+        metadata: { change: 'closure', provider: 'web', retrievedAt: '2026-10-06T18:31:51Z', researchRunId: `matrix-${tag}` },
+      });
+      await m.choose(a, tom.id);
+      const legacy = await proposeHypothesis(prisma, { accountName: a.name, primaryPersonaId: tom.id, persona: 'transportation', problemFamily: 'unmapped', observation: citedQuote(f.title, f.text, f.id, a.name), problemHypothesis: 'My guess is that this change moves load onto the gates, yards and docks they run.', rootCauseHypotheses: [], impactHypotheses: [], falsificationQuestions: ['How do trailers get checked in today?'], whatANoMeans: null, confidence: 40, signalIds: [f.id], createdBy: 'casey@freightroll.com' } as never);
+      if (!legacy.ok) throw new Error(JSON.stringify(legacy));
+      prod = a as unknown as Acct;
+      prodLegacyId = legacy.id;
+    }
     h = await startMatrixHarness({ companies: [...first.stub.companies, ...second.stub.companies, ...m.companies] });
     await h.control({ companyProps: { intent_score: '60', last_intent_at: new Date().toISOString() } });
   }, 300_000);
@@ -186,21 +218,35 @@ describe.skipIf(!RUN)('R62 matrix: the Pepsi regression (the page read, the page
     expect((row!.metadata as { approach?: string } | null)?.approach ?? 'event_led').not.toBe('event_led');
   }, 60_000);
 
-  // DEFECT src/lib/gap/compiler/evidence-from-signals.ts:19 (EVIDENCE_MAX_AGE_DAYS = 45; :55-57) against
-  // src/lib/gap/research/evidence-gate.ts:263 and src/lib/gap/story/anchor.ts (draftable): on the production shape
-  // (the Tulsa fact dated 2026-07-23, as in the recording) the page offers the Tulsa story, the draft is submitted,
-  // APPROVE AND USE approves, activates and routes a READY card for Tom, and the email preview then refuses
-  // `copy_rejected` ("C01: marker [[SRC:...]] cites stale evidence"): the recording's dead-end class, an advertised
-  // action the system cannot complete. The gate and the compiler must agree: a fact past the compiler's age is not
-  // offered or approvable as an opening, or its preview renders.
-  defect('the production-shaped Pepsi story the page offers and approves can be previewed for Tom (no stale-evidence dead end after approval)', async () => {
-    const tom = pepsi.people.find((p) => p.name.startsWith('Tom'))!;
-    const dr = await draftFromPage(pepsi, /Tulsa/);
-    expect(dr.status, JSON.stringify(dr.body)).toBe(201);
-    const decisionId = await useAndCard(pepsi, dr.body.hypothesisId!, tom.id);
+  // Was DEFECT src/lib/gap/compiler/evidence-from-signals.ts:19 (a flat 45-day evidence age) against
+  // research/evidence-gate.ts:263 and story/anchor.ts: the approved Tulsa story dead-ended at the preview with
+  // copy_rejected "C01 ... cites stale evidence". Fixed by the writer at daa61ff3 (one freshness clock,
+  // research/currentness.ts). This case carries the PRODUCTION row's own fields and the stranded draft R00 found, so the
+  // green proves the real repair path: the page's own payload adopts the draft, APPROVE AND USE routes Tom's card, and the
+  // email previews. After the row's recorded expiry (2026-11-20) the honest answer is that the story is no longer offered.
+  it('the production Pepsi repair: the stranded draft is adopted from the page payload, approved and used, and the email previews for Tom', async () => {
+    const tom = prod.people.find((p) => p.name.startsWith('Tom'))!;
+    const tulsa = prod.facts.find((f) => f.label === 'tulsa')!;
+    if (Date.now() >= new Date(PROD_EXPIRES).getTime()) {
+      const { anchor } = await pageRead(prod);
+      expect(anchor.draftable.map((d) => d.factId)).not.toContain(tulsa.id);
+      return;
+    }
+    const { storyDraftPayload } = await import('@/lib/gap/story/draft-defaults');
+    const { citedQuote } = await import('@/lib/gap/research/propose');
+    const { POST } = await import('@/app/api/gap/story/draft/route');
+    const payload = storyDraftPayload({ accountName: prod.name, factId: tulsa.id, claimClass: null, proposedObservation: citedQuote(tulsa.title, tulsa.text, tulsa.id, prod.name), person: { personaId: tom.id, title: tom.title } });
+    const res = await POST(req('/api/gap/story/draft', 'POST', payload));
+    const body = (await res.json()) as { hypothesisId?: string; existing?: boolean; preparation?: string; family?: string };
+    expect([res.status, body.hypothesisId, body.existing, body.preparation, body.family], JSON.stringify(body)).toEqual([200, prodLegacyId, true, 'submitted', 'hidden_capacity']);
+    const decisionId = await useAndCard(prod, prodLegacyId, tom.id);
     const pv = await send(decisionId);
     expect(pv.status, JSON.stringify(pv.body)).toBe(200);
     expect(pv.body.preview!.to).toBe(tom.email);
+    expect(pv.body.preview!.body).toMatch(/Tulsa, Oklahoma/);
+    const ev = await prisma.hypothesisEvent.findMany({ where: { hypothesis_id: prodLegacyId }, select: { action: true }, orderBy: { created_at: 'asc' } });
+    expect(ev.map((e) => e.action)).toEqual(['propose', 'edit', 'submit', 'approve', 'activate']);
+    expect(h.writtenTo(tom.email)).toBe(0);
   }, 300_000);
 
   it('the production shape reaches a READY card for Tom on the Tulsa story (draft, approve, use, route) without a family question', async () => {
