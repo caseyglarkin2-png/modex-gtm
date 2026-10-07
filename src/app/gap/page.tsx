@@ -414,7 +414,7 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
   ]);
   const mailbox = process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() || null;
   const meetings = meetingRows.filter((m) => !m.canceled).map((m) => ({ accountName: m.accountName, at: m.at, what: m.what, meetingId: m.meetingId, dealId: m.dealId }));
-  const canceledMeetings = meetingRows.filter((m) => m.canceled).map((m) => ({ accountName: m.accountName, at: m.at, what: m.what, meetingId: m.meetingId }));
+  const canceledMeetings = meetingRows.filter((m) => m.canceled).map((m) => ({ accountName: m.accountName, at: m.at, what: m.what, meetingId: m.meetingId, dealId: m.dealId }));
   const [priorities, followUpPlans, meetingPreps] = await Promise.all([
     loadAccountPriorities(prisma, [...new Set([...data.workAccounts, ...commitments.map((c) => c.accountName)])]).catch(() => new Map()),
     // R43: each follow-up due today, read off the person's own history (prepare, by hand, a saved draft, unknown, held).

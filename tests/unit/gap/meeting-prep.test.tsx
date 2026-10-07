@@ -145,6 +145,10 @@ describe('Work follows the calendar (R51)', () => {
     const rebooked = input({ commitments: [prepareCommitment], canceledMeetings: [{ accountName: ACCOUNT, at: TOMORROW_10, what: 'Pilot scope call', meetingId: 12 }], meetings: [{ accountName: ACCOUNT, at: '2026-10-07T18:00:00.000Z', what: 'Pilot scope call', meetingId: 13 }] });
     expect(rebooked.cards.find((c) => c.accountName === ACCOUNT)?.obligations?.map((x) => x.kind).sort()).toEqual(['meeting', 'prepare_meeting']);
     expect(rebooked.waiting).toEqual([]);
+    // A meeting on ANOTHER deal does not rebook the canceled pilot call: it is still said, and its preparation waits.
+    const otherDeal = input({ commitments: [{ ...prepareCommitment, dealId: '70001' }], canceledMeetings: [{ accountName: ACCOUNT, at: TOMORROW_10, what: 'Pilot scope call', meetingId: 12, dealId: '70001' }], meetings: [{ accountName: ACCOUNT, at: '2026-10-07T18:00:00.000Z', what: 'Columbus walk', meetingId: 14, dealId: '70002' }] });
+    expect(otherDeal.waiting.map((w) => w.line)).toEqual(['The meeting on the calendar was canceled (Oct 7 10:00 AM): nothing to prepare until it is rebooked.', 'Canceled: nothing to prepare unless it is rebooked.']);
+    expect(otherDeal.cards.find((c) => c.accountName === ACCOUNT)?.obligations?.map((x) => x.kind)).toEqual(['meeting']);
   });
 
   it('the day loader returns canceled rows marked, and the starting point reads the meeting\'s own deal and confirmed words', async () => {
