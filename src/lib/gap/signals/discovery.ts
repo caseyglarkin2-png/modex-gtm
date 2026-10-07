@@ -64,6 +64,11 @@ export function headlineMentions(headline: string, profile: Pick<WatchProfile, '
 // Name in the headline (+2) plus one operational category (4): every discovered outreach candidate is followed up.
 export const DISCOVERY_RESEARCH_SCORE = 6;
 export const DISCOVERY_TIME_BUDGET_MS = 200_000;
+/**
+ * Batch item 10 (R25): the news pass queues at most this many headlines for research a day (it had no daily cap; the
+ * grounded pass has its own, GROUNDED_QUEUE_PER_DAY). Read from the discovery ledger's own per-turn `queued` counts.
+ */
+export const DISCOVERY_QUEUE_PER_DAY = 40;
 
 
 /** "Headline - Publisher" (the Google News title shape) to the headline. */
@@ -183,6 +188,14 @@ export async function runDiscovery(
     asks.set(r.subject_id, (asks.get(r.subject_id) ?? 0) + 1);
   }
   const order = [...profiles].sort((a, b) => (lastAt.get(a.accountName) ?? 0) - (lastAt.get(b.accountName) ?? 0) || a.accountName.localeCompare(b.accountName));
+  // Batch item 10 (R25): today's news research budget, from the turns already recorded; unreadable queues nothing.
+  let queuedToday = 0;
+  try {
+    const today: Array<{ payload?: Record<string, unknown> | null }> = await prisma.gapAuditEvent.findMany({ where: { kind: DISCOVERY_AUDIT, created_at: { gte: new Date(opts.now.getTime() - 86_400_000) } }, select: { payload: true }, take: 2_000 });
+    queuedToday = (today ?? []).reduce((n, r) => n + (Number(r.payload?.queued ?? 0) || 0), 0);
+  } catch {
+    queuedToday = DISCOVERY_QUEUE_PER_DAY;
+  }
   const take = order.slice(0, Math.max(1, Math.min(opts.accounts ?? DISCOVERY_ACCOUNTS_PER_RUN, 40)));
 
   for (const p of take) {
@@ -233,9 +246,10 @@ export async function runDiscovery(
           continue;
         }
         out.captured += 1;
-        if (!mention && fresh && cls.relevance === 'outreach_evidence_candidate' && cls.score >= DISCOVERY_RESEARCH_SCORE) {
+        if (!mention && fresh && cls.relevance === 'outreach_evidence_candidate' && cls.score >= DISCOVERY_RESEARCH_SCORE && queuedToday < DISCOVERY_QUEUE_PER_DAY) {
           await prisma.gapSignal.update({ where: { id: r.signal.id }, data: { research_status: 'queued' } });
           out.queued += 1;
+          queuedToday += 1;
         }
       }
       await sleep(400);
