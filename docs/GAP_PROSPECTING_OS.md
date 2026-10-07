@@ -1765,6 +1765,101 @@ each change. Checklist, what was checked and what changed:
 - Found for R61: after recording a reply the page re-read itself and NEXT moved after 13.2 s with no reload.
 Receipt (production build, the scratch corpus, the HubSpot stub, mirror unset; scratchpad `r60-final/` and `r60-walk-final/`): Work's first card at 641 px with nothing above it but the day and the health line; the opt-out card opened Walmart at its record section (the Work position kept), recorded there, NEXT moved to "Find the operator", Next account went to account 6 of 9; Fedex's NEXT put the approved story in use on the page, then "Prepare the email to Glen" opened the pack (/gap/pack, then the pack page with Back to Work / Next account); Kroger's deal card opened the brief with both deals' stages in words and the bar; Heb's research NEXT said its move. Lane links on Work and every account page: 0. Internal words outside the sanctioned vocabulary: 0. Each change has focused tests and a deliberate mutation that turned its owning test red (6 mutations).
 
+**R61 what makes Casey wait (2026-10-07).** Measured on the production build (`next build`, then `next start` against
+the scratch corpus with the HubSpot stub), headless Chrome, 30 navigations per condition: Work, a corpus account
+(Fedex) and a 100-person account (the corpus Nfi with 94 contacts added), cold (a fresh server process and a fresh
+browser profile for every navigation: empty memory caches, no asset cache) and warm (one server, primed twice, then 30
+navigations). Local reads are loopback and hide the cost production pays per round trip (Vercel iad1 to the us-west2
+database, the HubSpot API), so each warm condition was also measured through two counting proxies that add 66 ms per
+database round trip and 150 ms per HubSpot call, with the statements of one navigation logged (Postgres protocol) to
+find the serial chains. Fixed, each with focused tests and a deliberate mutation that turned its owning test red:
+- 19c0c20e, an in-place action showed its result after 13.9 s: on the account page, router.refresh() fetched the new page in about 200 ms but the browser showed it only on the next React update anywhere (the notification bell's 15 s poll; with the poll held, never; Work committed the same refresh in 119 ms). Every GAP refresh now announces itself and the GAP layout's nudge updates over the next seconds: a recorded reply's NEXT now moves at 236 ms (poll held). Two experiments ruled out the account page's streamed boundary and the links' pending status; the framework cause is DEBT (named in refresh-now.tsx), the wait itself is fixed.
+- 11dd56f0, the account page's reads in series and repeated: owner resolution read the account row first and the people-dependent reads one after another (about nine round trips in series), the send gate and its copy check waited for every other pursuit read, the copy families were asked twice per page (the queue and the pursuit read), the employment context twice per request, the deal-state reconciliation blocked the page, and an account-scoped card read pulled every account's routing decisions. Now: name-only reads start with the account row, the people-dependent reads run together, the send gate starts first, the copy families are asked once a minute per shape and per database client, the employment context once per request, the decisions read is scoped to the account, and the reconciliation runs beside the page's reads (the obligations wait for it).
+- 31addc8d, two more chains: a contact's employment asks the people, their enrichments and their confirmed answers at once (three in series, twice per view), and the HubSpot identity asks the company read and the domain search at once (judged in the same order, so the reason given never changes).
+Result: the account page's full page under production-like latency went from p50 4,503 / p90 5,533 ms to p50 2,950 / p90 3,005 ms (Fedex) and from p50 5,003 / p90 5,553 ms to p50 2,480 / p90 2,993 ms (100 people); its serial database waves from 56 to 31 (one navigation's statement log, before the last commit). The decision (the account's state and NEXT from the remembered summary, UX-14) is on screen at p50 319 to 326 ms before the full page arrives. Work stays at p50 398 / p90 916 ms (its two-minute read).
+The principles, checked:
+- Useful content first, decision-critical before secondary: the account's state and NEXT are on screen at about a third of a second (the remembered summary), its full page follows; Work's cards arrive with the page.
+- No repeated expensive reads where durable state exists: CHANGED as above (copy families, employment context, the account's routing decisions). The account row is still read by several loaders with different fields (nine reads, one wave each but in parallel): named, not on the critical path.
+- No busy UI over bookkeeping: CHANGED (the deal-state reconciliation off the page's path; the stalled refresh). The summary write after a render is not awaited. Work's closed-deal sweep is still awaited but bounded (five accounts, once per five minutes per instance): named.
+- No freshness recomputation of unchanged facts in a normal session: CHANGED for the seeded copy families (a minute). HubSpot deal truth is read live on every account view by design (every gate depends on it).
+- PARTIAL, dependency (the platform): a cold first byte is 1.47 s on the sign-in page (no session, no database) against 1.62 to 1.71 s on GAP's pages, so a cold start is the server starting (module loading), not GAP's reads; it needs a platform-level change (bundle size or warm instances), not a read fix. And the Prisma engine checks each idle pooled connection with a SELECT 1 before reuse (29 per account view, one round trip each); it is the engine's own behavior, not configurable from GAP.
+
+Percentiles (ms from the navigation start; n = 30 per condition; "decision" is the move on screen: Work's first card, an account's NEXT from the remembered summary or the full page; "full" is the full page: Work's list, the account's own NEXT):
+- Local (loopback database and HubSpot stub):
+  - warm Work, first byte: before: p50 5, p90 7, max 10; after: p50 5, p90 6, max 7.
+  - warm Work, decision: before: p50 198, p90 205, max 208; after: p50 199, p90 208, max 229.
+  - warm Work, full page: before: p50 198, p90 206, max 209; after: p50 200, p90 204, max 212.
+  - warm a corpus account (Fedex), first byte: before: p50 6, p90 8, max 9; after: p50 5, p90 7, max 8.
+  - warm a corpus account (Fedex), decision: before: p50 132, p90 148, max 216; after: p50 132, p90 142, max 149.
+  - warm a corpus account (Fedex), full page: before: p50 207, p90 215, max 216; after: p50 205, p90 214, max 220.
+  - warm the 100-person account (Nfi), first byte: before: p50 6, p90 7, max 8; after: p50 6, p90 7, max 8.
+  - warm the 100-person account (Nfi), decision: before: p50 130, p90 138, max 147; after: p50 131, p90 140, max 156.
+  - warm the 100-person account (Nfi), full page: before: p50 207, p90 218, max 410; after: p50 207, p90 217, max 219.
+  - cold Work, first byte: before: p50 1602, p90 1622, max 1630; after: p50 1621, p90 1688, max 1705.
+  - cold Work, decision: before: p50 1987, p90 2496, max 2526; after: p50 2002, p90 2546, max 2567.
+  - cold Work, full page: before: p50 1987, p90 2496, max 2526; after: p50 2002, p90 2546, max 2567.
+  - cold a corpus account (Fedex), first byte: before: p50 1677, p90 1701, max 1716; after: p50 1714, p90 1773, max 1780.
+  - cold a corpus account (Fedex), decision: before: p50 1983, p90 2023, max 2103; after: p50 2016, p90 2149, max 2160.
+  - cold a corpus account (Fedex), full page: before: p50 2581, p90 2618, max 2629; after: p50 2616, p90 2666, max 2680.
+  - cold the 100-person account (Nfi), first byte: before: p50 1708, p90 1742, max 1756; after: p50 1686, p90 1729, max 1737.
+  - cold the 100-person account (Nfi), decision: before: p50 2001, p90 2049, max 2121; after: p50 1966, p90 2096, max 2129.
+  - cold the 100-person account (Nfi), full page: before: p50 2613, p90 2654, max 2662; after: p50 2579, p90 2641, max 2642.
+- Production-like (the database 66 ms and HubSpot 150 ms per round trip, through counting proxies):
+  - warm Work, decision: before: p50 404, p90 932, max 938; after: p50 398, p90 916, max 945.
+  - warm Work, full page: before: p50 404, p90 932, max 939; after: p50 399, p90 916, max 945.
+  - warm Work, database round trips: before: p50 16, p90 109, max 112; after: p50 12, p90 17, max 17.
+  - warm a corpus account (Fedex), decision: before: p50 230, p90 413, max 421; after: p50 319, p90 406, max 415.
+  - warm a corpus account (Fedex), full page: before: p50 4503, p90 5533, max 6034; after: p50 2950, p90 3005, max 3497.
+  - warm a corpus account (Fedex), database round trips: before: p50 144, p90 188, max 190; after: p50 143, p90 171, max 194.
+  - warm the 100-person account (Nfi), decision: before: p50 399, p90 421, max 423; after: p50 326, p90 416, max 428.
+  - warm the 100-person account (Nfi), full page: before: p50 5003, p90 5553, max 6044; after: p50 2480, p90 2993, max 3011.
+  - warm the 100-person account (Nfi), database round trips: before: p50 153, p90 182, max 198; after: p50 142, p90 167, max 187.
+- The cold floor: cold the sign-in page first byte p50 1474 ms; cold Notes first byte p50 1571 ms (no session or database on the sign-in page): a cold first byte is the server starting, not GAP's reads.
+
+Raw values (ms, in measurement order), decision then full page; production-like rows add the database round trips:
+- local before, warm:work, decision: 196,208,198,201,139,199,203,205,198,198,191,205,195,196,191,198,198,194,144,197,192,197,196,139,200,200,133,192,198,208
+- local before, warm:work, full: 196,209,198,201,139,199,203,205,198,198,192,206,195,196,191,203,198,194,144,197,192,197,196,139,200,200,133,193,198,208
+- local before, warm:corpus, decision: 216,211,135,138,127,134,137,119,136,128,124,130,129,119,128,132,134,129,130,123,129,137,135,128,131,148,134,132,132,126
+- local before, warm:corpus, full: 216,211,215,215,210,210,213,201,213,181,206,206,206,198,203,208,210,204,205,201,203,215,212,205,205,184,215,212,207,207
+- local before, warm:hundred, decision: 135,144,135,130,138,123,126,136,130,135,128,132,131,130,126,126,128,121,130,128,129,125,128,130,121,130,120,147,132,121
+- local before, warm:hundred, full: 331,218,211,205,211,410,207,213,209,212,209,209,210,209,203,206,203,204,204,207,207,203,212,205,203,205,200,189,211,202
+- local before, cold:work, decision: 1959,1984,1962,2451,2439,1958,1949,1991,1964,2006,1979,2003,1963,1978,2481,2012,1980,1977,1976,2496,1973,2007,2526,1966,1987,2019,2500,1992,1982,1994
+- local before, cold:work, full: 1959,1984,1962,2451,2439,1959,1949,1991,1964,2006,1979,2003,1963,1978,2481,2012,1980,1977,1976,2496,1973,2007,2526,1966,1987,2019,2501,1992,1982,1994
+- local before, cold:corpus, decision: 1904,1877,1992,2012,2023,1907,1919,1930,1909,1966,1955,1957,1966,2046,1982,1962,1963,1952,1994,1991,1995,1983,1988,1957,1994,1989,1999,1983,2014,2103
+- local before, cold:corpus, full: 2511,2496,2505,2526,2534,2529,2542,2558,2516,2581,2575,2588,2574,2550,2600,2576,2582,2565,2620,2614,2603,2598,2604,2578,2610,2608,2615,2601,2629,2618
+- local before, cold:hundred, decision: 2017,2001,2006,1983,2019,2016,2018,2047,2121,2104,1976,2034,2025,2049,2014,2026,2025,1997,1913,1940,1925,1881,1910,1959,1786,1870,1793,1901,1994,1884
+- local before, cold:hundred, full: 2627,2625,2634,2590,2639,2634,2631,2654,2625,2613,2590,2642,2655,2662,2636,2645,2639,2603,2545,2558,2536,2505,2539,2591,2526,2519,2504,2520,2501,2496
+- local after, warm:work, decision: 212,196,200,198,199,229,196,203,197,193,194,197,195,199,199,197,204,177,196,198,198,200,200,194,200,203,203,203,200,208
+- local after, warm:work, full: 212,197,201,200,199,178,196,203,198,193,194,197,196,199,200,197,204,177,201,198,199,200,202,194,201,203,203,203,201,208
+- local after, warm:corpus, decision: 129,145,133,138,132,140,149,126,132,130,124,127,131,142,125,138,133,122,129,129,125,132,129,142,135,132,129,131,132,129
+- local after, warm:corpus, full: 208,220,211,214,210,178,188,210,208,210,203,204,206,182,203,218,175,201,205,205,167,207,204,181,181,212,205,207,211,205
+- local after, warm:hundred, decision: 127,140,156,134,130,133,137,131,132,128,131,135,125,133,134,135,125,121,121,121,140,131,136,127,128,131,127,133,130,126
+- local after, warm:hundred, full: 207,217,198,213,214,210,217,209,208,202,212,211,204,176,177,210,203,200,200,200,214,207,219,202,205,207,169,208,205,201
+- local after, cold:work, decision: 2410,1993,1970,1972,1987,1982,1967,1995,1990,1979,1986,1978,2011,2013,2018,2087,1960,1997,2002,1992,2016,1987,2546,2030,2016,2081,2102,2567,2070,2566
+- local after, cold:work, full: 2410,1993,1970,1972,1987,1983,1967,1995,1990,1979,1987,1978,2012,2028,2018,2087,1960,1997,2002,1992,2016,1987,2546,2031,2016,2081,2102,2567,2070,2566
+- local after, cold:corpus, decision: 1971,2045,2047,1995,1947,2071,2056,1985,1986,1991,2148,2152,2044,2042,2054,2149,2160,2118,2009,1983,1992,2005,1983,1995,1990,2010,2016,1979,2025,2060
+- local after, cold:corpus, full: 2593,2659,2658,2614,2562,2578,2563,2589,2596,2611,2680,2654,2659,2654,2666,2656,2668,2624,2616,2595,2619,2635,2589,2611,2609,2613,2628,2602,2645,2564
+- local after, cold:hundred, decision: 1995,1997,2018,2033,2129,2096,2013,1997,2028,2006,1985,2025,2110,1994,1934,1926,1937,1887,1875,1913,1950,1966,1938,1934,1923,1930,1957,1917,1923,1894
+- local after, cold:hundred, full: 2620,2617,2641,2641,2635,2597,2635,2615,2635,2623,2602,2642,2627,2626,2551,2539,2579,2506,2483,2537,2578,2578,2554,2560,2541,2555,2578,2544,2544,2527
+- production-like before, warm:work, decision: 936,904,932,926,930,400,938,399,404,396,393,923,395,318,403,401,399,327,400,397,397,903,928,904,453,916,432,455,314,394
+- production-like before, warm:work, full: 936,904,932,927,930,400,939,399,404,396,393,923,395,318,403,401,399,327,400,397,397,903,929,905,454,916,432,455,314,394
+- production-like before, warm:work, db: 99,112,102,109,31,17,15,16,14,17,16,16,13,13,13,14,16,13,13,13,13,95,109,106,44,18,15,16,12,13
+- production-like before, warm:corpus, decision: 318,315,230,202,228,213,278,210,421,219,220,198,252,310,233,308,224,230,206,232,215,207,206,203,211,313,406,413,203,413
+- production-like before, warm:corpus, full: 6034,5493,5522,5495,5016,5003,5610,5533,5015,5013,4007,3979,5064,5002,4536,5006,3999,3990,4013,3511,3998,3991,3979,3466,3993,4004,4481,4503,3987,3974
+- production-like before, warm:corpus, db: 190,190,188,183,170,176,170,164,155,165,144,143,159,162,149,149,141,138,142,128,122,132,122,115,128,129,142,128,119,117
+- production-like before, warm:hundred, decision: 410,422,396,196,404,411,423,407,316,396,421,399,407,197,329,197,408,199,198,409,203,205,405,409,198,202,406,413,202,204
+- production-like before, warm:hundred, full: 6044,5501,6032,5515,5507,5520,5553,4978,5036,5527,5013,5509,4492,5023,4555,5514,3991,3987,5003,3962,4014,4978,5010,3975,3989,4505,4516,3479,3487,3998
+- production-like before, warm:hundred, db: 197,178,198,174,182,168,175,161,153,167,153,159,161,160,147,158,129,126,143,136,141,144,148,130,122,133,127,111,121,123
+- production-like after, warm:work, decision: 945,318,435,941,916,318,394,326,396,426,392,406,413,397,409,313,333,389,397,324,403,453,393,313,400,412,396,398,412,402
+- production-like after, warm:work, full: 945,318,435,942,916,318,394,326,396,426,393,406,413,397,409,313,333,389,397,325,403,453,393,313,400,412,396,399,413,404
+- production-like after, warm:work, db: 17,14,17,17,15,12,12,12,16,12,12,12,12,12,16,12,12,12,12,12,16,14,12,12,12,12,16,12,12,12
+- production-like after, warm:corpus, decision: 321,324,319,217,319,211,199,328,219,195,324,406,214,206,319,412,216,333,204,404,415,315,328,203,210,393,202,401,214,202
+- production-like after, warm:corpus, full: 3477,3497,3005,2982,2986,2991,2998,2978,2962,2462,2992,2951,2483,2493,2992,2461,2468,2509,2475,2971,2975,2473,2476,2446,2480,2950,2482,2443,1930,1966
+- production-like after, warm:corpus, db: 185,194,153,169,171,162,149,162,163,140,160,164,149,138,146,144,143,141,130,140,128,131,133,130,123,130,122,124,113,116
+- production-like after, warm:hundred, decision: 212,326,196,308,408,238,206,239,209,315,325,201,409,416,409,323,415,416,198,397,406,404,403,214,407,211,334,252,418,428
+- production-like after, warm:hundred, full: 2985,2992,2953,2976,2947,2501,2966,3011,2972,2993,3010,2960,2436,2455,2447,2487,2455,2480,2459,2427,2468,2444,2469,1967,2455,2463,2469,2526,2464,2480
+- production-like after, warm:hundred, db: 164,187,164,167,168,163,158,153,163,147,151,150,145,142,142,136,149,142,136,134,132,130,122,120,135,134,123,124,134,116
+
 ## 12. Migration, backfill and rollback
 
 Order of commits inside Sprint 1 and 3: schema + SQL first (no reader), then pure core, then importers (Top100 before PIC before modex legacy), then runtime pin, then services, then queue actions under the flag, then `GAP_OS_ENABLED=true` in Vercel after `verify-triggers.ts` passes against prod (env is snapshot at deploy; redeploy after setting). Before the prod `db push`, preview it with `prisma migrate diff --from-url <prod> --to-schema-datamodel prisma/schema.prisma --script` and confirm the script is additive only; also confirm the prod role can `CREATE FUNCTION` (not yet verified). Rollback: the flag off restores byte-identical behavior instantly; full removal is the rollback SQL plus reverting the runtime, service and queue-action commits; `sequences` is never modified; the only two pre-existing tables GAP OS's schema touches at all are `draft_queue_items` (one nullable `sequence_version_id` stamp, S1-T2) and `inbound_messages` (`source String @default("gmail")` and `hubspot_engagement_id String?`, S2-T1, needed so the reply cron and the HubSpot poller can tell a Gmail-sourced row from a HubSpot-engagement-sourced one and attribute the engagement id idempotently) — both additive-only, both confirmed by the production preflight below; the lane and PIC files are read, never written.
