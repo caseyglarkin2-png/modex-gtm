@@ -230,7 +230,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
   const callSection = callPack && !thesisHold && !optOut && hypothesis.status === 'active' ? (
       <section data-testid="call-pack" className="space-y-3 rounded-md border border-[var(--border)] p-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Call</p>
+            <h2 className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Call</h2>
             {/* Last mile: a cold call re-reads HubSpot opportunity truth at the click; no raw tel: link. */}
             {/* Execution acceptance: no raw number on the page; the dial is released by the governed check only. */}
             {embedded ? (
@@ -269,7 +269,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
       ) : null}
       {thesisHold ? (
         <section data-testid="thesis-needs-review" className="space-y-2 rounded-md border border-amber-500/40 bg-amber-500/10 p-4 text-sm">
-          <p className="text-xs font-semibold uppercase tracking-wide">Thesis needs review</p>
+          <h2 className="text-xs font-semibold uppercase tracking-wide">Thesis needs review</h2>
           {thesisState.current === false && thesisState.bestFact ? (
             <p data-testid="thesis-best-fact"><span className="font-semibold">Current best fact: </span>{thesisState.bestFact}</p>
           ) : null}
@@ -297,7 +297,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
 
       {touch && touch.state !== 'not_started' ? (
         <section data-testid="sequence-status" className="space-y-1 rounded-md border border-[var(--border)] p-4 text-sm">
-          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Sequence</p>
+          <h2 className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Sequence</h2>
           {'sent' in touch
             ? touch.sent.map((t) => (
                 <p key={t.gmailSentMessageId}>
@@ -324,7 +324,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
       ) : slot === 'thesis_hold' ? null : renderedEmail ? (
         <section data-testid="rendered-email" className="space-y-3 rounded-md border border-[var(--border)] p-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Email{touchStep > 0 ? ` (touch ${touchStep + 1})` : ''}</p>
+            <h2 className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Email{touchStep > 0 ? ` (touch ${touchStep + 1})` : ''}</h2>
             {rejected ? <Badge data-testid="email-readiness" variant="destructive">Blocked by the copy check</Badge> : emailReady ? <Badge data-testid="email-readiness" variant="success">Copy checked</Badge> : null}
           </div>
           <div>
@@ -357,7 +357,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
         </section>
       ) : (
         <section data-testid="no-email-copy" className="rounded-md border border-dashed border-[var(--border)] p-4 text-xs">
-          <p className="font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Missing prerequisite</p>
+          <h2 className="font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Missing prerequisite</h2>
           <p className="mt-1">
             {!persona
               ? 'No person is attached to this action pack.'
