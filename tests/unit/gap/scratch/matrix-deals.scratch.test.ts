@@ -303,10 +303,31 @@ describe.skipIf(!RUN)('R62 matrix: deals (two opportunities, closure and reopeni
     // longer says what it costs them is unknown.
     const story = projectStory({ accountName: d.a.name, now, state: pursuit.state, brief, inputs, whyNow: v.whyNow, know: v.know, touches: [], clawdRead: 'ok', vaultNote: null, excluded: [] } as never);
     const yard = story.rows.find((r) => r.key === 'yard');
-    const basis = expect.stringMatching(new RegExp(`^buyer said, ${esc(d.ben.name)}, [A-Z][a-z]{2} \\d{1,2}; ${esc(columbus)}$`));
+    // The deal on each sentence (who said it is the next case's subject).
+    const basis = expect.stringMatching(new RegExp(`^buyer said, .+, [A-Z][a-z]{2} \\d{1,2}; ${esc(columbus)}$`));
     const buyer = (yard?.sentences ?? []).filter((x) => x.tag === 'Buyer said').map((x) => [x.text, x.basis] as const).sort((p, q) => p[0].localeCompare(q[0]));
     expect(buyer).toEqual([[DETENTION, basis], [PROBLEM, basis]].sort((p, q) => String(p[0]).localeCompare(String(q[0]))));
     expect(story.rows.find((r) => r.key === 'learn')?.sentences[0]?.text ?? '').not.toMatch(/what it costs them/);
+  }, 240_000);
+
+  // Found by this matrix at 055d18a7 (general defect, source untouched): the story's "buyer said" basis names the buyer
+  // by the address on the row, because the account read hands the story the contact email as who said it
+  // (src/lib/gap/account-intel/load.ts:359 `who: b.contact_email`, rendered by src/lib/gap/story/story.ts:211). The
+  // seller reads "buyer said, ben@...example.com, Oct 7" where the artifacts and the people on the page name the person.
+  it('the story names who said it by the person on record, never the address', async () => {
+    const d = D.Scope;
+    const words = 'Trucks queue at the Columbus gate for forty minutes every morning.';
+    await bid(d, d.ben, 'business_problem', words, String(d.columbus.id));
+    const { brief, inputs, c, pursuit, now } = await pageRead(d);
+    const { projectNow } = await import('@/lib/gap/context/now');
+    const { projectStory } = await import('@/lib/gap/story/story');
+    const v = projectNow(brief, c, inputs, now);
+    const story = projectStory({ accountName: d.a.name, now, state: pursuit.state, brief, inputs, whyNow: v.whyNow, know: v.know, touches: [], clawdRead: 'ok', vaultNote: null, excluded: [] } as never);
+    const said = story.rows.flatMap((r) => r.sentences).filter((x) => x.tag === 'Buyer said').map((x) => x.basis);
+    expect(said.length).toBeGreaterThan(0);
+    expect(said.filter((b) => b.includes('@'))).toEqual([]);
+    const mine = story.rows.flatMap((r) => r.sentences).find((x) => x.text === words);
+    expect(mine?.basis, JSON.stringify(said)).toMatch(new RegExp(`^buyer said, ${esc(d.ben.name)}, `));
   }, 240_000);
 
   it('the prepared artifacts speak to their recipient in the second person and never carry the CRM deal name', async () => {

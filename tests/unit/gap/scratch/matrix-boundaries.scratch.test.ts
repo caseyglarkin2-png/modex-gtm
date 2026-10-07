@@ -255,8 +255,12 @@ describe.skipIf(!RUN)('R62 matrix: migration and boundaries (legacy shapes, free
     for (const i of cards) {
       const where = `card ${i.account.name}`;
       const r = cardReadiness(i as never);
+      // The card's three readiness states (card-readiness.ts CardReadiness): each one's heading and control labels.
       if (r.state === 'blocked') {
         add(`${where}: blocked`, r.title);
+      } else if (r.state === 'missing_prerequisite') {
+        add(`${where}: fix`, r.fix.label);
+        add(`${where}: warning`, r.warning?.title);
       } else {
         add(`${where}: primary`, r.primary.label);
         for (const s2 of r.secondary) add(`${where}: secondary`, s2.label);
