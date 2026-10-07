@@ -2019,7 +2019,7 @@ spend decision), operator (runs the system), copy (human-written words, Casey's)
 
 ### HANDOFF
 
-HANDOFF commit: 12050a3e (docs only; the block below describes head_sha 3fe2c39e on feat/gap-account-first-ux; first written in d3b6592a).
+HANDOFF commit: 6a529656 (docs only; the block below describes head_sha b63f2e69 on feat/gap-account-first-ux; first written in d3b6592a).
 
 ```yaml
 # HANDOFF (this block's own commit SHA is on the ledger line directly above the block)
