@@ -203,12 +203,35 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
 
 /** UX-06: the account's open theses whose opening the send gate would let out (the pack's own rule over the linked signals). */
 export async function loadSendableTheses(prisma: PrismaLike, accountName: string, now: Date): Promise<Set<string>> {
+  return (await loadSendableThesesFor(prisma, [accountName], now)).get(accountName) ?? new Set();
+}
+
+/** The open theses per account a first touch can be sent on (at most 50 per account, as one account's read). */
+const SENDABLE_PER_ACCOUNT = 50;
+
+/**
+ * R61: the send gate for many accounts in ONE read (Work asked it once per account, one after another: about 180
+ * reads and 40 s under production-like latency on the corpus). The same rule per thesis; every account named gets a
+ * set (empty when none); a failed read throws for all of them, as one account's read did.
+ */
+export async function loadSendableThesesFor(prisma: PrismaLike, accountNames: readonly string[], now: Date): Promise<Map<string, Set<string>>> {
+  const names = [...new Set(accountNames.filter(Boolean))];
+  const out = new Map<string, Set<string>>(names.map((n) => [n, new Set<string>()]));
+  if (!names.length) return out;
   const rows: Array<{ id: string; account_name: string; observation: string | null; signals: Array<{ role: string | null; signal: Record<string, unknown> | null }> }> = await prisma.prospectingHypothesis.findMany({
-    where: { account_name: accountName, superseded_by: { is: null }, status: { in: ['approved', 'active', 'confirmed', 'partially_confirmed', 'review_required'] } },
+    where: { account_name: names.length === 1 ? names[0] : { in: names }, superseded_by: { is: null }, status: { in: ['approved', 'active', 'confirmed', 'partially_confirmed', 'review_required'] } },
     select: { id: true, account_name: true, observation: true, metadata: true, signals: { select: { role: true, signal: { select: EVIDENCE_SIGNAL_SELECT } } } },
-    take: 50,
+    // No shared row limit: one account with many open theses must never crowd another out (the cap is per account).
+    orderBy: { id: 'asc' },
   });
-  return new Set(rows.filter((r) => hypothesisSendable(r as never, now)).map((r) => r.id));
+  const seen = new Map<string, number>();
+  for (const r of rows) {
+    const n = (seen.get(r.account_name) ?? 0) + 1;
+    seen.set(r.account_name, n);
+    if (n > SENDABLE_PER_ACCOUNT || !out.has(r.account_name)) continue;
+    if (hypothesisSendable(r as never, now)) out.get(r.account_name)!.add(r.id);
+  }
+  return out;
 }
 
 /** The newest audited HUMAN persona assignment on one of the account's active hypotheses (owner resolution USE). */

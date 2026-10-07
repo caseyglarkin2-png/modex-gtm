@@ -55,7 +55,7 @@ import { loadAccountPriorities } from '@/lib/gap/work/priority';
 import { loadFollowUpPlans } from '@/lib/gap/execution/follow-up-load';
 import { loadWorkOutcomes } from '@/lib/gap/work/outcome';
 import { loadPursuitSummaries, warmPursuitSummaries } from '@/lib/gap/pursuit/summary';
-import { loadSendableTheses } from '@/lib/gap/pursuit/load';
+import { loadSendableThesesFor } from '@/lib/gap/pursuit/load';
 import { loadMotionChoices, loadRecentFirstTouchAccounts } from '@/lib/gap/motion/load';
 import { agoText as readAgo, cachedRead } from '@/lib/gap/work/cache';
 import { todayListenText } from '@/lib/gap/voice/today';
@@ -184,8 +184,10 @@ async function loadCockpit() {
   const personaRows = chosenIds.length ? ((await prisma.persona.findMany({ where: { id: { in: chosenIds } }, select: { id: true, name: true, title: true } }).catch(() => [])) as Array<{ id: number; name: string | null; title: string | null }>) : [];
   const personaById = new Map(personaRows.map((p) => [p.id, p]));
   const dbState = new Map<string, { sendable: boolean; chosen: { name: string; title: string | null } | null }>();
+  // R61: one read for every Work account's send gate (it was one read per account, one after another).
+  const sendableAll = await loadSendableThesesFor(prisma, workAccounts, now).catch(() => null);
   for (const name of workAccounts) {
-    const sendable = await loadSendableTheses(prisma, name, now).catch(() => null);
+    const sendable = sendableAll?.get(name) ?? null;
     if (sendable === null) continue;
     const choice = choicesAll.get(name);
     const p = choice ? personaById.get(choice.primaryPersonaId) : undefined;

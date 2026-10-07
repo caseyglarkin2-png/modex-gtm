@@ -15,6 +15,7 @@
  */
 
 import { revisedByOf } from '../hypothesis/current-revision';
+import { mapLimit } from '../work/map-limit';
 import { audit as auditEvent } from '../audit';
 import type { HumanAction } from '../taxonomy';
 import { HYPOTHESIS_TERMINAL_STATUSES } from '../taxonomy';
@@ -92,6 +93,8 @@ export interface TouchSummary {
 
 /** Cards per page whose next touch is evaluated (each may read one Gmail thread). */
 export const MAX_TOUCH_EVALUATIONS = 20;
+/** R61: how many cards' next touches are evaluated at once (the production database pool holds five connections). */
+export const TOUCH_EVALUATION_CONCURRENCY = 5;
 
 export interface ListQueueResult {
   /** The run named by the caller; null for the current-decision view. */
@@ -505,11 +508,10 @@ export async function attachTouches(prisma: PrismaLike, items: QueueItem[]): Pro
   }
   const { computeNextTouch } = await import('../execution/next-touch');
   const now = new Date();
-  for (const [n, item] of withHistory.entries()) {
-    if (n >= MAX_TOUCH_EVALUATIONS) {
-      unevaluated(item, 'This person has send history; open the card to evaluate the next touch.');
-      continue;
-    }
+  for (const item of withHistory.slice(MAX_TOUCH_EVALUATIONS)) unevaluated(item, 'This person has send history; open the card to evaluate the next touch.');
+  // R61: the cards are evaluated a few at a time (each is about twenty round trips and may read a Gmail thread); in a
+  // loop, twenty cards took twenty times as long (about 20 s of Work's read under production-like latency).
+  await mapLimit(withHistory.slice(0, MAX_TOUCH_EVALUATIONS), TOUCH_EVALUATION_CONCURRENCY, async (item) => {
     try {
       const t = await computeNextTouch(prisma, item.id, now);
       if (t.state === 'not_started') {
@@ -517,7 +519,7 @@ export async function attachTouches(prisma: PrismaLike, items: QueueItem[]): Pro
         const { personSendHistoryForDecision } = await import('../execution/person-history');
         const h = await personSendHistoryForDecision(prisma, item.id);
         if (h.unresolvedClaims.length > 0) unevaluated(item, 'A send to this person was started and its outcome is not recorded. Check Gmail Sent.');
-        continue;
+        return;
       }
       item.touch = {
         state: t.state,
@@ -529,7 +531,7 @@ export async function attachTouches(prisma: PrismaLike, items: QueueItem[]): Pro
     } catch {
       unevaluated(item, 'Sequence could not be evaluated.');
     }
-  }
+  });
 }
 
 // ---------------------------------------------------------------------------
