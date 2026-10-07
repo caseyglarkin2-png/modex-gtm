@@ -110,6 +110,9 @@ function NoteReview({ capture, onChange, announce = () => {} }: { capture: Captu
   const multiSpeaker = buyerSpeakers(capture.rawText).length > 1;
   const [drafts, setDrafts] = useState<Record<string, ItemDraft>>({});
   const [results, setResults] = useState<Record<string, string>>({});
+  // R63-B N2: what another tab or person had already recorded when this press arrived (refused "already_decided").
+  const [stale, setStale] = useState<ReadonlySet<string>>(new Set());
+  const STALE_LINE = 'Already recorded before your press (another tab or person). Nothing was recorded twice.';
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   // R60: a note opened from a reply bears on the reply's own thesis unless the seller chooses another.
@@ -164,12 +167,16 @@ function NoteReview({ capture, onChange, announce = () => {} }: { capture: Captu
       announce(`Not recorded: ${body.error ?? `HTTP ${res.status}`}`);
       return;
     }
-    setResults(Object.fromEntries((body.results ?? []).filter((r) => !r.ok).map((r) => [r.candidateId, REASON_TEXT[r.reason ?? ''] ?? r.detail ?? r.reason ?? 'not recorded'])));
+    const already = new Set((body.results ?? []).filter((r) => !r.ok && r.reason === 'already_decided').map((r) => r.candidateId));
+    setStale(already);
+    setResults(Object.fromEntries((body.results ?? []).filter((r) => !r.ok && r.reason !== 'already_decided').map((r) => [r.candidateId, REASON_TEXT[r.reason ?? ''] ?? r.detail ?? r.reason ?? 'not recorded'])));
     onChange(body.capture);
     // R63-B S4: the outcome is said in the live region (a new line on the page is not announced by itself).
     const recorded = (body.results ?? []).filter((r) => r.ok && r.candidateId !== REPLY_KIND_ITEM).length;
-    const failed = (body.results ?? []).filter((r) => !r.ok).length;
-    announce([replyDecisionLine(body.capture), recorded ? `${recorded} recorded from the note.` : null, failed ? `${failed} not recorded; the reason is beside each.` : null].filter(Boolean).join(' ') || 'Recorded.');
+    const failed = (body.results ?? []).filter((r) => !r.ok && r.reason !== 'already_decided').length;
+    // R63-B N2: a stale press says it was refused, never the success text of the press that did record it.
+    const replyLine = already.has(REPLY_KIND_ITEM) ? `What the reply means: ${STALE_LINE}` : (body.results ?? []).some((r) => r.candidateId === REPLY_KIND_ITEM && r.ok) ? replyDecisionLine(body.capture) : null;
+    announce([replyLine, recorded ? `${recorded} recorded from the note.` : null, already.size - (already.has(REPLY_KIND_ITEM) ? 1 : 0) > 0 ? `${already.size - (already.has(REPLY_KIND_ITEM) ? 1 : 0)} already recorded before your press; nothing was recorded twice.` : null, failed ? `${failed} not recorded; the reason is beside each.` : null].filter(Boolean).join(' ') || 'Recorded.');
   }
 
   const people = ctx?.people ?? [];
@@ -216,7 +223,7 @@ function NoteReview({ capture, onChange, announce = () => {} }: { capture: Captu
         <article className="space-y-2 rounded-md border border-[var(--border)] p-3" data-testid="capture-reply-kind" data-state={reply.decision?.kind ?? (replyKeep ? 'keep' : 'reject')}>
           <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">What {reply.from}&apos;s reply means</p>
           {reply.decision?.kind === 'confirmed' ? (
-            decided(reply.decision.before ? 'Already recorded for this reply. Nothing is recorded twice.' : `Recorded: ${REPLY_KIND_WORDS[reply.decision.responseClass as ReplyKindClass] ?? 'what it means'}. The reply is answered on the account.`, 'text-emerald-700 dark:text-emerald-400')
+            decided(stale.has(REPLY_KIND_ITEM) ? `${STALE_LINE} On record: ${REPLY_KIND_WORDS[reply.decision.responseClass as ReplyKindClass] ?? 'what it means'}.` : reply.decision.before ? 'Already recorded for this reply. Nothing is recorded twice.' : `Recorded: ${REPLY_KIND_WORDS[reply.decision.responseClass as ReplyKindClass] ?? 'what it means'}. The reply is answered on the account.`, stale.has(REPLY_KIND_ITEM) ? 'text-amber-700 dark:text-amber-400' : 'text-emerald-700 dark:text-emerald-400')
           ) : reply.decision?.kind === 'rejected' ? (
             decided('Set aside. The reply still waits on the account.', 'text-[var(--muted-foreground)]')
           ) : (
@@ -263,12 +270,12 @@ function NoteReview({ capture, onChange, announce = () => {} }: { capture: Captu
               {c.decision?.kind === 'confirmed' ? (
                 <>
                   <blockquote className="break-words border-l-2 border-[var(--primary)] pl-2 text-sm">&ldquo;{c.quote}&rdquo;</blockquote>
-                  {decided(`Confirmed as ${words(c.decision.type)}. Recorded as buyer truth.`, 'text-emerald-700 dark:text-emerald-400')}
+                  {stale.has(c.id) ? decided(STALE_LINE, 'text-amber-700 dark:text-amber-400') : decided(`Confirmed as ${words(c.decision.type)}. Recorded as buyer truth.`, 'text-emerald-700 dark:text-emerald-400')}
                 </>
               ) : c.decision?.kind === 'rejected' ? (
                 <>
                   <blockquote className="break-words border-l-2 border-[var(--border)] pl-2 text-sm text-[var(--muted-foreground)]">&ldquo;{c.quote}&rdquo;</blockquote>
-                  {decided('Rejected. Not buyer truth.', 'text-[var(--muted-foreground)]')}
+                  {stale.has(c.id) ? decided(STALE_LINE, 'text-amber-700 dark:text-amber-400') : decided('Rejected. Not buyer truth.', 'text-[var(--muted-foreground)]')}
                 </>
               ) : (
                 <>
@@ -320,7 +327,9 @@ function NoteReview({ capture, onChange, announce = () => {} }: { capture: Captu
               <blockquote className="break-words border-l-2 border-[var(--primary)] pl-2 text-sm">
                 {c.speaker ? <span className="font-medium">{c.speaker}: </span> : null}&ldquo;{c.quote}&rdquo;
               </blockquote>
-              {c.decision?.kind === 'confirmed' ? (
+              {c.decision && stale.has(c.id) ? (
+                decided(STALE_LINE, 'text-amber-700 dark:text-amber-400')
+              ) : c.decision?.kind === 'confirmed' ? (
                 decided('Recorded as an obligation. It is on Work on its day.', 'text-emerald-700 dark:text-emerald-400')
               ) : c.decision?.kind === 'rejected' ? (
                 decided('Rejected. Nothing recorded.', 'text-[var(--muted-foreground)]')

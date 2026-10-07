@@ -95,4 +95,19 @@ describe('R63-B S4: Capture says every save, refusal and record in one polite li
     fireEvent.click(screen.getByTestId('capture-batch-submit'));
     await waitFor(() => expect(live().textContent).toBe('Recorded: Do not contact them again. The reply is answered on the account.'));
   });
+
+  it('R63-B N2: a stale tab\'s Record, refused "already_decided", says so and never shows the other press\'s success', async () => {
+    const prisma = db();
+    const c = await open(prisma);
+    const after = await decideBatch(prisma, { captureId: c.id, items: [{ candidateId: 'reply', decision: 'confirm', responseClass: 'do_not_contact' }], actor: 'casey@freightroll.com', now: NOW });
+    if (!after.ok) throw new Error('batch');
+    vi.stubGlobal('fetch', vi.fn(async () => new Response(JSON.stringify({ results: [{ candidateId: 'reply', ok: false, reason: 'already_decided' }], capture: after.capture }), { status: 200 })));
+    render(<CaptureFlow initial={c} initialAccount={ACCOUNT} />);
+    fireEvent.change(within(screen.getByTestId('capture-reply-kind')).getByTestId('capture-reply-class'), { target: { value: 'do_not_contact' } });
+    fireEvent.click(screen.getByTestId('capture-batch-submit'));
+    await waitFor(() => expect(live().textContent).toBe('What the reply means: Already recorded before your press (another tab or person). Nothing was recorded twice.'));
+    const item = screen.getByTestId('capture-reply-kind');
+    expect(item.textContent).toContain('Already recorded before your press (another tab or person). Nothing was recorded twice. On record: Do not contact them again.');
+    expect(item.textContent).not.toContain('The reply is answered on the account.');
+  });
 });
