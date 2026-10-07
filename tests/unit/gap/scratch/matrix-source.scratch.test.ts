@@ -98,19 +98,19 @@ describe.skipIf(!RUN)('R62 matrix: source truth and commercial relevance (DRAFT 
     expect(d.body.detail).toMatch(/posting_closed/);
   }, 120_000);
 
-  // DEFECT src/lib/gap/research/approach-policy.ts:134: only a CLOSED job posting is refused; a REPOSTED one is admitted as
-  // a new job-led trigger. R22: an expired or reposted listing is not new demand.
-  defect('a reposted posting is not admitted as a new job-led trigger', async () => {
+  // Was DEFECT src/lib/gap/research/approach-policy.ts:134: a reposted posting was admitted as a new trigger. Fixed by
+  // the writer at 1b6416a9 (item 7).
+  it('a reposted posting is not admitted as a new job-led trigger', async () => {
     const d = await draft('Reposted', { problemFamily: 'yard_state_integrity' });
-    expect([d.status, d.body.error], JSON.stringify(d.body)).toEqual([409, 'fact_not_outreach_evidence']);
+    expect([d.status, d.body.error, d.body.detail], JSON.stringify(d.body)).toEqual([409, 'fact_not_outreach_evidence', 'posting_reposted']);
   }, 120_000);
 
-  // DEFECT src/lib/gap/research/approach-policy.ts:134 with research/claim-types.ts:90: a procurement notice whose stated
-  // due date passed is admitted (dueDate is parsed, never enforced); the job-led copy then asks whether "the posting"
-  // is still open about a closed RFP.
-  defect('a procurement notice whose due date has passed is refused', async () => {
+  // Was DEFECT src/lib/gap/research/approach-policy.ts:134 with research/claim-types.ts:90: a notice past its due date
+  // was admitted. Fixed by the writer at 1b6416a9 (item 7): not current, basis closed.
+  it('a procurement notice whose due date has passed is refused', async () => {
     const d = await draft('ClosedRfp', { problemFamily: 'yard_state_integrity' });
     expect([d.status, d.body.error], JSON.stringify(d.body)).toEqual([409, 'fact_not_outreach_evidence']);
+    expect(d.body.detail).toMatch(/^This notice closed on .+: not a story for a first touch\.$/);
   }, 120_000);
 
   it('a vendor\'s marketing claim about the account is never the account\'s own evidence (a software win: not a physical change)', async () => {
@@ -118,15 +118,11 @@ describe.skipIf(!RUN)('R62 matrix: source truth and commercial relevance (DRAFT 
     expect([d.status, d.body.error, d.body.detail], JSON.stringify(d.body)).toEqual([409, 'fact_not_outreach_evidence', 'not_a_physical_network_change']);
   }, 120_000);
 
-  // DEFECT src/lib/gap/research/claim-rules.ts:57-77 (speakerOrg) used by the gate's liveFactFailure (:111-118): the
-  // speaker rule recognizes "said ... at ORG", "ORG <title> said" and "according to ORG", not "<Vendor> announced that
-  // <account> is opening ...", so a vendor's press release about its customer's new site passes as the account's own
-  // statement and opens an event-led first touch. The evidence-purpose table: vendor marketing never becomes the
-  // buyer's fact.
-  defect('a vendor speaking about the account\'s new site is a third party, never the account\'s statement', async () => {
+  // Was DEFECT src/lib/gap/research/claim-rules.ts:57-77 (speakerOrg): "<Vendor> announced that <account> ..." passed
+  // as the account's statement. Fixed by the writer at 1b6416a9 (item 7): quoted_third_party.
+  it('a vendor speaking about the account\'s new site is a third party, never the account\'s statement', async () => {
     const d = await draft('VendorPhysical', { problemFamily: 'hidden_capacity' });
-    expect([d.status, d.body.error], JSON.stringify(d.body)).toEqual([409, 'fact_not_outreach_evidence']);
-    expect(d.body.detail).not.toBe('not_a_physical_network_change');
+    expect([d.status, d.body.error, d.body.detail], JSON.stringify(d.body)).toEqual([409, 'fact_not_outreach_evidence', 'third_party_statement']);
   }, 120_000);
 
   it('a software implementation is context, not a physical-network change: refused as an event-led opening', async () => {

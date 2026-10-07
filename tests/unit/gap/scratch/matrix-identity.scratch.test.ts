@@ -95,24 +95,22 @@ describe.skipIf(!RUN)('R62 matrix: identity and scope (the real routes and the p
     expect(JSON.stringify({ motion: brief.motion, state: pursuit.state.stateLine, blocker: pursuit.state.blocker })).toMatch(new RegExp(parent.a.name));
   }, 180_000);
 
-  it('the click agrees with the page: the subsidiary\'s card is refused active_opportunity with the related-account detail, nothing sent', async () => {
+  it('routing agrees with the page: the subsidiary\'s card is a nurture hold (R3d family_hold), and the send route refuses it as not an email action; nothing sent', async () => {
     const { PATCH } = await import('@/app/api/gap/hypotheses/[id]/route');
     const used = await PATCH(req(`/api/gap/hypotheses/${child.h}`, 'PATCH', { advance: 'approve_and_use' }), ctx(child.h));
     expect(used.status).toBe(200);
-    const d = (await prisma.routingDecision.findFirst({ where: { account_name: child.a.name, persona_id: child.p.id }, orderBy: { created_at: 'desc' }, select: { id: true } }))!;
+    const d = (await prisma.routingDecision.findFirst({ where: { account_name: child.a.name, persona_id: child.p.id }, orderBy: { created_at: 'desc' }, select: { id: true, lane: true, action: true, rule_id: true } }))!;
+    expect([d.lane, d.action, d.rule_id]).toEqual(['work_queue', 'nurture', 'family_hold']);
     const { POST } = await import('@/app/api/gap/decisions/[id]/send/route');
     const res = await POST(req(`/api/gap/decisions/${d.id}/send`, 'POST', {}), ctx(d.id));
     const body = (await res.json()) as { error?: string; detail?: string };
-    expect([res.status, body.error], JSON.stringify(body)).toEqual([409, 'active_opportunity']);
-    expect(body.detail).toMatch(new RegExp(`^Related account activity\\. ${child.a.name} is part of ${parent.a.name}`));
+    expect([res.status, body.error, body.detail], JSON.stringify(body)).toEqual([409, 'not_an_email_action', 'nurture']);
     expect(h.writtenTo(child.p.email)).toBe(0);
   }, 180_000);
 
-  // DEFECT src/lib/gap/routing/run.ts:258 (the routing snapshot reads resolveAccountOpportunity for the account alone):
-  // routing ignores the corporate-family hold the page and the click both apply, so APPROVE AND USE routes a READY card
-  // (lane work_queue, one_off_email) for the subsidiary while its parent is in a live deal; Work offers a first touch
-  // that the preview then refuses. R10: a held account never presents as sendable on another surface.
-  defect('routing never makes a READY card for a subsidiary held by its parent\'s live deal', async () => {
+  // Was DEFECT src/lib/gap/routing/run.ts:258: routing made a READY card for a subsidiary its family holds.
+  // Fixed by the writer at 1b6416a9 (item 7, rule R3d family_hold).
+  it('routing never makes a READY card for a subsidiary held by its parent\'s live deal', async () => {
     const d = await prisma.routingDecision.findFirst({ where: { account_name: child.a.name, persona_id: child.p.id }, orderBy: { created_at: 'desc' }, select: { lane: true, action: true } });
     expect([d?.lane, d?.action]).not.toEqual(['work_queue', 'one_off_email']);
   }, 60_000);

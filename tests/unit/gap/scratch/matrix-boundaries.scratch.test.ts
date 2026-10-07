@@ -170,11 +170,9 @@ describe.skipIf(!RUN)('R62 matrix: migration and boundaries (legacy shapes, free
     expect(h.sinkFiles().length).toBe(sentBefore);
   }, 60_000);
 
-  // DEFECT src/lib/gap/ask/grounding.ts:139 (a question-word opening is never an action request) with
-  // src/app/api/gap/ask/route.ts:52: "What should I say to Glen in the first email?" skips ACTION_PATTERNS and the
-  // proposal intents and reaches the model, so a second, ungoverned copy path exists beside the compiler (mandate
-  // section 9). Correct: no model call; the answer names the control (or the prepared draft) instead.
-  defect('a request for email copy phrased as a question never reaches the model', async () => {
+  // Was DEFECT src/lib/gap/ask/grounding.ts:139 with ask/route.ts:52: a copy request phrased as a question reached the
+  // model. Fixed by the writer at 1b6416a9 (item 7).
+  it('a request for email copy phrased as a question never reaches the model', async () => {
     const fedex = acct('Fedex');
     await h.control({ provider: { mode: 'ok', content: 'Hi Glen, I noticed your terminals in Ohio are consolidating, so your yards must be overwhelmed.' } });
     const before = h.requests().filter((q) => q.path === '/v1/chat/completions').length;

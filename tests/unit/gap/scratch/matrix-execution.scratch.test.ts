@@ -110,12 +110,10 @@ describe.skipIf(!RUN)('R62 matrix: execution (real routes, real opportunity reso
     expect(await prisma.emailLog.count({ where: { to_email: r.p.email } })).toBe(1);
   }, 180_000);
 
-  // DEFECT src/lib/gap/execution/seller-send.ts:172 (the claim runs AFTER prepareSellerEmail's gates) with
-  // src/lib/gap/execution/seller-draft.ts:415-431 (the Sent read): a tab that loses the race reads the winner's message in
-  // Sent before the claim says "sent", so it is refused `emailed_outside_gap` ("GAP has no record of it. Record it as a
-  // manual send") or `decision_stale`; following that advice records GAP's own send a second time. The loser must
-  // answer ALREADY SENT (or send_in_progress_or_unknown while the winner is on the wire).
-  defect('duplicate tabs: every losing tab answers ALREADY SENT or send_in_progress_or_unknown, never emailed_outside_gap or decision_stale (four races)', async () => {
+  // Was DEFECT src/lib/gap/execution/seller-send.ts:172 with seller-draft.ts:415-431: a losing tab was refused
+  // emailed_outside_gap or decision_stale for GAP's own send. Fixed by the writer at 1b6416a9 (item 7): the loser re-reads
+  // the ledger and answers ALREADY SENT, or send_in_progress_or_unknown while the winner's claim is open.
+  it('duplicate tabs: every losing tab answers ALREADY SENT or send_in_progress_or_unknown, never emailed_outside_gap or decision_stale (four races)', async () => {
     const seen: string[] = [];
     for (const k of ['TabsReason1', 'TabsReason2', 'TabsReason3', 'TabsReason4']) {
       const r = ready[k];
@@ -138,9 +136,9 @@ describe.skipIf(!RUN)('R62 matrix: execution (real routes, real opportunity reso
     expect(h.writtenTo(r.p.email)).toBe(0);
   }, 180_000);
 
-  // DEFECT src/lib/gap/execution/seller-send.ts:164-168: the confirm binds the content hash and the recipient but not the
-  // sender mailbox the seller saw on the final check; a sender change between preview and confirm goes out unrefused.
-  defect('sender changed after approval: refused (the confirm binds the sender the seller saw), nothing sent', async () => {
+  // Was DEFECT src/lib/gap/execution/seller-send.ts:164-168: the confirm did not bind the sender. Fixed by the writer at
+  // 1b6416a9 (item 7): sender_changed_since_review.
+  it('sender changed after approval: refused (the confirm binds the sender the seller saw), nothing sent', async () => {
     const r = ready.Sender;
     const d = await use(r);
     const p = await preview(d);
