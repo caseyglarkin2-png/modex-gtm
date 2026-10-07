@@ -65,6 +65,7 @@ describe('R31: the draft text is read off the fact, never one sentence for every
   it('the site and the change class shape the guess, the falsification and what a no means', () => {
     expect(siteOf(TULSA)).toBe('the Tulsa, Oklahoma, production facility');
     expect(siteOf(DENVER)).toBe('the distribution center in Denver');
+    expect(siteOf('PepsiCo is expanding its Charlotte, North Carolina distribution center with 20 new dock doors.')).toBe('the Charlotte, North Carolina distribution center');
     const tulsa = draftDefaultsForFact({ text: TULSA, approach: 'event_led' });
     expect(tulsa).toEqual({
       problem: 'My guess is that closing the Tulsa, Oklahoma, production facility moves its volume onto the sites that remain, and their gates and yards are where that load shows up first.',

@@ -45,12 +45,15 @@ export function draftDefaultsFor(claimClass: string | null | undefined): DraftDe
 
 const FACILITY_WORD = String.raw`(?:production facility|distribution cent(?:er|re)|fulfil?lment cent(?:er|re)|cross-dock|manufacturing plant|bottling plant|plant|warehouse|facility|DC|terminal|hub|yard)`;
 const AT_SITE = new RegExp(String.raw`\b(?:at|in) (?:its |the |a |their |our )?((?:[A-Z][\w.'’-]*,?\s){1,4}${FACILITY_WORD})`);
+const ITS_SITE = new RegExp(String.raw`\b(?:its|their|our) ((?:[A-Z][\w.'’-]*,?\s){1,4}${FACILITY_WORD})`);
 const FAC_IN = new RegExp(String.raw`\b(${FACILITY_WORD})s? (?:in|near|outside) ((?:[A-Z][\w.'’-]*,?\s?){1,3})`);
 
 /** The site a fact names, in seller words ("the Tulsa, Oklahoma, production facility"), else null. */
 export function siteOf(text: string): string | null {
   const at = AT_SITE.exec(text);
   if (at) return `the ${at[1].trim()}`;
+  const its = ITS_SITE.exec(text);
+  if (its) return `the ${its[1].trim()}`;
   const fin = FAC_IN.exec(text);
   if (fin) return `the ${fin[1]} in ${fin[2].trim().replace(/[,.]+$/, '')}`;
   return null;
