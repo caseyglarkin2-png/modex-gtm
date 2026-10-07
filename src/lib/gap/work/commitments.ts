@@ -486,6 +486,9 @@ export async function syncFollowUpsFromLedger(prisma: PrismaLike, now: Date, opt
   const nameOf = new Map(people.map((p) => [p.id, p.name]));
   const accounts = [...new Set([...newest.values()].map((s) => s.accountName))];
   const existing = await loadCommitments(prisma, { accountNames: accounts });
+  // R61: a follow-up already on record needs no write (ensureCommitment would take its lock only to find it): the
+  // sweep, on Work's path once a minute per instance, took four locked transactions when nothing had changed.
+  const known = new Set(existing.map((c) => c.commitmentId));
   for (const s of newest.values()) {
     const steps = s.sequenceVersionId ? stepsOf.get(s.sequenceVersionId) ?? [] : [];
     const next = steps[s.stepIndex + 1] as { delay?: { value: number; unit: string } } | undefined;
@@ -493,7 +496,7 @@ export async function syncFollowUpsFromLedger(prisma: PrismaLike, now: Date, opt
     const due = next?.delay ? (next.delay.unit === 'calendar_days' ? new Date(sentAt.getTime() + next.delay.value * DAY_MS) : addBusinessDays(sentAt, next.delay.value)) : addBusinessDays(sentAt, SEED_DELAYS_BUSINESS_DAYS[1]);
     const name = s.personaId !== null ? nameOf.get(s.personaId) ?? null : null;
     const who = name ?? s.recipient;
-    const r = await ensureCommitment(
+    const r = known.has(commitmentIdFor({ kind: 'send', id: personStepKey(s.personaId, s.recipient, s.stepIndex) })) ? null : await ensureCommitment(
       prisma,
       {
         accountName: s.accountName,

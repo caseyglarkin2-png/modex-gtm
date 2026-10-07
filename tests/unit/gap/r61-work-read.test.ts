@@ -75,3 +75,31 @@ describe('the cards\' next touches run a few at a time', () => {
     expect(queue).not.toMatch(/for \(const \[n, item\] of withHistory\.entries\(\)\)/);
   });
 });
+
+describe('the follow-up sweep takes no lock when nothing changed', () => {
+  it('a re-run over a send whose follow-up is on record opens no transaction; a new send still writes one', async () => {
+    const { ledgerDb } = await import('./fixtures/ledger-db');
+    const { syncFollowUpsFromLedger } = await import('@/lib/gap/work/commitments');
+    const { DIRECT_SENT } = await import('@/lib/gap/execution/draft-ledger');
+    const NOW = new Date('2026-10-06T19:00:00Z');
+    const db = ledgerDb({ accounts: ['Fedex Scratch Co'], personas: [{ id: 7, name: 'Glen Scratch', email: 'glen@fedex.example.com', account_name: 'Fedex Scratch Co' }] });
+    const base = db.client();
+    let transactions = 0;
+    const p: object = new Proxy(base as object, {
+      get(t, k) {
+        if (k === '$executeRaw') return async () => 0;
+        if (k === '$transaction') return async (fn: (tx: unknown) => Promise<unknown>) => ((transactions += 1), fn(p));
+        return Reflect.get(t, k);
+      },
+    });
+    const send = (id: string, step: number, sentAt: string) => db.store.gapAuditEvent.push({ id, kind: DIRECT_SENT, actor: 'casey@freightroll.com', subject_type: 'routing_decision', subject_id: 'dec1', created_at: new Date(sentAt), payload: { accountName: 'Fedex Scratch Co', personaId: 7, recipient: 'glen@fedex.example.com', stepIndex: step, sentAt, confirmedBy: 'casey@freightroll.com' } });
+    send('s0', 0, '2026-10-06T15:00:00Z');
+    expect(await syncFollowUpsFromLedger(p, NOW)).toEqual({ created: 1, closed: 0 });
+    expect(transactions).toBe(1);
+    expect(await syncFollowUpsFromLedger(p, NOW)).toEqual({ created: 0, closed: 0 });
+    expect(transactions).toBe(1);
+    send('s1', 1, '2026-10-07T15:00:00Z');
+    expect(await syncFollowUpsFromLedger(p, new Date('2026-10-07T17:00:00Z'))).toEqual({ created: 1, closed: 1 });
+    expect(transactions).toBeGreaterThan(1);
+  });
+});
