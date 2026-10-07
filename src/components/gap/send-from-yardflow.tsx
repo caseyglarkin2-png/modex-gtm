@@ -58,6 +58,7 @@ const REASONS: Record<string, string> = {
   active_opportunity: 'This account already has an active opportunity (open HubSpot deal, meeting or positive reply). Nothing was sent.',
   fact_contradicted: 'Another verified fact about the same site says the opposite. Resolve it in Research. Nothing was sent.',
   account_motion_active: 'Someone else at this account is already in a cold email motion. One at a time. Nothing was sent.',
+  named_in_referral: 'A buyer named this person in a referral: no cold email until you choose how to approach them. Nothing was sent.',
   opportunity_unknown: "Can't verify whether this account already has an active opportunity. Check HubSpot before contacting them. Nothing was sent.",
   first_touch_already_sent: 'The first email was already sent. Nothing was sent.',
   touch_not_due: 'The next touch is not due yet. Nothing was sent.',

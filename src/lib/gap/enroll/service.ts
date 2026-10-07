@@ -137,6 +137,7 @@ import { parseSteps } from '@/lib/gap/sequence/steps';
 import { sendableEvidence } from '@/lib/gap/research/evidence-gate';
 import { seedCopyOutdated } from '@/lib/gap/sequences/seed-drift';
 import { accountRepliedRecently } from '@/lib/gap/replies/account-reply';
+import { referralHoldDetail, referralHoldFor } from '@/lib/gap/replies/referral-hold';
 import { materializeSequence, type MaterializeRefusal } from '@/lib/gap/sequences/service';
 import type { RoutingAction } from '@/lib/gap/taxonomy';
 import { restrictionForAccount } from '@/lib/gap/policy/restriction';
@@ -252,6 +253,7 @@ export type EnrollServiceRefusal =
   | 'no_email'
   | 'gap_history_exists'
   | 'account_replied'
+  | 'named_in_referral'
   | 'account_motion_active'
   | 'account_mismatch'
   | 'decision_persona_mismatch'
@@ -775,6 +777,11 @@ export async function enrollFromDecision(
     const replied = await accountRepliedRecently(prisma, email, input.now, { accountName: hypothesis.account_name || persona.account_name });
     if (replied) {
       return refuse('account_replied', { detail: `${replied.from_email} at this account wrote in on ${new Date(replied.received_at).toISOString().slice(0, 10)}; read and disposition it first` });
+    }
+    // R42b: a person a buyer named in a referral is never enrolled cold until the seller chose (referral-hold.ts).
+    const named = await referralHoldFor(prisma, { email, name: persona.name, accountName: hypothesis.account_name || persona.account_name });
+    if (named) {
+      return refuse('named_in_referral', { detail: referralHoldDetail(named) });
     }
     // Phase 2 C3: one cold email motion per account, as at the send gate.
     const motion = await accountMotionRefusal(prisma, { accountName: hypothesis.account_name || persona.account_name, personaId: input.personaId ?? null, email, now: input.now });

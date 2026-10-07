@@ -37,6 +37,7 @@ import { validateClaimsUsed } from '@/lib/gap/claims/validate-claims';
 import { sendableEvidence } from '../research/evidence-gate';
 import { seedCopyOutdated } from '../sequences/seed-drift';
 import { accountRepliedRecently } from '../replies/account-reply';
+import { referralHoldDetail, referralHoldFor } from '../replies/referral-hold';
 import { getGmailSignature, gmailSenderAddress } from '@/lib/email/gmail-sender';
 import { COMPANY_POSTAL_ADDRESS, oneClickUnsubscribeUrl, unsubscribePageUrl } from '@/lib/email/compliance';
 import { personMovedSince } from './stale-card';
@@ -75,6 +76,7 @@ export type SellerDraftRefusal =
   | 'draft_outstanding'
   | 'recipient_unsubscribed'
   | 'account_replied'
+  | 'named_in_referral'
   | 'account_motion_active'
   | 'fact_contradicted'
   | 'decision_stale'
@@ -403,6 +405,10 @@ export async function prepareSellerEmail(
     if (replied) {
       return refuse(prisma, actor, decisionId, { ok: false, reason: 'account_replied', detail: `${replied.from_email} at this account wrote in on ${new Date(replied.received_at).toISOString().slice(0, 10)}. Read it before a first touch to anyone else there.` });
     }
+    // R42b (audit at 31f09c71): a person a buyer NAMED in a referral is the seller's decision, never a cold target:
+    // no first touch until the referral obligation is done or skipped (replies/referral-hold.ts).
+    const named = await referralHoldFor(prisma, { email, name: persona.name, accountName: pack.hypothesis.account_name });
+    if (named) return refuse(prisma, actor, decisionId, { ok: false, reason: 'named_in_referral', detail: referralHoldDetail(named) });
     // Phase 2 C3: ONE cold email motion per account. Another person there holds a live
     // GAP first touch inside the unlock window: this person waits (a bounce releases it).
     const motion = await accountMotionRefusal(prisma, { accountName: pack.hypothesis.account_name, personaId: persona.id ?? null, email, now });

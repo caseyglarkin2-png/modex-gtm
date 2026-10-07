@@ -137,6 +137,7 @@ describe('RULES ordering', () => {
       'opportunity_unknown',
       'bounced_or_invalid',
       'disp_wrong_person',
+      'named_in_referral',
       'disp_timing',
       'disp_not_priority',
       'disp_objection',
@@ -392,6 +393,21 @@ describe('routePersona, one rule at a time', () => {
     expect(rd.ruleId).toBe('disp_wrong_person');
     expect(rd.reason).toBe('referral');
     expect(rd.explain.whyAction).toContain('Pat Doe');
+  });
+
+  it('R5b named_in_referral (R42b): the person a buyer NAMED gets no cold action until the seller chose; it says why', () => {
+    const i = withHotTrigger(base());
+    i.comms.namedInReferral = { commitmentId: 'cmt-ref-1', detail: 'Ann named Bob Lane. No cold email to them until you choose how to approach them: mark the referral done or skipped on Work.' };
+    const d = decision(routePersona(i));
+    expect(d.ruleId).toBe('named_in_referral');
+    expect(d.action).toBe('research_required');
+    expect(d.lane).toBe('work_queue');
+    expect(d.reason).toBe('named_in_referral');
+    expect(d.explain.whyAction).toContain('Ann named Bob Lane');
+    // Released (the referral done or skipped): the same person routes on.
+    const r = withHotTrigger(base());
+    r.comms.namedInReferral = null;
+    expect(decision(routePersona(r)).ruleId).not.toBe('named_in_referral');
   });
 
   it('R6 disp_timing: timing with a future resumeAt routes nurture; a past resumeAt falls through', () => {

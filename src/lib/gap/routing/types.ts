@@ -145,6 +145,11 @@ export interface RoutingCommsInput {
    * MAX_UNANSWERED_CALLS the person is held rather than called again.
    */
   unansweredCalls?: number;
+  /**
+   * R42b (audit at 31f09c71): an open referral obligation names this person (a buyer pointed to them). Routing holds
+   * every cold action until the seller chose how to approach them (replies/referral-hold.ts). Absent reads as none.
+   */
+  namedInReferral?: { commitmentId: string; detail: string } | null;
 }
 
 export interface RoutingFreshness {

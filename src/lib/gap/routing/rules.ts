@@ -373,6 +373,17 @@ export const RULES: RoutingRule[] = [
     },
   },
   {
+    // R42b (audit at 31f09c71): R5 holds the person who POINTED elsewhere; this holds the person they NAMED. No cold
+    // action reaches them until the seller chose how to approach them (the referral obligation done or skipped).
+    id: 'named_in_referral',
+    label: 'R5b',
+    when: (i) => !!i.comms.namedInReferral,
+    action: 'research_required',
+    lane: 'work_queue',
+    reason: () => 'named_in_referral',
+    predicate: (i) => i.comms.namedInReferral!.detail,
+  },
+  {
     id: 'disp_timing',
     label: 'R6',
     when: (i) => {

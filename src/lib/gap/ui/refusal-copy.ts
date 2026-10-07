@@ -53,6 +53,11 @@ const COPY: Record<string, RefusalCopy> = {
     why: 'Another verified fact about the same site says the opposite, so this fact cannot be quoted to a buyer.',
     next: 'Open Research, ignore the side you do not believe, then try again.',
   },
+  named_in_referral: {
+    what: 'Nothing was drafted or sent.',
+    why: 'A buyer named this person in a referral. A referral is not consent and not a relationship, so they get no cold email until you choose how to approach them.',
+    next: 'Decide the approach (an introduction, a mention of who named them, or not at all), then mark the referral done or skipped on Work.',
+  },
   account_motion_active: {
     what: 'Nothing was drafted or sent.',
     why: 'Someone else at this account is already in a cold email motion. One motion at a time keeps the account from being carpet-bombed.',

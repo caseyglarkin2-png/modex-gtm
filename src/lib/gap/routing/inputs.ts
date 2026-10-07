@@ -45,6 +45,7 @@ import { isPersona, isProblemFamily, isResponseClass, NON_STOPPING_RESPONSE_CLAS
 import type { HypothesisStatus, Persona } from '../taxonomy';
 import type { Top100Manifest, Top100RosterPerson } from '../top100/reader';
 import type { SuppressionReader } from './suppression-read';
+import { referralHoldDetail, referralHoldFor } from '../replies/referral-hold';
 import { DEFAULT_FRESHNESS } from './types';
 import type { OpportunityTruth } from '../opportunity/active-opportunity';
 import type {
@@ -138,6 +139,8 @@ interface AccountRow {
 
 interface PersonaRow {
   id: number;
+  /** R42b: the referral hold matches a named person by full name at the account. */
+  name?: string | null;
   account_name: string;
   title: string | null;
   seniority: string | null;
@@ -616,6 +619,9 @@ async function assembleLoaded(
 
   // Comms: keyed by the persona's lowercased email. No email means nothing outbound can be in flight.
   const comms = email ? await readComms(prisma, email, persona.id) : emptyComms();
+  // R42b: a person a buyer named in a referral is the seller's decision (an unreadable ledger skips the person).
+  const named = await read('referral_hold', () => referralHoldFor(prisma, { email, name: persona.name, accountName: account.name }));
+  comms.namedInReferral = named ? { commitmentId: named.commitmentId, detail: referralHoldDetail(named) } : null;
 
   let suppressionVerdict: RoutingInputs['suppression'] = { verdict: 'unknown', legs: {} };
   if (email && remoteSuppression) {

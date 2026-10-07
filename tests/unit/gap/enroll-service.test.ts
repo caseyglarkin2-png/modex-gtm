@@ -119,7 +119,7 @@ function snapshot(overrides: Record<string, unknown> = {}) {
 }
 
 function makePrisma(
-  opts: { compiles?: any[]; decision?: any; version?: any; persona?: any; hypothesis?: any; account?: any; lastDisposition?: any; gapLedger?: any[]; inbound?: any[]; readInbound?: string[] } = {},
+  opts: { compiles?: any[]; decision?: any; version?: any; persona?: any; hypothesis?: any; account?: any; lastDisposition?: any; gapLedger?: any[]; inbound?: any[]; readInbound?: string[]; referrals?: any[] } = {},
 ) {
   const p = {
     // B6 (Opus adversarial review, 2026-09-24): the active-opportunity guard.
@@ -176,7 +176,7 @@ function makePrisma(
     sequenceEnrollment: { create: asyncSpy(), updateMany: asyncSpy() },
     gapAuditEvent: {
       create: asyncSpy(),
-      findMany: asyncSpy(async (args: any) => (args?.where?.subject_id ? (opts.gapLedger ?? []).filter((r) => args.where.subject_id.in.includes(r.subject_id)) : [])),
+      findMany: asyncSpy(async (args: any) => (args?.where?.subject_id ? (opts.gapLedger ?? []).filter((r) => args.where.subject_id.in.includes(r.subject_id)) : args?.where?.payload?.equals === 'referral' ? (opts.referrals ?? []) : [])),
     },
     $transaction: vi.fn(),
   };
@@ -1331,6 +1331,17 @@ describe('Release C re-review S7: the account-reply hold at live enrollment', ()
   it('shadow writes nothing and is not held', async () => {
     const r = await enrollFromDecision(makePrisma({ inbound: [colleague] }), input({ mode: 'shadow' }), deps());
     expect(r.ok).toBe(true);
+  });
+
+  it('R42b: live enrollment of a person a buyer NAMED in a referral is refused named_in_referral until the seller chose; nothing is queued', async () => {
+    const referral = { commitmentId: 'cmt-ref-1', accountName: 'Acme Logistics', kind: 'referral', title: 'Pat named Jane Doe: decide how to approach them', status: 'open', person: { personaId: null, name: null, email: 'jane.doe@acme-logistics.com' }, createdAt: NOW.toISOString() };
+    const row = (c: any, n: number) => ({ id: `evt-${n}`, kind: 'account.commitment', payload: { commitmentId: c.commitmentId, op: n ? 'status' : 'create', commitment: c }, created_at: new Date(NOW.getTime() + n) });
+    const d = deps();
+    const r = await enrollFromDecision(makePrisma({ referrals: [row(referral, 0)] }), input({ mode: 'live' }), d);
+    expect(r).toMatchObject({ ok: false, reason: 'named_in_referral' });
+    expect(d.addOne).not.toHaveBeenCalled();
+    const skipped = await enrollFromDecision(makePrisma({ referrals: [row(referral, 0), row({ ...referral, status: 'skipped' }, 1)] }), input({ mode: 'live' }), deps());
+    expect(skipped.ok).toBe(true);
   });
 
   it('a localized out-of-office from the account does not hold anyone', async () => {

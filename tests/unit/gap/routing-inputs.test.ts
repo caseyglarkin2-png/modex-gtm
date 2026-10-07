@@ -449,6 +449,8 @@ describe('assembleRoutingInputs full fixture', () => {
       lastDisposition: null,
       meetingBooked: false,
       gapSequence: { state: 'none', sentSteps: 0, lastSentAt: null },
+      // R42b: no open referral obligation names this person.
+      namedInReferral: null,
       unansweredCalls: 0,
     });
 
