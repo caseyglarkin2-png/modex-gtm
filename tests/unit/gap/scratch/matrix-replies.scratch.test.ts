@@ -5,11 +5,14 @@
  * sink), then is read the way Work and the reply panel read it (GET /api/gap/replies, the Work day loaders and
  * workDay, classifyReply / prepareReply) and recorded through POST /api/gap/dispositions. HubSpot, clawd and the AI
  * gateway are the stub; the Gmail wire is the sink. Real reply, referral, objection, an opt-out inside a longer
- * message, an out-of-office with a return day, a bounce, and a Gmail plus HubSpot twin each behave distinctly.
+ * message, an out-of-office with a return day, a bounce, and a Gmail plus HubSpot twin each behave distinctly. A reply
+ * logged through Capture (POST /api/gap/captures on the reply, then the one review, with the real disposition and BID
+ * services) is recorded once and leaves Work; Work's reply card and the account page offer Capture as the only way.
  * Skipped without GAP_SCRATCH_DATABASE_URL pointing at the matrix database (127.0.0.1:55433/gap_matrix).
  */
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { NextRequest } from 'next/server';
+import { readFileSync } from 'node:fs';
 
 const MATRIX_URL = /^postgres(?:ql)?:\/\/[^@/]+@127\.0\.0\.1:55433\/gap_matrix(?:\?.*)?$/;
 const RUN = MATRIX_URL.test(process.env.GAP_SCRATCH_DATABASE_URL ?? '');
@@ -31,7 +34,7 @@ describe.skipIf(!RUN)('R62 matrix: replies (inbound rows after a real first touc
   const tag = `mr${Date.now().toString(36)}`;
   type Sent = { a: import('@/scripts/gap/recovery/seed-matrix').MatrixAccount; p: { id: number; name: string; email: string; title: string | null }; h: string; decisionId: string };
   const sent: Record<string, Sent> = {};
-  const CASES = ['Reply', 'Referral', 'Objection', 'OptOut', 'Away', 'AwayWeekday', 'Delayed', 'Bounce', 'Twin'];
+  const CASES = ['Reply', 'Referral', 'Objection', 'OptOut', 'Away', 'AwayWeekday', 'Delayed', 'Bounce', 'Twin', 'Capture', 'Offer'];
   const names = () => new Set(Object.values(sent).map((x) => x.a.name));
 
   beforeAll(async () => {
@@ -238,6 +241,101 @@ describe.skipIf(!RUN)('R62 matrix: replies (inbound rows after a real first touc
     expect((await replies()).filter((r) => r.accountName === x.a.name)).toHaveLength(0);
     const { commitments } = await readDay(new Date());
     expect(commitments.filter((c) => c.accountName === x.a.name && c.kind === 'prepare_meeting')).toHaveLength(1);
+  }, 240_000);
+
+  /** The account page's own pursuit read (loadAccountView live, the context, loadPursuit): what NOW and its reply list read. */
+  async function pursuitOf(a: Sent['a']) {
+    const { loadAccountView } = await import('@/lib/gap/account-intel/load');
+    const { loadAccountContext } = await import('@/lib/gap/context/load');
+    const { loadPursuit } = await import('@/lib/gap/pursuit/load');
+    const now = new Date();
+    const loaded = (await loadAccountView(prisma, a.slug, now, { live: true, context: true } as never)) as unknown as { brief: never; inputs: never } | null;
+    if (!loaded) throw new Error(`account not loaded: ${a.name}`);
+    const c = await loadAccountContext(prisma, loaded.inputs, now);
+    return loadPursuit(prisma, { brief: loaded.brief, inputs: loaded.inputs, ctx: c, now });
+  }
+
+  // R62 case added at 4e936a90 (R60 decision 1, capture once on a reply): Capture with the REAL disposition and BID
+  // services (POST /api/gap/captures on the reply, then the one review POST /api/gap/captures/[id] op batch).
+  it('a reply logged through Capture: one disposition sourced to the message, the kept statements confirmed and linked to it, the card gone from Work on the next load', async () => {
+    const x = sent.Capture;
+    const PROBLEM = 'We lose about 3 hours per shift hunting for trailers at the Columbus gate.';
+    const COST = 'The detention charges from carriers are killing us.';
+    const text = `${PROBLEM} ${COST} Can you send the case study by Friday?`;
+    const msg = await s.inbound(x.a, x.p, text, { key: 'capture' });
+    // Work as the cached cockpit holds it before the capture: the reply card.
+    const before = await readDay(new Date());
+    const card = before.day.cards.find((c) => c.accountName === x.a.name);
+    expect([card?.stateKind, card?.tier]).toEqual(['replied', 'reply']);
+    // Capture opened on the reply: it carries the message as its source, the thesis and the person; nothing decided yet.
+    const { POST: openCapture } = await import('@/app/api/gap/captures/route');
+    const opened = await openCapture(req('/api/gap/captures', 'POST', { accountName: x.a.name, personaId: x.p.id, source: { kind: 'reply', id: msg.id }, context: 'email', rawText: text }));
+    const cap = (await opened.json()) as { id: string; reply: Record<string, unknown> | null; candidates: Array<{ id: string; quote: string }> };
+    expect(opened.status, JSON.stringify(cap)).toBe(201);
+    expect(cap.reply).toMatchObject({ id: msg.id, sourceKind: 'inbound_message', hypothesisId: x.h, personaId: x.p.id, contactEmail: x.p.email, decision: null });
+    const kept = cap.candidates.filter((c) => c.quote === PROBLEM || c.quote === COST);
+    expect(kept.map((c) => c.quote)).toEqual([PROBLEM, COST]);
+    // ONE review: what the reply means, and the statements kept from it.
+    const { POST: review } = await import('@/app/api/gap/captures/[id]/route');
+    const items = [{ candidateId: 'reply', decision: 'confirm', responseClass: 'problem_confirmed' }, ...kept.map((c) => ({ candidateId: c.id, decision: 'confirm' }))];
+    type Batch = { results: Array<{ candidateId: string; ok: boolean; reason?: string; dispositionId?: string | null }> };
+    const first = await review(req(`/api/gap/captures/${cap.id}`, 'POST', { op: 'batch', items }), ctx(cap.id));
+    const b1 = (await first.json()) as Batch;
+    expect(first.status, JSON.stringify(b1)).toBe(200);
+    expect(b1.results.map((r) => [r.candidateId, r.ok, r.reason ?? null])).toEqual(items.map((i) => [i.candidateId, true, null]));
+    // Exactly one disposition, sourced to the message, with the seller's class; the kept statements are linked to it.
+    const disp = await prisma.conversationDisposition.findMany({ where: { source_id: msg.id }, select: { id: true, source_kind: true, hypothesis_id: true, response_class: true, human_confirmed: true } });
+    expect(disp).toEqual([{ id: expect.any(String), source_kind: 'inbound_message', hypothesis_id: x.h, response_class: 'problem_confirmed', human_confirmed: true }]);
+    expect(b1.results[0].dispositionId).toBe(disp[0].id);
+    const linked = await prisma.buyerInputData.findMany({ where: { disposition_id: disp[0].id }, select: { raw_buyer_language: true, human_confirmed: true, contact_email: true, metadata: true } });
+    expect(linked.map((b) => [b.raw_buyer_language, b.human_confirmed, b.contact_email, (b.metadata as { replyId?: unknown } | null)?.replyId ?? null]).sort()).toEqual([PROBLEM, COST].map((q) => [q, true, x.p.email, msg.id]).sort());
+    // A second press records nothing: each item answers already_decided.
+    const second = await review(req(`/api/gap/captures/${cap.id}`, 'POST', { op: 'batch', items }), ctx(cap.id));
+    const b2 = (await second.json()) as Batch;
+    expect(b2.results.map((r) => [r.candidateId, r.ok, r.reason ?? null])).toEqual(items.map((i) => [i.candidateId, false, 'already_decided']));
+    expect([await prisma.conversationDisposition.count({ where: { source_id: msg.id } }), await prisma.buyerInputData.count({ where: { disposition_id: disp[0].id } })]).toEqual([1, 2]);
+    // The next Work load: the cached cockpit still lists the reply; the page's recorded-reply read drops it, and the
+    // reply card is gone (the live reply list agrees).
+    const { loadRecordedReplyIds, withoutRecordedReplies } = await import('@/lib/gap/work/recorded-replies');
+    const cached = before.items.map((r) => ({ accountName: r.accountName, id: r.id }));
+    const recorded = await loadRecordedReplyIds(prisma, cached.map((r) => r.id));
+    expect([...recorded].filter((id) => id === msg.id)).toEqual([msg.id]);
+    expect(withoutRecordedReplies(cached, undefined, recorded).replies.filter((r) => r.id === msg.id)).toEqual([]);
+    const after = await readDay(new Date());
+    expect(after.items.filter((r) => r.id === msg.id)).toEqual([]);
+    expect(after.day.cards.filter((c) => c.accountName === x.a.name && c.tier === 'reply').map((c) => c.stateKind)).toEqual([]);
+  }, 240_000);
+
+  // R62 case added at 4e936a90 (R60 decision 1): one way to record a reply, Capture, from Work and from the account.
+  it('a reply card and the account page offer only Capture: one link into Capture on the message, no second record link, no reply form on the account', async () => {
+    const x = sent.Offer;
+    const msg = await s.inbound(x.a, x.p, 'Interesting. What would a pilot at one site involve?', { key: 'offer' });
+    // Work: the reply card's next move is Capture on this message; no separate capture link and no record control.
+    const { day } = await readDay(new Date());
+    const card = day.cards.find((c) => c.accountName === x.a.name) as unknown as { stateKind: string; tier: string; next: { label: string; href: string } | null; capture?: unknown; reply?: { record?: unknown; messageId?: string } | null } | undefined;
+    expect([card?.stateKind, card?.tier, card?.next?.label, card?.capture ?? null, card?.reply?.record ?? null]).toEqual(['replied', 'reply', 'Log what they said', null, null]);
+    const [path, query] = (card?.next?.href ?? '').split('?');
+    const q = new URLSearchParams(query ?? '');
+    expect([path, q.get('account'), q.get('context'), q.get('from')]).toEqual(['/gap/capture', x.a.name, 'email', `reply:${msg.id}`]);
+    // The account page: its pursuit read holds the waiting reply, which the page lists with AccountReplies.
+    const pursuit = await pursuitOf(x.a);
+    const waiting = pursuit.replyItems.filter((r) => !r.dispositionId);
+    expect(waiting.map((r) => [r.id, r.personaId])).toEqual([[msg.id, x.p.id]]);
+    const { replyCaptureHref } = await import('@/lib/gap/account-intel/href');
+    const { classifyReply } = await import('@/lib/gap/replies/classify');
+    // The page's own mapping (page.tsx waitingReplies, opened outside Work so no Work context is added).
+    const listed = waiting.map((r) => ({ id: r.id, from: r.fromName?.trim() || r.contactEmail, receivedAt: r.receivedAt, snippet: r.snippet, href: replyCaptureHref({ accountName: x.a.name, replyId: r.id, personaId: r.personaId, deal: null }), label: classifyReply({ snippet: r.snippet, subject: r.subject, from: r.contactEmail }).kind === 'opt_out' ? 'Record the opt-out' : 'Log what they said' }));
+    const { renderToStaticMarkup } = await import('react-dom/server');
+    const { createElement } = await import('react');
+    const { AccountReplies } = await import('@/components/gap/account-replies');
+    const html = renderToStaticMarkup(createElement(AccountReplies, { items: listed, accountName: x.a.name }));
+    const links = [...html.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>([^<]*)<\/a>/g)].map((m) => [m[1].replace(/&amp;/g, '&'), m[2]]);
+    expect(links).toEqual([[replyCaptureHref({ accountName: x.a.name, replyId: msg.id, personaId: x.p.id, deal: null }), 'Log what they said']]);
+    expect(html.match(/<(?:form|input|select|textarea|button)\b/g) ?? []).toEqual([]);
+    // The page source: the waiting replies render through that list, never a reply form of its own.
+    const page = readFileSync('src/app/gap/accounts/[slug]/page.tsx', 'utf8');
+    expect(page.match(/RepliesTriage|DispositionForm/g) ?? []).toEqual([]);
+    expect(page).toContain('<AccountReplies items={waitingReplies}');
   }, 240_000);
 
   it('no case reached the network', () => {

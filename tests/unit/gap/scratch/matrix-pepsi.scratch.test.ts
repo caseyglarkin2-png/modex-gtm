@@ -10,6 +10,8 @@
  */
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { NextRequest } from 'next/server';
+import { spawn } from 'node:child_process';
+import { join } from 'node:path';
 
 const MATRIX_URL = /^postgres(?:ql)?:\/\/[^@/]+@127\.0\.0\.1:55433\/gap_matrix(?:\?.*)?$/;
 const RUN = MATRIX_URL.test(process.env.GAP_SCRATCH_DATABASE_URL ?? '');
@@ -217,6 +219,53 @@ describe.skipIf(!RUN)('R62 matrix: the Pepsi regression (the page read, the page
     expect((row!.metadata as { approach?: string } | null)?.approach ?? 'event_led').not.toBe('event_led');
   }, 60_000);
 
+  // R62 case added at 4e936a90 (R65 for the R64 repair): the stranded-draft dry run, the very command the release runs
+  // against production (scripts/gap/recovery/repair-stranded-drafts.ts), here against the matrix database on the
+  // production-shaped Pepsiprod row. It names Tom's Tulsa draft ADOPT with the key the R11 service stamps, reads only,
+  // and refuses to run without --dry-run. The next case adopts that same id through the page's draft route and checks
+  // the key the plan named.
+  it('the stranded-draft dry run (the script itself, read only) says ADOPT for Tom\'s Tulsa draft on the Pepsiprod row, with the key the R11 service stamps; without --dry-run it refuses', async () => {
+    const tom = prod.people.find((p) => p.name.startsWith('Tom'))!;
+    const tulsa = prod.facts.find((f) => f.label === 'tulsa')!;
+    const url = process.env.GAP_SCRATCH_DATABASE_URL ?? '';
+    const script = (args: string[]) =>
+      new Promise<{ code: number | null; out: string; err: string }>((resolve, reject) => {
+        const child = spawn(process.execPath, [join(process.cwd(), 'node_modules', 'tsx', 'dist', 'cli.mjs'), 'scripts/gap/recovery/repair-stranded-drafts.ts', ...args], { env: { ...process.env, DATABASE_URL: url }, stdio: ['ignore', 'pipe', 'pipe'] });
+        let out = '';
+        let err = '';
+        child.stdout!.on('data', (b: Buffer) => (out += b.toString()));
+        child.stderr!.on('data', (b: Buffer) => (err += b.toString()));
+        const t = setTimeout(() => {
+          child.kill();
+          reject(new Error('the dry run did not finish'));
+        }, 240_000);
+        child.on('error', reject);
+        child.on('exit', (code) => {
+          clearTimeout(t);
+          resolve({ code, out, err });
+        });
+      });
+    // Without --dry-run: refused before reading anything (exit 2), in words.
+    const refused = await script([]);
+    expect([refused.code, refused.err], refused.out).toEqual([2, expect.stringMatching(/Refused: this script only reads \(--dry-run\)\.[\s\S]*Nothing was read or written\./)]);
+    // The dry run, as JSON: the database it read (host and name only, never the credentials) and the plan.
+    const run = await script(['--dry-run', '--json']);
+    expect(run.code, run.err).toBe(0);
+    const plan = JSON.parse(run.out.slice(run.out.indexOf('{'), run.out.lastIndexOf('}') + 1)) as { database: string; truncated: boolean; items: Array<Record<string, unknown>> };
+    const u = new URL(url);
+    expect([plan.database, run.out.includes(`${u.username}:${u.password}@`), plan.truncated]).toEqual(['127.0.0.1:55433/gap_matrix', false, false]);
+    const key = `anchor:${tulsa.id}:p${tom.id}`;
+    const mine = plan.items.filter((i) => i.accountName === prod.name);
+    if (Date.now() >= new Date(PROD_EXPIRES).getTime()) {
+      // After the row's recorded expiry the honest plan is that the service would refuse the fact now.
+      expect(mine).toEqual([expect.objectContaining({ hypothesisId: prodLegacyId, verdict: 'not_adopted', why: expect.stringMatching(/fails the service's checks now/) })]);
+      return;
+    }
+    expect(mine).toEqual([{ hypothesisId: prodLegacyId, accountName: prod.name, personaId: tom.id, person: tom.name, family: 'unmapped', createdAt: expect.any(String), ageDays: 0, verdict: 'adopt', factId: tulsa.id, factRole: 'supporting', key, why: `Drafting from its supporting fact for ${tom.name} adopts it as ${key} and continues the draft (the family question, then review).` }]);
+    // Read only: the draft is still stranded, exactly as it was.
+    expect(await prisma.prospectingHypothesis.findUnique({ where: { id: prodLegacyId }, select: { status: true, source_ref: true, problem_family: true } })).toEqual({ status: 'draft', source_ref: null, problem_family: 'unmapped' });
+  }, 300_000);
+
   // Was DEFECT src/lib/gap/compiler/evidence-from-signals.ts:19 (a flat 45-day evidence age) against
   // research/evidence-gate.ts:263 and story/anchor.ts: the approved Tulsa story dead-ended at the preview with
   // copy_rejected "C01 ... cites stale evidence". Fixed by the writer at daa61ff3 (one freshness clock,
@@ -246,6 +295,12 @@ describe.skipIf(!RUN)('R62 matrix: the Pepsi regression (the page read, the page
     const ev = await prisma.hypothesisEvent.findMany({ where: { hypothesis_id: prodLegacyId }, select: { action: true }, orderBy: { created_at: 'asc' } });
     expect(ev.map((e) => e.action)).toEqual(['propose', 'edit', 'submit', 'approve', 'activate']);
     expect(h.writtenTo(tom.email)).toBe(0);
+    // The dry run's prediction holds: the R11 service stamped the key the plan named on that same id, and the draft
+    // is no longer stranded (the plan, read only, lists nothing here now).
+    expect((await prisma.prospectingHypothesis.findUnique({ where: { id: prodLegacyId }, select: { source_ref: true } }))?.source_ref).toBe(`anchor:${tulsa.id}:p${tom.id}`);
+    const { planStrandedRepair } = await import('@/lib/gap/recovery/stranded-drafts');
+    const { readOnlyPrisma } = await import('@/lib/gap/recovery/read-only');
+    expect((await planStrandedRepair(readOnlyPrisma(prisma), new Date())).items.filter((i) => i.accountName === prod.name)).toEqual([]);
   }, 300_000);
 
   it('the production shape reaches a READY card for Tom on the Tulsa story (draft, approve, use, route) without a family question', async () => {

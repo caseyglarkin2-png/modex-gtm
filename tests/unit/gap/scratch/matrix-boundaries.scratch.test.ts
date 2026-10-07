@@ -2,9 +2,10 @@
 /**
  * R62 MATRIX, MIGRATION AND BOUNDARIES (mandate section 7): the corpus's legacy and held shapes through the REAL
  * routes (the routing run route, the send route, the replies route, the draft route, Ask GAP), the database's own freeze
- * triggers, the stranded-draft repair in its production shape, and every write route answering an unauthenticated
- * caller 401. HubSpot, clawd and the AI gateway on the stub; the Gmail wire on the sink. Skipped without
- * GAP_SCRATCH_DATABASE_URL pointing at the matrix database (127.0.0.1:55433/gap_matrix).
+ * triggers, the stranded-draft repair in its production shape, every write route answering an unauthenticated
+ * caller 401, and no seller heading or label saying HYPOTHESIS or BID. HubSpot, clawd and the AI gateway on the stub;
+ * the Gmail wire on the sink. Skipped without GAP_SCRATCH_DATABASE_URL pointing at the matrix database
+ * (127.0.0.1:55433/gap_matrix).
  */
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { NextRequest } from 'next/server';
@@ -31,6 +32,8 @@ describe.skipIf(!RUN)('R62 matrix: migration and boundaries (legacy shapes, free
   const tag = `mb${Date.now().toString(36)}`;
   const acct = (b: string) => corpus.accounts.find((a) => a.name.startsWith(b))!;
   let stranded: { a: import('@/scripts/gap/recovery/seed-matrix').MatrixAccount; tom: { id: number; title: string | null }; factId: string; legacyId: string; observation: string };
+  /** An account with a person and a checked fact and no thesis at all. */
+  let noThesis: import('@/scripts/gap/recovery/seed-matrix').MatrixAccount;
 
   beforeAll(async () => {
     prisma = (await import('@/lib/prisma')).prisma as never;
@@ -52,6 +55,9 @@ describe.skipIf(!RUN)('R62 matrix: migration and boundaries (legacy shapes, free
       if (!legacy.ok) throw new Error(JSON.stringify(legacy));
       stranded = { a, tom, factId: f.id, legacyId: legacy.id, observation };
     }
+    noThesis = await s.account('Boundary Nothesis');
+    await s.person(noThesis, 'Nia', 'VP Transportation');
+    await s.fact(noThesis, 'dc', `${noThesis.name} opened a distribution center in Joliet, Illinois, to serve its Midwest stores.`, { title: `${noThesis.name} opens a Joliet DC`, observedAt: new Date(Date.now() - 8 * 86_400_000).toISOString() });
     h = await startMatrixHarness({ companies: [...corpus.stub.companies, ...s.companies], deals: corpus.stub.deals });
     await h.control({ companyProps: { intent_score: '60', last_intent_at: new Date().toISOString() } });
   }, 400_000);
@@ -184,6 +190,92 @@ describe.skipIf(!RUN)('R62 matrix: migration and boundaries (legacy shapes, free
     }
     expect(h.requests().filter((q) => q.path === '/v1/chat/completions').length).toBe(before);
   }, 120_000);
+
+  // R62 case added at 4e936a90 (R60 decision 2): the seller reads "thesis", "what we think is happening" and "what the
+  // buyer said"; ids, routes, flags and ledger kinds keep their names. Every heading and label the corpus produces
+  // through the page's own read, the routing run route and the work queue route, plus the label tables, is swept.
+  it('no seller heading or label says HYPOTHESIS or BID: the corpus through the page read, the routed cards and their labels, and the label tables', async () => {
+    const accounts = [...corpus.accounts, noThesis];
+    const names = new Set(accounts.map((a) => a.name));
+    const run = await routeRun(corpus.accounts.map((a) => a.name));
+    expect(run.status, JSON.stringify(run.body).slice(0, 400)).toBe(200);
+    const labels: Array<[string, string]> = [];
+    const add = (where: string, v: unknown) => {
+      if (typeof v === 'string' && v.trim()) labels.push([where, v]);
+    };
+    const { loadAccountView } = await import('@/lib/gap/account-intel/load');
+    const { loadAccountContext } = await import('@/lib/gap/context/load');
+    const { loadPursuit } = await import('@/lib/gap/pursuit/load');
+    const { projectNow } = await import('@/lib/gap/context/now');
+    const { projectBrief } = await import('@/lib/gap/context/brief');
+    const { projectStory } = await import('@/lib/gap/story/story');
+    for (const a of accounts) {
+      const now = new Date();
+      const loaded = (await loadAccountView(prisma, a.slug, now, { live: true, context: true } as never)) as unknown as { brief: never; inputs: never } | null;
+      if (!loaded) throw new Error(`account not loaded: ${a.name}`);
+      const c = await loadAccountContext(prisma, loaded.inputs, now);
+      const pursuit = await loadPursuit(prisma, { brief: loaded.brief, inputs: loaded.inputs, ctx: c, now });
+      const v = projectNow(loaded.brief, c, loaded.inputs, now);
+      add(`${a.name}: NOW state line`, v.stateLine);
+      add(`${a.name}: NOW next`, v.next.text);
+      for (const g of v.gap) add(`${a.name}: NOW gap`, `${g.element}: ${g.state}`);
+      for (const l of [...v.whyNow, ...v.know]) add(`${a.name}: NOW tag`, l.tag);
+      for (const sec of projectBrief(loaded.brief, c, loaded.inputs, now)) add(`${a.name}: brief section`, sec.title);
+      const story = projectStory({ accountName: a.name, now, state: pursuit.state, brief: loaded.brief, inputs: loaded.inputs, whyNow: v.whyNow, know: v.know, touches: [], clawdRead: 'ok', vaultNote: null, excluded: [] } as never);
+      for (const row of story.rows) {
+        add(`${a.name}: story row`, row.label);
+        add(`${a.name}: story tag`, row.tag);
+      }
+      if (a === noThesis) {
+        // An account with no thesis at all says so in the replacement word.
+        const brief = loaded.brief as { glance?: { topHypothesis?: string }; thesis?: { whatMayBeBroken?: string } };
+        expect([brief.glance?.topHypothesis, brief.thesis?.whatMayBeBroken]).toEqual(['No strong thesis yet.', 'Unknown: No strong thesis yet.']);
+        add(`${a.name}: glance`, brief.glance?.topHypothesis);
+        add(`${a.name}: thesis`, brief.thesis?.whatMayBeBroken);
+      }
+    }
+    // The routed cards, as the work queue route pages them for this run, with the labels the card shows.
+    const { GET } = await import('@/app/api/gap/queue/route');
+    const { cardReadiness } = await import('@/lib/gap/routing/card-readiness');
+    const { sellerActionLabel } = await import('@/lib/gap/routing/seller-action');
+    const runId = String((run.body as { runId?: string }).runId ?? '');
+    expect(runId).not.toBe('');
+    type QItem = { action: string; account: { name: string }; persona: { displayName: string | null } };
+    const cards: QItem[] = [];
+    let cursor: string | null = null;
+    for (let page = 0; page < 10; page += 1) {
+      const res = await GET(req(`/api/gap/queue?runId=${encodeURIComponent(runId)}&limit=100${cursor ? `&cursor=${encodeURIComponent(cursor)}` : ''}`, 'GET'));
+      const body = (await res.json()) as { items: QItem[]; nextCursor: string | null };
+      expect(res.status, JSON.stringify(body).slice(0, 300)).toBe(200);
+      cards.push(...body.items.filter((i) => names.has(i.account.name)));
+      cursor = body.nextCursor;
+      if (!cursor) break;
+    }
+    expect(cards.length).toBeGreaterThan(0);
+    for (const i of cards) {
+      const where = `card ${i.account.name}`;
+      const r = cardReadiness(i as never);
+      if (r.state === 'blocked') {
+        add(`${where}: blocked`, r.title);
+      } else {
+        add(`${where}: primary`, r.primary.label);
+        for (const s2 of r.secondary) add(`${where}: secondary`, s2.label);
+        add(`${where}: warning`, r.warning?.title);
+      }
+      add(`${where}: action`, sellerActionLabel(i.action, i.persona.displayName?.split(' ')[0] ?? null, i.account.name));
+    }
+    // The label tables: every routing action's seller words, the human-action and purpose labels, the call brief's.
+    const { ROUTING_ACTIONS } = await import('@/lib/gap/taxonomy');
+    const { BRIEF_LABELS } = await import('@/components/gap/pre-call-brief');
+    const { HUMAN_ACTION_LABEL } = await import('@/components/gap/decision-card');
+    const { PURPOSE_LABEL } = await import('@/lib/gap/people/owner-resolution');
+    for (const act of ROUTING_ACTIONS) add(`action ${act}`, sellerActionLabel(act, 'Ann', 'Acme'));
+    for (const [k, v] of [...Object.entries(BRIEF_LABELS), ...Object.entries(HUMAN_ACTION_LABEL), ...Object.entries(PURPOSE_LABEL)]) add(`label ${k}`, v);
+    expect([BRIEF_LABELS.openBids, HUMAN_ACTION_LABEL.approved_hypothesis, PURPOSE_LABEL.HYPOTHESIS_ACTIVATION, sellerActionLabel('approve_hypothesis', 'Ann', 'Acme')]).toEqual(['What the buyer said', 'I approved the thesis', 'this thesis', 'Review the thesis']);
+    // The sweep: none of them says Hypothesis or BID.
+    expect(labels.length).toBeGreaterThan(50);
+    expect(labels.filter(([, l]) => /\bhypothes[ie]s\b/i.test(l) || /\bBIDs?\b/.test(l))).toEqual([]);
+  }, 400_000);
 
   it('no case reached the network', () => {
     expect(h.refusedFetches).toEqual([]);

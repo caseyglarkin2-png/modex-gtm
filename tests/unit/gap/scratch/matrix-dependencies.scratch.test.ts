@@ -5,8 +5,9 @@
  * unreadable (all reads, or only the deal associations), clawd's suppression contract answering 500, the AI gateway
  * at quota or answering malformed output, a fetched page and a seller note carrying instructions, a shared link to a
  * private address, a queued story whose research keeps failing (the dead letter), and a cold instance reading the
- * durable summary. Every failure must refuse or degrade for its own reason and never act. Skipped without
- * GAP_SCRATCH_DATABASE_URL pointing at the matrix database (127.0.0.1:55433/gap_matrix).
+ * durable summary. Every failure must refuse or degrade for its own reason and never act. The operator's view
+ * (GET /api/gap/health?operations=1) counts what the file breaks on purpose; the plain call carries none of it.
+ * Skipped without GAP_SCRATCH_DATABASE_URL pointing at the matrix database (127.0.0.1:55433/gap_matrix).
  */
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { NextRequest } from 'next/server';
@@ -32,13 +33,16 @@ describe.skipIf(!RUN)('R62 matrix: dependencies (each boundary failing on purpos
   const tag = `mdep${Date.now().toString(36)}`;
   type Ready = Awaited<ReturnType<import('@/scripts/gap/recovery/seed-matrix').MatrixSeeder['readyAccount']>>;
   const R: Record<string, Ready> = {};
+  /** The one open deal in this file (the operations case's HubSpot change targets it). */
+  let opsDeal: import('@/scripts/gap/recovery/seed-corpus').StubDeal;
 
   beforeAll(async () => {
     prisma = (await import('@/lib/prisma')).prisma as never;
     const { createMatrixSeeder, startMatrixHarness } = await import('@/scripts/gap/recovery/seed-matrix');
     s = createMatrixSeeder(prisma, tag);
-    for (const c of ['HubDown', 'HubPartial', 'Suppression', 'Model', 'Note', 'DeadLetter', 'Cold']) R[c] = await s.readyAccount(`Dep ${c} Co`);
-    h = await startMatrixHarness({ companies: s.companies });
+    for (const c of ['HubDown', 'HubPartial', 'Suppression', 'Model', 'Note', 'DeadLetter', 'Cold', 'Ops']) R[c] = await s.readyAccount(`Dep ${c} Co`);
+    opsDeal = s.openDeal(R.Ops.a, 1);
+    h = await startMatrixHarness({ companies: s.companies, deals: s.deals });
     await h.control({ companyProps: { intent_score: '60', last_intent_at: new Date().toISOString() } });
   }, 300_000);
   afterAll(async () => {
@@ -228,6 +232,90 @@ describe.skipIf(!RUN)('R62 matrix: dependencies (each boundary failing on purpos
     // The remembered READY never sends: there is no card for this account until it is used and routed.
     expect(await prisma.routingDecision.count({ where: { account_name: r.a.name } })).toBe(0);
   }, 120_000);
+
+  // R62 case added at 4e936a90 (R65): the operator's view counts what this case breaks on purpose (a stranded draft, an
+  // incomplete proposal, a dead-letter story, a HubSpot change that failed against the stub while it was down), each
+  // with its words, owner and where to retry; the plain call the Work strip makes on every load carries none of it.
+  it('GET /api/gap/health?operations=1 counts the broken handoffs and the failed HubSpot change with their words, owner and retry path; the plain call carries none', async () => {
+    const r = R.Ops;
+    type Line = { key: string; state: string; label: string; count: number | null; href: string | null };
+    type Ops = { state: string; failures: Line[]; crm: { failed: Array<Record<string, unknown> & { proposalId: string }> }; inputs: { handoffs: { stranded: number | null; incomplete: number | null; deadLetters: number | null } } };
+    const { GET } = await import('@/app/api/gap/health/route');
+    const health = async (q: string) => {
+      const res = await GET(req(`/api/gap/health${q}`, 'GET'));
+      return { status: res.status, body: (await res.json()) as Record<string, unknown> & { operations?: Ops } };
+    };
+    const before = await health('?operations=1');
+    expect(before.status, JSON.stringify(before.body).slice(0, 400)).toBe(200);
+    const b = before.body.operations!.inputs.handoffs;
+    const failedBefore = before.body.operations!.crm.failed.length;
+    expect([typeof b.stranded, typeof b.incomplete, typeof b.deadLetters]).toEqual(['number', 'number', 'number']);
+    const t0 = new Date();
+
+    // 1. A stranded draft: the older path's shape (unmapped family, no story key) on a checked fact.
+    const { proposeHypothesis } = await import('@/lib/gap/hypothesis/service');
+    const { citedQuote } = await import('@/lib/gap/research/propose');
+    const daysAgo = (n: number) => new Date(Date.now() - n * 86_400_000).toISOString();
+    const f1 = await s.fact(r.a, 'stranded', `${r.a.name} will close its Akron distribution center and move the volume to its Columbus hub.`, { title: `${r.a.name} closes its Akron DC`, observedAt: daysAgo(6) });
+    const legacy = await proposeHypothesis(prisma, { accountName: r.a.name, primaryPersonaId: r.p.id, persona: 'transportation', problemFamily: 'unmapped', observation: citedQuote(f1.title, f1.text, f1.id, r.a.name), problemHypothesis: 'My guess is that this change moves load onto the gates, yards and docks they run.', rootCauseHypotheses: [], impactHypotheses: [], falsificationQuestions: ['How do trailers get checked in today?'], whatANoMeans: null, confidence: 40, signalIds: [f1.id], createdBy: 'casey@freightroll.com' } as never);
+    expect(legacy.ok, JSON.stringify(legacy)).toBe(true);
+    // 2. An incomplete proposal: a keyed draft (the R11 path) never submitted.
+    const f2 = await s.fact(r.a, 'incomplete', `${r.a.name} opened a cross-dock in Dayton to serve its Ohio stores.`, { title: `${r.a.name} opens a Dayton cross-dock`, observedAt: daysAgo(4) });
+    await s.thesis(r.a, r.p.id, f2, 'draft');
+    // 3. A dead-letter story: research fails past its last attempt (the selection scoped to queued stories, as above).
+    const sig = await prisma.gapSignal.create({ data: { url: `https://news.example.com/${r.a.slug}/ops-dead-letter`, url_hash: `matrix-${tag}-ops-dl`, title: `${r.a.name} expands its Indiana network`, origin: 'casey_share', source_class: 'news', account_name: r.a.name, resolution: 'resolved', resolution_basis: 'explicit_account', research_status: 'queued', submitted_by: 'casey@freightroll.com' } as never });
+    const { runBackgroundResearch } = await import('@/lib/gap/research/background');
+    const outage = async () => {
+      throw new Error('provider_unavailable: 503 search provider down');
+    };
+    const onlyQueued = { loadGroups: async () => [], listQueue: async () => ({ items: [], nextCursor: null }), watch: async () => [] };
+    for (let i = 0; i < 3; i += 1) await runBackgroundResearch(prisma, { now: new Date(Date.now() + i * 3 * 86_400_000), cap: 50 }, { research: outage as never, ...(onlyQueued as never) });
+    expect((await prisma.gapSignal.findUnique({ where: { id: sig.id }, select: { research_status: true } }))?.research_status).toBe('research_failed');
+    // 4. A HubSpot change approved (recorded, writes off), then retried with approved writes on while the stub is down.
+    const { stableHash } = await import('@/lib/gap/deals/crm-model');
+    const { POST: crm } = await import('@/app/api/gap/crm-sync/route');
+    const dealId = String(opsDeal.id);
+    const note = `Recap for ${r.a.name}: the gate check-in is the constraint.`;
+    const approved = await crm(req('/api/gap/crm-sync', 'POST', { op: 'approve', accountName: r.a.name, dealId, dealName: opsDeal.dealname, change: { kind: 'note', objectType: 'deal', objectId: dealId, body: note }, origin: { kind: 'recap', id: `${dealId}:${stableHash(note)}`, label: 'the agreed recap prepared in GAP' } }));
+    const ab = (await approved.json()) as { item?: { proposalId: string; state: string } };
+    expect([approved.status, ab.item?.state], JSON.stringify(ab)).toEqual([200, 'off']);
+    const proposalId = ab.item!.proposalId;
+    expect(process.env.HUBSPOT_API_BASE_PATH).toMatch(/^http:\/\/127\.0\.0\.1:\d+$/);
+    process.env.GAP_CRM_APPROVED_WRITES_ENABLED = 'true';
+    process.env.ALLOW_EXTERNAL_WRITES_IN_TEST = 'true';
+    try {
+      await h.stubPost('/__stub/control', { failWrites: true });
+      const retried = await crm(req('/api/gap/crm-sync', 'POST', { op: 'retry', proposalId }));
+      const rb = (await retried.json()) as { item?: { state: string; detail: string | null } };
+      expect([rb.item?.state, rb.item?.detail], JSON.stringify(rb)).toEqual(['failed', expect.stringMatching(/503|unavailable/i)]);
+    } finally {
+      delete process.env.GAP_CRM_APPROVED_WRITES_ENABLED;
+      delete process.env.ALLOW_EXTERNAL_WRITES_IN_TEST;
+      await h.stubPost('/__stub/control', { failWrites: false });
+    }
+    expect(((await h.stubGet('/__stub/writes')) as { notes: unknown[] }).notes).toEqual([]);
+
+    // The operator's view: each count moved by exactly what this case broke, said in words, with owner and retry path.
+    const after = await health('?operations=1');
+    const ops = after.body.operations!;
+    const a = ops.inputs.handoffs;
+    const moved = await prisma.gapSignal.count({ where: { research_status: 'research_failed', updated_at: { gte: t0 } } });
+    expect([a.stranded! - b.stranded!, a.incomplete! - b.incomplete!, a.deadLetters! - b.deadLetters!, moved > 0]).toEqual([1, 1, moved, true]);
+    const line = (k: string) => ops.failures.find((l) => l.key === k);
+    const many = (c: number, one: string, more: string) => `${c} ${c === 1 ? one : more}`;
+    expect(line('drafts_stranded')).toMatchObject({ state: 'DEGRADED', count: a.stranded, label: `${many(a.stranded!, 'draft', 'drafts')} stranded (no story key; the R11 service adopts each when its fact is drafted): run the repair dry run` });
+    expect(line('dead_letter_signals')).toMatchObject({ state: 'DEGRADED', count: a.deadLetters, href: '/gap/signals', label: `${many(a.deadLetters!, 'signal', 'signals')} in the research dead letter (failed past the last attempt): open Signals to retry or dismiss` });
+    const { accountHref } = await import('@/lib/gap/account-intel/href');
+    expect(ops.crm.failed.length).toBe(failedBefore + 1);
+    expect(ops.crm.failed.find((l) => l.proposalId === proposalId)).toMatchObject({ accountName: r.a.name, kind: 'note', state: 'failed', owner: 'casey@freightroll.com', href: `${accountHref(r.a.name)}?view=brief#deal-workspace`, action: 'Retry it on the deal (the text is kept; a retry never writes twice)', detail: expect.stringMatching(/503|unavailable/i) });
+    expect(line('crm_failed')).toMatchObject({ state: 'DEGRADED', count: failedBefore + 1, label: `${many(failedBefore + 1, 'HubSpot change', 'HubSpot changes')} failed or in conflict: each lists its owner and where to retry` });
+    expect(['DEGRADED', 'BLOCKED']).toContain(ops.state);
+    // The plain call (the Work strip's, on every Work load) carries none of the operator's view.
+    const plain = await health('');
+    expect(plain.status).toBe(200);
+    expect(Object.keys(plain.body).filter((k) => k === 'operations')).toEqual([]);
+    expect(JSON.stringify(plain.body).match(/stranded|dead letter|failed or in conflict/g) ?? []).toEqual([]);
+  }, 300_000);
 
   it('no case reached the network (only the stub and the sink were ever addressed)', () => {
     expect(h.refusedFetches).toEqual([]);
