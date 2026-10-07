@@ -47,7 +47,8 @@ describe('the prepared artifacts (R53)', () => {
       '- Pilot at Columbus: two weeks, by Oct 20 (Ann Scratch)',
       '',
       'What I owe you:',
-      '- Send Ann the dock schedule template',
+      // Sprint 5 review (R53): written to Ann, in the second person.
+      '- Send you the dock schedule template',
       '',
       'If any of this is off, tell me and I will fix it.',
     ].join('\n'));
@@ -65,7 +66,7 @@ describe('the prepared artifacts (R53)', () => {
     expect(recap.why).toBe('Nothing confirmed from the buyer on YardFlow - Kroger yet: there is no recap to send until there is.');
     expect(recap.gaps[0]).toBe('No confirmed buyer statement on this deal yet.');
     const criteria = arts.find((a) => a.kind === 'pilot_criteria')!;
-    expect(criteria.text).toBe('Pilot success criteria: none agreed yet.\n\nQuestion for Ann: what would you need to see at the end of a pilot to call it worth rolling out?');
+    expect(criteria.text).toBe('Pilot success criteria: none agreed yet.\n\nWhat would you need to see at the end of a pilot to call it worth rolling out?');
     expect(criteria.text).not.toMatch(/\d/);
     expect(criteria.gaps).toEqual(['No success measure confirmed by the buyer: nothing is invented.']);
   });

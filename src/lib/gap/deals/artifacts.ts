@@ -17,7 +17,12 @@
  * No governed copy family exists for deal artifacts (the compiler's families are first-touch), so each is a prepared
  * text block labeled "Prepared, not sent", with its citations and a copy control. `artifactProblems` refuses what
  * may never appear: an em dash, "throughput", a canon figure without its qualifier, or a claim of the prospect's
- * acceptance or of legal, security or procurement approval that is not inside the buyer's own quoted words.
+ * acceptance or of legal, security or procurement approval that is not inside the buyer's own quoted words, and
+ * (Sprint 5 review, R53) the CRM's own deal name ("YardFlow - Kroger Scratch Co x71007" is our record, not their words).
+ *
+ * Voice (Sprint 5 review): the text is written TO its recipient, so what we owe them is in the second person ("Send
+ * you the dock schedule template", never "Send Ann the ..." to Ann); what we owe someone else on their side is listed
+ * under "What I owe your team", by name.
  */
 import { CANON_NUMBERS } from '../compiler/canon';
 import type { Milestone } from './action-plan';
@@ -60,14 +65,21 @@ export interface ArtifactInput {
   needs: ReadonlyArray<{ id: string; type: string; quote: string; who: string; at: string; accountLevel: boolean }>;
   /** This deal's plan (R52). */
   plan: readonly Milestone[];
-  /** This deal's open obligations. */
-  commitments: ReadonlyArray<{ commitmentId: string; kind: string; title: string; line: string; dueAt: string | null }>;
+  /** This deal's open obligations (`person`: who on their side it is owed to, when recorded). */
+  commitments: ReadonlyArray<{ commitmentId: string; kind: string; title: string; line: string; dueAt: string | null; person?: string | null }>;
   /** The account's ROI model, when one exists (account-intel: MODELED). */
   roi: { hardSavingsAnnual: number; totalValueAnnual: number; facilities: number; calculatorVersion: string | null; assumptions: readonly string[] } | null;
 }
 
 const dayOf = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' });
 const first = (name: string) => name.split(' ')[0];
+const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+/** Sprint 5 review: a line written to `to` names them as "you" ("Ann's question" is "your question"). */
+export function toSecondPerson(text: string, to: string | null): string {
+  if (!to?.trim()) return text;
+  const names = [...new Set([to.trim(), first(to.trim())])].sort((a, b) => b.length - a.length).map(escapeRe);
+  return text.replace(new RegExp(`\\b(?:${names.join('|')})(['\u2019]s)?\\b`, 'g'), (_m, s: string | undefined) => (s ? 'your' : 'you'));
+}
 const money = (n: number) => `$${Math.round(n).toLocaleString('en-US')}`;
 const MEASURE_TYPES = new Set(['metric', 'impact', 'future_state', 'constraint']);
 const STATEMENT_TYPES = new Set(['current_state', 'business_problem', 'root_cause', 'impact', 'metric', 'priority', 'future_state', 'constraint']);
@@ -79,11 +91,13 @@ export const YARDFLOW_PROOF = 'For reference, our own measured result: at 24 liv
 const ACCEPTANCE = /\b(?:you(?:'ve| have)? (?:approved|accepted|signed off|agreed to (?:buy|purchase|proceed))|(?:legal|security|procurement|IT) (?:has |have )?(?:approved|cleared|signed off)|approved by (?:legal|security|procurement)|(?:passed|cleared) (?:your )?(?:legal|security) review|signed off on (?:the )?(?:pilot|contract|purchase))\b/i;
 
 /** The guard over a prepared text: what may never appear outside the buyer's own quoted words. */
-export function artifactProblems(text: string, buyerQuotes: readonly string[] = []): string[] {
+export function artifactProblems(text: string, buyerQuotes: readonly string[] = [], crmNames: readonly (string | null | undefined)[] = []): string[] {
   const problems: string[] = [];
   if (text.includes('\u2014')) problems.push('an em dash');
   let outside = text;
   for (const q of buyerQuotes) outside = outside.split(q).join(' ');
+  // Sprint 5 review (R53): the CRM's deal name is our record, never the buyer's words.
+  for (const n of crmNames) if (n?.trim() && outside.toLowerCase().includes(n.trim().toLowerCase())) problems.push(`the CRM deal name "${n.trim()}" (say what it is in their words)`);
   if (/\bthroughput\b/i.test(outside)) problems.push('"throughput" (say production capacity)');
   const m = ACCEPTANCE.exec(outside);
   if (m) problems.push(`a claim of approval or acceptance the buyer did not make: "${m[0]}"`);
@@ -96,8 +110,8 @@ export function artifactProblems(text: string, buyerQuotes: readonly string[] = 
   return problems;
 }
 
-function finish(a: Omit<PreparedArtifact, 'status' | 'governed' | 'problems'>, quotes: readonly string[]): PreparedArtifact {
-  return { ...a, status: 'Prepared, not sent', governed: false, problems: artifactProblems(a.text, quotes) };
+function finish(a: Omit<PreparedArtifact, 'status' | 'governed' | 'problems'>, quotes: readonly string[], crmNames: readonly (string | null)[] = []): PreparedArtifact {
+  return { ...a, status: 'Prepared, not sent', governed: false, problems: artifactProblems(a.text, quotes, crmNames) };
 }
 
 export function prepareArtifacts(i: ArtifactInput): PreparedArtifact[] {
@@ -109,6 +123,12 @@ export function prepareArtifacts(i: ArtifactInput): PreparedArtifact[] {
   const agreedByBuyer = i.plan.filter((m) => m.state === 'agreed' && m.buyerAgreed);
   const agreedNotByBuyer = i.plan.filter((m) => m.state === 'agreed' && !m.buyerAgreed);
   const ours = i.commitments.filter((c) => c.kind === 'deliverable' || c.kind === 'answer_request');
+  // Sprint 5 review: owed to the recipient (or to nobody recorded) is said to them as "you"; owed to someone else on
+  // their side is listed for the team, by name.
+  const isLead = (who: string | null | undefined) => !who || !lead || who.trim().toLowerCase() === lead.name.trim().toLowerCase();
+  const owedYou = ours.filter((c) => isLead(c.person)).map((c) => toSecondPerson(c.title, lead?.name ?? null));
+  const owedTeam = ours.filter((c) => !isLead(c.person)).map((c) => c.title);
+  const crm = [i.deal.name];
 
   // RECAP: their words, in order, then only what THEY agreed, then what we owe.
   const recapLines = [
@@ -117,7 +137,8 @@ export function prepareArtifacts(i: ArtifactInput): PreparedArtifact[] {
     'Thank you for the time. Here is what I heard, in your words, so you can correct anything I got wrong:',
     ...(statements.length ? statements.map((n) => `- "${n.quote}" (${n.who})`) : ['- (Nothing confirmed yet: send this only after you have their words.)']),
     ...(agreedByBuyer.length ? ['', 'What we agreed as next steps:', ...agreedByBuyer.map((m) => `- ${m.title}${m.dueDay ? `, by ${dayOf(`${m.dueDay}T16:00:00Z`)}` : ''}${m.responsible?.name ? ` (${m.responsible.name})` : ''}`)] : []),
-    ...(ours.length ? ['', 'What I owe you:', ...ours.map((c) => `- ${c.title}`)] : []),
+    ...(owedYou.length ? ['', 'What I owe you:', ...owedYou.map((t) => `- ${t}`)] : []),
+    ...(owedTeam.length ? ['', 'What I owe your team:', ...owedTeam.map((t) => `- ${t}`)] : []),
     '',
     'If any of this is off, tell me and I will fix it.',
   ];
@@ -135,6 +156,7 @@ export function prepareArtifacts(i: ArtifactInput): PreparedArtifact[] {
       gaps: [...(statements.length ? [] : ['No confirmed buyer statement on this deal yet.']), ...(agreedNotByBuyer.length ? [`${agreedNotByBuyer.length} agreed step${agreedNotByBuyer.length === 1 ? '' : 's'} left out: the buyer's agreement is not recorded.`] : [])],
     },
     quotes,
+    crm,
   );
 
   // INTRODUCTION: who else must agree, asked of the deal's contact.
@@ -149,12 +171,14 @@ export function prepareArtifacts(i: ArtifactInput): PreparedArtifact[] {
       text: [
         `${lead ? `Hi ${first(lead.name)},` : 'Hi,'}`,
         '',
-        `Before we go further on ${dealName}, who else needs to be part of this for it to move? If it is someone who runs the yards day to day, or the person who owns the paperwork, would you introduce us? I will keep it short and send them what you and I have covered.`,
+        // Sprint 5 review: the CRM's deal name never reaches the buyer ("YardFlow - Kroger Scratch Co x71007").
+        'Before we go further, who else needs to be part of this for it to move? If it is someone who runs the yards day to day, or the person who owns the paperwork, would you introduce us? I will keep it short and send them what you and I have covered.',
       ].join('\n'),
       citations: [...i.deal.contacts.map((c) => ({ label: `${c.name}${c.title ? `, ${c.title}` : ''} (a contact on the deal)`, ref: `deal:${i.deal.id}` })), ...(alignment ? [{ label: `the plan: stakeholder alignment (${alignment.state})`, ref: alignment.commitmentId ?? 'plan:stakeholder_alignment' }] : [])],
       gaps: lead ? [] : ['Nobody GAP holds is a contact on this deal: add the person first.'],
     },
     quotes,
+    crm,
   );
 
   // PILOT SUCCESS CRITERIA: only their own measures.
@@ -171,11 +195,12 @@ export function prepareArtifacts(i: ArtifactInput): PreparedArtifact[] {
       to: lead?.name ?? null,
       text: measures.length
         ? ['Pilot success, in your own measures (please correct any of them):', ...measures.map((n) => `- "${n.quote}" (${n.who})`), '', 'How we would check each one, and when, is for us to agree together before the pilot starts.'].join('\n')
-        : ['Pilot success criteria: none agreed yet.', '', `Question for ${lead ? first(lead.name) : 'them'}: what would you need to see at the end of a pilot to call it worth rolling out?`].join('\n'),
+        : ['Pilot success criteria: none agreed yet.', '', 'What would you need to see at the end of a pilot to call it worth rolling out?'].join('\n'),
       citations: measures.map(cite),
       gaps: measures.length ? [] : ['No success measure confirmed by the buyer: nothing is invented.'],
     },
     quotes,
+    crm,
   );
 
   // BUSINESS-CASE INPUTS: modeled stays modeled, their numbers are theirs, our proof is ours.
@@ -200,6 +225,7 @@ export function prepareArtifacts(i: ArtifactInput): PreparedArtifact[] {
       gaps: [...(i.roi ? [] : ['No ROI model for this account.']), ...(theirNumbers.length ? [] : ['Their own numbers are not given yet.'])],
     },
     quotes,
+    crm,
   );
   return [recap, intro, criteria, businessCase];
 }

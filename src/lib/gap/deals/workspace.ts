@@ -190,7 +190,7 @@ export async function loadDealWorkspace(
   const artifacts = Object.fromEntries(
     opportunities.deals.map((d) => {
       const needs = [...d.needs, ...opportunities.accountLevel.needs].sort((a, b) => a.at.localeCompare(b.at)).map((n) => ({ id: n.id, type: n.type, quote: n.quote, who: n.who, at: n.at, accountLevel: n.scope.basis === 'none' }));
-      const input = { accountName: x.accountName, deal: { id: d.dealId, name: d.name, contacts: d.contacts }, needs, plan: plans[d.dealId] ?? [], commitments: d.commitments.map((c) => ({ commitmentId: c.commitmentId, kind: c.kind, title: c.title, line: c.line, dueAt: c.dueAt })), roi: x.roi ?? null };
+      const input = { accountName: x.accountName, deal: { id: d.dealId, name: d.name, contacts: d.contacts }, needs, plan: plans[d.dealId] ?? [], commitments: d.commitments.map((c) => ({ commitmentId: c.commitmentId, kind: c.kind, title: c.title, line: c.line, dueAt: c.dueAt, person: c.person?.name ?? null })), roi: x.roi ?? null };
       const all = prepareArtifacts(input);
       return [d.dealId, { next: nextArtifact(all, { ...input, recapSentAt: recapSentAt(d.dealId) }), all }];
     }),
