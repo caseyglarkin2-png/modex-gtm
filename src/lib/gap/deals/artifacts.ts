@@ -78,7 +78,7 @@ const ACCEPTANCE = /\b(?:you(?:'ve| have)? (?:approved|accepted|signed off|agree
 /** The guard over a prepared text: what may never appear outside the buyer's own quoted words. */
 export function artifactProblems(text: string, buyerQuotes: readonly string[] = []): string[] {
   const problems: string[] = [];
-  if (text.includes('—')) problems.push('an em dash');
+  if (text.includes('\u2014')) problems.push('an em dash');
   let outside = text;
   for (const q of buyerQuotes) outside = outside.split(q).join(' ');
   if (/\bthroughput\b/i.test(outside)) problems.push('"throughput" (say production capacity)');

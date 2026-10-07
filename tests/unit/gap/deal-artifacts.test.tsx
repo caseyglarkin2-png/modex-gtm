@@ -83,13 +83,13 @@ describe('the prepared artifacts (R53)', () => {
     expect(bc.problems).toEqual([]);
     for (const a of arts) {
       expect(a.status).toBe('Prepared, not sent');
-      expect(a.text).not.toMatch(/—/);
+      expect(a.text).not.toMatch(/\u2014/);
       expect(a.text).not.toMatch(/approved|signed off|accepted/i);
     }
   });
 
   it('the guard: an em dash, "throughput", an unqualified canon figure or a claimed approval is refused unless it is the buyer\'s own quote', () => {
-    expect(artifactProblems('A recap — with a dash.')).toEqual(['an em dash']);
+    expect(artifactProblems('A recap \u2014 with a dash.')).toEqual(['an em dash']);
     expect(artifactProblems('It frees throughput at the gate.')).toEqual(['"throughput" (say production capacity)']);
     expect(artifactProblems('Since legal has approved the pilot, we can start.')).toEqual(['a claim of approval or acceptance the buyer did not make: "legal has approved"']);
     expect(artifactProblems('Thanks: you have approved the pilot scope.')).toEqual(['a claim of approval or acceptance the buyer did not make: "you have approved"']);
