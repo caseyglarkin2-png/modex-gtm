@@ -232,6 +232,8 @@ export type RepliesState = 'undispositioned' | 'all';
 export interface ListRepliesParams {
   state?: RepliesState;
   cursor?: string | null;
+  /** R60: one account's replies. */
+  account?: string | null;
 }
 
 /** `POST /api/gap/replies/[id]/suggest` body: `null` means the model's answer was unusable; `rejected` says why. */
@@ -400,6 +402,7 @@ export function repliesUrl(params: ListRepliesParams = {}): string {
   const query = new URLSearchParams();
   query.set('state', params.state ?? 'undispositioned');
   if (params.cursor) query.set('cursor', params.cursor);
+  if (params.account) query.set('account', params.account);
   return `/api/gap/replies?${query.toString()}`;
 }
 

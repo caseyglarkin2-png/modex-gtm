@@ -94,6 +94,8 @@ export interface ListRepliesInput {
   state?: ReplyState;
   cursor?: string | null;
   limit?: number;
+  /** R60: one account's replies (the account page records them where the seller already is). */
+  accountName?: string | null;
 }
 
 export interface RepliesPage {
@@ -435,7 +437,9 @@ export async function listReplies(prisma: any, input: ListRepliesInput = {}): Pr
   const known = await loadKnownAddresses(prisma);
   if (known.size === 0) return { items: [], nextCursor: null };
 
-  const emails = Array.from(known.keys());
+  const account = input.accountName?.trim() || null;
+  const emails = Array.from(known.entries()).filter(([, a]) => !account || a.accountName === account).map(([e]) => e);
+  if (emails.length === 0 && !account) return { items: [], nextCursor: null };
 
   const items: ReplyItem[] = [];
   let cursor: string | null = input.cursor ?? null;
@@ -526,7 +530,7 @@ export async function listReplies(prisma: any, input: ListRepliesInput = {}): Pr
   }
 
   // Phase 2 D5: colleague replies join the first page, never lost because a different person was emailed.
-  const colleagues = input.cursor ? [] : await loadColleagueReplies(prisma, known, state).catch(() => [] as ReplyItem[]);
+  const colleagues = (input.cursor ? [] : await loadColleagueReplies(prisma, known, state).catch(() => [] as ReplyItem[])).filter((c) => !account || c.accountName === account);
   if (colleagues.length === 0) return { items: await collapseTwins(prisma, items, state), nextCursor };
   const merged = [...items, ...colleagues].sort((a, b) => b.receivedAt.localeCompare(a.receivedAt) || b.id.localeCompare(a.id));
   return { items: await collapseTwins(prisma, merged, state), nextCursor };

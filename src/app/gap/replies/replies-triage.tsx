@@ -12,6 +12,9 @@
  * In the cockpit REPLIES lane (`inCockpit`, 2026-09-26): the first waiting
  * reply opens on its own, the state filter is hidden (the lane IS the waiting
  * list), and a recorded disposition refreshes the page so the counts follow.
+ *
+ * On an account page (`account`, R60): only that account's waiting replies, the first open, no filter; a recorded
+ * reply refreshes the page so NEXT, the hold and Work follow, and the seller never leaves the account to record it.
  */
 
 import { useCallback, useEffect, useState } from 'react';
@@ -25,7 +28,9 @@ import { parseDuePhrase } from '@/lib/gap/work/dates';
 
 const SELECT_CLASS = 'h-9 rounded-md border border-[var(--border)] bg-transparent px-2 text-sm shadow-sm';
 
-export function RepliesTriage({ client = defaultGapApiClient, inCockpit = false }: { client?: GapApiClient; inCockpit?: boolean }) {
+export function RepliesTriage({ client = defaultGapApiClient, inCockpit = false, account = null }: { client?: GapApiClient; inCockpit?: boolean; account?: string | null }) {
+  // On an account page the list behaves like the cockpit's: the waiting replies, the first open, a refresh on record.
+  const inPlace = inCockpit || !!account;
   const router = useRouter();
   const [state, setState] = useState<RepliesState>('undispositioned');
   const [items, setItems] = useState<ReplyItem[]>([]);
@@ -39,11 +44,11 @@ export function RepliesTriage({ client = defaultGapApiClient, inCockpit = false 
     async (nextState: RepliesState) => {
       setLoading(true);
       setError(null);
-      const page = await client.listReplies({ state: nextState });
+      const page = await client.listReplies({ state: nextState, ...(account ? { account } : {}) });
       if (page.ok) {
         setItems(page.data.items);
         setNextCursor(page.data.nextCursor);
-        if (inCockpit && page.data.items[0]) setExpandedId((current) => current ?? page.data.items[0].id);
+        if (inPlace && page.data.items[0]) setExpandedId((current) => current ?? page.data.items[0].id);
       } else {
         setError(page.error);
         setItems([]);
@@ -51,7 +56,7 @@ export function RepliesTriage({ client = defaultGapApiClient, inCockpit = false 
       }
       setLoading(false);
     },
-    [client, inCockpit],
+    [client, inPlace, account],
   );
 
   useEffect(() => {
@@ -61,7 +66,7 @@ export function RepliesTriage({ client = defaultGapApiClient, inCockpit = false 
   async function loadMore() {
     if (!nextCursor) return;
     setLoadingMore(true);
-    const page = await client.listReplies({ state, cursor: nextCursor });
+    const page = await client.listReplies({ state, cursor: nextCursor, ...(account ? { account } : {}) });
     if (page.ok) {
       setItems((current) => {
         const seen = new Set(current.map((item) => item.id));
@@ -76,7 +81,7 @@ export function RepliesTriage({ client = defaultGapApiClient, inCockpit = false 
 
   return (
     <div className="space-y-4">
-      {inCockpit ? null : (
+      {inPlace ? null : (
       <div className="flex flex-wrap items-end gap-3">
         <label className="flex flex-col gap-1 text-xs text-[var(--muted-foreground)]">
           Show
@@ -119,14 +124,18 @@ export function RepliesTriage({ client = defaultGapApiClient, inCockpit = false 
               if (state === 'undispositioned') {
                 const rest = items.filter((row) => row.id !== item.id);
                 setItems(rest);
-                // In the cockpit the next waiting reply opens on its own.
-                setExpandedId(inCockpit && rest[0] ? rest[0].id : null);
+                // In the cockpit (and on an account page) the next waiting reply opens on its own.
+                setExpandedId(inPlace && rest[0] ? rest[0].id : null);
               }
-              if (inCockpit) router.refresh();
+              if (inPlace) router.refresh();
             }}
           />
         )}
       />
+
+      {account && !loading && !error && items.length === 0 ? (
+        <p className="text-sm text-[var(--muted-foreground)]" data-testid="record-reply-empty">Nothing from {account} is waiting to be recorded.</p>
+      ) : null}
 
       {nextCursor ? (
         <Button type="button" variant="outline" size="sm" disabled={loadingMore} onClick={() => void loadMore()}>

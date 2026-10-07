@@ -15,6 +15,7 @@
  * Pure: the page builds the candidates, this orders and filters them.
  */
 import { displayName } from '../people/display-name';
+import { recordReplyHref } from '../account-intel/href';
 import type { CockpitLane, NextUpItem } from '@/components/gap/gap-cockpit';
 
 export const LANE_RANK: Record<CockpitLane, number> = { replies: 0, follow_up: 1, ready: 2, review: 3, research: 4, deals: 5 };
@@ -104,7 +105,7 @@ export function buildNextUpCandidates(input: NextUpInput): NextCandidate[] {
   const tier = (a: string) => tierKey(input.tiers.get(a));
   const out: NextCandidate[] = [];
   for (const r of input.replies) {
-    out.push({ lane: 'replies', accountName: r.accountName || null, title: `${r.contactEmail} replied`, detail: `${r.accountName}: ${r.subject ?? r.snippet.slice(0, 80)}`, href: '/gap?lane=replies', sortKey: [timeKey(r.receivedAt)] });
+    out.push({ lane: 'replies', accountName: r.accountName || null, title: `${r.contactEmail} replied`, detail: `${r.accountName}: ${r.subject ?? r.snippet.slice(0, 80)}`, href: r.accountName ? recordReplyHref(r.accountName) : '/gap/replies', sortKey: [timeKey(r.receivedAt)] });
   }
   for (const c of input.followUps) {
     out.push({ lane: 'follow_up', accountName: c.account.name, title: `Follow up with ${who(c.persona)}`, detail: `${c.account.name}. The next touch is due.`, href: input.openHref('follow_up', c.id), sortKey: [timeKey(c.touch?.dueAt ?? null)] });

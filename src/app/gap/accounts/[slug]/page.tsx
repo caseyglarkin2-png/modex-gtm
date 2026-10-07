@@ -38,7 +38,8 @@ import { loadAccountContext } from '@/lib/gap/context/load';
 import { projectNow } from '@/lib/gap/context/now';
 import { loadReadyTarget } from '@/lib/gap/context/send-target';
 import { briefListenText, projectBrief } from '@/lib/gap/context/brief';
-import { accountSlug, accountTitle, gmailThreadHref } from '@/lib/gap/account-intel/href';
+import { accountSlug, accountTitle, gmailThreadHref, RECORD_REPLY_ANCHOR } from '@/lib/gap/account-intel/href';
+import { RepliesTriage } from '@/app/gap/replies/replies-triage';
 import { OpenHashDetails } from '@/components/gap/open-hash-details';
 import { PendingLink } from '@/components/gap/pending-link';
 import { loadPursuit } from '@/lib/gap/pursuit/load';
@@ -164,8 +165,19 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
   if (inputs.opportunity && inputs.opportunity.status !== 'UNKNOWN') {
     await syncDealStates(prisma, { accountName: brief.accountName, open: (inputs.opportunity.deals ?? []).filter((d): d is typeof d & { id: string } => !!d.id).map((d) => ({ id: d.id, name: d.name })), closed: inputs.opportunity.closed ?? [], now }).catch(() => null);
   }
-  const nameQ = q.name ? `name=${encodeURIComponent(q.name)}` : '';
-  const hrefFor = (v: View) => `/gap/accounts/${slug}${v === 'now' ? (nameQ ? `?${nameQ}` : '') : `?view=${v}${nameQ ? `&${nameQ}` : ''}`}`;
+  // R60: opened from Work, every view and anchor of this account keeps the seller's place (Back to Work, Next account).
+  const workIndex = q.from === 'work' && /^\d+$/.test(q.i ?? '') ? Number(q.i) : null;
+  const hrefFor = (v: View) => {
+    const p = new URLSearchParams();
+    if (v !== 'now') p.set('view', v);
+    if (q.name) p.set('name', q.name);
+    if (workIndex !== null) {
+      p.set('from', 'work');
+      p.set('i', String(workIndex));
+    }
+    const qs = p.toString();
+    return `/gap/accounts/${slug}${qs ? `?${qs}` : ''}`;
+  };
 
   const tabs = (
     // UX-04: never sticky on a phone (a sticky bar hid focused controls, WCAG 2.4.11); sticky from md up with scroll padding set.
@@ -240,6 +252,8 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
           <GapSubnav />
           {header}
           {tabs}
+          {/* R60: deal work opened from Work ends where every account ends: Back to Work, Next account, or record it. */}
+          {q.from === 'work' ? <DoneNext slug={slug} index={workIndex} accountName={brief.accountName} /> : null}
           {workspace && openDeals.length ? <DealOpportunities view={workspace.opportunities} slots={meetingSlots} /> : null}
           {accountMeetings.length ? (
             <section className="space-y-2" data-testid="account-meetings" aria-label="Meetings at the account">
@@ -271,6 +285,8 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
     // R42: the newest reply nobody has recorded, with its prepared notes (never copy, never a send).
     const mailboxId = process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() || null;
     const replyItem = pursuit?.replyItems.find((r) => !r.dispositionId) ?? null;
+    // R60: the account's waiting reply (or opt-out) is recorded on this page.
+    const recordReply = !!replyItem || pursuit?.state.state === 'replied' || pursuit?.state.state === 'opted_out';
     const replyPrep = replyItem ? prepareReply({ id: replyItem.id, from: replyItem.contactEmail, fromName: replyItem.fromName ?? null, subject: replyItem.subject, snippet: replyItem.snippet, receivedAt: replyItem.receivedAt, threadId: replyItem.threadId ?? null, accountName: brief.accountName }, { mailbox: mailboxId, now }) : null;
     // R50: each obligation says which opportunity it belongs to (a deal, through its person's deal, or account-level).
     const nowDeals = (inputs.opportunity?.deals ?? []).filter((d): d is typeof d & { id: string } => !!d.id).map((d) => ({ id: d.id, name: d.name, contactIds: d.contactIds ?? [] }));
@@ -384,9 +400,22 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
           links={pursuit?.state.person?.personaId != null ? links.map((l) => (l.label === 'Log what happened' ? { ...l, href: `${l.href}&person=${pursuit.state.person!.personaId}` } : l)) : links}
           mailbox={process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() || null}
           pursuit={pursuit ? { state: pursuit.state, stack: pursuit.stack, hypothesisId: pursuit.hypothesisId, excluded, story: storyShown, anchor } : null}
-          doneNext={q.from === 'work' ? <DoneNext slug={slug} index={/^\d+$/.test(q.i ?? '') ? Number(q.i) : null} accountName={brief.accountName} /> : null}
+          doneNext={q.from === 'work' ? <DoneNext slug={slug} index={workIndex} accountName={brief.accountName} /> : null}
           askGap={pursuit ? <AskGap accountName={brief.accountName} /> : null}
-          workItems={replyPrep || obligations.length ? <>{replyPrep ? <ReplyPrepPanel prep={replyPrep} /> : null}<AccountObligations items={obligations} /></> : null}
+          workItems={replyPrep || recordReply || obligations.length ? (
+            <>
+              {/* On this page the record control is the section below (an anchor keeps the Work position). */}
+              {replyPrep ? <ReplyPrepPanel prep={replyPrep.record ? { ...replyPrep, record: { ...replyPrep.record, href: `#${RECORD_REPLY_ANCHOR}` } } : replyPrep} /> : null}
+              {recordReply ? (
+                // R60: the reply is recorded here, on its own account (never the list of every account's replies).
+                <section id={RECORD_REPLY_ANCHOR} className="scroll-mt-16 space-y-2 rounded-md border border-[var(--border)] p-3" aria-labelledby="record-reply-heading" data-testid="record-reply">
+                  <h2 id="record-reply-heading" className="text-sm font-semibold">Record what they said</h2>
+                  <RepliesTriage account={brief.accountName} />
+                </section>
+              ) : null}
+              <AccountObligations items={obligations} />
+            </>
+          ) : null}
         />
       </div>
     );

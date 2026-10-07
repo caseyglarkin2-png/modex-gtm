@@ -24,6 +24,7 @@
 import type { SuppressionClass } from '../suppression/provenance';
 import { SUPPRESSION_CLASS_COPY } from '../suppression/provenance';
 import { hubspotCompanyUrl, hubspotContactUrl, telHref } from './seller-action';
+import { recordReplyHref } from '../account-intel/href';
 
 export interface ReadinessInput {
   id: string;
@@ -194,7 +195,7 @@ function readinessOf(item: ReadinessInput): CardReadiness {
         };
       case 'stopped':
         return t.reason === 'replied'
-          ? { state: 'actionable', primary: { label: 'Replied: sequence stopped. Log the reply', href: '/gap?lane=replies' }, secondary: [] }
+          ? { state: 'actionable', primary: { label: 'Replied: sequence stopped. Record the reply', href: recordReplyHref(item.account.name) }, secondary: [] }
           : { state: 'actionable', primary: { label: `Sequence stopped`, href: null, note: t.detail ?? 'A stop rule fired.' }, secondary: [] };
       case 'complete':
         return { state: 'actionable', primary: { label: 'Sequence complete', href: null, note: `All ${t.sentCount} touches sent.` }, secondary: [] };

@@ -33,18 +33,19 @@ export function pursuitListenText(v: { name: string; listen: string; stateLine: 
 
 export function nextFromPursuit(
   s: PursuitState,
-  opts: { hypothesisId: string | null; accountSlugHref: (view: 'brief' | 'sources') => string; replyThreadHref: string | null; captureHref: string; /** R12: the cockpit card where SEND FROM YARDFLOW lives (the pursuit view's ready target), so NEXT lands where the email is sent, never a page that points at a lane. */ readyHref?: string | null },
+  opts: { hypothesisId: string | null; accountSlugHref: (view: 'now' | 'brief' | 'sources') => string; replyThreadHref: string | null; captureHref: string; /** R12: the cockpit card where SEND FROM YARDFLOW lives (the pursuit view's ready target), so NEXT lands where the email is sent, never a page that points at a lane. */ readyHref?: string | null },
 ): NextAction {
   const p = s.person;
   switch (s.state) {
     case 'replied':
       return {
         text: `Read ${p ? `${p.name}'s` : 'the'} reply of ${s.lastInbound ? day(s.lastInbound.at) : 'today'} and record what they said. Nobody at ${s.accountName} gets a cold email until then.`,
-        control: opts.replyThreadHref ? { href: opts.replyThreadHref, label: `Open ${p ? `${p.name}'s` : 'the'} thread in Gmail` } : { href: '/gap?lane=replies', label: 'Open the reply' },
+        // R60: the reply is read and recorded on this account (its own waiting replies, in place); Gmail answers it.
+        control: { href: `${opts.accountSlugHref('now')}#record-reply`, label: 'Open the reply' },
         source: 'pursuit',
       };
     case 'opted_out':
-      return { text: `Record ${s.lastInbound ? `${s.lastInbound.who}'s` : 'the'} opt-out as do not contact. No reply goes back; the account cools before anyone else is touched.`, control: { href: '/gap?lane=replies', label: 'Record the opt-out' }, source: 'pursuit' };
+      return { text: `Record ${s.lastInbound ? `${s.lastInbound.who}'s` : 'the'} opt-out as do not contact. No reply goes back; the account cools before anyone else is touched.`, control: { href: `${opts.accountSlugHref('now')}#record-reply`, label: 'Record the opt-out' }, source: 'pursuit' };
     case 'in_deal':
       // R50: two opportunities are two pieces of work, each worked on its own in the deal brief.
       return s.deals.length > 1

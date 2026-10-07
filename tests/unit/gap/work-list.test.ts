@@ -71,7 +71,8 @@ describe('buildWorkList', () => {
     expect(onlyAdmin.map((c) => c.accountName)).toEqual(['Walmart Inc.', 'Tyson Foods', 'Dollar General', 'Kroger']);
     expect(walmart.state).toBe('Opted out');
     expect(walmart.why).toMatch(/^timothy\.cooper@walmart\.com wrote Oct 5: "stop"\. They asked not to be contacted: record it as do not contact\./);
-    expect(walmart.next).toEqual({ label: 'Record the opt-out', href: '/gap?lane=replies' });
+    // R60: the opt-out is recorded on Walmart's own page, never the all-replies lane.
+    expect(walmart.next).toEqual({ label: 'Record the opt-out', href: '/gap/accounts/walmart-inc#record-reply' });
     expect(cards.some((c) => c.accountName === 'FedEx')).toBe(false);
     const nfi = cards[0];
     expect(nfi.state).toBe('Someone replied');

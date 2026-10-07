@@ -15,6 +15,7 @@
  */
 import { classifyReply, type HumanReplyKind, type ReplyClassKind } from './classify';
 import { dayLabel, nyDay, parseDuePhrase, parseReturnDate, type ParsedDay } from '../work/dates';
+import { recordReplyHref } from '../account-intel/href';
 
 /** R42b: why a reply prepares no answer (said on the card instead of an answer). */
 export const NO_ANSWER_REFERRAL = 'A referral prepares no reply here: record who they named; you decide how to approach them.';
@@ -86,7 +87,10 @@ export function prepareReply(r: ReplyPrepInput, opts: { mailbox?: string | null;
   const notes: string[] = [];
   let named: string | null = null;
   let day: ParsedDay | null = null;
-  let record: ReplyPrep['record'] = { href: '/gap?lane=replies', label: 'Record what they said' };
+  // R60: a reply is recorded on its own account (the account page holds that account's waiting replies), never in a
+  // list of every account's replies.
+  const recordHref = r.accountName ? recordReplyHref(r.accountName) : '/gap/replies';
+  let record: ReplyPrep['record'] = { href: recordHref, label: 'Record what they said' };
   if (c.kind === 'human') {
     const ask = lines.find((s) => ASK.test(s));
     day = parseDuePhrase(words, written);
@@ -94,12 +98,12 @@ export function prepareReply(r: ReplyPrepInput, opts: { mailbox?: string | null;
       named = detectNamed(words);
       notes.push(`They pointed to ${named ?? 'someone else'}. Thank them and ask for the introduction.`);
       notes.push(`${named ?? 'The person they named'} gets no cold email: record the referral and GAP lists them as named by ${who}; you decide how to approach them.`);
-      record = { href: '/gap?lane=replies', label: 'Record who they named' };
+      record = { href: recordHref, label: 'Record who they named' };
     } else if (c.human === 'objection') {
       const objection = lines.find((s) => OBJECTION_LINE.test(s)) ?? lines[0] ?? words;
       notes.push(`They pushed back: "${objection}". Acknowledge it and ask one question that tests it; do not argue.`);
       notes.push('Record it as an objection (an existing solution, or not a priority) so the account cools.');
-      record = { href: '/gap?lane=replies', label: 'Record the objection' };
+      record = { href: recordHref, label: 'Record the objection' };
     } else {
       if (ask) notes.push(`They asked: "${ask}". Answer that first.`);
       if (day) notes.push(`They named a day: ${day.phrase} (${dayLabel(day.day, opts.now)}${day.ambiguous ? ', check which one they mean' : ''}). Offer a time then, or ask what suits.`);
@@ -109,7 +113,7 @@ export function prepareReply(r: ReplyPrepInput, opts: { mailbox?: string | null;
   } else if (c.kind === 'opt_out') {
     notes.push('No reply goes back.');
     notes.push('Record it as do not contact; the person is set aside and the account cools.');
-    record = { href: '/gap?lane=replies', label: 'Record the opt-out' };
+    record = { href: recordHref, label: 'Record the opt-out' };
   } else if (c.kind === 'out_of_office') {
     day = parseReturnDate(words, written);
     notes.push('An automatic notice: there is nothing to answer.');

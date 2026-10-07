@@ -27,7 +27,7 @@
  * a lane card), the ledger's touches, the seller's outcomes and the commitments (work/commitment-model.ts). Pinned by
  * tests/unit/gap/work-list.test.ts and tests/unit/gap/work-rank.test.ts.
  */
-import { accountHref } from '../account-intel/href';
+import { accountHref, recordReplyHref } from '../account-intel/href';
 import { classifyReply, HUMAN_REPLY_LABEL, type ReplyClassKind } from '../replies/classify';
 import { prepareReply, type ReplyPrep } from '../replies/prepare';
 import type { FollowUpPlan } from '../execution/follow-up-plan';
@@ -199,10 +199,11 @@ function pursuitAction(state: PursuitStateKind, accountName: string, stateLine =
   const page = accountHref(accountName);
   if (state === 'ready' && /^Relationship-led/.test(stateLine)) return { label: 'Log the warm touch', href: `/gap/capture?account=${encodeURIComponent(accountName)}` };
   switch (state) {
+    // R60: a reply is read and recorded on its own account, never in the all-replies lane.
     case 'replied':
-      return { label: 'Open the reply', href: '/gap?lane=replies' };
+      return { label: 'Open the reply', href: recordReplyHref(accountName) };
     case 'opted_out':
-      return { label: 'Record the opt-out', href: '/gap?lane=replies' };
+      return { label: 'Record the opt-out', href: recordReplyHref(accountName) };
     case 'in_deal':
       return { label: 'Open the deal brief', href: `${page}?view=brief` };
     case 'held':
@@ -338,7 +339,7 @@ export function workDay(i: WorkInput): WorkDay {
         state: c.human ? HUMAN_REPLY_LABEL[c.human] : STATE_TEXT[kind],
         why: `${r.contactEmail} wrote ${day(r.receivedAt)}: "${quote}". ${c.consequence}`,
         person: { name: r.contactEmail, title: null },
-        next: { label: c.kind === 'human' ? humanNext : c.kind === 'opt_out' ? 'Record the opt-out' : 'Find a working address', href: c.kind === 'bounce' ? accountHref(r.accountName) : '/gap?lane=replies' },
+        next: { label: c.kind === 'human' ? humanNext : c.kind === 'opt_out' ? 'Record the opt-out' : 'Find a working address', href: c.kind === 'bounce' ? accountHref(r.accountName) : recordReplyHref(r.accountName) },
         blocker: c.kind === 'human' ? 'No cold email to anyone here until it is recorded.' : c.kind === 'opt_out' ? 'They asked not to be contacted: no cold work here until it is recorded.' : null,
         // R42: the message itself and the prepared notes ride on the card (never copy, never a send).
         reply: prepareReply({ id: r.id ?? `${r.contactEmail}:${r.receivedAt}`, from: r.contactEmail, fromName: r.fromName ?? null, subject: r.subject, snippet: r.snippet, receivedAt: r.receivedAt, threadId: r.threadId ?? null, accountName: r.accountName }, { mailbox: i.mailbox ?? null, now: i.now }),

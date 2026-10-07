@@ -152,7 +152,7 @@ export async function summarizePursuit(prisma: PrismaLike, accountName: string, 
     const ctx = await loadAccountContext(prisma, inputs, now);
     const p = await loadPursuit(prisma, { brief, inputs, ctx, now });
     const href = accountHref(accountName);
-    const next = nextFromPursuit(p.state, { hypothesisId: p.hypothesisId, accountSlugHref: (view) => `${href}?view=${view}`, replyThreadHref: null, captureHref: `/gap/capture?account=${encodeURIComponent(accountName)}`, readyHref: p.ready?.href ?? null });
+    const next = nextFromPursuit(p.state, { hypothesisId: p.hypothesisId, accountSlugHref: (view) => (view === 'now' ? href : `${href}?view=${view}`), replyThreadHref: null, captureHref: `/gap/capture?account=${encodeURIComponent(accountName)}`, readyHref: p.ready?.href ?? null });
     const pending = inputs.hypotheses.filter((h) => h.status === 'draft' || h.status === 'review_required');
     const actionable = actionableFromPursuit(p.state, next, { hypothesisId: p.hypothesisId, usableTheses: p.usableTheses, pendingProposals: pending.length, incompleteProposals: pending.filter((h) => !h.problemFamily || h.problemFamily === 'unmapped').length });
     return rememberPursuitSummary(p.state, now, next.text, { prisma, actionable });

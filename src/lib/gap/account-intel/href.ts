@@ -5,6 +5,28 @@ export const accountSlug = (name: string) => name.toLowerCase().replace(/[^a-z0-
 
 export const accountHref = (name: string) => `/gap/accounts/${accountSlug(name)}`;
 
+/** R60: where a reply is read and recorded: on its own account, never a list of every account's replies. */
+export const RECORD_REPLY_ANCHOR = 'record-reply';
+export const recordReplyHref = (name: string) => `${accountHref(name)}#${RECORD_REPLY_ANCHOR}`;
+
+/**
+ * R60: a link to the same account page keeps the seller's place in Work (Back to Work and Next account follow them
+ * through the account's views and anchors). Any other link is returned unchanged.
+ */
+export function withWorkContext(href: string, accountName: string, index: number | null | undefined): string {
+  if (index === null || index === undefined || !Number.isInteger(index) || index < 0) return href;
+  const hashAt = href.indexOf('#');
+  const hash = hashAt >= 0 ? href.slice(hashAt) : '';
+  const head = hashAt >= 0 ? href.slice(0, hashAt) : href;
+  const queryAt = head.indexOf('?');
+  const path = queryAt >= 0 ? head.slice(0, queryAt) : head;
+  if (path.replace(/\/+$/, '') !== accountHref(accountName)) return href;
+  const params = new URLSearchParams(queryAt >= 0 ? head.slice(queryAt + 1) : '');
+  params.set('from', 'work');
+  params.set('i', String(index));
+  return `${path}?${params.toString()}${hash}`;
+}
+
 /** A Gmail search for someone's thread, in the signed-in seller's own mailbox (never whichever account is /u/0). */
 export function gmailThreadHref(from: string, mailbox: string | null | undefined): string {
   const q = `#search/${encodeURIComponent(`from:"${from}"`)}`;

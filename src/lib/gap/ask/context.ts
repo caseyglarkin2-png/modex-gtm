@@ -30,7 +30,7 @@ export async function buildAskContext(prisma: PrismaLike, accountName: string, n
   if (!pursuit) return null;
   const v = projectNow(brief, ctx, inputs, now, { ready: brief.motion.type === 'FACT_LED' ? pursuit.ready : null });
   const href = accountHref(brief.accountName);
-  const next = nextFromPursuit(pursuit.state, { hypothesisId: pursuit.hypothesisId, accountSlugHref: (view) => `${href}?view=${view}`, replyThreadHref: null, captureHref: `/gap/capture?account=${encodeURIComponent(brief.accountName)}`, readyHref: pursuit.ready?.href ?? null });
+  const next = nextFromPursuit(pursuit.state, { hypothesisId: pursuit.hypothesisId, accountSlugHref: (view) => (view === 'now' ? href : `${href}?view=${view}`), replyThreadHref: null, captureHref: `/gap/capture?account=${encodeURIComponent(brief.accountName)}`, readyHref: pursuit.ready?.href ?? null });
   const excluded = (pursuit.resolution?.excluded ?? []).map((e) => ({ key: e.candidate.key, name: e.candidate.name, title: e.candidate.title, code: e.code, reason: e.reason, source: e.source ?? null }));
   const story = projectStory({
     accountName: brief.accountName,

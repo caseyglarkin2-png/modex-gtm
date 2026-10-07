@@ -39,7 +39,7 @@ describe('the reply kinds (R42)', () => {
 describe('the prepared reply (R42; R42b makes a real reply answerable)', () => {
   it('a real reply: the message, what they asked, the day they named (New York), the thread to answer in and the record form; no governed copy family, answerable through the gated answer (no send link here)', () => {
     const prep = prepareReply(reply('Thanks Casey. Can you send the two-site comparison? Thursday works for a call.'), { mailbox: 'casey@yardflow.ai', now: NOW });
-    expect(prep).toMatchObject({ kind: 'human', human: 'reply', copyFamily: null, answerable: true, noAnswerLine: null, record: { href: '/gap?lane=replies', label: 'Record what they said' } });
+    expect(prep).toMatchObject({ kind: 'human', human: 'reply', copyFamily: null, answerable: true, noAnswerLine: null, record: { href: '/gap/accounts/nfi-scratch-co#record-reply', label: 'Record what they said' } });
     expect(prep.notes).toEqual([
       'They asked: "Can you send the two-site comparison?". Answer that first.',
       'They named a day: Thursday (Oct 8). Offer a time then, or ask what suits.',

@@ -14,7 +14,7 @@ import { useEffect, useRef, useState } from 'react';
 import { filterWork, needsYouCard, WORK_FILTER_LABEL, WORK_FILTERS, workCounts, type WaitingItem, type WorkCard, type WorkFilter } from '@/lib/gap/work/list';
 import { saveWorkOrder } from '@/lib/gap/work/order';
 import { VoicePreviewButton } from '@/components/voice-preview-button';
-import { accountHref, accountSlug } from '@/lib/gap/account-intel/href';
+import { accountHref, accountSlug, withWorkContext } from '@/lib/gap/account-intel/href';
 import { ReplyPrepPanel } from './reply-prep';
 import { ObligationActions, postJson as post, REFUSAL_TEXT } from './obligation-actions';
 
@@ -214,7 +214,8 @@ export function WorkList({
               ) : null}
               {c.blocker ? <p className="mt-0.5 text-xs text-amber-700 dark:text-amber-400" data-testid="work-card-blocker">{c.blocker}</p> : null}
               {c.outcome ? <p className="mt-0.5 text-xs text-[var(--muted-foreground)]" data-testid="work-card-outcome">{c.outcome.line}</p> : null}
-              {c.reply ? <ReplyPrepPanel prep={c.reply} compact /> : null}
+              {/* R60: every control that opens this account keeps the seller's place in Work (Back to Work, Next account). */}
+              {c.reply ? <ReplyPrepPanel prep={c.reply.record ? { ...c.reply, record: { ...c.reply.record, href: withWorkContext(c.reply.record.href, c.accountName, c.index) } } : c.reply} compact /> : null}
               {c.stalled?.length ? (
                 <ul className="mt-1 space-y-0.5 text-xs" data-testid="work-card-stalled">
                   {c.stalled.map((s) => <li key={s}>Stalled: {s}</li>)}
@@ -233,7 +234,7 @@ export function WorkList({
                       {o.scope ? <p className="text-xs font-semibold text-[var(--muted-foreground)]" data-testid="work-obligation-scope">{o.scope}</p> : null}
                       {o.prep ? <p className="text-xs" data-testid="work-obligation-prep">Prepared: {o.prep}</p> : null}
                       <div className="flex flex-wrap items-center gap-2">
-                        {o.href && o.label ? <Link href={o.href} className="inline-flex min-h-11 items-center text-xs underline sm:min-h-9" data-testid="obligation-open">{o.label}</Link> : null}
+                        {o.href && o.label ? <Link href={withWorkContext(o.href, c.accountName, c.index)} className="inline-flex min-h-11 items-center text-xs underline sm:min-h-9" data-testid="obligation-open">{o.label}</Link> : null}
                       </div>
                       <ObligationActions commitmentId={o.commitmentId} proofNeeded={o.proofNeeded ?? null} />
                     </li>
@@ -242,7 +243,7 @@ export function WorkList({
               ) : null}
               <div className="mt-2 flex flex-wrap items-center gap-2">
                 {c.next ? (
-                  <Link href={c.next.href} className={PRIMARY} data-testid="work-card-next">{c.next.label}</Link>
+                  <Link href={withWorkContext(c.next.href, c.accountName, c.index)} className={PRIMARY} data-testid="work-card-next">{c.next.label}</Link>
                 ) : null}
                 <Link href={c.href} className={OUTLINE} data-testid="work-card-open">Open {c.accountName}</Link>
                 {c.capture ? <Link href={c.capture.href} className="inline-flex min-h-11 items-center text-sm underline" data-testid="work-card-capture">{c.capture.label}</Link> : null}

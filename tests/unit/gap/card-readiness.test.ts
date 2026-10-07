@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { cardReadiness, sellerLaneOf, type ReadinessInput } from '@/lib/gap/routing/card-readiness';
 import { ROUTING_ACTIONS } from '@/lib/gap/taxonomy';
 import type { SuppressionClass } from '@/lib/gap/suppression/provenance';
+import { accountHref } from '@/lib/gap/account-intel/href';
 
 const RULES_FOR_RESEARCH = ['no_hypothesis', 'bounced_or_invalid', 'tam_unknown', 'hyp_stale', 'disp_wrong_person', 'suppression_review', 'something_new'];
 
@@ -136,9 +137,9 @@ describe('cardReadiness: sequence cards (last mile)', () => {
     expect(r.state === 'actionable' && r.primary).toMatchObject({ label: 'Follow up: touch 2', href: '/gap?lane=follow_up&open=dec-1#card-dec-1' });
   });
 
-  it('REPLIED: sequence stopped, points at logging the reply', () => {
+  it('REPLIED: sequence stopped, points at recording the reply on its own account (R60, never the all-replies lane)', () => {
     const r = cardReadiness({ ...base(), touch: { state: 'stopped', reason: 'replied', detail: 'Buyer replied.', sentCount: 1 } });
-    expect(r.state === 'actionable' && r.primary).toMatchObject({ label: 'Replied: sequence stopped. Log the reply', href: '/gap?lane=replies' });
+    expect(r.state === 'actionable' && r.primary).toMatchObject({ label: 'Replied: sequence stopped. Record the reply', href: `${accountHref(base().account.name)}#record-reply` });
   });
 
   it('unreadable sequence state is a named prerequisite, never an outreach action', () => {

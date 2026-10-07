@@ -175,6 +175,15 @@ describe('listReplies', () => {
     expect(prisma.inboundMessage.findMany.mock.calls.length).toBeGreaterThan(1);
   });
 
+  it('R60: one account at a time: only that account\'s known addresses are read, so the account page records its own replies', async () => {
+    const page = await listReplies(prisma, { state: 'all', accountName: 'Acme Logistics' });
+    expect(page.items.map((i) => i.id)).toEqual(['m5', 'm2']);
+    expect(page.items.every((i) => i.accountName === 'Acme Logistics')).toBe(true);
+    const asked: string[] = prisma.inboundMessage.findMany.mock.calls[0][0].where.from_email.in;
+    expect(asked).toEqual(['jordan@acme.example']);
+    expect((await listReplies(prisma, { state: 'all', accountName: 'Nobody Here Inc' })).items).toEqual([]);
+  });
+
   it('no known addresses means an empty page and no inbox query', async () => {
     prisma.sequenceEnrollment.findMany.mockResolvedValueOnce([]);
     // The thesis personas, then (batch item 8) the HubSpot-contact personas: both empty.

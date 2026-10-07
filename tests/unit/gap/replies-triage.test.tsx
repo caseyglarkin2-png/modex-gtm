@@ -27,6 +27,17 @@ describe('<RepliesTriage>', () => {
     expect(screen.queryByLabelText('Reply state filter')).toBeNull();
   });
 
+  it('R60 on an account page: only that account\'s replies are asked for, the first is open, no filter; none waiting says so', async () => {
+    const c = client();
+    render(<RepliesTriage client={c} account="GAP Test Foods" />);
+    await waitFor(() => expect(screen.getByTestId('disposition-form')).toBeInTheDocument());
+    expect(c.listReplies).toHaveBeenCalledWith({ state: 'undispositioned', account: 'GAP Test Foods' });
+    expect(screen.queryByLabelText('Reply state filter')).toBeNull();
+    const empty = { ...client(), listReplies: vi.fn(async () => ({ ok: true, status: 200, data: { items: [], nextCursor: null } })) } as unknown as GapApiClient;
+    render(<RepliesTriage client={empty} account="Quiet Co" />);
+    expect(await screen.findByTestId('record-reply-empty')).toHaveTextContent('Nothing from Quiet Co is waiting to be recorded.');
+  });
+
   it('on the history page: the filter is there and nothing opens on its own', async () => {
     render(<RepliesTriage client={client()} />);
     await screen.findByTestId('reply-row');

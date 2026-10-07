@@ -22,7 +22,8 @@ describe('<ReplyPrepPanel>', () => {
     expect(screen.queryByTestId('reply-prep-no-answer')).toBeNull();
     expect(screen.getByTestId('reply-answer-prepare')).toHaveTextContent('Prepare the answer');
     expect(screen.getByTestId('reply-prep-thread')).toHaveAttribute('href', 'https://mail.google.com/mail/u/0/?authuser=casey%40yardflow.ai#all/thr-1');
-    expect(screen.getByTestId('reply-prep-record')).toHaveAttribute('href', '/gap?lane=replies');
+    // R60: recorded on its own account, never the all-replies lane.
+    expect(screen.getByTestId('reply-prep-record')).toHaveAttribute('href', '/gap/accounts/nfi-scratch-co#record-reply');
     const links = [...document.querySelectorAll('[data-testid="reply-prep"] a, [data-testid="reply-prep"] button')];
     expect(links.map((l) => l.textContent)).toEqual(['Prepare the answer', 'Answer in Gmail', 'Record what they said']);
     expect(links.some((l) => /send/i.test(l.textContent ?? '') || /\/send/.test(l.getAttribute('href') ?? ''))).toBe(false);
