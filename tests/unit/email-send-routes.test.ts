@@ -18,6 +18,7 @@ const mockedEnforceOneAccountInvariant = vi.fn(async ({ cc }: { cc?: string[] })
 }));
 const mockedPrisma = {
   prisma: {
+    inboundMessage: { findMany: async () => [] }, // R63: no reply on file (perform-send reads opt-outs)
     unsubscribedEmail: {
       findUnique: vi.fn(),
       findMany: vi.fn(),

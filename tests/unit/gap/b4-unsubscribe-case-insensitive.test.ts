@@ -36,6 +36,7 @@ function emailWhereMatches(where: { email: unknown }, candidate: string): boolea
 }
 
 const mockedPrisma = {
+  inboundMessage: { findMany: async () => [] }, // R63: no reply on file (perform-send reads opt-outs)
   unsubscribedEmail: {
     findUnique: vi.fn(async ({ where }: any) => unsubscribedStore.find((r) => r.email === where.email) ?? null),
     create: vi.fn(async ({ data }: any) => {

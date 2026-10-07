@@ -15,9 +15,11 @@ import {
   ineligibleRecipientSendBlocker,
   mixedAccountPayloadSendBlocker,
   unsubscribedSendBlocker,
+  optedOutByReplySendBlocker,
   warmIntroOnlySendBlocker,
   type SendBlocker,
 } from '@/lib/email/send-blockers';
+import { optOutRefusalText, optOutReplyOnFile } from '@/lib/gap/replies/opt-out';
 import { restrictionFor, restrictionForEmail } from '@/lib/gap/policy/restriction';
 
 /**
@@ -211,6 +213,18 @@ export async function evaluateSendGuards(
     }
     const block = unsubscribedSendBlocker(email);
     return { ok: false, block };
+  }
+
+  // R63 blocker: an opt-out reply on file from a recipient ("stop"), recorded or not, refuses the send with the reason
+  // in words. The same read GAP's own send gate stops on (gap/replies/opt-out.ts over replies/classify.ts); a bounce,
+  // an automatic notice or a person's ordinary reply does not block. Internal addresses bypass as for unsubscribes.
+  for (const email of outboundRecipients) {
+    if (allowBypass(email)) continue;
+    const optOut = await optOutReplyOnFile(prisma, email);
+    if (optOut) {
+      const name = email.toLowerCase() === resolvedRecipient.to.toLowerCase() ? resolvedRecipient.personaName : null;
+      return { ok: false, block: optedOutByReplySendBlocker(optOutRefusalText(optOut, name)) };
+    }
   }
 
   for (const email of outboundRecipients) {

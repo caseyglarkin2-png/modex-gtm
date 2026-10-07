@@ -5,6 +5,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const mockedPrisma = {
+  inboundMessage: { findMany: async () => [] }, // R63: no reply on file (perform-send reads opt-outs)
   unsubscribedEmail: { findMany: vi.fn(async () => []), findUnique: vi.fn(async () => null) },
   emailLog: { findFirst: vi.fn(async () => null), findMany: vi.fn(async () => []) },
   draftQueueItem: { findFirst: vi.fn(async () => null), findMany: vi.fn(async () => []), create: vi.fn(async () => ({ id: 1 })) },
