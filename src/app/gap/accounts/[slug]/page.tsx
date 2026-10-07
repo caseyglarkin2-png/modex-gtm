@@ -297,15 +297,18 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
     const scopePeople = personIndex(inputs.personas.map((p) => ({ personaId: p.id, name: p.name, title: p.title, email: null, hubspotContactId: p.hubspotContactId ? String(p.hubspotContactId) : null })));
     const obligations = withPhases(commitments, now, buyerMoves((pursuit?.replyItems ?? []).filter((r) => !r.dispositionId))).map((c) => ({ ...c, scopeLabel: nowDeals.length || c.dealId ? commitmentScope(c, dealRefs(nowDeals.map((d) => ({ ...d, stage: null }))), scopePeople, inputs.opportunity?.closed ?? []).label : null }));
     const ready = pursuit ? (brief.motion.type === 'FACT_LED' ? pursuit.ready : null) : brief.motion.type === 'FACT_LED' ? await loadReadyTarget(prisma, brief.accountName, now) : null;
-    const v = projectNow(brief, ctx, inputs, now, { ready });
+    // Sprint 5 review: the earliest dated obligation due today or overdue (it outranks a meeting more than a day away).
+    const dueFirst = obligations.filter((c) => c.phase === 'due' && !!c.dueAt).sort((a, b) => String(a.dueAt).localeCompare(String(b.dueAt)))[0] ?? null;
+    const v = projectNow(brief, ctx, inputs, now, { ready, dueNow: dueFirst ? { title: dueFirst.title, scope: dueFirst.scopeLabel } : null });
     const top = brief.hypotheses.find((h) => h.grounded && h.truth !== 'CONTRADICTED');
     // NEXT from the pursuit state (the chosen person and the action agree by construction); a meeting within 14 days
     // still leads (projectNow's own rule).
-    const pursuitNext = pursuit && v.next.source !== 'meeting'
+    const pursuitNext = pursuit && v.next.source !== 'meeting' && v.next.source !== 'obligation'
       ? nextFromPursuit(pursuit.state, { hypothesisId: pursuit.hypothesisId, accountSlugHref: (view) => hrefFor(view), replyThreadHref: v.replyThread ? gmailThreadHref(v.replyThread, email) : null, captureHref: `/gap/capture?account=${encodeURIComponent(brief.accountName)}`, readyHref: pursuit.ready?.href ?? null })
       : null;
     const control: { href: string; label: string } | null =
       pursuitNext ? pursuitNext.control
+      : v.next.source === 'obligation' ? { href: `${hrefFor('now')}#account-obligations-heading`, label: 'Open what is due' }
       : v.next.source === 'meeting' ? { href: hrefFor('brief'), label: 'Open the meeting brief' }
       : v.next.source === 'deal' ? { href: hrefFor('brief'), label: 'Open the deal brief' }
       // An unanswered reply opens its thread in Gmail (round 6: "Open replies" was an empty lane for GXO).

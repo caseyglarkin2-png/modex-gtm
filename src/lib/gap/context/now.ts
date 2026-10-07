@@ -52,7 +52,7 @@ export interface NowView {
   lastTouch: string;
   /** The newest buyer reply on record, dated, else null. */
   lastReply: string | null;
-  next: { text: string; source: 'meeting' | 'deal' | 'conversation' | 'restriction' | 'motion' };
+  next: { text: string; source: 'meeting' | 'deal' | 'conversation' | 'restriction' | 'motion' | 'obligation' };
   who: { name: string; title: string | null; why: string; route: string | null; location?: string | null; inHubSpotOnly?: boolean; hubspotContactId?: string | null; personaId?: number | null; employment?: { state: string; label: string; why: string } | null; role?: { state: string; label: string; why: string } | null } | null;
   /** A better-fit person on record who is not yet a GAP contact (shown beside the ready-card person). */
   betterFit: string | null;
@@ -151,7 +151,7 @@ export function sellerLine(s: Statement, section: string, x: { domains: readonly
 const ASK_ORDER: DiscoveryQuestion['type'][] = ['CURRENT_PROCESS', 'VERIFY_PROBLEM', 'ROOT_CAUSE', 'IMPACT', 'OWNERSHIP', 'CURRENT_STACK', 'CHANGE_REQUIREMENT', 'DESIRED_FUTURE'];
 const LATE: ReadonlySet<string> = new Set(['CURRENT_STACK', 'CHANGE_REQUIREMENT', 'DESIRED_FUTURE']);
 
-export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext, i: Pick<AccountInputs, 'facts' | 'bids' | 'domains' | 'account'> & { firstTouches?: AccountInputs['firstTouches'] }, now: Date, opts: { ready?: ReadyTarget | null } = {}): NowView {
+export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext, i: Pick<AccountInputs, 'facts' | 'bids' | 'domains' | 'account'> & { firstTouches?: AccountInputs['firstTouches'] }, now: Date, opts: { ready?: ReadyTarget | null; /** Sprint 5 review: the earliest dated obligation due today or overdue at the account (its words and its scope). */ dueNow?: { title: string; scope: string | null } | null } = {}): NowView {
   const used = new Set<string>();
   // Each idea once, also when two sources say it in different words (round 4: Giant Eagle twice, Gatik twice).
   const shown: string[] = [];
@@ -172,7 +172,12 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   const soon = meeting && new Date(meeting.at).getTime() - now.getTime() <= 14 * 86_400_000;
   // In a deal, the deal's own next step (HubSpot) is NEXT when someone wrote one; otherwise GAP's deal guidance.
   const dealNext = m.type === 'IN_DEAL' ? brief.deals.find((d) => d.nextStep?.trim())?.nextStep?.trim() ?? null : null;
-  let next: NowView['next'] = soon
+  // Sprint 5 review: a promise due today outranks a meeting more than a day away (the meeting is still named next).
+  const meetingTomorrow = !!meeting && new Date(meeting.at).getTime() - now.getTime() <= 24 * 3_600_000;
+  const due = soon && !meetingTomorrow ? opts.dueNow ?? null : null;
+  let next: NowView['next'] = due
+    ? { text: `Due now: ${due.title}${due.scope ? ` (${due.scope})` : ''}. Then prepare for the meeting on ${day(meeting!.at)}: ${meeting!.what}.`, source: 'obligation' }
+    : soon
     ? { text: `Prepare for the meeting on ${day(meeting!.at)}: ${meeting!.what}. Read BRIEF before you go.`, source: 'meeting' }
     : m.type === 'FACT_LED' && opts.ready
       ? { text: `Review the thesis, then open the first-touch card for ${displayName(opts.ready.name)} (every gate runs at the click).`, source: 'motion' }

@@ -385,8 +385,15 @@ function betweenUs(i: StoryInput): StoryRow {
     const sources = [...new Set(sends.map((x) => x.source))].map((x) => x.replace(' ledger', '')).join(' and ');
     s.push({ text: `${sends.length} emails to ${people.size} ${people.size === 1 ? 'person' : 'people'} since ${dayYear(oldest.at)}.`, tag: 'Checked', basis: `${sources}`, basisIds: sends.map((x) => `touch:${x.at}`) });
   }
-  const meeting = t.find((x) => x.kind === 'meeting');
-  if (meeting) s.push({ text: `Meeting ${day(meeting.at)}: ${meeting.what.replace(/\.$/, '')}.`, tag: 'Checked', basis: `account history, ${day(meeting.at)}`, basisIds: [`touch:${meeting.at}`] });
+  // Sprint 5 review: only a meeting that took place has happened between us: a future one (prepared on the brief) or a
+  // canceled one (said on Work) is not told here as Checked history; the history's own "Meeting (status):" prefix is
+  // not repeated.
+  const meeting = t.find((x) => x.kind === 'meeting' && new Date(x.at).getTime() <= i.now.getTime() && !/\bcancel(?:l)?ed\b/i.test(x.what));
+  if (meeting) s.push({ text: `Meeting ${day(meeting.at)}: ${meeting.what.replace(/^Meeting \([^)]*\):?\s*/, '').replace(/\.$/, '') || 'held'}.`, tag: 'Checked', basis: `account history, ${day(meeting.at)}`, basisIds: [`touch:${meeting.at}`] });
+  if (!s.length) {
+    const booked = t.find((x) => x.kind === 'meeting' && new Date(x.at).getTime() > i.now.getTime() && !/\bcancel(?:l)?ed\b/i.test(x.what));
+    s.push({ text: booked ? `Nothing has happened between us yet; a meeting is booked for ${day(booked.at)}.` : 'Nothing has happened between us yet.', tag: 'Checked', basis: 'GAP and the account history', basisIds: booked ? [`touch:${booked.at}`] : [] });
+  }
   return row('between_us', s);
 }
 
