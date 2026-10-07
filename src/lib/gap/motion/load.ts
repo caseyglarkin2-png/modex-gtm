@@ -8,6 +8,7 @@ import { DIRECT_CLAIMED, DIRECT_RELEASED, DIRECT_SENT, DRAFTED, DRAFT_CLAIMED, D
 import { historyFromRows } from '../execution/person-history';
 import { isHardBounceStatus } from '../../email/bounce';
 import { accountRepliedRecently } from '../replies/account-reply';
+import { mapLimit } from '../work/map-limit';
 import { ACCOUNT_MOTION, MOTION_UNLOCK_BUSINESS_DAYS, type FirstTouch, type MotionChoice } from './account-motion';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -218,11 +219,16 @@ export async function loadAccountFirstTouches(prisma: PrismaLike, accountNames: 
 /** An account reply nobody has triaged yet, found through any address GAP holds at the account. */
 export async function loadReplyHolds(prisma: PrismaLike, emailsByAccount: ReadonlyMap<string, string>, now: Date): Promise<Map<string, { from: string; receivedAt: string }>> {
   const out = new Map<string, { from: string; receivedAt: string }>();
-  for (const [account, email] of emailsByAccount) {
-    // Final review P1: every company domain at the account, not only this card's.
-    const r = await accountRepliedRecently(prisma, email, now, { accountName: account });
-    if (r) out.set(account, { from: r.from_email, receivedAt: new Date(r.received_at).toISOString() });
-  }
+  // R61: the accounts are checked a few at a time (one after another, Work's read waited one round trip chain per
+  // account); a failed read still fails the whole hold read, as before (the caller fails closed).
+  const entries = [...emailsByAccount];
+  // Final review P1: every company domain at the account, not only this card's.
+  const results = await mapLimit(entries, 5, ([account, email]) => accountRepliedRecently(prisma, email, now, { accountName: account }));
+  results.forEach((res, i) => {
+    if (res.status === 'rejected') throw res.reason;
+    const r = res.value;
+    if (r) out.set(entries[i][0], { from: r.from_email, receivedAt: new Date(r.received_at).toISOString() });
+  });
   return out;
 }
 
