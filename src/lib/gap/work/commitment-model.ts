@@ -73,7 +73,10 @@ export interface Commitment {
   /** When it is due (an instant; a date-only obligation is due at 9 am New York that day), or null. */
   dueAt: string | null;
   person: CommitmentPerson | null;
+  /** R50: the HubSpot deal it belongs to (an id; notes saved before R50 may carry the deal's name). Null = account-level. */
   dealId: string | null;
+  /** R50: the division or site it belongs to, when the seller named one (deals/scope.ts reads the whole scope). */
+  scope?: { division: string | null; site: string | null } | null;
   /** The Gmail thread or inbound message it belongs to, when there is one. */
   threadId: string | null;
   status: CommitmentStatus;

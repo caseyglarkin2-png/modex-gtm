@@ -11,7 +11,7 @@ import { ObligationActions } from './obligation-actions';
 
 const ORDER: Record<PhaseRead['phase'], number> = { due: 0, blocked: 1, upcoming: 2, waiting: 3, snoozed: 4, done: 5, skipped: 6 };
 
-export function AccountObligations({ items }: { items: Array<Commitment & PhaseRead> }) {
+export function AccountObligations({ items }: { items: Array<Commitment & PhaseRead & { /** R50: "Deal: X" or "account-level", when the account has open deals. */ scopeLabel?: string | null }> }) {
   const open = items.filter((c) => c.phase !== 'done' && c.phase !== 'skipped').sort((a, b) => ORDER[a.phase] - ORDER[b.phase] || String(a.dueAt ?? '').localeCompare(String(b.dueAt ?? '')));
   if (open.length === 0) return null;
   return (
@@ -26,6 +26,7 @@ export function AccountObligations({ items }: { items: Array<Commitment & PhaseR
               <span className="mr-1 text-xs font-normal text-[var(--muted-foreground)]">{KIND_TEXT[c.kind]}:</span>
               {c.title}
             </p>
+            {c.scopeLabel ? <p className="text-xs font-semibold text-[var(--muted-foreground)]" data-testid="obligation-scope">{c.scopeLabel}</p> : null}
             <p className="text-xs text-[var(--muted-foreground)]">
               {c.line}
               {c.kind === 'referral' ? ' No cold email to them; you decide how to approach them.' : ''}

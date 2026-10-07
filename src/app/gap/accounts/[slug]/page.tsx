@@ -24,6 +24,9 @@ import { SeparateMotion } from '@/components/gap/separate-motion';
 import { loadResearchHistory, planResearch } from '@/lib/gap/account-intel/orchestrate';
 import { loadDealBrief } from '@/lib/gap/deals/deal-brief';
 import { DealBriefView } from '@/components/gap/deal-brief';
+import { DealOpportunities } from '@/components/gap/deal-opportunities';
+import { loadAccountDealWorkspace } from '@/lib/gap/deals/workspace';
+import { commitmentScope, dealRefs, personIndex } from '@/lib/gap/deals/opportunities';
 import { loadAccountSources } from '@/lib/gap/sources/account-sources';
 import { AccountSourcesSection } from '@/components/gap/account-sources';
 import { loadAccountContext } from '@/lib/gap/context/load';
@@ -70,6 +73,9 @@ const VIEWS: Array<{ v: View; label: string }> = [
 ];
 
 type AccountQuery = { name?: string; view?: string; from?: string; i?: string };
+
+/** R50: Capture's deal parameters: the HubSpot id (binds) and the name (the label); a deal with no id goes by name. */
+const dealParams = (d: { id?: string; name: string | null }): Record<string, string> => (d.id ? { deal: d.id, ...(d.name ? { dealName: d.name } : {}) } : d.name ? { deal: d.name } : {});
 
 /** The account's name from its slug with one cheap read (the full read follows in the streamed body). */
 async function quickAccountName(slug: string, name?: string): Promise<string | null> {
@@ -177,17 +183,25 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
       { label: 'Account history', href: `${legacyHref}` },
       { label: 'Content Studio', href: `/studio?account=${encodeURIComponent(brief.accountName)}` },
       // R44: Capture opens with the account, the deal (when there is exactly one open) and where it came from.
-      { label: 'Log what happened', href: `/gap/capture?${new URLSearchParams({ account: brief.accountName, from: `account:${accountSlug(brief.accountName)}`, ...((inputs.opportunity?.deals ?? []).length === 1 && inputs.opportunity?.deals[0].name ? { deal: inputs.opportunity.deals[0].name as string } : {}) }).toString()}` },
+      // R50: by the deal's HubSpot id (the note's words and obligations bind to it) with its name for the label.
+      { label: 'Log what happened', href: `/gap/capture?${new URLSearchParams({ account: brief.accountName, from: `account:${accountSlug(brief.accountName)}`, ...((inputs.opportunity?.deals ?? []).length === 1 ? dealParams(inputs.opportunity!.deals[0]) : {}) }).toString()}` },
       ...(inputs.account.hubspotCompanyId ? [{ label: 'HubSpot record', href: `https://app.hubspot.com/contacts/3819073/record/0-2/${inputs.account.hubspotCompanyId}`, external: true }] : []),
     ];
     if (view === 'brief') {
-      const dealBrief = brief.dealState === 'ACTIVE' ? await loadDealBrief(prisma, brief.accountName, { now }).catch(() => null) : null;
+      // R50: each open deal is worked on its own: its obligations, its confirmed words, its contacts and HubSpot's next
+      // step, with the account-level rows labeled; one deal brief per deal (never another deal's words).
+      const openDeals = brief.dealState === 'ACTIVE' ? (inputs.opportunity?.deals ?? []).filter((d): d is typeof d & { id: string } => !!d.id) : [];
+      const workspace = openDeals.length ? await loadAccountDealWorkspace(prisma, { accountName: brief.accountName, deals: openDeals.map((d) => ({ id: d.id, name: d.name, stage: d.stage, nextStep: d.nextStep ?? null, closeDate: d.closeDate ?? null, amount: d.amount ?? null, contactIds: d.contactIds ?? [] })), now }).catch(() => null) : null;
+      const dealBriefs = workspace
+        ? await Promise.all(openDeals.map((d) => loadDealBrief(prisma, brief.accountName, { now, deal: { id: d.id, name: d.name }, scopeOf: workspace.scopeOfBid, dealContacts: (d.contactIds ?? []).length }).catch(() => null)))
+        : brief.dealState === 'ACTIVE' ? [await loadDealBrief(prisma, brief.accountName, { now }).catch(() => null)] : [];
       return (
         <div className="mx-auto max-w-2xl space-y-4 pb-28">
           <GapSubnav />
           {header}
           {tabs}
-          {dealBrief ? <DealBriefView brief={dealBrief} deals={brief.deals.map((x) => ({ name: x.name, stage: x.stage ?? 'stage not given', lastActivityAt: null }))} /> : null}
+          {workspace ? <DealOpportunities view={workspace.opportunities} /> : null}
+          {dealBriefs.map((dealBrief, n) => (dealBrief ? <DealBriefView key={dealBrief.deal?.id ?? n} brief={dealBrief} deals={(dealBrief.deal ? brief.deals.filter((x) => x.id === dealBrief.deal!.id) : brief.deals).map((x) => ({ name: x.name, stage: x.stage ?? 'stage not given', lastActivityAt: null }))} /> : null))}
           <AccountBriefSections
             listen={briefListenText(brief.accountName, projectBrief(brief, ctx, inputs, now))}
             sections={projectBrief(brief, ctx, inputs, now)}
@@ -212,7 +226,10 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
     const mailboxId = process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() || null;
     const replyItem = pursuit?.replyItems.find((r) => !r.dispositionId) ?? null;
     const replyPrep = replyItem ? prepareReply({ id: replyItem.id, from: replyItem.contactEmail, fromName: replyItem.fromName ?? null, subject: replyItem.subject, snippet: replyItem.snippet, receivedAt: replyItem.receivedAt, threadId: replyItem.threadId ?? null, accountName: brief.accountName }, { mailbox: mailboxId, now }) : null;
-    const obligations = withPhases(commitments, now, buyerMoves((pursuit?.replyItems ?? []).filter((r) => !r.dispositionId)));
+    // R50: each obligation says which opportunity it belongs to (a deal, through its person's deal, or account-level).
+    const nowDeals = (inputs.opportunity?.deals ?? []).filter((d): d is typeof d & { id: string } => !!d.id).map((d) => ({ id: d.id, name: d.name, contactIds: d.contactIds ?? [] }));
+    const scopePeople = personIndex(inputs.personas.map((p) => ({ personaId: p.id, name: p.name, title: p.title, email: null, hubspotContactId: p.hubspotContactId ? String(p.hubspotContactId) : null })));
+    const obligations = withPhases(commitments, now, buyerMoves((pursuit?.replyItems ?? []).filter((r) => !r.dispositionId))).map((c) => ({ ...c, scopeLabel: nowDeals.length || c.dealId ? commitmentScope(c, dealRefs(nowDeals.map((d) => ({ ...d, stage: null }))), scopePeople).label : null }));
     const ready = pursuit ? (brief.motion.type === 'FACT_LED' ? pursuit.ready : null) : brief.motion.type === 'FACT_LED' ? await loadReadyTarget(prisma, brief.accountName, now) : null;
     const v = projectNow(brief, ctx, inputs, now, { ready });
     const top = brief.hypotheses.find((h) => h.grounded && h.truth !== 'CONTRADICTED');

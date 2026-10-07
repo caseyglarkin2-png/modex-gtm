@@ -1353,6 +1353,37 @@ family (both fail closed); no next follow-up proposed after a by-hand one; the t
 a meeting accepted by email has no time on record; three pre-existing backspace-mangled patterns outside this sprint
 (`story/propose-family.ts` line 49, `entity/providers.ts` `modelGone`, `hubspot-poller.test.ts` lines 708 to 710).
 
+**Sprint 5. R50 Intelligence and actions scoped to the right opportunity (DONE).** HubSpot stays the deal authority:
+the account read now keeps each open deal's HubSpot id beside its name, stage, next step, close date and contacts
+(`account-intel/load.ts`; the In Deals summary keeps the id, close date and next step too). ONE scope rule, NEW
+`deals/scope.ts` (pure): a row's RECORDED scope wins (a commitment's `dealId`, plus an optional division / site now
+accepted by `POST /api/gap/commitments`; a BID's `metadata.scope`, now accepted by `POST /api/gap/bids` as an optional
+`scope` and written by Capture when the note was opened on a deal); else the person's single open deal through their
+HubSpot contact, said as "through <person>"; else ACCOUNT-LEVEL, labeled so wherever it is shown. A person on two
+deals stays account-level (one person's words are never transferred to every opportunity they touch); a legacy deal
+NAME (R44 notes) resolves only when it names exactly one open deal; a closed deal's id or an unmatched name keeps its
+own label ("scoped elsewhere"), never guessed and never dropped. NEW `deals/opportunities.ts` (pure) +
+`deals/workspace.ts` (the read) + `components/gap/deal-opportunities.tsx`: on the account BRIEF each open deal shows
+ONLY its own open obligations, its own confirmed buyer words, the people GAP holds who are its contacts, HubSpot's own
+next step and close date, and its own actions (Capture opened on that deal by id; the deal in HubSpot); account-level
+rows are their own group; one deal brief per deal (`buildDealBrief` with the deal and the scope rule: that deal's words
+plus the tagged account-level ones, never the other deal's; without a deal it is unchanged). The NOW obligations list
+says each row's scope. Capture links carry the deal's HubSpot id and its name (`deal`, `dealName`; the note stores
+both), from the account page and from a Work card (the card's top obligation's deal, else the account's only deal).
+An open deal still blocks cold outreach (unchanged gates; the pursuit state stays in_deal with no cold touch) without
+suppressing deal work: NEXT names every open deal ("Work the 2 open deals (...) each on its own"), Work ranks a due
+deal step as deal work with "Deal: <name>" on the obligation. Proof: `deal-scope.test.tsx` (9: the scope rule, the
+legacy name, two deals under one company each holding only its own obligations and words with nothing listed twice,
+the per-deal brief, the rendered view, the pursuit state and NEXT, the Work card and its Capture link); five
+deliberate mutations (a person on two deals transferred to the first, account-level rows shown as every deal's, a
+per-deal brief keeping another deal's words, a legacy name guessed onto the first deal, Capture binding to the first
+deal) each turn it red. Corpus: Kroger Scratch Co now carries two open deals in the stub, each with its own contact
+(Ann on the yard pilot, Ben on the Columbus DC deal; tag-unique ids); the stub answers deal -> contacts and contact ->
+deals from the deals file. Adjacent: 18 files / 256 green; typecheck clean. Rollback: revert the commit (older rows
+read account-level; the new optional fields are ignored). Debt: the contact-derived binding needs the person's HubSpot
+contact id (a person GAP holds without one reads account-level); division and site are free text the seller names (no
+site entity).
+
 ## 12. Migration, backfill and rollback
 
 Order of commits inside Sprint 1 and 3: schema + SQL first (no reader), then pure core, then importers (Top100 before PIC before modex legacy), then runtime pin, then services, then queue actions under the flag, then `GAP_OS_ENABLED=true` in Vercel after `verify-triggers.ts` passes against prod (env is snapshot at deploy; redeploy after setting). Before the prod `db push`, preview it with `prisma migrate diff --from-url <prod> --to-schema-datamodel prisma/schema.prisma --script` and confirm the script is additive only; also confirm the prod role can `CREATE FUNCTION` (not yet verified). Rollback: the flag off restores byte-identical behavior instantly; full removal is the rollback SQL plus reverting the runtime, service and queue-action commits; `sequences` is never modified; the only two pre-existing tables GAP OS's schema touches at all are `draft_queue_items` (one nullable `sequence_version_id` stamp, S1-T2) and `inbound_messages` (`source String @default("gmail")` and `hubspot_engagement_id String?`, S2-T1, needed so the reply cron and the HubSpot poller can tell a Gmail-sourced row from a HubSpot-engagement-sourced one and attribute the engagement id idempotently) — both additive-only, both confirmed by the production preflight below; the lane and PIC files are read, never written.

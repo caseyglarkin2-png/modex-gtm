@@ -457,6 +457,7 @@ export function CaptureFlow({
   initialAccount = null,
   initialPersona = null,
   initialDeal = null,
+  initialDealName = null,
   initialContext = null,
   source = null,
   dictate = false,
@@ -467,6 +468,8 @@ export function CaptureFlow({
   initialPersona?: { id: number; name: string } | null;
   /** R44: the deal the action named (its reference as GAP knows it). */
   initialDeal?: string | null;
+  /** R50: the deal's name, when the link carried its id. */
+  initialDealName?: string | null;
   /** R44: the conversation the action implies (a meeting, a call, an email). */
   initialContext?: string | null;
   /** R44: what opened Capture (a Work card, a reply, an obligation, the account page). */
@@ -524,7 +527,7 @@ export function CaptureFlow({
       res = await fetch('/api/gap/captures', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ accountName: account, accountHint: account ? null : q.trim() || null, personaId, context, rawText, ...(account && initialDeal ? { dealId: initialDeal } : {}), ...(account && source ? { source } : {}) }),
+        body: JSON.stringify({ accountName: account, accountHint: account ? null : q.trim() || null, personaId, context, rawText, ...(account && initialDeal ? { dealId: initialDeal, ...(initialDealName ? { dealName: initialDealName } : {}) } : {}), ...(account && source ? { source } : {}) }),
       });
     } catch {
       setSaving(false);
@@ -573,7 +576,7 @@ export function CaptureFlow({
             <button type="button" className="text-xs underline" onClick={() => { setAccount(null); setPersonaId(null); }}>
               change
             </button>
-            {initialDeal ? <span className="text-xs text-[var(--muted-foreground)]" data-testid="capture-deal">Deal: {initialDeal}</span> : null}
+            {initialDeal ? <span className="text-xs text-[var(--muted-foreground)]" data-testid="capture-deal">Deal: {initialDealName ?? initialDeal}</span> : null}
             {source ? <span className="text-xs text-[var(--muted-foreground)]" data-testid="capture-source">Opened from {SOURCE_TEXT[source.kind] ?? source.kind}</span> : null}
           </div>
         ) : (

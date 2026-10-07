@@ -3,7 +3,9 @@
 // One local HTTP server that answers, with controlled data, the external boundaries a GAP page or action reads:
 //   HubSpot (the SDK base path, HUBSPOT_API_BASE_PATH): company search by domain/name, company batch read,
 //     v4 associations (basic page + batch), deal batch read, contact batch read. Deals per account come from a
-//     JSON file (STUB_DEALS_FILE: { "<company name>": [{ id, dealname, dealstage, hs_is_closed }] }).
+//     JSON file (STUB_DEALS_FILE: { "<company name>": [{ id, dealname, dealstage, hs_is_closed, contacts?,
+//     hs_next_step?, amount? }] }). R50: `contacts` lists the HubSpot contact ids on the deal, so two deals under one
+//     company can each carry their own person (deal -> contacts and contact -> deals associations answer from it).
 //   clawd (CLAWD_CONTROL_PLANE_URL): the suppression contract (every address clear unless listed in
 //     STUB_BLOCKED_FILE) and the autonomy state (global false, every motion false), plus the read endpoints the
 //     story readers call (answered empty).
@@ -41,6 +43,9 @@ const dealsOf = (companyId) => {
   for (const [name, list] of Object.entries(deals)) if (companyFor(name).id === companyId) return list;
   return [];
 };
+const allDeals = () => [...companies.values()].flatMap((c) => dealsOf(c.id));
+const contactsOf = (dealId) => (allDeals().find((d) => String(d.id) === String(dealId))?.contacts ?? []).map(String);
+const dealsOfContact = (contactId) => allDeals().filter((d) => (d.contacts ?? []).map(String).includes(String(contactId)));
 const byDomain = (d) => [...companies.values()].find((c) => c.domain === d.toLowerCase().replace(/^www\./, ''));
 const byName = (n) => [...companies.values()].find((c) => c.name.toLowerCase() === n.toLowerCase());
 const byId = (id) => [...companies.values()].find((c) => c.id === String(id));
@@ -130,7 +135,11 @@ const server = http.createServer((req, res) => {
             ? dealsOf(String(i.id)).map((d) => ({ toObjectId: String(d.id), associationTypes: [] }))
             : m[1] === 'deals' && m[2] === 'companies'
               ? [companyOfDeal(i.id)].filter(Boolean).map((c) => ({ toObjectId: c.id, associationTypes: [] }))
-              : [],
+              : m[1] === 'deals' && m[2] === 'contacts'
+                ? contactsOf(i.id).map((k) => ({ toObjectId: k, associationTypes: [] }))
+                : m[1] === 'contacts' && m[2] === 'deals'
+                  ? dealsOfContact(i.id).map((d) => ({ toObjectId: String(d.id), associationTypes: [] }))
+                  : [],
       }));
       return json(res, 200, { status: 'COMPLETE', results });
     }

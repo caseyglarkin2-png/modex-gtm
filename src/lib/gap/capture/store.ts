@@ -64,8 +64,10 @@ export interface CaptureView {
   createdBy: string;
   candidates: Array<CandidateBid & { decision: null | { kind: 'confirmed'; bidId: string; type: string; by: string } | { kind: 'rejected'; by: string } }>;
   meetings: Array<{ outcome: MeetingOutcome; dispositionId: string | null; nextLearningObjective: string | null; at: string }>;
-  /** R44: the deal the action that opened Capture named, when it did. */
+  /** R44: the deal the action that opened Capture named, when it did (R50: the HubSpot deal id; older notes, its name). */
   dealId: string | null;
+  /** R50: the deal's name, for the label. */
+  dealName: string | null;
   /** R44: what opened Capture (a Work card, a reply, an obligation, the account page), when known. */
   source: { kind: string; id: string } | null;
   /** R44: the obligations the note states (who owes what by when), each confirmed into a commitment or rejected. */
@@ -108,7 +110,7 @@ async function audit(prisma: PrismaLike, kind: string, actor: string, captureId:
 /** Save a raw note and propose candidates once. Unknown account text is kept as an unlinked hint, never guessed. */
 export async function createCapture(
   prisma: PrismaLike,
-  input: { accountName?: string | null; accountHint?: string | null; personaId?: number | null; dealId?: string | null; source?: { kind: string; id: string } | null; context: string; rawText: string; actor: string; now: Date },
+  input: { accountName?: string | null; accountHint?: string | null; personaId?: number | null; dealId?: string | null; dealName?: string | null; source?: { kind: string; id: string } | null; context: string; rawText: string; actor: string; now: Date },
 ): Promise<Ok<{ capture: CaptureView }> | Refused> {
   const raw = String(input.rawText ?? '');
   if (!raw.trim()) return { ok: false, reason: 'empty_note' };
@@ -140,6 +142,7 @@ export async function createCapture(
     capturedAt: input.now.toISOString(),
     // R44: the deal and the action that opened Capture, the obligations the note states and what is never buyer words.
     dealId: input.dealId?.trim() || null,
+    dealName: input.dealName?.trim() || null,
     source,
     commitments: extractCommitments(raw, input.now),
     excluded: excludedLines(raw),
@@ -192,6 +195,7 @@ export async function loadCapture(prisma: PrismaLike, id: string): Promise<Captu
       .filter((r) => r.kind === CAPTURE_MEETING)
       .map((r) => ({ outcome: r.payload.outcome as MeetingOutcome, dispositionId: (r.payload.dispositionId as string | null) ?? null, nextLearningObjective: (r.payload.nextLearningObjective as string | null) ?? null, at: new Date(r.created_at).toISOString() })),
     dealId: typeof p.dealId === 'string' ? p.dealId : null,
+    dealName: typeof p.dealName === 'string' ? p.dealName : null,
     source: p.source && typeof (p.source as { kind?: unknown }).kind === 'string' ? (p.source as { kind: string; id: string }) : null,
     commitments,
     excluded: Array.isArray(p.excluded) ? (p.excluded as Array<{ text: string; reason: string }>) : [],
@@ -385,7 +389,8 @@ async function decideCandidateUnlocked(
     rawBuyerLanguage: quote,
     normalizedSummary: input.summary?.trim() || null,
     source: BID_SOURCE_OF[view.context],
-    metadata: { captureId: view.id, candidateId: cand.id, proposedBy: 'machine', proposedType: cand.type, confirmedFromCapture: true },
+    // R50: words from a note opened on a deal belong to that deal (deals/scope.ts); otherwise they are account-level.
+    metadata: { captureId: view.id, candidateId: cand.id, proposedBy: 'machine', proposedType: cand.type, confirmedFromCapture: true, ...(view.dealId ? { scope: { dealId: view.dealId } } : {}) },
     actor: input.actor,
     actorKind: 'human',
     now: input.now,

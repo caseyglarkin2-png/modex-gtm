@@ -155,6 +155,8 @@ export interface BidBody {
   unit?: string;
   source: BidSource;
   supersedesId?: string;
+  /** R50: the opportunity the words belong to; absent = account-level. */
+  scope?: { dealId?: string; division?: string; site?: string };
 }
 
 /** `POST /api/gap/bids` 201 body. */

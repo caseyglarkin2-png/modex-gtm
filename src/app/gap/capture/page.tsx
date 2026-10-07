@@ -20,7 +20,7 @@ import { transcriptionProvider } from '@/lib/gap/voice/transcribe';
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Capture' };
 
-export default async function CapturePage({ searchParams }: { searchParams?: Promise<{ account?: string; person?: string; deal?: string; from?: string; context?: string }> }) {
+export default async function CapturePage({ searchParams }: { searchParams?: Promise<{ account?: string; person?: string; deal?: string; dealName?: string; from?: string; context?: string }> }) {
   if (assertGapEnabled('GAP_HYPOTHESIS_ENABLED')) notFound();
   const session = await auth();
   if (!session?.user?.email) redirect('/login');
@@ -34,6 +34,8 @@ export default async function CapturePage({ searchParams }: { searchParams?: Pro
   const person = initialAccount && personId ? await prisma.persona.findUnique({ where: { id: personId }, select: { id: true, name: true, account_name: true } }).catch(() => null) : null;
   const initialPersona = person && person.account_name === initialAccount ? { id: person.id, name: person.name ?? `person ${person.id}` } : null;
   const initialDeal = initialAccount && q.deal?.trim() ? q.deal.trim().slice(0, 200) : null;
+  // R50: the link carries the HubSpot deal id (what binds the note to the deal) and its name (what the seller reads).
+  const initialDealName = initialDeal && q.dealName?.trim() ? q.dealName.trim().slice(0, 200) : null;
   const from = /^(work|reply|commitment|account|meeting):(.{1,200})$/.exec(q.from ?? '');
   const source = initialAccount && from ? { kind: from[1], id: from[2] } : null;
   const initialContext = (CAPTURE_CONTEXTS as readonly string[]).includes(q.context ?? '') ? (q.context as string) : null;
@@ -45,7 +47,7 @@ export default async function CapturePage({ searchParams }: { searchParams?: Pro
         <h1 className="text-2xl font-semibold tracking-tight">Capture buyer truth</h1>
         <p className="mt-1 text-sm text-[var(--muted-foreground)]">Right after the conversation. GAP keeps your note as written and suggests what might be buyer truth; only what you confirm counts.</p>
       </div>
-      <CaptureFlow initialAccount={initialAccount} initialPersona={initialPersona} initialDeal={initialDeal} initialContext={initialContext} source={source} dictate={transcriptionProvider() !== 'disabled'} />
+      <CaptureFlow initialAccount={initialAccount} initialPersona={initialPersona} initialDeal={initialDeal} initialDealName={initialDealName} initialContext={initialContext} source={source} dictate={transcriptionProvider() !== 'disabled'} />
       {recent.length ? (
         <section className="space-y-2" data-testid="capture-recent">
           <h2 className="text-sm font-semibold">Recent notes</h2>

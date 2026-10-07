@@ -22,6 +22,8 @@ const Body = z
     personaId: z.number().int().positive().nullable().optional(),
     // R44: the deal and the action that opened Capture (a Work card, a reply, an obligation, the account page).
     dealId: z.string().trim().max(200).nullable().optional(),
+    // R50: the deal's name for the note's label (the id is what binds the note's words and obligations to the deal).
+    dealName: z.string().trim().max(200).nullable().optional(),
     source: z.object({ kind: z.enum(CAPTURE_SOURCE_KINDS), id: z.string().trim().min(1).max(200) }).strict().nullable().optional(),
     context: z.enum(CAPTURE_CONTEXTS),
     rawText: z.string().max(RAW_TEXT_MAX),

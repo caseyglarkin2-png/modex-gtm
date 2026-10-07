@@ -11,7 +11,8 @@
  *                        announcement), one sensitive fact (layoffs), NO usable thesis -> Research
  *   Fedex Scratch Co     a chosen person and an APPROVED grounded thesis on a verified fact -> Ready
  *   Walmart Scratch Co   a buyer replied "stop" -> Opted out (never cold work)
- *   Kroger Scratch Co    an open HubSpot deal (the stub's deals file names it) -> In a deal
+ *   Kroger Scratch Co    TWO open HubSpot deals under one company (R50), each with its own contact (Ann on the yard
+ *                        pilot, Ben on the Columbus DC deal) -> In a deal; neither deal's work is the other's
  *   Nfi Scratch Co       a 3PL with many eligible people and no choice -> Choose who hears this first
  *   Dannon Scratch Co    one person, no source, no fact, no thesis -> Research, nothing to draft
  *   Mills Scratch Co     an approved thesis whose only fact is a sale abroad -> the gate refuses it (not usable)
@@ -50,7 +51,21 @@ export interface Corpus {
   seededAt: string;
   accounts: CorpusAccount[];
   /** For scripts/gap/recovery/stubs.mjs: the accounts the HubSpot stub must know, and the deals it must report. */
-  stub: { companies: string[]; deals: Record<string, Array<{ id: number; dealname: string; dealstage: string; hs_is_closed: boolean }>> };
+  stub: { companies: string[]; deals: Record<string, StubDeal[]> };
+}
+
+/** One deal the HubSpot stub reports (scripts/gap/recovery/stubs.mjs). */
+export interface StubDeal {
+  id: number;
+  dealname: string;
+  dealstage: string;
+  hs_is_closed: boolean;
+  /** R55: closed won (true) or lost (false); absent while open. */
+  hs_is_closed_won?: boolean;
+  closedate?: string;
+  hs_next_step?: string;
+  /** R50: the HubSpot contact ids on the deal. */
+  contacts?: string[];
 }
 
 const slugOf = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -60,6 +75,13 @@ export function stubCompanyId(name: string): string {
   let h = 0;
   for (const c of key) h = (h * 31 + c.charCodeAt(0)) >>> 0;
   return String(900000000 + (h % 100000000));
+}
+
+/** A numeric id unique to the tag (deal and contact ids must not collide between two corpora in one stub). */
+export function taggedId(tag: string, n: number): number {
+  let h = 0;
+  for (const c of tag) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+  return (tag ? (h % 90000) + 10000 : 0) * 10000 + n;
 }
 
 export async function seedCorpus(prisma: PrismaClient, opts: { tag?: string; now?: Date } = {}): Promise<Corpus> {
@@ -80,13 +102,13 @@ export async function seedCorpus(prisma: PrismaClient, opts: { tag?: string; now
     out.stub.companies.push(name);
     return entry;
   }
-  async function person(a: CorpusAccount, first: string, title: string, over: { last?: string } = {}) {
+  async function person(a: CorpusAccount, first: string, title: string, over: { last?: string; hubspotContactId?: string } = {}) {
     const last = over.last ?? 'Scratch';
     const email = `${first.toLowerCase()}@${a.slug}.example.com`;
     const row = await prisma.persona.upsert({
       where: { persona_id: `corpus:${a.slug}:${first.toLowerCase()}` },
-      update: {},
-      create: { persona_id: `corpus:${a.slug}:${first.toLowerCase()}`, account_name: a.name, priority: 'P1', name: `${first} ${last}`, first_name: first, last_name: last, title, seniority: 'director', email, email_valid: true, email_status: 'valid', is_contact_ready: true, do_not_contact: false, company_domain: `${a.slug}.example.com` },
+      update: over.hubspotContactId ? { hubspot_contact_id: over.hubspotContactId } : {},
+      create: { persona_id: `corpus:${a.slug}:${first.toLowerCase()}`, account_name: a.name, priority: 'P1', name: `${first} ${last}`, first_name: first, last_name: last, title, seniority: 'director', email, email_valid: true, email_status: 'valid', is_contact_ready: true, do_not_contact: false, company_domain: `${a.slug}.example.com`, ...(over.hubspotContactId ? { hubspot_contact_id: over.hubspotContactId } : {}) },
       select: { id: true, name: true, title: true, email: true },
     });
     a.people.push({ id: row.id, name: row.name, title: row.title, email: row.email ?? email });
@@ -185,13 +207,19 @@ export async function seedCorpus(prisma: PrismaClient, opts: { tag?: string; now
     await thesis(a, doug.id, f, 'approved');
     await reply(a, { email: doug.email, name: doug.name }, 'stop', '2026-10-05T14:00:00Z');
   }
-  // ---- Kroger Scratch Co: in a deal (the stub reports an open deal) ----
+  // ---- Kroger Scratch Co: two open deals under one company, each with its own contact (R50) ----
   {
     const a = await account('Kroger Scratch Co', { vertical: 'grocery' });
-    a.expected = 'In a deal: work it from the deal, never a cold first touch; the deal still blocks conflicting cold outreach';
-    await person(a, 'Ann', 'VP Supply Chain Operations');
+    a.expected = 'In a deal (two): each deal worked on its own, never a cold first touch; neither deal shares the other\'s obligations, requirements or next steps';
+    const annContact = String(taggedId(tag, 81));
+    const benContact = String(taggedId(tag, 82));
+    await person(a, 'Ann', 'VP Supply Chain Operations', { hubspotContactId: annContact });
+    await person(a, 'Ben', 'Director, Columbus Distribution Center', { hubspotContactId: benContact });
     await fact(a, 'automation', `${a.name} is automating its Ohio distribution center with a new robotic fulfillment system.`, { title: `${a.name} automates Ohio DC`, observedAt: '2026-09-10T00:00:00Z', type: 'automation_program' });
-    out.stub.deals[a.name] = [{ id: 7001, dealname: `YardFlow - ${a.name}`, dealstage: 'appointmentscheduled', hs_is_closed: false }];
+    out.stub.deals[a.name] = [
+      { id: taggedId(tag, 7001), dealname: `YardFlow - ${a.name}`, dealstage: 'appointmentscheduled', hs_is_closed: false, contacts: [annContact], hs_next_step: 'Pilot scope call with Ann' },
+      { id: taggedId(tag, 7002), dealname: `${a.name} Columbus DC`, dealstage: 'qualifiedtobuy', hs_is_closed: false, contacts: [benContact] },
+    ];
   }
   // ---- Nfi Scratch Co: many eligible people, no choice ----
   {

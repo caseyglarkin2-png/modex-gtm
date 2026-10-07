@@ -46,7 +46,10 @@ export function nextFromPursuit(
     case 'opted_out':
       return { text: `Record ${s.lastInbound ? `${s.lastInbound.who}'s` : 'the'} opt-out as do not contact. No reply goes back; the account cools before anyone else is touched.`, control: { href: '/gap?lane=replies', label: 'Record the opt-out' }, source: 'pursuit' };
     case 'in_deal':
-      return { text: `Work the deal${s.deals[0]?.name ? ` (${s.deals[0].name})` : ''}, never a cold first touch. The deal brief says what to learn next.`, control: { href: opts.accountSlugHref('brief'), label: 'Open the deal brief' }, source: 'pursuit' };
+      // R50: two opportunities are two pieces of work, each worked on its own in the deal brief.
+      return s.deals.length > 1
+        ? { text: `Work the ${s.deals.length} open deals (${s.deals.map((d) => d.name ?? 'an unnamed deal').join('; ')}) each on its own, never a cold first touch. The deal brief holds each deal's obligations and what to learn next.`, control: { href: opts.accountSlugHref('brief'), label: 'Open the deal brief' }, source: 'pursuit' }
+        : { text: `Work the deal${s.deals[0]?.name ? ` (${s.deals[0].name})` : ''}, never a cold first touch. The deal brief says what to learn next.`, control: { href: opts.accountSlugHref('brief'), label: 'Open the deal brief' }, source: 'pursuit' };
     case 'held':
       return { text: s.blocker ?? 'Held.', control: s.stateLine.includes('warm intro') ? { href: opts.captureHref, label: 'Log the intro ask' } : null, source: 'pursuit' };
     case 'follow_up_due':

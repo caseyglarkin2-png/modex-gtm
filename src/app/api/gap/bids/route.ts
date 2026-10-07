@@ -7,7 +7,7 @@
  *
  * Contract: body `{ hypothesisId, contactEmail, dispositionId?, type,
  * rawBuyerLanguage, normalizedSummary?, numericValue?, unit?, source,
- * supersedesId? }` -> 201 `{ bidId, humanConfirmed, supersedesId }`.
+ * supersedesId?, scope? }` -> 201 `{ bidId, humanConfirmed, supersedesId }`.
  * A session (human) row is confirmed on capture; a header-token (agent) row
  * is unconfirmed. `supersedesId` makes it a correction: a NEW row that
  * supersedes the old one, which is never edited. 400 `{ error:
@@ -24,6 +24,7 @@ import { assertGapEnabled } from '@/lib/gap/flags';
 import type { ActorKind } from '@/lib/gap/enroll/service';
 import { recordBid } from '@/lib/gap/bid/service';
 import { BID_SOURCES, BID_TYPES } from '@/lib/gap/taxonomy';
+import { scopeFromBody } from '@/lib/gap/deals/scope';
 
 export const dynamic = 'force-dynamic';
 
@@ -39,6 +40,11 @@ const BodySchema = z
     unit: z.string().optional(),
     source: z.enum(BID_SOURCES),
     supersedesId: z.string().min(1).optional(),
+    // R50: the opportunity the words belong to (a HubSpot deal, a division, a site); absent = account-level.
+    scope: z
+      .object({ dealId: z.string().trim().max(64).optional(), division: z.string().trim().max(120).optional(), site: z.string().trim().max(120).optional() })
+      .strict()
+      .optional(),
   })
   .strict();
 
@@ -95,6 +101,7 @@ export async function POST(request: NextRequest) {
     unit: body.unit ?? null,
     source: body.source,
     supersedesId: body.supersedesId ?? null,
+    ...(scopeFromBody(body.scope) ? { metadata: { scope: scopeFromBody(body.scope) } } : {}),
     actor,
     actorKind,
     now: new Date(),

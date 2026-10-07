@@ -62,6 +62,10 @@ export interface WorkObligation {
   label: string | null;
   /** A commitment record: the seller can mark it done, snooze it or skip it from the card. */
   canComplete: boolean;
+  /** R50: the opportunity it belongs to ("Deal: Kroger yard pilot"), or null for account-level work. */
+  scope?: string | null;
+  /** R51: the meeting's prepared starting point (objective and the first open question), when one was prepared. */
+  prep?: string | null;
 }
 
 export interface WaitingItem {
@@ -121,7 +125,7 @@ export interface WorkInput {
   /** The account motions the cockpit read (primary and next per account). */
   motions: ReadonlyArray<{ accountName: string; state: string; primary: { name: string; title: string | null } | null; next: { name: string; title: string | null; unlock: string } | null }>;
   /** The In Deals summary: complete, or unavailable (then nothing is claimed about deals). */
-  inDeals: { status: 'complete' | 'unavailable'; accounts: ReadonlyArray<{ accountName: string; deals: ReadonlyArray<{ name: string | null; stage: string }> }> };
+  inDeals: { status: 'complete' | 'unavailable'; accounts: ReadonlyArray<{ accountName: string; deals: ReadonlyArray<{ id?: string; name: string | null; stage: string; lastActivityAt?: string | null; closeDate?: string | null }> }> };
   /** Accounts a current card holds for an open deal or an UNKNOWN opportunity read (never a cold action). */
   held: ReadonlyMap<string, 'active_opportunity' | 'opportunity_unknown'>;
   /** Fresh canonical pursuit summaries by account (pursuit/summary.ts), when any. */
@@ -451,6 +455,12 @@ export function workDay(i: WorkInput): WorkDay {
   // R40 / R41: the obligations. Due today -> on the account's card (a card is made when the account has none, so no
   // task is ever silently omitted); waiting, upcoming or blocked -> the Waiting footer; snoozed -> the Snoozed footer.
   const moved = buyerMoves(i.replies);
+  // R50: an obligation bound to a deal says which one (the In Deals summary names the account's open deals).
+  const dealLabel = (accountName: string, dealId: string | null): string | null => {
+    if (!dealId) return null;
+    const d = (i.inDeals.status === 'complete' ? i.inDeals.accounts.find((a) => a.accountName === accountName)?.deals : undefined)?.find((x) => x.id === dealId || (!/^\d+$/.test(dealId) && x.name === dealId));
+    return `Deal: ${d?.name ?? (/^\d+$/.test(dealId) ? `HubSpot deal ${dealId}` : dealId)}`;
+  };
   const obligations = new Map<string, WorkObligation[]>();
   const snoozed: WorkDay['snoozed'] = [];
   const outcomeSnoozed = new Set([...(i.outcomes ?? []).values()].filter((o) => o.kind === 'snoozed').map((o) => o.accountName));
@@ -474,7 +484,7 @@ export function workDay(i: WorkInput): WorkDay {
     // promotes a held account either; every other kind ranks.
     const tier: WorkTier = c.source.kind === 'snooze' || plan?.action === 'held' ? 'later' : commitmentTier(c);
     const list = obligations.get(c.accountName) ?? [];
-    list.push({ key: c.commitmentId, commitmentId: c.commitmentId, kind: c.kind, tier, title: c.title, line: plan?.line ?? p.line, dueAt: c.dueAt, dueDay: p.dueDay, person: c.person ? { name: c.person.name, email: c.person.email } : null, basis: c.basis, href: action.href, label: action.label, canComplete: true });
+    list.push({ key: c.commitmentId, commitmentId: c.commitmentId, kind: c.kind, tier, title: c.title, line: plan?.line ?? p.line, dueAt: c.dueAt, dueDay: p.dueDay, person: c.person ? { name: c.person.name, email: c.person.email } : null, basis: c.basis, href: action.href, label: action.label, canComplete: true, scope: dealLabel(c.accountName, c.dealId) });
     obligations.set(c.accountName, list);
   }
   const horizon = i.now.getTime() + 24 * 3_600_000;
@@ -534,8 +544,15 @@ export function workDay(i: WorkInput): WorkDay {
   const replyPersona = new Map(i.replies.filter((r) => r.personaId != null).map((r) => [`${r.accountName}|${r.contactEmail.toLowerCase()}`, r.personaId as number]));
   const captureFor = (card: Omit<WorkCard, 'href' | 'index' | 'source'>, list: WorkObligation[]): { href: string; label: string } => {
     const q = new URLSearchParams({ account: card.accountName });
-    const deal = dealAccounts.get(card.accountName)?.deals;
-    if (deal && deal.length === 1 && deal[0].name) q.set('deal', deal[0].name);
+    // R50: the deal the card's work belongs to (its top obligation's deal, else the account's only open deal), by its
+    // HubSpot id so the note's words and obligations bind to that deal; the name rides along for the label.
+    const deals = dealAccounts.get(card.accountName)?.deals ?? [];
+    const scoped = list.map((o) => (o.commitmentId ? (i.commitments ?? []).find((c) => c.commitmentId === o.commitmentId)?.dealId ?? null : null)).find((x): x is string => !!x);
+    const deal = (scoped ? deals.find((d) => d.id === scoped) : null) ?? (deals.length === 1 ? deals[0] : null);
+    if (deal?.id) {
+      q.set('deal', deal.id);
+      if (deal.name) q.set('dealName', deal.name);
+    } else if (deal?.name) q.set('deal', deal.name);
     if (card.reply && (card.stateKind === 'replied' || card.stateKind === 'opted_out')) {
       const pid = replyPersona.get(`${card.accountName}|${card.reply.from.toLowerCase()}`);
       if (pid) q.set('person', String(pid));

@@ -1,7 +1,7 @@
 /**
  * GET  /api/gap/commitments?account=<name>     the account's obligations with their phase now (R40)
  * POST /api/gap/commitments
- *   `{ op: 'create', accountName, kind, title, dueDay?, dueAt?, personaId?, dealId?, basis? }`   the seller's own
+ *   `{ op: 'create', accountName, kind, title, dueDay?, dueAt?, personaId?, dealId?, division?, site?, basis? }`   the seller's own
  *        obligation (a deliverable they promised, a deal step, something the buyer promised, a reminder, a task)
  *   `{ op: 'status', commitmentId, to, until?, dependency?, reason?, note?, dueDay? }`              done (the seller's
  *        recorded note is the proof), skipped (with the reason), snoozed (until a date), waiting / blocked (on what),
@@ -36,6 +36,9 @@ const Body = z.discriminatedUnion('op', [
       dueAt: z.string().trim().max(40).optional(),
       personaId: z.number().int().positive().nullable().optional(),
       dealId: z.string().trim().max(64).nullable().optional(),
+      // R50: the division or site the obligation belongs to (account-level when nothing is named).
+      division: z.string().trim().max(120).nullable().optional(),
+      site: z.string().trim().max(120).nullable().optional(),
       basis: z.string().trim().max(600).nullable().optional(),
     })
     .strict(),
@@ -81,7 +84,7 @@ export async function POST(request: NextRequest) {
     const dueAt = b.dueDay ? nyDayAt(b.dueDay) : b.dueAt ?? null;
     const r = await ensureCommitment(
       prisma,
-      { accountName: b.accountName, kind: b.kind, title: b.title, basis: b.basis ?? null, dueAt, person, dealId: b.dealId ?? null, status: b.kind === 'buyer_promise' ? 'waiting' : 'open', dependency: b.kind === 'buyer_promise' ? 'their delivery' : null, source: { kind: 'seller', id: randomUUID() } },
+      { accountName: b.accountName, kind: b.kind, title: b.title, basis: b.basis ?? null, dueAt, person, dealId: b.dealId ?? null, scope: b.division || b.site ? { division: b.division ?? null, site: b.site ?? null } : null, status: b.kind === 'buyer_promise' ? 'waiting' : 'open', dependency: b.kind === 'buyer_promise' ? 'their delivery' : null, source: { kind: 'seller', id: randomUUID() } },
       { actor: g.email, now },
     );
     if (!r.ok) return NextResponse.json({ error: r.reason }, { status: STATUS[r.reason] ?? 400 });

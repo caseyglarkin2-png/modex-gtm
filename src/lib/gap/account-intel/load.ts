@@ -260,7 +260,7 @@ export async function loadAccountInputs(
     const o: OpportunityTruth = await oppP;
     // The stage's NAME from the pipeline (display only; the id when the label cannot be read).
     const labels = await stagesP;
-    opportunity = o.status === 'ACTIVE' ? { status: 'ACTIVE', detail: '', deals: o.deals.map((d) => ({ name: d.name, stage: d.stage ? labels.get(d.stage) ?? d.stage : d.stage, amount: d.amount ?? null, closeDate: d.closeDate ?? null, nextStep: d.nextStep ?? null, contactIds: [...(d.contactIds ?? [])] })) } : o.status === 'UNKNOWN' ? { status: 'UNKNOWN', detail: o.reason, deals: [], ...(o.reason === 'identity_unresolved' && /^no HubSpot company/.test(o.detail ?? '') ? { unlinked: true } : {}) } : { status: 'CLEAR', detail: '', deals: [] };
+    opportunity = o.status === 'ACTIVE' ? { status: 'ACTIVE', detail: '', deals: o.deals.map((d) => ({ id: d.id, name: d.name, stage: d.stage ? labels.get(d.stage) ?? d.stage : d.stage, amount: d.amount ?? null, closeDate: d.closeDate ?? null, nextStep: d.nextStep ?? null, contactIds: [...(d.contactIds ?? [])] })) } : o.status === 'UNKNOWN' ? { status: 'UNKNOWN', detail: o.reason, deals: [], ...(o.reason === 'identity_unresolved' && /^no HubSpot company/.test(o.detail ?? '') ? { unlinked: true } : {}) } : { status: 'CLEAR', detail: '', deals: [] };
   }
   const conv = (convs as Map<string, { who: string; responseClass: string; at: string }>).get(accountName) ?? null;
   // The account's HubSpot people: the linked company; else (owner resolution, 2026-10-05) the companies the account's

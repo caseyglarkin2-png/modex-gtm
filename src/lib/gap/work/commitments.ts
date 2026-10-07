@@ -70,6 +70,8 @@ export interface NewCommitment {
   dueAt?: string | Date | null;
   person?: CommitmentPerson | null;
   dealId?: string | null;
+  /** R50: a division or site the obligation belongs to. */
+  scope?: { division?: string | null; site?: string | null } | null;
   threadId?: string | null;
   status?: Exclude<CommitmentStatus, 'done' | 'skipped'>;
   snoozeUntil?: string | Date | null;
@@ -196,6 +198,7 @@ export async function ensureCommitment(prisma: PrismaLike, input: NewCommitment,
       dueAt,
       person: input.person ? { personaId: input.person.personaId ?? null, name: clip(input.person.name, 120), email: input.person.email ? input.person.email.trim().toLowerCase() : null } : null,
       dealId: clip(input.dealId, 64),
+      ...(input.scope && (clip(input.scope.division, 120) || clip(input.scope.site, 120)) ? { scope: { division: clip(input.scope.division, 120), site: clip(input.scope.site, 120) } } : {}),
       threadId: clip(input.threadId, 200),
       status,
       snoozeUntil,
