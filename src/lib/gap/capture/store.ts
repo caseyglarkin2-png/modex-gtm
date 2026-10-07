@@ -30,7 +30,7 @@ import { randomUUID } from 'node:crypto';
 import { recordBid } from '../bid/service';
 import { recordDisposition } from '../disposition/service';
 import { BID_TYPES, type BidType } from '../taxonomy';
-import { buyerSpeakers, excludedLines, extractCandidates, extractCommitments, quoteInSource, quoteWithinSentence, sentencesWithSpeaker, type CandidateBid, type CandidateCommitment } from './extract';
+import { buyerSpeakers, commitmentTitle, excludedLines, extractCandidates, extractCommitments, quoteInSource, quoteWithinSentence, sentencesWithSpeaker, type CandidateBid, type CandidateCommitment } from './extract';
 import { ensureCommitment } from '../work/commitments';
 import { isDay, nyDayAt } from '../work/dates';
 import { loadReplyForCapture } from '../replies/list';
@@ -209,7 +209,8 @@ export async function createCapture(
       dealId: input.dealId?.trim() || null,
       dealName: input.dealName?.trim() || null,
       source,
-      commitments: extractCommitments(raw, input.now),
+      // R63-A B1: a note that is the buyer's own message (opened from a reply) reads an unlabelled "I" as the buyer.
+      commitments: extractCommitments(raw, input.now, { firstPersonIsBuyer: source?.kind === 'reply' }),
       excluded: excludedLines(raw),
       reply,
     });
@@ -372,7 +373,7 @@ export async function decideReplyKind(
  */
 export async function decideCommitmentCandidate(
   prisma: PrismaLike,
-  input: { captureId: string; candidateId: string; decision: 'confirm' | 'reject'; title?: string | null; dueDay?: string | null; personaId?: number | null; actor: string; now: Date },
+  input: { captureId: string; candidateId: string; decision: 'confirm' | 'reject'; title?: string | null; dueDay?: string | null; personaId?: number | null; /** R63-A B1: who owes it, as the seller chose in the review. */ owner?: 'seller' | 'buyer' | null; actor: string; now: Date },
 ): Promise<Ok<{ commitmentId: string | null; capture: CaptureView }> | Refused> {
   const run = async (tx: PrismaLike): Promise<Ok<{ commitmentId: string | null; capture: CaptureView }> | Refused> => {
     const view = await loadCapture(tx, input.captureId);
@@ -386,7 +387,11 @@ export async function decideCommitmentCandidate(
     }
     if (!view.accountName) return { ok: false, reason: 'capture_unlinked' };
     if (!quoteInSource(cand.quote, view.rawText)) return { ok: false, reason: 'quote_not_in_source' };
-    const title = (input.title ?? cand.title).replace(/\s+/g, ' ').trim();
+    // R63-A B1: the seller's choice of who owes it is the record (a seller's own promise is never chased from the buyer).
+    const owner = input.owner ?? cand.owner;
+    const kind = owner === 'buyer' ? 'buyer_promise' : cand.kind === 'buyer_promise' ? 'deliverable' : cand.kind;
+    const flipped = owner !== cand.owner;
+    const title = (input.title ?? (flipped ? commitmentTitle(owner, cand.object ?? null, null, cand.quote) : cand.title)).replace(/\s+/g, ' ').trim();
     if (!title) return { ok: false, reason: 'title_required' };
     const day = input.dueDay === undefined || input.dueDay === null ? cand.due?.day ?? null : input.dueDay.trim() || null;
     if (day && !isDay(day)) return { ok: false, reason: 'bad_due' };
@@ -401,14 +406,14 @@ export async function decideCommitmentCandidate(
       tx,
       {
         accountName: view.accountName,
-        kind: cand.kind,
+        kind,
         title: title.slice(0, 200),
-        basis: `${cand.speaker ?? 'In the note'}: "${cand.quote}"`,
+        basis: `${owner === 'seller' && (flipped || !cand.speaker) ? 'You' : cand.speaker ?? 'In the note'}: "${cand.quote}"`,
         dueAt: day ? nyDayAt(day) : null,
         person,
         dealId: view.dealId,
-        status: cand.kind === 'buyer_promise' ? 'waiting' : 'open',
-        dependency: cand.kind === 'buyer_promise' ? `${person?.name ?? cand.speaker ?? 'their'} delivery` : null,
+        status: kind === 'buyer_promise' ? 'waiting' : 'open',
+        dependency: kind === 'buyer_promise' ? `${person?.name ?? (cand.speaker && cand.speaker !== 'You' ? cand.speaker : null) ?? 'their'} delivery` : null,
         source: { kind: 'capture', id: `${view.id}:${cand.id}` },
         detail: cand.due?.ambiguous ? { ambiguousDate: cand.due.phrase } : null,
       },
@@ -435,6 +440,8 @@ export interface BatchItem {
   dueDay?: string | null;
   /** R60: on the reply item, what the reply means (the disposition class). */
   responseClass?: string | null;
+  /** R63-A B1: on an obligation, who owes it (the seller's choice in the review). */
+  owner?: 'seller' | 'buyer' | null;
 }
 
 /**
@@ -465,7 +472,7 @@ export async function decideBatch(
   for (const item of input.items) {
     if (item.candidateId === REPLY_KIND_ITEM) continue;
     if (/^k\d+$/.test(item.candidateId)) {
-      const r = await decideCommitmentCandidate(prisma, { captureId: input.captureId, candidateId: item.candidateId, decision: item.decision, title: item.title, dueDay: item.dueDay, personaId: item.personaId, actor: input.actor, now: input.now });
+      const r = await decideCommitmentCandidate(prisma, { captureId: input.captureId, candidateId: item.candidateId, decision: item.decision, title: item.title, dueDay: item.dueDay, personaId: item.personaId, owner: item.owner ?? null, actor: input.actor, now: input.now });
       results.push(r.ok ? { candidateId: item.candidateId, ok: true, commitmentId: r.commitmentId } : { candidateId: item.candidateId, ok: false, reason: r.reason, detail: r.detail });
     } else {
       const r = await decideCandidate(prisma, { captureId: input.captureId, candidateId: item.candidateId, decision: item.decision, type: item.type, quote: item.quote, hypothesisId, personaId: item.personaId, dispositionId, actor: input.actor, now: input.now });

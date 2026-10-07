@@ -59,6 +59,8 @@ const Body = z.discriminatedUnion('op', [
       title: z.string().max(200).optional(),
       dueDay: z.string().max(10).optional(),
       personaId: z.number().int().positive().nullable().optional(),
+      // R63-A B1: who owes it (me or them), as the seller chose.
+      owner: z.enum(['seller', 'buyer']).optional(),
     })
     .strict(),
   z
@@ -78,6 +80,8 @@ const Body = z.discriminatedUnion('op', [
               dueDay: z.string().max(10).optional(),
               // R60: on the reply item (candidateId "reply"), what the reply means.
               responseClass: z.enum(REPLY_KIND_CLASSES).optional(),
+              // R63-A B1: on an obligation, who owes it.
+              owner: z.enum(['seller', 'buyer']).optional(),
             })
             .strict(),
         )

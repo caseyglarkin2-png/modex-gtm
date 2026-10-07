@@ -155,12 +155,25 @@ export interface CandidateCommitment {
   kind: 'deliverable' | 'buyer_promise' | 'prepare_meeting';
   /** The proposed obligation in seller words; the seller edits it in the review. */
   title: string;
+  /** R63-A B1: the thing owed ("Ben a one-page agenda for the walk"), so the review can retitle it when the seller changes who owes it. */
+  object?: string | null;
   /** The day the sentence names (New York, read from the time the note was saved), or null. */
   due: ParsedDay | null;
 }
 
 const ASKS = /\b(?:send|share|forward|email)\s+(?:me|us|over)\b|\b(?:can|could|would)\s+you\s+(?:send|share|get|put together|pull together|forward|email)\b|\bget\s+(?:me|us)\b|\bplease\s+(?:send|share)\b/i;
-const PROMISE = /\b(?:i'?ll|i\s+will|we'?ll|we\s+will|let\s+me|i\s+can)\s+(?:send|share|get\s+you|get\s+them|put\s+together|pull\s+together|forward|email|follow\s+up)\b/i;
+const PROMISE = /\b(?:i'?ll|i\s+will|we'?ll|we\s+will|let\s+me|i\s+can)\s+(?:send|share|get\s+you|get\s+them|put\s+together|pull\s+together|forward|email|follow\s+up)\b|\b(?:i|we)\s+owe\b/i;
+/**
+ * R63-A B1: a promise in the third person ("Ben will send us the volumes", "she'll share the map"): theirs. The name
+ * (a capitalised word, never I or We) is who owes it.
+ */
+const THIRD_PROMISE = /\b(he|she|they|He|She|They|(?!I\b|We\b)[A-Z][a-z]{1,30})(?:\s+will|'ll|\s+is\s+going\s+to|\s+are\s+going\s+to|\s+promised\s+to)\s+(?:send|share|get\s+us|get\s+me|put\s+together|pull\s+together|forward|email|follow\s+up)\b/;
+
+/** R63-A B1: the obligation's title for who owes it ("Send Ben the agenda"; "Maria sends the volumes"; "They send ..."). */
+export function commitmentTitle(owner: 'seller' | 'buyer', object: string | null, who: string | null, sentence: string): string {
+  if (owner === 'seller') return object ? `Send ${object}` : `Follow through: ${sentence.slice(0, 80)}`;
+  return object ? (who ? `${who} sends ${object}` : `They send ${object}`) : `${who ?? 'They'} promised: ${sentence.slice(0, 80)}`;
+}
 const MEETING = /\b(?:let'?s\s+(?:meet|talk|connect|walk)|meet\s+(?:on|next|this|tomorrow)|(?:a|the|our)\s+(?:call|meeting|walk-?through|site\s+visit|demo)\s+(?:on|next|this|tomorrow)|see\s+you\s+(?:on|next|tomorrow))\b/i;
 const OBJECT = /\b(?:send|share|forward|email|get|put together|pull together)\s+(?:me\s+|us\s+|you\s+|them\s+|over\s+)?(?:a\s+copy\s+of\s+)?(.+?)(?:\s+(?:by|before|on|until|no later than|this|next|tomorrow|today|end of)\b.*)?[.?!]*$/i;
 
@@ -178,8 +191,13 @@ export const MAX_COMMITMENTS = 6;
  * seller's own words, never a buyer quote), a buyer promising something (waiting on them), a meeting named with a
  * day (prepare it). The day comes from the sentence, read in New York from `now`. A pasted summary and the seller's
  * own speculation propose nothing. Pure; the seller confirms, edits or rejects each in one review.
+ *
+ * R63-A B1: a line with no speaker label is the seller's own note, so a first-person promise there ("I will send Ben
+ * a one-page agenda by tonight", "I'll", "we will", "I owe") is OWED BY THE SELLER; a third-person promise ("Ben will
+ * send us the volumes") is theirs. In a note that IS the buyer's own message (opened from a reply,
+ * `firstPersonIsBuyer`), an unlabelled "I" is the buyer.
  */
-export function extractCommitments(text: string, now: Date): CandidateCommitment[] {
+export function extractCommitments(text: string, now: Date, opts: { firstPersonIsBuyer?: boolean } = {}): CandidateCommitment[] {
   const out: CandidateCommitment[] = [];
   for (const x of noteSentences(text)) {
     if (x.excluded) continue;
@@ -190,12 +208,22 @@ export function extractCommitments(text: string, now: Date): CandidateCommitment
     const rawObj = objectOf(x.sentence);
     const obj = rawObj && due ? rawObj.replace(new RegExp(`\\s*(?:by|before|on|this|next)?\\s*${due.phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}.*$`, 'i'), '').trim() || rawObj : rawObj;
     let c: Omit<CandidateCommitment, 'id'> | null = null;
-    if (!x.seller && ASKS.test(x.sentence)) {
-      c = { quote: x.sentence, speaker: x.speaker, owner: 'seller', kind: 'deliverable', title: obj ? `Send ${first ?? 'them'} ${obj}` : `Answer: ${x.sentence.slice(0, 80)}`, due };
-    } else if (PROMISE.test(x.sentence)) {
-      c = x.seller
-        ? { quote: x.sentence, speaker: 'You', owner: 'seller', kind: 'deliverable', title: obj ? `Send ${obj}` : `Follow through: ${x.sentence.slice(0, 80)}`, due }
-        : { quote: x.sentence, speaker: x.speaker, owner: 'buyer', kind: 'buyer_promise', title: obj ? `${first ?? 'They'} sends ${obj}` : `${first ?? 'They'} promised: ${x.sentence.slice(0, 80)}`, due };
+    // R63-A B1: an unlabelled line in the seller's own note is the seller speaking.
+    const sellerVoice = x.seller || (x.speaker === null && !opts.firstPersonIsBuyer);
+    // A third-person promise ("Ben will send us the volumes") is theirs, even though "send us" reads like an ask.
+    const third = !x.seller && !/\b(?:can|could|would)\s+you\b/i.test(x.sentence) ? THIRD_PROMISE.exec(x.sentence) : null;
+    if (third && !PROMISE.test(x.sentence)) {
+      const named = !/^(?:he|she|they)$/i.test(third[1]) ? third[1] : null;
+      const owes = x.speaker ? first : named;
+      c = { quote: x.sentence, speaker: x.speaker ?? named, owner: 'buyer', kind: 'buyer_promise', title: commitmentTitle('buyer', obj, owes, x.sentence), object: obj, due };
+    } else if (!x.seller && ASKS.test(x.sentence)) {
+      c = { quote: x.sentence, speaker: x.speaker, owner: 'seller', kind: 'deliverable', title: obj ? `Send ${first ?? 'them'} ${obj}` : `Answer: ${x.sentence.slice(0, 80)}`, object: obj ? `${first ?? 'them'} ${obj}` : null, due };
+    } else if (PROMISE.test(x.sentence) && sellerVoice) {
+      c = { quote: x.sentence, speaker: 'You', owner: 'seller', kind: 'deliverable', title: commitmentTitle('seller', obj, null, x.sentence), object: obj, due };
+    } else if (PROMISE.test(x.sentence) || third) {
+      const named = third && !/^(?:he|she|they)$/i.test(third[1]) ? third[1] : null;
+      const owes = x.speaker ? first : named;
+      c = { quote: x.sentence, speaker: x.speaker ?? named, owner: 'buyer', kind: 'buyer_promise', title: commitmentTitle('buyer', obj, owes, x.sentence), object: obj, due };
     } else if (MEETING.test(x.sentence) && due) {
       c = { quote: x.sentence, speaker: who, owner: 'seller', kind: 'prepare_meeting', title: `Prepare the meeting (${due.phrase})`, due };
     }

@@ -15,7 +15,7 @@
 import { useEffect, useState } from 'react';
 import { BID_TYPES } from '@/lib/gap/taxonomy';
 import type { CaptureView } from '@/lib/gap/capture/store';
-import { buyerSpeakers } from '@/lib/gap/capture/extract';
+import { buyerSpeakers, commitmentTitle } from '@/lib/gap/capture/extract';
 import { REPLY_KIND_CLASSES, REPLY_KIND_ITEM, REPLY_KIND_WORDS, type ReplyKindClass } from '@/lib/gap/capture/reply-kind';
 import { Dictate } from './dictate';
 
@@ -71,7 +71,7 @@ function useAccountContext(account: string | null): Context | null {
   return ctx;
 }
 
-type ItemDraft = { keep: boolean; type?: string; quote?: string; personaId?: number | null; title?: string; dueDay?: string };
+type ItemDraft = { keep: boolean; type?: string; quote?: string; personaId?: number | null; title?: string; dueDay?: string; /** R63-A B1: who owes an obligation. */ owner?: 'seller' | 'buyer' };
 type ItemResult = { candidateId: string; ok: boolean; reason?: string; detail?: string };
 
 const REASON_TEXT: Record<string, string> = {
@@ -147,7 +147,7 @@ function NoteReview({ capture, onChange, announce = () => {} }: { capture: Captu
       ),
       ...owed.map((c) =>
         d(c.id).keep
-          ? { candidateId: c.id, decision: 'confirm', title: d(c.id).title ?? c.title, dueDay: d(c.id).dueDay ?? c.due?.day ?? '', ...((d(c.id).personaId ?? capture.personaId) != null ? { personaId: d(c.id).personaId ?? capture.personaId } : {}) }
+          ? { candidateId: c.id, decision: 'confirm', title: d(c.id).title ?? c.title, dueDay: d(c.id).dueDay ?? c.due?.day ?? '', owner: d(c.id).owner ?? c.owner, ...((d(c.id).personaId ?? capture.personaId) != null ? { personaId: d(c.id).personaId ?? capture.personaId } : {}) }
           : { candidateId: c.id, decision: 'reject' },
       ),
     ];
@@ -335,7 +335,31 @@ function NoteReview({ capture, onChange, announce = () => {} }: { capture: Captu
                 decided('Rejected. Nothing recorded.', 'text-[var(--muted-foreground)]')
               ) : (
                 <>
-                  <p className="text-xs text-[var(--muted-foreground)]">{c.owner === 'seller' ? 'You owe this.' : 'They owe this: GAP waits, then reminds you to chase it.'}</p>
+                  {/* R63-A B1: who owes it is the seller's choice before anything is recorded (a seller's own "I will" was
+                      recorded as the buyer's, and Work then said to chase the buyer). Changing it retitles an untouched title. */}
+                  {(() => {
+                    const owner = d(c.id).owner ?? c.owner;
+                    const pick = (o: 'seller' | 'buyer') => {
+                      const pid = d(c.id).personaId ?? capture.personaId;
+                      const them = people.find((p) => p.id === pid)?.name?.split(/\s+/)[0] ?? null;
+                      const untouched = d(c.id).title === undefined || d(c.id).title === commitmentTitle(owner, c.object ?? null, owner === 'buyer' ? them : null, c.quote);
+                      set(c.id, { owner: o, ...(untouched && c.object ? { title: commitmentTitle(o, c.object, o === 'buyer' ? them : null, c.quote) } : {}) });
+                    };
+                    return (
+                      <div className="space-y-1">
+                        <div role="radiogroup" aria-label="Who owes it" className="flex flex-wrap items-center gap-x-3 text-xs" data-testid="commitment-owner">
+                          <span className="text-[var(--muted-foreground)]">Who owes it:</span>
+                          {(['seller', 'buyer'] as const).map((o) => (
+                            <label key={o} className="inline-flex min-h-11 items-center gap-1 sm:min-h-9">
+                              <input type="radio" className="h-6 w-6" name={`owner-${capture.id}-${c.id}`} checked={owner === o} onChange={() => pick(o)} data-testid={`commitment-owner-${o}`} />
+                              {o === 'seller' ? 'Me' : 'Them'}
+                            </label>
+                          ))}
+                        </div>
+                        <p className="text-xs text-[var(--muted-foreground)]" data-testid="commitment-owner-line">{owner === 'seller' ? 'You owe this: it is on Work on its day.' : 'They owe this: GAP waits, then reminds you to chase it.'}</p>
+                      </div>
+                    );
+                  })()}
                   <input aria-label="What is owed" data-testid="commitment-title" className={input} maxLength={200} value={d(c.id).title ?? c.title} onChange={(e) => set(c.id, { title: e.target.value })} />
                   <div className="flex flex-wrap items-center gap-2 text-xs">
                     <label className="inline-flex items-center gap-1">
