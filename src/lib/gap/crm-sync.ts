@@ -79,6 +79,16 @@ export function crmWritesEnabled(): { ok: true } | { ok: false; reason: string }
 }
 
 const mirrorKey = (proposalId: string) => `gap:crm:${proposalId}`;
+
+/** R65 (found on the live check): who changed a HubSpot value, in words, never HubSpot's source code ("CRM_UI"). */
+const SOURCE_WORDS: Record<string, string> = { CRM_UI: 'someone in HubSpot', IMPORT: 'an import', API: 'an integration', INTEGRATION: 'an integration', AUTOMATION: 'a HubSpot workflow', WORKFLOWS: 'a HubSpot workflow', SALES: 'HubSpot Sales', MOBILE_IOS: 'the HubSpot app', MOBILE_ANDROID: 'the HubSpot app' };
+
+/** The newer HubSpot value a conflict keeps, said for the seller: the value, the day and who changed it. */
+export function conflictDetail(v: { value: string | null; modifiedAt: string | null; source: string | null }): string {
+  const day = v.modifiedAt && !Number.isNaN(new Date(v.modifiedAt).getTime()) ? new Date(v.modifiedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' }) : null;
+  const who = v.source ? SOURCE_WORDS[v.source.toUpperCase()] ?? 'HubSpot' : null;
+  return `"${v.value ?? ''}"${day ? `, changed ${day}` : ''}${who ? ` by ${who}` : ''}`;
+}
 const errText = (e: unknown) => (e instanceof Error ? e.message : String(e)).slice(0, 240);
 
 async function rowsOf(prisma: PrismaLike, proposalId: string): Promise<CrmRow[]> {
@@ -247,7 +257,7 @@ export async function approveCrmChange(prisma: PrismaLike, input: { proposalId: 
       return finish('written', { objectRef: c.objectId, detail: 'HubSpot already holds this value' });
     }
     const newerThanSeen = (now.value ?? '') !== (c.from ?? '') || (!!now.modifiedAt && now.modifiedAt > it.proposedAt && now.source !== 'INTEGRATION');
-    if (newerThanSeen) return finish('conflict', { detail: `"${now.value ?? ''}"${now.modifiedAt ? `, changed ${now.modifiedAt.slice(0, 10)}` : ''}${now.source ? ` by ${now.source}` : ''}` });
+    if (newerThanSeen) return finish('conflict', { detail: conflictDetail(now) });
     await writer.updateDealProperty(c.objectId, c.property, c.to);
     await saveMirror(c.objectId, null);
     return finish('written', { objectRef: c.objectId });

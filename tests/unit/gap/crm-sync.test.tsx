@@ -205,7 +205,8 @@ describe('a proposal, an explicit approval, and the write only when allowed (R54
     for (const d of [db]) await obligation(d.client(), { kind: 'plan', id: `${DEAL}:pilot` }, 'Pilot at Columbus: two weeks', 'deal_step');
     const p = await propose(db.client(), change, origin);
     const r = await approveCrmChange(db.client(), { proposalId: p.ok ? p.item.proposalId : '', actor: ACTOR, now: NOW }, { writer: human.writer, writesEnabled: ON, assertWriteAllowed: ALLOW });
-    expect(r.ok && r.item).toMatchObject({ state: 'conflict', detail: '"Ann is out until Oct 12", changed 2026-10-06 by CRM_UI' });
+    // R65 (the live check): who changed it in words, the day in words; never HubSpot's source code or an ISO date.
+    expect(r.ok && r.item).toMatchObject({ state: 'conflict', detail: '"Ann is out until Oct 12", changed Oct 6 by someone in HubSpot' });
     expect(human.state.calls).toEqual(['readDealProperty']);
     // The same value, edited by a person AFTER the proposal: still never overwritten.
     const touched = fakeHubSpot({ property: { value: 'Pilot scope call with Ann', modifiedAt: '2026-10-06T21:00:00.000Z', source: 'CRM_UI' } });
