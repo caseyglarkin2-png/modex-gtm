@@ -286,7 +286,9 @@ describe.skipIf(!RUN)('Sprint 4: execute a day and remember what happened (scrat
       };
 
       // TODAY.
-      const now0 = await readDay(prisma, new Date());
+      // Read a second after the writes: the database stamps a row with its own precise clock, and Node's clock on
+      // Windows can lag it by a timer tick, so a read at the very same instant could miss the row it just wrote.
+      const now0 = await readDay(prisma, new Date(Date.now() + 1_000));
       expect(omitted(now0)).toEqual([]);
       expect(now0.day.cards.find((c) => c.accountName === mills.name)?.stateKind).toBe('replied');
       expect(now0.day.cards.some((c) => c.accountName === tyson.name)).toBe(false);

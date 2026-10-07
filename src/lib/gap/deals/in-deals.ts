@@ -42,7 +42,7 @@ export interface InDealAccount {
   /** Other GAP records of the same company on exactly these deals (duplicates are one row, never two). */
   alsoRecordedAs: string[];
   /** R50: each open deal with its HubSpot id (what scopes work to it); R55: its close date and next step (stalled reads). */
-  deals: Array<{ id?: string; name: string | null; stage: string; lastActivityAt: string | null; closeDate?: string | null; nextStep?: string | null }>;
+  deals: Array<{ id?: string; name: string | null; stage: string; lastActivityAt: string | null; closeDate?: string | null; nextStep?: string | null; /** Batch item 8: the deal's HubSpot contacts (Work scopes a reply and a meeting to their own deal). */ contactIds?: string[] }>;
   /** HubSpot contacts on the open deals (distinct). */
   dealContacts: number;
   /** People GAP holds at the account. */
@@ -224,7 +224,7 @@ async function buildSummary(prisma: PrismaLike, reads: OpenDealReadsLike, now: D
       return {
         accountName: r.primary,
         alsoRecordedAs: r.also,
-        deals: r.dealIds.map((id) => dealById.get(id)!).map((d) => ({ id: d.id, name: d.properties.dealname ?? null, stage: stageLabel(d.properties.dealstage), lastActivityAt: lastActivity(d.properties), closeDate: d.properties.closedate ? String(d.properties.closedate) : null, nextStep: d.properties.hs_next_step ? String(d.properties.hs_next_step) : null })),
+        deals: r.dealIds.map((id) => dealById.get(id)!).map((d) => ({ id: d.id, name: d.properties.dealname ?? null, stage: stageLabel(d.properties.dealstage), lastActivityAt: lastActivity(d.properties), closeDate: d.properties.closedate ? String(d.properties.closedate) : null, nextStep: d.properties.hs_next_step ? String(d.properties.hs_next_step) : null, contactIds: (dealContacts.get(d.id) ?? []).map(String) })),
         dealContacts: new Set(r.dealIds.flatMap((id) => dealContacts.get(id) ?? [])).size,
         people: (persons as Array<{ account_name: string; name: string; title: string | null }>).filter((p) => names.includes(p.account_name)).map((p) => ({ name: p.name, title: p.title ?? null })),
         known: knownSectionsOf((bids as Array<BriefBidRow & { account_name: string }>).filter((b) => names.includes(b.account_name))),

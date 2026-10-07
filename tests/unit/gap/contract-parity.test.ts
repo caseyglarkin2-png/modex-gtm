@@ -319,8 +319,10 @@ const REPLY_ITEM_CHECKS: Record<keyof ClientReplyItem, (v: unknown) => boolean> 
   threadId: (v) => v === undefined || v === null || typeof v === 'string',
   fromName: (v) => v === undefined || v === null || typeof v === 'string',
   twinIds: (v) => v === undefined || (Array.isArray(v) && v.every((x) => typeof x === 'string')),
+  // Batch item 8: the sender's HubSpot contact id when GAP holds it.
+  hubspotContactId: (v) => v === undefined || v === null || typeof v === 'string',
 };
-const OPTIONAL_REPLY_ITEM_KEYS: ReadonlySet<keyof ClientReplyItem> = new Set(['suggestion', 'dispositionId', 'threadId', 'fromName', 'twinIds']);
+const OPTIONAL_REPLY_ITEM_KEYS: ReadonlySet<keyof ClientReplyItem> = new Set(['suggestion', 'dispositionId', 'threadId', 'fromName', 'twinIds', 'hubspotContactId']);
 
 describe('a listReplies item satisfies the client ReplyItem', () => {
   it('undispositioned with an AI suggestion: every client key is present with the right shape, and the source id is the inbound id', async () => {

@@ -135,13 +135,13 @@ export interface WorkInput {
   /** Every NEXT UP candidate (all lanes), from buildNextUpCandidates. */
   candidates: readonly NextCandidate[];
   /** Undispositioned replies, the raw rows (classified here; twins already collapsed by the reply list). */
-  replies: ReadonlyArray<{ accountName: string; contactEmail: string; subject: string | null; snippet: string; receivedAt: string; id?: string; threadId?: string | null; fromName?: string | null; personaId?: number | null }>;
+  replies: ReadonlyArray<{ accountName: string; contactEmail: string; subject: string | null; snippet: string; receivedAt: string; id?: string; threadId?: string | null; fromName?: string | null; personaId?: number | null; hubspotContactId?: string | null }>;
   /** R42: the GAP mailbox, for the thread link on a reply card. */
   mailbox?: string | null;
   /** The account motions the cockpit read (primary and next per account). */
   motions: ReadonlyArray<{ accountName: string; state: string; primary: { name: string; title: string | null } | null; next: { name: string; title: string | null; unlock: string } | null }>;
   /** The In Deals summary: complete, or unavailable (then nothing is claimed about deals). */
-  inDeals: { status: 'complete' | 'unavailable'; accounts: ReadonlyArray<{ accountName: string; deals: ReadonlyArray<{ id?: string; name: string | null; stage: string; lastActivityAt?: string | null; closeDate?: string | null }> }> };
+  inDeals: { status: 'complete' | 'unavailable'; accounts: ReadonlyArray<{ accountName: string; deals: ReadonlyArray<{ id?: string; name: string | null; stage: string; lastActivityAt?: string | null; closeDate?: string | null; contactIds?: readonly string[] }> }> };
   /** Accounts a current card holds for an open deal or an UNKNOWN opportunity read (never a cold action). */
   held: ReadonlyMap<string, 'active_opportunity' | 'opportunity_unknown'>;
   /** Fresh canonical pursuit summaries by account (pursuit/summary.ts), when any. */
@@ -409,8 +409,19 @@ export function workDay(i: WorkInput): WorkDay {
 
   // Held accounts: in a deal (the summary) or UNKNOWN (a card's read), never a cold action.
   const dealAccounts = new Map(i.inDeals.status === 'complete' ? i.inDeals.accounts.map((a) => [a.accountName, a]) : []);
+  // Batch item 8 (R62 matrix): a person who wrote at a held account is the buyer talking (deal work, never cold): the
+  // reply stays the account's card, the hold said on it, and the deal's obligations stay on it.
+  const talking = new Map(replyCards.filter((r) => r.card.stateKind === 'replied' || r.card.stateKind === 'opted_out').map((r) => [r.card.accountName, r]));
+  const keepReply = (name: string, blocker: string): boolean => {
+    const r = talking.get(name);
+    if (!r) return false;
+    best.set(name, { ...r, card: { ...r.card, blocker } });
+    motionWaiting.delete(name);
+    return true;
+  };
   for (const [name, a] of dealAccounts) {
     const stages = a.deals.map((d) => `${d.name ? `"${d.name}"` : 'an unnamed deal'} (${d.stage})`).join(', ');
+    if (keepReply(name, `An open HubSpot deal here (${stages}): answer them as deal work, never a cold first touch.`)) continue;
     best.delete(name);
     motionWaiting.delete(name);
     // R55: a stalled deal is deal work (derived from overdue obligations and HubSpot's own dates, never a probability).
@@ -420,6 +431,7 @@ export function workDay(i: WorkInput): WorkDay {
   for (const [name, why] of i.held) {
     if (dealAccounts.has(name)) continue;
     const unknown = why === 'opportunity_unknown';
+    if (keepReply(name, unknown ? 'HubSpot could not say whether this account is in a deal: answer them, and no cold touch to anyone here.' : 'A current card holds this account for an open deal: answer them as deal work, never a cold first touch.')) continue;
     best.delete(name);
     motionWaiting.delete(name);
     offer({ rank: LANE_RANK.deals, sortKey: [unknown ? 0 : 1, name], card: { accountName: name, lane: 'deals', stateKind: unknown ? 'unknown_deal' : 'in_deal', state: STATE_TEXT[unknown ? 'unknown_deal' : 'in_deal'], why: unknown ? 'HubSpot could not say whether this account is in a deal: no cold touch until it can.' : 'A current card holds this account for an open deal.', person: null, next: unknown ? null : { label: 'Open the deal brief', href: `${accountHref(name)}?view=brief` }, blocker: unknown ? 'Check HubSpot directly before contacting anyone.' : 'No cold first touch while the deal is open.' } });
@@ -481,7 +493,10 @@ export function workDay(i: WorkInput): WorkDay {
   // R51: the calendar's truth, read on every load: a canceled meeting and what is still booked, per account AND deal
   // (a canceled pilot call is not "rebooked" by a meeting on another deal). A meeting with no deal is account-level.
   const live = i.meetings ?? [];
-  const rebooked = (accountName: string, dealId: string | null | undefined) => live.some((m) => m.accountName === accountName && (!dealId || !m.dealId || m.dealId === dealId));
+  // Batch item 8: a meeting rebooks only its own scope (the same deal, or account-level for account-level): Ben's walk
+  // on the Columbus deal never stands in for Ann's canceled account-level meeting. An untagged meeting is placed on the
+  // deal its attendees name before it gets here (work/day-load.ts resolveMeetingDeals).
+  const rebooked = (accountName: string, dealId: string | null | undefined) => live.some((m) => m.accountName === accountName && (dealId ? m.dealId === dealId : !m.dealId));
   const canceledFor = (accountName: string, dealId: string | null) => (i.canceledMeetings ?? []).find((m) => m.accountName === accountName && (!dealId || !m.dealId || m.dealId === dealId) && !rebooked(accountName, m.dealId));
   // R50: an obligation bound to a deal says which one (the In Deals summary names the account's open deals).
   const dealLabel = (accountName: string, dealId: string | null): string | null => {
@@ -588,13 +603,19 @@ export function workDay(i: WorkInput): WorkDay {
   ranked.sort((a, b) => Number(PARKED_TIERS.has(a.tier)) - Number(PARKED_TIERS.has(b.tier)) || TIER_RANK[a.tier] - TIER_RANK[b.tier] || a.dueMs - b.dueMs || b.act - a.act || Number(!a.prio) - Number(!b.prio) || a.r.rank - b.r.rank || cmpKeys(a.r.sortKey, b.r.sortKey) || a.r.card.accountName.localeCompare(b.r.card.accountName));
   /** R44: Capture opened from this card: the account, the person who wrote, the deal, the conversation, the source. */
   const replyPersona = new Map(i.replies.filter((r) => r.personaId != null).map((r) => [`${r.accountName}|${r.contactEmail.toLowerCase()}`, r.personaId as number]));
+  const replyContact = new Map(i.replies.filter((r) => r.hubspotContactId).map((r) => [`${r.accountName}|${r.contactEmail.toLowerCase()}`, String(r.hubspotContactId)]));
   const captureFor = (card: Omit<WorkCard, 'href' | 'index' | 'source'>, list: WorkObligation[]): { href: string; label: string } => {
     const q = new URLSearchParams({ account: card.accountName });
     // R50: the deal the card's work belongs to (its top obligation's deal, else the account's only open deal), by its
     // HubSpot id so the note's words and obligations bind to that deal; the name rides along for the label.
     const deals = dealAccounts.get(card.accountName)?.deals ?? [];
-    const scoped = list.map((o) => (o.commitmentId ? (i.commitments ?? []).find((c) => c.commitmentId === o.commitmentId)?.dealId ?? null : null)).find((x): x is string => !!x);
-    const deal = (scoped ? deals.find((d) => d.id === scoped) : null) ?? (deals.length === 1 ? deals[0] : null);
+    const isReply = !!card.reply && (card.stateKind === 'replied' || card.stateKind === 'opted_out');
+    // Batch item 8: a reply's words bind to the replier's OWN single deal (else account-level), never to the deal of an
+    // obligation that happens to top the card: Ann on the pilot is never logged against Ben's Columbus deal.
+    const replier = isReply ? replyContact.get(`${card.accountName}|${card.reply!.from.toLowerCase()}`) ?? null : null;
+    const theirs = replier ? deals.filter((d) => (d.contactIds ?? []).includes(replier)) : [];
+    const scoped = isReply ? null : list.map((o) => (o.commitmentId ? (i.commitments ?? []).find((c) => c.commitmentId === o.commitmentId)?.dealId ?? null : null)).find((x): x is string => !!x);
+    const deal = isReply ? (theirs.length === 1 ? theirs[0] : null) : (scoped ? deals.find((d) => d.id === scoped) : null) ?? (deals.length === 1 ? deals[0] : null);
     if (deal?.id) {
       q.set('deal', deal.id);
       if (deal.name) q.set('dealName', deal.name);

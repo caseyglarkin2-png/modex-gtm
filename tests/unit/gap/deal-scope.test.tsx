@@ -196,6 +196,49 @@ describe('an open deal blocks cold outreach without suppressing deal work', () =
     const q = new URL(`http://x${card.capture!.href}`).searchParams;
     expect([q.get('deal'), q.get('dealName')]).toEqual([COLUMBUS.id, 'Kroger Columbus DC']);
   });
+
+  // Batch item 8 (R62 matrix and the R50/R44 capture finding): a reply at a deal account is the buyer talking on the
+  // deal: it leads the card (never replaced by the hold), and Capture binds to the replier's OWN deal.
+  it('Work: Ann replying on the pilot leads the card with the hold said and the Columbus step kept; Capture binds to the pilot, never to Columbus; a replier on no deal is account-level', () => {
+    const day = (from: string, contactId: string | null) =>
+      workDay({
+        now: NOW,
+        candidates: [],
+        motions: [],
+        held: new Map(),
+        replies: [{ accountName: ACCOUNT, contactEmail: from, subject: 'Re: the pilot', snippet: 'Can you send the pilot plan by Friday?', receivedAt: '2026-10-06T17:00:00Z', id: 'm1', threadId: 't1', personaId: 1, hubspotContactId: contactId }],
+        inDeals: { status: 'complete', accounts: [{ accountName: ACCOUNT, deals: DEALS.map((x) => ({ id: x.id, name: x.name, stage: x.stage, contactIds: x.contactIds })) }] },
+        commitments: [COMMITMENTS[1]],
+      });
+    const ann = day('ann@kroger.example.com', '81').cards.find((c) => c.accountName === ACCOUNT)!;
+    expect([ann.stateKind, ann.tier]).toEqual(['replied', 'reply']);
+    expect(ann.blocker).toMatch(/^An open HubSpot deal here \(.*\): answer them as deal work, never a cold first touch\.$/);
+    expect(ann.obligations?.map((o) => [o.title, o.scope])).toEqual([['Book the Columbus yard walk', 'Deal: Kroger Columbus DC']]);
+    const q = new URL(`http://x${ann.capture!.href}`).searchParams;
+    expect([q.get('deal'), q.get('dealName'), q.get('context'), q.get('from')]).toEqual([PILOT.id, PILOT.name, 'email', 'reply:m1']);
+    const cal = new URL(`http://x${day('cal@kroger.example.com', '83').cards.find((c) => c.accountName === ACCOUNT)!.capture!.href}`).searchParams;
+    expect([cal.get('deal'), cal.get('context')]).toEqual([null, 'email']);
+  });
+
+  it('Work: at an account held because HubSpot could not answer, a person who wrote still leads the card, the hold said on it', () => {
+    const d = workDay({ now: NOW, candidates: [], motions: [], inDeals: { status: 'unavailable', accounts: [] }, held: new Map([[ACCOUNT, 'opportunity_unknown' as const]]), replies: [{ accountName: ACCOUNT, contactEmail: 'ann@kroger.example.com', subject: 'Re', snippet: 'Can we talk Thursday?', receivedAt: '2026-10-06T17:00:00Z', id: 'm2' }] });
+    const card = d.cards.find((c) => c.accountName === ACCOUNT)!;
+    expect([card.stateKind, card.tier]).toEqual(['replied', 'reply']);
+    expect(card.blocker).toBe('HubSpot could not say whether this account is in a deal: answer them, and no cold touch to anyone here.');
+  });
+
+  it('R51: Ann’s account-level preparation stays waiting while only Ben’s Columbus walk is live; an account-level meeting booked again rebooks it', () => {
+    const prep = commitment({ commitmentId: 'disposition:d9', kind: 'prepare_meeting', title: 'Prepare the pilot check-in with Ann', person: { personaId: 1, name: 'Ann Scratch', email: 'ann@kroger.example.com' } });
+    const ben = { accountName: ACCOUNT, at: '2026-10-07T14:00:00.000Z', what: 'Columbus yard walk with Ben', meetingId: 2, dealId: COLUMBUS.id };
+    const input = (meetings: Array<typeof ben | { accountName: string; at: string; what: string; meetingId: number; dealId: null }>) =>
+      workDay({ now: NOW, candidates: [], replies: [], motions: [], held: new Map(), inDeals: { status: 'unavailable', accounts: [] }, commitments: [prep], meetings, canceledMeetings: [{ accountName: ACCOUNT, at: '2026-10-06T20:00:00.000Z', what: 'Pilot check-in with Ann', meetingId: 1, dealId: null }] });
+    const only = input([ben]);
+    expect(only.waiting.find((w) => w.commitmentId === 'disposition:d9')?.line).toMatch(/^The meeting on the calendar was canceled/);
+    expect(only.cards.find((c) => c.accountName === ACCOUNT)?.obligations?.map((o) => o.kind)).toEqual(['meeting']);
+    const again = input([ben, { accountName: ACCOUNT, at: '2026-10-08T14:00:00.000Z', what: 'Pilot check-in with Ann', meetingId: 3, dealId: null }]);
+    expect(again.waiting.some((w) => w.commitmentId === 'disposition:d9')).toBe(false);
+    expect(again.cards.find((c) => c.accountName === ACCOUNT)?.obligations?.map((o) => o.kind).sort()).toEqual(['meeting', 'prepare_meeting']);
+  });
 });
 
 describe('partition helper', () => {

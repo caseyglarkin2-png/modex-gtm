@@ -9,7 +9,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import { meetingDeal, meetingInstant, meetingState, prepareMeeting, type PrepInput } from '@/lib/gap/deals/meeting-prep';
 import { openQuestionsFor, unknownSectionsOfTypes } from '@/lib/gap/deals/deal-brief';
-import { loadMeetingRows, loadMeetingStartingPoints } from '@/lib/gap/work/day-load';
+import { loadMeetingRows, loadMeetingStartingPoints, resolveMeetingDeals } from '@/lib/gap/work/day-load';
 import { workDay } from '@/lib/gap/work/list';
 import type { Commitment } from '@/lib/gap/work/commitment-model';
 import { MeetingPrepView } from '@/components/gap/meeting-prep';
@@ -172,5 +172,41 @@ describe('Work follows the calendar (R51)', () => {
     expect([...starts.keys()]).toEqual([11]);
     // The Columbus meeting reads Columbus's problem, never the pilot deal's root cause.
     expect(starts.get(11)).toEqual({ prep: 'Objective: Columbus yard walk with Ben. First to learn: Learn how their yards run today: how trailers are checked in, found and moved. 1 confirmed need on record.', href: '/gap/accounts/kroger-scratch-co?view=brief#meeting-11' });
+  });
+
+  // Batch item 8 (R51/R50): an untagged meeting read every deal's words on Work; it now takes the deal its attendees name.
+  it('an untagged Ben meeting is placed on Columbus (the deal whose contact it names) and reads only Columbus rows and the account-level ones', async () => {
+    const db = ledgerDb({
+      accounts: [ACCOUNT],
+      personas: [
+        { id: 1, name: 'Ann Scratch', email: 'ann@kroger.example.com', account_name: ACCOUNT, hubspot_contact_id: '81' },
+        { id: 2, name: 'Ben Scratch', email: 'ben@kroger.example.com', account_name: ACCOUNT, hubspot_contact_id: '82' },
+      ],
+      meetings: [{ id: 21, account_name: ACCOUNT, meeting_status: 'Scheduled', meeting_date: new Date('2026-10-07T00:00:00Z'), meeting_time: '10:00 AM', objective: 'Columbus yard walk', persona: 'Ben Scratch', hubspot_deal_id: null, created_at: new Date('2026-10-01T12:00:00Z'), updated_at: new Date('2026-10-01T12:00:00Z') }],
+      bids: [
+        { id: 'b1', account_name: ACCOUNT, type: 'business_problem', raw_buyer_language: 'Trailers sit two hours at Columbus.', contact_email: 'ben@kroger.example.com', human_confirmed: true, supersedes_id: null, confirmed_at: new Date('2026-10-03T15:00:00Z'), captured_at: new Date('2026-10-03T15:00:00Z'), metadata: { scope: { dealId: '70002' } } },
+        { id: 'b2', account_name: ACCOUNT, type: 'root_cause', raw_buyer_language: 'The pilot gate has one guard.', contact_email: 'ann@kroger.example.com', human_confirmed: true, supersedes_id: null, confirmed_at: new Date('2026-10-03T15:00:00Z'), captured_at: new Date('2026-10-03T15:00:00Z'), metadata: { scope: { dealId: '70001' } } },
+      ],
+    });
+    const inDeals = { status: 'complete' as const, accounts: [{ accountName: ACCOUNT, deals: [{ id: '70001', contactIds: ['81'] }, { id: '70002', contactIds: ['82'] }] }] };
+    const raw = await loadMeetingRows(db.client(), NOW);
+    expect(raw.map((r) => [r.meetingId, r.dealId])).toEqual([[21, null]]);
+    // Unplaced, it reads both deals' words (the defect); placed, only Columbus's.
+    expect((await loadMeetingStartingPoints(db.client(), raw, [], NOW)).get(21)?.prep).toMatch(/2 confirmed needs on record\.$/);
+    const rows = await resolveMeetingDeals(db.client(), raw, inDeals);
+    expect(rows.map((r) => [r.meetingId, r.dealId, r.dealBasis])).toEqual([[21, '70002', 'attendees']]);
+    expect((await loadMeetingStartingPoints(db.client(), rows, [], NOW)).get(21)?.prep).toMatch(/1 confirmed need on record\.$/);
+    // Without a complete open-deal read it stays as it was (never a guess).
+    expect((await resolveMeetingDeals(db.client(), raw, { status: 'unavailable', accounts: [] })).map((r) => r.dealId)).toEqual([null]);
+  });
+
+  it('today’s evening meeting (a date-only row with its time) is still on Work at 8:30 pm New York', async () => {
+    const db = ledgerDb({
+      accounts: [ACCOUNT],
+      meetings: [{ id: 31, account_name: ACCOUNT, meeting_status: 'Scheduled', meeting_date: new Date('2026-10-06T00:00:00Z'), meeting_time: '9:00 PM', objective: 'West coast check-in', persona: 'Lee', hubspot_deal_id: null, created_at: new Date('2026-10-01T12:00:00Z'), updated_at: new Date('2026-10-01T12:00:00Z') }],
+    });
+    const evening = new Date('2026-10-07T00:30:00Z'); // Tue Oct 6, 8:30 pm New York
+    const rows = await loadMeetingRows(db.client(), evening);
+    expect(rows.map((r) => [r.meetingId, r.at])).toEqual([[31, '2026-10-07T01:00:00.000Z']]);
   });
 });

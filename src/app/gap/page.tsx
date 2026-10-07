@@ -49,7 +49,7 @@ import { buyerMoves } from '@/lib/gap/work/commitment-model';
 import { addDays, nyDay, nyDayAt } from '@/lib/gap/work/dates';
 import { buildNextUpCandidates } from '@/lib/gap/routing/next-up';
 import { workDay, type WorkCard, type WorkInput } from '@/lib/gap/work/list';
-import { loadCompletedToday, loadMeetingRows, loadMeetingStartingPoints, loadWorkCommitments } from '@/lib/gap/work/day-load';
+import { loadCompletedToday, loadMeetingRows, loadMeetingStartingPoints, loadWorkCommitments, resolveMeetingDeals } from '@/lib/gap/work/day-load';
 import { loadAccountPriorities } from '@/lib/gap/work/priority';
 import { loadFollowUpPlans } from '@/lib/gap/execution/follow-up-load';
 import { loadWorkOutcomes } from '@/lib/gap/work/outcome';
@@ -200,11 +200,11 @@ async function loadCockpit() {
     candidates,
     dbState,
     inMotion,
-    replies: repliesPage.items.map((r) => ({ accountName: r.accountName, contactEmail: r.contactEmail, subject: r.subject, snippet: r.snippet, receivedAt: r.receivedAt, id: r.id, threadId: r.threadId ?? null, fromName: r.fromName ?? null, personaId: r.personaId })),
+    replies: repliesPage.items.map((r) => ({ accountName: r.accountName, contactEmail: r.contactEmail, subject: r.subject, snippet: r.snippet, receivedAt: r.receivedAt, id: r.id, threadId: r.threadId ?? null, fromName: r.fromName ?? null, personaId: r.personaId, hubspotContactId: r.hubspotContactId ?? null })),
     mailbox: process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() || null,
     motions: motion.motions.map((m) => ({ accountName: m.accountName, state: m.state, primary: m.primary ? { name: m.primary.name, title: m.primary.title } : null, next: m.next ? { name: m.next.name, title: m.next.title, unlock: m.next.unlock } : null })),
     // R50: each deal keeps its HubSpot id (an obligation names its deal; Capture binds a note to it by id).
-    inDeals: { status: inDeals.status, accounts: inDeals.accounts.map((a) => ({ accountName: a.accountName, deals: a.deals.map((d) => ({ ...(d.id ? { id: d.id } : {}), name: d.name, stage: d.stage, lastActivityAt: d.lastActivityAt ?? null, closeDate: d.closeDate ?? null })) })) },
+    inDeals: { status: inDeals.status, accounts: inDeals.accounts.map((a) => ({ accountName: a.accountName, deals: a.deals.map((d) => ({ ...(d.id ? { id: d.id } : {}), name: d.name, stage: d.stage, lastActivityAt: d.lastActivityAt ?? null, closeDate: d.closeDate ?? null, contactIds: d.contactIds ?? [] })) })) },
     held: heldWhy,
   };
 
@@ -404,7 +404,7 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
   // what the last workspace read said instead of falling back to the lanes.
   // R41: the obligations (after the bounded follow-up sweep), the next day's meetings and the seller's priorities are
   // read on every render, never cached with the lanes, so a write shows on the next load.
-  const [summaries, outcomes, commitments, meetingRows] = await Promise.all([
+  const [summaries, outcomes, commitments, meetingRowsRaw] = await Promise.all([
     loadPursuitSummaries(prisma, data.workAccounts, now),
     loadWorkOutcomes(prisma, data.workAccounts, now).catch(() => new Map()),
     // The sweep writes at the real time only; the phases are read at `now`.
@@ -412,6 +412,9 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
     // R51: every meeting row in the window, canceled ones included (Work says so and stops asking to prepare them).
     lane ? Promise.resolve([]) : loadMeetingRows(prisma, now).catch(() => []),
   ]);
+  // Batch item 8: an untagged meeting belongs to the deal whose contacts it names (the brief's own rule), so its
+  // preparation and its rebooking never read another deal's work.
+  const meetingRows = await resolveMeetingDeals(prisma, meetingRowsRaw, data.workInput.inDeals).catch(() => meetingRowsRaw);
   const mailbox = process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() || null;
   const meetings = meetingRows.filter((m) => !m.canceled).map((m) => ({ accountName: m.accountName, at: m.at, what: m.what, meetingId: m.meetingId, dealId: m.dealId }));
   const canceledMeetings = meetingRows.filter((m) => m.canceled).map((m) => ({ accountName: m.accountName, at: m.at, what: m.what, meetingId: m.meetingId, dealId: m.dealId }));

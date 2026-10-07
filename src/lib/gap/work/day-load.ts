@@ -11,11 +11,11 @@
  */
 import { loadCommitments, syncFollowUpsFromLedger, syncReturnRemindersFromReplies } from './commitments';
 import { COMMITMENT_EVENT, type Commitment } from './commitment-model';
-import { dayLabel, nyDay, nyDayAt } from './dates';
+import { addDays, dayLabel, nyDay, nyDayAt } from './dates';
 import type { DoneItem } from './today';
 import { DIRECT_SENT, DRAFT_SENT, DRAFT_SUBJECT_TYPE, MANUAL_SENT, REPLY_SENT } from '../execution/draft-ledger';
 import { WORK_OUTCOME } from './outcome';
-import { isCanceled, meetingInstant, parseTimeOfDay, prepareMeeting } from '../deals/meeting-prep';
+import { isCanceled, meetingDeal, meetingInstant, parseTimeOfDay, prepareMeeting } from '../deals/meeting-prep';
 import { openQuestionsFor, unknownSectionsOfTypes } from '../deals/deal-brief';
 import { selectConfirmedBids } from '../bid/select';
 import { accountHref } from '../account-intel/href';
@@ -55,13 +55,17 @@ export interface MeetingOnRecord {
   objective: string | null;
   updatedAt: string;
   createdAt: string;
+  /** Batch item 8: where the deal came from: the row's own deal id, or the deal its attendees name. */
+  dealBasis?: 'row' | 'attendees' | null;
 }
 
 /** Every meeting row in the window (yesterday to the horizon), canceled ones included and marked. Soft. */
 export async function loadMeetingRows(prisma: PrismaLike, now: Date, horizonMs = 48 * 3_600_000): Promise<MeetingOnRecord[]> {
   if (typeof prisma?.meeting?.findMany !== 'function') return [];
   const rows: Array<{ id: number; account_name: string; meeting_date: Date | null; meeting_time: string | null; meeting_status: string; objective: string | null; persona: string | null; hubspot_deal_id: string | null; created_at: Date; updated_at: Date }> = await prisma.meeting
-    .findMany({ where: { meeting_date: { gte: new Date(now.getTime() - 24 * 3_600_000), lte: new Date(now.getTime() + horizonMs) } }, select: { id: true, account_name: true, meeting_date: true, meeting_time: true, meeting_status: true, objective: true, persona: true, hubspot_deal_id: true, created_at: true, updated_at: true } })
+    // Batch item 8: a date-only row is stored at UTC midnight of its own day, so the window opens at yesterday's UTC
+    // midnight (New York calendar), never `now - 24h` (which dropped today's evening meetings after 8 pm New York).
+    .findMany({ where: { meeting_date: { gte: new Date(`${addDays(nyDay(now), -1)}T00:00:00.000Z`), lte: new Date(now.getTime() + horizonMs) } }, select: { id: true, account_name: true, meeting_date: true, meeting_time: true, meeting_status: true, objective: true, persona: true, hubspot_deal_id: true, created_at: true, updated_at: true } })
     .catch(() => []);
   const out: MeetingOnRecord[] = [];
   for (const r of rows) {
@@ -69,9 +73,35 @@ export async function loadMeetingRows(prisma: PrismaLike, now: Date, horizonMs =
     // A date-only row is stored at UTC midnight: its calendar day is the UTC date, never the New York evening before.
     const at = meetingInstant(r.meeting_date, r.meeting_time);
     if (!at) continue;
-    out.push({ meetingId: r.id, accountName: r.account_name, at: at.toISOString(), what: r.objective?.trim() || r.meeting_status, canceled: isCanceled(r.meeting_status), dealId: r.hubspot_deal_id ?? null, attendees: r.persona ?? null, objective: r.objective ?? null, updatedAt: new Date(r.updated_at ?? r.created_at ?? now).toISOString(), createdAt: new Date(r.created_at ?? now).toISOString() });
+    out.push({ meetingId: r.id, accountName: r.account_name, at: at.toISOString(), what: r.objective?.trim() || r.meeting_status, canceled: isCanceled(r.meeting_status), dealId: r.hubspot_deal_id ?? null, dealBasis: r.hubspot_deal_id ? 'row' : null, attendees: r.persona ?? null, objective: r.objective ?? null, updatedAt: new Date(r.updated_at ?? r.created_at ?? now).toISOString(), createdAt: new Date(r.created_at ?? now).toISOString() });
   }
   return out;
+}
+
+/**
+ * Batch item 8: an untagged meeting belongs to the deal whose contacts it names (the brief's own rule, deals/meeting-prep
+ * `meetingDeal`): one deal only, else it stays account-level. Read once for Work (its preparation, its rebooking and its
+ * deal label use the result), from the open deals' HubSpot contacts and the names GAP holds for them. Soft: without a
+ * complete open-deal read, or a name read, the rows stay as they are.
+ */
+export async function resolveMeetingDeals(
+  prisma: PrismaLike,
+  rows: readonly MeetingOnRecord[],
+  inDeals: { status: 'complete' | 'unavailable'; accounts: ReadonlyArray<{ accountName: string; deals: ReadonlyArray<{ id?: string; contactIds?: readonly string[] }> }> },
+): Promise<MeetingOnRecord[]> {
+  const untagged = rows.filter((r) => !r.dealId && r.attendees);
+  if (!untagged.length || inDeals.status !== 'complete' || typeof prisma?.persona?.findMany !== 'function') return [...rows];
+  const byAccount = new Map(inDeals.accounts.map((a) => [a.accountName, a.deals.filter((d): d is { id: string; contactIds?: readonly string[] } => !!d.id)]));
+  const ids = [...new Set(untagged.flatMap((r) => (byAccount.get(r.accountName) ?? []).flatMap((d) => (d.contactIds ?? []).map(String))))];
+  if (!ids.length) return [...rows];
+  const people: Array<{ name: string | null; hubspot_contact_id: string | null }> = await prisma.persona.findMany({ where: { hubspot_contact_id: { in: ids } }, select: { name: true, hubspot_contact_id: true } }).catch(() => []);
+  const nameOf = new Map(people.filter((p) => p.name && p.hubspot_contact_id).map((p) => [String(p.hubspot_contact_id), String(p.name)]));
+  return rows.map((r) => {
+    if (r.dealId || !r.attendees) return r;
+    const deals = (byAccount.get(r.accountName) ?? []).map((d) => ({ id: d.id, contacts: (d.contactIds ?? []).map((c) => nameOf.get(String(c))).filter((n): n is string => !!n).map((name) => ({ name })) }));
+    const own = meetingDeal({ dealId: null, attendees: r.attendees }, deals);
+    return own ? { ...r, dealId: own.id, dealBasis: 'attendees' as const } : r;
+  });
 }
 
 export async function loadUpcomingMeetings(prisma: PrismaLike, now: Date, horizonMs = 48 * 3_600_000): Promise<Array<{ accountName: string; at: string; what: string; meetingId?: number; dealId?: string | null }>> {

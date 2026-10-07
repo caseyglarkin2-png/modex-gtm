@@ -111,6 +111,8 @@ describe('IN DEALS: one authoritative read, from the open deals', () => {
     const r = reads({ deals: [deal('d1', 'Snacks pilot')], dealCompanies: { d1: ['c1'] }, dealContacts: { d1: ['k9'] }, companies: { c1: { name: 'Snack Holdings', domain: 'snackholdings.example' } } });
     const s = await loadInDealsSummary(p, { reads: r, now: NOW, fresh: true });
     expect(s.accounts.map((a) => a.accountName)).toEqual(['Frito-Lay']);
+    // Batch item 8: each deal carries its HubSpot contacts (Work binds a reply and a meeting to their own deal).
+    expect(s.accounts[0].deals.map((d) => [d.id, d.contactIds])).toEqual([['d1', ['k9']]]);
   });
 
   it('an open deal no GAP account maps to is surfaced as unresolved, never hidden and never an account', async () => {

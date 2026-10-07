@@ -177,9 +177,29 @@ describe('listReplies', () => {
 
   it('no known addresses means an empty page and no inbox query', async () => {
     prisma.sequenceEnrollment.findMany.mockResolvedValueOnce([]);
-    prisma.persona.findMany.mockResolvedValueOnce([]);
+    // The thesis personas, then (batch item 8) the HubSpot-contact personas: both empty.
+    prisma.persona.findMany.mockResolvedValueOnce([]).mockResolvedValueOnce([]);
     expect(await listReplies(prisma)).toEqual({ items: [], nextCursor: null });
     expect(prisma.inboundMessage.findMany).not.toHaveBeenCalled();
+  });
+});
+
+describe('batch item 8 (R62 matrix): an open deal’s own contact is a known address', () => {
+  it('a HubSpot contact GAP holds with no thesis and no enrollment is listed with its account and contact id; a stranger stays out', async () => {
+    const BEN = { id: 31, email: 'Ben@dealco.example', account_name: 'Deal Co', hubspot_contact_id: 'hs-31' };
+    const p = makePrisma();
+    p.persona.findMany = asyncSpy(async (q: any = {}) => (q?.where?.prospecting_hypotheses?.none ? [BEN] : [...PERSONAS].sort((a, b) => a.id - b.id)));
+    const known = await loadKnownAddresses(p);
+    expect(known.get('ben@dealco.example')).toEqual({ email: 'ben@dealco.example', personaId: 31, accountName: 'Deal Co', hubspotContactId: 'hs-31', enrollmentId: null, enrollmentStatus: null, hypothesisId: null, hypothesisTitle: null });
+    expect(p.persona.findMany).toHaveBeenCalledWith(expect.objectContaining({ where: { email: { not: null }, hubspot_contact_id: { not: null }, prospecting_hypotheses: { none: {} } } }));
+    MESSAGES.push({ id: 'm9', source: 'gmail', from_email: 'ben@dealco.example', subject: 'Re: the walk', body_text: 'Can you bring the detention numbers?', body_html: null, snippet: null, received_at: T(9) });
+    try {
+      const page = await listReplies(p, { state: 'undispositioned' });
+      expect(page.items.find((r) => r.contactEmail === 'ben@dealco.example')).toMatchObject({ accountName: 'Deal Co', personaId: 31, hubspotContactId: 'hs-31', hypothesisId: '' });
+      expect(page.items.some((r) => r.contactEmail === 'stranger@nowhere.example')).toBe(false);
+    } finally {
+      MESSAGES.pop();
+    }
   });
 });
 

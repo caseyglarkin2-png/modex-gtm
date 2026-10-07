@@ -83,6 +83,8 @@ export interface ReplyItem {
   fromName?: string | null;
   /** R42: the other imports of this same message (a Gmail copy and a HubSpot copy are one reply). */
   twinIds?: string[];
+  /** Batch item 8: the sender's HubSpot contact id when GAP holds it (Work binds Capture to their own deal). */
+  hubspotContactId?: string | null;
 }
 
 export interface ListRepliesInput {
@@ -262,6 +264,18 @@ export async function loadKnownAddresses(prisma: any): Promise<Map<string, Known
       hypothesisId: hyp?.id ?? null,
       hypothesisTitle: hyp?.problem_family ?? null,
     });
+  }
+  // Batch item 8 (R62 matrix): a person GAP holds who is a HubSpot contact (an open deal's own contact) is known even
+  // with no GAP thesis and no enrollment: their reply is the buyer talking on a live deal, never dropped. The account
+  // and the person come from the persona; no thesis is invented.
+  const contacts: Array<{ id: number; email: string | null; account_name: string; hubspot_contact_id: string | null }> =
+    (await prisma.persona
+      .findMany({ where: { email: { not: null }, hubspot_contact_id: { not: null }, prospecting_hypotheses: { none: {} } }, orderBy: { id: 'asc' }, select: { id: true, email: true, account_name: true, hubspot_contact_id: true } })
+      .catch(() => [])) ?? [];
+  for (const p of contacts) {
+    const email = normalizeEmail(p.email);
+    if (!email || map.has(email) || !p.hubspot_contact_id) continue;
+    map.set(email, { email, personaId: p.id, accountName: p.account_name, hubspotContactId: String(p.hubspot_contact_id), enrollmentId: null, enrollmentStatus: null, hypothesisId: null, hypothesisTitle: null });
   }
   const live = new Set<string>(LIVE_ENROLLMENT_STATUSES);
   for (const e of enrollments) {
@@ -467,6 +481,7 @@ export async function listReplies(prisma: any, input: ListRepliesInput = {}): Pr
         accountLevel: false,
         threadId: row.source === 'hubspot' ? null : (row.thread_id ?? null),
         fromName: row.from_name ?? null,
+        hubspotContactId: address.hubspotContactId ?? null,
       };
       if (state === 'all') item.dispositionId = dispositionId;
       items.push(item);

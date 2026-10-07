@@ -216,6 +216,8 @@ export interface ReplyItem {
   fromName?: string | null;
   /** R42: the other imports of this same message (a Gmail copy and a HubSpot copy are one reply). */
   twinIds?: string[];
+  /** Batch item 8: the sender's HubSpot contact id when GAP holds it. */
+  hubspotContactId?: string | null;
 }
 
 export interface RepliesPage {
