@@ -139,6 +139,51 @@ describe('closed, lost and reopened deals and GAP\'s own obligations (R55)', () 
     expect(await syncDealStates(p, { accountName: ACCOUNT, open: [{ id: '7001', name: 'YardFlow - Kroger' }, { id: '7002', name: 'Kroger Columbus DC' }], closed: [], now: later })).toEqual({ closed: [], reopened: [], skipped: 0, created: 0 });
   });
 
+  // Batch item 8 (R55 finding): a legacy note scoped by the deal's NAME was never skipped at closure.
+  it('an obligation scoped by the closed deal’s legacy NAME is skipped with it; another deal’s name stays open', async () => {
+    const { p } = await seed();
+    await ensureCommitment(p, { accountName: ACCOUNT, kind: 'deliverable', title: 'Send the pilot volumes back', dealId: 'YardFlow - Kroger', source: { kind: 'capture', id: 'legacy-1' } } as never, { actor: ACTOR, now: NOW });
+    await ensureCommitment(p, { accountName: ACCOUNT, kind: 'deliverable', title: 'Send the Columbus volumes back', dealId: 'Kroger Columbus DC', source: { kind: 'capture', id: 'legacy-2' } } as never, { actor: ACTOR, now: NOW });
+    await syncDealStates(p, { accountName: ACCOUNT, open: [{ id: '7001', name: 'YardFlow - Kroger' }, { id: '7002', name: 'Kroger Columbus DC' }], closed: [], now: NOW });
+    const r = await syncDealStates(p, { accountName: ACCOUNT, open: [{ id: '7002', name: 'Kroger Columbus DC' }], closed: [{ id: '7001', name: 'YardFlow - Kroger', stage: 'closedwon', won: true, closedAt: '2026-10-05T16:00:00.000Z' }], now: NOW });
+    expect(r.skipped).toBe(3);
+    expect(await loadCommitment(p, 'capture:legacy-1')).toMatchObject({ status: 'skipped', reason: 'the deal "YardFlow - Kroger" closed won on Oct 5; kept for history' });
+    expect((await loadCommitment(p, 'capture:legacy-2'))?.status).toBe('open');
+  });
+
+  it('the sweep reaches a legacy name no open deal carries, and resumes after the last account it swept so none starves the rest', async () => {
+    const accounts = Array.from({ length: 7 }, (_, k) => `Sweep ${k} Co`);
+    const db = ledgerDb({ accounts });
+    const cfg = new Map<string, string>();
+    const p = {
+      ...db.client(),
+      systemConfig: {
+        findUnique: async ({ where }: { where: { key: string } }) => (cfg.has(where.key) ? { key: where.key, value: cfg.get(where.key) } : null),
+        upsert: async ({ where, create, update }: { where: { key: string }; create: { value: string }; update: { value: string } }) => {
+          cfg.set(where.key, cfg.has(where.key) ? update.value : create.value);
+          return {};
+        },
+      },
+    };
+    for (const [k, a] of accounts.entries()) {
+      await ensureCommitment(p, { accountName: a, kind: 'deal_step', title: 'Old work', dealId: k === 6 ? 'An old deal name' : String(8000 + k), source: { kind: 'seller', id: `w${k}` } } as never, { actor: ACTOR, now: NOW });
+    }
+    const asked: string[] = [];
+    const resolve = async (a: string) => {
+      asked.push(a);
+      return { status: 'UNKNOWN' };
+    };
+    const first = await sweepClosedDeals(p, { now: NOW, openDealIds: new Set(['9999']), openDealNames: new Set(['a deal that is open']), resolve });
+    expect(first.accounts).toEqual(accounts.slice(0, 5));
+    resetClosureSweep();
+    const second = await sweepClosedDeals(p, { now: NOW, openDealIds: new Set(['9999']), openDealNames: new Set(['a deal that is open']), resolve });
+    expect(second.accounts).toEqual([accounts[5], accounts[6], accounts[0], accounts[1], accounts[2]]);
+    expect(new Set(asked)).toEqual(new Set(accounts));
+    // A legacy name an open deal carries is not swept.
+    resetClosureSweep();
+    expect((await sweepClosedDeals(p, { now: NOW, openDealIds: new Set(accounts.slice(0, 6).map((_, k) => String(8000 + k))), openDealNames: new Set(['an old deal name']), resolve })).accounts).toEqual([]);
+  });
+
   it('the Work sweep reads only accounts whose deal-scoped work left the open deals, bounded, and never without the open-deal read', async () => {
     const { p } = await seed();
     const asked: string[] = [];

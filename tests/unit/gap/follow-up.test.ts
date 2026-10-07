@@ -96,6 +96,38 @@ describe('a follow-up sent outside GAP (R43)', () => {
     expect(d.store.gapAuditEvent.filter((r) => r.kind === DIRECT_SENT)).toHaveLength(1);
   });
 
+  // Batch item 8: the reconcile checked the same first ten forever; it resumes after the last one it checked.
+  it('15 open follow-ups are all checked over successive runs (ten a run, resuming where the last run stopped)', async () => {
+    const d = ledgerDb({ accounts: ['Fedex Scratch Co'] });
+    const cfg = new Map<string, string>();
+    const p = {
+      ...d.client(),
+      systemConfig: {
+        findUnique: async ({ where }: { where: { key: string } }) => (cfg.has(where.key) ? { key: where.key, value: cfg.get(where.key) } : null),
+        upsert: async ({ where, create, update }: { where: { key: string }; create: { value: string }; update: { value: string } }) => {
+          cfg.set(where.key, cfg.has(where.key) ? update.value : create.value);
+          return {};
+        },
+      },
+    };
+    for (let k = 0; k < 15; k += 1) {
+      const n = String(k).padStart(2, '0');
+      await ensureCommitment(p, { accountName: 'Fedex Scratch Co', kind: 'follow_up', status: 'waiting', dependency: 'their reply', title: `Follow up with person ${n}`, dueAt: nyDayAt('2026-10-12'), person: { personaId: 100 + k, name: `Person ${n}`, email: `p${n}@fedex.example.com` }, source: { kind: 'send', id: `k${n}` }, detail: { stepIndex: 1, decisionId: `dec-${n}`, sentAt: '2026-10-06T15:00:00Z' } }, { actor: 'gap:work', now: NOW });
+    }
+    const asked: string[] = [];
+    const listSent = async (recipient: string) => {
+      asked.push(recipient);
+      return [];
+    };
+    const first = await reconcileFollowUpsFromSent(p, { now: NOW }, { listSent });
+    expect([first.checked, first.unknown.filter((u) => u.reason === 'not_yet_checked').length]).toEqual([10, 5]);
+    const second = await reconcileFollowUpsFromSent(p, { now: NOW }, { listSent });
+    expect(second.checked).toBe(10);
+    expect(new Set(asked).size).toBe(15);
+    // The five the first run left are checked first on the second.
+    expect(asked.slice(10, 15)).toEqual(first.unknown.map((u) => `p${u.commitmentId.slice('send:k'.length)}@fedex.example.com`));
+  });
+
   it('at the click, a follow-up over one sent by hand is refused (emailed_outside_gap); an unreadable Sent refuses; only GAP-recorded mail passes', async () => {
     const steps = JSON.parse(JSON.stringify(HC.steps));
     steps.steps[1].templates.bodyTemplate = 'Hi {{first_name}},\nFollowing up on the question about empty doors.\n\nMy guess is the lot, not the doors, sets the pace.\n\nWorth a short scorecard?\n\nCasey Larkin, YardFlow by FreightRoll';

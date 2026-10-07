@@ -17,12 +17,15 @@ import type { SentMatch } from './unknown-send-reconcile';
 import { commitmentPhase, TERMINAL_STATUSES, type Commitment } from '../work/commitment-model';
 import { loadCommitments, transitionCommitment } from '../work/commitments';
 import { dayLabel, nyDay } from '../work/dates';
+import { readCursor, rotateFrom, writeCursor } from '../work/cursor';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
 
 export const FOLLOW_UP_PLAN_LIMIT = 25;
 export const FOLLOW_UP_RECONCILE_MAX = 10;
+/** Batch item 8: where the bounded reconcile resumes (work/cursor.ts), so every open follow-up is checked in turn. */
+export const FOLLOW_UP_RECONCILE_CURSOR = 'gap:follow_up_reconcile_cursor';
 
 export async function loadFollowUpPlans(
   prisma: PrismaLike,
@@ -70,8 +73,14 @@ export async function reconcileFollowUpsFromSent(
   const actor = input.actor ?? 'cron:gap-mailbox';
   const report: FollowUpReconcileReport = { checked: 0, reconciled: 0, unknown: [] };
   const open = (await loadCommitments(prisma)).filter((c) => c.kind === 'follow_up' && !TERMINAL_STATUSES.includes(c.status) && c.person?.email);
-  for (const [k, c] of open.entries()) {
-    if (k >= (deps.max ?? FOLLOW_UP_RECONCILE_MAX)) {
+  const max = deps.max ?? FOLLOW_UP_RECONCILE_MAX;
+  // Batch item 8: past the first ten, a by-hand follow-up was never checked. Each run resumes after the last one it
+  // checked (a stable order, wrapping round), so every open follow-up is checked over successive runs.
+  const order = rotateFrom(open, (c) => c.commitmentId, await readCursor(prisma, FOLLOW_UP_RECONCILE_CURSOR));
+  const lastChecked = order[Math.min(order.length, max) - 1];
+  if (lastChecked) await writeCursor(prisma, FOLLOW_UP_RECONCILE_CURSOR, lastChecked.commitmentId);
+  for (const [k, c] of order.entries()) {
+    if (k >= max) {
       report.unknown.push({ commitmentId: c.commitmentId, reason: 'not_yet_checked' });
       continue;
     }

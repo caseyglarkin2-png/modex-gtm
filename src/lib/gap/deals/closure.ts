@@ -17,7 +17,8 @@
  * or changes a thesis, a person or a suppression.
  */
 import { ensureCommitment, loadCommitments, transitionCommitment } from '../work/commitments';
-import { TERMINAL_STATUSES } from '../work/commitment-model';
+import { TERMINAL_STATUSES, type Commitment } from '../work/commitment-model';
+import { readCursor, rotateFrom, writeCursor } from '../work/cursor';
 import type { ClosedDeal } from '../opportunity/active-opportunity';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -29,6 +30,16 @@ export const CLOSURE_ACTOR = 'gap:deals';
 
 const closedDay = (iso: string | null) => (iso ? new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' }) : 'a date HubSpot does not hold');
 const stateOf = (d: ClosedDeal): DealState => (d.won === true ? 'won' : d.won === false ? 'lost' : 'closed');
+const isDealId = (s: string) => /^\d+$/.test(s);
+const sameName = (a: string | null | undefined, b: string | null | undefined) => !!a && !!b && a.trim().toLowerCase() === b.trim().toLowerCase();
+
+/**
+ * Batch item 8: the open work on a deal: scoped by its HubSpot id, or (a legacy note, R44) by its exact NAME. A
+ * name-scoped obligation on a closed deal was never skipped (the match was by id only).
+ */
+export function openWorkOn(commitments: readonly Commitment[], deal: { id: string; name: string | null }): Commitment[] {
+  return commitments.filter((c) => !!c.dealId && !TERMINAL_STATUSES.includes(c.status) && (c.dealId === deal.id || (!isDealId(c.dealId) && sameName(c.dealId, deal.name))));
+}
 
 export async function loadDealStates(prisma: PrismaLike, accountName: string): Promise<Map<string, { state: DealState; at: string }>> {
   const rows: Array<{ payload: Record<string, unknown> | null; created_at: Date }> = await prisma.gapAuditEvent.findMany({ where: { kind: DEAL_STATE, subject_type: 'account', subject_id: accountName }, select: { payload: true, created_at: true }, orderBy: { created_at: 'asc' } });
@@ -59,7 +70,7 @@ export async function syncDealStates(
   if (typeof prisma?.gapAuditEvent?.findMany !== 'function') return out;
   const recorded = await loadDealStates(prisma, input.accountName);
   const commitments = await loadCommitments(prisma, { accountNames: [input.accountName] });
-  const openOn = (dealId: string) => commitments.filter((c) => c.dealId === dealId && !TERMINAL_STATUSES.includes(c.status));
+  const openOn = (deal: { id: string; name: string | null }) => openWorkOn(commitments, deal);
   const record = (dealId: string, state: DealState, name: string | null, closedAt: string | null = null) => prisma.gapAuditEvent.create({ data: { kind: DEAL_STATE, actor: CLOSURE_ACTOR, subject_type: 'account', subject_id: input.accountName, payload: { dealId, state, dealName: name, closedAt } } });
   const skip = async (commitmentId: string, reason: string) => {
     const t = await transitionCommitment(prisma, { commitmentId, to: 'skipped', reason, actor: CLOSURE_ACTOR, now: input.now }).catch(() => null);
@@ -71,14 +82,14 @@ export async function syncDealStates(
     const now = stateOf(d);
     if (was === now) continue;
     // A deal GAP never saw open and holds no work for: recorded, nothing else to do.
-    if (!was && openOn(d.id).length === 0) {
+    if (!was && openOn(d).length === 0) {
       await record(d.id, now, d.name, d.closedAt);
       continue;
     }
     await record(d.id, now, d.name, d.closedAt);
     out.closed.push(d.id);
     const why = `the deal "${d.name ?? d.id}" closed ${now === 'closed' ? 'without an outcome' : now} on ${closedDay(d.closedAt)}; kept for history`;
-    for (const c of openOn(d.id)) await skip(c.commitmentId, why);
+    for (const c of openOn(d)) await skip(c.commitmentId, why);
   }
   // Obsolete prospecting stops once no deal is open: a customer gets no cold follow-up; a lost deal parks them.
   if (out.closed.length && input.open.length === 0) {
@@ -107,6 +118,8 @@ export async function syncDealStates(
 /** Per instance: the Work sweep reconciles closures at most this often, for at most this many accounts. */
 export const CLOSURE_SWEEP_MS = 5 * 60_000;
 export const CLOSURE_SWEEP_ACCOUNTS = 5;
+/** Batch item 8: where the bounded closure sweep resumes (work/cursor.ts), so no account starves the rest. */
+export const CLOSURE_SWEEP_CURSOR = 'gap:closure_sweep_cursor';
 let lastClosureSweep = 0;
 export function resetClosureSweep(): void {
   lastClosureSweep = 0;
@@ -119,13 +132,18 @@ export function resetClosureSweep(): void {
  */
 export async function sweepClosedDeals(
   prisma: PrismaLike,
-  input: { now: Date; openDealIds: ReadonlySet<string> | null; resolve: (accountName: string) => Promise<{ status: string; deals?: Array<{ id: string; name: string | null }>; closed?: ClosedDeal[] }> },
+  input: { now: Date; openDealIds: ReadonlySet<string> | null; /** Batch item 8: the open deals' names, lowercased (a legacy name-scoped obligation is checked too). */ openDealNames?: ReadonlySet<string> | null; resolve: (accountName: string) => Promise<{ status: string; deals?: Array<{ id: string; name: string | null }>; closed?: ClosedDeal[] }> },
 ): Promise<ClosureSyncResult & { accounts: string[] }> {
   const empty = { closed: [] as string[], reopened: [] as string[], skipped: 0, created: 0, accounts: [] as string[] };
   if (!input.openDealIds || input.now.getTime() - lastClosureSweep < CLOSURE_SWEEP_MS) return empty;
   lastClosureSweep = input.now.getTime();
   const all = await loadCommitments(prisma).catch(() => []);
-  const accounts = [...new Set(all.filter((c) => c.dealId && /^\d+$/.test(c.dealId) && !TERMINAL_STATUSES.includes(c.status) && !input.openDealIds!.has(c.dealId)).map((c) => c.accountName))].slice(0, CLOSURE_SWEEP_ACCOUNTS);
+  // Batch item 8: work scoped by a deal id that left the open deals, or by a legacy deal NAME no open deal carries; the
+  // accounts in a stable order resumed after the last one swept, so a few unmapped deals never starve the rest.
+  const left = (dealId: string) => (isDealId(dealId) ? !input.openDealIds!.has(dealId) : !!input.openDealNames && !input.openDealNames.has(dealId.trim().toLowerCase()));
+  const candidates = [...new Set(all.filter((c) => c.dealId && !TERMINAL_STATUSES.includes(c.status) && left(c.dealId)).map((c) => c.accountName))];
+  const accounts = rotateFrom(candidates, (a) => a, await readCursor(prisma, CLOSURE_SWEEP_CURSOR)).slice(0, CLOSURE_SWEEP_ACCOUNTS);
+  if (accounts.length) await writeCursor(prisma, CLOSURE_SWEEP_CURSOR, accounts[accounts.length - 1]);
   const total = { ...empty, accounts };
   for (const a of accounts) {
     const t = await input.resolve(a).catch(() => null);

@@ -398,7 +398,8 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
   // accounts at most, every five minutes per instance; never when the open-deal read is unavailable; real time only).
   if (!lane && !preview) {
     const openDealIds = data.workInput.inDeals.status === 'complete' ? new Set(data.workInput.inDeals.accounts.flatMap((a) => a.deals.map((d) => d.id).filter((x): x is string => !!x))) : null;
-    await sweepClosedDeals(prisma, { now: realNow, openDealIds, resolve: (a) => resolveAccountOpportunity(prisma, a, {}, { timeoutMs: 8_000 }) }).catch(() => null);
+    const openDealNames = data.workInput.inDeals.status === 'complete' ? new Set(data.workInput.inDeals.accounts.flatMap((a) => a.deals.map((d) => (d.name ?? '').trim().toLowerCase()).filter(Boolean))) : null;
+    await sweepClosedDeals(prisma, { now: realNow, openDealIds, openDealNames, resolve: (a) => resolveAccountOpportunity(prisma, a, {}, { timeoutMs: 8_000 }) }).catch(() => null);
   }
   // R15: the summaries come from this instance's memory, then the durable rows (one read), so a cold instance says
   // what the last workspace read said instead of falling back to the lanes.
