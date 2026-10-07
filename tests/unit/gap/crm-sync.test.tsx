@@ -10,12 +10,15 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { NextRequest } from 'next/server';
 import { ledgerDb } from './fixtures/ledger-db';
 import { approveCrmChange, discardCrmChange, loadCrmSync, proposeCrmChange, crmWritesEnabled } from '@/lib/gap/crm-sync';
-import { changeText, crmCandidates, crmStateLine, externalIdFor, proposalIdFor, type CrmChange, type CrmOrigin } from '@/lib/gap/deals/crm-model';
+import { changeText, crmCandidates, crmStateLine, externalIdFor, proposalIdFor, stableHash, taskExternalIdFor, type CrmChange, type CrmOrigin } from '@/lib/gap/deals/crm-model';
+import { completionsOf } from '@/lib/gap/deals/workspace';
+import { taskDueTime } from '@/lib/gap/crm-writer';
 import type { CrmWriter } from '@/lib/gap/crm-writer';
 import { ensureCommitment, loadCommitment, transitionCommitment } from '@/lib/gap/work/commitments';
 import { CrmSyncPanel } from '@/components/gap/crm-sync';
 
-const holder = vi.hoisted(() => ({ client: null as unknown }));
+const holder = vi.hoisted(() => ({ client: null as unknown, inDeals: null as unknown, freshInDeals: null as unknown }));
+vi.mock('@/lib/gap/deals/in-deals', () => ({ loadInDealsSummary: async (_p: unknown, o?: { fresh?: boolean }) => (o?.fresh && holder.freshInDeals ? holder.freshInDeals : holder.inDeals) }));
 vi.mock('@/lib/auth', () => ({ auth: vi.fn(async () => ({ user: { email: 'casey@freightroll.com' } })) }));
 vi.mock('@/lib/prisma', () => ({ get prisma() { return holder.client; } }));
 vi.mock('next/navigation', () => ({ useRouter: () => ({ refresh: vi.fn() }) }));
@@ -29,7 +32,7 @@ const ALLOW = () => undefined;
 
 /** A controlled HubSpot (the external boundary): records every call, can fail, can lose the answer after a write. */
 function fakeHubSpot(over: { mode?: 'ok' | 'down' | 'lose_answer'; property?: { value: string | null; modifiedAt: string | null; source: string | null } } = {}) {
-  const state = { mode: over.mode ?? 'ok', notes: [] as Array<{ id: string; dealId: string; body: string }>, tasks: [] as Array<{ id: string; dealId: string; subject: string; body: string; dueAt: string | null }>, updates: [] as Array<{ dealId: string; property: string; value: string }>, calls: [] as string[], property: over.property ?? { value: 'Pilot scope call with Ann', modifiedAt: '2026-10-01T00:00:00.000Z', source: 'CRM_UI' } };
+  const state = { mode: over.mode ?? 'ok', notes: [] as Array<{ id: string; dealId: string; body: string }>, tasks: [] as Array<{ id: string; dealId: string; subject: string; body: string; dueAt: string | null; ownerId?: string | null; status?: string }>, updates: [] as Array<{ dealId: string; property: string; value: string }>, calls: [] as string[], property: over.property ?? { value: 'Pilot scope call with Ann', modifiedAt: '2026-10-01T00:00:00.000Z', source: 'CRM_UI' } };
   let n = 900;
   const create = <T extends { id: string }>(list: T[], o: T) => {
     if (state.mode === 'down') throw new Error('HubSpot 503: unavailable');
@@ -52,6 +55,20 @@ function fakeHubSpot(over: { mode?: 'ok' | 'down' | 'lose_answer'; property?: { 
       state.calls.push('createTask');
       return create(state.tasks, { id: String((n += 1)), dealId, ...t });
     },
+    async updateTask(taskId, t) {
+      state.calls.push('updateTask');
+      if (state.mode === 'down') throw new Error('HubSpot 503: unavailable');
+      Object.assign(state.tasks.find((x) => x.id === taskId)!, t);
+    },
+    async completeTask(taskId) {
+      state.calls.push('completeTask');
+      if (state.mode === 'down') throw new Error('HubSpot 503: unavailable');
+      state.tasks.find((x) => x.id === taskId)!.status = 'COMPLETED';
+    },
+    async ownerIdFor(email) {
+      state.calls.push('ownerIdFor');
+      return email === 'casey@freightroll.com' ? '85093129' : null;
+    },
     async readDealProperty() {
       state.calls.push('readDealProperty');
       if (state.mode === 'down') throw new Error('HubSpot 503: unavailable');
@@ -68,14 +85,20 @@ function fakeHubSpot(over: { mode?: 'ok' | 'down' | 'lose_answer'; property?: { 
 }
 
 const NOTE: CrmChange = { kind: 'note', objectType: 'deal', objectId: DEAL, body: 'Hi Ann,\n\nHere is what I heard, in your words:\n- "Trailers sit two hours before a door opens." (Ann Scratch)' };
-const RECAP: CrmOrigin = { kind: 'recap', id: `${DEAL}:abc`, label: 'the agreed recap prepared in GAP' };
+const RECAP: CrmOrigin = { kind: 'recap', id: `${DEAL}:${stableHash(NOTE.body)}`, label: 'the agreed recap prepared in GAP' };
 const propose = (p: unknown, change: CrmChange = NOTE, origin: CrmOrigin = RECAP) => proposeCrmChange(p, { accountName: ACCOUNT, dealId: DEAL, dealName: 'YardFlow - Kroger', change, origin, actor: ACTOR, now: NOW });
 
 beforeEach(() => {
   process.env.GAP_OS_ENABLED = 'true';
   process.env.GAP_ROUTING_ENABLED = 'true';
   delete process.env.GAP_HUBSPOT_MIRROR_ENABLED;
+  delete process.env.GAP_CRM_APPROVED_WRITES_ENABLED;
+  holder.inDeals = { status: 'complete', count: 1, accounts: [{ accountName: ACCOUNT, alsoRecordedAs: [], deals: [{ id: DEAL, name: 'YardFlow - Kroger', stage: 'Appointment scheduled', lastActivityAt: null }], dealContacts: 1, people: [], known: 0 }], unresolved: [], checkedAt: NOW.toISOString(), openDeals: 1 };
 });
+
+/** An obligation GAP holds on the deal (the origin a task or a next step must come from). */
+const obligation = (p: unknown, source: { kind: 'capture' | 'plan' | 'seller'; id: string }, title = 'Send Ann the dock schedule template', kind: 'deliverable' | 'deal_step' = 'deliverable') =>
+  ensureCommitment(p, { accountName: ACCOUNT, kind, title, dealId: DEAL, source }, { actor: ACTOR, now: NOW });
 
 describe('a proposal, an explicit approval, and the write only when allowed (R54)', () => {
   it('the exact change is recorded once (its id is its origin, kind and content) and shown with its external id', async () => {
@@ -92,13 +115,13 @@ describe('a proposal, an explicit approval, and the write only when allowed (R54
   });
 
   it('writes OFF (production): the approval is recorded and stands, the state says not written and why, HubSpot is never called', async () => {
-    expect(crmWritesEnabled()).toEqual({ ok: false, reason: 'GAP_HUBSPOT_MIRROR_ENABLED is off' });
+    expect(crmWritesEnabled()).toEqual({ ok: false, reason: 'GAP_CRM_APPROVED_WRITES_ENABLED is off' });
     const db = ledgerDb({ accounts: [ACCOUNT] });
     const hs = fakeHubSpot();
     const p = await propose(db.client());
     const r = await approveCrmChange(db.client(), { proposalId: p.ok ? p.item.proposalId : '', actor: ACTOR, now: NOW }, { writer: hs.writer, assertWriteAllowed: ALLOW });
-    expect(r.ok && r.item).toMatchObject({ state: 'off', approvedBy: ACTOR, detail: 'GAP_HUBSPOT_MIRROR_ENABLED is off' });
-    expect(r.ok && crmStateLine(r.item)).toBe('Approved by casey@freightroll.com, not written: HubSpot writes are off here (GAP_HUBSPOT_MIRROR_ENABLED is off). Nothing reached HubSpot.');
+    expect(r.ok && r.item).toMatchObject({ state: 'off', approvedBy: ACTOR, detail: 'GAP_CRM_APPROVED_WRITES_ENABLED is off' });
+    expect(r.ok && crmStateLine(r.item)).toBe('Approved by casey@freightroll.com, not written: HubSpot writes are off here (GAP_CRM_APPROVED_WRITES_ENABLED is off). Nothing reached HubSpot.');
     expect(hs.state.calls).toEqual([]);
     expect(db.store.gapAuditEvent.map((x) => x.kind)).toEqual(['crm.sync_proposed', 'crm.sync_approved', 'crm.sync_attempt', 'crm.sync_result']);
   });
@@ -159,6 +182,7 @@ describe('a proposal, an explicit approval, and the write only when allowed (R54
     const hs = fakeHubSpot({ mode: 'lose_answer' });
     const task: CrmChange = { kind: 'task', objectType: 'deal', objectId: DEAL, subject: 'Send Ann the dock schedule template', body: 'Send Ann the dock schedule template\nFrom GAP: an obligation recorded in GAP.', dueAt: '2026-10-09T13:00:00.000Z' };
     const origin: CrmOrigin = { kind: 'commitment', id: 'capture:n1:k1', label: 'the GAP obligation "Send Ann the dock schedule template"' };
+    await obligation(db.client(), { kind: 'capture', id: 'n1:k1' });
     const p = await propose(db.client(), task, origin);
     const id = p.ok ? p.item.proposalId : '';
     expect((await approveCrmChange(db.client(), { proposalId: id, actor: ACTOR, now: NOW }, { writer: hs.writer, writesEnabled: ON, assertWriteAllowed: ALLOW })).ok).toBe(true);
@@ -174,6 +198,7 @@ describe('a proposal, an explicit approval, and the write only when allowed (R54
     const origin: CrmOrigin = { kind: 'plan', id: `plan:${DEAL}:pilot`, label: 'the next agreed milestone in the plan' };
     const human = fakeHubSpot({ property: { value: 'Ann is out until Oct 12', modifiedAt: '2026-10-06T20:00:00.000Z', source: 'CRM_UI' } });
     const db = ledgerDb({ accounts: [ACCOUNT] });
+    for (const d of [db]) await obligation(d.client(), { kind: 'plan', id: `${DEAL}:pilot` }, 'Pilot at Columbus: two weeks', 'deal_step');
     const p = await propose(db.client(), change, origin);
     const r = await approveCrmChange(db.client(), { proposalId: p.ok ? p.item.proposalId : '', actor: ACTOR, now: NOW }, { writer: human.writer, writesEnabled: ON, assertWriteAllowed: ALLOW });
     expect(r.ok && r.item).toMatchObject({ state: 'conflict', detail: '"Ann is out until Oct 12", changed 2026-10-06 by CRM_UI' });
@@ -181,11 +206,13 @@ describe('a proposal, an explicit approval, and the write only when allowed (R54
     // The same value, edited by a person AFTER the proposal: still never overwritten.
     const touched = fakeHubSpot({ property: { value: 'Pilot scope call with Ann', modifiedAt: '2026-10-06T21:00:00.000Z', source: 'CRM_UI' } });
     const db2 = ledgerDb({ accounts: [ACCOUNT] });
+    await obligation(db2.client(), { kind: 'plan', id: `${DEAL}:pilot` }, 'Pilot at Columbus: two weeks', 'deal_step');
     const p2 = await propose(db2.client(), change, origin);
     expect((await approveCrmChange(db2.client(), { proposalId: p2.ok ? p2.item.proposalId : '', actor: ACTOR, now: new Date('2026-10-06T22:00:00Z') }, { writer: touched.writer, writesEnabled: ON, assertWriteAllowed: ALLOW })).ok && touched.state.updates).toEqual([]);
     // Unchanged since the seller saw it: written.
     const clean = fakeHubSpot();
     const db3 = ledgerDb({ accounts: [ACCOUNT] });
+    await obligation(db3.client(), { kind: 'plan', id: `${DEAL}:pilot` }, 'Pilot at Columbus: two weeks', 'deal_step');
     const p3 = await propose(db3.client(), change, origin);
     const w = await approveCrmChange(db3.client(), { proposalId: p3.ok ? p3.item.proposalId : '', actor: ACTOR, now: NOW }, { writer: clean.writer, writesEnabled: ON, assertWriteAllowed: ALLOW });
     expect(w.ok && w.item.state).toBe('written');
@@ -208,15 +235,135 @@ describe('a proposal, an explicit approval, and the write only when allowed (R54
   it('a CRM outage never loses the local completion receipt: the obligation stays done, the proposed task keeps its text', async () => {
     const db = ledgerDb({ accounts: [ACCOUNT] });
     const p = db.client();
-    const made = await ensureCommitment(p, { accountName: ACCOUNT, kind: 'deliverable', title: 'Send Ann the dock schedule template', dealId: DEAL, source: { kind: 'seller', id: 's1' } }, { actor: ACTOR, now: NOW });
+    const made = await obligation(p, { kind: 'seller', id: 's1' });
     const cid = made.ok ? made.commitment.commitmentId : '';
-    await transitionCommitment(p, { commitmentId: cid, to: 'done', proof: { kind: 'seller', note: 'sent it' }, actor: ACTOR, now: NOW });
-    const task: CrmChange = { kind: 'task', objectType: 'deal', objectId: DEAL, subject: 'Send Ann the dock schedule template', body: 'Done in GAP: sent it.', dueAt: null };
+    const task: CrmChange = { kind: 'task', objectType: 'deal', objectId: DEAL, subject: 'Send Ann the dock schedule template', body: 'Send Ann the dock schedule template', dueAt: null };
     const prop = await propose(p, task, { kind: 'commitment', id: cid, label: 'the GAP obligation' });
     const r = await approveCrmChange(p, { proposalId: prop.ok ? prop.item.proposalId : '', actor: ACTOR, now: NOW }, { writer: fakeHubSpot({ mode: 'down' }).writer, writesEnabled: ON, assertWriteAllowed: ALLOW });
     expect(r.ok && r.item.state).toBe('failed');
+    await transitionCommitment(p, { commitmentId: cid, to: 'done', proof: { kind: 'seller', note: 'sent it' }, actor: ACTOR, now: NOW });
     expect((await loadCommitment(db.client(), cid))?.status).toBe('done');
     expect((await loadCrmSync(db.client(), ACCOUNT))[0].change).toEqual(task);
+  });
+});
+
+describe('batch item 9: approved HubSpot changes are bounded to live work', () => {
+  it('an "off" approval retried after writes turn on, for an obligation since done or skipped, answers origin_closed and calls nothing', async () => {
+    for (const end of ['done', 'skipped'] as const) {
+      const db = ledgerDb({ accounts: [ACCOUNT] });
+      const p = db.client();
+      const made = await obligation(p, { kind: 'seller', id: `s-${end}` });
+      const cid = made.ok ? made.commitment.commitmentId : '';
+      const task: CrmChange = { kind: 'task', objectType: 'deal', objectId: DEAL, subject: 'Send Ann the dock schedule template', body: 'x', dueAt: null };
+      const prop = await propose(p, task, { kind: 'commitment', id: cid, label: 'the GAP obligation' });
+      const id = prop.ok ? prop.item.proposalId : '';
+      expect((await approveCrmChange(p, { proposalId: id, actor: ACTOR, now: NOW })).ok && (await loadCrmSync(p, ACCOUNT))[0].state).toBe('off');
+      await transitionCommitment(p, end === 'done' ? { commitmentId: cid, to: 'done', proof: { kind: 'seller', note: 'sent it' }, actor: ACTOR, now: NOW } : { commitmentId: cid, to: 'skipped', reason: 'not needed', actor: ACTOR, now: NOW });
+      const rows = db.store.gapAuditEvent.length;
+      const hs = fakeHubSpot();
+      const retry = await approveCrmChange(p, { proposalId: id, actor: ACTOR, now: new Date(NOW.getTime() + 120_000), retry: true }, { writer: hs.writer, writesEnabled: ON, assertWriteAllowed: ALLOW });
+      expect(retry).toMatchObject({ ok: false, reason: 'origin_closed', detail: `the obligation "Send Ann the dock schedule template" is ${end} in GAP: nothing is written for it` });
+      expect(hs.state.calls).toEqual([]);
+      expect(db.store.gapAuditEvent.length).toBe(rows);
+    }
+  });
+
+  it('a recap whose origin does not match its own text is refused bad_origin (a recap id is never free text)', async () => {
+    const db = ledgerDb({ accounts: [ACCOUNT] });
+    const p = db.client();
+    const prop = await propose(p, NOTE, { ...RECAP, id: `${DEAL}:${stableHash('a different recap')}` });
+    const hs = fakeHubSpot();
+    expect(await approveCrmChange(p, { proposalId: prop.ok ? prop.item.proposalId : '', actor: ACTOR, now: NOW }, { writer: hs.writer, writesEnabled: ON, assertWriteAllowed: ALLOW })).toMatchObject({ ok: false, reason: 'bad_origin', detail: 'the recap does not match its own text' });
+    expect(hs.state.calls).toEqual([]);
+  });
+
+  it('a deal the closure ledger says closed answers origin_closed at approve and at retry, the recap included', async () => {
+    const db = ledgerDb({ accounts: [ACCOUNT] });
+    const p = db.client();
+    const prop = await propose(p);
+    db.store.gapAuditEvent.push({ id: 'ds1', kind: 'deal.state', actor: 'gap:deals', subject_type: 'account', subject_id: ACCOUNT, created_at: new Date(NOW.getTime() - 60_000), payload: { dealId: DEAL, state: 'won' } });
+    const hs = fakeHubSpot();
+    expect(await approveCrmChange(p, { proposalId: prop.ok ? prop.item.proposalId : '', actor: ACTOR, now: NOW }, { writer: hs.writer, writesEnabled: ON, assertWriteAllowed: ALLOW })).toMatchObject({ ok: false, reason: 'origin_closed', detail: expect.stringMatching(/^the deal closed \(won\)/) });
+    expect(hs.state.calls).toEqual([]);
+  });
+
+  it('an amended obligation keeps ONE task: the newer text revises the proposal (approve again); once written, the task is updated, never created twice', async () => {
+    const db = ledgerDb({ accounts: [ACCOUNT] });
+    const p = db.client();
+    const made = await obligation(p, { kind: 'seller', id: 'amend' });
+    const origin: CrmOrigin = { kind: 'commitment', id: made.ok ? made.commitment.commitmentId : '', label: 'the GAP obligation' };
+    const v1: CrmChange = { kind: 'task', objectType: 'deal', objectId: DEAL, subject: 'Send Ann the dock schedule template', body: 'v1', dueAt: null };
+    const v2: CrmChange = { ...v1, subject: 'Send Ann the dock and gate schedule template', body: 'v2', dueAt: '2026-10-09T13:00:00.000Z' };
+    expect(proposalIdFor(origin, v1)).toBe(proposalIdFor(origin, v2));
+    const a = await propose(p, v1, origin);
+    const hs = fakeHubSpot();
+    const id = a.ok ? a.item.proposalId : '';
+    expect((await approveCrmChange(p, { proposalId: id, actor: ACTOR, now: NOW }, { writer: hs.writer, writesEnabled: ON, assertWriteAllowed: ALLOW })).ok).toBe(true);
+    expect(hs.state.tasks).toHaveLength(1);
+    // The owner is the approver's HubSpot owner; an undated obligation is due the next business day, never "now".
+    expect(hs.state.tasks[0]).toMatchObject({ ownerId: '85093129', dueAt: null });
+    expect(taskDueTime(null, NOW)).toBe('2026-10-07T13:00:00.000Z');
+    const b = await propose(p, v2, origin);
+    expect(b.ok && b.item).toMatchObject({ proposalId: id, state: 'proposed', change: v2, objectRef: hs.state.tasks[0].id });
+    expect(b.ok && crmStateLine(b.item)).toBe('Updated in GAP since it was written: approve again to update the task in HubSpot.');
+    const w = await approveCrmChange(p, { proposalId: id, actor: ACTOR, now: new Date(NOW.getTime() + 120_000) }, { writer: hs.writer, writesEnabled: ON, assertWriteAllowed: ALLOW });
+    expect(w.ok && w.item).toMatchObject({ state: 'written', detail: 'the task is updated in HubSpot' });
+    expect(hs.state.tasks).toHaveLength(1);
+    expect(hs.state.tasks[0]).toMatchObject({ subject: 'Send Ann the dock and gate schedule template', dueAt: '2026-10-09T13:00:00.000Z' });
+    expect(hs.state.calls.filter((c) => c === 'createTask')).toHaveLength(1);
+  });
+
+  it('a done obligation proposes completing its task; the approval completes the task found by its GAP reference', async () => {
+    const db = ledgerDb({ accounts: [ACCOUNT] });
+    const p = db.client();
+    const made = await obligation(p, { kind: 'seller', id: 'finish' });
+    const cid = made.ok ? made.commitment.commitmentId : '';
+    const origin: CrmOrigin = { kind: 'commitment', id: cid, label: 'the GAP obligation' };
+    const task: CrmChange = { kind: 'task', objectType: 'deal', objectId: DEAL, subject: 'Send Ann the dock schedule template', body: 'x', dueAt: null };
+    const hs = fakeHubSpot();
+    const t = await propose(p, task, origin);
+    await approveCrmChange(p, { proposalId: t.ok ? t.item.proposalId : '', actor: ACTOR, now: NOW }, { writer: hs.writer, writesEnabled: ON, assertWriteAllowed: ALLOW });
+    expect(hs.state.tasks[0].body).toContain(taskExternalIdFor(origin, DEAL));
+    await transitionCommitment(p, { commitmentId: cid, to: 'done', proof: { kind: 'seller', note: 'sent it' }, actor: ACTOR, now: NOW });
+    const items = await loadCrmSync(p, ACCOUNT);
+    const completions = completionsOf(items, [{ commitmentId: cid, status: 'done', title: 'Send Ann the dock schedule template' }], DEAL);
+    expect(completions).toEqual([{ commitmentId: cid, title: 'Send Ann the dock schedule template' }]);
+    const c = crmCandidates({ deal: { id: DEAL, name: 'YardFlow - Kroger', nextStep: null }, recap: null, commitments: [], nextMilestone: null, completions });
+    expect(c).toEqual([{ change: { kind: 'task_complete', objectType: 'deal', objectId: DEAL, subject: 'Send Ann the dock schedule template' }, origin: { kind: 'commitment', id: cid, label: 'the GAP obligation "Send Ann the dock schedule template", done in GAP' } }]);
+    const done = await propose(p, c[0].change, c[0].origin);
+    const r = await approveCrmChange(p, { proposalId: done.ok ? done.item.proposalId : '', actor: ACTOR, now: new Date(NOW.getTime() + 120_000) }, { writer: hs.writer, writesEnabled: ON, assertWriteAllowed: ALLOW });
+    expect(r.ok && r.item).toMatchObject({ state: 'written', objectRef: hs.state.tasks[0].id, detail: 'the task is completed in HubSpot' });
+    expect(hs.state.tasks[0].status).toBe('COMPLETED');
+    // An open obligation cannot be marked complete in HubSpot.
+    const open = await obligation(p, { kind: 'seller', id: 'still-open' });
+    const premature = await propose(p, { kind: 'task_complete', objectType: 'deal', objectId: DEAL, subject: 'x' }, { kind: 'commitment', id: open.ok ? open.commitment.commitmentId : '', label: 'x' });
+    expect(await approveCrmChange(p, { proposalId: premature.ok ? premature.item.proposalId : '', actor: ACTOR, now: NOW }, { writer: hs.writer, writesEnabled: ON, assertWriteAllowed: ALLOW })).toMatchObject({ ok: false, reason: 'bad_origin' });
+  });
+
+  it('after a conflict the next step can be proposed again from HubSpot’s newer value (a new proposal, never the stuck one)', async () => {
+    const db = ledgerDb({ accounts: [ACCOUNT] });
+    const p = db.client();
+    await obligation(p, { kind: 'plan', id: `${DEAL}:pilot` }, 'Pilot at Columbus: two weeks', 'deal_step');
+    const origin: CrmOrigin = { kind: 'plan', id: `plan:${DEAL}:pilot`, label: 'the next agreed milestone in the plan' };
+    const seen: CrmChange = { kind: 'deal_property', objectType: 'deal', objectId: DEAL, property: 'hs_next_step', from: 'Pilot scope call with Ann', to: 'Pilot at Columbus: two weeks' };
+    const human = fakeHubSpot({ property: { value: 'Ann is out until Oct 12', modifiedAt: '2026-10-06T20:00:00.000Z', source: 'CRM_UI' } });
+    const first = await propose(p, seen, origin);
+    expect((await approveCrmChange(p, { proposalId: first.ok ? first.item.proposalId : '', actor: ACTOR, now: NOW }, { writer: human.writer, writesEnabled: ON, assertWriteAllowed: ALLOW })).ok).toBe(true);
+    const again = crmCandidates({ deal: { id: DEAL, name: 'YardFlow - Kroger', nextStep: 'Ann is out until Oct 12' }, recap: null, commitments: [], nextMilestone: { commitmentId: `plan:${DEAL}:pilot`, title: 'Pilot at Columbus: two weeks', dueDay: null } });
+    expect(proposalIdFor(again[0].origin, again[0].change)).not.toBe(first.ok ? first.item.proposalId : '');
+    const second = await propose(p, again[0].change, again[0].origin);
+    expect(second).toMatchObject({ ok: true, created: true, item: { state: 'proposed' } });
+  });
+
+  it('approved writes have their own flag: the mirror flag alone writes nothing, and the approved-writes flag alone does not turn the mirror on', async () => {
+    process.env.HUBSPOT_ACCESS_TOKEN = process.env.HUBSPOT_ACCESS_TOKEN ?? '';
+    process.env.GAP_HUBSPOT_MIRROR_ENABLED = 'true';
+    expect(crmWritesEnabled()).toEqual({ ok: false, reason: 'GAP_CRM_APPROVED_WRITES_ENABLED is off' });
+    delete process.env.GAP_HUBSPOT_MIRROR_ENABLED;
+    process.env.GAP_CRM_APPROVED_WRITES_ENABLED = 'true';
+    expect(crmWritesEnabled().ok === true || crmWritesEnabled().reason !== 'GAP_CRM_APPROVED_WRITES_ENABLED is off').toBe(true);
+    const { gapFlag } = await import('@/lib/gap/flags');
+    expect(gapFlag('GAP_HUBSPOT_MIRROR_ENABLED')).toBe(false);
   });
 });
 
@@ -258,16 +405,52 @@ describe('the candidates, the route and the view (R54)', () => {
     expect(db.store.gapAuditEvent.map((x) => x.kind)).toEqual(['crm.sync_proposed', 'crm.sync_approved', 'crm.sync_attempt', 'crm.sync_result']);
     const bad = await post({ op: 'approve', accountName: ACCOUNT, dealId: DEAL, change: { kind: 'task', objectType: 'deal', objectId: DEAL, subject: 'x', body: '', dueAt: null }, origin: { kind: 'commitment', id: 'seller:nope', label: 'x' } });
     expect([bad.status, ((await bad.json()) as { error: string }).error]).toEqual([400, 'bad_origin']);
+    // Batch item 9: a deal that is not one of the account's open deals, an unreadable open-deal list, a done obligation.
+    const notMine = await post({ op: 'approve', accountName: ACCOUNT, dealId: '70009', change: { ...NOTE, objectId: '70009' }, origin: { ...RECAP, id: `70009:${stableHash(NOTE.body)}` } });
+    expect([notMine.status, await notMine.json()]).toEqual([400, { error: 'bad_origin', detail: `deal 70009 is not an open deal of ${ACCOUNT}` }]);
+    holder.inDeals = { status: 'unavailable', count: null, accounts: [], unresolved: [], checkedAt: NOW.toISOString(), openDeals: 0 };
+    const unverified = await post({ op: 'approve', accountName: ACCOUNT, dealId: DEAL, change: NOTE, origin: RECAP });
+    expect([unverified.status, ((await unverified.json()) as { error: string }).error]).toEqual([409, 'deal_unverified']);
+    holder.inDeals = { status: 'complete', count: 1, accounts: [{ accountName: ACCOUNT, alsoRecordedAs: [], deals: [{ id: DEAL, name: 'YardFlow - Kroger', stage: 'x', lastActivityAt: null }], dealContacts: 1, people: [], known: 0 }], unresolved: [], checkedAt: NOW.toISOString(), openDeals: 1 };
+    const doneOne = await obligation(holder.client, { kind: 'seller', id: 'route-done' });
+    const doneId = doneOne.ok ? doneOne.commitment.commitmentId : '';
+    await transitionCommitment(holder.client, { commitmentId: doneId, to: 'done', proof: { kind: 'seller', note: 'sent it' }, actor: ACTOR, now: NOW });
+    const closed = await post({ op: 'approve', accountName: ACCOUNT, dealId: DEAL, change: { kind: 'task', objectType: 'deal', objectId: DEAL, subject: 'Send Ann the dock schedule template', body: 'x', dueAt: null }, origin: { kind: 'commitment', id: doneId, label: 'x' } });
+    expect([closed.status, ((await closed.json()) as { error: string }).error]).toEqual([409, 'origin_closed']);
+    // A deal opened since the cached In Deals read is read fresh once, never refused on a stale list.
+    holder.freshInDeals = holder.inDeals;
+    holder.inDeals = { status: 'complete', count: 0, accounts: [], unresolved: [], checkedAt: NOW.toISOString(), openDeals: 0 };
+    const fresh = await post({ op: 'propose', accountName: ACCOUNT, dealId: DEAL, change: { ...NOTE, body: `${NOTE.body} (fresh)` }, origin: { ...RECAP, id: `${DEAL}:${stableHash(`${NOTE.body} (fresh)`)}` } });
+    expect(fresh.status).toBe(200);
+    holder.freshInDeals = null;
     const otherDeal = await post({ op: 'approve', accountName: ACCOUNT, dealId: DEAL, change: NOTE, origin: { kind: 'recap', id: '70002:abc', label: 'x' } });
     expect(otherDeal.status).toBe(400);
     const field = await post({ op: 'approve', accountName: ACCOUNT, dealId: DEAL, change: { kind: 'deal_property', objectType: 'deal', objectId: DEAL, property: 'amount', from: null, to: '1' }, origin: RECAP });
     expect(field.status).toBe(400);
     const list = (await (await GET(new NextRequest(`http://localhost/api/gap/crm-sync?account=${encodeURIComponent(ACCOUNT)}`))).json()) as { items: Array<{ state: string }> };
-    expect(list.items.map((i) => i.state)).toEqual(['off']);
+    // The approved recap (off) and the fresh-read proposal above (proposed), newest first.
+    expect(list.items.map((i) => i.state)).toEqual(['proposed', 'off']);
+  });
+
+  it('batch item 9, the view: an amended obligation is offered as an update of its one task; a refusal says why and never claims a write', async () => {
+    const origin: CrmOrigin = { kind: 'commitment', id: 'seller:s9', label: 'the GAP obligation' };
+    const v1: CrmChange = { kind: 'task', objectType: 'deal', objectId: DEAL, subject: 'Send the template', body: 'v1', dueAt: null };
+    const v2: CrmChange = { ...v1, subject: 'Send the dock and gate template', body: 'v2' };
+    const id = proposalIdFor(origin, v1);
+    const written = { proposalId: id, accountName: ACCOUNT, dealId: DEAL, dealName: 'YardFlow - Kroger', change: v1, externalId: externalIdFor(id), origin, proposedAt: NOW.toISOString(), proposedBy: ACTOR, state: 'written' as const, approvedBy: ACTOR, approvedAt: NOW.toISOString(), objectRef: '901', detail: null, attempts: 1, lastAttemptAt: NOW.toISOString() };
+    const fetchMock = vi.fn(async () => new Response(JSON.stringify({ error: 'origin_closed', detail: 'the obligation "Send the template" is done in GAP: nothing is written for it', item: written }), { status: 409 }));
+    vi.stubGlobal('fetch', fetchMock);
+    render(<CrmSyncPanel accountName={ACCOUNT} dealId={DEAL} dealName="YardFlow - Kroger" candidates={[{ change: v1, origin }, { change: v2, origin }]} items={[written]} />);
+    const offered = screen.getAllByTestId('crm-proposal');
+    expect(offered).toHaveLength(1);
+    expect(offered[0].textContent).toContain('The obligation changed: this updates its one task.');
+    fireEvent.click(screen.getByTestId('crm-approve'));
+    await waitFor(() => expect(screen.getByTestId('crm-status').textContent).toBe('Not done: the obligation "Send the template" is done in GAP: nothing is written for it.'));
+    vi.unstubAllGlobals();
   });
 
   it('the view shows the exact change and one approval click; a recorded one shows its state and a retry', async () => {
-    const fetchMock = vi.fn(async () => new Response(JSON.stringify({ ok: true, item: { state: 'off', detail: 'GAP_HUBSPOT_MIRROR_ENABLED is off', approvedBy: ACTOR, objectRef: null } }), { status: 200 }));
+    const fetchMock = vi.fn(async () => new Response(JSON.stringify({ ok: true, item: { state: 'off', detail: 'GAP_CRM_APPROVED_WRITES_ENABLED is off', approvedBy: ACTOR, objectRef: null } }), { status: 200 }));
     vi.stubGlobal('fetch', fetchMock);
     render(<CrmSyncPanel accountName={ACCOUNT} dealId={DEAL} dealName="YardFlow - Kroger" candidates={[{ change: NOTE, origin: RECAP }]} items={[]} />);
     expect(screen.getByTestId('crm-proposal-text').textContent).toBe(changeText({ change: NOTE, dealName: 'YardFlow - Kroger', dealId: DEAL, externalId: externalIdFor(proposalIdFor(RECAP, NOTE)) }));

@@ -5,8 +5,8 @@
  * hypothesis and disposition notes, behind GAP_HUBSPOT_MIRROR_ENABLED) is unchanged. Anything ELSE GAP would put in
  * HubSpot (a deal note, a deal task, a deal field) is a PROPOSAL the seller sees exactly, then approves with one
  * explicit click: an append-only `crm.sync_proposed` -> `crm.sync_approved` pair, recorded whether or not the write may
- * run. The write runs only when GAP_HUBSPOT_MIRROR_ENABLED is on (it is OFF in production); every outcome is a
- * `crm.sync_result` row, so the state is always visible:
+ * run. The write runs only when GAP_CRM_APPROVED_WRITES_ENABLED is on (batch item 9: its own flag, separate from the
+ * automatic mirror's; OFF by default); every outcome is a `crm.sync_result` row, so the state is always visible:
  *
  *   proposed     the exact change, recorded; not approved
  *   approved     approved; the write is starting (or stopped mid-way: retry is safe)
@@ -16,7 +16,12 @@
  *   conflict     HubSpot holds a NEWER value than the one the seller saw (a human edited it): never overwritten
  *   discarded    the seller dropped it before it was written
  *
- * Idempotent by construction: the proposal id is derived from its origin, kind and exact content, every body carries
+ * Batch item 9: an approval or a retry is refused (`origin_closed`, nothing called) when the obligation it came from is
+ * done or skipped or the deal closed; a done obligation proposes completing its task; amending an obligation revises its
+ * ONE task (the id is the obligation and the kind, the text is the change); a deal field's id carries the value the
+ * seller saw, so after a conflict the step can be proposed again from HubSpot's newer value.
+ *
+ * Idempotent by construction: the proposal id is derived from its origin, kind and content, every body carries
  * a stable external id (`gapcrm<id>`) that the writer searches for before creating anything (so a write whose answer
  * was lost is recovered, never duplicated), and the mirror ledger's idempotency row marks it written.
  */
@@ -36,6 +41,8 @@ export type CrmDealProperty = (typeof CRM_DEAL_PROPERTIES)[number];
 export type CrmChange =
   | { kind: 'note'; objectType: 'deal'; objectId: string; body: string }
   | { kind: 'task'; objectType: 'deal'; objectId: string; subject: string; body: string; dueAt: string | null }
+  /** Batch item 9: the obligation is done in GAP: mark its HubSpot task (found by its GAP reference) completed. */
+  | { kind: 'task_complete'; objectType: 'deal'; objectId: string; subject: string }
   | { kind: 'deal_property'; objectType: 'deal'; objectId: string; property: CrmDealProperty; from: string | null; to: string };
 
 /** What in GAP produced the change (origin tracking). */
@@ -60,6 +67,17 @@ export interface CrmProposal {
 
 export type CrmState = 'proposed' | 'approved' | 'off' | 'written' | 'failed' | 'conflict' | 'discarded';
 
+/** Batch item 9: the refusals an approval or a retry can answer, in seller words. */
+export const CRM_REFUSAL_TEXT: Record<string, string> = {
+  origin_closed: 'what it came from is closed (the obligation is done or skipped, or the deal closed): nothing was written',
+  bad_origin: 'GAP holds no such origin on this deal: nothing was recorded',
+  deal_unverified: 'HubSpot could not confirm this is an open deal of the account just now: nothing was recorded. Try again',
+  not_approved: 'it was never approved',
+  discarded: 'it was discarded',
+  already_written: 'it is already in HubSpot',
+  in_progress: 'a write is already in progress',
+};
+
 export interface CrmSyncItem extends CrmProposal {
   state: CrmState;
   approvedBy: string | null;
@@ -70,6 +88,8 @@ export interface CrmSyncItem extends CrmProposal {
   detail: string | null;
   attempts: number;
   lastAttemptAt: string | null;
+  /** Batch item 9: the obligation was amended after the proposal: its one task carries the newer text (approve again). */
+  revisedAt?: string | null;
 }
 
 /** A small, stable, client-safe hash (FNV-1a, 52 bits) for derived ids. */
@@ -84,12 +104,26 @@ export function stableHash(s: string): string {
   return `${h1.toString(16).padStart(8, '0')}${(h2 & 0xfffff).toString(16).padStart(5, '0')}`;
 }
 
-/** What the content of a change is, without the marker (the id is derived from it). */
-const contentOf = (c: CrmChange) => (c.kind === 'note' ? c.body : c.kind === 'task' ? `${c.subject}\n${c.body}\n${c.dueAt ?? ''}` : `${c.property}=${c.to}`);
+/** What the content of a change is, without the marker. */
+export const contentOf = (c: CrmChange) => (c.kind === 'note' ? c.body : c.kind === 'task' ? `${c.subject}\n${c.body}\n${c.dueAt ?? ''}` : c.kind === 'task_complete' ? `complete:${c.subject}` : `${c.property}:${c.from ?? ''}->${c.to}`);
 
-/** The proposal id: one per origin, kind, object and exact content, so the same approval can never make a second. */
-export const proposalIdFor = (origin: Pick<CrmOrigin, 'kind' | 'id'>, change: CrmChange) => `crm${stableHash(`${origin.kind}:${origin.id}|${change.kind}|${change.objectType}:${change.objectId}|${contentOf(change)}`)}`;
+/** Is this the same exact change (the content the seller would approve)? */
+export const sameChange = (a: CrmChange, b: CrmChange) => a.kind === b.kind && a.objectId === b.objectId && contentOf(a) === contentOf(b);
+
+/**
+ * The proposal id. Batch item 9 (addendum b): an obligation's task (and its completion) is keyed on the obligation and
+ * the kind, never its text, so amending the obligation revises its ONE task; a deal field is keyed on the value the
+ * seller saw and the new one (after a conflict, HubSpot's newer value opens a new proposal); a note stays keyed on its
+ * exact text. The same approval can never make a second.
+ */
+export const proposalIdFor = (origin: Pick<CrmOrigin, 'kind' | 'id'>, change: CrmChange) => {
+  const object = `${change.objectType}:${change.objectId}`;
+  if ((origin.kind === 'commitment' || origin.kind === 'plan') && (change.kind === 'task' || change.kind === 'task_complete')) return `crm${stableHash(`${origin.kind}:${origin.id}|${change.kind}|${object}`)}`;
+  return `crm${stableHash(`${origin.kind}:${origin.id}|${change.kind}|${object}|${contentOf(change)}`)}`;
+};
 export const externalIdFor = (proposalId: string) => `gapcrm${proposalId.replace(/^crm/, '')}`;
+/** Batch item 9: the GAP reference of an obligation's task on a deal (what a completion looks for in HubSpot). */
+export const taskExternalIdFor = (origin: Pick<CrmOrigin, 'kind' | 'id'>, dealId: string) => externalIdFor(proposalIdFor(origin, { kind: 'task', objectType: 'deal', objectId: dealId, subject: '', body: '', dueAt: null }));
 export const MARKER_LINE = (externalId: string) => `GAP reference ${externalId}`;
 
 /** The exact text HubSpot will hold for a note or a task body: the content and, last, the external id line. */
@@ -102,7 +136,8 @@ export function changeText(p: Pick<CrmProposal, 'change' | 'dealName' | 'dealId'
   const deal = p.dealName ?? `deal ${p.dealId}`;
   const c = p.change;
   if (c.kind === 'note') return `Add a note to the HubSpot deal "${deal}":\n${withMarker(c.body, p.externalId)}`;
-  if (c.kind === 'task') return `Create a HubSpot task on "${deal}": "${c.subject}"${c.dueAt ? `, due ${new Date(c.dueAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' })}` : ', no due date'}.\n${withMarker(c.body, p.externalId)}`;
+  if (c.kind === 'task') return `Create a HubSpot task on "${deal}": "${c.subject}"${c.dueAt ? `, due ${new Date(c.dueAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' })}` : ', no due date in GAP (HubSpot needs one: it shows the next business day)'}, owned by the person who approves it.\n${withMarker(c.body, p.externalId)}`;
+  if (c.kind === 'task_complete') return `Mark the HubSpot task "${c.subject}" on "${deal}" completed: it is done in GAP.`;
   return `Change "${deal}" next step in HubSpot from ${c.from ? `"${c.from}"` : 'empty'} to "${c.to}". Not written if HubSpot holds a newer value than "${c.from ?? ''}".`;
 }
 
@@ -123,10 +158,23 @@ export function foldCrmSync(rows: readonly CrmRow[]): CrmSyncItem[] {
     if (!id) continue;
     const at = new Date(r.created_at).toISOString();
     if (r.kind === CRM_PROPOSED) {
-      if (items.has(id)) continue;
       const proposal = p.proposal as CrmProposal | undefined;
       if (!proposal || !proposal.change) continue;
-      items.set(id, { ...proposal, state: 'proposed', approvedBy: null, approvedAt: null, objectRef: null, detail: null, attempts: 0, lastAttemptAt: null });
+      const have = items.get(id);
+      // Batch item 9: a revision (the obligation was amended) carries the newer text into the same proposal and asks for
+      // a new approval; a discarded proposal stays discarded.
+      if (have) {
+        if (p.revision === true && have.state !== 'discarded') {
+          have.change = proposal.change;
+          have.revisedAt = at;
+          have.state = 'proposed';
+          have.approvedAt = null;
+          have.approvedBy = null;
+          have.detail = null;
+        }
+        continue;
+      }
+      items.set(id, { ...proposal, state: 'proposed', approvedBy: null, approvedAt: null, objectRef: null, detail: null, attempts: 0, lastAttemptAt: null, revisedAt: null });
       continue;
     }
     const it = items.get(id);
@@ -156,7 +204,7 @@ export function foldCrmSync(rows: readonly CrmRow[]): CrmSyncItem[] {
 export function crmStateLine(it: Pick<CrmSyncItem, 'state' | 'detail' | 'objectRef' | 'approvedBy'>): string {
   switch (it.state) {
     case 'proposed':
-      return 'Proposed: not approved, nothing written.';
+      return it.objectRef ? 'Updated in GAP since it was written: approve again to update the task in HubSpot.' : 'Proposed: not approved, nothing written.';
     case 'approved':
       return 'Approved: the write was started and has no answer yet. Retry is safe (it never writes twice).';
     case 'off':
@@ -182,11 +230,16 @@ export function crmCandidates(i: {
   recap: { text: string; ready: boolean } | null;
   commitments: ReadonlyArray<{ commitmentId: string; kind: string; title: string; basis: string | null; dueAt: string | null; status: string }>;
   nextMilestone: { commitmentId: string; title: string; dueDay: string | null } | null;
+  /** Batch item 9: obligations done in GAP whose task is in HubSpot (each proposes completing that task). */
+  completions?: ReadonlyArray<{ commitmentId: string; title: string }>;
 }): Array<{ change: CrmChange; origin: CrmOrigin }> {
   const out: Array<{ change: CrmChange; origin: CrmOrigin }> = [];
   if (i.recap?.ready) out.push({ change: { kind: 'note', objectType: 'deal', objectId: i.deal.id, body: i.recap.text }, origin: { kind: 'recap', id: `${i.deal.id}:${stableHash(i.recap.text)}`, label: 'the agreed recap prepared in GAP' } });
   for (const c of i.commitments.filter((x) => (x.kind === 'deliverable' || x.kind === 'answer_request' || x.kind === 'deal_step') && x.status === 'open').slice(0, 3)) {
     out.push({ change: { kind: 'task', objectType: 'deal', objectId: i.deal.id, subject: c.title.slice(0, 200), body: `${c.title}${c.basis ? `\n${c.basis}` : ''}\nFrom GAP: an obligation recorded in GAP.`, dueAt: c.dueAt }, origin: { kind: 'commitment', id: c.commitmentId, label: `the GAP obligation "${c.title}"` } });
+  }
+  for (const c of i.completions ?? []) {
+    out.push({ change: { kind: 'task_complete', objectType: 'deal', objectId: i.deal.id, subject: c.title.slice(0, 200) }, origin: { kind: 'commitment', id: c.commitmentId, label: `the GAP obligation "${c.title}", done in GAP` } });
   }
   if (i.nextMilestone) {
     const to = `${i.nextMilestone.title}${i.nextMilestone.dueDay ? ` (by ${i.nextMilestone.dueDay})` : ''}`.slice(0, 250);

@@ -1,6 +1,8 @@
 /**
  * THE HUBSPOT WRITER FOR APPROVED CRM CHANGES (GAP OS execution recovery, R54, 2026-10-06). Server only. Called ONLY
- * by lib/gap/crm-sync.ts after an explicit approval and with GAP_HUBSPOT_MIRROR_ENABLED on (off in production). It sits
+ * by lib/gap/crm-sync.ts after an explicit approval and with GAP_CRM_APPROVED_WRITES_ENABLED on (batch item 9; off by
+ * default). A task is owned by the HubSpot owner of the person who approved it and, undated in GAP, is due the next
+ * business day (never "now", which made it overdue on arrival); a completion marks the task COMPLETED. It sits
  * beside the automatic mirror, never inside it: the mirror stays deal-free (its structural contract), the deals
  * surface stays write-free (its own), and this writer never touches a deal's stage, pipeline or lifecycle (the only
  * field it is ever asked to change is the allowlisted next step; pinned by tests/unit/gap/crm-sync.test.tsx). Every
@@ -10,6 +12,7 @@
  */
 import { FilterOperatorEnum } from '@hubspot/api-client/lib/codegen/crm/objects/notes/models/Filter';
 import { getHubSpotClient } from '@/lib/hubspot/client';
+import { nextBusinessDay, nyDay, nyDayAt } from './work/dates';
 
 /** HubSpot's standard association types: note -> deal, task -> deal. */
 export const NOTE_TO_DEAL = 214;
@@ -19,7 +22,13 @@ export interface CrmWriter {
   /** The id of a note or task whose body carries the marker, or null. */
   findByMarker(objectType: 'notes' | 'tasks', marker: string): Promise<string | null>;
   createNote(dealId: string, body: string): Promise<string>;
-  createTask(dealId: string, t: { subject: string; body: string; dueAt: string | null }): Promise<string>;
+  createTask(dealId: string, t: { subject: string; body: string; dueAt: string | null; ownerId: string | null }): Promise<string>;
+  /** Batch item 9: an amended obligation updates its one task (subject, body, due time). */
+  updateTask(taskId: string, t: { subject: string; body: string; dueAt: string | null }): Promise<void>;
+  /** Batch item 9: the obligation is done in GAP. */
+  completeTask(taskId: string): Promise<void>;
+  /** Batch item 9: the HubSpot owner id of the person who approved the change, or null. */
+  ownerIdFor(email: string): Promise<string | null>;
   /** The field's current value, when it last changed and by what source. */
   readDealProperty(dealId: string, property: string): Promise<{ value: string | null; modifiedAt: string | null; source: string | null }>;
   updateDealProperty(dealId: string, property: string, value: string): Promise<void>;
@@ -27,6 +36,8 @@ export interface CrmWriter {
 
 const assoc = (dealId: string, typeId: number) => [{ to: { id: dealId }, types: [{ associationCategory: 'HUBSPOT_DEFINED', associationTypeId: typeId }] }] as never;
 const html = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
+/** Batch item 9: HubSpot needs a task due time; an undated GAP obligation is due the next business day (New York). */
+export const taskDueTime = (dueAt: string | null, now: Date = new Date()) => dueAt ?? nyDayAt(nextBusinessDay(nyDay(now))).toISOString();
 
 export const hubspotCrmWriter: CrmWriter = {
   async findByMarker(objectType, marker) {
@@ -44,8 +55,22 @@ export const hubspotCrmWriter: CrmWriter = {
   },
   async createTask(dealId, t) {
     const client = getHubSpotClient();
-    const r = await client.crm.objects.tasks.basicApi.create({ properties: { hs_task_subject: t.subject.slice(0, 250), hs_task_body: html(t.body).slice(0, 65535), hs_timestamp: t.dueAt ?? new Date().toISOString(), hs_task_status: 'NOT_STARTED', hs_task_type: 'TODO' }, associations: assoc(dealId, TASK_TO_DEAL) });
+    const r = await client.crm.objects.tasks.basicApi.create({ properties: { hs_task_subject: t.subject.slice(0, 250), hs_task_body: html(t.body).slice(0, 65535), hs_timestamp: taskDueTime(t.dueAt), hs_task_status: 'NOT_STARTED', hs_task_type: 'TODO', ...(t.ownerId ? { hubspot_owner_id: t.ownerId } : {}) }, associations: assoc(dealId, TASK_TO_DEAL) });
     return String(r.id);
+  },
+  async updateTask(taskId, t) {
+    const client = getHubSpotClient();
+    await client.crm.objects.tasks.basicApi.update(taskId, { properties: { hs_task_subject: t.subject.slice(0, 250), hs_task_body: html(t.body).slice(0, 65535), hs_timestamp: taskDueTime(t.dueAt) } });
+  },
+  async completeTask(taskId) {
+    const client = getHubSpotClient();
+    await client.crm.objects.tasks.basicApi.update(taskId, { properties: { hs_task_status: 'COMPLETED' } });
+  },
+  async ownerIdFor(email) {
+    const client = getHubSpotClient();
+    const page = (await client.crm.owners.ownersApi.getPage(email, undefined, 1, false)) as { results?: Array<{ id?: string | number; email?: string }> };
+    const hit = (page.results ?? []).find((o) => String(o.email ?? '').toLowerCase() === email.toLowerCase());
+    return hit?.id != null ? String(hit.id) : null;
   },
   async readDealProperty(dealId, property) {
     const client = getHubSpotClient();

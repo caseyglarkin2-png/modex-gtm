@@ -5,6 +5,12 @@
 /// GAP_AUTO_ENROLL_ENABLED with GAP_AUTO_ENROLL_SHADOW as its rehearsal, and
 /// GAP_HUBSPOT_MIRROR_ENABLED, which lets the mirror write live HubSpot notes
 /// and properties; HUBSPOT_SYNC_ENABLED alone defaults ON and is not enough),
+/// and GAP_CRM_APPROVED_WRITES_ENABLED (batch item 9) lets a HubSpot change the
+/// seller approved on a deal (a note, a task, its completion, the next step)
+/// reach HubSpot. It is separate from the automatic mirror on purpose: approved
+/// deal writes can be turned on without turning on automatic mirror writes, and
+/// the reverse. Default off; with it off an approval is recorded and stands as
+/// "approved, not written".
 /// so flipping one off plus a redeploy must halt that path on the very next
 /// request. That is the same guarantee OUTREACH_PAUSED gives via
 /// isOutreachPaused() in src/lib/feature-flags.ts, and it is deliberately not
@@ -28,6 +34,8 @@ export const GAP_FLAGS = [
   'GAP_AUTO_ENROLL_ENABLED',
   'GAP_AUTO_ENROLL_SHADOW',
   'GAP_HUBSPOT_MIRROR_ENABLED',
+  // Batch item 9 (R54): the seller-approved HubSpot deal changes (crm-sync.ts), separate from the automatic mirror.
+  'GAP_CRM_APPROVED_WRITES_ENABLED',
   // Phase 2 B1: the scheduled background evidence research (research only; never promotes, routes or sends).
   'GAP_BACKGROUND_RESEARCH_ENABLED',
 ] as const;

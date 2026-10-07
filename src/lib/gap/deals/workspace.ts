@@ -91,6 +91,12 @@ export function recapSentAtOf(used: readonly UsedRow[], crm: readonly CrmSyncIte
   return [...copied, ...written].sort().pop() ?? null;
 }
 
+/** Batch item 9: the obligations done in GAP whose HubSpot task was written on this deal (one completion each). */
+export function completionsOf(crm: readonly CrmSyncItem[], commitments: ReadonlyArray<Pick<Commitment, 'commitmentId' | 'status' | 'title'>>, dealId: string): Array<{ commitmentId: string; title: string }> {
+  const done = new Map(commitments.filter((c) => c.status === 'done').map((c) => [c.commitmentId, c]));
+  return crm.filter((it) => it.dealId === dealId && it.change.kind === 'task' && it.origin.kind === 'commitment' && it.state === 'written' && done.has(it.origin.id)).map((it) => ({ commitmentId: it.origin.id, title: done.get(it.origin.id)!.title }));
+}
+
 export async function loadDealWorkspace(
   prisma: PrismaLike,
   x: { accountName: string; deals: readonly OpportunityDealInput[]; commitments: ReadonlyArray<Commitment & PhaseRead>; now: Date } & WorkspaceContext,
@@ -112,6 +118,8 @@ export async function loadDealWorkspace(
     soft(x.deals.length && prisma.gapAuditEvent?.findMany ? prisma.gapAuditEvent.findMany({ where: { kind: ARTIFACT_USED, subject_type: 'account', subject_id: x.accountName }, select: { payload: true, created_at: true }, orderBy: { created_at: 'desc' }, take: 50 }) : null, [], 'the artifacts you used'),
   ]);
   const recapSentAt = (dealId: string) => recapSentAtOf(usedRows as UsedRow[], crmItems as CrmSyncItem[], dealId);
+  // Batch item 9: an obligation done in GAP whose task is in HubSpot proposes completing that task.
+  const completionsFor = (dealId: string) => completionsOf(crmItems as CrmSyncItem[], x.commitments, dealId);
   const persons: OpportunityPerson[] = (people as Array<{ id: number; name: string | null; title: string | null; email: string | null; hubspot_contact_id: string | null }>).map((p) => ({ personaId: p.id, name: p.name ?? `person ${p.id}`, title: p.title ?? null, email: p.email ?? null, hubspotContactId: p.hubspot_contact_id ? String(p.hubspot_contact_id) : null }));
   type BidRow = { id: string; type: string; raw_buyer_language: string; normalized_summary: string | null; contact_email: string | null; human_confirmed: boolean; supersedes_id: string | null; confirmed_at: Date | string | null; captured_at: Date | string; metadata: unknown };
   const confirmed = selectConfirmedBids((bidRows as BidRow[]).map((b) => ({ ...b, id: String(b.id), humanConfirmed: b.human_confirmed === true, supersedesId: b.supersedes_id ?? null })));
@@ -179,6 +187,7 @@ export async function loadDealWorkspace(
         recap: recap ? { text: recap.text, ready: recap.problems.length === 0 && recap.citations.some((c) => c.ref.startsWith('bid:')) } : null,
         commitments: d.commitments.filter((c) => c.source.kind !== 'plan').map((c) => ({ commitmentId: c.commitmentId, kind: c.kind, title: c.title, basis: c.basis, dueAt: c.dueAt, status: c.status })),
         nextMilestone: next ? { commitmentId: next.commitmentId!, title: next.title, dueDay: next.dueDay } : null,
+        completions: completionsFor(d.dealId),
       });
       return [d.dealId, { candidates, items: (crmItems as CrmSyncItem[]).filter((it) => it.dealId === d.dealId) }];
     }),

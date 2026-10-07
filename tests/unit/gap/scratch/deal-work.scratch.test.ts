@@ -221,16 +221,19 @@ describe.skipIf(!RUN)('Sprint 5: advance active opportunities (scratch database,
         return { status: r.status, body: (await r.json()) as { item?: { proposalId: string; state: string; detail: string | null; objectRef: string | null }; error?: string } };
       };
       const note = { kind: 'note', objectType: 'deal', objectId: pilot, body: `Recap for the pilot (${tag}).` };
-      const origin = { kind: 'recap', id: `${pilot}:${tag}`, label: 'the agreed recap prepared in GAP' };
+      // Batch item 9: a recap origin is the recap's own text (its hash), never free text.
+      const { stableHash } = await import('@/lib/gap/deals/crm-model');
+      const origin = { kind: 'recap', id: `${pilot}:${stableHash(note.body)}`, label: 'the agreed recap prepared in GAP' };
       // OFF (as in production): the pair is recorded, nothing reaches the stub.
       const off = await post({ op: 'approve', accountName: kroger.name, dealId: pilot, dealName: `YardFlow - ${kroger.name}`, change: note, origin });
-      expect([off.status, off.body.item?.state]).toEqual([200, 'off']);
+      expect([off.status, off.body.item?.state], JSON.stringify(off.body)).toEqual([200, 'off']);
       expect(((await stubGet('/__stub/writes')) as { notes: unknown[] }).notes).toHaveLength(0);
       const id = off.body.item!.proposalId;
       expect(await prisma.gapAuditEvent.count({ where: { subject_type: 'crm_sync', subject_id: id, kind: { in: ['crm.sync_proposed', 'crm.sync_approved'] } } })).toBe(2);
       // ON, against the stub only (loopback asserted): HubSpot down -> failed, the text kept.
       expect(process.env.HUBSPOT_API_BASE_PATH).toMatch(/^http:\/\/127\.0\.0\.1:/);
-      process.env.GAP_HUBSPOT_MIRROR_ENABLED = 'true';
+      // Batch item 9: approved writes have their own flag (never the automatic mirror's).
+      process.env.GAP_CRM_APPROVED_WRITES_ENABLED = 'true';
       process.env.ALLOW_EXTERNAL_WRITES_IN_TEST = 'true';
       try {
         await stubPost('/__stub/control', { failWrites: true });
@@ -263,7 +266,7 @@ describe.skipIf(!RUN)('Sprint 5: advance active opportunities (scratch database,
         const t = await krogerTruth();
         expect(t.status === 'ACTIVE' && t.deals.find((d) => d.id === pilot)?.nextStep).toBe(`Ann is out until Oct 12 (${tag})`);
       } finally {
-        delete process.env.GAP_HUBSPOT_MIRROR_ENABLED;
+        delete process.env.GAP_CRM_APPROVED_WRITES_ENABLED;
         delete process.env.ALLOW_EXTERNAL_WRITES_IN_TEST;
         await stubPost('/__stub/control', { failWrites: false });
       }

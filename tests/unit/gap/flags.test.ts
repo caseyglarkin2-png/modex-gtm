@@ -17,6 +17,7 @@ const FLAG_NAMES = [
   'GAP_AUTO_ENROLL_ENABLED',
   'GAP_AUTO_ENROLL_SHADOW',
   'GAP_HUBSPOT_MIRROR_ENABLED',
+  'GAP_CRM_APPROVED_WRITES_ENABLED',
   'GAP_BACKGROUND_RESEARCH_ENABLED',
 ] as const;
 
@@ -39,8 +40,8 @@ afterEach(() => {
 });
 
 describe('GAP_FLAGS', () => {
-  it('has exactly ten entries in the documented order', () => {
-    expect(GAP_FLAGS).toHaveLength(10);
+  it('has exactly eleven entries in the documented order (batch item 9 added GAP_CRM_APPROVED_WRITES_ENABLED)', () => {
+    expect(GAP_FLAGS).toHaveLength(11);
     expect([...GAP_FLAGS]).toEqual([...FLAG_NAMES]);
   });
 

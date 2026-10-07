@@ -10,7 +10,11 @@
  *   1. under an advisory lock on the proposal: a written proposal answers "written" with no call; an attempt started
  *      in the last minute with no result answers "in progress" (a double click or two tabs never write twice);
  *      otherwise the approval row (once) and an attempt row are recorded, and the lock is released
- *   2. the gates: GAP_OS_ENABLED, GAP_HUBSPOT_MIRROR_ENABLED (OFF in production), HUBSPOT_SYNC_ENABLED, a HubSpot token;
+ *   0. batch item 9: the origin is still live (deals/crm-model.ts `originProblem`): an obligation done or skipped, or a
+ *      deal the closure ledger says closed, answers `origin_closed` (a retry of an "off" approval included); an origin
+ *      GAP does not hold answers `bad_origin`. Nothing is recorded and nothing is called.
+ *   2. the gates: GAP_OS_ENABLED, GAP_CRM_APPROVED_WRITES_ENABLED (batch item 9: its own flag, off by default; never the
+ *      automatic mirror's), HUBSPOT_SYNC_ENABLED, a HubSpot token;
  *      any one off records "off" with the reason: the proposal and the approval stand, nothing reaches HubSpot
  *   3. the mirror row says written: "written", no call
  *   4. read before write: a note or task already carrying the external id is RECOVERED (never created twice); a deal
@@ -34,6 +38,9 @@ import {
   externalIdFor,
   foldCrmSync,
   proposalIdFor,
+  sameChange,
+  stableHash,
+  taskExternalIdFor,
   withMarker,
   type CrmChange,
   type CrmOrigin,
@@ -50,7 +57,7 @@ type PrismaLike = any;
 export const ATTEMPT_IN_FLIGHT_MS = 60_000;
 export const NOTE_BODY_MAX = 5_000;
 
-export type CrmRefusal = 'account_not_found' | 'bad_change' | 'not_found' | 'discarded' | 'already_written' | 'in_progress' | 'not_approved';
+export type CrmRefusal = 'account_not_found' | 'bad_change' | 'not_found' | 'discarded' | 'already_written' | 'in_progress' | 'not_approved' | 'origin_closed' | 'bad_origin';
 
 export interface CrmDeps {
   writer?: CrmWriter;
@@ -62,7 +69,7 @@ export interface CrmDeps {
 
 export function crmWritesEnabled(): { ok: true } | { ok: false; reason: string } {
   if (!isGapOsEnabled()) return { ok: false, reason: 'GAP_OS_ENABLED is off' };
-  if (!gapFlag('GAP_HUBSPOT_MIRROR_ENABLED')) return { ok: false, reason: 'GAP_HUBSPOT_MIRROR_ENABLED is off' };
+  if (!gapFlag('GAP_CRM_APPROVED_WRITES_ENABLED')) return { ok: false, reason: 'GAP_CRM_APPROVED_WRITES_ENABLED is off' };
   if (!HUBSPOT_SYNC_ENABLED) return { ok: false, reason: 'HUBSPOT_SYNC_ENABLED is off' };
   if (!process.env.HUBSPOT_ACCESS_TOKEN?.trim()) return { ok: false, reason: 'no HubSpot token' };
   return { ok: true };
@@ -92,8 +99,30 @@ export function changeProblem(c: CrmChange): string | null {
   if (c.objectType !== 'deal' || !/^\d{1,24}$/.test(c.objectId)) return 'the change must target a HubSpot deal by its id';
   if (c.kind === 'note') return c.body.trim() && c.body.length <= NOTE_BODY_MAX ? null : 'the note is empty or too long';
   if (c.kind === 'task') return c.subject.trim() && c.subject.length <= 200 && c.body.length <= NOTE_BODY_MAX && (c.dueAt === null || !Number.isNaN(new Date(c.dueAt).getTime())) ? null : 'the task needs a subject (and a valid due time)';
+  if (c.kind === 'task_complete') return c.subject.trim() && c.subject.length <= 200 ? null : 'a completion names its task';
   if (c.kind === 'deal_property') return (CRM_DEAL_PROPERTIES as readonly string[]).includes(c.property) && c.to.trim() && c.to.length <= 250 ? null : 'only the deal next step may be proposed, with a value';
   return 'unknown change';
+}
+
+/**
+ * Batch item 9: is what the change came from still live? Read from GAP's own ledger only (never HubSpot): the deal's
+ * recorded closure (deals/closure.ts), the obligation's status, the recap's own text. A completion needs its obligation
+ * DONE; anything else needs it open. Null when it is.
+ */
+export async function originProblem(prisma: PrismaLike, it: Pick<CrmProposal, 'accountName' | 'dealId' | 'origin' | 'change'>): Promise<{ reason: 'origin_closed' | 'bad_origin'; detail: string } | null> {
+  const { loadDealStates } = await import('./deals/closure');
+  const deal = (await loadDealStates(prisma, it.accountName).catch(() => new Map<string, { state: string; at: string }>())).get(it.dealId);
+  if (deal && deal.state !== 'open') return { reason: 'origin_closed', detail: `the deal closed (${deal.state}) on ${deal.at.slice(0, 10)}: nothing is written to it` };
+  if (it.origin.kind === 'commitment' || it.origin.kind === 'plan') {
+    const { loadCommitment } = await import('./work/commitments');
+    const c = await loadCommitment(prisma, it.origin.id).catch(() => null);
+    if (!c || c.accountName !== it.accountName || (c.dealId && /^\d+$/.test(c.dealId) && c.dealId !== it.dealId)) return { reason: 'bad_origin', detail: 'the obligation it came from is not on this deal' };
+    if (it.change.kind === 'task_complete') return c.status === 'done' ? null : { reason: 'bad_origin', detail: `the obligation "${c.title}" is not done in GAP` };
+    if (c.status === 'done' || c.status === 'skipped') return { reason: 'origin_closed', detail: `the obligation "${c.title}" is ${c.status} in GAP: nothing is written for it` };
+    return null;
+  }
+  if (it.origin.kind === 'recap') return it.change.kind === 'note' && it.origin.id === `${it.dealId}:${stableHash(it.change.body)}` ? null : { reason: 'bad_origin', detail: 'the recap does not match its own text' };
+  return { reason: 'bad_origin', detail: 'GAP holds no such origin' };
 }
 
 /** Record the exact proposed change ONCE (its id is its origin, kind and content). */
@@ -108,6 +137,13 @@ export async function proposeCrmChange(
   const proposalId = proposalIdFor(input.origin, input.change);
   return locked(prisma, proposalId, async (tx) => {
     const have = foldCrmSync(await rowsOf(tx, proposalId))[0];
+    // Batch item 9: the same obligation amended is the same task: a revision carries the newer text (and asks for a
+    // new approval); a written task is then updated in place, never created twice. A discarded one stays discarded.
+    if (have && have.state !== 'discarded' && !sameChange(have.change, input.change)) {
+      const revised: CrmProposal = { proposalId, accountName: have.accountName, dealId: have.dealId, dealName: input.dealName ?? have.dealName, change: input.change, externalId: have.externalId, origin: have.origin, proposedAt: have.proposedAt, proposedBy: have.proposedBy };
+      await record(tx, CRM_PROPOSED, input.actor, revised, { proposal: revised, revision: true });
+      return { ok: true as const, created: false, item: foldCrmSync(await rowsOf(tx, proposalId))[0] };
+    }
     if (have) return { ok: true as const, created: false, item: have };
     const proposal: CrmProposal = { proposalId, accountName: account.name, dealId: input.dealId, dealName: input.dealName, change: input.change, externalId: externalIdFor(proposalId), origin: input.origin, proposedAt: input.now.toISOString(), proposedBy: input.actor };
     await record(tx, CRM_PROPOSED, input.actor, proposal, { proposal });
@@ -119,7 +155,14 @@ export async function proposeCrmChange(
  * The explicit approval (and every retry): the approval row once, then the write when the gates allow it. Never
  * throws; every outcome is a recorded state.
  */
-export async function approveCrmChange(prisma: PrismaLike, input: { proposalId: string; actor: string; now: Date; retry?: boolean }, deps: CrmDeps = {}): Promise<{ ok: true; item: CrmSyncItem } | { ok: false; reason: CrmRefusal; item?: CrmSyncItem }> {
+export async function approveCrmChange(prisma: PrismaLike, input: { proposalId: string; actor: string; now: Date; retry?: boolean }, deps: CrmDeps = {}): Promise<{ ok: true; item: CrmSyncItem } | { ok: false; reason: CrmRefusal; item?: CrmSyncItem; detail?: string }> {
+  // 0. Batch item 9: an approval or a retry is bounded to live work: an origin that closed answers origin_closed and
+  // nothing is recorded or called (an "off" approval retried after the flag turns on writes nothing for done work).
+  const pre = foldCrmSync(await rowsOf(prisma, input.proposalId))[0];
+  if (pre && pre.state !== 'written' && pre.state !== 'discarded') {
+    const bad = await originProblem(prisma, pre);
+    if (bad) return { ok: false, reason: bad.reason, item: pre, detail: bad.detail };
+  }
   // 1. Claim the attempt under the lock (never the external call inside the transaction).
   const claim = await locked(prisma, input.proposalId, async (tx) => {
     const it = foldCrmSync(await rowsOf(tx, input.proposalId))[0];
@@ -145,7 +188,9 @@ export async function approveCrmChange(prisma: PrismaLike, input: { proposalId: 
   // 3. Already written (the mirror ledger's idempotency row).
   const key = mirrorKey(it.proposalId);
   const prior: { error: string | null; note_id: string | null } | null = await prisma.gapHubSpotMirror.findUnique({ where: { key } }).catch(() => null);
-  if (prior && prior.error === null) return finish('written', { objectRef: prior.note_id, detail: 'already written' });
+  // (A revised proposal not yet written is an update still to make: the earlier write's row never stops it. Updating the
+  // task again after a crash is harmless: it carries the same text.)
+  if (prior && prior.error === null && !it.revisedAt) return finish('written', { objectRef: prior.note_id, detail: 'already written' });
   const saveMirror = async (objectRef: string | null, error: string | null) => {
     const fields = { object_type: 'deal', object_id: it.dealId, note_id: objectRef, written_at: input.now, error };
     await prisma.gapHubSpotMirror.upsert({ where: { key }, create: { key, ...fields }, update: fields }).catch(() => undefined);
@@ -154,14 +199,29 @@ export async function approveCrmChange(prisma: PrismaLike, input: { proposalId: 
     (deps.assertWriteAllowed ?? (() => assertExternalWriteAllowed('hubspot', 'gap.crmSync')))();
     const writer = deps.writer ?? (await import('./crm-writer')).hubspotCrmWriter;
     const c = it.change;
+    if (c.kind === 'task_complete') {
+      // Batch item 9: the obligation is done in GAP: its task (found by the task's own GAP reference) is completed.
+      const task = await writer.findByMarker('tasks', taskExternalIdFor(it.origin, it.dealId));
+      if (!task) return finish('failed', { detail: 'no GAP task for this obligation is in HubSpot to complete' });
+      await writer.completeTask(task);
+      await saveMirror(task, null);
+      return finish('written', { objectRef: task, detail: 'the task is completed in HubSpot' });
+    }
     if (c.kind === 'note' || c.kind === 'task') {
       // 4. Read before write: the external id finds a write whose answer was lost.
       const found = await writer.findByMarker(c.kind === 'note' ? 'notes' : 'tasks', it.externalId);
+      if (found && c.kind === 'task' && it.revisedAt) {
+        // Batch item 9: the obligation was amended: its one task is updated in place.
+        await writer.updateTask(found, { subject: c.subject, body: withMarker(c.body, it.externalId), dueAt: c.dueAt });
+        await saveMirror(found, null);
+        return finish('written', { objectRef: found, detail: 'the task is updated in HubSpot' });
+      }
       if (found) {
         await saveMirror(found, null);
         return finish('recovered', { objectRef: found, detail: 'found in HubSpot by its GAP reference' });
       }
-      const ref = c.kind === 'note' ? await writer.createNote(c.objectId, withMarker(c.body, it.externalId)) : await writer.createTask(c.objectId, { subject: c.subject, body: withMarker(c.body, it.externalId), dueAt: c.dueAt });
+      const ownerId = c.kind === 'task' ? await writer.ownerIdFor(input.actor).catch(() => null) : null;
+      const ref = c.kind === 'note' ? await writer.createNote(c.objectId, withMarker(c.body, it.externalId)) : await writer.createTask(c.objectId, { subject: c.subject, body: withMarker(c.body, it.externalId), dueAt: c.dueAt, ownerId });
       await saveMirror(ref, null);
       return finish('written', { objectRef: ref });
     }
