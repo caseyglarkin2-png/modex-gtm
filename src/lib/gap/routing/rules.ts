@@ -345,6 +345,17 @@ export const RULES: RoutingRule[] = [
     predicate: () => "HubSpot could not confirm whether this account has an open deal; check HubSpot before contacting anyone here",
   },
   {
+    // Batch item 7: a parent, subsidiary or sibling in a live deal, conversation or first touch holds a cold motion here,
+    // the hold the page and the click apply (family/family.ts); routing never offers the card the click would refuse.
+    id: 'family_hold',
+    label: 'R3d',
+    when: (i) => !!i.account.familyHold,
+    action: 'nurture',
+    lane: 'work_queue',
+    reason: (i) => (i.account.familyHold!.unknown ? 'family_hold:unknown' : 'family_hold'),
+    predicate: (i) => i.account.familyHold!.detail,
+  },
+  {
     id: 'bounced_or_invalid',
     label: 'R4',
     when: (i) => !emailUsable(i) && !hasUsablePhone(i),

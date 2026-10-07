@@ -136,6 +136,11 @@ const ACTION_PATTERNS: Array<{ re: RegExp; control: string }> = [
 /** A request to act is answered by naming where the control is; null when the question only asks (a question word opens a read: "What did we send them?" asks). */
 export function actionRequest(question: string): string | null {
   const q = question.trim();
+  // Batch item 7: a question about WHAT TO WRITE ("what should I say to Tom in the first email?") asks for outreach copy:
+  // the question-word read below never lets it reach the model.
+  if (/\b(what|how)\b[^?]{0,60}\b(should|do|would|can|could)\s+(i|we)\s+(say|write|put|tell|open|lead|start|use)\b[^?]{0,80}\b(email|emails|note|message|first touch|follow[- ]?up|subject|opener|opening|intro|linkedin)\b/i.test(q) || /\b(what|which)\b[^?]{0,30}\b(subject line|opener|opening line|first line)\b/i.test(q)) {
+    return ACTION_PATTERNS[1].control;
+  }
   if (/^(who|whom|whose|what|why|when|which|how|where|is|are|was|were|do|does|did|has|have|had|can|could|should|would|will)\b/i.test(q) && !/\b(can|could|would|will) you (send|email|enroll|look ?up|delete|merge|mark|choose|make|draft|write|compose|generate)\b/i.test(q)) return null;
   for (const p of ACTION_PATTERNS) if (p.re.test(q)) return p.control;
   return null;

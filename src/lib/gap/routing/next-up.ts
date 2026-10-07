@@ -141,7 +141,7 @@ export function buildNextUpCandidates(input: NextUpInput): NextCandidate[] {
   return out;
 }
 
-/** Accounts NEXT UP must never point at: an open deal or opportunity truth UNKNOWN on any current card. */
+/** Accounts NEXT UP must never point at: an open deal, opportunity truth UNKNOWN or a corporate-family hold (batch item 7) on any current card. */
 export function heldAccountsOf(items: ReadonlyArray<{ account: { name: string }; ruleId: string }>): Set<string> {
-  return new Set(items.filter((i) => i.ruleId === 'active_opportunity' || i.ruleId === 'opportunity_unknown').map((i) => i.account.name));
+  return new Set(items.filter((i) => i.ruleId === 'active_opportunity' || i.ruleId === 'opportunity_unknown' || i.ruleId === 'family_hold').map((i) => i.account.name));
 }

@@ -202,9 +202,15 @@ describe('final Monday blocker: an active or unverifiable opportunity is never a
 });
 
 describe('an opportunity hold wins over a revised thesis', () => {
-  it.each(['active_opportunity', 'opportunity_unknown'])('%s with hypothesis.revisedBy stays held, not REVIEW', (ruleId) => {
-    const it0 = item({ action: ruleId === 'active_opportunity' ? 'nurture' : 'research_required', ruleId, hypothesis: { id: 'old', status: 'approved', revisedBy: 'rev-1' } });
-    expect(sellerLaneOf(it0)).toBe(ruleId === 'active_opportunity' ? 'later' : 'research');
+  it.each(['active_opportunity', 'opportunity_unknown', 'family_hold'])('%s with hypothesis.revisedBy stays held, not REVIEW', (ruleId) => {
+    const it0 = item({ action: ruleId === 'opportunity_unknown' ? 'research_required' : 'nurture', ruleId, hypothesis: { id: 'old', status: 'approved', revisedBy: 'rev-1' } });
+    expect(sellerLaneOf(it0)).toBe(ruleId === 'opportunity_unknown' ? 'research' : 'later');
     expect(JSON.stringify(cardReadiness(it0))).not.toContain('Review the revised thesis');
+  });
+
+  it('R3d family_hold (batch item 7): the card holds with its own words, never a contact action', () => {
+    const r = cardReadiness(item({ action: 'nurture', ruleId: 'family_hold' }));
+    expect(r).toMatchObject({ state: 'actionable', primary: { label: 'Hold: related account', href: null } });
+    expect(JSON.stringify(r)).toMatch(/corporate family is in a live deal, conversation or first touch/);
   });
 });

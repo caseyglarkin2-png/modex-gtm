@@ -39,6 +39,7 @@ import type { ExecutionIntent, ExecutionReceipt } from './contract';
 import {
   appendLedger,
   DIRECT_CLAIMED,
+  DIRECT_PREVIEWED,
   DIRECT_RELEASED,
   DIRECT_SENT,
   DRAFT_SUBJECT_TYPE,
@@ -59,6 +60,7 @@ export type SellerSendRefusal =
   | SellerDraftRefusal
   | 'not_confirmed'
   | 'copy_changed_since_review'
+  | 'sender_changed_since_review'
   | 'recipient_changed_since_review'
   | 'send_in_progress_or_unknown'
   | 'send_refused';
@@ -118,6 +120,15 @@ function sentStepRow(rows: readonly Row[], stepIndex: number): Row | undefined {
   return rows.find((r) => r.kind === DIRECT_SENT && Number(r.payload?.stepIndex ?? 0) === stepIndex);
 }
 
+/** Batch item 7: the refusals a losing duplicate tab can hit before its claim reads the winner (see sendSellerEmail). */
+const RACE_SHAPED: ReadonlySet<string> = new Set(['emailed_outside_gap', 'decision_stale', 'first_touch_already_sent', 'step_already_sent', 'account_motion_active']);
+
+/** A claim on this card's touch with no sent or released row yet: a send on the wire. */
+function openClaimFor(rows: readonly Row[], stepIndex: number): boolean {
+  const closed = new Set(rows.filter((r) => r.kind === DIRECT_SENT || r.kind === DIRECT_RELEASED).map((r) => String(r.payload?.idempotencyKey ?? '')));
+  return rows.some((r) => r.kind === DIRECT_CLAIMED && Number(r.payload?.stepIndex ?? 0) === stepIndex && !closed.has(String(r.payload?.idempotencyKey ?? '')));
+}
+
 export async function sendSellerEmail(
   prisma: PrismaLike,
   input: {
@@ -143,11 +154,27 @@ export async function sendSellerEmail(
   }
 
   const prep = await prepareSellerEmail(prisma, { decisionId, actor, now, stepIndex, mode: 'send' }, deps);
-  if (!prep.ok) return prep;
+  if (!prep.ok) {
+    // Batch item 7 (duplicate tabs): a losing tab's gates read the winner's message in Sent (or "moved since the card")
+    // before its claim says sent. On the confirm path, the ledger answers first: this card's touch already recorded is
+    // ALREADY SENT; a claim on it still open is in progress. Never "emailed outside GAP" for GAP's own send.
+    if (input.confirm && RACE_SHAPED.has(prep.reason)) {
+      const rows = await directRows(prisma, decisionId);
+      const won = sentStepRow(rows, stepIndex);
+      if (won) {
+        const wp = won.payload as unknown as DirectSentPayload;
+        return { ok: true, alreadySent: true, sent: { sentAt: wp.sentAt, gmailSentMessageId: wp.gmailSentMessageId, gmailThreadId: wp.gmailThreadId, recipient: wp.recipient } };
+      }
+      if (openClaimFor(rows, stepIndex)) return { ok: false, reason: 'send_in_progress_or_unknown', detail: 'This email is being sent from another tab right now. GAP will not send it twice.' };
+    }
+    return prep;
+  }
   if (!('prepared' in prep)) return { ok: false, reason: 'send_refused', detail: 'unexpected prepare result' };
   const p: PreparedSellerEmail = prep.prepared;
 
   if (!input.confirm) {
+    // Batch item 7: record what the final check showed, so the confirm binds the sending mailbox too (never a send).
+    await appendLedger(prisma, DIRECT_PREVIEWED, actor, decisionId, { contentHash: p.contentHash, recipient: p.recipient, sender: p.senderIdentity, stepIndex, at: now.toISOString() }).catch(() => undefined);
     return {
       ok: true,
       preview: {
@@ -168,6 +195,14 @@ export async function sendSellerEmail(
   }
   if (input.confirm.recipient.trim().toLowerCase() !== p.recipient) {
     return { ok: false, reason: 'recipient_changed_since_review', detail: `The recipient is now ${p.recipient}. Review and confirm again.` };
+  }
+  // Batch item 7: the sending mailbox the seller saw on the final check is bound too (the newest preview of this copy).
+  const shown: { payload: Record<string, unknown> | null } | null = await prisma.gapAuditEvent
+    .findFirst({ where: { kind: DIRECT_PREVIEWED, subject_type: DRAFT_SUBJECT_TYPE, subject_id: decisionId, payload: { path: ['contentHash'], equals: p.contentHash } }, orderBy: { created_at: 'desc' }, select: { payload: true } })
+    .catch(() => null);
+  const shownSender = typeof shown?.payload?.sender === 'string' ? shown.payload.sender : null;
+  if (shownSender && shownSender.toLowerCase() !== String(p.senderIdentity).toLowerCase()) {
+    return { ok: false, reason: 'sender_changed_since_review', detail: `The email would now go from ${p.senderIdentity}, not ${shownSender} as you reviewed. Review and confirm again.` };
   }
 
   const key = personStepKey(p.personaId, p.recipient, stepIndex);

@@ -100,11 +100,22 @@ describe('POST /api/gap/enroll', () => {
     expect(falsy.status).toBe(422);
   });
 
-  it('mode live with confirm: true reaches the service as live from the human actor', async () => {
+  it('mode live with confirm: true reaches the service as live from the human actor, with the recipient it confirmed', async () => {
     mockedService.mockResolvedValue({ ok: true, kind: 'modex_enrolled', target: 'modex_queue', mode: 'live', draftItemId: 1, enrollment: { id: 'e', frozen: true, isTest: false } });
-    const res = await POST(post({ ...VALID_BODY, mode: 'live', confirm: true }));
+    const res = await POST(post({ ...VALID_BODY, mode: 'live', confirm: true, recipient: 'jane.doe@acme-logistics.com' }));
     expect(res.status).toBe(200);
-    expect(mockedService.mock.calls[0][1]).toMatchObject({ mode: 'live', actor: 'casey@freightroll.com', actorKind: 'human' });
+    expect(mockedService.mock.calls[0][1]).toMatchObject({ mode: 'live', actor: 'casey@freightroll.com', actorKind: 'human', recipient: 'jane.doe@acme-logistics.com' });
+  });
+
+  // Batch item 7: a live enrollment binds the address the seller saw; without it nothing is enrolled.
+  it('422 recipient_required for mode live with confirm but no recipient; shadow never needs one', async () => {
+    const res = await POST(post({ ...VALID_BODY, mode: 'live', confirm: true }));
+    expect(res.status).toBe(422);
+    expect(await res.json()).toEqual({ error: 'recipient_required', field: 'recipient' });
+    expect(mockedService).not.toHaveBeenCalled();
+    mockedService.mockResolvedValue({ ok: true, kind: 'shadow_enrolled', target: 'modex_queue', mode: 'shadow' });
+    expect((await POST(post({ ...VALID_BODY }))).status).toBe(200);
+    expect(mockedService.mock.calls[0][1]).toMatchObject({ mode: 'shadow', recipient: null });
   });
 
   it('200 shadow by default: the service result is the body and mode defaults to shadow', async () => {
@@ -134,7 +145,7 @@ describe('POST /api/gap/enroll', () => {
     expect(await res.json()).toEqual({ error: 'compile_not_passed:1' });
 
     mockedService.mockResolvedValue({ ok: false, reason: 'autonomy_halted', detail: 'outreach motion halted' });
-    const halted = await POST(post({ ...VALID_BODY, mode: 'live', confirm: true }));
+    const halted = await POST(post({ ...VALID_BODY, mode: 'live', confirm: true, recipient: 'jane.doe@acme-logistics.com' }));
     expect(halted.status).toBe(409);
     expect(await halted.json()).toEqual({ error: 'autonomy_halted', detail: 'outreach motion halted' });
   });
@@ -181,7 +192,7 @@ describe('POST /api/gap/enroll', () => {
 
   it('R3-13: a body carrying readback (any value, even null) is 422 readback_not_accepted and the service is never called', async () => {
     for (const readback of [{ activelyEnrolledCount: 1, latestSequenceId: '333', latestEnrolledAt: null }, null, 'yes']) {
-      const res = await POST(post({ ...VALID_BODY, mode: 'live', confirm: true, readback }));
+      const res = await POST(post({ ...VALID_BODY, mode: 'live', confirm: true, recipient: 'jane.doe@acme-logistics.com', readback }));
       expect(res.status).toBe(422);
       expect(await res.json()).toEqual({ error: 'readback_not_accepted', field: 'readback' });
     }

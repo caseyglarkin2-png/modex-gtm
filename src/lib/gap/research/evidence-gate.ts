@@ -74,6 +74,8 @@ export type OutreachFactRefusal =
   | 'claim_not_admitted_for_approach'
   /** R30: a posting the source says is closed is not a live job claim. */
   | 'posting_closed'
+  /** Batch item 7 (R22): a reposted listing is not new demand. */
+  | 'posting_reposted'
   /** R30: an approach the policy does not enable (an attributed report). */
   | 'approach_not_enabled'
   /** R30: the fit-led approach needs a stable operating fact, not a fresh event. */
@@ -113,6 +115,8 @@ export function outreachFactRefusal(s: GateSignal, accountName: string, opts: Ga
     if (!physical) return 'not_a_physical_network_change';
   } else {
     const attrs = isObj(s.metadata) && isObj(s.metadata.claimAttributes) ? (s.metadata.claimAttributes as { postingStatus?: 'open' | 'closed' | 'reposted' | 'unknown' }) : null;
+    // A stated posting status read from the words when the verifier did not record one (a "reposted" listing says so).
+    if (attrs === null && claimClass === 'JOB_POSTING' && /\b(reposted|re-posted|posted again|relisted)\b/i.test(text)) return 'posting_reposted';
     // Item 4: no recorded continuity reads the fact's own words (a "multi-year agreement" is an ongoing state). A program
     // a newer source ended is superseded before any approach question (the seller's reason is that it ended).
     if (continuity && continuity.kind === 'ended') return 'superseded';

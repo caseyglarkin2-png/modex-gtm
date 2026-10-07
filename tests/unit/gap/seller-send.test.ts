@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { sendSellerEmail } from '@/lib/gap/execution/seller-send';
-import { DIRECT_CLAIMED, DIRECT_RELEASED, DIRECT_SENT, DRAFTED } from '@/lib/gap/execution/draft-ledger';
+import { DIRECT_CLAIMED, DIRECT_PREVIEWED, DIRECT_RELEASED, DIRECT_SENT, DRAFTED } from '@/lib/gap/execution/draft-ledger';
 import type { ExecutionReceipt } from '@/lib/gap/execution/contract';
 import { NOW, baseDeps, db, prismaOf, type Db } from './fixtures/seller-db';
 import { findManyFrom } from './fixtures/where';
@@ -143,6 +143,68 @@ describe('SEND FROM YARDFLOW: preview and confirmation', () => {
     const pv = await preview(prisma, d, deps(d, direct));
     expect(await sendSellerEmail(prisma, { decisionId: 'dec-joey', actor: ACTOR, now: NOW, confirm: { contentHash: 'f'.repeat(64), recipient: pv.to } }, deps(d, direct))).toMatchObject({ ok: false, reason: 'copy_changed_since_review' });
     expect(await sendSellerEmail(prisma, { decisionId: 'dec-joey', actor: ACTOR, now: NOW, confirm: { contentHash: pv.contentHash, recipient: 'someone.else@kroger.com' } }, deps(d, direct))).toMatchObject({ ok: false, reason: 'recipient_changed_since_review' });
+    expect(direct).not.toHaveBeenCalled();
+  });
+});
+
+describe('batch item 7: the final check binds the sending mailbox too', () => {
+  it('the preview records what it showed; a different sending mailbox at confirm is refused sender_changed_since_review, Gmail never called', async () => {
+    const d = db();
+    const prisma = sendPrisma(d);
+    const direct = adapter();
+    const pv = await preview(prisma, d, deps(d, direct));
+    expect(d.audit.find((a) => a.kind === DIRECT_PREVIEWED)?.payload).toMatchObject({ contentHash: pv.contentHash, recipient: pv.to, sender: 'casey@yardflow.ai', stepIndex: 0 });
+    const confirm = { contentHash: pv.contentHash, recipient: pv.to };
+    const other = { ...YF, userEmail: 'casey@freightroll.com' };
+    const r = await sendSellerEmail(prisma, { decisionId: 'dec-joey', actor: ACTOR, now: NOW, confirm }, deps(d, direct, { gapSender: () => other }));
+    expect(r).toMatchObject({ ok: false, reason: 'sender_changed_since_review', detail: 'The email would now go from casey@freightroll.com, not casey@yardflow.ai as you reviewed. Review and confirm again.' });
+    expect(direct).not.toHaveBeenCalled();
+    // The mailbox the seller saw sends.
+    expect(await sendSellerEmail(prisma, { decisionId: 'dec-joey', actor: ACTOR, now: NOW, confirm }, deps(d, direct))).toMatchObject({ ok: true, alreadySent: false });
+    expect(direct).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('batch item 7 (R62 matrix): a losing duplicate tab is told ALREADY SENT, never "emailed outside GAP"', () => {
+  const winnerSent = (d: Db, to: string) => d.audit.push({ kind: DIRECT_SENT, actor: ACTOR, subject_type: 'routing_decision', subject_id: 'dec-joey', payload: { stepIndex: 0, recipient: to, gmailSentMessageId: 'msg-win', gmailThreadId: 'thr-win', sentAt: NOW.toISOString(), idempotencyKey: 'k-win' }, created_at: NOW });
+  const winnerOnWire = (d: Db, to: string) => d.audit.push({ kind: DIRECT_CLAIMED, actor: ACTOR, subject_type: 'routing_decision', subject_id: 'dec-joey', payload: { stepIndex: 0, recipient: to, personaId: 1787, idempotencyKey: 'k-win', claimedAt: NOW.toISOString() }, created_at: NOW });
+
+  it('the winner lands between this tab’s ledger read and its Sent-folder read: ALREADY SENT with the winner’s message, no Gmail call', async () => {
+    const d = db();
+    const prisma = sendPrisma(d);
+    const direct = adapter();
+    const pv = await preview(prisma, d, deps(d, direct));
+    const sentTo = async () => {
+      winnerSent(d, pv.to);
+      return [{ id: 'msg-win', internalDate: NOW, subject: pv.subject }];
+    };
+    const r = await sendSellerEmail(prisma, { decisionId: 'dec-joey', actor: ACTOR, now: NOW, confirm: { contentHash: pv.contentHash, recipient: pv.to } }, deps(d, direct, { mailboxSentTo: sentTo }));
+    expect(r).toMatchObject({ ok: true, alreadySent: true, sent: { gmailSentMessageId: 'msg-win', gmailThreadId: 'thr-win', recipient: pv.to } });
+    expect(direct).not.toHaveBeenCalled();
+  });
+
+  it('the winner is still on the wire (its claim open): in progress, never a send and never "emailed outside GAP"', async () => {
+    const d = db();
+    const prisma = sendPrisma(d);
+    const direct = adapter();
+    const pv = await preview(prisma, d, deps(d, direct));
+    const sentTo = async () => {
+      winnerOnWire(d, pv.to);
+      return [{ id: 'msg-win', internalDate: NOW, subject: pv.subject }];
+    };
+    const r = await sendSellerEmail(prisma, { decisionId: 'dec-joey', actor: ACTOR, now: NOW, confirm: { contentHash: pv.contentHash, recipient: pv.to } }, deps(d, direct, { mailboxSentTo: sentTo }));
+    expect(r).toMatchObject({ ok: false, reason: 'send_in_progress_or_unknown' });
+    expect(direct).not.toHaveBeenCalled();
+  });
+
+  it('a message in Sent that GAP never recorded is still emailed_outside_gap (the race read never hides a real outside send)', async () => {
+    const d = db();
+    const prisma = sendPrisma(d);
+    const direct = adapter();
+    const pv = await preview(prisma, d, deps(d, direct));
+    const sentTo = async () => [{ id: 'msg-hand', internalDate: NOW, subject: 'Quick question' }];
+    const r = await sendSellerEmail(prisma, { decisionId: 'dec-joey', actor: ACTOR, now: NOW, confirm: { contentHash: pv.contentHash, recipient: pv.to } }, deps(d, direct, { mailboxSentTo: sentTo }));
+    expect(r).toMatchObject({ ok: false, reason: 'emailed_outside_gap' });
     expect(direct).not.toHaveBeenCalled();
   });
 });

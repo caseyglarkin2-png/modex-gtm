@@ -13,6 +13,8 @@
  * signal type's window (signals/freshness.ts) from the newest evidence that the change is current. In order:
  *
  *   ENDED              a newer source says the program ended (metadata.continuity.kind): never current.
+ *   CLOSED             a notice whose stated due date passed (metadata.claimAttributes.dueDate, batch item 7): a
+ *                      closed RFP is not an opening; an open one is current at most until its due date.
  *   EXPLICIT           a recorded expiry (freshness_expires_at: a corroboration, an evidence record's fresh_until)
  *                      wins: current until then.
  *   PENDING CHANGE     an announced future change ("will close ... by March 2027") with a stated effective date: the
@@ -37,7 +39,7 @@ export interface CurrentnessFact {
   metadata?: unknown;
 }
 
-export type CurrentnessBasis = 'ended' | 'explicit' | 'effective_date' | 'type_window' | 'undated';
+export type CurrentnessBasis = 'ended' | 'closed' | 'explicit' | 'effective_date' | 'type_window' | 'undated';
 
 export interface Currentness {
   current: boolean;
@@ -96,20 +98,33 @@ export function pendingEffectiveDate(text: string, announcedAt: Date): Date | nu
 export function factCurrentness(f: CurrentnessFact, now: Date): Currentness {
   const continuity = isObj(f.metadata) && isObj(f.metadata.continuity) ? f.metadata.continuity : null;
   if (continuity && continuity.kind === 'ended') return { current: false, until: null, basis: 'ended' };
+  // Batch item 7: a notice's stated due date bounds it (through the end of that day in New York).
+  const attrs = isObj(f.metadata) && isObj(f.metadata.claimAttributes) ? f.metadata.claimAttributes : null;
+  const dueRaw = attrs && typeof attrs.dueDate === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(attrs.dueDate) ? attrs.dueDate : null;
+  const dueEnd = dueRaw ? endOfNewYorkDay(dueRaw) : null;
+  if (dueEnd && dueEnd.getTime() <= now.getTime()) return { current: false, until: dueEnd.toISOString(), basis: 'closed' };
+  const bounded = (c: Currentness): Currentness => (dueEnd && c.until && dueEnd.getTime() < new Date(c.until).getTime() ? { ...c, until: dueEnd.toISOString() } : c);
   const explicit = toDate(f.freshness_expires_at);
-  if (explicit) return { current: explicit.getTime() > now.getTime(), until: explicit.toISOString(), basis: 'explicit' };
+  if (explicit) return bounded({ current: explicit.getTime() > now.getTime(), until: explicit.toISOString(), basis: 'explicit' });
   const observed = toDate(f.observed_at);
   if (!observed) return { current: false, until: null, basis: 'undated' };
   const windowDays = (f.type && (SIGNAL_TTL_DAYS as Record<string, number>)[f.type]) || DEFAULT_WINDOW_DAYS;
   const effective = f.evidence_text ? pendingEffectiveDate(f.evidence_text, observed) : null;
   const start = effective ?? observed;
   const until = new Date(start.getTime() + windowDays * DAY_MS);
-  return { current: until.getTime() > now.getTime(), until: until.toISOString(), basis: effective ? 'effective_date' : 'type_window' };
+  return bounded({ current: until.getTime() > now.getTime(), until: until.toISOString(), basis: effective ? 'effective_date' : 'type_window' });
 }
 
 /** The boolean every gate reads. */
 export function isCurrentFact(f: CurrentnessFact, now: Date): boolean {
   return factCurrentness(f, now).current;
+}
+
+/** The last second of a calendar day in New York: 23:59:59 EST, or 23:59:59 EDT when daylight time is on. */
+function endOfNewYorkDay(day: string): Date {
+  const nyDay = (d: Date) => d.toLocaleDateString('en-CA', { timeZone: 'America/New_York' });
+  const est = new Date(`${day}T23:59:59-05:00`);
+  return nyDay(est) === day ? est : new Date(`${day}T23:59:59-04:00`);
 }
 
 const dayLabel = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' });
@@ -118,6 +133,7 @@ const dayLabel = (iso: string) => new Date(iso).toLocaleDateString('en-US', { mo
 export function currentnessLine(c: Currentness): string {
   if (c.basis === 'ended') return 'A newer source says this ended: not a story for a first touch.';
   if (c.basis === 'undated') return 'Undated: not a story for a first touch.';
+  if (c.basis === 'closed') return `This notice closed on ${dayLabel(c.until!)}: not a story for a first touch.`;
   if (c.current) return `Current until ${dayLabel(c.until!)}${c.basis === 'effective_date' ? ' (the change takes effect later)' : ''}.`;
   return `This story is too old for a first touch: it was current until ${dayLabel(c.until!)}.`;
 }

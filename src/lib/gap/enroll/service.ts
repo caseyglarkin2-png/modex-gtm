@@ -183,6 +183,8 @@ export interface EnrollFromDecisionInput {
   owner?: string | null;
   /** Sending identity. Defaults to the decision's preferred sender, else the owner. */
   sender?: string | null;
+  /** Batch item 7: the recipient the seller confirmed; when given, a different address now is refused. */
+  recipient?: string | null;
 }
 
 export interface AutonomyVerdict {
@@ -256,6 +258,7 @@ export type EnrollServiceRefusal =
   | 'account_replied'
   | 'named_in_referral'
   | 'account_motion_active'
+  | 'recipient_changed_since_review'
   | 'account_mismatch'
   | 'decision_persona_mismatch'
   | 'active_opportunity'
@@ -753,6 +756,9 @@ export async function enrollFromDecision(
   if (employment) return refuse(employment.reason, { detail: employment.detail });
   const email = (persona.email ?? '').trim().toLowerCase();
   if (!email) return refuse('no_email');
+  if (input.recipient && input.recipient.trim().toLowerCase() !== email) {
+    return refuse('recipient_changed_since_review', { detail: `The address is now ${email}, not ${input.recipient.trim().toLowerCase()} as you confirmed. Review and confirm again.` });
+  }
 
   // Red team Release B review #4: an enrollment starts at step 0. A person
   // GAP already emailed (any card, any engine), or with a send whose outcome

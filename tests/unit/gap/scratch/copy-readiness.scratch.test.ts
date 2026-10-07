@@ -143,4 +143,48 @@ describe.skipIf(!RUN)('R34: copy readiness end to end (scratch database, the rea
     const body = (await res.json()) as { error?: string };
     expect([res.status, body.error]).toEqual([409, 'no_version']);
   }, 300_000);
+
+  // Batch item 7: a failed loadSendableTheses read kept the account READY. An unread send gate opens nothing.
+  it('the send gate cannot be read: the page that was READY is research, saying why; nothing is called usable', async () => {
+    if (archived.length) await prisma.sequenceFamily.updateMany({ where: { id: { in: archived } }, data: { archived_at: null } });
+    archived = [];
+    const { loadAccountView } = await import('@/lib/gap/account-intel/load');
+    const { loadAccountContext } = await import('@/lib/gap/context/load');
+    const { loadPursuit } = await import('@/lib/gap/pursuit/load');
+    const { SCRATCH_NO_DEALS } = await import('@/scripts/gap/scratch-opportunity');
+    const now = new Date();
+    const loaded = (await loadAccountView(prisma, pepsi.slug, now, { live: true, context: true, deps: { opportunity: SCRATCH_NO_DEALS } } as never)) as { brief: never; inputs: never };
+    const pctx = await loadAccountContext(prisma, loaded.inputs, now);
+    const readable = await loadPursuit(prisma, { brief: loaded.brief, inputs: loaded.inputs, ctx: pctx, now });
+    expect(['ready', 'choose_person'], readable.state.stateLine).toContain(readable.state.state);
+    expect(readable.usableTheses.length).toBeGreaterThan(0);
+    // Only the send-gate read fails (the open theses with their linked signals); every other read answers.
+    const hyp = prisma.prospectingHypothesis;
+    const failingHyp = new Proxy(hyp, {
+      get(m, k) {
+        if (k === 'findMany') {
+          return async (args: { where?: { superseded_by?: unknown }; select?: { signals?: unknown } }) => {
+            if (args?.where?.superseded_by && args?.select?.signals) throw new Error('read timed out');
+            return hyp.findMany(args as never);
+          };
+        }
+        const v = Reflect.get(m, k);
+        return typeof v === 'function' ? v.bind(m) : v;
+      },
+    });
+    const failing = new Proxy(prisma, {
+      get(t, k) {
+        if (k === 'prospectingHypothesis') return failingHyp;
+        const v = Reflect.get(t, k);
+        return typeof v === 'function' ? v.bind(t) : v;
+      },
+    });
+    const unread = await loadPursuit(failing as never, { brief: loaded.brief, inputs: loaded.inputs, ctx: pctx, now });
+    expect(unread.sendableTheses).toBeNull();
+    expect(unread.state).toMatchObject({ state: 'research', stateLine: 'Research: whether a thesis can open an email could not be read just now', coldTouchAllowed: false });
+    expect(unread.state.blocker).toBe(`The send gate could not be read for ${pepsi.name} just now. Nothing goes out until it can be; reload in a moment.`);
+    expect(unread.usableTheses).toEqual([]);
+    expect(unread.hypothesisId).toBeNull();
+    expect(unread.ready).toBeNull();
+  }, 300_000);
 });

@@ -123,7 +123,7 @@ export function approachOfHypothesis(h: { metadata?: unknown } | null | undefine
   return isEvidenceApproach(v) ? v : DEFAULT_APPROACH;
 }
 
-export type ClaimAdmission = { ok: true } | { ok: false; reason: 'approach_not_enabled' | 'claim_not_admitted_for_approach' | 'posting_closed' | 'not_an_ongoing_state' };
+export type ClaimAdmission = { ok: true } | { ok: false; reason: 'approach_not_enabled' | 'claim_not_admitted_for_approach' | 'posting_closed' | 'posting_reposted' | 'not_an_ongoing_state' };
 
 /**
  * May a claim of this class open a thesis of this approach? The gate's other rules (verified, dated, the account's
@@ -135,6 +135,8 @@ export function claimAdmittedFor(approach: EvidenceApproach, claim: { claimClass
   const cls = claim.claimClass ?? 'FACT';
   if (!p.admits.includes(cls)) return { ok: false, reason: 'claim_not_admitted_for_approach' };
   if (approach === 'job_procurement_led' && cls === 'JOB_POSTING' && claim.attributes?.postingStatus === 'closed') return { ok: false, reason: 'posting_closed' };
+  // Batch item 7 (R22): a reposted listing is not new demand: never a fresh job-led trigger.
+  if (approach === 'job_procurement_led' && cls === 'JOB_POSTING' && claim.attributes?.postingStatus === 'reposted') return { ok: false, reason: 'posting_reposted' };
   if (approach === 'fit_led' && claim.continuity && claim.continuity !== 'ongoing_state') return { ok: false, reason: 'not_an_ongoing_state' };
   return { ok: true };
 }

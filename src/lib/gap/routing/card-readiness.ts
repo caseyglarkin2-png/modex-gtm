@@ -76,8 +76,8 @@ export const RESEARCHABLE_RULES: ReadonlySet<string> = new Set(['evidence_thin',
 
 const WARNING_CLASSES: ReadonlySet<SuppressionClass> = new Set(['soft_deliverability', 'hard_invalid_address']);
 
-/** R3b / R3c: the account's opportunity state holds the card whatever its thesis is doing. */
-const OPPORTUNITY_HOLDS: ReadonlySet<string> = new Set(['active_opportunity', 'opportunity_unknown']);
+/** R3b / R3c / R3d (batch item 7, the corporate-family hold): the account's opportunity state holds the card whatever its thesis is doing. */
+const OPPORTUNITY_HOLDS: ReadonlySet<string> = new Set(['active_opportunity', 'opportunity_unknown', 'family_hold']);
 
 /** Where a draft hypothesis for any account is reviewed and approved: the cockpit REVIEW lane. */
 export const HYPOTHESIS_REVIEW_HREF = '/gap?lane=review';
@@ -243,6 +243,14 @@ function readinessOf(item: ReadinessInput): CardReadiness {
           state: 'actionable' as const,
           primary: { label: 'Hold: active opportunity', href: null, note: `${item.account.name} already has an active opportunity (an open HubSpot deal, a meeting or a positive reply). Work it from the deal, not a cold first touch.` },
           secondary: company ? [{ label: 'Open the account in HubSpot', href: company }] : [],
+        });
+      }
+      // R3d (batch item 7): a parent, subsidiary or sibling in a live motion holds a cold one here, as the click does.
+      if (item.ruleId === 'family_hold') {
+        return withWarning({
+          state: 'actionable' as const,
+          primary: { label: 'Hold: related account', href: null, note: `A related account in the ${item.account.name} corporate family is in a live deal, conversation or first touch. No cold motion here until it settles. The routing details name it.` },
+          secondary: [],
         });
       }
       return withWarning({

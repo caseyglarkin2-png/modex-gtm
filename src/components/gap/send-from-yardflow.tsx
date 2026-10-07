@@ -48,6 +48,7 @@ type State =
 const REASONS: Record<string, string> = {
   copy_changed_since_review: 'The email changed after you reviewed it. Nothing was sent.',
   recipient_changed_since_review: 'The recipient changed after you reviewed it. Nothing was sent.',
+  sender_changed_since_review: 'The sending mailbox changed after you reviewed it. Nothing was sent.',
   send_in_progress_or_unknown: 'This email was already started and its outcome is not recorded. Check Gmail Sent before trying again. GAP will not send it twice.',
   send_refused: 'The send was refused before anything left the mailbox.',
   copy_review_required: 'The copy needs your review first. Nothing was sent.',

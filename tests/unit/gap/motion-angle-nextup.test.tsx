@@ -107,6 +107,8 @@ describe('NEXT UP v2: deterministic, one per account, never a held account', () 
 
   it('heldAccountsOf: an open deal or unknown opportunity truth on any current card holds the account', () => {
     expect([...heldAccountsOf([{ account: { name: 'Kroger' }, ruleId: 'active_opportunity' }, { account: { name: 'X' }, ruleId: 'opportunity_unknown' }, { account: { name: 'Y' }, ruleId: 'enroll' }])].sort()).toEqual(['Kroger', 'X']);
+    // Batch item 7: a corporate-family hold holds the account for NEXT UP too.
+    expect([...heldAccountsOf([{ account: { name: 'Frito-Lay' }, ruleId: 'family_hold' }])]).toEqual(['Frito-Lay']);
   });
 });
 

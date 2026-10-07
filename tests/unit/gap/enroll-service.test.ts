@@ -295,6 +295,19 @@ describe('Release B review #4: a person GAP already emailed is never enrolled at
   });
 });
 
+describe('batch item 7: a live enrollment binds the recipient the seller confirmed', () => {
+  it('the same address (any case or spacing) enrolls as before; a different one is refused recipient_changed_since_review, nothing written', async () => {
+    const plain = await enrollFromDecision(makePrisma(), input({ mode: 'live' }), deps());
+    expect(plain).toMatchObject({ ok: true });
+    expect(await enrollFromDecision(makePrisma(), input({ mode: 'live', recipient: ' JANE.DOE@acme-logistics.com ' }), deps())).toMatchObject({ ok: true });
+    const prisma = makePrisma();
+    const r = await enrollFromDecision(prisma, input({ mode: 'live', recipient: 'jane@acme-logistics.com' }), deps());
+    expect(r).toMatchObject({ ok: false, reason: 'recipient_changed_since_review', detail: 'The address is now jane.doe@acme-logistics.com, not jane@acme-logistics.com as you confirmed. Review and confirm again.' });
+    expect(prisma.draftQueueItem.create).not.toHaveBeenCalled();
+    expect(prisma.sequenceEnrollment.create).not.toHaveBeenCalled();
+  });
+});
+
 describe('enrollFromDecision guards, in order', () => {
   it('gap_disabled when GAP_OS_ENABLED is off, before any read', async () => {
     process.env.GAP_OS_ENABLED = 'false';

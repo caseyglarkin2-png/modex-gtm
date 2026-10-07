@@ -82,6 +82,8 @@ export interface HubSpotAccountSnapshot {
   contacts?: Record<string, HubSpotContactSnapshot>;
   /** HubSpot active-opportunity truth (opportunity/active-opportunity.ts). Absent is UNKNOWN. */
   opportunity?: OpportunityTruth;
+  /** Batch item 7: the corporate-family hold (family/family.ts familyHoldNow), the one the page and the click apply. */
+  familyHold?: { detail: string; unknown: boolean } | null;
 }
 
 export interface HubSpotContactSnapshot {
@@ -394,6 +396,7 @@ function buildAccount(
     outreachStatus: row.outreach_status ?? null,
     // No HubSpot read for this account: UNKNOWN, never clear (fail closed).
     opportunity: snapshot?.opportunity ?? { status: 'UNKNOWN', reason: snapshot ? 'hubspot_error' : 'hubspot_unconfigured', detail: 'no HubSpot opportunity read for this routing run' },
+    familyHold: snapshot?.familyHold ?? null,
   };
 }
 

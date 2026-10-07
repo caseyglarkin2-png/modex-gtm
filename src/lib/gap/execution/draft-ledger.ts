@@ -89,6 +89,8 @@ export const DIRECT_CLAIMED = 'execution.gmail_direct_claimed' as const;
 export const DIRECT_SENT = 'execution.gmail_direct_sent' as const;
 export const DIRECT_RELEASED = 'execution.gmail_direct_released' as const;
 export const DIRECT_REFUSED = 'execution.gmail_direct_refused' as const;
+/** Batch item 7: what the final check SHOWED (the copy hash, the recipient and the sending mailbox); never a send. */
+export const DIRECT_PREVIEWED = 'execution.gmail_direct_previewed' as const;
 /** Governed copy (2026-10-01): COPY EMAIL was refused by the same gates as draft and send. */
 export const COPY_REFUSED = 'execution.copy_refused' as const;
 /** Governed copy: the email text was released to Casey after every gate cleared. Never a draft, never a send. */
@@ -321,6 +323,7 @@ export async function appendLedger(
     | typeof DIRECT_REFUSED
     | typeof COPY_REFUSED
     | typeof COPY_RELEASED
+    | typeof DIRECT_PREVIEWED
     | typeof DRAFT_CLAIMED,
   actor: string,
   decisionId: string,

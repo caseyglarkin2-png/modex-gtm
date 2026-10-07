@@ -20,6 +20,8 @@ export type SuppressionVerdict = 'clear' | 'suppressed' | 'unknown';
 
 export interface RoutingAccountInput {
   name: string;
+  /** Batch item 7: a parent, subsidiary or sibling holds a cold motion here (family/family.ts); absent reads as none. */
+  familyHold?: { detail: string; unknown: boolean } | null;
   slug?: string | null;
   hubspotCompanyId?: string | null;
   tam: 'in' | 'out' | 'unknown';

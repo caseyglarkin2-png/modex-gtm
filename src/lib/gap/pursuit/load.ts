@@ -153,6 +153,11 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
   const usable = (h: (typeof brief.hypotheses)[number] | null) => gateUsable(h) && copyOk(h!.id);
   const anchoredOpen = usable(anchored) ? anchored : null;
   const usableTheses = brief.hypotheses.filter((h) => h.grounded && h.truth !== 'CONTRADICTED' && usable(h)).map((h) => h.id);
+  // Batch item 7: the send gate could not be read: nothing is called usable, so the account is never READY (the anchor
+  // says the same), and the state says why.
+  if (sendableTheses === null && (state.state === 'ready' || state.state === 'choose_person')) {
+    state = { ...state, state: 'research', stateLine: 'Research: whether a thesis can open an email could not be read just now', coldTouchAllowed: false, blocker: `The send gate could not be read for ${accountName} just now. Nothing goes out until it can be; reload in a moment.`, unlock: 'The send gate read.' };
+  }
   // Item 6: the only thing missing is installed copy: say which family, never "no usable angle".
   const copyMissing = usableTheses.length === 0 ? brief.hypotheses.filter((h) => h.grounded && h.truth !== 'CONTRADICTED' && gateUsable(h) && !copyOk(h.id)) : [];
   const missingCopy = copyMissing.length ? copyById?.get(copyMissing[0].id) ?? null : null;
@@ -180,7 +185,8 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
   const readyCard = state.state === 'ready' && state.person?.personaId != null
     ? queue.items.find((it) => EMAIL_ACTIONS.has(it.action) && it.persona?.id === state.person!.personaId && laneWithMotion(it, held, thesisHeld) === 'ready') ?? null
     : null;
-  const ready = readyTargetOf(mine) ?? (readyCard ? { name: state.person!.name, title: state.person!.title, href: cockpitOpenHref('ready', readyCard.id), headline: `Ready: ${state.person!.name}.` } : null);
+  // Batch item 7: an unread send gate opens nothing, so no Ready target either (the cockpit motion may still name one).
+  const ready = sendableTheses === null ? null : readyTargetOf(mine) ?? (readyCard ? { name: state.person!.name, title: state.person!.title, href: cockpitOpenHref('ready', readyCard.id), headline: `Ready: ${state.person!.name}.` } : null);
   return { state, resolution, stack, hypothesisId: anchoredOpen?.id ?? topUsable?.id ?? null, anchorChoice, sendableTheses, usableTheses, ready, replyItems: repliesPage.items.filter((x) => x.accountName === accountName) };
 }
 
