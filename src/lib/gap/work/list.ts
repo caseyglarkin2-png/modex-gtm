@@ -34,7 +34,7 @@ import type { FollowUpPlan } from '../execution/follow-up-plan';
 import { LANE_RANK, type NextCandidate } from '../routing/next-up';
 import type { PursuitSummary } from '../pursuit/summary';
 import type { PursuitStateKind } from '../pursuit/state';
-import { outcomeLine, type WorkOutcome } from './outcome';
+import { outcomeLine, type WorkOutcome } from './outcome-model';
 import { MOTION_UNLOCK_BUSINESS_DAYS } from '../motion/account-motion';
 import { buyerMoves, commitmentPhase, commitmentTier, KIND_TEXT, type Commitment, type CommitmentKind } from './commitment-model';
 import { dayLabel, nyDay } from './dates';

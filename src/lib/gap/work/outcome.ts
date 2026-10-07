@@ -14,39 +14,18 @@
  * HubSpot or changes any thesis, person or suppression.
  */
 import { accountSlug } from '../account-intel/href';
+import { outcomeLine, SNOOZE_MAX_DAYS, OUTCOME_REASON_MAX, WORK_OUTCOME, type WorkOutcome, type WorkOutcomeKind } from './outcome-model';
+
+// The client-safe model lives in ./outcome-model (the Work list reads only that); re-exported for the server callers.
+export { outcomeLine, SNOOZE_MAX_DAYS, OUTCOME_REASON_MAX, WORK_OUTCOME, type WorkOutcome, type WorkOutcomeKind } from './outcome-model';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
 
-export const WORK_OUTCOME = 'account.work_outcome' as const;
-export type WorkOutcomeKind = 'skipped' | 'snoozed' | 'logged';
-export const OUTCOME_REASON_MAX = 240;
-/** A snooze may not run past this. */
-export const SNOOZE_MAX_DAYS = 90;
 /** A skip and a logged-elsewhere hold the card out of today's list until the next day (New York). */
 const DAY_MS = 86_400_000;
 
-export interface WorkOutcome {
-  accountName: string;
-  kind: WorkOutcomeKind;
-  reason: string | null;
-  /** When the card returns (ISO). */
-  until: string;
-  by: string;
-  at: string;
-}
-
 const isObj = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null;
-
-/** The seller line: "Snoozed until Oct 9 (travel), you, Oct 6." */
-export function outcomeLine(o: WorkOutcome, now: Date = new Date()): string {
-  const day = (s: string) => new Date(s).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' });
-  const who = /^casey@/i.test(o.by) ? 'you' : o.by;
-  const head = o.kind === 'snoozed' ? `Snoozed until ${day(o.until)}` : o.kind === 'skipped' ? 'Skipped for today' : `Logged outside GAP${o.reason ? '' : ', back tomorrow'}`;
-  const reason = o.reason ? ` (${o.reason})` : '';
-  const when = new Date(o.at).toDateString() === now.toDateString() ? 'today' : day(o.at);
-  return `${head}${reason}, ${who}, ${when}.`;
-}
 
 /** The active outcome per account (newest row wins; a lapsed one or a clear reads as none). */
 export async function loadWorkOutcomes(prisma: PrismaLike, accountNames: readonly string[], now: Date = new Date()): Promise<Map<string, WorkOutcome>> {
