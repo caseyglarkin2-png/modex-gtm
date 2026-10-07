@@ -74,6 +74,7 @@ import { loadInDealsSummary, type InDealsSummary } from '@/lib/gap/deals/in-deal
 import { loadDealBrief } from '@/lib/gap/deals/deal-brief';
 import { DealBriefView } from '@/components/gap/deal-brief';
 import { loadRecordedClosures, sweepClosedDeals } from '@/lib/gap/deals/closure';
+import { loadRecordedReplyIds, withoutRecordedReplies } from '@/lib/gap/work/recorded-replies';
 import { resolveAccountOpportunity } from '@/lib/gap/opportunity/active-opportunity';
 
 export const dynamic = 'force-dynamic';
@@ -409,14 +410,18 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
   // what the last workspace read said instead of falling back to the lanes.
   // R41: the obligations (after the bounded follow-up sweep), the next day's meetings and the seller's priorities are
   // read on every render, never cached with the lanes, so a write shows on the next load.
-  const [summaries, outcomes, commitments, meetingRowsRaw] = await Promise.all([
+  // R60 capture once: which remembered replies were recorded since the read (one live read, in this same wave).
+  const [summariesRead, outcomes, commitments, meetingRowsRaw, recordedReplies] = await Promise.all([
     loadPursuitSummaries(prisma, data.workAccounts, now),
     loadWorkOutcomes(prisma, data.workAccounts, now).catch(() => new Map()),
     // The sweep writes at the real time only; the phases are read at `now`.
     lane ? Promise.resolve([]) : loadWorkCommitments(prisma, realNow, { replies: data.workInput.replies }).catch(() => []),
     // R51: every meeting row in the window, canceled ones included (Work says so and stops asking to prepare them).
     lane ? Promise.resolve([]) : loadMeetingRows(prisma, now).catch(() => []),
+    loadRecordedReplyIds(prisma, data.workInput.replies.map((r) => r.id ?? '')).catch(() => new Set<string>()),
   ]);
+  const live = withoutRecordedReplies(data.workInput.replies, summariesRead, recordedReplies);
+  const summaries = live.summaries ?? summariesRead;
   // Batch item 8: an untagged meeting belongs to the deal whose contacts it names (the brief's own rule), so its
   // preparation and its rebooking never read another deal's work.
   const meetingRows = await resolveMeetingDeals(prisma, meetingRowsRaw, data.workInput.inDeals).catch(() => meetingRowsRaw);
@@ -435,7 +440,7 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
     loadMeetingStartingPoints(prisma, meetingRows.filter((m) => new Date(m.at).getTime() <= now.getTime() + 24 * 3_600_000), commitments, now).catch(() => new Map()),
     closureAccounts.length ? loadRecordedClosures(prisma, closureAccounts).catch(() => new Map()) : Promise.resolve(new Map()),
   ]);
-  const day = workDay({ ...data.workInput, now, summaries, outcomes, commitments, meetings, canceledMeetings, meetingPreps, priorities, followUpPlans, closedDeals });
+  const day = workDay({ ...data.workInput, replies: live.replies, now, summaries, outcomes, commitments, meetings, canceledMeetings, meetingPreps, priorities, followUpPlans, closedDeals });
   const work: WorkCard[] = day.cards;
   // R45: close the day and keep tomorrow, derived from actual state (no new storage).
   const doneToday = lane || preview ? [] : await loadCompletedToday(prisma, now).catch(() => []);
