@@ -88,7 +88,7 @@ describe('R63-B S12: a parked account never carries a first-touch card on Work',
       dbState: new Map([ready(SYSCO, 'Lee Scratch'), ready(FEDEX, 'Glen Scratch'), ['No Thesis Co', { sendable: false, chosen: { name: 'X', title: null } }]]),
     });
     expect(names).toEqual([FEDEX, 'Follow Co', SYSCO, 'Held Deal Co']);
-    const many = new Map(Array.from({ length: 12 }, (_, n) => ready(`Co ${n}`, 'P')));
+    const many = new Map(Array.from({ length: 25 }, (_, n) => ready(`Co ${n}`, 'P')));
     expect(accountsToCheck({ candidates: [], dbState: many, held: new Map(), inDeals: { status: 'unavailable', accounts: [] } })).toHaveLength(OPPORTUNITY_HOLD_MAX);
   });
 

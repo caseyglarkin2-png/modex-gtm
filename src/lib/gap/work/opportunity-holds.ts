@@ -25,8 +25,12 @@ export type OpportunityHold =
   | { kind: 'open_deal'; why: string }
   | { kind: 'unknown'; why: string };
 
-/** How many accounts one Work read checks (Work's own order; the warmer writes the rest's summaries after it). */
-export const OPPORTUNITY_HOLD_MAX = 8;
+/**
+ * How many accounts one Work read checks (Work's own order). R63-A B2: twenty (the cold-work lanes a day holds), read
+ * OPPORTUNITY_HOLD_CONCURRENCY at a time; each answer is remembered, so a warm read costs nothing.
+ */
+export const OPPORTUNITY_HOLD_MAX = 20;
+export const OPPORTUNITY_HOLD_CONCURRENCY = 5;
 /** One account's read is bounded tighter than a click's: a HubSpot that does not answer holds the card (UNKNOWN). */
 export const OPPORTUNITY_HOLD_TIMEOUT_MS = 4_000;
 
@@ -71,20 +75,27 @@ export function resetOpportunityHolds(): void {
   remembered.clear();
 }
 
-/** Each account's hold, read through `resolve` (the gate's resolver), at once; an account nothing holds is absent. */
+/**
+ * Each account's hold, read through `resolve` (the gate's resolver), OPPORTUNITY_HOLD_CONCURRENCY at a time; an account
+ * nothing holds is absent.
+ */
 export async function loadOpportunityHolds(accounts: readonly string[], resolve: (accountName: string) => Promise<OpportunityTruth>, now = Date.now()): Promise<Map<string, OpportunityHold>> {
   const out = new Map<string, OpportunityHold>();
+  const one = async (name: string) => {
+    const have = remembered.get(name);
+    let hold: OpportunityHold | null;
+    if (have && now - have.at < have.ttl) hold = have.hold;
+    else {
+      const truth = await resolve(name).catch((e): OpportunityTruth => ({ status: 'UNKNOWN', reason: 'hubspot_error', detail: e instanceof Error ? e.message : String(e) }));
+      hold = opportunityHoldOf(truth);
+      remembered.set(name, { at: now, ttl: truth.status === 'UNKNOWN' ? IN_DEALS_FAILURE_CACHE_MS : IN_DEALS_CACHE_MS, hold });
+    }
+    if (hold) out.set(name, hold);
+  };
+  const queue = [...accounts];
   await Promise.all(
-    accounts.map(async (name) => {
-      const have = remembered.get(name);
-      let hold: OpportunityHold | null;
-      if (have && now - have.at < have.ttl) hold = have.hold;
-      else {
-        const truth = await resolve(name).catch((e): OpportunityTruth => ({ status: 'UNKNOWN', reason: 'hubspot_error', detail: e instanceof Error ? e.message : String(e) }));
-        hold = opportunityHoldOf(truth);
-        remembered.set(name, { at: now, ttl: truth.status === 'UNKNOWN' ? IN_DEALS_FAILURE_CACHE_MS : IN_DEALS_CACHE_MS, hold });
-      }
-      if (hold) out.set(name, hold);
+    Array.from({ length: Math.min(OPPORTUNITY_HOLD_CONCURRENCY, queue.length) }, async () => {
+      for (let name = queue.shift(); name !== undefined; name = queue.shift()) await one(name);
     }),
   );
   return out;
