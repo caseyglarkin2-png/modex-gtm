@@ -158,7 +158,7 @@ export function prepareArtifacts(i: ArtifactInput): PreparedArtifact[] {
       title: 'The agreed recap',
       dealId: i.deal.id,
       why: statements.length
-        ? `${statements.length} confirmed statement${statements.length === 1 ? '' : 's'} from ${[...new Set(statements.map((n) => n.who))].join(' and ')} on ${dealName}: send ${statements.length === 1 ? 'it' : 'them'} back so ${lead ? first(lead.name) : 'they'} can correct them${agreedByBuyer.length ? `, with the ${agreedByBuyer.length} step${agreedByBuyer.length === 1 ? '' : 's'} they agreed` : ''}.`
+        ? `${statements.length} confirmed statement${statements.length === 1 ? '' : 's'} from ${[...new Set(statements.map((n) => n.who))].join(' and ')} on ${dealName}: send ${statements.length === 1 ? 'it' : 'them'} back so ${lead ? first(lead.name) : 'they'} can correct ${statements.length === 1 ? 'it' : 'them'}${agreedByBuyer.length ? `, with the ${agreedByBuyer.length} step${agreedByBuyer.length === 1 ? '' : 's'} they agreed` : ''}.`
         : `Nothing confirmed from the buyer on ${dealName} yet: there is no recap to send until there is.`,
       to: lead?.name ?? null,
       text: recapLines.join('\n'),
