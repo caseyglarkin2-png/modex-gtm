@@ -37,3 +37,29 @@ describe('classifyReply: what kind of reply is this, before anything ranks on it
     expect(REPLY_CLASS_LABEL.opt_out).toBe('Opted out');
   });
 });
+
+describe('R42b: an out-of-office is an automatic notice, never a person mentioning their week (audit at 31f09c71)', () => {
+  it('a real reply that mentions a delay, a vacation or being out of the office STAYS HUMAN (it holds the account and gets a Work card)', () => {
+    for (const snippet of [
+      'Sorry for the delayed response. Yes, Thursday works for a call.',
+      'Apologies for the delayed reply, I was on vacation last week. Can you send the two-site comparison?',
+      'I was out of the office last week. We are interested, can we talk Monday?',
+      "I'm out of the office this week but yes, send me the comparison and I will read it Monday.",
+      'I am on vacation until the 12th. Monday the 13th works for me, 10am.',
+      'Thanks Casey, my responses will be delayed this week, but we are interested. Let\'s talk next week.',
+    ]) {
+      const c = classifyReply({ snippet, subject: 'Re: Yard question' });
+      expect([snippet, c.kind, c.pausesAccount]).toEqual([snippet, 'human', true]);
+    }
+  });
+  it('the canonical notice stays out_of_office: the notice and no answer to our ask, even with a colleague to contact', () => {
+    expect(classifyReply({ snippet: 'Thank you for your email. I am out of the office until Monday, October 12, with limited access to email. For urgent matters please contact Jane Doe at jane@acme.com.', subject: 'Re: Yard question' }).kind).toBe('out_of_office');
+    expect(classifyReply({ snippet: "I'm currently traveling and will return on Oct 14.", subject: 'Re: Yard question' }).kind).toBe('out_of_office');
+    expect(classifyReply({ snippet: 'Please note there will be a delay in my response this week.', subject: 'Re: Yard question' }).kind).toBe('out_of_office');
+    // The canonical subject alone decides: a person does not write "Automatic reply:".
+    expect(classifyReply({ snippet: 'Can you send more?', subject: 'Automatic reply: Yard question' }).kind).toBe('out_of_office');
+  });
+  it('an explicit opt-out inside an out-of-office notice is an opt-out (it stops everything; a notice only pauses the person)', () => {
+    expect(classifyReply({ snippet: 'I am out of the office until Monday. Please remove me from your list.', subject: 'Re: Yard question' }).kind).toBe('opt_out');
+  });
+});

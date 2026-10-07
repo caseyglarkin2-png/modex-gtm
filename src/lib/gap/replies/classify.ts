@@ -20,6 +20,15 @@
  * priority only: the send gates, the disposition workflow and the suppression writers are unchanged. The live
  * cases: Walmart's whole reply "stop" read as "Buyer replied" on the cockpit; FedEx's "my responses will be
  * delayed" drove NEXT as an unanswered thread for 125 days. Pinned by tests/unit/gap/reply-classify.test.ts.
+ *
+ * R42b (audit finding at 31f09c71): an out-of-office is an AUTOMATIC NOTICE, never a person answering. A message
+ * that carries an Auto-Submitted or autoresponder header is rejected at ingestion (email/reply-precision.ts), so here
+ * it is the canonical subject ("Automatic reply:", "Out of Office:") or the canonical notice body ("I am out of the
+ * office until", "my responses will be delayed", "I will return on") WITH no first-person answer to our ask (no
+ * question back, no yes, no day that works, no "send me"). "Sorry for the delayed response", "I was on vacation
+ * last week" or "I'm out of the office this week but yes, send it" are people: they stay human, hold the account and
+ * get a Work card. An explicit opt-out wins over an out-of-office notice in the same message ("I'm out of the office;
+ * please remove me from your list" is an opt-out).
  */
 import { AUTO_REPLY_SUBJECT } from './domains';
 
@@ -63,7 +72,21 @@ const CONSEQUENCE: Record<ReplyClassKind, string> = {
 /** A message that IS the refusal and nothing else: "stop", "STOP.", "unsubscribe", "remove me", "opt out". */
 const OPT_OUT = /^\W*(?:please\s+)?(?:stop|unsubscribe(?:\s+me)?|remove\s+me|opt\s*out|take\s+me\s+off(?:\s+(?:your|this|the)\s+list)?)\W*$/i;
 const OPT_OUT_ANYWHERE = /\b(?:unsubscribe me|remove me from (?:your|this|the) (?:list|emails?)|do not (?:contact|email) me(?: again)?|take me off (?:your|this|the) list|^\W*not interested\b)/i;
-const OUT_OF_OFFICE_BODY = /\b(?:out of (?:the )?office|responses? (?:will|may) be delayed|delayed (?:response|reply)|limited access to (?:my )?e-?mail|on (?:vacation|holiday|leave|pto)|currently (?:traveling|travelling|away)|will (?:return|be back) on|automatic(?:ally)? (?:reply|generated)|auto-?reply|this is an automated)\b/i;
+/**
+ * The canonical out-of-office NOTICE, in the present or the future: "I am out of the office until", "I'm currently on
+ * vacation", "my responses will be delayed", "I will return on". Never an apology or the past ("sorry for the
+ * delayed response", "I was out of the office"), which is a person writing back.
+ */
+const OUT_OF_OFFICE_NOTICE = /\b(?:(?:i\s+am|i'm|i\s+will\s+be|currently)\s+(?:(?:currently|now)\s+)?(?:out\s+of\s+(?:the\s+)?office|on\s+(?:vacation|holiday|leave|pto|parental\s+leave)|away\s+from\s+(?:the\s+)?office|traveling|travelling|ooo)\b|^\W*out\s+of\s+(?:the\s+)?office\b|out\s+of\s+(?:the\s+)?office\s+(?:until|through|from|and\s+will|with\s+limited)|responses?\s+(?:will|may)\s+be\s+delayed|(?:there\s+)?will\s+be\s+a\s+delay(?:ed)?\s+in\s+(?:my\s+)?(?:response|reply|responding)|limited\s+access\s+to\s+(?:my\s+)?e-?mail|will\s+(?:return|be\s+back)\s+(?:on|in\s+the\s+office|to\s+the\s+office)|automatic(?:ally)?\s+(?:reply|generated)|auto-?reply|this\s+is\s+an\s+automated)/i;
+/**
+ * A person answering us: a question back, a yes, a day that works, an ask for something. An automatic notice carries
+ * none of these, so a notice phrase beside one of them is a person mentioning their week, not an auto-reply.
+ */
+const ANSWER_CUE = /\?|(?:^|[.!,;]\s*)(?:yes|yeah|yep|sure|absolutely|definitely)\b|\b(?:works\s+for\s+(?:me|us)|(?:monday|tuesday|wednesday|thursday|friday|tomorrow|next\s+week)\s+(?:works|is\s+(?:good|fine|great|open))|let'?s\s+(?:talk|meet|connect|chat|set|find|schedule|do)|send\s+(?:me|us|over)\b|set\s+up\s+(?:a|some)\s+time|(?:we|i)(?:'re|\s+are|'m|\s+am)\s+(?:interested|open\s+to)|sounds\s+(?:good|great)|count\s+me\s+in|happy\s+to\s+(?:talk|chat|meet|connect|hop\s+on|take\s+a\s+look))\b/i;
+/** The canonical body of an automatic notice: the notice phrase, and no first-person answer to our ask. */
+export function isOutOfOfficeNotice(text: string): boolean {
+  return OUT_OF_OFFICE_NOTICE.test(text) && !ANSWER_CUE.test(text);
+}
 const BOUNCE_FROM = /^(?:mailer-daemon|postmaster|mail delivery (?:subsystem|system))\b/i;
 const BOUNCE_SUBJECT = /^(?:undeliverable|delivery (?:status notification|failure)|mail delivery failed|returned mail|failure notice)/i;
 /** "Not the right person", "talk to Bob", "I've copied my colleague": the answer points elsewhere. */
@@ -76,13 +99,15 @@ export function classifyReply(input: { snippet: string | null | undefined; subje
   const snippet = (input.snippet ?? '').replace(/\s+/g, ' ').trim();
   const subject = (input.subject ?? '').trim();
   const from = (input.from ?? '').trim().toLowerCase();
+  // Order: a bounce is a delivery failure; an explicit opt-out wins over a notice in the same message (it stops
+  // everything, an out-of-office only pauses the person); then the canonical auto-reply subject or notice body.
   const kind: ReplyClassKind =
     BOUNCE_FROM.test(from) || BOUNCE_SUBJECT.test(subject) || BOUNCE_BODY.test(snippet)
       ? 'bounce'
-      : AUTO_REPLY_SUBJECT.test(subject) || OUT_OF_OFFICE_BODY.test(snippet)
-        ? 'out_of_office'
-        : OPT_OUT.test(snippet) || OPT_OUT_ANYWHERE.test(snippet)
-          ? 'opt_out'
+      : OPT_OUT.test(snippet) || OPT_OUT_ANYWHERE.test(snippet)
+        ? 'opt_out'
+        : AUTO_REPLY_SUBJECT.test(subject) || isOutOfOfficeNotice(snippet)
+          ? 'out_of_office'
           : 'human';
   if (kind !== 'human') return { kind, label: REPLY_CLASS_LABEL[kind], pausesAccount: false, consequence: CONSEQUENCE[kind], human: null };
   const human: HumanReplyKind = REFERRAL.test(snippet) ? 'referral' : OBJECTION.test(snippet) ? 'objection' : 'reply';

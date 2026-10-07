@@ -7,8 +7,16 @@
  * hold clears then; re-review S7). A shared consumer domain, or our own, says
  * nothing about the account. Enforced at the send gate (step 0) and at live
  * enrollment.
+ *
+ * R42b (audit addendum at 31f09c71): the hold and the Work card read the SAME
+ * classification (classify.ts over the subject and the message text). An
+ * automatic notice or a bounce holds nobody; a person (a reply, a referral,
+ * an objection) or an opt-out holds until a human records it. Before, the
+ * hold looked at the subject only, so a notice without the canonical subject
+ * held every send with no card to tell the seller why.
  */
-import { AUTO_REPLY_SUBJECT, FREEMAIL_DOMAINS, OWN_DOMAINS } from './domains';
+import { FREEMAIL_DOMAINS, OWN_DOMAINS } from './domains';
+import { classifyReply } from './classify';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -21,6 +29,8 @@ export interface AccountReply {
   from_email: string;
   subject: string | null;
   received_at: Date;
+  snippet?: string | null;
+  body_text?: string | null;
 }
 
 /** A company domain (not a shared consumer domain, not ours) of an address, or null. */
@@ -52,11 +62,14 @@ export async function accountRepliedRecently(prisma: PrismaLike, recipient: stri
       OR: [...domains].sort().map((d) => ({ from_email: { endsWith: `@${d}`, mode: 'insensitive' } })),
       received_at: { gte: new Date(now.getTime() - ACCOUNT_REPLY_WINDOW_DAYS * 86_400_000) },
     },
-    select: { id: true, from_email: true, subject: true, received_at: true },
+    select: { id: true, from_email: true, subject: true, received_at: true, snippet: true, body_text: true },
     orderBy: { received_at: 'desc' },
     take: 20,
   });
-  const human = rows.filter((r) => !AUTO_REPLY_SUBJECT.test(r.subject ?? ''));
+  const human = rows.filter((r) => {
+    const kind = classifyReply({ snippet: r.body_text || r.snippet || '', subject: r.subject, from: r.from_email }).kind;
+    return kind === 'human' || kind === 'opt_out';
+  });
   if (human.length === 0) return null;
   // A message a human has already read and dispositioned no longer holds anyone.
   const read: Array<{ source_id: string }> = prisma.conversationDisposition?.findMany
