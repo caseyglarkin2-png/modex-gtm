@@ -31,6 +31,7 @@ import { accountSlug } from './href';
 import { approachOfHypothesis } from '../research/approach-policy';
 import { factCurrentness } from '../research/currentness';
 import { draftApproachFor } from '../story/draft-approach';
+import { nameFromAddress } from '../story/touches';
 /** R30/R31: the non-physical claim classes the read keeps as story facts of their own kind. */
 const CLAIM_FACT_CLASSES: ReadonlySet<string> = new Set(['JOB_POSTING', 'PROCUREMENT']);
 
@@ -285,6 +286,14 @@ export async function loadAccountInputs(
   // as the account's. With no deal there is nothing to tell apart.
   const scopeOfBid = bidScopeLabeler(opportunity, (personas as Row[]).map((p) => ({ personaId: p.id as number, name: (p.name as string | null) ?? `person ${p.id}`, title: (p.title as string | null) ?? null, email: (p.email as string | null) ?? null, hubspotContactId: p.hubspot_contact_id ? String(p.hubspot_contact_id) : null })));
   const conv = (convs as Map<string, { who: string; responseClass: string; at: string }>).get(accountName) ?? null;
+  // R63-A B4 / the matrix: an address is said as the person on record at it, else the name the address carries; the
+  // story never names a speaker by an address.
+  const speakerName = (email: string | null): string | null => {
+    const e = (email ?? '').trim().toLowerCase();
+    if (!e) return null;
+    const p = (personas as Row[]).find((x) => String(x.email ?? '').trim().toLowerCase() === e);
+    return p?.name ? String(p.name) : e.includes('@') ? nameFromAddress(e) : e;
+  };
   // The account's HubSpot people: the linked company; else (owner resolution, 2026-10-05) the companies the account's
   // identity resolved for deal truth (the one identity rule: FedEx and H-E-B have no linked company but their people
   // mail from fedex.com and heb.com). Read only; nothing links the account.
@@ -356,17 +365,18 @@ export async function loadAccountInputs(
       reviewedAt: (h.status === 'approved' || h.status === 'active') && h.reviewed_at ? lastReview(h, acks.get(h.id)) : null,
       reviewAckAt: acks.get(h.id) ? acks.get(h.id)!.toISOString() : null,
     })),
-    bids: confirmed.map((b) => ({ id: b.id, type: b.type, summary: b.normalized_summary ?? b.raw_buyer_language, quote: b.raw_buyer_language, who: b.contact_email ?? null, at: new Date(b.confirmed_at ?? b.captured_at).toISOString(), hypothesisId: b.hypothesis_id ?? null, scope: scopeOfBid({ metadata: b.metadata, contactEmail: b.contact_email ?? null }) })),
+    // R63-A B4 / matrix: whose words, by the person on record at the address (never the address itself).
+    bids: confirmed.map((b) => ({ id: b.id, type: b.type, summary: b.normalized_summary ?? b.raw_buyer_language, quote: b.raw_buyer_language, who: speakerName(b.contact_email ?? null), at: new Date(b.confirmed_at ?? b.captured_at).toISOString(), hypothesisId: b.hypothesis_id ?? null, scope: scopeOfBid({ metadata: b.metadata, contactEmail: b.contact_email ?? null }) })),
     personas: (personas as Row[]).map((p) => {
       const emp = employment.get(p.id) ?? null;
-      return { id: p.id, name: p.name, title: p.title ?? null, doNotContact: !!p.do_not_contact, hasEmail: !!p.email, emailStatus: p.email_status ?? null, updatedAt: iso(p.updated_at), hubspotContactId: p.hubspot_contact_id ?? null, apolloEnrichedAt: p.enrichment?.apollo_person_id ? iso(p.enrichment.last_enriched_at) : null, location: p.hubspot_contact_id ? hsById.get(String(p.hubspot_contact_id))?.location ?? null : null, employment: emp ? { state: emp.state, why: emp.why, elsewhere: emp.elsewhere ? { company: emp.elsewhere.company, title: emp.elsewhere.title } : null } : null, role: personaRoleOf(p) };
+      return { id: p.id, name: p.name, title: p.title ?? null, email: p.email ?? null, doNotContact: !!p.do_not_contact, hasEmail: !!p.email, emailStatus: p.email_status ?? null, updatedAt: iso(p.updated_at), hubspotContactId: p.hubspot_contact_id ?? null, apolloEnrichedAt: p.enrichment?.apollo_person_id ? iso(p.enrichment.last_enriched_at) : null, location: p.hubspot_contact_id ? hsById.get(String(p.hubspot_contact_id))?.location ?? null : null, employment: emp ? { state: emp.state, why: emp.why, elsewhere: emp.elsewhere ? { company: emp.elsewhere.company, title: emp.elsewhere.title } : null } : null, role: personaRoleOf(p) };
     }),
     hubspotPeople: hsWithEmployment,
     candidates: (candidates as Row[]).map((c) => ({ id: c.id, name: c.full_name, title: c.title ?? null, state: c.state, seenAt: iso(c.last_seen_at) })),
     // A member whose Persona is do-not-contact is never a way in (relationship context is never consent).
     memberships: (members as Row[]).map((m) => ({ sourceName: m.work_source?.name ?? 'a source', sourceType: m.work_source?.source_type ?? 'other', relationshipContext: m.relationship_context ?? null, personName: m.kind === 'person' ? m.name ?? null : null, title: m.kind === 'person' ? m.title ?? null : null, company: m.company ?? null, addedAt: iso(m.ingested_at), doNotContact: !!(m.persona_id && (personas as Row[]).some((p) => p.id === m.persona_id && p.do_not_contact)) })),
     firstTouches: ((touches as Map<string, Array<{ recipient: string; sentAt: string; released: boolean; outstanding?: boolean; personaId?: number | null; decisionId?: string; gmailDraftId?: string }>>).get(accountName) ?? []).map((t) => ({ recipient: t.recipient, sentAt: t.sentAt, state: t.outstanding ? 'draft outstanding' : t.released ? 'released' : 'sent', personaId: t.personaId ?? null, ...(t.decisionId ? { decisionId: t.decisionId } : {}), ...(t.gmailDraftId ? { gmailDraftId: t.gmailDraftId } : {}) })),
-    conversation: conv ? { who: conv.who, responseClass: conv.responseClass, at: new Date(conv.at).toISOString() } : null,
+    conversation: conv ? { who: speakerName(conv.who) ?? conv.who, responseClass: conv.responseClass, at: new Date(conv.at).toISOString() } : null,
     opportunity,
     pack: pack as unknown as PackInput | null,
     microsite: micro ? { network: micro.network, freight: micro.freight, sections: micro.sections } : null,

@@ -46,19 +46,26 @@ export function nameFromAddress(address: string): string {
   return parts.map((p) => p.charAt(0).toUpperCase() + p.slice(1).toLowerCase()).join(' ');
 }
 
-const nameKey = (s: string) => s.toLowerCase().replace(/[^a-z]+/g, ' ').trim();
+// R63-A B4: digits stay in the key ("Person1 Scratch" and "Person6 Scratch" are two people, never one).
+const nameKey = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 
 export function mergeTouches(x: {
   history: AccountContext['history'];
   firstTouches: AccountInputs['firstTouches'];
   clawd: ClawdOutreach | null;
-  replies?: Array<{ from: string; at: string; snippet: string; kind: ReplyClassKind; label: string }>;
-  people: Array<{ name: string; title: string | null }>;
+  /** R63-A B4: `address` is the message's from address; its sender is named by it, never by a name that two people share. */
+  replies?: Array<{ from: string; at: string; snippet: string; kind: ReplyClassKind; label: string; address?: string | null }>;
+  people: Array<{ name: string; title: string | null; email?: string | null }>;
   now: Date;
 }): StoryTouch[] {
   const byName = new Map(x.people.map((p) => [nameKey(p.name), p]));
-  const person = (raw: string): { name: string; title: string | null; address: string | null } => {
-    const address = raw.includes('@') ? raw.trim().toLowerCase() : null;
+  const byEmail = new Map(x.people.filter((p) => p.email).map((p) => [String(p.email).trim().toLowerCase(), p]));
+  const person = (raw: string, from?: string | null): { name: string; title: string | null; address: string | null } => {
+    // R63-A B4: the sender's address names them first (the persona on record at that address).
+    const sent = from?.trim().toLowerCase() || null;
+    const own = sent ? byEmail.get(sent) : undefined;
+    if (own) return { name: displayName(own.name), title: own.title ?? null, address: sent };
+    const address = raw.includes('@') ? raw.trim().toLowerCase() : sent;
     const guess = address ? nameFromAddress(address) : displayName(raw.trim());
     const hit = byName.get(nameKey(guess));
     return { name: hit ? displayName(hit.name) : guess, title: hit?.title ?? null, address };
@@ -86,7 +93,7 @@ export function mergeTouches(x: {
     out.push({ kind: 'send', at: new Date(s.date).toISOString(), ...person(s.to), what: s.subject?.trim() || 'email', source: 'clawd ledger' });
   }
   for (const r of x.replies ?? []) {
-    out.push({ kind: 'reply', at: r.at, ...person(r.from), what: r.snippet.replace(/\s+/g, ' ').trim().slice(0, 80), source: 'GAP ledger', replyKind: r.kind, replyLabel: r.label });
+    out.push({ kind: 'reply', at: r.at, ...person(r.from, r.address ?? null), what: r.snippet.replace(/\s+/g, ' ').trim().slice(0, 80), source: 'GAP ledger', replyKind: r.kind, replyLabel: r.label });
   }
 
   // One row per event: the same person, the same minute, the same kind (the history and the GAP ledger both record a send).

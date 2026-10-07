@@ -83,7 +83,7 @@ export interface PursuitState {
   /** May the seller choose or re-order people right now (never under a reply, an opt-out, a deal or a hold)? */
   chooseAllowed: boolean;
   replyClass: ReplyClass | null;
-  lastInbound: { who: string; at: string; kind: ReplyClass['kind']; label: string; /** The reply's first words (for the story's between-us row). */ snippet: string } | null;
+  lastInbound: { who: string; at: string; kind: ReplyClass['kind']; label: string; /** The reply's first words (for the story's between-us row). */ snippet: string; /** R63-A B4: the address it came from (the story names its sender by it). */ from?: string } | null;
   lastOutbound: PursuitInput['lastOutbound'];
   chosenMissing: string | null;
   /** The next person after the chosen one, when the motion names one, with what unlocks them. */
@@ -126,7 +126,7 @@ const who = (by: string) => (/^casey@|^caseyglarkin/i.test(by) ? 'you' : by.repl
 export function projectPursuitState(i: PursuitInput): PursuitState {
   const newestReply = [...i.replies].sort((a, b) => b.at.localeCompare(a.at))[0] ?? null;
   const replyClass = newestReply ? classifyReply({ snippet: newestReply.snippet, subject: newestReply.subject, from: newestReply.from }) : null;
-  const lastInbound = newestReply && replyClass ? { who: newestReply.name ?? newestReply.from, at: newestReply.at, kind: replyClass.kind, label: replyClass.label, snippet: newestReply.snippet.replace(/\s+/g, ' ').trim().slice(0, 80) } : null;
+  const lastInbound = newestReply && replyClass ? { who: newestReply.name ?? newestReply.from, at: newestReply.at, kind: replyClass.kind, label: replyClass.label, snippet: newestReply.snippet.replace(/\s+/g, ' ').trim().slice(0, 80), from: newestReply.from } : null;
 
   // The newest human choice wins; a choice that is no longer eligible is said, never silently dropped.
   const choices = [

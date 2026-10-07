@@ -91,6 +91,8 @@ export interface PersonaInput {
   id: number;
   name: string;
   title: string | null;
+  /** R63-A B4: the address on record (the story names a reply's sender and a buyer statement's speaker by it). */
+  email?: string | null;
   doNotContact: boolean;
   hasEmail: boolean;
   emailStatus: string | null;
