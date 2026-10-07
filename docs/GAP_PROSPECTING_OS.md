@@ -1950,118 +1950,165 @@ they were not re-measured.
 - Observed, not changed: the analyst tables lower on /gap/learning show sequence version ids, the evidence tier name VERIFIED_FACT and campaign program keys. They are kept by contract as the analyst views' own words (R60); listed for the lead's R62 / R63 decision.
 - Live check on the production build (scratchpad `r65-live/`): the operator view listed 4 stranded drafts and 2 HubSpot conflicts with owners and where to act; the strip's call carried no operations; /gap/learning showed the decisions, the approved-not-written note with its retry place, the conflicts, the outcomes and research cost.
 
-### HANDOFF 4e936a90
+**Consolidated debt (2026-10-07).** Every debt this recovery named, one line each, with its owner and the guard that
+holds today; the entries above keep the detail. Owners: engineering (the GAP engineer of record), Casey (a product or
+spend decision), operator (runs the system), copy (human-written words, Casey's).
+- The account page's refresh stall: a router refresh result commits only on the next React update (a framework cause). Guard: 19c0c20e (`refreshNow` and the `RefreshNudge` follow-ups). Owner: engineering. No further work in this program (the lead's decision 2).
+- A cold first byte of 1.6 to 1.8 s (the server starting; the sign-in page alone takes 1.47 s). Guard: none needed for correctness; the remembered summary shows first. Owner: engineering (platform).
+- Prisma's idle `SELECT 1` on each pooled connection (the Rust engine). Guard: connection_limit 5. Owner: engineering.
+- Work's rebuilt read takes 10.5 to 12.6 s under production-like latency (routing/inputs.ts readComms and execution/person-history.ts per card). Guard: the two-minute remembered read and the live reads beside it. Owner: engineering.
+- A closure typed as `site_expansion` (the signal type set is a database CHECK with no closure value; research/facts.ts classifyFact). Guard: `metadata.change` carries "closure". Owner: engineering (a schema change).
+- Work reads every commitment row on each render. Guard: today's volume. Owner: engineering (the indexed projection when rows grow).
+- Pattern reads for referral names, asks, obligations, deal intents and research intents. Guard: the seller confirms or edits each. Owner: engineering.
+- Free-text meeting attendees, no history for a moved meeting, no time for a meeting accepted by email. Guard: the seller adds the time. Owner: engineering.
+- Deal scope needs a HubSpot contact id; division and site are free text. Guard: account-level is said as account-level. Owner: engineering.
+- The plan's standard steps are one fixed list and are not mirrored to HubSpot. Guard: R54 proposes notes and fields only. Owner: engineering.
+- Artifact texts are fixed templates; a recap sent outside GAP is not known. Guard: the seller records "copied". Owner: engineering.
+- A HubSpot task's owner is the portal default; search-before-create depends on HubSpot's index delay. Guard: the mirror row and the marker search. Owner: engineering.
+- "Paused" has no HubSpot field; a closure's held card speaks generic words until its summary is fresh. Guard: the routing hold. Owner: engineering.
+- No next follow-up is proposed after a by-hand follow-up. Guard: the obligation closes and the next touch waits for a send or the seller's task. Owner: engineering.
+- The rotation ranks by tier and band only; the site read is a pattern over the fact text; the job-led copy says "posting" for a procurement notice. Guard: the seller's priority reasons; review. Owner: engineering.
+- R43 touch 2 and later have no copy family (every seeded approach family is single-touch). Guard: "prepare" is offered only for a version with step 1+ copy; the plan says follow up by hand. Owner: copy.
+- No reply copy family. Guard: the answer is prepared from the buyer's own words and edited before use. Owner: copy.
+- Generated quality has no held-out graded corpus (30 or more cases with model, prompt and policy versions). Guard: every generated line is reviewed by the seller. Owner: Casey and engineering.
+- R42b: a reply seen only in HubSpot's connected inbox is prepared and copyable, not drafted or sent from GAP. Guard: the Gmail thread is required. Owner: engineering.
+- The analyst tables on /gap/learning show sequence version ids, VERIFIED_FACT and campaign program keys. Guard: they are analyst words by contract (R60). Owner: Casey (decision).
+- Two Sprint 5 review NICEs not taken: a raw date in the brief (context/brief.ts), and a canceled meeting's rebook offer with HubSpot's stale next step. Guard: none. Owner: engineering (R62 lists them).
+- The app's main sidebar lists Accounts and Work Queue beside GAP OS. Guard: none (outside GAP). Owner: Casey (a system-wide change).
+- Transcription stays off pending its spend. Guard: `GAP_TRANSCRIPTION_ENABLED` unset. Owner: Casey.
+
+### HANDOFF
 
 ```yaml
-handoff: 4e936a90
-written: 2026-10-07
+# HANDOFF (this block's own commit SHA is on the ledger line directly above the block)
 branch: feat/gap-account-first-ux
-head: 4e936a90            # the code this block describes; the block itself is the docs commit on top
-base: origin/main 672570ed (production)
-worktree: C:/Users/casey/wt-gap-account-first-ux (one writer)
-schema_delta: none (no prisma change on the branch; the hand SQL is unchanged)
+base_sha: e66a9853
+head_sha: d9902641
+production_sha: 672570ed
 tickets:
-  R00: {state: DONE, sha: 2113361c, note: production reconciled; one stranded PepsiCo draft observed, nothing written}
-  R01: {state: DONE, sha: 2113361c, note: authority map and the scoped policy amendments}
-  R02: {state: DONE, sha: c0883ca4, note: representative corpus, scratch only}
-  R03: {state: DONE, sha: 2113361c, note: Pepsi reproduction, anchor-draft.scratch.test.ts}
-  R04: {state: DONE, sha: 2113361c, note: carried from docs/gap/ACCOUNT_FIRST_UX.md}
-  R05: {state: DONE, sha: f4b3c70f, note: sink and base path refused under VERCEL_ENV=production}
-  R10: {state: DONE, sha: 1b6416a9}
-  R11: {state: DONE, sha: 42b21547}
-  R12: {state: DONE, sha: 42b21547}
-  R13: {state: DONE, sha: 1b6416a9}
-  R14: {state: DONE, sha: 32a67597}
-  R15: {state: DONE, sha: 31c44d1f, note: measured with R61}
-  R20: {state: DONE, sha: 71c4c3a8, note: the coverage choice stays Casey's}
-  R21: {state: DONE, sha: 1b6416a9}
-  R22: {state: DONE, sha: 1b6416a9}
-  R23: {state: DONE, sha: 4cf3fdb1}
-  R24: {state: DONE, sha: daa61ff3}
-  R25: {state: DONE, sha: 0beca6b3}
-  R30: {state: DONE, sha: 1b6416a9}
-  R31: {state: DONE, sha: 4cf3fdb1}
-  R32: {state: DONE, sha: 6f3fa5eb}
-  R33: {state: DONE, sha: 5f5e76cf}
-  R34: {state: DONE, sha: 372f6609, note: seeding the families in production is an R64 step}
-  R35: {state: DONE, sha: 1b6416a9}
-  R40: {state: DONE, sha: 1e7b4aa4}
-  R41: {state: DONE, sha: 1e7b4aa4}
-  R42: {state: DONE, sha: 71b6ff36, note: "R42b PARTIAL for a reply seen only in HubSpot's inbox; dependency: its Gmail thread"}
-  R43: {state: PARTIAL, sha: e2da206e, dependency: "touch 2 and later copy: every seeded approach family is single-touch; a step-1 family must be written and seeded"}
-  R44: {state: DONE, sha: 8283a9cc, note: capture once now includes a reply's meaning}
-  R45: {state: DONE, sha: 1e7b4aa4}
-  R50: {state: DONE, sha: 6e16babd}
-  R51: {state: DONE, sha: f43d5280}
-  R52: {state: DONE, sha: ea3645f2}
-  R53: {state: DONE, sha: a0f6bb77}
-  R54: {state: DONE, sha: 4e936a90, note: approved HubSpot writes stay OFF in production; 4e936a90 words a conflict}
-  R55: {state: DONE, sha: 8feafd40}
-  R60: {state: DONE, sha: de14c0fa, note: "capture once 8283a9cc + de14c0fa; vocabulary 216cd80a"}
-  R61: {state: PARTIAL, sha: 31c44d1f, dependency: ["the platform's cold start (first byte 1.6 to 1.8 s with no GAP read)", "Work's rebuilt read 10.5 to 12.6 s under production-like latency: routing/inputs.ts readComms and execution/person-history.ts per card"]}
-  R62: {state: NOT STARTED}
-  R63: {state: NOT STARTED}
-  R64: {state: NOT STARTED}
-  R65: {state: DONE, sha: e5b0b567, note: "code: the counts e5b0b567, the dry run c72e6a2f; running it in production follows R64"}
-sprint5_review: {blocker: f43d5280, should: [9f283f1a, 8feafd40, 4834eb2d, 6e16babd, 20f244a3], nice: [9c0e5b14, 0e06651c, a0f6bb77], not_taken: ["a raw date in the brief (context/brief.ts)", "a canceled meeting's rebook offer and HubSpot's stale next step"]}
+  R00: {disposition: DONE, evidence: "2113361c: production 672570ed reconciled; the capability matrix and the one stranded PepsiCo draft recorded"}
+  R01: {disposition: DONE, evidence: "2113361c: the authority map and the scoped policy amendments"}
+  R02: {disposition: DONE, evidence: "c0883ca4: scripts/gap/recovery/seed-corpus.ts, scratch only"}
+  R03: {disposition: DONE, evidence: "2113361c: tests/unit/gap/scratch/anchor-draft.scratch.test.ts"}
+  R04: {disposition: DONE, evidence: "2113361c: carried from docs/gap/ACCOUNT_FIRST_UX.md"}
+  R05: {disposition: DONE, evidence: "f4b3c70f: GAP_SEND_TRANSPORT=sink and HUBSPOT_API_BASE_PATH refused under VERCEL_ENV=production"}
+  R10: {disposition: DONE, evidence: "1b6416a9: state and anchor agree on an unread send gate"}
+  R11: {disposition: DONE, evidence: "42b21547: the family derived with its basis, never asked for job or procurement drafts"}
+  R12: {disposition: DONE, evidence: "42b21547: review where the action lives"}
+  R13: {disposition: DONE, evidence: "1b6416a9: the confirm binds the sending mailbox; a live enrollment binds the recipient"}
+  R14: {disposition: DONE, evidence: "32a67597: an outcome, not a navigation event"}
+  R15: {disposition: DONE, evidence: "31c44d1f: measured with R61"}
+  R20: {disposition: DONE, evidence: "71c4c3a8: coverage honesty; the coverage choice stays Casey's"}
+  R21: {disposition: DONE, evidence: "1b6416a9: a vendor's claim about the account is quoted_third_party"}
+  R22: {disposition: DONE, evidence: "1b6416a9: a closed RFP is not current; a repost is never a job-led trigger"}
+  R23: {disposition: DONE, evidence: "4cf3fdb1: partnership and software claims are their own type"}
+  R24: {disposition: DONE, evidence: "daa61ff3: research/currentness.ts is the one freshness authority"}
+  R25: {disposition: DONE, evidence: "0beca6b3 and 71c4c3a8: the news budget and the research dead letter"}
+  R30: {disposition: DONE, evidence: "1b6416a9: the approach's evidence policy at the gate"}
+  R31: {disposition: DONE, evidence: "4cf3fdb1: Gatik is not an event, one guess everywhere"}
+  R32: {disposition: DONE, evidence: "6f3fa5eb: the person matched to the motion and its scope"}
+  R33: {disposition: DONE, evidence: "5f5e76cf and c0a4e214: a story set aside never returns; automatic reversible preparation"}
+  R34: {disposition: DONE, evidence: "372f6609: copy read from the seeded rows, never READY without it"}
+  R35: {disposition: DONE, evidence: "1b6416a9: a question asking what to write is answered with the control"}
+  R40: {disposition: DONE, evidence: "1e7b4aa4: one durable commitment per obligation; counts are completions"}
+  R41: {disposition: DONE, evidence: "1e7b4aa4: Work ranks today by commercial obligations"}
+  R42: {disposition: DONE, evidence: "71b6ff36: reply triage through reply execution; R42b PARTIAL for a reply seen only in HubSpot's inbox (dependency: its Gmail thread)"}
+  R43: {disposition: PARTIAL, evidence: "e2da206e: the plan, the holds and the recovery", dependency: "human-written step 1+ copy for the seeded approach families"}
+  R44: {disposition: DONE, evidence: "16971d2c: capture once, one capture per reply"}
+  R45: {disposition: DONE, evidence: "1e7b4aa4: close the day and keep tomorrow"}
+  R50: {disposition: DONE, evidence: "6e16babd: buyer words carry their deal in every view"}
+  R51: {disposition: DONE, evidence: "f43d5280: meeting preparation never mixes two deals' words"}
+  R52: {disposition: DONE, evidence: "ea3645f2: a practical mutual action plan"}
+  R53: {disposition: DONE, evidence: "20f244a3 and a0f6bb77: artifacts written to their recipient"}
+  R54: {disposition: DONE, evidence: "4834eb2d and 4e936a90: no outdated recap written; conflicts in words; approved writes OFF in production"}
+  R55: {disposition: DONE, evidence: "8feafd40: a reopened deal lists what its closure skipped, each restorable"}
+  R60: {disposition: DONE, evidence: "8283a9cc, de14c0fa, 16971d2c (one capture per reply) and 216cd80a (the vocabulary)"}
+  R61: {disposition: PARTIAL, evidence: "31c44d1f; the p95 re-judgment in the R61 entry", dependency: "cold first byte (platform); Prisma idle SELECT 1 per pooled connection; Work's rebuilt read"}
+later_tickets:
+  R62: {disposition: IN PROGRESS, evidence: "acceptB runs the matrix on 55433"}
+  R63: {disposition: NOT STARTED}
+  R64: {disposition: NOT STARTED, evidence: "needs Casey's authorization for the production write below"}
+  R65: {disposition: DONE, evidence: "e5b0b567 the counts, d9902641 owners and retry paths, c72e6a2f the read-only dry run"}
 reopened_unresolved:
-  - "Section 8 generated quality: PARTIAL; dependency: a held-out, human-graded corpus of 30 or more cases with model, prompt and policy versions"
-  - "the two Sprint 5 review NICEs not taken (listed for R62)"
+  - "R43 touch 2 and later: human-written copy"
+  - "generated quality: the graded corpus (30 or more cases with model, prompt and policy versions)"
+  - "R61: cold first byte 1.6 to 1.8 s"
+  - "R61: Prisma idle SELECT 1 per pooled connection"
+  - "R61: Work's rebuilt read 10.5 to 12.6 s under production-like latency"
+  - "a closure typed as site_expansion (research/facts.ts classifyFact; the signal type CHECK has no closure value)"
+  - "two Sprint 5 review NICEs not taken: a raw date in the brief; a canceled meeting's rebook offer and HubSpot's stale next step"
 r62_cases:
-  matrix: {branch: origin/feat/gap-matrix, sha: a43b46b3, files: {boundaries: 11, daily: 10, dependencies: 11, execution: 16, identity: 9, pepsi: 11, replies: 12, source: 12}}
-  invalidated: none (no matrix assertion pins a changed control; matrix-replies records through POST /api/gap/dispositions, which stays for calls, meetings and the analyst lane)
+  matrix: {branch: feat/gap-matrix, sha: caa0772c, origin_sha: a43b46b3, files: "tests/unit/gap/scratch/matrix-*.scratch.test.ts", file_count: 8, cases: 87, note: "87 green is acceptB's receipt; caa0772c and a43b46b3 carry the same runbook commit"}
+  groups: [migration and boundaries, daily work, dependencies, execution, identity and scope, Pepsi regression, replies and capture, source truth and commercial relevance]
+  stub_controls: "scripts/gap/recovery/stubs.mjs: POST /__stub/matrix (the matrix failure controls), POST /__stub/control, POST /__stub/deal-property, GET /__stub/writes"
   add:
-    - "a reply logged through Capture on the scratch database with the real disposition and BID services: one disposition sourced to the message, the kept statements confirmed and linked, the card gone from Work on the next load"
+    - "a reply logged through Capture with the real disposition and BID services: one capture, one disposition sourced to the message, the kept statements linked; opened again it returns the same note; Work drops the card"
     - "a reply card and the account page offer only Capture; no reply form on the account"
     - "a deal closed in HubSpot is named with its outcome on its kept rows, in Work and in meeting preparation; never its id"
     - "a reopened deal lists what its closure skipped; Restore makes one open obligation, refused while the deal is closed"
     - "a new recap retires the earlier unwritten recap on its deal; the replaced one is refused at retry and absent from Coverage"
     - "buyer words in NOW, the brief and the story carry their deal; a detention figure counts as cost"
-    - "artifacts in the second person, no CRM deal name in buyer text"
+    - "artifacts in the second person; no CRM deal name in buyer text"
     - "no seller heading or label says HYPOTHESIS or BID"
-    - "the stranded-draft dry run on the matrix's Pepsiprod row: ADOPT for Tom's Tulsa draft; the R11 service then adopts that id (stranded-repair.scratch.test.ts proves it on the corpus)"
-    - "GET /api/gap/health?operations=1 counts the matrix's broken handoffs and HubSpot failures; the plain call carries none"
-  decide: "the analyst tables on /gap/learning keep sequence version ids, VERIFIED_FACT and campaign program keys (analyst words by contract)"
-r63_tasks:   # each starts from Work on the production build
-  - log a reply once: the reply card, Capture prefilled, what it means and their words, recorded; Work moves on
-  - record an opt-out from its card
-  - work a deal: the brief, meeting preparation, agree the plan, copy the recap, approve the HubSpot note (not written)
-  - send a ready first touch through the gate to the sink
-  - a follow-up due today: prepare it or send it by hand in the thread
-  - review a thesis and put it in use from the account
-  - a deal closes and reopens: restore what still stands
-  - close the day and preview tomorrow
-r64_release:
-  merge: PR feat/gap-account-first-ux to main on Casey's go; Vercel builds production; verify the live pages after
-  seed_families: "dry run first, then GAP_OS_ENABLED=true npx tsx scripts/gap/seed-families.ts --apply against production; a production write that needs Casey's authorization"
-  flags: no new flag; GAP_HUBSPOT_MIRROR_ENABLED, GAP_CRM_APPROVED_WRITES_ENABLED, GAP_AUTO_ENROLL_ENABLED and GAP_HUBSPOT_SEQUENCE_PUBLISH_ENABLED stay off; GAP_SEND_TRANSPORT and HUBSPOT_API_BASE_PATH stay unset
-  stranded_draft_repair: "DATABASE_URL=<production> npx tsx scripts/gap/recovery/repair-stranded-drafts.ts --dry-run (exists since c72e6a2f; read-only, refuses to write) lists what the proposal service would adopt (known: PepsiCo cmux0uu7r0003jw0450gb4kno, Tom); the adoption itself runs through the R11 service (the seller's draft control, or with explicit authorization)"
-  verify: scripts/gap/verify-triggers.ts read-only after the deploy
-  rollback: promote the previous production deployment (main 672570ed); the flags are the kill switch; no schema or data migration to reverse
+    - "the stranded-draft dry run names ADOPT for the Pepsiprod Tulsa draft; the R11 service then adopts that id"
+    - "GET /api/gap/health?operations=1 counts the broken handoffs and HubSpot failures with owners and retry paths; the plain call carries none"
+r63_seller_tasks:
+  - work today's list
+  - handle a reply (Log what they said, one capture)
+  - prepare a first touch
+  - record a note
+  - resume tomorrow
+  - a no-action account
+  - an unsupported-data account
+  - the accessibility and trust pass
+r64_release_requirements:
+  - "a PR from feat/gap-account-first-ux to main with the attribution lines"
+  - "merge; Vercel production READY on that SHA"
+  - "the one named additive production write: GAP_OS_ENABLED=true npx tsx scripts/gap/seed-families.ts --apply --remote (the script is scripts/gap/seed-families.ts; scripts/gap/sequences/ does not exist), after its dry run without --apply"
+  - "the stranded PepsiCo draft cmux0uu7r0003jw0450gb4kno repaired through the page (drafting from the Tulsa fact for Tom adopts it) before 2026-11-20, the fact's expiry; the read-only dry run first"
+  - "read-only smoke: scripts/gap/verify-triggers.ts, the pages signed in"
+  - "a canary window before the next change"
+  - "rollback: redeploy 672570ed (no schema delta on the branch)"
 r65_requirements:
-  health_and_learning: [broken handoffs (drafts stranded, proposals incomplete, dead-letter signals), queue age, research freshness and cost (runs, turns, queued, verified, failed), preparation latency (summary age), seller corrections, completion / reply / meeting / commitment outcomes, CRM sync pending and failed with owners and retry paths]
-  audiences: the operator sees failures; Casey sees decisions
-  repair_script: scripts/gap/recovery/repair-stranded-drafts.ts --dry-run, read-only; refuses to write
-capabilities:
-  enabled_in_production: [hypothesis, routing, message compiler, reply classification, background research and grounded discovery on the cron schedule]
-  code_complete_disabled: [auto-enroll, HubSpot sequence publish, HubSpot mirror, approved HubSpot writes, transcription (spend), the transport sink and the HubSpot base-path override (scratch and test only)]
-  ships_with_this_branch_without_a_flag: [capture once on a reply, deal-scoped labels and closed-deal history, restore after reopening, recap retirement, the seller vocabulary, the operations counts (health ?operations=1 and /gap/learning), the read-only repair dry run]
-environment:   # the harness in five lines
-  - "Postgres: embedded scratch at postgresql://postgres:scratch@127.0.0.1:55432/gap_finish_e2e; reset with scratchpad reset-scratch.sh (schema, hand SQL, 33 guards, families)"
-  - "seed: DATABASE_URL=<scratch> npx tsx <scratchpad>/journey-exit-seed.ts <tag>; copy stub-deals-<tag>.json to r60-deals.json; write the tag to r60-tag.txt"
-  - "stub: bash <scratchpad>/run-r60-stub.sh (HubSpot and clawd on 4545); build: source scratch-env.sh; unset PORT; npm run build"
-  - "serve: bash <scratchpad>/run-r60-server.sh (next start -p 3100); cookie: AUTH_SECRET=$(cat auth-secret.txt) node mint-cookie.mjs"
-  - "walk: node journey-exit.mjs and r60-capture-walk.mjs (playwright-core from the rig); stop the server and the stub after; scratch tests run with --maxWorkers=1 (one shared database)"
-receipts:   # on 4e936a90 unless said
-  typecheck: {command: npx tsc --noEmit -p ., result: clean}
-  gap_unit: {command: "npx vitest run tests/unit/gap/[a-c|d-l|m-r|s-z0-9]*.test.ts(x) --maxWorkers=2 (four foreground chunks)", files: 403, tests: 5653, failed: 0}
-  gap_scratch: {command: GAP_SCRATCH_DATABASE_URL=<scratch> npx vitest run tests/unit/gap/scratch --maxWorkers=1, files: 9, tests: 50, failed: 0}
-  rest: {command: "npx vitest run --maxWorkers=2 --exclude tests/unit/gap/**", sha: e5b0b567, files: 326, tests: 2300, passed: 2299, skipped: 1, failed: 0, note: no file outside GAP changed after it}
-  build: {command: npm run build, sha: e5b0b567, result: compiled}
-  journeys: {sha: a0f6bb77, exit: "12 steps, zero internal-text hits (r62-exit2/)", reply_capture: "6 steps, zero internal-text hits (r62-capture2/)", hubspot_writes: 0}
-  r65_live: {sha: e5b0b567, result: "operations listed 4 stranded drafts and 2 conflicts with owners; the strip call carried none; /gap/learning showed the decisions (r65-live/)"}
-  focused: each fix's own test and a deliberate mutation turned red, then restored (named in each commit and the dispositions above)
-blockers: []
+  counts: [stranded drafts, incomplete proposals, dead-letter signals, queue age, research freshness and cost, preparation latency, seller corrections, outcomes, R54 sync failures]
+  where: "GET /api/gap/health?operations=1 (the operator: failures with owners and retry paths); /gap/learning (Casey: decisions only, with outcomes and research cost)"
+  dry_run: "scripts/gap/recovery/repair-stranded-drafts.ts --dry-run [--json]; refuses without --dry-run; a read-only client; tests/unit/gap/r65-stranded-repair.test.ts and tests/unit/gap/scratch/stranded-repair.scratch.test.ts"
+  runbook: "docs/gap/RUNBOOK.md on feat/gap-matrix at caa0772c (a43b46b3 on origin)"
+  debt: "the consolidated debt list directly above this block, each with its owner and guard"
+enabled_vs_code_complete_disabled:
+  production_flags:   # the GAP CORE LIVE block and R00, unless said
+    GAP_OS_ENABLED: "on"
+    GAP_HYPOTHESIS_ENABLED: "on"
+    GAP_ROUTING_ENABLED: "on"
+    GAP_MESSAGE_COMPILER_ENABLED: "on"
+    GAP_REPLY_CLASSIFICATION_ENABLED: "on"
+    GAP_BACKGROUND_RESEARCH_ENABLED: "on (R00, on the cron schedule)"
+    GAP_HUBSPOT_SEQUENCE_PUBLISH_ENABLED: "off"
+    GAP_AUTO_ENROLL_ENABLED: "off"
+    GAP_AUTO_ENROLL_SHADOW: "off"
+    GAP_HUBSPOT_MIRROR_ENABLED: "off"
+    GAP_CRM_APPROVED_WRITES_ENABLED: "unset (added on this branch; default off; stays off)"
+    GAP_TRANSCRIPTION_ENABLED: "unset (R00: transcription disabled pending its spend)"
+  code_complete_but_off:
+    - "approved HubSpot writes (R54, GAP_CRM_APPROVED_WRITES_ENABLED): proposals and approvals record; nothing is written"
+    - "the automatic HubSpot mirror (GAP_HUBSPOT_MIRROR_ENABLED)"
+    - "auto-enroll and its shadow"
+    - "HubSpot sequence publishing"
+    - "dictation (transcription)"
+    - "the transport sink and the HubSpot base-path override: test harness only; refused under VERCEL_ENV=production (f4b3c70f)"
+environment:
+  postgres: "embedded, postgresql://postgres:scratch@127.0.0.1:55432/gap_finish_e2e; reset with the scratchpad reset-scratch.sh (schema, hand SQL, 33 guards, families)"
+  stub: "node scripts/gap/recovery/stubs.mjs 4545 (HubSpot and clawd), STUB_DEALS_FILE and STUB_COMPANIES from the seed"
+  seed: "scripts/gap/recovery/seed-corpus.ts (and seed-matrix.ts on feat/gap-matrix)"
+  env: "scratch-env.sh: GAP flags on, GAP_SEND_TRANSPORT=sink, HUBSPOT_API_BASE_PATH at the stub, DATABASE_URL at the scratch database"
+  build_and_serve: "npm run build, then next start -p 3100 (NODE_ENV=production, PORT unset)"
+  session: "AUTH_SECRET=<scratch secret> node mint-cookie.mjs, sent as authjs.session-token"
+  rules: "scratch tests with --maxWorkers=1 (one shared database); stop the server and the stub after a run"
+test_receipts:
+  r61_run: {sha: e66a9853, source: "as reported at the R61 checkpoint; not repeated in the ledger", typecheck: clean, gap: "390 files / 5,593 tests", scratch: "8 files / 47 tests", rest: "326 files / 2,298 tests, 1 skipped", journeys: "r5-exit/ 11 steps; r60-final/ 7 of 7"}
+  latest: {sha: 4e936a90, typecheck: "npx tsc --noEmit -p . (clean)", gap: "npx vitest run tests/unit/gap/<four chunks> --maxWorkers=2: 403 files / 5,653 tests", scratch: "GAP_SCRATCH_DATABASE_URL=<scratch> npx vitest run tests/unit/gap/scratch --maxWorkers=1: 9 files / 50 tests", rest_e5b0b567: "npx vitest run --maxWorkers=2 --exclude tests/unit/gap/**: 326 files / 2,299 passed, 1 skipped", build_e5b0b567: "npm run build: compiled", journeys_a0f6bb77: "r62-exit2/ 12 steps and r62-capture2/ 6 steps, zero internal-text hits, zero HubSpot writes", r65_live_e5b0b567: "r65-live/"}
+  after_4e936a90: "16971d2c and d9902641: focused tests only under the load cap (r60-capture-reply 11, capture-once and capture 25, r65-operations and learning-dashboard 19), each with a red mutation"
+genuine_blockers: []
 ```
 
 ## 12. Migration, backfill and rollback
