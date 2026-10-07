@@ -49,7 +49,7 @@ import { buyerMoves } from '@/lib/gap/work/commitment-model';
 import { addDays, nyDay, nyDayAt } from '@/lib/gap/work/dates';
 import { buildNextUpCandidates } from '@/lib/gap/routing/next-up';
 import { workDay, type WorkCard, type WorkInput } from '@/lib/gap/work/list';
-import { loadCompletedToday, loadUpcomingMeetings, loadWorkCommitments } from '@/lib/gap/work/day-load';
+import { loadCompletedToday, loadMeetingRows, loadMeetingStartingPoints, loadWorkCommitments } from '@/lib/gap/work/day-load';
 import { loadAccountPriorities } from '@/lib/gap/work/priority';
 import { loadFollowUpPlans } from '@/lib/gap/execution/follow-up-load';
 import { loadWorkOutcomes } from '@/lib/gap/work/outcome';
@@ -396,20 +396,25 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
   // what the last workspace read said instead of falling back to the lanes.
   // R41: the obligations (after the bounded follow-up sweep), the next day's meetings and the seller's priorities are
   // read on every render, never cached with the lanes, so a write shows on the next load.
-  const [summaries, outcomes, commitments, meetings] = await Promise.all([
+  const [summaries, outcomes, commitments, meetingRows] = await Promise.all([
     loadPursuitSummaries(prisma, data.workAccounts, now),
     loadWorkOutcomes(prisma, data.workAccounts, now).catch(() => new Map()),
     // The sweep writes at the real time only; the phases are read at `now`.
     lane ? Promise.resolve([]) : loadWorkCommitments(prisma, realNow, { replies: data.workInput.replies }).catch(() => []),
-    lane ? Promise.resolve([]) : loadUpcomingMeetings(prisma, now).catch(() => []),
+    // R51: every meeting row in the window, canceled ones included (Work says so and stops asking to prepare them).
+    lane ? Promise.resolve([]) : loadMeetingRows(prisma, now).catch(() => []),
   ]);
   const mailbox = process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() || null;
-  const [priorities, followUpPlans] = await Promise.all([
+  const meetings = meetingRows.filter((m) => !m.canceled).map((m) => ({ accountName: m.accountName, at: m.at, what: m.what, meetingId: m.meetingId, dealId: m.dealId }));
+  const canceledMeetings = meetingRows.filter((m) => m.canceled).map((m) => ({ accountName: m.accountName, at: m.at, what: m.what, meetingId: m.meetingId }));
+  const [priorities, followUpPlans, meetingPreps] = await Promise.all([
     loadAccountPriorities(prisma, [...new Set([...data.workAccounts, ...commitments.map((c) => c.accountName)])]).catch(() => new Map()),
     // R43: each follow-up due today, read off the person's own history (prepare, by hand, a saved draft, unknown, held).
     loadFollowUpPlans(prisma, commitments, { now, mailbox, held: data.workInput.held, dealAccounts: new Set(data.workInput.inDeals.status === 'complete' ? data.workInput.inDeals.accounts.map((a) => a.accountName) : []) }).catch(() => new Map()),
+    // R51: each meeting's prepared starting point (objective, first thing to learn, last commitment).
+    loadMeetingStartingPoints(prisma, meetingRows.filter((m) => new Date(m.at).getTime() <= now.getTime() + 24 * 3_600_000), commitments, now).catch(() => new Map()),
   ]);
-  const day = workDay({ ...data.workInput, now, summaries, outcomes, commitments, meetings, priorities, followUpPlans });
+  const day = workDay({ ...data.workInput, now, summaries, outcomes, commitments, meetings, canceledMeetings, meetingPreps, priorities, followUpPlans });
   const work: WorkCard[] = day.cards;
   // R45: close the day and keep tomorrow, derived from actual state (no new storage).
   const doneToday = lane || preview ? [] : await loadCompletedToday(prisma, now).catch(() => []);

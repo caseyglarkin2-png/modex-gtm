@@ -71,7 +71,7 @@ export interface WorkObligation {
 export interface WaitingItem {
   key: string;
   accountName: string;
-  kind: CommitmentKind | 'motion';
+  kind: CommitmentKind | 'motion' | 'meeting';
   title: string;
   line: string;
   dueDay: string | null;
@@ -142,7 +142,11 @@ export interface WorkInput {
   /** R40/R41: every commitment at the Work accounts (and beyond), as stored; the phase is read here at `now`. */
   commitments?: readonly Commitment[];
   /** R41: meetings on the calendar (the Meeting table), any within the next 24 hours become an obligation. */
-  meetings?: ReadonlyArray<{ accountName: string; at: string; what: string; personaId?: number | null }>;
+  meetings?: ReadonlyArray<{ accountName: string; at: string; what: string; personaId?: number | null; meetingId?: number; dealId?: string | null }>;
+  /** R51: meetings on the calendar that were canceled (Work stops asking to prepare them, and says so). */
+  canceledMeetings?: ReadonlyArray<{ accountName: string; at: string; what: string; meetingId: number }>;
+  /** R51: each meeting's prepared starting point and where its preparation lives, by meeting id. */
+  meetingPreps?: ReadonlyMap<number, { prep: string; href: string }>;
   /** R41: the seller's explicit priority per account (work/priority.ts). */
   priorities?: ReadonlyMap<string, { reason: string; by: string; at: string }>;
   /** R43: the plan for each follow-up due today, by commitment id (execution/follow-up-plan.ts). */
@@ -455,6 +459,9 @@ export function workDay(i: WorkInput): WorkDay {
   // R40 / R41: the obligations. Due today -> on the account's card (a card is made when the account has none, so no
   // task is ever silently omitted); waiting, upcoming or blocked -> the Waiting footer; snoozed -> the Snoozed footer.
   const moved = buyerMoves(i.replies);
+  // R51: the calendar's truth, read on every load: a canceled meeting and the accounts that still have one booked.
+  const liveMeeting = new Set((i.meetings ?? []).map((m) => m.accountName));
+  const canceledAt = new Map((i.canceledMeetings ?? []).filter((m) => !liveMeeting.has(m.accountName)).map((m) => [m.accountName, `${day(m.at)} ${time(m.at)}`]));
   // R50: an obligation bound to a deal says which one (the In Deals summary names the account's open deals).
   const dealLabel = (accountName: string, dealId: string | null): string | null => {
     if (!dealId) return null;
@@ -476,6 +483,12 @@ export function workDay(i: WorkInput): WorkDay {
       waiting.push({ key: c.commitmentId, accountName: c.accountName, kind: c.kind, title: c.title, line: p.line, dueDay: p.dueDay, commitmentId: c.commitmentId });
       continue;
     }
+    // R51: a meeting to prepare whose meeting on the calendar was canceled (and none is booked) waits until it is
+    // rebooked, said in words; it never asks the seller to prepare a meeting that is not happening.
+    if (c.kind === 'prepare_meeting' && canceledAt.has(c.accountName) && !liveMeeting.has(c.accountName)) {
+      waiting.push({ key: c.commitmentId, accountName: c.accountName, kind: c.kind, title: c.title, line: `The meeting on the calendar was canceled (${canceledAt.get(c.accountName)}): nothing to prepare until it is rebooked.`, dueDay: p.dueDay, commitmentId: c.commitmentId });
+      continue;
+    }
     // R43: a follow-up says what its plan says: prepare it, follow up by hand, a saved draft, an unknown send, a hold.
     const plan = c.kind === 'follow_up' ? i.followUpPlans?.get(c.commitmentId) ?? null : null;
     if (plan?.action === 'complete') continue;
@@ -492,8 +505,17 @@ export function workDay(i: WorkInput): WorkDay {
     const at = new Date(m.at).getTime();
     if (!(at >= i.now.getTime() - 30 * 60_000 && at <= horizon)) continue;
     const list = obligations.get(m.accountName) ?? [];
-    list.push({ key: `meeting:${m.accountName}:${m.at}`, commitmentId: null, kind: 'meeting', tier: 'meeting', title: `Meeting ${dayLabel(nyDay(m.at), i.now)} ${time(m.at)}: ${m.what}`, line: 'Prepare it: within 24 hours.', dueAt: m.at, dueDay: nyDay(m.at), person: null, basis: null, href: m.personaId ? `/gap/call/${m.personaId}` : accountHref(m.accountName), label: 'Prepare the meeting', canComplete: false });
+    // R51: the prepared starting point rides on the card; the full preparation is on the account's deal brief.
+    const prep = m.meetingId != null ? i.meetingPreps?.get(m.meetingId) ?? null : null;
+    list.push({ key: `meeting:${m.accountName}:${m.at}`, commitmentId: null, kind: 'meeting', tier: 'meeting', title: `Meeting ${dayLabel(nyDay(m.at), i.now)} ${time(m.at)}: ${m.what}`, line: 'Prepare it: within 24 hours.', dueAt: m.at, dueDay: nyDay(m.at), person: null, basis: null, href: prep?.href ?? (m.personaId ? `/gap/call/${m.personaId}` : `${accountHref(m.accountName)}?view=brief`), label: 'Prepare the meeting', canComplete: false, prep: prep?.prep ?? null, scope: dealLabel(m.accountName, m.dealId ?? null) });
     obligations.set(m.accountName, list);
+  }
+  // R51: a canceled meeting is said once, in Waiting (never a meeting to prepare).
+  for (const m of i.canceledMeetings ?? []) {
+    if (liveMeeting.has(m.accountName)) continue;
+    const at = new Date(m.at).getTime();
+    if (!(at >= i.now.getTime() - 24 * 3_600_000 && at <= i.now.getTime() + 48 * 3_600_000)) continue;
+    waiting.push({ key: `meeting-canceled:${m.meetingId}`, accountName: m.accountName, kind: 'meeting', title: `Meeting ${dayLabel(nyDay(m.at), i.now)} ${time(m.at)}: ${m.what}`, line: 'Canceled: nothing to prepare unless it is rebooked.', dueDay: nyDay(m.at), commitmentId: null });
   }
   // A first touch out with no follow-up record waiting: the Waiting footer says it (one line per account).
   const waitingAccounts = new Set(waiting.filter((w) => w.kind === 'follow_up').map((w) => w.accountName));

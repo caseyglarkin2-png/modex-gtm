@@ -12,7 +12,9 @@
  *   Fedex Scratch Co     a chosen person and an APPROVED grounded thesis on a verified fact -> Ready
  *   Walmart Scratch Co   a buyer replied "stop" -> Opted out (never cold work)
  *   Kroger Scratch Co    TWO open HubSpot deals under one company (R50), each with its own contact (Ann on the yard
- *                        pilot, Ben on the Columbus DC deal) -> In a deal; neither deal's work is the other's
+ *                        pilot, Ben on the Columbus DC deal) -> In a deal; neither deal's work is the other's.
+ *                        R51: a meeting with Ben on the Columbus deal tomorrow at 10 am New York, and a pilot meeting
+ *                        with Ann that was CANCELED (nothing to prepare unless it is rebooked)
  *   Nfi Scratch Co       a 3PL with many eligible people and no choice -> Choose who hears this first
  *   Dannon Scratch Co    one person, no source, no fact, no thesis -> Research, nothing to draft
  *   Mills Scratch Co     an approved thesis whose only fact is a sale abroad -> the gate refuses it (not usable)
@@ -170,6 +172,14 @@ export async function seedCorpus(prisma: PrismaClient, opts: { tag?: string; now
     if (!r.ok) throw new Error(`choose at ${a.name}: ${r.reason}`);
     a.chosenPersonaId = personaId;
   }
+  /** A Meeting row (the table the account context and Work read), idempotent by its corpus key. */
+  async function meeting(a: CorpusAccount, key: string, m: { date: Date; time: string | null; status: string; objective: string; attendees: string; dealId: string | null }) {
+    const idStr = `corpus:${a.slug}:${key}`;
+    const have = await prisma.meeting.findFirst({ where: { meeting_id_str: idStr }, select: { id: true } });
+    if (have) return have.id;
+    const row = await prisma.meeting.create({ data: { meeting_id_str: idStr, account_name: a.name, meeting_status: m.status, meeting_date: m.date, meeting_time: m.time, objective: m.objective, persona: m.attendees, hubspot_deal_id: m.dealId }, select: { id: true } });
+    return row.id;
+  }
   async function reply(a: CorpusAccount, p: { email: string | null; name: string }, text: string, at: string) {
     const threadId = `corpus-thread-${a.slug}`;
     await prisma.emailThread.upsert({ where: { id: threadId }, update: {}, create: { id: threadId, account_name: a.name, persona_email: p.email, subject: 'Re: trailer turns at your sites', last_message_at: new Date(at) } });
@@ -220,6 +230,10 @@ export async function seedCorpus(prisma: PrismaClient, opts: { tag?: string; now
       { id: taggedId(tag, 7001), dealname: `YardFlow - ${a.name}`, dealstage: 'appointmentscheduled', hs_is_closed: false, contacts: [annContact], hs_next_step: 'Pilot scope call with Ann' },
       { id: taggedId(tag, 7002), dealname: `${a.name} Columbus DC`, dealstage: 'qualifiedtobuy', hs_is_closed: false, contacts: [benContact] },
     ];
+    // R51: tomorrow (New York) as a date-only row, the way the meetings table stores a day; the time rides in meeting_time.
+    const tomorrow = new Date(`${new Date(now.getTime() + 86_400_000).toLocaleDateString('en-CA', { timeZone: 'America/New_York' })}T00:00:00Z`);
+    await meeting(a, 'columbus-walk', { date: tomorrow, time: '10:00 AM', status: 'Scheduled', objective: 'Columbus yard walk with Ben', attendees: 'Ben Scratch', dealId: String(taggedId(tag, 7002)) });
+    await meeting(a, 'pilot-scope', { date: tomorrow, time: '2:00 PM', status: 'Canceled', objective: 'Pilot scope call', attendees: 'Ann Scratch', dealId: String(taggedId(tag, 7001)) });
   }
   // ---- Nfi Scratch Co: many eligible people, no choice ----
   {

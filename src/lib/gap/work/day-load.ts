@@ -3,8 +3,9 @@
  * cockpit's cached lanes, read on every render (never cached with the lanes, so a write shows on the next load):
  *
  *   commitments   every commitment (work/commitments.ts), after the bounded follow-up sweep over the send ledger
- *   meetings      the calendar's meetings in the next two days (the Meeting table), cancelled ones dropped, the
- *                 time of day read in New York when the row carries one
+ *   meetings      the calendar's meetings in the next two days (the Meeting table), the time of day read in New
+ *                 York when the row carries one; R51: a canceled one is returned apart (Work says it was canceled
+ *                 and stops asking to prepare it), and each upcoming one carries its prepared starting point
  *
  * Soft: an unreadable store reads as nothing and never fails the page (the send gates fail closed on their own).
  */
@@ -14,6 +15,12 @@ import { dayLabel, nyDay, nyDayAt } from './dates';
 import type { DoneItem } from './today';
 import { DIRECT_SENT, DRAFT_SENT, DRAFT_SUBJECT_TYPE, MANUAL_SENT } from '../execution/draft-ledger';
 import { WORK_OUTCOME } from './outcome';
+import { isCanceled, meetingInstant, parseTimeOfDay, prepareMeeting } from '../deals/meeting-prep';
+import { openQuestionsFor, unknownSectionsOfTypes } from '../deals/deal-brief';
+import { selectConfirmedBids } from '../bid/select';
+import { accountHref } from '../account-intel/href';
+
+export { parseTimeOfDay };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -37,33 +44,77 @@ export function resetWorkSweep(): void {
   lastSweep = 0;
 }
 
-/** "10:00 AM", "10am", "14:30" -> [hour, minute]; null when the text names no time. */
-export function parseTimeOfDay(text: string | null | undefined): [number, number] | null {
-  const m = /^\s*(\d{1,2})(?::(\d{2}))?\s*(am|pm|a\.m\.|p\.m\.)?\s*/i.exec(text ?? '');
-  if (!m) return null;
-  let h = Number(m[1]);
-  const mi = Number(m[2] ?? 0);
-  const ap = (m[3] ?? '').toLowerCase().replace(/\./g, '');
-  if (ap === 'pm' && h < 12) h += 12;
-  if (ap === 'am' && h === 12) h = 0;
-  if (h > 23 || mi > 59 || (!m[2] && !ap)) return null;
-  return [h, mi];
+export interface MeetingOnRecord {
+  meetingId: number;
+  accountName: string;
+  at: string;
+  what: string;
+  canceled: boolean;
+  dealId: string | null;
+  attendees: string | null;
+  objective: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 
-export async function loadUpcomingMeetings(prisma: PrismaLike, now: Date, horizonMs = 48 * 3_600_000): Promise<Array<{ accountName: string; at: string; what: string }>> {
+/** Every meeting row in the window (yesterday to the horizon), canceled ones included and marked. Soft. */
+export async function loadMeetingRows(prisma: PrismaLike, now: Date, horizonMs = 48 * 3_600_000): Promise<MeetingOnRecord[]> {
   if (typeof prisma?.meeting?.findMany !== 'function') return [];
-  const rows: Array<{ account_name: string; meeting_date: Date | null; meeting_time: string | null; meeting_status: string; objective: string | null }> = await prisma.meeting
-    .findMany({ where: { meeting_date: { gte: new Date(now.getTime() - 24 * 3_600_000), lte: new Date(now.getTime() + horizonMs) } }, select: { account_name: true, meeting_date: true, meeting_time: true, meeting_status: true, objective: true } })
+  const rows: Array<{ id: number; account_name: string; meeting_date: Date | null; meeting_time: string | null; meeting_status: string; objective: string | null; persona: string | null; hubspot_deal_id: string | null; created_at: Date; updated_at: Date }> = await prisma.meeting
+    .findMany({ where: { meeting_date: { gte: new Date(now.getTime() - 24 * 3_600_000), lte: new Date(now.getTime() + horizonMs) } }, select: { id: true, account_name: true, meeting_date: true, meeting_time: true, meeting_status: true, objective: true, persona: true, hubspot_deal_id: true, created_at: true, updated_at: true } })
     .catch(() => []);
-  const out: Array<{ accountName: string; at: string; what: string }> = [];
+  const out: MeetingOnRecord[] = [];
   for (const r of rows) {
-    if (!r.meeting_date || /cancel|no meeting/i.test(r.meeting_status)) continue;
-    const t = parseTimeOfDay(r.meeting_time);
+    if (/no meeting/i.test(r.meeting_status)) continue;
     // A date-only row is stored at UTC midnight: its calendar day is the UTC date, never the New York evening before.
-    const d = new Date(r.meeting_date);
-    const calendarDay = d.getUTCHours() === 0 && d.getUTCMinutes() === 0 ? d.toISOString().slice(0, 10) : nyDay(d);
-    const at = t ? nyDayAt(calendarDay, t[0], t[1]) : d.getUTCHours() === 0 && d.getUTCMinutes() === 0 ? nyDayAt(calendarDay, 9) : d;
-    out.push({ accountName: r.account_name, at: at.toISOString(), what: r.objective?.trim() || r.meeting_status });
+    const at = meetingInstant(r.meeting_date, r.meeting_time);
+    if (!at) continue;
+    out.push({ meetingId: r.id, accountName: r.account_name, at: at.toISOString(), what: r.objective?.trim() || r.meeting_status, canceled: isCanceled(r.meeting_status), dealId: r.hubspot_deal_id ?? null, attendees: r.persona ?? null, objective: r.objective ?? null, updatedAt: new Date(r.updated_at ?? r.created_at ?? now).toISOString(), createdAt: new Date(r.created_at ?? now).toISOString() });
+  }
+  return out;
+}
+
+export async function loadUpcomingMeetings(prisma: PrismaLike, now: Date, horizonMs = 48 * 3_600_000): Promise<Array<{ accountName: string; at: string; what: string; meetingId?: number; dealId?: string | null }>> {
+  return (await loadMeetingRows(prisma, now, horizonMs)).filter((m) => !m.canceled).map((m) => ({ accountName: m.accountName, at: m.at, what: m.what, meetingId: m.meetingId, dealId: m.dealId }));
+}
+
+/**
+ * R51: the prepared starting point for each meeting Work shows (objective, the first thing to learn, the last
+ * commitment, how much the buyer confirmed), from the meeting row, the account's obligations and its confirmed
+ * buyer words. One read of the buyer words for the meeting accounts; soft (a failed read prepares from the rest).
+ */
+export async function loadMeetingStartingPoints(prisma: PrismaLike, meetings: readonly MeetingOnRecord[], commitments: readonly Commitment[], now: Date): Promise<Map<number, { prep: string; href: string }>> {
+  const out = new Map<number, { prep: string; href: string }>();
+  const live = meetings.filter((m) => !m.canceled);
+  if (live.length === 0) return out;
+  const accounts = [...new Set(live.map((m) => m.accountName))];
+  type BidRow = { id: string; account_name: string; type: string; raw_buyer_language: string; contact_email: string; human_confirmed: boolean; supersedes_id: string | null; confirmed_at: Date | null; captured_at: Date; metadata: unknown };
+  const bids: BidRow[] = typeof prisma?.buyerInputData?.findMany === 'function'
+    ? await prisma.buyerInputData.findMany({ where: { account_name: { in: accounts } }, select: { id: true, account_name: true, type: true, raw_buyer_language: true, contact_email: true, human_confirmed: true, supersedes_id: true, confirmed_at: true, captured_at: true, metadata: true } }).catch(() => [])
+    : [];
+  const confirmed = selectConfirmedBids(bids.map((b) => ({ ...b, humanConfirmed: b.human_confirmed === true, supersedesId: b.supersedes_id })));
+  const dealOfBid = (b: BidRow): string | null => {
+    const s = b.metadata && typeof b.metadata === 'object' ? (b.metadata as { scope?: { dealId?: unknown } }).scope : undefined;
+    return typeof s?.dealId === 'string' ? s.dealId : null;
+  };
+  for (const m of live) {
+    // A meeting on a deal reads that deal's words and the unscoped ones, never another deal's.
+    const own = confirmed.filter((b) => b.account_name === m.accountName && (!m.dealId || !dealOfBid(b) || dealOfBid(b) === m.dealId));
+    const cs = commitments.filter((c) => c.accountName === m.accountName && (!m.dealId || !c.dealId || c.dealId === m.dealId));
+    const p = prepareMeeting({
+      meeting: { id: m.meetingId, at: m.at, status: m.canceled ? 'Canceled' : 'Scheduled', objective: m.objective, attendees: m.attendees, dealId: m.dealId, createdAt: m.createdAt, updatedAt: m.updatedAt },
+      now,
+      deal: null,
+      people: [],
+      commitments: cs.map((c) => ({ title: c.title, kind: c.kind, status: c.status, line: c.status, createdAt: c.createdAt, updatedAt: c.updatedAt, person: c.person ? { name: c.person.name } : null, scopeLabel: c.dealId ? 'the deal' : 'account-level' })),
+      needs: own.map((b) => ({ type: b.type, quote: b.raw_buyer_language, who: b.contact_email, at: new Date(b.confirmed_at ?? b.captured_at).toISOString(), scopeLabel: dealOfBid(b) ? 'the deal' : 'account-level' })),
+      unknownQuestions: openQuestionsFor(unknownSectionsOfTypes(own.map((b) => b.type))),
+      learningObjective: null,
+      guesses: [],
+      publicFacts: [],
+      materials: [],
+    });
+    out.set(m.meetingId, { prep: p.startingPoint, href: `${accountHref(m.accountName)}?view=brief#meeting-${m.meetingId}` });
   }
   return out;
 }

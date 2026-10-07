@@ -209,6 +209,8 @@ export function WorkList({
                         {o.person?.name || o.person?.email ? ` ${o.person.name ?? o.person.email}.` : ''}
                       </p>
                       {o.basis ? <p className="break-words text-xs italic text-[var(--muted-foreground)]">{o.basis}</p> : null}
+                      {o.scope ? <p className="text-xs font-semibold text-[var(--muted-foreground)]" data-testid="work-obligation-scope">{o.scope}</p> : null}
+                      {o.prep ? <p className="text-xs" data-testid="work-obligation-prep">Prepared: {o.prep}</p> : null}
                       <div className="flex flex-wrap items-center gap-2">
                         {o.href && o.label ? <Link href={o.href} className="inline-flex min-h-11 items-center text-xs underline sm:min-h-9" data-testid="obligation-open">{o.label}</Link> : null}
                       </div>

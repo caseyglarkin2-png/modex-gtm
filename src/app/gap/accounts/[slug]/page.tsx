@@ -25,6 +25,7 @@ import { loadResearchHistory, planResearch } from '@/lib/gap/account-intel/orche
 import { loadDealBrief } from '@/lib/gap/deals/deal-brief';
 import { DealBriefView } from '@/components/gap/deal-brief';
 import { DealOpportunities } from '@/components/gap/deal-opportunities';
+import { MeetingPrepView } from '@/components/gap/meeting-prep';
 import { loadAccountDealWorkspace } from '@/lib/gap/deals/workspace';
 import { commitmentScope, dealRefs, personIndex } from '@/lib/gap/deals/opportunities';
 import { loadAccountSources } from '@/lib/gap/sources/account-sources';
@@ -191,16 +192,38 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
       // R50: each open deal is worked on its own: its obligations, its confirmed words, its contacts and HubSpot's next
       // step, with the account-level rows labeled; one deal brief per deal (never another deal's words).
       const openDeals = brief.dealState === 'ACTIVE' ? (inputs.opportunity?.deals ?? []).filter((d): d is typeof d & { id: string } => !!d.id) : [];
-      const workspace = openDeals.length ? await loadAccountDealWorkspace(prisma, { accountName: brief.accountName, deals: openDeals.map((d) => ({ id: d.id, name: d.name, stage: d.stage, nextStep: d.nextStep ?? null, closeDate: d.closeDate ?? null, amount: d.amount ?? null, contactIds: d.contactIds ?? [] })), now }).catch(() => null) : null;
-      const dealBriefs = workspace
+      // R51: the meetings on record are prepared here (every account; a deal's meeting inside its deal), from what the
+      // page already holds: the working thesis as a guess to test, the verified public facts after the buyer's words,
+      // and the account's own materials.
+      const workspace = await loadAccountDealWorkspace(prisma, {
+        accountName: brief.accountName,
+        deals: openDeals.map((d) => ({ id: d.id, name: d.name, stage: d.stage, nextStep: d.nextStep ?? null, closeDate: d.closeDate ?? null, amount: d.amount ?? null, contactIds: d.contactIds ?? [] })),
+        now,
+        guesses: inputs.hypotheses.filter((h) => (h.status === 'active' || h.status === 'approved') && !h.buyerRejected && h.problem.trim()).map((h) => h.problem.trim()),
+        publicFacts: inputs.facts.map((f) => ({ quote: f.quote, title: f.title, url: f.url, publishedAt: f.publishedAt })),
+        materials: ctx.assets.filter((a) => !a.legacy && a.href).map((a) => ({ label: a.label, href: a.href })),
+      }).catch(() => null);
+      const dealBriefs = workspace && openDeals.length
         ? await Promise.all(openDeals.map((d) => loadDealBrief(prisma, brief.accountName, { now, deal: { id: d.id, name: d.name }, scopeOf: workspace.scopeOfBid, dealContacts: (d.contactIds ?? []).length }).catch(() => null)))
         : brief.dealState === 'ACTIVE' ? [await loadDealBrief(prisma, brief.accountName, { now }).catch(() => null)] : [];
+      const meetingSlots: Record<string, React.ReactNode> = {};
+      for (const d of workspace?.opportunities.deals ?? []) {
+        const own = (workspace?.meetings ?? []).filter((m) => m.dealId === d.dealId);
+        if (own.length) meetingSlots[d.dealId] = <div className="space-y-2">{own.map((m) => <MeetingPrepView key={m.meetingId} prep={m} />)}</div>;
+      }
+      const accountMeetings = (workspace?.meetings ?? []).filter((m) => !m.dealId);
       return (
         <div className="mx-auto max-w-2xl space-y-4 pb-28">
           <GapSubnav />
           {header}
           {tabs}
-          {workspace ? <DealOpportunities view={workspace.opportunities} /> : null}
+          {workspace && openDeals.length ? <DealOpportunities view={workspace.opportunities} slots={meetingSlots} /> : null}
+          {accountMeetings.length ? (
+            <section className="space-y-2" data-testid="account-meetings" aria-label="Meetings at the account">
+              <h2 className="text-base font-semibold">{openDeals.length ? 'Meetings not tied to one deal' : 'Meetings'}</h2>
+              {accountMeetings.map((m) => <MeetingPrepView key={m.meetingId} prep={m} />)}
+            </section>
+          ) : null}
           {dealBriefs.map((dealBrief, n) => (dealBrief ? <DealBriefView key={dealBrief.deal?.id ?? n} brief={dealBrief} deals={(dealBrief.deal ? brief.deals.filter((x) => x.id === dealBrief.deal!.id) : brief.deals).map((x) => ({ name: x.name, stage: x.stage ?? 'stage not given', lastActivityAt: null }))} /> : null))}
           <AccountBriefSections
             listen={briefListenText(brief.accountName, projectBrief(brief, ctx, inputs, now))}

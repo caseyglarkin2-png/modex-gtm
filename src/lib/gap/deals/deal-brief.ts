@@ -63,6 +63,18 @@ const SUGGESTION: Record<TruthSection, string> = {
 };
 const ALL_KNOWN_SUGGESTION = 'Every section has buyer truth. Learn who else must agree before anything changes.';
 
+/** R51: the truth sections no confirmed BID of these types fills, in the order a discovery conversation needs them. */
+export function unknownSectionsOfTypes(types: readonly string[]): TruthSection[] {
+  const known = new Set(types.map((t) => SECTION_OF_BID[t]).filter(Boolean));
+  return SUGGESTION_ORDER.filter((s) => !known.has(s));
+}
+
+/** R51: the discovery question for each unknown section (the brief's own suggestions), in conversation order. */
+export function openQuestionsFor(unknowns: readonly TruthSection[]): string[] {
+  const qs = SUGGESTION_ORDER.filter((s) => unknowns.includes(s)).map((s) => SUGGESTION[s]);
+  return qs.length ? qs : [ALL_KNOWN_SUGGESTION];
+}
+
 export interface BriefBidRow {
   id: string;
   type: string;

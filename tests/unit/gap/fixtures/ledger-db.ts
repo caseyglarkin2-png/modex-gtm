@@ -36,6 +36,18 @@ function table(rows: Row[], clock: () => Date, idPrefix: string) {
       rows.push(row);
       return pick(row, q.select);
     },
+    /** Sprint 5: the mirror ledger's idempotency row (one per key). */
+    upsert: async (q: { where: Row; create: Row; update: Row }) => {
+      const r = rows.find((x) => matchesWhere(x, q.where));
+      if (r) {
+        Object.assign(r, q.update);
+        return { ...r };
+      }
+      n += 1;
+      const row = { id: `${idPrefix}${String(rows.length + n).padStart(5, '0')}`, created_at: clock(), ...q.create };
+      rows.push(row);
+      return { ...row };
+    },
   };
 }
 
@@ -50,6 +62,9 @@ export interface LedgerSeed {
   routingDecisions?: Row[];
   unsubscribed?: Row[];
   hypotheses?: Row[];
+  /** Sprint 5: confirmed buyer words (R51 / R53) and the HubSpot mirror's idempotency rows (R54). */
+  bids?: Row[];
+  mirror?: Row[];
 }
 
 /** A fresh client over shared rows; `tick` advances the ledger clock so newest-row-wins is deterministic. */
@@ -65,6 +80,8 @@ export function ledgerDb(seed: LedgerSeed = {}, start = new Date('2026-10-06T14:
     routingDecision: [...(seed.routingDecisions ?? [])],
     unsubscribedEmail: [...(seed.unsubscribed ?? [])],
     prospectingHypothesis: [...(seed.hypotheses ?? [])],
+    buyerInputData: [...(seed.bids ?? [])],
+    gapHubSpotMirror: [...(seed.mirror ?? [])],
   };
   let t = start.getTime();
   const clock = () => new Date((t += 1000));
@@ -79,6 +96,8 @@ export function ledgerDb(seed: LedgerSeed = {}, start = new Date('2026-10-06T14:
     routingDecision: table(store.routingDecision, clock, 'rd'),
     unsubscribedEmail: table(store.unsubscribedEmail, clock, 'u'),
     prospectingHypothesis: table(store.prospectingHypothesis, clock, 'h'),
+    buyerInputData: table(store.buyerInputData, clock, 'b'),
+    gapHubSpotMirror: table(store.gapHubSpotMirror, clock, 'mir'),
   });
   return { store, client, setClock: (d: Date) => (t = d.getTime()) };
 }

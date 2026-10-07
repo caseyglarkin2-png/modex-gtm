@@ -1384,6 +1384,37 @@ read account-level; the new optional fields are ignored). Debt: the contact-deri
 contact id (a person GAP holds without one reads account-level); division and site are free text the seller names (no
 site entity).
 
+R51 **Meetings prepared from the current conversation (DONE; no new calendar connector).** NEW
+`deals/meeting-prep.ts` (pure) + `components/gap/meeting-prep.tsx`: ONE preparation per meeting on record (the
+Meeting table the account context and Work already read): the objective (the row's own, "Recorded", else the first
+thing still unknown, "Suggested"), who is coming with their role (the names on the row matched to the people GAP holds,
+then the deal's own contacts, "HubSpot"), the last commitment (the newest obligation on that deal or account-level),
+the confirmed needs (ONLY human-confirmed buyer words scoped to that deal plus the labeled account-level ones, "Buyer
+confirmed"), the open questions (the seller's own learning objective first, then the deal brief's discovery question
+for every truth section still unknown, "To learn"; `deal-brief.ts` now exports `unknownSectionsOfTypes` and
+`openQuestionsFor`), the working thesis as a guess to test ("Our guess", never a finding), at most two verified public
+facts AFTER the buyer's words and never in their place ("Public source", "not the buyer's words"), and the account's
+materials ("Ours"). Every line carries its trust word. A meeting belongs to its row's deal (`hubspot_deal_id`), else
+to the one deal whose contact is named, else to the account (`meetingDeal`). On the account BRIEF each deal's meetings
+render inside that deal (R50's slot), the others under "Meetings"; the loader (`deals/workspace.ts`) reads the meeting
+rows, the confirmed words and the learning objective once, soft. Work follows the calendar, read on every load
+(`work/day-load.ts` `loadMeetingRows`, `meetingInstant` moved beside the prep): a meeting within 24 hours is an
+obligation carrying its prepared starting point ("Prepared: Objective: ... First to learn: ... Last commitment: ...")
+and opening `?view=brief#meeting-<id>` (`loadMeetingStartingPoints`, one read of the meeting accounts' confirmed
+words, a deal's meeting never reading another deal's); a moved meeting is read at its new time; a CANCELED meeting is
+said once in Waiting ("Canceled: nothing to prepare unless it is rebooked") and an open "prepare the meeting"
+obligation at that account waits until a meeting is booked again. Proof: `meeting-prep.test.tsx` (10: the full
+preparation and its trust words; nothing confirmed means no confirmed needs while the guess and the news keep their own
+words; the suggested objective and the seller's own; canceled and moved; the meeting's deal; the view; Work's
+obligation with its starting point, the moved meeting, the canceled meeting and its preparation, the rebooked one; the
+loader's canceled rows and the per-deal starting point); six deliberate mutations (public facts read as confirmed
+needs, the guess tagged as confirmed, a canceled meeting prepared, Work asking to prepare a canceled meeting, a meeting
+reading another deal's words, the card losing its starting point) each turn it red. Corpus: Kroger carries a
+Columbus yard walk with Ben tomorrow at 10 am New York on the Columbus deal and a CANCELED pilot scope call with Ann on
+the pilot deal. Adjacent: 13 files / 125 green; typecheck clean. Rollback: revert the commit (no stored shape changes).
+Debt: attendees are the row's free text (no calendar attendee list); a meeting's history (the old time of a moved
+meeting) is not kept, only its current row.
+
 ## 12. Migration, backfill and rollback
 
 Order of commits inside Sprint 1 and 3: schema + SQL first (no reader), then pure core, then importers (Top100 before PIC before modex legacy), then runtime pin, then services, then queue actions under the flag, then `GAP_OS_ENABLED=true` in Vercel after `verify-triggers.ts` passes against prod (env is snapshot at deploy; redeploy after setting). Before the prod `db push`, preview it with `prisma migrate diff --from-url <prod> --to-schema-datamodel prisma/schema.prisma --script` and confirm the script is additive only; also confirm the prod role can `CREATE FUNCTION` (not yet verified). Rollback: the flag off restores byte-identical behavior instantly; full removal is the rollback SQL plus reverting the runtime, service and queue-action commits; `sequences` is never modified; the only two pre-existing tables GAP OS's schema touches at all are `draft_queue_items` (one nullable `sequence_version_id` stamp, S1-T2) and `inbound_messages` (`source String @default("gmail")` and `hubspot_engagement_id String?`, S2-T1, needed so the reply cron and the HubSpot poller can tell a Gmail-sourced row from a HubSpot-engagement-sourced one and attribute the engagement id idempotently) — both additive-only, both confirmed by the production preflight below; the lane and PIC files are read, never written.
