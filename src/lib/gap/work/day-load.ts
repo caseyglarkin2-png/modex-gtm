@@ -10,7 +10,7 @@
  * Soft: an unreadable store reads as nothing and never fails the page (the send gates fail closed on their own).
  */
 import { loadCommitments, syncFollowUpsFromLedger, syncReturnRemindersFromReplies } from './commitments';
-import { COMMITMENT_EVENT, type Commitment } from './commitment-model';
+import { COMMITMENT_EVENT, restoredIdFor, type Commitment } from './commitment-model';
 import { addDays, dayLabel, nyDay, nyDayAt } from './dates';
 import type { DoneItem } from './today';
 import { DIRECT_SENT, DRAFT_SENT, DRAFT_SUBJECT_TYPE, MANUAL_SENT, REPLY_SENT } from '../execution/draft-ledger';
@@ -173,6 +173,10 @@ export async function loadCompletedToday(prisma: PrismaLike, now: Date): Promise
     })
     .catch(() => []);
   const out: DoneItem[] = [];
+  // R63-B S11: the obligations written today, by id. A closure skip that was restored today (deals/closure.ts
+  // restoreSkippedObligation writes `restoredIdFor(skipped)`) leaves Work: the obligation stands once, under OWED; the
+  // skipped record stays in the account's history.
+  const writtenToday = new Set(rows.filter((r) => r.kind === COMMITMENT_EVENT && isObj(r.payload) && typeof r.payload.commitmentId === 'string').map((r) => String((r.payload as Record<string, unknown>).commitmentId)));
   for (const r of [...rows].reverse()) {
     const p = isObj(r.payload) ? r.payload : {};
     const at = new Date(r.created_at).toISOString();
@@ -187,7 +191,7 @@ export async function loadCompletedToday(prisma: PrismaLike, now: Date): Promise
     } else if (r.kind === COMMITMENT_EVENT && p.op === 'status' && isObj(p.commitment)) {
       const c = p.commitment as unknown as Commitment;
       if (c.status === 'done') out.push({ at, accountName: c.accountName, line: `Done: ${c.title}.`, kind: 'done' });
-      else if (c.status === 'skipped') out.push({ at, accountName: c.accountName, line: `Skipped: ${c.title}${c.reason ? ` (${c.reason})` : ''}.`, kind: 'set_aside' });
+      else if (c.status === 'skipped' && !writtenToday.has(restoredIdFor(String(p.commitmentId ?? c.commitmentId ?? '')))) out.push({ at, accountName: c.accountName, line: `Skipped: ${c.title}${c.reason ? ` (${c.reason})` : ''}.`, kind: 'set_aside' });
     } else if (r.kind === 'capture.note') {
       out.push({ at, accountName: typeof p.accountName === 'string' ? p.accountName : null, line: `Saved a note (${words(p.context)}).` });
     } else if (r.kind === WORK_OUTCOME) {
