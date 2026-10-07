@@ -82,6 +82,23 @@ function Item({ it }: { it: CrmSyncItem }) {
   );
 }
 
+/** Batch item 9 (R54 f): the approvals standing "approved, not written", across accounts, each with its Retry. */
+export function CrmOffApprovals({ items }: { items: readonly CrmSyncItem[] }) {
+  if (!items.length) return <p className="text-xs italic text-[var(--muted-foreground)]" data-testid="crm-off-none">None. Every approved HubSpot change was written, refused or discarded.</p>;
+  return (
+    <ul className="space-y-3" data-testid="crm-off-list">
+      {items.map((it) => (
+        <li key={it.proposalId} className="space-y-1" data-testid="crm-off-item" data-account={it.accountName}>
+          <p className="text-xs font-semibold">{it.accountName}: {it.dealName ?? `deal ${it.dealId}`}</p>
+          <ul>
+            <Item it={it} />
+          </ul>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export function CrmSyncPanel({ accountName, dealId, dealName, candidates, items }: { accountName: string; dealId: string; dealName: string | null; candidates: ReadonlyArray<{ change: CrmChange; origin: CrmOrigin }>; items: readonly CrmSyncItem[] }) {
   // Batch item 9: a candidate is new, or an amended obligation's newer text for its one task (offered as an update).
   const byId = new Map(items.map((i) => [i.proposalId, i]));

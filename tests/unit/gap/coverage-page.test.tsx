@@ -36,6 +36,9 @@ describe('the Coverage page (R20 follow-up)', () => {
     expect(screen.getByTestId('coverage-capacity')).toHaveTextContent('15% of the rotation turns kept for a failed or skipped turn');
     expect(screen.getByTestId('coverage-capacity')).toHaveTextContent('News: at most 10 accounts a run, with the time the grounded turns leave, so each watched account is asked about every 8 hours at best, not every run.');
     expect(screen.getByTestId('coverage-capacity')).not.toHaveTextContent('News runs with the same cron for every watched account');
+    // Batch item 9 (R54 f): the approvals standing "not written" are listed here, across accounts (none in this read).
+    expect(screen.getByTestId('coverage-crm-off')).toHaveTextContent('HubSpot changes approved, not written (0)');
+    expect(screen.getByTestId('crm-off-none')).toBeTruthy();
     // The pure report the page renders is the same one the runner uses.
     expect(coverageReport({ now: NOW, profiles: watched, grounded: [], newsAt: new Map(), researchAt: new Map(), priority: new Map() }).capacity.newsOnlyAccounts).toBe(2);
   });

@@ -9,13 +9,13 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { NextRequest } from 'next/server';
 import { ledgerDb } from './fixtures/ledger-db';
-import { approveCrmChange, discardCrmChange, loadCrmSync, proposeCrmChange, crmWritesEnabled } from '@/lib/gap/crm-sync';
+import { approveCrmChange, discardCrmChange, loadCrmOffApprovals, loadCrmSync, proposeCrmChange, crmWritesEnabled } from '@/lib/gap/crm-sync';
 import { changeText, crmCandidates, crmStateLine, externalIdFor, proposalIdFor, stableHash, taskExternalIdFor, type CrmChange, type CrmOrigin } from '@/lib/gap/deals/crm-model';
 import { completionsOf } from '@/lib/gap/deals/workspace';
 import { taskDueTime } from '@/lib/gap/crm-writer';
 import type { CrmWriter } from '@/lib/gap/crm-writer';
 import { ensureCommitment, loadCommitment, transitionCommitment } from '@/lib/gap/work/commitments';
-import { CrmSyncPanel } from '@/components/gap/crm-sync';
+import { CrmOffApprovals, CrmSyncPanel } from '@/components/gap/crm-sync';
 
 const holder = vi.hoisted(() => ({ client: null as unknown, inDeals: null as unknown, freshInDeals: null as unknown }));
 vi.mock('@/lib/gap/deals/in-deals', () => ({ loadInDealsSummary: async (_p: unknown, o?: { fresh?: boolean }) => (o?.fresh && holder.freshInDeals ? holder.freshInDeals : holder.inDeals) }));
@@ -364,6 +364,30 @@ describe('batch item 9: approved HubSpot changes are bounded to live work', () =
     expect(crmWritesEnabled().ok === true || crmWritesEnabled().reason !== 'GAP_CRM_APPROVED_WRITES_ENABLED is off').toBe(true);
     const { gapFlag } = await import('@/lib/gap/flags');
     expect(gapFlag('GAP_HUBSPOT_MIRROR_ENABLED')).toBe(false);
+  });
+});
+
+describe('batch item 9 (R54 f): approvals standing "not written" are listed across accounts', () => {
+  it('every off approval at every account, oldest first; a written or merely proposed one is not listed; the route and the list say so with a Retry each', async () => {
+    const db = ledgerDb({ accounts: [ACCOUNT, 'Pepsi Scratch Co'] });
+    const p = db.client();
+    const a = await propose(p);
+    await approveCrmChange(p, { proposalId: a.ok ? a.item.proposalId : '', actor: ACTOR, now: NOW });
+    const otherNote: CrmChange = { ...NOTE, objectId: '80001', body: 'Pepsi recap' };
+    const b = await proposeCrmChange(p, { accountName: 'Pepsi Scratch Co', dealId: '80001', dealName: 'Pepsi pilot', change: otherNote, origin: { kind: 'recap', id: `80001:${stableHash('Pepsi recap')}`, label: 'x' }, actor: ACTOR, now: NOW });
+    await approveCrmChange(p, { proposalId: b.ok ? b.item.proposalId : '', actor: ACTOR, now: new Date(NOW.getTime() + 60_000) });
+    const written = await proposeCrmChange(p, { accountName: 'Pepsi Scratch Co', dealId: '80001', dealName: 'Pepsi pilot', change: { ...otherNote, body: 'Written one' }, origin: { kind: 'recap', id: `80001:${stableHash('Written one')}`, label: 'x' }, actor: ACTOR, now: NOW });
+    await approveCrmChange(p, { proposalId: written.ok ? written.item.proposalId : '', actor: ACTOR, now: NOW }, { writer: fakeHubSpot().writer, writesEnabled: ON, assertWriteAllowed: ALLOW });
+    await proposeCrmChange(p, { accountName: ACCOUNT, dealId: DEAL, dealName: null, change: { ...NOTE, body: 'only proposed' }, origin: { kind: 'recap', id: `${DEAL}:${stableHash('only proposed')}`, label: 'x' }, actor: ACTOR, now: NOW });
+    const off = await loadCrmOffApprovals(p);
+    expect(off.map((it) => [it.accountName, it.state])).toEqual([[ACCOUNT, 'off'], ['Pepsi Scratch Co', 'off']]);
+    holder.client = p;
+    const { GET } = await import('@/app/api/gap/crm-sync/route');
+    const listed = (await (await GET(new NextRequest('http://localhost/api/gap/crm-sync?state=off'))).json()) as { items: Array<{ accountName: string }> };
+    expect(listed.items.map((i) => i.accountName)).toEqual([ACCOUNT, 'Pepsi Scratch Co']);
+    render(<CrmOffApprovals items={off} />);
+    expect(screen.getAllByTestId('crm-off-item').map((li) => li.getAttribute('data-account'))).toEqual([ACCOUNT, 'Pepsi Scratch Co']);
+    expect(screen.getAllByTestId('crm-retry')).toHaveLength(2);
   });
 });
 

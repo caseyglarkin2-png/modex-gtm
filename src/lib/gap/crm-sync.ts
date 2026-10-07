@@ -253,6 +253,17 @@ export async function discardCrmChange(prisma: PrismaLike, input: { proposalId: 
   });
 }
 
+/**
+ * Batch item 9 (R54 f): every approval standing as "approved, not written" (HubSpot writes were off), across accounts,
+ * oldest first, bounded. Listed on Coverage so a seller can retry them once writes are on, never only one account brief
+ * at a time. Each retry is the same bounded click (its origin rechecked). Soft: an unreadable ledger reads as none.
+ */
+export async function loadCrmOffApprovals(prisma: PrismaLike, limit = 50): Promise<CrmSyncItem[]> {
+  if (typeof prisma?.gapAuditEvent?.findMany !== 'function') return [];
+  const rows: CrmRow[] = await prisma.gapAuditEvent.findMany({ where: { kind: { in: [...CRM_KINDS] }, subject_type: CRM_SUBJECT }, select: { kind: true, actor: true, payload: true, created_at: true }, orderBy: { created_at: 'desc' }, take: 5_000 }).catch(() => []);
+  return foldCrmSync(rows ?? []).filter((it) => it.state === 'off').sort((a, b) => String(a.approvedAt ?? '').localeCompare(String(b.approvedAt ?? ''))).slice(0, limit);
+}
+
 /** Every proposal at the account, with its state. Soft: an unreadable ledger reads as none. */
 export async function loadCrmSync(prisma: PrismaLike, accountName: string): Promise<CrmSyncItem[]> {
   if (typeof prisma?.gapAuditEvent?.findMany !== 'function') return [];

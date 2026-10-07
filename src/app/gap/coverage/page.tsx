@@ -11,6 +11,8 @@ import { loadCoverage, type AccountCoverage } from '@/lib/gap/signals/coverage';
 import { GapSubnav } from '@/components/gap/gap-subnav';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { AccountLink } from '@/components/gap/account-link';
+import { CrmOffApprovals } from '@/components/gap/crm-sync';
+import { loadCrmOffApprovals } from '@/lib/gap/crm-sync';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Coverage' };
@@ -27,7 +29,7 @@ export default async function CoveragePage() {
   const session = await auth();
   if (!session?.user?.email) redirect('/login');
   const now = new Date();
-  const r = await loadCoverage(prisma, now);
+  const [r, offApprovals] = await Promise.all([loadCoverage(prisma, now), loadCrmOffApprovals(prisma).catch(() => [])]);
   const c = r.capacity;
   return (
     <div className="space-y-5">
@@ -48,6 +50,11 @@ export default async function CoveragePage() {
           <li data-testid="coverage-news-only-count">Watched for news only (outside the grounded rotation at the current allowance): {c.newsOnlyAccounts}{c.coversAllWatched ? '' : ` (every watched account in seven days needs ${c.requiredTurnsPerDay} turns a day)`}.</li>
         </ul>
         {c.choice ? <p className="mt-2 rounded-md border border-amber-500/40 bg-amber-500/10 p-2 text-xs" data-testid="coverage-choice">{c.choice}</p> : null}
+      </section>
+      <section className="space-y-2 rounded-md border border-[var(--border)] p-3 text-sm" data-testid="coverage-crm-off">
+        <h2 className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">HubSpot changes approved, not written ({offApprovals.length})</h2>
+        <p className="text-xs text-[var(--muted-foreground)]">Approved while HubSpot writes were off. Retry each once writes are on (GAP_CRM_APPROVED_WRITES_ENABLED); a retry rechecks that its obligation and deal are still open.</p>
+        <CrmOffApprovals items={offApprovals} />
       </section>
       <section className="space-y-2" data-testid="coverage-accounts">
         <h2 className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">

@@ -1,5 +1,6 @@
 /**
  * GET  /api/gap/crm-sync?account=<name>    every proposed HubSpot change at the account, with its state (R54)
+ * GET  /api/gap/crm-sync?state=off         batch item 9: every approval standing "approved, not written", all accounts
  * POST /api/gap/crm-sync
  *   `{ op: 'approve', accountName, dealId, dealName?, change, origin }`   the seller's explicit approval of the EXACT
  *        change shown on the page: `crm.sync_proposed` (once) then `crm.sync_approved`; the write runs only when
@@ -21,7 +22,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 import { badBody, intakeGuard } from '@/lib/gap/intake/route-helpers';
-import { approveCrmChange, discardCrmChange, loadCrmSync, proposeCrmChange } from '@/lib/gap/crm-sync';
+import { approveCrmChange, discardCrmChange, loadCrmOffApprovals, loadCrmSync, proposeCrmChange } from '@/lib/gap/crm-sync';
 import { CRM_DEAL_PROPERTIES } from '@/lib/gap/deals/crm-model';
 import { originProblem } from '@/lib/gap/crm-sync';
 import { loadDealStates } from '@/lib/gap/deals/closure';
@@ -51,6 +52,7 @@ const STATUS: Record<string, number> = { account_not_found: 404, not_found: 404,
 export async function GET(request: NextRequest) {
   const g = await intakeGuard();
   if ('response' in g) return g.response;
+  if (request.nextUrl.searchParams.get('state') === 'off') return NextResponse.json({ items: await loadCrmOffApprovals(prisma) });
   const account = request.nextUrl.searchParams.get('account')?.trim();
   if (!account) return NextResponse.json({ error: 'invalid_body', field: 'account' }, { status: 400 });
   return NextResponse.json({ items: await loadCrmSync(prisma, account) });
