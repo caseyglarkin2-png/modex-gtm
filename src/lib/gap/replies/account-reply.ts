@@ -16,7 +16,7 @@
  * held every send with no card to tell the seller why.
  */
 import { FREEMAIL_DOMAINS, OWN_DOMAINS } from './domains';
-import { classifyReply } from './classify';
+import { isPersonReply } from './classify';
 import { REPLY_SENT, REPLY_SUBJECT_TYPE } from '../execution/draft-ledger';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -67,10 +67,7 @@ export async function accountRepliedRecently(prisma: PrismaLike, recipient: stri
     orderBy: { received_at: 'desc' },
     take: 20,
   });
-  const human = rows.filter((r) => {
-    const kind = classifyReply({ snippet: r.body_text || r.snippet || '', subject: r.subject, from: r.from_email }).kind;
-    return kind === 'human' || kind === 'opt_out';
-  });
+  const human = rows.filter((r) => isPersonReply({ text: r.body_text, snippet: r.snippet, subject: r.subject, from: r.from_email }));
   if (human.length === 0) return null;
   // A message a human has already read and dispositioned no longer holds anyone.
   const read: Array<{ source_id: string }> = prisma.conversationDisposition?.findMany

@@ -95,6 +95,17 @@ const REFERRAL = /\b(?:not the (?:right|best) (?:person|contact)|wrong person|(?
 const OBJECTION = /\b(?:we already (?:have|use|run)|already (?:have|use|run) (?:a|an|our) (?:yms|yard|system|solution|tool)|(?:is )?not a priority|no budget|not in (?:the|our) budget|happy with (?:our|what we|the current)|locked (?:in|into)|under contract with|we use \w+ for (?:that|this|our yards?)|built (?:it|our own|one) in-house|not a fit (?:for us)?|we(?:'re| are) (?:all )?set (?:on|for) (?:that|this|yards?))\b/i;
 const BOUNCE_BODY = /\b(?:delivery to the following recipient(?:s)? failed|could not be delivered|address not found|user unknown|mailbox (?:unavailable|full|not found)|550\s+5\.\d\.\d)\b/i;
 
+/**
+ * THE one reading of "a person wrote back" (the lead's general defect, 2026-10-07): a person (a reply, a referral, an
+ * objection) or an opt-out, read from the message TEXT and the subject; never an automatic notice or a bounce. The
+ * account hold, the follow-up stop and learning's "replied" all read this, so a body-only out-of-office notice stops
+ * nothing and counts as no reply anywhere.
+ */
+export function isPersonReply(m: { text?: string | null; snippet?: string | null; subject?: string | null; from?: string | null }): boolean {
+  const kind = classifyReply({ snippet: m.text || m.snippet || '', subject: m.subject, from: m.from }).kind;
+  return kind === 'human' || kind === 'opt_out';
+}
+
 export function classifyReply(input: { snippet: string | null | undefined; subject: string | null | undefined; from?: string | null }): ReplyClass {
   const snippet = (input.snippet ?? '').replace(/\s+/g, ' ').trim();
   const subject = (input.subject ?? '').trim();

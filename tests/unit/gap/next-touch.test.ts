@@ -40,7 +40,10 @@ function ledger(sentSteps: number[], extra: Record<string, unknown> = {}) {
     },
     unsubscribedEmail: { findFirst: vi.fn(async () => (extra.unsub ? { id: 'u' } : null)) },
     conversationDisposition: { findFirst: vi.fn(async ({ where }: any) => (extra.disposition && !where.response_class.notIn.includes(extra.disposition) ? { response_class: extra.disposition } : null)) },
-    inboundMessage: { findFirst: vi.fn(async () => (extra.inbound ? { subject: extra.inbound } : null)) },
+    inboundMessage: {
+      findFirst: vi.fn(async () => (extra.inbound ? { subject: extra.inbound } : null)),
+      findMany: vi.fn(async () => (extra.inbound ? [{ subject: extra.inbound, snippet: (extra.inboundText as string | undefined) ?? null, body_text: (extra.inboundText as string | undefined) ?? null, from_email: 'joey.maggard@kroger.com' }] : [])),
+    },
     sequenceVersion: { findUnique: vi.fn(async () => ({ steps: HC.steps })) },
   };
 }
@@ -184,10 +187,36 @@ describe('T9: a reply from someone else at the account stops the sequence', () =
 
   it('a stored human reply from the account domain after the first send stops it; a consumer domain never does', async () => {
     const p: any = ledger([0]);
-    p.inboundMessage.findFirst = vi.fn(async ({ where }: any) => (where.from_email.endsWith === '@kroger.com' ? { subject: 'Saw your note to Joey', from_email: 'pat.lee@kroger.com' } : null));
+    p.inboundMessage.findMany = vi.fn(async ({ where }: { where: { from_email: { endsWith?: string } } }) => (where.from_email.endsWith === '@kroger.com' ? [{ subject: 'Saw your note to Joey', snippet: null, body_text: null, from_email: 'pat.lee@kroger.com' }] : []));
     const t = await computeNextTouch(p, 'dec-1', new Date('2026-09-28T12:00:00Z'), { gapSender: YF, getThread: noThread });
     expect(t).toMatchObject({ state: 'stopped', reason: 'replied' });
     expect(t.state === 'stopped' && t.detail).toContain('kroger.com');
+  });
+});
+
+// The lead's general defect (2026-10-07): the follow-up stop read replies by SUBJECT only; it now reads the one
+// classification the card and the hold read (replies/classify.ts isPersonReply).
+describe('the follow-up stop reads the message, never its subject alone', () => {
+  it('a body-only out-of-office notice (an ordinary "Re:" subject) does not stop the follow-up; a person writing back does', async () => {
+    const notice = 'I am out of the office until Monday, October 12, with limited access to email.';
+    const ooo = await computeNextTouch(ledger([0], { inbound: 'Re: Doors versus spots', inboundText: notice }), 'dec-1', new Date('2026-09-28T12:00:00Z'), { gapSender: YF, getThread: noThread });
+    expect(ooo.state).not.toBe('stopped');
+    const reply = await computeNextTouch(ledger([0], { inbound: 'Re: Doors versus spots', inboundText: 'Happy to talk. Thursday works for a call.' }), 'dec-1', new Date('2026-09-28T12:00:00Z'), { gapSender: YF, getThread: noThread });
+    expect(reply).toMatchObject({ state: 'stopped', reason: 'replied' });
+    // A person's reply behind a notice still stops it (the first message after the send is not the only one read).
+    const p = ledger([0]);
+    p.inboundMessage.findMany = vi.fn(async () => [
+      { subject: 'Re: Doors versus spots', snippet: notice, body_text: notice, from_email: 'joey.maggard@kroger.com' },
+      { subject: 'Re: Doors versus spots', snippet: 'Back now. Can you send the comparison?', body_text: 'Back now. Can you send the comparison?', from_email: 'joey.maggard@kroger.com' },
+    ]);
+    expect(await computeNextTouch(p, 'dec-1', new Date('2026-09-28T12:00:00Z'), { gapSender: YF, getThread: noThread })).toMatchObject({ state: 'stopped', reason: 'replied' });
+  });
+
+  it('in the Gmail thread too: a notice read from its snippet is not a reply; a person is', () => {
+    const at = new Date(SENT_AT.getTime() + 3_600_000);
+    const msg = (snippet: string) => ({ id: 'm', labelIds: ['INBOX'], internalDate: at, to: 'casey@yardflow.ai', from: 'Joey <joey.maggard@kroger.com>', subject: 'Re: Doors versus spots', snippet });
+    expect(recipientReplied([msg('I am out of the office until Monday, October 12, with limited access to email.')], 'joey.maggard@kroger.com', SENT_AT)).toBeNull();
+    expect(recipientReplied([msg('Happy to talk. Thursday works.')], 'joey.maggard@kroger.com', SENT_AT)).toMatchObject({ id: 'm' });
   });
 });
 

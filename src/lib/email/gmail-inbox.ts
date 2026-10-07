@@ -480,6 +480,8 @@ export interface GmailThreadMessageMeta {
   to: string;
   from: string;
   subject?: string;
+  /** The message's opening text (Gmail's snippet): the reply classification reads it, never the subject alone. */
+  snippet?: string;
 }
 
 /**
@@ -502,7 +504,7 @@ export async function getGmailThreadMessages(threadId: string, sender?: GmailSen
   if (res.status === 404) throw new GmailThreadMissingError(threadId);
   if (!res.ok) throw new Error(`Gmail threads.get failed (${res.status})`);
   const data = (await res.json()) as {
-    messages?: Array<{ id?: string; labelIds?: string[]; internalDate?: string; payload?: { headers?: Array<{ name?: string; value?: string }> } }>;
+    messages?: Array<{ id?: string; labelIds?: string[]; internalDate?: string; snippet?: string; payload?: { headers?: Array<{ name?: string; value?: string }> } }>;
   };
   return (data.messages ?? []).map((m) => {
     const headers = m.payload?.headers ?? [];
@@ -514,6 +516,7 @@ export async function getGmailThreadMessages(threadId: string, sender?: GmailSen
       to: h('To'),
       from: h('From'),
       subject: h('Subject'),
+      snippet: m.snippet ?? '',
     };
   });
 }

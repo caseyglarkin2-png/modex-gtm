@@ -42,6 +42,12 @@ describe('13C: Gmail message reads are bounded', () => {
     await getGmailThreadMessages('t1', SENDER);
     expect(fetchMock.mock.calls[0][1]?.signal).toBeInstanceOf(AbortSignal);
   });
+
+  // The follow-up stop reads the message, never the subject alone: the thread read carries each message's snippet.
+  it('the thread read carries each message\'s opening text (the snippet), so a reply is classified by what it says', async () => {
+    vi.stubGlobal('fetch', vi.fn(async () => new Response(JSON.stringify({ messages: [{ id: 'm1', labelIds: ['INBOX'], internalDate: '1759500000000', snippet: 'I am out of the office until Monday.', payload: { headers: [{ name: 'From', value: 'Joey <joey@kroger.example.com>' }, { name: 'Subject', value: 'Re: Doors versus spots' }] } }] }), { status: 200 })));
+    expect(await getGmailThreadMessages('t1', SENDER)).toEqual([expect.objectContaining({ id: 'm1', subject: 'Re: Doors versus spots', snippet: 'I am out of the office until Monday.' })]);
+  });
 });
 
 describe('13D: reconciliation keeps its meaning', () => {

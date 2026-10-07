@@ -34,7 +34,8 @@ import { parseSteps } from '../sequence/steps';
 import { NON_STOPPING_RESPONSE_CLASSES } from '../taxonomy';
 import { personSendHistoryForDecision } from './person-history';
 import { gapGmailSender } from './gap-sender';
-import { AUTO_REPLY_SUBJECT, DELIVERY_BLOCKED_KIND, FREEMAIL_DOMAINS } from '../replies/domains';
+import { DELIVERY_BLOCKED_KIND, FREEMAIL_DOMAINS } from '../replies/domains';
+import { isPersonReply } from '../replies/classify';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -83,7 +84,7 @@ export function threadReplyFromOther(thread: readonly GmailThreadMessageMeta[], 
         addresses(m.from).length > 0 &&
         !addresses(m.from).some((a) => own.has(a)) &&
         !/^(mailer-daemon|postmaster|mail-delivery-subsystem)@/i.test(addresses(m.from)[0] ?? '') &&
-        !AUTO_REPLY_SUBJECT.test(m.subject ?? ''),
+        isPersonReply({ snippet: m.snippet, subject: m.subject, from: addresses(m.from)[0] ?? m.from }),
     ) ?? null
   );
 }
@@ -98,7 +99,7 @@ export function recipientReplied(thread: readonly GmailThreadMessageMeta[], reci
         !m.labelIds.includes('DRAFT') &&
         m.internalDate.getTime() > since.getTime() &&
         addresses(m.from).includes(r) &&
-        !AUTO_REPLY_SUBJECT.test(m.subject ?? ''),
+        isPersonReply({ snippet: m.snippet, subject: m.subject, from: r }),
     ) ?? null
   );
 }
@@ -145,22 +146,29 @@ export async function computeNextTouch(prisma: PrismaLike, decisionId: string, n
     select: { response_class: true },
   });
   if (disposition) return { state: 'stopped', reason: 'replied', detail: `Buyer replied (${String(disposition.response_class).replace(/_/g, ' ')}).`, sent };
-  const inbound = await prisma.inboundMessage.findFirst({
+  // The one reading of a person writing back (replies/classify.ts isPersonReply): the message text, never its subject
+  // alone, so a body-only out-of-office notice stops nothing, and a person's reply behind a notice still stops it.
+  const inboundRows: Array<{ subject: string | null; snippet: string | null; body_text: string | null; from_email: string }> = await prisma.inboundMessage.findMany({
     where: { from_email: { equals: recipient, mode: 'insensitive' }, received_at: { gt: firstSentAt } },
-    select: { subject: true },
+    select: { subject: true, snippet: true, body_text: true, from_email: true },
+    orderBy: { received_at: 'asc' },
+    take: 20,
   });
-  if (inbound && !AUTO_REPLY_SUBJECT.test(inbound.subject ?? '')) return { state: 'stopped', reason: 'replied', detail: 'Buyer replied.', sent };
+  const inbound = inboundRows.find((m) => isPersonReply({ text: m.body_text, snippet: m.snippet, subject: m.subject, from: m.from_email }));
+  if (inbound) return { state: 'stopped', reason: 'replied', detail: 'Buyer replied.', sent };
   // Red team T9: someone else at the account replied after the first send (a
   // colleague, an assistant). Hold the sequence for a human read; a shared
   // consumer domain says nothing about the account.
   const domain = recipient.split('@')[1] ?? '';
   if (domain && !FREEMAIL_DOMAINS.has(domain)) {
-    const colleague = await prisma.inboundMessage.findFirst({
+    const colleagueRows: Array<{ subject: string | null; snippet: string | null; body_text: string | null; from_email: string }> = await prisma.inboundMessage.findMany({
       where: { from_email: { endsWith: `@${domain}`, mode: 'insensitive' }, received_at: { gt: firstSentAt } },
-      select: { subject: true, from_email: true },
+      select: { subject: true, snippet: true, body_text: true, from_email: true },
       orderBy: { received_at: 'asc' },
+      take: 20,
     });
-    if (colleague && !AUTO_REPLY_SUBJECT.test(colleague.subject ?? '')) {
+    const colleague = colleagueRows.find((m) => isPersonReply({ text: m.body_text, snippet: m.snippet, subject: m.subject, from: m.from_email }));
+    if (colleague) {
       return { state: 'stopped', reason: 'replied', detail: `Someone at ${domain} (${colleague.from_email}) replied after the first touch. Read it before anything else goes out.`, sent };
     }
   }
