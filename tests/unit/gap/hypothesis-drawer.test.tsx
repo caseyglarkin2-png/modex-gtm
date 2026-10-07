@@ -81,7 +81,9 @@ describe('<FactBlock>', () => {
     expect(within(block).getByRole('heading')).toHaveTextContent(/^FACT$/);
     expect(within(block).getByText('Observed, cited')).toBeInTheDocument();
     expect(within(block).getByText('Acme opened a second DC in Reno.')).toBeInTheDocument();
-    const link = within(block).getByRole('link', { name: '1' });
+    // R63-B N12: the numbered link is named by its source, not by "1" alone.
+    const link = within(block).getByRole('link', { name: 'Source 1: Opened a second DC in Reno (example.com)' });
+    expect(link).toHaveTextContent(/^1$/);
     expect(link).toHaveAttribute('href', 'https://example.com/reno');
     expect(block).not.toHaveAttribute('data-state', 'unsupported');
   });
