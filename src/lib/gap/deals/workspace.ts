@@ -10,6 +10,9 @@
  *                   proposals awaiting the seller's one review (deals/action-plan.ts)
  *   artifacts       R53: each deal's next artifact or stakeholder move, prepared (never sent) from its confirmed
  *                   context and plan (deals/artifacts.ts)
+ *   crm             R54: each deal's HubSpot changes: the exact candidates (the recap as a note, a task per open
+ *                   obligation, the next step from the plan) and every proposal already recorded with its state
+ *                   (deals/crm-model.ts; nothing is written without the seller's approval click)
  *
  * The deals themselves come from the account read (the opportunity resolver: HubSpot is the deal authority). Every
  * read here is soft: a failed read leaves its part empty and says so, never the page. Nothing here writes.
@@ -25,6 +28,8 @@ import { meetingDeal, meetingInstant, meetingState, prepareMeeting, type Meeting
 import { planFor, type Milestone } from './action-plan';
 import { loadPlanDecisions } from './action-plan-store';
 import { nextArtifact, prepareArtifacts, type PreparedArtifact } from './artifacts';
+import { crmCandidates, type CrmChange, type CrmOrigin, type CrmSyncItem } from './crm-model';
+import { loadCrmSync } from './crm-sync';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -40,6 +45,8 @@ export interface DealWorkspace {
   plans: Record<string, Milestone[]>;
   /** R53: each open deal's prepared artifacts and the one it needs now, by deal id. */
   artifacts: Record<string, { next: PreparedArtifact; all: PreparedArtifact[] }>;
+  /** R54: each open deal's HubSpot change candidates and recorded proposals, by deal id. */
+  crm: Record<string, { candidates: Array<{ change: CrmChange; origin: CrmOrigin }>; items: CrmSyncItem[] }>;
   /** The shared scope rule over this account's open deals, for the per-deal briefs. */
   scopeOfBid: (b: BriefBidRow) => ScopeRead;
   /** A part that could not be read, in words. */
@@ -82,12 +89,13 @@ export async function loadDealWorkspace(
       unread.push(what);
       return fallback;
     });
-  const [people, bidRows, meetingRows, objectiveRows, planDecisions] = await Promise.all([
+  const [people, bidRows, meetingRows, objectiveRows, planDecisions, crmItems] = await Promise.all([
     soft(prisma.persona?.findMany ? prisma.persona.findMany({ where: { account_name: x.accountName }, select: { id: true, name: true, title: true, email: true, hubspot_contact_id: true }, take: 200 }) : null, [], 'the people at the account'),
     soft(prisma.buyerInputData?.findMany ? prisma.buyerInputData.findMany({ where: { account_name: x.accountName }, select: { id: true, type: true, raw_buyer_language: true, normalized_summary: true, contact_email: true, human_confirmed: true, supersedes_id: true, confirmed_at: true, captured_at: true, metadata: true } }) : null, [], 'what the buyer said'),
     soft(prisma.meeting?.findMany ? prisma.meeting.findMany({ where: { account_name: x.accountName }, select: { id: true, meeting_date: true, meeting_time: true, meeting_status: true, objective: true, persona: true, hubspot_deal_id: true, created_at: true, updated_at: true }, orderBy: { meeting_date: 'desc' }, take: 20 }) : null, [], 'the meetings on record'),
     soft(prisma.gapAuditEvent?.findMany ? prisma.gapAuditEvent.findMany({ where: { kind: DEAL_OBJECTIVE, subject_type: 'account', subject_id: x.accountName }, select: { payload: true }, orderBy: { created_at: 'desc' }, take: 1 }) : null, [], 'your learning objective'),
     soft(x.deals.length ? loadPlanDecisions(prisma, x.accountName) : null, [], 'the plan decisions'),
+    soft(x.deals.length ? loadCrmSync(prisma, x.accountName) : null, [], 'the HubSpot changes'),
   ]);
   const persons: OpportunityPerson[] = (people as Array<{ id: number; name: string | null; title: string | null; email: string | null; hubspot_contact_id: string | null }>).map((p) => ({ personaId: p.id, name: p.name ?? `person ${p.id}`, title: p.title ?? null, email: p.email ?? null, hubspotContactId: p.hubspot_contact_id ? String(p.hubspot_contact_id) : null }));
   type BidRow = { id: string; type: string; raw_buyer_language: string; normalized_summary: string | null; contact_email: string | null; human_confirmed: boolean; supersedes_id: string | null; confirmed_at: Date | string | null; captured_at: Date | string; metadata: unknown };
@@ -146,5 +154,19 @@ export async function loadDealWorkspace(
       return [d.dealId, { next: nextArtifact(all, input), all }];
     }),
   );
-  return { accountName: x.accountName, opportunities, meetings, plans, artifacts, scopeOfBid: (b) => bidScope({ metadata: b.metadata, contactEmail: b.contact_email }, refs, personOf), unread };
+  // R54: the exact HubSpot changes GAP may propose for each deal, beside the ones already recorded.
+  const crm = Object.fromEntries(
+    opportunities.deals.map((d) => {
+      const recap = artifacts[d.dealId]?.all.find((a) => a.kind === 'recap') ?? null;
+      const next = (plans[d.dealId] ?? []).find((m) => m.state === 'agreed' && m.phase !== 'done' && m.phase !== 'skipped' && m.commitmentId) ?? null;
+      const candidates = crmCandidates({
+        deal: { id: d.dealId, name: d.name, nextStep: d.nextStep },
+        recap: recap ? { text: recap.text, ready: recap.problems.length === 0 && recap.citations.some((c) => c.ref.startsWith('bid:')) } : null,
+        commitments: d.commitments.filter((c) => c.source.kind !== 'plan').map((c) => ({ commitmentId: c.commitmentId, kind: c.kind, title: c.title, basis: c.basis, dueAt: c.dueAt, status: c.status })),
+        nextMilestone: next ? { commitmentId: next.commitmentId!, title: next.title, dueDay: next.dueDay } : null,
+      });
+      return [d.dealId, { candidates, items: (crmItems as CrmSyncItem[]).filter((it) => it.dealId === d.dealId) }];
+    }),
+  );
+  return { accountName: x.accountName, opportunities, meetings, plans, artifacts, crm, scopeOfBid: (b) => bidScope({ metadata: b.metadata, contactEmail: b.contact_email }, refs, personOf), unread };
 }

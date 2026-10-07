@@ -28,6 +28,7 @@ import { DealOpportunities } from '@/components/gap/deal-opportunities';
 import { MeetingPrepView } from '@/components/gap/meeting-prep';
 import { DealPlan } from '@/components/gap/deal-plan';
 import { DealArtifacts } from '@/components/gap/deal-artifacts';
+import { CrmSyncPanel } from '@/components/gap/crm-sync';
 import { loadAccountDealWorkspace } from '@/lib/gap/deals/workspace';
 import { commitmentScope, dealRefs, personIndex } from '@/lib/gap/deals/opportunities';
 import { loadAccountSources } from '@/lib/gap/sources/account-sources';
@@ -218,6 +219,7 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
             {own.map((m) => <MeetingPrepView key={m.meetingId} prep={m} />)}
             {workspace?.plans[d.dealId] ? <DealPlan accountName={brief.accountName} dealId={d.dealId} plan={workspace.plans[d.dealId]} /> : null}
             {workspace?.artifacts[d.dealId] ? <DealArtifacts next={workspace.artifacts[d.dealId].next} all={workspace.artifacts[d.dealId].all} /> : null}
+            {workspace?.crm[d.dealId] ? <CrmSyncPanel accountName={brief.accountName} dealId={d.dealId} dealName={d.name} candidates={workspace.crm[d.dealId].candidates} items={workspace.crm[d.dealId].items} /> : null}
           </div>
         );
       }

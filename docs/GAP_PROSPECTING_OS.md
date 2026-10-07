@@ -1466,6 +1466,44 @@ criteria, the recap always chosen) each turn it red. Adjacent: 5 files / 51 gree
 the commit (nothing stored). Debt: the texts are fixed templates around the buyer's words (no generated prose); the
 recap does not know whether one was already sent (no record of a sent recap exists outside the seller's mailbox).
 
+R54 **Bounded, recoverable CRM sync (DONE; HubSpot writes stay OFF in production).** Inspected first: the only
+HubSpot WRITE path is `hubspot-mirror.ts` (automatic hypothesis and disposition notes and two GAP properties, behind
+GAP_OS_ENABLED + GAP_HUBSPOT_MIRROR_ENABLED + HUBSPOT_SYNC_ENABLED, idempotent through `gap_hubspot_mirror`); that
+already-authorized automatic logging is reused unchanged and nothing new is automatic. NEW `deals/crm-model.ts` (pure),
+`deals/crm-sync.ts` (the store), `deals/crm-writer.ts` (the SDK writer), `POST/GET /api/gap/crm-sync` and
+`components/gap/crm-sync.tsx`, inside each deal on the account BRIEF: any OTHER HubSpot change GAP would make (the
+agreed recap as a deal note, a task per open seller obligation on the deal, at most three, and the deal's next step
+from the plan's next agreed milestone when it differs) is shown EXACTLY as HubSpot would hold it, with its origin, and
+needs ONE explicit approval click: append-only `crm.sync_proposed` (once: the id is the origin, kind and exact content)
+then `crm.sync_approved`, recorded whether or not the write may run, then a `crm.sync_attempt` and a `crm.sync_result`
+(subject `crm_sync`, the account in every payload; no new table). The write runs only with GAP_OS_ENABLED,
+GAP_HUBSPOT_MIRROR_ENABLED, HUBSPOT_SYNC_ENABLED and a token; otherwise the state is "Approved, not written: HubSpot
+writes are off here (<the flag>). Nothing reached HubSpot." Idempotent retries, three layers each pinned on its own:
+the claim (a written proposal answers written with no call; an attempt in flight under a minute answers "in
+progress", so a double click or two tabs never write twice; the claim is taken under an advisory lock, the HTTP call
+is outside the transaction), the mirror ledger row (`gap:crm:<proposal id>`, the hubspot-mirror encoding), and the
+stable external id in the payload (`GAP reference gapcrm<id>`, searched for before any create, so a write whose
+answer was lost is RECOVERED, never duplicated). Visible states: proposed, approved (in flight), off, written (its
+record id), failed (the reason; the full text kept; retry is safe), conflict, discarded. Conflict resolution: a deal
+field is read with its history before it is changed; a value different from the one the seller saw, or a change
+after the proposal by anything but GAP, is a CONFLICT and never overwritten; only `hs_next_step` may be proposed.
+Origin tracking: every proposal names what in GAP produced it, and the route accepts only an origin GAP holds for that
+deal (an obligation or milestone at the account and deal, the deal's recap). A CRM outage loses neither the text nor a
+local completion (the obligation's done stands; the proposal keeps its body). Stub: write endpoints that record
+(notes and tasks with their search, a deal's properties with history and their update; STUB_WRITES_FILE) and can be
+told to fail (`/__stub/control` failWrites true or after_write: the write kept and the answer lost) or to play a human
+edit (`/__stub/deal-property`). Proof: `crm-sync.test.tsx` (12, with a controlled HubSpot writer: the exact change
+recorded once; writes off with the approval standing and no call; written once and no second call; each idempotency
+layer on its own; down then retried once; the lost answer recovered by its external id; the newer human value never
+overwritten and the unchanged one updated; in flight and discard; the outage keeping the completion; the candidates;
+the real route with writes off and the origin refusals; the view); eight deliberate mutations (writing with writes
+off, no read before write, overwriting a newer value, the claim forgetting a written result, the mirror row ignored,
+a double click writing, the approval not recorded, an unknown origin accepted) each turn it red. Adjacent: 7 files /
+102 green; typecheck clean. Rollback: revert the commit (the rows go inert; nothing was written to HubSpot in
+production). Debt: a deal task's owner in HubSpot is not set (the portal's default); the search-before-create needs
+HubSpot's search index to have caught up (a retry inside its indexing delay could still create a second note; the
+mirror row and the claim cover the ordinary retry).
+
 ## 12. Migration, backfill and rollback
 
 Order of commits inside Sprint 1 and 3: schema + SQL first (no reader), then pure core, then importers (Top100 before PIC before modex legacy), then runtime pin, then services, then queue actions under the flag, then `GAP_OS_ENABLED=true` in Vercel after `verify-triggers.ts` passes against prod (env is snapshot at deploy; redeploy after setting). Before the prod `db push`, preview it with `prisma migrate diff --from-url <prod> --to-schema-datamodel prisma/schema.prisma --script` and confirm the script is additive only; also confirm the prod role can `CREATE FUNCTION` (not yet verified). Rollback: the flag off restores byte-identical behavior instantly; full removal is the rollback SQL plus reverting the runtime, service and queue-action commits; `sequences` is never modified; the only two pre-existing tables GAP OS's schema touches at all are `draft_queue_items` (one nullable `sequence_version_id` stamp, S1-T2) and `inbound_messages` (`source String @default("gmail")` and `hubspot_engagement_id String?`, S2-T1, needed so the reply cron and the HubSpot poller can tell a Gmail-sourced row from a HubSpot-engagement-sourced one and attribute the engagement id idempotently) — both additive-only, both confirmed by the production preflight below; the lane and PIC files are read, never written.
