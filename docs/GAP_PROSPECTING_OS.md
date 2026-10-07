@@ -1943,13 +1943,20 @@ platform's cold start, Work's rebuilt read). The commits after 31c44d1f add no s
 read and one recorded-reply read ride Work's existing parallel wave; the account page reuses data it already loaded);
 they were not re-measured.
 
-### HANDOFF a0f6bb77
+**R65 operations and the stranded-draft dry run (2026-10-07).** The operator sees failures, Casey sees decisions.
+- The counts: e5b0b567, `lib/gap/health/operations.ts`, from the ledgers GAP already keeps (no table, no model call, no write). Broken handoffs (drafts stranded, proposals drafted and never submitted, dead-letter signals), the research queue's oldest age and stuck runs, research freshness and cost over seven days (runs, grounded turns, pages queued, facts verified, failures), preparation latency (the remembered summaries' ages), seller corrections, outcomes (obligations, replies, meetings) and the HubSpot changes waiting for approval, approved and not written, or failed, each with its owner and where to decide or retry. Every read stands alone and is soft: a count GAP could not read is unreadable, never zero, and degrades the state. The operator's view is `GET /api/gap/health?operations=1` (the Work strip's call is unchanged, so it stays light); Casey's is the "Your decisions and what happened" section on /gap/learning.
+- The dry run: c72e6a2f, `scripts/gap/recovery/repair-stranded-drafts.ts --dry-run [--json]`. It lists each stranded draft and what the R11 service would do with it, ADOPT (the fact, the key) or why not. It refuses to write twice over (exit 2 without --dry-run before any read; a read-only client that throws on every write, raw SQL and transaction) and names the database without credentials. The service's fact checks are one exported function (`draftFactRefusal`), and on the scratch database the real service then adopts the very draft the plan named and refuses the sensitive one for the same reason (`stranded-repair.scratch.test.ts`).
+- Found by the live check and fixed: 4e936a90, a HubSpot conflict read "changed 2026-10-07 by CRM_UI"; it now says the day and who in words.
+- Observed, not changed: the analyst tables lower on /gap/learning show sequence version ids, the evidence tier name VERIFIED_FACT and campaign program keys. They are kept by contract as the analyst views' own words (R60); listed for the lead's R62 / R63 decision.
+- Live check on the production build (scratchpad `r65-live/`): the operator view listed 4 stranded drafts and 2 HubSpot conflicts with owners and where to act; the strip's call carried no operations; /gap/learning showed the decisions, the approved-not-written note with its retry place, the conflicts, the outcomes and research cost.
+
+### HANDOFF 4e936a90
 
 ```yaml
-handoff: a0f6bb77
+handoff: 4e936a90
 written: 2026-10-07
 branch: feat/gap-account-first-ux
-head: a0f6bb77            # the code this block describes; the block itself is the docs commit on top
+head: 4e936a90            # the code this block describes; the block itself is the docs commit on top
 base: origin/main 672570ed (production)
 worktree: C:/Users/casey/wt-gap-account-first-ux (one writer)
 schema_delta: none (no prisma change on the branch; the hand SQL is unchanged)
@@ -1988,14 +1995,14 @@ tickets:
   R51: {state: DONE, sha: f43d5280}
   R52: {state: DONE, sha: ea3645f2}
   R53: {state: DONE, sha: a0f6bb77}
-  R54: {state: DONE, sha: 4834eb2d, note: approved HubSpot writes stay OFF in production}
+  R54: {state: DONE, sha: 4e936a90, note: approved HubSpot writes stay OFF in production; 4e936a90 words a conflict}
   R55: {state: DONE, sha: 8feafd40}
   R60: {state: DONE, sha: de14c0fa, note: "capture once 8283a9cc + de14c0fa; vocabulary 216cd80a"}
   R61: {state: PARTIAL, sha: 31c44d1f, dependency: ["the platform's cold start (first byte 1.6 to 1.8 s with no GAP read)", "Work's rebuilt read 10.5 to 12.6 s under production-like latency: routing/inputs.ts readComms and execution/person-history.ts per card"]}
   R62: {state: NOT STARTED}
   R63: {state: NOT STARTED}
   R64: {state: NOT STARTED}
-  R65: {state: NOT STARTED, note: the code is next on this branch}
+  R65: {state: DONE, sha: e5b0b567, note: "code: the counts e5b0b567, the dry run c72e6a2f; running it in production follows R64"}
 sprint5_review: {blocker: f43d5280, should: [9f283f1a, 8feafd40, 4834eb2d, 6e16babd, 20f244a3], nice: [9c0e5b14, 0e06651c, a0f6bb77], not_taken: ["a raw date in the brief (context/brief.ts)", "a canceled meeting's rebook offer and HubSpot's stale next step"]}
 reopened_unresolved:
   - "Section 8 generated quality: PARTIAL; dependency: a held-out, human-graded corpus of 30 or more cases with model, prompt and policy versions"
@@ -2012,6 +2019,9 @@ r62_cases:
     - "buyer words in NOW, the brief and the story carry their deal; a detention figure counts as cost"
     - "artifacts in the second person, no CRM deal name in buyer text"
     - "no seller heading or label says HYPOTHESIS or BID"
+    - "the stranded-draft dry run on the matrix's Pepsiprod row: ADOPT for Tom's Tulsa draft; the R11 service then adopts that id (stranded-repair.scratch.test.ts proves it on the corpus)"
+    - "GET /api/gap/health?operations=1 counts the matrix's broken handoffs and HubSpot failures; the plain call carries none"
+  decide: "the analyst tables on /gap/learning keep sequence version ids, VERIFIED_FACT and campaign program keys (analyst words by contract)"
 r63_tasks:   # each starts from Work on the production build
   - log a reply once: the reply card, Capture prefilled, what it means and their words, recorded; Work moves on
   - record an opt-out from its card
@@ -2025,7 +2035,7 @@ r64_release:
   merge: PR feat/gap-account-first-ux to main on Casey's go; Vercel builds production; verify the live pages after
   seed_families: "dry run first, then GAP_OS_ENABLED=true npx tsx scripts/gap/seed-families.ts --apply against production; a production write that needs Casey's authorization"
   flags: no new flag; GAP_HUBSPOT_MIRROR_ENABLED, GAP_CRM_APPROVED_WRITES_ENABLED, GAP_AUTO_ENROLL_ENABLED and GAP_HUBSPOT_SEQUENCE_PUBLISH_ENABLED stay off; GAP_SEND_TRANSPORT and HUBSPOT_API_BASE_PATH stay unset
-  stranded_draft_repair: "scripts/gap/recovery/repair-stranded-drafts.ts --dry-run (R65, read-only) lists what the proposal service would adopt (known: PepsiCo cmux0uu7r0003jw0450gb4kno, Tom); the adoption itself runs through the R11 service with explicit authorization"
+  stranded_draft_repair: "DATABASE_URL=<production> npx tsx scripts/gap/recovery/repair-stranded-drafts.ts --dry-run (exists since c72e6a2f; read-only, refuses to write) lists what the proposal service would adopt (known: PepsiCo cmux0uu7r0003jw0450gb4kno, Tom); the adoption itself runs through the R11 service (the seller's draft control, or with explicit authorization)"
   verify: scripts/gap/verify-triggers.ts read-only after the deploy
   rollback: promote the previous production deployment (main 672570ed); the flags are the kill switch; no schema or data migration to reverse
 r65_requirements:
@@ -2035,20 +2045,21 @@ r65_requirements:
 capabilities:
   enabled_in_production: [hypothesis, routing, message compiler, reply classification, background research and grounded discovery on the cron schedule]
   code_complete_disabled: [auto-enroll, HubSpot sequence publish, HubSpot mirror, approved HubSpot writes, transcription (spend), the transport sink and the HubSpot base-path override (scratch and test only)]
-  ships_with_this_branch_without_a_flag: [capture once on a reply, deal-scoped labels and closed-deal history, restore after reopening, recap retirement, the seller vocabulary]
+  ships_with_this_branch_without_a_flag: [capture once on a reply, deal-scoped labels and closed-deal history, restore after reopening, recap retirement, the seller vocabulary, the operations counts (health ?operations=1 and /gap/learning), the read-only repair dry run]
 environment:   # the harness in five lines
   - "Postgres: embedded scratch at postgresql://postgres:scratch@127.0.0.1:55432/gap_finish_e2e; reset with scratchpad reset-scratch.sh (schema, hand SQL, 33 guards, families)"
   - "seed: DATABASE_URL=<scratch> npx tsx <scratchpad>/journey-exit-seed.ts <tag>; copy stub-deals-<tag>.json to r60-deals.json; write the tag to r60-tag.txt"
   - "stub: bash <scratchpad>/run-r60-stub.sh (HubSpot and clawd on 4545); build: source scratch-env.sh; unset PORT; npm run build"
   - "serve: bash <scratchpad>/run-r60-server.sh (next start -p 3100); cookie: AUTH_SECRET=$(cat auth-secret.txt) node mint-cookie.mjs"
   - "walk: node journey-exit.mjs and r60-capture-walk.mjs (playwright-core from the rig); stop the server and the stub after; scratch tests run with --maxWorkers=1 (one shared database)"
-receipts:   # all on a0f6bb77
+receipts:   # on 4e936a90 unless said
   typecheck: {command: npx tsc --noEmit -p ., result: clean}
-  gap_unit: {command: "npx vitest run tests/unit/gap/[a-c|d-l|m-r|s-z0-9]*.test.ts(x) --maxWorkers=2 (four foreground chunks)", files: 401, tests: 5644, failed: 0}
-  gap_scratch: {command: GAP_SCRATCH_DATABASE_URL=<scratch> npx vitest run tests/unit/gap/scratch --maxWorkers=1, files: 8, tests: 47, failed: 0}
-  rest: {command: "npx vitest run --maxWorkers=2 --exclude tests/unit/gap/**", files: 326, tests: 2300, passed: 2299, skipped: 1, failed: 0}
-  build: {command: npm run build, result: compiled}
-  journeys: {exit: "12 steps, zero internal-text hits (r62-exit2/)", reply_capture: "6 steps, zero internal-text hits (r62-capture2/)", hubspot_writes: 0}
+  gap_unit: {command: "npx vitest run tests/unit/gap/[a-c|d-l|m-r|s-z0-9]*.test.ts(x) --maxWorkers=2 (four foreground chunks)", files: 403, tests: 5653, failed: 0}
+  gap_scratch: {command: GAP_SCRATCH_DATABASE_URL=<scratch> npx vitest run tests/unit/gap/scratch --maxWorkers=1, files: 9, tests: 50, failed: 0}
+  rest: {command: "npx vitest run --maxWorkers=2 --exclude tests/unit/gap/**", sha: e5b0b567, files: 326, tests: 2300, passed: 2299, skipped: 1, failed: 0, note: no file outside GAP changed after it}
+  build: {command: npm run build, sha: e5b0b567, result: compiled}
+  journeys: {sha: a0f6bb77, exit: "12 steps, zero internal-text hits (r62-exit2/)", reply_capture: "6 steps, zero internal-text hits (r62-capture2/)", hubspot_writes: 0}
+  r65_live: {sha: e5b0b567, result: "operations listed 4 stranded drafts and 2 conflicts with owners; the strip call carried none; /gap/learning showed the decisions (r65-live/)"}
   focused: each fix's own test and a deliberate mutation turned red, then restored (named in each commit and the dispositions above)
 blockers: []
 ```
