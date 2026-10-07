@@ -1,11 +1,13 @@
 /**
- * THE INCOMING MESSAGE AND ITS PREPARED NOTES (GAP OS execution recovery, R42). Presentational only, used on the Work
- * card and on the account page: who wrote, when, the subject and their words, what kind of answer it is, the prepared
- * notes, the fail-closed line (no reply copy family: GAP never writes the reply), "Answer in Gmail" (the thread) and
- * "Record what they said" (the triage form). There is no send control here, by design.
+ * THE INCOMING MESSAGE AND ITS PREPARED NOTES (GAP OS execution recovery, R42 / R42b), on the Work card and on the
+ * account page: who wrote, when, the subject and their words, what kind of answer it is, the prepared notes, "Answer
+ * in Gmail" (the thread) and "Record what they said" (the triage form). R42b: a real reply or an objection offers the
+ * prepared, editable answer (reply-answer.tsx: copy, a Gmail draft, or a confirmed send, each its own gated action); a
+ * referral or an opt-out says why no answer is prepared.
  */
 import Link from 'next/link';
 import type { ReplyPrep } from '@/lib/gap/replies/prepare';
+import { ReplyAnswer } from './reply-answer';
 
 const when = (iso: string) => new Date(iso).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: 'America/New_York' });
 
@@ -27,7 +29,7 @@ export function ReplyPrepPanel({ prep, compact = false }: { prep: ReplyPrep; com
           <li key={k}>{n}</li>
         ))}
       </ul>
-      {prep.noCopyLine ? <p className="text-xs text-amber-700 dark:text-amber-400" data-testid="reply-prep-no-copy">{prep.noCopyLine}</p> : null}
+      {prep.answerable ? <ReplyAnswer messageId={prep.messageId} /> : prep.noAnswerLine ? <p className="text-xs text-amber-700 dark:text-amber-400" data-testid="reply-prep-no-answer">{prep.noAnswerLine}</p> : null}
       <div className="flex flex-wrap items-center gap-2">
         <a href={prep.threadHref} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center rounded-md border border-[var(--border)] px-3 text-xs hover:bg-[var(--muted)] sm:min-h-9" data-testid="reply-prep-thread">
           Answer in Gmail

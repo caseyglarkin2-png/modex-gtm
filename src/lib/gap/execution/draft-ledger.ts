@@ -126,6 +126,32 @@ export function isDefinitelyNotSent(reason: string): boolean {
 }
 
 /**
+ * R42b: the prepared ANSWER to a buyer's reply has its own facts, each written once, never changed, about ONE inbound
+ * message (`subject_type 'inbound_message'`, `subject_id <the message id>`), so "what became of this answer" is one
+ * indexed read. Copying the text, saving a Gmail draft and sending are three distinct states, never collapsed:
+ *
+ *   execution.reply_copied     the seller copied the prepared text (nothing left GAP)
+ *   execution.reply_drafted    a Gmail draft of the answer exists in the thread (NOT sent)
+ *   execution.reply_claimed    CONFIRM + SEND started (a lost answer leaves it open: check Sent, never resend)
+ *   execution.reply_sent       the answer left the GAP mailbox in the buyer's thread (the Gmail message id)
+ *   execution.reply_released   the send provably created nothing (the claim is released)
+ */
+export const REPLY_SUBJECT_TYPE = 'inbound_message';
+export const REPLY_COPIED = 'execution.reply_copied' as const;
+export const REPLY_DRAFTED = 'execution.reply_drafted' as const;
+export const REPLY_CLAIMED = 'execution.reply_claimed' as const;
+export const REPLY_SENT = 'execution.reply_sent' as const;
+export const REPLY_RELEASED = 'execution.reply_released' as const;
+export const REPLY_KINDS = [REPLY_COPIED, REPLY_DRAFTED, REPLY_CLAIMED, REPLY_SENT, REPLY_RELEASED] as const;
+export type ReplyLedgerKind = (typeof REPLY_KINDS)[number];
+
+/** Append one answer fact. THROWS on failure (a receipt that silently did not land is a lie). */
+export async function appendReplyLedger(prisma: PrismaLike, kind: ReplyLedgerKind, actor: string, messageId: string, payload: Record<string, unknown>): Promise<string> {
+  const row = await prisma.gapAuditEvent.create({ data: { kind, actor, subject_type: REPLY_SUBJECT_TYPE, subject_id: messageId, payload: JSON.parse(JSON.stringify(payload)) }, select: { id: true } });
+  return row.id;
+}
+
+/**
  * Serialize every execution write for one human: advisory locks on the
  * lowercased address AND the persona id, always taken in the same order.
  * Person identity is persona OR address (person-history.ts), so two persona

@@ -7,7 +7,7 @@
  */
 import { describe, expect, it } from 'vitest';
 import { classifyReply } from '@/lib/gap/replies/classify';
-import { detectNamed, NO_REPLY_COPY, prepareReply, threadLink } from '@/lib/gap/replies/prepare';
+import { detectNamed, NO_ANSWER_OPT_OUT, NO_ANSWER_REFERRAL, prepareReply, threadLink } from '@/lib/gap/replies/prepare';
 import { areTwins, twinGroups } from '@/lib/gap/replies/twins';
 import { listReplies } from '@/lib/gap/replies/list';
 import { projectPursuitState, type PursuitInput } from '@/lib/gap/pursuit/state';
@@ -36,10 +36,10 @@ describe('the reply kinds (R42)', () => {
   });
 });
 
-describe('the prepared reply fails closed on copy (R42)', () => {
-  it('a real reply: the message, what they asked, the day they named (New York), the thread to answer in and the record form; no copy family, no send', () => {
+describe('the prepared reply (R42; R42b makes a real reply answerable)', () => {
+  it('a real reply: the message, what they asked, the day they named (New York), the thread to answer in and the record form; no governed copy family, answerable through the gated answer (no send link here)', () => {
     const prep = prepareReply(reply('Thanks Casey. Can you send the two-site comparison? Thursday works for a call.'), { mailbox: 'casey@yardflow.ai', now: NOW });
-    expect(prep).toMatchObject({ kind: 'human', human: 'reply', copyFamily: null, noCopyLine: NO_REPLY_COPY, record: { href: '/gap?lane=replies', label: 'Record what they said' } });
+    expect(prep).toMatchObject({ kind: 'human', human: 'reply', copyFamily: null, answerable: true, noAnswerLine: null, record: { href: '/gap?lane=replies', label: 'Record what they said' } });
     expect(prep.notes).toEqual([
       'They asked: "Can you send the two-site comparison?". Answer that first.',
       'They named a day: Thursday (Oct 8). Offer a time then, or ask what suits.',
@@ -54,12 +54,13 @@ describe('the prepared reply fails closed on copy (R42)', () => {
 
   it('a referral names the person and says they get no cold email; an objection is quoted; an opt-out gets no reply; an automatic notice has nothing to answer; a bounce asks for an address', () => {
     const ref = prepareReply(reply("I'm not the right person. You should talk to Bob Lane, he runs our yards."), { now: NOW });
-    expect(ref).toMatchObject({ human: 'referral', named: 'Bob Lane', record: { label: 'Record who they named' } });
+    expect(ref).toMatchObject({ human: 'referral', named: 'Bob Lane', record: { label: 'Record who they named' }, answerable: false, noAnswerLine: NO_ANSWER_REFERRAL });
     expect(ref.notes[1]).toBe('Bob Lane gets no cold email: record the referral and GAP lists them as named by Ann Scratch; you decide how to approach them.');
     expect(detectNamed('please reach out to bob.lane@nfi.example.com directly')).toBe('bob.lane@nfi.example.com');
     const obj = prepareReply(reply('Appreciate it. We already run a YMS across the network.'), { now: NOW });
     expect(obj.notes[0]).toBe('They pushed back: "We already run a YMS across the network.". Acknowledge it and ask one question that tests it; do not argue.');
-    expect(prepareReply(reply('stop'), { now: NOW })).toMatchObject({ kind: 'opt_out', noCopyLine: null, notes: ['No reply goes back.', 'Record it as do not contact; the person is set aside and the account cools.'] });
+    expect(prepareReply(reply('stop'), { now: NOW })).toMatchObject({ kind: 'opt_out', answerable: false, noAnswerLine: NO_ANSWER_OPT_OUT, notes: ['No reply goes back.', 'Record it as do not contact; the person is set aside and the account cools.'] });
+    expect(obj).toMatchObject({ answerable: true, noAnswerLine: null });
     const ooo = prepareReply(reply('I am out of the office and will return on Monday, October 12.', { subject: 'Automatic reply: trailer turns' }), { now: NOW });
     expect(ooo).toMatchObject({ kind: 'out_of_office', record: null, day: { day: '2026-10-12' } });
     expect(ooo.notes).toEqual(['An automatic notice: there is nothing to answer.', 'They are back Oct 12: the follow-up waits until then.']);

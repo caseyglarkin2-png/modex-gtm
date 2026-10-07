@@ -49,6 +49,8 @@ import {
 import { gmailDirectAdapter, type GmailAdapterDeps, type GmailAdapterInput } from './gmail-adapter';
 import { prepareSellerEmail, type PreparedSellerEmail, type SellerDraftDeps, type SellerDraftRefusal } from './seller-draft';
 import { claimSendKey, personStepKey } from './person-history';
+import { REPLY_RELEASED, REPLY_SENT, appendReplyLedger } from './draft-ledger';
+import { claimReply, prepareSellerReply, replyIntent, type ReplyRefusal, type SellerReplyDeps } from './seller-reply';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -291,3 +293,127 @@ export async function sendSellerEmail(
   return { ok: true, alreadySent: false, sent, humanAction, ...(ledgerError ? { ledgerError } : {}) };
 }
 
+// ---------------------------------------------------------------------------------------------------------------------
+// R42b (GAP OS execution recovery, 2026-10-06): CONFIRM + SEND of the seller's answer to a buyer's reply, in their
+// thread. The same discipline as a first touch: a preview of exactly what leaves (from, to, subject, the text the seller
+// edited and its content hash), then a send of exactly that text to exactly that person, claimed under a lock on the
+// message first. Every click-time gate is seller-reply.ts `prepareSellerReply` (an opt-out stops everything, a referral
+// prepares no reply, a newer message, a do-not-contact, an open draft, an answer already sent from GAP or by hand in
+// Gmail, a placeholder left in the text); the wire runs restriction (In-Reply-To marks it a reply), autonomy,
+// suppression and the daily cap. A lost answer keeps the claim open: check Sent, never resend blind.
+// ---------------------------------------------------------------------------------------------------------------------
+
+export interface ReplySendPreview {
+  fromName: string;
+  from: string;
+  toName: string | null;
+  to: string;
+  subject: string;
+  body: string;
+  contentHash: string;
+}
+
+export interface ReplySentPayload {
+  engine: 'gmail_direct';
+  status: 'sent';
+  inboundMessageId: string;
+  accountName: string | null;
+  personaId: number | null;
+  recipient: string;
+  senderIdentity: string;
+  subject: string;
+  contentHash: string;
+  bodySnapshot: string;
+  gmailSentMessageId: string;
+  gmailThreadId: string | null;
+  inReplyTo: string | null;
+  sentAt: string;
+  confirmedBy: string;
+  confirmedAt: string;
+  claimId: string;
+}
+
+export type SellerReplySendResult =
+  | { ok: true; preview: ReplySendPreview }
+  | { ok: true; alreadySent: true; sent: { sentAt: string; gmailSentMessageId: string; recipient: string } }
+  | { ok: true; alreadySent: false; sent: ReplySentPayload; ledgerError?: string }
+  | ReplyRefusal
+  | { ok: false; reason: 'not_confirmed' | 'copy_changed_since_review' | 'recipient_changed_since_review' | 'send_refused'; detail?: string };
+
+export async function sendSellerReply(
+  prisma: PrismaLike,
+  input: { messageId: string; body: string; actor: string; now: Date; confirm?: { contentHash: string; recipient: string } | null },
+  deps: SellerReplyDeps & { directAdapter?: typeof gmailDirectAdapter; gmailTransport?: GmailAdapterDeps } = {},
+): Promise<SellerReplySendResult> {
+  const { messageId, actor, now } = input;
+  const prep = await prepareSellerReply(prisma, { messageId, body: input.body, actor, now }, deps);
+  if (!prep.ok) {
+    if (prep.reason === 'already_answered') {
+      const sent = (await import('./seller-reply')).foldReplyStates(
+        await prisma.gapAuditEvent.findMany({ where: { subject_type: 'inbound_message', subject_id: messageId, kind: REPLY_SENT }, select: { id: true, kind: true, actor: true, payload: true, created_at: true } }),
+        now,
+      ).sent;
+      if (sent) return { ok: true, alreadySent: true, sent: { sentAt: sent.at, gmailSentMessageId: sent.gmailSentMessageId, recipient: sent.recipient } };
+    }
+    return prep;
+  }
+  const p = prep.prepared;
+  if (!input.confirm) {
+    if (p.states.drafted) return { ok: false, reason: 'draft_outstanding', detail: 'A Gmail draft of this answer exists: send it or delete it in Gmail, so nothing goes out twice.' };
+    return { ok: true, preview: { fromName: p.gapSender.displayName ?? 'Casey Larkin', from: p.senderIdentity, toName: p.recipientName, to: p.recipient, subject: p.subject, body: p.text, contentHash: p.contentHash } };
+  }
+  if (input.confirm.contentHash !== p.contentHash) return { ok: false, reason: 'copy_changed_since_review', detail: 'The answer changed after you reviewed it. Review it again and confirm.' };
+  if (input.confirm.recipient.trim().toLowerCase() !== p.recipient) return { ok: false, reason: 'recipient_changed_since_review', detail: `The recipient is now ${p.recipient}. Review and confirm again.` };
+
+  const claim = await claimReply(prisma, { messageId, kind: 'send', actor, now });
+  if (!claim.claimed) {
+    if (claim.state === 'sent' && claim.states.sent) return { ok: true, alreadySent: true, sent: { sentAt: claim.states.sent.at, gmailSentMessageId: claim.states.sent.gmailSentMessageId, recipient: claim.states.sent.recipient } };
+    if (claim.state === 'drafted') return { ok: false, reason: 'draft_outstanding', detail: 'A Gmail draft of this answer exists: send it or delete it in Gmail, so nothing goes out twice.' };
+    return { ok: false, reason: 'reply_in_progress_or_unknown', detail: 'This answer was already started and its outcome is not recorded. Check Gmail Sent in casey@yardflow.ai before trying again. GAP will not send it twice.' };
+  }
+  const confirmation: HumanConfirmation = { actor, recipient: p.recipient, contentHash: p.contentHash, confirmedAt: now };
+  const wire: GmailAdapterInput = { to: p.recipient, subject: p.subject, html: p.html, text: p.text, purpose: 'HUMAN_APPROVED_1TO1', humanConfirmation: confirmation, sender: p.gapSender };
+  const receipt: ExecutionReceipt = await (deps.directAdapter ?? gmailDirectAdapter)(replyIntent(p, 'gmail_direct', `reply:${messageId}`, actor, now), wire, deps.gmailTransport ?? {});
+  if (receipt.status !== 'sent' || !receipt.engineId) {
+    const why = receipt.refusalReason ?? 'no message id';
+    if (receipt.status !== 'sent' && isDefinitelyNotSent(why)) {
+      await appendReplyLedger(prisma, REPLY_RELEASED, actor, messageId, { claimId: claim.claimId, reason: why, at: now.toISOString() }).catch(() => undefined);
+      const kind = suppressionRefusalKind(why);
+      return { ok: false, reason: kind === 'unreadable' ? 'suppression_unreadable' : kind === 'suppressed' ? 'recipient_suppressed' : 'send_refused', detail: why };
+    }
+    return { ok: false, reason: 'reply_in_progress_or_unknown', detail: `Gmail's answer was not conclusive (${why}). Check Gmail Sent before trying again.` };
+  }
+  const sentAt = (receipt.sentAt ?? now).toISOString();
+  const sent: ReplySentPayload = {
+    engine: 'gmail_direct',
+    status: 'sent',
+    inboundMessageId: messageId,
+    accountName: p.accountName,
+    personaId: p.personaId,
+    recipient: p.recipient,
+    senderIdentity: p.senderIdentity,
+    subject: p.subject,
+    contentHash: p.contentHash,
+    bodySnapshot: p.text,
+    gmailSentMessageId: receipt.engineId,
+    gmailThreadId: receipt.threadId ?? null,
+    inReplyTo: p.threadContext.inReplyTo ?? null,
+    sentAt,
+    confirmedBy: actor,
+    confirmedAt: now.toISOString(),
+    claimId: claim.claimId,
+  };
+  let ledgerError: string | undefined;
+  try {
+    await appendReplyLedger(prisma, REPLY_SENT, actor, messageId, sent as unknown as Record<string, unknown>);
+  } catch (err) {
+    // The answer left; the claim stays open, so it can never be re-sent.
+    ledgerError = err instanceof Error ? err.message : String(err);
+  }
+  try {
+    await prisma.emailLog.create({ data: { account_name: p.accountName ?? '', persona_name: p.recipientName, to_email: p.recipient, subject: p.subject, body_html: p.html, status: 'sent', provider_message_id: receipt.engineId, thread_id: receipt.threadId ?? null, metadata: { source: 'gap_reply_send', inboundMessageId: messageId }, sent_at: new Date(sentAt) } });
+  } catch {
+    // The daily-cap counter is best effort here; the GAP ledger is the truth.
+  }
+  return { ok: true, alreadySent: false, sent, ...(ledgerError ? { ledgerError } : {}) };
+}

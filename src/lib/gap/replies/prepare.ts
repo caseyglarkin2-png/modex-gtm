@@ -6,15 +6,19 @@
  * automatic notice, a bounce: replies/classify.ts), a few prepared notes read off their words (what they asked, the
  * day they named, who they named), where to answer it (the Gmail thread) and where to record it (the triage form).
  *
- * There is NO governed reply copy family: the compiler and the governed-copy path have families for first touches
- * only, so GAP fails closed here. It never writes the reply, never offers a send, and never asks a model for words
- * (`copyFamily` is always null and the notes are deterministic, built from the message alone). The seller answers in
- * the thread; GAP records what they said. Pinned by tests/unit/gap/reply-prep.test.ts.
+ * There is no governed reply copy family (the compiler's families are first touches), and no model is asked for words:
+ * the notes are deterministic, built from the message alone (`copyFamily` stays null). R42b: a real reply or an
+ * objection is ANSWERABLE: the panel prepares an editable answer from what they asked (replies/answer.ts), with what GAP
+ * can cite and what is missing, and copying, a Gmail draft and a send stay three distinct, gated actions
+ * (execution/seller-reply.ts, seller-send.ts). A referral or an opt-out prepares no answer and says why
+ * (`noAnswerLine`). Pinned by tests/unit/gap/reply-prep.test.ts and reply-answer.test.tsx.
  */
 import { classifyReply, type HumanReplyKind, type ReplyClassKind } from './classify';
 import { dayLabel, parseDuePhrase, parseReturnDate, type ParsedDay } from '../work/dates';
 
-export const NO_REPLY_COPY = 'No reply copy family yet: GAP does not write this reply. Answer it yourself in the thread.';
+/** R42b: why a reply prepares no answer (said on the card instead of an answer). */
+export const NO_ANSWER_REFERRAL = 'A referral prepares no reply here: record who they named; you decide how to approach them.';
+export const NO_ANSWER_OPT_OUT = 'An opt-out: no reply goes back, and nothing else goes to them.';
 
 export interface ReplyPrepInput {
   id: string;
@@ -37,9 +41,12 @@ export interface ReplyPrep {
   kind: ReplyClassKind;
   human: HumanReplyKind | null;
   label: string;
-  /** Always null: no governed reply copy exists, and GAP never generates one. */
+  /** Always null: no governed reply copy family exists; the answer is prepared from their message and edited by the seller. */
   copyFamily: null;
-  noCopyLine: string | null;
+  /** R42b: a real reply or an objection: the panel prepares an editable answer (never sent without the seller). */
+  answerable: boolean;
+  /** R42b: why no answer is prepared (a referral, an opt-out), else null. */
+  noAnswerLine: string | null;
   notes: string[];
   /** Answer it here: the Gmail thread in the GAP mailbox (or a search for the sender when the thread is unknown). */
   threadHref: string;
@@ -121,7 +128,8 @@ export function prepareReply(r: ReplyPrepInput, opts: { mailbox?: string | null;
     human: c.human,
     label: c.label,
     copyFamily: null,
-    noCopyLine: c.kind === 'human' ? NO_REPLY_COPY : null,
+    answerable: c.kind === 'human' && c.human !== 'referral',
+    noAnswerLine: c.kind === 'human' && c.human === 'referral' ? NO_ANSWER_REFERRAL : c.kind === 'opt_out' ? NO_ANSWER_OPT_OUT : null,
     notes,
     threadHref: threadLink(r.threadId, r.from, opts.mailbox),
     record,
