@@ -27,6 +27,7 @@ import { DealBriefView } from '@/components/gap/deal-brief';
 import { DealOpportunities } from '@/components/gap/deal-opportunities';
 import { MeetingPrepView } from '@/components/gap/meeting-prep';
 import { DealPlan } from '@/components/gap/deal-plan';
+import { DealArtifacts } from '@/components/gap/deal-artifacts';
 import { loadAccountDealWorkspace } from '@/lib/gap/deals/workspace';
 import { commitmentScope, dealRefs, personIndex } from '@/lib/gap/deals/opportunities';
 import { loadAccountSources } from '@/lib/gap/sources/account-sources';
@@ -203,6 +204,7 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
         guesses: inputs.hypotheses.filter((h) => (h.status === 'active' || h.status === 'approved') && !h.buyerRejected && h.problem.trim()).map((h) => h.problem.trim()),
         publicFacts: inputs.facts.map((f) => ({ quote: f.quote, title: f.title, url: f.url, publishedAt: f.publishedAt })),
         materials: ctx.assets.filter((a) => !a.legacy && a.href).map((a) => ({ label: a.label, href: a.href })),
+        roi: inputs.roi,
       }).catch(() => null);
       const dealBriefs = workspace && openDeals.length
         ? await Promise.all(openDeals.map((d) => loadDealBrief(prisma, brief.accountName, { now, deal: { id: d.id, name: d.name }, scopeOf: workspace.scopeOfBid, dealContacts: (d.contactIds ?? []).length }).catch(() => null)))
@@ -215,6 +217,7 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
           <div className="space-y-2">
             {own.map((m) => <MeetingPrepView key={m.meetingId} prep={m} />)}
             {workspace?.plans[d.dealId] ? <DealPlan accountName={brief.accountName} dealId={d.dealId} plan={workspace.plans[d.dealId]} /> : null}
+            {workspace?.artifacts[d.dealId] ? <DealArtifacts next={workspace.artifacts[d.dealId].next} all={workspace.artifacts[d.dealId].all} /> : null}
           </div>
         );
       }

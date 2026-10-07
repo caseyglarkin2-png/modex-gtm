@@ -1440,6 +1440,32 @@ it red. Adjacent: 12 files / 109 green; typecheck clean. Rollback: revert the co
 deal-step commitments; decision rows go inert). Debt: the standard steps are one fixed list (no per-deal template);
 the plan is not mirrored to HubSpot (R54 proposes notes and fields, never a plan object).
 
+R53 **The next deal artifact or stakeholder move, prepared (DONE; nothing is sent).** NEW `deals/artifacts.ts` (pure)
++ `components/gap/deal-artifacts.tsx`, inside each deal on the account BRIEF, from the deal's own confirmed context
+(R50), its plan (R52) and its open obligations: the AGREED RECAP (the buyer's confirmed statements in order and in
+their words, each cited by its BID, the account-level ones labeled; then only the next steps the BUYER agreed, i.e.
+milestones whose buyer agreement the seller recorded, the others left out and said so; then what the seller owes, as
+the seller's; an open invitation to correct it), the INTRODUCTION REQUEST (to the deal's contact, naming who else must
+agree and the stakeholder-alignment step's state), the PILOT SUCCESS CRITERIA (only the buyer's own measures: their
+numbers, their picture of good, their requirements; with none confirmed it asks the question and invents no target)
+and the BUSINESS-CASE INPUTS (the ROI model stays "Modeled, not measured" with its version and inputs shown, the buyer's
+numbers cited as theirs, YardFlow's proof in the canon's words labeled as YardFlow's measured result at 24 live Primo
+Brands sites and "not a forecast for your yards", and what is still needed from them). `nextArtifact` picks the one
+the deal needs now, deterministically, and its `why` names the actual commitment or blocker and the person ("3
+confirmed statements from Ann Scratch and Cal Scratch on YardFlow - Kroger: send them back so Ann can correct them,
+with the 1 step they agreed"). No governed copy family exists for deal artifacts (the compiler's families are
+first-touch), so each is a text block labeled "Prepared, not sent" with its citations, what it could not say, and a
+copy control that sends nothing. `artifactProblems` (the guard) refuses an em dash, "throughput", a canon figure
+without its qualifier (`compiler/canon.ts`) and any claim of the prospect's acceptance or of legal, security or
+procurement approval that is not inside the buyer's own quoted words; a flagged text cannot be copied. Proof:
+`deal-artifacts.test.tsx` (7: the recap and its citations and left-out steps; nothing confirmed; the introduction and
+the business case; the guard including the buyer-quote exemption; the next-artifact order; the view and its copy
+control; a flagged text not copyable); six deliberate mutations (the seller's agreement presented as the buyer's, the
+model losing MODELED, the guard missing an approval claim, the guard flagging the buyer's own words, invented pilot
+criteria, the recap always chosen) each turn it red. Adjacent: 5 files / 51 green; typecheck clean. Rollback: revert
+the commit (nothing stored). Debt: the texts are fixed templates around the buyer's words (no generated prose); the
+recap does not know whether one was already sent (no record of a sent recap exists outside the seller's mailbox).
+
 ## 12. Migration, backfill and rollback
 
 Order of commits inside Sprint 1 and 3: schema + SQL first (no reader), then pure core, then importers (Top100 before PIC before modex legacy), then runtime pin, then services, then queue actions under the flag, then `GAP_OS_ENABLED=true` in Vercel after `verify-triggers.ts` passes against prod (env is snapshot at deploy; redeploy after setting). Before the prod `db push`, preview it with `prisma migrate diff --from-url <prod> --to-schema-datamodel prisma/schema.prisma --script` and confirm the script is additive only; also confirm the prod role can `CREATE FUNCTION` (not yet verified). Rollback: the flag off restores byte-identical behavior instantly; full removal is the rollback SQL plus reverting the runtime, service and queue-action commits; `sequences` is never modified; the only two pre-existing tables GAP OS's schema touches at all are `draft_queue_items` (one nullable `sequence_version_id` stamp, S1-T2) and `inbound_messages` (`source String @default("gmail")` and `hubspot_engagement_id String?`, S2-T1, needed so the reply cron and the HubSpot poller can tell a Gmail-sourced row from a HubSpot-engagement-sourced one and attribute the engagement id idempotently) — both additive-only, both confirmed by the production preflight below; the lane and PIC files are read, never written.

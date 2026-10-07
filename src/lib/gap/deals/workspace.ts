@@ -8,6 +8,8 @@
  *                   to its deal; a canceled one prepares nothing (deals/meeting-prep.ts)
  *   plans           R52: each deal's mutual action plan: agreed milestones (commitments), declined steps and GAP's
  *                   proposals awaiting the seller's one review (deals/action-plan.ts)
+ *   artifacts       R53: each deal's next artifact or stakeholder move, prepared (never sent) from its confirmed
+ *                   context and plan (deals/artifacts.ts)
  *
  * The deals themselves come from the account read (the opportunity resolver: HubSpot is the deal authority). Every
  * read here is soft: a failed read leaves its part empty and says so, never the page. Nothing here writes.
@@ -22,6 +24,7 @@ import { ACCOUNT_LEVEL, type ScopeRead } from './scope';
 import { meetingDeal, meetingInstant, meetingState, prepareMeeting, type MeetingPrep } from './meeting-prep';
 import { planFor, type Milestone } from './action-plan';
 import { loadPlanDecisions } from './action-plan-store';
+import { nextArtifact, prepareArtifacts, type PreparedArtifact } from './artifacts';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -35,6 +38,8 @@ export interface DealWorkspace {
   meetings: MeetingPrep[];
   /** R52: each open deal's plan, by deal id. */
   plans: Record<string, Milestone[]>;
+  /** R53: each open deal's prepared artifacts and the one it needs now, by deal id. */
+  artifacts: Record<string, { next: PreparedArtifact; all: PreparedArtifact[] }>;
   /** The shared scope rule over this account's open deals, for the per-deal briefs. */
   scopeOfBid: (b: BriefBidRow) => ScopeRead;
   /** A part that could not be read, in words. */
@@ -49,6 +54,8 @@ export interface WorkspaceContext {
   publicFacts?: ReadonlyArray<{ quote: string; title: string; url: string | null; publishedAt: string }>;
   /** What already exists for the account (demo pack, microsite, content). */
   materials?: ReadonlyArray<{ label: string; href: string | null }>;
+  /** R53: the account's ROI model (MODELED), for the business-case inputs. */
+  roi?: { hardSavingsAnnual: number; totalValueAnnual: number; facilities: number; calculatorVersion: string | null; assumptions: readonly string[] } | null;
 }
 
 /** Capture opened on one deal: the HubSpot id binds the note's words and obligations to it; the name is the label. */
@@ -130,5 +137,14 @@ export async function loadDealWorkspace(
   }
   meetings.sort((a, b) => String(a.at ?? '9999').localeCompare(String(b.at ?? '9999')));
   const plans = Object.fromEntries(x.deals.map((d) => [d.id, planFor(d.id, x.commitments.filter((c) => c.dealId === d.id), planDecisions)]));
-  return { accountName: x.accountName, opportunities, meetings, plans, scopeOfBid: (b) => bidScope({ metadata: b.metadata, contactEmail: b.contact_email }, refs, personOf), unread };
+  // R53: the deal's own confirmed words (and the labeled account-level ones), its plan and its open obligations.
+  const artifacts = Object.fromEntries(
+    opportunities.deals.map((d) => {
+      const needs = [...d.needs, ...opportunities.accountLevel.needs].sort((a, b) => a.at.localeCompare(b.at)).map((n) => ({ id: n.id, type: n.type, quote: n.quote, who: n.who, at: n.at, accountLevel: n.scope.basis === 'none' }));
+      const input = { accountName: x.accountName, deal: { id: d.dealId, name: d.name, contacts: d.contacts }, needs, plan: plans[d.dealId] ?? [], commitments: d.commitments.map((c) => ({ commitmentId: c.commitmentId, kind: c.kind, title: c.title, line: c.line, dueAt: c.dueAt })), roi: x.roi ?? null };
+      const all = prepareArtifacts(input);
+      return [d.dealId, { next: nextArtifact(all, input), all }];
+    }),
+  );
+  return { accountName: x.accountName, opportunities, meetings, plans, artifacts, scopeOfBid: (b) => bidScope({ metadata: b.metadata, contactEmail: b.contact_email }, refs, personOf), unread };
 }
