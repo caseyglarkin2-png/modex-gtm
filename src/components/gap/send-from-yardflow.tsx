@@ -65,7 +65,44 @@ const REASONS: Record<string, string> = {
   sequence_stopped: 'The sequence stopped (for example the buyer replied). Nothing was sent.',
   hypothesis_not_active: 'The hypothesis is not in use. Nothing was sent.',
   decision_superseded: 'A newer routing run changed this card. Nothing was sent.',
+  // Item 6 (R34): every code the send route can return is worded (pinned by send-refusal-parity.test.ts).
+  no_version: 'No first-touch copy is installed for this thesis: its copy family must be seeded first. Nothing was sent.',
+  copy_not_installed: 'No first-touch copy is installed for this thesis: its copy family must be seeded first. Nothing was sent.',
+  approach_copy_unsupported: 'No first-touch copy exists for this kind of thesis yet. Nothing was sent.',
+  copy_family_mismatch: 'This copy is written for another kind of thesis. Nothing was sent.',
+  copy_version_outdated: 'This copy is a retired version. Nothing was sent.',
+  emailed_outside_gap: 'This person was already emailed from the GAP mailbox outside GAP. Nothing was sent.',
+  mailbox_sent_unreadable: "The GAP mailbox's Sent folder could not be read, so a second email cannot be ruled out. Nothing was sent.",
+  account_replied: 'Someone at this account wrote in: read it before a first touch to anyone else there. Nothing was sent.',
+  decision_stale: 'Something changed since this card was made: wait for the next routing run. Nothing was sent.',
+  recipient_unsuppressed_unknown: 'Suppression could not be read. Nothing was sent.',
+  evidence_insufficient: 'The send gate would refuse this opening: its fact is not verified outreach evidence. Nothing was sent.',
+  recipient_unsubscribed: 'This person unsubscribed. Nothing was sent.',
+  email_bounced: 'This address bounced. Nothing was sent.',
+  draft_outstanding: 'A Gmail draft of this email exists: send or delete it in Gmail. Nothing was sent.',
+  persona_left_account: 'This person left the account. Nothing was sent.',
+  persona_employment_conflict: "This person's employer is in question. Nothing was sent.",
+  gap_sender_unconfigured: 'The GAP mailbox is not configured here. Nothing was sent.',
+  decision_blocked: 'This card is blocked: GAP will not recommend an email here. Nothing was sent.',
+  step_already_sent: 'This touch was already sent. Nothing was sent.',
+  reply_truth_unavailable: 'Whether they replied could not be read just now. Nothing was sent.',
+  template_citations_unresolved: 'The copy cites evidence that is not this thesis. Nothing was sent.',
+  no_step_copy: 'This touch has no copy written for it. Nothing was sent.',
+  no_step0_copy: 'The first touch has no copy written for it. Nothing was sent.',
+  not_an_email_action: 'This card is not an email card. Nothing was sent.',
+  no_hypothesis: 'No thesis covers this card, so there is no email to send. Nothing was sent.',
+  hypothesis_not_found: 'The thesis behind this card no longer exists. Nothing was sent.',
+  no_email: 'No email address on file for this person. Nothing was sent.',
+  unrendered_placeholder: 'The copy still has a blank to fill in. Nothing was sent.',
+  unsubscribe_link_unavailable: 'The unsubscribe link could not be built. Nothing was sent.',
+  gmail_refused: 'Gmail refused the email. Nothing was sent.',
+  not_confirmed: 'Confirm the email first. Nothing was sent.',
 };
+
+/** Item 6: the seller words for a send refusal (this panel's own, else the shared refusal copy), or null. */
+export function sendRefusalWords(code: string): string | null {
+  return REASONS[code] ?? refusalSentence(code) ?? null;
+}
 
 /**
  * Refusals that no second click can fix: Send disappears the moment one comes
@@ -84,6 +121,20 @@ const TERMINAL: ReadonlySet<string> = new Set([
   'hypothesis_not_active',
   'decision_superseded',
   'send_in_progress_or_unknown',
+  // Item 6: a second click cannot install copy.
+  'no_version',
+  'copy_not_installed',
+  'approach_copy_unsupported',
+  'copy_family_mismatch',
+  'copy_version_outdated',
+  'no_step_copy',
+  'no_step0_copy',
+  'not_an_email_action',
+  'no_hypothesis',
+  'hypothesis_not_found',
+  'no_email',
+  'decision_blocked',
+  'step_already_sent',
 ]);
 
 const when = (iso: string) => new Date(iso).toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });

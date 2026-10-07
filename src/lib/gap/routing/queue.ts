@@ -74,6 +74,8 @@ export interface QueueItem {
   suppression: { class: SuppressionClass; hits: string[] };
   /** The multi-touch state, only for cards with a Gmail-proven sent touch. */
   touch?: TouchSummary | null;
+  /** Batch item 6 (R34): is first-touch copy installed for this card's thesis (email cards only); absent: not read. */
+  copy?: { installed: boolean; detail: string | null } | null;
   humanAction: string | null;
   humanActionAt: Date | null;
   createdAt: Date;
@@ -400,6 +402,17 @@ export async function listQueue(prisma: PrismaLike, opts: ListQueueOptions = {})
     if (item.hypothesis && next) item.hypothesis = { ...item.hypothesis, revisedBy: next };
   }
   await attachTouches(prisma, items);
+  // Batch item 6: an email card whose thesis has no installed copy is never READY (cardReadiness says what to seed).
+  const emailThesisIds = [...new Set(items.filter((i) => i.hypothesis && (i.action === 'enroll_gap_sequence' || i.action === 'one_off_email')).map((i) => i.hypothesis!.id))];
+  if (emailThesisIds.length && typeof prisma?.sequenceFamily?.findMany === 'function') {
+    const { copyAvailabilityMap } = await import('../execution/copy-availability');
+    const copy = await copyAvailabilityMap(prisma, emailThesisIds).catch(() => null);
+    for (const item of items) {
+      if (!item.hypothesis || !emailThesisIds.includes(item.hypothesis.id)) continue;
+      const c = copy?.get(item.hypothesis.id);
+      item.copy = c ? { installed: c.installed, detail: c.detail } : { installed: false, detail: 'Whether first-touch copy is installed could not be read just now. Nothing goes out until it can be.' };
+    }
+  }
   return { runId, asOf: current?.asOf ?? null, items, nextCursor };
 }
 

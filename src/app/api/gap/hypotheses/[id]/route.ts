@@ -140,7 +140,7 @@ export async function PATCH(request: NextRequest, { params }: RouteContext) {
     const result = await transitionHypothesis(prisma, id, action, { now, actor, reason, outcome });
     if (!result.ok) {
       const status = result.reason === 'not_found' ? 404 : 409;
-      return NextResponse.json({ error: result.reason }, { status });
+      return NextResponse.json({ error: result.reason, ...('detail' in result && result.detail ? { detail: result.detail } : {}) }, { status });
     }
     const routing = action === 'activate' ? await routeIfNowActive(id, result.to, actor, now) : null;
     return NextResponse.json({ from: result.from, to: result.to, effects: result.effects, ...(routing ? { routing } : {}) });

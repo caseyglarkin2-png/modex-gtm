@@ -141,11 +141,25 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
   const openStatuses = new Set(['approved', 'active', 'confirmed', 'partially_confirmed']);
   const anchored = anchorChoice ? brief.hypotheses.find((h) => h.id === anchorChoice && h.grounded && h.truth !== 'CONTRADICTED') ?? null : null;
   const sendableTheses = await soft(loadSendableTheses(prisma, accountName, now), null);
-  // The pack opens on a USABLE thesis only (open, grounded, not under review, and one the send gate would let out),
-  // the same set the anchor block shows; the recorded choice wins when it is usable. An unread gate opens nothing.
-  const usable = (h: (typeof brief.hypotheses)[number] | null) => !!h && !!sendableTheses && sendableTheses.has(h.id) && h.needsReview.length === 0 && openStatuses.has(inputs.hypotheses.find((x) => x.id === h.id)?.status ?? '');
+  // Batch item 6 (R34): a thesis whose first-touch copy is not installed cannot open an email: it is not usable, and
+  // the state says which copy family to seed (an unread copy check opens nothing either).
+  const { copyAvailabilityMap } = await import('../execution/copy-availability');
+  const copyById = sendableTheses && sendableTheses.size && typeof prisma?.sequenceFamily?.findMany === 'function' ? await soft(copyAvailabilityMap(prisma, [...sendableTheses]), null) : new Map<string, { installed: boolean; familyName: string; detail: string | null }>();
+  const copyOk = (id: string) => (typeof prisma?.sequenceFamily?.findMany !== 'function' ? true : copyById?.get(id)?.installed === true);
+  // The pack opens on a USABLE thesis only (open, grounded, not under review, one the send gate would let out, and with
+  // its copy installed), the same set the anchor block shows; the recorded choice wins when it is usable. An unread
+  // gate opens nothing.
+  const gateUsable = (h: (typeof brief.hypotheses)[number] | null) => !!h && !!sendableTheses && sendableTheses.has(h.id) && h.needsReview.length === 0 && openStatuses.has(inputs.hypotheses.find((x) => x.id === h.id)?.status ?? '');
+  const usable = (h: (typeof brief.hypotheses)[number] | null) => gateUsable(h) && copyOk(h!.id);
   const anchoredOpen = usable(anchored) ? anchored : null;
   const usableTheses = brief.hypotheses.filter((h) => h.grounded && h.truth !== 'CONTRADICTED' && usable(h)).map((h) => h.id);
+  // Item 6: the only thing missing is installed copy: say which family, never "no usable angle".
+  const copyMissing = usableTheses.length === 0 ? brief.hypotheses.filter((h) => h.grounded && h.truth !== 'CONTRADICTED' && gateUsable(h) && !copyOk(h.id)) : [];
+  const missingCopy = copyMissing.length ? copyById?.get(copyMissing[0].id) ?? null : null;
+  if (copyMissing.length && (state.state === 'ready' || state.state === 'choose_person')) {
+    const family = missingCopy?.familyName ?? 'this thesis';
+    state = { ...state, state: 'research', stateLine: `Research: no first-touch copy is installed for ${family}`, coldTouchAllowed: false, blocker: missingCopy?.detail ?? `Whether first-touch copy is installed for ${accountName} could not be read just now. Nothing goes out until it can be.`, unlock: `Seed the ${family} copy family.` };
+  }
   // Nobody is asked to choose who hears a first touch that nothing could open: without a usable thesis the account is
   // research (the people stand); a chosen person keeps READY, and NEXT says to review the angle first.
   if (state.state === 'choose_person' && sendableTheses && usableTheses.length === 0) {

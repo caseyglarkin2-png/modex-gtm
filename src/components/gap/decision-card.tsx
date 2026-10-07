@@ -91,6 +91,8 @@ export interface QueueItem {
   /** Provenance class of the suppression the router saw (optional for older payloads). */
   suppression?: { class: SuppressionClass; hits: string[] } | null;
   touch?: { state: 'waiting' | 'due' | 'complete' | 'stopped' | 'unknown'; stepIndex?: number; dueAt?: string; reason?: string; detail?: string; sentCount: number } | null;
+  /** Batch item 6 (R34): first-touch copy for this card's thesis (email cards); absent: not read. */
+  copy?: { installed: boolean; detail: string | null } | null;
   humanAction: string | null;
   humanActionAt: string | null;
   createdAt: string;
@@ -220,6 +222,7 @@ export function DecisionCard({ item, onAct, acting = false, actError = null, exp
     hypothesis: item.hypothesis ? { id: item.hypothesis.id, status: item.hypothesis.status } : null,
     suppression: item.suppression ?? null,
     touch: item.touch ?? null,
+    copy: item.copy ?? null,
     reviewWaiting: reviewWaitsFor(item, reviewWaiting),
   });
   const primaryCold = readiness.state === 'actionable' && 'cold' in readiness.primary ? readiness.primary.cold : undefined;

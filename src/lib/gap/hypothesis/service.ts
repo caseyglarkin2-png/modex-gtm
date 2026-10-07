@@ -93,7 +93,7 @@ export interface LoadedSnapshot extends HypothesisSnapshot {
 
 export type TransitionOutcome =
   | { ok: true; from: HypothesisStatus; to: HypothesisStatus; effects: string[] }
-  | { ok: false; reason: string };
+  | { ok: false; reason: string; detail?: string };
 
 export interface ServiceDeps {
   audit?: typeof defaultAudit;
@@ -488,6 +488,17 @@ export async function transitionHypothesis(
 
   const decision = transition(snapshot, action, ctx);
   if (!decision.ok) return decision;
+  // Batch item 6 (R34): approve and activate only a thesis whose first-touch copy is INSTALLED (the seeded rows the
+  // action pack renders from), so an approved thesis never routes READY and then dead-ends at "no version". The
+  // refusal names the family to seed. A client without the sequence tables (a unit-test double) is not asked.
+  if ((action === 'approve' || action === 'activate') && typeof prisma?.sequenceFamily?.findMany === 'function' && typeof prisma?.sequenceVersion?.findFirst === 'function') {
+    const { copyAvailabilityFor, COPY_THESIS_SELECT } = await import('../execution/copy-availability');
+    const row = await prisma.prospectingHypothesis.findUnique({ where: { id }, select: COPY_THESIS_SELECT });
+    if (row) {
+      const copy = await copyAvailabilityFor(prisma, row);
+      if (!copy.installed) return { ok: false, reason: 'copy_not_installed', detail: copy.detail ?? undefined };
+    }
+  }
 
   const from = snapshot.status;
   const { to, effects } = decision;

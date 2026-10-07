@@ -183,12 +183,12 @@ export async function advanceHypothesis(
   }
   if (status === 'review_required') {
     const a = await transition(prisma, id, 'approve', ctx);
-    if (!a.ok) return { hypothesisId: id, ok: false, from, to: status, detail: `approve refused: ${a.reason}`, reason: a.reason };
+    if (!a.ok) return { hypothesisId: id, ok: false, from, to: status, detail: `approve refused: ${a.reason}${'detail' in a && a.detail ? `: ${a.detail}` : ''}`, reason: a.reason };
     status = 'approved';
   }
   if (!opts.use) return { hypothesisId: id, ok: true, from, to: 'approved', detail: 'approved' };
   const u = await transition(prisma, id, 'activate', ctx);
-  if (!u.ok) return { hypothesisId: id, ok: false, from, to: 'approved', detail: `approved, but not in use: ${u.reason}`, reason: u.reason };
+  if (!u.ok) return { hypothesisId: id, ok: false, from, to: 'approved', detail: `approved, but not in use: ${u.reason}${'detail' in u && u.detail ? `: ${u.detail}` : ''}`, reason: u.reason };
   return { hypothesisId: id, ok: true, from, to: 'active', detail: from === 'approved' ? 'now in use' : 'approved and in use' };
 }
 

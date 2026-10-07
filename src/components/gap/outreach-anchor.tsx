@@ -44,6 +44,7 @@ export { personaKeyFor } from '@/lib/gap/story/draft-defaults';
 /** Plain words for a refused transition (the machine's stable reasons). */
 export const TRANSITION_REFUSAL_TEXT: Record<string, string> = {
   unmapped_family: 'The problem family is missing: choose the problem this fact points at.',
+  copy_not_installed: 'No first-touch copy is installed for this thesis yet: its copy family must be seeded first.',
   evidence_insufficient: 'The send gate would refuse this opening: its fact is not verified outreach evidence any more.',
   no_evidence: 'No evidence is linked to this thesis.',
   evidence_expired: 'Its evidence has expired.',
@@ -220,7 +221,9 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
       const res = await fetch(`/api/gap/hypotheses/${encodeURIComponent(item.hypothesisId)}`, { method: 'PATCH', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ advance: 'approve_and_use' }) });
       const body = (await res.json().catch(() => ({}))) as { ok?: boolean; to?: string | null; detail?: string; reason?: string; error?: string };
       if (!res.ok || body.ok === false) {
-        announce('alert', `Not approved: ${refusalWords(body.reason ?? body.error)} ${body.to === 'approved' ? 'It is approved but not in use.' : 'Nothing changed.'}`);
+        // Item 6: a refusal that names what is missing (the copy family to seed) says it in full.
+        const why = (body.reason ?? body.error) === 'copy_not_installed' && body.detail ? body.detail.replace(/^(?:approve refused|approved, but not in use): copy_not_installed: /, '') : refusalWords(body.reason ?? body.error);
+        announce('alert', `Not approved: ${why} ${body.to === 'approved' ? 'It is approved but not in use.' : 'Nothing changed.'}`);
         router.refresh();
         return;
       }

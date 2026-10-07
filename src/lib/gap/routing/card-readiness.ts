@@ -47,6 +47,8 @@ export interface ReadinessInput {
    * fix point at REVIEW; otherwise REVIEW may be empty and the work is research.
    */
   reviewWaiting?: boolean;
+  /** Batch item 6 (R34): first-touch copy for this card's thesis; absent means not read (older callers). */
+  copy?: { installed: boolean; detail: string | null } | null;
   /** Multi-touch state for a card with a Gmail-proven sent touch (queue.ts TouchSummary). */
   touch?: { state: 'waiting' | 'due' | 'complete' | 'stopped' | 'unknown'; stepIndex?: number; dueAt?: string; reason?: string; detail?: string; sentCount: number } | null;
 }
@@ -217,6 +219,8 @@ function readinessOf(item: ReadinessInput): CardReadiness {
     case 'one_off_email': {
       if (!item.hypothesis) return withWarning({ state: 'missing_prerequisite' as const, missing: `No hypothesis covers ${name} at ${item.account.name}, so there is no email to send.`, fix: hypothesisFix(item) });
       if (!item.persona.email) return withWarning({ state: 'missing_prerequisite' as const, missing: `No email address on file for ${name}.`, fix: contactFix(item, 'Add an email in HubSpot') });
+      // Item 6 (R34): no installed copy for the thesis means no email to send: never READY, and say what to seed.
+      if (item.copy && !item.copy.installed) return withWarning({ state: 'missing_prerequisite' as const, missing: item.copy.detail ?? 'No first-touch copy is installed for this thesis.', fix: hypothesisFix(item) });
       return withWarning({ state: 'actionable' as const, primary: openPack!, secondary: [] });
     }
     case 'call_now': {
