@@ -94,7 +94,15 @@ const REASON_TEXT: Record<string, string> = {
  * BID only with its exact words and its speaker; an obligation becomes a commitment). The lines that are never buyer
  * words (a pasted summary, your own read) are listed with why, kept in the note, never proposed.
  */
-function NoteReview({ capture, onChange }: { capture: CaptureView; onChange: (c: CaptureView) => void }) {
+/** R63-B S4: what a reply's recorded meaning says, the same words the review shows. */
+function replyDecisionLine(c: CaptureView): string | null {
+  const rd = c.reply?.decision;
+  if (!rd) return null;
+  if (rd.kind === 'rejected') return 'Set aside. The reply still waits on the account.';
+  return rd.before ? 'Already recorded for this reply. Nothing is recorded twice.' : `Recorded: ${REPLY_KIND_WORDS[rd.responseClass as ReplyKindClass] ?? 'what it means'}. The reply is answered on the account.`;
+}
+
+function NoteReview({ capture, onChange, announce = () => {} }: { capture: CaptureView; onChange: (c: CaptureView) => void; announce?: (text: string) => void }) {
   const ctx = useAccountContext(capture.accountName);
   // Review D P1: nothing is pre-chosen for Casey unless there is exactly one option.
   const onlyHyp = ctx && ctx.hypotheses.length === 1 ? ctx.hypotheses[0].id : '';
@@ -146,16 +154,22 @@ function NoteReview({ capture, onChange }: { capture: CaptureView; onChange: (c:
     } catch {
       setBusy(false);
       setError(`Not recorded: ${OFFLINE}`);
+      announce(`Not recorded: ${OFFLINE}`);
       return;
     }
     const body = await json<{ results?: ItemResult[]; capture?: CaptureView; error?: string }>(res);
     setBusy(false);
     if (!res.ok || !body.capture) {
       setError(`Not recorded: ${body.error ?? `HTTP ${res.status}`}`);
+      announce(`Not recorded: ${body.error ?? `HTTP ${res.status}`}`);
       return;
     }
     setResults(Object.fromEntries((body.results ?? []).filter((r) => !r.ok).map((r) => [r.candidateId, REASON_TEXT[r.reason ?? ''] ?? r.detail ?? r.reason ?? 'not recorded'])));
     onChange(body.capture);
+    // R63-B S4: the outcome is said in the live region (a new line on the page is not announced by itself).
+    const recorded = (body.results ?? []).filter((r) => r.ok && r.candidateId !== REPLY_KIND_ITEM).length;
+    const failed = (body.results ?? []).filter((r) => !r.ok).length;
+    announce([replyDecisionLine(body.capture), recorded ? `${recorded} recorded from the note.` : null, failed ? `${failed} not recorded; the reason is beside each.` : null].filter(Boolean).join(' ') || 'Recorded.');
   }
 
   const people = ctx?.people ?? [];
@@ -180,15 +194,19 @@ function NoteReview({ capture, onChange }: { capture: CaptureView; onChange: (c:
       // Final review P1 (UX lens): a dropped connection never leaves the buttons stuck or silent.
       setBusy(false);
       setResults((m) => ({ ...m, [candidateId]: OFFLINE }));
+      announce(`Not recorded: ${OFFLINE}`);
       return;
     }
     const body = await json<{ capture?: CaptureView; error?: string; detail?: string }>(res);
     setBusy(false);
     if (!res.ok || !body.capture) {
-      setResults((m) => ({ ...m, [candidateId]: REASON_TEXT[body.error ?? ''] ?? body.detail ?? body.error ?? `HTTP ${res.status}` }));
+      const why = REASON_TEXT[body.error ?? ''] ?? body.detail ?? body.error ?? `HTTP ${res.status}`;
+      setResults((m) => ({ ...m, [candidateId]: why }));
+      announce(`Not recorded: ${why}.`);
       return;
     }
     onChange(body.capture);
+    announce(decision === 'confirm' ? 'Confirmed. Recorded as buyer truth.' : 'Rejected. Not buyer truth.');
   }
   const decided = (label: string, tone: string) => <p className={`text-xs font-medium ${tone}`}>{label}</p>;
   return (
@@ -492,7 +510,26 @@ function LinkNote({ capture, onChange }: { capture: CaptureView; onChange: (c: C
   );
 }
 
-export function CaptureFlow({
+type CaptureFlowProps = Omit<Parameters<typeof CaptureFlowBody>[0], 'announce'>;
+
+/**
+ * R63-B S4: one polite live region, mounted for the whole flow (the form and the review), says every save, refusal
+ * and record; the lines that appear on the page are not announced by themselves.
+ */
+export function CaptureFlow(props: CaptureFlowProps) {
+  const [live, setLive] = useState('');
+  return (
+    <>
+      <p role="status" aria-live="polite" className="sr-only" data-testid="capture-live">
+        {live}
+      </p>
+      <CaptureFlowBody {...props} announce={setLive} />
+    </>
+  );
+}
+
+function CaptureFlowBody({
+  announce,
   initial = null,
   initialAccount = null,
   initialPersona = null,
@@ -518,6 +555,8 @@ export function CaptureFlow({
   /** R44: what opened Capture (a Work card, a reply, an obligation, the account page). */
   source?: { kind: string; id: string } | null;
   /** UX-12: transcription is on for this deployment (off until the spend is approved). */ dictate?: boolean;
+  /** R63-B S4: says a save, a refusal or a record in the flow's live region. */
+  announce: (text: string) => void;
 }) {
   const [capture, setCapture] = useState<CaptureView | null>(initial);
   // UX-12: what GAP heard, editable, confirmed before anything is written.
@@ -579,6 +618,7 @@ export function CaptureFlow({
     } catch {
       setSaving(false);
       setError('no connection. Your note is kept on this phone; press Save again when you have signal.');
+      announce('Not saved: no connection. Your note is kept on this phone; press Save again when you have signal.');
       return;
     }
     const body = await json<CaptureView & { error?: string; existing?: boolean }>(res);
@@ -586,8 +626,10 @@ export function CaptureFlow({
     setExisting(!!body.existing);
     if (!res.ok || !body.id) {
       setError(body.error ?? `HTTP ${res.status}`);
+      announce(`Not saved: ${body.error ?? `HTTP ${res.status}`}`);
       return;
     }
+    announce(body.existing ? `This reply already has its capture${body.accountName ? ` for ${body.accountName}` : ''}: one per reply. Its review is below.` : `Saved${body.accountName ? ` for ${body.accountName}` : ''}. The note is kept exactly as you wrote it.`);
     try {
       window.localStorage.removeItem(NOTE_DRAFT_KEY);
     } catch {
@@ -609,7 +651,7 @@ export function CaptureFlow({
           </p>
         )}
         {!capture.accountName ? <LinkNote capture={capture} onChange={setCapture} /> : null}
-        <NoteReview capture={capture} onChange={setCapture} />
+        <NoteReview capture={capture} onChange={setCapture} announce={announce} />
         <MeetingOutcomeForm capture={capture} onChange={setCapture} />
         <button type="button" className={btn} onClick={() => { setCapture(null); setText(''); }}>
           Capture another
