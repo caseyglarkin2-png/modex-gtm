@@ -4,6 +4,8 @@
  * in Gmail" (the thread) and "Record what they said" (the triage form). R42b: a real reply or an objection offers the
  * prepared, editable answer (reply-answer.tsx: copy, a Gmail draft, or a confirmed send, each its own gated action); a
  * referral or an opt-out says why no answer is prepared.
+ *
+ * R63-B S2: no reply goes back to an opt-out or a failed address, so neither offers "Answer in Gmail".
  */
 import Link from 'next/link';
 import type { ReplyPrep } from '@/lib/gap/replies/prepare';
@@ -31,9 +33,11 @@ export function ReplyPrepPanel({ prep, compact = false }: { prep: ReplyPrep; com
       </ul>
       {prep.answerable ? <ReplyAnswer messageId={prep.messageId} /> : prep.noAnswerLine ? <p className="text-xs text-amber-700 dark:text-amber-400" data-testid="reply-prep-no-answer">{prep.noAnswerLine}</p> : null}
       <div className="flex flex-wrap items-center gap-2">
-        <a href={prep.threadHref} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center rounded-md border border-[var(--border)] px-3 text-xs hover:bg-[var(--muted)] sm:min-h-9" data-testid="reply-prep-thread">
-          Answer in Gmail
-        </a>
+        {prep.kind === 'opt_out' || prep.kind === 'bounce' ? null : (
+          <a href={prep.threadHref} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center rounded-md border border-[var(--border)] px-3 text-xs hover:bg-[var(--muted)] sm:min-h-9" data-testid="reply-prep-thread">
+            Answer in Gmail
+          </a>
+        )}
         {prep.record ? (
           <Link href={prep.record.href} className="inline-flex min-h-11 items-center rounded-md border border-[var(--border)] px-3 text-xs hover:bg-[var(--muted)] sm:min-h-9" data-testid="reply-prep-record">
             {prep.record.label}

@@ -407,11 +407,15 @@ function betweenUs(i: StoryInput): StoryRow {
   // Silence is judged against the LAST email: an older reply (FedEx: a June automatic notice before an August send)
   // does not answer it.
   const answered = !!lastReply && (!last || lastReply.at > last.at);
+  // R63-B S2: an email that went to a person after they opted out carries that fact beside it (it is history, and it
+  // must never read as ordinary silence).
+  const firstName = (x: StoryTouch) => (x.address ? x.address.split('@')[0] : x.name).toLowerCase().replace(/[^a-z]+/g, ' ').trim().split(' ')[0] ?? '';
+  const optedOutBefore = last && lastReply?.replyKind === 'opt_out' && lastReply.at < last.at && firstName(lastReply) === firstName(last) ? lastReply : null;
   if (last) {
     const subject = last.what.replace(/^Re:\s*/i, '').replace(/^["“]+|["”]+$/g, '').trim();
     const what = subject === 'GAP first touch' ? ' (a GAP first touch)' : subject && subject !== 'email' ? `: "${subject}"` : '';
-    const silence = !answered ? (i.clawdRead === 'ok' ? ' No answer on record.' : " No answer in GAP's records (clawd's history could not be read).") : '';
-    s.push({ text: `Last email to ${who(last)}, ${day(last.at)}${what}.${silence}`, tag: !answered && i.clawdRead !== 'ok' ? 'Unknown' : 'Checked', basis: `${last.source}, ${day(last.at)}${!answered && i.clawdRead === 'ok' ? '; GAP, clawd and the account history for the silence' : ''}`, basisIds: [`touch:${last.at}`] });
+    const silence = optedOutBefore ? ` Sent after they opted out on ${day(optedOutBefore.at)}: nothing else goes to them.` : !answered ? (i.clawdRead === 'ok' ? ' No answer on record.' : " No answer in GAP's records (clawd's history could not be read).") : '';
+    s.push({ text: `Last email to ${who(last)}, ${day(last.at)}${what}.${silence}`, tag: !optedOutBefore && !answered && i.clawdRead !== 'ok' ? 'Unknown' : 'Checked', basis: `${last.source}, ${day(last.at)}${optedOutBefore ? `; their opt-out, ${day(optedOutBefore.at)}` : !answered && i.clawdRead === 'ok' ? '; GAP, clawd and the account history for the silence' : ''}`, basisIds: [`touch:${last.at}`, ...(optedOutBefore ? [`touch:${optedOutBefore.at}`] : [])] });
   }
   if (lastReply) {
     const k = lastReply.replyKind ?? 'human';
