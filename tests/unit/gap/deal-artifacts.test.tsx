@@ -11,6 +11,9 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { artifactProblems, nextArtifact, prepareArtifacts, YARDFLOW_PROOF, type ArtifactInput } from '@/lib/gap/deals/artifacts';
 import { planFor, type Milestone } from '@/lib/gap/deals/action-plan';
 import { DealArtifacts } from '@/components/gap/deal-artifacts';
+import { loadDealWorkspace, recapSentAtOf } from '@/lib/gap/deals/workspace';
+import { ledgerDb } from './fixtures/ledger-db';
+import { stableHash } from '@/lib/gap/deals/crm-model';
 
 const DEAL = { id: '70001', name: 'YardFlow - Kroger', contacts: [{ name: 'Ann Scratch', title: 'VP Supply Chain Operations' }] };
 const agreed = (step: Milestone['step'], over: Partial<Milestone> = {}): Milestone => ({ ...planFor(DEAL.id, [], []).find((m) => m.step === step)!, state: 'agreed', commitmentId: `plan:${DEAL.id}:${step}`, phase: 'upcoming', line: 'No date agreed yet.', ...over });
@@ -109,6 +112,57 @@ describe('the prepared artifacts (R53)', () => {
     expect(pick({ needs: [] })).toBe('introduction');
     expect(pick({ needs: [], deal: { ...DEAL, contacts: [...DEAL.contacts, { name: 'Ben Scratch', title: null }] } })).toBe('pilot_criteria');
     expect(pick({ needs: [], deal: { ...DEAL, contacts: [...DEAL.contacts, { name: 'Ben Scratch', title: null }] }, plan: planFor(DEAL.id, [], []) })).toBe('business_case');
+  });
+
+  // Batch item 8 (R53 finding): the recap stayed the next move forever, even after it was copied or written to HubSpot.
+  it('a recap copied or written is not the next move again: the deal moves to the introduction, until the buyer says something new', () => {
+    const pick = (over: Partial<ArtifactInput>, recapSentAt: string | null) => {
+      const i = base(over);
+      return nextArtifact(prepareArtifacts(i), { ...i, recapSentAt }).kind;
+    };
+    expect(pick({}, null)).toBe('recap');
+    expect(pick({}, '2026-10-05T12:00:00.000Z')).toBe('introduction');
+    const newer = [...base().needs, { id: 'b4', type: 'priority', quote: 'Columbus is first.', who: 'Ann Scratch', at: '2026-10-06T15:00:00.000Z', accountLevel: false }];
+    expect(pick({ needs: newer }, '2026-10-05T12:00:00.000Z')).toBe('recap');
+    // The last recap sent back is the newer of a copy the seller recorded and an approved HubSpot note written.
+    const used = [{ payload: { dealId: DEAL.id, kind: 'recap' }, created_at: new Date('2026-10-04T12:00:00Z') }, { payload: { dealId: 'other', kind: 'recap' }, created_at: new Date('2026-10-09T12:00:00Z') }, { payload: { dealId: DEAL.id, kind: 'introduction' }, created_at: new Date('2026-10-09T12:00:00Z') }];
+    const written = { dealId: DEAL.id, origin: { kind: 'recap', id: `${DEAL.id}:x`, label: 'the recap' }, state: 'written', lastAttemptAt: '2026-10-05T12:00:00.000Z', approvedAt: '2026-10-05T11:59:00.000Z' };
+    expect(recapSentAtOf(used, [], DEAL.id)).toBe('2026-10-04T12:00:00.000Z');
+    expect(recapSentAtOf(used, [written as never], DEAL.id)).toBe('2026-10-05T12:00:00.000Z');
+    expect(recapSentAtOf(used, [{ ...written, state: 'failed' } as never], DEAL.id)).toBe('2026-10-04T12:00:00.000Z');
+    expect(recapSentAtOf([], [], DEAL.id)).toBeNull();
+  });
+
+  it('the deal workspace reads the recorded copy: the recap is next until it is copied, then the introduction', async () => {
+    const ACCOUNT = 'Kroger Scratch Co';
+    const seed = (audit: unknown[]) =>
+      ledgerDb({
+        accounts: [ACCOUNT],
+        personas: [{ id: 1, name: 'Ann Scratch', title: 'VP Supply Chain Operations', email: 'ann@kroger.example.com', hubspot_contact_id: '81', account_name: ACCOUNT }],
+        bids: [{ id: 'b1', account_name: ACCOUNT, type: 'business_problem', raw_buyer_language: 'Trailers sit two hours before a door opens.', normalized_summary: null, contact_email: 'ann@kroger.example.com', human_confirmed: true, supersedes_id: null, confirmed_at: new Date('2026-10-03T15:00:00Z'), captured_at: new Date('2026-10-03T15:00:00Z'), metadata: { scope: { dealId: DEAL.id } } }],
+        audit: audit as never,
+      });
+    const x = { accountName: ACCOUNT, deals: [{ id: DEAL.id, name: DEAL.name, stage: 'Appointment scheduled', contactIds: ['81'] }], commitments: [], now: new Date('2026-10-06T19:00:00Z') };
+    expect((await loadDealWorkspace(seed([]).client(), x)).artifacts[DEAL.id].next.kind).toBe('recap');
+    const copied = await loadDealWorkspace(seed([{ id: 'u1', kind: 'deal.artifact_used', actor: 'casey', subject_type: 'account', subject_id: ACCOUNT, created_at: new Date('2026-10-05T12:00:00Z'), payload: { dealId: DEAL.id, kind: 'recap', textHash: 'x', how: 'copied' } }]).client(), x);
+    expect(copied.unread).toEqual([]);
+    expect(copied.artifacts[DEAL.id].next.kind).toBe('introduction');
+  });
+
+  it('copying a prepared artifact records it (never a send) so the next move moves on', async () => {
+    const writeText = vi.fn(async () => undefined);
+    Object.assign(navigator, { clipboard: { writeText } });
+    const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(JSON.stringify({ ok: true, id: 'u1' }), { status: 201 }));
+    try {
+      const i = base();
+      const all = prepareArtifacts(i);
+      render(<DealArtifacts next={nextArtifact(all, i)} all={all} accountName="Kroger Scratch Co" dealId={DEAL.id} />);
+      fireEvent.click(screen.getAllByTestId('artifact-copy')[0]);
+      await waitFor(() => expect(screen.getByTestId('artifact-copied').textContent).toBe('Copied and recorded. Nothing was sent.'));
+      expect(fetchSpy).toHaveBeenCalledWith('/api/gap/deals/artifact-used', expect.objectContaining({ method: 'POST', body: JSON.stringify({ accountName: 'Kroger Scratch Co', dealId: DEAL.id, kind: 'recap', textHash: stableHash(all[0].text) }) }));
+    } finally {
+      fetchSpy.mockRestore();
+    }
   });
 
   it('the view: the next artifact first, labeled "Prepared, not sent", with its citations and a copy control that sends nothing', async () => {

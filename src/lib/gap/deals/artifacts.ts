@@ -22,7 +22,10 @@
 import { CANON_NUMBERS } from '../compiler/canon';
 import type { Milestone } from './action-plan';
 
-export type ArtifactKind = 'recap' | 'introduction' | 'pilot_criteria' | 'business_case';
+export const ARTIFACT_KINDS = ['recap', 'introduction', 'pilot_criteria', 'business_case'] as const;
+export type ArtifactKind = (typeof ARTIFACT_KINDS)[number];
+/** Batch item 8: the seller used a prepared artifact (copied it to send from their own email), recorded on the account. */
+export const ARTIFACT_USED = 'deal.artifact_used' as const;
 
 export interface ArtifactCitation {
   /** "Ann Scratch, Oct 2 (buyer confirmed)", "the plan: Pilot (Ann Scratch agreed Oct 5)", "ROI model v3 (modeled)". */
@@ -205,10 +208,14 @@ export function prepareArtifacts(i: ArtifactInput): PreparedArtifact[] {
  * The one artifact the deal needs now, in order: a recap when their words are confirmed and not yet sent back; an
  * introduction when stakeholder alignment is on the plan and only one person is on the deal; pilot criteria once a
  * pilot is agreed; else the business-case inputs. Deterministic; the reason is the artifact's own `why`.
+ *
+ * Batch item 8: "not yet sent back" is read: `recapSentAt` is the last recap the seller copied or wrote to HubSpot, and
+ * the recap is next only while they said something after it.
  */
-export function nextArtifact(arts: readonly PreparedArtifact[], i: Pick<ArtifactInput, 'needs' | 'plan' | 'deal'>): PreparedArtifact {
+export function nextArtifact(arts: readonly PreparedArtifact[], i: Pick<ArtifactInput, 'needs' | 'plan' | 'deal'> & { recapSentAt?: string | null }): PreparedArtifact {
   const by = (k: ArtifactKind) => arts.find((a) => a.kind === k)!;
-  if (i.needs.some((n) => STATEMENT_TYPES.has(n.type))) return by('recap');
+  const sent = i.recapSentAt ? new Date(i.recapSentAt).getTime() : null;
+  if (i.needs.some((n) => STATEMENT_TYPES.has(n.type) && (sent === null || new Date(n.at).getTime() > sent))) return by('recap');
   const alignment = i.plan.find((m) => m.step === 'stakeholder_alignment');
   if (alignment && alignment.state !== 'declined' && i.deal.contacts.length <= 1) return by('introduction');
   if (i.plan.find((m) => m.step === 'pilot')?.state === 'agreed') return by('pilot_criteria');

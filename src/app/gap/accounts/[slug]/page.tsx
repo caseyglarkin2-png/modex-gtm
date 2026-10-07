@@ -229,7 +229,7 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
             ) : null}
             {own.map((m) => <MeetingPrepView key={m.meetingId} prep={m} />)}
             {workspace?.plans[d.dealId] ? <DealPlan accountName={brief.accountName} dealId={d.dealId} plan={workspace.plans[d.dealId]} /> : null}
-            {workspace?.artifacts[d.dealId] ? <DealArtifacts next={workspace.artifacts[d.dealId].next} all={workspace.artifacts[d.dealId].all} /> : null}
+            {workspace?.artifacts[d.dealId] ? <DealArtifacts next={workspace.artifacts[d.dealId].next} all={workspace.artifacts[d.dealId].all} accountName={brief.accountName} dealId={d.dealId} /> : null}
             {workspace?.crm[d.dealId] ? <CrmSyncPanel accountName={brief.accountName} dealId={d.dealId} dealName={d.name} candidates={workspace.crm[d.dealId].candidates} items={workspace.crm[d.dealId].items} /> : null}
           </div>
         );

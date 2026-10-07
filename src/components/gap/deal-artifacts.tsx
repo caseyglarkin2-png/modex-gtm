@@ -9,18 +9,28 @@
  */
 import { useState } from 'react';
 import type { PreparedArtifact } from '@/lib/gap/deals/artifacts';
+import { stableHash } from '@/lib/gap/deals/crm-model';
+import { postJson } from './obligation-actions';
 
 const SMALL = 'inline-flex min-h-11 items-center justify-center rounded-md border border-[var(--border)] px-2.5 text-xs hover:bg-[var(--muted)] disabled:opacity-60 sm:min-h-9';
 
-function Block({ a, lead }: { a: PreparedArtifact; lead: boolean }) {
+function Block({ a, lead, scope }: { a: PreparedArtifact; lead: boolean; scope: { accountName: string; dealId: string } | null }) {
   const [copied, setCopied] = useState<string | null>(null);
   async function copy() {
     try {
       await navigator.clipboard.writeText(a.text);
-      setCopied('Copied. Nothing was sent.');
     } catch {
       setCopied('Could not copy: select the text and copy it.');
+      return;
     }
+    // Batch item 8: the copy is recorded, so the deal's next move moves on (the recap is not offered again until the
+    // buyer says something new). Recording never sends anything.
+    if (!scope) {
+      setCopied('Copied. Nothing was sent.');
+      return;
+    }
+    const r = await postJson('/api/gap/deals/artifact-used', { accountName: scope.accountName, dealId: scope.dealId, kind: a.kind, textHash: stableHash(a.text) });
+    setCopied(r.ok ? 'Copied and recorded. Nothing was sent.' : `Copied. Nothing was sent. Not recorded: ${r.error}.`);
   }
   return (
     <div className="space-y-1" data-testid="deal-artifact" data-kind={a.kind} data-next={lead ? 'true' : 'false'}>
@@ -45,16 +55,17 @@ function Block({ a, lead }: { a: PreparedArtifact; lead: boolean }) {
   );
 }
 
-export function DealArtifacts({ next, all }: { next: PreparedArtifact; all: readonly PreparedArtifact[] }) {
+export function DealArtifacts({ next, all, accountName, dealId }: { next: PreparedArtifact; all: readonly PreparedArtifact[]; /** Batch item 8: where a copy is recorded. */ accountName?: string; dealId?: string }) {
+  const scope = accountName && dealId ? { accountName, dealId } : null;
   const others = all.filter((a) => a.kind !== next.kind);
   return (
     <div className="space-y-2" data-testid="deal-artifacts">
       <h4 className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">The next deal move, prepared</h4>
-      <Block a={next} lead />
+      <Block a={next} lead scope={scope} />
       {others.length ? (
         <details className="text-sm">
           <summary className="min-h-11 cursor-pointer text-xs text-[var(--muted-foreground)]">Other prepared artifacts ({others.length})</summary>
-          <div className="mt-2 space-y-3">{others.map((a) => <Block key={a.kind} a={a} lead={false} />)}</div>
+          <div className="mt-2 space-y-3">{others.map((a) => <Block key={a.kind} a={a} lead={false} scope={scope} />)}</div>
         </details>
       ) : null}
     </div>
