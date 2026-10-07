@@ -141,6 +141,14 @@ Not amended: attribution, quote integrity, the private boundary, account and div
 checks, opt-outs, family restrictions, actual-send proof, action-time validation, frozen facts, "Notes never change
 the product", and "the rule for future changes" (this program IS the deliberate decision, rule 4).
 
+Sprint 5 (2026-10-06, R50 to R55; stricter only, within the mandate): every outbound click's HubSpot read now also
+holds a CLOSED deal when no deal is open: closed won makes a customer (no first-touch campaign; expansion is the
+seller's explicit call) and the newest deal closed lost parks the account until a newer verified fact or a person's
+reply (the same action-time refusal as a live deal; routing, the approach and the pursuit state agree). Any HubSpot
+note, task or next-step change beyond the existing automatic mirror is shown exactly and needs an explicit approval
+(`crm.sync_proposed` -> `crm.sync_approved`); it is written only with GAP_HUBSPOT_MIRROR_ENABLED on and never
+overwrites a newer human value. The ledger's R50 to R55 entries hold the detail.
+
 ## Release
 
 Stabilization PRs: #348 (truth vocabulary, Verify only verifies), #349 (source ledger gaps), #350 (dogfood notes),

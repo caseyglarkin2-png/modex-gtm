@@ -1549,6 +1549,41 @@ skipped, their reasons on record). Debt: "paused" has no HubSpot field of its ow
 an open deal); the Work held card for a closure says the routing hold's generic words until the account's pursuit
 summary is fresh.
 
+**Sprint 5 batch gate (2026-10-06; R50 to R55).** Exit met on the scratch harness: GAP supports commercial execution
+after the first reply and through an active deal while HubSpot remains the deal authority (every deal, stage, contact,
+next step and closure is read from HubSpot; GAP writes HubSpot only through an approved, flag-gated proposal).
+Commits: R50 b5b961a9 (+ 3087ee2c the Work page kept the deal ids, 31f09c71 the two-deal state line), R51 0b0676fe
+(+ 79442298 a meeting on another deal is not a rebooking), R52 ea3645f2, R53 7eb8bcc8 (+ 47c61140 the em-dash
+escape), R54 bef11ba1 (+ 32683cdd the writer and the store moved out of the deals surface, keeping its write-free contract and the mirror's deal-free one), R55 f214bcc3 (+ 359b790f the cold call and LinkedIn control restated), the scratch run 5488552c. The full GAP suite 369 files / 5,408 tests green (its first run found the two structural and control failures fixed in 32683cdd and 359b790f); the rest of the repository 325 files / 2,293 green (one skipped); typecheck clean; eslint on the 62 changed TypeScript and script files: no finding on any changed line (the 50 errors left in those files are the house `prisma: any` signatures and fixture generics, untouched). Scratch, on a freshly rebuilt database,
+one file at a time: `anchor-draft` 6, `job-led-send` 5, `send-spine` 8, `work-day` 6, `deal-work` 5 (30 / 30); the new `deal-work.scratch.test.ts` runs the real routes, services, ledger and
+Postgres with the harness's own HubSpot stub spawned on a loopback port (the real resolver and the real CRM writer
+against it; GAP_HUBSPOT_MIRROR_ENABLED turned on only inside that test, only against the stub, with the loopback
+asserted): two deals under one company, the closed-won customer, the closed-lost account, the scheduled and the
+canceled meeting (three deliberate mutations red on the scratch database). Browser receipt (headless Chrome on the
+scratch server, GAP_HUBSPOT_MIRROR_ENABLED unset; scratchpad `r5-journey/`: `journey.json` and six screenshots): the
+Kroger account in two deals ("Work the 2 open deals (...) each on its own, never a cold first touch"; the obligation
+labeled "Deal: YardFlow - Kroger") -> the deal brief with each deal's own obligations, words, contacts and HubSpot next
+step and one deal brief per deal -> the Columbus walk prepared inside the Columbus deal, every line tagged (Recorded,
+Buyer confirmed, To learn, Public source) and the pilot call shown "Canceled ... Nothing to prepare unless it is
+rebooked" -> the plan reviewed in one press ("Record the plan (4 agreed, 1 declined)": undated milestones "No date
+agreed yet", the pilot "Waiting on Ann Scratch ... due Oct 30", every "Buyer agreement: not recorded", procurement
+declined) -> the recap "Prepared, not sent" in Ann's words with its citation, copied with "Copied. Nothing was sent."
+-> the HubSpot note shown exactly with its GAP reference and approved: "Approved by casey@freightroll.com, not
+written: HubSpot writes are off here (GAP_HUBSPOT_MIRROR_ENABLED is off). Nothing reached HubSpot.", the stub's request
+log holding no note, task or deal write. Deliberate mutations across the batch: 44 (three on the scratch database), each turning its owning
+test red. Production: nothing written, no flag changed, no send, no paid call, no HubSpot write. Deploy notes: no
+schema change and no new table (new ledger kinds `deal.plan_decision`, `deal.state`, `crm.sync_proposed`,
+`crm.sync_approved`, `crm.sync_attempt`, `crm.sync_result`, `crm.sync_discarded`; the mirror table gains `gap:crm:`
+keys only when the mirror flag is on); the deal reads add `hs_is_closed_won`; with this deployed, an account whose
+only HubSpot deals are closed lost and that has no newer verified fact or buyer reply is PARKED at every gate (a
+deliberate policy change, R55), and a closed-won account is held as a customer. Carried debt (each recorded in its
+entry): the contact-derived scope needs a HubSpot contact id; division and site are free text; meeting attendees are
+the row's free text and a moved meeting keeps no history; the standard plan steps are one fixed list; deal artifacts
+are templates around the buyer's words (no governed deal copy family) and no record of a sent recap exists; a deal
+task's HubSpot owner is the portal default and search-before-create depends on HubSpot's search index; "paused" has
+no HubSpot field; the Work held card for a closure speaks the routing hold's generic words until the account's
+pursuit summary is fresh.
+
 ## 12. Migration, backfill and rollback
 
 Order of commits inside Sprint 1 and 3: schema + SQL first (no reader), then pure core, then importers (Top100 before PIC before modex legacy), then runtime pin, then services, then queue actions under the flag, then `GAP_OS_ENABLED=true` in Vercel after `verify-triggers.ts` passes against prod (env is snapshot at deploy; redeploy after setting). Before the prod `db push`, preview it with `prisma migrate diff --from-url <prod> --to-schema-datamodel prisma/schema.prisma --script` and confirm the script is additive only; also confirm the prod role can `CREATE FUNCTION` (not yet verified). Rollback: the flag off restores byte-identical behavior instantly; full removal is the rollback SQL plus reverting the runtime, service and queue-action commits; `sequences` is never modified; the only two pre-existing tables GAP OS's schema touches at all are `draft_queue_items` (one nullable `sequence_version_id` stamp, S1-T2) and `inbound_messages` (`source String @default("gmail")` and `hubspot_engagement_id String?`, S2-T1, needed so the reply cron and the HubSpot poller can tell a Gmail-sourced row from a HubSpot-engagement-sourced one and attribute the engagement id idempotently) — both additive-only, both confirmed by the production preflight below; the lane and PIC files are read, never written.
