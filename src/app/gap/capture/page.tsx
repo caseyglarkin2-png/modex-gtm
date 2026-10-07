@@ -38,6 +38,9 @@ export default async function CapturePage({ searchParams }: { searchParams?: Pro
   // the one who wrote it; Capture then reviews their words and what the reply means together.
   const reply = source?.kind === 'reply' ? await loadReplyForCapture(prisma, source.id).catch(() => null) : null;
   const replyHere = reply && reply.item.accountName === initialAccount ? reply : null;
+  // R63-B N11: a link that names a reply GAP does not hold here opens a plain note (never "Opened from a reply").
+  const replyMissing = source?.kind === 'reply' && !replyHere;
+  const noteSource = replyMissing ? null : source;
   const personId = /^\d{1,9}$/.test(q.person ?? '') ? Number(q.person) : (replyHere?.item.personaId ?? null);
   const person = initialAccount && personId ? await prisma.persona.findUnique({ where: { id: personId }, select: { id: true, name: true, account_name: true } }).catch(() => null) : null;
   const initialPersona = person && person.account_name === initialAccount ? { id: person.id, name: person.name ?? `person ${person.id}` } : null;
@@ -54,7 +57,12 @@ export default async function CapturePage({ searchParams }: { searchParams?: Pro
         <h1 className="text-2xl font-semibold tracking-tight">Capture buyer truth</h1>
         <p className="mt-1 text-sm text-[var(--muted-foreground)]">Right after the conversation. GAP keeps your note as written and suggests what might be buyer truth; only what you confirm counts.</p>
       </div>
-      <CaptureFlow initialAccount={initialAccount} initialPersona={initialPersona} initialDeal={initialDeal} initialDealName={initialDealName} initialContext={initialContext} initialText={initialText} source={source} dictate={transcriptionProvider() !== 'disabled'} />
+      {replyMissing ? (
+        <p className="text-sm text-amber-700 dark:text-amber-400" data-testid="capture-reply-missing">
+          The reply this link names is not on file for {initialAccount}. This note is not tied to a reply.
+        </p>
+      ) : null}
+      <CaptureFlow initialAccount={initialAccount} initialPersona={initialPersona} initialDeal={initialDeal} initialDealName={initialDealName} initialContext={initialContext} initialText={initialText} source={noteSource} dictate={transcriptionProvider() !== 'disabled'} />
       {recent.length ? (
         <section className="space-y-2" data-testid="capture-recent">
           <h2 className="text-sm font-semibold">Recent notes</h2>
