@@ -65,7 +65,10 @@ describe('R65: the operations report', () => {
     expect(r.state).toBe('BLOCKED');
     expect(r.failures[0]).toMatchObject({ key: 'queue_age', state: 'BLOCKED', label: 'The research queue is not draining: 5 signals queued, the oldest for 4 days', href: '/gap/coverage' });
     expect(r.failures.filter((f) => f.state === 'DEGRADED').map((f) => f.key)).toEqual(['drafts_stranded', 'proposals_incomplete', 'dead_letter_signals', 'crm_failed']);
-    expect(r.failures.find((f) => f.key === 'crm_failed')).toMatchObject({ count: 1, href: '/gap/accounts/kroger-scratch-co?view=brief#deal-workspace' });
+    expect(r.failures.find((f) => f.key === 'crm_failed')).toMatchObject({ count: 1, href: '/gap/accounts/kroger-scratch-co?view=brief#deal-workspace', owner: 'casey@freightroll.com', retry: expect.stringMatching(/^The deal brief: Retry/) });
+    // Every failure names who repairs it and how (the operator's view).
+    for (const f of r.failures) expect([f.key, !!f.owner, !!f.retry]).toEqual([f.key, true, true]);
+    expect(r.failures.find((f) => f.key === 'drafts_stranded')).toMatchObject({ owner: 'operator', retry: expect.stringMatching(/repair-stranded-drafts\.ts --dry-run/) });
     expect(r.headline).toMatch(/^The research queue is not draining/);
   });
 

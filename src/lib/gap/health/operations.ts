@@ -81,7 +81,23 @@ export interface OpsLine {
   count: Count;
   /** Where to act, when there is a place. */
   href: string | null;
+  /** R65, failures only: who repairs it, and how (the retry path in words). */
+  owner?: string | null;
+  retry?: string | null;
 }
+
+/** R65: who repairs each failure and how. The operator sees these; Casey's view carries decisions only. */
+export const FAILURE_OWNERSHIP: Readonly<Record<string, { owner: string; retry: string }>> = {
+  drafts_stranded: { owner: 'operator', retry: 'Run scripts/gap/recovery/repair-stranded-drafts.ts --dry-run; each ADOPT completes when the seller drafts from its fact on the account page (the R11 service)' },
+  proposals_incomplete: { owner: 'the seller who drafted it', retry: 'Open the draft thesis: its account page asks for the one missing field, then submit it for review' },
+  dead_letter_signals: { owner: 'operator', retry: 'Signals: retry the research or dismiss the signal' },
+  queue_age: { owner: 'operator', retry: 'Coverage: check the background research runs (every two hours); a failed run is retried on the next pass' },
+  research_stuck: { owner: 'operator', retry: 'Nothing by hand: the next pass reclaims it as a failed attempt' },
+  research_runs_failed: { owner: 'operator', retry: 'Coverage: the failed runs; the rotation retries them' },
+  grounded_turns_failed: { owner: 'operator', retry: 'Retried on the next run after the backoff; Coverage shows each account' },
+  summaries_stale: { owner: 'operator', retry: 'Open the account (a visit rebuilds it) or let the warmer run' },
+  crm_failed: { owner: 'the seller who approved it', retry: 'The deal brief: Retry (a retry never writes twice) or decide the conflict' },
+};
 
 export interface OperationsReport {
   state: OpsState;
@@ -130,7 +146,14 @@ export function evaluateOperations(i: OperationsInputs, now: Date): OperationsRe
     i.crm.readable
       ? { key: 'crm_failed', state: i.crm.failed.length ? 'DEGRADED' : 'HEALTHY', label: i.crm.failed.length ? `${plural(i.crm.failed.length, 'HubSpot change', 'HubSpot changes')} failed or in conflict: each lists its owner and where to retry` : 'No HubSpot change failed', count: i.crm.failed.length, href: i.crm.failed[0]?.href ?? null }
       : { key: 'crm_failed', state: 'DEGRADED', label: 'HubSpot changes could not be read', count: null, href: null },
-  ] as OpsLine[]).sort((a, b) => RANK[b.state] - RANK[a.state]);
+  ] as OpsLine[])
+    .sort((a, b) => RANK[b.state] - RANK[a.state])
+    .map((f) => {
+      const own = FAILURE_OWNERSHIP[f.key];
+      // A failed HubSpot change is owned by the people who approved it.
+      const approvers = f.key === 'crm_failed' && i.crm.failed.length ? [...new Set(i.crm.failed.map((c) => c.owner))].join(', ') : null;
+      return { ...f, owner: approvers ?? own?.owner ?? null, retry: own?.retry ?? null };
+    });
 
   const decisions: OpsLine[] = [
     { key: 'theses_waiting_review', state: 'HEALTHY', label: i.decisions.thesesWaitingReview === null ? 'Theses waiting for your review: could not be read' : `${plural(i.decisions.thesesWaitingReview, 'thesis', 'theses')} waiting for your review`, count: i.decisions.thesesWaitingReview, href: '/gap/hypotheses?status=review_required' },
