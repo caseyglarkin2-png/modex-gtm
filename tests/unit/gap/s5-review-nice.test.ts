@@ -67,8 +67,9 @@ describe('Sprint 5 review NICE: only a meeting that took place has happened betw
   };
   const meeting = (at: string, what: string): StoryTouch => ({ kind: 'meeting', at, name: 'the account', title: null, address: null, what, source: 'account history' });
   it('a future canceled meeting is not told as a Checked meeting; a booked future one is said as booked', () => {
-    expect(between([meeting('2026-10-09T14:00:00Z', 'Meeting (Canceled): Pilot check-in with Ann')]).sentences.map((s) => s.text)).toEqual(['Nothing has happened between us yet.']);
-    expect(between([meeting('2026-10-09T14:00:00Z', 'Meeting (Scheduled): Pilot check-in with Ann')]).sentences.map((s) => s.text)).toEqual(['Nothing has happened between us yet; a meeting is booked for Oct 9.']);
+    // R63-B S9: the open deal is something that happened ("Nothing has happened between us yet" contradicted it).
+    expect(between([meeting('2026-10-09T14:00:00Z', 'Meeting (Canceled): Pilot check-in with Ann')]).sentences.map((s) => s.text)).toEqual(['In an open deal: YardFlow - Kroger Scratch Co.']);
+    expect(between([meeting('2026-10-09T14:00:00Z', 'Meeting (Scheduled): Pilot check-in with Ann')]).sentences.map((s) => s.text)).toEqual(['In an open deal: YardFlow - Kroger Scratch Co.', 'A meeting is booked for Oct 9: Pilot check-in with Ann.']);
   });
   it('a held meeting is told once, without the history prefix', () => {
     const r = between([meeting('2026-10-02T14:00:00Z', 'Meeting (Held): Discovery with Ann')]);

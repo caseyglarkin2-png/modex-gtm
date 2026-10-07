@@ -30,6 +30,7 @@ import { sellerRelevance } from '../research/continuity';
 import type { PursuitState } from '../pursuit/state';
 import type { StoryTouch } from './touches';
 import { isCostBid } from '../bid/cost';
+import { isReplyKindClass, REPLY_KIND_WORDS } from '../capture/reply-kind';
 
 export type StoryTag = SellerTag;
 
@@ -75,7 +76,10 @@ export interface StoryInput {
   now: Date;
   state: PursuitState;
   brief: AccountIntelligenceBrief;
-  inputs: Pick<AccountInputs, 'facts' | 'bids' | 'domains' | 'account' | 'signals'>;
+  /** R63-B S9: the open deals and the last recorded conversation feed "what has happened between us" too. */
+  inputs: Pick<AccountInputs, 'facts' | 'bids' | 'domains' | 'account' | 'signals'> & Partial<Pick<AccountInputs, 'opportunity' | 'conversation'>>;
+  /** R63-B S9: the meeting on the calendar ahead (context relationship), when one is booked. */
+  booked?: { at: string; what: string } | null;
   /** NOW's own WHY NOW and KNOW lines (already filtered: no market chatter, no imagery, one idea once). */
   whyNow: NowLine[];
   know: NowLine[];
@@ -281,7 +285,11 @@ export function projectStory(i: StoryInput): AccountStory {
   const missing = [!bid('current_state') ? 'how they run the yards today' : null, !i.inputs.bids.some((b) => isCostBid(b)) ? 'what it costs them' : null, !bid('root_cause') && !top?.rootCause ? 'why it happens' : null].filter((x): x is string => !!x);
   if (missing.length) {
     const list = missing.length === 1 ? missing[0] : `${missing.slice(0, -1).join(', ')} or ${missing[missing.length - 1]}`;
-    rows.push(row('learn', [{ text: `Nothing from the buyer yet on ${list}.`, tag: 'Unknown', basis: 'no buyer input on record', basisIds: [] }]));
+    // R63-B S9: the basis reads the same record as "what has happened between us": their words on record that do not
+    // cover these are said as such, never "no buyer input on record".
+    const words = happenedSoFar(i).buyerWords;
+    const basis = words.count ? `the buyer's ${words.count === 1 ? 'statement' : `${words.count} statements`} on record ${words.count === 1 ? 'does' : 'do'} not cover ${missing.length === 1 ? 'this' : 'these'}` : 'no buyer input on record';
+    rows.push(row('learn', [{ text: `Nothing from the buyer yet on ${list}.`, tag: 'Unknown', basis, basisIds: [] }]));
   }
 
   // STORIES THAT MATTER: the checked lines not already told, with their cite status, collapsed.
@@ -346,9 +354,47 @@ export function projectStory(i: StoryInput): AccountStory {
   return { rows, first: order.map((k) => rows.find((r) => r.key === k)).filter((r): r is StoryRow => !!r), checkBeforeContacting, setAsideCaveats };
 }
 
+/**
+ * R63-B S9: ONE reader for "has anything happened between us". Kroger's page said "Nothing has happened between us
+ * yet" and "no buyer input on record" while it quoted the buyer twice, held two open deals and a meeting tomorrow:
+ * the row read only the email ledgers. This reads the touches (emails, replies, a meeting that took place), the buyer's
+ * own words on record, the last recorded conversation, the open deals and a meeting ahead; the between-us row and
+ * the learn row both read it.
+ */
+export interface HappenedSoFar {
+  /** Emails, replies and meetings that took place (the ledgers and the account history). */
+  touched: boolean;
+  buyerWords: { count: number; newest: { who: string | null; at: string } | null; ids: string[] };
+  conversation: { who: string; responseClass: string; at: string } | null;
+  deals: Array<{ id: string | null; name: string }>;
+  booked: { at: string; what: string } | null;
+  any: boolean;
+}
+
+export function happenedSoFar(i: Pick<StoryInput, 'touches' | 'inputs' | 'booked' | 'now'>): HappenedSoFar {
+  const touched = i.touches.some((x) => x.kind !== 'meeting' || (new Date(x.at).getTime() <= i.now.getTime() && !/\bcancel(?:l)?ed\b/i.test(x.what)));
+  const bids = [...i.inputs.bids].sort((a, b) => b.at.localeCompare(a.at));
+  const opp = i.inputs.opportunity;
+  const deals = opp?.status === 'ACTIVE' ? opp.deals.map((d) => ({ id: d.id ?? null, name: d.name ?? 'an unnamed deal' })) : [];
+  const ahead = i.touches.find((x) => x.kind === 'meeting' && new Date(x.at).getTime() > i.now.getTime() && !/\bcancel(?:l)?ed\b/i.test(x.what));
+  const booked = i.booked ?? (ahead ? { at: ahead.at, what: ahead.what.replace(/^Meeting \([^)]*\):?\s*/, '') } : null);
+  const conversation = i.inputs.conversation ?? null;
+  return {
+    touched,
+    buyerWords: { count: bids.length, newest: bids[0] ? { who: bids[0].who, at: bids[0].at } : null, ids: bids.map((b) => `bid:${b.id}`) },
+    conversation,
+    deals,
+    booked,
+    any: touched || bids.length > 0 || !!conversation || deals.length > 0 || !!booked,
+  };
+}
+
 function betweenUs(i: StoryInput): StoryRow {
   const t = i.touches;
   if (!t.length) {
+    // R63-B S9: no email or meeting on record is not "nothing happened" when a deal, their words or a meeting are.
+    const other = beyondTouches(i);
+    if (other.length) return row('between_us', other);
     return i.clawdRead === 'ok'
       ? row('between_us', [{ text: 'No touch on record between us.', tag: 'Checked', basis: 'GAP, clawd and the account history: nothing found', basisIds: [] }])
       : row('between_us', [{ text: i.clawdRead === 'not_configured' ? "No touch in GAP's own records; clawd's send history is not connected here." : "No touch in GAP's own records; clawd's send history could not be read.", tag: 'Unknown', basis: 'GAP and the account history only', basisIds: [] }]);
@@ -391,10 +437,35 @@ function betweenUs(i: StoryInput): StoryRow {
   const meeting = t.find((x) => x.kind === 'meeting' && new Date(x.at).getTime() <= i.now.getTime() && !/\bcancel(?:l)?ed\b/i.test(x.what));
   if (meeting) s.push({ text: `Meeting ${day(meeting.at)}: ${meeting.what.replace(/^Meeting \([^)]*\):?\s*/, '').replace(/\.$/, '') || 'held'}.`, tag: 'Checked', basis: `account history, ${day(meeting.at)}`, basisIds: [`touch:${meeting.at}`] });
   if (!s.length) {
-    const booked = t.find((x) => x.kind === 'meeting' && new Date(x.at).getTime() > i.now.getTime() && !/\bcancel(?:l)?ed\b/i.test(x.what));
+    // R63-B S9: the same reader as the learn row: an open deal, their words, a recorded conversation, a meeting ahead.
+    const other = beyondTouches(i);
+    if (other.length) return row('between_us', other);
+    const booked = happenedSoFar(i).booked;
     s.push({ text: booked ? `Nothing has happened between us yet; a meeting is booked for ${day(booked.at)}.` : 'Nothing has happened between us yet.', tag: 'Checked', basis: 'GAP and the account history', basisIds: booked ? [`touch:${booked.at}`] : [] });
   }
   return row('between_us', s);
+}
+
+/**
+ * What has happened beyond the email ledgers (happenedSoFar) as between-us sentences: an open deal, a recorded
+ * conversation, their words, and then a meeting ahead; empty when none of the first three has (a meeting ahead alone
+ * keeps "Nothing has happened between us yet; a meeting is booked").
+ */
+function beyondTouches(i: StoryInput): StorySentence[] {
+  const h = happenedSoFar(i);
+  if (!h.deals.length && !h.conversation && !h.buyerWords.count) return [];
+  const out: StorySentence[] = [];
+  if (h.deals.length) out.push({ text: h.deals.length === 1 ? `In an open deal: ${h.deals[0].name}.` : `In ${h.deals.length} open deals: ${h.deals.map((d) => d.name).join('; ')}.`, tag: 'Checked', basis: 'HubSpot, read now', basisIds: h.deals.map((d) => `deal:${d.id ?? d.name}`) });
+  if (h.conversation) {
+    const what = isReplyKindClass(h.conversation.responseClass) ? REPLY_KIND_WORDS[h.conversation.responseClass].replace(/^They /, 'they ') : 'a conversation';
+    out.push({ text: `A conversation is recorded with ${h.conversation.who} on ${day(h.conversation.at)}: ${what}.`, tag: 'Checked', basis: `your recorded conversation, ${day(h.conversation.at)}`, basisIds: [`conversation:${h.conversation.at}`] });
+  }
+  if (h.buyerWords.count && h.buyerWords.newest) {
+    const n = h.buyerWords.count;
+    out.push({ text: `Their own words are on record: ${n === 1 ? 'one statement' : `${n} statements`}, the newest from ${h.buyerWords.newest.who ?? 'the buyer'} on ${day(h.buyerWords.newest.at)}.`, tag: 'Checked', basis: 'the buyer inputs you confirmed', basisIds: h.buyerWords.ids });
+  }
+  if (h.booked) out.push({ text: `A meeting is booked for ${day(h.booked.at)}: ${h.booked.what.replace(/\.$/, '')}.`, tag: 'Checked', basis: `the calendar, ${day(h.booked.at)}`, basisIds: [`touch:${h.booked.at}`] });
+  return out;
 }
 
 /**

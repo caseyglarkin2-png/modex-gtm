@@ -353,6 +353,7 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
           clawdRead: readers.clawd.read,
           vaultNote: readers.vaultNote,
           excluded,
+          booked: ctx.relationship.meetings.upcoming,
         })
       : null;
     // UX-06 (Option A): the outreach anchor for the chosen person over the story and the account's open theses.

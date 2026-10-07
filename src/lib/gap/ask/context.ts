@@ -51,6 +51,7 @@ export async function buildAskContext(prisma: PrismaLike, accountName: string, n
     clawdRead: readers.clawd.read,
     vaultNote: readers.vaultNote,
     excluded,
+    booked: ctx.relationship.meetings.upcoming,
   });
   const anchor = projectAnchor({
     accountName: brief.accountName,
