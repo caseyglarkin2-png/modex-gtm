@@ -13,7 +13,6 @@ import { NextRequest } from 'next/server';
 
 const MATRIX_URL = /^postgres(?:ql)?:\/\/[^@/]+@127\.0\.0\.1:55433\/gap_matrix(?:\?.*)?$/;
 const RUN = MATRIX_URL.test(process.env.GAP_SCRATCH_DATABASE_URL ?? '');
-const defect = process.env.MATRIX_DEFECTS === '1' ? it : it.skip;
 
 vi.mock('@/lib/auth', () => ({ auth: vi.fn(async () => ({ user: { email: 'casey@freightroll.com' } })) }));
 vi.mock('@/lib/prisma', async () => {
@@ -189,10 +188,9 @@ describe.skipIf(!RUN)('R62 matrix: replies (inbound rows after a real first touc
     expect(msg.id).toBeTruthy();
   }, 240_000);
 
-  // DEFECT src/lib/gap/work/commitments.ts:528: the return day is parsed against the READ time, not the message's
-  // receivedAt, and an out-of-office notice is never dispositioned, so it is re-parsed on every Work read: "back
-  // Monday" moves the waiting follow-up to the next Monday every week.
-  defect('an out-of-office "back Monday" read a week later moves nothing: the follow-up keeps the Monday the notice meant', async () => {
+  // Was DEFECT src/lib/gap/work/commitments.ts:528: the return day was parsed at read time.
+  // Fixed by the writer at 7f46b334 (item 8): it is parsed from the message's receivedAt.
+  it('an out-of-office "back Monday" read a week later moves nothing: the follow-up keeps the Monday the notice meant', async () => {
     const x = sent.AwayWeekday;
     await s.inbound(x.a, x.p, 'I am traveling this week and will be back Monday.', { key: 'away-weekday', subject: 'Automatic reply: trailer turns' });
     const now = new Date();

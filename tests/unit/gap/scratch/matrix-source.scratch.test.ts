@@ -11,7 +11,6 @@ import { NextRequest } from 'next/server';
 
 const MATRIX_URL = /^postgres(?:ql)?:\/\/[^@/]+@127\.0\.0\.1:55433\/gap_matrix(?:\?.*)?$/;
 const RUN = MATRIX_URL.test(process.env.GAP_SCRATCH_DATABASE_URL ?? '');
-const defect = process.env.MATRIX_DEFECTS === '1' ? it : it.skip;
 
 vi.mock('@/lib/auth', () => ({ auth: vi.fn(async () => ({ user: { email: 'casey@freightroll.com' } })) }));
 vi.mock('@/lib/prisma', async () => {

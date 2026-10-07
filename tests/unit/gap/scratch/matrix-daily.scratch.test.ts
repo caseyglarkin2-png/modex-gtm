@@ -12,7 +12,6 @@ import { NextRequest } from 'next/server';
 
 const MATRIX_URL = /^postgres(?:ql)?:\/\/[^@/]+@127\.0\.0\.1:55433\/gap_matrix(?:\?.*)?$/;
 const RUN = MATRIX_URL.test(process.env.GAP_SCRATCH_DATABASE_URL ?? '');
-const defect = process.env.MATRIX_DEFECTS === '1' ? it : it.skip;
 
 vi.mock('@/lib/auth', () => ({ auth: vi.fn(async () => ({ user: { email: 'casey@freightroll.com' } })) }));
 vi.mock('@/lib/prisma', async () => {
@@ -99,11 +98,9 @@ describe.skipIf(!RUN)('R62 matrix: daily work (Work as the page reads it; writes
     expect((cards[0].obligations ?? []).filter((o) => o.kind === 'meeting').map((o) => o.title)).toEqual(['Meeting today 10:00 AM: Columbus yard walk with Ben']);
   }, 180_000);
 
-  // DEFECT src/lib/gap/replies/list.ts:213-240 (loadKnownAddresses: enrollments and personas WITH A HYPOTHESIS only;
-  // ReplyItem requires a hypothesisId, :63): a reply from the open deal's own HubSpot contact, a GAP persona with no
-  // GAP thesis, is not listed by GET /api/gap/replies at all, so the buyer's question on an active deal never reaches
-  // Work. Mandate section 3: Work carries actionable replies and deal work, the reply ranked above the meeting.
-  defect('a reply from the open deal\'s contact is listed and leads that account\'s card, the meeting kept as its own obligation', async () => {
+  // Was DEFECT src/lib/gap/replies/list.ts:213-240: a reply from an open deal's own contact was never listed.
+  // Fixed by the writer at 6abad07a (item 8): the deal contact is a known address; the reply leads the card.
+  it('a reply from the open deal\'s contact is listed and leads that account\'s card, the meeting kept as its own obligation', async () => {
     const { a, p, morning } = await dealShape();
     const { GET } = await import('@/app/api/gap/replies/route');
     const listed = ((await (await GET(req('/api/gap/replies?state=undispositioned&limit=200', 'GET'))).json()) as { items: Array<{ accountName: string; contactEmail: string }> }).items.filter((r) => r.accountName === a.name);
@@ -129,13 +126,17 @@ describe.skipIf(!RUN)('R62 matrix: daily work (Work as the page reads it; writes
     expect((card!.obligations ?? []).map((x) => x.line)).toEqual(expect.arrayContaining([expect.stringMatching(/^Back today/)]));
   }, 180_000);
 
-  it('work arriving mid-session: a reply that lands between two reads puts its account first on the next read', async () => {
+  it('work arriving mid-session: a reply that lands between two reads puts its account in the reply tier, ahead of all other work, on the next read', async () => {
     const { a, p } = A.Arrive;
     const before = await readDay(new Date());
     expect(before.day.cards.find((c) => c.accountName === a.name)?.tier ?? null).not.toBe('reply');
     await s.inbound(a, p, 'Yes, we see this at Columbus. Can we talk Thursday?', { key: 'arrive' });
     const after = await readDay(new Date());
-    expect([after.day.cards[0]?.accountName, after.day.cards[0]?.tier]).toEqual([a.name, 'reply']);
+    // Since item 8 the deal contact's reply is a reply card too; replies order among themselves by their own due time, so
+    // the arriving reply leads every card that is not a buyer commitment or another reply.
+    const i = after.day.cards.findIndex((c) => c.accountName === a.name);
+    expect(after.day.cards[i]?.tier).toBe('reply');
+    expect(after.day.cards.slice(0, i).map((c) => c.tier).filter((t) => t !== 'reply' && t !== 'commitment')).toEqual([]);
   }, 180_000);
 
   it('an evening meeting is on Work in the afternoon of its day', async () => {
@@ -147,9 +148,9 @@ describe.skipIf(!RUN)('R62 matrix: daily work (Work as the page reads it; writes
     expect(afternoon.meetings.filter((m) => m.accountName === a.name).map((m) => m.what)).toEqual(['West coast check-in']);
   }, 180_000);
 
-  // DEFECT src/lib/gap/work/day-load.ts:64: the window is `meeting_date >= now - 24h` on a date-only row stored at UTC
-  // midnight, so from 8 pm New York (midnight UTC plus the offset) today's evening meeting falls out of Work.
-  defect('an evening meeting is still on Work at 8:30 pm New York, half an hour before it starts', async () => {
+  // Was DEFECT src/lib/gap/work/day-load.ts:64: today's evening meeting fell off Work after 8 pm New York.
+  // Fixed by the writer at 6abad07a (item 8): the window opens at yesterday's date-only midnight.
+  it('an evening meeting is still on Work at 8:30 pm New York, half an hour before it starts', async () => {
     const { a } = A.Evening;
     const { nyDay, nyDayAt } = await import('@/lib/gap/work/dates');
     const today = nyDay(new Date());
@@ -168,10 +169,9 @@ describe.skipIf(!RUN)('R62 matrix: daily work (Work as the page reads it; writes
     expect(h.writtenTo(p.email)).toBe(0);
   }, 180_000);
 
-  // DEFECT src/lib/gap/work/day-load.ts:155 and :160 with src/components/gap/work-today.tsx:45: a skip ("Set aside for
-  // today."), a snooze and an unproven "Logged outside GAP" are listed and COUNTED under "Done today". Completion,
-  // waiting and skipped must differ (mandate section 4; section 7 "skip without false completion").
-  defect('the Today panel never counts a skip or a snooze as done', async () => {
+  // Was DEFECT src/lib/gap/work/day-load.ts:155, :160: skips and snoozes were counted under Done today.
+  // Fixed by the writer at 1e7b4aa4 (item 8): Done excludes them; todaySummary.setAside lists them.
+  it('the Today panel never counts a skip or a snooze as done', async () => {
     const { a } = A.SkipDone;
     const { nyDay, addDays } = await import('@/lib/gap/work/dates');
     expect((await outcome(a.name, { kind: 'skipped', reason: 'not today' })).status).toBe(201);
@@ -180,10 +180,9 @@ describe.skipIf(!RUN)('R62 matrix: daily work (Work as the page reads it; writes
     expect(summary.done.filter((d) => d.accountName === a.name)).toEqual([]);
   }, 180_000);
 
-  // DEFECT src/lib/gap/work/commitments.ts:397-398: any newer outcome at an account settles its older snooze reminders,
-  // and a reminder that had already come back is marked DONE (terminal, proof "outcome"). Skipping the account for
-  // today silently completes the returned reminder; it never comes back.
-  defect('skipping an account whose snooze reminder came back does not complete the reminder', async () => {
+  // Was DEFECT src/lib/gap/work/commitments.ts:397-398: a skip completed a returned reminder.
+  // Fixed by the writer at 1e7b4aa4 (item 8): a skip re-snoozes it to tomorrow and never marks it done.
+  it('skipping an account whose snooze reminder came back does not complete the reminder', async () => {
     const { a } = A.SkipReminder;
     const soon = new Date(Date.now() + 4_000).toISOString();
     const o = await outcome(a.name, { kind: 'snoozed', until: soon, reason: 'call back after lunch' });

@@ -13,7 +13,6 @@ import { NextRequest } from 'next/server';
 
 const MATRIX_URL = /^postgres(?:ql)?:\/\/[^@/]+@127\.0\.0\.1:55433\/gap_matrix(?:\?.*)?$/;
 const RUN = MATRIX_URL.test(process.env.GAP_SCRATCH_DATABASE_URL ?? '');
-const defect = process.env.MATRIX_DEFECTS === '1' ? it : it.skip;
 
 vi.mock('@/lib/auth', () => ({ auth: vi.fn(async () => ({ user: { email: 'casey@freightroll.com' } })) }));
 vi.mock('@/lib/prisma', async () => {
@@ -189,21 +188,23 @@ describe.skipIf(!RUN)('R62 matrix: dependencies (each boundary failing on purpos
     expect(h.requests().filter((q) => q.path === '/__pages/private.html').length).toBe(before);
   }, 120_000);
 
-  // DEFECT src/lib/gap/research/background.ts:358 (with signals/intake.ts:736-740): a queued story whose research FAILS
-  // three times (a provider outage, not an empty source) settles `no_usable_fact`, the same state and label as a page
-  // with no fact ("Nothing usable: Researched: no fact GAP could verify at the source."); the error is kept in
-  // metadata but never surfaced. An outage must read as an outage (a distinct dead-letter state).
-  defect('a story whose research fails three times reads as a failed (dead-letter) story, never as "no usable fact"', async () => {
+  // Was DEFECT src/lib/gap/research/background.ts:358: three research failures settled no_usable_fact.
+  // Fixed by the writer at 71c4c3a8: they settle research_failed ("Research failed").
+  it('a story whose research fails three times reads as a failed (dead-letter) story, never as "no usable fact"', async () => {
     const r = R.DeadLetter;
     const sig = await prisma.gapSignal.create({ data: { url: `https://news.example.com/${r.a.slug}/dead-letter`, url_hash: `matrix-${tag}-dl`, title: `${r.a.name} expands its Ohio network`, origin: 'casey_share', source_class: 'news', account_name: r.a.name, resolution: 'resolved', resolution_basis: 'explicit_account', research_status: 'queued', submitted_by: 'casey@freightroll.com' } as never });
     const { runBackgroundResearch } = await import('@/lib/gap/research/background');
     const outage = async () => {
       throw new Error('provider_unavailable: 503 search provider down');
     };
-    for (let i = 0; i < 3; i += 1) await runBackgroundResearch(prisma, { now: new Date(Date.now() + i * 3 * 86_400_000), cap: 50 }, { research: outage as never });
+    // Scope the run's target selection to queued stories (the thesis groups, the card queue and the watch list are the
+    // selector's own seams), so the other files' accounts in this long-lived matrix database never take the cap. The
+    // runner, the research call boundary and the dead-letter writer stay the real ones.
+    const onlyQueued = { loadGroups: async () => [], listQueue: async () => ({ items: [], nextCursor: null }), watch: async () => [] };
+    for (let i = 0; i < 3; i += 1) await runBackgroundResearch(prisma, { now: new Date(Date.now() + i * 3 * 86_400_000), cap: 50 }, { research: outage as never, ...(onlyQueued as never) });
     const after = await prisma.gapSignal.findUnique({ where: { id: sig.id }, select: { research_status: true, metadata: true } });
     expect((after!.metadata as { researchAttempts?: number }).researchAttempts).toBe(3);
-    expect(after!.research_status).not.toBe('no_usable_fact');
+    expect(after!.research_status).toBe('research_failed');
   }, 240_000);
 
   it('a cold instance (fresh module registry, another database client) reads the last pursuit summary from the durable row, labeled with its age, and it authorizes nothing', async () => {
