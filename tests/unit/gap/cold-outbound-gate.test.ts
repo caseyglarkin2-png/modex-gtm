@@ -15,7 +15,7 @@ const NOW = new Date('2026-09-27T15:00:00.000Z');
 const COMPANY = 'c-acme';
 const OPEN_DEAL = { id: 'd-acme', closed: 'false', name: 'YardFlow - Acme' };
 
-function prismaFake(opts: { hubspotCompanyId?: string | null; decision?: Record<string, unknown> | null; persona?: Record<string, unknown> | null } = {}) {
+function prismaFake(opts: { hubspotCompanyId?: string | null; decision?: Record<string, unknown> | null; persona?: Record<string, unknown> | null; factAt?: Date } = {}) {
   const decision = opts.decision === undefined ? { id: 'dec-1', account_name: 'Acme Foods', persona_id: 41, action: 'call_now', lane: 'work_queue', hypothesis_id: null, created_at: NOW } : opts.decision;
   const persona =
     opts.persona === undefined
@@ -31,6 +31,8 @@ function prismaFake(opts: { hubspotCompanyId?: string | null; decision?: Record<
     account: { findUnique: vi.fn(async () => ({ hubspot_company_id: opts.hubspotCompanyId === undefined ? COMPANY : opts.hubspotCompanyId })) },
     canonicalAccountLink: { findMany: vi.fn(async () => []) },
     conversationDisposition: { findFirst: vi.fn(async () => null) },
+    // R55: the newest verified fact at the account (a material change after a lost deal unparks it).
+    ...(opts.factAt ? { prospectingSignal: { findFirst: vi.fn(async () => ({ observed_at: opts.factAt })) } } : {}),
   };
 }
 
@@ -66,10 +68,14 @@ describe('cold CALL / LINKEDIN: action-time active-opportunity check', () => {
     expect(await run(channel, via(fakeHubSpot({})), prismaFake({ hubspotCompanyId: null })).then((r) => r)).toMatchObject({ ok: false, reason: 'opportunity_unknown' });
   });
 
-  it('4. CLEAR allows both: the call returns the tel: link, LinkedIn the profile', async () => {
-    const hs = () => via(fakeHubSpot({ companyDeals: { [COMPANY]: [OPEN_DEAL.id] }, deals: [{ ...OPEN_DEAL, closed: 'true' }] }));
-    expect(await run('call', hs())).toEqual({ ok: true, channel: 'call', href: 'tel:+15550102000' });
-    expect(await run('linkedin', hs())).toEqual({ ok: true, channel: 'linkedin', href: 'https://www.linkedin.com/in/jordan' });
+  it('4. CLEAR allows both: the call returns the tel: link, LinkedIn the profile (a deal closed lost, something material since); R55: without it the account is parked', async () => {
+    const hs = () => via(fakeHubSpot({ companyDeals: { [COMPANY]: [OPEN_DEAL.id] }, deals: [{ ...OPEN_DEAL, closed: 'true', won: 'false', closedate: '2026-03-01T00:00:00Z' }] }));
+    const changed = prismaFake({ factAt: new Date('2026-09-01T00:00:00Z') });
+    expect(await run('call', hs(), changed)).toEqual({ ok: true, channel: 'call', href: 'tel:+15550102000' });
+    expect(await run('linkedin', hs(), changed)).toEqual({ ok: true, channel: 'linkedin', href: 'https://www.linkedin.com/in/jordan' });
+    const parked = await run('call', hs());
+    expect(parked).toMatchObject({ ok: false, reason: 'active_opportunity' });
+    expect(parked.ok ? '' : parked.message).toMatch(/Parked: "YardFlow - Acme" closed lost/);
   });
 
   it('5. the opportunity opens after routing but before the click: the action-time read blocks', async () => {

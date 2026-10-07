@@ -1532,8 +1532,9 @@ a buyer's promise that did not arrive), no HubSpot activity on the deal for 21 d
 the deal is open (a HubSpot date stored at UTC midnight reads as its calendar day); on the account BRIEF inside the
 deal and on Work, where a stalled open deal becomes deal work with "A stalled deal: ..." on its card (a healthy one
 stays held). Contract change, on purpose: a CLEAR read now carries the closed deals, and a closed deal with nothing
-material since parks the account at the gates (three older controls that read "a closed deal does not count, proceed"
-now prove both sides: with a newer verified fact it proceeds; without it is parked). Corpus: Costco Scratch Co (a
+material since parks the account at the gates (four older controls that read "a closed deal does not count, proceed",
+in the resolver, draft, enroll and cold call / LinkedIn suites, now prove both sides: with a newer verified fact it
+proceeds; without it is parked). Corpus: Costco Scratch Co (a
 closed-won deal, an approved thesis and a chosen person: held as a customer) and Sysco Scratch Co (closed lost Sep 1,
 only an older fact: parked); the stub reports `hs_is_closed_won` and `closedate`. Proof: `deal-closure.test.ts` (11:
 the resolver's closed deals; customer, parked, unparked, no outcome; the material change; the gate refusing at a
