@@ -127,3 +127,60 @@ describe('R61: reads that need only the account start together', () => {
     expect(page).toMatch(/dealsSynced\.then\(\(\) => loadCommitments\(prisma, \{ accountNames: \[brief\.accountName\] \}\)\)/);
   });
 });
+
+describe('R61: HubSpot identity and the contacts\' employment ask their independent reads together', () => {
+  const ID = { accountName: 'Acme Co', hubspotCompanyId: '101', domains: ['acme.example.com'], contactIds: [] };
+  const reads = (over: Record<string, unknown> = {}) => {
+    const started: string[] = [];
+    let release: () => void = () => {};
+    const gate = new Promise<void>((r) => (release = r));
+    const r = {
+      started,
+      release: () => release(),
+      companiesById: async () => (started.push('byId'), await gate, { companies: [{ id: '101', name: 'Acme Co' }], missing: [] }),
+      companiesByDomains: async () => (started.push('byDomain'), { companies: [], truncated: false }),
+      companiesByNames: async () => ({ companies: [], truncated: false }),
+      associations: async () => ({ byId: new Map(), truncated: false }),
+      ...over,
+    };
+    return r;
+  };
+  it('the domain search is asked while the company read is still out; the identity is the same', async () => {
+    const { resolveCompanyIdentity } = await import('@/lib/gap/opportunity/active-opportunity');
+    const r = reads();
+    const run = resolveCompanyIdentity(ID, r as never);
+    await tick();
+    expect(r.started).toEqual(['byId', 'byDomain']);
+    r.release();
+    expect(await run).toEqual({ ok: true, companyIds: ['101'] });
+  });
+  it('the reason given is unchanged: the company read is judged first, then the domain search', async () => {
+    const { resolveCompanyIdentity } = await import('@/lib/gap/opportunity/active-opportunity');
+    const both = reads({ companiesById: async () => { throw new Error('503'); }, companiesByDomains: async () => { throw new Error('429'); } });
+    const a = await resolveCompanyIdentity(ID, both as never);
+    expect(a.ok === false && a.truth).toMatchObject({ status: 'UNKNOWN', reason: 'hubspot_error' });
+    expect(a.ok === false && (a.truth as { detail: string }).detail).toMatch(/^company read: /);
+    const domainOnly = reads({ companiesById: async () => ({ companies: [{ id: '101', name: 'Acme Co' }], missing: [] }), companiesByDomains: async () => { throw new Error('429'); } });
+    const b = await resolveCompanyIdentity(ID, domainOnly as never);
+    expect(b.ok === false && (b.truth as { detail: string }).detail).toMatch(/^company search: /);
+    const gone = reads({ companiesById: async () => ({ companies: [], missing: ['101'] }) });
+    const c = await resolveCompanyIdentity(ID, gone as never);
+    expect(c.ok === false && c.truth).toMatchObject({ reason: 'identity_unresolved' });
+  });
+  it('the contacts\' employment asks the people, their enrichments and their confirmed answers together', async () => {
+    const { loadEmployment } = await import('@/lib/gap/people/employment-store');
+    const started: string[] = [];
+    let release: () => void = () => {};
+    const gate = new Promise<void>((r) => (release = r));
+    const prisma = {
+      persona: { findMany: async () => (started.push('people'), await gate, [{ id: 1, account_name: 'Acme Co', title: 'VP Ops', email: 'a@acme.example.com', hubspot_contact_id: null }]) },
+      contactEnrichment: { findMany: async () => (started.push('enrichments'), []) },
+      conversationDisposition: { findMany: async () => (started.push('answers'), []) },
+    };
+    const run = loadEmployment(prisma, [1], { now: new Date('2026-10-07T12:00:00Z') } as never);
+    await tick();
+    expect(started).toEqual(['people', 'enrichments', 'answers']);
+    release();
+    expect((await run).has(1)).toBe(true);
+  });
+});

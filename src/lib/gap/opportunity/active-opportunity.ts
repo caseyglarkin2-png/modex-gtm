@@ -237,25 +237,23 @@ export async function resolveCompanyIdentity(
 
   const companies = new Map<string, string | null>();
   const hsId = String(identity.hubspotCompanyId ?? '').trim();
+  // R61: the company read and the domain search are independent HubSpot calls, so they are asked together (one round
+  // trip, not two); their answers are judged in the same order as before, so the reason given never changes.
+  const [byId, byDomain] = await Promise.allSettled([
+    hsId ? reads.companiesById([hsId]) : Promise.resolve(null),
+    domains.length > 0 ? reads.companiesByDomains(hubspotDomainVariants(domains)) : Promise.resolve(null),
+  ]);
   if (hsId) {
-    let known: { companies: CompanyRef[]; missing: string[] };
-    try {
-      known = await reads.companiesById([hsId]);
-    } catch (e) {
-      return fail(unknown('hubspot_error', `company read: ${errText(e)}`));
-    }
+    if (byId.status === 'rejected') return fail(unknown('hubspot_error', `company read: ${errText(byId.reason)}`));
+    const known = byId.value as { companies: CompanyRef[]; missing: string[] } | null;
     if (!known || !Array.isArray(known.companies) || !Array.isArray(known.missing)) return fail(unknown('malformed_response', 'company read'));
     // A company id HubSpot no longer has (merged or deleted) is not a determined identity.
     if (known.missing.length > 0 || !known.companies.some((c) => String(c.id) === hsId)) return fail(unknown('identity_unresolved', `HubSpot company ${hsId} not found`));
     for (const c of known.companies) companies.set(String(c.id), c.name ?? null);
   }
   if (domains.length > 0) {
-    let hit: { companies: CompanyRef[]; truncated: boolean };
-    try {
-      hit = await reads.companiesByDomains(hubspotDomainVariants(domains));
-    } catch (e) {
-      return fail(unknown('hubspot_error', `company search: ${errText(e)}`));
-    }
+    if (byDomain.status === 'rejected') return fail(unknown('hubspot_error', `company search: ${errText(byDomain.reason)}`));
+    const hit = byDomain.value as { companies: CompanyRef[]; truncated: boolean } | null;
     if (!hit || !Array.isArray(hit.companies)) return fail(unknown('malformed_response', 'company search'));
     if (hit.truncated) return fail(unknown('identity_ambiguous', `more companies match ${domains.join(', ')} than one read returns`));
     for (const c of hit.companies) if (String(c.id).trim()) companies.set(String(c.id).trim(), c.name ?? null);
