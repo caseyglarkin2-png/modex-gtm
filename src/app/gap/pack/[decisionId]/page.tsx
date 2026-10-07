@@ -5,6 +5,7 @@
  */
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
+import { loginHref } from '@/lib/auth-return';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { actionPackHref } from '@/lib/gap/routing/card-readiness';
@@ -23,8 +24,8 @@ export async function generateMetadata({ params }: { params: Promise<{ decisionI
 export default async function PackPage({ params, searchParams }: { params: Promise<{ decisionId: string }>; searchParams?: Promise<{ from?: string; i?: string }> }) {
   if (assertGapEnabled('GAP_ROUTING_ENABLED')) notFound();
   const session = await auth();
-  if (!session?.user?.email) redirect('/login');
   const { decisionId } = await params;
+  if (!session?.user?.email) redirect(loginHref(`/gap/pack/${encodeURIComponent(decisionId)}/`));
   const q = (await searchParams) ?? {};
   const decision = (await prisma.routingDecision
     .findUnique({ where: { id: decisionId }, select: { hypothesis_id: true, persona_id: true, account_name: true } })

@@ -4,6 +4,7 @@
  */
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
+import { loginHref } from '@/lib/auth-return';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { listFeedback } from '@/lib/gap/feedback/feedback';
@@ -16,7 +17,7 @@ export const metadata = { title: 'GAP notes' };
 export default async function FeedbackPage() {
   if (assertGapEnabled('GAP_ROUTING_ENABLED')) notFound();
   const session = await auth();
-  if (!session?.user?.email) redirect('/login');
+  if (!session?.user?.email) redirect(loginHref('/gap/feedback/'));
   const items = await listFeedback(prisma);
   return (
     <div className="mx-auto max-w-2xl space-y-5">

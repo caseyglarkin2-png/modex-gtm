@@ -4,6 +4,7 @@
  */
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
+import { loginHref } from '@/lib/auth-return';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { loadCapture } from '@/lib/gap/capture/store';
@@ -16,8 +17,8 @@ export const metadata = { title: 'Capture' };
 export default async function CaptureNotePage({ params }: { params: Promise<{ id: string }> }) {
   if (assertGapEnabled('GAP_HYPOTHESIS_ENABLED')) notFound();
   const session = await auth();
-  if (!session?.user?.email) redirect('/login');
   const { id } = await params;
+  if (!session?.user?.email) redirect(loginHref(`/gap/capture/${encodeURIComponent(id)}/`));
   const capture = await loadCapture(prisma, id);
   if (!capture) notFound();
   return (

@@ -12,6 +12,7 @@
 
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
+import { loginHref } from '@/lib/auth-return';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { listHypotheses } from '@/lib/gap/hypothesis/service';
@@ -36,7 +37,7 @@ export default async function HypothesesPage({ searchParams }: { searchParams?: 
   if (assertGapEnabled('GAP_HYPOTHESIS_ENABLED')) notFound();
 
   const session = await auth();
-  if (!session?.user?.email) redirect('/login');
+  if (!session?.user?.email) redirect(loginHref('/gap/hypotheses/'));
 
   const params = (await searchParams) ?? {};
   const status = parseStatus(params.status);

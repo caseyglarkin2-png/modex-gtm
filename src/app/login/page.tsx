@@ -7,6 +7,13 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { safeReturnPath } from '@/lib/auth-return';
+
+/** R63-B S8: the page the session gate sent us from (same site only), so sign-in lands back on it. */
+function returnPath(): string {
+  if (typeof window === 'undefined') return '/';
+  return safeReturnPath(new URLSearchParams(window.location.search).get('callbackUrl'), window.location.origin);
+}
 
 const EMAIL_SIGN_IN = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test';
 
@@ -29,7 +36,7 @@ export default function LoginPage() {
         setError('Not authorized. Use an approved team email.');
         setLoading(false);
       } else {
-        router.push('/');
+        router.push(returnPath());
         router.refresh();
       }
     } catch {
@@ -54,7 +61,7 @@ export default function LoginPage() {
           <Button
             variant="outline"
             className="w-full gap-2"
-            onClick={() => { setLoading(true); signIn('google', { callbackUrl: '/' }); }}
+            onClick={() => { setLoading(true); signIn('google', { callbackUrl: returnPath() }); }}
             disabled={loading}
           >
             <svg className="h-4 w-4" viewBox="0 0 24 24">

@@ -4,6 +4,7 @@
  */
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
+import { loginHref } from '@/lib/auth-return';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { listSignals } from '@/lib/gap/signals/ops';
@@ -17,7 +18,7 @@ import { loadWatchProfilesCached } from '@/lib/gap/signals/watch';
 export async function SignalsPageBody({ searchParams }: { searchParams?: Promise<SharedParams> }) {
   if (assertGapEnabled('GAP_ROUTING_ENABLED')) notFound();
   const session = await auth();
-  if (!session?.user?.email) redirect('/login');
+  if (!session?.user?.email) redirect(loginHref('/gap/signals/'));
   const p = (await searchParams) ?? {};
   const [items, profiles] = await Promise.all([listSignals(prisma, { limit: 60 }).catch(() => []), loadWatchProfilesCached(prisma).catch(() => [])]);
   return (

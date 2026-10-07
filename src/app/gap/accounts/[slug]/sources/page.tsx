@@ -6,6 +6,7 @@
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
+import { loginHref } from '@/lib/auth-return';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { accountNamesForSlug } from '@/lib/gap/account-intel/load';
@@ -19,8 +20,8 @@ export const metadata = { title: 'GAP sources' };
 export default async function AccountSourcesPage({ params, searchParams }: { params: Promise<{ slug: string }>; searchParams?: Promise<{ name?: string }> }) {
   if (assertGapEnabled('GAP_ROUTING_ENABLED')) notFound();
   const session = await auth();
-  if (!session?.user?.email) redirect('/login');
   const { slug } = await params;
+  if (!session?.user?.email) redirect(loginHref(`/gap/accounts/${encodeURIComponent(slug)}/sources/`));
   const q = (await searchParams) ?? {};
   const names = await accountNamesForSlug(prisma, slug);
   const name = q.name && names.includes(q.name) ? q.name : names.length === 1 ? names[0] : null;

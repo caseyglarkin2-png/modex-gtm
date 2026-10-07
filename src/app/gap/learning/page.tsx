@@ -10,6 +10,7 @@
 
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
+import { loginHref } from '@/lib/auth-return';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { GapSubnav } from '@/components/gap/gap-subnav';
@@ -22,7 +23,7 @@ export default async function GapLearningPage() {
   if (assertGapEnabled()) notFound();
 
   const session = await auth();
-  if (!session?.user?.email) redirect('/login');
+  if (!session?.user?.email) redirect(loginHref('/gap/learning/'));
 
   return (
     <div className="space-y-6">

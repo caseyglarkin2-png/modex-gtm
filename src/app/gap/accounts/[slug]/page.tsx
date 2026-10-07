@@ -10,6 +10,7 @@
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
+import { loginHref } from '@/lib/auth-return';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { accountNamesForSlug, loadAccountView } from '@/lib/gap/account-intel/load';
@@ -126,8 +127,8 @@ function AccountShell({ name, quick, now }: { name: string | null; quick: Pursui
 export default async function AccountPage({ params, searchParams }: { params: Promise<{ slug: string }>; searchParams?: Promise<AccountQuery> }) {
   if (assertGapEnabled('GAP_ROUTING_ENABLED')) notFound();
   const session = await auth();
-  if (!session?.user?.email) redirect('/login');
   const { slug } = await params;
+  if (!session?.user?.email) redirect(loginHref(`/gap/accounts/${encodeURIComponent(slug)}/`));
   const q = (await searchParams) ?? {};
   const now = new Date();
   const name = await quickAccountName(slug, q.name);

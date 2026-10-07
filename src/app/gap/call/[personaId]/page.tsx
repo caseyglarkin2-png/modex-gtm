@@ -10,6 +10,7 @@
 
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
+import { loginHref } from '@/lib/auth-return';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { CallMode } from './call-mode';
@@ -23,9 +24,8 @@ export default async function GapCallPage({ params }: { params: Promise<Params> 
   if (assertGapEnabled()) notFound();
 
   const session = await auth();
-  if (!session?.user?.email) redirect('/login');
-
   const { personaId } = await params;
+  if (!session?.user?.email) redirect(loginHref(`/gap/call/${encodeURIComponent(personaId)}/`));
   if (!personaId || personaId.trim().length === 0) notFound();
 
   return (

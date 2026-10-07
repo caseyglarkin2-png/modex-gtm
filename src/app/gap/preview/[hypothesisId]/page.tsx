@@ -20,6 +20,7 @@
 
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
+import { loginHref } from '@/lib/auth-return';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { isApproved } from '@/lib/gap/compiler/approval';
@@ -75,9 +76,8 @@ export default async function PreviewPage({ params, searchParams }: { params: Pr
   if (assertGapEnabled('GAP_MESSAGE_COMPILER_ENABLED')) notFound();
 
   const session = await auth();
-  if (!session?.user?.email) redirect('/login');
-
   const { hypothesisId } = await params;
+  if (!session?.user?.email) redirect(loginHref(`/gap/preview/${encodeURIComponent(hypothesisId)}/`));
   const search = (await searchParams) ?? {};
   const target = {
     hypothesisId,

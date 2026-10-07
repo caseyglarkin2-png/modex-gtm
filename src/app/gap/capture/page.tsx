@@ -10,6 +10,7 @@
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
+import { loginHref } from '@/lib/auth-return';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { CAPTURE_CONTEXTS, RAW_TEXT_MAX, listRecentCaptures } from '@/lib/gap/capture/store';
@@ -24,7 +25,7 @@ export const metadata = { title: 'Capture' };
 export default async function CapturePage({ searchParams }: { searchParams?: Promise<{ account?: string; person?: string; deal?: string; dealName?: string; from?: string; context?: string }> }) {
   if (assertGapEnabled('GAP_HYPOTHESIS_ENABLED')) notFound();
   const session = await auth();
-  if (!session?.user?.email) redirect('/login');
+  if (!session?.user?.email) redirect(loginHref('/gap/capture/'));
   const recent = await listRecentCaptures(prisma, 8).catch(() => []);
   // ?account= from an account page: prefilled only when it names a real account (never a free-text guess).
   const q = (await searchParams) ?? {};

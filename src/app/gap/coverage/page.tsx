@@ -5,6 +5,7 @@
  */
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
+import { loginHref } from '@/lib/auth-return';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { loadCoverage, type AccountCoverage } from '@/lib/gap/signals/coverage';
@@ -27,7 +28,7 @@ const TONE: Record<AccountCoverage['state'], string> = { covered: 'text-emerald-
 export default async function CoveragePage() {
   if (assertGapEnabled('GAP_ROUTING_ENABLED')) notFound();
   const session = await auth();
-  if (!session?.user?.email) redirect('/login');
+  if (!session?.user?.email) redirect(loginHref('/gap/coverage/'));
   const now = new Date();
   const [r, offApprovals] = await Promise.all([loadCoverage(prisma, now), loadCrmOffApprovals(prisma).catch(() => [])]);
   const c = r.capacity;

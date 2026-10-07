@@ -31,6 +31,7 @@
 import { notFound, redirect } from 'next/navigation';
 import { after } from 'next/server';
 import { auth } from '@/lib/auth';
+import { loginHref } from '@/lib/auth-return';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { AccountLink } from '@/components/gap/account-link';
@@ -389,7 +390,7 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
   if (assertGapEnabled('GAP_ROUTING_ENABLED')) notFound();
 
   const session = await auth();
-  if (!session?.user?.email) redirect('/login');
+  if (!session?.user?.email) redirect(loginHref('/gap/'));
 
   const params = (await searchParams) ?? {};
   const lane = (params.lane && LANES.has(params.lane) ? params.lane : null) as CockpitLane | null;

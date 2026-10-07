@@ -5,6 +5,7 @@
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
+import { loginHref } from '@/lib/auth-return';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { loadSource, MEMBER_FILTERS, type MemberView } from '@/lib/gap/intake/views';
@@ -81,8 +82,8 @@ function Member({ m }: { m: MemberView }) {
 export default async function SourcePage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams?: Promise<{ field?: string; value?: string; all?: string }> }) {
   if (assertGapEnabled('GAP_ROUTING_ENABLED')) notFound();
   const session = await auth();
-  if (!session?.user?.email) redirect('/login');
   const { id } = await params;
+  if (!session?.user?.email) redirect(loginHref(`/gap/sources/${encodeURIComponent(id)}/`));
   const q = (await searchParams) ?? {};
   const filter = q.field && q.value && (MEMBER_FILTERS as readonly string[]).includes(q.field) ? { field: q.field as (typeof MEMBER_FILTERS)[number], value: q.value } : null;
   const [data, opportunities, unknown] = await Promise.all([loadSource(prisma, id, { filter, limit: q.all ? 1000 : 150 }), loadOpportunities(prisma, id, new Date()).catch(() => []), loadCandidateQueue(prisma, { workSourceId: id, limit: 60 }).catch(() => [])]);

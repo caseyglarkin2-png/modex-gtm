@@ -5,6 +5,7 @@
  */
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
+import { loginHref } from '@/lib/auth-return';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { Breadcrumb } from '@/components/breadcrumb';
@@ -42,7 +43,7 @@ async function loadIndex(): Promise<AccountIndexRow[]> {
 export default async function GapAccountsPage({ searchParams }: { searchParams?: Promise<{ q?: string }> }) {
   if (assertGapEnabled('GAP_ROUTING_ENABLED')) notFound();
   const session = await auth();
-  if (!session?.user?.email) redirect('/login');
+  if (!session?.user?.email) redirect(loginHref('/gap/accounts/'));
   const q = ((await searchParams) ?? {}).q ?? '';
   const rows = await loadIndex();
   return (

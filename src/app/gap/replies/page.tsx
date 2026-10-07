@@ -14,6 +14,7 @@
 
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
+import { loginHref } from '@/lib/auth-return';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { RepliesTriage } from './replies-triage';
@@ -25,7 +26,7 @@ export default async function GapRepliesPage() {
   if (assertGapEnabled()) notFound();
 
   const session = await auth();
-  if (!session?.user?.email) redirect('/login');
+  if (!session?.user?.email) redirect(loginHref('/gap/replies/'));
 
   return (
     <div className="space-y-6">
