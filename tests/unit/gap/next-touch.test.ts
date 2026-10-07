@@ -240,3 +240,30 @@ describe('ops closeout 14: one bounce vocabulary for every execution plane', () 
     expect(r.state).not.toBe('stopped');
   });
 });
+
+describe('R61: the stop rules\' reads are asked together, judged in order', () => {
+  const at = new Date('2026-09-30T16:00:00Z');
+  const deps = { gapSender: YF, getThread: noThread };
+  it('a reply read is asked while the unsubscribe read is still out (one round trip, not seven)', async () => {
+    const db = ledger([0]);
+    let release: (v: unknown) => void = () => {};
+    const gate = new Promise((r) => (release = r));
+    db.unsubscribedEmail.findFirst.mockImplementation(async () => {
+      await gate;
+      return null;
+    });
+    const run = computeNextTouch(db, 'dec-1', at, deps);
+    for (let i = 0; i < 20 && db.inboundMessage.findMany.mock.calls.length === 0; i += 1) await new Promise((r) => setTimeout(r, 0));
+    expect(db.inboundMessage.findMany).toHaveBeenCalled();
+    release(null);
+    expect((await run).state).toBe('due');
+  });
+  it('a stop found earlier still wins over a later read that failed; an earlier read that failed fails the evaluation', async () => {
+    const dnc = ledger([0], { persona: { do_not_contact: true } });
+    dnc.inboundMessage.findMany.mockRejectedValue(new Error('inbound read failed'));
+    expect(await computeNextTouch(dnc, 'dec-1', at, deps)).toMatchObject({ state: 'stopped', reason: 'do_not_contact' });
+    const early = ledger([0]);
+    early.unsubscribedEmail.findFirst.mockRejectedValue(new Error('unsubscribe read failed'));
+    await expect(computeNextTouch(early, 'dec-1', at, deps)).rejects.toThrow('unsubscribe read failed');
+  });
+});

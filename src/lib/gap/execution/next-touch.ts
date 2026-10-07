@@ -117,63 +117,79 @@ export async function computeNextTouch(prisma: PrismaLike, decisionId: string, n
   const recipient = (history.recipient || history.sent[0].recipient).toLowerCase();
   const sequenceVersionId = lastSend.sequenceVersionId ?? history.sent.find((s) => s.sequenceVersionId)?.sequenceVersionId ?? null;
 
-  // Stop rules that need no Gmail read.
-  const persona = anchorPersona !== null ? await prisma.persona.findUnique({ where: { id: anchorPersona }, select: { do_not_contact: true, email_status: true } }) : null;
+  // Stop rules that need no Gmail read. R61: their reads are independent, so they are asked together (one round trip
+  // instead of seven, per card, in Work's read); each is judged in the original order, and a failed read fails the
+  // evaluation only where the original would have reached it (a stop found earlier still wins).
+  const firstSentAt = new Date(first.sentAt);
+  const domain = recipient.split('@')[1] ?? '';
+  const [personaR, unsubR, blockedR, dispositionR, inboundR, colleagueR, commsR] = await Promise.allSettled([
+    anchorPersona !== null ? prisma.persona.findUnique({ where: { id: anchorPersona }, select: { do_not_contact: true, email_status: true } }) : Promise.resolve(null),
+    prisma.unsubscribedEmail.findFirst({ where: { email: { equals: recipient, mode: 'insensitive' } }, select: { id: true } }),
+    // Release C re-review S4: the recipient's server refused a GAP email for policy (5.7.x and similar).
+    prisma.gapAuditEvent?.findFirst
+      ? prisma.gapAuditEvent.findFirst({
+          where: { subject_type: 'recipient', subject_id: recipient, kind: DELIVERY_BLOCKED_KIND, created_at: { gt: firstSentAt } },
+          select: { payload: true },
+        })
+      : Promise.resolve(null),
+    prisma.conversationDisposition.findFirst({
+      where: { contact_email: recipient, created_at: { gt: firstSentAt }, response_class: { notIn: [...NON_STOPPING_RESPONSE_CLASSES] } },
+      select: { response_class: true },
+    }),
+    prisma.inboundMessage.findMany({
+      where: { from_email: { equals: recipient, mode: 'insensitive' }, received_at: { gt: firstSentAt } },
+      select: { subject: true, snippet: true, body_text: true, from_email: true },
+      orderBy: { received_at: 'asc' },
+      take: 20,
+    }),
+    domain && !FREEMAIL_DOMAINS.has(domain)
+      ? prisma.inboundMessage.findMany({
+          where: { from_email: { endsWith: `@${domain}`, mode: 'insensitive' }, received_at: { gt: firstSentAt } },
+          select: { subject: true, snippet: true, body_text: true, from_email: true },
+          orderBy: { received_at: 'asc' },
+          take: 20,
+        })
+      : Promise.resolve([]),
+    readComms(prisma, recipient),
+  ]);
+  const settled = <T,>(r: PromiseSettledResult<T>): T => {
+    if (r.status === 'rejected') throw r.reason;
+    return r.value;
+  };
+  const persona = settled(personaR) as { do_not_contact: boolean; email_status: string | null } | null;
   if (persona?.do_not_contact) return { state: 'stopped', reason: 'do_not_contact', detail: 'This person is marked do not contact.', sent };
   if (persona && (isHardBounceStatus(persona.email_status) || HARD_INVALID_STATUSES.has(String(persona.email_status ?? '').trim().toLowerCase()))) {
     return { state: 'stopped', reason: 'invalid_address', detail: 'The address is marked invalid.', sent };
   }
-  const unsub = await prisma.unsubscribedEmail.findFirst({ where: { email: { equals: recipient, mode: 'insensitive' } }, select: { id: true } });
+  const unsub = settled(unsubR);
   if (unsub) return { state: 'stopped', reason: 'unsubscribed', detail: 'The recipient unsubscribed.', sent };
 
-  const firstSentAt = new Date(first.sentAt);
-  // Release C re-review S4: the recipient's server refused a GAP email for
-  // policy (5.7.x and similar). The address may be fine, so nothing is marked
-  // do-not-contact, but the next touch waits for a human instead of hitting
-  // the same wall.
-  const blocked = prisma.gapAuditEvent?.findFirst
-    ? await prisma.gapAuditEvent.findFirst({
-        where: { subject_type: 'recipient', subject_id: recipient, kind: DELIVERY_BLOCKED_KIND, created_at: { gt: firstSentAt } },
-        select: { payload: true },
-      })
-    : null;
+  // The address may be fine, so nothing is marked do-not-contact, but the next touch waits for a human instead of
+  // hitting the same wall.
+  const blocked = settled(blockedR) as { payload: unknown } | null;
   if (blocked) {
     const status = (blocked.payload as { status?: unknown } | null)?.status;
     return { state: 'stopped', reason: 'delivery_blocked', detail: `The recipient's server refused an earlier email${typeof status === 'string' ? ` (${status})` : ''}. Check the address and the block before anything else goes out.`, sent };
   }
-  const disposition = await prisma.conversationDisposition.findFirst({
-    where: { contact_email: recipient, created_at: { gt: firstSentAt }, response_class: { notIn: [...NON_STOPPING_RESPONSE_CLASSES] } },
-    select: { response_class: true },
-  });
+  const disposition = settled(dispositionR) as { response_class: string } | null;
   if (disposition) return { state: 'stopped', reason: 'replied', detail: `Buyer replied (${String(disposition.response_class).replace(/_/g, ' ')}).`, sent };
   // The one reading of a person writing back (replies/classify.ts isPersonReply): the message text, never its subject
   // alone, so a body-only out-of-office notice stops nothing, and a person's reply behind a notice still stops it.
-  const inboundRows: Array<{ subject: string | null; snippet: string | null; body_text: string | null; from_email: string }> = await prisma.inboundMessage.findMany({
-    where: { from_email: { equals: recipient, mode: 'insensitive' }, received_at: { gt: firstSentAt } },
-    select: { subject: true, snippet: true, body_text: true, from_email: true },
-    orderBy: { received_at: 'asc' },
-    take: 20,
-  });
+  const inboundRows = settled(inboundR) as Array<{ subject: string | null; snippet: string | null; body_text: string | null; from_email: string }>;
   const inbound = inboundRows.find((m) => isPersonReply({ text: m.body_text, snippet: m.snippet, subject: m.subject, from: m.from_email }));
   if (inbound) return { state: 'stopped', reason: 'replied', detail: 'Buyer replied.', sent };
   // Red team T9: someone else at the account replied after the first send (a
   // colleague, an assistant). Hold the sequence for a human read; a shared
   // consumer domain says nothing about the account.
-  const domain = recipient.split('@')[1] ?? '';
   if (domain && !FREEMAIL_DOMAINS.has(domain)) {
-    const colleagueRows: Array<{ subject: string | null; snippet: string | null; body_text: string | null; from_email: string }> = await prisma.inboundMessage.findMany({
-      where: { from_email: { endsWith: `@${domain}`, mode: 'insensitive' }, received_at: { gt: firstSentAt } },
-      select: { subject: true, snippet: true, body_text: true, from_email: true },
-      orderBy: { received_at: 'asc' },
-      take: 20,
-    });
+    const colleagueRows = settled(colleagueR) as Array<{ subject: string | null; snippet: string | null; body_text: string | null; from_email: string }>;
     const colleague = colleagueRows.find((m) => isPersonReply({ text: m.body_text, snippet: m.snippet, subject: m.subject, from: m.from_email }));
     if (colleague) {
       return { state: 'stopped', reason: 'replied', detail: `Someone at ${domain} (${colleague.from_email}) replied after the first touch. Read it before anything else goes out.`, sent };
     }
   }
 
-  const comms = await readComms(prisma, recipient);
+  const comms = settled(commsR);
   if (comms.meetingBooked) return { state: 'stopped', reason: 'meeting_booked', detail: 'A meeting is booked.', sent };
 
   // The Gmail thread in the SAME mailbox the email was sent from.
