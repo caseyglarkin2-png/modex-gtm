@@ -101,6 +101,7 @@ export function RepliesTriage({ client = defaultGapApiClient, inCockpit = false,
         expandedId={expandedId}
         loading={loading}
         error={error}
+        {...(account ? { emptyText: `Nothing from ${account} is waiting to be recorded.` } : {})}
         onToggle={(item) => setExpandedId((current) => (current === item.id ? null : item.id))}
         renderExpanded={(item) => (
           <DispositionForm
@@ -132,10 +133,6 @@ export function RepliesTriage({ client = defaultGapApiClient, inCockpit = false,
           />
         )}
       />
-
-      {account && !loading && !error && items.length === 0 ? (
-        <p className="text-sm text-[var(--muted-foreground)]" data-testid="record-reply-empty">Nothing from {account} is waiting to be recorded.</p>
-      ) : null}
 
       {nextCursor ? (
         <Button type="button" variant="outline" size="sm" disabled={loadingMore} onClick={() => void loadMore()}>

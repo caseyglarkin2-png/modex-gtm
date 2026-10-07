@@ -66,7 +66,7 @@ export function DealOpportunities({ view, slots = {} }: { view: OpportunitiesVie
       {view.deals.map((d) => (
         <article key={d.dealId} id={`deal-${d.dealId}`} className="space-y-2 border-t border-[var(--border)] pt-3" data-testid="deal-opportunity" data-deal-id={d.dealId}>
           <h3 className="text-sm font-semibold" data-testid="deal-name">
-            {d.name ?? `HubSpot deal ${d.dealId}`}
+            {d.name ?? 'An unnamed HubSpot deal'}
             <span className="ml-1 font-normal text-[var(--muted-foreground)]">· {d.stage ?? 'stage not given'}</span>
           </h3>
           <p className="text-xs" data-testid="deal-next-step">

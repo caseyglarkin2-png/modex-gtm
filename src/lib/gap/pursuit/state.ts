@@ -20,6 +20,7 @@
  */
 import { classifyReply, type ReplyClass } from '../replies/classify';
 import type { MotionType } from '../account-intel/build';
+import { unknownReasonWords, unknownUnlock } from '../opportunity/unknown-words';
 
 export type PursuitStateKind = 'replied' | 'opted_out' | 'in_deal' | 'held' | 'follow_up_due' | 'in_motion' | 'ready' | 'choose_person' | 'research' | 'idle';
 
@@ -201,7 +202,8 @@ export function projectPursuitState(i: PursuitInput): PursuitState {
     return base('held', { stateLine: c.kind === 'customer' ? `${STATE_LINE.held}: a customer (closed won)` : `${STATE_LINE.held}: parked after a lost deal`, blocker: c.why, unlock: c.kind === 'customer' ? 'Your explicit decision to work an expansion with the customer.' : 'A material change: a newer verified fact, a buyer reply, or a new open deal.' });
   }
   if (i.opportunity.status === 'UNKNOWN') {
-    return base('held', { stateLine: `${STATE_LINE.held}: HubSpot could not be checked`, blocker: `HubSpot could not be read just now (${i.opportunity.detail || 'unknown opportunity truth'}): no cold touch until it can.`, unlock: 'HubSpot answers again.' });
+    // R60: the reason in words (never "identity_unresolved"), and what unlocks it for that reason.
+    return base('held', { stateLine: `${STATE_LINE.held}: HubSpot could not be checked`, blocker: `HubSpot could not be checked: ${unknownReasonWords(i.opportunity.detail)}. No cold touch until it can.`, unlock: unknownUnlock(i.opportunity.detail) });
   }
   if (i.restriction) {
     return base('held', {

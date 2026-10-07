@@ -519,7 +519,8 @@ export function workDay(i: WorkInput): WorkDay {
   const dealLabel = (accountName: string, dealId: string | null): string | null => {
     if (!dealId) return null;
     const d = (i.inDeals.status === 'complete' ? i.inDeals.accounts.find((a) => a.accountName === accountName)?.deals : undefined)?.find((x) => x.id === dealId || (!/^\d+$/.test(dealId) && x.name === dealId));
-    return `Deal: ${d?.name ?? (/^\d+$/.test(dealId) ? `HubSpot deal ${dealId}` : dealId)}`;
+    // R60: a deal no longer among the open deals is said in words, never its HubSpot id.
+    return `Deal: ${d?.name ?? (/^\d+$/.test(dealId) ? 'a deal that is no longer open in HubSpot' : dealId)}`;
   };
   const obligations = new Map<string, WorkObligation[]>();
   const snoozed: WorkDay['snoozed'] = [];

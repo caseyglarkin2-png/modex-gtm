@@ -35,7 +35,7 @@ describe('<RepliesTriage>', () => {
     expect(screen.queryByLabelText('Reply state filter')).toBeNull();
     const empty = { ...client(), listReplies: vi.fn(async () => ({ ok: true, status: 200, data: { items: [], nextCursor: null } })) } as unknown as GapApiClient;
     render(<RepliesTriage client={empty} account="Quiet Co" />);
-    expect(await screen.findByTestId('record-reply-empty')).toHaveTextContent('Nothing from Quiet Co is waiting to be recorded.');
+    expect(await screen.findByTestId('reply-list-empty')).toHaveTextContent('Nothing from Quiet Co is waiting to be recorded.');
   });
 
   it('on the history page: the filter is there and nothing opens on its own', async () => {

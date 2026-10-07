@@ -47,7 +47,8 @@ describe('helpers', () => {
     expect(enrollmentLabel({ enrollmentId: 'e', enrollmentStatus: 'stop_pending' })).toBe('stop pending');
     expect(enrollmentLabel({ enrollmentId: 'e', enrollmentStatus: null })).toBe('enrolled');
     expect(enrollmentLabel({ enrollmentId: null })).toBe('not enrolled');
-    expect(hypothesisLabel({ hypothesisId: 'hyp_1', hypothesisTitle: null })).toBe('hypothesis hyp_1');
+    // R60: no named angle is nothing, never the internal id.
+    expect(hypothesisLabel({ hypothesisId: 'hyp_1', hypothesisTitle: null })).toBe('');
     expect(hypothesisLabel({ hypothesisId: 'hyp_1', hypothesisTitle: 'hidden_capacity' })).toBe('hidden capacity');
   });
 });

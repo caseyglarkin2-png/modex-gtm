@@ -123,6 +123,7 @@ import {
 } from '@/lib/gap/routing/enroll-row';
 import { hasActiveOpportunity, opportunityUnknown, resolveEnrollTarget, type ActiveOpportunityInputs } from '@/lib/gap/routing/rules';
 import { OPPORTUNITY_UNKNOWN_COPY, opportunitySentence, resolveAccountOpportunity, type ResolveForAccountDeps } from '@/lib/gap/opportunity/active-opportunity';
+import { unknownReasonWords } from '@/lib/gap/opportunity/unknown-words';
 import type { EnrollTarget, RoutingInputs, RoutingTop100Input } from '@/lib/gap/routing/types';
 import { DEFAULT_FRESHNESS } from '@/lib/gap/routing/types';
 import { isResponseClass } from '@/lib/gap/taxonomy';
@@ -570,7 +571,8 @@ export const makeActiveOpportunityCheck = (resolveDeps: ResolveForAccountDeps = 
   if (hasActiveOpportunity(inputs)) return { status: 'ACTIVE', detail: 'A booked meeting or a recent positive reply: someone is already in conversation here.' };
   if (opportunityUnknown(inputs)) {
     const o = inputs.account.opportunity;
-    return { status: 'UNKNOWN', detail: `${OPPORTUNITY_UNKNOWN_COPY}${o.status === 'UNKNOWN' ? ` (${o.reason})` : ''}` };
+    // R60: the reason in words, never the code.
+    return { status: 'UNKNOWN', detail: `${OPPORTUNITY_UNKNOWN_COPY}${o.status === 'UNKNOWN' ? ` (${unknownReasonWords(o.reason)})` : ''}` };
   }
   // Corporate family (family/family.ts): a live deal, conversation, first touch, reply or enrollment at a parent,
   // subsidiary or sibling holds a cold motion here too, through the SAME refusal paths (ACTIVE / UNKNOWN), until
