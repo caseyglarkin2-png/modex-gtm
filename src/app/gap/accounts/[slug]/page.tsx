@@ -263,7 +263,7 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
           {tabs}
           {/* R60: deal work opened from Work ends where every account ends: Back to Work, Next account, or record it. */}
           {q.from === 'work' ? <DoneNext slug={slug} index={workIndex} accountName={brief.accountName} /> : null}
-          {workspace && openDeals.length ? <DealOpportunities view={workspace.opportunities} slots={meetingSlots} /> : null}
+          {workspace && openDeals.length ? <DealOpportunities view={workspace.opportunities} slots={meetingSlots} canceled={Object.fromEntries(workspace.opportunities.deals.map((d) => [d.dealId, (workspace.meetings ?? []).filter((m) => m.dealId === d.dealId && m.state === 'canceled').map((m) => m.what)]))} /> : null}
           {accountMeetings.length ? (
             <section className="space-y-2" data-testid="account-meetings" aria-label="Meetings at the account">
               <h2 className="text-base font-semibold">{openDeals.length ? 'Meetings not tied to one deal' : 'Meetings'}</h2>

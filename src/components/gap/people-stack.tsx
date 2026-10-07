@@ -76,6 +76,15 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
   const [note, setNote] = useState<Note | null>(null);
   const noteRef = useRef<HTMLParagraphElement>(null);
   const toggle = (key: string) => setOpen((prev) => { const n = new Set(prev); if (n.has(key)) n.delete(key); else n.add(key); return n; });
+  // R63-B N4: Escape closes an open "Why this person?" from its button or anywhere in its panel; focus goes back to the
+  // button.
+  const escapeWhy = (key: string) => (e: React.KeyboardEvent) => {
+    if (e.key !== 'Escape' || !open.has(key)) return;
+    e.preventDefault();
+    e.stopPropagation();
+    toggle(key);
+    document.getElementById(`why-btn-${key}`)?.focus();
+  };
   // After a choice the chosen row re-renders at the top and the Choose button unmounts: focus follows the person
   // (WCAG 2.4.3), never falls to the page body.
   const justChose = useRef<string | null>(null);
@@ -186,12 +195,12 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
   const quietChoose = state.state === 'research';
 
   const whyButton = (row: StackRow) => (
-    <button type="button" className={TEXT} aria-expanded={open.has(row.key)} aria-controls={`why-${row.key}`} aria-label={open.has(row.key) ? `Hide why: ${row.name}` : `Why this person? ${row.name}`} onClick={() => toggle(row.key)} data-testid="people-stack-why">
+    <button type="button" className={TEXT} aria-expanded={open.has(row.key)} id={`why-btn-${row.key}`} onKeyDown={escapeWhy(row.key)} aria-controls={`why-${row.key}`} aria-label={open.has(row.key) ? `Hide why: ${row.name}` : `Why this person? ${row.name}`} onClick={() => toggle(row.key)} data-testid="people-stack-why">
       {open.has(row.key) ? 'Hide why' : 'Why this person?'}
     </button>
   );
   const whyPanel = (row: StackRow) => (
-    <div id={`why-${row.key}`} hidden={!open.has(row.key)} className="mt-2 space-y-1 border-t border-[var(--border)] pt-2 text-xs text-[var(--muted-foreground)]">
+    <div id={`why-${row.key}`} onKeyDown={escapeWhy(row.key)} hidden={!open.has(row.key)} className="mt-2 space-y-1 border-t border-[var(--border)] pt-2 text-xs text-[var(--muted-foreground)]">
       {open.has(row.key) ? (
         <>
           <ul className="space-y-0.5" data-testid="people-stack-why-list">
@@ -498,7 +507,7 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
                 {row.title ? <span className="text-[var(--muted-foreground)]">, {row.title}</span> : null}
               </span>
               <span className="text-[var(--muted-foreground)]">(not a cold first touch)</span>
-              <button type="button" className={TEXT} aria-expanded={open.has(row.key)} aria-controls={`why-${row.key}`} aria-label={open.has(row.key) ? `Hide why: ${row.name}` : `Why this person? ${row.name}`} onClick={() => toggle(row.key)} data-testid="people-stack-why">
+              <button type="button" className={TEXT} aria-expanded={open.has(row.key)} id={`why-btn-${row.key}`} onKeyDown={escapeWhy(row.key)} aria-controls={`why-${row.key}`} aria-label={open.has(row.key) ? `Hide why: ${row.name}` : `Why this person? ${row.name}`} onClick={() => toggle(row.key)} data-testid="people-stack-why">
                 {open.has(row.key) ? 'Hide why' : 'Why?'}
               </button>
               <ul id={`why-${row.key}`} hidden={!open.has(row.key)} className="basis-full space-y-0.5 pl-2 text-[var(--muted-foreground)]" data-testid={open.has(row.key) ? 'people-stack-why-list' : undefined}>

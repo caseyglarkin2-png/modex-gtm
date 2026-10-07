@@ -12,7 +12,8 @@ function Line({ l }: { l: PrepLine }) {
     <li className="text-sm" data-testid="prep-line" data-trust={l.trust}>
       <span className="mr-1 rounded bg-[var(--muted)] px-1 text-[10px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]" data-testid="prep-trust">
         {l.trust}
-      </span>
+      </span>{' '}
+      {/* R63-B N5: a space after the trust word, so a screen reader says "To learn: Learn ...", never "To learnLearn". */}
       {l.href ? (
         <a href={l.href} className="underline" target={/^https?:/.test(l.href) ? '_blank' : undefined} rel="noreferrer">
           {l.text}

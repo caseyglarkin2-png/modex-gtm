@@ -180,6 +180,16 @@ function canonMatches(sentence: string): Array<{ canon: CanonNumber; start: numb
   return out;
 }
 
+/** R63-B N8: every canon phrasing violation in a text, sentence by sentence (the C05 rule, for fixed copy). */
+export function canonPhrasingProblems(text: string): string[] {
+  const out: string[] = [];
+  for (const sentence of splitSentences(text)) for (const hit of canonMatches(sentence)) {
+    const v = canonPhrasingViolation(sentence, hit);
+    if (v) out.push(`"${hit.text}" (${hit.canon.label}) ${v}: "${sentence}"`);
+  }
+  return out;
+}
+
 /** The phrasing violation for one canon figure in one sentence, or null. */
 function canonPhrasingViolation(sentence: string, hit: { canon: CanonNumber; start: number; end: number }): string | null {
   const required = nearest(sentence, hit.canon.requiredPhrasing, hit.start, hit.end);

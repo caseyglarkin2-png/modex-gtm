@@ -23,7 +23,7 @@ export function AccountObligations({ items }: { items: Array<Commitment & PhaseR
         {open.map((c) => (
           <li key={c.commitmentId} className="text-sm" data-testid="account-obligation" data-kind={c.kind} data-phase={c.phase}>
             <p className="font-medium">
-              <span className="mr-1 text-xs font-normal text-[var(--muted-foreground)]">{KIND_TEXT[c.kind]}:</span>
+              <span className="mr-1 text-xs font-normal text-[var(--muted-foreground)]">{KIND_TEXT[c.kind]}:</span>{' '}
               {c.title}
             </p>
             {c.scopeLabel ? <p className="text-xs font-semibold text-[var(--muted-foreground)]" data-testid="obligation-scope">{c.scopeLabel}</p> : null}

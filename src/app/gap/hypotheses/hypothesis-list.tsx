@@ -140,7 +140,8 @@ export function HypothesisList({ items, status, showFilter = true, emptyNote }: 
         <>
           <div className="flex items-center justify-between">
             <p className="text-xs text-[var(--muted-foreground)]">
-              {items.length} hypothesis{items.length === 1 ? '' : 'es'}
+              {/* R63-B N1: "7 hypothesises" read as a typo; the object is a thesis (R60 words). */}
+              {items.length} {items.length === 1 ? 'thesis' : 'theses'}
             </p>
             <Button type="button" size="sm" onClick={() => moveTo(nextToReviewIndex)}>
               Review next

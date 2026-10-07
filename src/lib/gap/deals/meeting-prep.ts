@@ -54,6 +54,8 @@ export interface MeetingPrep {
   state: MeetingState;
   /** "Meeting Wed, Oct 7, 10:00 AM: Pilot scope" or "Canceled: Pilot scope (was Oct 7)". */
   headline: string;
+  /** R63-B N10: what the meeting is ("Pilot scope"), as the row names it. */
+  what: string;
   dealId: string | null;
   dealName: string | null;
   objective: PrepLine;
@@ -173,6 +175,7 @@ export function prepareMeeting(i: PrepInput): MeetingPrep {
     at: m.at,
     state,
     headline,
+    what,
     dealId: i.deal?.id ?? null,
     dealName: i.deal?.name ?? null,
     objective,

@@ -11,6 +11,25 @@ import { KIND_TEXT } from '@/lib/gap/work/commitment-model';
 import type { OpportunitiesView, ScopedCommitment, ScopedNeed } from '@/lib/gap/deals/opportunities';
 import { ObligationActions, SkippedAtClosure } from './obligation-actions';
 
+const STOP = new Set(['the', 'and', 'with', 'for', 'call', 'meeting', 'about', 'our', 'their']);
+const words = (s: string) => s.toLowerCase().split(/[^a-z0-9]+/).filter((w) => w.length >= 3 && !STOP.has(w));
+
+/**
+ * R63-B N10: HubSpot's next step, unless it is a meeting that was canceled ("HubSpot next step: Pilot scope call with
+ * Ann" sat beside "Canceled: Pilot scope"): a canceled meeting is not the next step.
+ */
+export function nextStepLine(nextStep: string | null | undefined, canceled: readonly string[] = []): { kind: 'next' | 'canceled' | 'none'; text: string } {
+  const step = (nextStep ?? '').trim();
+  if (!step) return { kind: 'none', text: 'HubSpot holds no next step on this deal.' };
+  const have = new Set(words(step));
+  const gone = canceled.find((w) => {
+    const ws = words(w);
+    return ws.length > 0 && ws.every((x) => have.has(x));
+  });
+  if (gone) return { kind: 'canceled', text: `HubSpot still lists "${step}" as the next step, but that meeting was canceled: there is no next step until it is rebooked or a new one is set.` };
+  return { kind: 'next', text: `HubSpot next step: ${step}` };
+}
+
 const day = (iso: string | null) => (iso ? new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' }) : null);
 const NEED_WORD: Record<string, string> = { current_state: 'How it runs today', business_problem: 'Problem', root_cause: 'Why it happens', impact: 'Impact', metric: 'A number they gave', priority: 'Priority', future_state: 'What good looks like', constraint: 'Requirement', objection: 'Objection' };
 
@@ -21,7 +40,7 @@ function Obligations({ items, testid }: { items: ScopedCommitment[]; testid: str
       {items.map((c) => (
         <li key={c.commitmentId} className="text-sm" data-testid={testid} data-commitment-id={c.commitmentId} data-phase={c.phase}>
           <p className="font-medium">
-            <span className="mr-1 text-xs font-normal text-[var(--muted-foreground)]">{KIND_TEXT[c.kind]}:</span>
+            <span className="mr-1 text-xs font-normal text-[var(--muted-foreground)]">{KIND_TEXT[c.kind]}:</span>{' '}
             {c.title}
           </p>
           <p className="text-xs text-[var(--muted-foreground)]">
@@ -55,7 +74,7 @@ function Needs({ items, testid }: { items: ScopedNeed[]; testid: string }) {
   );
 }
 
-export function DealOpportunities({ view, slots = {} }: { view: OpportunitiesView; slots?: Record<string, ReactNode> }) {
+export function DealOpportunities({ view, slots = {}, canceled = {} }: { view: OpportunitiesView; slots?: Record<string, ReactNode>; /** R63-B N10: each deal's canceled meetings (what they were). */ canceled?: Record<string, readonly string[]> }) {
   return (
     <section id="deal-workspace" className="space-y-3 rounded-md border border-[var(--border)] p-3 sm:p-4" data-testid="deal-opportunities" aria-labelledby="deal-opportunities-heading">
       <div>
@@ -67,11 +86,14 @@ export function DealOpportunities({ view, slots = {} }: { view: OpportunitiesVie
       {view.deals.map((d) => (
         <article key={d.dealId} id={`deal-${d.dealId}`} className="space-y-2 border-t border-[var(--border)] pt-3" data-testid="deal-opportunity" data-deal-id={d.dealId}>
           <h3 className="text-sm font-semibold" data-testid="deal-name">
-            {d.name ?? 'An unnamed HubSpot deal'}
-            <span className="ml-1 font-normal text-[var(--muted-foreground)]">· {d.stage ?? 'stage not given'}</span>
+            {d.name ?? 'An unnamed HubSpot deal'}{' '}
+            <span className="font-normal text-[var(--muted-foreground)]">· {d.stage ?? 'stage not given'}</span>
           </h3>
           <p className="text-xs" data-testid="deal-next-step">
-            {d.nextStep ? <>HubSpot next step: {d.nextStep}</> : <span className="text-[var(--muted-foreground)]">HubSpot holds no next step on this deal.</span>}
+            {(() => {
+              const n = nextStepLine(d.nextStep, canceled[d.dealId] ?? []);
+              return n.kind === 'next' ? n.text : <span className={n.kind === 'canceled' ? 'text-amber-700 dark:text-amber-400' : 'text-[var(--muted-foreground)]'} data-testid={n.kind === 'canceled' ? 'deal-next-step-canceled' : undefined}>{n.text}</span>;
+            })()}
             {d.closeDate ? <span className="text-[var(--muted-foreground)]"> · close date {day(d.closeDate)}</span> : null}
           </p>
           <p className="text-xs text-[var(--muted-foreground)]" data-testid="deal-contacts">

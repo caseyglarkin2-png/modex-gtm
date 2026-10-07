@@ -37,6 +37,7 @@ import { suggestedFamilyFor } from './propose-family';
 import { draftApproachFor, noOpeningLine } from './draft-approach';
 import type { EvidenceApproach } from '../research/approach-policy';
 import type { AccountStory, StoryRow, StorySentence, StoryTag } from './story';
+import { CANON_PROOF } from '../compiler/canon';
 
 export interface AnchorPerson {
   personaId: number | null;
@@ -154,8 +155,12 @@ export interface AnchorInput {
   now: Date;
 }
 
-/** The canon, as the compiler phrases it (compiler/canon.ts): measured and modeled, both clearly YardFlow's. */
-export const BEST_PROOF_MEASURED = 'Primo Brands: trailer turns 48 to 24 minutes, measured, with about 5% more volume through the same doors, observed; 24 sites live, 260 sites under contract.';
+/**
+ * The canon, as the compiler phrases it (compiler/canon.ts CANON_PROOF): measured and modeled, both clearly YardFlow's.
+ * R63-B N8: composed from the canon's phrases, one figure's qualifier per sentence, so each passes the compiler's
+ * nearest-qualifier rule.
+ */
+export const BEST_PROOF_MEASURED = `Primo Brands: ${CANON_PROOF.turnTime}. ${CANON_PROOF.volumeLift[0].toUpperCase()}${CANON_PROOF.volumeLift.slice(1)}. ${CANON_PROOF.committed}; ${CANON_PROOF.live}.`;
 export const BEST_PROOF_MODELED = 'Our model, not their number: about $1M per site a year, modeled.';
 
 const OPEN_STATUSES = new Set(['approved', 'active', 'confirmed', 'partially_confirmed']);

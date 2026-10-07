@@ -16,7 +16,7 @@ type PersonaHit = {
 };
 
 /**
- * Global compose FAB — visible on all internal pages, Ctrl+Shift+E.
+ * Global compose FAB: visible on the internal pages outside GAP, Ctrl+Shift+E.
  * On an /accounts/[slug] page it pre-fills account context. Anywhere
  * else it opens a recipient search so a cold compose can still pick a
  * real person without hand-typing an address.
@@ -83,7 +83,7 @@ export function GlobalComposeButton() {
           setHits(data.personas ?? []);
         }
       } catch {
-        // Aborted or transient — non-critical.
+        // Aborted or transient: non-critical.
       }
     }, 200);
     return () => {
@@ -114,7 +114,7 @@ export function GlobalComposeButton() {
       <Dialog open={pickerOpen} onOpenChange={setPickerOpen}>
         <DialogContent className="max-w-md">
           <DialogHeader>
-            <DialogTitle>Compose — pick a recipient</DialogTitle>
+            <DialogTitle>Compose: pick a recipient</DialogTitle>
           </DialogHeader>
           <div className="space-y-3">
             <div className="relative">
