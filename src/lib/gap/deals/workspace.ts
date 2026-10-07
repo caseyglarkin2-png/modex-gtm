@@ -6,6 +6,8 @@
  *                   step; the account-level rows labeled as such (deals/opportunities.ts over deals/scope.ts)
  *   meetings        R51: one preparation per meeting on record (the Meeting table; no new calendar connector), bound
  *                   to its deal; a canceled one prepares nothing (deals/meeting-prep.ts)
+ *   plans           R52: each deal's mutual action plan: agreed milestones (commitments), declined steps and GAP's
+ *                   proposals awaiting the seller's one review (deals/action-plan.ts)
  *
  * The deals themselves come from the account read (the opportunity resolver: HubSpot is the deal authority). Every
  * read here is soft: a failed read leaves its part empty and says so, never the page. Nothing here writes.
@@ -18,6 +20,8 @@ import { buildOpportunities, dealRefs, personIndex, bidScope, type Opportunities
 import { DEAL_OBJECTIVE, openQuestionsFor, unknownSectionsOfTypes, type BriefBidRow } from './deal-brief';
 import { ACCOUNT_LEVEL, type ScopeRead } from './scope';
 import { meetingDeal, meetingInstant, meetingState, prepareMeeting, type MeetingPrep } from './meeting-prep';
+import { planFor, type Milestone } from './action-plan';
+import { loadPlanDecisions } from './action-plan-store';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -29,6 +33,8 @@ export interface DealWorkspace {
   opportunities: OpportunitiesView;
   /** R51: the meetings to prepare (and the canceled ones, said as such), each bound to its deal or account-level. */
   meetings: MeetingPrep[];
+  /** R52: each open deal's plan, by deal id. */
+  plans: Record<string, Milestone[]>;
   /** The shared scope rule over this account's open deals, for the per-deal briefs. */
   scopeOfBid: (b: BriefBidRow) => ScopeRead;
   /** A part that could not be read, in words. */
@@ -69,11 +75,12 @@ export async function loadDealWorkspace(
       unread.push(what);
       return fallback;
     });
-  const [people, bidRows, meetingRows, objectiveRows] = await Promise.all([
+  const [people, bidRows, meetingRows, objectiveRows, planDecisions] = await Promise.all([
     soft(prisma.persona?.findMany ? prisma.persona.findMany({ where: { account_name: x.accountName }, select: { id: true, name: true, title: true, email: true, hubspot_contact_id: true }, take: 200 }) : null, [], 'the people at the account'),
     soft(prisma.buyerInputData?.findMany ? prisma.buyerInputData.findMany({ where: { account_name: x.accountName }, select: { id: true, type: true, raw_buyer_language: true, normalized_summary: true, contact_email: true, human_confirmed: true, supersedes_id: true, confirmed_at: true, captured_at: true, metadata: true } }) : null, [], 'what the buyer said'),
     soft(prisma.meeting?.findMany ? prisma.meeting.findMany({ where: { account_name: x.accountName }, select: { id: true, meeting_date: true, meeting_time: true, meeting_status: true, objective: true, persona: true, hubspot_deal_id: true, created_at: true, updated_at: true }, orderBy: { meeting_date: 'desc' }, take: 20 }) : null, [], 'the meetings on record'),
     soft(prisma.gapAuditEvent?.findMany ? prisma.gapAuditEvent.findMany({ where: { kind: DEAL_OBJECTIVE, subject_type: 'account', subject_id: x.accountName }, select: { payload: true }, orderBy: { created_at: 'desc' }, take: 1 }) : null, [], 'your learning objective'),
+    soft(x.deals.length ? loadPlanDecisions(prisma, x.accountName) : null, [], 'the plan decisions'),
   ]);
   const persons: OpportunityPerson[] = (people as Array<{ id: number; name: string | null; title: string | null; email: string | null; hubspot_contact_id: string | null }>).map((p) => ({ personaId: p.id, name: p.name ?? `person ${p.id}`, title: p.title ?? null, email: p.email ?? null, hubspotContactId: p.hubspot_contact_id ? String(p.hubspot_contact_id) : null }));
   type BidRow = { id: string; type: string; raw_buyer_language: string; normalized_summary: string | null; contact_email: string | null; human_confirmed: boolean; supersedes_id: string | null; confirmed_at: Date | string | null; captured_at: Date | string; metadata: unknown };
@@ -122,5 +129,6 @@ export async function loadDealWorkspace(
     );
   }
   meetings.sort((a, b) => String(a.at ?? '9999').localeCompare(String(b.at ?? '9999')));
-  return { accountName: x.accountName, opportunities, meetings, scopeOfBid: (b) => bidScope({ metadata: b.metadata, contactEmail: b.contact_email }, refs, personOf), unread };
+  const plans = Object.fromEntries(x.deals.map((d) => [d.id, planFor(d.id, x.commitments.filter((c) => c.dealId === d.id), planDecisions)]));
+  return { accountName: x.accountName, opportunities, meetings, plans, scopeOfBid: (b) => bidScope({ metadata: b.metadata, contactEmail: b.contact_email }, refs, personOf), unread };
 }

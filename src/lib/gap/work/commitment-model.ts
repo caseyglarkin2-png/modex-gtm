@@ -42,7 +42,7 @@ export type CommitmentKind = (typeof COMMITMENT_KINDS)[number];
 export const PROOF_KINDS = ['ledger', 'disposition', 'capture', 'bid', 'mailbox_sent', 'outcome', 'seller'] as const;
 export type ProofKind = (typeof PROOF_KINDS)[number];
 
-export const SOURCE_KINDS = ['bid', 'disposition', 'send', 'snooze', 'capture', 'reply', 'seller'] as const;
+export const SOURCE_KINDS = ['bid', 'disposition', 'send', 'snooze', 'capture', 'reply', 'seller', 'plan', 'deal'] as const;
 export type CommitmentSourceKind = (typeof SOURCE_KINDS)[number];
 
 export interface CommitmentPerson {
@@ -89,7 +89,22 @@ export interface Commitment {
   /** What created it; the commitment id is derived from this, so the same source can never make a second one. */
   source: { kind: CommitmentSourceKind; id: string };
   /** Facts the surfaces need: the follow-up step and card, whether a copy family exists for it, an ambiguous date. */
-  detail: { stepIndex?: number; decisionId?: string; noFollowUpCopy?: boolean; ambiguousDate?: string; meetingAt?: string; sentAt?: string } | null;
+  detail: {
+    stepIndex?: number;
+    decisionId?: string;
+    noFollowUpCopy?: boolean;
+    ambiguousDate?: string;
+    meetingAt?: string;
+    sentAt?: string;
+    /** R52: a mutual-action-plan milestone (deals/action-plan.ts): which step, what proves it, what it follows. */
+    milestone?: string;
+    proofNeeded?: string;
+    after?: string | null;
+    /** R52: who on the buyer's side is responsible, when it is theirs. */
+    responsible?: { side: 'buyer' | 'seller'; name: string | null } | null;
+    /** R52: the buyer agreed to this step: who and on which day, as the seller recorded it (never inferred). */
+    buyerAgreed?: { by: string; on: string } | null;
+  } | null;
   createdAt: string;
   createdBy: string;
   updatedAt: string;
@@ -167,6 +182,8 @@ export function commitmentPhase(c: Commitment, now: Date, buyerMovedSince: Buyer
     }
     return { ...base, phase: 'waiting', line: `Waiting${c.dependency ? ` on ${c.dependency}` : ''}${when ? `; ${c.kind === 'follow_up' ? 'follow up' : 'due'} ${when}` : ''}.` };
   }
+  // R52: a plan milestone with no agreed date is upcoming, never "due now": an unknown field is not an admin task.
+  if (c.detail?.milestone && !c.dueAt) return { ...base, phase: 'upcoming', line: 'No date agreed yet.' };
   // open
   if (dueNow) return { ...base, phase: 'due', line: c.dueAt ? (when === 'today' ? 'Due today.' : `Overdue since ${when}.`) : 'Due now.' };
   return { ...base, phase: 'upcoming', line: `Due ${when}.` };

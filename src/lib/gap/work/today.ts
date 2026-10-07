@@ -49,7 +49,8 @@ export function todaySummary(i: {
   const tomorrowMorning = new Date(nyDayAt(addDays(tomorrowDay, 1), 0).getTime() - 60_000);
   const open = i.commitments.filter((c) => !TERMINAL_STATUSES.includes(c.status));
   const owed = open
-    .filter(isBuyerCommitment)
+    // R52: a plan milestone with no agreed date lives in the deal's plan, never in a daily list.
+    .filter((c) => isBuyerCommitment(c) && !(c.detail?.milestone && !c.dueAt))
     .map((c) => ({ c, p: commitmentPhase(c, i.now, i.moved) }))
     .sort((a, b) => String(a.c.dueAt ?? '9999').localeCompare(String(b.c.dueAt ?? '9999')))
     .map(({ c, p }) => ({ commitmentId: c.commitmentId, accountName: c.accountName, title: c.title, line: p.line }));

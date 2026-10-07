@@ -281,6 +281,29 @@ export async function transitionCommitment(prisma: PrismaLike, input: Transition
   });
 }
 
+/**
+ * R52: amend what a commitment carries (its title, due time or detail) without changing its status: a new snapshot row
+ * under the same lock. Terminal records refuse it, as every transition does.
+ */
+export async function amendCommitment(
+  prisma: PrismaLike,
+  input: { commitmentId: string; title?: string | null; dueAt?: string | Date | null; detail?: Partial<NonNullable<Commitment['detail']>>; actor: string; now: Date },
+): Promise<TransitionResult> {
+  const title = input.title === undefined || input.title === null ? undefined : clip(input.title, 10_000);
+  if (title !== undefined && !title) return { ok: false, reason: 'title_required' };
+  if (title && title.length > TITLE_MAX) return { ok: false, reason: 'title_too_long' };
+  const dueAt = input.dueAt === undefined ? undefined : iso(input.dueAt);
+  if (input.dueAt && !dueAt) return { ok: false, reason: 'bad_due' };
+  return locked(prisma, input.commitmentId, async (tx) => {
+    const c = foldCommitments(await rowsOf(tx, input.commitmentId)).get(input.commitmentId);
+    if (!c) return { ok: false as const, reason: 'not_found' as const };
+    if (TERMINAL_STATUSES.includes(c.status)) return { ok: false as const, reason: 'terminal' as const, status: c.status };
+    const next: Commitment = { ...c, ...(title ? { title } : {}), ...(dueAt !== undefined ? { dueAt } : {}), detail: input.detail ? { ...(c.detail ?? {}), ...input.detail } : c.detail, updatedAt: input.now.toISOString(), updatedBy: input.actor };
+    await write(tx, input.actor, next, 'status');
+    return { ok: true as const, commitment: next };
+  });
+}
+
 /** One commitment by id (its newest snapshot), or null. */
 export async function loadCommitment(prisma: PrismaLike, commitmentId: string): Promise<Commitment | null> {
   if (typeof prisma?.gapAuditEvent?.findMany !== 'function') return null;

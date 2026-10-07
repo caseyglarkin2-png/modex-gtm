@@ -480,6 +480,8 @@ export function workDay(i: WorkInput): WorkDay {
       continue;
     }
     if (p.phase !== 'due') {
+      // R52: a plan milestone with no agreed date lives in the deal's plan, never in Waiting (an unknown is no task).
+      if (c.detail?.milestone && !c.dueAt) continue;
       waiting.push({ key: c.commitmentId, accountName: c.accountName, kind: c.kind, title: c.title, line: p.line, dueDay: p.dueDay, commitmentId: c.commitmentId });
       continue;
     }

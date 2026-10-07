@@ -26,6 +26,7 @@ import { loadDealBrief } from '@/lib/gap/deals/deal-brief';
 import { DealBriefView } from '@/components/gap/deal-brief';
 import { DealOpportunities } from '@/components/gap/deal-opportunities';
 import { MeetingPrepView } from '@/components/gap/meeting-prep';
+import { DealPlan } from '@/components/gap/deal-plan';
 import { loadAccountDealWorkspace } from '@/lib/gap/deals/workspace';
 import { commitmentScope, dealRefs, personIndex } from '@/lib/gap/deals/opportunities';
 import { loadAccountSources } from '@/lib/gap/sources/account-sources';
@@ -209,7 +210,13 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
       const meetingSlots: Record<string, React.ReactNode> = {};
       for (const d of workspace?.opportunities.deals ?? []) {
         const own = (workspace?.meetings ?? []).filter((m) => m.dealId === d.dealId);
-        if (own.length) meetingSlots[d.dealId] = <div className="space-y-2">{own.map((m) => <MeetingPrepView key={m.meetingId} prep={m} />)}</div>;
+        // R51 / R52: the deal's meetings, then its mutual action plan (agreed milestones and the proposals to review).
+        meetingSlots[d.dealId] = (
+          <div className="space-y-2">
+            {own.map((m) => <MeetingPrepView key={m.meetingId} prep={m} />)}
+            {workspace?.plans[d.dealId] ? <DealPlan accountName={brief.accountName} dealId={d.dealId} plan={workspace.plans[d.dealId]} /> : null}
+          </div>
+        );
       }
       const accountMeetings = (workspace?.meetings ?? []).filter((m) => !m.dealId);
       return (

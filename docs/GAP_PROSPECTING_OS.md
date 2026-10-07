@@ -1415,6 +1415,31 @@ the pilot deal. Adjacent: 13 files / 125 green; typecheck clean. Rollback: rever
 Debt: attendees are the row's free text (no calendar attendee list); a meeting's history (the old time of a moved
 meeting) is not kept, only its current row.
 
+R52 **A practical mutual action plan (DONE).** NEW `deals/action-plan.ts` (pure) + `deals/action-plan-store.ts` +
+`POST/GET /api/gap/deals/plan` + `components/gap/deal-plan.tsx`, inside each deal on the account BRIEF. A milestone
+IS an R40 commitment scoped to the deal (kind `deal_step`, the deal's id, source `plan:<dealId>:<step>`, one-shot: a
+second agreement makes no second record): the next milestone, the responsible person (the seller, or someone on the
+buyer's side: theirs waits on them and becomes due on its day), the due day, what it follows and what proves it done
+(`detail.milestone / proofNeeded / after / responsible`). GAP proposes the five standard steps (discovery, site
+validation, pilot, stakeholder alignment, procurement); a proposal is NOT a commitment and never Work, and the seller
+reviews them in ONE press (keep with edits, or decline; each answered on its own, one refusal never blocking the
+others; R44's review shape). A declined step is an append-only `deal.plan_decision` row and is not proposed again; an
+agreed step cannot be declined. Unknown fields create no administrative task: an agreed milestone with no date reads
+"No date agreed yet" (`commitmentPhase` now says upcoming, never due now), stays out of Work, Waiting and Today's
+"owed" (it lives in the plan), and "Who: not set" asks nothing. The buyer's agreement is ALWAYS shown and never
+fabricated: "Buyer agreement: not recorded" until the seller names who on their side agreed and the day (in the
+review, or later through `op: buyer_agreed`, only on a milestone); agreeing in the review is the seller's agreement,
+not the buyer's. `work/commitments.ts` gains `amendCommitment` (a new snapshot of title, due or detail, same lock,
+terminal refused); `SOURCE_KINDS` gains `plan` and `deal`. Proof: `action-plan.test.tsx` (7: five proposals and no task;
+one review agreeing, editing, declining and refusing a malformed buyer agreement; one record per step, no decline
+after agreement, a declined step stays declined; an undated milestone never due, never in Waiting or owed, a dated one
+deal work on its day; the buyer's agreement recorded later, only on a milestone; the real route; the view); six
+deliberate mutations (the seller's agreement read as the buyer's, an undated milestone due now, an undated milestone
+in Waiting, a declined step proposed again, agreeing twice making a second record, an agreed step declined) each turn
+it red. Adjacent: 12 files / 109 green; typecheck clean. Rollback: revert the commit (agreed milestones stay ordinary
+deal-step commitments; decision rows go inert). Debt: the standard steps are one fixed list (no per-deal template);
+the plan is not mirrored to HubSpot (R54 proposes notes and fields, never a plan object).
+
 ## 12. Migration, backfill and rollback
 
 Order of commits inside Sprint 1 and 3: schema + SQL first (no reader), then pure core, then importers (Top100 before PIC before modex legacy), then runtime pin, then services, then queue actions under the flag, then `GAP_OS_ENABLED=true` in Vercel after `verify-triggers.ts` passes against prod (env is snapshot at deploy; redeploy after setting). Before the prod `db push`, preview it with `prisma migrate diff --from-url <prod> --to-schema-datamodel prisma/schema.prisma --script` and confirm the script is additive only; also confirm the prod role can `CREATE FUNCTION` (not yet verified). Rollback: the flag off restores byte-identical behavior instantly; full removal is the rollback SQL plus reverting the runtime, service and queue-action commits; `sequences` is never modified; the only two pre-existing tables GAP OS's schema touches at all are `draft_queue_items` (one nullable `sequence_version_id` stamp, S1-T2) and `inbound_messages` (`source String @default("gmail")` and `hubspot_engagement_id String?`, S2-T1, needed so the reply cron and the HubSpot poller can tell a Gmail-sourced row from a HubSpot-engagement-sourced one and attribute the engagement id idempotently) — both additive-only, both confirmed by the production preflight below; the lane and PIC files are read, never written.

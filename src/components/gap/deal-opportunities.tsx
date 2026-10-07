@@ -79,7 +79,8 @@ export function DealOpportunities({ view, slots = {} }: { view: OpportunitiesVie
           </p>
           <div>
             <h4 className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">This deal&apos;s obligations</h4>
-            <Obligations items={d.commitments} testid="deal-obligation" />
+            {/* R52: the plan's milestones are listed in the plan, never twice. */}
+            <Obligations items={d.commitments.filter((c) => c.source.kind !== 'plan')} testid="deal-obligation" />
           </div>
           <div>
             <h4 className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">What they said on this deal</h4>
