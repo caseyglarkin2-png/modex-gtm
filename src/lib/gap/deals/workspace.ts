@@ -29,7 +29,7 @@ import { planFor, type Milestone } from './action-plan';
 import { loadPlanDecisions } from './action-plan-store';
 import { nextArtifact, prepareArtifacts, type PreparedArtifact } from './artifacts';
 import { crmCandidates, type CrmChange, type CrmOrigin, type CrmSyncItem } from './crm-model';
-import { loadCrmSync } from './crm-sync';
+import { loadCrmSync } from '../crm-sync';
 import { stalledSignals } from './stalled';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

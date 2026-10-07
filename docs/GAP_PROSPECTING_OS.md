@@ -1470,7 +1470,9 @@ R54 **Bounded, recoverable CRM sync (DONE; HubSpot writes stay OFF in production
 HubSpot WRITE path is `hubspot-mirror.ts` (automatic hypothesis and disposition notes and two GAP properties, behind
 GAP_OS_ENABLED + GAP_HUBSPOT_MIRROR_ENABLED + HUBSPOT_SYNC_ENABLED, idempotent through `gap_hubspot_mirror`); that
 already-authorized automatic logging is reused unchanged and nothing new is automatic. NEW `deals/crm-model.ts` (pure),
-`deals/crm-sync.ts` (the store), `deals/crm-writer.ts` (the SDK writer), `POST/GET /api/gap/crm-sync` and
+`crm-sync.ts` (the store) and `crm-writer.ts` (the SDK writer, beside the mirror and gated by the same flag: the deals
+surface stays write-free and the mirror stays deal-free, both existing structural contracts kept and the writer
+pinned never to touch a stage, pipeline or lifecycle), `POST/GET /api/gap/crm-sync` and
 `components/gap/crm-sync.tsx`, inside each deal on the account BRIEF: any OTHER HubSpot change GAP would make (the
 agreed recap as a deal note, a task per open seller obligation on the deal, at most three, and the deal's next step
 from the plan's next agreed milestone when it differs) is shown EXACTLY as HubSpot would hold it, with its origin, and

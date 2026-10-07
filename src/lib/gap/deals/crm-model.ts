@@ -1,7 +1,7 @@
 /**
  * BOUNDED, RECOVERABLE CRM SYNC, the model (GAP OS execution recovery, R54, 2026-10-06). Pure and client-safe.
  *
- * HubSpot stays the deal authority. GAP's already-authorized automatic activity logging (hubspot-mirror.ts: the
+ * HubSpot stays the deal authority. GAP's already-authorized automatic activity logging (the mirror module: the
  * hypothesis and disposition notes, behind GAP_HUBSPOT_MIRROR_ENABLED) is unchanged. Anything ELSE GAP would put in
  * HubSpot (a deal note, a deal task, a deal field) is a PROPOSAL the seller sees exactly, then approves with one
  * explicit click: an append-only `crm.sync_proposed` -> `crm.sync_approved` pair, recorded whether or not the write may

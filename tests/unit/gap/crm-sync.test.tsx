@@ -9,9 +9,9 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { NextRequest } from 'next/server';
 import { ledgerDb } from './fixtures/ledger-db';
-import { approveCrmChange, discardCrmChange, loadCrmSync, proposeCrmChange, crmWritesEnabled } from '@/lib/gap/deals/crm-sync';
+import { approveCrmChange, discardCrmChange, loadCrmSync, proposeCrmChange, crmWritesEnabled } from '@/lib/gap/crm-sync';
 import { changeText, crmCandidates, crmStateLine, externalIdFor, proposalIdFor, type CrmChange, type CrmOrigin } from '@/lib/gap/deals/crm-model';
-import type { CrmWriter } from '@/lib/gap/deals/crm-writer';
+import type { CrmWriter } from '@/lib/gap/crm-writer';
 import { ensureCommitment, loadCommitment, transitionCommitment } from '@/lib/gap/work/commitments';
 import { CrmSyncPanel } from '@/components/gap/crm-sync';
 
@@ -25,7 +25,6 @@ const ACTOR = 'casey@freightroll.com';
 const ACCOUNT = 'Kroger Scratch Co';
 const DEAL = '70001';
 const ON = () => ({ ok: true as const });
-const OFF = () => ({ ok: false as const, reason: 'GAP_HUBSPOT_MIRROR_ENABLED is off' });
 const ALLOW = () => undefined;
 
 /** A controlled HubSpot (the external boundary): records every call, can fail, can lose the answer after a write. */
@@ -218,6 +217,19 @@ describe('a proposal, an explicit approval, and the write only when allowed (R54
     expect(r.ok && r.item.state).toBe('failed');
     expect((await loadCommitment(db.client(), cid))?.status).toBe('done');
     expect((await loadCrmSync(db.client(), ACCOUNT))[0].change).toEqual(task);
+  });
+});
+
+describe('the write path stays bounded (R54)', () => {
+  it('the writer never touches a deal stage, pipeline or lifecycle; the only proposable field is the next step; the mirror and the deals surface stay as they were', async () => {
+    const fs = await import('node:fs');
+    const path = await import('node:path');
+    const src = (f: string) => fs.readFileSync(path.join(process.cwd(), f), 'utf8');
+    expect(src('src/lib/gap/crm-writer.ts')).not.toMatch(/dealstage|hs_pipeline|lifecyclestage|hs_is_closed/i);
+    const { CRM_DEAL_PROPERTIES } = await import('@/lib/gap/deals/crm-model');
+    expect(CRM_DEAL_PROPERTIES).toEqual(['hs_next_step']);
+    expect(src('src/lib/gap/hubspot-mirror.ts')).not.toMatch(/crm-writer|crm-sync/);
+    for (const f of fs.readdirSync(path.join(process.cwd(), 'src/lib/gap/deals'))) expect(src(`src/lib/gap/deals/${f}`), f).not.toMatch(/crm-writer|getHubSpotClient|basicApi\.(create|update)/);
   });
 });
 

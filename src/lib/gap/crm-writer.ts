@@ -1,6 +1,9 @@
 /**
  * THE HUBSPOT WRITER FOR APPROVED CRM CHANGES (GAP OS execution recovery, R54, 2026-10-06). Server only. Called ONLY
- * by deals/crm-sync.ts after an explicit approval and with GAP_HUBSPOT_MIRROR_ENABLED on (off in production). Every
+ * by lib/gap/crm-sync.ts after an explicit approval and with GAP_HUBSPOT_MIRROR_ENABLED on (off in production). It sits
+ * beside the automatic mirror, never inside it: the mirror stays deal-free (its structural contract), the deals
+ * surface stays write-free (its own), and this writer never touches a deal's stage, pipeline or lifecycle (the only
+ * field it is ever asked to change is the allowlisted next step; pinned by tests/unit/gap/crm-sync.test.tsx). Every
  * method throws on failure (the caller records it). Reads first: a note or task is searched for by its external id
  * before one is created (a write whose answer was lost is found, never duplicated); a deal field is read with its
  * history before it is changed (a newer human value is never overwritten).

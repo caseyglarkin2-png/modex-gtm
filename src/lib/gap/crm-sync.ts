@@ -1,6 +1,6 @@
 /**
  * BOUNDED, RECOVERABLE CRM SYNC, the store (GAP OS execution recovery, R54, 2026-10-06). Server only. The model and the
- * states are in ./crm-model.ts; the HubSpot calls in ./crm-writer.ts.
+ * states are in ./deals/crm-model.ts; the HubSpot calls in ./crm-writer.ts (beside the automatic mirror, the same flag).
  *
  * Storage: the append-only ledger (`gapAuditEvent`, subject `crm_sync` / the proposal id, the account in every
  * payload) and the mirror's idempotency table (`gapHubSpotMirror`, key `gap:crm:<proposal id>`, the same row encoding
@@ -21,7 +21,7 @@
  */
 import { HUBSPOT_SYNC_ENABLED } from '@/lib/feature-flags';
 import { assertExternalWriteAllowed } from '@/lib/enrichment/external-write-guard';
-import { gapFlag, isGapOsEnabled } from '../flags';
+import { gapFlag, isGapOsEnabled } from './flags';
 import {
   CRM_APPROVED,
   CRM_ATTEMPT,
@@ -40,7 +40,7 @@ import {
   type CrmProposal,
   type CrmRow,
   type CrmSyncItem,
-} from './crm-model';
+} from './deals/crm-model';
 import type { CrmWriter } from './crm-writer';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

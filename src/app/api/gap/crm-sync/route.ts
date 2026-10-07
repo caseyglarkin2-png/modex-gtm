@@ -10,13 +10,13 @@
  *
  * GAP OS execution recovery, R54 (2026-10-06). Session only. A change targets one HubSpot deal by id: a note, a task
  * or the deal's next step, nothing else; its origin must be a record GAP holds for that deal (an obligation, a plan
- * milestone, the recap). lib/gap/deals/crm-sync.ts owns the states. 200 answered; 404 unknown; 409 refused; 400 bad.
+ * milestone, the recap). lib/gap/crm-sync.ts owns the states; lib/gap/crm-writer.ts makes the approved write. 200 answered; 404 unknown; 409 refused; 400 bad.
  */
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 import { badBody, intakeGuard } from '@/lib/gap/intake/route-helpers';
-import { approveCrmChange, discardCrmChange, loadCrmSync, proposeCrmChange } from '@/lib/gap/deals/crm-sync';
+import { approveCrmChange, discardCrmChange, loadCrmSync, proposeCrmChange } from '@/lib/gap/crm-sync';
 import { CRM_DEAL_PROPERTIES } from '@/lib/gap/deals/crm-model';
 import { loadCommitment } from '@/lib/gap/work/commitments';
 
