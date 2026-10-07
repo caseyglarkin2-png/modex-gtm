@@ -1771,18 +1771,34 @@ the scratch corpus with the HubSpot stub), headless Chrome, 30 navigations per c
 browser profile for every navigation: empty memory caches, no asset cache) and warm (one server, primed twice, then 30
 navigations). Local reads are loopback and hide the cost production pays per round trip (Vercel iad1 to the us-west2
 database, the HubSpot API), so each warm condition was also measured through two counting proxies that add 66 ms per
-database round trip and 150 ms per HubSpot call, with the statements of one navigation logged (Postgres protocol) to
-find the serial chains. Fixed, each with focused tests and a deliberate mutation that turned its owning test red:
-- 19c0c20e, an in-place action showed its result after 13.9 s: on the account page, router.refresh() fetched the new page in about 200 ms but the browser showed it only on the next React update anywhere (the notification bell's 15 s poll; with the poll held, never; Work committed the same refresh in 119 ms). Every GAP refresh now announces itself and the GAP layout's nudge updates over the next seconds: a recorded reply's NEXT now moves at 236 ms (poll held). Two experiments ruled out the account page's streamed boundary and the links' pending status; the framework cause is DEBT (named in refresh-now.tsx), the wait itself is fixed.
-- 11dd56f0, the account page's reads in series and repeated: owner resolution read the account row first and the people-dependent reads one after another (about nine round trips in series), the send gate and its copy check waited for every other pursuit read, the copy families were asked twice per page (the queue and the pursuit read), the employment context twice per request, the deal-state reconciliation blocked the page, and an account-scoped card read pulled every account's routing decisions. Now: name-only reads start with the account row, the people-dependent reads run together, the send gate starts first, the copy families are asked once a minute per shape and per database client, the employment context once per request, the decisions read is scoped to the account, and the reconciliation runs beside the page's reads (the obligations wait for it).
-- 31addc8d, two more chains: a contact's employment asks the people, their enrichments and their confirmed answers at once (three in series, twice per view), and the HubSpot identity asks the company read and the domain search at once (judged in the same order, so the reason given never changes).
-Result: the account page's full page under production-like latency went from p50 4,503 / p90 5,533 ms to p50 2,950 / p90 3,005 ms (Fedex) and from p50 5,003 / p90 5,553 ms to p50 2,480 / p90 2,993 ms (100 people); its serial database waves from 56 to 31 (one navigation's statement log, before the last commit). The decision (the account's state and NEXT from the remembered summary, UX-14) is on screen at p50 319 to 326 ms before the full page arrives. Work stays at p50 398 / p90 916 ms (its two-minute read).
+database round trip and 150 ms per HubSpot call, with one navigation's statements logged (Postgres protocol) to find
+the serial chains; Work's two-minute read, rebuilt (`?fresh=1`), was timed with curl through the same proxies.
+Fixed, each with focused tests and a deliberate mutation that turned its owning test red:
+- 19c0c20e, an in-place action showed its result after 13.9 s: on the account page, router.refresh() fetched the new page in about 200 ms but the browser showed it only on the next React update anywhere (the notification bell's 15 s poll; with the poll held, never; Work committed the same refresh in 119 ms). Every GAP refresh now announces itself and the GAP layout's nudge updates over the next seconds: a recorded reply's NEXT moves at 236 ms (poll held). Two experiments ruled out the account page's streamed boundary and the links' pending status; the framework cause is DEBT (named in refresh-now.tsx), the wait itself is fixed.
+- 11dd56f0 and 31addc8d, the account page's reads in series and repeated: owner resolution read the account row first and its people-dependent reads one after another, the send gate and its copy check waited for every other pursuit read, the copy families were asked twice per page, the employment context twice per request, the deal-state reconciliation blocked the page, an account-scoped card read pulled every account's routing decisions, a contact's employment read its three tables in series, and the HubSpot identity asked the company read and the domain search in series. Now they start together or are read once, the decisions read is scoped to the account, and the reconciliation runs beside the page (the obligations wait for it). 0ce5b99c corrected one of them: a minute-long copy-family cache kept "not installed" after a family was restored (the copy-readiness scratch test caught it); the answer is now kept for one request only.
+- 64ede221, 2d3d3944, 303092ca, 31c44d1f, Work's two-minute read, rebuilt: 67.6 s under production-like latency on the corpus (209 accounts): the send gate was read once per Work account, one after another (about 180 reads, 40 s); up to twenty cards' next touches were evaluated one after another (about twenty round trips each, 20 s), each asking its seven stop-rule reads in series; the reply holds were read one account after another; and the follow-up sweep, on Work's path once a minute per instance, opened a locked transaction per recent send only to find its follow-up on record. Now: one send-gate read for every Work account, the next touches five at a time (the production pool's width) with their stop reads together (judged in the original order, so a stop found earlier still wins), the reply holds five at a time, and the sweep writes only what is new. A rebuilt read takes 10.5 to 12.6 s (first 17.8 s); a cached Work load 0.39 to 0.68 s.
+Result, the baseline and final builds measured back to back (the same proxies, the same corpus, the same hour): the corpus account's full page p50 5,183 ms to 3,137 ms and p90 6,182 ms to 3,629 ms; the 100-person account's p50 5,177 ms to 3,114 ms and p90 6,219 ms to 3,718 ms; warm Work unchanged (p50 1,012 ms and 1,016 ms, served from its two-minute read). The serial database waves of one corpus account view went from 56 to 30 and its executions from 147 to 95. Runs taken hours apart drift with the machine (local warm first content 132 ms at the start, 222 ms at the end), so the back-to-back pair is the comparison; every run is below with its raw values.
 The principles, checked:
-- Useful content first, decision-critical before secondary: the account's state and NEXT are on screen at about a third of a second (the remembered summary), its full page follows; Work's cards arrive with the page.
-- No repeated expensive reads where durable state exists: CHANGED as above (copy families, employment context, the account's routing decisions). The account row is still read by several loaders with different fields (nine reads, one wave each but in parallel): named, not on the critical path.
-- No busy UI over bookkeeping: CHANGED (the deal-state reconciliation off the page's path; the stalled refresh). The summary write after a render is not awaited. Work's closed-deal sweep is still awaited but bounded (five accounts, once per five minutes per instance): named.
-- No freshness recomputation of unchanged facts in a normal session: CHANGED for the seeded copy families (a minute). HubSpot deal truth is read live on every account view by design (every gate depends on it).
-- PARTIAL, dependency (the platform): a cold first byte is 1.47 s on the sign-in page (no session, no database) against 1.62 to 1.71 s on GAP's pages, so a cold start is the server starting (module loading), not GAP's reads; it needs a platform-level change (bundle size or warm instances), not a read fix. And the Prisma engine checks each idle pooled connection with a SELECT 1 before reuse (29 per account view, one round trip each); it is the engine's own behavior, not configurable from GAP.
+- Useful content first, decision-critical before secondary: the account's state and NEXT are on screen at about a third of a second (the remembered summary, UX-14), its full page follows; Work's cards arrive with the page from its two-minute read.
+- No repeated expensive reads where durable state exists: CHANGED as above (the send gate per account, the copy families, the employment context, the account's routing decisions). The account row is still read by several loaders with different fields (in parallel, off the critical path): named.
+- No busy UI over bookkeeping: CHANGED (the stalled refresh; the deal-state reconciliation off the account page's path; the follow-up sweep's needless locked transactions). The summary write after a render is not awaited. Work's closed-deal sweep is still awaited but bounded (five accounts, once per five minutes per instance): named.
+- No freshness recomputation of unchanged facts in a normal session: CHANGED for the follow-up sweep (nothing written when nothing changed). HubSpot deal truth is read live on every account view by design (every gate depends on it).
+- PARTIAL, dependency (the platform): a cold first byte is 1.47 s on the sign-in page (no session, no database) against 1.62 to 1.71 s on GAP's pages, so a cold start is the server starting (module loading), not GAP's reads; it needs a platform-level change (bundle size or warm instances). The Prisma engine checks each idle pooled connection with a SELECT 1 before reuse (29 per account view, one round trip each); it is the engine's own behavior, not configurable from GAP.
+- PARTIAL, dependency (the next pass on the routing inputs): Work's rebuilt read is still 10.5 to 12.6 s under production-like latency; most of it is each card's send history and meeting state (routing/inputs.ts readComms and execution/person-history.ts, about ten reads in series per card, shared with the routing rules). Making those concurrent touches the safety-critical routing inputs and needs its own reviewed change.
+
+The comparison to read first: the baseline build (19c0c20e, before the read fixes) and the final build (31c44d1f), measured back to back through the same production-like proxies (the database 66 ms and HubSpot 150 ms per round trip), so machine drift cancels (n = 30 per account, 20 for Work):
+  - warm a corpus account (Fedex), decision: before: p50 311, p90 409, max 419; after: p50 310, p90 407, max 431.
+  - warm a corpus account (Fedex), the page arrived: before: p50 5001, p90 5944, max 6572; after: p50 3031, p90 3540, max 3850.
+  - warm a corpus account (Fedex), full page: before: p50 5183, p90 6182, max 7138; after: p50 3137, p90 3629, max 4120.
+  - warm a corpus account (Fedex), database round trips: before: p50 157, p90 197, max 222; after: p50 148, p90 178, max 221.
+  - warm the 100-person account (Nfi), decision: before: p50 325, p90 415, max 493; after: p50 329, p90 412, max 420.
+  - warm the 100-person account (Nfi), the page arrived: before: p50 5029, p90 6130, max 6358; after: p50 3021, p90 3495, max 3694.
+  - warm the 100-person account (Nfi), full page: before: p50 5177, p90 6219, max 6727; after: p50 3114, p90 3718, max 4099.
+  - warm the 100-person account (Nfi), database round trips: before: p50 154, p90 196, max 208; after: p50 152, p90 184, max 195.
+  - warm Work, decision: before: p50 1012, p90 1050, max 4677; after: p50 1017, p90 1037, max 1540.
+  - warm Work, the page arrived: before: p50 528, p90 685, max 4082; after: p50 525, p90 710, max 1082.
+  - warm Work, full page: before: p50 1013, p90 1050, max 4678; after: p50 1018, p90 1037, max 1541.
+  - warm Work, database round trips: before: p50 19, p90 161, max 169; after: p50 17, p90 166, max 172.
 
 Percentiles (ms from the navigation start; n = 30 per condition; "decision" is the move on screen: Work's first card, an account's NEXT from the remembered summary or the full page; "full" is the full page: Work's list, the account's own NEXT):
 - Local (loopback database and HubSpot stub):
@@ -1804,19 +1820,47 @@ Percentiles (ms from the navigation start; n = 30 per condition; "decision" is t
   - cold the 100-person account (Nfi), first byte: before: p50 1708, p90 1742, max 1756; after: p50 1686, p90 1729, max 1737.
   - cold the 100-person account (Nfi), decision: before: p50 2001, p90 2049, max 2121; after: p50 1966, p90 2096, max 2129.
   - cold the 100-person account (Nfi), full page: before: p50 2613, p90 2654, max 2662; after: p50 2579, p90 2641, max 2642.
-- Production-like (the database 66 ms and HubSpot 150 ms per round trip, through counting proxies):
-  - warm Work, decision: before: p50 404, p90 932, max 938; after: p50 398, p90 916, max 945.
-  - warm Work, full page: before: p50 404, p90 932, max 939; after: p50 399, p90 916, max 945.
-  - warm Work, database round trips: before: p50 16, p90 109, max 112; after: p50 12, p90 17, max 17.
-  - warm a corpus account (Fedex), decision: before: p50 230, p90 413, max 421; after: p50 319, p90 406, max 415.
-  - warm a corpus account (Fedex), full page: before: p50 4503, p90 5533, max 6034; after: p50 2950, p90 3005, max 3497.
-  - warm a corpus account (Fedex), database round trips: before: p50 144, p90 188, max 190; after: p50 143, p90 171, max 194.
-  - warm the 100-person account (Nfi), decision: before: p50 399, p90 421, max 423; after: p50 326, p90 416, max 428.
-  - warm the 100-person account (Nfi), full page: before: p50 5003, p90 5553, max 6044; after: p50 2480, p90 2993, max 3011.
-  - warm the 100-person account (Nfi), database round trips: before: p50 153, p90 182, max 198; after: p50 142, p90 167, max 187.
+- Production-like (the database 66 ms and HubSpot 150 ms per round trip, through counting proxies); "after" is the build with the account-page fixes (0ce5b99c):
+  - warm Work, decision: before: p50 404, p90 932, max 938; after: p50 913, p90 949, max 3474.
+  - warm Work, full page: before: p50 404, p90 932, max 939; after: p50 914, p90 949, max 3474.
+  - warm Work, database round trips: before: p50 16, p90 109, max 112; after: p50 18, p90 160, max 170.
+  - warm a corpus account (Fedex), decision: before: p50 230, p90 413, max 421; after: p50 406, p90 425, max 426.
+  - warm a corpus account (Fedex), full page: before: p50 4503, p90 5533, max 6034; after: p50 2976, p90 3497, max 3983.
+  - warm a corpus account (Fedex), database round trips: before: p50 144, p90 188, max 190; after: p50 151, p90 186, max 208.
+  - warm the 100-person account (Nfi), decision: before: p50 399, p90 421, max 423; after: p50 337, p90 417, max 425.
+  - warm the 100-person account (Nfi), full page: before: p50 5003, p90 5553, max 6044; after: p50 2959, p90 3493, max 3534.
+  - warm the 100-person account (Nfi), database round trips: before: p50 153, p90 182, max 198; after: p50 155, p90 176, max 199.
+- Production-like, the final build (31c44d1f, every R61 fix); measured last, on a slower machine (local warm first content 222 ms against 132 ms at the start), so compare its serial waves rather than its milliseconds:
+  - warm Work, decision: before: p50 404, p90 932, max 938; after: p50 1039, p90 1146, max 1535.
+  - warm Work, full page: before: p50 404, p90 932, max 939; after: p50 1041, p90 1146, max 1535.
+  - warm Work, database round trips: before: p50 16, p90 109, max 112; after: p50 17, p90 165, max 169.
+  - warm a corpus account (Fedex), decision: before: p50 230, p90 413, max 421; after: p50 375, p90 414, max 543.
+  - warm a corpus account (Fedex), full page: before: p50 4503, p90 5533, max 6034; after: p50 3575, p90 4090, max 4101.
+  - warm a corpus account (Fedex), database round trips: before: p50 144, p90 188, max 190; after: p50 152, p90 183, max 221.
+  - warm the 100-person account (Nfi), decision: before: p50 399, p90 421, max 423; after: p50 374, p90 416, max 531.
+  - warm the 100-person account (Nfi), full page: before: p50 5003, p90 5553, max 6044; after: p50 3572, p90 4102, max 4116.
+  - warm the 100-person account (Nfi), database round trips: before: p50 153, p90 182, max 198; after: p50 152, p90 185, max 201.
 - The cold floor: cold the sign-in page first byte p50 1474 ms; cold Notes first byte p50 1571 ms (no session or database on the sign-in page): a cold first byte is the server starting, not GAP's reads.
 
 Raw values (ms, in measurement order), decision then full page; production-like rows add the database round trips:
+- A/B baseline build, warm:work, decision: 1028,1003,1011,1004,1013,1014,1031,1011,575,1012,1050,589,1027,576,989,633,1027,614,4677,1038
+- A/B baseline build, warm:work, full: 1029,1003,1012,1004,1014,1014,1032,1011,575,1013,1050,589,1027,577,990,633,1028,614,4678,1039
+- A/B baseline build, warm:work, db: 147,133,161,112,37,20,19,16,13,20,16,13,13,13,18,13,14,13,169,122
+- A/B baseline build, warm:corpus, decision: 289,403,372,285,411,316,409,340,407,419,334,315,305,305,311,295,336,332,301,293,293,316,309,294,327,290,309,294,292,305
+- A/B baseline build, warm:corpus, full: 6153,6147,7138,6702,6182,5682,5657,5689,5618,5183,5213,5696,6181,5665,5139,5117,4631,5155,5119,5155,5114,5165,4676,4633,5254,4589,4653,4637,4628,4131
+- A/B baseline build, warm:corpus, db: 204,183,222,188,197,173,189,166,184,162,152,173,157,169,161,155,138,155,157,159,145,150,144,143,140,141,135,127,142,133
+- A/B baseline build, warm:hundred, decision: 415,311,286,402,381,325,384,387,393,493,385,303,328,313,314,316,325,294,397,306,301,425,351,309,323,303,319,287,300,327
+- A/B baseline build, warm:hundred, full: 6727,6219,6150,6709,6151,6186,5241,6133,5633,6157,5186,4639,5177,5164,5149,5168,5153,5217,5117,4615,6150,4112,4665,4636,4666,4646,4654,5146,4114,5250
+- A/B baseline build, warm:hundred, db: 208,203,196,189,184,176,166,180,181,167,177,145,166,151,146,152,152,158,154,147,160,126,138,131,130,136,134,135,124,142
+- A/B final build, warm:work, decision: 1018,1037,1013,1009,1017,1020,562,1028,1021,1037,1013,581,1016,596,565,1034,1032,1540,586,1005
+- A/B final build, warm:work, full: 1018,1037,1013,1009,1017,1020,562,1028,1022,1037,1014,582,1018,596,567,1035,1033,1541,586,1006
+- A/B final build, warm:work, db: 166,45,22,17,21,17,14,15,14,17,16,13,14,13,15,14,14,21,156,172
+- A/B final build, warm:corpus, decision: 285,394,391,431,429,307,355,323,310,335,304,291,297,391,391,305,407,281,349,293,286,283,276,307,345,285,297,396,294,388
+- A/B final build, warm:corpus, full: 3624,4120,3602,3664,3619,3629,3137,3617,2580,3626,3623,3115,3057,3596,3049,3613,3617,3074,3123,3092,3066,3591,3056,3138,2622,3045,3082,3059,2639,2558
+- A/B final build, warm:corpus, db: 174,221,169,166,196,169,151,178,140,161,168,148,142,161,138,154,174,148,140,142,135,137,145,139,134,143,134,128,131,120
+- A/B final build, warm:hundred, decision: 413,399,412,411,388,307,290,292,297,400,401,292,291,289,377,395,408,391,327,293,329,305,306,407,392,320,310,288,420,301
+- A/B final build, warm:hundred, full: 3718,4098,3606,3610,4099,3610,3063,3604,3622,3588,3092,3619,3586,3078,3058,3094,3114,3582,3105,2601,3122,2636,3606,3096,3074,2591,3098,3076,2577,2578
+- A/B final build, warm:hundred, db: 175,193,195,165,184,165,152,181,164,161,170,149,141,164,145,141,160,153,138,136,145,130,151,153,134,132,142,129,135,134
 - local before, warm:work, decision: 196,208,198,201,139,199,203,205,198,198,191,205,195,196,191,198,198,194,144,197,192,197,196,139,200,200,133,192,198,208
 - local before, warm:work, full: 196,209,198,201,139,199,203,205,198,198,192,206,195,196,191,203,198,194,144,197,192,197,196,139,200,200,133,193,198,208
 - local before, warm:corpus, decision: 216,211,135,138,127,134,137,119,136,128,124,130,129,119,128,132,134,129,130,123,129,137,135,128,131,148,134,132,132,126
@@ -1850,15 +1894,27 @@ Raw values (ms, in measurement order), decision then full page; production-like 
 - production-like before, warm:hundred, decision: 410,422,396,196,404,411,423,407,316,396,421,399,407,197,329,197,408,199,198,409,203,205,405,409,198,202,406,413,202,204
 - production-like before, warm:hundred, full: 6044,5501,6032,5515,5507,5520,5553,4978,5036,5527,5013,5509,4492,5023,4555,5514,3991,3987,5003,3962,4014,4978,5010,3975,3989,4505,4516,3479,3487,3998
 - production-like before, warm:hundred, db: 197,178,198,174,182,168,175,161,153,167,153,159,161,160,147,158,129,126,143,136,141,144,148,130,122,133,127,111,121,123
-- production-like after, warm:work, decision: 945,318,435,941,916,318,394,326,396,426,392,406,413,397,409,313,333,389,397,324,403,453,393,313,400,412,396,398,412,402
-- production-like after, warm:work, full: 945,318,435,942,916,318,394,326,396,426,393,406,413,397,409,313,333,389,397,325,403,453,393,313,400,412,396,399,413,404
-- production-like after, warm:work, db: 17,14,17,17,15,12,12,12,16,12,12,12,12,12,16,12,12,12,12,12,16,14,12,12,12,12,16,12,12,12
-- production-like after, warm:corpus, decision: 321,324,319,217,319,211,199,328,219,195,324,406,214,206,319,412,216,333,204,404,415,315,328,203,210,393,202,401,214,202
-- production-like after, warm:corpus, full: 3477,3497,3005,2982,2986,2991,2998,2978,2962,2462,2992,2951,2483,2493,2992,2461,2468,2509,2475,2971,2975,2473,2476,2446,2480,2950,2482,2443,1930,1966
-- production-like after, warm:corpus, db: 185,194,153,169,171,162,149,162,163,140,160,164,149,138,146,144,143,141,130,140,128,131,133,130,123,130,122,124,113,116
-- production-like after, warm:hundred, decision: 212,326,196,308,408,238,206,239,209,315,325,201,409,416,409,323,415,416,198,397,406,404,403,214,407,211,334,252,418,428
-- production-like after, warm:hundred, full: 2985,2992,2953,2976,2947,2501,2966,3011,2972,2993,3010,2960,2436,2455,2447,2487,2455,2480,2459,2427,2468,2444,2469,1967,2455,2463,2469,2526,2464,2480
-- production-like after, warm:hundred, db: 164,187,164,167,168,163,158,153,163,147,151,150,145,142,142,136,149,142,136,134,132,130,122,120,135,134,123,124,134,116
+- production-like after, warm:work, decision: 949,956,945,915,899,903,442,397,440,916,432,413,913,433,416,449,923,390,3474,944,909,926,907,923,914,931,914,903,915,401
+- production-like after, warm:work, full: 949,956,945,916,899,904,442,397,440,916,432,413,914,433,416,449,924,390,3474,944,909,926,907,923,915,931,914,903,916,401
+- production-like after, warm:work, db: 153,111,29,21,19,18,15,14,15,18,14,13,15,13,13,15,14,13,56,162,170,160,111,31,18,18,14,16,16,13
+- production-like after, warm:corpus, decision: 426,399,409,407,419,413,415,414,199,425,403,425,398,209,200,203,422,401,414,389,323,416,406,198,416,320,417,200,220,405
+- production-like after, warm:corpus, full: 3478,3983,3476,3474,3492,2970,3485,2968,2981,2976,3468,3527,2944,2967,2968,2963,3002,2974,3497,2971,2988,2964,2452,2460,2962,2454,2971,2994,2988,2959
+- production-like after, warm:corpus, db: 190,208,166,176,186,168,169,175,168,154,163,161,155,146,141,151,139,139,163,150,138,139,142,133,131,131,141,139,133,132
+- production-like after, warm:hundred, decision: 410,417,413,425,424,197,404,388,403,401,408,406,414,395,337,341,331,216,321,213,216,256,226,311,248,209,315,321,222,199
+- production-like after, warm:hundred, full: 3464,3493,2982,2971,2954,2951,3450,2942,2944,2922,2962,2949,2943,2959,3523,3534,2974,2989,2963,2979,2992,2484,2469,2936,2501,2467,2972,2461,2478,2456
+- production-like after, warm:hundred, db: 174,199,170,162,175,178,168,175,176,153,161,161,161,159,155,148,140,138,155,143,132,141,133,138,119,139,134,140,123,138
+- production-like final, warm:work, decision: 1028,1040,1117,1018,1035,590,1080,1008,1039,1059,1130,1043,626,1046,726,636,1529,725,1004,1535,1025,1039,1077,1091,1146,684,1031,1080,1008,1056
+- production-like final, warm:work, full: 1029,1041,1117,1018,1035,590,1080,1008,1044,1060,1130,657,626,1046,727,636,1529,725,1004,1535,1025,1041,1077,1093,1146,684,1032,1081,1008,1057
+- production-like final, warm:work, db: 169,30,19,21,17,14,15,18,18,14,14,13,13,17,13,13,21,165,169,132,20,19,19,14,15,13,13,15,14,14
+- production-like final, warm:corpus, decision: 306,392,299,387,375,436,396,402,306,318,543,298,306,393,383,407,387,277,319,374,302,394,381,317,285,407,311,303,414,371
+- production-like final, warm:corpus, full: 3617,4081,3585,3674,4090,3600,3591,3591,3134,3139,3625,3091,3586,3575,3163,3600,4100,3086,3124,3584,3175,3073,4101,3071,3049,3093,3099,3098,3089,3047
+- production-like final, warm:corpus, db: 174,221,175,165,201,164,156,182,152,144,183,145,147,176,135,147,166,128,125,177,141,133,163,134,135,153,131,133,148,125
+- production-like final, warm:hundred, decision: 384,401,393,297,384,531,304,379,381,359,374,394,396,427,398,310,310,392,293,281,416,315,301,337,321,305,338,376,325,301
+- production-like final, warm:hundred, full: 4103,4116,4068,3609,4102,3587,3604,3572,3583,3651,3551,3060,3575,3614,3585,3082,3188,3102,3086,3572,3100,3142,2572,3118,2579,3623,3682,2529,2590,2563
+- production-like final, warm:hundred, db: 184,201,183,168,185,173,166,175,157,152,186,151,146,161,154,135,152,139,150,162,138,137,146,131,127,141,146,122,134,124
+
+Serial database waves in one warm corpus account view (the statement log): 56 before, 31 after the account-page fixes, 30 on the final build; executions 147, 108, 95.
+Work's two-minute read rebuilt (`/gap/?fresh=1`, curl, production-like latency, seconds): before 70.8 (the first request), 67.6; after the first two Work fixes 22.7, 16.4, 13.9, 13.6, 16.0; after every fix 17.827296. A cached Work load after every fix: 12.579140.
 
 ## 12. Migration, backfill and rollback
 
