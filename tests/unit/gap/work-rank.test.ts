@@ -71,7 +71,8 @@ describe('the tiers (R41)', () => {
     expect(deal.obligations?.map((o) => o.title)).toEqual(['Send the pilot success criteria']);
     // The meeting beyond 24 hours is not today's work.
     expect(day.cards.map((c) => c.accountName)).not.toContain('Far Co');
-    expect(day.counts).toEqual({ needsYou: 8, obligationsDue: 3, waiting: 0, snoozed: 0 });
+    // Batch item 8: the research card is parked: listed last, never counted in "needs you".
+    expect(day.counts).toEqual({ needsYou: 7, parked: 1, obligationsDue: 3, waiting: 0, snoozed: 0 });
   });
 
   it('inside a tier: the due time, then the newest buyer activity, then the seller\'s explicit priority, each said on the card', () => {
@@ -94,6 +95,32 @@ describe('the tiers (R41)', () => {
   });
 });
 
+describe('batch item 8: research and holds never count as "needs you"', () => {
+  it('a day with only held and research accounts reads "Nothing needs you": every card parked, each still listed', () => {
+    const day = workDay(
+      base({
+        candidates: [cand('research', 'Article Co', 'Read the new article about Article Co'), cand('research', 'Thin Co', 'Research Thin Co')],
+        inDeals: { status: 'complete', accounts: [{ accountName: 'Deal Co', deals: [{ name: 'Deal Co pilot', stage: 'Proposal' }] }] },
+        held: new Map([['Unknown Co', 'opportunity_unknown' as const]]),
+      }),
+    );
+    expect(day.cards.map((c) => [c.accountName, c.tier])).toEqual([
+      ['Article Co', 'research'],
+      ['Thin Co', 'research'],
+      ['Unknown Co', 'held'],
+      ['Deal Co', 'held'],
+    ]);
+    expect(day.counts).toEqual({ needsYou: 0, parked: 4, obligationsDue: 0, waiting: 0, snoozed: 0 });
+    // A card that needs the seller always lists before every parked card, whatever its own tier rank.
+    const mixed = workDay(base({ candidates: [cand('research', 'Article Co', 'Read it')], replies: [{ accountName: 'Optout Co', contactEmail: 'x@optout.example.com', subject: null, snippet: 'stop', receivedAt: '2026-10-06T13:00:00Z' }] }));
+    expect(mixed.cards.map((c) => [c.accountName, c.tier])).toEqual([
+      ['Optout Co', 'admin'],
+      ['Article Co', 'research'],
+    ]);
+    expect(mixed.counts).toMatchObject({ needsYou: 1, parked: 1 });
+  });
+});
+
 describe('waiting, snoozed and the count that says "needs you" (R41)', () => {
   it('distant waiting items do not inflate needs you: a deliverable due Friday, a follow-up not yet due and a blocked task are counted under Waiting, never cards', () => {
     const day = workDay(
@@ -107,7 +134,7 @@ describe('waiting, snoozed and the count that says "needs you" (R41)', () => {
       }),
     );
     expect(day.cards.map((c) => c.accountName)).toEqual(['Ready Co']);
-    expect(day.counts).toEqual({ needsYou: 1, obligationsDue: 0, waiting: 3, snoozed: 0 });
+    expect(day.counts).toEqual({ needsYou: 1, parked: 0, obligationsDue: 0, waiting: 3, snoozed: 0 });
     // Waiting is ordered by the day each item is due (the blocked task was due today).
     expect(day.waiting.map((w) => [w.accountName, w.line])).toEqual([
       ['Legal Co', 'Blocked: their legal review.'],

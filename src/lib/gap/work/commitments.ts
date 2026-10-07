@@ -29,7 +29,7 @@ import { parseSteps } from '../sequence/steps';
 import { SEED_DELAYS_BUSINESS_DAYS } from '../sequences/families';
 import { DIRECT_SENT, DRAFT_SENT, DRAFT_SUBJECT_TYPE, DRAFTED, MANUAL_SENT } from '../execution/draft-ledger';
 import { personStepKey } from '../execution/person-history';
-import { dayLabel, nyDay, nyDayAt, parseReturnDate } from './dates';
+import { addDays, dayLabel, nyDay, nyDayAt, parseReturnDate } from './dates';
 import { classifyReply } from '../replies/classify';
 import {
   COMMITMENT_EVENT,
@@ -243,6 +243,9 @@ export async function transitionCommitment(prisma: PrismaLike, input: Transition
     if (!(PROOF_KINDS as readonly string[]).includes(input.proof.kind)) return { ok: false, reason: 'bad_proof' };
     if (input.proof.kind !== 'seller' && !input.proof.id) return { ok: false, reason: 'proof_required' };
     const note = clip(input.proof.note, 10_000);
+    // Batch item 8: the seller's own Done is proved by its words (what happened, or a milestone's own proof); a bare
+    // click proves nothing.
+    if (input.proof.kind === 'seller' && !note) return { ok: false, reason: 'proof_required' };
     if (note && note.length > NOTE_MAX) return { ok: false, reason: 'note_too_long' };
     proof = { kind: input.proof.kind, id: input.proof.id ?? null, note, at: input.now.toISOString(), by: input.actor };
   }
@@ -384,8 +387,10 @@ export async function commitmentsFromDisposition(
 }
 
 /**
- * A snooze returns on its date (R40): the snooze outcome row becomes a reminder snoozed until then. Any newer outcome
- * at the account settles the older snooze reminders (done when they had already come back, skipped when replaced).
+ * A snooze returns on its date (R40): the snooze outcome row becomes a reminder snoozed until then. A newer outcome at
+ * the account settles an older reminder still away (skipped: replaced or cleared). Batch item 8: a reminder that has
+ * come back is never completed by an account outcome (nothing proves it done): a skip ("not today") brings it back
+ * tomorrow morning, a newer snooze replaces it, and a clear or a log leaves it due.
  */
 export async function commitmentsFromOutcome(
   prisma: PrismaLike,
@@ -395,7 +400,13 @@ export async function commitmentsFromOutcome(
   const older = (await loadCommitments(prisma, { accountNames: [o.accountName] })).filter((c) => c.source.kind === 'snooze' && c.source.id !== o.outcomeId && !TERMINAL_STATUSES.includes(c.status));
   for (const c of older) {
     const came = commitmentPhase(c, o.now).phase === 'due';
-    await transitionCommitment(prisma, came ? { commitmentId: c.commitmentId, to: 'done', proof: { kind: 'outcome', id: o.outcomeId, note: `You recorded ${o.kind} on the account.` }, actor: o.actor, now: o.now } : { commitmentId: c.commitmentId, to: 'skipped', reason: o.kind === 'clear' ? 'snooze cleared' : `replaced by a newer ${o.kind}`, actor: o.actor, now: o.now });
+    if (!came) {
+      await transitionCommitment(prisma, { commitmentId: c.commitmentId, to: 'skipped', reason: o.kind === 'clear' ? 'snooze cleared' : `replaced by a newer ${o.kind}`, actor: o.actor, now: o.now });
+    } else if (o.kind === 'skipped') {
+      await transitionCommitment(prisma, { commitmentId: c.commitmentId, to: 'snoozed', until: nyDayAt(addDays(nyDay(o.now), 1), 0), actor: o.actor, now: o.now });
+    } else if (o.kind === 'snoozed') {
+      await transitionCommitment(prisma, { commitmentId: c.commitmentId, to: 'skipped', reason: 'replaced by a newer snoozed', actor: o.actor, now: o.now });
+    }
   }
   if (o.kind === 'snoozed' && o.until) {
     await ensureCommitment(prisma, { accountName: o.accountName, kind: 'reminder', status: 'snoozed', snoozeUntil: o.until, dueAt: o.until, title: `Back to ${o.accountName}${o.reason ? `: ${o.reason}` : ''}`.slice(0, TITLE_MAX), source: { kind: 'snooze', id: o.outcomeId } }, { actor: o.actor, now: o.now });

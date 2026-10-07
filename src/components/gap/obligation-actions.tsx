@@ -28,9 +28,10 @@ export const REFUSAL_TEXT: Record<string, string> = {
   until_too_far: 'that is more than 90 days out',
   until_required: 'choose a date',
   reason_required: 'say why in a few words',
+  proof_required: 'say what shows it is done',
 };
 
-export function ObligationActions({ commitmentId }: { commitmentId: string | null }) {
+export function ObligationActions({ commitmentId, proofNeeded = null }: { commitmentId: string | null; /** Batch item 8: a milestone's own proof, asked for on Done. */ proofNeeded?: string | null }) {
   const router = useRouter();
   const [mode, setMode] = useState<'none' | 'done' | 'snooze' | 'skip'>('none');
   const [text, setText] = useState('');
@@ -61,10 +62,10 @@ export function ObligationActions({ commitmentId }: { commitmentId: string | nul
       ) : (
         <>
           <label className="flex min-w-0 flex-1 items-center gap-2 text-xs">
-            <span className="shrink-0">{mode === 'done' ? 'What happened (optional)' : mode === 'snooze' ? 'Back on' : 'Why not (optional)'}</span>
+            <span className="shrink-0" data-testid="obligation-input-label">{mode === 'done' ? (proofNeeded ? `What shows it is done (${proofNeeded})` : 'What shows it is done') : mode === 'snooze' ? 'Back on' : 'Why not (optional)'}</span>
             <input className={`${INPUT} min-w-0 flex-1`} type={mode === 'snooze' ? 'date' : 'text'} maxLength={240} value={text} onChange={(e) => setText(e.target.value)} data-testid="obligation-input" />
           </label>
-          <button type="button" className={SMALL} disabled={busy || (mode === 'snooze' && !text)} data-testid="obligation-confirm" onClick={() => void record(mode === 'done' ? 'done' : mode === 'snooze' ? 'snoozed' : 'skipped')}>
+          <button type="button" className={SMALL} disabled={busy || ((mode === 'snooze' || mode === 'done') && !text.trim())} data-testid="obligation-confirm" onClick={() => void record(mode === 'done' ? 'done' : mode === 'snooze' ? 'snoozed' : 'skipped')}>
             {mode === 'done' ? 'Record done' : mode === 'snooze' ? 'Snooze' : 'Skip it'}
           </button>
           <button type="button" className={SMALL} onClick={() => setMode('none')}>Cancel</button>

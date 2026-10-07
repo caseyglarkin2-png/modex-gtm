@@ -75,6 +75,25 @@ describe('<WorkList>', () => {
     render(<WorkList cards={[]} />);
     expect(screen.getByTestId('work-empty')).toHaveTextContent('Nothing needs you right now.');
   });
+  // Batch item 8: research and holds are parked: listed under their own heading, never counted as "needs you".
+  it('only research and holds: "Nothing needs you", the parked cards listed apart under their heading, the count its contents', () => {
+    const parked = [card(0, 'Tyson', 'research', 'research', { tier: 'research' }), card(1, 'Kroger', 'deals', 'in_deal', { tier: 'held', next: null })];
+    render(<WorkList cards={parked} />);
+    expect(screen.getByTestId('work-needs-you')).toHaveTextContent('Nothing needs you today. 2 accounts are parked: research, holds or set aside.');
+    expect(screen.getByTestId('work-empty')).toHaveTextContent('Nothing needs you right now.');
+    expect(screen.queryByTestId('work-cards')).toBeNull();
+    expect(screen.getByTestId('work-parked-heading')).toHaveTextContent('Parked (2): research, holds and set aside. Nothing here needs you today.');
+    expect([...screen.getByTestId('work-parked-cards').querySelectorAll('[data-testid="work-card"]')].map((r) => r.getAttribute('data-account'))).toEqual(['Tyson', 'Kroger']);
+  });
+  it('a card that needs the seller lists before the parked ones, and the header counts only it', () => {
+    render(<WorkList cards={[card(0, 'Tyson', 'research', 'research', { tier: 'research' }), card(1, 'PepsiCo', 'ready', 'ready', { tier: 'ready' })]} />);
+    expect(screen.getByTestId('work-needs-you')).toHaveTextContent('1 account needs you today, in order. 1 more account is parked: research, holds or set aside.');
+    expect(screen.queryByTestId('work-empty')).toBeNull();
+    expect(screen.getAllByTestId('work-card').map((r) => [r.getAttribute('data-account'), r.querySelector('[data-testid="work-card-open"]')?.getAttribute('href')])).toEqual([
+      ['PepsiCo', '/gap/accounts/pepsico?from=work&i=0'],
+      ['Tyson', '/gap/accounts/tyson?from=work&i=1'],
+    ]);
+  });
 });
 
 describe('<WorkList> ranked by obligations (R41)', () => {
@@ -92,6 +111,12 @@ describe('<WorkList> ranked by obligations (R41)', () => {
     expect(items[0]).toHaveTextContent('Ann Scratch: "Send me the two-site comparison."');
     expect(items[0].querySelector('[data-testid="obligation-done"]')).not.toBeNull();
     expect(items[1].querySelector('[data-testid="obligation-done"]')).toBeNull();
+    // Batch item 8: Done asks what shows it is done, and records nothing until it is said.
+    fireEvent.click(items[0].querySelector('[data-testid="obligation-done"]')!);
+    expect(items[0].querySelector('[data-testid="obligation-input-label"]')).toHaveTextContent('What shows it is done');
+    expect(items[0].querySelector('[data-testid="obligation-confirm"]')).toBeDisabled();
+    fireEvent.change(items[0].querySelector('[data-testid="obligation-input"]')!, { target: { value: 'Sent the comparison from Gmail' } });
+    expect(items[0].querySelector('[data-testid="obligation-confirm"]')).not.toBeDisabled();
     expect(screen.getByTestId('work-filter-commitments')).toHaveTextContent('Due 1');
     expect(screen.getByTestId('work-needs-you')).toHaveTextContent('2 accounts need you today, in order; 2 obligations due on them.');
     expect(screen.getByTestId('work-waiting')).toHaveTextContent("Waiting (1): not today");

@@ -41,7 +41,8 @@ describe('todayListenText', () => {
       ...Array.from({ length: 6 }, (_, k) => card(3 + k, `Account ${k}`, 'research', { why: `Account ${k}: 2 cards missing evidence.`, next: { label: `Research Account ${k}`, href: '/x' } })),
     ];
     const t = todayListenText(cards);
-    expect(t).toMatch(/^Today\. 9 accounts need you: 1 reply to read, 1 ready for a first touch, 6 in research, 1 in a deal or held\. First, NFI Industries: someone replied\./);
+    // Batch item 8: research and holds are parked, said apart, never "need you".
+    expect(t).toMatch(/^Today\. 2 accounts need you: 1 reply to read, 1 ready for a first touch; 7 more are parked: 6 in research, 1 in a deal or held\. First, NFI Industries: someone replied\./);
     expect(t).toMatch(/Next, PepsiCo: ready for a first touch\. Contact Karen Darling\. Next person: Karen Darling, Senior Director - PBNA Transportation\. Next action: Contact Karen Darling\./);
     expect(t).toMatch(/Kroger: in a deal\. Open HubSpot deal: "Kroger yard pilot" \(Proposal\)\. Next action: Open the deal brief\. No cold first touch while the deal is open: work it from the deal\./);
     expect(t).toMatch(/4 more follow, in order\.$/);
@@ -62,6 +63,8 @@ describe('todayListenText', () => {
   });
   it('says plainly when nothing needs the seller', () => {
     expect(todayListenText([])).toMatch(/^Today\. Nothing needs you right now\./);
+    // Batch item 8: only parked accounts: nothing needs the seller, and the parked ones are counted apart.
+    expect(todayListenText([card(0, 'Tyson', 'research'), card(1, 'Kroger', 'in_deal')])).toMatch(/^Today\. Nothing needs you right now; 2 are parked: 1 in research, 1 in a deal or held\. First, Tyson: research\./);
   });
 });
 

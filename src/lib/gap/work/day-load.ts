@@ -155,14 +155,15 @@ export async function loadCompletedToday(prisma: PrismaLike, now: Date): Promise
       out.push({ at, accountName: typeof p.accountName === 'string' ? p.accountName : null, line: `Recorded ${String(p.contactEmail ?? 'their')}'s answer (${words(p.responseClass)}).` });
     } else if (r.kind === COMMITMENT_EVENT && p.op === 'status' && isObj(p.commitment)) {
       const c = p.commitment as unknown as Commitment;
-      if (c.status === 'done') out.push({ at, accountName: c.accountName, line: `Done: ${c.title}.` });
-      else if (c.status === 'skipped') out.push({ at, accountName: c.accountName, line: `Skipped: ${c.title}${c.reason ? ` (${c.reason})` : ''}.` });
+      if (c.status === 'done') out.push({ at, accountName: c.accountName, line: `Done: ${c.title}.`, kind: 'done' });
+      else if (c.status === 'skipped') out.push({ at, accountName: c.accountName, line: `Skipped: ${c.title}${c.reason ? ` (${c.reason})` : ''}.`, kind: 'set_aside' });
     } else if (r.kind === 'capture.note') {
       out.push({ at, accountName: typeof p.accountName === 'string' ? p.accountName : null, line: `Saved a note (${words(p.context)}).` });
     } else if (r.kind === WORK_OUTCOME) {
       const kind = p.kind;
       const line = kind === 'skipped' ? 'Set aside for today.' : kind === 'snoozed' && typeof p.until === 'string' ? `Snoozed until ${dayLabel(nyDay(p.until), now)}.` : kind === 'logged' ? `Logged outside GAP${p.reason ? ` (${String(p.reason)})` : ''}.` : null;
-      if (line) out.push({ at, accountName: r.subject_id, line });
+      // Batch item 8: the seller's own outcomes are set aside, never done (a log outside GAP proves nothing here).
+      if (line) out.push({ at, accountName: r.subject_id, line, kind: 'set_aside' });
     }
   }
   return out;

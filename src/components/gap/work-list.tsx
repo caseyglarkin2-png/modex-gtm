@@ -11,7 +11,7 @@
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { filterWork, WORK_FILTER_LABEL, WORK_FILTERS, workCounts, type WaitingItem, type WorkCard, type WorkFilter } from '@/lib/gap/work/list';
+import { filterWork, needsYouCard, WORK_FILTER_LABEL, WORK_FILTERS, workCounts, type WaitingItem, type WorkCard, type WorkFilter } from '@/lib/gap/work/list';
 import { saveWorkOrder } from '@/lib/gap/work/order';
 import { VoicePreviewButton } from '@/components/voice-preview-button';
 import { accountHref, accountSlug } from '@/lib/gap/account-intel/href';
@@ -96,7 +96,7 @@ export function WorkList({
   /** UX-14: when the read happened, with Refresh to read again. */ readAt?: { at: string; label: string } | null;
   /** R14 / R41: what the seller put away until a date (accounts and obligations), with their lines. */ snoozed?: Array<{ key?: string; accountName: string; line: string; until: string }>;
   /** R41: not today: waiting on someone, or due on a later day. Counted, never cards. */ waiting?: WaitingItem[];
-  /** R41: the counts (needs you = the cards; the footers count what they list). */ counts?: { needsYou: number; obligationsDue: number; waiting: number; snoozed: number } | null;
+  /** R41: the counts (needs you = the cards that need the seller; the footers count what they list). */ counts?: { needsYou: number; parked?: number; obligationsDue: number; waiting: number; snoozed: number } | null;
 }) {
   const router = useRouter();
   const params = useSearchParams();
@@ -104,7 +104,15 @@ export function WorkList({
   const [query, setQuery] = useState(params.get('q') ?? '');
   const chips = workCounts(cards);
   // The shown list IS the Work order: its hrefs carry its own positions, and Next account walks what the seller saw.
-  const shown = filterWork(cards, filter, query).map((c, k) => ({ ...c, index: k, href: `${accountHref(c.accountName)}?from=work&i=${k}` }));
+  // Batch item 8: the cards that need the seller first, then the parked ones (research, holds, set aside), each in order.
+  const filtered = filterWork(cards, filter, query);
+  const shown = [...filtered.filter(needsYouCard), ...filtered.filter((c) => !needsYouCard(c))].map((c, k) => ({ ...c, index: k, href: `${accountHref(c.accountName)}?from=work&i=${k}` }));
+  const shownNeeds = shown.filter(needsYouCard);
+  const shownParked = shown.filter((c) => !needsYouCard(c));
+  const needCount = cards.filter(needsYouCard).length;
+  const parkedCount = cards.length - needCount;
+  const NOTHING = 'Nothing needs you right now. Replies, follow ups, ready accounts and new angles show up here.';
+  const emptyText = shown.length === 0 ? (cards.length === 0 ? NOTHING : 'No account matches this filter.') : shownNeeds.length === 0 && filter === 'all' && !query.trim() ? NOTHING : null;
   useEffect(() => {
     saveWorkOrder({ at: new Date().toISOString(), filter, q: query, accounts: shown.map((c) => ({ name: c.accountName, slug: accountSlug(c.accountName) })) });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -134,7 +142,8 @@ export function WorkList({
           {listenText ? <VoicePreviewButton text={listenText} label="Listen to today" className="min-h-11 px-4" /> : null}
         </div>
         <p className="text-xs text-[var(--muted-foreground)]" data-testid="work-needs-you">
-          {cards.length === 1 ? '1 account needs you' : `${cards.length} accounts need you`} today, in order{due ? `; ${due} ${due === 1 ? 'obligation' : 'obligations'} due on them` : ''}. Counts are what the list holds.
+          {needCount === 0 ? 'Nothing needs you today.' : `${needCount === 1 ? '1 account needs you' : `${needCount} accounts need you`} today, in order${due ? `; ${due} ${due === 1 ? 'obligation' : 'obligations'} due on them` : ''}.`}
+          {parkedCount ? ` ${parkedCount} ${needCount ? 'more ' : ''}${parkedCount === 1 ? 'account is' : 'accounts are'} parked: research, holds or set aside.` : ''} Counts are what the list holds.
           {readAt ? (
             <>
               {' '}
@@ -174,13 +183,20 @@ export function WorkList({
           />
         </label>
       </div>
-      {shown.length === 0 ? (
+      {emptyText ? (
         <p className="text-sm italic text-[var(--muted-foreground)]" data-testid="work-empty">
-          {cards.length === 0 ? 'Nothing needs you right now. Replies, follow ups, ready accounts and new angles show up here.' : 'No account matches this filter.'}
+          {emptyText}
         </p>
-      ) : (
-        <ol className="space-y-2 pb-24 sm:pb-0" data-testid="work-cards">
-          {shown.map((c) => (
+      ) : null}
+      {[{ list: shownNeeds, testId: 'work-cards' }, { list: shownParked, testId: 'work-parked-cards' }].map(({ list, testId }) => list.length === 0 ? null : (
+        <div key={testId}>
+          {testId === 'work-parked-cards' ? (
+            <h3 className="mb-1 mt-2 text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]" data-testid="work-parked-heading">
+              Parked ({list.length}): research, holds and set aside. Nothing here needs you today.
+            </h3>
+          ) : null}
+        <ol className="space-y-2 pb-24 sm:pb-0" data-testid={testId}>
+          {list.map((c) => (
             <li key={c.accountName} id={`work-card-${c.index}`} tabIndex={-1} className="rounded-md border border-[var(--border)] p-3 outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]" data-testid="work-card" data-account={c.accountName} data-slug={accountSlug(c.accountName)} data-state={c.stateKind} data-lane={c.lane} data-tier={c.tier ?? undefined}>
               <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
                 <p className="text-base font-semibold">
@@ -219,7 +235,7 @@ export function WorkList({
                       <div className="flex flex-wrap items-center gap-2">
                         {o.href && o.label ? <Link href={o.href} className="inline-flex min-h-11 items-center text-xs underline sm:min-h-9" data-testid="obligation-open">{o.label}</Link> : null}
                       </div>
-                      <ObligationActions commitmentId={o.commitmentId} />
+                      <ObligationActions commitmentId={o.commitmentId} proofNeeded={o.proofNeeded ?? null} />
                     </li>
                   ))}
                 </ul>
@@ -235,7 +251,8 @@ export function WorkList({
             </li>
           ))}
         </ol>
-      )}
+        </div>
+      ))}
       {waiting.length ? (
         <details className="rounded-md border border-[var(--border)] px-3 py-2 text-sm" data-testid="work-waiting">
           <summary className="min-h-11 cursor-pointer text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Waiting ({waiting.length}): not today</summary>

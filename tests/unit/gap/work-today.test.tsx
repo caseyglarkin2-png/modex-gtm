@@ -77,9 +77,9 @@ describe('the Today summary (R45)', () => {
   });
 
   it('renders each group with its count equal to its list', () => {
-    render(<WorkToday today={{ day: '2026-10-06', done: [{ at: '2026-10-06T15:00:00Z', accountName: 'Done Co', line: 'Done: Already sent.' }], owed: [{ commitmentId: 'a', accountName: 'Pepsi Scratch Co', title: 'Send the template', line: 'Due tomorrow.' }], waiting: [], tomorrow: [{ key: 'm', accountName: 'Dannon Scratch Co', title: 'Meeting at 10:00 AM: Pilot scoping', line: 'Prepare it today or first thing.' }] }} />);
+    render(<WorkToday today={{ day: '2026-10-06', done: [{ at: '2026-10-06T15:00:00Z', accountName: 'Done Co', line: 'Done: Already sent.' }], setAside: [{ at: '2026-10-06T16:00:00Z', accountName: 'Tyson Scratch Co', line: 'Set aside for today.', kind: 'set_aside' }], owed: [{ commitmentId: 'a', accountName: 'Pepsi Scratch Co', title: 'Send the template', line: 'Due tomorrow.' }], waiting: [], tomorrow: [{ key: 'm', accountName: 'Dannon Scratch Co', title: 'Meeting at 10:00 AM: Pilot scoping', line: 'Prepare it today or first thing.' }] }} />);
     expect(screen.getByTestId('work-today')).toHaveTextContent('Today, Tue, Oct 6');
-    for (const [id, count] of [['today-done', 1], ['today-owed', 1], ['today-waiting', 0], ['today-tomorrow', 1]] as const) {
+    for (const [id, count] of [['today-done', 1], ['today-set-aside', 1], ['today-owed', 1], ['today-waiting', 0], ['today-tomorrow', 1]] as const) {
       expect(screen.getByTestId(id)).toHaveAttribute('data-count', String(count));
       expect(screen.getByTestId(id).querySelectorAll('li')).toHaveLength(count);
     }
@@ -106,6 +106,34 @@ describe('the Today summary (R45)', () => {
       ['Pepsi Scratch Co', 'Saved a note (call).'],
       ['Tyson Scratch Co', 'Snoozed until Oct 8.'],
     ]);
+  });
+});
+
+describe('batch item 8: Done today counts completions only', () => {
+  it('a skip, a snooze, a set-aside, a log outside GAP and a closure skip are never in the Done count; they are listed as set aside', async () => {
+    const at = (iso: string) => new Date(iso);
+    const d = ledgerDb({
+      audit: [
+        { id: 'c1', kind: DIRECT_SENT, subject_type: 'routing_decision', subject_id: 'dec', created_at: at('2026-10-06T15:00:00Z'), payload: { accountName: 'Fedex Scratch Co', recipient: 'glen@fedex.example.com', stepIndex: 0 } },
+        { id: 'c2', kind: 'account.commitment', subject_type: 'account', subject_id: 'Pepsi Scratch Co', created_at: at('2026-10-06T15:10:00Z'), payload: { commitmentId: 'c', op: 'status', commitment: { accountName: 'Pepsi Scratch Co', title: 'Send the template', status: 'done' } } },
+        { id: 'c3', kind: 'account.commitment', subject_type: 'account', subject_id: 'Kroger Scratch Co', created_at: at('2026-10-06T15:20:00Z'), payload: { commitmentId: 'k', op: 'status', commitment: { accountName: 'Kroger Scratch Co', title: 'Send the pilot terms', status: 'skipped', reason: 'the deal closed' } } },
+        { id: 'c4', kind: 'account.work_outcome', subject_type: 'account', subject_id: 'Tyson Scratch Co', created_at: at('2026-10-06T15:30:00Z'), payload: { kind: 'skipped' } },
+        { id: 'c5', kind: 'account.work_outcome', subject_type: 'account', subject_id: 'Heb Scratch Co', created_at: at('2026-10-06T15:40:00Z'), payload: { kind: 'snoozed', until: '2026-10-08T13:00:00Z' } },
+        { id: 'c6', kind: 'account.work_outcome', subject_type: 'account', subject_id: 'Nfi Scratch Co', created_at: at('2026-10-06T15:50:00Z'), payload: { kind: 'logged', reason: 'called from my phone' } },
+      ],
+    });
+    const rows = await loadCompletedToday(d.client(), LATE);
+    const t = todaySummary({ now: LATE, commitments: [], waiting: [], done: rows });
+    expect(t.done.map((x) => x.line)).toEqual(['Sent touch 1 to glen@fedex.example.com.', 'Done: Send the template.']);
+    expect(t.setAside.map((x) => [x.accountName, x.line])).toEqual([
+      ['Kroger Scratch Co', 'Skipped: Send the pilot terms (the deal closed).'],
+      ['Tyson Scratch Co', 'Set aside for today.'],
+      ['Heb Scratch Co', 'Snoozed until Oct 8.'],
+      ['Nfi Scratch Co', 'Logged outside GAP (called from my phone).'],
+    ]);
+    render(<WorkToday today={t} />);
+    expect(screen.getByTestId('today-done')).toHaveAttribute('data-count', '2');
+    expect(screen.getByTestId('today-set-aside')).toHaveAttribute('data-count', '4');
   });
 });
 

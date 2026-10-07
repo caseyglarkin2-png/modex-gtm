@@ -43,6 +43,7 @@ export function WorkToday({ today, preview = false }: { today: TodaySummary; pre
       </h2>
       <div className="grid gap-x-6 sm:grid-cols-2">
         <Group title="Done today" testId="today-done" items={today.done.map((d, k) => ({ key: `${d.at}:${k}`, accountName: d.accountName, text: d.line }))} />
+        <Group title="Set aside or logged today" testId="today-set-aside" items={(today.setAside ?? []).map((d, k) => ({ key: `${d.at}:${k}`, accountName: d.accountName, text: d.line }))} />
         <Group title="Owed to buyers" testId="today-owed" items={today.owed.map((o) => ({ key: o.commitmentId, accountName: o.accountName, text: `${o.title}. ${o.line}` }))} />
         <Group title="Waiting on them" testId="today-waiting" items={today.waiting.map((w) => ({ key: w.key, accountName: w.accountName, text: `${w.title}. ${w.line}` }))} />
         <Group title={preview ? 'The day after' : 'Tomorrow'} testId="today-tomorrow" items={today.tomorrow.map((t) => ({ key: t.key, accountName: t.accountName, text: `${t.title}. ${t.line}` }))} />

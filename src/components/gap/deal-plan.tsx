@@ -64,7 +64,7 @@ export function DealPlan({ accountName, dealId, plan }: { accountName: string; d
             <li key={m.step} className="text-sm" data-testid="plan-milestone" data-step={m.step} data-phase={m.phase ?? ''}>
               <p className="font-medium">{m.title}</p>
               <p className="text-xs text-[var(--muted-foreground)]" data-testid="plan-milestone-line">{milestoneLine(m)}</p>
-              {m.phase !== 'done' && m.phase !== 'skipped' ? <ObligationActions commitmentId={m.commitmentId} /> : null}
+              {m.phase !== 'done' && m.phase !== 'skipped' ? <ObligationActions commitmentId={m.commitmentId} proofNeeded={m.proof} /> : null}
             </li>
           ))}
         </ul>

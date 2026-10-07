@@ -63,6 +63,9 @@ describe('identity and lifecycle (R40)', () => {
     const id = made.ok ? made.commitment.commitmentId : '';
     expect(await transitionCommitment(p, { commitmentId: id, to: 'done', actor: ACTOR, now: NOW })).toEqual({ ok: false, reason: 'proof_required' });
     expect(await transitionCommitment(p, { commitmentId: id, to: 'done', proof: { kind: 'ledger' }, actor: ACTOR, now: NOW })).toEqual({ ok: false, reason: 'proof_required' });
+    // Batch item 8: the seller's own Done is proved by its words; a bare click (no note, or blank) proves nothing.
+    expect(await transitionCommitment(p, { commitmentId: id, to: 'done', proof: { kind: 'seller' }, actor: ACTOR, now: NOW })).toEqual({ ok: false, reason: 'proof_required' });
+    expect(await transitionCommitment(p, { commitmentId: id, to: 'done', proof: { kind: 'seller', note: '   ' }, actor: ACTOR, now: NOW })).toEqual({ ok: false, reason: 'proof_required' });
     const done = await transitionCommitment(p, { commitmentId: id, to: 'done', proof: { kind: 'seller', note: 'sent the spec sheet from my phone' }, actor: ACTOR, now: NOW });
     expect(done.ok && done.commitment.proof).toMatchObject({ kind: 'seller', id: null, note: 'sent the spec sheet from my phone', by: ACTOR });
     expect(await transitionCommitment(p, { commitmentId: id, to: 'open', actor: ACTOR, now: NOW })).toEqual({ ok: false, reason: 'terminal', status: 'done' });
@@ -155,6 +158,25 @@ describe('the sources that create commitments (R40)', () => {
       ['o1', 'skipped', 'replaced by a newer snoozed'],
       ['o2', 'skipped', 'snooze cleared'],
     ]);
+  });
+
+  // Batch item 8: a skip, clear or log on the account completed a reminder that had come back (done, "outcome" proof).
+  it('a reminder that came back is never completed by an account outcome: a skip brings it back tomorrow, a clear or a log leaves it due', async () => {
+    const db = ledgerDb({ accounts: ['Pepsi Scratch Co'] });
+    const p = db.client();
+    await commitmentsFromOutcome(p, { outcomeId: 'o1', accountName: 'Pepsi Scratch Co', kind: 'snoozed', until: nyDayAt('2026-10-07').toISOString(), reason: 'travel', actor: ACTOR, now: NOW });
+    const back = new Date('2026-10-07T16:00:00Z'); // Wed Oct 7, noon New York: the reminder is back
+    const reminder = async () => (await loadCommitments(p, { accountNames: ['Pepsi Scratch Co'] })).find((c) => c.source.id === 'o1')!;
+    expect(commitmentPhase(await reminder(), back).phase).toBe('due');
+    await commitmentsFromOutcome(p, { outcomeId: 'o2', accountName: 'Pepsi Scratch Co', kind: 'logged', until: null, reason: 'called', actor: ACTOR, now: back });
+    await commitmentsFromOutcome(p, { outcomeId: 'o3', accountName: 'Pepsi Scratch Co', kind: 'clear', until: null, reason: null, actor: ACTOR, now: back });
+    expect(await reminder()).toMatchObject({ status: 'snoozed', proof: null });
+    expect(commitmentPhase(await reminder(), back).phase).toBe('due');
+    await commitmentsFromOutcome(p, { outcomeId: 'o4', accountName: 'Pepsi Scratch Co', kind: 'skipped', until: null, reason: null, actor: ACTOR, now: back });
+    const r = await reminder();
+    expect(r).toMatchObject({ status: 'snoozed', snoozeUntil: nyDayAt('2026-10-08', 0).toISOString(), proof: null });
+    expect(commitmentPhase(r, back).phase).toBe('snoozed');
+    expect(commitmentPhase(r, new Date('2026-10-08T13:00:00Z')).phase).toBe('due');
   });
 
   it('a proven send leaves ONE waiting follow-up, due when the next touch is (or the house interval with no follow-up copy); a re-run adds nothing; the next send closes it with the ledger row', async () => {

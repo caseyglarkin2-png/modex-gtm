@@ -292,7 +292,9 @@ describe.skipIf(!RUN)('Sprint 4: execute a day and remember what happened (scrat
       expect(now0.day.cards.some((c) => c.accountName === tyson.name)).toBe(false);
       expect(now0.day.snoozed.map((x) => x.accountName)).toContain(tyson.name);
       expect(now0.summary.tomorrow.map((x) => x.accountName)).toContain(dannon.name);
-      expect(now0.summary.done.some((d) => d.accountName === tyson.name && /^Snoozed until/.test(d.line))).toBe(true);
+      // Batch item 8: a snooze is set aside, never Done.
+      expect(now0.summary.done.some((d) => d.accountName === tyson.name)).toBe(false);
+      expect(now0.summary.setAside.some((d) => d.accountName === tyson.name && /^Snoozed until/.test(d.line))).toBe(true);
       const owedPepsi = now0.commitments.find((c) => c.accountName === pepsi.name && c.source.kind === 'capture')!;
       const fus = now0.commitments.filter((c) => c.kind === 'follow_up').map((c) => [c.commitmentId, c.dueAt]);
       expect(fus.length).toBeGreaterThanOrEqual(2);

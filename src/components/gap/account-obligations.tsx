@@ -35,7 +35,7 @@ export function AccountObligations({ items }: { items: Array<Commitment & PhaseR
             {c.kind === 'referral' ? (
               <Link href="#people-stack-heading" className="inline-flex min-h-11 items-center text-xs underline sm:min-h-9">See the people here</Link>
             ) : null}
-            <ObligationActions commitmentId={c.commitmentId} />
+            <ObligationActions commitmentId={c.commitmentId} proofNeeded={c.detail?.proofNeeded ?? null} />
           </li>
         ))}
       </ul>

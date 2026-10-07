@@ -35,15 +35,17 @@ const input = (over: Partial<WorkInput> = {}): WorkInput => ({
 });
 
 describe('buildWorkList', () => {
-  it('one card per account, the human reply first, then follow up, ready, decide, research, the opt-out after research (admin, never cold work), deals last', () => {
+  // Batch item 8: research and holds are parked (never "needs you"), listed after every card that needs the seller; the
+  // opt-out to record is admin only the seller can do, so it needs the seller and sits after the decide card.
+  it('one card per account, the human reply first, then follow up, ready, decide, the opt-out (admin, never cold work); then parked: research, deals last', () => {
     const cards = buildWorkList(input());
     expect(cards.map((c) => [c.accountName, c.stateKind])).toEqual([
       ['NFI Industries', 'replied'],
       ['H-E-B', 'follow_up'],
       ['PepsiCo', 'ready'],
       ['General Mills', 'decide'],
-      ['Tyson Foods', 'research'],
       ['Walmart Inc.', 'opted_out'],
+      ['Tyson Foods', 'research'],
       ['Dollar General', 'unknown_deal'],
       ['Kroger', 'in_deal'],
     ]);
@@ -61,12 +63,12 @@ describe('buildWorkList', () => {
     expect(cards.filter((c) => c.accountName === 'Walmart Inc.')).toHaveLength(1);
     expect(cards[0]).toMatchObject({ accountName: 'NFI Industries', stateKind: 'replied' });
   });
-  it('replies are classified before they rank: the opt-out never heads the list, even when nothing else is ready, and says what to do; the automatic reply is not work', () => {
+  it('replies are classified before they rank: the opt-out never heads the list over real work, and says what to do; with only research and holds left it is the one thing that needs the seller; the automatic reply is not work', () => {
     const cards = buildWorkList(input());
     const walmart = cards.find((c) => c.accountName === 'Walmart Inc.')!;
     expect(cards[0].accountName).not.toBe('Walmart Inc.');
     const onlyAdmin = buildWorkList(input({ candidates: [cand('research', 'Tyson Foods', 'Research Tyson Foods', [-1, 2])], replies: [{ accountName: 'Walmart Inc.', contactEmail: 'timothy.cooper@walmart.com', subject: null, snippet: 'stop', receivedAt: '2026-10-05T14:00:00Z' }] }));
-    expect(onlyAdmin.map((c) => c.accountName)).toEqual(['Tyson Foods', 'Walmart Inc.', 'Dollar General', 'Kroger']);
+    expect(onlyAdmin.map((c) => c.accountName)).toEqual(['Walmart Inc.', 'Tyson Foods', 'Dollar General', 'Kroger']);
     expect(walmart.state).toBe('Opted out');
     expect(walmart.why).toMatch(/^timothy\.cooper@walmart\.com wrote Oct 5: "stop"\. They asked not to be contacted: record it as do not contact\./);
     expect(walmart.next).toEqual({ label: 'Record the opt-out', href: '/gap?lane=replies' });
@@ -242,7 +244,8 @@ describe('a motion in flight on the Work list (R14, as ranked by R41)', () => {
     expect(day.cards.find((c) => c.accountName === 'NFI Industries')?.stateKind).toBe('replied');
     expect(day.cards.find((c) => c.accountName === 'Kroger')?.stateKind).toBe('in_deal');
     expect(day.waiting.map((w) => w.accountName)).toEqual(['PepsiCo']);
-    expect(day.counts).toMatchObject({ needsYou: day.cards.length, waiting: 1 });
+    // Batch item 8: Tyson (research), Dollar General and Kroger (holds) are parked, never "needs you".
+    expect(day.counts).toMatchObject({ needsYou: 5, parked: 3, waiting: 1 });
     // A READY summary read before the touch is stale against it: still waiting. One read after it agrees: waiting.
     const stale = new Map([['PepsiCo', { accountName: 'PepsiCo', state: 'ready' as const, stateLine: 'Ready for a first touch: Karen Darling', person: { name: 'Karen Darling', title: null }, blocker: null, coldTouchAllowed: true, nextText: 'Prepare the first touch to Karen Darling.', at: '2026-10-06T13:50:00Z' }]]);
     expect(workDay(input({ inMotion, summaries: stale })).cards.map((c) => c.accountName)).not.toContain('PepsiCo');

@@ -29,7 +29,7 @@ function Obligations({ items, testid }: { items: ScopedCommitment[]; testid: str
             {c.scope.basis !== 'recorded' ? <span data-testid="obligation-scope"> {c.scope.label}.</span> : null}
           </p>
           {c.basis ? <p className="break-words text-xs italic text-[var(--muted-foreground)]">{c.basis}</p> : null}
-          <ObligationActions commitmentId={c.commitmentId} />
+          <ObligationActions commitmentId={c.commitmentId} proofNeeded={c.detail?.proofNeeded ?? null} />
         </li>
       ))}
     </ul>

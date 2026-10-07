@@ -3,7 +3,8 @@
  * day and keeps tomorrow, derived from actual state with NO new storage:
  *
  *   done       what was completed TODAY (New York day), from the ledger and the dispositions: sends GAP proved,
- *              answers recorded, obligations done or skipped, notes saved, the seller's outcomes
+ *              answers recorded, obligations done with their proof, notes saved
+ *   setAside   batch item 8: what the seller set aside, snoozed, skipped or logged outside GAP today (never "done")
  *   owed       the buyer obligations still open (promised to a buyer, asked by a buyer, a meeting to prepare, a deal
  *              step, a buyer's promise to chase), whatever their day
  *   waiting    what waits on the buyer (follow-ups not due, a buyer's promise not due, a first touch out)
@@ -21,12 +22,15 @@ export interface DoneItem {
   at: string;
   accountName: string | null;
   line: string;
+  /** Batch item 8: a completion, or something set aside (a skip, a snooze, an unproven log): never counted as done. */
+  kind?: 'done' | 'set_aside';
 }
 
 export interface TodaySummary {
   /** The New York day the summary is for. */
   day: string;
   done: DoneItem[];
+  setAside: DoneItem[];
   owed: Array<{ commitmentId: string; accountName: string; title: string; line: string }>;
   waiting: Array<{ key: string; accountName: string; title: string; line: string }>;
   tomorrow: Array<{ key: string; accountName: string; title: string; line: string }>;
@@ -66,6 +70,8 @@ export function todaySummary(i: {
     tomorrow.push({ key: `meeting:${m.accountName}:${m.at}`, accountName: m.accountName, title: `Meeting at ${time(m.at)}: ${m.what}`, line: 'Prepare it today or first thing.' });
   }
   const waiting = i.waiting.filter((w) => w.kind === 'follow_up' || w.kind === 'buyer_promise' || w.kind === 'motion').map((w) => ({ key: w.key, accountName: w.accountName, title: w.title, line: w.line }));
-  const done = i.done.filter((d) => nyDay(d.at) === today).sort((a, b) => a.at.localeCompare(b.at));
-  return { day: today, done, owed, waiting, tomorrow };
+  const todays = i.done.filter((d) => nyDay(d.at) === today).sort((a, b) => a.at.localeCompare(b.at));
+  const done = todays.filter((d) => d.kind !== 'set_aside');
+  const setAside = todays.filter((d) => d.kind === 'set_aside');
+  return { day: today, done, setAside, owed, waiting, tomorrow };
 }

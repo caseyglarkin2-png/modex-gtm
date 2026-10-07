@@ -4,7 +4,7 @@
  * where one applies. A spoken projection of the same cards, never the screen's DOM; nothing private (the cards carry
  * none), nothing machine. Pure; pinned by tests/unit/gap/voice-listen.test.ts.
  */
-import type { WorkCard } from '../work/list';
+import { needsYouCard, type WorkCard } from '../work/list';
 import { forTheEar, spokenPerson } from './for-the-ear';
 
 export const TODAY_MAX_ACCOUNTS = 5;
@@ -34,11 +34,20 @@ function whyForTheEar(c: WorkCard): string {
 export function todayListenText(cards: readonly WorkCard[], opts: { max?: number; now?: Date } = {}): string {
   const max = opts.max ?? TODAY_MAX_ACCOUNTS;
   if (cards.length === 0) return 'Today. Nothing needs you right now. Replies, follow ups, ready accounts and new angles show up here.';
-  const counts = { committed: 0, meeting: 0, replied: 0, opted_out: 0, bounced: 0, follow_up: 0, ready: 0, decide: 0, research: 0, hold: 0 };
-  for (const c of cards) {
-    if (c.stateKind === 'in_deal' || c.stateKind === 'unknown_deal' || c.stateKind === 'held') counts.hold += 1;
-    else counts[c.stateKind] += 1;
-  }
+  // Batch item 8: research, holds and set-asides are parked, never "needs you"; the headline counts them apart.
+  const needs = cards.filter(needsYouCard);
+  const parkedCards = cards.filter((c) => !needsYouCard(c));
+  const tally = (list: readonly WorkCard[]) => {
+    const t = { committed: 0, meeting: 0, replied: 0, opted_out: 0, bounced: 0, follow_up: 0, ready: 0, decide: 0, research: 0, hold: 0, later: 0 };
+    for (const c of list) {
+      if (c.tier === 'later') t.later += 1;
+      else if (c.stateKind === 'in_deal' || c.stateKind === 'unknown_deal' || c.stateKind === 'held') t.hold += 1;
+      else t[c.stateKind] += 1;
+    }
+    return t;
+  };
+  const counts = tally(needs);
+  const parked = tally(parkedCards);
   // Every kind is counted, so the headline adds up to the list.
   const headline = [
     counts.committed ? `${counts.committed} buyer ${counts.committed === 1 ? 'commitment' : 'commitments'} due` : null,
@@ -49,10 +58,11 @@ export function todayListenText(cards: readonly WorkCard[], opts: { max?: number
     counts.follow_up ? `${counts.follow_up} follow ${counts.follow_up === 1 ? 'up' : 'ups'} due` : null,
     counts.ready ? `${counts.ready} ready for a first touch` : null,
     counts.decide ? `${counts.decide} angle${counts.decide === 1 ? '' : 's'} to decide` : null,
-    counts.research ? `${counts.research} in research` : null,
-    counts.hold ? `${counts.hold} in a deal or held` : null,
   ].filter(Boolean);
-  const parts: string[] = [`Today. ${cards.length} ${cards.length === 1 ? 'account needs' : 'accounts need'} you${headline.length ? `: ${headline.join(', ')}` : ''}.`];
+  const parkedLine = [parked.research ? `${parked.research} in research` : null, parked.hold ? `${parked.hold} in a deal or held` : null, parked.later ? `${parked.later} set aside` : null].filter(Boolean).join(', ');
+  const lead = needs.length ? `Today. ${needs.length} ${needs.length === 1 ? 'account needs' : 'accounts need'} you${headline.length ? `: ${headline.join(', ')}` : ''}` : 'Today. Nothing needs you right now';
+  const more = needs.length ? `${parkedCards.length} more` : `${parkedCards.length}`;
+  const parts: string[] = [`${lead}${parkedCards.length ? `; ${more} ${parkedCards.length === 1 ? 'is' : 'are'} parked: ${parkedLine}` : ''}.`];
   const spoken = cards.slice(0, max);
   spoken.forEach((c, i) => {
     const lead = i === 0 ? 'First' : i === spoken.length - 1 && spoken.length > 1 ? 'Then' : 'Next';

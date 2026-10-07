@@ -18,7 +18,9 @@
  * activity, then the seller's explicit priority (work/priority.ts), then the lane's own order. Waiting work (a first
  * touch out and its follow-up not due, an obligation due on a later day, something blocked) is NOT a card: it is the
  * Waiting footer, counted, so "needs you" counts only what needs the seller today. A snoozed item leaves until its date
- * or until the buyer moves. The counts are the contents (N4): needs you = the cards; the footers list what they count.
+ * or until the buyer moves. The counts are the contents (N4): needs you = the cards that need the seller; research,
+ * holds and the seller's own set-asides stay listed after them, under PARKED, counted apart (batch item 8: a hold or a
+ * research card is never "needs you"); the footers list what they count.
  *
  * Not a second state engine: the cards are projected from the cockpit's candidates, the account motions, the In Deals
  * summary, the reply class (replies/classify.ts), the canonical pursuit summaries (whose actionable result wins over
@@ -42,6 +44,15 @@ import type { CockpitLane } from '@/components/gap/gap-cockpit';
 export type WorkStateKind = 'replied' | 'opted_out' | 'bounced' | 'follow_up' | 'ready' | 'decide' | 'research' | 'in_deal' | 'unknown_deal' | 'held' | 'committed' | 'meeting';
 export type WorkTier = 'commitment' | 'reply' | 'meeting' | 'deal' | 'follow_up' | 'ready' | 'review' | 'research' | 'admin' | 'later' | 'held';
 export const TIER_RANK: Record<WorkTier, number> = { commitment: 0, reply: 1, meeting: 2, deal: 3, follow_up: 4, ready: 5, review: 6, research: 7, admin: 7.5, later: 8, held: 9 };
+/**
+ * Batch item 8: the tiers that do not need the seller today (research, a hold, the seller's own set-aside). Their cards
+ * stay listed, after every card that needs the seller and under their own heading, and never count in "needs you".
+ */
+export const PARKED_TIERS: ReadonlySet<WorkTier> = new Set<WorkTier>(['research', 'later', 'held']);
+/** Does this card need the seller today? Its tier, else (a card built outside workDay) the tier its state places it in. */
+export function needsYouCard(c: { tier?: WorkTier; stateKind: WorkStateKind }): boolean {
+  return !PARKED_TIERS.has(c.tier ?? STATE_TIER[c.stateKind]);
+}
 /** The Work filters: the analyst lanes plus "due" (buyer commitments, meetings and deal steps due today). */
 export type WorkLane = CockpitLane | 'commitments';
 
@@ -67,6 +78,8 @@ export interface WorkObligation {
   scope?: string | null;
   /** R51: the meeting's prepared starting point (objective and the first open question), when one was prepared. */
   prep?: string | null;
+  /** Batch item 8: what proves it done (a plan milestone's own proof), asked when the seller marks it done. */
+  proofNeeded?: string | null;
 }
 
 export interface WaitingItem {
@@ -162,7 +175,8 @@ export interface WorkDay {
   waiting: WaitingItem[];
   /** Put away by the seller until a date (accounts and obligations). */
   snoozed: Array<{ key: string; accountName: string; line: string; until: string }>;
-  counts: { needsYou: number; obligationsDue: number; waiting: number; snoozed: number };
+  /** needsYou: the cards that need the seller; parked: the research, held and set-aside cards listed after them. */
+  counts: { needsYou: number; parked: number; obligationsDue: number; waiting: number; snoozed: number };
 }
 
 const STATE_TEXT: Record<WorkStateKind, string> = {
@@ -507,7 +521,7 @@ export function workDay(i: WorkInput): WorkDay {
     // promotes a held account either; every other kind ranks.
     const tier: WorkTier = c.source.kind === 'snooze' || plan?.action === 'held' ? 'later' : commitmentTier(c);
     const list = obligations.get(c.accountName) ?? [];
-    list.push({ key: c.commitmentId, commitmentId: c.commitmentId, kind: c.kind, tier, title: c.title, line: plan?.line ?? p.line, dueAt: c.dueAt, dueDay: p.dueDay, person: c.person ? { name: c.person.name, email: c.person.email } : null, basis: c.basis, href: action.href, label: action.label, canComplete: true, scope: dealLabel(c.accountName, c.dealId) });
+    list.push({ key: c.commitmentId, commitmentId: c.commitmentId, kind: c.kind, tier, title: c.title, line: plan?.line ?? p.line, dueAt: c.dueAt, dueDay: p.dueDay, person: c.person ? { name: c.person.name, email: c.person.email } : null, basis: c.basis, href: action.href, label: action.label, canComplete: true, scope: dealLabel(c.accountName, c.dealId), proofNeeded: c.detail?.proofNeeded ?? null });
     obligations.set(c.accountName, list);
   }
   const horizon = i.now.getTime() + 24 * 3_600_000;
@@ -571,7 +585,7 @@ export function workDay(i: WorkInput): WorkDay {
     const prio = i.priorities?.get(name) ?? null;
     return { r, tier, lane, list, dueMs, act, prio };
   });
-  ranked.sort((a, b) => TIER_RANK[a.tier] - TIER_RANK[b.tier] || a.dueMs - b.dueMs || b.act - a.act || Number(!a.prio) - Number(!b.prio) || a.r.rank - b.r.rank || cmpKeys(a.r.sortKey, b.r.sortKey) || a.r.card.accountName.localeCompare(b.r.card.accountName));
+  ranked.sort((a, b) => Number(PARKED_TIERS.has(a.tier)) - Number(PARKED_TIERS.has(b.tier)) || TIER_RANK[a.tier] - TIER_RANK[b.tier] || a.dueMs - b.dueMs || b.act - a.act || Number(!a.prio) - Number(!b.prio) || a.r.rank - b.r.rank || cmpKeys(a.r.sortKey, b.r.sortKey) || a.r.card.accountName.localeCompare(b.r.card.accountName));
   /** R44: Capture opened from this card: the account, the person who wrote, the deal, the conversation, the source. */
   const replyPersona = new Map(i.replies.filter((r) => r.personaId != null).map((r) => [`${r.accountName}|${r.contactEmail.toLowerCase()}`, r.personaId as number]));
   const captureFor = (card: Omit<WorkCard, 'href' | 'index' | 'source'>, list: WorkObligation[]): { href: string; label: string } => {
@@ -626,7 +640,8 @@ export function workDay(i: WorkInput): WorkDay {
   }
   snoozed.sort((a, b) => a.until.localeCompare(b.until) || a.accountName.localeCompare(b.accountName));
   waiting.sort((a, b) => String(a.dueDay ?? '9999').localeCompare(String(b.dueDay ?? '9999')) || a.accountName.localeCompare(b.accountName));
-  return { cards, waiting, snoozed, counts: { needsYou: cards.length, obligationsDue: cards.reduce((n, c) => n + (c.obligations?.length ?? 0), 0), waiting: waiting.length, snoozed: snoozed.length } };
+  const needs = cards.filter(needsYouCard).length;
+  return { cards, waiting, snoozed, counts: { needsYou: needs, parked: cards.length - needs, obligationsDue: cards.reduce((n, c) => n + (c.obligations?.length ?? 0), 0), waiting: waiting.length, snoozed: snoozed.length } };
 }
 
 /** The cards alone (the order Work shows). */
