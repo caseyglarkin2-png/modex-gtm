@@ -251,7 +251,7 @@ function ThesisGroupCard({ card, openInitially, onOutcome }: { card: ThesisCard;
           <section>
             <h3 className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">{card.members.length > 1 ? 'Shared thesis' : 'Thesis'}</h3>
             <p className="mt-1"><span className="text-[var(--muted-foreground)]">Observation:</span> {card.observation}</p>
-            <p className="mt-1"><span className="text-[var(--muted-foreground)]">Hypothesis:</span> {card.problemHypothesis}</p>
+            <p className="mt-1"><span className="text-[var(--muted-foreground)]">What we think is happening:</span> {card.problemHypothesis}</p>
             {card.rootCauses.length ? <p className="mt-1"><span className="text-[var(--muted-foreground)]">Root causes:</span> {card.rootCauses.join('; ')}</p> : null}
             {card.impacts.length ? <p className="mt-1"><span className="text-[var(--muted-foreground)]">Impacts:</span> {card.impacts.join('; ')}</p> : null}
             {card.falsification.length ? <p className="mt-1"><span className="text-[var(--muted-foreground)]">Falsify with:</span> {card.falsification.join(' ')}</p> : null}

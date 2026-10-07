@@ -100,7 +100,7 @@ describe('<SixLineBriefView>', () => {
     render(<SixLineBriefView brief={b} personaId={7} accountName="PepsiCo" />);
     for (const id of ['brief-know', 'brief-think', 'brief-learn', 'brief-why-you', 'brief-history', 'brief-wrong-if']) expect(screen.getByTestId(id)).toBeInTheDocument();
     expect(screen.getByTestId('brief-know')).toHaveTextContent('✓ verified');
-    expect(screen.getByTestId('brief-think')).toHaveTextContent('Hypothesis (inference):');
+    expect(screen.getByTestId('brief-think')).toHaveTextContent('What we think is happening (our read):');
     expect(screen.getByTestId('brief-why-you')).toHaveTextContent('Suggested (not yours yet): Runs distribution at PepsiCo.');
     // One column below sm (no horizontal scroll on a phone), a label column from sm up.
     expect(screen.getByTestId('brief-know').className).toContain('grid-cols-1');

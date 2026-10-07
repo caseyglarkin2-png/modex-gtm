@@ -52,7 +52,7 @@ export function SixLineBriefView({ brief, personaId, accountName }: { brief: Six
         <Row label="Think" testId="brief-think">
           {brief.think ? (
             <p>
-              <span className="text-xs font-semibold uppercase text-[var(--muted-foreground)]">Hypothesis (inference): </span>
+              <span className="text-xs font-semibold uppercase text-[var(--muted-foreground)]">What we think is happening (our read): </span>
               {brief.think}
             </p>
           ) : (

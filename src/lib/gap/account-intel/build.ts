@@ -1198,7 +1198,7 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
   const live = rankedFacts(i, now);
   const top = hypotheses.find((h) => h.truth !== 'CONTRADICTED' && h.grounded) ?? hypotheses.find((h) => h.truth === 'CONTRADICTED') ?? null;
   const drafts = hypotheses.filter((h) => !h.grounded && h.truth !== 'CONTRADICTED').length;
-  const noHypothesis = drafts ? `No strong hypothesis yet (${plural(drafts, 'ungrounded draft')} ${drafts === 1 ? 'exists: its observation is' : 'exist: their observations are'} not a live verified fact).` : 'No strong hypothesis yet.';
+  const noHypothesis = drafts ? `No strong thesis yet (${plural(drafts, 'ungrounded draft')} ${drafts === 1 ? 'exists: its observation is' : 'exist: their observations are'} not a live verified fact).` : 'No strong thesis yet.';
 
   const whyNot: string[] = [];
   if (i.opportunity?.status === 'ACTIVE') whyNot.push('There is an open deal: work it from the deal, never cold.');

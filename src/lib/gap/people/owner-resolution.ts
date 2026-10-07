@@ -49,7 +49,7 @@ export type OwnerPurpose = 'COLD_FIRST_TOUCH' | 'HYPOTHESIS_ACTIVATION' | 'SITE_
 
 export const PURPOSE_LABEL: Record<OwnerPurpose, string> = {
   COLD_FIRST_TOUCH: 'the cold first touch',
-  HYPOTHESIS_ACTIVATION: 'this hypothesis',
+  HYPOTHESIS_ACTIVATION: 'this thesis',
   SITE_PILOT: 'a site pilot',
   TRANSFORMATION_INITIATIVE: 'the transformation initiative',
 };

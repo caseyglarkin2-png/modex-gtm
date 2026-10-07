@@ -22,7 +22,7 @@ describe('sellerActionLabel', () => {
     expect(sellerActionLabel('call_now', 'Joey', 'Kroger')).toBe('Call Joey');
     expect(sellerActionLabel('linkedin_manual_task', 'Joey', 'Kroger')).toBe('Message Joey on LinkedIn');
     expect(sellerActionLabel('research_required', 'Joey', 'Kroger')).toBe('Research Joey / Kroger');
-    expect(sellerActionLabel('approve_hypothesis', 'Joey', 'Kroger')).toBe('Review hypothesis');
+    expect(sellerActionLabel('approve_hypothesis', 'Joey', 'Kroger')).toBe('Review the thesis');
     expect(sellerActionLabel('nurture', 'Joey', 'Kroger')).toBe('Hold for later');
     expect(sellerActionLabel('do_not_contact', 'Joey', 'Kroger')).toBe('Do not contact');
   });

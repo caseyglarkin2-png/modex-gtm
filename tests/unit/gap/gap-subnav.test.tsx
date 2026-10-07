@@ -20,7 +20,7 @@ describe('<GapSubnav>', () => {
     expect(screen.getByRole('link', { name: 'Capture' })).toHaveAttribute('href', '/gap/capture');
     const more = screen.getByTestId('gap-subnav-more');
     for (const t of MORE_TABS) expect(within(more).getByRole('link', { name: t.label })).toHaveAttribute('href', t.href);
-    expect(within(more).getByRole('link', { name: 'All hypotheses' })).toHaveAttribute('href', '/gap/hypotheses');
+    expect(within(more).getByRole('link', { name: 'All theses' })).toHaveAttribute('href', '/gap/hypotheses');
     expect(PRIMARY_TABS.map((t) => t.label)).toEqual(['Work', 'Accounts', 'Capture']);
     expect(screen.getAllByRole('link')).toHaveLength(PRIMARY_TABS.length + MORE_TABS.length);
     expect(screen.getByRole('link', { name: 'Work' })).toHaveAttribute('aria-current', 'page');
@@ -34,10 +34,10 @@ describe('<GapSubnav>', () => {
     expect(screen.getByRole('link', { name: 'Capture' })).not.toHaveAttribute('aria-current');
   });
 
-  it('a nested hypothesis path is current under All hypotheses, and the More menu label is marked', () => {
+  it('a nested hypothesis path is current under All theses, and the More menu label is marked', () => {
     pathname = '/gap/hypotheses/hyp_1';
     render(<GapSubnav />);
-    expect(screen.getByRole('link', { name: 'All hypotheses' })).toHaveAttribute('aria-current', 'page');
+    expect(screen.getByRole('link', { name: 'All theses' })).toHaveAttribute('aria-current', 'page');
     expect(screen.getByRole('link', { name: 'Work' })).not.toHaveAttribute('aria-current');
     expect(screen.getByText('More').className).toMatch(/var\(--primary\)/);
   });

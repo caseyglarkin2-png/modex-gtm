@@ -150,7 +150,7 @@ export function HypothesisBlock({
       className={`${BLOCK_BASE} border-2 border-dashed border-amber-500/70 bg-transparent`}
     >
       <div className="flex items-baseline justify-between gap-3">
-        <h3 className="text-xs font-bold tracking-[0.2em] text-amber-700 dark:text-amber-400">HYPOTHESIS</h3>
+        <h3 className="text-xs font-bold tracking-[0.2em] text-amber-700 dark:text-amber-400">WHAT WE THINK IS HAPPENING</h3>
       </div>
       <Caption>Seller inference, unproven</Caption>
       <p className="mt-3 italic leading-6">{problemHypothesis}</p>

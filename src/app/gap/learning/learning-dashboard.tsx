@@ -364,7 +364,7 @@ export function LearningDashboard({ client = defaultGapApiClient }: { client?: G
       ) : null}
       <section aria-labelledby="hypothesis-funnel-heading" className="space-y-3">
         <h2 id="hypothesis-funnel-heading" className="text-lg font-semibold">
-          Hypothesis funnel
+          Thesis funnel
         </h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <RateTile label="Resolution rate" r={f.resolutionRate} help="Resolved / hypotheses with substantive buyer interaction" />

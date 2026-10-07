@@ -86,7 +86,7 @@ describe('LearningDashboard', () => {
   it('shows "no data yet" rather than a fabricated 0% when the denominator is zero', async () => {
     const client = clientWith({ ok: true, status: 200, data: report() });
     render(<LearningDashboard client={client} />);
-    expect(await screen.findByText('Hypothesis funnel')).toBeInTheDocument();
+    expect(await screen.findByText('Thesis funnel')).toBeInTheDocument();
     expect(screen.getAllByText('no data yet').length).toBeGreaterThan(0);
     expect(screen.queryByText('0%')).not.toBeInTheDocument();
   });
@@ -98,7 +98,7 @@ describe('LearningDashboard', () => {
       data: report({ funnel: { ...report().funnel, resolutionRate: { value: 0.8, n: 5, numerator: 4, denominator: 5 } } }),
     });
     render(<LearningDashboard client={client} />);
-    await screen.findByText('Hypothesis funnel');
+    await screen.findByText('Thesis funnel');
     expect(screen.queryByText('80%')).not.toBeInTheDocument();
     expect(screen.getAllByText(/early observation, n < 20/).length).toBeGreaterThan(0);
     expect(screen.getByText('4/5')).toBeInTheDocument();
@@ -111,7 +111,7 @@ describe('LearningDashboard', () => {
       data: report({ funnel: { ...report().funnel, resolutionRate: { value: 0.5, n: 40, numerator: 20, denominator: 40 } } }),
     });
     render(<LearningDashboard client={client} />);
-    await screen.findByText('Hypothesis funnel');
+    await screen.findByText('Thesis funnel');
     expect(screen.getByText('50%')).toBeInTheDocument();
     expect(screen.getByText(/50% \(20\/40, 95% CI 35%-65%\)/)).toBeInTheDocument();
   });
@@ -135,7 +135,7 @@ describe('LearningDashboard', () => {
     const client = clientWith({ ok: false, status: 401, error: 'unauthenticated' });
     render(<LearningDashboard client={client} />);
     expect(await screen.findByRole('alert')).toHaveTextContent('unauthenticated');
-    expect(screen.queryByText('Hypothesis funnel')).not.toBeInTheDocument();
+    expect(screen.queryByText('Thesis funnel')).not.toBeInTheDocument();
   });
 
   it('renders a problem-family breakdown row with its rate and n', async () => {
@@ -159,7 +159,7 @@ describe('LearningDashboard', () => {
   it('R-A: the campaign select lists the programs the report response carries', async () => {
     const { client } = spyClient({ ...report(), filters: { program: null, from: null, to: null }, programs: ['Inland26', 'top100-2026-09-12'] });
     render(<LearningDashboard client={client} />);
-    await screen.findByText('Hypothesis funnel');
+    await screen.findByText('Thesis funnel');
     const select = screen.getByLabelText('Campaign') as HTMLSelectElement;
     const options = Array.from(select.options).map((o) => o.value);
     expect(options).toEqual(['', 'Inland26', 'top100-2026-09-12']);
@@ -168,7 +168,7 @@ describe('LearningDashboard', () => {
   it('R-A: choosing a campaign re-fetches with that program', async () => {
     const { client, getLearningReport } = spyClient({ ...report(), filters: { program: null, from: null, to: null }, programs: ['Inland26'] });
     render(<LearningDashboard client={client} />);
-    await screen.findByText('Hypothesis funnel');
+    await screen.findByText('Thesis funnel');
     expect(getLearningReport).toHaveBeenCalledWith({});
 
     fireEvent.change(screen.getByLabelText('Campaign'), { target: { value: 'Inland26' } });
@@ -178,7 +178,7 @@ describe('LearningDashboard', () => {
   it('R-A: setting a date range re-fetches with from/to', async () => {
     const { client, getLearningReport } = spyClient({ ...report(), filters: { program: null, from: null, to: null }, programs: [] });
     render(<LearningDashboard client={client} />);
-    await screen.findByText('Hypothesis funnel');
+    await screen.findByText('Thesis funnel');
 
     fireEvent.change(screen.getByLabelText('From date'), { target: { value: '2026-09-01' } });
     await waitFor(() => expect(getLearningReport).toHaveBeenLastCalledWith({ from: '2026-09-01' }));
@@ -189,7 +189,7 @@ describe('LearningDashboard', () => {
   it('R-A: Clear resets every filter and re-fetches unfiltered', async () => {
     const { client, getLearningReport } = spyClient({ ...report(), filters: { program: null, from: null, to: null }, programs: ['Inland26'] });
     render(<LearningDashboard client={client} />);
-    await screen.findByText('Hypothesis funnel');
+    await screen.findByText('Thesis funnel');
     fireEvent.change(screen.getByLabelText('Campaign'), { target: { value: 'Inland26' } });
     await waitFor(() => expect(getLearningReport).toHaveBeenLastCalledWith({ program: 'Inland26' }));
 
@@ -227,7 +227,7 @@ describe('LearningDashboard', () => {
     const client = clientWith({ ok: true, status: 200, data: report() });
     (client.getRoutingAgreement as ReturnType<typeof vi.fn>).mockResolvedValue({ ok: false, status: 401, error: 'unauthenticated' });
     render(<LearningDashboard client={client} />);
-    expect(await screen.findByText('Hypothesis funnel')).toBeInTheDocument();
+    expect(await screen.findByText('Thesis funnel')).toBeInTheDocument();
     expect(await screen.findByText(/Could not load the agreement report: unauthenticated/)).toBeInTheDocument();
   });
 });

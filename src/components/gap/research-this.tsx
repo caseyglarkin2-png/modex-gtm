@@ -121,7 +121,7 @@ function ProposedThesis({ narrative, links = {} }: { narrative: Narrative; links
       <Section label="Facts">
         <p>{uncited(narrative.observation)}</p>
       </Section>
-      <Section label="Hypothesis">
+      <Section label="What we think is happening">
         <p>{narrative.problemHypothesis}</p>
       </Section>
       <Section label="Root causes">

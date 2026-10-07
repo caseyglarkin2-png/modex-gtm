@@ -145,7 +145,7 @@ describe('the owner-resolution panel', () => {
     vi.spyOn(globalThis, 'fetch').mockImplementation(async () => jsonResponse({ resolution: RESOLUTION, hubspot: { via: 'identity' } }));
     render(<OwnerResolutionPanel hypothesisId="h1" accountName="FedEx" />);
     await waitFor(() => expect(screen.getByTestId('owner-recommended')).toBeInTheDocument());
-    expect(screen.getByTestId('owner-recommended')).toHaveTextContent('Recommended for this hypothesis');
+    expect(screen.getByTestId('owner-recommended')).toHaveTextContent('Recommended for this thesis');
     expect(screen.getByTestId('owner-recommended-why')).toHaveTextContent(/on thesis relevance: runs operations planning and engineering/);
     // The badge sits on one row only; no radio is checked; USE is absent until a click.
     expect(screen.getAllByTestId('owner-recommended')).toHaveLength(1);

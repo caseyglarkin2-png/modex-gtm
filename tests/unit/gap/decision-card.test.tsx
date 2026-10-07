@@ -321,7 +321,7 @@ describe('<DecisionCard> Seller Action Center (dogfood fix, 2026-09-25)', () => 
     expect(panel).toHaveTextContent('No hypothesis covers Jordan at Acme Foods');
     // Last mile: nothing of this card's is waiting in REVIEW, so the fix is research on this card, not an empty lane.
     expect(within(panel).queryByRole('link', { name: /Review/ })).toBeNull();
-    expect(within(panel).getByRole('link', { name: /Research to propose a hypothesis/ })).toHaveAttribute('href', '/gap?lane=research#card-dec_1');
+    expect(within(panel).getByRole('link', { name: /Research to propose a thesis/ })).toHaveAttribute('href', '/gap?lane=research#card-dec_1');
     expect(screen.queryByRole('link', { name: /Open email and call script/ })).toBeNull();
     expect(screen.queryByTestId('rendered-email')).toBeNull();
   });
@@ -408,7 +408,7 @@ describe('<DecisionCard> inline in the cockpit (weekend reduction, 2026-09-26)',
     it("links to REVIEW only when this card's thesis is actually waiting there", () => {
       render(<DecisionCard item={item({ action: 'research_required', ruleId: 'no_hypothesis', hypothesis: null })} reviewWaiting={{ hypothesisIds: [], personaIds: [41] }} onAct={() => {}} />);
       const panel = screen.getByTestId('missing-prerequisite');
-      expect(within(panel).getByRole('link', { name: /Review the waiting hypothesis/ })).toHaveAttribute('href', '/gap?lane=review');
+      expect(within(panel).getByRole('link', { name: /Review the waiting thesis/ })).toHaveAttribute('href', '/gap?lane=review');
     });
 
     it('something unrelated waiting in review does not send this card there', () => {

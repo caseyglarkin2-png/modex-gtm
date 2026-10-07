@@ -107,8 +107,8 @@ describe('buyer truth outranks public inference', () => {
 });
 
 describe('honest answers are first-class', () => {
-  it('no hypothesis: "No strong hypothesis yet"', () => {
-    expect(buildAccountBrief(base({ hypotheses: [] }), NOW).glance.topHypothesis).toBe('No strong hypothesis yet.');
+  it('no hypothesis: "No strong thesis yet"', () => {
+    expect(buildAccountBrief(base({ hypotheses: [] }), NOW).glance.topHypothesis).toBe('No strong thesis yet.');
   });
   it('no live verified fact: do not contact yet, research first', () => {
     const b = buildAccountBrief(base({ facts: [], hypotheses: [] }), NOW);
@@ -170,7 +170,7 @@ describe('the thesis is inference, never approved', () => {
     const bare = buildAccountBrief(base({ facts: [] }), NOW).thesis;
     expect(bare.whyNotPursue.join(' ')).toMatch(/No live verified fact/);
     // the draft's observation is no longer live: it cannot lead
-    expect(bare.whatMayBeBroken).toMatch(/^Unknown: No strong hypothesis yet \(1 ungrounded draft/);
+    expect(bare.whatMayBeBroken).toMatch(/^Unknown: No strong thesis yet \(1 ungrounded draft/);
   });
 });
 
@@ -194,10 +194,10 @@ describe('real-data fixes (PepsiCo / General Mills / Kroger dogfood)', () => {
     expect(b.glance.whyNow).toMatch(/redesign/);
   });
 
-  it('a hypothesis not grounded in a live verified fact never leads: "No strong hypothesis yet" and the drafts are counted', () => {
+  it('a hypothesis not grounded in a live verified fact never leads: "No strong thesis yet" and the drafts are counted', () => {
     const h = { ...base().hypotheses[0], id: 'kw', observation: 'PEP 10-Q mentions: capital expenditure', problem: 'My guess is that physical handoffs constrain production capacity, and the signals above are where that pressure shows first.', primarySignalId: 'kw-signal' };
     const b = buildAccountBrief(base({ hypotheses: [h] }), NOW);
-    expect(b.glance.topHypothesis).toBe('No strong hypothesis yet (1 ungrounded draft exists: its observation is not a live verified fact).');
+    expect(b.glance.topHypothesis).toBe('No strong thesis yet (1 ungrounded draft exists: its observation is not a live verified fact).');
     expect(b.hypotheses[0].grounded).toBe(false);
   });
 

@@ -72,7 +72,7 @@ describe('<PreCallBrief>', () => {
 
     const hypothesis = screen.getByTestId('hypothesis-block');
     expect(hypothesis).toHaveAttribute('data-block', 'hypothesis');
-    expect(within(hypothesis).getByText('HYPOTHESIS')).toBeInTheDocument();
+    expect(within(hypothesis).getByText('WHAT WE THINK IS HAPPENING')).toBeInTheDocument();
     expect(within(hypothesis).getByText('Seller inference, unproven')).toBeInTheDocument();
     // Red team T7: no auto confidence number is shown.
     expect(within(hypothesis).queryByText(/confidence \d+%/)).toBeNull();

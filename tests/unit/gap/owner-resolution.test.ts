@@ -93,7 +93,7 @@ describe('FedEx pattern: a carrier ranks its network owners by the carrier doctr
     const two = resolveOwner(base({ account: { name: 'FedEx', entityType: '3pl' }, hypothesis: fact, candidates: [people[0], hs('9', 'Pat Network', 'Vice President Network Operations - North America', { location: 'Memphis, Tennessee, United States' })] }));
     expect(two.nextStep).toBe('choose');
     expect(two.preselected).toBeNull();
-    expect(two.headline).toMatch(/^2 plausible owners for this hypothesis: choose one\. GAP does not pick\./);
+    expect(two.headline).toMatch(/^2 plausible owners for this thesis: choose one\. GAP does not pick\./);
   });
   it('the air network president is a direct operator with less named ownership: behind the ground network owners', () => {
     const names = r.eligible.map((c) => c.name);

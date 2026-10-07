@@ -298,7 +298,7 @@ function EffectsPanel({ result, onDone }: { result: DispositionResult; onDone: (
             : 'Resolution: none'}
         </li>
         <li data-testid="effect-mirrored">Mirrored to HubSpot: {effects?.mirrored ? 'yes' : 'no'}</li>
-        {Array.isArray(result.bidIds) && result.bidIds.length > 0 ? <li>{result.bidIds.length} BID captured</li> : null}
+        {Array.isArray(result.bidIds) && result.bidIds.length > 0 ? <li>{result.bidIds.length} of their statement{result.bidIds.length === 1 ? '' : 's'} recorded</li> : null}
       </ul>
       <Button type="button" size="sm" onClick={onDone}>
         Done

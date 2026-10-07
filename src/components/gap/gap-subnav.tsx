@@ -4,7 +4,7 @@
  * GAP subnav (account-first UX, UX-10): three seller items and an overflow.
  *
  *   WORK (/gap)   ACCOUNTS (/gap/accounts)   CAPTURE (/gap/capture)   More v (Add to GAP, Sources, Signals,
- *                                                                              All hypotheses, Learning, Notes)
+ *                                                                              All theses, Learning, Notes)
  *
  * The intelligence and admin tools are not deleted: they live under More, out of the seller's normal path. Active
  * item from the pathname (the main sidebar's convention); a More item that is current keeps the menu label marked.
@@ -26,7 +26,7 @@ export const MORE_TABS = [
   { label: 'Add to GAP', href: '/gap/add' },
   { label: 'Sources', href: '/gap/sources' },
   { label: 'Signals', href: '/gap/signals' },
-  { label: 'All hypotheses', href: '/gap/hypotheses' },
+  { label: 'All theses', href: '/gap/hypotheses' },
   { label: 'Learning', href: '/gap/learning' },
   { label: 'Coverage', href: '/gap/coverage' },
   { label: 'Notes', href: '/gap/feedback' },

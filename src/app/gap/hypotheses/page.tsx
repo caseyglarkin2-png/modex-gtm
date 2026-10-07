@@ -23,7 +23,7 @@ import { ThesisGroupReview } from '@/components/gap/thesis-group-review';
 import { HypothesisList } from './hypothesis-list';
 
 export const dynamic = 'force-dynamic';
-export const metadata = { title: 'All hypotheses' };
+export const metadata = { title: 'All theses' };
 
 type SearchParams = { status?: string };
 
@@ -48,10 +48,10 @@ export default async function HypothesesPage({ searchParams }: { searchParams?: 
 
   return (
     <div className="space-y-6">
-      <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'GAP', href: '/gap' }, { label: 'All hypotheses' }]} />
+      <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'GAP', href: '/gap' }, { label: 'All theses' }]} />
       <GapSubnav />
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight">All hypotheses</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">All theses</h1>
         <p className="mt-1 text-sm text-[var(--muted-foreground)]">
           History and every status. To decide what is waiting, use <a className="underline" href="/gap?lane=review">Review</a> in the cockpit.
         </p>

@@ -19,7 +19,7 @@ const SELLER_ACTION_TEMPLATE: Record<RoutingAction, string> = {
   call_now: 'Call {name}',
   linkedin_manual_task: 'Message {name} on LinkedIn',
   research_required: 'Research {name} / {account}',
-  approve_hypothesis: 'Review hypothesis',
+  approve_hypothesis: 'Review the thesis',
   nurture: 'Hold for later',
   do_not_contact: 'Do not contact',
 };

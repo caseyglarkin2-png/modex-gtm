@@ -170,7 +170,7 @@ function countOf(value: unknown): number {
  */
 export const HUMAN_ACTION_LABEL: Record<HumanAction, string> = {
   researched: 'I researched it',
-  approved_hypothesis: 'I approved the hypothesis',
+  approved_hypothesis: 'I approved the thesis',
   called: 'I called',
   emailed: 'I emailed',
   enrolled_by_hand: 'I enrolled manually',

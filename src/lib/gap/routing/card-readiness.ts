@@ -134,9 +134,9 @@ export function reviewWaitsFor(item: { hypothesis: { id: string } | null; person
  * Casey is never sent to an empty REVIEW lane. Label and destination agree.
  */
 function hypothesisFix(item: ReadinessInput): Link {
-  if (item.reviewWaiting) return { label: 'Review the waiting hypothesis', href: HYPOTHESIS_REVIEW_HREF };
+  if (item.reviewWaiting) return { label: 'Review the waiting thesis', href: HYPOTHESIS_REVIEW_HREF };
   const href = `/gap?lane=research#card-${encodeURIComponent(item.id)}`;
-  return item.hypothesis ? { label: 'Find verified evidence', href } : { label: 'Research to propose a hypothesis', href };
+  return item.hypothesis ? { label: 'Find verified evidence', href } : { label: 'Research to propose a thesis', href };
 }
 
 export function cardReadiness(item: ReadinessInput): CardReadiness {
@@ -235,7 +235,7 @@ function readinessOf(item: ReadinessInput): CardReadiness {
       return withWarning({ state: 'actionable' as const, primary: { label: `Message ${name} on LinkedIn`, href: li, cold: 'linkedin' as const }, secondary: openPack ? [openPack] : [] });
     }
     case 'approve_hypothesis':
-      return withWarning({ state: 'actionable' as const, primary: { label: 'Review the hypothesis', href: HYPOTHESIS_REVIEW_HREF }, secondary: [] });
+      return withWarning({ state: 'actionable' as const, primary: { label: 'Review the thesis', href: HYPOTHESIS_REVIEW_HREF }, secondary: [] });
     case 'nurture':
       // R3b: an open HubSpot deal (or a meeting / positive reply) at this account. Hold, and say why.
       if (item.ruleId === 'active_opportunity') {
