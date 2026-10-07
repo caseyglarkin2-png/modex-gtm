@@ -12,6 +12,7 @@ import { useState } from 'react';
 import type { PreparedAnswer } from '@/lib/gap/replies/answer';
 import { unfilledPlaceholders } from '@/lib/gap/replies/answer';
 import type { ReplyStates } from '@/lib/gap/execution/seller-reply';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 const SMALL = 'inline-flex min-h-11 items-center justify-center rounded-md border border-[var(--border)] px-3 text-xs hover:bg-[var(--muted)] disabled:opacity-60 sm:min-h-9';
 const PRIMARY = 'inline-flex min-h-11 items-center justify-center rounded-md bg-[var(--primary)] px-3 text-xs font-medium text-[var(--primary-foreground)] disabled:opacity-60 sm:min-h-9';
@@ -97,7 +98,7 @@ export function ReplyAnswer({ messageId }: { messageId: string }) {
     setStatus(op === 'copied' ? 'Copied. Nothing was sent.' : op === 'draft' ? 'Saved as a Gmail draft in their thread. Nothing was sent.' : r.data.alreadySent ? 'Already sent: nothing went out twice.' : 'Sent in their thread.');
     const again = await call(messageId, 'GET');
     if (again.ok) setLoaded(again.data as unknown as Loaded);
-    router.refresh();
+    refreshNow(router);
   }
 
   if (!loaded) {

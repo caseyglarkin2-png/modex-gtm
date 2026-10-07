@@ -9,6 +9,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { ResearchPlan } from '@/lib/gap/account-intel/orchestrate';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 const SECTION_LABEL: Record<string, string> = { identity: 'Company and operations', catalysts: 'Catalysts', footprint: 'Footprint', technology: 'Technology', freight: 'Freight', org: 'Who owns it', economics: 'Economics', yard: 'Yard process', commercial: 'Commercial' };
 const OUTCOME: Record<string, string> = { scouted: 'Scout judged what it is and what it runs', evidence_found: 'found verified evidence', insufficient_evidence: 'found nothing it could verify (an honest answer)', conflicting_evidence: 'found sources that disagree', section_filled: 'added to this section', nothing_for_section: 'found nothing new for this section', provider_unavailable: 'could not search the web right now (retry later; nothing was learned)' };
@@ -35,7 +36,7 @@ export function ResearchPlanView({ accountName, plan }: { accountName: string; p
     // Research aperture: sources found are never collapsed into claims verified at source.
     const counts = typeof body.sources === 'number' ? ` (sources / signals: ${body.sources} · claims verified at source: ${body.facts ?? 0})` : body.facts ? ` (${body.facts} ${body.facts === 1 ? 'fact' : 'facts'})` : '';
     setMsg(`${SECTION_LABEL[section] ?? section}: ${OUTCOME[body.sectionOutcome ?? body.outcome ?? ''] ?? body.outcome}${counts}.`);
-    router.refresh();
+    refreshNow(router);
   }
   if (!plan.tasks.length && !plan.skipped.length) return null;
   return (

@@ -13,6 +13,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { AskProposal } from '@/lib/gap/ask/proposal';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 const BTN = 'inline-flex min-h-11 items-center justify-center rounded-md px-3 text-sm font-medium';
 const PRIMARY = `${BTN} bg-[var(--primary)] text-[var(--primary-foreground)] hover:opacity-90 disabled:opacity-60`;
@@ -51,7 +52,7 @@ function ProposalControl({ proposal }: { proposal: AskProposal }) {
       const body = (await res.json().catch(() => ({}))) as { preparation?: string; detail?: string; error?: string; reason?: string; submitRefusal?: string | null; sectionOutcome?: string; outcome?: string };
       if (proposal.kind === 'draft_thesis') setResult(draftResult(body, res.ok));
       else setResult(res.ok ? { kind: 'status', text: `Research ran: ${body.sectionOutcome ?? body.outcome ?? 'done'}. The page refreshes with what it found. Nothing is sent.` } : { kind: 'alert', text: `Not run: ${body.reason ?? body.error ?? res.status}. Nothing changed.` });
-      if (res.ok) router.refresh();
+      if (res.ok) refreshNow(router);
     } catch (e) {
       setResult({ kind: 'alert', text: `${e instanceof Error ? e.message : 'network error'}. Reopen the page before trying again.` });
     } finally {

@@ -8,6 +8,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { MemberView } from '@/lib/gap/intake/views';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 const btn = 'min-h-[36px] rounded-md border border-[var(--border)] px-2 py-1 text-xs hover:bg-[var(--muted)] disabled:opacity-60';
 
@@ -24,7 +25,7 @@ export function PersonResolve({ member }: { member: Pick<MemberView, 'id' | 'nam
     setBusy(false);
     if (!res.ok) return setMsg(`Not saved: ${String(((await res.json().catch(() => ({}))) as { error?: string }).error ?? res.status)}`);
     setMsg(done);
-    router.refresh();
+    refreshNow(router);
   }
   return (
     <div className="space-y-1" data-testid="person-resolve">

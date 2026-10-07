@@ -17,6 +17,7 @@ import { VoicePreviewButton } from '@/components/voice-preview-button';
 import { accountHref, accountSlug, withWorkContext } from '@/lib/gap/account-intel/href';
 import { ReplyPrepPanel } from './reply-prep';
 import { ObligationActions, postJson as post, REFUSAL_TEXT } from './obligation-actions';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 const BTN = 'inline-flex min-h-11 items-center justify-center rounded-md px-3 text-sm font-medium';
 const PRIMARY = `${BTN} bg-[var(--primary)] text-[var(--primary-foreground)] hover:opacity-90`;
@@ -56,7 +57,7 @@ function PriorityControl({ c }: { c: WorkCard }) {
     }
     setOpen(false);
     setStatus(null);
-    router.refresh();
+    refreshNow(router);
   }
   if (c.priority) {
     return (

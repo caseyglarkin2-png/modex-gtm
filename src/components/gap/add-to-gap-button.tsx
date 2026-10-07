@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { refusalSentence } from '@/lib/gap/ui/refusal-copy';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 const STATUS_COPY: Record<string, string> = {
   created: 'Added as a GAP contact.',
@@ -36,7 +37,7 @@ export function AddToGapButton({ accountName, hubspotContactId, name, title, lab
       }
       setResult({ ok: true, text: `${STATUS_COPY[String(body.status)] ?? 'Done.'} ${name} is now available to routing at ${accountName}.`, notes: Array.isArray(body.notes) ? (body.notes as string[]) : [] });
       onDone?.();
-      router.refresh();
+      refreshNow(router);
     } catch (e) {
       setResult({ ok: false, text: e instanceof Error ? e.message : 'network error', notes: [] });
     } finally {

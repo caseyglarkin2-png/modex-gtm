@@ -6,6 +6,7 @@
  */
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 const btn = 'min-h-[36px] rounded-md border border-[var(--border)] px-2 py-1 text-xs hover:bg-[var(--muted)] disabled:opacity-60';
 
@@ -19,7 +20,7 @@ export function SourceMemberActions({ memberId, status, canResearch }: { memberI
     const res = await fetch(`/api/gap/sources/members/${encodeURIComponent(memberId)}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status: next }) });
     setBusy(false);
     if (!res.ok) return setError(String(((await res.json().catch(() => ({}))) as { error?: string }).error ?? res.status));
-    router.refresh();
+    refreshNow(router);
   }
   if (status !== 'active') {
     return (

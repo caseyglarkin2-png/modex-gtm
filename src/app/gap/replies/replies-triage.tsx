@@ -25,6 +25,7 @@ import { DispositionForm } from '@/components/gap/disposition-form';
 import { ReplyList } from '@/components/gap/reply-list';
 import { detectNamed } from '@/lib/gap/replies/prepare';
 import { parseDuePhrase } from '@/lib/gap/work/dates';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 const SELECT_CLASS = 'h-9 rounded-md border border-[var(--border)] bg-transparent px-2 text-sm shadow-sm';
 
@@ -128,7 +129,7 @@ export function RepliesTriage({ client = defaultGapApiClient, inCockpit = false,
                 // In the cockpit (and on an account page) the next waiting reply opens on its own.
                 setExpandedId(inPlace && rest[0] ? rest[0].id : null);
               }
-              if (inPlace) router.refresh();
+              if (inPlace) refreshNow(router);
             }}
           />
         )}

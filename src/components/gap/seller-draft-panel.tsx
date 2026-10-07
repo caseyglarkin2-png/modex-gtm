@@ -20,6 +20,7 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { refusalSentence } from '@/lib/gap/ui/refusal-copy';
 import { ReportThis } from './feedback-button';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 export interface DraftRow {
   gmailDraftId: string;
@@ -92,7 +93,7 @@ export function SellerDraftPanel({ decisionId, emailReady, senderIdentity, draft
           already: data.alreadyDrafted === true,
           ledgerError: data.ledgerError,
         });
-        router.refresh();
+        refreshNow(router);
       } else if (data.error === 'copy_review_required') {
         setOutcome({ kind: 'review', detail: String(data.detail ?? ''), approvalId: typeof data.approvalRequestId === 'string' ? data.approvalRequestId : null });
       } else {
@@ -100,7 +101,7 @@ export function SellerDraftPanel({ decisionId, emailReady, senderIdentity, draft
         const detail = [data.detail, ...(Array.isArray(data.failedChecks) ? data.failedChecks : [])].filter(Boolean).join(' | ');
         setOutcome({ kind: 'refused', reason, detail });
         // A rejected copy can never be drafted or sent: the pack re-reads the verdict and drops Send beside this panel too.
-        if (reason === 'copy_rejected') router.refresh();
+        if (reason === 'copy_rejected') refreshNow(router);
       }
     } catch (err) {
       setOutcome({ kind: 'refused', reason: 'network_error', detail: err instanceof Error ? err.message : String(err) });
@@ -123,7 +124,7 @@ export function SellerDraftPanel({ decisionId, emailReady, senderIdentity, draft
       if (!res.ok) setApproveError(`Approval failed (HTTP ${res.status}).`);
       else {
         setOutcome(null);
-        router.refresh();
+        refreshNow(router);
       }
     } finally {
       setBusy(null);
@@ -147,7 +148,7 @@ export function SellerDraftPanel({ decisionId, emailReady, senderIdentity, draft
       else if (data.fate === 'sent') setReconcileNote(`Sent ${data.sent?.sentAt ? when(data.sent.sentAt) : ''}. Recorded.`);
       else if (data.fate === 'discarded') setReconcileNote('The draft is gone and nothing was sent. Recorded as discarded.');
       else setReconcileNote('Still a draft in Gmail.');
-      router.refresh();
+      refreshNow(router);
     } finally {
       setBusy(null);
     }

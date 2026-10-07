@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { milestoneLine, type Milestone } from '@/lib/gap/deals/action-plan';
 import { ObligationActions, postJson } from './obligation-actions';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 const INPUT = 'min-h-11 rounded-md border border-[var(--border)] bg-transparent px-2 text-sm sm:min-h-9';
 const PRIMARY = 'inline-flex min-h-11 items-center justify-center rounded-md bg-[var(--primary)] px-3 text-sm font-medium text-[var(--primary-foreground)] disabled:opacity-60';
@@ -50,7 +51,7 @@ export function DealPlan({ accountName, dealId, plan }: { accountName: string; d
       return;
     }
     setStatus(`Recorded: ${kept} agreed, ${proposed.length - kept} declined.`);
-    router.refresh();
+    refreshNow(router);
   }
 
   const agreed = plan.filter((m) => m.state === 'agreed');

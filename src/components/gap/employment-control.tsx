@@ -13,6 +13,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 type Verification = { verdict?: string; company?: string | null; title?: string | null; priorTitle?: string | null; sourceUrl?: string | null; summary?: string | null };
 type RoleReadLike = { state?: string; effectiveTitle?: string | null; usableForRanking?: boolean };
@@ -70,7 +71,7 @@ export function EmploymentControl({ personaId, hubspotContactId, name, accountNa
       }
       setOutcome({ ok: true, text: done(b) });
       setMode(null);
-      router.refresh();
+      refreshNow(router);
       onDone?.();
     } catch (e) {
       setOutcome({ ok: false, text: e instanceof Error ? e.message : 'network error' });

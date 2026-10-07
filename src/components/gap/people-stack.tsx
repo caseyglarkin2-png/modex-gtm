@@ -24,6 +24,7 @@ import type { PeopleStack, StackRow } from '@/lib/gap/people/stack';
 import { SET_ASIDE_LABEL } from '@/lib/gap/people/stack';
 import type { PursuitState } from '@/lib/gap/pursuit/state';
 import { EmploymentControl } from './employment-control';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 /** A set-aside person, serializable (the resolver's exclusion carries regexes and reads that never cross to the client). */
 export interface SetAsidePerson {
@@ -116,7 +117,7 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
       }
       setNote({ kind: 'status', text: `${row.name} is first at ${accountName.replace(/\.$/, '')}. Nothing is sent by choosing; every send runs its own gates.` });
       justChose.current = chosenKey;
-      router.refresh();
+      refreshNow(router);
     } catch (e) {
       setNote({ kind: 'alert', text: e instanceof Error ? e.message : 'network error' });
     } finally {
@@ -143,7 +144,7 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
       });
       // The control that was pressed may unmount on refresh: focus moves to the read-back line (WCAG 2.4.3).
       requestAnimationFrame(() => noteRef.current?.focus());
-      router.refresh();
+      refreshNow(router);
     } catch (e) {
       setNote({ kind: 'alert', text: e instanceof Error ? e.message : 'network error' });
     } finally {
@@ -199,9 +200,9 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
             ))}
           </ul>
           {row.personaId !== null ? (
-            <EmploymentControl personaId={row.personaId} name={row.name} title={row.title} accountName={accountName} compact onDone={() => router.refresh()} />
+            <EmploymentControl personaId={row.personaId} name={row.name} title={row.title} accountName={accountName} compact onDone={() => refreshNow(router)} />
           ) : row.hubspotContactId ? (
-            <EmploymentControl hubspotContactId={row.hubspotContactId} name={row.name} title={row.title} accountName={accountName} compact onDone={() => router.refresh()} />
+            <EmploymentControl hubspotContactId={row.hubspotContactId} name={row.name} title={row.title} accountName={accountName} compact onDone={() => refreshNow(router)} />
           ) : null}
         </>
       ) : null}

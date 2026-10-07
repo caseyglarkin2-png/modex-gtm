@@ -16,6 +16,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 export interface IntakeSourceOption {
   id: string;
@@ -79,7 +80,7 @@ function PersonForm({ current }: { current: IntakeSourceOption | null }) {
     const what = r.data.resolution === 'resolved' ? `Matched someone GAP already knows${where}.` : r.data.resolution === 'new_candidate' ? `New person${where}, staged for your review.` : r.data.resolution === 'ambiguous' ? 'More than one match: GAP will not guess, review it in Sources.' : 'GAP does not know that company yet: saved, identity to confirm.';
     setResult({ text: `Saved to ${current?.name ?? 'People I met'}. ${what} Nothing is sent.`, buyerWords: !!r.data.buyerWords });
     setF({ name: '', company: '', title: '', note: '' });
-    router.refresh();
+    refreshNow(router);
   }
   return (
     <section data-testid="intake-person" className="space-y-3 rounded-md border border-[var(--border)] p-4">
@@ -140,7 +141,7 @@ function ListImport({ kind, sources }: { kind: 'people' | 'accounts'; sources: I
     setMsg({ ok: true, text: `Added ${r.data.created} new, ${r.data.existing} already in this source, ${r.data.staged} new people staged. Nothing is sent; GAP researches accounts, not rows.`, href: `/gap/sources/${id}` });
     setPreview(null);
     setText('');
-    router.refresh();
+    refreshNow(router);
   }
   async function readFile(file: File | undefined) {
     if (!file) return;
@@ -255,7 +256,7 @@ function StartSource() {
     setBusy(false);
     setOpen(false);
     setF({ name: '', sourceType: 'conference', relationshipContext: '' });
-    router.refresh();
+    refreshNow(router);
   }
   if (!open) {
     return (
@@ -301,7 +302,7 @@ export function WorkIntake({ sources, initialMode }: { sources: IntakeSourceOpti
     const r = id ? await post(`/api/gap/sources/${encodeURIComponent(id)}`, { op: 'current' }) : await post(`/api/gap/sources/${encodeURIComponent(current?.id ?? 'none')}`, { op: 'clear_current' });
     setSwitching(false);
     if (!r.ok) return setSwitchError(String(r.data.error ?? r.status));
-    router.refresh();
+    refreshNow(router);
   }
   const choice = (m: Mode, label: string) => (
     <button type="button" data-testid={`intake-choice-${m}`} aria-pressed={mode === m} className={`${btn} ${mode === m ? 'border-[var(--primary)] font-medium text-[var(--primary)]' : ''}`} onClick={() => setMode(m)}>

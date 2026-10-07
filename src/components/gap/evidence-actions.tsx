@@ -21,6 +21,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import type { InboxThesis } from '@/lib/gap/research/inbox';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 type State = { kind: 'idle' } | { kind: 'busy' } | { kind: 'done'; text: string; review: boolean } | { kind: 'error'; text: string } | { kind: 'ignored' };
 
@@ -64,7 +65,7 @@ export function EvidenceActions({
         return;
       }
       setState({ kind: 'done', text: [...new Set(results.map((r) => r.detail))].join('; ') || 'Applied.', review: true });
-      router.refresh();
+      refreshNow(router);
     } catch (e) {
       setState({ kind: 'error', text: e instanceof Error ? e.message : 'network error' });
     }
@@ -82,7 +83,7 @@ export function EvidenceActions({
         return;
       }
       setState({ kind: 'done', text: 'Draft thesis created from this fact. Nothing is approved.', review: true });
-      router.refresh();
+      refreshNow(router);
     } catch (e) {
       setState({ kind: 'error', text: e instanceof Error ? e.message : 'network error' });
     }

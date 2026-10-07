@@ -9,6 +9,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { WatchProfile } from '@/lib/gap/signals/watch';
 import { AccountLink } from './account-link';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 const REASON: Record<string, string> = { priority: 'priority', gap_thesis: 'GAP thesis', audited_for_page: '/for page', buying_committee: 'buying committee' };
 const input = 'min-w-0 rounded-md border border-[var(--border)] bg-[var(--background)] px-2 py-2 text-base sm:text-sm';
@@ -29,7 +30,7 @@ export function SignalWatch({ profiles }: { profiles: Array<Pick<WatchProfile, '
       setMsg(res.ok ? (kind === 'addAliases' ? 'Alias added.' : 'Alias removed.') : `Not saved: ${(b.error ?? String(res.status)).replace(/_/g, ' ')}`);
       if (res.ok) {
         setAlias('');
-        router.refresh();
+        refreshNow(router);
       }
     } catch {
       setMsg('Not saved: no connection.');

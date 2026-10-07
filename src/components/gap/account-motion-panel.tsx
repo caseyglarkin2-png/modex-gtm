@@ -13,6 +13,7 @@ import { useRouter } from 'next/navigation';
 import type { CockpitAngle, CockpitMotion } from '@/lib/gap/motion/cockpit';
 import { confirmChoiceBody } from '@/lib/gap/motion/account-motion';
 import { AccountLink } from './account-link';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 /** One person's angle: owned (edit), suggested (accept / edit) or missing (write). `bare` omits the label (the brief supplies it). */
 export function AngleLine({ a, personaId, bare = false }: { a: CockpitAngle | undefined; personaId: number; bare?: boolean }) {
@@ -32,7 +33,7 @@ export function AngleLine({ a, personaId, bare = false }: { a: CockpitAngle | un
     }
     setSaved(value.trim());
     setEditing(false);
-    router.refresh();
+    refreshNow(router);
   }
 
   const current = saved ?? a?.angle?.text ?? null;
@@ -105,7 +106,7 @@ export function AccountMotionPanel({ motion }: { motion: CockpitMotion }) {
       setError(((await res.json().catch(() => ({}))) as { error?: string }).error ?? `HTTP ${res.status}`);
       return;
     }
-    router.refresh();
+    refreshNow(router);
   }
 
   async function makePrimary(personaId: number) {
@@ -123,7 +124,7 @@ export function AccountMotionPanel({ motion }: { motion: CockpitMotion }) {
       setError(((await res.json().catch(() => ({}))) as { error?: string }).error ?? `HTTP ${res.status}`);
       return;
     }
-    router.refresh();
+    refreshNow(router);
   }
 
   async function confirm() {
@@ -137,7 +138,7 @@ export function AccountMotionPanel({ motion }: { motion: CockpitMotion }) {
       body: JSON.stringify(body),
     });
     setBusy(false);
-    if (res.ok) router.refresh();
+    if (res.ok) refreshNow(router);
   }
 
   return (

@@ -29,6 +29,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 export interface RunRoutingReport {
   runId: string;
@@ -103,7 +104,7 @@ export function RunRoutingPanel({ canRun, routableHypotheses, routableAccounts, 
       };
       setState({ kind: 'done', report, at: new Date().toISOString() });
       onComplete?.(report);
-      router.refresh();
+      refreshNow(router);
     } catch (caught) {
       if (caught instanceof DOMException && caught.name === 'AbortError') {
         setState({ kind: 'timeout' });

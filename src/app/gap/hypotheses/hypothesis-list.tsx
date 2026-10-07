@@ -17,6 +17,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { HYPOTHESIS_STATUSES } from '@/lib/gap/taxonomy';
+import { refreshNow } from '@/components/gap/refresh-now';
 import {
   HypothesisDrawer,
   HypothesisStatusBadge,
@@ -82,7 +83,7 @@ export function HypothesisList({ items, status, showFilter = true, emptyNote }: 
         // The drawer keeps the pre-transition row; the refresh below re-renders the table.
       }
     }
-    router.refresh();
+    refreshNow(router);
   }
 
   function moveTo(index: number) {

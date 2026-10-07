@@ -30,6 +30,7 @@ import { familyChoices, label as familyLabel } from '@/lib/gap/story/propose-fam
 import { OBSERVATION_REFUSAL_TEXT } from '@/lib/gap/hypothesis/observation';
 import { Tag } from './seller-tag';
 import { draftDefaultsForFact, storyDraftPayload } from '@/lib/gap/story/draft-defaults';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 const BTN = 'inline-flex min-h-11 items-center justify-center rounded-md px-3 text-sm font-medium';
 const OUTLINE = `${BTN} border border-[var(--border)] hover:bg-[var(--muted)] disabled:opacity-60`;
@@ -125,7 +126,7 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
         return;
       }
       announce('status', `${first}'s opening now builds on that thesis. Nothing is sent; the email still runs every check.`);
-      router.refresh();
+      refreshNow(router);
     } catch (e) {
       announce('alert', e instanceof Error ? e.message : 'network error');
     } finally {
@@ -184,7 +185,7 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
       setDrafted({ id: body.hypothesisId!, preparation: body.preparation ?? 'draft' });
       setDrafting(null);
       announce('status', describe(body));
-      router.refresh();
+      refreshNow(router);
     } catch (e) {
       announce('alert', e instanceof Error ? e.message : 'network error');
     } finally {
@@ -205,7 +206,7 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
       const body = await postDraft(item.factId, { observation: item.observationRaw, problem: item.problem }, family, item.claimClass, item.personaId != null ? { personaId: item.personaId, title: item.personTitle ?? null } : undefined);
       if (!body) return;
       announce('status', describe(body));
-      router.refresh();
+      refreshNow(router);
     } catch (e) {
       announce('alert', e instanceof Error ? e.message : 'network error');
     } finally {
@@ -224,11 +225,11 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
         // Item 6: a refusal that names what is missing (the copy family to seed) says it in full.
         const why = (body.reason ?? body.error) === 'copy_not_installed' && body.detail ? body.detail.replace(/^(?:approve refused|approved, but not in use): copy_not_installed: /, '') : refusalWords(body.reason ?? body.error);
         announce('alert', `Not approved: ${why} ${body.to === 'approved' ? 'It is approved but not in use.' : 'Nothing changed.'}`);
-        router.refresh();
+        refreshNow(router);
         return;
       }
       announce('status', `Approved and in use${first ? ` for ${first}` : ''}: the opening now builds on this story. The email is still a separate step and runs every check.`);
-      router.refresh();
+      refreshNow(router);
     } catch (e) {
       announce('alert', e instanceof Error ? e.message : 'network error');
     } finally {
@@ -245,11 +246,11 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
       const body = (await res.json().catch(() => ({}))) as { ok?: boolean; to?: string | null; reason?: string; error?: string };
       if (!res.ok || body.ok === false) {
         announce('alert', `Not put in use: ${refusalWords(body.reason ?? body.error)} Nothing changed.`);
-        router.refresh();
+        refreshNow(router);
         return;
       }
       announce('status', `In use${first ? ` for ${first}` : ''}: the email is prepared on this story. Sending is still a separate step and runs every check.`);
-      router.refresh();
+      refreshNow(router);
     } catch (e) {
       announce('alert', e instanceof Error ? e.message : 'network error');
     } finally {
@@ -268,7 +269,7 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
         return;
       }
       announce('status', 'Set aside. The fact stays checked; GAP will not propose this story again unless something material changes.');
-      router.refresh();
+      refreshNow(router);
     } catch (e) {
       announce('alert', e instanceof Error ? e.message : 'network error');
     } finally {

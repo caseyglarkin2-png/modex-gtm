@@ -10,6 +10,7 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { changeText, CRM_REFUSAL_TEXT, crmStateLine, externalIdFor, proposalIdFor, sameChange, type CrmChange, type CrmOrigin, type CrmSyncItem } from '@/lib/gap/deals/crm-model';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 /** Batch item 9: what the click answered, in seller words (a refusal names why; nothing is ever implied written). */
 function answerLine(r: { ok: boolean; item: CrmSyncItem | null; error: string | null; detail?: string | null }): string {
@@ -41,7 +42,7 @@ function Candidate({ accountName, dealId, dealName, change, origin, revision = f
     const r = await post({ op: 'approve', accountName, dealId, dealName, change, origin });
     setBusy(false);
     setStatus(answerLine(r));
-    if (r.ok) router.refresh();
+    if (r.ok) refreshNow(router);
   }
   return (
     <li className="space-y-1" data-testid="crm-proposal" data-kind={change.kind} data-proposal-id={proposalId}>
@@ -64,7 +65,7 @@ function Item({ it }: { it: CrmSyncItem }) {
     const r = await post({ op, proposalId: it.proposalId, ...(op === 'discard' ? { reason: 'not needed' } : {}) });
     setBusy(false);
     setStatus(answerLine(r));
-    if (r.ok) router.refresh();
+    if (r.ok) refreshNow(router);
   }
   return (
     <li className="space-y-1" data-testid="crm-sync-item" data-state={it.state} data-proposal-id={it.proposalId}>

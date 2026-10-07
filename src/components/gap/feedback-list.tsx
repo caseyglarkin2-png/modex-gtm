@@ -6,6 +6,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { debugPacket as debugPacketOf, type FeedbackItem as FeedbackListItem } from '@/lib/gap/feedback/packet';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 const GROUPS: Array<[FeedbackListItem['status'], string]> = [
   ['open', 'Open'],
@@ -22,7 +23,7 @@ export function FeedbackList({ items }: { items: FeedbackListItem[] }) {
     setBusy(id);
     try {
       await fetch(`/api/gap/feedback/${encodeURIComponent(id)}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status }) });
-      router.refresh();
+      refreshNow(router);
     } finally {
       setBusy(null);
     }

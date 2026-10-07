@@ -3,6 +3,7 @@
 /** PLAN NOW: qualify this source's accounts now (bounded). Research itself runs in the background, account by account. */
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 export function SourcePlanButton({ workSourceId }: { workSourceId: string }) {
   const router = useRouter();
@@ -16,7 +17,7 @@ export function SourcePlanButton({ workSourceId }: { workSourceId: string }) {
     setBusy(false);
     if (!res.ok) return setMsg(`Not planned: ${body.error ?? res.status}`);
     setMsg(`Qualified ${body.accounts ?? 0} accounts${body.deferredAccounts ? `, ${body.deferredAccounts} more next run` : ''}. Research runs in the background; nothing is sent.`);
-    router.refresh();
+    refreshNow(router);
   }
   return (
     <div className="space-y-1">

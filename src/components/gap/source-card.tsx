@@ -8,6 +8,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ageLabel, claimLine, OUTREACH_LABEL, VERIFICATION_LABEL, type AccountSource, type OutreachState, type VerificationState } from '@/lib/gap/sources/source-copy';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 const VERIFICATION_TONE: Record<VerificationState, string> = {
   VERIFIED_AT_SOURCE: 'border-emerald-600/50 text-emerald-700 dark:text-emerald-400',
@@ -51,7 +52,7 @@ export function SourceCard({ s, accountName, compact = false, researchHref }: { 
               ? 'Set aside (not deleted).'
               : 'Unassigned; name the right account in Signal intake.',
         );
-        router.refresh();
+        refreshNow(router);
       }
     } catch {
       setMsg('Could not save that. Try again.');

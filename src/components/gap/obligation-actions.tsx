@@ -7,6 +7,7 @@
  */
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 const SMALL = 'inline-flex min-h-11 items-center justify-center rounded-md border border-[var(--border)] px-2.5 text-xs hover:bg-[var(--muted)] disabled:opacity-60 sm:min-h-9';
 const INPUT = 'min-h-11 rounded-md border border-[var(--border)] bg-transparent px-2 text-sm sm:min-h-9';
@@ -49,7 +50,7 @@ export function ObligationActions({ commitmentId, proofNeeded = null }: { commit
     }
     setStatus(to === 'done' ? 'Recorded as done.' : to === 'snoozed' ? 'Snoozed.' : 'Skipped.');
     setMode('none');
-    router.refresh();
+    refreshNow(router);
   }
   return (
     <div className="mt-1 flex flex-wrap items-center gap-2">

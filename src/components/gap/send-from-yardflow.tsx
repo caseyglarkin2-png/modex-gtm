@@ -25,6 +25,7 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { refusalSentence } from '@/lib/gap/ui/refusal-copy';
 import { ReportThis } from './feedback-button';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 interface Preview {
   crmLogging: 'on' | 'unavailable';
@@ -172,14 +173,14 @@ export function SendFromYardflow({
           already: data.alreadySent === true,
           note: data.ledgerError ? `Sent, but the receipt did not save (${data.ledgerError}). GAP will not resend it.` : undefined,
         });
-        router.refresh();
+        refreshNow(router);
       } else if (data.error === 'copy_review_required') {
         const checks = Array.isArray(data.failedChecks) ? data.failedChecks : [];
         setState({ kind: 'review', approvalId: typeof data.approvalRequestId === 'string' ? data.approvalRequestId : null, detail: checks.join(' | ') || String(data.detail ?? '') });
       } else {
         const reason = String(data.error ?? `HTTP ${res.status}`);
         setState({ kind: 'refused', reason, detail: [data.detail, ...(Array.isArray(data.failedChecks) ? data.failedChecks : [])].filter(Boolean).join(' | ') });
-        if (TERMINAL.has(reason)) router.refresh();
+        if (TERMINAL.has(reason)) refreshNow(router);
       }
     } catch (err) {
       setState({ kind: 'refused', reason: 'network_error', detail: err instanceof Error ? err.message : String(err) });

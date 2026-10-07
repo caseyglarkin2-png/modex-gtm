@@ -23,6 +23,7 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { UseOutcome, type UseOutcomeResponse } from './use-outcome';
 import { ReportThis } from './feedback-button';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 interface Fact {
   signalId: string;
@@ -238,7 +239,7 @@ export function ResearchThis({ decisionId, personaIds }: { decisionId: string; p
             };
       setDecided(outcome);
       report?.({ key: runId, decided: outcome });
-      router.refresh();
+      refreshNow(router);
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err));
     } finally {

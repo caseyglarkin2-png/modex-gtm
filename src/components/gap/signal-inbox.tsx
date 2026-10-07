@@ -12,6 +12,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import type { SignalView } from '@/lib/gap/signals/ops';
 import { AccountLink } from './account-link';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 const TONE: Record<string, string> = {
   'Needs you': 'bg-amber-500/15 text-amber-800 dark:text-amber-300',
@@ -35,7 +36,7 @@ function SignalRow({ s }: { s: SignalView }) {
       const res = await fetch(`/api/gap/signal-intake/${encodeURIComponent(s.id)}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
       const b = (await res.json().catch(() => ({}))) as { error?: string };
       setMsg(res.ok ? done : `Not done: ${(b.error ?? String(res.status)).replace(/_/g, ' ')}`);
-      if (res.ok) router.refresh();
+      if (res.ok) refreshNow(router);
     } catch {
       setMsg('Not done: no connection.');
     } finally {
