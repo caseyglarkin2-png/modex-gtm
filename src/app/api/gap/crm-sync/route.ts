@@ -82,7 +82,7 @@ export async function POST(request: NextRequest) {
   let deals = await loadInDealsSummary(prisma).catch(() => null);
   if (!holds(deals)) deals = (await loadInDealsSummary(prisma, { fresh: true }).catch(() => null)) ?? deals;
   if (!deals || deals.status !== 'complete') return NextResponse.json({ error: 'deal_unverified', detail: 'HubSpot could not confirm the open deals just now. Nothing was recorded; try again.' }, { status: 409 });
-  if (!holds(deals)) return NextResponse.json({ error: 'bad_origin', detail: `deal ${b.dealId} is not an open deal of ${b.accountName}` }, { status: 400 });
+  if (!holds(deals)) return NextResponse.json({ error: 'bad_origin', detail: `${b.dealName ? `the deal "${b.dealName}"` : 'that deal'} is not an open deal of ${b.accountName}` }, { status: 400 });
   // The origin must be a live record GAP holds for this deal (origin tracking is never free text).
   const bad = await originProblem(prisma, { accountName: b.accountName, dealId: b.dealId, origin: b.origin, change: b.change });
   if (bad) return NextResponse.json({ error: bad.reason, detail: bad.detail }, { status: STATUS[bad.reason] ?? 400 });

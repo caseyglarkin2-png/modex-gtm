@@ -90,6 +90,29 @@ export interface CrmSyncItem extends CrmProposal {
   lastAttemptAt: string | null;
   /** Batch item 9: the obligation was amended after the proposal: its one task carries the newer text (approve again). */
   revisedAt?: string | null;
+  /** Sprint 5 review (R54): an unwritten recap the deal's current recap replaced (why, in words): never retried. */
+  replaced?: string | null;
+}
+
+export const RECAP_REPLACED = 'a newer recap for this deal replaced it';
+export const RECAP_CHANGED = 'the recap has changed since';
+const unwrittenRecap = (it: CrmSyncItem) => it.origin.kind === 'recap' && it.state !== 'written' && it.state !== 'discarded';
+
+/**
+ * Sprint 5 review (R54): the unwritten recaps that are no longer the deal's current recap, by proposal id, with why. A
+ * newer recap recorded for the same deal replaces an older one (the ledger alone says so); on the page, a recap whose
+ * text differs from the recap GAP prepares for the deal now (`current`: deal id to the current recap's origin id, null
+ * when none is ready) is replaced too. Retrying one would put a second, outdated recap on the deal.
+ */
+export function replacedRecaps(items: readonly CrmSyncItem[], current?: ReadonlyMap<string, string | null>): Map<string, string> {
+  const out = new Map<string, string>();
+  for (const it of items) {
+    if (!unwrittenRecap(it)) continue;
+    const newer = items.some((o) => o.proposalId !== it.proposalId && o.dealId === it.dealId && o.origin.kind === 'recap' && o.state !== 'discarded' && o.proposedAt > it.proposedAt);
+    if (newer) out.set(it.proposalId, RECAP_REPLACED);
+    else if (current?.has(it.dealId) && current.get(it.dealId) !== it.origin.id) out.set(it.proposalId, RECAP_CHANGED);
+  }
+  return out;
 }
 
 /** A small, stable, client-safe hash (FNV-1a, 52 bits) for derived ids. */

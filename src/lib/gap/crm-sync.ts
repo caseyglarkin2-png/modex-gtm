@@ -39,6 +39,8 @@ import {
   foldCrmSync,
   proposalIdFor,
   sameChange,
+  replacedRecaps,
+  RECAP_REPLACED,
   stableHash,
   taskExternalIdFor,
   withMarker,
@@ -110,7 +112,7 @@ export function changeProblem(c: CrmChange): string | null {
  * recorded closure (deals/closure.ts), the obligation's status, the recap's own text. A completion needs its obligation
  * DONE; anything else needs it open. Null when it is.
  */
-export async function originProblem(prisma: PrismaLike, it: Pick<CrmProposal, 'accountName' | 'dealId' | 'origin' | 'change'>): Promise<{ reason: 'origin_closed' | 'bad_origin'; detail: string } | null> {
+export async function originProblem(prisma: PrismaLike, it: Pick<CrmProposal, 'accountName' | 'dealId' | 'origin' | 'change'> & { proposalId?: string }): Promise<{ reason: 'origin_closed' | 'bad_origin'; detail: string } | null> {
   const { loadDealStates } = await import('./deals/closure');
   const deal = (await loadDealStates(prisma, it.accountName).catch(() => new Map<string, { state: string; at: string }>())).get(it.dealId);
   if (deal && deal.state !== 'open') return { reason: 'origin_closed', detail: `the deal closed (${deal.state}) on ${deal.at.slice(0, 10)}: nothing is written to it` };
@@ -122,7 +124,12 @@ export async function originProblem(prisma: PrismaLike, it: Pick<CrmProposal, 'a
     if (c.status === 'done' || c.status === 'skipped') return { reason: 'origin_closed', detail: `the obligation "${c.title}" is ${c.status} in GAP: nothing is written for it` };
     return null;
   }
-  if (it.origin.kind === 'recap') return it.change.kind === 'note' && it.origin.id === `${it.dealId}:${stableHash(it.change.body)}` ? null : { reason: 'bad_origin', detail: 'the recap does not match its own text' };
+  if (it.origin.kind === 'recap') {
+    if (it.change.kind !== 'note' || it.origin.id !== `${it.dealId}:${stableHash(it.change.body)}`) return { reason: 'bad_origin', detail: 'the recap does not match its own text' };
+    // Sprint 5 review (R54): a recorded recap that a newer recap for the deal replaced is never written (two recaps).
+    if (it.proposalId && replacedRecaps(await loadCrmSync(prisma, it.accountName)).has(it.proposalId)) return { reason: 'origin_closed', detail: `${RECAP_REPLACED}: nothing is written for this one` };
+    return null;
+  }
   return { reason: 'bad_origin', detail: 'GAP holds no such origin' };
 }
 
@@ -136,7 +143,7 @@ export async function proposeCrmChange(
   const account = await prisma.account.findUnique({ where: { name: input.accountName }, select: { name: true } });
   if (!account) return { ok: false, reason: 'account_not_found' };
   const proposalId = proposalIdFor(input.origin, input.change);
-  return locked(prisma, proposalId, async (tx) => {
+  const res = await locked(prisma, proposalId, async (tx) => {
     const have = foldCrmSync(await rowsOf(tx, proposalId))[0];
     // Batch item 9: the same obligation amended is the same task: a revision carries the newer text (and asks for a
     // new approval); a written task is then updated in place, never created twice. A discarded one stays discarded.
@@ -150,6 +157,13 @@ export async function proposeCrmChange(
     await record(tx, CRM_PROPOSED, input.actor, proposal, { proposal });
     return { ok: true as const, created: true, item: foldCrmSync(await rowsOf(tx, proposalId))[0] };
   });
+  // Sprint 5 review (R54): a new recap retires every earlier unwritten recap on the deal (discarded with the reason),
+  // so an outdated recap is never retried beside it and never lands as a second note.
+  if (res.created && input.origin.kind === 'recap') {
+    const older = (await loadCrmSync(prisma, account.name)).filter((it) => it.dealId === input.dealId && it.origin.kind === 'recap' && it.proposalId !== proposalId && it.state !== 'written' && it.state !== 'discarded');
+    for (const it of older) await discardCrmChange(prisma, { proposalId: it.proposalId, reason: RECAP_REPLACED, actor: input.actor, now: input.now });
+  }
+  return res;
 }
 
 /**
@@ -262,7 +276,10 @@ export async function discardCrmChange(prisma: PrismaLike, input: { proposalId: 
 export async function loadCrmOffApprovals(prisma: PrismaLike, limit = 50): Promise<CrmSyncItem[]> {
   if (typeof prisma?.gapAuditEvent?.findMany !== 'function') return [];
   const rows: CrmRow[] = await prisma.gapAuditEvent.findMany({ where: { kind: { in: [...CRM_KINDS] }, subject_type: CRM_SUBJECT }, select: { kind: true, actor: true, payload: true, created_at: true }, orderBy: { created_at: 'desc' }, take: 5_000 }).catch(() => []);
-  return foldCrmSync(rows ?? []).filter((it) => it.state === 'off').sort((a, b) => String(a.approvedAt ?? '').localeCompare(String(b.approvedAt ?? ''))).slice(0, limit);
+  const all = foldCrmSync(rows ?? []);
+  // Sprint 5 review (R54): a recap a newer one replaced is not offered for retry.
+  const replaced = replacedRecaps(all);
+  return all.filter((it) => it.state === 'off' && !replaced.has(it.proposalId)).sort((a, b) => String(a.approvedAt ?? '').localeCompare(String(b.approvedAt ?? ''))).slice(0, limit);
 }
 
 /** Every proposal at the account, with its state. Soft: an unreadable ledger reads as none. */

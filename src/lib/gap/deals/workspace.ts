@@ -28,7 +28,7 @@ import { meetingDeal, meetingInstant, meetingState, prepareMeeting, type Meeting
 import { planFor, type Milestone } from './action-plan';
 import { loadPlanDecisions } from './action-plan-store';
 import { ARTIFACT_USED, nextArtifact, prepareArtifacts, type PreparedArtifact } from './artifacts';
-import { crmCandidates, type CrmChange, type CrmOrigin, type CrmSyncItem } from './crm-model';
+import { crmCandidates, replacedRecaps, type CrmChange, type CrmOrigin, type CrmSyncItem } from './crm-model';
 import { loadCrmSync } from '../crm-sync';
 import { stalledSignals } from './stalled';
 
@@ -207,7 +207,11 @@ export async function loadDealWorkspace(
         nextMilestone: next ? { commitmentId: next.commitmentId!, title: next.title, dueDay: next.dueDay } : null,
         completions: completionsFor(d.dealId),
       });
-      return [d.dealId, { candidates, items: (crmItems as CrmSyncItem[]).filter((it) => it.dealId === d.dealId) }];
+      // Sprint 5 review (R54): an unwritten recap that is no longer this deal's current recap is shown as replaced.
+      const items = (crmItems as CrmSyncItem[]).filter((it) => it.dealId === d.dealId);
+      const currentRecap = candidates.find((c) => c.origin.kind === 'recap')?.origin.id ?? null;
+      const replaced = replacedRecaps(items, new Map([[d.dealId, currentRecap]]));
+      return [d.dealId, { candidates, items: items.map((it) => (replaced.has(it.proposalId) ? { ...it, replaced: replaced.get(it.proposalId)! } : it)) }];
     }),
   );
   const stalled = Object.fromEntries(opportunities.deals.map((d) => [d.dealId, stalledSignals({ now: x.now, deal: { name: d.name, lastActivityAt: d.lastActivityAt, closeDate: d.closeDate, contact: d.contacts[0]?.name ?? null }, commitments: d.commitments.map((c) => ({ title: c.title, kind: c.kind, status: c.status, dueAt: c.dueAt, person: c.person ? { name: c.person.name, email: c.person.email } : null })) })]));

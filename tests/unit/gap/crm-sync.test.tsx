@@ -380,9 +380,10 @@ describe('batch item 9 (R54 f): approvals standing "not written" are listed acro
     const otherNote: CrmChange = { ...NOTE, objectId: '80001', body: 'Pepsi recap' };
     const b = await proposeCrmChange(p, { accountName: 'Pepsi Scratch Co', dealId: '80001', dealName: 'Pepsi pilot', change: otherNote, origin: { kind: 'recap', id: `80001:${stableHash('Pepsi recap')}`, label: 'x' }, actor: ACTOR, now: NOW });
     await approveCrmChange(p, { proposalId: b.ok ? b.item.proposalId : '', actor: ACTOR, now: new Date(NOW.getTime() + 60_000) });
-    const written = await proposeCrmChange(p, { accountName: 'Pepsi Scratch Co', dealId: '80001', dealName: 'Pepsi pilot', change: { ...otherNote, body: 'Written one' }, origin: { kind: 'recap', id: `80001:${stableHash('Written one')}`, label: 'x' }, actor: ACTOR, now: NOW });
+    // Sprint 5 review (R54): a newer recap on the SAME deal retires an unwritten one, so these sit on their own deals.
+    const written = await proposeCrmChange(p, { accountName: 'Pepsi Scratch Co', dealId: '80002', dealName: 'Pepsi expansion', change: { ...otherNote, objectId: '80002', body: 'Written one' }, origin: { kind: 'recap', id: `80002:${stableHash('Written one')}`, label: 'x' }, actor: ACTOR, now: NOW });
     await approveCrmChange(p, { proposalId: written.ok ? written.item.proposalId : '', actor: ACTOR, now: NOW }, { writer: fakeHubSpot().writer, writesEnabled: ON, assertWriteAllowed: ALLOW });
-    await proposeCrmChange(p, { accountName: ACCOUNT, dealId: DEAL, dealName: null, change: { ...NOTE, body: 'only proposed' }, origin: { kind: 'recap', id: `${DEAL}:${stableHash('only proposed')}`, label: 'x' }, actor: ACTOR, now: NOW });
+    await proposeCrmChange(p, { accountName: ACCOUNT, dealId: '70009', dealName: null, change: { ...NOTE, objectId: '70009', body: 'only proposed' }, origin: { kind: 'recap', id: `70009:${stableHash('only proposed')}`, label: 'x' }, actor: ACTOR, now: NOW });
     const off = await loadCrmOffApprovals(p);
     expect(off.map((it) => [it.accountName, it.state])).toEqual([[ACCOUNT, 'off'], ['Pepsi Scratch Co', 'off']]);
     holder.client = p;
@@ -435,7 +436,8 @@ describe('the candidates, the route and the view (R54)', () => {
     expect([bad.status, ((await bad.json()) as { error: string }).error]).toEqual([400, 'bad_origin']);
     // Batch item 9: a deal that is not one of the account's open deals, an unreadable open-deal list, a done obligation.
     const notMine = await post({ op: 'approve', accountName: ACCOUNT, dealId: '70009', change: { ...NOTE, objectId: '70009' }, origin: { ...RECAP, id: `70009:${stableHash(NOTE.body)}` } });
-    expect([notMine.status, await notMine.json()]).toEqual([400, { error: 'bad_origin', detail: `deal 70009 is not an open deal of ${ACCOUNT}` }]);
+    // Sprint 5 review: the refusal names the deal in words, never its HubSpot id.
+    expect([notMine.status, await notMine.json()]).toEqual([400, { error: 'bad_origin', detail: 'that deal is not an open deal of Kroger Scratch Co' }]);
     holder.inDeals = { status: 'unavailable', count: null, accounts: [], unresolved: [], checkedAt: NOW.toISOString(), openDeals: 0 };
     const unverified = await post({ op: 'approve', accountName: ACCOUNT, dealId: DEAL, change: NOTE, origin: RECAP });
     expect([unverified.status, ((await unverified.json()) as { error: string }).error]).toEqual([409, 'deal_unverified']);
@@ -456,8 +458,8 @@ describe('the candidates, the route and the view (R54)', () => {
     const field = await post({ op: 'approve', accountName: ACCOUNT, dealId: DEAL, change: { kind: 'deal_property', objectType: 'deal', objectId: DEAL, property: 'amount', from: null, to: '1' }, origin: RECAP });
     expect(field.status).toBe(400);
     const list = (await (await GET(new NextRequest(`http://localhost/api/gap/crm-sync?account=${encodeURIComponent(ACCOUNT)}`))).json()) as { items: Array<{ state: string }> };
-    // The approved recap (off) and the fresh-read proposal above (proposed), newest first.
-    expect(list.items.map((i) => i.state)).toEqual(['proposed', 'off']);
+    // The fresh-read recap above (proposed) retired the earlier approved recap on the same deal (Sprint 5 review, R54).
+    expect(list.items.map((i) => i.state)).toEqual(['proposed', 'discarded']);
   });
 
   it('batch item 9, the view: an amended obligation is offered as an update of its one task; a refusal says why and never claims a write', async () => {

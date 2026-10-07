@@ -69,13 +69,13 @@ function Item({ it }: { it: CrmSyncItem }) {
   }
   return (
     <li className="space-y-1" data-testid="crm-sync-item" data-state={it.state} data-proposal-id={it.proposalId}>
-      <p className="text-xs font-medium" data-testid="crm-sync-state">{crmStateLine(it)}</p>
+      <p className="text-xs font-medium" data-testid="crm-sync-state">{it.replaced ? `Not written: ${it.replaced}. Approve the current recap instead; this one is never retried.` : crmStateLine(it)}</p>
       <details>
         <summary className="min-h-9 cursor-pointer text-xs text-[var(--muted-foreground)]">The exact change ({KIND_WORDS[it.change.kind]}, from {it.origin.label})</summary>
         <pre className="whitespace-pre-wrap break-words rounded-md border border-[var(--border)] p-2 text-xs">{changeText(it)}</pre>
       </details>
       <div className="flex flex-wrap items-center gap-2">
-        {it.state === 'failed' || it.state === 'off' || it.state === 'approved' ? <button type="button" className={SMALL} disabled={busy} onClick={() => void act('retry')} data-testid="crm-retry">Retry</button> : null}
+        {!it.replaced && (it.state === 'failed' || it.state === 'off' || it.state === 'approved') ? <button type="button" className={SMALL} disabled={busy} onClick={() => void act('retry')} data-testid="crm-retry">Retry</button> : null}
         {it.state !== 'written' && it.state !== 'discarded' ? <button type="button" className={SMALL} disabled={busy} onClick={() => void act('discard')} data-testid="crm-discard">Discard</button> : null}
         {status ? <span role="status" className="text-xs" data-testid="crm-item-status">{status}</span> : null}
       </div>
@@ -90,7 +90,7 @@ export function CrmOffApprovals({ items }: { items: readonly CrmSyncItem[] }) {
     <ul className="space-y-3" data-testid="crm-off-list">
       {items.map((it) => (
         <li key={it.proposalId} className="space-y-1" data-testid="crm-off-item" data-account={it.accountName}>
-          <p className="text-xs font-semibold">{it.accountName}: {it.dealName ?? `deal ${it.dealId}`}</p>
+          <p className="text-xs font-semibold">{it.accountName}: {it.dealName ?? 'a deal with no name in HubSpot'}</p>
           <ul>
             <Item it={it} />
           </ul>
