@@ -3,12 +3,12 @@
  * R61: the account page waited on reads made one round trip after another and on reads repeated within one view
  * (measured under production-like latency: 144 to 153 database round trips and 4.5 to 5.0 s to the full page). These
  * pins hold the fixes: reads that need only the account's name start together; the seeded copy families are asked
- * once a minute per shape, never twice per page; an account-scoped card read never pulls every account's decisions;
+ * once per shape per request, never twice per page; an account-scoped card read never pulls every account's decisions;
  * the deal-state reconciliation runs beside the page's reads.
  */
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { COPY_SHAPE_TTL_MS, copyAvailabilityMap } from '@/lib/gap/execution/copy-availability';
+import { copyAvailabilityMap } from '@/lib/gap/execution/copy-availability';
 import { loadOwnerResolution } from '@/lib/gap/people/owner-resolution-load';
 import { currentDecisions } from '@/lib/gap/routing/queue';
 import { SEED_PROGRAM } from '@/lib/gap/sequences/families';
@@ -16,44 +16,45 @@ import { SEED_PROGRAM } from '@/lib/gap/sequences/families';
 const src = (p: string) => readFileSync(p, 'utf8');
 const tick = () => new Promise((r) => setTimeout(r, 0));
 
-describe('R61: the seeded copy families are asked once per shape, not twice per page', () => {
+describe('R61: the seeded copy families are asked once per shape per request, never kept across views', () => {
   const FAM = { id: 'fam-hc', problem_family: 'hidden_capacity', program: SEED_PROGRAM, archived_at: null };
-  const db = (failFamilies = false) => {
+  const db = (state: { archived: boolean; fail?: boolean } = { archived: false }) => {
     const calls = { families: 0 };
     return {
       calls,
+      state,
       sequenceVersion: { findUnique: async () => null, findFirst: async () => ({ id: 'v1', family_id: FAM.id, version: 1, status: 'frozen', steps: {}, family: { id: FAM.id, name: FAM.id, engine: 'modex_draft_queue', program: FAM.program } }) },
       sequenceFamily: {
         findMany: async () => {
           calls.families += 1;
-          if (failFamilies) throw new Error('read failed');
-          return [{ id: FAM.id }];
+          if (state.fail) throw new Error('read failed');
+          return state.archived ? [] : [{ id: FAM.id }];
         },
       },
       prospectingHypothesis: { findMany: async ({ where }: { where: { id: { in: string[] } } }) => where.id.in.map((id) => ({ id, problem_family: 'hidden_capacity', metadata: null })) },
     };
   };
-  it('two theses of one shape, then the same shape again within the minute: one family read', async () => {
+  it('two theses of one shape in one call: one family read', async () => {
     const p = db();
-    const t0 = 1_000_000;
-    const a = await copyAvailabilityMap(p, ['h1', 'h2'], t0);
+    const a = await copyAvailabilityMap(p, ['h1', 'h2']);
     expect([...a.values()].every((c) => c.installed)).toBe(true);
-    await copyAvailabilityMap(p, ['h3'], t0 + 5_000);
     expect(p.calls.families).toBe(1);
-    await copyAvailabilityMap(p, ['h4'], t0 + COPY_SHAPE_TTL_MS + 1);
-    expect(p.calls.families).toBe(2);
   });
-  it('each database client keeps its own answers, and a failed read is never kept', async () => {
-    const p1 = db();
-    const p2 = db();
-    await copyAvailabilityMap(p1, ['h1'], 5);
-    await copyAvailabilityMap(p2, ['h1'], 5);
-    expect([p1.calls.families, p2.calls.families]).toEqual([1, 1]);
-    const bad = db(true);
-    await expect(copyAvailabilityMap(bad, ['h1'], 5)).rejects.toThrow('read failed');
+  it('a family archived and restored shows on the next call (nothing kept across requests); a failed read is never kept', async () => {
+    const p = db({ archived: true });
+    expect((await copyAvailabilityMap(p, ['h1'])).get('h1')?.installed).toBe(false);
+    p.state.archived = false;
+    expect((await copyAvailabilityMap(p, ['h1'])).get('h1')?.installed).toBe(true);
+    const bad = db({ archived: false, fail: true });
+    await expect(copyAvailabilityMap(bad, ['h1'])).rejects.toThrow('read failed');
     await tick();
-    await expect(copyAvailabilityMap(bad, ['h1'], 6)).rejects.toThrow('read failed');
+    await expect(copyAvailabilityMap(bad, ['h1'])).rejects.toThrow('read failed');
     expect(bad.calls.families).toBe(2);
+  });
+  it('within one server render the queue and the pursuit read share the answer (the React request cache)', () => {
+    const copy = src('src/lib/gap/execution/copy-availability.ts');
+    expect(copy).toMatch(/const requestShapes = cache\(\(_prisma: object\) => new Map<string, Promise<CopyAvailability>>\(\)\);/);
+    expect(copy).not.toMatch(/TTL/);
   });
 });
 
