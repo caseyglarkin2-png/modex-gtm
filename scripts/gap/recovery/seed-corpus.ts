@@ -120,7 +120,7 @@ export async function seedCorpus(prisma: PrismaClient, opts: { tag?: string; now
     return row;
   }
   /** A verified, dated, quoted, external-ok fact on a publisher page: what the evidence gate admits (research/evidence-gate.ts). */
-  async function fact(a: CorpusAccount, key: string, text: string, over: { title?: string; observedAt?: string; type?: string; host?: string; claimClass?: string; claimAttributes?: Record<string, unknown> } = {}) {
+  async function fact(a: CorpusAccount, key: string, text: string, over: { title?: string; observedAt?: string; type?: string; host?: string; claimClass?: string; claimAttributes?: Record<string, unknown>; expiresAt?: string; metadata?: Record<string, unknown> } = {}) {
     const title = over.title ?? `${a.name} news (${key})`;
     const r = await registerSignal(prisma, {
       accountName: a.name,
@@ -133,10 +133,11 @@ export async function seedCorpus(prisma: PrismaClient, opts: { tag?: string; now
       evidenceText: text,
       externalOk: true,
       observedAt: new Date(over.observedAt ?? '2026-09-16T00:00:00Z'),
+      ...(over.expiresAt ? { freshnessExpiresAt: new Date(over.expiresAt) } : {}),
       confidence: 80,
       // R22/R34: a claim of its own type keeps its class and attributes (research/claim-types.ts), as the verifier mints it.
       ...(over.claimClass ? { claimClass: over.claimClass } : {}),
-      metadata: { verified: VERIFIED_EXCERPT, ...(over.claimClass ? { claimType: over.claimClass.toLowerCase(), claimAttributes: over.claimAttributes ?? {} } : {}) },
+      metadata: { verified: VERIFIED_EXCERPT, ...(over.claimClass ? { claimType: over.claimClass.toLowerCase(), claimAttributes: over.claimAttributes ?? {} } : {}), ...(over.metadata ?? {}) },
       registeredBy: ACTOR,
     });
     a.facts.push({ id: r.id, label: key });
@@ -195,7 +196,9 @@ export async function seedCorpus(prisma: PrismaClient, opts: { tag?: string; now
     a.expected = 'Research with two checked facts and no usable thesis; Tom chosen; the draft from the warehouse closure must prepare a valid proposal and stay visible';
     const tom = await person(a, 'Tom', 'Senior Director - Logistics, Distribution & Transportation');
     await person(a, 'Kay', 'Senior Director - Transportation');
-    await fact(a, 'tulsa', `${a.name} will close its warehouse operations at its Tulsa, Oklahoma, production facility and shift duties to a new site in the area.`, { title: `${a.name} to cease warehouse operations at Oklahoma production site`, observedAt: '2026-07-23T00:00:00Z' });
+    // The PRODUCTION row's own fields (read-only by the lead, 2026-10-07): type site_expansion, observed 2026-07-23T10:17:19Z,
+    // an explicit expiry 2026-11-20T10:17:19Z, no claim class, public_secondary, metadata.change, no continuity key.
+    await fact(a, 'tulsa', `${a.name} will close its warehouse operations at its Tulsa, Oklahoma, production facility and shift duties to a new site in the area.`, { title: `${a.name} to cease warehouse operations at Oklahoma production site`, observedAt: '2026-07-23T10:17:19Z', expiresAt: '2026-11-20T10:17:19Z', metadata: { change: 'closure' } });
     await fact(a, 'gatik', `${a.name} and Gatik announced a multi-year agreement to deploy autonomous freight across its North America distribution network.`, { title: `${a.name} and Gatik announce multi-year agreement`, observedAt: '2026-08-25T00:00:00Z', type: 'technology_signal' });
     await fact(a, 'maryland', `${a.name} is ceasing manufacturing and warehouse operations at a bottling plant in Maryland, which will result in 143 layoffs, according to a WARN notice.`, { title: `${a.name} ending manufacturing and warehouse operations in Maryland`, observedAt: '2026-09-16T00:00:00Z' });
     await choose(a, tom.id);

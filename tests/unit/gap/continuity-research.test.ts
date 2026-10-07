@@ -183,6 +183,9 @@ describe('evidence integrity review findings (2026-09-28)', () => {
     const { classifyFact } = await import('@/lib/gap/research/facts');
     expect(classifyFact('This agreement builds on PepsiCo’s experience running one of North America’s largest private fleets and brings Gatik’s autonomous freight capabilities into real, day-to-day supply chain operations.')).toEqual({ type: 'automation_program', change: 'automation' });
     expect(classifyFact(AUG)).toEqual({ type: 'site_expansion', change: 'investment' });
+    // The production Tulsa sentence is a CLOSURE (its change). Its signal type stays site_expansion: the type set is a
+    // database CHECK with no closure value (prisma/sql/2026-09-23-gap-os.sql:51), recorded as debt in the ledger.
+    expect(classifyFact('PepsiCo will close its warehouse operations at its Tulsa, Oklahoma, production facility and shift duties to a new site in the area.')).toEqual({ type: 'site_expansion', change: 'closure' });
     // a site change in the same sentence still wins
     expect(classifyFact('Acme will open a new distribution center in Reno operating driverless trucks.').change).toBe('opening');
   });

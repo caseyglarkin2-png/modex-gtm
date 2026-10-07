@@ -1726,6 +1726,9 @@ a deliberate mutation that turns it red; nothing here sends, enrolls, spends Apo
 - R43 follow-up copy (touch 2 and later): PARTIAL, dependency: every seeded approach family is single-touch; a step-1 copy family must be written and seeded before a prepared follow-up exists.
 - Section 8 generated quality: PARTIAL, dependency: a held-out, human-graded corpus of at least 30 cases with model, prompt and policy versions recorded.
 - R15 / R61 latency: PARTIAL, dependency: 30 navigations per condition measured on the production build.
+- R24 / R30 Tulsa on the production row's own fields (read-only by the lead): the corpus fact now carries them (type site_expansion, observed 2026-07-23T10:17:19Z, explicit expiry 2026-11-20T10:17:19Z, no claim class, public_secondary, metadata.change closure, no continuity key). Result: the page OFFERS it for Tom with "Current until Nov 20, 2026." (anchor-draft scratch, exact line).
+- One reader for "a person wrote back" (the hold, the follow-up stop, learning): FIXED e4b555ed (`replies/classify.ts` isPersonReply; a body-only notice stops nothing and is no reply).
+- DEBT, a closure typed as an expansion: `research/facts.ts:308` classifyFact gives a closure signal type site_expansion with change closure, because the signal type set is a database CHECK with no closure value (`prisma/sql/2026-09-23-gap-os.sql:51`). The change field and the family derivation read closure; anything that words `type` says expansion. The fix needs a new type value in that hand SQL applied to production (an owner-approved schema change), then the readers worded from it. The Tulsa sentence is pinned as a closure change (`continuity-research.test.ts`).
 
 ## 12. Migration, backfill and rollback
 

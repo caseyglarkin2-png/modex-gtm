@@ -152,7 +152,8 @@ describe.skipIf(!RUN)('R03: the Pepsi draft, review and use transaction (scratch
     expect(anchor.draftable.map((d) => d.story)).toEqual(expect.arrayContaining([expect.stringMatching(/Tulsa/)]));
     // Item 2a: the 75-day-old Tulsa site change is offered with its end date; the 75-day-old news item is not offered
     // and the page says why.
-    expect(anchor.draftable.find((d) => /Tulsa/.test(d.story))?.currentLine).toMatch(/^Current until [A-Z][a-z]{2} \d{1,2}, 2026\.$/);
+    // On the production row's own fields (observed 2026-07-23, explicit expiry 2026-11-20): offered, current until Nov 20.
+    expect(anchor.draftable.find((d) => /Tulsa/.test(d.story))?.currentLine).toBe('Current until Nov 20, 2026.');
     expect(anchor.draftable.map((d) => d.factId)).not.toContain(staleNewsId);
     expect(anchor.tooOld).toEqual([expect.objectContaining({ factId: staleNewsId, line: expect.stringMatching(/^This story is too old for a first touch: it was current until /) })]);
   }, 120_000);
