@@ -109,6 +109,25 @@ describe('the Today summary (R45)', () => {
   });
 });
 
+describe('done today keeps the latest completions on a busy day (R42b gate finding)', () => {
+  it('more than 500 ledger rows today: the newest completion still shows (the oldest drop), in order; a reply answered from GAP counts', async () => {
+    const at = (ms: number) => new Date(Date.parse('2026-10-06T12:00:00Z') + ms);
+    const busy = Array.from({ length: 520 }, (_, k) => ({ id: `b${String(k).padStart(4, '0')}`, kind: 'account.commitment', subject_type: 'account', subject_id: 'Busy Co', created_at: at(k * 1000), payload: { commitmentId: `c${k}`, op: 'create', commitment: { accountName: 'Busy Co', status: 'open', title: 'x' } } }));
+    const d = ledgerDb({
+      audit: [
+        ...busy,
+        { id: 'z1', kind: 'execution.reply_sent', subject_type: 'inbound_message', subject_id: 'msg-1', created_at: at(600_000), payload: { accountName: 'Nfi Scratch Co', recipient: 'ann@nfi.example.com' } },
+        { id: 'z2', kind: 'account.work_outcome', subject_type: 'account', subject_id: 'Tyson Scratch Co', created_at: at(601_000), payload: { kind: 'snoozed', until: '2026-10-08T13:00:00Z' } },
+      ],
+    });
+    const done = await loadCompletedToday(d.client(), LATE);
+    expect(done.map((x) => [x.accountName, x.line])).toEqual([
+      ['Nfi Scratch Co', 'Answered ann@nfi.example.com in their thread.'],
+      ['Tyson Scratch Co', 'Snoozed until Oct 8.'],
+    ]);
+  });
+});
+
 describe('the actionable result is the card\'s action (R45)', () => {
   it('where the lane mapping would offer an action the workspace does not allow, the card offers none: the lane card never competes', () => {
     const summary = (actionable?: unknown) => new Map([['Heb Scratch Co', { accountName: 'Heb Scratch Co', state: 'follow_up_due' as const, stateLine: 'Follow up due: Dakota, due Oct 6', person: null, blocker: null, coldTouchAllowed: false, nextText: 'Send the next touch to Dakota (due Oct 6).', at: '2026-10-06T14:59:00Z', ...(actionable === undefined ? {} : { actionable: actionable as never }) }]]);

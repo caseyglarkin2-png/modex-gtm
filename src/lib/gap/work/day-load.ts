@@ -13,7 +13,7 @@ import { loadCommitments, syncFollowUpsFromLedger, syncReturnRemindersFromReplie
 import { COMMITMENT_EVENT, type Commitment } from './commitment-model';
 import { dayLabel, nyDay, nyDayAt } from './dates';
 import type { DoneItem } from './today';
-import { DIRECT_SENT, DRAFT_SENT, DRAFT_SUBJECT_TYPE, MANUAL_SENT } from '../execution/draft-ledger';
+import { DIRECT_SENT, DRAFT_SENT, DRAFT_SUBJECT_TYPE, MANUAL_SENT, REPLY_SENT } from '../execution/draft-ledger';
 import { WORK_OUTCOME } from './outcome';
 import { isCanceled, meetingInstant, parseTimeOfDay, prepareMeeting } from '../deals/meeting-prep';
 import { openQuestionsFor, unknownSectionsOfTypes } from '../deals/deal-brief';
@@ -125,26 +125,30 @@ const isObj = (v: unknown): v is Record<string, unknown> => typeof v === 'object
 /**
  * R45: what was completed TODAY (the New York day of `now`), read from the ledger and the dispositions, never from a
  * screen: sends GAP proved (direct, manual, a sent draft), answers recorded by a person, obligations done or skipped,
- * notes saved, the seller's own outcomes. Nothing is stored for it; tomorrow it reads as yesterday's, never as done
- * again. Soft: an unreadable ledger reads as nothing done (and says so nowhere as success).
+ * notes saved, the seller's own outcomes, and (R42b) an answer to a reply sent from GAP in their thread. Nothing is
+ * stored for it; tomorrow it reads as yesterday's, never as done again. Soft: an unreadable ledger reads as nothing
+ * done (and says so nowhere as success). Bounded to the NEWEST 500 rows of the day (read newest first, shown in
+ * order): on a busy day the oldest rows drop, never the latest completion.
  */
 export async function loadCompletedToday(prisma: PrismaLike, now: Date): Promise<DoneItem[]> {
   if (typeof prisma?.gapAuditEvent?.findMany !== 'function') return [];
   const start = nyDayAt(nyDay(now), 0);
   const rows: Array<{ kind: string; subject_type: string; subject_id: string; payload: unknown; created_at: Date }> = await prisma.gapAuditEvent
     .findMany({
-      where: { created_at: { gte: start, lte: now }, kind: { in: [DIRECT_SENT, MANUAL_SENT, DRAFT_SENT, 'disposition.recorded', COMMITMENT_EVENT, 'capture.note', WORK_OUTCOME] } },
+      where: { created_at: { gte: start, lte: now }, kind: { in: [DIRECT_SENT, MANUAL_SENT, DRAFT_SENT, REPLY_SENT, 'disposition.recorded', COMMITMENT_EVENT, 'capture.note', WORK_OUTCOME] } },
       select: { kind: true, subject_type: true, subject_id: true, payload: true, created_at: true },
-      orderBy: { created_at: 'asc' },
+      orderBy: { created_at: 'desc' },
       take: 500,
     })
     .catch(() => []);
   const out: DoneItem[] = [];
-  for (const r of rows) {
+  for (const r of [...rows].reverse()) {
     const p = isObj(r.payload) ? r.payload : {};
     const at = new Date(r.created_at).toISOString();
     if ((r.kind === DIRECT_SENT || r.kind === MANUAL_SENT) && r.subject_type === DRAFT_SUBJECT_TYPE) {
       out.push({ at, accountName: typeof p.accountName === 'string' ? p.accountName : null, line: `Sent touch ${Number(p.stepIndex ?? 0) + 1} to ${String(p.recipient ?? 'them')}${p.reconciledFromSent ? ' (found in Sent)' : ''}.` });
+    } else if (r.kind === REPLY_SENT) {
+      out.push({ at, accountName: typeof p.accountName === 'string' ? p.accountName : null, line: `Answered ${String(p.recipient ?? 'them')} in their thread.` });
     } else if (r.kind === DRAFT_SENT) {
       out.push({ at, accountName: null, line: 'A GAP draft was sent from Gmail.' });
     } else if (r.kind === 'disposition.recorded' && p.humanConfirmed === true) {
