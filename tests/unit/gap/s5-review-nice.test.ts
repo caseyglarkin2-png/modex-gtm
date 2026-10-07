@@ -45,11 +45,17 @@ describe('Sprint 5 review NICE: a promise due now outranks a meeting more than a
 });
 
 describe('Sprint 5 review NICE: the recap counts its statements in words that agree', () => {
+  const base = { accountName: 'Kroger Scratch Co', deal: { id: '392057001', name: 'YardFlow - Kroger Scratch Co', contacts: [{ name: 'Ann Scratch', title: null }] }, plan: planFor('392057001', [], []), commitments: [], roi: null };
   it('one statement: send it back; two: send them back', () => {
-    const base = { accountName: 'Kroger Scratch Co', deal: { id: '392057001', name: 'YardFlow - Kroger Scratch Co', contacts: [{ name: 'Ann Scratch', title: null }] }, plan: planFor('392057001', [], []), commitments: [], roi: null };
     const need = (id: string) => ({ id, type: 'business_problem', quote: `Quote ${id}.`, who: 'Ann Scratch', at: '2026-10-02T15:00:00.000Z', accountLevel: false });
     expect(prepareArtifacts({ ...base, needs: [need('b1')] })[0].why).toMatch(/^1 confirmed statement from Ann Scratch on YardFlow - Kroger Scratch Co: send it back so Ann/);
     expect(prepareArtifacts({ ...base, needs: [need('b1'), need('b2')] })[0].why).toMatch(/: send them back so Ann/);
+  });
+  it('two statements by one person on one day each say which words they rest on; a single one keeps the plain label', () => {
+    const ben = (id: string, quote: string) => ({ id, type: 'metric', quote, who: 'Ben Scratch', at: '2026-10-07T13:00:00.000Z', accountLevel: false });
+    const [recap] = prepareArtifacts({ ...base, needs: [ben('b1', 'We lose about 3 hours per shift hunting for trailers.'), ben('b2', 'We pay about forty thousand a month in detention.')] });
+    expect(recap.citations.map((c) => c.label)).toEqual(['Ben Scratch, Oct 7 (buyer confirmed): "We lose about 3 hours per..."', 'Ben Scratch, Oct 7 (buyer confirmed): "We pay about forty thousand a..."']);
+    expect(prepareArtifacts({ ...base, needs: [ben('b1', 'Short quote.')] })[0].citations[0].label).toBe('Ben Scratch, Oct 7 (buyer confirmed)');
   });
 });
 

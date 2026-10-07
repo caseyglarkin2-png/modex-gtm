@@ -119,7 +119,17 @@ export function prepareArtifacts(i: ArtifactInput): PreparedArtifact[] {
   const lead = i.deal.contacts[0] ?? null;
   const statements = i.needs.filter((n) => STATEMENT_TYPES.has(n.type));
   const quotes = i.needs.map((n) => n.quote);
-  const cite = (n: ArtifactInput['needs'][number]) => ({ label: `${n.who}, ${dayOf(n.at)} (buyer confirmed${n.accountLevel ? ', account-level' : ''})`, ref: `bid:${n.id}` });
+  const citeBase = (n: ArtifactInput['needs'][number]) => `${n.who}, ${dayOf(n.at)} (buyer confirmed${n.accountLevel ? ', account-level' : ''})`;
+  // Sprint 5 review NICE: two statements by one person on one day read "Rests on: Ben Scratch, Oct 7" twice; a repeated
+  // label carries the statement's first words, so each line says which words it rests on.
+  const opening = (q: string) => {
+    const w = q.replace(/\s+/g, ' ').trim().split(' ');
+    return w.length > 6 ? `${w.slice(0, 6).join(' ')}...` : w.join(' ');
+  };
+  const cite = (n: ArtifactInput['needs'][number]) => {
+    const base = citeBase(n);
+    return { label: i.needs.filter((x) => citeBase(x) === base).length > 1 ? `${base}: "${opening(n.quote)}"` : base, ref: `bid:${n.id}` };
+  };
   const agreedByBuyer = i.plan.filter((m) => m.state === 'agreed' && m.buyerAgreed);
   const agreedNotByBuyer = i.plan.filter((m) => m.state === 'agreed' && !m.buyerAgreed);
   const ours = i.commitments.filter((c) => c.kind === 'deliverable' || c.kind === 'answer_request');
