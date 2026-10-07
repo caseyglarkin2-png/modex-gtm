@@ -169,7 +169,7 @@ export async function applySignalOp(prisma: PrismaLike, input: { id: string; act
       if (!r.url) return { ok: false, reason: 'no_link' };
       if (r.resolution !== 'resolved' || !r.account_name) return { ok: false, reason: 'needs_account' };
       data = {
-        research_status: r.research_status === 'none' || r.research_status === 'no_usable_fact' ? 'queued' : r.research_status,
+        research_status: r.research_status === 'none' || r.research_status === 'no_usable_fact' || r.research_status === 'research_failed' ? 'queued' : r.research_status,
         feedback: null,
         feedback_by: null,
         feedback_at: null,

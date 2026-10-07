@@ -161,7 +161,29 @@ export function factMatchesSignal(fact: { url: string; excerpt: string; title?: 
   return shared >= 2;
 }
 
-export type SettledStatus = 'fact_found' | 'contradiction' | 'no_usable_fact';
+export type SettledStatus = 'fact_found' | 'contradiction' | 'no_usable_fact' | 'queued' | 'research_failed';
+
+/**
+ * Batch item 10 (R25): research that failed again and again (the provider did not answer, the run did not finish) is a
+ * DEAD LETTER with its own status and label, never "no usable fact": an outage must never read as "nothing there".
+ */
+export const RESEARCH_DEAD_LETTER = 'research_failed' as const;
+export const RESEARCH_FAILURE_MAX_ATTEMPTS = 3;
+
+/** One failed research attempt on a signal: back to the queue, or the dead letter after the last allowed attempt. */
+export async function recordFailedResearchAttempt(
+  prisma: PrismaLike,
+  s: { id: string; metadata?: unknown },
+  error: string,
+  now: Date,
+  max = RESEARCH_FAILURE_MAX_ATTEMPTS,
+): Promise<'queued' | typeof RESEARCH_DEAD_LETTER> {
+  const meta = ((s.metadata ?? {}) as Record<string, unknown>) ?? {};
+  const attempts = Number(meta.researchAttempts ?? 0) + 1;
+  const dead = attempts >= max;
+  await prisma.gapSignal.update({ where: { id: s.id }, data: { research_status: dead ? RESEARCH_DEAD_LETTER : 'queued', metadata: { ...meta, researchAttempts: attempts, researchError: error.slice(0, 200), ...(dead ? { deadLetteredAt: now.toISOString() } : {}) } } });
+  return dead ? RESEARCH_DEAD_LETTER : 'queued';
+}
 
 /** Record, per signal, what the research run concluded about ITS story. Writes GapSignal rows only. */
 export async function settleSignals(
@@ -180,6 +202,13 @@ export async function settleSignals(
     // belongs to the account it was researched for and never lands on a different one.
     if (!row || (row.account_name !== undefined && row.account_name !== input.accountName) || (row.research_status !== undefined && row.research_status !== 'researching')) {
       out.push({ id: s.id, status: 'no_usable_fact', matched: [] });
+      continue;
+    }
+    // Batch item 10 (R25): the provider did not answer: a failed attempt (requeued, the dead letter after the last),
+    // never "no usable fact".
+    if (input.result.outcome === 'provider_unavailable') {
+      const status = await recordFailedResearchAttempt(prisma, { id: s.id, metadata: row.metadata }, 'the research provider did not answer', input.now);
+      out.push({ id: s.id, status, matched: [] });
       continue;
     }
     await prisma.gapSignal.update({

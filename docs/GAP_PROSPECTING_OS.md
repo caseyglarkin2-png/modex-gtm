@@ -925,7 +925,9 @@ news"); priority accounts (in motion, a chosen person, a thesis in use, an open 
 marked and the rotation (`discoveryOrder`, now used by grounded discovery) asks them first, least-recently asked,
 with starvation protection: an account whose last turn failed within six hours waits behind every account that has
 not failed. `/gap/coverage` (under More) renders it with the capacity statement. Production, read only, 2026-10-06:
-75 watched accounts, 12 priority; the news pass covers every account (every two hours); grounded bundle 1
+75 watched accounts, 12 priority; the news pass asks at most 10 accounts a run with the time the grounded turns leave,
+so each account about every 15 hours at best (corrected by batch item 10: it does not cover every account every two
+hours); grounded bundle 1
 (newsroom / SEC / earnings / leadership) covered for 74, bundle 2 (jobs / WARN / security / government) for 40 with
 34 never, bundles 3 (procurement / case studies / technology / 3PL) and 4 (M&A / capex / fleet / trade press) NEVER
 for all 75: at 2 accounts a run, 12 runs a day (24 turns), 75 x 4 bundles take 12.5 days per rotation and the
@@ -938,7 +940,9 @@ Now a grounded page that is MATERIAL (newsroom, SEC, earnings, jobs, government/
 technology, 3PL/partner, M&A, capex, fleet, trade press; never leadership, labor or security), whose title names the
 account, that the reader could open and that carries the page's OWN date is queued (`research_status: queued`,
 `metadata.grounded.queuedAt`) for the existing background research, which keeps its cap, its cooldown and its
-three-attempt dead letter (`no_usable_fact` with `researchAttempts`); bounded here too: 4 a run, 40 a day. A
+three-attempt dead letter (batch item 10, 2026-10-07: its own status `research_failed`, labelled "Research failed" and
+retryable, never `no_usable_fact`, for a thrown run, a provider that did not answer and a run that never finished;
+`researchAttempts`, `deadLetteredAt`); bounded here too: 4 a run, 40 a day (an unreadable budget queues nothing). A
 "may be relevant" page, an unread page and a search-dated page are never queued. Pinned in
 `grounded-discovery.test.ts`. No automatic communication, no contact enrichment, no spend beyond the research the
 cron already runs.
@@ -1011,8 +1015,12 @@ capacity with the decision and its alternative. Defect fixed on the way (same su
 24 daily turns and no other account would ever rotate; a priority account now leads only while DUE (not asked within
 its one-day target) and otherwise waits its turn by recency. The arithmetic the earlier choice text used
 (floor(turns x 7 / bundles) - priorities = 30) ignored that the priorities' daily pass costs seven turns a week each,
-not four; with it the "30 rotating" rotation would take ten days, not seven, so the honest bound is 21. Production,
-read only, 2026-10-06: 75 watched, 12 priority, 21 rotating (every bundle every 7 days), 42 news only; covering
+not four; with it the "30 rotating" rotation would take ten days, not seven, so the honest bound was 21. Batch item
+10 (2026-10-07): 21 met the objective with zero slack (21 x 4 / 12 = 7.0 days), so one failed or skipped turn missed
+it; the rotation now keeps a 15% margin (`ROTATION_MARGIN`) and "met" is read against it: 12 priority, 17 rotating
+(every bundle every 5.7 days), 46 news only. A provider outage turn is now recorded (`transient`; Coverage shows it as
+failed) and never counted as a turn; an unreadable daily queue budget queues nothing. Production, read only,
+2026-10-06: 75 watched, 12 priority, 21 rotating (every bundle every 7 days), 42 news only; covering
 every watched account in seven days needs 48 turns a day (the hourly cron), the alternative declined. Pinned by
 `coverage.test.ts` (slots, the deterministic choice, the capacity statement, the due-priority order),
 `coverage-page.test.tsx` (the page line on exactly the news-only rows) and `grounded-discovery.test.ts` (a news-only

@@ -176,6 +176,9 @@ export async function runGroundedDiscovery(
   const lastFailedAt = new Map<string, number>();
   const turns = new Map<string, number>();
   for (const a of asked) {
+    // Batch item 10: a TRANSIENT failure (a provider outage) is recorded so Coverage can show it, but it is never a
+    // turn: the account keeps its place and its bundle and is asked again next run.
+    if ((a as { payload?: Record<string, unknown> }).payload?.transient === true) continue;
     if (!lastAt.has(a.subject_id)) {
       lastAt.set(a.subject_id, new Date(a.created_at).getTime());
       // The newest row's error (a content failure took the turn): the account backs off behind the others (R20).
@@ -202,7 +205,8 @@ export async function runGroundedDiscovery(
     const since = opts.now.getTime() - 86_400_000;
     queuedToday = recent.filter((r) => { const g = (r.metadata as { grounded?: { queuedAt?: string } } | null)?.grounded; return typeof g?.queuedAt === 'string' && new Date(g.queuedAt).getTime() >= since; }).length;
   } catch {
-    queuedToday = 0;
+    // Batch item 10: an unreadable budget queues nothing (fail closed), never a fresh day's worth.
+    queuedToday = GROUNDED_QUEUE_PER_DAY;
   }
 
   for (const p of order.slice(0, Math.max(1, Math.min(opts.accounts ?? GROUNDED_ACCOUNTS_PER_RUN, 10)))) {
@@ -218,8 +222,10 @@ export async function runGroundedDiscovery(
     if ('error' in answer) {
       res.error = answer.error.slice(0, 200);
       // A provider outage is retried next run; a content failure (no citations, unparsable) still takes the turn,
-      // so one hard account never holds every slot.
-      if (!TRANSIENT.test(answer.error)) await prisma.gapAuditEvent.create({ data: { kind: GROUNDED_DISCOVERY_AUDIT, actor: GROUNDED_DISCOVERY_ACTOR, subject_type: 'account', subject_id: p.accountName, created_at: opts.now, payload: JSON.parse(JSON.stringify(res)) } }).catch(() => undefined);
+      // so one hard account never holds every slot. Batch item 10: the outage is recorded too (`transient`), so
+      // Coverage shows a failed turn instead of nothing, and the rotation skips it (it is not a turn).
+      const transient = TRANSIENT.test(answer.error);
+      await prisma.gapAuditEvent.create({ data: { kind: GROUNDED_DISCOVERY_AUDIT, actor: GROUNDED_DISCOVERY_ACTOR, subject_type: 'account', subject_id: p.accountName, created_at: opts.now, payload: JSON.parse(JSON.stringify({ ...res, ...(transient ? { transient: true } : {}) })) } }).catch(() => undefined);
       out.accounts.push(res);
       continue;
     }

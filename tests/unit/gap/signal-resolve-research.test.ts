@@ -9,6 +9,7 @@ import { factMatchesSignal, settleSignals, signalCandidates, signalFocus } from 
 import { promoteSignal } from '@/lib/gap/signals/promote';
 import { processSignals } from '@/lib/gap/signals/process';
 import { runBackgroundResearch, selectBackgroundTargets, compareTargets } from '@/lib/gap/research/background';
+import { signalStatus } from '@/lib/gap/signals/intake';
 
 const NOW = new Date('2026-09-28T15:00:00.000Z');
 const row = (o: Record<string, unknown>) => ({ id: 'x', url: null, title: null, account_name: 'PepsiCo', published_at: new Date('2026-09-20T00:00:00Z'), created_at: new Date('2026-09-20T00:00:00Z'), event_id: null, ...o });
@@ -195,7 +196,8 @@ describe('the processing pass', () => {
     // A run that died mid-flight never leaves a signal "researching"; each requeue counts, the third settles it.
     expect(r.requeued).toBe(2);
     expect(update).toHaveBeenCalledWith({ where: { id: 'r1' }, data: { research_status: 'queued', metadata: { researchAttempts: 1, researchError: 'research run did not finish (timed out)' } } });
-    expect(update).toHaveBeenCalledWith({ where: { id: 'r2' }, data: { research_status: 'no_usable_fact', metadata: { researchAttempts: 3, researchError: 'research run did not finish (timed out)' } } });
+    // Batch item 10 (R25): the third failed attempt is the dead letter, never "no usable fact".
+    expect(update).toHaveBeenCalledWith({ where: { id: 'r2' }, data: { research_status: 'research_failed', metadata: { researchAttempts: 3, researchError: 'research run did not finish (timed out)', deadLetteredAt: NOW.toISOString() } } });
   });
 });
 
@@ -238,7 +240,8 @@ describe('background research follows up queued signals', () => {
     const prisma = prismaWith([]);
     prisma.gapSignal.findMany = vi.fn().mockResolvedValueOnce([{ id: 's1', account_name: 'PepsiCo', origin: 'casey_share', title: 'x', created_at: NOW, published_at: null }]).mockResolvedValueOnce([sigRow]);
     await runBackgroundResearch(prisma, { now: NOW }, { ...emptyDeps, research: (async () => { throw new Error('gemini 503'); }) as never });
-    expect(prisma.gapSignal.update).toHaveBeenCalledWith({ where: { id: 's1' }, data: { research_status: 'no_usable_fact', metadata: { researchAttempts: 3, researchError: 'gemini 503' } } });
+    // Batch item 10 (R25): three failures are a dead letter with its own status, never "no usable fact".
+    expect(prisma.gapSignal.update).toHaveBeenCalledWith({ where: { id: 's1' }, data: { research_status: 'research_failed', metadata: { researchAttempts: 3, researchError: 'gemini 503', deadLetteredAt: NOW.toISOString() } } });
   });
 });
 
@@ -267,6 +270,21 @@ describe('review B P1s', () => {
     const out = await settleSignals(prisma, { signals: [sig], accountName: 'Acme', result: { runId: 'r', outcome: 'insufficient_evidence', facts: [stale], rejected: [], conflicts: [], notes: [] }, now: NOW });
     expect(out[0].status).toBe('no_usable_fact');
     expect((rows.s1.metadata as { research: { staleMatches: number } }).research.staleMatches).toBe(1);
+  });
+
+  // Batch item 10 (R25): a run whose provider did not answer settled every signal as "no usable fact".
+  it('a run whose provider did not answer is a failed attempt (requeued, then the dead letter), never "no usable fact"; the dead letter has its own label', async () => {
+    const rows: Record<string, Record<string, unknown>> = { s1: { metadata: {}, research_status: 'researching', account_name: 'Acme' } };
+    const prisma = { gapSignal: { findUnique: vi.fn(async () => rows.s1), update: vi.fn(async ({ data }: { data: Record<string, unknown> }) => Object.assign(rows.s1, data)) } };
+    const down = { runId: 'r', outcome: 'provider_unavailable' as const, facts: [], rejected: [], conflicts: [], notes: [] };
+    expect((await settleSignals(prisma, { signals: [sig], accountName: 'Acme', result: down as never, now: NOW }))[0].status).toBe('queued');
+    expect(rows.s1).toMatchObject({ research_status: 'queued', metadata: { researchAttempts: 1, researchError: 'the research provider did not answer' } });
+    rows.s1.research_status = 'researching';
+    rows.s1.metadata = { researchAttempts: 2 };
+    expect((await settleSignals(prisma, { signals: [sig], accountName: 'Acme', result: down as never, now: NOW }))[0].status).toBe('research_failed');
+    expect(rows.s1).toMatchObject({ research_status: 'research_failed', metadata: { researchAttempts: 3, deadLetteredAt: NOW.toISOString() } });
+    expect(signalStatus({ url: sig.url, resolution: 'resolved', research_status: 'research_failed', feedback: null })).toEqual({ status: 'Research failed', detail: 'Research failed three times (the provider did not answer, or the run did not finish). This is not "nothing usable": press Research to try again.' });
+    expect(signalStatus({ url: sig.url, resolution: 'resolved', research_status: 'no_usable_fact', feedback: null }).status).toBe('Nothing usable');
   });
 
   it('one event is promoted once, whichever source verified', async () => {

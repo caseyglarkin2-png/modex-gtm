@@ -34,7 +34,7 @@ import { listAllCurrent } from '../routing/queue';
 import { RESEARCHABLE_RULES, sellerLaneOf } from '../routing/card-readiness';
 import { loadThesisGroups, splitThesisWork } from '../hypothesis/thesis-groups';
 import { runEvidenceResearch, type ResearchDeps, type ResearchResult } from './run';
-import { settleSignals, signalCandidates, signalFocus, type ResearchableSignal } from '../signals/research';
+import { recordFailedResearchAttempt, settleSignals, signalCandidates, signalFocus, type ResearchableSignal } from '../signals/research';
 import { loadWatchProfiles } from '../signals/watch';
 import { heldDealAccounts } from '../deals/in-deals';
 import { CURRENTNESS_SELECT, factCurrentness, type CurrentnessFact } from './currentness';
@@ -360,13 +360,10 @@ export async function runBackgroundResearch(
       result.failed.push({ accountName: t.accountName, error });
       // A failed attempt still serves the request (Casey can ask again); never an hourly retry forever.
       await serveWorkSourceRequest(prisma, t).catch(() => undefined);
-      // A signal never sticks in "researching": back to the queue, or settled no_usable_fact after repeated failures.
+      // A signal never sticks in "researching": back to the queue, or (batch item 10, R25) the DEAD LETTER after
+      // repeated failures, its own status and label, never "no usable fact".
       for (const sg of signals) {
-        const meta = ((sg as { metadata?: Record<string, unknown> | null }).metadata ?? {}) as Record<string, unknown>;
-        const attempts = Number(meta.researchAttempts ?? 0) + 1;
-        await prisma.gapSignal
-          .update({ where: { id: sg.id }, data: { research_status: attempts >= SIGNAL_RESEARCH_MAX_ATTEMPTS ? 'no_usable_fact' : 'queued', metadata: { ...meta, researchAttempts: attempts, researchError: error } } })
-          .catch(() => undefined);
+        await recordFailedResearchAttempt(prisma, { id: sg.id, metadata: (sg as { metadata?: unknown }).metadata }, error, opts.now, SIGNAL_RESEARCH_MAX_ATTEMPTS).catch(() => undefined);
       }
     }
   }

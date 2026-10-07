@@ -116,7 +116,24 @@ describe('grounded source discovery', () => {
     const ask = vi.fn(async () => ({ error: 'gemini quota' }));
     const r = await runGroundedDiscovery(prisma as never, { now: NOW, accounts: 1 }, { ask, profiles: async () => [profile('PepsiCo')] });
     expect(r.accounts[0]).toMatchObject({ classes: [...SOURCE_CLASS_BUNDLES[2]], error: 'gemini quota' });
-    expect(audit).toHaveLength(0);
+    // Batch item 10: the outage is recorded (Coverage shows a failed turn, never nothing) and marked transient ...
+    expect(audit).toHaveLength(1);
+    expect(audit[0]).toMatchObject({ subject_id: 'PepsiCo', payload: { error: 'gemini quota', transient: true } });
+    // ... and it is never a turn: the next run asks the SAME bundle again.
+    const again = db([{ subject_id: 'PepsiCo', created_at: new Date('2026-10-01'), payload: { error: 'gemini quota', transient: true } } as never, ...asked]);
+    const r2 = await runGroundedDiscovery(again.prisma as never, { now: NOW, accounts: 1 }, { ask, profiles: async () => [profile('PepsiCo')] });
+    expect(r2.accounts[0].classes).toEqual([...SOURCE_CLASS_BUNDLES[2]]);
+  });
+
+  it('batch item 10: an unreadable daily queue budget queues nothing (fail closed), never a fresh day’s worth', async () => {
+    const { prisma, rows } = db();
+    (prisma.gapSignal as Record<string, unknown>).findMany = vi.fn(async () => { throw new Error('db down'); });
+    const pages = [{ url: 'https://pepsico.com/news/a', title: 'PepsiCo opens a new distribution center in Denver', cls: 'company newsroom', date: '2026-09-28' }];
+    const ask = vi.fn(async () => ({ pages, citations: pages.map((p) => p.url), citedHosts: ['pepsico.com'] }));
+    const fetchPage = vi.fn(async (url: string) => ({ ok: true as const, finalUrl: url, title: pages[0].title, publishedAt: new Date('2026-09-28') }));
+    const r = await runGroundedDiscovery(prisma as never, { now: NOW, accounts: 1 }, { ask, profiles: async () => [profile('PepsiCo')], fetchPage: fetchPage as never, priority: async () => new Map() });
+    expect(r.accounts[0]).toMatchObject({ captured: 1, queued: 0 });
+    expect(rows.filter((x) => x.research_status === 'queued')).toEqual([]);
   });
 
   it('R25: a material cited page the account is named in, dated by the page itself, is queued for the bounded background research; a MAY BE RELEVANT page, an unread page, a search-dated page and a leadership page are not; the per-run cap holds', async () => {
@@ -143,15 +160,15 @@ describe('grounded source discovery', () => {
   });
 
   it('R20 follow-up: only the bounded rotating population is asked; an account outside it (news only at the current allowance) never takes a grounded turn, however long since it was asked', async () => {
-    // 50 watched, no priorities: the allowance (2 a run x 12 runs x 7 days / 4 bundles) carries 42; the last 8 by tier, band, name are news only.
-    const watched = Array.from({ length: 50 }, (_, k) => ({ ...profile(`Acct ${String(k).padStart(2, '0')}`), tier: k < 42 ? 'Tier 1' : null }));
+    // 50 watched, no priorities: the allowance (2 a run x 12 runs x 7 days x 0.85 margin / 4 bundles) carries 35; the last 15 by tier, band, name are news only.
+    const watched = Array.from({ length: 50 }, (_, k) => ({ ...profile(`Acct ${String(k).padStart(2, '0')}`), tier: k < 35 ? 'Tier 1' : null }));
     // The news-only accounts were never asked; every rotating account was asked recently: recency alone would pick the news-only ones.
-    const asked = watched.slice(0, 42).map((p) => ({ subject_id: p.accountName, created_at: new Date(NOW.getTime() - 3_600_000) }));
+    const asked = watched.slice(0, 35).map((p) => ({ subject_id: p.accountName, created_at: new Date(NOW.getTime() - 3_600_000) }));
     const { prisma } = db(asked);
     const ask = vi.fn(async () => ({ pages: [], citations: [], citedHosts: [] }));
     const r = await runGroundedDiscovery(prisma as never, { now: NOW, accounts: 2 }, { ask, profiles: async () => watched, priority: async () => new Map() });
-    expect(r.newsOnly).toBe(8);
-    expect(r.accounts.map((a) => a.accountName).every((n) => Number(n.slice(-2)) < 42)).toBe(true);
+    expect(r.newsOnly).toBe(15);
+    expect(r.accounts.map((a) => a.accountName).every((n) => Number(n.slice(-2)) < 35)).toBe(true);
     expect(r.accounts).toHaveLength(2);
   });
 

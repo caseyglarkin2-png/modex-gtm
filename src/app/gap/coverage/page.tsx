@@ -40,10 +40,10 @@ export default async function CoveragePage() {
       <section className="rounded-md border border-[var(--border)] p-3 text-sm" data-testid="coverage-capacity">
         <h2 className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Capacity against the objectives</h2>
         <p className="mt-1">
-          {c.accounts} watched accounts ({c.priorityAccounts} priority: in motion, chosen, in a deal, a meeting within 14 days) x {c.bundles} source-class bundles. Grounded search runs {c.runsPerDay} times a day, {c.accountsPerRun} accounts a run: {c.turnsPerDay} turns a day. In the grounded rotation: the {c.priorityAccounts} priority accounts and {c.rotatingAccounts} others{c.fullRotationDays !== null ? `, every bundle every ${c.fullRotationDays} days` : ''}. News runs with the same cron for every watched account.
+          {c.accounts} watched accounts ({c.priorityAccounts} priority: in motion, chosen, in a deal, a meeting within 14 days) x {c.bundles} source-class bundles. Grounded search runs {c.runsPerDay} times a day, {c.accountsPerRun} accounts a run: {c.turnsPerDay} turns a day. In the grounded rotation: the {c.priorityAccounts} priority accounts and {c.rotatingAccounts} others{c.fullRotationDays !== null ? `, every bundle every ${c.fullRotationDays} days` : ''} ({Math.round(c.margin * 100)}% of the rotation turns kept for a failed or skipped turn). News: at most {c.newsAccountsPerRun} accounts a run, with the time the grounded turns leave, so each watched account is asked about every {c.newsHoursPerAccount} hours at best, not every run.
         </p>
         <ul className="mt-1 list-disc pl-5 text-xs">
-          <li>Every bundle within seven days for the rotating accounts: {c.meetsSevenDayTarget ? 'met' : 'not met'}.</li>
+          <li>Every bundle within seven days for the rotating accounts, with the margin to spare: {c.meetsSevenDayTarget ? 'met' : 'not met'}.</li>
           <li>A daily pass for priority accounts: {c.meetsPriorityDailyTarget ? `met (${c.rotationTurnsPerDay} turns a day are left for the rotation)` : 'not met'}.</li>
           <li data-testid="coverage-news-only-count">Watched for news only (outside the grounded rotation at the current allowance): {c.newsOnlyAccounts}{c.coversAllWatched ? '' : ` (every watched account in seven days needs ${c.requiredTurnsPerDay} turns a day)`}.</li>
         </ul>

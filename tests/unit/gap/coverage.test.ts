@@ -46,25 +46,27 @@ describe('coverageReport', () => {
   it('the capacity statement is arithmetic over the real cadence; past the allowance the rotation is bounded and the statement names the decision and the alternative', () => {
     const many = Array.from({ length: 75 }, (_, k) => ({ accountName: `Account ${k}`, reasons: ['priority'] }));
     const r = coverageReport({ now: NOW, profiles: many, grounded: [], newsAt: new Map(), researchAt: new Map(), priority: new Map(), accountsPerRun: 2, runsPerDay: 12 });
-    // No priorities: 24 turns a day x 7 days / 4 bundles = 42 accounts rotate; 33 are watched for news only.
-    expect(r.capacity).toMatchObject({ accounts: 75, bundles: 4, turnsPerDay: 24, rotationSlots: 42, rotatingAccounts: 42, newsOnlyAccounts: 33, fullRotationDays: 7, uncappedRotationDays: 12.5, requiredTurnsPerDay: 43, meetsSevenDayTarget: true, coversAllWatched: false, meetsPriorityDailyTarget: true });
-    expect(r.capacity.choice).toMatch(/capped at 42 accounts/);
-    expect(r.capacity.choice).toMatch(/33 watched accounts are checked by the news pass only/);
+    // No priorities: 24 turns a day x 7 days x (1 - the 15% margin) / 4 bundles = 35 accounts rotate; 40 are news only.
+    expect(r.capacity).toMatchObject({ accounts: 75, bundles: 4, turnsPerDay: 24, margin: 0.15, rotationSlots: 35, rotatingAccounts: 35, newsOnlyAccounts: 40, fullRotationDays: 5.83, uncappedRotationDays: 12.5, requiredTurnsPerDay: 43, meetsSevenDayTarget: true, coversAllWatched: false, meetsPriorityDailyTarget: true });
+    // Batch item 10: the news pass is capped and said so: 10 accounts a run, 12 runs a day, 75 watched: every 15 hours at best.
+    expect(r.capacity).toMatchObject({ newsAccountsPerRun: 10, newsHoursPerAccount: 15 });
+    expect(r.capacity.choice).toMatch(/capped at 35 accounts/);
+    expect(r.capacity.choice).toMatch(/40 watched accounts are checked by the news pass only/);
     expect(r.capacity.choice).toMatch(/12\.5 days per full rotation/);
     expect(r.capacity.choice).toMatch(/runs hourly \(48 turns a day, about 100% more grounded-search calls\)/);
     expect(r.capacity.choice).toMatch(/no spend increase, no cadence change/);
-    expect(r.accounts.filter((a) => a.rotation === 'news_only')).toHaveLength(33);
-    const few = coverageReport({ now: NOW, profiles: many.slice(0, 40), grounded: [], newsAt: new Map(), researchAt: new Map(), priority: new Map(), accountsPerRun: 2, runsPerDay: 12 });
+    expect(r.accounts.filter((a) => a.rotation === 'news_only')).toHaveLength(40);
+    const few = coverageReport({ now: NOW, profiles: many.slice(0, 35), grounded: [], newsAt: new Map(), researchAt: new Map(), priority: new Map(), accountsPerRun: 2, runsPerDay: 12 });
     expect(few.capacity).toMatchObject({ newsOnlyAccounts: 0, coversAllWatched: true, meetsSevenDayTarget: true });
     expect(few.capacity.choice).toBeNull();
     expect(few.accounts.every((a) => a.rotation === 'rotating')).toBe(true);
     expect(r.classes.some((c) => c.mode === 'manual_only')).toBe(true);
   });
-  it('priority accounts take a daily turn each, so the rotation beside them is what the rest of the allowance covers in seven days (75 watched, 12 priority: 21 rotate, 42 news only)', () => {
+  it('priority accounts take a daily turn each, so the rotation beside them is what the rest of the allowance covers in seven days with the margin (75 watched, 12 priority: 17 rotate, 46 news only)', () => {
     const many = Array.from({ length: 75 }, (_, k) => ({ accountName: `Account ${String(k).padStart(2, '0')}`, reasons: ['priority'] }));
     const priority = new Map(many.slice(0, 12).map((p): [string, string[]] => [p.accountName, ['a chosen person']]));
     const r = coverageReport({ now: NOW, profiles: many, grounded: [], newsAt: new Map(), researchAt: new Map(), priority, accountsPerRun: 2, runsPerDay: 12 });
-    expect(r.capacity).toMatchObject({ priorityAccounts: 12, rotationTurnsPerDay: 12, rotationSlots: 21, rotatingAccounts: 21, newsOnlyAccounts: 42, fullRotationDays: 7, requiredTurnsPerDay: 48, meetsSevenDayTarget: true, meetsPriorityDailyTarget: true, coversAllWatched: false });
+    expect(r.capacity).toMatchObject({ priorityAccounts: 12, rotationTurnsPerDay: 12, rotationSlots: 17, rotatingAccounts: 17, newsOnlyAccounts: 46, fullRotationDays: 5.67, requiredTurnsPerDay: 48, meetsSevenDayTarget: true, meetsPriorityDailyTarget: true, coversAllWatched: false });
     expect(r.accounts.filter((a) => a.rotation === 'priority')).toHaveLength(12);
     expect(r.capacity.choice).toMatch(/beside the 12 priority accounts/);
     // Priorities alone past the allowance: no rotation at all, said plainly.
@@ -72,14 +74,24 @@ describe('coverageReport', () => {
     expect(crowded.capacity).toMatchObject({ rotationSlots: 0, rotatingAccounts: 0, newsOnlyAccounts: 45, meetsPriorityDailyTarget: false, fullRotationDays: null });
     expect(crowded.capacity.choice).toMatch(/30 priority accounts need 30 turns a day/);
   });
+  // Batch item 10: the old sizing (no margin) met the objective with zero slack; "met" now needs the margin to spare.
+  it('a rotation sized with no margin (21 beside 12 priorities: exactly 7.0 days) is NOT met: one failed or skipped turn would miss it', () => {
+    const many = Array.from({ length: 75 }, (_, k) => ({ accountName: `Account ${String(k).padStart(2, '0')}`, reasons: ['priority'] }));
+    const priority = new Map(many.slice(0, 12).map((p): [string, string[]] => [p.accountName, ['a chosen person']]));
+    const zero = coverageReport({ now: NOW, profiles: many, grounded: [], newsAt: new Map(), researchAt: new Map(), priority, accountsPerRun: 2, runsPerDay: 12, margin: 0 });
+    expect(zero.capacity).toMatchObject({ rotatingAccounts: 21, fullRotationDays: 7, meetsSevenDayTarget: false });
+    expect(coverageReport({ now: NOW, profiles: many, grounded: [], newsAt: new Map(), researchAt: new Map(), priority, accountsPerRun: 2, runsPerDay: 12 }).capacity).toMatchObject({ rotatingAccounts: 17, meetsSevenDayTarget: true });
+  });
 });
 
 describe('groundedRotation (R20 follow-up: the bounded, deterministic rotating population)', () => {
   const p = (accountName: string, tier: string | null, band: string | null) => ({ accountName, tier, band });
   const population = [p('Zeta', 'Tier 1', null), p('Alpha', null, 'C'), p('Kilo', 'Tier 2', 'A'), p('Bravo', 'Tier 1', 'B'), p('Echo', null, null), p('Delta', 'Tier 1', 'A'), p('Mike', null, 'A')];
-  it('the slots are the turns the allowance leaves after a daily turn per priority, over seven days, per bundle; never negative', () => {
-    expect(groundedRotationSlots({ turnsPerDay: 24, bundles: 4, priorityCount: 0 })).toBe(42);
-    expect(groundedRotationSlots({ turnsPerDay: 24, bundles: 4, priorityCount: 12 })).toBe(21);
+  it('the slots are the turns the allowance leaves after a daily turn per priority, over seven days, less the margin, per bundle; never negative', () => {
+    expect(groundedRotationSlots({ turnsPerDay: 24, bundles: 4, priorityCount: 0 })).toBe(35);
+    expect(groundedRotationSlots({ turnsPerDay: 24, bundles: 4, priorityCount: 12 })).toBe(17);
+    // Batch item 10: with no margin the bound was 21, exactly seven days (21 x 4 / 12): zero slack for a lost turn.
+    expect(groundedRotationSlots({ turnsPerDay: 24, bundles: 4, priorityCount: 12, margin: 0 })).toBe(21);
     expect(groundedRotationSlots({ turnsPerDay: 24, bundles: 4, priorityCount: 24 })).toBe(0);
     expect(groundedRotationSlots({ turnsPerDay: 24, bundles: 4, priorityCount: 40 })).toBe(0);
   });

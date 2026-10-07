@@ -25,6 +25,7 @@
  * stay watched for NEWS only and the Coverage page says so per account. Pinned by tests/unit/gap/coverage.test.ts.
  */
 import { GROUNDED_ACCOUNTS_PER_RUN, GROUNDED_DISCOVERY_AUDIT, SOURCE_CLASS_BUNDLES, SOURCE_CLASS_COVERAGE } from './grounded-discovery';
+import { DISCOVERY_ACCOUNTS_PER_RUN } from './discovery';
 import { BACKGROUND_AUDIT } from '../research/background';
 import { loadWatchProfilesCached, type WatchProfile } from './watch';
 import { ACCOUNT_MOTION } from '../motion/account-motion';
@@ -38,6 +39,13 @@ export const COVERAGE_TARGET_MS = 7 * 86_400_000;
 export const PRIORITY_TARGET_MS = 1 * 86_400_000;
 /** The grounded cron schedule (vercel.json): every two hours at fifteen past. */
 export const GROUNDED_RUNS_PER_DAY = 12;
+/**
+ * Batch item 10: the share of the rotation's turns kept free for a turn that fails (a provider outage, retried next run)
+ * or is skipped by the run's time budget. Sized with no margin, the rotation met the seven-day objective with exactly
+ * zero slack (21 accounts x 4 bundles / 12 turns a day = 7.0 days): one lost turn and it was missed. The rotation is
+ * sized, and "met" is read, against the allowance less this margin.
+ */
+export const ROTATION_MARGIN = 0.15;
 /** After a failed turn an account waits this long before it may take a slot ahead of accounts that have not failed. */
 export const FAILURE_BACKOFF_MS = 6 * 60 * 60_000;
 export const NEWS_AUDIT = 'signal.discovery';
@@ -74,6 +82,12 @@ export interface CapacityStatement {
   turnsPerDay: number;
   /** The daily pass for priority accounts leaves this many turns a day for the rotation (negative: the priorities alone exceed the allowance). */
   rotationTurnsPerDay: number;
+  /** Batch item 10: the share of rotation turns kept for a failed or skipped turn (the rotation is sized without it). */
+  margin: number;
+  /** Batch item 10: the news pass asks at most this many accounts a run, with the time the grounded turns leave. */
+  newsAccountsPerRun: number;
+  /** Batch item 10: at that cap and cadence, each watched account's news is asked at best every this many hours. */
+  newsHoursPerAccount: number;
   /** How many non-priority accounts the rotation can carry so each gets every bundle within seven days. */
   rotationSlots: number;
   /** Non-priority accounts in the grounded rotation (at most rotationSlots). */
@@ -123,6 +137,8 @@ export interface CoverageInput {
   priority: ReadonlyMap<string, string[]>;
   accountsPerRun?: number;
   runsPerDay?: number;
+  /** Batch item 10: the margin the rotation is SIZED with (default ROTATION_MARGIN); "met" always requires ROTATION_MARGIN to spare. */
+  margin?: number;
 }
 
 const bundleIndexOf = (classes: readonly string[]): number => {
@@ -138,9 +154,11 @@ const newer = (a: string | null, b: string | null): string | null => (!a ? b : !
  * a day (its daily pass); what is left over seven days, divided by the bundles each rotating account needs, is the
  * number of accounts that get every bundle within seven days. Never negative. Pure.
  */
-export function groundedRotationSlots(i: { turnsPerDay: number; bundles: number; priorityCount: number }): number {
+export function groundedRotationSlots(i: { turnsPerDay: number; bundles: number; priorityCount: number; margin?: number }): number {
   if (i.bundles <= 0) return 0;
-  return Math.max(0, Math.floor((7 * (i.turnsPerDay - i.priorityCount)) / i.bundles));
+  // Batch item 10: the margin keeps turns free for a failed or skipped one, so "every bundle within seven days" holds.
+  const margin = i.margin ?? ROTATION_MARGIN;
+  return Math.max(0, Math.floor((7 * (i.turnsPerDay - i.priorityCount) * (1 - margin)) / i.bundles));
 }
 
 /** Tier 1 before Tier 2 before Tier 3; no tier last. */
@@ -177,7 +195,7 @@ export function coverageReport(i: CoverageInput): CoverageReport {
   const turnsPerDay = perRun * runsPerDay;
   const bundles = SOURCE_CLASS_BUNDLES.length;
   const prioritySet = new Set(i.profiles.filter((p) => (i.priority.get(p.accountName) ?? []).length > 0).map((p) => p.accountName));
-  const rotationSlots = groundedRotationSlots({ turnsPerDay, bundles, priorityCount: prioritySet.size });
+  const rotationSlots = groundedRotationSlots({ turnsPerDay, bundles, priorityCount: prioritySet.size, margin: i.margin });
   const rotation = groundedRotation(i.profiles, { priority: prioritySet, slots: rotationSlots });
   const roleOf = new Map<string, RotationRole>([
     ...rotation.priority.map((p) => [p.accountName, 'priority'] as const),
@@ -232,7 +250,9 @@ export function coverageReport(i: CoverageInput): CoverageReport {
   const fullRotationDays = daysFor(rotatingAccounts);
   const uncappedRotationDays = daysFor(nonPriority);
   const requiredTurnsPerDay = counts.priority + Math.ceil((nonPriority * bundles) / 7);
-  const meetsSevenDayTarget = fullRotationDays !== null && fullRotationDays <= 7;
+  // Batch item 10: met only with the margin to spare (a failed or skipped turn never misses the objective).
+  const meetsSevenDayTarget = fullRotationDays !== null && fullRotationDays <= 7 * (1 - ROTATION_MARGIN);
+  const newsHoursPerAccount = accounts.length ? Math.ceil((accounts.length / (DISCOVERY_ACCOUNTS_PER_RUN * runsPerDay)) * 24) : 0;
   const coversAllWatched = newsOnlyAccounts === 0;
   const hourly = perRun * 24;
   const choice =
@@ -252,7 +272,7 @@ export function coverageReport(i: CoverageInput): CoverageReport {
     at: i.now.toISOString(),
     accounts,
     counts,
-    capacity: { accounts: accounts.length, priorityAccounts: counts.priority, bundles, accountsPerRun: perRun, runsPerDay, turnsPerDay, rotationTurnsPerDay, rotationSlots, rotatingAccounts, newsOnlyAccounts, fullRotationDays, uncappedRotationDays, requiredTurnsPerDay, meetsSevenDayTarget, coversAllWatched, meetsPriorityDailyTarget, choice },
+    capacity: { accounts: accounts.length, priorityAccounts: counts.priority, bundles, accountsPerRun: perRun, runsPerDay, turnsPerDay, rotationTurnsPerDay, margin: ROTATION_MARGIN, newsAccountsPerRun: DISCOVERY_ACCOUNTS_PER_RUN, newsHoursPerAccount, rotationSlots, rotatingAccounts, newsOnlyAccounts, fullRotationDays, uncappedRotationDays, requiredTurnsPerDay, meetsSevenDayTarget, coversAllWatched, meetsPriorityDailyTarget, choice },
     classes: SOURCE_CLASS_COVERAGE,
   };
 }

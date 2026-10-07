@@ -90,6 +90,15 @@ describe('every plausible source is visible, with provenance and an evidence sta
     expect(s).toMatchObject({ freshTrigger: false, ageDays: 115 });
   });
 
+  // Batch item 10 (R25): a dead-lettered source was never checked: it reads as not checked, never as "no fact sentence".
+  it('a source whose research failed three times reads as not checked, never as a finding about the page', async () => {
+    const failed = (await loadAccountSources(prisma({ signals: [signal({ research_status: 'research_failed' })] }) as never, 'PepsiCo', { now: NOW })).items[0];
+    const none = (await loadAccountSources(prisma({ signals: [signal({ research_status: 'no_usable_fact' })] }) as never, 'PepsiCo', { now: NOW })).items[0];
+    const unchecked = (await loadAccountSources(prisma({ signals: [signal({ research_status: 'none', resolution_basis: null })] }) as never, 'PepsiCo', { now: NOW })).items[0];
+    expect(failed.reason).toBe(unchecked.reason);
+    expect(failed.reason).not.toBe(none.reason);
+  });
+
   it('a search summary is never shown as a quote', async () => {
     const p = prisma({ runs: [run('r1', '2026-09-30T16:39:00Z', { sources: [{ url: 'https://news.example/x', title: 't', publishedAt: '2026-09-20T00:00:00Z', excerpt: 'PepsiCo is expanding its fleet.', excerptKind: 'search_summary', provider: 'web', status: 'not_verified', reason: 'reanchor_too_weak' }] })] });
     const [s] = (await loadAccountSources(p as never, 'PepsiCo', { now: NOW })).items;
