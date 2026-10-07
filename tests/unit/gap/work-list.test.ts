@@ -98,7 +98,8 @@ describe('buildWorkList', () => {
     expect(pepsi.stateKind).toBe('research');
     const ready = buildWorkList(input()).find((c) => c.accountName === 'PepsiCo')!;
     expect(ready.person).toEqual({ name: 'Karen Darling', title: 'Senior Director - PBNA Transportation' });
-    expect(ready.next).toEqual({ label: 'Contact Karen Darling', href: '/gap?lane=ready' });
+    // R60: a lane link never reaches a card: it opens the account, where NEXT holds the move.
+    expect(ready.next).toEqual({ label: 'Contact Karen Darling', href: '/gap/accounts/pepsico' });
   });
   it('an unavailable In Deals read claims nothing about deals; a held card still holds', () => {
     const cards = buildWorkList(input({ inDeals: { status: 'unavailable', accounts: [] } }));

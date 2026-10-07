@@ -38,7 +38,7 @@ import { loadAccountContext } from '@/lib/gap/context/load';
 import { projectNow } from '@/lib/gap/context/now';
 import { loadReadyTarget } from '@/lib/gap/context/send-target';
 import { briefListenText, projectBrief } from '@/lib/gap/context/brief';
-import { accountSlug, accountTitle, gmailThreadHref, RECORD_REPLY_ANCHOR } from '@/lib/gap/account-intel/href';
+import { accountSlug, accountTitle, gmailThreadHref, RECORD_REPLY_ANCHOR, withWorkContext } from '@/lib/gap/account-intel/href';
 import { RepliesTriage } from '@/app/gap/replies/replies-triage';
 import { OpenHashDetails } from '@/components/gap/open-hash-details';
 import { PendingLink } from '@/components/gap/pending-link';
@@ -394,7 +394,11 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
         {tabs}
         <AccountNowView
           v={{ ...v, listen }}
-          nextHref={(pursuitNext?.control ?? control)?.href ?? null}
+          nextHref={(() => {
+            const h = (pursuitNext?.control ?? control)?.href ?? null;
+            // R60: a pack opened from here keeps the seller's place in Work (an account link already does via hrefFor).
+            return h ? withWorkContext(h, brief.accountName, workIndex) : null;
+          })()}
           nextLabel={(pursuitNext?.control ?? control)?.label ?? null}
           nextText={pursuitNext?.text ?? null}
           links={pursuit?.state.person?.personaId != null ? links.map((l) => (l.label === 'Log what happened' ? { ...l, href: `${l.href}&person=${pursuit.state.person!.personaId}` } : l)) : links}

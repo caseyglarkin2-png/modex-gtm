@@ -19,6 +19,7 @@
 import type { Commitment } from '../work/commitment-model';
 import { commitmentPhase } from '../work/commitment-model';
 import { dayLabel, nyDay } from '../work/dates';
+import { packHref } from '../account-intel/href';
 
 export type FollowUpAction = 'held' | 'outcome_unknown' | 'complete' | 'draft_saved' | 'wait' | 'prepare' | 'by_hand';
 
@@ -72,7 +73,7 @@ export function planFollowUp(i: { commitment: Commitment; history: FollowUpHisto
     return { ...base, action: 'wait', line: `Wait until ${when}: no reply from ${who} yet${lastTouch ? ` since touch ${lastTouch.stepIndex + 1} on ${dayLabel(nyDay(lastTouch.at), i.now)}` : ''}, and the follow-up interval has not passed.`, href: null, label: null };
   }
   if (i.nextStepHasCopy && c.detail?.decisionId) {
-    return { ...base, action: 'prepare', line: `${touch[0].toUpperCase()}${touch.slice(1)} is due: the prepared follow-up goes in the same thread after the final check.`, href: `/gap?lane=follow_up&open=${encodeURIComponent(c.detail.decisionId)}`, label: `Prepare ${touch}` };
+    return { ...base, action: 'prepare', line: `${touch[0].toUpperCase()}${touch.slice(1)} is due: the prepared follow-up goes in the same thread after the final check.`, href: packHref(c.detail.decisionId), label: `Prepare ${touch}` };
   }
   const thread = lastTouch?.threadId ? gmail(i.mailbox, `all/${encodeURIComponent(lastTouch.threadId)}`) : gmail(i.mailbox, `search/${encodeURIComponent(`to:"${c.person?.email ?? ''}"`)}`);
   return { ...base, action: 'by_hand', line: `${touch[0].toUpperCase()}${touch.slice(1)} is due and this family has no follow-up copy yet: follow up by hand in the thread, then mark it done (GAP also finds it in Sent).`, href: thread, label: 'Follow up in Gmail' };

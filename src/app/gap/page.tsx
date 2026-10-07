@@ -36,7 +36,8 @@ import { assertGapEnabled } from '@/lib/gap/flags';
 import { AccountLink } from '@/components/gap/account-link';
 import { listReplies } from '@/lib/gap/replies/list';
 import { listAllCurrent } from '@/lib/gap/routing/queue';
-import { cockpitOpenHref, type ReviewWaiting } from '@/lib/gap/routing/card-readiness';
+import { type ReviewWaiting } from '@/lib/gap/routing/card-readiness';
+import { packHref } from '@/lib/gap/account-intel/href';
 import { loadThesisGroups, splitThesisWork, orderGroupsForReview, toThesisCard, withRecordedNotes, type LoadedGroup } from '@/lib/gap/hypothesis/thesis-groups';
 import { resolveRoutableHypothesisScope } from '@/lib/gap/routing/run';
 import { Breadcrumb } from '@/components/breadcrumb';
@@ -164,7 +165,8 @@ async function loadCockpit() {
       researchCards: research,
       inbox: inbox.map((a) => ({ accountName: a.accountName, ready: a.ready.length, people: Math.max(0, ...a.theses.map((t) => t.people)) })),
       tiers,
-      openHref: cockpitOpenHref,
+      // R60: a ready or follow-up card opens its pack page, never the cockpit lane.
+      openHref: (_lane, decisionId) => packHref(decisionId),
     });
   // UX-08: WORK, one card per account in the same order, over the same reads (never a second state engine).
   const heldWhy = new Map<string, 'active_opportunity' | 'opportunity_unknown'>();

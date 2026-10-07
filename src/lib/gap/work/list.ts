@@ -27,7 +27,7 @@
  * a lane card), the ledger's touches, the seller's outcomes and the commitments (work/commitment-model.ts). Pinned by
  * tests/unit/gap/work-list.test.ts and tests/unit/gap/work-rank.test.ts.
  */
-import { accountHref, recordReplyHref } from '../account-intel/href';
+import { accountHref, isCockpitLaneHref, packHref, recordReplyHref } from '../account-intel/href';
 import { classifyReply, HUMAN_REPLY_LABEL, type ReplyClassKind } from '../replies/classify';
 import { prepareReply, type ReplyPrep } from '../replies/prepare';
 import type { FollowUpPlan } from '../execution/follow-up-plan';
@@ -283,7 +283,7 @@ function obligationAction(c: Commitment): { href: string; label: string } {
     case 'prepare_meeting':
       return c.person?.personaId ? { href: `/gap/call/${c.person.personaId}`, label: 'Prepare the meeting' } : { href: page, label: 'Prepare the meeting' };
     case 'follow_up':
-      return c.detail?.decisionId && !c.detail.noFollowUpCopy ? { href: `/gap?lane=follow_up&open=${encodeURIComponent(c.detail.decisionId)}`, label: `Prepare touch ${(c.detail.stepIndex ?? 1) + 1}` } : { href: page, label: 'Open the follow-up' };
+      return c.detail?.decisionId && !c.detail.noFollowUpCopy ? { href: packHref(c.detail.decisionId), label: `Prepare touch ${(c.detail.stepIndex ?? 1) + 1}` } : { href: page, label: 'Open the follow-up' };
     case 'deal_step':
       return { href: `${page}?view=brief`, label: 'Open the deal brief' };
     case 'buyer_promise':
@@ -368,7 +368,9 @@ export function workDay(i: WorkInput): WorkDay {
         state: noAngle ? 'Research: no usable angle to open on yet' : kind === 'ready' && m?.state === 'needs_owner' ? 'Choose who hears this first' : STATE_TEXT[kind],
         why: noAngle ? 'The people stand; no thesis the send gate would let out grounds a first touch yet.' : c.detail,
         person: p,
-        next: noAngle ? { label: 'Open the account', href: accountHref(c.accountName) } : { label: c.title, href: c.href },
+        // R60: a card never lands in a cockpit lane (every account's cards, analyst words, no Next account): a lane
+        // link opens this account, where NEXT says and holds the move.
+        next: noAngle ? { label: 'Open the account', href: accountHref(c.accountName) } : { label: c.title, href: isCockpitLaneHref(c.href) ? accountHref(c.accountName) : c.href },
         blocker: null,
       },
     });

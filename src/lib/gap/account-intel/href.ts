@@ -9,6 +9,12 @@ export const accountHref = (name: string) => `/gap/accounts/${accountSlug(name)}
 export const RECORD_REPLY_ANCHOR = 'record-reply';
 export const recordReplyHref = (name: string) => `${accountHref(name)}#${RECORD_REPLY_ANCHOR}`;
 
+/** R60: a link into a cockpit lane (every account's cards, analyst words, no Next account): never a seller destination. */
+export const isCockpitLaneHref = (href: string) => /^\/gap\/?\?(?:[^#]*&)?lane=/.test(href);
+
+/** R60: a first touch or follow-up by its card: the dedicated pack page (redirects), never the cockpit lane. */
+export const packHref = (decisionId: string) => `/gap/pack/${encodeURIComponent(decisionId)}`;
+
 /**
  * R60: a link to the same account page keeps the seller's place in Work (Back to Work and Next account follow them
  * through the account's views and anchors). Any other link is returned unchanged.
@@ -20,7 +26,8 @@ export function withWorkContext(href: string, accountName: string, index: number
   const head = hashAt >= 0 ? href.slice(0, hashAt) : href;
   const queryAt = head.indexOf('?');
   const path = queryAt >= 0 ? head.slice(0, queryAt) : head;
-  if (path.replace(/\/+$/, '') !== accountHref(accountName)) return href;
+  // The account's own page, or one of its cards' packs (the pack page ends with Back to Work / Next account too).
+  if (path.replace(/\/+$/, '') !== accountHref(accountName) && !path.startsWith('/gap/pack/')) return href;
   const params = new URLSearchParams(queryAt >= 0 ? head.slice(queryAt + 1) : '');
   params.set('from', 'work');
   params.set('i', String(index));

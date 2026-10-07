@@ -40,12 +40,14 @@ import {
   type ReportApproval,
 } from '@/components/gap/compile-report';
 import { EnrollShadowButton } from './enroll-shadow-button';
+import { DoneNext } from '@/components/gap/done-next';
+import { accountSlug } from '@/lib/gap/account-intel/href';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Action pack' };
 
 type Params = { hypothesisId: string };
-type Search = { personaId?: string; decisionId?: string };
+type Search = { personaId?: string; decisionId?: string; from?: string; i?: string };
 
 function stepCopy(steps: Array<{ templates?: { subjectTemplate?: string | null; bodyTemplate?: string | null } | null }>, i: number) {
   const t = steps[i]?.templates ?? null;
@@ -133,6 +135,8 @@ export default async function PreviewPage({ params, searchParams }: { params: Pr
       </div>
 
       <ActionPackView target={target} />
+      {/* R60: opened from Work, the pack ends where every account ends: Back to Work, Next account, or record it. */}
+      {search.from === 'work' ? <DoneNext slug={accountSlug(hypothesis.account_name)} index={/^\d+$/.test(search.i ?? '') ? Number(search.i) : null} accountName={hypothesis.account_name} /> : null}
 
       <details className="rounded-md border border-[var(--border)] p-3" data-testid="system-details">
         <summary className="cursor-pointer text-sm font-medium">System details</summary>

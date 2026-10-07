@@ -9,7 +9,7 @@
 import type { AccountIntelligenceBrief, AccountInputs } from '../account-intel/build';
 import type { AccountContext } from '../context/context';
 import { listQueue } from '../routing/queue';
-import { cockpitOpenHref } from '../routing/card-readiness';
+import { packHref } from '../account-intel/href';
 import { laneWithMotion, loadCockpitMotions } from '../motion/cockpit';
 import { EMAIL_ACTIONS, MOTION_UNLOCK_BUSINESS_DAYS } from '../motion/account-motion';
 import { loadMotionChoices } from '../motion/load';
@@ -119,7 +119,7 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
     replies,
     lastOutbound: lastSend ? { to: lastSend.text.replace(/^.*?\bto\s+/, '').slice(0, 80), at: lastSend.at, what: lastSend.text, source: 'GAP history' } : null,
     outstandingDraft: od ? { recipient: od.recipient, name: null, decisionId: od.decisionId ?? '' } : null,
-    followUpDue: due ? { personaId: due.persona.id, name: due.persona.displayName ?? due.persona.email ?? 'the person', dueAt: due.touch?.dueAt ?? now.toISOString(), cardHref: cockpitOpenHref('follow_up', due.id) } : null,
+    followUpDue: due ? { personaId: due.persona.id, name: due.persona.displayName ?? due.persona.email ?? 'the person', dueAt: due.touch?.dueAt ?? now.toISOString(), cardHref: packHref(due.id) } : null,
     eligible: (resolution?.eligible ?? []).map((c) => ({ key: c.key, personaId: c.personaId, hubspotContactId: c.hubspotContactId, name: c.name, title: c.title })),
     // A relationship is real when you met them, were introduced or referred; a newsletter subscriber or a list
     // membership is a signal (contract 5.3), never a relationship that leads the account.
@@ -187,7 +187,7 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
     ? queue.items.find((it) => EMAIL_ACTIONS.has(it.action) && it.persona?.id === state.person!.personaId && laneWithMotion(it, held, thesisHeld) === 'ready') ?? null
     : null;
   // Batch item 7: an unread send gate opens nothing, so no Ready target either (the cockpit motion may still name one).
-  const ready = sendableTheses === null ? null : readyTargetOf(mine) ?? (readyCard ? { name: state.person!.name, title: state.person!.title, href: cockpitOpenHref('ready', readyCard.id), headline: `Ready: ${state.person!.name}.` } : null);
+  const ready = sendableTheses === null ? null : readyTargetOf(mine) ?? (readyCard ? { name: state.person!.name, title: state.person!.title, href: packHref(readyCard.id), headline: `Ready: ${state.person!.name}.` } : null);
   return { state, resolution, stack, hypothesisId: anchoredOpen?.id ?? topUsable?.id ?? null, anchorChoice, sendableTheses, usableTheses, ready, replyItems: repliesPage.items.filter((x) => x.accountName === accountName) };
 }
 

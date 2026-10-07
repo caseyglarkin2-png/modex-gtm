@@ -46,7 +46,8 @@ const plan = (over: Partial<Parameters<typeof planFollowUp>[0]> = {}) => planFol
 
 describe('the follow-up plan reads the person\'s actual history (R43)', () => {
   it('due with copy for the next step: prepare it on the existing card; due with none: follow up by hand in the same thread', () => {
-    expect(plan({ nextStepHasCopy: true })).toMatchObject({ action: 'prepare', href: '/gap?lane=follow_up&open=dec-1', label: 'Prepare touch 2', lastTouch: { stepIndex: 0, from: 'casey@yardflow.ai', threadId: 'thr-1' } });
+    // R60: prepared on the card's own pack page, never the cockpit lane.
+    expect(plan({ nextStepHasCopy: true })).toMatchObject({ action: 'prepare', href: '/gap/pack/dec-1', label: 'Prepare touch 2', lastTouch: { stepIndex: 0, from: 'casey@yardflow.ai', threadId: 'thr-1' } });
     expect(plan()).toMatchObject({ action: 'by_hand', label: 'Follow up in Gmail', href: 'https://mail.google.com/mail/u/0/?authuser=casey%40yardflow.ai#all/thr-1' });
     expect(plan().line).toBe('Touch 2 is due and this family has no follow-up copy yet: follow up by hand in the thread, then mark it done (GAP also finds it in Sent).');
   });

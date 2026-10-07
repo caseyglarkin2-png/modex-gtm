@@ -52,7 +52,8 @@ describe('one first-touch answer', () => {
   it('loadReadyTarget reads the cockpit\'s pick for the account and links its card; nothing ready or a failure is null', async () => {
     const list = async () => ({ items: [{ id: 'd9' }], nextCursor: null, runId: null, asOf: null }) as never;
     const motions = async () => ({ motions: [{ accountName: 'Acme Foods', state: 'ready', primary: { personaId: 2, name: 'michelle schlie', title: 'Director', cardId: 'd9', factors: [], chosen: false }, headline: 'Suggested primary: michelle schlie.' }], heldCardIds: [] }) as never;
-    expect(await loadReadyTarget({}, 'Acme Foods', NOW, { list, motions })).toEqual({ name: 'michelle schlie', title: 'Director', href: '/gap?lane=ready&open=d9#card-d9', headline: 'Suggested primary: michelle schlie.' });
+    // R60: the ready card's own pack page, never the cockpit lane.
+    expect(await loadReadyTarget({}, 'Acme Foods', NOW, { list, motions })).toEqual({ name: 'michelle schlie', title: 'Director', href: '/gap/pack/d9', headline: 'Suggested primary: michelle schlie.' });
     expect(await loadReadyTarget({}, 'Acme Foods', NOW, { list: async () => ({ items: [], nextCursor: null }) as never, motions })).toBeNull();
     expect(await loadReadyTarget({}, 'Acme Foods', NOW, { list: async () => { throw new Error('db'); }, motions })).toBeNull();
   });

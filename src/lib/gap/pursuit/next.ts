@@ -54,7 +54,7 @@ export function nextFromPursuit(
     case 'held':
       return { text: s.blocker ?? 'Held.', control: s.stateLine.includes('warm intro') ? { href: opts.captureHref, label: 'Log the intro ask' } : null, source: 'pursuit' };
     case 'follow_up_due':
-      return { text: `Send the next touch to ${p?.name ?? 'them'} (due ${s.followUp ? day(s.followUp.dueAt) : 'now'}).`, control: s.followUp ? { href: s.followUp.cardHref, label: 'Open the follow-up card' } : null, source: 'pursuit' };
+      return { text: `Send the next touch to ${p?.name ?? 'them'} (due ${s.followUp ? day(s.followUp.dueAt) : 'now'}).`, control: s.followUp ? { href: s.followUp.cardHref, label: 'Prepare the follow-up' } : null, source: 'pursuit' };
     case 'in_motion':
       return { text: `${p?.name ?? 'The first person'} has the first touch. ${s.unlock ?? ''}`.trim(), control: p?.personaId ? { href: `/gap/call/${p.personaId}`, label: `Call prep for ${first(p.name)}` } : null, source: 'pursuit' };
     case 'ready':
