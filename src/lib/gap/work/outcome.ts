@@ -14,6 +14,7 @@
  * HubSpot or changes any thesis, person or suppression.
  */
 import { accountSlug } from '../account-intel/href';
+import { nyDay } from './dates';
 import { outcomeLine, SNOOZE_MAX_DAYS, OUTCOME_REASON_MAX, WORK_OUTCOME, type WorkOutcome, type WorkOutcomeKind } from './outcome-model';
 
 // The client-safe model lives in ./outcome-model (the Work list reads only that); re-exported for the server callers.
@@ -55,13 +56,15 @@ export async function loadWorkOutcomes(prisma: PrismaLike, accountNames: readonl
 export function nextDayBoundary(now: Date, days = 1): Date {
   const ny = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
   const localMidnight = new Date(ny.getFullYear(), ny.getMonth(), ny.getDate() + days);
-  // Convert the New York wall-clock midnight back to an instant via the offset at `now`.
-  const offsetMs = now.getTime() - ny.getTime();
+  // Convert the New York wall-clock midnight back to an instant via the offset at `now`. R63-B S3: an offset is whole
+  // minutes (the wall-clock string drops the milliseconds, which made "midnight" carry the press's milliseconds, so two
+  // skips a second apart had two different ends).
+  const offsetMs = Math.round((now.getTime() - ny.getTime()) / 60_000) * 60_000;
   return new Date(localMidnight.getTime() + offsetMs);
 }
 
 export type RecordOutcomeInput = { accountName: string; kind: WorkOutcomeKind | 'clear'; reason?: string | null; until?: string | null; actor: string; now?: Date };
-export type RecordOutcomeResult = { ok: true; outcome: WorkOutcome | null; line: string | null; slug: string } | { ok: false; reason: 'account_not_found' | 'reason_too_long' | 'invalid_until' | 'until_in_past' | 'until_too_far' | 'until_required' };
+export type RecordOutcomeResult = { ok: true; outcome: WorkOutcome | null; line: string | null; slug: string; /** R63-B S3: the same outcome was already recorded today; nothing was written. */ existing?: boolean } | { ok: false; reason: 'account_not_found' | 'reason_too_long' | 'invalid_until' | 'until_in_past' | 'until_too_far' | 'until_required' };
 
 export async function recordWorkOutcome(prisma: PrismaLike, input: RecordOutcomeInput): Promise<RecordOutcomeResult> {
   const now = input.now ?? new Date();
@@ -80,7 +83,23 @@ export async function recordWorkOutcome(prisma: PrismaLike, input: RecordOutcome
     until = nextDayBoundary(now, 1);
   }
   const payload = input.kind === 'clear' ? { kind: 'clear', reason } : { kind: input.kind, reason, until: until!.toISOString() };
-  const row = await prisma.gapAuditEvent.create({ data: { kind: WORK_OUTCOME, actor: input.actor, subject_type: 'account', subject_id: account.name, payload } });
+  // R63-B S3: idempotent per account per day. A stale tab's second "Skip today" wrote a second row and Work said "Set
+  // aside for today." twice. The same outcome already recorded today (the newest row: same kind, reason and until) is
+  // answered with that row and nothing is written; a different outcome (a new snooze date, a clear) is written. Read
+  // and written under one account lock when the client has transactions, so two tabs at once write one row.
+  const write = async (tx: PrismaLike): Promise<{ row: { id?: unknown; actor?: string; created_at?: Date } | null; existing: boolean }> => {
+    if (typeof tx.$executeRaw === 'function') await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${`gap_work_outcome:${account.name}`}))`;
+    const newest: Array<{ id?: unknown; actor: string; payload: unknown; created_at: Date }> = await tx.gapAuditEvent.findMany({ where: { kind: WORK_OUTCOME, subject_type: 'account', subject_id: { in: [account.name] } }, select: { id: true, actor: true, payload: true, created_at: true }, orderBy: { created_at: 'desc' }, take: 1 });
+    const have = newest[0];
+    const p = have && isObj(have.payload) ? have.payload : null;
+    if (have && p && nyDay(new Date(have.created_at).toISOString()) === nyDay(now.toISOString()) && p.kind === payload.kind && (p.reason ?? null) === reason && (p.until ?? null) === ('until' in payload ? payload.until : null)) return { row: have, existing: true };
+    return { row: await tx.gapAuditEvent.create({ data: { kind: WORK_OUTCOME, actor: input.actor, subject_type: 'account', subject_id: account.name, payload } }), existing: false };
+  };
+  const { row, existing } = typeof prisma.$transaction === 'function' ? await prisma.$transaction((tx: PrismaLike) => write(tx)) : await write(prisma);
+  if (existing) {
+    const outcome: WorkOutcome | null = input.kind === 'clear' ? null : { accountName: account.name, kind: input.kind, reason, until: until!.toISOString(), by: row?.actor ?? input.actor, at: row?.created_at ? new Date(row.created_at).toISOString() : now.toISOString() };
+    return { ok: true, outcome, line: outcome ? outcomeLine(outcome, now) : null, slug: accountSlug(account.name), existing: true };
+  }
   // R40: a snooze is a durable reminder that returns on its date; a newer outcome settles the older ones. Fail-open.
   // Loaded on demand: this module is reachable from the Work list's client component, the commitment store is not.
   if (row?.id) {
