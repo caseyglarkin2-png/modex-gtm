@@ -39,6 +39,12 @@ describe('what they asked, and an answer that invents nothing (R42b)', () => {
     ]);
   });
 
+  // Batch item 8: "by Friday" in a message written Thursday Oct 1 is Friday Oct 2, however late the answer is prepared.
+  it('a day their words name is read from when they wrote it, never from the day the answer is prepared', () => {
+    const a = prepareAnswer(answerInput('Can you send the two-site comparison by Friday?', { receivedAt: '2026-10-01T14:00:00Z' }));
+    expect(a.asks.map((x) => [x.topic, x.day?.day ?? null])).toEqual([['material', '2026-10-02']]);
+  });
+
   it('planted asks for a price, a time, an attachment GAP lacks, a security answer, a commitment and buyer agreement: no value is fabricated; each is missing information and a placeholder', () => {
     const text = 'Thanks for the note. What would this cost per site? Are you free Thursday at 2pm for a call? Can you send the two-site comparison? Has your security team finished a SOC 2 audit? Can you guarantee it goes live by March? Can you confirm we agreed to a pilot?';
     const a = prepareAnswer(answerInput(text));

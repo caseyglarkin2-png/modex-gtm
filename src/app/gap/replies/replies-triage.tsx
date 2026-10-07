@@ -111,7 +111,8 @@ export function RepliesTriage({ client = defaultGapApiClient, inCockpit = false 
               aiSuggestionId: item.suggestion?.id ?? null,
               // R42: who their words name and the day they name, read from the message; the seller confirms or corrects.
               referralHint: detectNamed(item.snippet),
-              resumeHint: parseDuePhrase(item.snippet, new Date())?.day ?? null,
+              // Batch item 8: the day is read from when they wrote it, never from today.
+              resumeHint: parseDuePhrase(item.snippet, item.receivedAt ? new Date(item.receivedAt) : new Date())?.day ?? null,
             }}
             suggestion={item.suggestion ?? null}
             onSubmitted={() => {

@@ -88,6 +88,8 @@ export interface AnswerInput {
   from: string;
   fromName: string | null;
   now: Date;
+  /** Batch item 8: when they wrote it; a day their words name ("by Friday") is read from then. */
+  receivedAt?: string | null;
   /** The account's materials that exist (Ours). */
   materials: ReadonlyArray<{ kind: string; label: string; href: string }>;
   /** This person's own confirmed words (Buyer confirmed). */
@@ -120,7 +122,8 @@ export function prepareAnswer(i: AnswerInput): PreparedAnswer {
   if (c.kind === 'bounce') return none('The address failed: there is nobody to answer.');
   if (c.human === 'referral') return none('A referral prepares no reply: record who they named; you decide how to approach them (no cold email to them).');
 
-  const asks = readAsks(i.messageText, i.now);
+  const written = i.receivedAt && !Number.isNaN(Date.parse(i.receivedAt)) ? new Date(i.receivedAt) : i.now;
+  const asks = readAsks(i.messageText, written);
   const missing: string[] = [];
   const lines: string[] = [];
   const known: KnownFact[] = [];

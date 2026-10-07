@@ -14,7 +14,7 @@
  * (`noAnswerLine`). Pinned by tests/unit/gap/reply-prep.test.ts and reply-answer.test.tsx.
  */
 import { classifyReply, type HumanReplyKind, type ReplyClassKind } from './classify';
-import { dayLabel, parseDuePhrase, parseReturnDate, type ParsedDay } from '../work/dates';
+import { dayLabel, nyDay, parseDuePhrase, parseReturnDate, type ParsedDay } from '../work/dates';
 
 /** R42b: why a reply prepares no answer (said on the card instead of an answer). */
 export const NO_ANSWER_REFERRAL = 'A referral prepares no reply here: record who they named; you decide how to approach them.';
@@ -80,6 +80,8 @@ export function prepareReply(r: ReplyPrepInput, opts: { mailbox?: string | null;
   const c = classifyReply({ snippet: r.snippet, subject: r.subject, from: r.from });
   const words = r.snippet.replace(/\s+/g, ' ').trim();
   const lines = sentences(words);
+  // Batch item 8: a day the message names is read from when it was written, never from today's read.
+  const written = Number.isNaN(Date.parse(r.receivedAt)) ? opts.now : new Date(r.receivedAt);
   const who = r.fromName?.trim() || r.from;
   const notes: string[] = [];
   let named: string | null = null;
@@ -87,7 +89,7 @@ export function prepareReply(r: ReplyPrepInput, opts: { mailbox?: string | null;
   let record: ReplyPrep['record'] = { href: '/gap?lane=replies', label: 'Record what they said' };
   if (c.kind === 'human') {
     const ask = lines.find((s) => ASK.test(s));
-    day = parseDuePhrase(words, opts.now);
+    day = parseDuePhrase(words, written);
     if (c.human === 'referral') {
       named = detectNamed(words);
       notes.push(`They pointed to ${named ?? 'someone else'}. Thank them and ask for the introduction.`);
@@ -109,9 +111,10 @@ export function prepareReply(r: ReplyPrepInput, opts: { mailbox?: string | null;
     notes.push('Record it as do not contact; the person is set aside and the account cools.');
     record = { href: '/gap?lane=replies', label: 'Record the opt-out' };
   } else if (c.kind === 'out_of_office') {
-    day = parseReturnDate(words, opts.now);
+    day = parseReturnDate(words, written);
     notes.push('An automatic notice: there is nothing to answer.');
-    notes.push(day ? `They are back ${dayLabel(day.day, opts.now)}: the follow-up waits until then.` : 'The notice names no return day.');
+    const backPast = !!day && day.day < nyDay(opts.now);
+    notes.push(day ? (backPast ? `They were due back ${dayLabel(day.day, opts.now)}: the follow-up is due.` : `They are back ${dayLabel(day.day, opts.now)}: the follow-up waits until then.`) : 'The notice names no return day.');
     record = null;
   } else {
     notes.push('The address failed: find a working address or the next person.');

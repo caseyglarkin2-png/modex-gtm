@@ -175,6 +175,7 @@ export async function loadReplyContext(prisma: PrismaLike, messageId: string, no
     from,
     fromName: row.from_name ?? persona?.name ?? null,
     now,
+    receivedAt: message.receivedAt,
     materials,
     confirmed: confirmed.map((b) => ({ type: b.type, quote: b.raw_buyer_language, at: iso(b.confirmed_at ?? b.captured_at) })),
     story: signal?.title ? { title: signal.title, url: signal.evidence_url, at: signal.observed_at ? iso(signal.observed_at) : null } : null,

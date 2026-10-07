@@ -107,6 +107,37 @@ describe('an out-of-office return day adjusts the reminder (R42)', () => {
   });
 });
 
+describe('batch item 8: a notice is read from when it was written, never from the read', () => {
+  const notice = (over: Record<string, unknown> = {}) => ({ accountName: 'Nfi Scratch Co', contactEmail: 'ann@nfi.example.com', fromName: 'Ann Scratch', subject: 'Automatic reply: trailer turns', snippet: 'I am out of the office and will be back Monday.', receivedAt: '2026-10-06T13:00:00Z', ...over });
+  it('"back Monday" read on day 8 and on day 15 moves nothing after the first read and makes no second reminder', async () => {
+    const db = ledgerDb({ accounts: ['Nfi Scratch Co'] });
+    const p = db.client();
+    const day0 = NOW;
+    const day8 = new Date('2026-10-14T15:00:00Z');
+    const day15 = new Date('2026-10-21T15:00:00Z');
+    expect(await syncReturnRemindersFromReplies(p, [notice()], day0)).toEqual({ adjusted: 0, created: 1 });
+    expect(await syncReturnRemindersFromReplies(p, [notice()], day8)).toEqual({ adjusted: 0, created: 0 });
+    expect(await syncReturnRemindersFromReplies(p, [notice()], day15)).toEqual({ adjusted: 0, created: 0 });
+    const all = await loadCommitments(p, { accountNames: ['Nfi Scratch Co'] });
+    expect(all.map((c) => [c.kind, c.snoozeUntil, c.source.id])).toEqual([['reminder', '2026-10-12T13:00:00.000Z', 'ooo:ann@nfi.example.com:2026-10-12']]);
+  });
+  it('"October 14" first read after October 21 is still October 14 (never a year out); the follow-up waiting there is not moved again', async () => {
+    const db = ledgerDb({ accounts: ['Nfi Scratch Co'] });
+    const p = db.client();
+    await ensureCommitment(p, { accountName: 'Nfi Scratch Co', kind: 'follow_up', status: 'waiting', dependency: "Ann's reply", title: 'Follow up with Ann Scratch', dueAt: nyDayAt('2026-10-12'), person: { personaId: 1, name: 'Ann Scratch', email: 'ann@nfi.example.com' }, source: { kind: 'send', id: 'k0' } }, { actor: 'x', now: NOW });
+    const late = new Date('2026-10-23T15:00:00Z');
+    const oct14 = notice({ snippet: 'I am out of the office and will return on Wednesday, October 14.' });
+    expect(await syncReturnRemindersFromReplies(p, [oct14], late)).toEqual({ adjusted: 1, created: 0 });
+    expect(await syncReturnRemindersFromReplies(p, [oct14], new Date('2026-10-30T15:00:00Z'))).toEqual({ adjusted: 0, created: 0 });
+    const [fu] = await loadCommitments(p, { accountNames: ['Nfi Scratch Co'] });
+    expect(fu).toMatchObject({ status: 'waiting', dueAt: '2026-10-14T13:00:00.000Z' });
+  });
+  it('the reply panel reads the notice from when it arrived, and says so when the day is past', () => {
+    const prep = prepareReply({ id: 'm1', from: 'ann@nfi.example.com', fromName: 'Ann Scratch', subject: 'Automatic reply', snippet: 'I am out of the office and will be back Monday.', receivedAt: '2026-10-06T13:00:00Z', threadId: null, accountName: 'Nfi Scratch Co' }, { now: new Date('2026-10-21T15:00:00Z') });
+    expect(prep.notes).toContain('They were due back Oct 12: the follow-up is due.');
+  });
+});
+
 describe('one message imported twice is one piece of work (R42)', () => {
   const T = (min: number) => new Date(Date.UTC(2026, 9, 6, 13, min));
   const gmail = { id: 'gm-1', source: 'gmail', thread_id: 'thr-1', from_email: 'ann@nfi.example.com', from_name: 'Ann Scratch', subject: 'Re: trailer turns', body_text: 'Thursday works for a call.', body_html: null, snippet: null, received_at: T(0) };

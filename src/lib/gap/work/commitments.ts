@@ -536,7 +536,9 @@ export async function syncReturnRemindersFromReplies(
   if (!ledgerReadable(prisma)) return out;
   const notices = replies
     .filter((r) => r.accountName && classifyReply({ snippet: r.snippet, subject: r.subject, from: r.contactEmail }).kind === 'out_of_office')
-    .map((r) => ({ r, back: parseReturnDate(r.snippet, now) }))
+    // Batch item 8: the day a notice names is read from when it was WRITTEN ("back Monday" is the Monday after it
+    // arrived), never from the read: a re-read on any later day moves nothing and keys no second reminder.
+    .map((r) => ({ r, back: parseReturnDate(r.snippet, writtenAt(r.receivedAt, now)) }))
     .filter((x): x is { r: (typeof replies)[number]; back: NonNullable<ReturnType<typeof parseReturnDate>> } => !!x.back);
   if (notices.length === 0) return out;
   const existing = await loadCommitments(prisma, { accountNames: [...new Set(notices.map((x) => x.r.accountName))] });
@@ -563,6 +565,12 @@ export async function syncReturnRemindersFromReplies(
     if (made?.ok && made.created) out.created += 1;
   }
   return out;
+}
+
+/** When a message was written (its received time), else `now` for a row that carries none. */
+export function writtenAt(receivedAt: string | Date | null | undefined, now: Date): Date {
+  const t = receivedAt ? new Date(receivedAt).getTime() : Number.NaN;
+  return Number.isNaN(t) ? now : new Date(t);
 }
 
 /** The phase of every commitment at `now` (the surfaces render this). */
