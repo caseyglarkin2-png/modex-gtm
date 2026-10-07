@@ -531,6 +531,8 @@ export function CaptureFlow({
   const [text, setText] = useState(initialText ?? '');
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  // R60: the reply already had its capture; the review below is that one note.
+  const [existing, setExisting] = useState(false);
   const acctCtx = useAccountContext(account);
 
   useEffect(() => {
@@ -579,8 +581,9 @@ export function CaptureFlow({
       setError('no connection. Your note is kept on this phone; press Save again when you have signal.');
       return;
     }
-    const body = await json<CaptureView & { error?: string }>(res);
+    const body = await json<CaptureView & { error?: string; existing?: boolean }>(res);
     setSaving(false);
+    setExisting(!!body.existing);
     if (!res.ok || !body.id) {
       setError(body.error ?? `HTTP ${res.status}`);
       return;
@@ -596,9 +599,15 @@ export function CaptureFlow({
   if (capture) {
     return (
       <div className="space-y-4" data-testid="capture-review">
-        <p className="text-sm">
-          Saved{capture.accountName ? ` for ${capture.accountName}` : ''}. The note is kept exactly as you wrote it.
-        </p>
+        {existing ? (
+          <p className="text-sm" data-testid="capture-existing">
+            This reply already has its capture{capture.accountName ? ` for ${capture.accountName}` : ''}: one per reply. Its review is below.
+          </p>
+        ) : (
+          <p className="text-sm">
+            Saved{capture.accountName ? ` for ${capture.accountName}` : ''}. The note is kept exactly as you wrote it.
+          </p>
+        )}
         {!capture.accountName ? <LinkNote capture={capture} onChange={setCapture} /> : null}
         <NoteReview capture={capture} onChange={setCapture} />
         <MeetingOutcomeForm capture={capture} onChange={setCapture} />

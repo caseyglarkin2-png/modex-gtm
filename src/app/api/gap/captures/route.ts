@@ -44,7 +44,8 @@ export async function POST(request: NextRequest) {
   if (!parsed.success) return NextResponse.json({ error: 'invalid_body', field: parsed.error.issues[0]?.path.join('.') || 'body' }, { status: 400 });
   const r = await createCapture(prisma, { ...parsed.data, actor: email, now: new Date() });
   if (!r.ok) return NextResponse.json({ error: r.reason }, { status: r.reason === 'account_not_found' ? 404 : 422 });
-  return NextResponse.json(r.capture, { status: 201 });
+  // R60: a reply's capture already exists: that one note is the answer (200), never a second capture.
+  return r.existing ? NextResponse.json({ ...r.capture, existing: true }, { status: 200 }) : NextResponse.json(r.capture, { status: 201 });
 }
 
 export async function GET() {

@@ -144,7 +144,7 @@ async function audit(prisma: PrismaLike, kind: string, actor: string, captureId:
 export async function createCapture(
   prisma: PrismaLike,
   input: { accountName?: string | null; accountHint?: string | null; personaId?: number | null; dealId?: string | null; dealName?: string | null; source?: { kind: string; id: string } | null; context: string; rawText: string; actor: string; now: Date },
-): Promise<Ok<{ capture: CaptureView }> | Refused> {
+): Promise<Ok<{ capture: CaptureView; existing?: boolean }> | Refused> {
   const raw = String(input.rawText ?? '');
   if (!raw.trim()) return { ok: false, reason: 'empty_note' };
   if (raw.length > RAW_TEXT_MAX) return { ok: false, reason: 'note_too_long' };
@@ -185,24 +185,59 @@ export async function createCapture(
     };
     personaId = personaId ?? r.item.personaId;
   }
-  await audit(prisma, CAPTURE_NOTE, input.actor, id, {
-    accountName,
-    accountHint: accountName ? null : input.accountHint?.trim() || null,
-    personaId,
-    context: input.context,
-    rawText: raw,
-    candidates,
-    capturedAt: input.now.toISOString(),
-    // R44: the deal and the action that opened Capture, the obligations the note states and what is never buyer words.
-    dealId: input.dealId?.trim() || null,
-    dealName: input.dealName?.trim() || null,
-    source,
-    commitments: extractCommitments(raw, input.now),
-    excluded: excludedLines(raw),
-    reply,
+  // R60 decision 1 (the lead, 2026-10-07): ONE capture per reply. The reply stays the source and its capture is its
+  // seller-readable record: opened again from any path (Work's card, the account page), Capture returns that note and
+  // its review, never a second capture. Serialized per reply, so two tabs saving at once make one.
+  const write = async (db: PrismaLike): Promise<Ok<{ capture: CaptureView; existing?: boolean }> | Refused> => {
+    if (source?.kind === 'reply' && accountName) {
+      const prior = await replyCaptureId(db, source.id);
+      const view = prior ? await loadCapture(db, prior) : null;
+      if (view) return { ok: true, capture: view, existing: true };
+    }
+    return writeNote(db);
+  };
+  const writeNote = async (db: PrismaLike): Promise<Ok<{ capture: CaptureView }> | Refused> => {
+    await audit(db, CAPTURE_NOTE, input.actor, id, {
+      accountName,
+      accountHint: accountName ? null : input.accountHint?.trim() || null,
+      personaId,
+      context: input.context,
+      rawText: raw,
+      candidates,
+      capturedAt: input.now.toISOString(),
+      // R44: the deal and the action that opened Capture, the obligations the note states and what is never buyer words.
+      dealId: input.dealId?.trim() || null,
+      dealName: input.dealName?.trim() || null,
+      source,
+      commitments: extractCommitments(raw, input.now),
+      excluded: excludedLines(raw),
+      reply,
+    });
+    const view = await loadCapture(db, id);
+    return view ? { ok: true, capture: view } : { ok: false, reason: 'capture_not_found' };
+  };
+  if (source?.kind === 'reply' && accountName && typeof prisma.$transaction === 'function' && typeof prisma.$executeRaw === 'function') {
+    return prisma.$transaction(async (tx: PrismaLike) => {
+      await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${`gap_capture_reply:${source.id}`}))`;
+      return write(tx);
+    });
+  }
+  return write(prisma);
+}
+
+/** R60: the capture already made from this reply, when there is one (the oldest: the first is the record). */
+async function replyCaptureId(prisma: PrismaLike, replyId: string): Promise<string | null> {
+  const rows: Array<{ subject_id: string; payload: Record<string, unknown> | null }> = await prisma.gapAuditEvent.findMany({
+    where: { kind: CAPTURE_NOTE, subject_type: CAPTURE_SUBJECT, payload: { path: ['source', 'id'], equals: replyId } },
+    select: { subject_id: true, payload: true },
+    orderBy: { created_at: 'asc' },
+    take: 20,
   });
-  const view = await loadCapture(prisma, id);
-  return view ? { ok: true, capture: view } : { ok: false, reason: 'capture_not_found' };
+  const hit = rows.find((r) => {
+    const s = r.payload?.source as { kind?: unknown; id?: unknown } | null | undefined;
+    return s?.kind === 'reply' && s.id === replyId;
+  });
+  return hit?.subject_id ?? null;
 }
 
 export async function loadCapture(prisma: PrismaLike, id: string): Promise<CaptureView | null> {

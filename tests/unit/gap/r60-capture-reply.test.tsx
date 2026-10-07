@@ -129,6 +129,23 @@ describe('R60: a reply logged through Capture is recorded once', () => {
     expect(recordDisposition.mock.calls[0][1]).toMatchObject({ responseClass: 'do_not_contact', buyerLanguage: null });
   });
 
+  it('ONE capture per reply: opened again from any path, the reply returns its one note, never a second capture', async () => {
+    const { prisma, audit } = db();
+    const first = await open(prisma);
+    const again = await createCapture(prisma, { accountName: 'Kroger Scratch Co', personaId: 7, source: { kind: 'reply', id: 'gm-1' }, context: 'email', rawText: 'A second note typed on the account page.', actor: 'casey@freightroll.com', now: NOW });
+    expect(again.ok && again.existing).toBe(true);
+    expect(again.ok && again.capture.id).toBe(first.id);
+    expect(again.ok && again.capture.rawText).toBe(REPLY_TEXT);
+    expect(audit.filter((r) => r.kind === 'capture.note')).toHaveLength(1);
+    // Another reply is its own capture; a note opened from no reply is never folded into a reply's.
+    loadReplyForCapture.mockResolvedValueOnce({ ...replyItem(), item: { ...replyItem().item, id: 'gm-2', source: { kind: 'inbound_message', id: 'gm-2' } } });
+    const other = await createCapture(prisma, { accountName: 'Kroger Scratch Co', personaId: 7, source: { kind: 'reply', id: 'gm-2' }, context: 'email', rawText: REPLY_TEXT, actor: 'casey@freightroll.com', now: NOW });
+    expect(other.ok && !other.existing && other.capture.id !== first.id).toBe(true);
+    const plain = await createCapture(prisma, { accountName: 'Kroger Scratch Co', personaId: 7, source: { kind: 'account', id: 'Kroger Scratch Co' }, context: 'call', rawText: 'Ann: We lose trailers every day at the gate.', actor: 'casey@freightroll.com', now: NOW });
+    expect(plain.ok && !plain.existing).toBe(true);
+    expect(audit.filter((r) => r.kind === 'capture.note')).toHaveLength(3);
+  });
+
   it('a reply GAP cannot read here keeps the note and says so; nothing about the reply is recorded from it', async () => {
     const { prisma } = db();
     loadReplyForCapture.mockResolvedValue(null);
@@ -157,6 +174,16 @@ describe('R60: the seller sees one place to record a reply', () => {
     const sent = fetch.mock.calls.map((x) => JSON.parse(String((x as unknown as [string, { body?: string }])[1]?.body ?? '{}'))).find((b) => b.op === 'batch');
     expect(sent.items[0]).toEqual({ candidateId: 'reply', decision: 'confirm', responseClass: 'request_information' });
     expect(sent.items.filter((x: { candidateId: string }) => x.candidateId === 'reply')).toHaveLength(1);
+  });
+
+  it('saving again on a reply that already has its capture opens that one note and says so', async () => {
+    const { prisma } = db();
+    const c = await open(prisma);
+    vi.stubGlobal('fetch', vi.fn(async () => new Response(JSON.stringify({ ...c, existing: true }), { status: 200 })));
+    render(<CaptureFlow initialAccount="Kroger Scratch Co" initialContext="email" initialText={REPLY_TEXT} source={{ kind: 'reply', id: 'gm-1' }} />);
+    fireEvent.click(screen.getByTestId('capture-save'));
+    await waitFor(() => expect(screen.getByTestId('capture-existing')).toHaveTextContent('This reply already has its capture for Kroger Scratch Co: one per reply. Its review is below.'));
+    expect(screen.getByTestId('capture-reply-kind')).toBeInTheDocument();
   });
 
   it('a note opened from a reply starts as that reply', () => {
