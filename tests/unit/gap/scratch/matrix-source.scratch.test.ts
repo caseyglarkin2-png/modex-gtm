@@ -85,13 +85,11 @@ describe.skipIf(!RUN)('R62 matrix: source truth and commercial relevance (DRAFT 
     expect((row!.metadata as { approach?: string }).approach).toBe('job_procurement_led');
   }, 120_000);
 
-  // DEFECT src/lib/gap/story/propose-family.ts:56 (mandate section 8, "no mandatory family selection"): the posting
-  // matches no family cue and no change class, so the page control's own payload (problemFamily null) leaves the draft
-  // incomplete and asks the seller to pick one of seven families, although a job-led thesis's copy is chosen by its
-  // approach program, not by the family (execution/action-pack.ts). The job-led scratch case supplies the family by hand.
-  defect('the open posting drafted with the page control\'s own payload is complete: no family question', async () => {
+  // Was DEFECT src/lib/gap/story/propose-family.ts:56 (mandate section 8, no mandatory family selection); fixed by the
+  // writer at 42b21547: a job-led draft posted with problemFamily null submits, its family recorded, never asked.
+  it('the open posting drafted with the page control\'s own payload is complete: no family question', async () => {
     const d = await draft('PostingAsIs');
-    expect([d.status, d.body.preparation, d.body.missing ?? []], JSON.stringify(d.body)).toEqual([expect.any(Number), 'submitted', []]);
+    expect([d.status, d.body.preparation, d.body.missing ?? []], JSON.stringify(d.body)).toEqual([201, 'submitted', []]);
   }, 120_000);
 
   it('a closed posting is refused for its own reason', async () => {
@@ -136,11 +134,9 @@ describe.skipIf(!RUN)('R62 matrix: source truth and commercial relevance (DRAFT 
     expect([d.status, d.body.error, d.body.detail], JSON.stringify(d.body)).toEqual([409, 'fact_not_outreach_evidence', 'not_a_physical_network_change']);
   }, 120_000);
 
-  // DEFECT src/lib/gap/research/claim-types.ts:86 (the physical check runs before the technology class) with
-  // research/facts.ts:19 and :134 ("deploy"/"deployed" are a change and an event): the same software sentence with
-  // "deployed" instead of "implemented" passes as a physical-network change and opens an event-led first touch. The
-  // evidence-purpose table: a technology deployment supports at most a complementary-workflow question.
-  defect('a software deployment ("deployed a new warehouse management system") is refused as an event-led opening, like "implemented"', async () => {
+  // Was DEFECT src/lib/gap/research/claim-types.ts:86 with research/facts.ts:19, :134 ("deployed" read as a physical
+  // change); fixed by the writer at 4cf3fdb1: a software deployment is a technology claim, refused for event-led.
+  it('a software deployment ("deployed a new warehouse management system") is refused as an event-led opening, like "implemented"', async () => {
     const d = await draft('SoftwareDeployed', { problemFamily: 'automation_readiness' });
     expect([d.status, d.body.error], JSON.stringify(d.body)).toEqual([409, 'fact_not_outreach_evidence']);
   }, 120_000);
@@ -150,15 +146,10 @@ describe.skipIf(!RUN)('R62 matrix: source truth and commercial relevance (DRAFT 
     expect([d.status, d.body.error, d.body.detail], JSON.stringify(d.body)).toEqual([409, 'fact_not_outreach_evidence', 'operator_knowledge']);
   }, 120_000);
 
-  it('a stable operating fact with no event is not an event-led opening', async () => {
-    const d = await draft('Fit', { problemFamily: 'network_standardization' });
-    expect([d.status, d.body.error, d.body.detail], JSON.stringify(d.body)).toEqual([409, 'fact_not_outreach_evidence', 'not_a_physical_network_change']);
-  }, 120_000);
-
-  // DEFECT src/lib/gap/story/draft-from-fact.ts:74 (the draft declares only event_led or job_procurement_led): the fit-led
-  // approach has its policy (research/approach-policy.ts) and its copy family (sequences/families.ts) but no producer, so
-  // a legitimate fit with no fresh news can never be prepared (mandate section 3: a transparent fit-led question).
-  defect('a stable operating fact prepares a FIT-LED proposal (a transparent fit question, no why-now)', async () => {
+  // Was DEFECT src/lib/gap/story/draft-from-fact.ts:74 (no fit-led producer). The writer's 4cf3fdb1 drafts a stable
+  // operating fact as fit-led, which replaces the older expectation that such a fact is simply refused (it was refused
+  // as not_a_physical_network_change for event-led, and that stays true: it is never an event-led opening).
+  it('a stable operating fact is never an event-led opening: it prepares a FIT-LED proposal (a transparent fit question, no why-now)', async () => {
     const d = await draft('Fit', { problemFamily: 'network_standardization' });
     expect([d.status, d.body.preparation], JSON.stringify(d.body)).toEqual([201, 'submitted']);
     const row = await prisma.prospectingHypothesis.findUnique({ where: { id: d.body.hypothesisId! }, select: { metadata: true } });

@@ -202,10 +202,9 @@ describe.skipIf(!RUN)('R62 matrix: replies (inbound rows after a real first touc
     expect(later).toBe(first);
   }, 240_000);
 
-  // DEFECT src/lib/gap/replies/classify.ts:66: OUT_OF_OFFICE_BODY matches "delayed response" and "on vacation" before a
-  // reply is read as human, so a buyer's real question is filed as an automatic notice: no Work card
-  // (work/list.ts:313), not a buyer move (work/commitment-model.ts:140), "nothing to answer" (replies/prepare.ts:106).
-  defect('a human reply that apologizes for a delayed response is a reply card, not an automatic notice', async () => {
+  // Was DEFECT src/lib/gap/replies/classify.ts:66: "Sorry for the delayed response" was filed as an out-of-office notice.
+  // Fixed by the writer at 5059345d (R42b): a person who mentions their week stays a human reply with a Work card.
+  it('a human reply that apologizes for a delayed response is a reply card, not an automatic notice', async () => {
     const x = sent.Delayed;
     const { classifyReply } = await import('@/lib/gap/replies/classify');
     const msg = await s.inbound(x.a, x.p, 'Sorry for the delayed response, I was on vacation. Can you send pricing for two sites?', { key: 'delayed' });

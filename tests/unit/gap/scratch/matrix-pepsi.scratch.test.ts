@@ -165,11 +165,9 @@ describe.skipIf(!RUN)('R62 matrix: the Pepsi regression (the page read, the page
     expect(question(gatik.body)).not.toBe('');
   }, 300_000);
 
-  // DEFECT src/lib/gap/story/draft-defaults.ts:20 (R31): every event-led draft from the page control carries the same
-  // generic guess ("this change moves load onto the gates, yards and docks they run"), the Tulsa closure and the Gatik
-  // autonomous-freight partnership alike. R31 requires reasoning specific to the facts; a technology or partner
-  // announcement may support only a complementary-workflow question, never a diagnosed yard load.
-  defect('the Gatik proposal does not carry the generic yard-load guess the Tulsa proposal carries', async () => {
+  // Was DEFECT src/lib/gap/story/draft-defaults.ts:20 (R31): one generic guess on every event-led draft.
+  // Fixed by the writer at 4cf3fdb1 (R31): the guess names its own fact (the Gatik program, the Tulsa site).
+  it('the Gatik proposal does not carry the generic yard-load guess the Tulsa proposal carries', async () => {
     const rows = await prisma.prospectingHypothesis.findMany({ where: { id: { in: [state.tulsaId!, state.gatikId!] } }, select: { id: true, problem_hypothesis: true } });
     const tulsa = rows.find((r) => r.id === state.tulsaId)!.problem_hypothesis;
     const gatik = rows.find((r) => r.id === state.gatikId)!.problem_hypothesis;
@@ -177,11 +175,9 @@ describe.skipIf(!RUN)('R62 matrix: the Pepsi regression (the page read, the page
     expect(gatik).not.toMatch(/moves load onto the gates, yards and docks/);
   }, 60_000);
 
-  // DEFECT src/lib/gap/research/claim-types.ts:86 with src/lib/gap/research/facts.ts:230: the partnership sentence
-  // ("announced a multi-year agreement to deploy autonomous freight") is classified a physical-network change, so it
-  // opens an EVENT-LED first touch. The evidence-purpose table admits a partner announcement only as attributed
-  // context for a complementary-workflow question.
-  defect('a partnership announcement never opens an event-led first touch', async () => {
+  // Was DEFECT src/lib/gap/research/claim-types.ts:86, research/facts.ts:230: the Gatik partnership read as a physical change.
+  // Fixed by the writer at 4cf3fdb1 (item 4): a partnership is its own claim and drafts fit-led, never event-led.
+  it('a partnership announcement never opens an event-led first touch', async () => {
     const { classifyClaim } = await import('@/lib/gap/research/claim-types');
     const gatikFact = freshB.facts.find((f) => f.label === 'gatik')!;
     const sig = await prisma.prospectingSignal.findUnique({ where: { id: gatikFact.id }, select: { evidence_text: true } });
@@ -231,18 +227,16 @@ describe.skipIf(!RUN)('R62 matrix: the Pepsi regression (the page read, the page
     expect(ev.map((e) => e.action)).toEqual(['propose', 'submit', 'withdraw']);
   }, 180_000);
 
-  // DEFECT src/lib/gap/story/anchor.ts:144 and :296: LIVE_STATUSES omits `rejected`, so a story the seller set aside
-  // is offered again under DRAFT A THESIS on the next read, while the UI promised "GAP will not propose this story
-  // again unless something material changes" (components/gap/outreach-anchor.tsx:255).
-  defect('a story set aside with NOT THIS STORY is not offered again on the next read', async () => {
+  // Was DEFECT src/lib/gap/story/anchor.ts:144, :296: a story set aside with NOT THIS STORY was offered again.
+  // Fixed by the writer at 5f5e76cf (item 2): a rejected thesis's fact never returns as draftable.
+  it('a story set aside with NOT THIS STORY is not offered again on the next read', async () => {
     const { anchor } = await pageRead(pepsi);
     expect(anchor.draftable.map((d) => d.story)).not.toEqual(expect.arrayContaining([expect.stringMatching(/Gatik/)]));
   }, 120_000);
 
-  // DEFECT src/lib/gap/story/draft-from-fact.ts:97 (the source_ref lookup has no status filter) and :181-182 (any
-  // status but draft answers preparation 'submitted'): drafting the set-aside story again reports it "under review",
-  // although the row is rejected and nothing is under review.
-  defect('drafting a set-aside story again is refused with its reason, never reported submitted', async () => {
+  // Was DEFECT src/lib/gap/story/draft-from-fact.ts:97, :181-182: redrafting a rejected story answered "submitted".
+  // Fixed by the writer at 5f5e76cf (item 2): drafting it again answers 409 story_set_aside, no preparation field.
+  it('drafting a set-aside story again is refused with its reason, never reported submitted', async () => {
     const { storyDraftPayload } = await import('@/lib/gap/story/draft-defaults');
     const { POST } = await import('@/app/api/gap/story/draft/route');
     const tom = pepsi.people.find((p) => p.name.startsWith('Tom'))!;
@@ -252,7 +246,7 @@ describe.skipIf(!RUN)('R62 matrix: the Pepsi regression (the page read, the page
     const payload = storyDraftPayload({ accountName: pepsi.name, factId: gatikFact.id, claimClass: null, proposedObservation: citedQuote(sig!.title, sig!.evidence_text!, gatikFact.id, pepsi.name), person: { personaId: tom.id, title: tom.title } });
     const res = await POST(req('/api/gap/story/draft', 'POST', payload));
     const body = (await res.json()) as { preparation?: string; error?: string };
-    expect(res.status, JSON.stringify(body)).toBe(409);
+    expect([res.status, body.error], JSON.stringify(body)).toEqual([409, 'story_set_aside']);
     expect(body.preparation).toBeUndefined();
   }, 120_000);
 });
