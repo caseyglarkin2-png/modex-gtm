@@ -76,6 +76,7 @@ import { DealBriefView } from '@/components/gap/deal-brief';
 import { loadRecordedClosures, sweepClosedDeals } from '@/lib/gap/deals/closure';
 import { loadRecordedReplyIds, withoutRecordedReplies } from '@/lib/gap/work/recorded-replies';
 import { resolveAccountOpportunity } from '@/lib/gap/opportunity/active-opportunity';
+import { accountsToCheck, loadOpportunityHolds, OPPORTUNITY_HOLD_TIMEOUT_MS } from '@/lib/gap/work/opportunity-holds';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'GAP' };
@@ -194,6 +195,10 @@ async function loadCockpit() {
     const p = choice ? personaById.get(choice.primaryPersonaId) : undefined;
     dbState.set(name, { sendable: sendable.size > 0, chosen: p?.name ? { name: p.name, title: p.title } : null });
   }
+  // R63-B S12: the gate's own opportunity read for the few accounts Work would offer cold work (a closed deal parks
+  // or makes a customer; the page and the gate already say so). Bounded and remembered per instance; never a write.
+  const toCheck = accountsToCheck({ candidates, dbState, held: heldWhy, inDeals });
+  const opportunityHolds = toCheck.length ? await loadOpportunityHolds(toCheck, (a) => resolveAccountOpportunity(prisma, a, {}, { timeoutMs: OPPORTUNITY_HOLD_TIMEOUT_MS })) : new Map();
   // The pieces the Work cards are built from; the cards themselves are built at render over the live pursuit summaries.
   const inMotion = new Map<string, { state: 'sent' | 'drafted'; at: string; person: { name: string; title: string | null } | null }>();
   for (const [name, t] of recentTouches) {
@@ -211,6 +216,7 @@ async function loadCockpit() {
     // R50: each deal keeps its HubSpot id (an obligation names its deal; Capture binds a note to it by id).
     inDeals: { status: inDeals.status, accounts: inDeals.accounts.map((a) => ({ accountName: a.accountName, deals: a.deals.map((d) => ({ ...(d.id ? { id: d.id } : {}), name: d.name, stage: d.stage, lastActivityAt: d.lastActivityAt ?? null, closeDate: d.closeDate ?? null, contactIds: d.contactIds ?? [] })) })) },
     held: heldWhy,
+    opportunityHolds,
   };
 
   const routableHypotheses = 'tooLarge' in routableScope ? 0 : routableScope.hypothesesCount;

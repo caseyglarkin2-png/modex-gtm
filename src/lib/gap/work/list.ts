@@ -40,6 +40,7 @@ import { buyerMoves, commitmentPhase, commitmentTier, KIND_TEXT, skippedAtClosur
 import { dayLabel, nyDay } from './dates';
 import { stalledSignals } from '../deals/stalled';
 import { closedDealLabel, type ClosedDealRef } from '../deals/scope';
+import type { OpportunityHold } from './opportunity-holds';
 import type { CockpitLane } from '@/components/gap/gap-cockpit';
 
 export type WorkStateKind = 'replied' | 'opted_out' | 'bounced' | 'follow_up' | 'ready' | 'decide' | 'research' | 'in_deal' | 'unknown_deal' | 'held' | 'committed' | 'meeting';
@@ -147,6 +148,12 @@ export interface WorkInput {
   inDeals: { status: 'complete' | 'unavailable'; accounts: ReadonlyArray<{ accountName: string; deals: ReadonlyArray<{ id?: string; name: string | null; stage: string; lastActivityAt?: string | null; closeDate?: string | null; contactIds?: readonly string[] }> }> };
   /** Accounts a current card holds for an open deal or an UNKNOWN opportunity read (never a cold action). */
   held: ReadonlyMap<string, 'active_opportunity' | 'opportunity_unknown'>;
+  /**
+   * R63-B S12: what the gate's own opportunity read says for the accounts Work would offer cold work
+   * (work/opportunity-holds.ts): a closed deal (a customer, or parked after a loss), an open deal the In Deals summary
+   * missed, or HubSpot not answering. Each holds the account in the workspace's words, never a first touch.
+   */
+  opportunityHolds?: ReadonlyMap<string, OpportunityHold>;
   /** Fresh canonical pursuit summaries by account (pursuit/summary.ts), when any. */
   summaries?: ReadonlyMap<string, PursuitSummary>;
   /**
@@ -450,6 +457,24 @@ export function workDay(i: WorkInput): WorkDay {
     best.delete(name);
     motionWaiting.delete(name);
     offer({ rank: LANE_RANK.deals, sortKey: [unknown ? 0 : 1, name], card: { accountName: name, lane: 'deals', stateKind: unknown ? 'unknown_deal' : 'in_deal', state: STATE_TEXT[unknown ? 'unknown_deal' : 'in_deal'], why: unknown ? 'HubSpot could not say whether this account is in a deal: no cold touch until it can.' : 'A current card holds this account for an open deal.', person: null, next: unknown ? null : { label: 'Open the deal brief', href: `${accountHref(name)}?view=brief` }, blocker: unknown ? 'Check HubSpot directly before contacting anyone.' : 'No cold first touch while the deal is open.' } });
+  }
+
+  // R63-B S12: the gate's own opportunity read, for the accounts Work would offer cold work. A closed deal holds the
+  // account in the closure's words on the first load (before any summary), the same words the page says; an open deal
+  // or HubSpot not answering holds it as the routing card would. It speaks over a routing card's "open deal" words.
+  for (const [name, h] of i.opportunityHolds ?? []) {
+    if (dealAccounts.has(name)) continue;
+    const why = h.why;
+    if (keepReply(name, h.kind === 'unknown' ? 'HubSpot could not say whether this account is in a deal: answer them, and no cold touch to anyone here.' : `${why} Answer them; no cold touch to anyone here.`)) continue;
+    best.delete(name);
+    motionWaiting.delete(name);
+    if (h.kind === 'closure') {
+      offer({ rank: PURSUIT_RANK.held, sortKey: [name], card: { accountName: name, lane: 'deals', stateKind: 'held', state: h.stateLine, why, person: null, next: null, blocker: null } });
+    } else if (h.kind === 'unknown') {
+      offer({ rank: LANE_RANK.deals, sortKey: [0, name], card: { accountName: name, lane: 'deals', stateKind: 'unknown_deal', state: STATE_TEXT.unknown_deal, why, person: null, next: null, blocker: 'Check HubSpot directly before contacting anyone.' } });
+    } else {
+      offer({ rank: LANE_RANK.deals, sortKey: [1, name], card: { accountName: name, lane: 'deals', stateKind: 'in_deal', state: STATE_TEXT.in_deal, why, person: null, next: { label: 'Open the deal brief', href: `${accountHref(name)}?view=brief` }, blocker: 'No cold first touch while the deal is open: work it from the deal.' } });
+    }
   }
 
   // The canonical pursuit state wins where it is fresh: the card says what the workspace says, and ranks by it.

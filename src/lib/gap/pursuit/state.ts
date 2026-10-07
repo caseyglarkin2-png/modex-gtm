@@ -115,6 +115,11 @@ export const STATE_LINE: Record<PursuitStateKind, string> = {
   idle: 'Nothing to do yet',
 };
 
+/** R55: the held line for a closed deal, one wording for the workspace and Work (R63-B S12). */
+export function closureStateLine(kind: 'customer' | 'parked'): string {
+  return kind === 'customer' ? `${STATE_LINE.held}: a customer (closed won)` : `${STATE_LINE.held}: parked after a lost deal`;
+}
+
 const day = (s: string) => new Date(s).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' });
 const who = (by: string) => (/^casey@|^caseyglarkin/i.test(by) ? 'you' : by.replace(/@.*/, ''));
 
@@ -199,7 +204,7 @@ export function projectPursuitState(i: PursuitInput): PursuitState {
   // R55: a customer (closed won) or parked after a lost deal: held, said plainly; post-sale expansion is context only.
   if (i.opportunity.status === 'CLEAR' && i.opportunity.closure) {
     const c = i.opportunity.closure;
-    return base('held', { stateLine: c.kind === 'customer' ? `${STATE_LINE.held}: a customer (closed won)` : `${STATE_LINE.held}: parked after a lost deal`, blocker: c.why, unlock: c.kind === 'customer' ? 'Your explicit decision to work an expansion with the customer.' : 'A material change: a newer verified fact, a buyer reply, or a new open deal.' });
+    return base('held', { stateLine: closureStateLine(c.kind), blocker: c.why, unlock: c.kind === 'customer' ? 'Your explicit decision to work an expansion with the customer.' : 'A material change: a newer verified fact, a buyer reply, or a new open deal.' });
   }
   if (i.opportunity.status === 'UNKNOWN') {
     // R60: the reason in words (never "identity_unresolved"), and what unlocks it for that reason.
