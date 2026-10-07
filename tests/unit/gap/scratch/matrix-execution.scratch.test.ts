@@ -313,7 +313,10 @@ describe.skipIf(!RUN)('R62 matrix: execution (real routes, real opportunity reso
   // POST /api/email/send, by personaId and by address, for a reason that names the reply (perform-send.ts, beside
   // the unsubscribed blocker). A human reply from the same kind of person does not block that path; the GAP gate's
   // own refusal on the card is unchanged. The global compose control is not rendered on GAP pages.
-  // PIN: the blocker's exact code is in Worker A's commit message; it is pinned here when that SHA lands.
+  // Pinned to the landed fix 8f7c20d5: 409 RECIPIENT_OPTED_OUT_BY_REPLY, details.reason recipient_opted_out_by_reply,
+  // and the words '<name> replied "stop" on <day>. Nobody emails them from here. Record it as do not contact from
+  // their reply.' (gap/replies/opt-out.ts); a cc that opted out blocks too; an ordinary or automatic reply does not.
+  // The compose control is gone under /gap and /gap/ and below (3fe2c39e); /gapfoo is not GAP.
   it('an unrecorded "stop" reply refuses the legacy send path by person and by address, naming the reply; a human reply does not; the GAP card still answers account_replied; no compose control on GAP pages', async () => {
     const r = ready.LegacyStop;
     const d = await use(r);
@@ -324,31 +327,39 @@ describe.skipIf(!RUN)('R62 matrix: execution (real routes, real opportunity reso
     expect((await prisma.persona.findUnique({ where: { id: r.p.id }, select: { do_not_contact: true } }))?.do_not_contact).toBe(false);
     const { POST: legacySend } = await import('@/app/api/email/send/route');
     type Blocked = { error?: string; code?: string; message?: string; details?: unknown };
+    // The reason names the person, their words and the day the reply arrived (New York).
+    const at = (await prisma.inboundMessage.findFirst({ where: { from_email: r.p.email, body_text: 'stop' }, orderBy: { received_at: 'desc' }, select: { received_at: true } }))!.received_at;
+    const day = new Date(at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' });
+    const REASON = `${r.p.name} replied "stop" on ${day}. Nobody emails them from here. Record it as do not contact from their reply.`;
     const legacy = async (body: Record<string, unknown>) => {
       const res = await legacySend(req('/api/email/send', 'POST', { subject: 'Following up on the yard', bodyHtml: '<p>Following up on trailer turns at your sites.</p>', ...body }));
       return { status: res.status, body: (await res.json()) as Blocked };
     };
-    const namesTheReply = (b: Blocked) => `${b.error ?? ''} ${b.message ?? ''}`;
     // By person (the route resolves the address from the persona) and by address alone: refused, naming the reply.
     for (const attempt of [{ to: r.p.email, personaId: r.p.id }, { to: r.p.email, accountName: r.a.name, personaName: r.p.name }]) {
       const res = await legacy(attempt);
-      expect(res.status, JSON.stringify(res.body)).toBeGreaterThanOrEqual(400);
-      expect(res.status, JSON.stringify(res.body)).toBeLessThan(500);
-      expect(namesTheReply(res.body), JSON.stringify(res.body)).toMatch(/replied/i);
-      expect(namesTheReply(res.body), JSON.stringify(res.body)).toMatch(/\bstop\b/i);
-      expect(res.body.code, JSON.stringify(res.body)).not.toBe('UNSUBSCRIBED');
+      expect([res.status, res.body.code, res.body.error, res.body.message, res.body.details], JSON.stringify(res.body)).toEqual([409, 'RECIPIENT_OPTED_OUT_BY_REPLY', REASON, REASON, { reason: 'recipient_opted_out_by_reply' }]);
     }
     // The guard phase itself says the same, before any transport.
     const { evaluateSendGuards } = await import('@/lib/email/perform-send');
     const guardOf = (x: Ready) => evaluateSendGuards(prisma as never, { to: x.p.email, subject: 'Following up on the yard', bodyHtml: '<p>Following up.</p>', accountName: x.a.name, personaName: x.p.name, personaId: x.p.id });
     const stopped = await guardOf(r);
-    expect(stopped.ok ? 'clear' : namesTheReply(stopped.block as Blocked)).toMatch(/replied[\s\S]*\bstop\b|\bstop\b[\s\S]*replied/i);
+    expect(stopped.ok ? 'clear' : [stopped.block.code, stopped.block.status, stopped.block.message]).toEqual(['RECIPIENT_OPTED_OUT_BY_REPLY', 409, REASON]);
+    // A colleague at the same account with the opted-out person on cc: refused for the cc's reply, named from the reply.
+    const colleague = await s.person(r.a, 'Kim', 'Director, Transportation');
+    const cc = await evaluateSendGuards(prisma as never, { to: colleague.email, cc: [r.p.email], subject: 'Following up on the yard', bodyHtml: '<p>Following up.</p>', accountName: r.a.name, personaName: colleague.name, personaId: colleague.id });
+    expect(cc.ok ? 'clear' : [cc.block.code, cc.block.message]).toEqual(['RECIPIENT_OPTED_OUT_BY_REPLY', REASON]);
     // A human reply from the same kind of person: the legacy guards stay clear (no reply-based block).
     const human = ready.LegacyHuman;
     await s.inbound(human.a, human.p, 'Thanks, this is timely. Can you send the two-site comparison before Thursday?', { key: 'legacy-human' });
     expect(classifyReply({ snippet: 'Thanks, this is timely. Can you send the two-site comparison before Thursday?', subject: 'Re: trailer turns', from: human.p.email }).kind).toBe('human');
     const clear = await guardOf(human);
     expect(clear.ok ? 'clear' : JSON.stringify(clear.block)).toBe('clear');
+    // An automatic out-of-office notice does not block either.
+    const away = await s.person(human.a, 'Ola', 'Director, Distribution');
+    await s.inbound(human.a, away, 'I am out of the office until Monday, October 12 with limited access to email. For urgent matters contact the front desk.', { key: 'legacy-away', subject: 'Automatic reply: trailer turns' });
+    const awayGuard = await evaluateSendGuards(prisma as never, { to: away.email, subject: 'Following up on the yard', bodyHtml: '<p>Following up.</p>', accountName: human.a.name, personaName: away.name, personaId: away.id });
+    expect(awayGuard.ok ? 'clear' : JSON.stringify(awayGuard.block)).toBe('clear');
     // The GAP gate on the card prepared before the reply: its own refusal, unchanged. Nothing reached the sink.
     const gap = await send(d, { contentHash: p.contentHash, recipient: p.to });
     expect([gap.status, gap.body.error], JSON.stringify(gap.body)).toEqual([409, 'account_replied']);
@@ -364,8 +375,8 @@ describe.skipIf(!RUN)('R62 matrix: execution (real routes, real opportunity reso
       nav.path = path;
       return renderToStaticMarkup(createElement(AppShell, null, createElement('div', null, 'page'))).includes('aria-label="Compose email"');
     };
-    const gapPaths = ['/gap', '/gap/accounts/acme-co', '/gap/replies', '/gap/capture', '/gap/coverage'];
-    const otherPaths = ['/accounts/acme-co', '/discovery'];
+    const gapPaths = ['/gap', '/gap/', '/gap/accounts/acme-co', '/gap/replies', '/gap/capture', '/gap/coverage'];
+    const otherPaths = ['/accounts/acme-co', '/discovery', '/gapfoo'];
     expect([...gapPaths, ...otherPaths].map((x) => [x, composeOn(x)])).toEqual([...gapPaths.map((x) => [x, false]), ...otherPaths.map((x) => [x, true])]);
   }, 240_000);
 
