@@ -149,6 +149,17 @@ note, task or next-step change beyond the existing automatic mirror is shown exa
 (`crm.sync_proposed` -> `crm.sync_approved`); it is written only with GAP_HUBSPOT_MIRROR_ENABLED on and never
 overwrites a newer human value. The ledger's R50 to R55 entries hold the detail.
 
+R42b (2026-10-06; within the mandate): a real reply or an objection prepares an EDITABLE answer from what they
+asked. GAP writes in only what it holds (a material of ours, cited); every other ask is a "[Fill in: ...]" placeholder
+and a line under missing information, and GAP never writes a price, a time, an attachment, a commitment or the
+buyer's agreement. Copying, a Gmail draft in their thread and a send are three distinct ledger states; the send goes
+only through the preview and CONFIRM + SEND, bound to the sending mailbox, the recipient and the exact edited text,
+as HUMAN_APPROVED_1TO1 in their thread. A referral or an opt-out prepares no answer. Stricter: an out-of-office is an
+automatic notice only (a person who mentions a vacation stays a person, and an opt-out beats a notice); the
+account-reply hold reads the same classification as the card; the person a referral names gets no cold first touch,
+live enrollment or cold routed card until the seller marks the referral done or skipped. The ledger's R42 entry
+holds the detail.
+
 ## Release
 
 Stabilization PRs: #348 (truth vocabulary, Verify only verifies), #349 (source ledger gaps), #350 (dogfood notes),

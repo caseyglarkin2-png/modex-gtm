@@ -1188,16 +1188,17 @@ returning on an older reply, an obligation-only account omitted) each turn their
 `account.priority`). Debt: Work reads every commitment row on each render (fine at today's volume; the indexed
 projection named in R40 is the step when it grows); a meeting row with no time is placed at 9 am New York on its day.
 
-R42 **Reply triage through reply execution (DONE; the copy fails closed).** `replies/classify.ts` now says what a
+R42 **Reply triage through reply execution (DONE; the answer is prepared and editable since R42b, below).** `replies/classify.ts` now says what a
 HUMAN reply is without changing its kind (`human`: a real reply, a referral, an objection; each still pauses the
 account and stops every cold follow-up there; an opt-out inside a longer message stays an opt-out). NEW
 `replies/prepare.ts` (pure) + `components/gap/reply-prep.tsx`: on the Work reply card and on the account page right
 after NEXT, the incoming message (who, when, subject, their words), its kind, prepared notes read off their words
 (what they asked, the day they named in New York, who they named, the objection quoted), "Answer in Gmail" (the
-thread in the GAP mailbox, else a search for the sender there) and "Record what they said" (the triage form). NO reply
-copy family exists (the compiler and governed copy have first-touch families only), so it fails closed: `copyFamily`
-is always null, the panel says "No reply copy family yet: GAP does not write this reply. Answer it yourself in the
-thread.", there is no send, draft or preview control and no model is asked for words. A referral: the card reads
+thread in the GAP mailbox, else a search for the sender there) and "Record what they said" (the triage form). As first
+shipped (superseded by R42b): NO reply copy family exists (the compiler and governed copy have first-touch families
+only), so it failed closed: `copyFamily` is always null, the panel said "No reply copy family yet: GAP does not write
+this reply. Answer it yourself in the thread.", there was no send, draft or preview control and no model is asked
+for words. A referral: the card reads
 "They named someone" with "Record who they named"; the disposition form now carries who they named (and, for a
 not-now, the day to come back), prefilled from the message's words for the seller to confirm; the R40 referral
 obligation records the NAMED person, "named by" the one who named them, with no cold action and no implied consent or
@@ -1219,14 +1220,106 @@ on every read, a weekday beating the explicit date, a twin's disposition ignored
 referral naming the referrer) each turn their owning test red. Adjacent: the whole GAP suite 360 files / 5,331 green
 (the three scratch files skipped without the scratch URL); typecheck clean. Rollback: revert the commit (no stored
 shape changes; reminders already written stay inert rows). Debt: the referral name and the asked question are pattern
-reads of the message (the seller confirms the name in the form); a reply copy family (a governed answer in the thread)
-does not exist and is a deliberate next-version decision. Found on the way, OUTSIDE this sprint's surfaces and not
+reads of the message (the seller confirms the name in the form); the answer itself is R42b (below), prepared from
+their words with no governed reply copy family. Found on the way, OUTSIDE this sprint's surfaces and not
 fixed here (named debt for the lead): earlier heredoc edits left literal backspace characters where a word boundary was
 meant in three files, so `story/propose-family.ts` line 49 (the closure cue for the problem family) can never match,
 `entity/providers.ts` `modelGone` never matches the "404" alternative, and three guard assertions in
 `tests/unit/gap/hubspot-poller.test.ts` (lines 708 to 710) pass vacuously.
 
-R43 **Follow-up execution and recovery (DONE; through the real send route on scratch).** NEW `execution/follow-up-
+R42b **The prepared answer (DONE for a reply in the GAP mailbox thread; PARTIAL for a reply that came in only
+through HubSpot's connected inbox, the dependency named: the Gmail thread).** Casey reconciled R42 on 2026-10-06: the
+fail-closed line was a safe fallback, but the mandate is a PREPARED, EDITABLE answer to what was asked. NEW
+`replies/answer.ts` (pure): every ask is read from their message (pricing; a security, legal or contract question; a
+commitment or timing; a material; their availability, with the day they named in New York; any other question; an
+objection is acknowledged) and the text is prepared as a greeting and one line per ask. What GAP holds is written in
+and cited (the account's demo or microsite, trust "Ours"); everything else is a "[Fill in: ...]" placeholder in the
+text AND a line under Missing information. It never writes a price, a time, an attachment, a commitment or the buyer's
+agreement. Beside the text, what GAP can cite, each with its trust word: the sender's own human-confirmed statements
+("Buyer confirmed", read for that person at that account, so no other deal's context can appear), the fact the thesis
+started from ("Public source"), the last touch ("Recorded"). A referral, an opt-out, an automatic notice or a bounce
+prepares no answer and says why. NEW `execution/seller-reply.ts`, `sendSellerReply` in `execution/seller-send.ts`,
+`GET` / `POST /api/gap/replies/[id]/answer` and `components/gap/reply-answer.tsx` (on the reply panel, loaded when the
+seller presses "Prepare the answer"): three DISTINCT actions, each its own ledger kind on the inbound message. COPY
+(`execution.reply_copied`; nothing leaves GAP). SAVE AS A GMAIL DRAFT in their thread (`execution.reply_drafted`; a
+draft, not a send; the same text twice is one draft; a different text while it exists is refused). SEND: a preview of
+exactly what leaves, then CONFIRM + SEND bound to one hash of the sending mailbox, the recipient, the subject and the
+edited text (`execution.reply_sent` plus an EmailLog row); a newer message from them after the preview makes the
+confirm stale. Draft and send run under a per-message advisory lock and claim (`execution.reply_claimed` /
+`execution.reply_released`), so nothing goes out twice and a send while a draft exists is refused. The send is the only
+new HUMAN_APPROVED_1TO1 use and lives in seller-send.ts (the structural pin holds); it carries In-Reply-To and
+References so it lands in their thread, and the wire re-runs the restriction, autonomy, suppression and daily-cap
+gates. Every press re-reads current state: an opt-out (this message, a later one, or a recorded do-not-contact), a
+referral, a person marked do-not-contact or a notice refuse copy, draft and send; a newer message from them, an answer
+already in the GAP mailbox's Sent (sent by hand) or an unreadable Sent folder refuse the draft and the send; a text
+with an unfilled placeholder or an em dash, an empty one or one over 8,000 characters is refused, and the edited text
+passes the deal-artifact guard (`deals/artifacts.ts` `artifactProblems`: no "throughput", no claim of approval or
+acceptance the buyer did not make, their own quoted sentences exempt, a canon figure only with its label). Draft and send need
+an owner (403 otherwise). No model writes the answer and no governed copy family runs, so the congruence critic is not
+called: the seller's edited words are the copy. A missing GAP mailbox sender, like the HubSpot-inbox case, prepares
+the answer as PARTIAL with the dependency named, and copy still works. The R42 fail-closed line is gone: a real reply
+or an objection shows "Prepare the answer"; a referral or an opt-out says why no answer is prepared. Folded in
+from the independent audit at 31f09c71 (each line opened and confirmed first). (a) The out-of-office reader matched a
+real reply that mentions "delayed response", "on vacation" or "out of the office" in passing, and such a reply then
+got no Work card, did not count as a buyer move, could not be recorded and was not a material change. `classify.ts`
+now reads an out-of-office as an automatic notice only: the Auto-Submitted and autoresponder headers are already
+rejected at ingestion (`email/reply-precision.ts`), so here it is the canonical subject, or the canonical notice
+body (present or future tense) WITH no first-person answer to our ask (no question back, no yes, no day that works,
+no "send me"); an apology or the past ("sorry for the delayed response", "I was on vacation") is a person; and an
+explicit opt-out now wins over a notice in the same message. The account-reply hold (`account-reply.ts`) read the
+subject only, so a notice without the canonical subject held every first touch with no card to say why; it now reads
+the same classification as the card: a notice or a bounce holds nobody, a person or an opt-out holds until recorded.
+(b) The prepared reply did not exist: this entry. The
+follow-up side is R43, now marked PARTIAL with its dependency. (c) "Nobody they named gets a cold email until you
+choose" was said on the card and enforced nowhere: R5 held the person who pointed elsewhere, never the person named.
+NEW `replies/referral-hold.ts`: an open R40 referral obligation naming the person (by email anywhere, else by full
+name at the account; never a first name alone) holds them until the seller marks it done or skipped, read from the
+ledger by its JSON path (an unreadable ledger throws, never clear). Enforced where the other holds live: the send
+gate's step 0 (`named_in_referral`, shared by the draft and the send path), live enrollment, and routing (NEW rule R5b
+`named_in_referral`, after R5: research_required with the obligation's words), with the seller words in
+`ui/refusal-copy.ts` and the send panel. Proof:
+`reply-answer.test.tsx` (11: the asks and their topics; planted asks for a price, a time, an attachment GAP lacks, a
+security answer, a commitment and buyer agreement, with no value written outside the placeholders and each listed as
+missing; a held material linked and cited; no answer for an opt-out, a referral or a notice; the PARTIAL dependency;
+copy, preview, a changed text refused, CONFIRM + SEND once in their thread as HUMAN_APPROVED_1TO1, a replay already
+sent; a draft not a send and the send refused over it; every control at the click; the route with no sender, with
+placeholders, an em dash and a non-owner; the panel's three actions; the mailbox bound at confirm and a newer message making it stale; the copy guard) and
+scratch `reply-answer.scratch.test.ts` (7; the first six through
+the real route on Postgres with the sink and the clawd stub: a reply with three asks prepared with three placeholders
+and nothing invented; copy recorded with nothing sent; the placeholder text refused; a suppressed recipient refused
+at the wire after preview; CONFIRM + SEND one threaded message, one EmailLog row; a replay already sent; a second reply
+drafted in its thread, then its send refused; a referral and the corpus opt-out refused on all three with nothing in
+the sink). `work-today.test.tsx` (+1: more than 500 rows today keeps the newest, and a reply answered from GAP counts);
+`reply-prep.test.ts` and `reply-prep-view.test.tsx` now pin the prepare control and the no-answer lines;
+`reply-classify.test.ts` (+3: six real replies that mention a delay, a vacation or the office STAY HUMAN and hold the
+account; the canonical notice stays out-of-office with a colleague to contact; an opt-out inside a notice is an
+opt-out); `seller-draft.test.ts` (+2: a real reply that mentions a vacation holds, a notice by its body and a
+bounce do not); `referral-hold.test.ts` (4: by email anywhere or full name at the account, never the referrer or a first
+name; done or skipped releases, a snooze does not; only referral rows are read and folded; unreadable throws); the
+gate tests in `seller-draft.test.ts`, `enroll-service.test.ts` and `routing-rules.test.ts` (R5b, the rule order); and
+a seventh scratch step (the referral obligation written by the real commitment writer and read by its JSON path on
+Postgres; another kind naming the same person holds nothing; skipped releases).
+Eighteen deliberate mutations (a fabricated price, a referral answered, a later opt-out ignored, placeholders let
+out, a send previewed over an open draft, a changed text confirmed, a non-owner drafting or sending; any notice phrase
+read as an out-of-office, a notice beating an opt-out, the send gate, live enrollment or routing ignoring the
+referral hold, a done or skipped referral still holding, a first name alone matching, the account-reply hold reading the subject
+only, the confirm not binding the mailbox, the copy guard skipped, "done today" keeping the oldest rows) each turn
+the owning test red. Adjacent: the whole GAP suite 371 files / 5,434 green (scratch excluded); the rest of the repository 325 files / 2,294 green (one skipped); the six scratch
+files 37 / 37 on a freshly rebuilt database, one file at a time; typecheck clean. Rollback: revert the commits (new
+ledger kinds only, on the inbound message; nothing outside this panel reads
+them). Debt: the asks are pattern reads of their words (the seller sees each ask and edits the text); a reply that came
+in only through HubSpot's connected inbox is prepared and copyable but not drafted or sent from GAP (the Gmail thread);
+after a send the reply card still asks the seller to record what they said (recording is the triage, a separate step);
+the audit's reuse note suggested a referral answer that thanks them and asks about the named person; the brief for
+this ticket says a referral prepares no reply, and that stands. Found at the gate and fixed in its own commit:
+Work's "done today" read the OLDEST 500 ledger rows of the New York day, so on a busy day the newest completions
+vanished (the work-day scratch failed after three other scratch files ran the same day); it now keeps the newest 500,
+shown in order, and an answer sent from GAP counts ("Answered <them> in their thread").
+
+R43 **Follow-up execution and recovery (DONE for the plan, the holds and the recovery; PARTIAL for touch 2 and later
+on the four seeded event-led families: the dependency is human-written step 1+ copy for those families, deleted by
+red team T7 on 2026-09-26 and not replaced, so the plan says follow up by hand and "prepare" is reachable only for
+a version that carries step 1+ copy; audit at 31f09c71).** NEW `execution/follow-up-
 plan.ts` (pure): a follow-up due today says what to do from the PERSON's actual history (person-history.ts: every
 proven send, every Gmail draft and its fate, every send whose outcome is unknown), the obligation's due day and the
 holds: held (an open or unreadable deal, an opt-out; no follow-up while it stands, and it never promotes a held
@@ -1348,8 +1441,8 @@ send, no paid call. Deploy notes: no schema change and no new table (the new led
 and `account.priority`); the `gap-mailbox` cron report gains `followUpsFromSent`; the first Work load after deploy
 runs the follow-up sweep over the last 30 days of proven sends (it creates waiting follow-ups, writes nothing else).
 Carried debt (each recorded in its entry): the indexed commitment projection when the rows grow; pattern reads for
-names, asks and obligations in replies and notes (the seller confirms them); no reply copy family and no follow-up copy
-family (both fail closed); no next follow-up proposed after a by-hand one; the tomorrow preview speaks the lanes' words;
+names, asks and obligations in replies and notes (the seller confirms them); no reply copy family (the reply answer
+is now prepared and editable: R42b) and no follow-up copy family (fails closed); no next follow-up proposed after a by-hand one; the tomorrow preview speaks the lanes' words;
 a meeting accepted by email has no time on record; three pre-existing backspace-mangled patterns outside this sprint
 (`story/propose-family.ts` line 49, `entity/providers.ts` `modelGone`, `hubspot-poller.test.ts` lines 708 to 710).
 
