@@ -170,6 +170,7 @@ describe('an open deal blocks cold outreach without suppressing deal work', () =
   it('the pursuit state is in a deal (no cold touch) and NEXT names both deals, each worked on its own', () => {
     const s = projectPursuitState({ accountName: ACCOUNT, now: NOW, motionType: 'IN_DEAL', opportunity: { status: 'ACTIVE', detail: '', deals: DEALS.map((d) => ({ name: d.name, stage: d.stage })) }, restriction: null, familyHold: null, motion: null, choice: null, activePersona: null, replies: [], lastOutbound: null, outstandingDraft: null, followUpDue: null, eligible: [{ key: 'gap:1', personaId: 1, name: 'Ann Scratch', title: 'VP' }] });
     expect(s.state).toBe('in_deal');
+    expect(s.stateLine).toBe('In 2 open deals: YardFlow - Kroger; Kroger Columbus DC');
     expect(s.coldTouchAllowed).toBe(false);
     const n = nextFromPursuit(s, { hypothesisId: null, accountSlugHref: (v) => `/gap/accounts/kroger?view=${v}`, replyThreadHref: null, captureHref: '/gap/capture?account=Kroger' });
     expect(n.text).toBe('Work the 2 open deals (YardFlow - Kroger; Kroger Columbus DC) each on its own, never a cold first touch. The deal brief holds each deal\'s obligations and what to learn next.');

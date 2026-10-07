@@ -189,7 +189,8 @@ export function projectPursuitState(i: PursuitInput): PursuitState {
   if (i.motionType === 'IN_DEAL' || i.opportunity.status === 'OPEN' || i.opportunity.status === 'ACTIVE') {
     const d = i.opportunity.deals[0];
     return base('in_deal', {
-      stateLine: `${STATE_LINE.in_deal}${d?.name ? `: ${d.name}` : ''}${d?.stage ? ` (${d.stage})` : ''}`,
+      // R50: two opportunities are named as two, never as the first one's.
+      stateLine: i.opportunity.deals.length > 1 ? `In ${i.opportunity.deals.length} open deals: ${i.opportunity.deals.map((x) => x.name ?? 'an unnamed deal').join('; ')}` : `${STATE_LINE.in_deal}${d?.name ? `: ${d.name}` : ''}${d?.stage ? ` (${d.stage})` : ''}`,
       blocker: `An open HubSpot deal: work it from the deal, never a cold first touch.`,
       unlock: 'The deal closes or the opportunity read changes.',
     });
