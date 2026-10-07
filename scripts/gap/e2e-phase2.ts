@@ -409,7 +409,7 @@ async function main(): Promise<number> {
     expect('G6 brief', brief.know.fact !== null && brief.know.fact.quote === FACT, `KNOW -> ${JSON.stringify(brief.know)}`);
     expect('G6 brief', !!brief.think && !!brief.learn && !!brief.wrongIf, `THINK/LEARN/WRONG IF -> ${JSON.stringify({ think: brief.think, learn: brief.learn, wrongIf: brief.wrongIf })}`);
     expect('G6 brief', brief.whyYou?.owned === true && brief.whyYou.text.startsWith('Owns the Texas DC network'), `WHY YOU -> ${JSON.stringify(brief.whyYou)}`);
-    expect('G6 brief', brief.history.some((l) => l === 'HubSpot opportunity CLEAR, checked moments ago') && brief.history[0] === 'No GAP touches to VP1 yet', `HISTORY -> ${JSON.stringify(brief.history)}`);
+    expect('G6 brief', brief.history.some((l) => l === 'No open HubSpot deal, checked moments ago') && brief.history[0] === 'No GAP touches to VP1 yet', `HISTORY -> ${JSON.stringify(brief.history)}`);
     const sentBefore = await prisma.gapAuditEvent.count({ where: { kind: DIRECT_SENT } });
     const preview = await sendSellerEmail(prisma, { decisionId: readyEmail[0].id, actor: ACTOR, now }, sellerDeps(tag, threadFor));
     expect('G6 preview', preview.ok && 'preview' in preview, `preview -> ${JSON.stringify(preview)}`);

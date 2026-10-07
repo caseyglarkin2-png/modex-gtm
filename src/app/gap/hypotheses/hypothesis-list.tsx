@@ -167,7 +167,8 @@ export function HypothesisList({ items, status, showFilter = true, emptyNote }: 
                     key={row.id}
                     role="button"
                     tabIndex={0}
-                    aria-label={`Open ${row.account_name} ${row.problem_family}`}
+                    // R63-B S15: the row's name in the same words its cells show, never the family's code.
+                    aria-label={`Open ${row.account_name} ${row.problem_family.replace(/_/g, ' ')}`}
                     className="cursor-pointer"
                     onClick={() => void open(row, index)}
                     onKeyDown={(event) => {

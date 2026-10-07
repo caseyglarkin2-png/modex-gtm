@@ -133,6 +133,13 @@ export function knowOf(hypothesis: any, now: Date = new Date(), contradicted: Re
   };
 }
 
+/** R63-B S15: HubSpot's answer in words ("HubSpot opportunity CLEAR" was the reader's code on a seller screen). */
+export function opportunityHistoryLine(o: BriefHistory['opportunity']): string {
+  if (o.status === 'ACTIVE') return `An open HubSpot deal${o.detail ? `: ${o.detail}` : ''}, checked moments ago`;
+  if (o.status === 'UNKNOWN') return `HubSpot could not be checked${o.detail ? `: ${o.detail}` : ''}`;
+  return 'No open HubSpot deal, checked moments ago';
+}
+
 export function historyLines(firstName: string, accountName: string, h: BriefHistory): { lines: string[]; state: SixLineBrief['historyState'] } {
   const lines: string[] = [];
   lines.push(h.personTouches.count === 0 ? `No GAP touches to ${firstName} yet` : `${h.personTouches.count} GAP touch${h.personTouches.count === 1 ? '' : 'es'} to ${firstName}${h.personTouches.lastAt ? `, last ${day(h.personTouches.lastAt)}` : ''}`);
@@ -156,7 +163,7 @@ export function historyLines(firstName: string, accountName: string, h: BriefHis
   );
   if (o && !optOutReply) lines.push(optOutLine(o));
   if (h.lastResponse && !(o && h.lastResponse.responseClass === 'do_not_contact')) lines.push(`Last buyer response: ${h.lastResponse.responseClass.replace(/_/g, ' ')} (${day(h.lastResponse.at)})`);
-  lines.push(`HubSpot opportunity ${h.opportunity.status}${h.opportunity.detail ? `: ${h.opportunity.detail}` : ''}, checked moments ago`);
+  lines.push(opportunityHistoryLine(h.opportunity));
   const state: SixLineBrief['historyState'] =
     o || h.opportunity.status !== 'CLEAR' || (h.accountReply && h.accountReply !== 'unknown') ? 'blocked' : others.length || h.accountReply === 'unknown' ? 'caution' : 'clear';
   return { lines, state };

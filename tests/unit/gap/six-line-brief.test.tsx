@@ -43,7 +43,7 @@ describe('buildBrief', () => {
     expect(b.think).toBe('Scheduled autonomous linehaul may move variability into the DC gate and yard.');
     expect(b.learn).toBe('How are trailers staged when autonomous arrivals bunch up?');
     expect(b.whyYou).toEqual({ text: 'Owns the NA beverage DC network.', owned: true });
-    expect(b.history).toEqual(['No GAP touches to Jordan yet', 'No one else at PepsiCo contacted in 30 days', 'No account reply waiting', 'HubSpot opportunity CLEAR, checked moments ago']);
+    expect(b.history).toEqual(['No GAP touches to Jordan yet', 'No one else at PepsiCo contacted in 30 days', 'No account reply waiting', 'No open HubSpot deal, checked moments ago']);
     expect(b.historyState).toBe('clear');
     expect(b.wrongIf).toBe('Their receiving and yard flow already absorb arrival variability without dwell.');
   });
@@ -59,7 +59,7 @@ describe('buildBrief', () => {
 
   it('HISTORY: an open deal, UNKNOWN truth or an untriaged account reply turns it blocked; a colleague in motion is caution', () => {
     expect(historyLines('J', 'PepsiCo', { ...clearHistory, opportunity: { status: 'ACTIVE', detail: '"YardFlow - PepsiCo"', checkedAt: '' } }).state).toBe('blocked');
-    expect(historyLines('J', 'PepsiCo', { ...clearHistory, opportunity: { status: 'UNKNOWN', detail: 'check HubSpot before contacting', checkedAt: '' } }).lines.at(-1)).toBe('HubSpot opportunity UNKNOWN: check HubSpot before contacting, checked moments ago');
+    expect(historyLines('J', 'PepsiCo', { ...clearHistory, opportunity: { status: 'UNKNOWN', detail: 'check HubSpot before contacting', checkedAt: '' } }).lines.at(-1)).toBe('HubSpot could not be checked: check HubSpot before contacting');
     expect(historyLines('J', 'PepsiCo', { ...clearHistory, accountReply: { from: 'a@pepsico.com', receivedAt: NOW.toISOString() } }).state).toBe('blocked');
     const c = historyLines('J', 'PepsiCo', { ...clearHistory, colleagueTouches: [{ recipient: 'vp@pepsico.com', sentAt: NOW.toISOString(), outstanding: false }] });
     expect(c.state).toBe('caution');
