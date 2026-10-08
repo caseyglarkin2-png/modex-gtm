@@ -69,6 +69,10 @@ export interface LedgerSeed {
   config?: Row[];
   /** X10: compile rows (the copy a revision was judged on). */
   compiles?: Row[];
+  /** I01: the intelligence tables. */
+  signals?: Row[];
+  triggers?: Row[];
+  threads?: Row[];
 }
 
 /** X05b: SystemConfig's `key` is its primary key: a second create for the same key is Prisma's P2002 (the daily claims rely on it); delete removes by key. */
@@ -106,6 +110,9 @@ export function ledgerDb(seed: LedgerSeed = {}, start = new Date('2026-10-06T14:
     gapHubSpotMirror: [...(seed.mirror ?? [])],
     systemConfig: [...(seed.config ?? [])],
     gapCompile: [...(seed.compiles ?? [])],
+    gapSignal: [...(seed.signals ?? [])],
+    pounceTrigger: [...(seed.triggers ?? [])],
+    emailThread: [...(seed.threads ?? [])],
   };
   let t = start.getTime();
   const clock = () => new Date((t += 1000));
@@ -124,6 +131,9 @@ export function ledgerDb(seed: LedgerSeed = {}, start = new Date('2026-10-06T14:
     gapHubSpotMirror: table(store.gapHubSpotMirror, clock, 'mir'),
     systemConfig: uniqueKeyTable(store.systemConfig, clock, 'cfg'),
     gapCompile: table(store.gapCompile, clock, 'cmp'),
+    gapSignal: table(store.gapSignal, clock, 'sig'),
+    pounceTrigger: table(store.pounceTrigger, clock, 'trg'),
+    emailThread: table(store.emailThread, clock, 'th'),
   });
   return { store, client, setClock: (d: Date) => (t = d.getTime()) };
 }

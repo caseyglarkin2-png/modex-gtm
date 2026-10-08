@@ -2540,6 +2540,71 @@ against the daily send cap (a loop would starve prospect sends: HELP is rate-lim
 never answered); HubSpot sequence write scope unproven; the local box overheats under parallel heavy jobs (serial
 validation only, the full suite at the release gate).
 
+### GAP OS PROSPECTING FIRST (2026-10-08, in progress)
+
+Casey's second and third mandates of the day, verbatim in `docs/gap/PROSPECTING_FIRST_MANDATE_2026-10-08.md`: the
+first production briefing (18 items) was deal hygiene, not demand generation; then the course correction: STOP designing
+freshness gates and research prerequisites; surface the intelligence GAP already holds, let Casey decide (pursue, explore,
+save, skip, dismiss, more), and turn what he chooses into prepared outreach. The operating model is DISCOVER, SURFACE,
+LET CASEY DECIDE, DEVELOP THE ANGLE, PREPARE OUTREACH, EXECUTE, RECORD, FOLLOW UP. Signal age is shown, never a gate.
+Execution safety (opt-outs, suppression, authorization, CONFIRM + SEND) is unchanged.
+<!-- verified:2026-10-08 -->
+
+#### The October 8 briefing, measured (production, read-only)
+
+The 18 items by kind (the plan row `work.day_planned` 2026-10-08): 9 "In a deal" cards whose only move was a stalled
+close date, 1 follow-up at a deal account (held), 4 prospect follow-ups that were 2 (a reminder and a follow-up for the
+same return at Southern Glazer's and at Swire, both from a May out-of-office), 1 ready first touch (PepsiCo, Tom
+Kamantauskas, the only item with a prepared angle), 1 opted-out admin line, 2 "Someone replied" (Gusto, a vendor; The
+Boston Beer Company, June). New-conversation work: 1 of 18. Carried over: none (the first plan).
+
+Why, traced through `work/list.ts`, `work/plan.ts`, `work/briefing.ts` and upstream:
+
+- Ranking: `TIER_RANK` put deal (3) above follow_up (4) and ready (5), so stalled-deal hygiene led by design; the
+  briefing listed the plan's items in that order with no sections.
+- Supply: the ready lane is routing's `enroll` decisions over ACTIVE theses with a fresh verified outreach fact. The
+  whole system holds 31 theses at 8 accounts (16 unresolved, 8 active, 6 approved, 1 waiting review); PepsiCo's are
+  "not ready: evidence expired". Routing last ran 2026-10-05 (the daily cron first fires 2026-10-09 10:30Z).
+- Upstream of that: research ran 187 times in 7 days (170 insufficient_evidence, 17 evidence_found) and verified
+  evidence that was already STALE against the freshness window (23 signal, 15 EDGAR, 3 web records, all stale);
+  `research.proposal_prepared` rows: zero, ever (auto-prepare skips a fact that is not fresh). 67 of the 75 watched
+  accounts have no thesis. Discovery captured 2,916 signals (2,748 under 45 days old; 253 rated outreach
+  candidates, 2,323 account context, 226 research leads, 64 risk, 50 leadership) and queued 30 for research; the rest
+  were never put in front of Casey (feedback: null on every one). 91 Pounce triggers are live, 67 at companies that
+  are not GAP accounts (Tractor Supply, Costco, Daimler, Outpost). 229 people have written to the mailbox since May
+  (596 threads; 21 are known personas at known accounts). The universe: 1,708 accounts, 1,939 people (1,455 with an
+  address, 375 do-not-contact); GAP has emailed 1 of them.
+
+So the briefing was starved, not mis-sorted: the funnel demanded a fresh verified fact before anything reached Casey,
+and the intelligence GAP already held never got a decision from him. The course correction says exactly that.
+
+#### Backlog (atomic, each a commit; focused tests; one reviewer; Casey owns time)
+
+- **I01 the intelligence reader** `work/intel.ts`: the day's intelligence selection from what GAP holds, with no age
+  gate: undecided signals (any age, one per event, Casey's shares first, then outreach candidates, leadership and risk
+  by score, then research leads and context with themes), live Pounce triggers (matched to an account or not), and
+  the people who wrote in and went quiet (previously contacted, no live opportunity). Each item carries its source,
+  its published and observed dates, a truth label (historical observation, verified, unverified, contradicted),
+  the account when known, and the decisions it takes.
+- **I02 decide** one route and one page for Pursue, Explore, Save, Skip, Dismiss, More over signals, triggers and
+  people, reusing the signal feedback fields and one append-only decision row for people and triggers; signed links
+  from the briefing (`op: decide`) and buttons on Work; a skip hides for 30 days, a dismiss for good, both reversible
+  on the Signals page.
+- **I03 develop the angle** an agent task `develop_angle` queued by Pursue: why this could matter to YardFlow, the
+  accounts and buyer roles it points at (named people at a known account), two conversation starters, the dated
+  source line; checked (cited only, no product claims, no money, no em dash, yards plural); the result shown on the
+  item and the account. Pursue also queues the existing evidence research when the item has a source and an account,
+  and auto-prepare no longer skips a fact for its age (the date rides in the observation).
+- **I04 composition** the briefing and Work: Intelligence worth a look, Prospects to reengage, Ready to send,
+  Follow-ups owed, Deals in one compact line; `TIER_RANK` puts new conversations and prospect follow-ups above
+  stalled-deal hygiene; a reminder and a follow-up for the same return are one item.
+- **I05** the ledger, `CLAUDE.md`, one independent review, the demonstration (three examples on production: an older
+  signal, an insight with no account, a quiet prospect; Pursue on each), the START/REVISE/APPROVE verification with
+  Casey's reply.
+
+#### Receipts
+<!-- verified:2026-10-08 -->
+
 ## 12. Migration, backfill and rollback
 
 Order of commits inside Sprint 1 and 3: schema + SQL first (no reader), then pure core, then importers (Top100 before PIC before modex legacy), then runtime pin, then services, then queue actions under the flag, then `GAP_OS_ENABLED=true` in Vercel after `verify-triggers.ts` passes against prod (env is snapshot at deploy; redeploy after setting). Before the prod `db push`, preview it with `prisma migrate diff --from-url <prod> --to-schema-datamodel prisma/schema.prisma --script` and confirm the script is additive only; also confirm the prod role can `CREATE FUNCTION` (not yet verified). Rollback: the flag off restores byte-identical behavior instantly; full removal is the rollback SQL plus reverting the runtime, service and queue-action commits; `sequences` is never modified; the only two pre-existing tables GAP OS's schema touches at all are `draft_queue_items` (one nullable `sequence_version_id` stamp, S1-T2) and `inbound_messages` (`source String @default("gmail")` and `hubspot_engagement_id String?`, S2-T1, needed so the reply cron and the HubSpot poller can tell a Gmail-sourced row from a HubSpot-engagement-sourced one and attribute the engagement id idempotently) — both additive-only, both confirmed by the production preflight below; the lane and PIC files are read, never written.
