@@ -2493,6 +2493,7 @@ targets are kept (Casey asked for daily activity counts against a target) but af
 - X10 b2610288 `execution/copy-revision.ts`, the `loadActionPack` binding (copy-revision.test.ts 3)
 - X09 0b379c2e `agents/revise-message.ts`, REVISE queues and the drain runs with `after()` (revise-message.test.ts 5)
 - X11 1b430569 `agents/approve-request.ts`, APPROVE wired (approve-request.test.ts 4)
+- X12 DONE 2026-10-08 on the scratch harness, provider boundary SIMULATED (the sink, the stub; the model call real): all twelve steps of section 17 with their receipts in `docs/gap/execution-engine-demo-latest.md`. The walk found and fixed, each its own commit: 7992ae81 (a provider answering no thread id), 626b4a17 (approving a story forgets the stale Work summary), bde214a3 (a ready card's decision read off the NEXT UP candidate), 2cb74376 (a refused APPROVE never consumes the command), d3de26ff (the revise prompt states the subject form). Not proven: Gmail itself, the inbox listing, DMARC on real mail; the real-Gmail variant (a draft in Casey's own mailbox) waits for his go.
 - Production flags for the new crons stay OFF until Casey sets the seller settings (`set-seller-settings.ts --remote --apply`, or the settings page X13) and GAP_ACTION_SECRET in Vercel; the legacy `daily-digest` keeps running until Casey says stop.
 
 #### Demonstration acceptance (section 17)
