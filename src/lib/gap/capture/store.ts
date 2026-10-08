@@ -228,6 +228,12 @@ export async function createCapture(
 }
 
 /** R60: the capture already made from this reply, when there is one (the oldest: the first is the record). */
+/** R63-A S3: the one capture a reply already has, or null (Capture opens it at once instead of a fresh form). */
+export async function loadReplyCapture(prisma: PrismaLike, replyId: string): Promise<CaptureView | null> {
+  const id = await replyCaptureId(prisma, replyId);
+  return id ? loadCapture(prisma, id) : null;
+}
+
 async function replyCaptureId(prisma: PrismaLike, replyId: string): Promise<string | null> {
   const rows: Array<{ subject_id: string; payload: Record<string, unknown> | null }> = await prisma.gapAuditEvent.findMany({
     where: { kind: CAPTURE_NOTE, subject_type: CAPTURE_SUBJECT, payload: { path: ['source', 'id'], equals: replyId } },

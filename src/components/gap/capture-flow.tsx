@@ -580,6 +580,7 @@ function CaptureFlowBody({
   initialText = null,
   source = null,
   dictate = false,
+  initialExisting = false,
 }: {
   initial?: CaptureView | null;
   initialAccount?: string | null;
@@ -596,6 +597,8 @@ function CaptureFlowBody({
   /** R44: what opened Capture (a Work card, a reply, an obligation, the account page). */
   source?: { kind: string; id: string } | null;
   /** UX-12: transcription is on for this deployment (off until the spend is approved). */ dictate?: boolean;
+  /** R63-A S3: `initial` is the capture a reply already has (said at once, never after a second Save). */
+  initialExisting?: boolean;
   /** R63-B S4: says a save, a refusal or a record in the flow's live region. */
   announce: (text: string) => void;
 }) {
@@ -612,7 +615,7 @@ function CaptureFlowBody({
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   // R60: the reply already had its capture; the review below is that one note.
-  const [existing, setExisting] = useState(false);
+  const [existing, setExisting] = useState(initialExisting);
   const acctCtx = useAccountContext(account);
 
   useEffect(() => {

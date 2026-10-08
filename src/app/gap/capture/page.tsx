@@ -13,7 +13,7 @@ import { auth } from '@/lib/auth';
 import { loginHref } from '@/lib/auth-return';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
-import { CAPTURE_CONTEXTS, RAW_TEXT_MAX, listRecentCaptures } from '@/lib/gap/capture/store';
+import { CAPTURE_CONTEXTS, RAW_TEXT_MAX, listRecentCaptures, loadReplyCapture } from '@/lib/gap/capture/store';
 import { loadReplyForCapture } from '@/lib/gap/replies/list';
 import { GapSubnav } from '@/components/gap/gap-subnav';
 import { CaptureFlow } from '@/components/gap/capture-flow';
@@ -41,6 +41,9 @@ export default async function CapturePage({ searchParams }: { searchParams?: Pro
   // R63-B N11: a link that names a reply GAP does not hold here opens a plain note (never "Opened from a reply").
   const replyMissing = source?.kind === 'reply' && !replyHere;
   const noteSource = replyMissing ? null : source;
+  // R63-A S3: a reply that already has its capture opens it at once (never a fresh form that says so only after Save).
+  const existing = !replyMissing && source?.kind === 'reply' ? await loadReplyCapture(prisma, source.id).catch(() => null) : null;
+  const existingHere = existing && existing.accountName === initialAccount ? existing : null;
   const personId = /^\d{1,9}$/.test(q.person ?? '') ? Number(q.person) : (replyHere?.item.personaId ?? null);
   const person = initialAccount && personId ? await prisma.persona.findUnique({ where: { id: personId }, select: { id: true, name: true, account_name: true } }).catch(() => null) : null;
   const initialPersona = person && person.account_name === initialAccount ? { id: person.id, name: person.name ?? `person ${person.id}` } : null;
@@ -62,7 +65,7 @@ export default async function CapturePage({ searchParams }: { searchParams?: Pro
           The reply this link names is not on file for {initialAccount}. This note is not tied to a reply.
         </p>
       ) : null}
-      <CaptureFlow initialAccount={initialAccount} initialPersona={initialPersona} initialDeal={initialDeal} initialDealName={initialDealName} initialContext={initialContext} initialText={initialText} source={noteSource} dictate={transcriptionProvider() !== 'disabled'} />
+      <CaptureFlow initial={existingHere} initialExisting={!!existingHere} initialAccount={initialAccount} initialPersona={initialPersona} initialDeal={initialDeal} initialDealName={initialDealName} initialContext={initialContext} initialText={initialText} source={noteSource} dictate={transcriptionProvider() !== 'disabled'} />
       {recent.length ? (
         <section className="space-y-2" data-testid="capture-recent">
           <h2 className="text-sm font-semibold">Recent notes</h2>
