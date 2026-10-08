@@ -79,6 +79,7 @@ import { loadRecordedReplyIds, withoutRecordedReplies } from '@/lib/gap/work/rec
 import { resolveAccountOpportunity } from '@/lib/gap/opportunity/active-opportunity';
 import { accountsToCheck, loadOpportunityHolds, OPPORTUNITY_HOLD_TIMEOUT_MS } from '@/lib/gap/work/opportunity-holds';
 import { loadAccountConversations } from '@/lib/gap/motion/load';
+import { loadAnswersOwed } from '@/lib/gap/work/recorded-replies';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'GAP' };
@@ -426,7 +427,7 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
   // R41: the obligations (after the bounded follow-up sweep), the next day's meetings and the seller's priorities are
   // read on every render, never cached with the lanes, so a write shows on the next load.
   // R60 capture once: which remembered replies were recorded since the read (one live read, in this same wave).
-  const [summariesRead, outcomes, commitments, meetingRowsRaw, recordedReplies] = await Promise.all([
+  const [summariesRead, outcomes, commitments, meetingRowsRaw, recordedReplies, answersOwed] = await Promise.all([
     // R63-A B3: the preview starts from what the workspace says NOW (a summary read at tomorrow's time aged out and the
     // preview fell back to cards that knew nothing of a reply, a do not contact or a hold).
     loadPursuitSummaries(prisma, data.workAccounts, realNow),
@@ -436,8 +437,11 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
     // R51: every meeting row in the window, canceled ones included (Work says so and stops asking to prepare them).
     lane ? Promise.resolve([]) : loadMeetingRows(prisma, now).catch(() => []),
     loadRecordedReplyIds(prisma, data.workInput.replies.map((r) => r.id ?? '')).catch(() => new Set<string>()),
+    // R63-A S4: the recorded replies still owed an answer (never forgotten the moment they are recorded).
+    lane ? Promise.resolve([]) : loadAnswersOwed(prisma, realNow).catch(() => []),
   ]);
-  const live = withoutRecordedReplies(data.workInput.replies, summariesRead, recordedReplies);
+  const liveRead = withoutRecordedReplies(data.workInput.replies, summariesRead, recordedReplies);
+  const live = { ...liveRead, replies: [...liveRead.replies, ...answersOwed.filter((a) => !liveRead.replies.some((r) => r.id === a.id))] };
   const summaries = live.summaries ?? summariesRead;
   // Batch item 8: an untagged meeting belongs to the deal whose contacts it names (the brief's own rule), so its
   // preparation and its rebooking never read another deal's work.

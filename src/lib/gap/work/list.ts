@@ -133,6 +133,8 @@ export interface WorkCard {
   capture?: { href: string; label: string } | null;
   /** R55: stalled-deal suggestions on an in-deal card (overdue obligations, no recent activity, a passed close date). */
   stalled?: string[];
+  /** R63-A S4: a recorded reply whose answer is owed (its action is the prepared answer, never Capture again). */
+  answerOwed?: boolean;
 }
 
 export interface WorkInput {
@@ -140,7 +142,7 @@ export interface WorkInput {
   /** Every NEXT UP candidate (all lanes), from buildNextUpCandidates. */
   candidates: readonly NextCandidate[];
   /** Undispositioned replies, the raw rows (classified here; twins already collapsed by the reply list). */
-  replies: ReadonlyArray<{ accountName: string; contactEmail: string; subject: string | null; snippet: string; receivedAt: string; id?: string; threadId?: string | null; fromName?: string | null; personaId?: number | null; hubspotContactId?: string | null }>;
+  replies: ReadonlyArray<{ accountName: string; contactEmail: string; subject: string | null; snippet: string; receivedAt: string; id?: string; threadId?: string | null; fromName?: string | null; personaId?: number | null; hubspotContactId?: string | null; /** R63-A S4: what they said is recorded; the answer is still owed. */ recorded?: boolean }>;
   /** R42: the GAP mailbox, for the thread link on a reply card. */
   mailbox?: string | null;
   /** The account motions the cockpit read (primary and next per account). */
@@ -357,6 +359,17 @@ export function workDay(i: WorkInput): WorkDay {
     if (rank === null) continue; // an automatic reply is not work
     const kind: WorkStateKind = c.kind === 'human' ? 'replied' : c.kind === 'opt_out' ? 'opted_out' : 'bounced';
     const quote = (r.subject ?? r.snippet).replace(/\s+/g, ' ').trim().slice(0, 90);
+    // R63-A S4: a reply recorded through Capture still owes its answer: "Answer <them>", the prepared answer on the card.
+    if (r.recorded && c.kind === 'human') {
+      const who = r.fromName?.trim() || r.contactEmail;
+      const prep = prepareReply({ id: r.id ?? `${r.contactEmail}:${r.receivedAt}`, from: r.contactEmail, fromName: r.fromName ?? null, subject: r.subject, snippet: r.snippet, receivedAt: r.receivedAt, threadId: r.threadId ?? null, accountName: r.accountName }, { mailbox: i.mailbox ?? null, now: i.now });
+      offerReply({
+        rank,
+        sortKey: [at || Number.MAX_SAFE_INTEGER],
+        card: { answerOwed: true, accountName: r.accountName, lane: 'replies', stateKind: 'replied', state: `Answer ${who}`, why: `${who} wrote ${day(r.receivedAt)}: "${quote}". What they said is recorded; the answer is prepared and nothing goes out until you send or copy it.`, person: { name: who, title: null }, next: { label: 'Prepare the answer', href: `${accountHref(r.accountName)}#reply-answer` }, blocker: null, reply: { ...prep, label: 'Recorded; answer them', record: null } },
+      });
+      continue;
+    }
     const humanNext = c.human === 'referral' ? 'Record who they named' : c.human === 'objection' ? 'Record the objection' : 'Read the reply and record what they said';
     offerReply({
       rank,
@@ -690,7 +703,7 @@ export function workDay(i: WorkInput): WorkDay {
     // R50: the deal the card's work belongs to (its top obligation's deal, else the account's only open deal), by its
     // HubSpot id so the note's words and obligations bind to that deal; the name rides along for the label.
     const deals = dealAccounts.get(card.accountName)?.deals ?? [];
-    const isReply = !!card.reply && (card.stateKind === 'replied' || card.stateKind === 'opted_out');
+    const isReply = !!card.reply && !card.answerOwed && (card.stateKind === 'replied' || card.stateKind === 'opted_out');
     // Batch item 8: a reply's words bind to the replier's OWN single deal (else account-level), never to the deal of an
     // obligation that happens to top the card: Ann on the pilot is never logged against Ben's Columbus deal.
     const replier = isReply ? replyContact.get(`${card.accountName}|${card.reply!.from.toLowerCase()}`) ?? null : null;
@@ -701,7 +714,7 @@ export function workDay(i: WorkInput): WorkDay {
       q.set('deal', deal.id);
       if (deal.name) q.set('dealName', deal.name);
     } else if (deal?.name) q.set('deal', deal.name);
-    if (card.reply && (card.stateKind === 'replied' || card.stateKind === 'opted_out')) {
+    if (isReply && card.reply) {
       const pid = replyPersona.get(`${card.accountName}|${card.reply.from.toLowerCase()}`);
       if (pid) q.set('person', String(pid));
       q.set('context', 'email');
@@ -727,7 +740,7 @@ export function workDay(i: WorkInput): WorkDay {
     const capture = captureFor(r.card, list);
     // R60, capture once: a reply card offers ONE entry into Capture, which carries the reply's meaning and the buyer's
     // words in one review; the card's next move and its prepared reply point there, and no second record link shows.
-    const replyCard = !!r.card.reply && (r.card.stateKind === 'replied' || r.card.stateKind === 'opted_out');
+    const replyCard = !!r.card.reply && !r.card.answerOwed && (r.card.stateKind === 'replied' || r.card.stateKind === 'opted_out');
     return {
       ...r.card,
       ...(replyCard ? { next: { label: r.card.stateKind === 'opted_out' ? 'Record the opt-out' : capture.label, href: capture.href }, reply: { ...r.card.reply!, record: null } } : {}),

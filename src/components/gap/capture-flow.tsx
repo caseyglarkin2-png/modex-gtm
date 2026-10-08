@@ -94,12 +94,20 @@ const REASON_TEXT: Record<string, string> = {
  * BID only with its exact words and its speaker; an obligation becomes a commitment). The lines that are never buyer
  * words (a pasted summary, your own read) are listed with why, kept in the note, never proposed.
  */
+/**
+ * R63-A S4: recorded is not answered ("The reply is answered on the account." showed though nothing was sent): the answer
+ * waits on the account, prepared, until it is sent or copied.
+ */
+const RECORDED_ANSWER_LINE = 'Your answer to them waits on the account, prepared; nothing goes out until you send or copy it.';
+/** What follows a recorded meaning: no reply goes back to a stop, a machine or nothing to act on; anything else is owed. */
+const afterRecorded = (cls: string | null) => (cls === 'do_not_contact' || cls === 'bounce' || cls === 'out_of_office' || cls === 'no_signal' ? 'No reply goes back.' : RECORDED_ANSWER_LINE);
+
 /** R63-B S4: what a reply's recorded meaning says, the same words the review shows. */
 function replyDecisionLine(c: CaptureView): string | null {
   const rd = c.reply?.decision;
   if (!rd) return null;
   if (rd.kind === 'rejected') return 'Set aside. The reply still waits on the account.';
-  return rd.before ? 'Already recorded for this reply. Nothing is recorded twice.' : `Recorded: ${REPLY_KIND_WORDS[rd.responseClass as ReplyKindClass] ?? 'what it means'}. The reply is answered on the account.`;
+  return rd.before ? 'Already recorded for this reply. Nothing is recorded twice.' : `Recorded: ${REPLY_KIND_WORDS[rd.responseClass as ReplyKindClass] ?? 'what it means'}. ${afterRecorded(rd.responseClass)}`;
 }
 
 function NoteReview({ capture, onChange, announce = () => {} }: { capture: CaptureView; onChange: (c: CaptureView) => void; announce?: (text: string) => void }) {
@@ -223,7 +231,7 @@ function NoteReview({ capture, onChange, announce = () => {} }: { capture: Captu
         <article className="space-y-2 rounded-md border border-[var(--border)] p-3" data-testid="capture-reply-kind" data-state={reply.decision?.kind ?? (replyKeep ? 'keep' : 'reject')}>
           <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">What {reply.from}&apos;s reply means</p>
           {reply.decision?.kind === 'confirmed' ? (
-            decided(stale.has(REPLY_KIND_ITEM) ? `${STALE_LINE} On record: ${REPLY_KIND_WORDS[reply.decision.responseClass as ReplyKindClass] ?? 'what it means'}.` : reply.decision.before ? 'Already recorded for this reply. Nothing is recorded twice.' : `Recorded: ${REPLY_KIND_WORDS[reply.decision.responseClass as ReplyKindClass] ?? 'what it means'}. The reply is answered on the account.`, stale.has(REPLY_KIND_ITEM) ? 'text-amber-700 dark:text-amber-400' : 'text-emerald-700 dark:text-emerald-400')
+            decided(stale.has(REPLY_KIND_ITEM) ? `${STALE_LINE} On record: ${REPLY_KIND_WORDS[reply.decision.responseClass as ReplyKindClass] ?? 'what it means'}.` : reply.decision.before ? 'Already recorded for this reply. Nothing is recorded twice.' : `Recorded: ${REPLY_KIND_WORDS[reply.decision.responseClass as ReplyKindClass] ?? 'what it means'}. ${afterRecorded(reply.decision.responseClass)}`, stale.has(REPLY_KIND_ITEM) ? 'text-amber-700 dark:text-amber-400' : 'text-emerald-700 dark:text-emerald-400')
           ) : reply.decision?.kind === 'rejected' ? (
             decided('Set aside. The reply still waits on the account.', 'text-[var(--muted-foreground)]')
           ) : (

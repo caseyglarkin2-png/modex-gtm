@@ -54,6 +54,7 @@ import { projectAnchor, storyBesideAnchor } from '@/lib/gap/story/anchor';
 import { remitCaution } from '@/lib/gap/story/anchor-text';
 import { DoneNext } from '@/components/gap/done-next';
 import { ReplyPrepPanel } from '@/components/gap/reply-prep';
+import { answerable, loadAnsweredReplyIds } from '@/lib/gap/work/recorded-replies';
 import { AccountObligations } from '@/components/gap/account-obligations';
 import { prepareReply } from '@/lib/gap/replies/prepare';
 import { loadCommitments, withPhases } from '@/lib/gap/work/commitments';
@@ -294,9 +295,14 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
     // R42: the newest reply nobody has recorded, with its prepared notes (never copy, never a send).
     const mailboxId = process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() || null;
     const replyItem = pursuit?.replyItems.find((r) => !r.dispositionId) ?? null;
+    // R63-A S4: a reply recorded through Capture and not yet answered (sent or copied) keeps its prepared answer here.
+    const recordedItems = (pursuit?.replyItems ?? []).filter((r) => !!r.dispositionId && answerable({ snippet: r.snippet, subject: r.subject, from: r.contactEmail }));
+    const answeredIds = recordedItems.length ? await loadAnsweredReplyIds(prisma, recordedItems.map((r) => r.id)).catch(() => new Set<string>()) : new Set<string>();
+    const owedItem = replyItem ? null : recordedItems.filter((r) => !answeredIds.has(r.id)).sort((a, b) => String(b.receivedAt).localeCompare(String(a.receivedAt)))[0] ?? null;
     // R60: the account's waiting reply (or opt-out) is recorded on this page.
     const recordReply = !!replyItem || pursuit?.state.state === 'replied' || pursuit?.state.state === 'opted_out';
-    const replyPrep = replyItem ? prepareReply({ id: replyItem.id, from: replyItem.contactEmail, fromName: replyItem.fromName ?? null, subject: replyItem.subject, snippet: replyItem.snippet, receivedAt: replyItem.receivedAt, threadId: replyItem.threadId ?? null, accountName: brief.accountName }, { mailbox: mailboxId, now }) : null;
+    const prepItem = replyItem ?? owedItem;
+    const replyPrep = prepItem ? prepareReply({ id: prepItem.id, from: prepItem.contactEmail, fromName: prepItem.fromName ?? null, subject: prepItem.subject, snippet: prepItem.snippet, receivedAt: prepItem.receivedAt, threadId: prepItem.threadId ?? null, accountName: brief.accountName }, { mailbox: mailboxId, now }) : null;
     // R50: each obligation says which opportunity it belongs to (a deal, through its person's deal, or account-level).
     const nowDeals = (inputs.opportunity?.deals ?? []).filter((d): d is typeof d & { id: string } => !!d.id).map((d) => ({ id: d.id, name: d.name, contactIds: d.contactIds ?? [] }));
     // R60, capture once on a reply: each waiting reply opens Capture on itself (their words, the person who wrote it,
@@ -431,7 +437,17 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
             <>
               {/* On this page the record control is the section below (an anchor keeps the Work position). */}
               {/* R60: the prepared reply reads the message; its one record control is the section below (Capture). */}
-              {replyPrep ? <ReplyPrepPanel prep={{ ...replyPrep, record: null }} /> : null}
+              {replyPrep && owedItem ? (
+                // R63-A S4: what they said is recorded; their answer is owed, prepared here until it is sent or copied.
+                <section id="reply-answer" className="scroll-mt-16 space-y-1" aria-labelledby="reply-answer-heading" data-testid="reply-answer-owed">
+                  <h2 id="reply-answer-heading" className="text-sm font-semibold">Answer {owedItem.fromName?.trim() || owedItem.contactEmail}</h2>
+                  <ReplyPrepPanel prep={{ ...replyPrep, label: 'Recorded; answer them', record: null }} />
+                </section>
+              ) : replyPrep ? (
+                <div id="reply-answer" className="scroll-mt-16">
+                  <ReplyPrepPanel prep={{ ...replyPrep, record: null }} />
+                </div>
+              ) : null}
               {recordReply ? (
                 // R60: the reply is recorded here, on its own account (never the list of every account's replies).
                 <section id={RECORD_REPLY_ANCHOR} className="scroll-mt-16 space-y-2 rounded-md border border-[var(--border)] p-3" aria-labelledby="record-reply-heading" data-testid="record-reply">

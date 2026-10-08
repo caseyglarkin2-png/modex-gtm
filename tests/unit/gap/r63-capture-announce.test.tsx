@@ -93,7 +93,8 @@ describe('R63-B S4: Capture says every save, refusal and record in one polite li
     const item = screen.getByTestId('capture-reply-kind');
     fireEvent.change(within(item).getByTestId('capture-reply-class'), { target: { value: 'do_not_contact' } });
     fireEvent.click(screen.getByTestId('capture-batch-submit'));
-    await waitFor(() => expect(live().textContent).toBe('Recorded: Do not contact them again. The reply is answered on the account.'));
+    // R63-A S4: recorded is not answered; to an opt-out no reply goes back.
+    await waitFor(() => expect(live().textContent).toBe('Recorded: Do not contact them again. No reply goes back.'));
   });
 
   it('R63-B N2: a stale tab\'s Record, refused "already_decided", says so and never shows the other press\'s success', async () => {
