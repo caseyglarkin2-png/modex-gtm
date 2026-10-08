@@ -81,7 +81,10 @@ export function toSecondPerson(text: string, to: string | null): string {
   return text.replace(new RegExp(`\\b(?:${names.join('|')})(['\u2019]s)?\\b`, 'g'), (_m, s: string | undefined) => (s ? 'your' : 'you'));
 }
 const money = (n: number) => `$${Math.round(n).toLocaleString('en-US')}`;
-const MEASURE_TYPES = new Set(['metric', 'impact', 'future_state', 'constraint']);
+// R63-A S17: a constraint (a requirement the pilot must respect) is its own BID kind, never a success measure: the
+// pilot draft to Ann listed "Any pilot has to run on our existing gate cameras." as one.
+const MEASURE_TYPES = new Set(['metric', 'impact', 'future_state']);
+const CONSTRAINT_TYPES = new Set(['constraint']);
 const STATEMENT_TYPES = new Set(['current_state', 'business_problem', 'root_cause', 'impact', 'metric', 'priority', 'future_state', 'constraint']);
 
 /** YardFlow's own proof, in the canon's words (measured, live, at Primo Brands): ours, never a forecast for them. */
@@ -195,8 +198,11 @@ export function prepareArtifacts(i: ArtifactInput): PreparedArtifact[] {
     crm,
   );
 
-  // PILOT SUCCESS CRITERIA: only their own measures.
+  // PILOT SUCCESS CRITERIA: only their own measures; their requirements are listed apart, as what the pilot respects.
   const measures = i.needs.filter((n) => MEASURE_TYPES.has(n.type));
+  const constraints = i.needs.filter((n) => CONSTRAINT_TYPES.has(n.type));
+  const respect = constraints.length ? ['', 'What the pilot has to respect, as you told us:', ...constraints.map((n) => `- "${n.quote}" (${n.who})`)] : [];
+  const requirementsNote = constraints.length ? `${constraints.length === 1 ? 'one requirement' : `${constraints.length} requirements`} it has to respect` : '';
   const pilot = i.plan.find((m) => m.step === 'pilot');
   const criteria = finish(
     {
@@ -204,13 +210,13 @@ export function prepareArtifacts(i: ArtifactInput): PreparedArtifact[] {
       title: 'Pilot success criteria',
       dealId: i.deal.id,
       why: measures.length
-        ? `The pilot is ${pilot?.state ?? 'proposed'} on ${dealName}; ${measures.length} of their own measure${measures.length === 1 ? '' : 's'} can define success: confirm them with ${lead ? first(lead.name) : 'them'}.`
-        : `The pilot is ${pilot?.state ?? 'proposed'} on ${dealName} and no success measure is confirmed: ask ${lead ? first(lead.name) : 'them'} what they would need to see.`,
+        ? `The pilot is ${pilot?.state ?? 'proposed'} on ${dealName}; ${measures.length === 1 ? 'one measure of their own' : `${measures.length} measures of their own`} can define success${requirementsNote ? `, with ${requirementsNote}` : ''}: confirm ${measures.length === 1 ? 'it' : 'them'} with ${lead ? first(lead.name) : 'them'}.`
+        : `The pilot is ${pilot?.state ?? 'proposed'} on ${dealName} and no success measure is confirmed${requirementsNote ? ` (${requirementsNote})` : ''}: ask ${lead ? first(lead.name) : 'them'} what they would need to see.`,
       to: lead?.name ?? null,
       text: measures.length
-        ? ['Pilot success, in your own measures (please correct any of them):', ...measures.map((n) => `- "${n.quote}" (${n.who})`), '', 'How we would check each one, and when, is for us to agree together before the pilot starts.'].join('\n')
-        : ['Pilot success criteria: none agreed yet.', '', 'What would you need to see at the end of a pilot to call it worth rolling out?'].join('\n'),
-      citations: measures.map(cite),
+        ? ['Pilot success, in your own measures (please correct any of them):', ...measures.map((n) => `- "${n.quote}" (${n.who})`), ...respect, '', 'How we would check each one, and when, is for us to agree together before the pilot starts.'].join('\n')
+        : ['Pilot success criteria: none agreed yet.', ...respect, '', 'What would you need to see at the end of a pilot to call it worth rolling out?'].join('\n'),
+      citations: [...measures, ...constraints].map(cite),
       gaps: measures.length ? [] : ['No success measure confirmed by the buyer: nothing is invented.'],
     },
     quotes,
