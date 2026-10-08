@@ -37,7 +37,7 @@ import type { PursuitSummary } from '../pursuit/summary';
 import type { PursuitStateKind } from '../pursuit/state';
 import { outcomeLine, type WorkOutcome } from './outcome-model';
 import { MOTION_UNLOCK_BUSINESS_DAYS } from '../motion/account-motion';
-import { buyerMoves, commitmentPhase, commitmentTier, KIND_TEXT, skippedAtClosureOf, type Commitment, type CommitmentKind, type SkippedAtClosure } from './commitment-model';
+import { buyerMoves, commitmentPhase, commitmentTier, KIND_TEXT, skippedAtClosureOf, type Commitment, type CommitmentKind, type SkippedAtClosure, TERMINAL_STATUSES } from './commitment-model';
 import { dayLabel, nyDay } from './dates';
 import { stalledSignals } from '../deals/stalled';
 import { closedDealLabel, type ClosedDealRef } from '../deals/scope';
@@ -47,7 +47,12 @@ import type { CockpitLane } from '@/components/gap/gap-cockpit';
 
 export type WorkStateKind = 'replied' | 'opted_out' | 'bounced' | 'follow_up' | 'ready' | 'decide' | 'research' | 'in_deal' | 'unknown_deal' | 'held' | 'committed' | 'meeting';
 export type WorkTier = 'commitment' | 'reply' | 'meeting' | 'deal' | 'follow_up' | 'ready' | 'review' | 'research' | 'admin' | 'later' | 'held';
-export const TIER_RANK: Record<WorkTier, number> = { commitment: 0, reply: 1, meeting: 2, deal: 3, follow_up: 4, ready: 5, review: 6, research: 7, admin: 7.5, later: 8, held: 9 };
+/**
+ * I04 (Casey's course correction, 2026-10-08): the day is for new conversations. A buyer obligation, a reply and a
+ * meeting still lead (they are owed); then a prospect follow-up and a prepared first touch; stalled-deal hygiene (a
+ * passed close date, no activity) ranks after them, and the deal workspace holds the detail.
+ */
+export const TIER_RANK: Record<WorkTier, number> = { commitment: 0, reply: 1, meeting: 2, follow_up: 3, ready: 4, deal: 5, review: 6, research: 7, admin: 7.5, later: 8, held: 9 };
 /**
  * Batch item 8: the tiers that do not need the seller today (research, a hold, the seller's own set-aside). Their cards
  * stay listed, after every card that needs the seller and under their own heading, and never count in "needs you".
@@ -657,6 +662,8 @@ export function workDay(i: WorkInput): WorkDay {
     // promotes a held account either; every other kind ranks.
     const tier: WorkTier = c.source.kind === 'snooze' || plan?.action === 'held' ? 'later' : commitmentTier(c);
     const list = obligations.get(c.accountName) ?? [];
+    // I04: a reminder to follow up when someone is back and the follow-up waiting on the same person are one item.
+    if (c.kind === 'reminder' && c.person?.email && (i.commitments ?? []).some((o) => o.kind === 'follow_up' && o.commitmentId !== c.commitmentId && !TERMINAL_STATUSES.includes(o.status) && o.accountName === c.accountName && o.person?.email === c.person?.email && o.title.replace(/^Reminder: /, '') === c.title.replace(/^Reminder: /, ''))) continue;
     list.push({ key: c.commitmentId, commitmentId: c.commitmentId, kind: c.kind, tier, title: c.title, line: plan?.line ?? p.line, dueAt: c.dueAt, dueDay: p.dueDay, person: c.person ? { name: c.person.name, email: c.person.email } : null, basis: c.basis, href: action.href, label: action.label, canComplete: true, scope: dealLabel(c.accountName, c.dealId), proofNeeded: c.detail?.proofNeeded ?? null, ...(c.detail?.skippedAtClosure?.length ? { skippedAtClosure: skippedAtClosureOf(c, i.commitments ?? []) } : {}) });
     obligations.set(c.accountName, list);
   }

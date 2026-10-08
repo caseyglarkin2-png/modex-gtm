@@ -20,7 +20,9 @@
 import { randomBytes } from 'node:crypto';
 import type { GmailSender, GmailSendPayload } from '@/lib/email/gmail-sender';
 import { signActionToken } from './action-token';
-import { renderBriefing } from './briefing';
+import { renderBriefing, type BriefingIntel } from './briefing';
+import { loadIntelligence } from './intel';
+import { loadAngles } from '../agents/develop-angle';
 import { nyDay, nyDayAt } from './dates';
 import { planDay, type DayPlan, type PlanItem, type PlanLoad } from './plan';
 import type { SellerSettings } from './settings';
@@ -49,6 +51,8 @@ export interface BriefingSendInput {
 
 export interface BriefingSendDeps {
   send: (payload: GmailSendPayload) => Promise<{ provider: 'gmail'; id: string | null; threadId: string | null }>;
+  /** I04: the intelligence reader (tests inject one). */
+  intel?: (prisma: PrismaLike, now: Date) => Promise<BriefingIntel | null>;
   listSent: (recipient: string, afterEpoch: number, beforeEpoch: number) => Promise<Array<{ id: string; threadId: string | null; internalDate: Date; to: string; subject: string }>>;
 }
 
@@ -72,7 +76,7 @@ export const briefingSubjectPrefix = (day: string) => `GAP today, ${dayLabelOf(d
 
 function links(input: BriefingSendInput, day: string) {
   const base = input.baseUrl.replace(/\/$/, '');
-  const sign = (op: 'start' | 'open', item?: string) => (input.actionSecret ? signActionToken({ op, day, ...(item ? { item } : {}) }, { secret: input.actionSecret, now: input.now }) : null);
+  const sign = (op: 'start' | 'open' | 'decide', item?: string) => (input.actionSecret ? signActionToken({ op, day, ...(item ? { item } : {}) }, { secret: input.actionSecret, now: input.now }) : null);
   const start = sign('start');
   return {
     start: start ? `${base}/gap/start?t=${encodeURIComponent(start)}` : `${base}/gap/`,
@@ -81,7 +85,20 @@ function links(input: BriefingSendInput, day: string) {
       const t = sign('open', it.token);
       return t ? `${base}/gap/item?t=${encodeURIComponent(t)}` : `${base}${it.href}`;
     },
+    // I04: a decision from the inbox, signed; unsigned links are never minted (the item then points at Work).
+    decide: (key: string, decision: string) => {
+      const t = sign('decide', `${key}|${decision}`);
+      return t ? `${base}/gap/decide?t=${encodeURIComponent(t)}` : null;
+    },
   };
+}
+
+/** I04: the day's intelligence with the prepared angles, for the briefing. */
+export async function defaultIntel(prisma: PrismaLike, now: Date): Promise<BriefingIntel> {
+  const x = await loadIntelligence(prisma, { now });
+  const keys = [...x.signals, ...x.triggers, ...x.people].map((i) => i.key);
+  const angles = await loadAngles(prisma, { keys, now });
+  return { ...x, angles: Object.fromEntries([...angles.entries()].map(([k, a]) => [k, { whyItMatters: a.whyItMatters, starters: a.starters, peopleNamed: a.peopleNamed.map((p) => ({ name: p.name, title: p.title })), proposedAction: a.proposedAction }])) };
 }
 
 async function audit(prisma: PrismaLike, kind: string, actor: string, day: string, payload: Record<string, unknown>) {
@@ -120,7 +137,9 @@ export async function sendMorningBriefing(prisma: PrismaLike, input: BriefingSen
   try {
     const plan: DayPlan = await planDay(prisma, { now: input.now, load: input.load }, actor);
     const dayToken = randomBytes(12).toString('hex');
-    const rendered = renderBriefing({ plan, dayToken, links: links(input, day), commandsEnabled: input.commandsEnabled, legacyDigest: input.legacyDigest }, input.now);
+    // I04: the intelligence, read soft (a failure never withholds the briefing).
+    const intel: BriefingIntel | null = await (deps.intel ?? defaultIntel)(prisma, input.now).catch(() => null);
+    const rendered = renderBriefing({ plan, dayToken, links: links(input, day), commandsEnabled: input.commandsEnabled, legacyDigest: input.legacyDigest, intel }, input.now);
     const res = await deps.send({
       to,
       subject: rendered.subject,
