@@ -12,7 +12,7 @@
  * that email (X11) approves this revision and drafts it. `reviseRequest` is the REVISE command's effect: queue one
  * task (superseding a queued one) and tell the seller.
  */
-import { generateTextWithMetadata } from '@/lib/ai/client';
+import { gapGenerate } from '../ai/spend';
 import type { GmailSender, GmailSendPayload } from '@/lib/email/gmail-sender';
 import { compile, type CompileResult } from '../compiler/compile';
 import { evidenceRefsFromSignals, type SignalRow } from '../compiler/evidence-from-signals';
@@ -133,7 +133,7 @@ export async function reviseMessage(task: ClaimedTask, ctx: { prisma: PrismaLike
     observation: String(pack.hypothesis.observation ?? '').replace(/\s*\[S:[A-Za-z0-9_-]+\]/g, ''),
     problemHypothesis: String(pack.hypothesis.problem_hypothesis ?? ''),
   });
-  const answer = await (deps.generate ?? generateTextWithMetadata)(prompt, MAX_TOKENS);
+  const answer = await (deps.generate ?? ((p: string, m?: number) => gapGenerate(ctx.prisma, { prompt: p, maxTokens: m ?? MAX_TOKENS, tier: 'routine', task: { id: task.id, kind: task.kind, itemKey: task.itemKey }, now: ctx.now })))(prompt, MAX_TOKENS);
   const candidate = parseCandidate(answer.text);
   if (!candidate) return { ok: false, reason: 'could_not_satisfy', detail: 'the model returned something that is not a usable draft' };
 

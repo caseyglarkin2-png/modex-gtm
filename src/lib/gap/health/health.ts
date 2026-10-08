@@ -16,7 +16,7 @@ import { nyDay, nyDayAt } from '../work/dates';
  */
 
 export type HealthState = 'HEALTHY' | 'DEGRADED' | 'BLOCKED';
-export type HealthKey = 'mailbox' | 'hubspot' | 'suppression' | 'sender' | 'routing' | 'briefing' | 'agents';
+export type HealthKey = 'mailbox' | 'hubspot' | 'suppression' | 'sender' | 'routing' | 'briefing' | 'agents' | 'model';
 
 export interface HealthComponent {
   key: HealthKey;
@@ -43,6 +43,7 @@ export const HEALTH_REPAIR: Readonly<Record<HealthKey, { owner: string; retry: s
   routing: { owner: 'operator', retry: 'Recommendations refresh each weekday morning (the gap-routing schedule, GAP_ROUTING_CRON_ENABLED); to refresh now, open System at the foot of Work and press Run routing' },
   briefing: { owner: 'operator', retry: 'Check GAP_BRIEFING_ENABLED in Vercel and the briefing address on Settings; read the gap-briefing cron state and the briefing.failed rows for the day; run /api/cron/gap-briefing/ once with the cron secret (it also ticks every hour)' },
   agents: { owner: 'operator', retry: 'Check GAP_AGENT_TASKS_ENABLED in Vercel and the gap-agent-tasks cron state (every 5 minutes); a failed task keeps its error on its ledger row; reply REVISE again, or record the objection again, to queue a fresh task' },
+  model: { owner: 'Casey', retry: 'Spend is the ledger rows ai.model_call this month against GAP_AI_MONTHLY_CEILING_USD (default $25); a blocked route names the provider reason on the last task row: fix AI_GATEWAY_API_KEY or the model in Vercel and redeploy, top up AI Gateway credits only with Casey, or raise the ceiling only with Casey; then decide the item again' },
 };
 
 const repaired = (c: HealthComponent): HealthComponent => {
@@ -68,6 +69,8 @@ export interface HealthInputs {
   briefing?: { enabled: boolean; to: string | null; hourNy: number | null; lastSuccessAt: Date | null; consecutiveFailures: number; lastMessage: string | null; sentTodayAt: Date | null; failedToday: number };
   /** X20a: the agent tasks drain (cron gap-agent-tasks, every 5 minutes): REVISE, objections. */
   agents?: { enabled: boolean; lastSuccessAt: Date | null; consecutiveFailures: number; lastMessage: string | null; queued: number; oldestQueuedAt: Date | null; failedFinalToday: number };
+  /** A02: the GAP model route and its spend this month (src/lib/gap/ai/spend.ts). */
+  model?: { month: string; label: string; monthUsd: number; ceilingUsd: number; warnFraction: number; calls: number; failed: number; refused: number; inFlight: number; lastCall: { at: string; outcome: string; model: string | null; errorCategory: string | null } | null };
 }
 
 /** Mailbox intake runs every 10 minutes: one missed run is fine, three are degraded, three hours is blocked. */
@@ -167,8 +170,24 @@ function agents(i: HealthInputs['agents'], now: Date): HealthComponent {
   return { ...base, state: 'HEALTHY', label: `Agent tasks ${ago(age)}`, detail };
 }
 
+/** The provider reasons that do not get better by trying again: the route is blocked until someone changes it. */
+export const MODEL_PERMANENT = new Set(['billing', 'authentication', 'model_missing', 'configuration']);
+
+function model(i: HealthInputs['model']): HealthComponent {
+  const base = { key: 'model' as const, name: 'Model route and spend' };
+  if (!i) return { ...base, state: 'HEALTHY', label: 'Model spend not read', detail: 'The spend ledger was not read this time.' };
+  const usd = (n: number) => `$${n.toFixed(2)}`;
+  const pct = i.ceilingUsd > 0 ? Math.round((i.monthUsd / i.ceilingUsd) * 100) : 0;
+  const detail = `${usd(i.monthUsd)} of ${usd(i.ceilingUsd)} for ${i.label} (${pct}%): ${i.calls} call${i.calls === 1 ? '' : 's'}, ${i.failed} failed, ${i.refused} refused, ${i.inFlight} in flight${i.lastCall ? `; last call ${i.lastCall.outcome}${i.lastCall.model ? ` on ${i.lastCall.model}` : ''}${i.lastCall.errorCategory ? ` (${i.lastCall.errorCategory})` : ''} at ${i.lastCall.at}` : '; no call this month'}.`;
+  if (i.lastCall && i.lastCall.outcome === 'failed' && i.lastCall.errorCategory && MODEL_PERMANENT.has(i.lastCall.errorCategory)) return { ...base, state: 'BLOCKED', label: `No funded model route · the last call failed (${i.lastCall.errorCategory})`, detail };
+  if (i.monthUsd >= i.ceilingUsd) return { ...base, state: 'BLOCKED', label: `Model ceiling reached · ${usd(i.monthUsd)} of ${usd(i.ceilingUsd)} for ${i.label}`, detail };
+  if (i.monthUsd >= i.ceilingUsd * i.warnFraction) return { ...base, state: 'DEGRADED', label: `Model spend ${usd(i.monthUsd)} of ${usd(i.ceilingUsd)} for ${i.label} (${pct}%)`, detail };
+  if (i.lastCall && i.lastCall.outcome === 'refused') return { ...base, state: 'DEGRADED', label: `The last model call was refused (${i.lastCall.errorCategory ?? 'budget'})`, detail };
+  return { ...base, state: 'HEALTHY', label: `Model spend ${usd(i.monthUsd)} of ${usd(i.ceilingUsd)} for ${i.label}`, detail };
+}
+
 export function evaluateHealth(inputs: HealthInputs, now: Date): HealthReport {
-  const components = [mailbox(inputs.mailbox, now), hubspot(inputs.hubspot), suppression(inputs.suppression), sender(inputs.sender), routing(inputs.routing, now), briefing(inputs.briefing, now), agents(inputs.agents, now)].map(repaired);
+  const components = [mailbox(inputs.mailbox, now), hubspot(inputs.hubspot), suppression(inputs.suppression), sender(inputs.sender), routing(inputs.routing, now), briefing(inputs.briefing, now), agents(inputs.agents, now), model(inputs.model)].map(repaired);
   const overall = components.reduce<HealthState>((w, c) => (RANK[c.state] > RANK[w] ? c.state : w), 'HEALTHY');
   const routingC = components.find((c) => c.key === 'routing')!;
   const bad = components.filter((c) => c.state !== 'HEALTHY').sort((a, b) => RANK[b.state] - RANK[a.state]);

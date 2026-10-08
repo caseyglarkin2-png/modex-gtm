@@ -12,7 +12,7 @@ internal briefing and assignment mail to Casey is allowed; a routing run on a sc
 <!-- verified:2026-10-05 -->
 <!-- verified:2026-10-02 (V2) -->
 
-Production SHA: f374ec3f (PR #420, prospecting first I01-I05, over 0626d811 = PR #418 X14b, over cb6f47b4 = PR #417, over c5ae401d = PR #416, over 146fb342 = PR #415, over 6a9c3990 = PR #414, over 133aeee7 = PR #413; Vercel `dpl_7cJJkwhVNujPbsK3LcEk2bRtGX1J` READY 2026-10-08T23:00:56Z; rollback 0626d811 `dpl_7DUoXJRjWbf9EHdP5At8tkmsZekm`). Receipts: `docs/GAP_PROSPECTING_OS.md`, the SALES EXECUTION ENGINE section and its PROSPECTING FIRST subsection. Update this line when a change ships. <!-- verified:2026-10-08 -->
+Production SHA: 363e3b3e (PR #421, the AI classifier fix, over f374ec3f = PR #420 prospecting first I01-I05, over 0626d811 = PR #418, over cb6f47b4 = PR #417, over c5ae401d = PR #416, over 146fb342 = PR #415, over 6a9c3990 = PR #414, over 133aeee7 = PR #413; Vercel `dpl_A7H8ZDveiRzVYAt26whBHE5qc7hG` READY 2026-10-08T23:22:33Z; rollback f374ec3f `dpl_7cJJkwhVNujPbsK3LcEk2bRtGX1J`). Receipts: `docs/GAP_PROSPECTING_OS.md`, the SALES EXECUTION ENGINE section and its PROSPECTING FIRST subsection. Update this line when a change ships. <!-- verified:2026-10-08 -->
 <!-- verified:2026-10-08 -->
 
 ## The rule for future changes
@@ -431,7 +431,7 @@ opt-out, deal, restriction, family, outstanding draft, unknown opportunity truth
 a lone eligible person is GAP's preselection, never "chosen by you"; a newsletter subscriber or list member is never
 a relationship that leads an account; choosing writes only the existing append-only motion choice (a HubSpot-only
 person through the existing account-scoped import) and never sends, drafts, enrolls, writes HubSpot or spends Apollo.
-Production SHA: f374ec3f (PR #420, prospecting first I01-I05, over 0626d811 = PR #418 X14b, over cb6f47b4 = PR #417, over c5ae401d = PR #416, over 146fb342 = PR #415, over 6a9c3990 = PR #414, over 133aeee7 = PR #413; Vercel `dpl_7cJJkwhVNujPbsK3LcEk2bRtGX1J` READY 2026-10-08T23:00:56Z; rollback 0626d811 `dpl_7DUoXJRjWbf9EHdP5At8tkmsZekm`). Receipts: `docs/GAP_PROSPECTING_OS.md`, the SALES EXECUTION ENGINE section and its PROSPECTING FIRST subsection. Update this line when a change ships. <!-- verified:2026-10-08 -->
+Production SHA: 363e3b3e (PR #421, the AI classifier fix, over f374ec3f = PR #420 prospecting first I01-I05, over 0626d811 = PR #418, over cb6f47b4 = PR #417, over c5ae401d = PR #416, over 146fb342 = PR #415, over 6a9c3990 = PR #414, over 133aeee7 = PR #413; Vercel `dpl_A7H8ZDveiRzVYAt26whBHE5qc7hG` READY 2026-10-08T23:22:33Z; rollback f374ec3f `dpl_7cJJkwhVNujPbsK3LcEk2bRtGX1J`). Receipts: `docs/GAP_PROSPECTING_OS.md`, the SALES EXECUTION ENGINE section and its PROSPECTING FIRST subsection. Update this line when a change ships. <!-- verified:2026-10-08 -->
 
 **UX-04, the account workspace hierarchy (PR #402, merge 5c321ac6, 2026-10-06).** The account page reads as DECISION
 (the state line in its hold colour, the inbound line, NEXT with the one primary control, the People Stack with the

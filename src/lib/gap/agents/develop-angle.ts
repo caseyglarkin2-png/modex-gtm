@@ -9,7 +9,7 @@
  * is never presented as today). Checked like every GAP text: no em dash, "yards" plural, no product claim or money,
  * no person outside the roster offered; a model answer that breaks a rule ends `could_not_satisfy`, final.
  */
-import { generateTextWithMetadata } from '@/lib/ai/client';
+import { gapGenerate } from '../ai/spend';
 import { YARDFLOW_MESSAGING } from '@/lib/ai/yardflow-context';
 import { HEDGE_TOKENS } from '../taxonomy';
 import { listAgentTasks, type ClaimedTask, type HandlerResult } from './tasks';
@@ -156,7 +156,7 @@ export async function developAngle(task: ClaimedTask, ctx: { prisma: PrismaLike;
 
   const sourceLine = sourceLineFor({ source: str(input.source), url: str(input.url), publishedAt: str(input.publishedAt), observedAt: str(input.lastWroteAt) ?? str(input.observedAt) }, now);
   const prompt = buildAnglePrompt({ title, sourceLine, accountName, accountHint, categories, note: str(input.note), person, roster, theses, recent, candidateAccounts, decision: str(input.decision) ?? task.request });
-  const out = await (deps.generate ?? generateTextWithMetadata)(prompt, MAX_TOKENS);
+  const out = await (deps.generate ?? ((p: string, m?: number) => gapGenerate(ctx.prisma, { prompt: p, maxTokens: m ?? MAX_TOKENS, tier: task.input && (task.input as Record<string, unknown>).decision === 'more' ? 'strong' : 'routine', task: { id: task.id, kind: task.kind, itemKey: task.itemKey }, now: ctx.now })))(prompt, MAX_TOKENS);
   const angle = parseAngle(out.text);
   if (!angle) return { ok: false, reason: 'could_not_satisfy', detail: 'the model returned something that is not a usable angle' };
   const check = validateAngle(angle, new Set(roster.map((p) => p.id)));

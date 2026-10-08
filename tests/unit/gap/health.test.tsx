@@ -22,6 +22,8 @@ function healthy(): HealthInputs {
     // X20a: the briefing and agent-task crons (hour 7 New York; NOW is 11:00 New York; sent at 7:05).
     briefing: { enabled: true, to: 'casey@freightroll.com', hourNy: 7, lastSuccessAt: min(55), consecutiveFailures: 0, lastMessage: 'sent', sentTodayAt: min(235), failedToday: 0 },
     agents: { enabled: true, lastSuccessAt: min(3), consecutiveFailures: 0, lastMessage: 'ran 0', queued: 0, oldestQueuedAt: null, failedFinalToday: 0 },
+    // A02: the model route and its spend.
+    model: { month: '2026-09', label: 'September', monthUsd: 0.42, ceilingUsd: 25, warnFraction: 0.8, calls: 12, failed: 0, refused: 0, inFlight: 0, lastCall: { at: min(20).toISOString(), outcome: 'ok', model: 'google/gemini-2.5-flash-lite', errorCategory: null } },
   };
 }
 
@@ -72,7 +74,7 @@ describe('evaluateHealth', () => {
     i.sender = { configured: false, mailbox: null };
     const r = evaluateHealth(i, NOW);
     expect(r.overall).toBe('BLOCKED');
-    expect(r.components.filter((c) => c.state === 'HEALTHY').map((c) => c.key).sort()).toEqual(['agents', 'briefing', 'hubspot', 'mailbox', 'suppression']);
+    expect(r.components.filter((c) => c.state === 'HEALTHY').map((c) => c.key).sort()).toEqual(['agents', 'briefing', 'hubspot', 'mailbox', 'model', 'suppression']);
   });
 });
 
@@ -158,6 +160,20 @@ describe('X20a: the briefing and agent-task crons on health', () => {
     expect(comp({ ...base, agents: { ...base.agents, failedFinalToday: 1 } }, 'agents')).toMatchObject({ state: 'DEGRADED', label: '1 task failed today · read its error', retry: expect.stringContaining('REVISE') });
   });
 
+  it('A02 the model route: spend under the warning is healthy with the figure; past the warning fraction is degraded; at the ceiling is blocked; a last call that failed on billing, authentication, a missing model or configuration is blocked with the reason; a refused last call is degraded; an unread ledger is said', () => {
+    const base = healthy();
+    expect(comp(base, 'model')).toMatchObject({ state: 'HEALTHY', label: 'Model spend $0.42 of $25.00 for September' });
+    expect(comp({ ...base, model: { ...base.model!, monthUsd: 20.5 } }, 'model')).toMatchObject({ state: 'DEGRADED', label: 'Model spend $20.50 of $25.00 for September (82%)', owner: 'Casey' });
+    expect(comp({ ...base, model: { ...base.model!, monthUsd: 25.01 } }, 'model')).toMatchObject({ state: 'BLOCKED', label: 'Model ceiling reached · $25.01 of $25.00 for September', retry: expect.stringContaining('GAP_AI_MONTHLY_CEILING_USD') });
+    for (const reason of ['billing', 'authentication', 'model_missing', 'configuration']) {
+      expect(comp({ ...base, model: { ...base.model!, lastCall: { at: min(1).toISOString(), outcome: 'failed', model: null, errorCategory: reason } } }, 'model')).toMatchObject({ state: 'BLOCKED', label: `No funded model route · the last call failed (${reason})` });
+    }
+    expect(comp({ ...base, model: { ...base.model!, lastCall: { at: min(1).toISOString(), outcome: 'failed', model: null, errorCategory: 'quota' } } }, 'model')).toMatchObject({ state: 'HEALTHY' });
+    expect(comp({ ...base, model: { ...base.model!, lastCall: { at: min(1).toISOString(), outcome: 'refused', model: null, errorCategory: 'task_budget' } } }, 'model')).toMatchObject({ state: 'DEGRADED', label: 'The last model call was refused (task_budget)' });
+    expect(comp({ ...base, model: undefined }, 'model')).toMatchObject({ state: 'HEALTHY', label: 'Model spend not read' });
+    expect(evaluateHealth({ ...base, model: { ...base.model!, monthUsd: 26 } }, NOW).overall).toBe('BLOCKED');
+  });
+
   it('the loader reads both cron states by key, the seller settings, the briefing row for the day and the task rows; a client without those reads answers soft', async () => {
     const env = { GAP_BRIEFING_ENABLED: 'true', GAP_AGENT_TASKS_ENABLED: 'true', GAP_GMAIL_USER_EMAIL: 'casey@yardflow.ai', GAP_GOOGLE_REFRESH_TOKEN: 'r' };
     const values: Record<string, string> = {
@@ -179,6 +195,8 @@ describe('X20a: the briefing and agent-task crons on health', () => {
     const bare = await loadHealthInputs({ systemConfig: { findUnique: vi.fn(async () => null) }, gapAuditEvent: { findMany: vi.fn(async () => []) } }, { env: {} });
     expect(bare.briefing).toMatchObject({ enabled: false, to: null, sentTodayAt: null, lastSuccessAt: null });
     expect(bare.agents).toMatchObject({ enabled: false, lastSuccessAt: null, queued: 0 });
+    // A02: the spend ledger read through the same client; empty answers zero calls under the default ceiling.
+    expect(i.model).toMatchObject({ monthUsd: 0, ceilingUsd: 25, calls: 0, lastCall: null, warnFraction: 0.8 });
   });
 });
 
