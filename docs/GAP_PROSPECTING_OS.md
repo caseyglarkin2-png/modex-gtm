@@ -518,6 +518,13 @@ Every stale e2e assertion fixed above was a TEST catching up to a deliberate, al
 
 ### GAP CORE LIVE: MANUAL / SHADOW (2026-09-24)
 <!-- verified:2026-09-24 -->
+**Production now (2026-10-08):** main 542a6b4d (PR #410, the execution-recovery release R00-R65), deployment
+`dpl_C4THQEpA3qYy73JQt9A23sNLTx5W` READY 2026-10-08T02:27:23Z. Flags unchanged by the release: ON `GAP_OS_ENABLED`,
+`GAP_HYPOTHESIS_ENABLED`, `GAP_ROUTING_ENABLED`, `GAP_MESSAGE_COMPILER_ENABLED`, `GAP_REPLY_CLASSIFICATION_ENABLED`,
+`GAP_BACKGROUND_RESEARCH_ENABLED` (on the cron schedule); OFF `GAP_HUBSPOT_SEQUENCE_PUBLISH_ENABLED`,
+`GAP_HUBSPOT_MIRROR_ENABLED`, `GAP_AUTO_ENROLL_ENABLED`, `GAP_AUTO_ENROLL_SHADOW`; unset `GAP_CRM_APPROVED_WRITES_ENABLED`
+(approved HubSpot writes stay off) and `GAP_TRANSCRIPTION_ENABLED`. Receipts: the R64 entry.
+<!-- verified:2026-10-08 -->
 PR #250 merged to `main` with a normal merge commit, `d9a94dc2` (no production schema delta: only the rollback SQL changed). Production deployment `dpl_DuRtGTpjdAWsHoHMxVzwLhK2c8kw` READY on `d9a94dc2`. Prod read-only checks: `verify-triggers.ts` 30/30 PASS (rolled back), `prisma migrate diff` prod vs schema empty, every GAP read path OK inside a READ ONLY transaction (all tables empty). Flags ON in Production: `GAP_OS_ENABLED`, `GAP_HYPOTHESIS_ENABLED`, `GAP_ROUTING_ENABLED`, `GAP_MESSAGE_COMPILER_ENABLED`, `GAP_REPLY_CLASSIFICATION_ENABLED` (suggestions are unconfirmed, effect-free, GAP-local rows; human session only). Flags explicitly `false`: `GAP_HUBSPOT_SEQUENCE_PUBLISH_ENABLED`, `GAP_HUBSPOT_MIRROR_ENABLED`, `GAP_AUTO_ENROLL_ENABLED`, `GAP_AUTO_ENROLL_SHADOW`. GAP crons remain unregistered. `OUTREACH_PAUSED` and the clawd autonomy halt untouched. Not done at that time: an authenticated in-browser click-through (no signed-in browser reachable) and the shadow dogfood (prod has no internal/test Account/Persona; not fabricated). Findings carried into the runtime phase: 19 of 22 recent Pounce triggers do not exact-match an `accounts.name` (6A), and `/api/gap/*` agent header-token paths are unreachable behind the session middleware (6B/Sprint 7). Next phase: branch `feat/gap-os-runtime`, handoff `docs/GAP_RUNTIME_HANDOFF.md`.
 
 **Authenticated production UI check, closed 2026-09-24:** Casey verified, signed in to production, that `/gap/`, `/gap/hypotheses/` and `/gap/learning/` all render successfully. The pages are data-empty as expected -- production GAP data has not yet been populated (consistent with the read-only prod check above finding every GAP table empty) -- and no production data was changed to make them look populated. This closes the authenticated UI check the release session above could not perform.
@@ -2035,6 +2042,21 @@ on the critical path and only what it touched was rerun.
 - Read-only journeys (`r64/journeys.cjs`, a fresh signed-in headless browser, nothing pressed that writes): 15 of 15 checks. Work loads (200, 1.6 s); Costco ("Held: a customer (closed won)") and Sysco ("Held: parked after a lost deal") held on Work and on ?day=tomorrow; Walmart's pack says "No email: they opted out" with no send control; Kroger's story says "In 2 open deals" (never "Nothing has happened between us yet") and its Work card offers Prepared on the meeting; Nfi's story says "Person1 Scratch, VP Transportation replied on Oct 7"; no "Compose email" control on Work, the pack, Nfi or Accounts; a nonsense account id (/gap/accounts/no-such-account-zz9/) says "This account is not on your list" with Back to Work (HTTP 200, the named S7 debt). Kroger's Prepared outcome is checked as offered, not pressed (pressing it writes). The stub's write log reads zero notes and zero tasks (no HubSpot write).
 - Decision recorded (the lead, 2026-10-07): R63-A N2 is by design: UNKNOWN is the truth vocabulary (STABLE_BASELINE), and EMAIL, PREPARED and RECORDED are CSS uppercase over sentence-case text.
 
+**R64 Release (DONE, 2026-10-08).** The execution-recovery program (R00-R65) in production. Receipts, each verified
+by the lead:
+<!-- verified:2026-10-08 -->
+- PR #410 merged with a merge commit: main 542a6b4d (branch head 85716b81; code e8163c33; gated at c9cff73b, plus the Coverage fix e972efbc and the types-only e8163c33).
+- Vercel production: deployment dpl_C4THQEpA3qYy73JQt9A23sNLTx5W READY at 2026-10-08T02:27:23Z on 542a6b4d (build started 02:25Z), aliased to modex-gtm.vercel.app.
+- Signed-out gates in production: GET /gap/ answers 307 to /login/?callbackUrl=https%3A%2F%2Fmodex-gtm.vercel.app%2Fgap%2F (R63-B S8 live); GET /api/email/send/ answers 401.
+- `scripts/gap/verify-triggers.ts` against production: 33 of 33 guards passed, the transaction rolled back (the scratchpad `r64/verify-triggers-prod-*.txt`).
+- The one additive production write, after its dry run (2026-10-07, 20:00 local: the 4 event-led families present, 2 to create): `GAP_OS_ENABLED=true npx tsx scripts/gap/seed-families.ts --apply --remote --created-by gap-r64-release` at 02:27Z created 2 families and 2 versions (job_procurement_led "Job or Procurement Posting", program gap-approach-2026-10:job_procurement_led, version 1; fit_led "Operating Fit", program gap-approach-2026-10:fit_led, version 1). A second run created 0 families and 0 versions (idempotent).
+- The stranded PepsiCo draft: the read-only dry run before the repair found 1 stranded, 1 adoptable (cmux0uu7r0003jw0450gb4kno, persona 2236 "Tom", family unmapped, fact cmux0mg4s0005l204hrz6xd7x, key anchor:cmux0mg4s0005l204hrz6xd7x:p2236). Repaired through the production page at 02:31Z: on /gap/accounts/pepsico/ the proposal panel "One thing missing" offered the family question with GAP's derived suggestion (hidden capacity: a site closure or consolidation moves load onto the physical handoffs that remain), and "Submit for review with this problem" was pressed with that suggestion. The page reads "Proposal under review"; NEXT: "Review the proposal: approve it and the first touch is prepared, or set it aside." The dry run after: 0 stranded. The approval (approve and use) stays Casey's.
+- Signed-in smoke through the rig: Work renders, its health line "Recommendations refreshed 2d ago · cards may be stale" with "Owner: operator" and the retry step (R63-A S16 live); /gap/accounts/pepsico/ renders; GET /api/gap/health/?operations=1 signed in: DEGRADED on routing only (the last completed routing run 2026-10-05T20:46Z; owner operator; retry "Run routing from a GAP lane"), mailbox HEALTHY (last run 8 minutes before), HubSpot reads OK in 172 ms, suppression OK, sender casey@yardflow.ai; operations: 1 draft stranded at that moment (before the repair).
+- Rollback: promote 672570ed (dpl_5tW92dBWDxnL8VquojbfBedmu8MP). No schema, cron or dependency delta between 672570ed and 542a6b4d (prisma/, vercel.json and package.json unchanged).
+- Canary window: open from 02:27Z; nothing else changes in production until Casey's next decision.
+- New named debt (the list below): GitHub Actions never start.
+- R65 is in production with this release: the health counts, the owners and retry paths, the stranded-draft dry run and the repair through the page.
+
 **Consolidated debt (2026-10-07).** Every debt this recovery named, one line each, with its owner and the guard that
 holds today; the entries above keep the detail. Owners: engineering (the GAP engineer of record), Casey (a product or
 spend decision), operator (runs the system), copy (human-written words, Casey's).
@@ -2075,17 +2097,18 @@ spend decision), operator (runs the system), copy (human-written words, Casey's)
 - R63-A N8: the Accounts list says "no GAP touch yet" where a conversation or a deal exists (it reads GAP first touches only) and shows the record's vertical, not the page's industry words. Guard: the account page says what has happened. Owner: engineering (the index stays three cheap reads, UX-10).
 - R63-A N9: a reply's meaning allows one choice. Guard: the seller records the strongest meaning and notes the rest. Owner: engineering.
 - R63-A N11: the older Accounts page (/accounts, outside GAP) shows database id 9212 and recommends outreach at 0 contacts. Guard: none (legacy). Owner: the lead.
+- GitHub Actions (typecheck, unit-tests) fail with zero steps in about 2 s on every main commit since at least 2026-10-06, 672570ed and #410 included: the runner never starts (Actions runner or billing). Main has no required checks. Guard: the local gates are the release gate (R63 gates, R64). Owner: Casey.
 
 ### HANDOFF
 
-HANDOFF commit: 2d5ddb21 (docs only; the block below describes head_sha e8163c33 on feat/gap-account-first-ux; first written in d3b6592a).
+HANDOFF commit: 8e0bdaaf (docs only, branch docs/gap-r64-release off main 542a6b4d; the block below describes head_sha e8163c33 on feat/gap-account-first-ux, released as main 542a6b4d; first written in d3b6592a).
 
 ```yaml
 # HANDOFF (this block's own commit SHA is on the ledger line directly above the block)
 branch: feat/gap-account-first-ux
 base_sha: e66a9853
 head_sha: e8163c33
-production_sha: 672570ed
+production_sha: 542a6b4d   # main, PR #410; dpl_C4THQEpA3qYy73JQt9A23sNLTx5W READY 2026-10-08T02:27:23Z (rollback: 672570ed)
 tickets:
   R00: {disposition: DONE, evidence: "2113361c: production 672570ed reconciled; the capability matrix and the one stranded PepsiCo draft recorded"}
   R01: {disposition: DONE, evidence: "2113361c: the authority map and the scoped policy amendments"}
@@ -2128,8 +2151,8 @@ tickets:
 later_tickets:
   R62: {disposition: DONE, evidence: "acceptB's final pass on c9cff73b: 100 of 100 (feat/gap-matrix 8dbb9c57, re-headed 79bfdd4a); the one product defect it found fixed in e972efbc; merged in 307f3ee6"}
   R63: {disposition: DONE, evidence: "both reports dispositioned: R63-B (B1 8f7c20d5 3fe2c39e; S1-S15 fixed, S7 in part, its 404 named debt after R64) and R63-A (B1-B4 0fad39a5 5090fe4a 9893899f e6d1038f; the matrix's two 3f8753cd e6d1038f; S1-S17 fixed, S13 with its link 2684beae; S6 S7 S14 as R63-B's; NICE fixed, by design or named debt); the full gates and the rebuild run on the lead's word", dependency: "none for R63 (R63-A N2 decided by design); the 5% wording is listed for Casey, not a blocker"}
-  R64: {disposition: NOT STARTED, evidence: "needs Casey's authorization for the production write below"}
-  R65: {disposition: DONE, evidence: "e5b0b567 the counts, d9902641 owners and retry paths, c72e6a2f the read-only dry run"}
+  R64: {disposition: DONE, evidence: "main 542a6b4d (PR #410); production dpl_C4THQEpA3qYy73JQt9A23sNLTx5W READY 2026-10-08T02:27:23Z; seed-families 2 families and 2 versions, idempotent; the PepsiCo draft repaired through the page; verify-triggers 33 of 33; the R64 entry"}
+  R65: {disposition: DONE, evidence: "e5b0b567 the counts, d9902641 owners and retry paths, c72e6a2f the read-only dry run; in production at 542a6b4d (the dry run and the repair run there, the R64 entry)"}
 reopened_unresolved:
   - "R43 touch 2 and later: human-written copy"
   - "generated quality: the graded corpus (30 or more cases with model, prompt and policy versions)"
@@ -2178,13 +2201,13 @@ r63_seller_tasks:
   - an unsupported-data account
   - the accessibility and trust pass
 r64_release_requirements:
-  - "a PR from feat/gap-account-first-ux to main with the attribution lines"
-  - "merge; Vercel production READY on that SHA"
-  - "the one named additive production write: GAP_OS_ENABLED=true npx tsx scripts/gap/seed-families.ts --apply --remote (the script is scripts/gap/seed-families.ts; scripts/gap/sequences/ does not exist), after its dry run without --apply"
-  - "the stranded PepsiCo draft cmux0uu7r0003jw0450gb4kno repaired through the page (drafting from the Tulsa fact for Tom adopts it) before 2026-11-20, the fact's expiry; the read-only dry run first"
-  - "read-only smoke: scripts/gap/verify-triggers.ts, the pages signed in"
-  - "a canary window before the next change"
-  - "rollback: redeploy 672570ed (no schema delta on the branch)"
+  - "DONE: a PR from feat/gap-account-first-ux to main with the attribution lines (PR #410)"
+  - "DONE: merged with a merge commit, main 542a6b4d; Vercel production dpl_C4THQEpA3qYy73JQt9A23sNLTx5W READY 2026-10-08T02:27:23Z on 542a6b4d"
+  - "DONE: the one named additive production write, GAP_OS_ENABLED=true npx tsx scripts/gap/seed-families.ts --apply --remote --created-by gap-r64-release at 02:27Z, after its dry run (2026-10-07 20:00 local): 2 families, 2 versions (job_procurement_led, fit_led); a second run 0 and 0"
+  - "DONE: the stranded PepsiCo draft cmux0uu7r0003jw0450gb4kno repaired through the page at 02:31Z (submitted for review with GAP's derived family; approve and use is Casey's); the dry run before (1 adoptable) and after (0 stranded)"
+  - "DONE: read-only smoke: verify-triggers.ts 33 of 33 against production (rolled back); signed out /gap/ 307 with the callback and /api/email/send/ 401; signed in Work, /gap/accounts/pepsico/ and /api/gap/health/?operations=1 (DEGRADED on routing only)"
+  - "DONE: the canary window, open from 02:27Z; nothing else changes until Casey's next decision"
+  - "DONE: rollback recorded: promote 672570ed (dpl_5tW92dBWDxnL8VquojbfBedmu8MP); no schema, cron or dependency delta"
 r65_requirements:
   counts: [stranded drafts, incomplete proposals, dead-letter signals, queue age, research freshness and cost, preparation latency, seller corrections, outcomes, R54 sync failures]
   where: "GET /api/gap/health?operations=1 (the operator: failures with owners and retry paths); /gap/learning (Casey: decisions only, with outcomes and research cost)"
@@ -2231,7 +2254,7 @@ test_receipts:
   r63_b_b63f2e69: "77261d91..b63f2e69: the 19 R63 test files run singly with --maxWorkers=1, 59 tests green; neighbors run singly at each commit; a red mutation on each fix; eslint and tsc clean; no full suite, no build"
   r63_a_772de979: "0fad39a5..772de979: the 43 R63 test files (R63-B and R63-A) run singly with --maxWorkers=1, 115 tests green; neighbors run singly at each commit; a red mutation on each fix; eslint and tsc clean; no full suite, no build"
   r63_a_1b240b19: "after 2684beae (S13's link) and 1b240b19 (N10's title): the 44 R63 test files run singly with --maxWorkers=1, 116 tests green; a red mutation on each; eslint and tsc clean; no full suite, no build"
-genuine_blockers: []
+genuine_blockers: []   # 2026-10-08, after R64
 ```
 
 ## 12. Migration, backfill and rollback
