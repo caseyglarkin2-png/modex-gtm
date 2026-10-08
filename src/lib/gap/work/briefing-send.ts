@@ -22,8 +22,7 @@ import type { GmailSender, GmailSendPayload } from '@/lib/email/gmail-sender';
 import { signActionToken } from './action-token';
 import { renderBriefing } from './briefing';
 import { nyDay, nyDayAt } from './dates';
-import type { WorkDay } from './list';
-import { planDay, type DayPlan, type PlanItem } from './plan';
+import { planDay, type DayPlan, type PlanItem, type PlanLoad } from './plan';
 import type { SellerSettings } from './settings';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -43,8 +42,8 @@ export interface BriefingSendInput {
   actionSecret: string | null;
   commandsEnabled: boolean;
   legacyDigest: boolean;
-  /** The one day builder's day (work/load-day.ts), read only when no plan exists yet. */
-  load: () => Promise<WorkDay>;
+  /** The one day builder's day (work/load-day.ts) with the ready lane's decision ids, read only when no plan exists yet. */
+  load: () => Promise<PlanLoad>;
   actor?: string;
 }
 

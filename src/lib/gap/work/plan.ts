@@ -68,8 +68,23 @@ export interface DayPlan {
 
 const DECISION_HREF = /^\/gap\/pack\/([^/?#]+)/;
 
+/**
+ * X12 demo finding: a pursuit-sourced ready card's action is the account page (the send card lives in the outreach
+ * anchor), not the pack link, so the card itself names no routing decision. The NEXT UP candidates do (their href is
+ * the pack link): the ready lane's decision id per account, read off them.
+ */
+export function decisionIdsFromCandidates(candidates: ReadonlyArray<{ accountName: string | null; lane: string; href: string }>): Map<string, string> {
+  const out = new Map<string, string>();
+  for (const c of candidates) {
+    if (!c.accountName || (c.lane !== 'ready' && c.lane !== 'follow_up')) continue;
+    const m = DECISION_HREF.exec(c.href);
+    if (m && !out.has(c.accountName)) out.set(c.accountName, decodeURIComponent(m[1]));
+  }
+  return out;
+}
+
 /** Pure: the stable key of a card's own move (null when the card's only work is its obligations). */
-function cardKey(c: WorkCard, day: string): { key: string; refs: PlanItemRefs } | null {
+function cardKey(c: WorkCard, day: string, decisionIds?: ReadonlyMap<string, string>): { key: string; refs: PlanItemRefs } | null {
   const tier = c.tier ?? 'ready';
   switch (c.stateKind) {
     case 'replied':
@@ -80,12 +95,12 @@ function cardKey(c: WorkCard, day: string): { key: string; refs: PlanItemRefs } 
     }
     case 'ready': {
       const m = c.next?.href ? DECISION_HREF.exec(c.next.href) : null;
-      const decisionId = m ? decodeURIComponent(m[1]) : null;
+      const decisionId = m ? decodeURIComponent(m[1]) : decisionIds?.get(c.accountName) ?? null;
       return decisionId ? { key: `first_touch:${decisionId}`, refs: { decisionId } } : { key: `first_touch:${c.accountName}:${day}`, refs: {} };
     }
     case 'follow_up': {
       const m = c.next?.href ? DECISION_HREF.exec(c.next.href) : null;
-      const decisionId = m ? decodeURIComponent(m[1]) : null;
+      const decisionId = m ? decodeURIComponent(m[1]) : decisionIds?.get(c.accountName) ?? null;
       return { key: `follow_up:${c.accountName}:${day}`, refs: decisionId ? { decisionId } : {} };
     }
     case 'decide':
@@ -123,7 +138,7 @@ function obligationItem(c: WorkCard, o: WorkObligation): Omit<PlanItem, 'rank' |
 }
 
 /** Pure: the day's items in Work's order. Parked cards are not items; every obligation due today is one. */
-export function itemsForDay(day: WorkDay, nyDate: string): PlanItem[] {
+export function itemsForDay(day: WorkDay, nyDate: string, opts: { decisionIds?: ReadonlyMap<string, string> } = {}): PlanItem[] {
   const out: PlanItem[] = [];
   const seen = new Set<string>();
   const push = (it: Omit<PlanItem, 'rank' | 'token'>) => {
@@ -134,7 +149,7 @@ export function itemsForDay(day: WorkDay, nyDate: string): PlanItem[] {
   for (const c of day.cards) {
     const tier = c.tier ?? 'ready';
     if (PARKED_TIERS.has(tier)) continue;
-    const own = cardKey(c, nyDate);
+    const own = cardKey(c, nyDate, opts.decisionIds);
     const obligations = c.obligations ?? [];
     // The card's own move first when the tier is its own; the obligations in their order (R41: each its own row).
     if (own && (obligations.length === 0 || !obligations.some((o) => o.tier === tier))) {
@@ -171,15 +186,19 @@ export async function loadDayPlan(prisma: PrismaLike, day: string): Promise<DayP
  * The plan for `now`'s New York day: the stored one when a claim exists, else built from `load` (the one day builder)
  * and written ONCE under an advisory lock. `load` runs only when no plan exists yet.
  */
-export async function planDay(prisma: PrismaLike, input: { now: Date; load: () => Promise<WorkDay> }, actor: string): Promise<DayPlan> {
+export type PlanLoad = WorkDay | { day: WorkDay; decisionIds?: ReadonlyMap<string, string> };
+
+export async function planDay(prisma: PrismaLike, input: { now: Date; load: () => Promise<PlanLoad> }, actor: string): Promise<DayPlan> {
   const day = nyDay(input.now);
   const existing = await loadDayPlan(prisma, day);
   if (existing) return existing;
   return locked(prisma, day, async (tx) => {
     const again = await loadDayPlan(tx, day);
     if (again) return again;
-    const built = await input.load();
-    const items = itemsForDay(built, day);
+    const loaded = await input.load();
+    const built = 'cards' in loaded ? loaded : loaded.day;
+    const decisionIds = 'cards' in loaded ? undefined : loaded.decisionIds;
+    const items = itemsForDay(built, day, { decisionIds });
     const row = await tx.gapAuditEvent.create({
       data: { kind: DAY_PLANNED, actor, subject_type: PLAN_SUBJECT_TYPE, subject_id: day, payload: JSON.parse(JSON.stringify({ items, counts: built.counts, waiting: built.waiting.length, snoozed: built.snoozed.length })) },
     });

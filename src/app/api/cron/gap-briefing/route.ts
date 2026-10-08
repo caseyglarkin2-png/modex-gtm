@@ -8,6 +8,7 @@ import { listSentTo } from '@/lib/email/gmail-inbox';
 import { actionSecret } from '@/lib/gap/work/action-token';
 import { sendMorningBriefing } from '@/lib/gap/work/briefing-send';
 import { loadWorkDay } from '@/lib/gap/work/load-day';
+import { decisionIdsFromCandidates } from '@/lib/gap/work/plan';
 import { loadSellerSettings } from '@/lib/gap/work/settings';
 import { prisma } from '@/lib/prisma';
 
@@ -67,7 +68,10 @@ export async function GET(request: Request) {
         actionSecret: actionSecret(),
         commandsEnabled: COMMANDS_ENABLED,
         legacyDigest: true,
-        load: async () => (await loadWorkDay(prisma, { lane: false, preview: false, fresh: true, now })).day,
+        load: async () => {
+          const l = await loadWorkDay(prisma, { lane: false, preview: false, fresh: true, now });
+          return { day: l.day, decisionIds: decisionIdsFromCandidates(l.data.workInput.candidates) };
+        },
       },
       { send: sendViaGmail, listSent: (rcpt, a, b) => listSentTo(sender, rcpt, a, b) },
     );

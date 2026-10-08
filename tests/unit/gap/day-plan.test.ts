@@ -11,7 +11,7 @@
  */
 import { beforeEach, describe, expect, it } from 'vitest';
 import { ledgerDb } from './fixtures/ledger-db';
-import { DAY_PLANNED, findPlanItemByToken, itemsForDay, loadDayPlan, planDay, type DayPlan } from '@/lib/gap/work/plan';
+import { DAY_PLANNED, decisionIdsFromCandidates, findPlanItemByToken, itemsForDay, loadDayPlan, planDay, type DayPlan } from '@/lib/gap/work/plan';
 import type { WorkCard, WorkDay } from '@/lib/gap/work/list';
 
 const card = (over: Partial<WorkCard> & { accountName: string; stateKind: WorkCard['stateKind']; tier: NonNullable<WorkCard['tier']> }): WorkCard => ({
@@ -75,6 +75,20 @@ describe('X04: itemsForDay (pure)', () => {
     const follow = itemsForDay(day([card({ accountName: 'Kenco', stateKind: 'follow_up', tier: 'follow_up', state: 'Follow up due' }), card({ accountName: 'GXO', stateKind: 'in_deal', tier: 'deal', state: 'In a deal', stalled: ['No activity since Sep 8'] }), card({ accountName: 'Dole', stateKind: 'decide', tier: 'review', state: 'Decide' })]), '2026-10-08');
     expect(follow.map((i) => i.key)).toEqual(['follow_up:Kenco:2026-10-08', 'deal:GXO:2026-10-08', 'review:Dole:2026-10-08']);
     expect(itemsForDay(day([card({ accountName: 'Kenco', stateKind: 'follow_up', tier: 'follow_up', state: 'Follow up due' })]), '2026-10-09')[0].key).toBe('follow_up:Kenco:2026-10-09');
+  });
+
+  it('X12 finding: a pursuit-sourced ready card whose action is the account page takes its decision from the NEXT UP candidates, so the key and the refs still name the card', () => {
+    const candidates = [
+      { accountName: 'Fedex', lane: 'ready', href: '/gap/pack/dec-fx?from=work&i=0' },
+      { accountName: 'Fedex', lane: 'ready', href: '/gap/pack/dec-fx-second' },
+      { accountName: 'Kroger', lane: 'deals', href: '/gap/accounts/kroger' },
+      { accountName: null, lane: 'ready', href: '/gap/pack/dec-none' },
+    ];
+    const ids = decisionIdsFromCandidates(candidates);
+    expect([...ids]).toEqual([['Fedex', 'dec-fx']]);
+    const ready = card({ accountName: 'Fedex', stateKind: 'ready', tier: 'ready', state: 'Ready for a first touch: Glen', next: { label: 'Prepare the first touch', href: '/gap/accounts/fedex' } });
+    expect(itemsForDay(day([ready]), '2026-10-08', { decisionIds: ids })[0]).toMatchObject({ key: 'first_touch:dec-fx', refs: { decisionId: 'dec-fx' }, href: '/gap/accounts/fedex' });
+    expect(itemsForDay(day([ready]), '2026-10-08')[0].key).toBe('first_touch:Fedex:2026-10-08');
   });
 
   it('every item carries an unguessable token, distinct, and the card words the seller sees', () => {

@@ -19,7 +19,7 @@ import { actionSecret, verifyActionToken } from '@/lib/gap/work/action-token';
 import { nextUnassignedItem, sendAssignment, startDay } from '@/lib/gap/work/assignment';
 import { nyDay } from '@/lib/gap/work/dates';
 import { loadWorkDay } from '@/lib/gap/work/load-day';
-import { planDay } from '@/lib/gap/work/plan';
+import { decisionIdsFromCandidates, planDay } from '@/lib/gap/work/plan';
 import { loadSellerSettings } from '@/lib/gap/work/settings';
 
 export const dynamic = 'force-dynamic';
@@ -36,7 +36,17 @@ export default async function StartPage({ searchParams }: { searchParams?: Promi
   const token = q.t ? verifyActionToken(q.t, { secret: actionSecret(), now }) : null;
   const via = token?.ok ? 'link' : 'app';
 
-  const plan = await planDay(prisma, { now, load: async () => (await loadWorkDay(prisma, { lane: false, preview: false, fresh: false, now })).day }, actor);
+  const plan = await planDay(
+    prisma,
+    {
+      now,
+      load: async () => {
+        const l = await loadWorkDay(prisma, { lane: false, preview: false, fresh: false, now });
+        return { day: l.day, decisionIds: decisionIdsFromCandidates(l.data.workInput.candidates) };
+      },
+    },
+    actor,
+  );
   const started = await startDay(prisma, { day, now, actor, via });
   const settings = await loadSellerSettings(prisma);
   const sender = gapGmailSender();
