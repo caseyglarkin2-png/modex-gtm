@@ -92,7 +92,7 @@ export function conflictDetail(v: { value: string | null; modifiedAt: string | n
 const errText = (e: unknown) => (e instanceof Error ? e.message : String(e)).slice(0, 240);
 
 async function rowsOf(prisma: PrismaLike, proposalId: string): Promise<CrmRow[]> {
-  return prisma.gapAuditEvent.findMany({ where: { subject_type: CRM_SUBJECT, subject_id: proposalId }, select: { kind: true, actor: true, payload: true, created_at: true }, orderBy: { created_at: 'asc' } });
+  return prisma.gapAuditEvent.findMany({ where: { subject_type: CRM_SUBJECT, subject_id: proposalId }, select: { id: true, kind: true, actor: true, payload: true, created_at: true }, orderBy: [{ created_at: 'asc' }, { id: 'asc' }] });
 }
 
 async function record(prisma: PrismaLike, kind: string, actor: string, proposal: Pick<CrmProposal, 'proposalId' | 'accountName'>, payload: Record<string, unknown>) {
@@ -285,7 +285,8 @@ export async function discardCrmChange(prisma: PrismaLike, input: { proposalId: 
  */
 export async function loadCrmOffApprovals(prisma: PrismaLike, limit = 50): Promise<CrmSyncItem[]> {
   if (typeof prisma?.gapAuditEvent?.findMany !== 'function') return [];
-  const rows: CrmRow[] = await prisma.gapAuditEvent.findMany({ where: { kind: { in: [...CRM_KINDS] }, subject_type: CRM_SUBJECT }, select: { kind: true, actor: true, payload: true, created_at: true }, orderBy: { created_at: 'desc' }, take: 5_000 }).catch(() => []);
+  // R62 final pass: the newest 5,000 rows (the bound), read in one order; the fold orders them itself (crm-model.ts).
+  const rows: CrmRow[] = await prisma.gapAuditEvent.findMany({ where: { kind: { in: [...CRM_KINDS] }, subject_type: CRM_SUBJECT }, select: { id: true, kind: true, actor: true, payload: true, created_at: true }, orderBy: [{ created_at: 'desc' }, { id: 'desc' }], take: 5_000 }).catch(() => []);
   const all = foldCrmSync(rows ?? []);
   // Sprint 5 review (R54): a recap a newer one replaced is not offered for retry.
   const replaced = replacedRecaps(all);
@@ -295,6 +296,6 @@ export async function loadCrmOffApprovals(prisma: PrismaLike, limit = 50): Promi
 /** Every proposal at the account, with its state. Soft: an unreadable ledger reads as none. */
 export async function loadCrmSync(prisma: PrismaLike, accountName: string): Promise<CrmSyncItem[]> {
   if (typeof prisma?.gapAuditEvent?.findMany !== 'function') return [];
-  const rows: CrmRow[] = await prisma.gapAuditEvent.findMany({ where: { kind: { in: [...CRM_KINDS] }, subject_type: CRM_SUBJECT, payload: { path: ['accountName'], equals: accountName } }, select: { kind: true, actor: true, payload: true, created_at: true }, orderBy: { created_at: 'asc' } }).catch(() => []);
+  const rows: CrmRow[] = await prisma.gapAuditEvent.findMany({ where: { kind: { in: [...CRM_KINDS] }, subject_type: CRM_SUBJECT, payload: { path: ['accountName'], equals: accountName } }, select: { id: true, kind: true, actor: true, payload: true, created_at: true }, orderBy: [{ created_at: 'asc' }, { id: 'asc' }] }).catch(() => []);
   return foldCrmSync(rows).sort((a, b) => b.proposedAt.localeCompare(a.proposedAt));
 }

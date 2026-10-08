@@ -170,15 +170,24 @@ export function changeText(p: Pick<CrmProposal, 'change' | 'dealName' | 'dealId'
 }
 
 export interface CrmRow {
+  /** The ledger row's id: the last tie-break, so one millisecond always folds in one order. */
+  id?: string;
   kind: string;
   actor: string;
   payload: Record<string, unknown> | null;
   created_at: Date | string;
 }
 
+/**
+ * R62 final pass: rows that share a millisecond fold in their lifecycle order (proposed, approved, attempt, result,
+ * discarded), then by id, never in whatever order the database returned them. An attempt and its result written in one
+ * millisecond and read result first folded to "approved", so an approval standing "off" dropped off Coverage.
+ */
+const LIFECYCLE: Readonly<Record<string, number>> = { [CRM_PROPOSED]: 0, [CRM_APPROVED]: 1, [CRM_ATTEMPT]: 2, [CRM_RESULT]: 3, [CRM_DISCARDED]: 4 };
+
 /** Fold the append-only rows into one item per proposal (any row order). */
 export function foldCrmSync(rows: readonly CrmRow[]): CrmSyncItem[] {
-  const sorted = [...rows].sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
+  const sorted = [...rows].sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime() || (LIFECYCLE[a.kind] ?? 9) - (LIFECYCLE[b.kind] ?? 9) || String(a.id ?? '').localeCompare(String(b.id ?? '')));
   const items = new Map<string, CrmSyncItem>();
   for (const r of sorted) {
     const p = r.payload ?? {};
