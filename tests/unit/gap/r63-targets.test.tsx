@@ -43,12 +43,12 @@ describe('R63-B S13: 24 px targets', () => {
   });
 });
 
-describe('R63-B S14: the Note pill covers nothing at phone width', () => {
-  it('in the page flow below 640 px, fixed only from 640 px up', () => {
+describe('R63-B S14 / R63-A S12: the Feedback pill covers nothing at any width', () => {
+  it('in the page flow at every width (fixed from 640 px up it covered the email body at 1280 px)', () => {
     render(<FeedbackButton />);
     const t = tokens(screen.getByTestId('feedback-open'));
     expect(t.has('fixed')).toBe(false);
-    expect(t.has('sm:fixed')).toBe(true);
+    expect(t.has('sm:fixed')).toBe(false);
     expect(t.has('min-h-11')).toBe(true);
   });
 });

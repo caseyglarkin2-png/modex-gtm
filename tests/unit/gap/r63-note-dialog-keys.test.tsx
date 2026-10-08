@@ -15,12 +15,12 @@ describe('R63-B S5: the Note panel for the keyboard', () => {
     const opener = screen.getByTestId('feedback-open');
     opener.focus();
     fireEvent.click(opener);
-    const dialog = screen.getByRole('dialog', { name: 'Note' });
+    const dialog = screen.getByRole('dialog', { name: 'Feedback about GAP' });
     expect(dialog).toHaveAttribute('aria-modal', 'true');
     const area = screen.getByTestId('feedback-note');
     expect(document.activeElement).toBe(area);
     fireEvent.change(area, { target: { value: 'The pack page shows Hi Doug.' } });
-    expect(dialog.textContent).toContain('Closing keeps your note here until you save it.');
+    expect(dialog.textContent).toContain('Closing keeps your feedback here until you save it.');
     fireEvent.keyDown(area, { key: 'Escape' });
     expect(screen.queryByRole('dialog')).toBeNull();
     expect(document.activeElement).toBe(opener);
@@ -31,7 +31,7 @@ describe('R63-B S5: the Note panel for the keyboard', () => {
   it('Tab and Shift+Tab stay inside the panel', () => {
     render(<FeedbackButton />);
     fireEvent.click(screen.getByTestId('feedback-open'));
-    const dialog = screen.getByRole('dialog', { name: 'Note' });
+    const dialog = screen.getByRole('dialog', { name: 'Feedback about GAP' });
     fireEvent.change(screen.getByTestId('feedback-note'), { target: { value: 'x' } });
     const stops = [...dialog.querySelectorAll<HTMLElement>('button:not([disabled]), textarea')];
     const first = stops[0];

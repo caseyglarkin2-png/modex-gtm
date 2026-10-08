@@ -9,6 +9,9 @@
  * R63-B S5: the panel is a modal dialog for the keyboard: Escape closes it from anywhere inside (the textarea too),
  * Tab and Shift+Tab stay inside it, and focus returns to whatever opened it. Closing never discards what was typed:
  * the note is kept, said in the panel, until it is saved.
+ *
+ * R63-A S12: it is feedback about the app, not a note on an account, so it is called Feedback everywhere; and it sits
+ * in the page flow after the content at every width (floating bottom right it covered the email body at 1280 px).
  */
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
@@ -137,7 +140,7 @@ export function FeedbackButton() {
       setExtra({});
       setTimeout(() => close(), 900);
     } catch (e) {
-      setErrorText(e instanceof Error && e.message === 'signed_out' ? 'Signed out. Sign in in another tab, then Save again (your note is kept).' : e instanceof Error && e.message === 'off' ? 'Notes are off on this deployment.' : 'Not saved. Try again (your note is kept).');
+      setErrorText(e instanceof Error && e.message === 'signed_out' ? 'Signed out. Sign in in another tab, then Save again (your feedback is kept).' : e instanceof Error && e.message === 'off' ? 'Feedback is off on this deployment.' : 'Not saved. Try again (your feedback is kept).');
       setState('error');
     }
   }, [note, type, extra, pathname, search, close]);
@@ -154,17 +157,16 @@ export function FeedbackButton() {
         }}
         // UX-04: on the GAP account workspace the pill is hidden (it covered Log a touch and Call prep at 390); the
         // workspace's own tools row carries a Note control that opens this same dialog (openFeedback).
-        // R63-B S14: at phone width a fixed pill covered the text under it (HISTORY on the pack page), so there it sits
-        // in the page flow after the content; from 640 px up it floats bottom right, left of where the global Compose
-        // button sits elsewhere (it renders nothing on GAP pages since R63).
-        className={`relative z-40 mx-4 mb-6 mt-8 inline-flex min-h-11 items-center rounded-full border border-[var(--border)] bg-[var(--background)] px-3 text-xs font-semibold shadow-md hover:bg-[var(--muted)] sm:fixed sm:bottom-6 sm:right-20 sm:m-0 sm:min-h-9 ${/^\/gap\/accounts\//.test(pathname) ? 'hidden' : ''}`}
+        // R63-B S14 / R63-A S12: a fixed pill covered the text under it (HISTORY at phone width, the email body at
+        // 1280 px), so it sits in the page flow after the content at every width and covers nothing.
+        className={`mx-4 mb-6 mt-8 inline-flex min-h-11 items-center rounded-full border border-[var(--border)] bg-[var(--background)] px-3 text-xs font-semibold hover:bg-[var(--muted)] sm:min-h-9 ${/^\/gap\/accounts\//.test(pathname) ? 'hidden' : ''}`}
         data-testid="feedback-open"
-        aria-label="Write a note about GAP"
+        aria-label="Send feedback about GAP"
       >
-        Note
+        Feedback
       </button>
       {open ? (
-        <div ref={panel} onKeyDown={onPanelKey} className="fixed inset-x-0 bottom-0 z-[60] border-t border-[var(--border)] bg-[var(--background)] p-3 shadow-lg sm:inset-x-auto sm:bottom-16 sm:right-4 sm:w-96 sm:rounded-md sm:border" role="dialog" aria-modal="true" aria-label="Note" data-testid="feedback-form">
+        <div ref={panel} onKeyDown={onPanelKey} className="fixed inset-x-0 bottom-0 z-[60] border-t border-[var(--border)] bg-[var(--background)] p-3 shadow-lg sm:inset-x-auto sm:bottom-16 sm:right-4 sm:w-96 sm:rounded-md sm:border" role="dialog" aria-modal="true" aria-label="Feedback about GAP" data-testid="feedback-form">
           <label className="block text-sm font-semibold" htmlFor="gap-feedback-note">
             What did you notice?
           </label>
@@ -179,16 +181,16 @@ export function FeedbackButton() {
           </div>
           <div className="mt-2 flex items-center gap-2">
             <button type="button" onClick={() => void save()} disabled={!note.trim() || state === 'saving'} className="rounded-md bg-[var(--primary)] px-3 py-1.5 text-xs font-semibold text-[var(--primary-foreground)] disabled:opacity-50" data-testid="feedback-save">
-              {state === 'saving' ? 'Saving' : 'Save note'}
+              {state === 'saving' ? 'Saving' : 'Save feedback'}
             </button>
             <button type="button" onClick={close} className="text-xs underline" data-testid="feedback-close">
               Close
             </button>
             <span role="status" className="text-xs" data-testid="feedback-status">
-              {state === 'saved' ? 'Saved to GAP notes.' : state === 'error' ? errorText : ''}
+              {state === 'saved' ? 'Saved to GAP feedback.' : state === 'error' ? errorText : ''}
             </span>
           </div>
-          <p className="mt-1 text-[11px] text-[var(--muted-foreground)]">Saves your words with this screen&apos;s location and build. Nothing about the account or buyer changes.{note.trim() ? ' Closing keeps your note here until you save it.' : ''}</p>
+          <p className="mt-1 text-[11px] text-[var(--muted-foreground)]">Saves your words with this screen&apos;s location and build. Nothing about the account or buyer changes.{note.trim() ? ' Closing keeps your feedback here until you save it.' : ''}</p>
         </div>
       ) : null}
     </>

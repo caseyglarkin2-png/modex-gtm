@@ -55,11 +55,11 @@ describe('the redirect resolver never takes a mirror as the publisher', () => {
   });
 });
 
-describe('the Note button is never under the global Compose button', () => {
-  it('sits left of the Compose button (fixed bottom-6 right-6, 48px wide)', () => {
+describe('the Feedback button is never under the global Compose button', () => {
+  it('is in the page flow at every width (R63-A S12), so it is never under anything fixed', () => {
     render(<FeedbackButton />);
     const cls = screen.getByTestId('feedback-open').className;
-    expect(cls).toContain('right-20');
-    expect(cls).not.toMatch(/\bright-(?:[0-9]|1[0-9])\b/);
+    expect(cls).not.toMatch(/(?:^|\s)(?:\w+:)?fixed(?:\s|$)/);
+    expect(cls).not.toMatch(/\bright-\d/);
   });
 });

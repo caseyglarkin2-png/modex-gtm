@@ -78,7 +78,7 @@ describe('the NOTE button', () => {
     expect(screen.getByTestId('feedback-save')).toBeDisabled();
     fireEvent.change(screen.getByTestId('feedback-note'), { target: { value: 'Timed out again' } });
     await act(async () => fireEvent.click(screen.getByTestId('feedback-save')));
-    await waitFor(() => expect(screen.getByTestId('feedback-status')).toHaveTextContent('Saved to GAP notes.'));
+    await waitFor(() => expect(screen.getByTestId('feedback-status')).toHaveTextContent('Saved to GAP feedback.'));
     const [url, init] = f.mock.calls[0] as [string, RequestInit];
     expect(url).toBe('/api/gap/feedback');
     const body = JSON.parse(String(init.body));
