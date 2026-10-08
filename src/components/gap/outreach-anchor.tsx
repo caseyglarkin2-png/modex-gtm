@@ -238,7 +238,8 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
   }
 
   /** USE THIS STORY: an approved thesis not yet in use is activated and routed through the same audited advance. */
-  async function usePrimary(hypothesisId: string) {
+  // A click handler, not a hook: named so the hooks rule never reads it as one (the whole-project lint gate).
+  async function putPrimaryInUse(hypothesisId: string) {
     setNote(null);
     setBusy({ kind: 'review', id: hypothesisId });
     try {
@@ -294,7 +295,7 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
           </p>
           {p.status === 'approved' && coldTouchAllowed ? (
             <div className="ml-1 flex flex-wrap items-center gap-2">
-              <button type="button" className={PRIMARY} disabled={busy !== null} onClick={() => void usePrimary(p.hypothesisId)} data-testid="anchor-use-primary">
+              <button type="button" className={PRIMARY} disabled={busy !== null} onClick={() => void putPrimaryInUse(p.hypothesisId)} data-testid="anchor-use-primary">
                 {busy?.kind === 'review' && busy.id === p.hypothesisId ? 'Putting in use...' : 'Put this story in use'}
               </button>
               <span className="text-xs text-[var(--muted-foreground)]">Approved stories are put in use here; the email is then prepared on it. Nothing is sent.</span>
