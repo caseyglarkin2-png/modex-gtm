@@ -32,6 +32,7 @@ import { classifyFact, detectConflicts, excerptFoundIn, isPhysicalOpsFact, norma
 import { datelineDate, defaultFetchPage, edgarCandidates, hostBelongsToAccount, normalizeCompany, webCandidates, type Candidate, type FetchPage } from './providers';
 import type { PageResult } from '../signals/research';
 import { WEAK_SOURCE, speakerOrg, textNamesAccount } from './claim-rules';
+import { claimClassOf, classifyClaim, type ClaimType } from './claim-types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -78,6 +79,8 @@ export interface ResearchFact {
   provider: Candidate['provider'];
   type: SignalType;
   change: FactChange;
+  /** R22/R23: the claim's own type (physical_change keeps the first-touch path; the rest are context by purpose). */
+  claimType?: ClaimType;
   fresh: boolean;
 }
 
@@ -402,6 +405,13 @@ export function accountIsSubject(sentence: string, accountKey: string): boolean 
  * Nothing else mints the `excerpt_found_at_source` stamp: storeVerifiedFact
  * is only ever called with a candidate that passed here.
  */
+/** R22/R23: the claim types the verifier mints. A finance line and an unclassified sentence are not minted. */
+const ADMITTED_CLAIM_TYPES: ReadonlySet<ClaimType> = new Set(['physical_change', 'job_posting', 'procurement', 'technology', 'partnership', 'leadership']);
+const admittedClaim = (sentence: string): boolean => ADMITTED_CLAIM_TYPES.has(classifyClaim(sentence).type);
+// Item 4: a partnership is an ongoing program (the Gatik agreement), read with the technology window (90 days), not
+// as a 45-day news item: its currentness is kept by corroboration (continuity-store.ts), not re-searched every run.
+const SIGNAL_TYPE_OF_CLAIM: Record<ClaimType, SignalType> = { physical_change: 'site_expansion', job_posting: 'job_posting', procurement: 'news', technology: 'technology_signal', partnership: 'technology_signal', leadership: 'news', financial: 'news', other: 'other' };
+
 export async function verifyCandidate(c: Candidate, ctx: VerificationContext): Promise<{ ok: true; publishedAt: Date; excerpt: string } | { ok: false; reason: string }> {
   if (!c.excerpt?.trim()) return { ok: false, reason: 'no_excerpt' };
   // A web search model's proposal is a summary; the gates run on what is STORED (the page's own sentence) below.
@@ -409,9 +419,11 @@ export async function verifyCandidate(c: Candidate, ctx: VerificationContext): P
   const web = c.provider === 'web';
   // A web proposal's date is the model's claim: it is dated by its page below. Every other proposer dates its own.
   if (!web && (!c.publishedAt || Number.isNaN(c.publishedAt.getTime()))) return { ok: false, reason: 'no_publication_date' };
-  if (!web && !isPhysicalOpsFact(c.excerpt)) return { ok: false, reason: 'not_a_physical_operations_fact' };
+  // R22/R23: a physical change, or a job, procurement, technology, partnership or leadership claim, is admitted as its
+  // own claim type (claim-types.ts); a finance line or an unclassified sentence is not minted.
+  if (!web && !admittedClaim(c.excerpt)) return { ok: false, reason: 'not_a_physical_operations_fact' };
   // Quality review: a past-year event restated in a newer source is not dated by the source.
-  if (!web && classifyContinuity(c.excerpt) === 'event' && describesPastEvent(c.excerpt, c.publishedAt!)) return { ok: false, reason: 'describes_past_event' };
+  if (!web && isPhysicalOpsFact(c.excerpt) && classifyContinuity(c.excerpt) === 'event' && describesPastEvent(c.excerpt, c.publishedAt!)) return { ok: false, reason: 'describes_past_event' };
   if (WEAK_SOURCE.test(c.url)) return { ok: false, reason: 'source_too_weak' };
   if (!ctx.pages.has(c.url)) {
     try {
@@ -437,14 +449,14 @@ export async function verifyCandidate(c: Candidate, ctx: VerificationContext): P
     if (page.replace(/\s+/g, ' ').trim().length < 25) return { ok: false, reason: 'source_unreadable:no_readable_text' };
     const own = c.provider === 'web' ? pageSentenceFor(excerpt, page) : null;
     // A web proposal the page does not state closely enough (or states differently) is a weak reanchor.
-    if (!own) return { ok: false, reason: !web ? 'excerpt_not_found_at_source' : isPhysicalOpsFact(c.excerpt) ? 'reanchor_too_weak' : 'not_a_physical_operations_fact' };
+    if (!own) return { ok: false, reason: !web ? 'excerpt_not_found_at_source' : admittedClaim(c.excerpt) ? 'reanchor_too_weak' : 'not_a_physical_operations_fact' };
     // The page's sentence must be about THIS account (a roundup page can hold a competitor's sentence).
     if (!textNamesAccount(own, ctx.accountKey)) return { ok: false, reason: 'sentence_does_not_name_account' };
     excerpt = own;
   }
   // The stored sentence itself must be a physical-operations fact that is current for its source date.
-  if (web && !isPhysicalOpsFact(excerpt)) return { ok: false, reason: 'not_a_physical_operations_fact' };
-  if (web && classifyContinuity(excerpt) === 'event' && describesPastEvent(excerpt, publishedAt)) return { ok: false, reason: 'describes_past_event' };
+  if (web && !admittedClaim(excerpt)) return { ok: false, reason: 'not_a_physical_operations_fact' };
+  if (web && isPhysicalOpsFact(excerpt) && classifyContinuity(excerpt) === 'event' && describesPastEvent(excerpt, publishedAt)) return { ok: false, reason: 'describes_past_event' };
   if (c.provider !== 'edgar' && !textNamesAccount(page, ctx.accountKey)) return { ok: false, reason: 'page_does_not_name_account' };
   // A sentence taken from a signal's own page must itself name the account (a competitor's paragraph on the
   // same page is not this account's fact).
@@ -468,6 +480,10 @@ export async function storeVerifiedFact(
 ): Promise<ResearchFact> {
   const a = input.candidate;
   const cls = classifyFact(a.excerpt);
+  // R22/R23: the claim's own type rides on the signal (`claim_class`) and its metadata; a physical change keeps the
+  // fact classifier's type and change, another type takes its own signal type and freshness.
+  const claim = classifyClaim(a.excerpt);
+  const signalType: SignalType = claim.type === 'physical_change' ? cls.type : SIGNAL_TYPE_OF_CLAIM[claim.type];
   const claimHash = hash(normalizeForMatch(a.excerpt));
   await upsertEvidenceRecords(prisma, input.runId, [{
     accountName: input.accountName,
@@ -480,7 +496,7 @@ export async function storeVerifiedFact(
     provider: `gap_research:${a.provider}`,
     observedAt: a.publishedAt,
     deterministicKey: `gap_research:${input.accountName}:${claimHash.slice(0, 16)}`,
-    metadata: { retrievedAt: input.now.toISOString(), excerpt: a.excerpt, change: cls.change, signalType: cls.type, verified: 'excerpt_found_at_source' },
+    metadata: { retrievedAt: input.now.toISOString(), excerpt: a.excerpt, change: cls.change, signalType, claimType: claim.type, verified: 'excerpt_found_at_source' },
   }]);
   const record = await prisma.evidenceRecord.findUnique({
     where: { account_name_claim_hash_source_url_observed_at: { account_name: input.accountName, claim_hash: claimHash, source_url: a.url, observed_at: a.publishedAt } },
@@ -488,13 +504,14 @@ export async function storeVerifiedFact(
   });
   // The evidence clock runs from the event the sentence states when a later source restates it.
   const eventDate = statedEventDate(a.excerpt, a.publishedAt);
-  const expires = freshnessExpiresAt(cls.type, eventDate ?? a.publishedAt);
+  const expires = freshnessExpiresAt(signalType, eventDate ?? a.publishedAt);
   const signal = await registerSignal(prisma, {
     accountName: input.accountName,
     personaId: input.personaId,
     sourceKind: 'evidence_record',
     sourceId: record.id,
-    type: cls.type,
+    type: signalType,
+    claimClass: claimClassOf(claim),
     title: a.title,
     summary: null,
     sourceType: a.sourceType,
@@ -504,7 +521,7 @@ export async function storeVerifiedFact(
     observedAt: a.publishedAt,
     confidence: a.sourceType === 'public_primary' ? 80 : 60,
     freshnessExpiresAt: expires,
-    metadata: { researchRunId: input.runId, retrievedAt: input.now.toISOString(), provider: a.provider, change: cls.change, verified: 'excerpt_found_at_source', ...(eventDate ? { eventDate: eventDate.toISOString().slice(0, 10) } : {}) },
+    metadata: { researchRunId: input.runId, retrievedAt: input.now.toISOString(), provider: a.provider, change: cls.change, claimType: claim.type, ...(Object.keys(claim.attributes).length ? { claimAttributes: claim.attributes } : {}), verified: 'excerpt_found_at_source', ...(eventDate ? { eventDate: eventDate.toISOString().slice(0, 10) } : {}) },
     registeredBy: input.actor,
   });
   return {
@@ -516,8 +533,9 @@ export async function storeVerifiedFact(
     publishedAt: a.publishedAt.toISOString(),
     retrievedAt: input.now.toISOString(),
     provider: a.provider,
-    type: cls.type,
+    type: signalType,
     change: cls.change,
+    claimType: claim.type,
     fresh: expires.getTime() > input.now.getTime(),
   };
 }

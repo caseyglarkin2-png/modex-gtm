@@ -4,9 +4,11 @@
  * The compile route builds its contract SERVER-SIDE: the evidence a step may
  * cite is the hypothesis's linked `ProspectingSignal` rows, projected here,
  * never a list the caller sends. Every flag fails closed: `external_ok` null
- * reads false, an unstated freshness reads from `observed_at` against the
- * spec's 45-day window (section 6), `superseded` is only `metadata.superseded
- * === true`, and first-party is the source type alone.
+ * reads false, `fresh` is the ONE freshness authority (research/currentness.ts,
+ * acceptance batch item 2a: the clock approval, routing and the draftable list
+ * read, so an approved story never dead-ends at "cites stale evidence"),
+ * `superseded` is only `metadata.superseded === true`, and first-party is the
+ * source type alone.
  *
  * This is the enroll service's `evidenceRefsFromSignals` moved to the
  * compiler it serves; the service keeps its own copy until the lead switches
@@ -14,10 +16,7 @@
  */
 
 import type { CompileEvidenceRef } from './types';
-
-/** Evidence freshness window for a per-hypothesis compile contract (spec section 6, 45 days). */
-export const EVIDENCE_MAX_AGE_DAYS = 45;
-const DAY_MS = 24 * 60 * 60 * 1000;
+import { isCurrentFact } from '../research/currentness';
 
 export interface SignalRow {
   id: string;
@@ -31,6 +30,8 @@ export interface SignalRow {
   /** Loaded by EVIDENCE_SIGNAL_SELECT; a loaded blank is a keyword hit (red team T6). */
   evidence_text?: string | null;
   source_kind?: string | null;
+  /** Item 2a: the signal type, whose window the freshness authority reads. */
+  type?: string | null;
 }
 
 function isObj(v: unknown): v is Record<string, unknown> {
@@ -46,15 +47,7 @@ export function evidenceRefsFromSignals(signals: readonly SignalRow[], now: Date
   const out: CompileEvidenceRef[] = [];
   for (const s of signals) {
     if (!s || typeof s.id !== 'string') continue;
-    const observed = s.observed_at instanceof Date ? s.observed_at : new Date(s.observed_at);
-    const expires = s.freshness_expires_at
-      ? s.freshness_expires_at instanceof Date
-        ? s.freshness_expires_at
-        : new Date(s.freshness_expires_at)
-      : null;
-    const fresh = expires
-      ? expires.getTime() > now.getTime()
-      : !Number.isNaN(observed.getTime()) && now.getTime() - observed.getTime() <= EVIDENCE_MAX_AGE_DAYS * DAY_MS;
+    const fresh = isCurrentFact(s, now);
     const superseded = isObj(s.metadata) && s.metadata.superseded === true;
     // Red team T6: a loaded signal that quotes nothing is a keyword hit. It
     // names a document; it does not show a fact, so it is never citable.

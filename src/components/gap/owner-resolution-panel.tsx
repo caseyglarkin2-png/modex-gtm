@@ -118,7 +118,7 @@ export function OwnerResolutionPanel({ hypothesisId, accountName, onChanged }: O
   const selected = r.eligible.find((c) => c.key === chosen) ?? null;
   const actionLabel = (c: OwnerCandidate) => (c.action === 'add_then_use' ? `Add ${c.name} to GAP + use in routing` : `Use ${c.name} in routing`);
   const routing: UseOutcomeResponse | null = result?.routing ? (result.routing as unknown as UseOutcomeResponse) : null;
-  const purposeWord = r.purpose === 'HYPOTHESIS_ACTIVATION' ? 'this hypothesis' : r.purpose === 'SITE_PILOT' ? 'a site pilot' : r.purpose === 'TRANSFORMATION_INITIATIVE' ? 'this initiative' : 'the first touch';
+  const purposeWord = r.purpose === 'HYPOTHESIS_ACTIVATION' ? 'this thesis' : r.purpose === 'SITE_PILOT' ? 'a site pilot' : r.purpose === 'TRANSFORMATION_INITIATIVE' ? 'this initiative' : 'the first touch';
   // The one-line summary a rep reads first: the recommendation's reason, else the lane sentence; the thesis fit beside it.
   const summaryOf = (c: OwnerCandidate) => c.reasons.filter((why) => /^(Primary operator|Adjacent operator|Facility \/ yard operator|Executive sponsor|Transformation \/ technology|Thesis fit)/.test(why));
   const detailsOf = (c: OwnerCandidate) => c.reasons.filter((why) => !summaryOf(c).includes(why));
@@ -175,7 +175,7 @@ export function OwnerResolutionPanel({ hypothesisId, accountName, onChanged }: O
                     {c.action === 'add_then_use' ? <span className="ml-2 rounded-sm border border-[var(--border)] px-1 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--muted-foreground)]">HubSpot only</span> : null}
                     {r.recommended?.key === c.key ? (
                       <span className="ml-2 rounded-sm border border-[var(--primary)] px-1 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[var(--primary)]" data-testid="owner-recommended">
-                        Recommended for {r.purpose === 'HYPOTHESIS_ACTIVATION' ? 'this hypothesis' : r.purpose === 'SITE_PILOT' ? 'a site pilot' : 'this initiative'}
+                        Recommended for {r.purpose === 'HYPOTHESIS_ACTIVATION' ? 'this thesis' : r.purpose === 'SITE_PILOT' ? 'a site pilot' : 'this initiative'}
                       </span>
                     ) : null}
                   </p>

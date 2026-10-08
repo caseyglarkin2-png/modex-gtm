@@ -20,6 +20,7 @@
 
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
+import { loginHref } from '@/lib/auth-return';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { isApproved } from '@/lib/gap/compiler/approval';
@@ -40,12 +41,20 @@ import {
   type ReportApproval,
 } from '@/components/gap/compile-report';
 import { EnrollShadowButton } from './enroll-shadow-button';
+import { DoneNext } from '@/components/gap/done-next';
+import { accountSlug } from '@/lib/gap/account-intel/href';
+import { GAP_NOT_FOUND_TITLE } from '@/components/gap/gap-not-found';
 
 export const dynamic = 'force-dynamic';
-export const metadata = { title: 'Action pack' };
+/** R63-B S7: a link to no thesis is titled as not found, never "Action pack". */
+export async function generateMetadata({ params }: { params: Promise<{ hypothesisId: string }> }): Promise<{ title: string }> {
+  const { hypothesisId } = await params;
+  const found = await prisma.prospectingHypothesis.findUnique({ where: { id: hypothesisId }, select: { id: true } }).catch(() => undefined);
+  return { title: found === null ? GAP_NOT_FOUND_TITLE : 'Action pack' };
+}
 
 type Params = { hypothesisId: string };
-type Search = { personaId?: string; decisionId?: string };
+type Search = { personaId?: string; decisionId?: string; from?: string; i?: string };
 
 function stepCopy(steps: Array<{ templates?: { subjectTemplate?: string | null; bodyTemplate?: string | null } | null }>, i: number) {
   const t = steps[i]?.templates ?? null;
@@ -67,9 +76,8 @@ export default async function PreviewPage({ params, searchParams }: { params: Pr
   if (assertGapEnabled('GAP_MESSAGE_COMPILER_ENABLED')) notFound();
 
   const session = await auth();
-  if (!session?.user?.email) redirect('/login');
-
   const { hypothesisId } = await params;
+  if (!session?.user?.email) redirect(loginHref(`/gap/preview/${encodeURIComponent(hypothesisId)}/`));
   const search = (await searchParams) ?? {};
   const target = {
     hypothesisId,
@@ -133,6 +141,8 @@ export default async function PreviewPage({ params, searchParams }: { params: Pr
       </div>
 
       <ActionPackView target={target} />
+      {/* R60: opened from Work, the pack ends where every account ends: Back to Work, Next account, or record it. */}
+      {search.from === 'work' ? <DoneNext slug={accountSlug(hypothesis.account_name)} index={/^\d+$/.test(search.i ?? '') ? Number(search.i) : null} accountName={hypothesis.account_name} /> : null}
 
       <details className="rounded-md border border-[var(--border)] p-3" data-testid="system-details">
         <summary className="cursor-pointer text-sm font-medium">System details</summary>

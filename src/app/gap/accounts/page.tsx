@@ -5,6 +5,7 @@
  */
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
+import { loginHref } from '@/lib/auth-return';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { Breadcrumb } from '@/components/breadcrumb';
@@ -16,7 +17,7 @@ import { loadAccountFirstTouches } from '@/lib/gap/motion/load';
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Accounts | GAP' };
 
-async function loadIndex(): Promise<AccountIndexRow[]> {
+async function loadIndex(): Promise<{ rows: AccountIndexRow[]; others: AccountIndexRow[] }> {
   const now = new Date();
   const accounts = (await prisma.account.findMany({ select: { name: true, tier: true, vertical: true, priority_band: true }, orderBy: { name: 'asc' } })) as Array<{ name: string; tier: string | null; vertical: string | null; priority_band: string | null }>;
   const names = accounts.map((a) => a.name);
@@ -35,25 +36,28 @@ async function loadIndex(): Promise<AccountIndexRow[]> {
   const withThesis = new Set((theses as Array<{ account_name: string }>).map((t) => t.account_name));
   // Test fixtures (E2E) and bare-domain rows are not seller accounts.
   const isFixture = (name: string) => /\bE2E\b/i.test(name) || /^[a-z0-9.-]+\.[a-z]{2,}$/i.test(name.trim());
-  const gapAccounts = accounts.filter((a) => !isFixture(a.name) && ((peopleBy.get(a.name) ?? 0) > 0 || withThesis.has(a.name) || (touches.get(a.name)?.length ?? 0) > 0));
-  return orderAccounts(gapAccounts.map((a) => toIndexRow(a, peopleBy.get(a.name) ?? 0, lastTouch(a.name))));
+  const worked = (a: { name: string }) => (peopleBy.get(a.name) ?? 0) > 0 || withThesis.has(a.name) || (touches.get(a.name)?.length ?? 0) > 0;
+  const gapAccounts = accounts.filter((a) => !isFixture(a.name) && worked(a));
+  // R63-A S13: the search covers every account (its page exists whether or not GAP has worked it yet).
+  const others = accounts.filter((a) => !isFixture(a.name) && !worked(a));
+  return { rows: orderAccounts(gapAccounts.map((a) => toIndexRow(a, peopleBy.get(a.name) ?? 0, lastTouch(a.name)))), others: orderAccounts(others.map((a) => toIndexRow(a, 0, null))) };
 }
 
 export default async function GapAccountsPage({ searchParams }: { searchParams?: Promise<{ q?: string }> }) {
   if (assertGapEnabled('GAP_ROUTING_ENABLED')) notFound();
   const session = await auth();
-  if (!session?.user?.email) redirect('/login');
+  if (!session?.user?.email) redirect(loginHref('/gap/accounts/'));
   const q = ((await searchParams) ?? {}).q ?? '';
-  const rows = await loadIndex();
+  const { rows, others } = await loadIndex();
   return (
     <div className="space-y-5">
       <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'GAP', href: '/gap' }, { label: 'Accounts' }]} />
       <div>
         <h1 id="accounts-heading" className="text-2xl font-semibold tracking-tight">Accounts</h1>
-        <p className="mt-1 text-sm text-[var(--muted-foreground)]">Every GAP account. Type to find one; Work lists the ones that need you.</p>
+        <p className="mt-1 text-sm text-[var(--muted-foreground)]">Every GAP account. Type to find any account; Work lists the ones that need you.</p>
       </div>
       <GapSubnav />
-      <AccountsIndex rows={rows} initialQuery={q} />
+      <AccountsIndex rows={rows} others={others} initialQuery={q} />
     </div>
   );
 }

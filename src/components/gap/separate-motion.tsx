@@ -6,6 +6,7 @@
  */
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 export function SeparateMotion({ accountName, detail, relatedAccounts }: { accountName: string; detail: string; relatedAccounts: string[] }) {
   const router = useRouter();
@@ -22,7 +23,7 @@ export function SeparateMotion({ accountName, detail, relatedAccounts }: { accou
       const body = ((await res.json().catch(() => ({}))) ?? {}) as { expiresAt?: string; reason?: string; error?: string };
       if (!res.ok) return setMsg(body.reason ?? `Not saved: ${body.error ?? res.status}`);
       setMsg(`Recorded until ${String(body.expiresAt).slice(0, 10)}. Every other gate still runs at the click.`);
-      router.refresh();
+      refreshNow(router);
     } catch {
       setMsg('Not saved: the request did not complete.');
     } finally {

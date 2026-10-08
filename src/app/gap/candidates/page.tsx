@@ -4,6 +4,7 @@
  */
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
+import { loginHref } from '@/lib/auth-return';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { loadCandidateQueue } from '@/lib/gap/entity/candidates';
@@ -16,7 +17,7 @@ export const metadata = { title: 'GAP new companies' };
 export default async function CandidatesPage() {
   if (assertGapEnabled('GAP_ROUTING_ENABLED')) notFound();
   const session = await auth();
-  if (!session?.user?.email) redirect('/login');
+  if (!session?.user?.email) redirect(loginHref('/gap/candidates/'));
   const items = await loadCandidateQueue(prisma, { limit: 150 });
   return (
     <div className="mx-auto max-w-2xl space-y-5">

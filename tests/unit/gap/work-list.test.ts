@@ -4,7 +4,8 @@
  * lists last under In a deal; the chip counts are the filtered contents (N4); search keeps the order.
  */
 import { describe, expect, it } from 'vitest';
-import { buildWorkList, filterWork, workCounts, type WorkInput } from '@/lib/gap/work/list';
+import { buildWorkList, filterWork, snoozedWork, workCounts, workDay, type WorkInput } from '@/lib/gap/work/list';
+import type { WorkOutcome } from '@/lib/gap/work/outcome';
 import type { NextCandidate } from '@/lib/gap/routing/next-up';
 
 const NOW = new Date('2026-10-06T15:00:00Z');
@@ -34,15 +35,17 @@ const input = (over: Partial<WorkInput> = {}): WorkInput => ({
 });
 
 describe('buildWorkList', () => {
-  it('one card per account, the human reply first, then follow up, ready, decide, research, the opt-out after research (admin, never cold work), deals last', () => {
+  // Batch item 8: research and holds are parked (never "needs you"), listed after every card that needs the seller; the
+  // opt-out to record is admin only the seller can do, so it needs the seller and sits after the decide card.
+  it('one card per account, the human reply first, then follow up, ready, decide, the opt-out (admin, never cold work); then parked: research, deals last', () => {
     const cards = buildWorkList(input());
     expect(cards.map((c) => [c.accountName, c.stateKind])).toEqual([
       ['NFI Industries', 'replied'],
       ['H-E-B', 'follow_up'],
       ['PepsiCo', 'ready'],
       ['General Mills', 'decide'],
-      ['Tyson Foods', 'research'],
       ['Walmart Inc.', 'opted_out'],
+      ['Tyson Foods', 'research'],
       ['Dollar General', 'unknown_deal'],
       ['Kroger', 'in_deal'],
     ]);
@@ -60,20 +63,23 @@ describe('buildWorkList', () => {
     expect(cards.filter((c) => c.accountName === 'Walmart Inc.')).toHaveLength(1);
     expect(cards[0]).toMatchObject({ accountName: 'NFI Industries', stateKind: 'replied' });
   });
-  it('replies are classified before they rank: the opt-out never heads the list, even when nothing else is ready, and says what to do; the automatic reply is not work', () => {
+  it('replies are classified before they rank: the opt-out never heads the list over real work, and says what to do; with only research and holds left it is the one thing that needs the seller; the automatic reply is not work', () => {
     const cards = buildWorkList(input());
     const walmart = cards.find((c) => c.accountName === 'Walmart Inc.')!;
     expect(cards[0].accountName).not.toBe('Walmart Inc.');
     const onlyAdmin = buildWorkList(input({ candidates: [cand('research', 'Tyson Foods', 'Research Tyson Foods', [-1, 2])], replies: [{ accountName: 'Walmart Inc.', contactEmail: 'timothy.cooper@walmart.com', subject: null, snippet: 'stop', receivedAt: '2026-10-05T14:00:00Z' }] }));
-    expect(onlyAdmin.map((c) => c.accountName)).toEqual(['Tyson Foods', 'Walmart Inc.', 'Dollar General', 'Kroger']);
+    expect(onlyAdmin.map((c) => c.accountName)).toEqual(['Walmart Inc.', 'Tyson Foods', 'Dollar General', 'Kroger']);
     expect(walmart.state).toBe('Opted out');
     expect(walmart.why).toMatch(/^timothy\.cooper@walmart\.com wrote Oct 5: "stop"\. They asked not to be contacted: record it as do not contact\./);
-    expect(walmart.next).toEqual({ label: 'Record the opt-out', href: '/gap?lane=replies' });
+    // R60, capture once: the opt-out is recorded in Capture opened on the reply (its one entry), never a lane.
+    expect(walmart.next?.label).toBe('Record the opt-out');
+    expect(walmart.next?.href).toMatch(/^\/gap\/capture\?account=Walmart\+Inc\.&.*context=email&from=reply%3A/);
+    expect(walmart.capture).toBeNull();
     expect(cards.some((c) => c.accountName === 'FedEx')).toBe(false);
     const nfi = cards[0];
     expect(nfi.state).toBe('Someone replied');
     expect(nfi.blocker).toMatch(/No cold email to anyone here until it is recorded/);
-    expect(nfi.next?.label).toBe('Read the reply and record what they said');
+    expect(nfi.next?.label).toBe('Log what they said');
   });
   it('a held account is never a cold action: Kroger lists In a deal with the deal brief, its READY card dropped; UNKNOWN is a caution with no action', () => {
     const cards = buildWorkList(input());
@@ -94,7 +100,8 @@ describe('buildWorkList', () => {
     expect(pepsi.stateKind).toBe('research');
     const ready = buildWorkList(input()).find((c) => c.accountName === 'PepsiCo')!;
     expect(ready.person).toEqual({ name: 'Karen Darling', title: 'Senior Director - PBNA Transportation' });
-    expect(ready.next).toEqual({ label: 'Contact Karen Darling', href: '/gap?lane=ready' });
+    // R60: a lane link never reaches a card: it opens the account, where NEXT holds the move.
+    expect(ready.next).toEqual({ label: 'Contact Karen Darling', href: '/gap/accounts/pepsico' });
   });
   it('an unavailable In Deals read claims nothing about deals; a held card still holds', () => {
     const cards = buildWorkList(input({ inDeals: { status: 'unavailable', accounts: [] } }));
@@ -186,10 +193,72 @@ describe('counts and filters', () => {
   it('the chip counts are the filtered contents; the filter and the search keep the Work order', () => {
     const cards = buildWorkList(input());
     const counts = workCounts(cards);
-    expect(counts).toEqual({ all: 8, replies: 2, follow_up: 1, ready: 1, review: 1, research: 1, deals: 2 });
-    for (const f of ['replies', 'follow_up', 'ready', 'review', 'research', 'deals'] as const) expect(filterWork(cards, f, '')).toHaveLength(counts[f]);
+    expect(counts).toEqual({ all: 8, commitments: 0, replies: 2, follow_up: 1, ready: 1, review: 1, research: 1, deals: 2 });
+    for (const f of ['commitments', 'replies', 'follow_up', 'ready', 'review', 'research', 'deals'] as const) expect(filterWork(cards, f, '')).toHaveLength(counts[f]);
     expect(filterWork(cards, 'all', 'pep').map((c) => c.accountName)).toEqual(['PepsiCo']);
     expect(filterWork(cards, 'replies', 'WAL').map((c) => c.accountName)).toEqual(['Walmart Inc.']);
     expect(filterWork(cards, 'all', '').map((c) => c.index)).toEqual([0, 1, 2, 3, 4, 5, 6, 7]);
+  });
+});
+
+describe('outcomes on the Work list (R14)', () => {
+  const o = (accountName: string, kind: WorkOutcome['kind'], until: string, reason: string | null = null): [string, WorkOutcome] => [accountName, { accountName, kind, reason, until, by: 'casey@freightroll.com', at: '2026-10-06T14:00:00Z' }];
+  it('a snoozed account leaves the list and is counted in the footer; a skipped or logged one drops to the end with its line; a reply or an opt-out is never hidden by a seller note', () => {
+    const outcomes = new Map([o('PepsiCo', 'snoozed', '2026-10-09T12:00:00Z', 'travel'), o('H-E-B', 'skipped', '2026-10-07T04:00:00Z'), o('General Mills', 'logged', '2026-10-07T04:00:00Z', 'called Jo'), o('NFI Industries', 'snoozed', '2026-10-20T12:00:00Z'), o('Walmart Inc.', 'skipped', '2026-10-07T04:00:00Z')]);
+    const cards = buildWorkList(input({ outcomes }));
+    const names = cards.map((c) => c.accountName);
+    expect(names).not.toContain('PepsiCo');
+    // The reply (NFI) and the opt-out (Walmart) stay where the buyer's move puts them.
+    expect(names[0]).toBe('NFI Industries');
+    expect(cards.find((c) => c.accountName === 'Walmart Inc.')?.outcome).toBeUndefined();
+    // Skipped and logged accounts come after research, before the deals, with their lines.
+    const heb = cards.find((c) => c.accountName === 'H-E-B')!;
+    const mills = cards.find((c) => c.accountName === 'General Mills')!;
+    expect(heb.outcome?.line).toBe('Skipped for today, you, today.');
+    expect(mills.outcome?.line).toBe('Logged outside GAP (called Jo), you, today.');
+    expect(names.indexOf('Tyson Foods')).toBeLessThan(names.indexOf('H-E-B'));
+    expect(names.indexOf('H-E-B')).toBeLessThan(names.indexOf('Kroger'));
+    // The footer lists the snoozed accounts that left, by date.
+    expect(snoozedWork(outcomes, cards, NOW)).toEqual([{ accountName: 'PepsiCo', line: 'Snoozed until Oct 9 (travel), you, today.', until: '2026-10-09T12:00:00Z' }]);
+    // Without outcomes nothing changes.
+    expect(buildWorkList(input()).map((c) => c.outcome)).toEqual(buildWorkList(input()).map(() => undefined));
+  });
+});
+
+describe('a motion in flight on the Work list (R14, as ranked by R41)', () => {
+  // R41 changed one R14 rule on purpose: a first touch that WENT OUT is waiting on the buyer (then on the follow-up's
+  // interval), so it is listed under Waiting, counted, and no longer a card that inflates "needs you". An outstanding
+  // GAP draft is still work (send or discard it) and stays a card.
+  it('a proven send is WAITING (never a cold READY, never dropped); an outstanding draft is a card; a reply or a hold still wins the account', () => {
+    const inMotion = new Map([
+      ['PepsiCo', { state: 'sent' as const, at: '2026-10-06T14:00:00Z', person: { name: 'Karen Darling', title: 'Senior Director - PBNA Transportation' } }],
+      ['Mondelez', { state: 'drafted' as const, at: '2026-10-06T13:00:00Z', person: { name: 'Pat Lee', title: null } }],
+      ['Kroger', { state: 'sent' as const, at: '2026-10-05T14:00:00Z', person: null }],
+      ['NFI Industries', { state: 'sent' as const, at: '2026-10-05T14:00:00Z', person: null }],
+    ]);
+    const day = workDay(input({ inMotion }));
+    const names = day.cards.map((c) => c.accountName);
+    expect(names).not.toContain('PepsiCo');
+    expect(day.waiting.find((w) => w.accountName === 'PepsiCo')).toMatchObject({ kind: 'motion', title: 'First touch out to Karen Darling', line: 'Sent Oct 6; waiting on their reply. The next person unlocks after 5 business days without one.' });
+    const mondelez = day.cards.find((c) => c.accountName === 'Mondelez')!;
+    expect(mondelez.state).toBe('A GAP draft to Pat Lee is outstanding');
+    expect(mondelez.tier).toBe('ready');
+    // The reply at NFI wins over the motion; Kroger is held by its deal: the motion never lifts the hold.
+    expect(names.indexOf('NFI Industries')).toBe(0);
+    expect(day.cards.find((c) => c.accountName === 'NFI Industries')?.stateKind).toBe('replied');
+    expect(day.cards.find((c) => c.accountName === 'Kroger')?.stateKind).toBe('in_deal');
+    expect(day.waiting.map((w) => w.accountName)).toEqual(['PepsiCo']);
+    // Batch item 8: Tyson (research), Dollar General and Kroger (holds) are parked, never "needs you".
+    expect(day.counts).toMatchObject({ needsYou: 5, parked: 3, waiting: 1 });
+    // A READY summary read before the touch is stale against it: still waiting. One read after it agrees: waiting.
+    const stale = new Map([['PepsiCo', { accountName: 'PepsiCo', state: 'ready' as const, stateLine: 'Ready for a first touch: Karen Darling', person: { name: 'Karen Darling', title: null }, blocker: null, coldTouchAllowed: true, nextText: 'Prepare the first touch to Karen Darling.', at: '2026-10-06T13:50:00Z' }]]);
+    expect(workDay(input({ inMotion, summaries: stale })).cards.map((c) => c.accountName)).not.toContain('PepsiCo');
+    const fresh = new Map([['PepsiCo', { ...stale.get('PepsiCo')!, state: 'in_motion' as const, stateLine: 'First touch in motion: Karen Darling', nextText: 'Karen Darling has the first touch.', at: '2026-10-06T14:10:00Z' }]]);
+    expect(workDay(input({ inMotion, summaries: fresh })).waiting.map((w) => w.accountName)).toEqual(['PepsiCo']);
+    // A newer summary that says the account is held (a conversation the motion saw) brings the card back.
+    const heldNow = new Map([['PepsiCo', { ...stale.get('PepsiCo')!, state: 'replied' as const, stateLine: 'Someone replied: Karen Darling', blocker: 'Paused: Karen Darling answered.', at: '2026-10-06T15:00:00Z' }]]);
+    const back = workDay(input({ inMotion, summaries: heldNow }));
+    expect(back.cards.find((c) => c.accountName === 'PepsiCo')?.stateKind).toBe('replied');
+    expect(back.waiting.map((w) => w.accountName)).toEqual([]);
   });
 });

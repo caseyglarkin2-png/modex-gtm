@@ -17,6 +17,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { HYPOTHESIS_STATUSES } from '@/lib/gap/taxonomy';
+import { refreshNow } from '@/components/gap/refresh-now';
 import {
   HypothesisDrawer,
   HypothesisStatusBadge,
@@ -82,7 +83,7 @@ export function HypothesisList({ items, status, showFilter = true, emptyNote }: 
         // The drawer keeps the pre-transition row; the refresh below re-renders the table.
       }
     }
-    router.refresh();
+    refreshNow(router);
   }
 
   function moveTo(index: number) {
@@ -139,7 +140,8 @@ export function HypothesisList({ items, status, showFilter = true, emptyNote }: 
         <>
           <div className="flex items-center justify-between">
             <p className="text-xs text-[var(--muted-foreground)]">
-              {items.length} hypothesis{items.length === 1 ? '' : 'es'}
+              {/* R63-B N1: "7 hypothesises" read as a typo; the object is a thesis (R60 words). */}
+              {items.length} {items.length === 1 ? 'thesis' : 'theses'}
             </p>
             <Button type="button" size="sm" onClick={() => moveTo(nextToReviewIndex)}>
               Review next
@@ -166,7 +168,8 @@ export function HypothesisList({ items, status, showFilter = true, emptyNote }: 
                     key={row.id}
                     role="button"
                     tabIndex={0}
-                    aria-label={`Open ${row.account_name} ${row.problem_family}`}
+                    // R63-B S15: the row's name in the same words its cells show, never the family's code.
+                    aria-label={`Open ${row.account_name} ${row.problem_family.replace(/_/g, ' ')}`}
                     className="cursor-pointer"
                     onClick={() => void open(row, index)}
                     onKeyDown={(event) => {

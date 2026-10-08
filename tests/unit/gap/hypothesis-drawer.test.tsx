@@ -81,7 +81,9 @@ describe('<FactBlock>', () => {
     expect(within(block).getByRole('heading')).toHaveTextContent(/^FACT$/);
     expect(within(block).getByText('Observed, cited')).toBeInTheDocument();
     expect(within(block).getByText('Acme opened a second DC in Reno.')).toBeInTheDocument();
-    const link = within(block).getByRole('link', { name: '1' });
+    // R63-B N12: the numbered link is named by its source, not by "1" alone.
+    const link = within(block).getByRole('link', { name: 'Source 1: Opened a second DC in Reno (example.com)' });
+    expect(link).toHaveTextContent(/^1$/);
     expect(link).toHaveAttribute('href', 'https://example.com/reno');
     expect(block).not.toHaveAttribute('data-state', 'unsupported');
   });
@@ -121,7 +123,7 @@ describe('<HypothesisBlock>', () => {
     );
     const block = screen.getByTestId('hypothesis-block');
     expect(block).toHaveAttribute('data-block', 'hypothesis');
-    expect(within(block).getByRole('heading', { level: 3 })).toHaveTextContent(/^HYPOTHESIS$/);
+    expect(within(block).getByRole('heading', { level: 3 })).toHaveTextContent(/^WHAT WE THINK IS HAPPENING$/);
     expect(within(block).getByText('Seller inference, unproven')).toBeInTheDocument();
     expect(within(block).getByText('Root causes')).toBeInTheDocument();
     expect(within(block).getByText('Impacts')).toBeInTheDocument();
@@ -281,11 +283,11 @@ describe('<HypothesisDrawer>', () => {
     expect(error).toHaveTextContent('some_new_code');
   });
 
-  it('Reject hypothesis (withdraw) is disabled until a reason is typed, then the PATCH body carries the reason', async () => {
+  it('Reject the thesis (withdraw) is disabled until a reason is typed, then the PATCH body carries the reason', async () => {
     fetchMock.mockResolvedValueOnce(jsonResponse({ from: 'draft', to: 'rejected', effects: [] }, 200));
     render(<HypothesisDrawer hypothesis={row()} onClose={vi.fn()} onTransition={vi.fn()} />);
 
-    const withdraw = screen.getByRole('button', { name: 'Reject hypothesis' });
+    const withdraw = screen.getByRole('button', { name: 'Reject the thesis' });
     expect(withdraw).toBeDisabled();
 
     fireEvent.change(screen.getByLabelText('Reason'), { target: { value: 'Duplicate of hyp_0' } });
@@ -314,7 +316,7 @@ describe('<HypothesisDrawer>', () => {
     expect(screen.getByText('Closed')).toBeInTheDocument();
     expect(screen.queryByTestId('hypothesis-actions')).toBeNull();
     expect(screen.queryByTestId('hypothesis-sticky-decision')).toBeNull();
-    for (const name of ['Ready for review', 'Approve hypothesis', 'Use in routing', 'Reject hypothesis', 'Resolve', 'Expire']) {
+    for (const name of ['Ready for review', 'Approve the thesis', 'Use in routing', 'Reject the thesis', 'Resolve', 'Expire']) {
       expect(screen.queryByRole('button', { name })).toBeNull();
     }
   });
@@ -324,16 +326,16 @@ describe('<HypothesisDrawer>', () => {
     const sticky = screen.getByTestId('hypothesis-sticky-decision');
     expect(within(sticky).getByRole('button', { name: 'Approve + use' })).toBeInTheDocument();
     expect(within(sticky).getByRole('button', { name: 'Approve only' })).toBeInTheDocument();
-    expect(within(sticky).getByText(/Reject hypothesis/)).toBeInTheDocument();
-    // Reject hypothesis needs a reason, so its actual button lives in the lower Actions section, not duplicated here.
-    expect(within(sticky).queryByRole('button', { name: 'Reject hypothesis' })).toBeNull();
+    expect(within(sticky).getByText(/Reject the thesis/)).toBeInTheDocument();
+    // Reject the thesis needs a reason, so its actual button lives in the lower Actions section, not duplicated here.
+    expect(within(sticky).queryByRole('button', { name: 'Reject the thesis' })).toBeNull();
   });
 
-  it('review_required: the sticky decision area recommends Approve + use, with Needs work / Reject hypothesis as secondary', () => {
+  it('review_required: the sticky decision area recommends Approve + use, with Needs work / Reject the thesis as secondary', () => {
     render(<HypothesisDrawer hypothesis={row({ status: 'review_required' })} onClose={vi.fn()} onTransition={vi.fn()} />);
     const sticky = screen.getByTestId('hypothesis-sticky-decision');
     expect(within(sticky).getByRole('button', { name: 'Approve + use' })).toBeInTheDocument();
-    expect(within(sticky).getByText(/Needs work.*Reject hypothesis/)).toBeInTheDocument();
+    expect(within(sticky).getByText(/Needs work.*Reject the thesis/)).toBeInTheDocument();
   });
 
   it('renders Previous/Next only when the owner passes review-mode callbacks, and disables the edge it cannot move to', () => {

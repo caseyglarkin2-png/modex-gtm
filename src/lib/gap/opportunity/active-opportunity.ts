@@ -43,6 +43,7 @@
  */
 
 import { FREEMAIL_DOMAINS, OWN_DOMAINS } from '../replies/domains';
+import { classifyReply } from '../replies/classify';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -74,10 +75,49 @@ export interface OpenDeal {
   nextStep?: string | null;
 }
 
+/** R55: a deal HubSpot marks closed, and how it ended (`hs_is_closed_won`; null when HubSpot did not say). */
+export interface ClosedDeal {
+  id: string;
+  name: string | null;
+  stage: string | null;
+  won: boolean | null;
+  /** HubSpot's close date, when it holds one. */
+  closedAt: string | null;
+}
+
+/**
+ * R55: what a closed deal means for prospecting, when no deal is open:
+ *   customer   a deal closed WON: no first-touch campaign, ever automatically; post-sale expansion is the seller's
+ *              explicit call, worked with the customer
+ *   parked     the newest deal closed LOST (or ended with no outcome) and nothing material has changed since (no
+ *              newer verified fact, no buyer reply after it): no cold outreach until something does
+ */
+export interface Closure {
+  kind: 'customer' | 'parked';
+  deal: ClosedDeal;
+  why: string;
+}
+
 export type OpportunityTruth =
-  | { status: 'CLEAR'; companyIds: string[] }
-  | { status: 'ACTIVE'; companyIds: string[]; deals: OpenDeal[] }
+  | { status: 'CLEAR'; companyIds: string[]; closed?: ClosedDeal[]; closure?: Closure | null }
+  | { status: 'ACTIVE'; companyIds: string[]; deals: OpenDeal[]; closed?: ClosedDeal[] }
   | { status: 'UNKNOWN'; reason: OpportunityUnknownReason; detail?: string };
+
+const closedDay = (iso: string | null) => (iso ? new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' }) : 'a date HubSpot does not hold');
+
+/**
+ * R55, pure: the closure a CLEAR account carries. A won deal makes a customer (whatever else lost); otherwise the newest
+ * closed deal parks the account unless something material changed after it closed (`materialChangeAt`: the newest
+ * verified fact or human buyer reply after the close). An open deal is never a closure (it is ACTIVE).
+ */
+export function closureOf(closed: readonly ClosedDeal[], materialChangeAt: string | null): Closure | null {
+  if (closed.length === 0) return null;
+  const won = closed.filter((d) => d.won === true).sort((a, b) => String(b.closedAt ?? '').localeCompare(String(a.closedAt ?? '')))[0];
+  if (won) return { kind: 'customer', deal: won, why: `A customer: "${won.name ?? `deal ${won.id}`}" closed won on ${closedDay(won.closedAt)}. No first-touch campaign here; any expansion is your explicit call, worked with the customer, never a cold sequence.` };
+  const newest = [...closed].sort((a, b) => String(b.closedAt ?? '').localeCompare(String(a.closedAt ?? '')))[0];
+  if (materialChangeAt && newest.closedAt && materialChangeAt > newest.closedAt) return null;
+  return { kind: 'parked', deal: newest, why: `Parked: "${newest.name ?? `deal ${newest.id}`}" closed ${newest.won === false ? 'lost' : 'without an outcome'} on ${closedDay(newest.closedAt)}, and nothing material has changed since (a newer verified fact or a buyer reply would). No cold outreach until then.` };
+}
 
 /** What the resolver needs to know about the account, loaded from modex (loadOpportunityIdentity). */
 export interface OpportunityIdentity {
@@ -197,25 +237,23 @@ export async function resolveCompanyIdentity(
 
   const companies = new Map<string, string | null>();
   const hsId = String(identity.hubspotCompanyId ?? '').trim();
+  // R61: the company read and the domain search are independent HubSpot calls, so they are asked together (one round
+  // trip, not two); their answers are judged in the same order as before, so the reason given never changes.
+  const [byId, byDomain] = await Promise.allSettled([
+    hsId ? reads.companiesById([hsId]) : Promise.resolve(null),
+    domains.length > 0 ? reads.companiesByDomains(hubspotDomainVariants(domains)) : Promise.resolve(null),
+  ]);
   if (hsId) {
-    let known: { companies: CompanyRef[]; missing: string[] };
-    try {
-      known = await reads.companiesById([hsId]);
-    } catch (e) {
-      return fail(unknown('hubspot_error', `company read: ${errText(e)}`));
-    }
+    if (byId.status === 'rejected') return fail(unknown('hubspot_error', `company read: ${errText(byId.reason)}`));
+    const known = byId.value as { companies: CompanyRef[]; missing: string[] } | null;
     if (!known || !Array.isArray(known.companies) || !Array.isArray(known.missing)) return fail(unknown('malformed_response', 'company read'));
     // A company id HubSpot no longer has (merged or deleted) is not a determined identity.
     if (known.missing.length > 0 || !known.companies.some((c) => String(c.id) === hsId)) return fail(unknown('identity_unresolved', `HubSpot company ${hsId} not found`));
     for (const c of known.companies) companies.set(String(c.id), c.name ?? null);
   }
   if (domains.length > 0) {
-    let hit: { companies: CompanyRef[]; truncated: boolean };
-    try {
-      hit = await reads.companiesByDomains(hubspotDomainVariants(domains));
-    } catch (e) {
-      return fail(unknown('hubspot_error', `company search: ${errText(e)}`));
-    }
+    if (byDomain.status === 'rejected') return fail(unknown('hubspot_error', `company search: ${errText(byDomain.reason)}`));
+    const hit = byDomain.value as { companies: CompanyRef[]; truncated: boolean } | null;
     if (!hit || !Array.isArray(hit.companies)) return fail(unknown('malformed_response', 'company search'));
     if (hit.truncated) return fail(unknown('identity_ambiguous', `more companies match ${domains.join(', ')} than one read returns`));
     for (const c of hit.companies) if (String(c.id).trim()) companies.set(String(c.id).trim(), c.name ?? null);
@@ -288,12 +326,19 @@ async function resolveDealsFor(identity: OpportunityIdentity, companyIds: string
   if (!Array.isArray(rows)) return unknown('malformed_response', 'deal read');
   const byId = new Map(rows.map((r) => [String(r?.id ?? ''), r]));
   const open: OpenDeal[] = [];
+  const closedDeals: ClosedDeal[] = [];
   for (const id of dealIds) {
     const r = byId.get(id);
     if (!r || !r.properties) return unknown('malformed_response', `deal ${id} did not read back`);
     const closed = String(r.properties.hs_is_closed ?? '').trim().toLowerCase();
     if (closed !== 'true' && closed !== 'false') return unknown('malformed_response', `deal ${id} has no hs_is_closed`);
-    if (closed === 'true') continue;
+    if (closed === 'true') {
+      // R55: how it ended, as HubSpot says (never inferred from a stage name).
+      const wonRaw = String(r.properties.hs_is_closed_won ?? '').trim().toLowerCase();
+      const at = r.properties.closedate ? new Date(String(r.properties.closedate)) : null;
+      closedDeals.push({ id, name: r.properties.dealname ?? null, stage: r.properties.dealstage ?? null, won: wonRaw === 'true' ? true : wonRaw === 'false' ? false : null, closedAt: at && !Number.isNaN(at.getTime()) ? at.toISOString() : null });
+      continue;
+    }
     open.push({
       id,
       name: r.properties.dealname ?? null,
@@ -307,7 +352,7 @@ async function resolveDealsFor(identity: OpportunityIdentity, companyIds: string
       ...(r.properties.hs_next_step?.toString().trim() ? { nextStep: r.properties.hs_next_step.toString().trim() } : {}),
     });
   }
-  if (open.length === 0) return { status: 'CLEAR', companyIds };
+  if (open.length === 0) return { status: 'CLEAR', companyIds, ...(closedDeals.length ? { closed: closedDeals } : {}) };
 
   // Metadata only: who is on the open deals. A failure here never changes ACTIVE.
   try {
@@ -316,7 +361,24 @@ async function resolveDealsFor(identity: OpportunityIdentity, companyIds: string
   } catch {
     // ACTIVE stands without the contact list.
   }
-  return { status: 'ACTIVE', companyIds, deals: open };
+  return { status: 'ACTIVE', companyIds, deals: open, ...(closedDeals.length ? { closed: closedDeals } : {}) };
+}
+
+/**
+ * R55: the newest material change at the account after `since` (a verified fact registered for it, or a reply a
+ * PERSON wrote, never an automatic notice, a bounce or an opt-out), or null. Soft: an unreadable store is no change
+ * (so a parked account stays parked: the conservative answer).
+ */
+export async function materialChangeSince(prisma: PrismaLike, accountName: string, since: string | null): Promise<string | null> {
+  if (!since) return null;
+  const after = new Date(since);
+  const [fact, replies] = await Promise.all([
+    typeof prisma?.prospectingSignal?.findFirst === 'function' ? prisma.prospectingSignal.findFirst({ where: { account_name: accountName, source_kind: 'evidence_record', observed_at: { gt: after } }, orderBy: { observed_at: 'desc' }, select: { observed_at: true } }).catch(() => null) : null,
+    typeof prisma?.inboundMessage?.findMany === 'function' ? prisma.inboundMessage.findMany({ where: { thread: { account_name: accountName }, received_at: { gt: after } }, orderBy: { received_at: 'desc' }, take: 10, select: { received_at: true, snippet: true, subject: true, from_email: true } }).catch(() => []) : [],
+  ]);
+  const human = (replies as Array<{ received_at: Date; snippet: string | null; subject: string | null; from_email: string }>).find((r) => classifyReply({ snippet: r.snippet ?? '', subject: r.subject, from: r.from_email }).kind === 'human');
+  const dates = [fact?.observed_at, human?.received_at].filter(Boolean).map((d) => new Date(d as Date).toISOString()).sort();
+  return dates.pop() ?? null;
 }
 
 /**
@@ -401,7 +463,15 @@ export async function resolveAccountOpportunity(
     try {
       const identity = await loadOpportunityIdentity(prisma, accountName, extra);
       const reads = deps.reads ?? (await import('./hubspot-reads')).hubspotOpportunityReads;
-      return await resolveOpportunity(identity, reads);
+      const truth = await resolveOpportunity(identity, reads);
+      // R55: with no open deal, a closed one says whether the account is a customer or parked (one place, so the
+      // gates, routing, the brief and the pursuit state all read the same answer).
+      if (truth.status === 'CLEAR' && truth.closed?.length) {
+        const newest = [...truth.closed].sort((a, b) => String(b.closedAt ?? '').localeCompare(String(a.closedAt ?? '')))[0];
+        const changed = truth.closed.some((d) => d.won === true) ? null : await materialChangeSince(prisma, accountName, newest.closedAt).catch(() => null);
+        return { ...truth, closure: closureOf(truth.closed, changed) };
+      }
+      return truth;
     } catch (e) {
       return unknown('hubspot_error', errText(e));
     }

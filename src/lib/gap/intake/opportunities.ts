@@ -25,6 +25,7 @@ import { traitsOf } from './traits';
 import { decideApproach } from '../motion/approach';
 import { restrictionForName } from '../policy/restriction';
 import { sensitivityOf } from '../research/sensitivity';
+import { accountHref } from '../account-intel/href';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -77,7 +78,8 @@ export function proposeOpportunity(i: OpportunityInput): Opportunity {
   const decided = decideApproach({ deal: 'CLEAR', contradicted: !!i.contradicted, conversation: i.conversation, touchHold: null, verifiedFact: !!i.fact, reachable: true, source: { sourceType: i.source.sourceType, context: ctx, name: i.source.name }, groundedThesis: !!i.thesis, sensitiveOnly: i.fact ? sensitivityOf(i.fact.quote) : null, restriction: restrictionForName(m.accountName) });
   if (decided.kind === 'NO_GOOD_MOTION' || decided.kind === 'IN_DEAL' || decided.kind === 'INTRO_ONLY') {
     approach = 'hold';
-    suggested = `Not now. ${decided.why}`;
+    // R63-B S1: a do not contact is not "not now"; it is said as it is.
+    suggested = /^Do not contact: /.test(decided.why) ? decided.why : `Not now. ${decided.why}`;
   } else if (decided.kind === 'FOLLOW_UP' && i.conversation) {
     approach = 'follow_up';
     suggested = `Follow-up: there is a conversation at ${m.accountName} with ${i.conversation.who} (${i.conversation.responseClass.replace(/_/g, ' ')}). Continue it in that thread; this is not a cold first touch.`;
@@ -130,7 +132,8 @@ export function proposeOpportunity(i: OpportunityInput): Opportunity {
     learn: i.thesis ? i.thesis.learn : i.fact ? 'No thesis yet: draft one from this fact in Research, then set what to learn.' : null,
     wrongIf: i.thesis?.wrongIf ?? null,
     safety,
-    reviewHref: `/gap?lane=research#account-${encodeURIComponent(m.accountName)}`,
+    // R60: Review opens the account (its NEXT, its story, its people), never the research lane of every account.
+    reviewHref: accountHref(m.accountName),
   };
 }
 

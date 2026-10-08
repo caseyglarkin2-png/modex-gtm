@@ -7,8 +7,17 @@
  * hold clears then; re-review S7). A shared consumer domain, or our own, says
  * nothing about the account. Enforced at the send gate (step 0) and at live
  * enrollment.
+ *
+ * R42b (audit addendum at 31f09c71): the hold and the Work card read the SAME
+ * classification (classify.ts over the subject and the message text). An
+ * automatic notice or a bounce holds nobody; a person (a reply, a referral,
+ * an objection) or an opt-out holds until a human records it. Before, the
+ * hold looked at the subject only, so a notice without the canonical subject
+ * held every send with no card to tell the seller why.
  */
-import { AUTO_REPLY_SUBJECT, FREEMAIL_DOMAINS, OWN_DOMAINS } from './domains';
+import { FREEMAIL_DOMAINS, OWN_DOMAINS } from './domains';
+import { isPersonReply } from './classify';
+import { REPLY_SENT, REPLY_SUBJECT_TYPE } from '../execution/draft-ledger';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -21,6 +30,8 @@ export interface AccountReply {
   from_email: string;
   subject: string | null;
   received_at: Date;
+  snippet?: string | null;
+  body_text?: string | null;
 }
 
 /** A company domain (not a shared consumer domain, not ours) of an address, or null. */
@@ -52,11 +63,11 @@ export async function accountRepliedRecently(prisma: PrismaLike, recipient: stri
       OR: [...domains].sort().map((d) => ({ from_email: { endsWith: `@${d}`, mode: 'insensitive' } })),
       received_at: { gte: new Date(now.getTime() - ACCOUNT_REPLY_WINDOW_DAYS * 86_400_000) },
     },
-    select: { id: true, from_email: true, subject: true, received_at: true },
+    select: { id: true, from_email: true, subject: true, received_at: true, snippet: true, body_text: true },
     orderBy: { received_at: 'desc' },
     take: 20,
   });
-  const human = rows.filter((r) => !AUTO_REPLY_SUBJECT.test(r.subject ?? ''));
+  const human = rows.filter((r) => isPersonReply({ text: r.body_text, snippet: r.snippet, subject: r.subject, from: r.from_email }));
   if (human.length === 0) return null;
   // A message a human has already read and dispositioned no longer holds anyone.
   const read: Array<{ source_id: string }> = prisma.conversationDisposition?.findMany
@@ -68,5 +79,12 @@ export async function accountRepliedRecently(prisma: PrismaLike, recipient: stri
       })
     : [];
   const done = new Set(read.map((r) => r.source_id));
+  // Batch item 8 (finding 3): an answer GAP sent in their thread is the record of their message too. The account stays
+  // in a conversation (motion/load.ts loadAccountConversations counts the answer), so nobody else there gets a cold
+  // first touch because of it.
+  if (prisma.gapAuditEvent?.findMany) {
+    const answered: Array<{ kind?: string; subject_type?: string; subject_id: string }> = await prisma.gapAuditEvent.findMany({ where: { kind: REPLY_SENT, subject_type: REPLY_SUBJECT_TYPE, subject_id: { in: human.map((r) => r.id) } }, select: { kind: true, subject_type: true, subject_id: true } });
+    for (const a of answered ?? []) if (a.kind === REPLY_SENT && a.subject_type === REPLY_SUBJECT_TYPE) done.add(String(a.subject_id));
+  }
   return human.find((r) => !done.has(r.id)) ?? null;
 }

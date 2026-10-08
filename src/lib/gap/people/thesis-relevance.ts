@@ -7,7 +7,19 @@
  *
  * Explainable: fact FAMILIES (from the fact and the hypothesis text) meet responsibility TAGS (from the title), and
  * the answer is a tier with its reason in words. Never a hidden numeric score. Pure.
+ *
+ * R32 (GAP OS execution recovery, 2026-10-06): the person is matched to the MOTION and its SCOPE, not only to the fact.
+ *   approach   a job / procurement-led thesis whose posting names a role is matched on THAT role's function (the
+ *              hiring manager's remit), never on every yard or trailer word in the posting's text: a fleet title is
+ *              not "direct" on a Yard Operations Manager posting because the posting mentions trailers
+ *   site       a fact that names a site ("its Tulsa distribution center") makes a person who runs ANOTHER site
+ *              related, never direct; a network remit is not capped (it covers every site)
+ *   division   at a multi-division parent (people/division.ts), a fact one division states is never attributed to a
+ *              person in another division (a PBNA fact is not Frito-Lay's); a person whose division is not on record
+ *              keeps their tier and the reason says whose fact it is
  */
+import { divisionOf } from './division';
+import { postingRoleOf } from '../research/claim-types';
 
 export type FactFamily = 'NETWORK_PROGRAM' | 'SITE_OPENING' | 'AUTOMATION_TECH' | 'FLEET' | 'AIR_NETWORK' | 'YARD' | 'GENERIC';
 export type RelevanceTier = 'direct' | 'related' | 'none';
@@ -127,6 +139,19 @@ export interface ThesisContext {
   observation: string;
   problemHypothesis?: string | null;
   problemFamily?: string | null;
+  /** R32: the thesis's declared evidence approach (metadata.approach); absent reads as the event-led path. */
+  approach?: string | null;
+  /** R32: the role a job posting names (its claim attributes), when known; else read from the observation. */
+  postingRole?: string | null;
+}
+
+/** R32: where the person sits, for the site and division scope (all optional; unknown never demotes). */
+export interface PersonScope {
+  accountName?: string | null;
+  /** The person's location (a CRM "City, State, Country" line). */
+  location?: string | null;
+  /** The CRM company field (a division's name, e.g. Frito-Lay), never identity. */
+  company?: string | null;
 }
 
 export interface ThesisRelevance {
@@ -136,14 +161,123 @@ export interface ThesisRelevance {
   families: FactFamily[];
   /** The fact family in words (for the headline). */
   factLabel: string;
+  /** R32: the posting's role, when the thesis is job-led and the role is known (the function the match was made on). */
+  postingRole?: string | null;
+  /** R32: a direct fit capped to related because the person runs another site or sits in another division. */
+  cappedBy?: 'site' | 'division' | null;
+  /** R32: the fact names a site and the person runs that same site. */
+  siteMatch?: boolean;
 }
+
+const US_STATES = new Set(
+  'alabama alaska arizona arkansas california colorado connecticut delaware florida georgia hawaii idaho illinois indiana iowa kansas kentucky louisiana maine maryland massachusetts michigan minnesota mississippi missouri montana nebraska nevada ohio oklahoma oregon pennsylvania tennessee texas utah vermont virginia washington wisconsin wyoming'
+    .split(' ')
+    .concat(['new hampshire', 'new jersey', 'new mexico', 'new york', 'north carolina', 'north dakota', 'rhode island', 'south carolina', 'south dakota', 'west virginia']),
+);
+const STATE_CODE = /^(?:A[LKZR]|C[AOT]|DE|FL|GA|HI|I[ADLN]|K[SY]|LA|M[ADEINOST]|N[CDEHJMVY]|O[HKR]|PA|RI|S[CD]|T[NX]|UT|V[AT]|W[AIVY]|DC)$/;
+const NOT_A_SITE = /^(?:the|a|an|its|our|their|new|north|south|east|west|central|america|americas|north america|united states|us|usa|global|corporate|headquarters|hq|january|february|march|april|may|june|july|august|september|october|november|december|monday|tuesday|wednesday|thursday|friday|saturday|sunday|company|group|inc|llc)$/i;
+const SITE_NOUN = '(?:[Dd]istribution [Cc]ent(?:er|re)|DC|[Pp]lant|[Ff]acility|[Ww]arehouse|[Ff]ulfil+ment [Cc]ent(?:er|re)|[Ss]ite|[Yy]ard|[Tt]erminal|[Hh]ub|[Cc]ampus|[Mm]anufacturing (?:[Pp]lant|[Ff]acility)|[Cc]ross[- ]?[Dd]ock)';
+const PLACE = "([A-Z][a-z]+(?:[ -][A-Z][a-z]+){0,2})";
+
+const usablePlace = (raw: string | null | undefined, account?: string | null): string | null => {
+  const v = String(raw ?? '').trim();
+  if (!v || NOT_A_SITE.test(v) || US_STATES.has(v.toLowerCase()) || STATE_CODE.test(v)) return null;
+  if (account && account.toLowerCase().split(/[^a-z0-9]+/).filter((w) => w.length > 2).includes(v.toLowerCase())) return null;
+  if (responsibilityTags(v).size) return null;
+  return v;
+};
+
+/**
+ * R32: the SITE a fact names, when it names one: "its Tulsa distribution center", "a new plant in Tulsa, Oklahoma",
+ * "at the Tulsa DC". A state alone, a region, a month or the account's own name is never a site. Null when none.
+ */
+export function factSite(text: string, accountName?: string | null): string | null {
+  const t = String(text ?? '');
+  // The place is a capitalized name (case-sensitive); every match is tried, so an early non-place never hides a site.
+  const patterns = [
+    new RegExp(`\\b(?:[Ii]ts|[Tt]he|[Aa]n?|[Oo]ur|[Nn]ew)\\s+(?:new\\s+)?${PLACE}(?:,\\s*[A-Z]{2})?\\s+${SITE_NOUN}\\b`, 'g'),
+    new RegExp(`\\b(?:in|at|near|outside)\\s+(?:the\\s+)?${PLACE},\\s*(?:[A-Z]{2}\\b|[A-Z][a-z]+(?:\\s[A-Z][a-z]+)?)`, 'g'),
+    new RegExp(`\\b(?:in|at|near)\\s+(?:the\\s+)?${PLACE}\\s+${SITE_NOUN}\\b`, 'g'),
+  ];
+  for (const re of patterns) {
+    for (const m of t.matchAll(re)) {
+      const place = usablePlace(m[1], accountName);
+      if (place) return place;
+    }
+  }
+  return null;
+}
+
+/**
+ * R32: the site a person runs, when their title or location says so: "DC Manager, Dallas", "Plant Manager - Tulsa",
+ * or a site-level title with a CRM location ("Dallas, Texas, United States"). A network title is never read as a
+ * site from its location (an executive based at headquarters runs every site).
+ */
+export function personSite(title: string | null | undefined, location: string | null | undefined, accountName?: string | null): string | null {
+  const t = String(title ?? '');
+  const tail = /(?:,|\s[-\u2013|@]\s|\sat\s)\s*([A-Z][A-Za-z]+(?:[ -][A-Z][A-Za-z]+){0,2})\s*$/.exec(t)?.[1] ?? null;
+  const fromTitle = usablePlace(tail, accountName);
+  if (fromTitle) return fromTitle;
+  if (!responsibilityTags(t).has('site') && !SITE_LEVEL.test(t)) return null;
+  const city = String(location ?? '').split(',')[0]?.trim() ?? '';
+  return usablePlace(city, accountName);
+}
+
+/** A title that runs one site (its location is then the site): a DC, plant, warehouse, terminal, hub or yard lead. */
+const SITE_LEVEL = /\b(?:distribution cent(?:er|re)|fulfil+ment cent(?:er|re)|dc|plant|warehouse|terminal|hub|yard|site|facility|branch)\s+(?:operations\s+)?(?:manager|director|general manager|gm|lead|leader|supervisor|superintendent|head)\b/i;
+const sameSite = (a: string, b: string) => a.toLowerCase().replace(/[^a-z]+/g, '') === b.toLowerCase().replace(/[^a-z]+/g, '');
 
 /**
  * How a title relates to what the hypothesis says changed. The fact (the observation) names the families; the
  * hypothesis text stands in only when the fact names none.
  */
-export function thesisRelevance(title: string | null | undefined, thesis: ThesisContext | null | undefined): ThesisRelevance {
+export function thesisRelevance(title: string | null | undefined, thesis: ThesisContext | null | undefined, person?: PersonScope | null): ThesisRelevance {
   if (!thesis) return { tier: 'none', why: 'no hypothesis context', families: [], factLabel: 'no fact' };
+  const base = remitRelevance(title, thesis);
+  return scoped(base, title, thesis, person ?? null);
+}
+
+/**
+ * R32: the site and division scope over a remit read. A DIRECT fit is capped to related when the fact names a site
+ * and the person runs another one, or when the fact is one division's and the person sits in another. Unknown never
+ * demotes; the reason says whose fact it is when the person's division is not on record.
+ */
+function scoped(r: ThesisRelevance, title: string | null | undefined, thesis: ThesisContext, person: PersonScope | null): ThesisRelevance {
+  if (r.tier !== 'direct') return r;
+  const account = person?.accountName ?? null;
+  const factDivision = account ? divisionOf(account, thesis.observation) : null;
+  if (factDivision && account) {
+    const theirs = divisionOf(account, title) ?? divisionOf(account, person?.company ?? null);
+    if (theirs && theirs !== factDivision) return { ...r, tier: 'related', why: `${r.why}; but they sit in ${theirs}, and the fact is ${factDivision}'s`, cappedBy: 'division' };
+    if (!theirs) r = { ...r, why: `${r.why} (the fact is ${factDivision}'s; their division is not on record)` };
+  }
+  const site = factSite(thesis.observation, account);
+  const theirSite = site ? personSite(title, person?.location ?? null, account) : null;
+  if (site && theirSite && !sameSite(site, theirSite)) return { ...r, tier: 'related', why: `${r.why}; but they run ${theirSite}, and the fact names ${site}`, cappedBy: 'site' };
+  if (site && theirSite) return { ...r, why: `${r.why}, at ${site}, the site it names`, siteMatch: true };
+  return r;
+}
+
+/** The remit read: the posting's role for a job-led thesis, else the fact (and the hypothesis text when the fact names nothing). */
+function remitRelevance(title: string | null | undefined, thesis: ThesisContext): ThesisRelevance {
+  // R32: a job / procurement-led thesis whose posting names a role is matched on that role's function (the hiring
+  // manager's remit), never on every word of the posting's text.
+  const role = thesis.approach === 'job_procurement_led' ? (thesis.postingRole?.trim() || postingRoleOf(thesis.observation)) : null;
+  if (role) {
+    const families = factFamilies(role);
+    const tags = responsibilityTags(title);
+    const factLabel = `a job posting for a ${role}`;
+    if (!tags.size) return { tier: 'none', why: `the title names no operating responsibility; the posting is for a ${role}`, families, factLabel, postingRole: role };
+    for (const f of families) {
+      const hit = FAMILY_TAGS[f].direct.filter((t) => tags.has(t));
+      if (hit.length) return { tier: 'direct', why: `runs ${hit.map((t) => TAG_LABEL[t]).join(' and ')}: the posting is for a ${role}, a role in that function`, families, factLabel, postingRole: role };
+    }
+    for (const f of families) {
+      const hit = FAMILY_TAGS[f].related.filter((t) => tags.has(t));
+      if (hit.length) return { tier: 'related', why: `runs ${hit.map((t) => TAG_LABEL[t]).join(' and ')}, adjacent to the ${role} the posting names`, families, factLabel, postingRole: role };
+    }
+    return { tier: 'none', why: `runs ${[...tags].map((t) => TAG_LABEL[t]).join(' and ')}; the posting is for a ${role}, outside that function`, families, factLabel, postingRole: role };
+  }
   // The FACT decides what changed. The hypothesis text (every hidden-capacity guess says "gates, yards and docks")
   // adds its families only when the fact itself names none: otherwise every transportation title would read
   // direct on every hypothesis and nothing would be thesis-specific (WHO truth maintenance, 2026-10-05).

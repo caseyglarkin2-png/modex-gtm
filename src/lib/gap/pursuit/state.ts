@@ -20,6 +20,7 @@
  */
 import { classifyReply, type ReplyClass } from '../replies/classify';
 import type { MotionType } from '../account-intel/build';
+import { identityHold, unknownReasonWords, unknownUnlock } from '../opportunity/unknown-words';
 
 export type PursuitStateKind = 'replied' | 'opted_out' | 'in_deal' | 'held' | 'follow_up_due' | 'in_motion' | 'ready' | 'choose_person' | 'research' | 'idle';
 
@@ -48,7 +49,7 @@ export interface PursuitInput {
   now: Date;
   /** The brief's motion type (account-intel/build.ts). */
   motionType: MotionType;
-  opportunity: { status: 'CLEAR' | 'OPEN' | 'UNKNOWN' | string; detail: string; deals: Array<{ name: string | null; stage: string | null }> };
+  opportunity: { status: 'CLEAR' | 'OPEN' | 'UNKNOWN' | string; detail: string; deals: Array<{ name: string | null; stage: string | null }>; closure?: { kind: 'customer' | 'parked'; why: string } | null };
   restriction: { kind: string; introducer: string; route: string } | null;
   familyHold: { detail: string } | null;
   /** The cockpit's account motion for this account, when one exists (motion/account-motion.ts). */
@@ -82,7 +83,7 @@ export interface PursuitState {
   /** May the seller choose or re-order people right now (never under a reply, an opt-out, a deal or a hold)? */
   chooseAllowed: boolean;
   replyClass: ReplyClass | null;
-  lastInbound: { who: string; at: string; kind: ReplyClass['kind']; label: string; /** The reply's first words (for the story's between-us row). */ snippet: string } | null;
+  lastInbound: { who: string; at: string; kind: ReplyClass['kind']; label: string; /** The reply's first words (for the story's between-us row). */ snippet: string; /** R63-A B4: the address it came from (the story names its sender by it). */ from?: string } | null;
   lastOutbound: PursuitInput['lastOutbound'];
   chosenMissing: string | null;
   /** The next person after the chosen one, when the motion names one, with what unlocks them. */
@@ -114,13 +115,18 @@ export const STATE_LINE: Record<PursuitStateKind, string> = {
   idle: 'Nothing to do yet',
 };
 
+/** R55: the held line for a closed deal, one wording for the workspace and Work (R63-B S12). */
+export function closureStateLine(kind: 'customer' | 'parked'): string {
+  return kind === 'customer' ? `${STATE_LINE.held}: a customer (closed won)` : `${STATE_LINE.held}: parked after a lost deal`;
+}
+
 const day = (s: string) => new Date(s).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' });
 const who = (by: string) => (/^casey@|^caseyglarkin/i.test(by) ? 'you' : by.replace(/@.*/, ''));
 
 export function projectPursuitState(i: PursuitInput): PursuitState {
   const newestReply = [...i.replies].sort((a, b) => b.at.localeCompare(a.at))[0] ?? null;
   const replyClass = newestReply ? classifyReply({ snippet: newestReply.snippet, subject: newestReply.subject, from: newestReply.from }) : null;
-  const lastInbound = newestReply && replyClass ? { who: newestReply.name ?? newestReply.from, at: newestReply.at, kind: replyClass.kind, label: replyClass.label, snippet: newestReply.snippet.replace(/\s+/g, ' ').trim().slice(0, 80) } : null;
+  const lastInbound = newestReply && replyClass ? { who: newestReply.name ?? newestReply.from, at: newestReply.at, kind: replyClass.kind, label: replyClass.label, snippet: newestReply.snippet.replace(/\s+/g, ' ').trim().slice(0, 80), from: newestReply.from } : null;
 
   // The newest human choice wins; a choice that is no longer eligible is said, never silently dropped.
   const choices = [
@@ -189,13 +195,22 @@ export function projectPursuitState(i: PursuitInput): PursuitState {
   if (i.motionType === 'IN_DEAL' || i.opportunity.status === 'OPEN' || i.opportunity.status === 'ACTIVE') {
     const d = i.opportunity.deals[0];
     return base('in_deal', {
-      stateLine: `${STATE_LINE.in_deal}${d?.name ? `: ${d.name}` : ''}${d?.stage ? ` (${d.stage})` : ''}`,
+      // R50: two opportunities are named as two, never as the first one's.
+      stateLine: i.opportunity.deals.length > 1 ? `In ${i.opportunity.deals.length} open deals: ${i.opportunity.deals.map((x) => x.name ?? 'an unnamed deal').join('; ')}` : `${STATE_LINE.in_deal}${d?.name ? `: ${d.name}` : ''}${d?.stage ? ` (${d.stage})` : ''}`,
       blocker: `An open HubSpot deal: work it from the deal, never a cold first touch.`,
       unlock: 'The deal closes or the opportunity read changes.',
     });
   }
+  // R55: a customer (closed won) or parked after a lost deal: held, said plainly; post-sale expansion is context only.
+  if (i.opportunity.status === 'CLEAR' && i.opportunity.closure) {
+    const c = i.opportunity.closure;
+    return base('held', { stateLine: closureStateLine(c.kind), blocker: c.why, unlock: c.kind === 'customer' ? 'Your explicit decision to work an expansion with the customer.' : 'A material change: a newer verified fact, a buyer reply, or a new open deal.' });
+  }
   if (i.opportunity.status === 'UNKNOWN') {
-    return base('held', { stateLine: `${STATE_LINE.held}: HubSpot could not be checked`, blocker: `HubSpot could not be read just now (${i.opportunity.detail || 'unknown opportunity truth'}): no cold touch until it can.`, unlock: 'HubSpot answers again.' });
+    // R60: the reason in words (never "identity_unresolved"), and what unlocks it for that reason.
+    // R63-A S13: no HubSpot company linked is said as that, with the step that lifts it (never an outage).
+    const identity = identityHold(i.opportunity.detail);
+    return base('held', { stateLine: `${STATE_LINE.held}: ${identity?.state ?? 'HubSpot could not be checked'}`, blocker: identity?.why ?? `HubSpot could not be checked: ${unknownReasonWords(i.opportunity.detail)}. No cold touch until it can.`, unlock: unknownUnlock(i.opportunity.detail) });
   }
   if (i.restriction) {
     return base('held', {

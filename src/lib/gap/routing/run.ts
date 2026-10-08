@@ -239,6 +239,11 @@ export interface SnapshotProviderOptions {
    * It never throws; any failure is UNKNOWN, which R3c holds.
    */
   opportunity?: (accountName: string) => Promise<OpportunityTruth>;
+  /**
+   * Batch item 7: the corporate-family hold the page and the click apply (family/family.ts familyHoldNow). A failed
+   * read is a hold marked unknown (fail closed), which R3d holds.
+   */
+  familyHold?: (accountName: string) => Promise<{ detail: string; unknown: boolean } | null>;
 }
 
 /**
@@ -255,9 +260,14 @@ export function createHubSpotSnapshotProvider(
 ): HubSpotSnapshotProvider {
   const configured = opts.configured ?? (() => true);
   const opportunityOf = opts.opportunity ?? ((accountName: string) => resolveAccountOpportunity(prisma, accountName, {}, { configured }));
+  const familyOf = opts.familyHold ?? (async (accountName: string) => (await import('../family/family')).familyHoldNow(prisma, accountName, new Date()));
   return async (accountName, hubspotCompanyId) => {
     if (!configured()) return null;
     const opportunity = opportunityOf(accountName);
+    const familyRead = familyOf(accountName).catch((e: unknown) => ({
+      detail: `Could not read the related accounts in the ${accountName} corporate family (${e instanceof Error ? e.message : String(e)}). Check HubSpot before contacting.`,
+      unknown: true,
+    }));
 
     let company: HubSpotProps | null = null;
     if (hubspotCompanyId) {
@@ -290,7 +300,8 @@ export function createHubSpotSnapshotProvider(
     }
 
     const snapshot = snapshotFromProperties(company, contacts) ?? { tam: 'unknown' as const, tamTier: '' as const };
-    return { ...snapshot, opportunity: await opportunity };
+    // Batch item 7: the corporate-family hold the page and the click apply; a failed read holds (fail closed).
+    return { ...snapshot, opportunity: await opportunity, familyHold: await familyRead };
   };
 }
 

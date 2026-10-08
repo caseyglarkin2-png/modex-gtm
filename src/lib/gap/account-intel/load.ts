@@ -8,7 +8,7 @@ import { loadWatchProfilesCached } from '../signals/watch';
 import { loadAccountConversations, loadAccountFirstTouches } from '../motion/load';
 import { resolveAccountOpportunity, type OpportunityTruth } from '../opportunity/active-opportunity';
 import { classifyContinuity } from '../research/continuity';
-import { factUrl, liveFactFailure } from '../research/claim-rules';
+import { factUrl, liveClaimFailure, liveFactFailure } from '../research/claim-rules';
 import { contradictedFactIds } from '../research/conflicts';
 import { selectConfirmedBids } from '../bid/select';
 import { getAllAccountMicrositeData } from '@/lib/microsites/accounts';
@@ -23,9 +23,18 @@ import { apolloEvidence, crmEvidence, type EmploymentEvidence } from '../people/
 import { accountEmploymentContext, loadEmployment, loadHubSpotContactRoleEvidence, personaRole, readHubSpotOnlyEmployment, type HubSpotEmploymentProps } from '../people/employment-store';
 import { readRole, type RoleRead } from '../people/role-currentness';
 import { stageLabels, type StageLabelRead } from '../opportunity/stage-labels';
+import { stageName } from '../deals/stage-label';
+import { bidScopeLabeler } from '../deals/opportunities';
 import { fetchAccountContextRows, loadAccountContext, projectAccountContext } from '../context/load';
 import type { AccountContext } from '../context/context';
 import { accountSlug } from './href';
+import { approachOfHypothesis } from '../research/approach-policy';
+import { factCurrentness } from '../research/currentness';
+import { draftApproachFor } from '../story/draft-approach';
+import { nameFromAddress } from '../story/touches';
+import { wordingOf } from '../bid/wording';
+/** R30/R31: the non-physical claim classes the read keeps as story facts of their own kind. */
+const CLAIM_FACT_CLASSES: ReadonlySet<string> = new Set(['JOB_POSTING', 'PROCUREMENT']);
 
 export { accountSlug };
 
@@ -137,6 +146,11 @@ export async function loadAccountInputs(
   const hsPeopleP = opts.live && account.hubspot_company_id ? loadHubSpotPeople(account.hubspot_company_id, opts.deps?.hubspotPeople) : Promise.resolve(null);
   const stagesP = opts.live ? stageLabels(opts.deps?.stageLabels) : Promise.resolve(new Map<string, string>());
   const contradictedP = early(soft(contradictedFactIds(prisma, accountName, now), new Map<string, string>()));
+  // R61: the account's names and domains need only its name: read now, beside everything else (it waited for the
+  // HubSpot people before).
+  const empCtxP = opts.lean ? Promise.resolve({ aliases: [] as string[], domains: [] as string[] }) : early(accountEmploymentContext(prisma, accountName).catch(() => ({ aliases: [] as string[], domains: [] as string[] })));
+  // Item 2: every fact a REJECTED thesis here cites (the seller set the story aside), not only the ten newest theses.
+  const setAsideP: Promise<string[]> = early(skip(() => (prisma.hypothesisSignal?.findMany ? prisma.hypothesisSignal.findMany({ where: { hypothesis: { account_name: accountName, status: 'rejected' } }, select: { signal_id: true }, take: 500 }).then((rows: Row[]) => [...new Set(rows.map((r) => String(r.signal_id)))]).catch(() => [] as string[]) : Promise.resolve([] as string[])), [] as string[]));
   const candidateP: Promise<Row | null> = !lean && prisma.gapAccountCandidate?.findFirst
     ? prisma.gapAccountCandidate.findFirst({ where: { scouted_at: { not: null }, OR: [{ account_name: accountName, decision: { in: ['added', 'mapped'] } }, { company_key: normalizeCompanyName(accountName) }] }, orderBy: { scouted_at: 'desc' } }).catch(() => null)
     : Promise.resolve(null);
@@ -158,11 +172,11 @@ export async function loadAccountInputs(
     skip(() => namesStartingLike(prisma, accountName), [] as string[]),
     skip(() => loadWatchProfilesCached(prisma).catch(() => []), []),
     skip(() => prisma.gapSignal.findMany({ where: { account_name: accountName, resolution: 'resolved' }, select: { id: true, title: true, url: true, published_at: true, research_status: true, note: true, created_at: true }, orderBy: { created_at: 'desc' }, take: 15 }).catch(() => []), []),
-    prisma.prospectingSignal.findMany({ where: { account_name: accountName, source_kind: 'evidence_record' }, select: { id: true, title: true, evidence_text: true, evidence_url: true, observed_at: true, freshness_expires_at: true, metadata: true }, orderBy: { observed_at: 'desc' }, take: 200 }),
+    prisma.prospectingSignal.findMany({ where: { account_name: accountName, source_kind: 'evidence_record' }, select: { id: true, title: true, evidence_text: true, evidence_url: true, observed_at: true, freshness_expires_at: true, metadata: true, claim_class: true, type: true }, orderBy: { observed_at: 'desc' }, take: 200 }),
     skip(() => prisma.researchRun.findFirst({ where: { account_name: accountName, run_key: { startsWith: 'gap_research:' } }, orderBy: { created_at: 'desc' }, select: { created_at: true, provider_status: true } }).catch(() => null), null as Row | null),
     soft(prisma.prospectingHypothesis.findMany({
       where: { account_name: accountName, superseded_by: { is: null }, status: { in: ['draft', 'review_required', 'approved', 'active', 'confirmed', 'partially_confirmed', 'rejected'] } },
-      select: { id: true, status: true, reviewed_at: true, activated_at: true, observation: true, problem_hypothesis: true, root_cause_hypotheses: true, impact_hypotheses: true, falsification_questions: true, what_a_no_means: true, signals: { where: { role: 'primary' }, select: { signal_id: true } } },
+      select: { id: true, status: true, reviewed_at: true, activated_at: true, observation: true, problem_hypothesis: true, root_cause_hypotheses: true, impact_hypotheses: true, falsification_questions: true, what_a_no_means: true, problem_family: true, primary_persona_id: true, metadata: true, signals: { where: { role: 'primary' }, select: { signal_id: true } } },
       orderBy: { updated_at: 'desc' },
       take: 10,
     })
@@ -171,11 +185,11 @@ export async function loadAccountInputs(
         if (!opts.hypothesisId || rows.some((r) => r.id === opts.hypothesisId)) return rows;
         const extra: Row[] = await prisma.prospectingHypothesis.findMany({
           where: { id: opts.hypothesisId, account_name: accountName, superseded_by: { is: null }, status: { in: ['draft', 'review_required', 'approved', 'active', 'confirmed', 'partially_confirmed', 'rejected'] } },
-          select: { id: true, status: true, reviewed_at: true, activated_at: true, observation: true, problem_hypothesis: true, root_cause_hypotheses: true, impact_hypotheses: true, falsification_questions: true, what_a_no_means: true, signals: { where: { role: 'primary' }, select: { signal_id: true } } },
+          select: { id: true, status: true, reviewed_at: true, activated_at: true, observation: true, problem_hypothesis: true, root_cause_hypotheses: true, impact_hypotheses: true, falsification_questions: true, what_a_no_means: true, problem_family: true, primary_persona_id: true, metadata: true, signals: { where: { role: 'primary' }, select: { signal_id: true } } },
         });
         return [...rows, ...extra];
       }), [] as Row[]),
-    soft(prisma.buyerInputData.findMany({ where: { account_name: accountName }, select: { id: true, type: true, normalized_summary: true, raw_buyer_language: true, contact_email: true, captured_at: true, human_confirmed: true, supersedes_id: true, confirmed_at: true, hypothesis_id: true } }), [] as Row[]),
+    soft(prisma.buyerInputData.findMany({ where: { account_name: accountName }, select: { id: true, type: true, normalized_summary: true, raw_buyer_language: true, contact_email: true, captured_at: true, human_confirmed: true, supersedes_id: true, confirmed_at: true, hypothesis_id: true, metadata: true } }), [] as Row[]),
     skip(() => prisma.persona.findMany({ where: { account_name: accountName }, select: { id: true, name: true, title: true, do_not_contact: true, email: true, email_status: true, updated_at: true, hubspot_contact_id: true, enrichment: { select: { apollo_person_id: true, last_enriched_at: true } } }, take: 60 }), [] as Row[]),
     skip(() => prisma.accountContactCandidate.findMany({ where: { account_name: accountName, state: 'staged' }, select: { id: true, full_name: true, title: true, state: true, last_seen_at: true }, take: 30 }).catch(() => []), []),
     skip(() => (prisma.gapWorkSourceMember?.findMany ? prisma.gapWorkSourceMember.findMany({ where: { account_name: accountName, status: { notIn: ['ignored', 'not_now'] } }, select: { name: true, kind: true, title: true, company: true, persona_id: true, relationship_context: true, ingested_at: true, work_source: { select: { name: true, source_type: true } } }, take: 30 }).catch(() => []) : Promise.resolve([])), []),
@@ -216,16 +230,26 @@ export async function loadAccountInputs(
     // Re-gated on read: a fact stored before a rule tightened (a software rollout, a 10-K description, an acquired
     // company's exhibit) stops being live. The row stays for audit; nothing is deleted.
     // A quote attributed to another organization (a vendor's CEO about this account) is that organization's fact.
-    if (liveFactFailure(r.evidence_text, accountName, factUrl(r))) continue;
+    // R30/R31: a job or procurement claim is re-gated by the claim rules (publisher, speaker), a physical fact by the
+    // fact rules; the class rides on the fact so the story and the anchor know which approach it may open.
+    const claimClass = typeof r.claim_class === 'string' && CLAIM_FACT_CLASSES.has(r.claim_class) ? r.claim_class : null;
+    // Item 4: an ONGOING partnership or program the account states (the Gatik agreement) opens a fit-led thesis; it is
+    // kept and re-gated by the claim rules (publisher, speaker), like a posting. A one-time software deployment opens
+    // nothing and stays off the page, as before.
+    const recordedKind = meta.continuity?.kind;
+    const fitLed = !claimClass && draftApproachFor({ text: r.evidence_text, claimClass: r.claim_class ?? null, continuity: recordedKind === 'event' || recordedKind === 'ongoing_state' || recordedKind === 'ended' ? recordedKind : null }) === 'fit_led';
+    if (claimClass || fitLed ? liveClaimFailure(r.evidence_text, accountName, factUrl(r)) : liveFactFailure(r.evidence_text, accountName, factUrl(r))) continue;
     if (contradicted.has(r.id)) continue;
     const k = meta.continuity?.kind;
     const f: FactInput = {
       id: r.id,
+      claimClass,
       quote: r.evidence_text,
       url: factUrl(r),
       title: r.title ?? '',
       publishedAt: new Date(r.observed_at).toISOString(),
-      expiresAt: r.freshness_expires_at ? new Date(r.freshness_expires_at).toISOString() : null,
+      // Item 2a: when it stops being current, by the one freshness authority (the gate and the compiler read the same).
+      expiresAt: factCurrentness(r as never, now).until,
       continuity: k === 'ended' ? 'ended' : k === 'ongoing_state' ? 'ongoing_state' : classifyContinuity(r.evidence_text),
       currentness: meta.continuity?.currentness?.publishedAt ? { url: meta.continuity.currentness.url ?? null, publishedAt: meta.continuity.currentness.publishedAt } : null,
     };
@@ -253,9 +277,24 @@ export async function loadAccountInputs(
     const o: OpportunityTruth = await oppP;
     // The stage's NAME from the pipeline (display only; the id when the label cannot be read).
     const labels = await stagesP;
-    opportunity = o.status === 'ACTIVE' ? { status: 'ACTIVE', detail: '', deals: o.deals.map((d) => ({ name: d.name, stage: d.stage ? labels.get(d.stage) ?? d.stage : d.stage, amount: d.amount ?? null, closeDate: d.closeDate ?? null, nextStep: d.nextStep ?? null })) } : o.status === 'UNKNOWN' ? { status: 'UNKNOWN', detail: o.reason, deals: [], ...(o.reason === 'identity_unresolved' && /^no HubSpot company/.test(o.detail ?? '') ? { unlinked: true } : {}) } : { status: 'CLEAR', detail: '', deals: [] };
+    // R55: with no open deal, the closure (a customer, or parked after a lost deal) rides on CLEAR.
+    const closure = o.status === 'CLEAR' && o.closure ? { kind: o.closure.kind, why: o.closure.why, dealName: o.closure.deal.name, closedAt: o.closure.deal.closedAt } : null;
+    const closed = o.status !== 'UNKNOWN' && o.closed?.length ? { closed: o.closed.map((d) => ({ ...d })) } : {};
+    opportunity = o.status === 'ACTIVE' ? { status: 'ACTIVE', detail: '', deals: o.deals.map((d) => ({ id: d.id, name: d.name, stage: stageName(d.stage, labels), amount: d.amount ?? null, closeDate: d.closeDate ?? null, nextStep: d.nextStep ?? null, contactIds: [...(d.contactIds ?? [])] })), ...closed } : o.status === 'UNKNOWN' ? { status: 'UNKNOWN', detail: o.reason, deals: [], ...(o.reason === 'identity_unresolved' && /^no HubSpot company/.test(o.detail ?? '') ? { unlinked: true } : {}) } : { status: 'CLEAR', detail: '', deals: [], ...(closure ? { closure } : {}), ...closed };
   }
+  // Sprint 5 review (R50): with a deal at the account (open or closed), each buyer input carries its opportunity's
+  // label (deals/scope.ts, the same rule as the deal brief), so NOW, the brief and the story never show one deal's words
+  // as the account's. With no deal there is nothing to tell apart.
+  const scopeOfBid = bidScopeLabeler(opportunity, (personas as Row[]).map((p) => ({ personaId: p.id as number, name: (p.name as string | null) ?? `person ${p.id}`, title: (p.title as string | null) ?? null, email: (p.email as string | null) ?? null, hubspotContactId: p.hubspot_contact_id ? String(p.hubspot_contact_id) : null })));
   const conv = (convs as Map<string, { who: string; responseClass: string; at: string }>).get(accountName) ?? null;
+  // R63-A B4 / the matrix: an address is said as the person on record at it, else the name the address carries; the
+  // story never names a speaker by an address.
+  const speakerName = (email: string | null): string | null => {
+    const e = (email ?? '').trim().toLowerCase();
+    if (!e) return null;
+    const p = (personas as Row[]).find((x) => String(x.email ?? '').trim().toLowerCase() === e);
+    return p?.name ? String(p.name) : e.includes('@') ? nameFromAddress(e) : e;
+  };
   // The account's HubSpot people: the linked company; else (owner resolution, 2026-10-05) the companies the account's
   // identity resolved for deal truth (the one identity rule: FedEx and H-E-B have no linked company but their people
   // mail from fedex.com and heb.com). Read only; nothing links the account.
@@ -270,15 +309,18 @@ export async function loadAccountInputs(
   // Contact currentness for the GAP contacts (database evidence plus the live HubSpot properties where linked).
   const hsProps = new Map<string, HubSpotEmploymentProps>();
   for (const h of hsPeople?.people ?? []) hsProps.set(h.id, { company: h.company ?? null, title: h.title, email: null, lastModifiedAt: h.lastModifiedAt ?? null, apolloEmploymentStatus: h.apolloEmploymentStatus ?? null, apolloVerifiedAt: h.apolloVerifiedAt ?? null });
-  const empCtx = lean ? { aliases: [] as string[], domains: [] as string[] } : await accountEmploymentContext(prisma, accountName).catch(() => ({ aliases: [] as string[], domains: [] as string[] }));
+  const empCtx = await empCtxP;
   const empAliases = [...new Set([...aliasList, ...(account.parent_brand ? [account.parent_brand] : []), ...empCtx.aliases])];
-  const employment = lean || !(personas as Row[]).length ? new Map() : await loadEmployment(prisma, (personas as Row[]).map((p) => p.id as number), { now, hubspot: hsProps, aliasesFor: () => empAliases, domainsFor: () => empCtx.domains }).catch(() => new Map());
   // ROLE currentness (WHO truth maintenance, 2026-10-05): the stored title against current evidence, for GAP contacts
   // (the record plus anything verified against the linked HubSpot contact) and for HubSpot-only people (the CRM row,
   // Apollo's sweep, anything verified against the contact id). A changed role with no known title, or a role
   // conflict, never fills a slot; a verified new title is the title the buyer map reads.
   const roleIds = lean ? [] : [...new Set([...(hsPeople?.people ?? []).map((h) => h.id), ...(personas as Row[]).map((p) => (p.hubspot_contact_id ? String(p.hubspot_contact_id) : '')).filter(Boolean)])];
-  const roleEvidence = roleIds.length ? await loadHubSpotContactRoleEvidence(prisma, roleIds).catch(() => new Map<string, EmploymentEvidence[]>()) : new Map<string, EmploymentEvidence[]>();
+  // R61: the contacts' employment and their role evidence are read together, never one after the other.
+  const [employment, roleEvidence] = await Promise.all([
+    lean || !(personas as Row[]).length ? Promise.resolve(new Map()) : loadEmployment(prisma, (personas as Row[]).map((p) => p.id as number), { now, hubspot: hsProps, aliasesFor: () => empAliases, domainsFor: () => empCtx.domains }).catch(() => new Map()),
+    roleIds.length ? loadHubSpotContactRoleEvidence(prisma, roleIds).catch(() => new Map<string, EmploymentEvidence[]>()) : Promise.resolve(new Map<string, EmploymentEvidence[]>()),
+  ]);
   const roleView = (r: RoleRead) => ({ state: r.state, why: r.why, effectiveTitle: r.effectiveTitle, priorTitle: r.priorTitle, usableForRanking: r.usableForRanking });
   const personaRoleOf = (p: Row) => {
     const emp = employment.get(p.id);
@@ -302,6 +344,7 @@ export async function loadAccountInputs(
     watched: !!profile,
     watchReasons: profile?.reasons ?? [],
     facts: [...byQuote.values()],
+    setAsideFactIds: await setAsideP,
     signals: (signalRows as Row[]).map((s) => ({ id: s.id, title: s.title ?? null, url: s.url ?? null, publishedAt: s.published_at ? new Date(s.published_at).toISOString() : null, researchStatus: s.research_status, note: s.note ?? null, capturedAt: iso(s.created_at) })),
     lastResearch: lastRun ? { at: new Date(lastRun.created_at).toISOString(), outcome: String((lastRun.provider_status as Record<string, unknown> | null)?.outcome ?? 'unknown') } : null,
     hypotheses: (hyps as Row[]).map((h) => ({
@@ -314,22 +357,27 @@ export async function loadAccountInputs(
       falsification: Array.isArray(h.falsification_questions) ? h.falsification_questions.map(String) : [],
       whatANoMeans: h.what_a_no_means ?? null,
       primarySignalId: h.signals?.[0]?.signal_id ?? null,
+      problemFamily: typeof h.problem_family === 'string' ? h.problem_family : null,
+      // R32: the declared evidence approach (metadata.approach; default event-led), for the person match.
+      approach: approachOfHypothesis(h),
+      personaId: typeof h.primary_persona_id === 'number' ? h.primary_persona_id : null,
       buyerRejected: buyerRejected.has(h.id),
       // The last time Casey looked: approval, activation, or an explicit "reviewed" after a flag.
       reviewedAt: (h.status === 'approved' || h.status === 'active') && h.reviewed_at ? lastReview(h, acks.get(h.id)) : null,
       reviewAckAt: acks.get(h.id) ? acks.get(h.id)!.toISOString() : null,
     })),
-    bids: confirmed.map((b) => ({ id: b.id, type: b.type, summary: b.normalized_summary ?? b.raw_buyer_language, quote: b.raw_buyer_language, who: b.contact_email ?? null, at: new Date(b.confirmed_at ?? b.captured_at).toISOString(), hypothesisId: b.hypothesis_id ?? null })),
+    // R63-A B4 / matrix: whose words, by the person on record at the address (never the address itself).
+    bids: confirmed.map((b) => ({ id: b.id, type: b.type, summary: b.normalized_summary ?? b.raw_buyer_language, quote: b.raw_buyer_language, who: speakerName(b.contact_email ?? null), at: new Date(b.confirmed_at ?? b.captured_at).toISOString(), hypothesisId: b.hypothesis_id ?? null, scope: scopeOfBid({ metadata: b.metadata, contactEmail: b.contact_email ?? null }), noted: wordingOf(b.metadata, String(b.raw_buyer_language ?? '')) === 'noted' })),
     personas: (personas as Row[]).map((p) => {
       const emp = employment.get(p.id) ?? null;
-      return { id: p.id, name: p.name, title: p.title ?? null, doNotContact: !!p.do_not_contact, hasEmail: !!p.email, emailStatus: p.email_status ?? null, updatedAt: iso(p.updated_at), hubspotContactId: p.hubspot_contact_id ?? null, apolloEnrichedAt: p.enrichment?.apollo_person_id ? iso(p.enrichment.last_enriched_at) : null, location: p.hubspot_contact_id ? hsById.get(String(p.hubspot_contact_id))?.location ?? null : null, employment: emp ? { state: emp.state, why: emp.why, elsewhere: emp.elsewhere ? { company: emp.elsewhere.company, title: emp.elsewhere.title } : null } : null, role: personaRoleOf(p) };
+      return { id: p.id, name: p.name, title: p.title ?? null, email: p.email ?? null, doNotContact: !!p.do_not_contact, hasEmail: !!p.email, emailStatus: p.email_status ?? null, updatedAt: iso(p.updated_at), hubspotContactId: p.hubspot_contact_id ?? null, apolloEnrichedAt: p.enrichment?.apollo_person_id ? iso(p.enrichment.last_enriched_at) : null, location: p.hubspot_contact_id ? hsById.get(String(p.hubspot_contact_id))?.location ?? null : null, employment: emp ? { state: emp.state, why: emp.why, elsewhere: emp.elsewhere ? { company: emp.elsewhere.company, title: emp.elsewhere.title } : null } : null, role: personaRoleOf(p) };
     }),
     hubspotPeople: hsWithEmployment,
     candidates: (candidates as Row[]).map((c) => ({ id: c.id, name: c.full_name, title: c.title ?? null, state: c.state, seenAt: iso(c.last_seen_at) })),
     // A member whose Persona is do-not-contact is never a way in (relationship context is never consent).
     memberships: (members as Row[]).map((m) => ({ sourceName: m.work_source?.name ?? 'a source', sourceType: m.work_source?.source_type ?? 'other', relationshipContext: m.relationship_context ?? null, personName: m.kind === 'person' ? m.name ?? null : null, title: m.kind === 'person' ? m.title ?? null : null, company: m.company ?? null, addedAt: iso(m.ingested_at), doNotContact: !!(m.persona_id && (personas as Row[]).some((p) => p.id === m.persona_id && p.do_not_contact)) })),
     firstTouches: ((touches as Map<string, Array<{ recipient: string; sentAt: string; released: boolean; outstanding?: boolean; personaId?: number | null; decisionId?: string; gmailDraftId?: string }>>).get(accountName) ?? []).map((t) => ({ recipient: t.recipient, sentAt: t.sentAt, state: t.outstanding ? 'draft outstanding' : t.released ? 'released' : 'sent', personaId: t.personaId ?? null, ...(t.decisionId ? { decisionId: t.decisionId } : {}), ...(t.gmailDraftId ? { gmailDraftId: t.gmailDraftId } : {}) })),
-    conversation: conv ? { who: conv.who, responseClass: conv.responseClass, at: new Date(conv.at).toISOString() } : null,
+    conversation: conv ? { who: speakerName(conv.who) ?? conv.who, responseClass: conv.responseClass, at: new Date(conv.at).toISOString() } : null,
     opportunity,
     pack: pack as unknown as PackInput | null,
     microsite: micro ? { network: micro.network, freight: micro.freight, sections: micro.sections } : null,

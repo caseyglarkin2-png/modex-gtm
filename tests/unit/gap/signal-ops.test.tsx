@@ -43,6 +43,17 @@ describe('applySignalOp', () => {
     expect(await applySignalOp(p, { id: 's1', actor: 'casey', now: NOW, op: 'assign', accountName: 'Nobody Inc' })).toEqual({ ok: false, reason: 'account_not_found' });
   });
 
+  // Batch item 10 (R25): the dead letter can be researched again (Casey's Research press requeues it), and says so.
+  it('a dead-lettered signal (research failed three times) is offered Research and the press requeues it', async () => {
+    const rows = [{ ...base, id: 'd1', research_status: 'research_failed' }];
+    const p = db(rows);
+    expect(await applySignalOp(p, { id: 'd1', actor: 'casey', now: NOW, op: 'research' })).toMatchObject({ ok: true });
+    expect(rows[0].research_status).toBe('queued');
+    render(<SignalInbox items={[toView({ ...base, id: 'd2', research_status: 'research_failed' })]} />);
+    expect(screen.getByText('Research failed')).toBeTruthy();
+    expect(screen.getByRole('button', { name: /^Research/ })).toBeTruthy();
+  });
+
   it('research needs a resolved account and a link', async () => {
     const p = db([{ ...base, id: 'a', resolution: 'ambiguous', account_name: null }, { ...base, id: 'b', url: null }]);
     expect(await applySignalOp(p, { id: 'a', actor: 'c', now: NOW, op: 'research' })).toEqual({ ok: false, reason: 'needs_account' });

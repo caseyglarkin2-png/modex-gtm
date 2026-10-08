@@ -3,8 +3,8 @@ import { describe, expect, it } from 'vitest';
 import { readyTargetOf } from '@/lib/gap/context/send-target';
 
 describe('readyTargetOf', () => {
-  it('a ready motion with a card yields the cockpit link for that card', () => {
-    expect(readyTargetOf({ state: 'ready', primary: { name: 'Doug Estrada', title: 'Sr Director', cardId: 'c1' }, headline: 'Suggested primary: Doug.' })).toEqual({ name: 'Doug Estrada', title: 'Sr Director', href: '/gap?lane=ready&open=c1#card-c1', headline: 'Suggested primary: Doug.' });
+  it('a ready motion with a card yields the pack page of that card (R60: never the cockpit lane)', () => {
+    expect(readyTargetOf({ state: 'ready', primary: { name: 'Doug Estrada', title: 'Sr Director', cardId: 'c1' }, headline: 'Suggested primary: Doug.' })).toEqual({ name: 'Doug Estrada', title: 'Sr Director', href: '/gap/pack/c1', headline: 'Suggested primary: Doug.' });
   });
   it('any other state, no primary, or no card yields null', () => {
     expect(readyTargetOf({ state: 'paused_reply', primary: { name: 'D', title: null, cardId: 'c1' }, headline: '' })).toBeNull();

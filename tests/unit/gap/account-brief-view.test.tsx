@@ -69,7 +69,7 @@ describe('account intelligence view', () => {
     render(<AccountBriefView brief={buildAccountBrief(inputs({ facts: [] }), NOW)} />);
     expect(screen.getByTestId('brief-hypothesis').getAttribute('data-grounded')).toBe('false');
     expect(screen.getByTestId('brief-hypothesis').textContent).toMatch(/this draft cannot lead/);
-    expect(screen.getByTestId('glance-topHypothesis').textContent).toMatch(/^Top hypothesisNo strong hypothesis yet/);
+    expect(screen.getByTestId('glance-topHypothesis').textContent).toMatch(/^What we think is happeningNo strong thesis yet/);
     expect(screen.getByTestId('brief-next-action').textContent).toMatch(/Do not contact yet/);
   });
 

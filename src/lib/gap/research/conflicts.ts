@@ -13,6 +13,7 @@
  */
 import { EVIDENCE_IGNORED } from './inbox';
 import { classifyFact, detectConflicts } from './facts';
+import { isCurrentFact } from './currentness';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -21,12 +22,13 @@ export async function contradictedFactIds(prisma: PrismaLike, accountName: strin
   const out = new Map<string, string>();
   // A client without the signal table (test fakes) has no facts to compare; a failed READ throws (fail closed).
   if (!prisma?.prospectingSignal?.findMany) return out;
-  const facts: Array<{ id: string; evidence_text: string | null; freshness_expires_at: Date | null }> = await prisma.prospectingSignal.findMany({
+  const facts: Array<{ id: string; evidence_text: string | null; freshness_expires_at: Date | null; observed_at?: Date | null; type?: string | null; metadata?: unknown }> = await prisma.prospectingSignal.findMany({
     where: { account_name: accountName, source_kind: 'evidence_record', metadata: { path: ['verified'], equals: 'excerpt_found_at_source' } },
-    select: { id: true, evidence_text: true, freshness_expires_at: true },
+    select: { id: true, evidence_text: true, freshness_expires_at: true, observed_at: true, type: true, metadata: true },
     take: 500,
   });
-  const live = facts.filter((f) => !f.freshness_expires_at || new Date(f.freshness_expires_at).getTime() > now.getTime());
+  // Item 2a: the one freshness authority decides which facts are current enough to contradict each other.
+  const live = facts.filter((f) => isCurrentFact(f, now));
   if (live.length < 2) return out;
   const ignored: Array<{ subject_id: string }> = await prisma.gapAuditEvent.findMany({
     where: { kind: EVIDENCE_IGNORED, subject_type: 'prospecting_signal', subject_id: { in: live.map((f) => f.id) } },

@@ -166,13 +166,13 @@ const ACTION_ORDER: readonly HypothesisAction[] = [
  */
 const ACTION_LABEL: Record<HypothesisAction, string> = {
   submit: 'Ready for review',
-  approve: 'Approve hypothesis',
+  approve: 'Approve the thesis',
   activate: 'Use in routing',
   resolve: 'Resolve',
   close_unresolved: 'Close, unresolved',
   expire: 'Expire',
   reject_review: 'Needs work',
-  withdraw: 'Reject hypothesis',
+  withdraw: 'Reject the thesis',
 };
 
 const REASON_ACTIONS: ReadonlySet<HypothesisAction> = new Set(['withdraw', 'reject_review', 'close_unresolved']);

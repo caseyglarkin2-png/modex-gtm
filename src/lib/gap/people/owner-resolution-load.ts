@@ -8,7 +8,10 @@
  *      only, each member through its own linked company id, a divested unit never, capped, deduplicated by contact
  *      id and by email, every person carrying where they were read)
  *   3. staged AccountContactCandidates
- *   4. relationships (work-source members) and the hypothesis context
+ *   4. relationships (work-source members) and the hypothesis context: its declared APPROACH (metadata.approach) and,
+ *      for a job / procurement-led thesis, the posting's role from its primary claim (R32)
+ *   5. the open deals' contacts, when the caller already read them (the account read's opportunity truth): a contact
+ *      on the open deal precedes a cold alternative (R32). Never a HubSpot read here.
  *
  * It also proposes POSSIBLE ACCOUNT ALIASES (alias-review.ts) from the employment conflicts it read: a CRM or provider
  * spelling that is not the account's, for Casey to confirm or reject; never an alias by itself.
@@ -26,6 +29,7 @@ import { loadFamilyPeople, type FamilyPeopleDeps, type FamilyPeopleRead } from '
 import { readRole, ROLE_LABEL, type RoleRead } from './role-currentness';
 import type { HubSpotPeopleReads, HubSpotPerson } from './hubspot-people';
 import { resolveOwner, type OwnerCandidateInput, type OwnerPurpose, type OwnerResolution } from './owner-resolution';
+import { approachOfHypothesis } from '../research/approach-policy';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -42,6 +46,8 @@ export interface LoadOwnerResolutionInput {
    * 3PL rows still carry "Unknown"). The routes never pass it; the dogfood script does, to show the carrier doctrine.
    */
   entityType?: EntityType | null;
+  /** R32: the account's open deals with their HubSpot contacts, from a read the caller already made (never read here). */
+  openDeals?: ReadonlyArray<{ name: string | null; contactIds?: readonly string[] | null }> | null;
 }
 
 export interface LoadOwnerResolutionDeps {
@@ -70,26 +76,33 @@ export type LoadOwnerResolutionResult =
 const iso = (d: unknown): string | null => (d instanceof Date || typeof d === 'string' ? (Number.isNaN(new Date(d).getTime()) ? null : new Date(d).toISOString()) : null);
 
 export async function loadOwnerResolution(prisma: PrismaLike, input: LoadOwnerResolutionInput, deps: LoadOwnerResolutionDeps = {}): Promise<LoadOwnerResolutionResult> {
-  const account: { name: string; vertical: string | null; hubspot_company_id: string | null; parent_brand: string | null } | null = await prisma.account.findUnique({
-    where: { name: input.accountName },
-    select: { name: true, vertical: true, hubspot_company_id: true, parent_brand: true },
-  });
+  // R61: everything that needs only the account's name is read at once with the account row (the account is found by
+  // that same name), never one round trip after another; the answer is the same.
+  const name = input.accountName;
+  const [account, hypothesis, personas, aliases, candidates, members, fam, ctx] = await Promise.all([
+    prisma.account.findUnique({
+      where: { name },
+      select: { name: true, vertical: true, hubspot_company_id: true, parent_brand: true },
+    }) as Promise<{ name: string; vertical: string | null; hubspot_company_id: string | null; parent_brand: string | null } | null>,
+    (input.hypothesisId
+      ? prisma.prospectingHypothesis.findUnique({
+          where: { id: input.hypothesisId },
+          select: { id: true, account_name: true, status: true, primary_persona_id: true, observation: true, problem_hypothesis: true, problem_family: true, persona: true, metadata: true, signals: { where: { role: 'primary' }, select: { signal: { select: { claim_class: true, metadata: true } } }, take: 1 } },
+        })
+      : Promise.resolve(null)) as Promise<Row | null>,
+    prisma.persona.findMany({ where: { account_name: name }, select: { id: true, name: true, title: true, email: true, do_not_contact: true, email_status: true, hubspot_contact_id: true } }) as Promise<Row[]>,
+    (prisma.gapAccountAlias?.findMany ? prisma.gapAccountAlias.findMany({ where: { account_name: name }, select: { alias: true } }).catch(() => []) : Promise.resolve([])) as Promise<Row[]>,
+    (prisma.accountContactCandidate?.findMany ? prisma.accountContactCandidate.findMany({ where: { account_name: name, state: 'staged' }, select: { id: true, full_name: true, title: true, email: true }, take: 30 }).catch(() => []) : Promise.resolve([])) as Promise<Row[]>,
+    (prisma.gapWorkSourceMember?.findMany ? prisma.gapWorkSourceMember.findMany({ where: { account_name: name, status: { notIn: ['ignored', 'not_now'] } }, select: { id: true, name: true, kind: true, title: true, persona_id: true, relationship_context: true, work_source: { select: { name: true, source_type: true } } }, take: 30 }).catch(() => []) : Promise.resolve([])) as Promise<Row[]>,
+    loadFamilyPeople(prisma, name, input.now, { hubspotPeople: deps.hubspotPeople, company: deps.company, family: deps.family, caps: deps.cap ? { total: deps.cap, perCompany: deps.cap } : undefined }),
+    // The account's own names and domains (the same context the decision-time gate reads, so the two never disagree).
+    accountEmploymentContext(prisma, name).catch(() => ({ aliases: [] as string[], domains: [] as string[] })),
+  ]);
   if (!account) return { ok: false, reason: 'account_not_found' };
-
-  let hypothesis: Row | null = null;
   if (input.hypothesisId) {
-    hypothesis = await prisma.prospectingHypothesis.findUnique({ where: { id: input.hypothesisId }, select: { id: true, account_name: true, status: true, primary_persona_id: true, observation: true, problem_hypothesis: true, problem_family: true, persona: true } });
     if (!hypothesis) return { ok: false, reason: 'hypothesis_not_found' };
     if (hypothesis.account_name !== account.name) return { ok: false, reason: 'hypothesis_not_at_account' };
   }
-
-  const [personas, aliases, candidates, members, fam] = await Promise.all([
-    prisma.persona.findMany({ where: { account_name: account.name }, select: { id: true, name: true, title: true, email: true, do_not_contact: true, email_status: true, hubspot_contact_id: true } }) as Promise<Row[]>,
-    (prisma.gapAccountAlias?.findMany ? prisma.gapAccountAlias.findMany({ where: { account_name: account.name }, select: { alias: true } }).catch(() => []) : Promise.resolve([])) as Promise<Row[]>,
-    (prisma.accountContactCandidate?.findMany ? prisma.accountContactCandidate.findMany({ where: { account_name: account.name, state: 'staged' }, select: { id: true, full_name: true, title: true, email: true }, take: 30 }).catch(() => []) : Promise.resolve([])) as Promise<Row[]>,
-    (prisma.gapWorkSourceMember?.findMany ? prisma.gapWorkSourceMember.findMany({ where: { account_name: account.name, status: { notIn: ['ignored', 'not_now'] } }, select: { id: true, name: true, kind: true, title: true, persona_id: true, relationship_context: true, work_source: { select: { name: true, source_type: true } } }, take: 30 }).catch(() => []) : Promise.resolve([])) as Promise<Row[]>,
-    loadFamilyPeople(prisma, account.name, input.now, { hubspotPeople: deps.hubspotPeople, company: deps.company, family: deps.family, caps: deps.cap ? { total: deps.cap, perCompany: deps.cap } : undefined }),
-  ]);
   const companies = { ids: fam.primary.companyIds, via: fam.primary.via, detail: familyDetail(fam) };
   const hs = fam.read ? { people: fam.people, truncated: fam.primary.truncated || fam.capHit } : null;
   const hsPeople = fam.people;
@@ -101,24 +114,28 @@ export async function loadOwnerResolution(prisma: PrismaLike, input: LoadOwnerRe
 
   // Unsubscribes are the recipient's own decision: read directly, never only the do_not_contact mirror.
   const emails = personas.map((p) => String(p.email ?? '').trim().toLowerCase()).filter(Boolean);
-  const unsub: Row[] = emails.length && prisma.unsubscribedEmail?.findMany ? await prisma.unsubscribedEmail.findMany({ where: { email: { in: emails } }, select: { email: true } }).catch(() => []) : [];
-  const unsubscribed = new Set(unsub.map((u) => String(u.email).toLowerCase()));
 
   // Contact currentness for every GAP persona, with the live HubSpot properties where the person is linked.
   const hsProps = new Map<string, HubSpotEmploymentProps>();
   for (const p of hsPeople) hsProps.set(p.id, { company: p.company ?? null, title: p.title, email: null, lastModifiedAt: p.lastModifiedAt ?? null, apolloEmploymentStatus: p.apolloEmploymentStatus ?? null, apolloVerifiedAt: p.apolloVerifiedAt ?? null });
-  // The account's own names and domains (the same context the decision-time gate reads, so the two never disagree).
-  const ctx = await accountEmploymentContext(prisma, account.name).catch(() => ({ aliases: [] as string[], domains: [] as string[] }));
   const aliasList = [...new Set([...(aliases as Row[]).map((a) => String(a.alias)), ...(account.parent_brand ? [account.parent_brand] : []), ...ctx.aliases])];
-  const employment = await loadEmployment(prisma, personas.map((p) => p.id as number), { now: input.now, hubspot: hsProps, aliasesFor: () => aliasList, domainsFor: () => ctx.domains });
   // ROLE currentness evidence recorded against a HubSpot contact id (VERIFY CURRENT ROLE on a HubSpot-only person, or
   // on a person before they became a GAP contact): one batch read of the audit rows, keyed by contact id.
   const contactIds = [...new Set([...hsPeople.map((h) => h.id), ...personas.map((p) => (p.hubspot_contact_id ? String(p.hubspot_contact_id) : '')).filter(Boolean)])];
-  const roleEvidence = contactIds.length ? await loadHubSpotContactRoleEvidence(prisma, contactIds).catch(() => new Map<string, EmploymentEvidence[]>()) : new Map<string, EmploymentEvidence[]>();
+  // R61: the three reads that need the people run together, never one after another.
+  const [unsub, employment, roleEvidence] = await Promise.all([
+    (emails.length && prisma.unsubscribedEmail?.findMany ? prisma.unsubscribedEmail.findMany({ where: { email: { in: emails } }, select: { email: true } }).catch(() => []) : Promise.resolve([])) as Promise<Row[]>,
+    loadEmployment(prisma, personas.map((p) => p.id as number), { now: input.now, hubspot: hsProps, aliasesFor: () => aliasList, domainsFor: () => ctx.domains }),
+    contactIds.length ? loadHubSpotContactRoleEvidence(prisma, contactIds).catch(() => new Map<string, EmploymentEvidence[]>()) : Promise.resolve(new Map<string, EmploymentEvidence[]>()),
+  ]);
+  const unsubscribed = new Set(unsub.map((u) => String(u.email).toLowerCase()));
   const asInput = (r: RoleRead): NonNullable<OwnerCandidateInput['role']> => ({ state: r.state, label: ROLE_LABEL[r.state], why: r.why, effectiveTitle: r.effectiveTitle, priorTitle: r.priorTitle, usableForRanking: r.usableForRanking });
   const roleOf = (storedTitle: string | null, evidence: readonly EmploymentEvidence[], crmTitle: string | null) => asInput(readRole({ accountName: account.name, aliases: aliasList, domains: ctx.domains, storedTitle, crmTitle, evidence, now: input.now }));
 
   const bounced = (s: unknown) => /bounce|invalid/i.test(String(s ?? ''));
+  // R32: a contact on an open deal (the caller's opportunity read), by HubSpot contact id.
+  const dealOf = new Map<string, string>();
+  for (const d of input.openDeals ?? []) for (const id of d.contactIds ?? []) if (id && !dealOf.has(String(id))) dealOf.set(String(id), d.name?.trim() || 'the open deal');
   const inputs: OwnerCandidateInput[] = [
     ...personas.map((p): OwnerCandidateInput => {
       const h = p.hubspot_contact_id ? hsById.get(String(p.hubspot_contact_id)) : undefined;
@@ -147,6 +164,7 @@ export async function loadOwnerResolution(prisma: PrismaLike, input: LoadOwnerRe
           return extra.length ? roleOf(storedTitle, [...emp.evidence, ...extra], h?.title ?? null) : asInput(personaRole(emp, storedTitle, { now: input.now, aliases: aliasList, domains: ctx.domains }));
         })(),
         relationship: m?.relationship_context ?? null,
+        openDeal: p.hubspot_contact_id ? dealOf.get(String(p.hubspot_contact_id)) ?? null : null,
       };
     }),
     ...hsPeople.filter((h) => !linked.has(h.id)).map((h): OwnerCandidateInput => ({
@@ -160,6 +178,7 @@ export async function loadOwnerResolution(prisma: PrismaLike, input: LoadOwnerRe
       hasEmail: h.hasEmail,
       optedOut: h.optedOut,
       provenance: { accountName: h.provenance.accountName, relation: h.provenance.relation, companyId: h.provenance.companyId, separate: h.provenance.boundary?.note ?? null },
+      openDeal: dealOf.get(h.id) ?? null,
       // The CURRENT role for a HubSpot-only person: the CRM row, Apollo's sweep and any verification recorded against
       // the contact id. With nothing verified the stored title stands, unverified.
       role: roleOf(h.title, [...crmEvidence({ company: h.company ?? null, title: h.title, email: null, lastModifiedAt: h.lastModifiedAt ?? null }), ...apolloEvidence({ status: h.apolloEmploymentStatus ?? null, verifiedAt: h.apolloVerifiedAt ?? null, accountName: account.name, title: h.title }), ...(roleEvidence.get(h.id) ?? [])], h.title),
@@ -182,7 +201,7 @@ export async function loadOwnerResolution(prisma: PrismaLike, input: LoadOwnerRe
   const resolution = resolveOwner({
     account: { name: account.name, entityType: input.entityType ?? typeFromVertical(account.vertical), aliases: aliasList },
     purpose: input.purpose,
-    hypothesis: hypothesis ? { id: hypothesis.id, status: hypothesis.status, primaryPersonaId: hypothesis.primary_persona_id ?? null, observation: hypothesis.observation ?? '', problemHypothesis: hypothesis.problem_hypothesis ?? null, problemFamily: hypothesis.problem_family ?? null } : null,
+    hypothesis: hypothesis ? { id: hypothesis.id, status: hypothesis.status, primaryPersonaId: hypothesis.primary_persona_id ?? null, observation: hypothesis.observation ?? '', problemHypothesis: hypothesis.problem_hypothesis ?? null, problemFamily: hypothesis.problem_family ?? null, ...thesisMotion(hypothesis) } : null,
     candidates: inputs,
     hubspot: { read: !!hs, count: hsPeople.length, truncated: !!hs?.truncated, via: companies.ids.length ? (hs ? companies.via : 'unreadable') : companies.via === 'unreadable' ? 'unreadable' : 'none', family: fam.family.length || fam.excluded.length ? { companies: family.companies, count: family.count, capHit: family.capHit, searched: family.searched, excluded: family.excluded } : null },
     now: input.now,
@@ -201,6 +220,18 @@ export async function loadOwnerResolution(prisma: PrismaLike, input: LoadOwnerRe
 
   void iso;
   return { ok: true, resolution, hubspot: { companyIds: companies.ids, via: companies.via, detail: companies.detail }, people: hsPeople, family, aliasProposals };
+}
+
+/**
+ * R32: the thesis's declared approach and, for a job / procurement-led thesis, the role its primary claim names (the
+ * claim attributes the verifier stored), so the resolver matches the person to the posting's function.
+ */
+function thesisMotion(h: Row): { approach: string; postingRole: string | null } {
+  const approach = approachOfHypothesis(h);
+  const claim = Array.isArray(h.signals) ? h.signals[0]?.signal : null;
+  const attrs = claim?.metadata && typeof claim.metadata === 'object' ? (claim.metadata as Row).claimAttributes : null;
+  const role = approach === 'job_procurement_led' && attrs && typeof attrs.role === 'string' && attrs.role.trim() ? attrs.role.trim() : null;
+  return { approach, postingRole: role };
 }
 
 /** One sentence on what the HubSpot read covered, for the route's `hubspot.detail` and the dogfood. */

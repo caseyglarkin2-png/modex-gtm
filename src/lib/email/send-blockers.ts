@@ -23,6 +23,7 @@ export type SendBlockerCode =
   | 'APPROVAL_REQUIRED'
   | 'MIXED_ACCOUNT_PAYLOAD'
   | 'WARM_INTRO_ONLY'
+  | 'RECIPIENT_OPTED_OUT_BY_REPLY'
   | 'RUNTIME_FAILURE';
 
 export type SendBlocker = {
@@ -69,6 +70,14 @@ export function recipientNotFoundSendBlocker(message = 'Recipient record not fou
 
 export function unsubscribedSendBlocker(email: string) {
   return blocker('UNSUBSCRIBED', 400, 'UNSUBSCRIBED', `Cannot send to ${email} - recipient has unsubscribed.`);
+}
+
+/**
+ * R63 blocker: the recipient wrote back an opt-out ("stop"), recorded or not (gap/replies/opt-out.ts). The reason text
+ * is the error the composer shows; the machine reason rides in the details.
+ */
+export function optedOutByReplySendBlocker(message: string) {
+  return blocker('RECIPIENT_OPTED_OUT_BY_REPLY', 409, message, message, { reason: 'recipient_opted_out_by_reply' });
 }
 
 /** A warm-intro-only account (gap/policy/restriction.ts): never a cold send. */

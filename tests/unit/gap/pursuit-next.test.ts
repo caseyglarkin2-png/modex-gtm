@@ -4,7 +4,7 @@ import { projectPursuitState } from '@/lib/gap/pursuit/state';
 import { nextFromPursuit } from '@/lib/gap/pursuit/next';
 
 const NOW = new Date('2026-10-05T15:00:00Z');
-const opts = { hypothesisId: 'h1', accountSlugHref: (v: 'brief' | 'sources') => `/gap/accounts/acme?view=${v}`, replyThreadHref: null, captureHref: '/gap/capture?account=Acme' };
+const opts = { hypothesisId: 'h1', accountSlugHref: (v: 'now' | 'brief' | 'sources') => (v === 'now' ? '/gap/accounts/acme' : `/gap/accounts/acme?view=${v}`), replyThreadHref: null, captureHref: '/gap/capture?account=Acme' };
 const base = (over: Partial<Parameters<typeof projectPursuitState>[0]> = {}) =>
   projectPursuitState({ accountName: 'Acme', now: NOW, motionType: 'FACT_LED', opportunity: { status: 'CLEAR', detail: '', deals: [] }, restriction: null, familyHold: null, motion: null, choice: null, activePersona: null, replies: [], lastOutbound: null, outstandingDraft: null, followUpDue: null, eligible: [{ key: 'gap:1', personaId: 1, name: 'Karen Darling', title: 'Sr Director PBNA Transportation' }], ...over });
 
@@ -29,9 +29,12 @@ describe('nextFromPursuit', () => {
     const o = nextFromPursuit(base({ replies: [{ from: 'tim@acme.com', name: null, at: '2026-10-05T13:58:00Z', subject: null, snippet: 'stop', triaged: false }] }), opts);
     expect(o.text).toMatch(/Record tim@acme.com's opt-out/);
     expect(o.control?.label).toBe('Record the opt-out');
+    // R60: recorded on this account (its own waiting replies, in place), never the all-replies lane.
+    expect(o.control?.href).toBe('/gap/accounts/acme#record-reply');
     const r = nextFromPursuit(base({ replies: [{ from: 'tim@acme.com', name: 'Tim Cooper', at: '2026-10-05T13:58:00Z', subject: null, snippet: 'Call me Tuesday', triaged: false }] }), opts);
     expect(r.text).toMatch(/Read Tim Cooper's reply of Oct 5 and record what they said/);
     expect(r.control?.label).toBe('Open the reply');
+    expect(r.control?.href).toBe('/gap/accounts/acme#record-reply');
   });
   it('IN A DEAL opens the deal brief; RESEARCH opens the research plan', () => {
     expect(nextFromPursuit(base({ motionType: 'IN_DEAL', opportunity: { status: 'ACTIVE', detail: '', deals: [{ name: 'YardFlow - Kroger', stage: 'Discovery' }] } }), opts).control?.label).toBe('Open the deal brief');

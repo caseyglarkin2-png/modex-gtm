@@ -30,6 +30,17 @@ describe('stored facts are re-gated on read', () => {
 });
 
 describe('final dogfood: a stored third-party quote is not the account\'s fact', () => {
+  it('R30/R31: a job or procurement claim minted with its class is a live fact of that class (publisher and speaker rules only); the same text without a class is not a fact', async () => {
+    const JOB = 'Unfi is now hiring a Yard Operations Manager in Hopkins who will be responsible for trailer spotting and dock scheduling.';
+    const i = await loadAccountInputs(fake([
+      { ...row('job', JOB), claim_class: 'JOB_POSTING' },
+      row('job-unclassed', JOB),
+      { ...row('job-third', `${JOB.replace(/\.$/, '')}, said the CEO of HireCo.`), claim_class: 'JOB_POSTING', evidence_url: 'https://hireco.example/news' },
+      { ...row('rfp', 'Unfi issued a request for proposals for a yard management system at its Hopkins distribution center; proposals are due November 14, 2026.'), claim_class: 'PROCUREMENT' },
+      { ...row('lead', 'Unfi named Jane Doe as Senior Vice President of Supply Chain.'), claim_class: 'LEADERSHIP' },
+    ]), 'Unfi', NOW);
+    expect(i?.facts.map((f) => [f.id, f.claimClass])).toEqual([['job', 'JOB_POSTING'], ['rfp', 'PROCUREMENT']]);
+  });
   it('PepsiCo: the Gatik CEO quote stored before #334 is not live; PepsiCo\'s own executive quoted is', async () => {
     const gatik = '“Driverless trucks deployed in commercial capacity, driving across highways and surface streets — that’s what we’re doing with PepsiCo,” said Gautam Narang, CEO and co-founder of Gatik.';
     const own = '"We will open two new automated distribution centers in Texas in 2027," said Jane Doe, chief supply chain officer of PepsiCo.';

@@ -15,7 +15,8 @@
 import { useEffect, useState } from 'react';
 import { BID_TYPES } from '@/lib/gap/taxonomy';
 import type { CaptureView } from '@/lib/gap/capture/store';
-import { buyerSpeakers } from '@/lib/gap/capture/extract';
+import { buyerSpeakers, commitmentTitle } from '@/lib/gap/capture/extract';
+import { REPLY_KIND_CLASSES, REPLY_KIND_ITEM, REPLY_KIND_WORDS, type ReplyKindClass } from '@/lib/gap/capture/reply-kind';
 import { Dictate } from './dictate';
 
 const OFFLINE = 'no connection. Try again when you have signal.';
@@ -42,6 +43,13 @@ const OUTCOMES = [
 ] as const;
 
 const words = (s: string) => s.replace(/_/g, ' ');
+/** R63-A N1: a thesis choice in words ("Hidden capacity (approved, not in use)", never "hidden capacity (approved)"). */
+const THESIS_STATUS: Record<string, string> = { approved: 'approved, not in use', active: 'in use', draft: 'draft', review_required: 'waiting for review', confirmed: 'confirmed', partially_confirmed: 'partly confirmed' };
+export const thesisOption = (h: { problem_family: string; status: string }) => {
+  const family = words(h.problem_family);
+  return `${family.charAt(0).toUpperCase()}${family.slice(1)} (${THESIS_STATUS[h.status] ?? words(h.status)})`;
+};
+const SOURCE_TEXT: Record<string, string> = { work: 'a Work card', reply: 'a reply', commitment: 'an obligation', account: 'the account page', meeting: 'a meeting' };
 const input = 'w-full rounded-md border border-[var(--border)] bg-transparent px-3 py-2 text-base';
 const btn = 'rounded-md border border-[var(--border)] px-3 py-2 text-sm disabled:opacity-60';
 const primary = 'rounded-md bg-[var(--primary)] px-4 py-2 text-sm font-medium text-[var(--primary-foreground)] disabled:opacity-60';
@@ -69,22 +77,129 @@ function useAccountContext(account: string | null): Context | null {
   return ctx;
 }
 
-function Candidates({ capture, onChange }: { capture: CaptureView; onChange: (c: CaptureView) => void }) {
+type ItemDraft = { keep: boolean; type?: string; quote?: string; personaId?: number | null; title?: string; dueDay?: string; /** R63-A B1: who owes an obligation. */ owner?: 'seller' | 'buyer' };
+type ItemResult = { candidateId: string; ok: boolean; reason?: string; detail?: string };
+
+const REASON_TEXT: Record<string, string> = {
+  hypothesis_not_at_account: 'choose the thesis it bears on',
+  speaker_required: 'choose who said it',
+  no_contact: 'choose who said it',
+  contact_not_at_account: 'that person is not at this account',
+  quote_not_in_source: 'the quote must stay their exact words, inside its sentence',
+  capture_unlinked: 'link the note to an account first',
+  already_decided: 'already decided',
+  bad_due: 'that is not a date',
+  title_required: 'say what is owed',
+  persona_not_at_account: 'that person is not at this account',
+};
+
+/**
+ * R44: ONE concise review of the whole note. Every buyer statement and every obligation the note states, each kept
+ * (default) or rejected, each corrected on its own (a relabelled type, a shortened quote, who said it, what is owed and
+ * by when), then one press records all of it through the same single decisions (a buyer statement becomes a confirmed
+ * BID only with its exact words and its speaker; an obligation becomes a commitment). The lines that are never buyer
+ * words (a pasted summary, your own read) are listed with why, kept in the note, never proposed.
+ */
+/**
+ * R63-A S4: recorded is not answered ("The reply is answered on the account." showed though nothing was sent): the answer
+ * waits on the account, prepared, until it is sent or copied.
+ */
+const RECORDED_ANSWER_LINE = 'Your answer to them waits on the account, prepared; nothing goes out until you send or copy it.';
+/** What follows a recorded meaning: no reply goes back to a stop, a machine or nothing to act on; anything else is owed. */
+const afterRecorded = (cls: string | null) => (cls === 'do_not_contact' || cls === 'bounce' || cls === 'out_of_office' || cls === 'no_signal' ? 'No reply goes back.' : RECORDED_ANSWER_LINE);
+
+/** R63-B S4: what a reply's recorded meaning says, the same words the review shows. */
+function replyDecisionLine(c: CaptureView): string | null {
+  const rd = c.reply?.decision;
+  if (!rd) return null;
+  if (rd.kind === 'rejected') return 'Set aside. The reply still waits on the account.';
+  return rd.before ? 'Already recorded for this reply. Nothing is recorded twice.' : `Recorded: ${REPLY_KIND_WORDS[rd.responseClass as ReplyKindClass] ?? 'what it means'}. ${afterRecorded(rd.responseClass)}`;
+}
+
+function NoteReview({ capture, onChange, announce = () => {} }: { capture: CaptureView; onChange: (c: CaptureView) => void; announce?: (text: string) => void }) {
   const ctx = useAccountContext(capture.accountName);
   // Review D P1: nothing is pre-chosen for Casey unless there is exactly one option.
   const onlyHyp = ctx && ctx.hypotheses.length === 1 ? ctx.hypotheses[0].id : '';
   const [hypothesisId, setHypothesisId] = useState<string>('');
   const multiSpeaker = buyerSpeakers(capture.rawText).length > 1;
-  const [speakerOf, setSpeakerOf] = useState<Record<string, number | null>>({});
-  const [types, setTypes] = useState<Record<string, string>>({});
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [busy, setBusy] = useState<string | null>(null);
-  const hyp = hypothesisId || onlyHyp;
-  const personaFor = (cid: string) => (cid in speakerOf ? speakerOf[cid] : multiSpeaker ? null : capture.personaId);
+  const [drafts, setDrafts] = useState<Record<string, ItemDraft>>({});
+  const [results, setResults] = useState<Record<string, string>>({});
+  // R63-B N2: what another tab or person had already recorded when this press arrived (refused "already_decided").
+  const [stale, setStale] = useState<ReadonlySet<string>>(new Set());
+  const STALE_LINE = 'Already recorded before your press (another tab or person). Nothing was recorded twice.';
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  // R60: a note opened from a reply bears on the reply's own thesis unless the seller chooses another.
+  const replyHyp = capture.reply?.hypothesisId && ctx?.hypotheses.some((h) => h.id === capture.reply!.hypothesisId) ? capture.reply.hypothesisId : '';
+  const hyp = hypothesisId || replyHyp || onlyHyp;
+  const reply = capture.reply ?? null;
+  const replyPending = !!reply && !reply.decision;
+  const [replyClass, setReplyClass] = useState<string>(reply?.proposedClass ?? '');
+  const [replyKeep, setReplyKeep] = useState(true);
+  const d = (id: string): ItemDraft => drafts[id] ?? { keep: true };
+  const set = (id: string, patch: Partial<ItemDraft>) => setDrafts((m) => ({ ...m, [id]: { ...d(id), ...patch } }));
+  const personaFor = (id: string) => (d(id).personaId !== undefined ? d(id).personaId : multiSpeaker ? null : capture.personaId);
+  // A note saved before R44 carries no obligations or exclusions.
+  const commitmentList = capture.commitments ?? [];
+  const excludedList = capture.excluded ?? [];
+  const bids = capture.candidates.filter((c) => !c.decision);
+  const owed = commitmentList.filter((c) => !c.decision);
+  const kept = bids.filter((c) => d(c.id).keep).length + owed.filter((c) => d(c.id).keep).length + (replyPending && replyKeep ? 1 : 0);
+  const rejected = bids.length + owed.length + (replyPending ? 1 : 0) - kept;
+  // R60: what the reply means must be chosen before the review records (or the seller sets it aside for now).
+  const replyUnchosen = replyPending && replyKeep && !replyClass;
 
-  async function decide(candidateId: string, decision: 'confirm' | 'reject') {
-    setBusy(candidateId);
-    setErrors((e) => ({ ...e, [candidateId]: '' }));
+  async function submit() {
+    setBusy(true);
+    setError(null);
+    const items = [
+      ...(replyPending ? [replyKeep ? { candidateId: REPLY_KIND_ITEM, decision: 'confirm', responseClass: replyClass } : { candidateId: REPLY_KIND_ITEM, decision: 'reject' }] : []),
+      ...bids.map((c) =>
+        d(c.id).keep
+          ? { candidateId: c.id, decision: 'confirm', type: d(c.id).type ?? c.type, ...(d(c.id).quote && d(c.id).quote !== c.quote ? { quote: d(c.id).quote } : {}), ...(personaFor(c.id) != null ? { personaId: personaFor(c.id) } : {}) }
+          : { candidateId: c.id, decision: 'reject' },
+      ),
+      ...owed.map((c) =>
+        d(c.id).keep
+          ? { candidateId: c.id, decision: 'confirm', title: d(c.id).title ?? c.title, dueDay: d(c.id).dueDay ?? c.due?.day ?? '', owner: d(c.id).owner ?? c.owner, ...((d(c.id).personaId ?? capture.personaId) != null ? { personaId: d(c.id).personaId ?? capture.personaId } : {}) }
+          : { candidateId: c.id, decision: 'reject' },
+      ),
+    ];
+    let res: Response;
+    try {
+      res = await fetch(`/api/gap/captures/${encodeURIComponent(capture.id)}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ op: 'batch', ...(hyp ? { hypothesisId: hyp } : {}), items }) });
+    } catch {
+      setBusy(false);
+      setError(`Not recorded: ${OFFLINE}`);
+      announce(`Not recorded: ${OFFLINE}`);
+      return;
+    }
+    const body = await json<{ results?: ItemResult[]; capture?: CaptureView; error?: string }>(res);
+    setBusy(false);
+    if (!res.ok || !body.capture) {
+      setError(`Not recorded: ${body.error ?? `HTTP ${res.status}`}`);
+      announce(`Not recorded: ${body.error ?? `HTTP ${res.status}`}`);
+      return;
+    }
+    const already = new Set((body.results ?? []).filter((r) => !r.ok && r.reason === 'already_decided').map((r) => r.candidateId));
+    setStale(already);
+    setResults(Object.fromEntries((body.results ?? []).filter((r) => !r.ok && r.reason !== 'already_decided').map((r) => [r.candidateId, REASON_TEXT[r.reason ?? ''] ?? r.detail ?? r.reason ?? 'not recorded'])));
+    onChange(body.capture);
+    // R63-B S4: the outcome is said in the live region (a new line on the page is not announced by itself).
+    const recorded = (body.results ?? []).filter((r) => r.ok && r.candidateId !== REPLY_KIND_ITEM).length;
+    const failed = (body.results ?? []).filter((r) => !r.ok && r.reason !== 'already_decided').length;
+    // R63-B N2: a stale press says it was refused, never the success text of the press that did record it.
+    const replyLine = already.has(REPLY_KIND_ITEM) ? `What the reply means: ${STALE_LINE}` : (body.results ?? []).some((r) => r.candidateId === REPLY_KIND_ITEM && r.ok) ? replyDecisionLine(body.capture) : null;
+    announce([replyLine, recorded ? `${recorded} recorded from the note.` : null, already.size - (already.has(REPLY_KIND_ITEM) ? 1 : 0) > 0 ? `${already.size - (already.has(REPLY_KIND_ITEM) ? 1 : 0)} already recorded before your press; nothing was recorded twice.` : null, failed ? `${failed} not recorded; the reason is beside each.` : null].filter(Boolean).join(' ') || 'Recorded.');
+  }
+
+  const people = ctx?.people ?? [];
+
+  /** One statement on its own (the single correction path): confirm or reject it now. */
+  async function decideOne(candidateId: string, decision: 'confirm' | 'reject') {
+    setBusy(true);
+    setResults((m) => ({ ...m, [candidateId]: '' }));
+    const c = capture.candidates.find((x) => x.id === candidateId);
     let res: Response;
     try {
       res = await fetch(`/api/gap/captures/${encodeURIComponent(capture.id)}`, {
@@ -93,94 +208,226 @@ function Candidates({ capture, onChange }: { capture: CaptureView; onChange: (c:
         body: JSON.stringify(
           decision === 'reject'
             ? { op: 'decide', candidateId, decision }
-            : { op: 'decide', candidateId, decision, type: types[candidateId], hypothesisId: hyp || undefined, personaId: personaFor(candidateId) ?? undefined },
+            : { op: 'decide', candidateId, decision, type: d(candidateId).type ?? c?.type, ...(d(candidateId).quote && d(candidateId).quote !== c?.quote ? { quote: d(candidateId).quote } : {}), hypothesisId: hyp || undefined, personaId: personaFor(candidateId) ?? undefined },
         ),
       });
     } catch {
       // Final review P1 (UX lens): a dropped connection never leaves the buttons stuck or silent.
-      setBusy(null);
-      setErrors((e) => ({ ...e, [candidateId]: OFFLINE }));
+      setBusy(false);
+      setResults((m) => ({ ...m, [candidateId]: OFFLINE }));
+      announce(`Not recorded: ${OFFLINE}`);
       return;
     }
-    const body = await json<{ ok?: boolean; capture?: CaptureView; error?: string; detail?: string }>(res);
-    setBusy(null);
+    const body = await json<{ capture?: CaptureView; error?: string; detail?: string }>(res);
+    setBusy(false);
     if (!res.ok || !body.capture) {
-      setErrors((e) => ({ ...e, [candidateId]: body.detail ?? body.error ?? `HTTP ${res.status}` }));
+      const why = REASON_TEXT[body.error ?? ''] ?? body.detail ?? body.error ?? `HTTP ${res.status}`;
+      setResults((m) => ({ ...m, [candidateId]: why }));
+      announce(`Not recorded: ${why}.`);
       return;
     }
     onChange(body.capture);
+    announce(decision === 'confirm' ? 'Confirmed. Recorded as buyer truth.' : 'Rejected. Not buyer truth.');
   }
-
-  if (capture.candidates.length === 0) return <p className="text-sm text-[var(--muted-foreground)]">No buyer statements stood out. The note is saved as written.</p>;
+  const decided = (label: string, tone: string) => <p className={`text-xs font-medium ${tone}`}>{label}</p>;
   return (
-    <section className="space-y-3" data-testid="capture-candidates">
-      <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Candidate buyer truth (not truth until you confirm)</p>
-      {capture.accountName && ctx ? (
-        <div className="grid gap-2 sm:grid-cols-2">
-          <label className="text-xs">
-            Thesis it bears on
-            <select aria-label="Thesis" className={input} value={hyp} onChange={(e) => setHypothesisId(e.target.value)}>
-              <option value="">{ctx.hypotheses.length === 0 ? 'No current thesis at this account' : 'Choose the thesis'}</option>
-              {ctx.hypotheses.map((h) => (
-                <option key={h.id} value={h.id}>
-                  {words(h.problem_family)} ({h.status})
-                </option>
-              ))}
-            </select>
-          </label>
-          {multiSpeaker ? (
-            <p className="text-xs text-amber-700 dark:text-amber-400">This note has more than one speaker: choose who said each line.</p>
-          ) : null}
-        </div>
-      ) : null}
-      {capture.candidates.map((c) => (
-        <article key={c.id} data-testid="capture-candidate" data-state={c.decision?.kind ?? 'candidate'} className="space-y-2 rounded-md border border-[var(--border)] p-3">
-          <blockquote className="break-words border-l-2 border-[var(--primary)] pl-2 text-sm">&ldquo;{c.quote}&rdquo;</blockquote>
-          {c.speaker ? <p className="text-xs text-[var(--muted-foreground)]">In the note: {c.speaker}</p> : null}
-          {c.decision?.kind === 'confirmed' ? (
-            <p className="text-xs font-medium text-emerald-700 dark:text-emerald-400">Confirmed as {words(c.decision.type)}. Recorded as buyer truth.</p>
-          ) : c.decision?.kind === 'rejected' ? (
-            <p className="text-xs text-[var(--muted-foreground)]">Rejected. Not buyer truth.</p>
+    <section className="space-y-3" data-testid="capture-review-batch">
+      {reply ? (
+        // R60: what the reply means, reviewed with their words and recorded once (the disposition service writes it).
+        <article className="space-y-2 rounded-md border border-[var(--border)] p-3" data-testid="capture-reply-kind" data-state={reply.decision?.kind ?? (replyKeep ? 'keep' : 'reject')}>
+          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">What {reply.from}&apos;s reply means</p>
+          {reply.decision?.kind === 'confirmed' ? (
+            decided(stale.has(REPLY_KIND_ITEM) ? `${STALE_LINE} On record: ${REPLY_KIND_WORDS[reply.decision.responseClass as ReplyKindClass] ?? 'what it means'}.` : reply.decision.before ? 'Already recorded for this reply. Nothing is recorded twice.' : `Recorded: ${REPLY_KIND_WORDS[reply.decision.responseClass as ReplyKindClass] ?? 'what it means'}. ${afterRecorded(reply.decision.responseClass)}`, stale.has(REPLY_KIND_ITEM) ? 'text-amber-700 dark:text-amber-400' : 'text-emerald-700 dark:text-emerald-400')
+          ) : reply.decision?.kind === 'rejected' ? (
+            decided('Set aside. The reply still waits on the account.', 'text-[var(--muted-foreground)]')
           ) : (
             <>
-              <div className="flex flex-wrap items-center gap-2 text-xs">
-                <span className="text-[var(--muted-foreground)]">Suggested: {words(c.type)}{c.cues.length ? ` (${c.cues.join(', ')})` : ''}</span>
-                <select aria-label="Relabel" className="rounded-md border border-[var(--border)] bg-transparent px-2 py-1 text-xs" value={types[c.id] ?? c.type} onChange={(e) => setTypes((t) => ({ ...t, [c.id]: e.target.value }))}>
-                  {BID_TYPES.map((t) => (
-                    <option key={t} value={t}>
-                      {words(t)}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              {ctx ? (
-                <select aria-label="Who said it" data-testid="candidate-speaker" className={input} value={personaFor(c.id) ?? ''} onChange={(e) => setSpeakerOf((m) => ({ ...m, [c.id]: e.target.value ? Number(e.target.value) : null }))}>
-                  <option value="">Who said it?</option>
-                  {ctx.people.map((p) => (
-                    <option key={p.id} value={p.id}>
-                      {p.name ?? p.email ?? `person ${p.id}`}
-                      {p.title ? `, ${p.title}` : ''}
-                    </option>
-                  ))}
-                </select>
-              ) : null}
-              <div className="flex flex-wrap gap-2">
-                <button type="button" data-testid="candidate-confirm" disabled={busy === c.id || !capture.accountName || !hyp || personaFor(c.id) == null} onClick={() => void decide(c.id, 'confirm')} className={primary}>
-                  ✓ Confirm
-                </button>
-                <button type="button" data-testid="candidate-reject" disabled={busy === c.id} onClick={() => void decide(c.id, 'reject')} className={btn}>
-                  ✕ Reject
-                </button>
-              </div>
-              {errors[c.id] ? (
-                <p role="alert" className="text-xs text-[var(--destructive)]">
-                  Not recorded: {errors[c.id]}
-                </p>
-              ) : null}
+              <select aria-label="What the reply means" data-testid="capture-reply-class" className={input} value={replyClass} onChange={(e) => setReplyClass(e.target.value)} disabled={!replyKeep}>
+                <option value="">Choose what the reply means</option>
+                {REPLY_KIND_CLASSES.map((k) => (
+                  <option key={k} value={k}>
+                    {REPLY_KIND_WORDS[k]}
+                  </option>
+                ))}
+              </select>
+              {reply.proposedClass ? <p className="text-xs text-[var(--muted-foreground)]" data-testid="capture-reply-proposed">The message itself says: {REPLY_KIND_WORDS[reply.proposedClass]}.</p> : null}
+              {reply.suggestedClass && reply.suggestedClass !== reply.proposedClass ? <p className="text-xs text-[var(--muted-foreground)]" data-testid="capture-reply-suggested">Suggested, not confirmed: {REPLY_KIND_WORDS[reply.suggestedClass as ReplyKindClass] ?? words(reply.suggestedClass)}.</p> : null}
+              <label className="inline-flex min-h-11 items-center gap-1 text-xs sm:min-h-9">
+                <input type="checkbox" data-testid="capture-reply-reject-toggle" checked={!replyKeep} onChange={(e) => setReplyKeep(!e.target.checked)} /> Do not record what it means now
+              </label>
+              {results[REPLY_KIND_ITEM] ? <p role="alert" className="text-xs text-[var(--destructive)]">Not recorded: {results[REPLY_KIND_ITEM]}.</p> : null}
             </>
           )}
         </article>
-      ))}
+      ) : null}
+      {!reply && capture.source?.kind === 'reply' ? <p className="text-xs text-[var(--muted-foreground)]" data-testid="capture-reply-unread">GAP could not read that reply here, so what it means is not part of this review.</p> : null}
+      {capture.candidates.length === 0 && commitmentList.length === 0 && !reply ?<p className="text-sm text-[var(--muted-foreground)]">No buyer statements or obligations stood out. The note is saved as written.</p> : null}
+      {capture.candidates.length ? (
+        <div className="space-y-2" data-testid="capture-candidates">
+          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Candidate buyer truth (not truth until you confirm)</p>
+          {capture.accountName && ctx ? (
+            <label className="block text-xs">
+              Thesis it bears on
+              <select aria-label="Thesis" className={input} value={hyp} onChange={(e) => setHypothesisId(e.target.value)}>
+                <option value="">{ctx.hypotheses.length === 0 ? 'No current thesis at this account' : 'Choose the thesis'}</option>
+                {ctx.hypotheses.map((h) => (
+                  <option key={h.id} value={h.id}>
+                    {thesisOption(h)}
+                  </option>
+                ))}
+              </select>
+            </label>
+          ) : null}
+          {multiSpeaker ? <p className="text-xs text-amber-700 dark:text-amber-400">This note has more than one speaker: choose who said each line.</p> : null}
+          {capture.candidates.map((c) => (
+            <article key={c.id} data-testid="capture-candidate" data-state={c.decision?.kind ?? 'candidate'} data-keep={c.decision ? undefined : String(d(c.id).keep)} className="space-y-2 rounded-md border border-[var(--border)] p-3">
+              {c.decision?.kind === 'confirmed' ? (
+                <>
+                  <blockquote className="break-words border-l-2 border-[var(--primary)] pl-2 text-sm">&ldquo;{c.quote}&rdquo;</blockquote>
+                  {stale.has(c.id) ? decided(STALE_LINE, 'text-amber-700 dark:text-amber-400') : decided(`Confirmed as ${words(c.decision.type)}. Recorded as buyer truth.`, 'text-emerald-700 dark:text-emerald-400')}
+                </>
+              ) : c.decision?.kind === 'rejected' ? (
+                <>
+                  <blockquote className="break-words border-l-2 border-[var(--border)] pl-2 text-sm text-[var(--muted-foreground)]">&ldquo;{c.quote}&rdquo;</blockquote>
+                  {stale.has(c.id) ? decided(STALE_LINE, 'text-amber-700 dark:text-amber-400') : decided('Rejected. Not buyer truth.', 'text-[var(--muted-foreground)]')}
+                </>
+              ) : (
+                <>
+                  <textarea aria-label="Their exact words" data-testid="candidate-quote" className={`${input} min-h-[3rem] text-sm`} value={d(c.id).quote ?? c.quote} onChange={(e) => set(c.id, { quote: e.target.value })} />
+                  {c.speaker ? <p className="text-xs text-[var(--muted-foreground)]">In the note: {c.speaker}</p> : null}
+                  <div className="flex flex-wrap items-center gap-2 text-xs">
+                    <select aria-label="What kind of statement" className="min-h-11 rounded-md border border-[var(--border)] bg-transparent px-2 text-xs sm:min-h-9" value={d(c.id).type ?? c.type} onChange={(e) => set(c.id, { type: e.target.value })}>
+                      {BID_TYPES.map((t) => (
+                        <option key={t} value={t}>
+                          {words(t)}
+                        </option>
+                      ))}
+                    </select>
+                    {ctx ? (
+                      <select aria-label="Who said it" data-testid="candidate-speaker" className="min-h-11 rounded-md border border-[var(--border)] bg-transparent px-2 text-xs sm:min-h-9" value={personaFor(c.id) ?? ''} onChange={(e) => set(c.id, { personaId: e.target.value ? Number(e.target.value) : null })}>
+                        <option value="">Who said it?</option>
+                        {people.map((p) => (
+                          <option key={p.id} value={p.id}>
+                            {p.name ?? p.email ?? `person ${p.id}`}
+                            {p.title ? `, ${p.title}` : ''}
+                          </option>
+                        ))}
+                      </select>
+                    ) : null}
+                    <label className="inline-flex min-h-11 items-center gap-1 sm:min-h-9">
+                      <input type="checkbox" data-testid="candidate-reject-toggle" checked={!d(c.id).keep} onChange={(e) => set(c.id, { keep: !e.target.checked })} /> Reject this one
+                    </label>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <button type="button" data-testid="candidate-confirm" disabled={busy || !capture.accountName || !hyp || personaFor(c.id) == null} onClick={() => void decideOne(c.id, 'confirm')} className={btn}>
+                      Confirm this one now
+                    </button>
+                    <button type="button" data-testid="candidate-reject" disabled={busy} onClick={() => void decideOne(c.id, 'reject')} className={btn}>
+                      Reject this one now
+                    </button>
+                  </div>
+                  {results[c.id] ? <p role="alert" className="text-xs text-[var(--destructive)]">Not recorded: {results[c.id]}.</p> : null}
+                </>
+              )}
+            </article>
+          ))}
+        </div>
+      ) : null}
+      {commitmentList.length ? (
+        <div className="space-y-2" data-testid="capture-commitments">
+          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">What is owed, and by when</p>
+          {commitmentList.map((c) => (
+            <article key={c.id} data-testid="capture-commitment" data-state={c.decision?.kind ?? (d(c.id).keep ? 'keep' : 'reject')} className="space-y-2 rounded-md border border-[var(--border)] p-3">
+              <blockquote className="break-words border-l-2 border-[var(--primary)] pl-2 text-sm">
+                {c.speaker ? <span className="font-medium">{c.speaker}: </span> : null}&ldquo;{c.quote}&rdquo;
+              </blockquote>
+              {c.decision && stale.has(c.id) ? (
+                decided(STALE_LINE, 'text-amber-700 dark:text-amber-400')
+              ) : c.decision?.kind === 'confirmed' ? (
+                decided('Recorded as an obligation. It is on Work on its day.', 'text-emerald-700 dark:text-emerald-400')
+              ) : c.decision?.kind === 'rejected' ? (
+                decided('Rejected. Nothing recorded.', 'text-[var(--muted-foreground)]')
+              ) : (
+                <>
+                  {/* R63-A B1: who owes it is the seller's choice before anything is recorded (a seller's own "I will" was
+                      recorded as the buyer's, and Work then said to chase the buyer). Changing it retitles an untouched title. */}
+                  {(() => {
+                    const owner = d(c.id).owner ?? c.owner;
+                    const pick = (o: 'seller' | 'buyer') => {
+                      const pid = d(c.id).personaId ?? capture.personaId;
+                      const them = people.find((p) => p.id === pid)?.name?.split(/\s+/)[0] ?? null;
+                      const untouched = d(c.id).title === undefined || d(c.id).title === commitmentTitle(owner, c.object ?? null, owner === 'buyer' ? them : null, c.quote);
+                      set(c.id, { owner: o, ...(untouched && c.object ? { title: commitmentTitle(o, c.object, o === 'buyer' ? them : null, c.quote) } : {}) });
+                    };
+                    return (
+                      <div className="space-y-1">
+                        <div role="radiogroup" aria-label="Who owes it" className="flex flex-wrap items-center gap-x-3 text-xs" data-testid="commitment-owner">
+                          <span className="text-[var(--muted-foreground)]">Who owes it:</span>
+                          {(['seller', 'buyer'] as const).map((o) => (
+                            <label key={o} className="inline-flex min-h-11 items-center gap-1 sm:min-h-9">
+                              <input type="radio" className="h-6 w-6" name={`owner-${capture.id}-${c.id}`} checked={owner === o} onChange={() => pick(o)} data-testid={`commitment-owner-${o}`} />
+                              {o === 'seller' ? 'Me' : 'Them'}
+                            </label>
+                          ))}
+                        </div>
+                        <p className="text-xs text-[var(--muted-foreground)]" data-testid="commitment-owner-line">{owner === 'seller' ? 'You owe this: it is on Work on its day.' : 'They owe this: GAP waits, then reminds you to chase it.'}</p>
+                      </div>
+                    );
+                  })()}
+                  <input aria-label="What is owed" data-testid="commitment-title" className={input} maxLength={200} value={d(c.id).title ?? c.title} onChange={(e) => set(c.id, { title: e.target.value })} />
+                  <div className="flex flex-wrap items-center gap-2 text-xs">
+                    <label className="inline-flex items-center gap-1">
+                      Due
+                      <input aria-label="Due day" data-testid="commitment-due" type="date" className="min-h-11 rounded-md border border-[var(--border)] bg-transparent px-2 text-xs sm:min-h-9" value={d(c.id).dueDay ?? c.due?.day ?? ''} onChange={(e) => set(c.id, { dueDay: e.target.value })} />
+                    </label>
+                    {c.due?.ambiguous ? <span className="text-amber-700 dark:text-amber-400">&ldquo;{c.due.phrase}&rdquo; could mean another day: check it.</span> : null}
+                    {ctx && people.length ? (
+                      <select aria-label="Who it is with" className="min-h-11 rounded-md border border-[var(--border)] bg-transparent px-2 text-xs sm:min-h-9" value={d(c.id).personaId ?? capture.personaId ?? ''} onChange={(e) => set(c.id, { personaId: e.target.value ? Number(e.target.value) : null })}>
+                        <option value="">Who it is with (optional)</option>
+                        {people.map((p) => (
+                          <option key={p.id} value={p.id}>
+                            {p.name ?? p.email ?? `person ${p.id}`}
+                          </option>
+                        ))}
+                      </select>
+                    ) : null}
+                    <label className="inline-flex min-h-11 items-center gap-1 sm:min-h-9">
+                      <input type="checkbox" data-testid="commitment-reject-toggle" checked={!d(c.id).keep} onChange={(e) => set(c.id, { keep: !e.target.checked })} /> Reject this one
+                    </label>
+                  </div>
+                  {results[c.id] ? <p role="alert" className="text-xs text-[var(--destructive)]">Not recorded: {results[c.id]}.</p> : null}
+                </>
+              )}
+            </article>
+          ))}
+        </div>
+      ) : null}
+      {bids.length + owed.length + (replyPending ? 1 : 0) > 0 ? (
+        <div className="flex flex-wrap items-center gap-2">
+          <button type="button" data-testid="capture-batch-submit" disabled={busy || !capture.accountName || replyUnchosen} onClick={() => void submit()} className={primary}>
+            {busy ? 'Recording...' : `Record ${kept} kept${rejected ? `, reject ${rejected}` : ''}`}
+          </button>
+          {!capture.accountName ? <span className="text-xs text-[var(--muted-foreground)]">Link the note to an account first.</span> : null}
+          {replyUnchosen ? <span className="text-xs text-[var(--muted-foreground)]" data-testid="capture-reply-choose">Choose what the reply means first.</span> : null}
+          {error ? (
+            <p role="alert" className="text-xs text-[var(--destructive)]">
+              {error}
+            </p>
+          ) : null}
+        </div>
+      ) : null}
+      {excludedList.length ? (
+        <details className="text-xs" data-testid="capture-excluded">
+          <summary className="cursor-pointer text-[var(--muted-foreground)]">Never proposed as their words ({excludedList.length})</summary>
+          <ul className="mt-1 space-y-1">
+            {excludedList.map((x, k) => (
+              <li key={k}>
+                <span className="text-[var(--muted-foreground)]">{x.reason}:</span> &ldquo;{x.text}&rdquo;
+              </li>
+            ))}
+          </ul>
+        </details>
+      ) : null}
     </section>
   );
 }
@@ -239,7 +486,7 @@ function MeetingOutcomeForm({ capture, onChange }: { capture: CaptureView; onCha
         <option value="">Choose the thesis this meeting tested</option>
         {(ctx?.hypotheses ?? []).map((h) => (
           <option key={h.id} value={h.id}>
-            {words(h.problem_family)} ({h.status})
+            {thesisOption(h)}
           </option>
         ))}
       </select>
@@ -310,7 +557,57 @@ function LinkNote({ capture, onChange }: { capture: CaptureView; onChange: (c: C
   );
 }
 
-export function CaptureFlow({ initial = null, initialAccount = null, dictate = false }: { initial?: CaptureView | null; initialAccount?: string | null; /** UX-12: transcription is on for this deployment (off until the spend is approved). */ dictate?: boolean }) {
+type CaptureFlowProps = Omit<Parameters<typeof CaptureFlowBody>[0], 'announce'>;
+
+/**
+ * R63-B S4: one polite live region, mounted for the whole flow (the form and the review), says every save, refusal
+ * and record; the lines that appear on the page are not announced by themselves.
+ */
+export function CaptureFlow(props: CaptureFlowProps) {
+  const [live, setLive] = useState('');
+  return (
+    <>
+      <p role="status" aria-live="polite" className="sr-only" data-testid="capture-live">
+        {live}
+      </p>
+      <CaptureFlowBody {...props} announce={setLive} />
+    </>
+  );
+}
+
+function CaptureFlowBody({
+  announce,
+  initial = null,
+  initialAccount = null,
+  initialPersona = null,
+  initialDeal = null,
+  initialDealName = null,
+  initialContext = null,
+  initialText = null,
+  source = null,
+  dictate = false,
+  initialExisting = false,
+}: {
+  initial?: CaptureView | null;
+  initialAccount?: string | null;
+  /** R44: the person the action that opened Capture was about (a person at the account, checked by the page). */
+  initialPersona?: { id: number; name: string } | null;
+  /** R44: the deal the action named (its reference as GAP knows it). */
+  initialDeal?: string | null;
+  /** R50: the deal's name, when the link carried its id. */
+  initialDealName?: string | null;
+  /** R44: the conversation the action implies (a meeting, a call, an email). */
+  initialContext?: string | null;
+  /** R60: the note's starting text (a reply's own words, when Capture was opened from it). */
+  initialText?: string | null;
+  /** R44: what opened Capture (a Work card, a reply, an obligation, the account page). */
+  source?: { kind: string; id: string } | null;
+  /** UX-12: transcription is on for this deployment (off until the spend is approved). */ dictate?: boolean;
+  /** R63-A S3: `initial` is the capture a reply already has (said at once, never after a second Save). */
+  initialExisting?: boolean;
+  /** R63-B S4: says a save, a refusal or a record in the flow's live region. */
+  announce: (text: string) => void;
+}) {
   const [capture, setCapture] = useState<CaptureView | null>(initial);
   // UX-12: what GAP heard, editable, confirmed before anything is written.
   const [heard, setHeard] = useState<string | null>(null);
@@ -318,11 +615,13 @@ export function CaptureFlow({ initial = null, initialAccount = null, dictate = f
   const [found, setFound] = useState<{ accounts: string[]; people: Person[] }>({ accounts: [], people: [] });
   // Opened from an account page ("Log what happened"): the account is already chosen (Casey can still clear it).
   const [account, setAccount] = useState<string | null>(initialAccount);
-  const [personaId, setPersonaId] = useState<number | null>(null);
-  const [context, setContext] = useState<string>('meeting');
-  const [text, setText] = useState('');
+  const [personaId, setPersonaId] = useState<number | null>(initialPersona?.id ?? null);
+  const [context, setContext] = useState<string>(initialContext && CONTEXTS.some(([k]) => k === initialContext) ? initialContext : 'meeting');
+  const [text, setText] = useState(initialText ?? '');
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  // R60: the reply already had its capture; the review below is that one note.
+  const [existing, setExisting] = useState(initialExisting);
   const acctCtx = useAccountContext(account);
 
   useEffect(() => {
@@ -339,11 +638,13 @@ export function CaptureFlow({ initial = null, initialAccount = null, dictate = f
   // Final review P1 (UX lens): the unsaved note survives a dropped connection and a reload on this phone.
   useEffect(() => {
     try {
-      const kept = window.localStorage.getItem(NOTE_DRAFT_KEY);
+      // R60: a note opened from a reply starts as that reply; an unsaved draft from elsewhere never replaces it.
+      const kept = initialText ? null : window.localStorage.getItem(NOTE_DRAFT_KEY);
       if (kept) setText((t) => t || kept);
     } catch {
       // Storage unavailable (private mode): the note stays in the page only.
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- once, on open
   }, []);
   useEffect(() => {
     try {
@@ -362,19 +663,23 @@ export function CaptureFlow({ initial = null, initialAccount = null, dictate = f
       res = await fetch('/api/gap/captures', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ accountName: account, accountHint: account ? null : q.trim() || null, personaId, context, rawText }),
+        body: JSON.stringify({ accountName: account, accountHint: account ? null : q.trim() || null, personaId, context, rawText, ...(account && initialDeal ? { dealId: initialDeal, ...(initialDealName ? { dealName: initialDealName } : {}) } : {}), ...(account && source ? { source } : {}) }),
       });
     } catch {
       setSaving(false);
       setError('no connection. Your note is kept on this phone; press Save again when you have signal.');
+      announce('Not saved: no connection. Your note is kept on this phone; press Save again when you have signal.');
       return;
     }
-    const body = await json<CaptureView & { error?: string }>(res);
+    const body = await json<CaptureView & { error?: string; existing?: boolean }>(res);
     setSaving(false);
+    setExisting(!!body.existing);
     if (!res.ok || !body.id) {
       setError(body.error ?? `HTTP ${res.status}`);
+      announce(`Not saved: ${body.error ?? `HTTP ${res.status}`}`);
       return;
     }
+    announce(body.existing ? `This reply already has its capture${body.accountName ? ` for ${body.accountName}` : ''}: one per reply. Its review is below.` : `Saved${body.accountName ? ` for ${body.accountName}` : ''}. The note is kept exactly as you wrote it.`);
     try {
       window.localStorage.removeItem(NOTE_DRAFT_KEY);
     } catch {
@@ -386,11 +691,17 @@ export function CaptureFlow({ initial = null, initialAccount = null, dictate = f
   if (capture) {
     return (
       <div className="space-y-4" data-testid="capture-review">
-        <p className="text-sm">
-          Saved{capture.accountName ? ` for ${capture.accountName}` : ''}. The note is kept exactly as you wrote it.
-        </p>
+        {existing ? (
+          <p className="text-sm" data-testid="capture-existing">
+            This reply already has its capture{capture.accountName ? ` for ${capture.accountName}` : ''}: one per reply. Its review is below.
+          </p>
+        ) : (
+          <p className="text-sm">
+            Saved{capture.accountName ? ` for ${capture.accountName}` : ''}. The note is kept exactly as you wrote it.
+          </p>
+        )}
         {!capture.accountName ? <LinkNote capture={capture} onChange={setCapture} /> : null}
-        <Candidates capture={capture} onChange={setCapture} />
+        <NoteReview capture={capture} onChange={setCapture} announce={announce} />
         <MeetingOutcomeForm capture={capture} onChange={setCapture} />
         <button type="button" className={btn} onClick={() => { setCapture(null); setText(''); }}>
           Capture another
@@ -411,6 +722,8 @@ export function CaptureFlow({ initial = null, initialAccount = null, dictate = f
             <button type="button" className="text-xs underline" onClick={() => { setAccount(null); setPersonaId(null); }}>
               change
             </button>
+            {initialDeal ? <span className="text-xs text-[var(--muted-foreground)]" data-testid="capture-deal">Deal: {initialDealName ?? initialDeal}</span> : null}
+            {source ? <span className="text-xs text-[var(--muted-foreground)]" data-testid="capture-source">Opened from {SOURCE_TEXT[source.kind] ?? source.kind}</span> : null}
           </div>
         ) : (
           <>

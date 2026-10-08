@@ -180,7 +180,7 @@ export const scoutRefusalStatus = (refused: string) => (refused === 'web_failed'
  * go to the chain as they are).
  */
 export const GEMINI_MODELS = () => [...new Set([process.env.SCOUT_GEMINI_MODEL || 'gemini-2.5-flash', 'gemini-flash-latest'])];
-export const modelGone = (e: unknown) => /404|not found|no longer available/i.test(e instanceof Error ? e.message : String(e));
+export const modelGone = (e: unknown) => /\b404\b|not found|no longer available/i.test(e instanceof Error ? e.message : String(e));
 export async function withModelFallback<T>(models: readonly string[], run: (model: string) => Promise<T>): Promise<T> {
   let last: unknown;
   for (const m of models) {

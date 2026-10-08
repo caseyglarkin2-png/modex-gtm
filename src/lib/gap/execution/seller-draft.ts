@@ -37,6 +37,8 @@ import { validateClaimsUsed } from '@/lib/gap/claims/validate-claims';
 import { sendableEvidence } from '../research/evidence-gate';
 import { seedCopyOutdated } from '../sequences/seed-drift';
 import { accountRepliedRecently } from '../replies/account-reply';
+import { referralHoldDetail, referralHoldFor } from '../replies/referral-hold';
+import { isCurrentFact } from '../research/currentness';
 import { getGmailSignature, gmailSenderAddress } from '@/lib/email/gmail-sender';
 import { COMPANY_POSTAL_ADDRESS, oneClickUnsubscribeUrl, unsubscribePageUrl } from '@/lib/email/compliance';
 import { personMovedSince } from './stale-card';
@@ -57,6 +59,7 @@ import { claimSendKey, personSendHistoryForDecision, personStepKey } from './per
 import { getGmailMessageHeaders } from '@/lib/email/gmail-inbox';
 import type { GmailSender } from '@/lib/email/gmail-sender';
 import type { ExecutionIntent } from './contract';
+import { approachOfHypothesis, COPY_UNSUPPORTED_DETAIL, copyFamilySupports } from '../research/approach-policy';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -74,6 +77,7 @@ export type SellerDraftRefusal =
   | 'draft_outstanding'
   | 'recipient_unsubscribed'
   | 'account_replied'
+  | 'named_in_referral'
   | 'account_motion_active'
   | 'fact_contradicted'
   | 'decision_stale'
@@ -106,6 +110,8 @@ export type SellerDraftRefusal =
   | 'unsubscribe_link_unavailable'
   | 'gmail_refused'
   | 'suppression_unreadable'
+  /** R34: the thesis's approach has no first-touch copy family yet; nothing is rendered or sent. */
+  | 'approach_copy_unsupported'
   | 'recipient_suppressed'
   | 'thesis_needs_review'
   | 'thesis_currentness_unknown'
@@ -351,12 +357,18 @@ export async function prepareSellerEmail(
   // One live outreach fact (verified, dated, quoted, this account, a network
   // change) or no email; a keyword hit can only send this card to research.
   const linked = Array.isArray(pack.hypothesis.signals) ? pack.hypothesis.signals.map((l: { signal?: unknown }) => l.signal).filter(Boolean) : [];
-  const live = linked.filter((sig: { freshness_expires_at?: Date | string | null }) => !sig.freshness_expires_at || new Date(sig.freshness_expires_at).getTime() > now.getTime());
-  if (sendableEvidence(pack.hypothesis.observation, live, pack.hypothesis.account_name).tier !== 'VERIFIED_FACT') {
+  const live = linked.filter((sig: { freshness_expires_at?: Date | string | null }) => isCurrentFact(sig, now));
+  // R30: the gate judges the thesis under its declared approach; R34: only the event-led path has copy today.
+  const hypRow: { metadata?: unknown } | null = await prisma.prospectingHypothesis.findUnique({ where: { id: pack.hypothesis.id }, select: { metadata: true } }).catch(() => null);
+  const approach = approachOfHypothesis(hypRow);
+  if (!copyFamilySupports(approach)) {
+    return refuse(prisma, actor, decisionId, { ok: false, reason: 'approach_copy_unsupported', detail: COPY_UNSUPPORTED_DETAIL(approach) });
+  }
+  if (sendableEvidence(pack.hypothesis.observation, live, pack.hypothesis.account_name, { approach }).tier !== 'VERIFIED_FACT') {
     return refuse(prisma, actor, decisionId, {
       ok: false,
       reason: 'evidence_insufficient',
-      detail: 'The observation does not rest only on verified, dated, quoted facts about a physical-network change at this account. Research it before any email.',
+      detail: approach === 'event_led' ? 'The observation does not rest only on verified, dated, quoted facts about a physical-network change at this account. Research it before any email.' : `The observation does not rest only on verified, dated, quoted claims a ${approach.replace(/_/g, ' ')} thesis may cite at this account. Research it before any email.`,
     });
   }
   // Final review P1: a linked fact that another verified fact at the account contradicts is never quoted.
@@ -394,6 +406,10 @@ export async function prepareSellerEmail(
     if (replied) {
       return refuse(prisma, actor, decisionId, { ok: false, reason: 'account_replied', detail: `${replied.from_email} at this account wrote in on ${new Date(replied.received_at).toISOString().slice(0, 10)}. Read it before a first touch to anyone else there.` });
     }
+    // R42b (audit at 31f09c71): a person a buyer NAMED in a referral is the seller's decision, never a cold target:
+    // no first touch until the referral obligation is done or skipped (replies/referral-hold.ts).
+    const named = await referralHoldFor(prisma, { email, name: persona.name, accountName: pack.hypothesis.account_name });
+    if (named) return refuse(prisma, actor, decisionId, { ok: false, reason: 'named_in_referral', detail: referralHoldDetail(named) });
     // Phase 2 C3: ONE cold email motion per account. Another person there holds a live
     // GAP first touch inside the unlock window: this person waits (a bounce releases it).
     const motion = await accountMotionRefusal(prisma, { accountName: pack.hypothesis.account_name, personaId: persona.id ?? null, email, now });
@@ -418,6 +434,24 @@ export async function prepareSellerEmail(
       if (prior.length > 0) {
         const p = prior[0];
         return refuse(prisma, actor, decisionId, { ok: false, reason: 'emailed_outside_gap', detail: `casey@yardflow.ai already emailed this person on ${p.internalDate.toISOString().slice(0, 10)} ("${p.subject}"), and GAP has no record of it. Record it as a manual send before anything else goes out.` });
+      }
+    }
+  } else {
+    // R43: a follow-up never goes out over one already sent by hand from the GAP mailbox. Sent after the last recorded
+    // touch, minus every message GAP recorded, must hold nothing to this person. Unreadable is unknown, never "nothing".
+    const lastAt = history.sent.filter((s) => s.stepIndex < stepIndex).map((s) => new Date(s.sentAt).getTime()).sort((a, b) => b - a)[0];
+    const sentTo = deps.mailboxSentTo ?? defaultMailboxSentTo((deps.gapSender ?? gapGmailSender)());
+    if (sentTo && lastAt) {
+      const recorded = new Set(history.sent.map((s) => s.gmailSentMessageId));
+      let after: Array<{ id: string; internalDate: Date; subject: string }>;
+      try {
+        after = (await sentTo(email, Math.floor((lastAt + 60_000) / 1000), Math.ceil(now.getTime() / 1000) + 86_400)).filter((m) => m.internalDate.getTime() > lastAt + 60_000 && !recorded.has(m.id));
+      } catch (e) {
+        return refuse(prisma, actor, decisionId, { ok: false, reason: 'mailbox_sent_unreadable', detail: `Could not read the GAP mailbox's Sent folder (${e instanceof Error ? e.message : String(e)}). No follow-up goes out until it can be read.` });
+      }
+      if (after.length > 0) {
+        const p = after[0];
+        return refuse(prisma, actor, decisionId, { ok: false, reason: 'emailed_outside_gap', detail: `casey@yardflow.ai emailed this person on ${p.internalDate.toISOString().slice(0, 10)} ("${p.subject}") after the last recorded touch, and GAP has no record of it. That was the follow-up: mark it done; nothing else goes out now.` });
       }
     }
   }

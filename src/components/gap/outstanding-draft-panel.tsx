@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { DISCARD_REASON_LABEL, DISCARD_REASONS, type DiscardReason } from '@/lib/gap/execution/draft-discard-reasons';
 import { refusalSentence } from '@/lib/gap/ui/refusal-copy';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 export interface OutstandingDraftProps {
   recipient: string;
@@ -48,7 +49,7 @@ export function OutstandingDraftPanel({ recipient, name, decisionId, gmailDraftI
       const action = String(body.action);
       setOutcome({ ok: true, text: action === 'discarded' ? `Discarded the GAP draft to ${recipient}. The account motion is released.` : action === 'reconciled' ? String(body.detail ?? 'Reconciled with Gmail.') : String(body.detail ?? 'Nothing to discard.') });
       setConfirming(false);
-      router.refresh();
+      refreshNow(router);
     } catch (e) {
       setOutcome({ ok: false, text: e instanceof Error ? e.message : 'network error' });
     } finally {

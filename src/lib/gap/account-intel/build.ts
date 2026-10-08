@@ -37,6 +37,8 @@ export interface FactInput {
   currentness: { url: string | null; publishedAt: string } | null;
   /** Other stored rows of this exact quote (the same fact registered once per person): the same fact. */
   sameQuoteIds?: string[];
+  /** R30/R31: JOB_POSTING or PROCUREMENT when the fact is a claim of that kind (null: a physical-network fact). */
+  claimClass?: string | null;
 }
 
 /** Every stored id of one fact (a thesis may cite any of them). */
@@ -54,6 +56,12 @@ export interface HypothesisInput {
   falsification: string[];
   whatANoMeans: string | null;
   primarySignalId: string | null;
+  /** The stored problem family ('unmapped' when none); absent when the loader predates it. */
+  problemFamily?: string | null;
+  /** The primary person the thesis is written for, when assigned. */
+  personaId?: number | null;
+  /** R32: the thesis's declared evidence approach (metadata.approach); absent reads as event-led. */
+  approach?: string | null;
   /** When Casey approved it (reviewed_at on an approved or active thesis); null for a draft. */
   reviewedAt?: string | null;
   /** Casey's latest explicit "Reviewed, keep it" on this thesis (thesis.review_ack), if any. */
@@ -71,12 +79,22 @@ export interface BidInput {
   at: string;
   /** The hypothesis this BID was captured against (every BID has one). */
   hypothesisId: string | null;
+  /** R63-A S5: what the seller noted they said (a paraphrase), never their own words. */
+  noted?: boolean;
+  /**
+   * Sprint 5 review (R50): the opportunity it belongs to in seller words (deals/scope.ts: "Deal: Kroger Columbus DC
+   * (through Ben Scratch)", "account-level", a closed deal with its outcome), when the account has a deal; null when
+   * it has none (nothing to tell apart).
+   */
+  scope?: string | null;
 }
 
 export interface PersonaInput {
   id: number;
   name: string;
   title: string | null;
+  /** R63-A B4: the address on record (the story names a reply's sender and a buyer statement's speaker by it). */
+  email?: string | null;
   doNotContact: boolean;
   hasEmail: boolean;
   emailStatus: string | null;
@@ -137,6 +155,8 @@ export interface AccountInputs {
   watched: boolean;
   watchReasons: string[];
   facts: FactInput[];
+  /** Item 2: facts a rejected thesis at the account cites (the seller set the story aside): never offered as a draft again. */
+  setAsideFactIds?: string[];
   signals: Array<{ id: string; title: string | null; url: string | null; publishedAt: string | null; researchStatus: string; note?: string | null; capturedAt?: string | null }>;
   lastResearch: { at: string; outcome: string } | null;
   hypotheses: HypothesisInput[];
@@ -148,7 +168,7 @@ export interface AccountInputs {
   firstTouches: Array<{ recipient: string; sentAt: string | null; state: string; personaId?: number | null; decisionId?: string; gmailDraftId?: string }>;
   conversation: { who: string; responseClass: string; at: string } | null;
   /** null = not read this time (the section says so). */
-  opportunity: { status: 'CLEAR' | 'ACTIVE' | 'UNKNOWN'; detail: string; deals: Array<{ name: string | null; stage: string | null; amount?: string | null; closeDate?: string | null; nextStep?: string | null }>; unlinked?: boolean } | null;
+  opportunity: { status: 'CLEAR' | 'ACTIVE' | 'UNKNOWN'; detail: string; deals: Array<{ /** R50: the HubSpot deal id (scopes work to the deal). */ id?: string; name: string | null; stage: string | null; amount?: string | null; closeDate?: string | null; nextStep?: string | null; /** R32: the deal's HubSpot contacts, when HubSpot returned them. */ contactIds?: string[] }>; unlinked?: boolean; /** R55: a customer (closed won) or parked (closed lost, nothing material since), when no deal is open. */ closure?: { kind: 'customer' | 'parked'; why: string; dealName: string | null; closedAt: string | null } | null; /** R55: the account's closed deals as HubSpot reports them (won / lost and when). */ closed?: Array<{ id: string; name: string | null; stage: string | null; won: boolean | null; closedAt: string | null }> } | null;
   pack: PackInput | null;
   microsite: MicrositeInput | null;
   facilityFact: { facilityCount: string; status: 'verified' | 'provisional'; summary: string; updatedAt: string; sources: Array<{ label: string; url?: string }> } | null;
@@ -290,7 +310,7 @@ export interface AccountIntelligenceBrief {
   /** The HubSpot deal state as data (plans and gates read this, never the display text). */
   dealState: 'ACTIVE' | 'CLEAR' | 'UNKNOWN' | 'NOT_READ';
   /** The open deals when dealState is ACTIVE (name and stage as HubSpot said them moments ago). */
-  deals: Array<{ name: string | null; stage: string | null; amount?: string | null; closeDate?: string | null; nextStep?: string | null }>;
+  deals: Array<{ id?: string; name: string | null; stage: string | null; amount?: string | null; closeDate?: string | null; nextStep?: string | null }>;
   /**
    * WHO, from THE PERSON PRIOR (people/person-prior.ts): one primary person and one alternate, each with one sentence
    * why, and the buyer map by lane. Lanes and reasons, never a score.
@@ -367,7 +387,7 @@ const plural = (n: number, one: string, many = `${one}s`) => `${n} ${n === 1 ? o
 const money = (n: number) => `$${(n / 1_000_000).toFixed(1)}M`;
 
 const ev = (f: FactInput): Source => ({ kind: 'evidence', ref: f.id, label: f.title, url: f.url, at: f.publishedAt });
-const bidSrc = (b: BidInput): Source => ({ kind: 'bid', ref: b.id, label: `${b.who ?? 'buyer'}, confirmed`, url: null, at: b.at });
+const bidSrc = (b: BidInput): Source => ({ kind: 'bid', ref: b.id, label: `${b.who ?? 'buyer'}, confirmed${b.scope ? `; ${b.scope}` : ''}`, url: null, at: b.at });
 const SCOUT = (at: string | null): Source => ({ kind: 'signal', ref: 'scout', label: 'Scout (cited web pass, not verified at source)', url: null, at });
 const MICROSITE: Source = { kind: 'microsite', ref: null, label: 'Hand-authored microsite (undated)', url: null, at: null };
 
@@ -434,11 +454,11 @@ function identitySection(i: AccountInputs, now: Date): Section {
   const st: Statement[] = [
     { text: `${a.name}${a.vertical ? `, ${a.vertical}` : ''}`, truth: 'VERIFIED_PUBLIC', sources: [rec] },
   ];
-  // Tier and band are GAP's own legacy ratings (MODEX era), never a verified fact about the company (click test P0).
-  if (a.tier || a.priorityBand) st.push({ text: `Legacy internal rating: ${[a.tier, a.priorityBand ? `band ${a.priorityBand}` : null].filter(Boolean).join(' / ')} (a GAP rating, not a fact about the company)`, truth: 'INFERENCE', sources: [rec], falsifiableBy: 'Current account research or the buyer shows a different priority.' });
+  // Tier and band are GAP's own legacy ratings (MODEX era): never a fact about the company (click test P0), and since
+  // the Sprint 5 exit never shown at all (a rating word is taxonomy the seller does not use).
   if (i.aliases.length) st.push({ text: `Also known as: ${i.aliases.join(', ')}`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'account', ref: 'aliases', label: 'GAP curated aliases', url: null, at: i.aliasesAddedAt ?? null }] });
   if (i.domains.length) st.push({ text: `Domains: ${i.domains.join(', ')}`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'hubspot', ref: a.hubspotCompanyId ?? 'crm-identity', label: 'CRM identity', url: null, at: null }] });
-  if (a.hubspotCompanyId) st.push({ text: `HubSpot company ${a.hubspotCompanyId}`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'hubspot', ref: a.hubspotCompanyId, label: 'HubSpot', url: null, at: null }] });
+  if (a.hubspotCompanyId) st.push({ text: 'Linked to its HubSpot company record', truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'hubspot', ref: a.hubspotCompanyId, label: 'HubSpot', url: null, at: null }] });
   if (a.parentBrand) st.push({ text: `Parent brand: ${a.parentBrand}`, truth: 'VERIFIED_PUBLIC', sources: [rec] });
   if (i.pack?.account.archetype) {
     const t = i.pack.account.archetype;
@@ -732,10 +752,11 @@ function commercialSection(i: AccountInputs, now: Date): Section {
   const o = i.opportunity;
   if (!o) unknowns.push('HubSpot deal state (not read this time)');
   else if (o.status === 'UNKNOWN') st.push({ text: o.unlinked ? UNLINKED : `HubSpot deal state could not be read (${o.detail || 'unknown'}): held, never cold`, truth: 'UNKNOWN', sources: [] });
-  else st.push({ text: o.status === 'ACTIVE' ? `Open deal: ${o.deals.map((d) => `${d.name ?? 'deal'}${d.stage ? ` (${d.stage})` : ''}`).join('; ')}` : 'No open HubSpot deal', truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'hubspot', ref: 'deal-truth', label: 'HubSpot, read now', url: null, at: now.toISOString() }], asOf: now.toISOString() });
+  else st.push({ text: o.status === 'ACTIVE' ? `Open deal: ${o.deals.map((d) => `${d.name ?? 'deal'}${d.stage ? ` (${d.stage})` : ''}`).join('; ')}` : o.closure ? o.closure.why : 'No open HubSpot deal', truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'hubspot', ref: 'deal-truth', label: 'HubSpot, read now', url: null, at: now.toISOString() }], asOf: now.toISOString() });
   for (const t of i.firstTouches) st.push({ text: `GAP first touch to ${t.recipient}${t.sentAt ? ` on ${day(t.sentAt)}` : ''} (${t.state})`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'ledger', ref: t.recipient, label: 'GAP send ledger', url: null, at: t.sentAt }], asOf: t.sentAt });
   if (i.conversation) st.push({ text: `Conversation with ${i.conversation.who}: ${i.conversation.responseClass.replace(/_/g, ' ')} (${day(i.conversation.at)})`, truth: 'VERIFIED_PUBLIC', sources: [{ kind: 'ledger', ref: i.conversation.who, label: 'human-confirmed disposition', url: null, at: i.conversation.at }], asOf: i.conversation.at });
-  for (const b of i.bids) st.push({ text: `Buyer said (${b.type.replace(/_/g, ' ')}): ${b.summary}`, truth: 'BUYER_CONFIRMED', sources: [bidSrc(b)], asOf: b.at });
+  // Sprint 5 review (R50): each line says which opportunity it belongs to (Ann's pilot words, Ben's Columbus words).
+  for (const b of i.bids) st.push({ text: `Buyer said (${b.type.replace(/_/g, ' ')})${b.scope ? `, ${b.scope}` : ''}: ${b.summary}`, truth: 'BUYER_CONFIRMED', sources: [bidSrc(b)], asOf: b.at });
   unknowns.push('Sends outside GAP (manual HubSpot or other mailboxes) are not visible here');
   return section('commercial', st, unknowns, now);
 }
@@ -996,6 +1017,7 @@ function accountMotion(i: AccountInputs, hyps: HypothesisView[], now: Date, prim
   });
   const a = decideApproach({
     deal: i.opportunity ? i.opportunity.status : 'NOT_READ',
+    closure: i.opportunity?.status === 'CLEAR' ? i.opportunity.closure ?? null : null,
     dealUnknownWhy: i.opportunity?.status === 'UNKNOWN' && i.opportunity.unlinked ? 'this GAP account is not linked to a HubSpot company, so the opportunity state cannot be verified (link it in HubSpot, or confirm there is none).' : undefined,
     contradicted: hyps.some((h) => h.truth === 'CONTRADICTED'),
     conversation: i.conversation,
@@ -1023,7 +1045,8 @@ function accountMotion(i: AccountInputs, hyps: HypothesisView[], now: Date, prim
   return { type: a.kind, who, why: a.why, ...(met ? { met } : {}) };
 }
 
-const motionLine = (m: Motion) => (m.type === 'FACT_LED' ? 'Fact-led, on the verified fact.' : m.type === 'NO_GOOD_MOTION' ? `No good motion yet: ${m.why.replace(/^Do not contact yet: /, '')}` : `${MOTION_LABEL[m.type]}${m.who ? `: ${m.who}` : ''}. ${m.why}`);
+// R63-B S1: a do not contact is said as it is, never "No good motion yet" (it is not temporary).
+const motionLine = (m: Motion) => (m.type === 'FACT_LED' ? 'Fact-led, on the verified fact.' : m.type === 'NO_GOOD_MOTION' && /^Do not contact: /.test(m.why) ? m.why : m.type === 'NO_GOOD_MOTION' ? `No good motion yet: ${m.why.replace(/^Do not contact yet: /, '')}` : `${MOTION_LABEL[m.type]}${m.who ? `: ${m.who}` : ''}. ${m.why}`);
 
 
 /** NETWORK in the 30-second view: a count (filing, registry, audit estimate, microsite), never a news sentence. */
@@ -1180,7 +1203,7 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
   const live = rankedFacts(i, now);
   const top = hypotheses.find((h) => h.truth !== 'CONTRADICTED' && h.grounded) ?? hypotheses.find((h) => h.truth === 'CONTRADICTED') ?? null;
   const drafts = hypotheses.filter((h) => !h.grounded && h.truth !== 'CONTRADICTED').length;
-  const noHypothesis = drafts ? `No strong hypothesis yet (${plural(drafts, 'ungrounded draft')} ${drafts === 1 ? 'exists: its observation is' : 'exist: their observations are'} not a live verified fact).` : 'No strong hypothesis yet.';
+  const noHypothesis = drafts ? `No strong thesis yet (${plural(drafts, 'ungrounded draft')} ${drafts === 1 ? 'exists: its observation is' : 'exist: their observations are'} not a live verified fact).` : 'No strong thesis yet.';
 
   const whyNot: string[] = [];
   if (i.opportunity?.status === 'ACTIVE') whyNot.push('There is an open deal: work it from the deal, never cold.');

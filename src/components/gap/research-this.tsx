@@ -23,6 +23,7 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { UseOutcome, type UseOutcomeResponse } from './use-outcome';
 import { ReportThis } from './feedback-button';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 interface Fact {
   signalId: string;
@@ -120,7 +121,7 @@ function ProposedThesis({ narrative, links = {} }: { narrative: Narrative; links
       <Section label="Facts">
         <p>{uncited(narrative.observation)}</p>
       </Section>
-      <Section label="Hypothesis">
+      <Section label="What we think is happening">
         <p>{narrative.problemHypothesis}</p>
       </Section>
       <Section label="Root causes">
@@ -238,7 +239,7 @@ export function ResearchThis({ decisionId, personaIds }: { decisionId: string; p
             };
       setDecided(outcome);
       report?.({ key: runId, decided: outcome });
-      router.refresh();
+      refreshNow(router);
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err));
     } finally {

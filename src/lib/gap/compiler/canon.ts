@@ -27,6 +27,20 @@ export interface CanonNumber {
   forbiddenPhrasing: RegExp;
 }
 
+/**
+ * R63-B N8: YardFlow's proof in the canon's own phrases, typed once. The anchor and the brief compose these (never a
+ * hand-typed variant: the pack had said "260 sites under contract" beside the canon's "260 sites committed"). Each
+ * sentence passes the phrasing rules below (pinned by tests/unit/gap/r63-nice.test.ts). The 5% travels with
+ * "observed" because the rules below forbid "measured" beside it; the repository's prospect canon says "~5% measured":
+ * that difference is Casey's decision, recorded in the R63-B dispositions.
+ */
+export const CANON_PROOF = {
+  turnTime: 'trailer turns 48 to 24 minutes, measured',
+  volumeLift: 'about 5% more volume through the same doors, observed',
+  committed: '260 sites committed',
+  live: '24 sites live',
+} as const;
+
 export const CANON_NUMBERS: readonly CanonNumber[] = [
   {
     label: 'turn_time',

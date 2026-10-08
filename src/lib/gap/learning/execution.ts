@@ -41,7 +41,7 @@ import { createHash } from 'node:crypto';
 import { DIRECT_SENT, DRAFT_SENT, DRAFT_SUBJECT_TYPE, DRAFTED, MANUAL_SENT } from '../execution/draft-ledger';
 import { isInternalRecipient } from '../sequence/internal-recipient';
 import { selectConfirmedBids } from '../bid/select';
-import { AUTO_REPLY_SUBJECT } from '../replies/domains';
+import { isPersonReply } from '../replies/classify';
 import { honestRate, type HonestRate } from './stats';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -261,14 +261,15 @@ export async function loadOutcomes(prisma: PrismaLike, people: Map<string, Perso
 
   // 1. Replies IN a GAP thread of this person (review S1: a reply to anything else is not a GAP reply).
   for (const part of chunks(recipients)) {
-    const inbound: Array<{ from_email: string; received_at: Date; subject: string | null; thread_id: string | null }> = await prisma.inboundMessage.findMany({
+    const inbound: Array<{ from_email: string; received_at: Date; subject: string | null; thread_id: string | null; snippet?: string | null; body_text?: string | null }> = await prisma.inboundMessage.findMany({
       where: { from_email: { in: part, mode: 'insensitive' } },
-      select: { from_email: true, received_at: true, subject: true, thread_id: true },
+      select: { from_email: true, received_at: true, subject: true, thread_id: true, snippet: true, body_text: true },
     });
     for (const m of inbound) {
       const r = lower(m.from_email);
       if (!out.has(r) || !m.thread_id || !threadsOf.get(r)!.has(m.thread_id)) continue;
-      if (inWindow(r, new Date(m.received_at).getTime()) && !AUTO_REPLY_SUBJECT.test(m.subject ?? '')) out.get(r)!.replied = true;
+      // The one reading of a person writing back (replies/classify.ts): a body-only notice is not "replied".
+      if (inWindow(r, new Date(m.received_at).getTime()) && isPersonReply({ text: m.body_text, snippet: m.snippet, subject: m.subject, from: m.from_email })) out.get(r)!.replied = true;
     }
   }
   // 2. The GAP mailbox tied a reply to this person by thread or exact address (review B1: never by account domain).

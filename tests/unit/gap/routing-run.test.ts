@@ -620,6 +620,16 @@ describe('runRouting', () => {
       };
     }
 
+    // Batch item 7 (R62 matrix): routing reads the corporate-family hold the click applies; a failed read holds.
+    it('carries the corporate-family hold, and a family read that throws is a hold marked unknown (fail closed)', async () => {
+      store.persona.findMany.mockResolvedValue([]);
+      const held = createHubSpotSnapshotProvider(store, fakeReads(), { opportunity: OPP_CLEAR, familyHold: async () => ({ detail: 'Frito-Lay (a subsidiary) has an open HubSpot deal.', unknown: false }) });
+      await expect(held('PepsiCo', '111')).resolves.toMatchObject({ familyHold: { detail: 'Frito-Lay (a subsidiary) has an open HubSpot deal.', unknown: false } });
+      const broken = createHubSpotSnapshotProvider(store, fakeReads(), { opportunity: OPP_CLEAR, familyHold: async () => { throw new Error('associations 503'); } });
+      const snap = await broken('PepsiCo', '111');
+      expect(snap?.familyHold).toEqual({ detail: 'Could not read the related accounts in the PepsiCo corporate family (associations 503). Check HubSpot before contacting.', unknown: true });
+    });
+
     it('unconfigured HubSpot -> null for every account, no reads at all', async () => {
       const reads = fakeReads();
       const provider = createHubSpotSnapshotProvider(store, reads, { configured: () => false });
@@ -646,7 +656,7 @@ describe('runRouting', () => {
       expect(snap).toEqual({
         tam: 'in', tamTier: 'A', intentScore: null, lastIntentAt: null, triggerScore: null, lastTriggerAt: null,
         contacts: { '9': { qualVerdict: 'sql', lastIntentSource: 'reply' }, '10': { qualVerdict: 'none', lastIntentSource: null } },
-        opportunity: { status: 'CLEAR', companyIds: ['111'] },
+        opportunity: { status: 'CLEAR', companyIds: ['111'] }, familyHold: null,
       });
     });
 
@@ -676,7 +686,7 @@ describe('runRouting', () => {
       const reads = fakeReads();
       store.persona.findMany.mockResolvedValue([]);
       const provider = createHubSpotSnapshotProvider(store, reads, { opportunity: OPP_CLEAR });
-      await expect(provider('Beta Dairy', null)).resolves.toEqual({ tam: 'unknown', tamTier: '', opportunity: { status: 'CLEAR', companyIds: ['111'] } });
+      await expect(provider('Beta Dairy', null)).resolves.toEqual({ tam: 'unknown', tamTier: '', opportunity: { status: 'CLEAR', companyIds: ['111'] }, familyHold: null });
       expect(reads.readContacts).not.toHaveBeenCalled();
       await expect(provider('Acme Foods', '111')).resolves.toMatchObject({ tam: 'in' });
       expect(reads.readContacts).not.toHaveBeenCalled();
@@ -707,6 +717,7 @@ describe('runRouting', () => {
         tam: 'unknown',
         tamTier: '',
         opportunity: expect.objectContaining({ status: 'UNKNOWN', reason: 'hubspot_error' }),
+        familyHold: null,
       });
     });
   });

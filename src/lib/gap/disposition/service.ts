@@ -69,6 +69,7 @@ import { stop as defaultStop, stopEnrollmentsForHypothesis as defaultStopForHypo
 import { LIVE_ENROLLMENT_STATUSES } from '../sequence/family';
 import { stopRunsForRecipient as defaultStopRuns } from '@/lib/queue/sequence-runtime';
 import { dispositionEffects, validateDisposition, type DispositionEffects, type ValidDisposition } from './model';
+import { commitmentsFromDisposition as defaultCommitments } from '../work/commitments';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -122,6 +123,8 @@ export interface RecordDispositionDeps {
   recordUnsubscribe?: typeof defaultRecordUnsubscribe;
   transition?: typeof defaultTransition;
   propose?: typeof defaultPropose;
+  /** R40: the obligations a confirmed answer creates or settles (commitments). Fail-open. */
+  commitments?: typeof defaultCommitments;
 }
 
 export type DispositionStep = 'stop' | 'unsubscribe' | 'resolve' | 'retarget' | 'referral' | 'mirror';
@@ -642,6 +645,27 @@ export async function recordDisposition(
   const mirrored = await runMirror(prisma, deps, input, dispositionId, hypothesis, persona, valid);
   applied.mirrored = mirrored.mirrored;
   if (mirrored.refusal) refusals.push(mirrored.refusal);
+
+  // 7. R40: the obligations this answer creates (answer the request, prepare the meeting, come back on the date,
+  // decide on the person they named) and the follow-ups it settles. Fail-open: the row above is the record.
+  try {
+    await (deps.commitments ?? defaultCommitments)(prisma, {
+      dispositionId,
+      accountName: hypothesis.account_name,
+      responseClass: valid.responseClass,
+      contactEmail: valid.contactEmail,
+      personaId: persona?.id ?? null,
+      resumeAt: input.resumeAt ?? null,
+      referral: input.referral ?? null,
+      nextBestAction: input.nextBestAction ?? null,
+      buyerLanguage: valid.buyerLanguage,
+      stopsRun: effects.stopsRun,
+      actor: input.actor,
+      now: input.now,
+    });
+  } catch {
+    // The commitment ledger never gates the disposition.
+  }
 
   await auditEffects(auditFn, prisma, input, dispositionId, applied, refusals);
   return { ok: true, dispositionId, bidIds, humanConfirmed, effects: applied, refusals };

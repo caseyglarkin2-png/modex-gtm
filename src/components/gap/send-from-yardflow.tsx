@@ -25,6 +25,7 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { refusalSentence } from '@/lib/gap/ui/refusal-copy';
 import { ReportThis } from './feedback-button';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 interface Preview {
   crmLogging: 'on' | 'unavailable';
@@ -48,6 +49,7 @@ type State =
 const REASONS: Record<string, string> = {
   copy_changed_since_review: 'The email changed after you reviewed it. Nothing was sent.',
   recipient_changed_since_review: 'The recipient changed after you reviewed it. Nothing was sent.',
+  sender_changed_since_review: 'The sending mailbox changed after you reviewed it. Nothing was sent.',
   send_in_progress_or_unknown: 'This email was already started and its outcome is not recorded. Check Gmail Sent before trying again. GAP will not send it twice.',
   send_refused: 'The send was refused before anything left the mailbox.',
   copy_review_required: 'The copy needs your review first. Nothing was sent.',
@@ -58,13 +60,51 @@ const REASONS: Record<string, string> = {
   active_opportunity: 'This account already has an active opportunity (open HubSpot deal, meeting or positive reply). Nothing was sent.',
   fact_contradicted: 'Another verified fact about the same site says the opposite. Resolve it in Research. Nothing was sent.',
   account_motion_active: 'Someone else at this account is already in a cold email motion. One at a time. Nothing was sent.',
+  named_in_referral: 'A buyer named this person in a referral: no cold email until you choose how to approach them. Nothing was sent.',
   opportunity_unknown: "Can't verify whether this account already has an active opportunity. Check HubSpot before contacting them. Nothing was sent.",
   first_touch_already_sent: 'The first email was already sent. Nothing was sent.',
   touch_not_due: 'The next touch is not due yet. Nothing was sent.',
   sequence_stopped: 'The sequence stopped (for example the buyer replied). Nothing was sent.',
   hypothesis_not_active: 'The hypothesis is not in use. Nothing was sent.',
   decision_superseded: 'A newer routing run changed this card. Nothing was sent.',
+  // Item 6 (R34): every code the send route can return is worded (pinned by send-refusal-parity.test.ts).
+  no_version: 'No first-touch copy is installed for this thesis: its copy family must be seeded first. Nothing was sent.',
+  copy_not_installed: 'No first-touch copy is installed for this thesis: its copy family must be seeded first. Nothing was sent.',
+  approach_copy_unsupported: 'No first-touch copy exists for this kind of thesis yet. Nothing was sent.',
+  copy_family_mismatch: 'This copy is written for another kind of thesis. Nothing was sent.',
+  copy_version_outdated: 'This copy is a retired version. Nothing was sent.',
+  emailed_outside_gap: 'This person was already emailed from the GAP mailbox outside GAP. Nothing was sent.',
+  mailbox_sent_unreadable: "The GAP mailbox's Sent folder could not be read, so a second email cannot be ruled out. Nothing was sent.",
+  account_replied: 'Someone at this account wrote in: read it before a first touch to anyone else there. Nothing was sent.',
+  decision_stale: 'Something changed since this card was made: wait for the next routing run. Nothing was sent.',
+  recipient_unsuppressed_unknown: 'Suppression could not be read. Nothing was sent.',
+  evidence_insufficient: 'The send gate would refuse this opening: its fact is not verified outreach evidence. Nothing was sent.',
+  recipient_unsubscribed: 'This person unsubscribed. Nothing was sent.',
+  email_bounced: 'This address bounced. Nothing was sent.',
+  draft_outstanding: 'A Gmail draft of this email exists: send or delete it in Gmail. Nothing was sent.',
+  persona_left_account: 'This person left the account. Nothing was sent.',
+  persona_employment_conflict: "This person's employer is in question. Nothing was sent.",
+  gap_sender_unconfigured: 'The GAP mailbox is not configured here. Nothing was sent.',
+  decision_blocked: 'This card is blocked: GAP will not recommend an email here. Nothing was sent.',
+  step_already_sent: 'This touch was already sent. Nothing was sent.',
+  reply_truth_unavailable: 'Whether they replied could not be read just now. Nothing was sent.',
+  template_citations_unresolved: 'The copy cites evidence that is not this thesis. Nothing was sent.',
+  no_step_copy: 'This touch has no copy written for it. Nothing was sent.',
+  no_step0_copy: 'The first touch has no copy written for it. Nothing was sent.',
+  not_an_email_action: 'This card is not an email card. Nothing was sent.',
+  no_hypothesis: 'No thesis covers this card, so there is no email to send. Nothing was sent.',
+  hypothesis_not_found: 'The thesis behind this card no longer exists. Nothing was sent.',
+  no_email: 'No email address on file for this person. Nothing was sent.',
+  unrendered_placeholder: 'The copy still has a blank to fill in. Nothing was sent.',
+  unsubscribe_link_unavailable: 'The unsubscribe link could not be built. Nothing was sent.',
+  gmail_refused: 'Gmail refused the email. Nothing was sent.',
+  not_confirmed: 'Confirm the email first. Nothing was sent.',
 };
+
+/** Item 6: the seller words for a send refusal (this panel's own, else the shared refusal copy), or null. */
+export function sendRefusalWords(code: string): string | null {
+  return REASONS[code] ?? refusalSentence(code) ?? null;
+}
 
 /**
  * Refusals that no second click can fix: Send disappears the moment one comes
@@ -83,9 +123,35 @@ const TERMINAL: ReadonlySet<string> = new Set([
   'hypothesis_not_active',
   'decision_superseded',
   'send_in_progress_or_unknown',
+  // Item 6: a second click cannot install copy.
+  'no_version',
+  'copy_not_installed',
+  'approach_copy_unsupported',
+  'copy_family_mismatch',
+  'copy_version_outdated',
+  'no_step_copy',
+  'no_step0_copy',
+  'not_an_email_action',
+  'no_hypothesis',
+  'hypothesis_not_found',
+  'no_email',
+  'decision_blocked',
+  'step_already_sent',
 ]);
 
 const when = (iso: string) => new Date(iso).toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+
+/**
+ * R63-A S9: the final check says HubSpot once, in words. "CRM HubSpot: UNAVAILABLE" sat a few lines under "No open
+ * HubSpot deal, checked moments ago" and read like an outage; it meant only that this send is not logged there. The
+ * final check exists only after the click-time gate read HubSpot fresh and found no open deal (an open deal or an
+ * unreadable HubSpot refuses first), so the one sentence carries both facts.
+ */
+export function hubspotSentence(crmLogging: 'on' | 'unavailable'): string {
+  return crmLogging === 'on'
+    ? 'No open deal, read moments ago. This email is logged to their HubSpot record.'
+    : 'No open deal, read moments ago. This email is not logged in HubSpot; GAP records it as emailed.';
+}
 
 export function SendFromYardflow({
   decisionId,
@@ -119,14 +185,14 @@ export function SendFromYardflow({
           already: data.alreadySent === true,
           note: data.ledgerError ? `Sent, but the receipt did not save (${data.ledgerError}). GAP will not resend it.` : undefined,
         });
-        router.refresh();
+        refreshNow(router);
       } else if (data.error === 'copy_review_required') {
         const checks = Array.isArray(data.failedChecks) ? data.failedChecks : [];
         setState({ kind: 'review', approvalId: typeof data.approvalRequestId === 'string' ? data.approvalRequestId : null, detail: checks.join(' | ') || String(data.detail ?? '') });
       } else {
         const reason = String(data.error ?? `HTTP ${res.status}`);
         setState({ kind: 'refused', reason, detail: [data.detail, ...(Array.isArray(data.failedChecks) ? data.failedChecks : [])].filter(Boolean).join(' | ') });
-        if (TERMINAL.has(reason)) router.refresh();
+        if (TERMINAL.has(reason)) refreshNow(router);
       }
     } catch (err) {
       setState({ kind: 'refused', reason: 'network_error', detail: err instanceof Error ? err.message : String(err) });
@@ -201,8 +267,8 @@ export function SendFromYardflow({
           <dd>{p.toName ? `${p.toName} ` : ''}&lt;{p.to}&gt;</dd>
           <dt className="text-[var(--muted-foreground)]">Subject</dt>
           <dd>{p.subject}</dd>
-          <dt className="text-[var(--muted-foreground)]">CRM</dt>
-          <dd>HubSpot: {p.crmLogging === 'on' ? 'ON' : 'UNAVAILABLE'}</dd>
+          <dt className="text-[var(--muted-foreground)]">HubSpot</dt>
+          <dd data-testid="send-hubspot">{hubspotSentence(p.crmLogging)}</dd>
         </dl>
         <pre data-testid="send-body" className="whitespace-pre-wrap rounded-md bg-[var(--muted)]/50 p-3 font-sans text-sm">{p.body}</pre>
         <div className="flex flex-wrap gap-2">

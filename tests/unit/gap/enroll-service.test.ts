@@ -295,6 +295,19 @@ describe('Release B review #4: a person GAP already emailed is never enrolled at
   });
 });
 
+describe('batch item 7: a live enrollment binds the recipient the seller confirmed', () => {
+  it('the same address (any case or spacing) enrolls as before; a different one is refused recipient_changed_since_review, nothing written', async () => {
+    const plain = await enrollFromDecision(makePrisma(), input({ mode: 'live' }), deps());
+    expect(plain).toMatchObject({ ok: true });
+    expect(await enrollFromDecision(makePrisma(), input({ mode: 'live', recipient: ' JANE.DOE@acme-logistics.com ' }), deps())).toMatchObject({ ok: true });
+    const prisma = makePrisma();
+    const r = await enrollFromDecision(prisma, input({ mode: 'live', recipient: 'jane@acme-logistics.com' }), deps());
+    expect(r).toMatchObject({ ok: false, reason: 'recipient_changed_since_review', detail: 'The address is now jane.doe@acme-logistics.com, not jane@acme-logistics.com as you confirmed. Review and confirm again.' });
+    expect(prisma.draftQueueItem.create).not.toHaveBeenCalled();
+    expect(prisma.sequenceEnrollment.create).not.toHaveBeenCalled();
+  });
+});
+
 describe('enrollFromDecision guards, in order', () => {
   it('gap_disabled when GAP_OS_ENABLED is off, before any read', async () => {
     process.env.GAP_OS_ENABLED = 'false';
@@ -403,11 +416,14 @@ describe('enrollFromDecision guards, in order', () => {
     expect(r).toMatchObject({ ok: false, reason: 'active_opportunity' });
   });
 
-  it('active_opportunity control: a closed HubSpot deal and no positive disposition still enroll normally', async () => {
+  it('active_opportunity control: a deal closed lost with something material since and no positive disposition still enroll normally (R55: without, parked)', async () => {
     const prisma = makePrisma();
-    const hs = fakeHubSpot({ companyDeals: { '111': ['d1'] }, deals: [{ id: 'd1', closed: 'true' }] });
+    const hs = fakeHubSpot({ companyDeals: { '111': ['d1'] }, deals: [{ id: 'd1', closed: 'true', won: 'false', closedate: '2026-01-05T00:00:00Z' }] });
+    (prisma as unknown as { prospectingSignal: unknown }).prospectingSignal = { findFirst: async () => ({ observed_at: new Date('2026-09-01T00:00:00Z') }) };
     const r = await enrollFromDecision(prisma, input(), deps({ opportunity: opportunityVia(hs) }));
     expect(r.ok).toBe(true);
+    const parked = await enrollFromDecision(makePrisma(), input(), deps({ opportunity: opportunityVia(hs) }));
+    expect(parked).toMatchObject({ ok: false, reason: 'active_opportunity' });
   });
 
   it('version_not_found, then version_retired', async () => {
@@ -543,8 +559,9 @@ describe('enrollFromDecision guards, in order', () => {
   });
 
   describe('SF14: evidence freshness recheck (checkEvidenceFreshness opt-in)', () => {
-    it('null and future freshness_expires_at are both fresh; a past one is expired', () => {
-      expect(checkEvidenceFreshness([{ freshness_expires_at: null }], NOW)).toBeNull();
+    it('item 2a, the one freshness authority: a future expiry, or none with a date inside the type window, is fresh; a past expiry, or an undated row, is not', () => {
+      expect(checkEvidenceFreshness([{ freshness_expires_at: null, observed_at: new Date(NOW.getTime() - 10 * 86_400_000), type: 'news' }], NOW)).toBeNull();
+      expect(checkEvidenceFreshness([{ freshness_expires_at: null }], NOW)).toBe('evidence_expired');
       expect(checkEvidenceFreshness([{ freshness_expires_at: '2026-12-01T00:00:00.000Z' }], NOW)).toBeNull();
       expect(checkEvidenceFreshness([{ freshness_expires_at: '2026-09-01T00:00:00.000Z' }], NOW)).toBe('evidence_expired');
     });
@@ -1328,6 +1345,24 @@ describe('Release C re-review S7: the account-reply hold at live enrollment', ()
   it('shadow writes nothing and is not held', async () => {
     const r = await enrollFromDecision(makePrisma({ inbound: [colleague] }), input({ mode: 'shadow' }), deps());
     expect(r.ok).toBe(true);
+  });
+
+  it('R42b: live enrollment of a person a buyer NAMED in a referral is refused named_in_referral until the seller chose; nothing is queued', async () => {
+    const referral = { commitmentId: 'cmt-ref-1', accountName: 'Acme Logistics', kind: 'referral', title: 'Pat named Jane Doe: decide how to approach them', status: 'open', person: { personaId: null, name: null, email: 'jane.doe@acme-logistics.com' }, createdAt: NOW.toISOString() };
+    const row = (c: typeof referral, n: number) => ({ id: `evt-${n}`, kind: 'account.commitment', payload: { commitmentId: c.commitmentId, op: n ? 'status' : 'create', commitment: c }, created_at: new Date(NOW.getTime() + n) });
+    // The fake's ledger read answers the referral rows (the hold's JSON-path query); every other read is unchanged.
+    const withReferrals = (rows: ReadonlyArray<ReturnType<typeof row>>) => {
+      const prisma = makePrisma();
+      const base = prisma.gapAuditEvent.findMany;
+      prisma.gapAuditEvent.findMany = asyncSpy(async (args: { where?: { payload?: { equals?: unknown } } }) => (args?.where?.payload?.equals === 'referral' ? [...rows] : base(args)));
+      return prisma;
+    };
+    const d = deps();
+    const r = await enrollFromDecision(withReferrals([row(referral, 0)]), input({ mode: 'live' }), d);
+    expect(r).toMatchObject({ ok: false, reason: 'named_in_referral' });
+    expect(d.addOne).not.toHaveBeenCalled();
+    const skipped = await enrollFromDecision(withReferrals([row(referral, 0), row({ ...referral, status: 'skipped' }, 1)]), input({ mode: 'live' }), deps());
+    expect(skipped.ok).toBe(true);
   });
 
   it('a localized out-of-office from the account does not hold anyone', async () => {

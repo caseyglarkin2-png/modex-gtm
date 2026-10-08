@@ -154,6 +154,15 @@ describe('Release D review: outcomes must be tied to GAP, to the person, and to 
     expect(l.overall.replyPerSend.numerator).toBe(1); // only E's thread reply
   });
 
+  // The lead's general defect (2026-10-07): learning read replies by SUBJECT only; it reads the one classification now.
+  it('a body-only out-of-office notice in the GAP thread (an ordinary "Re:" subject) is not a reply; a person writing back there is', async () => {
+    const notice = { from_email: 'a@acme.example', received_at: at(5), subject: 'Re: doors', thread_id: 'tA', snippet: 'I am out of the office until Monday, October 12, with limited access to email.', body_text: 'I am out of the office until Monday, October 12, with limited access to email.' };
+    const ooo = await build(world({ dispositions: [], inbound: [notice] }).prisma);
+    expect(ooo.overall.replyPerSend.numerator).toBe(1); // E only: A's notice is no reply
+    const person = await build(world({ dispositions: [], inbound: [{ ...notice, snippet: 'Happy to talk. Thursday works.', body_text: 'Happy to talk. Thursday works.' }] }).prisma);
+    expect(person.overall.replyPerSend.numerator).toBe(2); // A and E
+  });
+
   it('S1: an inbound message outside the person\'s GAP threads is not a GAP reply', async () => {
     const { prisma } = world({ dispositions: [], inbound: [{ from_email: 'a@acme.example', received_at: at(5), subject: 'Re: HubSpot blast', thread_id: 'hubspot-thread' }] });
     const l = await build(prisma);

@@ -20,6 +20,8 @@ export type SuppressionVerdict = 'clear' | 'suppressed' | 'unknown';
 
 export interface RoutingAccountInput {
   name: string;
+  /** Batch item 7: a parent, subsidiary or sibling holds a cold motion here (family/family.ts); absent reads as none. */
+  familyHold?: { detail: string; unknown: boolean } | null;
   slug?: string | null;
   hubspotCompanyId?: string | null;
   tam: 'in' | 'out' | 'unknown';
@@ -145,6 +147,11 @@ export interface RoutingCommsInput {
    * MAX_UNANSWERED_CALLS the person is held rather than called again.
    */
   unansweredCalls?: number;
+  /**
+   * R42b (audit at 31f09c71): an open referral obligation names this person (a buyer pointed to them). Routing holds
+   * every cold action until the seller chose how to approach them (replies/referral-hold.ts). Absent reads as none.
+   */
+  namedInReferral?: { commitmentId: string; detail: string } | null;
 }
 
 export interface RoutingFreshness {

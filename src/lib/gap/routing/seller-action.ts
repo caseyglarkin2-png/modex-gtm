@@ -19,7 +19,7 @@ const SELLER_ACTION_TEMPLATE: Record<RoutingAction, string> = {
   call_now: 'Call {name}',
   linkedin_manual_task: 'Message {name} on LinkedIn',
   research_required: 'Research {name} / {account}',
-  approve_hypothesis: 'Review hypothesis',
+  approve_hypothesis: 'Review the thesis',
   nurture: 'Hold for later',
   do_not_contact: 'Do not contact',
 };
@@ -57,6 +57,11 @@ export function hubspotCompanyUrl(hubspotCompanyId: string): string | null {
   const portal = hubspotPortalId();
   if (!portal || !hubspotCompanyId) return null;
   return `https://app.hubspot.com/contacts/${portal}/company/${hubspotCompanyId}`;
+}
+
+/** R63-A S13: HubSpot's company search for an account GAP cannot link yet (the seller links it there). */
+export function hubspotCompanySearchUrl(accountName: string): string {
+  return `https://app.hubspot.com/contacts/${hubspotPortalId()}/objects/0-2/views/all/list?query=${encodeURIComponent(accountName)}`;
 }
 
 /** Digits only, for a `tel:` link; null when there is nothing usable. */

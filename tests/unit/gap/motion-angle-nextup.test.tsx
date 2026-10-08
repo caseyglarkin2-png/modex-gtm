@@ -97,16 +97,20 @@ describe('NEXT UP v2: deterministic, one per account, never a held account', () 
       'new@a.com replied',
       'Contact Jordan',
       'Contact Jordan',
-      'Decide the Big thesis',
-      'Decide the Small thesis',
-      'Find verified evidence for the PepsiCo thesis',
-      'Judge 1 verified fact at Unfi',
+      // R60: the card names the account; the move is in the seller's words and opens the account.
+      'Decide the angle',
+      'Decide the angle',
+      'Find verified evidence',
+      'Judge 1 verified fact',
     ]);
+    expect(picked.slice(4).map((p) => p.href)).toEqual(['/gap/accounts/big', '/gap/accounts/small', '/gap/accounts/pepsico', '/gap/accounts/unfi']);
     expect(picked[2].href).toBe('/gap?lane=ready&open=r2');
   });
 
   it('heldAccountsOf: an open deal or unknown opportunity truth on any current card holds the account', () => {
     expect([...heldAccountsOf([{ account: { name: 'Kroger' }, ruleId: 'active_opportunity' }, { account: { name: 'X' }, ruleId: 'opportunity_unknown' }, { account: { name: 'Y' }, ruleId: 'enroll' }])].sort()).toEqual(['Kroger', 'X']);
+    // Batch item 7: a corporate-family hold holds the account for NEXT UP too.
+    expect([...heldAccountsOf([{ account: { name: 'Frito-Lay' }, ruleId: 'family_hold' }])]).toEqual(['Frito-Lay']);
   });
 });
 

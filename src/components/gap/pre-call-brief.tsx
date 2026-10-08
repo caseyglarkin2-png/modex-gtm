@@ -19,7 +19,7 @@ import { formatWhen } from '@/lib/gap/ui/format';
 export const BRIEF_LABELS = {
   wouldProveWrong: 'Would prove wrong',
   lastDispositions: 'Last dispositions',
-  openBids: 'Open BIDs',
+  openBids: 'What the buyer said',
   suggestedQuestions: 'Suggested questions',
   afterAcknowledgement: 'After they acknowledge the problem',
 } as const;

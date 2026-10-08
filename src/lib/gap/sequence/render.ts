@@ -142,6 +142,7 @@ export type EvidenceSignalRow = SignalRow;
 export const EVIDENCE_SIGNAL_SELECT = {
   id: true,
   title: true,
+  claim_class: true,
   evidence_url: true,
   external_ok: true,
   observed_at: true,
@@ -152,4 +153,6 @@ export const EVIDENCE_SIGNAL_SELECT = {
   evidence_text: true,
   source_kind: true,
   account_name: true,
+  // Item 2a: the one freshness authority (research/currentness.ts) reads the type's window.
+  type: true,
 } as const;

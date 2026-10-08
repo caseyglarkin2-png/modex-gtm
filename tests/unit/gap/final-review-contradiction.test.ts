@@ -12,7 +12,8 @@ import { NOW, baseDeps, db, prismaOf } from './fixtures/seller-db';
 
 const OPEN = 'Kroger will open its Dallas distribution center in March 2027 to serve Texas stores.';
 const CLOSE = 'Kroger is closing the Dallas distribution center and moving volume to Houston.';
-const fact = (id: string, text: string, over: Record<string, unknown> = {}) => ({ id, evidence_text: text, freshness_expires_at: null, ...over });
+// A stored fact always carries its date (observed_at is required); item 2a's one freshness authority reads it.
+const fact = (id: string, text: string, over: Record<string, unknown> = {}) => ({ id, evidence_text: text, freshness_expires_at: null, observed_at: new Date(NOW.getTime() - 5 * 86_400_000), type: 'site_expansion', ...over });
 
 function reader(facts: unknown[], ignored: string[] = []) {
   return {

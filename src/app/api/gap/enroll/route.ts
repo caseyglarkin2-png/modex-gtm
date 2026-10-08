@@ -18,7 +18,8 @@
  * live enroll from an agent while GAP_AUTO_ENROLL_ENABLED is off.
  *
  * Body: `mode` defaults to `shadow`. `mode: 'live'` additionally requires
- * `confirm: true` (422 `confirm_required` otherwise) so a UI cannot enroll
+ * `confirm: true` (422 `confirm_required` otherwise) and, batch item 7, the `recipient` the seller
+ * confirmed (422 `recipient_required`; a different address now is refused) so a UI cannot enroll
  * live by leaving a field out. Status codes: 200 with the service result;
  * 409 with `{error: <reason>}` on a refusal; 400 unparsable JSON; 422 shape.
  *
@@ -56,6 +57,8 @@ const BodySchema = z.object({
   confirm: z.boolean().optional(),
   owner: z.string().email().optional(),
   sender: z.string().min(1).optional(),
+  /** Batch item 7: the address the seller saw; required for a live enrollment, refused when it changed since. */
+  recipient: z.string().email().optional(),
 });
 
 function firstField(error: z.ZodError): string {
@@ -106,6 +109,9 @@ export async function POST(request: NextRequest) {
   if (input.mode === 'live' && input.confirm !== true) {
     return NextResponse.json({ error: 'confirm_required', field: 'confirm' }, { status: 422 });
   }
+  if (input.mode === 'live' && !input.recipient) {
+    return NextResponse.json({ error: 'recipient_required', field: 'recipient' }, { status: 422 });
+  }
   if (input.sender !== undefined && !SENDING_IDENTITIES.includes(input.sender)) {
     return NextResponse.json({ error: 'sender_not_allowed', field: 'sender' }, { status: 422 });
   }
@@ -127,6 +133,7 @@ export async function POST(request: NextRequest) {
       now: new Date(),
       owner: input.owner ?? null,
       sender: input.sender ?? null,
+      recipient: input.recipient ?? null,
     },
     { addOne },
   );

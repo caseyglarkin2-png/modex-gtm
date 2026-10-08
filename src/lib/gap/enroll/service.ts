@@ -123,6 +123,7 @@ import {
 } from '@/lib/gap/routing/enroll-row';
 import { hasActiveOpportunity, opportunityUnknown, resolveEnrollTarget, type ActiveOpportunityInputs } from '@/lib/gap/routing/rules';
 import { OPPORTUNITY_UNKNOWN_COPY, opportunitySentence, resolveAccountOpportunity, type ResolveForAccountDeps } from '@/lib/gap/opportunity/active-opportunity';
+import { unknownReasonWords } from '@/lib/gap/opportunity/unknown-words';
 import type { EnrollTarget, RoutingInputs, RoutingTop100Input } from '@/lib/gap/routing/types';
 import { DEFAULT_FRESHNESS } from '@/lib/gap/routing/types';
 import { isResponseClass } from '@/lib/gap/taxonomy';
@@ -137,10 +138,14 @@ import { parseSteps } from '@/lib/gap/sequence/steps';
 import { sendableEvidence } from '@/lib/gap/research/evidence-gate';
 import { seedCopyOutdated } from '@/lib/gap/sequences/seed-drift';
 import { accountRepliedRecently } from '@/lib/gap/replies/account-reply';
+import { isCurrentFact, type CurrentnessFact } from '@/lib/gap/research/currentness';
+import { referralHoldDetail, referralHoldFor } from '@/lib/gap/replies/referral-hold';
 import { materializeSequence, type MaterializeRefusal } from '@/lib/gap/sequences/service';
 import type { RoutingAction } from '@/lib/gap/taxonomy';
 import { restrictionForAccount } from '@/lib/gap/policy/restriction';
 import type { QueueAddInput } from '@/lib/validations';
+import { approachOfHypothesis, COPY_FAMILY_MISMATCH_DETAIL, COPY_UNSUPPORTED_DETAIL, copyFamilySupports } from '../research/approach-policy';
+import { approachOfFamilyProgram } from '../sequences/families';
 
 export const ENROLL_ACTION: RoutingAction = 'enroll_gap_sequence';
 export const DEFAULT_OWNER = 'casey@freightroll.com';
@@ -179,6 +184,8 @@ export interface EnrollFromDecisionInput {
   owner?: string | null;
   /** Sending identity. Defaults to the decision's preferred sender, else the owner. */
   sender?: string | null;
+  /** Batch item 7: the recipient the seller confirmed; when given, a different address now is refused. */
+  recipient?: string | null;
 }
 
 export interface AutonomyVerdict {
@@ -250,7 +257,9 @@ export type EnrollServiceRefusal =
   | 'no_email'
   | 'gap_history_exists'
   | 'account_replied'
+  | 'named_in_referral'
   | 'account_motion_active'
+  | 'recipient_changed_since_review'
   | 'account_mismatch'
   | 'decision_persona_mismatch'
   | 'active_opportunity'
@@ -395,21 +404,15 @@ export async function verifyCompiles(
   return null;
 }
 
-export interface EvidenceFreshnessRow {
-  freshness_expires_at: Date | string | null;
-}
+export type EvidenceFreshnessRow = CurrentnessFact;
 
 /**
- * SF14 (6B-T2): a cited signal's `freshness_expires_at`, when set, must not
- * already be past `now`. Same IS-NULL-OR-future predicate
- * `signals/registry.ts`'s `findSignalsForAccount` already uses for "still
- * fresh". Pure; opt-in only (see `EnrollDeps.checkEvidenceFreshness`).
+ * SF14 (6B-T2): every cited signal must still be CURRENT at `now`, by the one
+ * freshness authority (research/currentness.ts, item 2a). Pure; opt-in only
+ * (see `EnrollDeps.checkEvidenceFreshness`).
  */
 export function checkEvidenceFreshness(signals: readonly EvidenceFreshnessRow[], now: Date): 'evidence_expired' | null {
-  for (const s of signals) {
-    if (!s.freshness_expires_at) continue;
-    if (new Date(s.freshness_expires_at).getTime() <= now.getTime()) return 'evidence_expired';
-  }
+  for (const s of signals) if (!isCurrentFact(s, now)) return 'evidence_expired';
   return null;
 }
 
@@ -562,10 +565,14 @@ export const makeActiveOpportunityCheck = (resolveDeps: ResolveForAccountDeps = 
     return { status: 'UNKNOWN', detail: `${OPPORTUNITY_UNKNOWN_COPY} (${e instanceof Error ? e.message : String(e)})` };
   }
   if (inputs.account.opportunity.status === 'ACTIVE') return { status: 'ACTIVE', detail: opportunitySentence(inputs.account.opportunity) };
+  // R55: no open deal, but a closed one makes the account a customer (closed won) or parks it (closed lost, nothing
+  // material since): the same terminal refusal as a live deal, worded as the closure.
+  if (inputs.account.opportunity.status === 'CLEAR' && inputs.account.opportunity.closure) return { status: 'ACTIVE', detail: inputs.account.opportunity.closure.why };
   if (hasActiveOpportunity(inputs)) return { status: 'ACTIVE', detail: 'A booked meeting or a recent positive reply: someone is already in conversation here.' };
   if (opportunityUnknown(inputs)) {
     const o = inputs.account.opportunity;
-    return { status: 'UNKNOWN', detail: `${OPPORTUNITY_UNKNOWN_COPY}${o.status === 'UNKNOWN' ? ` (${o.reason})` : ''}` };
+    // R60: the reason in words, never the code.
+    return { status: 'UNKNOWN', detail: `${OPPORTUNITY_UNKNOWN_COPY}${o.status === 'UNKNOWN' ? ` (${unknownReasonWords(o.reason)})` : ''}` };
   }
   // Corporate family (family/family.ts): a live deal, conversation, first touch, reply or enrollment at a parent,
   // subsidiary or sibling holds a cold motion here too, through the SAME refusal paths (ACTIVE / UNKNOWN), until
@@ -705,6 +712,7 @@ export async function enrollFromDecision(
   const hypothesis: HypothesisRow | null = await prisma.prospectingHypothesis.findUnique({
     where: { id: input.hypothesisId },
     select: {
+      metadata: true,
       id: true,
       status: true,
       account_name: true,
@@ -729,9 +737,15 @@ export async function enrollFromDecision(
   // account, a physical-network change) means no sequence at all.
   const liveSignals = (hypothesis.signals ?? [])
     .map((link) => link.signal)
-    .filter((s): s is EvidenceSignalRow => s !== null && (!s.freshness_expires_at || new Date(s.freshness_expires_at).getTime() > input.now.getTime()));
-  if (sendableEvidence(hypothesis.observation, liveSignals, hypothesis.account_name).tier !== 'VERIFIED_FACT') {
-    return refuse('evidence_insufficient', { detail: 'No verified, dated, quoted fact about a physical-network change at this account.' });
+    .filter((s): s is EvidenceSignalRow => s !== null && isCurrentFact(s, input.now));
+  const approach = approachOfHypothesis(hypothesis as { metadata?: unknown });
+  if (!copyFamilySupports(approach)) return refuse('evidence_insufficient', { detail: COPY_UNSUPPORTED_DETAIL(approach) });
+  // R34: the version's copy is for the thesis's approach, never another's (a job-led thesis never enrolls on an
+  // event-led version, nor the reverse).
+  const familyApproach = approachOfFamilyProgram((version as { family?: { program?: string | null } | null }).family?.program ?? null);
+  if (familyApproach !== approach) return refuse('evidence_insufficient', { detail: COPY_FAMILY_MISMATCH_DETAIL(approach, familyApproach) });
+  if (sendableEvidence(hypothesis.observation, liveSignals, hypothesis.account_name, { approach }).tier !== 'VERIFIED_FACT') {
+    return refuse('evidence_insufficient', { detail: approach === 'event_led' ? 'No verified, dated, quoted fact about a physical-network change at this account.' : `No verified, dated, quoted claim a ${approach.replace(/_/g, ' ')} thesis may cite at this account.` });
   }
 
   const persona: PersonaRow | null = await prisma.persona.findUnique({
@@ -744,6 +758,9 @@ export async function enrollFromDecision(
   if (employment) return refuse(employment.reason, { detail: employment.detail });
   const email = (persona.email ?? '').trim().toLowerCase();
   if (!email) return refuse('no_email');
+  if (input.recipient && input.recipient.trim().toLowerCase() !== email) {
+    return refuse('recipient_changed_since_review', { detail: `The address is now ${email}, not ${input.recipient.trim().toLowerCase()} as you confirmed. Review and confirm again.` });
+  }
 
   // Red team Release B review #4: an enrollment starts at step 0. A person
   // GAP already emailed (any card, any engine), or with a send whose outcome
@@ -763,6 +780,11 @@ export async function enrollFromDecision(
     const replied = await accountRepliedRecently(prisma, email, input.now, { accountName: hypothesis.account_name || persona.account_name });
     if (replied) {
       return refuse('account_replied', { detail: `${replied.from_email} at this account wrote in on ${new Date(replied.received_at).toISOString().slice(0, 10)}; read and disposition it first` });
+    }
+    // R42b: a person a buyer named in a referral is never enrolled cold until the seller chose (referral-hold.ts).
+    const named = await referralHoldFor(prisma, { email, name: persona.name, accountName: hypothesis.account_name || persona.account_name });
+    if (named) {
+      return refuse('named_in_referral', { detail: referralHoldDetail(named) });
     }
     // Phase 2 C3: one cold email motion per account, as at the send gate.
     const motion = await accountMotionRefusal(prisma, { accountName: hypothesis.account_name || persona.account_name, personaId: input.personaId ?? null, email, now: input.now });

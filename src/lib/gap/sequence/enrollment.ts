@@ -54,6 +54,9 @@ import { stopRun } from '@/lib/queue/sequence-runtime';
 import { HARD_BOUNCE_STATUSES, isHardBounceStatus } from '../../email/bounce';
 import { sendableEvidence } from '@/lib/gap/research/evidence-gate';
 import { EVIDENCE_SIGNAL_SELECT } from '@/lib/gap/sequence/render';
+import { isCurrentFact } from '@/lib/gap/research/currentness';
+import { approachOfHypothesis, copyFamilySupports } from '../research/approach-policy';
+import { approachOfFamilyProgram } from '../sequences/families';
 
 export const TERMINAL_STATUSES = ['stopped', 'completed'] as const;
 export const HYPOTHESIS_READY_STATUSES = ['approved', 'active'] as const;
@@ -203,7 +206,7 @@ export async function enroll(prisma: any, input: EnrollInput, opts: SuppressionO
 
   const version = await prisma.sequenceVersion.findUnique({
     where: { id: input.versionId },
-    select: { id: true, family_id: true, status: true },
+    select: { id: true, family_id: true, status: true, family: { select: { program: true } } },
   });
   if (!version) return { ok: false, reason: 'version_not_found' };
   if (version.status === 'retired') return { ok: false, reason: 'version_retired' };
@@ -217,7 +220,7 @@ export async function enroll(prisma: any, input: EnrollInput, opts: SuppressionO
   if (input.hypothesisId) {
     const hyp = await prisma.prospectingHypothesis.findUnique({
       where: { id: input.hypothesisId },
-      select: { status: true, account_name: true, observation: true, signals: { select: { signal: { select: EVIDENCE_SIGNAL_SELECT } } } },
+      select: { status: true, account_name: true, observation: true, metadata: true, signals: { select: { signal: { select: EVIDENCE_SIGNAL_SELECT } } } },
     });
     if (!hyp) return { ok: false, reason: 'hypothesis_not_found' };
     if (!(HYPOTHESIS_READY_STATUSES as readonly string[]).includes(hyp.status)) {
@@ -227,11 +230,18 @@ export async function enroll(prisma: any, input: EnrollInput, opts: SuppressionO
     // live outreach fact, the same gate as the action pack and the runtime.
     const nowMs = Date.now();
     const links: Array<{ signal: any }> = Array.isArray(hyp.signals) ? hyp.signals : [];
-    const live = links.map((l) => l.signal).filter((s) => s && (!s.freshness_expires_at || new Date(s.freshness_expires_at).getTime() > nowMs));
-    if (sendableEvidence(hyp.observation, live, String(hyp.account_name ?? '')).tier !== 'VERIFIED_FACT') {
+    const live = links.map((l) => l.signal).filter((s) => s && isCurrentFact(s, new Date(nowMs)));
+    const approach = approachOfHypothesis(hyp);
+    if (!copyFamilySupports(approach)) return { ok: false, reason: 'evidence_insufficient' };
+    // R34: the version's copy is for this thesis's approach, never another's.
+    if (approachOfFamilyProgram(version.family?.program ?? null) !== approach) return { ok: false, reason: 'family_mismatch' };
+    if (sendableEvidence(hyp.observation, live, String(hyp.account_name ?? ''), { approach }).tier !== 'VERIFIED_FACT') {
       return { ok: false, reason: 'evidence_insufficient' };
     }
   }
+
+  // R34: an approach family's copy carries the thesis's own fact; it never runs without its thesis.
+  if (!input.hypothesisId && approachOfFamilyProgram(version.family?.program ?? null) !== 'event_led') return { ok: false, reason: 'family_mismatch' };
 
   const id = randomUUID();
   const isTest = isInternalRecipient(email);

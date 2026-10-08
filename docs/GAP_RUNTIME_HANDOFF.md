@@ -25,7 +25,7 @@ Do not re-plan, re-review or re-run Sprints 1-5; they are merged, live and verif
 Flags (Vercel Production env, call-time reads in `src/lib/gap/flags.ts`):
 
 - ON: `GAP_OS_ENABLED`, `GAP_HYPOTHESIS_ENABLED`, `GAP_ROUTING_ENABLED`, `GAP_MESSAGE_COMPILER_ENABLED`, `GAP_REPLY_CLASSIFICATION_ENABLED`
-- OFF (explicitly `false`): `GAP_HUBSPOT_SEQUENCE_PUBLISH_ENABLED`, `GAP_HUBSPOT_MIRROR_ENABLED`, `GAP_AUTO_ENROLL_ENABLED`, `GAP_AUTO_ENROLL_SHADOW`
+- OFF (explicitly `false`): `GAP_HUBSPOT_SEQUENCE_PUBLISH_ENABLED`, `GAP_HUBSPOT_MIRROR_ENABLED`, `GAP_AUTO_ENROLL_ENABLED`, `GAP_AUTO_ENROLL_SHADOW`; and, unset (default off, batch item 9, 2026-10-07), `GAP_CRM_APPROVED_WRITES_ENABLED`, the separate gate for seller-approved HubSpot deal changes
 - `OUTREACH_PAUSED` untouched. The clawd autonomy halt (2026-08-19, outreach=false, actuator=false) is INTACT.
 - The three GAP crons (`gap-hypothesize`, `gap-hubspot-replies`, `gap-enrollment-sync`) are NOT registered in `vercel.json`; manual only.
 

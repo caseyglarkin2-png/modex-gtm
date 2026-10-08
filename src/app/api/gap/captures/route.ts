@@ -11,7 +11,7 @@ import { z } from 'zod';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
-import { CAPTURE_CONTEXTS, RAW_TEXT_MAX, createCapture, listRecentCaptures } from '@/lib/gap/capture/store';
+import { CAPTURE_CONTEXTS, CAPTURE_SOURCE_KINDS, RAW_TEXT_MAX, createCapture, listRecentCaptures } from '@/lib/gap/capture/store';
 
 export const dynamic = 'force-dynamic';
 
@@ -20,6 +20,11 @@ const Body = z
     accountName: z.string().max(200).nullable().optional(),
     accountHint: z.string().max(200).nullable().optional(),
     personaId: z.number().int().positive().nullable().optional(),
+    // R44: the deal and the action that opened Capture (a Work card, a reply, an obligation, the account page).
+    dealId: z.string().trim().max(200).nullable().optional(),
+    // R50: the deal's name for the note's label (the id is what binds the note's words and obligations to the deal).
+    dealName: z.string().trim().max(200).nullable().optional(),
+    source: z.object({ kind: z.enum(CAPTURE_SOURCE_KINDS), id: z.string().trim().min(1).max(200) }).strict().nullable().optional(),
     context: z.enum(CAPTURE_CONTEXTS),
     rawText: z.string().max(RAW_TEXT_MAX),
   })
@@ -39,7 +44,8 @@ export async function POST(request: NextRequest) {
   if (!parsed.success) return NextResponse.json({ error: 'invalid_body', field: parsed.error.issues[0]?.path.join('.') || 'body' }, { status: 400 });
   const r = await createCapture(prisma, { ...parsed.data, actor: email, now: new Date() });
   if (!r.ok) return NextResponse.json({ error: r.reason }, { status: r.reason === 'account_not_found' ? 404 : 422 });
-  return NextResponse.json(r.capture, { status: 201 });
+  // R60: a reply's capture already exists: that one note is the answer (200), never a second capture.
+  return r.existing ? NextResponse.json({ ...r.capture, existing: true }, { status: 200 }) : NextResponse.json(r.capture, { status: 201 });
 }
 
 export async function GET() {

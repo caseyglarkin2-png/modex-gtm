@@ -37,6 +37,7 @@ import { Button } from '@/components/ui/button';
 import type { ThesisCard } from '@/lib/gap/hypothesis/thesis-groups';
 import { refusalCopy, refusalSentence } from '@/lib/gap/ui/refusal-copy';
 import { UseOutcome, type OutcomeState, type UseOutcomeResponse } from './use-outcome';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 interface RowResult { hypothesisId: string; ok: boolean; from: string; to: string | null; detail: string; reason?: string; revisionId?: string }
 interface Summary extends OutcomeState { approved: number; inUse: number }
@@ -160,7 +161,7 @@ function ThesisGroupCard({ card, openInitially, onOutcome }: { card: ThesisCard;
       const inUse = summary?.inUse ?? rows.filter((x) => final(x) === 'active').length;
       onOutcome({ key, title, approved, inUse, routing: r.data.routing ?? null, failures: rows.filter((x) => !x.ok).map((x) => `${nameOf(x.hypothesisId)}: ${x.detail}`), state: summary });
       if (approved > 0 && rows.every((x) => x.ok)) setDecided(true);
-      router.refresh();
+      refreshNow(router);
     } catch (e) { setError(e instanceof Error ? e.message : String(e)); } finally { setBusy(null); }
   }
 
@@ -176,7 +177,7 @@ function ThesisGroupCard({ card, openInitially, onOutcome }: { card: ThesisCard;
       onOutcome({ key, title, approved: 0, inUse: 0, routing: null, failures: rows.filter((x) => !x.ok).map((x) => `${nameOf(x.hypothesisId)}: ${x.detail}`), revised: { drafts, rebuilt } });
       setCorr(null); setChosen(new Set()); setPrimary(null);
       if (rows.length > 0 && rows.every((x) => x.ok)) setDecided(true);
-      router.refresh();
+      refreshNow(router);
     } catch (e) { setError(e instanceof Error ? e.message : String(e)); } finally { setBusy(null); }
   }
 
@@ -250,7 +251,7 @@ function ThesisGroupCard({ card, openInitially, onOutcome }: { card: ThesisCard;
           <section>
             <h3 className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">{card.members.length > 1 ? 'Shared thesis' : 'Thesis'}</h3>
             <p className="mt-1"><span className="text-[var(--muted-foreground)]">Observation:</span> {card.observation}</p>
-            <p className="mt-1"><span className="text-[var(--muted-foreground)]">Hypothesis:</span> {card.problemHypothesis}</p>
+            <p className="mt-1"><span className="text-[var(--muted-foreground)]">What we think is happening:</span> {card.problemHypothesis}</p>
             {card.rootCauses.length ? <p className="mt-1"><span className="text-[var(--muted-foreground)]">Root causes:</span> {card.rootCauses.join('; ')}</p> : null}
             {card.impacts.length ? <p className="mt-1"><span className="text-[var(--muted-foreground)]">Impacts:</span> {card.impacts.join('; ')}</p> : null}
             {card.falsification.length ? <p className="mt-1"><span className="text-[var(--muted-foreground)]">Falsify with:</span> {card.falsification.join(' ')}</p> : null}

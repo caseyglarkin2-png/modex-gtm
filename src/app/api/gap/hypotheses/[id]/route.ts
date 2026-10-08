@@ -96,7 +96,7 @@ export async function GET(_request: NextRequest, { params }: RouteContext) {
   const row = await getHypothesis(prisma, id);
   if (!row) return NextResponse.json({ error: 'not_found' }, { status: 404 });
   // What Casey can do now, from the canonical evidence gate (the drawer never re-derives it).
-  const actionability = actionabilityOf({ status: row.status, observation: row.observation, account_name: row.account_name, signals: (row.signals ?? []).map((l: { signal?: unknown }) => l.signal as never) }, new Date());
+  const actionability = actionabilityOf({ status: row.status, observation: row.observation, account_name: row.account_name, metadata: row.metadata, signals: (row.signals ?? []).map((l: { signal?: unknown }) => l.signal as never) }, new Date());
   return NextResponse.json({ ...row, actionability });
 }
 
@@ -140,7 +140,7 @@ export async function PATCH(request: NextRequest, { params }: RouteContext) {
     const result = await transitionHypothesis(prisma, id, action, { now, actor, reason, outcome });
     if (!result.ok) {
       const status = result.reason === 'not_found' ? 404 : 409;
-      return NextResponse.json({ error: result.reason }, { status });
+      return NextResponse.json({ error: result.reason, ...('detail' in result && result.detail ? { detail: result.detail } : {}) }, { status });
     }
     const routing = action === 'activate' ? await routeIfNowActive(id, result.to, actor, now) : null;
     return NextResponse.json({ from: result.from, to: result.to, effects: result.effects, ...(routing ? { routing } : {}) });

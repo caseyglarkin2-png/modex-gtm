@@ -58,11 +58,11 @@ export async function existingRevisionFor(
     }
   }
   if (input.hypothesisId) {
-    const own: { id: string; status: string; observation: string | null; account_name: string; signals?: Array<{ signal: unknown }> } | null = await prisma.prospectingHypothesis.findFirst({
+    const own: { id: string; status: string; observation: string | null; account_name: string; metadata?: unknown; signals?: Array<{ signal: unknown }> } | null = await prisma.prospectingHypothesis.findFirst({
       where: { id: input.hypothesisId, status: { in: [...OPEN_WORK_STATUSES] }, superseded_by: { is: null } },
       include: { signals: { include: { signal: { select: { ...GATE_SIGNAL_SELECT, freshness_expires_at: true } } } } },
     });
-    if (own && outreachReadiness({ observation: own.observation, account_name: own.account_name, signals: (own.signals ?? []).map((l) => l.signal as never) }, new Date()).ready) {
+    if (own && outreachReadiness({ observation: own.observation, account_name: own.account_name, metadata: own.metadata, signals: (own.signals ?? []).map((l) => l.signal as never) }, new Date()).ready) {
       return { hypothesisId: own.id, status: own.status, via: 'open_work' };
     }
   }

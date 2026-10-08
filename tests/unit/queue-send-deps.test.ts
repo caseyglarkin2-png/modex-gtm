@@ -44,6 +44,7 @@ const mockedPrisma = {
   experimentVariant: {
     findFirst: vi.fn(),
   },
+  inboundMessage: { findMany: async () => [] }, // R63: no reply on file (perform-send reads opt-outs)
   unsubscribedEmail: {
     findMany: vi.fn(),
     delete: vi.fn(() => ({ catch: vi.fn() })),

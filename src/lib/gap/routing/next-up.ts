@@ -15,6 +15,7 @@
  * Pure: the page builds the candidates, this orders and filters them.
  */
 import { displayName } from '../people/display-name';
+import { accountHref, recordReplyHref } from '../account-intel/href';
 import type { CockpitLane, NextUpItem } from '@/components/gap/gap-cockpit';
 
 export const LANE_RANK: Record<CockpitLane, number> = { replies: 0, follow_up: 1, ready: 2, review: 3, research: 4, deals: 5 };
@@ -104,7 +105,7 @@ export function buildNextUpCandidates(input: NextUpInput): NextCandidate[] {
   const tier = (a: string) => tierKey(input.tiers.get(a));
   const out: NextCandidate[] = [];
   for (const r of input.replies) {
-    out.push({ lane: 'replies', accountName: r.accountName || null, title: `${r.contactEmail} replied`, detail: `${r.accountName}: ${r.subject ?? r.snippet.slice(0, 80)}`, href: '/gap?lane=replies', sortKey: [timeKey(r.receivedAt)] });
+    out.push({ lane: 'replies', accountName: r.accountName || null, title: `${r.contactEmail} replied`, detail: `${r.accountName}: ${r.subject ?? r.snippet.slice(0, 80)}`, href: r.accountName ? recordReplyHref(r.accountName) : '/gap/replies', sortKey: [timeKey(r.receivedAt)] });
   }
   for (const c of input.followUps) {
     out.push({ lane: 'follow_up', accountName: c.account.name, title: `Follow up with ${who(c.persona)}`, detail: `${c.account.name}. The next touch is due.`, href: input.openHref('follow_up', c.id), sortKey: [timeKey(c.touch?.dueAt ?? null)] });
@@ -121,27 +122,28 @@ export function buildNextUpCandidates(input: NextUpInput): NextCandidate[] {
     });
   }
   for (const g of input.reviewGroups) {
-    out.push({ lane: 'review', accountName: g.accountName, title: `Decide the ${g.accountName} thesis`, detail: `${g.people} ${g.people === 1 ? 'person' : 'people'}, ready for outreach.`, href: '/gap?lane=review', sortKey: [-g.people, tier(g.accountName)] });
+    // R60: Work's card names the account; the move is said in the seller's words and opens the account, where it lives.
+    out.push({ lane: 'review', accountName: g.accountName, title: 'Decide the angle', detail: `${g.people} ${g.people === 1 ? 'person' : 'people'}, ready for outreach.`, href: accountHref(g.accountName), sortKey: [-g.people, tier(g.accountName)] });
   }
   for (const o of input.readyOneOffs) {
-    out.push({ lane: 'review', accountName: o.accountName, title: `Decide the ${o.accountName} hypothesis`, detail: '1 person, ready for outreach.', href: '/gap?lane=review', sortKey: [-1, tier(o.accountName)] });
+    out.push({ lane: 'review', accountName: o.accountName, title: 'Decide the angle', detail: '1 person, ready for outreach.', href: o.accountName ? accountHref(o.accountName) : '/gap', sortKey: [-1, tier(o.accountName)] });
   }
   for (const i of input.inbox) {
     if (i.ready < 1) continue;
-    out.push({ lane: 'research', accountName: i.accountName, title: `Judge ${i.ready} verified fact${i.ready === 1 ? '' : 's'} at ${i.accountName}`, detail: 'Found and verified in the background. Use or ignore.', href: '/gap?lane=research', sortKey: [-Math.max(1, i.people), 0, tier(i.accountName)] });
+    out.push({ lane: 'research', accountName: i.accountName, title: `Judge ${i.ready} verified fact${i.ready === 1 ? '' : 's'}`, detail: 'Found and verified in the background. Use or ignore.', href: accountHref(i.accountName), sortKey: [-Math.max(1, i.people), 0, tier(i.accountName)] });
   }
   for (const g of input.researchGroups) {
-    out.push({ lane: 'research', accountName: g.accountName, title: `Find verified evidence for the ${g.accountName} thesis`, detail: `${g.people} ${g.people === 1 ? 'person' : 'people'} waiting on it. Not ready for outreach yet.`, href: '/gap?lane=research', sortKey: [-g.people, -timeKey(g.triggerAt ?? null, 0), tier(g.accountName)] });
+    out.push({ lane: 'research', accountName: g.accountName, title: 'Find verified evidence', detail: `${g.people} ${g.people === 1 ? 'person' : 'people'} waiting on it. Not ready for outreach yet.`, href: accountHref(g.accountName), sortKey: [-g.people, -timeKey(g.triggerAt ?? null, 0), tier(g.accountName)] });
   }
   const cardsByAccount = new Map<string, Card[]>();
   for (const c of input.researchCards) cardsByAccount.set(c.account.name, [...(cardsByAccount.get(c.account.name) ?? []), c]);
   for (const [a, cards] of cardsByAccount) {
-    out.push({ lane: 'research', accountName: a, title: `Research ${a}`, detail: `${cards.length} card${cards.length === 1 ? '' : 's'} missing evidence or contact data.`, href: '/gap?lane=research', sortKey: [-cards.length, 0, tier(a)] });
+    out.push({ lane: 'research', accountName: a, title: 'Research the account', detail: `${cards.length} ${cards.length === 1 ? 'person' : 'people'} missing evidence or contact data.`, href: accountHref(a), sortKey: [-cards.length, 0, tier(a)] });
   }
   return out;
 }
 
-/** Accounts NEXT UP must never point at: an open deal or opportunity truth UNKNOWN on any current card. */
+/** Accounts NEXT UP must never point at: an open deal, opportunity truth UNKNOWN or a corporate-family hold (batch item 7) on any current card. */
 export function heldAccountsOf(items: ReadonlyArray<{ account: { name: string }; ruleId: string }>): Set<string> {
-  return new Set(items.filter((i) => i.ruleId === 'active_opportunity' || i.ruleId === 'opportunity_unknown').map((i) => i.account.name));
+  return new Set(items.filter((i) => i.ruleId === 'active_opportunity' || i.ruleId === 'opportunity_unknown' || i.ruleId === 'family_hold').map((i) => i.account.name));
 }

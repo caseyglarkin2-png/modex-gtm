@@ -24,11 +24,13 @@ import type { AccountContext } from './context';
 import type { ReadyTarget } from './send-target';
 
 /** "Unverified": a third party's report GAP has not checked (a signal); not our inference, not checked. */
-export type SellerTag = 'Buyer said' | 'Checked' | 'Unverified' | 'Our read' | 'Unknown' | 'Contradicted';
+/** R63-A S5: "You noted" is what the seller noted a buyer said (a paraphrase): never quoted as their words. */
+export type SellerTag = 'Buyer said' | 'You noted' | 'Checked' | 'Unverified' | 'Our read' | 'Unknown' | 'Contradicted';
 
 /** Names stored all lower case ("adel ghanem") read as names. Anything with a capital is left as written. */
 export { displayName } from '../people/display-name';
 import { displayName } from '../people/display-name';
+import { isCostBid } from '../bid/cost';
 
 export interface NowLine {
   /** Identity for deduplication (a fact id, a BID id, else the text). */
@@ -51,7 +53,7 @@ export interface NowView {
   lastTouch: string;
   /** The newest buyer reply on record, dated, else null. */
   lastReply: string | null;
-  next: { text: string; source: 'meeting' | 'deal' | 'conversation' | 'restriction' | 'motion' };
+  next: { text: string; source: 'meeting' | 'deal' | 'conversation' | 'restriction' | 'motion' | 'obligation' };
   who: { name: string; title: string | null; why: string; route: string | null; location?: string | null; inHubSpotOnly?: boolean; hubspotContactId?: string | null; personaId?: number | null; employment?: { state: string; label: string; why: string } | null; role?: { state: string; label: string; why: string } | null } | null;
   /** A better-fit person on record who is not yet a GAP contact (shown beside the ready-card person). */
   betterFit: string | null;
@@ -150,7 +152,7 @@ export function sellerLine(s: Statement, section: string, x: { domains: readonly
 const ASK_ORDER: DiscoveryQuestion['type'][] = ['CURRENT_PROCESS', 'VERIFY_PROBLEM', 'ROOT_CAUSE', 'IMPACT', 'OWNERSHIP', 'CURRENT_STACK', 'CHANGE_REQUIREMENT', 'DESIRED_FUTURE'];
 const LATE: ReadonlySet<string> = new Set(['CURRENT_STACK', 'CHANGE_REQUIREMENT', 'DESIRED_FUTURE']);
 
-export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext, i: Pick<AccountInputs, 'facts' | 'bids' | 'domains' | 'account'> & { firstTouches?: AccountInputs['firstTouches'] }, now: Date, opts: { ready?: ReadyTarget | null } = {}): NowView {
+export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext, i: Pick<AccountInputs, 'facts' | 'bids' | 'domains' | 'account'> & { firstTouches?: AccountInputs['firstTouches'] }, now: Date, opts: { ready?: ReadyTarget | null; /** Sprint 5 review: the earliest dated obligation due today or overdue at the account (its words and its scope). */ dueNow?: { title: string; scope: string | null } | null } = {}): NowView {
   const used = new Set<string>();
   // Each idea once, also when two sources say it in different words (round 4: Giant Eagle twice, Gatik twice).
   const shown: string[] = [];
@@ -171,8 +173,13 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   const soon = meeting && new Date(meeting.at).getTime() - now.getTime() <= 14 * 86_400_000;
   // In a deal, the deal's own next step (HubSpot) is NEXT when someone wrote one; otherwise GAP's deal guidance.
   const dealNext = m.type === 'IN_DEAL' ? brief.deals.find((d) => d.nextStep?.trim())?.nextStep?.trim() ?? null : null;
-  let next: NowView['next'] = soon
-    ? { text: `Prepare for the meeting on ${day(meeting!.at)}: ${meeting!.what}. Read BRIEF before you go.`, source: 'meeting' }
+  // Sprint 5 review: a promise due today outranks a meeting more than a day away (the meeting is still named next).
+  const meetingTomorrow = !!meeting && new Date(meeting.at).getTime() - now.getTime() <= 24 * 3_600_000;
+  const due = soon && !meetingTomorrow ? opts.dueNow ?? null : null;
+  let next: NowView['next'] = due
+    ? { text: `Due now: ${due.title}${due.scope ? ` (${due.scope})` : ''}. Then prepare for the meeting on ${day(meeting!.at)}: ${meeting!.what}.`, source: 'obligation' }
+    : soon
+    ? { text: `Prepare for the meeting on ${day(meeting!.at)}: ${meeting!.what}. Read the Brief tab before you go.`, source: 'meeting' }
     : m.type === 'FACT_LED' && opts.ready
       ? { text: `Review the thesis, then open the first-touch card for ${displayName(opts.ready.name)} (every gate runs at the click).`, source: 'motion' }
     : dealNext
@@ -291,7 +298,7 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   const gap: NowView['gap'] = [
     { element: 'Current state', state: bidOf('current_state') ? 'Buyer said' : 'Unknown' },
     { element: 'Problem', state: bidOf('business_problem') ? 'Buyer said' : top ? 'Our read' : 'Unknown' },
-    { element: 'Impact', state: bidOf('impact') ? 'Buyer said' : 'Unknown' },
+    { element: 'Impact', state: i.bids.some((b) => isCostBid(b)) ? 'Buyer said' : 'Unknown' },
     { element: 'Root cause', state: bidOf('root_cause') ? 'Buyer said' : top?.rootCause ? 'Our read' : 'Unknown' },
   ];
   const cs = bidOf('current_state');

@@ -36,22 +36,38 @@ function Caption({ children }: { children: string }) {
   return <p className="mt-1 text-xs uppercase tracking-wide text-[var(--muted-foreground)]">{children}</p>;
 }
 
+/** R63-B N12: a citation's name says which source it is ("Source 1: <title> (<site>)"), never just "1". */
+export function citationName(number: number, signal: FactSignal | undefined): string {
+  const url = signal?.evidence_url?.trim();
+  let site: string | null = null;
+  try {
+    site = url ? new URL(url).hostname.replace(/^www\./, '') : null;
+  } catch {
+    site = null;
+  }
+  const title = signal?.title?.trim();
+  return `Source ${number}${title ? `: ${title}` : ''}${site ? ` (${site})` : ''}`;
+}
+
 function Citation({ number, signal }: { number: number; signal: FactSignal | undefined }) {
   const url = signal?.evidence_url?.trim();
-  const shared = 'ml-1 inline-flex h-5 min-w-5 items-center justify-center rounded border px-1 align-baseline text-[11px] font-semibold';
+  // R63-B S13: a 24 px target.
+  const shared = 'ml-1 inline-flex h-6 min-w-6 items-center justify-center rounded border px-1 align-baseline text-[11px] font-semibold';
   if (url) {
     return (
       <a
         href={url}
         target="_blank"
         rel="noreferrer noopener"
+        aria-label={citationName(number, signal)}
         className={`${shared} border-[var(--primary)] text-[var(--primary)] no-underline hover:underline`}
       >
         {number}
       </a>
     );
   }
-  const tooltip = signal?.evidence_text?.trim() || signal?.source_kind || 'signal not linked';
+  // R63-B N1: never the signal's storage kind ("evidence_record") as the words.
+  const tooltip = signal?.evidence_text?.trim() || 'A cited source with no link on record';
   return (
     <span title={tooltip} className={`${shared} border-[var(--border)] text-[var(--muted-foreground)]`}>
       {number}
@@ -150,7 +166,7 @@ export function HypothesisBlock({
       className={`${BLOCK_BASE} border-2 border-dashed border-amber-500/70 bg-transparent`}
     >
       <div className="flex items-baseline justify-between gap-3">
-        <h3 className="text-xs font-bold tracking-[0.2em] text-amber-700 dark:text-amber-400">HYPOTHESIS</h3>
+        <h3 className="text-xs font-bold tracking-[0.2em] text-amber-700 dark:text-amber-400">WHAT WE THINK IS HAPPENING</h3>
       </div>
       <Caption>Seller inference, unproven</Caption>
       <p className="mt-3 italic leading-6">{problemHypothesis}</p>

@@ -29,11 +29,13 @@ import { sameIdea } from '../context/same-idea';
 import { sellerRelevance } from '../research/continuity';
 import type { PursuitState } from '../pursuit/state';
 import type { StoryTouch } from './touches';
+import { isCostBid } from '../bid/cost';
+import { isReplyKindClass, REPLY_KIND_WORDS } from '../capture/reply-kind';
 
 export type StoryTag = SellerTag;
 
 /** Strongest to weakest: a row takes the weakest class of its sentences. */
-export const STRENGTH: Record<StoryTag, number> = { 'Buyer said': 0, Checked: 1, 'Our read': 2, Unverified: 3, Unknown: 4, Contradicted: 5 };
+export const STRENGTH: Record<StoryTag, number> = { 'Buyer said': 0, 'You noted': 0.5, Checked: 1, 'Our read': 2, Unverified: 3, Unknown: 4, Contradicted: 5 };
 export const weakestTag = (tags: readonly StoryTag[]): StoryTag => tags.reduce((w, t) => (STRENGTH[t] > STRENGTH[w] ? t : w), tags[0] ?? 'Unknown');
 
 export interface StorySentence {
@@ -74,7 +76,10 @@ export interface StoryInput {
   now: Date;
   state: PursuitState;
   brief: AccountIntelligenceBrief;
-  inputs: Pick<AccountInputs, 'facts' | 'bids' | 'domains' | 'account' | 'signals'>;
+  /** R63-B S9: the open deals and the last recorded conversation feed "what has happened between us" too. */
+  inputs: Pick<AccountInputs, 'facts' | 'bids' | 'domains' | 'account' | 'signals'> & Partial<Pick<AccountInputs, 'opportunity' | 'conversation'>>;
+  /** R63-B S9: the meeting on the calendar ahead (context relationship), when one is booked. */
+  booked?: { at: string; what: string } | null;
   /** NOW's own WHY NOW and KNOW lines (already filtered: no market chatter, no imagery, one idea once). */
   whyNow: NowLine[];
   know: NowLine[];
@@ -206,6 +211,10 @@ export function projectStory(i: StoryInput): AccountStory {
     return true;
   };
   const line = (l: NowLine) => fromLine(l, i.accountName);
+  // Sprint 5 review (R50): a buyer sentence says whose words and, at an account with deals, which opportunity.
+  // R63-A S5: a paraphrase the seller noted is "you noted they said", tagged as such, never "Buyer said".
+  const saidBy = (b: { who: string | null; at: string; scope?: string | null; noted?: boolean }) => `${b.noted ? 'you noted they said' : 'buyer said'}, ${b.who ?? 'the buyer'}, ${day(b.at)}${b.scope ? `; ${b.scope}` : ''}`;
+  const tagOf = (b: { noted?: boolean }): StoryTag => (b.noted ? 'You noted' : 'Buyer said');
   const rows: StoryRow[] = [];
 
   // WHAT HAS HAPPENED BETWEEN US: the last person touched with their title, what came back, the count.
@@ -214,7 +223,7 @@ export function projectStory(i: StoryInput): AccountStory {
   // THEIR GOAL: only in the buyer's words (a future-state or priority input); a program statement is a change.
   const goalBid = i.inputs.bids.find((b) => b.type === 'future_state' || b.type === 'priority');
   if (goalBid) {
-    rows.push(row('goal', [{ text: sentence(goalBid.summary), tag: 'Buyer said', basis: `buyer said, ${goalBid.who ?? 'the buyer'}, ${day(goalBid.at)}`, basisIds: [`bid:${goalBid.id}`] }]));
+    rows.push(row('goal', [{ text: sentence(goalBid.summary), tag: tagOf(goalBid), basis: saidBy(goalBid), basisIds: [`bid:${goalBid.id}`] }]));
     used.add(`bid:${goalBid.id}`);
   }
 
@@ -261,10 +270,11 @@ export function projectStory(i: StoryInput): AccountStory {
     rows.push(row('network', [{ text: sentence(top.inference), tag: 'Our read', basis: `our inference from: ${obs.length > 110 ? `${obs.slice(0, 107).trimEnd()}...` : obs}${review}`, basisIds: [`hypothesis:${top.id}`, ...(top.observation.verified && i.inputs.facts.some((f) => f.quote === top.observation.text) ? [`evidence:${i.inputs.facts.find((f) => f.quote === top.observation.text)!.id}`] : [])] }]));
   }
   const problemBid = i.inputs.bids.find((b) => b.type === 'business_problem');
-  const impactBid = i.inputs.bids.find((b) => b.type === 'impact');
+  // Sprint 5 review: what it costs them is an impact, or a number in money or detention terms (bid/cost.ts).
+  const impactBid = i.inputs.bids.find((b) => b.type === 'impact') ?? i.inputs.bids.find((b) => isCostBid(b));
   if (problemBid) {
-    const s: StorySentence[] = [{ text: sentence(problemBid.summary), tag: 'Buyer said', basis: `buyer said, ${problemBid.who ?? 'the buyer'}, ${day(problemBid.at)}`, basisIds: [`bid:${problemBid.id}`] }];
-    if (impactBid) s.push({ text: sentence(impactBid.summary), tag: 'Buyer said', basis: `buyer said, ${impactBid.who ?? 'the buyer'}, ${day(impactBid.at)}`, basisIds: [`bid:${impactBid.id}`] });
+    const s: StorySentence[] = [{ text: sentence(problemBid.summary), tag: tagOf(problemBid), basis: saidBy(problemBid), basisIds: [`bid:${problemBid.id}`] }];
+    if (impactBid) s.push({ text: sentence(impactBid.summary), tag: tagOf(impactBid), basis: saidBy(impactBid), basisIds: [`bid:${impactBid.id}`] });
     rows.push(row('yard', s));
   } else if (top) {
     // "Wrong if: If trailers..." doubles the word; the clause starts after it.
@@ -274,10 +284,14 @@ export function projectStory(i: StoryInput): AccountStory {
 
   // WHAT WE NEED TO LEARN: one Unknown line naming what the buyer has not said (the ASK slot carries the question).
   const bid = (t: string) => i.inputs.bids.some((b) => b.type === t);
-  const missing = [!bid('current_state') ? 'how they run the yards today' : null, !bid('impact') ? 'what it costs them' : null, !bid('root_cause') && !top?.rootCause ? 'why it happens' : null].filter((x): x is string => !!x);
+  const missing = [!bid('current_state') ? 'how they run the yards today' : null, !i.inputs.bids.some((b) => isCostBid(b)) ? 'what it costs them' : null, !bid('root_cause') && !top?.rootCause ? 'why it happens' : null].filter((x): x is string => !!x);
   if (missing.length) {
     const list = missing.length === 1 ? missing[0] : `${missing.slice(0, -1).join(', ')} or ${missing[missing.length - 1]}`;
-    rows.push(row('learn', [{ text: `Nothing from the buyer yet on ${list}.`, tag: 'Unknown', basis: 'no buyer input on record', basisIds: [] }]));
+    // R63-B S9: the basis reads the same record as "what has happened between us": their words on record that do not
+    // cover these are said as such, never "no buyer input on record".
+    const words = happenedSoFar(i).buyerWords;
+    const basis = words.count ? `the buyer's ${words.count === 1 ? 'statement' : `${words.count} statements`} on record ${words.count === 1 ? 'does' : 'do'} not cover ${missing.length === 1 ? 'this' : 'these'}` : 'no buyer input on record';
+    rows.push(row('learn', [{ text: `Nothing from the buyer yet on ${list}.`, tag: 'Unknown', basis, basisIds: [] }]));
   }
 
   // STORIES THAT MATTER: the checked lines not already told, with their cite status, collapsed.
@@ -342,11 +356,49 @@ export function projectStory(i: StoryInput): AccountStory {
   return { rows, first: order.map((k) => rows.find((r) => r.key === k)).filter((r): r is StoryRow => !!r), checkBeforeContacting, setAsideCaveats };
 }
 
+/**
+ * R63-B S9: ONE reader for "has anything happened between us". Kroger's page said "Nothing has happened between us
+ * yet" and "no buyer input on record" while it quoted the buyer twice, held two open deals and a meeting tomorrow:
+ * the row read only the email ledgers. This reads the touches (emails, replies, a meeting that took place), the buyer's
+ * own words on record, the last recorded conversation, the open deals and a meeting ahead; the between-us row and
+ * the learn row both read it.
+ */
+export interface HappenedSoFar {
+  /** Emails, replies and meetings that took place (the ledgers and the account history). */
+  touched: boolean;
+  buyerWords: { count: number; newest: { who: string | null; at: string } | null; ids: string[] };
+  conversation: { who: string; responseClass: string; at: string } | null;
+  deals: Array<{ id: string | null; name: string }>;
+  booked: { at: string; what: string } | null;
+  any: boolean;
+}
+
+export function happenedSoFar(i: Pick<StoryInput, 'touches' | 'inputs' | 'booked' | 'now'>): HappenedSoFar {
+  const touched = i.touches.some((x) => x.kind !== 'meeting' || (new Date(x.at).getTime() <= i.now.getTime() && !/\bcancel(?:l)?ed\b/i.test(x.what)));
+  const bids = [...i.inputs.bids].sort((a, b) => b.at.localeCompare(a.at));
+  const opp = i.inputs.opportunity;
+  const deals = opp?.status === 'ACTIVE' ? opp.deals.map((d) => ({ id: d.id ?? null, name: d.name ?? 'an unnamed deal' })) : [];
+  const ahead = i.touches.find((x) => x.kind === 'meeting' && new Date(x.at).getTime() > i.now.getTime() && !/\bcancel(?:l)?ed\b/i.test(x.what));
+  const booked = i.booked ?? (ahead ? { at: ahead.at, what: ahead.what.replace(/^Meeting \([^)]*\):?\s*/, '') } : null);
+  const conversation = i.inputs.conversation ?? null;
+  return {
+    touched,
+    buyerWords: { count: bids.length, newest: bids[0] ? { who: bids[0].who, at: bids[0].at } : null, ids: bids.map((b) => `bid:${b.id}`) },
+    conversation,
+    deals,
+    booked,
+    any: touched || bids.length > 0 || !!conversation || deals.length > 0 || !!booked,
+  };
+}
+
 function betweenUs(i: StoryInput): StoryRow {
   const t = i.touches;
   if (!t.length) {
+    // R63-B S9: no email or meeting on record is not "nothing happened" when a deal, their words or a meeting are.
+    const other = beyondTouches(i);
+    if (other.length) return row('between_us', other);
     return i.clawdRead === 'ok'
-      ? row('between_us', [{ text: 'No touch on record between us.', tag: 'Checked', basis: 'GAP, clawd and the account history: nothing found', basisIds: [] }])
+      ? row('between_us', [{ text: 'No touch on record between us.', tag: 'Checked', basis: 'GAP, the outreach log and the account history: nothing found', basisIds: [] }])
       : row('between_us', [{ text: i.clawdRead === 'not_configured' ? "No touch in GAP's own records; clawd's send history is not connected here." : "No touch in GAP's own records; clawd's send history could not be read.", tag: 'Unknown', basis: 'GAP and the account history only', basisIds: [] }]);
   }
   const s: StorySentence[] = [];
@@ -357,11 +409,15 @@ function betweenUs(i: StoryInput): StoryRow {
   // Silence is judged against the LAST email: an older reply (FedEx: a June automatic notice before an August send)
   // does not answer it.
   const answered = !!lastReply && (!last || lastReply.at > last.at);
+  // R63-B S2: an email that went to a person after they opted out carries that fact beside it (it is history, and it
+  // must never read as ordinary silence).
+  const firstName = (x: StoryTouch) => (x.address ? x.address.split('@')[0] : x.name).toLowerCase().replace(/[^a-z]+/g, ' ').trim().split(' ')[0] ?? '';
+  const optedOutBefore = last && lastReply?.replyKind === 'opt_out' && lastReply.at < last.at && firstName(lastReply) === firstName(last) ? lastReply : null;
   if (last) {
     const subject = last.what.replace(/^Re:\s*/i, '').replace(/^["“]+|["”]+$/g, '').trim();
     const what = subject === 'GAP first touch' ? ' (a GAP first touch)' : subject && subject !== 'email' ? `: "${subject}"` : '';
-    const silence = !answered ? (i.clawdRead === 'ok' ? ' No answer on record.' : " No answer in GAP's records (clawd's history could not be read).") : '';
-    s.push({ text: `Last email to ${who(last)}, ${day(last.at)}${what}.${silence}`, tag: !answered && i.clawdRead !== 'ok' ? 'Unknown' : 'Checked', basis: `${last.source}, ${day(last.at)}${!answered && i.clawdRead === 'ok' ? '; GAP, clawd and the account history for the silence' : ''}`, basisIds: [`touch:${last.at}`] });
+    const silence = optedOutBefore ? ` Sent after they opted out on ${day(optedOutBefore.at)}: nothing else goes to them.` : !answered ? (i.clawdRead === 'ok' ? ' No answer on record.' : " No answer in GAP's records (clawd's history could not be read).") : '';
+    s.push({ text: `Last email to ${who(last)}, ${day(last.at)}${what}.${silence}`, tag: !optedOutBefore && !answered && i.clawdRead !== 'ok' ? 'Unknown' : 'Checked', basis: `${last.source}, ${day(last.at)}${optedOutBefore ? `; their opt-out, ${day(optedOutBefore.at)}` : !answered && i.clawdRead === 'ok' ? '; GAP, clawd and the account history for the silence' : ''}`, basisIds: [`touch:${last.at}`, ...(optedOutBefore ? [`touch:${optedOutBefore.at}`] : [])] });
   }
   if (lastReply) {
     const k = lastReply.replyKind ?? 'human';
@@ -381,9 +437,41 @@ function betweenUs(i: StoryInput): StoryRow {
     const sources = [...new Set(sends.map((x) => x.source))].map((x) => x.replace(' ledger', '')).join(' and ');
     s.push({ text: `${sends.length} emails to ${people.size} ${people.size === 1 ? 'person' : 'people'} since ${dayYear(oldest.at)}.`, tag: 'Checked', basis: `${sources}`, basisIds: sends.map((x) => `touch:${x.at}`) });
   }
-  const meeting = t.find((x) => x.kind === 'meeting');
-  if (meeting) s.push({ text: `Meeting ${day(meeting.at)}: ${meeting.what.replace(/\.$/, '')}.`, tag: 'Checked', basis: `account history, ${day(meeting.at)}`, basisIds: [`touch:${meeting.at}`] });
+  // Sprint 5 review: only a meeting that took place has happened between us: a future one (prepared on the brief) or a
+  // canceled one (said on Work) is not told here as Checked history; the history's own "Meeting (status):" prefix is
+  // not repeated.
+  const meeting = t.find((x) => x.kind === 'meeting' && new Date(x.at).getTime() <= i.now.getTime() && !/\bcancel(?:l)?ed\b/i.test(x.what));
+  if (meeting) s.push({ text: `Meeting ${day(meeting.at)}: ${meeting.what.replace(/^Meeting \([^)]*\):?\s*/, '').replace(/\.$/, '') || 'held'}.`, tag: 'Checked', basis: `account history, ${day(meeting.at)}`, basisIds: [`touch:${meeting.at}`] });
+  if (!s.length) {
+    // R63-B S9: the same reader as the learn row: an open deal, their words, a recorded conversation, a meeting ahead.
+    const other = beyondTouches(i);
+    if (other.length) return row('between_us', other);
+    const booked = happenedSoFar(i).booked;
+    s.push({ text: booked ? `Nothing has happened between us yet; a meeting is booked for ${day(booked.at)}.` : 'Nothing has happened between us yet.', tag: 'Checked', basis: 'GAP and the account history', basisIds: booked ? [`touch:${booked.at}`] : [] });
+  }
   return row('between_us', s);
+}
+
+/**
+ * What has happened beyond the email ledgers (happenedSoFar) as between-us sentences: an open deal, a recorded
+ * conversation, their words, and then a meeting ahead; empty when none of the first three has (a meeting ahead alone
+ * keeps "Nothing has happened between us yet; a meeting is booked").
+ */
+function beyondTouches(i: StoryInput): StorySentence[] {
+  const h = happenedSoFar(i);
+  if (!h.deals.length && !h.conversation && !h.buyerWords.count) return [];
+  const out: StorySentence[] = [];
+  if (h.deals.length) out.push({ text: h.deals.length === 1 ? `In an open deal: ${h.deals[0].name}.` : `In ${h.deals.length} open deals: ${h.deals.map((d) => d.name).join('; ')}.`, tag: 'Checked', basis: 'HubSpot, read now', basisIds: h.deals.map((d) => `deal:${d.id ?? d.name}`) });
+  if (h.conversation) {
+    const what = isReplyKindClass(h.conversation.responseClass) ? REPLY_KIND_WORDS[h.conversation.responseClass].replace(/^They /, 'they ') : 'a conversation';
+    out.push({ text: `A conversation is recorded with ${h.conversation.who} on ${day(h.conversation.at)}: ${what}.`, tag: 'Checked', basis: `your recorded conversation, ${day(h.conversation.at)}`, basisIds: [`conversation:${h.conversation.at}`] });
+  }
+  if (h.buyerWords.count && h.buyerWords.newest) {
+    const n = h.buyerWords.count;
+    out.push({ text: `Their own words are on record: ${n === 1 ? 'one statement' : `${n} statements`}, the newest from ${h.buyerWords.newest.who ?? 'the buyer'} on ${day(h.buyerWords.newest.at)}.`, tag: 'Checked', basis: 'the buyer inputs you confirmed', basisIds: h.buyerWords.ids });
+  }
+  if (h.booked) out.push({ text: `A meeting is booked for ${day(h.booked.at)}: ${h.booked.what.replace(/\.$/, '')}.`, tag: 'Checked', basis: `the calendar, ${day(h.booked.at)}`, basisIds: [`touch:${h.booked.at}`] });
+  return out;
 }
 
 /**

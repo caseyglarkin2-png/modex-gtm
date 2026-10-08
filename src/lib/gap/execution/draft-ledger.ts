@@ -89,6 +89,8 @@ export const DIRECT_CLAIMED = 'execution.gmail_direct_claimed' as const;
 export const DIRECT_SENT = 'execution.gmail_direct_sent' as const;
 export const DIRECT_RELEASED = 'execution.gmail_direct_released' as const;
 export const DIRECT_REFUSED = 'execution.gmail_direct_refused' as const;
+/** Batch item 7: what the final check SHOWED (the copy hash, the recipient and the sending mailbox); never a send. */
+export const DIRECT_PREVIEWED = 'execution.gmail_direct_previewed' as const;
 /** Governed copy (2026-10-01): COPY EMAIL was refused by the same gates as draft and send. */
 export const COPY_REFUSED = 'execution.copy_refused' as const;
 /** Governed copy: the email text was released to Casey after every gate cleared. Never a draft, never a send. */
@@ -105,6 +107,8 @@ export const DRAFT_CLAIMED = 'execution.gmail_draft_claimed' as const;
 
 /** Refusals that provably happened before anything reached Gmail, so a claim may be released. */
 export const DEFINITELY_NOT_SENT: readonly RegExp[] = [
+  // The harness transport sink (email/transport-sink.ts) refuses before any network call: nothing could have left.
+  /transport sink refused/i,
   /^Canonical autonomy refused/,
   /^HUMAN_APPROVED_1TO1 refused/,
   /^Cross-plane suppression refused/,
@@ -121,6 +125,32 @@ export const DEFINITELY_NOT_SENT: readonly RegExp[] = [
 
 export function isDefinitelyNotSent(reason: string): boolean {
   return DEFINITELY_NOT_SENT.some((re) => re.test(reason));
+}
+
+/**
+ * R42b: the prepared ANSWER to a buyer's reply has its own facts, each written once, never changed, about ONE inbound
+ * message (`subject_type 'inbound_message'`, `subject_id <the message id>`), so "what became of this answer" is one
+ * indexed read. Copying the text, saving a Gmail draft and sending are three distinct states, never collapsed:
+ *
+ *   execution.reply_copied     the seller copied the prepared text (nothing left GAP)
+ *   execution.reply_drafted    a Gmail draft of the answer exists in the thread (NOT sent)
+ *   execution.reply_claimed    CONFIRM + SEND started (a lost answer leaves it open: check Sent, never resend)
+ *   execution.reply_sent       the answer left the GAP mailbox in the buyer's thread (the Gmail message id)
+ *   execution.reply_released   the send provably created nothing (the claim is released)
+ */
+export const REPLY_SUBJECT_TYPE = 'inbound_message';
+export const REPLY_COPIED = 'execution.reply_copied' as const;
+export const REPLY_DRAFTED = 'execution.reply_drafted' as const;
+export const REPLY_CLAIMED = 'execution.reply_claimed' as const;
+export const REPLY_SENT = 'execution.reply_sent' as const;
+export const REPLY_RELEASED = 'execution.reply_released' as const;
+export const REPLY_KINDS = [REPLY_COPIED, REPLY_DRAFTED, REPLY_CLAIMED, REPLY_SENT, REPLY_RELEASED] as const;
+export type ReplyLedgerKind = (typeof REPLY_KINDS)[number];
+
+/** Append one answer fact. THROWS on failure (a receipt that silently did not land is a lie). */
+export async function appendReplyLedger(prisma: PrismaLike, kind: ReplyLedgerKind, actor: string, messageId: string, payload: Record<string, unknown>): Promise<string> {
+  const row = await prisma.gapAuditEvent.create({ data: { kind, actor, subject_type: REPLY_SUBJECT_TYPE, subject_id: messageId, payload: JSON.parse(JSON.stringify(payload)) }, select: { id: true } });
+  return row.id;
 }
 
 /**
@@ -293,6 +323,7 @@ export async function appendLedger(
     | typeof DIRECT_REFUSED
     | typeof COPY_REFUSED
     | typeof COPY_RELEASED
+    | typeof DIRECT_PREVIEWED
     | typeof DRAFT_CLAIMED,
   actor: string,
   decisionId: string,

@@ -178,6 +178,11 @@ function hasOpenDeal(i: ActiveOpportunityInputs): boolean {
   return i.account.opportunity.status === 'ACTIVE';
 }
 
+/** R55: no open deal, but a closed one: a customer (closed won) or parked (closed lost, nothing material since). */
+function closureHold(i: ActiveOpportunityInputs) {
+  return i.account.opportunity.status === 'CLEAR' ? i.account.opportunity.closure ?? null : null;
+}
+
 /** R3c: HubSpot could not say whether the account has an open deal. Never treated as clear. */
 export function opportunityUnknown(i: Pick<ActiveOpportunityInputs, 'account'>): boolean {
   return i.account.opportunity.status === 'UNKNOWN';
@@ -196,7 +201,7 @@ function recentPositiveDisposition(i: ActiveOpportunityInputs): RoutingLastDispo
  *  has gone stale (a meeting booked after the decision was made) still
  *  blocks. Same predicate, not a second opportunity model. */
 export function hasActiveOpportunity(i: ActiveOpportunityInputs): boolean {
-  return hasOpenDeal(i) || i.comms.meetingBooked || recentPositiveDisposition(i) != null;
+  return hasOpenDeal(i) || !!closureHold(i) || i.comms.meetingBooked || recentPositiveDisposition(i) != null;
 }
 
 /**
@@ -313,6 +318,8 @@ export const RULES: RoutingRule[] = [
     lane: 'work_queue',
     reason: (i) => {
       if (hasOpenDeal(i)) return 'active_opportunity:hubspot_open_deal';
+      const closure = closureHold(i);
+      if (closure) return closure.kind === 'customer' ? 'active_opportunity:closed_won_customer' : 'active_opportunity:closed_lost_parked';
       if (i.comms.meetingBooked) return 'active_opportunity:meeting_booked';
       return 'active_opportunity:recent_positive_disposition';
     },
@@ -321,6 +328,8 @@ export const RULES: RoutingRule[] = [
         const n = i.account.opportunity.deals.length;
         return `the account has ${n} open HubSpot deal${n === 1 ? '' : 's'}; work it from the deal, not a cold first touch`;
       }
+      const closure = closureHold(i);
+      if (closure) return closure.kind === 'customer' ? `a customer (a deal closed won): no first-touch campaign; expansion is the seller's explicit call` : `parked after a lost deal with nothing material since; no cold outreach until something changes`;
       if (i.comms.meetingBooked) return 'a meeting is booked';
       const d = recentPositiveDisposition(i)!;
       return `a confirmed ${d.responseClass} disposition ${Math.round(ageDays(i.now, d.at))} days ago (within ${i.freshness.cooldownDays})`;
@@ -334,6 +343,17 @@ export const RULES: RoutingRule[] = [
     lane: 'work_queue',
     reason: (i) => `opportunity_unknown:${i.account.opportunity.status === 'UNKNOWN' ? i.account.opportunity.reason : 'unknown'}`,
     predicate: () => "HubSpot could not confirm whether this account has an open deal; check HubSpot before contacting anyone here",
+  },
+  {
+    // Batch item 7: a parent, subsidiary or sibling in a live deal, conversation or first touch holds a cold motion here,
+    // the hold the page and the click apply (family/family.ts); routing never offers the card the click would refuse.
+    id: 'family_hold',
+    label: 'R3d',
+    when: (i) => !!i.account.familyHold,
+    action: 'nurture',
+    lane: 'work_queue',
+    reason: (i) => (i.account.familyHold!.unknown ? 'family_hold:unknown' : 'family_hold'),
+    predicate: (i) => i.account.familyHold!.detail,
   },
   {
     id: 'bounced_or_invalid',
@@ -362,6 +382,17 @@ export const RULES: RoutingRule[] = [
         : '';
       return `last disposition was ${d.responseClass}${who}; find the right person`;
     },
+  },
+  {
+    // R42b (audit at 31f09c71): R5 holds the person who POINTED elsewhere; this holds the person they NAMED. No cold
+    // action reaches them until the seller chose how to approach them (the referral obligation done or skipped).
+    id: 'named_in_referral',
+    label: 'R5b',
+    when: (i) => !!i.comms.namedInReferral,
+    action: 'research_required',
+    lane: 'work_queue',
+    reason: () => 'named_in_referral',
+    predicate: (i) => i.comms.namedInReferral!.detail,
   },
   {
     id: 'disp_timing',

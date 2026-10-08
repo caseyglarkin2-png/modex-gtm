@@ -15,11 +15,11 @@ import { useCallback, useEffect, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { defaultGapApiClient, type GapApiClient, type LearningReportParams } from '@/lib/gap/ui/gap-api-client';
+import { defaultGapApiClient, type GapApiClient, type LearningReportParams, type LearningReportResponse } from '@/lib/gap/ui/gap-api-client';
+import type { CrmLine, OperationsReport, OpsLine } from '@/lib/gap/health/operations';
 import { type Rate } from '@/lib/gap/learning/metrics';
 import { describeRate, honestRate, RELIABLE_N, type HonestRate } from '@/lib/gap/learning/stats';
 import type { ExecutionBreakdownRow, ExecutionLearning, ExecutionMetrics } from '@/lib/gap/learning/execution';
-import type { LearningReport } from '@/lib/gap/learning/query';
 import type { AgreementReport } from '@/lib/gap/routing/agreement';
 
 /** A table cell for a legacy Rate: the percentage only at n >= RELIABLE_N, otherwise k/n marked early. */
@@ -320,8 +320,66 @@ function RoutingAgreementSection({ client }: { client: GapApiClient }) {
   );
 }
 
+const CRM_KIND_WORDS: Record<string, string> = { note: 'a note', task: 'a task', task_complete: 'a task completion', deal_property: 'the next step' };
+const dayOf = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' });
+
+function OpsLines({ lines, testid }: { lines: readonly OpsLine[]; testid: string }) {
+  return (
+    <ul className="space-y-1 text-sm">
+      {lines.map((l) => (
+        <li key={l.key} data-testid={testid} data-key={l.key}>
+          {l.href ? <a className="underline" href={l.href}>{l.label}</a> : l.label}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function CrmList({ title, lines, testid }: { title: string; lines: readonly CrmLine[]; testid: string }) {
+  if (!lines.length) return null;
+  return (
+    <div className="space-y-1">
+      <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">{title}</p>
+      <ul className="space-y-1 text-sm">
+        {lines.map((c) => (
+          <li key={c.proposalId} data-testid={testid}>
+            {c.accountName}: {CRM_KIND_WORDS[c.kind] ?? 'a change'} on {c.dealName ?? 'a deal with no name in HubSpot'}, {c.owner}, since {dayOf(c.since)}.{' '}
+            <a className="underline" href={c.href}>{c.action}</a>
+            {c.detail ? <span className="block text-xs text-[var(--muted-foreground)]">{c.detail}</span> : null}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+/**
+ * R65: Casey sees decisions. What waits on him (theses to review, HubSpot changes to approve or retry, overdue
+ * obligations), what happened over the week, his own corrections, and research freshness and cost. The operator's
+ * failures (broken handoffs, the dead letter, the queue) are in the health check, not here.
+ */
+function OperationsSection({ ops }: { ops: OperationsReport }) {
+  return (
+    <section aria-labelledby="decisions-heading" className="space-y-3" data-testid="ops-decisions-section">
+      <h2 id="decisions-heading" className="text-lg font-semibold">
+        Your decisions and what happened
+      </h2>
+      <Card>
+        <CardContent className="space-y-4 pt-4">
+          <OpsLines lines={ops.decisions} testid="ops-decision" />
+          <CrmList title="HubSpot changes waiting for your approval" lines={ops.crm.pendingApproval} testid="ops-crm-pending" />
+          <CrmList title="Approved, not written" lines={ops.crm.approvedNotWritten} testid="ops-crm-off" />
+          <CrmList title="Failed or in conflict" lines={ops.crm.failed} testid="ops-crm-failed" />
+          <OpsLines lines={ops.outcomes} testid="ops-outcome" />
+          <OpsLines lines={ops.research} testid="ops-research" />
+        </CardContent>
+      </Card>
+    </section>
+  );
+}
+
 export function LearningDashboard({ client = defaultGapApiClient }: { client?: GapApiClient }) {
-  const [report, setReport] = useState<LearningReport | null>(null);
+  const [report, setReport] = useState<LearningReportResponse | null>(null);
   const [programs, setPrograms] = useState<string[]>([]);
   const [filters, setFilters] = useState<LearningReportParams>({});
   const [loading, setLoading] = useState(true);
@@ -355,6 +413,7 @@ export function LearningDashboard({ client = defaultGapApiClient }: { client?: G
   return (
     <div className="space-y-8">
       <FilterBar programs={programs} value={filters} onChange={setFilters} />
+      {report.operations ? <OperationsSection ops={report.operations} /> : null}
       {report.execution ? (
         <ExecutionSection execution={report.execution} />
       ) : report.executionError ? (
@@ -364,7 +423,7 @@ export function LearningDashboard({ client = defaultGapApiClient }: { client?: G
       ) : null}
       <section aria-labelledby="hypothesis-funnel-heading" className="space-y-3">
         <h2 id="hypothesis-funnel-heading" className="text-lg font-semibold">
-          Hypothesis funnel
+          Thesis funnel
         </h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <RateTile label="Resolution rate" r={f.resolutionRate} help="Resolved / hypotheses with substantive buyer interaction" />

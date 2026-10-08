@@ -4,10 +4,11 @@
  * append-only send ledger), and an account reply still waiting for triage.
  * Read only, except `recordMotionChoice` (one append-only audit row).
  */
-import { DIRECT_CLAIMED, DIRECT_RELEASED, DIRECT_SENT, DRAFTED, DRAFT_CLAIMED, DRAFT_DISCARDED, DRAFT_SENT, DRAFT_SUBJECT_TYPE, MANUAL_SENT } from '../execution/draft-ledger';
+import { DIRECT_CLAIMED, DIRECT_RELEASED, DIRECT_SENT, DRAFTED, DRAFT_CLAIMED, DRAFT_DISCARDED, DRAFT_SENT, DRAFT_SUBJECT_TYPE, MANUAL_SENT, REPLY_SENT, REPLY_SUBJECT_TYPE } from '../execution/draft-ledger';
 import { historyFromRows } from '../execution/person-history';
 import { isHardBounceStatus } from '../../email/bounce';
 import { accountRepliedRecently } from '../replies/account-reply';
+import { mapLimit } from '../work/map-limit';
 import { ACCOUNT_MOTION, MOTION_UNLOCK_BUSINESS_DAYS, type FirstTouch, type MotionChoice } from './account-motion';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -49,7 +50,25 @@ export interface AccountConversation {
 /** The newest buyer response at each account in the window (human-confirmed only). */
 export async function loadAccountConversations(prisma: PrismaLike, accountNames: readonly string[], now: Date): Promise<Map<string, AccountConversation>> {
   const out = new Map<string, AccountConversation>();
-  if (accountNames.length === 0 || !prisma.conversationDisposition?.findMany) return out;
+  if (accountNames.length === 0) return out;
+  // Batch item 8 (finding 3): an answer GAP sent in a person's thread is a conversation too (the reply it answered is
+  // recorded by it), so the account stays held for everyone else, exactly as a recorded answer holds it.
+  const keepNewest = (account: string, c: AccountConversation) => {
+    const have = out.get(account);
+    if (!have || c.at > have.at) out.set(account, c);
+  };
+  if (prisma.gapAuditEvent?.findMany) {
+    const wanted = new Set(accountNames);
+    const sent: Array<{ kind?: string; subject_type?: string; payload: Record<string, unknown> | null; created_at: Date }> = await prisma.gapAuditEvent.findMany({ where: { kind: REPLY_SENT, subject_type: REPLY_SUBJECT_TYPE, created_at: { gte: new Date(now.getTime() - ACCOUNT_CONVERSATION_DAYS * 86_400_000) } }, select: { kind: true, subject_type: true, payload: true, created_at: true }, orderBy: { created_at: 'desc' }, take: 500 });
+    for (const r of sent ?? []) {
+      // Belt and braces over the query: only an answer sent in a person's thread counts.
+      if (r.kind !== REPLY_SENT || r.subject_type !== REPLY_SUBJECT_TYPE) continue;
+      const account = typeof r.payload?.accountName === 'string' ? r.payload.accountName : null;
+      const who = typeof r.payload?.recipient === 'string' ? r.payload.recipient.toLowerCase() : null;
+      if (account && who && wanted.has(account) && !Number.isNaN(new Date(r.created_at).getTime())) keepNewest(account, { who, responseClass: 'answered_in_their_thread', at: new Date(r.created_at).toISOString() });
+    }
+  }
+  if (!prisma.conversationDisposition?.findMany) return out;
   const rows: Array<{ account_name: string; contact_email: string; response_class: string; created_at: Date }> = await prisma.conversationDisposition.findMany({
     where: {
       account_name: { in: [...accountNames] },
@@ -63,7 +82,7 @@ export async function loadAccountConversations(prisma: PrismaLike, accountNames:
   for (const r of rows) {
     // Belt and braces over the query: only a real answer with a real date counts.
     if (!CONVERSATION_RESPONSE_CLASSES.has(r.response_class) || !r.created_at || Number.isNaN(new Date(r.created_at).getTime())) continue;
-    if (!out.has(r.account_name)) out.set(r.account_name, { who: String(r.contact_email).toLowerCase(), responseClass: r.response_class, at: new Date(r.created_at).toISOString() });
+    keepNewest(r.account_name, { who: String(r.contact_email).toLowerCase(), responseClass: r.response_class, at: new Date(r.created_at).toISOString() });
   }
   return out;
 }
@@ -183,7 +202,8 @@ export async function loadAccountFirstTouches(prisma: PrismaLike, accountNames: 
   }
   // Released when the address has since failed.
   const pids = [...new Set(touches.map((t) => t.personaId).filter((x): x is number => x !== null))];
-  const personas: Array<{ id: number; do_not_contact: boolean; email_status: string | null }> = pids.length ? await prisma.persona.findMany({ where: { id: { in: pids } }, select: { id: true, do_not_contact: true, email_status: true } }) : [];
+  const personas: Array<{ id: number; do_not_contact: boolean; email_status: string | null; name?: string | null }> = pids.length ? await prisma.persona.findMany({ where: { id: { in: pids } }, select: { id: true, do_not_contact: true, email_status: true, name: true } }) : [];
+  const nameById = new Map(personas.map((p) => [p.id, p.name ?? null]));
   const failed = new Set(personas.filter((p) => p.do_not_contact || isHardBounceStatus(p.email_status)).map((p) => p.id));
   const recipients = [...new Set(touches.map((t) => t.recipient).filter(Boolean))];
   const unsub: Array<{ email: string }> = recipients.length ? await prisma.unsubscribedEmail.findMany({ where: { email: { in: recipients } }, select: { email: true } }) : [];
@@ -191,7 +211,8 @@ export async function loadAccountFirstTouches(prisma: PrismaLike, accountNames: 
   for (const t of touches) {
     t.released = (t.personaId !== null && failed.has(t.personaId)) || unsubscribed.has(t.recipient);
     const list = out.get(t.account) ?? [];
-    list.push({ personaId: t.personaId, recipient: t.recipient, sentAt: t.sentAt, released: t.released, ...(t.outstanding ? { outstanding: true } : {}), ...(t.decisionId && t.gmailDraftId ? { decisionId: t.decisionId, gmailDraftId: t.gmailDraftId } : {}) });
+    const recipientName = t.personaId !== null ? nameById.get(t.personaId) ?? null : null;
+    list.push({ personaId: t.personaId, recipient: t.recipient, sentAt: t.sentAt, released: t.released, ...(t.outstanding ? { outstanding: true } : {}), ...(t.decisionId && t.gmailDraftId ? { decisionId: t.decisionId, gmailDraftId: t.gmailDraftId } : {}), ...(recipientName ? { recipientName } : {}) });
     out.set(t.account, list);
   }
   return out;
@@ -200,11 +221,16 @@ export async function loadAccountFirstTouches(prisma: PrismaLike, accountNames: 
 /** An account reply nobody has triaged yet, found through any address GAP holds at the account. */
 export async function loadReplyHolds(prisma: PrismaLike, emailsByAccount: ReadonlyMap<string, string>, now: Date): Promise<Map<string, { from: string; receivedAt: string }>> {
   const out = new Map<string, { from: string; receivedAt: string }>();
-  for (const [account, email] of emailsByAccount) {
-    // Final review P1: every company domain at the account, not only this card's.
-    const r = await accountRepliedRecently(prisma, email, now, { accountName: account });
-    if (r) out.set(account, { from: r.from_email, receivedAt: new Date(r.received_at).toISOString() });
-  }
+  // R61: the accounts are checked a few at a time (one after another, Work's read waited one round trip chain per
+  // account); a failed read still fails the whole hold read, as before (the caller fails closed).
+  const entries = [...emailsByAccount];
+  // Final review P1: every company domain at the account, not only this card's.
+  const results = await mapLimit(entries, 5, ([account, email]) => accountRepliedRecently(prisma, email, now, { accountName: account }));
+  results.forEach((res, i) => {
+    if (res.status === 'rejected') throw res.reason;
+    const r = res.value;
+    if (r) out.set(entries[i][0], { from: r.from_email, receivedAt: new Date(r.received_at).toISOString() });
+  });
   return out;
 }
 
@@ -241,4 +267,47 @@ export async function accountMotionRefusal(
     if (input.now.getTime() < unlockAt.getTime()) return { owner, sentAt: t.sentAt, unlockAt: unlockAt.toISOString(), detail: describe(owner, t.sentAt, `on ${unlockAt.toISOString().slice(0, 10)} with no response`) };
   }
   return null;
+}
+
+export interface RecentFirstTouch {
+  accountName: string;
+  personaId: number | null;
+  recipient: string;
+  /** 'sent': a proven send; 'drafted': a GAP draft still outstanding in the mailbox. */
+  state: 'sent' | 'drafted';
+  at: string;
+}
+
+/** Accounts touched by GAP in the window, from the send ledger alone (R14): newest touch per account. */
+export async function loadRecentFirstTouchAccounts(prisma: PrismaLike, now: Date, lookbackMs = FIRST_TOUCH_LOOKBACK_MS): Promise<Map<string, RecentFirstTouch>> {
+  const out = new Map<string, RecentFirstTouch>();
+  if (typeof prisma?.gapAuditEvent?.findMany !== 'function') return out;
+  const rows: Array<{ kind: string; payload: Record<string, unknown> | null; created_at: Date }> = await prisma.gapAuditEvent.findMany({
+    where: { kind: { in: [DIRECT_SENT, MANUAL_SENT, DRAFT_SENT, DRAFTED, DRAFT_DISCARDED] }, subject_type: DRAFT_SUBJECT_TYPE, created_at: { gte: new Date(now.getTime() - lookbackMs) } },
+    select: { kind: true, payload: true, created_at: true },
+    orderBy: { created_at: 'desc' },
+  });
+  const discarded = new Set<string>();
+  const sentDrafts = new Set<string>();
+  for (const r of rows) {
+    const draftId = String(r.payload?.gmailDraftId ?? '');
+    if (r.kind === DRAFT_DISCARDED && draftId) discarded.add(draftId);
+    if (r.kind === DRAFT_SENT && draftId) sentDrafts.add(draftId);
+  }
+  for (const r of rows) {
+    const account = String(r.payload?.accountName ?? '').trim();
+    if (!account || out.has(account)) continue;
+    if (r.kind === DRAFT_DISCARDED) continue;
+    const draftId = String(r.payload?.gmailDraftId ?? '');
+    if (r.kind === DRAFTED && (discarded.has(draftId) || sentDrafts.has(draftId))) continue;
+    const pid = Number(r.payload?.personaId);
+    out.set(account, {
+      accountName: account,
+      personaId: Number.isInteger(pid) ? pid : null,
+      recipient: String(r.payload?.recipient ?? ''),
+      state: r.kind === DRAFTED ? 'drafted' : 'sent',
+      at: String(r.payload?.sentAt ?? r.created_at.toISOString()),
+    });
+  }
+  return out;
 }

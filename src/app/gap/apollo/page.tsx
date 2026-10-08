@@ -5,6 +5,7 @@
  */
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
+import { loginHref } from '@/lib/auth-return';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { GapSubnav } from '@/components/gap/gap-subnav';
@@ -19,7 +20,7 @@ export const metadata = { title: 'Apollo review | GAP' };
 export default async function ApolloReviewPage({ searchParams }: { searchParams?: Promise<{ a?: string | string[] }> }) {
   if (assertGapEnabled('GAP_ROUTING_ENABLED')) notFound();
   const session = await auth();
-  if (!session?.user?.email) redirect('/login');
+  if (!session?.user?.email) redirect(loginHref('/gap/apollo/'));
   const q = (await searchParams) ?? {};
   const chosen = (Array.isArray(q.a) ? q.a : q.a ? [q.a] : []).slice(0, MAX_REVIEW_ACCOUNTS);
   const watched = (await loadWatchProfilesCached(prisma).catch(() => [])).map((p) => ({ name: p.accountName, slug: accountSlug(p.accountName) })).sort((x, y) => x.name.localeCompare(y.name));

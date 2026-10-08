@@ -18,10 +18,12 @@ import { factUrl } from '../research/claim-rules';
 import { outreachFactRefusal } from '../research/evidence-gate';
 import { loadAccountFirstTouches } from '../motion/load';
 import { accountRepliedRecently } from '../replies/account-reply';
+import { currentnessLine, factCurrentness, isCurrentFact } from '../research/currentness';
 import { FREEMAIL_DOMAINS, OWN_DOMAINS } from '../replies/domains';
 import { resolveAccountOpportunity, type OpportunityTruth } from '../opportunity/active-opportunity';
 import { accountHref } from '../account-intel/href';
 import { BEST_PROOF_MEASURED } from '../story/anchor';
+import { optOutReplyOnFile } from '../replies/opt-out';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -40,6 +42,39 @@ export interface BriefHistory {
   accountReply: { from: string; receivedAt: string } | null | 'unknown';
   lastResponse: { responseClass: string; at: string } | null;
   opportunity: { status: 'CLEAR' | 'ACTIVE' | 'UNKNOWN'; detail: string; checkedAt: string };
+  /** R63-B S1: this person opted out (an opt-out reply on file, recorded or not, or a recorded do not contact). */
+  optOut?: BriefOptOut | null;
+}
+
+/** R63-B S1: an opt-out on file for the person the pack is for (replies/opt-out.ts, the send gate's own read). */
+export interface BriefOptOut {
+  email: string;
+  name: string | null;
+  /** Their words, when the opt-out is a reply on file. */
+  said: string | null;
+  at: string | null;
+  /** Recorded as do not contact (the person's flag or a confirmed do-not-contact answer). */
+  recorded: boolean;
+}
+
+const dayYear = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' });
+
+/**
+ * R63-B S1: the opt-out in words, never temporary ("Do not contact yet" read as if it would pass): what they said and
+ * when, that nothing goes to them, and, while it is not recorded, to record it from their reply.
+ */
+export function optOutLine(o: BriefOptOut): string {
+  const who = o.name?.trim() || o.email;
+  if (o.recorded) return `${who} asked not to be contacted${o.at ? ` (${dayYear(o.at)})` : ''}; it is recorded as do not contact. Nothing goes to them from here.`;
+  return `${who} replied "${o.said ?? 'stop'}"${o.at ? ` on ${dayYear(o.at)}` : ''}: an opt-out. Nothing goes to them from here; record it as do not contact from their reply.`;
+}
+
+/** R63-B S1: what the pack's EMAIL slot shows. An opt-out on file shows no draft at all (no subject, no body). */
+export type EmailSlot = 'opted_out' | 'thesis_hold' | 'email' | 'missing';
+export function emailSlot(x: { optedOut: boolean; rendered: boolean; thesisHold: boolean }): EmailSlot {
+  if (x.optedOut) return 'opted_out';
+  if (!x.rendered) return 'missing';
+  return x.thesisHold ? 'thesis_hold' : 'email';
 }
 
 export interface SixLineBrief {
@@ -69,13 +104,26 @@ export interface BriefAccountIntel {
   firstDiscoveryQuestion: string | null;
 }
 
+/**
+ * R63-A S10: the account row says the motion once. A cautious motion (no good motion, in a deal, warm intro only) is
+ * its one amber line (its label and why); a first touch in motion says that alone, never "Do not contact yet: In
+ * motion: ..." under "No good motion yet: In motion: ...". Otherwise the plain motion line.
+ */
+export function accountLines(a: BriefAccountIntel): { motion: string; caution: string | null } {
+  const m = a.motion;
+  if (m.type !== 'NO_GOOD_MOTION' && m.type !== 'IN_DEAL' && m.type !== 'INTRO_ONLY') return { motion: a.motionLine, caution: null };
+  if (m.type !== 'NO_GOOD_MOTION') return { motion: '', caution: a.motionLine };
+  const held = m.why.replace(/^Do not contact yet: /, '');
+  return { motion: '', caution: /^In motion: /.test(held) ? held : m.why };
+}
+
 const list = (v: unknown): string[] => (Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string' && x.trim().length > 0) : []);
 const day = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' });
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- the getHypothesis row (house glue)
 export function knowOf(hypothesis: any, now: Date = new Date(), contradicted: ReadonlyMap<string, string> = new Map()): SixLineBrief['know'] {
   const links: Array<{ role?: string | null; signal?: Record<string, unknown> | null }> = Array.isArray(hypothesis?.signals) ? hypothesis.signals : [];
-  const expired = (sig: Record<string, unknown>) => !!sig.freshness_expires_at && new Date(String(sig.freshness_expires_at)).getTime() <= now.getTime();
+  const expired = (sig: Record<string, unknown>) => !isCurrentFact(sig, now);
   const verifiedAny = links.filter((l) => l.signal && outreachFactRefusal(l.signal as never, String(hypothesis.account_name ?? '')) === null);
   // Review E P1: an expired fact is not known (every send gate drops it too).
   const fresh = verifiedAny.filter((l) => !expired(l.signal!));
@@ -86,7 +134,7 @@ export function knowOf(hypothesis: any, now: Date = new Date(), contradicted: Re
     const clash = fresh.find((l) => contradicted.has(String(l.signal!.id ?? '')));
     if (clash?.signal) return { fact: null, reason: `Verified facts about ${contradicted.get(String(clash.signal.id))} contradict each other: neither can be quoted. Ignore the side you do not believe in Research.` };
     const stale = verifiedAny.find((l) => l.role === 'primary') ?? verifiedAny[0];
-    if (stale?.signal) return { fact: null, reason: `The verified fact expired on ${new Date(String(stale.signal.freshness_expires_at)).toISOString().slice(0, 10)}: it cannot be quoted to a buyer. Find fresh evidence.` };
+    if (stale?.signal) return { fact: null, reason: `${currentnessLine(factCurrentness(stale.signal, now))} It cannot be quoted to a buyer. Find fresh evidence.` };
     return { fact: null, reason: links.length ? 'No verified fact: what is linked is a keyword hit or unverified context.' : 'No fact is linked to this thesis.' };
   }
   const s = primary.signal;
@@ -98,6 +146,13 @@ export function knowOf(hypothesis: any, now: Date = new Date(), contradicted: Re
   };
 }
 
+/** R63-B S15: HubSpot's answer in words ("HubSpot opportunity CLEAR" was the reader's code on a seller screen). */
+export function opportunityHistoryLine(o: BriefHistory['opportunity']): string {
+  if (o.status === 'ACTIVE') return `An open HubSpot deal${o.detail ? `: ${o.detail}` : ''}, checked moments ago`;
+  if (o.status === 'UNKNOWN') return `HubSpot could not be checked${o.detail ? `: ${o.detail}` : ''}`;
+  return 'No open HubSpot deal, checked moments ago';
+}
+
 export function historyLines(firstName: string, accountName: string, h: BriefHistory): { lines: string[]; state: SixLineBrief['historyState'] } {
   const lines: string[] = [];
   lines.push(h.personTouches.count === 0 ? `No GAP touches to ${firstName} yet` : `${h.personTouches.count} GAP touch${h.personTouches.count === 1 ? '' : 'es'} to ${firstName}${h.personTouches.lastAt ? `, last ${day(h.personTouches.lastAt)}` : ''}`);
@@ -107,17 +162,23 @@ export function historyLines(firstName: string, accountName: string, h: BriefHis
       ? `No one else at ${accountName} contacted in 30 days`
       : others.map((o) => (o.outstanding ? `a first-touch draft to ${o.recipient} is outstanding` : `${o.recipient} got a first touch ${day(o.sentAt)}`)).join('; '),
   );
+  // R63-B S1: the person's opt-out is said once, in words, in place of their reply's "not triaged yet".
+  const o = h.optOut ?? null;
+  const optOutReply = !!o && !!h.accountReply && h.accountReply !== 'unknown' && h.accountReply.from.toLowerCase() === o.email.toLowerCase();
   lines.push(
-    h.accountReply === 'unknown'
-      ? `Account reply status unknown (no company email at ${accountName} to check)`
-      : h.accountReply
-        ? `${h.accountReply.from} replied ${day(h.accountReply.receivedAt)}, not triaged yet`
-        : 'No account reply waiting',
+    optOutReply && o
+      ? optOutLine(o)
+      : h.accountReply === 'unknown'
+        ? `Account reply status unknown (no company email at ${accountName} to check)`
+        : h.accountReply
+          ? `${h.accountReply.from} replied ${day(h.accountReply.receivedAt)}, not triaged yet`
+          : 'No account reply waiting',
   );
-  if (h.lastResponse) lines.push(`Last buyer response: ${h.lastResponse.responseClass.replace(/_/g, ' ')} (${day(h.lastResponse.at)})`);
-  lines.push(`HubSpot opportunity ${h.opportunity.status}${h.opportunity.detail ? `: ${h.opportunity.detail}` : ''}, checked moments ago`);
+  if (o && !optOutReply) lines.push(optOutLine(o));
+  if (h.lastResponse && !(o && h.lastResponse.responseClass === 'do_not_contact')) lines.push(`Last buyer response: ${h.lastResponse.responseClass.replace(/_/g, ' ')} (${day(h.lastResponse.at)})`);
+  lines.push(opportunityHistoryLine(h.opportunity));
   const state: SixLineBrief['historyState'] =
-    h.opportunity.status !== 'CLEAR' || (h.accountReply && h.accountReply !== 'unknown') ? 'blocked' : others.length || h.accountReply === 'unknown' ? 'caution' : 'clear';
+    o || h.opportunity.status !== 'CLEAR' || (h.accountReply && h.accountReply !== 'unknown') ? 'blocked' : others.length || h.accountReply === 'unknown' ? 'caution' : 'clear';
   return { lines, state };
 }
 
@@ -157,8 +218,9 @@ export function buildBrief(input: {
     context: (input.context ?? []).filter((l) => typeof l === 'string' && l.trim()),
     account: input.account
       ? {
-          motion: input.account.motionLine,
-          caution: input.account.motion.type === 'NO_GOOD_MOTION' || input.account.motion.type === 'IN_DEAL' || input.account.motion.type === 'INTRO_ONLY' ? input.account.motion.why : null,
+          // R63-A S10: the motion once ("No good motion yet: In motion: ..." and "Do not contact yet: In motion: ..."
+          // were one fact twice): a cautious motion is its one amber line, and a first touch in motion says only that.
+          ...accountLines(input.account),
           href: accountHref(input.account.accountName),
         }
       : null,
@@ -175,7 +237,7 @@ function opportunityLine(t: OpportunityTruth): BriefHistory['opportunity'] {
 
 export async function loadBriefHistory(
   prisma: PrismaLike,
-  input: { accountName: string; personaId: number | null; email: string | null; sent: Array<{ sentAt: string }>; now: Date },
+  input: { accountName: string; personaId: number | null; email: string | null; sent: Array<{ sentAt: string }>; now: Date; /** R63-B S1 */ name?: string | null; doNotContact?: boolean },
   deps: { opportunity?: (accountName: string, email: string | null) => Promise<OpportunityTruth> } = {},
 ): Promise<BriefHistory | null> {
   try {
@@ -191,14 +253,21 @@ export async function loadBriefHistory(
       : ((await prisma.persona.findMany({ where: { account_name: input.accountName, email: { not: null } }, select: { email: true }, take: 50 })) as Array<{ email: string | null }>)
           .map((p) => String(p.email ?? '').toLowerCase())
           .find(isCompany) ?? null;
-    const [touches, reply, last, opp] = await Promise.all([
+    const [touches, reply, last, opp, optOutReply] = await Promise.all([
       loadAccountFirstTouches(prisma, [input.accountName], input.now),
       replyAddress ? accountRepliedRecently(prisma, replyAddress, input.now, { accountName: input.accountName }) : Promise.resolve('unknown' as const),
       email
         ? prisma.conversationDisposition.findFirst({ where: { contact_email: email, human_confirmed: true }, orderBy: { created_at: 'desc' }, select: { response_class: true, created_at: true } })
         : Promise.resolve(null),
       (deps.opportunity ?? ((a: string, e: string | null) => resolveAccountOpportunity(prisma, a, { email: e }, { timeoutMs: 8_000 })))(input.accountName, email || null),
+      // R63-B S1: the person's opt-out reply on file, recorded or not (the send gate's own read).
+      email ? optOutReplyOnFile(prisma, email).catch(() => null) : Promise.resolve(null),
     ]);
+    const recorded = !!input.doNotContact || last?.response_class === 'do_not_contact';
+    const optOut: BriefOptOut | null =
+      optOutReply || recorded
+        ? { email, name: input.name?.trim() || optOutReply?.fromName || null, said: optOutReply?.said ?? null, at: optOutReply?.receivedAt ?? (last?.response_class === 'do_not_contact' ? new Date(last.created_at).toISOString() : null), recorded }
+        : null;
     const others = (touches.get(input.accountName) ?? []).filter((t) => !t.released && t.personaId !== input.personaId && t.recipient !== email);
     const lastAt = input.sent.length ? input.sent[input.sent.length - 1].sentAt : null;
     return {
@@ -207,6 +276,7 @@ export async function loadBriefHistory(
       accountReply: reply === 'unknown' ? 'unknown' : reply ? { from: reply.from_email, receivedAt: new Date(reply.received_at).toISOString() } : null,
       lastResponse: last ? { responseClass: String(last.response_class), at: new Date(last.created_at).toISOString() } : null,
       opportunity: opportunityLine(opp),
+      optOut,
     };
   } catch {
     return null;

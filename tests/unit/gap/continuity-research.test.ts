@@ -65,15 +65,17 @@ describe('G: June primary + August corroboration, through research', () => {
     const c = cont[0];
     expect(c).toMatchObject({ evidence_text: PRIMARY, evidence_url: PEPSI_URL, source_type: 'public_primary', account_name: 'PepsiCo' });
     expect(c.observed_at.toISOString().slice(0, 10)).toBe('2026-06-08'); // the ORIGINAL event date is kept
-    expect(c.freshness_expires_at.getTime()).toBeGreaterThan(new Date('2026-12-01').getTime()); // currentness from Aug 25
+    // Item 4: the June sentence is a partnership claim (the technology window, 90 days): currentness runs from Aug 25.
+    expect(c.freshness_expires_at.toISOString().slice(0, 10)).toBe('2026-11-23');
     expect(c.metadata).toMatchObject({ verified: 'excerpt_found_at_source', continuity: { kind: 'ongoing_state', primary: { url: PEPSI_URL }, currentness: { url: FW_AUG, excerpt: AUG } } });
-    // the original June row is untouched: its own clock still ends October 6
+    // the original June row is untouched: its own clock still ends September 6 (90 days from June 8)
     const orig = t.signals.find((s) => s.evidence_url === PEPSI_URL && !s.source_id.startsWith('continuity:'));
-    expect(orig.freshness_expires_at.toISOString().slice(0, 10)).toBe('2026-10-06');
+    expect(orig.freshness_expires_at.toISOString().slice(0, 10)).toBe('2026-09-06');
     expect(r.continuity?.corroborated).toHaveLength(1);
     expect(t.audit.map((a) => a.kind)).toContain('research.continuity_established');
-    // it passes the unchanged outreach gate; no corroboration search was needed
-    expect(outreachFactRefusal(c, 'PepsiCo')).toBeNull();
+    // item 4: it opens a FIT-LED thesis (an ongoing program), never an event-led one; no corroboration search was needed
+    expect(outreachFactRefusal(c, 'PepsiCo', { approach: 'fit_led' })).toBeNull();
+    expect(outreachFactRefusal(c, 'PepsiCo')).toBe('not_a_physical_network_change');
     expect(web).toHaveBeenCalledTimes(1); // the ordinary web provider only
     expect(writes.every((k) => /^(researchRun|evidenceRecord|prospectingSignal|gapAuditEvent)\./.test(k))).toBe(true);
   });
@@ -96,11 +98,11 @@ describe('only VERIFIED facts take part', () => {
     const aug = t.signals.find((s) => s.evidence_text === AUG);
     aug.metadata = { ...aug.metadata, verified: 'failed_recheck' };
     const minted = t.signals.find((s) => s.source_id.startsWith('continuity:'));
-    expect(outreachFactRefusal(minted, 'PepsiCo')).toBeNull();
+    expect(outreachFactRefusal(minted, 'PepsiCo', { approach: 'fit_led' })).toBeNull();
     await runEvidenceResearch(prisma, { ...input(new Date('2026-09-29T00:00:00Z')), seekCurrentness: false }, { ...deps, extra: async () => ({ candidates: [], note: 'none' }) });
     // the existing continuation is withdrawn (refused by the gate), and no new one is minted
     expect(minted.metadata.verified).toBe('source_failed_recheck');
-    expect(outreachFactRefusal(minted, 'PepsiCo')).toBe('not_verified');
+    expect(outreachFactRefusal(minted, 'PepsiCo', { approach: 'fit_led' })).toBe('not_verified');
     expect(t.signals.filter((s) => s.source_id.startsWith('continuity:'))).toHaveLength(1);
   });
 });
@@ -148,7 +150,7 @@ describe('C: a newer source says the program ended', () => {
     });
     const orig = t.signals.find((s) => s.evidence_text === PRIMARY && !s.source_id.startsWith('continuity:'));
     expect(orig.metadata.continuity).toMatchObject({ kind: 'ended', endedBy: { url: END_URL } });
-    expect(outreachFactRefusal(orig, 'PepsiCo')).toBe('superseded');
+    expect(outreachFactRefusal(orig, 'PepsiCo', { approach: 'fit_led' })).toBe('superseded');
     expect(t.signals.filter((s) => s.source_id.startsWith('continuity:'))).toHaveLength(0);
     delete PAGES[END_URL];
   });
@@ -181,6 +183,9 @@ describe('evidence integrity review findings (2026-09-28)', () => {
     const { classifyFact } = await import('@/lib/gap/research/facts');
     expect(classifyFact('This agreement builds on PepsiCo’s experience running one of North America’s largest private fleets and brings Gatik’s autonomous freight capabilities into real, day-to-day supply chain operations.')).toEqual({ type: 'automation_program', change: 'automation' });
     expect(classifyFact(AUG)).toEqual({ type: 'site_expansion', change: 'investment' });
+    // The production Tulsa sentence is a CLOSURE (its change). Its signal type stays site_expansion: the type set is a
+    // database CHECK with no closure value (prisma/sql/2026-09-23-gap-os.sql:51), recorded as debt in the ledger.
+    expect(classifyFact('PepsiCo will close its warehouse operations at its Tulsa, Oklahoma, production facility and shift duties to a new site in the area.')).toEqual({ type: 'site_expansion', change: 'closure' });
     // a site change in the same sentence still wins
     expect(classifyFact('Acme will open a new distribution center in Reno operating driverless trucks.').change).toBe('opening');
   });

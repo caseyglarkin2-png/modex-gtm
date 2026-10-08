@@ -175,11 +175,54 @@ describe('listReplies', () => {
     expect(prisma.inboundMessage.findMany.mock.calls.length).toBeGreaterThan(1);
   });
 
+  it('R60: one account at a time: only that account\'s known addresses are read, so the account page records its own replies', async () => {
+    const page = await listReplies(prisma, { state: 'all', accountName: 'Acme Logistics' });
+    expect(page.items.map((i) => i.id)).toEqual(['m5', 'm2']);
+    expect(page.items.every((i) => i.accountName === 'Acme Logistics')).toBe(true);
+    const asked: string[] = prisma.inboundMessage.findMany.mock.calls[0][0].where.from_email.in;
+    expect(asked).toEqual(['jordan@acme.example']);
+    expect((await listReplies(prisma, { state: 'all', accountName: 'Nobody Here Inc' })).items).toEqual([]);
+  });
+
   it('no known addresses means an empty page and no inbox query', async () => {
     prisma.sequenceEnrollment.findMany.mockResolvedValueOnce([]);
-    prisma.persona.findMany.mockResolvedValueOnce([]);
+    // The thesis personas, then (batch item 8) the HubSpot-contact personas: both empty.
+    prisma.persona.findMany.mockResolvedValueOnce([]).mockResolvedValueOnce([]);
     expect(await listReplies(prisma)).toEqual({ items: [], nextCursor: null });
     expect(prisma.inboundMessage.findMany).not.toHaveBeenCalled();
+  });
+});
+
+describe('batch item 8 (R62 matrix): an open deal’s own contact is a known address', () => {
+  it('a HubSpot contact GAP holds with no thesis and no enrollment is listed with its account and contact id; a stranger stays out', async () => {
+    const BEN = { id: 31, email: 'Ben@dealco.example', account_name: 'Deal Co', hubspot_contact_id: 'hs-31' };
+    const p = makePrisma();
+    p.persona.findMany = asyncSpy(async (q: any = {}) => (q?.where?.prospecting_hypotheses?.none ? [BEN] : [...PERSONAS].sort((a, b) => a.id - b.id)));
+    const known = await loadKnownAddresses(p);
+    expect(known.get('ben@dealco.example')).toEqual({ email: 'ben@dealco.example', personaId: 31, accountName: 'Deal Co', hubspotContactId: 'hs-31', enrollmentId: null, enrollmentStatus: null, hypothesisId: null, hypothesisTitle: null });
+    expect(p.persona.findMany).toHaveBeenCalledWith(expect.objectContaining({ where: { email: { not: null }, hubspot_contact_id: { not: null }, prospecting_hypotheses: { none: {} } } }));
+    MESSAGES.push({ id: 'm9', source: 'gmail', from_email: 'ben@dealco.example', subject: 'Re: the walk', body_text: 'Can you bring the detention numbers?', body_html: null, snippet: null, received_at: T(9) });
+    try {
+      const page = await listReplies(p, { state: 'undispositioned' });
+      expect(page.items.find((r) => r.contactEmail === 'ben@dealco.example')).toMatchObject({ accountName: 'Deal Co', personaId: 31, hubspotContactId: 'hs-31', hypothesisId: '' });
+      expect(page.items.some((r) => r.contactEmail === 'stranger@nowhere.example')).toBe(false);
+    } finally {
+      MESSAGES.pop();
+    }
+  });
+});
+
+describe('batch item 8 (finding 3): a sent answer is the record of the reply', () => {
+  it('a message GAP answered in its thread is not listed for triage; "all" lists it with when it was answered', async () => {
+    const p: any = makePrisma();
+    p.gapAuditEvent = { findMany: asyncSpy(async (q: any) => (q.where.subject_id.in.includes('m5') ? [{ kind: 'execution.reply_sent', subject_type: 'inbound_message', subject_id: 'm5', created_at: T(8) }] : [])) };
+    const open = await listReplies(p, { state: 'undispositioned' });
+    expect(open.items.map((r) => r.id)).not.toContain('m5');
+    expect(open.items.map((r) => r.id)).toContain('m3');
+    const all = await listReplies(p, { state: 'all' });
+    expect(all.items.find((r) => r.id === 'm5')).toMatchObject({ answeredAt: T(8).toISOString() });
+    expect(all.items.find((r) => r.id === 'm3')?.answeredAt).toBeUndefined();
+    expect(p.gapAuditEvent.findMany).toHaveBeenCalledWith(expect.objectContaining({ where: expect.objectContaining({ kind: 'execution.reply_sent', subject_type: 'inbound_message' }) }));
   });
 });
 

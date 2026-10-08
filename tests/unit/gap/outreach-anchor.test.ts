@@ -51,16 +51,24 @@ function anchorFor(i: AccountInputs, personaId: number | null, anchorChoice: str
   const story = projectStory({ accountName: 'PepsiCo', now: NOW, state, brief, inputs: i, whyNow: v.whyNow, know: v.know, touches: [], clawdRead: 'ok', vaultNote: null, excluded: [] });
   const p = personaId ? i.personas.find((x) => x.id === personaId)! : null;
   const sendable = new Set(i.hypotheses.filter((h) => h.status !== 'draft' && !(i as AccountInputs & { unsendable?: string[] }).unsendable?.includes(h.id)).map((h) => h.id));
-  return { anchor: projectAnchor({ accountName: 'PepsiCo', person: p ? { personaId: p.id, name: p.name, title: p.title } : null, brief, inputs: i, story, anchorChoice, privateLine: v.private, sendable, now: NOW }), story, brief };
+  return { anchor: projectAnchor({ accountName: 'PepsiCo', person: p ? { personaId: p.id, name: p.name, title: p.title } : null, people: i.personas.map((x) => ({ personaId: x.id, name: x.name, title: x.title })), brief, inputs: i, story, anchorChoice, privateLine: v.private, sendable, now: NOW }), story, brief };
 }
 
 describe('the seller re-check batch: one fact is one item', () => {
   it('the supporting fact prefers a fact no other usable thesis is grounded on; when none exists, the alternative says it is the same fact', () => {
-    // Karen: Denver is the anchor; Gatik grounds the only alternative; Maryland is sensitive. The supporting fact can
-    // only be Gatik, and the alternative is flagged as the same fact (never three items on one page).
+    // Karen: Denver is the anchor; Gatik grounds the only alternative; Maryland is sensitive. Item 4: the Gatik agreement
+    // is a partnership claim, never a physical-network fact, so it cannot be the supporting fact: there is none.
     const { anchor } = anchorFor(inputs(), 1);
-    expect(anchor.supporting?.text).toBe(factA.quote);
-    expect(anchor.alternatives.map((t) => [t.hypothesisId, t.sameAsSupporting === true])).toEqual([['h-gatik', true]]);
+    expect(anchor.supporting).toBeNull();
+    // When the only physical candidate grounds the alternative, it is the supporting fact and the alternative is flagged
+    // as the same fact (never three items on one page).
+    const factE = { ...factB, id: 'f-charlotte', quote: 'PepsiCo is expanding its Charlotte, North Carolina distribution center with 20 new dock doors.', url: 'https://news.example/charlotte' };
+    const same = anchorFor(inputs({ facts: [factB, factC, factE], hypotheses: [{ ...hypA, id: 'h-charlotte', primarySignalId: 'f-charlotte', observation: cited(factE.quote, 'f-charlotte') }, hypB, hypDraft] }), 1).anchor;
+    // Charlotte lands on Karen's remit and opens; Denver is then the only other physical candidate, it grounds the
+    // alternative, so it supports and the alternative is flagged as the same fact.
+    expect(same.primary?.hypothesisId).toBe('h-charlotte');
+    expect(same.supporting?.text).toBe(factB.quote);
+    expect(same.alternatives.map((t) => [t.hypothesisId, t.sameAsSupporting === true])).toEqual([['h-denver', true]]);
     // With a checked fact of its own, the supporting fact is that one and the alternative is not flagged.
     const factD = { ...factB, id: 'f-ohio', quote: 'PepsiCo is opening a new distribution center in Columbus, Ohio in 2027.', url: 'https://news.example/ohio' };
     const withD = anchorFor(inputs({ facts: [factA, factB, factC, factD] }), 1);
@@ -68,13 +76,16 @@ describe('the seller re-check batch: one fact is one item', () => {
     expect(withD.anchor.alternatives[0].sameAsSupporting).toBeUndefined();
   });
   it('the story beside the anchor tells the supporting fact once too (a pointer, never the sentence again)', () => {
-    const { anchor, story } = anchorFor(inputs(), 1);
+    const factD = { ...factB, id: 'f-charlotte', quote: 'PepsiCo is expanding its Charlotte, North Carolina distribution center with 20 new dock doors.', url: 'https://news.example/charlotte' };
+    const { anchor, story } = anchorFor(inputs({ facts: [factA, factB, factC, factD] }), 1);
     const beside = storyBesideAnchor(story, anchor);
     const all = beside.rows.flatMap((r) => r.sentences.map((s) => s.text));
-    expect(all.filter((t) => t === factA.quote)).toHaveLength(0);
+    expect(all.filter((t) => t === factD.quote)).toHaveLength(0);
     expect(all.filter((t) => t === factB.quote)).toHaveLength(0);
     expect(all).toContain('The opening story, above.');
-    expect(all).toContain('The supporting fact, above.');
+    // Item 4: the supporting fact is now a physical change listed under STORIES (Gatik, a partnership, cannot support);
+    // it is dropped there, never told twice (a pointer is placed only under WHAT IS CHANGING).
+    expect(all.some((t) => t.includes('Charlotte'))).toBe(false);
     // Nothing is told twice.
     expect(new Set(all).size).toBe(all.length);
   });
@@ -148,7 +159,8 @@ describe('the outreach anchor (Option A)', () => {
     expect(fits.whyTheyCare?.text).toMatch(/Karen Darling \(Senior Director - PBNA Transportation\) fits it/);
   });
   it('nothing private, unverified, modeled or imagery-sourced can be the anchor or the supporting fact; each is named under DO NOT USE', () => {
-    const { anchor, story } = anchorFor(inputs(), 1);
+    const factD = { ...factB, id: 'f-charlotte', quote: 'PepsiCo is expanding its Charlotte, North Carolina distribution center with 20 new dock doors.', url: 'https://news.example/charlotte' };
+    const { anchor, story } = anchorFor(inputs({ facts: [factA, factB, factC, factD] }), 1);
     const texts = [anchor.primary?.observation ?? '', anchor.supporting?.text ?? ''].join(' ');
     expect(texts).not.toContain(PRIVATE_SENTINEL);
     expect(texts).not.toMatch(/Quaker Foods unit/);
@@ -179,6 +191,66 @@ describe('the outreach anchor (Option A)', () => {
     expect(anchor.draftable.some((d) => d.factId === 'f-gatik')).toBe(false);
     // Not for outreach (the WARN notice is checked but not citable): never draftable.
     expect(anchor.draftable.some((d) => d.factId === 'f-plant')).toBe(false);
+  });
+  it('an open draft grounded on a checked fact is a PENDING proposal (status, family known or not, the person); its fact is not offered as a draft again (R11/R12)', () => {
+    const { anchor } = anchorFor(inputs({ hypotheses: [hypA, hypB, { ...hypDraft, problemFamily: 'unmapped', personaId: 1 }] }), 1);
+    expect(anchor.pending).toEqual([
+      expect.objectContaining({ hypothesisId: 'h-draft', status: 'draft', factId: 'f-plant', story: factC.quote, family: 'unmapped', familyKnown: false, personaId: 1, personName: 'Karen Darling', gate: 'not_judged', observation: expect.stringMatching(/^PepsiCo is ceasing manufacturing/) }),
+    ]);
+    expect(anchor.pending[0].observation).not.toMatch(/\[S:/);
+    expect(anchor.pending[0].observationRaw).toMatch(/\[S:f-plant\]/);
+    expect(anchor.draftable.map((d) => d.factId)).not.toContain('f-plant');
+    // A proposal under review with its family set reads as such; the gate is read from the loader's sendable set.
+    const under = anchorFor(inputs({ hypotheses: [hypA, hypB, { ...hypDraft, status: 'review_required', problemFamily: 'hidden_capacity', personaId: 2 }] }), 1).anchor;
+    expect(under.pending[0]).toMatchObject({ status: 'review_required', family: 'hidden_capacity', familyKnown: true, personName: 'Shawn Pierce', gate: 'sendable' });
+    // An approved thesis is never pending; an account with no open draft has none.
+    expect(anchorFor(inputs({ hypotheses: [hypA, hypB] }), 1).anchor.pending).toEqual([]);
+  });
+  it('item 2a: a story past its currentness is never draftable; it is listed TOO OLD with the reason; a proposal on it stays listed, says why and is refused; a current one says until when', () => {
+    const tulsa = { ...factB, id: 'f-tulsa', quote: 'PepsiCo will close its warehouse operations at its Tulsa, Oklahoma, production facility and shift duties to a new site in the area.', url: 'https://news.example/tulsa', publishedAt: '2026-07-23T00:00:00Z', expiresAt: '2026-09-06T00:00:00Z' };
+    const denver = { ...factB, expiresAt: '2026-11-20T00:00:00Z' };
+    const { anchor } = anchorFor(inputs({ facts: [factA, denver, factC, tulsa], hypotheses: [hypA] }), 1);
+    expect(anchor.draftable.map((d) => d.factId)).not.toContain('f-tulsa');
+    expect(anchor.draftable.find((d) => d.factId === 'f-denver')?.currentLine).toBe('Current until Nov 19, 2026.');
+    expect(anchor.tooOld).toEqual([expect.objectContaining({ factId: 'f-tulsa', story: tulsa.quote, sourceUrl: tulsa.url, line: 'This story is too old for a first touch: it was current until Sep 5, 2026.' })]);
+    // The stranded proposal on the old fact never vanishes: it is listed, says why, and its gate reads refused.
+    const withDraft = anchorFor(inputs({ facts: [factA, denver, factC, tulsa], hypotheses: [hypA, { ...hypDraft, id: 'h-tulsa', status: 'review_required', observation: cited(tulsa.quote, 'f-tulsa'), problemFamily: 'hidden_capacity', personaId: 1 }] }), 1).anchor;
+    expect(withDraft.pending).toEqual([expect.objectContaining({ hypothesisId: 'h-tulsa', factId: 'f-tulsa', gate: 'refused', stale: 'This story is too old for a first touch: it was current until Sep 5, 2026.' })]);
+    expect(withDraft.tooOld).toEqual([]);
+    // A current proposal carries no stale line.
+    expect(anchorFor(inputs({ hypotheses: [hypA, hypB, { ...hypDraft, status: 'review_required', problemFamily: 'hidden_capacity', personaId: 2 }] }), 1).anchor.pending[0].stale).toBeNull();
+  });
+  it('item 2: a story the seller set aside (a rejected thesis cites it, loaded or listed by the loader) is never offered again and never listed as too old', () => {
+    const denverOpen = anchorFor(inputs({ hypotheses: [hypA] }), 1).anchor;
+    expect(denverOpen.draftable.map((d) => d.factId)).toContain('f-denver');
+    // Set aside: the rejected thesis is among the loaded theses.
+    const rejected = anchorFor(inputs({ hypotheses: [hypA, { ...hypB, id: 'h-denver-x', status: 'rejected' }] }), 1).anchor;
+    expect(rejected.draftable.map((d) => d.factId)).not.toContain('f-denver');
+    expect(rejected.tooOld.map((t) => t.factId)).not.toContain('f-denver');
+    // Set aside by an older thesis the ten newest do not include: the loader's list carries it.
+    const listed = anchorFor(inputs({ hypotheses: [hypA], setAsideFactIds: ['f-denver'] }), 1).anchor;
+    expect(listed.draftable.map((d) => d.factId)).not.toContain('f-denver');
+  });
+  it('item 3: an incomplete proposal carries a suggested family (preselected, with why) and the title of its OWN person, never that of the anchor person', () => {
+    const { anchor } = anchorFor(inputs({ hypotheses: [hypA, hypB, { ...hypDraft, problemFamily: 'unmapped', personaId: 2 }] }), 1);
+    expect(anchor.pending[0]).toMatchObject({ familyKnown: false, suggestedFamily: 'hidden_capacity', suggestedBasis: expect.any(String), personaId: 2, personName: 'Shawn Pierce', personTitle: 'Sr Director Transportation Strategy' });
+    const known = anchorFor(inputs({ hypotheses: [hypA, hypB, { ...hypDraft, status: 'review_required', problemFamily: 'hidden_capacity', personaId: 2 }] }), 1).anchor;
+    expect(known.pending[0]).toMatchObject({ suggestedFamily: null, suggestedBasis: null });
+  });
+  it('item 4: the Gatik agreement is offered as a FIT-LED draft; a one-time software deployment is not offered and says why', () => {
+    const factW = { ...factB, id: 'f-wms', quote: 'PepsiCo deployed a new warehouse management system across its Texas distribution centers.', url: 'https://news.example/wms' };
+    const { anchor } = anchorFor(inputs({ facts: [factA, factB, factC, factW], hypotheses: [hypB] }), 1);
+    expect(anchor.draftable.find((d) => d.factId === 'f-gatik')).toMatchObject({ approach: 'fit_led' });
+    expect(anchor.draftable.map((d) => d.factId)).not.toContain('f-wms');
+    expect(anchor.notAnOpening).toEqual([expect.objectContaining({ factId: 'f-wms', line: 'Checked, but a technology deployment is not an opening for a first touch: context only.' })]);
+  });
+  it('R30/R31: a job claim (its class on the fact) is a draftable story; the draft the service makes of it carries the job/procurement approach, never the physical words', () => {
+    const job = { id: 'f-job', quote: 'PepsiCo is now hiring a Transportation Coordinator in Dallas; apply by October 30.', url: 'https://jobs.pepsico.com/yard-ops-dallas', title: 'PepsiCo Careers', publishedAt: '2026-09-20T00:00:00Z', expiresAt: null, continuity: 'ongoing_state' as const, currentness: null, claimClass: 'JOB_POSTING' };
+    const { anchor } = anchorFor(inputs({ facts: [factA, factB, job], hypotheses: [hypA, hypB] }), 1);
+    expect(anchor.draftable.map((d) => d.factId)).toContain('f-job');
+    // The class is what admits it as a story fact at all: without it the read (account-intel/load.ts, pinned in
+    // account-intel-regate.test.ts) never hands the sentence to the story, so there is nothing to draft.
+    expect(anchor.draftable.find((d) => d.factId === 'f-job')?.proposedObservation).toMatch(/\[S:f-job\]\.$/);
   });
   it('a thesis the send gate would refuse is never the anchor and is listed as not usable; with the gate unread nothing is usable', () => {
     const gated = { ...inputs(), unsendable: ['h-denver'] } as AccountInputs & { unsendable: string[] };

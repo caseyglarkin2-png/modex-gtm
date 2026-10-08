@@ -54,6 +54,8 @@ export async function GET(request: NextRequest) {
   const limitRaw = params.get('limit');
   const limit = limitRaw !== null && /^\d+$/.test(limitRaw) ? Number(limitRaw) : undefined;
 
-  const page = await listReplies(prisma, { state: stateRaw as ReplyState, cursor: cursor && cursor.length > 0 ? cursor : null, limit });
+  // R60: ?account= lists one account's replies (the account page records them in place).
+  const account = params.get('account')?.trim().slice(0, 200) || null;
+  const page = await listReplies(prisma, { state: stateRaw as ReplyState, cursor: cursor && cursor.length > 0 ? cursor : null, limit, accountName: account });
   return NextResponse.json(page);
 }

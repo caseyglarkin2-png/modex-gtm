@@ -45,7 +45,8 @@ export function hypothesisLabel(item: Pick<ReplyItem, 'hypothesisId' | 'hypothes
   if (typeof item.hypothesisTitle === 'string' && item.hypothesisTitle.trim().length > 0) {
     return item.hypothesisTitle.replace(/_/g, ' ');
   }
-  return `hypothesis ${item.hypothesisId}`;
+  // R60: no named angle is said as nothing, never as an internal id.
+  return '';
 }
 
 export interface ReplyListProps {
@@ -55,9 +56,11 @@ export interface ReplyListProps {
   renderExpanded: (item: ReplyItem) => ReactNode;
   loading?: boolean;
   error?: string | null;
+  /** R60: what an empty list says (an account page names the account). */
+  emptyText?: string;
 }
 
-export function ReplyList({ items, expandedId, onToggle, renderExpanded, loading = false, error = null }: ReplyListProps) {
+export function ReplyList({ items, expandedId, onToggle, renderExpanded, loading = false, error = null, emptyText = 'No replies waiting to be recorded.' }: ReplyListProps) {
   if (error) {
     return (
       <p role="alert" className="text-sm text-[var(--destructive)]">
@@ -67,7 +70,7 @@ export function ReplyList({ items, expandedId, onToggle, renderExpanded, loading
   }
   if (loading) return <p className="text-sm italic text-[var(--muted-foreground)]">Loading replies...</p>;
   if (items.length === 0) {
-    return <p data-testid="reply-list-empty" className="text-sm italic text-[var(--muted-foreground)]">No replies waiting for a disposition.</p>;
+    return <p data-testid="reply-list-empty" className="text-sm italic text-[var(--muted-foreground)]">{emptyText}</p>;
   }
 
   return (
@@ -113,7 +116,7 @@ export function ReplyList({ items, expandedId, onToggle, renderExpanded, loading
                   </span>
                 ) : null}
                 <span data-testid="reply-account">{item.accountName}</span>
-                <span data-testid="reply-hypothesis">{hypothesisLabel(item)}</span>
+                {hypothesisLabel(item) ? <span data-testid="reply-hypothesis">{hypothesisLabel(item)}</span> : null}
                 <span data-testid="reply-enrollment">{enrollmentLabel(item)}</span>
               </span>
             </button>

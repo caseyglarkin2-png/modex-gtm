@@ -163,6 +163,23 @@ describe('discovery', () => {
     expect(rows).toHaveLength(1);
   });
 
+  // Batch item 10 (R25): the news pass had no daily research budget.
+  it('the news pass queues within its daily budget (read from today’s recorded turns); a spent or unreadable budget queues nothing, the story still captured', async () => {
+    const item = { title: 'Kroger deploys autonomous trucks and yard automation at new distribution center - FreightWaves', url: 'https://news.google.com/rss/articles/K9', source: 'FreightWaves', publishedAt: new Date('2026-09-26T00:00:00Z') };
+    const news = vi.fn(async () => ({ items: [item], error: null }));
+    const spent = discoveryDb();
+    spent.prisma.gapAuditEvent.findMany = vi.fn(async (q: { where?: { created_at?: unknown } } = {}) => (q?.where?.created_at ? [{ payload: { queued: 25 } }, { payload: { queued: 15 } }] : [{ subject_id: 'Kroger', created_at: new Date('2026-09-27T00:00:00Z') }])) as never;
+    const r = await runDiscovery(spent.prisma, { now: NOW, accounts: 1, queriesPerAccount: 1 }, { news, profiles: async () => [profile('Kroger')], sleep: async () => undefined });
+    expect(r.accounts[0]).toMatchObject({ captured: 1, queued: 0 });
+    expect(spent.rows[0].research_status ?? 'none').not.toBe('queued');
+    const unreadable = discoveryDb();
+    unreadable.prisma.gapAuditEvent.findMany = vi.fn(async (q: { where?: { created_at?: unknown } } = {}) => { if (q?.where?.created_at) throw new Error('db down'); return [{ subject_id: 'Kroger', created_at: new Date('2026-09-27T00:00:00Z') }]; }) as never;
+    expect((await runDiscovery(unreadable.prisma, { now: NOW, accounts: 1, queriesPerAccount: 1 }, { news, profiles: async () => [profile('Kroger')], sleep: async () => undefined })).accounts[0]).toMatchObject({ captured: 1, queued: 0 });
+    const room = discoveryDb();
+    room.prisma.gapAuditEvent.findMany = vi.fn(async (q: { where?: { created_at?: unknown } } = {}) => (q?.where?.created_at ? [{ payload: { queued: 39 } }] : [{ subject_id: 'Kroger', created_at: new Date('2026-09-27T00:00:00Z') }])) as never;
+    expect((await runDiscovery(room.prisma, { now: NOW, accounts: 1, queriesPerAccount: 1 }, { news, profiles: async () => [profile('Kroger')], sleep: async () => undefined })).accounts[0]).toMatchObject({ captured: 1, queued: 1 });
+  });
+
   it('stops starting accounts past the time budget', async () => {
     const { prisma } = discoveryDb();
     let t = 0;

@@ -13,6 +13,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import type { SignalView } from '@/lib/gap/signals/ops';
 import { BUYER_WORDS } from '@/lib/gap/capture/buyer-words';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 const input = 'w-full min-w-0 rounded-md border border-[var(--border)] bg-[var(--background)] px-3 py-2.5 text-base';
 
@@ -66,7 +67,7 @@ export function SignalShare({ initialUrl = '', initialAccount = '', initialNote 
       return;
     }
     setSaved({ signal: body.signal, created: !!body.created });
-    router.refresh();
+    refreshNow(router);
   }
 
   if (saved) {

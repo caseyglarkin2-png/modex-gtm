@@ -17,7 +17,9 @@ describe('<CaptureFlow> offline', () => {
     render(<CaptureFlow />);
     fireEvent.change(screen.getByTestId('capture-text'), { target: { value: 'Maria: The detention charges from carriers are killing us.' } });
     fireEvent.click(screen.getByTestId('capture-save'));
-    await waitFor(() => expect(screen.getByText(/no connection\. Your note is kept on this phone/)).toBeInTheDocument());
+    // R63-B S4: the alert shows it and the flow's polite live region says it too.
+    await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent(/no connection\. Your note is kept on this phone/));
+    expect(screen.getByTestId('capture-live')).toHaveTextContent(/^Not saved: no connection\. Your note is kept on this phone/);
     expect(screen.getByTestId('capture-save')).not.toBeDisabled();
     expect(window.localStorage.getItem('gap-capture-unsaved-note')).toBe('Maria: The detention charges from carriers are killing us.');
   });

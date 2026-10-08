@@ -17,6 +17,7 @@
  * Never touches do_not_contact, email, email_status or HubSpot: leaving a company is not suppression.
  * House `prisma: any` glue.
  */
+import { cache } from 'react';
 import { apolloEvidence, crmEvidence, interactionEvidence, kindForUrl, readEmployment, tierForUrl, type EmploymentEvidence, type EmploymentRead, type EvidenceTier } from './employment';
 import type { RoleVerdict } from './employment-verify';
 import { readRole, type RoleRead } from './role-currentness';
@@ -129,7 +130,13 @@ const emailDomain = (e: string | null | undefined): string | null => (e && e.inc
  * contacts share). One person's address is never an account domain (review B2). Every caller passes this: the two
  * loaders and the decision-time gate, so the panel and the gate read the same spellings.
  */
-export async function accountEmploymentContext(prisma: PrismaLike, accountName: string): Promise<{ aliases: string[]; domains: string[] }> {
+export const accountEmploymentContext = cache(readAccountEmploymentContext);
+
+/**
+ * R61: read once per request (React's request cache; a plain call outside a server render): the account page's
+ * inputs and its owner resolution both asked for the same five reads.
+ */
+async function readAccountEmploymentContext(prisma: PrismaLike, accountName: string): Promise<{ aliases: string[]; domains: string[] }> {
   const [account, aliasRows, links, people, children] = await Promise.all([
     typeof prisma?.account?.findUnique === 'function' ? prisma.account.findUnique({ where: { name: accountName }, select: { parent_brand: true } }).catch(() => null) : null,
     typeof prisma?.gapAccountAlias?.findMany === 'function' ? prisma.gapAccountAlias.findMany({ where: { account_name: accountName }, select: { alias: true } }).catch(() => []) : [],
@@ -172,18 +179,25 @@ export async function loadEmployment(prisma: PrismaLike, personaIds: readonly nu
   const out = new Map<number, PersonaEmployment>();
   const ids = [...new Set(personaIds)];
   if (ids.length === 0) return out;
-  const personas: Array<{ id: number; account_name: string; title: string | null; email: string | null; hubspot_contact_id: string | null }> = await prisma.persona.findMany({
-    where: { id: { in: ids } },
-    select: { id: true, account_name: true, title: true, email: true, hubspot_contact_id: true },
-  });
-  const enrichments: Array<{ persona_id: number; fields: FieldRow[] }> = prisma.contactEnrichment?.findMany
-    ? await prisma.contactEnrichment.findMany({ where: { persona_id: { in: ids } }, select: { persona_id: true, fields: { select: { field_name: true, field_value: true, source: true, source_timestamp: true, confidence: true, last_writer: true } } } })
-    : [];
+  // R61: the three reads need only the ids, so they run together (they ran one after another, twice per account view).
+  const [personas, enrichments, dispositions] = (await Promise.all([
+    prisma.persona.findMany({
+      where: { id: { in: ids } },
+      select: { id: true, account_name: true, title: true, email: true, hubspot_contact_id: true },
+    }),
+    prisma.contactEnrichment?.findMany
+      ? prisma.contactEnrichment.findMany({ where: { persona_id: { in: ids } }, select: { persona_id: true, fields: { select: { field_name: true, field_value: true, source: true, source_timestamp: true, confidence: true, last_writer: true } } } })
+      : Promise.resolve([]),
+    // A human-confirmed buyer answer from this account is a dated interaction (strong evidence they were there then).
+    prisma.conversationDisposition?.findMany
+      ? prisma.conversationDisposition.findMany({ where: { persona_id: { in: ids }, human_confirmed: true }, select: { persona_id: true, created_at: true, response_class: true, channel: true }, orderBy: { created_at: 'desc' } })
+      : Promise.resolve([]),
+  ])) as [
+    Array<{ id: number; account_name: string; title: string | null; email: string | null; hubspot_contact_id: string | null }>,
+    Array<{ persona_id: number; fields: FieldRow[] }>,
+    Array<{ persona_id: number | null; created_at: Date; response_class: string; channel?: string | null }>,
+  ];
   const fieldsOf = new Map(enrichments.map((e) => [e.persona_id, e.fields ?? []]));
-  // A human-confirmed buyer answer from this account is a dated interaction (strong evidence they were there then).
-  const dispositions: Array<{ persona_id: number | null; created_at: Date; response_class: string; channel?: string | null }> = prisma.conversationDisposition?.findMany
-    ? await prisma.conversationDisposition.findMany({ where: { persona_id: { in: ids }, human_confirmed: true }, select: { persona_id: true, created_at: true, response_class: true, channel: true }, orderBy: { created_at: 'desc' } })
-    : [];
   const newestDisposition = new Map<number, (typeof dispositions)[number]>();
   for (const d of dispositions) if (d.persona_id != null && !newestDisposition.has(d.persona_id)) newestDisposition.set(d.persona_id, d);
 

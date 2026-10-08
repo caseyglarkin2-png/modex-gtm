@@ -25,6 +25,8 @@ import { EMAIL_ACTIONS } from '@/lib/gap/execution/seller-draft';
 import { gmailSenderAddress } from '@/lib/email/gmail-sender';
 import { gapGmailSender } from '@/lib/gap/execution/gap-sender';
 import { computeNextTouch, type NextTouch } from '@/lib/gap/execution/next-touch';
+import { afterSendWords, followUpFor } from '@/lib/gap/execution/after-send';
+import { loadCommitments } from '@/lib/gap/work/commitments';
 import { telHref } from '@/lib/gap/routing/seller-action';
 import { firstNameOf } from '@/lib/gap/sequence/render';
 import { buildCallPack, stripObservationCitations } from '@/lib/gap/sequence/call-pack';
@@ -34,10 +36,13 @@ import { Badge } from '@/components/ui/badge';
 import { ColdOutboundButton } from './cold-outbound-button';
 import { SixLineBriefView } from './six-line-brief';
 import { contradictedFactIds } from '@/lib/gap/research/conflicts';
-import { buildBrief, loadBriefHistory } from '@/lib/gap/execution/six-line-brief';
+import { buildBrief, emailSlot, loadBriefHistory, optOutLine, type BriefOptOut } from '@/lib/gap/execution/six-line-brief';
+import { recordReplyHref } from '@/lib/gap/account-intel/href';
+import { OptedOutEmail } from './opted-out-email';
 import { loadAngles, suggestAngle } from '@/lib/gap/motion/persona-angle';
 import { GovernedCopyButton } from './governed-copy-button';
 import { FactBlock, HypothesisBlock } from './fact-hypothesis-blocks';
+import { approachOfHypothesis } from '@/lib/gap/research/approach-policy';
 import { SellerDraftPanel, type DraftRow } from './seller-draft-panel';
 import { SendFromYardflow } from './send-from-yardflow';
 import { loadRelationshipContext } from '@/lib/gap/intake/context';
@@ -115,6 +120,10 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
             ((await prisma.sendApprovalRequest.findUnique({ where: { id: pack.compile.approvalRequestId }, select: { comment: true } })) as { comment: string | null } | null)?.comment ?? '',
         }
       : null;
+  // R63-A S10: after the family's last step, the send's follow-up obligation is what comes next (its day, from Work).
+  const afterSend = touch?.state === 'complete'
+    ? afterSendWords({ sent: touch.sent, followUp: decision ? followUpFor(await loadCommitments(prisma, { accountNames: [hypothesis.account_name] }).catch(() => []), decision.id) : null })
+    : null;
   const touchIneligible = !touch || touch.state === 'not_started' || touch.state === 'due'
     ? null
     : touch.state === 'waiting'
@@ -122,7 +131,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
       : touch.state === 'stopped'
         ? `Sequence stopped: ${touch.detail}`
         : touch.state === 'complete'
-          ? 'Every touch in this sequence has been sent.'
+          ? afterSend?.blocked ?? 'Nothing more to send from this card.'
           : touch.state === 'unknown'
             ? `Sequence status unknown: ${touch.detail} Nothing is prepared until it can be read.`
             : null;
@@ -163,6 +172,8 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
           problemHypothesis: hypothesis.problem_hypothesis ?? '',
           diagnosticQuestion: asStringList(hypothesis.falsification_questions)[0] ?? null,
           title: persona.title ?? null,
+          // R34: the call opening follows the thesis's approach, as the email does.
+          approach: approachOfHypothesis(hypothesis),
         })
       : null;
 
@@ -177,6 +188,8 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
       email: persona?.email ?? null,
       sent: touch && 'sent' in touch ? touch.sent.map((t) => ({ sentAt: t.sentAt })) : [],
       now: new Date(),
+      name: persona?.name ?? null,
+      doNotContact: !!persona?.do_not_contact,
     }),
     contradictedFactIds(prisma, hypothesis.account_name, new Date()).catch(() => null),
     // Universal Work Intake: how Casey knows this person (his context, never evidence).
@@ -206,6 +219,10 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
   // the click). An old card or deep link to a thesis that needs review shows the review, never its outreach.
   const thesisState: ThesisCurrentness = hypothesis.status !== 'active' ? { current: true } : await checkThesisCurrent(prisma, hypothesis.account_name, hypothesis.id, new Date());
   const thesisHold = thesisState.current !== true;
+  // R63-B S1: an opt-out on file (their "stop" reply, recorded or not, or a recorded do not contact) means no email is
+  // prepared at all: no subject, no body, no draft, no copy, no call script.
+  const optOut: BriefOptOut | null = briefHistory?.optOut ?? (persona?.do_not_contact ? { email: String(persona.email ?? ''), name: persona.name ?? null, said: null, at: null, recorded: true } : null);
+  const slot = emailSlot({ optedOut: !!optOut, rendered: !!renderedEmail, thesisHold });
   const tel = persona?.phone ? telHref(persona.phone) : null;
   const mailbox = gapGmailSender()?.userEmail ?? gmailSenderAddress();
   const signals = Array.isArray(hypothesis.signals)
@@ -216,10 +233,10 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
   // not repeat the card's Call button (the number is shown, the card's Call checks HubSpot first).
   const callFirst = decision?.action === 'call_now';
   // A call script reads the thesis aloud: only an ACTIVE (approved and in use) thesis that is current.
-  const callSection = callPack && !thesisHold && hypothesis.status === 'active' ? (
+  const callSection = callPack && !thesisHold && !optOut && hypothesis.status === 'active' ? (
       <section data-testid="call-pack" className="space-y-3 rounded-md border border-[var(--border)] p-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Call</p>
+            <h2 className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Call</h2>
             {/* Last mile: a cold call re-reads HubSpot opportunity truth at the click; no raw tel: link. */}
             {/* Execution acceptance: no raw number on the page; the dial is released by the governed check only. */}
             {embedded ? (
@@ -258,7 +275,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
       ) : null}
       {thesisHold ? (
         <section data-testid="thesis-needs-review" className="space-y-2 rounded-md border border-amber-500/40 bg-amber-500/10 p-4 text-sm">
-          <p className="text-xs font-semibold uppercase tracking-wide">Thesis needs review</p>
+          <h2 className="text-xs font-semibold uppercase tracking-wide">Thesis needs review</h2>
           {thesisState.current === false && thesisState.bestFact ? (
             <p data-testid="thesis-best-fact"><span className="font-semibold">Current best fact: </span>{thesisState.bestFact}</p>
           ) : null}
@@ -286,7 +303,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
 
       {touch && touch.state !== 'not_started' ? (
         <section data-testid="sequence-status" className="space-y-1 rounded-md border border-[var(--border)] p-4 text-sm">
-          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Sequence</p>
+          <h2 className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Sequence</h2>
           {'sent' in touch
             ? touch.sent.map((t) => (
                 <p key={t.gmailSentMessageId}>
@@ -297,7 +314,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
           {touch.state === 'waiting' ? <p className="font-medium">Waiting: touch {touch.stepIndex + 1} due {fmtDay(touch.dueAt)}</p> : null}
           {touch.state === 'due' ? <p className="font-medium">Follow up: touch {touch.stepIndex + 1} is due now (below)</p> : null}
           {touch.state === 'stopped' ? <p className="font-medium text-[var(--destructive)]">Sequence stopped: {touch.detail}</p> : null}
-          {touch.state === 'complete' ? <p className="font-medium">Sequence complete</p> : null}
+          {touch.state === 'complete' ? <p className="font-medium" data-testid="sequence-after-send">{afterSend?.status}</p> : null}
           {touch.state === 'unknown' ? <p className="font-medium">Sequence status unknown: {touch.detail}</p> : null}
         </section>
       ) : null}
@@ -308,10 +325,12 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
         </p>
       ) : null}
 
-      {renderedEmail && thesisHold ? null : renderedEmail ? (
+      {slot === 'opted_out' && optOut ? (
+        <OptedOutEmail line={optOutLine(optOut)} recordHref={optOut.recorded ? null : recordReplyHref(hypothesis.account_name)} />
+      ) : slot === 'thesis_hold' ? null : renderedEmail ? (
         <section data-testid="rendered-email" className="space-y-3 rounded-md border border-[var(--border)] p-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Email{touchStep > 0 ? ` (touch ${touchStep + 1})` : ''}</p>
+            <h2 className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Email{touchStep > 0 ? ` (touch ${touchStep + 1})` : ''}</h2>
             {rejected ? <Badge data-testid="email-readiness" variant="destructive">Blocked by the copy check</Badge> : emailReady ? <Badge data-testid="email-readiness" variant="success">Copy checked</Badge> : null}
           </div>
           <div>
@@ -344,7 +363,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
         </section>
       ) : (
         <section data-testid="no-email-copy" className="rounded-md border border-dashed border-[var(--border)] p-4 text-xs">
-          <p className="font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Missing prerequisite</p>
+          <h2 className="font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Missing prerequisite</h2>
           <p className="mt-1">
             {!persona
               ? 'No person is attached to this action pack.'
@@ -355,7 +374,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
         </section>
       )}
 
-      {renderedEmail && decision && !blockedReason && !rejected && !thesisHold ? (
+      {slot === 'email' && renderedEmail && decision && !blockedReason && !rejected && !thesisHold ? (
         <details className="rounded-md border border-[var(--border)] p-3 text-sm" data-testid="save-draft-details">
           <summary className="cursor-pointer font-medium">Save draft instead (edit and send from Gmail)</summary>
           <div className="mt-3">

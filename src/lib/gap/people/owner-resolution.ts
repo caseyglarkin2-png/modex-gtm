@@ -17,10 +17,11 @@
  * CONFLICT) AND not another region's remit AND not a divested unit AND contactable (not do-not-contact, not opted
  * out). Ranking among the eligible is PURPOSE-SPECIFIC (WHO truth maintenance, 2026-10-05), first difference wins:
  *
- *   COLD_FIRST_TOUCH          buyer truth > relationship > named initiative > lane > named ownership > region > scope
- *                             > US market > seniority > currentness > reachability (operator-first, unchanged)
- *   HYPOTHESIS_ACTIVATION     buyer truth > relationship > named initiative > CURRENT role validity > thesis relevance
- *                             > lane > named ownership > scope > region > US market > seniority > currentness > reach
+ *   COLD_FIRST_TOUCH          buyer truth > relationship > open deal > named initiative > lane > named ownership >
+ *                             region > scope > US market > seniority > currentness > reachability (operator-first)
+ *   HYPOTHESIS_ACTIVATION     buyer truth > relationship > open deal > named initiative > CURRENT role validity >
+ *                             thesis relevance > lane > named ownership > scope > region > US market > seniority >
+ *                             currentness > reach
  *   SITE_PILOT                ... > current role > site fit (a site or regional operator) > lane > ...
  *   TRANSFORMATION_INITIATIVE ... > current role > explicit freight / yard technology ownership > lane > ...
  *
@@ -29,20 +30,26 @@
  * RECOMMENDED FOR THIS PURPOSE with that first difference in words. It is not a selection: nobody is preselected
  * unless they are the only eligible person, and Casey still clicks. A difference only in scope, geography,
  * seniority, currentness or reachability is a choice, said as such. Never a number.
- * Pure. The loader (owner-resolution-load.ts) gathers the inputs.
+ *
+ * R32 (motion and scope, 2026-10-06): warm routes (buyer truth, a relationship) and a contact on the account's open
+ * HubSpot deal precede every cold alternative; thesis relevance reads the thesis's APPROACH (a job-led thesis is
+ * matched on the posting's role) and its SCOPE (a person at another site or in another division is related, never
+ * direct). The resolver still selects nobody: a recorded seller choice is never replaced here (people/stack.ts keeps
+ * it first and says when it is no longer eligible), and `focus` says what the owner must own, for the one question a
+ * genuine tie asks. Pure. The loader (owner-resolution-load.ts) gathers the inputs.
  */
 import type { EntityType } from '../entity/fit';
 import { displayName } from './display-name';
 import { entityBoundaryFor, type EntityBoundary } from './entity-boundary';
 import { EMPLOYMENT_LABEL, employmentBlocksOutreach, type EmploymentRead, type EmploymentState } from './employment';
 import { geoPhrase, isColdWho, isSponsor, LANE_LABEL, rankWho, readPerson, type PersonLane, type PersonRead } from './person-prior';
-import { thesisRelevance, type ThesisContext, type ThesisRelevance } from './thesis-relevance';
+import { factSite, thesisRelevance, type ThesisContext, type ThesisRelevance } from './thesis-relevance';
 
 export type OwnerPurpose = 'COLD_FIRST_TOUCH' | 'HYPOTHESIS_ACTIVATION' | 'SITE_PILOT' | 'TRANSFORMATION_INITIATIVE';
 
 export const PURPOSE_LABEL: Record<OwnerPurpose, string> = {
   COLD_FIRST_TOUCH: 'the cold first touch',
-  HYPOTHESIS_ACTIVATION: 'this hypothesis',
+  HYPOTHESIS_ACTIVATION: 'this thesis',
   SITE_PILOT: 'a site pilot',
   TRANSFORMATION_INITIATIVE: 'the transformation initiative',
 };
@@ -88,6 +95,8 @@ export interface OwnerCandidateInput {
   buyerTruth?: string | null;
   relationship?: string | null;
   initiative?: string | null;
+  /** R32: the open HubSpot deal this person is a contact on (its name), when the account read has the deal's contacts. */
+  openDeal?: string | null;
 }
 
 export interface OwnerResolutionInput {
@@ -120,6 +129,8 @@ export interface OwnerCandidate {
   role: RoleInput | null;
   /** Where a HubSpot person was read (a family company carries the relation). */
   provenance: OwnerCandidateInput['provenance'];
+  /** R32: the open deal they are a contact on, when known. */
+  openDeal: string | null;
   entity: EntityBoundary | null;
   hasEmail: boolean;
   /** 'use' a GAP contact; 'add_then_use' a HubSpot-only person; 'review_staged' a staged candidate; 'relationship_only' a work-source member. */
@@ -150,6 +161,8 @@ export interface OwnerResolution {
   purpose: OwnerPurpose;
   account: { name: string; entityType: EntityType | null; kind: 'shipper' | 'carrier_3pl' | 'unknown' };
   hypothesis: { id: string; status: string; primaryPersonaId: number | null; factLabel: string } | null;
+  /** R32: what the owner must own, in words ("the Yard Operations Manager posting at Tulsa"), for the one tie question. */
+  focus: string;
   /** The eligible owners, best first. */
   eligible: OwnerCandidate[];
   /** The one GAP (or HubSpot-only) person preselected in the UI when nobody else is plausible; Casey still clicks. */
@@ -192,7 +205,11 @@ export function eligibleForPurpose(read: PersonRead, purpose: OwnerPurpose, ctx:
   // their technology. A network, site or fleet fact never makes the technology owner the cold owner (they are the tech
   // slot, a co-buyer), and seniority never does.
   const techInitiative = purpose === 'HYPOTHESIS_ACTIVATION' && read.lane === 'TRANSFORMATION_TECH' && ctx.relevance?.tier === 'direct' && ctx.relevance.families.includes('AUTOMATION_TECH') ? 'the hypothesis is a technology change on their remit' : null;
-  return isColdWho(read, { initiative: ctx.initiative ?? techInitiative });
+  // R32: a job or procurement-led thesis whose posting names a site: the site operator AT that site, whose remit is
+  // the posting's function, is the hiring manager, so they are eligible for it (never for an event-led thesis, where
+  // the operator-first doctrine stands, and never a site operator at another site).
+  const hiringSite = purpose === 'HYPOTHESIS_ACTIVATION' && read.lane === 'FACILITY_OPERATOR' && ctx.relevance?.tier === 'direct' && !!ctx.relevance.siteMatch && !!ctx.relevance.postingRole;
+  return isColdWho(read, { initiative: ctx.initiative ?? techInitiative, siteScoped: hiringSite });
 }
 
 /** "transportation", "logistics", "network" or "operating": the function the stored title named, for the set-aside sentence. */
@@ -208,7 +225,7 @@ function roleWord(title: string | null): string {
 type RankDimension = { name: string; value: number };
 
 /** The dimensions whose first difference makes one person a RECOMMENDED owner; the rest only order a choice. */
-const STRONG_DIMENSIONS = new Set(['buyer truth', 'relationship', 'named initiative', 'current role', 'thesis relevance', 'lane', 'named ownership', 'site fit', 'technology ownership']);
+const STRONG_DIMENSIONS = new Set(['buyer truth', 'relationship', 'open deal', 'named initiative', 'current role', 'thesis relevance', 'lane', 'named ownership', 'site fit', 'technology ownership']);
 
 /**
  * How the person's CURRENT role reads for ranking: a role CONFIRMED by strong evidence (their own profile, the
@@ -223,11 +240,15 @@ function rankDimensions(c: OwnerCandidate, input: OwnerCandidateInput, purpose: 
   const lead: RankDimension[] = [
     { name: 'buyer truth', value: input.buyerTruth ? 1 : 0 },
     { name: 'relationship', value: input.relationship ? 1 : 0 },
+    // R32: a contact on the open deal precedes a cold alternative (deal work is with the people already in it).
+    { name: 'open deal', value: input.openDeal ? 1 : 0 },
     { name: 'named initiative', value: input.initiative ? 1 : 0 },
   ];
   const lane: RankDimension = { name: 'lane', value: LANE_ORDER.length - LANE_ORDER.indexOf(r.lane) };
   const ownership: RankDimension = { name: 'named ownership', value: r.ownership };
-  const relevance: RankDimension = { name: 'thesis relevance', value: c.relevance ? RELEVANCE_RANK[c.relevance.tier] : 0 };
+  // R32: under a job or procurement-led thesis, the person who runs the posting's function AT the site it names leads
+  // the direct fits (the hiring manager); an event-led thesis ranks a site match like any direct fit.
+  const relevance: RankDimension = { name: 'thesis relevance', value: c.relevance ? RELEVANCE_RANK[c.relevance.tier] + (c.relevance.tier === 'direct' && c.relevance.siteMatch && c.relevance.postingRole ? 1 : 0) : 0 };
   const region: RankDimension = { name: 'region', value: r.region === 'OTHER_REGION' ? 0 : 1 };
   const scope: RankDimension = { name: 'scope', value: SCOPE_RANK[r.scope] };
   const market: RankDimension = { name: 'US market', value: MARKET_RANK[r.market] };
@@ -260,7 +281,7 @@ function rankKey(c: OwnerCandidate, input: OwnerCandidateInput, purpose: OwnerPu
 
 /** The dimension names in rank-key order for a purpose (the same order `rankDimensions` returns; pinned by a test). */
 export function rankDimensionNames(purpose: OwnerPurpose): string[] {
-  const lead = ['buyer truth', 'relationship', 'named initiative'];
+  const lead = ['buyer truth', 'relationship', 'open deal', 'named initiative'];
   if (purpose === 'COLD_FIRST_TOUCH') return [...lead, 'lane', 'named ownership', 'thesis relevance', 'region', 'scope', 'US market', 'seniority', 'currentness', 'reachability'];
   if (purpose === 'SITE_PILOT') return [...lead, 'current role', 'site fit', 'lane', 'named ownership', 'thesis relevance', 'region', 'US market', 'seniority', 'currentness', 'reachability'];
   if (purpose === 'TRANSFORMATION_INITIATIVE') return [...lead, 'current role', 'technology ownership', 'lane', 'named ownership', 'thesis relevance', 'region', 'scope', 'US market', 'seniority', 'currentness', 'reachability'];
@@ -302,6 +323,8 @@ export function leadOver(top: OwnerCandidate, second: OwnerCandidate, purpose: O
         return `${t} is already talking to you; ${s} is not.`;
       case 'relationship':
         return `You have a way in to ${t}; none on record for ${s}.`;
+      case 'open deal':
+        return `${t} is a contact on the open deal${top.openDeal ? ` (${top.openDeal})` : ''}; ${s} is not.`;
       case 'named initiative':
         return `A live signal names ${t} on the initiative; none names ${s}.`;
       case 'current role':
@@ -357,6 +380,8 @@ function recommend(rows: ReadonlyArray<{ c: OwnerCandidate; input: OwnerCandidat
         return `they are already talking to you (${rows[0].input.buyerTruth})`;
       case 'relationship':
         return `you have a way in (${rows[0].input.relationship})`;
+      case 'open deal':
+        return `they are a contact on the open deal (${rows[0].input.openDeal})`;
       case 'named initiative':
         return `a live signal names them on the initiative (${rows[0].input.initiative})`;
       case 'current role':
@@ -390,6 +415,7 @@ function describe(c: OwnerCandidateInput, read: PersonRead, relevance: ThesisRel
   const out: string[] = [];
   out.push(`${LANE_LABEL[read.lane]}: ${read.laneWhy}.`);
   out.push(`${geoPhrase(read)}${read.scope === 'NETWORK' ? '; network scope' : read.scope === 'SITE' ? '; one site' : '; scope not stated'}.`);
+  if (c.openDeal) out.push(`On the open deal: ${c.openDeal}.`);
   if (relevance) out.push(`Thesis fit: ${relevance.why}.`);
   if (employment) out.push(`Employment: ${EMPLOYMENT_LABEL[employment.state]}. ${employment.why}`);
   if (c.role && c.role.state !== 'ROLE_UNVERIFIED') out.push(`Role: ${c.role.label}. ${c.role.why}${c.role.priorTitle && c.role.effectiveTitle && c.role.priorTitle !== c.role.effectiveTitle ? ` (was ${c.role.priorTitle})` : ''}`);
@@ -423,7 +449,8 @@ export function resolveOwner(input: OwnerResolutionInput): OwnerResolution {
     const role = ci.role ?? null;
     const title = role?.usableForRanking && role.effectiveTitle ? role.effectiveTitle : ci.title;
     const read = readPerson(title, { entityType: account.entityType, location: ci.location ?? null });
-    const relevance = thesis ? thesisRelevance(title, thesis) : null;
+    // R32: the thesis's approach (a posting's role) and scope (the fact's site and division) against where they sit.
+    const relevance = thesis ? thesisRelevance(title, thesis, { accountName: account.name, location: ci.location ?? null, company: ci.company ?? null }) : null;
     const entity = entityBoundaryFor(account.name, { title, company: ci.company ?? null });
     const employment = ci.employment ?? null;
     // The role read's own sentence already says "Still at ..." when it decided a change; the resolver wraps only a
@@ -444,6 +471,7 @@ export function resolveOwner(input: OwnerResolutionInput): OwnerResolution {
       employment: employment ? { state: employment.state, label: EMPLOYMENT_LABEL[employment.state], why: employment.why, elsewhere: employment.elsewhere } : null,
       role,
       provenance: ci.provenance ?? null,
+      openDeal: ci.openDeal ?? null,
       entity,
       hasEmail: ci.hasEmail,
       action: ci.source === 'gap' ? 'use' : ci.source === 'hubspot' ? 'add_then_use' : ci.source === 'staged' ? 'review_staged' : 'relationship_only',
@@ -571,10 +599,20 @@ export function resolveOwner(input: OwnerResolutionInput): OwnerResolution {
     `role currentness (${excluded.filter((e) => e.code === 'role_changed' || e.code === 'role_conflict').length} set aside)`,
   ];
   void now;
+  const thesisLabel = thesis ? thesisRelevance(null, thesis, { accountName: account.name }) : null;
+  const focusSite = thesis ? factSite(thesis.observation, account.name) : null;
+  const focus = thesisLabel?.postingRole
+    ? `the ${thesisLabel.postingRole} posting${focusSite ? ` at ${focusSite}` : ''}`
+    : thesisLabel
+      ? `${thesisLabel.factLabel.split('; ')[0].replace(/ \(.*\)$/, '').replace(/^an? /, 'the ')}${focusSite ? ` at ${focusSite}` : ''}`
+      : carrier
+        ? 'network, hub and terminal operations'
+        : 'transportation and the yards';
   return {
     purpose,
     account: { name: account.name, entityType: account.entityType, kind },
-    hypothesis: thesis ? { id: thesis.id, status: thesis.status, primaryPersonaId: thesis.primaryPersonaId, factLabel: thesisRelevance(null, thesis).factLabel } : null,
+    hypothesis: thesis ? { id: thesis.id, status: thesis.status, primaryPersonaId: thesis.primaryPersonaId, factLabel: thesisLabel!.factLabel } : null,
+    focus,
     eligible,
     preselected,
     recommended: recommend(eligibleRows, purpose),

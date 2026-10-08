@@ -142,7 +142,7 @@ const GLANCE_ROWS: Array<[keyof AccountIntelligenceBrief['glance'], string]> = [
   ['network', 'Network'],
   ['freight', 'Freight'],
   ['bestFact', 'Best outreach evidence'],
-  ['topHypothesis', 'Top hypothesis'],
+  ['topHypothesis', 'What we think is happening'],
   ['currentTech', 'Current tech'],
   ['likelyOwner', 'Who probably owns it'],
   ['relationship', 'Relationship'],
@@ -205,7 +205,7 @@ export function AccountBriefView({ brief, afterGlance }: { brief: AccountIntelli
       </section>
 
       <section id="brief-hypotheses" className="scroll-mt-16 space-y-2" data-testid="brief-hypotheses">
-        <h2 className="text-sm font-semibold">Hypotheses</h2>
+        <h2 className="text-sm font-semibold">What we think is happening</h2>
         {brief.hypotheses.length ? (
           <ul className="space-y-2">
             {brief.hypotheses.map((h) => (
@@ -227,7 +227,7 @@ export function AccountBriefView({ brief, afterGlance }: { brief: AccountIntelli
             ))}
           </ul>
         ) : (
-          <p className="text-sm text-[var(--muted-foreground)]">No strong hypothesis yet.</p>
+          <p className="text-sm text-[var(--muted-foreground)]">No strong thesis yet.</p>
         )}
       </section>
 

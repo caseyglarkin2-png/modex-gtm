@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { cardReadiness, sellerLaneOf, type ReadinessInput } from '@/lib/gap/routing/card-readiness';
 import { ROUTING_ACTIONS } from '@/lib/gap/taxonomy';
 import type { SuppressionClass } from '@/lib/gap/suppression/provenance';
+import { accountHref } from '@/lib/gap/account-intel/href';
 
 const RULES_FOR_RESEARCH = ['no_hypothesis', 'bounced_or_invalid', 'tam_unknown', 'hyp_stale', 'disp_wrong_person', 'suppression_review', 'something_new'];
 
@@ -77,7 +78,7 @@ describe('cardReadiness: the two-state invariant for every non-blocked card', ()
       expect(noEmail.state).toBe('missing_prerequisite');
       expect(noEmail.state === 'missing_prerequisite' && noEmail.missing).toContain('No email address');
       const noHyp = cardReadiness(item({ action, hypothesis: null }));
-      expect(noHyp.state === 'missing_prerequisite' && noHyp.missing).toContain('No hypothesis covers');
+      expect(noHyp.state === 'missing_prerequisite' && noHyp.missing).toContain('No thesis covers');
     }
   });
 
@@ -90,11 +91,11 @@ describe('cardReadiness: the two-state invariant for every non-blocked card', ()
   it('Jason (research_required, no hypothesis): exact prerequisite, never a fabricated email', () => {
     const r = cardReadiness(item({ action: 'research_required', ruleId: 'no_hypothesis', hypothesis: null, persona: { ...item().persona, id: 1788, displayName: 'jason gaiser' } }));
     expect(r.state).toBe('missing_prerequisite');
-    expect(r.state === 'missing_prerequisite' && r.missing).toContain('No hypothesis covers jason at Kroger');
+    expect(r.state === 'missing_prerequisite' && r.missing).toContain('No thesis covers jason at Kroger');
     // Last mile: nothing of Jason's waits in REVIEW, so the fix is research on his card, never an empty lane.
-    expect(r.state === 'missing_prerequisite' && r.fix).toMatchObject({ label: 'Research to propose a hypothesis', href: `/gap?lane=research#card-${item().id}` });
+    expect(r.state === 'missing_prerequisite' && r.fix).toMatchObject({ label: 'Research to propose a thesis', href: `/gap?lane=research#card-${item().id}` });
     const waiting = cardReadiness(item({ action: 'research_required', ruleId: 'no_hypothesis', hypothesis: null, persona: { ...item().persona, id: 1788 }, reviewWaiting: true }));
-    expect(waiting.state === 'missing_prerequisite' && waiting.fix).toEqual({ label: 'Review the waiting hypothesis', href: '/gap?lane=review' });
+    expect(waiting.state === 'missing_prerequisite' && waiting.fix).toEqual({ label: 'Review the waiting thesis', href: '/gap?lane=review' });
   });
 
   it('unknown provenance is always a review prerequisite, never an outreach action', () => {
@@ -136,9 +137,9 @@ describe('cardReadiness: sequence cards (last mile)', () => {
     expect(r.state === 'actionable' && r.primary).toMatchObject({ label: 'Follow up: touch 2', href: '/gap?lane=follow_up&open=dec-1#card-dec-1' });
   });
 
-  it('REPLIED: sequence stopped, points at logging the reply', () => {
+  it('REPLIED: sequence stopped, points at recording the reply on its own account (R60, never the all-replies lane)', () => {
     const r = cardReadiness({ ...base(), touch: { state: 'stopped', reason: 'replied', detail: 'Buyer replied.', sentCount: 1 } });
-    expect(r.state === 'actionable' && r.primary).toMatchObject({ label: 'Replied: sequence stopped. Log the reply', href: '/gap?lane=replies' });
+    expect(r.state === 'actionable' && r.primary).toMatchObject({ label: 'Replied: sequence stopped. Record the reply', href: `${accountHref(base().account.name)}#record-reply` });
   });
 
   it('unreadable sequence state is a named prerequisite, never an outreach action', () => {
@@ -202,9 +203,15 @@ describe('final Monday blocker: an active or unverifiable opportunity is never a
 });
 
 describe('an opportunity hold wins over a revised thesis', () => {
-  it.each(['active_opportunity', 'opportunity_unknown'])('%s with hypothesis.revisedBy stays held, not REVIEW', (ruleId) => {
-    const it0 = item({ action: ruleId === 'active_opportunity' ? 'nurture' : 'research_required', ruleId, hypothesis: { id: 'old', status: 'approved', revisedBy: 'rev-1' } });
-    expect(sellerLaneOf(it0)).toBe(ruleId === 'active_opportunity' ? 'later' : 'research');
+  it.each(['active_opportunity', 'opportunity_unknown', 'family_hold'])('%s with hypothesis.revisedBy stays held, not REVIEW', (ruleId) => {
+    const it0 = item({ action: ruleId === 'opportunity_unknown' ? 'research_required' : 'nurture', ruleId, hypothesis: { id: 'old', status: 'approved', revisedBy: 'rev-1' } });
+    expect(sellerLaneOf(it0)).toBe(ruleId === 'opportunity_unknown' ? 'research' : 'later');
     expect(JSON.stringify(cardReadiness(it0))).not.toContain('Review the revised thesis');
+  });
+
+  it('R3d family_hold (batch item 7): the card holds with its own words, never a contact action', () => {
+    const r = cardReadiness(item({ action: 'nurture', ruleId: 'family_hold' }));
+    expect(r).toMatchObject({ state: 'actionable', primary: { label: 'Hold: related account', href: null } });
+    expect(JSON.stringify(r)).toMatch(/corporate family is in a live deal, conversation or first touch/);
   });
 });

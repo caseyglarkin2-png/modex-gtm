@@ -14,6 +14,13 @@
  *   - HubSpot's parent company (hs_parent_company_id) mapped to GAP accounts, when it can be read
  */
 import { normalizeCompanyName } from '../identity/normalize';
+import { CUSTOM_STAGE, stageName } from '../deals/stage-label';
+
+/** A known stage in words after a related deal's name; a custom stage whose name was not read adds nothing (never its id). */
+const stageWords = (stage: string | null) => {
+  const w = stageName(stage);
+  return w && w !== CUSTOM_STAGE ? ` (${w})` : '';
+};
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -140,7 +147,7 @@ export async function loadRelatedActivity(prisma: PrismaLike, family: CorporateF
     // A duplicate GAP record of THIS company with no HubSpot company of its own has no separate deal to read: the
     // account's own action-time HubSpot check covers the company. Its GAP activity below still holds.
     const dealUnknown = o.status === 'UNKNOWN' && !(m.relation === 'same_company' && o.noHubspotCompany);
-    if (o.status === 'ACTIVE') activity.push(`active opportunity${o.deals?.length ? `: ${o.deals.map((d) => `${d.name ?? 'deal'}${d.stage ? ` (${d.stage})` : ''}`).join('; ')}` : ''}`);
+    if (o.status === 'ACTIVE') activity.push(`active opportunity${o.deals?.length ? `: ${o.deals.map((d) => `${d.name ?? 'deal'}${stageWords(d.stage)}`).join('; ')}` : ''}`);
     const c = (conversations as Map<string, { who: string; responseClass: string; at: string }>).get(m.accountName);
     if (c) activity.push(`a buyer conversation (${c.responseClass.replace(/_/g, ' ')}, ${c.at.slice(0, 10)})`);
     const gate = computeAccountMotion({ accountName: m.accountName, readyEmailCards: [], choice: null, firstTouches: ((touches as Map<string, never[]>).get(m.accountName) ?? []) as never[], replyHold: null, conversation: null, now });

@@ -3,6 +3,9 @@
  * KNOW / THINK / LEARN / WHY YOU / HISTORY / WRONG IF. Stacked rows at phone
  * width (no horizontal scroll), a label column from sm up. WHY YOU is edited
  * in place (the human-owned PersonaAngle). Voice: no em dashes.
+ *
+ * R63-B S6: each row's label is a real heading (h2, the same visible words), so KNOW, PROOF, THINK, LEARN, HISTORY and
+ * the rest can be jumped to by heading.
  */
 import type { SixLineBrief } from '@/lib/gap/execution/six-line-brief';
 import { AngleLine } from './account-motion-panel';
@@ -16,8 +19,8 @@ const STATE_CLASS: Record<SixLineBrief['historyState'], string> = {
 function Row({ label, testId, children }: { label: string; testId: string; children: React.ReactNode }) {
   return (
     <div data-testid={testId} className="grid grid-cols-1 gap-0.5 border-t border-[var(--border)] py-2 first:border-t-0 sm:grid-cols-[6rem_1fr] sm:gap-3">
-      <dt className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">{label}</dt>
-      <dd className="min-w-0 break-words">{children}</dd>
+      <h2 className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">{label}</h2>
+      <div className="min-w-0 break-words">{children}</div>
     </div>
   );
 }
@@ -26,7 +29,7 @@ export function SixLineBriefView({ brief, personaId, accountName }: { brief: Six
   const k = brief.know;
   return (
     <section data-testid="six-line-brief" aria-label={`Brief for ${accountName}`} className="rounded-md border-2 border-[var(--primary)] p-3 text-sm">
-      <dl>
+      <div>
         <Row label="Know" testId="brief-know">
           {k.fact ? (
             <>
@@ -52,7 +55,7 @@ export function SixLineBriefView({ brief, personaId, accountName }: { brief: Six
         <Row label="Think" testId="brief-think">
           {brief.think ? (
             <p>
-              <span className="text-xs font-semibold uppercase text-[var(--muted-foreground)]">Hypothesis (inference): </span>
+              <span className="text-xs font-semibold uppercase text-[var(--muted-foreground)]">What we think is happening (our read): </span>
               {brief.think}
             </p>
           ) : (
@@ -78,7 +81,7 @@ export function SixLineBriefView({ brief, personaId, accountName }: { brief: Six
         </Row>
         {brief.account ? (
           <Row label="Account" testId="brief-account">
-            <p>{brief.account.motion}</p>
+            {brief.account.motion ? <p>{brief.account.motion}</p> : null}
             {brief.account.caution ? <p className="font-medium text-amber-700 dark:text-amber-400">{brief.account.caution}</p> : null}
             <a href={brief.account.href} className="text-xs underline">
               Everything GAP knows about this account
@@ -98,7 +101,7 @@ export function SixLineBriefView({ brief, personaId, accountName }: { brief: Six
         <Row label="Wrong if" testId="brief-wrong-if">
           {brief.wrongIf ?? <span className="italic text-[var(--muted-foreground)]">No falsification condition written.</span>}
         </Row>
-      </dl>
+      </div>
     </section>
   );
 }

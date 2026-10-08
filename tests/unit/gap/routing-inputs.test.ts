@@ -370,6 +370,7 @@ describe('assembleRoutingInputs full fixture', () => {
       lastTriggerAt: daysAgo(3),
       outreachStatus: 'Not started',
       opportunity: { status: 'CLEAR', companyIds: ['111'] },
+      familyHold: null,
     });
     expect(i.account.heatTier).toBe(1); // fresh trigger + live intent = tier1 per classifyTier
     expect(i.account.heat).toBeGreaterThan(0);
@@ -449,6 +450,8 @@ describe('assembleRoutingInputs full fixture', () => {
       lastDisposition: null,
       meetingBooked: false,
       gapSequence: { state: 'none', sentSteps: 0, lastSentAt: null },
+      // R42b: no open referral obligation names this person.
+      namedInReferral: null,
       unansweredCalls: 0,
     });
 
@@ -1179,6 +1182,12 @@ describe('routePersona over assembled inputs', () => {
 
     const t = routePersona(await assemble(fullDb(), { hubspotSnapshot: { tam: 'unknown', tamTier: '', opportunity: { status: 'CLEAR', companyIds: ['111'] } } }));
     expect(t.kind === 'decision' && t.decision.ruleId).toBe('tam_unknown');
+
+    // Batch item 7: the snapshot's corporate-family hold reaches the router (R3d), ahead of the TAM read.
+    const fam = await assemble(fullDb(), { hubspotSnapshot: { tam: 'unknown', tamTier: '', opportunity: { status: 'CLEAR', companyIds: ['111'] }, familyHold: { detail: 'A sibling is live.', unknown: false } } });
+    expect(fam.account.familyHold).toEqual({ detail: 'A sibling is live.', unknown: false });
+    const fr = routePersona(fam);
+    expect(fr.kind === 'decision' && fr.decision.ruleId).toBe('family_hold');
 
     const db = fullDb();
     db.enrollments.push({ id: 'enr-1', to_email: EMAIL_LOWER, status: 'paused' });

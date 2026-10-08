@@ -25,7 +25,7 @@ export function DealBriefView({ brief, deals, editable = false }: { brief: DealB
   return (
     <section data-testid="deal-brief" className="space-y-2 rounded-md border border-[var(--border)] p-3 sm:p-4">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <h3 className="text-base font-semibold">Deal brief: {brief.accountName}</h3>
+        <h3 className="text-base font-semibold">Deal brief: {brief.deal?.name ?? brief.accountName}</h3>
         <p data-testid="deal-brief-known" className="text-xs text-[var(--muted-foreground)]">
           {brief.known} of {TRUTH_SECTIONS.length} known · confirmed buyer truth only · read-only
         </p>
@@ -48,8 +48,10 @@ export function DealBriefView({ brief, deals, editable = false }: { brief: DealB
               <ul className="space-y-1">
                 {brief.sections[s].map((e) => (
                   <li key={e.bidId}>
-                    <q className="italic">{e.quote}</q>
+                    {/* R63-A S5: their own words quoted; what the seller noted, never in quotation marks. */}
+                    {e.noted ? <span data-testid="deal-brief-noted">You noted they said: {e.quote}</span> : <q className="italic">{e.quote}</q>}
                     <span className="block text-xs text-[var(--muted-foreground)]">
+                      {e.scope ? <span className="font-semibold" data-testid="deal-brief-scope">{e.scope} · </span> : null}
                       {e.who} · {e.source}
                       {e.confirmedBy ? ` · confirmed by ${e.confirmedBy}` : ''}
                       {e.at ? ` · ${day(e.at)}` : ''}

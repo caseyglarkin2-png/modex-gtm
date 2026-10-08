@@ -27,9 +27,11 @@
  * (no new table). Nothing here writes to HubSpot.
  */
 import { selectConfirmedBids } from '../bid/select';
+import { wordingOf } from '../bid/wording';
 import { CAPTURE_MEETING } from '../capture/store';
 import { loadEvidenceInbox } from '../research/inbox';
 import { TRUTH_SECTIONS, type TruthSection } from './sections';
+import { ACCOUNT_LEVEL, type ScopeRead } from './scope';
 
 export { TRUTH_SECTIONS, SECTION_TITLE, type TruthSection } from './sections';
 
@@ -62,6 +64,18 @@ const SUGGESTION: Record<TruthSection, string> = {
 };
 const ALL_KNOWN_SUGGESTION = 'Every section has buyer truth. Learn who else must agree before anything changes.';
 
+/** R51: the truth sections no confirmed BID of these types fills, in the order a discovery conversation needs them. */
+export function unknownSectionsOfTypes(types: readonly string[]): TruthSection[] {
+  const known = new Set(types.map((t) => SECTION_OF_BID[t]).filter(Boolean));
+  return SUGGESTION_ORDER.filter((s) => !known.has(s));
+}
+
+/** R51: the discovery question for each unknown section (the brief's own suggestions), in conversation order. */
+export function openQuestionsFor(unknowns: readonly TruthSection[]): string[] {
+  const qs = SUGGESTION_ORDER.filter((s) => unknowns.includes(s)).map((s) => SUGGESTION[s]);
+  return qs.length ? qs : [ALL_KNOWN_SUGGESTION];
+}
+
 export interface BriefBidRow {
   id: string;
   type: string;
@@ -74,6 +88,8 @@ export interface BriefBidRow {
   confirmed_at: Date | string | null;
   supersedes_id: string | null;
   captured_at: Date | string;
+  /** R50: `scope` names the deal, division or site the words belong to. */
+  metadata?: unknown;
 }
 
 export interface BriefDispositionRow {
@@ -104,10 +120,30 @@ export interface BriefEntry {
   source: string;
   confirmedBy: string | null;
   at: string;
+  /** R50: on a per-deal brief, "account-level" for words not tied to this deal (this deal's own carry no tag). */
+  scope?: string | null;
+  /** R63-A S5: what the seller noted they said (shown without quotation marks), not their own words. */
+  noted?: boolean;
+}
+
+/**
+ * R63-A N3: who confirmed a statement, by name ("confirmed by casey@freightroll.com" put an address where a name
+ * belongs): the person on record, else the address's own name ("casey@..." is Casey), never the address.
+ */
+export function actorName(address: string | null | undefined, people: ReadonlyMap<string, { name?: string | null }> = new Map()): string | null {
+  const a = (address ?? '').trim();
+  if (!a) return null;
+  if (!a.includes('@')) return a;
+  const onRecord = people.get(a.toLowerCase())?.name?.trim();
+  if (onRecord) return onRecord;
+  const parts = a.split('@')[0].split(/[._-]+/).filter((p) => p && !/\d/.test(p));
+  return parts.length ? parts.map((p) => p.charAt(0).toUpperCase() + p.slice(1).toLowerCase()).join(' ') : a;
 }
 
 export interface DealBrief {
   accountName: string;
+  /** R50: the deal this brief is about; null = every confirmed word at the account. */
+  deal?: { id: string; name: string | null } | null;
   sections: Record<TruthSection, BriefEntry[]>;
   stakeholders: Array<{ who: string; title: string | null; email: string }>;
   dealContacts: number;
@@ -131,12 +167,30 @@ export function buildDealBrief(input: {
   dealContacts: number;
   objective: ObjectiveRow | null;
   meetingObjective: ObjectiveRow | null;
+  /**
+   * R50: a brief for ONE deal: only that deal's words and the account-level ones (tagged), never another deal's.
+   * `scopeOf` is the shared scope rule (deals/scope.ts) over the account's open deals.
+   */
+  deal?: { id: string; name: string | null } | null;
+  scopeOf?: (b: BriefBidRow) => ScopeRead;
 }): DealBrief {
   const byEmail = new Map(input.people.filter((p) => p.email).map((p) => [String(p.email).toLowerCase(), p]));
   const whoOf = (email: string) => byEmail.get(email.toLowerCase())?.name?.trim() || email;
 
   // Truth: human-confirmed and not corrected (an unconfirmed correction still removes the old row).
-  const truth = selectConfirmedBids(input.bids.map((b) => ({ ...b, humanConfirmed: b.human_confirmed === true, supersedesId: b.supersedes_id })));
+  const all = selectConfirmedBids(input.bids.map((b) => ({ ...b, humanConfirmed: b.human_confirmed === true, supersedesId: b.supersedes_id })));
+  // R50: one deal's brief holds that deal's words and the account-level ones (tagged); another deal's never appear.
+  const scopeOf = input.deal && input.scopeOf ? input.scopeOf : null;
+  const scopeTag = new Map<string, string | null>();
+  const truth = scopeOf
+    ? all.filter((b) => {
+        const s = scopeOf(b);
+        if (s.dealId === input.deal!.id) scopeTag.set(b.id, null);
+        else if (s.basis === 'none') scopeTag.set(b.id, ACCOUNT_LEVEL);
+        else return false;
+        return true;
+      })
+    : all;
   const sections = Object.fromEntries(TRUTH_SECTIONS.map((s) => [s, [] as BriefEntry[]])) as Record<TruthSection, BriefEntry[]>;
   const speakers: string[] = [];
   for (const b of truth) {
@@ -144,13 +198,14 @@ export function buildDealBrief(input: {
     if (email && !speakers.includes(email)) speakers.push(email);
     const section = SECTION_OF_BID[b.type];
     if (!section) continue;
-    sections[section].push({ bidId: b.id, quote: b.raw_buyer_language, summary: b.normalized_summary ?? null, who: whoOf(email), source: b.source, confirmedBy: b.confirmed_by ?? null, at: iso(b.confirmed_at ?? b.captured_at) });
+    const noted = wordingOf(b.metadata, b.raw_buyer_language) === 'noted';
+    sections[section].push({ bidId: b.id, quote: b.raw_buyer_language, summary: b.normalized_summary ?? null, who: whoOf(email), source: b.source, confirmedBy: actorName(b.confirmed_by, byEmail), at: iso(b.confirmed_at ?? b.captured_at), ...(scopeOf ? { scope: scopeTag.get(b.id) ?? null } : {}), ...(noted ? { noted: true } : {}) });
   }
 
   const confirmed = input.dispositions.filter((d) => d.human_confirmed === true);
   const commitments = confirmed
     .filter((d) => d.response_class === 'meeting_accepted')
-    .map((d) => ({ what: 'Agreed to a meeting', who: whoOf(d.contact_email), at: iso(d.confirmed_at ?? d.created_at), confirmedBy: d.confirmed_by ?? null, next: d.next_best_action?.trim() || null }));
+    .map((d) => ({ what: 'Agreed to a meeting', who: whoOf(d.contact_email), at: iso(d.confirmed_at ?? d.created_at), confirmedBy: actorName(d.confirmed_by, byEmail), next: d.next_best_action?.trim() || null }));
 
   const contradictions: string[] = [];
   // Review F: only the SAME thesis confirmed and rejected is a contradiction (two different problems are not).
@@ -175,6 +230,7 @@ export function buildDealBrief(input: {
 
   return {
     accountName: input.accountName,
+    deal: input.deal ?? null,
     sections,
     stakeholders: speakers.map((email) => ({ who: whoOf(email), title: byEmail.get(email)?.title ?? null, email })),
     dealContacts: input.dealContacts,
@@ -204,13 +260,14 @@ export const BRIEF_BID_SELECT = {
   confirmed_at: true,
   supersedes_id: true,
   captured_at: true,
+  metadata: true,
 } as const;
 
 /** Read-only. `conflicts` defaults to the evidence inbox's contradictions for this account. */
 export async function loadDealBrief(
   prisma: PrismaLike,
   accountName: string,
-  deps: { now: Date; dealContacts?: number; conflicts?: (accountName: string) => Promise<Array<{ site: string }>> },
+  deps: { now: Date; dealContacts?: number; conflicts?: (accountName: string) => Promise<Array<{ site: string }>>; deal?: { id: string; name: string | null } | null; scopeOf?: (b: BriefBidRow) => ScopeRead },
 ): Promise<DealBrief> {
   const conflicts =
     deps.conflicts ??
@@ -242,6 +299,8 @@ export async function loadDealBrief(
     dealContacts: deps.dealContacts ?? 0,
     objective: toObjective(objectiveRows[0], 'text'),
     meetingObjective: toObjective(meeting, 'nextLearningObjective'),
+    deal: deps.deal ?? null,
+    scopeOf: deps.scopeOf,
   });
 }
 

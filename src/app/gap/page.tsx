@@ -31,22 +31,33 @@
 import { notFound, redirect } from 'next/navigation';
 import { after } from 'next/server';
 import { auth } from '@/lib/auth';
+import { loginHref } from '@/lib/auth-return';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { AccountLink } from '@/components/gap/account-link';
 import { listReplies } from '@/lib/gap/replies/list';
 import { listAllCurrent } from '@/lib/gap/routing/queue';
-import { cockpitOpenHref, type ReviewWaiting } from '@/lib/gap/routing/card-readiness';
+import { type ReviewWaiting } from '@/lib/gap/routing/card-readiness';
+import { packHref } from '@/lib/gap/account-intel/href';
 import { loadThesisGroups, splitThesisWork, orderGroupsForReview, toThesisCard, withRecordedNotes, type LoadedGroup } from '@/lib/gap/hypothesis/thesis-groups';
 import { resolveRoutableHypothesisScope } from '@/lib/gap/routing/run';
 import { Breadcrumb } from '@/components/breadcrumb';
 import { GapSubnav } from '@/components/gap/gap-subnav';
-import { GapCockpit, NextUp, type CockpitLane } from '@/components/gap/gap-cockpit';
-import { buildNextUpCandidates, heldAccountsOf, pickNextUpV2 } from '@/lib/gap/routing/next-up';
-import { buildWorkList, type WorkCard, type WorkInput } from '@/lib/gap/work/list';
-import { readPursuitSummaries, warmPursuitSummaries } from '@/lib/gap/pursuit/summary';
-import { loadSendableTheses } from '@/lib/gap/pursuit/load';
-import { loadMotionChoices } from '@/lib/gap/motion/load';
+import { GapCockpit, type CockpitLane } from '@/components/gap/gap-cockpit';
+import Link from 'next/link';
+import { WorkToday } from '@/components/gap/work-today';
+import { todaySummary } from '@/lib/gap/work/today';
+import { buyerMoves } from '@/lib/gap/work/commitment-model';
+import { addDays, nyDay, nyDayAt } from '@/lib/gap/work/dates';
+import { buildNextUpCandidates } from '@/lib/gap/routing/next-up';
+import { workDay, type WorkCard, type WorkInput } from '@/lib/gap/work/list';
+import { loadCompletedToday, loadMeetingRows, loadMeetingStartingPoints, loadWorkCommitments, resolveMeetingDeals } from '@/lib/gap/work/day-load';
+import { loadAccountPriorities } from '@/lib/gap/work/priority';
+import { loadFollowUpPlans } from '@/lib/gap/execution/follow-up-load';
+import { loadWorkOutcomes } from '@/lib/gap/work/outcome';
+import { loadPursuitSummaries, warmPursuitSummaries } from '@/lib/gap/pursuit/summary';
+import { loadSendableThesesFor } from '@/lib/gap/pursuit/load';
+import { loadMotionChoices, loadRecentFirstTouchAccounts } from '@/lib/gap/motion/load';
 import { agoText as readAgo, cachedRead } from '@/lib/gap/work/cache';
 import { todayListenText } from '@/lib/gap/voice/today';
 import { WorkList } from '@/components/gap/work-list';
@@ -63,6 +74,13 @@ import { loadEvidenceInbox, researchSections, type InboxAccount } from '@/lib/ga
 import { loadInDealsSummary, type InDealsSummary } from '@/lib/gap/deals/in-deals';
 import { loadDealBrief } from '@/lib/gap/deals/deal-brief';
 import { DealBriefView } from '@/components/gap/deal-brief';
+import { loadRecordedClosures, sweepClosedDeals } from '@/lib/gap/deals/closure';
+import { loadRecordedReplyIds, withoutRecordedReplies } from '@/lib/gap/work/recorded-replies';
+import { resolveAccountOpportunity } from '@/lib/gap/opportunity/active-opportunity';
+import { accountsToCheck, loadOpportunityHolds, OPPORTUNITY_HOLD_TIMEOUT_MS } from '@/lib/gap/work/opportunity-holds';
+import { loadAccountConversations } from '@/lib/gap/motion/load';
+import { loadAnswersOwed } from '@/lib/gap/work/recorded-replies';
+import { loadPreparedMeetings } from '@/lib/gap/work/outcome';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'GAP' };
@@ -153,39 +171,63 @@ async function loadCockpit() {
       researchCards: research,
       inbox: inbox.map((a) => ({ accountName: a.accountName, ready: a.ready.length, people: Math.max(0, ...a.theses.map((t) => t.people)) })),
       tiers,
-      openHref: cockpitOpenHref,
+      // R60: a ready or follow-up card opens its pack page, never the cockpit lane.
+      openHref: (_lane, decisionId) => packHref(decisionId),
     });
-  const next = pickNextUpV2(candidates, heldAccountsOf(queue.items));
   // UX-08: WORK, one card per account in the same order, over the same reads (never a second state engine).
   const heldWhy = new Map<string, 'active_opportunity' | 'opportunity_unknown'>();
   for (const it of queue.items) {
     if (it.ruleId === 'opportunity_unknown') heldWhy.set(it.account.name, 'opportunity_unknown');
     else if (it.ruleId === 'active_opportunity' && !heldWhy.has(it.account.name)) heldWhy.set(it.account.name, 'active_opportunity');
   }
-  const workAccounts = [...new Set([...candidates.map((c) => c.accountName).filter((x): x is string => !!x), ...repliesPage.items.map((r) => r.accountName), ...inDeals.accounts.map((a) => a.accountName)])];
+  // R14: an account GAP touched (a proven send, an outstanding draft) is Work even when the lanes hold no card for it.
+  const recentTouches = await loadRecentFirstTouchAccounts(prisma, now).catch(() => new Map());
+  const workAccounts = [...new Set([...candidates.map((c) => c.accountName).filter((x): x is string => !!x), ...repliesPage.items.map((r) => r.accountName), ...inDeals.accounts.map((a) => a.accountName), ...recentTouches.keys()])];
   // What the database alone says per Work account, on every load (no HubSpot): a usable thesis exists; the recorded
   // chosen person. A cold instance then still agrees with the workspace on READY and on research (Pass A blocker).
   const choicesAll = await loadMotionChoices(prisma, workAccounts).catch(() => new Map());
-  const chosenIds = [...choicesAll.values()].map((c) => c.primaryPersonaId);
+  const chosenIds = [...new Set([...[...choicesAll.values()].map((c) => c.primaryPersonaId), ...[...recentTouches.values()].map((t) => t.personaId).filter((x): x is number => typeof x === 'number')])];
   const personaRows = chosenIds.length ? ((await prisma.persona.findMany({ where: { id: { in: chosenIds } }, select: { id: true, name: true, title: true } }).catch(() => [])) as Array<{ id: number; name: string | null; title: string | null }>) : [];
   const personaById = new Map(personaRows.map((p) => [p.id, p]));
   const dbState = new Map<string, { sendable: boolean; chosen: { name: string; title: string | null } | null }>();
+  // R61: one read for every Work account's send gate (it was one read per account, one after another).
+  const sendableAll = await loadSendableThesesFor(prisma, workAccounts, now).catch(() => null);
   for (const name of workAccounts) {
-    const sendable = await loadSendableTheses(prisma, name, now).catch(() => null);
+    const sendable = sendableAll?.get(name) ?? null;
     if (sendable === null) continue;
     const choice = choicesAll.get(name);
     const p = choice ? personaById.get(choice.primaryPersonaId) : undefined;
     dbState.set(name, { sendable: sendable.size > 0, chosen: p?.name ? { name: p.name, title: p.title } : null });
   }
+  // R63-B S12: the gate's own opportunity read for the few accounts Work would offer cold work (a closed deal parks
+  // or makes a customer; the page and the gate already say so). Bounded and remembered per instance; never a write.
+  const toCheck = accountsToCheck({ candidates, dbState, held: heldWhy, inDeals });
+  const opportunityHolds = toCheck.length ? await loadOpportunityHolds(toCheck, (a) => resolveAccountOpportunity(prisma, a, {}, { timeoutMs: OPPORTUNITY_HOLD_TIMEOUT_MS })) : new Map();
+  // R63-A B3: each Work account's recorded conversation (the page's own reader, DB only), named by the person GAP holds.
+  const convRaw = await loadAccountConversations(prisma, workAccounts, now).catch(() => new Map<string, { who: string; responseClass: string; at: string }>());
+  const convEmails = [...new Set([...convRaw.values()].map((c) => c.who).filter((w) => w.includes('@')))];
+  const convPeople = convEmails.length ? ((await prisma.persona.findMany({ where: { OR: convEmails.map((e) => ({ email: { equals: e, mode: 'insensitive' } })) }, select: { email: true, name: true } }).catch(() => [])) as Array<{ email: string | null; name: string | null }>) : [];
+  const nameByEmail = new Map(convPeople.filter((p) => p.email && p.name).map((p) => [String(p.email).toLowerCase(), String(p.name)]));
+  const conversations = new Map([...convRaw].map(([a, c]) => [a, { ...c, name: nameByEmail.get(c.who.toLowerCase()) ?? null }]));
   // The pieces the Work cards are built from; the cards themselves are built at render over the live pursuit summaries.
+  const inMotion = new Map<string, { state: 'sent' | 'drafted'; at: string; person: { name: string; title: string | null } | null }>();
+  for (const [name, t] of recentTouches) {
+    const p = t.personaId != null ? personaById.get(t.personaId) : undefined;
+    inMotion.set(name, { state: t.state, at: t.at, person: p?.name ? { name: p.name, title: p.title } : t.recipient ? { name: t.recipient, title: null } : null });
+  }
   const workInput: Omit<WorkInput, 'summaries'> = {
     now,
     candidates,
     dbState,
-    replies: repliesPage.items.map((r) => ({ accountName: r.accountName, contactEmail: r.contactEmail, subject: r.subject, snippet: r.snippet, receivedAt: r.receivedAt })),
+    inMotion,
+    replies: repliesPage.items.map((r) => ({ accountName: r.accountName, contactEmail: r.contactEmail, subject: r.subject, snippet: r.snippet, receivedAt: r.receivedAt, id: r.id, threadId: r.threadId ?? null, fromName: r.fromName ?? null, personaId: r.personaId, hubspotContactId: r.hubspotContactId ?? null })),
+    mailbox: process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() || null,
     motions: motion.motions.map((m) => ({ accountName: m.accountName, state: m.state, primary: m.primary ? { name: m.primary.name, title: m.primary.title } : null, next: m.next ? { name: m.next.name, title: m.next.title, unlock: m.next.unlock } : null })),
-    inDeals: { status: inDeals.status, accounts: inDeals.accounts.map((a) => ({ accountName: a.accountName, deals: a.deals.map((d) => ({ name: d.name, stage: d.stage })) })) },
+    // R50: each deal keeps its HubSpot id (an obligation names its deal; Capture binds a note to it by id).
+    inDeals: { status: inDeals.status, accounts: inDeals.accounts.map((a) => ({ accountName: a.accountName, deals: a.deals.map((d) => ({ ...(d.id ? { id: d.id } : {}), name: d.name, stage: d.stage, lastActivityAt: d.lastActivityAt ?? null, closeDate: d.closeDate ?? null, contactIds: d.contactIds ?? [] })) })) },
     held: heldWhy,
+    opportunityHolds,
+    conversations,
   };
 
   const routableHypotheses = 'tooLarge' in routableScope ? 0 : routableScope.hypothesesCount;
@@ -200,7 +242,6 @@ async function loadCockpit() {
       deals: { count: inDeals.count, unresolved: inDeals.unresolved.length, checkedAt: inDeals.checkedAt },
     },
     inDeals,
-    next,
     workInput,
     workAccounts,
     groups: reviewGroups,
@@ -355,11 +396,11 @@ async function InDealsLane({ summary, open }: { summary: InDealsSummary; open: s
   );
 }
 
-export default async function GapCockpitPage({ searchParams }: { searchParams?: Promise<{ lane?: string; open?: string; account?: string; filter?: string; q?: string; focus?: string; fresh?: string }> }) {
+export default async function GapCockpitPage({ searchParams }: { searchParams?: Promise<{ lane?: string; open?: string; account?: string; filter?: string; q?: string; focus?: string; fresh?: string; day?: string }> }) {
   if (assertGapEnabled('GAP_ROUTING_ENABLED')) notFound();
 
   const session = await auth();
-  if (!session?.user?.email) redirect('/login');
+  if (!session?.user?.email) redirect(loginHref('/gap/'));
 
   const params = (await searchParams) ?? {};
   const lane = (params.lane && LANES.has(params.lane) ? params.lane : null) as CockpitLane | null;
@@ -370,12 +411,70 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
   const fresh = params.fresh === '1' || !!lane;
   const read = await cachedRead('cockpit', loadCockpit, { fresh });
   const data = read.value;
-  const now = new Date();
-  const work: WorkCard[] = buildWorkList({ ...data.workInput, now, summaries: readPursuitSummaries(data.workAccounts, now) });
+  const realNow = new Date();
+  // R45: `?day=tomorrow` previews Work as it will stand tomorrow at 8 am New York (read only: every write still happens
+  // at the real time, every gate re-runs at the click). Everything time-dependent below reads `now`.
+  const preview = params.day === 'tomorrow' && !lane;
+  const now = preview ? nyDayAt(addDays(nyDay(realNow), 1), 8) : realNow;
+  // R55: work scoped to a deal that left the portal's open deals is reconciled with HubSpot's closure (bounded: five
+  // accounts at most, every five minutes per instance; never when the open-deal read is unavailable; real time only).
+  if (!lane && !preview) {
+    const openDealIds = data.workInput.inDeals.status === 'complete' ? new Set(data.workInput.inDeals.accounts.flatMap((a) => a.deals.map((d) => d.id).filter((x): x is string => !!x))) : null;
+    const openDealNames = data.workInput.inDeals.status === 'complete' ? new Set(data.workInput.inDeals.accounts.flatMap((a) => a.deals.map((d) => (d.name ?? '').trim().toLowerCase()).filter(Boolean))) : null;
+    await sweepClosedDeals(prisma, { now: realNow, openDealIds, openDealNames, resolve: (a) => resolveAccountOpportunity(prisma, a, {}, { timeoutMs: 8_000 }) }).catch(() => null);
+  }
+  // R15: the summaries come from this instance's memory, then the durable rows (one read), so a cold instance says
+  // what the last workspace read said instead of falling back to the lanes.
+  // R41: the obligations (after the bounded follow-up sweep), the next day's meetings and the seller's priorities are
+  // read on every render, never cached with the lanes, so a write shows on the next load.
+  // R60 capture once: which remembered replies were recorded since the read (one live read, in this same wave).
+  const [summariesRead, outcomes, commitments, meetingRowsRaw, recordedReplies, answersOwed, preparedMeetings] = await Promise.all([
+    // R63-A B3: the preview starts from what the workspace says NOW (a summary read at tomorrow's time aged out and the
+    // preview fell back to cards that knew nothing of a reply, a do not contact or a hold).
+    loadPursuitSummaries(prisma, data.workAccounts, realNow),
+    loadWorkOutcomes(prisma, data.workAccounts, now).catch(() => new Map()),
+    // The sweep writes at the real time only; the phases are read at `now`.
+    lane ? Promise.resolve([]) : loadWorkCommitments(prisma, realNow, { replies: data.workInput.replies }).catch(() => []),
+    // R51: every meeting row in the window, canceled ones included (Work says so and stops asking to prepare them).
+    lane ? Promise.resolve([]) : loadMeetingRows(prisma, now).catch(() => []),
+    loadRecordedReplyIds(prisma, data.workInput.replies.map((r) => r.id ?? '')).catch(() => new Set<string>()),
+    // R63-A S4: the recorded replies still owed an answer (never forgotten the moment they are recorded).
+    lane ? Promise.resolve([]) : loadAnswersOwed(prisma, realNow).catch(() => []),
+    // R63-A S11: the meetings marked prepared (they leave what needs you).
+    loadPreparedMeetings(prisma, data.workAccounts, realNow).catch(() => new Set<string>()),
+  ]);
+  // R63-A S1: the list is complete when the reply read had no further page (then a remembered "replied" with no reply
+  // waiting is stale, recorded since).
+  const liveRead = withoutRecordedReplies(data.workInput.replies, summariesRead, recordedReplies, { complete: !data.counts.replies.atLeast });
+  const live = { ...liveRead, replies: [...liveRead.replies, ...answersOwed.filter((a) => !liveRead.replies.some((r) => r.id === a.id))] };
+  const summaries = live.summaries ?? summariesRead;
+  // Batch item 8: an untagged meeting belongs to the deal whose contacts it names (the brief's own rule), so its
+  // preparation and its rebooking never read another deal's work.
+  const meetingRows = await resolveMeetingDeals(prisma, meetingRowsRaw, data.workInput.inDeals).catch(() => meetingRowsRaw);
+  const mailbox = process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() || null;
+  const meetings = meetingRows.filter((m) => !m.canceled).map((m) => ({ accountName: m.accountName, at: m.at, what: m.what, meetingId: m.meetingId, dealId: m.dealId }));
+  const canceledMeetings = meetingRows.filter((m) => m.canceled).map((m) => ({ accountName: m.accountName, at: m.at, what: m.what, meetingId: m.meetingId, dealId: m.dealId }));
+  // Sprint 5 review: a meeting or an obligation on a deal that is not open here is named from GAP's own closure record
+  // (its name, outcome and date), read in this same wave and only for the accounts that hold one.
+  const openIds = data.workInput.inDeals.status === 'complete' ? new Set(data.workInput.inDeals.accounts.flatMap((a) => a.deals.map((d) => d.id).filter((x): x is string => !!x))) : null;
+  const closureAccounts = [...new Set([...meetingRows, ...commitments].filter((x) => !!x.dealId && /^\d+$/.test(x.dealId) && !openIds?.has(x.dealId)).map((x) => x.accountName))];
+  const [priorities, followUpPlans, meetingPreps, closedDeals] = await Promise.all([
+    loadAccountPriorities(prisma, [...new Set([...data.workAccounts, ...commitments.map((c) => c.accountName)])]).catch(() => new Map()),
+    // R43: each follow-up due today, read off the person's own history (prepare, by hand, a saved draft, unknown, held).
+    loadFollowUpPlans(prisma, commitments, { now, mailbox, held: data.workInput.held, dealAccounts: new Set(data.workInput.inDeals.status === 'complete' ? data.workInput.inDeals.accounts.map((a) => a.accountName) : []) }).catch(() => new Map()),
+    // R51: each meeting's prepared starting point (objective, first thing to learn, last commitment).
+    loadMeetingStartingPoints(prisma, meetingRows.filter((m) => new Date(m.at).getTime() <= now.getTime() + 24 * 3_600_000), commitments, now).catch(() => new Map()),
+    closureAccounts.length ? loadRecordedClosures(prisma, closureAccounts).catch(() => new Map()) : Promise.resolve(new Map()),
+  ]);
+  const day = workDay({ ...data.workInput, replies: live.replies, now, summaries, outcomes, commitments, meetings, canceledMeetings, meetingPreps, priorities, followUpPlans, closedDeals, preparedMeetings });
+  const work: WorkCard[] = day.cards;
+  // R45: close the day and keep tomorrow, derived from actual state (no new storage).
+  const doneToday = lane || preview ? [] : await loadCompletedToday(prisma, now).catch(() => []);
+  const today = todaySummary({ now, commitments, done: doneToday, waiting: day.waiting, meetings, moved: buyerMoves(data.workInput.replies) });
   // UX-08 parity: after the response is sent, read the canonical pursuit state for the first few Work accounts
   // that have none remembered (serial, bounded, never blocking a render), so the next Work load says what the
   // workspace says.
-  if (!lane) after(() => warmPursuitSummaries(prisma, work.filter((c) => c.source === 'cockpit').map((c) => c.accountName)).catch(() => []));
+  if (!lane && !preview) after(() => warmPursuitSummaries(prisma, work.filter((c) => c.source === 'cockpit').map((c) => c.accountName)).catch(() => []));
 
   // The opened card's action pack, built on the server from the same component as the deep link.
   let openPanel: React.ReactNode = null;
@@ -397,7 +496,7 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
       <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'GAP' }]} />
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">GAP</h1>
-        <p className="mt-1 text-sm text-[var(--muted-foreground)]">Decide what you believe, contact who GAP marks ready, log what buyers tell you.</p>
+        <p className="mt-1 text-sm text-[var(--muted-foreground)]" data-testid="work-subtitle">{lane ? 'An analyst view: every account in one list. Work holds your day.' : preview ? 'The accounts that will need you tomorrow, in order: a preview.' : 'The accounts that need you today, in order. Open one, do the move, record it, then go to the next.'}</p>
       </div>
       <GapSubnav />
       {/* Phase 2 A3: can the cockpit be trusted right now (mailbox, HubSpot, suppression, sender, routing). */}
@@ -405,7 +504,8 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
       {/* UX-10: the six lane tiles are the analyst's lanes; on Work the chips carry the counts, so the tiles show only inside a lane. */}
       {lane ? <GapCockpit data={{ ...data.counts, active: lane }} /> : null}
 
-      {data.unrouted > 0 ? (
+      {/* R60: the routing repair is the system's, never the top of the seller's day: it lives in System at the foot. */}
+      {lane && data.unrouted > 0 ? (
         <section data-testid="unrouted-notice" className="space-y-2 rounded-md border border-amber-500/40 bg-amber-500/10 p-3 text-sm">
           <p>
             {data.unrouted} {data.unrouted === 1 ? 'person is' : 'people are'} in use without a current recommendation (routing did not
@@ -434,15 +534,29 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
       ) : (
         <>
           {/* UX-08: WORK is the landing: the accounts that need the seller, one card each, the lanes as filters. */}
-          <WorkList cards={work} focus={/^[a-z0-9-]{1,120}$/.test(params.focus ?? '') ? (params.focus as string) : null} listenText={todayListenText(work)} readAt={{ at: read.at, label: read.fromCache ? `Read ${readAgo(read.at, now)}` : 'Read just now' }} />
-          {work.length === 0 ? <NextUp items={data.next} /> : null}
+          {preview ? (
+            <p className="rounded-md border border-amber-500/40 bg-amber-500/10 px-3 py-2 text-sm" data-testid="work-preview">
+              Tomorrow at 8:00 AM New York, as Work will hold it then: a preview. Nothing here happens until then, and every action still runs its checks when you press it. <Link href="/gap" className="underline">Back to today</Link>
+            </p>
+          ) : null}
+          <WorkToday today={today} preview={preview} />
+          {!preview ? <Link href="/gap?day=tomorrow" className="inline-flex min-h-11 items-center text-xs underline" data-testid="work-tomorrow-link">See tomorrow</Link> : null}
+          {/* R45: Work is the one list. The legacy NEXT UP fallback no longer competes with it when it is empty. */}
+          <WorkList when={preview ? 'tomorrow' : 'today'} cards={work} snoozed={day.snoozed} waiting={day.waiting} counts={day.counts} focus={/^[a-z0-9-]{1,120}$/.test(params.focus ?? '') ? (params.focus as string) : null} listenText={todayListenText(work)} readAt={{ at: read.at, label: read.fromCache ? `Read ${readAgo(read.at, realNow)}` : 'Read just now' }} />
         </>
       )}
 
-      {data.unrouted === 0 ? (
+      {!lane || data.unrouted === 0 ? (
         <details className="rounded-md border border-[var(--border)] p-3 text-xs" data-testid="system-details">
-          <summary className="cursor-pointer text-[var(--muted-foreground)]">System: routing</summary>
-          <div className="mt-3">{routingPanel}</div>
+          <summary className="cursor-pointer text-[var(--muted-foreground)]">{data.unrouted > 0 ? `System: ${data.unrouted} ${data.unrouted === 1 ? 'person needs' : 'people need'} a recommendation` : 'System'}</summary>
+          <div className="mt-3 space-y-2">
+            {data.unrouted > 0 ? (
+              <p data-testid="unrouted-notice">
+                {data.unrouted} {data.unrouted === 1 ? 'person is' : 'people are'} in use without a current recommendation. One routing pass fixes it; it creates cards only and contacts no one.
+              </p>
+            ) : null}
+            {routingPanel}
+          </div>
         </details>
       ) : null}
     </div>

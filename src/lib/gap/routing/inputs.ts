@@ -34,6 +34,7 @@
 import { createLimiter, type Limiter } from './bounded';
 import { employmentGate } from '../people/employment-gate';
 import { sendableEvidence } from '../research/evidence-gate';
+import { approachOfHypothesis } from '../research/approach-policy';
 import { personSendHistory } from '../execution/person-history';
 import { parseSteps } from '../sequence/steps';
 import { normalizeScore } from '../../pounce/fit';
@@ -44,6 +45,8 @@ import { isPersona, isProblemFamily, isResponseClass, NON_STOPPING_RESPONSE_CLAS
 import type { HypothesisStatus, Persona } from '../taxonomy';
 import type { Top100Manifest, Top100RosterPerson } from '../top100/reader';
 import type { SuppressionReader } from './suppression-read';
+import { referralHoldDetail, referralHoldFor } from '../replies/referral-hold';
+import { isCurrentFact } from '../research/currentness';
 import { DEFAULT_FRESHNESS } from './types';
 import type { OpportunityTruth } from '../opportunity/active-opportunity';
 import type {
@@ -79,6 +82,8 @@ export interface HubSpotAccountSnapshot {
   contacts?: Record<string, HubSpotContactSnapshot>;
   /** HubSpot active-opportunity truth (opportunity/active-opportunity.ts). Absent is UNKNOWN. */
   opportunity?: OpportunityTruth;
+  /** Batch item 7: the corporate-family hold (family/family.ts familyHoldNow), the one the page and the click apply. */
+  familyHold?: { detail: string; unknown: boolean } | null;
 }
 
 export interface HubSpotContactSnapshot {
@@ -137,6 +142,8 @@ interface AccountRow {
 
 interface PersonaRow {
   id: number;
+  /** R42b: the referral hold matches a named person by full name at the account. */
+  name?: string | null;
   account_name: string;
   title: string | null;
   seniority: string | null;
@@ -169,6 +176,8 @@ interface SignalRow {
   evidence_url: string | null;
   evidence_text: string | null;
   freshness_expires_at: Date | null;
+  /** Item 2a: the full row is loaded; the freshness authority reads the type (and observed_at, below). */
+  type?: string | null;
   source_kind?: string | null;
   summary?: string | null;
   // The evidence gate's fields (red team T6); loaded with the full signal row.
@@ -387,6 +396,7 @@ function buildAccount(
     outreachStatus: row.outreach_status ?? null,
     // No HubSpot read for this account: UNKNOWN, never clear (fail closed).
     opportunity: snapshot?.opportunity ?? { status: 'UNKNOWN', reason: snapshot ? 'hubspot_error' : 'hubspot_unconfigured', detail: 'no HubSpot opportunity read for this routing run' },
+    familyHold: snapshot?.familyHold ?? null,
   };
 }
 
@@ -440,9 +450,8 @@ function buildHypothesis(h: HypothesisRow | null, now: Date, hasNewerVersion: bo
   const links = h.signals ?? [];
   const signals = links.map((l) => l.signal).filter((s): s is SignalRow => !!s);
   const evidenced = signals.filter(hasEvidence);
-  const evidenceFresh = evidenced.some(
-    (s) => s.freshness_expires_at == null || s.freshness_expires_at.getTime() > now.getTime(),
-  );
+  // Item 2a: the one freshness authority (research/currentness.ts), the clock the gate and the compiler read.
+  const evidenceFresh = evidenced.some((s) => isCurrentFact(s, now));
   const m = meta(h.metadata);
   return {
     id: h.id,
@@ -452,11 +461,14 @@ function buildHypothesis(h: HypothesisRow | null, now: Date, hasNewerVersion: bo
     evidenceFresh,
     // Red team T6: thin = no LIVE outreach fact (research/evidence-gate.ts), the
     // same rule approval, activation, the compiler and the send gate apply.
+    // R34: under the thesis's declared approach, as those gates read it (a
+    // job-led thesis on a live posting is not thin for want of a physical fact).
     evidenceThin:
       sendableEvidence(
         h.observation,
-        signals.filter((s) => s.freshness_expires_at == null || s.freshness_expires_at.getTime() > now.getTime()),
+        signals.filter((s) => isCurrentFact(s, now)),
         h.account_name ?? '',
+        { approach: approachOfHypothesis(h) },
       ).tier !== 'VERIFIED_FACT',
     hasNewerVersion,
     expiresAt: h.expires_at ?? null,
@@ -612,6 +624,9 @@ async function assembleLoaded(
 
   // Comms: keyed by the persona's lowercased email. No email means nothing outbound can be in flight.
   const comms = email ? await readComms(prisma, email, persona.id) : emptyComms();
+  // R42b: a person a buyer named in a referral is the seller's decision (an unreadable ledger skips the person).
+  const named = await read('referral_hold', () => referralHoldFor(prisma, { email, name: persona.name, accountName: account.name }));
+  comms.namedInReferral = named ? { commitmentId: named.commitmentId, detail: referralHoldDetail(named) } : null;
 
   let suppressionVerdict: RoutingInputs['suppression'] = { verdict: 'unknown', legs: {} };
   if (email && remoteSuppression) {

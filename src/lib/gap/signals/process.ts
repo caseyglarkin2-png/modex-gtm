@@ -13,6 +13,7 @@
  * drafts, enrolls or sends.
  */
 import { clusterSignal } from './cluster';
+import { recordFailedResearchAttempt } from './research';
 import { classifySignal, defaultFetchHtml, parseSignalMeta, resolveSignalAccount, type FetchHtml } from './intake';
 import { promoteSignal } from './promote';
 import type { ingestTriggers } from '@/lib/pounce/ingest';
@@ -89,9 +90,8 @@ export async function processSignals(
     take: 100,
   });
   for (const r of staleRows) {
-    const meta = (r.metadata ?? {}) as Record<string, unknown>;
-    const attempts = Number(meta.researchAttempts ?? 0) + 1;
-    await prisma.gapSignal.update({ where: { id: r.id }, data: { research_status: attempts >= 3 ? 'no_usable_fact' : 'queued', metadata: { ...meta, researchAttempts: attempts, researchError: 'research run did not finish (timed out)' } } });
+    // Batch item 10 (R25): a run that never finished is a failed attempt; the last one is the dead letter, never "no fact".
+    await recordFailedResearchAttempt(prisma, r, 'research run did not finish (timed out)', opts.now);
     res.requeued += 1;
   }
 

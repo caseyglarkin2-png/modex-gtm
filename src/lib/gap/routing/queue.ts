@@ -15,6 +15,7 @@
  */
 
 import { revisedByOf } from '../hypothesis/current-revision';
+import { mapLimit } from '../work/map-limit';
 import { audit as auditEvent } from '../audit';
 import type { HumanAction } from '../taxonomy';
 import { HYPOTHESIS_TERMINAL_STATUSES } from '../taxonomy';
@@ -74,6 +75,8 @@ export interface QueueItem {
   suppression: { class: SuppressionClass; hits: string[] };
   /** The multi-touch state, only for cards with a Gmail-proven sent touch. */
   touch?: TouchSummary | null;
+  /** Batch item 6 (R34): is first-touch copy installed for this card's thesis (email cards only); absent: not read. */
+  copy?: { installed: boolean; detail: string | null } | null;
   humanAction: string | null;
   humanActionAt: Date | null;
   createdAt: Date;
@@ -90,6 +93,8 @@ export interface TouchSummary {
 
 /** Cards per page whose next touch is evaluated (each may read one Gmail thread). */
 export const MAX_TOUCH_EVALUATIONS = 20;
+/** R61: how many cards' next touches are evaluated at once (the production database pool holds five connections). */
+export const TOUCH_EVALUATION_CONCURRENCY = 5;
 
 export interface ListQueueResult {
   /** The run named by the caller; null for the current-decision view. */
@@ -282,8 +287,11 @@ export interface CurrentDecisions {
  * over three narrow columns. Past tens of thousands of rows, move it into
  * Postgres as DISTINCT ON (account_name, persona_id).
  */
-export async function currentDecisions(prisma: PrismaLike): Promise<CurrentDecisions> {
+export async function currentDecisions(prisma: PrismaLike, scope: { accountName?: string | null } = {}): Promise<CurrentDecisions> {
+  // R61: one account's cards are decided by that account's rows alone (newest per account and person), so an
+  // account-scoped read never pulls every account's decisions (the account page did, on every view).
   const all = (await prisma.routingDecision.findMany({
+    ...(scope.accountName ? { where: { account_name: scope.accountName } } : {}),
     orderBy: [{ created_at: 'desc' }, { id: 'desc' }],
     select: { id: true, run_id: true, account_name: true, persona_id: true, hypothesis_id: true, created_at: true },
   })) as Array<{ id: string; run_id: string; account_name: string; persona_id: number | null; hypothesis_id: string | null; created_at: Date }>;
@@ -333,7 +341,7 @@ export async function listQueue(prisma: PrismaLike, opts: ListQueueOptions = {})
   const limit = Math.min(MAX_QUEUE_LIMIT, Math.max(1, Math.trunc(opts.limit ?? DEFAULT_QUEUE_LIMIT)));
 
   const runId = opts.runId?.trim() || null;
-  const current = runId ? null : await currentDecisions(prisma);
+  const current = runId ? null : await currentDecisions(prisma, { accountName: opts.accountName ?? null });
   if (current && current.ids.length === 0) return { runId: null, asOf: null, items: [], nextCursor: null };
 
   const where: Record<string, unknown> = runId ? { run_id: runId } : { id: { in: current!.ids } };
@@ -400,6 +408,17 @@ export async function listQueue(prisma: PrismaLike, opts: ListQueueOptions = {})
     if (item.hypothesis && next) item.hypothesis = { ...item.hypothesis, revisedBy: next };
   }
   await attachTouches(prisma, items);
+  // Batch item 6: an email card whose thesis has no installed copy is never READY (cardReadiness says what to seed).
+  const emailThesisIds = [...new Set(items.filter((i) => i.hypothesis && (i.action === 'enroll_gap_sequence' || i.action === 'one_off_email')).map((i) => i.hypothesis!.id))];
+  if (emailThesisIds.length && typeof prisma?.sequenceFamily?.findMany === 'function') {
+    const { copyAvailabilityMap } = await import('../execution/copy-availability');
+    const copy = await copyAvailabilityMap(prisma, emailThesisIds).catch(() => null);
+    for (const item of items) {
+      if (!item.hypothesis || !emailThesisIds.includes(item.hypothesis.id)) continue;
+      const c = copy?.get(item.hypothesis.id);
+      item.copy = c ? { installed: c.installed, detail: c.detail } : { installed: false, detail: 'Whether first-touch copy is installed could not be read just now. Nothing goes out until it can be.' };
+    }
+  }
   return { runId, asOf: current?.asOf ?? null, items, nextCursor };
 }
 
@@ -489,11 +508,10 @@ export async function attachTouches(prisma: PrismaLike, items: QueueItem[]): Pro
   }
   const { computeNextTouch } = await import('../execution/next-touch');
   const now = new Date();
-  for (const [n, item] of withHistory.entries()) {
-    if (n >= MAX_TOUCH_EVALUATIONS) {
-      unevaluated(item, 'This person has send history; open the card to evaluate the next touch.');
-      continue;
-    }
+  for (const item of withHistory.slice(MAX_TOUCH_EVALUATIONS)) unevaluated(item, 'This person has send history; open the card to evaluate the next touch.');
+  // R61: the cards are evaluated a few at a time (each is about twenty round trips and may read a Gmail thread); in a
+  // loop, twenty cards took twenty times as long (about 20 s of Work's read under production-like latency).
+  await mapLimit(withHistory.slice(0, MAX_TOUCH_EVALUATIONS), TOUCH_EVALUATION_CONCURRENCY, async (item) => {
     try {
       const t = await computeNextTouch(prisma, item.id, now);
       if (t.state === 'not_started') {
@@ -501,7 +519,7 @@ export async function attachTouches(prisma: PrismaLike, items: QueueItem[]): Pro
         const { personSendHistoryForDecision } = await import('../execution/person-history');
         const h = await personSendHistoryForDecision(prisma, item.id);
         if (h.unresolvedClaims.length > 0) unevaluated(item, 'A send to this person was started and its outcome is not recorded. Check Gmail Sent.');
-        continue;
+        return;
       }
       item.touch = {
         state: t.state,
@@ -513,7 +531,7 @@ export async function attachTouches(prisma: PrismaLike, items: QueueItem[]): Pro
     } catch {
       unevaluated(item, 'Sequence could not be evaluated.');
     }
-  }
+  });
 }
 
 // ---------------------------------------------------------------------------

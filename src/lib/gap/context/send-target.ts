@@ -6,7 +6,7 @@
  * straight to that card. Read-only; fails soft to null (NOW then keeps its own WHO).
  */
 import { listQueue } from '../routing/queue';
-import { cockpitOpenHref } from '../routing/card-readiness';
+import { packHref } from '../account-intel/href';
 import { loadCockpitMotions } from '../motion/cockpit';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -15,7 +15,7 @@ type PrismaLike = any;
 export interface ReadyTarget {
   name: string;
   title: string | null;
-  /** The cockpit card to open. */
+  /** R60: the card's pack page (the email, the call, Send from YardFlow), never the cockpit lane. */
   href: string;
   /** The cockpit's own line for the account ("Suggested primary: ..."). */
   headline: string;
@@ -25,7 +25,7 @@ export interface ReadyTarget {
 export function readyTargetOf(mine: { state: string; primary: { name: string; title: string | null; cardId: string | null } | null; headline: string } | null | undefined): ReadyTarget | null {
   const p = mine?.state === 'ready' ? mine.primary : null;
   if (!p?.cardId) return null;
-  return { name: p.name, title: p.title, href: cockpitOpenHref('ready', p.cardId), headline: mine!.headline };
+  return { name: p.name, title: p.title, href: packHref(p.cardId), headline: mine!.headline };
 }
 
 export async function loadReadyTarget(prisma: PrismaLike, accountName: string, now: Date, deps: { motions?: typeof loadCockpitMotions; list?: typeof listQueue } = {}): Promise<ReadyTarget | null> {

@@ -1,5 +1,6 @@
 /**
- * GAP Prospecting OS: seed the four sequence families (S3-T11).
+ * GAP Prospecting OS: seed the four sequence families (S3-T11) and the R34 approach families (job / procurement-led,
+ * fit-led; each under its own program, no problem family, so the event-led lookup never reaches them).
  *
  *   GAP_OS_ENABLED=true DATABASE_URL=postgresql://... \
  *   npx tsx scripts/gap/seed-families.ts [--apply] [--created-by <who>] [--remote]
@@ -27,7 +28,12 @@ import { isGapOsEnabled } from '../../src/lib/gap/flags';
 import { createFamily } from '../../src/lib/gap/sequence/family';
 import { stepsHash } from '../../src/lib/gap/sequence/steps';
 import { createVersion } from '../../src/lib/gap/sequence/version';
-import { SEED_FAMILIES, SEED_PROGRAM, type SeedFamily } from '../../src/lib/gap/sequences/families';
+import { APPROACH_FAMILIES, SEED_FAMILIES, SEED_PROGRAM, type ApproachFamily, type SeedFamily } from '../../src/lib/gap/sequences/families';
+
+/** A family this script seeds: an event-led seed (SEED_PROGRAM) or an approach family (its own program). */
+type Seedable = (SeedFamily & { program?: undefined }) | ApproachFamily;
+const ALL_SEEDS: readonly Seedable[] = [...SEED_FAMILIES, ...APPROACH_FAMILIES];
+const programOf = (seed: Seedable): string => seed.program ?? SEED_PROGRAM;
 
 interface Args {
   apply: boolean;
@@ -69,17 +75,18 @@ function isLocalDatabase(url: string): boolean {
 interface FamilyPlan {
   key: string;
   name: string;
-  problemFamily: string;
+  program: string;
+  problemFamily: string | null;
   persona: string;
   stepsHash: string;
   family: { id: string | null; create: boolean };
   version: { id: string | null; version: number | null; create: boolean };
 }
 
-async function planFamily(prisma: any, seed: SeedFamily): Promise<FamilyPlan> {
+async function planFamily(prisma: any, seed: Seedable): Promise<FamilyPlan> {
   const hash = stepsHash(seed.steps);
   const existing = await prisma.sequenceFamily.findFirst({
-    where: { engine: 'modex_draft_queue', program: SEED_PROGRAM, name: seed.name, archived_at: null },
+    where: { engine: 'modex_draft_queue', program: programOf(seed), name: seed.name, archived_at: null },
     orderBy: { created_at: 'asc' },
     select: { id: true },
   });
@@ -87,6 +94,7 @@ async function planFamily(prisma: any, seed: SeedFamily): Promise<FamilyPlan> {
     return {
       key: seed.key,
       name: seed.name,
+      program: programOf(seed),
       problemFamily: seed.problemFamily,
       persona: seed.persona,
       stepsHash: hash,
@@ -104,6 +112,7 @@ async function planFamily(prisma: any, seed: SeedFamily): Promise<FamilyPlan> {
   return {
     key: seed.key,
     name: seed.name,
+    program: programOf(seed),
     problemFamily: seed.problemFamily,
     persona: seed.persona,
     stepsHash: hash,
@@ -112,14 +121,14 @@ async function planFamily(prisma: any, seed: SeedFamily): Promise<FamilyPlan> {
   };
 }
 
-async function applyPlan(prisma: any, seed: SeedFamily, plan: FamilyPlan, createdBy: string): Promise<FamilyPlan> {
+async function applyPlan(prisma: any, seed: Seedable, plan: FamilyPlan, createdBy: string): Promise<FamilyPlan> {
   const out: FamilyPlan = { ...plan, family: { ...plan.family }, version: { ...plan.version } };
   let familyId = plan.family.id;
   if (plan.family.create) {
     const created = await createFamily(prisma, {
       name: seed.name,
       engine: 'modex_draft_queue',
-      program: SEED_PROGRAM,
+      program: programOf(seed),
       problemFamily: seed.problemFamily,
       persona: seed.persona,
       createdBy,
@@ -166,7 +175,7 @@ async function main(): Promise<void> {
   const prisma: any = new PrismaClient();
   try {
     const plans: FamilyPlan[] = [];
-    for (const seed of SEED_FAMILIES) plans.push(await planFamily(prisma, seed));
+    for (const seed of ALL_SEEDS) plans.push(await planFamily(prisma, seed));
 
     const report: Record<string, unknown> = {
       dryRun: !args.apply,
@@ -178,13 +187,13 @@ async function main(): Promise<void> {
 
     if (args.apply) {
       const applied: FamilyPlan[] = [];
-      for (const seed of SEED_FAMILIES) {
+      for (const seed of ALL_SEEDS) {
         const plan = plans.find((p) => p.key === seed.key) as FamilyPlan;
         applied.push(await applyPlan(prisma, seed, plan, args.createdBy));
       }
       report.applied = applied;
       const again: FamilyPlan[] = [];
-      for (const seed of SEED_FAMILIES) again.push(await planFamily(prisma, seed));
+      for (const seed of ALL_SEEDS) again.push(await planFamily(prisma, seed));
       report.secondRun = { counts: counts(again), families: again };
     }
 

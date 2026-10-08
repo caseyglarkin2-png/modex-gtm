@@ -26,12 +26,18 @@
  * tests/unit/gap/outreach-anchor.test.ts.
  */
 import type { AccountInputs, AccountIntelligenceBrief, HypothesisView } from '../account-intel/build';
-import { thesisRelevance } from '../people/thesis-relevance';
+import { thesisRelevance, type ThesisContext } from '../people/thesis-relevance';
+import { postingRoleOf } from '../research/claim-types';
 import { sensitivityOf } from '../research/sensitivity';
 import { isPhysicalOpsFact } from '../research/facts';
 import { citedQuote } from '../research/propose';
 import { sameIdea } from '../context/same-idea';
+import { currentnessLine } from '../research/currentness';
+import { suggestedFamilyFor } from './propose-family';
+import { draftApproachFor, noOpeningLine } from './draft-approach';
+import type { EvidenceApproach } from '../research/approach-policy';
 import type { AccountStory, StoryRow, StorySentence, StoryTag } from './story';
+import { CANON_PROOF } from '../compiler/canon';
 
 export interface AnchorPerson {
   personaId: number | null;
@@ -80,7 +86,52 @@ export interface OutreachAnchor {
   /** The other theses (approved, active or under review, grounded, not contradicted), the primary excluded. */
   alternatives: AnchorThesis[];
   /** Checked, citable story lines no thesis is grounded on: a prefilled draft each. */
-  draftable: Array<{ story: string; sourceLabel: string; sourceUrl: string | null; factId: string; proposedObservation: string }>;
+  draftable: Array<{ story: string; sourceLabel: string; sourceUrl: string | null; factId: string; proposedObservation: string; /** R35: JOB_POSTING / PROCUREMENT for a claim of its own class (its own draft text); null for a physical fact. */ claimClass?: string | null; /** Item 2a: "Current until <date>." by the one freshness authority (null: no end date). */ currentLine?: string | null; /** Items 4 and 6: the approach this fact opens (story/draft-approach.ts). */ approach?: EvidenceApproach }>;
+  /** Item 4: checked, citable stories that open NO approach (a one-time software deployment, a leadership change): said, never offered. */
+  notAnOpening: Array<{ story: string; sourceLabel: string; sourceUrl: string | null; factId: string; line: string }>;
+  /**
+   * Item 2a: checked, citable stories that are TOO OLD for a first touch by the one freshness authority
+   * (research/currentness.ts, the clock the gate and the compiler read): never offered as draftable, and the page says
+   * why instead of dropping them silently.
+   */
+  tooOld: Array<{ story: string; sourceLabel: string; sourceUrl: string | null; factId: string; line: string }>;
+  /**
+   * PROPOSALS IN PROGRESS (R11/R12): the open drafts and theses under review grounded on a checked fact here, with
+   * what the reviewer decides on (the exact opening sentence, the guess, the person, what would prove it wrong, the
+   * family and whether it is known). A draft never consumes its fact silently: it is listed here with its status and
+   * the one review control; review happens where the action lives, never in a lane.
+   */
+  pending: AnchorPending[];
+}
+
+export interface AnchorPending {
+  hypothesisId: string;
+  status: 'draft' | 'review_required';
+  factId: string;
+  story: string;
+  sourceLabel: string;
+  sourceUrl: string | null;
+  /** The observation without citation tokens: the sentence the opening is built on. */
+  observation: string;
+  /** The stored observation with its citation tokens, for an edit that must keep them. */
+  observationRaw: string;
+  problem: string;
+  wouldProveWrong: string[];
+  family: string;
+  familyKnown: boolean;
+  /** Item 3: preselected on the one question (the derived family, else the general case), with why. */
+  suggestedFamily?: string | null;
+  suggestedBasis?: string | null;
+  personaId: number | null;
+  personName: string | null;
+  /** Item 3: the proposal's own person's title: answering the question posts THIS person, never the anchor's. */
+  personTitle?: string | null;
+  /** Would the send gate let it out (read from the loader's sendable set; a draft is not judged until review). */
+  gate: 'sendable' | 'refused' | 'not_judged';
+  /** R35: the cited fact's claim class (a posting keeps its own draft text on a resubmit). */
+  claimClass?: string | null;
+  /** Item 2a: why its fact can no longer open a first touch (too old, or ended), else null. Never approvable then. */
+  stale?: string | null;
 }
 
 export interface AnchorInput {
@@ -89,7 +140,7 @@ export interface AnchorInput {
   /** The eligible people on the stack (for "fits better"). */
   people?: AnchorPerson[];
   brief: Pick<AccountIntelligenceBrief, 'hypotheses'>;
-  inputs: Pick<AccountInputs, 'facts' | 'hypotheses' | 'roi'>;
+  inputs: Pick<AccountInputs, 'facts' | 'hypotheses' | 'roi' | 'setAsideFactIds'>;
   story: Pick<AccountStory, 'rows'>;
   /** The person's recorded anchor choice (persona.angle row with anchorHypothesisId), if any. */
   anchorChoice: string | null;
@@ -104,8 +155,12 @@ export interface AnchorInput {
   now: Date;
 }
 
-/** The canon, as the compiler phrases it (compiler/canon.ts): measured and modeled, both clearly YardFlow's. */
-export const BEST_PROOF_MEASURED = 'Primo Brands: trailer turns 48 to 24 minutes, measured, with about 5% more volume through the same doors, observed; 24 sites live, 260 sites under contract.';
+/**
+ * The canon, as the compiler phrases it (compiler/canon.ts CANON_PROOF): measured and modeled, both clearly YardFlow's.
+ * R63-B N8: composed from the canon's phrases, one figure's qualifier per sentence, so each passes the compiler's
+ * nearest-qualifier rule.
+ */
+export const BEST_PROOF_MEASURED = `Primo Brands: ${CANON_PROOF.turnTime}. ${CANON_PROOF.volumeLift[0].toUpperCase()}${CANON_PROOF.volumeLift.slice(1)}. ${CANON_PROOF.committed}; ${CANON_PROOF.live}.`;
 export const BEST_PROOF_MODELED = 'Our model, not their number: about $1M per site a year, modeled.';
 
 const OPEN_STATUSES = new Set(['approved', 'active', 'confirmed', 'partially_confirmed']);
@@ -140,10 +195,20 @@ function sharedCounterparty(a: string, b: string, account: string): boolean {
   return [...nouns(a)].some((w) => nb.has(w));
 }
 
-function thesisOf(h: HypothesisView, raw: AccountInputs['hypotheses'][number] | undefined, facts: AccountInputs['facts'], person: AnchorPerson | null, sendable: ReadonlySet<string> | null | undefined): AnchorThesis {
+/**
+ * R32: what the person match reads from a thesis: the observation, the guess, the declared approach and, for a job or
+ * procurement-led thesis, the role its cited posting names (so the remit is the posting's function, not its words).
+ */
+function thesisContextOf(h: HypothesisView, raw: AccountInputs['hypotheses'][number] | undefined, first: AccountInputs['facts'][number] | undefined): ThesisContext {
+  const approach = raw?.approach ?? null;
+  return { observation: h.observation.text, problemHypothesis: h.problem, approach, postingRole: approach === 'job_procurement_led' && first ? postingRoleOf(first.quote) : null };
+}
+
+function thesisOf(h: HypothesisView, raw: AccountInputs['hypotheses'][number] | undefined, facts: AccountInputs['facts'], person: AnchorPerson | null, sendable: ReadonlySet<string> | null | undefined, accountName: string): AnchorThesis & { context: ThesisContext } {
   const factIds = raw ? [...new Set([...raw.observation.matchAll(CITATION)].map((m) => m[1]))] : [];
   const first = facts.find((f) => factIds.includes(f.id) || (f.sameQuoteIds ?? []).some((id) => factIds.includes(id)));
-  const rel = thesisRelevance(person?.title ?? null, { observation: h.observation.text, problemHypothesis: h.problem });
+  const context = thesisContextOf(h, raw, first);
+  const rel = thesisRelevance(person?.title ?? null, context, { accountName });
   const gateRead = !!sendable;
   const gateOk = !!sendable && sendable.has(h.id);
   const needsReview = h.needsReview.length > 0;
@@ -158,6 +223,7 @@ function thesisOf(h: HypothesisView, raw: AccountInputs['hypotheses'][number] | 
     problem: h.problem,
     usable: gateRead && gateOk && !needsReview,
     unusableWhy: !gateRead ? 'the send gate could not be read just now' : !gateOk ? 'its observation is a keyword hit or not a verified outreach fact, so the send gate would refuse the opening' : needsReview ? `the angle needs your review: ${h.needsReview[0].replace(/\.$/, '')}` : null,
+    context,
   };
 }
 
@@ -167,8 +233,11 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
   const live = i.inputs.facts.filter((f) => !f.expiresAt || new Date(f.expiresAt).getTime() > i.now.getTime());
   const theses = i.brief.hypotheses
     .filter((h) => h.grounded && h.truth !== 'CONTRADICTED')
-    .map((h) => thesisOf(h, rawById.get(h.id), live, i.person, i.sendable))
+    .map((h) => thesisOf(h, rawById.get(h.id), live, i.person, i.sendable, i.accountName))
     .filter((t) => OPEN_STATUSES.has(t.status) || REVIEW_STATUSES.has(t.status));
+  // The person-match context stays internal (the anchor's public shape is unchanged).
+  const contextOf = new Map(theses.map((t) => [t.hypothesisId, t.context]));
+  for (const t of theses) delete (t as Partial<typeof t>).context;
   // Only a usable open thesis can be the anchor: the same gate the email runs (General Mills' active thesis opens on a
   // Brazil divestiture that needs review; the call page says so, and the anchor must never contradict it).
   const open = theses.filter((t) => OPEN_STATUSES.has(t.status) && t.usable);
@@ -195,7 +264,9 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
   if (primary && i.person && primary.relevance.tier === 'none') {
     const t = primary;
     const others = (i.people ?? []).filter((p) => p.name !== i.person!.name);
-    const tierOf = (p: AnchorPerson) => thesisRelevance(p.title, { observation: t.observation, problemHypothesis: t.problem }).tier;
+    // R32: the same context the primary was read on (a job-led thesis: the posting's function), never the bare text.
+    const ctx = contextOf.get(t.hypothesisId) ?? { observation: t.observation, problemHypothesis: t.problem };
+    const tierOf = (p: AnchorPerson) => thesisRelevance(p.title, ctx, { accountName: i.accountName }).tier;
     fitsBetter = others.find((p) => tierOf(p) === 'direct') ?? others.find((p) => tierOf(p) === 'related') ?? null;
   }
   const first = i.person ? i.person.name.split(' ')[0] : '';
@@ -209,7 +280,8 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
     : null;
 
   // SUPPORTING FACT: one more checked, citable, live, physical-network fact that is not the anchor's (the gate's rules).
-  const citable = (f: AccountInputs['facts'][number]) => f.continuity !== 'ended' && !sensitivityOf(f.quote) && !BROKEN_MONEY.test(f.quote) && isPhysicalOpsFact(f.quote);
+  // R30/R31: a physical fact, or a job / procurement claim (its own approach), may open a thesis.
+  const citable = (f: AccountInputs['facts'][number]) => f.continuity !== 'ended' && !sensitivityOf(f.quote) && !BROKEN_MONEY.test(f.quote) && (isPhysicalOpsFact(f.quote) || f.claimClass === 'JOB_POSTING' || f.claimClass === 'PROCUREMENT');
   // A fact that grounds another usable thesis is already offered as a different story; another fact is preferred, and
   // when none exists the thesis is flagged as the same fact so the page never reads it as three items.
   const altFactIds = new Set(theses.filter((t) => t.hypothesisId !== primary?.hypothesisId && t.usable).flatMap((t) => t.factIds));
@@ -249,6 +321,17 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
       .flatMap((h) => [...(rawById.get(h.id)?.observation ?? '').matchAll(CITATION)].map((m) => m[1])),
   );
   const draftable: OutreachAnchor['draftable'] = [];
+  const notAnOpening: OutreachAnchor['notAnOpening'] = [];
+  // Item 2 (audit at 31f09c71): a story the seller set aside (NOT THIS STORY: a rejected thesis cites it) never returns
+  // under DRAFT A THESIS; the page promised GAP would not propose it again. The loader reads every rejected thesis's
+  // facts; the loaded theses are read too (a fixture, or a loader without the list).
+  const setAside = new Set<string>([
+    ...(i.inputs.setAsideFactIds ?? []),
+    ...i.inputs.hypotheses.filter((h) => h.status === 'rejected').flatMap((h) => [...(h.observation ?? '').matchAll(CITATION)].map((m) => m[1])),
+  ]);
+  const isSetAside = (f: AccountInputs['facts'][number]) => setAside.has(f.id) || (f.sameQuoteIds ?? []).some((id) => setAside.has(id));
+  // Item 2a: the one freshness authority's words for a fact (the loader computed `expiresAt` with it).
+  const staleLine = (f: AccountInputs['facts'][number]) => (f.continuity === 'ended' ? currentnessLine({ current: false, until: null, basis: 'ended' }) : currentnessLine({ current: false, until: f.expiresAt, basis: 'type_window' }));
   for (const r of i.story.rows) {
     if (r.key !== 'changing' && r.key !== 'stories' && r.key !== 'goal') continue;
     for (const s of r.sentences) {
@@ -257,10 +340,63 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
       if (!factId) continue;
       const fact = live.find((f) => f.id === factId || (f.sameQuoteIds ?? []).includes(factId))!;
       if (groundedFactIds.has(fact.id) || (fact.sameQuoteIds ?? []).some((id) => groundedFactIds.has(id))) continue;
+      if (isSetAside(fact)) continue;
       if (theses.some((t) => sameIdea(t.observation, s.text, i.accountName) || sharedCounterparty(t.observation, s.text, i.accountName))) continue;
       if (draftable.some((d) => d.factId === fact.id || sameIdea(d.story, s.text, i.accountName) || sharedCounterparty(d.story, s.text, i.accountName))) continue;
-      draftable.push({ story: s.text, sourceLabel: `${host(fact.url) ?? (fact.title || 'source')}, ${day(fact.publishedAt)}`, sourceUrl: fact.url, factId: fact.id, proposedObservation: citedQuote(fact.title || host(fact.url) || 'source', fact.quote.trim().replace(/\s+/g, ' '), fact.id, i.accountName) });
+      // Items 4 and 6: the approach this fact may open; none means an honest no-action, said on the page.
+      const approach = draftApproachFor({ text: fact.quote, claimClass: fact.claimClass ?? null, continuity: fact.continuity });
+      if (!approach) {
+        if (!notAnOpening.some((n) => n.factId === fact.id)) notAnOpening.push({ story: s.text, sourceLabel: `${host(fact.url) ?? (fact.title || 'source')}, ${day(fact.publishedAt)}`, sourceUrl: fact.url, factId: fact.id, line: noOpeningLine(fact.quote) });
+        continue;
+      }
+      draftable.push({ approach, story: s.text, sourceLabel: `${host(fact.url) ?? (fact.title || 'source')}, ${day(fact.publishedAt)}`, sourceUrl: fact.url, factId: fact.id, proposedObservation: citedQuote(fact.title || host(fact.url) || 'source', fact.quote.trim().replace(/\s+/g, ' '), fact.id, i.accountName), claimClass: fact.claimClass ?? null, currentLine: fact.expiresAt ? currentnessLine({ current: true, until: fact.expiresAt, basis: 'type_window' }) : null });
     }
+  }
+  // TOO OLD FOR A FIRST TOUCH (item 2a): a checked, citable story no live thesis grounds, past its currentness. Never
+  // offered as draftable (it could not be sent); listed with the reason, newest first, at most three.
+  const tooOld: OutreachAnchor['tooOld'] = [];
+  for (const f of i.inputs.facts) {
+    if (tooOld.length >= 3) break;
+    if (live.includes(f) || f.continuity === 'ended' || !citable(f) || isSetAside(f)) continue;
+    if (groundedFactIds.has(f.id) || (f.sameQuoteIds ?? []).some((id) => groundedFactIds.has(id))) continue;
+    if (tooOld.some((t) => t.factId === f.id || sameIdea(t.story, f.quote, i.accountName))) continue;
+    tooOld.push({ story: f.quote, sourceLabel: `${host(f.url) ?? (f.title || 'source')}, ${day(f.publishedAt)}`, sourceUrl: f.url, factId: f.id, line: staleLine(f) });
+  }
+
+  // PROPOSALS IN PROGRESS: an open draft or a thesis under review grounded on a live checked fact here. Listed with
+  // its status so the seller never loses the fact (the recording: a failed submit made the fact vanish).
+  const pending: AnchorPending[] = [];
+  for (const raw of i.inputs.hypotheses) {
+    if (raw.status !== 'draft' && raw.status !== 'review_required') continue;
+    const cited = [...new Set([...raw.observation.matchAll(CITATION)].map((m) => m[1]))];
+    const citedBy = (f: AccountInputs['facts'][number]) => cited.includes(f.id) || (f.sameQuoteIds ?? []).some((id) => cited.includes(id));
+    // Item 2a: a proposal whose fact is past its currentness stays listed (a draft never vanishes) and says why.
+    const fact = live.find(citedBy) ?? i.inputs.facts.find(citedBy);
+    if (!fact) continue;
+    const stale = live.includes(fact) ? null : staleLine(fact);
+    const family = raw.problemFamily ?? 'unmapped';
+    const who = raw.personaId != null ? (i.people ?? []).find((p) => p.personaId === raw.personaId) ?? (i.person?.personaId === raw.personaId ? i.person : null) : null;
+    pending.push({
+      hypothesisId: raw.id,
+      status: raw.status,
+      factId: fact.id,
+      story: fact.quote,
+      sourceLabel: `${host(fact.url) ?? (fact.title || 'source')}, ${day(fact.publishedAt)}`,
+      sourceUrl: fact.url,
+      observation: stripCitations(raw.observation),
+      observationRaw: raw.observation,
+      problem: raw.problem,
+      wouldProveWrong: raw.falsification,
+      family,
+      familyKnown: family !== 'unmapped',
+      ...(family === 'unmapped' ? (() => { const s = suggestedFamilyFor(fact.quote); return { suggestedFamily: s.family, suggestedBasis: s.basis }; })() : { suggestedFamily: null, suggestedBasis: null }),
+      personaId: raw.personaId ?? null,
+      personName: who?.name ?? null,
+      personTitle: who?.title ?? null,
+      gate: stale ? 'refused' : raw.status === 'draft' || !i.sendable ? 'not_judged' : i.sendable.has(raw.id) ? 'sendable' : 'refused',
+      claimClass: fact.claimClass ?? null,
+      stale,
+    });
   }
 
   return {
@@ -274,6 +410,9 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
     doNotUse: merged,
     alternatives,
     draftable,
+    tooOld,
+    notAnOpening,
+    pending,
   };
 }
 

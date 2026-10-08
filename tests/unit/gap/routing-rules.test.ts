@@ -135,8 +135,10 @@ describe('RULES ordering', () => {
       'reply_pending',
       'active_opportunity',
       'opportunity_unknown',
+      'family_hold',
       'bounced_or_invalid',
       'disp_wrong_person',
+      'named_in_referral',
       'disp_timing',
       'disp_not_priority',
       'disp_objection',
@@ -323,6 +325,30 @@ describe('routePersona, one rule at a time', () => {
     expect(decision(routePersona(i)).ruleId).toBe('opportunity_unknown');
   });
 
+  // Batch item 7 (R62 matrix): routing made a READY card for a subsidiary its corporate family holds; the click refused it.
+  it('R3d family_hold: a related account in a live motion holds the card (nurture, never a contact action), and says which', () => {
+    const i = withHotTrigger(base());
+    i.account.familyHold = { detail: 'Frito-Lay (a subsidiary) has an open HubSpot deal.', unknown: false };
+    const d = decision(routePersona(i));
+    expect(d).toMatchObject({ ruleId: 'family_hold', action: 'nurture', reason: 'family_hold', blocked: false });
+    expect(d.explain.whyAction).toContain('Frito-Lay (a subsidiary) has an open HubSpot deal.');
+  });
+
+  it('R3d family_hold: a family that could not be read holds too (fail closed), named unknown; no hold routes as before', () => {
+    const i = base();
+    i.account.familyHold = { detail: 'Could not read the parent and child companies in HubSpot.', unknown: true };
+    expect(decision(routePersona(i))).toMatchObject({ ruleId: 'family_hold', reason: 'family_hold:unknown' });
+    i.account.familyHold = null;
+    expect(decision(routePersona(i)).ruleId).toBe('enroll');
+  });
+
+  it('R3d comes after R3b and R3c: an opportunity read that failed at the account itself is named as such, not as the family', () => {
+    const i = base();
+    i.account.familyHold = { detail: 'A sibling is live.', unknown: false };
+    i.account.opportunity = { status: 'UNKNOWN', reason: 'hubspot_error', detail: '503' };
+    expect(decision(routePersona(i)).ruleId).toBe('opportunity_unknown');
+  });
+
   it('R3b active_opportunity: a booked meeting routes nurture even with a hot trigger and usable phone', () => {
     const i = withHotTrigger(base());
     i.comms.meetingBooked = true;
@@ -392,6 +418,21 @@ describe('routePersona, one rule at a time', () => {
     expect(rd.ruleId).toBe('disp_wrong_person');
     expect(rd.reason).toBe('referral');
     expect(rd.explain.whyAction).toContain('Pat Doe');
+  });
+
+  it('R5b named_in_referral (R42b): the person a buyer NAMED gets no cold action until the seller chose; it says why', () => {
+    const i = withHotTrigger(base());
+    i.comms.namedInReferral = { commitmentId: 'cmt-ref-1', detail: 'Ann named Bob Lane. No cold email to them until you choose how to approach them: mark the referral done or skipped on Work.' };
+    const d = decision(routePersona(i));
+    expect(d.ruleId).toBe('named_in_referral');
+    expect(d.action).toBe('research_required');
+    expect(d.lane).toBe('work_queue');
+    expect(d.reason).toBe('named_in_referral');
+    expect(d.explain.whyAction).toContain('Ann named Bob Lane');
+    // Released (the referral done or skipped): the same person routes on.
+    const r = withHotTrigger(base());
+    r.comms.namedInReferral = null;
+    expect(decision(routePersona(r)).ruleId).not.toBe('named_in_referral');
   });
 
   it('R6 disp_timing: timing with a future resumeAt routes nurture; a past resumeAt falls through', () => {

@@ -59,6 +59,8 @@ export interface FirstTouch {
   released: boolean;
   /** A first-touch Gmail draft not yet sent or deleted: it holds the account until it is (review C P1). */
   outstanding?: boolean;
+  /** R63-A S10: the person's name on record, when the recipient is a GAP contact (the motion line names them). */
+  recipientName?: string | null;
   /** The routing decision and the Gmail draft behind an outstanding draft (owner resolution: the remediation control). */
   decisionId?: string;
   gmailDraftId?: string;
@@ -212,6 +214,8 @@ export function computeAccountMotion(input: {
   if (live) {
     const unlockAt = live.outstanding ? new Date(8.64e15) : addBusinessDays(new Date(live.sentAt), MOTION_UNLOCK_BUSINESS_DAYS);
     const owner = cards.find((c) => c.persona.id === live.personaId) ?? null;
+    // R63-A S10: the person by name when their card has left the ready list (it does once the touch is out).
+    const toWhom = owner ? nameOf(owner) : live.recipientName?.trim() || live.recipient;
     const waiting = ranked.filter((r) => r.card.persona.id !== live.personaId);
     // Casey's choice of who comes next: the recorded next person, or (from the needs_owner panel, review S1) the person
     // chosen as primary when they are still waiting.
@@ -237,8 +241,8 @@ export function computeAccountMotion(input: {
         alsoWaiting: waiting.filter((r) => r !== nextPick).map((x) => person(x.card, x.factors)),
         heldCardIds: allIds,
         headline: live.outstanding
-          ? `In motion: a first-touch draft to ${owner ? nameOf(owner) : live.recipient} is outstanding. One cold email motion at a time.`
-          : `In motion: ${owner ? nameOf(owner) : live.recipient} got a first touch on ${live.sentAt.slice(0, 10)}. One cold email motion at a time.`,
+          ? `In motion: a first-touch draft to ${toWhom} is outstanding. One cold email motion at a time.`
+          : `In motion: ${toWhom} got a first touch on ${day(new Date(live.sentAt))}. One cold email motion at a time.`,
       };
     }
     // Unlock window passed with no response: the next person becomes the primary, if they are a cold WHO or chosen.

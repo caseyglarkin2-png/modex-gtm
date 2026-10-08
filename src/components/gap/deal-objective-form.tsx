@@ -7,6 +7,7 @@
  */
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 export function DealObjectiveForm({ accountName, initial }: { accountName: string; initial: string }) {
   const router = useRouter();
@@ -21,7 +22,7 @@ export function DealObjectiveForm({ accountName, initial }: { accountName: strin
       return;
     }
     setState('saved');
-    router.refresh();
+    refreshNow(router);
   };
   return (
     <div className="mt-2 flex flex-col gap-2 sm:flex-row">

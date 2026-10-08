@@ -29,7 +29,8 @@ describe('<SendFromYardflow>', () => {
     expect(JSON.parse(String((fetchMock.mock.calls[0] as any[])[1].body))).toEqual({});
     expect(confirm).toHaveTextContent('Casey Larkin <casey@yardflow.ai>');
     expect(confirm).toHaveTextContent('joey maggard <joey.maggard@kroger.com>');
-    expect(confirm).toHaveTextContent('HubSpot: ON');
+    // R63-A S9: HubSpot in words, once.
+    expect(confirm).toHaveTextContent('No open deal, read moments ago. This email is logged to their HubSpot record.');
     expect(confirm).not.toHaveTextContent(/bcc|gmail_direct|HUMAN_APPROVED|review_required/i);
 
     fetchMock.mockResolvedValueOnce(json({ ok: true, alreadySent: false, sent: { sentAt: '2026-09-26T14:00:00Z', gmailSentMessageId: 'm-1' }, humanAction: 'recorded' }, 201));

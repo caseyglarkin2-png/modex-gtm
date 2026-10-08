@@ -222,11 +222,34 @@ export function isTransportNetworkFact(sentence: string): boolean {
   return TRANSPORT.test(sentence) && TRANSPORT_ACTION.test(sentence) && !FUNDING_OR_MARKET.test(sentence);
 }
 
+/**
+ * Batch item 4 (audit at 31f09c71): a SOFTWARE deployment ("deployed a new warehouse management system across its
+ * Ohio DCs") and a PARTNERSHIP announcement ("announced a multi-year agreement with Gatik to deploy autonomous
+ * freight") name a site and a change verb but report no change to the physical network: the first is a technology
+ * claim, the second a partnership claim (research/claim-types.ts), and neither opens an event-led first touch (the
+ * prohibited leap: "any software deployment implies a yard need"; "the partner speaks for the account"). Hardware in
+ * the yard or the building ("deployed 40 autonomous yard trucks", "a robotic fulfillment system") stays physical.
+ */
+export const SOFTWARE_DEPLOYMENT = /\b(?:implement(?:ed|s|ing|ation)|deploy(?:ed|s|ing|ment)|rolled out|roll(?:s|ing)? out|went live|go-live|selected|selects|chose|adopt(?:ed|s|ing)|integrat(?:ed|es|ing)|upgrad(?:ed|es|ing)|migrat(?:ed|es|ing))\b.{0,80}\b(?:system|software|platform|wms|tms|yms|yard management|warehouse management|transportation management|telematics|rfid|visibility)\b/i;
+export const PARTNERSHIP_ANNOUNCEMENT = /\b(?:partner(?:ed|ship|s)?|agreement|teams? up|collaborat(?:e|es|ed|ion)|alliance)\b.{0,60}\b(?:3pl|carrier|logistics provider|freight|transportation provider|trucking|fleet|autonomous|drayage|intermodal|rail)\b/i;
+
+/** A software deployment or a partnership announcement: a claim of its own type, never a physical-network change. */
+export function isSoftwareOrPartnershipClaim(sentence: string): boolean {
+  return SOFTWARE_DEPLOYMENT.test(sentence) || PARTNERSHIP_ANNOUNCEMENT.test(sentence);
+}
+
+/** Item 4: a partnership or software sentence that states something (not negated, habitual, boilerplate or a hedge). */
+function isClaimOfItsOwnType(sentence: string): boolean {
+  return isSoftwareOrPartnershipClaim(sentence) && !NEGATION.test(sentence) && !HABITUAL.test(sentence) && !isBoilerplate(sentence) && !isRunOnOrNavigation(sentence) && !HYPOTHETICAL.test(sentence);
+}
+
 /** Does this sentence state a physical-operations or network change (and is not a financial-statement mention)? */
 export function isPhysicalOpsFact(sentence: string): boolean {
   if (NEGATION.test(sentence) || HABITUAL.test(sentence)) return false;
   if (isBoilerplate(sentence) || isRunOnOrNavigation(sentence)) return false;
   if (HYPOTHETICAL.test(sentence)) return false;
+  // Item 4: a software deployment or a partnership announcement is its own claim type (claim-types.ts), never this.
+  if (isSoftwareOrPartnershipClaim(sentence)) return false;
   if (isTransportNetworkFact(sentence)) return true;
   if (CONTRACT_CONTEXT.test(sentence)) return false;
   if (hasSpecificSiteChange(sentence)) return true;
@@ -300,7 +323,9 @@ export function extractFactSentences(text: string, max = 12): string[] {
     // Only a real dateline ("HOUSTON and WHITESTONE, N.Y., March 30, 2026 (GLOBE NEWSWIRE) --"), never a clause.
     const s = raw.replace(/\s+/g, ' ').trim().replace(/^(?:[A-Z][A-Za-z.'-]*(?: [A-Z][A-Za-z.'-]*)*,? (?:and [A-Z][A-Za-z.'-]*(?: [A-Z][A-Za-z.'-]*)*,? )?(?:[A-Z]{2}\.?|[A-Z]\.[A-Z]\.|[A-Z][a-z]+\.?)?,? ?)?(?:[A-Z][a-z]{2,8}\.? \d{1,2}, \d{4} )?\((?:GLOBE NEWSWIRE|BUSINESS WIRE|PR ?Newswire|PRNewswire|ACCESSWIRE|Canada NewsWire)\) ?(?:--|\u2013|\u2014) ?/, '');
     if (s.length < 60 || s.length > 500) continue;
-    if (!isPhysicalOpsFact(s)) continue;
+    // Item 4: a partnership or software sentence is no longer a physical fact, but research keeps it as a verified
+    // claim of its own type (R22: claim-types.ts), behind the same negation, habit, boilerplate and hedge filters.
+    if (!isPhysicalOpsFact(s) && !isClaimOfItsOwnType(s)) continue;
     const key = normalizeForMatch(s);
     if (seen.has(key)) continue;
     seen.add(key);

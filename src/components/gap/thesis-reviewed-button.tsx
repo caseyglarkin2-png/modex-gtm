@@ -3,6 +3,7 @@
 /** "I reviewed it, keep it": clears a THESIS NEEDS REVIEW flag until the next material change. Never rewrites the thesis. */
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 export function ThesisReviewedButton({ hypothesisId }: { hypothesisId: string }) {
   const router = useRouter();
@@ -14,7 +15,7 @@ export function ThesisReviewedButton({ hypothesisId }: { hypothesisId: string })
     try {
       const res = await fetch('/api/gap/accounts/thesis-reviewed', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ hypothesisId }) });
       if (!res.ok) return setErr(String(((await res.json().catch(() => ({}))) as { reason?: string; error?: string }).reason ?? res.status));
-      router.refresh();
+      refreshNow(router);
     } catch {
       setErr('Not saved: the request did not complete.');
     } finally {

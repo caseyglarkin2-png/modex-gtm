@@ -56,14 +56,21 @@ export function HealthStrip({ initial = null }: { initial?: HealthReport | null 
     );
   }
   const r = state.report;
+  // R63-A S16: the worst failure names who repairs it and the next step, on the line itself (never only in the details).
+  const worst = r.overall === 'HEALTHY' ? null : r.components.filter((c) => c.state === r.overall && c.owner && c.retry)[0] ?? null;
   return (
     <details data-testid="health-strip" data-state={r.overall} className="rounded-md border border-[var(--border)] px-3 py-2 text-xs">
-      <summary className="flex cursor-pointer list-none items-center gap-2">
+      <summary className="flex cursor-pointer list-none flex-wrap items-center gap-x-2 gap-y-0.5">
         <span aria-hidden className={`inline-block h-2 w-2 shrink-0 rounded-full ${DOT[r.overall]}`} />
         <span className="sr-only">{WORD[r.overall]}:</span>
         <span data-testid="health-headline" className={r.overall === 'HEALTHY' ? 'text-[var(--muted-foreground)]' : 'font-medium'}>
           {r.headline}
         </span>
+        {worst ? (
+          <span data-testid="health-repair" className="basis-full pl-4 text-[var(--muted-foreground)]">
+            Owner: {worst.owner}. Next: {worst.retry}.
+          </span>
+        ) : null}
       </summary>
       <ul className="mt-2 space-y-1" data-testid="health-details">
         {r.components.map((c) => (
@@ -72,6 +79,7 @@ export function HealthStrip({ initial = null }: { initial?: HealthReport | null 
             <span className="font-medium">{c.name}</span>
             <span>{WORD[c.state]}</span>
             <span className="text-[var(--muted-foreground)]">{c.detail}</span>
+            {c.owner && c.retry ? <span className="basis-full pl-3.5" data-testid={`health-${c.key}-repair`}>Owner: {c.owner}. Next: {c.retry}.</span> : null}
           </li>
         ))}
         <li className="text-[var(--muted-foreground)]">Checked {new Date(r.checkedAt).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}</li>

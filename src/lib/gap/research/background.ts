@@ -8,11 +8,15 @@
  * with a reason) for the accounts where evidence would unblock the most work,
  * BEFORE he opens the app. Its output is an inbox (research/inbox.ts).
  *
- * It NEVER creates, submits, approves or activates a hypothesis, never links
- * evidence to one, never picks a problem family as buyer truth, never routes,
- * drafts, enrolls or sends. runEvidenceResearch writes only ResearchRun,
- * EvidenceRecord, ProspectingSignal and its audit row; this module adds only a
- * summary audit row. Pinned by tests/unit/gap/background-research.test.ts.
+ * It never approves or activates a hypothesis, never picks a problem family as
+ * buyer truth, never routes, drafts an email, enrolls or sends. runEvidenceResearch
+ * writes only ResearchRun, EvidenceRecord, ProspectingSignal and its audit row;
+ * this module adds a summary audit row. R33 (batch item 5, Casey's approved
+ * policy): with GAP_HYPOTHESIS_ENABLED on, the closeout PREPARES a proposal for
+ * each fresh verified claim no thesis cites (research/auto-prepare.ts: a draft
+ * submitted for review through the one draft service, withdrawable, never
+ * twinned, never for a story set aside). Pinned by
+ * tests/unit/gap/background-research.test.ts and auto-prepare.test.ts.
  *
  * Deterministic priority, no score (selectBackgroundTargets):
  *   1. a research thesis / research card blocking the most people
@@ -30,9 +34,11 @@ import { listAllCurrent } from '../routing/queue';
 import { RESEARCHABLE_RULES, sellerLaneOf } from '../routing/card-readiness';
 import { loadThesisGroups, splitThesisWork } from '../hypothesis/thesis-groups';
 import { runEvidenceResearch, type ResearchDeps, type ResearchResult } from './run';
-import { settleSignals, signalCandidates, signalFocus, type ResearchableSignal } from '../signals/research';
+import { recordFailedResearchAttempt, settleSignals, signalCandidates, signalFocus, type ResearchableSignal } from '../signals/research';
 import { loadWatchProfiles } from '../signals/watch';
 import { heldDealAccounts } from '../deals/in-deals';
+import { CURRENTNESS_SELECT, factCurrentness, type CurrentnessFact } from './currentness';
+import { prepareProposalsFromResearch, type PrepareOutcome } from './auto-prepare';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -222,13 +228,14 @@ export async function selectBackgroundTargets(prisma: PrismaLike, now: Date, dep
   }
 
   // 3. Outreach facts on approved / in-use hypotheses nearing expiry.
-  const expiring: Array<{ account_name: string; problem_family: string; signals: Array<{ signal: { freshness_expires_at: Date | null } | null }> }> = await prisma.prospectingHypothesis.findMany({
+  const expiring: Array<{ account_name: string; problem_family: string; signals: Array<{ signal: CurrentnessFact | null }> }> = await prisma.prospectingHypothesis.findMany({
     where: { status: { in: ['approved', 'active'] } },
-    select: { account_name: true, problem_family: true, signals: { where: { role: 'primary' }, select: { signal: { select: { freshness_expires_at: true } } } } },
+    select: { account_name: true, problem_family: true, signals: { where: { role: 'primary' }, select: { signal: { select: CURRENTNESS_SELECT } } } },
     take: 500,
   });
   for (const h of expiring) {
-    const exp = h.signals.map((s) => s.signal?.freshness_expires_at).filter((d): d is Date => !!d).map((d) => new Date(d));
+    // Item 2a: when each primary fact stops being current, by the one freshness authority.
+    const exp = h.signals.map((s) => (s.signal ? factCurrentness(s.signal, now).until : null)).filter((d): d is string => !!d).map((d) => new Date(d));
     const soon = exp.find((d) => d.getTime() > now.getTime() && d.getTime() - now.getTime() <= EXPIRY_HORIZON_MS);
     if (soon) merge(byAccount, { ...base(h.account_name, 'expiring_evidence'), expiresAt: soon.toISOString(), problemFamily: h.problem_family });
   }
@@ -262,7 +269,7 @@ export async function selectBackgroundTargets(prisma: PrismaLike, now: Date, dep
 export interface BackgroundRunResult {
   runTag: string;
   considered: number;
-  researched: Array<{ accountName: string; reason: TargetReason; runId: string; outcome: ResearchResult['outcome']; facts: number; freshFacts: number; rejected: number; conflicts: number; sources: number }>;
+  researched: Array<{ accountName: string; reason: TargetReason; runId: string; outcome: ResearchResult['outcome']; facts: number; freshFacts: number; rejected: number; conflicts: number; sources: number; /** R33: the proposals prepared for review from this run's claims. */ prepared?: string[] }>;
   skipped: Array<{ accountName: string; reason: string }>;
   failed: Array<{ accountName: string; error: string }>;
 }
@@ -282,7 +289,7 @@ async function lastResearchAt(prisma: PrismaLike, accountName: string): Promise<
 export async function runBackgroundResearch(
   prisma: PrismaLike,
   opts: { now: Date; cap?: number; clock?: () => number; timeBudgetMs?: number },
-  deps: ResearchDeps & SelectDeps & { research?: typeof runEvidenceResearch; fetchHtml?: import('../signals/intake').FetchHtml } = {},
+  deps: ResearchDeps & SelectDeps & { research?: typeof runEvidenceResearch; fetchHtml?: import('../signals/intake').FetchHtml; prepare?: typeof prepareProposalsFromResearch } = {},
 ): Promise<BackgroundRunResult> {
   const cap = Math.max(1, Math.min(BACKGROUND_MAX_CAP, Math.floor(opts.cap ?? BACKGROUND_DEFAULT_CAP)));
   const clock = opts.clock ?? Date.now;
@@ -333,6 +340,8 @@ export async function runBackgroundResearch(
       );
       if (signals.length) await settleSignals(prisma, { signals, accountName: t.accountName, result: r, now: opts.now });
       if (r.outcome !== 'provider_unavailable') await serveWorkSourceRequest(prisma, t);
+      // R33: prepare a reviewable proposal from each fresh verified claim no thesis cites (never beyond review).
+      const prepared: PrepareOutcome[] = r.facts.length ? await (deps.prepare ?? prepareProposalsFromResearch)(prisma, { accountName: t.accountName, facts: r.facts, actor: BACKGROUND_ACTOR, now: opts.now }).catch(() => []) : [];
       result.researched.push({
         accountName: t.accountName,
         reason: t.reason,
@@ -344,19 +353,17 @@ export async function runBackgroundResearch(
         conflicts: r.conflicts.length,
         // Research aperture: every page the run looked at, apart from the facts that verified.
         sources: r.sources?.length ?? 0,
+        ...(prepared.length ? { prepared: prepared.filter((p) => p.outcome === 'prepared').map((p) => ('hypothesisId' in p ? p.hypothesisId : '')) } : {}),
       });
     } catch (e) {
       const error = (e instanceof Error ? e.message : String(e)).slice(0, 200);
       result.failed.push({ accountName: t.accountName, error });
       // A failed attempt still serves the request (Casey can ask again); never an hourly retry forever.
       await serveWorkSourceRequest(prisma, t).catch(() => undefined);
-      // A signal never sticks in "researching": back to the queue, or settled no_usable_fact after repeated failures.
+      // A signal never sticks in "researching": back to the queue, or (batch item 10, R25) the DEAD LETTER after
+      // repeated failures, its own status and label, never "no usable fact".
       for (const sg of signals) {
-        const meta = ((sg as { metadata?: Record<string, unknown> | null }).metadata ?? {}) as Record<string, unknown>;
-        const attempts = Number(meta.researchAttempts ?? 0) + 1;
-        await prisma.gapSignal
-          .update({ where: { id: sg.id }, data: { research_status: attempts >= SIGNAL_RESEARCH_MAX_ATTEMPTS ? 'no_usable_fact' : 'queued', metadata: { ...meta, researchAttempts: attempts, researchError: error } } })
-          .catch(() => undefined);
+        await recordFailedResearchAttempt(prisma, { id: sg.id, metadata: (sg as { metadata?: unknown }).metadata }, error, opts.now, SIGNAL_RESEARCH_MAX_ATTEMPTS).catch(() => undefined);
       }
     }
   }

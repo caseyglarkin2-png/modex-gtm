@@ -23,6 +23,7 @@
 import { sourceLabel } from './source-label';
 import { proposeHypothesis } from '../hypothesis/service';
 import { GATE_SIGNAL_SELECT, outreachFactRefusal, type GateSignal } from './evidence-gate';
+import { isCurrentFact } from './currentness';
 import { actionabilityOf } from '../hypothesis/actionability';
 import { existingRevisionFor, type ExistingRevision } from '../hypothesis/current-revision';
 import { factFitsOpener } from './opener';
@@ -93,7 +94,7 @@ async function frozenToSupersede(prisma: PrismaLike, accountName: string, person
     include: { signals: { include: { signal: { select: { ...GATE_SIGNAL_SELECT, freshness_expires_at: true } } } } },
   });
   if (!row || row.status !== 'approved') return null;
-  const next = actionabilityOf({ status: row.status, observation: row.observation, account_name: row.account_name, signals: (row.signals ?? []).map((l: { signal?: unknown }) => l.signal as never) }, now).next;
+  const next = actionabilityOf({ status: row.status, observation: row.observation, account_name: row.account_name, metadata: row.metadata, signals: (row.signals ?? []).map((l: { signal?: unknown }) => l.signal as never) }, now).next;
   return next === 'revise' ? row.id : null;
 }
 
@@ -139,7 +140,7 @@ export async function proposeFromResearch(
         })
       : [];
   }
-  const fresh = signals.filter((s) => !s.freshness_expires_at || s.freshness_expires_at.getTime() > input.now.getTime());
+  const fresh = signals.filter((s) => isCurrentFact(s, input.now));
   if (fresh.length === 0) return { ok: false, reason: 'no_fresh_evidence' };
   // Red team T6/T7: the observation is built only from evidence that passes
   // the SAME gate approval applies. A verified quote that states no network
@@ -186,7 +187,7 @@ export async function proposeFromResearch(
     impacts: asList(base?.impact_hypotheses),
     wouldProveWrong: falsificationQuestions,
     // A thesis GAP proposes always says what would close it (WRONG IF is never blank).
-    whatANoMeans: base ? (base.what_a_no_means ?? null) : (operator ? 'If trailers do not wait longer at the sites you run since the change, it moved no load onto the yard: this thesis is closed for them.' : 'If trailers do not wait longer at the sites that remain, the change moved no load onto the yard: this thesis is closed for this account.'),
+    whatANoMeans: base ? (base.what_a_no_means ?? null) : (operator ? 'If trailers do not wait longer at the sites you run since the change, it moved no load onto the yards: this thesis is closed for them.' : 'If trailers do not wait longer at the sites that remain, the change moved no load onto the yards: this thesis is closed for this account.'),
     evidence: quotable.map((s) => ({ signalId: s.id, title: s.title, excerpt: s.evidence_text!, observedAt: s.observed_at.toISOString() })),
   };
 

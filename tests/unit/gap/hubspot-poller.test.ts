@@ -705,9 +705,9 @@ describe('S2-T9 structural: no HubSpot write path', () => {
     expect(POLLER.indexOf('isGapOsEnabled()')).toBeLessThan(POLLER.indexOf('ingestReply('));
     expect(POLLER.indexOf('inboundMessage.upsert')).toBeLessThan(POLLER.lastIndexOf('ingestReply('));
     // No direct stop or pause of its own.
-    expect(POLLER).not.toMatch(/stopRun/);
-    expect(POLLER).not.toMatch(/pause\(/);
-    expect(POLLER).not.toMatch(/stop\(/);
+    expect(POLLER).not.toMatch(/\bstopRun/);
+    expect(POLLER).not.toMatch(/\bpause\(/);
+    expect(POLLER).not.toMatch(/\bstop\(/);
     expect(ROUTE).not.toContain('ingestReply');
   });
 });

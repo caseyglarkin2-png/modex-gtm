@@ -30,6 +30,8 @@
 
 import { LIVE_ENROLLMENT_STATUSES } from '../sequence/family';
 import { AUTO_REPLY_SUBJECT, FREEMAIL_DOMAINS, OWN_DOMAINS } from './domains';
+import { areTwins, twinGroups, TWIN_WINDOW_MS, type TwinCandidate } from './twins';
+import { REPLY_SENT, REPLY_SUBJECT_TYPE } from '../execution/draft-ledger';
 
 export const SNIPPET_LENGTH = 280;
 export const DEFAULT_LIMIT = 50;
@@ -76,12 +78,24 @@ export interface ReplyItem {
    * (`contactEmail`, no persona), never to the colleague GAP emailed.
    */
   accountLevel?: boolean;
+  /** R42: the Gmail thread of the message (Gmail rows), for "answer it in the thread". */
+  threadId?: string | null;
+  /** R42: the sender's display name, when the mailbox gave one. */
+  fromName?: string | null;
+  /** R42: the other imports of this same message (a Gmail copy and a HubSpot copy are one reply). */
+  twinIds?: string[];
+  /** Batch item 8: the sender's HubSpot contact id when GAP holds it (Work binds Capture to their own deal). */
+  hubspotContactId?: string | null;
+  /** Batch item 8: when GAP sent the answer in their thread (the record of the reply; never asked to be recorded). */
+  answeredAt?: string | null;
 }
 
 export interface ListRepliesInput {
   state?: ReplyState;
   cursor?: string | null;
   limit?: number;
+  /** R60: one account's replies (the account page records them where the seller already is). */
+  accountName?: string | null;
 }
 
 export interface RepliesPage {
@@ -256,6 +270,18 @@ export async function loadKnownAddresses(prisma: any): Promise<Map<string, Known
       hypothesisTitle: hyp?.problem_family ?? null,
     });
   }
+  // Batch item 8 (R62 matrix): a person GAP holds who is a HubSpot contact (an open deal's own contact) is known even
+  // with no GAP thesis and no enrollment: their reply is the buyer talking on a live deal, never dropped. The account
+  // and the person come from the persona; no thesis is invented.
+  const contacts: Array<{ id: number; email: string | null; account_name: string; hubspot_contact_id: string | null }> =
+    (await prisma.persona
+      .findMany({ where: { email: { not: null }, hubspot_contact_id: { not: null }, prospecting_hypotheses: { none: {} } }, orderBy: { id: 'asc' }, select: { id: true, email: true, account_name: true, hubspot_contact_id: true } })
+      .catch(() => [])) ?? [];
+  for (const p of contacts) {
+    const email = normalizeEmail(p.email);
+    if (!email || map.has(email) || !p.hubspot_contact_id) continue;
+    map.set(email, { email, personaId: p.id, accountName: p.account_name, hubspotContactId: String(p.hubspot_contact_id), enrollmentId: null, enrollmentStatus: null, hypothesisId: null, hypothesisTitle: null });
+  }
   const live = new Set<string>(LIVE_ENROLLMENT_STATUSES);
   for (const e of enrollments) {
     const email = normalizeEmail(e.to_email);
@@ -288,6 +314,20 @@ export async function loadKnownAddresses(prisma: any): Promise<Map<string, Known
   return map;
 }
 
+/**
+ * Batch item 8 (finding 3): the messages GAP already answered in their thread (a REPLY_SENT row), with when. A sent
+ * answer is the record of the reply: it is not listed for triage and its account is never asked to record it.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- house convention for DB glue
+export async function answeredMessages(prisma: any, ids: readonly string[]): Promise<Map<string, string>> {
+  if (!ids.length || typeof prisma?.gapAuditEvent?.findMany !== 'function') return new Map();
+  const rows: Array<{ kind?: string; subject_type?: string; subject_id: string; created_at: Date }> = await prisma.gapAuditEvent
+    .findMany({ where: { kind: REPLY_SENT, subject_type: REPLY_SUBJECT_TYPE, subject_id: { in: [...ids] } }, select: { kind: true, subject_type: true, subject_id: true, created_at: true } })
+    .catch(() => []);
+  const wanted = new Set(ids);
+  return new Map((rows ?? []).filter((r) => r.kind === REPLY_SENT && wanted.has(String(r.subject_id))).map((r) => [String(r.subject_id), new Date(r.created_at).toISOString()]));
+}
+
 // ---------------------------------------------------------------------------
 // listReplies
 // ---------------------------------------------------------------------------
@@ -295,6 +335,8 @@ export async function loadKnownAddresses(prisma: any): Promise<Map<string, Known
 interface InboundRow {
   id: string;
   source?: string | null;
+  thread_id?: string | null;
+  from_name?: string | null;
   from_email: string;
   subject: string | null;
   body_text: string | null;
@@ -340,7 +382,7 @@ export async function loadColleagueReplies(prisma: any, known: Map<string, Known
     },
     orderBy: [{ received_at: 'desc' }, { id: 'desc' }],
     take: 100,
-    select: { id: true, source: true, from_email: true, subject: true, body_text: true, body_html: true, snippet: true, received_at: true },
+    select: { id: true, source: true, thread_id: true, from_email: true, from_name: true, subject: true, body_text: true, body_html: true, snippet: true, received_at: true },
   });
   const colleague = rows.filter((r) => !known.has(normalizeEmail(r.from_email)) && !AUTO_REPLY_SUBJECT.test(r.subject ?? ''));
   if (colleague.length === 0) return [];
@@ -357,10 +399,12 @@ export async function loadColleagueReplies(prisma: any, known: Map<string, Known
       if (s) suggestion.set(d.source_id, s);
     }
   }
+  const answered = await answeredMessages(prisma, colleague.map((r) => r.id));
   const out: ReplyItem[] = [];
   for (const r of colleague) {
     const dispositionId = confirmed.get(r.id) ?? null;
-    if (state === 'undispositioned' && dispositionId) continue;
+    const answeredAt = answered.get(r.id) ?? null;
+    if (state === 'undispositioned' && (dispositionId || answeredAt)) continue;
     const via = byDomain.get((normalizeEmail(r.from_email).split('@')[1] ?? '').toLowerCase());
     if (!via?.accountName || !via.hypothesisId) continue;
     const item: ReplyItem = {
@@ -378,6 +422,8 @@ export async function loadColleagueReplies(prisma: any, known: Map<string, Known
       enrollmentStatus: null,
       suggestion: suggestion.get(r.id) ?? null,
       accountLevel: true,
+      threadId: r.source === 'hubspot' ? null : (r.thread_id ?? null),
+      fromName: r.from_name ?? null,
     };
     if (state === 'all') item.dispositionId = dispositionId;
     out.push(item);
@@ -391,7 +437,9 @@ export async function listReplies(prisma: any, input: ListRepliesInput = {}): Pr
   const known = await loadKnownAddresses(prisma);
   if (known.size === 0) return { items: [], nextCursor: null };
 
-  const emails = Array.from(known.keys());
+  const account = input.accountName?.trim() || null;
+  const emails = Array.from(known.entries()).filter(([, a]) => !account || a.accountName === account).map(([e]) => e);
+  if (emails.length === 0 && !account) return { items: [], nextCursor: null };
 
   const items: ReplyItem[] = [];
   let cursor: string | null = input.cursor ?? null;
@@ -403,7 +451,7 @@ export async function listReplies(prisma: any, input: ListRepliesInput = {}): Pr
       where: { from_email: { in: emails, mode: 'insensitive' } },
       orderBy: [{ received_at: 'desc' }, { id: 'desc' }],
       take,
-      select: { id: true, source: true, from_email: true, subject: true, body_text: true, body_html: true, snippet: true, received_at: true },
+      select: { id: true, source: true, thread_id: true, from_email: true, from_name: true, subject: true, body_text: true, body_html: true, snippet: true, received_at: true },
     };
     if (cursor) {
       query.cursor = { id: cursor };
@@ -432,11 +480,13 @@ export async function listReplies(prisma: any, input: ListRepliesInput = {}): Pr
       }
     }
 
+    const answered = await answeredMessages(prisma, ids);
     let consumedThrough: string | null = null;
     for (const row of pageRows) {
       consumedThrough = row.id;
       const dispositionId = confirmedBySource.get(row.id) ?? null;
-      if (state === 'undispositioned' && dispositionId) continue;
+      const answeredAt = answered.get(row.id) ?? null;
+      if (state === 'undispositioned' && (dispositionId || answeredAt)) continue;
       const address = known.get(normalizeEmail(row.from_email));
       if (!address) continue;
       const item: ReplyItem = {
@@ -454,6 +504,10 @@ export async function listReplies(prisma: any, input: ListRepliesInput = {}): Pr
         enrollmentStatus: address.enrollmentStatus,
         suggestion: suggestionBySource.get(row.id) ?? null,
         accountLevel: false,
+        threadId: row.source === 'hubspot' ? null : (row.thread_id ?? null),
+        fromName: row.from_name ?? null,
+        hubspotContactId: address.hubspotContactId ?? null,
+        ...(answeredAt ? { answeredAt } : {}),
       };
       if (state === 'all') item.dispositionId = dispositionId;
       items.push(item);
@@ -476,8 +530,108 @@ export async function listReplies(prisma: any, input: ListRepliesInput = {}): Pr
   }
 
   // Phase 2 D5: colleague replies join the first page, never lost because a different person was emailed.
-  const colleagues = input.cursor ? [] : await loadColleagueReplies(prisma, known, state).catch(() => [] as ReplyItem[]);
-  if (colleagues.length === 0) return { items, nextCursor };
+  const colleagues = (input.cursor ? [] : await loadColleagueReplies(prisma, known, state).catch(() => [] as ReplyItem[])).filter((c) => !account || c.accountName === account);
+  if (colleagues.length === 0) return { items: await collapseTwins(prisma, items, state), nextCursor };
   const merged = [...items, ...colleagues].sort((a, b) => b.receivedAt.localeCompare(a.receivedAt) || b.id.localeCompare(a.id));
-  return { items: merged, nextCursor };
+  return { items: await collapseTwins(prisma, merged, state), nextCursor };
+}
+
+/**
+ * R42: one message imported twice (the GAP mailbox's Gmail copy and HubSpot's connected-inbox copy) is ONE reply. The
+ * list keeps the Gmail copy and names the others (`twinIds`); a confirmed disposition on ANY copy, on this page or not,
+ * settles the whole group, so recording one copy never leaves the other waiting as work. Soft: an unreadable twin read
+ * keeps the page as it is.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- house convention for DB glue
+async function collapseTwins(prisma: any, items: ReplyItem[], state: ReplyState): Promise<ReplyItem[]> {
+  if (items.length === 0) return items;
+  const cand = (i: ReplyItem): TwinCandidate => ({ id: i.id, from: i.contactEmail, subject: i.subject, snippet: i.snippet, receivedAt: i.receivedAt, source: i.source.kind === 'hubspot_engagement' ? 'hubspot' : 'gmail' });
+  const times = items.map((i) => new Date(i.receivedAt).getTime());
+  let outside: InboundRow[] = [];
+  try {
+    outside = await prisma.inboundMessage.findMany({
+      where: {
+        from_email: { in: [...new Set(items.map((i) => i.contactEmail))], mode: 'insensitive' },
+        received_at: { gte: new Date(Math.min(...times) - TWIN_WINDOW_MS), lte: new Date(Math.max(...times) + TWIN_WINDOW_MS) },
+        id: { notIn: items.map((i) => i.id) },
+      },
+      select: { id: true, source: true, from_email: true, subject: true, body_text: true, body_html: true, snippet: true, received_at: true },
+      take: 200,
+    });
+  } catch {
+    outside = [];
+  }
+  const byId = new Map(items.map((i) => [i.id, i]));
+  // The window and the exclusion are enforced here too (the read is a hint, never trusted to have filtered).
+  const lo = Math.min(...times) - TWIN_WINDOW_MS;
+  const hi = Math.max(...times) + TWIN_WINDOW_MS;
+  outside = (Array.isArray(outside) ? outside : []).filter((o) => !byId.has(o.id) && new Date(o.received_at).getTime() >= lo && new Date(o.received_at).getTime() <= hi);
+  const settled = new Map<string, string>();
+  if (outside.length > 0) {
+    const rows: Array<{ id: string; source_id: string; human_confirmed?: boolean }> = await prisma.conversationDisposition
+      .findMany({ where: { source_id: { in: outside.map((o) => o.id) }, human_confirmed: true }, select: { id: true, source_id: true, human_confirmed: true } })
+      .catch(() => []);
+    // Only a HUMAN-confirmed disposition settles a reply (an AI suggestion never does).
+    for (const r of rows) if (r.human_confirmed === true) settled.set(r.source_id, r.id);
+  }
+  const outsideCands: TwinCandidate[] = outside.map((o) => ({ id: o.id, from: o.from_email, subject: o.subject, snippet: snippetOf(o), receivedAt: new Date(o.received_at).toISOString(), source: o.source ?? 'gmail' }));
+  const out: ReplyItem[] = [];
+  for (const g of twinGroups(items.map(cand))) {
+    const members = g.members.map((m) => byId.get(m.id)!);
+    const repItem = byId.get(g.rep.id)!;
+    const outsideTwins = outsideCands.filter((o) => g.members.some((m) => areTwins(m, o)));
+    const settledBy = outsideTwins.map((o) => settled.get(o.id)).find((x): x is string => !!x) ?? members.map((m) => m.dispositionId).find((x): x is string => !!x) ?? null;
+    if (state === 'undispositioned' && settledBy) continue;
+    const twinIds = [...members.filter((m) => m.id !== repItem.id).map((m) => m.id), ...outsideTwins.map((o) => o.id)];
+    out.push({ ...repItem, ...(twinIds.length ? { twinIds } : {}), ...(state === 'all' && settledBy ? { dispositionId: settledBy } : {}) });
+  }
+  return out;
+}
+
+/**
+ * R60, capture once on a reply: ONE reply as Capture carries it: the message's plain text, who sent it and what GAP
+ * holds for them (the account, the thesis, the person, the source the disposition service records against), any
+ * stored suggestion, and the confirmed disposition when one already exists. Null when the message is not a reply from
+ * a GAP account (a known recipient, or a colleague at a known recipient's domain).
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- house convention for DB glue
+export async function loadReplyForCapture(prisma: any, replyId: string, now: Date = new Date()): Promise<{ item: ReplyItem; text: string; dispositionId: string | null } | null> {
+  const id = replyId.trim();
+  if (!id || typeof prisma?.inboundMessage?.findUnique !== 'function') return null;
+  const row: InboundRow | null = await prisma.inboundMessage.findUnique({
+    where: { id },
+    select: { id: true, source: true, thread_id: true, from_email: true, from_name: true, subject: true, body_text: true, body_html: true, snippet: true, received_at: true },
+  });
+  if (!row) return null;
+  const known = await loadKnownAddresses(prisma);
+  const joined: DispositionJoinRow[] = await prisma.conversationDisposition.findMany({
+    where: { source_kind: { in: ['inbound_message', 'hubspot_engagement'] }, source_id: row.id },
+    select: { id: true, source_kind: true, source_id: true, human_confirmed: true, created_by: true, ai_suggested: true },
+  });
+  const dispositionId = joined.find((d) => d.human_confirmed)?.id ?? null;
+  const suggestion = joined.filter((d) => !d.human_confirmed).map(suggestionFromRow).find((s): s is StoredSuggestion => !!s) ?? null;
+  const address = known.get(normalizeEmail(row.from_email));
+  const item: ReplyItem | null = address
+    ? {
+        id: row.id,
+        source: sourceOfInbound(row),
+        contactEmail: address.email,
+        personaId: address.personaId,
+        accountName: address.accountName ?? '',
+        hypothesisId: address.hypothesisId ?? '',
+        hypothesisTitle: address.hypothesisTitle,
+        subject: row.subject ?? null,
+        snippet: snippetOf(row),
+        receivedAt: row.received_at.toISOString(),
+        enrollmentId: address.enrollmentId,
+        enrollmentStatus: address.enrollmentStatus,
+        suggestion,
+        accountLevel: false,
+        threadId: row.source === 'hubspot' ? null : (row.thread_id ?? null),
+        fromName: row.from_name ?? null,
+        hubspotContactId: address.hubspotContactId ?? null,
+      }
+    : ((await loadColleagueReplies(prisma, known, 'all', now)).find((x) => x.id === row.id) ?? null);
+  if (!item || !item.accountName) return null;
+  return { item: { ...item, suggestion: item.suggestion ?? suggestion }, text: plainTextOf(row), dispositionId };
 }

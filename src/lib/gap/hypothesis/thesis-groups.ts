@@ -20,6 +20,7 @@ import { groupSiblings, REVIEWABLE_STATUSES, thesisFingerprint, type ThesisGroup
 import { actionabilityOf, EVIDENCE_REFUSALS, outreachReadiness, type ActionSignal, type NextStep, type ReadinessReason } from './actionability';
 import { evidenceDepth, originKeyOf, type DepthSignal, type EvidenceDepth } from '../research/depth';
 import { GATE_SIGNAL_SELECT, outreachFactRefusal, sendableEvidence } from '../research/evidence-gate';
+import { isCurrentFact } from '../research/currentness';
 import { citedQuote } from '../research/propose';
 import { runEvidenceResearch, type ResearchDeps, type ResearchResult } from '../research/run';
 
@@ -75,7 +76,7 @@ export async function loadThesisRows(prisma: PrismaLike, where: Record<string, u
     personaName: r.primary_persona?.name ?? null,
     personaTitle: r.primary_persona?.title ?? null,
     signals: (r.signals ?? []).map((l: any) => l.signal).filter(Boolean),
-    next: actionabilityOf({ status: r.status, observation: r.observation, account_name: r.account_name, signals: (r.signals ?? []).map((l: any) => l.signal) }, now).next,
+    next: actionabilityOf({ status: r.status, observation: r.observation, account_name: r.account_name, metadata: r.metadata, signals: (r.signals ?? []).map((l: any) => l.signal) }, now).next,
   }));
 }
 
@@ -182,12 +183,12 @@ export async function advanceHypothesis(
   }
   if (status === 'review_required') {
     const a = await transition(prisma, id, 'approve', ctx);
-    if (!a.ok) return { hypothesisId: id, ok: false, from, to: status, detail: `approve refused: ${a.reason}`, reason: a.reason };
+    if (!a.ok) return { hypothesisId: id, ok: false, from, to: status, detail: `approve refused: ${a.reason}${'detail' in a && a.detail ? `: ${a.detail}` : ''}`, reason: a.reason };
     status = 'approved';
   }
   if (!opts.use) return { hypothesisId: id, ok: true, from, to: 'approved', detail: 'approved' };
   const u = await transition(prisma, id, 'activate', ctx);
-  if (!u.ok) return { hypothesisId: id, ok: false, from, to: 'approved', detail: `approved, but not in use: ${u.reason}`, reason: u.reason };
+  if (!u.ok) return { hypothesisId: id, ok: false, from, to: 'approved', detail: `approved, but not in use: ${u.reason}${'detail' in u && u.detail ? `: ${u.detail}` : ''}`, reason: u.reason };
   return { hypothesisId: id, ok: true, from, to: 'active', detail: from === 'approved' ? 'now in use' : 'approved and in use' };
 }
 
@@ -334,7 +335,7 @@ export async function useEvidenceForThesis(
     if (!s) return { ok: false, reason: `unknown_signal:${id}`, results: [] };
     const why = outreachFactRefusal(s, group.accountName);
     if (why) return { ok: false, reason: `not_verified_evidence:${id}:${why}`, results: [] };
-    if (s.freshness_expires_at && new Date(s.freshness_expires_at).getTime() <= input.now.getTime()) return { ok: false, reason: `not_verified_evidence:${id}:expired`, results: [] };
+    if (!isCurrentFact(s, input.now)) return { ok: false, reason: `not_verified_evidence:${id}:expired`, results: [] };
     facts.push(s);
   }
   if (facts.length === 0) return { ok: false, reason: 'no_signals', results: [] };
@@ -560,7 +561,7 @@ export async function corroborateThesis(
     const linked = new Set(group.members.flatMap((m) => m.signalIds));
     const candidates = research.facts.filter((f) => f.fresh && !linked.has(f.signalId));
     const rows: any[] = candidates.length ? await prisma.prospectingSignal.findMany({ where: { id: { in: candidates.map((f) => f.signalId) } }, select: SIGNAL_SELECT }) : [];
-    const gate = new Map(rows.map((s) => [s.id, outreachFactRefusal(s, group.accountName) === null && (!s.freshness_expires_at || new Date(s.freshness_expires_at).getTime() > input.now.getTime())]));
+    const gate = new Map(rows.map((s) => [s.id, outreachFactRefusal(s, group.accountName) === null && isCurrentFact(s, input.now)]));
     newIndependent = candidates.filter((f) => gate.get(f.signalId) === true);
   }
   const outcome: CorroborationOutcome = research.conflicts.length > 0 ? 'contradicts' : newIndependent.length > 0 ? 'corroborated' : research.outcome === 'provider_unavailable' ? 'search_unavailable' : 'no_second_source';

@@ -144,8 +144,8 @@ export function BidChips({ value, onChange, disabled = false, seed = null, onSee
   return (
     <div data-testid="bid-chips" className="space-y-3">
       <div>
-        <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Buyer input (BID)</p>
-        <div className="mt-2 flex flex-wrap gap-2" role="group" aria-label="BID types">
+        <p className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">What the buyer said</p>
+        <div className="mt-2 flex flex-wrap gap-2" role="group" aria-label="Kinds of buyer statement">
           {BID_TYPES.map((type) => {
             const active = panel?.type === type;
             const count = counts.get(type) ?? 0;

@@ -414,7 +414,26 @@ describe('Release C review S5: a reply from the account holds first touches to a
     expect(r.ok ? '' : String(r.detail)).toContain('pat.lee@kroger.com');
   });
 
+  it('R42b (audit at 31f09c71): a person a buyer NAMED in a referral gets no first touch until the seller chose; done releases it', async () => {
+    const d = db();
+    const referral = { commitmentId: 'cmt-ref-1', accountName: 'Kroger', kind: 'referral', title: 'Pat named Joey Maggard: decide how to approach them', status: 'open', person: { personaId: null, name: 'Joey Maggard', email: null }, createdAt: NOW.toISOString() };
+    d.audit.push({ id: 'evt-ref-0', kind: 'account.commitment', subject_type: 'account', subject_id: 'Kroger', payload: { commitmentId: 'cmt-ref-1', op: 'create', commitment: referral }, created_at: NOW });
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d));
+    expect(r).toMatchObject({ ok: false, reason: 'named_in_referral' });
+    expect(r.ok ? '' : String(r.detail)).toBe('Pat named Joey Maggard. No cold email to them until you choose how to approach them: mark the referral done or skipped on Work.');
+    d.audit.push({ id: 'evt-ref-1', kind: 'account.commitment', subject_type: 'account', subject_id: 'Kroger', payload: { commitmentId: 'cmt-ref-1', op: 'status', commitment: { ...referral, status: 'done' } }, created_at: new Date(NOW.getTime() + 1000) });
+    expect(await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d))).toMatchObject({ ok: true });
+  });
+
+  it('R42b (audit addendum): the hold reads the same classification as the card: a real reply that mentions a vacation holds; a notice by its body does not', async () => {
+    const d = db();
+    d.inbound = [{ id: 'in-h', from_email: 'pat.lee@kroger.com', subject: 'Re: doors versus spots', snippet: 'Sorry for the delayed response, I was on vacation. Can you send the comparison?', body_text: 'Sorry for the delayed response, I was on vacation. Can you send the comparison?', received_at: new Date(NOW.getTime() - 86_400_000) }];
+    expect(await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d))).toMatchObject({ ok: false, reason: 'account_replied' });
+  });
+
   it.each([
+    ['an out-of-office by its body (no canonical subject)', { from_email: 'pat.lee@kroger.com', subject: 'Re: doors versus spots', snippet: 'I am out of the office until Monday with limited access to email.', body_text: 'I am out of the office until Monday with limited access to email. For urgent matters contact Sam Ray.', received_at: new Date(NOW.getTime() - 86_400_000) }],
+    ['a bounce', { from_email: 'postmaster@kroger.com', subject: 'Undeliverable: doors versus spots', snippet: 'Your message could not be delivered', received_at: new Date(NOW.getTime() - 86_400_000) }],
     ['an out-of-office', { from_email: 'pat.lee@kroger.com', subject: 'Automatic reply: doors versus spots', received_at: new Date(NOW.getTime() - 86_400_000) }],
     ['an old reply', { from_email: 'pat.lee@kroger.com', subject: 'Re: doors', received_at: new Date(NOW.getTime() - 45 * 86_400_000) }],
     ['another domain', { from_email: 'pat.lee@albertsons.com', subject: 'Re: doors', received_at: new Date(NOW.getTime() - 86_400_000) }],

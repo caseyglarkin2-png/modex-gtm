@@ -1,7 +1,7 @@
 # YardFlow GAP Prospecting OS: production build specification
 
-STATUS: ACTIVE. Current state lives in `docs/gap/STABLE_BASELINE.md` (seller dogfood mode; V2 decision compression + resource convergence SHIPPED 2026-10-02, #357 to #364). This file is the historical build spec and ticket ledger; the FINISH pass it once tracked on feat/gap-os-finish is long merged.
-<!-- verified:2026-10-03 -->
+STATUS: ACTIVE. Current state lives in `docs/gap/STABLE_BASELINE.md` (seller dogfood mode; V2 SHIPPED 2026-10-02; the account-first UX SHIPPED 2026-10-06, `docs/gap/ACCOUNT_FIRST_UX.md`). The live ticket ledger is the "GAP OS EXECUTION RECOVERY" section near the end of section 11 (2026-10-06, in progress). This file is the historical build spec and ticket ledger; the FINISH pass it once tracked on feat/gap-os-finish is long merged.
+<!-- verified:2026-10-06 -->
 
 Supersedes the draft `Downloads/YardFlow_GAP_Prospecting_OS_Spec.md` (2026-09-23), which named `caseyglarkin2-png/GTM-YardFlow` as the host. Reconnaissance showed that repo is an abandoned prototype; this document is the single master plan and lives in the repo that hosts the build. There is no second plan. Every accepted implementation or reviewer finding that changes work is folded back into this file in the same commit.
 
@@ -238,7 +238,7 @@ Default cold policy: human-reviewed enrollment. Freshly imported cold contacts a
 
 ## 10. Feature flags, safety progression and earned gates
 
-Flags (`src/lib/gap/flags.ts`, all read at CALL time with the `isOutreachPaused` regex, default false): `GAP_OS_ENABLED`, `GAP_HYPOTHESIS_ENABLED`, `GAP_ROUTING_ENABLED`, `GAP_MESSAGE_COMPILER_ENABLED`, `GAP_REPLY_CLASSIFICATION_ENABLED`, `GAP_HUBSPOT_SEQUENCE_PUBLISH_ENABLED`, `GAP_AUTO_ENROLL_ENABLED`, `GAP_AUTO_ENROLL_SHADOW`, and (added in Sprint 1 after the e2e run found the repo-wide `HUBSPOT_SYNC_ENABLED` defaults ON) `GAP_HUBSPOT_MIRROR_ENABLED`, which gates every GAP write to HubSpot independently of the repo-wide sync flag. `GAP_OS_ENABLED=false` makes every `/api/gap/*` route answer HTTP 404 with the typed skip payload for every caller (the `/api/cron/gap-*` routes answer 200 with the same payload so a scheduled run never errors) and every GAP write a no-op; flag-off behavior of the existing queue is asserted byte-identical by tests. Kill switches reused, nothing new: the clawd autonomy halt (canonical, checked at enroll and at the wire) and `OUTREACH_PAUSED`.
+Flags (`src/lib/gap/flags.ts`, all read at CALL time with the `isOutreachPaused` regex, default false): `GAP_OS_ENABLED`, `GAP_HYPOTHESIS_ENABLED`, `GAP_ROUTING_ENABLED`, `GAP_MESSAGE_COMPILER_ENABLED`, `GAP_REPLY_CLASSIFICATION_ENABLED`, `GAP_HUBSPOT_SEQUENCE_PUBLISH_ENABLED`, `GAP_AUTO_ENROLL_ENABLED`, `GAP_AUTO_ENROLL_SHADOW`, and (added in Sprint 1 after the e2e run found the repo-wide `HUBSPOT_SYNC_ENABLED` defaults ON) `GAP_HUBSPOT_MIRROR_ENABLED`, which gates every GAP write to HubSpot independently of the repo-wide sync flag, and (batch item 9, 2026-10-07) `GAP_CRM_APPROVED_WRITES_ENABLED`, default off: the only gate for a HubSpot deal change the seller approved on the account brief (R54: a note, a task, its completion, the next step). It is separate from the mirror's flag on purpose: approved deal writes can be enabled without enabling automatic mirror writes, and the reverse; with it off an approval is recorded and stands as "approved, not written". `GAP_OS_ENABLED=false` makes every `/api/gap/*` route answer HTTP 404 with the typed skip payload for every caller (the `/api/cron/gap-*` routes answer 200 with the same payload so a scheduled run never errors) and every GAP write a no-op; flag-off behavior of the existing queue is asserted byte-identical by tests. Kill switches reused, nothing new: the clawd autonomy halt (canonical, checked at enroll and at the wire) and `OUTREACH_PAUSED`.
 Progression: 1 manual hypothesis creation and approval; 2 deterministic routing recommendations (shadow); 3 human-reviewed enrollment via the enroll table; 4 AI-suggested reply and call classification with human confirmation; 5 learning dashboard; 6 HubSpot-native publishing if auth supports it; 7 shadow auto-routing; 8 canary auto-enrollment; 9 broader automation only after measured precision.
 Gates that must be EARNED before `GAP_AUTO_ENROLL_ENABLED=true` (each a dashboard tile with n): G1 shadow agreement: at least 200 shadow decisions over at least 4 weeks, `enroll_gap_sequence` human agreement at or above 80% with n at least 50; G2 compiler precision: zero post-hoc reject-class violations in an audit sample of the last 100 human-approved GAP sends; G3 suppression health: zero unknown suppression verdicts in the last 7 days of routing runs and zero DNC violations ever; G4 reply classification: AI suggestion equals human confirmation at or above 90% with n at least 100; G5 truth yield: hypothesis resolution rate at or above 20% on human-run GAP with n at least 50 hypotheses; G6 canary: allowlist of at most 10 accounts, cap 5 per day, 2 weeks, zero incidents, one logged kill-switch drill (halt -> zero enrolls and zero sends within one poll cycle). G0, above all of them: Casey reverses the 2026-08-19 autonomy halt with one POST. Canary config lives in `SystemConfig` (`gap_auto_enroll_canary`: allowlist, per-rule cap, daily cap, startedAt); every refused predicate is audited as `enroll.refused` with the predicate name. Audit: `HypothesisEvent` / `GapAuditEvent` locally plus fan-out to war-room `POST /api/review/log` (bearer `MC_API_TOKEN`; see `AGENT_CLIS.md`) for hypothesis, routing, compile, approval, disposition, enroll and flag-refusal events.
 
@@ -768,6 +768,1471 @@ Branch `feat/gap-os-final`. Closes the gap between "GAP produced a recommendatio
 - Proof: the suites named in the canonical doc (every numbered case of the brief), 14 mutation proofs, the reviewer's 14 failing-input cases kept green; full suite 643 files / 7,249 tests / 0 failures; typecheck, lint and production build clean. Fresh adversarial review: 1 blocker (the Pepsi Isaac review unreachable) and 9 should-fix items, all fixed; 6 nice items, 5 fixed and 1 recorded.
 - Production (GAP tables only, audited): 6 aliases (Central Market, King Soopers, City Market, SDR Distribution x3); NFI Industries, J.B. Hunt, UPS = "3PL / Logistics"; role evidence for Christina Mannella (changed, title unknown), Lisa Lisson, Glen Chaffee, Jeffrey Tallman; Christian Burton staged as candidate 49. Not done: no owner selected, Isaac's flag not cleared (LEGACY_CONFLICT, Casey's click), no HubSpot write, no send, no enrollment, no Apollo credit, no Account or Persona created.
 - Same day, after Casey chose the FedEx (Glen Chaffee) and Walmart (Doug Estrada) owners through the panel: PR #399 (merge 4ad8b81c) closed the debt that should close (a supporting title stands when nothing is stored; a HubSpot-only person can be corrected by Casey; the suppression review reads the GAP mailbox's delivery failures; the pre-call brief says employment and role currentness; the FedEx GAP contact "Jeffrey" completed to "Jeffrey Tallman" from its linked HubSpot contact) and made the owner panel, the person checks, NOW and the brief rep-friendly (plain-language frame, compact cards with Details, grouped set-aside with counts, a glossary, action help that says no email is sent, buttons instead of links, do-not-contact contacts named on NOW with the legacy review one click away). The #400 follow-up gives a HubSpot-only WHO the same checks and merges contact-id role evidence into the call brief. Canonical: `docs/gap/OWNER_RESOLUTION.md`, last section.
+
+### GAP OS EXECUTION RECOVERY (2026-10-06, in progress)
+<!-- verified:2026-10-06 -->
+Mandate: Casey's "GAP OS: execution recovery mandate and atomic sprint plan" (2026-10-06; evidence inspected at
+672570ed, production READY on 672570ed, dpl_5tW92dBWDxnL8VquojbfBedmu8MP, and on c7fbf4ef before it). The operating
+promise: GAP finds and checks relevant information, prepares a defensible commercial move, puts the right work in
+front of Casey, helps him execute it, remembers the result, and brings back the next commitment when it is due.
+Product-policy amendments (preparation may be automatic; evidence by purpose; the day centers on commitments) are
+recorded in `docs/gap/STABLE_BASELINE.md`, "Execution-recovery amendments". Branch `feat/gap-account-first-ux`
+(the worktree `wt-gap-account-first-ux`), one writer. This section is the ticket ledger (R00..R65); each ticket
+records ownership, dependency, positive and negative proof, rollback and the observed result.
+
+**R00 Reconcile live and local state (DONE).** main 672570ed = production (READY, auto-deployed after c7fbf4ef);
+branch at main; no open GAP PRs; worktrees of other sessions untouched. Capability matrix: hypothesis / routing /
+compiler / reply classification ENABLED in production (the GAP CORE LIVE block); background research and grounded
+discovery ENABLED on the cron schedule (every 2 h / hourly / 30 min, `docs/gap/STABLE_BASELINE.md` "Health
+dependencies"); auto-enroll, sequence publish and the HubSpot mirror OFF; transcription DISABLED (spend); the
+transport sink and the HubSpot base-path override (R05) are CODE ONLY, unset in production. Production read-only
+observation: exactly ONE stranded `unmapped` draft exists (PepsiCo, `cmux0uu7r0003jw0450gb4kno`, persona 2236 "Tom",
+created 2026-10-06T18:38Z by the recording, source_ref null, the Tulsa fact linked as `supporting`, one `propose`
+event); PepsiCo holds 15 theses (5 active Gatik, 5 approved and 4 unresolved keyword-only 10-Q rows, the draft).
+Nothing was rerun or written in production.
+
+**R01 Authority map and policy amendments (DONE).** One owning service per concept: source -> `signals/registry.ts`
+(registerSignal); claim -> `research/run.ts` + `research/claim-rules.ts`; outreach admission -> `research/evidence-
+gate.ts` (outreachFactRefusal / sendableEvidence / hypothesisSendable); thesis -> `hypothesis/service.ts` +
+`hypothesis/machine.ts` (the only transitions) with `hypothesis/current-revision.ts` (one revision per person and
+family) and `research/propose.ts` (the research proposal path); the draft from a checked fact -> NEW
+`story/draft-from-fact.ts` (R11) on top of those; person -> `people/owner-resolution*.ts` + `motion/load.ts`
+(recordMotionChoice); the account read -> `pursuit/load.ts` + `pursuit/state.ts`; the Work card -> `work/list.ts`;
+message -> `compiler/*` + `sequence/render.ts`; execution -> `execution/seller-send.ts` / `seller-draft.ts` /
+`gmail-adapter.ts` behind `email/gmail-sender.ts` (the one wire, every gate); reply -> `replies/list.ts` +
+`replies/classify.ts` + dispositions; capture -> `capture/*`; opportunity -> `opportunity/active-opportunity.ts`
+(the page) and `deals/in-deals.ts` (the cockpit tile; a second READ of the same HubSpot truth, reconciled in R10).
+Legacy routes left in place: `/gap?lane=review` and All hypotheses still work; the normal path no longer needs them.
+Changed invariants with before/after tests: "no auto hypothesis / draft" -> internal proposals allowed (R11 tests;
+R33 later); "physical change only" -> kept for the first-touch path (`research-facts`, `evidence-gate` suites
+unchanged) and widened by purpose in R30 with its own positive/negative cases.
+
+**R02 Representative corpus (DONE, scratch only).** `scripts/gap/recovery/seed-corpus.ts` seeds, through the real
+intake and hypothesis authorities, eight test-safe accounts on the embedded scratch Postgres (55432/gap_finish_e2e;
+rebuild: db push + the eight forward `prisma/sql` files + `verify-triggers` 33/33 + `seed-families`): Pepsi Scratch Co
+(the recording: Tom chosen, closure + partner + sensitive facts, no thesis), Fedex (chosen + approved thesis: Ready),
+Walmart (an approved thesis and a "stop" reply: Opted out), Kroger (an open deal in the stub: In a deal), Nfi (a 3PL,
+six eligible, an approved thesis: Choose), Dannon (nothing), Mills (a legacy ACTIVE thesis on a sale abroad: the gate
+refuses it), Heb (the only operator left). Each carries its expected useful outcome; none is assumed Ready.
+
+**R03 Pepsi reproduction (DONE).** `tests/unit/gap/scratch/anchor-draft.scratch.test.ts` (real routes, service,
+machine and Postgres; only the session mocked; skipped without GAP_SCRATCH_DATABASE_URL). BEFORE the fix, with the
+component's exact payload: POST /api/gap/hypotheses 201 then PATCH {action: submit} answered **409
+{"error":"unmapped_family"}** (the recording's "Drafted (unmapped_family); submit it from the REVIEW lane"), and the
+page's own projection dropped the warehouse closure from the draft list (the recording's fact count 2 -> 1). The
+browser journey on the scratch server (headless Chrome, the visible control, `journey-pepsi-draft.mjs`, receipts
+`r03/pre_*`) showed the same note, "Draft a thesis from a checked fact (2)" -> "(1)", and the fact gone after refresh;
+NEXT read "draft it from the opening story below" while its button read "Open the research plan". Duplicate-click
+and retry variants are in the same file.
+
+**R04 Baseline tasks and latency (DONE, carried from the account-first record).** `docs/gap/ACCOUNT_FIRST_UX.md`
+7.5: Work 21.4 s cold / 78 ms repeat; the account read 10 to 49 s cold; the shell 0.3 to 4.9 s warm. New: the draft
+transaction on the scratch server, 7.5 s from click to the note (pre-fix) and 4.7 s (post-fix, incl. the family
+question); approve and use 4.8 s incl. routing. Targets (section 8 of the mandate) are not met yet; R15/R61 own them.
+
+**R05 Safety harness (DONE).** `src/lib/email/transport-sink.ts` behind every gate in `gmail-sender.ts`
+(GAP_SEND_TRANSPORT=sink; a real address refused before any network call, the attempt recorded; proven by
+`tests/unit/gap/transport-sink.test.ts`), `HUBSPOT_API_BASE_PATH` on the SDK singleton, `scripts/gap/recovery/
+stubs.mjs` (HubSpot + clawd, every request logged), the scratch database rebuild, the corpus. The local server runs
+with no production credential (scratch-env). Rollback: the variables are unset in production; the code paths are
+inert without them.
+
+**Sprint 1, the account-to-action spine.** R11 **Proposal creation recoverable and idempotent (DONE):**
+`story/propose-family.ts` derives the problem family from the fact (a clear cue wins; a tie is decided by the change
+class with its basis; nothing derivable asks the seller ONE question, never `unmapped` on the submit path);
+`story/draft-from-fact.ts` + `POST /api/gap/story/draft` gate the fact (the outreach gate and sensitivity), keep one
+draft per fact and person (`source_ref anchor:<fact>:p<persona>`; a stranded legacy draft that cites the fact is
+ADOPTED and stamped, never twinned), return a person's existing open thesis in the family instead of a twin, edit an
+existing draft (audited `edit`) and submit a complete one in the same call; a refused submit leaves the draft
+recoverable and says why. Proof: `propose-family.test.ts`, the scratch transaction (6 cases: start, submit, retry,
+approve and use, adopt, sensitive refused), `ux06-views` and `outreach-anchor` suites. R12 **Review where the action
+lives (DONE):** `AnchorPending` in `story/anchor.ts` (an open draft or a thesis under review grounded on a checked
+fact stays visible with its status, the exact opening sentence, the guess, the person, what would prove it wrong,
+the family and the gate read); the panel in `outreach-anchor.tsx` with ONE labeled control, APPROVE AND USE (the
+existing audited `advance: approve_and_use`: submit if needed, approve, activate, route), NOT THIS STORY (withdraw
+with a reason) and the family question; NEXT names the proposal; `pursuit/load.ts` no longer reads a chosen person
+with only a thesis under review as Ready (parity with Work's cold card). Observed: on the scratch server the whole
+loop ran through the browser (set the family -> under review -> Approve and use -> "Ready for a first touch: Tom
+Scratch", "Prepare the email to Tom"; the second story drafted lands under review and is NOT approved: one motion per
+account) and the Work card read Ready.
+
+R10 **The shared actionable result (DONE):** `pursuit/actionable.ts` derives from the one pursuit state and its NEXT
+the intent (reply, opt-out, deal, hold, follow-up, in motion, warm touch, cold first touch, review a proposal,
+choose, research), the person, the one allowed action, the blocker, the preparation (ready, under review,
+incomplete, none) and the completion event; the account page derives it once and remembers it with the summary;
+Work's card takes the summary's allowed action and preparation. Identical state yields the identical move on both
+surfaces; a held account carries no cold action anywhere (`actionable.test.ts`); the cold-card rule stays
+conservative (never READY without the database's own chosen person and usable thesis; never a cold action on a
+held account). Two HubSpot reads remain (the page's resolver; the cockpit's In Deals summary) and now agree on the
+corpus once the summary serves both legs (the stub's deal associations use HubSpot's `from` key).
+R13 **Approval bound across the right boundaries (DONE, verified):** `tests/unit/gap/scratch/send-spine.scratch.
+test.ts` runs the real send route, gates, compiler, ledger and Postgres with the boundaries controlled (the sink as
+the mailbox, an in-process clawd stub for autonomy, suppression and the critic, the scratch opportunity reader): the
+preview binds the recipient and the exact rendered copy (a content hash, so a refresh never demands a second
+approval); a changed recipient or copy is refused; a suppressed recipient is refused at the wire; a buyer reply
+between preview and confirm makes the card stale and the confirm is refused; a real address is refused by the sink
+before any network call and recorded; CONFIRM + SEND writes exactly one message, one DIRECT_SENT row and one
+EmailLog row; a replayed confirm answers ALREADY SENT and writes nothing. All send paths share the wire
+(`gmail-sender.ts`). Under the sink, the Sent-folder read for a first touch GAP did not record reads the sink.
+R14 **An outcome, not a navigation event (DONE):** `work/outcome.ts` + `POST /api/gap/accounts/outcome` record
+skipped (until tomorrow), snoozed (until the seller's date, within 90 days) and logged outside GAP as append-only
+`account.work_outcome` rows; Work drops a snoozed account to a footer and ranks a skipped or logged one last with
+its line; a reply or an opt-out is never hidden by a seller note; the Done/Next bar keeps its plain links (Next
+account records nothing, pinned) and adds the three controls that record first, then move on. Sent, drafted, failed
+and unknown sends stay with the execution ledger (a lost answer leaves the claim open: outcome unknown, never a
+resend; `unknown-send-reconcile` reads Sent for truth). Observed on the scratch server through the browser: Skip ->
+"Skipped for today, you, today. Moving to the next account." -> Work shows the card last with the line; Snooze ->
+the footer "Snoozed (1): back on their dates".
+R15 **The working panel without the blocking read (DONE, measured on the production build at the gate):**
+`pursuit/summary.ts` now keeps the summaries in memory AND one durable `system_config` row per account
+(`gap:pursuit:<account>`; source: the page's own pursuit read; rebuild: any visit or the warmer; owner: that
+module), read on a miss, so a cold instance's Work says what the last read said and the account shell shows the
+last-known state (up to a day old, labeled with its age); `forgetPursuitSummary` drops both layers after an
+outcome, a decision or a choice. Display state only: no send, draft or enroll path reads it. The full account read
+itself is unchanged (R61 owns its speed).
+
+**Sprint 1 gate (2026-10-06).** Exit met: Pepsi and two other conditions (Fedex ready, the corpus opt-out, the
+corpus deal) reach a persisted outcome through the UI with no REVIEW-lane repair. Receipts:
+- Unit: the full GAP suite 348 files / 5,232 tests green; the rest of the repository 325 files / 2,283 green (one
+  skipped); tsc clean; eslint clean on every changed file.
+- Scratch (real routes, services, machine, Postgres; boundaries controlled): `anchor-draft.scratch.test.ts` 6/6
+  (the Pepsi transaction: start, submit, retry, approve and use, adopt a stranded draft, a sensitive fact refused);
+  `send-spine.scratch.test.ts` 8/8 (route, preview binding, suppression, confirm + sink, replay, in motion, a real
+  address refused by the sink, a reply between preview and confirm).
+- Browser (headless Chrome against the scratch server, the sink as the mailbox): the Pepsi loop (set the missing
+  family -> under review -> Approve and use -> Ready for Tom -> the email control; the second story lands under
+  review, not approved); the outcomes loop (Skip today -> the next account; Snooze -> the footer; Work reflects both);
+  the send loop (account -> Put the story in use -> NEXT "Prepare the email to Glen" -> the card -> Send email -> the
+  final check from casey@yardflow.ai to the person with the exact copy -> confirm -> exactly one message written to
+  the sink -> Work reads "First touch in motion: Glen Scratch"). Receipts: scratchpad `r03/`, `r14/`, `send/`.
+- Defects found and fixed on the way (all in this sprint's commits): a stranded legacy draft twinned instead of
+  adopted; a chosen person with only a thesis under review read Ready; a proven send read research when the queue
+  held no card; a one-card READY account had no ready target so NEXT pointed at a preview that pointed at the lane;
+  the rendered NEXT control was derived before the page's overrides; an in-motion account vanished from Work after
+  its card was acted; a READY summary older than the ledger's touch overrode the touch; the send route left the
+  remembered summary in place.
+- Carried into Sprint 2+: the dev server rendered the Work list twice in one headless probe (the served HTML holds
+  one list; re-check on the production build, R60); the full account read's own speed (R61); the Work page's own
+  heavy cockpit read behind `cachedRead` (R61); the production stranded draft (`cmux0uu7r0003jw0450gb4kno`) is
+  repaired by Casey answering the family question on the PepsiCo page after deploy (the service adopts it; no
+  script needed, R64 records it).
+
+**Sprint 2. R20 Monitored coverage and capacity (DONE; the choice is Casey's).** `signals/coverage.ts` reads the
+ledgers the jobs already write (`signal.grounded_discovery` with the classes it asked and its error,
+`signal.discovery`, `research.background_run`) and says per watched account and per source-class bundle: covered
+(asked within seven days), stale, never, failed (the last turn failed and nothing fresh stands: never read as "no
+news"); priority accounts (in motion, a chosen person, a thesis in use, an open deal, a meeting within 14 days) are
+marked and the rotation (`discoveryOrder`, now used by grounded discovery) asks them first, least-recently asked,
+with starvation protection: an account whose last turn failed within six hours waits behind every account that has
+not failed. `/gap/coverage` (under More) renders it with the capacity statement. Production, read only, 2026-10-06:
+75 watched accounts, 12 priority; the news pass asks at most 10 accounts a run with the time the grounded turns leave,
+so each account about every 15 hours at best (corrected by batch item 10: it does not cover every account every two
+hours); grounded bundle 1
+(newsroom / SEC / earnings / leadership) covered for 74, bundle 2 (jobs / WARN / security / government) for 40 with
+34 never, bundles 3 (procurement / case studies / technology / 3PL) and 4 (M&A / capex / fleet / trade press) NEVER
+for all 75: at 2 accounts a run, 12 runs a day (24 turns), 75 x 4 bundles take 12.5 days per rotation and the
+twelve priorities need 12 of those turns daily. The seven-day objective needs 43 turns a day. THE CHOICE (nothing
+changed): run the grounded cron hourly (48 turns a day, about twice the grounded-search calls) or cut the rotation to
+about 30 accounts beside the priorities. Not done here: no spend raised, no cadence changed, no cap raised.
+R25 **Discovery connected to bounded research (DONE for grounded pages).** News discovery already queued headlines
+that classify as a physical-network change; grounded pages were never queued ("the date is the search's claim").
+Now a grounded page that is MATERIAL (newsroom, SEC, earnings, jobs, government/permits, procurement, case study,
+technology, 3PL/partner, M&A, capex, fleet, trade press; never leadership, labor or security), whose title names the
+account, that the reader could open and that carries the page's OWN date is queued (`research_status: queued`,
+`metadata.grounded.queuedAt`) for the existing background research, which keeps its cap, its cooldown and its
+three-attempt dead letter (batch item 10, 2026-10-07: its own status `research_failed`, labelled "Research failed" and
+retryable, never `no_usable_fact`, for a thrown run, a provider that did not answer and a run that never finished;
+`researchAttempts`, `deadLetteredAt`); bounded here too: 4 a run, 40 a day (an unreadable budget queues nothing). A
+"may be relevant" page, an unread page and a search-dated page are never queued. Pinned in
+`grounded-discovery.test.ts`. No automatic communication, no contact enrichment, no spend beyond the research the
+cron already runs.
+R21 **Source provenance and identity (VERIFIED, one addition).** Intake already keeps the canonical final URL
+(`url_hash`), the page's own title and publication date, the retrieval time, the origin, the resolution basis
+(explicit, named in source, alias, domain, discovery query, human), the grounded class and the search's date claim
+apart from the page's date; a claim keeps its verbatim span, its speaker (`speakerOrg`), its event date when stated
+and its account/division mapping through the governed aliases and family links (owner resolution). Added: a grounded
+page found AS a job board, a procurement notice, a filing, the company's own site or a vendor page keeps that
+`source_class` on its row when the host alone could only say "news". Family research (PBNA / Frito-Lay with PepsiCo)
+runs through the existing alias and family-people reads; namesakes and sold subsidiaries stay unresolved by the
+existing identity rules; no frozen fact is rewritten.
+R22 / R23 **Job, procurement and other claims as their own types (DONE at the verifier).**
+`research/claim-types.ts` classifies a verified sentence as physical_change (the existing first-touch path),
+job_posting (role; open / closed / reposted / unknown only when stated), procurement (due date and issuer when
+stated), technology, partnership, leadership (appointed / departed) or financial / other, each with its permitted
+interpretation and forbidden leap (the mandate's table). The verifier (`research/run.ts`) now admits a job,
+procurement, technology, partnership or leadership sentence that is verbatim at its source, dated and the account's
+own statement (the speaker rule and the account-as-subject rule unchanged), and mints it with its `claim_class` and
+`claimType` / `claimAttributes`; a finance line and an unclassified sentence are not minted. The outreach evidence
+gate is unchanged: only a physical-network change is first-touch evidence (`not_a_physical_network_change` for the
+rest), so nothing widens until R30's purpose policy says what each type may support. Pinned by `claim-types.test.ts`
+and `research-claim-admission.test.ts`; the twelve existing research and evidence suites stay green (206 tests).
+R24 **Events and temporal meaning (VERIFIED existing, recorded).** `signals/cluster.ts` already groups a press
+release, a wire copy and a trade rewrite into one event (`event_id`) at the same account within four days by shared
+specific words, keeping every source; `research/continuity.ts` tracks ongoing / event / ended and a newer contrary
+source marks a fact superseded (the gate refuses it); contradictions are recorded by `research/conflicts.ts`. Not
+built: an explicit pending / announced / active / completed state machine over events (carried as debt; the
+continuity read covers ended and contradicted).
+
+**Sprint 2 gate (2026-10-06).** Full GAP suite 351 files / 5,247 tests green on the Sprint 2 tree (before R30);
+typecheck and lint clean on every changed file; the coverage read run read-only against production (the receipt
+under R20). Exit met in part: every supported source class has a measured path to a checked claim (R22/R23 at the
+verifier) and a no-action outcome (not minted, or verified-not-eligible), and coverage is measured; the seven-day
+objective is NOT met at the current allowance (the choice is Casey's, R20). Carried: an explicit event state
+machine (R24), job-board and procurement connectors beyond grounded search (the classes are reached through grounded
+search today), the first-touch copy family for a job-led thesis (R34).
+
+**Sprint 3. R30 Approach-specific evidence policy (DONE at the gate; the copy and the UI paths follow in R31-R35).**
+`research/approach-policy.ts`: event_led (the existing physical-change path, unchanged), job_procurement_led (a
+verified posting with yard / dock / trailer / gate / fleet duties not known closed, or a notice the account issued;
+the copy may state only its own text and must ask whether it is still open; never "they lack a system",
+"understaffed", "budget", "the contract is open"), report_led (NOT ENABLED; refused with its reason, never a bypass),
+fit_led (a stable operating fact, a transparent fit question, no why-now), and the three that need no thesis:
+warm_intro, existing_thread_reply, active_deal_follow_up, each with what it requires and forbids. The gate
+(`evidence-gate.ts`) reads the thesis's declared approach (`metadata.approach`, default event_led) at approval,
+activation, the pursuit read and the wire: under event_led nothing changed; under job_procurement_led a JOB_POSTING
+or PROCUREMENT claim passes the verified / dated / own-account / publisher / speaker rules without the physical
+rule, a closed posting is refused, and every other class is refused as not admitted. `draft-from-fact.ts` declares
+job_procurement_led on a thesis drafted from a job or procurement claim. Pinned by `approach-policy.test.ts`; the
+evidence-gate, machine, service, actionability and thesis-group suites stay green. Not done yet: the account read
+(`account-intel/load.ts`) kept only physical facts as story facts; now (R31/R33, same day) a JOB_POSTING or
+PROCUREMENT claim is a live story fact of its own class (re-gated by the publisher and speaker rules), the opening
+story offers it as a draftable story, and the draft the service makes declares job_procurement_led. R34 is NOT
+built: the compiler's first-touch copy exists for the physical-change path only, so every send and enroll gate
+refuses a job-led thesis with `approach_copy_unsupported` / the stated detail (fail closed) until that copy family
+ships; a job-led thesis is prepared and reviewed, never mailed in the physical-change words. Post-R30 regression:
+the full GAP suite 352 files / 5,253 green.
+
+R20 **follow-up: the bounded grounded rotation (DONE; the capacity choice decided).** The lead decided on 2026-10-06:
+NO spend increase and no cron change; the rotation is bounded instead. `signals/coverage.ts` now owns, pure:
+`groundedRotationSlots` (each priority account takes one turn a day for its daily pass; what the allowance leaves over
+seven days, divided by the four bundles, is how many other accounts get every bundle within seven days:
+floor(7 x (turnsPerDay - priorities) / bundles)) and `groundedRotation` (every priority rotates; the rest are ordered
+by tier, then band, then name, and the first `slots` rotate; the input order never changes the choice).
+`grounded-discovery.ts` asks only that population; the others stay watched for NEWS only, and `/gap/coverage` says
+so on each such row ("news only: outside the grounded rotation at the current allowance") and counts them beside the
+capacity with the decision and its alternative. Defect fixed on the way (same surface, it blocked the bound):
+`discoveryOrder` put every priority account first on every run, so twelve priorities at two accounts a run took all
+24 daily turns and no other account would ever rotate; a priority account now leads only while DUE (not asked within
+its one-day target) and otherwise waits its turn by recency. The arithmetic the earlier choice text used
+(floor(turns x 7 / bundles) - priorities = 30) ignored that the priorities' daily pass costs seven turns a week each,
+not four; with it the "30 rotating" rotation would take ten days, not seven, so the honest bound was 21. Batch item
+10 (2026-10-07): 21 met the objective with zero slack (21 x 4 / 12 = 7.0 days), so one failed or skipped turn missed
+it; the rotation now keeps a 15% margin (`ROTATION_MARGIN`) and "met" is read against it: 12 priority, 17 rotating
+(every bundle every 5.7 days), 46 news only. A provider outage turn is now recorded (`transient`; Coverage shows it as
+failed) and never counted as a turn; an unreadable daily queue budget queues nothing. Production, read only,
+2026-10-06: 75 watched, 12 priority, 21 rotating (every bundle every 7 days), 42 news only; covering
+every watched account in seven days needs 48 turns a day (the hourly cron), the alternative declined. Pinned by
+`coverage.test.ts` (slots, the deterministic choice, the capacity statement, the due-priority order),
+`coverage-page.test.tsx` (the page line on exactly the news-only rows) and `grounded-discovery.test.ts` (a news-only
+account never takes a grounded turn even when it is the least recently asked; mutating the runner to ask every
+watched account turns it red). Rollback: revert the commit; nothing persisted changes. Debt: tier and band are the
+only ranking inputs (no seller override of the rotating set yet; a seller-priority account enters through the
+priority reasons).
+
+R32 **The person matched to the motion and its scope (DONE).** One authority, extended: `people/thesis-relevance.ts`
+now reads the thesis's APPROACH and SCOPE beside the title. A job or procurement-led thesis whose posting names a
+role is matched on that role's function (the hiring manager's remit; the role comes from the claim attributes, else
+the posting sentence), never on every yard or trailer word in the posting: on "hiring a Yard Operations Manager at its
+Tulsa distribution center to manage trailer moves", transportation is direct and the fleet is adjacent (the event-led
+reading of the same text would call the fleet direct). A fact that names a site (`factSite`: "its Tulsa distribution
+center", "in Tulsa, Oklahoma"; never a state, region or month) makes a person who runs ANOTHER site related, never
+direct (`personSite` from the title or, for a site-level title only, the CRM location; a network remit is never
+capped). At a multi-division parent a fact one division states is never attributed to another division's contact
+(a PBNA fact reads related for a Frito-Lay title or CRM company; a contact with no division on record keeps the tier
+and the reason says whose fact it is). `people/owner-resolution.ts`: a contact on the account's open HubSpot deal
+ranks right after a relationship and ahead of every cold alternative (a strong dimension, said in words); under a
+job or procurement-led thesis only, the site operator AT the site the posting names is eligible and leads the direct
+fits on thesis relevance (the hiring manager; event-led stays operator-first); `focus` says what the owner must own.
+`people/stack.ts`: a genuine tie asks ONE concrete question ("Who owns the Yard Operations Manager posting at Tulsa
+at PepsiCo: Ann or Bob?") only when nobody is chosen and choosing is the next action (`pursuit/load.ts` passes the
+state after its research downgrades); the view renders it. The loader carries `metadata.approach`, the primary
+claim's role and the open deals' contacts from the account read already made (no new HubSpot read; the account
+read's deals now keep their contact ids). The anchor's "fits better" caution reads the same job-led context. Kept:
+the resolver selects nobody; Tom's recorded choice leads the stack while the recommendation is a badge on Ana, and
+only a material invalidation (left, set aside) drops it, said by `chosenMissing`; a large map shows three rows with
+distinct reasons and the rest one counted step away. Pinned by `owner-motion-scope.test.ts` (13) and
+`people-stack-view.test.tsx`; six deliberate mutations (site cap, division cap, the posting-role path, the open-deal
+dimension, the hiring-site eligibility, the blocking condition) each turn their owning test red. Adjacent: 37 files /
+420 green. Rollback: revert the commit; nothing persisted changes. Debt: the site read is a pattern over the fact
+text and the title (no site entity table); the open-deal dimension is read only where the account read has the
+deal's contacts (the hypothesis owner route has none and says nothing about deals); division vocabulary exists for
+PepsiCo only (`people/division.ts`).
+
+R34 **Channel-specific copy per approach (DONE; sent through the sink).** `sequences/families.ts` keeps the four
+event-led seed families byte-identical (their steps hashes and rendered bytes pinned to the pre-R34 values; on the
+scratch database the seeder found every stored event-led version unchanged and created none) and adds
+APPROACH_FAMILIES, each under its own program (`gap-approach-2026-10:<approach>`) with no problem family:
+**job / procurement-led** ("A question on the posting": the posting's or notice's own words through the
+`{{observation}}` slot, the verified quote with its citation exactly as the event-led step 0 carries its fact; one
+hedged sentence, "A posting says what a role covers, not how the day actually goes, so I might be reading too much
+into it."; ONE question, "Is the posting still open, and are the yards where the day gets lost at {{account}}?") and
+**fit-led** ("Nothing new prompted this note.", a hedged fit sentence, one question). Neither carries the
+physical-change words, ROI, an engagement reference, a layoff hook or familiarity; both pass all sixteen compiler
+checks. `copyFamilySupports` now opens for event-led, job / procurement-led and fit-led (report-led stays closed;
+the list is pinned equal to the families). One authority picks the copy: `execution/action-pack.ts`
+`resolvePackVersion` renders a thesis from ITS approach's family and never uses a version written for another
+approach, wherever it came from (a pinned version, a pinned family or the lookup); `enroll/service.ts` and
+`sequence/enrollment.ts` refuse a version of another approach, and an approach family never runs without its thesis;
+`sequences/seed-drift.ts` judges approach versions against their family's current copy; `scripts/gap/seed-families.ts`
+seeds both lists. The call opening follows the approach too (`sequence/call-pack.ts`: the posting question, no
+guess; the event-led opening byte-identical). Compiler: the singular-"yard" voice warning (C14) now judges our prose
+only; a verified cited quote and its source label (a posting titled "Yard Operations Manager") are the source's
+words, set aside the way C07 and C08 already set the quote aside; an unverified quote is still judged. **Defect found
+by the scratch run and fixed (R30 omission, blocking):** routing judged a thesis's evidence without its approach
+(`routing/inputs.ts` evidenceThin), so a job-led thesis could only ever route to research_required; the readiness
+read (`hypothesis/actionability.ts`, its four callers) had the same omission. Both now read `metadata.approach`.
+Proof: `approach-copy.test.ts` (18; eight deliberate mutations each turn their owning test red);
+`tests/unit/gap/scratch/job-led-send.scratch.test.ts` (5, real routes / services / machine / compiler / gates /
+ledger / Postgres; a new corpus account, Tyson Scratch Co, carries a JOB_POSTING claim and a chosen person): draft
+from the posting (job_procurement_led, submitted) -> APPROVE AND USE -> a routed card -> the preview renders from
+the job family with the posting's exact quote and one question, none of the physical-change words -> CONFIRM +
+SEND writes exactly one message to the sink with that copy in its MIME body; an event-led thesis at another account
+still renders from its event-led family. Before the routing fix the same run stopped at the preview with
+`not_an_email_action: research_required` (receipt: scratchpad `r34/preview.txt`). All three scratch files pass in
+sequence on a freshly reset database (19). Adjacent: 43 files / 817 and 32 files / 808 green. Rollback: revert the
+commit; the two approach families stay inert rows (archive them, or leave them: nothing resolves to them once the
+gate closes). Production: the approach families need `seed-families.ts --apply --remote` before a job-led thesis can
+render there (until then the pack answers `no_version` and nothing goes out). Debt: the job-led copy says "posting"
+for a procurement notice too; no follow-up steps exist for either approach family (single touch, as the event-led
+seeds); `hypothesis/thesis-groups.ts` group readiness reads the first member's metadata only.
+
+R35 **Ask GAP requests use the same preparation service (DONE).** A request to PREPARE something now comes back
+with ONE typed `proposal` built from the page's own controls (`lib/gap/ask/proposal.ts`, pure): "help me approach
+this person" (or "how should I approach Ana") returns the link to NEXT's prepared email when an approved opening is
+usable, the review panel when a proposal waits, else the opening story's DRAFT A THESIS on a checked fact for that
+person, else one research pass; "draft an angle from the job posting" returns the draft on the checked posting
+(the posting's own draft text) or says there is none and links Coverage; "research their footprint deeper" returns
+the research plan's DEEPEN on that section. Kinds: `draft_thesis` (POST /api/gap/story/draft with the exact payload
+the page's control posts: the defaults and the persona key moved to `story/draft-defaults.ts`, one module for both
+callers; the event-led draft text is unchanged, a posting gets its own), `research` (POST /api/gap/accounts/deepen,
+which re-plans and refuses an unplanned section) and `open_control` (a link). The route reads the intent before
+anything else and answers a proposal with NO model call; the controls ride in the remembered context and are dropped
+from the model's prompt; an explanation ("Why this approach?", "What research has been done?") stays a read-only
+answer, and a request to send, enroll, look up, suppress, choose or write copy is still answered by naming its
+control. The component renders the proposal as a button that calls only that route with that payload (or a plain
+link) and says what happened; the press is the seller's and the route runs its own gates. Ask GAP still cannot
+send, choose permanently, spend, suppress or write the CRM. The people stack section gained the anchor the links
+land on. Pinned by `ask-proposal.test.tsx` (10: the intents and the non-intents, each proposal against the page's
+controls, the prompt without the controls, the real route with only the session and the model provider replaced,
+the component's button and link); six deliberate mutations (the route asking the model, the controls reaching the
+model, a payload that is not the page's, a copy request read as a proposal, the button posting elsewhere, an
+explanation read as a request) each turn their owning test red; adjacent 10 files / 131 green. Rollback: revert
+the commit. Debt: the research proposal does not read the plan first (the deepen route refuses an unplanned section
+with its reason, said on the button); intents are English patterns over the question, not a model classification.
+
+**Sprint 3 batch gate (2026-10-06; R20 follow-up, R32, R34, R35).** The full GAP suite 356 files / 5,304 tests
+green; the rest of the repository 325 files / 2,284 green (one skipped); typecheck clean; eslint clean on every
+changed line (the remaining errors in `enroll/service.ts`, `sequence/enrollment.ts`, `hypothesis/thesis-groups.ts`
+and `outreach-anchor.tsx` are identical at the pre-batch commit). Scratch, on a freshly reset database, in sequence:
+`anchor-draft`, `job-led-send` and `send-spine` 19 / 19 (the global EmailLog count in `anchor-draft` holds only on a
+fresh database; run the scratch files one at a time). Production stays as it was: no write, no flag change; the
+approach families are not seeded there yet (the R34 entry says how).
+
+**Sprint 4. R40 Commitment identity and lifecycle (DONE).** `work/commitment-model.ts` (pure, client-safe),
+`work/commitments.ts` (the store) and `work/dates.ts` (New York days): ONE durable record per obligation, an
+append-only `account.commitment` ledger row (subject the account; each row a full snapshot keyed by
+`payload.commitmentId`; the newest row wins) carrying the owner, the due time (a date-only obligation is due at 9 am
+New York that day), the account, person, deal and thread, the status (open, waiting, blocked, snoozed, done,
+skipped), the dependency in words, the completion proof (the ledger row, the disposition, the capture, the mailbox
+message, the outcome, or the seller's own recorded note) and its source. The id IS the source (`disposition:<id>`,
+`send:<person + step key>`, `snooze:<outcome row>`, `capture:<note>:<candidate>`, `seller:<uuid>`) and the create is
+one-shot under an advisory lock, so a duplicate event, a retry, a refresh or another instance finds the record and
+writes nothing; done and skipped are terminal (the writer refuses every transition and the fold ignores any later
+row), so nothing resurrects a completed item. Sources: a human-confirmed disposition (`disposition/service.ts` step
+7, fail-open, injectable: request_information -> answer the request; meeting_accepted -> prepare the meeting; timing
+with a date -> a reminder snoozed until then; referral -> decide how to approach the NAMED person, recorded as that
+person and never as the referrer; any stopping answer closes that person's waiting follow-ups with the disposition as
+proof), a snooze (`work/outcome.ts`, loaded on demand because the outcome module is reachable from the Work list's
+client component: a reminder that returns on its date; a newer outcome settles the older ones, done when they had
+come back, skipped when replaced or cleared) and every proven send of the last 30 days (`syncFollowUpsFromLedger`,
+run on the Work read: one waiting follow-up per person, due when the pinned version's next step is, else the house
+four-business-day interval flagged `noFollowUpCopy`, because every seeded family is single-touch today; a newer send
+closes the older follow-up with its ledger row). `GET / POST /api/gap/commitments` lists an account's obligations with
+their phase and records the seller's own obligations and transitions (done needs proof, waiting and blocked need the
+dependency, a snooze a future date within 90 days). The phase at `now` (due before the end of the New York day,
+upcoming, waiting, blocked, snoozed, done, skipped) is derived, never stored: a snooze returns on its date or early
+when the buyer moves; a follow-up the buyer answered is blocked by the answer; a buyer promise past its day becomes a
+chase. Storage decision: no new table; one indexed read by kind (every obligation) or by subject (one account); the
+additive (status, due_at) projection is the next step if the rows pass about ten thousand (owner: this module; rebuild:
+the rows). Proof: `commitments.test.ts` (9: the New York calendar across a late evening and daylight saving, the
+one-shot create, proof and terminal states across a reload, the five statuses, two obligations at one account, the
+three sources); six deliberate mutations (the one-shot create, the terminal refusal, the fold's terminal guard, done
+without proof, a UTC day, the referral naming the referrer) each turn it red. Adjacent: disposition, outcome, capture,
+BID and Work suites 8 files / 188 green; typecheck clean. Rollback: revert the commit; the rows stay inert (nothing
+else reads the kind). Debt: a meeting accepted by email has no time on record, so its preparation is due at once
+until the seller adds the time.
+
+R41 **Today's work ranked by commercial obligations (DONE).** `work/list.ts` now builds the DAY (`workDay`: cards,
+the Waiting footer, the Snoozed footer and their counts; `buildWorkList` is its cards): the tiers are a buyer
+commitment due today (a deliverable the seller promised, a request the buyer made), an actionable reply (and a
+referral to decide on), a meeting within 24 hours (the Meeting table, read in New York; prepare it), an open deal with
+a step due (deal work on the same card that still says no cold first touch), a follow-up due (and a reminder that came
+back), prepared prospecting (a first touch ready, a GAP draft to send or discard), a proposal to review, research,
+then the admin (an opt-out to record), the seller's own "not today" and the holds. Inside a tier: the due time, then
+the newest buyer activity, then the seller's explicit priority (NEW `work/priority.ts` + `POST /api/gap/accounts/
+priority`: an append-only `account.priority` row with a one-line reason, newest wins, `clear` ends it; it never lifts
+a hold and never puts cold work above a buyer's obligation), then the lane's own order; each card says why it sits
+where it does (`rankWhy`: "A buyer commitment is due: Send the comparison (due today)", "A prepared first touch; you
+prioritized it (their CFO asked)"). Every obligation due today is its own row on its account's card with Done (the
+seller's note is the proof), Snooze (a date) and Skip (a reason) through `/api/gap/commitments`; an account whose only
+work is an obligation gets a card of its own, so no task is silently omitted. Waiting work is counted, never a card:
+an obligation due on a later day, one waiting on someone, a blocked one, and (the one R14 rule changed on purpose) a
+first touch that WENT OUT, which now waits on the buyer and then on its follow-up instead of inflating "needs you"
+(an outstanding GAP draft is still a card). A snooze returns on its date, or early when the buyer moves after it was
+set (a reply before it is not a change); the seller's snooze of an account never hides a buyer obligation due there.
+The counts are the contents: needs you = the cards; obligations due = the rows on them; Waiting and Snoozed count what
+they list; a new "Due" chip filters the cards a commitment, meeting or deal step placed. The Work page reads the
+commitments (after the bounded follow-up sweep, at most once a minute per instance), the next two days' meetings and
+the priorities on every render (`work/day-load.ts`), never cached with the lanes. Proof: `work-rank.test.ts` (6: a
+customer-promised deliverable outranks a new article and the full tier order; the three tie-breaks in order, said on
+the card; waiting never inflates needs you; a snooze returns only when due or materially changed; two obligations on
+one account stay two and every open obligation appears exactly once; a seller snooze never hides a buyer obligation),
+`work-list.test.ts` (the R14 motion case rewritten to the waiting rule, the counts with the Due chip) and
+`work-list-view.test.tsx` (the rank line, the obligation rows with their actions, Done through the route, the Waiting
+footer, the priority); seven deliberate mutations (a research card above a commitment, an upcoming obligation as a
+card, the priority tie-break dropped, a sent touch kept as a card, a snooze hiding a buyer obligation, a snooze
+returning on an older reply, an obligation-only account omitted) each turn their owning test red. Adjacent: 9 files /
+67 green; typecheck clean. Rollback: revert the commit (the commitment and priority rows stay; nothing else reads
+`account.priority`). Debt: Work reads every commitment row on each render (fine at today's volume; the indexed
+projection named in R40 is the step when it grows); a meeting row with no time is placed at 9 am New York on its day.
+
+R42 **Reply triage through reply execution (DONE; the answer is prepared and editable since R42b, below).** `replies/classify.ts` now says what a
+HUMAN reply is without changing its kind (`human`: a real reply, a referral, an objection; each still pauses the
+account and stops every cold follow-up there; an opt-out inside a longer message stays an opt-out). NEW
+`replies/prepare.ts` (pure) + `components/gap/reply-prep.tsx`: on the Work reply card and on the account page right
+after NEXT, the incoming message (who, when, subject, their words), its kind, prepared notes read off their words
+(what they asked, the day they named in New York, who they named, the objection quoted), "Answer in Gmail" (the
+thread in the GAP mailbox, else a search for the sender there) and "Record what they said" (the triage form). As first
+shipped (superseded by R42b): NO reply copy family exists (the compiler and governed copy have first-touch families
+only), so it failed closed: `copyFamily` is always null, the panel said "No reply copy family yet: GAP does not write
+this reply. Answer it yourself in the thread.", there was no send, draft or preview control and no model is asked
+for words. A referral: the card reads
+"They named someone" with "Record who they named"; the disposition form now carries who they named (and, for a
+not-now, the day to come back), prefilled from the message's words for the seller to confirm; the R40 referral
+obligation records the NAMED person, "named by" the one who named them, with no cold action and no implied consent or
+relationship, and the account page lists it under "Obligations here" (every open obligation at the account, each its
+own row with Done, Snooze and Skip). An out-of-office notice with a return day (`dates.ts` `parseReturnDate`; an
+explicit date now beats a weekday in the same phrase) moves the person's waiting follow-up to that day, never earlier,
+or with none waiting makes ONE reminder snoozed until then, keyed by the person and the day. Duplicate imports: the
+same Gmail id and the same HubSpot engagement were already stored once; the remaining duplicate, the same reply from
+the GAP mailbox AND HubSpot's connected inbox, is now one reply (`replies/twins.ts`: same sender, subject, opening
+words, within ten minutes); the list keeps the Gmail copy, names the others (`twinIds`), and a HUMAN-confirmed
+disposition on ANY copy, on the page or not, settles it (an AI suggestion never does). The reply item gains
+`threadId`, `fromName` and `twinIds`, added to the client type on purpose (contract parity). Proof: `reply-prep.test.ts`
+(9: the kinds; the prepared reply with no copy family and no send path; referral, objection, opt-out, automatic notice
+and bounce notes; a real reply, a referral and an objection all read replied with no cold touch and block the follow-up
+there; the out-of-office move and the one reminder; twins and their settlement, inside and outside the page; the form
+body) and `reply-prep-view.test.tsx` (the panel offers exactly two ways out); eight deliberate mutations (a send in
+the prepared reply, every human reply read as plain, a follow-up offered over a reply, the out-of-office move re-applied
+on every read, a weekday beating the explicit date, a twin's disposition ignored, an AI suggestion settling a twin, the
+referral naming the referrer) each turn their owning test red. Adjacent: the whole GAP suite 360 files / 5,331 green
+(the three scratch files skipped without the scratch URL); typecheck clean. Rollback: revert the commit (no stored
+shape changes; reminders already written stay inert rows). Debt: the referral name and the asked question are pattern
+reads of the message (the seller confirms the name in the form); the answer itself is R42b (below), prepared from
+their words with no governed reply copy family. Found on the way, OUTSIDE this sprint's surfaces and not
+fixed here (named debt for the lead): earlier heredoc edits left literal backspace characters where a word boundary was
+meant in three files, so `story/propose-family.ts` line 49 (the closure cue for the problem family) can never match,
+`entity/providers.ts` `modelGone` never matches the "404" alternative, and three guard assertions in
+`tests/unit/gap/hubspot-poller.test.ts` (lines 708 to 710) pass vacuously.
+
+R42b **The prepared answer (DONE for a reply in the GAP mailbox thread; PARTIAL for a reply that came in only
+through HubSpot's connected inbox, the dependency named: the Gmail thread).** Casey reconciled R42 on 2026-10-06: the
+fail-closed line was a safe fallback, but the mandate is a PREPARED, EDITABLE answer to what was asked. NEW
+`replies/answer.ts` (pure): every ask is read from their message (pricing; a security, legal or contract question; a
+commitment or timing; a material; their availability, with the day they named in New York; any other question; an
+objection is acknowledged) and the text is prepared as a greeting and one line per ask. What GAP holds is written in
+and cited (the account's demo or microsite, trust "Ours"); everything else is a "[Fill in: ...]" placeholder in the
+text AND a line under Missing information. It never writes a price, a time, an attachment, a commitment or the buyer's
+agreement. Beside the text, what GAP can cite, each with its trust word: the sender's own human-confirmed statements
+("Buyer confirmed", read for that person at that account, so no other deal's context can appear), the fact the thesis
+started from ("Public source"), the last touch ("Recorded"). A referral, an opt-out, an automatic notice or a bounce
+prepares no answer and says why. NEW `execution/seller-reply.ts`, `sendSellerReply` in `execution/seller-send.ts`,
+`GET` / `POST /api/gap/replies/[id]/answer` and `components/gap/reply-answer.tsx` (on the reply panel, loaded when the
+seller presses "Prepare the answer"): three DISTINCT actions, each its own ledger kind on the inbound message. COPY
+(`execution.reply_copied`; nothing leaves GAP). SAVE AS A GMAIL DRAFT in their thread (`execution.reply_drafted`; a
+draft, not a send; the same text twice is one draft; a different text while it exists is refused). SEND: a preview of
+exactly what leaves, then CONFIRM + SEND bound to one hash of the sending mailbox, the recipient, the subject and the
+edited text (`execution.reply_sent` plus an EmailLog row); a newer message from them after the preview makes the
+confirm stale. Draft and send run under a per-message advisory lock and claim (`execution.reply_claimed` /
+`execution.reply_released`), so nothing goes out twice and a send while a draft exists is refused. The send is the only
+new HUMAN_APPROVED_1TO1 use and lives in seller-send.ts (the structural pin holds); it carries In-Reply-To and
+References so it lands in their thread, and the wire re-runs the restriction, autonomy, suppression and daily-cap
+gates. Every press re-reads current state: an opt-out (this message, a later one, or a recorded do-not-contact), a
+referral, a person marked do-not-contact or a notice refuse copy, draft and send; a newer message from them, an answer
+already in the GAP mailbox's Sent (sent by hand) or an unreadable Sent folder refuse the draft and the send; a text
+with an unfilled placeholder or an em dash, an empty one or one over 8,000 characters is refused, and the edited text
+passes the deal-artifact guard (`deals/artifacts.ts` `artifactProblems`: no "throughput", no claim of approval or
+acceptance the buyer did not make, their own quoted sentences exempt, a canon figure only with its label). Draft and send need
+an owner (403 otherwise). No model writes the answer and no governed copy family runs, so the congruence critic is not
+called: the seller's edited words are the copy. A missing GAP mailbox sender, like the HubSpot-inbox case, prepares
+the answer as PARTIAL with the dependency named, and copy still works. The R42 fail-closed line is gone: a real reply
+or an objection shows "Prepare the answer"; a referral or an opt-out says why no answer is prepared. Folded in
+from the independent audit at 31f09c71 (each line opened and confirmed first). (a) The out-of-office reader matched a
+real reply that mentions "delayed response", "on vacation" or "out of the office" in passing, and such a reply then
+got no Work card, did not count as a buyer move, could not be recorded and was not a material change. `classify.ts`
+now reads an out-of-office as an automatic notice only: the Auto-Submitted and autoresponder headers are already
+rejected at ingestion (`email/reply-precision.ts`), so here it is the canonical subject, or the canonical notice
+body (present or future tense) WITH no first-person answer to our ask (no question back, no yes, no day that works,
+no "send me"); an apology or the past ("sorry for the delayed response", "I was on vacation") is a person; and an
+explicit opt-out now wins over a notice in the same message. The account-reply hold (`account-reply.ts`) read the
+subject only, so a notice without the canonical subject held every first touch with no card to say why; it now reads
+the same classification as the card: a notice or a bounce holds nobody, a person or an opt-out holds until recorded.
+(b) The prepared reply did not exist: this entry. The
+follow-up side is R43, now marked PARTIAL with its dependency. (c) "Nobody they named gets a cold email until you
+choose" was said on the card and enforced nowhere: R5 held the person who pointed elsewhere, never the person named.
+NEW `replies/referral-hold.ts`: an open R40 referral obligation naming the person (by email anywhere, else by full
+name at the account; never a first name alone) holds them until the seller marks it done or skipped, read from the
+ledger by its JSON path (an unreadable ledger throws, never clear). Enforced where the other holds live: the send
+gate's step 0 (`named_in_referral`, shared by the draft and the send path), live enrollment, and routing (NEW rule R5b
+`named_in_referral`, after R5: research_required with the obligation's words), with the seller words in
+`ui/refusal-copy.ts` and the send panel. Proof:
+`reply-answer.test.tsx` (11: the asks and their topics; planted asks for a price, a time, an attachment GAP lacks, a
+security answer, a commitment and buyer agreement, with no value written outside the placeholders and each listed as
+missing; a held material linked and cited; no answer for an opt-out, a referral or a notice; the PARTIAL dependency;
+copy, preview, a changed text refused, CONFIRM + SEND once in their thread as HUMAN_APPROVED_1TO1, a replay already
+sent; a draft not a send and the send refused over it; every control at the click; the route with no sender, with
+placeholders, an em dash and a non-owner; the panel's three actions; the mailbox bound at confirm and a newer message making it stale; the copy guard) and
+scratch `reply-answer.scratch.test.ts` (7; the first six through
+the real route on Postgres with the sink and the clawd stub: a reply with three asks prepared with three placeholders
+and nothing invented; copy recorded with nothing sent; the placeholder text refused; a suppressed recipient refused
+at the wire after preview; CONFIRM + SEND one threaded message, one EmailLog row; a replay already sent; a second reply
+drafted in its thread, then its send refused; a referral and the corpus opt-out refused on all three with nothing in
+the sink). `work-today.test.tsx` (+1: more than 500 rows today keeps the newest, and a reply answered from GAP counts);
+`reply-prep.test.ts` and `reply-prep-view.test.tsx` now pin the prepare control and the no-answer lines;
+`reply-classify.test.ts` (+3: six real replies that mention a delay, a vacation or the office STAY HUMAN and hold the
+account; the canonical notice stays out-of-office with a colleague to contact; an opt-out inside a notice is an
+opt-out); `seller-draft.test.ts` (+2: a real reply that mentions a vacation holds, a notice by its body and a
+bounce do not); `referral-hold.test.ts` (4: by email anywhere or full name at the account, never the referrer or a first
+name; done or skipped releases, a snooze does not; only referral rows are read and folded; unreadable throws); the
+gate tests in `seller-draft.test.ts`, `enroll-service.test.ts` and `routing-rules.test.ts` (R5b, the rule order); and
+a seventh scratch step (the referral obligation written by the real commitment writer and read by its JSON path on
+Postgres; another kind naming the same person holds nothing; skipped releases).
+Eighteen deliberate mutations (a fabricated price, a referral answered, a later opt-out ignored, placeholders let
+out, a send previewed over an open draft, a changed text confirmed, a non-owner drafting or sending; any notice phrase
+read as an out-of-office, a notice beating an opt-out, the send gate, live enrollment or routing ignoring the
+referral hold, a done or skipped referral still holding, a first name alone matching, the account-reply hold reading the subject
+only, the confirm not binding the mailbox, the copy guard skipped, "done today" keeping the oldest rows) each turn
+the owning test red. Adjacent: the whole GAP suite 371 files / 5,434 green (scratch excluded); the rest of the repository 325 files / 2,294 green (one skipped); the six scratch
+files 37 / 37 on a freshly rebuilt database, one file at a time; typecheck clean. Rollback: revert the commits (new
+ledger kinds only, on the inbound message; nothing outside this panel reads
+them). Debt: the asks are pattern reads of their words (the seller sees each ask and edits the text); a reply that came
+in only through HubSpot's connected inbox is prepared and copyable but not drafted or sent from GAP (the Gmail thread);
+after a send the reply card still asks the seller to record what they said (recording is the triage, a separate step);
+the audit's reuse note suggested a referral answer that thanks them and asks about the named person; the brief for
+this ticket says a referral prepares no reply, and that stands. Found at the gate and fixed in its own commit:
+Work's "done today" read the OLDEST 500 ledger rows of the New York day, so on a busy day the newest completions
+vanished (the work-day scratch failed after three other scratch files ran the same day); it now keeps the newest 500,
+shown in order, and an answer sent from GAP counts ("Answered <them> in their thread").
+
+R43 **Follow-up execution and recovery (DONE for the plan, the holds and the recovery; PARTIAL for touch 2 and later
+on the four seeded event-led families: the dependency is human-written step 1+ copy for those families, deleted by
+red team T7 on 2026-09-26 and not replaced, so the plan says follow up by hand and "prepare" is reachable only for
+a version that carries step 1+ copy; audit at 31f09c71).** NEW `execution/follow-up-
+plan.ts` (pure): a follow-up due today says what to do from the PERSON's actual history (person-history.ts: every
+proven send, every Gmail draft and its fate, every send whose outcome is unknown), the obligation's due day and the
+holds: held (an open or unreadable deal, an opt-out; no follow-up while it stands, and it never promotes a held
+account), outcome unknown (a send of the next touch was started and its answer lost: check Gmail Sent, never resend),
+complete (the next touch already went out), draft saved (a Gmail draft of the next touch is SAVED, not sent; GAP counts
+it only once Gmail shows it sent), a justified wait (when, and since which touch), prepare (the family has copy for
+the next step: the existing card and its seller-send preview) or by hand (no follow-up copy, which is every seeded
+family today: follow up in the same thread, then mark it done). `execution/follow-up-load.ts` reads the plans for the
+follow-ups due on Work (bounded) and `reconcileFollowUpsFromSent` (run by the `gap-mailbox` cron after the unknown-send
+reconcile) closes a follow-up sent by hand from the GAP mailbox: Sent after the last recorded touch, minus every
+message GAP recorded, holding a message to that person, is the proof (`mailbox_sent`); no ledger send is fabricated
+for copy GAP did not render; an unreadable mailbox writes nothing. At the click (`seller-draft.ts`, the one send
+authority, stricter only): a follow-up is now refused `emailed_outside_gap` when Sent holds an unrecorded message to
+the person after the last recorded touch (`mailbox_sent_unreadable` when Sent cannot be read), as the first touch
+already was. Harness only: `GAP_SINK_FAULT=timeout_after_write` makes the sink keep the message and then lose the
+answer, the way a provider timeout after acceptance looks (the sink never runs in production). Proof:
+`follow-up.test.ts` (5: prepare versus by hand; the justified wait, a saved draft never a send, a sent draft complete,
+the unknown send, the hold; the plan on Work and a held follow-up not promoting a held account; the Sent reconcile
+closing the obligation with the message, ignoring GAP's own recorded send and writing nothing on an unreadable read;
+the click refusing a follow-up over one sent by hand) and the sprint's scratch file
+`tests/unit/gap/scratch/work-day.scratch.test.ts` (real routes, gates, ledger, Postgres; the sink as the mailbox):
+three tabs press CONFIRM + SEND on one email together and exactly one leaves (one sink message, one DIRECT_SENT, one
+EmailLog row), every other tab refused by whichever gate first sees the winner (the open claim, the ledger, the
+stale-card read of the EmailLog, the mailbox Sent read) or answered ALREADY SENT (stressed ten runs, green); the provider
+accepts and the answer is lost: the claim stays open, the retry is refused `send_in_progress_or_unknown` and writes
+nothing, and the Sent read reconciles it so the next press answers ALREADY SENT; a deal opens between preview and send:
+the confirm is refused `active_opportunity` and nothing leaves; every proven send leaves one waiting follow-up and a
+re-read makes no second. Six deliberate mutations (a follow-up over one sent by hand, a saved draft read as sent, the
+Sent reconcile counting GAP's own send, an unknown send offered again, a lost answer read as not sent so the claim is
+released, an open deal ignored at the click) each turn their owning test red, the last two on the scratch database.
+Adjacent: 21 files / 278 green; typecheck clean. Rollback: revert the commit (the cron report gains one key; the
+reconcile writes only commitment rows). Debt: no next follow-up is proposed after a by-hand follow-up (the obligation
+closes; the next touch waits for a new send or the seller's own task); the follow-up copy family (step 1+) does not
+exist, so "prepare" is reachable only for legacy multi-step versions.
+
+R44 **Capture a conversation once (DONE; dictation stays off).** The note is kept verbatim WITH its source: Capture
+opened from a Work card, a reply, an obligation, a meeting or the account page carries the account, the person (only
+one at that account, checked by the page and the store), the deal (its name: the account read holds no deal id) and
+the conversation in the link (`/gap/capture?account=&person=&deal=&context=&from=kind:id`), and the note stores
+`dealId` and `source` (an unknown source kind is dropped, never trusted). Each Work card offers it ("Log what they
+said" on a reply, as an email with the person who wrote; "Log the meeting" with a meeting due; "Log a conversation"
+otherwise, with the deal on a deal card); the account page's "Log what happened" carries the deal and the chosen
+person. `capture/extract.ts` now reads every sentence with its speaker and whether the seller said it
+(`noteSentences`): a pasted summary (a "Summary:", "AI summary:", "TL;DR:", "Key takeaways:", "Action items:" or
+note-taker block, to the next blank line) and the seller's own read on an unlabelled line ("I think", "my guess",
+"probably") are NEVER proposed as buyer words and are listed with why; a labelled buyer line saying "I think" is still
+theirs; a bullet marker is layout, not words. NEW `extractCommitments`: a buyer asking the seller for something (the
+seller owes a deliverable), the seller promising something (the seller's own words, recorded as "You", never a buyer
+quote), a buyer promising something (waiting on them, then a chase), a meeting named with a day (prepare it); the day
+is read in New York from when the note was saved, the thing owed without the day words, and an ambiguous day ("next
+Friday") is flagged for the seller to check. The review is ONE concise press (`decideBatch`, op `batch`): every
+statement and every obligation kept by default or rejected, each corrected on its own (a relabelled type, a shortened
+quote that must stay inside its sentence, who said it, what is owed, the day), each item through the same single
+decision (a statement becomes a human-confirmed BID only with its exact words and its speaker, as before; an obligation
+becomes an R40 commitment with the note and candidate as its one-shot source, the deal from the note, the verbatim
+sentence and its speaker as its basis), one refusal never blocking the others and each answer said per item; the
+single Confirm / Reject per statement stays for a one-off correction. Dictation: unchanged and off (transcription spend
+not authorized; a press shows why and records nothing). Proof: `capture-once.test.tsx` (7: speakers, owners, kinds and
+New York days of the four obligations in one note saved late in the evening; summaries and the seller's own read never
+proposed, a seller line that sounds like data never a statement, a buyer's "I think" kept; the note keeps its source,
+deal and person; confirm all, correct one, reject one in one press, the commitments with the edited title and day and
+the right status, a second press recording nothing twice; one refusal not blocking the others and a seller promise in
+the seller's own words; Capture opened prefilled from a reply, a deal and a meeting; the screen saving the prefill and
+dictation recording nothing) and the scratch file (the note through the real routes, one batch, the commitment due on
+that Friday at 9 am New York, a second press recording nothing); seven deliberate mutations (the seller's read as a
+quote, a summary as quotes, a seller line as a statement, an obligation decided twice, a refusal stopping the batch, a
+buyer promise made the seller's, Capture forgetting what opened it) each turn their owning test red. Adjacent: 26 files
+/ 367 green; typecheck and lint clean. Rollback: revert the commit (older notes read with no obligations; the
+commitments already written stay). Debt: the obligation and object reads are patterns over the sentence (the seller
+edits the title and the day in the review); a deal is referenced by name.
+
+R45 **Close the day and retain tomorrow (DONE).** NEW `work/today.ts` (pure) + `components/gap/work-today.tsx`: a small
+"Today" panel on Work, derived from actual state with NO new storage: done today (the New York day; read from the
+ledger and the dispositions by `loadCompletedToday`: sends GAP proved, answers recorded by a person, obligations done or
+skipped, notes saved, the seller's outcomes; an AI suggestion is never "done"), owed to buyers (every open buyer
+obligation, whatever its day), waiting on them (follow-ups not due, a buyer's promise not due, a first touch out) and
+tomorrow (what becomes due at any time tomorrow that is not due today: an obligation's day, a snooze coming back, a
+meeting on tomorrow's calendar), each group counted and listed (the count is its list). "See tomorrow"
+(`/gap?day=tomorrow`) shows Work as it will stand at 8 am New York tomorrow, read only and labelled (every write
+still happens at the real time; the follow-up sweep never writes in the future; every gate re-runs at the press).
+Legacy competition removed from the Work surface, the actionable result wins: a fresh pursuit summary's actionable
+result IS the card's action, its ABSENCE included (before, a summary that allowed nothing fell back to the lane's
+mapping, so a follow-up state the workspace held could still offer "Open the follow-up"; the lane mapping now speaks
+only for a summary written before R10), and the legacy NEXT UP list no longer renders beside an empty Work list (its
+pick is no longer computed). Proof: `work-today.test.tsx` (7: done is today only in New York at 11:30 pm, owed, waiting
+and tomorrow including a 9 am snooze return and a meeting; the panel's counts equal its lists; done read from the
+ledger with yesterday's rows and an unconfirmed disposition left out; the actionable result's absence wins where the
+lane mapping would offer an action; Work renders no NEXT UP; a pure mixed session read today and the next day with
+no omitted task, the Friday obligation still on Friday, the snooze away until its day, the reply still waiting, the
+meeting tomorrow's work) and the sprint's scratch file: a mixed session through the real routes (a reply, two sends,
+a snooze through the outcome route, a captured obligation due Friday, a meeting tomorrow as the meetings table stores
+it) read today, then the next morning and a day later by ANOTHER database client (a restart, another instance): no
+task omitted on any read (every open obligation is on a card, in Waiting or in Snoozed), nothing done by itself and no
+phantom Done the next day, the Friday obligation still due that Friday at 9 am New York and every follow-up's due time
+unchanged, the snooze away until its own day, the reply still waiting until recorded, the meeting an obligation the
+next morning. Browser receipt (headless Chrome on the scratch server; scratchpad `r45-journey/`: `journey.json` and six
+step screenshots plus the card, the Today panel and the tomorrow preview): Work shows Jo's reply as the card with the
+message, the prepared notes ("They asked...", "They named a day: Friday (Oct 9)"), the no-copy line and exactly two
+ways out -> "Log what they said" opens Capture with the account, Jo, Email and "Opened from a reply" -> the note's
+obligation "Send Jo the two-site comparison" due Oct 9, the statement with Jo as speaker and the "I think" line never
+proposed -> one press records both -> Work's Today panel owes it ("Due Oct 9") and lists the note as done, the reply
+still the card -> tomorrow's preview ("Tomorrow, Wed, Oct 7") still owes it on Oct 9 with nothing done. Five
+deliberate mutations (yesterday read as done today, the done read from UTC midnight, a lane card competing with the
+actionable result, tomorrow read in the morning so a 9 am return is missed, and both layers of the done-today filter
+removed on the scratch database) each turn their owning test red. Rollback: revert the commit (nothing stored).
+Debt: the preview carries no pursuit summaries (they are fresh for 15 minutes of the real clock), so its cards speak
+the lanes' words; "owed to buyers" lists every open buyer obligation, not only those due this week.
+
+**Sprint 4 batch gate (2026-10-06; R40 to R45).** Exit met on the scratch harness: replies, follow-ups, meetings,
+buyer obligations and prepared prospecting form one persistent, explainable daily queue, and a mixed session resumes
+correctly the next day. The full GAP suite 363 files / 5,350 tests green; the rest of the repository 325 files /
+2,288 green (one skipped); typecheck clean; eslint on the 51 changed TypeScript files: the 20 remaining errors are
+identical at the pre-batch commit (the house `prisma: any` signatures in `disposition/service.ts` and
+`replies/list.ts`, the mock generics in `contract-parity.test.ts`). Scratch, on a freshly rebuilt database, one file at
+a time: `anchor-draft` 6, `job-led-send` 5, `send-spine` 8, `work-day` 6 (25 / 25). Browser receipt: scratchpad
+`r45-journey/` (Work -> reply -> Capture -> the obligation -> tomorrow). Deliberate mutations across the batch: 39,
+each turning its owning test red (two on the scratch database). Production: nothing written, no flag changed, no
+send, no paid call. Deploy notes: no schema change and no new table (the new ledger kinds are `account.commitment`
+and `account.priority`); the `gap-mailbox` cron report gains `followUpsFromSent`; the first Work load after deploy
+runs the follow-up sweep over the last 30 days of proven sends (it creates waiting follow-ups, writes nothing else).
+Carried debt (each recorded in its entry): the indexed commitment projection when the rows grow; pattern reads for
+names, asks and obligations in replies and notes (the seller confirms them); no reply copy family (the reply answer
+is now prepared and editable: R42b) and no follow-up copy family (fails closed); no next follow-up proposed after a by-hand one; the tomorrow preview speaks the lanes' words;
+a meeting accepted by email has no time on record; three pre-existing backspace-mangled patterns outside this sprint
+(`story/propose-family.ts` line 49, `entity/providers.ts` `modelGone`, `hubspot-poller.test.ts` lines 708 to 710).
+
+**Sprint 5. R50 Intelligence and actions scoped to the right opportunity (DONE).** HubSpot stays the deal authority:
+the account read now keeps each open deal's HubSpot id beside its name, stage, next step, close date and contacts
+(`account-intel/load.ts`; the In Deals summary keeps the id, close date and next step too). ONE scope rule, NEW
+`deals/scope.ts` (pure): a row's RECORDED scope wins (a commitment's `dealId`, plus an optional division / site now
+accepted by `POST /api/gap/commitments`; a BID's `metadata.scope`, now accepted by `POST /api/gap/bids` as an optional
+`scope` and written by Capture when the note was opened on a deal); else the person's single open deal through their
+HubSpot contact, said as "through <person>"; else ACCOUNT-LEVEL, labeled so wherever it is shown. A person on two
+deals stays account-level (one person's words are never transferred to every opportunity they touch); a legacy deal
+NAME (R44 notes) resolves only when it names exactly one open deal; a closed deal's id or an unmatched name keeps its
+own label ("scoped elsewhere"), never guessed and never dropped. NEW `deals/opportunities.ts` (pure) +
+`deals/workspace.ts` (the read) + `components/gap/deal-opportunities.tsx`: on the account BRIEF each open deal shows
+ONLY its own open obligations, its own confirmed buyer words, the people GAP holds who are its contacts, HubSpot's own
+next step and close date, and its own actions (Capture opened on that deal by id; the deal in HubSpot); account-level
+rows are their own group; one deal brief per deal (`buildDealBrief` with the deal and the scope rule: that deal's words
+plus the tagged account-level ones, never the other deal's; without a deal it is unchanged). The NOW obligations list
+says each row's scope. Capture links carry the deal's HubSpot id and its name (`deal`, `dealName`; the note stores
+both), from the account page and from a Work card (the card's top obligation's deal, else the account's only deal).
+An open deal still blocks cold outreach (unchanged gates; the pursuit state stays in_deal with no cold touch) without
+suppressing deal work: NEXT names every open deal ("Work the 2 open deals (...) each on its own"), Work ranks a due
+deal step as deal work with "Deal: <name>" on the obligation. Proof: `deal-scope.test.tsx` (9: the scope rule, the
+legacy name, two deals under one company each holding only its own obligations and words with nothing listed twice,
+the per-deal brief, the rendered view, the pursuit state and NEXT, the Work card and its Capture link); five
+deliberate mutations (a person on two deals transferred to the first, account-level rows shown as every deal's, a
+per-deal brief keeping another deal's words, a legacy name guessed onto the first deal, Capture binding to the first
+deal) each turn it red. Corpus: Kroger Scratch Co now carries two open deals in the stub, each with its own contact
+(Ann on the yard pilot, Ben on the Columbus DC deal; tag-unique ids); the stub answers deal -> contacts and contact ->
+deals from the deals file. Adjacent: 18 files / 256 green; typecheck clean. Rollback: revert the commit (older rows
+read account-level; the new optional fields are ignored). Debt: the contact-derived binding needs the person's HubSpot
+contact id (a person GAP holds without one reads account-level); division and site are free text the seller names (no
+site entity).
+
+R51 **Meetings prepared from the current conversation (DONE; no new calendar connector).** NEW
+`deals/meeting-prep.ts` (pure) + `components/gap/meeting-prep.tsx`: ONE preparation per meeting on record (the
+Meeting table the account context and Work already read): the objective (the row's own, "Recorded", else the first
+thing still unknown, "Suggested"), who is coming with their role (the names on the row matched to the people GAP holds,
+then the deal's own contacts, "HubSpot"), the last commitment (the newest obligation on that deal or account-level),
+the confirmed needs (ONLY human-confirmed buyer words scoped to that deal plus the labeled account-level ones, "Buyer
+confirmed"), the open questions (the seller's own learning objective first, then the deal brief's discovery question
+for every truth section still unknown, "To learn"; `deal-brief.ts` now exports `unknownSectionsOfTypes` and
+`openQuestionsFor`), the working thesis as a guess to test ("Our guess", never a finding), at most two verified public
+facts AFTER the buyer's words and never in their place ("Public source", "not the buyer's words"), and the account's
+materials ("Ours"). Every line carries its trust word. A meeting belongs to its row's deal (`hubspot_deal_id`), else
+to the one deal whose contact is named, else to the account (`meetingDeal`). On the account BRIEF each deal's meetings
+render inside that deal (R50's slot), the others under "Meetings"; the loader (`deals/workspace.ts`) reads the meeting
+rows, the confirmed words and the learning objective once, soft. Work follows the calendar, read on every load
+(`work/day-load.ts` `loadMeetingRows`, `meetingInstant` moved beside the prep): a meeting within 24 hours is an
+obligation carrying its prepared starting point ("Prepared: Objective: ... First to learn: ... Last commitment: ...")
+and opening `?view=brief#meeting-<id>` (`loadMeetingStartingPoints`, one read of the meeting accounts' confirmed
+words, a deal's meeting never reading another deal's); a moved meeting is read at its new time; a CANCELED meeting is
+said once in Waiting ("Canceled: nothing to prepare unless it is rebooked") and an open "prepare the meeting"
+obligation at that account waits until a meeting is booked again. Proof: `meeting-prep.test.tsx` (10: the full
+preparation and its trust words; nothing confirmed means no confirmed needs while the guess and the news keep their own
+words; the suggested objective and the seller's own; canceled and moved; the meeting's deal; the view; Work's
+obligation with its starting point, the moved meeting, the canceled meeting and its preparation, the rebooked one; the
+loader's canceled rows and the per-deal starting point); six deliberate mutations (public facts read as confirmed
+needs, the guess tagged as confirmed, a canceled meeting prepared, Work asking to prepare a canceled meeting, a meeting
+reading another deal's words, the card losing its starting point) each turn it red. Corpus: Kroger carries a
+Columbus yard walk with Ben tomorrow at 10 am New York on the Columbus deal and a CANCELED pilot scope call with Ann on
+the pilot deal. Adjacent: 13 files / 125 green; typecheck clean. Rollback: revert the commit (no stored shape changes).
+Debt: attendees are the row's free text (no calendar attendee list); a meeting's history (the old time of a moved
+meeting) is not kept, only its current row.
+
+R52 **A practical mutual action plan (DONE).** NEW `deals/action-plan.ts` (pure) + `deals/action-plan-store.ts` +
+`POST/GET /api/gap/deals/plan` + `components/gap/deal-plan.tsx`, inside each deal on the account BRIEF. A milestone
+IS an R40 commitment scoped to the deal (kind `deal_step`, the deal's id, source `plan:<dealId>:<step>`, one-shot: a
+second agreement makes no second record): the next milestone, the responsible person (the seller, or someone on the
+buyer's side: theirs waits on them and becomes due on its day), the due day, what it follows and what proves it done
+(`detail.milestone / proofNeeded / after / responsible`). GAP proposes the five standard steps (discovery, site
+validation, pilot, stakeholder alignment, procurement); a proposal is NOT a commitment and never Work, and the seller
+reviews them in ONE press (keep with edits, or decline; each answered on its own, one refusal never blocking the
+others; R44's review shape). A declined step is an append-only `deal.plan_decision` row and is not proposed again; an
+agreed step cannot be declined. Unknown fields create no administrative task: an agreed milestone with no date reads
+"No date agreed yet" (`commitmentPhase` now says upcoming, never due now), stays out of Work, Waiting and Today's
+"owed" (it lives in the plan), and "Who: not set" asks nothing. The buyer's agreement is ALWAYS shown and never
+fabricated: "Buyer agreement: not recorded" until the seller names who on their side agreed and the day (in the
+review, or later through `op: buyer_agreed`, only on a milestone); agreeing in the review is the seller's agreement,
+not the buyer's. `work/commitments.ts` gains `amendCommitment` (a new snapshot of title, due or detail, same lock,
+terminal refused); `SOURCE_KINDS` gains `plan` and `deal`. Proof: `action-plan.test.tsx` (7: five proposals and no task;
+one review agreeing, editing, declining and refusing a malformed buyer agreement; one record per step, no decline
+after agreement, a declined step stays declined; an undated milestone never due, never in Waiting or owed, a dated one
+deal work on its day; the buyer's agreement recorded later, only on a milestone; the real route; the view); six
+deliberate mutations (the seller's agreement read as the buyer's, an undated milestone due now, an undated milestone
+in Waiting, a declined step proposed again, agreeing twice making a second record, an agreed step declined) each turn
+it red. Adjacent: 12 files / 109 green; typecheck clean. Rollback: revert the commit (agreed milestones stay ordinary
+deal-step commitments; decision rows go inert). Debt: the standard steps are one fixed list (no per-deal template);
+the plan is not mirrored to HubSpot (R54 proposes notes and fields, never a plan object).
+
+R53 **The next deal artifact or stakeholder move, prepared (DONE; nothing is sent).** NEW `deals/artifacts.ts` (pure)
++ `components/gap/deal-artifacts.tsx`, inside each deal on the account BRIEF, from the deal's own confirmed context
+(R50), its plan (R52) and its open obligations: the AGREED RECAP (the buyer's confirmed statements in order and in
+their words, each cited by its BID, the account-level ones labeled; then only the next steps the BUYER agreed, i.e.
+milestones whose buyer agreement the seller recorded, the others left out and said so; then what the seller owes, as
+the seller's; an open invitation to correct it), the INTRODUCTION REQUEST (to the deal's contact, naming who else must
+agree and the stakeholder-alignment step's state), the PILOT SUCCESS CRITERIA (only the buyer's own measures: their
+numbers, their picture of good, their requirements; with none confirmed it asks the question and invents no target)
+and the BUSINESS-CASE INPUTS (the ROI model stays "Modeled, not measured" with its version and inputs shown, the buyer's
+numbers cited as theirs, YardFlow's proof in the canon's words labeled as YardFlow's measured result at 24 live Primo
+Brands sites and "not a forecast for your yards", and what is still needed from them). `nextArtifact` picks the one
+the deal needs now, deterministically, and its `why` names the actual commitment or blocker and the person ("3
+confirmed statements from Ann Scratch and Cal Scratch on YardFlow - Kroger: send them back so Ann can correct them,
+with the 1 step they agreed"). No governed copy family exists for deal artifacts (the compiler's families are
+first-touch), so each is a text block labeled "Prepared, not sent" with its citations, what it could not say, and a
+copy control that sends nothing. `artifactProblems` (the guard) refuses an em dash, "throughput", a canon figure
+without its qualifier (`compiler/canon.ts`) and any claim of the prospect's acceptance or of legal, security or
+procurement approval that is not inside the buyer's own quoted words; a flagged text cannot be copied. Proof:
+`deal-artifacts.test.tsx` (7: the recap and its citations and left-out steps; nothing confirmed; the introduction and
+the business case; the guard including the buyer-quote exemption; the next-artifact order; the view and its copy
+control; a flagged text not copyable); six deliberate mutations (the seller's agreement presented as the buyer's, the
+model losing MODELED, the guard missing an approval claim, the guard flagging the buyer's own words, invented pilot
+criteria, the recap always chosen) each turn it red. Adjacent: 5 files / 51 green; typecheck clean. Rollback: revert
+the commit (nothing stored). Debt: the texts are fixed templates around the buyer's words (no generated prose); the
+recap does not know whether one was already sent (no record of a sent recap exists outside the seller's mailbox).
+
+R54 batch item 9 (2026-10-07): approved writes moved to their own flag, `GAP_CRM_APPROVED_WRITES_ENABLED` (default
+off; the automatic mirror keeps `GAP_HUBSPOT_MIRROR_ENABLED`), so "the same flag" below now reads that one. An approval
+and a retry are bounded to live work (`originProblem`: an obligation done or skipped, or a deal the closure ledger
+closed, answers 409 `origin_closed` with nothing recorded or called; an origin GAP does not hold, or a recap whose id is
+not its own text, answers 400 `bad_origin`); the approve route also requires the deal to be an open deal of the account
+(the In Deals read, a stale cache re-read once; unreadable is 409 `deal_unverified`). An obligation's task is keyed on
+the obligation and the kind, so amending it revises its ONE task (approve again; a written task is updated in place,
+never created twice); a done obligation proposes `task_complete` (its task, found by its GAP reference, is marked
+COMPLETED); a deal field's id carries the value the seller saw, so after a conflict the step is proposed again from
+HubSpot's newer value. Tasks carry the approver's HubSpot owner and, undated in GAP, are due the next business day.
+
+R54 **Bounded, recoverable CRM sync (DONE; HubSpot writes stay OFF in production).** Inspected first: the only
+HubSpot WRITE path is `hubspot-mirror.ts` (automatic hypothesis and disposition notes and two GAP properties, behind
+GAP_OS_ENABLED + GAP_HUBSPOT_MIRROR_ENABLED + HUBSPOT_SYNC_ENABLED, idempotent through `gap_hubspot_mirror`); that
+already-authorized automatic logging is reused unchanged and nothing new is automatic. NEW `deals/crm-model.ts` (pure),
+`crm-sync.ts` (the store) and `crm-writer.ts` (the SDK writer, beside the mirror and gated by the same flag: the deals
+surface stays write-free and the mirror stays deal-free, both existing structural contracts kept and the writer
+pinned never to touch a stage, pipeline or lifecycle), `POST/GET /api/gap/crm-sync` and
+`components/gap/crm-sync.tsx`, inside each deal on the account BRIEF: any OTHER HubSpot change GAP would make (the
+agreed recap as a deal note, a task per open seller obligation on the deal, at most three, and the deal's next step
+from the plan's next agreed milestone when it differs) is shown EXACTLY as HubSpot would hold it, with its origin, and
+needs ONE explicit approval click: append-only `crm.sync_proposed` (once: the id is the origin, kind and exact content)
+then `crm.sync_approved`, recorded whether or not the write may run, then a `crm.sync_attempt` and a `crm.sync_result`
+(subject `crm_sync`, the account in every payload; no new table). The write runs only with GAP_OS_ENABLED,
+GAP_HUBSPOT_MIRROR_ENABLED, HUBSPOT_SYNC_ENABLED and a token; otherwise the state is "Approved, not written: HubSpot
+writes are off here (<the flag>). Nothing reached HubSpot." Idempotent retries, three layers each pinned on its own:
+the claim (a written proposal answers written with no call; an attempt in flight under a minute answers "in
+progress", so a double click or two tabs never write twice; the claim is taken under an advisory lock, the HTTP call
+is outside the transaction), the mirror ledger row (`gap:crm:<proposal id>`, the hubspot-mirror encoding), and the
+stable external id in the payload (`GAP reference gapcrm<id>`, searched for before any create, so a write whose
+answer was lost is RECOVERED, never duplicated). Visible states: proposed, approved (in flight), off, written (its
+record id), failed (the reason; the full text kept; retry is safe), conflict, discarded. Conflict resolution: a deal
+field is read with its history before it is changed; a value different from the one the seller saw, or a change
+after the proposal by anything but GAP, is a CONFLICT and never overwritten; only `hs_next_step` may be proposed.
+Origin tracking: every proposal names what in GAP produced it, and the route accepts only an origin GAP holds for that
+deal (an obligation or milestone at the account and deal, the deal's recap). A CRM outage loses neither the text nor a
+local completion (the obligation's done stands; the proposal keeps its body). Stub: write endpoints that record
+(notes and tasks with their search, a deal's properties with history and their update; STUB_WRITES_FILE) and can be
+told to fail (`/__stub/control` failWrites true or after_write: the write kept and the answer lost) or to play a human
+edit (`/__stub/deal-property`). Proof: `crm-sync.test.tsx` (12, with a controlled HubSpot writer: the exact change
+recorded once; writes off with the approval standing and no call; written once and no second call; each idempotency
+layer on its own; down then retried once; the lost answer recovered by its external id; the newer human value never
+overwritten and the unchanged one updated; in flight and discard; the outage keeping the completion; the candidates;
+the real route with writes off and the origin refusals; the view); eight deliberate mutations (writing with writes
+off, no read before write, overwriting a newer value, the claim forgetting a written result, the mirror row ignored,
+a double click writing, the approval not recorded, an unknown origin accepted) each turn it red. Adjacent: 7 files /
+102 green; typecheck clean. Rollback: revert the commit (the rows go inert; nothing was written to HubSpot in
+production). Debt: a deal task's owner in HubSpot is not set (the portal's default); the search-before-create needs
+HubSpot's search index to have caught up (a retry inside its indexing delay could still create a second note; the
+mirror row and the claim cover the ordinary retry).
+
+R55 **Stalled, won, lost and reactivated work (DONE).** Closure is read from HubSpot, never from a stage name: the
+deal reads now ask `hs_is_closed_won` with `closedate`, and the ONE opportunity resolver keeps every closed deal with
+how it ended and when (`ClosedDeal`; CLEAR and ACTIVE carry `closed`). With no deal open, `closureOf` (pure) says
+what a closed deal means and `resolveAccountOpportunity` attaches it to CLEAR (`closure`), so every reader gets the
+same answer: a deal closed WON makes a CUSTOMER (whatever else was lost): no first-touch campaign, ever automatically,
+and post-sale expansion is explicit context ("any expansion is your explicit call, worked with the customer, never a
+cold sequence"); otherwise the newest closed deal PARKS the account ("closed lost" or "without an outcome") until
+something material happened after it closed (`materialChangeSince`: a verified fact registered for the account, or a
+reply a PERSON wrote; an automatic notice, a bounce or an opt-out is not; an unreadable store keeps it parked). The
+closure holds everywhere through the existing authorities: the action-time check (`makeActiveOpportunityCheck`, the
+same terminal refusal as a live deal, worded as the closure, so no draft, send or enroll), routing (R3b
+`active_opportunity:closed_won_customer` / `closed_lost_parked`), the approach (`decideApproach`: no cold motion,
+the closure's words), the brief's deal statement and the pursuit state (`held`: "a customer (closed won)" or "parked
+after a lost deal", with what unlocks it). History is preserved and obsolete work stops (NEW `deals/closure.ts`): an
+append-only `deal.state` row per deal per change; when a deal closes, every open obligation on it is SKIPPED with its
+reason ("the deal "X" closed won on Oct 5; kept for history"), terminal and kept, and when no deal is left open the
+account's cold follow-ups stop (a customer: "no cold follow-up"; lost: "parked"); when a deal REOPENS, ONE current next
+step ("Reopened: decide the next step on X", source `deal:reopen:<id>:<day>`) and nothing skipped at the closure comes
+back; first sight records the baseline; an UNKNOWN read changes nothing. It runs on the account page read and in a
+bounded Work sweep (`sweepClosedDeals`: accounts whose deal-scoped work left the portal's open deals, five at most,
+every five minutes per instance, never without the open-deal read). Stalled work (NEW `deals/stalled.ts`, pure) comes
+only from the record, never a probability: an obligation on the deal overdue by more than two days (the seller's, or
+a buyer's promise that did not arrive), no HubSpot activity on the deal for 21 days, a close date that passed while
+the deal is open (a HubSpot date stored at UTC midnight reads as its calendar day); on the account BRIEF inside the
+deal and on Work, where a stalled open deal becomes deal work with "A stalled deal: ..." on its card (a healthy one
+stays held). Contract change, on purpose: a CLEAR read now carries the closed deals, and a closed deal with nothing
+material since parks the account at the gates (four older controls that read "a closed deal does not count, proceed",
+in the resolver, draft, enroll and cold call / LinkedIn suites, now prove both sides: with a newer verified fact it
+proceeds; without it is parked). Corpus: Costco Scratch Co (a
+closed-won deal, an approved thesis and a chosen person: held as a customer) and Sysco Scratch Co (closed lost Sep 1,
+only an older fact: parked); the stub reports `hs_is_closed_won` and `closedate`. Proof: `deal-closure.test.ts` (11:
+the resolver's closed deals; customer, parked, unparked, no outcome; the material change; the gate refusing at a
+customer and a parked account and proceeding after a newer fact; routing, the approach and the pursuit state; the won
+closure skipping the deal's work and a re-read changing nothing; the lost closure stopping cold follow-ups; the reopen
+making one next step and reviving nothing; the bounded Work sweep; the stalled lines; Work's stalled card); eight
+deliberate mutations (the gate, routing, a lost deal never unparking, an automatic reply as a change, the pursuit
+state reading a customer as ready, a closed deal's work left open, every re-read making another next step, a healthy
+deal read as stalled) each turn it red. Adjacent: 21 files / 536 and 9 files / 60 green after the three controls were
+restated; typecheck clean. Rollback: revert the commit (the `deal.state` rows go inert; skipped obligations stay
+skipped, their reasons on record). Debt: "paused" has no HubSpot field of its own (a custom open stage still reads as
+an open deal); the Work held card for a closure says the routing hold's generic words until the account's pursuit
+summary is fresh.
+
+**Sprint 5 batch gate (2026-10-06; R50 to R55).** Exit met on the scratch harness: GAP supports commercial execution
+after the first reply and through an active deal while HubSpot remains the deal authority (every deal, stage, contact,
+next step and closure is read from HubSpot; GAP writes HubSpot only through an approved, flag-gated proposal).
+Commits: R50 b5b961a9 (+ 3087ee2c the Work page kept the deal ids, 31f09c71 the two-deal state line), R51 0b0676fe
+(+ 79442298 a meeting on another deal is not a rebooking), R52 ea3645f2, R53 7eb8bcc8 (+ 47c61140 the em-dash
+escape), R54 bef11ba1 (+ 32683cdd the writer and the store moved out of the deals surface, keeping its write-free contract and the mirror's deal-free one), R55 f214bcc3 (+ 359b790f the cold call and LinkedIn control restated), the scratch run 5488552c. The full GAP suite 369 files / 5,408 tests green (its first run found the two structural and control failures fixed in 32683cdd and 359b790f); the rest of the repository 325 files / 2,293 green (one skipped); typecheck clean; eslint on the 62 changed TypeScript and script files: no finding on any changed line (the 50 errors left in those files are the house `prisma: any` signatures and fixture generics, untouched). Scratch, on a freshly rebuilt database,
+one file at a time: `anchor-draft` 6, `job-led-send` 5, `send-spine` 8, `work-day` 6, `deal-work` 5 (30 / 30); the new `deal-work.scratch.test.ts` runs the real routes, services, ledger and
+Postgres with the harness's own HubSpot stub spawned on a loopback port (the real resolver and the real CRM writer
+against it; GAP_HUBSPOT_MIRROR_ENABLED turned on only inside that test, only against the stub, with the loopback
+asserted): two deals under one company, the closed-won customer, the closed-lost account, the scheduled and the
+canceled meeting (three deliberate mutations red on the scratch database). Browser receipt (headless Chrome on the
+scratch server, GAP_HUBSPOT_MIRROR_ENABLED unset; scratchpad `r5-journey/`: `journey.json` and six screenshots): the
+Kroger account in two deals ("Work the 2 open deals (...) each on its own, never a cold first touch"; the obligation
+labeled "Deal: YardFlow - Kroger") -> the deal brief with each deal's own obligations, words, contacts and HubSpot next
+step and one deal brief per deal -> the Columbus walk prepared inside the Columbus deal, every line tagged (Recorded,
+Buyer confirmed, To learn, Public source) and the pilot call shown "Canceled ... Nothing to prepare unless it is
+rebooked" -> the plan reviewed in one press ("Record the plan (4 agreed, 1 declined)": undated milestones "No date
+agreed yet", the pilot "Waiting on Ann Scratch ... due Oct 30", every "Buyer agreement: not recorded", procurement
+declined) -> the recap "Prepared, not sent" in Ann's words with its citation, copied with "Copied. Nothing was sent."
+-> the HubSpot note shown exactly with its GAP reference and approved: "Approved by casey@freightroll.com, not
+written: HubSpot writes are off here (GAP_HUBSPOT_MIRROR_ENABLED is off). Nothing reached HubSpot.", the stub's request
+log holding no note, task or deal write. Deliberate mutations across the batch: 44 (three on the scratch database), each turning its owning
+test red. Production: nothing written, no flag changed, no send, no paid call, no HubSpot write. Deploy notes: no
+schema change and no new table (new ledger kinds `deal.plan_decision`, `deal.state`, `crm.sync_proposed`,
+`crm.sync_approved`, `crm.sync_attempt`, `crm.sync_result`, `crm.sync_discarded`; the mirror table gains `gap:crm:`
+keys only when the mirror flag is on); the deal reads add `hs_is_closed_won`; with this deployed, an account whose
+only HubSpot deals are closed lost and that has no newer verified fact or buyer reply is PARKED at every gate (a
+deliberate policy change, R55), and a closed-won account is held as a customer. Carried debt (each recorded in its
+entry): the contact-derived scope needs a HubSpot contact id; division and site are free text; meeting attendees are
+the row's free text and a moved meeting keeps no history; the standard plan steps are one fixed list; deal artifacts
+are templates around the buyer's words (no governed deal copy family) and no record of a sent recap exists; a deal
+task's HubSpot owner is the portal default and search-before-create depends on HubSpot's search index; "paused" has
+no HubSpot field; the Work held card for a closure speaks the routing hold's generic words until the account's
+pursuit summary is fresh.
+
+### ACCEPTANCE B DEFECT BATCH: dispositions by ticket (2026-10-07; base 7ab63c7a)
+
+One line per ticket: fixed (with the commit) or PARTIAL (with the dependency named). Every fix has a focused test and
+a deliberate mutation that turns it red; nothing here sends, enrolls, spends Apollo or writes HubSpot.
+
+- R05 production guard: FIXED f4b3c70f (GAP_SEND_TRANSPORT=sink and HUBSPOT_API_BASE_PATH are refused under VERCEL_ENV=production).
+- R24 / R30 one freshness authority (the Tulsa story): FIXED daa61ff3 (`research/currentness.ts` is the only clock).
+- R33 / section 4 a story set aside comes back: FIXED 5f5e76cf (never offered again; redrafting answers story_set_aside).
+- R11 / R12 / section 8 the family question: FIXED 42b21547 (never asked for job or procurement drafts; a suggested default with its basis).
+- R31 / R23 Gatik is not an event, one guess everywhere: FIXED 4cf3fdb1 (partnership and software claims; fit-led; the guess and falsification read off the fact, editable).
+- R33 automatic reversible preparation: FIXED c0a4e214 (Casey's approved policy; never approved, routed or sent).
+- R34 production dead end until the families are seeded: FIXED 372f6609 (copy read from the seeded rows; never READY without it). Seeding the families stays a release precondition (owner action).
+- R22 / R30 a closed RFP and a reposted posting: FIXED 1b6416a9 (a past due date is not current; a repost is never a job-led trigger).
+- R13 binding: FIXED 1b6416a9 (the confirm binds the sending mailbox; a live enrollment binds the recipient; a losing duplicate tab is told already sent).
+- R10 / R15 state vs anchor on an unread send gate: FIXED 1b6416a9 (research with the reason, no Ready target).
+- R35 copy outside the compiler: FIXED 1b6416a9 (a question asking what to write is answered with the control, never the model).
+- R21 / R23 a vendor announcing news about the account: FIXED 1b6416a9 (the vendor's claim, quoted_third_party).
+- Family hold at routing (R62 matrix): FIXED 1b6416a9 (R3d family_hold, fail closed when unread).
+- R41 / R45 / R40 Work's counts are not completions: FIXED 1e7b4aa4 (parked research and holds; Done counts completions only; a returned reminder is never completed by a skip; Done needs its proof).
+- R42 out-of-office date: FIXED 7f46b334 (read from the received time).
+- R50 / R44 capture scope, R51 rebooking and meeting context, R41 / R51 evening meetings, a deal contact's reply: FIXED 6abad07a.
+- R43 by-hand follow-ups past the first ten, R55 legacy-name closure and sweep starvation: FIXED e2da206e (rotation cursors).
+- R53 the recap is always next: FIXED 5486471f (a copied or written recap is recorded; the deal moves on).
+- R42b finding 3, a sent answer is the record of the reply: FIXED 71b6ff36 (completes what it answered; the account stays in a conversation).
+- R54 approved HubSpot changes bounded to live work: FIXED 280faa5a (origin_closed, one task per obligation, completion, conflict re-proposed, owner and due time, GAP_CRM_APPROVED_WRITES_ENABLED); (f) the cross-account list: FIXED 4dfa32ec.
+- R20 coverage claims: FIXED 71c4c3a8 (the news cap stated; a 15% rotation margin; an outage turn recorded and never counted).
+- R25 dead letter and budget: FIXED 71c4c3a8 (research_failed; an unreadable grounded budget queues nothing) and 0beca6b3 (a news daily budget). "A re-seen signal erases queuedAt" does not reproduce at this tip: a re-seen URL returns created false at capture and the runner never rewrites its metadata.
+- R43 follow-up copy (touch 2 and later): PARTIAL, dependency: every seeded approach family is single-touch; a step-1 copy family must be written and seeded before a prepared follow-up exists.
+- Section 8 generated quality: PARTIAL, dependency: a held-out, human-graded corpus of at least 30 cases with model, prompt and policy versions recorded.
+- R15 / R61 latency: measured since (R61, below): 30 navigations per condition on the production build, judged on the full page (no remembered shell counted as content), p50, p90 and p95 recorded.
+- R24 / R30 Tulsa on the production row's own fields (read-only by the lead): the corpus fact now carries them (type site_expansion, observed 2026-07-23T10:17:19Z, explicit expiry 2026-11-20T10:17:19Z, no claim class, public_secondary, metadata.change closure, no continuity key). Result: the page OFFERS it for Tom with "Current until Nov 20, 2026." (anchor-draft scratch, exact line).
+- One reader for "a person wrote back" (the hold, the follow-up stop, learning): FIXED e4b555ed (`replies/classify.ts` isPersonReply; a body-only notice stops nothing and is no reply).
+- DEBT, a closure typed as an expansion: `research/facts.ts:308` classifyFact gives a closure signal type site_expansion with change closure, because the signal type set is a database CHECK with no closure value (`prisma/sql/2026-09-23-gap-os.sql:51`). The change field and the family derivation read closure; anything that words `type` says expansion. The fix needs a new type value in that hand SQL applied to production (an owner-approved schema change), then the readers worded from it. The Tulsa sentence is pinned as a closure change (`continuity-research.test.ts`).
+
+**Sprint 5 checkpoint 7cbfaf94 (2026-10-07).** Demonstrated through the running application: the production build
+(`next build`, then `next start` on the scratch database, the HubSpot stub on a loopback port, GAP_HUBSPOT_MIRROR_ENABLED
+unset, the send transport a sink), one headless Chrome journey on a fresh corpus copy (Kroger, two open deals), 11 steps,
+all passed; scratchpad `r5-exit/` holds `journey.json` and the 11 screenshots.
+- Active opportunity as actionable work: the Work card reads "In a deal", why "A buyer commitment is due: Send Ann the dock schedule template (due today)", the obligation labeled "Deal: YardFlow - Kroger ...", next "Open the deal brief", and "No cold first touch while the deal is open: work it from the deal."
+- The deal state on the account page: "In 2 open deals: ..." with Next "Prepare for the meeting on Oct 8, 2026: Columbus yard walk with Ben" and each obligation labeled with its own deal; the brief shows each deal with its stage in words ("Appointment scheduled", "Qualified to buy"), its own obligations and its own buyer words.
+- Meeting context: the Columbus walk is prepared inside the Columbus deal, every line tagged (Recorded, Buyer confirmed, To learn) and only Columbus words in it; the canceled pilot call says "Nothing to prepare".
+- Commitments and milestones scoped to the right deal: the plan is recorded on the pilot deal (the pilot milestone "Waiting on Ann Scratch ... due Oct 30", undated milestones "No date agreed yet", every "Buyer agreement: not recorded").
+- The next deal artifact: the recap is proposed on the pilot deal from Ann's confirmed words and copied: "Copied and recorded. Nothing was sent."
+- Persists after a reload: the next artifact has moved on to the introduction, the plan and the CRM state are kept, the pilot obligation is done, and Work lists "Done: Send Ann the dock schedule template." under Done today.
+- CRM sync, honest and recoverable: the HubSpot note shows the approved text and says the reference line in words; approved, it reads "Approved by casey@freightroll.com, not written: approved HubSpot writes are turned off here. Nothing reached HubSpot."; the stub logged 0 writes before and 0 after; Coverage offers the retry once approved writes are on.
+- Closed and reopened: the Columbus deal closed in HubSpot leaves the open deals with its work kept for history; reopened, it carries one "Reopened: decide the next step on ..." step and nothing is revived.
+- What Casey reads: every step's visible text is scanned for internal ids, CRM reference ids, flag or constant names, snake_case, raw null or undefined, and lane or tier words. Zero real hits; the only match is the corpus person "Bob Lane".
+- Fixed to get there: 2892a800 (the HubSpot change states in seller words), 17e39096 (the production build: the Work list reached a server module that hashes with node:crypto), 7cbfaf94 (a deal stage in words wherever the seller reads it, never the id; the legacy tier / band rating no longer shown; the HubSpot link in words).
+- Gates, once each, in the foreground on 7cbfaf94: typecheck clean; the GAP suite 382 files / 5,543 tests green (its 8 scratch files skip there and were run against the scratch database: 8 files / 47 tests green); the rest of the repository 326 files / 2,296 tests green (one skipped).
+- Production: nothing written, no flag changed, no send, no paid call, no HubSpot write.
+
+**Sprint 5 review dispositions (2026-10-07).** One line each; every fix landed with focused tests and a deliberate
+mutation that turned its owning test red, then was restored.
+- BLOCKER, meeting preparation mixed two deals' words (R50 / R51): DONE f43d5280. A meeting reads its own deal's rows; one on a deal that has since closed reads that deal's kept rows, named with its outcome; one bound to no deal labels each line with its deal; Work's starting point for an unbound meeting counts the account-level words only.
+- SHOULD, a closed deal showed its raw HubSpot id and the brief dropped it (R50 / R55): DONE f43d5280 (the label) and 9f283f1a (the brief's "Closed here" line with name, outcome and date; Work names a meeting or obligation on a closed deal from the deal.state record and claims nothing when the open deals were not read). The exit journey's internal-text scan now flags any number of six or more digits.
+- SHOULD, closure dropped a live promise (R55): DONE 8feafd40. The reopen step lists what the closure skipped with due dates, on the brief and on Work; Restore makes a new open obligation (the skipped record stays terminal), once per skip, refused while the deal is closed.
+- SHOULD, a stale unwritten recap stayed retryable beside a new one (R54): DONE 4834eb2d. A new recap retires the earlier unwritten recaps on its deal; a replaced recap is refused at approval and at retry, is not offered on Coverage, and shows as replaced with no Retry.
+- SHOULD, account-level sections showed one deal's words unlabeled (R50): DONE 6e16babd. Every buyer input carries its opportunity's label into NOW, the brief and the story; a cost in money or detention terms counts as what it costs them.
+- SHOULD, artifact copy in the third person and with the CRM deal name (R53): DONE 20f244a3. Owed lines in the second person, another person's under "What I owe your team", the pilot question asked of the recipient, the CRM deal name refused in buyer text.
+- NICE, a meeting within 14 days outranked a promise due today: DONE 9c0e5b14 (a meeting within a day still leads).
+- NICE, "1 confirmed statement ... send them back": DONE 9c0e5b14.
+- NICE, a future canceled meeting tagged Checked under What has happened between us: DONE 9c0e5b14.
+- NICE, "Rests on: Ben Scratch, Oct 7" twice: DONE 0e06651c.
+- NICE, a raw "2026-10-08" date in the brief: NOT TAKEN, not in a file the fixes touched (context/brief.ts); listed for R62.
+- NICE, the canceled pilot call offers no rebook and HubSpot's next step still names it: NOT TAKEN, needs a decision on where rebooking runs (GAP holds no calendar write); listed for R62.
+
+**R60 one product from Work (2026-10-07).** The loop Casey runs: see what deserves attention, open the right account,
+get the prepared context, do or approve the move, record the result once, go to the next account, never learning GAP
+internals. Walked first on the accumulated scratch database (201 cards: 1,273 controls and 11,563 words on Work, the
+next move of 167 cards pointing into a cockpit lane, the routing repair above the work), then on a clean corpus after
+each change. Checklist, what was checked and what changed:
+- Work, the first screen: CHANGED 6ddb61bf. The routing repair ("N people in use without a current recommendation", Run routing) moved from above the work into System at the foot (an analyst lane still leads with it); the subtitle says the loop. 28ea4715: the health line says "recommendations", never "routing".
+- Work cards into the lanes: CHANGED 90e669a0. Decide, judge, evidence and research cards opened the list of every account's cards (analyst words, no Next account); they now open their account, where NEXT holds the move, in the seller's words without the account name the card already shows. A first touch or follow-up opens its card's pack page through /gap/pack/:card (the email, the call, Send from YardFlow), which ends with Back to Work / Next account. f14b70cc: a summary remembered before this change with a lane link opens the account's own action instead.
+- Replies: CHANGED 2f23daee. A reply is read and recorded on its own account (that account's waiting replies in place, under the reply), never the all-replies lane; every reply control on Work, NEXT, the follow-up card and next-up opens it there. f14b70cc: the account read takes that account's replies (the newest 200 across every account hid an older reply), and the card says the fact once, by name (it said the replier's address four times beside a panel that named her).
+- The workspace: CHANGED 2f23daee. Every view, anchor, obligation and next move of the account keeps Back to Work and Next account; deal work opened from Work (the brief) ends with the same bar.
+- Account and deal text: CHANGED a72d4b4b. "HubSpot could not be read just now (identity_unresolved)" in NEXT and in a refused send is said in words with what unlocks it; no "hypothesis <id>" on a reply row; no HubSpot deal id for an unnamed or closed deal; an empty reply list names the account once.
+- Add to GAP (More): CHANGED 329f840a. A result's Review opened the research lane; "Open the account" opens its page.
+- Capture, Ask, Accounts, the replies history: CHECKED, unchanged. Capture opens prefilled from the action (R44); Ask answers over the page's own projections and links no lane; Accounts lists and opens accounts; /gap/replies stays the all-replies history (reachable only as a fallback), its filter and "disposition" words kept there.
+- Capture once on a reply: DONE 8283a9cc and de14c0fa (the lead's decision 1). Work's reply card offers one entry, "Log what they said" (an opt-out: "Record the opt-out"), into Capture prefilled with the reply itself (its words as the note, the person who wrote it, their own deal, the message as the source); Capture's single review holds what the reply means as one more confirmable item (proposed only where the message says it), and confirming records the disposition through the disposition service once, then each kept statement through the BID human confirmation, linked to it. The account page lists its waiting replies, each with that one link, and shows no reply form; NEXT on a replied account opens the same place. de14c0fa: the walk on the production build found the logged reply's card still on Work (its two-minute remembered read); one live read in Work's wave now drops recorded replies. Pinned by r60-capture-reply.test.tsx and r60-recorded-replies.test.ts; walked on the production build (scratchpad `r62-capture2/`, 6 steps, zero internal-text hits).
+- The vocabulary: CHANGED 216cd80a (the lead's decision 2). Seller-facing headings and labels say "What we think is happening" for the read itself, "thesis" where it names the object (Review, Approve and Reject the thesis; All theses; the Thesis funnel) and "What the buyer said" for buyer inputs; ids, routes, flags, ledger kinds and the CRM note format keep their names (pinned by r60-vocabulary.test.ts). Kept by contract: "Tier 1" on Accounts (its ordering contract) and the analyst views under More with their own words; the lanes stay reachable from those views only.
+- Outside GAP, observed, not changed: the app's main sidebar still lists Accounts and Work Queue beside GAP OS (two account surfaces); a sidebar change is system-wide and needs Casey.
+- Found for R61: after recording a reply the page re-read itself and NEXT moved after 13.2 s with no reload.
+Receipt (production build, the scratch corpus, the HubSpot stub, mirror unset; scratchpad `r60-final/` and `r60-walk-final/`): Work's first card at 641 px with nothing above it but the day and the health line; the opt-out card opened Walmart at its record section (the Work position kept), recorded there, NEXT moved to "Find the operator", Next account went to account 6 of 9; Fedex's NEXT put the approved story in use on the page, then "Prepare the email to Glen" opened the pack (/gap/pack, then the pack page with Back to Work / Next account); Kroger's deal card opened the brief with both deals' stages in words and the bar; Heb's research NEXT said its move. Lane links on Work and every account page: 0. Internal words outside the sanctioned vocabulary: 0. Each change has focused tests and a deliberate mutation that turned its owning test red (6 mutations).
+
+**R61 what makes Casey wait (2026-10-07).** Measured on the production build (`next build`, then `next start` against
+the scratch corpus with the HubSpot stub), headless Chrome, 30 navigations per condition: Work, a corpus account
+(Fedex) and a 100-person account (the corpus Nfi with 94 contacts added), cold (a fresh server process and a fresh
+browser profile for every navigation: empty memory caches, no asset cache) and warm (one server, primed twice, then 30
+navigations). Local reads are loopback and hide the cost production pays per round trip (Vercel iad1 to the us-west2
+database, the HubSpot API), so each warm condition was also measured through two counting proxies that add 66 ms per
+database round trip and 150 ms per HubSpot call, with one navigation's statements logged (Postgres protocol) to find
+the serial chains; Work's two-minute read, rebuilt (`?fresh=1`), was timed with curl through the same proxies.
+Fixed, each with focused tests and a deliberate mutation that turned its owning test red:
+- 19c0c20e, an in-place action showed its result after 13.9 s: on the account page, router.refresh() fetched the new page in about 200 ms but the browser showed it only on the next React update anywhere (the notification bell's 15 s poll; with the poll held, never; Work committed the same refresh in 119 ms). Every GAP refresh now announces itself and the GAP layout's nudge updates over the next seconds: a recorded reply's NEXT moves at 236 ms (poll held). Two experiments ruled out the account page's streamed boundary and the links' pending status; the framework cause is DEBT (named in refresh-now.tsx), the wait itself is fixed.
+- 11dd56f0 and 31addc8d, the account page's reads in series and repeated: owner resolution read the account row first and its people-dependent reads one after another, the send gate and its copy check waited for every other pursuit read, the copy families were asked twice per page, the employment context twice per request, the deal-state reconciliation blocked the page, an account-scoped card read pulled every account's routing decisions, a contact's employment read its three tables in series, and the HubSpot identity asked the company read and the domain search in series. Now they start together or are read once, the decisions read is scoped to the account, and the reconciliation runs beside the page (the obligations wait for it). 0ce5b99c corrected one of them: a minute-long copy-family cache kept "not installed" after a family was restored (the copy-readiness scratch test caught it); the answer is now kept for one request only.
+- 64ede221, 2d3d3944, 303092ca, 31c44d1f, Work's two-minute read, rebuilt: 67.6 s under production-like latency on the corpus (209 accounts): the send gate was read once per Work account, one after another (about 180 reads, 40 s); up to twenty cards' next touches were evaluated one after another (about twenty round trips each, 20 s), each asking its seven stop-rule reads in series; the reply holds were read one account after another; and the follow-up sweep, on Work's path once a minute per instance, opened a locked transaction per recent send only to find its follow-up on record. Now: one send-gate read for every Work account, the next touches five at a time (the production pool's width) with their stop reads together (judged in the original order, so a stop found earlier still wins), the reply holds five at a time, and the sweep writes only what is new. A rebuilt read takes 10.5 to 12.6 s (first 17.8 s); a cached Work load 0.39 to 0.68 s.
+Result, the baseline and final builds measured back to back (the same proxies, the same corpus, the same hour): the corpus account's full page p50 5,183 ms to 3,137 ms and p90 6,182 ms to 3,629 ms; the 100-person account's p50 5,177 ms to 3,114 ms and p90 6,219 ms to 3,718 ms; warm Work unchanged (p50 1,012 ms and 1,016 ms, served from its two-minute read). The serial database waves of one corpus account view went from 56 to 30 and its executions from 147 to 95. Runs taken hours apart drift with the machine (local warm first content 132 ms at the start, 222 ms at the end), so the back-to-back pair is the comparison; every run is below with its raw values.
+The principles, checked:
+- Useful content first, decision-critical before secondary: the account's state and NEXT are on screen at about a third of a second (the remembered summary, UX-14), its full page follows; Work's cards arrive with the page from its two-minute read.
+- No repeated expensive reads where durable state exists: CHANGED as above (the send gate per account, the copy families, the employment context, the account's routing decisions). The account row is still read by several loaders with different fields (in parallel, off the critical path): named.
+- No busy UI over bookkeeping: CHANGED (the stalled refresh; the deal-state reconciliation off the account page's path; the follow-up sweep's needless locked transactions). The summary write after a render is not awaited. Work's closed-deal sweep is still awaited but bounded (five accounts, once per five minutes per instance): named.
+- No freshness recomputation of unchanged facts in a normal session: CHANGED for the follow-up sweep (nothing written when nothing changed). HubSpot deal truth is read live on every account view by design (every gate depends on it).
+- PARTIAL, dependency (the platform): a cold first byte is 1.47 s on the sign-in page (no session, no database) against 1.62 to 1.71 s on GAP's pages, so a cold start is the server starting (module loading), not GAP's reads; it needs a platform-level change (bundle size or warm instances). The Prisma engine checks each idle pooled connection with a SELECT 1 before reuse (29 per account view, one round trip each); it is the engine's own behavior, not configurable from GAP.
+- PARTIAL, dependency (the next pass on the routing inputs): Work's rebuilt read is still 10.5 to 12.6 s under production-like latency; most of it is each card's send history and meeting state (routing/inputs.ts readComms and execution/person-history.ts, about ten reads in series per card, shared with the routing rules). Making those concurrent touches the safety-critical routing inputs and needs its own reviewed change.
+
+The comparison to read first: the baseline build (19c0c20e, before the read fixes) and the final build (31c44d1f), measured back to back through the same production-like proxies (the database 66 ms and HubSpot 150 ms per round trip), so machine drift cancels (n = 30 per account, 20 for Work):
+  - warm a corpus account (Fedex), decision: before: p50 311, p90 409, max 419; after: p50 310, p90 407, max 431.
+  - warm a corpus account (Fedex), the page arrived: before: p50 5001, p90 5944, max 6572; after: p50 3031, p90 3540, max 3850.
+  - warm a corpus account (Fedex), full page: before: p50 5183, p90 6182, max 7138; after: p50 3137, p90 3629, max 4120.
+  - warm a corpus account (Fedex), database round trips: before: p50 157, p90 197, max 222; after: p50 148, p90 178, max 221.
+  - warm the 100-person account (Nfi), decision: before: p50 325, p90 415, max 493; after: p50 329, p90 412, max 420.
+  - warm the 100-person account (Nfi), the page arrived: before: p50 5029, p90 6130, max 6358; after: p50 3021, p90 3495, max 3694.
+  - warm the 100-person account (Nfi), full page: before: p50 5177, p90 6219, max 6727; after: p50 3114, p90 3718, max 4099.
+  - warm the 100-person account (Nfi), database round trips: before: p50 154, p90 196, max 208; after: p50 152, p90 184, max 195.
+  - warm Work, decision: before: p50 1012, p90 1050, max 4677; after: p50 1017, p90 1037, max 1540.
+  - warm Work, the page arrived: before: p50 528, p90 685, max 4082; after: p50 525, p90 710, max 1082.
+  - warm Work, full page: before: p50 1013, p90 1050, max 4678; after: p50 1018, p90 1037, max 1541.
+  - warm Work, database round trips: before: p50 19, p90 161, max 169; after: p50 17, p90 166, max 172.
+
+Percentiles (ms from the navigation start; n = 30 per condition; "decision" is the move on screen: Work's first card, an account's NEXT from the remembered summary or the full page; "full" is the full page: Work's list, the account's own NEXT):
+- Local (loopback database and HubSpot stub):
+  - warm Work, first byte: before: p50 5, p90 7, max 10; after: p50 5, p90 6, max 7.
+  - warm Work, decision: before: p50 198, p90 205, max 208; after: p50 199, p90 208, max 229.
+  - warm Work, full page: before: p50 198, p90 206, max 209; after: p50 200, p90 204, max 212.
+  - warm a corpus account (Fedex), first byte: before: p50 6, p90 8, max 9; after: p50 5, p90 7, max 8.
+  - warm a corpus account (Fedex), decision: before: p50 132, p90 148, max 216; after: p50 132, p90 142, max 149.
+  - warm a corpus account (Fedex), full page: before: p50 207, p90 215, max 216; after: p50 205, p90 214, max 220.
+  - warm the 100-person account (Nfi), first byte: before: p50 6, p90 7, max 8; after: p50 6, p90 7, max 8.
+  - warm the 100-person account (Nfi), decision: before: p50 130, p90 138, max 147; after: p50 131, p90 140, max 156.
+  - warm the 100-person account (Nfi), full page: before: p50 207, p90 218, max 410; after: p50 207, p90 217, max 219.
+  - cold Work, first byte: before: p50 1602, p90 1622, max 1630; after: p50 1621, p90 1688, max 1705.
+  - cold Work, decision: before: p50 1987, p90 2496, max 2526; after: p50 2002, p90 2546, max 2567.
+  - cold Work, full page: before: p50 1987, p90 2496, max 2526; after: p50 2002, p90 2546, max 2567.
+  - cold a corpus account (Fedex), first byte: before: p50 1677, p90 1701, max 1716; after: p50 1714, p90 1773, max 1780.
+  - cold a corpus account (Fedex), decision: before: p50 1983, p90 2023, max 2103; after: p50 2016, p90 2149, max 2160.
+  - cold a corpus account (Fedex), full page: before: p50 2581, p90 2618, max 2629; after: p50 2616, p90 2666, max 2680.
+  - cold the 100-person account (Nfi), first byte: before: p50 1708, p90 1742, max 1756; after: p50 1686, p90 1729, max 1737.
+  - cold the 100-person account (Nfi), decision: before: p50 2001, p90 2049, max 2121; after: p50 1966, p90 2096, max 2129.
+  - cold the 100-person account (Nfi), full page: before: p50 2613, p90 2654, max 2662; after: p50 2579, p90 2641, max 2642.
+- Production-like (the database 66 ms and HubSpot 150 ms per round trip, through counting proxies); "after" is the build with the account-page fixes (0ce5b99c):
+  - warm Work, decision: before: p50 404, p90 932, max 938; after: p50 913, p90 949, max 3474.
+  - warm Work, full page: before: p50 404, p90 932, max 939; after: p50 914, p90 949, max 3474.
+  - warm Work, database round trips: before: p50 16, p90 109, max 112; after: p50 18, p90 160, max 170.
+  - warm a corpus account (Fedex), decision: before: p50 230, p90 413, max 421; after: p50 406, p90 425, max 426.
+  - warm a corpus account (Fedex), full page: before: p50 4503, p90 5533, max 6034; after: p50 2976, p90 3497, max 3983.
+  - warm a corpus account (Fedex), database round trips: before: p50 144, p90 188, max 190; after: p50 151, p90 186, max 208.
+  - warm the 100-person account (Nfi), decision: before: p50 399, p90 421, max 423; after: p50 337, p90 417, max 425.
+  - warm the 100-person account (Nfi), full page: before: p50 5003, p90 5553, max 6044; after: p50 2959, p90 3493, max 3534.
+  - warm the 100-person account (Nfi), database round trips: before: p50 153, p90 182, max 198; after: p50 155, p90 176, max 199.
+- Production-like, the final build (31c44d1f, every R61 fix); measured last, on a slower machine (local warm first content 222 ms against 132 ms at the start), so compare its serial waves rather than its milliseconds:
+  - warm Work, decision: before: p50 404, p90 932, max 938; after: p50 1039, p90 1146, max 1535.
+  - warm Work, full page: before: p50 404, p90 932, max 939; after: p50 1041, p90 1146, max 1535.
+  - warm Work, database round trips: before: p50 16, p90 109, max 112; after: p50 17, p90 165, max 169.
+  - warm a corpus account (Fedex), decision: before: p50 230, p90 413, max 421; after: p50 375, p90 414, max 543.
+  - warm a corpus account (Fedex), full page: before: p50 4503, p90 5533, max 6034; after: p50 3575, p90 4090, max 4101.
+  - warm a corpus account (Fedex), database round trips: before: p50 144, p90 188, max 190; after: p50 152, p90 183, max 221.
+  - warm the 100-person account (Nfi), decision: before: p50 399, p90 421, max 423; after: p50 374, p90 416, max 531.
+  - warm the 100-person account (Nfi), full page: before: p50 5003, p90 5553, max 6044; after: p50 3572, p90 4102, max 4116.
+  - warm the 100-person account (Nfi), database round trips: before: p50 153, p90 182, max 198; after: p50 152, p90 185, max 201.
+- The cold floor: cold the sign-in page first byte p50 1474 ms; cold Notes first byte p50 1571 ms (no session or database on the sign-in page): a cold first byte is the server starting, not GAP's reads.
+
+Raw values (ms, in measurement order), decision then full page; production-like rows add the database round trips:
+- A/B baseline build, warm:work, decision: 1028,1003,1011,1004,1013,1014,1031,1011,575,1012,1050,589,1027,576,989,633,1027,614,4677,1038
+- A/B baseline build, warm:work, full: 1029,1003,1012,1004,1014,1014,1032,1011,575,1013,1050,589,1027,577,990,633,1028,614,4678,1039
+- A/B baseline build, warm:work, db: 147,133,161,112,37,20,19,16,13,20,16,13,13,13,18,13,14,13,169,122
+- A/B baseline build, warm:corpus, decision: 289,403,372,285,411,316,409,340,407,419,334,315,305,305,311,295,336,332,301,293,293,316,309,294,327,290,309,294,292,305
+- A/B baseline build, warm:corpus, full: 6153,6147,7138,6702,6182,5682,5657,5689,5618,5183,5213,5696,6181,5665,5139,5117,4631,5155,5119,5155,5114,5165,4676,4633,5254,4589,4653,4637,4628,4131
+- A/B baseline build, warm:corpus, db: 204,183,222,188,197,173,189,166,184,162,152,173,157,169,161,155,138,155,157,159,145,150,144,143,140,141,135,127,142,133
+- A/B baseline build, warm:hundred, decision: 415,311,286,402,381,325,384,387,393,493,385,303,328,313,314,316,325,294,397,306,301,425,351,309,323,303,319,287,300,327
+- A/B baseline build, warm:hundred, full: 6727,6219,6150,6709,6151,6186,5241,6133,5633,6157,5186,4639,5177,5164,5149,5168,5153,5217,5117,4615,6150,4112,4665,4636,4666,4646,4654,5146,4114,5250
+- A/B baseline build, warm:hundred, db: 208,203,196,189,184,176,166,180,181,167,177,145,166,151,146,152,152,158,154,147,160,126,138,131,130,136,134,135,124,142
+- A/B final build, warm:work, decision: 1018,1037,1013,1009,1017,1020,562,1028,1021,1037,1013,581,1016,596,565,1034,1032,1540,586,1005
+- A/B final build, warm:work, full: 1018,1037,1013,1009,1017,1020,562,1028,1022,1037,1014,582,1018,596,567,1035,1033,1541,586,1006
+- A/B final build, warm:work, db: 166,45,22,17,21,17,14,15,14,17,16,13,14,13,15,14,14,21,156,172
+- A/B final build, warm:corpus, decision: 285,394,391,431,429,307,355,323,310,335,304,291,297,391,391,305,407,281,349,293,286,283,276,307,345,285,297,396,294,388
+- A/B final build, warm:corpus, full: 3624,4120,3602,3664,3619,3629,3137,3617,2580,3626,3623,3115,3057,3596,3049,3613,3617,3074,3123,3092,3066,3591,3056,3138,2622,3045,3082,3059,2639,2558
+- A/B final build, warm:corpus, db: 174,221,169,166,196,169,151,178,140,161,168,148,142,161,138,154,174,148,140,142,135,137,145,139,134,143,134,128,131,120
+- A/B final build, warm:hundred, decision: 413,399,412,411,388,307,290,292,297,400,401,292,291,289,377,395,408,391,327,293,329,305,306,407,392,320,310,288,420,301
+- A/B final build, warm:hundred, full: 3718,4098,3606,3610,4099,3610,3063,3604,3622,3588,3092,3619,3586,3078,3058,3094,3114,3582,3105,2601,3122,2636,3606,3096,3074,2591,3098,3076,2577,2578
+- A/B final build, warm:hundred, db: 175,193,195,165,184,165,152,181,164,161,170,149,141,164,145,141,160,153,138,136,145,130,151,153,134,132,142,129,135,134
+- local before, warm:work, decision: 196,208,198,201,139,199,203,205,198,198,191,205,195,196,191,198,198,194,144,197,192,197,196,139,200,200,133,192,198,208
+- local before, warm:work, full: 196,209,198,201,139,199,203,205,198,198,192,206,195,196,191,203,198,194,144,197,192,197,196,139,200,200,133,193,198,208
+- local before, warm:corpus, decision: 216,211,135,138,127,134,137,119,136,128,124,130,129,119,128,132,134,129,130,123,129,137,135,128,131,148,134,132,132,126
+- local before, warm:corpus, full: 216,211,215,215,210,210,213,201,213,181,206,206,206,198,203,208,210,204,205,201,203,215,212,205,205,184,215,212,207,207
+- local before, warm:hundred, decision: 135,144,135,130,138,123,126,136,130,135,128,132,131,130,126,126,128,121,130,128,129,125,128,130,121,130,120,147,132,121
+- local before, warm:hundred, full: 331,218,211,205,211,410,207,213,209,212,209,209,210,209,203,206,203,204,204,207,207,203,212,205,203,205,200,189,211,202
+- local before, cold:work, decision: 1959,1984,1962,2451,2439,1958,1949,1991,1964,2006,1979,2003,1963,1978,2481,2012,1980,1977,1976,2496,1973,2007,2526,1966,1987,2019,2500,1992,1982,1994
+- local before, cold:work, full: 1959,1984,1962,2451,2439,1959,1949,1991,1964,2006,1979,2003,1963,1978,2481,2012,1980,1977,1976,2496,1973,2007,2526,1966,1987,2019,2501,1992,1982,1994
+- local before, cold:corpus, decision: 1904,1877,1992,2012,2023,1907,1919,1930,1909,1966,1955,1957,1966,2046,1982,1962,1963,1952,1994,1991,1995,1983,1988,1957,1994,1989,1999,1983,2014,2103
+- local before, cold:corpus, full: 2511,2496,2505,2526,2534,2529,2542,2558,2516,2581,2575,2588,2574,2550,2600,2576,2582,2565,2620,2614,2603,2598,2604,2578,2610,2608,2615,2601,2629,2618
+- local before, cold:hundred, decision: 2017,2001,2006,1983,2019,2016,2018,2047,2121,2104,1976,2034,2025,2049,2014,2026,2025,1997,1913,1940,1925,1881,1910,1959,1786,1870,1793,1901,1994,1884
+- local before, cold:hundred, full: 2627,2625,2634,2590,2639,2634,2631,2654,2625,2613,2590,2642,2655,2662,2636,2645,2639,2603,2545,2558,2536,2505,2539,2591,2526,2519,2504,2520,2501,2496
+- local after, warm:work, decision: 212,196,200,198,199,229,196,203,197,193,194,197,195,199,199,197,204,177,196,198,198,200,200,194,200,203,203,203,200,208
+- local after, warm:work, full: 212,197,201,200,199,178,196,203,198,193,194,197,196,199,200,197,204,177,201,198,199,200,202,194,201,203,203,203,201,208
+- local after, warm:corpus, decision: 129,145,133,138,132,140,149,126,132,130,124,127,131,142,125,138,133,122,129,129,125,132,129,142,135,132,129,131,132,129
+- local after, warm:corpus, full: 208,220,211,214,210,178,188,210,208,210,203,204,206,182,203,218,175,201,205,205,167,207,204,181,181,212,205,207,211,205
+- local after, warm:hundred, decision: 127,140,156,134,130,133,137,131,132,128,131,135,125,133,134,135,125,121,121,121,140,131,136,127,128,131,127,133,130,126
+- local after, warm:hundred, full: 207,217,198,213,214,210,217,209,208,202,212,211,204,176,177,210,203,200,200,200,214,207,219,202,205,207,169,208,205,201
+- local after, cold:work, decision: 2410,1993,1970,1972,1987,1982,1967,1995,1990,1979,1986,1978,2011,2013,2018,2087,1960,1997,2002,1992,2016,1987,2546,2030,2016,2081,2102,2567,2070,2566
+- local after, cold:work, full: 2410,1993,1970,1972,1987,1983,1967,1995,1990,1979,1987,1978,2012,2028,2018,2087,1960,1997,2002,1992,2016,1987,2546,2031,2016,2081,2102,2567,2070,2566
+- local after, cold:corpus, decision: 1971,2045,2047,1995,1947,2071,2056,1985,1986,1991,2148,2152,2044,2042,2054,2149,2160,2118,2009,1983,1992,2005,1983,1995,1990,2010,2016,1979,2025,2060
+- local after, cold:corpus, full: 2593,2659,2658,2614,2562,2578,2563,2589,2596,2611,2680,2654,2659,2654,2666,2656,2668,2624,2616,2595,2619,2635,2589,2611,2609,2613,2628,2602,2645,2564
+- local after, cold:hundred, decision: 1995,1997,2018,2033,2129,2096,2013,1997,2028,2006,1985,2025,2110,1994,1934,1926,1937,1887,1875,1913,1950,1966,1938,1934,1923,1930,1957,1917,1923,1894
+- local after, cold:hundred, full: 2620,2617,2641,2641,2635,2597,2635,2615,2635,2623,2602,2642,2627,2626,2551,2539,2579,2506,2483,2537,2578,2578,2554,2560,2541,2555,2578,2544,2544,2527
+- production-like before, warm:work, decision: 936,904,932,926,930,400,938,399,404,396,393,923,395,318,403,401,399,327,400,397,397,903,928,904,453,916,432,455,314,394
+- production-like before, warm:work, full: 936,904,932,927,930,400,939,399,404,396,393,923,395,318,403,401,399,327,400,397,397,903,929,905,454,916,432,455,314,394
+- production-like before, warm:work, db: 99,112,102,109,31,17,15,16,14,17,16,16,13,13,13,14,16,13,13,13,13,95,109,106,44,18,15,16,12,13
+- production-like before, warm:corpus, decision: 318,315,230,202,228,213,278,210,421,219,220,198,252,310,233,308,224,230,206,232,215,207,206,203,211,313,406,413,203,413
+- production-like before, warm:corpus, full: 6034,5493,5522,5495,5016,5003,5610,5533,5015,5013,4007,3979,5064,5002,4536,5006,3999,3990,4013,3511,3998,3991,3979,3466,3993,4004,4481,4503,3987,3974
+- production-like before, warm:corpus, db: 190,190,188,183,170,176,170,164,155,165,144,143,159,162,149,149,141,138,142,128,122,132,122,115,128,129,142,128,119,117
+- production-like before, warm:hundred, decision: 410,422,396,196,404,411,423,407,316,396,421,399,407,197,329,197,408,199,198,409,203,205,405,409,198,202,406,413,202,204
+- production-like before, warm:hundred, full: 6044,5501,6032,5515,5507,5520,5553,4978,5036,5527,5013,5509,4492,5023,4555,5514,3991,3987,5003,3962,4014,4978,5010,3975,3989,4505,4516,3479,3487,3998
+- production-like before, warm:hundred, db: 197,178,198,174,182,168,175,161,153,167,153,159,161,160,147,158,129,126,143,136,141,144,148,130,122,133,127,111,121,123
+- production-like after, warm:work, decision: 949,956,945,915,899,903,442,397,440,916,432,413,913,433,416,449,923,390,3474,944,909,926,907,923,914,931,914,903,915,401
+- production-like after, warm:work, full: 949,956,945,916,899,904,442,397,440,916,432,413,914,433,416,449,924,390,3474,944,909,926,907,923,915,931,914,903,916,401
+- production-like after, warm:work, db: 153,111,29,21,19,18,15,14,15,18,14,13,15,13,13,15,14,13,56,162,170,160,111,31,18,18,14,16,16,13
+- production-like after, warm:corpus, decision: 426,399,409,407,419,413,415,414,199,425,403,425,398,209,200,203,422,401,414,389,323,416,406,198,416,320,417,200,220,405
+- production-like after, warm:corpus, full: 3478,3983,3476,3474,3492,2970,3485,2968,2981,2976,3468,3527,2944,2967,2968,2963,3002,2974,3497,2971,2988,2964,2452,2460,2962,2454,2971,2994,2988,2959
+- production-like after, warm:corpus, db: 190,208,166,176,186,168,169,175,168,154,163,161,155,146,141,151,139,139,163,150,138,139,142,133,131,131,141,139,133,132
+- production-like after, warm:hundred, decision: 410,417,413,425,424,197,404,388,403,401,408,406,414,395,337,341,331,216,321,213,216,256,226,311,248,209,315,321,222,199
+- production-like after, warm:hundred, full: 3464,3493,2982,2971,2954,2951,3450,2942,2944,2922,2962,2949,2943,2959,3523,3534,2974,2989,2963,2979,2992,2484,2469,2936,2501,2467,2972,2461,2478,2456
+- production-like after, warm:hundred, db: 174,199,170,162,175,178,168,175,176,153,161,161,161,159,155,148,140,138,155,143,132,141,133,138,119,139,134,140,123,138
+- production-like final, warm:work, decision: 1028,1040,1117,1018,1035,590,1080,1008,1039,1059,1130,1043,626,1046,726,636,1529,725,1004,1535,1025,1039,1077,1091,1146,684,1031,1080,1008,1056
+- production-like final, warm:work, full: 1029,1041,1117,1018,1035,590,1080,1008,1044,1060,1130,657,626,1046,727,636,1529,725,1004,1535,1025,1041,1077,1093,1146,684,1032,1081,1008,1057
+- production-like final, warm:work, db: 169,30,19,21,17,14,15,18,18,14,14,13,13,17,13,13,21,165,169,132,20,19,19,14,15,13,13,15,14,14
+- production-like final, warm:corpus, decision: 306,392,299,387,375,436,396,402,306,318,543,298,306,393,383,407,387,277,319,374,302,394,381,317,285,407,311,303,414,371
+- production-like final, warm:corpus, full: 3617,4081,3585,3674,4090,3600,3591,3591,3134,3139,3625,3091,3586,3575,3163,3600,4100,3086,3124,3584,3175,3073,4101,3071,3049,3093,3099,3098,3089,3047
+- production-like final, warm:corpus, db: 174,221,175,165,201,164,156,182,152,144,183,145,147,176,135,147,166,128,125,177,141,133,163,134,135,153,131,133,148,125
+- production-like final, warm:hundred, decision: 384,401,393,297,384,531,304,379,381,359,374,394,396,427,398,310,310,392,293,281,416,315,301,337,321,305,338,376,325,301
+- production-like final, warm:hundred, full: 4103,4116,4068,3609,4102,3587,3604,3572,3583,3651,3551,3060,3575,3614,3585,3082,3188,3102,3086,3572,3100,3142,2572,3118,2579,3623,3682,2529,2590,2563
+- production-like final, warm:hundred, db: 184,201,183,168,185,173,166,175,157,152,186,151,146,161,154,135,152,139,150,162,138,137,146,131,127,141,146,122,134,124
+
+Serial database waves in one warm corpus account view (the statement log): 56 before, 31 after the account-page fixes, 30 on the final build; executions 147, 108, 95.
+Work's two-minute read rebuilt (`/gap/?fresh=1`, curl, production-like latency, seconds): before 70.8 (the first request), 67.6; after the first two Work fixes 22.7, 16.4, 13.9, 13.6, 16.0; after every fix 17.827296. A cached Work load after every fix: 12.579140.
+
+**R61 re-judged on the full page, with p95 (2026-10-07).** No remembered shell counts as content, so the account's
+"decision" time (the remembered summary at about a third of a second) is not the measure; the full page is. The
+production build, 30 navigations per condition unless said; the raw values are the scratchpad files named here.
+- An account, production-like latency, warm, the same-time A/B (`r61-ab.json` against `r61-ab-head.json`): the corpus account p50 5,174 to 3,130 ms, p90 6,181 to 3,626, p95 6,468 to 3,648; the 100-person account p50 5,172 to 3,110, p90 6,189 to 3,632, p95 6,488 to 3,927.
+- Work, production-like latency, warm (`r61-final-rtt.json`): p50 1,038, p90 1,132, p95 1,357 ms. The A/B measured Work 20 times only (p95 1,231 to 1,062), so it is not the p95 of record.
+- Cold, local (`r61-after-local.json`, a fresh server and browser per navigation): Work p50 2,000, p95 2,557; an account p50 2,578 to 2,615, p95 2,641 to 2,667, of which the first byte is p95 1,692 to 1,773 (the server starting; the sign-in page alone takes 1.47 s).
+- Warm, local: every page p95 206 to 217 ms.
+Verdict: DONE for GAP's own reads on the account page and Work; PARTIAL with the two dependencies recorded above (the
+platform's cold start, Work's rebuilt read). The commits after 31c44d1f add no serial read on these paths (one closure
+read and one recorded-reply read ride Work's existing parallel wave; the account page reuses data it already loaded);
+they were not re-measured.
+
+**R65 operations and the stranded-draft dry run (2026-10-07).** The operator sees failures, Casey sees decisions.
+- The counts: e5b0b567, `lib/gap/health/operations.ts`, from the ledgers GAP already keeps (no table, no model call, no write). Broken handoffs (drafts stranded, proposals drafted and never submitted, dead-letter signals), the research queue's oldest age and stuck runs, research freshness and cost over seven days (runs, grounded turns, pages queued, facts verified, failures), preparation latency (the remembered summaries' ages), seller corrections, outcomes (obligations, replies, meetings) and the HubSpot changes waiting for approval, approved and not written, or failed, each with its owner and where to decide or retry. Every read stands alone and is soft: a count GAP could not read is unreadable, never zero, and degrades the state. The operator's view is `GET /api/gap/health?operations=1` (the Work strip's call is unchanged, so it stays light); Casey's is the "Your decisions and what happened" section on /gap/learning.
+- The dry run: c72e6a2f, `scripts/gap/recovery/repair-stranded-drafts.ts --dry-run [--json]`. It lists each stranded draft and what the R11 service would do with it, ADOPT (the fact, the key) or why not. It refuses to write twice over (exit 2 without --dry-run before any read; a read-only client that throws on every write, raw SQL and transaction) and names the database without credentials. The service's fact checks are one exported function (`draftFactRefusal`), and on the scratch database the real service then adopts the very draft the plan named and refuses the sensitive one for the same reason (`stranded-repair.scratch.test.ts`).
+- Found by the live check and fixed: 4e936a90, a HubSpot conflict read "changed 2026-10-07 by CRM_UI"; it now says the day and who in words.
+- Observed, not changed: the analyst tables lower on /gap/learning show sequence version ids, the evidence tier name VERIFIED_FACT and campaign program keys. They are kept by contract as the analyst views' own words (R60). DECIDED by the lead (2026-10-07): they keep their words.
+- Live check on the production build (scratchpad `r65-live/`): the operator view listed 4 stranded drafts and 2 HubSpot conflicts with owners and where to act; the strip's call carried no operations; /gap/learning showed the decisions, the approved-not-written note with its retry place, the conflicts, the outcomes and research cost.
+
+**R63 seller review dispositions (2026-10-07).** Fresh seller reviewers on the production build of c00b94ca (code
+d9902641), on the scratch database and the stubs, corpus tag r63.
+- BLOCKER, fixed (found by reviewer B, verified by the lead): the floating "Compose email" button opened the legacy composer on a GAP page, and its send (POST /api/email/send) went to Doug Scratch at Walmart Scratch Co r63, whose "stop" reply was on file but not yet recorded as do not contact. The send was accepted. GAP's own gate stops on that reply; the legacy send never read replies. Two commits:
+  - 8f7c20d5: `performSend`, the one legacy send authority, reads each recipient's replies the way GAP's stop rules do (`lib/gap/replies/opt-out.ts` over `replies/classify.ts`, never a second classifier) and refuses when an opt-out reply from that address is on file, recorded or not: 409 RECIPIENT_OPTED_OUT_BY_REPLY, details.reason recipient_opted_out_by_reply, and the error the composer shows, "Doug Scratch replied "stop" on Oct 5, 2026. Nobody emails them from here. Record it as do not contact from their reply." A person's ordinary reply, an automatic notice and a bounce do not block; a cc is read the same way; internal addresses bypass as they do for unsubscribes; the unsubscribed blocker is unchanged and still checked first. Test: `tests/unit/r63-opt-out-send.test.ts` (4); removing the refusal turned it red, then restored. The six other legacy-send test files mock an empty inbox.
+  - 3fe2c39e: the button renders nothing on every route under /gap (it hid only on the account pages), so GAP's send spine and its gate are the only way to email from GAP; unchanged elsewhere, and a path that merely starts with the letters (/gapfoo) is not GAP. Test: `tests/unit/r63-compose-on-gap.test.tsx` (2, on the component with the pathname); the accounts-only rule turned it red, then restored.
+  - Receipts at 3fe2c39e: the eight files run singly with --maxWorkers=1, 41 tests green; eslint and tsc clean. No full suite and no build under the lead's load cap; the full gates and the rebuild come after the R63 reports.
+- Harness event: the R63 server on 3100 exited (code 127) at about 18:01 local, after reviewer B's double-send attempt. It was restarted once on the same `.next` build, database, stub and session; the lead was told. The dead log is kept in the scratchpad.
+- The analyst tables lower on /gap/learning keep their words (sequence version ids, VERIFIED_FACT, program keys): DECIDED by the lead.
+
+**R63-B dispositions (reviewer B: accessibility, trust, engineering; 2026-10-07).** 1 BLOCKER, 15 SHOULD, 13 NICE on
+c00b94ca; screenshots in the scratchpad `r63-B/`. Each fix is its own commit with focused single-file tests
+(--maxWorkers=1) and one red mutation, restored; no full suite and no rebuild under the lead's load cap.
+- B1 FIXED 8f7c20d5 and 3fe2c39e (above).
+- S12 FIXED 77261d91: a parked account (Sysco, closed lost Sep 1) never carries a first-touch card on Work. Work asks the gate's own resolver for the accounts it would offer cold work (eight at most, in Work's order, remembered five minutes) and holds them in the closure's words; the gate refuses the same touch with the same sentence (pinned).
+- S10 FIXED 66b1e9ce: a proposed plan stays proposed: each milestone starts at Not decided, the button counts only what was chosen, only those are recorded.
+- S9 FIXED 67010fe2: one reader for "has anything happened" (the touches, the buyer's words, a recorded conversation, the open deals, a meeting ahead) feeds both "What has happened between us" and the learn line's basis.
+- S11 FIXED a9f53e3f: a restored skip leaves SET ASIDE OR LOGGED TODAY; the obligation stands once, under OWED; the skip stays in the account's history.
+- S1 FIXED 0fa50dfa: an opt-out on file (their reply, recorded or not, or a recorded do not contact) makes the pack show no draft ("No email: they opted out", no subject, no body, no copy, no call script); the words are not temporary and say what to do. The approach, the motion line and the intake card say "Do not contact: ... Nothing goes to them from here."
+- S2 FIXED 002e4829: an opt-out or a bounce offers no "Answer in Gmail"; an email sent after the opt-out carries it beside the send.
+- S3 FIXED 21331eae: one Work outcome per account per day (a stale tab's second press answers 200 with the existing row, one line on Work); the day boundary no longer carries the press's milliseconds.
+- S7 FIXED IN PART 58b953d6: GAP's own not-found ("This account is not on your list", "This action pack is not on your list", "This page is not in GAP"), one link Back to Work, the title "Not found | GAP", the call page in words. NOT FIXED, the lead's decision: the HTTP status stays 200, because the page streams under the root and GAP loading boundaries before it can know the id is unknown (Next's docs: a real 404 needs the check in the proxy). The fix is a system-wide change: move the root `middleware.ts` to `proxy.ts` (Node runtime) and check the GAP detail ids there, or drop the loading boundaries above the GAP detail pages. DECIDED by the lead (2026-10-07): named debt after R64; the seller-facing fix (what is missing, one way back) ships now.
+- S8 FIXED 3967165c: sign-in comes back to the page (every GAP page's fallback carries it; the login page honors the session gate's callbackUrl, same site only). Production's gate already sends the callback (read-only check: GET /gap/ answers 307 to /login/?callbackUrl=...).
+- S4 FIXED 2666398e: Capture keeps one polite live region for the whole flow and says every save, refusal and record in it.
+- S5 FIXED d97fd055: the Note panel is a modal dialog for the keyboard (Escape from anywhere inside, Tab and Shift+Tab wrap, focus returns to the opener); closing keeps the typed note.
+- S6 FIXED a51fd852: real headings: the brief's rows and the pack's sections are h2, each Work card an h3 named by its account.
+- S13 and S14 FIXED 624b9e27 (and the plan's 24 px radios in 66b1e9ce, the citations in e1046642): 24 px targets; at phone width the Note pill sits in the page flow after the content (fixed from 640 px up), so it covers nothing.
+- S15 FIXED c31cab0c: "No open HubSpot deal, checked moments ago" (never "HubSpot opportunity CLEAR"); a thesis row named in the words its cells show ("hidden capacity"); the call page's "not_found" in 58b953d6.
+- NICE fixed: N2 6891aa7b (a stale Record says it was refused); N1 part, N3, N4, N5, N8, N10 6c25eed2 ("7 theses", the composer's em dashes, Escape on "Why this person?", screen-reader spacing, the proof line from the canon's phrases with "260 sites committed" and passing the compiler's nearest-qualifier rule, a canceled meeting never the next step); N11 1f2ce814 (a capture link to a reply GAP does not hold opens a plain note); N12 e1046642 (a citation named "Source 1: title (site)"; an unlinked one never says "evidence_record"); N9 b63f2e69 (a fact's date is one calendar day everywhere).
+- NICE as debt (owners in the debt list below): N1 rest, N6, N7, N13.
+- N8 DECIDED by the lead (2026-10-07): keep "observed". The compiler enforces it (top100/CLAIMS.md forbids "measured" beside the 5%); the repository canon line ("~5% measured", CLAUDE.md) is for the native site's copy, not GAP's compiled text. It stays listed for Casey in the final packet as a wording decision, not a blocker.
+- Harness finding, not a product defect: the local Windows `next build` registers no middleware (`.next/server/middleware-manifest.json` is empty), so on the R63 server a signed-out page renders its own fallback and an API answers without the session gate; production runs the gate (read-only checks: GET /api/email/send/ answers 401, GET /gap/ 307 with the callback). Signed-out and API probes on the local server do not describe production.
+- Passing (reviewer B): the skip link; 182 focus stops with a visible ring; the keyboard walk completes; no horizontal scroll at 390 on five pages; no unnamed controls; one capture per reply across tabs; a recorded do not contact removes Doug from the composer; direct links load in a fresh signed-in context; a bogus view parameter falls back to Now.
+- Receipts at b63f2e69: the 19 R63 test files run singly with --maxWorkers=1, 59 tests green; each fix's neighboring files run singly at its commit (the tests that pinned old wording or old source lines moved to the new contract in the same commit); eslint and tsc clean on every changed file.
+
+**R63-A dispositions (reviewer A: the seller walk; 2026-10-07).** 4 BLOCKER, 17 SHOULD, 11 NICE on the c00b94ca
+build; screenshots and page text in the scratchpad `r63-A/`. Each fix is its own commit with focused single-file tests
+(--maxWorkers=1) and one red mutation, restored; no full suite and no rebuild under the lead's cap. Order as the lead
+set it: the four blockers, the two matrix additions, then the MUST list.
+- B1 FIXED 0fad39a5: a seller's own promise is owed by the seller. An unlabelled first-person promise in a note ("I will send Ben a one-pager") is the seller's deliverable; a third-person one ("Ben will send us...") is the buyer's promise to chase; Capture shows "Who owes it: Me / Them" and retitles an untouched title.
+- B2 FIXED 5090fe4a: a customer or lost-deal account never reads Ready on Work: the opportunity holds read twenty accounts, five at a time, remembered five minutes, so a restart or a Refresh holds them in the closure's words without a page visit.
+- B3 FIXED 9893899f: the tomorrow preview goes through the same stop rules as today (a live reply, a recorded do not contact, a decline, a not-a-priority answer hold the account), and it starts from what the workspace says now.
+- B4 FIXED e6d1038f (with the matrix's speaker case): the story names who actually spoke, resolved from the reply's address before any name, digits kept in the name key; the deal brief and the conversation read the person on record.
+- Matrix item 2 FIXED 3f8753cd: card readiness says "thesis" in its body text (R60).
+- S4 FIXED 1bcc2ccf: a recorded reply is owed its answer (R42): its Work card reads "Answer <name>" until the answer is sent or copied, and the account page keeps the prepared answer at #reply-answer; a stop or a bounce owes none ("No reply goes back.").
+- S5 FIXED 048c61d3, with 3ab2a345 and f5d3aaac: a paraphrase is what the seller noted they said, never a quote: the wording is recorded at capture (bid/wording.ts), and the deal list, the meeting brief, the story, Listen, the recap, the pilot draft, the business-case inputs and the deal brief all say "You noted" or "as I understood it", without quotation marks.
+- S1 FIXED 04e5d217: a recorded reply's card clears on the next Refresh, and a reply card's day is the message's received date (never "Dec 31").
+- S2 FIXED 115dda98: "Open the reply" always lands on a real place: the account page keeps the reply's anchor and says what happened to it.
+- S3 FIXED 4ad5e063: a reply that has its capture opens it at once, with its review, saying it already has one.
+- S11 FIXED 67db8037: the day can finish: a meeting card has "Prepared" (recorded with the outcomes); Work says "Done for today: nothing needs you."; the preview speaks of tomorrow.
+- S8 FIXED a8110a38: the Work card keeps the page's move until the seller acts. Cause: the account page refined NEXT with the outreach anchor ("Put the story in use"), the Work warmer and Ask did not ("Prepare the email to Glen"), so a page visit flipped the remembered card and its aging flipped it back. One function (pursuit/next-anchor.ts) over one composition (story/compose.ts) now serves all three.
+- S9 FIXED 8247574b: the email page says HubSpot once: "No open deal, read moments ago. This email is not logged in HubSpot; GAP records it as emailed."
+- S13 FIXED 930bfa3c: the Accounts search covers every account (the ones GAP has not worked are listed after, "Not worked in GAP yet"), Work's search links to it, and an unlinked account says "No HubSpot company is linked to this account. Link it in HubSpot; until then no cold touch." with the link: "Link it in HubSpot" on NEXT and on its Work card opens HubSpot's company search for the account (2684beae).
+- S15 FIXED a4db626e: one line per obligation: a buyer obligation stays in Owed with its day and never repeats under tomorrow.
+- S16 FIXED 91c8bc0f: a blocked health line names its owner and the retry path (the R65 shape), on the line itself.
+- S17 FIXED 0380d5b5: a constraint is never a pilot success measure; it is listed apart as what the pilot has to respect.
+- S10 FIXED 0d4e5eff: after one send: "Touch 1 sent; the follow-up is on Oct 13." (the send's own follow-up obligation, by the sweep's day rule), and one motion line with the person's name and a readable date.
+- S12 FIXED 562e0f0b: the floating Note is Feedback and sits in the page flow at every width.
+- S6, S7 and S14 are R63-B S9 (67010fe2), S11 (a9f53e3f) and S10 (66b1e9ce).
+- NICE fixed: N1 part d126588d (clawd, Wedge, "hidden capacity (approved)", "0 candidates waiting"); N3 f5d3aaac (names on Done today and the deal brief); N4 part 73a9a4bc, d126588d and 0d4e5eff (the meeting context, Capture's recent notes, the motion line); N5 and N7 670dbbd8 (yards plural; the canon proof line); N6 part 73a9a4bc and 0380d5b5 (a currentness said twice, "also leads", "...lost Wrong if: If", "Read BRIEF", "1 of their own measure"); N10 772de979 ("CSCO" spelled out) and 1b240b19 (a person with no title reads "title not on record": Dannon's Mark Shaughnessy).
+- NICE by design: N10's intro ask lives only on the account (warm intro only: the account is the one place that asks Mark).
+- NICE as debt (owners in the debt list below): N1 rest, N4 rest, N6 rest, N8, N9, N11. N2 is by design (the lead's decision, below).
+- Acceptance, each proven by a test: a first-person promise is owed by the seller (`r63a-seller-promise.test.tsx`); a customer or lost-deal account never reads Ready on Work or the preview after a restart or Refresh (`r63a-held-never-ready.test.ts`); the preview offers no outreach to an account with a live reply or a recorded do not contact (`r63a-preview-stop-rules.test.ts`); the story names the person who replied (`r63a-story-names.test.ts`); a recorded reply's card clears on the next Refresh with a real date (`r63a-reply-clears.test.ts`); Work reaches done when the only item left is a prepared meeting (`r63a-day-done.test.tsx`).
+- Receipts at 772de979: the 43 R63 test files run singly with --maxWorkers=1, 115 tests green; each fix's neighboring files run singly at its commit (tests that pinned old wording moved to the new contract in the same commit); eslint and tsc clean on every changed file.
+
+**R62 final pass and the merge (2026-10-07).** acceptB's final matrix on the release candidate c9cff73b: 100 of 100
+cases green on its own scratch database (55433), feat/gap-matrix 8dbb9c57 (tests, the matrix seed and stubs, and
+docs/gap/RUNBOOK.md only; no source), re-headed by acceptB as 79bfdd4a on b441983a with the same content. The reds the
+pass classified:
+- deals, the speaker case: the product defect it found (the story named the buyer by contact email) was fixed by the writer in e6d1038f; the case now checks that every buyer sentence shown on Ben's deal names Ben (the extra statement it had assumed was a test assumption, not a contract change).
+- deals, the recap case: an intermittent product defect. Coverage's "approved, not written" list folded the CRM ledger with a stable millisecond sort; an approval's attempt and result rows that share a millisecond, read result first, folded to "approved", so the approval dropped off Coverage and GET /api/gap/crm-sync?state=off while the deal brief said HubSpot writes are turned off (seen as crm538d9d3b9eb3b). FIXED e972efbc before the merge: the fold orders one millisecond by the write lifecycle, then by id, whatever order the rows are read in; the ledger reads select the id and order by time then id. Test `r62-crm-tie.test.ts` (the same rows in three read orders and the Coverage list read result first, all "off"; dropping the tie-break turns both red); crm-sync 22, deal-artifacts 10, s5-review-recap 3, coverage 10, coverage-page 1 and deal-brief 18 run singly, green; eslint and tsc clean on the touched files. The two notes that called it open now name the fix: the recap case's comment in matrix-deals.scratch.test.ts and the runbook's section 2 line (fixed in e972efbc, no longer debt).
+- The merge 307f3ee6 (`git merge --no-ff`, no conflict; the ledger file untouched by the matrix branch): `git diff --stat c9cff73b..307f3ee6 -- src` is the Coverage fix alone (src/lib/gap/crm-sync.ts and src/lib/gap/deals/crm-model.ts, 14 insertions, 4 deletions). After the merge, `npx tsc --noEmit -p .` reports 4 type errors, all in the merged matrix test files (matrix-dependencies 208 and 272, matrix-identity 86, matrix-pepsi 286): vitest runs them (types are stripped), and `next build` drops diagnostics in `*.test.*` files (next/dist/lib/typescript/runTypeCheck.js), so the Vercel build is not affected; the release branch owns them since the merge and they are fixed, types only, in e8163c33 (whole-project tsc clean, 7 s; eslint clean on the three files; no assertion or exercised path changed; acceptB reruns them on 55433). The matrix files need 55433 and were not rerun here (acceptB's 100 of 100 is the receipt).
+
+**R63 gates on the final SHA (2026-10-07, the lead's go after R63 was accepted).** Serial, one job at a time, on
+c9cff73b; logs in the scratchpad `gates/`, journeys in `r64/journeys/`. Two gates went red once; each was fixed atomically
+on the critical path and only what it touched was rerun.
+- tsc, whole project (`npx tsc --noEmit -p .`): clean, 8 s (incremental).
+- eslint, whole project (`npx eslint .`, 14 s): exits 1 with 1,045 errors and 84 warnings in 171 files, every one present at the production base 672570ed (the lint configuration is unchanged on the branch; no file the branch touched has more errors than at the base). The one error the branch added (react-hooks/rules-of-hooks on a click handler named usePrimary in outreach-anchor.tsx) is fixed in ba29d430 (renamed putPrimaryInUse; renaming it back turns eslint red). The pre-existing errors are named debt below.
+- The GAP suite (445 files, four chunks with --maxWorkers=2): 5,765 of 5,765 green, 278 s (72, 69, 67, 70). The first run had one red: pre-call-brief.test.tsx still asked for a citation link named "1" after R63-B N12 named it "Source 1: title (site)"; fixed in c9cff73b (returning the bare number turns it red) and its chunk rerun green (108 files, 827 tests).
+- The scratch suite on 55432 (`GAP_SCRATCH_DATABASE_URL=<scratch> npx vitest run tests/unit/gap/scratch --maxWorkers=1`, the nine non-matrix files): 50 of 50 green, 33 s.
+- The rest suite (`npx vitest run --maxWorkers=2 --exclude tests/unit/gap/**`): 328 files, 2,311 passed and 1 skipped of 2,312, 156 s.
+- The production build (`npm run build` at c9cff73b, the scratch environment, no production credential): compiled, 99 s in all (the prebuild VOICE CI and pack validations passed; compiled in 38.2 s; 60 of 60 static pages), BUILD_ID 5wDGj3pLDgnc1LvFwrTXM.
+- The review server: the old server (Windows PID 45732) stopped before the build, which writes the same `.next`; the scratch database reset (`reset-scratch.sh`: schema, hand SQL, 33 of 33 guards, families) and reseeded with the R63 harness (`journey-exit-seed.ts r63`, which runs seed-corpus.ts and adds Kroger's buyer words, Nfi's reply from Person1 and the pilot obligation, plus `r63-extra-seed.ts r63` for Unlinked); the stub on 4545 left running, its deals file refreshed from the new corpus (it rereads the file per request). seed-matrix.ts was not run on 55432: it is Worker B's on feat/gap-matrix and is written for the matrix database (55433) only; the journeys' accounts all come from the corpus and journey seeds. `next start -p 3100` on the new build (PID 26584).
+- Read-only journeys (`r64/journeys.cjs`, a fresh signed-in headless browser, nothing pressed that writes): 15 of 15 checks. Work loads (200, 1.6 s); Costco ("Held: a customer (closed won)") and Sysco ("Held: parked after a lost deal") held on Work and on ?day=tomorrow; Walmart's pack says "No email: they opted out" with no send control; Kroger's story says "In 2 open deals" (never "Nothing has happened between us yet") and its Work card offers Prepared on the meeting; Nfi's story says "Person1 Scratch, VP Transportation replied on Oct 7"; no "Compose email" control on Work, the pack, Nfi or Accounts; a nonsense account id (/gap/accounts/no-such-account-zz9/) says "This account is not on your list" with Back to Work (HTTP 200, the named S7 debt). Kroger's Prepared outcome is checked as offered, not pressed (pressing it writes). The stub's write log reads zero notes and zero tasks (no HubSpot write).
+- Decision recorded (the lead, 2026-10-07): R63-A N2 is by design: UNKNOWN is the truth vocabulary (STABLE_BASELINE), and EMAIL, PREPARED and RECORDED are CSS uppercase over sentence-case text.
+
+**Consolidated debt (2026-10-07).** Every debt this recovery named, one line each, with its owner and the guard that
+holds today; the entries above keep the detail. Owners: engineering (the GAP engineer of record), Casey (a product or
+spend decision), operator (runs the system), copy (human-written words, Casey's).
+- The account page's refresh stall: a router refresh result commits only on the next React update (a framework cause). Guard: 19c0c20e (`refreshNow` and the `RefreshNudge` follow-ups). Owner: engineering. No further work in this program (the lead's decision 2).
+- A cold first byte of 1.6 to 1.8 s (the server starting; the sign-in page alone takes 1.47 s). Guard: none needed for correctness; the remembered summary shows first. Owner: engineering (platform).
+- Prisma's idle `SELECT 1` on each pooled connection (the Rust engine). Guard: connection_limit 5. Owner: engineering.
+- Work's rebuilt read takes 10.5 to 12.6 s under production-like latency (routing/inputs.ts readComms and execution/person-history.ts per card). Guard: the two-minute remembered read and the live reads beside it. Owner: engineering.
+- A closure typed as `site_expansion` (the signal type set is a database CHECK with no closure value; research/facts.ts classifyFact). Guard: `metadata.change` carries "closure". Owner: engineering (a schema change).
+- Work reads every commitment row on each render. Guard: today's volume. Owner: engineering (the indexed projection when rows grow).
+- Pattern reads for referral names, asks, obligations, deal intents and research intents. Guard: the seller confirms or edits each. Owner: engineering.
+- Free-text meeting attendees, no history for a moved meeting, no time for a meeting accepted by email. Guard: the seller adds the time. Owner: engineering.
+- Deal scope needs a HubSpot contact id; division and site are free text. Guard: account-level is said as account-level. Owner: engineering.
+- The plan's standard steps are one fixed list and are not mirrored to HubSpot. Guard: R54 proposes notes and fields only. Owner: engineering.
+- Artifact texts are fixed templates; a recap sent outside GAP is not known. Guard: the seller records "copied". Owner: engineering.
+- A HubSpot task's owner is the portal default; search-before-create depends on HubSpot's index delay. Guard: the mirror row and the marker search. Owner: engineering.
+- "Paused" has no HubSpot field; a closure's held card speaks generic words until its summary is fresh. Guard: the routing hold. Owner: engineering.
+- No next follow-up is proposed after a by-hand follow-up. Guard: the obligation closes and the next touch waits for a send or the seller's task. Owner: engineering.
+- The rotation ranks by tier and band only; the site read is a pattern over the fact text; the job-led copy says "posting" for a procurement notice. Guard: the seller's priority reasons; review. Owner: engineering.
+- R43 touch 2 and later have no copy family (every seeded approach family is single-touch). Guard: "prepare" is offered only for a version with step 1+ copy; the plan says follow up by hand. Owner: copy.
+- No reply copy family. Guard: the answer is prepared from the buyer's own words and edited before use. Owner: copy.
+- Generated quality has no held-out graded corpus (30 or more cases with model, prompt and policy versions). Guard: every generated line is reviewed by the seller. Owner: Casey and engineering.
+- R42b: a reply seen only in HubSpot's connected inbox is prepared and copyable, not drafted or sent from GAP. Guard: the Gmail thread is required. Owner: engineering.
+- The analyst tables on /gap/learning show sequence version ids, VERIFIED_FACT and campaign program keys. DECIDED by the lead (2026-10-07): they keep their words, analyst words by contract (R60). Kept here for the record; no longer open.
+- One Sprint 5 review NICE not taken: a canceled meeting's rebook offer with HubSpot's stale next step. Guard: none. Owner: engineering (R62 lists it). The raw date in the brief (context/brief.ts) is fixed in 73a9a4bc.
+- The app's main sidebar lists Accounts and Work Queue beside GAP OS. Guard: none (outside GAP). Owner: Casey (a system-wide change).
+- Transcription stays off pending its spend. Guard: `GAP_TRANSCRIPTION_ENABLED` unset. Owner: Casey.
+- R63-B S7: GAP detail pages answer 200 for an unknown id; the real 404 needs the id check in the proxy. Guard: the body says what is missing, links back to Work, and Next marks the response noindex. Owner: the lead. After R64 (the lead's decision 2026-10-07).
+- R63-B N1 rest: admin words on the preview page's system details ("review_required to approved", "Emit enroll row (shadow)", "Hidden Capacity v1draft", "{{first_name}}", "Confidence 40%" without a trust word). Guard: they sit in the collapsed System details and the analyst views. Owner: engineering, copy for the words.
+- R63-B N6: Mills reads "active" in the thesis list and "No usable thesis yet" on its page (the list shows the record's state, the page the gate's). Guard: the send gate refuses it. Owner: engineering.
+- R63-B N7: "The opening story, above." can show when the anchor above is not shown (an account on hold). Guard: its basis names the anchor's fact. Owner: engineering.
+- R63-B N13: a first-touch email opens by quoting the raw fact title. Guard: the seller reads every email before it goes. Owner: copy (Casey).
+- R63-B N8: DECIDED by the lead, GAP keeps "about 5% ... observed" (the compiler enforces it; the repository canon line is the native site's copy). Listed for Casey in the final packet as a wording decision, not a blocker. Owner: Casey (wording only).
+- R63-A N1 rest: "remit" in seller text (the remit caution, "it lands on their remit", "Location / remit unknown"; 19 test files pin it) and the "Next operator" slot name (a typed slot). Guard: words only. Owner: copy (Casey) for the word, engineering for the change.
+- R63-A N2: DECIDED by the lead (2026-10-07), by design: UNKNOWN is the truth vocabulary (STABLE_BASELINE: an empty section says UNKNOWN); EMAIL, PREPARED and RECORDED are CSS uppercase over sentence-case text. Kept here for the record; no longer open.
+- The whole-project eslint run: 1,045 errors and 84 warnings in 171 files, all present at the production base 672570ed (mostly `no-explicit-any` in GAP tests and services). Guard: tsc is clean and every file a change touches is linted clean of new errors. Owner: engineering.
+- R63-A N4 rest: about 33 seller-visible strings still print an ISO date (`slice(0, 10)`: person factors, the paused-reply headline, a family's separate-motion line). Guard: the date is right, only its form. Owner: engineering.
+- R63-A N6 rest: the Fedex first touch names the account three times (the headline, inside the quoted fact, "That might not be true at ..."); it is governed copy in a seeded approach family. Guard: the seller reads every email. Owner: copy (Casey), with R63-B N13.
+- R63-A N8: the Accounts list says "no GAP touch yet" where a conversation or a deal exists (it reads GAP first touches only) and shows the record's vertical, not the page's industry words. Guard: the account page says what has happened. Owner: engineering (the index stays three cheap reads, UX-10).
+- R63-A N9: a reply's meaning allows one choice. Guard: the seller records the strongest meaning and notes the rest. Owner: engineering.
+- R63-A N11: the older Accounts page (/accounts, outside GAP) shows database id 9212 and recommends outreach at 0 contacts. Guard: none (legacy). Owner: the lead.
+
+### HANDOFF
+
+HANDOFF commit: 2d5ddb21 (docs only; the block below describes head_sha e8163c33 on feat/gap-account-first-ux; first written in d3b6592a).
+
+```yaml
+# HANDOFF (this block's own commit SHA is on the ledger line directly above the block)
+branch: feat/gap-account-first-ux
+base_sha: e66a9853
+head_sha: e8163c33
+production_sha: 672570ed
+tickets:
+  R00: {disposition: DONE, evidence: "2113361c: production 672570ed reconciled; the capability matrix and the one stranded PepsiCo draft recorded"}
+  R01: {disposition: DONE, evidence: "2113361c: the authority map and the scoped policy amendments"}
+  R02: {disposition: DONE, evidence: "c0883ca4: scripts/gap/recovery/seed-corpus.ts, scratch only"}
+  R03: {disposition: DONE, evidence: "2113361c: tests/unit/gap/scratch/anchor-draft.scratch.test.ts"}
+  R04: {disposition: DONE, evidence: "2113361c: carried from docs/gap/ACCOUNT_FIRST_UX.md"}
+  R05: {disposition: DONE, evidence: "f4b3c70f: GAP_SEND_TRANSPORT=sink and HUBSPOT_API_BASE_PATH refused under VERCEL_ENV=production"}
+  R10: {disposition: DONE, evidence: "1b6416a9: state and anchor agree on an unread send gate"}
+  R11: {disposition: DONE, evidence: "42b21547: the family derived with its basis, never asked for job or procurement drafts"}
+  R12: {disposition: DONE, evidence: "42b21547: review where the action lives"}
+  R13: {disposition: DONE, evidence: "1b6416a9: the confirm binds the sending mailbox; a live enrollment binds the recipient"}
+  R14: {disposition: DONE, evidence: "32a67597: an outcome, not a navigation event"}
+  R15: {disposition: DONE, evidence: "31c44d1f: measured with R61"}
+  R20: {disposition: DONE, evidence: "71c4c3a8: coverage honesty; the coverage choice stays Casey's"}
+  R21: {disposition: DONE, evidence: "1b6416a9: a vendor's claim about the account is quoted_third_party"}
+  R22: {disposition: DONE, evidence: "1b6416a9: a closed RFP is not current; a repost is never a job-led trigger"}
+  R23: {disposition: DONE, evidence: "4cf3fdb1: partnership and software claims are their own type"}
+  R24: {disposition: DONE, evidence: "daa61ff3: research/currentness.ts is the one freshness authority"}
+  R25: {disposition: DONE, evidence: "0beca6b3 and 71c4c3a8: the news budget and the research dead letter"}
+  R30: {disposition: DONE, evidence: "1b6416a9: the approach's evidence policy at the gate"}
+  R31: {disposition: DONE, evidence: "4cf3fdb1: Gatik is not an event, one guess everywhere"}
+  R32: {disposition: DONE, evidence: "6f3fa5eb: the person matched to the motion and its scope"}
+  R33: {disposition: DONE, evidence: "5f5e76cf and c0a4e214: a story set aside never returns; automatic reversible preparation"}
+  R34: {disposition: DONE, evidence: "372f6609: copy read from the seeded rows, never READY without it"}
+  R35: {disposition: DONE, evidence: "1b6416a9: a question asking what to write is answered with the control"}
+  R40: {disposition: DONE, evidence: "1e7b4aa4: one durable commitment per obligation; counts are completions"}
+  R41: {disposition: DONE, evidence: "1e7b4aa4: Work ranks today by commercial obligations"}
+  R42: {disposition: DONE, evidence: "71b6ff36: reply triage through reply execution; R42b PARTIAL for a reply seen only in HubSpot's inbox (dependency: its Gmail thread)"}
+  R43: {disposition: PARTIAL, evidence: "e2da206e: the plan, the holds and the recovery", dependency: "human-written step 1+ copy for the seeded approach families"}
+  R44: {disposition: DONE, evidence: "16971d2c: capture once, one capture per reply"}
+  R45: {disposition: DONE, evidence: "1e7b4aa4: close the day and keep tomorrow"}
+  R50: {disposition: DONE, evidence: "6e16babd: buyer words carry their deal in every view"}
+  R51: {disposition: DONE, evidence: "f43d5280: meeting preparation never mixes two deals' words"}
+  R52: {disposition: DONE, evidence: "ea3645f2: a practical mutual action plan"}
+  R53: {disposition: DONE, evidence: "20f244a3 and a0f6bb77: artifacts written to their recipient"}
+  R54: {disposition: DONE, evidence: "4834eb2d and 4e936a90: no outdated recap written; conflicts in words; approved writes OFF in production"}
+  R55: {disposition: DONE, evidence: "8feafd40: a reopened deal lists what its closure skipped, each restorable"}
+  R60: {disposition: DONE, evidence: "8283a9cc, de14c0fa, 16971d2c (one capture per reply) and 216cd80a (the vocabulary)"}
+  R61: {disposition: PARTIAL, evidence: "31c44d1f; the p95 re-judgment in the R61 entry", dependency: "cold first byte (platform); Prisma idle SELECT 1 per pooled connection; Work's rebuilt read"}
+later_tickets:
+  R62: {disposition: DONE, evidence: "acceptB's final pass on c9cff73b: 100 of 100 (feat/gap-matrix 8dbb9c57, re-headed 79bfdd4a); the one product defect it found fixed in e972efbc; merged in 307f3ee6"}
+  R63: {disposition: DONE, evidence: "both reports dispositioned: R63-B (B1 8f7c20d5 3fe2c39e; S1-S15 fixed, S7 in part, its 404 named debt after R64) and R63-A (B1-B4 0fad39a5 5090fe4a 9893899f e6d1038f; the matrix's two 3f8753cd e6d1038f; S1-S17 fixed, S13 with its link 2684beae; S6 S7 S14 as R63-B's; NICE fixed, by design or named debt); the full gates and the rebuild run on the lead's word", dependency: "none for R63 (R63-A N2 decided by design); the 5% wording is listed for Casey, not a blocker"}
+  R64: {disposition: NOT STARTED, evidence: "needs Casey's authorization for the production write below"}
+  R65: {disposition: DONE, evidence: "e5b0b567 the counts, d9902641 owners and retry paths, c72e6a2f the read-only dry run"}
+reopened_unresolved:
+  - "R43 touch 2 and later: human-written copy"
+  - "generated quality: the graded corpus (30 or more cases with model, prompt and policy versions)"
+  - "R61: cold first byte 1.6 to 1.8 s"
+  - "R61: Prisma idle SELECT 1 per pooled connection"
+  - "R61: Work's rebuilt read 10.5 to 12.6 s under production-like latency"
+  - "a closure typed as site_expansion (research/facts.ts classifyFact; the signal type CHECK has no closure value)"
+  - "one Sprint 5 review NICE not taken: a canceled meeting's rebook offer and HubSpot's stale next step (the raw date in the brief is fixed in 73a9a4bc)"
+r62_cases:
+  matrix: {branch: feat/gap-matrix, sha: 79bfdd4a, content_of: 8dbb9c57, merged_in: 307f3ee6, files: "tests/unit/gap/scratch/matrix-*.scratch.test.ts", file_count: 9, cases: 100, note: "100 of 100 on c9cff73b is acceptB's receipt (55433); the matrix seed, stubs and docs/gap/RUNBOOK.md came with it"}
+  groups: [migration and boundaries, daily work, dependencies, execution, identity and scope, Pepsi regression, replies and capture, source truth and commercial relevance]
+  stub_controls: "scripts/gap/recovery/stubs.mjs: POST /__stub/matrix (the matrix failure controls), POST /__stub/control, POST /__stub/deal-property, GET /__stub/writes"
+  add:
+    - "a reply logged through Capture with the real disposition and BID services: one capture, one disposition sourced to the message, the kept statements linked; opened again it returns the same note; Work drops the card"
+    - "a reply card and the account page offer only Capture; no reply form on the account"
+    - "a deal closed in HubSpot is named with its outcome on its kept rows, in Work and in meeting preparation; never its id"
+    - "a reopened deal lists what its closure skipped; Restore makes one open obligation, refused while the deal is closed"
+    - "a new recap retires the earlier unwritten recap on its deal; the replaced one is refused at retry and absent from Coverage"
+    - "buyer words in NOW, the brief and the story carry their deal; a detention figure counts as cost"
+    - "artifacts in the second person; no CRM deal name in buyer text"
+    - "no seller heading or label says HYPOTHESIS or BID"
+    - "the stranded-draft dry run names ADOPT for the Pepsiprod Tulsa draft; the R11 service then adopts that id"
+    - "GET /api/gap/health?operations=1 counts the broken handoffs and HubSpot failures with owners and retry paths; the plain call carries none"
+    - "an opt-out reply on file, unrecorded, refuses the legacy composer's send with the reason text; the composer is absent on GAP pages"
+    - "a parked account (closed lost, nothing since) holds on Work's first load in the closure's words; the gate refuses its first touch"
+    - "an opt-out on file shows no draft on the pack page; no Answer in Gmail on an opt-out or a bounce"
+    - "a proposed plan records only what was chosen; a stale Skip today is one row and one line on Work"
+    - "a restored skip leaves the day's set-aside list; Kroger's story says what has happened (deals, their words, the meeting)"
+    - "a seller's own promise in a note is owed by the seller; a buyer's third-person promise is chased"
+    - "a customer or lost-deal account holds on Work and on the tomorrow preview after a restart, with no page visit"
+    - "the tomorrow preview offers no outreach where a reply waits or a do not contact is recorded"
+    - "the story names the person who replied (resolved from the address)"
+    - "a recorded reply's card clears on the next Refresh; its answer stays owed until sent or copied"
+    - "Prepared on a meeting card closes the day: Work says Done for today"
+    - "the Work card's action equals the account page's NEXT for an approved story not in use, before any visit"
+    - "the Accounts search finds an account GAP has not worked; an unlinked account says no HubSpot company is linked"
+    - "after one send on a single-touch family: Touch 1 sent and the follow-up day; one motion line with a name"
+  decide: "DECIDED by the lead 2026-10-07: the analyst tables lower on /gap/learning keep their words (sequence version ids, VERIFIED_FACT, program keys), analyst words by contract (R60)"
+r63_seller_tasks:
+  - work today's list
+  - handle a reply (Log what they said, one capture)
+  - prepare a first touch
+  - record a note
+  - resume tomorrow
+  - a no-action account
+  - an unsupported-data account
+  - the accessibility and trust pass
+r64_release_requirements:
+  - "a PR from feat/gap-account-first-ux to main with the attribution lines"
+  - "merge; Vercel production READY on that SHA"
+  - "the one named additive production write: GAP_OS_ENABLED=true npx tsx scripts/gap/seed-families.ts --apply --remote (the script is scripts/gap/seed-families.ts; scripts/gap/sequences/ does not exist), after its dry run without --apply"
+  - "the stranded PepsiCo draft cmux0uu7r0003jw0450gb4kno repaired through the page (drafting from the Tulsa fact for Tom adopts it) before 2026-11-20, the fact's expiry; the read-only dry run first"
+  - "read-only smoke: scripts/gap/verify-triggers.ts, the pages signed in"
+  - "a canary window before the next change"
+  - "rollback: redeploy 672570ed (no schema delta on the branch)"
+r65_requirements:
+  counts: [stranded drafts, incomplete proposals, dead-letter signals, queue age, research freshness and cost, preparation latency, seller corrections, outcomes, R54 sync failures]
+  where: "GET /api/gap/health?operations=1 (the operator: failures with owners and retry paths); /gap/learning (Casey: decisions only, with outcomes and research cost)"
+  dry_run: "scripts/gap/recovery/repair-stranded-drafts.ts --dry-run [--json]; refuses without --dry-run; a read-only client; tests/unit/gap/r65-stranded-repair.test.ts and tests/unit/gap/scratch/stranded-repair.scratch.test.ts"
+  runbook: "docs/gap/RUNBOOK.md on feat/gap-matrix at caa0772c (a43b46b3 on origin)"
+  debt: "the consolidated debt list directly above this block, each with its owner and guard"
+enabled_vs_code_complete_disabled:
+  production_flags:   # the GAP CORE LIVE block and R00, unless said
+    GAP_OS_ENABLED: "on"
+    GAP_HYPOTHESIS_ENABLED: "on"
+    GAP_ROUTING_ENABLED: "on"
+    GAP_MESSAGE_COMPILER_ENABLED: "on"
+    GAP_REPLY_CLASSIFICATION_ENABLED: "on"
+    GAP_BACKGROUND_RESEARCH_ENABLED: "on (R00, on the cron schedule)"
+    GAP_HUBSPOT_SEQUENCE_PUBLISH_ENABLED: "off"
+    GAP_AUTO_ENROLL_ENABLED: "off"
+    GAP_AUTO_ENROLL_SHADOW: "off"
+    GAP_HUBSPOT_MIRROR_ENABLED: "off"
+    GAP_CRM_APPROVED_WRITES_ENABLED: "unset (added on this branch; default off; stays off)"
+    GAP_TRANSCRIPTION_ENABLED: "unset (R00: transcription disabled pending its spend)"
+  code_complete_but_off:
+    - "approved HubSpot writes (R54, GAP_CRM_APPROVED_WRITES_ENABLED): proposals and approvals record; nothing is written"
+    - "the automatic HubSpot mirror (GAP_HUBSPOT_MIRROR_ENABLED)"
+    - "auto-enroll and its shadow"
+    - "HubSpot sequence publishing"
+    - "dictation (transcription)"
+    - "the transport sink and the HubSpot base-path override: test harness only; refused under VERCEL_ENV=production (f4b3c70f)"
+environment:
+  postgres: "embedded, postgresql://postgres:scratch@127.0.0.1:55432/gap_finish_e2e; reset with the scratchpad reset-scratch.sh (schema, hand SQL, 33 guards, families)"
+  stub: "node scripts/gap/recovery/stubs.mjs 4545 (HubSpot and clawd), STUB_DEALS_FILE and STUB_COMPANIES from the seed"
+  seed: "scripts/gap/recovery/seed-corpus.ts (and seed-matrix.ts on feat/gap-matrix)"
+  env: "scratch-env.sh: GAP flags on, GAP_SEND_TRANSPORT=sink, HUBSPOT_API_BASE_PATH at the stub, DATABASE_URL at the scratch database"
+  build_and_serve: "npm run build, then next start -p 3100 (NODE_ENV=production, PORT unset)"
+  session: "AUTH_SECRET=<scratch secret> node mint-cookie.mjs, sent as authjs.session-token"
+  rules: "scratch tests with --maxWorkers=1 (one shared database); stop the server and the stub after a run"
+test_receipts:
+  r61_run: {sha: e66a9853, source: "as reported at the R61 checkpoint; not repeated in the ledger", typecheck: clean, gap: "390 files / 5,593 tests", scratch: "8 files / 47 tests", rest: "326 files / 2,298 tests, 1 skipped", journeys: "r5-exit/ 11 steps; r60-final/ 7 of 7"}
+  latest: {sha: c9cff73b, typecheck: "npx tsc --noEmit -p . (clean, 8 s)", lint: "npx eslint .: 1,045 errors and 84 warnings, all present at 672570ed; the branch adds none after ba29d430", gap: "npx vitest run tests/unit/gap/<four chunks> --maxWorkers=2: 445 files / 5,765 tests, 278 s", scratch: "GAP_SCRATCH_DATABASE_URL=<scratch> npx vitest run tests/unit/gap/scratch --maxWorkers=1: 9 files / 50 tests, 33 s", rest: "npx vitest run --maxWorkers=2 --exclude tests/unit/gap/**: 328 files / 2,311 passed, 1 skipped, 156 s", build: "npm run build: compiled, 99 s, BUILD_ID 5wDGj3pLDgnc1LvFwrTXM", journeys: "r64/journeys/ 15 of 15 checks on the rebuilt server (PID 26584), zero HubSpot writes", forced_fixes: "ba29d430 (lint), c9cff73b (a test pinned the old citation name)"}
+  r62_final_307f3ee6: "e972efbc (the Coverage tie): r62-crm-tie 2, crm-sync 22, deal-artifacts 10, s5-review-recap 3, coverage 10, coverage-page 1, deal-brief 18, singly, green; a red mutation; eslint and tsc clean on the touched files. The merge 307f3ee6: src diff from c9cff73b is the fix alone; whole-project tsc has 4 errors in the merged matrix test files (acceptB's; next build skips test files); no full suite, no rebuild (Vercel builds the merge)"
+  matrix_types_e8163c33: "the four matrix type errors fixed, types only: npx tsc --noEmit -p . clean (7 s); eslint clean on matrix-dependencies, matrix-identity and matrix-pepsi; the files run on 55433 (acceptB)"
+  gates_4e936a90: {sha: 4e936a90, typecheck: "npx tsc --noEmit -p . (clean)", gap: "npx vitest run tests/unit/gap/<four chunks> --maxWorkers=2: 403 files / 5,653 tests", scratch: "GAP_SCRATCH_DATABASE_URL=<scratch> npx vitest run tests/unit/gap/scratch --maxWorkers=1: 9 files / 50 tests", rest_e5b0b567: "npx vitest run --maxWorkers=2 --exclude tests/unit/gap/**: 326 files / 2,299 passed, 1 skipped", build_e5b0b567: "npm run build: compiled", journeys_a0f6bb77: "r62-exit2/ 12 steps and r62-capture2/ 6 steps, zero internal-text hits, zero HubSpot writes", r65_live_e5b0b567: "r65-live/"}
+  after_4e936a90: "16971d2c and d9902641: focused tests only under the load cap (r60-capture-reply 11, capture-once and capture 25, r65-operations and learning-dashboard 19), each with a red mutation"
+  r63_fix_3fe2c39e: "8f7c20d5 and 3fe2c39e: eight files run singly with --maxWorkers=1, 41 tests (r63-opt-out-send 4, r63-compose-on-gap 2, email-send-routes 11, queue-send-deps 10, warm-intro-writers 7, perform-send-parity 3, campaign-tag-flow 2, b4-unsubscribe-case-insensitive 2), a red mutation on each fix; eslint and tsc clean"
+  r63_b_b63f2e69: "77261d91..b63f2e69: the 19 R63 test files run singly with --maxWorkers=1, 59 tests green; neighbors run singly at each commit; a red mutation on each fix; eslint and tsc clean; no full suite, no build"
+  r63_a_772de979: "0fad39a5..772de979: the 43 R63 test files (R63-B and R63-A) run singly with --maxWorkers=1, 115 tests green; neighbors run singly at each commit; a red mutation on each fix; eslint and tsc clean; no full suite, no build"
+  r63_a_1b240b19: "after 2684beae (S13's link) and 1b240b19 (N10's title): the 44 R63 test files run singly with --maxWorkers=1, 116 tests green; a red mutation on each; eslint and tsc clean; no full suite, no build"
+genuine_blockers: []
+```
 
 ## 12. Migration, backfill and rollback
 

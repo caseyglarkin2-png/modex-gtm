@@ -1,27 +1,36 @@
 'use client';
 
 /**
- * OPENING STORY (the outreach anchor; account-first UX, UX-06, Option A): for the chosen person, the one reviewed
- * story the email opening is built on, and the honest alternatives. Renders the pure projection
- * (lib/gap/story/anchor.ts); never ranks, never writes copy.
+ * OPENING STORY (the outreach anchor; account-first UX, UX-06, Option A; execution recovery R11/R12, 2026-10-06):
+ * for the chosen person, the one reviewed story the email opening is built on, and the honest alternatives. Renders
+ * the pure projection (lib/gap/story/anchor.ts); never ranks, never writes copy.
  *
  *   in the open    the primary anchor (its sentence, source, basis), why this person cares (Our read)
+ *   PROPOSALS      a thesis drafted from a checked fact, where the action lives: the exact opening sentence, the
+ *                  guess, the person, what would prove it wrong, the problem family and its basis, and ONE labeled
+ *                  review control (APPROVE AND USE: the existing audited submit/approve/activate transitions through
+ *                  PATCH /api/gap/hypotheses/[id] {advance}). Send stays a separate explicit action. An incomplete
+ *                  proposal asks the one question that completes it (the problem family); a refused submit says why
+ *                  and stays editable. A proposal never hides its fact.
  *   one disclosure best proof (YardFlow's, clearly ours), the supporting fact, the do-not-use list
  *   one disclosure USE A DIFFERENT STORY (the other theses; choosing one records anchorHypothesisId on the person's
  *                  angle row through POST /api/gap/personas/[id]/anchor and the page re-renders on that thesis) and
- *                  DRAFT A THESIS from a checked fact no thesis is grounded on (a prefilled draft through the
- *                  existing hypothesis authority: POST /api/gap/hypotheses, then submit; review happens in the
- *                  cockpit's REVIEW lane). Never straight into copy.
+ *                  DRAFT A THESIS from a checked fact no thesis is grounded on (POST /api/gap/story/draft: the one
+ *                  service that gates the fact, derives the family with a basis, keeps one draft per fact and person,
+ *                  and submits a complete draft for review in the same call). Never straight into copy.
  *
  * Nothing here sends, enrolls, writes HubSpot or spends Apollo. Voice: no em dashes.
  */
 import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import type { OutreachAnchor } from '@/lib/gap/story/anchor';
+import type { AnchorPending, OutreachAnchor } from '@/lib/gap/story/anchor';
 import { PRIMARY_BY_TEXT } from '@/lib/gap/story/anchor-text';
+import { familyChoices, label as familyLabel } from '@/lib/gap/story/propose-family';
 import { OBSERVATION_REFUSAL_TEXT } from '@/lib/gap/hypothesis/observation';
 import { Tag } from './seller-tag';
+import { draftDefaultsForFact, storyDraftPayload } from '@/lib/gap/story/draft-defaults';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 const BTN = 'inline-flex min-h-11 items-center justify-center rounded-md px-3 text-sm font-medium';
 const OUTLINE = `${BTN} border border-[var(--border)] hover:bg-[var(--muted)] disabled:opacity-60`;
@@ -30,19 +39,26 @@ const TEXT = 'inline-flex min-h-9 items-center text-xs underline text-[var(--mut
 const SUMMARY = 'group-open:hidden';
 const SUMMARY_OPEN = 'hidden group-open:inline';
 
-/** The seller's persona key for a title (the propose API's enum); a title that names nothing is supply_chain. */
-export function personaKeyFor(title: string | null): string {
-  const t = (title ?? '').toLowerCase();
-  if (/\b(chief|coo|cso|csco|evp|executive vice)\b/.test(t)) return 'executive_ops';
-  if (/automation|robotic|engineering/.test(t)) return 'automation';
-  if (/transport|freight|fleet|carrier|linehaul|line haul/.test(t)) return 'transportation';
-  if (/distribution|warehous|fulfil|\bdc\b/.test(t)) return 'distribution';
-  if (/plant|site|facility|yard|gate|dock/.test(t)) return 'site_ops';
-  if (/security|compliance|safety/.test(t)) return 'security';
-  if (/finance|procure|sourcing/.test(t)) return 'finance_procurement';
-  if (/technology|systems|digital|it\b/.test(t)) return 'technology';
-  return 'supply_chain';
-}
+// R35: the persona key and the draft text live in one lib module, so Ask GAP's proposal posts the same payload.
+export { personaKeyFor } from '@/lib/gap/story/draft-defaults';
+
+/** Plain words for a refused transition (the machine's stable reasons). */
+export const TRANSITION_REFUSAL_TEXT: Record<string, string> = {
+  unmapped_family: 'The problem family is missing: choose the problem this fact points at.',
+  copy_not_installed: 'No first-touch copy is installed for this thesis yet: its copy family must be seeded first.',
+  evidence_insufficient: 'The send gate would refuse this opening: its fact is not verified outreach evidence any more.',
+  no_evidence: 'No evidence is linked to this thesis.',
+  evidence_expired: 'Its evidence has expired.',
+  opener_too_long: 'The opening quote is longer than a first touch can carry.',
+  no_persona: 'No person is assigned to this thesis.',
+  suppressed: 'That person is on the suppression list: nothing can be prepared for them.',
+  persona_left_account: 'That person has left the account.',
+  persona_employment_conflict: 'That person\'s employer is in conflict: verify their role first.',
+  unhedged_hypothesis: 'Our guess must read as a guess (my guess, likely, might).',
+  no_falsification: 'Say what would prove the thesis wrong.',
+  stale_status: 'The thesis moved under you: the page is refreshed.',
+};
+
 
 export interface OutreachAnchorViewProps {
   accountName: string;
@@ -51,7 +67,27 @@ export interface OutreachAnchorViewProps {
   coldTouchAllowed: boolean;
 }
 
-type Busy = { kind: 'switch' | 'draft'; id: string } | null;
+type Busy = { kind: 'switch' | 'draft' | 'review' | 'withdraw' | 'family'; id: string } | null;
+
+type DraftResponse = {
+  ok?: boolean;
+  hypothesisId?: string;
+  status?: string;
+  existing?: boolean;
+  existingVia?: 'same_fact' | 'open_work' | null;
+  family?: string;
+  familyBasis?: string | null;
+  preparation?: 'submitted' | 'incomplete' | 'draft' | 'in_use';
+  missing?: string[];
+  submitRefusal?: string | null;
+  error?: string;
+  detail?: string;
+};
+
+function refusalWords(code: string | null | undefined): string {
+  if (!code) return 'refused';
+  return (OBSERVATION_REFUSAL_TEXT as Record<string, string>)[code] ?? TRANSITION_REFUSAL_TEXT[code] ?? `refused (${code})`;
+}
 
 export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: OutreachAnchorViewProps) {
   const router = useRouter();
@@ -60,7 +96,9 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
   const [drafting, setDrafting] = useState<string | null>(null);
   const [observation, setObservation] = useState('');
   const [problem, setProblem] = useState('');
-  const [drafted, setDrafted] = useState<{ id: string; status: string } | null>(null);
+  const [falsification, setFalsification] = useState('');
+  const [familyPick, setFamilyPick] = useState<Record<string, string>>({});
+  const [drafted, setDrafted] = useState<{ id: string; preparation: string } | null>(null);
   // After a switch or a submit the clicked control unmounts: focus moves to the status line (WCAG 2.4.3).
   const noteRef = useRef<HTMLParagraphElement>(null);
   const person = anchor.person;
@@ -68,6 +106,7 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
   const p = anchor.primary;
   const usableAlternatives = anchor.alternatives.filter((t) => t.usable || t.status === 'review_required');
   const unusable = anchor.alternatives.filter((t) => !t.usable && t.status !== 'review_required');
+  const pending = anchor.pending ?? [];
   const storyCount = usableAlternatives.length + anchor.draftable.length;
 
   function announce(kind: 'status' | 'alert', text: string) {
@@ -87,7 +126,7 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
         return;
       }
       announce('status', `${first}'s opening now builds on that thesis. Nothing is sent; the email still runs every check.`);
-      router.refresh();
+      refreshNow(router);
     } catch (e) {
       announce('alert', e instanceof Error ? e.message : 'network error');
     } finally {
@@ -100,44 +139,138 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
     setNote(null);
     setDrafting(d.factId);
     setObservation(d.proposedObservation);
-    setProblem('My guess is that this change moves load onto the gates, yards and docks they run, and that is where site capacity is won or lost.');
+    // R31: the guess and the falsification are read off this fact (its change, its site, its approach), never one
+    // sentence for every account; both are editable before the draft goes to review.
+    const defaults = draftDefaultsForFact({ text: d.story, claimClass: d.claimClass, approach: d.approach ?? null });
+    setProblem(defaults.problem);
+    setFalsification(defaults.falsification);
+  }
+
+  /**
+   * The one draft call: gates the fact, derives or takes the family, one draft per fact and person, submits when
+   * complete. Item 3: a pending proposal posts ITS OWN person (`forPerson`), never the anchor's chosen one, so answering
+   * Kay's question never mints a draft for Tom.
+   */
+  async function postDraft(factId: string, text: { observation: string; problem: string; falsification?: string; factText?: string; approach?: string | null }, problemFamily: string | null, claimClass: string | null | undefined, forPerson?: { personaId: number | null; title: string | null }): Promise<DraftResponse | null> {
+    const who = forPerson ?? (person ? { personaId: person.personaId ?? null, title: person.title ?? null } : null);
+    const res = await fetch('/api/gap/story/draft', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(storyDraftPayload({ accountName, factId, claimClass, proposedObservation: text.observation, person: who, problem: text.problem, problemFamily, falsification: text.falsification ?? null, factText: text.factText ?? null, approach: (text.approach as never) ?? null })),
+    });
+    const body = (await res.json().catch(() => ({}))) as DraftResponse;
+    if (!res.ok || !body.hypothesisId) {
+      const code = body.detail ?? body.error ?? String(res.status);
+      // Item 2: a story set aside (or closed) says so in plain words; it is never reported as under review.
+      announce('alert', body.error === 'story_set_aside' || body.error === 'story_closed' ? `${body.detail ?? 'This story was set aside.'} Nothing was drafted.` : body.error === 'fact_not_outreach_evidence' ? `This fact would be refused by the send gate (${code}): nothing was drafted.` : `Could not draft the thesis: ${refusalWords(code)} Nothing changed.`);
+      return null;
+    }
+    return body;
+  }
+
+  function describe(body: DraftResponse): string {
+    const who = first ? ` for ${first}` : '';
+    if (body.preparation === 'submitted') return `${body.existing && body.existingVia === 'open_work' ? `${first ?? 'This person'} already had this thesis open: it is` : 'Drafted and'} under review below${who}. Approve it there and the first touch is prepared. Nothing is sent.`;
+    if (body.preparation === 'incomplete') return `Drafted${who}. One thing is missing: which problem this fact points at. Choose it below and it goes to review.`;
+    if (body.preparation === 'in_use') return `This story is already approved and in use${who}: nothing new was drafted.`;
+    return `Drafted${who}, not yet submitted: ${refusalWords(body.submitRefusal)}`;
   }
 
   async function submitDraft(d: OutreachAnchor['draftable'][number]) {
     setNote(null);
     setBusy({ kind: 'draft', id: d.factId });
     try {
-      const propose = await fetch('/api/gap/hypotheses', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({
-          accountName,
-          primaryPersonaId: person?.personaId ?? null,
-          persona: personaKeyFor(person?.title ?? null),
-          problemFamily: 'unmapped',
-          observation,
-          problemHypothesis: problem,
-          rootCauseHypotheses: [],
-          impactHypotheses: [],
-          falsificationQuestions: ['How do trailers get checked in and found at the sites this change touches today?'],
-          whatANoMeans: 'If trailers do not wait longer at those sites since the change, it moved no load onto the yard: this thesis is closed for them.',
-          confidence: 40,
-          signalIds: [d.factId],
-        }),
-      });
-      const body = (await propose.json().catch(() => ({}))) as { id?: string; error?: string; reason?: string };
-      if (!propose.ok || !body.id) {
-        const code = body.reason ?? body.error ?? String(propose.status);
-        announce('alert', (OBSERVATION_REFUSAL_TEXT as Record<string, string>)[code] ?? `Could not draft the thesis (${code}). Nothing changed.`);
+      const body = await postDraft(d.factId, { observation, problem, falsification, factText: d.story, approach: d.approach ?? null }, null, d.claimClass);
+      if (!body) return;
+      setDrafted({ id: body.hypothesisId!, preparation: body.preparation ?? 'draft' });
+      setDrafting(null);
+      announce('status', describe(body));
+      refreshNow(router);
+    } catch (e) {
+      announce('alert', e instanceof Error ? e.message : 'network error');
+    } finally {
+      setBusy(null);
+    }
+  }
+
+  /** The one question on an incomplete proposal: the problem family. Same service, same draft, then review. */
+  async function setFamily(item: AnchorPending) {
+    const family = familyPick[item.hypothesisId] ?? item.suggestedFamily ?? '';
+    if (!family) {
+      announce('alert', 'Choose the problem this fact points at first.');
+      return;
+    }
+    setNote(null);
+    setBusy({ kind: 'family', id: item.hypothesisId });
+    try {
+      const body = await postDraft(item.factId, { observation: item.observationRaw, problem: item.problem }, family, item.claimClass, item.personaId != null ? { personaId: item.personaId, title: item.personTitle ?? null } : undefined);
+      if (!body) return;
+      announce('status', describe(body));
+      refreshNow(router);
+    } catch (e) {
+      announce('alert', e instanceof Error ? e.message : 'network error');
+    } finally {
+      setBusy(null);
+    }
+  }
+
+  /** APPROVE AND USE: the existing audited transitions (submit if needed, approve, activate, route) in one labeled click. */
+  async function approveAndUse(item: AnchorPending) {
+    setNote(null);
+    setBusy({ kind: 'review', id: item.hypothesisId });
+    try {
+      const res = await fetch(`/api/gap/hypotheses/${encodeURIComponent(item.hypothesisId)}`, { method: 'PATCH', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ advance: 'approve_and_use' }) });
+      const body = (await res.json().catch(() => ({}))) as { ok?: boolean; to?: string | null; detail?: string; reason?: string; error?: string };
+      if (!res.ok || body.ok === false) {
+        // Item 6: a refusal that names what is missing (the copy family to seed) says it in full.
+        const why = (body.reason ?? body.error) === 'copy_not_installed' && body.detail ? body.detail.replace(/^(?:approve refused|approved, but not in use): copy_not_installed: /, '') : refusalWords(body.reason ?? body.error);
+        announce('alert', `Not approved: ${why} ${body.to === 'approved' ? 'It is approved but not in use.' : 'Nothing changed.'}`);
+        refreshNow(router);
         return;
       }
-      // Submit for review through the same transition every thesis takes; approval stays a human click in REVIEW.
-      const submit = await fetch(`/api/gap/hypotheses/${encodeURIComponent(body.id)}`, { method: 'PATCH', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action: 'submit' }) });
-      const sub = (await submit.json().catch(() => ({}))) as { status?: string; error?: string };
-      setDrafted({ id: body.id, status: submit.ok ? sub.status ?? 'review_required' : 'draft' });
-      setDrafting(null);
-      announce('status', submit.ok ? 'Drafted and submitted for review. Approve it in the REVIEW lane; the opening then builds on it.' : `Drafted (${sub.error ?? submit.status}); submit it from the REVIEW lane.`);
-      router.refresh();
+      announce('status', `Approved and in use${first ? ` for ${first}` : ''}: the opening now builds on this story. The email is still a separate step and runs every check.`);
+      refreshNow(router);
+    } catch (e) {
+      announce('alert', e instanceof Error ? e.message : 'network error');
+    } finally {
+      setBusy(null);
+    }
+  }
+
+  /** USE THIS STORY: an approved thesis not yet in use is activated and routed through the same audited advance. */
+  // A click handler, not a hook: named so the hooks rule never reads it as one (the whole-project lint gate).
+  async function putPrimaryInUse(hypothesisId: string) {
+    setNote(null);
+    setBusy({ kind: 'review', id: hypothesisId });
+    try {
+      const res = await fetch(`/api/gap/hypotheses/${encodeURIComponent(hypothesisId)}`, { method: 'PATCH', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ advance: 'approve_and_use' }) });
+      const body = (await res.json().catch(() => ({}))) as { ok?: boolean; to?: string | null; reason?: string; error?: string };
+      if (!res.ok || body.ok === false) {
+        announce('alert', `Not put in use: ${refusalWords(body.reason ?? body.error)} Nothing changed.`);
+        refreshNow(router);
+        return;
+      }
+      announce('status', `In use${first ? ` for ${first}` : ''}: the email is prepared on this story. Sending is still a separate step and runs every check.`);
+      refreshNow(router);
+    } catch (e) {
+      announce('alert', e instanceof Error ? e.message : 'network error');
+    } finally {
+      setBusy(null);
+    }
+  }
+
+  async function notThisStory(item: AnchorPending) {
+    setNote(null);
+    setBusy({ kind: 'withdraw', id: item.hypothesisId });
+    try {
+      const res = await fetch(`/api/gap/hypotheses/${encodeURIComponent(item.hypothesisId)}`, { method: 'PATCH', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action: 'withdraw', reason: 'not this story (set aside on the account page)' }) });
+      const body = (await res.json().catch(() => ({}))) as { error?: string };
+      if (!res.ok) {
+        announce('alert', `Could not set it aside (${body.error ?? res.status}). Nothing changed.`);
+        return;
+      }
+      announce('status', 'Set aside. The fact stays checked; GAP will not propose this story again unless something material changes.');
+      refreshNow(router);
     } catch (e) {
       announce('alert', e instanceof Error ? e.message : 'network error');
     } finally {
@@ -158,14 +291,22 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
             <p className="min-w-0 break-words text-sm">{p.observation}</p>
           </div>
           <p className="ml-1 text-xs text-[var(--muted-foreground)]">
-            {p.basis}; {p.status === 'active' ? 'an active thesis' : p.status === 'approved' ? 'an approved thesis' : p.status}; basis: {anchor.primaryBy ? PRIMARY_BY_TEXT[anchor.primaryBy] : 'none'}. The email is built on it and still runs every check.
+            {p.basis}; {p.status === 'active' ? 'an active thesis' : p.status === 'approved' ? 'an approved thesis, not yet in use' : p.status}; basis: {anchor.primaryBy ? PRIMARY_BY_TEXT[anchor.primaryBy] : 'none'}. The email is built on it and still runs every check.
           </p>
+          {p.status === 'approved' && coldTouchAllowed ? (
+            <div className="ml-1 flex flex-wrap items-center gap-2">
+              <button type="button" className={PRIMARY} disabled={busy !== null} onClick={() => void putPrimaryInUse(p.hypothesisId)} data-testid="anchor-use-primary">
+                {busy?.kind === 'review' && busy.id === p.hypothesisId ? 'Putting in use...' : 'Put this story in use'}
+              </button>
+              <span className="text-xs text-[var(--muted-foreground)]">Approved stories are put in use here; the email is then prepared on it. Nothing is sent.</span>
+            </div>
+          ) : null}
         </div>
       ) : (
         <p className="text-sm text-amber-700 dark:text-amber-400" data-testid="anchor-none">
           No usable thesis at {accountName} yet: nothing to open on.
           {unusable.length ? ` ${unusable.length === 1 ? 'The open thesis' : `${unusable.length} open theses`} would be refused by the send gate: ${unusable[0].unusableWhy}.` : ''}
-          {anchor.draftable.length ? ' A checked fact below can become a thesis (it goes to review).' : ' Open the research plan to find a fact; review grounds the thesis.'}
+          {pending.length ? ` ${pending.length === 1 ? 'A proposal' : `${pending.length} proposals`} below ${pending.length === 1 ? 'is' : 'are'} waiting for your review.` : anchor.draftable.length ? ' A checked fact below can become a thesis (it goes to review).' : (anchor.tooOld ?? []).length ? ' The checked stories here are too old for a first touch (below); open the research plan to find a current fact.' : ' Open the research plan to find a fact; review grounds the thesis.'}
         </p>
       )}
 
@@ -174,6 +315,83 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
           <Tag tag="Our read" />
           <p className="min-w-0 break-words text-sm">{anchor.whyTheyCare.text}</p>
         </div>
+      ) : null}
+
+      {pending.length ? (
+        <ul className="space-y-2" data-testid="anchor-pending-list" aria-label="Proposals waiting for your review">
+          {pending.map((item) => {
+            const mine = busy?.id === item.hypothesisId;
+            const heading = !item.familyKnown ? 'Proposal: one thing missing' : item.status === 'review_required' ? 'Proposal under review' : 'Proposal drafted, not yet submitted';
+            return (
+              <li key={item.hypothesisId} className="space-y-1.5 rounded-md border border-[var(--primary)] px-3 py-2" data-testid="anchor-pending" data-hypothesis={item.hypothesisId} data-status={item.status} data-family-known={item.familyKnown ? 'true' : 'false'}>
+                <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--primary)]">{heading}</p>
+                <div className="flex items-start gap-2">
+                  <Tag tag="Checked" />
+                  <p className="min-w-0 break-words text-sm" data-testid="anchor-pending-observation">{item.observation}</p>
+                </div>
+                {item.stale ? <p className="text-xs text-amber-700 dark:text-amber-400" data-testid="anchor-pending-stale">{item.stale} Set it aside; it cannot be approved for a first touch.</p> : null}
+                <p className="ml-1 text-xs text-[var(--muted-foreground)]">
+                  {item.sourceUrl ? <a href={item.sourceUrl} target="_blank" rel="noreferrer" className="underline">{item.sourceLabel}</a> : item.sourceLabel}. This is the sentence the opening is built on; nothing else from the source reaches the buyer.
+                </p>
+                <div className="flex items-start gap-2">
+                  <Tag tag="Our read" />
+                  <p className="min-w-0 break-words text-sm">{item.problem}</p>
+                </div>
+                <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 text-xs">
+                  <dt className="font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">For</dt>
+                  <dd>{item.personName ?? (item.personaId == null ? 'the account (no person yet)' : `person ${item.personaId}`)}</dd>
+                  <dt className="font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Problem</dt>
+                  <dd data-testid="anchor-pending-family">{item.familyKnown ? familyLabel(item.family) : 'not set yet'}</dd>
+                  {item.wouldProveWrong.length ? (
+                    <>
+                      <dt className="font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Would prove wrong</dt>
+                      <dd>{item.wouldProveWrong[0]}</dd>
+                    </>
+                  ) : null}
+                  <dt className="font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Send gate</dt>
+                  <dd>{item.gate === 'sendable' ? 'would let this opening out' : item.gate === 'refused' ? 'would refuse this opening' : 'judged at approval'}</dd>
+                </dl>
+                {item.stale ? (
+                  <div className="flex flex-wrap items-center gap-2">
+                    <button type="button" className={OUTLINE} disabled={busy !== null} onClick={() => void notThisStory(item)} data-testid="anchor-pending-withdraw">
+                      {mine && busy?.kind === 'withdraw' ? 'Setting aside...' : 'Not this story'}
+                    </button>
+                  </div>
+                ) : !item.familyKnown ? (
+                  <div className="flex flex-col gap-2 sm:flex-row sm:items-end" data-testid="anchor-pending-family-form">
+                    <label className="flex min-w-0 flex-1 flex-col gap-1 text-xs">
+                      <span>Which problem does this fact point at? Suggested: {item.suggestedFamily ? familyLabel(item.suggestedFamily) : 'none'}{item.suggestedBasis ? ` (${item.suggestedBasis})` : ''}</span>
+                      <select className="min-h-11 rounded-md border border-[var(--border)] bg-transparent px-2 text-sm" value={familyPick[item.hypothesisId] ?? item.suggestedFamily ?? ''} onChange={(e) => setFamilyPick((m) => ({ ...m, [item.hypothesisId]: e.target.value }))} data-testid="anchor-pending-family-select">
+                        {item.suggestedFamily ? null : <option value="">Choose one</option>}
+                        {familyChoices().map((c) => (
+                          <option key={c.family} value={c.family}>{c.label}: {c.problem}</option>
+                        ))}
+                      </select>
+                    </label>
+                    <button type="button" className={PRIMARY} disabled={busy !== null} onClick={() => void setFamily(item)} data-testid="anchor-pending-set-family">
+                      {mine && busy?.kind === 'family' ? 'Submitting...' : 'Submit for review with this problem'}
+                    </button>
+                    <button type="button" className={OUTLINE} disabled={busy !== null} onClick={() => void notThisStory(item)} data-testid="anchor-pending-withdraw">
+                      {mine && busy?.kind === 'withdraw' ? 'Setting aside...' : 'Not this story'}
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex flex-wrap items-center gap-2">
+                    {coldTouchAllowed || item.status === 'review_required' || item.status === 'draft' ? (
+                      <button type="button" className={PRIMARY} disabled={busy !== null || !coldTouchAllowed} title={coldTouchAllowed ? undefined : 'A hold on the account stops approval for use'} onClick={() => void approveAndUse(item)} data-testid="anchor-pending-approve">
+                        {mine && busy?.kind === 'review' ? 'Approving...' : 'Approve and use this story'}
+                      </button>
+                    ) : null}
+                    <button type="button" className={OUTLINE} disabled={busy !== null} onClick={() => void notThisStory(item)} data-testid="anchor-pending-withdraw">
+                      {mine && busy?.kind === 'withdraw' ? 'Setting aside...' : 'Not this story'}
+                    </button>
+                    <span className="text-xs text-[var(--muted-foreground)]">Approve runs the same checks every thesis takes; the email is a separate step. Nothing is sent.</span>
+                  </div>
+                )}
+              </li>
+            );
+          })}
+        </ul>
       ) : null}
 
       <details className="group text-sm" data-testid="anchor-more">
@@ -233,7 +451,7 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
                       <span className="text-xs text-[var(--muted-foreground)]"> ({t.basis}; {t.status === 'review_required' ? 'under review' : t.status}; {t.relevance.tier === 'none' ? 'off their remit' : `${t.relevance.tier} on their remit`})</span>
                     </p>
                     {t.status === 'review_required' ? (
-                      <Link href="/gap?lane=review" className={OUTLINE}>Review it</Link>
+                      <span className="text-xs text-[var(--muted-foreground)]">Review it above.</span>
                     ) : person?.personaId && coldTouchAllowed ? (
                       <button type="button" className={OUTLINE} disabled={busy !== null} onClick={() => void switchStory(t.hypothesisId)} data-testid="anchor-use-story">
                         {busy?.kind === 'switch' && busy.id === t.hypothesisId ? 'Switching...' : 'Use this story'}
@@ -259,7 +477,7 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
                     <div className="flex flex-col gap-1 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3">
                       <p className="min-w-0 flex-1 text-sm">
                         {d.story}
-                        <span className="text-xs text-[var(--muted-foreground)]"> ({d.sourceLabel}; no thesis yet)</span>
+                        <span className="text-xs text-[var(--muted-foreground)]"> ({d.sourceLabel}; no thesis yet){d.currentLine ? ` ${d.currentLine}` : ''}</span>
                       </p>
                       {drafting === d.factId ? null : (
                         <button type="button" className={OUTLINE} disabled={busy !== null} onClick={() => openDraft(d)} data-testid="anchor-draft-open">
@@ -288,12 +506,17 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
                           <textarea id={`anchor-problem-${d.factId}`} aria-describedby={`anchor-problem-help-${d.factId}`} className="mt-1 w-full rounded-md border border-[var(--border)] bg-transparent p-2 text-sm" rows={2} value={problem} onChange={(e) => setProblem(e.target.value)} data-testid="anchor-draft-problem" />
                           <p id={`anchor-problem-help-${d.factId}`} className="text-[var(--muted-foreground)]">What we think the change does to their yards, as a guess the buyer can refute.</p>
                         </div>
+                        <div className="text-xs">
+                          <label htmlFor={`anchor-falsification-${d.factId}`} className="font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">What would prove it wrong</label>
+                          <textarea id={`anchor-falsification-${d.factId}`} aria-describedby={`anchor-falsification-help-${d.factId}`} className="mt-1 w-full rounded-md border border-[var(--border)] bg-transparent p-2 text-sm" rows={2} value={falsification} onChange={(e) => setFalsification(e.target.value)} data-testid="anchor-draft-falsification" />
+                          <p id={`anchor-falsification-help-${d.factId}`} className="text-[var(--muted-foreground)]">The question whose answer would close this thesis.</p>
+                        </div>
                         <div className="flex flex-wrap items-center gap-2">
                           <button type="submit" className={PRIMARY} disabled={busy !== null} data-testid="anchor-draft-submit">
                             {busy?.kind === 'draft' ? 'Drafting...' : 'Submit for review'}
                           </button>
                           <button type="button" className={TEXT} onClick={() => setDrafting(null)}>Cancel</button>
-                          <span className="text-xs text-[var(--muted-foreground)]">Creates a draft thesis and submits it for review. Nothing is sent.</span>
+                          <span className="text-xs text-[var(--muted-foreground)]">Creates the thesis and puts it under review above, on this page. Nothing is sent.</span>
                         </div>
                       </form>
                     ) : null}
@@ -303,12 +526,32 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
             ) : null}
             {drafted ? (
               <p className="text-xs" data-testid="anchor-drafted">
-                Thesis {drafted.status === 'review_required' ? 'submitted for review' : 'drafted'}.{' '}
-                <Link href="/gap?lane=review" className="underline">Open the REVIEW lane</Link>
+                {drafted.preparation === 'submitted' ? 'Thesis under review above.' : drafted.preparation === 'in_use' ? 'This story is already in use above.' : drafted.preparation === 'incomplete' ? 'Thesis drafted; one thing to set above.' : 'Thesis drafted; see the reason above.'}{' '}
+                <Link href="#outreach-anchor" className="underline">Review it here</Link>
               </p>
             ) : null}
           </div>
         </details>
+      ) : null}
+      {(anchor.notAnOpening ?? []).length ? (
+        <ul className="space-y-1 text-xs text-[var(--muted-foreground)]" data-testid="anchor-not-an-opening" aria-label="Checked stories that are not an opening">
+          <li className="font-semibold uppercase tracking-wide">Not offered: not an opening</li>
+          {(anchor.notAnOpening ?? []).map((t) => (
+            <li key={t.factId} data-fact={t.factId}>
+              {t.story} ({t.sourceUrl ? <a href={t.sourceUrl} target="_blank" rel="noreferrer" className="underline">{t.sourceLabel}</a> : t.sourceLabel}). {t.line}
+            </li>
+          ))}
+        </ul>
+      ) : null}
+      {(anchor.tooOld ?? []).length ? (
+        <ul className="space-y-1 text-xs text-[var(--muted-foreground)]" data-testid="anchor-too-old" aria-label="Stories too old for a first touch">
+          <li className="font-semibold uppercase tracking-wide">Not offered: too old for a first touch</li>
+          {(anchor.tooOld ?? []).map((t) => (
+            <li key={t.factId} data-fact={t.factId}>
+              {t.story} ({t.sourceUrl ? <a href={t.sourceUrl} target="_blank" rel="noreferrer" className="underline">{t.sourceLabel}</a> : t.sourceLabel}). {t.line}
+            </li>
+          ))}
+        </ul>
       ) : null}
 
       <p ref={noteRef} tabIndex={-1} role="status" aria-live="polite" className="rounded text-xs outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]" data-testid="anchor-note">

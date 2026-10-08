@@ -47,7 +47,7 @@ describe('<ResearchThis> one human decision (debt burn, 2026-09-26)', () => {
     expect(fetchMock.mock.calls[1][0]).toBe('/api/gap/research/rr-1/propose');
     expect(JSON.parse(String(fetchMock.mock.calls[1][1].body))).toEqual({ personaIds: [1886, 1788] });
     expect(screen.queryByRole('button', { name: /propose/i })).toBeNull();
-    for (const label of ['Facts', 'Hypothesis', 'Root causes', 'Impacts', 'Would prove it wrong', 'Evidence']) expect(within(thesis).getByText(label)).toBeInTheDocument();
+    for (const label of ['Facts', 'What we think is happening', 'Root causes', 'Impacts', 'Would prove it wrong', 'Evidence']) expect(within(thesis).getByText(label)).toBeInTheDocument();
     expect(thesis).toHaveTextContent('KROGER CO 10-Q: "We opened a new DC in Ohio".');
     expect(thesis).not.toHaveTextContent('[S:');
     expect(thesis).toHaveTextContent('Gate check-in is manual');

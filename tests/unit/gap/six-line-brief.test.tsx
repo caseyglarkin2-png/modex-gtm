@@ -43,7 +43,7 @@ describe('buildBrief', () => {
     expect(b.think).toBe('Scheduled autonomous linehaul may move variability into the DC gate and yard.');
     expect(b.learn).toBe('How are trailers staged when autonomous arrivals bunch up?');
     expect(b.whyYou).toEqual({ text: 'Owns the NA beverage DC network.', owned: true });
-    expect(b.history).toEqual(['No GAP touches to Jordan yet', 'No one else at PepsiCo contacted in 30 days', 'No account reply waiting', 'HubSpot opportunity CLEAR, checked moments ago']);
+    expect(b.history).toEqual(['No GAP touches to Jordan yet', 'No one else at PepsiCo contacted in 30 days', 'No account reply waiting', 'No open HubSpot deal, checked moments ago']);
     expect(b.historyState).toBe('clear');
     expect(b.wrongIf).toBe('Their receiving and yard flow already absorb arrival variability without dwell.');
   });
@@ -59,7 +59,7 @@ describe('buildBrief', () => {
 
   it('HISTORY: an open deal, UNKNOWN truth or an untriaged account reply turns it blocked; a colleague in motion is caution', () => {
     expect(historyLines('J', 'PepsiCo', { ...clearHistory, opportunity: { status: 'ACTIVE', detail: '"YardFlow - PepsiCo"', checkedAt: '' } }).state).toBe('blocked');
-    expect(historyLines('J', 'PepsiCo', { ...clearHistory, opportunity: { status: 'UNKNOWN', detail: 'check HubSpot before contacting', checkedAt: '' } }).lines.at(-1)).toBe('HubSpot opportunity UNKNOWN: check HubSpot before contacting, checked moments ago');
+    expect(historyLines('J', 'PepsiCo', { ...clearHistory, opportunity: { status: 'UNKNOWN', detail: 'check HubSpot before contacting', checkedAt: '' } }).lines.at(-1)).toBe('HubSpot could not be checked: check HubSpot before contacting');
     expect(historyLines('J', 'PepsiCo', { ...clearHistory, accountReply: { from: 'a@pepsico.com', receivedAt: NOW.toISOString() } }).state).toBe('blocked');
     const c = historyLines('J', 'PepsiCo', { ...clearHistory, colleagueTouches: [{ recipient: 'vp@pepsico.com', sentAt: NOW.toISOString(), outstanding: false }] });
     expect(c.state).toBe('caution');
@@ -100,7 +100,7 @@ describe('<SixLineBriefView>', () => {
     render(<SixLineBriefView brief={b} personaId={7} accountName="PepsiCo" />);
     for (const id of ['brief-know', 'brief-think', 'brief-learn', 'brief-why-you', 'brief-history', 'brief-wrong-if']) expect(screen.getByTestId(id)).toBeInTheDocument();
     expect(screen.getByTestId('brief-know')).toHaveTextContent('✓ verified');
-    expect(screen.getByTestId('brief-think')).toHaveTextContent('Hypothesis (inference):');
+    expect(screen.getByTestId('brief-think')).toHaveTextContent('What we think is happening (our read):');
     expect(screen.getByTestId('brief-why-you')).toHaveTextContent('Suggested (not yours yet): Runs distribution at PepsiCo.');
     // One column below sm (no horizontal scroll on a phone), a label column from sm up.
     expect(screen.getByTestId('brief-know').className).toContain('grid-cols-1');
@@ -111,7 +111,7 @@ describe('<SixLineBriefView>', () => {
 describe('review E P1: the brief never overstates what it knows', () => {
   it('an EXPIRED verified fact is not known; the brief says when it expired', () => {
     const expired = { ...verifiedFact, freshness_expires_at: new Date('2026-09-01T00:00:00Z') };
-    expect(knowOf(hypothesis([{ role: 'primary', signal: expired }]), NOW)).toEqual({ fact: null, reason: 'The verified fact expired on 2026-09-01: it cannot be quoted to a buyer. Find fresh evidence.' });
+    expect(knowOf(hypothesis([{ role: 'primary', signal: expired }]), NOW)).toEqual({ fact: null, reason: 'This story is too old for a first touch: it was current until Aug 31, 2026. It cannot be quoted to a buyer. Find fresh evidence.' });
     const fresh = { ...verifiedFact, freshness_expires_at: new Date('2026-12-01T00:00:00Z') };
     expect(knowOf(hypothesis([{ role: 'primary', signal: fresh }]), NOW).fact).not.toBeNull();
   });

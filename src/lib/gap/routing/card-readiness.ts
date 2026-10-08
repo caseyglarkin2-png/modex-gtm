@@ -24,6 +24,7 @@
 import type { SuppressionClass } from '../suppression/provenance';
 import { SUPPRESSION_CLASS_COPY } from '../suppression/provenance';
 import { hubspotCompanyUrl, hubspotContactUrl, telHref } from './seller-action';
+import { recordReplyHref } from '../account-intel/href';
 
 export interface ReadinessInput {
   id: string;
@@ -47,6 +48,8 @@ export interface ReadinessInput {
    * fix point at REVIEW; otherwise REVIEW may be empty and the work is research.
    */
   reviewWaiting?: boolean;
+  /** Batch item 6 (R34): first-touch copy for this card's thesis; absent means not read (older callers). */
+  copy?: { installed: boolean; detail: string | null } | null;
   /** Multi-touch state for a card with a Gmail-proven sent touch (queue.ts TouchSummary). */
   touch?: { state: 'waiting' | 'due' | 'complete' | 'stopped' | 'unknown'; stepIndex?: number; dueAt?: string; reason?: string; detail?: string; sentCount: number } | null;
 }
@@ -74,8 +77,8 @@ export const RESEARCHABLE_RULES: ReadonlySet<string> = new Set(['evidence_thin',
 
 const WARNING_CLASSES: ReadonlySet<SuppressionClass> = new Set(['soft_deliverability', 'hard_invalid_address']);
 
-/** R3b / R3c: the account's opportunity state holds the card whatever its thesis is doing. */
-const OPPORTUNITY_HOLDS: ReadonlySet<string> = new Set(['active_opportunity', 'opportunity_unknown']);
+/** R3b / R3c / R3d (batch item 7, the corporate-family hold): the account's opportunity state holds the card whatever its thesis is doing. */
+const OPPORTUNITY_HOLDS: ReadonlySet<string> = new Set(['active_opportunity', 'opportunity_unknown', 'family_hold']);
 
 /** Where a draft hypothesis for any account is reviewed and approved: the cockpit REVIEW lane. */
 export const HYPOTHESIS_REVIEW_HREF = '/gap?lane=review';
@@ -131,9 +134,9 @@ export function reviewWaitsFor(item: { hypothesis: { id: string } | null; person
  * Casey is never sent to an empty REVIEW lane. Label and destination agree.
  */
 function hypothesisFix(item: ReadinessInput): Link {
-  if (item.reviewWaiting) return { label: 'Review the waiting hypothesis', href: HYPOTHESIS_REVIEW_HREF };
+  if (item.reviewWaiting) return { label: 'Review the waiting thesis', href: HYPOTHESIS_REVIEW_HREF };
   const href = `/gap?lane=research#card-${encodeURIComponent(item.id)}`;
-  return item.hypothesis ? { label: 'Find verified evidence', href } : { label: 'Research to propose a hypothesis', href };
+  return item.hypothesis ? { label: 'Find verified evidence', href } : { label: 'Research to propose a thesis', href };
 }
 
 export function cardReadiness(item: ReadinessInput): CardReadiness {
@@ -187,12 +190,12 @@ function readinessOf(item: ReadinessInput): CardReadiness {
       case 'due':
         return {
           state: 'actionable',
-          primary: item.hypothesis ? { label: `Follow up: touch ${nth}`, href: cockpitOpenHref('follow_up', item.id) } : { label: `Follow up: touch ${nth} is due`, href: null, note: 'No hypothesis on this card to render the follow-up from.' },
+          primary: item.hypothesis ? { label: `Follow up: touch ${nth}`, href: cockpitOpenHref('follow_up', item.id) } : { label: `Follow up: touch ${nth} is due`, href: null, note: 'No thesis on this card to render the follow-up from.' },
           secondary: [],
         };
       case 'stopped':
         return t.reason === 'replied'
-          ? { state: 'actionable', primary: { label: 'Replied: sequence stopped. Log the reply', href: '/gap?lane=replies' }, secondary: [] }
+          ? { state: 'actionable', primary: { label: 'Replied: sequence stopped. Record the reply', href: recordReplyHref(item.account.name) }, secondary: [] }
           : { state: 'actionable', primary: { label: `Sequence stopped`, href: null, note: t.detail ?? 'A stop rule fired.' }, secondary: [] };
       case 'complete':
         return { state: 'actionable', primary: { label: 'Sequence complete', href: null, note: `All ${t.sentCount} touches sent.` }, secondary: [] };
@@ -215,8 +218,11 @@ function readinessOf(item: ReadinessInput): CardReadiness {
   switch (item.action) {
     case 'enroll_gap_sequence':
     case 'one_off_email': {
-      if (!item.hypothesis) return withWarning({ state: 'missing_prerequisite' as const, missing: `No hypothesis covers ${name} at ${item.account.name}, so there is no email to send.`, fix: hypothesisFix(item) });
+      // R63 matrix: the R60 vocabulary in body text too: a thesis, never "hypothesis".
+      if (!item.hypothesis) return withWarning({ state: 'missing_prerequisite' as const, missing: `No thesis covers ${name} at ${item.account.name}, so there is no email to send.`, fix: hypothesisFix(item) });
       if (!item.persona.email) return withWarning({ state: 'missing_prerequisite' as const, missing: `No email address on file for ${name}.`, fix: contactFix(item, 'Add an email in HubSpot') });
+      // Item 6 (R34): no installed copy for the thesis means no email to send: never READY, and say what to seed.
+      if (item.copy && !item.copy.installed) return withWarning({ state: 'missing_prerequisite' as const, missing: item.copy.detail ?? 'No first-touch copy is installed for this thesis.', fix: hypothesisFix(item) });
       return withWarning({ state: 'actionable' as const, primary: openPack!, secondary: [] });
     }
     case 'call_now': {
@@ -230,7 +236,7 @@ function readinessOf(item: ReadinessInput): CardReadiness {
       return withWarning({ state: 'actionable' as const, primary: { label: `Message ${name} on LinkedIn`, href: li, cold: 'linkedin' as const }, secondary: openPack ? [openPack] : [] });
     }
     case 'approve_hypothesis':
-      return withWarning({ state: 'actionable' as const, primary: { label: 'Review the hypothesis', href: HYPOTHESIS_REVIEW_HREF }, secondary: [] });
+      return withWarning({ state: 'actionable' as const, primary: { label: 'Review the thesis', href: HYPOTHESIS_REVIEW_HREF }, secondary: [] });
     case 'nurture':
       // R3b: an open HubSpot deal (or a meeting / positive reply) at this account. Hold, and say why.
       if (item.ruleId === 'active_opportunity') {
@@ -239,6 +245,14 @@ function readinessOf(item: ReadinessInput): CardReadiness {
           state: 'actionable' as const,
           primary: { label: 'Hold: active opportunity', href: null, note: `${item.account.name} already has an active opportunity (an open HubSpot deal, a meeting or a positive reply). Work it from the deal, not a cold first touch.` },
           secondary: company ? [{ label: 'Open the account in HubSpot', href: company }] : [],
+        });
+      }
+      // R3d (batch item 7): a parent, subsidiary or sibling in a live motion holds a cold one here, as the click does.
+      if (item.ruleId === 'family_hold') {
+        return withWarning({
+          state: 'actionable' as const,
+          primary: { label: 'Hold: related account', href: null, note: `A related account in the ${item.account.name} corporate family is in a live deal, conversation or first touch. No cold motion here until it settles. The routing details name it.` },
+          secondary: [],
         });
       }
       return withWarning({
@@ -252,11 +266,11 @@ function readinessOf(item: ReadinessInput): CardReadiness {
         case 'no_hypothesis':
           // The router looks for this person's own hypothesis, then an account-level one; the account may
           // still have hypotheses written for OTHER people (Kroger does), so never claim it has none.
-          return withWarning({ state: 'missing_prerequisite' as const, missing: `No hypothesis covers ${name} at ${item.account.name} yet, so there is no outreach to prepare for this person.`, fix: hypothesisFix(item) });
+          return withWarning({ state: 'missing_prerequisite' as const, missing: `No thesis covers ${name} at ${item.account.name} yet, so there is no outreach to prepare for this person.`, fix: hypothesisFix(item) });
         case 'evidence_thin':
           return withWarning({
             state: 'missing_prerequisite' as const,
-            missing: `The hypothesis for ${item.account.name} rests only on an automated keyword hit (a filing that "mentions capital expenditure"), which is not a reason to contact ${name}. Add one sourced, quoted fact about a distribution center, dock, yard or site change (a DC opening, expansion, consolidation or automation program, or a yard, gate or dock job posting) and link it to the hypothesis.`,
+            missing: `The thesis for ${item.account.name} rests only on an automated keyword hit (a filing that "mentions capital expenditure"), which is not a reason to contact ${name}. Add one sourced, quoted fact about a distribution center, dock, yard or site change (a DC opening, expansion, consolidation or automation program, or a yard, gate or dock job posting) and link it to the thesis.`,
             fix: hypothesisFix(item),
           });
         case 'bounced_or_invalid':
@@ -266,7 +280,7 @@ function readinessOf(item: ReadinessInput): CardReadiness {
         case 'tam_unknown':
           return withWarning({ state: 'missing_prerequisite' as const, missing: `${item.account.name} has no verified TAM status.`, fix: accountFix(item, 'Verify TAM on the account') });
         case 'hyp_stale':
-          return withWarning({ state: 'missing_prerequisite' as const, missing: 'The hypothesis rests on stale or expired evidence.', fix: hypothesisFix(item) });
+          return withWarning({ state: 'missing_prerequisite' as const, missing: 'The thesis rests on stale or expired evidence.', fix: hypothesisFix(item) });
         case 'disp_wrong_person':
           return withWarning({ state: 'missing_prerequisite' as const, missing: `The last reply said ${name} is the wrong person. Find the right contact.`, fix: accountFix(item, 'Find the right person') });
         default:

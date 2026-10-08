@@ -686,7 +686,7 @@ export async function captureSignal(
 
 // ---------------------------------------------------------------- seller status
 
-export type SignalStatus = 'Captured' | 'Needs you' | 'Researching' | 'Fact ready' | 'Nothing usable' | 'Ignored' | 'Context kept';
+export type SignalStatus = 'Captured' | 'Needs you' | 'Researching' | 'Fact ready' | 'Nothing usable' | 'Research failed' | 'Ignored' | 'Context kept';
 
 export interface StatusInput {
   url: string | null;
@@ -732,6 +732,12 @@ export function signalStatus(s: StatusInput): {
       return {
         status: 'Needs you',
         detail: 'Sources disagree. Decide which side you believe in Research.',
+      };
+    case 'research_failed':
+      // Batch item 10 (R25): the dead letter: research could not run, which says nothing about the story.
+      return {
+        status: 'Research failed',
+        detail: 'Research failed three times (the provider did not answer, or the run did not finish). This is not "nothing usable": press Research to try again.',
       };
     case 'no_usable_fact':
       return {

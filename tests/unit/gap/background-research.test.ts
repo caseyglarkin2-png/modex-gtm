@@ -116,6 +116,20 @@ describe('runBackgroundResearch', () => {
     expect(db.runs[0].provider_status).toMatchObject({ purpose: 'gap_background_research', targetReason: 'fresh_trigger', triggerTitle: 'PepsiCo expands autonomous freight' });
   });
 
+  it('R33 (batch item 5): with GAP_HYPOTHESIS_ENABLED on, the closeout prepares a proposal from the verified claim with no press, and the run says which', async () => {
+    process.env.GAP_HYPOTHESIS_ENABLED = 'true';
+    try {
+      const db = recordingDb({ triggers: [{ account_name: 'PEPSICO', title: 'PepsiCo expands autonomous freight', first_seen_at: daysAgo(1), published_at: daysAgo(1) }] });
+      const prepare = vi.fn(async (_p: unknown, i: { facts: Array<{ signalId: string }> }) => i.facts.map((f) => ({ factId: f.signalId, outcome: 'prepared' as const, hypothesisId: 'h-auto', preparation: 'submitted', approach: 'event_led' })));
+      const r = await runBackgroundResearch(db.prisma, { now: NOW }, { ...research([webFact()]), loadGroups: noGroups, listQueue: noQueue, prepare: prepare as never });
+      expect(prepare).toHaveBeenCalledTimes(1);
+      expect(prepare.mock.calls[0][1]).toMatchObject({ accountName: 'PepsiCo', actor: BACKGROUND_ACTOR, facts: [expect.objectContaining({ fresh: true })] });
+      expect(r.researched[0]).toMatchObject({ outcome: 'evidence_found', prepared: ['h-auto'] });
+    } finally {
+      delete process.env.GAP_HYPOTHESIS_ENABLED;
+    }
+  });
+
   it('when nothing verifies, the account gets an explicit answer (insufficient evidence + rejected reasons), still no other writes', async () => {
     const db = recordingDb({ triggers: [{ account_name: 'PepsiCo', title: 't', first_seen_at: daysAgo(1), published_at: null }] });
     const r = await runBackgroundResearch(db.prisma, { now: NOW }, { ...research([{ ...webFact(), excerpt: 'PepsiCo will open a brand new distribution center in Ohio next spring.' }]), loadGroups: noGroups, listQueue: noQueue });

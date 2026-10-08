@@ -61,7 +61,7 @@ describe('account motion', () => {
     for (const over of [{}, { personas: [] }, { personas: [{ ...person, hasEmail: false }], facts: [] }]) {
       const b = buildAccountBrief(inputs({ ...dannon, ...over }), NOW);
       expect(b.motion).toMatchObject({ type: 'INTRO_ONLY', who: 'Mark Shaughnessy' });
-      expect(b.glance.nextAction).toMatch(/^Ask Mark Shaughnessy for the introduction to the Danone CSCO office/);
+      expect(b.glance.nextAction).toMatch(/^Ask Mark Shaughnessy for the introduction to the Danone Chief Supply Chain Officer's office/);
       expect(b.glance.nextAction).not.toMatch(/Research first|first touch/);
     }
     // an alias recorded on another account name is enough
@@ -98,7 +98,9 @@ describe('account motion', () => {
 
 describe('review E fixes', () => {
   it('a buyer who said no is never a follow-up', () => {
-    expect(motion({ conversation: { who: 'dana@acme.example', responseClass: 'do_not_contact', at: '2026-09-20T00:00:00Z' } })).toMatchObject({ type: 'NO_GOOD_MOTION', why: expect.stringMatching(/No new outreach/) });
+    // R63-B S1: a do not contact is said as it is, never temporary.
+    expect(motion({ conversation: { who: 'dana@acme.example', responseClass: 'do_not_contact', at: '2026-09-20T00:00:00Z' } })).toMatchObject({ type: 'NO_GOOD_MOTION', why: expect.stringMatching(/^Do not contact: dana@acme\.example asked not to be contacted .*Nothing goes to them from here\.$/) });
+    expect(motion({ conversation: { who: 'dana@acme.example', responseClass: 'meeting_declined', at: '2026-09-20T00:00:00Z' } })).toMatchObject({ type: 'NO_GOOD_MOTION', why: expect.stringMatching(/No new outreach/) });
   });
   it('a first touch already out holds the account (the motion gate own reading)', () => {
     expect(motion({ firstTouches: [{ recipient: 'bob@acme.example', sentAt: '2026-09-28T00:00:00Z', state: 'sent' }] })).toMatchObject({ type: 'NO_GOOD_MOTION', why: expect.stringMatching(/bob@acme.example got a first touch/) });

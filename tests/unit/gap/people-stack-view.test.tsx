@@ -33,6 +33,20 @@ beforeEach(() => {
   vi.restoreAllMocks();
 });
 
+describe('R32: a genuine tie asks one question, only while choosing is the next action', () => {
+  it('two people GAP cannot separate and nobody chosen: the one question names both; once a choice is recorded it is gone', () => {
+    const tied = resolveOwner(base({ candidates: [gap(71, 'Ann Same', 'Director of Transportation'), gap(72, 'Bob Same', 'Director of Transportation')] }));
+    const rows = tied.eligible.map((c) => ({ key: c.key, personaId: c.personaId, hubspotContactId: c.hubspotContactId, name: c.name, title: c.title }));
+    const open = projectPursuitState({ accountName: 'Walmart Inc.', now: NOW, motionType: 'FACT_LED', opportunity: { status: 'CLEAR', detail: '', deals: [] }, restriction: null, familyHold: null, motion: null, choice: null, activePersona: null, replies: [], lastOutbound: null, outstandingDraft: null, followUpDue: null, eligible: rows });
+    const { unmount } = render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(tied, { chosenKey: null })} state={open} hypothesisId="h1" excluded={[]} />);
+    expect(screen.getByTestId('people-stack-question').textContent).toBe('Who owns transportation and the yards at Walmart Inc.: Ann Same or Bob Same?');
+    unmount();
+    const chosen = projectPursuitState({ accountName: 'Walmart Inc.', now: NOW, motionType: 'FACT_LED', opportunity: { status: 'CLEAR', detail: '', deals: [] }, restriction: null, familyHold: null, motion: null, choice: { personaId: 71, by: 'casey@yardflow.ai', at: '2026-10-05T14:00:00Z', source: 'motion' }, activePersona: null, replies: [], lastOutbound: null, outstandingDraft: null, followUpDue: null, eligible: rows });
+    render(<PeopleStackView accountName="Walmart Inc." stack={buildPeopleStack(tied, { chosenKey: 'gap:71', chosenBy: 'casey@yardflow.ai' })} state={chosen} hypothesisId="h1" excluded={[]} />);
+    expect(screen.queryByTestId('people-stack-question')).toBeNull();
+  });
+});
+
 describe('the default view', () => {
   it('shows at most five rows of forty-one eligible, no ordinals on the tie, the tie in words, and no Best fit', () => {
     const state = stateFor({});

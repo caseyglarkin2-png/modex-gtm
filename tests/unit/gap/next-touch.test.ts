@@ -40,7 +40,10 @@ function ledger(sentSteps: number[], extra: Record<string, unknown> = {}) {
     },
     unsubscribedEmail: { findFirst: vi.fn(async () => (extra.unsub ? { id: 'u' } : null)) },
     conversationDisposition: { findFirst: vi.fn(async ({ where }: any) => (extra.disposition && !where.response_class.notIn.includes(extra.disposition) ? { response_class: extra.disposition } : null)) },
-    inboundMessage: { findFirst: vi.fn(async () => (extra.inbound ? { subject: extra.inbound } : null)) },
+    inboundMessage: {
+      findFirst: vi.fn(async () => (extra.inbound ? { subject: extra.inbound } : null)),
+      findMany: vi.fn(async () => (extra.inbound ? [{ subject: extra.inbound, snippet: (extra.inboundText as string | undefined) ?? null, body_text: (extra.inboundText as string | undefined) ?? null, from_email: 'joey.maggard@kroger.com' }] : [])),
+    },
     sequenceVersion: { findUnique: vi.fn(async () => ({ steps: HC.steps })) },
   };
 }
@@ -184,10 +187,36 @@ describe('T9: a reply from someone else at the account stops the sequence', () =
 
   it('a stored human reply from the account domain after the first send stops it; a consumer domain never does', async () => {
     const p: any = ledger([0]);
-    p.inboundMessage.findFirst = vi.fn(async ({ where }: any) => (where.from_email.endsWith === '@kroger.com' ? { subject: 'Saw your note to Joey', from_email: 'pat.lee@kroger.com' } : null));
+    p.inboundMessage.findMany = vi.fn(async ({ where }: { where: { from_email: { endsWith?: string } } }) => (where.from_email.endsWith === '@kroger.com' ? [{ subject: 'Saw your note to Joey', snippet: null, body_text: null, from_email: 'pat.lee@kroger.com' }] : []));
     const t = await computeNextTouch(p, 'dec-1', new Date('2026-09-28T12:00:00Z'), { gapSender: YF, getThread: noThread });
     expect(t).toMatchObject({ state: 'stopped', reason: 'replied' });
     expect(t.state === 'stopped' && t.detail).toContain('kroger.com');
+  });
+});
+
+// The lead's general defect (2026-10-07): the follow-up stop read replies by SUBJECT only; it now reads the one
+// classification the card and the hold read (replies/classify.ts isPersonReply).
+describe('the follow-up stop reads the message, never its subject alone', () => {
+  it('a body-only out-of-office notice (an ordinary "Re:" subject) does not stop the follow-up; a person writing back does', async () => {
+    const notice = 'I am out of the office until Monday, October 12, with limited access to email.';
+    const ooo = await computeNextTouch(ledger([0], { inbound: 'Re: Doors versus spots', inboundText: notice }), 'dec-1', new Date('2026-09-28T12:00:00Z'), { gapSender: YF, getThread: noThread });
+    expect(ooo.state).not.toBe('stopped');
+    const reply = await computeNextTouch(ledger([0], { inbound: 'Re: Doors versus spots', inboundText: 'Happy to talk. Thursday works for a call.' }), 'dec-1', new Date('2026-09-28T12:00:00Z'), { gapSender: YF, getThread: noThread });
+    expect(reply).toMatchObject({ state: 'stopped', reason: 'replied' });
+    // A person's reply behind a notice still stops it (the first message after the send is not the only one read).
+    const p = ledger([0]);
+    p.inboundMessage.findMany = vi.fn(async () => [
+      { subject: 'Re: Doors versus spots', snippet: notice, body_text: notice, from_email: 'joey.maggard@kroger.com' },
+      { subject: 'Re: Doors versus spots', snippet: 'Back now. Can you send the comparison?', body_text: 'Back now. Can you send the comparison?', from_email: 'joey.maggard@kroger.com' },
+    ]);
+    expect(await computeNextTouch(p, 'dec-1', new Date('2026-09-28T12:00:00Z'), { gapSender: YF, getThread: noThread })).toMatchObject({ state: 'stopped', reason: 'replied' });
+  });
+
+  it('in the Gmail thread too: a notice read from its snippet is not a reply; a person is', () => {
+    const at = new Date(SENT_AT.getTime() + 3_600_000);
+    const msg = (snippet: string) => ({ id: 'm', labelIds: ['INBOX'], internalDate: at, to: 'casey@yardflow.ai', from: 'Joey <joey.maggard@kroger.com>', subject: 'Re: Doors versus spots', snippet });
+    expect(recipientReplied([msg('I am out of the office until Monday, October 12, with limited access to email.')], 'joey.maggard@kroger.com', SENT_AT)).toBeNull();
+    expect(recipientReplied([msg('Happy to talk. Thursday works.')], 'joey.maggard@kroger.com', SENT_AT)).toMatchObject({ id: 'm' });
   });
 });
 
@@ -209,5 +238,32 @@ describe('ops closeout 14: one bounce vocabulary for every execution plane', () 
   it.each(['unverified', 'verified', 'replied'])('email_status %s does not', async (status) => {
     const r = await computeNextTouch(ledger([0], { persona: { email_status: status } }), 'dec-1', new Date('2026-10-01T00:00:00Z'), { gapSender: YF, getThread: noThread });
     expect(r.state).not.toBe('stopped');
+  });
+});
+
+describe('R61: the stop rules\' reads are asked together, judged in order', () => {
+  const at = new Date('2026-09-30T16:00:00Z');
+  const deps = { gapSender: YF, getThread: noThread };
+  it('a reply read is asked while the unsubscribe read is still out (one round trip, not seven)', async () => {
+    const db = ledger([0]);
+    let release: (v: unknown) => void = () => {};
+    const gate = new Promise((r) => (release = r));
+    db.unsubscribedEmail.findFirst.mockImplementation(async () => {
+      await gate;
+      return null;
+    });
+    const run = computeNextTouch(db, 'dec-1', at, deps);
+    for (let i = 0; i < 20 && db.inboundMessage.findMany.mock.calls.length === 0; i += 1) await new Promise((r) => setTimeout(r, 0));
+    expect(db.inboundMessage.findMany).toHaveBeenCalled();
+    release(null);
+    expect((await run).state).toBe('due');
+  });
+  it('a stop found earlier still wins over a later read that failed; an earlier read that failed fails the evaluation', async () => {
+    const dnc = ledger([0], { persona: { do_not_contact: true } });
+    dnc.inboundMessage.findMany.mockRejectedValue(new Error('inbound read failed'));
+    expect(await computeNextTouch(dnc, 'dec-1', at, deps)).toMatchObject({ state: 'stopped', reason: 'do_not_contact' });
+    const early = ledger([0]);
+    early.unsubscribedEmail.findFirst.mockRejectedValue(new Error('unsubscribe read failed'));
+    await expect(computeNextTouch(early, 'dec-1', at, deps)).rejects.toThrow('unsubscribe read failed');
   });
 });

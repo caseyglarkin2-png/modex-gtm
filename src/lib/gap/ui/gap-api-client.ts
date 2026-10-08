@@ -25,6 +25,7 @@
 
 import type { BidSource, BidType, Channel, ResponseClass } from '../taxonomy';
 import type { LearningReport } from '../learning/query';
+import type { OperationsReport } from '../health/operations';
 import type { AgreementReport } from '../routing/agreement';
 
 // ---------------------------------------------------------------------------
@@ -155,6 +156,8 @@ export interface BidBody {
   unit?: string;
   source: BidSource;
   supersedesId?: string;
+  /** R50: the opportunity the words belong to; absent = account-level. */
+  scope?: { dealId?: string; division?: string; site?: string };
 }
 
 /** `POST /api/gap/bids` 201 body. */
@@ -208,6 +211,16 @@ export interface ReplyItem {
   dispositionId?: string | null;
   /** Phase 2 D5: an account-level / colleague reply (the sender is not a known GAP recipient). */
   accountLevel?: boolean;
+  /** R42: the Gmail thread of the message (Gmail rows only), for answering it in the thread. */
+  threadId?: string | null;
+  /** R42: the sender's display name, when the mailbox gave one. */
+  fromName?: string | null;
+  /** R42: the other imports of this same message (a Gmail copy and a HubSpot copy are one reply). */
+  twinIds?: string[];
+  /** Batch item 8: the sender's HubSpot contact id when GAP holds it. */
+  hubspotContactId?: string | null;
+  /** Batch item 8: when GAP sent the answer in their thread. */
+  answeredAt?: string | null;
 }
 
 export interface RepliesPage {
@@ -220,6 +233,8 @@ export type RepliesState = 'undispositioned' | 'all';
 export interface ListRepliesParams {
   state?: RepliesState;
   cursor?: string | null;
+  /** R60: one account's replies. */
+  account?: string | null;
 }
 
 /** `POST /api/gap/replies/[id]/suggest` body: `null` means the model's answer was unusable; `rejected` says why. */
@@ -388,6 +403,7 @@ export function repliesUrl(params: ListRepliesParams = {}): string {
   const query = new URLSearchParams();
   query.set('state', params.state ?? 'undispositioned');
   if (params.cursor) query.set('cursor', params.cursor);
+  if (params.account) query.set('account', params.account);
   return `/api/gap/replies?${query.toString()}`;
 }
 
@@ -451,6 +467,8 @@ export interface LearningFiltersApplied {
 export interface LearningReportResponse extends LearningReport {
   filters: LearningFiltersApplied;
   programs: string[];
+  /** R65: Casey's decisions waiting, the outcomes, research cost and the HubSpot changes (null when unreadable). */
+  operations?: OperationsReport | null;
 }
 
 /** R-A: the UI's filter params. Dates are plain `yyyy-mm-dd` strings, same as an `<input type="date">` value. */

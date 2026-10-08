@@ -13,6 +13,7 @@ import { useRouter } from 'next/navigation';
 import type { CockpitAngle, CockpitMotion } from '@/lib/gap/motion/cockpit';
 import { confirmChoiceBody } from '@/lib/gap/motion/account-motion';
 import { AccountLink } from './account-link';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 /** One person's angle: owned (edit), suggested (accept / edit) or missing (write). `bare` omits the label (the brief supplies it). */
 export function AngleLine({ a, personaId, bare = false }: { a: CockpitAngle | undefined; personaId: number; bare?: boolean }) {
@@ -32,7 +33,7 @@ export function AngleLine({ a, personaId, bare = false }: { a: CockpitAngle | un
     }
     setSaved(value.trim());
     setEditing(false);
-    router.refresh();
+    refreshNow(router);
   }
 
   const current = saved ?? a?.angle?.text ?? null;
@@ -56,7 +57,7 @@ export function AngleLine({ a, personaId, bare = false }: { a: CockpitAngle | un
     return (
       <p className="mt-1 text-xs" data-testid="angle-current">
         {bare ? null : <span className="font-semibold">Why this person: </span>}{current}{' '}
-        <button type="button" onClick={() => setEditing(true)} className="underline">
+        <button type="button" onClick={() => setEditing(true)} className="inline-flex min-h-6 min-w-6 items-center justify-center px-1 underline">
           edit
         </button>
       </p>
@@ -66,10 +67,11 @@ export function AngleLine({ a, personaId, bare = false }: { a: CockpitAngle | un
     return (
       <p className="mt-1 text-xs" data-testid="angle-suggested">
         <span className="font-semibold">{bare ? 'Suggested (not yours yet):' : 'Suggested why:'}</span> <span className="italic">{a.suggested}</span>{' '}
-        <button type="button" data-testid="angle-accept" onClick={() => void save('accepted_suggestion', a.suggested!)} className="underline">
+        {/* R63-B S13: 24 px targets at phone width. */}
+        <button type="button" data-testid="angle-accept" onClick={() => void save('accepted_suggestion', a.suggested!)} className="inline-flex min-h-6 min-w-6 items-center justify-center px-1 underline">
           accept
         </button>{' '}
-        <button type="button" onClick={() => setEditing(true)} className="underline">
+        <button type="button" data-testid="angle-edit" onClick={() => setEditing(true)} className="inline-flex min-h-6 min-w-6 items-center justify-center px-1 underline">
           edit
         </button>
         {error ? <span role="alert" className="ml-2 text-[var(--destructive)]">{error}</span> : null}
@@ -105,7 +107,7 @@ export function AccountMotionPanel({ motion }: { motion: CockpitMotion }) {
       setError(((await res.json().catch(() => ({}))) as { error?: string }).error ?? `HTTP ${res.status}`);
       return;
     }
-    router.refresh();
+    refreshNow(router);
   }
 
   async function makePrimary(personaId: number) {
@@ -123,7 +125,7 @@ export function AccountMotionPanel({ motion }: { motion: CockpitMotion }) {
       setError(((await res.json().catch(() => ({}))) as { error?: string }).error ?? `HTTP ${res.status}`);
       return;
     }
-    router.refresh();
+    refreshNow(router);
   }
 
   async function confirm() {
@@ -137,7 +139,7 @@ export function AccountMotionPanel({ motion }: { motion: CockpitMotion }) {
       body: JSON.stringify(body),
     });
     setBusy(false);
-    if (res.ok) router.refresh();
+    if (res.ok) refreshNow(router);
   }
 
   return (

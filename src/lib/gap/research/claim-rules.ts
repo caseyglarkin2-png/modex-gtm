@@ -48,10 +48,12 @@ const isPublisher = (org: string, url?: string | null): boolean => {
 };
 
 /**
- * The organization a claim is attributed to, else null. Three press forms:
+ * The organization a claim is attributed to, else null. Four press forms:
  *   "..., said Jane Doe, CEO of Gatik"           (a department in the title is skipped: "VP of Supply Chain at PepsiCo")
  *   "Gatik CEO Gautam Narang said ..."            (an organization right before a title, then said / says / told)
  *   "..., according to Gatik"                     (the page's own publisher reporting is not a third party)
+ *   "Kaleris announced that Acme is opening ..."   (batch item 7: an organization announcing news about another; the
+ *                                                  account announcing about itself stays its own statement)
  * Used by every truth gate: a claim whose speaker is not the account is that speaker's claim.
  */
 export function speakerOrg(sentence: string, url?: string | null): string | null {
@@ -66,6 +68,11 @@ export function speakerOrg(sentence: string, url?: string | null): string | null
   const titled = new RegExp(String.raw`\b(${ORG})\s+${TITLES}\b[^."“”;]{0,60}?\b(?:said|says|told|stated)\b`).exec(sentence);
   if (titled) {
     const org = cleanOrg(titled[1]);
+    if (org) return org;
+  }
+  const announced = new RegExp(String.raw`^\s*(${ORG})(?:,[^,]{1,80},)?\s+(?:announced|said|reported|revealed|stated|shared|confirmed)(?:\s+(?:today|this week|on\s+[A-Z][a-z]+\.?\s+\d{1,2}(?:,\s+\d{4})?))?\s+that\b`).exec(sentence);
+  if (announced) {
+    const org = cleanOrg(announced[1]);
     if (org) return org;
   }
   const per = new RegExp(String.raw`\baccording to\s+(${ORG})`).exec(sentence);
@@ -99,6 +106,15 @@ export type LiveFactFailure = 'not_a_physical_operations_fact' | 'quoted_third_p
  * null. The claim stays a verified fact (true at its source); only its outreach eligibility is withdrawn. A claim
  * stored on a search-redirect link has no publisher Casey can open, so it is never outreach evidence.
  */
+/** R30: the stored-claim rules for a job, procurement or other admitted claim: the publisher and the speaker, not the physical rule. */
+export function liveClaimFailure(text: string, accountName: string, url?: string | null): LiveFactFailure | null {
+  if (url && SEARCH_REDIRECT.test(url)) return 'redirect_unresolved';
+  if (url && WEAK_SOURCE.test(url)) return 'source_too_weak';
+  const speaker = speakerOrg(text, url);
+  if (speaker && !textNamesAccount(speaker, normalizeCompany(accountName))) return 'quoted_third_party';
+  return null;
+}
+
 export function liveFactFailure(text: string, accountName: string, url?: string | null): LiveFactFailure | null {
   if (url && SEARCH_REDIRECT.test(url)) return 'redirect_unresolved';
   // An aggregator or mirror is never the page outreach evidence links to (the same rule a new fact must pass).

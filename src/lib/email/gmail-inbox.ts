@@ -4,6 +4,7 @@
  */
 import * as Sentry from '@sentry/nextjs';
 import { accessTokenForSender, type GmailSender } from './gmail-sender';
+import { sinkConfig, sinkSentTo } from './transport-sink';
 
 const GMAIL_API = 'https://gmail.googleapis.com/gmail/v1';
 
@@ -479,6 +480,8 @@ export interface GmailThreadMessageMeta {
   to: string;
   from: string;
   subject?: string;
+  /** The message's opening text (Gmail's snippet): the reply classification reads it, never the subject alone. */
+  snippet?: string;
 }
 
 /**
@@ -501,7 +504,7 @@ export async function getGmailThreadMessages(threadId: string, sender?: GmailSen
   if (res.status === 404) throw new GmailThreadMissingError(threadId);
   if (!res.ok) throw new Error(`Gmail threads.get failed (${res.status})`);
   const data = (await res.json()) as {
-    messages?: Array<{ id?: string; labelIds?: string[]; internalDate?: string; payload?: { headers?: Array<{ name?: string; value?: string }> } }>;
+    messages?: Array<{ id?: string; labelIds?: string[]; internalDate?: string; snippet?: string; payload?: { headers?: Array<{ name?: string; value?: string }> } }>;
   };
   return (data.messages ?? []).map((m) => {
     const headers = m.payload?.headers ?? [];
@@ -513,6 +516,7 @@ export async function getGmailThreadMessages(threadId: string, sender?: GmailSen
       to: h('To'),
       from: h('From'),
       subject: h('Subject'),
+      snippet: m.snippet ?? '',
     };
   });
 }
@@ -662,6 +666,10 @@ export async function listSentTo(
   afterEpoch: number,
   beforeEpoch: number,
 ): Promise<Array<{ id: string; threadId: string | null; internalDate: Date; to: string; subject: string }>> {
+  // The transport sink (./transport-sink.ts, GAP_SEND_TRANSPORT=sink, unset in production) is the harness mailbox:
+  // its Sent folder is what it wrote. Real Gmail is never read under it.
+  const sink = sinkConfig();
+  if (sink) return sinkSentTo(sink, recipient, afterEpoch, beforeEpoch);
   const accessToken = await accessTokenForSender(sender);
   const mailbox = sender.userEmail.toLowerCase();
   const listUrl = new URL(`${GMAIL_API}/users/${encodeURIComponent(mailbox)}/messages`);

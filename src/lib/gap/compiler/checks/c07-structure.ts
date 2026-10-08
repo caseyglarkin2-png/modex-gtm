@@ -179,6 +179,25 @@ export function withoutVerifiedQuotes(body: string, ctx: CompileContext): { text
   return { text, quotedWords };
 }
 
+/** A cited quote with the source label in front of it ("<the page's title>: \"<quote>\" [[SRC:id]]"). */
+const LABELLED_QUOTE_RE = /(^|\n)([^\n"]{1,200}?):\s*"([^"\n]*)"\s*(?:\[\[SRC:([A-Za-z0-9_-]+)\]\]|\[S:([A-Za-z0-9_-]+)\])/g;
+
+/**
+ * R34: the body without the SOURCE'S own words: a cited quote that IS its source's excerpt, with the source label
+ * in front of it (the page's title). Our voice rules judge our prose; a job posting's title ("Yard Operations
+ * Manager") is the employer's words, exactly as the quoted excerpt is (the rule C07 and C08 already apply to the
+ * quote). A quote that does not match its source keeps its label and counts as ours.
+ */
+export function withoutVerifiedSourceText(body: string, ctx: CompileContext): string {
+  const excerpts = new Map((ctx.evidence ?? []).map((r) => [r.id, normQuote(r.excerpt ?? '')]));
+  return body.replace(LABELLED_QUOTE_RE, (whole: string, lead: string, _label: string, quote: string, srcId?: string, sId?: string) => {
+    const q = normQuote(quote);
+    const excerpt = excerpts.get(srcId ?? sId ?? '') ?? '';
+    if (!q || !excerpt || !` ${excerpt} `.includes(` ${q} `)) return whole;
+    return `${lead} `;
+  });
+}
+
 export const checkWordCount: Check = (draft, ctx) => {
   const stripped = withoutVerifiedQuotes(draft.body, ctx);
   const count = wordCount(stripped.text);

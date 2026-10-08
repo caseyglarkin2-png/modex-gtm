@@ -61,6 +61,7 @@ import {
   type ReplySuggestion,
 } from '@/lib/gap/ui/gap-api-client';
 import { BidChips, words, type BidDraft } from './bid-chips';
+import { isDay, nyDayAt } from '@/lib/gap/work/dates';
 
 // ---------------------------------------------------------------------------
 // Rules (the same the disposition model applies server-side)
@@ -116,6 +117,12 @@ export interface DispositionDraft {
   buyerLanguage: string;
   nextBestAction: string;
   bids: BidDraft[];
+  /** R42, referral: who they named (never a cold target; the seller decides how to approach them). */
+  referralName?: string;
+  referralTitle?: string;
+  referralEmail?: string;
+  /** R42, timing: the New York day they said to come back (a reminder returns then). */
+  resumeDay?: string;
 }
 
 export interface DispositionPrefill {
@@ -127,6 +134,10 @@ export interface DispositionPrefill {
   /** Narrows the root cause and impact chips to one family's catalog. */
   problemFamily?: string | null;
   aiSuggestionId?: string | null;
+  /** R42: who the reply names, read from its words (the seller confirms or corrects it). */
+  referralHint?: string | null;
+  /** R42: the day the reply names, read from its words (the seller confirms or corrects it). */
+  resumeHint?: string | null;
 }
 
 export type DraftRefusal = { field: keyof DispositionBody; reason: FormRefusal };
@@ -173,6 +184,12 @@ export function buildDispositionBody(prefill: DispositionPrefill, draft: Disposi
   if (next.length > 0) body.nextBestAction = next;
   if (draft.bids.length > 0) body.bids = draft.bids.map((bid) => ({ ...bid }));
   if (prefill.aiSuggestionId) body.aiSuggestionId = prefill.aiSuggestionId;
+  // R42: who a referral named and when a not-now comes back travel with the row (the service keeps them in metadata).
+  if (draft.responseClass === 'referral') {
+    const referral = { name: draft.referralName?.trim() || undefined, title: draft.referralTitle?.trim() || undefined, email: draft.referralEmail?.trim().toLowerCase() || undefined };
+    if (referral.name || referral.title || referral.email) body.referral = JSON.parse(JSON.stringify(referral));
+  }
+  if (draft.responseClass === 'timing' && draft.resumeDay && isDay(draft.resumeDay)) body.resumeAt = nyDayAt(draft.resumeDay).toISOString();
   return body;
 }
 
@@ -281,7 +298,7 @@ function EffectsPanel({ result, onDone }: { result: DispositionResult; onDone: (
             : 'Resolution: none'}
         </li>
         <li data-testid="effect-mirrored">Mirrored to HubSpot: {effects?.mirrored ? 'yes' : 'no'}</li>
-        {Array.isArray(result.bidIds) && result.bidIds.length > 0 ? <li>{result.bidIds.length} BID captured</li> : null}
+        {Array.isArray(result.bidIds) && result.bidIds.length > 0 ? <li>{result.bidIds.length} of their statement{result.bidIds.length === 1 ? '' : 's'} recorded</li> : null}
       </ul>
       <Button type="button" size="sm" onClick={onDone}>
         Done
@@ -316,7 +333,7 @@ export function DispositionForm({
 }: DispositionFormProps) {
   const channel: Channel = mode === 'call' ? 'call' : prefill.channel;
   const [stage, setStage] = useState<'first_row' | 'classes'>(mode === 'call' ? 'first_row' : 'classes');
-  const [draft, setDraft] = useState<DispositionDraft>(emptyDraft);
+  const [draft, setDraft] = useState<DispositionDraft>(() => ({ ...emptyDraft(), ...(prefill.referralHint ? { referralName: prefill.referralHint } : {}), ...(prefill.resumeHint && isDay(prefill.resumeHint) ? { resumeDay: prefill.resumeHint } : {}) }));
   const [submitting, setSubmitting] = useState(false);
   const [clientError, setClientError] = useState<DraftRefusal | null>(null);
   const [serverError, setServerError] = useState<string | null>(null);
@@ -557,6 +574,31 @@ export function DispositionForm({
                     onChange={(event) => patch({ objection: event.target.value })}
                     placeholder="Already runs a yard management system"
                   />
+                </label>
+              ) : null}
+
+              {draft.responseClass === 'referral' ? (
+                <div className="grid gap-2 sm:grid-cols-3" data-testid="disposition-referral">
+                  <label className="flex flex-col gap-1 text-xs text-[var(--muted-foreground)]">
+                    Who did they name?
+                    <Input aria-label="Referred name" value={draft.referralName ?? ''} disabled={busy} onChange={(event) => patch({ referralName: event.target.value })} placeholder="Bob Lane" />
+                  </label>
+                  <label className="flex flex-col gap-1 text-xs text-[var(--muted-foreground)]">
+                    Their title (optional)
+                    <Input aria-label="Referred title" value={draft.referralTitle ?? ''} disabled={busy} onChange={(event) => patch({ referralTitle: event.target.value })} />
+                  </label>
+                  <label className="flex flex-col gap-1 text-xs text-[var(--muted-foreground)]">
+                    Their email (optional)
+                    <Input aria-label="Referred email" value={draft.referralEmail ?? ''} disabled={busy} onChange={(event) => patch({ referralEmail: event.target.value })} />
+                  </label>
+                  <p className="text-xs text-[var(--muted-foreground)] sm:col-span-3">GAP lists them as named by this person. Nobody they named gets a cold email; you decide how to approach them.</p>
+                </div>
+              ) : null}
+
+              {draft.responseClass === 'timing' ? (
+                <label className="flex flex-col gap-1 text-xs text-[var(--muted-foreground)]" data-testid="disposition-resume">
+                  When to come back (optional)
+                  <Input aria-label="Resume day" type="date" value={draft.resumeDay ?? ''} disabled={busy} onChange={(event) => patch({ resumeDay: event.target.value })} />
                 </label>
               ) : null}
 

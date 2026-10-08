@@ -57,7 +57,7 @@ describe('BRIEF render', () => {
     expect(screen.getByTestId('brief-v2-network')).toBeTruthy();
     expect(screen.getByTestId('brief-v2-people').textContent).toMatch(/Primary operator: Dana Trans \(Director of Transportation\)/);
     expect(screen.getByTestId('brief-v2-private').textContent).toMatch(/never mention to the buyer/);
-    expect(screen.getByTestId('brief-v2-commercial').textContent).toMatch(/Legacy note \(MODEX-era record, 2026-03-01; never the next step\): Prep MODEX booth visit/);
+    expect(screen.getByTestId('brief-v2-commercial').textContent).toMatch(/Legacy note \(MODEX-era record, Mar 1, 2026; never the next step\): Prep MODEX booth visit/);
     expect(screen.getAllByText(/View details/)[0].getAttribute('href')).toMatch(/^\/gap\/accounts\/acme-foods\?view=sources#brief-section-/);
   });
 });

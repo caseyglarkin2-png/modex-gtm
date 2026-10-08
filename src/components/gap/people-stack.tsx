@@ -24,6 +24,7 @@ import type { PeopleStack, StackRow } from '@/lib/gap/people/stack';
 import { SET_ASIDE_LABEL } from '@/lib/gap/people/stack';
 import type { PursuitState } from '@/lib/gap/pursuit/state';
 import { EmploymentControl } from './employment-control';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 /** A set-aside person, serializable (the resolver's exclusion carries regexes and reads that never cross to the client). */
 export interface SetAsidePerson {
@@ -62,6 +63,11 @@ const PRIMARY = `${BTN} bg-[var(--primary)] text-[var(--primary-foreground)] hov
 const OUTLINE = `${BTN} border border-[var(--border)] hover:bg-[var(--muted)] disabled:opacity-60`;
 const TEXT = 'inline-flex min-h-9 items-center text-xs underline text-[var(--muted-foreground)]';
 
+/** R63-A N6: a reason the cue already starts with is said once ("Current (confirmed), Current (confirmed): ..."). */
+export function compactReason(reason: string | null, cue: string): string | null {
+  return cue && reason && cue.toLowerCase().startsWith(reason.toLowerCase()) ? null : reason;
+}
+
 /** The compact row's cue: a material currentness, then the reachability (always; a seller choosing needs it). */
 function cueOf(row: StackRow): string {
   return [row.currentness, row.reachability.charAt(0).toLowerCase() + row.reachability.slice(1)].filter(Boolean).join(', ');
@@ -75,6 +81,15 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
   const [note, setNote] = useState<Note | null>(null);
   const noteRef = useRef<HTMLParagraphElement>(null);
   const toggle = (key: string) => setOpen((prev) => { const n = new Set(prev); if (n.has(key)) n.delete(key); else n.add(key); return n; });
+  // R63-B N4: Escape closes an open "Why this person?" from its button or anywhere in its panel; focus goes back to the
+  // button.
+  const escapeWhy = (key: string) => (e: React.KeyboardEvent) => {
+    if (e.key !== 'Escape' || !open.has(key)) return;
+    e.preventDefault();
+    e.stopPropagation();
+    toggle(key);
+    document.getElementById(`why-btn-${key}`)?.focus();
+  };
   // After a choice the chosen row re-renders at the top and the Choose button unmounts: focus follows the person
   // (WCAG 2.4.3), never falls to the page body.
   const justChose = useRef<string | null>(null);
@@ -116,7 +131,7 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
       }
       setNote({ kind: 'status', text: `${row.name} is first at ${accountName.replace(/\.$/, '')}. Nothing is sent by choosing; every send runs its own gates.` });
       justChose.current = chosenKey;
-      router.refresh();
+      refreshNow(router);
     } catch (e) {
       setNote({ kind: 'alert', text: e instanceof Error ? e.message : 'network error' });
     } finally {
@@ -143,7 +158,7 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
       });
       // The control that was pressed may unmount on refresh: focus moves to the read-back line (WCAG 2.4.3).
       requestAnimationFrame(() => noteRef.current?.focus());
-      router.refresh();
+      refreshNow(router);
     } catch (e) {
       setNote({ kind: 'alert', text: e instanceof Error ? e.message : 'network error' });
     } finally {
@@ -185,12 +200,12 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
   const quietChoose = state.state === 'research';
 
   const whyButton = (row: StackRow) => (
-    <button type="button" className={TEXT} aria-expanded={open.has(row.key)} aria-controls={`why-${row.key}`} aria-label={open.has(row.key) ? `Hide why: ${row.name}` : `Why this person? ${row.name}`} onClick={() => toggle(row.key)} data-testid="people-stack-why">
+    <button type="button" className={TEXT} aria-expanded={open.has(row.key)} id={`why-btn-${row.key}`} onKeyDown={escapeWhy(row.key)} aria-controls={`why-${row.key}`} aria-label={open.has(row.key) ? `Hide why: ${row.name}` : `Why this person? ${row.name}`} onClick={() => toggle(row.key)} data-testid="people-stack-why">
       {open.has(row.key) ? 'Hide why' : 'Why this person?'}
     </button>
   );
   const whyPanel = (row: StackRow) => (
-    <div id={`why-${row.key}`} hidden={!open.has(row.key)} className="mt-2 space-y-1 border-t border-[var(--border)] pt-2 text-xs text-[var(--muted-foreground)]">
+    <div id={`why-${row.key}`} onKeyDown={escapeWhy(row.key)} hidden={!open.has(row.key)} className="mt-2 space-y-1 border-t border-[var(--border)] pt-2 text-xs text-[var(--muted-foreground)]">
       {open.has(row.key) ? (
         <>
           <ul className="space-y-0.5" data-testid="people-stack-why-list">
@@ -199,9 +214,9 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
             ))}
           </ul>
           {row.personaId !== null ? (
-            <EmploymentControl personaId={row.personaId} name={row.name} title={row.title} accountName={accountName} compact onDone={() => router.refresh()} />
+            <EmploymentControl personaId={row.personaId} name={row.name} title={row.title} accountName={accountName} compact onDone={() => refreshNow(router)} />
           ) : row.hubspotContactId ? (
-            <EmploymentControl hubspotContactId={row.hubspotContactId} name={row.name} title={row.title} accountName={accountName} compact onDone={() => router.refresh()} />
+            <EmploymentControl hubspotContactId={row.hubspotContactId} name={row.name} title={row.title} accountName={accountName} compact onDone={() => refreshNow(router)} />
           ) : null}
         </>
       ) : null}
@@ -307,7 +322,8 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
       {row.ordinal !== null && choosing ? <span className="text-xs font-semibold tabular-nums text-[var(--muted-foreground)]" data-testid="people-stack-ordinal">{row.ordinal}.</span> : null}
       <p id={`row-${row.key}`} tabIndex={-1} className="font-medium outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]">
         {row.name}
-        {row.title ? <span className="font-normal text-[var(--muted-foreground)]">, {row.title}</span> : null}
+        {/* R63-A N10: a person with no title says so (Dannon's Mark Shaughnessy read as a bare name). */}
+        {row.title ? <span className="font-normal text-[var(--muted-foreground)]">, {row.title}</span> : <span className="font-normal text-[var(--muted-foreground)]" data-testid="people-stack-no-title">, title not on record</span>}
       </p>
       {row.slot !== 'Eligible operator' ? <span className="rounded-sm border border-[var(--border)] px-1 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--muted-foreground)]">{row.slot}</span> : null}
       {row.badge ? <span className="rounded-sm border border-[var(--primary)] px-1 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[var(--primary)]" data-testid="people-stack-badge">{row.badge}</span> : null}
@@ -316,7 +332,7 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
   );
 
   return (
-    <section className="space-y-2" data-testid="people-stack" aria-labelledby="people-stack-heading">
+    <section id="people-stack" className="scroll-mt-20 space-y-2" data-testid="people-stack" aria-labelledby="people-stack-heading">
       <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
         <h2 id="people-stack-heading" className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">
           {choosing
@@ -329,6 +345,11 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
       {state.next && choosing ? (
         <p className="text-xs" data-testid="people-stack-next">
           <span className="font-semibold">Next if no response:</span> {state.next.name}{state.next.title ? `, ${state.next.title}` : ''}. {state.next.unlock}.
+        </p>
+      ) : null}
+      {stack.question && choosing ? (
+        <p className="text-sm font-medium" data-testid="people-stack-question">
+          {stack.question}
         </p>
       ) : null}
       {stack.tieLine && choosing ? (
@@ -367,13 +388,14 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
           const card = row.chosen && choosing;
           if (!card) {
             const cue = cueOf(row);
+            const reason = compactReason(row.reason, cue);
             return (
               <li key={row.key} className="py-2" data-testid="people-stack-row" data-key={row.key} data-chosen={row.chosen ? 'true' : 'false'} data-slot={row.slot} data-compact="true">
                 {head(row)}
                 <div className="mt-0.5 flex flex-wrap items-center gap-x-3 gap-y-1">
                   <p id={`reason-${row.key}`} className="min-w-0 text-sm text-[var(--muted-foreground)]" data-testid="people-stack-reason">
-                    {row.reason}
-                    <span className={`text-xs ${/conflict|changed|in question|left|separate|divested|no email/i.test(cue) ? 'text-amber-700 dark:text-amber-400' : ''}`} data-testid="people-stack-cue">, {cue}</span>
+                    {reason}
+                    <span className={`text-xs ${/conflict|changed|in question|left|separate|divested|no email/i.test(cue) ? 'text-amber-700 dark:text-amber-400' : ''}`} data-testid="people-stack-cue">{reason ? ', ' : ''}{cue}</span>
                   </p>
                   {row.chosen && state.state === 'in_motion' ? (
                     <span className="text-xs text-amber-700 dark:text-amber-400" data-testid="people-stack-held">First touch sent; waiting.</span>
@@ -400,7 +422,7 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
                   {row.chosenBy && !/^GAP:/.test(row.chosenBy) ? (
                     <>
                       <span className="font-semibold">You chose {row.name.split(' ')[0]} ({row.chosenBy}).</span>{' '}
-                      {row.leadOver.tie ? `On evidence GAP cannot separate ${row.name.split(' ')[0]} and ${row.leadOver.over.split(' ')[0]}.` : row.leadOver.leads ? `On evidence ${row.name.split(' ')[0]} also leads ${row.leadOver.over.split(' ')[0]}: ${row.leadOver.text}` : `On evidence GAP ranks ${row.leadOver.over.split(' ')[0]} ahead: ${row.leadOver.text}`}
+                      {row.leadOver.tie ? `On evidence GAP cannot separate ${row.name.split(' ')[0]} and ${row.leadOver.over.split(' ')[0]}.` : row.leadOver.leads ? `The evidence agrees: ${row.name.split(' ')[0]} ranks ahead of ${row.leadOver.over.split(' ')[0]}. ${row.leadOver.text.replace(/^\w/, (ch) => ch.toUpperCase())}` : `On evidence GAP ranks ${row.leadOver.over.split(' ')[0]} ahead: ${row.leadOver.text}`}
                     </>
                   ) : (
                     <>
@@ -492,7 +514,7 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
                 {row.title ? <span className="text-[var(--muted-foreground)]">, {row.title}</span> : null}
               </span>
               <span className="text-[var(--muted-foreground)]">(not a cold first touch)</span>
-              <button type="button" className={TEXT} aria-expanded={open.has(row.key)} aria-controls={`why-${row.key}`} aria-label={open.has(row.key) ? `Hide why: ${row.name}` : `Why this person? ${row.name}`} onClick={() => toggle(row.key)} data-testid="people-stack-why">
+              <button type="button" className={TEXT} aria-expanded={open.has(row.key)} id={`why-btn-${row.key}`} onKeyDown={escapeWhy(row.key)} aria-controls={`why-${row.key}`} aria-label={open.has(row.key) ? `Hide why: ${row.name}` : `Why this person? ${row.name}`} onClick={() => toggle(row.key)} data-testid="people-stack-why">
                 {open.has(row.key) ? 'Hide why' : 'Why?'}
               </button>
               <ul id={`why-${row.key}`} hidden={!open.has(row.key)} className="basis-full space-y-0.5 pl-2 text-[var(--muted-foreground)]" data-testid={open.has(row.key) ? 'people-stack-why-list' : undefined}>

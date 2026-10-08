@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation';
 import type { QueueItem } from '@/lib/gap/entity/candidates';
 import { ENTITY_LABEL, FIT_LABEL, type EntityType } from '@/lib/gap/entity/fit';
 import { AccountLink } from './account-link';
+import { refreshNow } from '@/components/gap/refresh-now';
 
 const VERDICT_LABEL: Record<string, string> = FIT_LABEL;
 const VERDICT_TONE: Record<string, string> = {
@@ -86,7 +87,7 @@ function AddForm({ c, onDone }: { c: QueueItem; onDone: (msg: string, added?: st
     setBusy(false);
     if (!r.ok) return setCheck({ ok: false, reason: r.body.error, matches: r.body.matches ?? [] });
     onDone(`Added ${name.trim()}. It is in the watched band and can be researched; ${((r.body.replan as { reresolved?: number })?.reresolved ?? 0)} people were placed there.`, name.trim());
-    router.refresh();
+    refreshNow(router);
   }
   const refused = check && check.ok === false;
   const input = 'min-h-[36px] w-full rounded-md border border-[var(--border)] bg-transparent px-2 text-sm';
@@ -158,7 +159,7 @@ function MapForm({ c, onDone }: { c: QueueItem; onDone: (msg: string) => void })
     setBusy(false);
     if (!r.ok) return setErr(r.body.error === 'account_not_found' ? 'GAP has no account by that name.' : String(r.body.error ?? r.status).startsWith('alias_conflict:') ? `That name already means ${String(r.body.error).split(':')[1]}.` : `Not saved: ${String(r.body.error ?? r.status)}`);
     onDone(`Mapped to ${account.trim()}. ${((r.body.replan as { reresolved?: number })?.reresolved ?? 0)} people were placed there.`);
-    router.refresh();
+    refreshNow(router);
   }
   const listId = `map-${c.companyKey.replace(/[^a-z0-9]/g, '')}`;
   return (
@@ -192,7 +193,7 @@ function Candidate({ c }: { c: QueueItem }) {
     if (r.status === 429) return setMsg(r.body.error === 'daily_cap' || r.body.error === 'attempt_cap' ? 'Scout has done its passes for today; try again tomorrow.' : 'Scouted within the last day already.');
     if (!r.ok) return setMsg(`Not saved: ${String(r.body.error ?? r.status)}`);
     setMsg(op === 'scout' ? `Scouted: ${VERDICT_LABEL[String(r.body.verdict)] ?? r.body.verdict}.` : op === 'ignore' ? 'Ignored.' : 'Marked for more research.');
-    router.refresh();
+    refreshNow(router);
   }
   const btn = 'min-h-[36px] rounded-md border border-[var(--border)] px-2 text-xs hover:bg-[var(--muted)] disabled:opacity-60';
   return (
