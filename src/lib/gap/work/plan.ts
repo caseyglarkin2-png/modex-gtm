@@ -226,14 +226,17 @@ export async function planDay(prisma: PrismaLike, input: { now: Date; load: () =
   const day = nyDay(input.now);
   const existing = await loadDayPlan(prisma, day);
   if (existing) return existing;
+  // X21 (production 2026-10-08, the first briefing): the day builder (HubSpot reads, the whole cockpit read) runs
+  // OUTSIDE the advisory-lock transaction, which has a short timeout; the lock guards only the re-check and the one
+  // write. A plan written by another instance meanwhile wins and the day built here is dropped.
+  const loaded = await input.load();
+  const built = 'cards' in loaded ? loaded : loaded.day;
+  const decisionIds = 'cards' in loaded ? undefined : loaded.decisionIds;
+  const previous = await loadPreviousPlan(prisma, day, { now: input.now }).catch(() => null);
+  const items = markCarried(itemsForDay(built, day, { decisionIds }), previous);
   return locked(prisma, day, async (tx) => {
     const again = await loadDayPlan(tx, day);
     if (again) return again;
-    const loaded = await input.load();
-    const built = 'cards' in loaded ? loaded : loaded.day;
-    const decisionIds = 'cards' in loaded ? undefined : loaded.decisionIds;
-    const previous = await loadPreviousPlan(tx, day, { now: input.now }).catch(() => null);
-    const items = markCarried(itemsForDay(built, day, { decisionIds }), previous);
     const row = await tx.gapAuditEvent.create({
       data: { kind: DAY_PLANNED, actor, subject_type: PLAN_SUBJECT_TYPE, subject_id: day, payload: JSON.parse(JSON.stringify({ items, counts: built.counts, waiting: built.waiting.length, snoozed: built.snoozed.length })) },
     });
