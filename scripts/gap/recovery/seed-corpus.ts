@@ -151,7 +151,7 @@ export async function seedCorpus(prisma: PrismaClient, opts: { tag?: string; now
     impactHypotheses: ['Detention at the remaining sites'],
     whyNow: null,
     falsificationQuestions: ['Did the change above add trailer volume or dwell at the sites that remain?'],
-    whatANoMeans: 'If trailers do not wait longer at the sites that remain, the change moved no load onto the yard: this thesis is closed for this account.',
+    whatANoMeans: 'If trailers do not wait longer at the sites that remain, the change moved no load onto the yards: this thesis is closed for this account.',
     confidence: 40,
     createdBy: ACTOR,
   };

@@ -28,7 +28,7 @@ export interface DraftDefaults {
 export const EVENT_DRAFT_DEFAULTS: DraftDefaults = {
   problem: 'My guess is that this change moves load onto the gates, yards and docks they run, and that is where site capacity is won or lost.',
   falsification: 'How do trailers get checked in and found at the sites this change touches today?',
-  noMeans: 'If trailers do not wait longer at those sites since the change, it moved no load onto the yard: this thesis is closed for them.',
+  noMeans: 'If trailers do not wait longer at those sites since the change, it moved no load onto the yards: this thesis is closed for them.',
 };
 
 /** A job posting or a procurement notice the account issued (the job / procurement-led path). */
@@ -83,7 +83,7 @@ function eventDefaultsFor(text: string): DraftDefaults {
       return {
         problem: `My guess is that the expansion at ${s} adds trailers to the same gates and yards, and that is where the added capacity is won or lost.`,
         falsification: `Do the gates and yards at ${s} grow with the expansion, or does more volume go through the same ones?`,
-        noMeans: 'If the gates and yards grew with it, the expansion moved no load onto the yard: this thesis is closed for them.',
+        noMeans: 'If the gates and yards grew with it, the expansion moved no load onto the yards: this thesis is closed for them.',
       };
     case 'relocation':
       return {

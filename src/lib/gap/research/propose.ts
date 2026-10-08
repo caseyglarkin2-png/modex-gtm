@@ -187,7 +187,7 @@ export async function proposeFromResearch(
     impacts: asList(base?.impact_hypotheses),
     wouldProveWrong: falsificationQuestions,
     // A thesis GAP proposes always says what would close it (WRONG IF is never blank).
-    whatANoMeans: base ? (base.what_a_no_means ?? null) : (operator ? 'If trailers do not wait longer at the sites you run since the change, it moved no load onto the yard: this thesis is closed for them.' : 'If trailers do not wait longer at the sites that remain, the change moved no load onto the yard: this thesis is closed for this account.'),
+    whatANoMeans: base ? (base.what_a_no_means ?? null) : (operator ? 'If trailers do not wait longer at the sites you run since the change, it moved no load onto the yards: this thesis is closed for them.' : 'If trailers do not wait longer at the sites that remain, the change moved no load onto the yards: this thesis is closed for this account.'),
     evidence: quotable.map((s) => ({ signalId: s.id, title: s.title, excerpt: s.evidence_text!, observedAt: s.observed_at.toISOString() })),
   };
 

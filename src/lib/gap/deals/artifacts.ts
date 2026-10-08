@@ -24,7 +24,7 @@
  * you the dock schedule template", never "Send Ann the ..." to Ann); what we owe someone else on their side is listed
  * under "What I owe your team", by name.
  */
-import { CANON_NUMBERS } from '../compiler/canon';
+import { CANON_NUMBERS, CANON_PROOF } from '../compiler/canon';
 import type { Milestone } from './action-plan';
 
 export const ARTIFACT_KINDS = ['recap', 'introduction', 'pilot_criteria', 'business_case'] as const;
@@ -93,7 +93,9 @@ const saidLine = (n: { quote: string; who: string; noted?: boolean }) => (n.note
 const STATEMENT_TYPES = new Set(['current_state', 'business_problem', 'root_cause', 'impact', 'metric', 'priority', 'future_state', 'constraint']);
 
 /** YardFlow's own proof, in the canon's words (measured, live, at Primo Brands): ours, never a forecast for them. */
-export const YARDFLOW_PROOF = 'For reference, our own measured result: at 24 live Primo Brands sites, drop and hook went from 48 to 24 minutes, measured. That is a YardFlow result at Primo Brands, not a forecast for your yards.';
+// R63-A N7: the canon's own phrases (compiler/canon.ts CANON_PROOF), never a hand-typed variant: "at 24 live Primo Brands
+// sites, drop and hook went from 48 to 24 minutes, measured" read as measured at all 24 sites.
+export const YARDFLOW_PROOF = `For reference, our own result at Primo Brands: ${CANON_PROOF.turnTime}. Primo Brands has ${CANON_PROOF.live}. That is a YardFlow result at Primo Brands, not a forecast for your yards.`;
 
 /** Claims the seller may never make on the buyer's behalf, unless they are the buyer's own quoted words. */
 const ACCEPTANCE = /\b(?:you(?:'ve| have)? (?:approved|accepted|signed off|agreed to (?:buy|purchase|proceed))|(?:legal|security|procurement|IT) (?:has |have )?(?:approved|cleared|signed off)|approved by (?:legal|security|procurement)|(?:passed|cleared) (?:your )?(?:legal|security) review|signed off on (?:the )?(?:pilot|contract|purchase))\b/i;

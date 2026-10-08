@@ -135,7 +135,7 @@ export function suggestAngle(p: { title: string | null; personaKey: string | nul
     .sort((x, y) => x.index - y.index);
   if (spans.length >= 2) return `Title spans ${spans.map((m) => m[1]).join(' and ')} at ${a}; which part they own is not known. Learn who owns yard performance.`;
   if (/transport|freight|carrier|fleet/.test(t) && /procure|sourcing|buyer|category/.test(t)) return `Buys transportation for ${a}; may see detention and dwell charges before operations does. Learn whether carrier dwell shows up in their costs.`;
-  if (/transport|freight|carrier|fleet|logistics/.test(t)) return `Runs transportation at ${a}, so carrier dwell and detention are visible to them. Learn whether the yard is where trucks wait.`;
+  if (/transport|freight|carrier|fleet|logistics/.test(t)) return `Runs transportation at ${a}, so carrier dwell and detention are visible to them. Learn whether their yards are where trucks wait.`;
   if (/distribution|\bdc\b|warehouse|fulfil/.test(t)) return `Runs distribution at ${a}: the dock and yard are where arrival variability shows up first. Learn how trailers are staged and found.`;
   if (/yard|dock|gate|receiving|shipping/.test(t)) return `Works the yard and dock at ${a} every day. Learn how trailers are found, moved and checked in today.`;
   if (/security|compliance|safety/.test(t)) return `Owns site security or compliance at ${a}; gate check-in and driver identity sit with them. Learn how the gate is controlled today.`;
