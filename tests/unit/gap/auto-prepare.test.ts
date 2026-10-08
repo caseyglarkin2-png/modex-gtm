@@ -49,13 +49,10 @@ describe('automatic reversible preparation (R33)', () => {
     expect(w.audit).toEqual([{ kind: AUTO_PREPARE_AUDIT, actor: 'gap-background-research', subject_type: 'prospecting_hypothesis', subject_id: 'h-s-tulsa-1', payload: { accountName: 'PepsiCo', factId: 's-tulsa', preparation: 'submitted', status: 'review_required', approach: 'event_led' } }]);
   });
 
-  it('an ongoing partnership is prepared FIT-LED; a one-time software deployment opens nothing; a cited fact and a set-aside story are left alone; a stale fact is prepared too, marked historical (I03b)', async () => {
+  it('an ongoing partnership is prepared FIT-LED; a one-time software deployment opens nothing; a cited fact, a set-aside story and a stale fact are left alone', async () => {
     const w = world([{ signal_id: 's-denver', status: 'active' }, { signal_id: 's-tulsa', status: 'rejected' }]);
     const out = await prepareProposalsFromResearch(w.prisma, { accountName: 'PepsiCo', facts: [fact('s-gatik'), fact('s-wms'), fact('s-denver'), fact('s-tulsa'), { signalId: 's-gatik', fresh: false }], actor: 'a', now: NOW }, { draft: w.draft as never });
-    // I03b: a fact's age is never a gate: the stale fact is prepared too, marked historical.
-    expect(out.map((o) => [o.factId, o.outcome])).toEqual([['s-gatik', 'prepared'], ['s-wms', 'no_approach'], ['s-denver', 'cited'], ['s-tulsa', 'set_aside'], ['s-gatik', 'prepared']]);
-    expect(out[4]).toMatchObject({ historical: true });
-    expect(out[0]).not.toHaveProperty('historical');
+    expect(out.map((o) => [o.factId, o.outcome])).toEqual([['s-gatik', 'prepared'], ['s-wms', 'no_approach'], ['s-denver', 'cited'], ['s-tulsa', 'set_aside'], ['s-gatik', 'not_fresh']]);
     expect(out[0]).toMatchObject({ approach: 'fit_led' });
     expect(w.draft.mock.calls[0][1]).toMatchObject({ problemHypothesis: expect.stringMatching(/Gatik program/) });
   });

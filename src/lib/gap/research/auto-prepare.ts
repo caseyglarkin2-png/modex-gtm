@@ -41,9 +41,9 @@ export interface PreparableFact {
 }
 
 export type PrepareOutcome =
-  | { factId: string; outcome: 'prepared'; hypothesisId: string; preparation: string; approach: string; historical?: boolean }
+  | { factId: string; outcome: 'prepared'; hypothesisId: string; preparation: string; approach: string }
   | { factId: string; outcome: 'existing'; hypothesisId: string; preparation: string }
-  | { factId: string; outcome: 'cited' | 'set_aside' | 'no_approach' | 'cap_reached' }
+  | { factId: string; outcome: 'cited' | 'set_aside' | 'no_approach' | 'not_fresh' | 'cap_reached' }
   | { factId: string; outcome: 'refused'; reason: string; detail?: string };
 
 export async function prepareProposalsFromResearch(
@@ -69,9 +69,10 @@ export async function prepareProposalsFromResearch(
   for (const f of input.facts) {
     const row = byId.get(f.signalId);
     if (!row?.evidence_text?.trim()) continue;
-    // I03b (Casey's course correction, 2026-10-08): a fact's age is never a gate. A fact past its freshness window is
-    // prepared like a fresh one; it is marked historical here and dated on the thesis (the FACT block shows the
-    // signal's date), so the review says what it is and the copy never presents it as today.
+    if (!f.fresh) {
+      out.push({ factId: f.signalId, outcome: 'not_fresh' });
+      continue;
+    }
     const mine = links.filter((l) => l.signal_id === f.signalId && l.hypothesis?.account_name === input.accountName);
     if (mine.some((l) => l.hypothesis && LIVE.has(l.hypothesis.status))) {
       out.push({ factId: f.signalId, outcome: 'cited' });
@@ -116,7 +117,7 @@ export async function prepareProposalsFromResearch(
       continue;
     }
     prepared += 1;
-    out.push({ factId: f.signalId, outcome: 'prepared', hypothesisId: r.hypothesisId, preparation: r.preparation, approach, ...(f.fresh ? {} : { historical: true }) });
+    out.push({ factId: f.signalId, outcome: 'prepared', hypothesisId: r.hypothesisId, preparation: r.preparation, approach });
     await prisma.gapAuditEvent.create({ data: { kind: AUTO_PREPARE_AUDIT, actor: input.actor, subject_type: 'prospecting_hypothesis', subject_id: r.hypothesisId, payload: { accountName: input.accountName, factId: f.signalId, preparation: r.preparation, status: r.status, approach } } });
   }
   return out;
