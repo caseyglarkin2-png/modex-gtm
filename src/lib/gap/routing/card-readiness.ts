@@ -190,7 +190,7 @@ function readinessOf(item: ReadinessInput): CardReadiness {
       case 'due':
         return {
           state: 'actionable',
-          primary: item.hypothesis ? { label: `Follow up: touch ${nth}`, href: cockpitOpenHref('follow_up', item.id) } : { label: `Follow up: touch ${nth} is due`, href: null, note: 'No hypothesis on this card to render the follow-up from.' },
+          primary: item.hypothesis ? { label: `Follow up: touch ${nth}`, href: cockpitOpenHref('follow_up', item.id) } : { label: `Follow up: touch ${nth} is due`, href: null, note: 'No thesis on this card to render the follow-up from.' },
           secondary: [],
         };
       case 'stopped':
@@ -218,7 +218,8 @@ function readinessOf(item: ReadinessInput): CardReadiness {
   switch (item.action) {
     case 'enroll_gap_sequence':
     case 'one_off_email': {
-      if (!item.hypothesis) return withWarning({ state: 'missing_prerequisite' as const, missing: `No hypothesis covers ${name} at ${item.account.name}, so there is no email to send.`, fix: hypothesisFix(item) });
+      // R63 matrix: the R60 vocabulary in body text too: a thesis, never "hypothesis".
+      if (!item.hypothesis) return withWarning({ state: 'missing_prerequisite' as const, missing: `No thesis covers ${name} at ${item.account.name}, so there is no email to send.`, fix: hypothesisFix(item) });
       if (!item.persona.email) return withWarning({ state: 'missing_prerequisite' as const, missing: `No email address on file for ${name}.`, fix: contactFix(item, 'Add an email in HubSpot') });
       // Item 6 (R34): no installed copy for the thesis means no email to send: never READY, and say what to seed.
       if (item.copy && !item.copy.installed) return withWarning({ state: 'missing_prerequisite' as const, missing: item.copy.detail ?? 'No first-touch copy is installed for this thesis.', fix: hypothesisFix(item) });
@@ -265,11 +266,11 @@ function readinessOf(item: ReadinessInput): CardReadiness {
         case 'no_hypothesis':
           // The router looks for this person's own hypothesis, then an account-level one; the account may
           // still have hypotheses written for OTHER people (Kroger does), so never claim it has none.
-          return withWarning({ state: 'missing_prerequisite' as const, missing: `No hypothesis covers ${name} at ${item.account.name} yet, so there is no outreach to prepare for this person.`, fix: hypothesisFix(item) });
+          return withWarning({ state: 'missing_prerequisite' as const, missing: `No thesis covers ${name} at ${item.account.name} yet, so there is no outreach to prepare for this person.`, fix: hypothesisFix(item) });
         case 'evidence_thin':
           return withWarning({
             state: 'missing_prerequisite' as const,
-            missing: `The hypothesis for ${item.account.name} rests only on an automated keyword hit (a filing that "mentions capital expenditure"), which is not a reason to contact ${name}. Add one sourced, quoted fact about a distribution center, dock, yard or site change (a DC opening, expansion, consolidation or automation program, or a yard, gate or dock job posting) and link it to the hypothesis.`,
+            missing: `The thesis for ${item.account.name} rests only on an automated keyword hit (a filing that "mentions capital expenditure"), which is not a reason to contact ${name}. Add one sourced, quoted fact about a distribution center, dock, yard or site change (a DC opening, expansion, consolidation or automation program, or a yard, gate or dock job posting) and link it to the thesis.`,
             fix: hypothesisFix(item),
           });
         case 'bounced_or_invalid':
@@ -279,7 +280,7 @@ function readinessOf(item: ReadinessInput): CardReadiness {
         case 'tam_unknown':
           return withWarning({ state: 'missing_prerequisite' as const, missing: `${item.account.name} has no verified TAM status.`, fix: accountFix(item, 'Verify TAM on the account') });
         case 'hyp_stale':
-          return withWarning({ state: 'missing_prerequisite' as const, missing: 'The hypothesis rests on stale or expired evidence.', fix: hypothesisFix(item) });
+          return withWarning({ state: 'missing_prerequisite' as const, missing: 'The thesis rests on stale or expired evidence.', fix: hypothesisFix(item) });
         case 'disp_wrong_person':
           return withWarning({ state: 'missing_prerequisite' as const, missing: `The last reply said ${name} is the wrong person. Find the right contact.`, fix: accountFix(item, 'Find the right person') });
         default:

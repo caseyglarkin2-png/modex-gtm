@@ -78,7 +78,7 @@ describe('cardReadiness: the two-state invariant for every non-blocked card', ()
       expect(noEmail.state).toBe('missing_prerequisite');
       expect(noEmail.state === 'missing_prerequisite' && noEmail.missing).toContain('No email address');
       const noHyp = cardReadiness(item({ action, hypothesis: null }));
-      expect(noHyp.state === 'missing_prerequisite' && noHyp.missing).toContain('No hypothesis covers');
+      expect(noHyp.state === 'missing_prerequisite' && noHyp.missing).toContain('No thesis covers');
     }
   });
 
@@ -91,7 +91,7 @@ describe('cardReadiness: the two-state invariant for every non-blocked card', ()
   it('Jason (research_required, no hypothesis): exact prerequisite, never a fabricated email', () => {
     const r = cardReadiness(item({ action: 'research_required', ruleId: 'no_hypothesis', hypothesis: null, persona: { ...item().persona, id: 1788, displayName: 'jason gaiser' } }));
     expect(r.state).toBe('missing_prerequisite');
-    expect(r.state === 'missing_prerequisite' && r.missing).toContain('No hypothesis covers jason at Kroger');
+    expect(r.state === 'missing_prerequisite' && r.missing).toContain('No thesis covers jason at Kroger');
     // Last mile: nothing of Jason's waits in REVIEW, so the fix is research on his card, never an empty lane.
     expect(r.state === 'missing_prerequisite' && r.fix).toMatchObject({ label: 'Research to propose a thesis', href: `/gap?lane=research#card-${item().id}` });
     const waiting = cardReadiness(item({ action: 'research_required', ruleId: 'no_hypothesis', hypothesis: null, persona: { ...item().persona, id: 1788 }, reviewWaiting: true }));

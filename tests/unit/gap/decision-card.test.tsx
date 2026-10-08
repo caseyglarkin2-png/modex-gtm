@@ -318,7 +318,7 @@ describe('<DecisionCard> Seller Action Center (dogfood fix, 2026-09-25)', () => 
     render(<DecisionCard item={item({ action: 'research_required', ruleId: 'no_hypothesis', hypothesis: null })} onAct={() => {}} />);
     const panel = screen.getByTestId('missing-prerequisite');
     expect(panel).toHaveTextContent('Missing prerequisite');
-    expect(panel).toHaveTextContent('No hypothesis covers Jordan at Acme Foods');
+    expect(panel).toHaveTextContent('No thesis covers Jordan at Acme Foods');
     // Last mile: nothing of this card's is waiting in REVIEW, so the fix is research on this card, not an empty lane.
     expect(within(panel).queryByRole('link', { name: /Review/ })).toBeNull();
     expect(within(panel).getByRole('link', { name: /Research to propose a thesis/ })).toHaveAttribute('href', '/gap?lane=research#card-dec_1');
