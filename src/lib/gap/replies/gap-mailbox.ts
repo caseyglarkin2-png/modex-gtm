@@ -89,6 +89,8 @@ export const MAILBOX_KINDS = {
   autoReply: 'mailbox.auto_reply',
   canary: 'mailbox.canary',
   own: 'mailbox.own',
+  /** X07: a reply from the seller in a GAP assignment or briefing thread (judged before `own`; commands.ts). */
+  command: 'mailbox.command',
   unrelated: 'mailbox.unrelated',
   quarantined: 'mailbox.quarantined',
   /** Ops closeout 13A: a quarantined message processed on retry, or read and closed by an operator. */
@@ -103,6 +105,7 @@ const FINAL_KINDS: string[] = HANDLED_KINDS.filter((k) => !PROVISIONAL_KINDS.inc
 const SUBJECT_TYPE = 'gmail_message';
 
 export { FREEMAIL_DOMAINS } from './domains';
+import { authenticateCommand, matchCommandTarget, parseCommand, commandTextOf, type CommandAuth, type CommandContext, type ParsedCommand } from './commands';
 
 /** The subject prefix of an operator's intake canary (sent from one of our own domains). */
 export const CANARY_SUBJECT_PREFIX = '[gap-intake-canary]';
@@ -291,6 +294,7 @@ export type ReplyAttribution = 'gap_thread' | 'gap_recipient' | 'account_domain'
 
 export type MailboxVerdict =
   | { kind: 'own' }
+  | { kind: 'command'; command: ParsedCommand; auth: CommandAuth }
   | { kind: 'canary' }
   | { kind: 'bounce'; dsn: DsnFinding }
   | { kind: 'auto_reply'; reason: string; attributedTo: SentRef[] }
@@ -311,8 +315,11 @@ function attribute(ctx: GapSendContext, from: string, threadId: string, received
 }
 
 /** Pure: what one inbox message is to GAP. */
-export function classifyMailboxMessage(m: MailboxMessage, ctx: GapSendContext, mailbox: string): MailboxVerdict {
+export function classifyMailboxMessage(m: MailboxMessage, ctx: GapSendContext, mailbox: string, commands?: CommandContext): MailboxVerdict {
   const from = lower(m.fromEmail);
+  // X07 (the review's B6): a reply in a thread GAP sent is a command BEFORE `own` and before attribution; the
+  // verdict carries the parsed command and whether it is authenticated (commands.ts). Nothing runs here.
+  if (commands && matchCommandTarget(m, commands)) return { kind: 'command', command: parseCommand(commandTextOf(m)), auth: authenticateCommand(m, commands) };
   if (from === lower(mailbox)) return { kind: 'own' };
   if (OWN_DOMAINS.has(domainOf(from)) && lower(m.subject ?? '').startsWith(CANARY_SUBJECT_PREFIX)) return { kind: 'canary' };
   const dsn = parseDsn(m);
@@ -342,6 +349,8 @@ export interface MailboxReport {
   autoReplies: number;
   unrelated: number;
   own: number;
+  /** X07: command verdicts (authenticated or refused). */
+  commands: number;
   canaries: number;
   alreadyHandled: number;
   /** Provisional verdicts that attributed once the send was recorded. */
@@ -367,6 +376,10 @@ export interface MailboxDeps {
   listIds: (afterEpoch: number) => Promise<MailboxListing>;
   fetch: (id: string) => Promise<MailboxMessage>;
   mailbox: string;
+  /** X07: the command senders and the recorded assignment and briefing threads; absent means no command is ever judged. */
+  commands?: CommandContext;
+  /** X07b: runs an AUTHENTICATED command after its verdict row is written; a throw is recorded, never a quarantine. */
+  onCommand?: (m: MailboxMessage, v: Extract<MailboxVerdict, { kind: 'command' }>, now: Date) => Promise<void>;
   ingest?: typeof ingestReply;
   bounce?: typeof recordHardBounce;
   budget?: number;
@@ -468,9 +481,20 @@ async function handleReply(prisma: PrismaLike, m: MailboxMessage, v: Extract<Mai
 
 /** Classify one message and write its verdict (and effects). */
 async function processMessage(prisma: PrismaLike, m: MailboxMessage, ctx: GapSendContext, deps: MailboxDeps, now: Date, actor: string, report: MailboxReport): Promise<void> {
-  const v = classifyMailboxMessage(m, ctx, deps.mailbox);
+  const v = classifyMailboxMessage(m, ctx, deps.mailbox, deps.commands);
   const at = { threadId: m.threadId, receivedAt: m.receivedAt.toISOString() };
-  if (v.kind === 'own') {
+  if (v.kind === 'command') {
+    report.commands += 1;
+    // The verdict row first (one per message id; a retry never re-runs a command); the effect after, never in a throw path.
+    await audit(prisma, MAILBOX_KINDS.command, actor, m.id, { from: lower(m.fromEmail), command: v.command.kind, auth: v.auth.ok ? { ok: true, bound: v.auth.bound, target: v.auth.target } : { ok: false, reason: v.auth.reason }, ...at });
+    if (v.auth.ok && deps.onCommand) {
+      try {
+        await deps.onCommand(m, v, now);
+      } catch (err) {
+        report.errors.push(`${m.id}: command ${v.command.kind} failed: ${err instanceof Error ? err.message : String(err)}`);
+      }
+    }
+  } else if (v.kind === 'own') {
     report.own += 1;
     await audit(prisma, MAILBOX_KINDS.own, actor, m.id, at);
   } else if (v.kind === 'canary') {
@@ -565,7 +589,7 @@ export async function pollGapMailbox(prisma: PrismaLike, input: { now: Date; act
   const ctx = await loadGapSendContext(prisma);
   const report: MailboxReport = {
     since, seen: listing.ids.length, fetched: 0, backlog: 0, replies: 0, hardBounces: 0, policyBounces: 0, softBounces: 0, unattributedBounces: 0,
-    autoReplies: 0, unrelated: 0, own: 0, canaries: 0, alreadyHandled: 0, reattributed: 0, quarantined: 0, unresolvedQuarantine: [], inboundMessagesCreated: 0,
+    autoReplies: 0, unrelated: 0, own: 0, commands: 0, canaries: 0, alreadyHandled: 0, reattributed: 0, quarantined: 0, unresolvedQuarantine: [], inboundMessagesCreated: 0,
     bouncedAddresses: [], errors: [], watermark: null,
   };
 
