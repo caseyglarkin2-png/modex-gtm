@@ -322,7 +322,8 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
       {row.ordinal !== null && choosing ? <span className="text-xs font-semibold tabular-nums text-[var(--muted-foreground)]" data-testid="people-stack-ordinal">{row.ordinal}.</span> : null}
       <p id={`row-${row.key}`} tabIndex={-1} className="font-medium outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]">
         {row.name}
-        {row.title ? <span className="font-normal text-[var(--muted-foreground)]">, {row.title}</span> : null}
+        {/* R63-A N10: a person with no title says so (Dannon's Mark Shaughnessy read as a bare name). */}
+        {row.title ? <span className="font-normal text-[var(--muted-foreground)]">, {row.title}</span> : <span className="font-normal text-[var(--muted-foreground)]" data-testid="people-stack-no-title">, title not on record</span>}
       </p>
       {row.slot !== 'Eligible operator' ? <span className="rounded-sm border border-[var(--border)] px-1 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--muted-foreground)]">{row.slot}</span> : null}
       {row.badge ? <span className="rounded-sm border border-[var(--primary)] px-1 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[var(--primary)]" data-testid="people-stack-badge">{row.badge}</span> : null}
