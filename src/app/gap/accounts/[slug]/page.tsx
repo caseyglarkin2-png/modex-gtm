@@ -433,7 +433,7 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
           pursuit={pursuit ? { state: pursuit.state, stack: pursuit.stack, hypothesisId: pursuit.hypothesisId, excluded, story: storyShown, anchor } : null}
           doneNext={q.from === 'work' ? <DoneNext slug={slug} index={workIndex} accountName={brief.accountName} /> : null}
           askGap={pursuit ? <AskGap accountName={brief.accountName} /> : null}
-          workItems={replyPrep || recordReply || obligations.length ? (
+          workItems={pursuit || replyPrep || recordReply || obligations.length ? (
             <>
               {/* On this page the record control is the section below (an anchor keeps the Work position). */}
               {/* R60: the prepared reply reads the message; its one record control is the section below (Capture). */}
@@ -454,7 +454,13 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
                   <h2 id="record-reply-heading" className="text-sm font-semibold">Record what they said</h2>
                   <AccountReplies items={waitingReplies} accountName={brief.accountName} />
                 </section>
-              ) : null}
+              ) : (
+                // R63-A S2: a link to this account's reply ("Open the reply") always lands on a real place, which says
+                // what is true: every reply here is recorded, and where an owed answer is.
+                <p id={RECORD_REPLY_ANCHOR} className="scroll-mt-16 text-xs text-[var(--muted-foreground)]" data-testid="record-reply-none">
+                  {owedItem ? 'What they said is recorded; their answer is owed above.' : 'Every reply here is recorded; none waits.'}
+                </p>
+              )}
               <AccountObligations items={obligations} />
             </>
           ) : null}
