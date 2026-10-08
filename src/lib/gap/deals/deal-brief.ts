@@ -27,6 +27,7 @@
  * (no new table). Nothing here writes to HubSpot.
  */
 import { selectConfirmedBids } from '../bid/select';
+import { wordingOf } from '../bid/wording';
 import { CAPTURE_MEETING } from '../capture/store';
 import { loadEvidenceInbox } from '../research/inbox';
 import { TRUTH_SECTIONS, type TruthSection } from './sections';
@@ -121,6 +122,22 @@ export interface BriefEntry {
   at: string;
   /** R50: on a per-deal brief, "account-level" for words not tied to this deal (this deal's own carry no tag). */
   scope?: string | null;
+  /** R63-A S5: what the seller noted they said (shown without quotation marks), not their own words. */
+  noted?: boolean;
+}
+
+/**
+ * R63-A N3: who confirmed a statement, by name ("confirmed by casey@freightroll.com" put an address where a name
+ * belongs): the person on record, else the address's own name ("casey@..." is Casey), never the address.
+ */
+export function actorName(address: string | null | undefined, people: ReadonlyMap<string, { name?: string | null }> = new Map()): string | null {
+  const a = (address ?? '').trim();
+  if (!a) return null;
+  if (!a.includes('@')) return a;
+  const onRecord = people.get(a.toLowerCase())?.name?.trim();
+  if (onRecord) return onRecord;
+  const parts = a.split('@')[0].split(/[._-]+/).filter((p) => p && !/\d/.test(p));
+  return parts.length ? parts.map((p) => p.charAt(0).toUpperCase() + p.slice(1).toLowerCase()).join(' ') : a;
 }
 
 export interface DealBrief {
@@ -181,13 +198,14 @@ export function buildDealBrief(input: {
     if (email && !speakers.includes(email)) speakers.push(email);
     const section = SECTION_OF_BID[b.type];
     if (!section) continue;
-    sections[section].push({ bidId: b.id, quote: b.raw_buyer_language, summary: b.normalized_summary ?? null, who: whoOf(email), source: b.source, confirmedBy: b.confirmed_by ?? null, at: iso(b.confirmed_at ?? b.captured_at), ...(scopeOf ? { scope: scopeTag.get(b.id) ?? null } : {}) });
+    const noted = wordingOf(b.metadata, b.raw_buyer_language) === 'noted';
+    sections[section].push({ bidId: b.id, quote: b.raw_buyer_language, summary: b.normalized_summary ?? null, who: whoOf(email), source: b.source, confirmedBy: actorName(b.confirmed_by, byEmail), at: iso(b.confirmed_at ?? b.captured_at), ...(scopeOf ? { scope: scopeTag.get(b.id) ?? null } : {}), ...(noted ? { noted: true } : {}) });
   }
 
   const confirmed = input.dispositions.filter((d) => d.human_confirmed === true);
   const commitments = confirmed
     .filter((d) => d.response_class === 'meeting_accepted')
-    .map((d) => ({ what: 'Agreed to a meeting', who: whoOf(d.contact_email), at: iso(d.confirmed_at ?? d.created_at), confirmedBy: d.confirmed_by ?? null, next: d.next_best_action?.trim() || null }));
+    .map((d) => ({ what: 'Agreed to a meeting', who: whoOf(d.contact_email), at: iso(d.confirmed_at ?? d.created_at), confirmedBy: actorName(d.confirmed_by, byEmail), next: d.next_best_action?.trim() || null }));
 
   const contradictions: string[] = [];
   // Review F: only the SAME thesis confirmed and rejected is a contradiction (two different problems are not).

@@ -48,7 +48,8 @@ export function DealBriefView({ brief, deals, editable = false }: { brief: DealB
               <ul className="space-y-1">
                 {brief.sections[s].map((e) => (
                   <li key={e.bidId}>
-                    <q className="italic">{e.quote}</q>
+                    {/* R63-A S5: their own words quoted; what the seller noted, never in quotation marks. */}
+                    {e.noted ? <span data-testid="deal-brief-noted">You noted they said: {e.quote}</span> : <q className="italic">{e.quote}</q>}
                     <span className="block text-xs text-[var(--muted-foreground)]">
                       {e.scope ? <span className="font-semibold" data-testid="deal-brief-scope">{e.scope} · </span> : null}
                       {e.who} · {e.source}

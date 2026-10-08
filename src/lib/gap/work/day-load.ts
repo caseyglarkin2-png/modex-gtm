@@ -173,6 +173,11 @@ export async function loadCompletedToday(prisma: PrismaLike, now: Date): Promise
     })
     .catch(() => []);
   const out: DoneItem[] = [];
+  // R63-A N3: a person by name where GAP has them on record ("Recorded person1@...'s answer"), else their address.
+  const addresses = [...new Set(rows.flatMap((r) => (isObj(r.payload) ? [r.payload.recipient, r.payload.contactEmail] : [])).filter((x): x is string => typeof x === 'string' && x.includes('@')).map((x) => x.toLowerCase()))];
+  const people: Array<{ email: string | null; name: string | null }> = addresses.length && typeof prisma.persona?.findMany === 'function' ? await Promise.resolve().then(() => prisma.persona.findMany({ where: { email: { in: addresses, mode: 'insensitive' } }, select: { email: true, name: true } })).catch(() => []) : [];
+  const nameByAddress = new Map(people.filter((p) => p.email && p.name?.trim()).map((p) => [String(p.email).toLowerCase(), String(p.name).trim()]));
+  const who = (address: unknown, fallback: string) => (typeof address === 'string' && address ? nameByAddress.get(address.toLowerCase()) ?? address : fallback);
   // R63-B S11: the obligations written today, by id. A closure skip that was restored today (deals/closure.ts
   // restoreSkippedObligation writes `restoredIdFor(skipped)`) leaves Work: the obligation stands once, under OWED; the
   // skipped record stays in the account's history.
@@ -181,13 +186,13 @@ export async function loadCompletedToday(prisma: PrismaLike, now: Date): Promise
     const p = isObj(r.payload) ? r.payload : {};
     const at = new Date(r.created_at).toISOString();
     if ((r.kind === DIRECT_SENT || r.kind === MANUAL_SENT) && r.subject_type === DRAFT_SUBJECT_TYPE) {
-      out.push({ at, accountName: typeof p.accountName === 'string' ? p.accountName : null, line: `Sent touch ${Number(p.stepIndex ?? 0) + 1} to ${String(p.recipient ?? 'them')}${p.reconciledFromSent ? ' (found in Sent)' : ''}.` });
+      out.push({ at, accountName: typeof p.accountName === 'string' ? p.accountName : null, line: `Sent touch ${Number(p.stepIndex ?? 0) + 1} to ${who(p.recipient, 'them')}${p.reconciledFromSent ? ' (found in Sent)' : ''}.` });
     } else if (r.kind === REPLY_SENT) {
-      out.push({ at, accountName: typeof p.accountName === 'string' ? p.accountName : null, line: `Answered ${String(p.recipient ?? 'them')} in their thread.` });
+      out.push({ at, accountName: typeof p.accountName === 'string' ? p.accountName : null, line: `Answered ${who(p.recipient, 'them')} in their thread.` });
     } else if (r.kind === DRAFT_SENT) {
       out.push({ at, accountName: null, line: 'A GAP draft was sent from Gmail.' });
     } else if (r.kind === 'disposition.recorded' && p.humanConfirmed === true) {
-      out.push({ at, accountName: typeof p.accountName === 'string' ? p.accountName : null, line: `Recorded ${String(p.contactEmail ?? 'their')}'s answer (${words(p.responseClass)}).` });
+      out.push({ at, accountName: typeof p.accountName === 'string' ? p.accountName : null, line: typeof p.contactEmail === 'string' && p.contactEmail ? `Recorded ${who(p.contactEmail, 'their')}'s answer (${words(p.responseClass)}).` : `Recorded their answer (${words(p.responseClass)}).` });
     } else if (r.kind === COMMITMENT_EVENT && p.op === 'status' && isObj(p.commitment)) {
       const c = p.commitment as unknown as Commitment;
       if (c.status === 'done') out.push({ at, accountName: c.accountName, line: `Done: ${c.title}.`, kind: 'done' });

@@ -65,7 +65,7 @@ describe('buildDealBrief: confirmed buyer truth only', () => {
       ],
     });
     expect(b.sections.current_state.map((e) => e.quote)).toEqual(['We check trailers in on paper.']);
-    expect(b.sections.problem[0]).toMatchObject({ quote: 'Trucks wait two hours at the gate on Mondays.', who: 'Dana Ops', source: 'meeting', confirmedBy: 'casey@freightroll.com' });
+    expect(b.sections.problem[0]).toMatchObject({ quote: 'Trucks wait two hours at the gate on Mondays.', who: 'Dana Ops', source: 'meeting', confirmedBy: 'Casey' }); // R63-A N3: by name
     expect(b.sections.root_cause).toHaveLength(1);
     expect(b.sections.business_impact.map((e) => e.quote)).toEqual(['Detention runs us six figures.', 'Dwell is 3.5 hours average.']);
     expect(b.sections.future_state).toHaveLength(1);
@@ -108,7 +108,7 @@ describe('buildDealBrief: confirmed buyer truth only', () => {
       ...base,
       dispositions: [disp({ next_best_action: 'Walk the Delaware yard' }), disp({ id: 'd2', human_confirmed: false, confirmed_by: null, confirmed_at: null }), disp({ id: 'd3', response_class: 'no_signal' })],
     });
-    expect(b.commitments).toEqual([{ what: 'Agreed to a meeting', who: 'Dana Ops', at: '2026-09-21T12:00:00.000Z', confirmedBy: 'casey@freightroll.com', next: 'Walk the Delaware yard' }]);
+    expect(b.commitments).toEqual([{ what: 'Agreed to a meeting', who: 'Dana Ops', at: '2026-09-21T12:00:00.000Z', confirmedBy: 'Casey', next: 'Walk the Delaware yard' }]);
   });
 
   it('contradictions: a confirmed problem and a rejected problem, buyer objections, and conflicting public facts', () => {
@@ -234,7 +234,9 @@ describe('<DealBriefView>', () => {
     render(<DealBriefView brief={b} deals={[{ name: 'YardFlow - Kroger', stage: 'Appointment scheduled', lastActivityAt: '2026-09-25T00:00:00.000Z' }]} />);
     expect(screen.getByTestId('deal-brief-problem')).toHaveTextContent('Trucks wait two hours at the gate on Mondays.');
     expect(screen.getByTestId('deal-brief-problem')).toHaveTextContent('Dana Ops');
-    expect(screen.getByTestId('deal-brief-problem')).toHaveTextContent('confirmed by casey@freightroll.com');
+    // R63-A N3: the confirmer by name, never an address.
+    expect(screen.getByTestId('deal-brief-problem')).toHaveTextContent('confirmed by Casey');
+    expect(screen.getByTestId('deal-brief-problem')).not.toHaveTextContent('casey@freightroll.com');
     for (const s of ['current_state', 'root_cause', 'business_impact', 'future_state', 'requirements']) expect(screen.getByTestId(`deal-brief-${s}`)).toHaveTextContent('UNKNOWN');
     expect(screen.getByTestId('deal-brief-objective')).toHaveTextContent('Suggested (not yours yet)');
     expect(screen.getByTestId('deal-brief-known')).toHaveTextContent('1 of 6 known');
