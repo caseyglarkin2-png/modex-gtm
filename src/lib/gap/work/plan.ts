@@ -55,6 +55,8 @@ export interface PlanItem {
   person: { name: string; title: string | null } | null;
   refs: PlanItemRefs;
   token: string;
+  /** X18: the day of the newest earlier plan that held this work (the same object, or the same account and kind). */
+  carriedFrom?: string;
 }
 
 export interface DayPlan {
@@ -176,6 +178,38 @@ function rowToPlan(row: { payload: Record<string, unknown> | null; created_at: D
   return { day: row.subject_id, plannedAt: new Date(row.created_at).toISOString(), items: Array.isArray(p.items) ? p.items : [], counts: p.counts ?? { needsYou: 0, parked: 0, obligationsDue: 0, waiting: 0, snoozed: 0 }, fresh };
 }
 
+const OBJECT_KEY = /^(reply|commitment|first_touch|meeting):/;
+const dayKeyed = (key: string) => key.replace(/:\d{4}-\d{2}-\d{2}$/, ':');
+
+/**
+ * X18: work carried over. An item carried when the previous plan held the same object (reply, commitment, first touch,
+ * meeting: the key is the object) or, for a day-keyed item (follow_up, deal, review, ready, admin: `<kind>:<account>:<day>`),
+ * the same kind at the same account. Pure; `carriedFrom` is the previous plan's day.
+ */
+export function markCarried(items: readonly PlanItem[], previous: DayPlan | null): PlanItem[] {
+  if (!previous) return items.map((i) => ({ ...i }));
+  const objects = new Set(previous.items.filter((i) => OBJECT_KEY.test(i.key)).map((i) => i.key));
+  const days = new Set(previous.items.filter((i) => !OBJECT_KEY.test(i.key)).map((i) => dayKeyed(i.key)));
+  return items.map((i) => {
+    const { carriedFrom: _old, ...rest } = i;
+    void _old;
+    const carried = OBJECT_KEY.test(i.key) ? objects.has(i.key) : days.has(dayKeyed(i.key));
+    return carried ? { ...rest, carriedFrom: previous.day } : rest;
+  });
+}
+
+/** The newest stored plan for a day before `day` within the lookback, or null. */
+export async function loadPreviousPlan(prisma: PrismaLike, day: string, opts: { now: Date }): Promise<DayPlan | null> {
+  const since = new Date(opts.now.getTime() - PLAN_LOOKBACK_DAYS * DAY_MS);
+  const rows: Array<{ payload: Record<string, unknown> | null; created_at: Date | string; subject_id: string }> = await prisma.gapAuditEvent.findMany({
+    where: { kind: DAY_PLANNED, subject_type: PLAN_SUBJECT_TYPE, created_at: { gte: since } },
+    orderBy: [{ created_at: 'desc' }],
+    take: PLAN_LOOKBACK_DAYS + 2,
+  });
+  const earlier = rows.filter((r) => r.subject_id < day).sort((a, b) => (a.subject_id < b.subject_id ? 1 : -1));
+  return earlier.length ? rowToPlan(earlier[0], false) : null;
+}
+
 /** The stored plan for a New York day, or null. */
 export async function loadDayPlan(prisma: PrismaLike, day: string): Promise<DayPlan | null> {
   const row = await prisma.gapAuditEvent.findFirst({ where: { kind: DAY_PLANNED, subject_type: PLAN_SUBJECT_TYPE, subject_id: day }, orderBy: [{ created_at: 'asc' }] });
@@ -198,7 +232,8 @@ export async function planDay(prisma: PrismaLike, input: { now: Date; load: () =
     const loaded = await input.load();
     const built = 'cards' in loaded ? loaded : loaded.day;
     const decisionIds = 'cards' in loaded ? undefined : loaded.decisionIds;
-    const items = itemsForDay(built, day, { decisionIds });
+    const previous = await loadPreviousPlan(tx, day, { now: input.now }).catch(() => null);
+    const items = markCarried(itemsForDay(built, day, { decisionIds }), previous);
     const row = await tx.gapAuditEvent.create({
       data: { kind: DAY_PLANNED, actor, subject_type: PLAN_SUBJECT_TYPE, subject_id: day, payload: JSON.parse(JSON.stringify({ items, counts: built.counts, waiting: built.waiting.length, snoozed: built.snoozed.length })) },
     });
