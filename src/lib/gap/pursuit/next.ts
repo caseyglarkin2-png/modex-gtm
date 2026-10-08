@@ -4,6 +4,7 @@
  * opened a draft to Shawn). Pure; pinned by tests/unit/gap/pursuit-next.test.ts.
  */
 import type { PursuitState } from './state';
+import { hubspotCompanySearchUrl } from '../routing/seller-action';
 
 export interface NextAction {
   text: string;
@@ -52,7 +53,8 @@ export function nextFromPursuit(
         ? { text: `Work the ${s.deals.length} open deals (${s.deals.map((d) => d.name ?? 'an unnamed deal').join('; ')}) each on its own, never a cold first touch. The deal brief holds each deal's obligations and what to learn next.`, control: { href: opts.accountSlugHref('brief'), label: 'Open the deal brief' }, source: 'pursuit' }
         : { text: `Work the deal${s.deals[0]?.name ? ` (${s.deals[0].name})` : ''}, never a cold first touch. The deal brief says what to learn next.`, control: { href: opts.accountSlugHref('brief'), label: 'Open the deal brief' }, source: 'pursuit' };
     case 'held':
-      return { text: s.blocker ?? 'Held.', control: s.stateLine.includes('warm intro') ? { href: opts.captureHref, label: 'Log the intro ask' } : null, source: 'pursuit' };
+      // R63-A S13: an account with no HubSpot company linked (or two) offers the link, where the seller makes it.
+      return { text: s.blocker ?? 'Held.', control: s.stateLine.includes('warm intro') ? { href: opts.captureHref, label: 'Log the intro ask' } : /no HubSpot company linked|more than one HubSpot company/.test(s.stateLine) ? { href: hubspotCompanySearchUrl(s.accountName), label: 'Link it in HubSpot' } : null, source: 'pursuit' };
     case 'follow_up_due':
       return { text: `Send the next touch to ${p?.name ?? 'them'} (due ${s.followUp ? day(s.followUp.dueAt) : 'now'}).`, control: s.followUp ? { href: s.followUp.cardHref, label: 'Prepare the follow-up' } : null, source: 'pursuit' };
     case 'in_motion':

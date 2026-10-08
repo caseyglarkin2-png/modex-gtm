@@ -16,6 +16,7 @@ import { orderAccounts, toIndexRow } from '@/lib/gap/accounts/index-list';
 import { opportunityHoldOf } from '@/lib/gap/work/opportunity-holds';
 import { workDay } from '@/lib/gap/work/list';
 import { projectPursuitState, type PursuitInput } from '@/lib/gap/pursuit/state';
+import { nextFromPursuit } from '@/lib/gap/pursuit/next';
 
 const NOW = new Date('2026-10-07T15:00:00Z');
 const UNLINKED = 'Unlinked Scratch Co r63';
@@ -49,7 +50,11 @@ describe('R63-A S13: the search covers every account; no HubSpot company linked 
     expect(s.blocker).toBe(SENTENCE);
     const hold = opportunityHoldOf({ status: 'UNKNOWN', reason: 'identity_unresolved' })!;
     const day = workDay({ now: NOW, candidates: [], replies: [], motions: [], held: new Map(), inDeals: { status: 'complete', accounts: [] }, opportunityHolds: new Map([[UNLINKED, hold]]) });
-    expect(day.cards.find((c) => c.accountName === UNLINKED)).toMatchObject({ state: 'Held: no HubSpot company linked', why: SENTENCE, blocker: null });
+    const LINK = { label: 'Link it in HubSpot', href: 'https://app.hubspot.com/contacts/3819073/objects/0-2/views/all/list?query=Unlinked%20Scratch%20Co%20r63' };
+    expect(day.cards.find((c) => c.accountName === UNLINKED)).toMatchObject({ state: 'Held: no HubSpot company linked', why: SENTENCE, blocker: null, next: LINK });
+    // NEXT on the account offers the same link, where the seller makes it.
+    const next = nextFromPursuit(s, { hypothesisId: null, accountSlugHref: (v) => `/gap/accounts/unlinked-scratch-co-r63?view=${v}`, replyThreadHref: null, captureHref: '/gap/capture' });
+    expect(next).toMatchObject({ text: SENTENCE, control: { label: LINK.label, href: LINK.href } });
     expect(opportunityHoldOf({ status: 'UNKNOWN', reason: 'timeout' })).toEqual({ kind: 'unknown', why: 'HubSpot could not be checked: HubSpot did not answer in time. No cold touch until it can.' });
   });
 });

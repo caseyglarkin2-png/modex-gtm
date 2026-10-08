@@ -32,6 +32,7 @@ import { classifyReply, HUMAN_REPLY_LABEL, type ReplyClassKind } from '../replie
 import { prepareReply, type ReplyPrep } from '../replies/prepare';
 import type { FollowUpPlan } from '../execution/follow-up-plan';
 import { LANE_RANK, type NextCandidate } from '../routing/next-up';
+import { hubspotCompanySearchUrl } from '../routing/seller-action';
 import type { PursuitSummary } from '../pursuit/summary';
 import type { PursuitStateKind } from '../pursuit/state';
 import { outcomeLine, type WorkOutcome } from './outcome-model';
@@ -505,7 +506,7 @@ export function workDay(i: WorkInput): WorkDay {
       offer({ rank: PURSUIT_RANK.held, sortKey: [name], card: { accountName: name, lane: 'deals', stateKind: 'held', state: h.stateLine, why, person: null, next: null, blocker: null } });
     } else if (h.kind === 'unknown') {
       // R63-A S13: an identity hold says itself (its why already names the step), never "check HubSpot" as an outage.
-      offer({ rank: LANE_RANK.deals, sortKey: [0, name], card: { accountName: name, lane: 'deals', stateKind: 'unknown_deal', state: h.stateLine ?? STATE_TEXT.unknown_deal, why, person: null, next: null, blocker: h.stateLine ? null : 'Check HubSpot directly before contacting anyone.' } });
+      offer({ rank: LANE_RANK.deals, sortKey: [0, name], card: { accountName: name, lane: 'deals', stateKind: 'unknown_deal', state: h.stateLine ?? STATE_TEXT.unknown_deal, why, person: null, next: h.stateLine ? { label: 'Link it in HubSpot', href: hubspotCompanySearchUrl(name) } : null, blocker: h.stateLine ? null : 'Check HubSpot directly before contacting anyone.' } });
     } else {
       offer({ rank: LANE_RANK.deals, sortKey: [1, name], card: { accountName: name, lane: 'deals', stateKind: 'in_deal', state: STATE_TEXT.in_deal, why, person: null, next: { label: 'Open the deal brief', href: `${accountHref(name)}?view=brief` }, blocker: 'No cold first touch while the deal is open: work it from the deal.' } });
     }

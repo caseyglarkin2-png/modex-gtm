@@ -59,6 +59,11 @@ export function hubspotCompanyUrl(hubspotCompanyId: string): string | null {
   return `https://app.hubspot.com/contacts/${portal}/company/${hubspotCompanyId}`;
 }
 
+/** R63-A S13: HubSpot's company search for an account GAP cannot link yet (the seller links it there). */
+export function hubspotCompanySearchUrl(accountName: string): string {
+  return `https://app.hubspot.com/contacts/${hubspotPortalId()}/objects/0-2/views/all/list?query=${encodeURIComponent(accountName)}`;
+}
+
 /** Digits only, for a `tel:` link; null when there is nothing usable. */
 export function telHref(phone: string | null): string | null {
   if (!phone) return null;
