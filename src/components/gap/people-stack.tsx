@@ -63,6 +63,11 @@ const PRIMARY = `${BTN} bg-[var(--primary)] text-[var(--primary-foreground)] hov
 const OUTLINE = `${BTN} border border-[var(--border)] hover:bg-[var(--muted)] disabled:opacity-60`;
 const TEXT = 'inline-flex min-h-9 items-center text-xs underline text-[var(--muted-foreground)]';
 
+/** R63-A N6: a reason the cue already starts with is said once ("Current (confirmed), Current (confirmed): ..."). */
+export function compactReason(reason: string | null, cue: string): string | null {
+  return cue && reason && cue.toLowerCase().startsWith(reason.toLowerCase()) ? null : reason;
+}
+
 /** The compact row's cue: a material currentness, then the reachability (always; a seller choosing needs it). */
 function cueOf(row: StackRow): string {
   return [row.currentness, row.reachability.charAt(0).toLowerCase() + row.reachability.slice(1)].filter(Boolean).join(', ');
@@ -382,13 +387,14 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
           const card = row.chosen && choosing;
           if (!card) {
             const cue = cueOf(row);
+            const reason = compactReason(row.reason, cue);
             return (
               <li key={row.key} className="py-2" data-testid="people-stack-row" data-key={row.key} data-chosen={row.chosen ? 'true' : 'false'} data-slot={row.slot} data-compact="true">
                 {head(row)}
                 <div className="mt-0.5 flex flex-wrap items-center gap-x-3 gap-y-1">
                   <p id={`reason-${row.key}`} className="min-w-0 text-sm text-[var(--muted-foreground)]" data-testid="people-stack-reason">
-                    {row.reason}
-                    <span className={`text-xs ${/conflict|changed|in question|left|separate|divested|no email/i.test(cue) ? 'text-amber-700 dark:text-amber-400' : ''}`} data-testid="people-stack-cue">, {cue}</span>
+                    {reason}
+                    <span className={`text-xs ${/conflict|changed|in question|left|separate|divested|no email/i.test(cue) ? 'text-amber-700 dark:text-amber-400' : ''}`} data-testid="people-stack-cue">{reason ? ', ' : ''}{cue}</span>
                   </p>
                   {row.chosen && state.state === 'in_motion' ? (
                     <span className="text-xs text-amber-700 dark:text-amber-400" data-testid="people-stack-held">First touch sent; waiting.</span>
@@ -415,7 +421,7 @@ export function PeopleStackView({ accountName, stack, state, hypothesisId, exclu
                   {row.chosenBy && !/^GAP:/.test(row.chosenBy) ? (
                     <>
                       <span className="font-semibold">You chose {row.name.split(' ')[0]} ({row.chosenBy}).</span>{' '}
-                      {row.leadOver.tie ? `On evidence GAP cannot separate ${row.name.split(' ')[0]} and ${row.leadOver.over.split(' ')[0]}.` : row.leadOver.leads ? `On evidence ${row.name.split(' ')[0]} also leads ${row.leadOver.over.split(' ')[0]}: ${row.leadOver.text}` : `On evidence GAP ranks ${row.leadOver.over.split(' ')[0]} ahead: ${row.leadOver.text}`}
+                      {row.leadOver.tie ? `On evidence GAP cannot separate ${row.name.split(' ')[0]} and ${row.leadOver.over.split(' ')[0]}.` : row.leadOver.leads ? `The evidence agrees: ${row.name.split(' ')[0]} ranks ahead of ${row.leadOver.over.split(' ')[0]}. ${row.leadOver.text.replace(/^\w/, (ch) => ch.toUpperCase())}` : `On evidence GAP ranks ${row.leadOver.over.split(' ')[0]} ahead: ${row.leadOver.text}`}
                     </>
                   ) : (
                     <>

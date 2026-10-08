@@ -24,6 +24,15 @@ export interface BriefSection {
 }
 
 const SHOW = 5;
+/** R63-A N4: a date the seller reads ("Oct 7, 2026"), never ISO. */
+const readable = (iso: string) => {
+  const d = new Date(iso);
+  // A calendar day ("2026-03-01") is that day, never the evening before in New York.
+  const tz = /^\d{4}-\d{2}-\d{2}$/.test(iso.trim()) ? 'UTC' : 'America/New_York';
+  return Number.isNaN(d.getTime()) ? iso : d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: tz });
+};
+/** R63-A N6: a clause ends as a sentence before the next one starts. */
+export const endSentence = (s: string) => (/[.!?]["')\]]?\s*$/.test(s.trim()) ? s.trim() : `${s.trim()}.`);
 
 /**
  * One row per person in the buyer map when a GAP contact and an unlinked HubSpot record carry the SAME name AND the
@@ -44,6 +53,11 @@ function dedupePeople<T extends { name: string; title: string | null; source?: '
 }
 
 /** What Listen reads on BRIEF (the meeting brief): every section's lines, never the private engagement section. */
+/** R63-A N6: the read ends as a sentence and its "wrong if" never doubles the "if" ("...is lost Wrong if: If ..."). */
+export function ourReadLine(h: { problem: string; wrongIf: string | null }): string {
+  return `Our read: ${endSentence(h.problem)}${h.wrongIf ? ` Wrong if ${h.wrongIf.trim().replace(/^If\s+/i, '').replace(/^\w/, (c) => c.toLowerCase())}` : ''}`;
+}
+
 export function briefListenText(accountName: string, sections: readonly BriefSection[]): string {
   return [`${accountName}, the meeting brief.`, ...sections.filter((s) => s.key !== 'private').map((s) => `${s.title}. ${[...s.lines.map((l) => l.text), ...s.notes].join(' ')}`)]
     .join(' ')
@@ -92,12 +106,13 @@ export function projectBrief(brief: AccountIntelligenceBrief, ctx: AccountContex
     : [];
   const commercial = [
     ...brief.sections.commercial.statements.map((s) => s.text),
-    ...ctx.history.map((h) => `${h.at.slice(0, 10)} ${h.text}`),
-    ...(ctx.legacyNote ? [`Legacy note (MODEX-era record, ${ctx.legacyNote.at?.slice(0, 10) ?? 'undated'}; never the next step): ${ctx.legacyNote.text}`] : []),
+    // R63-A N4: readable dates on a seller screen, never ISO.
+    ...ctx.history.map((h) => `${readable(h.at)}: ${h.text}`),
+    ...(ctx.legacyNote ? [`Legacy note (MODEX-era record, ${ctx.legacyNote.at ? readable(ctx.legacyNote.at) : 'undated'}; never the next step): ${ctx.legacyNote.text}`] : []),
   ];
-  const assets = ctx.assets.map((a) => `${a.label}${a.at ? `, ${a.at.slice(0, 10)}` : ''}${a.lastSentAt ? `, last sent ${a.lastSentAt.slice(0, 10)}` : a.legacy ? '' : ', never sent'}`);
+  const assets = ctx.assets.map((a) => `${a.label}${a.at ? `, ${readable(a.at)}` : ''}${a.lastSentAt ? `, last sent ${readable(a.lastSentAt)}` : a.legacy ? '' : ', never sent'}`);
   const read = [
-    ...brief.hypotheses.slice(0, 2).map((h) => `Our read: ${h.problem}${h.wrongIf ? ` Wrong if: ${h.wrongIf}` : ''}`),
+    ...brief.hypotheses.slice(0, 2).map(ourReadLine),
     ...brief.discovery.slice(0, 4).map((q) => `Ask (${q.type.replace(/_/g, ' ').toLowerCase()}): ${q.question}`),
   ];
   // The pitch conclusion only after the buyer confirmed a problem or a cost (the same rule as NOW's WEDGE).

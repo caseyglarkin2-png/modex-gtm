@@ -127,7 +127,7 @@ describe('NOW: the decision, once', () => {
   });
   it('NEXT is an upcoming meeting within 14 days', () => {
     const ctx = emptyCtx({ relationship: projectRelationship({ restriction: null, account: null, personas: [], memberships: [], meetings: [{ meeting_status: 'Booked', meeting_date: '2026-10-06T15:00:00Z', objective: 'Yard walk-through', created_at: '2026-09-30' }], emails: [], now: NOW }) });
-    expect(now({}, ctx).next).toEqual({ text: 'Prepare for the meeting on Oct 6, 2026: Yard walk-through. Read BRIEF before you go.', source: 'meeting' });
+    expect(now({}, ctx).next).toEqual({ text: 'Prepare for the meeting on Oct 6, 2026: Yard walk-through. Read the Brief tab before you go.', source: 'meeting' });
   });
 });
 

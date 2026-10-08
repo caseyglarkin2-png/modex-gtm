@@ -292,7 +292,7 @@ describe('why #1 over #2 on the chosen card', () => {
     const lead = screen.getByTestId('people-stack-lead-over');
     expect(lead).toHaveAttribute('data-tie', 'false');
     // A human choice reads as the choice first, then what the evidence says.
-    expect(lead.textContent).toMatch(/^You chose Glen \(you, Oct 5\)\. On evidence Glen also leads Pat: Glen/);
+    expect(lead.textContent).toMatch(/^You chose Glen \(you, Oct 5\)\. The evidence agrees: Glen ranks ahead of Pat. Glen/);
     const tie = resolveOwner({ account: { name: 'Walmart Inc.', entityType: 'retailer' }, purpose: 'COLD_FIRST_TOUCH', hypothesis: null, candidates: [gap(1, 'Doug Estrada', 'Regional Transportation Director'), gap(2, 'Kelly Kruse', 'Regional Transportation Director')], hubspot: { read: true, count: 2, truncated: false, via: 'linked' }, now: NOW });
     const te = tie.eligible.map((c) => ({ key: c.key, personaId: c.personaId, name: c.name, title: c.title }));
     const ts = state(te, 1);

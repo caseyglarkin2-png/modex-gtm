@@ -179,7 +179,7 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
   let next: NowView['next'] = due
     ? { text: `Due now: ${due.title}${due.scope ? ` (${due.scope})` : ''}. Then prepare for the meeting on ${day(meeting!.at)}: ${meeting!.what}.`, source: 'obligation' }
     : soon
-    ? { text: `Prepare for the meeting on ${day(meeting!.at)}: ${meeting!.what}. Read BRIEF before you go.`, source: 'meeting' }
+    ? { text: `Prepare for the meeting on ${day(meeting!.at)}: ${meeting!.what}. Read the Brief tab before you go.`, source: 'meeting' }
     : m.type === 'FACT_LED' && opts.ready
       ? { text: `Review the thesis, then open the first-touch card for ${displayName(opts.ready.name)} (every gate runs at the click).`, source: 'motion' }
     : dealNext
