@@ -18,12 +18,31 @@ export const ANSWER_OWED_DAYS = 14;
 /** R63-A S4: what a recorded reply can mean and still be owed no answer (a stop, a machine, nothing to act on). */
 const NO_ANSWER_CLASSES = ['do_not_contact', 'bounce', 'out_of_office', 'no_signal'];
 
-/** R63-A S4: the replies among `ids` that were answered from GAP (sent in their thread, or copied to send by hand). */
+/**
+ * R63-A S4, amended by X14 (copied is not sent): the replies among `ids` that were ANSWERED from GAP, which means sent
+ * in their thread: by GAP, or by hand and found in Sent (execution/copies-reconcile.ts writes the same REPLY_SENT row
+ * with `reconciledFromSent`). A copy alone is not an answer: the reply stays owed, said as copied (loadCopiedReplyIds).
+ */
 export async function loadAnsweredReplyIds(prisma: PrismaLike, ids: readonly string[]): Promise<Set<string>> {
   const want = [...new Set(ids.filter(Boolean))];
   if (!want.length || typeof prisma?.gapAuditEvent?.findMany !== 'function') return new Set();
-  const rows: Array<{ subject_id: string }> = await prisma.gapAuditEvent.findMany({ where: { subject_type: REPLY_SUBJECT_TYPE, subject_id: { in: want }, kind: { in: [REPLY_SENT, REPLY_COPIED] } }, select: { subject_id: true } });
+  const rows: Array<{ subject_id: string }> = await prisma.gapAuditEvent.findMany({ where: { subject_type: REPLY_SUBJECT_TYPE, subject_id: { in: want }, kind: REPLY_SENT }, select: { subject_id: true } });
   return new Set(rows.map((r) => r.subject_id));
+}
+
+/** X14: the replies among `ids` whose answer was COPIED (to send by hand) and not yet seen sent: id -> the newest copy time. */
+export async function loadCopiedReplyIds(prisma: PrismaLike, ids: readonly string[]): Promise<Map<string, string>> {
+  const want = [...new Set(ids.filter(Boolean))];
+  if (!want.length || typeof prisma?.gapAuditEvent?.findMany !== 'function') return new Map();
+  const rows: Array<{ subject_id: string; kind: string; created_at: Date | string }> = await prisma.gapAuditEvent.findMany({ where: { subject_type: REPLY_SUBJECT_TYPE, subject_id: { in: want }, kind: { in: [REPLY_SENT, REPLY_COPIED] } }, select: { subject_id: true, kind: true, created_at: true } });
+  const sent = new Set(rows.filter((r) => r.kind === REPLY_SENT).map((r) => r.subject_id));
+  const out = new Map<string, string>();
+  for (const r of rows) {
+    if (r.kind !== REPLY_COPIED || sent.has(r.subject_id)) continue;
+    const at = new Date(r.created_at).toISOString();
+    if (!out.has(r.subject_id) || at > (out.get(r.subject_id) as string)) out.set(r.subject_id, at);
+  }
+  return out;
 }
 
 /** A person's reply that asks for an answer (a person writing, never a referral, an opt-out, a notice or a bounce). */
