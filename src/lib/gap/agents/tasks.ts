@@ -34,7 +34,7 @@ export const AGENT_TASK_MAX_ATTEMPTS = 3;
 export const AGENT_TASK_WINDOW_DAYS = 14;
 const DAY_MS = 86_400_000;
 
-export const AGENT_TASK_KINDS = ['revise_message', 'research_focus', 'prepare_call', 'prepare_follow_up', 'prepare_meeting', 'answer_objection'] as const;
+export const AGENT_TASK_KINDS = ['revise_message', 'research_focus', 'prepare_call', 'prepare_follow_up', 'prepare_meeting', 'answer_objection', 'develop_angle'] as const;
 export type AgentTaskKind = (typeof AGENT_TASK_KINDS)[number];
 
 export interface AgentTaskRequest {

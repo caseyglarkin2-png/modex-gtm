@@ -37,7 +37,7 @@ import type { PursuitSummary } from '../pursuit/summary';
 import type { PursuitStateKind } from '../pursuit/state';
 import { outcomeLine, type WorkOutcome } from './outcome-model';
 import { MOTION_UNLOCK_BUSINESS_DAYS } from '../motion/account-motion';
-import { buyerMoves, commitmentPhase, commitmentTier, KIND_TEXT, skippedAtClosureOf, type Commitment, type CommitmentKind, type SkippedAtClosure } from './commitment-model';
+import { buyerMoves, commitmentPhase, commitmentTier, KIND_TEXT, skippedAtClosureOf, type Commitment, type CommitmentKind, type SkippedAtClosure, TERMINAL_STATUSES } from './commitment-model';
 import { dayLabel, nyDay } from './dates';
 import { stalledSignals } from '../deals/stalled';
 import { closedDealLabel, type ClosedDealRef } from '../deals/scope';
@@ -48,6 +48,13 @@ import type { CockpitLane } from '@/components/gap/gap-cockpit';
 export type WorkStateKind = 'replied' | 'opted_out' | 'bounced' | 'follow_up' | 'ready' | 'decide' | 'research' | 'in_deal' | 'unknown_deal' | 'held' | 'committed' | 'meeting';
 export type WorkTier = 'commitment' | 'reply' | 'meeting' | 'deal' | 'follow_up' | 'ready' | 'review' | 'research' | 'admin' | 'later' | 'held';
 export const TIER_RANK: Record<WorkTier, number> = { commitment: 0, reply: 1, meeting: 2, deal: 3, follow_up: 4, ready: 5, review: 6, research: 7, admin: 7.5, later: 8, held: 9 };
+/**
+ * I04 / I05 (Casey's course correction, 2026-10-08, and the review): the day is for new conversations. A deal card whose
+ * ONLY move is hygiene (a passed close date, no activity: no due obligation, no HubSpot next step) ranks after the
+ * prospect follow-ups and the prepared first touches; a deal card carrying a due commitment or a next step keeps the
+ * deal tier's place (a real commitment coming due stays prominent, the mandate's section 5).
+ */
+export const DEAL_HYGIENE_RANK = TIER_RANK.ready + 0.5;
 /**
  * Batch item 8: the tiers that do not need the seller today (research, a hold, the seller's own set-aside). Their cards
  * stay listed, after every card that needs the seller and under their own heading, and never count in "needs you".
@@ -657,6 +664,8 @@ export function workDay(i: WorkInput): WorkDay {
     // promotes a held account either; every other kind ranks.
     const tier: WorkTier = c.source.kind === 'snooze' || plan?.action === 'held' ? 'later' : commitmentTier(c);
     const list = obligations.get(c.accountName) ?? [];
+    // I04: a reminder to follow up when someone is back and the follow-up waiting on the same person are one item.
+    if (c.kind === 'reminder' && c.person?.email && (i.commitments ?? []).some((o) => o.kind === 'follow_up' && o.commitmentId !== c.commitmentId && !TERMINAL_STATUSES.includes(o.status) && o.accountName === c.accountName && o.person?.email === c.person?.email && o.title.replace(/^Reminder: /, '') === c.title.replace(/^Reminder: /, ''))) continue;
     list.push({ key: c.commitmentId, commitmentId: c.commitmentId, kind: c.kind, tier, title: c.title, line: plan?.line ?? p.line, dueAt: c.dueAt, dueDay: p.dueDay, person: c.person ? { name: c.person.name, email: c.person.email } : null, basis: c.basis, href: action.href, label: action.label, canComplete: true, scope: dealLabel(c.accountName, c.dealId), proofNeeded: c.detail?.proofNeeded ?? null, ...(c.detail?.skippedAtClosure?.length ? { skippedAtClosure: skippedAtClosureOf(c, i.commitments ?? []) } : {}) });
     obligations.set(c.accountName, list);
   }
@@ -728,9 +737,11 @@ export function workDay(i: WorkInput): WorkDay {
     const act = activity.get(name) ?? 0;
     const prio = i.priorities?.get(name) ?? null;
     const oldReplyDays = oldReply ? replyAgeDays : null;
-    return { r, tier, lane, list, dueMs, act, prio, oldReplyDays };
+    const hygiene = tier === 'deal' && !fromObligation && !r.card.dealNextStep;
+    return { r, tier, lane, list, dueMs, act, prio, oldReplyDays, hygiene };
   });
-  ranked.sort((a, b) => Number(PARKED_TIERS.has(a.tier)) - Number(PARKED_TIERS.has(b.tier)) || TIER_RANK[a.tier] - TIER_RANK[b.tier] || a.dueMs - b.dueMs || b.act - a.act || Number(!a.prio) - Number(!b.prio) || a.r.rank - b.r.rank || cmpKeys(a.r.sortKey, b.r.sortKey) || a.r.card.accountName.localeCompare(b.r.card.accountName));
+  const rankOf = (x: { tier: WorkTier; hygiene: boolean }) => (x.hygiene ? DEAL_HYGIENE_RANK : TIER_RANK[x.tier]);
+  ranked.sort((a, b) => Number(PARKED_TIERS.has(a.tier)) - Number(PARKED_TIERS.has(b.tier)) || rankOf(a) - rankOf(b) || a.dueMs - b.dueMs || b.act - a.act || Number(!a.prio) - Number(!b.prio) || a.r.rank - b.r.rank || cmpKeys(a.r.sortKey, b.r.sortKey) || a.r.card.accountName.localeCompare(b.r.card.accountName));
   /** R44: Capture opened from this card: the account, the person who wrote, the deal, the conversation, the source. */
   const replyPersona = new Map(i.replies.filter((r) => r.personaId != null).map((r) => [`${r.accountName}|${r.contactEmail.toLowerCase()}`, r.personaId as number]));
   const replyContact = new Map(i.replies.filter((r) => r.hubspotContactId).map((r) => [`${r.accountName}|${r.contactEmail.toLowerCase()}`, String(r.hubspotContactId)]));

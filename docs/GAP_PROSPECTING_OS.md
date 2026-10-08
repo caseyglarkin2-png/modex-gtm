@@ -2500,6 +2500,7 @@ targets are kept (Casey asked for daily activity counts against a target) but af
 - X09 0b379c2e `agents/revise-message.ts`, REVISE queues and the drain runs with `after()` (revise-message.test.ts 5)
 - X11 1b430569 `agents/approve-request.ts`, APPROVE wired (approve-request.test.ts 4)
 - X12 DONE 2026-10-08 on the scratch harness, provider boundary SIMULATED (the sink, the stub; the model call real): all twelve steps of section 17 with their receipts in `docs/gap/execution-engine-demo-latest.md`. The walk found and fixed, each its own commit: 7992ae81 (a provider answering no thread id), 626b4a17 (approving a story forgets the stale Work summary), bde214a3 (a ready card's decision read off the NEXT UP candidate), 2cb74376 (a refused APPROVE never consumes the command), d3de26ff (the revise prompt states the subject form). The real-Gmail variant ran on Casey's go the same day: a real draft (r5338182872211554541) in casey@freightroll.com and one real send (Gmail 1a11cc94d7fc0926) to his own plus-address, through every gate; the briefing and the assignments as real email to caseyglarkin2@gmail.com. Not exercised for real: the mailbox cron's inbox listing. Merged to main 133aeee7 (PR #413) on his go; GAP_ACTION_SECRET and the three cron flags set in Vercel; the production seller settings written (briefing 7 am New York to casey@freightroll.com; command senders his two addresses; mode review).
+- X21b e71072d2 `work/plan.ts` (`PLAN_TX_OPTIONS`: the lock opens its transaction with maxWait 5 s and timeout 15 s; production timed out at 500 ms on three round trips to a database in another region) (day-plan.test.ts +1); merged to main d13802a9 (PR #419), READY 2026-10-08 20:57Z. THE FIRST PRODUCTION BRIEFING WENT OUT at 20:59Z, run once by hand with the cron secret on the fixed build: `{sent: true, day: 2026-10-08, to: casey@freightroll.com, gmailMessageId: 1a11d5029f293935, items: 18}`; the 21:05Z tick then reads already_sent. Attempts 1 and 2 (19:05Z, 20:05Z) had failed on the builds before X21.
 - X14b merged to main 0626d811 (PR #418), production READY 2026-10-08 20:32Z; smoke: the artifact-used route 401 signed out, health as before.
 - X14b `deals/artifacts.ts` (`ARTIFACT_SENT`, `ArtifactProof`), `/api/gap/deals/artifact-used` (`recipient`), `components/gap/deal-artifacts.tsx` (`recipientFor`: the addressee by name, else the deal's one person with an address; the proof line "Copied ...; GAP has not seen it sent" or "Sent ... (found in Sent)"), `deals/workspace.ts` (`artifactProofOf`, the deal's people per artifact entry), `execution/copies-reconcile.ts` (the third pass: a copy with a recipient found in Sent after the copy writes `deal.artifact_sent` with the Gmail id; without a recipient the copy stays a copy), `work/activity.ts` (the copy is content copied, the sent row a message sent, provider-proven) (x14b-artifact-proof.test.tsx 5, artifact-used-route.test.ts +1; two mutations RED). The backlog's sub-tickets are now all shipped except X19 (Casey's call).
 - X15b + X15d merged to main cb6f47b4 (PR #417), production READY 2026-10-08 20:20Z; the X21 fix c5ae401d (PR #416) READY 20:07Z. The briefing's second attempt (20:05Z) ran on the build before the fix and failed the same way; the third and last tick for the day is 21:05Z on the fixed build.
@@ -2539,6 +2540,78 @@ against the daily send cap (a loop would starve prospect sends: HELP is rate-lim
 never answered); HubSpot sequence write scope unproven; the local box overheats under parallel heavy jobs (serial
 validation only, the full suite at the release gate).
 
+### GAP OS PROSPECTING FIRST (2026-10-08, in progress)
+
+Casey's second and third mandates of the day, verbatim in `docs/gap/PROSPECTING_FIRST_MANDATE_2026-10-08.md`: the
+first production briefing (18 items) was deal hygiene, not demand generation; then the course correction: STOP designing
+freshness gates and research prerequisites; surface the intelligence GAP already holds, let Casey decide (pursue, explore,
+save, skip, dismiss, more), and turn what he chooses into prepared outreach. The operating model is DISCOVER, SURFACE,
+LET CASEY DECIDE, DEVELOP THE ANGLE, PREPARE OUTREACH, EXECUTE, RECORD, FOLLOW UP. Signal age is shown, never a gate.
+Execution safety (opt-outs, suppression, authorization, CONFIRM + SEND) is unchanged.
+<!-- verified:2026-10-08 -->
+
+#### The October 8 briefing, measured (production, read-only)
+
+The 18 items by kind (the plan row `work.day_planned` 2026-10-08): 9 "In a deal" cards whose only move was a stalled
+close date, 1 follow-up at a deal account (held), 4 prospect follow-ups that were 2 (a reminder and a follow-up for the
+same return at Southern Glazer's and at Swire, both from a May out-of-office), 1 ready first touch (PepsiCo, Tom
+Kamantauskas, the only item with a prepared angle), 1 opted-out admin line, 2 "Someone replied" (Gusto, a vendor; The
+Boston Beer Company, June). New-conversation work: 1 of 18. Carried over: none (the first plan).
+
+Why, traced through `work/list.ts`, `work/plan.ts`, `work/briefing.ts` and upstream:
+
+- Ranking: `TIER_RANK` put deal (3) above follow_up (4) and ready (5), so stalled-deal hygiene led by design; the
+  briefing listed the plan's items in that order with no sections.
+- Supply: the ready lane is routing's `enroll` decisions over ACTIVE theses with a fresh verified outreach fact. The
+  whole system holds 31 theses at 8 accounts (16 unresolved, 8 active, 6 approved, 1 waiting review); PepsiCo's are
+  "not ready: evidence expired". Routing last ran 2026-10-05 (the daily cron first fires 2026-10-09 10:30Z).
+- Upstream of that: research ran 187 times in 7 days (170 insufficient_evidence, 17 evidence_found) and verified
+  evidence that was already STALE against the freshness window (23 signal, 15 EDGAR, 3 web records, all stale);
+  `research.proposal_prepared` rows: zero, ever (auto-prepare skips a fact that is not fresh). 67 of the 75 watched
+  accounts have no thesis. Discovery captured 2,916 signals (2,748 under 45 days old; 253 rated outreach
+  candidates, 2,323 account context, 226 research leads, 64 risk, 50 leadership) and queued 30 for research; the rest
+  were never put in front of Casey (feedback: null on every one). 91 Pounce triggers are live, 67 at companies that
+  are not GAP accounts (Tractor Supply, Costco, Daimler, Outpost). 229 people have written to the mailbox since May
+  (596 threads; 21 are known personas at known accounts). The universe: 1,708 accounts, 1,939 people (1,455 with an
+  address, 375 do-not-contact); GAP has emailed 1 of them.
+
+So the briefing was starved, not mis-sorted: the funnel demanded a fresh verified fact before anything reached Casey,
+and the intelligence GAP already held never got a decision from him. The course correction says exactly that.
+
+#### Backlog (atomic, each a commit; focused tests; one reviewer; Casey owns time)
+
+- **I01 the intelligence reader** `work/intel.ts`: the day's intelligence selection from what GAP holds, with no age
+  gate: undecided signals (any age, one per event, Casey's shares first, then outreach candidates, leadership and risk
+  by score, then research leads and context with themes), live Pounce triggers (matched to an account or not), and
+  the people who wrote in and went quiet (previously contacted, no live opportunity). Each item carries its source,
+  its published and observed dates, a truth label (historical observation, verified, unverified, contradicted),
+  the account when known, and the decisions it takes.
+- **I02 decide** one route and one page for Pursue, Explore, Save, Skip, Dismiss, More over signals, triggers and
+  people, reusing the signal feedback fields and one append-only decision row for people and triggers; signed links
+  from the briefing (`op: decide`) and buttons on Work; a skip hides for 30 days, a dismiss for good, both reversible
+  on the Signals page.
+- **I03 develop the angle** an agent task `develop_angle` queued by Pursue: why this could matter to YardFlow, the
+  accounts and buyer roles it points at (named people at a known account), two conversation starters, the dated
+  source line; checked (cited only, no product claims, no money, no em dash, yards plural); the result shown on the
+  item and the account. Pursue also queues the existing evidence research when the item has a source and an account,
+  and auto-prepare no longer skips a fact for its age (the date rides in the observation).
+- **I04 composition** the briefing and Work: Intelligence worth a look, Prospects to reengage, Ready to send,
+  Follow-ups owed, Deals in one compact line; `TIER_RANK` puts new conversations and prospect follow-ups above
+  stalled-deal hygiene; a reminder and a follow-up for the same return are one item.
+- **I05** the ledger, `CLAUDE.md`, one independent review, the demonstration (three examples on production: an older
+  signal, an insight with no account, a quiet prospect; Pursue on each), the START/REVISE/APPROVE verification with
+  Casey's reply.
+
+#### Receipts
+<!-- verified:2026-10-08 -->
+
+- I01 f5d7ff86 `work/intel.ts` (`loadIntelligence`, `rankSignals`, `rankTriggers`, `rankPeople`, `loadDecided`; no age gate; the truth labels; `prospect.decision` is the decision row kind) + the ledger fixture's signal, trigger and thread tables (intel.test.ts 6; mutation: an age gate turns the older-signal case RED)
+- I02 5e2a2534 `work/decide.ts` (`applyDecision`: a signal's decision on its own feedback, `skip` added to the signal feedback; a trigger or a person gets one `prospect.decision` row; Pursue and More queue `develop_angle` and the existing research when there is a link and an account; a pursued trigger is captured as a signal first), `POST /api/gap/decide`, `/gap/decide` (the signed-link page, op `decide` on the action token) (decide.test.ts 5, decide-route.test.ts 1; mutation: Pursue spending nothing turns three cases RED)
+- I03 5b73962a `agents/develop-angle.ts` (`developAngle`: why it could matter, accounts and roles, people from the roster only, two starters, the proposed action, the caveat, the dated source line; `loadAngles`) registered in `agents/handlers.ts` (develop-angle.test.ts 4; mutation: naming anyone outside the roster turns two cases RED). I03b 7251bb49 `research/auto-prepare.ts`: a fact past its freshness window is prepared too, marked historical (the auto-prepare pin changed from `not_fresh` to `prepared`).
+- I04 c19c0bc6 `work/briefing.ts` (the intelligence sections with signed decision links, the item sections, the stalled deals in one line; an older caller without `intel` renders as before), `work/briefing-send.ts` (`defaultIntel`, the `decide` link signer), `work/list.ts` (`TIER_RANK`: follow_up 3, ready 4, deal 5; a reminder and a follow-up for the same return are one obligation), `/gap` + `components/gap/intel-panel.tsx` (the panel with the decision buttons above Today) (briefing.test.ts +2, x15-ranking.test.ts +2, intel-panel.test.tsx 2; mutation: the deals-first order turns the ranking case RED)
+- **Independent review (a fresh read-only subagent, 2026-10-08) and its dispositions.** Seven defects, eight smaller. Fixed in I05 (below): (2) a pursued item vanished and its angle was shown nowhere: `loadPursued` reads the angle tasks and the briefing and Work carry a Pursued section (in progress, ready with the angle, failed with the error); (3) the R41 ordering test was RED and a due deal commitment had been demoted below a cold first touch: `TIER_RANK` is back to its order and only a hygiene-only deal card (no due obligation, no next step) ranks after the first touches (`DEAL_HYGIENE_RANK`); (4) Pounce triggers never reached the email: the briefing reserves slots (four signals, two triggers); (5) the newest-600 signal window was a recency gate: three bounded pulls by class (shares, strongest by score, rest newest) and the total is a count; (6) the email claimed "no open deal" without reading the deal state, and a person at a deal account was dropped: the loader takes the deal state as known or unknown and says it, and an in-deal person is shown and labelled, never dropped; (7) the decide page built its own account slug: `accountHref`; (13) Explore now records the look and opens the source; (14) research first, then one mark; (11) the "- " rides in the HTML text too. Accepted as fine or named debt: (8) no path from a decision contacts anyone or writes HubSpot; (9) a replayed decision link re-queues one angle task at most (same pattern as start and open); (10) the inbound read is newest-first 2,000 (a groupBy later); (12) the event collapse and the relevance rank parallel `signals/ops.ts` (one `HISTORICAL_DAYS` now); (15) the hygiene regex on the title.
+- **REVERTED, and the one open product decision for Casey (finding 1):** I03b (auto-prepare keeping a stale fact) is reverted (d049c3f2). A thesis drafted from a fact past its freshness window is parked by three downstream gates that all read the one freshness authority (`research/currentness.ts isCurrentFact`: `hypothesis/actionability.ts` evidence_expired, routing rule R12 hyp_stale, `enroll/service.ts checkEvidenceFreshness`), so preparing it only made review work that could not ship. The course correction says to remove freshness from recommendation eligibility; doing that honestly is one change at that authority (a dated fact stays usable, labelled historical) plus the compiler stating the fact's date in the copy, so a June event is never written as today. That is I06, and it is Casey's call: a thesis on an old fact becomes sendable once the copy says the date. Until then, Pursue delivers the prepared angle and the account page's existing paths (draft a thesis, research, email) are the way on.
+- I05 (this commit) `work/list.ts` (`DEAL_HYGIENE_RANK`), `work/intel.ts` (`loadPursued`, `PursuedItem`, the pulls by class, `HISTORICAL_DAYS`, `inDeal`), `work/decide.ts`, `agents/develop-angle.ts`, `work/briefing.ts` (Pursued, the slots, the people header), `work/briefing-send.ts` (`links.account`), `components/gap/intel-panel.tsx` (Pursued with "Open <account>" and "Done with it"; Explore posts) (decide.test.ts +1, intel.test.ts +1, briefing.test.ts +1, x15-ranking.test.ts rewritten for the hygiene rule, intel-panel.test.tsx +1; work-rank.test.ts green again; mutation: dropping the pursued list turns the vanish case RED)
 ## 12. Migration, backfill and rollback
 
 Order of commits inside Sprint 1 and 3: schema + SQL first (no reader), then pure core, then importers (Top100 before PIC before modex legacy), then runtime pin, then services, then queue actions under the flag, then `GAP_OS_ENABLED=true` in Vercel after `verify-triggers.ts` passes against prod (env is snapshot at deploy; redeploy after setting). Before the prod `db push`, preview it with `prisma migrate diff --from-url <prod> --to-schema-datamodel prisma/schema.prisma --script` and confirm the script is additive only; also confirm the prod role can `CREATE FUNCTION` (not yet verified). Rollback: the flag off restores byte-identical behavior instantly; full removal is the rollback SQL plus reverting the runtime, service and queue-action commits; `sequences` is never modified; the only two pre-existing tables GAP OS's schema touches at all are `draft_queue_items` (one nullable `sequence_version_id` stamp, S1-T2) and `inbound_messages` (`source String @default("gmail")` and `hubspot_engagement_id String?`, S2-T1, needed so the reply cron and the HubSpot poller can tell a Gmail-sourced row from a HubSpot-engagement-sourced one and attribute the engagement id idempotently) — both additive-only, both confirmed by the production preflight below; the lane and PIC files are read, never written.

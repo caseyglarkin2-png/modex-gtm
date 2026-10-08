@@ -17,7 +17,7 @@ import { classifySignal, signalStatus, type SignalStatus } from './intake';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
 
-export const SIGNAL_FEEDBACK = ['use', 'ignored', 'irrelevant', 'wrong_account', 'already_knew', 'good_context', 'not_sayable'] as const;
+export const SIGNAL_FEEDBACK = ['use', 'ignored', 'irrelevant', 'wrong_account', 'already_knew', 'good_context', 'not_sayable', 'skip'] as const;
 export type SignalFeedback = (typeof SIGNAL_FEEDBACK)[number];
 export const SIGNAL_OP_AUDIT = 'signal.op' as const;
 

@@ -111,3 +111,87 @@ describe('X18: the briefing says what carried over', () => {
     expect(none.text).not.toMatch(/Carried/);
   });
 });
+
+describe('I04: the briefing leads with intelligence, then the items in sections, the stalled deals in one line', () => {
+  const links = { start: 'https://x/start', work: 'https://x/work', item: (it: PlanItem) => `https://x/item/${it.token}`, decide: (key: string, d: string) => `https://x/decide/${encodeURIComponent(key)}/${d}` };
+  const intelItem = (over: Partial<import('@/lib/gap/work/intel').IntelItem> & { kind: 'signal' | 'trigger' | 'person'; id: string; title: string }): import('@/lib/gap/work/intel').IntelItem => ({ key: `${over.kind}:${over.id}`, source: 's', url: null, publishedAt: null, observedAt: '2026-10-01T00:00:00.000Z', truth: 'historical_observation', line: 'news.example, published Jun 24, 2026. Historical observation.', accountName: null, accountHint: null, relevance: null, categories: [], person: null, decisions: ['pursue', 'explore', 'save', 'skip', 'dismiss', 'more'], rank: 0, ...over });
+  const intel = {
+    signals: [intelItem({ kind: 'signal', id: 's-old', title: 'Kenco opens new innovation lab', accountName: 'Kenco' })],
+    triggers: [intelItem({ kind: 'trigger', id: '7', title: 'Tractor Supply opens Idaho DC with automation', accountHint: 'Tractor Supply Company', truth: 'unverified_status', line: 'chainstoreage.com, published Oct 7, 2026. Unverified present-day status. Tractor Supply Company is not a GAP account yet.' })],
+    people: [intelItem({ kind: 'person', id: 'dave@kencogroup.com', title: 'Dave Kiesling, VP Operations at Kenco', accountName: 'Kenco', line: 'Wrote to us Sep 16, 2026 (2 messages); no open deal.' })],
+    totals: { signals: 14, triggers: 3, people: 9 },
+    angles: { 'signal:s-old': { whyItMatters: 'My guess is the lab means the warehouses are standardized while the yards still run on radio.', starters: ['How does the gate know where a trailer goes?', 'Who owns dwell?'], peopleNamed: [{ name: 'Dave Kiesling', title: 'VP Operations' }], proposedAction: 'email' } },
+  };
+  const dealPlan: DayPlan = {
+    ...PLAN,
+    items: [
+      ...PLAN.items,
+      item({ key: 'deal:Boston Beer:2026-10-08', rank: 3, accountName: 'Boston Beer', kind: 'deal', stateKind: 'in_deal', title: 'In a deal', why: 'A stalled deal: the close date (Sep 30) has passed and the deal is still open.', href: '/gap/accounts/boston-beer?view=brief', token: 'e'.repeat(32) }),
+      item({ key: 'deal:Kroger:2026-10-08', rank: 4, accountName: 'Kroger', kind: 'deal', stateKind: 'in_deal', title: 'Next step on the deal: Send the pilot scope to Ann', why: "The deal's next step: Send the pilot scope to Ann", href: '/gap/accounts/kroger?view=brief', token: 'f'.repeat(32) }),
+      item({ key: 'follow_up:Swire:2026-10-08', rank: 5, accountName: 'Swire', kind: 'follow_up', stateKind: 'follow_up', title: 'Follow up with Bryan Sink when they are back', why: 'Back today.', href: '/gap/accounts/swire', token: '1'.repeat(32) }),
+    ],
+  };
+
+  it('intelligence comes before the items, each with its decision links and the prepared angle; the sections name what is owed, ready and followed up; stalled deals are one line; the count in the subject is unchanged', () => {
+    const out = renderBriefing({ plan: dealPlan, dayToken: 'tok', links, commandsEnabled: false, legacyDigest: false, intel }, NOW);
+    expect(out.subject).toBe('GAP today, Thu Oct 8: 6 need you [GAP#tok]');
+    const t = out.text;
+    expect(t.indexOf('Intelligence worth a look (2 of 17)')).toBeLessThan(t.indexOf('Begin with the first item'));
+    expect(t).toContain('- Kenco: Kenco opens new innovation lab. news.example, published Jun 24, 2026. Historical observation. The angle: My guess is the lab means the warehouses are standardized while the yards still run on radio. Who: Dave Kiesling (VP Operations). Ask: How does the gate know where a trailer goes?');
+    expect(t).toContain('Pursue: https://x/decide/signal%3As-old/pursue  Skip: https://x/decide/signal%3As-old/skip  Dismiss: https://x/decide/signal%3As-old/dismiss  More: https://x/decide/signal%3As-old/more');
+    expect(t).toContain('- Tractor Supply Company: Tractor Supply opens Idaho DC with automation. chainstoreage.com, published Oct 7, 2026. Unverified present-day status. Tractor Supply Company is not a GAP account yet.');
+    expect(t).toContain('Prospects to reengage (1 of 9). They wrote to us and went quiet.');
+    expect(out.html).toContain('<li>- Kenco: Kenco opens new innovation lab.');
+    expect(t).toContain('- Kenco: Dave Kiesling, VP Operations at Kenco. Wrote to us Sep 16, 2026 (2 messages); no open deal.');
+    expect(t).toContain('Ready to send (1)\n3. PepsiCo: Ready for a first touch.');
+    expect(t).toContain('Owed and in conversation (2)\n1. Boston Beer: Someone replied.');
+    expect(t).toContain('Follow-ups (1)\n6. Swire: Follow up with Bryan Sink when they are back.');
+    expect(t).toContain('Deals with a next step (1)\n5. Kroger: Next step on the deal: Send the pilot scope to Ann.');
+    expect(t).toContain('Deals, in one line (1): Boston Beer (the close date (Sep 30) has passed and the deal is still open). The deal workspace holds the detail.');
+    expect(t).not.toMatch(/^4\. Boston Beer: In a deal/m);
+    expect(out.html).toContain('<h3>Intelligence worth a look (2 of 17)</h3>');
+    expect(out.html).toContain('<a href="https://x/decide/signal%3As-old/pursue">Pursue</a>');
+    for (const line of t.split('\n')) expect(line).not.toMatch(/^(START|APPROVE|REVISE|SKIP|DEFER|DONE|NEXT|HELP)\b/);
+  });
+
+  it('without a decide signer the item points at Work; without intelligence the older shape renders; no intelligence waiting is said', () => {
+    const noSign = renderBriefing({ plan: PLAN, dayToken: 'tok', links: { ...links, decide: () => null }, commandsEnabled: false, legacyDigest: false, intel }, NOW);
+    expect(noSign.text).toContain('Decide it on Work: https://x/work');
+    const older = renderBriefing({ plan: PLAN, dayToken: 'tok', links, commandsEnabled: false, legacyDigest: false }, NOW);
+    expect(older.text).not.toMatch(/Intelligence/);
+    expect(older.text).toContain('1. Boston Beer: Someone replied.');
+    const none = renderBriefing({ plan: PLAN, dayToken: 'tok', links, commandsEnabled: false, legacyDigest: false, intel: { signals: [], triggers: [], people: [], totals: { signals: 0, triggers: 0, people: 0 }, angles: {} } }, NOW);
+    expect(none.text).toContain('No intelligence is waiting for a decision today.');
+  });
+});
+
+describe('I05: the pursued section and the reserved slots', () => {
+  const links = { start: 'https://x/start', work: 'https://x/work', item: (it: PlanItem) => `https://x/item/${it.token}`, decide: () => null, account: (name: string) => `https://x/accounts/${name.toLowerCase()}/` };
+  const mk = (kind: 'signal' | 'trigger', id: string, title: string): import('@/lib/gap/work/intel').IntelItem => ({ kind, id, key: `${kind}:${id}`, title, source: 's', url: null, publishedAt: null, observedAt: '2026-10-01T00:00:00.000Z', truth: 'historical_observation', line: 'line.', accountName: null, accountHint: kind === 'trigger' ? 'Some Co' : null, relevance: null, categories: [], person: null, decisions: ['pursue', 'explore', 'save', 'skip', 'dismiss', 'more'], rank: 0 });
+  it('what Casey pursued leads, with the angle when ready and the state when not; the top triggers reach the email beside the top signals', () => {
+    const intel = {
+      signals: Array.from({ length: 12 }, (_, k) => mk('signal', `s${k}`, `Signal ${k}`)),
+      triggers: Array.from({ length: 5 }, (_, k) => mk('trigger', `t${k}`, `Trigger ${k}`)),
+      people: [],
+      pursued: [
+        { key: 'signal:p1', kind: 'signal' as const, title: 'Kenco opens new innovation lab', accountName: 'Kenco', accountHint: null, url: null, decision: 'pursue', decidedAt: '2026-10-08T15:00:00.000Z', status: 'ready' as const, error: null, angle: { whyItMatters: 'My guess is the lab standardizes the warehouses while the yards run on radio.', starters: ['How does the gate know where a trailer goes?', 'Who owns dwell?'], roles: ['VP Operations'], accounts: ['Kenco'], peopleNamed: [{ personaId: 1, name: 'Dave Kiesling', title: 'VP Operations' }], proposedAction: 'email', caveat: null, sourceLine: 'freightwaves.com, published Jun 24, 2026 (a historical observation)' } },
+        { key: 'trigger:7', kind: 'trigger' as const, title: 'Tractor Supply opens Idaho DC', accountName: null, accountHint: 'Tractor Supply Company', url: null, decision: 'pursue', decidedAt: '2026-10-08T15:30:00.000Z', status: 'in_progress' as const, error: null, angle: null },
+      ],
+      totals: { signals: 40, triggers: 5, people: 0 },
+      angles: {},
+    };
+    const out = renderBriefing({ plan: PLAN, dayToken: 'tok', links, commandsEnabled: false, legacyDigest: false, intel }, NOW);
+    const t = out.text;
+    expect(t.indexOf('Pursued (2): what GAP prepared on your decisions.')).toBeLessThan(t.indexOf('Intelligence worth a look'));
+    expect(t).toContain('- Kenco: Kenco opens new innovation lab. The angle: My guess is the lab standardizes the warehouses while the yards run on radio. Who: Dave Kiesling (VP Operations). Ask: How does the gate know where a trailer goes? Proposed: an email.');
+    expect(t).toContain('   Open Kenco: https://x/accounts/kenco/');
+    expect(t).toContain('- Tractor Supply Company: Tractor Supply opens Idaho DC. GAP is developing the angle; it comes back here and on Work.');
+    expect(t).toContain('Intelligence worth a look (6 of 45).');
+    expect(t).toContain('- Some Co: Trigger 0.');
+    expect(t).toContain('- Some Co: Trigger 1.');
+    expect(t).not.toContain('Trigger 2.');
+    expect(t).toContain('Signal 3.');
+    expect(t).not.toContain('Signal 4.');
+    for (const line of t.split('\n')) expect(line).not.toMatch(/^(START|APPROVE|REVISE|SKIP|DEFER|DONE|NEXT|HELP)\b/);
+  });
+});

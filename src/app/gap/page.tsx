@@ -41,6 +41,9 @@ import { GapSubnav } from '@/components/gap/gap-subnav';
 import { GapCockpit, type CockpitLane } from '@/components/gap/gap-cockpit';
 import Link from 'next/link';
 import { WorkToday } from '@/components/gap/work-today';
+import { IntelPanel } from '@/components/gap/intel-panel';
+import { loadIntelligence } from '@/lib/gap/work/intel';
+import { loadAngles } from '@/lib/gap/agents/develop-angle';
 import { loadWorkDay } from '@/lib/gap/work/load-day';
 import { loadSellerSettings } from '@/lib/gap/work/settings';
 import { warmPursuitSummaries } from '@/lib/gap/pursuit/summary';
@@ -233,6 +236,9 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
   const { read, data, realNow, day, cards: work, today } = await loadWorkDay(prisma, { lane: !!lane, preview, fresh });
   // X13: the daily targets for the scorecard (the seller settings; defaults when none are stored).
   const sellerTargets = lane ? {} : (await loadSellerSettings(prisma)).targets;
+  // I04: the day's intelligence for Casey's decisions, read soft; the prepared angles by item key.
+  const intel = lane ? null : await loadIntelligence(prisma, { now: new Date(), dealAccounts: new Set(data.inDeals.accounts.map((a) => a.accountName)) }).catch(() => null);
+  const angles = intel ? Object.fromEntries([...(await loadAngles(prisma, { keys: [...intel.signals, ...intel.triggers, ...intel.people].map((i) => i.key), now: new Date() }).catch(() => new Map())).entries()]) : {};
   // UX-08 parity: after the response is sent, read the canonical pursuit state for the first few Work accounts
   // that have none remembered (serial, bounded, never blocking a render), so the next Work load says what the
   // workspace says.
@@ -301,6 +307,7 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
               Tomorrow at 8:00 AM New York, as Work will hold it then: a preview. Nothing here happens until then, and every action still runs its checks when you press it. <Link href="/gap" className="underline">Back to today</Link>
             </p>
           ) : null}
+          {intel ? <IntelPanel intel={intel} angles={angles} /> : null}
           <WorkToday today={today} preview={preview} targets={sellerTargets} />
           {!preview ? <Link href="/gap?day=tomorrow" className="inline-flex min-h-11 items-center text-xs underline" data-testid="work-tomorrow-link">See tomorrow</Link> : null}
           {/* R45: Work is the one list. The legacy NEXT UP fallback no longer competes with it when it is empty. */}
