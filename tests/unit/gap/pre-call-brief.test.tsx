@@ -68,7 +68,7 @@ describe('<PreCallBrief>', () => {
     expect(within(fact).getByText('FACT')).toBeInTheDocument();
     expect(within(fact).getByText('Observed, cited')).toBeInTheDocument();
     expect(within(fact).getByText('Acme opened a second DC in Reno.')).toBeInTheDocument();
-    expect(within(fact).getByRole('link', { name: '1' })).toHaveAttribute('href', 'https://news.example/reno');
+    expect(within(fact).getByRole('link', { name: 'Source 1: Reno DC opening (news.example)' }) /* R63-B N12: a citation names its source */).toHaveAttribute('href', 'https://news.example/reno');
 
     const hypothesis = screen.getByTestId('hypothesis-block');
     expect(hypothesis).toHaveAttribute('data-block', 'hypothesis');
