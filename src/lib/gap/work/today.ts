@@ -9,7 +9,7 @@
  *              step, a buyer's promise to chase), whatever their day
  *   waiting    what waits on the buyer (follow-ups not due, a buyer's promise not due, a first touch out)
  *   tomorrow   what becomes due tomorrow that is not due today (an obligation's day, a snooze coming back, a meeting
- *              on tomorrow's calendar)
+ *              on tomorrow's calendar), never an obligation already listed under owed (R63-A S15: one line each)
  *
  * The phase of every obligation is read with the same New York rule Work uses (commitment-model.ts), so the summary,
  * Work today and Work tomorrow can never disagree about a date. Pinned by tests/unit/gap/work-today.test.ts.
@@ -59,7 +59,11 @@ export function todaySummary(i: {
     .sort((a, b) => String(a.c.dueAt ?? '9999').localeCompare(String(b.c.dueAt ?? '9999')))
     .map(({ c, p }) => ({ commitmentId: c.commitmentId, accountName: c.accountName, title: c.title, line: p.line }));
   const tomorrow: TodaySummary['tomorrow'] = [];
+  // R63-A S15: one line per obligation. A buyer obligation is already in Owed with its day ("Due tomorrow."); the
+  // tomorrow list never repeats it (the preview listed Nfi's case study under Owed and again under The day after).
+  const listed = new Set(owed.map((o) => o.commitmentId));
   for (const c of open) {
+    if (listed.has(c.commitmentId)) continue;
     const nowPhase = commitmentPhase(c, i.now, i.moved).phase;
     if (nowPhase === 'due' || nowPhase === 'blocked') continue;
     const then = commitmentPhase(c, tomorrowMorning, i.moved);

@@ -69,8 +69,9 @@ describe('the Today summary (R45)', () => {
     expect(t.done.map((d) => d.accountName)).toEqual(['Done Co', 'Late Co']);
     expect(t.owed.map((o) => o.title)).toEqual(["Answer Ann's request", 'Send the dock schedule template']);
     expect(t.waiting.map((w) => w.title)).toEqual(['Follow up with Glen']);
+    // R63-A S15: Pepsi's template is a buyer obligation, listed once under Owed with its day; never again here.
+    expect(t.owed.find((o) => o.title === 'Send the dock schedule template')?.line).toBe('Due tomorrow.');
     expect(t.tomorrow.map((x) => [x.accountName, x.line])).toEqual([
-      ['Pepsi Scratch Co', 'Due tomorrow.'],
       ['Tyson Scratch Co', 'Back tomorrow.'],
       ['Dannon Scratch Co', 'Prepare it today or first thing.'],
     ]);
