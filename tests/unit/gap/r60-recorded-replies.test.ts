@@ -39,8 +39,8 @@ describe('R60: a reply logged through Capture leaves Work on the next load', () 
     expect(after.cards.find((c) => c.accountName === 'Nfi Co')).toBeUndefined();
   });
 
-  it('the Work page reads it live, in the same wave, and builds the cards from what is left', () => {
-    const page = readFileSync('src/app/gap/page.tsx', 'utf8');
+  it('the day builder (load-day.ts, shared by the page and the crons) reads it live, in the same wave, and builds the cards from what is left', () => {
+    const page = readFileSync('src/lib/gap/work/load-day.ts', 'utf8') // X01: the day builder moved out of page.tsx;
     expect(page).toMatch(/loadRecordedReplyIds\(prisma, data\.workInput\.replies\.map/);
     expect(page).toMatch(/const day = workDay\(\{ \.\.\.data\.workInput, replies: live\.replies,/);
   });
