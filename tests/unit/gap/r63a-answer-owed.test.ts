@@ -16,7 +16,7 @@ const msg = (id: string, from: string, body: string) => ({ id, thread_id: `t-${i
 const disp = (source_id: string, response_class: string) => ({ id: `d-${source_id}`, source_kind: 'inbound_message', source_id, account_name: NFI, persona_id: 1, contact_email: 'x', response_class, human_confirmed: true, created_at: new Date('2026-10-07T21:55:00Z') });
 
 describe('R63-A S4: a recorded reply is not an answered reply', () => {
-  it('a recorded person\'s reply is owed its answer until GAP sends or copies it; an opt-out, a bounce and a referral owe none', async () => {
+  it('a recorded person\'s reply is owed its answer until it is sent (copied is not sent); an opt-out, a bounce and a referral owe none', async () => {
     const d = ledgerDb({
       inbound: [
         msg('m1', 'person1@nfi-scratch-co-r63.example.com', 'Hi Casey, the detention charges are killing us. Can you send the case study by Friday?'),
@@ -27,8 +27,11 @@ describe('R63-A S4: a recorded reply is not an answered reply', () => {
     });
     const owed = await loadAnswersOwed(d.client(), NOW);
     expect(owed.map((o) => [o.id, o.accountName, o.fromName, o.recorded])).toEqual([['m1', NFI, 'Person1 Scratch', true]]);
-    // Sent in their thread, or copied to send by hand: answered.
+    // X14 (copied is not sent): a copy to send by hand leaves the answer OWED until Sent shows it went; a sent row (GAP's, or
+    // the copies reconcile's from Sent) is the answer.
     d.store.gapAuditEvent.push({ id: 'e1', kind: 'execution.reply_copied', subject_type: 'inbound_message', subject_id: 'm1', actor: 'casey@freightroll.com', payload: {}, created_at: NOW });
+    expect((await loadAnswersOwed(d.client(), NOW)).map((o) => o.id)).toEqual(['m1']);
+    d.store.gapAuditEvent.push({ id: 'e2', kind: 'execution.reply_sent', subject_type: 'inbound_message', subject_id: 'm1', actor: 'cron:gap-mailbox', payload: { reconciledFromSent: true }, created_at: NOW });
     expect(await loadAnswersOwed(d.client(), NOW)).toEqual([]);
   });
 

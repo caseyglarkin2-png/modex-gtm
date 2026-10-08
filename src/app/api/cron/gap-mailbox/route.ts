@@ -7,6 +7,7 @@ import { classifyMailboxMessage, GAP_MAILBOX_WATERMARK_KEY, loadGapSendContext, 
 import { getMailboxMessage, listMailboxIds, listSentTo } from '@/lib/email/gmail-inbox';
 import { reconcileUnknownSends } from '@/lib/gap/execution/unknown-send-reconcile';
 import { reconcileFollowUpsFromSent } from '@/lib/gap/execution/follow-up-load';
+import { reconcileCopiesFromSent } from '@/lib/gap/execution/copies-reconcile';
 import { prisma } from '@/lib/prisma';
 import { sendViaGmail } from '@/lib/email/gmail-sender';
 import { applyCommand, loadCommandContext } from '@/lib/gap/replies/commands-apply';
@@ -114,6 +115,8 @@ export async function GET(request: Request) {
       report.unknownSends = await reconcileUnknownSends(prisma, { now }, { listSent: (rcpt, a, b) => listSentTo(sender, rcpt, a, b), mailbox: sender.userEmail });
       // R43: a follow-up sent by hand from this mailbox closes its obligation (Sent is the proof; nothing else is written).
       report.followUpsFromSent = await reconcileFollowUpsFromSent(prisma, { now }, { listSent: (rcpt, a, b) => listSentTo(sender, rcpt, a, b) }).catch((e) => ({ error: e instanceof Error ? e.message : String(e) }));
+      // X14: copied is not sent. A copied reply or cold email is recorded as sent only once Sent shows it went (the proof is the Gmail message).
+      report.copiesFromSent = await reconcileCopiesFromSent(prisma, { now }, { listSent: (rcpt, a, b) => listSentTo(sender, rcpt, a, b) }).catch((e) => ({ error: e instanceof Error ? e.message : String(e) }));
       // Release C review S2: a failed or quarantined message, an unattributable
       // delivery notice or a truncated listing is never a quiet success.
       const errors = Array.isArray(report.errors) ? (report.errors as string[]) : [];

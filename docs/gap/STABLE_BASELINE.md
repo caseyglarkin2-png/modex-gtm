@@ -12,7 +12,7 @@ internal briefing and assignment mail to Casey is allowed; a routing run on a sc
 <!-- verified:2026-10-05 -->
 <!-- verified:2026-10-02 (V2) -->
 
-Production SHA: 542a6b4d (PR #410, the execution-recovery release R00-R65; Vercel `dpl_C4THQEpA3qYy73JQt9A23sNLTx5W` READY 2026-10-08T02:27:23Z; rollback 672570ed). Receipts: `docs/GAP_PROSPECTING_OS.md`, the R64 entry. Update this line when a change ships.
+Production SHA: 133aeee7 (PR #413, the sales execution engine X01-X12 over the canary fix 2759f2ab; Vercel `dpl_Daup1pG6Eo48tBCDsuZ1iwfGFywQ` READY 2026-10-08T18:33:38Z; rollback 2759f2ab `dpl_Dv77MfLrk62bNXYm7ToWRUpKKB8u`). Receipts: `docs/GAP_PROSPECTING_OS.md`, the SALES EXECUTION ENGINE section. Update this line when a change ships.
 <!-- verified:2026-10-08 -->
 
 ## The rule for future changes

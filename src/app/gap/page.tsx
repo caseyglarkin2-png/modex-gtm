@@ -42,6 +42,7 @@ import { GapCockpit, type CockpitLane } from '@/components/gap/gap-cockpit';
 import Link from 'next/link';
 import { WorkToday } from '@/components/gap/work-today';
 import { loadWorkDay } from '@/lib/gap/work/load-day';
+import { loadSellerSettings } from '@/lib/gap/work/settings';
 import { warmPursuitSummaries } from '@/lib/gap/pursuit/summary';
 import { agoText as readAgo } from '@/lib/gap/work/cache';
 import { todayListenText } from '@/lib/gap/voice/today';
@@ -230,6 +231,8 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
   const preview = params.day === 'tomorrow' && !lane;
   // X01: the one day builder (the briefing cron reads the same function); the page only renders what it returns.
   const { read, data, realNow, day, cards: work, today } = await loadWorkDay(prisma, { lane: !!lane, preview, fresh });
+  // X13: the daily targets for the scorecard (the seller settings; defaults when none are stored).
+  const sellerTargets = lane ? {} : (await loadSellerSettings(prisma)).targets;
   // UX-08 parity: after the response is sent, read the canonical pursuit state for the first few Work accounts
   // that have none remembered (serial, bounded, never blocking a render), so the next Work load says what the
   // workspace says.
@@ -298,7 +301,7 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
               Tomorrow at 8:00 AM New York, as Work will hold it then: a preview. Nothing here happens until then, and every action still runs its checks when you press it. <Link href="/gap" className="underline">Back to today</Link>
             </p>
           ) : null}
-          <WorkToday today={today} preview={preview} />
+          <WorkToday today={today} preview={preview} targets={sellerTargets} />
           {!preview ? <Link href="/gap?day=tomorrow" className="inline-flex min-h-11 items-center text-xs underline" data-testid="work-tomorrow-link">See tomorrow</Link> : null}
           {/* R45: Work is the one list. The legacy NEXT UP fallback no longer competes with it when it is empty. */}
           <WorkList when={preview ? 'tomorrow' : 'today'} cards={work} snoozed={day.snoozed} waiting={day.waiting} counts={day.counts} focus={/^[a-z0-9-]{1,120}$/.test(params.focus ?? '') ? (params.focus as string) : null} listenText={todayListenText(work)} readAt={{ at: read.at, label: read.fromCache ? `Read ${readAgo(read.at, realNow)}` : 'Read just now' }} />

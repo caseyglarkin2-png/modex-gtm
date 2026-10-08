@@ -50,7 +50,9 @@ async function main() {
   const words = rest.join(' ').trim();
   const url = process.env.DATABASE_URL ?? '';
   if (!isLocal(url)) throw new Error('refused: DATABASE_URL is not local (scratch only)');
-  if ((process.env.GAP_SEND_TRANSPORT ?? '') !== 'sink') throw new Error('refused: GAP_SEND_TRANSPORT must be sink (the harness mailbox)');
+  // The real-Gmail variant (DEMO_REAL=1): the real wire, but only to Casey's own addresses (checked again below on the settings).
+  const OWN = new Set(['casey@freightroll.com', 'casey@yardflow.ai', 'caseyglarkin2@gmail.com']);
+  if ((process.env.GAP_SEND_TRANSPORT ?? '') !== 'sink' && process.env.DEMO_REAL !== '1') throw new Error('refused: GAP_SEND_TRANSPORT must be sink (the harness mailbox), or DEMO_REAL=1 for the real-Gmail variant to Casey only');
   const { prisma } = await import('../../src/lib/prisma');
   const now = new Date();
   const day = nyDay(now);
@@ -59,6 +61,7 @@ async function main() {
   if (!sender) throw new Error('GAP sender unconfigured');
   const seller = settings.commandSenders[0];
   if (!seller) throw new Error('no command sender in the seller settings');
+  if (process.env.DEMO_REAL === '1' && (!settings.briefingTo || !OWN.has(settings.briefingTo) || !settings.commandSenders.every((a) => OWN.has(a)))) throw new Error('refused: the real-Gmail variant mails only addresses that belong to Casey');
   const ctx = await loadCommandContext(prisma, settings, now);
   const plan = await loadDayPlan(prisma, day);
 

@@ -71,8 +71,8 @@ describe('cold CALL / LINKEDIN: action-time active-opportunity check', () => {
   it('4. CLEAR allows both: the call returns the tel: link, LinkedIn the profile (a deal closed lost, something material since); R55: without it the account is parked', async () => {
     const hs = () => via(fakeHubSpot({ companyDeals: { [COMPANY]: [OPEN_DEAL.id] }, deals: [{ ...OPEN_DEAL, closed: 'true', won: 'false', closedate: '2026-03-01T00:00:00Z' }] }));
     const changed = prismaFake({ factAt: new Date('2026-09-01T00:00:00Z') });
-    expect(await run('call', hs(), changed)).toEqual({ ok: true, channel: 'call', href: 'tel:+15550102000' });
-    expect(await run('linkedin', hs(), changed)).toEqual({ ok: true, channel: 'linkedin', href: 'https://www.linkedin.com/in/jordan' });
+    expect(await run('call', hs(), changed)).toMatchObject({ ok: true, channel: 'call', href: 'tel:+15550102000', personaId: expect.any(Number) });
+    expect(await run('linkedin', hs(), changed)).toMatchObject({ ok: true, channel: 'linkedin', href: 'https://www.linkedin.com/in/jordan' });
     const parked = await run('call', hs());
     expect(parked).toMatchObject({ ok: false, reason: 'active_opportunity' });
     expect(parked.ok ? '' : parked.message).toMatch(/Parked: "YardFlow - Acme" closed lost/);

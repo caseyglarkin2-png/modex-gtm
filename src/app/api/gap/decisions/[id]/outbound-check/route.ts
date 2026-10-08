@@ -7,7 +7,8 @@
  *
  * 200 `{ ok: true, channel, href }` CLEAR: the tel: / LinkedIn link to act on.
  * 409 `{ ok: false, reason, message }` ACTIVE or UNKNOWN (fail closed), no link.
- * 404 unknown card or flag off, 401 no session, 400 bad body. Read only.
+ * 404 unknown card or flag off, 401 no session, 400 bad body. The one write (X16a): a CLEAR call release records
+ * `call.attempt_started` (self-reported; never a call until its outcome is recorded). Fail-open.
  */
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
@@ -15,6 +16,7 @@ import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { checkColdOutbound } from '@/lib/gap/execution/cold-outbound';
+import { recordCallAttempt } from '@/lib/gap/execution/call-attempt';
 import { OPPORTUNITY_UNKNOWN_COPY } from '@/lib/gap/opportunity/active-opportunity';
 
 export const dynamic = 'force-dynamic';
@@ -33,8 +35,12 @@ export async function POST(request: NextRequest, context: { params: Promise<{ id
   if (!id?.trim()) return NextResponse.json({ ok: false, reason: 'decision_not_found' }, { status: 404 });
 
   try {
-    const result = await checkColdOutbound(prisma, { decisionId: id.trim(), channel: parsed.data.channel, now: new Date() });
-    if (result.ok) return NextResponse.json(result, { status: 200 });
+    const now = new Date();
+    const result = await checkColdOutbound(prisma, { decisionId: id.trim(), channel: parsed.data.channel, now });
+    if (result.ok) {
+      await recordCallAttempt(prisma, { decisionId: id.trim(), accountName: result.accountName, personaId: result.personaId, channel: result.channel, actor: email, now });
+      return NextResponse.json(result, { status: 200 });
+    }
     return NextResponse.json(result, { status: result.reason === 'decision_not_found' ? 404 : 409 });
   } catch (e) {
     return NextResponse.json({ ok: false, reason: 'opportunity_unknown', message: `${OPPORTUNITY_UNKNOWN_COPY} (${e instanceof Error ? e.message : String(e)})` }, { status: 409 });

@@ -161,3 +161,55 @@ describe('ops closeout 17: quantify only after the buyer acknowledges the proble
     expect(screen.queryByTestId('brief-after-acknowledgement')).toBeNull();
   });
 });
+
+describe('X16c: the timeline section', () => {
+  it('renders the summary line and the entries, oldest last, the unconfirmed ones marked; without a timeline no section', () => {
+    render(
+      <PreCallBrief
+        brief={brief({
+          timeline: {
+            unansweredCalls: 2,
+            callsLeft: 1,
+            entries: [
+              { kind: 'attempt', at: '2026-10-08T15:00:00.000Z', line: 'Dial link opened (self-reported; no outcome recorded)', confirmed: true },
+              { kind: 'disposition', at: '2026-10-06T15:00:00.000Z', line: 'Call: voicemail', confirmed: true },
+              { kind: 'disposition', at: '2026-10-01T15:00:00.000Z', line: 'Call: no answer', confirmed: false },
+            ],
+          },
+        })}
+      />,
+    );
+    const section = screen.getByTestId('brief-timeline');
+    expect(within(section).getByText(BRIEF_LABELS.timeline)).toBeTruthy();
+    expect(within(section).getByText('2 unanswered calls since their last answer; 1 more before the hold.')).toBeTruthy();
+    const items = within(section).getAllByRole('listitem');
+    expect(items).toHaveLength(3);
+    expect(items[0].textContent).toContain('Dial link opened');
+    expect(items[2].textContent).toContain('unconfirmed');
+    expect(items[1].textContent).not.toContain('unconfirmed');
+  });
+
+  it('no section without a timeline; the held wording at the cap', () => {
+    render(<PreCallBrief brief={brief()} />);
+    expect(screen.queryByTestId('brief-timeline')).toBeNull();
+    render(<PreCallBrief brief={brief({ timeline: { unansweredCalls: 3, callsLeft: 0, entries: [] } })} />);
+    expect(screen.getByText('3 unanswered calls since their last answer; the person is held, no cold call.')).toBeTruthy();
+  });
+});
+
+describe('X16d: the prepared objection talking points', () => {
+  it('renders each objection with the talking point (fact markers stripped) and the question; nothing without any', () => {
+    render(<PreCallBrief brief={brief({ objectionAnswers: [{ taskId: 'at_1', dispositionId: 'd9', objection: 'We already run a YMS.', answer: 'Fair, most sites run one. The Tulsa expansion adds doors [[SRC:sig-1]], so my guess is the gate still works from a clipboard.', question: 'How does the gate find a trailer the YMS has wrong?', factsUsed: ['sig-1'], preparedAt: '2026-10-08T16:00:00.000Z' }] })} />);
+    const section = screen.getByTestId('brief-objections');
+    expect(within(section).getByText(BRIEF_LABELS.objectionAnswers)).toBeTruthy();
+    expect(within(section).getByText('We already run a YMS.')).toBeTruthy();
+    expect(section.textContent).toContain('adds doors, so my guess');
+    expect(section.textContent).not.toContain('[[SRC:');
+    expect(within(section).getByText('How does the gate find a trailer the YMS has wrong?')).toBeTruthy();
+  });
+
+  it('no section without a talking point', () => {
+    render(<PreCallBrief brief={brief()} />);
+    expect(screen.queryByTestId('brief-objections')).toBeNull();
+  });
+});

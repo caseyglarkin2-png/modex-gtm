@@ -151,7 +151,7 @@ export async function loadCockpit(prisma: PrismaLike) {
     mailbox: process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() || null,
     motions: motion.motions.map((m) => ({ accountName: m.accountName, state: m.state, primary: m.primary ? { name: m.primary.name, title: m.primary.title } : null, next: m.next ? { name: m.next.name, title: m.next.title, unlock: m.next.unlock } : null })),
     // R50: each deal keeps its HubSpot id (an obligation names its deal; Capture binds a note to it by id).
-    inDeals: { status: inDeals.status, accounts: inDeals.accounts.map((a) => ({ accountName: a.accountName, deals: a.deals.map((d) => ({ ...(d.id ? { id: d.id } : {}), name: d.name, stage: d.stage, lastActivityAt: d.lastActivityAt ?? null, closeDate: d.closeDate ?? null, contactIds: d.contactIds ?? [] })) })) },
+    inDeals: { status: inDeals.status, accounts: inDeals.accounts.map((a) => ({ accountName: a.accountName, deals: a.deals.map((d) => ({ ...(d.id ? { id: d.id } : {}), name: d.name, stage: d.stage, lastActivityAt: d.lastActivityAt ?? null, closeDate: d.closeDate ?? null, nextStep: d.nextStep ?? null, contactIds: d.contactIds ?? [] })) })) },
     held: heldWhy,
     opportunityHolds,
     conversations,

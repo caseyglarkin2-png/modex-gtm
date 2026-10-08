@@ -19,6 +19,8 @@ import { formatWhen } from '@/lib/gap/ui/format';
 export const BRIEF_LABELS = {
   wouldProveWrong: 'Would prove wrong',
   lastDispositions: 'Last dispositions',
+  timeline: 'Timeline',
+  objectionAnswers: 'Prepared for their objection',
   openBids: 'What the buyer said',
   suggestedQuestions: 'Suggested questions',
   afterAcknowledgement: 'After they acknowledge the problem',
@@ -56,7 +58,14 @@ export function PreCallBrief({ brief, hideContact = false, checking = false, sta
   const afterAck = strings(brief.afterAcknowledgementQuestions);
   const proveWrong = strings(hypothesis?.wouldProveWrong);
   const dispositions = Array.isArray(brief.lastDispositions) ? brief.lastDispositions : [];
+  // X16c: the person's timeline (dial attempts, self-reported, and dispositions) with the calls left before the hold.
+  const timeline = brief.timeline && Array.isArray(brief.timeline.entries) ? brief.timeline : null;
+  const timelineLine = timeline
+    ? `${timeline.unansweredCalls} unanswered ${timeline.unansweredCalls === 1 ? 'call' : 'calls'} since their last answer; ${timeline.callsLeft > 0 ? `${timeline.callsLeft} more before the hold.` : 'the person is held, no cold call.'}`
+    : null;
   const bids = Array.isArray(brief.openBids) ? brief.openBids : [];
+  // X16d: the agent's talking points for objections this person raised: said in the seller's words, never sent.
+  const objectionAnswers = Array.isArray(brief.objectionAnswers) ? brief.objectionAnswers : [];
 
   // UX-06: the SAME account state NOW shows, said first; under a hold no opener is offered; while the state is being
   // read, or when it could not be read, no opener either (fail closed).
@@ -171,6 +180,25 @@ export function PreCallBrief({ brief, hideContact = false, checking = false, sta
       </div>
       )}
 
+      {timeline ? (
+        <div data-testid="brief-timeline" className="rounded-md border border-[var(--border)] p-3">
+          <Heading>{BRIEF_LABELS.timeline}</Heading>
+          <p className="mt-1 text-sm text-[var(--muted-foreground)]">{timelineLine}</p>
+          {timeline.entries.length > 0 ? (
+            <ul className="mt-2 space-y-1">
+              {timeline.entries.map((e, i) => (
+                <li key={`${e.kind}:${e.at}:${i}`} className="flex flex-wrap items-center gap-2 text-sm">
+                  <span className="text-xs text-[var(--muted-foreground)]">{formatWhen(e.at, true)}</span>
+                  <span>{e.line}</span>
+                  {e.confirmed ? null : <Badge variant="warning">unconfirmed</Badge>}
+                  {e.buyerLanguage ? <q className="text-[var(--muted-foreground)]">{e.buyerLanguage}</q> : null}
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </div>
+      ) : null}
+
       <div className="grid gap-3 sm:grid-cols-2">
         <div data-testid="brief-dispositions" className="rounded-md border border-[var(--border)] p-3">
           <Heading>{BRIEF_LABELS.lastDispositions}</Heading>
@@ -213,6 +241,22 @@ export function PreCallBrief({ brief, hideContact = false, checking = false, sta
           )}
         </div>
       </div>
+
+      {objectionAnswers.length > 0 ? (
+        <div data-testid="brief-objections" className="rounded-md border border-[var(--border)] p-3">
+          <Heading>{BRIEF_LABELS.objectionAnswers}</Heading>
+          <p className="mt-1 text-xs text-[var(--muted-foreground)]">A talking point to say in your own words, from the thesis facts only. Prepared by GAP; not sent anywhere.</p>
+          <ul className="mt-2 space-y-3">
+            {objectionAnswers.map((o) => (
+              <li key={o.taskId} className="flex flex-col gap-1">
+                <q className="text-[var(--muted-foreground)]">{o.objection}</q>
+                <p className="text-sm">{o.answer.replace(/\s*\[\[SRC:[A-Za-z0-9_-]+\]\]/g, '')}</p>
+                {o.question ? <p className="text-sm font-medium">{o.question}</p> : null}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
 
       {noOpener ? null : (
       <div data-testid="brief-questions" className="rounded-md border border-[var(--border)] p-3">

@@ -70,6 +70,12 @@ import { LIVE_ENROLLMENT_STATUSES } from '../sequence/family';
 import { stopRunsForRecipient as defaultStopRuns } from '@/lib/queue/sequence-runtime';
 import { dispositionEffects, validateDisposition, type DispositionEffects, type ValidDisposition } from './model';
 import { commitmentsFromDisposition as defaultCommitments } from '../work/commitments';
+import { unansweredCallsFor } from './unanswered-calls';
+import { queueObjectionTask as defaultQueueObjection } from '../agents/answer-objection';
+import { gapFlag } from '../flags';
+
+// X16: one reader for the unanswered-call count (the builder, the brief and routing agree); kept exported here.
+export { unansweredCallsFor };
 
 // ---------------------------------------------------------------------------
 // Types
@@ -125,6 +131,8 @@ export interface RecordDispositionDeps {
   propose?: typeof defaultPropose;
   /** R40: the obligations a confirmed answer creates or settles (commitments). Fail-open. */
   commitments?: typeof defaultCommitments;
+  /** X16d: a confirmed objection queues the agent's talking point (behind GAP_AGENT_TASKS_ENABLED). Fail-open. */
+  queueObjection?: typeof defaultQueueObjection;
 }
 
 export type DispositionStep = 'stop' | 'unsubscribe' | 'resolve' | 'retarget' | 'referral' | 'mirror';
@@ -539,6 +547,47 @@ export async function recordDisposition(
     },
   });
 
+  // R40 / X16: the obligations a confirmed answer creates (answer the request, prepare the meeting, come back on the
+  // date, decide on the person they named, call again after no answer or voicemail, get past the gatekeeper) and the
+  // follow-ups it settles. Run for every confirmed row, the non-stopping classes included (X16b: before this, the
+  // early return below skipped it, so a no-answer never made its follow-up). Fail-open: the row is the record.
+  const settleCommitments = async (stopsRun: boolean): Promise<void> => {
+    try {
+      await (deps.commitments ?? defaultCommitments)(prisma, {
+        dispositionId,
+        accountName: hypothesis.account_name,
+        responseClass: valid.responseClass,
+        contactEmail: valid.contactEmail,
+        personaId: persona?.id ?? null,
+        resumeAt: input.resumeAt ?? null,
+        referral: input.referral ?? null,
+        nextBestAction: input.nextBestAction ?? null,
+        buyerLanguage: valid.buyerLanguage,
+        stopsRun,
+        channel: valid.channel,
+        unansweredCalls: valid.channel === 'call' ? await unansweredCallsFor(prisma, valid.contactEmail) : 0,
+        actor: input.actor,
+        now: input.now,
+      });
+    } catch {
+      // The commitment ledger never gates the disposition.
+    }
+  };
+
+  // X16d: a confirmed objection (the existing-solution classes carry one; a captured objection BID is one too) queues
+  // the agent's talking point for the next call, behind the agent-tasks flag. Fail-open: the row is the record.
+  const queueObjection = async (): Promise<void> => {
+    if (!humanConfirmed || !gapFlag('GAP_AGENT_TASKS_ENABLED')) return;
+    const bid = (input.bids ?? []).find((b) => b.type === 'objection' && typeof b.rawBuyerLanguage === 'string' && b.rawBuyerLanguage.trim());
+    const objection = (typeof valid.objection === 'string' && valid.objection.trim()) || bid?.rawBuyerLanguage.trim() || null;
+    if (!objection) return;
+    try {
+      await (deps.queueObjection ?? defaultQueueObjection)(prisma, { dispositionId, accountName: hypothesis.account_name, personaId: persona?.id ?? null, contactEmail: valid.contactEmail, hypothesisId: hypothesis.id, objection, buyerLanguage: valid.buyerLanguage ?? null, actor: input.actor, now: input.now });
+    } catch {
+      // The task queue never gates the disposition.
+    }
+  };
+
   // ---- 3. effects (an unconfirmed row has none, by construction) -----------
   const effects: DispositionEffects = dispositionEffects({ responseClass: valid.responseClass, humanConfirmed });
   if (!humanConfirmed || (!effects.stopsRun && !effects.writesDnc && effects.resolves === null && effects.nextAction === 'none')) {
@@ -550,6 +599,8 @@ export async function recordDisposition(
       const mirrored = await runMirror(prisma, deps, input, dispositionId, hypothesis, persona, valid);
       applied.mirrored = mirrored.mirrored;
       const refusals = mirrored.refusal ? [mirrored.refusal] : [];
+      await settleCommitments(false);
+      await queueObjection();
       await auditEffects(auditFn, prisma, input, dispositionId, applied, refusals);
       return { ok: true, dispositionId, bidIds, humanConfirmed, effects: applied, refusals };
     }
@@ -646,26 +697,9 @@ export async function recordDisposition(
   applied.mirrored = mirrored.mirrored;
   if (mirrored.refusal) refusals.push(mirrored.refusal);
 
-  // 7. R40: the obligations this answer creates (answer the request, prepare the meeting, come back on the date,
-  // decide on the person they named) and the follow-ups it settles. Fail-open: the row above is the record.
-  try {
-    await (deps.commitments ?? defaultCommitments)(prisma, {
-      dispositionId,
-      accountName: hypothesis.account_name,
-      responseClass: valid.responseClass,
-      contactEmail: valid.contactEmail,
-      personaId: persona?.id ?? null,
-      resumeAt: input.resumeAt ?? null,
-      referral: input.referral ?? null,
-      nextBestAction: input.nextBestAction ?? null,
-      buyerLanguage: valid.buyerLanguage,
-      stopsRun: effects.stopsRun,
-      actor: input.actor,
-      now: input.now,
-    });
-  } catch {
-    // The commitment ledger never gates the disposition.
-  }
+  // 7. R40: the obligations this answer creates and the follow-ups it settles; X16d: the objection's talking point.
+  await settleCommitments(effects.stopsRun);
+  await queueObjection();
 
   await auditEffects(auditFn, prisma, input, dispositionId, applied, refusals);
   return { ok: true, dispositionId, bidIds, humanConfirmed, effects: applied, refusals };

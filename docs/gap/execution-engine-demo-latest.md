@@ -32,6 +32,22 @@ The scratch database's 33 hand-SQL guards were proven live after the walk (`veri
 
 Harness-only resets during the walk (never product behavior): today's plan, briefing and assignment rows were removed on the SCRATCH database three times with the append-only trigger disabled and re-enabled (to re-plan after fixes 1 and 2 and after fix 3), and the Fedex draft bracket once (step 10). Each is labelled above. The 33 guards were proven live afterwards.
 
+## The real-Gmail variant (Casey's go, 2026-10-08, after the merge)
+
+The same walk with the REAL Gmail wire: the scratch database and the stub as before, no sink, the sender casey@freightroll.com (the local refresh token), every recipient one of Casey's own addresses. The persona on the Fedex card was re-addressed on the scratch database to `caseyglarkin2+glen@gmail.com` (the same inbox, an address GAP had never mailed: the first-touch gate `emailed_outside_gap` correctly refused the plain address because GAP had just mailed the briefing and the assignments to it).
+
+| Step | Receipt (real Gmail ids) |
+|---|---|
+| The briefing to caseyglarkin2@gmail.com | Gmail message 1a11cc742641537e |
+| START, NEXT, NEXT: three assignment emails in their own threads | 1a11cc5b4944c9fb, 1a11cc5c2e70bcc0, then the Fedex item carrying the prepared email |
+| REVISE by reply, the agent (Gemini, the compiler, the critic stub), the revision back in the thread | compile `pass`, subject "Ohio consolidation" |
+| APPROVE by reply: a REAL editable draft in the casey@freightroll.com mailbox | draft r5338182872211554541 to caseyglarkin2+glen@gmail.com, subject "Ohio consolidation" |
+| CONFIRM + SEND while the draft stands | refused `draft_outstanding` |
+| The draft bracket removed on the scratch database (the real draft stays in the mailbox; Casey can delete it) and CONFIRM + SEND | ONE real message, HUMAN_APPROVED_1TO1, from casey@freightroll.com to caseyglarkin2+glen@gmail.com, Gmail message 1a11cc94d7fc0926 |
+| NEXT | item 4 as its own email |
+
+Still not exercised for real: the mailbox cron's inbox listing (the replies were handed to the same `applyCommand` path by the driver with Gmail's Authentication-Results as it would arrive). Everything that reached Gmail did so through the production code path and every gate.
+
 ## What this does not prove
 
 - Gmail itself: the sink is not Gmail. The real-Gmail variant (the GAP identity drafting and sending to Casey's own address) needs Casey's go, since it writes a draft to his real mailbox.

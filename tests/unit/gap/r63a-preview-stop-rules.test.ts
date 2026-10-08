@@ -59,7 +59,7 @@ describe('R63-A B3: tomorrow goes through the same stop rules as today', () => {
   });
 
   it('the preview reads the remembered summaries as of now, never at tomorrow\'s time', () => {
-    const page = readFileSync('src/app/gap/page.tsx', 'utf8');
+    const page = readFileSync('src/lib/gap/work/load-day.ts', 'utf8') // X01: the day builder moved out of page.tsx;
     expect(page).toContain('loadPursuitSummaries(prisma, data.workAccounts, realNow)');
     expect(page).not.toContain('loadPursuitSummaries(prisma, data.workAccounts, now)');
   });

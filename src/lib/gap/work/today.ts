@@ -18,12 +18,16 @@ import { commitmentPhase, isBuyerCommitment, TERMINAL_STATUSES, type BuyerMoveSi
 import { addDays, nyDay, nyDayAt } from './dates';
 import type { WaitingItem } from './list';
 
+import type { TargetKind } from './settings';
+
 export interface DoneItem {
   at: string;
   accountName: string | null;
   line: string;
   /** Batch item 8: a completion, or something set aside (a skip, a snooze, an unproven log): never counted as done. */
   kind?: 'done' | 'set_aside';
+  /** X13: the activity this completion counts as on the scorecard (work/scorecard.ts); absent counts as nothing. */
+  activity?: TargetKind;
 }
 
 export interface TodaySummary {

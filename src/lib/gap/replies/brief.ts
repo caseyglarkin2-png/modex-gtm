@@ -24,6 +24,9 @@ import { hypothesisSendable } from '../research/evidence-gate';
 import { QUANTIFYING } from '../sequence/call-pack';
 import { supersededIds } from '../bid/select';
 import { PROBLEM_FAMILY_CATALOG, isProblemFamily } from '../taxonomy';
+import { loadCallAttempts } from '../execution/call-attempt';
+import { callsLeftBeforeHold, unansweredCallsFor } from '../disposition/unanswered-calls';
+import { loadObjectionAnswers, type PreparedObjectionAnswer } from '../agents/answer-objection';
 
 export interface BriefPersona {
   id: number;
@@ -96,11 +99,32 @@ export interface BriefBid {
   capturedAt: string | null;
 }
 
+/** X16c: one line of the person's timeline: a recorded dial attempt (self-reported) or a disposition. */
+export interface BriefTimelineEntry {
+  kind: 'attempt' | 'disposition';
+  at: string;
+  line: string;
+  /** An attempt is what the seller did (true); a disposition is confirmed or an unconfirmed suggestion. */
+  confirmed: boolean;
+  buyerLanguage?: string | null;
+}
+
+/** X16c: the person's timeline and the unanswered-call count routing reads (disposition/unanswered-calls.ts). */
+export interface BriefTimeline {
+  entries: BriefTimelineEntry[];
+  unansweredCalls: number;
+  callsLeft: number;
+}
+
 export interface CallBrief {
   persona: BriefPersona;
   account: BriefAccount;
   hypothesis: BriefHypothesis | null;
   lastDispositions: BriefDisposition[];
+  /** X16c: the person's timeline (dial attempts and dispositions, newest first) with the calls left before the hold. */
+  timeline: BriefTimeline;
+  /** X16d: the agent's cleared talking points for objections this person raised (the task results), newest first. */
+  objectionAnswers: PreparedObjectionAnswer[];
   openBids: BriefBid[];
   /** Asked BEFORE the buyer acknowledges the problem: never a measurement (ops closeout 17). */
   suggestedQuestions: string[];
@@ -307,6 +331,18 @@ export async function callBrief(prisma: any, personaId: number, opts: { hypothes
     createdAt: d.created_at instanceof Date ? d.created_at.toISOString() : String(d.created_at),
   }));
 
+  // X16c: the recorded dial attempts (self-reported) merged with the dispositions above, newest first; the count of
+  // unanswered calls since the last substantive answer is the one routing reads. Both soft.
+  const attempts = await loadCallAttempts(prisma, persona.id, { take: LAST_DISPOSITIONS * 2 }).catch(() => []);
+  const channelWord = (c: string) => (c === 'call' ? 'Call' : c === 'email' ? 'Email' : c === 'linkedin' ? 'LinkedIn' : c.charAt(0).toUpperCase() + c.slice(1));
+  const entries: BriefTimelineEntry[] = [
+    ...attempts.map((a) => ({ kind: 'attempt' as const, at: a.at, line: 'Dial link opened (self-reported; no outcome recorded)', confirmed: true })),
+    ...lastDispositions.map((d) => ({ kind: 'disposition' as const, at: d.createdAt, line: `${channelWord(d.channel)}: ${d.responseClass.replace(/_/g, ' ')}`, confirmed: d.humanConfirmed, buyerLanguage: d.buyerLanguage })),
+  ].sort((a, b) => new Date(b.at).getTime() - new Date(a.at).getTime() || (a.kind === 'attempt' ? -1 : 1));
+  const unansweredCalls = email ? await unansweredCallsFor(prisma, email) : 0;
+  const timeline: BriefTimeline = { entries, unansweredCalls, callsLeft: callsLeftBeforeHold(unansweredCalls) };
+  const objectionAnswers = await loadObjectionAnswers(prisma, { personaId: persona.id, now: new Date() }).catch(() => []);
+
   let openBids: BriefBid[] = [];
   if (hypothesis) {
     const bidRows: any[] = await prisma.buyerInputData.findMany({
@@ -346,6 +382,8 @@ export async function callBrief(prisma: any, personaId: number, opts: { hypothes
     },
     hypothesis,
     lastDispositions,
+    timeline,
+    objectionAnswers,
     openBids,
     suggestedQuestions: suggestedQuestionsFor(hypothesis),
     afterAcknowledgementQuestions: afterAcknowledgementQuestionsFor(hypothesis),

@@ -49,7 +49,17 @@ function makePrisma() {
       findMany: asyncSpy(async () => [hyp({ id: 'H2', status: 'draft', created_at: T(3) }), hyp()]),
       findFirst: asyncSpy(async () => null),
     },
+    // X16c: the recorded dial attempts (self-reported) and the unanswered-call reads behind the timeline.
+    gapAuditEvent: {
+      // The attempts for the timeline; the task rows (X16d) answer empty here (the loader is pinned in answer-objection.test.ts).
+      findMany: asyncSpy(async (q: { where?: { kind?: unknown } } = {}) => (q.where?.kind === 'call.attempt_started' ? [
+        { subject_id: 'dec-9', payload: { accountName: 'Acme Logistics', personaId: 7, basis: 'self_reported' }, created_at: T(4) },
+        { subject_id: 'dec-9', payload: { accountName: 'Acme Logistics', personaId: 7, basis: 'self_reported' }, created_at: T(2) },
+      ] : [])),
+    },
     conversationDisposition: {
+      findFirst: asyncSpy(async () => ({ created_at: T(0) })),
+      count: asyncSpy(async () => 1),
       findMany: asyncSpy(async () => [
         { id: 'D3', channel: 'email', response_class: 'timing', buyer_language: null, human_confirmed: true, created_at: T(3) },
         { id: 'D2', channel: 'call', response_class: 'voicemail', buyer_language: null, human_confirmed: true, created_at: T(2) },
@@ -201,5 +211,33 @@ describe('ops closeout 17: the brief shows the CARD’s hypothesis, never anothe
     const brief = await callBrief(prisma, 7, { hypothesisId: 'H-other-account' });
     expect(brief!.hypothesis).toBeNull();
     expect(prisma.prospectingHypothesis.findMany).not.toHaveBeenCalled();
+  });
+});
+
+describe('X16c: the person\'s timeline on the brief', () => {
+  it('merges the recorded dial attempts (self-reported, never a call) with the dispositions, newest first, and says the unanswered calls and the calls left before the hold', async () => {
+    const brief = await callBrief(prisma, 7);
+    expect(brief!.timeline).toMatchObject({ unansweredCalls: 1, callsLeft: 2 });
+    expect(brief!.timeline.entries.map((e) => [e.kind, e.at])).toEqual([
+      ['attempt', T(4).toISOString()],
+      ['disposition', T(3).toISOString()],
+      ['attempt', T(2).toISOString()],
+      ['disposition', T(2).toISOString()],
+      ['disposition', T(1).toISOString()],
+    ]);
+    expect(brief!.timeline.entries[0]).toMatchObject({ kind: 'attempt', line: 'Dial link opened (self-reported; no outcome recorded)', confirmed: true });
+    expect(brief!.timeline.entries[1]).toMatchObject({ kind: 'disposition', line: 'Email: timing', confirmed: true });
+    expect(brief!.timeline.entries[3]).toMatchObject({ kind: 'disposition', line: 'Call: voicemail', confirmed: true });
+    expect(brief!.timeline.entries[4]).toMatchObject({ kind: 'disposition', line: 'Call: no answer', confirmed: false });
+    expect(prisma.gapAuditEvent.findMany.mock.calls[0][0]).toMatchObject({ where: { kind: 'call.attempt_started', payload: { path: ['personaId'], equals: 7 } } });
+    expect(prisma.conversationDisposition.count.mock.calls[0][0]).toMatchObject({ where: { contact_email: 'jordan@acme.example', channel: 'call', created_at: { gt: T(0) } } });
+  });
+
+  it('a client without the ledger or the count reads: no attempts, zero unanswered, the full three left (soft, never a failure)', async () => {
+    const bare = { ...prisma, gapAuditEvent: undefined, conversationDisposition: { findMany: prisma.conversationDisposition.findMany } };
+    const brief = await callBrief(bare, 7);
+    expect(brief!.timeline).toMatchObject({ unansweredCalls: 0, callsLeft: 3 });
+    expect(brief!.timeline.entries.map((e) => e.kind)).toEqual(['disposition', 'disposition', 'disposition']);
+    expect(brief!.objectionAnswers).toEqual([]);
   });
 });

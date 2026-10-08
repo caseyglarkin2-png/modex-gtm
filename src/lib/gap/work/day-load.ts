@@ -186,16 +186,16 @@ export async function loadCompletedToday(prisma: PrismaLike, now: Date): Promise
     const p = isObj(r.payload) ? r.payload : {};
     const at = new Date(r.created_at).toISOString();
     if ((r.kind === DIRECT_SENT || r.kind === MANUAL_SENT) && r.subject_type === DRAFT_SUBJECT_TYPE) {
-      out.push({ at, accountName: typeof p.accountName === 'string' ? p.accountName : null, line: `Sent touch ${Number(p.stepIndex ?? 0) + 1} to ${who(p.recipient, 'them')}${p.reconciledFromSent ? ' (found in Sent)' : ''}.` });
+      out.push({ at, accountName: typeof p.accountName === 'string' ? p.accountName : null, line: `Sent touch ${Number(p.stepIndex ?? 0) + 1} to ${who(p.recipient, 'them')}${p.reconciledFromSent ? ' (found in Sent)' : ''}.` , activity: Number(p.stepIndex ?? 0) === 0 ? 'first_touches' : 'follow_ups' });
     } else if (r.kind === REPLY_SENT) {
-      out.push({ at, accountName: typeof p.accountName === 'string' ? p.accountName : null, line: `Answered ${who(p.recipient, 'them')} in their thread.` });
+      out.push({ at, accountName: typeof p.accountName === 'string' ? p.accountName : null, line: `Answered ${who(p.recipient, 'them')} in their thread.`, activity: 'replies_handled' });
     } else if (r.kind === DRAFT_SENT) {
-      out.push({ at, accountName: null, line: 'A GAP draft was sent from Gmail.' });
+      out.push({ at, accountName: null, line: 'A GAP draft was sent from Gmail.', activity: Number(p.stepIndex ?? 0) === 0 ? 'first_touches' : 'follow_ups' });
     } else if (r.kind === 'disposition.recorded' && p.humanConfirmed === true) {
-      out.push({ at, accountName: typeof p.accountName === 'string' ? p.accountName : null, line: typeof p.contactEmail === 'string' && p.contactEmail ? `Recorded ${who(p.contactEmail, 'their')}'s answer (${words(p.responseClass)}).` : `Recorded their answer (${words(p.responseClass)}).` });
+      out.push({ at, accountName: typeof p.accountName === 'string' ? p.accountName : null, line: typeof p.contactEmail === 'string' && p.contactEmail ? `Recorded ${who(p.contactEmail, 'their')}'s answer (${words(p.responseClass)}).` : `Recorded their answer (${words(p.responseClass)}).`, activity: p.responseClass === 'meeting_accepted' ? 'meetings_booked' : p.channel === 'call' ? 'calls' : 'replies_handled' });
     } else if (r.kind === COMMITMENT_EVENT && p.op === 'status' && isObj(p.commitment)) {
       const c = p.commitment as unknown as Commitment;
-      if (c.status === 'done') out.push({ at, accountName: c.accountName, line: `Done: ${c.title}.`, kind: 'done' });
+      if (c.status === 'done') out.push({ at, accountName: c.accountName, line: `Done: ${c.title}.`, kind: 'done', ...(c.kind === 'deal_step' ? { activity: 'deal_steps' as const } : {}) });
       else if (c.status === 'skipped' && !writtenToday.has(restoredIdFor(String(p.commitmentId ?? c.commitmentId ?? '')))) out.push({ at, accountName: c.accountName, line: `Skipped: ${c.title}${c.reason ? ` (${c.reason})` : ''}.`, kind: 'set_aside' });
     } else if (r.kind === 'capture.note') {
       out.push({ at, accountName: typeof p.accountName === 'string' ? p.accountName : null, line: `Saved a note (${words(p.context)}).` });

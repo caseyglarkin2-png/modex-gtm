@@ -113,6 +113,8 @@ export interface Commitment {
     stepIndex?: number;
     decisionId?: string;
     noFollowUpCopy?: boolean;
+    /** X16b: a call-again follow-up; the next call outcome on the person settles it. */
+    callAgain?: boolean;
     ambiguousDate?: string;
     meetingAt?: string;
     sentAt?: string;
