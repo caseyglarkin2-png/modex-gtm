@@ -199,10 +199,11 @@ export async function sendAssignment(prisma: PrismaLike, input: SendAssignmentIn
       actor: input.actor,
       subject_type: ITEM_SUBJECT_TYPE,
       subject_id: input.item.key,
-      payload: { day: input.plan.day, itemToken: input.item.token, revision: input.revision, to: input.to, gmailMessageId: res.id, gmailThreadId: res.threadId, contentHash: built.contentHash, subject: built.subject, prepared: built.prepared, resend: !!input.resend },
+      // A fresh Gmail message's thread id is its own id; a provider that answers none (the harness sink) is read the same way.
+      payload: { day: input.plan.day, itemToken: input.item.token, revision: input.revision, to: input.to, gmailMessageId: res.id, gmailThreadId: res.threadId ?? res.id, contentHash: built.contentHash, subject: built.subject, prepared: built.prepared, resend: !!input.resend },
     },
   });
-  return { sent: true, gmailMessageId: res.id, gmailThreadId: res.threadId, contentHash: built.contentHash, subject: built.subject };
+  return { sent: true, gmailMessageId: res.id, gmailThreadId: res.threadId ?? res.id, contentHash: built.contentHash, subject: built.subject };
 }
 
 /** The first plan item with no assignment sent, or null when every item went out. */

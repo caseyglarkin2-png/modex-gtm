@@ -132,8 +132,9 @@ export async function sendMorningBriefing(prisma: PrismaLike, input: BriefingSen
       replyTo: input.sender.userEmail,
       headers: { 'Auto-Submitted': 'auto-generated', 'X-GAP-Day': day },
     });
-    await audit(prisma, BRIEFING_SENT, actor, day, { to, gmailMessageId: res.id, gmailThreadId: res.threadId, dayToken, items: plan.items.length, recoveredFromSent: false });
-    return { sent: true, day, to, gmailMessageId: res.id, gmailThreadId: res.threadId, items: plan.items.length, recoveredFromSent: false };
+    // A fresh Gmail message's thread id is its own id; a provider that answers none (the harness sink) is read the same way.
+    await audit(prisma, BRIEFING_SENT, actor, day, { to, gmailMessageId: res.id, gmailThreadId: res.threadId ?? res.id, dayToken, items: plan.items.length, recoveredFromSent: false });
+    return { sent: true, day, to, gmailMessageId: res.id, gmailThreadId: res.threadId ?? res.id, items: plan.items.length, recoveredFromSent: false };
   } catch (err) {
     await audit(prisma, BRIEFING_FAILED, actor, day, { to, attempt: attempts + 1, error: (err instanceof Error ? err.message : String(err)).slice(0, 500) }).catch(() => undefined);
     await prisma.systemConfig.delete({ where: { key: briefingClaimKey(day) } }).catch(() => undefined);

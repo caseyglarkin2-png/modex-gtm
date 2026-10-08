@@ -2479,6 +2479,22 @@ targets are kept (Casey asked for daily activity counts against a target) but af
   task; **X17** the deal next step on NOW; **X18** carried work reported; **X19** retire the legacy digest (Casey's
   call); **X20** `activity.ts` and the accountability view.
 
+#### Receipts (each ticket one commit on `feat/gap-execution-engine`, RED then GREEN then one mutation per invariant; focused vitest, tsc, eslint on the touched files)
+<!-- verified:2026-10-08 -->
+
+- X01 16270691 `work/load-day.ts` + `work/cockpit-read.ts` (load-day.test.ts 5)
+- X02 062f1b24 `/api/cron/gap-routing`, flag GAP_ROUTING_CRON_ENABLED (gap-routing-cron.test.ts 6)
+- X03 ab278020 `work/settings.ts`, `/api/gap/settings`, `scripts/gap/set-seller-settings.ts` (seller-settings.test.ts 11)
+- X04 84b5b285 `work/plan.ts` (day-plan.test.ts 6)
+- X05a bdcd042c `work/action-token.ts`, `work/briefing.ts` (briefing.test.ts 6); X05b 74abedd1 `work/briefing-send.ts`, `/api/cron/gap-briefing`, flag GAP_BRIEFING_ENABLED (briefing-send.test.ts 6, gap-briefing-cron.test.ts 4)
+- X06 84691a40 `work/assignment.ts`, `/gap/start`, `/gap/item` (assignment.test.ts 5)
+- X07a 753f23ca `replies/commands.ts`, the `mailbox.command` verdict (commands.test.ts 12); X07b ee25927a `replies/commands-apply.ts` wired into `/api/cron/gap-mailbox` (commands-apply.test.ts 7)
+- X08 718ffefc `agents/tasks.ts`, `agents/handlers.ts`, `/api/cron/gap-agent-tasks`, flag GAP_AGENT_TASKS_ENABLED (agent-tasks.test.ts 4, gap-agent-tasks-cron.test.ts 3)
+- X10 b2610288 `execution/copy-revision.ts`, the `loadActionPack` binding (copy-revision.test.ts 3)
+- X09 0b379c2e `agents/revise-message.ts`, REVISE queues and the drain runs with `after()` (revise-message.test.ts 5)
+- X11 1b430569 `agents/approve-request.ts`, APPROVE wired (approve-request.test.ts 4)
+- Production flags for the new crons stay OFF until Casey sets the seller settings (`set-seller-settings.ts --remote --apply`, or the settings page X13) and GAP_ACTION_SECRET in Vercel; the legacy `daily-digest` keeps running until Casey says stop.
+
 #### Demonstration acceptance (section 17)
 
 1 a plan from existing intelligence (X04 over X01); 2 the briefing to an internal mailbox (X05); 3 START (X06);
