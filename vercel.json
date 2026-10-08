@@ -70,6 +70,10 @@
     {
       "path": "/api/cron/gap-briefing/",
       "schedule": "5 * * * *"
+    },
+    {
+      "path": "/api/cron/gap-agent-tasks/",
+      "schedule": "*/5 * * * *"
     }
   ]
 }
