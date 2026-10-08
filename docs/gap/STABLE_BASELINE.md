@@ -7,8 +7,8 @@ explicit new-version decision. The 2026-10-04 operator-first WHO correction (bel
 <!-- verified:2026-10-05 -->
 <!-- verified:2026-10-02 (V2) -->
 
-Production SHA: see "V2 finish" below (the code release is the #392 merge; this doc lands after it). Update this line when a change ships. Update this line when a change ships.
-<!-- verified:2026-10-03 -->
+Production SHA: 542a6b4d (PR #410, the execution-recovery release R00-R65; Vercel `dpl_C4THQEpA3qYy73JQt9A23sNLTx5W` READY 2026-10-08T02:27:23Z; rollback 672570ed). Receipts: `docs/GAP_PROSPECTING_OS.md`, the R64 entry. Update this line when a change ships.
+<!-- verified:2026-10-08 -->
 
 ## The rule for future changes
 
@@ -110,6 +110,8 @@ a Claude session. A future session starts from the Open notes, applies the rule 
 
 ## Execution-recovery amendments (2026-10-06; owner-approved, scoped)
 <!-- verified:2026-10-06 -->
+SHIPPED 2026-10-08 at 542a6b4d (PR #410): the amendments below are the contract in production from that release.
+<!-- verified:2026-10-08 -->
 
 Casey approved the GAP OS execution-recovery mandate on 2026-10-06 (the program ledger: `docs/GAP_PROSPECTING_OS.md`,
 "GAP OS EXECUTION RECOVERY"). Three contracts above are AMENDED for that bounded program; everything else in this
