@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, after } from 'next/server';
 import { isAuthorizedCronRequest } from '@/lib/cron-auth';
 import { markCronFailure, markCronSkipped, markCronStarted, markCronSuccess } from '@/lib/cron-monitor';
 import { assertGapEnabled } from '@/lib/gap/flags';
@@ -10,6 +10,10 @@ import { reconcileFollowUpsFromSent } from '@/lib/gap/execution/follow-up-load';
 import { prisma } from '@/lib/prisma';
 import { sendViaGmail } from '@/lib/email/gmail-sender';
 import { applyCommand, loadCommandContext } from '@/lib/gap/replies/commands-apply';
+import { reviseRequest } from '@/lib/gap/agents/revise-message';
+import { agentTaskHandlers } from '@/lib/gap/agents/handlers';
+import { runAgentTasks } from '@/lib/gap/agents/tasks';
+import { gapFlag } from '@/lib/gap/flags';
 import { actionSecret } from '@/lib/gap/work/action-token';
 import { loadSellerSettings } from '@/lib/gap/work/settings';
 
@@ -95,7 +99,11 @@ export async function GET(request: Request) {
             mailbox: sender.userEmail,
             commands,
             onCommand: async (m, _v, at) => {
-              await applyCommand(prisma, { m, ctx: commands as NonNullable<typeof commands>, now: at, settings, sender, baseUrl, actionSecret: actionSecret(), actor: 'cron:gap-mailbox' }, { send: sendViaGmail });
+              const r = await applyCommand(prisma, { m, ctx: commands as NonNullable<typeof commands>, now: at, settings, sender, baseUrl, actionSecret: actionSecret(), actor: 'cron:gap-mailbox' }, { send: sendViaGmail, onRevise: reviseRequest });
+              // X09: a REVISE does not wait for the five-minute tick; the drain runs after this response (the same lease rules).
+              if (r.applied && r.effect === 'revision_queued' && gapFlag('GAP_AGENT_TASKS_ENABLED')) {
+                after(() => runAgentTasks(prisma, { now: new Date(), max: 1, claimer: 'after:gap-mailbox', handlers: agentTaskHandlers() }).catch(() => undefined));
+              }
             },
           },
         )),

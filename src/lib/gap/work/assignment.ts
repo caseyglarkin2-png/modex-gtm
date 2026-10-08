@@ -71,6 +71,10 @@ export interface BuildAssignmentInput {
   actionSecret: string | null;
   commandsEnabled: boolean;
   now: Date;
+  /** X09: a PROPOSED copy revision shown in place of the pack's copy (its queued text and hash), never approved here. */
+  copyOverride?: { subject: string; body: string; to: string | null; contentHash: string } | null;
+  /** X09: one line above the copy saying what this revision answers ("Revised on your words: ..."). */
+  note?: string | null;
 }
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -118,12 +122,19 @@ export async function buildAssignment(prisma: PrismaLike, input: BuildAssignment
   lines.push('', `The move: ${endSentence(ctx?.state.next || item.title)}`);
 
   let prepared: Prepared = { kind: 'none' };
-  if (pack?.rendered?.queued) {
-    const to = pack.persona?.email ?? null;
-    prepared = { kind: 'email', to, subject: pack.rendered.queued.subject, body: pack.rendered.queued.body };
-    lines.push('', `The email${to ? `, to ${to}` : ''}, subject "${pack.rendered.queued.subject}":`);
-    for (const l of pack.rendered.queued.body.split('\n')) lines.push(`> ${l}`);
-    const sources = (pack.hypothesis?.signals ?? []).map((s) => s.signal).filter((s): s is NonNullable<typeof s> => !!s && !!s.title);
+  // X09: a proposed revision (never approved here) is shown in place of the pack's copy, with the line that says why.
+  const copy = input.copyOverride
+    ? { subject: input.copyOverride.subject, body: input.copyOverride.body, to: input.copyOverride.to ?? pack?.persona?.email ?? null }
+    : pack?.rendered?.queued
+      ? { subject: pack.rendered.queued.subject, body: pack.rendered.queued.body, to: pack.persona?.email ?? null }
+      : null;
+  if (input.note) lines.push('', input.note);
+  if (copy) {
+    const to = copy.to;
+    prepared = { kind: 'email', to, subject: copy.subject, body: copy.body };
+    lines.push('', `The email${to ? `, to ${to}` : ''}, subject "${copy.subject}":`);
+    for (const l of copy.body.split('\n')) lines.push(`> ${l}`);
+    const sources = (pack?.hypothesis?.signals ?? []).map((s) => s.signal).filter((s): s is NonNullable<typeof s> => !!s && !!s.title);
     if (sources.length) lines.push(`Sources: ${sources.map((s) => `${s.title}${dateLabel(s.observed_at) ? ` (${dateLabel(s.observed_at)})` : ''}${s.evidence_url ? ` ${s.evidence_url}` : ''}`).join('; ')}`);
   }
   lines.push('', `Open it in GAP: ${itemLink(input)}`);
@@ -132,7 +143,7 @@ export async function buildAssignment(prisma: PrismaLike, input: BuildAssignment
   }
   lines.push('', 'This is an internal message from GAP to you; nothing in it went to a buyer.');
   const text = lines.map(safeLine).join('\n');
-  const contentHash = pack?.contentHash ?? createHash('sha256').update(text).digest('hex');
+  const contentHash = input.copyOverride?.contentHash ?? pack?.contentHash ?? createHash('sha256').update(text).digest('hex');
   const html = `<div style="font-family:system-ui,sans-serif;line-height:1.45;white-space:pre-wrap">${esc(text)}</div>`;
   return { subject, text, html, contentHash, prepared };
 }
@@ -169,8 +180,11 @@ export async function sendAssignment(prisma: PrismaLike, input: SendAssignmentIn
   if (!input.resend && prior.some((p) => p.revision === input.revision)) return { sent: false, reason: 'already_sent' };
   const built = await buildAssignment(prisma, input, deps);
   const send = deps.send ?? (await import('@/lib/email/gmail-sender')).sendViaGmail;
+  // A later revision stays in the item's thread (the seller's replies bind by that thread: commands.ts).
+  const threadId = input.revision > 0 ? [...prior].reverse().find((p) => p.gmailThreadId)?.gmailThreadId ?? undefined : undefined;
   const res = await send({
     to: input.to,
+    ...(threadId ? { threadId } : {}),
     subject: built.subject,
     html: built.html,
     text: built.text,
