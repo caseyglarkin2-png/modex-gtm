@@ -44,7 +44,8 @@ describe('R60: why HubSpot could not be checked, in words', () => {
   it('the held state NEXT reads says the reason in words and what unlocks it', () => {
     const s = projectPursuitState(input({ opportunity: { status: 'UNKNOWN', detail: 'identity_unresolved', deals: [] } }));
     expect(s.state).toBe('held');
-    expect(s.blocker).toBe('HubSpot could not be checked: GAP cannot tell which HubSpot company this account is. No cold touch until it can.');
+    // R63-A S13: no HubSpot company linked is said as that, with the step that lifts it.
+    expect(s.blocker).toBe('No HubSpot company is linked to this account. Link it in HubSpot; until then no cold touch.');
     expect(s.blocker).not.toMatch(/identity_unresolved/);
     expect(s.unlock).toBe('Link the account to its one HubSpot company.');
   });

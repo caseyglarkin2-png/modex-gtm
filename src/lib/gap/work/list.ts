@@ -504,7 +504,8 @@ export function workDay(i: WorkInput): WorkDay {
     if (h.kind === 'closure') {
       offer({ rank: PURSUIT_RANK.held, sortKey: [name], card: { accountName: name, lane: 'deals', stateKind: 'held', state: h.stateLine, why, person: null, next: null, blocker: null } });
     } else if (h.kind === 'unknown') {
-      offer({ rank: LANE_RANK.deals, sortKey: [0, name], card: { accountName: name, lane: 'deals', stateKind: 'unknown_deal', state: STATE_TEXT.unknown_deal, why, person: null, next: null, blocker: 'Check HubSpot directly before contacting anyone.' } });
+      // R63-A S13: an identity hold says itself (its why already names the step), never "check HubSpot" as an outage.
+      offer({ rank: LANE_RANK.deals, sortKey: [0, name], card: { accountName: name, lane: 'deals', stateKind: 'unknown_deal', state: h.stateLine ?? STATE_TEXT.unknown_deal, why, person: null, next: null, blocker: h.stateLine ? null : 'Check HubSpot directly before contacting anyone.' } });
     } else {
       offer({ rank: LANE_RANK.deals, sortKey: [1, name], card: { accountName: name, lane: 'deals', stateKind: 'in_deal', state: STATE_TEXT.in_deal, why, person: null, next: { label: 'Open the deal brief', href: `${accountHref(name)}?view=brief` }, blocker: 'No cold first touch while the deal is open: work it from the deal.' } });
     }

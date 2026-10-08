@@ -21,6 +21,18 @@ export function unknownReasonWords(reason: string | null | undefined): string {
   return r;
 }
 
+/**
+ * R63-A S13: an account with no HubSpot company linked is not an outage ("HubSpot could not be checked" read like one on
+ * Unlinked's page): the hold says what is missing and the one step that lifts it. null for every other reason (HubSpot
+ * not answering keeps its own words).
+ */
+export function identityHold(reason: string | null | undefined): { state: string; why: string } | null {
+  const r = (reason ?? '').trim();
+  if (r === 'identity_unresolved') return { state: 'no HubSpot company linked', why: 'No HubSpot company is linked to this account. Link it in HubSpot; until then no cold touch.' };
+  if (r === 'identity_ambiguous') return { state: 'more than one HubSpot company', why: 'More than one HubSpot company could be this account. Link the right one in HubSpot; until then no cold touch.' };
+  return null;
+}
+
 /** What makes the account workable again: the company linked for an identity problem, else HubSpot answering. */
 export function unknownUnlock(reason: string | null | undefined): string {
   return reason === 'identity_unresolved' || reason === 'identity_ambiguous' ? 'Link the account to its one HubSpot company.' : 'HubSpot answers again.';

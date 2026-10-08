@@ -15,7 +15,7 @@
  * five minutes (a failed read for one), never a write.
  */
 import { opportunitySentence, type OpportunityTruth } from '../opportunity/active-opportunity';
-import { unknownReasonWords } from '../opportunity/unknown-words';
+import { identityHold, unknownReasonWords } from '../opportunity/unknown-words';
 import { closureStateLine } from '../pursuit/state';
 import { IN_DEALS_CACHE_MS, IN_DEALS_FAILURE_CACHE_MS } from '../deals/in-deals';
 
@@ -23,7 +23,7 @@ import { IN_DEALS_CACHE_MS, IN_DEALS_FAILURE_CACHE_MS } from '../deals/in-deals'
 export type OpportunityHold =
   | { kind: 'closure'; closure: 'customer' | 'parked'; stateLine: string; why: string }
   | { kind: 'open_deal'; why: string }
-  | { kind: 'unknown'; why: string };
+  | { kind: 'unknown'; why: string; /** R63-A S13: an identity hold's own state line (no HubSpot company linked). */ stateLine?: string };
 
 /**
  * How many accounts one Work read checks (Work's own order). R63-A B2: twenty (the cold-work lanes a day holds), read
@@ -37,7 +37,10 @@ export const OPPORTUNITY_HOLD_TIMEOUT_MS = 4_000;
 /** The truth as a hold, or null when nothing holds the account (CLEAR with no closure). */
 export function opportunityHoldOf(t: OpportunityTruth): OpportunityHold | null {
   if (t.status === 'ACTIVE') return { kind: 'open_deal', why: opportunitySentence(t) };
-  if (t.status === 'UNKNOWN') return { kind: 'unknown', why: `HubSpot could not be checked: ${unknownReasonWords(t.reason)}. No cold touch until it can.` };
+  if (t.status === 'UNKNOWN') {
+    const identity = identityHold(t.reason);
+    return identity ? { kind: 'unknown', why: identity.why, stateLine: `Held: ${identity.state}` } : { kind: 'unknown', why: `HubSpot could not be checked: ${unknownReasonWords(t.reason)}. No cold touch until it can.` };
+  }
   if (t.closure) return { kind: 'closure', closure: t.closure.kind, stateLine: closureStateLine(t.closure.kind), why: t.closure.why };
   return null;
 }

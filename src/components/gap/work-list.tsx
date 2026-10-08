@@ -145,7 +145,8 @@ export function WorkList({
   const parkedCount = cards.length - needCount;
   // R63-A S11: a plain done state when nothing needs the seller (the day can finish).
   const NOTHING = when === 'tomorrow' ? 'Nothing will need you tomorrow.' : `Done for today: nothing needs you.${cards.length ? ' The parked accounts are below.' : ' Replies, follow ups, ready accounts and new angles show up here.'}`;
-  const emptyText = shown.length === 0 ? (cards.length === 0 ? NOTHING : 'No account matches this filter.') : shownNeeds.length === 0 && filter === 'all' && !query.trim() ? NOTHING : null;
+  // R63-A S13: Work's search covers the cards on Work; every account is one link away (the Accounts search).
+  const emptyText = shown.length === 0 ? (cards.length === 0 && !query.trim() ? NOTHING : query.trim() && filter === 'all' ? 'No account on Work matches.' : 'No account matches this filter.') : shownNeeds.length === 0 && filter === 'all' && !query.trim() ? NOTHING : null;
   useEffect(() => {
     saveWorkOrder({ at: new Date().toISOString(), filter, q: query, accounts: shown.map((c) => ({ name: c.accountName, slug: accountSlug(c.accountName) })) });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -219,6 +220,13 @@ export function WorkList({
       {emptyText ? (
         <p className="text-sm italic text-[var(--muted-foreground)]" data-testid="work-empty">
           {emptyText}
+        </p>
+      ) : null}
+      {query.trim() ? (
+        <p className="text-xs" data-testid="work-search-all">
+          <Link href={`/gap/accounts/?q=${encodeURIComponent(query.trim())}`} className="inline-flex min-h-11 items-center underline sm:min-h-9">
+            Search every account for &quot;{query.trim()}&quot;
+          </Link>
         </p>
       ) : null}
       {[{ list: shownNeeds, testId: 'work-cards' }, { list: shownParked, testId: 'work-parked-cards' }].map(({ list, testId }) => list.length === 0 ? null : (

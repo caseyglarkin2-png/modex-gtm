@@ -20,7 +20,7 @@
  */
 import { classifyReply, type ReplyClass } from '../replies/classify';
 import type { MotionType } from '../account-intel/build';
-import { unknownReasonWords, unknownUnlock } from '../opportunity/unknown-words';
+import { identityHold, unknownReasonWords, unknownUnlock } from '../opportunity/unknown-words';
 
 export type PursuitStateKind = 'replied' | 'opted_out' | 'in_deal' | 'held' | 'follow_up_due' | 'in_motion' | 'ready' | 'choose_person' | 'research' | 'idle';
 
@@ -208,7 +208,9 @@ export function projectPursuitState(i: PursuitInput): PursuitState {
   }
   if (i.opportunity.status === 'UNKNOWN') {
     // R60: the reason in words (never "identity_unresolved"), and what unlocks it for that reason.
-    return base('held', { stateLine: `${STATE_LINE.held}: HubSpot could not be checked`, blocker: `HubSpot could not be checked: ${unknownReasonWords(i.opportunity.detail)}. No cold touch until it can.`, unlock: unknownUnlock(i.opportunity.detail) });
+    // R63-A S13: no HubSpot company linked is said as that, with the step that lifts it (never an outage).
+    const identity = identityHold(i.opportunity.detail);
+    return base('held', { stateLine: `${STATE_LINE.held}: ${identity?.state ?? 'HubSpot could not be checked'}`, blocker: identity?.why ?? `HubSpot could not be checked: ${unknownReasonWords(i.opportunity.detail)}. No cold touch until it can.`, unlock: unknownUnlock(i.opportunity.detail) });
   }
   if (i.restriction) {
     return base('held', {
