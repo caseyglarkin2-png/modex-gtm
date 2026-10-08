@@ -8,7 +8,7 @@
  * out-of-office), PepsiCo (two or more eligible, nobody chosen), Kroger (in a deal: no cold touch).
  */
 import { describe, expect, it } from 'vitest';
-import { projectPursuitState, type PursuitInput } from '@/lib/gap/pursuit/state';
+import { approvalHoldFor, projectPursuitState, type PursuitInput } from '@/lib/gap/pursuit/state';
 
 const NOW = new Date('2026-10-05T15:00:00Z');
 const base = (over: Partial<PursuitInput> = {}): PursuitInput => ({
@@ -184,5 +184,30 @@ describe('the cockpit motion\'s own holds are read, never recomputed away (trust
     expect(s.state).toBe('choose_person');
     const chosen = projectPursuitState(base({ motion: { state: 'needs_owner', primary: null, next: null, headline: 'x' }, choice: { personaId: 1, by: 'casey@yardflow.ai', at: '2026-10-05T14:00:00Z', source: 'motion' } }));
     expect(chosen.state).toBe('ready');
+  });
+});
+
+describe('approvalHoldFor: a proposal is approvable unless the account is under a real hold (2026-10-08, PepsiCo in production)', () => {
+  it('research, ready and choose are not holds: the proposal under review is the next move, so approval is open', () => {
+    const research = projectPursuitState(base({ motionType: 'NO_GOOD_MOTION', briefNext: 'No thesis grounded on the fact yet: draft and review one.' }));
+    expect(research.state).toBe('research');
+    expect(research.coldTouchAllowed).toBe(false);
+    expect(approvalHoldFor(research)).toBeNull();
+    expect(approvalHoldFor(projectPursuitState(base()))).toBeNull();
+    expect(approvalHoldFor({ state: 'choose_person', blocker: null })).toBeNull();
+    expect(approvalHoldFor({ state: 'research', blocker: 'The send gate could not be read just now.' })).toBeNull();
+  });
+  it("a reply, an opt-out, a deal and a held account are holds, named by the state's own blocker sentence", () => {
+    const deal = projectPursuitState(base({ opportunity: { status: 'OPEN', detail: '', deals: [{ name: 'Acme pilot', stage: 'Qualified' }] } }));
+    expect(approvalHoldFor(deal)).toBe(deal.blocker);
+    expect(approvalHoldFor(deal)).toMatch(/open HubSpot deal/);
+    const replied = projectPursuitState(base({ replies: [{ from: 'doug@acme.example', name: 'Doug Estrada', at: '2026-10-05T13:58:00Z', subject: 'Re: hi', snippet: 'Sure, let us talk next week.', triaged: false }] }));
+    expect(approvalHoldFor(replied)).toBe(replied.blocker);
+    const opted = projectPursuitState(base({ replies: [{ from: 'doug@acme.example', name: null, at: '2026-10-05T13:58:00Z', subject: 'Re: hi', snippet: 'stop', triaged: false }] }));
+    expect(approvalHoldFor(opted)).toMatch(/do not contact/);
+    const held = projectPursuitState(base({ restriction: { kind: 'warm_intro', introducer: 'Mark S', route: 'the CSCO office' } }));
+    expect(held.state).toBe('held');
+    expect(approvalHoldFor(held)).toMatch(/No cold touch/);
+    expect(approvalHoldFor({ state: 'held', blocker: null })).toBe('A hold on the account stops approval for use.');
   });
 });

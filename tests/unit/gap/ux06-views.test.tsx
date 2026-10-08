@@ -254,8 +254,21 @@ describe('the outreach anchor block', () => {
     fireEvent.click(screen.getByTestId('anchor-pending-approve'));
     await waitFor(() => expect(screen.getByRole('alert').textContent).toMatch(/Not approved: The send gate would refuse this opening/));
     unmount();
-    render(<OutreachAnchorView accountName="PepsiCo" anchor={{ ...anchor, pending: [pendingItem] }} coldTouchAllowed={false} />);
-    expect(screen.getByTestId('anchor-pending-approve')).toBeDisabled();
+    render(<OutreachAnchorView accountName="PepsiCo" anchor={{ ...anchor, pending: [pendingItem] }} coldTouchAllowed={false} approvalHold="An open HubSpot deal: work it from the deal, never a cold first touch." />);
+    const held = screen.getByTestId('anchor-pending-approve');
+    expect(held).toBeDisabled();
+    expect(held).toHaveAttribute('title', 'An open HubSpot deal: work it from the deal, never a cold first touch.');
+  });
+  it('2026-10-08 (PepsiCo, production): under RESEARCH no cold touch is allowed yet, and that is exactly when the proposal must be approvable; only a real hold disables it', async () => {
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce({ ok: true, status: 200, json: async () => ({ hypothesisId: 'h-pend', ok: true, from: 'review_required', to: 'active', detail: 'approved and in use' }) } as Response);
+    render(<OutreachAnchorView accountName="PepsiCo" anchor={{ ...anchor, primary: null, primaryBy: null, whyTheyCare: null, pending: [pendingItem] }} coldTouchAllowed={false} approvalHold={null} />);
+    const approve = screen.getByTestId('anchor-pending-approve');
+    expect(approve).toBeEnabled();
+    expect(approve).not.toHaveAttribute('title');
+    fireEvent.click(approve);
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(1));
+    expect(JSON.parse(String(fetchMock.mock.calls[0][1]!.body))).toEqual({ advance: 'approve_and_use' });
+    await waitFor(() => expect(screen.getByTestId('anchor-note').textContent).toMatch(/Approved and in use for Karen/));
   });
   it('a title-shaped observation is refused in plain words and nothing is submitted', async () => {
     const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce({ ok: false, status: 409, json: async () => ({ error: 'title_shaped_observation' }) } as Response);

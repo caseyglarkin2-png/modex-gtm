@@ -65,6 +65,12 @@ export interface OutreachAnchorViewProps {
   anchor: OutreachAnchor;
   /** The pursuit state's cold-touch permission: a hold shows nothing to use, only the alternatives to read. */
   coldTouchAllowed: boolean;
+  /**
+   * The sentence that stops APPROVE AND USE (a reply, an opt-out, a deal, a held account: `approvalHoldFor`), or null.
+   * Never derived from coldTouchAllowed: under RESEARCH no cold touch is allowed yet, and approving the proposal is
+   * the move that changes that (2026-10-08, PepsiCo in production).
+   */
+  approvalHold?: string | null;
 }
 
 type Busy = { kind: 'switch' | 'draft' | 'review' | 'withdraw' | 'family'; id: string } | null;
@@ -89,7 +95,7 @@ function refusalWords(code: string | null | undefined): string {
   return (OBSERVATION_REFUSAL_TEXT as Record<string, string>)[code] ?? TRANSITION_REFUSAL_TEXT[code] ?? `refused (${code})`;
 }
 
-export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: OutreachAnchorViewProps) {
+export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed, approvalHold = null }: OutreachAnchorViewProps) {
   const router = useRouter();
   const [busy, setBusy] = useState<Busy>(null);
   const [note, setNote] = useState<{ kind: 'status' | 'alert'; text: string } | null>(null);
@@ -378,7 +384,7 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed }: Ou
                 ) : (
                   <div className="flex flex-wrap items-center gap-2">
                     {coldTouchAllowed || item.status === 'review_required' || item.status === 'draft' ? (
-                      <button type="button" className={PRIMARY} disabled={busy !== null || !coldTouchAllowed} title={coldTouchAllowed ? undefined : 'A hold on the account stops approval for use'} onClick={() => void approveAndUse(item)} data-testid="anchor-pending-approve">
+                      <button type="button" className={PRIMARY} disabled={busy !== null || approvalHold !== null} title={approvalHold ?? undefined} onClick={() => void approveAndUse(item)} data-testid="anchor-pending-approve">
                         {mine && busy?.kind === 'review' ? 'Approving...' : 'Approve and use this story'}
                       </button>
                     ) : null}

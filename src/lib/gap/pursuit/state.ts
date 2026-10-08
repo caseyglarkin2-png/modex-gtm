@@ -120,6 +120,17 @@ export function closureStateLine(kind: 'customer' | 'parked'): string {
   return kind === 'customer' ? `${STATE_LINE.held}: a customer (closed won)` : `${STATE_LINE.held}: parked after a lost deal`;
 }
 
+/**
+ * 2026-10-08 (PepsiCo, production): coldTouchAllowed is false under RESEARCH because no thesis is usable YET, and a
+ * proposal under review is exactly how one becomes usable. The approve control must not read that as a hold. Only a
+ * reply, an opt-out, a deal or a held account stops approval for use, and the hold is the state's own blocker sentence.
+ */
+export const APPROVAL_HOLD_STATES: ReadonlySet<PursuitStateKind> = new Set(['replied', 'opted_out', 'in_deal', 'held']);
+export function approvalHoldFor(state: Pick<PursuitState, 'state' | 'blocker'>): string | null {
+  if (!APPROVAL_HOLD_STATES.has(state.state)) return null;
+  return state.blocker ?? 'A hold on the account stops approval for use.';
+}
+
 const day = (s: string) => new Date(s).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' });
 const who = (by: string) => (/^casey@|^caseyglarkin/i.test(by) ? 'you' : by.replace(/@.*/, ''));
 
