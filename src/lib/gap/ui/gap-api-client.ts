@@ -323,6 +323,17 @@ export interface BriefTimeline {
   callsLeft: number;
 }
 
+/** X16d: the agent's cleared talking point for an objection this person raised (a task result; said, never sent). */
+export interface BriefObjectionAnswer {
+  taskId: string;
+  dispositionId: string;
+  objection: string;
+  answer: string;
+  question: string;
+  factsUsed: string[];
+  preparedAt: string;
+}
+
 /** An open BID: unconfirmed and unsuperseded, so `humanConfirmed` is always false here. */
 export interface BriefBid {
   id: string;
@@ -346,6 +357,8 @@ export interface CallBrief {
   lastDispositions: BriefDisposition[];
   /** X16c: optional so an older response still reads; the brief route always sends it now. */
   timeline?: BriefTimeline;
+  /** X16d: optional for the same reason. */
+  objectionAnswers?: BriefObjectionAnswer[];
   openBids: BriefBid[];
   suggestedQuestions: string[];
   /** Ops closeout 17: quantifying questions, for after the buyer acknowledges the problem. */

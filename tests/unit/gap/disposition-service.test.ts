@@ -591,3 +591,29 @@ describe('X16: the service hands the commitment builder the channel and the unan
     expect(email.mock.calls[0][1]).toMatchObject({ channel: 'email', unansweredCalls: 0 });
   });
 });
+
+describe('X16d: a confirmed objection queues the talking-point task', () => {
+  it('existing_solution with its objection queues once (the flag on); an objection BID on another class queues too; the flag off, an unconfirmed row or no objection queues nothing', async () => {
+    vi.stubEnv('GAP_AGENT_TASKS_ENABLED', 'true');
+    try {
+      const { deps } = makeDeps();
+      const queueObjection = asyncSpy(async () => ({ id: 'at_1', superseded: [] }));
+      const out = await recordDisposition(makePrisma(), input({ responseClass: 'existing_solution', objection: 'We already run a YMS.', buyerLanguage: 'we put one in last year' }), { ...deps, queueObjection });
+      expect(out).toMatchObject({ ok: true });
+      expect(queueObjection).toHaveBeenCalledTimes(1);
+      expect(queueObjection.mock.calls[0][1]).toMatchObject({ dispositionId: 'D1', accountName: 'Acme Logistics', contactEmail: 'jordan@acme.example', hypothesisId: 'H1', objection: 'We already run a YMS.', buyerLanguage: 'we put one in last year' });
+      const viaBid = asyncSpy(async () => ({ id: 'at_2', superseded: [] }));
+      await recordDisposition(makePrisma(), input({ bids: [{ type: 'objection', rawBuyerLanguage: 'Our 3PL runs the yards.' }] }), { ...deps, queueObjection: viaBid });
+      expect(viaBid.mock.calls[0][1]).toMatchObject({ objection: 'Our 3PL runs the yards.' });
+      const none = asyncSpy(async () => ({ id: 'x', superseded: [] }));
+      await recordDisposition(makePrisma(), input(), { ...deps, queueObjection: none });
+      await recordDisposition(makePrisma(), input({ responseClass: 'existing_solution', objection: 'We already run a YMS.', actorKind: 'agent', actor: 'agent:x' }), { ...deps, queueObjection: none });
+      expect(none).not.toHaveBeenCalled();
+      vi.stubEnv('GAP_AGENT_TASKS_ENABLED', 'false');
+      await recordDisposition(makePrisma(), input({ responseClass: 'existing_solution', objection: 'We already run a YMS.' }), { ...deps, queueObjection: none });
+      expect(none).not.toHaveBeenCalled();
+    } finally {
+      vi.unstubAllEnvs();
+    }
+  });
+});

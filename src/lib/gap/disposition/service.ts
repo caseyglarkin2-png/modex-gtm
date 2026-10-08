@@ -71,6 +71,8 @@ import { stopRunsForRecipient as defaultStopRuns } from '@/lib/queue/sequence-ru
 import { dispositionEffects, validateDisposition, type DispositionEffects, type ValidDisposition } from './model';
 import { commitmentsFromDisposition as defaultCommitments } from '../work/commitments';
 import { unansweredCallsFor } from './unanswered-calls';
+import { queueObjectionTask as defaultQueueObjection } from '../agents/answer-objection';
+import { gapFlag } from '../flags';
 
 // X16: one reader for the unanswered-call count (the builder, the brief and routing agree); kept exported here.
 export { unansweredCallsFor };
@@ -129,6 +131,8 @@ export interface RecordDispositionDeps {
   propose?: typeof defaultPropose;
   /** R40: the obligations a confirmed answer creates or settles (commitments). Fail-open. */
   commitments?: typeof defaultCommitments;
+  /** X16d: a confirmed objection queues the agent's talking point (behind GAP_AGENT_TASKS_ENABLED). Fail-open. */
+  queueObjection?: typeof defaultQueueObjection;
 }
 
 export type DispositionStep = 'stop' | 'unsubscribe' | 'resolve' | 'retarget' | 'referral' | 'mirror';
@@ -570,6 +574,20 @@ export async function recordDisposition(
     }
   };
 
+  // X16d: a confirmed objection (the existing-solution classes carry one; a captured objection BID is one too) queues
+  // the agent's talking point for the next call, behind the agent-tasks flag. Fail-open: the row is the record.
+  const queueObjection = async (): Promise<void> => {
+    if (!humanConfirmed || !gapFlag('GAP_AGENT_TASKS_ENABLED')) return;
+    const bid = (input.bids ?? []).find((b) => b.type === 'objection' && typeof b.rawBuyerLanguage === 'string' && b.rawBuyerLanguage.trim());
+    const objection = (typeof valid.objection === 'string' && valid.objection.trim()) || bid?.rawBuyerLanguage.trim() || null;
+    if (!objection) return;
+    try {
+      await (deps.queueObjection ?? defaultQueueObjection)(prisma, { dispositionId, accountName: hypothesis.account_name, personaId: persona?.id ?? null, contactEmail: valid.contactEmail, hypothesisId: hypothesis.id, objection, buyerLanguage: valid.buyerLanguage ?? null, actor: input.actor, now: input.now });
+    } catch {
+      // The task queue never gates the disposition.
+    }
+  };
+
   // ---- 3. effects (an unconfirmed row has none, by construction) -----------
   const effects: DispositionEffects = dispositionEffects({ responseClass: valid.responseClass, humanConfirmed });
   if (!humanConfirmed || (!effects.stopsRun && !effects.writesDnc && effects.resolves === null && effects.nextAction === 'none')) {
@@ -582,6 +600,7 @@ export async function recordDisposition(
       applied.mirrored = mirrored.mirrored;
       const refusals = mirrored.refusal ? [mirrored.refusal] : [];
       await settleCommitments(false);
+      await queueObjection();
       await auditEffects(auditFn, prisma, input, dispositionId, applied, refusals);
       return { ok: true, dispositionId, bidIds, humanConfirmed, effects: applied, refusals };
     }
@@ -678,8 +697,9 @@ export async function recordDisposition(
   applied.mirrored = mirrored.mirrored;
   if (mirrored.refusal) refusals.push(mirrored.refusal);
 
-  // 7. R40: the obligations this answer creates and the follow-ups it settles.
+  // 7. R40: the obligations this answer creates and the follow-ups it settles; X16d: the objection's talking point.
   await settleCommitments(effects.stopsRun);
+  await queueObjection();
 
   await auditEffects(auditFn, prisma, input, dispositionId, applied, refusals);
   return { ok: true, dispositionId, bidIds, humanConfirmed, effects: applied, refusals };

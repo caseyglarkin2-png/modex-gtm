@@ -196,3 +196,20 @@ describe('X16c: the timeline section', () => {
     expect(screen.getByText('3 unanswered calls since their last answer; the person is held, no cold call.')).toBeTruthy();
   });
 });
+
+describe('X16d: the prepared objection talking points', () => {
+  it('renders each objection with the talking point (fact markers stripped) and the question; nothing without any', () => {
+    render(<PreCallBrief brief={brief({ objectionAnswers: [{ taskId: 'at_1', dispositionId: 'd9', objection: 'We already run a YMS.', answer: 'Fair, most sites run one. The Tulsa expansion adds doors [[SRC:sig-1]], so my guess is the gate still works from a clipboard.', question: 'How does the gate find a trailer the YMS has wrong?', factsUsed: ['sig-1'], preparedAt: '2026-10-08T16:00:00.000Z' }] })} />);
+    const section = screen.getByTestId('brief-objections');
+    expect(within(section).getByText(BRIEF_LABELS.objectionAnswers)).toBeTruthy();
+    expect(within(section).getByText('We already run a YMS.')).toBeTruthy();
+    expect(section.textContent).toContain('adds doors, so my guess');
+    expect(section.textContent).not.toContain('[[SRC:');
+    expect(within(section).getByText('How does the gate find a trailer the YMS has wrong?')).toBeTruthy();
+  });
+
+  it('no section without a talking point', () => {
+    render(<PreCallBrief brief={brief()} />);
+    expect(screen.queryByTestId('brief-objections')).toBeNull();
+  });
+});

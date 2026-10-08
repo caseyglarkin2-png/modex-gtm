@@ -20,6 +20,7 @@ export const BRIEF_LABELS = {
   wouldProveWrong: 'Would prove wrong',
   lastDispositions: 'Last dispositions',
   timeline: 'Timeline',
+  objectionAnswers: 'Prepared for their objection',
   openBids: 'What the buyer said',
   suggestedQuestions: 'Suggested questions',
   afterAcknowledgement: 'After they acknowledge the problem',
@@ -63,6 +64,8 @@ export function PreCallBrief({ brief, hideContact = false, checking = false, sta
     ? `${timeline.unansweredCalls} unanswered ${timeline.unansweredCalls === 1 ? 'call' : 'calls'} since their last answer; ${timeline.callsLeft > 0 ? `${timeline.callsLeft} more before the hold.` : 'the person is held, no cold call.'}`
     : null;
   const bids = Array.isArray(brief.openBids) ? brief.openBids : [];
+  // X16d: the agent's talking points for objections this person raised: said in the seller's words, never sent.
+  const objectionAnswers = Array.isArray(brief.objectionAnswers) ? brief.objectionAnswers : [];
 
   // UX-06: the SAME account state NOW shows, said first; under a hold no opener is offered; while the state is being
   // read, or when it could not be read, no opener either (fail closed).
@@ -238,6 +241,22 @@ export function PreCallBrief({ brief, hideContact = false, checking = false, sta
           )}
         </div>
       </div>
+
+      {objectionAnswers.length > 0 ? (
+        <div data-testid="brief-objections" className="rounded-md border border-[var(--border)] p-3">
+          <Heading>{BRIEF_LABELS.objectionAnswers}</Heading>
+          <p className="mt-1 text-xs text-[var(--muted-foreground)]">A talking point to say in your own words, from the thesis facts only. Prepared by GAP; not sent anywhere.</p>
+          <ul className="mt-2 space-y-3">
+            {objectionAnswers.map((o) => (
+              <li key={o.taskId} className="flex flex-col gap-1">
+                <q className="text-[var(--muted-foreground)]">{o.objection}</q>
+                <p className="text-sm">{o.answer.replace(/\s*\[\[SRC:[A-Za-z0-9_-]+\]\]/g, '')}</p>
+                {o.question ? <p className="text-sm font-medium">{o.question}</p> : null}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
 
       {noOpener ? null : (
       <div data-testid="brief-questions" className="rounded-md border border-[var(--border)] p-3">

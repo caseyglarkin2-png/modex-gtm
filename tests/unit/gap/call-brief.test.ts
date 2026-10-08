@@ -51,10 +51,11 @@ function makePrisma() {
     },
     // X16c: the recorded dial attempts (self-reported) and the unanswered-call reads behind the timeline.
     gapAuditEvent: {
-      findMany: asyncSpy(async () => [
+      // The attempts for the timeline; the task rows (X16d) answer empty here (the loader is pinned in answer-objection.test.ts).
+      findMany: asyncSpy(async (q: { where?: { kind?: unknown } } = {}) => (q.where?.kind === 'call.attempt_started' ? [
         { subject_id: 'dec-9', payload: { accountName: 'Acme Logistics', personaId: 7, basis: 'self_reported' }, created_at: T(4) },
         { subject_id: 'dec-9', payload: { accountName: 'Acme Logistics', personaId: 7, basis: 'self_reported' }, created_at: T(2) },
-      ]),
+      ] : [])),
     },
     conversationDisposition: {
       findFirst: asyncSpy(async () => ({ created_at: T(0) })),
@@ -237,5 +238,6 @@ describe('X16c: the person\'s timeline on the brief', () => {
     const brief = await callBrief(bare, 7);
     expect(brief!.timeline).toMatchObject({ unansweredCalls: 0, callsLeft: 3 });
     expect(brief!.timeline.entries.map((e) => e.kind)).toEqual(['disposition', 'disposition', 'disposition']);
+    expect(brief!.objectionAnswers).toEqual([]);
   });
 });

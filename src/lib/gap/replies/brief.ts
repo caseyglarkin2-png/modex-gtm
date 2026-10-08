@@ -26,6 +26,7 @@ import { supersededIds } from '../bid/select';
 import { PROBLEM_FAMILY_CATALOG, isProblemFamily } from '../taxonomy';
 import { loadCallAttempts } from '../execution/call-attempt';
 import { callsLeftBeforeHold, unansweredCallsFor } from '../disposition/unanswered-calls';
+import { loadObjectionAnswers, type PreparedObjectionAnswer } from '../agents/answer-objection';
 
 export interface BriefPersona {
   id: number;
@@ -122,6 +123,8 @@ export interface CallBrief {
   lastDispositions: BriefDisposition[];
   /** X16c: the person's timeline (dial attempts and dispositions, newest first) with the calls left before the hold. */
   timeline: BriefTimeline;
+  /** X16d: the agent's cleared talking points for objections this person raised (the task results), newest first. */
+  objectionAnswers: PreparedObjectionAnswer[];
   openBids: BriefBid[];
   /** Asked BEFORE the buyer acknowledges the problem: never a measurement (ops closeout 17). */
   suggestedQuestions: string[];
@@ -338,6 +341,7 @@ export async function callBrief(prisma: any, personaId: number, opts: { hypothes
   ].sort((a, b) => new Date(b.at).getTime() - new Date(a.at).getTime() || (a.kind === 'attempt' ? -1 : 1));
   const unansweredCalls = email ? await unansweredCallsFor(prisma, email) : 0;
   const timeline: BriefTimeline = { entries, unansweredCalls, callsLeft: callsLeftBeforeHold(unansweredCalls) };
+  const objectionAnswers = await loadObjectionAnswers(prisma, { personaId: persona.id, now: new Date() }).catch(() => []);
 
   let openBids: BriefBid[] = [];
   if (hypothesis) {
@@ -379,6 +383,7 @@ export async function callBrief(prisma: any, personaId: number, opts: { hypothes
     hypothesis,
     lastDispositions,
     timeline,
+    objectionAnswers,
     openBids,
     suggestedQuestions: suggestedQuestionsFor(hypothesis),
     afterAcknowledgementQuestions: afterAcknowledgementQuestionsFor(hypothesis),
