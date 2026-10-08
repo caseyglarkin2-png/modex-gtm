@@ -30,6 +30,8 @@ export const DAY_PLANNED = 'work.day_planned' as const;
 export const PLAN_SUBJECT_TYPE = 'work_day' as const;
 /** A token older than this (by the plan's day) finds nothing: an assignment link or email outlives its day by a week. */
 export const PLAN_LOOKBACK_DAYS = 7;
+/** X21b: the plan lock's own transaction limits (see `locked`). */
+export const PLAN_TX_OPTIONS = { maxWait: 5_000, timeout: 15_000 } as const;
 const DAY_MS = 86_400_000;
 
 export interface PlanItemRefs {
@@ -167,10 +169,12 @@ export function itemsForDay(day: WorkDay, nyDate: string, opts: { decisionIds?: 
 
 async function locked<T>(prisma: PrismaLike, key: string, fn: (tx: PrismaLike) => Promise<T>): Promise<T> {
   if (typeof prisma.$transaction !== 'function' || typeof prisma.$executeRaw !== 'function') return fn(prisma);
+  // X21b: the production transaction timed out at 500 ms (the client runs with defaults, so the limit comes from the
+  // deployment); the lock holds three round trips to a database in another region, so it carries its own limits.
   return prisma.$transaction(async (tx: PrismaLike) => {
     await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${`gap_day_plan:${key}`}))`;
     return fn(tx);
-  });
+  }, PLAN_TX_OPTIONS);
 }
 
 function rowToPlan(row: { payload: Record<string, unknown> | null; created_at: Date | string; subject_id: string }, fresh: boolean): DayPlan {
