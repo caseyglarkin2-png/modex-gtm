@@ -104,6 +104,19 @@ export interface BriefAccountIntel {
   firstDiscoveryQuestion: string | null;
 }
 
+/**
+ * R63-A S10: the account row says the motion once. A cautious motion (no good motion, in a deal, warm intro only) is
+ * its one amber line (its label and why); a first touch in motion says that alone, never "Do not contact yet: In
+ * motion: ..." under "No good motion yet: In motion: ...". Otherwise the plain motion line.
+ */
+export function accountLines(a: BriefAccountIntel): { motion: string; caution: string | null } {
+  const m = a.motion;
+  if (m.type !== 'NO_GOOD_MOTION' && m.type !== 'IN_DEAL' && m.type !== 'INTRO_ONLY') return { motion: a.motionLine, caution: null };
+  if (m.type !== 'NO_GOOD_MOTION') return { motion: '', caution: a.motionLine };
+  const held = m.why.replace(/^Do not contact yet: /, '');
+  return { motion: '', caution: /^In motion: /.test(held) ? held : m.why };
+}
+
 const list = (v: unknown): string[] => (Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string' && x.trim().length > 0) : []);
 const day = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' });
 
@@ -205,8 +218,9 @@ export function buildBrief(input: {
     context: (input.context ?? []).filter((l) => typeof l === 'string' && l.trim()),
     account: input.account
       ? {
-          motion: input.account.motionLine,
-          caution: input.account.motion.type === 'NO_GOOD_MOTION' || input.account.motion.type === 'IN_DEAL' || input.account.motion.type === 'INTRO_ONLY' ? input.account.motion.why : null,
+          // R63-A S10: the motion once ("No good motion yet: In motion: ..." and "Do not contact yet: In motion: ..."
+          // were one fact twice): a cautious motion is its one amber line, and a first touch in motion says only that.
+          ...accountLines(input.account),
           href: accountHref(input.account.accountName),
         }
       : null,

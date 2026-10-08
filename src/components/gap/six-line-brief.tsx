@@ -81,7 +81,7 @@ export function SixLineBriefView({ brief, personaId, accountName }: { brief: Six
         </Row>
         {brief.account ? (
           <Row label="Account" testId="brief-account">
-            <p>{brief.account.motion}</p>
+            {brief.account.motion ? <p>{brief.account.motion}</p> : null}
             {brief.account.caution ? <p className="font-medium text-amber-700 dark:text-amber-400">{brief.account.caution}</p> : null}
             <a href={brief.account.href} className="text-xs underline">
               Everything GAP knows about this account

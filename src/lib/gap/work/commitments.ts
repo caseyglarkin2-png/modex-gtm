@@ -24,9 +24,8 @@
  * reminder that returns on its date), a confirmed capture commitment (R44) and an out-of-office return date (R42).
  * Nothing here sends, drafts, enrolls, writes HubSpot or changes a thesis, a person or a suppression.
  */
-import { addBusinessDays } from '../sequence/business-days';
+import { followUpDue } from '../execution/after-send';
 import { parseSteps } from '../sequence/steps';
-import { SEED_DELAYS_BUSINESS_DAYS } from '../sequences/families';
 import { DIRECT_SENT, DRAFT_SENT, DRAFT_SUBJECT_TYPE, DRAFTED, MANUAL_SENT } from '../execution/draft-ledger';
 import { personStepKey } from '../execution/person-history';
 import { addDays, dayLabel, nyDay, nyDayAt, parseReturnDate } from './dates';
@@ -492,8 +491,8 @@ export async function syncFollowUpsFromLedger(prisma: PrismaLike, now: Date, opt
   for (const s of newest.values()) {
     const steps = s.sequenceVersionId ? stepsOf.get(s.sequenceVersionId) ?? [] : [];
     const next = steps[s.stepIndex + 1] as { delay?: { value: number; unit: string } } | undefined;
-    const sentAt = new Date(s.sentAt);
-    const due = next?.delay ? (next.delay.unit === 'calendar_days' ? new Date(sentAt.getTime() + next.delay.value * DAY_MS) : addBusinessDays(sentAt, next.delay.value)) : addBusinessDays(sentAt, SEED_DELAYS_BUSINESS_DAYS[1]);
+    // R63-A S10: one rule for the follow-up day (the email page says the same day before this sweep has run).
+    const due = followUpDue(s.sentAt, next);
     const name = s.personaId !== null ? nameOf.get(s.personaId) ?? null : null;
     const who = name ?? s.recipient;
     const r = known.has(commitmentIdFor({ kind: 'send', id: personStepKey(s.personaId, s.recipient, s.stepIndex) })) ? null : await ensureCommitment(
@@ -503,7 +502,7 @@ export async function syncFollowUpsFromLedger(prisma: PrismaLike, now: Date, opt
         kind: 'follow_up',
         status: 'waiting',
         title: `Follow up with ${who}`,
-        dueAt: nyDayAt(nyDay(due)),
+        dueAt: due,
         dependency: `${first(who) ?? who}'s reply`,
         person: { personaId: s.personaId, name, email: s.recipient },
         source: { kind: 'send', id: personStepKey(s.personaId, s.recipient, s.stepIndex) },

@@ -25,6 +25,8 @@ import { EMAIL_ACTIONS } from '@/lib/gap/execution/seller-draft';
 import { gmailSenderAddress } from '@/lib/email/gmail-sender';
 import { gapGmailSender } from '@/lib/gap/execution/gap-sender';
 import { computeNextTouch, type NextTouch } from '@/lib/gap/execution/next-touch';
+import { afterSendWords, followUpFor } from '@/lib/gap/execution/after-send';
+import { loadCommitments } from '@/lib/gap/work/commitments';
 import { telHref } from '@/lib/gap/routing/seller-action';
 import { firstNameOf } from '@/lib/gap/sequence/render';
 import { buildCallPack, stripObservationCitations } from '@/lib/gap/sequence/call-pack';
@@ -118,6 +120,10 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
             ((await prisma.sendApprovalRequest.findUnique({ where: { id: pack.compile.approvalRequestId }, select: { comment: true } })) as { comment: string | null } | null)?.comment ?? '',
         }
       : null;
+  // R63-A S10: after the family's last step, the send's follow-up obligation is what comes next (its day, from Work).
+  const afterSend = touch?.state === 'complete'
+    ? afterSendWords({ sent: touch.sent, followUp: decision ? followUpFor(await loadCommitments(prisma, { accountNames: [hypothesis.account_name] }).catch(() => []), decision.id) : null })
+    : null;
   const touchIneligible = !touch || touch.state === 'not_started' || touch.state === 'due'
     ? null
     : touch.state === 'waiting'
@@ -125,7 +131,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
       : touch.state === 'stopped'
         ? `Sequence stopped: ${touch.detail}`
         : touch.state === 'complete'
-          ? 'Every touch in this sequence has been sent.'
+          ? afterSend?.blocked ?? 'Nothing more to send from this card.'
           : touch.state === 'unknown'
             ? `Sequence status unknown: ${touch.detail} Nothing is prepared until it can be read.`
             : null;
@@ -308,7 +314,7 @@ export async function ActionPackView({ target, embedded = false }: { target: Act
           {touch.state === 'waiting' ? <p className="font-medium">Waiting: touch {touch.stepIndex + 1} due {fmtDay(touch.dueAt)}</p> : null}
           {touch.state === 'due' ? <p className="font-medium">Follow up: touch {touch.stepIndex + 1} is due now (below)</p> : null}
           {touch.state === 'stopped' ? <p className="font-medium text-[var(--destructive)]">Sequence stopped: {touch.detail}</p> : null}
-          {touch.state === 'complete' ? <p className="font-medium">Sequence complete</p> : null}
+          {touch.state === 'complete' ? <p className="font-medium" data-testid="sequence-after-send">{afterSend?.status}</p> : null}
           {touch.state === 'unknown' ? <p className="font-medium">Sequence status unknown: {touch.detail}</p> : null}
         </section>
       ) : null}

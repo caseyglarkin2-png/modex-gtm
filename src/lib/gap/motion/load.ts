@@ -202,7 +202,8 @@ export async function loadAccountFirstTouches(prisma: PrismaLike, accountNames: 
   }
   // Released when the address has since failed.
   const pids = [...new Set(touches.map((t) => t.personaId).filter((x): x is number => x !== null))];
-  const personas: Array<{ id: number; do_not_contact: boolean; email_status: string | null }> = pids.length ? await prisma.persona.findMany({ where: { id: { in: pids } }, select: { id: true, do_not_contact: true, email_status: true } }) : [];
+  const personas: Array<{ id: number; do_not_contact: boolean; email_status: string | null; name?: string | null }> = pids.length ? await prisma.persona.findMany({ where: { id: { in: pids } }, select: { id: true, do_not_contact: true, email_status: true, name: true } }) : [];
+  const nameById = new Map(personas.map((p) => [p.id, p.name ?? null]));
   const failed = new Set(personas.filter((p) => p.do_not_contact || isHardBounceStatus(p.email_status)).map((p) => p.id));
   const recipients = [...new Set(touches.map((t) => t.recipient).filter(Boolean))];
   const unsub: Array<{ email: string }> = recipients.length ? await prisma.unsubscribedEmail.findMany({ where: { email: { in: recipients } }, select: { email: true } }) : [];
@@ -210,7 +211,8 @@ export async function loadAccountFirstTouches(prisma: PrismaLike, accountNames: 
   for (const t of touches) {
     t.released = (t.personaId !== null && failed.has(t.personaId)) || unsubscribed.has(t.recipient);
     const list = out.get(t.account) ?? [];
-    list.push({ personaId: t.personaId, recipient: t.recipient, sentAt: t.sentAt, released: t.released, ...(t.outstanding ? { outstanding: true } : {}), ...(t.decisionId && t.gmailDraftId ? { decisionId: t.decisionId, gmailDraftId: t.gmailDraftId } : {}) });
+    const recipientName = t.personaId !== null ? nameById.get(t.personaId) ?? null : null;
+    list.push({ personaId: t.personaId, recipient: t.recipient, sentAt: t.sentAt, released: t.released, ...(t.outstanding ? { outstanding: true } : {}), ...(t.decisionId && t.gmailDraftId ? { decisionId: t.decisionId, gmailDraftId: t.gmailDraftId } : {}), ...(recipientName ? { recipientName } : {}) });
     out.set(t.account, list);
   }
   return out;
