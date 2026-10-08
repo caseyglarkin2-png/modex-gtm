@@ -25,7 +25,28 @@ export interface HealthComponent {
   label: string;
   /** Diagnostic detail for the disclosure. */
   detail: string;
+  /** R63-A S16, not healthy only: who repairs it and how (the retry path in words), as the R65 operations lines do. */
+  owner?: string;
+  retry?: string;
 }
+
+/**
+ * R63-A S16: "Blocked: Mailbox intake has never completed..." named no owner and no next step. Every component that is
+ * not healthy now carries who repairs it and the retry path (the R65 FAILURE_OWNERSHIP shape).
+ */
+export const HEALTH_REPAIR: Readonly<Record<HealthKey, { owner: string; retry: string }>> = {
+  mailbox: { owner: 'operator', retry: 'Read the last run message in the details; fix its cause, then run /api/cron/gap-mailbox/?mode=apply once with the cron secret (it also runs every 10 minutes on its own)' },
+  hubspot: { owner: 'operator', retry: 'Check HUBSPOT_ACCESS_TOKEN in Vercel and that HubSpot answers; cold actions resume on their own once it reads' },
+  suppression: { owner: 'operator', retry: 'Check CLAWD_CONTROL_PLANE_URL and its token in Vercel and that the clawd control plane answers; sends resume on their own once it gives a verdict' },
+  sender: { owner: 'operator', retry: 'Set GAP_GMAIL_USER_EMAIL and its Gmail credential in Vercel, then redeploy' },
+  routing: { owner: 'operator', retry: 'Run routing from a GAP lane (Run routing); the cards refresh when it lands' },
+};
+
+const repaired = (c: HealthComponent): HealthComponent => {
+  if (c.state === 'HEALTHY') return c;
+  const r = c.key === 'mailbox' && /intake off/.test(c.label) ? HEALTH_REPAIR.sender : HEALTH_REPAIR[c.key];
+  return { ...c, owner: r.owner, retry: r.retry };
+};
 
 export interface HealthReport {
   overall: HealthState;
@@ -104,7 +125,7 @@ function routing(i: HealthInputs['routing'], now: Date): HealthComponent {
 }
 
 export function evaluateHealth(inputs: HealthInputs, now: Date): HealthReport {
-  const components = [mailbox(inputs.mailbox, now), hubspot(inputs.hubspot), suppression(inputs.suppression), sender(inputs.sender), routing(inputs.routing, now)];
+  const components = [mailbox(inputs.mailbox, now), hubspot(inputs.hubspot), suppression(inputs.suppression), sender(inputs.sender), routing(inputs.routing, now)].map(repaired);
   const overall = components.reduce<HealthState>((w, c) => (RANK[c.state] > RANK[w] ? c.state : w), 'HEALTHY');
   const routingC = components.find((c) => c.key === 'routing')!;
   const bad = components.filter((c) => c.state !== 'HEALTHY').sort((a, b) => RANK[b.state] - RANK[a.state]);
