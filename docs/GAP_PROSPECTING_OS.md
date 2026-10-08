@@ -2010,9 +2010,22 @@ set it: the four blockers, the two matrix additions, then the MUST list.
 - S6, S7 and S14 are R63-B S9 (67010fe2), S11 (a9f53e3f) and S10 (66b1e9ce).
 - NICE fixed: N1 part d126588d (clawd, Wedge, "hidden capacity (approved)", "0 candidates waiting"); N3 f5d3aaac (names on Done today and the deal brief); N4 part 73a9a4bc, d126588d and 0d4e5eff (the meeting context, Capture's recent notes, the motion line); N5 and N7 670dbbd8 (yards plural; the canon proof line); N6 part 73a9a4bc and 0380d5b5 (a currentness said twice, "also leads", "...lost Wrong if: If", "Read BRIEF", "1 of their own measure"); N10 772de979 ("CSCO" spelled out) and 1b240b19 (a person with no title reads "title not on record": Dannon's Mark Shaughnessy).
 - NICE by design: N10's intro ask lives only on the account (warm intro only: the account is the one place that asks Mark).
-- NICE as debt (owners in the debt list below): N1 rest, N2, N4 rest, N6 rest, N8, N9, N11.
+- NICE as debt (owners in the debt list below): N1 rest, N4 rest, N6 rest, N8, N9, N11. N2 is by design (the lead's decision, below).
 - Acceptance, each proven by a test: a first-person promise is owed by the seller (`r63a-seller-promise.test.tsx`); a customer or lost-deal account never reads Ready on Work or the preview after a restart or Refresh (`r63a-held-never-ready.test.ts`); the preview offers no outreach to an account with a live reply or a recorded do not contact (`r63a-preview-stop-rules.test.ts`); the story names the person who replied (`r63a-story-names.test.ts`); a recorded reply's card clears on the next Refresh with a real date (`r63a-reply-clears.test.ts`); Work reaches done when the only item left is a prepared meeting (`r63a-day-done.test.tsx`).
 - Receipts at 772de979: the 43 R63 test files run singly with --maxWorkers=1, 115 tests green; each fix's neighboring files run singly at its commit (tests that pinned old wording moved to the new contract in the same commit); eslint and tsc clean on every changed file.
+
+**R63 gates on the final SHA (2026-10-07, the lead's go after R63 was accepted).** Serial, one job at a time, on
+c9cff73b; logs in the scratchpad `gates/`, journeys in `r64/journeys/`. Two gates went red once; each was fixed atomically
+on the critical path and only what it touched was rerun.
+- tsc, whole project (`npx tsc --noEmit -p .`): clean, 8 s (incremental).
+- eslint, whole project (`npx eslint .`, 14 s): exits 1 with 1,045 errors and 84 warnings in 171 files, every one present at the production base 672570ed (the lint configuration is unchanged on the branch; no file the branch touched has more errors than at the base). The one error the branch added (react-hooks/rules-of-hooks on a click handler named usePrimary in outreach-anchor.tsx) is fixed in ba29d430 (renamed putPrimaryInUse; renaming it back turns eslint red). The pre-existing errors are named debt below.
+- The GAP suite (445 files, four chunks with --maxWorkers=2): 5,765 of 5,765 green, 278 s (72, 69, 67, 70). The first run had one red: pre-call-brief.test.tsx still asked for a citation link named "1" after R63-B N12 named it "Source 1: title (site)"; fixed in c9cff73b (returning the bare number turns it red) and its chunk rerun green (108 files, 827 tests).
+- The scratch suite on 55432 (`GAP_SCRATCH_DATABASE_URL=<scratch> npx vitest run tests/unit/gap/scratch --maxWorkers=1`, the nine non-matrix files): 50 of 50 green, 33 s.
+- The rest suite (`npx vitest run --maxWorkers=2 --exclude tests/unit/gap/**`): 328 files, 2,311 passed and 1 skipped of 2,312, 156 s.
+- The production build (`npm run build` at c9cff73b, the scratch environment, no production credential): compiled, 99 s in all (the prebuild VOICE CI and pack validations passed; compiled in 38.2 s; 60 of 60 static pages), BUILD_ID 5wDGj3pLDgnc1LvFwrTXM.
+- The review server: the old server (Windows PID 45732) stopped before the build, which writes the same `.next`; the scratch database reset (`reset-scratch.sh`: schema, hand SQL, 33 of 33 guards, families) and reseeded with the R63 harness (`journey-exit-seed.ts r63`, which runs seed-corpus.ts and adds Kroger's buyer words, Nfi's reply from Person1 and the pilot obligation, plus `r63-extra-seed.ts r63` for Unlinked); the stub on 4545 left running, its deals file refreshed from the new corpus (it rereads the file per request). seed-matrix.ts was not run on 55432: it is Worker B's on feat/gap-matrix and is written for the matrix database (55433) only; the journeys' accounts all come from the corpus and journey seeds. `next start -p 3100` on the new build (PID 26584).
+- Read-only journeys (`r64/journeys.cjs`, a fresh signed-in headless browser, nothing pressed that writes): 14 of 14 checks. Work loads (200, 1.6 s); Costco ("Held: a customer (closed won)") and Sysco ("Held: parked after a lost deal") held on Work and on ?day=tomorrow; Walmart's pack says "No email: they opted out" with no send control; Kroger's story says "In 2 open deals" (never "Nothing has happened between us yet") and its Work card offers Prepared on the meeting; Nfi's story says "Person1 Scratch, VP Transportation replied on Oct 7"; no "Compose email" control on Work, the pack, Nfi or Accounts. The stub's write log reads zero notes and zero tasks (no HubSpot write).
+- Decision recorded (the lead, 2026-10-07): R63-A N2 is by design: UNKNOWN is the truth vocabulary (STABLE_BASELINE), and EMAIL, PREPARED and RECORDED are CSS uppercase over sentence-case text.
 
 **Consolidated debt (2026-10-07).** Every debt this recovery named, one line each, with its owner and the guard that
 holds today; the entries above keep the detail. Owners: engineering (the GAP engineer of record), Casey (a product or
@@ -2047,7 +2060,8 @@ spend decision), operator (runs the system), copy (human-written words, Casey's)
 - R63-B N13: a first-touch email opens by quoting the raw fact title. Guard: the seller reads every email before it goes. Owner: copy (Casey).
 - R63-B N8: DECIDED by the lead, GAP keeps "about 5% ... observed" (the compiler enforces it; the repository canon line is the native site's copy). Listed for Casey in the final packet as a wording decision, not a blocker. Owner: Casey (wording only).
 - R63-A N1 rest: "remit" in seller text (the remit caution, "it lands on their remit", "Location / remit unknown"; 19 test files pin it) and the "Next operator" slot name (a typed slot). Guard: words only. Owner: copy (Casey) for the word, engineering for the change.
-- R63-A N2: UNKNOWN is the truth vocabulary (STABLE_BASELINE: an empty section says UNKNOWN); EMAIL, PREPARED and RECORDED are the uppercase badge and heading style over sentence-case text. Guard: screen readers read the sentence case. Owner: the lead (a design decision).
+- R63-A N2: DECIDED by the lead (2026-10-07), by design: UNKNOWN is the truth vocabulary (STABLE_BASELINE: an empty section says UNKNOWN); EMAIL, PREPARED and RECORDED are CSS uppercase over sentence-case text. Kept here for the record; no longer open.
+- The whole-project eslint run: 1,045 errors and 84 warnings in 171 files, all present at the production base 672570ed (mostly `no-explicit-any` in GAP tests and services). Guard: tsc is clean and every file a change touches is linted clean of new errors. Owner: engineering.
 - R63-A N4 rest: about 33 seller-visible strings still print an ISO date (`slice(0, 10)`: person factors, the paused-reply headline, a family's separate-motion line). Guard: the date is right, only its form. Owner: engineering.
 - R63-A N6 rest: the Fedex first touch names the account three times (the headline, inside the quoted fact, "That might not be true at ..."); it is governed copy in a seeded approach family. Guard: the seller reads every email. Owner: copy (Casey), with R63-B N13.
 - R63-A N8: the Accounts list says "no GAP touch yet" where a conversation or a deal exists (it reads GAP first touches only) and shows the record's vertical, not the page's industry words. Guard: the account page says what has happened. Owner: engineering (the index stays three cheap reads, UX-10).
@@ -2056,13 +2070,13 @@ spend decision), operator (runs the system), copy (human-written words, Casey's)
 
 ### HANDOFF
 
-HANDOFF commit: 3f1c2030 (docs only; the block below describes head_sha 1b240b19 on feat/gap-account-first-ux; first written in d3b6592a).
+HANDOFF commit: PENDING (docs only; the block below describes head_sha c9cff73b on feat/gap-account-first-ux; first written in d3b6592a).
 
 ```yaml
 # HANDOFF (this block's own commit SHA is on the ledger line directly above the block)
 branch: feat/gap-account-first-ux
 base_sha: e66a9853
-head_sha: 1b240b19
+head_sha: c9cff73b
 production_sha: 672570ed
 tickets:
   R00: {disposition: DONE, evidence: "2113361c: production 672570ed reconciled; the capability matrix and the one stranded PepsiCo draft recorded"}
@@ -2105,7 +2119,7 @@ tickets:
   R61: {disposition: PARTIAL, evidence: "31c44d1f; the p95 re-judgment in the R61 entry", dependency: "cold first byte (platform); Prisma idle SELECT 1 per pooled connection; Work's rebuilt read"}
 later_tickets:
   R62: {disposition: IN PROGRESS, evidence: "acceptB runs the matrix on 55433"}
-  R63: {disposition: DONE, evidence: "both reports dispositioned: R63-B (B1 8f7c20d5 3fe2c39e; S1-S15 fixed, S7 in part, its 404 named debt after R64) and R63-A (B1-B4 0fad39a5 5090fe4a 9893899f e6d1038f; the matrix's two 3f8753cd e6d1038f; S1-S17 fixed, S13 with its link 2684beae; S6 S7 S14 as R63-B's; NICE fixed, by design or named debt); the full gates and the rebuild run on the lead's word", dependency: "none for R63; R63-A N2 (UNKNOWN and the uppercase badges) is the lead's design call; the 5% wording is listed for Casey, not a blocker"}
+  R63: {disposition: DONE, evidence: "both reports dispositioned: R63-B (B1 8f7c20d5 3fe2c39e; S1-S15 fixed, S7 in part, its 404 named debt after R64) and R63-A (B1-B4 0fad39a5 5090fe4a 9893899f e6d1038f; the matrix's two 3f8753cd e6d1038f; S1-S17 fixed, S13 with its link 2684beae; S6 S7 S14 as R63-B's; NICE fixed, by design or named debt); the full gates and the rebuild run on the lead's word", dependency: "none for R63 (R63-A N2 decided by design); the 5% wording is listed for Casey, not a blocker"}
   R64: {disposition: NOT STARTED, evidence: "needs Casey's authorization for the production write below"}
   R65: {disposition: DONE, evidence: "e5b0b567 the counts, d9902641 owners and retry paths, c72e6a2f the read-only dry run"}
 reopened_unresolved:
@@ -2200,7 +2214,8 @@ environment:
   rules: "scratch tests with --maxWorkers=1 (one shared database); stop the server and the stub after a run"
 test_receipts:
   r61_run: {sha: e66a9853, source: "as reported at the R61 checkpoint; not repeated in the ledger", typecheck: clean, gap: "390 files / 5,593 tests", scratch: "8 files / 47 tests", rest: "326 files / 2,298 tests, 1 skipped", journeys: "r5-exit/ 11 steps; r60-final/ 7 of 7"}
-  latest: {sha: 4e936a90, typecheck: "npx tsc --noEmit -p . (clean)", gap: "npx vitest run tests/unit/gap/<four chunks> --maxWorkers=2: 403 files / 5,653 tests", scratch: "GAP_SCRATCH_DATABASE_URL=<scratch> npx vitest run tests/unit/gap/scratch --maxWorkers=1: 9 files / 50 tests", rest_e5b0b567: "npx vitest run --maxWorkers=2 --exclude tests/unit/gap/**: 326 files / 2,299 passed, 1 skipped", build_e5b0b567: "npm run build: compiled", journeys_a0f6bb77: "r62-exit2/ 12 steps and r62-capture2/ 6 steps, zero internal-text hits, zero HubSpot writes", r65_live_e5b0b567: "r65-live/"}
+  latest: {sha: c9cff73b, typecheck: "npx tsc --noEmit -p . (clean, 8 s)", lint: "npx eslint .: 1,045 errors and 84 warnings, all present at 672570ed; the branch adds none after ba29d430", gap: "npx vitest run tests/unit/gap/<four chunks> --maxWorkers=2: 445 files / 5,765 tests, 278 s", scratch: "GAP_SCRATCH_DATABASE_URL=<scratch> npx vitest run tests/unit/gap/scratch --maxWorkers=1: 9 files / 50 tests, 33 s", rest: "npx vitest run --maxWorkers=2 --exclude tests/unit/gap/**: 328 files / 2,311 passed, 1 skipped, 156 s", build: "npm run build: compiled, 99 s, BUILD_ID 5wDGj3pLDgnc1LvFwrTXM", journeys: "r64/journeys/ 14 of 14 checks on the rebuilt server (PID 26584), zero HubSpot writes", forced_fixes: "ba29d430 (lint), c9cff73b (a test pinned the old citation name)"}
+  gates_4e936a90: {sha: 4e936a90, typecheck: "npx tsc --noEmit -p . (clean)", gap: "npx vitest run tests/unit/gap/<four chunks> --maxWorkers=2: 403 files / 5,653 tests", scratch: "GAP_SCRATCH_DATABASE_URL=<scratch> npx vitest run tests/unit/gap/scratch --maxWorkers=1: 9 files / 50 tests", rest_e5b0b567: "npx vitest run --maxWorkers=2 --exclude tests/unit/gap/**: 326 files / 2,299 passed, 1 skipped", build_e5b0b567: "npm run build: compiled", journeys_a0f6bb77: "r62-exit2/ 12 steps and r62-capture2/ 6 steps, zero internal-text hits, zero HubSpot writes", r65_live_e5b0b567: "r65-live/"}
   after_4e936a90: "16971d2c and d9902641: focused tests only under the load cap (r60-capture-reply 11, capture-once and capture 25, r65-operations and learning-dashboard 19), each with a red mutation"
   r63_fix_3fe2c39e: "8f7c20d5 and 3fe2c39e: eight files run singly with --maxWorkers=1, 41 tests (r63-opt-out-send 4, r63-compose-on-gap 2, email-send-routes 11, queue-send-deps 10, warm-intro-writers 7, perform-send-parity 3, campaign-tag-flow 2, b4-unsubscribe-case-insensitive 2), a red mutation on each fix; eslint and tsc clean"
   r63_b_b63f2e69: "77261d91..b63f2e69: the 19 R63 test files run singly with --maxWorkers=1, 59 tests green; neighbors run singly at each commit; a red mutation on each fix; eslint and tsc clean; no full suite, no build"
