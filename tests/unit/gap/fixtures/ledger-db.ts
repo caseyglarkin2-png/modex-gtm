@@ -37,6 +37,12 @@ function table(rows: Row[], clock: () => Date, idPrefix: string) {
       return pick(row, q.select);
     },
     /** Sprint 5: the mirror ledger's idempotency row (one per key). */
+    update: async (q: { where: Row; data: Row; select?: Row }) => {
+      const r = rows.find((x) => matchesWhere(x, q.where));
+      if (!r) throw Object.assign(new Error('Record to update not found.'), { code: 'P2025' });
+      Object.assign(r, q.data, { updated_at: clock() });
+      return pick(r, q.select);
+    },
     upsert: async (q: { where: Row; create: Row; update: Row }) => {
       const r = rows.find((x) => matchesWhere(x, q.where));
       if (r) {

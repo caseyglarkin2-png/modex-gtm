@@ -10,7 +10,7 @@
  */
 import { createHmac, timingSafeEqual } from 'node:crypto';
 
-export const ACTION_OPS = ['start', 'open', 'defer', 'review'] as const;
+export const ACTION_OPS = ['start', 'open', 'defer', 'review', 'decide'] as const;
 export type ActionOp = (typeof ACTION_OPS)[number];
 
 export interface ActionPayload {
