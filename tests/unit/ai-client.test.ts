@@ -76,3 +76,14 @@ describe('AI client provider routing', () => {
     expect(result.errors.every((error) => error.provider === 'ai_gateway')).toBe(true);
   });
 });
+
+describe('classifyAIError: a retired model is model_missing, never a timeout (production 2026-10-08)', () => {
+  it('a 404 whose wording says "Error fetching" is model_missing (the Gemini list continues); a real timeout stays a timeout; a 429 is quota', async () => {
+    const { classifyAIError } = await import('@/lib/ai/client');
+    const retired = classifyAIError('gemini', new Error('[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent: [404 Not Found] This model models/gemini-2.5-flash-lite is no longer available'));
+    expect(retired).toMatchObject({ category: 'model_missing', retryable: true });
+    expect(classifyAIError('gemini', new Error('Error fetching from https://x: request timed out'))).toMatchObject({ category: 'timeout' });
+    expect(classifyAIError('gemini', new Error('429 Too Many Requests: quota exceeded'))).toMatchObject({ category: 'quota' });
+    expect(classifyAIError('ai_gateway', new Error('AI Gateway error: 403 Free tier users do not have access to this model'))).toMatchObject({ category: 'unknown', retryable: false });
+  });
+});

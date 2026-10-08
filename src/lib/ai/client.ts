@@ -33,18 +33,20 @@ const GEMINI_MODELS = [
   'gemini-2.0-flash',
 ];
 
-function classifyAIError(provider: AIProvider, err: unknown): AIErrorInfo {
+export function classifyAIError(provider: AIProvider, err: unknown): AIErrorInfo {
   const message = err instanceof Error ? err.message : String(err);
   const normalized = message.toLowerCase();
   const isQuota = /429|quota|resource_exhausted|rate_limit/.test(normalized);
   const isTimeout = /timeout|timed out|aborted|network|fetch/.test(normalized);
-  const isModelMissing = /404|not found|model.*not.*found|resource.*not.*found/.test(normalized);
+  // A 404 or a retired model is never a timeout, whatever the SDK's wording ("Error fetching from ...: [404 Not Found] This
+  // model ... is no longer available" abandoned the whole Gemini list in production, 2026-10-08): it is judged first.
+  const isModelMissing = /404|not found|model.*not.*found|resource.*not.*found|no longer available|no longer supported|deprecated/.test(normalized);
   const isAuth = /unauthorized|api key|invalid key|permission/.test(normalized);
 
   let category: AIErrorCategory = 'unknown';
   if (isQuota) category = 'quota';
-  else if (isTimeout) category = 'timeout';
   else if (isModelMissing) category = 'model_missing';
+  else if (isTimeout) category = 'timeout';
   else if (isAuth) category = 'authentication';
 
   const retryable = category === 'quota' || category === 'timeout' || category === 'model_missing';
