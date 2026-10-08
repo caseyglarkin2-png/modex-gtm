@@ -274,10 +274,10 @@ describe.skipIf(!RUN)('R62 matrix: deals (two opportunities, closure and reopeni
     }
     expect(((await h.stubGet('/__stub/writes')) as { notes: unknown[] }).notes).toEqual([]);
     // Coverage lists every approved change not written: the current recap, never the replaced one.
-    // DEFECT seen at c46647fe (intermittent, source untouched): Coverage folds the ledger read newest first
-    // (src/lib/gap/crm-sync.ts:288) with a stable millisecond sort (src/lib/gap/deals/crm-model.ts:181); when the
-    // approval's attempt and result share a millisecond and Postgres returns that tie result-first, the current
-    // recap reads "approved" there and is missing from Coverage while the deal brief says it is not written.
+    // FIXED in e972efbc (seen intermittently at c46647fe): Coverage folded the ledger read newest first with a stable
+    // millisecond sort, so an attempt and its result in one millisecond, read result first, made the recap read
+    // "approved" and miss Coverage while the deal brief said it is not written. The fold now orders one millisecond
+    // by the write lifecycle, then by id (src/lib/gap/deals/crm-model.ts foldCrmSync).
     expect((await get('state=off')).filter((it) => it.accountName === d.a.name).map((it) => it.proposalId)).toEqual([newId]);
   }, 240_000);
 
