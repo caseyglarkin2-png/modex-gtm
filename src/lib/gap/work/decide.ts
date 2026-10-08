@@ -17,7 +17,7 @@
  */
 import { applySignalOp } from '../signals/ops';
 import { captureSignal } from '../signals/intake';
-import { queueAgentTask } from '../agents/tasks';
+import { listAgentTasks, queueAgentTask } from '../agents/tasks';
 import { nyDay } from './dates';
 import { accountHref } from '../account-intel/href';
 import { DECISIONS, PROSPECT_DECISION, type Decision } from './intel';
@@ -55,12 +55,19 @@ export type DecideResult =
 export interface DecideDeps {
   /** The signal capture (tests inject one; production captures through signals/intake.ts). */
   capture?: typeof captureSignal;
-  queueAngle?: (prisma: PrismaLike, input: { key: string; decision: Decision; note: string | null; actor: string; now: Date; via: string; input: Record<string, unknown> }) => Promise<{ id: string }>;
+  queueAngle?: (prisma: PrismaLike, input: { key: string; decision: Decision; note: string | null; actor: string; now: Date; via: string; input: Record<string, unknown> }) => Promise<{ id: string; kept?: boolean }>;
 }
 
 const SPENDS = new Set<Decision>(['pursue', 'more']);
 
-async function queueAngle(prisma: PrismaLike, input: { key: string; decision: Decision; note: string | null; actor: string; now: Date; via: string; input: Record<string, unknown> }): Promise<{ id: string }> {
+/**
+ * A02: unchanged work is never regenerated and two angle tasks never run at once on one item. A Pursue without a
+ * note on an item whose angle is already prepared keeps that angle (`angle_kept`); a task still running is kept too;
+ * More, a note, or a failed task queue a fresh one (the retry path the task row names).
+ */
+async function queueAngle(prisma: PrismaLike, input: { key: string; decision: Decision; note: string | null; actor: string; now: Date; via: string; input: Record<string, unknown> }): Promise<{ id: string; kept?: boolean }> {
+  const existing = (await listAgentTasks(prisma, { now: input.now, itemKey: input.key }).catch(() => [])).filter((t) => t.kind === 'develop_angle').sort((a, b) => b.queuedAt.localeCompare(a.queuedAt))[0];
+  if (existing && (existing.status === 'running' || (existing.status === 'succeeded' && input.decision === 'pursue' && !input.note))) return { id: existing.id, kept: true };
   const q = await queueAgentTask(prisma, { kind: 'develop_angle', itemKey: input.key, itemToken: '', day: nyDay(input.now), revision: 0, request: input.note ?? input.decision, requestedBy: input.actor, requestedFrom: input.via, input: { decision: input.decision, ...input.input } }, { now: input.now, actor: input.actor });
   return { id: q.id };
 }
@@ -78,6 +85,7 @@ export async function applyDecision(prisma: PrismaLike, input: DecideInput, deps
   const effects: string[] = [];
   const angle = deps.queueAngle ?? queueAngle;
   let angleTaskId: string | null = null;
+  let queued: { id: string; kept?: boolean };
   let accountName: string | null = null;
   let href = '/gap/signals/';
 
@@ -100,8 +108,9 @@ export async function applyDecision(prisma: PrismaLike, input: DecideInput, deps
       // Research first (the op service clears the feedback), then the one mark for a pursue.
       if (s.url && s.account_name && s.resolution === 'resolved' && (s.research_status === 'none' || s.research_status === 'no_usable_fact' || s.research_status === 'research_failed')) await op({ op: 'research' }, 'research_queued');
       if (input.decision === 'pursue') await op({ op: 'feedback', value: 'use' }, 'marked_use');
-      angleTaskId = (await angle(prisma, { key, decision: input.decision, note: input.note ?? null, actor: input.actor, now: input.now, via, input: { title: s.title ?? null, url: s.url ?? null, accountName: s.account_name ?? null, accountHint: s.account_hint ?? null, publishedAt: s.published_at ? new Date(s.published_at).toISOString() : null, relevance: s.relevance ?? null, categories: Array.isArray(s.categories) ? s.categories : [], note: s.note ?? null } })).id;
-      effects.push('angle_queued');
+      queued = await angle(prisma, { key, decision: input.decision, note: input.note ?? null, actor: input.actor, now: input.now, via, input: { title: s.title ?? null, url: s.url ?? null, accountName: s.account_name ?? null, accountHint: s.account_hint ?? null, publishedAt: s.published_at ? new Date(s.published_at).toISOString() : null, relevance: s.relevance ?? null, categories: Array.isArray(s.categories) ? s.categories : [], note: s.note ?? null } });
+      angleTaskId = queued.id;
+      effects.push(queued.kept ? 'angle_kept' : 'angle_queued');
     }
     await recordDecision(prisma, key, input, { accountName, effects });
     return { ok: true, key, decision: input.decision, effects, angleTaskId, accountName, href };
@@ -127,8 +136,9 @@ export async function applyDecision(prisma: PrismaLike, input: DecideInput, deps
           if (rr?.ok) effects.push('research_queued');
         }
       }
-      angleTaskId = (await angle(prisma, { key, decision: input.decision, note: input.note ?? null, actor: input.actor, now: input.now, via, input: { title: t.title, url: t.url, accountName, accountHint: accountName ? null : t.account_name, publishedAt: t.published_at ? new Date(t.published_at).toISOString() : null, source: t.source, categories: Array.isArray(t.categories) ? t.categories : [], signalId } })).id;
-      effects.push('angle_queued');
+      queued = await angle(prisma, { key, decision: input.decision, note: input.note ?? null, actor: input.actor, now: input.now, via, input: { title: t.title, url: t.url, accountName, accountHint: accountName ? null : t.account_name, publishedAt: t.published_at ? new Date(t.published_at).toISOString() : null, source: t.source, categories: Array.isArray(t.categories) ? t.categories : [], signalId } });
+      angleTaskId = queued.id;
+      effects.push(queued.kept ? 'angle_kept' : 'angle_queued');
     } else {
       effects.push(input.decision === 'skip' ? 'skipped_30_days' : input.decision === 'dismiss' ? 'dismissed' : input.decision === 'save' ? 'saved' : 'explored');
     }
@@ -141,8 +151,9 @@ export async function applyDecision(prisma: PrismaLike, input: DecideInput, deps
   accountName = persona?.account_name ?? null;
   href = accountName ? `${accountHref(accountName)}/` : '/gap/replies/';
   if (SPENDS.has(input.decision)) {
-    angleTaskId = (await angle(prisma, { key, decision: input.decision, note: input.note ?? null, actor: input.actor, now: input.now, via, input: { email: parsed.email, personaId: persona?.id ?? null, name: persona?.name ?? null, title: persona?.title ?? null, accountName } })).id;
-    effects.push('angle_queued');
+    queued = await angle(prisma, { key, decision: input.decision, note: input.note ?? null, actor: input.actor, now: input.now, via, input: { email: parsed.email, personaId: persona?.id ?? null, name: persona?.name ?? null, title: persona?.title ?? null, accountName } });
+    angleTaskId = queued.id;
+    effects.push(queued.kept ? 'angle_kept' : 'angle_queued');
   } else {
     effects.push(input.decision === 'skip' ? 'skipped_30_days' : input.decision === 'dismiss' ? 'dismissed' : input.decision === 'save' ? 'saved' : 'explored');
   }

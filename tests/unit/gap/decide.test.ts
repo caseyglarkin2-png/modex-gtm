@@ -12,7 +12,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { ledgerDb } from './fixtures/ledger-db';
 import { applyDecision, decisionLine, parseDecisionKey } from '@/lib/gap/work/decide';
 import { PROSPECT_DECISION, loadDecided, loadIntelligence } from '@/lib/gap/work/intel';
-import { listAgentTasks } from '@/lib/gap/agents/tasks';
+import { listAgentTasks, runAgentTasks } from '@/lib/gap/agents/tasks';
 import { ACTION_OPS, signActionToken, verifyActionToken } from '@/lib/gap/work/action-token';
 
 const NOW = new Date('2026-10-08T16:00:00Z');
@@ -50,6 +50,23 @@ describe('I02: decisions on signals', () => {
     expect(db.store.gapAuditEvent.filter((e) => e.kind === PROSPECT_DECISION).map((e) => [e.subject_id, (e.payload as { decision: string; via: string }).decision, (e.payload as { via: string }).via])).toEqual([['signal:s-old', 'pursue', 'gmail:link']]);
     expect((await loadIntelligence(c, { now: NOW })).signals.map((i) => i.id)).toEqual(['s-noacct']);
     expect(decisionLine(r)).toMatch(/^Pursuing the signal\. GAP is developing the angle and checking the source/);
+  });
+
+  it('A02: a second Pursue without a note on an item whose angle is prepared keeps the angle (no regeneration); a running task is kept; More, a note or a failed task queue a fresh one', async () => {
+    const c = db.client();
+    const first = await applyDecision(c, { key: 'signal:s-old', decision: 'pursue', actor: ACTOR, now: NOW });
+    if (!first.ok) throw new Error('first');
+    const again = await applyDecision(c, { key: 'signal:s-old', decision: 'pursue', actor: ACTOR, now: new Date(NOW.getTime() + 5000) });
+    // queued (not yet run): the queue supersedes, as X08 pins; the task is fresh
+    expect(again).toMatchObject({ ok: true, effects: expect.arrayContaining(['angle_queued']) });
+    const [task] = await runAgentTasks(c, { now: new Date(NOW.getTime() + 6000), max: 5, claimer: 'test', handlers: { develop_angle: async () => ({ ok: true, result: { whyItMatters: 'prepared', accounts: [], roles: [], people: [], starters: ['a', 'b'], proposedAction: 'research', caveat: null } }) } }).then((r) => r.results);
+    expect(task.outcome).toBe('succeeded');
+    const third = await applyDecision(c, { key: 'signal:s-old', decision: 'pursue', actor: ACTOR, now: new Date(NOW.getTime() + 7000) });
+    expect(third).toMatchObject({ ok: true, angleTaskId: task.id, effects: expect.arrayContaining(['angle_kept']) });
+    expect((await listAgentTasks(c, { now: new Date(NOW.getTime() + 7000), itemKey: 'signal:s-old' })).filter((t) => t.status === 'queued')).toHaveLength(0);
+    const more = await applyDecision(c, { key: 'signal:s-old', decision: 'more', actor: ACTOR, now: new Date(NOW.getTime() + 8000), note: 'focus on the gate' });
+    expect(more).toMatchObject({ ok: true, effects: expect.arrayContaining(['angle_queued']) });
+    expect(more.ok && more.angleTaskId).not.toBe(task.id);
   });
 
   it('More on a signal with no account queues the angle only; Save keeps context; Skip hides 30 days; Dismiss ignores; Explore changes nothing; an unknown signal is not_found', async () => {

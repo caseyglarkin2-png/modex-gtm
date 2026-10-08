@@ -9,6 +9,7 @@ import { ACTION_TIME_SUPPRESSION_TIMEOUT_MS, probeSuppressionContract } from '@/
 import type { HealthInputs } from './health';
 import { nyDay } from '../work/dates';
 import { listAgentTasks } from '../agents/tasks';
+import { loadSpend, spendLimits } from '../ai/spend';
 import { SELLER_SETTINGS_KEY } from '../work/settings';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -72,7 +73,7 @@ export async function loadHealthInputs(prisma: PrismaLike, deps: HealthDeps = {}
 
   const config = (key: string) => (typeof prisma?.systemConfig?.findUnique === 'function' ? prisma.systemConfig.findUnique({ where: { key } }).catch(() => null) : Promise.resolve(null));
   const day = nyDay(new Date(clock()));
-  const [cron, lastRun, hs, sup, briefingCron, agentsCron, settingsRow, sentToday, failedToday, tasks] = await Promise.all([
+  const [cron, lastRun, hs, sup, briefingCron, agentsCron, settingsRow, sentToday, failedToday, tasks, spend] = await Promise.all([
     config('cron:gap-mailbox'),
     prisma.gapAuditEvent.findMany({ where: { kind: ROUTING_RUN_DONE }, orderBy: { created_at: 'desc' }, take: 25, select: { created_at: true, payload: true } }).catch(() => []),
     hubspotConfigured ? timed(deps.hubspotPing ?? defaultHubspotPing, clock, HEALTH_PROBE_TIMEOUT_MS) : Promise.resolve(null),
@@ -92,6 +93,8 @@ export async function loadHealthInputs(prisma: PrismaLike, deps: HealthDeps = {}
     typeof prisma?.gapAuditEvent?.findFirst === 'function' ? prisma.gapAuditEvent.findFirst({ where: { kind: 'briefing.sent', subject_type: 'work_day', subject_id: day }, select: { created_at: true } }).catch(() => null) : Promise.resolve(null),
     typeof prisma?.gapAuditEvent?.count === 'function' ? prisma.gapAuditEvent.count({ where: { kind: 'briefing.failed', subject_type: 'work_day', subject_id: day } }).catch(() => 0) : Promise.resolve(0),
     listAgentTasks(prisma, { now: new Date(clock()) }).catch(() => []),
+    // A02: the model spend ledger for the month. Soft.
+    loadSpend(prisma, { now: new Date(clock()), env }).catch(() => null),
   ]);
 
   let state: Record<string, unknown> = {};
@@ -150,5 +153,6 @@ export async function loadHealthInputs(prisma: PrismaLike, deps: HealthDeps = {}
       oldestQueuedAt: queued.length ? new Date(Math.min(...queued.map((t) => new Date(t.queuedAt).getTime()))) : null,
       failedFinalToday: (Array.isArray(tasks) ? tasks : []).filter((t) => t.status === 'failed' && t.final && nyDay(new Date(t.queuedAt)) === day).length,
     },
+    model: spend ? { month: spend.month, label: spend.label, monthUsd: spend.monthUsd, ceilingUsd: spend.ceilingUsd, warnFraction: spendLimits(env).warnFraction, calls: spend.calls, failed: spend.failed, refused: spend.refused, inFlight: spend.inFlight, lastCall: spend.lastCall ? { at: spend.lastCall.at, outcome: spend.lastCall.outcome, model: spend.lastCall.model, errorCategory: spend.lastCall.errorCategory } : null } : undefined,
   };
 }
