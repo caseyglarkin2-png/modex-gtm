@@ -65,6 +65,8 @@ export interface LedgerSeed {
   /** Sprint 5: confirmed buyer words (R51 / R53) and the HubSpot mirror's idempotency rows (R54). */
   bids?: Row[];
   mirror?: Row[];
+  /** X03 (sales execution engine): SystemConfig rows (the seller settings, the briefing claims). */
+  config?: Row[];
 }
 
 /** A fresh client over shared rows; `tick` advances the ledger clock so newest-row-wins is deterministic. */
@@ -82,6 +84,7 @@ export function ledgerDb(seed: LedgerSeed = {}, start = new Date('2026-10-06T14:
     prospectingHypothesis: [...(seed.hypotheses ?? [])],
     buyerInputData: [...(seed.bids ?? [])],
     gapHubSpotMirror: [...(seed.mirror ?? [])],
+    systemConfig: [...(seed.config ?? [])],
   };
   let t = start.getTime();
   const clock = () => new Date((t += 1000));
@@ -98,6 +101,7 @@ export function ledgerDb(seed: LedgerSeed = {}, start = new Date('2026-10-06T14:
     prospectingHypothesis: table(store.prospectingHypothesis, clock, 'h'),
     buyerInputData: table(store.buyerInputData, clock, 'b'),
     gapHubSpotMirror: table(store.gapHubSpotMirror, clock, 'mir'),
+    systemConfig: table(store.systemConfig, clock, 'cfg'),
   });
   return { store, client, setClock: (d: Date) => (t = d.getTime()) };
 }
