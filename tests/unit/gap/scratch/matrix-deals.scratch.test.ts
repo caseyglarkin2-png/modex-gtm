@@ -274,6 +274,10 @@ describe.skipIf(!RUN)('R62 matrix: deals (two opportunities, closure and reopeni
     }
     expect(((await h.stubGet('/__stub/writes')) as { notes: unknown[] }).notes).toEqual([]);
     // Coverage lists every approved change not written: the current recap, never the replaced one.
+    // DEFECT seen at c46647fe (intermittent, source untouched): Coverage folds the ledger read newest first
+    // (src/lib/gap/crm-sync.ts:288) with a stable millisecond sort (src/lib/gap/deals/crm-model.ts:181); when the
+    // approval's attempt and result share a millisecond and Postgres returns that tie result-first, the current
+    // recap reads "approved" there and is missing from Coverage while the deal brief says it is not written.
     expect((await get('state=off')).filter((it) => it.accountName === d.a.name).map((it) => it.proposalId)).toEqual([newId]);
   }, 240_000);
 
@@ -310,10 +314,9 @@ describe.skipIf(!RUN)('R62 matrix: deals (two opportunities, closure and reopeni
     expect(story.rows.find((r) => r.key === 'learn')?.sentences[0]?.text ?? '').not.toMatch(/what it costs them/);
   }, 240_000);
 
-  // Found by this matrix at 055d18a7 (general defect, source untouched): the story's "buyer said" basis names the buyer
-  // by the address on the row, because the account read hands the story the contact email as who said it
-  // (src/lib/gap/account-intel/load.ts:359 `who: b.contact_email`, rendered by src/lib/gap/story/story.ts:211). The
-  // seller reads "buyer said, ben@...example.com, Oct 7" where the artifacts and the people on the page name the person.
+  // Found by this matrix at 055d18a7 (the story named the buyer by the contact email: account-intel/load.ts passed
+  // contact_email as who); fixed by the writer at e6d1038f (R63-A B4: the speaker from the person on record at the
+  // address). The story shows at most two buyer sentences a row, so every one shown on Ben's deal is checked.
   it('the story names who said it by the person on record, never the address', async () => {
     const d = D.Scope;
     const words = 'Trucks queue at the Columbus gate for forty minutes every morning.';
@@ -324,10 +327,11 @@ describe.skipIf(!RUN)('R62 matrix: deals (two opportunities, closure and reopeni
     const v = projectNow(brief, c, inputs, now);
     const story = projectStory({ accountName: d.a.name, now, state: pursuit.state, brief, inputs, whyNow: v.whyNow, know: v.know, touches: [], clawdRead: 'ok', vaultNote: null, excluded: [] } as never);
     const said = story.rows.flatMap((r) => r.sentences).filter((x) => x.tag === 'Buyer said').map((x) => x.basis);
-    expect(said.length).toBeGreaterThan(0);
     expect(said.filter((b) => b.includes('@'))).toEqual([]);
-    const mine = story.rows.flatMap((r) => r.sentences).find((x) => x.text === words);
-    expect(mine?.basis, JSON.stringify(said)).toMatch(new RegExp(`^buyer said, ${esc(d.ben.name)}, `));
+    // Every sentence shown on Ben's deal names Ben, by the name on record.
+    const onColumbus = said.filter((b) => b.endsWith(`; Deal: ${d.columbus.dealname}`));
+    expect(onColumbus.length, JSON.stringify(said)).toBeGreaterThan(0);
+    expect(onColumbus.filter((b) => !b.startsWith(`buyer said, ${d.ben.name}, `))).toEqual([]);
   }, 240_000);
 
   it('the prepared artifacts speak to their recipient in the second person and never carry the CRM deal name', async () => {
