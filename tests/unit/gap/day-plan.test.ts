@@ -192,3 +192,48 @@ describe('X18: work carried over is reported', () => {
     expect((await loadDayPlan(db.client(), '2026-10-08'))!.items[0].carriedFrom).toBe('2026-10-07');
   });
 });
+
+const T21 = new Date('2026-10-08T15:00:00Z');
+describe('X21: the day is built outside the plan transaction (production 2026-10-08: the first briefing failed, "Transaction already closed", the builder ran inside the 500 ms advisory-lock transaction)', () => {
+  it('load() runs before the transaction opens; the lock guards only the re-check and the write; a plan written meanwhile wins and the built day is dropped', async () => {
+    const db = ledgerDb({}, T21);
+    const base = db.client();
+    let inTx = false;
+    let loadsInTx = 0;
+    let loads = 0;
+    const client = {
+      ...base,
+      $executeRaw: async () => 0,
+      $transaction: async (fn: (tx: unknown) => Promise<unknown>) => {
+        inTx = true;
+        try {
+          return await fn({ ...base, $executeRaw: async () => 0 });
+        } finally {
+          inTx = false;
+        }
+      },
+    };
+    const plan = await planDay(client, { now: T21, load: async () => { loads += 1; if (inTx) loadsInTx += 1; return day([card({ accountName: 'Kenco', stateKind: 'follow_up', tier: 'follow_up', state: 'Follow up due' })]); } }, 'test');
+    expect(plan.items.map((i) => i.key)).toEqual(['follow_up:Kenco:2026-10-08']);
+    expect(loads).toBe(1);
+    expect(loadsInTx).toBe(0);
+    // A second instance planned the same day between the build and the lock: the stored plan wins, nothing is written twice.
+    const racing = {
+      ...client,
+      $transaction: async (fn: (tx: unknown) => Promise<unknown>) => {
+        inTx = true;
+        try {
+          return await fn({ ...base, $executeRaw: async () => 0 });
+        } finally {
+          inTx = false;
+        }
+      },
+    };
+    db.store.gapAuditEvent.length = 0;
+    let built = 0;
+    const second = await planDay(racing, { now: T21, load: async () => { built += 1; await planDay(base, { now: T21, load: async () => day([card({ accountName: 'Dole', stateKind: 'decide', tier: 'review', state: 'Decide' })]) }, 'other'); return day([]); } }, 'test');
+    expect(built).toBe(1);
+    expect(second.items.map((i) => i.key)).toEqual(['review:Dole:2026-10-08']);
+    expect(db.store.gapAuditEvent.filter((e) => e.kind === DAY_PLANNED)).toHaveLength(1);
+  });
+});

@@ -27,7 +27,7 @@ export function ActivityView({ a }: { a: Accountability }) {
   const asideCount = a.intended.filter((x) => x.status === 'set_aside').length;
   return (
     <div className="space-y-4" data-testid="activity-view">
-      <Section title="What I intended" hint={a.planned ? `The day's plan: ${a.intended.length} items; ${doneCount} done, ${asideCount} set aside, ${a.attention.open.length} open.` : 'No plan was made for this day (the briefing cron makes it, or the first open of Work).'} testId="activity-intended">
+      <Section title="What I intended" hint={a.planned ? `The day's plan: ${a.intended.length} items; ${doneCount} done, ${asideCount} set aside, ${a.attention.open.length} open.` : 'No plan was made for this day (the briefing cron makes it at the briefing hour, or START does).'} testId="activity-intended">
         {a.intended.length ? (
           <ol className="space-y-1">
             {a.intended.map(({ item, status, by }) => (
