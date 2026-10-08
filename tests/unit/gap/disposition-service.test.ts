@@ -80,6 +80,9 @@ function makePrisma() {
     persona: { findUnique: asyncSpy(), findFirst: asyncSpy(async () => null) },
     conversationDisposition: {
       findUnique: asyncSpy(async () => null),
+      // X16: the unanswered-call count the service hands the commitment builder (count after the last substantive answer).
+      findFirst: asyncSpy(async () => null),
+      count: asyncSpy(async () => 2),
       findMany: asyncSpy(async () => [
         { id: 'D1', response_class: 'problem_confirmed', channel: 'call', human_confirmed: true, created_at: NOW, confirmed_at: NOW, metadata: null, ai_suggested: null },
       ]),
@@ -570,5 +573,21 @@ describe('stale rows in the enrollment query', () => {
       OR: [{ to_email: 'jordan@acme.example' }, { persona_id: 7 }],
       status: { in: ['active', 'paused', 'stop_pending'] },
     });
+  });
+});
+
+describe('X16: the service hands the commitment builder the channel and the unanswered-call count', () => {
+  it('a call outcome carries channel call and the count routing reads (this call included); an email outcome carries 0', async () => {
+    const prisma = makePrisma();
+    const { deps } = makeDeps();
+    const commitments = asyncSpy(async () => undefined);
+    const out = await recordDisposition(prisma, input({ responseClass: 'no_answer' }), { ...deps, commitments });
+    expect(out).toMatchObject({ ok: true });
+    expect(commitments).toHaveBeenCalledTimes(1);
+    expect(commitments.mock.calls[0][1]).toMatchObject({ channel: 'call', unansweredCalls: 2, responseClass: 'no_answer', contactEmail: 'jordan@acme.example' });
+    expect(prisma.conversationDisposition.count.mock.calls[0][0]).toMatchObject({ where: { contact_email: 'jordan@acme.example', human_confirmed: true, channel: 'call', response_class: { in: ['no_answer', 'voicemail', 'gatekeeper'] } } });
+    const email = asyncSpy(async () => undefined);
+    await recordDisposition(makePrisma(), input({ channel: 'email', responseClass: 'timing', source: { kind: 'inbound_message', id: 'msg-9' } }), { ...deps, commitments: email });
+    expect(email.mock.calls[0][1]).toMatchObject({ channel: 'email', unansweredCalls: 0 });
   });
 });

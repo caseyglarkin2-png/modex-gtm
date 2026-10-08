@@ -70,6 +70,8 @@ import { LIVE_ENROLLMENT_STATUSES } from '../sequence/family';
 import { stopRunsForRecipient as defaultStopRuns } from '@/lib/queue/sequence-runtime';
 import { dispositionEffects, validateDisposition, type DispositionEffects, type ValidDisposition } from './model';
 import { commitmentsFromDisposition as defaultCommitments } from '../work/commitments';
+import { NON_STOPPING_RESPONSE_CLASSES } from '../taxonomy';
+import { UNANSWERED_CALL_CLASSES } from '../routing/inputs';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -539,6 +541,33 @@ export async function recordDisposition(
     },
   });
 
+  // R40 / X16: the obligations a confirmed answer creates (answer the request, prepare the meeting, come back on the
+  // date, decide on the person they named, call again after no answer or voicemail, get past the gatekeeper) and the
+  // follow-ups it settles. Run for every confirmed row, the non-stopping classes included (X16b: before this, the
+  // early return below skipped it, so a no-answer never made its follow-up). Fail-open: the row is the record.
+  const settleCommitments = async (stopsRun: boolean): Promise<void> => {
+    try {
+      await (deps.commitments ?? defaultCommitments)(prisma, {
+        dispositionId,
+        accountName: hypothesis.account_name,
+        responseClass: valid.responseClass,
+        contactEmail: valid.contactEmail,
+        personaId: persona?.id ?? null,
+        resumeAt: input.resumeAt ?? null,
+        referral: input.referral ?? null,
+        nextBestAction: input.nextBestAction ?? null,
+        buyerLanguage: valid.buyerLanguage,
+        stopsRun,
+        channel: valid.channel,
+        unansweredCalls: valid.channel === 'call' ? await unansweredCallsFor(prisma, valid.contactEmail) : 0,
+        actor: input.actor,
+        now: input.now,
+      });
+    } catch {
+      // The commitment ledger never gates the disposition.
+    }
+  };
+
   // ---- 3. effects (an unconfirmed row has none, by construction) -----------
   const effects: DispositionEffects = dispositionEffects({ responseClass: valid.responseClass, humanConfirmed });
   if (!humanConfirmed || (!effects.stopsRun && !effects.writesDnc && effects.resolves === null && effects.nextAction === 'none')) {
@@ -550,6 +579,7 @@ export async function recordDisposition(
       const mirrored = await runMirror(prisma, deps, input, dispositionId, hypothesis, persona, valid);
       applied.mirrored = mirrored.mirrored;
       const refusals = mirrored.refusal ? [mirrored.refusal] : [];
+      await settleCommitments(false);
       await auditEffects(auditFn, prisma, input, dispositionId, applied, refusals);
       return { ok: true, dispositionId, bidIds, humanConfirmed, effects: applied, refusals };
     }
@@ -646,29 +676,33 @@ export async function recordDisposition(
   applied.mirrored = mirrored.mirrored;
   if (mirrored.refusal) refusals.push(mirrored.refusal);
 
-  // 7. R40: the obligations this answer creates (answer the request, prepare the meeting, come back on the date,
-  // decide on the person they named) and the follow-ups it settles. Fail-open: the row above is the record.
-  try {
-    await (deps.commitments ?? defaultCommitments)(prisma, {
-      dispositionId,
-      accountName: hypothesis.account_name,
-      responseClass: valid.responseClass,
-      contactEmail: valid.contactEmail,
-      personaId: persona?.id ?? null,
-      resumeAt: input.resumeAt ?? null,
-      referral: input.referral ?? null,
-      nextBestAction: input.nextBestAction ?? null,
-      buyerLanguage: valid.buyerLanguage,
-      stopsRun: effects.stopsRun,
-      actor: input.actor,
-      now: input.now,
-    });
-  } catch {
-    // The commitment ledger never gates the disposition.
-  }
+  // 7. R40: the obligations this answer creates and the follow-ups it settles.
+  await settleCommitments(effects.stopsRun);
 
   await auditEffects(auditFn, prisma, input, dispositionId, applied, refusals);
   return { ok: true, dispositionId, bidIds, humanConfirmed, effects: applied, refusals };
+}
+
+/**
+ * X16: confirmed unanswered calls to this person since their last substantive answer, the count routing reads
+ * (routing/inputs.ts, red team T8), taken after the new row is written so it includes this call. Soft: a client
+ * without the reads answers 0 (no follow-up is then capped wrongly: the builder treats 0 as the first attempt).
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function unansweredCallsFor(prisma: any, contactEmail: string): Promise<number> {
+  if (typeof prisma?.conversationDisposition?.count !== 'function') return 0;
+  const email = contactEmail.trim().toLowerCase();
+  try {
+    const lastSubstantive: { created_at: Date } | null = typeof prisma.conversationDisposition.findFirst === 'function'
+      ? await prisma.conversationDisposition.findFirst({ where: { contact_email: email, human_confirmed: true, response_class: { notIn: [...NON_STOPPING_RESPONSE_CLASSES] } }, orderBy: { created_at: 'desc' }, select: { created_at: true } })
+      : null;
+    const n = await prisma.conversationDisposition.count({
+      where: { contact_email: email, human_confirmed: true, channel: 'call', response_class: { in: [...UNANSWERED_CALL_CLASSES] }, ...(lastSubstantive ? { created_at: { gt: lastSubstantive.created_at } } : {}) },
+    });
+    return typeof n === 'number' ? n : 0;
+  } catch {
+    return 0;
+  }
 }
 
 function refusalResult(err: Refusal): RecordDispositionResult {

@@ -42,7 +42,7 @@ export type ColdOutboundRefusal =
   | 'thesis_currentness_unknown';
 
 export type ColdOutboundResult =
-  | { ok: true; channel: ColdChannel; href: string }
+  | { ok: true; channel: ColdChannel; href: string; accountName: string; personaId: number }
   | { ok: false; reason: ColdOutboundRefusal; message: string };
 
 const WORK_THE_DEAL: Record<ColdChannel, string> = {
@@ -108,5 +108,5 @@ export async function checkColdOutbound(
     // The family reason ("Could not read the related accounts...", "Related account activity...") is kept too.
     return { ok: false, reason: 'opportunity_unknown', message: detail.startsWith(OPPORTUNITY_UNKNOWN_COPY) || /corporate family|related account|parent and child companies/i.test(detail) ? detail : OPPORTUNITY_UNKNOWN_COPY };
   }
-  return { ok: true, channel: input.channel, href };
+  return { ok: true, channel: input.channel, href, accountName: decision.account_name, personaId: decision.persona_id };
 }

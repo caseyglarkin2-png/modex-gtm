@@ -28,7 +28,7 @@ import { followUpDue } from '../execution/after-send';
 import { parseSteps } from '../sequence/steps';
 import { DIRECT_SENT, DRAFT_SENT, DRAFT_SUBJECT_TYPE, DRAFTED, MANUAL_SENT } from '../execution/draft-ledger';
 import { personStepKey } from '../execution/person-history';
-import { addDays, dayLabel, nyDay, nyDayAt, parseReturnDate } from './dates';
+import { addDays, dayLabel, nextBusinessDay, nyDay, nyDayAt, parseReturnDate } from './dates';
 import { classifyReply } from '../replies/classify';
 import {
   COMMITMENT_EVENT,
@@ -51,6 +51,13 @@ import {
 type PrismaLike = any;
 
 export const TITLE_MAX = 200;
+/**
+ * X16b: a no-answer or voicemail makes the next call its own follow-up, two business days out, while the person is
+ * under the routing hold (routing/rules.ts MAX_UNANSWERED_CALLS, pinned equal by x16-calls.test.ts): the third
+ * unanswered call holds the person and makes no follow-up.
+ */
+export const MAX_CALL_FOLLOW_UPS = 3;
+export const CALL_RETRY_BUSINESS_DAYS = 2;
 export const BASIS_MAX = 600;
 export const NOTE_MAX = 240;
 export const SNOOZE_MAX_DAYS = 90;
@@ -341,6 +348,10 @@ export async function commitmentsFromDisposition(
     nextBestAction?: string | null;
     buyerLanguage?: string | null;
     stopsRun: boolean;
+    /** X16b: the disposition's channel; the call outcomes below apply to `call` only. */
+    channel?: string | null;
+    /** X16b: confirmed unanswered calls since the last substantive answer, this one included (the routing count). */
+    unansweredCalls?: number | null;
     actor: string;
     now: Date;
   },
@@ -352,7 +363,23 @@ export async function commitmentsFromDisposition(
   const source = { kind: 'disposition' as const, id: d.dispositionId };
   const ctx = { actor: d.actor, now: d.now };
   const basis = d.buyerLanguage ? `${who}: "${d.buyerLanguage}"` : null;
-  if (d.responseClass === 'request_information') {
+  const isCall = d.channel === 'call';
+  // X16b: a call outcome settles the call-again follow-up waiting on this person (the call was made), whatever it was.
+  if (isCall) {
+    const waiting = (await loadCommitments(prisma, { accountNames: [d.accountName] })).filter(
+      (c) => !TERMINAL_STATUSES.includes(c.status) && c.kind === 'follow_up' && c.detail?.callAgain === true && c.person?.email === d.contactEmail.toLowerCase() && c.source.id !== d.dispositionId,
+    );
+    for (const c of waiting) await transitionCommitment(prisma, { commitmentId: c.commitmentId, to: 'done', proof: { kind: 'disposition', id: d.dispositionId, note: `Called ${who} (${d.responseClass.replace(/_/g, ' ')}).` }, actor: d.actor, now: d.now });
+  }
+  if (isCall && (d.responseClass === 'no_answer' || d.responseClass === 'voicemail')) {
+    const attempts = Math.max(1, Math.floor(d.unansweredCalls ?? 1));
+    if (attempts < MAX_CALL_FOLLOW_UPS) {
+      const dueAt = nyDayAt(nextBusinessDay(nyDay(d.now), CALL_RETRY_BUSINESS_DAYS));
+      await ensureCommitment(prisma, { accountName: d.accountName, kind: 'follow_up', title: `Call ${who} again (attempt ${attempts + 1} of ${MAX_CALL_FOLLOW_UPS}; ${d.responseClass.replace(/_/g, ' ')})`.slice(0, TITLE_MAX), basis, dueAt, person, source, detail: { callAgain: true } }, ctx);
+    }
+  } else if (isCall && d.responseClass === 'gatekeeper') {
+    await ensureCommitment(prisma, { accountName: d.accountName, kind: 'task', title: `Get past the gatekeeper for ${who} (a direct line, a colleague, a better time)`.slice(0, TITLE_MAX), basis, dueAt: nyDayAt(nextBusinessDay(nyDay(d.now), 1)), person, source }, ctx);
+  } else if (d.responseClass === 'request_information') {
     await ensureCommitment(prisma, { accountName: d.accountName, kind: 'answer_request', title: `Answer ${first(who) ?? who}'s request${d.nextBestAction ? `: ${d.nextBestAction}` : ''}`.slice(0, TITLE_MAX), basis, dueAt: d.now, person, source }, ctx);
   } else if (d.responseClass === 'meeting_accepted') {
     await ensureCommitment(prisma, { accountName: d.accountName, kind: 'prepare_meeting', title: `Prepare the meeting with ${who}`.slice(0, TITLE_MAX), basis, dueAt: d.now, person, source }, ctx);
