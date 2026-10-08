@@ -61,7 +61,7 @@ describe('account motion', () => {
     for (const over of [{}, { personas: [] }, { personas: [{ ...person, hasEmail: false }], facts: [] }]) {
       const b = buildAccountBrief(inputs({ ...dannon, ...over }), NOW);
       expect(b.motion).toMatchObject({ type: 'INTRO_ONLY', who: 'Mark Shaughnessy' });
-      expect(b.glance.nextAction).toMatch(/^Ask Mark Shaughnessy for the introduction to the Danone CSCO office/);
+      expect(b.glance.nextAction).toMatch(/^Ask Mark Shaughnessy for the introduction to the Danone Chief Supply Chain Officer's office/);
       expect(b.glance.nextAction).not.toMatch(/Research first|first touch/);
     }
     // an alias recorded on another account name is enough

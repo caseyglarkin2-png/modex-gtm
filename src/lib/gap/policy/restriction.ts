@@ -38,8 +38,9 @@ const RULES: readonly RestrictionRule[] = [
     names: ['dannon', 'danone'],
     domains: ['danone.com', 'dannon.com'],
     introducer: 'Mark Shaughnessy',
-    route: 'the Danone CSCO office',
-    reason: 'Warm intro only: Dannon is reached only through Mark Shaughnessy\'s introduction to the Danone CSCO office. No cold outreach.',
+    // R63-A N10: the office by its name, never the acronym.
+    route: "the Danone Chief Supply Chain Officer's office",
+    reason: "Warm intro only: Dannon is reached only through Mark Shaughnessy's introduction to the Danone Chief Supply Chain Officer's office. No cold outreach.",
   },
 ];
 

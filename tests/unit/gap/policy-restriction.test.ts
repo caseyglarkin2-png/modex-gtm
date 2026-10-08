@@ -7,7 +7,7 @@ import { restrictionFor, restrictionForAccount, restrictionForEmail, restriction
 import { isWarmIntroOnlyAccount, assertColdOutreachAllowed } from '@/lib/studio/guardrails';
 import { decideApproach, type ApproachInput } from '@/lib/gap/motion/approach';
 
-const intro = { introducer: 'Mark Shaughnessy', route: 'the Danone CSCO office' };
+const intro = { introducer: 'Mark Shaughnessy', route: "the Danone Chief Supply Chain Officer's office" };
 
 describe('restriction authority', () => {
   it('matches whole name words, aliases and owned domains (fail closed)', () => {
