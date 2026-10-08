@@ -2014,6 +2014,14 @@ set it: the four blockers, the two matrix additions, then the MUST list.
 - Acceptance, each proven by a test: a first-person promise is owed by the seller (`r63a-seller-promise.test.tsx`); a customer or lost-deal account never reads Ready on Work or the preview after a restart or Refresh (`r63a-held-never-ready.test.ts`); the preview offers no outreach to an account with a live reply or a recorded do not contact (`r63a-preview-stop-rules.test.ts`); the story names the person who replied (`r63a-story-names.test.ts`); a recorded reply's card clears on the next Refresh with a real date (`r63a-reply-clears.test.ts`); Work reaches done when the only item left is a prepared meeting (`r63a-day-done.test.tsx`).
 - Receipts at 772de979: the 43 R63 test files run singly with --maxWorkers=1, 115 tests green; each fix's neighboring files run singly at its commit (tests that pinned old wording moved to the new contract in the same commit); eslint and tsc clean on every changed file.
 
+**R62 final pass and the merge (2026-10-07).** acceptB's final matrix on the release candidate c9cff73b: 100 of 100
+cases green on its own scratch database (55433), feat/gap-matrix 8dbb9c57 (tests, the matrix seed and stubs, and
+docs/gap/RUNBOOK.md only; no source), re-headed by acceptB as 79bfdd4a on b441983a with the same content. The reds the
+pass classified:
+- deals, the speaker case: the product defect it found (the story named the buyer by contact email) was fixed by the writer in e6d1038f; the case now checks that every buyer sentence shown on Ben's deal names Ben (the extra statement it had assumed was a test assumption, not a contract change).
+- deals, the recap case: an intermittent product defect. Coverage's "approved, not written" list folded the CRM ledger with a stable millisecond sort; an approval's attempt and result rows that share a millisecond, read result first, folded to "approved", so the approval dropped off Coverage and GET /api/gap/crm-sync?state=off while the deal brief said HubSpot writes are turned off (seen as crm538d9d3b9eb3b). FIXED e972efbc before the merge: the fold orders one millisecond by the write lifecycle, then by id, whatever order the rows are read in; the ledger reads select the id and order by time then id. Test `r62-crm-tie.test.ts` (the same rows in three read orders and the Coverage list read result first, all "off"; dropping the tie-break turns both red); crm-sync 22, deal-artifacts 10, s5-review-recap 3, coverage 10, coverage-page 1 and deal-brief 18 run singly, green; eslint and tsc clean on the touched files. The runbook's line naming this gap as debt is closed by e972efbc.
+- The merge 307f3ee6 (`git merge --no-ff`, no conflict; the ledger file untouched by the matrix branch): `git diff --stat c9cff73b..307f3ee6 -- src` is the Coverage fix alone (src/lib/gap/crm-sync.ts and src/lib/gap/deals/crm-model.ts, 14 insertions, 4 deletions). After the merge, `npx tsc --noEmit -p .` reports 4 type errors, all in the merged matrix test files (matrix-dependencies 208 and 272, matrix-identity 86, matrix-pepsi 286): vitest runs them (types are stripped), and `next build` drops diagnostics in `*.test.*` files (next/dist/lib/typescript/runTypeCheck.js), so the Vercel build is not affected; they are acceptB's to fix (named debt below). The matrix files need 55433 and were not rerun here (acceptB's 100 of 100 is the receipt).
+
 **R63 gates on the final SHA (2026-10-07, the lead's go after R63 was accepted).** Serial, one job at a time, on
 c9cff73b; logs in the scratchpad `gates/`, journeys in `r64/journeys/`. Two gates went red once; each was fixed atomically
 on the critical path and only what it touched was rerun.
@@ -2067,16 +2075,17 @@ spend decision), operator (runs the system), copy (human-written words, Casey's)
 - R63-A N8: the Accounts list says "no GAP touch yet" where a conversation or a deal exists (it reads GAP first touches only) and shows the record's vertical, not the page's industry words. Guard: the account page says what has happened. Owner: engineering (the index stays three cheap reads, UX-10).
 - R63-A N9: a reply's meaning allows one choice. Guard: the seller records the strongest meaning and notes the rest. Owner: engineering.
 - R63-A N11: the older Accounts page (/accounts, outside GAP) shows database id 9212 and recommends outreach at 0 contacts. Guard: none (legacy). Owner: the lead.
+- The merged matrix test files fail the whole-project `tsc --noEmit -p .` with 4 type errors (matrix-dependencies.scratch.test.ts 208 and 272: a spread of a value cast to never; matrix-identity.scratch.test.ts 86: a cast between non-overlapping types; matrix-pepsi.scratch.test.ts 286: `title` read on a `{ id, label }`). Guard: vitest runs them; `next build` skips diagnostics in test files. Owner: acceptB (the matrix files are theirs).
 
 ### HANDOFF
 
-HANDOFF commit: 83153e35 (docs only; the block below describes head_sha c9cff73b on feat/gap-account-first-ux; first written in d3b6592a).
+HANDOFF commit: PENDING (docs only; the block below describes head_sha 307f3ee6 on feat/gap-account-first-ux; first written in d3b6592a).
 
 ```yaml
 # HANDOFF (this block's own commit SHA is on the ledger line directly above the block)
 branch: feat/gap-account-first-ux
 base_sha: e66a9853
-head_sha: c9cff73b
+head_sha: 307f3ee6
 production_sha: 672570ed
 tickets:
   R00: {disposition: DONE, evidence: "2113361c: production 672570ed reconciled; the capability matrix and the one stranded PepsiCo draft recorded"}
@@ -2118,7 +2127,7 @@ tickets:
   R60: {disposition: DONE, evidence: "8283a9cc, de14c0fa, 16971d2c (one capture per reply) and 216cd80a (the vocabulary)"}
   R61: {disposition: PARTIAL, evidence: "31c44d1f; the p95 re-judgment in the R61 entry", dependency: "cold first byte (platform); Prisma idle SELECT 1 per pooled connection; Work's rebuilt read"}
 later_tickets:
-  R62: {disposition: IN PROGRESS, evidence: "acceptB runs the matrix on 55433"}
+  R62: {disposition: DONE, evidence: "acceptB's final pass on c9cff73b: 100 of 100 (feat/gap-matrix 8dbb9c57, re-headed 79bfdd4a); the one product defect it found fixed in e972efbc; merged in 307f3ee6"}
   R63: {disposition: DONE, evidence: "both reports dispositioned: R63-B (B1 8f7c20d5 3fe2c39e; S1-S15 fixed, S7 in part, its 404 named debt after R64) and R63-A (B1-B4 0fad39a5 5090fe4a 9893899f e6d1038f; the matrix's two 3f8753cd e6d1038f; S1-S17 fixed, S13 with its link 2684beae; S6 S7 S14 as R63-B's; NICE fixed, by design or named debt); the full gates and the rebuild run on the lead's word", dependency: "none for R63 (R63-A N2 decided by design); the 5% wording is listed for Casey, not a blocker"}
   R64: {disposition: NOT STARTED, evidence: "needs Casey's authorization for the production write below"}
   R65: {disposition: DONE, evidence: "e5b0b567 the counts, d9902641 owners and retry paths, c72e6a2f the read-only dry run"}
@@ -2131,7 +2140,7 @@ reopened_unresolved:
   - "a closure typed as site_expansion (research/facts.ts classifyFact; the signal type CHECK has no closure value)"
   - "one Sprint 5 review NICE not taken: a canceled meeting's rebook offer and HubSpot's stale next step (the raw date in the brief is fixed in 73a9a4bc)"
 r62_cases:
-  matrix: {branch: feat/gap-matrix, sha: caa0772c, origin_sha: a43b46b3, files: "tests/unit/gap/scratch/matrix-*.scratch.test.ts", file_count: 8, cases: 87, note: "87 green is acceptB's receipt; caa0772c and a43b46b3 carry the same runbook commit"}
+  matrix: {branch: feat/gap-matrix, sha: 79bfdd4a, content_of: 8dbb9c57, merged_in: 307f3ee6, files: "tests/unit/gap/scratch/matrix-*.scratch.test.ts", file_count: 9, cases: 100, note: "100 of 100 on c9cff73b is acceptB's receipt (55433); the matrix seed, stubs and docs/gap/RUNBOOK.md came with it"}
   groups: [migration and boundaries, daily work, dependencies, execution, identity and scope, Pepsi regression, replies and capture, source truth and commercial relevance]
   stub_controls: "scripts/gap/recovery/stubs.mjs: POST /__stub/matrix (the matrix failure controls), POST /__stub/control, POST /__stub/deal-property, GET /__stub/writes"
   add:
@@ -2215,6 +2224,7 @@ environment:
 test_receipts:
   r61_run: {sha: e66a9853, source: "as reported at the R61 checkpoint; not repeated in the ledger", typecheck: clean, gap: "390 files / 5,593 tests", scratch: "8 files / 47 tests", rest: "326 files / 2,298 tests, 1 skipped", journeys: "r5-exit/ 11 steps; r60-final/ 7 of 7"}
   latest: {sha: c9cff73b, typecheck: "npx tsc --noEmit -p . (clean, 8 s)", lint: "npx eslint .: 1,045 errors and 84 warnings, all present at 672570ed; the branch adds none after ba29d430", gap: "npx vitest run tests/unit/gap/<four chunks> --maxWorkers=2: 445 files / 5,765 tests, 278 s", scratch: "GAP_SCRATCH_DATABASE_URL=<scratch> npx vitest run tests/unit/gap/scratch --maxWorkers=1: 9 files / 50 tests, 33 s", rest: "npx vitest run --maxWorkers=2 --exclude tests/unit/gap/**: 328 files / 2,311 passed, 1 skipped, 156 s", build: "npm run build: compiled, 99 s, BUILD_ID 5wDGj3pLDgnc1LvFwrTXM", journeys: "r64/journeys/ 15 of 15 checks on the rebuilt server (PID 26584), zero HubSpot writes", forced_fixes: "ba29d430 (lint), c9cff73b (a test pinned the old citation name)"}
+  r62_final_307f3ee6: "e972efbc (the Coverage tie): r62-crm-tie 2, crm-sync 22, deal-artifacts 10, s5-review-recap 3, coverage 10, coverage-page 1, deal-brief 18, singly, green; a red mutation; eslint and tsc clean on the touched files. The merge 307f3ee6: src diff from c9cff73b is the fix alone; whole-project tsc has 4 errors in the merged matrix test files (acceptB's; next build skips test files); no full suite, no rebuild (Vercel builds the merge)"
   gates_4e936a90: {sha: 4e936a90, typecheck: "npx tsc --noEmit -p . (clean)", gap: "npx vitest run tests/unit/gap/<four chunks> --maxWorkers=2: 403 files / 5,653 tests", scratch: "GAP_SCRATCH_DATABASE_URL=<scratch> npx vitest run tests/unit/gap/scratch --maxWorkers=1: 9 files / 50 tests", rest_e5b0b567: "npx vitest run --maxWorkers=2 --exclude tests/unit/gap/**: 326 files / 2,299 passed, 1 skipped", build_e5b0b567: "npm run build: compiled", journeys_a0f6bb77: "r62-exit2/ 12 steps and r62-capture2/ 6 steps, zero internal-text hits, zero HubSpot writes", r65_live_e5b0b567: "r65-live/"}
   after_4e936a90: "16971d2c and d9902641: focused tests only under the load cap (r60-capture-reply 11, capture-once and capture 25, r65-operations and learning-dashboard 19), each with a red mutation"
   r63_fix_3fe2c39e: "8f7c20d5 and 3fe2c39e: eight files run singly with --maxWorkers=1, 41 tests (r63-opt-out-send 4, r63-compose-on-gap 2, email-send-routes 11, queue-send-deps 10, warm-intro-writers 7, perform-send-parity 3, campaign-tag-flow 2, b4-unsubscribe-case-insensitive 2), a red mutation on each fix; eslint and tsc clean"
