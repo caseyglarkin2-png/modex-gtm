@@ -85,6 +85,11 @@ const money = (n: number) => `$${Math.round(n).toLocaleString('en-US')}`;
 // pilot draft to Ann listed "Any pilot has to run on our existing gate cameras." as one.
 const MEASURE_TYPES = new Set(['metric', 'impact', 'future_state']);
 const CONSTRAINT_TYPES = new Set(['constraint']);
+/** R63-A S5: what the seller noted is said as understood, its reported-speech lead ("He said ...") dropped. */
+const REPORTED_LEAD = /^\s*(?:he|she|they|[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)\s+(?:said|says|told\s+(?:me|us|casey|him|her|them)|mentioned|explained|noted)\s+(?:that\s+)?/i;
+const understood = (q: string) => q.replace(REPORTED_LEAD, '').replace(/^\w/, (c) => c.toUpperCase());
+/** One statement line: their own words quoted and attributed; a noted statement never in quotation marks. */
+const saidLine = (n: { quote: string; who: string; noted?: boolean }) => (n.noted ? `- ${understood(n.quote)} (as I understood it from ${n.who})` : `- "${n.quote}" (${n.who})`);
 const STATEMENT_TYPES = new Set(['current_state', 'business_problem', 'root_cause', 'impact', 'metric', 'priority', 'future_state', 'constraint']);
 
 /** YardFlow's own proof, in the canon's words (measured, live, at Primo Brands): ours, never a forecast for them. */
@@ -151,7 +156,7 @@ export function prepareArtifacts(i: ArtifactInput): PreparedArtifact[] {
     '',
     // R63-A S5: "in your words" only for their own words; what the seller noted is said as understood, never quoted.
     ...(verbatim.length ? ['Thank you for the time. Here is what I heard, in your words, so you can correct anything I got wrong:', ...verbatim.map((n) => `- "${n.quote}" (${n.who})`)] : []),
-    ...(noted.length ? [verbatim.length ? '' : 'Thank you for the time. Here is what I understood, so you can correct anything I got wrong:', ...(verbatim.length ? ['What I understood from our conversation:'] : []), ...noted.map((n) => `- ${n.quote.replace(/^\s*(?:he|she|they|[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)\s+(?:said|says|told\s+(?:me|us|casey|him|her|them)|mentioned|explained|noted)\s+(?:that\s+)?/i, '').replace(/^\w/, (c) => c.toUpperCase())}`)] : []),
+    ...(noted.length ? [verbatim.length ? '' : 'Thank you for the time. Here is what I understood, so you can correct anything I got wrong:', ...(verbatim.length ? ['What I understood from our conversation:'] : []), ...noted.map((n) => `- ${understood(n.quote)}`)] : []),
     ...(statements.length ? [] : ['Thank you for the time. Here is what I heard, so you can correct anything I got wrong:', '- (Nothing confirmed yet: send this only after you have their words.)']),
     ...(agreedByBuyer.length ? ['', 'What we agreed as next steps:', ...agreedByBuyer.map((m) => `- ${m.title}${m.dueDay ? `, by ${dayOf(`${m.dueDay}T16:00:00Z`)}` : ''}${m.responsible?.name ? ` (${m.responsible.name})` : ''}`)] : []),
     ...(owedYou.length ? ['', 'What I owe you:', ...owedYou.map((t) => `- ${t}`)] : []),
@@ -201,7 +206,7 @@ export function prepareArtifacts(i: ArtifactInput): PreparedArtifact[] {
   // PILOT SUCCESS CRITERIA: only their own measures; their requirements are listed apart, as what the pilot respects.
   const measures = i.needs.filter((n) => MEASURE_TYPES.has(n.type));
   const constraints = i.needs.filter((n) => CONSTRAINT_TYPES.has(n.type));
-  const respect = constraints.length ? ['', 'What the pilot has to respect, as you told us:', ...constraints.map((n) => `- "${n.quote}" (${n.who})`)] : [];
+  const respect = constraints.length ? ['', 'What the pilot has to respect, as you told us:', ...constraints.map(saidLine)] : [];
   const requirementsNote = constraints.length ? `${constraints.length === 1 ? 'one requirement' : `${constraints.length} requirements`} it has to respect` : '';
   const pilot = i.plan.find((m) => m.step === 'pilot');
   const criteria = finish(
@@ -214,7 +219,7 @@ export function prepareArtifacts(i: ArtifactInput): PreparedArtifact[] {
         : `The pilot is ${pilot?.state ?? 'proposed'} on ${dealName} and no success measure is confirmed${requirementsNote ? ` (${requirementsNote})` : ''}: ask ${lead ? first(lead.name) : 'them'} what they would need to see.`,
       to: lead?.name ?? null,
       text: measures.length
-        ? ['Pilot success, in your own measures (please correct any of them):', ...measures.map((n) => `- "${n.quote}" (${n.who})`), ...respect, '', 'How we would check each one, and when, is for us to agree together before the pilot starts.'].join('\n')
+        ? ['Pilot success, in your own measures (please correct any of them):', ...measures.map(saidLine), ...respect, '', 'How we would check each one, and when, is for us to agree together before the pilot starts.'].join('\n')
         : ['Pilot success criteria: none agreed yet.', ...respect, '', 'What would you need to see at the end of a pilot to call it worth rolling out?'].join('\n'),
       citations: [...measures, ...constraints].map(cite),
       gaps: measures.length ? [] : ['No success measure confirmed by the buyer: nothing is invented.'],
@@ -230,7 +235,7 @@ export function prepareArtifacts(i: ArtifactInput): PreparedArtifact[] {
     ...(i.roi
       ? [`- Modeled, not measured: about ${money(i.roi.hardSavingsAnnual)} a year in hard savings and ${money(i.roi.totalValueAnnual)} a year in total value across ${i.roi.facilities} facilit${i.roi.facilities === 1 ? 'y' : 'ies'}, from our ROI model${i.roi.calculatorVersion ? ` (version ${i.roi.calculatorVersion})` : ''}.`, ...i.roi.assumptions.slice(0, 4).map((a) => `- Model input: ${a}`)]
       : ['- No ROI model exists for this account yet.']),
-    ...(theirNumbers.length ? theirNumbers.map((n) => `- Your number: "${n.quote}" (${n.who})`) : ['- Your numbers: not given yet (dwell hours, detention spend, trailer moves a day).']),
+    ...(theirNumbers.length ? theirNumbers.map((n) => (n.noted ? `- Your number, as I understood it: ${understood(n.quote)} (${n.who})` : `- Your number: "${n.quote}" (${n.who})`)) : ['- Your numbers: not given yet (dwell hours, detention spend, trailer moves a day).']),
     `- ${YARDFLOW_PROOF}`,
   ];
   const businessCase = finish(
