@@ -69,6 +69,24 @@ export interface LedgerSeed {
   config?: Row[];
 }
 
+/** X05b: SystemConfig's `key` is its primary key: a second create for the same key is Prisma's P2002 (the daily claims rely on it); delete removes by key. */
+function uniqueKeyTable(rows: Row[], clock: () => Date, idPrefix: string) {
+  const base = table(rows, clock, idPrefix);
+  return {
+    ...base,
+    create: async (q: { data: Row; select?: Row }) => {
+      if (rows.some((r) => r.key === q.data.key)) throw Object.assign(new Error('Unique constraint failed on the fields: (`key`)'), { code: 'P2002' });
+      return base.create(q);
+    },
+    delete: async (q: { where: Row }) => {
+      const i = rows.findIndex((r) => matchesWhere(r, q.where));
+      if (i < 0) throw Object.assign(new Error('Record to delete does not exist.'), { code: 'P2025' });
+      const [gone] = rows.splice(i, 1);
+      return { ...gone };
+    },
+  };
+}
+
 /** A fresh client over shared rows; `tick` advances the ledger clock so newest-row-wins is deterministic. */
 export function ledgerDb(seed: LedgerSeed = {}, start = new Date('2026-10-06T14:00:00Z')) {
   const store = {
@@ -101,7 +119,7 @@ export function ledgerDb(seed: LedgerSeed = {}, start = new Date('2026-10-06T14:
     prospectingHypothesis: table(store.prospectingHypothesis, clock, 'h'),
     buyerInputData: table(store.buyerInputData, clock, 'b'),
     gapHubSpotMirror: table(store.gapHubSpotMirror, clock, 'mir'),
-    systemConfig: table(store.systemConfig, clock, 'cfg'),
+    systemConfig: uniqueKeyTable(store.systemConfig, clock, 'cfg'),
   });
   return { store, client, setClock: (d: Date) => (t = d.getTime()) };
 }

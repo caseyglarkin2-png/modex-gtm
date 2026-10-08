@@ -40,6 +40,8 @@ export const GAP_FLAGS = [
   'GAP_BACKGROUND_RESEARCH_ENABLED',
   // X02 (sales execution engine): routing on the weekday morning schedule (cards only; never drafts, enrolls, sends or writes HubSpot).
   'GAP_ROUTING_CRON_ENABLED',
+  // X05b (sales execution engine): the morning briefing to the seller's configured address (an internal message; nothing to a buyer).
+  'GAP_BRIEFING_ENABLED',
 ] as const;
 
 export type GapFlagName = (typeof GAP_FLAGS)[number];
