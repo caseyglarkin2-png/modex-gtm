@@ -1,0 +1,285 @@
+/**
+ * EMAIL COMMANDS, applied (X07b, GAP OS sales execution engine, 2026-10-08). Server only; called by the GAP mailbox
+ * cron through `MailboxDeps.onCommand` after the `mailbox.command` verdict row is written (gap-mailbox.ts).
+ *
+ * Every effect goes to the OWNER of the state it changes: an obligation through work/commitments.ts (skipped, snoozed,
+ * done with the seller's note as the proof), an account item through work/outcome.ts (skipped until tomorrow, snoozed
+ * to a date, logged outside GAP: self-reported and labelled), an assignment through work/assignment.ts. The plan
+ * itself records only `work.command_applied` (what ran, on which revision, from which Gmail message) or
+ * `work.command_refused` (why not). GAP answers every command in the same thread, as an internal message.
+ *
+ * Rules (pinned by tests/unit/gap/commands-apply.test.ts):
+ *   - SKIP, DEFER and DONE act on an item ONCE: a second identical command is refused `already_applied` (replay)
+ *   - a command bound to an older revision than the item's latest assignment is refused `stale_revision`
+ *   - DEFER needs a date GAP understands (work/dates.ts parseDuePhrase; `DEFER` alone means tomorrow); DONE needs words
+ *   - NEXT sends the next unassigned item; START (the briefing thread) starts the day and sends the first unassigned
+ *   - HELP, and an unknown line, answer with the commands once per item per hour (HELP_INTERVAL_MS)
+ *   - APPROVE and REVISE run through `deps.onApprove` / `deps.onRevise` when wired (X11, X09); absent, they are
+ *     refused `not_yet_available` and the seller is told
+ *   - nothing here sends to a buyer, drafts, enrolls or writes HubSpot
+ */
+import type { GmailSender, GmailSendPayload } from '@/lib/email/gmail-sender';
+import type { MailboxMessage } from '@/lib/email/gmail-inbox';
+import { ASSIGNMENT_SENT, ITEM_SUBJECT_TYPE, loadAssignments, nextUnassignedItem, sendAssignment, startDay, type AssignmentDeps } from '../work/assignment';
+import { BRIEFING_SENT } from '../work/briefing-send';
+import { loadCommitment, transitionCommitment } from '../work/commitments';
+import { nyDayAt, parseDuePhrase } from '../work/dates';
+import { recordWorkOutcome } from '../work/outcome';
+import { loadDayPlan, type PlanItem } from '../work/plan';
+import type { SellerSettings } from '../work/settings';
+import { authenticateCommand, commandTextOf, matchCommandTarget, parseCommand, type AssignmentRef, type BriefingRef, type CommandContext, type ParsedCommand } from './commands';
+import type { MailboxVerdict } from './gap-mailbox';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type PrismaLike = any;
+
+export const COMMAND_APPLIED = 'work.command_applied' as const;
+export const COMMAND_REFUSED = 'work.command_refused' as const;
+/** The assignment and briefing threads a command may answer are read this far back. */
+export const COMMAND_LOOKBACK_DAYS = 14;
+export const HELP_INTERVAL_MS = 60 * 60_000;
+const DAY_MS = 86_400_000;
+
+export const COMMANDS_HELP = 'Commands, on the first line of your reply: APPROVE, REVISE: your words, SKIP, DEFER Oct 14, DONE: what happened, NEXT, HELP. APPROVE creates the Gmail draft; REVISE has GAP rewrite and come back; SKIP sets it aside for today; DEFER brings it back on that day; DONE records what happened as your word; NEXT sends the next item. Anything longer than a sentence is read as a revision request.';
+
+/** The command senders and every recorded assignment and briefing thread of the lookback, keyed for the verdict. */
+export async function loadCommandContext(prisma: PrismaLike, settings: SellerSettings, now: Date): Promise<CommandContext> {
+  const since = new Date(now.getTime() - COMMAND_LOOKBACK_DAYS * DAY_MS);
+  const assignmentsByThread = new Map<string, AssignmentRef>();
+  const assignmentsByMessageId = new Map<string, AssignmentRef>();
+  const briefingsByThread = new Map<string, BriefingRef>();
+  const rows: Array<{ kind: string; subject_id: string; payload: Record<string, unknown> | null; created_at: Date | string }> = await prisma.gapAuditEvent.findMany({
+    where: { kind: { in: [ASSIGNMENT_SENT, BRIEFING_SENT] }, created_at: { gte: since } },
+    orderBy: [{ created_at: 'asc' }],
+  });
+  for (const r of rows) {
+    const p = (r.payload ?? {}) as Record<string, unknown>;
+    if (r.kind === ASSIGNMENT_SENT) {
+      const ref: AssignmentRef = { itemKey: r.subject_id, itemToken: String(p.itemToken ?? ''), revision: Number(p.revision ?? 0), contentHash: String(p.contentHash ?? ''), day: String(p.day ?? '') };
+      if (typeof p.gmailThreadId === 'string' && p.gmailThreadId) assignmentsByThread.set(p.gmailThreadId, ref);
+      if (typeof p.rfcMessageId === 'string' && p.rfcMessageId) assignmentsByMessageId.set(p.rfcMessageId, ref);
+    } else if (typeof p.gmailThreadId === 'string' && p.gmailThreadId) {
+      briefingsByThread.set(p.gmailThreadId, { day: r.subject_id, dayToken: String(p.dayToken ?? '') });
+    }
+  }
+  return { senders: settings.commandSenders, assignmentsByThread, assignmentsByMessageId, briefingsByThread };
+}
+
+export interface ApplyInput {
+  m: MailboxMessage;
+  ctx: CommandContext;
+  now: Date;
+  settings: SellerSettings;
+  sender: GmailSender;
+  baseUrl: string;
+  actionSecret: string | null;
+  actor: string;
+}
+
+export interface ApplyDeps extends AssignmentDeps {
+  send: (payload: GmailSendPayload) => Promise<{ provider: 'gmail'; id: string | null; threadId: string | null }>;
+  /** X11: APPROVE on an assignment (the Gmail draft). Absent: refused not_yet_available. */
+  onApprove?: (prisma: PrismaLike, input: ApplyInput & { item: PlanItem; ref: AssignmentRef }) => Promise<{ text: string; effect: string; extra?: Record<string, unknown> }>;
+  /** X09: REVISE on an assignment (the agent task). Absent: refused not_yet_available. */
+  onRevise?: (prisma: PrismaLike, input: ApplyInput & { item: PlanItem; ref: AssignmentRef; critique: string }) => Promise<{ text: string; effect: string; extra?: Record<string, unknown> }>;
+}
+
+export type ApplyResult =
+  | { applied: true; command: ParsedCommand['kind']; effect: string; itemKey?: string; until?: string; basis?: 'provider' | 'self_reported' }
+  | { applied: false; command: ParsedCommand['kind']; reason: string; currentRevision?: number };
+
+const reasonText: Record<string, string> = {
+  already_applied: 'That was already done for this item; nothing changed. Reply NEXT for the next one.',
+  stale_revision: 'This reply answers an older version of the item. Please answer the latest email for it (the newest subject carries the highest revision).',
+  when_not_understood: 'Say the date to come back on, for example DEFER Oct 14, DEFER tomorrow or DEFER next Tuesday.',
+  note_required: 'Say what happened, for example DONE: called Joey, he wants the comparison Friday. Your note is the record.',
+  not_yet_available: 'That command is not available yet by email. Open the item in GAP to do it there.',
+  item_not_found: 'GAP could not find the item this reply is about. Open Work in GAP.',
+  needs_an_assignment: 'Reply to the email of the item you mean, or reply NEXT here to get the next one.',
+  help_rate_limited: '',
+};
+
+async function answer(input: ApplyInput, deps: ApplyDeps, text: string): Promise<{ id: string | null }> {
+  const subject = /^re:/i.test(input.m.subject ?? '') ? input.m.subject : `Re: ${input.m.subject ?? 'GAP'}`;
+  const headers: Record<string, string> = { 'Auto-Submitted': 'auto-replied' };
+  if (input.m.rfcMessageId) {
+    headers['In-Reply-To'] = input.m.rfcMessageId;
+    headers.References = input.m.rfcMessageId;
+  }
+  const res = await deps.send({ to: input.m.fromEmail, subject, text, html: `<div style="font-family:system-ui,sans-serif;white-space:pre-wrap">${text.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</div>`, sender: input.sender, purpose: 'OPERATOR_ALERT', replyTo: input.sender.userEmail, threadId: input.m.threadId, headers });
+  return { id: res.id };
+}
+
+async function recordApplied(prisma: PrismaLike, input: ApplyInput, subject: { type: string; id: string }, payload: Record<string, unknown>) {
+  await prisma.gapAuditEvent.create({ data: { kind: COMMAND_APPLIED, actor: input.actor, subject_type: subject.type, subject_id: subject.id, payload: { gmailMessageId: input.m.id, from: input.m.fromEmail.toLowerCase(), at: input.now.toISOString(), ...payload } } });
+}
+async function recordRefused(prisma: PrismaLike, input: ApplyInput, subject: { type: string; id: string }, payload: Record<string, unknown>) {
+  await prisma.gapAuditEvent.create({ data: { kind: COMMAND_REFUSED, actor: input.actor, subject_type: subject.type, subject_id: subject.id, payload: { gmailMessageId: input.m.id, from: input.m.fromEmail.toLowerCase(), at: input.now.toISOString(), ...payload } } });
+}
+
+async function refuse(prisma: PrismaLike, input: ApplyInput, deps: ApplyDeps, subject: { type: string; id: string }, command: ParsedCommand['kind'], reason: string, extra: Record<string, unknown> = {}): Promise<ApplyResult> {
+  await recordRefused(prisma, input, subject, { command, reason, ...extra });
+  const text = reasonText[reason];
+  if (text) await answer(input, deps, text);
+  return { applied: false, command, reason, ...(typeof extra.currentRevision === 'number' ? { currentRevision: extra.currentRevision } : {}) };
+}
+
+async function appliedBefore(prisma: PrismaLike, itemKey: string, command: string): Promise<boolean> {
+  const row = await prisma.gapAuditEvent.findFirst({ where: { kind: COMMAND_APPLIED, subject_type: ITEM_SUBJECT_TYPE, subject_id: itemKey, payload: { path: ['command'], equals: command } } }).catch(() => null);
+  if (row) return true;
+  // The fixture and older Prisma versions: fall back to a scan of the item's applied rows.
+  const rows: Array<{ payload: Record<string, unknown> | null }> = await prisma.gapAuditEvent.findMany({ where: { kind: COMMAND_APPLIED, subject_type: ITEM_SUBJECT_TYPE, subject_id: itemKey } });
+  return rows.some((r) => (r.payload ?? {}).command === command);
+}
+
+async function helpRecently(prisma: PrismaLike, subject: { type: string; id: string }, now: Date): Promise<boolean> {
+  const rows: Array<{ payload: Record<string, unknown> | null; created_at: Date | string }> = await prisma.gapAuditEvent.findMany({ where: { kind: COMMAND_APPLIED, subject_type: subject.type, subject_id: subject.id } });
+  return rows.some((r) => (r.payload ?? {}).effect === 'help_sent' && now.getTime() - new Date(String((r.payload ?? {}).at ?? r.created_at)).getTime() < HELP_INTERVAL_MS);
+}
+
+async function sendNext(prisma: PrismaLike, input: ApplyInput, deps: ApplyDeps, day: string, subject: { type: string; id: string }, command: ParsedCommand['kind']): Promise<ApplyResult> {
+  const plan = await loadDayPlan(prisma, day);
+  const item = plan ? await nextUnassignedItem(prisma, plan) : null;
+  if (!plan || !item) {
+    await recordApplied(prisma, input, subject, { command, effect: 'nothing_left' });
+    await answer(input, deps, 'Nothing left on today\'s list has gone unassigned. Open Work in GAP for what is waiting and parked.');
+    return { applied: true, command, effect: 'nothing_left' };
+  }
+  if (!input.settings.briefingTo) return refuse(prisma, input, deps, subject, command, 'no_briefing_address');
+  const r = await sendAssignment(prisma, { plan, item, revision: 0, to: input.settings.briefingTo, sender: input.sender, baseUrl: input.baseUrl, actionSecret: input.actionSecret, commandsEnabled: true, now: input.now, actor: input.actor }, deps);
+  await recordApplied(prisma, input, subject, { command, effect: 'assignment_sent', itemKey: item.key, sent: r.sent });
+  return { applied: true, command, effect: 'assignment_sent', itemKey: item.key };
+}
+
+export async function applyCommand(prisma: PrismaLike, input: ApplyInput, deps: ApplyDeps): Promise<ApplyResult> {
+  const v = input.ctx;
+  const verdict = classify(input.m, v);
+  if (!verdict) return { applied: false, command: 'unknown', reason: 'not_a_command' };
+  const { command, auth } = verdict;
+  if (!auth.ok) return { applied: false, command: command.kind, reason: auth.reason };
+  const target = auth.target;
+
+  // The briefing thread: START, NEXT and HELP act on the day.
+  if (target.kind === 'briefing') {
+    const subject = { type: 'work_day', id: target.day };
+    if (command.kind === 'start') {
+      await startDay(prisma, { day: target.day, now: input.now, actor: input.m.fromEmail.toLowerCase(), via: 'email' });
+      return sendNext(prisma, input, deps, target.day, subject, 'start');
+    }
+    if (command.kind === 'next') return sendNext(prisma, input, deps, target.day, subject, 'next');
+    if (command.kind === 'help' || command.kind === 'unknown') return help(prisma, input, deps, subject, command.kind);
+    return refuse(prisma, input, deps, subject, command.kind, 'needs_an_assignment');
+  }
+
+  // An assignment thread: the item, its latest revision, and the once-only rule.
+  const ref = target;
+  const subject = { type: ITEM_SUBJECT_TYPE, id: ref.itemKey };
+  const plan = await loadDayPlan(prisma, ref.day);
+  const item = plan?.items.find((i) => i.token === ref.itemToken) ?? null;
+  if (!item) return refuse(prisma, input, deps, subject, command.kind, 'item_not_found');
+  const latest = Math.max(0, ...(await loadAssignments(prisma, ref.itemKey)).map((a) => a.revision));
+  if (ref.revision < latest) return refuse(prisma, input, deps, subject, command.kind, 'stale_revision', { currentRevision: latest, revision: ref.revision });
+
+  switch (command.kind) {
+    case 'help':
+    case 'unknown':
+      return help(prisma, input, deps, subject, command.kind);
+    case 'next':
+      return sendNext(prisma, input, deps, ref.day, subject, 'next');
+    case 'skip':
+    case 'defer':
+    case 'done': {
+      if (await appliedBefore(prisma, ref.itemKey, command.kind)) return refuse(prisma, input, deps, subject, command.kind, 'already_applied');
+      return act(prisma, input, deps, item, ref, command, subject);
+    }
+    case 'approve': {
+      if (!deps.onApprove) return refuse(prisma, input, deps, subject, 'approve', 'not_yet_available');
+      if (await appliedBefore(prisma, ref.itemKey, 'approve')) return refuse(prisma, input, deps, subject, 'approve', 'already_applied');
+      const r = await deps.onApprove(prisma, { ...input, item, ref });
+      await recordApplied(prisma, input, subject, { command: 'approve', revision: ref.revision, effect: r.effect, ...(r.extra ?? {}) });
+      await answer(input, deps, r.text);
+      return { applied: true, command: 'approve', effect: r.effect, itemKey: ref.itemKey };
+    }
+    case 'revise': {
+      if (!deps.onRevise) return refuse(prisma, input, deps, subject, 'revise', 'not_yet_available');
+      const r = await deps.onRevise(prisma, { ...input, item, ref, critique: command.text });
+      await recordApplied(prisma, input, subject, { command: 'revise', revision: ref.revision, effect: r.effect, critique: command.text.slice(0, 2000), ...(r.extra ?? {}) });
+      await answer(input, deps, r.text);
+      return { applied: true, command: 'revise', effect: r.effect, itemKey: ref.itemKey };
+    }
+    case 'start':
+      return refuse(prisma, input, deps, subject, 'start', 'needs_an_assignment');
+    default:
+      return refuse(prisma, input, deps, subject, 'unknown', 'not_a_command');
+  }
+}
+
+/** Re-judge from the message (the cron hands the verdict it wrote; a direct caller hands the message): the same pure rules. */
+function classify(m: MailboxMessage, ctx: CommandContext): Extract<MailboxVerdict, { kind: 'command' }> | null {
+  if (!matchCommandTarget(m, ctx)) return null;
+  return { kind: 'command', command: parseCommand(commandTextOf(m)), auth: authenticateCommand(m, ctx) };
+}
+
+async function help(prisma: PrismaLike, input: ApplyInput, deps: ApplyDeps, subject: { type: string; id: string }, command: ParsedCommand['kind']): Promise<ApplyResult> {
+  if (await helpRecently(prisma, subject, input.now)) {
+    await recordRefused(prisma, input, subject, { command, reason: 'help_rate_limited' });
+    return { applied: false, command, reason: 'help_rate_limited' };
+  }
+  await recordApplied(prisma, input, subject, { command, effect: 'help_sent' });
+  await answer(input, deps, COMMANDS_HELP);
+  return { applied: true, command, effect: 'help_sent' };
+}
+
+async function act(prisma: PrismaLike, input: ApplyInput, deps: ApplyDeps, item: PlanItem, ref: AssignmentRef, command: Extract<ParsedCommand, { kind: 'skip' | 'defer' | 'done' }>, subject: { type: string; id: string }): Promise<ApplyResult> {
+  const actor = input.m.fromEmail.toLowerCase();
+  const commitmentId = item.refs.commitmentId ?? null;
+  const commitment = commitmentId ? await loadCommitment(prisma, commitmentId) : null;
+
+  if (command.kind === 'skip') {
+    if (commitment) {
+      const t = await transitionCommitment(prisma, { commitmentId: commitment.commitmentId, to: 'skipped', reason: command.reason ?? 'Skipped by email', actor, now: input.now });
+      if (!t.ok) return refuse(prisma, input, deps, subject, 'skip', `commitment_${t.reason}`);
+      await recordApplied(prisma, input, subject, { command: 'skip', revision: ref.revision, effect: 'commitment_skipped', commitmentId: commitment.commitmentId, reason: command.reason });
+      await answer(input, deps, `Skipped: ${item.title} at ${item.accountName}${command.reason ? ` (${command.reason})` : ''}. Reply NEXT for the next item.`);
+      return { applied: true, command: 'skip', effect: 'commitment_skipped', itemKey: ref.itemKey };
+    }
+    const o = await recordWorkOutcome(prisma, { accountName: item.accountName, kind: 'skipped', reason: command.reason ?? null, actor, now: input.now });
+    if (!o.ok) return refuse(prisma, input, deps, subject, 'skip', `outcome_${o.reason}`);
+    await recordApplied(prisma, input, subject, { command: 'skip', revision: ref.revision, effect: 'account_skipped', reason: command.reason });
+    await answer(input, deps, `Skipped for today: ${item.accountName}. It returns tomorrow. Reply NEXT for the next item.`);
+    return { applied: true, command: 'skip', effect: 'account_skipped', itemKey: ref.itemKey };
+  }
+
+  if (command.kind === 'defer') {
+    const parsed = parseDuePhrase(command.when ?? 'tomorrow', input.now);
+    if (!parsed) return refuse(prisma, input, deps, subject, 'defer', 'when_not_understood');
+    const until = nyDayAt(parsed.day);
+    if (commitment) {
+      const t = await transitionCommitment(prisma, { commitmentId: commitment.commitmentId, to: 'snoozed', until, actor, now: input.now });
+      if (!t.ok) return refuse(prisma, input, deps, subject, 'defer', `commitment_${t.reason}`);
+      await recordApplied(prisma, input, subject, { command: 'defer', revision: ref.revision, effect: 'commitment_snoozed', commitmentId: commitment.commitmentId, until: parsed.day });
+      await answer(input, deps, `Deferred to ${parsed.day}: ${item.title} at ${item.accountName}. Reply NEXT for the next item.`);
+      return { applied: true, command: 'defer', effect: 'commitment_snoozed', itemKey: ref.itemKey, until: parsed.day };
+    }
+    const o = await recordWorkOutcome(prisma, { accountName: item.accountName, kind: 'snoozed', until: until.toISOString(), reason: command.when ?? null, actor, now: input.now });
+    if (!o.ok) return refuse(prisma, input, deps, subject, 'defer', `outcome_${o.reason}`);
+    await recordApplied(prisma, input, subject, { command: 'defer', revision: ref.revision, effect: 'account_snoozed', until: parsed.day });
+    await answer(input, deps, `Deferred to ${parsed.day}: ${item.accountName}. Reply NEXT for the next item.`);
+    return { applied: true, command: 'defer', effect: 'account_snoozed', itemKey: ref.itemKey, until: parsed.day };
+  }
+
+  // done
+  if (!command.note) return refuse(prisma, input, deps, subject, 'done', 'note_required');
+  if (commitment) {
+    const t = await transitionCommitment(prisma, { commitmentId: commitment.commitmentId, to: 'done', proof: { kind: 'seller', note: command.note }, actor, now: input.now });
+    if (!t.ok) return refuse(prisma, input, deps, subject, 'done', `commitment_${t.reason}`);
+    await recordApplied(prisma, input, subject, { command: 'done', revision: ref.revision, effect: 'commitment_done', commitmentId: commitment.commitmentId, note: command.note, basis: 'self_reported' });
+    await answer(input, deps, `Done, by your word: ${item.title} at ${item.accountName}. Recorded: "${command.note}". Reply NEXT for the next item.`);
+    return { applied: true, command: 'done', effect: 'commitment_done', itemKey: ref.itemKey, basis: 'self_reported' };
+  }
+  const o = await recordWorkOutcome(prisma, { accountName: item.accountName, kind: 'logged', reason: command.note.slice(0, 240), actor, now: input.now });
+  if (!o.ok) return refuse(prisma, input, deps, subject, 'done', `outcome_${o.reason}`);
+  await recordApplied(prisma, input, subject, { command: 'done', revision: ref.revision, effect: 'account_logged', note: command.note, basis: 'self_reported' });
+  await answer(input, deps, `Logged, by your word: ${item.accountName}. Recorded: "${command.note}". GAP counts what it can prove separately. Reply NEXT for the next item.`);
+  return { applied: true, command: 'done', effect: 'account_logged', itemKey: ref.itemKey, basis: 'self_reported' };
+}

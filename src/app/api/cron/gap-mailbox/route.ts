@@ -8,6 +8,10 @@ import { getMailboxMessage, listMailboxIds, listSentTo } from '@/lib/email/gmail
 import { reconcileUnknownSends } from '@/lib/gap/execution/unknown-send-reconcile';
 import { reconcileFollowUpsFromSent } from '@/lib/gap/execution/follow-up-load';
 import { prisma } from '@/lib/prisma';
+import { sendViaGmail } from '@/lib/email/gmail-sender';
+import { applyCommand, loadCommandContext } from '@/lib/gap/replies/commands-apply';
+import { actionSecret } from '@/lib/gap/work/action-token';
+import { loadSellerSettings } from '@/lib/gap/work/settings';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 300;
@@ -76,7 +80,26 @@ export async function GET(request: Request) {
       }
       report = { since, seen: listing.ids.length, pending: pending.length, sampled: Math.min(pending.length, DRY_RUN_SAMPLE), counts };
     } else {
-      report = { ...(await pollGapMailbox(prisma, { now }, { listIds: (after) => listMailboxIds(sender, after), fetch: (id) => getMailboxMessage(sender, id), mailbox: sender.userEmail })) };
+      // X07: the seller's email commands. The senders come from the seller settings; the assignment and briefing
+      // threads from the ledger; an authenticated command's effect runs after its verdict row (commands-apply.ts).
+      const settings = await loadSellerSettings(prisma);
+      const commands = settings.commandSenders.length ? await loadCommandContext(prisma, settings, now) : undefined;
+      const baseUrl = process.env.NEXT_PUBLIC_APP_URL?.trim().replace(/\/$/, '') || 'https://modex-gtm.vercel.app';
+      report = {
+        ...(await pollGapMailbox(
+          prisma,
+          { now },
+          {
+            listIds: (after) => listMailboxIds(sender, after),
+            fetch: (id) => getMailboxMessage(sender, id),
+            mailbox: sender.userEmail,
+            commands,
+            onCommand: async (m, _v, at) => {
+              await applyCommand(prisma, { m, ctx: commands as NonNullable<typeof commands>, now: at, settings, sender, baseUrl, actionSecret: actionSecret(), actor: 'cron:gap-mailbox' }, { send: sendViaGmail });
+            },
+          },
+        )),
+      };
       // Ops closeout 13B: direct sends whose Gmail answer was lost, reconciled against Sent.
       // Still-unknown ones stay visible in the report; they are never read as not sent.
       report.unknownSends = await reconcileUnknownSends(prisma, { now }, { listSent: (rcpt, a, b) => listSentTo(sender, rcpt, a, b), mailbox: sender.userEmail });

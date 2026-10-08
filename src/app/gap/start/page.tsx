@@ -45,7 +45,7 @@ export default async function StartPage({ searchParams }: { searchParams?: Promi
   if (item && settings.briefingTo && sender) {
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL?.trim().replace(/\/$/, '') || 'https://modex-gtm.vercel.app';
     try {
-      const r = await sendAssignment(prisma, { plan, item, revision: 0, to: settings.briefingTo, sender, baseUrl, actionSecret: actionSecret(), commandsEnabled: false, now, actor });
+      const r = await sendAssignment(prisma, { plan, item, revision: 0, to: settings.briefingTo, sender, baseUrl, actionSecret: actionSecret(), commandsEnabled: true, now, actor });
       mailed = r.sent ? { to: settings.briefingTo, subject: r.subject } : { reason: 'already sent' };
     } catch (e) {
       mailed = { reason: e instanceof Error ? e.message : String(e) };

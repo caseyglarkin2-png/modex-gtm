@@ -32,10 +32,9 @@ const CRON_SCHEDULE = '5 * * * *';
  * - Auth first, then the flags (GAP_OS_ENABLED + GAP_ROUTING_ENABLED +
  *   GAP_BRIEFING_ENABLED). Off answers 200 with the skip payload.
  * - An unconfigured GAP mailbox is a skip, never a silent success.
- * - Email commands are announced in the footer only once X07 ships
- *   (COMMANDS_ENABLED below).
+ * - Email commands (X07) are announced in the footer (COMMANDS_ENABLED).
  */
-const COMMANDS_ENABLED = false;
+const COMMANDS_ENABLED = true;
 
 export async function GET(request: Request) {
   if (!isAuthorizedCronRequest(request)) {
