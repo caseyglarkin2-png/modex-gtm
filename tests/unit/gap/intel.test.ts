@@ -87,7 +87,11 @@ describe('I01: people who wrote in and went quiet', () => {
     ];
     const personas = [{ id: 1, email: 'dave.kiesling@kencogroup.com', name: 'Dave Kiesling', title: 'VP Operations', account_name: 'Kenco' }, { id: 2, email: 'dnc@acme.example', name: 'D', title: null, account_name: 'Acme', do_not_contact: true }];
     const items = rankPeople(rows, personas, { now: NOW, decided: new Set(['person:decided@acme.example']), dealAccounts: new Set(['Kroger']), unsubscribed: new Set(['gone@acme.example']) });
-    expect(items.map((i) => i.id)).toEqual(['dave.kiesling@kencogroup.com', 'ivanildo.andres@mdlz.com']);
+    // I05: the person at an account in an open deal is shown and labelled, never dropped; with no deal state read the line says so.
+    expect(items.map((i) => i.id)).toEqual(['dave.kiesling@kencogroup.com', 'ivanildo.andres@mdlz.com', 'deal@kroger.example']);
+    expect(items[2]).toMatchObject({ inDeal: true, accountName: 'Kroger' });
+    expect(items[2].line).toContain('their account is in an open deal: work it from the deal');
+    expect(rankPeople(rows.slice(0, 1), personas, { now: NOW, decided: new Set(), dealAccounts: null, unsubscribed: new Set() })[0].line).toContain('no open deal on record here');
     expect(items[0]).toMatchObject({ kind: 'person', key: 'person:dave.kiesling@kencogroup.com', title: 'Dave Kiesling, VP Operations at Kenco', accountName: 'Kenco', truth: 'historical_observation', person: { messages: 2, name: 'Dave Kiesling' } });
     expect(items[0].line).toMatch(/^Wrote to us Sep 16, 2026 \(2 messages\), last about "Re: yards at Chattanooga"; no open deal\. Previously contacted/);
     expect(items[1]).toMatchObject({ accountName: null, accountHint: 'mdlz.com' });
@@ -111,7 +115,18 @@ describe('I01: the loader', () => {
     expect(x.triggers[0].accountHint).toBe('Tractor Supply Company');
     expect(x.people.map((i) => i.id)).toEqual(['dave@kencogroup.com']);
     expect(x.totals).toEqual({ signals: 1, triggers: 1, people: 1 });
+    expect(x.pursued).toEqual([]);
     expect(INTEL_LIMIT).toBeGreaterThanOrEqual(8);
-    expect(await loadIntelligence({}, { now: NOW })).toEqual({ signals: [], triggers: [], people: [], totals: { signals: 0, triggers: 0, people: 0 } });
+    expect(await loadIntelligence({}, { now: NOW })).toEqual({ signals: [], triggers: [], people: [], pursued: [], totals: { signals: 0, triggers: 0, people: 0 } });
+  });
+});
+
+describe('I05: the signal pulls are by class, never a newest-first window; the total counts the universe', () => {
+  it('a Casey share and an outreach candidate older than hundreds of newer context items still enter the selection; the total is the count', async () => {
+    const filler = Array.from({ length: 250 }, (_, k) => sig({ id: `ctx-${k}`, relevance: 'account_context', created_at: new Date(NOW.getTime() - k * 60_000), published_at: new Date(NOW.getTime() - k * 60_000), score: 0 }));
+    const db = ledgerDb({ accounts: ['Kenco'], signals: [...filler, sig({ id: 'share-old', origin: 'casey_share', created_at: days(120), published_at: days(120), score: 0 }), sig({ id: 'cand-old', relevance: 'outreach_evidence_candidate', score: 6, created_at: days(90), published_at: days(90) })] }, NOW);
+    const x = await loadIntelligence(db.client(), { now: NOW, limit: 3 });
+    expect(x.signals.map((i) => i.id)).toEqual(['share-old', 'cand-old', expect.stringMatching(/^ctx-/)]);
+    expect(x.totals.signals).toBe(252);
   });
 });

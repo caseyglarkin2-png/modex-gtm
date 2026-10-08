@@ -22,6 +22,7 @@ import type { GmailSender, GmailSendPayload } from '@/lib/email/gmail-sender';
 import { signActionToken } from './action-token';
 import { renderBriefing, type BriefingIntel } from './briefing';
 import { loadIntelligence } from './intel';
+import { accountHref } from '../account-intel/href';
 import { loadAngles } from '../agents/develop-angle';
 import { nyDay, nyDayAt } from './dates';
 import { planDay, type DayPlan, type PlanItem, type PlanLoad } from './plan';
@@ -90,6 +91,7 @@ function links(input: BriefingSendInput, day: string) {
       const t = sign('decide', `${key}|${decision}`);
       return t ? `${base}/gap/decide?t=${encodeURIComponent(t)}` : null;
     },
+    account: (name: string) => `${base}${accountHref(name)}/`,
   };
 }
 

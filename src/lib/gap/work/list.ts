@@ -47,12 +47,14 @@ import type { CockpitLane } from '@/components/gap/gap-cockpit';
 
 export type WorkStateKind = 'replied' | 'opted_out' | 'bounced' | 'follow_up' | 'ready' | 'decide' | 'research' | 'in_deal' | 'unknown_deal' | 'held' | 'committed' | 'meeting';
 export type WorkTier = 'commitment' | 'reply' | 'meeting' | 'deal' | 'follow_up' | 'ready' | 'review' | 'research' | 'admin' | 'later' | 'held';
+export const TIER_RANK: Record<WorkTier, number> = { commitment: 0, reply: 1, meeting: 2, deal: 3, follow_up: 4, ready: 5, review: 6, research: 7, admin: 7.5, later: 8, held: 9 };
 /**
- * I04 (Casey's course correction, 2026-10-08): the day is for new conversations. A buyer obligation, a reply and a
- * meeting still lead (they are owed); then a prospect follow-up and a prepared first touch; stalled-deal hygiene (a
- * passed close date, no activity) ranks after them, and the deal workspace holds the detail.
+ * I04 / I05 (Casey's course correction, 2026-10-08, and the review): the day is for new conversations. A deal card whose
+ * ONLY move is hygiene (a passed close date, no activity: no due obligation, no HubSpot next step) ranks after the
+ * prospect follow-ups and the prepared first touches; a deal card carrying a due commitment or a next step keeps the
+ * deal tier's place (a real commitment coming due stays prominent, the mandate's section 5).
  */
-export const TIER_RANK: Record<WorkTier, number> = { commitment: 0, reply: 1, meeting: 2, follow_up: 3, ready: 4, deal: 5, review: 6, research: 7, admin: 7.5, later: 8, held: 9 };
+export const DEAL_HYGIENE_RANK = TIER_RANK.ready + 0.5;
 /**
  * Batch item 8: the tiers that do not need the seller today (research, a hold, the seller's own set-aside). Their cards
  * stay listed, after every card that needs the seller and under their own heading, and never count in "needs you".
@@ -735,9 +737,11 @@ export function workDay(i: WorkInput): WorkDay {
     const act = activity.get(name) ?? 0;
     const prio = i.priorities?.get(name) ?? null;
     const oldReplyDays = oldReply ? replyAgeDays : null;
-    return { r, tier, lane, list, dueMs, act, prio, oldReplyDays };
+    const hygiene = tier === 'deal' && !fromObligation && !r.card.dealNextStep;
+    return { r, tier, lane, list, dueMs, act, prio, oldReplyDays, hygiene };
   });
-  ranked.sort((a, b) => Number(PARKED_TIERS.has(a.tier)) - Number(PARKED_TIERS.has(b.tier)) || TIER_RANK[a.tier] - TIER_RANK[b.tier] || a.dueMs - b.dueMs || b.act - a.act || Number(!a.prio) - Number(!b.prio) || a.r.rank - b.r.rank || cmpKeys(a.r.sortKey, b.r.sortKey) || a.r.card.accountName.localeCompare(b.r.card.accountName));
+  const rankOf = (x: { tier: WorkTier; hygiene: boolean }) => (x.hygiene ? DEAL_HYGIENE_RANK : TIER_RANK[x.tier]);
+  ranked.sort((a, b) => Number(PARKED_TIERS.has(a.tier)) - Number(PARKED_TIERS.has(b.tier)) || rankOf(a) - rankOf(b) || a.dueMs - b.dueMs || b.act - a.act || Number(!a.prio) - Number(!b.prio) || a.r.rank - b.r.rank || cmpKeys(a.r.sortKey, b.r.sortKey) || a.r.card.accountName.localeCompare(b.r.card.accountName));
   /** R44: Capture opened from this card: the account, the person who wrote, the deal, the conversation, the source. */
   const replyPersona = new Map(i.replies.filter((r) => r.personaId != null).map((r) => [`${r.accountName}|${r.contactEmail.toLowerCase()}`, r.personaId as number]));
   const replyContact = new Map(i.replies.filter((r) => r.hubspotContactId).map((r) => [`${r.accountName}|${r.contactEmail.toLowerCase()}`, String(r.hubspotContactId)]));

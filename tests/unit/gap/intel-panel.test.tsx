@@ -19,6 +19,7 @@ const intel: Intelligence = {
   signals: [item({ kind: 'signal', id: 's-old', title: 'Kenco opens new innovation lab for warehouse automation testing', accountName: 'Kenco' })],
   triggers: [item({ kind: 'trigger', id: '7', title: 'Tractor Supply opens Idaho distribution center with automation', accountHint: 'Tractor Supply Company', truth: 'unverified_status', line: 'chainstoreage.com, published Oct 7, 2026. Unverified present-day status. Tractor Supply Company is not a GAP account yet.' })],
   people: [item({ kind: 'person', id: 'dave@kencogroup.com', title: 'Dave Kiesling, VP Operations at Kenco', accountName: 'Kenco', url: null, source: 'the mailbox', line: 'Wrote to us Sep 16, 2026 (2 messages); no open deal. Previously contacted, a response, no live opportunity.', person: { email: 'dave@kencogroup.com', name: 'Dave Kiesling', title: 'VP Operations', lastWroteAt: '2026-09-16T12:00:00.000Z', messages: 2 } })],
+  pursued: [{ key: 'trigger:9', kind: 'trigger', title: 'Daimler bets on the autonomous truck system', accountName: null, accountHint: 'Daimler Truck North America', url: 'https://fw/x', decision: 'pursue', decidedAt: '2026-10-08T15:00:00.000Z', status: 'ready', error: null, angle: { whyItMatters: 'My guess is an autonomous program changes who runs the yards at the terminals.', starters: ['Who runs the yards at your terminals today?', 'Where does a trailer wait?'], roles: ['VP Operations'], accounts: ['Daimler Truck North America'], peopleNamed: [], proposedAction: 'research', caveat: null, sourceLine: 'FreightWaves, published Oct 1, 2026 (a recent report)' } }],
   totals: { signals: 14, triggers: 3, people: 9 },
 };
 const angle: PreparedAngle = { taskId: 'at_1', key: 'signal:s-old', title: 'Kenco opens new innovation lab', accountName: 'Kenco', accountHint: null, sourceLine: 'freightwaves.com, published Jun 24, 2026 (a historical observation)', whyItMatters: 'My guess is the lab means the warehouses are being standardized while the yards outside still run on radio.', accounts: ['Kenco'], roles: ['VP Operations'], people: [1], starters: ['How does the gate know where a trailer should go?', 'Who owns dwell across your yards?'], proposedAction: 'email', caveat: null, peopleNamed: [{ personaId: 1, name: 'Dave Kiesling', title: 'VP Operations' }], preparedAt: '2026-10-08T16:00:00.000Z' };
@@ -40,7 +41,16 @@ describe('I04: <IntelPanel>', () => {
     expect(screen.getByTestId('intel-people').textContent).toContain('(1 of 9)');
   });
 
-  it('a decision posts the key and the decision and shows the line GAP answers; Explore opens the source and posts nothing', async () => {
+  it('the pursued section shows the angle with the way on; without an account it points at Signals', () => {
+    render(<IntelPanel intel={intel} angles={{}} />);
+    const p = screen.getByTestId('intel-pursued');
+    expect(p).toHaveAttribute('data-status', 'ready');
+    expect(within(p).getByTestId('intel-pursued-angle').textContent).toContain('who runs the yards at the terminals');
+    expect(within(p).getByRole('link', { name: 'Name the account on Signals' })).toHaveAttribute('href', '/gap/signals');
+    expect(within(p).getByTestId('intel-pursued-done')).toBeTruthy();
+  });
+
+  it('a decision posts the key and the decision and shows the line GAP answers; Explore opens the source and records the look', async () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(JSON.stringify({ ok: true, line: 'Pursuing the signal. GAP is developing the angle.' }), { status: 200 }));
     const open = vi.spyOn(window, 'open').mockImplementation(() => null);
     render(<IntelPanel intel={intel} angles={{}} />);
@@ -51,6 +61,8 @@ describe('I04: <IntelPanel>', () => {
     expect(within(first).getByTestId('intel-decided').textContent).toBe('Pursuing the signal. GAP is developing the angle.');
     fireEvent.click(within(first).getByTestId('intel-decide-explore'));
     expect(open).toHaveBeenCalledWith('https://news.example/x', '_blank', 'noopener');
-    expect(fetchSpy).toHaveBeenCalledTimes(1);
+    // I05: explore opens the source AND records the look.
+    expect(fetchSpy).toHaveBeenCalledTimes(2);
+    expect(fetchSpy).toHaveBeenLastCalledWith('/api/gap/decide', expect.objectContaining({ body: JSON.stringify({ key: 'signal:s-old', decision: 'explore' }) }));
   });
 });

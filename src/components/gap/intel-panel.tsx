@@ -9,10 +9,11 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import type { Intelligence, IntelItem, Decision } from '@/lib/gap/work/intel';
+import type { Intelligence, IntelItem, Decision, PursuedItem } from '@/lib/gap/work/intel';
 import type { PreparedAngle } from '@/lib/gap/agents/develop-angle';
 import { TRUTH_TEXT } from '@/lib/gap/work/intel';
 import { AccountLink } from './account-link';
+import { accountHref } from '@/lib/gap/account-intel/href';
 import { refreshNow } from './refresh-now';
 
 const BTN = 'min-h-11 rounded-md border border-[var(--border)] px-3 py-2 text-xs hover:bg-[var(--muted)] disabled:opacity-50 sm:min-h-9';
@@ -24,11 +25,8 @@ function Item({ item, angle }: { item: IntelItem; angle: PreparedAngle | null })
   const [busy, setBusy] = useState(false);
   const [line, setLine] = useState<string | null>(null);
   async function decide(decision: Decision) {
-    if (decision === 'explore') {
-      setLine(null);
-      if (item.url) window.open(item.url, '_blank', 'noopener');
-      return;
-    }
+    // Explore opens the source AND records the look (the review's finding 13: one meaning for explore).
+    if (decision === 'explore' && item.url) window.open(item.url, '_blank', 'noopener');
     setBusy(true);
     try {
       const res = await fetch('/api/gap/decide', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ key: item.key, decision }) });
@@ -46,6 +44,7 @@ function Item({ item, angle }: { item: IntelItem; angle: PreparedAngle | null })
       <div className="flex flex-wrap items-center gap-x-2 text-xs text-[var(--muted-foreground)]">
         <span className="rounded bg-[var(--muted)] px-1.5 py-0.5 font-semibold" data-testid="intel-truth">{TRUTH_TEXT[item.truth]}</span>
         {item.accountName ? <AccountLink name={item.accountName} /> : <span data-testid="intel-no-account">{item.accountHint ? `${item.accountHint} (no account yet)` : 'No account yet'}</span>}
+        {item.inDeal ? <span className="rounded bg-amber-500/15 px-1.5 py-0.5" data-testid="intel-in-deal">in an open deal</span> : null}
       </div>
       <p className="font-medium">{item.url ? <a href={item.url} target="_blank" rel="noopener noreferrer" className="underline">{item.title}</a> : item.title}</p>
       <p className="text-xs text-[var(--muted-foreground)]" data-testid="intel-line">{item.line}</p>
@@ -83,12 +82,60 @@ function Section({ title, hint, items, angles, testId, total }: { title: string;
   );
 }
 
+function Pursued({ p }: { p: PursuedItem }) {
+  const router = useRouter();
+  const [busy, setBusy] = useState(false);
+  const [line, setLine] = useState<string | null>(null);
+  async function done() {
+    setBusy(true);
+    try {
+      const res = await fetch('/api/gap/decide', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ key: p.key, decision: 'dismiss' }) });
+      const b = (await res.json().catch(() => ({}))) as { line?: string; error?: string };
+      setLine(res.ok ? 'Done with it.' : `Not done: ${(b.error ?? String(res.status)).replace(/_/g, ' ')}.`);
+      if (res.ok) refreshNow(router);
+    } finally {
+      setBusy(false);
+    }
+  }
+  const a = p.angle;
+  return (
+    <li data-testid="intel-pursued" data-key={p.key} data-status={p.status} className="space-y-1 rounded-md border border-[var(--primary)] p-3 text-sm">
+      <div className="flex flex-wrap items-center gap-x-2 text-xs text-[var(--muted-foreground)]">
+        <span className="rounded bg-[var(--muted)] px-1.5 py-0.5 font-semibold">{p.status === 'ready' ? 'The angle is ready' : p.status === 'failed' ? 'GAP could not develop the angle' : 'GAP is developing the angle'}</span>
+        {p.accountName ? <AccountLink name={p.accountName} /> : <span>{p.accountHint ? `${p.accountHint} (no account yet)` : 'No account yet'}</span>}
+      </div>
+      <p className="font-medium">{p.url ? <a href={p.url} target="_blank" rel="noopener noreferrer" className="underline">{p.title}</a> : p.title}</p>
+      {a ? (
+        <div className="rounded-md bg-[var(--muted)] p-2 text-xs" data-testid="intel-pursued-angle">
+          <p>{a.whyItMatters}</p>
+          {a.peopleNamed.length ? <p className="mt-1">Who: {a.peopleNamed.map((x) => `${x.name ?? `person ${x.personaId}`}${x.title ? ` (${x.title})` : ''}`).join('; ')}.</p> : a.roles.length ? <p className="mt-1">Roles: {a.roles.join(', ')}.</p> : null}
+          {a.accounts.length && !p.accountName ? <p className="mt-1">Accounts: {a.accounts.join(', ')}.</p> : null}
+          <ul className="mt-1 list-disc pl-4">{a.starters.map((s, i) => <li key={i}>{s}</li>)}</ul>
+          <p className="mt-1 text-[var(--muted-foreground)]">Proposed: {a.proposedAction === 'email' ? 'an email' : a.proposedAction === 'call' ? 'a call' : 'research first'}.{a.caveat ? ` ${a.caveat}` : ''} Source: {a.sourceLine}.</p>
+        </div>
+      ) : p.status === 'failed' ? <p className="text-xs text-amber-700 dark:text-amber-400">{p.error ?? 'The task failed.'} Decide it again to retry.</p> : <p className="text-xs text-[var(--muted-foreground)]">It comes back here and in the next briefing.</p>}
+      <div className="flex flex-wrap items-center gap-2 pt-1">
+        {p.accountName ? <Link href={accountHref(p.accountName)} className={PRIMARY}>Open {p.accountName}: draft, call or research</Link> : <Link href="/gap/signals" className={PRIMARY}>Name the account on Signals</Link>}
+        <button type="button" className={BTN} disabled={busy} onClick={() => void done()} data-testid="intel-pursued-done">Done with it</button>
+        {line ? <span role="status" className="text-xs text-[var(--muted-foreground)]">{line}</span> : null}
+      </div>
+    </li>
+  );
+}
+
 export function IntelPanel({ intel, angles }: { intel: Intelligence; angles: Record<string, PreparedAngle> }) {
   const worth = [...intel.signals, ...intel.triggers];
   return (
     <div className="space-y-4" data-testid="intel-panel">
+      {intel.pursued.length ? (
+        <section className="space-y-2" data-testid="intel-pursued-section" aria-label="Pursued">
+          <h2 className="text-sm font-semibold">Pursued <span className="text-xs font-normal text-[var(--muted-foreground)]">({intel.pursued.length})</span></h2>
+          <p className="text-xs text-[var(--muted-foreground)]">What GAP prepared on your decisions. Nothing is sent until you draft and approve it on the account.</p>
+          <ul className="space-y-2">{intel.pursued.map((p) => <Pursued key={p.key} p={p} />)}</ul>
+        </section>
+      ) : null}
       <Section title="Intelligence worth a look" hint="What GAP found, any age, for your call. Pursue and GAP develops the angle and checks the source; nothing is sent until you approve it." items={worth} angles={angles} testId="intel-worth" total={intel.totals.signals + intel.totals.triggers} />
-      <Section title="Prospects to reengage" hint="People who wrote to us and went quiet, with no open deal. Pursue and GAP prepares the reopening." items={intel.people} angles={angles} testId="intel-people" total={intel.totals.people} />
+      <Section title="Prospects to reengage" hint="People who wrote to us and went quiet. Pursue and GAP prepares the reopening; an open deal at the account is said, and the deal keeps its hold." items={intel.people} angles={angles} testId="intel-people" total={intel.totals.people} />
       <p className="text-xs text-[var(--muted-foreground)]">
         Decided items leave the day. <Link href="/gap/signals" className="underline">Every signal</Link>, including the ones you set aside.
       </p>

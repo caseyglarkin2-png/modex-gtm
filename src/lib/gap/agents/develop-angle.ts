@@ -13,6 +13,7 @@ import { generateTextWithMetadata } from '@/lib/ai/client';
 import { YARDFLOW_MESSAGING } from '@/lib/ai/yardflow-context';
 import { HEDGE_TOKENS } from '../taxonomy';
 import { listAgentTasks, type ClaimedTask, type HandlerResult } from './tasks';
+import { HISTORICAL_DAYS } from '../work/intel';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -54,7 +55,7 @@ export function sourceLineFor(i: { source?: string | null; url?: string | null; 
   const host = i.source ?? (i.url ? (() => { try { return new URL(i.url as string).hostname.replace(/^www\./, ''); } catch { return 'the source'; } })() : 'the mailbox');
   const at = i.publishedAt ?? i.observedAt ?? null;
   if (!at) return `${host}, undated`;
-  const old = now.getTime() - new Date(at).getTime() > 45 * 86_400_000;
+  const old = now.getTime() - new Date(at).getTime() > HISTORICAL_DAYS * 86_400_000;
   return `${host}, ${i.publishedAt ? 'published' : 'observed'} ${dayText(at)} (${old ? 'a historical observation' : 'a recent report'})`;
 }
 

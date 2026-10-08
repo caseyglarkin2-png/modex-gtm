@@ -6,7 +6,7 @@
  * real date": when HubSpot carries the deal's next step, the card leads with it and the hygiene line comes second.
  */
 import { describe, expect, it } from 'vitest';
-import { REPLY_TRIAGE_DAYS, TIER_RANK, workDay, type WorkInput } from '@/lib/gap/work/list';
+import { DEAL_HYGIENE_RANK, REPLY_TRIAGE_DAYS, TIER_RANK, workDay, type WorkInput } from '@/lib/gap/work/list';
 
 const NOW = new Date('2026-10-08T16:00:00Z');
 const base: Omit<WorkInput, 'replies' | 'summaries'> & { summaries?: WorkInput['summaries'] } = { now: NOW, candidates: [], motions: [], held: new Map(), inDeals: { status: 'complete', accounts: [] }, dbState: new Map(), inMotion: new Map(), mailbox: null, opportunityHolds: new Map(), conversations: new Map() };
@@ -79,12 +79,15 @@ describe('X17: the deal next step is deal work, on NOW', () => {
   });
 });
 
-describe('I04: new conversations and prospect follow-ups rank above stalled-deal hygiene; a return is one item', () => {
-  it('a ready first touch and a follow-up lead a stalled deal; a deal with a next step still ranks as deal work', () => {
-    expect(TIER_RANK.ready).toBeLessThan(TIER_RANK.deal);
-    expect(TIER_RANK.follow_up).toBeLessThan(TIER_RANK.deal);
-    expect(TIER_RANK.commitment).toBeLessThan(TIER_RANK.follow_up);
-    expect(TIER_RANK.reply).toBeLessThan(TIER_RANK.ready);
+describe('I04 / I05: a hygiene-only deal card ranks after new conversations; a deal with a due commitment keeps its place; a return is one item', () => {
+  it('a ready first touch leads a stalled deal with no obligation and no next step; a deal with a due commitment still leads the first touch (the review, finding 3)', () => {
+    expect(TIER_RANK.deal).toBeLessThan(TIER_RANK.follow_up);
+    expect(DEAL_HYGIENE_RANK).toBeGreaterThan(TIER_RANK.ready);
+    const owed = { commitmentId: 'c-deal', accountName: 'GXO', kind: 'deal_step', title: 'Send the pilot success criteria', basis: null, owner: 'casey', dueAt: '2026-10-08T13:00:00.000Z', person: null, dealId: '2', dependency: null, status: 'open', snoozeUntil: null, source: { kind: 'plan', id: 'plan:2:pilot' }, proof: null, reason: null, detail: null, createdAt: '2026-10-01T00:00:00.000Z', updatedAt: '2026-10-01T00:00:00.000Z', updatedBy: 'casey' };
+    const withOwed: WorkInput['inDeals'] = { status: 'complete', accounts: [{ accountName: 'GXO', deals: [{ id: '2', name: 'GXO - Enterprise', stage: 'Qualified to buy', lastActivityAt: '2026-10-07T00:00:00Z', closeDate: '2026-12-30', nextStep: null }] }] };
+    const owedDay = workDay({ ...base, inDeals: withOwed, dbState: new Map([['PepsiCo', { chosen: { personaId: 7, name: 'Tom K', title: 'Director', email: 't@pepsico.com' }, sendable: true } as never]]), replies: [], commitments: [owed] as never } as WorkInput);
+    const owedNames = owedDay.cards.map((c) => c.accountName);
+    expect(owedNames.indexOf('GXO')).toBeLessThan(owedNames.indexOf('PepsiCo'));
     const inDeals: WorkInput['inDeals'] = { status: 'complete', accounts: [{ accountName: 'Boston Beer', deals: [{ id: '1', name: 'YardFlow - Boston Beer', stage: 'Appointment scheduled', lastActivityAt: '2026-09-08T00:00:00Z', closeDate: '2026-09-30', nextStep: null }] }] };
     const dbState: WorkInput['dbState'] = new Map([['PepsiCo', { chosen: { personaId: 7, name: 'Tom K', title: 'Director', email: 't@pepsico.com' }, sendable: true } as never]]);
     const day = workDay({ ...base, inDeals, dbState, replies: [] } as WorkInput);

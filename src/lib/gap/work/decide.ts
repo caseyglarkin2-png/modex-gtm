@@ -19,6 +19,7 @@ import { applySignalOp } from '../signals/ops';
 import { captureSignal } from '../signals/intake';
 import { queueAgentTask } from '../agents/tasks';
 import { nyDay } from './dates';
+import { accountHref } from '../account-intel/href';
 import { DECISIONS, PROSPECT_DECISION, type Decision } from './intel';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -84,22 +85,21 @@ export async function applyDecision(prisma: PrismaLike, input: DecideInput, deps
     const s = await prisma.gapSignal.findUnique({ where: { id: parsed.id } });
     if (!s) return { ok: false, reason: 'not_found' };
     accountName = s.account_name ?? null;
-    href = accountName ? `/gap/accounts/${encodeURIComponent(accountName.toLowerCase().replace(/\s+/g, '-'))}/` : '/gap/signals/';
+    href = accountName ? `${accountHref(accountName)}/` : '/gap/signals/';
     const op = async (o: Record<string, unknown>, effect: string) => {
       const r = await applySignalOp(prisma, { id: parsed.id, actor: input.actor, now: input.now, ...o } as Parameters<typeof applySignalOp>[1]);
       if (r.ok) effects.push(effect);
       else effects.push(`${effect}_refused:${r.reason}`);
       return r.ok;
     };
-    if (input.decision === 'pursue') await op({ op: 'feedback', value: 'use' }, 'marked_use');
-    else if (input.decision === 'save') await op({ op: 'feedback', value: 'good_context' }, 'saved_as_context');
+    if (input.decision === 'save') await op({ op: 'feedback', value: 'good_context' }, 'saved_as_context');
     else if (input.decision === 'skip') await op({ op: 'feedback', value: 'skip' }, 'skipped_30_days');
     else if (input.decision === 'dismiss') await op({ op: 'ignore' }, 'dismissed');
     else if (input.decision === 'explore') effects.push('explored');
     if (SPENDS.has(input.decision)) {
+      // Research first (the op service clears the feedback), then the one mark for a pursue.
       if (s.url && s.account_name && s.resolution === 'resolved' && (s.research_status === 'none' || s.research_status === 'no_usable_fact' || s.research_status === 'research_failed')) await op({ op: 'research' }, 'research_queued');
-      // After a research op the feedback is cleared by the op service; a pursue keeps its mark.
-      if (input.decision === 'pursue' && effects.includes('research_queued')) await op({ op: 'feedback', value: 'use' }, 'marked_use');
+      if (input.decision === 'pursue') await op({ op: 'feedback', value: 'use' }, 'marked_use');
       angleTaskId = (await angle(prisma, { key, decision: input.decision, note: input.note ?? null, actor: input.actor, now: input.now, via, input: { title: s.title ?? null, url: s.url ?? null, accountName: s.account_name ?? null, accountHint: s.account_hint ?? null, publishedAt: s.published_at ? new Date(s.published_at).toISOString() : null, relevance: s.relevance ?? null, categories: Array.isArray(s.categories) ? s.categories : [], note: s.note ?? null } })).id;
       effects.push('angle_queued');
     }
@@ -112,7 +112,7 @@ export async function applyDecision(prisma: PrismaLike, input: DecideInput, deps
     if (!t) return { ok: false, reason: 'not_found' };
     const known = typeof prisma.account?.findFirst === 'function' ? await prisma.account.findFirst({ where: { name: { equals: t.account_name, mode: 'insensitive' } }, select: { name: true } }).catch(() => null) : null;
     accountName = known?.name ?? null;
-    href = accountName ? `/gap/accounts/${encodeURIComponent(accountName.toLowerCase().replace(/\s+/g, '-'))}/` : '/gap/signals/';
+    href = accountName ? `${accountHref(accountName)}/` : '/gap/signals/';
     let signalId: string | null = null;
     if (SPENDS.has(input.decision)) {
       // The trigger becomes a signal GAP can research and remember; an unknown company stays a hint until Casey names it.
@@ -139,7 +139,7 @@ export async function applyDecision(prisma: PrismaLike, input: DecideInput, deps
   // person
   const persona = typeof prisma.persona?.findFirst === 'function' ? await prisma.persona.findFirst({ where: { email: { equals: parsed.email, mode: 'insensitive' } }, select: { id: true, name: true, title: true, account_name: true } }).catch(() => null) : null;
   accountName = persona?.account_name ?? null;
-  href = accountName ? `/gap/accounts/${encodeURIComponent(accountName.toLowerCase().replace(/\s+/g, '-'))}/` : '/gap/replies/';
+  href = accountName ? `${accountHref(accountName)}/` : '/gap/replies/';
   if (SPENDS.has(input.decision)) {
     angleTaskId = (await angle(prisma, { key, decision: input.decision, note: input.note ?? null, actor: input.actor, now: input.now, via, input: { email: parsed.email, personaId: persona?.id ?? null, name: persona?.name ?? null, title: persona?.title ?? null, accountName } })).id;
     effects.push('angle_queued');

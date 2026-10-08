@@ -12,7 +12,7 @@
  *   - when nothing needs the seller the briefing says so in words; the legacy pipeline digest is named while it runs
  */
 import type { DayPlan, PlanItem } from './plan';
-import type { IntelItem } from './intel';
+import type { IntelItem, PursuedItem } from './intel';
 
 /** The reply commands (X07). Named here so the render can keep every body line clear of them. */
 export const COMMAND_WORDS = ['APPROVE', 'REVISE', 'SKIP', 'DEFER', 'DONE', 'NEXT', 'HELP', 'START'] as const;
@@ -23,6 +23,8 @@ export interface BriefingLinks {
   item: (it: PlanItem) => string;
   /** I04: a decision link for an intelligence item (null when links cannot be signed: the item then says "on Work"). */
   decide?: (key: string, decision: 'pursue' | 'skip' | 'dismiss' | 'more') => string | null;
+  /** I05: the account page. */
+  account?: (name: string) => string;
 }
 
 /** I04: the day's intelligence for the briefing (work/intel.ts) with the prepared angles by item key. */
@@ -30,6 +32,8 @@ export interface BriefingIntel {
   signals: IntelItem[];
   triggers: IntelItem[];
   people: IntelItem[];
+  /** I05: what Casey pursued, with the angle when it is ready. */
+  pursued?: PursuedItem[];
   totals: { signals: number; triggers: number; people: number };
   angles: Record<string, { whyItMatters: string; starters: string[]; peopleNamed: Array<{ name: string | null; title: string | null }>; proposedAction: string }>;
 }
@@ -97,8 +101,24 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
     const who = a?.peopleNamed.length ? ` Who: ${a.peopleNamed.map((p) => `${p.name ?? 'someone'}${p.title ? ` (${p.title})` : ''}`).join('; ')}.` : '';
     return `${it.accountName ?? it.accountHint ?? 'No account yet'}: ${it.title}. ${it.line}${a ? ` The angle: ${a.whyItMatters}${who} Ask: ${a.starters[0] ?? ''}` : ''}`;
   };
+  // I05: what Casey pursued comes first: the angle when it is ready, the state when it is not.
+  const pursued = (intel?.pursued ?? []).slice(0, 6);
+  if (pursued.length) {
+    lines.push('', `Pursued (${pursued.length}): what GAP prepared on your decisions.`);
+    html.push(`<h3>Pursued (${pursued.length})</h3><p style="color:#666">What GAP prepared on your decisions.</p><ul>`);
+    for (const p of pursued) {
+      const where = p.accountName ?? p.accountHint ?? 'No account yet';
+      const a = p.angle;
+      const body = p.status === 'ready' && a ? `The angle: ${a.whyItMatters}${a.peopleNamed.length ? ` Who: ${a.peopleNamed.map((x) => `${x.name ?? 'someone'}${x.title ? ` (${x.title})` : ''}`).join('; ')}.` : a.roles.length ? ` Roles: ${a.roles.join(', ')}.` : ''} Ask: ${a.starters[0] ?? ''} Proposed: ${a.proposedAction === 'email' ? 'an email' : a.proposedAction === 'call' ? 'a call' : 'research first'}.${a.caveat ? ` ${a.caveat}` : ''}` : p.status === 'failed' ? `GAP could not develop the angle${p.error ? ` (${p.error.slice(0, 120)})` : ''}; decide it again on Work to retry.` : 'GAP is developing the angle; it comes back here and on Work.';
+      const open = p.accountName && links.account ? links.account(p.accountName) : links.work;
+      lines.push(`- ${where}: ${p.title}. ${body}`, `   ${p.accountName ? `Open ${p.accountName}` : 'Open Work'}: ${open}`);
+      html.push(`<li>- ${esc(`${where}: ${p.title}. ${body}`)} <a href="${esc(open)}">${esc(p.accountName ? `Open ${p.accountName}` : 'Open Work')}</a></li>`);
+    }
+    html.push('</ul>');
+  }
   if (intel && (intel.signals.length || intel.triggers.length || intel.people.length)) {
-    const worth = [...intel.signals, ...intel.triggers].slice(0, 6);
+    // Reserved slots (the review's finding 4): the top signals and the top triggers both reach the email.
+    const worth = [...intel.signals.slice(0, 4), ...intel.triggers.slice(0, 2), ...intel.signals.slice(4), ...intel.triggers.slice(2)].slice(0, 6);
     const worthTotal = intel.totals.signals + intel.totals.triggers;
     if (worth.length) {
       lines.push('', `Intelligence worth a look (${worth.length}${worthTotal > worth.length ? ` of ${worthTotal}` : ''}). Any age, for your call; Pursue and GAP develops the angle.`);
@@ -106,18 +126,18 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
       worth.forEach((it) => {
         const d = decideLinks(it.key);
         lines.push(`- ${intelLine(it)}`, `   ${d.text}`);
-        html.push(`<li>${esc(intelLine(it))} ${d.html}</li>`);
+        html.push(`<li>- ${esc(intelLine(it))} ${d.html}</li>`);
       });
       html.push('</ul>');
     }
     const people = intel.people.slice(0, 5);
     if (people.length) {
-      lines.push('', `Prospects to reengage (${people.length}${intel.totals.people > people.length ? ` of ${intel.totals.people}` : ''}). They wrote to us and went quiet; no open deal.`);
-      html.push(`<h3>Prospects to reengage (${people.length}${intel.totals.people > people.length ? ` of ${intel.totals.people}` : ''})</h3><p style="color:#666">They wrote to us and went quiet; no open deal.</p><ul>`);
+      lines.push('', `Prospects to reengage (${people.length}${intel.totals.people > people.length ? ` of ${intel.totals.people}` : ''}). They wrote to us and went quiet.`);
+      html.push(`<h3>Prospects to reengage (${people.length}${intel.totals.people > people.length ? ` of ${intel.totals.people}` : ''})</h3><p style="color:#666">They wrote to us and went quiet.</p><ul>`);
       people.forEach((it) => {
         const d = decideLinks(it.key);
         lines.push(`- ${intelLine(it)}`, `   ${d.text}`);
-        html.push(`<li>${esc(intelLine(it))} ${d.html}</li>`);
+        html.push(`<li>- ${esc(intelLine(it))} ${d.html}</li>`);
       });
       html.push('</ul>');
     }

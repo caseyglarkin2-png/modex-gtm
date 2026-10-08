@@ -41,7 +41,7 @@ describe('I02: decisions on signals', () => {
     const r = await applyDecision(c, { key: 'signal:s-old', decision: 'pursue', actor: ACTOR, now: NOW, via: 'gmail:link' });
     expect(r).toMatchObject({ ok: true, key: 'signal:s-old', decision: 'pursue', accountName: 'Kenco', href: '/gap/accounts/kenco/' });
     if (!r.ok) return;
-    expect(r.effects).toEqual(['marked_use', 'research_queued', 'marked_use', 'angle_queued']);
+    expect(r.effects).toEqual(['research_queued', 'marked_use', 'angle_queued']);
     const s = db.store.gapSignal.find((x) => x.id === 's-old')!;
     expect(s).toMatchObject({ feedback: 'use', research_status: 'queued' });
     const tasks = await listAgentTasks(c, { now: NOW });
@@ -96,6 +96,9 @@ describe('I02: decisions on triggers and people', () => {
     const c = db.client();
     const r = await applyDecision(c, { key: 'person:Dave@KencoGroup.com', decision: 'pursue', actor: ACTOR, now: NOW });
     expect(r).toMatchObject({ ok: true, key: 'person:dave@kencogroup.com', accountName: 'Kenco', effects: ['angle_queued'], href: '/gap/accounts/kenco/' });
+    // I05: the account link goes through the one slug helper (an apostrophe or a comma in the name is no new slug).
+    const { accountHref } = await import('@/lib/gap/account-intel/href');
+    expect(accountHref("Southern Glazer's Wine & Spirits")).toBe('/gap/accounts/southern-glazer-s-wine-spirits');
     const tasks = await listAgentTasks(c, { now: NOW });
     expect(tasks[0].input).toMatchObject({ email: 'dave@kencogroup.com', personaId: 1, name: 'Dave Kiesling', title: 'VP Operations', accountName: 'Kenco' });
     expect((await loadIntelligence(c, { now: NOW })).people).toEqual([]);
@@ -117,5 +120,23 @@ describe('I02: decisions on triggers and people', () => {
     expect(ACTION_OPS).toContain('decide');
     const t = signActionToken({ op: 'decide', item: 'signal:s-old|pursue', day: '2026-10-08' }, { secret: 'k', now: NOW, ttlSeconds: 86_400 });
     expect(verifyActionToken(t, { secret: 'k', now: NOW })).toMatchObject({ ok: true, payload: { op: 'decide', item: 'signal:s-old|pursue' } });
+  });
+});
+
+describe('I05: a pursued item never vanishes', () => {
+  it('after Pursue the item leaves the undecided lists and appears under pursued, in progress until the angle task succeeds, then with the angle', async () => {
+    const db = world();
+    const c = db.client();
+    await applyDecision(c, { key: 'signal:s-old', decision: 'pursue', actor: ACTOR, now: NOW });
+    const before = await loadIntelligence(c, { now: NOW });
+    expect(before.signals.map((i) => i.id)).toEqual(['s-noacct']);
+    expect(before.pursued.map((p) => [p.key, p.status, p.title])).toEqual([['signal:s-old', 'in_progress', 'Kenco opens new innovation lab for warehouse automation testing']]);
+    const { runAgentTasks } = await import('@/lib/gap/agents/tasks');
+    const { developAngle } = await import('@/lib/gap/agents/develop-angle');
+    const generate = async () => ({ text: JSON.stringify({ whyItMatters: 'My guess is the lab means the warehouses are being standardized while the yards outside still run on radio and clipboards, which is a reason to ask.', accounts: ['Kenco'], roles: ['VP Operations'], people: [1], starters: ['How does the gate know where a trailer should go?', 'Who owns dwell across your yards?'], proposedAction: 'email', caveat: null }), provider: 'test' });
+    await runAgentTasks(c, { now: new Date(NOW.getTime() + 1000), max: 5, claimer: 'test', handlers: { develop_angle: (t, ctx) => developAngle(t, ctx, { generate }) } });
+    const after = await loadIntelligence(c, { now: new Date(NOW.getTime() + 2000) });
+    expect(after.pursued[0]).toMatchObject({ key: 'signal:s-old', status: 'ready', accountName: 'Kenco', angle: { proposedAction: 'email', peopleNamed: [{ personaId: 1, name: 'Dave Kiesling' }] } });
+    expect(after.pursued[0].angle!.whyItMatters).toContain('the yards outside');
   });
 });

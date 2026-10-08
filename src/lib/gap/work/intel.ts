@@ -26,6 +26,8 @@ import { signalStatus } from '../signals/intake';
 type PrismaLike = any;
 
 export const SKIP_DAYS = 30;
+/** The line between a recent report and a historical observation: a LABEL, never a gate. */
+export const HISTORICAL_DAYS = 45;
 export const QUIET_DAYS = 14;
 export const INTEL_LIMIT = 12;
 export const REENGAGE_LIMIT = 8;
@@ -63,6 +65,8 @@ export interface IntelItem {
   categories: string[];
   /** A person's name and title when GAP holds them. */
   person: { email: string; name: string | null; title: string | null; lastWroteAt: string; messages: number } | null;
+  /** I05: the person's account is in an open deal: shown and labelled (work it from the deal), never dropped. */
+  inDeal?: boolean;
   decisions: readonly Decision[];
   /** How it ranked, for the test and the page. */
   rank: number;
@@ -77,7 +81,7 @@ export function truthOfSignal(s: { research_status?: string | null; published_at
   if (s.research_status === 'contradiction') return 'contradicted';
   if (s.research_status === 'fact_found') return 'verified_fact';
   const at = new Date(s.published_at ?? s.created_at).getTime();
-  return now.getTime() - at > 45 * 86_400_000 ? 'historical_observation' : 'unverified_status';
+  return now.getTime() - at > HISTORICAL_DAYS * 86_400_000 ? 'historical_observation' : 'unverified_status';
 }
 
 const RELEVANCE_RANK: Record<string, number> = { outreach_evidence_candidate: 1, leadership: 2, risk: 2, deal_context: 3, research_lead: 4, account_context: 5 };
@@ -123,7 +127,7 @@ export function rankTriggers(rows: readonly TriggerRow[], accountNames: Readonly
     .sort((a, b) => new Date(b.published_at ?? b.first_seen_at).getTime() - new Date(a.published_at ?? a.first_seen_at).getTime())
     .map((t, i) => {
       const known = [...accountNames].find((n) => n.toLowerCase() === t.account_name.toLowerCase()) ?? null;
-      const truth: TruthLabel = now.getTime() - new Date(t.published_at ?? t.first_seen_at).getTime() > 45 * 86_400_000 ? 'historical_observation' : 'unverified_status';
+      const truth: TruthLabel = now.getTime() - new Date(t.published_at ?? t.first_seen_at).getTime() > HISTORICAL_DAYS * 86_400_000 ? 'historical_observation' : 'unverified_status';
       const categories = cats(t.categories);
       return {
         kind: 'trigger', id: String(t.id), key: `trigger:${t.id}`, title: t.title, source: t.source, url: t.url, publishedAt: t.published_at ? new Date(t.published_at).toISOString() : null, observedAt: new Date(t.first_seen_at).toISOString(), truth,
@@ -137,7 +141,7 @@ type WriterRow = { from_email: string; from_name: string | null; subject: string
 type PersonaRow = { id: number; email: string | null; name: string | null; title: string | null; account_name: string | null; do_not_contact?: boolean | null };
 
 /** Pure: the people who wrote in and went quiet, one per address, newest last word first. */
-export function rankPeople(rows: readonly WriterRow[], personas: readonly PersonaRow[], opts: { now: Date; decided: ReadonlySet<string>; dealAccounts: ReadonlySet<string>; unsubscribed: ReadonlySet<string> }): IntelItem[] {
+export function rankPeople(rows: readonly WriterRow[], personas: readonly PersonaRow[], opts: { now: Date; decided: ReadonlySet<string>; dealAccounts: ReadonlySet<string> | null; unsubscribed: ReadonlySet<string> }): IntelItem[] {
   const byEmail = new Map<string, { last: Date; n: number; name: string | null; account: string | null; subject: string | null }>();
   for (const r of rows) {
     const email = r.from_email.trim().toLowerCase();
@@ -157,21 +161,40 @@ export function rankPeople(rows: readonly WriterRow[], personas: readonly Person
     const p = personaByEmail.get(email) ?? null;
     if (p?.do_not_contact) continue;
     const account = p?.account_name ?? w.account ?? null;
-    if (account && opts.dealAccounts.has(account)) continue;
+    // I05: an open deal at the account is said, never a silent drop (the mandate's section 3); execution stays with the deal.
+    const inDeal = !!(account && opts.dealAccounts && opts.dealAccounts.has(account));
+    const dealWords = opts.dealAccounts ? (inDeal ? 'their account is in an open deal: work it from the deal' : 'no open deal') : 'no open deal on record here';
     const name = p?.name ?? w.name ?? null;
     out.push({
       kind: 'person', id: email, key: `person:${email}`, title: `${name ?? email}${p?.title ? `, ${p.title}` : ''}${account ? ` at ${account}` : ` (${domainOf(email)})`}`, source: 'the mailbox', url: null, publishedAt: null, observedAt: w.last.toISOString(), truth: 'historical_observation',
-      line: `Wrote to us ${dayText(w.last)} (${w.n} message${w.n === 1 ? '' : 's'})${w.subject ? `, last about "${w.subject.slice(0, 60)}"` : ''}; no open deal${p ? '' : '; not a GAP contact yet'}. Previously contacted, a response, no live opportunity.`,
-      accountName: account, accountHint: account ? null : domainOf(email), relevance: null, categories: [], person: { email, name, title: p?.title ?? null, lastWroteAt: w.last.toISOString(), messages: w.n }, decisions: DECISIONS, rank: out.length,
+      line: `Wrote to us ${dayText(w.last)} (${w.n} message${w.n === 1 ? '' : 's'})${w.subject ? `, last about "${w.subject.slice(0, 60)}"` : ''}; ${dealWords}${p ? '' : '; not a GAP contact yet'}. Previously contacted, a response${inDeal ? '' : ', no live opportunity'}.`,
+      accountName: account, accountHint: account ? null : domainOf(email), relevance: null, categories: [], person: { email, name, title: p?.title ?? null, lastWroteAt: w.last.toISOString(), messages: w.n }, decisions: DECISIONS, rank: out.length, ...(inDeal ? { inDeal: true } : {}),
     });
   }
   return out.sort((a, b) => b.observedAt.localeCompare(a.observedAt)).map((x, i) => ({ ...x, rank: i }));
+}
+
+/** I05: an item Casey pursued (or asked more about): the angle task's state and its result when ready. */
+export interface PursuedItem {
+  key: string;
+  kind: 'signal' | 'trigger' | 'person';
+  title: string;
+  accountName: string | null;
+  accountHint: string | null;
+  url: string | null;
+  decision: string;
+  decidedAt: string;
+  status: 'in_progress' | 'ready' | 'failed';
+  error: string | null;
+  angle: { whyItMatters: string; starters: string[]; roles: string[]; accounts: string[]; peopleNamed: Array<{ personaId: number; name: string | null; title: string | null }>; proposedAction: string; caveat: string | null; sourceLine: string } | null;
 }
 
 export interface Intelligence {
   signals: IntelItem[];
   triggers: IntelItem[];
   people: IntelItem[];
+  /** I05: what Casey pursued, with the angle when it is ready (the review's finding 2: a pursued item never vanishes). */
+  pursued: PursuedItem[];
   /** How many undecided items the selection was cut from, so the shortage or the depth is said truthfully. */
   totals: { signals: number; triggers: number; people: number };
 }
@@ -192,15 +215,49 @@ export async function loadDecided(prisma: PrismaLike, now: Date): Promise<Set<st
   return out;
 }
 
-/** The day's intelligence. Soft: an unreadable table reads as empty, said by the totals. */
-export async function loadIntelligence(prisma: PrismaLike, opts: { now: Date; limit?: number; peopleLimit?: number; dealAccounts?: ReadonlySet<string> }): Promise<Intelligence> {
+/** I05: the pursued items from the angle tasks (any state, the task window), newest decision first, one per key. */
+export async function loadPursued(prisma: PrismaLike, now: Date): Promise<PursuedItem[]> {
+  if (typeof prisma?.gapAuditEvent?.findMany !== 'function') return [];
+  const { listAgentTasks } = await import('../agents/tasks');
+  const tasks = await listAgentTasks(prisma, { now }).catch(() => []);
+  const out = new Map<string, PursuedItem>();
+  for (const t of tasks.filter((x) => x.kind === 'develop_angle').sort((a, b) => b.queuedAt.localeCompare(a.queuedAt))) {
+    if (out.has(t.itemKey) || t.status === 'superseded') continue;
+    const input = (t.input ?? {}) as Record<string, unknown>;
+    const str = (v: unknown) => (typeof v === 'string' && v.trim() ? v.trim() : null);
+    const kind = (t.itemKey.split(':')[0] as PursuedItem['kind']) ?? 'signal';
+    const r = (t.status === 'succeeded' && t.result && typeof t.result.whyItMatters === 'string' ? t.result : null) as Record<string, unknown> | null;
+    const strs = (v: unknown) => (Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : []);
+    out.set(t.itemKey, {
+      key: t.itemKey, kind, title: str(input.title) ?? (kind === 'person' ? `${str(input.name) ?? str(input.email) ?? 'A person'} wrote to us` : 'An item'), accountName: str(input.accountName), accountHint: str(input.accountHint), url: str(input.url),
+      decision: str(input.decision) ?? t.request, decidedAt: t.queuedAt,
+      status: r ? 'ready' : t.status === 'failed' ? 'failed' : 'in_progress', error: t.status === 'failed' ? t.lastError : null,
+      angle: r ? { whyItMatters: String(r.whyItMatters), starters: strs(r.starters), roles: strs(r.roles), accounts: strs(r.accounts), peopleNamed: Array.isArray(r.peopleNamed) ? (r.peopleNamed as Array<{ personaId: number; name: string | null; title: string | null }>) : [], proposedAction: String(r.proposedAction ?? 'research'), caveat: str(r.caveat), sourceLine: String(r.sourceLine ?? '') } : null,
+    });
+  }
+  return [...out.values()];
+}
+
+/**
+ * The day's intelligence. Soft: an unreadable table reads as empty, said by the totals. The signals come from three
+ * bounded pulls through one ranker (the review's finding 5: a newest-first window would be a recency gate): Casey's
+ * shares of any age, the strongest classes by score, then the rest newest; the totals are counts of the undecided
+ * universe, not of the window. `dealAccounts` null means the deal state was not read: the person lines say so.
+ */
+export async function loadIntelligence(prisma: PrismaLike, opts: { now: Date; limit?: number; peopleLimit?: number; dealAccounts?: ReadonlySet<string> | null }): Promise<Intelligence> {
   const limit = opts.limit ?? INTEL_LIMIT;
   const peopleLimit = opts.peopleLimit ?? REENGAGE_LIMIT;
   const decided = await loadDecided(prisma, opts.now);
-  const signalRows: SignalRow[] = typeof prisma?.gapSignal?.findMany === 'function'
-    ? await prisma.gapSignal.findMany({ where: { OR: [{ feedback: null }, { feedback: 'skip' }], resolution: { not: 'rejected' } }, orderBy: [{ created_at: 'desc' }], take: 600 }).catch(() => [])
-    : [];
+  const undecided = { OR: [{ feedback: null }, { feedback: 'skip' }], resolution: { not: 'rejected' } };
+  const pull = async (where: Record<string, unknown>, orderBy: Array<Record<string, string>>, take: number): Promise<SignalRow[]> => (typeof prisma?.gapSignal?.findMany === 'function' ? prisma.gapSignal.findMany({ where: { ...undecided, ...where }, orderBy, take }).catch(() => []) : []);
+  const [shares, strong, rest] = await Promise.all([
+    pull({ origin: { in: ['casey_share', 'conference_note'] } }, [{ created_at: 'desc' }], 100),
+    pull({ relevance: { in: ['outreach_evidence_candidate', 'leadership', 'risk'] } }, [{ score: 'desc' }, { created_at: 'desc' }], 300),
+    pull({}, [{ created_at: 'desc' }], 200),
+  ]);
+  const signalRows = [...new Map([...shares, ...strong, ...rest].map((r) => [r.id, r])).values()];
   const signals = rankSignals(signalRows, opts.now);
+  const signalTotal: number = typeof prisma?.gapSignal?.count === 'function' ? await prisma.gapSignal.count({ where: { feedback: null, resolution: { not: 'rejected' } } }).catch(() => signals.length) : signals.length;
   const triggerRows: TriggerRow[] = typeof prisma?.pounceTrigger?.findMany === 'function' ? await prisma.pounceTrigger.findMany({ where: { dismissed: false }, orderBy: [{ first_seen_at: 'desc' }], take: 200 }).catch(() => []) : [];
   const names: Array<{ name: string }> = triggerRows.length && typeof prisma?.account?.findMany === 'function' ? await prisma.account.findMany({ where: { name: { in: [...new Set(triggerRows.map((t) => t.account_name))], mode: 'insensitive' } }, select: { name: true } }).catch(() => []) : [];
   const triggers = rankTriggers(triggerRows, new Set(names.map((n) => n.name)), decided, opts.now);
@@ -211,6 +268,7 @@ export async function loadIntelligence(prisma: PrismaLike, opts: { now: Date; li
   const emails = [...new Set(msgs.map((m) => m.from_email.toLowerCase()))];
   const personas: PersonaRow[] = emails.length && typeof prisma?.persona?.findMany === 'function' ? await prisma.persona.findMany({ where: { email: { in: emails, mode: 'insensitive' } }, select: { id: true, email: true, name: true, title: true, account_name: true, do_not_contact: true } }).catch(() => []) : [];
   const unsub: Array<{ email: string }> = emails.length && typeof prisma?.unsubscribedEmail?.findMany === 'function' ? await prisma.unsubscribedEmail.findMany({ where: { email: { in: emails, mode: 'insensitive' } }, select: { email: true } }).catch(() => []) : [];
-  const people = rankPeople(msgs.map((m) => ({ from_email: m.from_email, from_name: m.from_name, subject: m.subject, received_at: m.received_at, thread_account: m.thread?.account_name ?? null })), personas, { now: opts.now, decided, dealAccounts: opts.dealAccounts ?? new Set(), unsubscribed: new Set(unsub.map((u) => u.email.toLowerCase())) });
-  return { signals: signals.slice(0, limit), triggers: triggers.slice(0, limit), people: people.slice(0, peopleLimit), totals: { signals: signals.length, triggers: triggers.length, people: people.length } };
+  const people = rankPeople(msgs.map((m) => ({ from_email: m.from_email, from_name: m.from_name, subject: m.subject, received_at: m.received_at, thread_account: m.thread?.account_name ?? null })), personas, { now: opts.now, decided, dealAccounts: opts.dealAccounts ?? null, unsubscribed: new Set(unsub.map((u) => u.email.toLowerCase())) });
+  const pursued = await loadPursued(prisma, opts.now);
+  return { signals: signals.slice(0, limit), triggers: triggers.slice(0, limit), people: people.slice(0, peopleLimit), pursued, totals: { signals: Math.max(signalTotal, signals.length), triggers: triggers.length, people: people.length } };
 }
