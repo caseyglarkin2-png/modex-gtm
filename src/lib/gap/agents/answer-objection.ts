@@ -12,7 +12,7 @@
  * invented. The call brief shows the cleared talking point under the objection (replies/brief.ts, X16c timeline's
  * sibling), read from the task's own result: no second record.
  */
-import { generateTextWithMetadata } from '@/lib/ai/client';
+import { gapGenerate } from '../ai/spend';
 import { HEDGE_TOKENS } from '../taxonomy';
 import { nyDay } from '../work/dates';
 import { listAgentTasks, queueAgentTask, type ClaimedTask, type HandlerResult } from './tasks';
@@ -140,7 +140,7 @@ export async function answerObjection(task: ClaimedTask, ctx: { prisma: PrismaLi
     problemHypothesis: String(hypothesis?.problem_hypothesis ?? ''),
     whatANoMeans: typeof hypothesis?.what_a_no_means === 'string' && hypothesis.what_a_no_means.trim() ? hypothesis.what_a_no_means.trim() : null,
   });
-  const out = await (deps.generate ?? generateTextWithMetadata)(prompt, MAX_TOKENS);
+  const out = await (deps.generate ?? ((p: string, m?: number) => gapGenerate(ctx.prisma, { prompt: p, maxTokens: m ?? MAX_TOKENS, tier: 'routine', task: { id: task.id, kind: task.kind, itemKey: task.itemKey }, now: ctx.now })))(prompt, MAX_TOKENS);
   const candidate = parseObjectionAnswer(out.text);
   if (!candidate) return { ok: false, reason: 'could_not_satisfy', detail: 'the model returned something that is not a usable talking point' };
   const check = validateObjectionAnswer(candidate, factIds);

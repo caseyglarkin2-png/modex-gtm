@@ -17,6 +17,7 @@
  * three failures end the task; a handler refusal is final at once; a re-queue supersedes the queued task.
  */
 import { randomBytes } from 'node:crypto';
+import { isPermanentAgentError } from './errors';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -219,7 +220,7 @@ export interface RunReport {
   results: Array<{ id: string; kind: AgentTaskKind; itemKey: string; outcome: 'succeeded' | 'failed' | 'retry'; error?: string }>;
 }
 
-/** The drain: claim, run each handler, record. A handler refusal is final; a throw is a retryable failure. */
+/** The drain: claim, run each handler, record. A handler refusal is final; a throw is a retryable failure unless it is a PermanentAgentError (A01). */
 export async function runAgentTasks(prisma: PrismaLike, opts: { now: Date; max: number; claimer: string; handlers: Partial<Record<AgentTaskKind, AgentTaskHandler>>; leaseMs?: number }): Promise<RunReport> {
   const claimed = await claimAgentTasks(prisma, { now: opts.now, max: opts.max, claimer: opts.claimer, leaseMs: opts.leaseMs });
   const report: RunReport = { claimed: claimed.length, succeeded: 0, failed: 0, results: [] };
@@ -245,7 +246,8 @@ export async function runAgentTasks(prisma: PrismaLike, opts: { now: Date; max: 
       }
     } catch (err) {
       const error = err instanceof Error ? err.message : String(err);
-      await failAgentTask(prisma, { id: task.id, fence: task.fence, error, now: opts.now, actor: opts.claimer }).catch(() => undefined);
+      // A01: a permanent failure (billing, an invalid key, a missing model, a spent budget) is final on this attempt; retrying it only spends.
+      await failAgentTask(prisma, { id: task.id, fence: task.fence, error, now: opts.now, final: isPermanentAgentError(err), actor: opts.claimer }).catch(() => undefined);
       report.failed += 1;
       const after = await loadAgentTask(prisma, task.id).catch(() => null);
       report.results.push({ id: task.id, kind: task.kind, itemKey: task.itemKey, outcome: after?.status === 'failed' ? 'failed' : 'retry', error });

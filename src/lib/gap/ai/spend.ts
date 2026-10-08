@@ -1,0 +1,236 @@
+/**
+ * The GAP model route and spend ledger (A01, GAP OS AI recovery, 2026-10-08). Server only.
+ *
+ * One inexpensive route: the Vercel AI Gateway credential already in this project's production environment
+ * (AI_GATEWAY_API_KEY), the routine model `google/gemini-2.5-flash-lite` (free tier allowed, $0.10 per million input
+ * tokens and $0.40 per million output, an angle-sized call measured at $0.0002 on 2026-10-08) and the stronger
+ * `google/gemini-2.5-flash` only when a task asks for it (tier `strong`). The gateway reports each call's cost in its
+ * usage block and the team's credit balance on /v1/credits; a provider that reports no cost (the direct Gemini
+ * fallback) is charged a conservative estimate from its tokens, and the row says so.
+ *
+ * Every call GAP makes is two ledger rows: `ai.model_call_reserved` BEFORE the call at the worst-case estimate (so a
+ * call in flight already counts against the month) and `ai.model_call` after it with the task, model, tokens, cost
+ * and outcome. The month's ceiling (GAP_AI_MONTHLY_CEILING_USD, default $25) and the per-task budget
+ * (GAP_AI_TASK_BUDGET_USD, default $0.10) are checked before the call; a refusal is a PermanentAgentError with the
+ * recovery in words and a `refused` row. Hard enforcement at the provider is the gateway's own budget (Casey's
+ * dashboard: AI Gateway, Budgets); this ledger is the in-app control and the observable record.
+ */
+import { AIAllProvidersFailed, generateTextWithMetadata, type AIErrorInfo, type GenerateTextResult } from '@/lib/ai/client';
+import { PermanentAgentError } from '../agents/errors';
+import { nyWallToInstant } from '../work/dates';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type PrismaLike = any;
+
+export const MODEL_CALL_SUBJECT = 'model_call' as const;
+export const MODEL_CALL_RESERVED = 'ai.model_call_reserved' as const;
+export const MODEL_CALL = 'ai.model_call' as const;
+
+export const ROUTINE_MODEL = 'google/gemini-2.5-flash-lite';
+export const STRONG_MODEL = 'google/gemini-2.5-flash';
+
+export type ModelTier = 'routine' | 'strong';
+
+export interface GapModelCallContext {
+  id: string;
+  kind: string;
+  itemKey: string;
+}
+
+export interface SpendLimits {
+  monthlyCeilingUsd: number;
+  taskBudgetUsd: number;
+  warnFraction: number;
+  maxOutputTokens: number;
+  maxPromptChars: number;
+  routineModel: string;
+  strongModel: string;
+}
+
+export interface SpendReport {
+  month: string;
+  label: string;
+  monthUsd: number;
+  ceilingUsd: number;
+  taskBudgetUsd: number;
+  calls: number;
+  failed: number;
+  refused: number;
+  inFlight: number;
+  lastCall: { at: string; outcome: string; model: string | null; errorCategory: string | null; costUsd: number } | null;
+}
+
+/** USD per million tokens [input, output]; unknown models are estimated at a conservative default, never zero. */
+const PRICES_PER_M: Readonly<Record<string, readonly [number, number]>> = {
+  'google/gemini-2.5-flash-lite': [0.1, 0.4],
+  'gemini-2.5-flash-lite': [0.1, 0.4],
+  'google/gemini-2.5-flash': [0.3, 2.5],
+  'gemini-2.5-flash': [0.3, 2.5],
+  'google/gemini-3.5-flash-lite': [0.3, 2.5],
+  'gemini-3.5-flash-lite': [0.3, 2.5],
+  'openai/gpt-5-nano': [0.05, 0.4],
+  'openai/gpt-5-mini': [0.25, 2],
+  'gpt-4o-mini': [0.15, 0.6],
+};
+const DEFAULT_PRICE: readonly [number, number] = [2.5, 15];
+/** A rough tokenizer for the estimate only: four characters per token, rounded up. */
+const CHARS_PER_TOKEN = 4;
+
+const num = (v: unknown, fallback: number, min = 0) => {
+  const n = Number(String(v ?? '').trim());
+  return Number.isFinite(n) && n > min ? n : fallback;
+};
+
+export function spendLimits(env: Record<string, string | undefined> = process.env): SpendLimits {
+  return {
+    monthlyCeilingUsd: num(env.GAP_AI_MONTHLY_CEILING_USD, 25),
+    taskBudgetUsd: num(env.GAP_AI_TASK_BUDGET_USD, 0.1),
+    warnFraction: Math.min(1, num(env.GAP_AI_WARN_FRACTION, 0.8)),
+    maxOutputTokens: Math.floor(num(env.GAP_AI_MAX_OUTPUT_TOKENS, 1024)),
+    maxPromptChars: Math.floor(num(env.GAP_AI_MAX_PROMPT_CHARS, 24_000)),
+    routineModel: env.GAP_AI_MODEL?.trim() || ROUTINE_MODEL,
+    strongModel: env.GAP_AI_MODEL_STRONG?.trim() || STRONG_MODEL,
+  };
+}
+
+export function estimateCostUsd(model: string, promptTokens: number, completionTokens: number): number {
+  const [input, output] = PRICES_PER_M[model] ?? DEFAULT_PRICE;
+  return (Math.max(0, promptTokens) * input + Math.max(0, completionTokens) * output) / 1_000_000;
+}
+
+/** The calendar month in New York that holds `now`. */
+export function monthWindow(now: Date): { month: string; label: string; start: Date } {
+  const wall = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
+  const y = wall.getFullYear();
+  const m = wall.getMonth() + 1;
+  return { month: `${y}-${String(m).padStart(2, '0')}`, label: wall.toLocaleString('en-US', { month: 'long' }), start: nyWallToInstant(y, m, 1) };
+}
+
+type Row = { kind: string; subject_id: string; payload: unknown; created_at: Date | string };
+
+async function monthRows(prisma: PrismaLike, start: Date): Promise<Row[]> {
+  if (typeof prisma?.gapAuditEvent?.findMany !== 'function') return [];
+  return prisma.gapAuditEvent.findMany({ where: { subject_type: MODEL_CALL_SUBJECT, created_at: { gte: start } }, orderBy: { created_at: 'asc' }, take: 5000 }).catch(() => []) as Promise<Row[]>;
+}
+
+function fold(rows: readonly Row[]): Omit<SpendReport, 'month' | 'label' | 'ceilingUsd' | 'taskBudgetUsd'> {
+  const reserved = new Map<string, number>();
+  let monthUsd = 0;
+  let calls = 0;
+  let failed = 0;
+  let refused = 0;
+  let lastCall: SpendReport['lastCall'] = null;
+  for (const r of rows) {
+    const p = (r.payload ?? {}) as Record<string, unknown>;
+    const callId = typeof p.callId === 'string' ? p.callId : r.subject_id;
+    if (r.kind === MODEL_CALL_RESERVED) {
+      reserved.set(callId, Number(p.estimateUsd) || 0);
+      continue;
+    }
+    if (r.kind !== MODEL_CALL) continue;
+    reserved.delete(callId);
+    const cost = Number(p.costUsd) || 0;
+    monthUsd += cost;
+    const outcome = String(p.outcome ?? 'ok');
+    if (outcome === 'ok') calls += 1;
+    else if (outcome === 'refused') refused += 1;
+    else failed += 1;
+    lastCall = { at: new Date(r.created_at).toISOString(), outcome, model: typeof p.model === 'string' ? p.model : null, errorCategory: typeof p.errorCategory === 'string' ? p.errorCategory : null, costUsd: cost };
+  }
+  for (const estimate of reserved.values()) monthUsd += estimate;
+  return { monthUsd, calls, failed, refused, inFlight: reserved.size, lastCall };
+}
+
+/** The month's spend as the ledger holds it (recorded cost plus in-flight reservations). Soft: an unreadable table reads as zero calls. */
+export async function loadSpend(prisma: PrismaLike, opts: { now: Date; env?: Record<string, string | undefined> }): Promise<SpendReport> {
+  const limits = spendLimits(opts.env);
+  const w = monthWindow(opts.now);
+  const folded = fold(await monthRows(prisma, w.start));
+  return { month: w.month, label: w.label, ceilingUsd: limits.monthlyCeilingUsd, taskBudgetUsd: limits.taskBudgetUsd, ...folded };
+}
+
+export type GapGenerate = (prompt: string, maxTokens: number, opts: { model: string }) => Promise<GenerateTextResult>;
+
+export interface GapGenerateInput {
+  prompt: string;
+  maxTokens: number;
+  tier: ModelTier;
+  task: GapModelCallContext;
+  now: Date;
+}
+
+export interface GapGenerateDeps {
+  generate?: GapGenerate;
+  env?: Record<string, string | undefined>;
+  actor?: string;
+}
+
+const PERMANENT_CATEGORIES = new Set(['billing', 'authentication', 'model_missing']);
+
+function classifyFailure(errors: readonly AIErrorInfo[]): { permanent: boolean; category: string } {
+  if (!errors.length) return { permanent: true, category: 'configuration' };
+  // Transient if any provider's failure was transient (it may answer next time); permanent only when every provider failed for good.
+  if (errors.some((e) => e.retryable)) return { permanent: false, category: errors.find((e) => e.retryable)!.category };
+  const first = errors[0].category;
+  return { permanent: true, category: PERMANENT_CATEGORIES.has(first) ? first : 'configuration' };
+}
+
+/**
+ * One bounded, budgeted, recorded model call for a GAP agent task. Refuses before the call when the month or the task
+ * budget would be exceeded (PermanentAgentError); records the call either way; maps a provider failure to a
+ * permanent error (billing, authentication, a missing model, no provider configured) or a transient one (thrown as
+ * a plain Error for the runner's bounded attempts).
+ */
+export async function gapGenerate(prisma: PrismaLike, input: GapGenerateInput, deps: GapGenerateDeps = {}): Promise<GenerateTextResult> {
+  const limits = spendLimits(deps.env);
+  const actor = deps.actor ?? 'agent';
+  const model = input.tier === 'strong' ? limits.strongModel : limits.routineModel;
+  const prompt = input.prompt.length > limits.maxPromptChars ? input.prompt.slice(0, limits.maxPromptChars) : input.prompt;
+  const maxTokens = Math.max(1, Math.min(input.maxTokens, limits.maxOutputTokens));
+  const promptTokensEstimate = Math.ceil(prompt.length / CHARS_PER_TOKEN);
+  const estimateUsd = estimateCostUsd(model, promptTokensEstimate, maxTokens);
+  const callId = `mc_${input.task.id}_${input.now.getTime().toString(36)}`;
+  const base = { callId, taskId: input.task.id, taskKind: input.task.kind, itemKey: input.task.itemKey, model, tier: input.tier };
+  const write = async (kind: string, payload: Record<string, unknown>) => {
+    if (typeof prisma?.gapAuditEvent?.create !== 'function') return;
+    await prisma.gapAuditEvent.create({ data: { kind, actor, subject_type: MODEL_CALL_SUBJECT, subject_id: input.task.id, payload: { ...base, ...payload } } }).catch(() => undefined);
+  };
+  const refuse = async (code: 'monthly_ceiling' | 'task_budget', message: string) => {
+    await write(MODEL_CALL, { outcome: 'refused', costUsd: 0, estimated: false, errorCategory: code, error: message, at: input.now.toISOString() });
+    throw new PermanentAgentError(code, message);
+  };
+
+  if (estimateUsd > limits.taskBudgetUsd) {
+    await refuse('task_budget', `this call could cost $${estimateUsd.toFixed(4)} on ${model} (${promptTokensEstimate} prompt tokens, ${maxTokens} output), over the per-task budget of $${limits.taskBudgetUsd.toFixed(2)} (GAP_AI_TASK_BUDGET_USD); shorten the context or raise the budget`);
+  }
+  const spend = await loadSpend(prisma, { now: input.now, env: deps.env });
+  if (spend.monthUsd + estimateUsd > limits.monthlyCeilingUsd) {
+    await refuse('monthly_ceiling', `the GAP model ceiling of $${limits.monthlyCeilingUsd.toFixed(2)} for ${spend.label} is spent ($${spend.monthUsd.toFixed(2)} recorded, $${estimateUsd.toFixed(4)} more needed); raise GAP_AI_MONTHLY_CEILING_USD with Casey's approval or wait for next month, then decide the item again`);
+  }
+
+  await write(MODEL_CALL_RESERVED, { estimateUsd, promptTokensEstimate, maxTokens, at: input.now.toISOString() });
+  const generate: GapGenerate = deps.generate ?? ((p, m, o) => generateTextWithMetadata(p, m, o));
+  try {
+    const out = await generate(prompt, maxTokens, { model });
+    const usedModel = out.model ?? model;
+    const promptTokens = out.usage?.promptTokens ?? promptTokensEstimate;
+    const completionTokens = out.usage?.completionTokens ?? maxTokens;
+    const reported = out.usage?.costUsd;
+    const estimated = typeof reported !== 'number';
+    const costUsd = estimated ? estimateCostUsd(usedModel, promptTokens, completionTokens) : reported;
+    await write(MODEL_CALL, { outcome: 'ok', provider: out.provider, model: usedModel, promptTokens, completionTokens, costUsd, estimated, providerErrors: out.errors.map((e) => `${e.provider}:${e.category}`), at: new Date().toISOString() });
+    return out;
+  } catch (err) {
+    const errors = err instanceof AIAllProvidersFailed ? err.errors : [];
+    const { permanent, category } = classifyFailure(errors);
+    const message = err instanceof Error ? err.message : String(err);
+    // A failed call may still have been billed (a timeout after generation): charge the estimate, never zero, unless no generation could have run.
+    const costUsd = category === 'billing' || category === 'authentication' || category === 'model_missing' || category === 'configuration' ? 0 : estimateUsd;
+    await write(MODEL_CALL, { outcome: 'failed', model, costUsd, estimated: true, errorCategory: category, permanent, error: message.slice(0, 600), at: new Date().toISOString() });
+    if (permanent) {
+      const why = errors.length ? errors.map((e) => `${e.provider} ${e.category}: ${e.message.slice(0, 160)}`).join(' | ') : message.slice(0, 300);
+      throw new PermanentAgentError(category as 'billing' | 'authentication' | 'model_missing' | 'configuration', `no funded model route answered (${why}); fix the credential or the model in Vercel, redeploy, then decide the item again`);
+    }
+    throw new Error(`transient: ${message.slice(0, 600)}`);
+  }
+}
