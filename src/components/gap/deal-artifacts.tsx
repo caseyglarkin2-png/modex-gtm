@@ -8,13 +8,26 @@
  * guard flags is shown with the problem and cannot be copied.
  */
 import { useState } from 'react';
-import type { PreparedArtifact } from '@/lib/gap/deals/artifacts';
+import type { ArtifactProof, PreparedArtifact } from '@/lib/gap/deals/artifacts';
 import { stableHash } from '@/lib/gap/deals/crm-model';
 import { postJson } from './obligation-actions';
 
 const SMALL = 'inline-flex min-h-11 items-center justify-center rounded-md border border-[var(--border)] px-2.5 text-xs hover:bg-[var(--muted)] disabled:opacity-60 sm:min-h-9';
 
-function Block({ a, lead, scope }: { a: PreparedArtifact; lead: boolean; scope: { accountName: string; dealId: string } | null }) {
+type Person = { personaId?: number; name: string | null; email: string | null };
+
+/** X14b: who the copy is for: the artifact's own addressee by name, else the deal's one person with an address. */
+export function recipientFor(a: Pick<PreparedArtifact, 'to'>, people: readonly Person[]): string | null {
+  const withEmail = people.filter((p) => typeof p.email === 'string' && p.email.includes('@'));
+  const to = (a.to ?? '').trim().toLowerCase();
+  const named = to ? withEmail.find((p) => (p.name ?? '').trim().toLowerCase() === to || to.startsWith((p.name ?? '').trim().toLowerCase().split(' ')[0] || '\u0000')) : null;
+  const pick = named ?? (withEmail.length === 1 ? withEmail[0] : null);
+  return pick?.email ? pick.email.trim().toLowerCase() : null;
+}
+
+const when = (iso: string) => new Date(iso).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: 'America/New_York' });
+
+function Block({ a, lead, scope, people = [], proof = null }: { a: PreparedArtifact; lead: boolean; scope: { accountName: string; dealId: string } | null; people?: readonly Person[]; proof?: ArtifactProof | null }) {
   const [copied, setCopied] = useState<string | null>(null);
   async function copy() {
     try {
@@ -29,8 +42,10 @@ function Block({ a, lead, scope }: { a: PreparedArtifact; lead: boolean; scope: 
       setCopied('Copied. Nothing was sent.');
       return;
     }
-    const r = await postJson('/api/gap/deals/artifact-used', { accountName: scope.accountName, dealId: scope.dealId, kind: a.kind, textHash: stableHash(a.text) });
-    setCopied(r.ok ? 'Copied and recorded. Nothing was sent.' : `Copied. Nothing was sent. Not recorded: ${r.error}.`);
+    // X14b: the recipient rides on the record, so the mailbox cron can find the send in Sent; a copy is never a send.
+    const recipient = recipientFor(a, people);
+    const r = await postJson('/api/gap/deals/artifact-used', { accountName: scope.accountName, dealId: scope.dealId, kind: a.kind, textHash: stableHash(a.text), ...(recipient ? { recipient } : {}) });
+    setCopied(r.ok ? (recipient ? `Copied and recorded for ${recipient}. Not sent until Sent shows it.` : 'Copied and recorded. Nothing was sent.') : `Copied. Nothing was sent. Not recorded: ${r.error}.`);
   }
   return (
     <div className="space-y-1" data-testid="deal-artifact" data-kind={a.kind} data-next={lead ? 'true' : 'false'}>
@@ -39,6 +54,11 @@ function Block({ a, lead, scope }: { a: PreparedArtifact; lead: boolean; scope: 
         <span className="ml-2 rounded bg-[var(--muted)] px-1 text-[10px] font-semibold uppercase tracking-wide text-[var(--muted-foreground)]" data-testid="artifact-status">{a.status}</span>
       </p>
       <p className="text-xs" data-testid="artifact-why">{a.why}</p>
+      {proof && proof.kind === a.kind ? (
+        <p className="text-xs text-[var(--muted-foreground)]" data-testid="artifact-proof" data-state={proof.state}>
+          {proof.state === 'sent' ? `Sent ${when(proof.at)}${proof.recipient ? ` to ${proof.recipient}` : ''} (found in Sent).` : `Copied ${when(proof.at)}${proof.recipient ? ` for ${proof.recipient}` : ''}; GAP has not seen it sent.`}
+        </p>
+      ) : null}
       <textarea readOnly className="min-h-32 w-full rounded-md border border-[var(--border)] bg-transparent p-2 font-mono text-xs" value={a.text} aria-label={`${a.title}, prepared, not sent`} data-testid="artifact-text" rows={Math.min(14, a.text.split('\n').length + 1)} />
       {a.citations.length ? (
         <ul className="text-xs text-[var(--muted-foreground)]" data-testid="artifact-citations">
@@ -55,17 +75,17 @@ function Block({ a, lead, scope }: { a: PreparedArtifact; lead: boolean; scope: 
   );
 }
 
-export function DealArtifacts({ next, all, accountName, dealId }: { next: PreparedArtifact; all: readonly PreparedArtifact[]; /** Batch item 8: where a copy is recorded. */ accountName?: string; dealId?: string }) {
+export function DealArtifacts({ next, all, accountName, dealId, people = [], proof = null }: { next: PreparedArtifact; all: readonly PreparedArtifact[]; /** Batch item 8: where a copy is recorded. */ accountName?: string; dealId?: string; /** X14b: the deal's people with the address GAP holds (the copy's recipient). */ people?: readonly Person[]; /** X14b: what the ledger proves about the recap. */ proof?: ArtifactProof | null }) {
   const scope = accountName && dealId ? { accountName, dealId } : null;
   const others = all.filter((a) => a.kind !== next.kind);
   return (
     <div className="space-y-2" data-testid="deal-artifacts">
       <h4 className="text-xs font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">The next deal move, prepared</h4>
-      <Block a={next} lead scope={scope} />
+      <Block a={next} lead scope={scope} people={people} proof={proof} />
       {others.length ? (
         <details className="text-sm">
           <summary className="min-h-11 cursor-pointer text-xs text-[var(--muted-foreground)]">Other prepared artifacts ({others.length})</summary>
-          <div className="mt-2 space-y-3">{others.map((a) => <Block key={a.kind} a={a} lead={false} scope={scope} />)}</div>
+          <div className="mt-2 space-y-3">{others.map((a) => <Block key={a.kind} a={a} lead={false} scope={scope} people={people} proof={proof} />)}</div>
         </details>
       ) : null}
     </div>
