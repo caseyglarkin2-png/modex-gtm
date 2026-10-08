@@ -70,8 +70,10 @@ import { LIVE_ENROLLMENT_STATUSES } from '../sequence/family';
 import { stopRunsForRecipient as defaultStopRuns } from '@/lib/queue/sequence-runtime';
 import { dispositionEffects, validateDisposition, type DispositionEffects, type ValidDisposition } from './model';
 import { commitmentsFromDisposition as defaultCommitments } from '../work/commitments';
-import { NON_STOPPING_RESPONSE_CLASSES } from '../taxonomy';
-import { UNANSWERED_CALL_CLASSES } from '../routing/inputs';
+import { unansweredCallsFor } from './unanswered-calls';
+
+// X16: one reader for the unanswered-call count (the builder, the brief and routing agree); kept exported here.
+export { unansweredCallsFor };
 
 // ---------------------------------------------------------------------------
 // Types
@@ -681,28 +683,6 @@ export async function recordDisposition(
 
   await auditEffects(auditFn, prisma, input, dispositionId, applied, refusals);
   return { ok: true, dispositionId, bidIds, humanConfirmed, effects: applied, refusals };
-}
-
-/**
- * X16: confirmed unanswered calls to this person since their last substantive answer, the count routing reads
- * (routing/inputs.ts, red team T8), taken after the new row is written so it includes this call. Soft: a client
- * without the reads answers 0 (no follow-up is then capped wrongly: the builder treats 0 as the first attempt).
- */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function unansweredCallsFor(prisma: any, contactEmail: string): Promise<number> {
-  if (typeof prisma?.conversationDisposition?.count !== 'function') return 0;
-  const email = contactEmail.trim().toLowerCase();
-  try {
-    const lastSubstantive: { created_at: Date } | null = typeof prisma.conversationDisposition.findFirst === 'function'
-      ? await prisma.conversationDisposition.findFirst({ where: { contact_email: email, human_confirmed: true, response_class: { notIn: [...NON_STOPPING_RESPONSE_CLASSES] } }, orderBy: { created_at: 'desc' }, select: { created_at: true } })
-      : null;
-    const n = await prisma.conversationDisposition.count({
-      where: { contact_email: email, human_confirmed: true, channel: 'call', response_class: { in: [...UNANSWERED_CALL_CLASSES] }, ...(lastSubstantive ? { created_at: { gt: lastSubstantive.created_at } } : {}) },
-    });
-    return typeof n === 'number' ? n : 0;
-  } catch {
-    return 0;
-  }
 }
 
 function refusalResult(err: Refusal): RecordDispositionResult {

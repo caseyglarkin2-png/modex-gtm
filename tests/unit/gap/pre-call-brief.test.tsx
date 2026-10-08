@@ -161,3 +161,38 @@ describe('ops closeout 17: quantify only after the buyer acknowledges the proble
     expect(screen.queryByTestId('brief-after-acknowledgement')).toBeNull();
   });
 });
+
+describe('X16c: the timeline section', () => {
+  it('renders the summary line and the entries, oldest last, the unconfirmed ones marked; without a timeline no section', () => {
+    render(
+      <PreCallBrief
+        brief={brief({
+          timeline: {
+            unansweredCalls: 2,
+            callsLeft: 1,
+            entries: [
+              { kind: 'attempt', at: '2026-10-08T15:00:00.000Z', line: 'Dial link opened (self-reported; no outcome recorded)', confirmed: true },
+              { kind: 'disposition', at: '2026-10-06T15:00:00.000Z', line: 'Call: voicemail', confirmed: true },
+              { kind: 'disposition', at: '2026-10-01T15:00:00.000Z', line: 'Call: no answer', confirmed: false },
+            ],
+          },
+        })}
+      />,
+    );
+    const section = screen.getByTestId('brief-timeline');
+    expect(within(section).getByText(BRIEF_LABELS.timeline)).toBeTruthy();
+    expect(within(section).getByText('2 unanswered calls since their last answer; 1 more before the hold.')).toBeTruthy();
+    const items = within(section).getAllByRole('listitem');
+    expect(items).toHaveLength(3);
+    expect(items[0].textContent).toContain('Dial link opened');
+    expect(items[2].textContent).toContain('unconfirmed');
+    expect(items[1].textContent).not.toContain('unconfirmed');
+  });
+
+  it('no section without a timeline; the held wording at the cap', () => {
+    render(<PreCallBrief brief={brief()} />);
+    expect(screen.queryByTestId('brief-timeline')).toBeNull();
+    render(<PreCallBrief brief={brief({ timeline: { unansweredCalls: 3, callsLeft: 0, entries: [] } })} />);
+    expect(screen.getByText('3 unanswered calls since their last answer; the person is held, no cold call.')).toBeTruthy();
+  });
+});
