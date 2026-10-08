@@ -19,6 +19,7 @@ const FLAG_NAMES = [
   'GAP_HUBSPOT_MIRROR_ENABLED',
   'GAP_CRM_APPROVED_WRITES_ENABLED',
   'GAP_BACKGROUND_RESEARCH_ENABLED',
+  'GAP_ROUTING_CRON_ENABLED',
 ] as const;
 
 let savedEnv: NodeJS.ProcessEnv;
@@ -41,12 +42,12 @@ afterEach(() => {
 
 describe('GAP_FLAGS', () => {
   it('has exactly eleven entries in the documented order (batch item 9 added GAP_CRM_APPROVED_WRITES_ENABLED)', () => {
-    expect(GAP_FLAGS).toHaveLength(11);
+    expect(GAP_FLAGS).toHaveLength(12);
     expect([...GAP_FLAGS]).toEqual([...FLAG_NAMES]);
   });
 
   it('lists GAP_BACKGROUND_RESEARCH_ENABLED last (Phase 2 B1)', () => {
-    expect(GAP_FLAGS[GAP_FLAGS.length - 1]).toBe('GAP_BACKGROUND_RESEARCH_ENABLED');
+    expect(GAP_FLAGS[GAP_FLAGS.length - 1]).toBe('GAP_ROUTING_CRON_ENABLED');
   });
 });
 
