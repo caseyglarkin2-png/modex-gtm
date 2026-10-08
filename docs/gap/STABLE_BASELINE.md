@@ -4,6 +4,11 @@ STATUS: ACTIVE. GAP V2 is STRUCTURALLY COMPLETE (2026-10-03). The 2026-10-06 EXE
 mandate; amendments below; ledger in `docs/GAP_PROSPECTING_OS.md`) is the deliberate next-version decision: the rule below
 applies to everything outside it. No V2.1: future changes come from real selling evidence, repeated Casey feedback, production defects, or an
 explicit new-version decision. The 2026-10-04 operator-first WHO correction (below) is seller evidence (rule 3), not V3.
+The 2026-10-08 SALES EXECUTION ENGINE program (Casey's final product mandate, `docs/gap/EXECUTION_ENGINE_MANDATE_2026-10-08.md`;
+ledger section "GAP OS SALES EXECUTION ENGINE" in `docs/GAP_PROSPECTING_OS.md`) is the current deliberate next-version decision
+(rule 4). It amends nothing here: an actual send stays CONFIRM + SEND in the app (an email APPROVE creates the Gmail draft only);
+internal briefing and assignment mail to Casey is allowed; a routing run on a schedule is internal preparation under amendment 1.
+<!-- verified:2026-10-08 -->
 <!-- verified:2026-10-05 -->
 <!-- verified:2026-10-02 (V2) -->
 
