@@ -398,7 +398,7 @@ function betweenUs(i: StoryInput): StoryRow {
     const other = beyondTouches(i);
     if (other.length) return row('between_us', other);
     return i.clawdRead === 'ok'
-      ? row('between_us', [{ text: 'No touch on record between us.', tag: 'Checked', basis: 'GAP, clawd and the account history: nothing found', basisIds: [] }])
+      ? row('between_us', [{ text: 'No touch on record between us.', tag: 'Checked', basis: 'GAP, the outreach log and the account history: nothing found', basisIds: [] }])
       : row('between_us', [{ text: i.clawdRead === 'not_configured' ? "No touch in GAP's own records; clawd's send history is not connected here." : "No touch in GAP's own records; clawd's send history could not be read.", tag: 'Unknown', basis: 'GAP and the account history only', basisIds: [] }]);
   }
   const s: StorySentence[] = [];

@@ -74,7 +74,8 @@ export default async function CapturePage({ searchParams }: { searchParams?: Pro
               <li key={r.id} className="flex flex-wrap items-center gap-2">
                 <span className={r.accountName ? '' : 'font-medium text-amber-700 dark:text-amber-400'}>{r.accountName ?? `Unlinked${r.accountHint ? ` ("${r.accountHint}")` : ''}`}</span>
                 <span className="text-xs text-[var(--muted-foreground)]">
-                  {r.context} · {r.createdAt.slice(0, 10)} · {r.pending} candidate{r.pending === 1 ? '' : 's'} waiting
+                  {/* R63-A N1/N4: words and a readable date ("email · 2026-10-07 · 0 candidates waiting" was ours). */}
+                  {r.context.charAt(0).toUpperCase() + r.context.slice(1).replace(/_/g, ' ')} · {new Date(r.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' })} · {r.pending ? `${r.pending} ${r.pending === 1 ? 'statement' : 'statements'} to confirm` : 'nothing left to confirm'}
                 </span>
                 <Link href={`/gap/capture/${encodeURIComponent(r.id)}`} className="text-xs underline">
                   open

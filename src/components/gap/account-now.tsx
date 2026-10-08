@@ -321,7 +321,8 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, 
         ) : null}
 
         {v.wedge ? (
-          <Slot label="Wedge" testId="now-wedge">
+          <Slot label="What to lead with" testId="now-wedge">
+            {/* R63-A N1: "Wedge" was our word; the seller reads what to lead with. */}
             <p className="text-sm">{v.wedge}</p>
           </Slot>
         ) : null}

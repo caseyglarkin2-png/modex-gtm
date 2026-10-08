@@ -43,6 +43,12 @@ const OUTCOMES = [
 ] as const;
 
 const words = (s: string) => s.replace(/_/g, ' ');
+/** R63-A N1: a thesis choice in words ("Hidden capacity (approved, not in use)", never "hidden capacity (approved)"). */
+const THESIS_STATUS: Record<string, string> = { approved: 'approved, not in use', active: 'in use', draft: 'draft', review_required: 'waiting for review', confirmed: 'confirmed', partially_confirmed: 'partly confirmed' };
+export const thesisOption = (h: { problem_family: string; status: string }) => {
+  const family = words(h.problem_family);
+  return `${family.charAt(0).toUpperCase()}${family.slice(1)} (${THESIS_STATUS[h.status] ?? words(h.status)})`;
+};
 const SOURCE_TEXT: Record<string, string> = { work: 'a Work card', reply: 'a reply', commitment: 'an obligation', account: 'the account page', meeting: 'a meeting' };
 const input = 'w-full rounded-md border border-[var(--border)] bg-transparent px-3 py-2 text-base';
 const btn = 'rounded-md border border-[var(--border)] px-3 py-2 text-sm disabled:opacity-60';
@@ -266,7 +272,7 @@ function NoteReview({ capture, onChange, announce = () => {} }: { capture: Captu
                 <option value="">{ctx.hypotheses.length === 0 ? 'No current thesis at this account' : 'Choose the thesis'}</option>
                 {ctx.hypotheses.map((h) => (
                   <option key={h.id} value={h.id}>
-                    {words(h.problem_family)} ({h.status})
+                    {thesisOption(h)}
                   </option>
                 ))}
               </select>
@@ -480,7 +486,7 @@ function MeetingOutcomeForm({ capture, onChange }: { capture: CaptureView; onCha
         <option value="">Choose the thesis this meeting tested</option>
         {(ctx?.hypotheses ?? []).map((h) => (
           <option key={h.id} value={h.id}>
-            {words(h.problem_family)} ({h.status})
+            {thesisOption(h)}
           </option>
         ))}
       </select>
