@@ -153,11 +153,11 @@ export function itemsForDay(day: WorkDay, nyDate: string, opts: { decisionIds?: 
     const obligations = c.obligations ?? [];
     // The card's own move first when the tier is its own; the obligations in their order (R41: each its own row).
     if (own && (obligations.length === 0 || !obligations.some((o) => o.tier === tier))) {
-      push({ key: own.key, accountName: c.accountName, kind: tier, stateKind: c.stateKind, title: c.state, why: c.rankWhy ?? c.why, href: c.next?.href ?? c.href, person: c.person, refs: own.refs });
+      push({ key: own.key, accountName: c.accountName, kind: tier, stateKind: c.stateKind, title: c.move ?? c.state, why: c.rankWhy ?? c.why, href: c.next?.href ?? c.href, person: c.person, refs: own.refs });
     }
     for (const o of obligations) push(obligationItem(c, o));
     if (own && obligations.length > 0 && obligations.some((o) => o.tier === tier) && !seen.has(own.key)) {
-      push({ key: own.key, accountName: c.accountName, kind: tier, stateKind: c.stateKind, title: c.state, why: c.rankWhy ?? c.why, href: c.next?.href ?? c.href, person: c.person, refs: own.refs });
+      push({ key: own.key, accountName: c.accountName, kind: tier, stateKind: c.stateKind, title: c.move ?? c.state, why: c.rankWhy ?? c.why, href: c.next?.href ?? c.href, person: c.person, refs: own.refs });
     }
   }
   return out;

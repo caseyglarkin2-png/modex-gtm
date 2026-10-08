@@ -149,3 +149,14 @@ describe('X04: planDay, loadDayPlan, findPlanItemByToken', () => {
     expect(await findPlanItemByToken(db.client(), token, { now: new Date('2026-10-20T12:00:00Z') })).toBeNull();
   });
 });
+
+describe('X17: a deal with a next step is a plan item titled with the step', () => {
+  it('the item carries the day, the step as its title, the brief as its link; a held deal card is no item', () => {
+    const items = itemsForDay(day([
+      card({ accountName: 'Kroger', stateKind: 'in_deal', tier: 'deal', state: 'In a deal', move: 'Next step on the deal: Send the pilot scope to Ann by Friday', dealNextStep: 'Send the pilot scope to Ann by Friday', rankWhy: "The deal's next step: Send the pilot scope to Ann by Friday", next: { label: 'Next step: Send the pilot scope to Ann by Friday', href: '/gap/accounts/kroger?view=brief' } }),
+      card({ accountName: 'GXO', stateKind: 'in_deal', tier: 'held', state: 'In a deal' }),
+    ]), '2026-10-08');
+    expect(items.map((i) => i.key)).toEqual(['deal:Kroger:2026-10-08']);
+    expect(items[0]).toMatchObject({ kind: 'deal', title: 'Next step on the deal: Send the pilot scope to Ann by Friday', why: "The deal's next step: Send the pilot scope to Ann by Friday", href: '/gap/accounts/kroger?view=brief' });
+  });
+});

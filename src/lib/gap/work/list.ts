@@ -145,6 +145,8 @@ export interface WorkCard {
   answerOwed?: boolean;
   /** X15c: the next step HubSpot carries on the deal (hs_next_step), when one is set: the card leads with it. */
   dealNextStep?: string | null;
+  /** X17: the card's own move in words, when it is not its state (a deal's next step): the plan item's title. */
+  move?: string;
 }
 
 export interface WorkInput {
@@ -491,8 +493,10 @@ export function workDay(i: WorkInput): WorkDay {
     const stalled = a.deals.flatMap((d) => stalledSignals({ now: i.now, deal: { name: d.name, lastActivityAt: d.lastActivityAt ?? null, closeDate: d.closeDate ?? null }, commitments: (i.commitments ?? []).filter((c) => c.accountName === name && !!d.id && c.dealId === d.id) }).map((s) => (a.deals.length > 1 ? `${d.name ?? 'A deal'}: ${s}` : s)));
     // X15c: the buyer's next step (HubSpot hs_next_step) leads the card when one is set; the hygiene line comes second.
     const dealNextStep = a.deals.map((d) => (typeof d.nextStep === 'string' ? d.nextStep.trim() : '')).find(Boolean) ?? null;
+    // X17: the step as a phrase (no trailing period, bounded) for the action label and the plan item's title.
+    const clipStep = (s: string) => { const t = s.replace(/\.$/, '').trim(); return t.length > 90 ? `${t.slice(0, 89)}…` : t; };
     const dealsLine = `Open HubSpot ${a.deals.length === 1 ? 'deal' : 'deals'}: ${stages}.`;
-    offer({ rank: LANE_RANK.deals, sortKey: [name], card: { accountName: name, lane: 'deals', stateKind: 'in_deal', state: STATE_TEXT.in_deal, why: dealNextStep ? `Next step on the deal: ${dealNextStep.replace(/\.$/, '')}. ${dealsLine}` : dealsLine, person: null, next: { label: 'Open the deal brief', href: `${accountHref(name)}?view=brief` }, blocker: 'No cold first touch while the deal is open: work it from the deal.', ...(stalled.length ? { stalled } : {}), ...(dealNextStep ? { dealNextStep } : {}) } });
+    offer({ rank: LANE_RANK.deals, sortKey: [name], card: { accountName: name, lane: 'deals', stateKind: 'in_deal', state: STATE_TEXT.in_deal, why: dealNextStep ? `Next step on the deal: ${dealNextStep.replace(/\.$/, '')}. ${dealsLine}` : dealsLine, person: null, next: dealNextStep ? { label: `Next step: ${clipStep(dealNextStep)}`, href: `${accountHref(name)}?view=brief` } : { label: 'Open the deal brief', href: `${accountHref(name)}?view=brief` }, blocker: 'No cold first touch while the deal is open: work it from the deal.', ...(stalled.length ? { stalled } : {}), ...(dealNextStep ? { dealNextStep, move: `Next step on the deal: ${clipStep(dealNextStep)}` } : {}) } });
   }
   for (const [name, why] of i.held) {
     if (dealAccounts.has(name)) continue;
@@ -713,7 +717,7 @@ export function workDay(i: WorkInput): WorkDay {
     // X15a: an untriaged reply older than the triage window ranks as admin (never hidden); an owed answer keeps the reply tier.
     const replyAgeDays = r.card.stateKind === 'replied' && !r.card.answerOwed && r.card.reply?.at ? Math.floor((i.now.getTime() - new Date(r.card.reply.at).getTime()) / 86_400_000) : null;
     const oldReply = replyAgeDays !== null && replyAgeDays > REPLY_TRIAGE_DAYS;
-    const own: WorkTier = later.has(name) && r.card.stateKind !== 'replied' && r.card.stateKind !== 'opted_out' ? 'later' : oldReply ? 'admin' : r.card.stalled?.length && r.card.stateKind === 'in_deal' ? 'deal' : STATE_TIER[r.card.stateKind];
+    const own: WorkTier = later.has(name) && r.card.stateKind !== 'replied' && r.card.stateKind !== 'opted_out' ? 'later' : oldReply ? 'admin' : (r.card.stalled?.length || r.card.dealNextStep) && r.card.stateKind === 'in_deal' ? 'deal' : STATE_TIER[r.card.stateKind];
     const fromObligation = list.filter((o) => o.tier !== 'later').sort((a, b) => TIER_RANK[a.tier] - TIER_RANK[b.tier])[0];
     const tier: WorkTier = fromObligation && TIER_RANK[fromObligation.tier] < TIER_RANK[own] ? fromObligation.tier : own;
     const lane: WorkLane = tier !== own ? TIER_LANE[tier] ?? r.card.lane : r.card.lane;
