@@ -52,7 +52,8 @@ function who(it: PlanItem): string | null {
 
 /** One item line: "1. Boston Beer: Someone replied. Phil Savastano (VP Operations). Phil Savastano wrote Oct 8." */
 export function itemLine(it: PlanItem, n: number): string {
-  const parts = [endSentence(it.title), who(it) ? endSentence(who(it) as string) : null, it.why ? endSentence(it.why) : null].filter((x): x is string => !!x);
+  // X18: carried work says the day it came from.
+  const parts = [endSentence(it.title), who(it) ? endSentence(who(it) as string) : null, it.why ? endSentence(it.why) : null, it.carriedFrom ? `Carried from ${dayLabel(it.carriedFrom)}.` : null].filter((x): x is string => !!x);
   return `${n}. ${it.accountName}: ${parts.join(' ')}`;
 }
 
@@ -80,6 +81,16 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
       html.push(`<li>${esc(itemLine(it, i + 1).replace(/^\d+\. /, ''))} <a href="${esc(links.item(it))}">Open</a></li>`);
     });
     html.push('</ol>');
+  }
+  // X18: the carried work, counted by the day it came from.
+  const carried = plan.items.filter((it) => it.carriedFrom);
+  if (carried.length) {
+    const byDay = new Map<string, number>();
+    for (const it of carried) byDay.set(it.carriedFrom as string, (byDay.get(it.carriedFrom as string) ?? 0) + 1);
+    const words = (k: number) => (k === 1 ? 'one' : String(k));
+    const line = `Carried over: ${carried.length} of ${n} (${[...byDay.entries()].sort((a, b) => (a[0] < b[0] ? 1 : -1)).map(([d, k]) => `${words(k)} from ${dayLabel(d)}`).join(', ')}).`;
+    lines.push('', line);
+    html.push(`<p>${esc(line)}</p>`);
   }
   const counts = `Waiting on them: ${c.waiting}. Parked (research, holds, set aside): ${c.parked}. Snoozed: ${c.snoozed}.`;
   lines.push('', counts, `Everything, with what is waiting and parked: ${links.work}`);

@@ -30,6 +30,8 @@ export const MORE_TABS = [
   { label: 'Learning', href: '/gap/learning' },
   { label: 'Coverage', href: '/gap/coverage' },
   { label: 'Notes', href: '/gap/feedback' },
+  // X20b: what I intended, what was completed, what needs attention, what the agents are handling.
+  { label: 'Activity', href: '/gap/activity' },
   // X13: the briefing, the command senders, the mode and the daily targets.
   { label: 'Settings', href: '/gap/settings' },
 ] as const;

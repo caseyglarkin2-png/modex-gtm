@@ -53,3 +53,28 @@ describe('X15c: a deal card leads with the next step HubSpot carries', () => {
     expect(gxo.rankWhy).toMatch(/^A stalled deal:/);
   });
 });
+
+describe('X17: the deal next step is deal work, on NOW', () => {
+  it('an in-deal card with a next step needs you (tier deal, never held), its move names the step and its action is the step; without a step and not stalled it stays held', () => {
+    const inDeals: WorkInput['inDeals'] = {
+      status: 'complete',
+      accounts: [
+        { accountName: 'Kroger', deals: [{ id: '1', name: 'YardFlow - Kroger', stage: 'Appointment scheduled', lastActivityAt: '2026-10-07T00:00:00Z', closeDate: '2026-12-30', nextStep: 'Send the pilot scope to Ann by Friday.' }] },
+        { accountName: 'GXO', deals: [{ id: '2', name: 'GXO - Enterprise', stage: 'Qualified to buy', lastActivityAt: '2026-10-07T00:00:00Z', closeDate: '2026-12-30', nextStep: null }] },
+      ],
+    };
+    const day = workDay({ ...base, inDeals, replies: [] } as WorkInput);
+    const kroger = day.cards.find((c) => c.accountName === 'Kroger')!;
+    const gxo = day.cards.find((c) => c.accountName === 'GXO')!;
+    expect(kroger.tier).toBe('deal');
+    expect(kroger.stalled ?? []).toEqual([]);
+    expect(kroger.move).toBe('Next step on the deal: Send the pilot scope to Ann by Friday');
+    expect(kroger.next).toEqual({ label: 'Next step: Send the pilot scope to Ann by Friday', href: expect.stringContaining('?view=brief') });
+    expect(kroger.rankWhy).toMatch(/^The deal's next step: Send the pilot scope to Ann by Friday/);
+    expect(kroger.rankWhy).not.toMatch(/stalled/i);
+    expect(gxo.tier).toBe('held');
+    expect(gxo.move).toBeUndefined();
+    expect(day.counts.needsYou).toBe(1);
+    expect(day.cards.indexOf(kroger)).toBeLessThan(day.cards.indexOf(gxo));
+  });
+});

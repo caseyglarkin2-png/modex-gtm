@@ -99,3 +99,15 @@ describe('X05a: renderBriefing (pure)', () => {
     expect(empty.text).toContain('The HubSpot pipeline digest still arrives separately');
   });
 });
+
+describe('X18: the briefing says what carried over', () => {
+  it('a carried item says the day it came from and the body counts the carried work; nothing carried, no such line', () => {
+    const plan: DayPlan = { ...PLAN, items: [PLAN.items[0], { ...PLAN.items[1], carriedFrom: '2026-10-07' }, { ...PLAN.items[2], carriedFrom: '2026-10-06' }] };
+    const out = renderBriefing({ plan, dayToken: 'tok', links: { start: 'https://x/start', work: 'https://x/work', item: (it) => `https://x/item/${it.token}` }, commandsEnabled: false, legacyDigest: false }, NOW);
+    expect(out.text).toContain('2. Kroger: Send the dock comparison. Joey Maggard. Due today. Carried from Wed Oct 7.');
+    expect(out.text).toContain('Carried over: 2 of 3 (one from Wed Oct 7, one from Tue Oct 6).');
+    expect(out.html).toContain('Carried from Wed Oct 7.');
+    const none = renderBriefing({ plan: PLAN, dayToken: 'tok', links: { start: 'https://x/start', work: 'https://x/work', item: (it) => `https://x/item/${it.token}` }, commandsEnabled: false, legacyDigest: false }, NOW);
+    expect(none.text).not.toMatch(/Carried/);
+  });
+});

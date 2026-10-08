@@ -11,7 +11,7 @@
  */
 import { beforeEach, describe, expect, it } from 'vitest';
 import { ledgerDb } from './fixtures/ledger-db';
-import { DAY_PLANNED, decisionIdsFromCandidates, findPlanItemByToken, itemsForDay, loadDayPlan, planDay, type DayPlan } from '@/lib/gap/work/plan';
+import { DAY_PLANNED, decisionIdsFromCandidates, findPlanItemByToken, itemsForDay, loadDayPlan, markCarried, planDay, type DayPlan, type PlanItem } from '@/lib/gap/work/plan';
 import type { WorkCard, WorkDay } from '@/lib/gap/work/list';
 
 const card = (over: Partial<WorkCard> & { accountName: string; stateKind: WorkCard['stateKind']; tier: NonNullable<WorkCard['tier']> }): WorkCard => ({
@@ -147,5 +147,48 @@ describe('X04: planDay, loadDayPlan, findPlanItemByToken', () => {
     expect(found?.item.key).toBe('first_touch:dec-42');
     expect(await findPlanItemByToken(db.client(), 'f'.repeat(32), { now: NOW })).toBeNull();
     expect(await findPlanItemByToken(db.client(), token, { now: new Date('2026-10-20T12:00:00Z') })).toBeNull();
+  });
+});
+
+describe('X17: a deal with a next step is a plan item titled with the step', () => {
+  it('the item carries the day, the step as its title, the brief as its link; a held deal card is no item', () => {
+    const items = itemsForDay(day([
+      card({ accountName: 'Kroger', stateKind: 'in_deal', tier: 'deal', state: 'In a deal', move: 'Next step on the deal: Send the pilot scope to Ann by Friday', dealNextStep: 'Send the pilot scope to Ann by Friday', rankWhy: "The deal's next step: Send the pilot scope to Ann by Friday", next: { label: 'Next step: Send the pilot scope to Ann by Friday', href: '/gap/accounts/kroger?view=brief' } }),
+      card({ accountName: 'GXO', stateKind: 'in_deal', tier: 'held', state: 'In a deal' }),
+    ]), '2026-10-08');
+    expect(items.map((i) => i.key)).toEqual(['deal:Kroger:2026-10-08']);
+    expect(items[0]).toMatchObject({ kind: 'deal', title: 'Next step on the deal: Send the pilot scope to Ann by Friday', why: "The deal's next step: Send the pilot scope to Ann by Friday", href: '/gap/accounts/kroger?view=brief' });
+  });
+});
+
+describe('X18: work carried over is reported', () => {
+  const pi = (over: Partial<PlanItem> & { key: string; accountName: string }): PlanItem => ({ rank: 0, kind: 'follow_up', stateKind: 'follow_up', title: 't', why: 'w', href: '/x', person: null, refs: {}, token: 'f'.repeat(32), ...over });
+  it('markCarried: an object-bound key carries when yesterday held the same object; a day-keyed item carries by account and kind; new work does not; no previous plan carries nothing', () => {
+    const previous: DayPlan = { day: '2026-10-07', plannedAt: '2026-10-07T11:00:00.000Z', fresh: false, counts: { needsYou: 0, parked: 0, obligationsDue: 0, waiting: 0, snoozed: 0 }, items: [pi({ key: 'commitment:c-1', accountName: 'Kroger', kind: 'commitment' }), pi({ key: 'follow_up:Kenco:2026-10-07', accountName: 'Kenco' }), pi({ key: 'reply:msg-1', accountName: 'Dole', kind: 'reply' })] };
+    const today = [pi({ key: 'commitment:c-1', accountName: 'Kroger', kind: 'commitment' }), pi({ key: 'follow_up:Kenco:2026-10-08', accountName: 'Kenco' }), pi({ key: 'reply:msg-2', accountName: 'Dole', kind: 'reply' }), pi({ key: 'deal:Kenco:2026-10-08', accountName: 'Kenco', kind: 'deal' })];
+    const marked = markCarried(today, previous);
+    expect(marked.map((i) => [i.key, i.carriedFrom ?? null])).toEqual([
+      ['commitment:c-1', '2026-10-07'],
+      ['follow_up:Kenco:2026-10-08', '2026-10-07'],
+      ['reply:msg-2', null],
+      ['deal:Kenco:2026-10-08', null],
+    ]);
+    expect(markCarried(today, null).every((i) => i.carriedFrom === undefined)).toBe(true);
+  });
+
+  it('planDay reads the newest earlier plan within the lookback and marks what carried; the first plan ever carries nothing', async () => {
+    const db = ledgerDb({}, new Date('2026-10-07T11:00:00Z'));
+    const kenco = card({ accountName: 'Kenco', stateKind: 'follow_up', tier: 'follow_up', state: 'Follow up due' });
+    const gxo = card({ accountName: 'GXO', stateKind: 'in_deal', tier: 'deal', state: 'In a deal', stalled: ['No activity since Sep 8'] });
+    const dole = card({ accountName: 'Dole', stateKind: 'decide', tier: 'review', state: 'Decide' });
+    const first = await planDay(db.client(), { now: new Date('2026-10-07T11:00:00Z'), load: async () => day([kenco, gxo]) }, 'test');
+    expect(first.items.every((i) => i.carriedFrom === undefined)).toBe(true);
+    const next = await planDay(db.client(), { now: new Date('2026-10-08T11:00:00Z'), load: async () => day([kenco, dole]) }, 'test');
+    expect(next.items.map((i) => [i.key, i.carriedFrom ?? null])).toEqual([
+      ['follow_up:Kenco:2026-10-08', '2026-10-07'],
+      ['review:Dole:2026-10-08', null],
+    ]);
+    // The stored row carries the marks too (the briefing reads the stored plan).
+    expect((await loadDayPlan(db.client(), '2026-10-08'))!.items[0].carriedFrom).toBe('2026-10-07');
   });
 });
