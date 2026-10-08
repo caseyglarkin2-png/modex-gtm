@@ -196,6 +196,11 @@ export async function loadCompletedToday(prisma: PrismaLike, now: Date): Promise
       out.push({ at, accountName: typeof p.accountName === 'string' ? p.accountName : null, line: `Saved a note (${words(p.context)}).` });
     } else if (r.kind === WORK_OUTCOME) {
       const kind = p.kind;
+      // R63-A S11: a meeting marked prepared is a completion.
+      if (kind === 'prepared') {
+        out.push({ at, accountName: r.subject_id, line: `Prepared: ${typeof p.what === 'string' && p.what ? p.what : 'the meeting'}.`, kind: 'done' });
+        continue;
+      }
       const line = kind === 'skipped' ? 'Set aside for today.' : kind === 'snoozed' && typeof p.until === 'string' ? `Snoozed until ${dayLabel(nyDay(p.until), now)}.` : kind === 'logged' ? `Logged outside GAP${p.reason ? ` (${String(p.reason)})` : ''}.` : null;
       // Batch item 8: the seller's own outcomes are set aside, never done (a log outside GAP proves nothing here).
       // R63-B S3: the same outcome twice in a day (written before the store was idempotent) is one line.

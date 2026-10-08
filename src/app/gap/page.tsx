@@ -80,6 +80,7 @@ import { resolveAccountOpportunity } from '@/lib/gap/opportunity/active-opportun
 import { accountsToCheck, loadOpportunityHolds, OPPORTUNITY_HOLD_TIMEOUT_MS } from '@/lib/gap/work/opportunity-holds';
 import { loadAccountConversations } from '@/lib/gap/motion/load';
 import { loadAnswersOwed } from '@/lib/gap/work/recorded-replies';
+import { loadPreparedMeetings } from '@/lib/gap/work/outcome';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'GAP' };
@@ -427,7 +428,7 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
   // R41: the obligations (after the bounded follow-up sweep), the next day's meetings and the seller's priorities are
   // read on every render, never cached with the lanes, so a write shows on the next load.
   // R60 capture once: which remembered replies were recorded since the read (one live read, in this same wave).
-  const [summariesRead, outcomes, commitments, meetingRowsRaw, recordedReplies, answersOwed] = await Promise.all([
+  const [summariesRead, outcomes, commitments, meetingRowsRaw, recordedReplies, answersOwed, preparedMeetings] = await Promise.all([
     // R63-A B3: the preview starts from what the workspace says NOW (a summary read at tomorrow's time aged out and the
     // preview fell back to cards that knew nothing of a reply, a do not contact or a hold).
     loadPursuitSummaries(prisma, data.workAccounts, realNow),
@@ -439,6 +440,8 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
     loadRecordedReplyIds(prisma, data.workInput.replies.map((r) => r.id ?? '')).catch(() => new Set<string>()),
     // R63-A S4: the recorded replies still owed an answer (never forgotten the moment they are recorded).
     lane ? Promise.resolve([]) : loadAnswersOwed(prisma, realNow).catch(() => []),
+    // R63-A S11: the meetings marked prepared (they leave what needs you).
+    loadPreparedMeetings(prisma, data.workAccounts, realNow).catch(() => new Set<string>()),
   ]);
   // R63-A S1: the list is complete when the reply read had no further page (then a remembered "replied" with no reply
   // waiting is stale, recorded since).
@@ -463,7 +466,7 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
     loadMeetingStartingPoints(prisma, meetingRows.filter((m) => new Date(m.at).getTime() <= now.getTime() + 24 * 3_600_000), commitments, now).catch(() => new Map()),
     closureAccounts.length ? loadRecordedClosures(prisma, closureAccounts).catch(() => new Map()) : Promise.resolve(new Map()),
   ]);
-  const day = workDay({ ...data.workInput, replies: live.replies, now, summaries, outcomes, commitments, meetings, canceledMeetings, meetingPreps, priorities, followUpPlans, closedDeals });
+  const day = workDay({ ...data.workInput, replies: live.replies, now, summaries, outcomes, commitments, meetings, canceledMeetings, meetingPreps, priorities, followUpPlans, closedDeals, preparedMeetings });
   const work: WorkCard[] = day.cards;
   // R45: close the day and keep tomorrow, derived from actual state (no new storage).
   const doneToday = lane || preview ? [] : await loadCompletedToday(prisma, now).catch(() => []);
@@ -493,7 +496,7 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
       <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'GAP' }]} />
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">GAP</h1>
-        <p className="mt-1 text-sm text-[var(--muted-foreground)]" data-testid="work-subtitle">{lane ? 'An analyst view: every account in one list. Work holds your day.' : 'The accounts that need you today, in order. Open one, do the move, record it, then go to the next.'}</p>
+        <p className="mt-1 text-sm text-[var(--muted-foreground)]" data-testid="work-subtitle">{lane ? 'An analyst view: every account in one list. Work holds your day.' : preview ? 'The accounts that will need you tomorrow, in order: a preview.' : 'The accounts that need you today, in order. Open one, do the move, record it, then go to the next.'}</p>
       </div>
       <GapSubnav />
       {/* Phase 2 A3: can the cockpit be trusted right now (mailbox, HubSpot, suppression, sender, routing). */}
@@ -539,7 +542,7 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
           <WorkToday today={today} preview={preview} />
           {!preview ? <Link href="/gap?day=tomorrow" className="inline-flex min-h-11 items-center text-xs underline" data-testid="work-tomorrow-link">See tomorrow</Link> : null}
           {/* R45: Work is the one list. The legacy NEXT UP fallback no longer competes with it when it is empty. */}
-          <WorkList cards={work} snoozed={day.snoozed} waiting={day.waiting} counts={day.counts} focus={/^[a-z0-9-]{1,120}$/.test(params.focus ?? '') ? (params.focus as string) : null} listenText={todayListenText(work)} readAt={{ at: read.at, label: read.fromCache ? `Read ${readAgo(read.at, realNow)}` : 'Read just now' }} />
+          <WorkList when={preview ? 'tomorrow' : 'today'} cards={work} snoozed={day.snoozed} waiting={day.waiting} counts={day.counts} focus={/^[a-z0-9-]{1,120}$/.test(params.focus ?? '') ? (params.focus as string) : null} listenText={todayListenText(work)} readAt={{ at: read.at, label: read.fromCache ? `Read ${readAgo(read.at, realNow)}` : 'Read just now' }} />
         </>
       )}
 

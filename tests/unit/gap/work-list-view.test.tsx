@@ -73,14 +73,15 @@ describe('<WorkList>', () => {
   });
   it('says plainly when nothing needs the seller', () => {
     render(<WorkList cards={[]} />);
-    expect(screen.getByTestId('work-empty')).toHaveTextContent('Nothing needs you right now.');
+    // R63-A S11: the day can finish: a plain done state.
+    expect(screen.getByTestId('work-empty')).toHaveTextContent('Done for today: nothing needs you.');
   });
   // Batch item 8: research and holds are parked: listed under their own heading, never counted as "needs you".
   it('only research and holds: "Nothing needs you", the parked cards listed apart under their heading, the count its contents', () => {
     const parked = [card(0, 'Tyson', 'research', 'research', { tier: 'research' }), card(1, 'Kroger', 'deals', 'in_deal', { tier: 'held', next: null })];
     render(<WorkList cards={parked} />);
-    expect(screen.getByTestId('work-needs-you')).toHaveTextContent('Nothing needs you today. 2 accounts are parked: research, holds or set aside.');
-    expect(screen.getByTestId('work-empty')).toHaveTextContent('Nothing needs you right now.');
+    expect(screen.getByTestId('work-needs-you')).toHaveTextContent('Done for today: nothing needs you. 2 accounts are parked: research, holds or set aside.');
+    expect(screen.getByTestId('work-empty')).toHaveTextContent('Done for today: nothing needs you. The parked accounts are below.');
     expect(screen.queryByTestId('work-cards')).toBeNull();
     expect(screen.getByTestId('work-parked-heading')).toHaveTextContent('Parked (2): research, holds and set aside. Nothing here needs you today.');
     expect([...screen.getByTestId('work-parked-cards').querySelectorAll('[data-testid="work-card"]')].map((r) => r.getAttribute('data-account'))).toEqual(['Tyson', 'Kroger']);

@@ -39,6 +39,33 @@ const STATE_TONE: Record<WorkCard['stateKind'], string> = {
   meeting: 'text-[var(--primary)]',
 };
 
+/** R63-A S11: a meeting to prepare can be marked prepared (recorded with the outcomes); it then leaves what needs you. */
+function MeetingPrepared({ accountName, meetingKey, at, what }: { accountName: string; meetingKey: string; at: string; what: string }) {
+  const router = useRouter();
+  const [busy, setBusy] = useState(false);
+  const [status, setStatus] = useState<string | null>(null);
+  async function mark() {
+    setBusy(true);
+    setStatus(null);
+    const r = await post('/api/gap/accounts/outcome', { accountName, kind: 'prepared', meeting: { key: meetingKey, at, what } });
+    setBusy(false);
+    if (!r.ok) {
+      setStatus(`Not recorded: ${REFUSAL_TEXT[r.error ?? ''] ?? r.error}.`);
+      return;
+    }
+    setStatus('Recorded: prepared. It is listed under Done today.');
+    refreshNow(router);
+  }
+  return (
+    <>
+      <button type="button" className={SMALL} disabled={busy} onClick={() => void mark()} data-testid="meeting-prepared">
+        {busy ? 'Recording...' : 'Prepared'}
+      </button>
+      {status ? <span role="status" className="text-xs">{status}</span> : null}
+    </>
+  );
+}
+
 function isFilter(v: string | null): v is WorkFilter {
   return !!v && (WORK_FILTERS as readonly string[]).includes(v);
 }
@@ -91,7 +118,10 @@ export function WorkList({
   snoozed = [],
   waiting = [],
   counts = null,
+  when = 'today',
 }: {
+  /** R63-A S11: the day the list is for (the tomorrow preview speaks of tomorrow). */
+  when?: 'today' | 'tomorrow';
   cards: WorkCard[];
   /** The account (slug) to focus on arrival (Back to Work). */ focus?: string | null;
   /** UX-11: the spoken brief for today (lib/gap/voice/today.ts), played on a press only. */ listenText?: string | null;
@@ -113,7 +143,8 @@ export function WorkList({
   const shownParked = shown.filter((c) => !needsYouCard(c));
   const needCount = cards.filter(needsYouCard).length;
   const parkedCount = cards.length - needCount;
-  const NOTHING = 'Nothing needs you right now. Replies, follow ups, ready accounts and new angles show up here.';
+  // R63-A S11: a plain done state when nothing needs the seller (the day can finish).
+  const NOTHING = when === 'tomorrow' ? 'Nothing will need you tomorrow.' : `Done for today: nothing needs you.${cards.length ? ' The parked accounts are below.' : ' Replies, follow ups, ready accounts and new angles show up here.'}`;
   const emptyText = shown.length === 0 ? (cards.length === 0 ? NOTHING : 'No account matches this filter.') : shownNeeds.length === 0 && filter === 'all' && !query.trim() ? NOTHING : null;
   useEffect(() => {
     saveWorkOrder({ at: new Date().toISOString(), filter, q: query, accounts: shown.map((c) => ({ name: c.accountName, slug: accountSlug(c.accountName) })) });
@@ -144,7 +175,7 @@ export function WorkList({
           {listenText ? <VoicePreviewButton text={listenText} label="Listen to today" className="min-h-11 px-4" /> : null}
         </div>
         <p className="text-xs text-[var(--muted-foreground)]" data-testid="work-needs-you">
-          {needCount === 0 ? 'Nothing needs you today.' : `${needCount === 1 ? '1 account needs you' : `${needCount} accounts need you`} today, in order${due ? `; ${due} ${due === 1 ? 'obligation' : 'obligations'} due on them` : ''}.`}
+          {needCount === 0 ? (when === 'tomorrow' ? 'Nothing will need you tomorrow.' : 'Done for today: nothing needs you.') : `${needCount === 1 ? (when === 'tomorrow' ? '1 account will need you' : '1 account needs you') : when === 'tomorrow' ? `${needCount} accounts will need you` : `${needCount} accounts need you`} ${when}, in order${due ? `; ${due} ${due === 1 ? 'obligation' : 'obligations'} due on them` : ''}.`}
           {parkedCount ? ` ${parkedCount} ${needCount ? 'more ' : ''}${parkedCount === 1 ? 'account is' : 'accounts are'} parked: research, holds or set aside.` : ''} Counts are what the list holds.
           {readAt ? (
             <>
@@ -239,6 +270,7 @@ export function WorkList({
                       {o.prep ? <p className="text-xs" data-testid="work-obligation-prep">Prepared: {o.prep}</p> : null}
                       <div className="flex flex-wrap items-center gap-2">
                         {o.href && o.label ? <Link href={withWorkContext(o.href, c.accountName, c.index)} className="inline-flex min-h-11 items-center text-xs underline sm:min-h-9" data-testid="obligation-open">{o.label}</Link> : null}
+                        {o.kind === 'meeting' && o.meeting && when === 'today' ? <MeetingPrepared accountName={c.accountName} meetingKey={o.key} at={o.meeting.at} what={o.meeting.what} /> : null}
                       </div>
                       {o.skippedAtClosure?.length ? <SkippedAtClosure items={o.skippedAtClosure} /> : null}
                       <ObligationActions commitmentId={o.commitmentId} proofNeeded={o.proofNeeded ?? null} />

@@ -21,9 +21,11 @@ export const dynamic = 'force-dynamic';
 const Body = z
   .object({
     accountName: z.string().trim().min(1).max(200),
-    kind: z.enum(['skipped', 'snoozed', 'logged', 'clear']),
+    kind: z.enum(['skipped', 'snoozed', 'logged', 'clear', 'prepared']),
     reason: z.string().trim().max(OUTCOME_REASON_MAX).nullable().optional(),
     until: z.string().trim().max(40).nullable().optional(),
+    // R63-A S11: the meeting marked prepared.
+    meeting: z.object({ key: z.string().trim().min(1).max(200), at: z.string().trim().max(40), what: z.string().trim().max(200).nullable().optional() }).strict().nullable().optional(),
   })
   .strict();
 

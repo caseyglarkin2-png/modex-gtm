@@ -81,6 +81,8 @@ export interface WorkObligation {
   scope?: string | null;
   /** R51: the meeting's prepared starting point (objective and the first open question), when one was prepared. */
   prep?: string | null;
+  /** R63-A S11: the meeting itself, so the card can mark it prepared. */
+  meeting?: { at: string; what: string } | null;
   /** Batch item 8: what proves it done (a plan milestone's own proof), asked when the seller marks it done. */
   proofNeeded?: string | null;
   /** Sprint 5 review (R55): on a reopened deal's next step, what its closure skipped (each restorable). */
@@ -183,6 +185,8 @@ export interface WorkInput {
   canceledMeetings?: ReadonlyArray<{ accountName: string; at: string; what: string; meetingId: number; dealId?: string | null }>;
   /** R51: each meeting's prepared starting point and where its preparation lives, by meeting id. */
   meetingPreps?: ReadonlyMap<number, { prep: string; href: string }>;
+  /** R63-A S11: the meetings marked prepared (their key on Work); they no longer need the seller. */
+  preparedMeetings?: ReadonlySet<string>;
   /** R41: the seller's explicit priority per account (work/priority.ts). */
   priorities?: ReadonlyMap<string, { reason: string; by: string; at: string }>;
   /** R43: the plan for each follow-up due today, by commitment id (execution/follow-up-plan.ts). */
@@ -322,6 +326,11 @@ function obligationAction(c: Commitment): { href: string; label: string } {
 }
 
 /** Build the day: the cards (needs you), the waiting footer and the snoozed footer, every count their contents. */
+/** R63-A S11: a meeting's key on Work (its record's id when it has one, else its account and time). */
+export function meetingKeyOf(m: { accountName: string; at: string; meetingId?: number | null }): string {
+  return m.meetingId != null ? `meeting:${m.meetingId}` : `meeting:${m.accountName}:${m.at}`;
+}
+
 /** R63-A B3: the answers that stop outreach at the account (motion/approach.ts STOP_CLASSES, read the same way). */
 const CONVERSATION_STOPS: ReadonlySet<string> = new Set(['do_not_contact', 'meeting_declined', 'problem_rejected', 'not_priority']);
 
@@ -639,10 +648,12 @@ export function workDay(i: WorkInput): WorkDay {
   for (const m of i.meetings ?? []) {
     const at = new Date(m.at).getTime();
     if (!(at >= i.now.getTime() - 30 * 60_000 && at <= horizon)) continue;
+    // R63-A S11: a meeting the seller marked prepared is done for today (it is listed under Done, not as work).
+    if (i.preparedMeetings?.has(meetingKeyOf(m))) continue;
     const list = obligations.get(m.accountName) ?? [];
     // R51: the prepared starting point rides on the card; the full preparation is on the account's deal brief.
     const prep = m.meetingId != null ? i.meetingPreps?.get(m.meetingId) ?? null : null;
-    list.push({ key: `meeting:${m.accountName}:${m.at}`, commitmentId: null, kind: 'meeting', tier: 'meeting', title: `Meeting ${dayLabel(nyDay(m.at), i.now)} ${time(m.at)}: ${m.what}`, line: 'Prepare it: within 24 hours.', dueAt: m.at, dueDay: nyDay(m.at), person: null, basis: null, href: prep?.href ?? (m.personaId ? `/gap/call/${m.personaId}` : `${accountHref(m.accountName)}?view=brief`), label: 'Prepare the meeting', canComplete: false, prep: prep?.prep ?? null, scope: dealLabel(m.accountName, m.dealId ?? null) });
+    list.push({ key: meetingKeyOf(m), commitmentId: null, kind: 'meeting', meeting: { at: m.at, what: m.what }, tier: 'meeting', title: `Meeting ${dayLabel(nyDay(m.at), i.now)} ${time(m.at)}: ${m.what}`, line: 'Prepare it: within 24 hours.', dueAt: m.at, dueDay: nyDay(m.at), person: null, basis: null, href: prep?.href ?? (m.personaId ? `/gap/call/${m.personaId}` : `${accountHref(m.accountName)}?view=brief`), label: 'Prepare the meeting', canComplete: false, prep: prep?.prep ?? null, scope: dealLabel(m.accountName, m.dealId ?? null) });
     obligations.set(m.accountName, list);
   }
   // R51: a canceled meeting is said once, in Waiting (never a meeting to prepare).
