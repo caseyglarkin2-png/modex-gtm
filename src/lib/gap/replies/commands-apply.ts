@@ -79,9 +79,17 @@ export interface ApplyInput {
 export interface ApplyDeps extends AssignmentDeps {
   send: (payload: GmailSendPayload) => Promise<{ provider: 'gmail'; id: string | null; threadId: string | null }>;
   /** X11: APPROVE on an assignment (the Gmail draft). Absent: refused not_yet_available. */
-  onApprove?: (prisma: PrismaLike, input: ApplyInput & { item: PlanItem; ref: AssignmentRef }) => Promise<{ text: string; effect: string; extra?: Record<string, unknown> }>;
+  onApprove?: (prisma: PrismaLike, input: ApplyInput & { item: PlanItem; ref: AssignmentRef }) => Promise<EffectOutcome>;
   /** X09: REVISE on an assignment (the agent task). Absent: refused not_yet_available. */
-  onRevise?: (prisma: PrismaLike, input: ApplyInput & { item: PlanItem; ref: AssignmentRef; critique: string }) => Promise<{ text: string; effect: string; extra?: Record<string, unknown> }>;
+  onRevise?: (prisma: PrismaLike, input: ApplyInput & { item: PlanItem; ref: AssignmentRef; critique: string }) => Promise<EffectOutcome>;
+}
+
+/** What an effect handler answers: `ok: false` is a refusal in words (recorded refused, never applied; the seller is told). */
+export interface EffectOutcome {
+  text: string;
+  effect: string;
+  ok?: boolean;
+  extra?: Record<string, unknown>;
 }
 
 export type ApplyResult =
@@ -196,6 +204,13 @@ export async function applyCommand(prisma: PrismaLike, input: ApplyInput, deps: 
       if (!deps.onApprove) return refuse(prisma, input, deps, subject, 'approve', 'not_yet_available');
       if (await appliedBefore(prisma, ref.itemKey, 'approve')) return refuse(prisma, input, deps, subject, 'approve', 'already_applied');
       const r = await deps.onApprove(prisma, { ...input, item, ref });
+      if (r.ok === false) {
+        // X12 demo finding: a refused approval (the revision not cleared, the mode, a gate) was recorded as applied and
+        // blocked the next APPROVE on a later revision. A refusal is recorded refused and never consumes the command.
+        await recordRefused(prisma, input, subject, { command: 'approve', revision: ref.revision, reason: r.effect, ...(r.extra ?? {}) });
+        await answer(input, deps, r.text);
+        return { applied: false, command: 'approve', reason: r.effect };
+      }
       await recordApplied(prisma, input, subject, { command: 'approve', revision: ref.revision, effect: r.effect, ...(r.extra ?? {}) });
       await answer(input, deps, r.text);
       return { applied: true, command: 'approve', effect: r.effect, itemKey: ref.itemKey };
@@ -203,6 +218,11 @@ export async function applyCommand(prisma: PrismaLike, input: ApplyInput, deps: 
     case 'revise': {
       if (!deps.onRevise) return refuse(prisma, input, deps, subject, 'revise', 'not_yet_available');
       const r = await deps.onRevise(prisma, { ...input, item, ref, critique: command.text });
+      if (r.ok === false) {
+        await recordRefused(prisma, input, subject, { command: 'revise', revision: ref.revision, reason: r.effect, ...(r.extra ?? {}) });
+        await answer(input, deps, r.text);
+        return { applied: false, command: 'revise', reason: r.effect };
+      }
       await recordApplied(prisma, input, subject, { command: 'revise', revision: ref.revision, effect: r.effect, critique: command.text.slice(0, 2000), ...(r.extra ?? {}) });
       await answer(input, deps, r.text);
       return { applied: true, command: 'revise', effect: r.effect, itemKey: ref.itemKey };

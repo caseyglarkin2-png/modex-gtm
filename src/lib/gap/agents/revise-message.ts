@@ -179,10 +179,10 @@ export async function reviseMessage(task: ClaimedTask, ctx: { prisma: PrismaLike
 }
 
 /** The REVISE command's effect (commands-apply.ts deps.onRevise): queue one task and tell the seller. */
-export async function reviseRequest(prisma: PrismaLike, input: ApplyInput & { item: PlanItem; ref: AssignmentRef; critique: string }): Promise<{ text: string; effect: string; extra?: Record<string, unknown> }> {
+export async function reviseRequest(prisma: PrismaLike, input: ApplyInput & { item: PlanItem; ref: AssignmentRef; critique: string }): Promise<{ text: string; effect: string; ok: boolean; extra?: Record<string, unknown> }> {
   const critique = input.critique.trim();
-  if (!critique) return { text: 'Say what to change, for example REVISE: make it about the Tulsa gate, shorter. Nothing was queued.', effect: 'revision_not_queued' };
-  if (!FIRST_TOUCH_KEY.test(input.item.key)) return { text: 'GAP can revise a first-touch email. This item is not one; open it in GAP to work it there.', effect: 'revision_not_queued' };
+  if (!critique) return { ok: false, text: 'Say what to change, for example REVISE: make it about the Tulsa gate, shorter. Nothing was queued.', effect: 'revision_not_queued' };
+  if (!FIRST_TOUCH_KEY.test(input.item.key)) return { ok: false, text: 'GAP can revise a first-touch email. This item is not one; open it in GAP to work it there.', effect: 'revision_not_queued' };
   const q = await queueAgentTask(prisma, { kind: 'revise_message', itemKey: input.item.key, itemToken: input.item.token, day: input.ref.day, revision: input.ref.revision, request: critique, requestedBy: input.m.fromEmail.toLowerCase(), requestedFrom: `gmail:${input.m.id}` }, { now: input.now, actor: input.actor });
-  return { text: `Working on it. GAP will rewrite the email on your words ("${critique.slice(0, 200)}") against the verified facts on this account and send the revised item back in this thread, usually within a few minutes. If no fact supports what you asked, it will say so instead of inventing one.`, effect: 'revision_queued', extra: { taskId: q.id, superseded: q.superseded } };
+  return { ok: true, text: `Working on it. GAP will rewrite the email on your words ("${critique.slice(0, 200)}") against the verified facts on this account and send the revised item back in this thread, usually within a few minutes. If no fact supports what you asked, it will say so instead of inventing one.`, effect: 'revision_queued', extra: { taskId: q.id, superseded: q.superseded } };
 }

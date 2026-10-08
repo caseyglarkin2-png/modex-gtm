@@ -24,14 +24,14 @@ export interface ApproveDeps {
   draft?: (prisma: PrismaLike, input: { decisionId: string; actor: string; now: Date; stepIndex?: number }) => Promise<SellerDraftResult>;
 }
 
-export type ApproveOutcome = { text: string; effect: string; extra?: Record<string, unknown> };
+export type ApproveOutcome = { text: string; effect: string; ok: boolean; extra?: Record<string, unknown> };
 
 const draftsHref = (mailbox: string) => `https://mail.google.com/mail/?authuser=${encodeURIComponent(mailbox)}#drafts`;
 
 export async function approveRequest(prisma: PrismaLike, input: ApplyInput & { item: PlanItem; ref: AssignmentRef }, deps: ApproveDeps = {}): Promise<ApproveOutcome> {
   const decisionId = input.item.refs.decisionId ?? null;
-  if (!decisionId) return { text: 'This item has no email to draft (it is an obligation, a reply or deal work). Open it in GAP to do it there.', effect: 'approve_not_applicable' };
-  if (input.settings.mode === 'prepare') return { text: 'GAP is in prepare mode: it prepares work but creates no Gmail draft from an email reply. Open the item in GAP to draft it there, or switch the mode to review in Settings.', effect: 'mode_prepare' };
+  if (!decisionId) return { ok: false, text: 'This item has no email to draft (it is an obligation, a reply or deal work). Open it in GAP to do it there.', effect: 'approve_not_applicable' };
+  if (input.settings.mode === 'prepare') return { ok: false, text: 'GAP is in prepare mode: it prepares work but creates no Gmail draft from an email reply. Open the item in GAP to draft it there, or switch the mode to review in Settings.', effect: 'mode_prepare' };
 
   const stepIndex = 0;
   const actor = input.m.fromEmail.toLowerCase();
@@ -40,13 +40,13 @@ export async function approveRequest(prisma: PrismaLike, input: ApplyInput & { i
     // The email the seller approved carried a proposed revision: approve exactly that one, by its hash.
     const proposals = await loadProposedCopyRevisions(prisma, { decisionId, stepIndex });
     const match = proposals.find((p) => p.contentHash === input.ref.contentHash) ?? null;
-    if (!match) return { text: 'The copy in the email you answered is no longer current for this item. Reply APPROVE to the latest email for it, or open it in GAP.', effect: 'revision_not_current' };
+    if (!match) return { ok: false, text: 'The copy in the email you answered is no longer current for this item. Reply APPROVE to the latest email for it, or open it in GAP.', effect: 'revision_not_current' };
     revisionId = match.revisionId;
     if (!match.approved) {
       const a = await approveCopyRevision(prisma, { decisionId, revisionId: match.revisionId, actor, via: 'email' }, input.now);
       if (!a.ok) {
-        if (a.reason === 'compile_not_cleared') return { text: 'GAP\'s checker wants a look at this revision before it can be approved (it passed no clean verdict). Open the item in GAP to review and approve it there.', effect: 'revision_not_cleared', extra: { revisionId: match.revisionId } };
-        if (a.reason !== 'already_approved') return { text: `This revision could not be approved (${a.reason}). Open the item in GAP.`, effect: 'revision_not_approved', extra: { revisionId: match.revisionId, reason: a.reason } };
+        if (a.reason === 'compile_not_cleared') return { ok: false, text: 'GAP\'s checker wants a look at this revision before it can be approved (it passed no clean verdict). Open the item in GAP to review and approve it there.', effect: 'revision_not_cleared', extra: { revisionId: match.revisionId } };
+        if (a.reason !== 'already_approved') return { ok: false, text: `This revision could not be approved (${a.reason}). Open the item in GAP.`, effect: 'revision_not_approved', extra: { revisionId: match.revisionId, reason: a.reason } };
       }
     }
   }
@@ -54,7 +54,7 @@ export async function approveRequest(prisma: PrismaLike, input: ApplyInput & { i
   const r = await (deps.draft ?? createSellerGmailDraft)(prisma, { decisionId, actor, now: input.now, stepIndex });
   if (!r.ok) {
     const detail = 'detail' in r && r.detail ? ` ${r.detail}` : '';
-    return { text: `GAP could not create the draft: ${r.reason}.${detail} Nothing was drafted. Open the item in GAP to see what unlocks it.`, effect: 'draft_refused', extra: { reason: r.reason, revisionId } };
+    return { ok: false, text: `GAP could not create the draft: ${r.reason}.${detail} Nothing was drafted. Open the item in GAP to see what unlocks it.`, effect: 'draft_refused', extra: { reason: r.reason, revisionId } };
   }
   const d = r.receipt;
   const sendHref = `${input.baseUrl.replace(/\/$/, '')}/gap/pack/${encodeURIComponent(decisionId)}`;
@@ -64,5 +64,5 @@ export async function approveRequest(prisma: PrismaLike, input: ApplyInput & { i
     `Or send it from GAP with every check re-run (CONFIRM + SEND): ${sendHref}`,
     'A draft is not a send: GAP records it as sent only when Gmail shows it went. Reply NEXT for the next item.',
   ].join('\n');
-  return { text, effect: r.alreadyDrafted ? 'already_drafted' : 'gmail_drafted', extra: { gmailDraftId: d.gmailDraftId, contentHash: d.contentHash, revisionId, recipient: d.recipient } };
+  return { ok: true, text, effect: r.alreadyDrafted ? 'already_drafted' : 'gmail_drafted', extra: { gmailDraftId: d.gmailDraftId, contentHash: d.contentHash, revisionId, recipient: d.recipient } };
 }

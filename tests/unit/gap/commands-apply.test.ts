@@ -176,6 +176,20 @@ describe('X07b: applyCommand', () => {
     expect(send.mock.calls[1][0].subject).toMatch(/^GAP 2 of 2, Kroger/);
   });
 
+  it('X12 finding: an APPROVE the effect refuses (the revision not cleared) is recorded refused, and a later APPROVE on a cleared revision proceeds; a successful APPROVE is consumed once', async () => {
+    let turn = 0;
+    const onApprove = vi.fn(async () => (turn++ === 0 ? { ok: false, text: 'needs a look in GAP', effect: 'revision_not_cleared' } : { ok: true, text: 'drafted', effect: 'gmail_drafted', extra: { gmailDraftId: 'r-1' } }));
+    const deps2 = { ...w.deps, onApprove };
+    const refused = await applyCommand(w.db.client(), { m: msg({ threadId: 'th-item-0', bodyText: 'APPROVE' }), ctx: w.ctx, now: NOW, settings: SETTINGS, sender: SENDER, baseUrl: 'https://app.example', actionSecret: null, actor: 'cron' }, deps2);
+    expect(refused).toMatchObject({ applied: false, reason: 'revision_not_cleared' });
+    expect(w.db.store.gapAuditEvent.filter((e) => e.kind === COMMAND_REFUSED && e.payload.reason === 'revision_not_cleared')).toHaveLength(1);
+    const ok = await applyCommand(w.db.client(), { m: msg({ threadId: 'th-item-0', bodyText: 'APPROVE' }), ctx: w.ctx, now: NOW, settings: SETTINGS, sender: SENDER, baseUrl: 'https://app.example', actionSecret: null, actor: 'cron' }, deps2);
+    expect(ok).toMatchObject({ applied: true, effect: 'gmail_drafted' });
+    const again = await applyCommand(w.db.client(), { m: msg({ threadId: 'th-item-0', bodyText: 'APPROVE' }), ctx: w.ctx, now: NOW, settings: SETTINGS, sender: SENDER, baseUrl: 'https://app.example', actionSecret: null, actor: 'cron' }, deps2);
+    expect(again).toMatchObject({ applied: false, reason: 'already_applied' });
+    expect(onApprove).toHaveBeenCalledTimes(2);
+  });
+
   it('HELP answers with the commands once per item per hour; an unknown line draws the same help; APPROVE and REVISE are refused not_yet_available and the seller is told', async () => {
     expect(await w.run(msg({ threadId: 'th-item-0', bodyText: 'HELP' }))).toMatchObject({ applied: true, effect: 'help_sent' });
     expect(w.send.mock.calls[0][0].text).toMatch(/APPROVE, REVISE/);
