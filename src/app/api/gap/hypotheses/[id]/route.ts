@@ -26,6 +26,7 @@ import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { getHypothesis, transitionHypothesis, updateDraftNarrative } from '@/lib/gap/hypothesis/service';
 import { advanceHypothesis } from '@/lib/gap/hypothesis/thesis-groups';
+import { forgetPursuitSummary } from '@/lib/gap/pursuit/summary';
 import { actionabilityOf } from '@/lib/gap/hypothesis/actionability';
 import { routeAfterUse, type RouteAfterUseResult } from '@/lib/gap/routing/interactive';
 import { PERSONAS, PROBLEM_FAMILIES, UNMAPPED_FAMILY } from '@/lib/gap/taxonomy';
@@ -122,12 +123,15 @@ export async function PATCH(request: NextRequest, { params }: RouteContext) {
   if (keys.advance !== undefined) {
     const parsed = z.object({ advance: z.enum(['approve', 'approve_and_use']) }).strict().safeParse(body);
     if (!parsed.success) return invalidBody('advance');
-    const row = await prisma.prospectingHypothesis.findUnique({ where: { id }, select: { status: true } });
+    const row = await prisma.prospectingHypothesis.findUnique({ where: { id }, select: { status: true, account_name: true } });
     if (!row) return NextResponse.json({ error: 'not_found' }, { status: 404 });
     const use = parsed.data.advance === 'approve_and_use';
     const now = new Date();
     const r = await advanceHypothesis(prisma, id, row.status, { use, actor, now, reason: use ? 'approve + use in routing' : 'approve only' });
     const routing = r.ok && r.from !== 'active' ? await routeIfNowActive(id, r.to, actor, now) : null;
+    // X12 demo finding: the account's remembered Work summary predates this approval ("Put the story in use"); forget
+    // it so the next Work read and the next briefing rebuild the card from the live state (the outcome route's rule).
+    if (r.ok) await forgetPursuitSummary(prisma, row.account_name).catch(() => undefined);
     return NextResponse.json({ ...r, ...(routing ? { routing } : {}) }, { status: r.ok ? 200 : 409 });
   }
 
@@ -143,6 +147,8 @@ export async function PATCH(request: NextRequest, { params }: RouteContext) {
       return NextResponse.json({ error: result.reason, ...('detail' in result && result.detail ? { detail: result.detail } : {}) }, { status });
     }
     const routing = action === 'activate' ? await routeIfNowActive(id, result.to, actor, now) : null;
+    const owner = await prisma.prospectingHypothesis.findUnique({ where: { id }, select: { account_name: true } }).catch(() => null);
+    if (owner?.account_name) await forgetPursuitSummary(prisma, owner.account_name).catch(() => undefined);
     return NextResponse.json({ from: result.from, to: result.to, effects: result.effects, ...(routing ? { routing } : {}) });
   }
 
