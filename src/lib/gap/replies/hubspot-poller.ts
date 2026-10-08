@@ -94,6 +94,12 @@ export interface HubSpotEmailEngagement {
 
 export interface PollOptions {
   now: Date;
+  /**
+   * X15b: the addresses GAP counts as its own (the GAP mailbox, the briefing address, the command senders). When
+   * given, an engagement addressed to anyone else (a known person writing to a teammate, logged by HubSpot) is not a
+   * reply to GAP: counted `notToGap`, never landed. Absent: the gate is off (older callers, the report unchanged).
+   */
+  gapIdentities?: ReadonlySet<string> | null;
   /** Explicit floor; overrides the stored watermark when given. */
   since?: Date | null;
   dryRun: boolean;
@@ -115,6 +121,8 @@ export interface PollReport {
   created: number;
   existing: number;
   unknownSender: number;
+  /** X15b: engagements addressed to someone other than a GAP identity (present only when the identities were given). */
+  notToGap?: number;
   /** Non-human verdicts keyed by the classifier's reason string. */
   filtered: Record<string, number>;
   dryRun: boolean;
@@ -207,6 +215,31 @@ async function loadScopedPersonas(prisma: any): Promise<Map<string, ScopedPerson
  * Read INCOMING_EMAIL engagements since a floor and land the human ones locally.
  * Every write is local (Prisma). The only outbound call is `deps.searchIncomingEmails`.
  */
+/**
+ * X15b: the addresses GAP counts as its own: the GAP mailbox (GAP_GMAIL_USER_EMAIL), the briefing address and the
+ * command senders from the seller settings. Null when none is known (then the poller's gate stays off). Soft.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function gapIdentities(prisma: any, env: Record<string, string | undefined> = process.env): Promise<Set<string> | null> {
+  const out = new Set<string>();
+  const add = (v: unknown) => {
+    const s = typeof v === 'string' ? v.trim().toLowerCase() : '';
+    if (s.includes('@')) out.add(s);
+  };
+  add(env.GAP_GMAIL_USER_EMAIL);
+  try {
+    const row = typeof prisma?.systemConfig?.findUnique === 'function' ? await prisma.systemConfig.findUnique({ where: { key: 'gap:seller:settings' } }) : null;
+    const v = row && typeof row.value === 'string' ? (JSON.parse(row.value) as Record<string, unknown>) : null;
+    if (v && typeof v === 'object') {
+      add(v.briefingTo);
+      if (Array.isArray(v.commandSenders)) for (const s of v.commandSenders) add(s);
+    }
+  } catch {
+    // The settings are a convenience here; the mailbox alone gates.
+  }
+  return out.size ? out : null;
+}
+
 export async function pollHubSpotReplies(prisma: any, opts: PollOptions, deps: PollDeps): Promise<PollReport> {
   const classify = deps.classify ?? classifyInboundReply;
   const limit = opts.limit ?? DEFAULT_LIMIT;
@@ -230,6 +263,7 @@ export async function pollHubSpotReplies(prisma: any, opts: PollOptions, deps: P
   // S4-T4: null when the flag is off (or dry run) so the report is unchanged.
   const gap = !opts.dryRun && isGapOsEnabled() ? { paused: 0, errors: [] as string[] } : null;
   if (gap) report.gap = gap;
+  if (opts.gapIdentities) report.notToGap = 0;
 
   let newest: Date | null = null;
 
@@ -285,6 +319,14 @@ export async function pollHubSpotReplies(prisma: any, opts: PollOptions, deps: P
     if (!persona) {
       report.unknownSender += 1;
       continue;
+    }
+    // X15b: a known person writing to a teammate is not a reply to GAP. A row with no recipient still lands.
+    if (opts.gapIdentities) {
+      const to = (engagement.toEmail ?? '').trim().toLowerCase();
+      if (to && !opts.gapIdentities.has(to)) {
+        report.notToGap = (report.notToGap ?? 0) + 1;
+        continue;
+      }
     }
 
     const subject = (engagement.subject ?? '').trim();

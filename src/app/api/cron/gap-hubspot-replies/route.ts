@@ -7,6 +7,7 @@ import {
   DEFAULT_LIMIT,
   pollHubSpotReplies,
   searchIncomingEmailsFromHubSpot,
+  gapIdentities,
 } from '@/lib/gap/replies/hubspot-poller';
 import { prisma } from '@/lib/prisma';
 
@@ -95,9 +96,11 @@ export async function GET(request: Request) {
   }
 
   try {
+    // X15b: an engagement addressed to a teammate (not a GAP identity) is not a reply to GAP.
+    const identities = await gapIdentities(prisma).catch(() => null);
     const report = await pollHubSpotReplies(
       prisma,
-      { now, since, dryRun, limit },
+      { now, since, dryRun, limit, gapIdentities: identities },
       { searchIncomingEmails: (args) => searchIncomingEmailsFromHubSpot(args) },
     );
 
@@ -108,7 +111,7 @@ export async function GET(request: Request) {
       durationMs: Date.now() - startedAt,
       message:
         `${mode}: ${report.seen} inbound since ${report.since}, ${report.created} new, ` +
-        `${report.existing} existing, ${filteredTotal} filtered, ${report.unknownSender} unknown sender`,
+        `${report.existing} existing, ${filteredTotal} filtered, ${report.unknownSender} unknown sender${typeof report.notToGap === 'number' ? `, ${report.notToGap} not to GAP` : ''}`,
       stats: { mode, limit, ...report },
     }).catch(() => undefined);
 
