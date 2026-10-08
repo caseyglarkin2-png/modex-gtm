@@ -71,15 +71,24 @@ export async function loadRecordedReplyIds(prisma: PrismaLike, ids: readonly str
   return new Set(rows.map((r) => r.source_id));
 }
 
-/** The replies still waiting, and the summaries with a stale "replied" or "opted out" dropped where nothing waits. */
+/**
+ * The replies still waiting, and the summaries with a stale "replied" or "opted out" dropped where nothing waits.
+ *
+ * R63-A S1: after a Refresh the recorded reply is no longer in the (fresh) list at all, so "settled" never saw it and a
+ * remembered "replied" kept the card for minutes. With `complete` (the list holds every waiting reply), a "replied" or
+ * "opted out" summary for an account with no reply waiting is stale whatever the remembered read said.
+ */
 export function withoutRecordedReplies<R extends { id?: string | null; accountName: string }, S extends { state: string }>(
   replies: readonly R[],
   summaries: ReadonlyMap<string, S> | undefined,
   recorded: ReadonlySet<string>,
+  opts: { complete?: boolean } = {},
 ): { replies: R[]; summaries: Map<string, S> | undefined } {
-  if (!recorded.size) return { replies: [...replies], summaries: summaries ? new Map(summaries) : undefined };
+  if (!recorded.size && !opts.complete) return { replies: [...replies], summaries: summaries ? new Map(summaries) : undefined };
   const waiting = replies.filter((r) => !r.id || !recorded.has(r.id));
   const settled = new Set(replies.filter((r) => !!r.id && recorded.has(r.id)).map((r) => r.accountName).filter((a) => !waiting.some((w) => w.accountName === a)));
-  const kept = summaries ? new Map([...summaries].filter(([a, s]) => !(settled.has(a) && (s.state === 'replied' || s.state === 'opted_out')))) : undefined;
+  const waitingAt = new Set(waiting.map((r) => r.accountName));
+  const stale = (a: string) => settled.has(a) || (!!opts.complete && !waitingAt.has(a));
+  const kept = summaries ? new Map([...summaries].filter(([a, s]) => !(stale(a) && (s.state === 'replied' || s.state === 'opted_out')))) : undefined;
   return { replies: waiting, summaries: kept };
 }

@@ -522,6 +522,8 @@ export function workDay(i: WorkInput): WorkDay {
   // The canonical pursuit state wins where it is fresh: the card says what the workspace says, and ranks by it.
   for (const [name, s] of i.summaries ?? []) {
     let have = best.get(name);
+    // R63-A S4: a recorded reply's answer card says what is owed; a remembered "replied" never relabels it.
+    if (have?.card.answerOwed) continue;
     const waitingTouch = motionWaiting.get(name);
     if (!have && !waitingTouch) continue;
     // A first touch moved to Waiting is still the account's card for a newer summary that says something else (a
@@ -689,7 +691,10 @@ export function workDay(i: WorkInput): WorkDay {
     const fromObligation = list.filter((o) => o.tier !== 'later').sort((a, b) => TIER_RANK[a.tier] - TIER_RANK[b.tier])[0];
     const tier: WorkTier = fromObligation && TIER_RANK[fromObligation.tier] < TIER_RANK[own] ? fromObligation.tier : own;
     const lane: WorkLane = tier !== own ? TIER_LANE[tier] ?? r.card.lane : r.card.lane;
-    const dueMs = Math.min(...list.filter((o) => o.tier === tier).map((o) => (o.dueAt ? new Date(o.dueAt).getTime() : Number.MAX_SAFE_INTEGER)), tier === 'reply' ? (typeof r.sortKey[0] === 'number' ? (r.sortKey[0] as number) : Number.MAX_SAFE_INTEGER) : Number.MAX_SAFE_INTEGER);
+    // R63-A S1: a reply's day is the message's received date, never another card's sort key ("A buyer replied Dec 31"
+    // was a summary-relabelled card's 0); with no message on the card, no day is claimed.
+    const replyAt = r.card.reply?.at ? new Date(r.card.reply.at).getTime() : NaN;
+    const dueMs = Math.min(...list.filter((o) => o.tier === tier).map((o) => (o.dueAt ? new Date(o.dueAt).getTime() : Number.MAX_SAFE_INTEGER)), tier === 'reply' && Number.isFinite(replyAt) && replyAt > 0 ? replyAt : Number.MAX_SAFE_INTEGER);
     const act = activity.get(name) ?? 0;
     const prio = i.priorities?.get(name) ?? null;
     return { r, tier, lane, list, dueMs, act, prio };

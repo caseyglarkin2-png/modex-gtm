@@ -440,7 +440,9 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
     // R63-A S4: the recorded replies still owed an answer (never forgotten the moment they are recorded).
     lane ? Promise.resolve([]) : loadAnswersOwed(prisma, realNow).catch(() => []),
   ]);
-  const liveRead = withoutRecordedReplies(data.workInput.replies, summariesRead, recordedReplies);
+  // R63-A S1: the list is complete when the reply read had no further page (then a remembered "replied" with no reply
+  // waiting is stale, recorded since).
+  const liveRead = withoutRecordedReplies(data.workInput.replies, summariesRead, recordedReplies, { complete: !data.counts.replies.atLeast });
   const live = { ...liveRead, replies: [...liveRead.replies, ...answersOwed.filter((a) => !liveRead.replies.some((r) => r.id === a.id))] };
   const summaries = live.summaries ?? summariesRead;
   // Batch item 8: an untagged meeting belongs to the deal whose contacts it names (the brief's own rule), so its
