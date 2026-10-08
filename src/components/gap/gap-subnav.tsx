@@ -30,6 +30,8 @@ export const MORE_TABS = [
   { label: 'Learning', href: '/gap/learning' },
   { label: 'Coverage', href: '/gap/coverage' },
   { label: 'Notes', href: '/gap/feedback' },
+  // X13: the briefing, the command senders, the mode and the daily targets.
+  { label: 'Settings', href: '/gap/settings' },
 ] as const;
 
 function isActive(rawPathname: string, href: string): boolean {
