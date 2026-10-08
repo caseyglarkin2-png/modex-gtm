@@ -274,7 +274,8 @@ describe.skipIf(!RUN)('R62 matrix: the Pepsi regression (the page read, the page
   // email previews. After the row's recorded expiry (2026-11-20) the honest answer is that the story is no longer offered.
   it('the production Pepsi repair: the stranded draft is adopted from the page payload, approved and used, and the email previews for Tom', async () => {
     const tom = prod.people.find((p) => p.name.startsWith('Tom'))!;
-    const tulsa = prod.facts.find((f) => f.label === 'tulsa')!;
+    // Types only: the production row's facts are the matrix seed's (they carry the title and the text).
+    const tulsa = prod.facts.find((f) => f.label === 'tulsa')! as import('@/scripts/gap/recovery/seed-matrix').MatrixAccount['facts'][number];
     if (Date.now() >= new Date(PROD_EXPIRES).getTime()) {
       const { anchor } = await pageRead(prod);
       expect(anchor.draftable.map((d) => d.factId)).not.toContain(tulsa.id);

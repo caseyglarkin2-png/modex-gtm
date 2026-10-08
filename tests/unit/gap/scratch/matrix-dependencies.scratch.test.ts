@@ -204,8 +204,9 @@ describe.skipIf(!RUN)('R62 matrix: dependencies (each boundary failing on purpos
     // Scope the run's target selection to queued stories (the thesis groups, the card queue and the watch list are the
     // selector's own seams), so the other files' accounts in this long-lived matrix database never take the cap. The
     // runner, the research call boundary and the dead-letter writer stay the real ones.
-    const onlyQueued = { loadGroups: async () => [], listQueue: async () => ({ items: [], nextCursor: null }), watch: async () => [] };
-    for (let i = 0; i < 3; i += 1) await runBackgroundResearch(prisma, { now: new Date(Date.now() + i * 3 * 86_400_000), cap: 50 }, { research: outage as never, ...(onlyQueued as never) });
+    // Types only: the selector seams typed as the runner's own deps (never a cast to never).
+    const onlyQueued: Pick<NonNullable<Parameters<typeof runBackgroundResearch>[2]>, 'loadGroups' | 'listQueue' | 'watch'> = { loadGroups: async () => [], listQueue: async () => ({ asOf: null, items: [], truncated: false }), watch: async () => [] };
+    for (let i = 0; i < 3; i += 1) await runBackgroundResearch(prisma, { now: new Date(Date.now() + i * 3 * 86_400_000), cap: 50 }, { research: outage as never, ...onlyQueued });
     const after = await prisma.gapSignal.findUnique({ where: { id: sig.id }, select: { research_status: true, metadata: true } });
     expect((after!.metadata as { researchAttempts?: number }).researchAttempts).toBe(3);
     expect(after!.research_status).toBe('research_failed');
@@ -268,8 +269,9 @@ describe.skipIf(!RUN)('R62 matrix: dependencies (each boundary failing on purpos
     const outage = async () => {
       throw new Error('provider_unavailable: 503 search provider down');
     };
-    const onlyQueued = { loadGroups: async () => [], listQueue: async () => ({ items: [], nextCursor: null }), watch: async () => [] };
-    for (let i = 0; i < 3; i += 1) await runBackgroundResearch(prisma, { now: new Date(Date.now() + i * 3 * 86_400_000), cap: 50 }, { research: outage as never, ...(onlyQueued as never) });
+    // Types only: the selector seams typed as the runner's own deps (never a cast to never).
+    const onlyQueued: Pick<NonNullable<Parameters<typeof runBackgroundResearch>[2]>, 'loadGroups' | 'listQueue' | 'watch'> = { loadGroups: async () => [], listQueue: async () => ({ asOf: null, items: [], truncated: false }), watch: async () => [] };
+    for (let i = 0; i < 3; i += 1) await runBackgroundResearch(prisma, { now: new Date(Date.now() + i * 3 * 86_400_000), cap: 50 }, { research: outage as never, ...onlyQueued });
     expect((await prisma.gapSignal.findUnique({ where: { id: sig.id }, select: { research_status: true } }))?.research_status).toBe('research_failed');
     // 4. A HubSpot change approved (recorded, writes off), then retried with approved writes on while the stub is down.
     const { stableHash } = await import('@/lib/gap/deals/crm-model');

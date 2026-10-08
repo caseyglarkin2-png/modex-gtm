@@ -83,7 +83,7 @@ describe.skipIf(!RUN)('R62 matrix: identity and scope (the real routes and the p
     const { loadPursuit } = await import('@/lib/gap/pursuit/load');
     const loaded = await loadAccountView(prisma, a.slug, now, { live: true, context: true } as never);
     if (!loaded) throw new Error('account not loaded');
-    const { brief, inputs } = loaded as { brief: { motion?: { kind?: string; why?: string } }; inputs: never };
+    const { brief, inputs } = loaded as unknown as { brief: { motion?: { kind?: string; why?: string } }; inputs: never };
     const c = await loadAccountContext(prisma, inputs, now);
     return { brief, pursuit: await loadPursuit(prisma, { brief: brief as never, inputs, ctx: c, now }) };
   }
