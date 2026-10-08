@@ -62,6 +62,18 @@
     {
       "path": "/api/cron/gap-hubspot-replies/?mode=apply",
       "schedule": "45 12 * * *"
+    },
+    {
+      "path": "/api/cron/gap-routing/",
+      "schedule": "30 10 * * 1-5"
+    },
+    {
+      "path": "/api/cron/gap-briefing/",
+      "schedule": "5 * * * *"
+    },
+    {
+      "path": "/api/cron/gap-agent-tasks/",
+      "schedule": "*/5 * * * *"
     }
   ]
 }

@@ -2262,6 +2262,259 @@ test_receipts:
 genuine_blockers: []   # 2026-10-08, after R64
 ```
 
+### GAP OS SALES EXECUTION ENGINE (2026-10-08, in progress)
+<!-- verified:2026-10-08 -->
+
+STATUS: ACTIVE. Casey's "GAP OS FINAL PRODUCT MANDATE AND BUILD INSTRUCTIONS" (2026-10-08) is the deliberate
+next-version decision (STABLE_BASELINE rule 4). It continues the R00-R65 program above; that record is preserved
+unchanged. One writer: branch `feat/gap-execution-engine` from main 2759f2ab in worktree `wt-gap-account-first-ux`.
+
+#### Product definition
+
+GAP OS is Casey's AI-powered sales execution engine: every morning it knows which accounts and people deserve
+attention, why, and the next action; it mails a briefing; Casey works the day from email or the app; each item
+arrives prepared (intelligence, evidence, the message or the call opener) and can be approved, revised, deferred or
+skipped; a revision request becomes durable agent work that returns an improved recommendation; an executed action
+is recorded as what actually happened; unfinished work stays until resolved. The objective is substantially more
+quality selling activity with substantially less administrative effort, not more software.
+
+#### The seller operating loop
+
+Briefing (email, the day's plan) -> START (the first assignment, by email or in the app) -> read the prepared item
+-> APPROVE (a real Gmail draft, then CONFIRM + SEND in the app) | REVISE: words (an agent task; the revision
+returns in the same thread) | DEFER | SKIP | DONE: words -> NEXT (the next assignment) -> the ledger records what
+happened -> tomorrow's plan carries what is unresolved. Deals, replies, meetings and follow-ups are items in the same
+plan; account research is background.
+
+#### Baseline (2026-10-08, verified against production and the code)
+
+Production: main 2759f2ab (PR #412) == `dpl_Dv77MfLrk62bNXYm7ToWRUpKKB8u` READY 13:42Z; flags as the GAP CORE LIVE
+block. The live Work page that morning: a degraded banner telling the seller to "Run routing from a GAP lane"
+(recommendations three days old; routing has no schedule); the first two cards were untriaged replies from Jun 2
+(Boston Beer) and Aug 18 (Gusto, a benefits vendor writing to Jake, not a prospect); eight in-deal cards all saying
+"the close date has passed, confirm the real date"; 1 Ready, 11 Research, 13 held; Done today 0. The feedback
+backlog held no Casey note.
+
+| Capability | Verdict | Where |
+|---|---|---|
+| One ranked day (commitments, replies, meetings, deal work, follow-ups, prepared prospecting, review, research, admin, parked); the Today panel; the tomorrow preview; Skip, Snooze, Logged; commitments with proof | VERIFIED | `work/list.ts`, `work/today.ts`, `work/outcome.ts`, `work/commitments.ts` (R41, R45, R14, R40) |
+| Account page: pursuit state, NEXT, proposal review, approve and use, people stack, story, deal brief (plan, artifacts, meeting prep, CRM proposals) | VERIFIED | `account-now.tsx`, `pursuit/*`, `deals/*` |
+| First touch: preview, CONFIRM + SEND through the GAP Gmail identity, one DIRECT_SENT row, a replay refused; Gmail drafts of a first touch and of a reply answer; draft -> sent / vanished reconcile; unknown-send reconcile; a follow-up sent by hand closed from Sent | VERIFIED | `execution/seller-send.ts`, `seller-draft.ts`, `seller-reply.ts`, `draft-reconcile.ts`, `gap-mailbox.ts` |
+| Reply intake (the GAP mailbox every 10 minutes; HubSpot's inbox daily), classification, opt-outs, bounces, the prepared editable answer | VERIFIED | `replies/*` |
+| Calls: the brief, the opener from the thesis, outcomes (18 classes plus no answer, voicemail, gatekeeper), BID | VERIFIED | `app/gap/call/[personaId]`, `disposition/*` |
+| Research: the hourly background cron (cap 3), RESEARCH THIS, deepen, the verified-evidence inbox, auto-prepared proposals | VERIFIED | `research/background.ts`, `research/auto-prepare.ts` |
+| Approved HubSpot writes (note, task, hs_next_step) and the hypothesis mirror | VERIFIED code, flags OFF | `crm-writer.ts`, `crm-sync.ts`, `hubspot-mirror.ts` |
+| HubSpot sequence enrollment write | PARTIAL, dark | `execution/hubspot-sequence-adapter.ts`; write scope never proven; no caller |
+| Routing on a schedule | MISSING | `/api/gap/routing/run` is a session or token POST; nothing schedules it |
+| A persisted day: START, a record of the day, day over day, targets and counts | MISSING | `today.ts` is "NO new storage"; only sessionStorage order |
+| A morning briefing from GAP's day; delivery preferences; once per day; retries; signed links | MISSING | the legacy `daily-digest` cron mails a HubSpot pipeline digest to an env address |
+| Email commands, authenticated, mapped to an item; replay and stale approvals refused | MISSING | `classifyMailboxMessage` returns `own` for the mailbox's own address and ignores it; no signed action link exists beyond unsubscribe and the open pixel |
+| A seller's critique becoming durable agent work that returns an improved recommendation | MISSING | feedback notes never change state; Ask GAP maps regexes to fixed proposals; no job table (ResearchRun is written after the run; GenerationJob never retries) |
+| A per-recipient revised copy the draft and send services can bind | MISSING | `prepareSellerEmail` renders only the version's step template (`action-pack.ts` loadActionPack) and binds that hash |
+| Copied is not sent | PARTIAL, inconsistent | a copied reply clears "Answer them" (`work/recorded-replies.ts` counts REPLY_COPIED), a copied recap counts as sent back (`deals/workspace.ts` recapSentAtOf); a copied cold email is recorded (`copy_released`) and never read |
+| Aging windows | PARTIAL | overdue commitments never drop; a recorded reply stops being owed after 14 days; a send older than 30 days makes no follow-up |
+| Call follow-ups from no answer or voicemail; objection prep; the person's activity timeline on the brief; a dial attempt recorded | MISSING / PARTIAL | `commitmentsFromDisposition` creates none for those; `outbound-check` is read-only |
+| Operating modes (prepare / review / execute) as a product setting | MISSING | implicit in flags |
+| Delivered state from a provider event | MISSING | no writer; never claimed |
+
+#### Architecture: one durable day, every consumer reads it
+
+- **One day builder.** `work/load-day.ts` `loadWorkDay(prisma, {now})` is the single function the Work page and
+  the briefing cron call (the page's `loadCockpit` plus its second wave, extracted). A briefing never rebuilds a
+  second, inconsistent list.
+- **The day snapshot** is ONE `work.day_planned` GapAuditEvent per New York day (claimed under an advisory lock,
+  the commitments pattern): the ordered items with an episode-bearing key (`reply:<messageId>`,
+  `commitment:<id>`, `first_touch:<decisionId>`, `deal:<dealId>:<signal>:<day>`, `meeting:<id>`,
+  `review:<hypothesisId>`, `research:<account>:<day>`), their object references and an unguessable per-item
+  token. No new table in this program's first increments. Transitions stay with their OWNERS: an obligation's Done,
+  Snooze, Skip and Restore in `work/commitments.ts`; an account's skip, snooze and "logged outside GAP" in
+  `work/outcome.ts`; a send in the execution ledger. The plan records only START (`work.day_started`), the
+  assignments and the revisions. A card the builder no longer produces while its owner still holds it open is
+  reported as carried, never dropped silently; a degraded read (HubSpot unavailable, a cold instance) never marks
+  anything dropped.
+- **Provider ownership.** Gmail through the GAP identity (casey@yardflow.ai) owns drafts, sends and the briefing;
+  HubSpot owns engagement logging (the connected inbox) and, behind their flags, approved notes, tasks and the next
+  step; SendGrid has no GAP role; sequence enrollment stays dark until its write scope is proven. One wire
+  (`gmail-sender.ts`); internal mail goes through `sendViaGmail` with purpose OPERATOR_ALERT and an
+  `Auto-Submitted: auto-generated` header, never through `sendEmail` (which logs every send to HubSpot).
+- **Seller settings** in SystemConfig `gap:seller:settings`: briefing_to, briefing_hour (New York),
+  command_senders, mode (`prepare | review`; `execute` is defined below and refused until its amendment is
+  recorded), targets per activity kind (later). The GAP mailbox itself is refused as briefing_to or a command
+  sender (a reply to oneself lands in Sent and is never read).
+- **The briefing** (`/api/cron/gap-briefing`, hourly tick, flag `GAP_BRIEFING_ENABLED`): at or after the
+  configured hour it claims the day (SystemConfig plus a `briefing.sent` row), plans the day, renders the briefing
+  from the snapshot (`work/briefing.ts`, pure), sends it from the GAP identity to briefing_to, Reply-To the GAP
+  mailbox, subject carrying `[GAP#<day token>]`. Before any resend it checks Sent for the day token (the
+  unknown-send pattern). A failure is recorded and retried on the next tick, three attempts, then visible on
+  health. Links are HMAC-signed (`work/action-token.ts`, `GAP_ACTION_SECRET`, an expiry) and open the
+  session-protected app at the item; a link never executes an external action by itself.
+- **Assignments and commands.** START sends one assignment email per item (built from `ask/context.ts`
+  buildAskContext and `loadActionPack` copy with its citations), recorded as `work.assignment_sent` with the Gmail
+  threadId, the RFC message id, the item key, the revision and the content hash. The mailbox cron (already every
+  10 minutes) gains a `command` verdict judged BEFORE `own` and before attribution: the sender is in
+  command_senders, the message's thread or In-Reply-To matches a recorded assignment, Authentication-Results shows
+  DMARC pass aligned to the From domain (freightroll.com and yardflow.ai both publish SPF including Google and a
+  DMARC record, checked 2026-10-08), no Auto-Submitted or Precedence bulk header, not a forward. The parser
+  (`replies/commands.ts`, pure) reads the first non-quoted line: `APPROVE | REVISE: <words> | SKIP | DEFER [date]
+  | DONE: <words> | NEXT | HELP`; a line of sentence length that is none of these is REVISE with the body as the
+  critique; a short unknown line gets one HELP reply (rate-limited) and nothing executes. A command is consumed
+  once per (assignment, revision, command); a token for an older revision is a stale approval, refused and
+  explained; every effect runs after the verdict row is written and re-runs every click-time gate. HTML-only mail
+  falls back to its text.
+- **Agent tasks** as ledger rows (`agents/tasks.ts`: `agent.task_queued | task_claimed | task_succeeded |
+  task_failed | task_superseded`), claimed under an advisory lock with a lease longer than the function limit,
+  attempts counted at claim, a fence token on completion; drained by `/api/cron/gap-agent-tasks` (every 5
+  minutes, flag `GAP_AGENT_TASKS_ENABLED`) and kicked immediately with `after()` from the command handler. One
+  handler first, `revise_message`: the critique, the current copy and the account's verified facts go to the
+  existing LLM client; the result must pass the compiler's checks (`compiler/compile.ts`) or the task ends
+  `could_not_satisfy` with the reasons (never invented evidence); a success writes `work.item_revised` (revision
+  + 1) and re-sends the assignment in the same thread. A newer REVISE supersedes a queued one; a result arriving
+  after an APPROVE is a proposal only. Failures show on the item and on `health?operations=1`.
+- **The revised copy reaches the draft** through `execution/copy-revision.ts`: an approved per-decision,
+  per-step revision (`execution.copy_revision_approved`: subject, body, hash, revision, the facts it rests on)
+  that `loadActionPack` reads in place of the template render, with its own compile row, so `prepareSellerEmail`
+  and the send bind the revised hash end to end. A revision that needs a fact the thesis does not carry is refused
+  at the evidence gate like any other copy.
+- **APPROVE** in `review` mode records the approved revision (when one exists) and creates the real Gmail draft
+  through `createSellerGmailDraft` (every gate), then replies with the Gmail link and the CONFIRM + SEND link. The
+  send itself stays the session-authenticated route: STABLE_BASELINE R42b and amendment 1 ("an actual send ...
+  still human and explicit") and `seller-send.ts` ("reached only from the session-authenticated route, never from
+  a cron") are not amended by this program. `execute` mode (a send on APPROVE for recipients on an allowlist) is
+  defined in settings and REFUSED until Casey records that amendment; it is the one open product decision.
+- **Routing on a schedule** (`/api/cron/gap-routing`, apply mode over the routable-hypothesis scope, bounded,
+  flag `GAP_ROUTING_CRON_ENABLED`) runs before the briefing hour: automatic, reversible, internal preparation under
+  amendment 1. The degraded banner on Work moves to System in seller words.
+- **Activity semantics** (the mandate's section 10): a projection over the existing ledger, one module
+  (`work/activity.ts`): research_generated, proposal_prepared, draft_created, message_approved, content_copied,
+  message_sent (provider-proven), reply_received, call_attempted, conversation_completed, meeting_booked,
+  deal_advanced, task_deferred, work_blocked, each with `basis: provider | self_reported`. Delivered is never
+  claimed. The three copy conflations are fixed at their readers: a copied reply or recap stays owed as "copied,
+  GAP has not seen it sent" until Sent shows it (the follow-up-by-hand pattern) or the seller says sent by hand
+  (self-reported, labelled).
+- **Calls**: the brief gains the person's timeline (sends, drafts, replies, dispositions) and likely objections
+  (an agent task, grounded); releasing the dial link records `call.attempt_started` (self-reported); no answer and
+  voicemail create a follow-up (two business days, up to the existing three-attempt hold); gatekeeper creates a
+  task. A script is never a call.
+- **Deals**: the buyer's next step (HubSpot hs_next_step) leads the deal card and shows on NOW, the hygiene line
+  second; deal obligations are plan items like any other; approved writes stay behind their flag.
+
+#### Independent review (2026-10-08, a fresh read-only agent) and its dispositions
+
+Six blockers, all verified in the code and all taken: B1 an email APPROVE must not send (the HUMAN_APPROVED_1TO1
+contract and the autonomy halt): APPROVE drafts, the send stays CONFIRM + SEND; B2 the revised copy had no route
+into the draft service: the copy-revision ticket (X10); B3 a work-item status machine would conflict with the
+commitment and outcome owners: the snapshot records START, assignments and revisions only; B4 the page assembled
+the day inside the component: `loadWorkDay` first (X01); B5 "sender plus subject token" is spoofable: thread
+match plus DMARC alignment required; B6 the mailbox cron would classify a self-addressed reply as `own`:
+the command verdict runs first and the GAP mailbox is refused as a command sender. Its SHOULD list is taken
+(sendViaGmail with OPERATOR_ALERT and Auto-Submitted; the threadId as the binding; buildAskContext as the
+grounding; one handler first; the snapshot as a ledger row; effects after the verdict row; each ranking repair
+alone). Documented disagreements: (1) the legacy `daily-digest` cron is not retired in the same ticket that turns
+the briefing on; two morning emails for a few days is Casey's call, named in settings; (2) the scorecard and
+targets are kept (Casey asked for daily activity counts against a target) but after the demonstration path;
+(3) `execute` mode is defined now so the rollout policy lives in the product, and refused until amended.
+
+#### Atomic backlog (the demonstration path first; each ticket: outcome, boundary, files, dependencies, acceptance, test, demo evidence, commit)
+
+- **X01 `loadWorkDay`** Outcome: the Work page and any cron build the identical day. Boundary: move
+  `loadCockpit` and the second wave from `src/app/gap/page.tsx` into `src/lib/gap/work/load-day.ts`; the page
+  calls it. Deps: none. Acceptance: the page renders unchanged; a source test proves the page builds no day of
+  its own; a unit test runs `loadWorkDay` over fakes. Test: `tests/unit/gap/load-day.test.ts`. Demo: Work on the
+  harness unchanged.
+- **X02 routing cron** Outcome: recommendations are never days old before the briefing. Boundary:
+  `src/app/api/cron/gap-routing/route.ts` (apply over the routable scope, bounded), `vercel.json` (weekdays 10:30
+  UTC), flag `GAP_ROUTING_CRON_ENABLED` default off, health copy in seller words. Deps: none. Acceptance: off
+  answers the skip payload; on runs `runRouting` once per day under a claim. Test: `gap-routing-cron.test.ts`.
+- **X03 seller settings** Outcome: the briefing address, hour, command senders and mode live in the product.
+  Boundary: `src/lib/gap/work/settings.ts` (SystemConfig `gap:seller:settings`, validation: the GAP mailbox
+  refused; mode `execute` refused), `GET/POST /api/gap/settings` (session), `scripts/gap/set-seller-settings.ts`.
+  Deps: none. Acceptance: round trip; refusals named. Test: `seller-settings.test.ts`.
+- **X04 the day snapshot** Outcome: one durable plan per day with tokens. Boundary: `src/lib/gap/work/plan.ts`
+  (`planDay`, `loadDayPlan`, item keys, tokens, `work.day_planned`), the advisory-lock claim. Deps: X01.
+  Acceptance: two concurrent plans write one row; keys carry an episode; the snapshot lists what workDay listed.
+  Test: `day-plan.test.ts` (plus a scratch test over Postgres for the lock).
+- **X05 the briefing** Outcome: a useful morning email from the canonical day, once. Boundary:
+  `src/lib/gap/work/briefing.ts` (pure render), `src/lib/gap/work/action-token.ts`, `src/app/api/cron/gap-briefing/
+  route.ts`, `vercel.json` (hourly), flag `GAP_BRIEFING_ENABLED`, `briefing.sent | briefing.failed` rows. Deps:
+  X01, X03, X04. Acceptance: sent at the hour, once per day, retried after a failure, resend only after Sent is
+  checked; links signed with an expiry; the GAP mailbox never the recipient. Test: `briefing.test.ts`,
+  `action-token.test.ts` (mutation: a forged token is refused).
+- **X06 START and the assignment** Outcome: one prepared assignment per item, by email or in the app.
+  Boundary: `src/lib/gap/work/assignment.ts` (render from buildAskContext plus the pack copy with citations;
+  `work.day_started`, `work.assignment_sent` with threadId, rfc id, key, revision, hash), `/gap/start` (session),
+  NEXT. Deps: X04, X05. Acceptance: the record carries the threadId and hash; the body never starts a line with a
+  command word. Test: `assignment.test.ts`.
+- **X07 the command verdict** Outcome: Casey's reply acts on the right item, authenticated, once. Boundary:
+  `src/lib/gap/replies/commands.ts` (pure parser and authentication), `gap-mailbox.ts` (`command` before `own`),
+  `mailbox.command` and `work.command_applied | command_refused` rows, effects for SKIP, DEFER, DONE: words,
+  NEXT, HELP. Deps: X03, X06. Acceptance: forged sender, missing DMARC alignment, a forward, an auto-reply, a
+  stale revision, a replayed command are each refused with the reason; effects run after the verdict row. Test:
+  `commands.test.ts` (mutation: removing the DMARC check lets a forged command through).
+- **X08 agent task ledger and cron** Outcome: durable, visible agent work. Boundary:
+  `src/lib/gap/agents/tasks.ts`, `/api/cron/gap-agent-tasks` (every 5 minutes), flag `GAP_AGENT_TASKS_ENABLED`,
+  health counts. Deps: none. Acceptance: a claim is exclusive; a lease outlives the function limit; attempts count
+  at claim; a zombie cannot complete a newer attempt; three failures end the task. Test: `agent-tasks.test.ts`.
+- **X09 `revise_message`** Outcome: a critique returns an improved, compiled recommendation in the same thread.
+  Boundary: `src/lib/gap/agents/revise-message.ts`, the REVISE command creating the task, `work.item_revised`,
+  the re-sent assignment. Deps: X07, X08. Acceptance: a revision passes compile or ends could_not_satisfy with
+  reasons; no invented fact; a newer REVISE supersedes. Test: `revise-message.test.ts` (fake LLM).
+- **X10 copy revision binding** Outcome: the approved revision is what the draft and the send carry. Boundary:
+  `src/lib/gap/execution/copy-revision.ts`, `loadActionPack` reads it, a compile row for it,
+  `execution.copy_revision_approved`. Deps: none. Acceptance: after approval the pack's hash is the revision's;
+  the draft idempotency key carries it; a superseded revision never renders. Test: `copy-revision.test.ts`
+  (mutation: the pack ignoring the revision makes the draft carry the template hash).
+- **X11 APPROVE by email** Outcome: APPROVE yields a real editable Gmail draft and the send link. Boundary: the
+  APPROVE effect in `commands.ts`, `createSellerGmailDraft`, the acknowledgment email; `prepare` mode refuses.
+  Deps: X07, X10. Acceptance: one draft per decision, step and hash; the acknowledgment carries both links; the
+  send remains the session route. Test: `approve-command.test.ts`.
+- **X12 the demonstration** Outcome: the mandate's section 17, steps 1-12, on the harness (sink mailbox,
+  labelled simulated), then the real-Gmail variant from the legacy identity to Casey's own address (labelled
+  real). Deps: X01-X11. Evidence: `docs/gap/execution-engine-demo-latest.md`.
+- Then, each alone: **X13** settings page, targets and the scorecard (today against target, yesterday, the week);
+  **X14a** a copied reply stays owed until Sent shows it; **X14b** a copied recap likewise; **X14c** a copied cold
+  email shown as copied, send pending; **X15a** an untriaged reply older than 14 days ranks as admin; **X15b** a
+  non-prospect inbound (a vendor writing to a teammate) is excluded; **X15c** the deal card leads with
+  hs_next_step; **X15d** the degraded banner in seller words at the foot; **X16a** call attempt recorded; **X16b**
+  no answer and voicemail make a follow-up; **X16c** the person's timeline on the brief; **X16d** objections
+  task; **X17** the deal next step on NOW; **X18** carried work reported; **X19** retire the legacy digest (Casey's
+  call); **X20** `activity.ts` and the accountability view.
+
+#### Receipts (each ticket one commit on `feat/gap-execution-engine`, RED then GREEN then one mutation per invariant; focused vitest, tsc, eslint on the touched files)
+<!-- verified:2026-10-08 -->
+
+- X01 16270691 `work/load-day.ts` + `work/cockpit-read.ts` (load-day.test.ts 5)
+- X02 062f1b24 `/api/cron/gap-routing`, flag GAP_ROUTING_CRON_ENABLED (gap-routing-cron.test.ts 6)
+- X03 ab278020 `work/settings.ts`, `/api/gap/settings`, `scripts/gap/set-seller-settings.ts` (seller-settings.test.ts 11)
+- X04 84b5b285 `work/plan.ts` (day-plan.test.ts 6)
+- X05a bdcd042c `work/action-token.ts`, `work/briefing.ts` (briefing.test.ts 6); X05b 74abedd1 `work/briefing-send.ts`, `/api/cron/gap-briefing`, flag GAP_BRIEFING_ENABLED (briefing-send.test.ts 6, gap-briefing-cron.test.ts 4)
+- X06 84691a40 `work/assignment.ts`, `/gap/start`, `/gap/item` (assignment.test.ts 5)
+- X07a 753f23ca `replies/commands.ts`, the `mailbox.command` verdict (commands.test.ts 12); X07b ee25927a `replies/commands-apply.ts` wired into `/api/cron/gap-mailbox` (commands-apply.test.ts 7)
+- X08 718ffefc `agents/tasks.ts`, `agents/handlers.ts`, `/api/cron/gap-agent-tasks`, flag GAP_AGENT_TASKS_ENABLED (agent-tasks.test.ts 4, gap-agent-tasks-cron.test.ts 3)
+- X10 b2610288 `execution/copy-revision.ts`, the `loadActionPack` binding (copy-revision.test.ts 3)
+- X09 0b379c2e `agents/revise-message.ts`, REVISE queues and the drain runs with `after()` (revise-message.test.ts 5)
+- X11 1b430569 `agents/approve-request.ts`, APPROVE wired (approve-request.test.ts 4)
+- X12 DONE 2026-10-08 on the scratch harness, provider boundary SIMULATED (the sink, the stub; the model call real): all twelve steps of section 17 with their receipts in `docs/gap/execution-engine-demo-latest.md`. The walk found and fixed, each its own commit: 7992ae81 (a provider answering no thread id), 626b4a17 (approving a story forgets the stale Work summary), bde214a3 (a ready card's decision read off the NEXT UP candidate), 2cb74376 (a refused APPROVE never consumes the command), d3de26ff (the revise prompt states the subject form). Not proven: Gmail itself, the inbox listing, DMARC on real mail; the real-Gmail variant (a draft in Casey's own mailbox) waits for his go.
+- Production flags for the new crons stay OFF until Casey sets the seller settings (`set-seller-settings.ts --remote --apply`, or the settings page X13) and GAP_ACTION_SECRET in Vercel; the legacy `daily-digest` keeps running until Casey says stop.
+
+#### Demonstration acceptance (section 17)
+
+1 a plan from existing intelligence (X04 over X01); 2 the briefing to an internal mailbox (X05); 3 START (X06);
+4 a specific evidence-backed action (the assignment); 5 REVISE by reply (X07); 6 the agent revises (X09); 7 the
+revision returns (X09); 8 APPROVE (X11); 9 a real editable draft (X11 through the existing draft service);
+10 a permitted test send confirmed (CONFIRM + SEND in the app to an allowlisted test recipient; the sink locally,
+labelled simulated; the real-Gmail variant labelled real); 11 the ledger shows DRAFTED then DIRECT_SENT and the
+Today panel counts it; 12 NEXT surfaces the next item. Nothing simulated is ever presented as a confirmed
+provider event.
+
+#### Remaining technical risks
+
+The mailbox cron is the command transport (up to 10 minutes; a Gmail push subscription is the upgrade); a client
+that rewrites the subject or drops References falls back to HELP; the agent revision is bounded by the evidence
+gate (a critique that cannot be met with verified facts returns could_not_satisfy); every internal email counts
+against the daily send cap (a loop would starve prospect sends: HELP is rate-limited and auto-submitted mail is
+never answered); HubSpot sequence write scope unproven; the local box overheats under parallel heavy jobs (serial
+validation only, the full suite at the release gate).
+
 ## 12. Migration, backfill and rollback
 
 Order of commits inside Sprint 1 and 3: schema + SQL first (no reader), then pure core, then importers (Top100 before PIC before modex legacy), then runtime pin, then services, then queue actions under the flag, then `GAP_OS_ENABLED=true` in Vercel after `verify-triggers.ts` passes against prod (env is snapshot at deploy; redeploy after setting). Before the prod `db push`, preview it with `prisma migrate diff --from-url <prod> --to-schema-datamodel prisma/schema.prisma --script` and confirm the script is additive only; also confirm the prod role can `CREATE FUNCTION` (not yet verified). Rollback: the flag off restores byte-identical behavior instantly; full removal is the rollback SQL plus reverting the runtime, service and queue-action commits; `sequences` is never modified; the only two pre-existing tables GAP OS's schema touches at all are `draft_queue_items` (one nullable `sequence_version_id` stamp, S1-T2) and `inbound_messages` (`source String @default("gmail")` and `hubspot_engagement_id String?`, S2-T1, needed so the reply cron and the HubSpot poller can tell a Gmail-sourced row from a HubSpot-engagement-sourced one and attribute the engagement id idempotently) — both additive-only, both confirmed by the production preflight below; the lane and PIC files are read, never written.

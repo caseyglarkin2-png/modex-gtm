@@ -61,7 +61,8 @@ describe('the send gate for many accounts is one read', () => {
     expect(one.calls).toEqual(['Acme Co']);
   });
   it('Work reads the send gate for its accounts once, never in a loop', () => {
-    const page = readFileSync('src/app/gap/page.tsx', 'utf8');
+    // X01: the cockpit read lives in work/cockpit-read.ts (the page and the briefing cron share it).
+    const page = readFileSync('src/lib/gap/work/cockpit-read.ts', 'utf8');
     expect(page).toMatch(/const sendableAll = await loadSendableThesesFor\(prisma, workAccounts, now\)/);
     expect(page).not.toMatch(/for \(const name of workAccounts\) \{\s*const sendable = await/);
   });

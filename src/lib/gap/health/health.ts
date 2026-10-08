@@ -39,7 +39,7 @@ export const HEALTH_REPAIR: Readonly<Record<HealthKey, { owner: string; retry: s
   hubspot: { owner: 'operator', retry: 'Check HUBSPOT_ACCESS_TOKEN in Vercel and that HubSpot answers; cold actions resume on their own once it reads' },
   suppression: { owner: 'operator', retry: 'Check CLAWD_CONTROL_PLANE_URL and its token in Vercel and that the clawd control plane answers; sends resume on their own once it gives a verdict' },
   sender: { owner: 'operator', retry: 'Set GAP_GMAIL_USER_EMAIL and its Gmail credential in Vercel, then redeploy' },
-  routing: { owner: 'operator', retry: 'Run routing from a GAP lane (Run routing); the cards refresh when it lands' },
+  routing: { owner: 'operator', retry: 'Recommendations refresh each weekday morning (the gap-routing schedule, GAP_ROUTING_CRON_ENABLED); to refresh now, open System at the foot of Work and press Run routing' },
 };
 
 const repaired = (c: HealthComponent): HealthComponent => {

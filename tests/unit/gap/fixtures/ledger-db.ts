@@ -65,6 +65,28 @@ export interface LedgerSeed {
   /** Sprint 5: confirmed buyer words (R51 / R53) and the HubSpot mirror's idempotency rows (R54). */
   bids?: Row[];
   mirror?: Row[];
+  /** X03 (sales execution engine): SystemConfig rows (the seller settings, the briefing claims). */
+  config?: Row[];
+  /** X10: compile rows (the copy a revision was judged on). */
+  compiles?: Row[];
+}
+
+/** X05b: SystemConfig's `key` is its primary key: a second create for the same key is Prisma's P2002 (the daily claims rely on it); delete removes by key. */
+function uniqueKeyTable(rows: Row[], clock: () => Date, idPrefix: string) {
+  const base = table(rows, clock, idPrefix);
+  return {
+    ...base,
+    create: async (q: { data: Row; select?: Row }) => {
+      if (rows.some((r) => r.key === q.data.key)) throw Object.assign(new Error('Unique constraint failed on the fields: (`key`)'), { code: 'P2002' });
+      return base.create(q);
+    },
+    delete: async (q: { where: Row }) => {
+      const i = rows.findIndex((r) => matchesWhere(r, q.where));
+      if (i < 0) throw Object.assign(new Error('Record to delete does not exist.'), { code: 'P2025' });
+      const [gone] = rows.splice(i, 1);
+      return { ...gone };
+    },
+  };
 }
 
 /** A fresh client over shared rows; `tick` advances the ledger clock so newest-row-wins is deterministic. */
@@ -82,6 +104,8 @@ export function ledgerDb(seed: LedgerSeed = {}, start = new Date('2026-10-06T14:
     prospectingHypothesis: [...(seed.hypotheses ?? [])],
     buyerInputData: [...(seed.bids ?? [])],
     gapHubSpotMirror: [...(seed.mirror ?? [])],
+    systemConfig: [...(seed.config ?? [])],
+    gapCompile: [...(seed.compiles ?? [])],
   };
   let t = start.getTime();
   const clock = () => new Date((t += 1000));
@@ -98,6 +122,8 @@ export function ledgerDb(seed: LedgerSeed = {}, start = new Date('2026-10-06T14:
     prospectingHypothesis: table(store.prospectingHypothesis, clock, 'h'),
     buyerInputData: table(store.buyerInputData, clock, 'b'),
     gapHubSpotMirror: table(store.gapHubSpotMirror, clock, 'mir'),
+    systemConfig: uniqueKeyTable(store.systemConfig, clock, 'cfg'),
+    gapCompile: table(store.gapCompile, clock, 'cmp'),
   });
   return { store, client, setClock: (d: Date) => (t = d.getTime()) };
 }

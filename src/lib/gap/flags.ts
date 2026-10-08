@@ -38,6 +38,12 @@ export const GAP_FLAGS = [
   'GAP_CRM_APPROVED_WRITES_ENABLED',
   // Phase 2 B1: the scheduled background evidence research (research only; never promotes, routes or sends).
   'GAP_BACKGROUND_RESEARCH_ENABLED',
+  // X02 (sales execution engine): routing on the weekday morning schedule (cards only; never drafts, enrolls, sends or writes HubSpot).
+  'GAP_ROUTING_CRON_ENABLED',
+  // X05b (sales execution engine): the morning briefing to the seller's configured address (an internal message; nothing to a buyer).
+  'GAP_BRIEFING_ENABLED',
+  // X08 (sales execution engine): the durable agent task drain (proposals only; never a send, a draft, an enrollment or a HubSpot write).
+  'GAP_AGENT_TASKS_ENABLED',
 ] as const;
 
 export type GapFlagName = (typeof GAP_FLAGS)[number];
