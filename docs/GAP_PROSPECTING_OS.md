@@ -1970,7 +1970,7 @@ c00b94ca; screenshots in the scratchpad `r63-B/`. Each fix is its own commit wit
 - S1 FIXED 0fa50dfa: an opt-out on file (their reply, recorded or not, or a recorded do not contact) makes the pack show no draft ("No email: they opted out", no subject, no body, no copy, no call script); the words are not temporary and say what to do. The approach, the motion line and the intake card say "Do not contact: ... Nothing goes to them from here."
 - S2 FIXED 002e4829: an opt-out or a bounce offers no "Answer in Gmail"; an email sent after the opt-out carries it beside the send.
 - S3 FIXED 21331eae: one Work outcome per account per day (a stale tab's second press answers 200 with the existing row, one line on Work); the day boundary no longer carries the press's milliseconds.
-- S7 FIXED IN PART 58b953d6: GAP's own not-found ("This account is not on your list", "This action pack is not on your list", "This page is not in GAP"), one link Back to Work, the title "Not found | GAP", the call page in words. NOT FIXED, the lead's decision: the HTTP status stays 200, because the page streams under the root and GAP loading boundaries before it can know the id is unknown (Next's docs: a real 404 needs the check in the proxy). The fix is a system-wide change: move the root `middleware.ts` to `proxy.ts` (Node runtime) and check the GAP detail ids there, or drop the loading boundaries above the GAP detail pages.
+- S7 FIXED IN PART 58b953d6: GAP's own not-found ("This account is not on your list", "This action pack is not on your list", "This page is not in GAP"), one link Back to Work, the title "Not found | GAP", the call page in words. NOT FIXED, the lead's decision: the HTTP status stays 200, because the page streams under the root and GAP loading boundaries before it can know the id is unknown (Next's docs: a real 404 needs the check in the proxy). The fix is a system-wide change: move the root `middleware.ts` to `proxy.ts` (Node runtime) and check the GAP detail ids there, or drop the loading boundaries above the GAP detail pages. DECIDED by the lead (2026-10-07): named debt after R64; the seller-facing fix (what is missing, one way back) ships now.
 - S8 FIXED 3967165c: sign-in comes back to the page (every GAP page's fallback carries it; the login page honors the session gate's callbackUrl, same site only). Production's gate already sends the callback (read-only check: GET /gap/ answers 307 to /login/?callbackUrl=...).
 - S4 FIXED 2666398e: Capture keeps one polite live region for the whole flow and says every save, refusal and record in it.
 - S5 FIXED d97fd055: the Note panel is a modal dialog for the keyboard (Escape from anywhere inside, Tab and Shift+Tab wrap, focus returns to the opener); closing keeps the typed note.
@@ -1979,7 +1979,7 @@ c00b94ca; screenshots in the scratchpad `r63-B/`. Each fix is its own commit wit
 - S15 FIXED c31cab0c: "No open HubSpot deal, checked moments ago" (never "HubSpot opportunity CLEAR"); a thesis row named in the words its cells show ("hidden capacity"); the call page's "not_found" in 58b953d6.
 - NICE fixed: N2 6891aa7b (a stale Record says it was refused); N1 part, N3, N4, N5, N8, N10 6c25eed2 ("7 theses", the composer's em dashes, Escape on "Why this person?", screen-reader spacing, the proof line from the canon's phrases with "260 sites committed" and passing the compiler's nearest-qualifier rule, a canceled meeting never the next step); N11 1f2ce814 (a capture link to a reply GAP does not hold opens a plain note); N12 e1046642 (a citation named "Source 1: title (site)"; an unlinked one never says "evidence_record"); N9 b63f2e69 (a fact's date is one calendar day everywhere).
 - NICE as debt (owners in the debt list below): N1 rest, N6, N7, N13.
-- Decision for Casey (N8): the 5% figure travels with "observed" in GAP (the compiler's canon, top100/CLAIMS.md, forbids "measured" beside it); the repository's prospect canon (CLAUDE.md) says "~5% measured". The proof line keeps "observed" until Casey says which canon is right.
+- N8 DECIDED by the lead (2026-10-07): keep "observed". The compiler enforces it (top100/CLAIMS.md forbids "measured" beside the 5%); the repository canon line ("~5% measured", CLAUDE.md) is for the native site's copy, not GAP's compiled text. It stays listed for Casey in the final packet as a wording decision, not a blocker.
 - Harness finding, not a product defect: the local Windows `next build` registers no middleware (`.next/server/middleware-manifest.json` is empty), so on the R63 server a signed-out page renders its own fallback and an API answers without the session gate; production runs the gate (read-only checks: GET /api/email/send/ answers 401, GET /gap/ 307 with the callback). Signed-out and API probes on the local server do not describe production.
 - Passing (reviewer B): the skip link; 182 focus stops with a visible ring; the keyboard walk completes; no horizontal scroll at 390 on five pages; no unnamed controls; one capture per reply across tabs; a recorded do not contact removes Doug from the composer; direct links load in a fresh signed-in context; a bogus view parameter falls back to Now.
 - Receipts at b63f2e69: the 19 R63 test files run singly with --maxWorkers=1, 59 tests green; each fix's neighboring files run singly at its commit (the tests that pinned old wording or old source lines moved to the new contract in the same commit); eslint and tsc clean on every changed file.
@@ -2001,14 +2001,14 @@ set it: the four blockers, the two matrix additions, then the MUST list.
 - S11 FIXED 67db8037: the day can finish: a meeting card has "Prepared" (recorded with the outcomes); Work says "Done for today: nothing needs you."; the preview speaks of tomorrow.
 - S8 FIXED a8110a38: the Work card keeps the page's move until the seller acts. Cause: the account page refined NEXT with the outreach anchor ("Put the story in use"), the Work warmer and Ask did not ("Prepare the email to Glen"), so a page visit flipped the remembered card and its aging flipped it back. One function (pursuit/next-anchor.ts) over one composition (story/compose.ts) now serves all three.
 - S9 FIXED 8247574b: the email page says HubSpot once: "No open deal, read moments ago. This email is not logged in HubSpot; GAP records it as emailed."
-- S13 FIXED 930bfa3c: the Accounts search covers every account (the ones GAP has not worked are listed after, "Not worked in GAP yet"), Work's search links to it, and an unlinked account says "No HubSpot company is linked to this account. Link it in HubSpot; until then no cold touch."
+- S13 FIXED 930bfa3c: the Accounts search covers every account (the ones GAP has not worked are listed after, "Not worked in GAP yet"), Work's search links to it, and an unlinked account says "No HubSpot company is linked to this account. Link it in HubSpot; until then no cold touch." with the link: "Link it in HubSpot" on NEXT and on its Work card opens HubSpot's company search for the account (2684beae).
 - S15 FIXED a4db626e: one line per obligation: a buyer obligation stays in Owed with its day and never repeats under tomorrow.
 - S16 FIXED 91c8bc0f: a blocked health line names its owner and the retry path (the R65 shape), on the line itself.
 - S17 FIXED 0380d5b5: a constraint is never a pilot success measure; it is listed apart as what the pilot has to respect.
 - S10 FIXED 0d4e5eff: after one send: "Touch 1 sent; the follow-up is on Oct 13." (the send's own follow-up obligation, by the sweep's day rule), and one motion line with the person's name and a readable date.
 - S12 FIXED 562e0f0b: the floating Note is Feedback and sits in the page flow at every width.
 - S6, S7 and S14 are R63-B S9 (67010fe2), S11 (a9f53e3f) and S10 (66b1e9ce).
-- NICE fixed: N1 part d126588d (clawd, Wedge, "hidden capacity (approved)", "0 candidates waiting"); N3 f5d3aaac (names on Done today and the deal brief); N4 part 73a9a4bc, d126588d and 0d4e5eff (the meeting context, Capture's recent notes, the motion line); N5 and N7 670dbbd8 (yards plural; the canon proof line); N6 part 73a9a4bc and 0380d5b5 (a currentness said twice, "also leads", "...lost Wrong if: If", "Read BRIEF", "1 of their own measure"); N10 772de979 ("CSCO" spelled out).
+- NICE fixed: N1 part d126588d (clawd, Wedge, "hidden capacity (approved)", "0 candidates waiting"); N3 f5d3aaac (names on Done today and the deal brief); N4 part 73a9a4bc, d126588d and 0d4e5eff (the meeting context, Capture's recent notes, the motion line); N5 and N7 670dbbd8 (yards plural; the canon proof line); N6 part 73a9a4bc and 0380d5b5 (a currentness said twice, "also leads", "...lost Wrong if: If", "Read BRIEF", "1 of their own measure"); N10 772de979 ("CSCO" spelled out) and 1b240b19 (a person with no title reads "title not on record": Dannon's Mark Shaughnessy).
 - NICE by design: N10's intro ask lives only on the account (warm intro only: the account is the one place that asks Mark).
 - NICE as debt (owners in the debt list below): N1 rest, N2, N4 rest, N6 rest, N8, N9, N11.
 - Acceptance, each proven by a test: a first-person promise is owed by the seller (`r63a-seller-promise.test.tsx`); a customer or lost-deal account never reads Ready on Work or the preview after a restart or Refresh (`r63a-held-never-ready.test.ts`); the preview offers no outreach to an account with a live reply or a recorded do not contact (`r63a-preview-stop-rules.test.ts`); the story names the person who replied (`r63a-story-names.test.ts`); a recorded reply's card clears on the next Refresh with a real date (`r63a-reply-clears.test.ts`); Work reaches done when the only item left is a prepared meeting (`r63a-day-done.test.tsx`).
@@ -2040,12 +2040,12 @@ spend decision), operator (runs the system), copy (human-written words, Casey's)
 - One Sprint 5 review NICE not taken: a canceled meeting's rebook offer with HubSpot's stale next step. Guard: none. Owner: engineering (R62 lists it). The raw date in the brief (context/brief.ts) is fixed in 73a9a4bc.
 - The app's main sidebar lists Accounts and Work Queue beside GAP OS. Guard: none (outside GAP). Owner: Casey (a system-wide change).
 - Transcription stays off pending its spend. Guard: `GAP_TRANSCRIPTION_ENABLED` unset. Owner: Casey.
-- R63-B S7: a nonsense GAP id answers HTTP 200 (the not-found body and title are GAP's own). Guard: the body says not found, links back to Work, and Next marks the response noindex. Owner: the lead (a system-wide proxy change).
+- R63-B S7: GAP detail pages answer 200 for an unknown id; the real 404 needs the id check in the proxy. Guard: the body says what is missing, links back to Work, and Next marks the response noindex. Owner: the lead. After R64 (the lead's decision 2026-10-07).
 - R63-B N1 rest: admin words on the preview page's system details ("review_required to approved", "Emit enroll row (shadow)", "Hidden Capacity v1draft", "{{first_name}}", "Confidence 40%" without a trust word). Guard: they sit in the collapsed System details and the analyst views. Owner: engineering, copy for the words.
 - R63-B N6: Mills reads "active" in the thesis list and "No usable thesis yet" on its page (the list shows the record's state, the page the gate's). Guard: the send gate refuses it. Owner: engineering.
 - R63-B N7: "The opening story, above." can show when the anchor above is not shown (an account on hold). Guard: its basis names the anchor's fact. Owner: engineering.
 - R63-B N13: a first-touch email opens by quoting the raw fact title. Guard: the seller reads every email before it goes. Owner: copy (Casey).
-- R63-B N8 decision: "about 5% ... observed" (GAP's compiler canon) or "~5% measured" (the repository canon). Guard: the compiler's rule holds every email. Owner: Casey.
+- R63-B N8: DECIDED by the lead, GAP keeps "about 5% ... observed" (the compiler enforces it; the repository canon line is the native site's copy). Listed for Casey in the final packet as a wording decision, not a blocker. Owner: Casey (wording only).
 - R63-A N1 rest: "remit" in seller text (the remit caution, "it lands on their remit", "Location / remit unknown"; 19 test files pin it) and the "Next operator" slot name (a typed slot). Guard: words only. Owner: copy (Casey) for the word, engineering for the change.
 - R63-A N2: UNKNOWN is the truth vocabulary (STABLE_BASELINE: an empty section says UNKNOWN); EMAIL, PREPARED and RECORDED are the uppercase badge and heading style over sentence-case text. Guard: screen readers read the sentence case. Owner: the lead (a design decision).
 - R63-A N4 rest: about 33 seller-visible strings still print an ISO date (`slice(0, 10)`: person factors, the paused-reply headline, a family's separate-motion line). Guard: the date is right, only its form. Owner: engineering.
@@ -2056,13 +2056,13 @@ spend decision), operator (runs the system), copy (human-written words, Casey's)
 
 ### HANDOFF
 
-HANDOFF commit: 77e4a71e (docs only; the block below describes head_sha 772de979 on feat/gap-account-first-ux; first written in d3b6592a).
+HANDOFF commit: PENDING (docs only; the block below describes head_sha 1b240b19 on feat/gap-account-first-ux; first written in d3b6592a).
 
 ```yaml
 # HANDOFF (this block's own commit SHA is on the ledger line directly above the block)
 branch: feat/gap-account-first-ux
 base_sha: e66a9853
-head_sha: 772de979
+head_sha: 1b240b19
 production_sha: 672570ed
 tickets:
   R00: {disposition: DONE, evidence: "2113361c: production 672570ed reconciled; the capability matrix and the one stranded PepsiCo draft recorded"}
@@ -2105,7 +2105,7 @@ tickets:
   R61: {disposition: PARTIAL, evidence: "31c44d1f; the p95 re-judgment in the R61 entry", dependency: "cold first byte (platform); Prisma idle SELECT 1 per pooled connection; Work's rebuilt read"}
 later_tickets:
   R62: {disposition: IN PROGRESS, evidence: "acceptB runs the matrix on 55433"}
-  R63: {disposition: IN PROGRESS, evidence: "both reports dispositioned: R63-B (B1 8f7c20d5 3fe2c39e; S1-S15 fixed, S7 in part) and R63-A (B1-B4 0fad39a5 5090fe4a 9893899f e6d1038f; the matrix's two 3f8753cd e6d1038f; S1-S17 fixed, S6 S7 S14 as R63-B's; NICE fixed, by design or named debt); awaiting the lead's acceptance, the rebuild and the full gates", dependency: "S7's HTTP 404 needs the lead's proxy decision; N8's 5% qualifier needs Casey's; R63-A N2 is the lead's design call"}
+  R63: {disposition: DONE, evidence: "both reports dispositioned: R63-B (B1 8f7c20d5 3fe2c39e; S1-S15 fixed, S7 in part, its 404 named debt after R64) and R63-A (B1-B4 0fad39a5 5090fe4a 9893899f e6d1038f; the matrix's two 3f8753cd e6d1038f; S1-S17 fixed, S13 with its link 2684beae; S6 S7 S14 as R63-B's; NICE fixed, by design or named debt); the full gates and the rebuild run on the lead's word", dependency: "none for R63; R63-A N2 (UNKNOWN and the uppercase badges) is the lead's design call; the 5% wording is listed for Casey, not a blocker"}
   R64: {disposition: NOT STARTED, evidence: "needs Casey's authorization for the production write below"}
   R65: {disposition: DONE, evidence: "e5b0b567 the counts, d9902641 owners and retry paths, c72e6a2f the read-only dry run"}
 reopened_unresolved:
@@ -2205,6 +2205,7 @@ test_receipts:
   r63_fix_3fe2c39e: "8f7c20d5 and 3fe2c39e: eight files run singly with --maxWorkers=1, 41 tests (r63-opt-out-send 4, r63-compose-on-gap 2, email-send-routes 11, queue-send-deps 10, warm-intro-writers 7, perform-send-parity 3, campaign-tag-flow 2, b4-unsubscribe-case-insensitive 2), a red mutation on each fix; eslint and tsc clean"
   r63_b_b63f2e69: "77261d91..b63f2e69: the 19 R63 test files run singly with --maxWorkers=1, 59 tests green; neighbors run singly at each commit; a red mutation on each fix; eslint and tsc clean; no full suite, no build"
   r63_a_772de979: "0fad39a5..772de979: the 43 R63 test files (R63-B and R63-A) run singly with --maxWorkers=1, 115 tests green; neighbors run singly at each commit; a red mutation on each fix; eslint and tsc clean; no full suite, no build"
+  r63_a_1b240b19: "after 2684beae (S13's link) and 1b240b19 (N10's title): the 44 R63 test files run singly with --maxWorkers=1, 116 tests green; a red mutation on each; eslint and tsc clean; no full suite, no build"
 genuine_blockers: []
 ```
 
