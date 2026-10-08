@@ -53,6 +53,11 @@ export const TIER_RANK: Record<WorkTier, number> = { commitment: 0, reply: 1, me
  * stay listed, after every card that needs the seller and under their own heading, and never count in "needs you".
  */
 export const PARKED_TIERS: ReadonlySet<WorkTier> = new Set<WorkTier>(['research', 'later', 'held']);
+/**
+ * X15a: an untriaged reply older than this no longer leads the day (the live page led with June and August replies);
+ * it ranks as admin, "An old reply to triage", still listed. The same window as ANSWER_OWED_DAYS.
+ */
+export const REPLY_TRIAGE_DAYS = 14;
 /** Does this card need the seller today? Its tier, else (a card built outside workDay) the tier its state places it in. */
 export function needsYouCard(c: { tier?: WorkTier; stateKind: WorkStateKind }): boolean {
   return !PARKED_TIERS.has(c.tier ?? STATE_TIER[c.stateKind]);
@@ -138,6 +143,8 @@ export interface WorkCard {
   stalled?: string[];
   /** R63-A S4: a recorded reply whose answer is owed (its action is the prepared answer, never Capture again). */
   answerOwed?: boolean;
+  /** X15c: the next step HubSpot carries on the deal (hs_next_step), when one is set: the card leads with it. */
+  dealNextStep?: string | null;
 }
 
 export interface WorkInput {
@@ -151,7 +158,7 @@ export interface WorkInput {
   /** The account motions the cockpit read (primary and next per account). */
   motions: ReadonlyArray<{ accountName: string; state: string; primary: { name: string; title: string | null } | null; next: { name: string; title: string | null; unlock: string } | null }>;
   /** The In Deals summary: complete, or unavailable (then nothing is claimed about deals). */
-  inDeals: { status: 'complete' | 'unavailable'; accounts: ReadonlyArray<{ accountName: string; deals: ReadonlyArray<{ id?: string; name: string | null; stage: string; lastActivityAt?: string | null; closeDate?: string | null; contactIds?: readonly string[] }> }> };
+  inDeals: { status: 'complete' | 'unavailable'; accounts: ReadonlyArray<{ accountName: string; deals: ReadonlyArray<{ id?: string; name: string | null; stage: string; lastActivityAt?: string | null; closeDate?: string | null; /** X15c: HubSpot hs_next_step, when set. */ nextStep?: string | null; contactIds?: readonly string[] }> }> };
   /** Accounts a current card holds for an open deal or an UNKNOWN opportunity read (never a cold action). */
   held: ReadonlyMap<string, 'active_opportunity' | 'opportunity_unknown'>;
   /**
@@ -482,7 +489,10 @@ export function workDay(i: WorkInput): WorkDay {
     motionWaiting.delete(name);
     // R55: a stalled deal is deal work (derived from overdue obligations and HubSpot's own dates, never a probability).
     const stalled = a.deals.flatMap((d) => stalledSignals({ now: i.now, deal: { name: d.name, lastActivityAt: d.lastActivityAt ?? null, closeDate: d.closeDate ?? null }, commitments: (i.commitments ?? []).filter((c) => c.accountName === name && !!d.id && c.dealId === d.id) }).map((s) => (a.deals.length > 1 ? `${d.name ?? 'A deal'}: ${s}` : s)));
-    offer({ rank: LANE_RANK.deals, sortKey: [name], card: { accountName: name, lane: 'deals', stateKind: 'in_deal', state: STATE_TEXT.in_deal, why: `Open HubSpot ${a.deals.length === 1 ? 'deal' : 'deals'}: ${stages}.`, person: null, next: { label: 'Open the deal brief', href: `${accountHref(name)}?view=brief` }, blocker: 'No cold first touch while the deal is open: work it from the deal.', ...(stalled.length ? { stalled } : {}) } });
+    // X15c: the buyer's next step (HubSpot hs_next_step) leads the card when one is set; the hygiene line comes second.
+    const dealNextStep = a.deals.map((d) => (typeof d.nextStep === 'string' ? d.nextStep.trim() : '')).find(Boolean) ?? null;
+    const dealsLine = `Open HubSpot ${a.deals.length === 1 ? 'deal' : 'deals'}: ${stages}.`;
+    offer({ rank: LANE_RANK.deals, sortKey: [name], card: { accountName: name, lane: 'deals', stateKind: 'in_deal', state: STATE_TEXT.in_deal, why: dealNextStep ? `Next step on the deal: ${dealNextStep.replace(/\.$/, '')}. ${dealsLine}` : dealsLine, person: null, next: { label: 'Open the deal brief', href: `${accountHref(name)}?view=brief` }, blocker: 'No cold first touch while the deal is open: work it from the deal.', ...(stalled.length ? { stalled } : {}), ...(dealNextStep ? { dealNextStep } : {}) } });
   }
   for (const [name, why] of i.held) {
     if (dealAccounts.has(name)) continue;
@@ -700,7 +710,10 @@ export function workDay(i: WorkInput): WorkDay {
   const ranked = [...best.values()].map((r) => {
     const name = r.card.accountName;
     const list = [...(obligations.get(name) ?? [])].sort((a, b) => TIER_RANK[a.tier] - TIER_RANK[b.tier] || String(a.dueAt ?? '').localeCompare(String(b.dueAt ?? '')));
-    const own: WorkTier = later.has(name) && r.card.stateKind !== 'replied' && r.card.stateKind !== 'opted_out' ? 'later' : r.card.stalled?.length && r.card.stateKind === 'in_deal' ? 'deal' : STATE_TIER[r.card.stateKind];
+    // X15a: an untriaged reply older than the triage window ranks as admin (never hidden); an owed answer keeps the reply tier.
+    const replyAgeDays = r.card.stateKind === 'replied' && !r.card.answerOwed && r.card.reply?.at ? Math.floor((i.now.getTime() - new Date(r.card.reply.at).getTime()) / 86_400_000) : null;
+    const oldReply = replyAgeDays !== null && replyAgeDays > REPLY_TRIAGE_DAYS;
+    const own: WorkTier = later.has(name) && r.card.stateKind !== 'replied' && r.card.stateKind !== 'opted_out' ? 'later' : oldReply ? 'admin' : r.card.stalled?.length && r.card.stateKind === 'in_deal' ? 'deal' : STATE_TIER[r.card.stateKind];
     const fromObligation = list.filter((o) => o.tier !== 'later').sort((a, b) => TIER_RANK[a.tier] - TIER_RANK[b.tier])[0];
     const tier: WorkTier = fromObligation && TIER_RANK[fromObligation.tier] < TIER_RANK[own] ? fromObligation.tier : own;
     const lane: WorkLane = tier !== own ? TIER_LANE[tier] ?? r.card.lane : r.card.lane;
@@ -710,7 +723,8 @@ export function workDay(i: WorkInput): WorkDay {
     const dueMs = Math.min(...list.filter((o) => o.tier === tier).map((o) => (o.dueAt ? new Date(o.dueAt).getTime() : Number.MAX_SAFE_INTEGER)), tier === 'reply' && Number.isFinite(replyAt) && replyAt > 0 ? replyAt : Number.MAX_SAFE_INTEGER);
     const act = activity.get(name) ?? 0;
     const prio = i.priorities?.get(name) ?? null;
-    return { r, tier, lane, list, dueMs, act, prio };
+    const oldReplyDays = oldReply ? replyAgeDays : null;
+    return { r, tier, lane, list, dueMs, act, prio, oldReplyDays };
   });
   ranked.sort((a, b) => Number(PARKED_TIERS.has(a.tier)) - Number(PARKED_TIERS.has(b.tier)) || TIER_RANK[a.tier] - TIER_RANK[b.tier] || a.dueMs - b.dueMs || b.act - a.act || Number(!a.prio) - Number(!b.prio) || a.r.rank - b.r.rank || cmpKeys(a.r.sortKey, b.r.sortKey) || a.r.card.accountName.localeCompare(b.r.card.accountName));
   /** R44: Capture opened from this card: the account, the person who wrote, the deal, the conversation, the source. */
@@ -748,10 +762,10 @@ export function workDay(i: WorkInput): WorkDay {
     q.set('from', `work:${card.accountName}`);
     return { href: `/gap/capture?${q.toString()}`, label: 'Log a conversation' };
   };
-  const cards: WorkCard[] = ranked.map(({ r, tier, lane, list, dueMs, act, prio }, index) => {
+  const cards: WorkCard[] = ranked.map(({ r, tier, lane, list, dueMs, act, prio, oldReplyDays }, index) => {
     const top = list.find((o) => o.tier === tier);
     const phrase = (line: string) => line.replace(/\.$/, '').replace(/^\w/, (ch) => ch.toLowerCase());
-    const bits = [top ? `${TIER_WHY[tier]}: ${top.title}${top.dueDay && top.kind !== 'meeting' ? ` (${phrase(top.line)})` : ''}` : tier === 'deal' && r.card.stalled?.length ? `A stalled deal: ${phrase(r.card.stalled[0])}` : TIER_WHY[tier]];
+    const bits = [top ? `${TIER_WHY[tier]}: ${top.title}${top.dueDay && top.kind !== 'meeting' ? ` (${phrase(top.line)})` : ''}` : tier === 'admin' && oldReplyDays !== null ? `An old reply to triage (${oldReplyDays} days): record what they said or dismiss it` : tier === 'deal' && r.card.dealNextStep ? `The deal's next step: ${r.card.dealNextStep.replace(/\.$/, '')}${r.card.stalled?.length ? ` (stalled: ${phrase(r.card.stalled[0])})` : ''}` : tier === 'deal' && r.card.stalled?.length ? `A stalled deal: ${phrase(r.card.stalled[0])}` : TIER_WHY[tier]];
     if (!top && dueMs < Number.MAX_SAFE_INTEGER && tier === 'reply') bits[0] = `${TIER_WHY.reply} ${day(new Date(dueMs).toISOString())}`;
     else if (act && tier !== 'reply') bits.push(`buyer activity ${day(new Date(act).toISOString())}`);
     if (prio) bits.push(`you prioritized it (${prio.reason})`);
