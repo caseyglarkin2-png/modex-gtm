@@ -1984,6 +1984,36 @@ c00b94ca; screenshots in the scratchpad `r63-B/`. Each fix is its own commit wit
 - Passing (reviewer B): the skip link; 182 focus stops with a visible ring; the keyboard walk completes; no horizontal scroll at 390 on five pages; no unnamed controls; one capture per reply across tabs; a recorded do not contact removes Doug from the composer; direct links load in a fresh signed-in context; a bogus view parameter falls back to Now.
 - Receipts at b63f2e69: the 19 R63 test files run singly with --maxWorkers=1, 59 tests green; each fix's neighboring files run singly at its commit (the tests that pinned old wording or old source lines moved to the new contract in the same commit); eslint and tsc clean on every changed file.
 
+**R63-A dispositions (reviewer A: the seller walk; 2026-10-07).** 4 BLOCKER, 17 SHOULD, 11 NICE on the c00b94ca
+build; screenshots and page text in the scratchpad `r63-A/`. Each fix is its own commit with focused single-file tests
+(--maxWorkers=1) and one red mutation, restored; no full suite and no rebuild under the lead's cap. Order as the lead
+set it: the four blockers, the two matrix additions, then the MUST list.
+- B1 FIXED 0fad39a5: a seller's own promise is owed by the seller. An unlabelled first-person promise in a note ("I will send Ben a one-pager") is the seller's deliverable; a third-person one ("Ben will send us...") is the buyer's promise to chase; Capture shows "Who owes it: Me / Them" and retitles an untouched title.
+- B2 FIXED 5090fe4a: a customer or lost-deal account never reads Ready on Work: the opportunity holds read twenty accounts, five at a time, remembered five minutes, so a restart or a Refresh holds them in the closure's words without a page visit.
+- B3 FIXED 9893899f: the tomorrow preview goes through the same stop rules as today (a live reply, a recorded do not contact, a decline, a not-a-priority answer hold the account), and it starts from what the workspace says now.
+- B4 FIXED e6d1038f (with the matrix's speaker case): the story names who actually spoke, resolved from the reply's address before any name, digits kept in the name key; the deal brief and the conversation read the person on record.
+- Matrix item 2 FIXED 3f8753cd: card readiness says "thesis" in its body text (R60).
+- S4 FIXED 1bcc2ccf: a recorded reply is owed its answer (R42): its Work card reads "Answer <name>" until the answer is sent or copied, and the account page keeps the prepared answer at #reply-answer; a stop or a bounce owes none ("No reply goes back.").
+- S5 FIXED 048c61d3, with 3ab2a345 and f5d3aaac: a paraphrase is what the seller noted they said, never a quote: the wording is recorded at capture (bid/wording.ts), and the deal list, the meeting brief, the story, Listen, the recap, the pilot draft, the business-case inputs and the deal brief all say "You noted" or "as I understood it", without quotation marks.
+- S1 FIXED 04e5d217: a recorded reply's card clears on the next Refresh, and a reply card's day is the message's received date (never "Dec 31").
+- S2 FIXED 115dda98: "Open the reply" always lands on a real place: the account page keeps the reply's anchor and says what happened to it.
+- S3 FIXED 4ad5e063: a reply that has its capture opens it at once, with its review, saying it already has one.
+- S11 FIXED 67db8037: the day can finish: a meeting card has "Prepared" (recorded with the outcomes); Work says "Done for today: nothing needs you."; the preview speaks of tomorrow.
+- S8 FIXED a8110a38: the Work card keeps the page's move until the seller acts. Cause: the account page refined NEXT with the outreach anchor ("Put the story in use"), the Work warmer and Ask did not ("Prepare the email to Glen"), so a page visit flipped the remembered card and its aging flipped it back. One function (pursuit/next-anchor.ts) over one composition (story/compose.ts) now serves all three.
+- S9 FIXED 8247574b: the email page says HubSpot once: "No open deal, read moments ago. This email is not logged in HubSpot; GAP records it as emailed."
+- S13 FIXED 930bfa3c: the Accounts search covers every account (the ones GAP has not worked are listed after, "Not worked in GAP yet"), Work's search links to it, and an unlinked account says "No HubSpot company is linked to this account. Link it in HubSpot; until then no cold touch."
+- S15 FIXED a4db626e: one line per obligation: a buyer obligation stays in Owed with its day and never repeats under tomorrow.
+- S16 FIXED 91c8bc0f: a blocked health line names its owner and the retry path (the R65 shape), on the line itself.
+- S17 FIXED 0380d5b5: a constraint is never a pilot success measure; it is listed apart as what the pilot has to respect.
+- S10 FIXED 0d4e5eff: after one send: "Touch 1 sent; the follow-up is on Oct 13." (the send's own follow-up obligation, by the sweep's day rule), and one motion line with the person's name and a readable date.
+- S12 FIXED 562e0f0b: the floating Note is Feedback and sits in the page flow at every width.
+- S6, S7 and S14 are R63-B S9 (67010fe2), S11 (a9f53e3f) and S10 (66b1e9ce).
+- NICE fixed: N1 part d126588d (clawd, Wedge, "hidden capacity (approved)", "0 candidates waiting"); N3 f5d3aaac (names on Done today and the deal brief); N4 part 73a9a4bc, d126588d and 0d4e5eff (the meeting context, Capture's recent notes, the motion line); N5 and N7 670dbbd8 (yards plural; the canon proof line); N6 part 73a9a4bc and 0380d5b5 (a currentness said twice, "also leads", "...lost Wrong if: If", "Read BRIEF", "1 of their own measure"); N10 772de979 ("CSCO" spelled out).
+- NICE by design: N10's intro ask lives only on the account (warm intro only: the account is the one place that asks Mark).
+- NICE as debt (owners in the debt list below): N1 rest, N2, N4 rest, N6 rest, N8, N9, N11.
+- Acceptance, each proven by a test: a first-person promise is owed by the seller (`r63a-seller-promise.test.tsx`); a customer or lost-deal account never reads Ready on Work or the preview after a restart or Refresh (`r63a-held-never-ready.test.ts`); the preview offers no outreach to an account with a live reply or a recorded do not contact (`r63a-preview-stop-rules.test.ts`); the story names the person who replied (`r63a-story-names.test.ts`); a recorded reply's card clears on the next Refresh with a real date (`r63a-reply-clears.test.ts`); Work reaches done when the only item left is a prepared meeting (`r63a-day-done.test.tsx`).
+- Receipts at 772de979: the 43 R63 test files run singly with --maxWorkers=1, 115 tests green; each fix's neighboring files run singly at its commit (tests that pinned old wording moved to the new contract in the same commit); eslint and tsc clean on every changed file.
+
 **Consolidated debt (2026-10-07).** Every debt this recovery named, one line each, with its owner and the guard that
 holds today; the entries above keep the detail. Owners: engineering (the GAP engineer of record), Casey (a product or
 spend decision), operator (runs the system), copy (human-written words, Casey's).
@@ -2007,7 +2037,7 @@ spend decision), operator (runs the system), copy (human-written words, Casey's)
 - Generated quality has no held-out graded corpus (30 or more cases with model, prompt and policy versions). Guard: every generated line is reviewed by the seller. Owner: Casey and engineering.
 - R42b: a reply seen only in HubSpot's connected inbox is prepared and copyable, not drafted or sent from GAP. Guard: the Gmail thread is required. Owner: engineering.
 - The analyst tables on /gap/learning show sequence version ids, VERIFIED_FACT and campaign program keys. DECIDED by the lead (2026-10-07): they keep their words, analyst words by contract (R60). Kept here for the record; no longer open.
-- Two Sprint 5 review NICEs not taken: a raw date in the brief (context/brief.ts), and a canceled meeting's rebook offer with HubSpot's stale next step. Guard: none. Owner: engineering (R62 lists them).
+- One Sprint 5 review NICE not taken: a canceled meeting's rebook offer with HubSpot's stale next step. Guard: none. Owner: engineering (R62 lists it). The raw date in the brief (context/brief.ts) is fixed in 73a9a4bc.
 - The app's main sidebar lists Accounts and Work Queue beside GAP OS. Guard: none (outside GAP). Owner: Casey (a system-wide change).
 - Transcription stays off pending its spend. Guard: `GAP_TRANSCRIPTION_ENABLED` unset. Owner: Casey.
 - R63-B S7: a nonsense GAP id answers HTTP 200 (the not-found body and title are GAP's own). Guard: the body says not found, links back to Work, and Next marks the response noindex. Owner: the lead (a system-wide proxy change).
@@ -2016,16 +2046,23 @@ spend decision), operator (runs the system), copy (human-written words, Casey's)
 - R63-B N7: "The opening story, above." can show when the anchor above is not shown (an account on hold). Guard: its basis names the anchor's fact. Owner: engineering.
 - R63-B N13: a first-touch email opens by quoting the raw fact title. Guard: the seller reads every email before it goes. Owner: copy (Casey).
 - R63-B N8 decision: "about 5% ... observed" (GAP's compiler canon) or "~5% measured" (the repository canon). Guard: the compiler's rule holds every email. Owner: Casey.
+- R63-A N1 rest: "remit" in seller text (the remit caution, "it lands on their remit", "Location / remit unknown"; 19 test files pin it) and the "Next operator" slot name (a typed slot). Guard: words only. Owner: copy (Casey) for the word, engineering for the change.
+- R63-A N2: UNKNOWN is the truth vocabulary (STABLE_BASELINE: an empty section says UNKNOWN); EMAIL, PREPARED and RECORDED are the uppercase badge and heading style over sentence-case text. Guard: screen readers read the sentence case. Owner: the lead (a design decision).
+- R63-A N4 rest: about 33 seller-visible strings still print an ISO date (`slice(0, 10)`: person factors, the paused-reply headline, a family's separate-motion line). Guard: the date is right, only its form. Owner: engineering.
+- R63-A N6 rest: the Fedex first touch names the account three times (the headline, inside the quoted fact, "That might not be true at ..."); it is governed copy in a seeded approach family. Guard: the seller reads every email. Owner: copy (Casey), with R63-B N13.
+- R63-A N8: the Accounts list says "no GAP touch yet" where a conversation or a deal exists (it reads GAP first touches only) and shows the record's vertical, not the page's industry words. Guard: the account page says what has happened. Owner: engineering (the index stays three cheap reads, UX-10).
+- R63-A N9: a reply's meaning allows one choice. Guard: the seller records the strongest meaning and notes the rest. Owner: engineering.
+- R63-A N11: the older Accounts page (/accounts, outside GAP) shows database id 9212 and recommends outreach at 0 contacts. Guard: none (legacy). Owner: the lead.
 
 ### HANDOFF
 
-HANDOFF commit: 6a529656 (docs only; the block below describes head_sha b63f2e69 on feat/gap-account-first-ux; first written in d3b6592a).
+HANDOFF commit: PENDING (docs only; the block below describes head_sha 772de979 on feat/gap-account-first-ux; first written in d3b6592a).
 
 ```yaml
 # HANDOFF (this block's own commit SHA is on the ledger line directly above the block)
 branch: feat/gap-account-first-ux
 base_sha: e66a9853
-head_sha: b63f2e69
+head_sha: 772de979
 production_sha: 672570ed
 tickets:
   R00: {disposition: DONE, evidence: "2113361c: production 672570ed reconciled; the capability matrix and the one stranded PepsiCo draft recorded"}
@@ -2068,7 +2105,7 @@ tickets:
   R61: {disposition: PARTIAL, evidence: "31c44d1f; the p95 re-judgment in the R61 entry", dependency: "cold first byte (platform); Prisma idle SELECT 1 per pooled connection; Work's rebuilt read"}
 later_tickets:
   R62: {disposition: IN PROGRESS, evidence: "acceptB runs the matrix on 55433"}
-  R63: {disposition: IN PROGRESS, evidence: "reviewer B's report dispositioned (the R63-B entry): B1 8f7c20d5 3fe2c39e; S1-S15 fixed (S7 in part); NICE fixed or named debt; reviewer A's list pending", dependency: "S7's HTTP 404 needs the lead's proxy decision; N8's 5% qualifier needs Casey's"}
+  R63: {disposition: IN PROGRESS, evidence: "both reports dispositioned: R63-B (B1 8f7c20d5 3fe2c39e; S1-S15 fixed, S7 in part) and R63-A (B1-B4 0fad39a5 5090fe4a 9893899f e6d1038f; the matrix's two 3f8753cd e6d1038f; S1-S17 fixed, S6 S7 S14 as R63-B's; NICE fixed, by design or named debt); awaiting the lead's acceptance, the rebuild and the full gates", dependency: "S7's HTTP 404 needs the lead's proxy decision; N8's 5% qualifier needs Casey's; R63-A N2 is the lead's design call"}
   R64: {disposition: NOT STARTED, evidence: "needs Casey's authorization for the production write below"}
   R65: {disposition: DONE, evidence: "e5b0b567 the counts, d9902641 owners and retry paths, c72e6a2f the read-only dry run"}
 reopened_unresolved:
@@ -2078,7 +2115,7 @@ reopened_unresolved:
   - "R61: Prisma idle SELECT 1 per pooled connection"
   - "R61: Work's rebuilt read 10.5 to 12.6 s under production-like latency"
   - "a closure typed as site_expansion (research/facts.ts classifyFact; the signal type CHECK has no closure value)"
-  - "two Sprint 5 review NICEs not taken: a raw date in the brief; a canceled meeting's rebook offer and HubSpot's stale next step"
+  - "one Sprint 5 review NICE not taken: a canceled meeting's rebook offer and HubSpot's stale next step (the raw date in the brief is fixed in 73a9a4bc)"
 r62_cases:
   matrix: {branch: feat/gap-matrix, sha: caa0772c, origin_sha: a43b46b3, files: "tests/unit/gap/scratch/matrix-*.scratch.test.ts", file_count: 8, cases: 87, note: "87 green is acceptB's receipt; caa0772c and a43b46b3 carry the same runbook commit"}
   groups: [migration and boundaries, daily work, dependencies, execution, identity and scope, Pepsi regression, replies and capture, source truth and commercial relevance]
@@ -2099,6 +2136,15 @@ r62_cases:
     - "an opt-out on file shows no draft on the pack page; no Answer in Gmail on an opt-out or a bounce"
     - "a proposed plan records only what was chosen; a stale Skip today is one row and one line on Work"
     - "a restored skip leaves the day's set-aside list; Kroger's story says what has happened (deals, their words, the meeting)"
+    - "a seller's own promise in a note is owed by the seller; a buyer's third-person promise is chased"
+    - "a customer or lost-deal account holds on Work and on the tomorrow preview after a restart, with no page visit"
+    - "the tomorrow preview offers no outreach where a reply waits or a do not contact is recorded"
+    - "the story names the person who replied (resolved from the address)"
+    - "a recorded reply's card clears on the next Refresh; its answer stays owed until sent or copied"
+    - "Prepared on a meeting card closes the day: Work says Done for today"
+    - "the Work card's action equals the account page's NEXT for an approved story not in use, before any visit"
+    - "the Accounts search finds an account GAP has not worked; an unlinked account says no HubSpot company is linked"
+    - "after one send on a single-touch family: Touch 1 sent and the follow-up day; one motion line with a name"
   decide: "DECIDED by the lead 2026-10-07: the analyst tables lower on /gap/learning keep their words (sequence version ids, VERIFIED_FACT, program keys), analyst words by contract (R60)"
 r63_seller_tasks:
   - work today's list
@@ -2158,6 +2204,7 @@ test_receipts:
   after_4e936a90: "16971d2c and d9902641: focused tests only under the load cap (r60-capture-reply 11, capture-once and capture 25, r65-operations and learning-dashboard 19), each with a red mutation"
   r63_fix_3fe2c39e: "8f7c20d5 and 3fe2c39e: eight files run singly with --maxWorkers=1, 41 tests (r63-opt-out-send 4, r63-compose-on-gap 2, email-send-routes 11, queue-send-deps 10, warm-intro-writers 7, perform-send-parity 3, campaign-tag-flow 2, b4-unsubscribe-case-insensitive 2), a red mutation on each fix; eslint and tsc clean"
   r63_b_b63f2e69: "77261d91..b63f2e69: the 19 R63 test files run singly with --maxWorkers=1, 59 tests green; neighbors run singly at each commit; a red mutation on each fix; eslint and tsc clean; no full suite, no build"
+  r63_a_772de979: "0fad39a5..772de979: the 43 R63 test files (R63-B and R63-A) run singly with --maxWorkers=1, 115 tests green; neighbors run singly at each commit; a red mutation on each fix; eslint and tsc clean; no full suite, no build"
 genuine_blockers: []
 ```
 
