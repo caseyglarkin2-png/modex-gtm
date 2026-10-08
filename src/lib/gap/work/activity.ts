@@ -19,6 +19,7 @@ import { COPY_RELEASED, DIRECT_REFUSED, DIRECT_SENT, DRAFT_REFUSED, DRAFT_SENT, 
 import { COPY_REVISION_APPROVED, COPY_REVISION_PROPOSED } from '../execution/copy-revision';
 import { CALL_ATTEMPT_STARTED } from '../execution/call-attempt';
 import { COMMAND_APPLIED, COMMAND_REFUSED } from '../replies/commands-apply';
+import { ARTIFACT_SENT, ARTIFACT_USED } from '../deals/artifacts';
 import { TASK_SUCCEEDED, listAgentTasks, type AgentTask } from '../agents/tasks';
 import { COMMITMENT_EVENT, type Commitment } from './commitment-model';
 
@@ -97,6 +98,8 @@ export const ACTIVITY_LEDGER_KINDS: readonly string[] = [
   'disposition.recorded',
   'capture.meeting',
   'crm.sync_result',
+  ARTIFACT_USED,
+  ARTIFACT_SENT,
   COMMITMENT_EVENT,
   WORK_OUTCOME,
   COMMAND_APPLIED,
@@ -156,6 +159,9 @@ export function projectActivity(r: LedgerRow): ActivityEvent | null {
     return ev('conversation_completed', 'self_reported', `Recorded ${who ? `${who}'s` : 'their'} answer (${cls})${p.channel === 'call' ? ', by phone' : ''}.`, who, [...(str(p.inboundMessageId) ? [`reply:${str(p.inboundMessageId)}`] : []), ...accountKey('reply')]);
   }
   if (r.kind === 'capture.meeting') return ev('meeting_booked', 'self_reported', `A meeting outcome was captured (${words(p.outcome)}).`);
+  // X14b: a deal artifact copied is content copied; found in Sent after the copy it is a message sent (provider-proven).
+  if (r.kind === ARTIFACT_USED) return ev('content_copied', 'self_reported', `The ${words(p.kind) || 'artifact'} was copied${str(p.recipient) ? ` for ${str(p.recipient)}` : ''}; not sent until Sent shows it.`, str(p.recipient));
+  if (r.kind === ARTIFACT_SENT) return ev('message_sent', 'provider', `The ${words(p.kind) || 'artifact'} went to ${str(p.recipient) ?? 'them'} (found in Sent).`, str(p.recipient), accountKey('deal'));
   if (r.kind === 'crm.sync_result') return p.outcome === 'ok' || p.outcome === 'written' ? ev('deal_advanced', 'provider', `HubSpot was updated${accountName ? ` for ${accountName}` : ''}.`) : ev('work_blocked', 'provider', `A HubSpot change failed${str(p.detail) ? `: ${str(p.detail)}` : ''}.`);
   if (r.kind === COMMITMENT_EVENT) {
     if (p.op !== 'status' || !isObj(p.commitment)) return null;

@@ -1,5 +1,5 @@
 /**
- * POST /api/gap/deals/artifact-used   `{ accountName, dealId, kind, textHash }`
+ * POST /api/gap/deals/artifact-used   `{ accountName, dealId, kind, textHash, recipient? }`
  *
  * Batch item 8 (R53, 2026-10-07): the seller copied a prepared deal artifact (to send it from their own email). One
  * append-only `deal.artifact_used` row on the account records it, so the next artifact moves on: a recap copied (or
@@ -21,6 +21,8 @@ const Body = z
     dealId: z.string().trim().min(1).max(64),
     kind: z.enum(ARTIFACT_KINDS),
     textHash: z.string().trim().min(1).max(64),
+    /** X14b: who the copy is for, when the view knows (the Sent reconcile matches on it; without it the copy stays a copy). */
+    recipient: z.string().trim().email().max(320).optional(),
   })
   .strict();
 
@@ -32,6 +34,6 @@ export async function POST(request: NextRequest) {
   const b = parsed.data;
   const account = await prisma.account.findUnique({ where: { name: b.accountName }, select: { name: true } });
   if (!account) return NextResponse.json({ error: 'account_not_found' }, { status: 404 });
-  const row = await prisma.gapAuditEvent.create({ data: { kind: ARTIFACT_USED, actor: g.email, subject_type: 'account', subject_id: account.name, payload: { dealId: b.dealId, kind: b.kind, textHash: b.textHash, how: 'copied' } } });
+  const row = await prisma.gapAuditEvent.create({ data: { kind: ARTIFACT_USED, actor: g.email, subject_type: 'account', subject_id: account.name, payload: { dealId: b.dealId, kind: b.kind, textHash: b.textHash, how: 'copied' , ...(b.recipient ? { recipient: b.recipient.toLowerCase() } : {}) } } });
   return NextResponse.json({ ok: true, id: String(row.id) }, { status: 201 });
 }

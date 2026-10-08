@@ -37,3 +37,16 @@ describe('POST /api/gap/deals/artifact-used (batch item 8)', () => {
     expect(db.store.gapAuditEvent).toHaveLength(1);
   });
 });
+
+describe('X14b: the recipient on the copy', () => {
+  it('a recipient is recorded lowercased; a bad address is 400; without one the row is as before', async () => {
+    process.env.GAP_OS_ENABLED = 'true';
+    process.env.GAP_ROUTING_ENABLED = 'true';
+    const db = ledgerDb({ accounts: ['Kroger Scratch Co'] });
+    h.client = db.client();
+    expect((await POST(post({ accountName: 'Kroger Scratch Co', dealId: '70001', kind: 'recap', textHash: 'abc123', recipient: 'Ann@Kroger.example.com' }))).status).toBe(201);
+    expect(db.store.gapAuditEvent[0].payload).toMatchObject({ dealId: '70001', kind: 'recap', recipient: 'ann@kroger.example.com' });
+    expect((await POST(post({ accountName: 'Kroger Scratch Co', dealId: '70001', kind: 'recap', textHash: 'abc123', recipient: 'not-an-address' }))).status).toBe(400);
+    expect(db.store.gapAuditEvent).toHaveLength(1);
+  });
+});

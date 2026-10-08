@@ -31,6 +31,16 @@ export const ARTIFACT_KINDS = ['recap', 'introduction', 'pilot_criteria', 'busin
 export type ArtifactKind = (typeof ARTIFACT_KINDS)[number];
 /** Batch item 8: the seller used a prepared artifact (copied it to send from their own email), recorded on the account. */
 export const ARTIFACT_USED = 'deal.artifact_used' as const;
+/** X14b: a copied artifact found in Sent to its recipient after the copy (the mailbox cron's reconcile); the proof it went. */
+export const ARTIFACT_SENT = 'deal.artifact_sent' as const;
+
+/** X14b: what the ledger proves about a deal's recap: copied (GAP has not seen it sent) or sent (found in Sent). */
+export interface ArtifactProof {
+  kind: ArtifactKind;
+  state: 'copied' | 'sent';
+  at: string;
+  recipient: string | null;
+}
 
 export interface ArtifactCitation {
   /** "Ann Scratch, Oct 2 (buyer confirmed)", "the plan: Pilot (Ann Scratch agreed Oct 5)", "ROI model v3 (modeled)". */

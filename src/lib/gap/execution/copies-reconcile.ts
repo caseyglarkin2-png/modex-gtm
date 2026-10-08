@@ -18,6 +18,7 @@ import type { SentMatch } from './unknown-send-reconcile';
 import { COPY_RELEASED, DIRECT_SENT, DRAFT_SENT, DRAFT_SUBJECT_TYPE, MANUAL_SENT, REPLY_COPIED, REPLY_SENT, REPLY_SUBJECT_TYPE, appendReplyLedger } from './draft-ledger';
 import { recordManualSend } from './manual-send';
 import { loadActionPack } from './action-pack';
+import { ARTIFACT_SENT, ARTIFACT_USED } from '../deals/artifacts';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -29,6 +30,8 @@ const DAY_MS = 86_400_000;
 export interface CopiesReconcileReport {
   replies: { checked: number; reconciled: number; unknown: Array<{ id: string; reason: 'gmail_error' | 'no_recipient'; detail?: string }> };
   copies: { checked: number; reconciled: number; unknown: Array<{ id: string; reason: 'gmail_error' | 'card_unreadable'; detail?: string }> };
+  /** X14b: deal artifacts (a recap) copied with a recipient and then found in Sent. */
+  artifacts: { checked: number; reconciled: number; unknown: Array<{ id: string; reason: 'gmail_error'; detail?: string }> };
 }
 
 type ManualRecorder = (prisma: PrismaLike, input: Parameters<typeof recordManualSend>[1]) => Promise<{ ledgerId: string; humanAction: 'recorded' | 'already_acted' | 'not_recorded' }>;
@@ -55,9 +58,9 @@ export async function reconcileCopiesFromSent(prisma: PrismaLike, input: { now: 
   const actor = input.actor ?? 'cron:gap-mailbox';
   const max = deps.max ?? COPY_RECONCILE_MAX;
   const since = new Date(input.now.getTime() - COPY_LOOKBACK_DAYS * DAY_MS);
-  const report: CopiesReconcileReport = { replies: { checked: 0, reconciled: 0, unknown: [] }, copies: { checked: 0, reconciled: 0, unknown: [] } };
+  const report: CopiesReconcileReport = { replies: { checked: 0, reconciled: 0, unknown: [] }, copies: { checked: 0, reconciled: 0, unknown: [] }, artifacts: { checked: 0, reconciled: 0, unknown: [] } };
   const rows: Row[] = await prisma.gapAuditEvent.findMany({
-    where: { created_at: { gte: since }, kind: { in: [REPLY_COPIED, REPLY_SENT, COPY_RELEASED, DIRECT_SENT, MANUAL_SENT, DRAFT_SENT] } },
+    where: { created_at: { gte: since }, kind: { in: [REPLY_COPIED, REPLY_SENT, COPY_RELEASED, DIRECT_SENT, MANUAL_SENT, DRAFT_SENT, ARTIFACT_USED, ARTIFACT_SENT] } },
     orderBy: [{ created_at: 'desc' }],
   });
 
@@ -155,6 +158,41 @@ export async function reconcileCopiesFromSent(prisma: PrismaLike, input: { now: 
       ownerStatement: null,
     });
     report.copies.reconciled += 1;
+  }
+
+  // X14b: a deal artifact copied for a recipient (the recap the seller sends by hand) is found in Sent the same way;
+  // the proof row carries the Gmail id. Without a recipient on the copy there is nothing to match: it stays a copy.
+  const artifactSent = rows.filter((r) => r.kind === ARTIFACT_SENT && r.subject_type === 'account');
+  const sentKey = (r: Row) => `${r.subject_id}:${String(r.payload?.dealId ?? '')}:${String(r.payload?.kind ?? '')}:${String(r.payload?.recipient ?? '').toLowerCase()}`;
+  const sentAfter = (key: string, after: Date) => artifactSent.some((s) => sentKey(s) === key && new Date(String(s.payload?.copiedAt ?? s.created_at)).getTime() >= after.getTime() - 60_000);
+  const seenArtifact = new Set<string>();
+  for (const r of rows.filter((x) => x.kind === ARTIFACT_USED && x.subject_type === 'account')) {
+    const p = r.payload ?? {};
+    const recipient = String(p.recipient ?? '').trim().toLowerCase();
+    if (!recipient) continue;
+    const key = sentKey(r);
+    if (seenArtifact.has(key) || report.artifacts.checked >= max) continue;
+    seenArtifact.add(key);
+    if (sentAfter(key, new Date(r.created_at))) continue;
+    report.artifacts.checked += 1;
+    let m: SentMatch | null;
+    try {
+      m = await firstSentAfter(deps, recipient, new Date(r.created_at), input.now, recordedIds);
+    } catch (e) {
+      report.artifacts.unknown.push({ id: r.id ?? key, reason: 'gmail_error', detail: e instanceof Error ? e.message : String(e) });
+      continue;
+    }
+    if (!m) continue;
+    await prisma.gapAuditEvent.create({
+      data: {
+        kind: ARTIFACT_SENT,
+        actor,
+        subject_type: 'account',
+        subject_id: r.subject_id,
+        payload: { dealId: String(p.dealId ?? ''), kind: String(p.kind ?? ''), recipient, textHash: typeof p.textHash === 'string' ? p.textHash : null, gmailSentMessageId: m.id, gmailThreadId: m.threadId ?? null, subject: m.subject, sentAt: m.internalDate.toISOString(), copiedAt: new Date(r.created_at).toISOString(), reconciledFromSent: true },
+      },
+    });
+    report.artifacts.reconciled += 1;
   }
   return report;
 }

@@ -28,7 +28,7 @@ import { ACCOUNT_LEVEL, closedDealLabel, type ClosedDealRef, type ScopeRead } fr
 import { meetingDeal, meetingInstant, meetingState, prepareMeeting, type MeetingPrep } from './meeting-prep';
 import { planFor, type Milestone } from './action-plan';
 import { loadPlanDecisions } from './action-plan-store';
-import { ARTIFACT_USED, nextArtifact, prepareArtifacts, type PreparedArtifact } from './artifacts';
+import { ARTIFACT_USED, nextArtifact, prepareArtifacts, type PreparedArtifact, ARTIFACT_SENT, type ArtifactProof, type ArtifactKind } from './artifacts';
 import { crmCandidates, replacedRecaps, type CrmChange, type CrmOrigin, type CrmSyncItem } from './crm-model';
 import { loadCrmSync } from '../crm-sync';
 import { stalledSignals } from './stalled';
@@ -46,7 +46,7 @@ export interface DealWorkspace {
   /** R52: each open deal's plan, by deal id. */
   plans: Record<string, Milestone[]>;
   /** R53: each open deal's prepared artifacts and the one it needs now, by deal id. */
-  artifacts: Record<string, { next: PreparedArtifact; all: PreparedArtifact[] }>;
+  artifacts: Record<string, { next: PreparedArtifact; all: PreparedArtifact[]; /** X14b: what the ledger proves about the recap, if anything. */ proof: ArtifactProof | null; /** X14b: the deal's contacts with the address GAP holds, for the copy's recipient. */ people: Array<{ personaId: number; name: string; email: string | null }> }>;
   /** R55: each open deal's stalled-work suggestions (overdue obligations, no recent activity, a passed close date). */
   stalled: Record<string, string[]>;
   /** R54: each open deal's HubSpot change candidates and recorded proposals, by deal id. */
@@ -87,6 +87,19 @@ type MeetingRow = { id: number; meeting_date: Date | null; meeting_time: string 
 
 type UsedRow = { payload: Record<string, unknown> | null; created_at: Date | string };
 
+/**
+ * X14b: what the ledger proves about one artifact kind on a deal: the newest sent row (found in Sent after the copy) wins
+ * as `sent`; else the newest copy is `copied` (GAP has not seen it sent); else nothing.
+ */
+export function artifactProofOf(used: readonly UsedRow[], sent: readonly UsedRow[], dealId: string, kind: ArtifactKind): ArtifactProof | null {
+  const pick = (rows: readonly UsedRow[]) => rows.filter((r) => r.payload?.dealId === dealId && r.payload?.kind === kind).sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())[0] ?? null;
+  const s = pick(sent);
+  if (s) return { kind, state: 'sent', at: typeof s.payload?.sentAt === 'string' ? s.payload.sentAt : new Date(s.created_at).toISOString(), recipient: typeof s.payload?.recipient === 'string' ? s.payload.recipient : null };
+  const c = pick(used);
+  if (c) return { kind, state: 'copied', at: new Date(c.created_at).toISOString(), recipient: typeof c.payload?.recipient === 'string' ? c.payload.recipient : null };
+  return null;
+}
+
 /** Batch item 8: the last recap sent back on a deal: copied by the seller (ARTIFACT_USED), or written to HubSpot. */
 export function recapSentAtOf(used: readonly UsedRow[], crm: readonly CrmSyncItem[], dealId: string): string | null {
   const copied = used.filter((r) => r.payload?.dealId === dealId && r.payload?.kind === 'recap').map((r) => new Date(r.created_at).toISOString());
@@ -110,7 +123,7 @@ export async function loadDealWorkspace(
       unread.push(what);
       return fallback;
     });
-  const [people, bidRows, meetingRows, objectiveRows, planDecisions, crmItems, usedRows] = await Promise.all([
+  const [people, bidRows, meetingRows, objectiveRows, planDecisions, crmItems, usedRows, sentRows] = await Promise.all([
     soft(prisma.persona?.findMany ? prisma.persona.findMany({ where: { account_name: x.accountName }, select: { id: true, name: true, title: true, email: true, hubspot_contact_id: true }, take: 200 }) : null, [], 'the people at the account'),
     soft(prisma.buyerInputData?.findMany ? prisma.buyerInputData.findMany({ where: { account_name: x.accountName }, select: { id: true, type: true, raw_buyer_language: true, normalized_summary: true, contact_email: true, human_confirmed: true, supersedes_id: true, confirmed_at: true, captured_at: true, metadata: true } }) : null, [], 'what the buyer said'),
     soft(prisma.meeting?.findMany ? prisma.meeting.findMany({ where: { account_name: x.accountName }, select: { id: true, meeting_date: true, meeting_time: true, meeting_status: true, objective: true, persona: true, hubspot_deal_id: true, created_at: true, updated_at: true }, orderBy: { meeting_date: 'desc' }, take: 20 }) : null, [], 'the meetings on record'),
@@ -119,6 +132,8 @@ export async function loadDealWorkspace(
     soft(x.deals.length ? loadCrmSync(prisma, x.accountName) : null, [], 'the HubSpot changes'),
     // Batch item 8: the artifacts the seller used (a copied recap), so the recap is not the next move again.
     soft(x.deals.length && prisma.gapAuditEvent?.findMany ? prisma.gapAuditEvent.findMany({ where: { kind: ARTIFACT_USED, subject_type: 'account', subject_id: x.accountName }, select: { payload: true, created_at: true }, orderBy: { created_at: 'desc' }, take: 50 }) : null, [], 'the artifacts you used'),
+    // X14b: the artifacts found in Sent after their copy (the proof they went).
+    soft(x.deals.length && prisma.gapAuditEvent?.findMany ? prisma.gapAuditEvent.findMany({ where: { kind: ARTIFACT_SENT, subject_type: 'account', subject_id: x.accountName }, select: { payload: true, created_at: true }, orderBy: { created_at: 'desc' }, take: 50 }) : null, [], 'the artifacts found in Sent'),
   ]);
   const recapSentAt = (dealId: string) => recapSentAtOf(usedRows as UsedRow[], crmItems as CrmSyncItem[], dealId);
   // Batch item 9: an obligation done in GAP whose task is in HubSpot proposes completing that task.
@@ -193,7 +208,9 @@ export async function loadDealWorkspace(
       const needs = [...d.needs, ...opportunities.accountLevel.needs].sort((a, b) => a.at.localeCompare(b.at)).map((n) => ({ id: n.id, type: n.type, quote: n.quote, who: n.who, at: n.at, accountLevel: n.scope.basis === 'none', noted: wordingOf(n.metadata, n.quote) === 'noted' }));
       const input = { accountName: x.accountName, deal: { id: d.dealId, name: d.name, contacts: d.contacts }, needs, plan: plans[d.dealId] ?? [], commitments: d.commitments.map((c) => ({ commitmentId: c.commitmentId, kind: c.kind, title: c.title, line: c.line, dueAt: c.dueAt, person: c.person?.name ?? null })), roi: x.roi ?? null };
       const all = prepareArtifacts(input);
-      return [d.dealId, { next: nextArtifact(all, { ...input, recapSentAt: recapSentAt(d.dealId) }), all }];
+      const proof = artifactProofOf(usedRows as UsedRow[], sentRows as UsedRow[], d.dealId, 'recap');
+      const dealPeople = d.contacts.map((c) => ({ personaId: c.personaId, name: c.name, email: persons.find((p) => p.personaId === c.personaId)?.email ?? null }));
+      return [d.dealId, { next: nextArtifact(all, { ...input, recapSentAt: recapSentAt(d.dealId) }), all, proof, people: dealPeople }];
     }),
   );
   // R54: the exact HubSpot changes GAP may propose for each deal, beside the ones already recorded.
