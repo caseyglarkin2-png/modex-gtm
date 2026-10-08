@@ -11,7 +11,7 @@
  */
 import { beforeEach, describe, expect, it } from 'vitest';
 import { ledgerDb } from './fixtures/ledger-db';
-import { DAY_PLANNED, decisionIdsFromCandidates, findPlanItemByToken, itemsForDay, loadDayPlan, markCarried, planDay, type DayPlan, type PlanItem } from '@/lib/gap/work/plan';
+import { DAY_PLANNED, PLAN_TX_OPTIONS, decisionIdsFromCandidates, findPlanItemByToken, itemsForDay, loadDayPlan, markCarried, planDay, type DayPlan, type PlanItem } from '@/lib/gap/work/plan';
 import type { WorkCard, WorkDay } from '@/lib/gap/work/list';
 
 const card = (over: Partial<WorkCard> & { accountName: string; stateKind: WorkCard['stateKind']; tier: NonNullable<WorkCard['tier']> }): WorkCard => ({
@@ -235,5 +235,18 @@ describe('X21: the day is built outside the plan transaction (production 2026-10
     expect(built).toBe(1);
     expect(second.items.map((i) => i.key)).toEqual(['review:Dole:2026-10-08']);
     expect(db.store.gapAuditEvent.filter((e) => e.kind === DAY_PLANNED)).toHaveLength(1);
+  });
+});
+
+describe('X21b: the plan lock carries its own transaction limits (production timed out at 500 ms)', () => {
+  it('the transaction is opened with maxWait and timeout well above the three round trips it holds', async () => {
+    const db = ledgerDb({}, T21);
+    const base = db.client();
+    let seen: unknown = null;
+    const client = { ...base, $executeRaw: async () => 0, $transaction: async (fn: (tx: unknown) => Promise<unknown>, opts?: unknown) => { seen = opts; return fn({ ...base, $executeRaw: async () => 0 }); } };
+    await planDay(client, { now: T21, load: async () => day([]) }, 'test');
+    expect(seen).toEqual(PLAN_TX_OPTIONS);
+    expect(PLAN_TX_OPTIONS.timeout).toBeGreaterThanOrEqual(10_000);
+    expect(PLAN_TX_OPTIONS.maxWait).toBeGreaterThanOrEqual(2_000);
   });
 });
