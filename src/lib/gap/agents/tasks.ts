@@ -205,7 +205,7 @@ export async function failAgentTask(prisma: PrismaLike, input: { id: string; fen
   const t = await loadAgentTask(prisma, input.id);
   if (!t || t.status !== 'running' || t.fence !== input.fence) return false;
   const final = !!input.final || t.attempts >= AGENT_TASK_MAX_ATTEMPTS;
-  await write(prisma, TASK_FAILED, input.actor ?? 'agent', input.id, { fence: input.fence, attempt: t.attempts, error: input.error.slice(0, 500), final, at: input.now.toISOString() });
+  await write(prisma, TASK_FAILED, input.actor ?? 'agent', input.id, { fence: input.fence, attempt: t.attempts, error: input.error.slice(0, 1500), final, at: input.now.toISOString() });
   return true;
 }
 
