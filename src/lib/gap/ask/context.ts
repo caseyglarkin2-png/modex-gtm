@@ -5,13 +5,11 @@
 import { loadAccountInputs } from '../account-intel/load';
 import { buildAccountBrief } from '../account-intel/build';
 import { loadAccountContext } from '../context/load';
-import { projectNow } from '../context/now';
 import { loadPursuit } from '../pursuit/load';
 import { nextFromPursuit } from '../pursuit/next';
-import { projectStory } from '../story/story';
-import { mergeTouches } from '../story/touches';
-import { accountDomainFor, loadStoryReaders } from '../story/load';
-import { projectAnchor, storyBesideAnchor } from '../story/anchor';
+import { refineNextWithAnchor } from '../pursuit/next-anchor';
+import { storyBesideAnchor } from '../story/anchor';
+import { composeStoryAndAnchor } from '../story/compose';
 import { accountHref } from '../account-intel/href';
 import { compactContext, type AskContext } from './grounding';
 
@@ -23,48 +21,12 @@ export async function buildAskContext(prisma: PrismaLike, accountName: string, n
   if (!inputs) return null;
   const brief = buildAccountBrief(inputs, now);
   const ctx = await loadAccountContext(prisma, inputs, now);
-  const [pursuit, readers] = await Promise.all([
-    loadPursuit(prisma, { brief, inputs, ctx, now }).catch(() => null),
-    loadStoryReaders({ accountName: brief.accountName, domain: accountDomainFor({ domains: inputs.domains, addresses: ctx.history.map((h) => h.text.match(/[\w.+-]+@[\w.-]+\.[a-z]{2,}/i)?.[0] ?? '').filter(Boolean) }) }),
-  ]);
+  const pursuit = await loadPursuit(prisma, { brief, inputs, ctx, now }).catch(() => null);
   if (!pursuit) return null;
-  const v = projectNow(brief, ctx, inputs, now, { ready: brief.motion.type === 'FACT_LED' ? pursuit.ready : null });
   const href = accountHref(brief.accountName);
-  const next = nextFromPursuit(pursuit.state, { hypothesisId: pursuit.hypothesisId, accountSlugHref: (view) => (view === 'now' ? href : `${href}?view=${view}`), replyThreadHref: null, captureHref: `/gap/capture?account=${encodeURIComponent(brief.accountName)}`, readyHref: pursuit.ready?.href ?? null });
-  const excluded = (pursuit.resolution?.excluded ?? []).map((e) => ({ key: e.candidate.key, name: e.candidate.name, title: e.candidate.title, code: e.code, reason: e.reason, source: e.source ?? null }));
-  const story = projectStory({
-    accountName: brief.accountName,
-    now,
-    state: pursuit.state,
-    brief,
-    inputs,
-    whyNow: v.whyNow,
-    know: v.know,
-    touches: mergeTouches({
-      history: ctx.history,
-      firstTouches: inputs.firstTouches,
-      clawd: readers.clawd,
-      replies: pursuit.state.lastInbound && pursuit.state.replyClass ? [{ from: pursuit.state.lastInbound.who, at: pursuit.state.lastInbound.at, snippet: pursuit.state.lastInbound.snippet, kind: pursuit.state.replyClass.kind, label: pursuit.state.replyClass.label, address: pursuit.state.lastInbound.from ?? null }] : [],
-      people: [...inputs.personas.map((p) => ({ name: p.name, title: p.title, email: p.email ?? null })), ...(inputs.hubspotPeople?.people ?? []).map((p) => ({ name: p.name, title: p.title }))],
-      now,
-    }),
-    clawdRead: readers.clawd.read,
-    vaultNote: readers.vaultNote,
-    excluded,
-    booked: ctx.relationship.meetings.upcoming,
-  });
-  const anchor = projectAnchor({
-    accountName: brief.accountName,
-    person: pursuit.state.person ? { personaId: pursuit.state.person.personaId, name: pursuit.state.person.name, title: pursuit.state.person.title } : null,
-    people: [...(pursuit.stack?.rows ?? []), ...(pursuit.stack?.more ?? [])].map((r) => ({ personaId: r.personaId, name: r.name, title: r.title })),
-    brief,
-    inputs,
-    story,
-    anchorChoice: pursuit.anchorChoice,
-    privateLine: v.private,
-    sendable: pursuit.sendableTheses,
-    now,
-  });
+  // R63-A S8: the page's composition and its anchor-refined NEXT, so Ask, Work and the page say one move.
+  const { story, anchor } = await composeStoryAndAnchor({ inputs, brief, ctx, pursuit, now });
+  const next = refineNextWithAnchor(nextFromPursuit(pursuit.state, { hypothesisId: pursuit.hypothesisId, accountSlugHref: (view) => (view === 'now' ? href : `${href}?view=${view}`), replyThreadHref: null, captureHref: `/gap/capture?account=${encodeURIComponent(brief.accountName)}`, readyHref: pursuit.ready?.href ?? null }), { state: pursuit.state, anchor });
   return compactContext({
     accountName: brief.accountName,
     state: pursuit.state,

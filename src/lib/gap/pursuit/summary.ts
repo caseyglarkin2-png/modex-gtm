@@ -19,6 +19,8 @@ import { buildAccountBrief } from '../account-intel/build';
 import { loadAccountContext } from '../context/load';
 import { loadPursuit } from './load';
 import { nextFromPursuit } from './next';
+import { refineNextWithAnchor } from './next-anchor';
+import { composeStoryAndAnchor } from '../story/compose';
 import { actionableFromPursuit, type ActionableResult } from './actionable';
 import { accountHref } from '../account-intel/href';
 import type { PursuitState } from './state';
@@ -152,9 +154,14 @@ export async function summarizePursuit(prisma: PrismaLike, accountName: string, 
     const ctx = await loadAccountContext(prisma, inputs, now);
     const p = await loadPursuit(prisma, { brief, inputs, ctx, now });
     const href = accountHref(accountName);
-    const next = nextFromPursuit(p.state, { hypothesisId: p.hypothesisId, accountSlugHref: (view) => (view === 'now' ? href : `${href}?view=${view}`), replyThreadHref: null, captureHref: `/gap/capture?account=${encodeURIComponent(accountName)}`, readyHref: p.ready?.href ?? null });
+    // R63-A S8: the Work card's move is the page's move: NEXT refined by the same outreach anchor (Fedex's card said
+    // "Prepare the email to Glen" from here and "Put the story in use" after a page visit, with no seller action).
+    const anchor = await composeStoryAndAnchor({ inputs, brief, ctx, pursuit: p, now }).then((c) => c.anchor).catch(() => null);
+    const next = refineNextWithAnchor(nextFromPursuit(p.state, { hypothesisId: p.hypothesisId, accountSlugHref: (view) => (view === 'now' ? href : `${href}?view=${view}`), replyThreadHref: null, captureHref: `/gap/capture?account=${encodeURIComponent(accountName)}`, readyHref: p.ready?.href ?? null }), { state: p.state, anchor });
     const pending = inputs.hypotheses.filter((h) => h.status === 'draft' || h.status === 'review_required');
-    const actionable = actionableFromPursuit(p.state, next, { hypothesisId: p.hypothesisId, usableTheses: p.usableTheses, pendingProposals: pending.length, incompleteProposals: pending.filter((h) => !h.problemFamily || h.problemFamily === 'unmapped').length });
+    const actionable = actionableFromPursuit(p.state, next, anchor
+      ? { hypothesisId: p.hypothesisId, usableTheses: p.usableTheses, pendingProposals: anchor.pending.length, incompleteProposals: anchor.pending.filter((x) => !x.familyKnown).length }
+      : { hypothesisId: p.hypothesisId, usableTheses: p.usableTheses, pendingProposals: pending.length, incompleteProposals: pending.filter((h) => !h.problemFamily || h.problemFamily === 'unmapped').length });
     return rememberPursuitSummary(p.state, now, next.text, { prisma, actionable });
   })();
   const cap = new Promise<null>((r) => {

@@ -47,11 +47,11 @@ import { OpenHashDetails } from '@/components/gap/open-hash-details';
 import { PendingLink } from '@/components/gap/pending-link';
 import { loadPursuit } from '@/lib/gap/pursuit/load';
 import { nextFromPursuit } from '@/lib/gap/pursuit/next';
+import { refineNextWithAnchor } from '@/lib/gap/pursuit/next-anchor';
 import { accountDomainFor, loadStoryReaders } from '@/lib/gap/story/load';
 import { mergeTouches } from '@/lib/gap/story/touches';
 import { projectStory } from '@/lib/gap/story/story';
 import { projectAnchor, storyBesideAnchor } from '@/lib/gap/story/anchor';
-import { remitCaution } from '@/lib/gap/story/anchor-text';
 import { DoneNext } from '@/components/gap/done-next';
 import { ReplyPrepPanel } from '@/components/gap/reply-prep';
 import { answerable, loadAnsweredReplyIds } from '@/lib/gap/work/recorded-replies';
@@ -322,11 +322,11 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
     const top = brief.hypotheses.find((h) => h.grounded && h.truth !== 'CONTRADICTED');
     // NEXT from the pursuit state (the chosen person and the action agree by construction); a meeting within 14 days
     // still leads (projectNow's own rule).
-    const pursuitNext = pursuit && v.next.source !== 'meeting' && v.next.source !== 'obligation'
+    const rawNext = pursuit && v.next.source !== 'meeting' && v.next.source !== 'obligation'
       ? nextFromPursuit(pursuit.state, { hypothesisId: pursuit.hypothesisId, accountSlugHref: (view) => hrefFor(view), replyThreadHref: v.replyThread ? gmailThreadHref(v.replyThread, email) : null, replyCaptureHref: replyCapture, captureHref: `/gap/capture?account=${encodeURIComponent(brief.accountName)}`, readyHref: pursuit.ready?.href ?? null })
       : null;
     const control: { href: string; label: string } | null =
-      pursuitNext ? pursuitNext.control
+      rawNext ? rawNext.control
       : v.next.source === 'obligation' ? { href: `${hrefFor('now')}#account-obligations-heading`, label: 'Open what is due' }
       : v.next.source === 'meeting' ? { href: hrefFor('brief'), label: 'Open the meeting brief' }
       : v.next.source === 'deal' ? { href: hrefFor('brief'), label: 'Open the deal brief' }
@@ -373,31 +373,10 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
       : null;
     // The story is told once: the anchor's own fact is a pointer in the story, never a repeat.
     const storyShown = rawStory && anchor ? storyBesideAnchor(rawStory, anchor) : rawStory;
-    // The remit caution travels to NEXT: a cold first touch never asks the buyer who owns it.
-    if (pursuitNext && anchor?.primary && anchor.primary.relevance.tier === 'none' && pursuit?.state.person) {
-      const first = pursuit.state.person.name.split(' ')[0];
-      pursuitNext.text = `${pursuitNext.text} ${remitCaution(first, anchor.primary.factLabel, anchor.fitsBetter)}${anchor.fitsBetter ? ` Use a different story below, or make ${anchor.fitsBetter.name.split(' ')[0]} first.` : ' Use a different story below.'}`;
-    }
-    // A research account with a checked fact and no thesis: the unblocking move is the draft on this page, not the
-    // analyst's research plan (the review: NEXT left the workspace while the draft sat collapsed on it).
-    // R12: a READY account whose story is approved but not yet in use: the move is on this page (put it in use), never
-    // a preview that points at a lane.
-    if (pursuitNext && pursuit?.state.state === 'ready' && pursuit.state.person?.personaId != null && anchor?.primary && anchor.primary.status === 'approved') {
-      const first = pursuit.state.person.name.split(' ')[0];
-      pursuitNext.text = `The story for ${first} is approved but not yet in use: put it in use below and the email is prepared on it.`;
-      pursuitNext.control = { href: '#outreach-anchor', label: 'Put the story in use' };
-    }
-    if (pursuitNext && pursuit?.state.state === 'research' && anchor && anchor.pending.length > 0) {
-      // R12: a proposal in progress is reviewed where the action lives, never in a lane.
-      const incomplete = anchor.pending.filter((x) => !x.familyKnown).length;
-      pursuitNext.text = incomplete
-        ? `${incomplete === 1 ? 'One proposal' : `${incomplete} proposals`} below ${incomplete === 1 ? 'needs' : 'need'} one answer: which problem the fact points at. Set it and the thesis goes to review; approve it and the first touch is prepared.`
-        : `${anchor.pending.length === 1 ? 'One proposal' : `${anchor.pending.length} proposals`} below ${anchor.pending.length === 1 ? 'is' : 'are'} waiting for your review: approve it and the first touch is prepared, or set it aside.`;
-      pursuitNext.control = { href: '#outreach-anchor', label: incomplete ? 'Complete the proposal' : 'Review the proposal' };
-    } else if (pursuitNext && pursuit?.state.state === 'research' && anchor && anchor.draftable.length > 0) {
-      pursuitNext.text = `${anchor.draftable.length === 1 ? 'One checked fact' : `${anchor.draftable.length} checked facts`} can become a thesis: draft it from the opening story below; review grounds it, then the first touch is prepared.`;
-      pursuitNext.control = { href: '#outreach-anchor', label: 'Draft a thesis from the checked fact' };
-    }
+    // NEXT refined by the outreach anchor (the remit caution; R12: an approved story not yet in use is put in use here;
+    // a proposal is reviewed here; a checked fact is drafted into a thesis here). R63-A S8: one function for the page,
+    // the Work warmer and Ask (pursuit/next-anchor.ts), so the Work card never changes its move without a seller action.
+    const pursuitNext = pursuit && rawNext ? refineNextWithAnchor(rawNext, { state: pursuit.state, anchor }) : null;
     // UX-11: Listen to account is written for the ear (60 to 90 s) over the same projections the page renders; it
     // never carries the private line, the do-not-use list, an address, a URL or a machine word. The older screen-read
     // text stays only when the pursuit read failed.
