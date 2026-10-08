@@ -1,3 +1,4 @@
+import { nyDay, nyDayAt } from '../work/dates';
 /**
  * GAP system health (Phase 2 A3, 2026-09-28): can Casey trust the cockpit
  * right now? Five dependencies, each HEALTHY / DEGRADED / BLOCKED:
@@ -15,7 +16,7 @@
  */
 
 export type HealthState = 'HEALTHY' | 'DEGRADED' | 'BLOCKED';
-export type HealthKey = 'mailbox' | 'hubspot' | 'suppression' | 'sender' | 'routing';
+export type HealthKey = 'mailbox' | 'hubspot' | 'suppression' | 'sender' | 'routing' | 'briefing' | 'agents';
 
 export interface HealthComponent {
   key: HealthKey;
@@ -40,6 +41,8 @@ export const HEALTH_REPAIR: Readonly<Record<HealthKey, { owner: string; retry: s
   suppression: { owner: 'operator', retry: 'Check CLAWD_CONTROL_PLANE_URL and its token in Vercel and that the clawd control plane answers; sends resume on their own once it gives a verdict' },
   sender: { owner: 'operator', retry: 'Set GAP_GMAIL_USER_EMAIL and its Gmail credential in Vercel, then redeploy' },
   routing: { owner: 'operator', retry: 'Recommendations refresh each weekday morning (the gap-routing schedule, GAP_ROUTING_CRON_ENABLED); to refresh now, open System at the foot of Work and press Run routing' },
+  briefing: { owner: 'operator', retry: 'Check GAP_BRIEFING_ENABLED in Vercel and the briefing address on Settings; read the gap-briefing cron state and the briefing.failed rows for the day; run /api/cron/gap-briefing/ once with the cron secret (it also ticks every hour)' },
+  agents: { owner: 'operator', retry: 'Check GAP_AGENT_TASKS_ENABLED in Vercel and the gap-agent-tasks cron state (every 5 minutes); a failed task keeps its error on its ledger row; reply REVISE again, or record the objection again, to queue a fresh task' },
 };
 
 const repaired = (c: HealthComponent): HealthComponent => {
@@ -61,12 +64,21 @@ export interface HealthInputs {
   suppression: { configured: boolean; verdict: 'clear' | 'suppressed' | 'unknown' | null; ms: number | null; error: string | null };
   sender: { configured: boolean; mailbox: string | null };
   routing: { lastRunAt: Date | null };
+  /** X20a: the morning briefing (cron gap-briefing, hourly; sends once a day at the seller's hour). */
+  briefing?: { enabled: boolean; to: string | null; hourNy: number | null; lastSuccessAt: Date | null; consecutiveFailures: number; lastMessage: string | null; sentTodayAt: Date | null; failedToday: number };
+  /** X20a: the agent tasks drain (cron gap-agent-tasks, every 5 minutes): REVISE, objections. */
+  agents?: { enabled: boolean; lastSuccessAt: Date | null; consecutiveFailures: number; lastMessage: string | null; queued: number; oldestQueuedAt: Date | null; failedFinalToday: number };
 }
 
 /** Mailbox intake runs every 10 minutes: one missed run is fine, three are degraded, three hours is blocked. */
 export const MAILBOX_HEALTHY_MS = 30 * 60_000;
 export const MAILBOX_BLOCKED_MS = 3 * 60 * 60_000;
 export const ROUTING_FRESH_MS = 24 * 60 * 60_000;
+/** X20a: the briefing cron ticks hourly at :05; past this grace after the seller's hour, an unsent briefing is degraded. */
+export const BRIEFING_GRACE_MS = 90 * 60_000;
+/** X20a: agent tasks drain every 5 minutes; a queued task older than this, or a drain older than this, is degraded. */
+export const AGENTS_STALE_MS = 30 * 60_000;
+export const AGENT_TASK_WAIT_MS = 20 * 60_000;
 export const HUBSPOT_SLOW_MS = 5_000;
 /** Past half the action-time suppression timeout, a click is at risk of timing out: DEGRADED. */
 export const SUPPRESSION_SLOW_MS = 4_000;
@@ -124,8 +136,39 @@ function routing(i: HealthInputs['routing'], now: Date): HealthComponent {
   return { ...base, state: 'HEALTHY', label: `recommendations refreshed ${ago(age)}`, detail };
 }
 
+const hourText = (h: number) => `${h % 12 === 0 ? 12 : h % 12} ${h < 12 ? 'AM' : 'PM'}`;
+const nyTime = (d: Date) => d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/New_York' });
+
+function briefing(i: HealthInputs['briefing'], now: Date): HealthComponent {
+  const base = { key: 'briefing' as const, name: 'Morning briefing' };
+  if (!i || !i.enabled) return { ...base, state: 'HEALTHY', label: 'Morning briefing off', detail: 'GAP_BRIEFING_ENABLED is off: no briefing email goes out; Work is the list.' };
+  if (!i.to) return { ...base, state: 'DEGRADED', label: 'No briefing address · the briefing cannot go out', detail: 'Set the briefing address on Settings (/gap/settings).' };
+  const hour = i.hourNy ?? 7;
+  const runState = `${i.lastSuccessAt ? `cron last ran ${ago(now.getTime() - i.lastSuccessAt.getTime())}` : 'the cron has never completed'}; ${i.consecutiveFailures} consecutive failure(s)${i.lastMessage ? `; last message: ${i.lastMessage}` : ''}`;
+  if (i.sentTodayAt) return { ...base, state: 'HEALTHY', label: `Briefing sent ${nyTime(i.sentTodayAt)}`, detail: `Today's briefing went to ${i.to} at ${nyTime(i.sentTodayAt)} New York (${runState}).` };
+  const due = nyDayAt(nyDay(now), hour);
+  if (now.getTime() < due.getTime()) return { ...base, state: 'HEALTHY', label: `Briefing due ${hourText(hour)}`, detail: `Today's briefing to ${i.to} is due at ${hourText(hour)} New York (${runState}).` };
+  if (i.failedToday > 0) return { ...base, state: 'DEGRADED', label: `Today's briefing failed (${i.failedToday} attempt${i.failedToday === 1 ? '' : 's'}) · the mailbox or the sender`, detail: `No briefing.sent row for today; ${i.failedToday} briefing.failed row(s) (${runState}).` };
+  if (now.getTime() - due.getTime() > BRIEFING_GRACE_MS) return { ...base, state: 'DEGRADED', label: `Today's briefing has not gone out (due ${hourText(hour)})`, detail: `No briefing.sent row for today ${ago(now.getTime() - due.getTime())} past the hour (${runState}).` };
+  return { ...base, state: 'HEALTHY', label: `Briefing due now (${hourText(hour)})`, detail: `The hourly tick after ${hourText(hour)} New York sends it (${runState}).` };
+}
+
+function agents(i: HealthInputs['agents'], now: Date): HealthComponent {
+  const base = { key: 'agents' as const, name: 'Agent tasks' };
+  if (!i || !i.enabled) return { ...base, state: 'HEALTHY', label: 'Agent tasks off', detail: 'GAP_AGENT_TASKS_ENABLED is off: REVISE and objection tasks queue and wait.' };
+  const runState = `${i.consecutiveFailures} consecutive failure(s)${i.lastMessage ? `; last message: ${i.lastMessage}` : ''}; ${i.queued} queued`;
+  if (!i.lastSuccessAt) return { ...base, state: 'DEGRADED', label: 'Agent tasks have never run · REVISE and objections wait', detail: `No successful gap-agent-tasks run on record (${runState}).` };
+  const age = now.getTime() - i.lastSuccessAt.getTime();
+  const detail = `Last successful drain ${ago(age)} (${i.lastSuccessAt.toISOString()}); ${runState}.`;
+  if (age > AGENTS_STALE_MS) return { ...base, state: 'DEGRADED', label: `Agent tasks stale (${ago(age)}) · REVISE and objections wait`, detail };
+  const waited = i.oldestQueuedAt ? now.getTime() - i.oldestQueuedAt.getTime() : 0;
+  if (i.queued > 0 && waited > AGENT_TASK_WAIT_MS) return { ...base, state: 'DEGRADED', label: `${i.queued} task${i.queued === 1 ? '' : 's'} waiting ${ago(waited)}`, detail };
+  if (i.failedFinalToday > 0) return { ...base, state: 'DEGRADED', label: `${i.failedFinalToday} task${i.failedFinalToday === 1 ? '' : 's'} failed today · read its error`, detail };
+  return { ...base, state: 'HEALTHY', label: `Agent tasks ${ago(age)}`, detail };
+}
+
 export function evaluateHealth(inputs: HealthInputs, now: Date): HealthReport {
-  const components = [mailbox(inputs.mailbox, now), hubspot(inputs.hubspot), suppression(inputs.suppression), sender(inputs.sender), routing(inputs.routing, now)].map(repaired);
+  const components = [mailbox(inputs.mailbox, now), hubspot(inputs.hubspot), suppression(inputs.suppression), sender(inputs.sender), routing(inputs.routing, now), briefing(inputs.briefing, now), agents(inputs.agents, now)].map(repaired);
   const overall = components.reduce<HealthState>((w, c) => (RANK[c.state] > RANK[w] ? c.state : w), 'HEALTHY');
   const routingC = components.find((c) => c.key === 'routing')!;
   const bad = components.filter((c) => c.state !== 'HEALTHY').sort((a, b) => RANK[b.state] - RANK[a.state]);

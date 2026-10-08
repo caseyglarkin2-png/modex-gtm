@@ -19,6 +19,9 @@ function healthy(): HealthInputs {
     suppression: { configured: true, verdict: 'clear', ms: 3100, error: null },
     sender: { configured: true, mailbox: 'casey@yardflow.ai' },
     routing: { lastRunAt: min(12) },
+    // X20a: the briefing and agent-task crons (hour 7 New York; NOW is 11:00 New York; sent at 7:05).
+    briefing: { enabled: true, to: 'casey@freightroll.com', hourNy: 7, lastSuccessAt: min(55), consecutiveFailures: 0, lastMessage: 'sent', sentTodayAt: min(235), failedToday: 0 },
+    agents: { enabled: true, lastSuccessAt: min(3), consecutiveFailures: 0, lastMessage: 'ran 0', queued: 0, oldestQueuedAt: null, failedFinalToday: 0 },
   };
 }
 
@@ -69,7 +72,7 @@ describe('evaluateHealth', () => {
     i.sender = { configured: false, mailbox: null };
     const r = evaluateHealth(i, NOW);
     expect(r.overall).toBe('BLOCKED');
-    expect(r.components.filter((c) => c.state === 'HEALTHY').map((c) => c.key).sort()).toEqual(['hubspot', 'mailbox', 'suppression']);
+    expect(r.components.filter((c) => c.state === 'HEALTHY').map((c) => c.key).sort()).toEqual(['agents', 'briefing', 'hubspot', 'mailbox', 'suppression']);
   });
 });
 
@@ -127,5 +130,54 @@ describe('<HealthStrip>', () => {
     await waitFor(() => expect(screen.getByTestId('health-strip')).toHaveAttribute('data-state', 'unknown'));
     expect(screen.getByTestId('health-strip')).toHaveTextContent('could not be checked');
     f.mockRestore();
+  });
+});
+
+describe('X20a: the briefing and agent-task crons on health', () => {
+  const comp = (i: HealthInputs, key: string) => evaluateHealth(i, NOW).components.find((c) => c.key === key)!;
+
+  it('the briefing: off is healthy and says so; no address is degraded; sent today is healthy with the time; after the hour, unsent past the grace, is degraded; failed today is degraded; before the hour is due', () => {
+    const base = healthy();
+    expect(comp(base, 'briefing')).toMatchObject({ state: 'HEALTHY', label: 'Briefing sent 7:05 AM' });
+    expect(comp({ ...base, briefing: { ...base.briefing, enabled: false } }, 'briefing')).toMatchObject({ state: 'HEALTHY', label: 'Morning briefing off' });
+    expect(comp({ ...base, briefing: { ...base.briefing, to: null } }, 'briefing')).toMatchObject({ state: 'DEGRADED', label: 'No briefing address · the briefing cannot go out', owner: 'operator' });
+    expect(comp({ ...base, briefing: { ...base.briefing, sentTodayAt: null } }, 'briefing')).toMatchObject({ state: 'DEGRADED', label: "Today's briefing has not gone out (due 7 AM)" });
+    expect(comp({ ...base, briefing: { ...base.briefing, sentTodayAt: null, failedToday: 2 } }, 'briefing')).toMatchObject({ state: 'DEGRADED', label: "Today's briefing failed (2 attempts) · the mailbox or the sender" });
+    expect(comp({ ...base, briefing: { ...base.briefing, sentTodayAt: null, hourNy: 13 } }, 'briefing')).toMatchObject({ state: 'HEALTHY', label: 'Briefing due 1 PM' });
+    expect(comp({ ...base, briefing: { ...base.briefing, sentTodayAt: null, hourNy: 10 } }, 'briefing')).toMatchObject({ state: 'HEALTHY', label: 'Briefing due now (10 AM)' });
+  });
+
+  it('agent tasks: off is healthy and says so; never run, stale, waiting too long or failed today are degraded', () => {
+    const base = healthy();
+    expect(comp(base, 'agents')).toMatchObject({ state: 'HEALTHY', label: 'Agent tasks 3m ago' });
+    expect(comp({ ...base, agents: { ...base.agents, enabled: false } }, 'agents')).toMatchObject({ state: 'HEALTHY', label: 'Agent tasks off' });
+    expect(comp({ ...base, agents: { ...base.agents, lastSuccessAt: null } }, 'agents')).toMatchObject({ state: 'DEGRADED', label: 'Agent tasks have never run · REVISE and objections wait' });
+    expect(comp({ ...base, agents: { ...base.agents, lastSuccessAt: min(45) } }, 'agents')).toMatchObject({ state: 'DEGRADED', label: 'Agent tasks stale (45m ago) · REVISE and objections wait' });
+    expect(comp({ ...base, agents: { ...base.agents, queued: 2, oldestQueuedAt: min(25) } }, 'agents')).toMatchObject({ state: 'DEGRADED', label: '2 tasks waiting 25m ago' });
+    expect(comp({ ...base, agents: { ...base.agents, queued: 1, oldestQueuedAt: min(2) } }, 'agents')).toMatchObject({ state: 'HEALTHY' });
+    expect(comp({ ...base, agents: { ...base.agents, failedFinalToday: 1 } }, 'agents')).toMatchObject({ state: 'DEGRADED', label: '1 task failed today · read its error', retry: expect.stringContaining('REVISE') });
+  });
+
+  it('the loader reads both cron states by key, the seller settings, the briefing row for the day and the task rows; a client without those reads answers soft', async () => {
+    const env = { GAP_BRIEFING_ENABLED: 'true', GAP_AGENT_TASKS_ENABLED: 'true', GAP_GMAIL_USER_EMAIL: 'casey@yardflow.ai', GAP_GOOGLE_REFRESH_TOKEN: 'r' };
+    const values: Record<string, string> = {
+      'cron:gap-mailbox': JSON.stringify({ lastSuccessAt: min(3).toISOString(), consecutiveFailures: 0 }),
+      'cron:gap-briefing': JSON.stringify({ lastSuccessAt: min(55).toISOString(), consecutiveFailures: 0, lastMessage: 'sent' }),
+      'cron:gap-agent-tasks': JSON.stringify({ lastSuccessAt: min(4).toISOString(), consecutiveFailures: 1, lastMessage: 'ran 1' }),
+      'gap:seller:settings': JSON.stringify({ briefingTo: 'casey@freightroll.com', briefingHourNy: 7, commandSenders: ['casey@freightroll.com'], mode: 'review', targets: {} }),
+    };
+    const findFirst = vi.fn(async (q: { where: { kind?: string; subject_id?: string } }) => (q.where.kind === 'briefing.sent' && q.where.subject_id === '2026-09-28' ? { created_at: min(235) } : null));
+    const prisma = {
+      systemConfig: { findUnique: vi.fn(async (q: { where: { key: string } }) => (values[q.where.key] ? { key: q.where.key, value: values[q.where.key] } : null)) },
+      gapAuditEvent: { findMany: vi.fn(async () => []), findFirst, count: vi.fn(async () => 0) },
+    };
+    const i = await loadHealthInputs(prisma, { env, clock: () => NOW.getTime() });
+    expect(i.briefing).toMatchObject({ enabled: true, to: 'casey@freightroll.com', hourNy: 7, consecutiveFailures: 0, failedToday: 0 });
+    expect(i.briefing.sentTodayAt?.toISOString()).toBe(min(235).toISOString());
+    expect(i.briefing.lastSuccessAt?.toISOString()).toBe(min(55).toISOString());
+    expect(i.agents).toMatchObject({ enabled: true, consecutiveFailures: 1, lastMessage: 'ran 1', queued: 0, oldestQueuedAt: null, failedFinalToday: 0 });
+    const bare = await loadHealthInputs({ systemConfig: { findUnique: vi.fn(async () => null) }, gapAuditEvent: { findMany: vi.fn(async () => []) } }, { env: {} });
+    expect(bare.briefing).toMatchObject({ enabled: false, to: null, sentTodayAt: null, lastSuccessAt: null });
+    expect(bare.agents).toMatchObject({ enabled: false, lastSuccessAt: null, queued: 0 });
   });
 });

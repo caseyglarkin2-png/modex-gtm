@@ -7,6 +7,9 @@ import { gapGmailSender } from '../execution/gap-sender';
 import { ROUTING_RUN_DONE } from '../routing/queue';
 import { ACTION_TIME_SUPPRESSION_TIMEOUT_MS, probeSuppressionContract } from '@/lib/email/suppression-gate';
 import type { HealthInputs } from './health';
+import { nyDay } from '../work/dates';
+import { listAgentTasks } from '../agents/tasks';
+import { SELLER_SETTINGS_KEY } from '../work/settings';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -67,8 +70,10 @@ export async function loadHealthInputs(prisma: PrismaLike, deps: HealthDeps = {}
   const hubspotConfigured = !!env.HUBSPOT_ACCESS_TOKEN?.trim();
   const suppressionConfigured = !!env.CLAWD_CONTROL_PLANE_URL?.trim() && !!env.CLAWD_CONTROL_PLANE_TOKEN?.trim();
 
-  const [cron, lastRun, hs, sup] = await Promise.all([
-    prisma.systemConfig.findUnique({ where: { key: 'cron:gap-mailbox' } }).catch(() => null),
+  const config = (key: string) => (typeof prisma?.systemConfig?.findUnique === 'function' ? prisma.systemConfig.findUnique({ where: { key } }).catch(() => null) : Promise.resolve(null));
+  const day = nyDay(new Date(clock()));
+  const [cron, lastRun, hs, sup, briefingCron, agentsCron, settingsRow, sentToday, failedToday, tasks] = await Promise.all([
+    config('cron:gap-mailbox'),
     prisma.gapAuditEvent.findMany({ where: { kind: ROUTING_RUN_DONE }, orderBy: { created_at: 'desc' }, take: 25, select: { created_at: true, payload: true } }).catch(() => []),
     hubspotConfigured ? timed(deps.hubspotPing ?? defaultHubspotPing, clock, HEALTH_PROBE_TIMEOUT_MS) : Promise.resolve(null),
     suppressionConfigured
@@ -80,6 +85,13 @@ export async function loadHealthInputs(prisma: PrismaLike, deps: HealthDeps = {}
           HEALTH_SUPPRESSION_TIMEOUT_MS + 500,
         )
       : Promise.resolve(null),
+    // X20a: the briefing and agent-task crons, the seller settings, today's briefing rows and the task rows. All soft.
+    config('cron:gap-briefing'),
+    config('cron:gap-agent-tasks'),
+    config(SELLER_SETTINGS_KEY),
+    typeof prisma?.gapAuditEvent?.findFirst === 'function' ? prisma.gapAuditEvent.findFirst({ where: { kind: 'briefing.sent', subject_type: 'work_day', subject_id: day }, select: { created_at: true } }).catch(() => null) : Promise.resolve(null),
+    typeof prisma?.gapAuditEvent?.count === 'function' ? prisma.gapAuditEvent.count({ where: { kind: 'briefing.failed', subject_type: 'work_day', subject_id: day } }).catch(() => 0) : Promise.resolve(0),
+    listAgentTasks(prisma, { now: new Date(clock()) }).catch(() => []),
   ]);
 
   let state: Record<string, unknown> = {};
@@ -89,6 +101,20 @@ export async function loadHealthInputs(prisma: PrismaLike, deps: HealthDeps = {}
     state = {};
   }
   const date = (v: unknown) => (typeof v === 'string' && !Number.isNaN(new Date(v).getTime()) ? new Date(v) : null);
+  const parse = (row: { value?: unknown } | null): Record<string, unknown> => {
+    try {
+      const v = typeof row?.value === 'string' ? (JSON.parse(row.value) as unknown) : null;
+      return v && typeof v === 'object' && !Array.isArray(v) ? (v as Record<string, unknown>) : {};
+    } catch {
+      return {};
+    }
+  };
+  const bState = parse(briefingCron);
+  const aState = parse(agentsCron);
+  const settings = parse(settingsRow);
+  // The same reading as gap/flags.ts gapFlag, over the injected env.
+  const flagOn = (v: unknown) => /^(1|true|yes|on)$/i.test(String(v ?? '').trim());
+  const queued = (Array.isArray(tasks) ? tasks : []).filter((t) => t.status === 'queued');
 
   return {
     mailbox: {
@@ -105,5 +131,24 @@ export async function loadHealthInputs(prisma: PrismaLike, deps: HealthDeps = {}
         : { configured: true, verdict: sup.ok ? sup.value.verdict : null, ms: sup.ms, error: sup.ok ? (sup.value.verdict === 'unknown' ? 'verdict unknown' : null) : sup.error },
     sender: { configured: !!gapSender, mailbox: gapSender?.userEmail ?? null },
     routing: { lastRunAt: lastAppliedRoutingRun(lastRun ?? []) },
+    briefing: {
+      enabled: flagOn(env.GAP_BRIEFING_ENABLED),
+      to: typeof settings.briefingTo === 'string' && settings.briefingTo.includes('@') ? settings.briefingTo : null,
+      hourNy: typeof settings.briefingHourNy === 'number' ? settings.briefingHourNy : null,
+      lastSuccessAt: date(bState.lastSuccessAt),
+      consecutiveFailures: typeof bState.consecutiveFailures === 'number' ? bState.consecutiveFailures : 0,
+      lastMessage: typeof bState.lastMessage === 'string' ? bState.lastMessage.slice(0, 200) : null,
+      sentTodayAt: sentToday?.created_at ? new Date(sentToday.created_at) : null,
+      failedToday: typeof failedToday === 'number' ? failedToday : 0,
+    },
+    agents: {
+      enabled: flagOn(env.GAP_AGENT_TASKS_ENABLED),
+      lastSuccessAt: date(aState.lastSuccessAt),
+      consecutiveFailures: typeof aState.consecutiveFailures === 'number' ? aState.consecutiveFailures : 0,
+      lastMessage: typeof aState.lastMessage === 'string' ? aState.lastMessage.slice(0, 200) : null,
+      queued: queued.length,
+      oldestQueuedAt: queued.length ? new Date(Math.min(...queued.map((t) => new Date(t.queuedAt).getTime()))) : null,
+      failedFinalToday: (Array.isArray(tasks) ? tasks : []).filter((t) => t.status === 'failed' && t.final && nyDay(new Date(t.queuedAt)) === day).length,
+    },
   };
 }
