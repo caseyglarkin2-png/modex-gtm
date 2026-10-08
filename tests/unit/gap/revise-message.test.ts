@@ -70,6 +70,8 @@ describe('X09: reviseMessage', () => {
     expect(prompt).toContain('sig-1');
     expect(prompt).toContain('180,000 square feet');
     expect(prompt).not.toContain('[S:sig-1]');
+    // The X12 demo: the model wrote a Title Case subject and C15 held the revision for review; the prompt names the house form.
+    expect(prompt).toMatch(/subject is 2 to 7 plain words in sentence case/);
     const proposed = await loadProposedCopyRevisions(w.c, { decisionId: 'dec-1', stepIndex: 0 });
     expect(proposed).toHaveLength(1);
     expect(proposed[0]).toMatchObject({ approved: false, compileVerdict: 'pass', basis: { critique: w.task().request, facts: ['sig-1'] }, taskId: 'at_1' });

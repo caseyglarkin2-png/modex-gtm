@@ -95,6 +95,7 @@ export function buildRevisePrompt(input: { critique: string; firstName: string; 
     '- Exactly one question, at the end, about their operation. No meeting request, no calendar link.',
     '- Never name a product, YardFlow, FreightRoll or "we help". Never promise savings, money, percentages or ROI to them. Never mention other customers by name.',
     '- No em dashes. Say "yards" never "yard" alone. Do not start sentences with "I".',
+    '- The subject is 2 to 7 plain words in sentence case: capitalize only the first word and real proper nouns, never Title Case, never Re: or Fwd:, no colon, no account name unless it is the proper noun. Like "Doors versus spots".',
   ].join('\n');
 }
 
