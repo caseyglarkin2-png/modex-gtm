@@ -1,0 +1,70 @@
+/**
+ * X20b (GAP OS sales execution engine, 2026-10-08): the accountability view renders what I intended with each item's
+ * status, what was completed as provider-proven apart from self-reported, what needs attention, what the agents are
+ * handling, and the day's events with their basis; the empty states say nothing was found, never success.
+ */
+import { render, screen, within } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
+import { ActivityView } from '@/components/gap/activity-view';
+import type { Accountability } from '@/lib/gap/work/activity';
+import type { AgentTask } from '@/lib/gap/agents/tasks';
+
+const AT = '2026-10-08T15:00:00.000Z';
+const item = (key: string, accountName: string, title: string): Accountability['intended'][number]['item'] => ({ key, rank: 0, accountName, kind: 'ready', stateKind: 'ready', title, why: '', href: `/gap/accounts/${accountName.toLowerCase()}`, person: null, refs: {}, token: 'a'.repeat(32) });
+const ev = (kind: Accountability['events'][number]['kind'], basis: 'provider' | 'self_reported', line: string, accountName: string | null = null): Accountability['events'][number] => ({ kind, basis, at: AT, accountName, who: null, line, ref: { kind: 'x', subjectType: 'y', subjectId: 'z' }, completes: [] });
+const task = (over: Partial<AgentTask>): AgentTask => ({ id: 't', kind: 'revise_message', itemKey: 'k', itemToken: '', day: '2026-10-08', revision: 0, request: 'Make it about the gate', requestedBy: '', requestedFrom: '', status: 'queued', attempts: 0, queuedAt: AT, leaseUntil: null, fence: null, result: null, lastError: null, final: false, supersededBy: null, ...over });
+
+function view(): Accountability {
+  const sent = ev('message_sent', 'provider', 'Sent touch 1 to ann@kroger.example.com.', 'Kroger');
+  const deferred = ev('task_deferred', 'self_reported', 'Deferred by email: tomorrow.', 'Dole');
+  return {
+    day: '2026-10-08',
+    planned: true,
+    intended: [
+      { item: item('first_touch:dec-1', 'Kroger', 'Ready for a first touch'), status: 'done', by: sent },
+      { item: item('commitment:c-1', 'Dole', 'Send the dock comparison'), status: 'set_aside', by: deferred },
+      { item: item('follow_up:Kenco:2026-10-08', 'Kenco', 'Follow up due'), status: 'open', by: null },
+    ],
+    completed: [
+      { kind: 'message_sent', label: 'Message sent', provider: 1, selfReported: 0 },
+      { kind: 'content_copied', label: 'Content copied', provider: 0, selfReported: 2 },
+    ],
+    events: [sent, deferred, ev('work_blocked', 'provider', 'An action was refused: active opportunity.', 'GXO')],
+    attention: { open: [item('follow_up:Kenco:2026-10-08', 'Kenco', 'Follow up due')], blocked: [ev('work_blocked', 'provider', 'An action was refused: active opportunity.', 'GXO')] },
+    agents: { queued: [task({ id: 'q' })], running: [], succeeded: [task({ id: 's', status: 'succeeded', kind: 'answer_objection', request: 'We already run a YMS.' })], failed: [task({ id: 'f', status: 'failed', final: true, lastError: 'could_not_satisfy: product_named' })] },
+  };
+}
+
+describe('X20b: <ActivityView>', () => {
+  it('intended items carry their status and what did them; completed splits provider from self-reported; attention lists open and blocked; agents by status with their errors; events with their basis', () => {
+    render(<ActivityView a={view()} />);
+    const intended = within(screen.getByTestId('activity-intended')).getAllByTestId('activity-intended-item');
+    expect(intended.map((li) => li.getAttribute('data-status'))).toEqual(['done', 'set_aside', 'open']);
+    expect(intended[0].textContent).toContain('Sent touch 1 to ann@kroger.example.com.');
+    expect(intended[1].textContent).toContain('(self-reported)');
+    expect(within(intended[2]).getByRole('link', { name: 'Open' })).toHaveAttribute('href', '/gap/accounts/kenco');
+    expect(screen.getByTestId('activity-intended').textContent).toContain('3 items; 1 done, 1 set aside, 1 open');
+    const copied = screen.getByTestId('activity-count-content_copied');
+    expect(copied.textContent).toBe('Content copied02');
+    expect(screen.getByTestId('activity-count-message_sent').textContent).toBe('Message sent10');
+    const attention = screen.getByTestId('activity-attention');
+    expect(within(attention).getByRole('link', { name: 'Kenco: Follow up due' })).toBeTruthy();
+    expect(attention.textContent).toContain('Blocked');
+    expect(attention.textContent).toContain('at GXO');
+    const tasks = within(screen.getByTestId('activity-agents')).getAllByTestId('activity-agent-task');
+    expect(tasks.map((li) => li.getAttribute('data-status'))).toEqual(['queued', 'failed', 'succeeded']);
+    expect(tasks[1].textContent).toContain('could_not_satisfy: product_named');
+    expect(screen.getByTestId('activity-agents').textContent).toContain('1 queued, 0 running, 1 finished today, 1 failed today.');
+    const events = screen.getByTestId('activity-events');
+    expect(events.textContent).toContain('provider-proven · Kroger');
+    expect(events.textContent).toContain('self-reported · Dole');
+  });
+
+  it('the empty states say nothing was found, never success; no plan says so', () => {
+    render(<ActivityView a={{ day: '2026-10-08', planned: false, intended: [], completed: [], events: [], attention: { open: [], blocked: [] }, agents: { queued: [], running: [], succeeded: [], failed: [] } }} />);
+    expect(screen.getByTestId('activity-intended').textContent).toContain('No plan was made for this day');
+    expect(screen.getByTestId('activity-completed').textContent).toContain('No activity recorded for this day.');
+    expect(screen.getByTestId('activity-attention').textContent).toContain('Nothing open and nothing blocked.');
+    expect(screen.getByTestId('activity-agents').textContent).toContain('No agent tasks.');
+  });
+});
