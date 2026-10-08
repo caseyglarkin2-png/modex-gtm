@@ -6,6 +6,7 @@ import type { SellerTag } from '@/lib/gap/context/now';
 
 export const TAG_TONE: Record<SellerTag, string> = {
   'Buyer said': 'border-emerald-600 text-emerald-700 dark:text-emerald-400',
+  'You noted': 'border-dashed border-emerald-600 text-emerald-700 dark:text-emerald-400',
   Checked: 'border-sky-600 text-sky-700 dark:text-sky-400',
   Unverified: 'border-dashed border-[var(--border)] text-[var(--muted-foreground)]',
   'Our read': 'border-[var(--border)] text-[var(--muted-foreground)]',

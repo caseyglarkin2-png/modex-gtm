@@ -79,6 +79,8 @@ export interface BidInput {
   at: string;
   /** The hypothesis this BID was captured against (every BID has one). */
   hypothesisId: string | null;
+  /** R63-A S5: what the seller noted they said (a paraphrase), never their own words. */
+  noted?: boolean;
   /**
    * Sprint 5 review (R50): the opportunity it belongs to in seller words (deals/scope.ts: "Deal: Kroger Columbus DC
    * (through Ben Scratch)", "account-level", a closed deal with its outcome), when the account has a deal; null when

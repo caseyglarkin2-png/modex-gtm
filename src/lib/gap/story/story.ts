@@ -35,7 +35,7 @@ import { isReplyKindClass, REPLY_KIND_WORDS } from '../capture/reply-kind';
 export type StoryTag = SellerTag;
 
 /** Strongest to weakest: a row takes the weakest class of its sentences. */
-export const STRENGTH: Record<StoryTag, number> = { 'Buyer said': 0, Checked: 1, 'Our read': 2, Unverified: 3, Unknown: 4, Contradicted: 5 };
+export const STRENGTH: Record<StoryTag, number> = { 'Buyer said': 0, 'You noted': 0.5, Checked: 1, 'Our read': 2, Unverified: 3, Unknown: 4, Contradicted: 5 };
 export const weakestTag = (tags: readonly StoryTag[]): StoryTag => tags.reduce((w, t) => (STRENGTH[t] > STRENGTH[w] ? t : w), tags[0] ?? 'Unknown');
 
 export interface StorySentence {
@@ -212,7 +212,9 @@ export function projectStory(i: StoryInput): AccountStory {
   };
   const line = (l: NowLine) => fromLine(l, i.accountName);
   // Sprint 5 review (R50): a buyer sentence says whose words and, at an account with deals, which opportunity.
-  const saidBy = (b: { who: string | null; at: string; scope?: string | null }) => `buyer said, ${b.who ?? 'the buyer'}, ${day(b.at)}${b.scope ? `; ${b.scope}` : ''}`;
+  // R63-A S5: a paraphrase the seller noted is "you noted they said", tagged as such, never "Buyer said".
+  const saidBy = (b: { who: string | null; at: string; scope?: string | null; noted?: boolean }) => `${b.noted ? 'you noted they said' : 'buyer said'}, ${b.who ?? 'the buyer'}, ${day(b.at)}${b.scope ? `; ${b.scope}` : ''}`;
+  const tagOf = (b: { noted?: boolean }): StoryTag => (b.noted ? 'You noted' : 'Buyer said');
   const rows: StoryRow[] = [];
 
   // WHAT HAS HAPPENED BETWEEN US: the last person touched with their title, what came back, the count.
@@ -221,7 +223,7 @@ export function projectStory(i: StoryInput): AccountStory {
   // THEIR GOAL: only in the buyer's words (a future-state or priority input); a program statement is a change.
   const goalBid = i.inputs.bids.find((b) => b.type === 'future_state' || b.type === 'priority');
   if (goalBid) {
-    rows.push(row('goal', [{ text: sentence(goalBid.summary), tag: 'Buyer said', basis: saidBy(goalBid), basisIds: [`bid:${goalBid.id}`] }]));
+    rows.push(row('goal', [{ text: sentence(goalBid.summary), tag: tagOf(goalBid), basis: saidBy(goalBid), basisIds: [`bid:${goalBid.id}`] }]));
     used.add(`bid:${goalBid.id}`);
   }
 
@@ -271,8 +273,8 @@ export function projectStory(i: StoryInput): AccountStory {
   // Sprint 5 review: what it costs them is an impact, or a number in money or detention terms (bid/cost.ts).
   const impactBid = i.inputs.bids.find((b) => b.type === 'impact') ?? i.inputs.bids.find((b) => isCostBid(b));
   if (problemBid) {
-    const s: StorySentence[] = [{ text: sentence(problemBid.summary), tag: 'Buyer said', basis: saidBy(problemBid), basisIds: [`bid:${problemBid.id}`] }];
-    if (impactBid) s.push({ text: sentence(impactBid.summary), tag: 'Buyer said', basis: saidBy(impactBid), basisIds: [`bid:${impactBid.id}`] });
+    const s: StorySentence[] = [{ text: sentence(problemBid.summary), tag: tagOf(problemBid), basis: saidBy(problemBid), basisIds: [`bid:${problemBid.id}`] }];
+    if (impactBid) s.push({ text: sentence(impactBid.summary), tag: tagOf(impactBid), basis: saidBy(impactBid), basisIds: [`bid:${impactBid.id}`] });
     rows.push(row('yard', s));
   } else if (top) {
     // "Wrong if: If trailers..." doubles the word; the clause starts after it.

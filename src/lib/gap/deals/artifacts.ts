@@ -62,7 +62,7 @@ export interface ArtifactInput {
   accountName: string;
   deal: { id: string; name: string | null; contacts: ReadonlyArray<{ name: string; title: string | null }> };
   /** This deal's confirmed buyer words and the account-level ones (labeled), oldest first. */
-  needs: ReadonlyArray<{ id: string; type: string; quote: string; who: string; at: string; accountLevel: boolean }>;
+  needs: ReadonlyArray<{ id: string; type: string; quote: string; who: string; at: string; accountLevel: boolean; /** R63-A S5: what the seller noted they said (never quoted to them as their words). */ noted?: boolean }>;
   /** This deal's plan (R52). */
   plan: readonly Milestone[];
   /** This deal's open obligations (`person`: who on their side it is owed to, when recorded). */
@@ -118,8 +118,10 @@ export function prepareArtifacts(i: ArtifactInput): PreparedArtifact[] {
   const dealName = i.deal.name ?? `the ${i.accountName} deal`;
   const lead = i.deal.contacts[0] ?? null;
   const statements = i.needs.filter((n) => STATEMENT_TYPES.has(n.type));
+  const verbatim = statements.filter((n) => !n.noted);
+  const noted = statements.filter((n) => n.noted);
   const quotes = i.needs.map((n) => n.quote);
-  const citeBase = (n: ArtifactInput['needs'][number]) => `${n.who}, ${dayOf(n.at)} (buyer confirmed${n.accountLevel ? ', account-level' : ''})`;
+  const citeBase = (n: ArtifactInput['needs'][number]) => `${n.who}, ${dayOf(n.at)} (${n.noted ? 'as you noted it' : 'buyer confirmed'}${n.accountLevel ? ', account-level' : ''})`;
   // Sprint 5 review NICE: two statements by one person on one day read "Rests on: Ben Scratch, Oct 7" twice; a repeated
   // label carries the statement's first words, so each line says which words it rests on.
   const opening = (q: string) => {
@@ -144,8 +146,10 @@ export function prepareArtifacts(i: ArtifactInput): PreparedArtifact[] {
   const recapLines = [
     `${lead ? `Hi ${first(lead.name)},` : 'Hi,'}`,
     '',
-    'Thank you for the time. Here is what I heard, in your words, so you can correct anything I got wrong:',
-    ...(statements.length ? statements.map((n) => `- "${n.quote}" (${n.who})`) : ['- (Nothing confirmed yet: send this only after you have their words.)']),
+    // R63-A S5: "in your words" only for their own words; what the seller noted is said as understood, never quoted.
+    ...(verbatim.length ? ['Thank you for the time. Here is what I heard, in your words, so you can correct anything I got wrong:', ...verbatim.map((n) => `- "${n.quote}" (${n.who})`)] : []),
+    ...(noted.length ? [verbatim.length ? '' : 'Thank you for the time. Here is what I understood, so you can correct anything I got wrong:', ...(verbatim.length ? ['What I understood from our conversation:'] : []), ...noted.map((n) => `- ${n.quote.replace(/^\s*(?:he|she|they|[A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)\s+(?:said|says|told\s+(?:me|us|casey|him|her|them)|mentioned|explained|noted)\s+(?:that\s+)?/i, '').replace(/^\w/, (c) => c.toUpperCase())}`)] : []),
+    ...(statements.length ? [] : ['Thank you for the time. Here is what I heard, so you can correct anything I got wrong:', '- (Nothing confirmed yet: send this only after you have their words.)']),
     ...(agreedByBuyer.length ? ['', 'What we agreed as next steps:', ...agreedByBuyer.map((m) => `- ${m.title}${m.dueDay ? `, by ${dayOf(`${m.dueDay}T16:00:00Z`)}` : ''}${m.responsible?.name ? ` (${m.responsible.name})` : ''}`)] : []),
     ...(owedYou.length ? ['', 'What I owe you:', ...owedYou.map((t) => `- ${t}`)] : []),
     ...(owedTeam.length ? ['', 'What I owe your team:', ...owedTeam.map((t) => `- ${t}`)] : []),

@@ -21,6 +21,7 @@ import { selectConfirmedBids } from '../bid/select';
 import { loadCommitments, withPhases } from '../work/commitments';
 import type { Commitment, PhaseRead } from '../work/commitment-model';
 import { accountSlug } from '../account-intel/href';
+import { wordingOf } from '../bid/wording';
 import { buildOpportunities, dealRefs, personIndex, bidScope, type OpportunitiesView, type OpportunityBid, type OpportunityDealInput, type OpportunityPerson, type ScopedCommitment, type ScopedNeed } from './opportunities';
 import { DEAL_OBJECTIVE, openQuestionsFor, unknownSectionsOfTypes, type BriefBidRow } from './deal-brief';
 import { ACCOUNT_LEVEL, closedDealLabel, type ClosedDealRef, type ScopeRead } from './scope';
@@ -175,7 +176,7 @@ export async function loadDealWorkspace(
         deal: own ? { id: own.dealId, name: own.name, contacts: own.contacts } : closedId ? { id: closedId, name: closedRef ? closedDealLabel(closedRef).replace(/^Deal: /, '') : 'a deal that is not open here', contacts: [] } : null,
         people: persons.map((p) => ({ name: p.name, title: p.title })),
         commitments: commitments.map((c) => ({ title: c.title, kind: c.kind, status: c.status, line: c.line, createdAt: c.createdAt, updatedAt: c.updatedAt, person: c.person ? { name: c.person.name } : null, scopeLabel: c.scope.label })),
-        needs: needs.map((n) => ({ type: n.type, quote: n.quote, who: n.who, at: n.at, scopeLabel: n.scope.basis === 'none' ? ACCOUNT_LEVEL : n.scope.label })),
+        needs: needs.map((n) => ({ type: n.type, quote: n.quote, who: n.who, at: n.at, scopeLabel: n.scope.basis === 'none' ? ACCOUNT_LEVEL : n.scope.label, noted: wordingOf(n.metadata, n.quote) === 'noted' })),
         unknownQuestions: openQuestionsFor(unknownSectionsOfTypes(needs.map((n) => n.type))),
         learningObjective: objectiveText,
         guesses: x.guesses ?? [],
@@ -189,7 +190,7 @@ export async function loadDealWorkspace(
   // R53: the deal's own confirmed words (and the labeled account-level ones), its plan and its open obligations.
   const artifacts = Object.fromEntries(
     opportunities.deals.map((d) => {
-      const needs = [...d.needs, ...opportunities.accountLevel.needs].sort((a, b) => a.at.localeCompare(b.at)).map((n) => ({ id: n.id, type: n.type, quote: n.quote, who: n.who, at: n.at, accountLevel: n.scope.basis === 'none' }));
+      const needs = [...d.needs, ...opportunities.accountLevel.needs].sort((a, b) => a.at.localeCompare(b.at)).map((n) => ({ id: n.id, type: n.type, quote: n.quote, who: n.who, at: n.at, accountLevel: n.scope.basis === 'none', noted: wordingOf(n.metadata, n.quote) === 'noted' }));
       const input = { accountName: x.accountName, deal: { id: d.dealId, name: d.name, contacts: d.contacts }, needs, plan: plans[d.dealId] ?? [], commitments: d.commitments.map((c) => ({ commitmentId: c.commitmentId, kind: c.kind, title: c.title, line: c.line, dueAt: c.dueAt, person: c.person?.name ?? null })), roi: x.roi ?? null };
       const all = prepareArtifacts(input);
       return [d.dealId, { next: nextArtifact(all, { ...input, recapSentAt: recapSentAt(d.dealId) }), all }];

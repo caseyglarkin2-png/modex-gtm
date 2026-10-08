@@ -24,7 +24,8 @@ import type { AccountContext } from './context';
 import type { ReadyTarget } from './send-target';
 
 /** "Unverified": a third party's report GAP has not checked (a signal); not our inference, not checked. */
-export type SellerTag = 'Buyer said' | 'Checked' | 'Unverified' | 'Our read' | 'Unknown' | 'Contradicted';
+/** R63-A S5: "You noted" is what the seller noted a buyer said (a paraphrase): never quoted as their words. */
+export type SellerTag = 'Buyer said' | 'You noted' | 'Checked' | 'Unverified' | 'Our read' | 'Unknown' | 'Contradicted';
 
 /** Names stored all lower case ("adel ghanem") read as names. Anything with a capital is left as written. */
 export { displayName } from '../people/display-name';

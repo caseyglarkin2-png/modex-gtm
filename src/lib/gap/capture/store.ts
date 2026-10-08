@@ -32,6 +32,7 @@ import { recordDisposition } from '../disposition/service';
 import { BID_TYPES, type BidType } from '../taxonomy';
 import { buyerSpeakers, commitmentTitle, excludedLines, extractCandidates, extractCommitments, quoteInSource, quoteWithinSentence, sentencesWithSpeaker, type CandidateBid, type CandidateCommitment } from './extract';
 import { ensureCommitment } from '../work/commitments';
+import { bidWording } from '../bid/wording';
 import { isDay, nyDayAt } from '../work/dates';
 import { loadReplyForCapture } from '../replies/list';
 import { classifyReply } from '../replies/classify';
@@ -578,7 +579,8 @@ async function decideCandidateUnlocked(
     normalizedSummary: input.summary?.trim() || null,
     source: BID_SOURCE_OF[view.context],
     // R50: words from a note opened on a deal belong to that deal (deals/scope.ts); otherwise they are account-level.
-    metadata: { captureId: view.id, candidateId: cand.id, proposedBy: 'machine', proposedType: cand.type, confirmedFromCapture: true, ...(view.dealId ? { scope: { dealId: view.dealId } } : {}), ...(view.reply ? { replyId: view.reply.id } : {}) },
+    // R63-A S5: their own words (their message, a transcript's labelled line) or what the seller noted they said.
+    metadata: { captureId: view.id, candidateId: cand.id, proposedBy: 'machine', proposedType: cand.type, confirmedFromCapture: true, wording: bidWording(quote, { reply: !!view.reply || view.source?.kind === 'reply', speakerLabelled: !!cand.speaker }), ...(view.dealId ? { scope: { dealId: view.dealId } } : {}), ...(view.reply ? { replyId: view.reply.id } : {}) },
     actor: input.actor,
     actorKind: 'human',
     now: input.now,

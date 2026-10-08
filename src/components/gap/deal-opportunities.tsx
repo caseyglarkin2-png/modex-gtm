@@ -10,6 +10,7 @@ import type { ReactNode } from 'react';
 import { KIND_TEXT } from '@/lib/gap/work/commitment-model';
 import type { OpportunitiesView, ScopedCommitment, ScopedNeed } from '@/lib/gap/deals/opportunities';
 import { ObligationActions, SkippedAtClosure } from './obligation-actions';
+import { wordingOf } from '@/lib/gap/bid/wording';
 
 const STOP = new Set(['the', 'and', 'with', 'for', 'call', 'meeting', 'about', 'our', 'their']);
 const words = (s: string) => s.toLowerCase().split(/[^a-z0-9]+/).filter((w) => w.length >= 3 && !STOP.has(w));
@@ -62,10 +63,11 @@ function Needs({ items, testid }: { items: ScopedNeed[]; testid: string }) {
     <ul className="space-y-1">
       {items.map((b) => (
         <li key={b.id} className="text-sm" data-testid={testid}>
-          <span className="mr-1 text-xs font-semibold text-[var(--muted-foreground)]">{NEED_WORD[b.type] ?? b.type}:</span>
-          <q className="italic">{b.quote}</q>
+          <span className="mr-1 text-xs font-semibold text-[var(--muted-foreground)]">{NEED_WORD[b.type] ?? b.type}:</span>{' '}
+          {/* R63-A S5: only their own words are quoted; a paraphrase is what you noted they said. */}
+          {wordingOf(b.metadata, b.quote) === 'noted' ? <span data-testid="need-noted">{b.quote}</span> : <q className="italic">{b.quote}</q>}
           <span className="block text-xs text-[var(--muted-foreground)]">
-            Buyer confirmed · {b.who} · {day(b.at)}
+            {wordingOf(b.metadata, b.quote) === 'noted' ? 'You noted they said' : 'Buyer confirmed'} · {b.who} · {day(b.at)}
             {b.scope.basis === 'contact' ? ` · ${b.scope.label}` : ''}
           </span>
         </li>

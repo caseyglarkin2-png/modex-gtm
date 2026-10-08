@@ -34,6 +34,8 @@ export function spokenTag(tag: StoryTag): string {
   switch (tag) {
     case 'Buyer said':
       return 'the buyer said it';
+    case 'You noted':
+      return 'as you noted it';
     case 'Checked':
       return 'checked';
     case 'Our read':

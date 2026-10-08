@@ -32,6 +32,7 @@ import { approachOfHypothesis } from '../research/approach-policy';
 import { factCurrentness } from '../research/currentness';
 import { draftApproachFor } from '../story/draft-approach';
 import { nameFromAddress } from '../story/touches';
+import { wordingOf } from '../bid/wording';
 /** R30/R31: the non-physical claim classes the read keeps as story facts of their own kind. */
 const CLAIM_FACT_CLASSES: ReadonlySet<string> = new Set(['JOB_POSTING', 'PROCUREMENT']);
 
@@ -366,7 +367,7 @@ export async function loadAccountInputs(
       reviewAckAt: acks.get(h.id) ? acks.get(h.id)!.toISOString() : null,
     })),
     // R63-A B4 / matrix: whose words, by the person on record at the address (never the address itself).
-    bids: confirmed.map((b) => ({ id: b.id, type: b.type, summary: b.normalized_summary ?? b.raw_buyer_language, quote: b.raw_buyer_language, who: speakerName(b.contact_email ?? null), at: new Date(b.confirmed_at ?? b.captured_at).toISOString(), hypothesisId: b.hypothesis_id ?? null, scope: scopeOfBid({ metadata: b.metadata, contactEmail: b.contact_email ?? null }) })),
+    bids: confirmed.map((b) => ({ id: b.id, type: b.type, summary: b.normalized_summary ?? b.raw_buyer_language, quote: b.raw_buyer_language, who: speakerName(b.contact_email ?? null), at: new Date(b.confirmed_at ?? b.captured_at).toISOString(), hypothesisId: b.hypothesis_id ?? null, scope: scopeOfBid({ metadata: b.metadata, contactEmail: b.contact_email ?? null }), noted: wordingOf(b.metadata, String(b.raw_buyer_language ?? '')) === 'noted' })),
     personas: (personas as Row[]).map((p) => {
       const emp = employment.get(p.id) ?? null;
       return { id: p.id, name: p.name, title: p.title ?? null, email: p.email ?? null, doNotContact: !!p.do_not_contact, hasEmail: !!p.email, emailStatus: p.email_status ?? null, updatedAt: iso(p.updated_at), hubspotContactId: p.hubspot_contact_id ?? null, apolloEnrichedAt: p.enrichment?.apollo_person_id ? iso(p.enrichment.last_enriched_at) : null, location: p.hubspot_contact_id ? hsById.get(String(p.hubspot_contact_id))?.location ?? null : null, employment: emp ? { state: emp.state, why: emp.why, elsewhere: emp.elsewhere ? { company: emp.elsewhere.company, title: emp.elsewhere.title } : null } : null, role: personaRoleOf(p) };
