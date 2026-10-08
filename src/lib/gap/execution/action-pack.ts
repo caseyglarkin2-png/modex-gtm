@@ -22,6 +22,7 @@
 import { createHash } from 'node:crypto';
 import { isApproved } from '../compiler/approval';
 import { getHypothesis } from '../hypothesis/service';
+import { loadApprovedCopyRevision } from './copy-revision';
 import { resolveEnrollTarget } from '../routing/rules';
 import type { EnrollTarget, RoutingInputs, RoutingTop100Input } from '../routing/types';
 import { parseSteps, type StepsV2 } from '../sequence/steps';
@@ -111,6 +112,8 @@ export interface ActionPack {
   stepIndex: number;
   /** Citations in the copy that are not this hypothesis's evidence (template fixtures). */
   unresolvedCitations: string[];
+  /** X10: the approved copy revision this pack renders from (null: the version's template copy). */
+  revision: { revisionId: string; approvedBy: string | null; approvedAt: string | null; basis: { critique: string; facts: string[] } } | null;
 }
 
 const PERSONA_SELECT = {
@@ -294,13 +297,17 @@ export async function loadActionPack(prisma: PrismaLike, args: LoadActionPackArg
 
   const stepIndex = Math.max(0, args.stepIndex ?? 0);
   const step0 = steps[stepIndex];
-  const rendered =
+  const templateRender =
     persona && step0?.templates?.subjectTemplate && step0.templates.bodyTemplate
       ? renderStepCopy(
           { subject: step0.templates.subjectTemplate, body: step0.templates.bodyTemplate },
           { firstName: firstNameOf(persona.name), account: hypothesis.account_name, observation: hypothesis.observation },
         )
       : null;
+  // X10: an approved copy revision for THIS card and step is what the pack renders, hashes and finds the compile row
+  // for, so the draft and the send bind the revised copy end to end (copy-revision.ts). A proposal is never used.
+  const approvedRevision = decision && persona ? await loadApprovedCopyRevision(prisma, { decisionId: decision.id, stepIndex }).catch(() => null) : null;
+  const rendered = approvedRevision ? { marked: approvedRevision.marked, queued: approvedRevision.queued, unrendered: null } : templateRender;
 
   const compile =
     rendered && version && rendered.unrendered === null
@@ -335,5 +342,6 @@ ${rendered.marked.body}`.matchAll(/\[\[SRC:([A-Za-z0-9_-]+)\]\]/g)].map((m) => m
     emailReady: rendered !== null && rendered.unrendered === null && unresolvedCitations.length === 0 && compileCleared(compile),
     stepIndex,
     unresolvedCitations,
+    revision: approvedRevision ? { revisionId: approvedRevision.revisionId, approvedBy: approvedRevision.approvedBy, approvedAt: approvedRevision.approvedAt, basis: approvedRevision.basis } : null,
   };
 }
