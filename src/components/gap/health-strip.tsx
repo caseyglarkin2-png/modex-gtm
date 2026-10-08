@@ -1,9 +1,9 @@
 'use client';
 
 /**
- * The GAP health strip (Phase 2 A3): one line at the top of /gap saying
- * whether the cockpit can be trusted right now, with the diagnostic detail
- * under a disclosure. It loads after the page (GET /api/gap/health) so a slow
+ * The GAP health strip (Phase 2 A3): one line saying whether the cockpit can be trusted right now, with the diagnostic
+ * detail under a disclosure. X15d: it lives in System at the foot of Work (the seller's day is never led by the
+ * machinery); the head carries it only when outbound is BLOCKED, or when health could not be checked. It loads after the page (GET /api/gap/health) so a slow
  * dependency never delays the cockpit. A strip that cannot load says so; it
  * is never shown green by default. Voice: no em dashes.
  */
@@ -20,7 +20,7 @@ const WORD: Record<HealthState, string> = { HEALTHY: 'Healthy', DEGRADED: 'Degra
 
 type State = { kind: 'loading' } | { kind: 'ready'; report: HealthReport } | { kind: 'failed'; reason: string };
 
-export function HealthStrip({ initial = null }: { initial?: HealthReport | null }) {
+export function HealthStrip({ initial = null, placement = 'foot' }: { initial?: HealthReport | null; placement?: 'head' | 'foot' }) {
   const [state, setState] = useState<State>(initial ? { kind: 'ready', report: initial } : { kind: 'loading' });
 
   useEffect(() => {
@@ -42,6 +42,7 @@ export function HealthStrip({ initial = null }: { initial?: HealthReport | null 
   }, [initial]);
 
   if (state.kind === 'loading') {
+    if (placement === 'head') return null;
     return (
       <p data-testid="health-strip" data-state="loading" className="text-xs text-[var(--muted-foreground)]">
         Checking GAP health...
@@ -56,6 +57,8 @@ export function HealthStrip({ initial = null }: { initial?: HealthReport | null 
     );
   }
   const r = state.report;
+  // X15d: at the head, only a block is said; degraded (stale recommendations, a late briefing) waits in System at the foot.
+  if (placement === 'head' && r.overall !== 'BLOCKED') return null;
   // R63-A S16: the worst failure names who repairs it and the next step, on the line itself (never only in the details).
   const worst = r.overall === 'HEALTHY' ? null : r.components.filter((c) => c.state === r.overall && c.owner && c.retry)[0] ?? null;
   return (
