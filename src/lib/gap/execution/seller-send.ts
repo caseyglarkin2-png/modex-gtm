@@ -77,7 +77,7 @@ export function crmLogMethodFor(hubspotContactId: string | null, env: Record<str
 }
 
 export interface SendPreview {
-  /** HubSpot ON (the send will be logged) or UNAVAILABLE. */
+  /** Whether this send is logged to HubSpot ('on') or not ('unavailable': no logging set up). Not a HubSpot read. */
   crmLogging: 'on' | 'unavailable';
   fromName: string;
   from: string;

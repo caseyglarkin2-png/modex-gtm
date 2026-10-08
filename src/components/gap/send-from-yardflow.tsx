@@ -141,6 +141,18 @@ const TERMINAL: ReadonlySet<string> = new Set([
 
 const when = (iso: string) => new Date(iso).toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
 
+/**
+ * R63-A S9: the final check says HubSpot once, in words. "CRM HubSpot: UNAVAILABLE" sat a few lines under "No open
+ * HubSpot deal, checked moments ago" and read like an outage; it meant only that this send is not logged there. The
+ * final check exists only after the click-time gate read HubSpot fresh and found no open deal (an open deal or an
+ * unreadable HubSpot refuses first), so the one sentence carries both facts.
+ */
+export function hubspotSentence(crmLogging: 'on' | 'unavailable'): string {
+  return crmLogging === 'on'
+    ? 'No open deal, read moments ago. This email is logged to their HubSpot record.'
+    : 'No open deal, read moments ago. This email is not logged in HubSpot; GAP records it as emailed.';
+}
+
 export function SendFromYardflow({
   decisionId,
   stepIndex = 0,
@@ -255,8 +267,8 @@ export function SendFromYardflow({
           <dd>{p.toName ? `${p.toName} ` : ''}&lt;{p.to}&gt;</dd>
           <dt className="text-[var(--muted-foreground)]">Subject</dt>
           <dd>{p.subject}</dd>
-          <dt className="text-[var(--muted-foreground)]">CRM</dt>
-          <dd>HubSpot: {p.crmLogging === 'on' ? 'ON' : 'UNAVAILABLE'}</dd>
+          <dt className="text-[var(--muted-foreground)]">HubSpot</dt>
+          <dd data-testid="send-hubspot">{hubspotSentence(p.crmLogging)}</dd>
         </dl>
         <pre data-testid="send-body" className="whitespace-pre-wrap rounded-md bg-[var(--muted)]/50 p-3 font-sans text-sm">{p.body}</pre>
         <div className="flex flex-wrap gap-2">
