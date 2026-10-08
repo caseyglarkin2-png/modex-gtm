@@ -261,8 +261,8 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
         <p className="mt-1 text-sm text-[var(--muted-foreground)]" data-testid="work-subtitle">{lane ? 'An analyst view: every account in one list. Work holds your day.' : preview ? 'The accounts that will need you tomorrow, in order: a preview.' : 'The accounts that need you today, in order. Open one, do the move, record it, then go to the next.'}</p>
       </div>
       <GapSubnav />
-      {/* Phase 2 A3: can the cockpit be trusted right now (mailbox, HubSpot, suppression, sender, routing). */}
-      <HealthStrip />
+      {/* Phase 2 A3 + X15d: at the head only a BLOCKED outbound is said; the full health line is System at the foot. */}
+      <HealthStrip placement="head" />
       {/* UX-10: the six lane tiles are the analyst's lanes; on Work the chips carry the counts, so the tiles show only inside a lane. */}
       {lane ? <GapCockpit data={{ ...data.counts, active: lane }} /> : null}
 
@@ -321,6 +321,8 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
           </div>
         </details>
       ) : null}
+      {/* X15d: the health line in seller words, at the foot (mailbox, HubSpot, suppression, sender, routing, briefing, agents). */}
+      <HealthStrip />
     </div>
   );
 }

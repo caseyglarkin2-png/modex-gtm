@@ -970,3 +970,36 @@ describe('GET /api/cron/gap-hubspot-replies (route)', () => {
     expect(mockedFailure).toHaveBeenCalledTimes(1);
   });
 });
+
+describe('X15b: a non-prospect inbound (a known person writing to a teammate, logged by HubSpot) is not a reply to GAP', () => {
+  it('with the GAP identities given, an engagement addressed to someone else is counted notToGap and never lands; one addressed to a GAP identity lands; one with no recipient on the row still lands (nothing says it was not to GAP)', async () => {
+    const prisma = makePrisma();
+    const toTeammate = engagement({ id: '5560', toEmail: 'Someone.Else@yardflow.ai', subject: 'Invoice for the Reno audit', text: 'Attached is the invoice we discussed.', timestamp: new Date(NOW.getTime() - 50 * 60 * 1000) });
+    const noRecipient = engagement({ id: '5561', toEmail: null, timestamp: new Date(NOW.getTime() - 40 * 60 * 1000) });
+    const report = await pollHubSpotReplies(
+      prisma,
+      { now: NOW, dryRun: false, gapIdentities: new Set(['casey@yardflow.ai', 'casey@freightroll.com']) },
+      { searchIncomingEmails: makeSearch([engagement(), toTeammate, noRecipient]) },
+    );
+    expect(report).toMatchObject({ seen: 3, created: 2, notToGap: 1, unknownSender: 0 });
+    expect(prisma.__store.messages.has('hs:5560')).toBe(false);
+    expect(prisma.__store.messages.has('hs:5551')).toBe(true);
+    expect(prisma.__store.messages.has('hs:5561')).toBe(true);
+    expect(prisma.__store.notifications.some((n: { source_id: string }) => n.source_id === 'hs:5560')).toBe(false);
+  });
+
+  it('without the identities (older callers) the gate is off and the report shape is unchanged', async () => {
+    const prisma = makePrisma();
+    const report = await pollHubSpotReplies(prisma, { now: NOW, dryRun: false }, { searchIncomingEmails: makeSearch([engagement({ id: '5562', toEmail: 'someone.else@yardflow.ai' })]) });
+    expect(report.created).toBe(1);
+    expect(report).not.toHaveProperty('notToGap');
+  });
+
+  it('gapIdentities(): the GAP mailbox, the briefing address and the command senders, lowercased; a client without settings gives the mailbox alone', async () => {
+    const { gapIdentities } = await vi.importActual<typeof import('@/lib/gap/replies/hubspot-poller')>('@/lib/gap/replies/hubspot-poller');
+    const prisma = { systemConfig: { findUnique: async () => ({ value: JSON.stringify({ briefingTo: 'Casey@FreightRoll.com', briefingHourNy: 7, commandSenders: ['casey@freightroll.com', 'caseyglarkin2@gmail.com'], mode: 'review', targets: {} }) }) } };
+    expect([...((await gapIdentities(prisma, { GAP_GMAIL_USER_EMAIL: 'Casey@YardFlow.ai' })) ?? [])].sort()).toEqual(['casey@freightroll.com', 'casey@yardflow.ai', 'caseyglarkin2@gmail.com']);
+    expect([...((await gapIdentities({}, { GAP_GMAIL_USER_EMAIL: 'casey@yardflow.ai' })) ?? [])]).toEqual(['casey@yardflow.ai']);
+    expect(await gapIdentities({}, {})).toBeNull();
+  });
+});

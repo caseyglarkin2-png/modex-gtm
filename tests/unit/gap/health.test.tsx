@@ -181,3 +181,25 @@ describe('X20a: the briefing and agent-task crons on health', () => {
     expect(bare.agents).toMatchObject({ enabled: false, lastSuccessAt: null, queued: 0 });
   });
 });
+
+describe('X15d: the degraded line lives in System at the foot; the head shows only a block', () => {
+  it('head placement renders nothing while healthy or degraded, the full strip when blocked, and the could-not-check line when the read fails', async () => {
+    const degraded = healthy();
+    degraded.routing.lastRunAt = null;
+    const { container, unmount } = render(<HealthStrip placement="head" initial={evaluateHealth(degraded, NOW)} />);
+    expect(container.querySelector('[data-testid="health-strip"]')).toBeNull();
+    unmount();
+    const blocked = healthy();
+    blocked.hubspot = { configured: true, ok: false, ms: 8000, error: 'timeout' };
+    render(<HealthStrip placement="head" initial={evaluateHealth(blocked, NOW)} />);
+    expect(screen.getByTestId('health-strip')).toHaveAttribute('data-state', 'BLOCKED');
+    expect(screen.getByTestId('health-headline').textContent).toContain('HubSpot opportunity truth unavailable');
+  });
+
+  it('foot placement (the default) renders the full strip whatever the state', () => {
+    const degraded = healthy();
+    degraded.routing.lastRunAt = null;
+    render(<HealthStrip initial={evaluateHealth(degraded, NOW)} />);
+    expect(screen.getByTestId('health-strip')).toHaveAttribute('data-state', 'DEGRADED');
+  });
+});
