@@ -518,7 +518,13 @@ Every stale e2e assertion fixed above was a TEST catching up to a deliberate, al
 
 ### GAP CORE LIVE: MANUAL / SHADOW (2026-09-24)
 <!-- verified:2026-09-24 -->
-**Production now (2026-10-08):** main 542a6b4d (PR #410, the execution-recovery release R00-R65), deployment
+**Production now (2026-10-08, evening):** main 133aeee7 (PR #413, the sales execution engine X01-X12), deployment
+`dpl_Daup1pG6Eo48tBCDsuZ1iwfGFywQ` READY 2026-10-08T18:33:38Z. New and ON: `GAP_BRIEFING_ENABLED`, `GAP_AGENT_TASKS_ENABLED`,
+`GAP_ROUTING_CRON_ENABLED`, `GAP_ACTION_SECRET` set; the seller settings written (briefing 7 am New York to casey@freightroll.com,
+command senders his two addresses, mode review). Read-only smoke on the SHA: the three cron routes and the settings route 401
+signed out; health HEALTHY on mailbox, HubSpot, suppression and sender; Work renders as before. The earlier line stands below.
+<!-- verified:2026-10-08 -->
+**Production at the morning release (2026-10-08):** main 542a6b4d (PR #410, the execution-recovery release R00-R65), deployment
 `dpl_C4THQEpA3qYy73JQt9A23sNLTx5W` READY 2026-10-08T02:27:23Z. Flags unchanged by the release: ON `GAP_OS_ENABLED`,
 `GAP_HYPOTHESIS_ENABLED`, `GAP_ROUTING_ENABLED`, `GAP_MESSAGE_COMPILER_ENABLED`, `GAP_REPLY_CLASSIFICATION_ENABLED`,
 `GAP_BACKGROUND_RESEARCH_ENABLED` (on the cron schedule); OFF `GAP_HUBSPOT_SEQUENCE_PUBLISH_ENABLED`,
