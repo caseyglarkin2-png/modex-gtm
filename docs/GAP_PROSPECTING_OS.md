@@ -2099,6 +2099,10 @@ spend decision), operator (runs the system), copy (human-written words, Casey's)
 - R63-A N11: the older Accounts page (/accounts, outside GAP) shows database id 9212 and recommends outreach at 0 contacts. Guard: none (legacy). Owner: the lead.
 - GitHub Actions (typecheck, unit-tests) fail with zero steps in about 2 s on every main commit since at least 2026-10-06, 672570ed and #410 included: the runner never starts (Actions runner or billing). Main has no required checks. Guard: the local gates are the release gate (R63 gates, R64). Owner: Casey.
 
+#### Post-release defects (the canary window)
+
+- **2026-10-08, PepsiCo in production (Casey's screenshot 09:19 local): "Approve and use this story" greyed out, the button's tooltip reading as a hold.** Root cause: `outreach-anchor.tsx` disabled APPROVE AND USE on `!coldTouchAllowed`, and `coldTouchAllowed` is false under RESEARCH because no thesis is usable yet, which is exactly the state a proposal under review exists to change (`pursuit/load.ts`'s own NEXT said "Approve the proposal on this page"). The server never had that hold (`advance: approve_and_use` runs the audited transitions and the gate); only the button did, so approve-and-use through the page could not work on any account without a usable thesis. The R62 matrix approved through the API, the ux06 suite rendered the panel with `coldTouchAllowed` on, and the R64 repair stopped at submit (approval is Casey's), so it reached production. Fix: `approvalHoldFor(state)` in `pursuit/state.ts` names a hold only under a reply, an opt-out, a deal or a held account (the state's own blocker sentence); the anchor takes `approvalHold` and disables approval on that alone; the page passes it from the one pursuit read. Proof: `pursuit-state.test.ts` (the helper, research and ready open, the four holds named; mutation-tested: the helper returning null for every state breaks the hold case) and `ux06-views.test.tsx` (under research with `coldTouchAllowed` off the control is enabled and runs the audited advance; under a hold it is disabled with the hold sentence as its title). PR #412. <!-- verified:2026-10-08 -->
+
 ### HANDOFF
 
 HANDOFF commit: 8e0bdaaf (docs only, branch docs/gap-r64-release off main 542a6b4d; the block below describes head_sha e8163c33 on feat/gap-account-first-ux, released as main 542a6b4d; first written in d3b6592a).
@@ -2208,6 +2212,7 @@ r64_release_requirements:
   - "DONE: read-only smoke: verify-triggers.ts 33 of 33 against production (rolled back); signed out /gap/ 307 with the callback and /api/email/send/ 401; signed in Work, /gap/accounts/pepsico/ and /api/gap/health/?operations=1 (DEGRADED on routing only)"
   - "DONE: the canary window, open from 02:27Z; nothing else changes until Casey's next decision"
   - "DONE: rollback recorded: promote 672570ed (dpl_5tW92dBWDxnL8VquojbfBedmu8MP); no schema, cron or dependency delta"
+  - "CANARY DEFECT 2026-10-08: APPROVE AND USE disabled under RESEARCH (the anchor read coldTouchAllowed as a hold); fixed in PR #412 (approvalHoldFor); see Post-release defects above the block"
 r65_requirements:
   counts: [stranded drafts, incomplete proposals, dead-letter signals, queue age, research freshness and cost, preparation latency, seller corrections, outcomes, R54 sync failures]
   where: "GET /api/gap/health?operations=1 (the operator: failures with owners and retry paths); /gap/learning (Casey: decisions only, with outcomes and research cost)"

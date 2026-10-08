@@ -27,6 +27,7 @@ import { Tag } from '@/components/gap/seller-tag';
 import type { AccountStory } from '@/lib/gap/story/story';
 import type { OutreachAnchor } from '@/lib/gap/story/anchor';
 import { OutreachAnchorView } from '@/components/gap/outreach-anchor';
+import { approvalHoldFor } from '@/lib/gap/pursuit/state';
 import type { PeopleStack } from '@/lib/gap/people/stack';
 import type { PursuitState } from '@/lib/gap/pursuit/state';
 
@@ -160,7 +161,7 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, 
         {doneNext}
 
         {pursuit?.anchor && (pursuit.state.coldTouchAllowed || pursuit.state.state === 'research' || pursuit.state.state === 'choose_person') ? (
-          <OutreachAnchorView accountName={v.name} anchor={pursuit.anchor} coldTouchAllowed={pursuit.state.coldTouchAllowed} />
+          <OutreachAnchorView accountName={v.name} anchor={pursuit.anchor} coldTouchAllowed={pursuit.state.coldTouchAllowed} approvalHold={approvalHoldFor(pursuit.state)} />
         ) : null}
 
         {pursuit?.story?.checkBeforeContacting.length ? (
