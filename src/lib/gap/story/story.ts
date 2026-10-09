@@ -28,7 +28,7 @@ import { sensitivityOf } from '../research/sensitivity';
 import { sameIdea } from '../context/same-idea';
 import { sellerRelevance } from '../research/continuity';
 import type { PursuitState } from '../pursuit/state';
-import type { StoryTouch } from './touches';
+import { PLACED_WORDS, type StoryTouch } from './touches';
 import { isCostBid } from '../bid/cost';
 import { isReplyKindClass, REPLY_KIND_WORDS } from '../capture/reply-kind';
 
@@ -425,10 +425,13 @@ function betweenUs(i: StoryInput): StoryRow {
     // The email a reply answered is not always in GAP's ledgers (Walmart's opt-out answered a Resend-era send).
     const sentTo = sends.some((x) => x.name.toLowerCase() === lastReply.name.toLowerCase() && x.at < lastReply.at);
     const orphan = sentTo ? '' : " The email it answered is not in GAP's ledgers.";
+    // C6: a message the identity machinery placed here (its thread named no account, or another) says so and "wrote", not "replied".
+    const placed = lastReply.placedVia && lastReply.placedVia !== 'thread' ? ` (${lastReply.address?.split('@')[1] ?? 'their domain'}, placed by ${PLACED_WORDS[lastReply.placedVia]})` : '';
     const text =
-      k === 'opt_out' ? `${who(lastReply)} opted out on ${day(lastReply.at)}${lastReply.what ? ` ("${lastReply.what}")` : ''}.${orphan}`
-      : k === 'out_of_office' ? `${who(lastReply)} sent an automatic reply on ${day(lastReply.at)}: not an answer.`
-      : k === 'bounce' ? `The address for ${who(lastReply)} failed on ${day(lastReply.at)}.`
+      k === 'opt_out' ? `${who(lastReply)}${placed} opted out on ${day(lastReply.at)}${lastReply.what ? ` ("${lastReply.what}")` : ''}.${orphan}`
+      : k === 'out_of_office' ? `${who(lastReply)}${placed} sent an automatic reply on ${day(lastReply.at)}: not an answer.`
+      : k === 'bounce' ? `The address for ${who(lastReply)}${placed} failed on ${day(lastReply.at)}.`
+      : placed ? `${who(lastReply)}${placed} wrote ${day(lastReply.at)}: "${lastReply.what}".${orphan}`
       : `${who(lastReply)} replied on ${day(lastReply.at)}: "${lastReply.what}".${orphan}`;
     s.push({ text, tag: k === 'opt_out' || k === 'human' ? 'Buyer said' : 'Checked', basis: `${lastReply.source}, ${day(lastReply.at)}`, basisIds: [`touch:${lastReply.at}`] });
   }

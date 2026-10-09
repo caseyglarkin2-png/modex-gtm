@@ -194,7 +194,22 @@ export interface AccountInputs {
   /** The account's people in HubSpot (people/hubspot-people.ts): live, read-only; null when not read. */
   hubspotPeople?: { people: Array<{ id: string; name: string; title: string | null; location: string | null; hasEmail: boolean; optedOut?: boolean; employment?: PersonaInput['employment']; role?: RoleView | null }>; truncated: boolean } | null;
   scout?: { domain: string | null; what: string | null; entityType: string | null; network: Array<{ claim: string; url: string }>; freight: Array<{ claim: string; url: string }>; at: string | null; basis?: 'web' | 'name_rules' | null; ambiguous?: boolean } | null;
+  /**
+   * C6 (seller acceptance, 2026-10-09): the account's inbound mail from GAP's synced inbox, last 180 days, at most 50
+   * each way: the thread-keyed read (email_threads.account_name) merged by message id with the PLACED read (a sender
+   * whose address the identity machinery places here: persona, the CRM contact's company, the thread name, the
+   * verified domain, the family's deal-holding account after C5). `via` says how each reached the account; a freemail
+   * sender is never placed. `identityRead` false: the identity context could not be read, so only the thread read ran.
+   */
+  inbound?: {
+    messages: Array<{ id: string; from: string; name: string | null; at: string; subject: string | null; snippet: string; threadId: string | null; via: InboundVia; domain: string | null }>;
+    identityRead: boolean;
+    detail: string | null;
+  } | null;
 }
+
+/** C6: how an inbound message reached the account: its thread, or the identity path that placed its sender. */
+export type InboundVia = 'thread' | 'persona' | 'crm_contact' | 'alias' | 'domain' | 'family_deal';
 
 // ---------------------------------------------------------------- the brief
 

@@ -98,6 +98,13 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
     const answered = !!lastSend && lastSend.at > h.at;
     replies.push({ from: m[1].trim(), name: m[1].trim(), at: h.at, subject: null, snippet: m[2].trim(), triaged: answered });
   }
+  // C6: the account's inbound mail the loader read (its threads, and the senders the identity machinery places here),
+  // merged by time with what the reply list and the history already hold; a placed message says how it was placed.
+  for (const m of inputs.inbound?.messages ?? []) {
+    if (replies.some((r) => Math.abs(new Date(r.at).getTime() - new Date(m.at).getTime()) < 60_000 && (r.from.toLowerCase() === m.from || !r.from.includes('@')))) continue;
+    const answered = !!lastSend && lastSend.at > m.at;
+    replies.push({ from: m.from, name: m.name, at: m.at, subject: m.subject, snippet: m.snippet, triaged: answered, placedVia: m.via });
+  }
 
   const choice = choices.get(accountName) ?? null;
   const od = inputs.firstTouches.find((t) => t.state === 'draft outstanding') ?? null;

@@ -33,6 +33,8 @@ export interface AskCoverageInputs {
   senderConfigured: boolean;
   /** GAP drafts the ledger knows (first touches with a Gmail draft id); Gmail's own drafts are not read. */
   draftsOnRecord: number;
+  /** C6: the inbound read (thread-keyed and placed): how many placed messages were merged, and whether the identity context was readable. */
+  inbound?: { placed: number; identityRead: boolean; detail: string | null } | null;
 }
 
 export function askCoverageOf(i: AskCoverageInputs): AskCoverage[] {
@@ -40,7 +42,7 @@ export function askCoverageOf(i: AskCoverageInputs): AskCoverage[] {
   return [
     { source: 'hubspot', status: !o ? 'not_read' : o.status === 'UNKNOWN' ? 'failed' : 'read', detail: !o ? 'not read this time' : o.status === 'UNKNOWN' ? o.detail || 'the read did not settle' : null },
     // The replies the page shows come from GAP's synced inbox (the poller's copy), never a live thread read.
-    { source: 'gmail_thread', status: 'partial', detail: "GAP's synced inbox, not a live thread read" },
+    { source: 'gmail_thread', status: 'partial', detail: `GAP's synced inbox, not a live thread read${i.inbound ? (i.inbound.identityRead ? `; ${i.inbound.placed} placed sender message${i.inbound.placed === 1 ? '' : 's'} merged` : `; ${i.inbound.detail ?? 'senders could not be placed'}`) : ''}` },
     { source: 'gmail_sent', status: 'not_read', detail: i.senderConfigured ? 'not read on the account page' : 'no GAP sender configured' },
     { source: 'gmail_drafts', status: i.draftsOnRecord > 0 ? 'partial' : 'not_read', detail: i.draftsOnRecord > 0 ? `${i.draftsOnRecord} GAP draft${i.draftsOnRecord === 1 ? '' : 's'} known from the ledger; Gmail drafts not read` : 'Gmail drafts not read' },
     { source: 'vault', status: !i.vaultConfigured ? 'not_read' : i.vaultNote ? 'read' : 'partial', detail: !i.vaultConfigured ? 'not configured' : i.vaultNote ? null : 'no account note found, or the read failed' },
@@ -50,10 +52,11 @@ export function askCoverageOf(i: AskCoverageInputs): AskCoverage[] {
 }
 
 /** The coverage the page's own reads support, from the inputs and the composed story (no new read; the adapters are a config check). */
-export function coverageFromPage(inputs: Pick<AccountInputs, 'opportunity' | 'firstTouches'>, story: AccountStory | null, env: Record<string, string | undefined> = process.env): AskCoverage[] {
+export function coverageFromPage(inputs: Pick<AccountInputs, 'opportunity' | 'firstTouches'> & { inbound?: AccountInputs['inbound'] }, story: AccountStory | null, env: Record<string, string | undefined> = process.env): AskCoverage[] {
   const { vault, clawd } = knowledgeAdapters({ env });
   return askCoverageOf({
     opportunity: inputs.opportunity,
+    inbound: inputs.inbound ? { placed: inputs.inbound.messages.filter((m) => m.via !== 'thread').length, identityRead: inputs.inbound.identityRead, detail: inputs.inbound.detail } : null,
     vaultNote: (story?.rows ?? []).some((r) => r.key === 'note'),
     vaultConfigured: !!vault,
     clawdConfigured: !!clawd,
