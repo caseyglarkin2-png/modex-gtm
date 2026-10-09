@@ -162,3 +162,78 @@ describe('C38c: advancement needs a stage transition or a confirmed milestone on
     expect(order).toEqual(['preparation', 'contact', 'commercial']);
   });
 });
+
+/**
+ * Seller acceptance follow-up (2026-10-09), C3: research in progress never becomes evidence of completed outreach or
+ * commercial advancement, and the agent's own research shows as what it was. The October 9 rows, in their shapes:
+ * Casey replied "DONE: researching catalysts" (with his signature block) on the Diego Fonseca follow-up and the
+ * activity view said "Done: Follow up with Diego Fonseca when they are back"; the agent's research run (insufficient
+ * evidence, 0 facts, 9 rejected) showed nowhere.
+ */
+describe('Seller acceptance (2026-10-09): a progress note, a held item and a research run are said as what they are', () => {
+  const AT9 = new Date('2026-10-09T01:10:00Z');
+  const NOTE = 'researching catalysts\nCasey Larkin · GTM, YardFlow by FreightRoll · c. 410-236-7434 · yardflow.ai';
+  const diego = (proof: Record<string, unknown> | null, title = 'Follow up with Diego Fonseca when they are back') => row('account.commitment', { op: 'status', commitmentId: 'c-diego', commitment: { commitmentId: 'c-diego', accountName: 'Primo Brands', kind: 'follow_up', title, basis: null, owner: 'casey@freightroll.com', dueAt: '2026-10-09T13:00:00.000Z', person: { personaId: 7, name: 'Diego Fonseca', email: null }, dealId: null, threadId: null, status: 'done', snoozeUntil: null, dependency: null, proof, reason: null, source: { kind: 'reply', id: 'r-1' }, detail: {} } }, { subject_type: 'account', subject_id: 'Primo Brands', created_at: AT9 });
+
+  it('(a) a commitment done on a seller note that reads as progress is an obligation done in class other, self-reported, said as in progress; it completes only the commitment key, never a first touch or a reply, and never counts as contact', () => {
+    const e = project(diego({ kind: 'seller', id: null, note: NOTE, at: AT9.toISOString(), by: 'casey@freightroll.com' }));
+    expect(e).toMatchObject({ kind: 'obligation_done', basis: 'self_reported', completes: ['commitment:c-diego'], prepares: [], dealId: null, accountName: 'Primo Brands' });
+    expect(e.line).toBe('Marked done by your note "researching catalysts", which reads as work in progress, not a completed follow-up.');
+    expect(ACTIVITY_CLASS[e.kind]).toBe('other');
+    const first = item('first_touch:dec-9', 'Primo Brands');
+    const reply = item('reply:m-9', 'Primo Brands', 'reply');
+    const a = accountability({ day: '2026-10-09', plan: plan(first, reply), events: [e], tasks: [] });
+    expect(a.intended.map((x) => x.status), 'the note completes no outreach item').toEqual(['open', 'open']);
+    expect(Object.keys(counts([e]))).toEqual(['obligation_done']);
+    expect(accountability({ day: '2026-10-09', plan: null, events: [e], tasks: [] }).completed.map((c) => c.cls)).toEqual(['other']);
+    // The same row with a note that says what HAPPENED is the completion it was before.
+    const done = project(diego({ kind: 'seller', id: null, note: 'called Diego, he will send the comparison Friday', at: AT9.toISOString(), by: 'casey@freightroll.com' }));
+    expect(done.line).toBe('Done: Follow up with Diego Fonseca when they are back.');
+    // A proof that is not the seller's word is never re-read as progress.
+    const proven = project(diego({ kind: 'mailbox_sent', id: 'g-9', note: NOTE, at: AT9.toISOString(), by: 'casey@freightroll.com' }));
+    expect(proven).toMatchObject({ kind: 'obligation_done', basis: 'provider' });
+    expect(proven.line).toMatch(/^Done: Follow up/);
+    // A deal step with a milestone under a progress note never advances the deal.
+    const step = project(row('account.commitment', { op: 'status', commitmentId: 'c-m', commitment: { commitmentId: 'c-m', kind: 'deal_step', status: 'done', title: 'Pilot scope signed', dealId: '1001', detail: { milestone: 'pilot_scope' }, proof: { kind: 'seller', id: null, note: 'still waiting on legal', at: AT9.toISOString(), by: 'casey' } } }, { subject_type: 'account', subject_id: 'Kroger', created_at: AT9 }));
+    expect(step).toMatchObject({ kind: 'obligation_done', basis: 'self_reported', completes: ['commitment:c-m'] });
+    expect(counts([step]).deal_advanced).toBeUndefined();
+  });
+
+  it('(b) a command applied with effect progress_noted is the new kind progress_noted, class other, with the seller words; it completes nothing', () => {
+    const e = project(row('work.command_applied', { gmailMessageId: 'm-done-9', from: 'casey@freightroll.com', at: AT9.toISOString(), command: 'done', revision: 2, effect: 'progress_noted', note: NOTE, cue: 'researching', itemKey: 'follow_up:Primo Brands:2026-10-09', commitmentId: 'c-diego', basis: 'self_reported' }, { subject_type: 'work_item', subject_id: 'follow_up:Primo Brands:2026-10-09', created_at: AT9 }));
+    expect(e).toMatchObject({ kind: 'progress_noted', basis: 'self_reported', completes: [], prepares: [] });
+    expect(e.line).toBe('In progress (your note): researching catalysts.');
+    expect(ACTIVITY_CLASS.progress_noted).toBe('other');
+    expect(ACTIVITY_KINDS).toContain('progress_noted');
+    const a = accountability({ day: '2026-10-09', plan: plan(item('follow_up:Primo Brands:2026-10-09', 'Primo Brands', 'follow_up')), events: [e], tasks: [] });
+    expect(a.intended[0].status, 'the item stays open').toBe('open');
+    expect(counts([e])).toEqual({ progress_noted: 1 });
+  });
+
+  it('(c) a command applied with effect item_held_for_research is research generated (preparation), named by the account', () => {
+    const e = project(row('work.command_applied', { gmailMessageId: 'm-done-9', from: 'casey@freightroll.com', at: AT9.toISOString(), command: 'done', revision: 2, effect: 'item_held_for_research', itemKey: 'follow_up:Primo Brands:2026-10-09', accountName: 'Primo Brands' }, { subject_type: 'work_item', subject_id: 'follow_up:Primo Brands:2026-10-09', created_at: AT9 }));
+    expect(e).toMatchObject({ kind: 'research_generated', basis: 'provider', completes: [], accountName: 'Primo Brands' });
+    expect(e.line).toBe('Held for GAP research: Primo Brands.');
+    expect(ACTIVITY_CLASS.research_generated).toBe('preparation');
+    const noAccount = project(row('work.command_applied', { command: 'done', effect: 'item_held_for_research', itemKey: 'follow_up:Primo Brands:2026-10-09' }, { subject_type: 'work_item', subject_id: 'follow_up:Primo Brands:2026-10-09', created_at: AT9 }));
+    expect(noAccount.line).toBe('Held for GAP research: follow_up:Primo Brands:2026-10-09.');
+  });
+
+  it('(d) the research run\'s completion row is research generated with its outcome and counts, never contact; the same run recorded twice counts once', async () => {
+    const run = (over: Record<string, unknown> = {}, id = 'run-9') => row('research.completed', { outcome: 'insufficient_evidence', accountName: 'Kenco', personaId: null, hypothesisId: null, facts: 0, rejected: 9, ...over }, { subject_type: 'research_run', subject_id: id, created_at: AT9, actor: 'agent' });
+    const e = project(run());
+    expect(e).toMatchObject({ kind: 'research_generated', basis: 'provider', accountName: 'Kenco', completes: [], evidence: 'research:run-9' });
+    expect(e.line).toBe('GAP researched Kenco: insufficient evidence (0 facts, 9 rejected).');
+    expect(ACTIVITY_CLASS[e.kind]).toBe('preparation');
+    expect(project(run({ outcome: 'facts_found', facts: 3, rejected: 2 }, 'run-10')).line).toBe('GAP researched Kenco: 3 facts found, 2 rejected.');
+    expect(project(run({ outcome: 'facts_found', facts: 1, rejected: 0 }, 'run-11')).line).toBe('GAP researched Kenco: 1 fact found.');
+    expect(project(run({ accountName: null }, 'run-12')).line).toBe('GAP researched the account: insufficient evidence (0 facts, 9 rejected).');
+    const { ledgerDb } = await import('./fixtures/ledger-db');
+    const { loadActivity } = await import('@/lib/gap/work/activity');
+    const db = ledgerDb({ audit: [run(), run()] }, AT9);
+    const read = await loadActivity(db.client(), { since: new Date('2026-10-09T00:00:00Z'), until: new Date('2026-10-09T23:59:59Z') });
+    expect(read.events.map((x) => x.kind)).toEqual(['research_generated']);
+    expect(read.deduped).toBe(1);
+    expect(counts(read.events)).toEqual({ research_generated: 1 });
+  });
+});
