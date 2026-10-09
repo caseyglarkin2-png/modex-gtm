@@ -11,6 +11,7 @@
  *   IGNORE             recorded; the company stops surfacing.
  */
 import { legacyNormalizeCompanyName, normalizeCompanyName } from '../identity/normalize';
+import { groundedMeter } from '../ai/spend';
 import { scoutCompany, type ScoutResult } from './scout';
 import { deriveFit, operatingCount, type EntityType } from './fit';
 
@@ -148,7 +149,7 @@ export async function scoutCandidate(
     await end('entity.scout_superseded', { ok: false });
     return inFlight;
   }
-  const scout = deps.scout ?? ((c: string, o: { hint?: string }) => scoutCompany(c, { hint: o.hint }));
+  const scout = deps.scout ?? ((c: string, o: { hint?: string }) => scoutCompany(c, { hint: o.hint, meter: groundedMeter(prisma, { id: `scout_${company_key}`, kind: 'scout', itemKey: `candidate:${company_key}` }, { now: input.now }) }));
   let r: ScoutResult;
   try {
     r = await scout(input.company.trim(), { hint: input.hint });

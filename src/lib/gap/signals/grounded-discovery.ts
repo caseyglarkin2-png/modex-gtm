@@ -15,6 +15,7 @@
  * not name the account is kept and labelled MAY BE RELEVANT, never thrown away.
  */
 import { askGrounded, defaultProviders, groundedOnly, type ProviderAnswer, type ScoutProvider } from '../entity/providers';
+import { groundedMeter } from '../ai/spend';
 import { normalizeCompany, textNamesAccount } from '../research/claim-rules';
 import { SEARCH_REDIRECT } from '../sources/source-copy';
 import { MARKET_CHATTER } from './discovery';
@@ -158,7 +159,7 @@ export async function runGroundedDiscovery(
         const pages = parseGroundedPages(a.text);
         meta = { citations: a.citations, citedHosts: a.citedHosts ?? [] };
         return /\[/.test(a.text) ? pages : null;
-      }, deps.providers ?? defaultProviders(), { budgetMs });
+      }, deps.providers ?? defaultProviders(), { budgetMs, meter: groundedMeter(prisma, { id: `discovery_${opts.now.getTime().toString(36)}`, kind: 'grounded_discovery', itemKey: 'discovery' }, { now: opts.now }) });
       return r.ok ? { pages: r.value, ...meta } : { error: r.attempts.map((x) => `${x.provider} ${x.outcome}`).join('; ') || 'no grounded provider' };
     });
   const profiles = await (deps.profiles ?? (() => loadWatchProfiles(prisma)))();

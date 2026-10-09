@@ -168,6 +168,51 @@ export async function loadSpend(prisma: PrismaLike, opts: { now: Date; env?: Rec
 
 export type GapGenerate = (prompt: string, maxTokens: number, opts: { model: string; skipControlPlane?: boolean }) => Promise<GenerateTextResult>;
 
+/**
+ * A06 (the review's finding 3): the grounded discovery and research providers (entity/providers.ts: the Gemini scout,
+ * OpenAI with web search, the gateway with its search tool) answer through the `ai` SDK with tools and report no
+ * cost, so they are metered by a conservative estimate per provider attempt: reserved before the attempt, recorded
+ * after it with the outcome; the month ceiling refuses before the attempt exactly as it does for an agent task.
+ */
+export const GROUNDED_ESTIMATE_USD = 0.02;
+
+export interface GroundedMeter {
+  before: (provider: string) => Promise<void>;
+  after: (provider: string, outcome: string) => Promise<void>;
+}
+
+export function groundedMeter(prisma: PrismaLike, ctx: GapModelCallContext, opts: { now: Date; env?: Record<string, string | undefined>; actor?: string } = { now: new Date() }): GroundedMeter {
+  const actor = opts.actor ?? 'agent';
+  const write = async (kind: string, payload: Record<string, unknown>, strict = false) => {
+    if (typeof prisma?.gapAuditEvent?.create !== 'function') return;
+    try {
+      await prisma.gapAuditEvent.create({ data: { kind, actor, subject_type: MODEL_CALL_SUBJECT, subject_id: ctx.id, payload: { taskId: ctx.id, taskKind: ctx.kind, itemKey: ctx.itemKey, tier: 'grounded', ...payload } } });
+    } catch (e) {
+      if (strict) throw new PermanentAgentError('configuration', `the model spend ledger could not record the reservation, so no grounded call is made (${e instanceof Error ? e.message.slice(0, 160) : String(e)})`);
+    }
+  };
+  const ids = new Map<string, string>();
+  return {
+    before: async (provider) => {
+      const limits = spendLimits(opts.env);
+      const spend = await loadSpend(prisma, { now: opts.now, env: opts.env, strict: true });
+      if (spend.monthUsd + GROUNDED_ESTIMATE_USD > limits.monthlyCeilingUsd) {
+        await write(MODEL_CALL, { callId: `gm_${ctx.id}_${provider}_${randomBytes(3).toString('hex')}`, model: provider, outcome: 'refused', costUsd: 0, estimated: true, errorCategory: 'monthly_ceiling', at: opts.now.toISOString() });
+        throw new PermanentAgentError('monthly_ceiling', `the GAP model ceiling of $${limits.monthlyCeilingUsd.toFixed(2)} for ${spend.label} is spent ($${spend.monthUsd.toFixed(2)} recorded); the grounded providers wait for next month or a raised ceiling`);
+      }
+      const callId = `gm_${ctx.id}_${provider}_${randomBytes(3).toString('hex')}`;
+      ids.set(provider, callId);
+      await write(MODEL_CALL_RESERVED, { callId, model: provider, estimateUsd: GROUNDED_ESTIMATE_USD, at: opts.now.toISOString() }, true);
+    },
+    after: async (provider, outcome) => {
+      const callId = ids.get(provider) ?? `gm_${ctx.id}_${provider}`;
+      // A provider that answered (ok, unparsable, no citations) was billed; one that was unavailable, cooling or errored before answering was not.
+      const answered = outcome === 'ok' || outcome === 'unparsable' || outcome === 'no_citations';
+      await write(MODEL_CALL, { callId, model: provider, outcome: answered ? 'ok' : 'failed', costUsd: answered ? GROUNDED_ESTIMATE_USD : 0, estimated: true, ...(answered ? {} : { errorCategory: outcome }), at: new Date().toISOString() });
+    },
+  };
+}
+
 export interface GapGenerateInput {
   prompt: string;
   maxTokens: number;
