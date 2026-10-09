@@ -75,7 +75,8 @@ function hybrid(real: Any, mem: Any, models: readonly string[]): Any {
     findMany: async (args: { where?: Any; orderBy?: Any; take?: number; skip?: number; select?: Any } = {}) => {
       const { take, skip, ...rest } = args;
       const [a, b] = await Promise.all([mem[model].findMany({ ...rest }), real[model].findMany({ ...rest })]);
-      const rows = [...new Map([...a, ...b].map((r: Any) => [r.id, r])).values()];
+      // Merged by id when the query selected one; a projection without an id keeps every row.
+      const rows = [...new Map([...a, ...b].map((r: Any, i: number) => [r.id ?? `row_${i}_${JSON.stringify(r)}`, r])).values()];
       return sortBy(rows, args.orderBy).slice(skip ?? 0, (skip ?? 0) + (take ?? rows.length));
     },
     count: async (args: Any = {}) => (await mem[model].count(args)) + (await real[model].count(args)),

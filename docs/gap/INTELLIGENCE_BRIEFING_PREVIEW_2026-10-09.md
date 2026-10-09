@@ -1,6 +1,6 @@
 # Intelligence briefing preview (intelligence wiring, October 9, 2026)
 
-STATUS: RECEIPT. Rendered 2026-10-09T22:34:47.249Z (2026-10-09 New York) in 13646 ms against production data, READ ONLY: the fixture's records were imported into an in-memory overlay (never the production table), the intelligence was read from the overlay and production together, and every production write was intercepted (listed at the end). Nothing was sent, drafted, enrolled, queued or stored. The plan is the stored day (revision 2, planned 2026-10-09T19:13:20.759Z); Gmail Sent is not read by this process.
+STATUS: RECEIPT. Rendered 2026-10-09T22:39:46.223Z (2026-10-09 New York) in 15193 ms against production data, READ ONLY: the fixture's records were imported into an in-memory overlay (never the production table), the intelligence was read from the overlay and production together, and every production write was intercepted (listed at the end). Nothing was sent, drafted, enrolled, queued or stored. The plan is the stored day (revision 2, planned 2026-10-09T19:13:20.759Z); Gmail Sent is not read by this process.
 
 ## The import (into the overlay)
 
@@ -17,7 +17,7 @@ STATUS: RECEIPT. Rendered 2026-10-09T22:34:47.249Z (2026-10-09 New York) in 1364
 | Freight X Signal Desk | included | 6 reports through 2026-10-09, from the captured snapshot (a bounded thread read); 21 items |
 | Yards First Brief | included | 48 reports through 2026-10-09, from the captured snapshot (a bounded thread read); 83 items |
 | HubSpot Activity & Engagement report | included | 2 reports through 2026-10-08, from the captured snapshot (a bounded thread read); 3 items |
-| GAP's own signals (discovery, shares, Pounce) | included | production rows, 3288 undecided in all, 93 live triggers |
+| GAP's own signals (discovery, shares, Pounce) | included | production rows, 3288 undecided in all, 92 live triggers |
 | HubSpot deals (coverage) | included (complete) | the in-deals summary the day builds |
 | Clawd signal hunter | unavailable | no export endpoint on the producer yet (IW07 prepared, not deployed) |
 | The vault (calls, meetings, next actions) | not in this digest | on the account stories and the people state since the knowledge program; a digest projection is IW06 |
@@ -26,7 +26,7 @@ STATUS: RECEIPT. Rendered 2026-10-09T22:34:47.249Z (2026-10-09 New York) in 1364
 
 ## The digest
 
-- Shown 11 (2 from the briefs, 2 GAP found, 1 triggers; 8 people), 3558 omitted and reachable on the Intelligence page; 0 rotated.
+- Shown 11 (2 from the briefs, 2 GAP found, 1 triggers; 8 people), 3557 omitted and reachable on the Intelligence page; 0 rotated.
 - Subject: GAP today, Fri Oct 9: 12 to execute, 11 to decide [GAP#preview]
 
 | Key | Producer | Account | Title | Truth |
@@ -37,15 +37,15 @@ STATUS: RECEIPT. Rendered 2026-10-09T22:34:47.249Z (2026-10-09 New York) in 1364
 | person:craig.morrison@kencogroup.com | inbound | Kenco | Morrison, Craig at Kenco | historical_observation |
 | person:ccuebas@lazerlogistics.com | inbound | Lazer Logistics | Cristian Cuebas Morales at Lazer Logistics | historical_observation |
 | person:twasson@firecrown.com | inbound | firecrown.com (no account yet) | Thomas Wasson (firecrown.com) | historical_observation |
-| person:dave.kiesling@kencogroup.com | inbound | Kenco | Kiesling, Dave at Kenco | historical_observation |
 | person:seb@riserify.com | inbound | riserify.com (no account yet) | Seb Hulme (riserify.com) | historical_observation |
+| person:agarcia@exemplifyrisk.com | inbound | exemplifyrisk.com (no account yet) | Arideilys Garcia (exemplifyrisk.com) | historical_observation |
 
 ## The email, as text
 
 ```text
 Good evening. Here is Fri Oct 9 from GAP, in order.
 This replays the plan GAP made at 3:13 PM New York on Fri Oct 9, as it stood then; what changed since is on Work, not here.
-12 to execute: the plan's items, the same list START and NEXT walk, in this order. 11 to decide: intelligence, counted apart (3634 waiting in all).
+12 to execute: the plan's items, the same list START and NEXT walk, in this order. 11 to decide: intelligence, counted apart (3632 waiting in all).
 
 Pursued (3): what GAP prepared on your decisions.
 - Tractor Supply Company: Tractor Supply opens Idaho distribution center with automation, dedicated AI team - Supply Chain Dive. The angle: A report from October 7, 2026, indicates Tractor Supply Company is opening a new distribution center in Idaho with a focus on automation and a dedicated AI team. This suggests a proactive approach to enhancing supply chain efficiency. It's likely their yards, particularly at new facilities, might benefit from standardized driver journeys and optimized dock assignments to unlock hidden production capacity. Roles: VP Supply Chain, Director of Distribution, Director of Operations. Ask: How are you currently managing driver check-in and yard routing at your distribution centers? Proposed: research first. Need to verify if the Idaho DC is operational and what specific automation technologies are being implemented beyond AI.
@@ -55,8 +55,8 @@ Pursued (3): what GAP prepared on your decisions.
 - Kenco: dave.kiesling@kencogroup.com wrote to us. The angle: The undated note from Dave Kiesling suggests Kenco Group might have previously expressed interest in optimizing their yards. This historical observation hints at potential challenges Kenco faces with manual gate check-in, radio dispatching, and tribal knowledge affecting dwell times and dock friction. A conversation could explore how standardizing the driver journey might help unlock hidden production capacity within their yards. Roles: Director of Operations, VP of Supply Chain, Logistics Manager. Ask: How do you currently manage gate check-in and driver communication during busy periods? Proposed: an email. The exact date of the communication is unknown, and it's unclear if Kenco Group has implemented any yard management solutions since this note was written.
    Open Kenco: https://modex-gtm.vercel.app/gap/accounts/kenco/
 
-Intelligence worth a look (6 of 3564). Any age, for your call; Pursue and GAP develops the angle. 2 from your briefs, 2 found by GAP, 1 trigger, 1 from the vault; 3558 more waiting.
-   Sources read: Freight X Signal Desk (6 reports, 21 items, through 2026-10-09); Yards First Brief (48 reports, 83 items, through 2026-10-09); HubSpot Activity & Engagement report (2 reports, 3 items, through 2026-10-08); imported into this preview from the captured snapshots of 2026-10-09. Not read this time: Clawd signal hunter (no export yet); the vault's notes (on the account stories, not in this digest); our Gmail Sent (this process has no sender credential).
+Intelligence worth a look (6 of 3563). Any age, for your call; Pursue and GAP develops the angle. 2 from your briefs, 2 found by GAP, 1 trigger, 1 from the vault; 3557 more waiting.
+   Sources: Yards First Brief Oct 9, 2026 (83 items); Freight X Signal Desk Oct 9, 2026 (21 items); HubSpot Activity & Engagement report Oct 9, 2026 (3 items); the vault Oct 9, 2026 (7434 notes). Not read this time: Clawd signal hunter: never imported. The briefs' records were imported into this preview from the captured snapshots of 2026-10-09 (Freight X Signal Desk (6 reports, 21 items, through 2026-10-09); Yards First Brief (48 reports, 83 items, through 2026-10-09); HubSpot Activity & Engagement report (2 reports, 3 items, through 2026-10-08)). Not read this time: our Gmail Sent (this process has no sender credential; production reads it).
    Everything retained, with filters: https://modex-gtm.vercel.app/gap/intelligence/
 - No account yet: Edin Kočo (relationship move). Freight X Signal Desk reported it Oct 9, 2026 (the capture date; the report states none) (RELATIONSHIP MOVE). Unverified present-day status. Themes: autonomy, digital ops.
    What was reported: Edin Kočo, co-founder and Chief Robotics Officer at Gideon. Edin owns hardware, product design, safety and manufacturing, and he is quoted directly in today's launch. More importantly, he sits on the other side of a question YardFlow should understand very well: what information does an autonomous physical actor need from the surrounding operation, and what can it simply perceive for itself? No YardFlow pitch.
@@ -82,7 +82,7 @@ Intelligence worth a look (6 of 3564). Any age, for your call; Pursue and GAP de
    Reported Oct 6, 2026 by the vault; event date Oct 6, 2026; imported Oct 9, 2026.
    Open Cost Plus World Market: https://modex-gtm.vercel.app/gap/accounts/cost-plus-world-market/
 
-Prospects to reengage (5 of 70). They wrote to us and went quiet.
+Prospects to reengage (5 of 69). They wrote to us and went quiet.
 - Kenco: Morrison, Craig at Kenco. Wrote to us Sep 24, 2026 (8 messages), last about "Re: [Caution: External]referral request"; their account is in an open deal (YardFlow - Kenco, Presentation scheduled): work it from the deal; not a GAP contact yet. Previously contacted, a response. Our Sent was not read for this list, so a reply of ours may exist. Review before outreach: purpose unknown: review before any outreach.
    In a deal at Kenco: YardFlow - Kenco (Presentation scheduled). Work it from the deal: https://modex-gtm.vercel.app/gap/accounts/kenco/?view=brief
    Decide it on Work: https://modex-gtm.vercel.app/gap/
@@ -91,10 +91,9 @@ Prospects to reengage (5 of 70). They wrote to us and went quiet.
    Decide it on Work: https://modex-gtm.vercel.app/gap/
 - firecrown.com: Thomas Wasson (firecrown.com). Wrote to us Sep 18, 2026 (10 messages), last about "Re: Jake BIO and YardFlow Background."; open deal unknown: the person is not placed at an account; not a GAP contact yet. Previously contacted, a response. Our Sent was not read for this list, so a reply of ours may exist.
    Decide it on Work: https://modex-gtm.vercel.app/gap/
-- Kenco: Kiesling, Dave at Kenco. Wrote to us Sep 16, 2026 (11 messages), last about "Accepted: [Caution: External]Updated invitation: Kenco x Yar"; their account is in an open deal (YardFlow - Kenco, Presentation scheduled): work it from the deal; not a GAP contact yet. Previously contacted, a response. Our Sent was not read for this list, so a reply of ours may exist. The angle: The undated note from Dave Kiesling suggests Kenco Group might have previously expressed interest in optimizing their yards. This historical observation hints at potential challenges Kenco faces with manual gate check-in, radio dispatching, and tribal knowledge affecting dwell times and dock friction. A conversation could explore how standardizing the driver journey might help unlock hidden production capacity within their yards. Ask: How do you currently manage gate check-in and driver communication during busy periods?
-   In a deal at Kenco: YardFlow - Kenco (Presentation scheduled). Work it from the deal: https://modex-gtm.vercel.app/gap/accounts/kenco/?view=brief
-   Decide it on Work: https://modex-gtm.vercel.app/gap/
 - riserify.com: Seb Hulme (riserify.com). Wrote to us Sep 15, 2026 (5 messages), last about "Good to connect"; open deal unknown: the person is not placed at an account; not a GAP contact yet. Previously contacted, a response. Our Sent was not read for this list, so a reply of ours may exist.
+   Decide it on Work: https://modex-gtm.vercel.app/gap/
+- exemplifyrisk.com: Arideilys Garcia (exemplifyrisk.com). Wrote to us Sep 14, 2026 (1 message), last about "Re: Email Inquiry - Gold Star Adjusters - Larkin - #HO260036"; open deal unknown: the person is not placed at an account; not a GAP contact yet. Previously contacted, a response. Our Sent was not read for this list, so a reply of ours may exist. Review before outreach: purpose unknown: review before any outreach.
    Decide it on Work: https://modex-gtm.vercel.app/gap/
 
 Begin with item 1, Crowley: In a deal. https://modex-gtm.vercel.app/gap/
@@ -140,7 +139,7 @@ Everything, with what is waiting and parked: https://modex-gtm.vercel.app/gap/
 
 To work from your inbox, reply with START and the first item arrives as its own email. Each item takes APPROVE, REVISE: your words, SKIP, DEFER, DONE: what happened, NEXT or HELP on the first line of your reply.
 
-Sent by GAP at 6:34 PM New York. This is an internal message to you; nothing in it went to a buyer.
+Sent by GAP at 6:39 PM New York. This is an internal message to you; nothing in it went to a buyer.
 ```
 
 The HTML body is beside this receipt: docs/gap/INTELLIGENCE_BRIEFING_PREVIEW_2026-10-09.html.
