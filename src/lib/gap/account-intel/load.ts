@@ -452,7 +452,10 @@ export async function loadAccountInputs(
         if (opts.deps?.knowledge) return opts.deps.knowledge(account.name, now);
         const { knowledgeForAccount } = await import('../knowledge/vault-table-adapter');
         const { parseFirefliesCapture } = await import('../knowledge/fireflies-summary');
-        const set = await knowledgeForAccount(prisma, account.name, { limit: 80 });
+        // The account's domains (the canonical company's, plus the GAP contacts' own, never freemail) and its aliases find
+        // the Fireflies calls by participant and the notes filed under another of its names.
+        const personaDomains = (personas as Row[]).map((p) => String(p.email ?? '').split('@')[1]?.toLowerCase() ?? '').filter((d) => d && !FREEMAIL_DOMAINS.has(d) && !OWN_DOMAINS.has(d));
+        const set = await knowledgeForAccount(prisma, account.name, { limit: 80, domains: [...new Set([...domains, ...personaDomains])], aliases: aliasList });
         const calls = set.calls
           .filter((n) => n.source === 'fireflies' && n.noteDate)
           .map((n) => {
