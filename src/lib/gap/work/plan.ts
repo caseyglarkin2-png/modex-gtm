@@ -145,9 +145,15 @@ function obligationItem(c: WorkCard, o: WorkObligation): Omit<PlanItem, 'rank' |
 export function itemsForDay(day: WorkDay, nyDate: string, opts: { decisionIds?: ReadonlyMap<string, string> } = {}): PlanItem[] {
   const out: PlanItem[] = [];
   const seen = new Set<string>();
+  // C27: an item is one per durable object as well as per key: the same commitment, meeting or reply reached through
+  // two cards (an obligation listed on the account card and again on a deal card) is one item, whatever it is titled.
+  const originOf = (it: Omit<PlanItem, 'rank' | 'token'>): string | null =>
+    it.refs.commitmentId ? `commitment:${it.refs.commitmentId}` : it.refs.meetingKey ? `meeting:${it.refs.meetingKey}` : it.refs.replyMessageId ? `reply:${it.refs.replyMessageId}` : null;
   const push = (it: Omit<PlanItem, 'rank' | 'token'>) => {
-    if (seen.has(it.key)) return;
+    const origin = originOf(it);
+    if (seen.has(it.key) || (origin && seen.has(origin))) return;
     seen.add(it.key);
+    if (origin) seen.add(origin);
     out.push({ ...it, rank: out.length, token: randomBytes(16).toString('hex') });
   };
   for (const c of day.cards) {

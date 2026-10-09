@@ -49,6 +49,11 @@ export function ActivityView({ a }: { a: Accountability }) {
       </Section>
 
       <Section title="What was completed" hint="Counted from the ledger, by class: preparation is work on your side of the line (a draft is not a send); contact is a message, reply, call or conversation; commercial progress is a booking, a meeting outcome or a deal milestone; CRM maintenance is a note, task or next step in HubSpot, never advancement. Provider-proven means a system of record (Gmail, HubSpot, GAP itself) holds the proof; self-reported means you said so and nothing proves it. Delivered is never claimed." testId="activity-completed">
+        {a.coverage !== 'complete' ? (
+          <p className="mb-2 text-xs text-amber-700 dark:text-amber-400" data-testid="activity-coverage" data-coverage={a.coverage}>
+            {a.coverage === 'unavailable' ? 'The ledger could not be read for this day; nothing below is a count of zero.' : 'The read was partial: the day holds more rows than were read, so these counts are a floor.'}{a.coverageDetail ? ` (${a.coverageDetail})` : ''}
+          </p>
+        ) : null}
         {a.completed.length ? (
           <table className="w-full text-sm">
             <thead>
@@ -64,7 +69,7 @@ export function ActivityView({ a }: { a: Accountability }) {
             ))}
           </table>
         ) : (
-          <p className="italic text-[var(--muted-foreground)]">No activity recorded for this day.</p>
+          <p className="italic text-[var(--muted-foreground)]">{a.coverage === 'unavailable' ? 'Unknown: the activity ledger was not readable.' : 'No activity recorded for this day.'}</p>
         )}
       </Section>
 

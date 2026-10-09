@@ -127,6 +127,8 @@ export interface ActivityEvent {
   prepares: string[];
   /** C38c: the HubSpot deal a commercial event is scoped to; null when it names none. */
   dealId: string | null;
+  /** C49: the provider's own id for the evidence (a Gmail message id, a HubSpot record id, a calendar event id): the same evidence recorded twice counts once. */
+  evidence: string | null;
 }
 
 export type LedgerRow = { kind: string; subject_type: string; subject_id: string; actor?: string | null; payload: unknown; created_at: Date | string };
@@ -193,7 +195,7 @@ export function projectActivity(r: LedgerRow): ActivityEvent | null {
   const at = new Date(r.created_at).toISOString();
   const accountName = accountOf(r, p);
   const ref = { kind: r.kind, subjectType: r.subject_type, subjectId: r.subject_id };
-  const ev = (kind: ActivityKind, basis: ActivityBasis, line: string, who: string | null = null, completes: string[] = [], extra: Partial<Pick<ActivityEvent, 'prepares' | 'dealId'>> = {}): ActivityEvent => ({ kind, basis, at, accountName, who, line, ref, completes, prepares: extra.prepares ?? [], dealId: extra.dealId ?? null });
+  const ev = (kind: ActivityKind, basis: ActivityBasis, line: string, who: string | null = null, completes: string[] = [], extra: Partial<Pick<ActivityEvent, 'prepares' | 'dealId' | 'evidence'>> = {}): ActivityEvent => ({ kind, basis, at, accountName, who, line, ref, completes, prepares: extra.prepares ?? [], dealId: extra.dealId ?? null, evidence: extra.evidence ?? null });
   const accountKey = (tier: string) => (accountName ? [`${tier}:${accountName}:${dayOf(at)}`] : []);
 
   if (RESEARCH_KINDS.includes(r.kind)) return ev('research_generated', 'provider', accountName ? `Research ran on ${accountName}.` : 'Background research ran.');
@@ -204,8 +206,8 @@ export function projectActivity(r: LedgerRow): ActivityEvent | null {
     return { ...ev('proposal_prepared', 'provider', str(result.objection) ? `A talking point was prepared for an objection: "${String(result.objection).slice(0, 80)}".` : 'An agent task finished.'), accountName: str(result.accountName) ?? accountName };
   }
   // C36: a draft or an approval PREPARES the outreach item; it never completes it.
-  if (r.kind === DRAFTED) return ev('draft_created', 'provider', `A Gmail draft was created${str(p.recipient) ? ` to ${str(p.recipient)}` : ''}; not a send until Sent shows it.`, str(p.recipient), [], { prepares: [`first_touch:${r.subject_id}`] });
-  if (r.kind === REPLY_DRAFTED) return ev('draft_created', 'provider', 'A reply draft was created in Gmail; not an answer until Sent shows it.', str(p.recipient), [], { prepares: [`reply:${r.subject_id}`] });
+  if (r.kind === DRAFTED) return ev('draft_created', 'provider', `A Gmail draft was created${str(p.recipient) ? ` to ${str(p.recipient)}` : ''}; not a send until Sent shows it.`, str(p.recipient), [], { prepares: [`first_touch:${r.subject_id}`], evidence: str(p.gmailDraftId) });
+  if (r.kind === REPLY_DRAFTED) return ev('draft_created', 'provider', 'A reply draft was created in Gmail; not an answer until Sent shows it.', str(p.recipient), [], { prepares: [`reply:${r.subject_id}`], evidence: str(p.gmailDraftId) });
   if (r.kind === COPY_REVISION_APPROVED) return ev('message_approved', 'provider', 'A revised email was approved.', null, [], { prepares: str(p.decisionId) ? [`first_touch:${str(p.decisionId)}`] : [] });
   if (r.kind === 'hypothesis.approved') return ev('message_approved', 'provider', `A thesis was approved${accountName ? ` at ${accountName}` : ''}.`, null, accountKey('review'));
   if (r.kind === COMMAND_APPLIED) {
@@ -223,9 +225,9 @@ export function projectActivity(r: LedgerRow): ActivityEvent | null {
     const basis: ActivityBasis = r.kind === MANUAL_SENT && !gmailId ? 'self_reported' : 'provider';
     const recipient = str(p.recipient);
     const completes = r.kind === REPLY_SENT ? [`reply:${r.subject_id}`] : [`first_touch:${r.subject_id}`, ...accountKey('follow_up')];
-    return ev('message_sent', basis, r.kind === REPLY_SENT ? `Answered ${recipient ?? 'them'} in their thread${p.reconciledFromSent ? ' (found in Sent)' : ''}.` : `Sent touch ${Number(p.stepIndex ?? 0) + 1}${recipient ? ` to ${recipient}` : ''}${basis === 'self_reported' ? ' (said by hand, no Gmail id)' : ''}.`, recipient, completes);
+    return ev('message_sent', basis, r.kind === REPLY_SENT ? `Answered ${recipient ?? 'them'} in their thread${p.reconciledFromSent ? ' (found in Sent)' : ''}.` : `Sent touch ${Number(p.stepIndex ?? 0) + 1}${recipient ? ` to ${recipient}` : ''}${basis === 'self_reported' ? ' (said by hand, no Gmail id)' : ''}.`, recipient, completes, { evidence: gmailId });
   }
-  if (r.kind === 'reply.ingested') return ev('reply_received', 'provider', `A reply arrived${str(p.toEmail) ? ` at ${str(p.toEmail)}` : ''}.`, null);
+  if (r.kind === 'reply.ingested') return ev('reply_received', 'provider', `A reply arrived${str(p.toEmail) ? ` at ${str(p.toEmail)}` : ''}.`, null, [], { evidence: str(p.gmailMessageId) ?? r.subject_id });
   if (r.kind === CALL_ATTEMPT_STARTED) return ev('call_attempted', 'self_reported', 'The dial link was opened; not a call until its outcome is recorded.', typeof p.personaId === 'number' ? `persona ${p.personaId}` : null);
   if (r.kind === 'disposition.recorded') {
     if (p.humanConfirmed !== true) return null;
@@ -237,20 +239,21 @@ export function projectActivity(r: LedgerRow): ActivityEvent | null {
   }
   if (r.kind === MEETING_BOOKED) {
     const proof = str(p.calendarEventId) ?? str(p.providerRef);
-    return ev('meeting_booked', proof ? 'provider' : 'self_reported', `A meeting is booked${str(p.contactEmail) ? ` with ${str(p.contactEmail)}` : ''}${proof ? ' (calendar)' : ' (said, no calendar proof)'}.`, str(p.contactEmail), [], { dealId: str(p.dealId) });
+    return ev('meeting_booked', proof ? 'provider' : 'self_reported', `A meeting is booked${str(p.contactEmail) ? ` with ${str(p.contactEmail)}` : ''}${proof ? ' (calendar)' : ' (said, no calendar proof)'}.`, str(p.contactEmail), [], { dealId: str(p.dealId), evidence: proof });
   }
   // C37: an outcome captured is a meeting that HAPPENED and what it yielded; never a booking.
   if (r.kind === 'capture.meeting') return ev('meeting_outcome_captured', 'self_reported', `A meeting outcome was captured (${words(p.outcome)})${p.outcome === 'next_meeting' ? '; the next meeting is booked when the calendar shows it' : ''}.`, str(p.contactEmail), [], { dealId: str(p.dealId) });
   // X14b: a deal artifact copied is content copied; found in Sent after the copy it is a message sent (provider-proven).
   if (r.kind === ARTIFACT_USED) return ev('content_copied', 'self_reported', `The ${words(p.kind) || 'artifact'} was copied${str(p.recipient) ? ` for ${str(p.recipient)}` : ''}; not sent until Sent shows it.`, str(p.recipient));
-  if (r.kind === ARTIFACT_SENT) return ev('message_sent', 'provider', `The ${words(p.kind) || 'artifact'} went to ${str(p.recipient) ?? 'them'} (found in Sent).`, str(p.recipient), accountKey('deal'), { dealId: str(p.dealId) });
+  if (r.kind === ARTIFACT_SENT) return ev('message_sent', 'provider', `The ${words(p.kind) || 'artifact'} went to ${str(p.recipient) ?? 'them'} (found in Sent).`, str(p.recipient), accountKey('deal'), { dealId: str(p.dealId), evidence: str(p.gmailSentMessageId) ?? str(p.gmailMessageId) });
   // C38a / C38b: a HubSpot note, task or next step is CRM maintenance, never advancement; each outcome maps apart.
   if (r.kind === 'crm.sync_result') {
     const outcome = String(p.outcome ?? '');
     const dealId = str(p.dealId);
     const forAccount = accountName ? ` for ${accountName}` : '';
-    if (outcome === 'written' || outcome === 'ok') return ev('crm_updated', 'provider', `HubSpot was updated${forAccount}: ${crmChangeWords(p)} (CRM maintenance, not a stage change).`, null, [], { dealId });
-    if (outcome === 'recovered') return ev('crm_updated', 'provider', `HubSpot already held ${crmChangeWords(p)}${forAccount}: a write whose answer was lost was recovered, not repeated.`, null, [], { dealId });
+    const objectRef = str(p.objectRef);
+    if (outcome === 'written' || outcome === 'ok') return ev('crm_updated', 'provider', `HubSpot was updated${forAccount}: ${crmChangeWords(p)} (CRM maintenance, not a stage change).`, null, [], { dealId, evidence: objectRef });
+    if (outcome === 'recovered') return ev('crm_updated', 'provider', `HubSpot already held ${crmChangeWords(p)}${forAccount}: a write whose answer was lost was recovered, not repeated.`, null, [], { dealId, evidence: objectRef });
     if (outcome === 'off') return ev('work_blocked', 'provider', `HubSpot writes are off here: the approved change${forAccount} is standing, not written${str(p.detail) ? ` (${str(p.detail)})` : ''}.`, null, [], { dealId });
     if (outcome === 'conflict') return ev('work_blocked', 'provider', `HubSpot holds a newer value than the one you saw${forAccount}; nothing was overwritten.`, null, [], { dealId });
     return ev('work_blocked', 'provider', `A HubSpot change failed${forAccount}${str(p.detail) ? `: ${str(p.detail)}` : ''}.`, null, [], { dealId });
@@ -260,7 +263,7 @@ export function projectActivity(r: LedgerRow): ActivityEvent | null {
     const dealId = str(p.dealId);
     if (!dealId) return null;
     const basis: ActivityBasis = p.basis === 'provider' || p.source === 'hubspot' ? 'provider' : 'self_reported';
-    return ev('deal_advanced', basis, `Deal ${str(p.dealName) ?? dealId} moved${str(p.from) ? ` from ${words(p.from)}` : ''} to ${words(p.to) || 'a new stage'}${basis === 'provider' ? ' (HubSpot)' : ' (said; HubSpot not read)'}.`, null, [...(str(p.commitmentId) ? [`commitment:${str(p.commitmentId)}`] : []), ...accountKey('deal')], { dealId });
+    return ev('deal_advanced', basis, `Deal ${str(p.dealName) ?? dealId} moved${str(p.from) ? ` from ${words(p.from)}` : ''} to ${words(p.to) || 'a new stage'}${basis === 'provider' ? ' (HubSpot)' : ' (said; HubSpot not read)'}.`, null, [...(str(p.commitmentId) ? [`commitment:${str(p.commitmentId)}`] : []), ...accountKey('deal')], { dealId, evidence: basis === 'provider' ? `${dealId}:${str(p.to) ?? ''}` : null });
   }
   if (r.kind === COMMITMENT_EVENT) {
     if (p.op !== 'status' || !isObj(p.commitment)) return null;
@@ -284,13 +287,76 @@ export function projectActivity(r: LedgerRow): ActivityEvent | null {
   return null;
 }
 
-/** The activity in a window, newest first. Soft: an unreadable ledger reads as nothing (never as success). */
-export async function loadActivity(prisma: PrismaLike, opts: { since: Date; until: Date; take?: number }): Promise<ActivityEvent[]> {
-  if (typeof prisma?.gapAuditEvent?.findMany !== 'function') return [];
-  const rows: LedgerRow[] = await prisma.gapAuditEvent
-    .findMany({ where: { created_at: { gte: opts.since, lte: opts.until }, kind: { in: [...ACTIVITY_LEDGER_KINDS] } }, select: { kind: true, subject_type: true, subject_id: true, actor: true, payload: true, created_at: true }, orderBy: { created_at: 'desc' }, take: opts.take ?? 1000 })
-    .catch(() => []);
-  return rows.map(projectActivity).filter((e): e is ActivityEvent => e !== null);
+/** C49: how much of the window the read covered. `unavailable` is never a zero-activity day. */
+export type ActivityCoverage = 'complete' | 'partial' | 'unavailable';
+
+export interface ActivityRead {
+  events: ActivityEvent[];
+  coverage: ActivityCoverage;
+  /** Why the coverage is not complete, in words; null when complete. */
+  detail: string | null;
+  /** Ledger rows read (before projection and dedup). */
+  rows: number;
+  /** Events dropped as the same provider evidence recorded twice. */
+  deduped: number;
+}
+
+/** One page of the ledger read (the Postgres default is 1,000; a window holding more is paged by a (created_at, id) cursor). */
+export const ACTIVITY_PAGE = 1000;
+/** The most pages one read makes before it says partial (20,000 rows: no seller day is that long; a runaway writer is). */
+export const ACTIVITY_MAX_PAGES = 20;
+
+type PagedRow = LedgerRow & { id?: string };
+
+/**
+ * The activity in a window, newest first, with its COVERAGE (C49): complete when every row of the window was read,
+ * partial when the page cap stopped the read (the events are the newest ones), unavailable when the ledger threw or
+ * no ledger client was given. A thrown read never reads as a zero-activity day. The same provider evidence recorded
+ * twice (a reconcile that wrote the same Gmail id again) counts once.
+ */
+export async function loadActivity(prisma: PrismaLike, opts: { since: Date; until: Date; pageSize?: number; maxPages?: number }): Promise<ActivityRead> {
+  if (typeof prisma?.gapAuditEvent?.findMany !== 'function') return { events: [], coverage: 'unavailable', detail: 'no ledger client', rows: 0, deduped: 0 };
+  const pageSize = Math.max(1, opts.pageSize ?? ACTIVITY_PAGE);
+  const maxPages = Math.max(1, opts.maxPages ?? ACTIVITY_MAX_PAGES);
+  const rows: PagedRow[] = [];
+  let coverage: ActivityCoverage = 'complete';
+  let detail: string | null = null;
+  let cursor: { at: Date; id: string | null } | null = null;
+  try {
+    for (let page = 0; page < maxPages; page += 1) {
+      const window = { created_at: { gte: opts.since, lte: opts.until }, kind: { in: [...ACTIVITY_LEDGER_KINDS] } };
+      const where = cursor
+        ? { AND: [window, cursor.id ? { OR: [{ created_at: { lt: cursor.at } }, { created_at: cursor.at, id: { lt: cursor.id } }] } : { created_at: { lt: cursor.at } }] }
+        : window;
+      const batch: PagedRow[] = await prisma.gapAuditEvent.findMany({ where, select: { id: true, kind: true, subject_type: true, subject_id: true, actor: true, payload: true, created_at: true }, orderBy: [{ created_at: 'desc' }, { id: 'desc' }], take: pageSize });
+      rows.push(...batch);
+      if (batch.length < pageSize) break;
+      const last = batch[batch.length - 1];
+      cursor = { at: new Date(last.created_at), id: typeof last.id === 'string' ? last.id : null };
+      if (page === maxPages - 1) {
+        coverage = 'partial';
+        detail = `the window holds more than ${rows.length} rows; the newest ${rows.length} were read`;
+      }
+    }
+  } catch (err) {
+    return { events: [], coverage: 'unavailable', detail: err instanceof Error ? err.message : String(err), rows: rows.length, deduped: 0 };
+  }
+  const seen = new Set<string>();
+  let deduped = 0;
+  const events: ActivityEvent[] = [];
+  for (const e of rows.map(projectActivity)) {
+    if (!e) continue;
+    if (e.basis === 'provider' && e.evidence) {
+      const key = `${e.kind}:${e.evidence}`;
+      if (seen.has(key)) {
+        deduped += 1;
+        continue;
+      }
+      seen.add(key);
+    }
+    events.push(e);
+  }
+  return { events, coverage, detail, rows: rows.length, deduped };
 }
 
 export interface ActivityCounts {
@@ -317,12 +383,15 @@ export interface Accountability {
   /** What the agents are handling. */
   agents: { queued: AgentTask[]; running: AgentTask[]; succeeded: AgentTask[]; failed: AgentTask[] };
   planned: boolean;
+  /** C49: how much of the day the ledger read covered; `unavailable` means the counts are not counts of zero. */
+  coverage: ActivityCoverage;
+  coverageDetail: string | null;
 }
 
 const CLASS_ORDER: readonly ActivityClass[] = ['preparation', 'contact', 'commercial', 'maintenance', 'other'];
 
 /** Pure: the accountability view from the plan, the day's events and the tasks. */
-export function accountability(i: { day: string; plan: DayPlan | null; events: readonly ActivityEvent[]; tasks: readonly AgentTask[] }): Accountability {
+export function accountability(i: { day: string; plan: DayPlan | null; events: readonly ActivityEvent[]; tasks: readonly AgentTask[]; coverage?: ActivityCoverage; coverageDetail?: string | null }): Accountability {
   const byKey = new Map<string, ActivityEvent>();
   const preparedByKey = new Map<string, ActivityEvent>();
   for (const e of [...i.events].sort((a, b) => a.at.localeCompare(b.at))) {
@@ -363,6 +432,8 @@ export function accountability(i: { day: string; plan: DayPlan | null; events: r
       failed: i.tasks.filter((t) => t.status === 'failed' && todays(t)),
     },
     planned: !!i.plan,
+    coverage: i.coverage ?? 'complete',
+    coverageDetail: i.coverageDetail ?? null,
   };
 }
 
@@ -370,8 +441,8 @@ export function accountability(i: { day: string; plan: DayPlan | null; events: r
 export async function loadAccountability(prisma: PrismaLike, now: Date, day = nyDay(now)): Promise<Accountability> {
   const start = nyDayAt(day, 0);
   const end = new Date(Math.min(now.getTime(), nyDayAt(day, 0).getTime() + 86_400_000 - 1));
-  const [plan, events, tasks] = await Promise.all([loadDayPlan(prisma, day).catch(() => null), loadActivity(prisma, { since: start, until: end }), listAgentTasks(prisma, { now }).catch(() => [] as AgentTask[])]);
-  return accountability({ day, plan, events, tasks });
+  const [plan, read, tasks] = await Promise.all([loadDayPlan(prisma, day).catch(() => null), loadActivity(prisma, { since: start, until: end }), listAgentTasks(prisma, { now }).catch(() => [] as AgentTask[])]);
+  return accountability({ day, plan, events: read.events, tasks, coverage: read.coverage, coverageDetail: read.detail });
 }
 
 export { DAY_PLANNED };
