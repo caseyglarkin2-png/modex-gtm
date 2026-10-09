@@ -120,7 +120,8 @@ describe('I01: the loader', () => {
     expect(x.triggers.map((i) => i.id)).toEqual(['7']);
     expect(x.triggers[0].accountHint).toBe('Tractor Supply Company');
     expect(x.people.map((i) => i.id)).toEqual(['dave@kencogroup.com']);
-    expect(x.totals).toEqual({ signals: 1, triggers: 1, people: 1 });
+    // Intelligence wiring (2026-10-09): the producers' imported records are counted apart (none here).
+    expect(x.totals).toEqual({ signals: 1, triggers: 1, people: 1, reports: 0, knowledge: 0 });
     expect(x.pursued).toEqual([]);
     expect(INTEL_LIMIT).toBeGreaterThanOrEqual(8);
     expect(await loadIntelligence({}, { now: NOW })).toMatchObject({ signals: [], triggers: [], people: [], pursued: [], totals: { signals: 0, triggers: 0, people: 0 }, selection: { moreSignals: false, morePeople: false } });

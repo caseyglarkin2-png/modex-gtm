@@ -51,6 +51,22 @@ function Item({ item, angle }: { item: IntelItem; angle: PreparedAngle | null })
       </div>
       <p className="font-medium">{item.url ? <a href={item.url} target="_blank" rel="noopener noreferrer" className="underline">{item.title}</a> : item.title}</p>
       <p className="text-xs text-[var(--muted-foreground)]" data-testid="intel-line">{item.line}</p>
+      {item.substance ? (
+        <div className="space-y-1 rounded-md border border-[var(--border)] p-2 text-xs" data-testid="intel-substance">
+          <p className="whitespace-pre-line" data-testid="intel-substance-text">{item.substance.text}</p>
+          {item.substance.uncertainty ? <p className="text-[var(--muted-foreground)]" data-testid="intel-substance-uncertainty">In the producer&apos;s words: {item.substance.uncertainty}</p> : null}
+          {item.substance.interpretation ? <p className="whitespace-pre-line text-[var(--muted-foreground)]" data-testid="intel-substance-read">The producer&apos;s read (not an obligation): {item.substance.interpretation}</p> : null}
+          {item.substance.sources.length || item.substance.sourceRecordIds.length ? (
+            <p className="text-[var(--muted-foreground)]" data-testid="intel-substance-sources">
+              {item.substance.sources.filter((s) => s.url).map((s, i) => (
+                <span key={s.url ?? i}>{i ? '; ' : 'Sources: '}<a href={s.url ?? undefined} target="_blank" rel="noopener noreferrer" className="underline">{s.label ?? s.publisher ?? s.url}</a></span>
+              ))}
+              {item.substance.sourceRecordIds.length ? ` CRM: ${item.substance.sourceRecordIds.map((r) => `${r.system} ${r.type} ${r.id}`).join(', ')}.` : ''}
+            </p>
+          ) : null}
+          <p className="text-[var(--muted-foreground)]">Reported {item.substance.reportedOn} by {item.substance.producerLabel}{item.substance.eventDate ? `; event date ${item.substance.eventDate}` : ''}; imported {item.substance.importedAt.slice(0, 10)}{item.substance.revisions ? `; revised ${item.substance.revisions} time${item.substance.revisions === 1 ? '' : 's'}` : ''}{item.substance.suggestions ? `; ${item.substance.suggestions} drafted message${item.substance.suggestions === 1 ? '' : 's'} archived, never sent` : ''}.</p>
+        </div>
+      ) : null}
       {angle ? (
         <div className="rounded-md bg-[var(--muted)] p-2 text-xs" data-testid="intel-angle">
           <p className="font-semibold">The angle, prepared by GAP</p>
@@ -140,7 +156,13 @@ export function IntelPanel({ intel, angles }: { intel: Intelligence; angles: Rec
           <ul className="space-y-2">{intel.pursued.map((p) => <Pursued key={p.key} p={p} />)}</ul>
         </section>
       ) : null}
+      {intel.reports?.length ? (
+        <Section title="From your briefs" hint="What your briefs and reports collected, newest report first, with the passage, the producer's confidence and its sources. Casey judges usefulness; nothing here is verified by GAP or an obligation." items={intel.reports} angles={angles} testId="intel-reports" total={intel.totals.reports ?? intel.reports.length} selection="the producers' imported records, newest report first; the complete list with filters is on the Intelligence page" moreHref="/gap/intelligence" />
+      ) : null}
       <Section title="Intelligence worth a look" hint="What GAP found, any age, for your call. Pursue and GAP develops the angle and checks the source; nothing is sent until you approve it." items={worth} angles={angles} testId="intel-worth" total={intel.totals.signals + intel.totals.triggers} selection={intel.selection?.signals} moreHref={intel.selection?.moreSignals ? `/gap?moreSignals=${intel.selection.skipSignals + intel.signals.length}${intel.selection.skipPeople ? `&morePeople=${intel.selection.skipPeople}` : ''}` : null} />
+      {intel.knowledge?.length ? (
+        <Section title="From the vault" hint="Your recent calls and meetings on the vault, newest first: the Fireflies summary (advisory; the verbatim is on the note) and the action items. No decisions here; the account page holds the moves." items={intel.knowledge} angles={angles} testId="intel-knowledge" total={intel.totals.knowledge ?? intel.knowledge.length} selection="the vault's held calls and meetings of the last 45 days" moreHref={null} />
+      ) : null}
       <Section title="Prospects to reengage" hint="People who wrote to us and went quiet. Pursue and GAP prepares the reopening; an open deal at the account is said, and the deal keeps its hold." items={intel.people} angles={angles} testId="intel-people" total={intel.totals.people} selection={intel.selection?.people} moreHref={intel.selection?.morePeople ? `/gap?morePeople=${intel.selection.skipPeople + intel.people.length}${intel.selection.skipSignals ? `&moreSignals=${intel.selection.skipSignals}` : ''}` : null} />
       <p className="text-xs text-[var(--muted-foreground)]">
         Decided items leave the day. <Link href="/gap/signals" className="underline">Every signal</Link>, including the ones you set aside.

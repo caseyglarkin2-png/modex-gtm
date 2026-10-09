@@ -1,4 +1,5 @@
 import { nyDay, nyDayAt } from '../work/dates';
+import type { ProducerStatus } from '../signals/producer-status';
 /**
  * GAP system health (Phase 2 A3, 2026-09-28): can Casey trust the cockpit
  * right now? Five dependencies, each HEALTHY / DEGRADED / BLOCKED:
@@ -16,7 +17,7 @@ import { nyDay, nyDayAt } from '../work/dates';
  */
 
 export type HealthState = 'HEALTHY' | 'DEGRADED' | 'BLOCKED';
-export type HealthKey = 'mailbox' | 'hubspot' | 'suppression' | 'sender' | 'routing' | 'briefing' | 'agents' | 'model' | 'context';
+export type HealthKey = 'mailbox' | 'hubspot' | 'suppression' | 'sender' | 'routing' | 'briefing' | 'agents' | 'model' | 'context' | 'producers';
 
 export interface HealthComponent {
   key: HealthKey;
@@ -45,6 +46,7 @@ export const HEALTH_REPAIR: Readonly<Record<HealthKey, { owner: string; retry: s
   agents: { owner: 'operator', retry: 'Check GAP_AGENT_TASKS_ENABLED in Vercel and the gap-agent-tasks cron state (every 5 minutes); a failed task keeps its error on its ledger row; reply REVISE again, or record the objection again, to queue a fresh task' },
   context: { owner: 'operator', retry: 'Commercial context is advisory: a send is never blocked by it, but a prepared angle on partial context is labelled so. Identity reads the canonicalCompany and gapAccountAlias tables; associations read HubSpot contacts; Sent reads the GAP sender\'s Gmail; the vault needs GAP_VAULT_DIR on the box that runs it; Clawd needs CLAWD_CONTROL_PLANE_URL and its token. A source rebuilt today whose newest knowledge is months old is said so; refresh the source, not the timestamp' },
   model: { owner: 'Casey', retry: 'Spend is the ledger rows ai.model_call this month against GAP_AI_MONTHLY_CEILING_USD (default $25); a blocked route names the provider reason on the last task row: fix AI_GATEWAY_API_KEY or the model in Vercel and redeploy, top up AI Gateway credits only with Casey, or raise the ceiling only with Casey; then decide the item again' },
+  producers: { owner: 'operator', retry: 'Each producer is read from its intelligence.imported ledger rows (the import writes one per run) and the vault from knowledge.vault_synced; a stalled producer needs its export run and imported again through the import, a failed one carries its reason on the last row, and the vault needs the local push or GAP_VAULT_GITHUB_TOKEN in Vercel for the cron' },
 };
 
 const repaired = (c: HealthComponent): HealthComponent => {
@@ -98,6 +100,8 @@ export interface HealthInputs {
       | { readable: true; rows: number; lastSyncedAt: string | null; kinds: Record<string, number>; tokenConfigured: boolean; localDir: boolean; lastSync: { ok: boolean; at: string; error: string | null; written: number | null; skipped: boolean } | null }
       | { readable: false; error: string; tokenConfigured: boolean; localDir: boolean };
   };
+  /** IW13: the intelligence producers (signals/producer-status.ts). Absent: not read (no component); null: the read failed. */
+  producers?: ProducerStatus[] | null;
   /** A02: the GAP model route and its spend this month (src/lib/gap/ai/spend.ts). */
   model?: { month: string; label: string; monthUsd: number; ceilingUsd: number; warnFraction: number; calls: number; failed: number; refused: number; inFlight: number; lastCall: { at: string; outcome: string; model: string | null; errorCategory: string | null } | null; /** A04: the AI Gateway credit balance (every call on the route draws on it, metered or not); null when unread. */ credits?: { balance: number; totalUsed: number } | null };
 }
@@ -296,8 +300,30 @@ function model(i: HealthInputs['model']): HealthComponent {
   return { ...base, state: 'HEALTHY', label: `Model spend ${usd(i.monthUsd)} of ${usd(i.ceilingUsd)} for ${i.label}${i.credits ? ` · gateway credits ${usd(i.credits.balance)}` : ''}`, detail };
 }
 
+/**
+ * IW13: the intelligence producers. HEALTHY when every producer that has ever imported is current (named), DEGRADED
+ * when any is stalled or failed (named, with since when), HEALTHY "No producer has imported yet" when none has. Never
+ * BLOCKED: a producer that stops is missing intelligence, not a safety matter. Absent input: not read, no component
+ * (the older callers' reports keep their shape); null: the read itself failed, said as such.
+ */
+function producers(i: HealthInputs['producers']): HealthComponent | null {
+  const base = { key: 'producers' as const, name: 'Intelligence producers' };
+  if (i === undefined) return null;
+  if (i === null) return { ...base, state: 'DEGRADED', label: 'Intelligence producers not readable', detail: 'The producer ledger could not be read this time.' };
+  const detail = i.map((s) => s.line).join(' ') || 'No producer on record.';
+  const ever = i.filter((s) => s.state !== 'never');
+  if (!ever.length) return { ...base, state: 'HEALTHY', label: 'No producer has imported yet', detail };
+  const day = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' });
+  const bad = ever.filter((s) => s.state === 'stale' || s.state === 'failed');
+  if (bad.length) {
+    const words = bad.map((s) => (s.state === 'failed' ? `${s.label} failed ${day(s.lastImportAt!)}` : `${s.label} stalled since ${day(s.lastImportAt!)}`));
+    return { ...base, state: 'DEGRADED', label: `Intelligence producers: ${words.join('; ')}`, detail };
+  }
+  return { ...base, state: 'HEALTHY', label: `Intelligence producers current: ${ever.map((s) => s.label).join(', ')}`, detail };
+}
+
 export function evaluateHealth(inputs: HealthInputs, now: Date): HealthReport {
-  const components = [mailbox(inputs.mailbox, now), hubspot(inputs.hubspot), suppression(inputs.suppression), sender(inputs.sender), routing(inputs.routing, now), briefing(inputs.briefing, now), agents(inputs.agents, now), model(inputs.model), context(inputs.context, now)].map(repaired);
+  const components = [mailbox(inputs.mailbox, now), hubspot(inputs.hubspot), suppression(inputs.suppression), sender(inputs.sender), routing(inputs.routing, now), briefing(inputs.briefing, now), agents(inputs.agents, now), model(inputs.model), context(inputs.context, now), producers(inputs.producers)].filter((c): c is HealthComponent => c !== null).map(repaired);
   const overall = components.reduce<HealthState>((w, c) => (RANK[c.state] > RANK[w] ? c.state : w), 'HEALTHY');
   const routingC = components.find((c) => c.key === 'routing')!;
   const bad = components.filter((c) => c.state !== 'HEALTHY').sort((a, b) => RANK[b.state] - RANK[a.state]);

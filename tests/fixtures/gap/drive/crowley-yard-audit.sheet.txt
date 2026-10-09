@@ -1,0 +1,22 @@
+Context Type: corpus_document
+## Table Context
+### File Name: Crowley — Yard Audit
+### Sheet Name: Crowley — Yard Audit
+### Table Range: A1:AP45
+### Table Sample Data:
+|  |  |  |  |  |  |  |  |  | Connectivity | Shipment | Shifts per | Guards per | DCs per |  |  |  | Staging Area |  | Driveway |  | Backup | Entry/Exit |  |  |  | Fast Lane | Dock Doors |  |  |  | Drop Area |  |  |  | Ship/Rcv | Urban / | Potential | Multiple |  | Remote |  |
+| Name | Type | Archetype | Archetype Name |  | WMS | TMS | YMS | EBOL | Available | Volume | Day | Shift | Shift | Truck Gate? | Guard Shack? | Remote GS? | Pre-Gate | Post-Gate | Long (3+) | Short (1-2 trucks) | Sensitive? | Together | Separate | Entry Lanes | Exit Lanes | Opportunity? | 0-10 | 10-25 | 25-50 | 50+ | 0-10 | 10-25 | 25-50 | 50+ | Separate? | Rural | Connectivity Issue? | Facilities? | Scale | Drop Yard |  |
+| Crowley JAXPORT Marine Terminal - Jacksonville FL | Marine terminal / container port | \#6 | Gate + GS (not BU sens.) + campus |  |  |  |  |  |  |  |  |  |  | YES | YES |  | YES | YES | YES |  |  | YES |  | 3 | 2 | YES |  | YES |  |  |  |  |  | YES |  | Urban |  | YES |  | YES | https://www.google.com/maps/@30.354400,-81.623900,400m/data=\!3m1\!1e3 |
+| Crowley Conley Container Yard - Conley GA (Atlanta) | Inland container yard / intermodal logistics hub | \#9 | Gate + No GS (remote check-in) |  |  |  |  |  |  |  |  |  |  | YES |  | YES |  | YES | YES |  |  | YES |  | 1 | 1 |  |  |  |  |  |  |  |  | YES |  | Urban |  |  |  | YES | https://www.google.com/maps/@33.65645,-84.34470,400m/data=\!3m1\!1e3 |
+| Crowley Jacksonville Cross Dock Facility - Jacksonville FL | Cross-dock / distribution warehouse | \#6 | Gate + GS (not BU sens.) + campus |  |  |  |  |  |  |  |  |  |  | YES | YES |  |  | YES | YES |  |  | YES |  | 1 | 1 | YES |  |  |  | YES |  |  |  | YES | YES | Urban |  | YES |  | YES | https://www.google.com/maps/@30.34640,-81.69680,400m/data=\!3m1\!1e3 |
+| Crowley CrowleyFresh Distribution Center (Temperature Controlled) - M... | Temperature-controlled distribution center / warehouse | \#3 | No Gate / No GS |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  | YES |  | YES |  |  |  |  |  |  |  | YES |  | YES |  |  | YES | Urban |  |  |  |  | https://www.google.com/maps/@25.87360,-80.35850,400m/data=\!3m1\!1e3 |
+|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+|  | \#6 | 10 | 71% |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+|  | Total | 14 | 100% |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+|  | Fast Lane Opportunity | 9 | 64% |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+|  | Guarded | 11 | 79% |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+
+### Table Columns:
+-
+  - range: A1:A45
+  - sample data: , Name, Crowley JAXPORT Marine Terminal - Jacksonville FL, Crowley Conley Container Yard - Conley GA (Atlanta), Crowley Jacksonville Cross Dock Facility - Jacksonville FL

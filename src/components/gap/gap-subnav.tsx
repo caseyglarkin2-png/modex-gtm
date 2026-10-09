@@ -26,6 +26,8 @@ export const MORE_TABS = [
   { label: 'Add to GAP', href: '/gap/add' },
   { label: 'Sources', href: '/gap/sources' },
   { label: 'Signals', href: '/gap/signals' },
+  // IW05: every retained intelligence record, paged, with filters and the archive.
+  { label: 'Intelligence', href: '/gap/intelligence' },
   { label: 'All theses', href: '/gap/hypotheses' },
   { label: 'Learning', href: '/gap/learning' },
   { label: 'Coverage', href: '/gap/coverage' },

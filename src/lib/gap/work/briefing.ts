@@ -24,6 +24,7 @@
  */
 import type { DayPlan, PlanItem } from './plan';
 import type { IntelItem, PursuedItem } from './intel';
+import { dateOnlyText } from '../signals/intelligence-record';
 
 /**
  * C32: a long text kept whole or cut at a sentence end, never mid-sentence. Under `max` it is returned as is; over it,
@@ -60,17 +61,87 @@ export interface BriefingLinks {
   account?: (name: string) => string;
   /** C32: the account's deal brief (the deal workspace), for an item at an account with an open deal. */
   deal?: (name: string) => string;
+  /** IW12: the complete retained intelligence with filters (the Intelligence page), so an omission today is never a loss. */
+  intelligence?: string;
 }
 
 /** I04: the day's intelligence for the briefing (work/intel.ts) with the prepared angles by item key. */
 export interface BriefingIntel {
   signals: IntelItem[];
+  /** IW11: the producers' imported records as their own group (newest report first); absent on an older caller. */
+  reports?: IntelItem[];
+  /** IW06: the vault's recent calls and meetings, their own group (no decisions). */
+  knowledge?: IntelItem[];
   triggers: IntelItem[];
   people: IntelItem[];
   /** I05: what Casey pursued, with the angle when it is ready. */
   pursued?: PursuedItem[];
-  totals: { signals: number; triggers: number; people: number };
+  totals: { signals: number; triggers: number; people: number; reports?: number; knowledge?: number };
   angles: Record<string, { whyItMatters: string; starters: string[]; peopleNamed: Array<{ name: string | null; title: string | null }>; proposedAction: string }>;
+  /** IW12/IW13: the producers' coverage in words (which sources were read and when; which were not), printed under the section head. */
+  coverage?: { sources: string; unavailable: string | null } | null;
+  /** IW12: the item keys shown in recent briefings: they rotate behind the unseen, so an omission today is not permanent. */
+  shownBefore?: string[];
+  /** IW11: the digest sizes (configurable; DEFAULT_DIGEST when absent). */
+  digest?: Partial<DigestSizes>;
+}
+
+/** IW11: how many items the email carries and the reserved slots per section (your briefs, what GAP found, triggers, the vault). */
+export interface DigestSizes {
+  signals: number;
+  people: number;
+  reserved: { reports: number; found: number; triggers: number; vault: number };
+}
+export const DEFAULT_DIGEST: DigestSizes = Object.freeze({ signals: 6, people: 5, reserved: Object.freeze({ reports: 2, found: 2, triggers: 1, vault: 1 }) }) as DigestSizes;
+
+export interface Digest {
+  worth: IntelItem[];
+  people: IntelItem[];
+  /** The undecided items beyond the ones shown (the complete list is the Intelligence page). */
+  omitted: number;
+  breakdown: { reports: number; found: number; triggers: number; vault: number };
+  /** How many shown-before items were moved behind the unseen. */
+  rotated: number;
+  keys: string[];
+}
+const EMPTY_DIGEST: Digest = { worth: [], people: [], omitted: 0, breakdown: { reports: 0, found: 0, triggers: 0, vault: 0 }, rotated: 0, keys: [] };
+
+/**
+ * IW11: the digest, by a rule the email states: four sections (your briefs' imported records, the signals GAP found,
+ * the triggers, the vault's conversations) each get reserved slots (2, 2, 1, 1 of 6 by default), filled in rank order
+ * with the items not shown in a recent briefing first; the remaining slots go to the sections in turn (briefs, found,
+ * triggers, vault) until the digest is full; the email lists the sections in that order. No usefulness gate: an
+ * omitted item is counted, listed on the Intelligence page, and rotates in.
+ */
+export function composeDigest(intel: Pick<BriefingIntel, 'signals' | 'reports' | 'knowledge' | 'triggers' | 'people' | 'totals'>, opts: { sizes?: Partial<DigestSizes>; shownBefore?: ReadonlySet<string> } = {}): Digest {
+  const sizes: DigestSizes = { ...DEFAULT_DIGEST, ...(opts.sizes ?? {}), reserved: { ...DEFAULT_DIGEST.reserved, ...(opts.sizes?.reserved ?? {}) } };
+  const seen = opts.shownBefore ?? new Set<string>();
+  const order = (items: IntelItem[]) => [...items.filter((i) => !seen.has(i.key)), ...items.filter((i) => seen.has(i.key))];
+  // The briefs' group comes from the reader (newest report first); an older caller's signals carry them inline.
+  const reports = order([...(intel.reports ?? []), ...intel.signals.filter((s) => s.substance)].filter((it, i, all) => all.findIndex((x) => x.key === it.key) === i));
+  const found = order(intel.signals.filter((s) => !s.substance));
+  const triggers = order(intel.triggers);
+  const vault = order((intel.knowledge ?? []).filter((k) => k.kind === 'knowledge'));
+  const sections: Array<{ name: keyof DigestSizes['reserved']; items: IntelItem[]; picked: IntelItem[] }> = [
+    { name: 'reports', items: reports, picked: [] },
+    { name: 'found', items: found, picked: [] },
+    { name: 'triggers', items: triggers, picked: [] },
+    { name: 'vault', items: vault, picked: [] },
+  ];
+  const seenKeys = new Set<string>();
+  let count = 0;
+  const take = (s: (typeof sections)[number], n: number) => { for (const it of s.items) { if (count >= sizes.signals || n <= 0) break; if (seenKeys.has(it.key)) continue; seenKeys.add(it.key); s.picked.push(it); count += 1; n -= 1; } };
+  for (const s of sections) take(s, sizes.reserved[s.name]);
+  // The remaining slots: the sections in turn until the digest is full or nothing is left.
+  const total = sections.reduce((n, s) => n + s.items.length, 0);
+  while (count < sizes.signals && seenKeys.size < total) for (const s of sections) take(s, 1);
+  const worth = sections.flatMap((s) => s.picked);
+  const people = intel.people.slice(0, sizes.people);
+  const breakdown = { reports: sections[0].picked.length, found: sections[1].picked.length, triggers: sections[2].picked.length, vault: sections[3].picked.length };
+  const omitted = Math.max(0, intel.totals.signals + intel.totals.triggers + (intel.totals.reports ?? 0) + (intel.totals.knowledge ?? 0) - worth.length);
+  // The shown-before items that wait behind the unseen this time.
+  const rotated = sections.flatMap((s) => s.items).filter((i) => seen.has(i.key) && !seenKeys.has(i.key)).length;
+  return { worth, people, omitted, breakdown, rotated, keys: [...worth, ...people].map((i) => i.key) };
 }
 
 export interface BriefingInput {
@@ -90,6 +161,8 @@ export interface RenderedBriefing {
   subject: string;
   text: string;
   html: string;
+  /** IW12: what the email selected (the keys), what it omitted and how it was composed, for the sent row. */
+  digest: { keys: string[]; omitted: number; breakdown: { reports: number; found: number; triggers: number }; rotated: number };
 }
 
 const dayLabel = (day: string) => {
@@ -98,6 +171,8 @@ const dayLabel = (day: string) => {
 };
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+/** IW10: an imported passage is printed whole up to this many characters, cut at a sentence end past it. */
+const SUBSTANCE_MAX = 700;
 const endSentence = (s: string) => (/[.!?]$/.test(s.trim()) ? s.trim() : `${s.trim()}.`);
 
 function who(it: PlanItem): string | null {
@@ -173,10 +248,12 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
   const n = plan.items.length;
   const intel = input.intel ?? null;
   // C31: the intelligence SHOWN (the same selection the sections render), counted apart from the execution count.
-  const worthAll = intel ? [...intel.signals.slice(0, 4), ...intel.triggers.slice(0, 2), ...intel.signals.slice(4), ...intel.triggers.slice(2)].slice(0, 6) : [];
-  const peopleAll = intel ? intel.people.slice(0, 5) : [];
+  // IW11: composed by the stated rule (composeDigest): reserved slots per section, the unseen first, sizes configurable.
+  const digest = intel ? composeDigest(intel, { sizes: intel.digest, shownBefore: new Set(intel.shownBefore ?? []) }) : EMPTY_DIGEST;
+  const worthAll = digest.worth;
+  const peopleAll = digest.people;
   const toDecide = worthAll.length + peopleAll.length;
-  const decideTotal = intel ? intel.totals.signals + intel.totals.triggers + intel.totals.people : 0;
+  const decideTotal = intel ? intel.totals.signals + intel.totals.triggers + intel.totals.people + (intel.totals.reports ?? 0) + (intel.totals.knowledge ?? 0) : 0;
   const execText = n === 0 ? 'nothing to execute' : `${n} to execute`;
   const countText = toDecide > 0 ? `${execText}, ${toDecide} to decide` : n === 0 ? 'nothing needs you' : execText;
   const subject = `GAP today, ${label}: ${countText} [GAP#${input.dayToken}]`;
@@ -224,11 +301,16 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
     const step = d?.nextStep ? ` Next step: ${endSentence(clipAtSentence(d.nextStep, 400))}` : '';
     return { text: `In a deal at ${it.accountName}: ${name}${d?.stage ? ` (${d.stage})` : ''}.${step} Work it from the deal: ${href}`, href };
   };
-  // I05: what Casey pursued comes first: the angle when it is ready, the state when it is not.
-  const pursued = (intel?.pursued ?? []).slice(0, 6);
-  if (pursued.length) {
-    lines.push('', `Pursued (${pursued.length}): what GAP prepared on your decisions.`);
-    html.push(`<h3>Pursued (${pursued.length})</h3><p style="color:#666">What GAP prepared on your decisions.</p><ul>`);
+  // I05, moved by the intelligence wiring (2026-10-09): what Casey pursued FOLLOWS the newly collected intelligence
+  // (the angle when it is ready, the state when it is not), capped at three with the rest on Work, so an old pursued
+  // angle never sits ahead of what was collected today while staying reachable.
+  const pursuedAll = intel?.pursued ?? [];
+  const pursued = pursuedAll.slice(0, 3);
+  const renderPursued = () => {
+    if (!pursued.length) return;
+    const more = pursuedAll.length - pursued.length;
+    lines.push('', `Pursued (${pursued.length}${more > 0 ? ` of ${pursuedAll.length}` : ''}): what GAP prepared on your decisions.${more > 0 ? ` ${more} more on Work.` : ''}`);
+    html.push(`<h3>Pursued (${pursued.length}${more > 0 ? ` of ${pursuedAll.length}` : ''})</h3><p style="color:#666">What GAP prepared on your decisions.${more > 0 ? ` ${more} more on Work.` : ''}</p><ul>`);
     for (const p of pursued) {
       // C5 (2026-10-09): an ambiguous placement is said with its names, never "No account yet"; a read-time placement says its line.
       const where = p.accountName ?? (p.ambiguousAmong?.length ? (p.ambiguityLine ?? `Claimed by ${p.ambiguousAmong.join(' and ')}: choose the account`) : null) ?? p.accountHint ?? 'No account yet';
@@ -239,20 +321,63 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
       html.push(`<li>- ${esc(`${where}: ${p.title}. ${body}`)} <a href="${esc(open)}">${esc(p.accountName ? `Open ${p.accountName}` : 'Open Work')}</a></li>`);
     }
     html.push('</ul>');
-  }
-  if (intel && (intel.signals.length || intel.triggers.length || intel.people.length)) {
+  };
+  if (intel && (intel.signals.length || intel.reports?.length || intel.knowledge?.length || intel.triggers.length || intel.people.length)) {
     // Reserved slots (the review's finding 4): the top signals and the top triggers both reach the email.
     const worth = worthAll;
-    const worthTotal = intel.totals.signals + intel.totals.triggers;
+    const worthTotal = intel.totals.signals + intel.totals.triggers + (intel.totals.reports ?? 0) + (intel.totals.knowledge ?? 0);
+    // IW10: an imported record's substance under its line: the passage (whole, or cut at a sentence end), the
+    // producer's confidence in its words, its read labelled as such (never an obligation), the sources and CRM ids,
+    // the dates said as what they are. Imported text is data: escaped, never interpreted.
+    const substanceLines = (it: IntelItem): { text: string[]; html: string[] } => {
+      const s = it.substance;
+      if (!s) return { text: [], html: [] };
+      const oneLine = (v: string) => v.replace(/\s*\n+\s*/g, ' ').trim();
+      const text: string[] = [];
+      const htmlLines: string[] = [];
+      // Cut at a sentence end past the cap; a passage with no sentence end is cut hard at twice the cap.
+      const passage = clipAtSentence(oneLine(s.text), SUBSTANCE_MAX).slice(0, SUBSTANCE_MAX * 2);
+      text.push(`What was reported: ${passage}`);
+      htmlLines.push(`<b>What was reported:</b> ${esc(passage)}`);
+      if (s.uncertainty) { const u = clipAtSentence(oneLine(s.uncertainty), 320); text.push(`In the producer's words: ${u}`); htmlLines.push(`<b>In the producer's words:</b> ${esc(u)}`); }
+      if (s.interpretation) { const r = clipAtSentence(oneLine(s.interpretation), 320); text.push(`The producer's read (not an obligation): ${r}`); htmlLines.push(`<b>The producer's read (not an obligation):</b> ${esc(r)}`); }
+      const src = s.sources.filter((x) => x.url);
+      const ids = s.sourceRecordIds.map((r) => `${r.system} ${r.type} ${r.id}`);
+      if (src.length || ids.length) {
+        text.push(`${src.length ? `Sources: ${src.map((x) => `${x.label ?? x.publisher ?? 'source'} ${x.url}`).join('; ')}.` : ''}${ids.length ? ` CRM: ${ids.join(', ')}.` : ''}`.trim());
+        htmlLines.push(`${src.length ? `Sources: ${src.map((x) => `<a href="${esc(x.url as string)}">${esc(x.label ?? x.publisher ?? 'source')}</a>`).join('; ')}.` : ''}${ids.length ? ` CRM: ${esc(ids.join(', '))}.` : ''}`.trim());
+      }
+      const when = `Reported ${dateOnlyText(s.reportedOn)} by ${s.producerLabel}${s.reportedOnBasis === 'captured' ? ' (the capture date; the report states none)' : ''}${s.eventDate ? `; event date ${dateOnlyText(s.eventDate)}` : ''}; imported ${dateOnlyText(s.importedAt.slice(0, 10))}${s.revisions ? `; revised ${s.revisions} time${s.revisions === 1 ? '' : 's'}` : ''}${s.suggestions ? `; ${s.suggestions} drafted message${s.suggestions === 1 ? '' : 's'} archived, never sent` : ''}.`;
+      text.push(when);
+      htmlLines.push(esc(when));
+      return { text, html: htmlLines };
+    };
     const pushIntel = (it: IntelItem) => {
-      const d = decideLinks(it.key);
+      // IW06: a vault conversation has no decisions; the account page holds the moves.
+      const open = it.accountName && links.account ? links.account(it.accountName) : links.work;
+      const d = it.kind === 'knowledge' ? { text: `${it.accountName ? `Open ${it.accountName}` : 'Open Work'}: ${open}`, html: `<a href="${esc(open)}">${esc(it.accountName ? `Open ${it.accountName}` : 'Open Work')}</a>` } : decideLinks(it.key);
       const deal = dealLine(it);
-      lines.push(`- ${intelLine(it)}`, ...(deal ? [`   ${deal.text}`] : []), `   ${d.text}`);
-      html.push(`<li>- ${esc(intelLine(it))}${deal ? ` ${esc(deal.text.replace(/ Work it from the deal: .*$/, ''))} <a href="${esc(deal.href)}">Work it from the deal</a>` : ''} ${d.html}</li>`);
+      const sub = substanceLines(it);
+      lines.push(`- ${intelLine(it)}`, ...sub.text.map((l) => `   ${l}`), ...(deal ? [`   ${deal.text}`] : []), `   ${d.text}`);
+      html.push(`<li>- ${esc(intelLine(it))}${sub.html.length ? `<br/><span style="color:#444">${sub.html.join('<br/>')}</span>` : ''}${deal ? `<br/>${esc(deal.text.replace(/ Work it from the deal: .*$/, ''))} <a href="${esc(deal.href)}">Work it from the deal</a>` : ''}<br/>${d.html}</li>`);
     };
     if (worth.length) {
-      lines.push('', `Intelligence worth a look (${worth.length}${worthTotal > worth.length ? ` of ${worthTotal}` : ''}). Any age, for your call; Pursue and GAP develops the angle.`);
-      html.push(`<h3>Intelligence worth a look (${worth.length}${worthTotal > worth.length ? ` of ${worthTotal}` : ''})</h3><p style="color:#666">Any age, for your call; Pursue and GAP develops the angle.</p><ul>`);
+      // IW11/IW12: the rule in words beside the count, the omitted counted, the complete list linked, the sources' coverage.
+      const b = digest.breakdown;
+      const parts = [b.reports ? `${b.reports} from your briefs` : null, b.found ? `${b.found} found by GAP` : null, b.triggers ? `${b.triggers} trigger${b.triggers === 1 ? '' : 's'}` : null, b.vault ? `${b.vault} from the vault` : null].filter(Boolean).join(', ');
+      const how = `${parts ? `${parts}; ` : ''}${digest.omitted ? `${digest.omitted} more waiting` : 'nothing omitted'}${digest.rotated ? `; ${digest.rotated} shown in an earlier briefing wait behind the unseen` : ''}.`;
+      lines.push('', `Intelligence worth a look (${worth.length}${worthTotal > worth.length ? ` of ${worthTotal}` : ''}). Any age, for your call; Pursue and GAP develops the angle. ${how}`);
+      html.push(`<h3>Intelligence worth a look (${worth.length}${worthTotal > worth.length ? ` of ${worthTotal}` : ''})</h3><p style="color:#666">Any age, for your call; Pursue and GAP develops the angle. ${esc(how)}</p>`);
+      if (intel.coverage) {
+        const cov = `${intel.coverage.sources}${intel.coverage.unavailable ? ` Not read this time: ${intel.coverage.unavailable}` : ''}`;
+        lines.push(`   ${cov}`);
+        html.push(`<p style="color:#666">${esc(cov)}</p>`);
+      }
+      if (links.intelligence) {
+        lines.push(`   Everything retained, with filters: ${links.intelligence}`);
+        html.push(`<p style="color:#666"><a href="${esc(links.intelligence)}">Everything retained, with filters</a></p>`);
+      }
+      html.push('<ul>');
       worth.forEach(pushIntel);
       html.push('</ul>');
     }
@@ -267,6 +392,7 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
     lines.push('', 'No intelligence is waiting for a decision today.');
     html.push('<p>No intelligence is waiting for a decision today.</p>');
   }
+  renderPursued();
   if (n === 0) {
     lines.push('', 'Nothing on the list needs you today. Open Work to see what is waiting and what is parked.');
     html.push('<p>Nothing on the list needs you today. Open Work to see what is waiting and what is parked.</p>');
@@ -332,5 +458,5 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
   const stamp = `Sent by GAP at ${now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/New_York' })} New York. This is an internal message to you; nothing in it went to a buyer.`;
   lines.push('', stamp);
   html.push(`<p style="color:#888;font-size:12px">${esc(stamp)}</p>`);
-  return { subject, text: lines.join('\n'), html: `<div style="font-family:system-ui,sans-serif;line-height:1.45">${html.join('\n')}</div>` };
+  return { subject, text: lines.join('\n'), html: `<div style="font-family:system-ui,sans-serif;line-height:1.45">${html.join('\n')}</div>`, digest: { keys: digest.keys, omitted: digest.omitted, breakdown: digest.breakdown, rotated: digest.rotated } };
 }

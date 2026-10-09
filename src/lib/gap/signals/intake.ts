@@ -26,7 +26,8 @@ import { isNetworkPrivateHost, isPrivateHost } from './private-hosts';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
 
-export const SIGNAL_ORIGINS = ['casey_share', 'conference_note', 'discovery', 'pounce_scan'] as const;
+/** report_import (intelligence wiring, 2026-10-09): a producer's exported record (signals/intelligence-import.ts), never a share. */
+export const SIGNAL_ORIGINS = ['casey_share', 'conference_note', 'discovery', 'pounce_scan', 'report_import'] as const;
 export type SignalOrigin = (typeof SIGNAL_ORIGINS)[number];
 export const NOTE_MAX = 1_000;
 export const HINT_MAX = 200;

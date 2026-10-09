@@ -14,6 +14,7 @@ import { loadSpend, spendLimits } from '../ai/spend';
 import { SELLER_SETTINGS_KEY } from '../work/settings';
 import { vaultTableStatus } from '../knowledge/vault-table-adapter';
 import { lastVaultSync } from '../knowledge/vault-sync';
+import { loadProducerStatus } from '../signals/producer-status';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -169,7 +170,7 @@ export async function loadHealthInputs(prisma: PrismaLike, deps: HealthDeps = {}
 
   const config = (key: string) => (typeof prisma?.systemConfig?.findUnique === 'function' ? prisma.systemConfig.findUnique({ where: { key } }).catch(() => null) : Promise.resolve(null));
   const day = nyDay(new Date(clock()));
-  const [cron, lastRun, hs, sup, briefingCron, agentsCron, settingsRow, sentToday, failedToday, tasks, spend, credits, context] = await Promise.all([
+  const [cron, lastRun, hs, sup, briefingCron, agentsCron, settingsRow, sentToday, failedToday, tasks, spend, credits, context, producers] = await Promise.all([
     config('cron:gap-mailbox'),
     prisma.gapAuditEvent.findMany({ where: { kind: ROUTING_RUN_DONE }, orderBy: { created_at: 'desc' }, take: 25, select: { created_at: true, payload: true } }).catch(() => []),
     hubspotConfigured ? timed(deps.hubspotPing ?? defaultHubspotPing, clock, HEALTH_PROBE_TIMEOUT_MS) : Promise.resolve(null),
@@ -195,6 +196,9 @@ export async function loadHealthInputs(prisma: PrismaLike, deps: HealthDeps = {}
     env.AI_GATEWAY_API_KEY?.trim() ? timed(() => (deps.gatewayCredits ?? (() => defaultGatewayCredits(env)))(), clock, 5_000) : Promise.resolve(null),
     // C46: the context sources, soft and bounded.
     loadContextInputs(prisma, deps, env, clock, hubspotConfigured).catch((e: unknown) => ({ failed: (e instanceof Error ? e.message : String(e)).slice(0, 160) })),
+    // IW13: the intelligence producers, read from the import ledger and the signal rows. A client without the signal
+    // table is not read (no component); a read that throws is null (said unreadable).
+    typeof prisma?.gapSignal?.count === 'function' ? loadProducerStatus(prisma, new Date(clock()), { env }).catch(() => null) : Promise.resolve(undefined),
   ]);
 
   let state: Record<string, unknown> = {};
@@ -254,6 +258,7 @@ export async function loadHealthInputs(prisma: PrismaLike, deps: HealthDeps = {}
       failedFinalToday: (Array.isArray(tasks) ? tasks : []).filter((t) => t.status === 'failed' && t.final && nyDay(new Date(t.queuedAt)) === day).length,
     },
     context,
+    ...(producers !== undefined ? { producers } : {}),
     model: spend ? { month: spend.month, label: spend.label, monthUsd: spend.monthUsd, ceilingUsd: spend.ceilingUsd, warnFraction: spendLimits(env).warnFraction, calls: spend.calls, failed: spend.failed, refused: spend.refused, inFlight: spend.inFlight, lastCall: spend.lastCall ? { at: spend.lastCall.at, outcome: spend.lastCall.outcome, model: spend.lastCall.model, errorCategory: spend.lastCall.errorCategory } : null, credits: credits && credits.ok && Number.isFinite(credits.value.balance) ? credits.value : null } : undefined,
   };
 }
