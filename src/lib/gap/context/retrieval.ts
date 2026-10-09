@@ -310,13 +310,17 @@ function accountNoteClaims(ctx: VaultCtx, path: string, text: string): { links: 
     const dated = /inbox notes|next action|history|timeline|touches|notes/i.test(s.heading);
     const pick = items.length ? items : paragraphs(s.text).slice(0, 2);
     if (items.length > MAX_CLAIMS_PER_SECTION) ctx.truncated.push(`${s.heading}: ${items.length - MAX_CLAIMS_PER_SECTION} more bullets not read`);
+    // C57 F4 (C15 at the vault path): a section that is a SYNC block ("Live signals (clawd, 2026-10-08)", "Ecosystem engagement
+    // (PostHog, 45d to 2026-08-31)") carries a stamp in its heading: that date is when the block was written, the index time, never
+    // what its bullets observed (a July wedge under an October stamp stays July or undated). Only a bullet's own leading date is its observation.
+    const syncSection = /live signals|ecosystem engagement|clawd|posthog|sync|refreshed|rebuilt/i.test(s.heading);
+    const headDate = isoDay(s.heading);
+    const sectionIndexedAt = syncSection && headDate ? dayIso(headDate) : indexedAt;
     for (const item of pick.slice(0, MAX_CLAIMS_PER_SECTION)) {
-      // The section's date when the section heading carries one ("Live signals (clawd, 2026-10-08)"); the bullet's own leading date otherwise.
-      const own = dated ? isoDay(item.slice(0, 24)) : null;
-      const headDate = isoDay(s.heading);
-      const observedAt = dayIso(own) ?? dayIso(headDate);
+      const own = dated || syncSection ? isoDay(item.slice(0, 24)) : null;
+      const observedAt = dayIso(own) ?? (syncSection ? null : dayIso(headDate));
       const clean = item.replace(/\s*Source:\s*(\[\[[^\]]+\]\],?\s*)+\.?$/i, '').replace(/\[\[([^\]|#]+)(?:[#|][^\]]*)?\]\]/g, '$1');
-      push(ctx, claimOf(ctx, { path, heading: s.heading, text: clean, eventAt: observedAt, observedAt, indexedAt, classified: classifyVaultText(clean, { section: s.heading, others: ctx.others }) }));
+      push(ctx, claimOf(ctx, { path, heading: s.heading, text: clean, eventAt: observedAt, observedAt, indexedAt: sectionIndexedAt, classified: classifyVaultText(clean, { section: s.heading, others: ctx.others }) }));
       if (dated || /committee|sources|provenance/i.test(s.heading)) for (const l of wikiLinks(item)) if (!links.includes(l)) links.push(l);
     }
   }
@@ -529,8 +533,9 @@ async function retrieveVault(vault: VaultAdapter | null | undefined, input: Know
   if (index) index.lastSyncAt = nowIso;
   sync.lastSyncAt = nowIso;
   const partial = ctx.truncated.length > 0 || notFollowed.some((n) => n.reason === 'bound' || n.reason === 'unreadable');
-  // The newest OBSERVED date (a due date in next_action's eventAt is not a watermark).
-  const watermark = ctx.claims.map((c) => c.observedAt ?? '').filter(Boolean).sort().at(-1) ?? null;
+  // The newest OBSERVED date of a claim that is knowledge (a due date in next_action's eventAt is not a watermark; C57 F4: an
+  // internal-only or modeled line, such as a sync block's bullets, never makes the source look fresh).
+  const watermark = ctx.claims.filter((c) => c.claimClass !== 'internal_only' && c.claimClass !== 'modeled').map((c) => c.observedAt ?? '').filter(Boolean).sort().at(-1) ?? null;
   const omitted = [...ctx.truncated, ...notFollowed.filter((n) => n.reason !== 'other_account' && n.reason !== 'not_found').map((n) => `${n.link}: ${n.reason}`)];
   return { claims: ctx.claims, coverage: cov({ reachable: true, completeness: partial ? 'partial' : 'complete', watermark, indexedAt, query: accountPath, omittedReason: omitted.length ? omitted.join('; ') : null }), followed, notFollowed, sync, tombstones: history() };
 }

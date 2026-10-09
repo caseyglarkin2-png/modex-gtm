@@ -36,7 +36,11 @@ describe('C14: bounded account-specific retrieval from the vault', () => {
     expect(k.claims.some((c) => c.sourceId.includes('raw/2026-10-07') && /sub zero/.test(c.text))).toBe(false);
     expect(k.followed).toEqual(expect.arrayContaining(['05_Meetings/2026-07-16 Kenco Logistics.md', '00_Inbox/raw/2026-10-07-call-sales-standup.md', '03_People/Craig Morrison.md']));
     expect(k.notFollowed).toEqual(expect.arrayContaining([{ link: '2026-07-16 Ball Corporation', reason: 'other_account' }, { link: 'Dave Kiesling', reason: 'other_account' }, { link: '2026-07-29-call-sales-standup', reason: 'not_found' }]));
-    expect(k.coverage.find((c) => c.source === 'vault')).toMatchObject({ configured: true, reachable: true, completeness: 'complete', watermark: '2026-10-08T00:00:00.000Z', indexedAt: '2026-10-08T00:00:00.000Z', query: '02_Accounts/Kenco Logistics.md' });
+    expect(k.coverage.find((c) => c.source === 'vault')).toMatchObject({ configured: true, reachable: true, completeness: 'complete', watermark: '2026-10-07T00:00:00.000Z', indexedAt: '2026-10-08T00:00:00.000Z', query: '02_Accounts/Kenco Logistics.md' });
+    // C57 F4: the sync block's heading date is its index stamp, never an observation; the watermark comes from knowledge claims only.
+    const live = k.claims.filter((c) => c.sourceId.endsWith('#Live signals (clawd, 2026-10-08)'));
+    expect(live.length).toBeGreaterThan(0);
+    expect(live.every((c) => c.observedAt === null && c.eventAt === null && c.indexedAt === '2026-10-08T00:00:00.000Z' && c.claimClass === 'internal_only')).toBe(true);
   });
 
   it('unrelated accounts, private personal details, engagement and modeled figures never reach external use; the Ball note is not read at all', async () => {
@@ -53,7 +57,7 @@ describe('C14: bounded account-specific retrieval from the vault', () => {
     expect(k.claims.find((c) => /opened the YardFlow network deck/.test(c.text))).toMatchObject({ claimClass: 'internal_only' });
     expect(k.claims.find((c) => /\$98\.9M/.test(c.text))).toMatchObject({ claimClass: 'modeled', authority: 'modeled', visibility: 'internal' });
     expect(k.claims.find((c) => /no associated deal/.test(c.text))).toMatchObject({ claimClass: 'seller_noted', authority: 'seller_interpretation' });
-    expect(k.claims.find((c) => /already emailed/.test(c.text))).toMatchObject({ claimClass: 'internal_only', observedAt: '2026-10-08T00:00:00.000Z' });
+    expect(k.claims.find((c) => /already emailed/.test(c.text))).toMatchObject({ claimClass: 'internal_only', observedAt: null, indexedAt: '2026-10-08T00:00:00.000Z' });
   });
 
   it('C15: the October 8 refreshed file with an undated July wedge yields an undated claim; the September buyer mail would keep September (the validator refuses a refresh time as an observation)', async () => {
