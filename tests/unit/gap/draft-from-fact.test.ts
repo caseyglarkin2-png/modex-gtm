@@ -6,7 +6,7 @@
  * closed, an approved or active one as already in use; and (item 2a) a fact past its currentness with the words.
  */
 import { describe, expect, it, vi } from 'vitest';
-import { draftThesisFromFact, STORY_SET_ASIDE_DETAIL } from '@/lib/gap/story/draft-from-fact';
+import { draftFactRefusal, draftThesisFromFact, STORY_SET_ASIDE_DETAIL } from '@/lib/gap/story/draft-from-fact';
 import { VERIFIED_EXCERPT } from '@/lib/gap/research/evidence-gate';
 
 const NOW = new Date('2026-10-07T15:00:00Z');
@@ -43,9 +43,13 @@ describe('drafting a story again after it was set aside or used (item 2)', () =>
     expect(await draftThesisFromFact(prismaWith({ id: 'h-1', status: 'review_required', problem_family: 'hidden_capacity' }), input)).toMatchObject({ ok: true, preparation: 'submitted' });
   });
 
-  it('item 2a: a fact past its currentness is refused with the seller words, before anything is looked up or written', async () => {
-    const p = prismaWith(null, fact({ type: 'news', observed_at: new Date('2026-07-23T00:00:00Z') }));
-    expect(await draftThesisFromFact(p, input)).toEqual({ ok: false, reason: 'fact_not_outreach_evidence', detail: 'This story is too old for a first touch: it was current until Sep 5, 2026.' });
+  it('I06: a fact past its window DRAFTS (the copy says its date); a fact a newer source says ended, or an undated one, is refused with the seller words before anything is looked up or written', async () => {
+    const old = fact({ type: 'news', observed_at: new Date('2026-07-23T12:00:00Z') });
+    expect(draftFactRefusal(old, 'PepsiCo', NOW)).toBeNull();
+    const ended = fact({ type: 'news', observed_at: new Date('2026-07-23T12:00:00Z'), metadata: { verified: VERIFIED_EXCERPT, continuity: { kind: 'ended' } } });
+    const p = prismaWith(null, ended);
+    expect(await draftThesisFromFact(p, input)).toEqual({ ok: false, reason: 'fact_not_outreach_evidence', detail: 'A newer source says this ended: not a story for a first touch.' });
     expect(p.prospectingHypothesis.findFirst).not.toHaveBeenCalled();
+    expect(draftFactRefusal(fact({ observed_at: null }), 'PepsiCo', NOW)).toEqual({ reason: 'fact_not_outreach_evidence', detail: 'Undated: not a story for a first touch.' });
   });
 });

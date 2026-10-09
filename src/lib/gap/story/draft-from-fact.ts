@@ -21,7 +21,7 @@ import { isProblemFamily, type ProblemFamily } from '../taxonomy';
 import { approachFamilyDefault, proposeFamilyFor } from './propose-family';
 import type { EvidenceApproach } from '../research/approach-policy';
 import { sensitivityOf } from '../research/sensitivity';
-import { currentnessLine, factCurrentness } from '../research/currentness';
+import { factUsability, usabilityLine } from '../research/currentness';
 import { draftApproachFor } from './draft-approach';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -86,9 +86,10 @@ export const DRAFT_FACT_SELECT = { ...GATE_SIGNAL_SELECT, freshness_expires_at: 
 export function draftFactRefusal(fact: DraftFactRow | null, accountName: string, now: Date): { reason: 'fact_not_found' | 'signal_account_mismatch' | 'fact_not_outreach_evidence'; detail?: string } | null {
   if (!fact) return { reason: 'fact_not_found' };
   if ((fact.account_name ?? '').trim().toLowerCase() !== accountName.trim().toLowerCase()) return { reason: 'signal_account_mismatch' };
-  // Item 2a: the one freshness authority; the refusal says why in the seller's words.
-  const currentness = factCurrentness(fact, now);
-  if (!currentness.current) return { reason: 'fact_not_outreach_evidence', detail: currentnessLine(currentness) };
+  // I06: the one usability authority; a historical fact drafts (the copy says its date); ended, closed, undated or
+  // superseded refuses, in the seller's words.
+  const standing = factUsability(fact, now);
+  if (!standing.usable) return { reason: 'fact_not_outreach_evidence', detail: usabilityLine(standing, fact) };
   const refusal: OutreachFactRefusal | null = outreachFactRefusal(fact, accountName, { approach: draftApproachOf(fact) });
   if (refusal) return { reason: 'fact_not_outreach_evidence', detail: refusal };
   // The page never offers a sensitive fact (layoffs, a lawsuit) as the hook; the service refuses it the same way.
