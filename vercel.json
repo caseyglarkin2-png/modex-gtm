@@ -70,6 +70,10 @@
     {
       "path": "/api/cron/gap-agent-tasks/",
       "schedule": "*/5 * * * *"
+    },
+    {
+      "path": "/api/cron/gap-vault-sync/",
+      "schedule": "12,42 * * * *"
     }
   ]
 }

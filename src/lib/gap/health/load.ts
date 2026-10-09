@@ -12,6 +12,8 @@ import { nyDay } from '../work/dates';
 import { listAgentTasks } from '../agents/tasks';
 import { loadSpend, spendLimits } from '../ai/spend';
 import { SELLER_SETTINGS_KEY } from '../work/settings';
+import { vaultTableStatus } from '../knowledge/vault-table-adapter';
+import { lastVaultSync } from '../knowledge/vault-sync';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -78,9 +80,25 @@ async function defaultSentProbe(env: Record<string, string | undefined>, now: Da
   await listSentTo(sender, sender.userEmail, nowS - 7 * 86_400, nowS);
 }
 
-async function defaultKnowledge(env: Record<string, string | undefined>, input: { accountName: string; domain: string | null; now: Date }) {
+async function defaultKnowledge(prisma: PrismaLike, env: Record<string, string | undefined>, input: { accountName: string; domain: string | null; now: Date }) {
   const { loadAccountKnowledge } = await import('../story/load');
-  return loadAccountKnowledge({ accountName: input.accountName, domain: input.domain, now: input.now }, { env });
+  // Stream A: the table-backed vault is read through the health's own prisma (the local directory still wins when set).
+  return loadAccountKnowledge({ accountName: input.accountName, domain: input.domain, now: input.now }, { env, prisma });
+}
+
+/** Stream A: the synced vault table itself (rows, the newest sync, the counts by kind) and the last cron tick's fate from the ledger. */
+async function loadVaultTable(prisma: PrismaLike, env: Record<string, string | undefined>): Promise<NonNullable<Exclude<HealthInputs['context'], { failed: string }>>['vaultTable']> {
+  const tokenConfigured = !!env.GAP_VAULT_GITHUB_TOKEN?.trim();
+  const localDir = !!env.GAP_VAULT_DIR?.trim();
+  // A client that does not know the model at all (an older stub) has nothing to probe: absent, nothing claimed. A client
+  // that knows it and cannot read it (the migration not applied) is said unreadable.
+  if (typeof prisma?.gapKnowledgeNote?.count !== 'function') return undefined;
+  try {
+    const [status, last] = await Promise.all([vaultTableStatus(prisma), lastVaultSync(prisma).catch(() => null)]);
+    return { readable: true, rows: status.rows, lastSyncedAt: status.syncedAt, kinds: status.kinds, tokenConfigured, localDir, lastSync: last ? { ok: last.ok, at: last.at, error: last.error, written: last.written, skipped: last.skipped } : null };
+  } catch (e) {
+    return { readable: false, error: (e instanceof Error ? e.message : String(e)).slice(0, 160), tokenConfigured, localDir };
+  }
 }
 
 /** C46: the context sources, each read soft and bounded; an unreadable source is said as such, never as empty. */
@@ -103,8 +121,9 @@ async function loadContextInputs(prisma: PrismaLike, deps: HealthDeps, env: Reco
   const [assoc, sent, knowledge] = await Promise.all([
     hubspotConfigured ? timed(deps.associationsProbe ?? defaultAssociationsProbe, clock, HEALTH_PROBE_TIMEOUT_MS) : Promise.resolve(null),
     gapSender ? timed(deps.sentProbe ?? (() => defaultSentProbe(env, now)), clock, HEALTH_PROBE_TIMEOUT_MS) : Promise.resolve(null),
-    canary ? timed(() => (deps.knowledge ?? ((i) => defaultKnowledge(env, i)))({ accountName: canary.account, domain: canary.domain, now }), clock, HEALTH_PROBE_TIMEOUT_MS) : Promise.resolve(null),
+    canary ? timed(() => (deps.knowledge ?? ((i) => defaultKnowledge(prisma, env, i)))({ accountName: canary.account, domain: canary.domain, now }), clock, HEALTH_PROBE_TIMEOUT_MS) : Promise.resolve(null),
   ]);
+  const vaultTable = await loadVaultTable(prisma, env);
   const cov = (source: 'vault' | 'clawd'): ContextSourceCoverage => {
     if (!knowledge) return { configured: false, reachable: false, completeness: 'unknown', watermark: null, indexedAt: null, omittedReason: canary ? 'not probed' : 'no account on record to probe with' };
     if (!knowledge.ok) return { configured: true, reachable: false, completeness: 'unknown', watermark: null, indexedAt: null, omittedReason: knowledge.error };
@@ -119,6 +138,7 @@ async function loadContextInputs(prisma: PrismaLike, deps: HealthDeps, env: Reco
     vault: cov('vault'),
     clawd: cov('clawd'),
     canary,
+    vaultTable,
   };
 }
 

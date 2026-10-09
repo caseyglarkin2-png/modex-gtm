@@ -126,8 +126,8 @@ export async function syncVaultNotes(prisma: PrismaLike, candidates: readonly Sy
       const accountName = await resolve(parsed.accountName, parsed.domain);
       const row = knowledgeRowOf(parsed, { accountName, vaultPushedAt: opts.vaultPushedAt ?? null, syncedAt: now });
       if (c.gitSha) row.git_sha = c.gitSha;
-      const { path: _p, ...data } = row;
-      await prisma.gapKnowledgeNote.upsert({ where: { path: parsed.path }, create: { path: parsed.path, ...data }, update: data });
+      const { path: notePath, ...data } = row;
+      await prisma.gapKnowledgeNote.upsert({ where: { path: notePath }, create: { path: notePath, ...data }, update: data });
       counts.written += 1;
     } catch (e) {
       counts.errors.push({ path: c.path, error: (e instanceof Error ? e.message : String(e)).slice(0, 200) });
