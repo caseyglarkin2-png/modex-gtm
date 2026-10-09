@@ -301,11 +301,16 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
     const step = d?.nextStep ? ` Next step: ${endSentence(clipAtSentence(d.nextStep, 400))}` : '';
     return { text: `In a deal at ${it.accountName}: ${name}${d?.stage ? ` (${d.stage})` : ''}.${step} Work it from the deal: ${href}`, href };
   };
-  // I05: what Casey pursued comes first: the angle when it is ready, the state when it is not.
-  const pursued = (intel?.pursued ?? []).slice(0, 6);
-  if (pursued.length) {
-    lines.push('', `Pursued (${pursued.length}): what GAP prepared on your decisions.`);
-    html.push(`<h3>Pursued (${pursued.length})</h3><p style="color:#666">What GAP prepared on your decisions.</p><ul>`);
+  // I05, moved by the intelligence wiring (2026-10-09): what Casey pursued FOLLOWS the newly collected intelligence
+  // (the angle when it is ready, the state when it is not), capped at three with the rest on Work, so an old pursued
+  // angle never sits ahead of what was collected today while staying reachable.
+  const pursuedAll = intel?.pursued ?? [];
+  const pursued = pursuedAll.slice(0, 3);
+  const renderPursued = () => {
+    if (!pursued.length) return;
+    const more = pursuedAll.length - pursued.length;
+    lines.push('', `Pursued (${pursued.length}${more > 0 ? ` of ${pursuedAll.length}` : ''}): what GAP prepared on your decisions.${more > 0 ? ` ${more} more on Work.` : ''}`);
+    html.push(`<h3>Pursued (${pursued.length}${more > 0 ? ` of ${pursuedAll.length}` : ''})</h3><p style="color:#666">What GAP prepared on your decisions.${more > 0 ? ` ${more} more on Work.` : ''}</p><ul>`);
     for (const p of pursued) {
       // C5 (2026-10-09): an ambiguous placement is said with its names, never "No account yet"; a read-time placement says its line.
       const where = p.accountName ?? (p.ambiguousAmong?.length ? (p.ambiguityLine ?? `Claimed by ${p.ambiguousAmong.join(' and ')}: choose the account`) : null) ?? p.accountHint ?? 'No account yet';
@@ -316,7 +321,7 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
       html.push(`<li>- ${esc(`${where}: ${p.title}. ${body}`)} <a href="${esc(open)}">${esc(p.accountName ? `Open ${p.accountName}` : 'Open Work')}</a></li>`);
     }
     html.push('</ul>');
-  }
+  };
   if (intel && (intel.signals.length || intel.reports?.length || intel.knowledge?.length || intel.triggers.length || intel.people.length)) {
     // Reserved slots (the review's finding 4): the top signals and the top triggers both reach the email.
     const worth = worthAll;
@@ -387,6 +392,7 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
     lines.push('', 'No intelligence is waiting for a decision today.');
     html.push('<p>No intelligence is waiting for a decision today.</p>');
   }
+  renderPursued();
   if (n === 0) {
     lines.push('', 'Nothing on the list needs you today. Open Work to see what is waiting and what is parked.');
     html.push('<p>Nothing on the list needs you today. Open Work to see what is waiting and what is parked.</p>');

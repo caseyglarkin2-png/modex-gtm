@@ -16,7 +16,17 @@ import { PrismaClient } from '@prisma/client';
 import { readdir, readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { isSyncedVaultPath, normalizeVaultPath, VAULT_SYNC_FOLDERS } from '../../src/lib/gap/knowledge/vault-note';
+import { execFileSync } from 'node:child_process';
 import { MAX_FILES_PER_RUN, recordVaultSync, reresolveKnowledgeAccounts, syncVaultNotes, type SyncCandidate } from '../../src/lib/gap/knowledge/vault-sync';
+
+/** The vault's git head (sha, branch, commit time) when the folder is a repository; nulls otherwise. Never throws. */
+function vaultHead(dir: string): { sha: string | null; branch: string | null; at: string | null } {
+  const git = (args: string[]) => { try { return execFileSync('git', ['-C', dir, ...args], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim() || null; } catch { return null; } };
+  const sha = git(['rev-parse', 'HEAD']);
+  const branch = git(['rev-parse', '--abbrev-ref', 'HEAD']);
+  const at = git(['log', '-1', '--format=%cI']);
+  return { sha, branch: branch && branch !== 'HEAD' ? branch : null, at: at && !Number.isNaN(Date.parse(at)) ? new Date(at).toISOString() : null };
+}
 
 const DEFAULT_VAULT = 'C:/Users/casey/Documents/Obsidian/YardFlow-GTM-Obsidian-Vault';
 
@@ -80,7 +90,9 @@ async function main() {
     for (const [kind, n] of Object.entries(counts.byKind)) if (n) console.log(`  ${kind}: ${n} read`);
     for (const e of counts.errors.slice(0, 20)) console.log(`  error ${e.path}: ${e.error}`);
     if (APPLY) {
-      await recordVaultSync(prisma, { ok: true, repo: `local:${path.basename(VAULT)}`, branch: 'local', commitSha: null, treeSha: null, commitAt: null, etag: null, counts, durationMs: Date.now() - t0, error: null, skipped: null }, 'casey:vault-push');
+      // The source revision: the local vault's git head (and its commit time), so the sync line can say which revision it holds.
+      const head = vaultHead(VAULT);
+      await recordVaultSync(prisma, { ok: true, repo: `local:${path.basename(VAULT)}`, branch: head.branch ?? 'local', commitSha: head.sha, treeSha: null, commitAt: head.at, etag: null, counts, durationMs: Date.now() - t0, error: null, skipped: null }, 'casey:vault-push');
       console.log(`applied: ${await prisma.gapKnowledgeNote.count()} rows on record; one knowledge.vault_synced ledger row`);
     } else {
       console.log('dry run: nothing written');

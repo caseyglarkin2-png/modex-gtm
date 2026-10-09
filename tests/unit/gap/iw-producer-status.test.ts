@@ -71,10 +71,15 @@ describe('loadProducerStatus', () => {
     expect(other).toMatchObject({ label: 'some_new_tool', cadenceDays: 7, state: 'current' });
     expect(by(list, 'freight_x_signal_desk').state).toBe('never');
     // Short forms and the paragraph.
-    expect(producerShort(yfb)).toBe('Yards First Brief Oct 9, 2026 (3 items)');
-    expect(producerShort(hs)).toBe('HubSpot Activity & Engagement report: stalled since Oct 6, 2026');
+    // Two dates (the second list, item 2): the newest report's date, then the import's.
+    expect(producerShort(yfb)).toMatch(/^Yards First Brief (reports through [A-Z][a-z]{2} \d{1,2}, \d{4}, )?imported Oct 9, 2026 \(3 items\)$/);
+    expect(producerShort(hs)).toMatch(/^HubSpot Activity & Engagement report: stalled since Oct 6, 2026( \(reports through [A-Z][a-z]{2} \d{1,2}, \d{4}\))?$/);
     expect(producerShort(clawd)).toBe('Clawd signal hunter: failed Oct 8, 2026');
-    expect(producerStatusLine(list)).toBe('Sources: Yards First Brief Oct 9, 2026 (3 items); some_new_tool Oct 4, 2026 (0 items). Not read this time: Freight X Signal Desk: never imported; HubSpot Activity & Engagement report: stalled since Oct 6, 2026; Clawd signal hunter: failed Oct 8, 2026; the vault: never synced.');
+    const line = producerStatusLine(list);
+    expect(line.startsWith('Sources: Yards First Brief ')).toBe(true);
+    expect(line).toContain('imported Oct 9, 2026 (3 items); some_new_tool ');
+    expect(line).toContain('imported Oct 4, 2026 (0 items). Not read this time: Freight X Signal Desk: never imported; HubSpot Activity & Engagement report: stalled since Oct 6, 2026');
+    expect(line.endsWith('; Clawd signal hunter: failed Oct 8, 2026; the vault: never synced.')).toBe(true);
   });
 
   it('a partial run followed by a later run advances the cursor and the state; a later run without a cursor keeps the last one', async () => {
@@ -106,7 +111,7 @@ describe('loadProducerStatus', () => {
     expect(noToken.line).toBe('the vault: synced Oct 9, 2026 (2 notes) by the local push; the cron waits for its GitHub token.');
     const withToken = by(await loadProducerStatus(db.client(), NOW, { env: { GAP_VAULT_GITHUB_TOKEN: 'set' } }), 'vault');
     expect(withToken.line).toBe('the vault: synced Oct 9, 2026 (2 notes) by the local push; the cron has not run yet.');
-    expect(producerShort(withToken)).toBe('the vault Oct 9, 2026 (2 notes)');
+    expect(producerShort(withToken)).toMatch(/^the vault (reports through [A-Z][a-z]{2} \d{1,2}, \d{4}, )?imported Oct 9, 2026 \(2 notes\)$/);
     db.store.gapAuditEvent.push({ id: 'v2', kind: VAULT_SYNCED_KIND, actor: 'cron:gap-vault-sync', subject_type: 'vault', subject_id: 'o/r', payload: { ok: true, repo: 'o/r', branch: 'main', commitSha: 'c1', treeSha: 't1', commitAt: '2026-10-09T10:00:00.000Z', etag: 'W/"e1"', counts: { seen: 20, unchangedByGitSha: 8, unchangedBySha: 0, read: 12, written: 12, remaining: 0, byKind: {}, errors: [] }, durationMs: 900, error: null, skipped: null }, created_at: day(0.2) });
     const cron = by(await loadProducerStatus(db.client(), NOW, { env: { GAP_VAULT_GITHUB_TOKEN: 'set' } }), 'vault');
     expect(cron).toMatchObject({ state: 'current', lastRunId: 'c1', lastReportedOn: '2026-10-09', cursor: 'W/"e1"', lastCounts: { accepted: 12, duplicates: 8 } });

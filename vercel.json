@@ -74,6 +74,10 @@
     {
       "path": "/api/cron/gap-vault-sync/",
       "schedule": "12,42 * * * *"
+    },
+    {
+      "path": "/api/cron/gap-clawd-import/",
+      "schedule": "20 */2 * * *"
     }
   ]
 }

@@ -155,10 +155,12 @@ async function vaultStatus(prisma: PrismaLike, now: Date, env: Record<string, st
 export function producerShort(s: ProducerStatus): string {
   const unit = s.producer === VAULT_PRODUCER ? 'note' : 'item';
   switch (s.state) {
+    // Two dates, never one: when the producer's newest report was written, and when GAP last imported. A reimport of
+    // an old report moves the second date only; the first says how fresh the information is.
     case 'current':
-      return `${s.label} ${dayWords(s.lastImportAt!)} (${plural(s.totalItems, unit)})`;
+      return `${s.label} ${s.lastReportedOn ? `reports through ${dateOnlyWords(s.lastReportedOn)}, ` : ''}imported ${dayWords(s.lastImportAt!)} (${plural(s.totalItems, unit)})`;
     case 'stale':
-      return `${s.label}: stalled since ${dayWords(s.lastImportAt!)}`;
+      return `${s.label}: stalled since ${dayWords(s.lastImportAt!)}${s.lastReportedOn ? ` (reports through ${dateOnlyWords(s.lastReportedOn)})` : ''}`;
     case 'failed':
       return `${s.label}: failed ${dayWords(s.lastImportAt!)}`;
     default:

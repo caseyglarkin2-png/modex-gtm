@@ -185,7 +185,8 @@ describe('I05: the pursued section and the reserved slots', () => {
     };
     const out = renderBriefing({ plan: PLAN, dayToken: 'tok', links, commandsEnabled: false, legacyDigest: false, intel }, NOW);
     const t = out.text;
-    expect(t.indexOf('Pursued (2): what GAP prepared on your decisions.')).toBeLessThan(t.indexOf('Intelligence worth a look'));
+    // Intelligence wiring (2026-10-09): newly collected intelligence leads; what Casey pursued follows it.
+    expect(t.indexOf('Pursued (2): what GAP prepared on your decisions.')).toBeGreaterThan(t.indexOf('Intelligence worth a look'));
     expect(t).toContain('- Kenco: Kenco opens new innovation lab. The angle: My guess is the lab standardizes the warehouses while the yards run on radio. Who: Dave Kiesling (VP Operations). Ask: How does the gate know where a trailer goes? Proposed: an email.');
     expect(t).toContain('   Open Kenco: https://x/accounts/kenco/');
     expect(t).toContain('- Tractor Supply Company: Tractor Supply opens Idaho DC. GAP is developing the angle; it comes back here and on Work.');
