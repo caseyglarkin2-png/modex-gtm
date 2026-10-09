@@ -1,6 +1,6 @@
 # GAP OS retrieval evaluation (C53)
 
-STATUS: MEASUREMENT, generated 2026-10-09T04:23:27.215Z by scripts/gap/retrieval-eval.ts over reference set v2 (12 cases, 24 runs: each case whole and with one source removed). Sink adapters, the real assembler; no model, no network. Regenerate rather than edit.
+STATUS: MEASUREMENT, generated 2026-10-09T04:40:21.892Z by scripts/gap/retrieval-eval.ts over reference set v3 (12 cases, 24 runs: each case whole and with one source removed). Sink adapters, the real assembler; no model, no network. Regenerate rather than edit.
 <!-- verified:2026-10-09 -->
 
 ## Per class (failures over runs checked; never one aggregate score)
@@ -14,6 +14,7 @@ STATUS: MEASUREMENT, generated 2026-10-09T04:23:27.215Z by scripts/gap/retrieval
 | unauthorized_exclusion | 24 | 0 |
 | instruction_safety | 24 | 0 |
 | opportunity_status | 24 | 0 |
+| missing_source_said | 24 | 0 |
 
 ## Runs
 
