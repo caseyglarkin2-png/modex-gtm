@@ -1,19 +1,19 @@
 # GAP OS deployment and configuration receipt
 
-STATUS: RECEIPT, generated 2026-10-09T11:52:37.154Z by scripts/gap/deployment-receipt.ts (reads only; no secret values; regenerate rather than edit).
+STATUS: RECEIPT, generated 2026-10-09T14:27:28.253Z by scripts/gap/deployment-receipt.ts (reads only; no secret values; regenerate rather than edit).
 <!-- verified:2026-10-09 -->
 
 Three things kept apart: the LOCAL CODE this receipt was generated from, the DEPLOYED ENVIRONMENT (the deployment Vercel serves on the production alias and the environment it snapshotted at build time), and the PROJECT SETTINGS (what the Vercel project holds now; a change here reaches production only with the next deploy).
 
 ## 1. Local code
 
-- Commit fd4091bc on feat/gap-execution-engine (uncommitted changes present); origin/main fd4091bc.
-- Local code IS the deployed commit (deployed fd4091bc).
+- Commit 6c87d497 on feat/gap-seller-acceptance (uncommitted changes present); origin/main 6c87d497.
+- Local code IS the deployed commit (deployed 6c87d497).
 
 ## 2. Deployed environment
 
-- Production alias modex-gtm.vercel.app serves deployment dpl_91j7Tf4qZPjJqqbBo7AMWCX6eVNU, state READY, commit fd4091bc, ready 2026-10-09T11:51:11.833Z (alias binding from the API: modex-gtm.vercel.app).
-- Other recent production deployments: dpl_G9KX6ZmwES9f719vk8jsrCcay6r1 READY a195467f 2026-10-09T01:47:22.876Z; dpl_8uZtsdeXsHBH7wNZsBQWomBESN24 READY cfce2f27 2026-10-09T01:42:56.040Z; dpl_ChJ8apYhQmWeQ9UgmBrNGHXno6rq READY ed9976e8 2026-10-09T01:37:25.771Z; dpl_F7CbnmnmAxGi2o6MFkY3n5sLiQtY READY 672b8694 2026-10-09T01:14:25.843Z.
+- Production alias modex-gtm.vercel.app serves deployment dpl_5GuaGMKtmVDPoTwKjNfqZjL9huM7, state READY, commit 6c87d497, ready 2026-10-09T14:25:08.364Z (alias binding from the API: modex-gtm.vercel.app).
+- Other recent production deployments: dpl_52y35agU6xqM4pqxGTACD2NVmpge READY 9e0d6e23 2026-10-09T12:03:41.320Z; dpl_91j7Tf4qZPjJqqbBo7AMWCX6eVNU READY fd4091bc 2026-10-09T11:51:11.833Z; dpl_G9KX6ZmwES9f719vk8jsrCcay6r1 READY a195467f 2026-10-09T01:47:22.876Z; dpl_8uZtsdeXsHBH7wNZsBQWomBESN24 READY cfce2f27 2026-10-09T01:42:56.040Z.
 - The environment a deployment runs with is the project environment snapshotted at ITS build; a project setting changed after that time is not in it until the next deploy.
 - Crons in the deployed build: not read (the local vercel.json below is the code's declaration; the deployed set is what Vercel registered at build).
 
@@ -27,7 +27,7 @@ Three things kept apart: the LOCAL CODE this receipt was generated from, the DEP
 ## 4. Baseline pointer
 
 - docs/gap/STABLE_BASELINE.md says: Production SHA: fd4091bc (PR #432, the commercial-context and execution audit C01-C60 with the client-chunk build fix b76dc1d5; Vercel `dpl_91j7Tf4qZPjJqqbBo7AMWCX6eVNU` READY 2026-10-09T11:51:11Z; rollback a195467f `dpl_G9KX6ZmwES9f719vk8j ...
-- That pointer AGREES with the deployed commit (fd4091bc).
+- HISTORICAL: that pointer names fd4091bc and the deployed commit is 6c87d497; the pointer is a record of an earlier state, not the live one. Update it at its owning surface when a change ships.
 
 ## 5. Last successful source reads (health)
 

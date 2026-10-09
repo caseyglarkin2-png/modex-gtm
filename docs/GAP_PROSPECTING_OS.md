@@ -3399,7 +3399,7 @@ Traps met and closed this session: the ledger fixture ignored `skip`, so a paged
 
 ## GAP OS SELLER ACCEPTANCE FOLLOW-UP — October 9, 2026 New York
 
-**Status words, kept apart:** IMPLEMENTED (code on the branch, focused suites green), DEPLOYED (on `modex-gtm.vercel.app`), SELLER-ACCEPTED (Casey's own round trip passed). As of this section's last stamp: IMPLEMENTED on `feat/gap-seller-acceptance`; NOT DEPLOYED; NOT ACCEPTED (the acceptance is Casey's reply, never marked on his behalf). <!-- verified:2026-10-09 -->
+**Status words, kept apart:** IMPLEMENTED (code on the branch, focused suites green), DEPLOYED (on `modex-gtm.vercel.app`), SELLER-ACCEPTED (Casey's own round trip passed). As of this section's last stamp: IMPLEMENTED; DEPLOYED (Casey, 2026-10-09: "continue, merge and deploy 434": PR #434 merged as 6c87d497, production `dpl_5GuaGMKtmVDPoTwKjNfqZjL9huM7` READY 2026-10-09T14:25:08Z, the alias bound; `/gap/` redirects to login and the APIs answer 401 without the secret); NOT ACCEPTED (the acceptance is Casey's reply, never marked on his behalf). After the deploy, on Casey's go: the October 9 reconcile APPLIED (two append-only rows at 2026-10-09: the Southern Glazer's reminder returned to its pre-DONE state and the note recorded as progress); Kenco Logistics Services MERGED into Kenco (`scripts/gap/merge-account.ts`, dry run then `--apply`: 74 rows re-pointed across 13 models, the canonical link and 21 open conflicts dropped, the account row deleted, the alias "Kenco Logistics Services" created through confirmAlias with the evidence, the canonical records re-synced: kencogroup.com now verified to Kenco, 0 open conflicts, the link resolved, Dave Kiesling and Craig Morrison placed by domain; one `account.merged` ledger row); the resend KEEPS refreshing the plan by default (the lead's call on Casey's "your call": an operator who asks for the briefing again wants the current plan, and the scheduled tick never refreshes); the refreshed briefing went out on the deployed code (revision 1, 14 items, Gmail thread 1a1210fc8fc58b7e, 2026-10-09T14:27:25Z). The START / NEXT / DONE / APPROVE round trip on that thread is the acceptance test, Casey's. <!-- verified:2026-10-09 -->
 
 **Casey's verdict (2026-10-09, after the first START on the released C01-C60 code):** the release shipped, the real START did not pass seller acceptance. Observed: the 7:51 resend replayed the 7:05 plan; START delivered Southern Glazer's / Diego Fonseca first on a May 20 automatic reply and a May 26 return date, said "Back today", acknowledged no supported angle and told him to research catalysts; the briefing duplicated that follow-up and showed Kenco's prepared angle as "No account yet". The outcome he needs: GAP uses the intelligence it holds to prepare and prioritize the most commercially useful work; his attention goes to judgment, relationships and execution, not routine research the agent can perform. No broad audit, no large backlog; fix the actual workflow.
 
@@ -3485,8 +3485,8 @@ Branch `feat/gap-seller-acceptance` (the lead), merged from `feat/gap-sa-a` (A: 
 ### Owner items (Casey)
 
 - The acceptance round trip itself: START on a refreshed plan, the first assignment, NEXT, a real DONE, an APPROVE on a prepared item. Never simulated.
-- Merge or alias Kenco Logistics Services into Kenco (dedup engine / HubSpot), which ends the ambiguity at the source.
-- Whether the resend (`?resend=1`) should keep refreshing the plan by default (implemented so) or only on request.
+- DONE 2026-10-09 on Casey's go: Kenco Logistics Services merged into Kenco (see the status line above); nothing to do in HubSpot (the duplicate had no HubSpot company).
+- The resend (`?resend=1`) keeps refreshing the plan by default (decided 2026-10-09 on Casey's "your call").
 
 ## 12. Migration, backfill and rollback
 
