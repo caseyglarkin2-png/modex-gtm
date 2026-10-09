@@ -447,3 +447,45 @@ describe('Release C review S5: a reply from the account holds first touches to a
     expect(await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d))).toMatchObject({ ok: true });
   });
 });
+
+describe('C57 pass 2 (P2-1, the sender side): a hand-written Gmail draft of Casey\'s to the person is outstanding too', () => {
+  const hand = (to = 'joey.maggard@kroger.com') => ({ id: 'hm-1', draftId: 'hd-1', threadId: null, internalDate: new Date('2026-09-25T12:00:00Z'), to: `Joey Maggard <${to}>`, subject: 'Quick one on your doors' });
+
+  it('a draft of his own to the person refuses the GAP first touch in words naming it as his; the Gmail create spy stays at zero; the refusal is ledgered and nothing is claimed', async () => {
+    const d = db();
+    const prisma = prismaOf(d);
+    const gmail = gmailFake();
+    const r = await createSellerGmailDraft(prisma, { decisionId: 'dec-joey', actor: 'casey', now: NOW }, { ...baseDeps(d, 'pass', gmail), mailboxDraftsTo: async () => [hand()] });
+    expect(r).toMatchObject({ ok: false, reason: 'draft_outstanding' });
+    expect(!r.ok && r.detail).toBe('A draft of yours to joey.maggard@kroger.com already sits in Gmail (Quick one on your doors, Sep 25); edit or send it in Gmail, or delete it there first.');
+    expect(gmail.createGmailDraft).not.toHaveBeenCalled();
+    expect(d.audit.filter((a) => a.kind === DRAFT_REFUSED).map((a) => a.payload.reason)).toEqual(['draft_outstanding']);
+    expect(d.audit.some((a) => String(a.kind).includes('draft_claimed'))).toBe(false);
+    expect(d.audit.filter((a) => a.kind === DRAFTED)).toHaveLength(0);
+  });
+
+  it('a reader that throws refuses as unknown ("Gmail drafts could not be read; try again"), never reaching Gmail', async () => {
+    const d = db();
+    const gmail = gmailFake();
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, { ...baseDeps(d, 'pass', gmail), mailboxDraftsTo: async () => { throw new Error('Gmail 503'); } });
+    expect(r).toMatchObject({ ok: false, reason: 'send_in_progress_or_unknown', detail: 'Gmail drafts could not be read (Gmail 503); try again.' });
+    expect(gmail.createGmailDraft).not.toHaveBeenCalled();
+  });
+
+  it('no hand draft to the person (one to someone else does not count): the GAP draft proceeds as today, once; the C39 snapshot check still comes first', async () => {
+    const d = db();
+    const prisma = prismaOf(d);
+    const gmail = gmailFake();
+    const reader = vi.fn(async () => [hand('someone.else@kroger.com')]);
+    const r = await createSellerGmailDraft(prisma, { decisionId: 'dec-joey', actor: 'casey', now: NOW }, { ...baseDeps(d, 'pass', gmail), mailboxDraftsTo: reader });
+    expect(r).toMatchObject({ ok: true, alreadyDrafted: false });
+    expect(gmail.createGmailDraft).toHaveBeenCalledTimes(1);
+    expect(reader).toHaveBeenCalledWith('joey.maggard@kroger.com');
+    // A stale snapshot refuses before the drafts are even read.
+    const d2 = db();
+    const reader2 = vi.fn(async () => [hand()]);
+    const stale = await createSellerGmailDraft(prismaOf(d2), { decisionId: 'dec-joey', actor: 'casey', now: NOW, expected: { revision: 0, contentHash: 'deadbeef', recipient: 'joey.maggard@kroger.com', senderIdentity: 'casey@freightroll.com' } }, { ...baseDeps(d2, 'pass', gmailFake()), mailboxDraftsTo: reader2 });
+    expect(stale).toMatchObject({ ok: false, reason: 'copy_changed_since_review' });
+    expect(reader2).not.toHaveBeenCalled();
+  });
+});
