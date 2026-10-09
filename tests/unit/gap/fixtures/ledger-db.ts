@@ -20,7 +20,7 @@ function table(rows: Row[], clock: () => Date, idPrefix: string) {
   let n = 0;
   return {
     rows,
-    findMany: async (q: { where?: Row; orderBy?: Row | Row[]; take?: number; select?: Row } = {}) => sortBy(rows.filter((r) => matchesWhere(r, q.where)), q.orderBy).slice(0, q.take ?? undefined).map((r) => pick(r, q.select)),
+    findMany: async (q: { where?: Row; orderBy?: Row | Row[]; take?: number; skip?: number; select?: Row } = {}) => sortBy(rows.filter((r) => matchesWhere(r, q.where)), q.orderBy).slice(q.skip ?? 0, (q.skip ?? 0) + (q.take ?? Number.MAX_SAFE_INTEGER)).map((r) => pick(r, q.select)),
     findFirst: async (q: { where?: Row; orderBy?: Row | Row[]; select?: Row } = {}) => {
       const r = sortBy(rows.filter((x) => matchesWhere(x, q.where)), q.orderBy)[0];
       return r ? pick(r, q.select) : null;
