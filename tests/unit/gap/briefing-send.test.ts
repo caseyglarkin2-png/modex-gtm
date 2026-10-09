@@ -61,7 +61,8 @@ describe('X05b: sendMorningBriefing', () => {
     const payload = h.send.mock.calls[0][0];
     expect(payload).toMatchObject({ to: 'casey@freightroll.com', sender: SENDER, purpose: 'OPERATOR_ALERT', replyTo: 'casey@yardflow.ai' });
     expect(payload.headers).toMatchObject({ 'Auto-Submitted': 'auto-generated' });
-    expect(payload.subject).toMatch(/^GAP today, Thu Oct 8: 1 needs you \[GAP#[a-f0-9]{24}\]$/);
+    // C31: the count names its basis (the plan items START and NEXT walk).
+    expect(payload.subject).toMatch(/^GAP today, Thu Oct 8: 1 to execute \[GAP#[a-f0-9]{24}\]$/);
     expect(payload.text).toContain('1. PepsiCo: Ready for a first touch. Karen. A prepared first touch.');
     expect(payload.text).toContain('https://app.example/gap/start?t=');
     expect(payload.text).toContain('https://app.example/gap/item?t=');
@@ -117,7 +118,7 @@ describe('X05b: sendMorningBriefing', () => {
   it('a lost Gmail answer: before a retry, Sent shows the day\'s briefing to the recipient, so it is recorded from Sent and nothing is sent again', async () => {
     const h = harness({ sendImpl: async () => { throw new Error('socket hang up'); } });
     await expect(h.run()).rejects.toThrow('socket hang up');
-    h.listSent.mockResolvedValue([{ id: 'gm-lost', threadId: 'th-lost', internalDate: new Date('2026-10-08T12:30:05Z'), to: 'casey@freightroll.com', subject: 'GAP today, Thu Oct 8: 1 needs you [GAP#abc]' }]);
+    h.listSent.mockResolvedValue([{ id: 'gm-lost', threadId: 'th-lost', internalDate: new Date('2026-10-08T12:30:05Z'), to: 'casey@freightroll.com', subject: 'GAP today, Thu Oct 8: 1 to execute [GAP#abc]' }]);
     const r = await h.run(new Date('2026-10-08T13:30:00Z'));
     expect(r).toMatchObject({ sent: true, recoveredFromSent: true, gmailMessageId: 'gm-lost' });
     expect(h.send).toHaveBeenCalledTimes(1);

@@ -41,6 +41,18 @@ export interface PlanItemRefs {
   meetingKey?: string;
 }
 
+/**
+ * C32: what a briefing card says beyond the title: the relationship or motion, the last material exchange, the next
+ * prepared action (whole), the source and date. Read off the Work card and the obligation; nothing is invented.
+ */
+export interface PlanItemContext {
+  motion: string | null;
+  lastExchange: string | null;
+  nextAction: string | null;
+  source: string | null;
+  date: string | null;
+}
+
 export interface PlanItem {
   key: string;
   rank: number;
@@ -59,6 +71,8 @@ export interface PlanItem {
   token: string;
   /** X18: the day of the newest earlier plan that held this work (the same object, or the same account and kind). */
   carriedFrom?: string;
+  /** C32: the card context (motion, last exchange, next action, source and date), when the card carried it. */
+  context?: PlanItemContext;
 }
 
 export interface DayPlan {
@@ -124,6 +138,32 @@ function cardKey(c: WorkCard, day: string, decisionIds?: ReadonlyMap<string, str
   }
 }
 
+const replyDay = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' });
+
+/** C32: the context of a card's own move. */
+export function cardContext(c: WorkCard): PlanItemContext {
+  const r = c.reply ?? null;
+  const motion = c.stateKind === 'in_deal' && c.dealNextStep ? `${c.state}; HubSpot next step: ${c.dealNextStep.replace(/\.$/, '')}` : c.state;
+  return {
+    motion,
+    lastExchange: r ? `${r.fromName ?? r.from} wrote ${replyDay(r.at)}${r.subject ? `, "${r.subject}"` : ''}: ${r.snippet.replace(/\s+/g, ' ').trim().slice(0, 160)}` : null,
+    nextAction: c.dealNextStep ? `Next step on the deal: ${c.dealNextStep.replace(/\.$/, '')}` : c.next?.label ?? null,
+    source: r ? 'their email in the GAP mailbox' : c.stateKind === 'in_deal' || c.stateKind === 'unknown_deal' ? 'HubSpot deals' : c.source === 'pursuit' ? 'the pursuit record' : 'the Work lanes',
+    date: r?.at ?? null,
+  };
+}
+
+/** C32: the context of an obligation on a card. */
+export function obligationContext(c: WorkCard, o: WorkObligation): PlanItemContext {
+  return {
+    motion: o.scope ?? (c.stateKind === 'in_deal' ? c.state : null),
+    lastExchange: o.basis ?? null,
+    nextAction: o.label ?? null,
+    source: o.kind === 'meeting' ? 'the calendar' : o.basis ? 'the recorded buyer words' : 'a GAP commitment',
+    date: o.dueAt ?? null,
+  };
+}
+
 function obligationItem(c: WorkCard, o: WorkObligation): Omit<PlanItem, 'rank' | 'token'> {
   // A meeting obligation's key already reads `meeting:<account>:<at>` (work/list.ts); a commitment's is its id.
   const key = o.kind === 'meeting' ? (o.key.startsWith('meeting:') ? o.key : `meeting:${o.key}`) : `commitment:${o.commitmentId ?? o.key}`;
@@ -138,6 +178,7 @@ function obligationItem(c: WorkCard, o: WorkObligation): Omit<PlanItem, 'rank' |
     href: o.href ?? c.href,
     person: o.person?.name ? { name: o.person.name, title: null } : c.person,
     refs,
+    context: obligationContext(c, o),
   };
 }
 
@@ -162,13 +203,10 @@ export function itemsForDay(day: WorkDay, nyDate: string, opts: { decisionIds?: 
     const own = cardKey(c, nyDate, opts.decisionIds);
     const obligations = c.obligations ?? [];
     // The card's own move first when the tier is its own; the obligations in their order (R41: each its own row).
-    if (own && (obligations.length === 0 || !obligations.some((o) => o.tier === tier))) {
-      push({ key: own.key, accountName: c.accountName, kind: tier, stateKind: c.stateKind, title: c.move ?? c.state, why: c.rankWhy ?? c.why, href: c.next?.href ?? c.href, person: c.person, refs: own.refs });
-    }
+    const ownItem = own ? { key: own.key, accountName: c.accountName, kind: tier, stateKind: c.stateKind, title: c.move ?? c.state, why: c.rankWhy ?? c.why, href: c.next?.href ?? c.href, person: c.person, refs: own.refs, context: cardContext(c) } : null;
+    if (ownItem && (obligations.length === 0 || !obligations.some((o) => o.tier === tier))) push(ownItem);
     for (const o of obligations) push(obligationItem(c, o));
-    if (own && obligations.length > 0 && obligations.some((o) => o.tier === tier) && !seen.has(own.key)) {
-      push({ key: own.key, accountName: c.accountName, kind: tier, stateKind: c.stateKind, title: c.move ?? c.state, why: c.rankWhy ?? c.why, href: c.next?.href ?? c.href, person: c.person, refs: own.refs });
-    }
+    if (ownItem && obligations.length > 0 && obligations.some((o) => o.tier === tier) && !seen.has(ownItem.key)) push(ownItem);
   }
   return out;
 }

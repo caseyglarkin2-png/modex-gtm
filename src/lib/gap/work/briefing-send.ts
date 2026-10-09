@@ -99,6 +99,8 @@ function links(input: BriefingSendInput, day: string) {
       return t ? `${base}/gap/decide?t=${encodeURIComponent(t)}` : null;
     },
     account: (name: string) => `${base}${accountHref(name)}/`,
+    // C32: the deal brief for an item at an account with an open deal.
+    deal: (name: string) => `${base}${accountHref(name)}/?view=brief`,
   };
 }
 
@@ -150,7 +152,7 @@ export async function sendMorningBriefing(prisma: PrismaLike, input: BriefingSen
     const dayToken = randomBytes(12).toString('hex');
     // I04: the intelligence, read soft (a failure never withholds the briefing).
     const intel: BriefingIntel | null = await (deps.intel ?? ((p: PrismaLike, n: Date) => defaultIntel(p, n, deps)))(prisma, input.now).catch(() => null);
-    const rendered = renderBriefing({ plan, dayToken, links: links(input, day), commandsEnabled: input.commandsEnabled, legacyDigest: input.legacyDigest, intel }, input.now);
+    const rendered = renderBriefing({ plan, dayToken, links: links(input, day), commandsEnabled: input.commandsEnabled, legacyDigest: input.legacyDigest, intel, resend: input.resend === true }, input.now);
     const res = await deps.send({
       to,
       subject: rendered.subject,
