@@ -159,7 +159,7 @@ export async function approveRequest(prisma: PrismaLike, input: ApplyInput & { i
     r.alreadyDrafted ? `A Gmail draft of this email already exists for ${d.recipient}, subject "${d.subject}".` : `Done: a Gmail draft to ${d.recipient}, subject "${d.subject}", is in the ${d.senderIdentity} mailbox.`,
     `Edit or send it in Gmail: ${draftsHref(d.senderIdentity)}`,
     `Or send it from GAP with every check re-run (CONFIRM + SEND): ${sendHref}`,
-    'A draft is not a send: GAP records it as sent only when Gmail shows it went. Reply NEXT for the next item.',
+    'A draft is not a send: GAP records it as sent only when Gmail shows it went. Sending from Gmail is outside GAP\'s checks: GAP records what Sent shows, as sent by hand, and an edited draft is never recorded as the approved copy. Reply NEXT for the next item.',
   ].join('\n');
   return { ok: true, text, effect: r.alreadyDrafted ? 'already_drafted' : 'gmail_drafted', extra: { gmailDraftId: d.gmailDraftId, contentHash: d.contentHash, revisionId, recipient: d.recipient, revision: input.ref.revision } };
 }

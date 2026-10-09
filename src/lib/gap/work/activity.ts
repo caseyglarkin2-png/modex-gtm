@@ -225,7 +225,11 @@ export function projectActivity(r: LedgerRow): ActivityEvent | null {
     const basis: ActivityBasis = r.kind === MANUAL_SENT && !gmailId ? 'self_reported' : 'provider';
     const recipient = str(p.recipient);
     const completes = r.kind === REPLY_SENT ? [`reply:${r.subject_id}`] : [`first_touch:${r.subject_id}`, ...accountKey('follow_up')];
-    return ev('message_sent', basis, r.kind === REPLY_SENT ? `Answered ${recipient ?? 'them'} in their thread${p.reconciledFromSent ? ' (found in Sent)' : ''}.` : `Sent touch ${Number(p.stepIndex ?? 0) + 1}${recipient ? ` to ${recipient}` : ''}${basis === 'self_reported' ? ' (said by hand, no Gmail id)' : ''}.`, recipient, completes, { evidence: gmailId });
+    // C40: a message that left from Gmail by hand (a GAP draft sent there, a reconciled copy) went outside the app's
+    // send gate and its body was not checked; the line says so and never calls it the approved copy.
+    const byHand = r.kind === DRAFT_SENT || r.kind === MANUAL_SENT || p.route === 'gmail_by_hand' || p.bodyRead === false;
+    const route = byHand ? (r.kind === DRAFT_SENT ? ' (a GAP draft sent from Gmail by hand; the copy as sent was not checked by GAP)' : basis === 'provider' ? ' (sent from Gmail by hand; the copy as sent was not checked by GAP)' : '') : '';
+    return ev('message_sent', basis, r.kind === REPLY_SENT ? `Answered ${recipient ?? 'them'} in their thread${p.reconciledFromSent ? ' (found in Sent)' : ''}${route}.` : `Sent touch ${Number(p.stepIndex ?? 0) + 1}${recipient ? ` to ${recipient}` : ''}${basis === 'self_reported' ? ' (said by hand, no Gmail id)' : route}.`, recipient, completes, { evidence: gmailId });
   }
   if (r.kind === 'reply.ingested') return ev('reply_received', 'provider', `A reply arrived${str(p.toEmail) ? ` at ${str(p.toEmail)}` : ''}.`, null, [], { evidence: str(p.gmailMessageId) ?? r.subject_id });
   if (r.kind === CALL_ATTEMPT_STARTED) return ev('call_attempted', 'self_reported', 'The dial link was opened; not a call until its outcome is recorded.', typeof p.personaId === 'number' ? `persona ${p.personaId}` : null);

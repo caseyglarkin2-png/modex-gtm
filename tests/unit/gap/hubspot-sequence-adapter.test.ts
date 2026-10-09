@@ -95,7 +95,7 @@ describe('hubspotSequenceAdapter', () => {
     expect(receipt).toEqual({ engine: 'hubspot_sequence', status: 'queued', engineId: 'hs_enr_1', createdAt: NOW });
   });
 
-  it('flag on: a network throw is translated to a refused receipt, never rethrown', async () => {
+  it('flag on: a network throw with no readback is an UNKNOWN outcome (C41): refused in shape, never rethrown, never a refusal a caller may retry blind', async () => {
     process.env.GAP_HUBSPOT_SEQUENCE_PUBLISH_ENABLED = 'true';
     const fetchImpl = vi.fn(async () => {
       throw new Error('ECONNRESET');
@@ -104,6 +104,6 @@ describe('hubspotSequenceAdapter', () => {
     const receipt = await hubspotSequenceAdapter(intent(), INPUT, { fetchImpl, accessToken: 'tok' });
 
     expect(receipt.status).toBe('refused');
-    expect(receipt.refusalReason).toContain('ECONNRESET');
+    expect(receipt.refusalReason).toBe('hubspot_enroll_outcome_unknown: ECONNRESET (no readback available)');
   });
 });
