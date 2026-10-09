@@ -110,7 +110,7 @@ async function main() {
         why: line(built.text, 'Why now:') ?? item.why,
         know: section(built.text, 'What we know:'),
         move: line(built.text, 'The move:'),
-        coverage: line(built.text, 'Not read this time:'),
+        coverage: line(built.text, 'Not read this time:') ?? line(built.text, 'Partly read:'),
         held,
       });
     }
