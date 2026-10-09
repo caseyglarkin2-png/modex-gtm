@@ -29,7 +29,7 @@ import { fetchAccountContextRows, loadAccountContext, projectAccountContext } fr
 import type { AccountContext } from '../context/context';
 import { accountSlug } from './href';
 import { approachOfHypothesis } from '../research/approach-policy';
-import { factCurrentness } from '../research/currentness';
+import { factUsability, usabilityLine } from '../research/currentness';
 import { draftApproachFor } from '../story/draft-approach';
 import { nameFromAddress } from '../story/touches';
 import { wordingOf } from '../bid/wording';
@@ -241,6 +241,7 @@ export async function loadAccountInputs(
     if (claimClass || fitLed ? liveClaimFailure(r.evidence_text, accountName, factUrl(r)) : liveFactFailure(r.evidence_text, accountName, factUrl(r))) continue;
     if (contradicted.has(r.id)) continue;
     const k = meta.continuity?.kind;
+    const standing = factUsability(r as never, now);
     const f: FactInput = {
       id: r.id,
       claimClass,
@@ -248,8 +249,11 @@ export async function loadAccountInputs(
       url: factUrl(r),
       title: r.title ?? '',
       publishedAt: new Date(r.observed_at).toISOString(),
-      // Item 2a: when it stops being current, by the one freshness authority (the gate and the compiler read the same).
-      expiresAt: factCurrentness(r as never, now).until,
+      // I06: when its window closes (a label) and whether it may carry a thesis (the gate), by the one authority.
+      expiresAt: standing.currentness.until,
+      usable: standing.usable,
+      historical: standing.historical,
+      usabilityLine: usabilityLine(standing, r as never),
       continuity: k === 'ended' ? 'ended' : k === 'ongoing_state' ? 'ongoing_state' : classifyContinuity(r.evidence_text),
       currentness: meta.continuity?.currentness?.publishedAt ? { url: meta.continuity.currentness.url ?? null, publishedAt: meta.continuity.currentness.publishedAt } : null,
     };

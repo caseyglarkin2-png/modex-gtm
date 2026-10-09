@@ -77,7 +77,7 @@ const NEXT_WORDS: Record<string, string> = {
 };
 const READINESS_WORDS: Record<string, string> = {
   evidence_insufficient: 'no outreach evidence yet',
-  evidence_expired: 'evidence expired',
+  evidence_expired: 'evidence ended, closed, undated or superseded',
   no_evidence: 'no evidence',
   opener_too_long: 'opener too long',
 };
@@ -91,7 +91,7 @@ const DEPTH_TONE: Record<string, string> = {
 function evidenceRefusal(code: string): string {
   const [head, , why] = code.split(':');
   if (head === 'not_verified_evidence') {
-    const what = why === 'expired' ? 'is too old to open a conversation with' : why === 'not_a_physical_network_change' ? 'does not state a physical-network change' : 'is not a verified, quoted fact about this account';
+    const what = ['expired', 'ended', 'closed', 'undated', 'superseded'].includes(why ?? '') ? 'ended, closed, is undated or was superseded: it cannot open a conversation' : why === 'not_a_physical_network_change' ? 'does not state a physical-network change' : 'is not a verified, quoted fact about this account';
     return `Nothing changed. The fact you chose ${what}. Choose another fact or research again. (${code})`;
   }
   if (head === 'observation_unsupported') return `Nothing changed. The chosen fact could not be quoted as a supported observation. Choose another fact. (${code})`;

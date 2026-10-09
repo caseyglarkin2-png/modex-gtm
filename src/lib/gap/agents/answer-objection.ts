@@ -14,6 +14,7 @@
  */
 import { gapGenerate } from '../ai/spend';
 import { MAX_ANGLE_CALLS, REASK_REASONS } from './develop-angle';
+import { SINGULAR_YARD_RE } from '../compiler/checks/c11-banned';
 import { HEDGE_TOKENS } from '../taxonomy';
 import { nyDay } from '../work/dates';
 import { listAgentTasks, queueAgentTask, type ClaimedTask, type HandlerResult } from './tasks';
@@ -61,11 +62,12 @@ export function parseObjectionAnswer(text: string): ObjectionAnswer | null {
   }
 }
 
-export type ObjectionCheck = { ok: true; factsUsed: string[] } | { ok: false; reason: 'unknown_fact' | 'product_named' | 'money_promised' | 'em_dash' | 'yard_singular' | 'length'; detail?: string };
+export type ObjectionCheck = { ok: true; factsUsed: string[] } | { ok: false; reason: 'unknown_fact' | 'product_named' | 'money_promised' | 'em_dash' | 'yard_singular' | 'throughput' | 'length'; detail?: string };
 
 function objectionReaskLine(check: Exclude<ObjectionCheck, { ok: true }>): string {
   switch (check.reason) {
-    case 'yard_singular': return 'it says "yard" in the singular; YardFlow copy always says "yards" (write "their yards", never "the yard")';
+    case 'yard_singular': return 'it says "yard" in the singular; YardFlow copy says "yards" (write "their yards", "operations in their yards"; only yard network, yard management, yard system, yard check, yard truck, yard move and yard spotting keep the singular)';
+    case 'throughput': return 'it says "throughput"; YardFlow copy says "production capacity"';
     case 'em_dash': return 'it contains an em dash; use a comma or a period instead';
     case 'product_named': return 'it names YardFlow or a product; name neither';
     case 'money_promised': return 'it promises money, savings, a percentage or ROI; remove the number or the claim';
@@ -83,7 +85,9 @@ export function validateObjectionAnswer(a: ObjectionAnswer, factIds: ReadonlySet
   if (/\b(yardflow|freightroll)\b/i.test(text)) return { ok: false, reason: 'product_named' };
   if (/\$\s?\d|\b\d+(\.\d+)?\s?%|\b(dollars|roi|savings)\b/i.test(text)) return { ok: false, reason: 'money_promised' };
   if (/—/.test(text)) return { ok: false, reason: 'em_dash' };
-  if (/\byard\b/i.test(text)) return { ok: false, reason: 'yard_singular' };
+  // A03b: the canonical C14 rule (compounds such as yard management keep the singular).
+  if (SINGULAR_YARD_RE.test(text)) return { ok: false, reason: 'yard_singular', detail: SINGULAR_YARD_RE.exec(text)?.[0] };
+  if (/\bthroughput\b/i.test(text)) return { ok: false, reason: 'throughput' };
   const words = a.answer.replace(/\[\[SRC:[A-Za-z0-9_-]+\]\]/g, '').trim().split(/\s+/).filter(Boolean).length;
   if (words < MIN_WORDS || words > MAX_WORDS) return { ok: false, reason: 'length', detail: `${words} words` };
   return { ok: true, factsUsed: cited };
@@ -117,7 +121,7 @@ export function buildObjectionPrompt(input: { objection: string; buyerLanguage: 
     `- ${MIN_WORDS} to ${MAX_WORDS} words in the answer, plain spoken sentences, no bullet points, no greeting.`,
     '- The question (separate field) is one open question about their operation that the objection does not already answer. No meeting request.',
     '- Never name a product, YardFlow, FreightRoll or "we help". Never promise savings, money, percentages or ROI. Never mention other customers by name.',
-    '- No em dashes. Say "yards" never "yard" alone.',
+    '- No em dashes. Say "yards" (plural) in prose; only yard network, yard management, yard system, yard check, yard truck, yard move and yard spotting keep the singular. Say "production capacity", never "throughput".',
   ].filter((l) => l !== '').join('\n');
 }
 

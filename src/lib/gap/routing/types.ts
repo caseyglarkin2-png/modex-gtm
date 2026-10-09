@@ -91,6 +91,8 @@ export interface RoutingHypothesisInput {
   family: ProblemFamily | 'unmapped';
   confidence: number;
   evidenceFresh: boolean;
+  /** I06: a usable fact exists (not ended, closed, undated or superseded). Absent reads as usable: age never routes research. */
+  evidenceUsable?: boolean;
   /**
    * True when EVERY linked signal is an auto-ingested trigger with no quoted
    * evidence text and no summary (e.g. "KR 10-Q mentions: capital

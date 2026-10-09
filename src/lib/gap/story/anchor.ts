@@ -90,9 +90,9 @@ export interface OutreachAnchor {
   /** Item 4: checked, citable stories that open NO approach (a one-time software deployment, a leadership change): said, never offered. */
   notAnOpening: Array<{ story: string; sourceLabel: string; sourceUrl: string | null; factId: string; line: string }>;
   /**
-   * Item 2a: checked, citable stories that are TOO OLD for a first touch by the one freshness authority
-   * (research/currentness.ts, the clock the gate and the compiler read): never offered as draftable, and the page says
-   * why instead of dropping them silently.
+   * I06: checked, citable stories that are UNUSABLE (closed on their due date, undated, superseded) by the one
+   * authority (research/currentness.ts): never offered as draftable, and the page says why instead of dropping them
+   * silently. A story that merely aged is draftable and labelled historical (the field keeps its name).
    */
   tooOld: Array<{ story: string; sourceLabel: string; sourceUrl: string | null; factId: string; line: string }>;
   /**
@@ -230,7 +230,8 @@ function thesisOf(h: HypothesisView, raw: AccountInputs['hypotheses'][number] | 
 /** A thesis is eligible as an anchor when it is open, grounded, not contradicted, not under review and the gate would let it out. */
 export function projectAnchor(i: AnchorInput): OutreachAnchor {
   const rawById = new Map(i.inputs.hypotheses.map((h) => [h.id, h]));
-  const live = i.inputs.facts.filter((f) => !f.expiresAt || new Date(f.expiresAt).getTime() > i.now.getTime());
+  // I06: live means usable (ended, closed, undated or superseded are not); a fact past its window is live and labelled.
+  const live = i.inputs.facts.filter((f) => f.usable !== false && f.continuity !== 'ended');
   const theses = i.brief.hypotheses
     .filter((h) => h.grounded && h.truth !== 'CONTRADICTED')
     .map((h) => thesisOf(h, rawById.get(h.id), live, i.person, i.sendable, i.accountName))
@@ -331,7 +332,7 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
   ]);
   const isSetAside = (f: AccountInputs['facts'][number]) => setAside.has(f.id) || (f.sameQuoteIds ?? []).some((id) => setAside.has(id));
   // Item 2a: the one freshness authority's words for a fact (the loader computed `expiresAt` with it).
-  const staleLine = (f: AccountInputs['facts'][number]) => (f.continuity === 'ended' ? currentnessLine({ current: false, until: null, basis: 'ended' }) : currentnessLine({ current: false, until: f.expiresAt, basis: 'type_window' }));
+  const staleLine = (f: AccountInputs['facts'][number]) => f.usabilityLine ?? (f.continuity === 'ended' ? currentnessLine({ current: false, until: null, basis: 'ended' }) : currentnessLine({ current: false, until: f.expiresAt, basis: 'type_window' }));
   for (const r of i.story.rows) {
     if (r.key !== 'changing' && r.key !== 'stories' && r.key !== 'goal') continue;
     for (const s of r.sentences) {
@@ -349,11 +350,11 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
         if (!notAnOpening.some((n) => n.factId === fact.id)) notAnOpening.push({ story: s.text, sourceLabel: `${host(fact.url) ?? (fact.title || 'source')}, ${day(fact.publishedAt)}`, sourceUrl: fact.url, factId: fact.id, line: noOpeningLine(fact.quote) });
         continue;
       }
-      draftable.push({ approach, story: s.text, sourceLabel: `${host(fact.url) ?? (fact.title || 'source')}, ${day(fact.publishedAt)}`, sourceUrl: fact.url, factId: fact.id, proposedObservation: citedQuote(fact.title || host(fact.url) || 'source', fact.quote.trim().replace(/\s+/g, ' '), fact.id, i.accountName), claimClass: fact.claimClass ?? null, currentLine: fact.expiresAt ? currentnessLine({ current: true, until: fact.expiresAt, basis: 'type_window' }) : null });
+      draftable.push({ approach, story: s.text, sourceLabel: `${host(fact.url) ?? (fact.title || 'source')}, ${day(fact.publishedAt)}`, sourceUrl: fact.url, factId: fact.id, proposedObservation: citedQuote(fact.title || host(fact.url) || 'source', fact.quote.trim().replace(/\s+/g, ' '), fact.id, i.accountName), claimClass: fact.claimClass ?? null, currentLine: fact.usabilityLine ?? (fact.expiresAt ? currentnessLine({ current: new Date(fact.expiresAt).getTime() > i.now.getTime(), until: fact.expiresAt, basis: 'type_window' }) : null) });
     }
   }
-  // TOO OLD FOR A FIRST TOUCH (item 2a): a checked, citable story no live thesis grounds, past its currentness. Never
-  // offered as draftable (it could not be sent); listed with the reason, newest first, at most three.
+  // NOT OFFERED (I06): a checked, citable story that is UNUSABLE (closed, undated, superseded; an ended one is told in
+  // the story), never one that merely aged. Listed with the reason, newest first, at most three.
   const tooOld: OutreachAnchor['tooOld'] = [];
   for (const f of i.inputs.facts) {
     if (tooOld.length >= 3) break;

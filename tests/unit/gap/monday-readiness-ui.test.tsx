@@ -162,7 +162,7 @@ describe('use_evidence refusal is plain language', () => {
     fireEvent.click(screen.getByTestId('find-evidence'));
     await screen.findByText('FOUND EVIDENCE');
     fireEvent.click(screen.getByTestId('use-verified-evidence'));
-    expect(await screen.findByRole('alert')).toHaveTextContent('Nothing changed. The fact you chose is too old to open a conversation with.');
+    expect(await screen.findByRole('alert')).toHaveTextContent('Nothing changed. The fact you chose ended, closed, is undated or was superseded: it cannot open a conversation.');
   });
 });
 

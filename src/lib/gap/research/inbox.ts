@@ -23,7 +23,7 @@ import { factUrl } from './claim-rules';
 import { outreachFactRefusal } from './evidence-gate';
 import { draftApproachFor } from '../story/draft-approach';
 import { sellerRelevance, type SellerRelevance } from './continuity';
-import { factCurrentness, isCurrentFact } from './currentness';
+import { factUsability, isUsableFact } from './currentness';
 import { hostBelongsToAccount } from './providers';
 import { classifyFact, detectConflicts, normalizeForMatch } from './facts';
 import { loadThesisGroups } from '../hypothesis/thesis-groups';
@@ -46,6 +46,8 @@ export interface InboxFact {
   why: string;
   expiresAt: string | null;
   daysLeft: number | null;
+  /** I06: past its window but usable: cite it with its date (days left is null). */
+  historical: boolean;
   runId: string | null;
   onThesis: boolean;
   /** Where the fact comes from and why it is current: the source, and the newer source that confirmed it still holds. */
@@ -235,7 +237,7 @@ export async function loadEvidenceInbox(prisma: PrismaLike, now: Date, opts: { a
     return outreachFactRefusal(s as never, s.account_name, { approach });
   };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- raw rows from a narrow select
-  const live = (s: Record<string, any>) => !ignored.has(s.id) && isCurrentFact(s, now) && !refused(s);
+  const live = (s: Record<string, any>) => !ignored.has(s.id) && isUsableFact(s, now) && !refused(s);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any -- raw rows from a narrow select
   const newestContinuation = new Map<string, Record<string, any>>();
   for (const s of signals) {
@@ -258,9 +260,11 @@ export async function loadEvidenceInbox(prisma: PrismaLike, now: Date, opts: { a
   }
   for (const s of signals) {
     if (ignored.has(s.id) || folded.has(s.id)) continue;
-    // Item 2a: the one freshness authority: whether it is current, and until when (the inbox's days left).
-    const cur = factCurrentness(s, now);
-    if (!cur.current) continue;
+    // I06: the one authority: a usable fact is listed whatever its age (historical says so); ended, closed, undated or
+    // superseded is not.
+    const standing = factUsability(s, now);
+    if (!standing.usable) continue;
+    const cur = standing.currentness;
     const exp = cur.until ? new Date(cur.until) : null;
     if (refused(s)) continue;
     const meta = isObj(s.metadata) ? s.metadata : {};
@@ -282,7 +286,8 @@ export async function loadEvidenceInbox(prisma: PrismaLike, now: Date, opts: { a
       retrievedAt,
       why: whyItQualifies(String(s.evidence_text ?? ''), retrievedAt),
       expiresAt: exp ? exp.toISOString() : null,
-      daysLeft: exp ? Math.ceil((exp.getTime() - now.getTime()) / DAY) : null,
+      daysLeft: exp && !standing.historical ? Math.ceil((exp.getTime() - now.getTime()) / DAY) : null,
+      historical: standing.historical,
       runId: typeof meta.researchRunId === 'string' ? meta.researchRunId : null,
       onThesis: linked.has(s.id),
       chain,
@@ -308,6 +313,8 @@ export async function loadEvidenceInbox(prisma: PrismaLike, now: Date, opts: { a
           x.relevance.rank - y.relevance.rank ||
           Number(y.chain.basis === 'corroborated') - Number(x.chain.basis === 'corroborated') ||
           Number(y.chain.kind === 'primary') - Number(x.chain.kind === 'primary') ||
+          // I06: a current fact before a historical one of the same standing (and it wins the same-quote dedupe below).
+          Number(x.historical) - Number(y.historical) ||
           y.publishedAt.localeCompare(x.publishedAt) ||
           x.signalId.localeCompare(y.signalId),
       )

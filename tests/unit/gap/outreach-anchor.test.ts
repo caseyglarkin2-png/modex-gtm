@@ -206,16 +206,21 @@ describe('the outreach anchor (Option A)', () => {
     // An approved thesis is never pending; an account with no open draft has none.
     expect(anchorFor(inputs({ hypotheses: [hypA, hypB] }), 1).anchor.pending).toEqual([]);
   });
-  it('item 2a: a story past its currentness is never draftable; it is listed TOO OLD with the reason; a proposal on it stays listed, says why and is refused; a current one says until when', () => {
+  it('I06: a story past its window is DRAFTABLE with its historical line (never too old); an unusable one (closed, undated, superseded) is listed as not offered with its reason; a proposal on it stays listed, says why and is refused; a current one says until when', () => {
     const tulsa = { ...factB, id: 'f-tulsa', quote: 'PepsiCo will close its warehouse operations at its Tulsa, Oklahoma, production facility and shift duties to a new site in the area.', url: 'https://news.example/tulsa', publishedAt: '2026-07-23T00:00:00Z', expiresAt: '2026-09-06T00:00:00Z' };
     const denver = { ...factB, expiresAt: '2026-11-20T00:00:00Z' };
     const { anchor } = anchorFor(inputs({ facts: [factA, denver, factC, tulsa], hypotheses: [hypA] }), 1);
-    expect(anchor.draftable.map((d) => d.factId)).not.toContain('f-tulsa');
+    expect(anchor.draftable.map((d) => d.factId)).toContain('f-tulsa');
+    expect(anchor.draftable.find((d) => d.factId === 'f-tulsa')?.currentLine).toBe('A historical observation: it was current until Sep 5, 2026. Cite it with its date.');
     expect(anchor.draftable.find((d) => d.factId === 'f-denver')?.currentLine).toBe('Current until Nov 19, 2026.');
-    expect(anchor.tooOld).toEqual([expect.objectContaining({ factId: 'f-tulsa', story: tulsa.quote, sourceUrl: tulsa.url, line: 'This story is too old for a first touch: it was current until Sep 5, 2026.' })]);
-    // The stranded proposal on the old fact never vanishes: it is listed, says why, and its gate reads refused.
-    const withDraft = anchorFor(inputs({ facts: [factA, denver, factC, tulsa], hypotheses: [hypA, { ...hypDraft, id: 'h-tulsa', status: 'review_required', observation: cited(tulsa.quote, 'f-tulsa'), problemFamily: 'hidden_capacity', personaId: 1 }] }), 1).anchor;
-    expect(withDraft.pending).toEqual([expect.objectContaining({ hypothesisId: 'h-tulsa', factId: 'f-tulsa', gate: 'refused', stale: 'This story is too old for a first touch: it was current until Sep 5, 2026.' })]);
+    expect(anchor.tooOld).toEqual([]);
+    const closed = { ...tulsa, id: 'f-closed', url: 'https://news.example/closed', usable: false, usabilityLine: 'This notice closed on Sep 30, 2026: not a story for a first touch.' };
+    const withClosed = anchorFor(inputs({ facts: [factA, denver, factC, closed], hypotheses: [hypA] }), 1).anchor;
+    expect(withClosed.draftable.map((d) => d.factId)).not.toContain('f-closed');
+    expect(withClosed.tooOld).toEqual([expect.objectContaining({ factId: 'f-closed', story: closed.quote, sourceUrl: closed.url, line: closed.usabilityLine })]);
+    // The stranded proposal on the unusable fact never vanishes: it is listed, says why, and its gate reads refused.
+    const withDraft = anchorFor(inputs({ facts: [factA, denver, factC, closed], hypotheses: [hypA, { ...hypDraft, id: 'h-closed', status: 'review_required', observation: cited(closed.quote, 'f-closed'), problemFamily: 'hidden_capacity', personaId: 1 }] }), 1).anchor;
+    expect(withDraft.pending).toEqual([expect.objectContaining({ hypothesisId: 'h-closed', factId: 'f-closed', gate: 'refused', stale: closed.usabilityLine })]);
     expect(withDraft.tooOld).toEqual([]);
     // A current proposal carries no stale line.
     expect(anchorFor(inputs({ hypotheses: [hypA, hypB, { ...hypDraft, status: 'review_required', problemFamily: 'hidden_capacity', personaId: 2 }] }), 1).anchor.pending[0].stale).toBeNull();

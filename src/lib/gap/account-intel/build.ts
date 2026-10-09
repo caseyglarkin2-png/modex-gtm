@@ -35,6 +35,12 @@ export interface FactInput {
   expiresAt: string | null;
   continuity: 'event' | 'ongoing_state' | 'ended';
   currentness: { url: string | null; publishedAt: string } | null;
+  /** I06: may the fact carry a thesis (false: ended, closed, undated, superseded)? Absent reads as usable. */
+  usable?: boolean;
+  /** I06: usable but past its window: cited with its date. */
+  historical?: boolean;
+  /** I06: the seller words for its standing (research/currentness.ts usabilityLine). */
+  usabilityLine?: string;
   /** Other stored rows of this exact quote (the same fact registered once per person): the same fact. */
   sameQuoteIds?: string[];
   /** R30/R31: JOB_POSTING or PROCUREMENT when the fact is a claim of that kind (null: a physical-network fact). */
@@ -397,11 +403,12 @@ function section(key: SectionKey, statements: Statement[], unknowns: string[], n
   return { key, title: TITLES[key], status: sectionStatus(valid, unknowns, FRESHNESS[key], now), statements: valid, unknowns, freshnessDays: FRESHNESS[key], refused };
 }
 
-const liveFacts = (i: AccountInputs, now: Date) => i.facts.filter((f) => f.continuity !== 'ended' && (!f.expiresAt || new Date(f.expiresAt).getTime() > now.getTime()));
+// I06: live means usable (not ended, closed, undated or superseded); a fact past its window stays live, labelled historical.
+const liveFacts = (i: AccountInputs) => i.facts.filter((f) => f.continuity !== 'ended' && f.usable !== false);
 /** Seller relevance first (a network change beats a foreign divestiture), then newest. */
 // A sensitive fact (people harmed) or a vendor's own marketing ("Gatik moves freight for ...") never leads.
 const demoted = (q: string) => (sensitivityOf(q) ? 2 : 0) + (VENDOR_LEAD.test(q) ? 1 : 0);
-const rankedFacts = (i: AccountInputs, now: Date) => liveFacts(i, now).sort((x, y) => demoted(x.quote) - demoted(y.quote) || sellerRelevance(x.quote).rank - sellerRelevance(y.quote).rank || y.publishedAt.localeCompare(x.publishedAt));
+const rankedFacts = (i: AccountInputs) => liveFacts(i).sort((x, y) => demoted(x.quote) - demoted(y.quote) || sellerRelevance(x.quote).rank - sellerRelevance(y.quote).rank || y.publishedAt.localeCompare(x.publishedAt));
 
 /** Sites the audit did not reject, split by who operates them. */
 function auditedSites(pack: PackInput | null) {
@@ -519,7 +526,7 @@ function footprintSection(i: AccountInputs, now: Date): Section {
   const n = i.microsite?.network;
   if (n?.facilityCount) st.push({ text: `${n.facilityCount}${n.facilityTypes?.length ? ` (${n.facilityTypes.join(', ')})` : ''}${n.geographicSpread ? `, ${n.geographicSpread}` : ''} (hand-authored, undated)`, truth: 'INFERENCE', sources: [MICROSITE], falsifiableBy: 'A current filing or site count differs.' });
   // A site fact about the network; never a fact about people harmed or a vendor's own marketing (those are catalysts).
-  for (const f of liveFacts(i, now).filter((x) => /\b(distribution cent|fulfil|warehouse|plant|facilit|DC\b|site)/i.test(x.quote) && !sensitivityOf(x.quote) && !VENDOR_LEAD.test(x.quote))) {
+  for (const f of liveFacts(i).filter((x) => /\b(distribution cent|fulfil|warehouse|plant|facilit|DC\b|site)/i.test(x.quote) && !sensitivityOf(x.quote) && !VENDOR_LEAD.test(x.quote))) {
     st.push({ text: f.quote, truth: 'VERIFIED_PUBLIC', sources: [ev(f)], asOf: f.publishedAt });
   }
   for (const c of i.scout?.network ?? []) st.push({ text: `${c.claim} (Scout lead, not yet verified at source)`, truth: 'INFERENCE', sources: [{ ...SCOUT(i.scout!.at), url: c.url }], falsifiableBy: 'The page does not say this, or a newer source differs.' });
@@ -540,7 +547,7 @@ const NOT_GROUND_FREIGHT = /\b(air network|aircraft|air cargo|airline|ocean|vess
 
 function freightSection(i: AccountInputs, now: Date): Section {
   const st: Statement[] = [];
-  for (const f of liveFacts(i, now).filter((x) => FREIGHT_WORDS.test(x.quote) && !NOT_GROUND_FREIGHT.test(x.quote) && !VENDOR_LEAD.test(x.quote) && !sensitivityOf(x.quote))) st.push({ text: f.quote, truth: 'VERIFIED_PUBLIC', sources: [ev(f)], asOf: f.publishedAt });
+  for (const f of liveFacts(i).filter((x) => FREIGHT_WORDS.test(x.quote) && !NOT_GROUND_FREIGHT.test(x.quote) && !VENDOR_LEAD.test(x.quote) && !sensitivityOf(x.quote))) st.push({ text: f.quote, truth: 'VERIFIED_PUBLIC', sources: [ev(f)], asOf: f.publishedAt });
   const a = auditedSites(i.pack);
   const unknowns = ['Private fleet vs dedicated vs common carrier mix', 'Drop vs live share by site type', 'Inbound pattern (supplier, plant-to-DC)'];
   // Rail over the sites the audit actually recorded it for; none recorded is unknown, never "0 rail-served".
@@ -655,7 +662,7 @@ function technologySection(i: AccountInputs, now: Date): Section {
   // Buyer truth outranks public: once the buyer names their yard system, a public mention of a DIFFERENT yard
   // system is contradicted by the buyer (visible until Casey resolves it), never silently kept as current.
   const said = i.bids.flatMap((b) => VENDORS.filter((v) => vendorRe(v).test(b.summary)).map((v) => ({ v, b, status: buyerVendorStatus(b.summary, v) })));
-  for (const f of liveFacts(i, now)) {
+  for (const f of liveFacts(i)) {
     for (const v of VENDORS) if (vendorRe(v).test(f.quote) && !seen.has(`f:${v}`)) {
       seen.add(`f:${v}`);
       const host = (() => { try { return new URL(f.url ?? '').hostname; } catch { return ''; } })();
@@ -686,8 +693,10 @@ function technologySection(i: AccountInputs, now: Date): Section {
 function catalystSection(i: AccountInputs, now: Date): Section {
   const st: Statement[] = [];
   for (const f of i.facts) {
-    const live = !f.expiresAt || new Date(f.expiresAt).getTime() > now.getTime();
-    const label = f.continuity === 'ended' ? 'ENDED / SUPERSEDED' : f.continuity === 'ongoing_state' ? 'ONGOING CONDITION' : 'RECENT EVENT';
+    // I06: a usable fact is shown whatever its age; past its window it is a HISTORICAL EVENT, never dropped.
+    const live = f.usable !== false;
+    const historical = f.historical ?? (!!f.expiresAt && new Date(f.expiresAt).getTime() <= now.getTime());
+    const label = f.continuity === 'ended' ? 'ENDED / SUPERSEDED' : f.continuity === 'ongoing_state' ? 'ONGOING CONDITION' : historical ? 'HISTORICAL EVENT' : 'RECENT EVENT';
     if (!live && f.continuity !== 'ended') continue;
     st.push({ text: `${label}: ${f.quote}${f.currentness ? ` (current as of ${day(f.currentness.publishedAt)})` : ''}`, truth: 'VERIFIED_PUBLIC', sources: [ev(f)], asOf: f.currentness?.publishedAt ?? f.publishedAt });
   }
@@ -699,7 +708,7 @@ function catalystSection(i: AccountInputs, now: Date): Section {
     const sharedAt = s.note?.trim() && s.capturedAt ? s.capturedAt : null;
     st.push({ text: `Signal, not verified: ${what} (${s.publishedAt ? day(s.publishedAt) : sharedAt ? `shared ${day(sharedAt)}` : 'undated'})`, truth: 'INFERENCE', sources: [{ kind: 'signal', ref: s.id, label: 'shared or discovered signal', url: s.url, at: s.publishedAt ?? sharedAt }], falsifiableBy: 'Research finds no verifiable fact behind it.' });
   }
-  const unknowns = liveFacts(i, now).length ? [] : ['A current, verified catalyst'];
+  const unknowns = liveFacts(i).length ? [] : ['A current, verified catalyst'];
   return section('catalysts', st, unknowns, now);
 }
 
@@ -768,7 +777,7 @@ const hedge = (h: HypothesisView) => (h.truth === 'BUYER_CONFIRMED' ? h.problem 
 const stripGuess = (s: string) => s.replace(/^my guess is (that )?/i, '').replace(/\.$/, '');
 
 function hypothesisViews(i: AccountInputs, now: Date): HypothesisView[] {
-  const verified = new Set(liveFacts(i, now).flatMap(idsOf));
+  const verified = new Set(liveFacts(i).flatMap(idsOf));
   // A BID speaks only to the hypothesis it was captured against. A withdrawn (rejected) draft is Casey's call, not the buyer's: it is not shown.
   return i.hypotheses.filter((h) => h.status !== 'rejected' || h.buyerRejected).slice(0, 3).map((h) => {
     const mine = i.bids.filter((b) => b.hypothesisId === h.id);
@@ -810,13 +819,13 @@ function reviewReasons(i: AccountInputs, h: HypothesisInput, now: Date, verified
   const primary = factById(i, h.primarySignalId);
   if (primary && idsOf(primary).some((x) => verified.has(x))) {
     const primaryRank = sellerRelevance(primary.quote).rank;
-    const better = rankedFacts(i, now).find((f) => f.id !== primary.id && new Date(f.publishedAt).getTime() > since && sellerRelevance(f.quote).rank <= 3 && sellerRelevance(f.quote).rank < primaryRank);
+    const better = rankedFacts(i).find((f) => f.id !== primary.id && new Date(f.publishedAt).getTime() > since && sellerRelevance(f.quote).rank <= 3 && sellerRelevance(f.quote).rank < primaryRank);
     if (better) out.push(`A newer fact (${sellerRelevance(better.quote).reason}, ${monthDay(better.publishedAt)}) may change the story.`);
   }
   // It opens on context (a sale abroad, a divestiture) while a more seller-relevant current fact exists. A review
   // reason like the others (soak P1: so "Reviewed, keep it" shows for it), cleared when Casey keeps the thesis after
   // that better fact was published.
-  const best = rankedFacts(i, now)[0] ?? null;
+  const best = rankedFacts(i)[0] ?? null;
   const opener = factById(i, h.primarySignalId) ?? null;
   if (opener && best && best.id !== opener.id) {
     const o = sellerRelevance(opener.quote);
@@ -927,7 +936,7 @@ function inferiorOpener(i: AccountInputs, now: Date): { reason: string; opener: 
   const top = hypothesisViews(i, now).find((h) => h.grounded && h.truth !== 'CONTRADICTED');
   const hyp = top ? i.hypotheses.find((h) => h.id === top.id) : null;
   const opener = hyp ? factById(i, hyp.primarySignalId) ?? null : null;
-  const best = rankedFacts(i, now)[0];
+  const best = rankedFacts(i)[0];
   if (!opener || !best || best.id === opener.id) return null;
   const o = sellerRelevance(opener.quote);
   if (o.rank < 7 || sellerRelevance(best.quote).rank >= o.rank) return null;
@@ -944,10 +953,10 @@ function inferiorOpener(i: AccountInputs, now: Date): { reason: string; opener: 
  * this only says what Casey must review before acting.
  */
 export function thesisCurrentness(i: AccountInputs, hypothesisId: string, now: Date): { current: true } | { current: false; reason: string; bestFact: string | null; opener: string | null } {
-  const best = rankedFacts(i, now)[0] ?? null;
+  const best = rankedFacts(i)[0] ?? null;
   const h = i.hypotheses.find((x) => x.id === hypothesisId);
   if (!h) return { current: false, reason: "This thesis is no longer one of the account's current theses (it was revised, superseded or archived).", bestFact: best?.quote ?? null, opener: null };
-  const verified = new Set(liveFacts(i, now).flatMap(idsOf));
+  const verified = new Set(liveFacts(i).flatMap(idsOf));
   const mine = i.bids.filter((b) => b.hypothesisId === h.id);
   const truth: TruthClass = h.buyerRejected || mine.some((b) => b.type === 'objection') ? 'CONTRADICTED' : mine.some((b) => b.type === 'business_problem') ? 'BUYER_CONFIRMED' : 'INFERENCE';
   const reasons = reviewReasons(i, h, now, verified, truth);
@@ -984,7 +993,7 @@ function nextAction(i: AccountInputs, m: Motion, now: Date): string {
       return `Reach out to ${m.who ?? 'them'} through ${m.why.split(':')[0].replace(/\.$/, '') || 'how you know them'} and ask for their perspective (your own note; GAP drafts nothing yet).`;
     default:
       // A hold on the HubSpot link is cleared in HubSpot, not by research (the plan holds research until then).
-      return liveFacts(i, now).length || /Not a shipper prospect|not linked to a HubSpot company|deal state could not be read|Scout it first/.test(m.why) ? m.why : `${m.why} Research first (Deepen catalysts on this page).`;
+      return liveFacts(i).length || /Not a shipper prospect|not linked to a HubSpot company|deal state could not be read|Scout it first/.test(m.why) ? m.why : `${m.why} Research first (Deepen catalysts on this page).`;
   }
 }
 
@@ -1022,13 +1031,13 @@ function accountMotion(i: AccountInputs, hyps: HypothesisView[], now: Date, prim
     contradicted: hyps.some((h) => h.truth === 'CONTRADICTED'),
     conversation: i.conversation,
     touchHold: gate.state === 'in_motion' ? gate.headline : null,
-    verifiedFact: liveFacts(i, now).length > 0,
+    verifiedFact: liveFacts(i).length > 0,
     reachable: reachable.length > 0 || (!i.personas.length && !!known?.personName),
     source: known ? { sourceType: known.sourceType, context: known.relationshipContext, name: known.sourceName } : null,
     groundedThesis: hyps.some((h) => h.grounded && h.truth !== 'CONTRADICTED'),
     staleThesis: !hyps.some((h) => h.grounded && h.truth !== 'CONTRADICTED' && h.needsReview.length === 0) && hyps.some((h) => h.grounded && h.needsReview.length > 0),
     sensitiveOnly: (() => {
-      const live = liveFacts(i, now);
+      const live = liveFacts(i);
       return live.length && live.every((f) => sensitivityOf(f.quote)) ? sensitivityOf(live[0].quote) : null;
     })(),
     // WHY NOT's "settle its identity first" (type unknown, most audited sites 3PL-run) is the motion's answer too:
@@ -1172,7 +1181,7 @@ export function accountFit(i: AccountInputs, now: Date): { entityType: EntityTyp
   };
   if (i.facilityFact?.status === 'verified') counted('sourced facility count', i.facilityFact.facilityCount);
   else if (i.pack?.account.networkCount && i.pack.account.networkCountSource) counted(`network count (${i.pack.account.networkCountSource})`, i.pack.account.networkCount);
-  for (const f of liveFacts(i, now)) if (operatingClaims([{ claim: f.quote }]).length) evidence.push(`fact: ${clip(f.quote, 90)}`);
+  for (const f of liveFacts(i)) if (operatingClaims([{ claim: f.quote }]).length) evidence.push(`fact: ${clip(f.quote, 90)}`);
   // Scout leads: page-matched claims each count; site-only ones (Gemini) count once at most.
   const leads = operatingClaims([...(scout?.network ?? []), ...(scout?.freight ?? [])] as Array<{ claim: string; url: string; siteOnly?: boolean }>);
   for (const c of [...leads.filter((x) => !x.siteOnly), ...leads.filter((x) => x.siteOnly).slice(0, 1)]) evidence.push(`Scout lead: ${clip(c.claim, 90)}`);
@@ -1200,7 +1209,7 @@ export function buildAccountBrief(i: AccountInputs, now: Date): AccountIntellige
   const hypotheses = hypothesisViews(i, now);
   const wedge = siteWedge(i);
   const discovery = discoveryPlan(i, hypotheses, wedge);
-  const live = rankedFacts(i, now);
+  const live = rankedFacts(i);
   const top = hypotheses.find((h) => h.truth !== 'CONTRADICTED' && h.grounded) ?? hypotheses.find((h) => h.truth === 'CONTRADICTED') ?? null;
   const drafts = hypotheses.filter((h) => !h.grounded && h.truth !== 'CONTRADICTED').length;
   const noHypothesis = drafts ? `No strong thesis yet (${plural(drafts, 'ungrounded draft')} ${drafts === 1 ? 'exists: its observation is' : 'exist: their observations are'} not a live verified fact).` : 'No strong thesis yet.';

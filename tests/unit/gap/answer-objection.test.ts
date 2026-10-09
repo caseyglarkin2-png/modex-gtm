@@ -81,7 +81,7 @@ describe('X16d: the task', () => {
     expect(reasked.ok).toBe(true);
     expect(w.generate.mock.calls[w.generate.mock.calls.length - 1][0]).toContain('rejected by the checker: it says "yard" in the singular');
     w.generate.mockResolvedValueOnce({ text: singular, provider: 'test' }).mockResolvedValueOnce({ text: singular, provider: 'test' });
-    expect(await answerObjection(w.task(), { prisma: w.c, now: NOW }, w.deps)).toEqual({ ok: false, reason: 'could_not_satisfy', detail: 'yard_singular (after one re-ask)' });
+    expect(await answerObjection(w.task(), { prisma: w.c, now: NOW }, w.deps)).toEqual({ ok: false, reason: 'could_not_satisfy', detail: 'yard_singular yard (after one re-ask)' });
     w.generate.mockResolvedValueOnce({ text: 'I cannot help with that.', provider: 'test' });
     expect(await answerObjection(w.task(), { prisma: w.c, now: NOW }, w.deps)).toMatchObject({ ok: false, reason: 'could_not_satisfy' });
     const named = { text: JSON.stringify({ answer: 'YardFlow fixes that for the yards across every site we have seen so far, honestly, and it does it in a week or two at most without any trouble.', question: 'Would you like a demo?' }), provider: 'test' };

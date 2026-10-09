@@ -13,7 +13,7 @@
  */
 import { EVIDENCE_IGNORED } from './inbox';
 import { classifyFact, detectConflicts } from './facts';
-import { isCurrentFact } from './currentness';
+import { isUsableFact } from './currentness';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -27,8 +27,8 @@ export async function contradictedFactIds(prisma: PrismaLike, accountName: strin
     select: { id: true, evidence_text: true, freshness_expires_at: true, observed_at: true, type: true, metadata: true },
     take: 500,
   });
-  // Item 2a: the one freshness authority decides which facts are current enough to contradict each other.
-  const live = facts.filter((f) => isCurrentFact(f, now));
+  // I06: every usable fact may contradict another, whatever its age (a contradiction is exposed, never aged out).
+  const live = facts.filter((f) => isUsableFact(f, now));
   if (live.length < 2) return out;
   const ignored: Array<{ subject_id: string }> = await prisma.gapAuditEvent.findMany({
     where: { kind: EVIDENCE_IGNORED, subject_type: 'prospecting_signal', subject_id: { in: live.map((f) => f.id) } },

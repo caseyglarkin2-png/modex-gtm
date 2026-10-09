@@ -87,7 +87,12 @@ function SourceChain({ f, now }: { f: InboxFact; now: Date }) {
           </dd>
         </>
       ) : null}
-      {f.expiresAt ? (
+      {f.historical ? (
+        <>
+          <dt className="font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Historical</dt>
+          <dd data-testid="inbox-historical">{f.expiresAt ? `Its window ran until ${short(f.expiresAt, now)}: ` : ''}usable, cited with its date.</dd>
+        </>
+      ) : f.expiresAt ? (
         <>
           <dt className="font-semibold uppercase tracking-wide text-[var(--muted-foreground)]">Current until</dt>
           <dd>

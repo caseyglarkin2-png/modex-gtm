@@ -280,7 +280,7 @@ function readinessOf(item: ReadinessInput): CardReadiness {
         case 'tam_unknown':
           return withWarning({ state: 'missing_prerequisite' as const, missing: `${item.account.name} has no verified TAM status.`, fix: accountFix(item, 'Verify TAM on the account') });
         case 'hyp_stale':
-          return withWarning({ state: 'missing_prerequisite' as const, missing: 'The thesis rests on stale or expired evidence.', fix: hypothesisFix(item) });
+          return withWarning({ state: 'missing_prerequisite' as const, missing: 'The thesis rests on evidence that ended, closed, is undated or was superseded.', fix: hypothesisFix(item) });
         case 'disp_wrong_person':
           return withWarning({ state: 'missing_prerequisite' as const, missing: `The last reply said ${name} is the wrong person. Find the right contact.`, fix: accountFix(item, 'Find the right person') });
         default:
