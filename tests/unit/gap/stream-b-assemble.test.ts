@@ -56,6 +56,19 @@ describe('C17: field-specific authority', () => {
     expect(gapLines(packet)).toEqual([]);
   });
 
+  it('C53-1: a vendor pitch, a media note, internal mail, a referral, a calendar message, a notice or a suspicious message on the timeline is never a buyer fact and never externally usable; a buyer conversation, a support ask and an unclassified message are', () => {
+    const at = (n: number) => ({ ...sep16, id: `m-${n}`, at: `2026-10-0${n}T10:00:00.000Z`, providerIds: [`p${n}`] });
+    const pitch = { ...at(1), from: 'seb@riserify.example', excerpt: 'We book meetings for yard software vendors. Reply YES to book a strategy call.', purpose: 'vendor_solicitation' as const };
+    const others = [{ ...at(2), purpose: 'media' as const }, { ...at(3), purpose: 'internal' as const }, { ...at(4), purpose: 'partner_referral' as const }, { ...at(5), purpose: 'calendar' as const }, { ...at(6), purpose: 'automated' as const }, { ...at(7), purpose: 'suspicious' as const }];
+    const kept = [{ ...at(8), purpose: 'customer_support' as const }, { ...at(9), purpose: 'unknown' as const }, { ...sep16, purpose: null }];
+    const claims = buyerClaimsFromTimeline([pitch, ...others, ...kept], 'Kenco Logistics');
+    const vendor = claims.find((c) => c.sourceId === 'gmail:p1')!;
+    expect(vendor).toMatchObject({ claimClass: 'internal_only', authority: 'seller_interpretation', visibility: 'internal', text: expect.stringContaining('Reply YES') });
+    expect(externallyUsable(claims).map((c) => c.sourceId).sort()).toEqual(['gmail:1a0aa7d3c587d944', 'gmail:p8', 'gmail:p9']);
+    for (const n of [2, 3, 4, 5, 6, 7]) expect(claims.find((c) => c.sourceId === `gmail:p${n}`)).toMatchObject({ claimClass: 'internal_only', visibility: 'internal' });
+    expect(claims.filter((c) => c.claimClass === 'buyer_said').map((c) => c.sourceId).sort()).toEqual(['gmail:1a0aa7d3c587d944', 'gmail:p8', 'gmail:p9']);
+  });
+
   it('two buyer sources that keep and drop the same system are shown in conflict, both kept', () => {
     const keep = buyerClaimsFromTimeline([sep16], 'Kenco Logistics')[0];
     const drop = buyerClaimsFromTimeline([{ ...sep16, id: 'm-jul', at: '2026-07-20T12:00:00.000Z', providerIds: ['jul'], excerpt: 'We are moving off Open Dock next year.' }], 'Kenco Logistics')[0];
