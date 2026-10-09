@@ -604,6 +604,8 @@ describe('searchIncomingEmailsFromHubSpot', () => {
         html: '<p>yes</p>',
         timestamp: new Date('2026-09-21T10:00:00.000Z'),
         createdAt: new Date('2026-09-21T10:05:00.000Z'),
+        // C47: HubSpot returned no hs_email_message_id here; the cross-provider key is absent, not invented.
+        rfcMessageId: null,
       },
     ]);
   });

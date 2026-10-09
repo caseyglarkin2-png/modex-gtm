@@ -6,7 +6,7 @@
  */
 import { describe, expect, it } from 'vitest';
 import { ledgerDb } from './fixtures/ledger-db';
-import { buildTimeline, classifyMailType, collapseCalendarResponses, excerptOf, loadThreadContext, mergeProvenance, meetingKeyOf, parseCalendarStart, type OutboundMail } from '@/lib/gap/context/thread-context';
+import { buildTimeline, classifyMailType, collapseCalendarResponses, excerptOf, loadThreadContext, mergeProvenance, meetingKeyOf, parseCalendarStart, type OutboundMail, type StoredInbound } from '@/lib/gap/context/thread-context';
 
 const NOW = new Date('2026-10-08T15:00:00Z');
 const DAVE = 'dave.kiesling@kencogroup.com';
@@ -17,7 +17,7 @@ const ROADMAP = 'We will keep Open Dock at the ungated locations and pilot Blue 
 const NESTED = `${ROADMAP}\n\nThanks,\nDave\n\nOn Tue, Sep 9, 2026 at 10:12 AM Casey Larkin <${CASEY}> wrote:\n> Dave, we would love to buy you 20 minutes to walk the Nashville yard.\n> On Mon, Sep 8, 2026 Dave Kiesling wrote:\n>> Send me what you have on gate automation.\n`;
 const OUTLOOK = `Yes, Thursday works for us.\n\n________________________________\nFrom: Casey Larkin <${CASEY}>\nSent: Monday, September 15, 2026 9:00 AM\nTo: Dave Kiesling\nSubject: Yard walk\n\nDoes Thursday work?`;
 
-const row = (o: Record<string, unknown>) => ({ thread_id: 't-kenco', from_email: DAVE, from_name: 'Dave Kiesling', subject: 'Re: YardFlow and the 2027 roadmap', snippet: null, body_text: null, source: 'gmail', rfc_message_id: null, hubspot_engagement_id: null, thread: { account_name: 'Kenco Logistics' }, ...o });
+const row = (o: Partial<StoredInbound> & Record<string, unknown>): StoredInbound & Record<string, unknown> => ({ id: 'unset', received_at: NOW, thread_id: 't-kenco', from_email: DAVE, from_name: 'Dave Kiesling', subject: 'Re: YardFlow and the 2027 roadmap', snippet: null, body_text: null, source: 'gmail', rfc_message_id: null, hubspot_engagement_id: null, thread: { account_name: 'Kenco Logistics' }, ...o });
 const RSVP = 'Accepted: Yard walk @ Tue Oct 14, 2026 2pm - 3pm (EDT) (casey@freightroll.com)';
 
 function world(extra: Array<Record<string, unknown>> = []) {
