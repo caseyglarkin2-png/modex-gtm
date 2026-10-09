@@ -9,7 +9,7 @@
  */
 import { describe, expect, it, vi } from 'vitest';
 import { ledgerDb } from './fixtures/ledger-db';
-import { buildAnglePrompt, developAngle, loadAngles, parseAngle, sourceLineFor, validateAngle, type DevelopAngleDeps } from '@/lib/gap/agents/develop-angle';
+import { buildAnglePrompt, developAngle, loadAngles, parseAngle, sourceLineFor, validateAngle, type DevelopAngleDeps, MAX_ANGLE_CALLS } from '@/lib/gap/agents/develop-angle';
 import { agentTaskHandlers } from '@/lib/gap/agents/handlers';
 import { runAgentTasks, type ClaimedTask } from '@/lib/gap/agents/tasks';
 import { applyDecision } from '@/lib/gap/work/decide';
@@ -63,6 +63,34 @@ describe('I03: the source line, the parser and the checks', () => {
     expect(validateAngle({ ...a, caveat: 'Worth $40,000 a year.' }, roster)).toMatchObject({ ok: false, reason: 'money_promised' });
     expect(validateAngle({ ...a, people: [1, 9] }, roster)).toMatchObject({ ok: false, reason: 'person_not_offered', detail: '9' });
     expect(validateAngle({ ...a, whyItMatters: 'Too short to say.' }, roster)).toMatchObject({ ok: false, reason: 'length' });
+  });
+});
+
+describe('A03: one bounded re-ask on a voice-rule break', () => {
+  it('a first answer with "yard" in the singular is re-asked once with the break named and the previous answer; the fixed answer succeeds with calls 2; a second break is could_not_satisfy after exactly two calls; a stranger is never re-asked', async () => {
+    const w = world();
+    const singular = JSON.stringify({ ...JSON.parse(GOOD), whyItMatters: JSON.parse(GOOD).whyItMatters.replace('the yards outside', 'the yard outside') });
+    const generate = vi.fn<(prompt: string, maxTokens?: number) => Promise<{ text: string; provider: string }>>()
+      .mockResolvedValueOnce({ text: singular, provider: 'test' })
+      .mockResolvedValueOnce({ text: GOOD, provider: 'test' });
+    const r = await developAngle(task(), { prisma: w.client(), now: NOW }, { generate });
+    expect(r.ok).toBe(true);
+    if (r.ok) expect(r.result).toMatchObject({ calls: 2, whyItMatters: JSON.parse(GOOD).whyItMatters });
+    expect(generate).toHaveBeenCalledTimes(2);
+    const second = generate.mock.calls[1][0];
+    expect(second).toContain('rejected by the checker: it says "yard" in the singular');
+    expect(second).toContain('Previous answer:');
+    expect(second).toContain('the yard outside');
+
+    const stubborn = vi.fn<(prompt: string, maxTokens?: number) => Promise<{ text: string; provider: string }>>(async () => ({ text: singular, provider: 'test' }));
+    const again = await developAngle(task(), { prisma: w.client(), now: NOW }, { generate: stubborn });
+    expect(again).toEqual({ ok: false, reason: 'could_not_satisfy', detail: 'yard_singular (after one re-ask)' });
+    expect(stubborn).toHaveBeenCalledTimes(MAX_ANGLE_CALLS);
+
+    const stranger = vi.fn<(prompt: string, maxTokens?: number) => Promise<{ text: string; provider: string }>>(async () => ({ text: JSON.stringify({ ...JSON.parse(GOOD), people: [9] }), provider: 'test' }));
+    const never = await developAngle(task(), { prisma: w.client(), now: NOW }, { generate: stranger });
+    expect(never).toMatchObject({ ok: false, reason: 'could_not_satisfy', detail: 'person_not_offered 9' });
+    expect(stranger).toHaveBeenCalledTimes(1);
   });
 });
 
