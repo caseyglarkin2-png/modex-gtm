@@ -102,9 +102,12 @@ function Pursued({ p }: { p: PursuedItem }) {
     <li data-testid="intel-pursued" data-key={p.key} data-status={p.status} className="space-y-1 rounded-md border border-[var(--primary)] p-3 text-sm">
       <div className="flex flex-wrap items-center gap-x-2 text-xs text-[var(--muted-foreground)]">
         <span className="rounded bg-[var(--muted)] px-1.5 py-0.5 font-semibold">{p.status === 'ready' ? 'The angle is ready' : p.status === 'failed' ? 'GAP could not develop the angle' : 'GAP is developing the angle'}</span>
-        {p.accountName ? <AccountLink name={p.accountName} /> : <span>{p.accountHint ? `${p.accountHint} (no account yet)` : 'No account yet'}</span>}
+        {p.accountName ? <AccountLink name={p.accountName} /> : <span data-testid="intel-pursued-no-account">{p.accountHint ? `${p.accountHint} (no account yet)` : 'No account yet'}</span>}
+        {p.dealLine ? <span className="rounded bg-amber-500/15 px-1.5 py-0.5" data-testid="intel-pursued-deal">{p.dealLine}</span> : null}
       </div>
       <p className="font-medium">{p.url ? <a href={p.url} target="_blank" rel="noopener noreferrer" className="underline">{p.title}</a> : p.title}</p>
+      {/* Seller acceptance (2026-10-09): a person placed at read time (the task predates the identity fix) says so; nothing is queued, the seller decides. */}
+      {p.placementLine ? <p className="text-xs text-amber-700 dark:text-amber-400" data-testid="intel-pursued-placement">{p.placementLine}.</p> : null}
       {a ? (
         <div className="rounded-md bg-[var(--muted)] p-2 text-xs" data-testid="intel-pursued-angle">
           <p>{a.whyItMatters}</p>

@@ -19,7 +19,7 @@ const intel: Intelligence = {
   signals: [item({ kind: 'signal', id: 's-old', title: 'Kenco opens new innovation lab for warehouse automation testing', accountName: 'Kenco' })],
   triggers: [item({ kind: 'trigger', id: '7', title: 'Tractor Supply opens Idaho distribution center with automation', accountHint: 'Tractor Supply Company', truth: 'unverified_status', line: 'chainstoreage.com, published Oct 7, 2026. Unverified present-day status. Tractor Supply Company is not a GAP account yet.' })],
   people: [item({ kind: 'person', id: 'dave@kencogroup.com', title: 'Dave Kiesling, VP Operations at Kenco', accountName: 'Kenco', url: null, source: 'the mailbox', line: 'Wrote to us Sep 16, 2026 (2 messages); no open deal. Previously contacted, a response, no live opportunity.', person: { email: 'dave@kencogroup.com', name: 'Dave Kiesling', title: 'VP Operations', lastWroteAt: '2026-09-16T12:00:00.000Z', messages: 2 } })],
-  pursued: [{ key: 'trigger:9', taskId: 'at_test', writer: null, kind: 'trigger', title: 'Daimler bets on the autonomous truck system', accountName: null, accountHint: 'Daimler Truck North America', url: 'https://fw/x', decision: 'pursue', decidedAt: '2026-10-08T15:00:00.000Z', status: 'ready', error: null, angle: { whyItMatters: 'My guess is an autonomous program changes who runs the yards at the terminals.', starters: ['Who runs the yards at your terminals today?', 'Where does a trailer wait?'], roles: ['VP Operations'], accounts: ['Daimler Truck North America'], peopleNamed: [], proposedAction: 'research', caveat: null, sourceLine: 'FreightWaves, published Oct 1, 2026 (a recent report)' } }],
+  pursued: [{ key: 'trigger:9', taskId: 'at_test', writer: null, kind: 'trigger', title: 'Daimler bets on the autonomous truck system', accountName: null, accountHint: 'Daimler Truck North America', url: 'https://fw/x', placedVia: null, placementChanged: false, placementLine: null, dealLine: null, decision: 'pursue', decidedAt: '2026-10-08T15:00:00.000Z', status: 'ready', error: null, angle: { whyItMatters: 'My guess is an autonomous program changes who runs the yards at the terminals.', starters: ['Who runs the yards at your terminals today?', 'Where does a trailer wait?'], roles: ['VP Operations'], accounts: ['Daimler Truck North America'], peopleNamed: [], proposedAction: 'research', caveat: null, sourceLine: 'FreightWaves, published Oct 1, 2026 (a recent report)' } }],
   totals: { signals: 14, triggers: 3, people: 9 },
 };
 const angle: PreparedAngle = { taskId: 'at_1', key: 'signal:s-old', title: 'Kenco opens new innovation lab', accountName: 'Kenco', accountHint: null, sourceLine: 'freightwaves.com, published Jun 24, 2026 (a historical observation)', whyItMatters: 'My guess is the lab means the warehouses are being standardized while the yards outside still run on radio.', accounts: ['Kenco'], roles: ['VP Operations'], people: [1], starters: ['How does the gate know where a trailer should go?', 'Who owns dwell across your yards?'], proposedAction: 'email', caveat: null, peopleNamed: [{ personaId: 1, name: 'Dave Kiesling', title: 'VP Operations' }], preparedAt: '2026-10-08T16:00:00.000Z' };
@@ -48,6 +48,18 @@ describe('I04: <IntelPanel>', () => {
     expect(within(p).getByTestId('intel-pursued-angle').textContent).toContain('who runs the yards at the terminals');
     expect(within(p).getByRole('link', { name: 'Name the account on Signals' })).toHaveAttribute('href', '/gap/signals');
     expect(within(p).getByTestId('intel-pursued-done')).toBeTruthy();
+  });
+
+  it('seller acceptance (2026-10-09): a pursued person placed at read time shows the account link, the open deal and the placement line; nothing is auto-queued', () => {
+    const placed: Intelligence = { ...intel, pursued: [{ key: 'person:dave.kiesling@kencogroup.com', taskId: 'at_kenco', writer: { email: 'dave.kiesling@kencogroup.com', name: 'Dave Kiesling' }, kind: 'person', title: 'Dave Kiesling wrote to us', accountName: 'Kenco', accountHint: null, url: null, placedVia: 'domain', placementChanged: true, placementLine: 'Placed at Kenco by its verified domain after the identity fix; the angle was developed before placement, so Pursue again to develop it as deal work', dealLine: 'In an open deal: YardFlow - Kenco', decision: 'pursue', decidedAt: '2026-10-09T00:32:00.000Z', status: 'ready', error: null, angle: { whyItMatters: 'My guess is the warehouses are standardized while the yards outside are not.', starters: ['Who owns dwell across your yards?'], roles: [], accounts: ['Kenco'], peopleNamed: [], proposedAction: 'email', caveat: null, sourceLine: 'the mailbox' } }] };
+    const fetchSpy = vi.spyOn(globalThis, 'fetch');
+    render(<IntelPanel intel={placed} angles={{}} />);
+    const p = screen.getByTestId('intel-pursued');
+    expect(within(p).queryByTestId('intel-pursued-no-account')).toBeNull();
+    expect(within(p).getByRole('link', { name: /Open Kenco/ })).toHaveAttribute('href', '/gap/accounts/kenco');
+    expect(within(p).getByTestId('intel-pursued-deal').textContent).toBe('In an open deal: YardFlow - Kenco');
+    expect(within(p).getByTestId('intel-pursued-placement').textContent).toBe('Placed at Kenco by its verified domain after the identity fix; the angle was developed before placement, so Pursue again to develop it as deal work.');
+    expect(fetchSpy, 'rendering a placed item posts nothing').not.toHaveBeenCalled();
   });
 
   it('a decision posts the key and the decision and shows the line GAP answers; Explore opens the source and records the look', async () => {

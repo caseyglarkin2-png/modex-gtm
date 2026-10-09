@@ -21,7 +21,7 @@
  */
 import { AUTO_REPLY_SUBJECT, FREEMAIL_DOMAINS, OWN_DOMAINS } from '../replies/domains';
 import { coverageFromNames, dealsAt, dealWords, type DealCoverage } from './deal-coverage';
-import { resolvePersonAccount } from './person-identity';
+import { resolvePersonAccount, type PersonVia } from './person-identity';
 import { sameIdea } from '../context/same-idea';
 import { classifyPurpose, reengageEligible, type ReengageVerdict } from '../context/purpose';
 import { classifyMailType } from '../context/thread-context';
@@ -244,6 +244,9 @@ export function rankPeople(rows: readonly WriterRow[], personas: readonly Person
   return out.sort((a, b) => b.observedAt.localeCompare(a.observedAt)).map((x, i) => ({ ...x, rank: i }));
 }
 
+/** How a pursued person was placed at an account (the identity machinery's path, in four words). */
+export type PlacedVia = 'persona' | 'crm_contact' | 'alias' | 'domain';
+
 /** I05: an item Casey pursued (or asked more about): the angle task's state and its result when ready. */
 export interface PursuedItem {
   key: string;
@@ -255,6 +258,18 @@ export interface PursuedItem {
   title: string;
   accountName: string | null;
   accountHint: string | null;
+  /**
+   * Seller acceptance (2026-10-09): a person is placed at READ time through the same identity path the people ranker
+   * uses (persona, the CRM contact's company, the thread's account, the verified domain; freemail never places), so a
+   * task whose input predates the identity fix (October 9: five Kenco pursues carried accountName null although
+   * kencogroup.com is Kenco's verified domain) is no longer shown under "No account yet". `placementChanged` says the
+   * placement differs from what the task carried; the line tells the seller the angle was developed before it.
+   */
+  placedVia: PlacedVia | null;
+  placementChanged: boolean;
+  placementLine: string | null;
+  /** "In an open deal: <deal>" from the day's deal coverage (C01), when the placed account is in one; else null. */
+  dealLine: string | null;
   url: string | null;
   decision: string;
   decidedAt: string;
@@ -299,11 +314,46 @@ export async function loadDecided(prisma: PrismaLike, now: Date): Promise<Set<st
   return out;
 }
 
-/** I05: the pursued items from the angle tasks (any state, the task window), newest decision first, one per key. */
-export async function loadPursued(prisma: PrismaLike, now: Date): Promise<PursuedItem[]> {
+/** The identity path in the four words the pursued item carries; null when nothing placed the person. */
+export const placedViaOf = (v: PersonVia | string | null | undefined): PlacedVia | null =>
+  v === 'persona' ? 'persona' : v === 'hubspot_contact' || v === 'hubspot_company_id' ? 'crm_contact' : v === 'alias' || v === 'normalized' ? 'alias' : v === 'domain' ? 'domain' : null;
+
+const PLACED_BY: Record<PlacedVia, string> = { persona: 'by the GAP contact record', crm_contact: "by the CRM contact's company", alias: "by the thread's account name", domain: 'by its verified domain' };
+
+export interface PursuedOpts {
+  /** C02/C03: the identity context (read from the database when absent and the client has the tables). */
+  identity?: IdentityContext | null;
+  /** C01: the deal coverage; absent is "not read" and no deal line is said. */
+  coverage?: DealCoverage;
+  /** The persona by lowercased address and the thread's account by address, when the caller already read them (loadIntelligence does); a missing address is read here, one bounded row each. */
+  personas?: ReadonlyMap<string, PersonaRow>;
+  threadAccounts?: ReadonlyMap<string, string | null>;
+}
+
+/**
+ * I05: the pursued items from the angle tasks (any state, the task window), newest decision first, one per key.
+ * Seller acceptance (2026-10-09): a person whose task carries no account is placed here through resolvePersonAccount
+ * (the same path the people ranker takes; no new sources: the persona and the thread the loader already holds, read
+ * one row each when it does not), the deal coverage says whether the placed account is in an open deal, and nothing
+ * is queued: the line asks the seller to Pursue again so the angle is developed with the placement.
+ */
+export async function loadPursued(prisma: PrismaLike, now: Date, opts: PursuedOpts = {}): Promise<PursuedItem[]> {
   if (typeof prisma?.gapAuditEvent?.findMany !== 'function') return [];
   const { listAgentTasks } = await import('../agents/tasks');
   const tasks = await listAgentTasks(prisma, { now }).catch(() => []);
+  const coverage = opts.coverage ?? coverageFromNames(null);
+  const identity: IdentityContext | null = opts.identity !== undefined ? opts.identity : typeof prisma?.canonicalCompany?.findMany === 'function' && typeof prisma?.gapAccountAlias?.findMany === 'function' ? await loadIdentityContext(prisma).catch(() => null) : null;
+  const personaFor = async (email: string): Promise<PersonaRow | null> => {
+    if (opts.personas?.has(email)) return opts.personas.get(email) ?? null;
+    if (typeof prisma?.persona?.findFirst !== 'function') return null;
+    return prisma.persona.findFirst({ where: { email: { equals: email, mode: 'insensitive' } }, select: { id: true, email: true, name: true, title: true, account_name: true, do_not_contact: true } }).catch(() => null);
+  };
+  const threadAccountFor = async (email: string): Promise<string | null> => {
+    if (opts.threadAccounts?.has(email)) return opts.threadAccounts.get(email) ?? null;
+    if (typeof prisma?.inboundMessage?.findFirst !== 'function') return null;
+    const last = await prisma.inboundMessage.findFirst({ where: { from_email: { equals: email, mode: 'insensitive' } }, orderBy: { received_at: 'desc' }, include: { thread: { select: { account_name: true } } } }).catch(() => null);
+    return last?.thread?.account_name ?? null;
+  };
   const out = new Map<string, PursuedItem>();
   for (const t of tasks.filter((x) => x.kind === 'develop_angle').sort((a, b) => b.queuedAt.localeCompare(a.queuedAt))) {
     if (out.has(t.itemKey) || t.status === 'superseded') continue;
@@ -312,8 +362,27 @@ export async function loadPursued(prisma: PrismaLike, now: Date): Promise<Pursue
     const kind = (t.itemKey.split(':')[0] as PursuedItem['kind']) ?? 'signal';
     const r = (t.status === 'succeeded' && t.result && typeof t.result.whyItMatters === 'string' ? t.result : null) as Record<string, unknown> | null;
     const strs = (v: unknown) => (Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : []);
+    const email = kind === 'person' ? (str(input.email) ?? t.itemKey.slice('person:'.length)).toLowerCase() : null;
+    // The placement: what the task carried when it carried one; else the identity path at read time (a person only).
+    let accountName = str(input.accountName);
+    let accountHint = str(input.accountHint);
+    let placedVia: PlacedVia | null = accountName ? placedViaOf(str(input.resolvedVia)) : null;
+    let placementChanged = false;
+    if (!accountName && email) {
+      const placed = resolvePersonAccount({ email, persona: await personaFor(email), threadAccount: await threadAccountFor(email), identity, hubspotCompanyIds: [] });
+      if (placed.accountName) {
+        accountName = placed.accountName;
+        accountHint = null;
+        placedVia = placedViaOf(placed.via);
+        placementChanged = true;
+      }
+    }
+    const lookup = dealsAt(coverage, accountName);
+    const dealLine = lookup.inDeal === true ? `In an open deal: ${lookup.account.deals.map((d) => d.name).filter((n): n is string => !!n).join(', ') || lookup.account.accountName}` : null;
+    const placementLine = placementChanged && accountName ? `Placed at ${accountName} ${PLACED_BY[placedVia ?? 'domain']} after the identity fix; the angle was developed before placement, so Pursue again to develop it ${lookup.inDeal === true ? 'as deal work' : 'at the account'}` : null;
     out.set(t.itemKey, {
-      key: t.itemKey, taskId: t.id, kind, writer: kind === 'person' ? { email: str(input.email) ?? t.itemKey.slice('person:'.length), name: str(input.name) } : null, title: str(input.title) ?? (kind === 'person' ? `${str(input.name) ?? str(input.email) ?? 'A person'} wrote to us` : 'An item'), accountName: str(input.accountName), accountHint: str(input.accountHint), url: str(input.url),
+      key: t.itemKey, taskId: t.id, kind, writer: email ? { email, name: str(input.name) } : null, title: str(input.title) ?? (kind === 'person' ? `${str(input.name) ?? str(input.email) ?? 'A person'} wrote to us` : 'An item'), accountName, accountHint, url: str(input.url),
+      placedVia, placementChanged, placementLine, dealLine,
       decision: str(input.decision) ?? t.request, decidedAt: t.queuedAt,
       status: r ? 'ready' : t.status === 'failed' ? 'failed' : 'in_progress', error: t.status === 'failed' ? t.lastError : null,
       angle: r ? { whyItMatters: String(r.whyItMatters), starters: strs(r.starters), roles: strs(r.roles), accounts: strs(r.accounts), peopleNamed: Array.isArray(r.peopleNamed) ? (r.peopleNamed as Array<{ personaId: number; name: string | null; title: string | null }>) : [], proposedAction: String(r.proposedAction ?? 'research'), caveat: str(r.caveat), sourceLine: String(r.sourceLine ?? ''), warnings: strs(r.warnings) } : null,
@@ -407,7 +476,10 @@ export async function loadIntelligence(prisma: PrismaLike, opts: { now: Date; li
     for (const email of sentFailed) states.delete(email);
   }
   const people = rankPeople(writerRows, personas, { ...base, states, sentFailed });
-  const pursued = await loadPursued(prisma, opts.now);
+  // The pursued items are placed with what this read already holds (the personas and the threads of the window's writers; no new source).
+  const threadAccounts = new Map<string, string | null>();
+  for (const w of writerRows) { const e = w.from_email.trim().toLowerCase(); if (!threadAccounts.get(e)) threadAccounts.set(e, w.thread_account ?? threadAccounts.get(e) ?? null); }
+  const pursued = await loadPursued(prisma, opts.now, { identity, coverage, personas: new Map(personas.filter((p) => p.email).map((p) => [String(p.email).toLowerCase(), p])), threadAccounts });
   return {
     signals: signals.slice(skipSignals, skipSignals + limit), triggers: triggers.slice(0, limit), people: people.slice(skipPeople, skipPeople + peopleLimit), pursued,
     totals: { signals: Math.max(signalTotal, signals.length), triggers: triggers.length, people: people.length },
