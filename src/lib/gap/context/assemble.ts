@@ -27,6 +27,7 @@ import { retrieveAccountKnowledge, type AccountKnowledge, type KnowledgeAdapters
 import { VERIFIED_EXCERPT, type GateSignal } from '../research/evidence-gate';
 import { factUsability } from '../research/currentness';
 import { hash8 } from './retrieval';
+import { guardFacts, type RejectedFamily } from '../learning/outcome-loop';
 
 export interface IdentityQuery {
   accountName: string | null;
@@ -59,6 +60,8 @@ export interface AssembleAdapters {
   /** The verified public facts for the account (the research's signal rows). */
   publicFacts?: (q: { accountName: string; now: Date }) => Promise<GateSignal[]>;
   commitments?: (q: { accountName: string | null; identity: ContextIdentity }) => Promise<ContextCommitment[]>;
+  /** C55 (P2-7): the account's rejected hypotheses (learning/outcome-loop.ts), so a note restating one carries the rejection, never a live hypothesis. */
+  rejected?: (q: { accountName: string | null; identity: ContextIdentity }) => Promise<RejectedFamily[]>;
 }
 
 export interface AssembleInput {
@@ -277,8 +280,18 @@ export async function assembleCommercialContext(adapters: AssembleAdapters, inpu
   const subject = identity.accountName ?? input.domain ?? 'unknown';
   const candidate = [...buyerClaimsFromTimeline(timeline, subject), ...(knowledge?.claims ?? []), ...external];
   const checked = validateClaims(candidate);
-  const claims = checked.ok ? checked.claims : candidate.filter((c) => !checked.faults.some((f) => f.claimId === c.claimId));
+  let claims = checked.ok ? checked.claims : candidate.filter((c) => !checked.faults.some((f) => f.claimId === c.claimId));
   if (!checked.ok) refused.push(...checked.faults.map((f) => ({ claimId: f.claimId, reason: f.reason })));
+  // C55 (P2-7): a seller note that restates a rejected hypothesis is marked superseded by the rejection, kept visible with the words,
+  // and never externally usable; a buyer's own words are never marked (guardFacts leaves buyer_said alone).
+  if (adapters.rejected) {
+    try {
+      const rejected = await adapters.rejected({ accountName: identity.accountName, identity });
+      if (rejected.length) claims = guardFacts(claims, rejected);
+    } catch (err) {
+      coverage.push(cov('gap', { configured: true, reachable: false, omittedReason: `rejected hypotheses unreadable: ${failReason(err)}` }));
+    }
+  }
   markBuyerConflicts(claims);
   const buyerFacts = claims.filter((c) => c.claimClass === 'buyer_said');
   const sellerHypotheses = claims.filter((c) => c.claimClass === 'seller_noted' || c.claimClass === 'inference' || c.claimClass === 'internal_only' || c.claimClass === 'modeled');

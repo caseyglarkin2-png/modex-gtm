@@ -244,7 +244,8 @@ export async function replayOctober8(prisma: PrismaLike, opts: { now: Date; case
   const drafts: unknown[] = [];
   const sent: unknown[] = [];
   const sender = gapGmailSender({ GAP_GMAIL_USER_EMAIL: 'casey@yardflow.ai', GAP_GOOGLE_REFRESH_TOKEN: 'replay' });
-  const reply = { gapSender: () => sender, materials: async () => [], signature: async () => null, mailboxSentTo: async () => [], gmail: { createGmailDraft: async (p: unknown) => { drafts.push(p); return { provider: 'gmail' as const, draftId: `d-${drafts.length}`, messageId: 'dm-1', threadId: 't-m-chris-sep2' }; }, sendViaGmail: async (p: unknown) => { sent.push(p); return { provider: 'gmail' as const, id: 'never', threadId: null }; } } };
+  // The sink mailbox holds no hand-written drafts (P2-1: the reply service reads them before any draft; the sink answers none).
+  const reply = { gapSender: () => sender, materials: async () => [], signature: async () => null, mailboxSentTo: async () => [], mailboxDraftsTo: async () => [], gmail: { createGmailDraft: async (p: unknown) => { drafts.push(p); return { provider: 'gmail' as const, draftId: `d-${drafts.length}`, messageId: 'dm-1', threadId: 't-m-chris-sep2' }; }, sendViaGmail: async (p: unknown) => { sent.push(p); return { provider: 'gmail' as const, id: 'never', threadId: null }; } } };
   const taskId = decision.ok ? decision.angleTaskId : null;
   // The person item's own address is the recipient (no persona chosen from a roster the scripted angle does not offer).
   const promotion: PromoteAngleResult = taskId ? await promoteAngle(prisma, { taskId, actor: ACTOR, now: new Date(now.getTime() + 3000), action: 'email' }, { reply: reply as never }) : { ok: false, reason: 'no_task' };
