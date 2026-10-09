@@ -53,6 +53,26 @@ describe('C24/C25: <AnglePromote>', () => {
     expect(fetchMock.mock.calls.every((c) => !/send/i.test(String(c[0])))).toBe(true);
   });
 
+  it('P2-8: with a writer and no offered people the email stays enabled, defaults to "Reply to <name>" and posts personaId null; an offered person stays an alternative and posts its id', async () => {
+    const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(json(200, { ok: true, lane: 'reply', line: 'A Gmail draft of the reply is saved.', href: null }));
+    render(<AnglePromote taskId="at_w" people={[]} proposedAction="email" accountName="Kenco Logistics" writer={{ email: 'dave.kiesling@kencogroup.com', name: 'Dave Kiesling' }} />);
+    const box = screen.getAllByTestId('angle-promote').find((n) => n.getAttribute('data-task') === 'at_w')!;
+    expect((within(box).getByTestId('angle-promote-email') as HTMLButtonElement).disabled).toBe(false);
+    const select = within(box).getByTestId('angle-promote-person') as HTMLSelectElement;
+    expect([...select.options].map((o) => o.textContent)).toEqual(['Reply to Dave Kiesling']);
+    fireEvent.click(within(box).getByTestId('angle-promote-email'));
+    await waitFor(() => expect(within(box).getByTestId('angle-promote-line').textContent).toContain('A Gmail draft of the reply is saved'));
+    expect(JSON.parse(String(fetchMock.mock.calls[0][1]?.body))).toEqual({ taskId: 'at_w', personaId: null, action: 'email' });
+    render(<AnglePromote taskId="at_w2" people={people} proposedAction="email" accountName="Kenco Logistics" writer={{ email: 'dave.kiesling@kencogroup.com', name: null }} />);
+    const box2 = screen.getAllByTestId('angle-promote').find((n) => n.getAttribute('data-task') === 'at_w2')!;
+    const select2 = within(box2).getByTestId('angle-promote-person') as HTMLSelectElement;
+    expect([...select2.options].map((o) => o.textContent)).toEqual(['Reply to dave.kiesling@kencogroup.com', 'Dave Kiesling (VP Transportation)', 'Craig Morrison (Asset Leader)']);
+    fireEvent.change(select2, { target: { value: '2' } });
+    fireEvent.click(within(box2).getByTestId('angle-promote-email'));
+    await waitFor(() => expect(fetchMock.mock.calls.length).toBe(2));
+    expect(JSON.parse(String(fetchMock.mock.calls[1][1]?.body))).toEqual({ taskId: 'at_w2', personaId: 2, action: 'email' });
+  });
+
   it('a refusal is shown in words; with no person on record only research is enabled', async () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce(json(400, { ok: false, error: 'gap_sender_unconfigured', detail: null }));
     render(<AnglePromote taskId="at_1" people={people} proposedAction="call" accountName={null} />);

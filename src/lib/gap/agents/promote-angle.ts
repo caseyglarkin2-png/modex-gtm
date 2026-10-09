@@ -180,6 +180,11 @@ export async function promoteAngle(prisma: PrismaLike, input: PromoteAngleInput,
   }
   const personName = persona?.name ?? str(taskInput.name);
   const personEmail = persona?.email ?? personItemEmail;
+  // P2-8: a person item is the WRITER's message; the email goes to them. Another chosen persona is refused in words, never the thesis lane.
+  const writerName = str(taskInput.name) ?? personItemEmail;
+  if (personItemEmail && persona && input.personaId != null && (persona.email ?? '').toLowerCase() !== personItemEmail && (input.action ?? angle.proposedAction) === 'email') {
+    return { ok: false, reason: 'person_not_writer', detail: `This item is ${writerName}'s message; the reply goes to them, or choose Research. ${persona.name ?? `Person ${persona.id}`} is not the writer.` };
+  }
 
   if (action === 'call') {
     const href = persona ? `/gap/call/${persona.id}` : accountName ? `${accountHref(accountName)}/` : null;

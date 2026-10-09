@@ -15,6 +15,8 @@ export interface AnglePromoteProps {
   people: Array<{ personaId: number; name: string | null; title: string | null }>;
   proposedAction: 'email' | 'call' | 'research';
   accountName: string | null;
+  /** P2-8: for a person item, the person who wrote in: the reply goes to them (posted as personaId null); the offered people stay as alternatives. */
+  writer?: { email: string; name: string | null } | null;
 }
 
 type Choice = 'reuse' | 'revise' | 'fresh';
@@ -25,8 +27,9 @@ const PRIMARY = 'rounded-md bg-[var(--primary)] px-2 py-1 text-xs text-[var(--pr
 const ACTION_LABEL: Record<AnglePromoteProps['proposedAction'], string> = { email: 'Draft the email', call: 'Prepare the call', research: 'Research first' };
 const CHOICE_LABEL: Record<Choice, string> = { reuse: 'Reuse that draft', revise: 'Revise it where it is', fresh: 'Write a fresh one' };
 
-export function AnglePromote({ taskId, people, proposedAction, accountName }: AnglePromoteProps) {
-  const [personaId, setPersonaId] = useState<number | null>(people[0]?.personaId ?? null);
+export function AnglePromote({ taskId, people, proposedAction, accountName, writer = null }: AnglePromoteProps) {
+  const [personaId, setPersonaId] = useState<number | null>(writer ? null : people[0]?.personaId ?? null);
+  const hasRecipient = !!writer || people.length > 0;
   const [busy, setBusy] = useState(false);
   const [line, setLine] = useState<string | null>(null);
   const [href, setHref] = useState<string | null>(null);
@@ -61,17 +64,18 @@ export function AnglePromote({ taskId, people, proposedAction, accountName }: An
 
   return (
     <div className="mt-2 space-y-2 text-xs" data-testid="angle-promote" data-task={taskId}>
-      {people.length ? (
+      {hasRecipient ? (
         <label className="flex flex-wrap items-center gap-2">
           <span className="text-[var(--muted-foreground)]">For</span>
           <select className="rounded-md border border-[var(--border)] bg-transparent px-2 py-1" value={personaId ?? ''} onChange={(e) => setPersonaId(e.target.value ? Number(e.target.value) : null)} disabled={busy} data-testid="angle-promote-person">
+            {writer ? <option value="">Reply to {writer.name ?? writer.email}</option> : null}
             {people.map((p) => <option key={p.personaId} value={p.personaId}>{p.name ?? `person ${p.personaId}`}{p.title ? ` (${p.title})` : ''}</option>)}
           </select>
         </label>
       ) : <p className="text-[var(--muted-foreground)]">No person is on record{accountName ? ` at ${accountName}` : ''}: the email and the call wait for one.</p>}
       <div className="flex flex-wrap items-center gap-2">
         {(['email', 'call', 'research'] as const).map((a) => (
-          <button key={a} type="button" className={a === proposedAction ? PRIMARY : BTN} disabled={busy || (a !== 'research' && !people.length)} onClick={() => void promote(a)} data-testid={`angle-promote-${a}`}>
+          <button key={a} type="button" className={a === proposedAction ? PRIMARY : BTN} disabled={busy || (a !== 'research' && !hasRecipient)} onClick={() => void promote(a)} data-testid={`angle-promote-${a}`}>
             {ACTION_LABEL[a]}{a === proposedAction ? ' (proposed)' : ''}
           </button>
         ))}

@@ -131,12 +131,21 @@ describe('C24: an accepted angle becomes a draft through the existing workflow',
     const taskId = await preparedTask(c);
     const g = gmailSpy();
     expect(await promoteAngle(c, { taskId, actor: ACTOR, now: NOW, personaId: 99 }, g.deps)).toEqual({ ok: false, reason: 'person_not_offered', detail: '99' });
+    // P2-8: a person item is the writer's message; another offered persona for the email is refused naming the writer, never the thesis lane.
+    const otherTask = await preparedTask(c, { result: { ...ANGLE, peopleNamed: [{ personaId: 1, name: 'Dave Kiesling', title: 'VP' }, { personaId: 2, name: 'Craig Morrison', title: 'Asset Leader' }] } });
+    const craigRow = { id: 2, name: 'Craig Morrison', title: 'Asset Leader', email: 'craig.morrison@kencogroup.com', account_name: 'Kenco Logistics', do_not_contact: false, hubspot_contact_id: '2', persona_lane: null };
+    await c.persona.create({ data: craigRow });
+    const notWriter = await promoteAngle(c, { taskId: otherTask, actor: ACTOR, now: NOW, personaId: 2 }, g.deps);
+    expect(notWriter).toMatchObject({ ok: false, reason: 'person_not_writer', detail: "This item is Dave Kiesling's message; the reply goes to them, or choose Research. Craig Morrison is not the writer." });
+    expect(g.drafts).toEqual([]);
+    expect(await promoteAngle(c, { taskId: otherTask, actor: ACTOR, now: NOW, personaId: 2, action: 'call' }, g.deps)).toMatchObject({ ok: true, lane: 'call', href: '/gap/call/2' });
     const call = await promoteAngle(c, { taskId, actor: ACTOR, now: NOW, personaId: 1, action: 'call' }, g.deps);
     expect(call).toMatchObject({ ok: true, lane: 'call', href: '/gap/call/1', line: expect.stringMatching(/^Nothing drafted: the angle is a call/) });
     const research = await promoteAngle(c, { taskId, actor: ACTOR, now: NOW, action: 'research' }, g.deps);
     expect(research).toMatchObject({ ok: true, lane: 'research', href: '/gap/accounts/kenco-logistics/' });
     expect(g.drafts).toEqual([]);
-    expect(await loadPromotions(c, `person:${DAVE_EMAIL}`)).toHaveLength(2);
+    // Three promotions on the item: the Craig call brief (P2-8), the call and the research; the refusals recorded nothing.
+    expect(await loadPromotions(c, `person:${DAVE_EMAIL}`)).toHaveLength(3);
     expect(g.sent).toEqual([]);
     expect(await promoteAngle(c, { taskId: 'at_nope', actor: ACTOR, now: NOW }, g.deps)).toEqual({ ok: false, reason: 'task_not_found' });
     const queued = await queueAgentTask(c, { kind: 'develop_angle', itemKey: 'signal:s-x', itemToken: '', day: '2026-10-08', revision: 0, request: 'pursue', requestedBy: ACTOR, requestedFrom: 'app', input: {} }, { now: NOW, actor: ACTOR });
