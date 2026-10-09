@@ -460,7 +460,7 @@ function betweenUs(i: StoryInput): StoryRow {
   // Sprint 5 review: only a meeting that took place has happened between us: a future one (prepared on the brief) or a
   // canceled one (said on Work) is not told here as Checked history; the history's own "Meeting (status):" prefix is
   // not repeated.
-  const meeting = t.find((x) => x.kind === 'meeting' && x.source !== 'HubSpot' && new Date(x.at).getTime() <= i.now.getTime() && !/\bcancel(?:l)?ed\b/i.test(x.what));
+  const meeting = t.find((x) => x.kind === 'meeting' && x.source !== 'HubSpot' && x.source !== 'vault' && new Date(x.at).getTime() <= i.now.getTime() && !/\bcancel(?:l)?ed\b/i.test(x.what));
   if (meeting) s.push({ text: `Meeting ${day(meeting.at)}: ${meeting.what.replace(/^Meeting \([^)]*\):?\s*/, '').replace(/\.$/, '') || 'held'}.`, tag: 'Checked', basis: `account history, ${day(meeting.at)}`, basisIds: [`touch:${meeting.at}`] });
   // B2: what the deal team wrote down in HubSpot (a note, a call, a meeting that took place), dated and tagged by its
   // origin, newest first, a few; never buyer words (only an email FROM them is, and that is a reply above).
@@ -472,6 +472,17 @@ function betweenUs(i: StoryInput): StoryRow {
     const body = [title, cut.replace(/\.$/, '')].filter(Boolean).join(': ');
     const head = e.kind === 'note' ? `HubSpot note ${day(e.at)}` : `HubSpot ${e.kind} logged ${day(e.at)}`;
     s.push({ text: `${head}${body ? `: ${body}` : ''}.`, tag: 'Checked', basis: `HubSpot, ${day(e.at)}`, basisIds: [`hubspot:${e.kind}:${e.engagementId ?? e.at}`] });
+  }
+  // Knowledge program (2026-10-09): the vault's Fireflies calls (the summary is advisory; the verbatim is on the note) and the
+  // meetings on the calendar that have been held, newest first, a few, tagged by their origin.
+  const vaultRows = t.filter((x) => x.source === 'vault' && (x.kind === 'call' || x.kind === 'meeting') && new Date(x.at).getTime() <= i.now.getTime()).slice(0, ENGAGEMENT_ROWS_MAX);
+  for (const v of vaultRows) {
+    const excerpt = (v.excerpt ?? '').replace(/\s+/g, ' ').trim();
+    const cut = excerpt.length > 220 ? `${excerpt.slice(0, 220).replace(/\s+\S*$/, '')}...` : excerpt;
+    const who = v.name && v.name !== 'the account' ? ` with ${v.name}` : '';
+    const what = v.what.replace(/\.$/, '').trim();
+    if (v.kind === 'call') s.push({ text: `Call ${day(v.at)}${who} (Fireflies): ${what}${cut ? `. ${cut.replace(/\.$/, '')}` : ''}.`, tag: 'Checked', basis: `the vault's Fireflies capture, ${day(v.at)}; the summary is advisory, the verbatim is on the note`, basisIds: [`vault:call:${v.engagementId ?? v.at}`] });
+    else s.push({ text: `Meeting ${day(v.at)}${who}: ${what} (on the calendar; the vault's prep note).`, tag: 'Checked', basis: `the vault's meeting note, ${day(v.at)}`, basisIds: [`vault:meeting:${v.engagementId ?? v.at}`] });
   }
   if (!s.length) {
     // R63-B S9: the same reader as the learn row: an open deal, their words, a recorded conversation, a meeting ahead.

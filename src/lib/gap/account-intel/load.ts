@@ -219,6 +219,8 @@ export async function loadAccountInputs(
       sent?: (args: Omit<LoadAccountSentArgs, 'sender'> & { sender: GmailSender | null }) => Promise<AccountInputs['sent']>;
       /** B2: the HubSpot company's engagements (tests inject; the live page reads hubspot/engagements.ts with its cache). */
       engagements?: (companyId: string, now: Date) => Promise<AccountInputs['engagements']>;
+      /** Knowledge program: the vault's calls and meetings for the account (tests inject; the live page reads the knowledge table). */
+      knowledge?: (accountName: string, now: Date) => Promise<AccountInputs['knowledge']>;
     };
     hypothesisId?: string;
     /**
@@ -442,6 +444,24 @@ export async function loadAccountInputs(
         const r = await loadCompanyEngagements(companyId, { token: process.env.HUBSPOT_ACCESS_TOKEN, now, prisma });
         return { items: r.items.map((e) => ({ kind: e.kind, at: e.at, title: e.title, body: e.body, id: e.id, from: e.from ?? null, to: e.to ?? null, direction: e.direction ?? null })), read: r.read, detail: r.detail };
       })().catch(() => null);
+  // Knowledge program (2026-10-09): the vault's Fireflies calls and calendar-prepped meetings for the account, from the
+  // knowledge table (live only; soft; the test seam injects).
+  const knowledgeP: Promise<AccountInputs['knowledge']> = lean || !(opts.deps?.knowledge || opts.live)
+    ? Promise.resolve(null)
+    : (async () => {
+        if (opts.deps?.knowledge) return opts.deps.knowledge(account.name, now);
+        const { knowledgeForAccount } = await import('../knowledge/vault-table-adapter');
+        const { parseFirefliesCapture } = await import('../knowledge/fireflies-summary');
+        const set = await knowledgeForAccount(prisma, account.name, { limit: 80 });
+        const calls = set.calls
+          .filter((n) => n.source === 'fireflies' && n.noteDate)
+          .map((n) => {
+            const f = parseFirefliesCapture(n.text ?? '');
+            return { id: n.id, path: n.path, title: n.title ?? n.path, at: new Date(n.noteDate as string).toISOString(), people: n.people ?? [], summary: f.summary, actions: f.actions };
+          });
+        const meetings = set.meetings.filter((n) => n.noteDate).map((n) => ({ id: n.id, path: n.path, title: n.title ?? n.path, at: new Date(n.noteDate as string).toISOString(), people: n.people ?? [] }));
+        return { calls, meetings, read: true, detail: null };
+      })().catch((e) => ({ calls: [], meetings: [], read: false, detail: `the knowledge table could not be read: ${e instanceof Error ? e.message : String(e)}` }));
   // Contact currentness for the GAP contacts (database evidence plus the live HubSpot properties where linked).
   const hsProps = new Map<string, HubSpotEmploymentProps>();
   for (const h of hsPeople?.people ?? []) hsProps.set(h.id, { company: h.company ?? null, title: h.title, email: null, lastModifiedAt: h.lastModifiedAt ?? null, apolloEmploymentStatus: h.apolloEmploymentStatus ?? null, apolloVerifiedAt: h.apolloVerifiedAt ?? null });
@@ -524,6 +544,7 @@ export async function loadAccountInputs(
     inbound: await inboundP,
     sent: await sentP,
     engagements: await engagementsP,
+    knowledge: await knowledgeP,
   };
 }
 

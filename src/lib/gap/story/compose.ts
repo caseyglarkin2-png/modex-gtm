@@ -38,6 +38,7 @@ export async function composeStoryAndAnchor(x: { inputs: AccountInputs; brief: A
       // B1/B2: our Sent mail and the HubSpot engagements the inputs carry (null when not read this time).
       sent: inputs.sent ?? null,
       engagements: inputs.engagements ?? null,
+      knowledge: inputs.knowledge ?? null,
       now,
     }),
     clawdRead: readers.clawd.read,
