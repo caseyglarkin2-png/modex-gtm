@@ -158,28 +158,33 @@ describe('B1/B3: the coverage reads what it holds', () => {
     expect(Object.keys(ASK_COVERAGE_WORDS)).toEqual(['hubspot', 'hubspot_engagements', 'gmail_thread', 'gmail_sent', 'gmail_drafts', 'vault', 'clawd', 'signals']);
   });
 
-  it('B3: the line names what was read with what it held; the vault row reads the retrieval\'s coverage (a fixture until the table adapter lands): synced time and count, partial with its reason, unreachable as failed, not configured as not read', () => {
+  it('B3: the line names what was read with what it held; the vault row reads the retrieval\'s coverage (a fixture until the table adapter lands): the adapter\'s summary on the seller\'s clock, else synced time and count, partial with its reason, unreachable as failed, not configured as not read', () => {
     const base = { opportunity: { status: 'ACTIVE', detail: '', deals: [] } as AccountInputs['opportunity'], vaultNote: false, vaultConfigured: true, clawdConfigured: true, clawdFailed: false, senderConfigured: true, draftsOnRecord: 0, sent: { read: true, count: 3, detail: null }, engagements: { read: true, count: 7, detail: null } };
     // 14:39Z is 10:39 on the seller's clock (America/New_York, daylight time).
     const full = askCoverageOf({ ...base, vault: { configured: true, reachable: true, completeness: 'complete', watermark: '2026-10-08', indexedAt: '2026-10-09T14:39:00.000Z', omittedReason: null, count: 92, countWord: 'call' } });
-    expect(full.find((c) => c.source === 'vault')).toEqual({ source: 'vault', status: 'read', detail: 'synced 10:39, 92 calls' });
-    expect(coverageLineOf(full)).toBe("Not read this time: Gmail drafts (Gmail drafts not read). Partly read: the Gmail thread (GAP's synced inbox, not a live thread read). Read: HubSpot engagements (7), Gmail Sent (3 messages), the vault (synced 10:39, 92 calls)");
+    expect(full.find((c) => c.source === 'vault')).toEqual({ source: 'vault', status: 'read', detail: 'synced 10:39 New York, 92 calls' });
+    // Builder A's adapter writes the row's summary: it is what the line says, its instant on the seller's clock.
+    const summarised = askCoverageOf({ ...base, vault: { configured: true, reachable: true, completeness: 'complete', summary: 'synced 2026-10-09T14:39Z, 92 calls, 78 account notes' } });
+    expect(summarised.find((c) => c.source === 'vault')).toEqual({ source: 'vault', status: 'read', detail: 'synced 10:39 New York, 92 calls, 78 account notes' });
+    expect(coverageLineOf(summarised)).toContain('Read: HubSpot engagements (7), Gmail Sent (3 messages), the vault (synced 10:39 New York, 92 calls, 78 account notes)');
+    expect(askCoverageOf({ ...base, vault: { configured: true, reachable: true, completeness: 'partial', summary: 'synced 2026-10-09T14:39:00.000Z, 4 calls', omittedReason: 'the note links to 2 pages not followed' } }).find((c) => c.source === 'vault')).toEqual({ source: 'vault', status: 'partial', detail: 'synced 10:39 New York, 4 calls; the note links to 2 pages not followed' });
+    expect(coverageLineOf(full)).toBe("Not read this time: Gmail drafts (Gmail drafts not read). Partly read: the Gmail thread (GAP's synced inbox, not a live thread read). Read: HubSpot engagements (7), Gmail Sent (3 messages), the vault (synced 10:39 New York, 92 calls)");
     const fixture: AskCoverage[] = [
-      { source: 'vault', status: 'read', detail: 'synced 10:39, 92 calls' },
+      { source: 'vault', status: 'read', detail: 'synced 10:39 New York, 92 calls, 78 account notes' },
       { source: 'gmail_sent', status: 'read', detail: '3 messages' },
       { source: 'hubspot_engagements', status: 'read', detail: '7' },
       { source: 'gmail_drafts', status: 'not_read', detail: 'Gmail drafts not read' },
       { source: 'hubspot', status: 'read', detail: null },
     ];
-    expect(coverageLineOf(fixture)).toBe('Not read this time: Gmail drafts (Gmail drafts not read). Read: the vault (synced 10:39, 92 calls), Gmail Sent (3 messages), HubSpot engagements (7)');
+    expect(coverageLineOf(fixture)).toBe('Not read this time: Gmail drafts (Gmail drafts not read). Read: the vault (synced 10:39 New York, 92 calls, 78 account notes), Gmail Sent (3 messages), HubSpot engagements (7)');
     expect(coverageLineOf([{ source: 'hubspot', status: 'read', detail: null }]), 'a read source with nothing to say is no line').toBeNull();
-    expect(askCoverageOf({ ...base, vault: { configured: true, reachable: true, completeness: 'partial', indexedAt: '2026-10-09T14:39:00.000Z', omittedReason: 'the note links to 2 pages not followed', count: 4, countWord: 'claim' } }).find((c) => c.source === 'vault')).toEqual({ source: 'vault', status: 'partial', detail: 'synced 10:39, 4 claims; the note links to 2 pages not followed' });
+    expect(askCoverageOf({ ...base, vault: { configured: true, reachable: true, completeness: 'partial', indexedAt: '2026-10-09T14:39:00.000Z', omittedReason: 'the note links to 2 pages not followed', count: 4, countWord: 'claim' } }).find((c) => c.source === 'vault')).toEqual({ source: 'vault', status: 'partial', detail: 'synced 10:39 New York, 4 claims; the note links to 2 pages not followed' });
     expect(askCoverageOf({ ...base, vault: { configured: true, reachable: false, omittedReason: 'vault unreadable: ENOENT' } }).find((c) => c.source === 'vault')).toEqual({ source: 'vault', status: 'failed', detail: 'vault unreadable: ENOENT' });
     expect(askCoverageOf({ ...base, vault: { configured: false } }).find((c) => c.source === 'vault')).toEqual({ source: 'vault', status: 'not_read', detail: 'not configured' });
     // Without the retrieval's row the vault keeps the configuration check and the story's note row.
     expect(askCoverageOf({ ...base, vaultConfigured: false }).find((c) => c.source === 'vault')).toEqual({ source: 'vault', status: 'not_read', detail: 'not configured' });
     expect(askCoverageOf({ ...base, vaultNote: true }).find((c) => c.source === 'vault')).toEqual({ source: 'vault', status: 'read', detail: null });
-    expect(coverageFromPage(inputsWith({}), null, {}, { vault: { configured: true, reachable: true, completeness: 'complete', indexedAt: '2026-10-09T14:39:00.000Z', count: 92, countWord: 'call' } }).find((c) => c.source === 'vault')!.detail).toBe('synced 10:39, 92 calls');
+    expect(coverageFromPage(inputsWith({}), null, {}, { vault: { configured: true, reachable: true, completeness: 'complete', indexedAt: '2026-10-09T14:39:00.000Z', count: 92, countWord: 'call' } }).find((c) => c.source === 'vault')!.detail).toBe('synced 10:39 New York, 92 calls');
   });
 });
 
