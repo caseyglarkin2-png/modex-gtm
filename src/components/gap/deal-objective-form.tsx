@@ -8,21 +8,22 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { refreshNow } from '@/components/gap/refresh-now';
+import { ActionStatus } from '@/components/gap/action-status';
+import { postAction, type ActionResult } from '@/lib/gap/ui/action-result';
 
 export function DealObjectiveForm({ accountName, initial }: { accountName: string; initial: string }) {
   const router = useRouter();
   const [text, setText] = useState(initial);
-  const [state, setState] = useState<'idle' | 'saving' | 'saved' | string>('idle');
+  const [saving, setSaving] = useState(false);
+  const [result, setResult] = useState<ActionResult | null>(null);
   const save = async () => {
-    setState('saving');
-    const res = await fetch('/api/gap/deals/objective', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ accountName, text }) }).catch(() => null);
-    if (!res?.ok) {
-      const body = (await res?.json().catch(() => null)) as { error?: string } | null;
-      setState(`Not saved: ${body?.error ?? 'network error'}`);
-      return;
-    }
-    setState('saved');
-    refreshNow(router);
+    setSaving(true);
+    setResult(null);
+    // C44: one state per save; an incomplete request says it may have applied instead of "network error".
+    const r = await postAction('/api/gap/deals/objective', { accountName, text }, { verb: 'Saved', source: accountName, accepted: () => 'Saved.' });
+    setSaving(false);
+    setResult(r);
+    if (r.state === 'accepted') refreshNow(router);
   };
   return (
     <div className="mt-2 flex flex-col gap-2 sm:flex-row">
@@ -38,13 +39,13 @@ export function DealObjectiveForm({ accountName, initial }: { accountName: strin
       <button
         type="button"
         data-testid="deal-objective-save"
-        disabled={state === 'saving' || !text.trim()}
+        disabled={saving || !text.trim()}
         onClick={save}
         className="rounded-md bg-[var(--primary)] px-3 py-1.5 text-sm font-medium text-[var(--primary-foreground)] disabled:opacity-50"
       >
-        {state === 'saving' ? 'Saving' : 'Set objective'}
+        {saving ? 'Saving' : 'Set objective'}
       </button>
-      {state !== 'idle' && state !== 'saving' ? <p className="text-xs text-[var(--muted-foreground)]">{state === 'saved' ? 'Saved.' : state}</p> : null}
+      <ActionStatus result={result} testId="deal-objective-status" busy={saving} onRetry={() => void save()} />
     </div>
   );
 }

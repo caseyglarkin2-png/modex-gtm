@@ -9,23 +9,27 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { MemberView } from '@/lib/gap/intake/views';
 import { refreshNow } from '@/components/gap/refresh-now';
+import { ActionStatus } from '@/components/gap/action-status';
+import { postAction, type ActionResult } from '@/lib/gap/ui/action-result';
 
 const btn = 'min-h-[36px] rounded-md border border-[var(--border)] px-2 py-1 text-xs hover:bg-[var(--muted)] disabled:opacity-60';
 
 export function PersonResolve({ member }: { member: Pick<MemberView, 'id' | 'name' | 'candidates' | 'accountName'> }) {
   const router = useRouter();
   const [busy, setBusy] = useState(false);
-  const [msg, setMsg] = useState<string | null>(null);
+  const [result, setResult] = useState<ActionResult | null>(null);
+  const [last, setLast] = useState<{ body: Record<string, unknown>; done: string } | null>(null);
   const people = member.candidates.filter((c) => c.personaId);
   const accounts = [...new Set(member.candidates.filter((c) => !c.personaId && !c.accountName.endsWith('(not in GAP)')).map((c) => c.accountName).concat(member.accountName ? [member.accountName] : []))];
   async function send(body: Record<string, unknown>, done: string) {
     setBusy(true);
-    setMsg(null);
-    const res = await fetch(`/api/gap/sources/members/${encodeURIComponent(member.id)}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    setResult(null);
+    setLast({ body, done });
+    // C44: never a throw that leaves the buttons disabled; every outcome is a state with its next path.
+    const r = await postAction(`/api/gap/sources/members/${encodeURIComponent(member.id)}`, body, { verb: 'Saved', source: member.id, accepted: () => done });
     setBusy(false);
-    if (!res.ok) return setMsg(`Not saved: ${String(((await res.json().catch(() => ({}))) as { error?: string }).error ?? res.status)}`);
-    setMsg(done);
-    refreshNow(router);
+    setResult(r.state === 'accepted' || r.state === 'queued' ? { ...r, line: done } : r);
+    if (r.state === 'accepted' || r.state === 'queued') refreshNow(router);
   }
   return (
     <div className="space-y-1" data-testid="person-resolve">
@@ -49,7 +53,7 @@ export function PersonResolve({ member }: { member: Pick<MemberView, 'id' | 'nam
           Leave unresolved
         </button>
       </div>
-      {msg ? <p className="text-xs">{msg}</p> : null}
+      <ActionStatus result={result} testId="person-resolve-status" className="text-xs" busy={busy} onRetry={() => { if (last) void send(last.body, last.done); }} />
     </div>
   );
 }

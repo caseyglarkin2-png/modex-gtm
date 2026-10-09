@@ -36,7 +36,8 @@ export async function POST(request: NextRequest) {
   if (!parsed.success) return badBody(parsed.error.issues);
   const r = await recordWorkOutcome(prisma, { ...parsed.data, actor: g.email });
   if (!r.ok) return NextResponse.json({ error: r.reason }, { status: r.reason === 'account_not_found' ? 404 : 400 });
-  if (r.existing) return NextResponse.json(r, { status: 200 });
+  // C44: the state the action came to; an outcome already recorded today is accepted too (nothing written twice).
+  if (r.existing) return NextResponse.json({ ...r, state: 'accepted' }, { status: 200 });
   await forgetPursuitSummary(prisma, parsed.data.accountName);
-  return NextResponse.json(r, { status: 201 });
+  return NextResponse.json({ ...r, state: 'accepted' }, { status: 201 });
 }
