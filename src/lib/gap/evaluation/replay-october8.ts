@@ -229,9 +229,11 @@ export async function replayOctober8(prisma: PrismaLike, opts: { now: Date; case
   const taskId = decision.ok ? decision.angleTaskId : null;
   // The person item's own address is the recipient (no persona chosen from a roster the scripted angle does not offer).
   const promotion: PromoteAngleResult = taskId ? await promoteAngle(prisma, { taskId, actor: ACTOR, now: new Date(now.getTime() + 3000), action: 'email' }, { reply: reply as never }) : { ok: false, reason: 'no_task' };
+  // C25 as builder B shipped it: a second acceptance with no choice is refused with the competing draft and its offers; reuse returns the existing draft and creates nothing.
   const secondPromotion: PromoteAngleResult = taskId ? await promoteAngle(prisma, { taskId, actor: ACTOR, now: new Date(now.getTime() + 4000), action: 'email' }, { reply: reply as never }) : { ok: false, reason: 'no_task' };
+  const reused: PromoteAngleResult = taskId ? await promoteAngle(prisma, { taskId, actor: ACTOR, now: new Date(now.getTime() + 4500), action: 'email', choice: 'reuse' }, { reply: reply as never }) : { ok: false, reason: 'no_task' };
   demo('C24', promotion.ok && promotion.lane === 'reply' && drafts.length === 1 && sent.length === 0, promotion.ok ? `lane ${promotion.lane}, ${drafts.length} Gmail draft in the sink, ${sent.length} sent` : `refused: ${promotion.reason}${promotion.detail ? ` ${promotion.detail}` : ''}`);
-  demo('C25', secondPromotion.ok && secondPromotion.lane === 'reply' && secondPromotion.alreadyDrafted === true && drafts.length === 1, secondPromotion.ok ? 'the second acceptance returns the same draft; no second draft' : `refused: ${secondPromotion.reason}`);
+  demo('C25', !secondPromotion.ok && secondPromotion.reason === 'competing_work' && reused.ok && drafts.length === 1, !secondPromotion.ok && reused.ok ? `a second acceptance is refused with the competing draft (${secondPromotion.detail ?? 'offers: reuse, fresh'}); reuse returns it, lane ${reused.lane}; still one draft` : `second: ${secondPromotion.ok ? 'created again' : secondPromotion.reason}; reuse: ${reused.ok ? reused.lane : reused.reason}`);
   documented('C26', 'docs/gap/HANDLER_INVENTORY.md (builder B, cb2a7fd0)');
 
   // 4. A seller correction is durable and scoped to one conversation.

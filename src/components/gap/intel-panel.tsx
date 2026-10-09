@@ -7,6 +7,7 @@
  * contacts anyone. Voice: no em dashes, "yards" plural.
  */
 import { useState } from 'react';
+import { AnglePromote } from './angle-promote';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import type { Intelligence, IntelItem, Decision, PursuedItem } from '@/lib/gap/work/intel';
@@ -110,6 +111,8 @@ function Pursued({ p }: { p: PursuedItem }) {
           {a.peopleNamed.length ? <p className="mt-1">Who: {a.peopleNamed.map((x) => `${x.name ?? `person ${x.personaId}`}${x.title ? ` (${x.title})` : ''}`).join('; ')}.</p> : a.roles.length ? <p className="mt-1">Roles: {a.roles.join(', ')}.</p> : null}
           {a.accounts.length && !p.accountName ? <p className="mt-1">Accounts: {a.accounts.join(', ')}.</p> : null}
           <ul className="mt-1 list-disc pl-4">{a.starters.map((s, i) => <li key={i}>{s}</li>)}</ul>
+          {/* C24: the one control that promotes an accepted angle into the existing draft workflow (builder B's component); nothing sends. */}
+          <div className="mt-2"><AnglePromote taskId={p.taskId} people={a.peopleNamed} proposedAction={(a.proposedAction === 'call' || a.proposedAction === 'research' ? a.proposedAction : 'email')} accountName={p.accountName} /></div>
           {a.warnings?.length ? <p className="mt-1 text-amber-700 dark:text-amber-400" data-testid="intel-pursued-warning">{a.warnings.join(' ')}</p> : null}
           <p className="mt-1 text-[var(--muted-foreground)]">Proposed: {a.proposedAction === 'email' ? 'an email' : a.proposedAction === 'call' ? 'a call' : 'research first'}.{a.caveat ? ` ${a.caveat}` : ''} Source: {a.sourceLine}.</p>
         </div>

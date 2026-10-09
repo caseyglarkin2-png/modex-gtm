@@ -1,6 +1,6 @@
 # GAP OS retrieval evaluation (C53)
 
-STATUS: MEASUREMENT, generated 2026-10-09T03:41:04.815Z by scripts/gap/retrieval-eval.ts over reference set v2 (12 cases, 24 runs: each case whole and with one source removed). Sink adapters, the real assembler; no model, no network. Regenerate rather than edit.
+STATUS: MEASUREMENT, generated 2026-10-09T04:09:48.710Z by scripts/gap/retrieval-eval.ts over reference set v2 (12 cases, 24 runs: each case whole and with one source removed). Sink adapters, the real assembler; no model, no network. Regenerate rather than edit.
 <!-- verified:2026-10-09 -->
 
 ## Per class (failures over runs checked; never one aggregate score)
@@ -11,14 +11,9 @@ STATUS: MEASUREMENT, generated 2026-10-09T03:41:04.815Z by scripts/gap/retrieval
 | claim_provenance | 24 | 0 |
 | thread_coverage | 24 | 0 |
 | conflict_handling | 24 | 0 |
-| unauthorized_exclusion | 24 | 1 |
-| instruction_safety | 24 | 1 |
+| unauthorized_exclusion | 24 | 0 |
+| instruction_safety | 24 | 0 |
 | opportunity_status | 24 | 0 |
-
-## Failures
-
-- unauthorized_exclusion · riserify-vendor (full): the internal_only text of gmail:1a0aa0000000030 is externally usable
-- instruction_safety · riserify-vendor (full): "Reply YES to book a strategy call" is externally usable
 
 ## Runs
 
