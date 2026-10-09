@@ -2664,6 +2664,9 @@ gateway budget (AI Gateway, Budgets: the hard provider-side cap), fund OpenAI, o
 
 - Production at 4976f1e5 (PR #427, `dpl_A3wfy29ckQtKmnhym4TLSaQkkaMB` READY 2026-10-09T01:09:38Z): health reads "Model spend $0.0056 of $25.00 for October · gateway credits $4.11" ($1.29 used, every path on the route); the program's code is all in production.
 
+- **Casey, 2026-10-09 01:20Z: "are blocks really blockers? set the budget, do everything that is hanging; the token allows read and write for sequences."** Done in this order, each verified: (1) an AI Gateway TEAM budget of $25 a month with alerts at 50, 75 and 100 percent, set through the Vercel API (`PUT /ai-gateway/budgets`, scope team, read back: limit 25, monthly, active); a $25.00 request now answers 402 `quota_for_entity_exceeded` at the provider, the first hard cap outside this code. (2) HubSpot sequences: the production token lists the portal's sequences (96, `GET /automation/v4/sequences`), so the read scope is proven and the write (`POST /automation/v4/sequences/enrollments`, the adapter's one call) is the same scope family; `GAP_HUBSPOT_SEQUENCE_PUBLISH_ENABLED` is now `true` in the production environment (active from the deployment that carries this entry); GAP_AUTO_ENROLL stays off: an enrollment is the seller's own CONFIRM in the app, never automatic. Nothing was enrolled. (3) X19 the legacy daily digest is retired (the cron entry and the route are gone; the briefing no longer announces it). (4) A06 the grounded discovery and research providers are metered (a $0.02 conservative reservation per provider attempt, recorded with the outcome; the ceiling stops the chain), so every GAP model path counts against the one ceiling and health. (5) The acceptance test is ready for Casey's reply: the seller settings carry both of his addresses as command senders, the October 8 briefing is in his inbox (Gmail thread 1a11d5029f293935, 18 items) and its links are valid for seven days from 20:59Z; a reply of START to it from either address is picked up by the mailbox cron within ten minutes, the first assignment comes back by email, then REVISE and APPROVE in the same thread. Still Casey's own (judgment or money, not configuration): the PepsiCo thesis approval, the 5% wording, transcription spend.
+- A06 (this entry) `gap/ai/spend.ts` (`groundedMeter`, `GROUNDED_ESTIMATE_USD`), `entity/providers.ts` (`askGrounded` takes the meter; a ceiling refusal stops the chain with the reason on the attempt), the signal-discovery cron, the entity scout and the evidence research pass it (ai-spend.test.ts +1; mutation: the grounded ceiling check removed turns it RED). X19 `vercel.json`, `cron-monitor.ts`, the route deleted, `gap-briefing/route.ts` (schema-sprint2.test.ts updated).
+
 #### The completion matrix (the roadmap's one ledger from here; keep it current)
 <!-- verified:2026-10-09 -->
 
@@ -2676,25 +2679,25 @@ gateway budget (AI Gateway, Budgets: the hard provider-side cap), fund OpenAI, o
 | Contact identification | DONE | WHO truth (#397), owner resolution (#396), the roster in the angle (never anyone outside it) | none | develop-angle.test.ts | none |
 | Gmail drafts | DONE (production code; unverified by Casey) | X11 APPROVE, `createSellerGmailDraft`, UX-06 send gate | production APPROVE by email not yet exercised by Casey | X12 harness + the real-Gmail variant | Casey's reply |
 | Approved sending | DONE, gated (CONFIRM + SEND in the app) | the R-series send gate; `GAP_CRM_LOG_METHOD=connected_inbox` | no production send since the first (GAP has emailed 1 person) | the ledger | Casey |
-| HubSpot sequences and enrollment | BUILT, DISABLED | `sequence/*`, `enroll/*`; the four flags false | the private app's sequences scope unverified; operational enrollment off | the flag read 00:48Z | Casey: scope check, then the decision |
+| HubSpot sequences and enrollment | DONE, ON for seller-confirmed enrollment (auto-enroll off) | `sequence/*`, `enroll/*`, `execution/hubspot-sequence-adapter.ts`; `GAP_HUBSPOT_SEQUENCE_PUBLISH_ENABLED=true` since 2026-10-09 | a GAP sequence version must carry a HubSpot sequence id before an enrollment can land (96 sequences exist in the portal); no enrollment has run yet | the sequences read 2026-10-09 (HTTP 200, 96); the flag read | the first seller-confirmed enrollment, watched |
 | Calls and call outcomes | DONE | X16a to X16d | none | x16-calls.test.ts | none |
 | Activity recording | DONE | X20b `work/activity.ts`, `/gap/activity` | none | activity.test.ts | none |
 | Feedback-driven agent revisions | DONE (the route now works) | X09 `revise_message`, A01 to A03d | production REVISE not yet exercised by Casey | revise-message.test.ts, the harness | Casey's reply |
 | Daily briefing and work queue | DONE (production) | X04, X05, X21, I04, I05 | none | sent 2026-10-08 20:59Z | none |
 | Active-deal awareness | DONE | X15c, X17, the in-deal labels (I05) | none | tests | none |
 | Durable follow-ups and commitments | DONE | `work/commitments.ts`, X16b, X18 | none | tests | none |
-| Cost observability | DONE for the agent tasks, Ask and reply-suggest (production) | A01 spend ledger, A02 + A04 health "Model route and spend" with the gateway credit balance | no provider-side hard cap; the discovery and research providers are unmetered (debt A06, watched through the credit balance) | health 00:55Z: $0.0056, 30 calls | Casey: set an AI Gateway budget; A06 |
+| Cost observability | DONE (production) | A01 spend ledger, A02 + A04 health with the gateway credit balance, A06 the grounded providers metered, the $25 monthly AI Gateway team budget (the provider-side hard cap) | none | health 00:55Z: $0.0056, 30 calls; the budget read back | none |
 | Recovery and reliability | DONE | A01 permanent vs transient, A02 kept angle, X21 | none | tests + the production runs | none |
 
 #### Backlog classification (every ticket, none dropped or renumbered)
 <!-- verified:2026-10-09 -->
 
 - R00 to R65: DONE (the HANDOFF block above). UX-01 to UX-17: DONE (`docs/gap/ACCOUNT_FIRST_UX.md`).
-- X01 to X18, X20, X21: DONE. **X19 retire the legacy digest: TODO, Casey's call** (not superseded; nothing replaced it).
+- X01 to X21: DONE (X19 retired the legacy digest on Casey's word, 2026-10-09).
 - I01 to I05: DONE. **I06: DONE (I06a to I06g; the review closed the last two age gates).**
-- A01 to A03d: DONE. **The seller acceptance test (section 7 of the mandate): BLOCKED on Casey's reply** (the briefing, START, REVISE, APPROVE, the draft, a safe internal send).
-- Owner items still with Casey: the PepsiCo approval, the 5% wording, transcription spend, the GitHub Actions runner, X19, an AI Gateway budget, the HubSpot sequences scope check, the acceptance-test reply.
-- Named debt from this program: A06 meter the discovery and research providers (`entity/providers.ts`, `research/providers.ts`, `entity/scout.ts`) through the spend ledger; the person item's account by domain (above); the non-GAP AI features still answer 403 on `openai/gpt-5.4` (changing `AI_GATEWAY_MODEL` is a separate decision); clawd-control-plane's own model path (a retired default model and the same exhausted OpenAI key).
+- A01 to A06: DONE. **The seller acceptance test (section 7 of the mandate): ready for Casey's reply** (START to the October 8 briefing, then REVISE and APPROVE in the thread).
+- Owner items still with Casey (judgment or money): the PepsiCo thesis approval, the 5% wording, transcription spend, the GitHub Actions runner (not asked for), the acceptance-test reply.
+- Named debt from this program: the person item's account by domain (above); the non-GAP AI features still answer 403 on `openai/gpt-5.4` (changing `AI_GATEWAY_MODEL` is a separate decision); clawd-control-plane's own model path (a retired default model and the same exhausted OpenAI key).
 
 
 ## 12. Migration, backfill and rollback

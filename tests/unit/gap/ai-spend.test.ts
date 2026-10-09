@@ -10,7 +10,8 @@
 import { describe, expect, it, vi } from 'vitest';
 import { ledgerDb } from './fixtures/ledger-db';
 import { AIAllProvidersFailed, type AIErrorInfo } from '@/lib/ai/client';
-import { estimateCostUsd, gapGenerate, LEDGER_READ_MAX, loadSpend, MODEL_CALL, MODEL_CALL_RESERVED, MODEL_CALL_SUBJECT, monthWindow, spendLimits, type GapGenerate, type GapModelCallContext } from '@/lib/gap/ai/spend';
+import { estimateCostUsd, gapGenerate, GROUNDED_ESTIMATE_USD, groundedMeter, LEDGER_READ_MAX, loadSpend, MODEL_CALL, MODEL_CALL_RESERVED, MODEL_CALL_SUBJECT, monthWindow, spendLimits, type GapGenerate, type GapModelCallContext } from '@/lib/gap/ai/spend';
+import { askGrounded, type ScoutProvider } from '@/lib/gap/entity/providers';
 import { PermanentAgentError } from '@/lib/gap/agents/errors';
 import { loadAgentTask, queueAgentTask, runAgentTasks } from '@/lib/gap/agents/tasks';
 
@@ -130,6 +131,31 @@ describe('A01: the spend ledger', () => {
     const huge = { gapAuditEvent: { findMany: async () => Array.from({ length: LEDGER_READ_MAX }, (_, n) => ({ kind: MODEL_CALL, subject_id: 'x', payload: { callId: `c${n}`, costUsd: 0.000001, outcome: 'ok' }, created_at: NOW })), create: async () => undefined } };
     const err3 = await gapGenerate(huge, { prompt: 'p', maxTokens: 100, tier: 'routine', task, now: NOW }, { generate, env }).catch((e: unknown) => e);
     expect((err3 as PermanentAgentError).message).toMatch(/or more rows this month/);
+  });
+
+  it('A06: the grounded providers are metered: a reservation before each attempt, a recorded row after it (the estimate when the provider answered, zero when it did not), the month ceiling refuses before the attempt and stops the chain', async () => {
+    const db = ledgerDb({}, NOW);
+    const meter = groundedMeter(db.client(), { id: 'discovery_1', kind: 'grounded_discovery', itemKey: 'discovery' }, { now: NOW, env });
+    const prov = (name: ScoutProvider['name'], ask: () => Promise<{ text: string; citations: string[] }>): ScoutProvider => ({ name, available: () => true, ask });
+    const r = await askGrounded('q', (a) => (a.text === 'x' ? a.text : null), [prov('gemini', async () => ({ text: 'x', citations: ['https://a.example/p'] }))], { meter });
+    expect(r.ok).toBe(true);
+    const rows = db.store.gapAuditEvent.filter((e) => e.subject_type === MODEL_CALL_SUBJECT);
+    expect(rows.map((e) => e.kind)).toEqual([MODEL_CALL_RESERVED, MODEL_CALL]);
+    expect(rows[1].payload).toMatchObject({ taskKind: 'grounded_discovery', model: 'gemini', outcome: 'ok', costUsd: GROUNDED_ESTIMATE_USD, estimated: true, tier: 'grounded' });
+    expect((await loadSpend(db.client(), { now: NOW, env })).monthUsd).toBeCloseTo(GROUNDED_ESTIMATE_USD, 8);
+    // A provider that was unavailable or errored before answering is recorded at zero.
+    const bad = await askGrounded('q', (a) => a.text, [prov('openai_web', async () => { throw new Error('503 Service Unavailable'); })], { meter: groundedMeter(db.client(), { id: 'discovery_2', kind: 'grounded_discovery', itemKey: 'discovery' }, { now: NOW, env }), sleep: async () => undefined });
+    expect(bad.ok).toBe(false);
+    const zero = db.store.gapAuditEvent.filter((e) => e.subject_id === 'discovery_2' && e.kind === MODEL_CALL);
+    expect(zero.length).toBeGreaterThan(0);
+    expect(zero.every((e) => (e.payload as Record<string, unknown>).costUsd === 0)).toBe(true);
+    // The ceiling refuses the whole chain before the first attempt, and says so on the attempt.
+    const full = ledgerDb({ audit: [{ kind: MODEL_CALL, actor: 'agent', subject_type: MODEL_CALL_SUBJECT, subject_id: 'at_0', payload: { callId: 'c0', costUsd: 24.99, outcome: 'ok' }, created_at: new Date(NOW.getTime() - 3_600_000) }] }, NOW);
+    const asked = vi.fn(async () => ({ text: 'x', citations: ['https://a.example/p'] }));
+    const stopped = await askGrounded('q', (a) => a.text, [prov('gemini', asked), prov('openai_web', asked)], { meter: groundedMeter(full.client(), { id: 'discovery_3', kind: 'grounded_discovery', itemKey: 'discovery' }, { now: NOW, env }) });
+    expect(stopped.ok).toBe(false);
+    if (!stopped.ok) expect(stopped.attempts).toEqual([{ provider: 'gemini', outcome: 'error', detail: expect.stringMatching(/^spend: monthly_ceiling/) }]);
+    expect(asked).not.toHaveBeenCalled();
   });
 
   it('the month window is the calendar month in New York; the limits read the environment with safe defaults', () => {

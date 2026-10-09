@@ -145,7 +145,7 @@ describe('S2-T1: KNOWN_CRONS registry rows for the GAP crons', () => {
       'dispatch-daily',
       'qualification',
       'warm-dispatch',
-      'daily-digest',
+      // X19 (2026-10-09): daily-digest retired; the GAP briefing replaced it.
       'drip-sequence',
       'pounce-scan',
       'refresh-intel',

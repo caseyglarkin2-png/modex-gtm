@@ -12,6 +12,7 @@
  *           Its excerpts are PROPOSALS; unverifiable ones are dropped.
  */
 import { extractFactSentences, htmlToText } from './facts';
+import type { GroundedMeter } from '../ai/spend';
 import type { PageResult } from '../signals/research';
 import { normalizeCompany } from './claim-rules';
 import { parseSignalMeta } from '../signals/intake';
@@ -208,7 +209,7 @@ const hasJsonArray = (text: string) => {
  * provider can run (quota, no key, no grounding, a cut-off answer) this THROWS: an outage is infrastructure
  * state, never "nothing found".
  */
-export async function webCandidates(accountName: string, focus: string, deps: { providers?: ScoutProvider[] } = {}): Promise<{ candidates: Candidate[]; note: string; sources?: string[]; pageResults?: PageResult[] }> {
+export async function webCandidates(accountName: string, focus: string, deps: { providers?: ScoutProvider[]; /** A06: the spend meter from the caller that holds the database. */ meter?: GroundedMeter } = {}): Promise<{ candidates: Candidate[]; note: string; sources?: string[]; pageResults?: PageResult[] }> {
   const prompt = `Find up to 5 PUBLIC, dated facts from the last 12 months about ${accountName}'s physical operations: distribution or fulfillment centers, warehouses, plants, yards, docks or transportation network (openings, closures, consolidations, expansions, automation, acquisitions, relocations). ${focus}
 Sources, best first: ${accountName}'s own newsroom, investor or official operations page; an SEC filing; a government, economic-development or permit release; a credible trade or business publication; a vendor case study that names ${accountName}. When a story reports a fact, cite ${accountName}'s own announcement of it if one exists. Never cite a search-result redirect, an aggregator or syndicated copy, a snippet-only page or a paywalled page.
 Return ONLY a JSON array: [{"url": "...", "title": "...", "date": "YYYY-MM-DD", "excerpt": "one sentence copied VERBATIM from that page"}].
@@ -218,7 +219,7 @@ Every excerpt must be copied exactly from the page at that url. If you cannot fi
     const parsed = hasJsonArray(a.text) ? parseWebCandidates(a.text) : null;
     if (parsed) cited = a.citations;
     return parsed;
-  }, deps.providers ?? defaultProviders());
+  }, deps.providers ?? defaultProviders(), { meter: deps.meter });
   if (!r.ok) throw new Error(`no grounded web search (${r.attempts.map((x) => `${x.provider} ${x.outcome.replace(/_/g, ' ')}`).join('; ') || 'no provider configured'})`);
   const parsed = r.value.filter((p) => !p.short);
   return {

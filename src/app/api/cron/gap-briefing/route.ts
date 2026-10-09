@@ -67,7 +67,8 @@ export async function GET(request: Request) {
         baseUrl,
         actionSecret: actionSecret(),
         commandsEnabled: COMMANDS_ENABLED,
-        legacyDigest: true,
+        // X19 (2026-10-09): the legacy daily-digest cron is retired; nothing arrives beside this briefing.
+        legacyDigest: false,
         load: async () => {
           const l = await loadWorkDay(prisma, { lane: false, preview: false, fresh: true, now });
           return { day: l.day, decisionIds: decisionIdsFromCandidates(l.data.workInput.candidates) };

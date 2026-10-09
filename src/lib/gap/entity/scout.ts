@@ -11,6 +11,7 @@
  * claims are cited, not verified at source: the account brief treats them as leads, never VERIFIED_PUBLIC.
  */
 import { deriveFit, ENTITY_TYPES, fitFromName, operatingClaims, operatingCount, type EntityType, type YardFlowFit } from './fit';
+import type { GroundedMeter } from '../ai/spend';
 import { askGrounded, defaultProviders, groundedOnly, type Attempt, type ProviderName, type ScoutProvider } from './providers';
 
 export type { EntityType, YardFlowFit } from './fit';
@@ -107,7 +108,7 @@ Return ONLY JSON:
  * groundedCompanyScout: the name rule first (free), then the provider chain (entity/providers.ts). Whichever
  * provider answers, the result is the same typed Scout evidence; a claim the search did not cite is dropped.
  */
-export async function scoutCompany(company: string, deps: { providers?: ScoutProvider[]; hint?: string } = {}): Promise<ScoutResult> {
+export async function scoutCompany(company: string, deps: { providers?: ScoutProvider[]; hint?: string; /** A06: the spend meter from the caller that holds the database. */ meter?: GroundedMeter } = {}): Promise<ScoutResult> {
   const base = { company, domain: null, what: null, network: [], freight: [], unknowns: [] as string[] };
   const rule = fitFromName(company);
   // Only a genuinely obvious name settles fit for free; a logistics or carrier name still gets checked.
@@ -127,7 +128,7 @@ export async function scoutCompany(company: string, deps: { providers?: ScoutPro
     // Every claim lost to the citation check: the answer is not grounded, so no fit is read from it (next provider).
     if (lost.length && !net.kept.length && !fr.kept.length) return null;
     return { ...p, network: net.kept, freight: fr.kept, unknowns: [...p.unknowns, ...lost.map((c) => `Not cited by the search (dropped): ${c.claim}`)] };
-  }, providers);
+  }, providers, { meter: deps.meter });
   if (!r.ok) {
     const how = r.attempts.map((a) => `${a.provider} ${a.outcome.replace(/_/g, ' ')}`).join('; ') || 'no provider configured';
     return { ...base, verdict: 'UNKNOWN', entityType: null, why: `The web pass failed (${how}); nothing is known yet. Retry later.`, basis: 'web', failed: true, attempts: r.attempts };

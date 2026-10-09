@@ -82,7 +82,7 @@ export async function askGrounded<T>(
   prompt: string,
   parse: (a: ProviderAnswer) => T | null,
   providers: readonly ScoutProvider[] = defaultProviders(),
-  opts: { now?: () => number; sleep?: (ms: number) => Promise<void>; timeoutMs?: number; budgetMs?: number } = {},
+  opts: { now?: () => number; sleep?: (ms: number) => Promise<void>; timeoutMs?: number; budgetMs?: number; /** A06: the spend meter (gap/ai/spend.ts groundedMeter); a ceiling refusal stops the chain. */ meter?: { before: (provider: string) => Promise<void>; after: (provider: string, outcome: string) => Promise<void> } } = {},
 ): Promise<{ ok: true; value: T; provider: ProviderName; attempts: Attempt[] } | { ok: false; attempts: Attempt[] }> {
   const now = opts.now ?? Date.now;
   const sleep = opts.sleep ?? ((ms: number) => new Promise<void>((r) => setTimeout(r, ms)));
@@ -104,31 +104,47 @@ export async function askGrounded<T>(
       continue;
     }
     for (let attempt = 0; attempt < 2; attempt++) {
+      // A06: reserve the attempt on the spend ledger; the month ceiling refuses the whole chain.
+      if (opts.meter) {
+        try {
+          await opts.meter.before(p.name);
+        } catch (e) {
+          attempts.push({ provider: p.name, outcome: 'error', detail: `spend: ${e instanceof Error ? e.message.slice(0, 200) : String(e)}` });
+          return { ok: false, attempts };
+        }
+      }
+      const settle = (outcome: Attempt['outcome']) => (opts.meter ? opts.meter.after(p.name, outcome).catch(() => undefined) : Promise.resolve());
       try {
         const a = await bounded((signal) => p.ask(prompt, signal), Math.min(opts.timeoutMs ?? 45_000, deadline - Date.now()));
         if (!a.citations.length && !a.citedHosts?.length) {
           attempts.push({ provider: p.name, outcome: 'no_citations', detail: `the answer cited no sources: not grounded, not used${a.note ? ` (${a.note})` : ''}` });
+          await settle('no_citations');
           break;
         }
         const v = parse(a);
         if (v === null) {
           attempts.push({ provider: p.name, outcome: 'unparsable' });
+          await settle('unparsable');
           break;
         }
         attempts.push({ provider: p.name, outcome: 'ok' });
+        await settle('ok');
         return { ok: true, value: v, provider: p.name, attempts };
       } catch (e) {
         const c = classifyProviderError(e);
         if (c.kind === 'quota') {
           cooling.set(p.name, now() + c.coolMs);
           attempts.push({ provider: p.name, outcome: 'quota', detail: c.detail });
+          await settle('quota');
           break;
         }
         if (c.kind === 'transient' && attempt === 0 && !(e instanceof Timeout) && deadline - Date.now() > 15_000) {
+          await settle('error');
           await sleep(2_000);
           continue;
         }
         attempts.push({ provider: p.name, outcome: 'error', detail: c.detail });
+        await settle('error');
         break;
       }
     }

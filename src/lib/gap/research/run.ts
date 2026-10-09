@@ -22,6 +22,7 @@
  * is a separate human click (propose.ts).
  */
 import { createHash } from 'node:crypto';
+import { groundedMeter } from '../ai/spend';
 import { classifyContinuity } from './continuity';
 import { establishContinuity, currentnessFocus, type ContinuityOutcome } from './continuity-store';
 import { createResearchRun, upsertEvidenceRecords } from '@/lib/source-backed/evidence';
@@ -170,6 +171,8 @@ export interface ResearchDeps {
 const hash = (s: string) => createHash('sha256').update(s).digest('hex');
 
 export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInput, deps: ResearchDeps = {}): Promise<ResearchResult> {
+  // A06: the web providers are metered on the spend ledger like every GAP model call.
+  const meteredWeb = (accountName: string, focus: string) => webCandidates(accountName, focus, { meter: groundedMeter(prisma, { id: `research_${input.now.getTime().toString(36)}`, kind: 'research', itemKey: `account:${input.accountName}` }, { now: input.now }) });
   const notes: string[] = [];
   const providerErrors: Record<string, string> = {};
   const candidates: Candidate[] = [];
@@ -179,7 +182,7 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
   const providers: Array<readonly [string, () => Promise<{ candidates: Candidate[]; note: string; pages?: Map<string, string>; pageResults?: PageResult[] }>]> = [
     ['edgar', () => (deps.edgar ?? ((a, n) => edgarCandidates(a, n)))(input.accountName, input.now)],
     ['web', async () => {
-      const r = await (deps.web ?? webCandidates)(input.accountName, [input.problemFamily ? `Focus: ${input.problemFamily.replace(/_/g, ' ')}.` : '', input.focus ?? ''].filter(Boolean).join(' '));
+      const r = await (deps.web ?? meteredWeb)(input.accountName, [input.problemFamily ? `Focus: ${input.problemFamily.replace(/_/g, ' ')}.` : '', input.focus ?? ''].filter(Boolean).join(' '));
       webSources = r.sources ?? [];
       return r;
     }],
@@ -256,7 +259,7 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
     let host = '';
     try { host = new URL(c.url).hostname.replace(/^www\./, ''); } catch { /* keep empty */ }
     try {
-      const r = await (deps.web ?? webCandidates)(input.accountName, `Find ONE other accessible source (${input.accountName}'s own announcement, a filing, a government release or a credible publication) that states this event: "${c.excerpt}". Do not use ${host || 'the same site'}.`);
+      const r = await (deps.web ?? meteredWeb)(input.accountName, `Find ONE other accessible source (${input.accountName}'s own announcement, a filing, a government release or a credible publication) that states this event: "${c.excerpt}". Do not use ${host || 'the same site'}.`);
       for (const alt of r.candidates.filter((a) => { try { return new URL(a.url).hostname.replace(/^www\./, '') !== host; } catch { return false; } }).slice(0, 2)) {
         const v = await verifyCandidate(alt, ctx);
         recordSource(sources, sourceFromCandidate(alt, v));
@@ -297,7 +300,7 @@ export async function runEvidenceResearch(prisma: PrismaLike, input: ResearchInp
     // Case H: an ongoing fact is never called fresh on its own wording; look ONCE for newer corroboration.
     const focus = currentnessFocus(input.accountName, continuity.seeking, input.now);
     try {
-      const r = await (deps.web ?? webCandidates)(input.accountName, focus);
+      const r = await (deps.web ?? meteredWeb)(input.accountName, focus);
       notes.push(`currentness: ${r.note}`);
       for (const c of r.candidates) {
         const key = normalizeForMatch(c.excerpt);
