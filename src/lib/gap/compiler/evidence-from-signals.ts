@@ -16,7 +16,7 @@
  */
 
 import type { CompileEvidenceRef } from './types';
-import { isCurrentFact } from '../research/currentness';
+import { isCurrentFact, isUsableFact } from '../research/currentness';
 
 export interface SignalRow {
   id: string;
@@ -48,6 +48,9 @@ export function evidenceRefsFromSignals(signals: readonly SignalRow[], now: Date
   for (const s of signals) {
     if (!s || typeof s.id !== 'string') continue;
     const fresh = isCurrentFact(s, now);
+    // I06: usable is the gate; fresh stays the label, and the date rides so a historical fact can be cited with it.
+    const usable = isUsableFact(s, now);
+    const observedAt = s.observed_at ? new Date(s.observed_at as Date | string).toISOString() : null;
     const superseded = isObj(s.metadata) && s.metadata.superseded === true;
     // Red team T6: a loaded signal that quotes nothing is a keyword hit. It
     // names a document; it does not show a fact, so it is never citable.
@@ -64,6 +67,8 @@ export function evidenceRefsFromSignals(signals: readonly SignalRow[], now: Date
       externalOk: s.external_ok === true && !keywordOnly,
       ...(keywordOnly ? { keywordOnly: true } : {}),
       fresh,
+      usable,
+      observedAt,
       superseded,
       firstParty: isFirstParty(s.source_type ?? ''),
     });

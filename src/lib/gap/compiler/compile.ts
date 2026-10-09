@@ -156,6 +156,9 @@ export function readEvidenceRefs(raw: unknown): CompileEvidenceRef[] {
       url: typeof entry.url === 'string' ? entry.url : null,
       externalOk: bool(entry.externalOk),
       fresh: bool(entry.fresh),
+      // I06: absent reads as usable (a ref stored before the field); the date rides when stored.
+      ...(entry.usable !== undefined ? { usable: bool(entry.usable) } : {}),
+      ...(typeof entry.observedAt === 'string' ? { observedAt: entry.observedAt } : {}),
       superseded: bool(entry.superseded),
       firstParty: bool(entry.firstParty),
       ...(typeof entry.excerpt === 'string' && entry.excerpt.length > 0 ? { excerpt: entry.excerpt } : {}),

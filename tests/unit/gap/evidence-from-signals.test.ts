@@ -37,6 +37,8 @@ describe('evidenceRefsFromSignals', () => {
         url: 'https://example.test/jobs',
         externalOk: true,
         fresh: true,
+        usable: true,
+        observedAt: expect.any(String),
         superseded: false,
         firstParty: false,
       },

@@ -33,6 +33,10 @@ export interface CompileEvidenceRef {
   url: string | null;
   externalOk: boolean;
   fresh: boolean;
+  /** I06: usable (not ended, closed, undated or superseded). Absent reads as usable; `fresh` is the label beside it. */
+  usable?: boolean;
+  /** I06: when the fact was observed (ISO); a historical ref is citable only when the copy states this date. */
+  observedAt?: string | null;
   superseded: boolean;
   firstParty: boolean;
   /** The source excerpt when the ledger carries one; C01 counts its numbers as cited (S3-T13). */

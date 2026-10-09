@@ -109,9 +109,11 @@ describe('<SixLineBriefView>', () => {
 });
 
 describe('review E P1: the brief never overstates what it knows', () => {
-  it('an EXPIRED verified fact is not known; the brief says when it expired', () => {
+  it('an expired verified fact is KNOWN with its date (I06); a superseded fact is not, and the brief says why', () => {
     const expired = { ...verifiedFact, freshness_expires_at: new Date('2026-09-01T00:00:00Z') };
-    expect(knowOf(hypothesis([{ role: 'primary', signal: expired }]), NOW)).toEqual({ fact: null, reason: 'This story is too old for a first touch: it was current until Aug 31, 2026. It cannot be quoted to a buyer. Find fresh evidence.' });
+    expect(knowOf(hypothesis([{ role: 'primary', signal: expired }]), NOW)).toMatchObject({ fact: expect.objectContaining({ publishedAt: expect.any(String) }), verified: true });
+    const superseded = { ...verifiedFact, metadata: { ...(verifiedFact.metadata as Record<string, unknown>), superseded: true } };
+    expect(knowOf(hypothesis([{ role: 'primary', signal: superseded }]), NOW)).toEqual({ fact: null, reason: 'Research marked this fact superseded by a newer one: it is not quoted. It cannot be quoted to a buyer. Find another verified fact.' });
     const fresh = { ...verifiedFact, freshness_expires_at: new Date('2026-12-01T00:00:00Z') };
     expect(knowOf(hypothesis([{ role: 'primary', signal: fresh }]), NOW).fact).not.toBeNull();
   });
