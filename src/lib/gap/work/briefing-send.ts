@@ -117,6 +117,13 @@ export async function shownRecently(prisma: PrismaLike, now: Date): Promise<stri
   return [...new Set(keys)];
 }
 
+/** IW13: the producers' coverage paragraph (signals/producer-status.ts), read soft; null when the ledger cannot be read. */
+async function defaultCoverage(prisma: PrismaLike, now: Date): Promise<{ sources: string; unavailable: string | null } | null> {
+  const { loadProducerStatus, producerStatusLine } = await import('../signals/producer-status');
+  const statuses = await loadProducerStatus(prisma, now);
+  return { sources: producerStatusLine(statuses), unavailable: null };
+}
+
 /** IW11: the digest sizes from the environment (GAP_BRIEFING_DIGEST_SIGNALS, GAP_BRIEFING_DIGEST_PEOPLE; 1..40); undefined keeps the defaults. */
 export function digestSizesFromEnv(env: Record<string, string | undefined>): Partial<DigestSizes> | undefined {
   const n = (v: string | undefined) => { const x = Number(v); return v && Number.isInteger(x) && x > 0 && x <= 40 ? x : null; };
@@ -135,7 +142,7 @@ export async function defaultIntel(prisma: PrismaLike, now: Date, deps: Pick<Bri
   const angles = await loadAngles(prisma, { keys, now });
   // IW12: what recent briefings showed rotates behind the unseen; IW13: the producers' coverage in words; IW11: the sizes.
   const shownBefore = await shownRecently(prisma, now).catch(() => [] as string[]);
-  const coverage = deps.coverage ? await deps.coverage(prisma, now).catch(() => null) : null;
+  const coverage = await (deps.coverage ?? defaultCoverage)(prisma, now).catch(() => null);
   return { ...x, angles: Object.fromEntries([...angles.entries()].map(([k, a]) => [k, { whyItMatters: a.whyItMatters, starters: a.starters, peopleNamed: a.peopleNamed.map((p) => ({ name: p.name, title: p.title })), proposedAction: a.proposedAction }])), shownBefore, coverage, digest: digestSizesFromEnv(deps.env ?? process.env) };
 }
 

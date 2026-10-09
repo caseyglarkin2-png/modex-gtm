@@ -118,9 +118,13 @@ async function main() {
     const plan: DayPlan = stored ?? (await planDay(prisma, { now, load: async () => { const l = await loadWorkDay(prisma, { lane: false, preview: false, fresh: true, now }); return { day: l.day, candidates: l.data.workInput.candidates } as Any; } }, 'preview-harness'));
     const summary = await loadInDealsSummary(prisma, { now }).catch(() => null);
     const inventory = fixture.sources.map((s) => `${producerLabel(s.producer)} (${s.distinctReports} report${s.distinctReports === 1 ? '' : 's'}, ${s.reports.reduce((n, r) => n + r.items, 0)} items, through ${s.reports[s.reports.length - 1]?.reportedOn ?? '?'})`);
+    // IW13: the same coverage paragraph the cron prints (the producer status over the overlay's import ledger and
+    // production's vault ledger), plus what this process alone cannot read.
+    const { loadProducerStatus, producerStatusLine } = await import('../../src/lib/gap/signals/producer-status');
+    const statuses = await loadProducerStatus(prisma, now);
     const coverage = {
-      sources: `Sources read: ${inventory.join('; ')}; imported into this preview from the captured snapshots of ${fixture.capturedOn}.`,
-      unavailable: 'Clawd signal hunter (no export yet); the vault\'s notes (on the account stories, not in this digest); our Gmail Sent (this process has no sender credential).',
+      sources: `${producerStatusLine(statuses)} The briefs' records were imported into this preview from the captured snapshots of ${fixture.capturedOn} (${inventory.join('; ')}).`,
+      unavailable: 'our Gmail Sent (this process has no sender credential; production reads it).',
     };
     const intel = await defaultIntel(prisma, now, { inDeals: async () => summary, coverage: async () => coverage });
     const dayLinks = {
