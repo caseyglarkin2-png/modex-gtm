@@ -1,6 +1,6 @@
 # YardFlow GAP Prospecting OS: production build specification
 
-STATUS: ACTIVE. Current state lives in `docs/gap/STABLE_BASELINE.md` (seller dogfood mode; V2 SHIPPED 2026-10-02; the account-first UX SHIPPED 2026-10-06, `docs/gap/ACCOUNT_FIRST_UX.md`). The live ticket ledger is the "GAP OS EXECUTION RECOVERY" section near the end of section 11 (2026-10-06, in progress). This file is the historical build spec and ticket ledger; the FINISH pass it once tracked on feat/gap-os-finish is long merged.
+STATUS: ACTIVE. Current corrective audit: "GAP OS COMMERCIAL CONTEXT AND EXECUTION AUDIT" below (October 8 New York, main a195467). Historical DONE labels are implementation receipts, not blanket seller acceptance.  Current state lives in `docs/gap/STABLE_BASELINE.md` (seller dogfood mode; V2 SHIPPED 2026-10-02; the account-first UX SHIPPED 2026-10-06, `docs/gap/ACCOUNT_FIRST_UX.md`). The live ticket ledger is the "GAP OS EXECUTION RECOVERY" section near the end of section 11 (2026-10-06, in progress). This file is the historical build spec and ticket ledger; the FINISH pass it once tracked on feat/gap-os-finish is long merged.
 <!-- verified:2026-10-06 -->
 
 Supersedes the draft `Downloads/YardFlow_GAP_Prospecting_OS_Spec.md` (2026-09-23), which named `caseyglarkin2-png/GTM-YardFlow` as the host. Reconnaissance showed that repo is an abandoned prototype; this document is the single master plan and lives in the repo that hosts the build. There is no second plan. Every accepted implementation or reviewer finding that changes work is folded back into this file in the same commit.
@@ -2699,6 +2699,656 @@ gateway budget (AI Gateway, Budgets: the hard provider-side cap), fund OpenAI, o
 - Owner items still with Casey (judgment or money): the PepsiCo thesis approval, the 5% wording, transcription spend, the GitHub Actions runner (not asked for), the acceptance-test reply.
 - Named debt from this program: the person item's account by domain (above); the non-GAP AI features still answer 403 on `openai/gpt-5.4` (changing `AI_GATEWAY_MODEL` is a separate decision); clawd-control-plane's own model path (a retired default model and the same exhausted OpenAI key).
 
+
+## GAP OS COMMERCIAL CONTEXT AND EXECUTION AUDIT — October 8, 2026 New York
+
+This is the current corrective audit addendum, based on main `a195467f6c723b8859a8d6ce7165d3a86ae02394` (PR #431). It supplements the historical R/UX/X/I/A receipts; it does not reset completed implementation or authorize production actions. Some earlier receipts use October 9 UTC for the same October 8 New York evening.
+
+**Decision:** repair the joins and evidence flow across the existing identity, opportunity, story, context, mailbox, compiler and task ledger. Do not rebuild GAP, add another CRM, replace the task framework or switch models as a substitute for missing context. The model generating `develop_angle` does not receive the commercial conversation. Passing style validation cannot repair omitted buyer facts.
+
+**Owner constraints:** Casey owns time management. No delivery dates, sprint durations, staffing estimates or activity quotas are assigned here. Buyer commitments and observed event dates remain part of commercial truth. Intelligence of any age remains visible for Casey to judge; factual attribution, supersession and execution safety remain intact. This audit performs no external sends, CRM changes, enrollments, production flag changes, model purchases or deployment mutations.
+
+**Actual runtime:** HubSpot reads work; Kenco company 55608495412 has open deal 62704698979 and associated contacts Craig 234991610011 and Dave 217664765537. Gmail contains the dated roadmap and existing drafts. Local Brain contains deeper context but conflicting older content. Production Clawd serves an October8 rebuilt snapshot whose wedge notes are July/August. Vercel preparation flags are on, sequence publishing is on, automatic enrollment and CRM mirror are off; Clawd outreach/actuator are false. Enabled publishing is not permission or proof of live enrollment. The production alias was inspected as deployment dpl_G9KX6ZmwES9f719vk8jsrCcay6r1, READY, with SHA a195467f6c723b8859a8d6ce7165d3a86ae02394. Full runtime source coverage remains unverified.
+
+**Proof vocabulary:** REPRODUCED means an actual source function exhibited the defect under a controlled fixture. SOURCE means static path evidence. LIVE READ means provider returned the stated record now, not that every portal record was audited. ACCEPTANCE SPECIFIED means a future test, not a passing result. No new corrective ticket is marked implemented by this audit. The exhaustive backlog below covers the requested audit surfaces and observed failure classes; uninspected data is explicitly not certified.
+
+**Architecture contract:** source adapters -> identity/association resolution -> attributed commercial-context packet -> purpose/motion classification -> specific action proposal -> existing compiler/approval -> selected execution lane -> provider/self-reported receipt -> commitments, brief and learning. Each source envelope carries identity, event date, observation/index date, provenance, visibility, authority, completeness and version. Internal planning may use private context; externally usable facts remain separately validated. Retrieval never grants instructions from emails, notes or documents permission to call tools.
+
+**Ticket discipline:** each ID is one committable behavior or bounded validation task. Acceptance includes both positive and negative cases below. Dependencies are technical, not a schedule. Use focused tests serially with one worker, never the full local suite per ticket. Add one meaningful mutation or fault injection for each central invariant. Preserve stable negative controls: historical intelligence remains visible, opt-out remains blocked, ambiguous identity remains unresolved, copied remains unsent, unknown remains unknown. Render each slice in the actual app/email consumer using fixtures and sink adapters. Do not call production GET pages that perform sweeps as a shortcut for read-only inspection.
+
+
+### V1 — One Kenco relationship across email, CRM and Work
+
+**Demo:** Replay Craig and Dave with no GAP persona. Email, app and pursuit all show the same company and open deal, with a dated source. Repeat with CRM unavailable: unknown, never no opportunity.
+
+
+#### C01 [P1] Carry deal coverage into briefing intelligence
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** work/briefing-send.ts defaultIntel and its caller: pass the same complete/unavailable deal snapshot used by the day, including checkedAt.
+- **Acceptance:** Complete Kenco snapshot reaches rankPeople in both surfaces; failed snapshot produces unknown. Exercise the real defaultIntel composition, not a manually built ranker fixture.
+- **Depends on:** none.
+- **Evidence/test state:** Code: defaultIntel:102 omits dealAccounts; P01.
+
+
+#### C02 [P1] Resolve a mailbox person through existing identity machinery
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** work/decide.ts and identity/opportunity adapters: exact normalized email -> CRM contact associations -> company IDs/domain aliases. Preserve competing matches; do not auto-create CRM records.
+- **Acceptance:** Dave without Persona resolves to company 55608495412 and deal 62704698979; shared corporate domain with two candidate subsidiaries stays ambiguous.
+- **Depends on:** none.
+- **Evidence/test state:** P02; live HubSpot associations.
+
+
+#### C03 [P1] Use stable IDs and alias-aware relationship matching
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** work/intel.ts: replace exact account-name Set membership with existing resolved identity references; retain display names as labels.
+- **Acceptance:** Kenco, Kenco Logistics and kencogroup.com map to one supported identity; unrelated similarly named company does not.
+- **Depends on:** C02.
+- **Evidence/test state:** P03; in-deals.ts already has identity-aware joins.
+
+
+#### C04 [P1] Make negative opportunity claims conditional on complete reads
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** work/intel.ts and intel line model: present open, none-confirmed, unknown, ambiguous explicitly.
+- **Acceptance:** Missing identity, timeout, pagination truncation and absent dealAccounts never say no live opportunity; complete empty association read may.
+- **Depends on:** C01,C03.
+- **Evidence/test state:** P01.
+
+
+#### C05 [P1] Preserve message provenance on Pursue
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** work/decide.ts person branch: carry source message/thread IDs, mailbox identity, receivedAt, lastWroteAt, body reference and account resolution; reload authoritative source rather than trusting URL payload.
+- **Acceptance:** Dave September 16 remains dated after queue -> task -> angle; missing body is an explicit retrieval gap. Replaying cannot attach another sender’s thread.
+- **Depends on:** C02.
+- **Evidence/test state:** P06; decide.ts person branch drops dates and thread.
+
+
+#### C06 [P1] Scope active-deal preparation to the right opportunity
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Reuse deals/scope.ts and active-opportunity resolver before angle/action selection. Resolve Dave and Craig through contact-deal associations; multiple deals require explicit supported scope.
+- **Acceptance:** Two deals at one company with shared contacts do not inherit each other’s next step; active deal proposes deal work without authorizing cold enrollment.
+- **Depends on:** C03,C05.
+- **Evidence/test state:** Live Kenco company+two-contact associations; existing R50-R55.
+
+
+### V2 — Read the conversation before recommending outreach
+
+**Demo:** Kenco shows Dave’s September roadmap, October 1 sent message and existing unsent drafts; Lazer shows site support and Riserify vendor outreach. None becomes a generic cold opener.
+
+
+#### C07 [P1] Read complete bounded thread context
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Add a reusable context adapter over existing Gmail/InboundMessage and HubSpot engagement readers: inbound and outbound, quoted-text boundaries, participants and pagination coverage.
+- **Acceptance:** Nested MIME September thread retains current author text; quoted earlier messages are not new buyer statements; truncated thread reports partial.
+- **Depends on:** C05.
+- **Evidence/test state:** Live Gmail MIME read; no thread body in develop-angle.ts.
+
+
+#### C08 [P1] Distinguish draft, sent, received and calendar mail
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Context timeline records provider IDs, labels, direction, authoredAt and source; DRAFT never counts as contact; invitations/RSVPs are typed events.
+- **Acceptance:** October 5 Kenco drafts are available as preparation, October 1 is sent, duplicate Oct14 RSVP messages yield one meeting response.
+- **Depends on:** C07.
+- **Evidence/test state:** Gmail Kenco sample, 21 records, no next page.
+
+
+#### C09 [P1] Classify commercial relationship and message purpose separately
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Reuse disposition/reply precision; add evidence-backed purposes: buyer conversation, customer support, vendor solicitation, partner/referral, media, internal, calendar, automated, suspicious, unknown. Do not make these CRM truth automatically. Relationship is a separate evidenced axis: active opportunity, customer, prospect, partner, vendor, media, internal, mixed or unknown. One person may have multiple roles by thread/deal; purpose never proves relationship.
+- **Acceptance:** Lazer device-support message routes to support context; Seb sales-service pitch to vendor; referral request remains referral. Unknown is visible for review. A customer can ask a new buying question; a partner can send a vendor pitch; classify each axis separately and preserve unknown.
+- **Depends on:** C07.
+- **Evidence/test state:** P04 plus Gmail Lazer/Riserify reads.
+
+
+#### C10 [P1] Compute answer owed and quietness from both sides
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** work/intel.ts people ranking: newest meaningful conversation state, latest sent action, accepted future meeting and outstanding commitments; date is descriptive and seller-overridable.
+- **Acceptance:** September 24 inbound followed by same-day reply is not answer owed; October 1 send and future meeting prevent went-quiet claim based only on inbound date.
+- **Depends on:** C08,C09.
+- **Evidence/test state:** rankPeople uses inbound timestamp only.
+
+
+#### C11 [P1] Expose suspect correspondence for review without prospect claims
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Classifier presentation excludes suspicious/calendar-only messages from prospects by default, retains searchable source and reversible classification. Do not click links or auto-delete.
+- **Acceptance:** Court-summons invitation cannot yield a buyer-interest assertion or automatic outreach; seller can inspect and correct classification.
+- **Depends on:** C09.
+- **Evidence/test state:** P04; actual summons contents not independently retrieved.
+
+
+#### C12 [P1] Make classification corrections durable and explainable
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Store seller override with source ID, rationale, version and scope in existing ledger; apply across brief/app/tasks without changing unrelated conversations.
+- **Acceptance:** Correcting one media thread does not blacklist all people at that domain; subsequent agent run honors override and retains original machine suggestion.
+- **Depends on:** C09.
+- **Evidence/test state:** Design acceptance; no claim existing disposition system absent.
+
+
+### V3 — Brain and Clawd supply usable, attributed knowledge
+
+**Demo:** Kenco packet displays buyer statements, internal standup interpretation and historical research separately. Older contradictory no-deal text cannot override CRM. A missing source stays visible as missing.
+
+
+#### C13 [P1] Define the shared commercial-context contract
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Extend existing AccountContext/Story rather than a new CRM. Packet: identity, opportunity, timeline, buyer facts, seller hypotheses, commitments, incumbent systems, source IDs, event dates, observed dates, visibility and coverage.
+- **Acceptance:** Contract fixture requires provenance and coverage for each source; API/schema tests reject untyped facts and maintain compatibility.
+- **Depends on:** C06,C08,C09.
+- **Evidence/test state:** Existing context/story/deals readers; thin angle prompt.
+
+
+#### C14 [P1] Retrieve linked account, people and meeting notes
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Replace wedge-only adapter with bounded account-specific retrieval from canonical vault/index, following relevant wiki-links to meeting notes/raw transcript spans and source references. Preserve raw text attribution.
+- **Acceptance:** Kenco recent inbox notes and July discovery are retrievable alongside account note; unrelated accounts and private personal details are excluded from outbound context.
+- **Depends on:** C13.
+- **Evidence/test state:** P07; local vault files inspected.
+
+
+#### C15 [P1] Separate document refresh time from claim time
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** story/load.ts and source envelope: file/index rebuilt time never becomes claim observation date. Retain section date and unknown dates.
+- **Acceptance:** October 8 refreshed account with July wedge remains July/undated claim; September buyer mail keeps September date.
+- **Depends on:** C14.
+- **Evidence/test state:** P07; live Clawd rebuilt Oct8 with July/Aug wedges.
+
+
+#### C16 [P1] Select Clawd knowledge by source identity and version
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** story/load.ts cloud adapter: replace first matching Vault wedge with version-aware source retrieval; deduplicate identical claims, preserve superseded history.
+- **Acceptance:** July11 and Aug7 notes select appropriate newest version, retaining citation; unordered array gives same result; contradictory assertions remain visible.
+- **Depends on:** C13.
+- **Evidence/test state:** P08; live reasoning_notes order.
+
+
+#### C17 [P1] Resolve conflicting sources with field-specific authority
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Use CRM for deal existence, provider mail for sent/received, buyer source for buyer words, seller notes for interpretation, public citations for external facts. No universal newest-wins rule.
+- **Acceptance:** Kenco stale vault no-deal claim cannot override associated open deal; seller assertion cannot become a buyer quote; two conflicting buyer sources display conflict.
+- **Depends on:** C13,C14,C16.
+- **Evidence/test state:** Kenco vault contains research status, no-deal source line and newer meeting history.
+
+
+#### C18 [P1] Separate seller knowledge from externally usable evidence
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Apply existing trust vocabulary/compiler controls to retrieved chunks: internal-only, buyer-attributed, approved external fact, modeled, inference. Keep useful private context available to internal planning.
+- **Acceptance:** Deck scanner activity cannot be quoted as buyer intent; modeled $98.9M remains modeled/internal unless approved; private standup guides strategy without leaking. Malicious email/vault instructions to send, change flags or reveal secrets remain quoted source data and trigger no tool action.
+- **Depends on:** C17.
+- **Evidence/test state:** ask/grounding.ts intentionally excludes vault; account note mixes claim classes.
+
+
+#### C19 [P2] Index Claude knowledge as attributed artifacts, not implicit memory
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Inventory relevant CLAUDE.md, project memory and accepted plans; import only canonical accepted decisions/approved commercial notes with origin/version. Do not copy chat instructions into tool authority.
+- **Acceptance:** Stale Claude memory X19-open does not override later canonical X19-retired; no assumption that selecting a Claude model grants project-chat access.
+- **Depends on:** C13.
+- **Evidence/test state:** Local Claude execution-engine memory read; current canon differs.
+
+
+#### C20 [P1] Expose retrieval coverage and source freshness
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Packet includes configured, reachable, complete/partial, source watermark, indexedAt, query and omitted source reason; distinguish empty from unavailable.
+- **Acceptance:** Vault offline, Clawd timeout and partial CRM associations produce useful internal packet plus honest gaps; no fabricated empty history.
+- **Depends on:** C13,C14,C16.
+- **Evidence/test state:** Current soft catches return null/empty; live adapters partially connected.
+
+
+### V4 — Pursue becomes specific prepared work
+
+**Demo:** Pursue Kenco prepares a deal-specific follow-up draft proposal grounded in Dave’s roadmap; Pursue Hormel retains the dated 2018 signal; no message is sent.
+
+
+#### C21 [P1] Use the shared context in angle generation
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** agents/develop-angle.ts: consume bounded C13 packet rather than title+generic pains+three hypotheses. Include incumbent, buyer objective, last exchange and existing next step.
+- **Acceptance:** Kenco output mentions source-supported Open Dock/Birdseye/Blue Yonder context and prior conversation; it does not ask how gate check-in is managed as if unknown.
+- **Depends on:** C13,C17,C18,C20.
+- **Evidence/test state:** Current buildAnglePrompt inputs inspected.
+
+
+#### C22 [P1] Require traceable commercial claims in generated angles
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Add claim/source references and fact-vs-inference annotations to internal angle result; validate references and unsupported assertions alongside existing voice checks.
+- **Acceptance:** Invented facility pain, buyer interest or installed system is rejected/labelled inference; a supported historical observation stays usable with its date.
+- **Depends on:** C21.
+- **Evidence/test state:** validateAngle checks style/roster/length, not factual support.
+
+
+#### C23 [P1] Bind cached agent output to its context revision
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** queueAngle cache keyed by source revision/context fingerprint and seller request; unchanged Pursue reuses output, changed buyer/CRM context invalidates it.
+- **Acceptance:** An old no-account Kenco angle is replaced after identity/context fix; repeat unchanged click creates no duplicate spend.
+- **Depends on:** C21.
+- **Evidence/test state:** A02 cache keeps succeeded angle on unchanged Pursue.
+
+
+#### C24 [P1] Promote an accepted angle into the existing draft workflow
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Bridge selected people/action to existing hypothesis/proposal/compiler and editable draft preparation. Track prepared versus sent separately; no second orchestration framework.
+- **Acceptance:** Pursue -> specific proposed person/action -> seller approval -> compiled mock Gmail draft, with source and revision links; no automatic buyer send.
+- **Depends on:** C21,C22,C23,C39.
+- **Evidence/test state:** develop_angle returns prose/result; does not itself create outreach.
+
+
+#### C25 [P1] Reuse existing drafts and check for competing work
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Before generating another draft, compare same identity/deal/thread/purpose and existing draft revision. Offer reuse/revise; do not overwrite unsent seller edits.
+- **Acceptance:** October 5 Kenco draft appears as existing work; retry does not create a second conflicting agenda.
+- **Depends on:** C08,C24.
+- **Evidence/test state:** Live Kenco drafts exist; absence from test email.
+
+
+#### C26 [P2] Inventory handler coverage and make unsupported actions explicit
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Compare every exposed call/follow-up/meeting action and declared task kind with registered handlers; mark unsupported paths explicitly and create individually scoped implementation children only for demonstrated missing promises.
+- **Acceptance:** Each exposed action has a registered tested handler or is explicitly unavailable; generated follow-up/call brief keeps account/deal scope and sources.
+- **Depends on:** C13.
+- **Evidence/test state:** handlers.ts registers revise_message, answer_objection, develop_angle; broader coverage needs inventory.
+
+
+### V5 — A truthful, navigable daily briefing
+
+**Demo:** Render the October 8 fixture locally. One Kenco deal thread, one obligation per Diego/Bryan, historical intelligence retained, explicit count basis and matching app/email actions.
+
+
+#### C27 [P1] Deduplicate obligations by durable origin
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** work/list.ts, commitments and plan projection: use shared originating message/disposition/commitment ID and relationship scope, not titles alone; retain distinct obligations.
+- **Acceptance:** Diego follow-up plus derived reminder renders once; two different promises to same person remain two. Repeat with missing email and alternate title.
+- **Depends on:** none.
+- **Evidence/test state:** Test email duplicates; existing list.ts:668 has only conditional reminder dedup.
+
+
+#### C28 [P1] Describe return dates accurately
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Follow-up presentation distinguishes due today, overdue since, returned on and scheduled for; date-only values do not shift through UTC conversion.
+- **Acceptance:** May26/Jun16 on Oct8 never says back today; DST and New York midnight cases remain correct.
+- **Depends on:** none.
+- **Evidence/test state:** Observed email; targeted expected behavior.
+
+
+#### C29 [P1] Preserve publication date semantics
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Signal/trigger display carries date-only versus timestamp type; do not interpret an EDGAR filing date at UTC midnight as prior New York day.
+- **Acceptance:** 2026-10-08 filing displays Oct8; actual timestamp converts correctly. Do not alter underlying factual date without source evidence.
+- **Depends on:** none.
+- **Evidence/test state:** P10; test email PEP/COST title versus display mismatch.
+
+
+#### C30 [P2] Cluster related intelligence with retained sources
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Reuse signal event IDs and cross-source identity; group related Pepsi/Gatik reports rather than losing three of six slots; avoid merging distinct launches.
+- **Acceptance:** Three corroborating reports one event with three sources; different dates/expansions stay separate when evidence does not establish same event.
+- **Depends on:** none.
+- **Evidence/test state:** Email shows three Pepsi/Gatik stories; exact event equivalence needs verification.
+
+
+#### C31 [P1] Align brief counts, ordering and START target
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Brief presentation names count categories and uses the same durable actionable items/order as START/NEXT. Intelligence discovery stays first if chosen but is labelled separately from execution count.
+- **Acceptance:** Headline, visible actionable rows and START target reconcile; no “first” pointer secretly starts on a different category. Test zero and mixed states.
+- **Depends on:** C01,C27.
+- **Evidence/test state:** briefing.ts uses plan.items.length, independently grouped intelligence.
+
+
+#### C32 [P1] Show account/deal context and item-specific destinations
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Brief card: identity, relationship/motion, why surfaced, last material exchange, next prepared action, source/date and precise deep link; unresolved items link to resolution context.
+- **Acceptance:** Kenco never falls back to generic Open Work when a supported deal exists; long deal next steps are not cut mid-sentence.
+- **Depends on:** C06,C21,C31.
+- **Evidence/test state:** Observed generic links and truncated deals line.
+
+
+#### C33 [P2] Use greeting appropriate to actual send and replay
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** briefing.ts uses neutral greeting or seller-local hour; replay states snapshot date/time and whether current state changed.
+- **Acceptance:** 21:47 New York does not say good morning; yesterday snapshot cannot be mistaken for fresh live plan.
+- **Depends on:** none.
+- **Evidence/test state:** briefing.ts:94; email sent 21:47.
+
+
+#### C34 [P2] Maintain visibility beyond bounded selection windows
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Reader coverage/pagination for signals, people, decisions and pursued tasks. Retain any-age intelligence; explain selection and allow more/search. Do not reintroduce age cutoff as relevance policy.
+- **Acceptance:** An older relevant signal beyond initial windows can be retrieved; 3,023 is not labelled completely reviewed; skipped/dismissed state survives capped decision reads.
+- **Depends on:** C20.
+- **Evidence/test state:** intel pulls 100/300/200; people 180d/2000; decisions 2000; tasks14d.
+
+
+#### C35 [P1] Keep unresolved obligations durable until resolved
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** work/recorded-replies.ts and task projection: query unresolved status independently of age windows; pagination cannot delete owed work.
+- **Acceptance:** Unanswered confirmed reply aged15d and the 101st reply stay owed; old task remains visible until terminal. Resolution is explicit.
+- **Depends on:** C10.
+- **Evidence/test state:** ANSWER_OWED_DAYS14/take100 remain after X14.
+
+
+### V6 — Activity means what it says
+
+**Demo:** Replay draft, send, meeting outcome, CRM note and recovered write. The scorecard reports preparation, actual contact and commercial progress distinctly.
+
+
+#### C36 [P1] Separate draft preparation from first-touch completion
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** work/activity.ts/accountability: drafted or copy-approved may complete a preparation item, never an outreach item.
+- **Acceptance:** Draft-only first_touch remains awaiting send; provider send or explicit seller-reported send completes correct action with its basis.
+- **Depends on:** none.
+- **Evidence/test state:** Independent probe: reproduced.
+
+
+#### C37 [P1] Separate meeting outcome from meeting booked
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** work/activity.ts event mapping and scorecard consumers; preserve capture.meeting outcome enum.
+- **Acceptance:** disqualified_problem/no_decision/more_discovery do not increment booked; meeting accepted, booked and outcome captured remain distinguishable.
+- **Depends on:** none.
+- **Evidence/test state:** Independent probe: reproduced.
+
+
+#### C38a [P1] Label CRM maintenance as CRM updated
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** work/activity.ts taxonomy and scorecard: note/task/next-step write is CRM updated.
+- **Acceptance:** Successful note/task write never increments deal advanced.
+- **Depends on:** none.
+- **Evidence/test state:** Independent activity review and probes.
+
+
+#### C38b [P2] Treat recovered CRM writes as successful reconciliation
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** work/activity.ts maps recovered/off/conflict/failed separately.
+- **Acceptance:** Recovered write creates no failure count; failed remains failed.
+- **Depends on:** none.
+- **Evidence/test state:** Independent activity review and probes.
+
+
+#### C38c [P1] Require evidence for commercial advancement
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** work/activity.ts milestone projection uses explicit stage transition or defined confirmed commercial milestone, scoped to a deal.
+- **Acceptance:** No generic CRM update is advancement; validated milestone is one event with basis and deal ID.
+- **Depends on:** none.
+- **Evidence/test state:** Independent activity review and probes.
+
+
+### V7 — Approval, send and reconciliation stay bound
+
+**Demo:** A mock START -> REVISE -> APPROVE -> draft -> app-confirmed send -> receipt flow completes once; stale initial approval refuses before draft creation. Direct Gmail is shown as a separate seller route.
+
+
+#### C39 [P1] Bind initial APPROVE to the assigned revision
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** agents/approve-request.ts: validate revision0 exact content/sender/recipient before calling draft adapter, as well as revised content; validate returned draft hash. Pass the expected revision/hash into the draft service and recheck the pinned content immediately before the provider adapter; a post-creation comparison alone is insufficient.
+- **Acceptance:** Assigned A/current B revision0 refuses and draft spy stays zero; unchanged A creates one draft. Recipient-only and sender-only changes refuse. Change source between preflight and creation: refuse before provider side effect or use the exact immutable approved snapshot.
+- **Depends on:** none.
+- **Evidence/test state:** Independent pure probe reproduced bypass at revision0.
+
+
+#### C40 [P1] Make direct Gmail and app-send boundaries explicit
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** UI and handoff: approval creates a draft; app send rechecks gates at action time; Gmail manual editing/sending is outside that app gate and must be reconciled.
+- **Acceptance:** No screen claims manual Gmail was app-validated at send; edited Gmail draft is not falsely attributed to approved copy.
+- **Depends on:** C39.
+- **Evidence/test state:** approve-request.ts:77 offers direct Gmail; seller-send checks present.
+
+
+#### C41 [P1] Verify provider receipts and uncertain-send recovery
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Focused contract tests on seller-send, copies-reconcile, native sequence adapter; inject timeout after provider acceptance and eventual provider readback.
+- **Acceptance:** No retry double-send after uncertain outcome; sender/recipient/thread/body hash attribution survives reconciliation; delivered is not inferred from accepted/sent.
+- **Depends on:** C39,C40.
+- **Evidence/test state:** Existing send claims present; new end-to-end fault cases required.
+
+
+#### C42 [P1] Verify sequence enrollment against all execution lanes
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Reuse cross-plane suppression/autonomy, contact employment, duplicate-contact/active enrollment and immutable copy/version guards for native HubSpot, Gmail and manual recorded sends. Prospective app/native-sequence gate checks are distinct from recording an already-sent manual Gmail event; reconciliation cannot retroactively block that send.
+- **Acceptance:** Suppression change between approval and confirm blocks app send/enroll; active deal routes deal work; enabled publish with autonomy halted does not imply executable enrollment.
+- **Depends on:** C06,C41.
+- **Evidence/test state:** Live publish=true, auto_enroll=false; Clawd outreach=false; existing gates retained.
+
+
+#### C43 [P1] Test command authenticity, stale links and replay idempotency
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Focused commands/commands-apply/action-token integration fixtures: sender identity, trusted auth headers, original thread, quoted commands, duplicate provider IDs and expired day tokens.
+- **Acceptance:** Forwarded/forged/auto-response and quoted APPROVE never mutate work; duplicate valid command applies once; a link preview cannot execute a commercial decision.
+- **Depends on:** C39.
+- **Evidence/test state:** Existing X07 checks; cross-surface adversarial validation required.
+
+
+#### C44 [P1] Make every visible action end in a recoverable state
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** START/NEXT/REVISE/APPROVE/SKIP/DEFER/DONE/Pursue/More each reports accepted, refused, queued, prepared, failed or unknown with source item and next path. Preserve originals on failure.
+- **Acceptance:** Unknown handler, invalid revision and CRM outage produce actionable result without consuming future retry; no orphaned task disappears after14d.
+- **Depends on:** C24,C35,C43.
+- **Evidence/test state:** Existing durable ledger; test whole action chain.
+
+
+### V8 — Integration health describes the actual runtime
+
+**Demo:** Read-only diagnostics distinguish configured credentials, actual source coverage and successful operations. Snapshot and source versions are visible; no flags or budgets are changed by the audit.
+
+
+#### C45 [P2] Record a single deployment/configuration receipt
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** A read-only operator report records repo SHA, deployment ID/alias binding, environment, nonsecret flags, cron settings and last successful source reads; avoid printing keys.
+- **Acceptance:** Receipt distinguishes Vercel project settings from deployed environment and local code; stale baseline pointers marked historical.
+- **Depends on:** none.
+- **Evidence/test state:** Live Vercel alias Ready and env list; deployment API binds dpl_G9KX6ZmwES9f719vk8jsrCcay6r1 to a195467; repeatable runtime receipt still required.
+
+
+#### C46 [P1] Make health cover contextual completeness
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Extend existing health/operations with identity, HubSpot associations, Gmail inbox/Sent coverage, vault index and Clawd knowledge watermark; degraded internal generation is labelled, send safety unchanged.
+- **Acceptance:** A rebuilt-but-old Kenco wedge or unreadable Sent mailbox cannot report complete commercial context.
+- **Depends on:** C20,C45.
+- **Evidence/test state:** Live partial knowledge vs available services.
+
+
+#### C47 [P1] Reconcile ingestion idempotency across Gmail and HubSpot
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Use provider message IDs/RFC Message-ID plus mailbox and engagement IDs; preserve associations to multiple deals without double counting content.
+- **Acceptance:** Same email in Gmail and HubSpot yields one communication event with two provenance links; pagination/retry adds no duplicate dispositions.
+- **Depends on:** C07,C08.
+- **Evidence/test state:** Multiple ingress paths exist; cross-source duplicate incidence not measured.
+
+
+#### C48 [P2] Validate source indexing and deletion lifecycle
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Use content hashes and incremental watermarks for vault/Clawd artifacts; deleted or superseded notes tombstoned in retrieval, history retained.
+- **Acceptance:** Changing one Kenco note refreshes affected chunks; deleted private note cannot reappear from cache; stale index reports last successful sync.
+- **Depends on:** C14,C16.
+- **Evidence/test state:** No full production vault index verified.
+
+
+#### C49 [P1] Make activity-read coverage honest
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** work/activity.ts loadActivity returns complete/partial/unavailable; paginate beyond1,000 and handle duplicate provider evidence.
+- **Acceptance:** 1,001 rows show complete counts after paging or explicit partial; thrown read yields unavailable, not a zero-activity day.
+- **Depends on:** C36,C37,C38a,C38b,C38c.
+- **Evidence/test state:** Independent code review: cap1000 and catch[].
+
+
+#### C50 [P2] Verify every model path is metered without losing task truth
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Retain A01-A06 model route and budgets. Test reservation/concurrency, fallback price, failed/partial runs, context retrieval cost and per-task reason; no cap increases.
+- **Acceptance:** Two competing workers cannot spend beyond intended policy; failed reservation makes no call; model outage preserves decision and work for retry.
+- **Depends on:** none.
+- **Evidence/test state:** Canon records A06 implemented; current spend concurrency accepted debt.
+
+
+#### C51 [P1] Audit cross-system authority for CRM stages
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Read Clawd hubspot_autopush and runtime enablement/invocations; retire or isolate touch->stage writes only through separately authorized change.
+- **Acceptance:** Fixture sent_t1 never advances commercial stage; any remaining external writer is named with owner and enablement proof.
+- **Depends on:** none.
+- **Evidence/test state:** Clawd source STAGE_MAP exists; runtime effect not established.
+
+
+### V9 — Commercial preparation is useful and measurable
+
+**Demo:** Held-out examples cover active deal, cold prospect, historic signal, support, vendor, referral and conflicted knowledge. Quality is judged by grounded usefulness, not merely a parser or voice check.
+
+
+#### C52 [P1] Assemble the reference evaluation set
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Create de-identified fixtures grounded in sources: Kenco positive, ambiguous subsidiary, Pepsi repeats, Hormel2018, GeneralMills2013, Lazer support, Riserify vendor, suspicious invite, opt-out, old unanswered reply, two deals, model outage.
+- **Acceptance:** Each fixture has source IDs, expected identity/motion, prohibited claims and missing-source cases; frozen before prompt changes.
+- **Depends on:** C13.
+- **Evidence/test state:** Audit sources + synthetic adverse variants.
+
+
+#### C53 [P1] Evaluate retrieval before prose quality
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Measure source recall, claim provenance, relevant thread coverage, conflict handling and unauthorized-content exclusion on C52.
+- **Acceptance:** Required Kenco roadmap retrieved; private intent never promoted; report per-class failures and sample size rather than one aggregate score. Malicious email/vault instructions to send, change flags or reveal secrets remain quoted source data and trigger no tool action.
+- **Depends on:** C52,C21.
+- **Evidence/test state:** Design evaluation not yet run.
+
+
+#### C54 [P1] Evaluate generated commercial usefulness
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Held-out at least30 generated outputs: correct motion/person, acknowledges known answer, specific next step, disconfirming question, no invented pain, concise house voice. Version prompt/model/context.
+- **Acceptance:** Zero critical unsupported buyer claims or authority leaks in release set; seller reviews usefulness; cost reported. Do not claim live model evaluation from mocked tests.
+- **Depends on:** C52,C53.
+- **Evidence/test state:** Prior quality debt; no 30-output assessment executed.
+
+
+#### C55 [P2] Close the loop from real outcomes to recommendations
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Reuse BID/disposition/learning: seller correction, buyer objection, not-now, referral, meeting and loss/win feedback inform future routing with cited evidence and explicit attribution.
+- **Acceptance:** Hypothesis rejected does not recur as fact; a seller edit is not buyer evidence; small samples do not imply causal uplift.
+- **Depends on:** C12,C22,C36,C37,C38a,C38b,C38c.
+- **Evidence/test state:** Existing learning layer, regression/coverage extension.
+
+
+### V10 — Demonstrate and hand off without dropping the plan
+
+**Demo:** Replay the full October 8 case in a safe local/sink environment, then hand Claude one canonical ledger with evidence, explicit residuals and no implied production authorization.
+
+
+#### C56 [P1] Build one replay of the actual October8 brief
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Safe fixtures/sink adapters; invoke real orchestration and both renderer paths, not isolated invented outputs. Include observed snapshot IDs but remove signed action tokens.
+- **Acceptance:** All supplied email sections reconcile; C01-C44 behaviors demonstrated, exceptions recorded, no production DB or mail credentials available. Record an explicit acceptance disposition for every C01-C44 ID; no silent exception.
+- **Depends on:** C01,C02,C03,C04,C05,C06,C07,C08,C09,C10,C11,C12,C13,C14,C15,C16,C17,C18,C19,C20,C21,C22,C23,C24,C25,C26,C27,C28,C29,C30,C31,C32,C33,C34,C35,C36,C37,C38a,C38b,C38c,C39,C40,C41,C42,C43,C44.
+- **Evidence/test state:** Current audit probes are not this end-to-end demo.
+
+
+#### C57 [P1] Run independent adversarial review after each vertical slice
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Separate reviewer, read-only source or disposable exclusive mutation workspace. Review evidence joins and product behavior, not just test count. This is a standing gate on each slice; aggregate the per-slice receipts at C56, rather than waiting for C56 to start review.
+- **Acceptance:** Reviewer checks negative controls; writer verifies proposed edits; findings receive fixed/accepted/deferred disposition and linked ticket.
+- **Depends on:** none.
+- **Evidence/test state:** Initial independent review executed; implementation review remains.
+
+
+#### C58 [P1] Reconcile all old ledger families and known debt
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Retain R00-R65, UX01-17, X01-X21, I01-I06, A01-A06 history. Add code/test/deployed/accepted distinctions, owners and reasons for deferred work; no mass DONE claims.
+- **Acceptance:** Every prior family and named owner decision has a disposition; no follow-on prompt abandons remaining tickets.
+- **Depends on:** C45,C56.
+- **Evidence/test state:** Current completion matrix overstates acceptance.
+
+
+#### C59 [P1] Publish the next-version demonstration receipt locally
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** Include before/after rendered email, source manifest, targeted tests, mocked/live boundaries, reviewer findings, residuals and rollback plan. No live sends needed.
+- **Acceptance:** Another developer reproduces fixture replay; linked canonical tickets resolve; no credentials, signed actions or raw private mail in shareable report.
+- **Depends on:** C54,C56,C57,C58.
+- **Evidence/test state:** Audit deliverables prepared; implementation demo pending.
+
+
+#### C60 [P2] Exercise owner-controlled production acceptance separately
+
+- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Change boundary:** After code release and explicit authorization in that future session: seller uses real START/REVISE/APPROVE; any send is separately authorized and sink-addressed. Never simulate Casey’s authenticated reply.
+- **Acceptance:** Mail listing, command ingest, revised assignment and one editable draft verified with provider receipts; external buyer sends and flag changes remain outside this audit.
+- **Depends on:** C59.
+- **Evidence/test state:** Canon records real-Gmail harness but production mailbox listing and seller acceptance incomplete.
+
+
+### Prior-plan reconciliation and residual ownership
+
+| Prior plan | Keep / correction / acceptance |
+|---|---|
+| R00-R65 execution recovery | Preserve shipped source and historical receipts. Reopen only demonstrated semantics through C35-C38/C49. Prior R43/R61 quality/performance debt must have explicit disposition; do not silently erase because family says DONE. |
+| UX01-UX17 | Preserve account-first story, proposal approvals and existing send controls. C13-C24 extend context into the newer prospecting path. |
+| X01-X21 | Day builder, plan, briefing, commands, draft approval, activity and legacy-digest retirement exist. C01/C27-C44 correct integration/semantic gaps; production seller round trip remains unaccepted. |
+| I01-I05 | Intelligence surface, decisions, angles and briefing shipped. Kenco and noise classification prove the completion label is not acceptance. C01-C34 address the delta. |
+| I06a-I06g | Age-as-gate fixes already recorded as complete. Do not build I06 again. Retain dated historic facts and tests; C29/C34 correct display and coverage without age-based suppression. |
+| A01-A06 | Model recovery and cost-metering changes recorded as shipped. C50 verifies current coverage/concurrency; do not reopen a generic funded-key hunt or increase budgets. |
+| Earlier audit X14 copy/recap concern | X14a/b/c now implemented; reviewer finds different draft-only accountability defect, C36. Do not claim original copy-as-sent implementation is still absent. |
+| Person account by domain | Previously named debt is now C02/C03/C05/C06, supported by live Kenco associations. |
+| Non-GAP model routes and Clawd model fallback | Separate named debt, not fixed by enabling broad fallback or sharing private GAP prompts. Inventory remains; no model changes in this audit. |
+| Top100/PIC/war-room | Preserve existing lane, evidence contracts, claims and import history. C42/C47/C51 check cross-lane activity and authority; do not revive abandoned GTM-YardFlow. |
+| Owner commercial judgments | Pepsi thesis approval, 5% wording and transcription spend remain Casey decisions. A code change does not approve them. |
+| Infrastructure/acceptance | No GitHub Actions work requested; no production mailbox command/send test in this audit. C45/C60 own missing proof, not a false completed checkbox. |
+
+### Codex-to-Claude execution handoff
+
+Read CLAUDE.md, STABLE_BASELINE.md and this addendum in the existing canonical file. Rebase onto the current main and verify this audit's source paths before editing. Begin with V1 and its failing Kenco fixture, then V2 and V3 so V4 receives actual commercial context. C39 is independently actionable as an approval-correctness fix. Retain all remaining slices in this file; completing V1 does not abandon V2-V10. Do not equate a stronger model, a passed parser or a recreated email with end-to-end completion.
+
+For each ticket record changed files, code revision, exact focused tests and counts, before/after fixture behavior, mutation result, review disposition and residuals. Report code implemented, tests passed, deployed and seller accepted separately. Never mark an entire family DONE while required acceptance is missing. Update this single ledger in the same commit as the change. Existing historical receipts stay historical.
+
+This handoff is a work specification for a future implementation session, not authorization here to push, deploy, send, enroll, buy credits, alter production settings or write CRM records. Keep demonstrations local/sink-backed until authorized otherwise. Casey controls priorities and time management; do not invent dates or estimates. End every slice with a demoable result and the exact next unresolved ticket, carrying forward every remaining obligation.
 
 ## 12. Migration, backfill and rollback
 
