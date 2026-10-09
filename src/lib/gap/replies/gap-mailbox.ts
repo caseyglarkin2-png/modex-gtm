@@ -60,7 +60,7 @@ import { classifyInboundReply } from '@/lib/email/reply-precision';
 import type { MailboxMessage } from '@/lib/email/gmail-inbox';
 import { recordHardBounce } from '@/lib/email/bounce';
 import { ingestReply } from './ingest';
-import { PROVENANCE_LINKED_KIND, PROVENANCE_SUBJECT_TYPE } from '../context/thread-context';
+import { linkProvenance, rfcWhere } from '../context/thread-context';
 import { AUTO_REPLY_SUBJECT, DELIVERY_BLOCKED_KIND, FREEMAIL_DOMAINS, OWN_DOMAINS } from './domains';
 export { DELIVERY_BLOCKED_KIND } from './domains';
 import { DIRECT_SENT, DRAFT_SENT, DRAFT_SUBJECT_TYPE, DRAFTED, MANUAL_SENT } from '../execution/draft-ledger';
@@ -449,11 +449,11 @@ export async function storeInbound(prisma: PrismaLike, m: MailboxMessage, report
   });
   const existing = await prisma.inboundMessage.findUnique({ where: { id: m.id }, select: { id: true } });
   if (existing) return existing.id;
-  const sameRfc: { id: string } | null = m.rfcMessageId ? await prisma.inboundMessage.findFirst({ where: { rfc_message_id: m.rfcMessageId }, select: { id: true } }) : null;
+  // C57 F16: matched in every spelling of the Message-ID (brackets or not, any case).
+  const rfcMatch = rfcWhere(m.rfcMessageId);
+  const sameRfc: { id: string } | null = rfcMatch ? await prisma.inboundMessage.findFirst({ where: { rfc_message_id: rfcMatch }, select: { id: true } }) : null;
   if (sameRfc) {
-    const providerId = `gmail:${m.id}`;
-    const linked = await prisma.gapAuditEvent.findFirst({ where: { kind: PROVENANCE_LINKED_KIND, subject_type: PROVENANCE_SUBJECT_TYPE, subject_id: sameRfc.id, payload: { path: ['providerId'], equals: providerId } }, select: { id: true } });
-    if (!linked) await audit(prisma, PROVENANCE_LINKED_KIND, actor, sameRfc.id, { providerId, rfcMessageId: m.rfcMessageId, threadId: m.threadId, receivedAt: m.receivedAt.toISOString() }, PROVENANCE_SUBJECT_TYPE);
+    await linkProvenance(prisma, { storedId: sameRfc.id, providerId: `gmail:${m.id}`, actor, rfcMessageId: m.rfcMessageId, extra: { threadId: m.threadId, receivedAt: m.receivedAt.toISOString() } });
     return sameRfc.id;
   }
   {

@@ -65,7 +65,7 @@ describe('C47: one email through Gmail and HubSpot is one message', () => {
     expect(d.store.gapAuditEvent).toHaveLength(0);
     // The thread context reads one event with both provenance ids.
     const ctx = await loadThreadContext(d.client(), { threadId: 't-kenco', now: NOW }, { listSent: async () => [] });
-    expect(ctx.events.map((e) => e.providerIds)).toEqual([['gmail:g-sep16', 'hubspot:7001', `rfc:${RFC}`]]);
+    expect(ctx.events.map((e) => e.providerIds)).toEqual([['gmail:g-sep16', 'hubspot:7001', `rfc:sep16@kencogroup.com`]]);
   });
 
   it('a second engagement for a row already linked to another engagement is a provenance row, not a second message; a dry run counts and writes nothing', async () => {
@@ -96,10 +96,28 @@ describe('C47: one email through Gmail and HubSpot is one message', () => {
     expect(d.store.inboundMessage).toHaveLength(1);
     expect(d.store.gapAuditEvent.map((r) => [r.kind, r.subject_type, r.subject_id, r.payload.providerId])).toEqual([[PROVENANCE_LINKED_KIND, 'inbound_message', 'hs:7001', 'gmail:g-sep16']]);
     const ctx = await loadThreadContext(d.client(), { email: DAVE, now: NOW }, { listSent: async () => [] });
-    expect(ctx.events.map((e) => [e.id, e.providerIds])).toEqual([['hs:7001', ['hubspot:7001', `rfc:${RFC}`, 'gmail:g-sep16']]]);
+    expect(ctx.events.map((e) => [e.id, e.providerIds])).toEqual([['hs:7001', ['hubspot:7001', `rfc:sep16@kencogroup.com`, 'gmail:g-sep16']]]);
     // A message with no RFC id and a new Gmail id is stored as its own row.
     expect(await storeInbound(d.client(), { ...m, id: 'g-other', rfcMessageId: null }, report)).toBe('g-other');
     expect(report.inboundMessagesCreated).toBe(1);
+  });
+
+  it('C57 F16: the join normalizes the Message-ID: HubSpot answers it without brackets and in another case, Gmail stored it raw with brackets; the mailbox matches the other way too', async () => {
+    const d = ledgerDb({ inbound: [{ id: 'g-sep16', thread_id: 't-kenco', rfc_message_id: '<Sep16@KencoGroup.com>', from_email: DAVE, subject: 'x', body_text: BODY, received_at: new Date('2026-09-16T14:00:00Z'), source: 'gmail', hubspot_engagement_id: null }] }, NOW);
+    const report = await pollHubSpotReplies(pollerPrisma(d), { now: NOW, dryRun: false, since: new Date('2026-09-01T00:00:00Z') }, { searchIncomingEmails: async () => [engagement('7009', '  sep16@kencogroup.com ')] });
+    expect(report).toMatchObject({ merged: 1, created: 0 });
+    expect(d.store.inboundMessage).toHaveLength(1);
+    expect(d.store.inboundMessage[0]).toMatchObject({ id: 'g-sep16', hubspot_engagement_id: '7009' });
+    // The other direction: HubSpot stored it bare, the Gmail copy arrives bracketed and upper-cased.
+    const d2 = ledgerDb({ inbound: [{ id: 'hs:7001', thread_id: 'hs-thread:1', rfc_message_id: 'sep16@kencogroup.com', from_email: DAVE, subject: 'x', body_text: BODY, received_at: new Date('2026-09-16T14:00:00Z'), source: 'hubspot', hubspot_engagement_id: '7001' }] }, NOW);
+    const m = { id: 'g-sep16', threadId: 't-kenco', rfcMessageId: '<SEP16@kencogroup.com>', fromEmail: DAVE, fromName: 'Dave', subject: 'x', snippet: BODY.slice(0, 80), bodyText: BODY, rawText: BODY, bodyHtml: '', deliveryStatus: null, labelIds: ['INBOX'], receivedAt: new Date('2026-09-16T14:00:00Z'), headers: {} } satisfies MailboxMessage;
+    const rep = { inboundMessagesCreated: 0 } as Parameters<typeof storeInbound>[2];
+    expect(await storeInbound(d2.client(), m, rep)).toBe('hs:7001');
+    expect(d2.store.inboundMessage).toHaveLength(1);
+    expect(d2.store.gapAuditEvent.map((r) => r.payload.providerId)).toEqual(['gmail:g-sep16']);
+    // The thread context keys the rfc provenance id on the normalized form, so both rows read as one event.
+    const ctx = await loadThreadContext(d2.client(), { email: DAVE, now: NOW }, { listSent: async () => [] });
+    expect(ctx.events[0].providerIds).toEqual(['hubspot:7001', 'rfc:sep16@kencogroup.com', 'gmail:g-sep16']);
   });
 
   it('the HubSpot search asks for hs_email_message_id and maps it to rfcMessageId', async () => {

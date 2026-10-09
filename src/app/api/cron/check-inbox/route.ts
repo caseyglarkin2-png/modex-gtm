@@ -14,6 +14,7 @@ import { ensureLocalMeetingDealLink } from '@/lib/hubspot/deals';
 import { advancePipelineStage, derivePipelineStage } from '@/lib/pipeline';
 import { isGapOsEnabled } from '@/lib/gap/flags';
 import { ingestReply } from '@/lib/gap/replies/ingest';
+import { linkProvenance, rfcWhere } from '@/lib/gap/context/thread-context';
 import * as Sentry from '@sentry/nextjs';
 
 export const dynamic = 'force-dynamic';
@@ -97,13 +98,17 @@ export async function GET(request: Request) {
       // Ops closeout 14: one RFC message can arrive under two Gmail ids (a
       // calendar invite, a list copy). The RFC Message-ID is the idempotency
       // key: a second copy is labelled processed and changes nothing.
-      if (reply.rfcMessageId) {
+      // C47 / C57 F16: matched in every spelling of the id; the second copy (another Gmail id, or a HubSpot-stored
+      // row) is recorded as a provenance link on the stored message, so the thread context reads one event.
+      const rfcMatch = rfcWhere(reply.rfcMessageId);
+      if (rfcMatch) {
         const sameRfc = await prisma.inboundMessage.findFirst({
-          where: { rfc_message_id: reply.rfcMessageId, id: { not: reply.messageId } },
+          where: { rfc_message_id: rfcMatch, id: { not: reply.messageId } },
           select: { id: true },
         });
         if (sameRfc) {
           skipped++;
+          await linkProvenance(prisma, { storedId: sameRfc.id, providerId: `gmail:${reply.messageId}`, actor: 'cron:check-inbox', rfcMessageId: reply.rfcMessageId }).catch(() => false);
           await markAsProcessed(reply.messageId).catch(() => undefined);
           continue;
         }
