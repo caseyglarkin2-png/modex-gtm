@@ -67,6 +67,10 @@ const PARTNER = /\b(?:referral (?:partner|program|fee|agreement)|refer (?:you|cl
 const VENDOR = /\b(?:we (?:offer|provide|specialize|specialise|deliver|help (?:companies|businesses|teams|brands|startups|founders)|build|are an? (?:agency|firm|studio|team of))|our (?:services?|agency|firm|team can|platform helps|solution helps|clients (?:see|get|achieve)|developers|engineers)|outsourc(?:ed|ing)|lead gen(?:eration)?|sdr (?:services?|team|as a service)|appointment setting|staff augmentation|developers for hire|seo (?:services?|audit|ranking)|grow your (?:pipeline|revenue|business|sales)|fill your (?:pipeline|calendar)|special offer|limited[- ]time|free (?:trial|audit|consultation)|pricing plans|sales[- ]service|case stud(?:y|ies) (?:of|from) our clients|white[- ]?label)\b/i;
 const SUPPORT = /\b(?:not working|stopped (?:working|scanning|syncing|printing|responding)|isn'?t working|won'?t (?:load|open|scan|connect|sync|start|boot)|troubleshoot(?:ing)?|(?:the |our |a )?(?:device|tablet|scanner|kiosk|printer|handheld|gate (?:unit|kiosk|tablet)|camera|reader) (?:is|at|on|keeps|has)|log ?in (?:issue|problem|fails?|failed)|can'?t (?:log ?in|access|see|open|sign in)|password reset|error (?:message|code|when)|getting an error|broken|crash(?:es|ed|ing)?|bug|outage|is down|down (?:since|again)|support (?:ticket|request|case|team)|replacement (?:unit|device|tablet)|\brma\b|how do (?:i|we) (?:add|change|reset|remove|update|configure)|user (?:access|account) (?:for|request)|add (?:a )?(?:new )?user)\b/i;
 const BUYER = /\b(?:yards?|yms|gate|gates|dock|docks|trailers?|detention|dwell|pilot|roadmap|budget(?:ing)?|demo|proposal|pricing for|a quote|rollout|our (?:sites|facilit(?:y|ies)|network|fleet|dcs?|operations?|team)|warehouses?|carriers?|drivers?|reconnect|next (?:steps?|quarter|year)|open dock|blue yonder|yard (?:walk|audit|check)|case study|roi|security|automation|wms|tms|procurement|contract|renewal|site visit|on-?site)\b/i;
+/** The buyer's own operation, first person: "our two yards", "my pilot", "our gates", "our sites", "our DC". */
+const BUYER_FIRST_PERSON = /\b(?:our|my)\s+(?:\w+\s+)?(?:yards?|pilot|gates?|docks?|sites?|dcs?|facilit(?:y|ies)|network|fleet|warehouses?|operations?|trailers?|drivers?|carriers?|rollout|budget|roadmap|team)\b/i;
+/** A pitch that addresses US as the vendor: we are the target market, not the buyer. */
+const ADDRESSES_US_AS_VENDOR = /\b(?:(?:yard management|yard|logistics|supply[- ]chain|freight|saas|software|b2b|tech(?:nology)?) (?:vendors?|software companies|companies|providers|startups|firms)|(?:vendors?|companies|startups|teams|founders) like yardflow|yardflow'?s? (?:pipeline|growth|outbound|marketing|sales team)|(?:your|yardflow'?s) (?:icp|ideal customers?|target accounts?|tam))\b/i;
 
 /** A message from one of our own addresses or domains, whichever direction it was stored in. */
 function isOwn(addr: string | null, own: ReadonlySet<string>): boolean {
@@ -133,15 +137,23 @@ export function classifyPurpose(event: PurposeInput, context: PurposeContext = {
   }
   if (partner && !(known && buyer)) return { purpose: 'partner_referral', evidence: [...evidence, `referral or partner words: "${partner[0]}"`], confidence: 'medium' };
   if (reply.kind === 'opt_out') return { purpose: 'buyer_conversation', evidence, confidence: 'high' };
-  // C57 F2: a person writing back in the BUYER vocabulary (yards, a pilot, a demo, pricing, the roadmap, the dock,
-  // the gate, trailers) is a buyer conversation before any pitch cue is weighed; a pitch beside it is said in the
-  // evidence, never used to drop the person. A vendor needs pitch cues WITHOUT the buyer vocabulary.
-  if (reply.kind === 'human' && buyer) {
-    evidence.push(`buyer vocabulary: "${buyer[0]}"`);
-    if (vendor && !known) evidence.push(`pitch words beside it: "${vendor[0]}"; judged a buyer by the vocabulary, review if it reads as a pitch`);
+  // C57 F2, corrected on the reference set (2026-10-09): a pitch that addresses US as a vendor ("for yard management
+  // vendors", "vendors like YardFlow") or offers services is a vendor solicitation whatever operational nouns it holds.
+  // Buyer vocabulary wins only when it is FIRST-PERSON operational ("our two yards", "my pilot", "our gates") or the
+  // message is a reply in a conversation we started (a Re: subject, an In-Reply-To); then a pitch cue beside it is
+  // said in the evidence, never used to drop the person.
+  const addressesUs = both.match(ADDRESSES_US_AS_VENDOR);
+  const firstPerson = both.match(BUYER_FIRST_PERSON);
+  const inOurThread = /^\s*(?:re|aw|sv|fwd?)\s*:/i.test(subject) || !!headerValue(event.headers, 'In-Reply-To') || !!headerValue(event.headers, 'References');
+  const buyerWins = reply.kind === 'human' && buyer && !addressesUs && (firstPerson || inOurThread || !vendor);
+  if (buyerWins) {
+    evidence.push(`buyer vocabulary: "${(firstPerson ?? buyer)[0]}"${inOurThread && !firstPerson ? ' in a thread we started' : ''}`);
+    if (vendor && !known) evidence.push(`pitch words beside it: "${vendor[0]}"; judged a buyer by the first-person vocabulary, review if it reads as a pitch`);
     return { purpose: 'buyer_conversation', evidence, confidence: known ? 'high' : vendor ? 'low' : 'medium' };
   }
-  if (vendor && !known) return { purpose: 'vendor_solicitation', evidence: [...evidence, `a pitch in their own words: "${vendor[0]}"`, 'sender is not a known person'], confidence: 'high' };
+  if ((vendor || addressesUs) && !known) {
+    return { purpose: 'vendor_solicitation', evidence: [...evidence, `a pitch in their own words: "${(vendor ?? addressesUs)![0]}"`, ...(addressesUs ? [`it addresses us as a vendor: "${addressesUs[0]}"`] : []), 'sender is not a known person'], confidence: 'high' };
+  }
   // A known person (a partner, a customer) can still send a pitch: the purpose says so, the relationship is judged apart.
   if (vendor && known) return { purpose: 'vendor_solicitation', evidence: [...evidence, `a pitch in their own words: "${vendor[0]}"`, 'from a known person: the relationship is judged apart'], confidence: 'low' };
   if (reply.kind === 'human' && known) return { purpose: 'buyer_conversation', evidence, confidence: 'medium' };

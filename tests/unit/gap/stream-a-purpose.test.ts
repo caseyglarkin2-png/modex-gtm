@@ -26,7 +26,7 @@ describe('C09: purpose, with evidence', () => {
     expect(classifyPurpose(RISERIFY)).toMatchObject({ purpose: 'vendor_solicitation', evidence: expect.arrayContaining(['a pitch in their own words: "We provide"', 'sender is not a known person']) });
     expect(classifyPurpose(REFERRAL)).toMatchObject({ purpose: 'partner_referral', evidence: expect.arrayContaining(['referral or partner words: "introduce me to"']) });
     expect(classifyPurpose(SUMMONS)).toMatchObject({ purpose: 'suspicious', confidence: 'high', evidence: ['a calendar invitation', 'threat or lure words: "Summons"', 'not a buyer statement; do not follow its links'] });
-    expect(classifyPurpose(DAVE, { knownPerson: true, inDeal: true })).toEqual({ purpose: 'buyer_conversation', confidence: 'high', evidence: ['a person wrote back', 'a known person at an account', 'their account is in an open deal', 'buyer vocabulary: "roadmap"'] });
+    expect(classifyPurpose(DAVE, { knownPerson: true, inDeal: true })).toEqual({ purpose: 'buyer_conversation', confidence: 'high', evidence: ['a person wrote back', 'a known person at an account', 'their account is in an open deal', 'buyer vocabulary: "roadmap" in a thread we started'] });
     expect(classifyPurpose(DAVE)).toMatchObject({ purpose: 'buyer_conversation', confidence: 'medium' });
   });
 
@@ -47,13 +47,21 @@ describe('C09: purpose, with evidence', () => {
 
   it('C57 F2: a prospect with no persona who says yes to a call about the pilot at their yards is a buyer conversation and stays re-engageable; the Riserify pitch is still a vendor', () => {
     const yes = classifyPurpose(inbound('ops@newprospect.example', 'Re: trailer turns', 'Yes, open to a quick call next week to talk through the pilot at our two yards.'));
-    expect(yes).toMatchObject({ purpose: 'buyer_conversation', confidence: 'medium', evidence: expect.arrayContaining(['a person wrote back', expect.stringMatching(/^buyer vocabulary: "(trailer|pilot|yards)"$/)]) });
+    expect(yes).toMatchObject({ purpose: 'buyer_conversation', confidence: 'medium', evidence: expect.arrayContaining(['a person wrote back', 'buyer vocabulary: "our two yards"']) });
     expect(reengageEligible({ purposes: [yes.purpose], relationship: 'unknown' })).toMatchObject({ eligible: true });
     expect(classifyPurpose(inbound('ops@newprospect.example', 'Re: 15 minutes?', 'Sure, book a 15-min call for Thursday; bring the demo.')).purpose).toBe('buyer_conversation');
-    // Pitch cues beside buyer vocabulary: a buyer at low confidence, the pitch words said in the evidence.
-    const mixed = classifyPurpose(inbound('seb@riserify.example', 'Yards', 'We provide outsourced SDR services; happy to discuss your yards on a call.'));
+    // The frozen reference pitch (lead-c52-reference-set), verbatim: it addresses us as a vendor and offers services,
+    // so the operational noun "yard" in it never makes it a buyer.
+    const reference = classifyPurpose(inbound('growth@riseagency.example', 'Grow your pipeline', 'We offer outbound services for yard management vendors like YardFlow. Reply YES to book a strategy call.'));
+    expect(reference).toMatchObject({ purpose: 'vendor_solicitation', confidence: 'high', evidence: expect.arrayContaining(['a pitch in their own words: "We offer"', 'it addresses us as a vendor: "yard management vendors"']) });
+    expect(reengageEligible({ purposes: [reference.purpose], relationship: 'unknown' }).eligible).toBe(false);
+    // A pitch with "your yards" (second person) is still a pitch; the same words first person in our thread are a buyer.
+    expect(classifyPurpose(inbound('seb@riserify.example', 'Yards', 'We provide outsourced SDR services; happy to discuss your yards on a call.'))).toMatchObject({ purpose: 'vendor_solicitation', confidence: 'high' });
+    const mixed = classifyPurpose(inbound('ops@newprospect.example', 'Re: trailer turns', 'We provide third-party logistics; the pilot at our yards is what I want to talk about.'));
     expect(mixed).toMatchObject({ purpose: 'buyer_conversation', confidence: 'low', evidence: expect.arrayContaining([expect.stringContaining('pitch words beside it: "We provide"')]) });
     expect(classifyPurpose(RISERIFY)).toMatchObject({ purpose: 'vendor_solicitation', confidence: 'high' });
+    // Buyer nouns in a cold message to us with no first person and no thread: not a buyer by vocabulary alone.
+    expect(classifyPurpose(inbound('x@somewhere.example', 'Logistics software vendors', 'We help logistics software vendors book demos with yard operators.')).purpose).toBe('vendor_solicitation');
     // An ask for a call alone is not a pitch: with no buyer vocabulary and no pitch cue it is unknown, for review.
     expect(classifyPurpose(inbound('x@somewhere.example', 'Hi', 'Open to a quick call sometime?')).purpose).toBe('unknown');
   });
