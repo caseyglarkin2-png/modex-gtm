@@ -56,8 +56,11 @@ export interface DecideInput {
   via?: string;
 }
 
+/** How the angle task stands after a Pursue or More: queued fresh, kept because one is already queued or running, kept because the angle is prepared. */
+export type AngleState = 'queued' | 'kept_in_progress' | 'kept_prepared';
+
 export type DecideResult =
-  | { ok: true; key: string; decision: Decision; effects: string[]; angleTaskId: string | null; accountName: string | null; href: string }
+  | { ok: true; key: string; decision: Decision; effects: string[]; angleTaskId: string | null; accountName: string | null; href: string; angle?: AngleState | null }
   | { ok: false; reason: 'bad_key' | 'bad_decision' | 'not_found' | string };
 
 export interface DecideDeps {
@@ -69,7 +72,7 @@ export interface DecideDeps {
   identity?: IdentityContext | null;
   /** C06: the in-deals read (the day's own by default) that scopes a person to their open deal. */
   inDeals?: (prisma: PrismaLike, now: Date) => Promise<InDealsSummary | null>;
-  queueAngle?: (prisma: PrismaLike, input: { key: string; decision: Decision; note: string | null; actor: string; now: Date; via: string; input: Record<string, unknown> }) => Promise<{ id: string; kept?: boolean }>;
+  queueAngle?: (prisma: PrismaLike, input: { key: string; decision: Decision; note: string | null; actor: string; now: Date; via: string; input: Record<string, unknown> }) => Promise<{ id: string; kept?: boolean; keptAs?: 'in_progress' | 'prepared' }>;
 }
 
 const SPENDS = new Set<Decision>(['pursue', 'more']);
@@ -85,12 +88,18 @@ const SPENDS = new Set<Decision>(['pursue', 'more']);
  * person placed at an account after the identity fix, a new deal next step, a newer message) queues a fresh one, so
  * an old no-account angle is replaced; a succeeded task from before this rule (no revision on its input) is replaced
  * too. The revision rides on the task input as `contextRevision`.
+ *
+ * Seller acceptance (2026-10-09): a task that is QUEUED (unclaimed, or awaiting its retry) is kept exactly as a
+ * running one is, so repeated clicks never stack agent tasks (October 9: five pursues on one person queued five
+ * tasks). The answer says "Already queued; GAP is on it". A FAILED (final) task still re-queues on an explicit
+ * Pursue: that is the retry path.
  */
-async function queueAngle(prisma: PrismaLike, input: { key: string; decision: Decision; note: string | null; actor: string; now: Date; via: string; input: Record<string, unknown> }): Promise<{ id: string; kept?: boolean }> {
+async function queueAngle(prisma: PrismaLike, input: { key: string; decision: Decision; note: string | null; actor: string; now: Date; via: string; input: Record<string, unknown> }): Promise<{ id: string; kept?: boolean; keptAs?: 'in_progress' | 'prepared' }> {
   const contextRevision = seedRevision(input.input);
   const existing = (await listAgentTasks(prisma, { now: input.now, itemKey: input.key }).catch(() => [])).filter((t) => t.kind === 'develop_angle').sort((a, b) => b.queuedAt.localeCompare(a.queuedAt))[0];
   const sameContext = existing?.input?.contextRevision === contextRevision;
-  if (existing && (existing.status === 'running' || (existing.status === 'succeeded' && input.decision === 'pursue' && !input.note && sameContext))) return { id: existing.id, kept: true };
+  if (existing && (existing.status === 'running' || existing.status === 'queued')) return { id: existing.id, kept: true, keptAs: 'in_progress' };
+  if (existing && existing.status === 'succeeded' && input.decision === 'pursue' && !input.note && sameContext) return { id: existing.id, kept: true, keptAs: 'prepared' };
   const q = await queueAgentTask(prisma, { kind: 'develop_angle', itemKey: input.key, itemToken: '', day: nyDay(input.now), revision: 0, request: input.note ?? input.decision, requestedBy: input.actor, requestedFrom: input.via, input: { decision: input.decision, ...input.input, contextRevision } }, { now: input.now, actor: input.actor });
   return { id: q.id };
 }
@@ -108,7 +117,9 @@ export async function applyDecision(prisma: PrismaLike, input: DecideInput, deps
   const effects: string[] = [];
   const angle = deps.queueAngle ?? queueAngle;
   let angleTaskId: string | null = null;
-  let queued: { id: string; kept?: boolean };
+  let queued: { id: string; kept?: boolean; keptAs?: 'in_progress' | 'prepared' };
+  let angleState: AngleState | null = null;
+  const stateOf = (q: { kept?: boolean; keptAs?: 'in_progress' | 'prepared' }): AngleState => (q.kept ? (q.keptAs === 'prepared' ? 'kept_prepared' : 'kept_in_progress') : 'queued');
   let accountName: string | null = null;
   let href = '/gap/signals/';
 
@@ -133,10 +144,11 @@ export async function applyDecision(prisma: PrismaLike, input: DecideInput, deps
       if (input.decision === 'pursue') await op({ op: 'feedback', value: 'use' }, 'marked_use');
       queued = await angle(prisma, { key, decision: input.decision, note: input.note ?? null, actor: input.actor, now: input.now, via, input: { title: s.title ?? null, url: s.url ?? null, accountName: s.account_name ?? null, accountHint: s.account_hint ?? null, publishedAt: s.published_at ? new Date(s.published_at).toISOString() : null, relevance: s.relevance ?? null, categories: Array.isArray(s.categories) ? s.categories : [], note: s.note ?? null } });
       angleTaskId = queued.id;
+      angleState = stateOf(queued);
       effects.push(queued.kept ? 'angle_kept' : 'angle_queued');
     }
     await recordDecision(prisma, key, input, { accountName, effects });
-    return { ok: true, key, decision: input.decision, effects, angleTaskId, accountName, href };
+    return { ok: true, key, decision: input.decision, effects, angleTaskId, accountName, href, angle: angleState };
   }
 
   if (parsed.kind === 'trigger') {
@@ -161,12 +173,13 @@ export async function applyDecision(prisma: PrismaLike, input: DecideInput, deps
       }
       queued = await angle(prisma, { key, decision: input.decision, note: input.note ?? null, actor: input.actor, now: input.now, via, input: { title: t.title, url: t.url, accountName, accountHint: accountName ? null : t.account_name, publishedAt: t.published_at ? new Date(t.published_at).toISOString() : null, source: t.source, categories: Array.isArray(t.categories) ? t.categories : [], signalId } });
       angleTaskId = queued.id;
+      angleState = stateOf(queued);
       effects.push(queued.kept ? 'angle_kept' : 'angle_queued');
     } else {
       effects.push(input.decision === 'skip' ? 'skipped_30_days' : input.decision === 'dismiss' ? 'dismissed' : input.decision === 'save' ? 'saved' : 'explored');
     }
     await recordDecision(prisma, key, input, { accountName, accountHint: accountName ? null : t.account_name, title: t.title, url: t.url, signalId, effects });
-    return { ok: true, key, decision: input.decision, effects, angleTaskId, accountName, href };
+    return { ok: true, key, decision: input.decision, effects, angleTaskId, accountName, href, angle: angleState };
   }
 
   // person (C02, C05, C06): the authoritative sources are reloaded here, never trusted from the link.
@@ -205,12 +218,13 @@ export async function applyDecision(prisma: PrismaLike, input: DecideInput, deps
       hubspotContactId: contact?.contactId ?? null, deals, dealCoverage: coverage.status, opportunity: lookup.inDeal === true ? 'open' : lookup.inDeal === false ? 'none' : 'unknown',
     } });
     angleTaskId = queued.id;
+    angleState = stateOf(queued);
     effects.push(queued.kept ? 'angle_kept' : 'angle_queued');
   } else {
     effects.push(input.decision === 'skip' ? 'skipped_30_days' : input.decision === 'dismiss' ? 'dismissed' : input.decision === 'save' ? 'saved' : 'explored');
   }
   await recordDecision(prisma, key, input, { accountName, personaId: persona?.id ?? null, resolvedVia: placed.via, ambiguous: placed.ambiguous, inboundMessageId: last?.id ?? null, effects });
-  return { ok: true, key, decision: input.decision, effects, angleTaskId, accountName, href };
+  return { ok: true, key, decision: input.decision, effects, angleTaskId, accountName, href, angle: angleState };
 }
 
 /** The seller line for a decision just taken. */
@@ -218,8 +232,12 @@ export function decisionLine(r: Extract<DecideResult, { ok: true }>): string {
   const what = r.key.startsWith('person:') ? 'the person' : r.key.startsWith('trigger:') ? 'the trigger' : 'the signal';
   switch (r.decision) {
     case 'pursue':
+      // Seller acceptance (2026-10-09): a repeated click finds the task already queued or running; the answer says so and queues nothing.
+      if (r.angle === 'kept_in_progress') return `Already queued; GAP is on it. The angle for ${what} comes back on the item and in the next briefing. Nothing is sent until you approve it.`;
+      if (r.angle === 'kept_prepared') return `The angle for ${what} is already prepared on the item. Pursue with a note, or More, to develop it again. Nothing is sent until you approve it.`;
       return `Pursuing ${what}. GAP is developing the angle${r.effects.includes('research_queued') ? ' and checking the source' : ''}; it comes back on the item and in the next briefing. Nothing is sent until you approve it.`;
     case 'more':
+      if (r.angle === 'kept_in_progress') return `Already queued; GAP is on it. What it finds about ${what} comes back on the item.`;
       return `GAP is finding out more about ${what}${r.effects.includes('research_queued') ? ' (the source is being checked)' : ''}; it comes back on the item.`;
     case 'save':
       return `Saved ${what} as context. It stays on the account; it leaves the day.`;

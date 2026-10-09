@@ -26,7 +26,8 @@ const row = (kind: string, payload: unknown, over: Partial<LedgerRow> = {}): Led
 describe('X20b: the projection', () => {
   it('delivered is never a kind; every kind has a label', () => {
     expect(ACTIVITY_KINDS).not.toContain('message_delivered');
-    expect(ACTIVITY_KINDS).toHaveLength(17);
+    // 18 since 2026-10-09: progress_noted (a DONE note that reads as work in progress; the seller acceptance follow-up).
+    expect(ACTIVITY_KINDS).toHaveLength(18);
   });
 
   it('copied is content copied (self-reported), never sent; a Gmail-proven send is provider; a manual send without its id is self-reported', () => {
