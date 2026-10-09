@@ -692,6 +692,70 @@ export async function listSentTo(
   return out;
 }
 
+/** A draft in this mailbox, in the shape loadThreadContext.listDrafts (lib/gap/context/thread-context.ts) reads. */
+export interface DraftTo {
+  /** The draft's MESSAGE id (what Sent will carry if it goes; the thread context keys on it). */
+  id: string;
+  /** The draft id (drafts.get / drafts.send). */
+  draftId: string;
+  threadId: string | null;
+  internalDate: Date;
+  to: string;
+  subject: string;
+  text: string;
+  isDraft: true;
+  rfcMessageId: string | null;
+}
+
+export const DRAFTS_TO_MAX = 25;
+
+/**
+ * C25 (the commercial-context audit, pass 2, 2026-10-09): the seller's own drafts in this mailbox addressed to
+ * `recipient`, newest DRAFTS_TO_MAX, read-only (drafts.list with a `to:` query, then drafts.get in full; nothing is
+ * sent, modified or trashed). A promotion reads this before it writes a draft, so a hand-written one is reused or
+ * shown, never doubled. Under the transport sink real Gmail is never read and there are no drafts. Throws on a read
+ * failure so the caller reports partial, never "no drafts".
+ */
+export async function listDraftsTo(sender: GmailSender, recipient: string): Promise<DraftTo[]> {
+  if (sinkConfig()) return [];
+  const want = recipient.trim().toLowerCase();
+  if (!want) return [];
+  const accessToken = await accessTokenForSender(sender);
+  const mailbox = sender.userEmail.toLowerCase();
+  const listUrl = new URL(`${GMAIL_API}/users/${encodeURIComponent(mailbox)}/drafts`);
+  listUrl.searchParams.set('q', `to:${want}`);
+  listUrl.searchParams.set('maxResults', String(DRAFTS_TO_MAX));
+  const res = await fetch(listUrl.toString(), { headers: { Authorization: `Bearer ${accessToken}` }, signal: AbortSignal.timeout(15_000) });
+  if (!res.ok) throw new Error(`Gmail drafts list failed (${res.status})`);
+  const data = (await res.json()) as { drafts?: Array<{ id: string; message?: { id?: string } }> };
+  const out: DraftTo[] = [];
+  for (const { id: draftId } of (data.drafts ?? []).slice(0, DRAFTS_TO_MAX)) {
+    const url = `${GMAIL_API}/users/${encodeURIComponent(mailbox)}/drafts/${encodeURIComponent(draftId)}?format=full`;
+    const g = await fetch(url, { headers: { Authorization: `Bearer ${accessToken}` }, signal: AbortSignal.timeout(15_000) });
+    if (!g.ok) throw new Error(`Gmail drafts get failed (${g.status})`);
+    const d = (await g.json()) as { id: string; message?: GmailMessageDetail };
+    const msg = d.message;
+    if (!msg) continue;
+    const to = getHeader(msg, 'To');
+    // Gmail's `to:` query matches loosely (a display name, a prefix); the address list is the test.
+    const addresses = to.split(/[,;]/).map((s) => (s.match(/[^\s<>,;"']+@[^\s<>,;"']+/)?.[0] ?? s).trim().toLowerCase());
+    if (!addresses.includes(want)) continue;
+    const { text } = extractBodies(msg.payload);
+    out.push({
+      id: msg.id,
+      draftId: d.id,
+      threadId: msg.threadId ?? null,
+      internalDate: msg.internalDate ? new Date(parseInt(msg.internalDate, 10)) : new Date(0),
+      to,
+      subject: getHeader(msg, 'Subject'),
+      text,
+      isDraft: true,
+      rfcMessageId: getHeader(msg, 'Message-ID') || null,
+    });
+  }
+  return out.sort((a, b) => b.internalDate.getTime() - a.internalDate.getTime());
+}
+
 /** One inbox message, read in full. */
 export async function getMailboxMessage(sender: GmailSender, id: string): Promise<MailboxMessage> {
   const accessToken = await accessTokenForSender(sender);
