@@ -45,7 +45,9 @@ async function main() {
     const done = [...mine].reverse().find((r) => (r.payload?.op === 'status') && ((r.payload?.commitment as { status?: string } | undefined)?.status === 'done'));
     if (!done) { console.log('no done row found for the commitment; nothing to reconcile'); return; }
     const c = done.payload?.commitment as Record<string, unknown>;
-    const note = String((c.proof as { note?: string } | undefined)?.note ?? '');
+    // The command row keeps the note as written (with its line breaks); the commitment writer collapsed it.
+    const commandRow = [...rows].reverse().find((r) => r.kind === 'work.command_applied' && r.payload?.command === 'done' && r.payload?.effect === 'commitment_done');
+    const note = String((commandRow?.payload as { note?: string } | null)?.note ?? (c.proof as { note?: string } | undefined)?.note ?? '');
     const reading = readDoneNote(note);
     console.log(`done row ${done.id} at ${done.created_at.toISOString()} by ${done.actor}; note reads as ${reading.kind}${reading.kind === 'progress' ? ` (cue "${reading.cue}")` : ''}`);
     if (reading.kind !== 'progress') { console.log('the note is a completion; nothing to reverse'); return; }

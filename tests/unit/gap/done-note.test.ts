@@ -5,6 +5,8 @@ describe('the DONE note is read before it is recorded (seller acceptance follow-
   it('the October 9 note "researching catalysts" with the signature block is progress, not a completion', () => {
     const r = readDoneNote('researching catalysts\nCasey Larkin · GTM, YardFlow by FreightRoll · c. 410-236-7434 · yardflow.ai');
     expect(r).toEqual({ kind: 'progress', cue: 'researching', note: 'researching catalysts' });
+    // The commitment writer collapsed the newline: the stored proof reads the same.
+    expect(readDoneNote('researching catalysts Casey Larkin · GTM, YardFlow by FreightRoll · c. 410-236-7434 · yardflow.ai')).toEqual({ kind: 'progress', cue: 'researching', note: 'researching catalysts' });
     if (r.kind === 'progress') expect(progressLine(r)).toMatch(/^Recorded as in progress, not done: "researching catalysts"\. The item stays open\./);
   });
 

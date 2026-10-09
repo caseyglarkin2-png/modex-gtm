@@ -19,7 +19,14 @@ export function sellerWordsOf(note: string | null | undefined): string {
   const out: string[] = [];
   for (const l of lines) {
     if (/^(--|—|__)/.test(l)) break;
-    if (/ · /.test(l)) break;
+    if (/ · /.test(l)) {
+      // A signature collapsed onto the note's own line ("researching catalysts Casey Larkin · GTM, ..."): keep the
+      // words before the first separator, less a trailing two-word name.
+      if (out.length) break;
+      const before = l.split(' · ')[0].replace(/(^|\s+)[A-Z][a-z]+\s+[A-Z][a-z]+$/, '').trim();
+      if (before) out.push(before);
+      break;
+    }
     if (/^(sent from my|get outlook for)/i.test(l)) break;
     if (!l) {
       if (out.length) break;
