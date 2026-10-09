@@ -4,10 +4,14 @@
  * the ledger into the thirteen activity kinds, each with a basis: provider (a system of record proves it) or
  * self_reported (the seller said so). Pinned: a copied email is content copied, never sent; a dial link is a call
  * attempted, never a conversation; a manual send without its Gmail id is self-reported, with one is provider; a
- * recorded disposition is a conversation completed (self-reported) and a meeting accepted is a meeting booked; a
- * refused action is work blocked; delivered is never a kind. The accountability view: what I intended (the plan's
- * items, each done, set aside or open by the events that complete them), what was completed by kind and basis, what
- * needs attention, what the agents are handling.
+ * recorded disposition is a conversation completed (self-reported) and a meeting accepted is a meeting ACCEPTED (C37:
+ * booked needs a calendar proof); a refused action is work blocked; delivered is never a kind. The accountability
+ * view: what I intended (the plan's items, each done, prepared, set aside or open by the events that complete or
+ * prepare them), what was completed by kind and basis, what needs attention, what the agents are handling.
+ * C36-C38c (2026-10-08) changed the semantics this file first pinned: a draft or approval PREPARES an outreach item
+ * (never completes it), a meeting outcome is not a booking, a HubSpot note or task is CRM updated (never deal
+ * advanced), a recovered write is no failure, and a deal step done is an obligation done unless it is a defined
+ * milestone on one deal id. The expectations below were updated deliberately on those tickets.
  */
 import { describe, expect, it } from 'vitest';
 import { ledgerDb } from './fixtures/ledger-db';
@@ -22,7 +26,7 @@ const row = (kind: string, payload: unknown, over: Partial<LedgerRow> = {}): Led
 describe('X20b: the projection', () => {
   it('delivered is never a kind; every kind has a label', () => {
     expect(ACTIVITY_KINDS).not.toContain('message_delivered');
-    expect(ACTIVITY_KINDS).toHaveLength(13);
+    expect(ACTIVITY_KINDS).toHaveLength(17);
   });
 
   it('copied is content copied (self-reported), never sent; a Gmail-proven send is provider; a manual send without its id is self-reported', () => {
@@ -37,23 +41,23 @@ describe('X20b: the projection', () => {
   it('a dial link is a call attempted (self-reported); a confirmed disposition is a conversation completed (self-reported); meeting accepted is a meeting booked; an unconfirmed disposition is nothing', () => {
     expect(projectActivity(row('call.attempt_started', { accountName: 'Kroger', personaId: 41, basis: 'self_reported' }))).toMatchObject({ kind: 'call_attempted', basis: 'self_reported', accountName: 'Kroger' });
     expect(projectActivity(row('disposition.recorded', { humanConfirmed: true, accountName: 'Kroger', contactEmail: 'ann@kroger.example.com', responseClass: 'no_answer', channel: 'call' }, { subject_type: 'disposition', subject_id: 'd1' }))).toMatchObject({ kind: 'conversation_completed', basis: 'self_reported', line: "Recorded ann@kroger.example.com's answer (no answer), by phone.", completes: ['reply:Kroger:2026-10-08'] });
-    expect(projectActivity(row('disposition.recorded', { humanConfirmed: true, accountName: 'Kroger', contactEmail: 'ann@kroger.example.com', responseClass: 'meeting_accepted', channel: 'email' }))).toMatchObject({ kind: 'meeting_booked', basis: 'self_reported' });
+    expect(projectActivity(row('disposition.recorded', { humanConfirmed: true, accountName: 'Kroger', contactEmail: 'ann@kroger.example.com', responseClass: 'meeting_accepted', channel: 'email' }))).toMatchObject({ kind: 'meeting_accepted', basis: 'self_reported' });
     expect(projectActivity(row('disposition.recorded', { humanConfirmed: false, accountName: 'Kroger', responseClass: 'timing' }))).toBeNull();
   });
 
   it('drafts, approvals, proposals, research, replies, deals, deferrals and refusals each map to their kind; an unknown row is nothing', () => {
-    expect(projectActivity(row('execution.gmail_drafted', { recipient: 'ann@kroger.example.com', accountName: 'Kroger' }))).toMatchObject({ kind: 'draft_created', basis: 'provider', completes: ['first_touch:dec-1'] });
-    expect(projectActivity(row('execution.copy_revision_approved', { decisionId: 'dec-9' }))).toMatchObject({ kind: 'message_approved', basis: 'provider', completes: ['first_touch:dec-9'] });
-    expect(projectActivity(row('work.command_applied', { command: 'approve', itemKey: 'first_touch:dec-1' }))).toMatchObject({ kind: 'message_approved', completes: ['first_touch:dec-1'] });
+    expect(projectActivity(row('execution.gmail_drafted', { recipient: 'ann@kroger.example.com', accountName: 'Kroger' }))).toMatchObject({ kind: 'draft_created', basis: 'provider', completes: [], prepares: ['first_touch:dec-1'] });
+    expect(projectActivity(row('execution.copy_revision_approved', { decisionId: 'dec-9' }))).toMatchObject({ kind: 'message_approved', basis: 'provider', completes: [], prepares: ['first_touch:dec-9'] });
+    expect(projectActivity(row('work.command_applied', { command: 'approve', itemKey: 'first_touch:dec-1' }))).toMatchObject({ kind: 'message_approved', completes: [], prepares: ['first_touch:dec-1'] });
     expect(projectActivity(row('work.command_applied', { command: 'defer', itemKey: 'commitment:c-1', reason: 'tomorrow' }))).toMatchObject({ kind: 'task_deferred', basis: 'self_reported', completes: ['commitment:c-1'] });
     expect(projectActivity(row('work.command_applied', { command: 'next' }))).toBeNull();
     expect(projectActivity(row('execution.copy_revision_proposed', { decisionId: 'dec-1' }))).toMatchObject({ kind: 'proposal_prepared', basis: 'provider' });
     expect(projectActivity(row('agent.task_succeeded', { result: { objection: 'We already run a YMS.', accountName: 'PepsiCo' } }, { subject_type: 'agent_task', subject_id: 'at_1' }))).toMatchObject({ kind: 'proposal_prepared', accountName: 'PepsiCo' });
     expect(projectActivity(row('research.background_run', { ran: 3 }, { subject_type: 'background_research', subject_id: 'r1' }))).toMatchObject({ kind: 'research_generated', basis: 'provider' });
     expect(projectActivity(row('reply.ingested', { toEmail: 'casey@yardflow.ai' }, { subject_type: 'inbound_message', subject_id: 'm2' }))).toMatchObject({ kind: 'reply_received', basis: 'provider' });
-    expect(projectActivity(row('crm.sync_result', { accountName: 'Kroger', outcome: 'ok' }, { subject_type: 'crm_proposal', subject_id: 'p1' }))).toMatchObject({ kind: 'deal_advanced', basis: 'provider' });
+    expect(projectActivity(row('crm.sync_result', { accountName: 'Kroger', outcome: 'written' }, { subject_type: 'crm_proposal', subject_id: 'p1' }))).toMatchObject({ kind: 'crm_updated', basis: 'provider' });
     expect(projectActivity(row('crm.sync_result', { accountName: 'Kroger', outcome: 'failed', detail: '403' }, { subject_type: 'crm_proposal', subject_id: 'p1' }))).toMatchObject({ kind: 'work_blocked', basis: 'provider' });
-    expect(projectActivity(row('account.commitment', { op: 'status', commitmentId: 'c-7', commitment: { commitmentId: 'c-7', kind: 'deal_step', status: 'done', title: 'Send the pilot scope', proof: { kind: 'self', id: 'x' } } }, { subject_type: 'account', subject_id: 'Kroger' }))).toMatchObject({ kind: 'deal_advanced', basis: 'self_reported', accountName: 'Kroger', completes: ['commitment:c-7', 'deal:Kroger:2026-10-08'] });
+    expect(projectActivity(row('account.commitment', { op: 'status', commitmentId: 'c-7', commitment: { commitmentId: 'c-7', kind: 'deal_step', status: 'done', title: 'Send the pilot scope', proof: { kind: 'seller', id: null } } }, { subject_type: 'account', subject_id: 'Kroger' }))).toMatchObject({ kind: 'obligation_done', basis: 'self_reported', accountName: 'Kroger', completes: ['commitment:c-7', 'deal:Kroger:2026-10-08'] });
     expect(projectActivity(row('account.commitment', { op: 'status', commitmentId: 'c-8', commitment: { commitmentId: 'c-8', kind: 'follow_up', status: 'snoozed', title: 'Call Ann again' } }, { subject_type: 'account', subject_id: 'Kroger' }))).toMatchObject({ kind: 'task_deferred', completes: ['commitment:c-8'] });
     expect(projectActivity(row('account.commitment', { op: 'create', commitment: { status: 'open' } }, { subject_type: 'account', subject_id: 'Kroger' }))).toBeNull();
     expect(projectActivity(row('account.work_outcome', { kind: 'skipped' }, { subject_type: 'account', subject_id: 'GXO' }))).toMatchObject({ kind: 'task_deferred', completes: expect.arrayContaining(['deal:GXO:2026-10-08', 'follow_up:GXO:2026-10-08']) });
@@ -64,12 +68,12 @@ describe('X20b: the projection', () => {
 
 describe('X20b: the accountability view', () => {
   const item = (key: string, accountName: string, kind: PlanItem['kind'] = 'ready'): PlanItem => ({ key, rank: 0, accountName, kind, stateKind: 'ready', title: key, why: '', href: '/x', person: null, refs: {}, token: 'a'.repeat(32) });
-  const ev = (kind: ActivityEvent['kind'], basis: ActivityEvent['basis'], completes: string[], at = AT.toISOString()): ActivityEvent => ({ kind, basis, at, accountName: null, who: null, line: kind, ref: { kind: 'x', subjectType: 'y', subjectId: 'z' }, completes });
+  const ev = (kind: ActivityEvent['kind'], basis: ActivityEvent['basis'], completes: string[], at = AT.toISOString(), prepares: string[] = []): ActivityEvent => ({ kind, basis, at, accountName: null, who: null, line: kind, ref: { kind: 'x', subjectType: 'y', subjectId: 'z' }, completes, prepares, dealId: null });
   const task = (over: Partial<AgentTask>): AgentTask => ({ id: 't', kind: 'revise_message', itemKey: 'k', itemToken: '', day: '2026-10-08', revision: 0, request: '', requestedBy: '', requestedFrom: '', status: 'queued', attempts: 0, queuedAt: AT.toISOString(), leaseUntil: null, fence: null, result: null, lastError: null, final: false, supersededBy: null, ...over });
 
   it('each intended item is done by the event that completes it, set aside by a deferral, or open; completed counts split provider from self-reported; blocked and open go to attention; the agents by status', () => {
     const plan: DayPlan = { day: '2026-10-08', plannedAt: AT.toISOString(), fresh: false, counts: { needsYou: 3, parked: 0, obligationsDue: 0, waiting: 0, snoozed: 0 }, items: [item('first_touch:dec-1', 'Kroger'), item('commitment:c-1', 'Dole', 'commitment'), item('follow_up:Kenco:2026-10-08', 'Kenco', 'follow_up')] };
-    const events = [ev('draft_created', 'provider', ['first_touch:dec-1'], '2026-10-08T14:00:00Z'), ev('message_sent', 'provider', ['first_touch:dec-1'], '2026-10-08T15:00:00Z'), ev('task_deferred', 'self_reported', ['commitment:c-1']), ev('content_copied', 'self_reported', []), ev('work_blocked', 'provider', [])];
+    const events = [ev('draft_created', 'provider', [], '2026-10-08T14:00:00Z', ['first_touch:dec-1']), ev('message_sent', 'provider', ['first_touch:dec-1'], '2026-10-08T15:00:00Z'), ev('task_deferred', 'self_reported', ['commitment:c-1']), ev('content_copied', 'self_reported', []), ev('work_blocked', 'provider', [])];
     const a = accountability({ day: '2026-10-08', plan, events, tasks: [task({ id: 'q', status: 'queued' }), task({ id: 's', status: 'succeeded' }), task({ id: 'f', status: 'failed', final: true }), task({ id: 'old', status: 'succeeded', queuedAt: '2026-10-07T15:00:00Z' })] });
     expect(a.intended.map((x) => [x.item.key, x.status, x.by?.kind ?? null])).toEqual([
       ['first_touch:dec-1', 'done', 'message_sent'],
@@ -77,11 +81,11 @@ describe('X20b: the accountability view', () => {
       ['follow_up:Kenco:2026-10-08', 'open', null],
     ]);
     expect(a.completed).toEqual([
-      { kind: 'draft_created', label: 'Draft created', provider: 1, selfReported: 0 },
-      { kind: 'content_copied', label: 'Content copied', provider: 0, selfReported: 1 },
-      { kind: 'message_sent', label: 'Message sent', provider: 1, selfReported: 0 },
-      { kind: 'task_deferred', label: 'Task deferred', provider: 0, selfReported: 1 },
-      { kind: 'work_blocked', label: 'Work blocked', provider: 1, selfReported: 0 },
+      { kind: 'draft_created', label: 'Draft created', cls: 'preparation', provider: 1, selfReported: 0 },
+      { kind: 'content_copied', label: 'Content copied', cls: 'preparation', provider: 0, selfReported: 1 },
+      { kind: 'message_sent', label: 'Message sent', cls: 'contact', provider: 1, selfReported: 0 },
+      { kind: 'task_deferred', label: 'Task deferred', cls: 'other', provider: 0, selfReported: 1 },
+      { kind: 'work_blocked', label: 'Work blocked', cls: 'other', provider: 1, selfReported: 0 },
     ]);
     expect(a.attention.open.map((i) => i.key)).toEqual(['follow_up:Kenco:2026-10-08']);
     expect(a.attention.blocked).toHaveLength(1);
