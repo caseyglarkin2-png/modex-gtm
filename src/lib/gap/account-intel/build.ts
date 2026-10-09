@@ -227,6 +227,13 @@ export interface AccountInputs {
     read: boolean;
     detail: string | null;
   } | null;
+  /** Knowledge program (2026-10-09): the vault's Fireflies calls (the summary and the action items, never the transcript) and its calendar-prepped meetings for the account; null when not read. */
+  knowledge?: {
+    calls: Array<{ id: string; path: string; title: string; at: string; people: string[]; summary: string[]; actions: Array<{ who: string | null; text: string }> }>;
+    meetings: Array<{ id: string; path: string; title: string; at: string; people: string[] }>;
+    read: boolean;
+    detail: string | null;
+  } | null;
 }
 
 /** C6: how an inbound message reached the account: its thread, or the identity path that placed its sender. */

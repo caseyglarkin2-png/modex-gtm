@@ -1,36 +1,34 @@
 # Refreshed-plan preview (seller acceptance follow-up, October 9, 2026)
 
-STATUS: PREVIEW, generated 2026-10-09T18:56:45.649Z by scripts/gap/preview-refreshed-plan.ts against the database the environment named, READ ONLY (every write intercepted; the list is in section 7). Nothing was sent, drafted, queued or written. Not a plan GAP made: the day's stored plan is unchanged until an operator refreshes it.
+STATUS: PREVIEW, generated 2026-10-09T19:28:50.562Z by scripts/gap/preview-refreshed-plan.ts against the database the environment named, READ ONLY (every write intercepted; the list is in section 7). Nothing was sent, drafted, queued or written. Not a plan GAP made: the day's stored plan is unchanged until an operator refreshes it.
 <!-- verified:2026-10-09 -->
 
 ## 1. What GAP planned (the stored plan for the day)
 
-Stored plan for 2026-10-09, written 2026-10-09T14:27:13.718Z, revision 1: 14 items.
+Stored plan for 2026-10-09, written 2026-10-09T19:13:20.759Z, revision 2: 12 items.
 
 | # | Account | Kind | Title | Why |
 |---|---|---|---|---|
-| 1 | Kenco | deal | In a deal | A stalled deal: the close date (Sep 30) has passed and the deal is still open. Confirm the real date; GAP prepared an angle for dave.kieslin |
-| 2 | PepsiCo | ready | Ready for a first touch: Tom Kamantauskas | A prepared first touch. Ranked here: a first touch prepared. |
-| 3 | Boston Beer Company | deal | In a deal | A stalled deal: the close date (Sep 30) has passed and the deal is still open. Confirm the real date. Ranked here: deal hygiene only (close  |
-| 4 | Crowley | deal | In a deal | A stalled deal: crowley - Pilot: The close date (Sep 29) has passed and the deal is still open. Confirm the real date. Ranked here: deal hyg |
-| 5 | General Motors | deal | In a deal | A stalled deal: the close date (Sep 30) has passed and the deal is still open. Confirm the real date. Ranked here: deal hygiene only (close  |
-| 6 | GXO Logistics | deal | In a deal | A stalled deal: no activity on the deal in HubSpot since Sep 8 (30 days). Agree the next step, or close it out. Ranked here: deal hygiene on |
-| 7 | Kraft Heinz | deal | In a deal | A stalled deal: no activity on the deal in HubSpot since Sep 8 (30 days). Agree the next step, or close it out. Ranked here: deal hygiene on |
-| 8 | Kroger | deal | In a deal | A stalled deal: the close date (Sep 30) has passed and the deal is still open. Confirm the real date. Ranked here: deal hygiene only (close  |
-| 9 | Mondelez International | deal | In a deal | A stalled deal: the close date (Sep 30) has passed and the deal is still open. Confirm the real date. Ranked here: deal hygiene only (close  |
-| 10 | Wesco International | deal | In a deal | A stalled deal: no activity on the deal in HubSpot since Sep 9 (30 days). Agree the next step, or close it out. Ranked here: deal hygiene on |
-| 11 | Coca-Cola | review | Decide the angle | A proposal to review. Ranked here: a decision to review. |
-| 12 | Walmart Inc. | admin | Opted out | Admin: record it; buyer activity Oct 5. |
-| 13 | Gusto | admin | Someone replied | An old reply to triage (51 days): record what they said or dismiss it; buyer activity Aug 19. |
-| 14 | The Boston Beer Company | admin | Someone replied | An old reply to triage (129 days): record what they said or dismiss it; buyer activity Jun 3. |
+| 1 | Crowley | deal | In a deal | A stalled deal: crowley - Pilot: The close date (Sep 29) has passed and the deal is still open. Confirm the real date. Ranked here: the vaul |
+| 2 | GXO Logistics | deal | In a deal | A stalled deal: no activity on the deal in HubSpot since Sep 8 (31 days). Agree the next step, or close it out. Ranked here: the vault's nex |
+| 3 | Kraft Heinz | deal | In a deal | A stalled deal: no activity on the deal in HubSpot since Sep 8 (30 days). Agree the next step, or close it out. Ranked here: the vault's nex |
+| 4 | Kroger | deal | In a deal | A stalled deal: the close date (Sep 30) has passed and the deal is still open. Confirm the real date. Ranked here: the vault's next action:  |
+| 5 | PepsiCo | ready | Ready for a first touch: Tom Kamantauskas | A prepared first touch. Ranked here: a first touch prepared. |
+| 6 | Boston Beer Company | deal | In a deal | A stalled deal: the close date (Sep 30) has passed and the deal is still open. Confirm the real date. Ranked here: deal hygiene only (close  |
+| 7 | Mondelez International | deal | In a deal | A stalled deal: the close date (Sep 30) has passed and the deal is still open. Confirm the real date. Ranked here: deal hygiene only (close  |
+| 8 | Wesco International | deal | In a deal | A stalled deal: no activity on the deal in HubSpot since Sep 9 (30 days). Agree the next step, or close it out. Ranked here: deal hygiene on |
+| 9 | Coca-Cola | review | Decide the angle | A proposal to review. Ranked here: a decision to review. |
+| 10 | Walmart Inc. | admin | Opted out | Admin: record it; buyer activity Oct 5; the vault's next action: One regional DC, one pilot: prove the gate-to-dock flow gain at a single si |
+| 11 | Gusto | admin | Someone replied | An old reply to triage (51 days): record what they said or dismiss it; buyer activity Aug 19. |
+| 12 | The Boston Beer Company | admin | Someone replied | An old reply to triage (129 days): record what they said or dismiss it; buyer activity Jun 3; the vault's next action: Send the 4 tracked sa |
 
 ## 2. What GAP would plan now (12 items; the top 10 with their evidence)
 
 | # | Account | Kind | Title | Ranked here because | Prepared | Held |
 |---|---|---|---|---|---|---|
 | 1 | Crowley | deal | In a deal | A stalled deal: crowley - Pilot: The close date (Sep 29) has passed and the deal is still open. Confirm the real date. Ranked here: the vault's next action: 202 | nothing prepared |  |
-| 2 | GXO Logistics | deal | In a deal | A stalled deal: no activity on the deal in HubSpot since Sep 8 (30 days). Agree the next step, or close it out. Ranked here: the vault's next action: Email GXO  | nothing prepared |  |
-| 3 | Kraft Heinz | deal | In a deal | A stalled deal: no activity on the deal in HubSpot since Sep 8 (30 days). Agree the next step, or close it out. Ranked here: the vault's next action: One plant  | nothing prepared |  |
+| 2 | GXO Logistics | deal | In a deal | A stalled deal: no activity on the deal in HubSpot since Sep 8 (31 days). Agree the next step, or close it out. Ranked here: the vault's next action: Email GXO  | nothing prepared |  |
+| 3 | Kraft Heinz | deal | In a deal | A stalled deal: no activity on the deal in HubSpot since Sep 8 (31 days). Agree the next step, or close it out. Ranked here: the vault's next action: One plant  | nothing prepared |  |
 | 4 | Kroger | deal | In a deal | A stalled deal: the close date (Sep 30) has passed and the deal is still open. Confirm the real date. Ranked here: the vault's next action: Jeff Hiller punted t | nothing prepared |  |
 | 5 | PepsiCo | ready | Ready for a first touch: Tom Kamantauskas | A prepared first touch. Ranked here: a first touch prepared. | an email to shawn.miller@pepsico.com, subject "Doors versus spots" |  |
 | 6 | Boston Beer Company | deal | In a deal | A stalled deal: the close date (Sep 30) has passed and the deal is still open. Confirm the real date. Ranked here: deal hygiene only (close date passed, nothing | nothing prepared |  |
@@ -63,8 +61,8 @@ Stored plan for 2026-10-09, written 2026-10-09T14:27:13.718Z, revision 1: 14 ite
 
 ### 2. GXO Logistics: In a deal
 
-- Why now: A stalled deal: no activity on the deal in HubSpot since Sep 8 (30 days). Agree the next step, or close it out. Ranked here: the vault's next action: Email GXO contacts Mike Swenson and Missy Bratton directly (existing contact is not getting internal traction), then work toward one pilot y, due Jul 28. Someone replied: Jake Koppinger, May 27.
-- Ranked here because: A stalled deal: no activity on the deal in HubSpot since Sep 8 (30 days). Agree the next step, or close it out. Ranked here: the vault's next action: Email GXO contacts Mike Swenson and Missy Bratton directly (existing contact is not getting internal traction), then work toward one pilot y, due Jul 28.
+- Why now: A stalled deal: no activity on the deal in HubSpot since Sep 8 (31 days). Agree the next step, or close it out. Ranked here: the vault's next action: Email GXO contacts Mike Swenson and Missy Bratton directly (existing contact is not getting internal traction), then work toward one pilot y, due Jul 28. Someone replied: Jake Koppinger, May 27.
+- Ranked here because: A stalled deal: no activity on the deal in HubSpot since Sep 8 (31 days). Agree the next step, or close it out. Ranked here: the vault's next action: Email GXO contacts Mike Swenson and Missy Bratton directly (existing contact is not getting internal traction), then work toward one pilot y, due Jul 28.
 - Next action on record: Open the deal brief
 - Source: HubSpot deals
 - Carried from the 2026-10-08 plan.
@@ -85,8 +83,8 @@ Stored plan for 2026-10-09, written 2026-10-09T14:27:13.718Z, revision 1: 14 ite
 
 ### 3. Kraft Heinz: In a deal
 
-- Why now: A stalled deal: no activity on the deal in HubSpot since Sep 8 (30 days). Agree the next step, or close it out. Ranked here: the vault's next action: One plant yard, the pilot Jacob already owns, prove the capacity number at Davenport or Garland, feed clean gate-to-dock data into Unison, a, due Jul 17. In a deal: Kraft Heinz Company - Pilot (Solution).
-- Ranked here because: A stalled deal: no activity on the deal in HubSpot since Sep 8 (30 days). Agree the next step, or close it out. Ranked here: the vault's next action: One plant yard, the pilot Jacob already owns, prove the capacity number at Davenport or Garland, feed clean gate-to-dock data into Unison, a, due Jul 17.
+- Why now: A stalled deal: no activity on the deal in HubSpot since Sep 8 (31 days). Agree the next step, or close it out. Ranked here: the vault's next action: One plant yard, the pilot Jacob already owns, prove the capacity number at Davenport or Garland, feed clean gate-to-dock data into Unison, a, due Jul 17. In a deal: Kraft Heinz Company - Pilot (Solution).
+- Ranked here because: A stalled deal: no activity on the deal in HubSpot since Sep 8 (31 days). Agree the next step, or close it out. Ranked here: the vault's next action: One plant yard, the pilot Jacob already owns, prove the capacity number at Davenport or Garland, feed clean gate-to-dock data into Unison, a, due Jul 17.
 - Next action on record: Open the deal brief
 - Source: HubSpot deals
 - Carried from the 2026-10-08 plan.
@@ -197,6 +195,8 @@ Stored plan for 2026-10-09, written 2026-10-09T14:27:13.718Z, revision 1: 14 ite
 - The move: Read "Rivera, Wilfred"'s reply of Sep 1 and record what they said. Nobody at Wesco International gets a cold email until then.
 - What we know:
   - "rivera, wilfred" replied on Sep 1: "Thank you for reaching out. Steve London, my RVP, has been leading this effort.". The email it answered is not in GAP's ledgers. (GAP ledger, Sep 1)
+  - Call Aug 18 with Steve London and Wilfred Rivera (Fireflies): Wesco<>FreightRoll. Partnership and Integration: Wesco and Freight Roll collaborate via Kyndryl to pilot Yard Flow kiosks at high-volume sites, targeting late 2024 or early 2025 deployment. System Synergy: Wesco wants Yard Flow to enhance... (the vault's Fireflies capture, Aug 18; the summary is advisory, the verbatim is on the note)
+  - Meeting Aug 18 with Steve London and Wilfred Rivera: Wesco<>FreightRoll (on the calendar; the vault's prep note). (the vault's meeting note, Aug 18)
   - Nothing from the buyer yet on how they run the yards today, what it costs them or why it happens. (no buyer input on record)
   They said: "Thank you for reaching out. Steve London, my RVP, has been leading this effort." ("Rivera, Wilfred", 2026-09-01T22:47:59.000Z)
 - Your vault note (seller-only, the knowledge program):
@@ -253,9 +253,9 @@ Stored plan for 2026-10-09, written 2026-10-09T14:27:13.718Z, revision 1: 14 ite
 
 Added (0): none.
 
-Removed (2): Kenco (deal: In a deal); General Motors (deal: In a deal).
+Removed (0): none.
 
-Moved (12): Crowley 4 to 1; GXO Logistics 6 to 2; Kraft Heinz 7 to 3; Kroger 8 to 4; PepsiCo 2 to 5; Boston Beer Company 3 to 6; Mondelez International 9 to 7; Wesco International 10 to 8; Coca-Cola 11 to 9; Walmart Inc. 12 to 10; Gusto 13 to 11; The Boston Beer Company 14 to 12.
+Moved (0): none.
 
 ## 4. Southern Glazer's, Swire and Kenco, specifically
 
@@ -276,7 +276,7 @@ Moved (12): Crowley 4 to 1; GXO Logistics 6 to 2; Kraft Heinz 7 to 3; Kroger 8 t
 
 ### Kenco
 
-- Stored plan: #1 deal "In a deal" (A stalled deal: the close date (Sep 30) has passed and the deal is still open. Confirm the real date; GAP prepared an angle for dave.kiesling@kencogroup.com: The undated note from Dave Kiesling suggests Kenco Group might have previously expressed interest in optimizing their yards. This historical. Ranked here: open deal, close date passed; an angle prepared for dave.kiesling@kencogroup.com.).
+- Stored plan: not on it.
 - Refreshed: not an item.
 - The card: tier later, state "In a deal", why "Open HubSpot deal: "YardFlow - Kenco" (Presentation scheduled).", ranked: You set it aside for today; GAP prepared an angle for dave.kiesling@kencogroup.com: The undated note from Dave Kiesling suggests Kenco Group might have previously expressed interest in optimizing their yards. This historical; the vault's next action: Regroup with Craig Morrison and the Kenco contacts the week of 2026-10-12. Ask for an audience with the committee members who think existing, due Oct 15..
 - Parked/snoozed/waiting rows naming it: none.
@@ -305,15 +305,15 @@ People who wrote in, ranked (8 shown):
 
 Signals ranked (12 shown): PepsiCo: PepsiCo and Gatik launch commercial driverless trucking depl; PepsiCo: PepsiCo and Gatik announce multi-year agreement to deploy au; PepsiCo: PepsiCo expanding autonomous truck use in its supply chain; General Mills: General Mills to build $24M distribution center in Michigan; Walmart Inc.: https://careers.walmart.com/us/en/jobs/R-2426277; Walmart Inc.: https://careers.walmart.com/us/en/jobs/R-2547672
 
-Selection: {"signals":"ranked from three bounded pulls (your shares, up to 100; the strongest classes by score, up to 300; the rest newest, up to 200) of 3201 undecided; showing 12 from 1","people":"people who wrote in the last 180 days (up to 2000 messages read); our Sent not read: quiet is judged from their last message alone; showing 8 of 70 from 1","moreSignals":true,"morePeople":true,"skipSignals":0,"sk
+Selection: {"signals":"ranked from three bounded pulls (your shares, up to 100; the strongest classes by score, up to 300; the rest newest, up to 200) of 3201 undecided; showing 12 from 1","people":"people who wrote in the last 180 days (up to 2000 messages read); our Sent not read: quiet is judged from their last message alone; showing 8 of 69 from 1","moreSignals":true,"morePeople":true,"skipSignals":0,"sk
 
 ## 6. Coverage of the read
 
-- In-deals read: complete at 2026-10-09T18:56:45.649Z; accounts in open deals: 13.
-- Cockpit read at 2026-10-09T18:57:04.299Z (fresh); counts: {"needsYou":12,"parked":32,"obligationsDue":1,"waiting":0,"snoozed":0,"availability":1}; waiting 0; snoozed 0.
+- In-deals read: complete at 2026-10-09T19:28:50.562Z; accounts in open deals: 13.
+- Cockpit read at 2026-10-09T19:29:08.514Z (fresh); counts: {"needsYou":12,"parked":32,"obligationsDue":1,"waiting":0,"snoozed":0,"availability":1}; waiting 0; snoozed 0.
 - GAP mailbox configured for Sent reads: yes.
 - HubSpot token present: yes.
-- Elapsed: 394954 ms.
+- Elapsed: 389191 ms.
 
 ## 7. Writes intercepted (proof the run wrote nothing)
 

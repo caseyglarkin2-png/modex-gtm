@@ -35,7 +35,7 @@ export interface StoryTouch {
   /** The subject, the meeting objective, the reply's first words. */
   what: string;
   /** B1/B2: our Sent folder and the HubSpot company's engagements are sources of their own, named as such. */
-  source: 'GAP ledger' | 'clawd ledger' | 'account history' | 'Gmail Sent' | 'HubSpot';
+  source: 'GAP ledger' | 'clawd ledger' | 'account history' | 'Gmail Sent' | 'HubSpot' | 'vault';
   /** B1/B2: the message snippet or the engagement body (bounded), for the story's excerpt. */
   excerpt?: string;
   /** B2: the HubSpot engagement id (the dedup key for a note, call or meeting). */
@@ -71,6 +71,8 @@ export function mergeTouches(x: {
   sent?: AccountInputs['sent'];
   /** B2: the HubSpot company's engagements (AccountInputs.engagements); absent or null when not read. */
   engagements?: AccountInputs['engagements'];
+  /** Knowledge program: the vault's Fireflies calls and calendar-prepped meetings (AccountInputs.knowledge); absent or null when not read. */
+  knowledge?: AccountInputs['knowledge'];
   now: Date;
 }): StoryTouch[] {
   const byName = new Map(x.people.map((p) => [nameKey(p.name), p]));
@@ -129,6 +131,21 @@ export function mergeTouches(x: {
       continue;
     }
     out.push({ kind: e.kind, at: e.at, name: 'the account', title: null, address: null, what: e.title?.trim() || '', source: 'HubSpot', excerpt: e.body || undefined, engagementId: e.id });
+  }
+
+  // Knowledge program (2026-10-09): the vault's Fireflies calls and the meetings on the calendar that have been held are
+  // touches of their own source; the buyers on the call are named from the record, the rest is "the account".
+  const buyersOf = (people: readonly string[]) => people.filter((p) => p.includes('@') && !isInternalRecipient(p)).map((p) => person(p, p).name).filter((n, i, all) => all.indexOf(n) === i);
+  for (const c of x.knowledge?.calls ?? []) {
+    const buyers = buyersOf(c.people);
+    const action = c.actions[0] ? `Action item${c.actions[0].who ? ` (${c.actions[0].who})` : ''}: ${c.actions[0].text}` : null;
+    const excerpt = [...c.summary.slice(0, 2), ...(action ? [action] : [])].join(' ').trim();
+    out.push({ kind: 'call', at: c.at, name: buyers.length ? buyers.slice(0, 2).join(' and ') : 'the account', title: null, address: null, what: c.title, source: 'vault', excerpt: excerpt || undefined, engagementId: `vault:${c.id}` });
+  }
+  for (const m of x.knowledge?.meetings ?? []) {
+    if (new Date(m.at).getTime() > x.now.getTime()) continue;
+    const buyers = buyersOf(m.people);
+    out.push({ kind: 'meeting', at: m.at, name: buyers.length ? buyers.slice(0, 2).join(' and ') : 'the account', title: null, address: null, what: m.title, source: 'vault', engagementId: `vault:${m.id}` });
   }
 
   // One row per event: the same person, the same minute, the same kind (the history and the GAP ledger both record a
