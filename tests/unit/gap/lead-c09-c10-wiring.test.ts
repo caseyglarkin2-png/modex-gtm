@@ -44,7 +44,11 @@ describe('C09/C10 wired into the people ranker', () => {
     const x = await loadIntelligence(db().client(), { now: NOW, identity: null, listSent });
     const ids = x.people.map((p) => p.id);
     expect(ids).not.toContain(DAVE);
-    expect(ids).not.toContain(OWED);
+    // C57 F3: an owed writer with no disposition stays listed, said as owed (never dropped from both lists).
+    expect(ids).toContain(OWED);
+    const owedItem = x.people.find((p) => p.id === OWED)!;
+    expect(owedItem.line).toMatch(/An answer is owed since Sep 20, 2026: they wrote Sep 20; nothing sent since\.$/);
+    expect(owedItem.state?.answerOwedSince).toBe(days(18).toISOString());
     expect(ids).not.toContain(VENDOR);
     expect(ids).toContain(BOB);
     expect(ids).toContain(PAT);
@@ -81,6 +85,6 @@ describe('C09/C10 wired into the people ranker', () => {
     const dave = x.people.find((p) => p.id === DAVE)!;
     expect(dave.line).toContain('Our Sent could not be read for them, so a reply of ours may exist.');
     expect(x.selection.people).toMatch(/\(1 read failed\)/);
-    expect(x.people.find((p) => p.id === OWED)).toBeUndefined();
+    expect(x.people.find((p) => p.id === OWED)?.line).toMatch(/An answer is owed since/);
   });
 });

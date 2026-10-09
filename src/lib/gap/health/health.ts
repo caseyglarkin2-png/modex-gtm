@@ -206,7 +206,8 @@ export const CONTEXT_STALE_DAYS = 60;
  */
 function context(i: HealthInputs['context'], now: Date): HealthComponent {
   const base = { key: 'context' as const, name: 'Commercial context' };
-  if (!i) return { ...base, state: 'HEALTHY', label: 'Commercial context not read', detail: 'The context sources were not probed this time; nothing here says they are complete.' };
+  // C57 F14: the loader reads the sources soft and hands null only when the probe itself failed; that is not health.
+  if (!i) return { ...base, state: 'DEGRADED', label: 'Commercial context not read (the probe failed)', detail: 'The context sources could not be probed this time; nothing here says they are complete. Read the server log for the probe error.' };
   const problems: string[] = [];
   const partial: string[] = [];
   const facts: string[] = [];
@@ -227,6 +228,7 @@ function context(i: HealthInputs['context'], now: Date): HealthComponent {
     const rebuilt = days(c.indexedAt);
     const words = `${name}: ${c.completeness}${c.watermark ? `, newest knowledge ${c.watermark.slice(0, 10)}` : ', no dated knowledge'}${c.indexedAt ? `, rebuilt ${c.indexedAt.slice(0, 10)}` : ''}`;
     if (age !== null && age > CONTEXT_STALE_DAYS) problems.push(`${words}: ${age} days old${rebuilt !== null && rebuilt <= 7 ? ' although rebuilt this week: the rebuild carried no newer knowledge' : ''}`);
+    else if (!c.watermark) partial.push(`${words} (no dated knowledge: nothing here is fresh)`);
     else if (c.completeness === 'partial') partial.push(words + (c.omittedReason ? ` (${c.omittedReason})` : ''));
     else facts.push(words);
   }

@@ -22,6 +22,7 @@ import { nyDay } from './dates';
 import { accountHref } from '../account-intel/href';
 import { dealCoverageFrom, dealsAt, dealsByContactId, type DealLookup } from './deal-coverage';
 import { resolvePersonAccount } from './person-identity';
+import { classifyPurpose } from '../context/purpose';
 import { loadIdentityContext } from '../identity/service';
 import type { IdentityContext } from '../identity/resolve';
 import { loadInDealsSummary, type InDealsSummary } from '../deals/in-deals';
@@ -170,7 +171,8 @@ export async function applyDecision(prisma: PrismaLike, input: DecideInput, deps
 
   // person (C02, C05, C06): the authoritative sources are reloaded here, never trusted from the link.
   const persona = typeof prisma.persona?.findFirst === 'function' ? await prisma.persona.findFirst({ where: { email: { equals: parsed.email, mode: 'insensitive' } }, select: { id: true, name: true, title: true, account_name: true } }).catch(() => null) : null;
-  const last = typeof prisma.inboundMessage?.findFirst === 'function' ? await prisma.inboundMessage.findFirst({ where: { from_email: { equals: parsed.email, mode: 'insensitive' } }, orderBy: { received_at: 'desc' } }).catch(() => null) : null;
+  // C57 F6 (C02/C05): the thread is a relation; without the include the thread-alias placement never ran in production.
+  const last = typeof prisma.inboundMessage?.findFirst === 'function' ? await prisma.inboundMessage.findFirst({ where: { from_email: { equals: parsed.email, mode: 'insensitive' } }, orderBy: { received_at: 'desc' }, include: { thread: { select: { account_name: true } } } }).catch(() => null) : null;
   const messages: number = typeof prisma.inboundMessage?.count === 'function' ? await prisma.inboundMessage.count({ where: { from_email: { equals: parsed.email, mode: 'insensitive' } } }).catch(() => 0) : 0;
   // The CRM read is the caller's to supply (the route passes the real one); the library never reaches HubSpot on its own.
   const contact = persona?.account_name || !deps.contactLookup ? null : await deps.contactLookup(parsed.email).catch(() => null);
@@ -188,6 +190,8 @@ export async function applyDecision(prisma: PrismaLike, input: DecideInput, deps
       email: parsed.email, personaId: persona?.id ?? null, name: persona?.name ?? contact?.name ?? last?.from_name ?? null, title: persona?.title ?? contact?.title ?? null,
       accountName, accountHint: accountName ? null : placed.domain, resolvedVia: placed.via, ambiguous: placed.ambiguous,
       lastWroteAt: last?.received_at ? new Date(last.received_at).toISOString() : null, messages, subject: last?.subject ?? null, inboundMessageId: last?.id ?? null, threadId: last?.thread_id ?? null, excerpt,
+      // C57 F10 (C17/C18): the message's purpose rides with it so a vendor's or a support sender's words never seed "what the buyer said".
+      purpose: last ? classifyPurpose({ from: parsed.email, subject: last.subject ?? null, excerpt, direction: 'inbound', type: 'email' }, { knownPerson: !!persona }).purpose : null,
       hubspotContactId: contact?.contactId ?? null, deals, dealCoverage: coverage.status, opportunity: lookup.inDeal === true ? 'open' : lookup.inDeal === false ? 'none' : 'unknown',
     } });
     angleTaskId = queued.id;

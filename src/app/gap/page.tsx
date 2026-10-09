@@ -241,7 +241,7 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
   // C01/C04: the coverage carries the read's status, so an unavailable CRM says unknown, never no deal.
   // C34: the next page of the intelligence selection, asked by the panel's More.
   const skipOf = (v: string | undefined) => (v && /^\d{1,6}$/.test(v) ? Number(v) : 0);
-  const intel = lane ? null : await loadIntelligence(prisma, { now: new Date(), skipSignals: skipOf(params.moreSignals), skipPeople: skipOf(params.morePeople), coverage: dealCoverageFrom({ status: data.inDeals.status, accounts: data.inDeals.accounts.map((a) => ({ ...a, alsoRecordedAs: [], dealContacts: 0, people: [], known: 0 })), checkedAt: (data.inDeals as { checkedAt?: string | null }).checkedAt ?? null }) }).catch(() => null);
+  const intel = lane ? null : await loadIntelligence(prisma, { now: new Date(), skipSignals: skipOf(params.moreSignals), skipPeople: skipOf(params.morePeople), coverage: dealCoverageFrom({ status: data.inDeals.status, accounts: data.inDeals.accounts.map((a) => ({ ...a, alsoRecordedAs: (a as { alsoRecordedAs?: string[] }).alsoRecordedAs ?? [], dealContacts: 0, people: [], known: 0 })), checkedAt: (data.inDeals as { checkedAt?: string | null }).checkedAt ?? null }) }).catch(() => null);
   const angles = intel ? Object.fromEntries([...(await loadAngles(prisma, { keys: [...intel.signals, ...intel.triggers, ...intel.people].map((i) => i.key), now: new Date() }).catch(() => new Map())).entries()]) : {};
   // UX-08 parity: after the response is sent, read the canonical pursuit state for the first few Work accounts
   // that have none remembered (serial, bounded, never blocking a render), so the next Work load says what the

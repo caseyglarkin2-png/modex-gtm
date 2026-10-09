@@ -1,0 +1,49 @@
+# C57 independent review: findings and dispositions
+
+STATUS: ACTIVE (a standing gate). Pass 1 reviewed the first three merges (lead branch at 9edf2edd) in the read-only worktree `wt-gap-review`; pass 2 reviews the final integrated tree (a97d7480 and after) in `wt-gap-review-2`. Reviewers never edit; every edit is made by the owning writer (the lead or the owning builder) and verified by that writer. Each finding carries one disposition: FIXED (commit), ROUTED (owner, in progress), ACCEPTED (left as is, with the reason) or DEFERRED (named debt, owner, reason).
+<!-- verified:2026-10-09 -->
+
+## Pass 1 (at 9edf2edd): 9 P1, 8 P2
+
+| # | Sev | Ticket | Finding (file) | Disposition |
+|---|---|---|---|---|
+| 1 | P1 | C04 | `work/deal-coverage.ts` dealsAt answered `inDeal: false` for a person with no account name, so an unplaced writer under a complete read read "no open deal found". REPRODUCED. | FIXED (lead): no name is `inDeal: null, why: 'unplaced'`; the words say "open deal unknown: the person is not placed at an account"; the replay's C04 evidence now asserts it. |
+| 2 | P1 | C09/C11 | `context/purpose.ts` orders the vendor branch before the buyer branch and VENDOR matches "open to a quick call", so a buyer's "open to a quick call next week to talk through the pilot at our two yards" is a vendor pitch and dropped silently. REPRODUCED. | ROUTED to builder A: buyer vocabulary in a human reply wins over the vendor cues (or unknown with review); never a silent drop. |
+| 3 | P1 | C10 vs C35 | `work/intel.ts` dropped every owed writer as "C35's list", but `loadAnswersOwed` reads human-confirmed dispositions only: an unanswered writer with no disposition vanished from both. | FIXED (lead): an owed writer stays listed with "An answer is owed since <date>: <basis>" and `state.answerOwedSince`; the wiring test pins it. |
+| 4 | P1 | C15/C46 | `context/retrieval.ts` takes a date in a section heading ("## Live signals (clawd, 2026-10-08)") as the claims' observedAt and the vault watermark, so a rebuilt-but-old wedge reads fresh through the vault path. REPRODUCED. | ROUTED to builder B: a sync-section heading date is indexedAt only; the watermark comes from dated non-internal claims. |
+| 5 | P1 | C13/C15 | `validateClaims` refused refresh-as-observation only with eventAt null; retrieval copies observedAt into eventAt, which bypassed it; observedAt with indexedAt null also passes. REPRODUCED. | FIXED (lead) for the copy bypass: equality is refused when eventAt is null or equals observedAt. ACCEPTED residual: a claim with observedAt set and indexedAt null cannot be judged by the validator alone (nothing says what the refresh time was); retrieval is the only builder of such claims and sets indexedAt from the file; B's fix to F4 closes the heading-date source. |
+| 6 | P1 | C02/C05 | `work/decide.ts` loaded the newest inbound row without including the thread relation, so the thread-alias placement on Pursue never ran in production (the fixture embeds the relation). | FIXED (lead): `include: { thread: { select: { account_name: true } } }`. |
+| 7 | P1 | C03/C04 | `work/cockpit-read.ts` and `app/gap/page.tsx` dropped `alsoRecordedAs`, so the Work page could say "no open deal found" where the briefing says "in an open deal". | FIXED (lead): the aliases ride through the cockpit projection, the Work input type and the page. |
+| 8 | P1 | C12 | `loadOverrides`/`applyOverrides` had no consumer: the correction ledger was write-only. | FIXED (lead): `loadIntelligence` loads the overrides for every typed message and thread id, applies the message or thread purpose before the verdict and the thread relationship into it; the machine purpose is kept beside. |
+| 9 | P1 | C07/C21 | `loadThreadContext` had no production caller for the angle; the handler ran developAngle with no timeline, CRM or identity adapter, so the angle never saw our own sends, the drafts or the accepted meeting. | ROUTED to builder B: develop-angle defaults the timeline adapter to loadThreadContext with the GAP sender's Sent reader (read-only) and the identity service; injection kept for tests. |
+| 10 | P2 | C17/C18 | The Pursue seed carried purpose null, which the assembler treats as the buyer's; a Pursue on a vendor sender put the pitch under "what the buyer said". | FIXED (lead side): the decide task input carries the message purpose from classifyPurpose; ROUTED to builder B: packetSeedFromInput reads it onto the seeded event. |
+| 11 | P2 | C22 | `agents/angle-claims.ts` BUYER_SUBJECT hard-codes dave|craig: "Bryan confirmed the budget" with no support passes as fact. REPRODUCED. | ROUTED to builder B: the subject list is built from the packet's people. |
+| 12 | P2 | C10 | The Sent read covers the first page plus five; a shown person beyond the buffer had no state and no sentence while the selection said Sent was read. | FIXED (lead): a shown person without a state says "Our Sent was not read for them, so a reply of ours may exist". |
+| 13 | P2 | C04/C01 | `dealCoverageFrom` ignored `summary.unresolved`: an open deal at a HubSpot company GAP could not map was invisible, so a same-named account read "no open deal found". | FIXED (lead): unresolved company names fold into `unmappedNames`; `dealsAt` answers `inDeal: null, why: 'unmapped'` with the words "an open deal exists at a HubSpot company of this name that GAP has not mapped to an account". |
+| 14 | P2 | C46 | A failed context probe answered HEALTHY "not read"; a reachable source with no dated knowledge could be "complete and fresh". | FIXED (lead): a failed probe is DEGRADED and says so; no dated knowledge is partial. |
+| 15 | P2 | C39 | approve-request and seller-draft skip the recipient check when the snapshot carries no recipient, and the assignment row records no senderIdentity. | ROUTED to builder C: refuse an APPROVE whose snapshot has no recipient; record and compare senderIdentity. |
+| 16 | P2 | C47 | The poller joins hs_email_message_id to the stored RFC id with no normalization. Unconfirmed. | ROUTED to builder A: normalize (trim, strip <>, lowercase) on store and lookup, with a test. |
+| 17 | P2 | ledger | Status lines lagged the code at 9edf2edd (C21-C23, C31-C33, C47). | FIXED: every merged ticket carries its receipt; the C58 reconciliation keeps code, tests, deployed and accepted apart. |
+
+Verified as sound by the reviewer (unchanged): coverage status mapping; resolvePersonAccount; C06 scoping; C23 revision; C13 externallyUsable, byAuthority, fingerprint, emptyPacket; C17 deal existence from the CRM only; C16 Clawd versions; C14 bounds and classes; C08 mail types and provenance merge; C35 paging; C36-C38c projection; C49 paging and dedup; C39 revision-0 binding and the recheck before the adapter; C45 redaction; C50 race guard; no retrieved text reaches a tool; no credential printing.
+
+## Builder interface requests (from the final reports)
+
+| From | Request | Disposition |
+|---|---|---|
+| A | `audit.ts` GapAuditKind gains conversation.classified, execution.reply_resolved, inbound.provenance_linked | FIXED (lead). |
+| A | check-inbox cron dedups by RFC but records no provenance link | ROUTED to builder A (reuse storeInbound). |
+| A | no Gmail drafts-by-recipient reader; loadThreadContext.listDrafts unwired | DEFERRED (named debt, owner engineering): a draft is never a contact today because the Sent read holds sends only; the drafts reader is a later wiring. |
+| A, B | `TimelineEvent.threadId` on the contract | FIXED (lead, optional field). |
+| A | no route or UI calls recordOverride / resolveAnswerOwed | DEFERRED (owner: the next seller-evidence ticket): the override is now applied by the intelligence reader; the seller control to record one is a UI ticket Casey raises when a wrong classification costs a day. |
+| B | memory `project_gap_execution_engine.md` said X19 open | FIXED at the memory file and its index line. |
+| B | developAngle default timeline wiring | ROUTED to builder B (= finding 9). |
+| C | unknown-send reconciler drops the body hash (C41 residual) | ROUTED to builder C (execution/* is theirs). |
+| C | decide, start and item pages execute on a bare GET | ROUTED to builder A: executionAllowed on GET renders a confirm form; apply on POST. |
+| C | assignment row records no senderIdentity | ROUTED to builder C (= finding 15). |
+| C | commitmentPhase still says "Back today" on the account page for a passed snooze | DEFERRED (named debt, owner C's next slice): list.ts overrides it on Work; the account page keeps the old words. |
+| C | DRAFT_SENT carries no sent-body hash; day-load says only "sent from Gmail by hand" | ACCEPTED: the activity line says the copy as sent was not checked (C40), which is the truth of a by-hand send. |
+| C | nothing writes deal.stage_changed or meeting.booked yet | DEFERRED (named debt, owner engineering): deal.stage_changed needs two CRM reads of one deal (C51's only shape) and GAP has no scheduled re-read; meeting.booked needs the calendar proof row. |
+| C | the live Clawd read (2026-10-09T03:47Z): the autopush and reply-scan jobs are enabled and running at prod sha 5ad1734, dry run off | ROUTED to builder A to add to `docs/gap/CRM_STAGE_AUTHORITY.md` as the enablement column's live read; OWNER ITEM for Casey (unchanged). |
+
+## Pass 2 (at a97d7480): pending the reviewer's report.

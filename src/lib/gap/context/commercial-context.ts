@@ -108,6 +108,8 @@ export type TimelineType = 'email' | 'draft' | 'calendar' | 'meeting' | 'call' |
 
 export interface TimelineEvent {
   id: string;
+  /** The provider's thread, when known (C08/C25: a draft is matched by its thread, never by subject). */
+  threadId?: string | null;
   at: string;
   direction: 'inbound' | 'outbound' | 'internal';
   type: TimelineType;
@@ -180,7 +182,8 @@ export function validateClaims(claims: ReadonlyArray<Partial<ContextClaim>>): { 
     else if (!c.authority || !AUTHORITIES.has(c.authority)) faults.push({ claimId: id, reason: 'no_authority' });
     else if (!c.visibility || !VISIBILITIES.has(c.visibility)) faults.push({ claimId: id, reason: 'no_visibility' });
     else if (!c.text || !c.text.trim()) faults.push({ claimId: id, reason: 'no_text' });
-    else if (c.observedAt && c.indexedAt && c.observedAt === c.indexedAt && c.eventAt === null) faults.push({ claimId: id, reason: 'refresh_as_observation' });
+    // C57 F5: a builder that copies the observation into eventAt (retrieval does) must not slip the same refresh time past the guard.
+    else if (c.observedAt && c.indexedAt && c.observedAt === c.indexedAt && (c.eventAt === null || c.eventAt === c.observedAt)) faults.push({ claimId: id, reason: 'refresh_as_observation' });
     else out.push(c as ContextClaim);
   }
   return faults.length ? { ok: false, faults } : { ok: true, claims: out };

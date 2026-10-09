@@ -27,6 +27,7 @@ import { classifyPurpose, reengageEligible, type ReengageVerdict } from '../cont
 import { classifyMailType } from '../context/thread-context';
 import type { Purpose } from '../context/commercial-context';
 import { peopleState, type PersonState, type StateEvent } from './people-state';
+import { loadOverrides, overrideFor, relationshipOverride, type ClassificationOverride } from '../context/classification-overrides';
 import type { IdentityContext } from '../identity/resolve';
 import { loadIdentityContext } from '../identity/service';
 import { signalStatus } from '../signals/intake';
@@ -77,7 +78,7 @@ export interface IntelItem {
   /** C04: the opportunity standing, explicit: open (a complete CRM read found a deal), none (a complete read found none), unknown (no complete read). */
   opportunity?: 'open' | 'none' | 'unknown';
   /** C10: the two-sided state, when the seller's Sent was read for this person (quiet basis, the next meeting). */
-  state?: { quietDays: number | null; quietBasis: string; nextMeetingAt: string | null; lastOutboundAt: string | null };
+  state?: { quietDays: number | null; quietBasis: string; nextMeetingAt: string | null; lastOutboundAt: string | null; /** C57 F3: when their newest answerable message has no send of ours after it. */ answerOwedSince?: string | null };
   /** C09/C11: the re-engage verdict's review note, when the purposes asked for one. */
   review?: string;
   /** C29: the publication value is a date (no time of day), shown as that calendar day. */
@@ -214,9 +215,11 @@ export function rankPeople(rows: readonly WriterRow[], personas: readonly Person
   const out: IntelItem[] = [];
   for (const [email, w] of byEmail) {
     const st = opts.states?.get(email) ?? null;
+    // C57 F3 (C10 vs C35): an owed answer with no disposition on record would vanish from both lists; the person stays here, said as owed.
+    const owed = !!st && st.answerOwed.owed;
     if (st) {
-      // C10: an owed answer is a reply obligation (C35's list), not a re-engagement; a person we wrote to or who has a meeting ahead is not quiet.
-      if (st.answerOwed.owed || !st.quiet.quiet) continue;
+      // C10: a person we wrote to after their message, or who has a meeting ahead, is not quiet; an owed writer is listed as owed.
+      if (!owed && !st.quiet.quiet) continue;
     } else if (w.last.getTime() > quiet) continue;
     if (opts.decided.has(`person:${email}`) || opts.unsubscribed.has(email)) continue;
     const verdict = opts.verdicts?.get(email) ?? null;
@@ -233,11 +236,11 @@ export function rankPeople(rows: readonly WriterRow[], personas: readonly Person
     const name = p?.name ?? w.name ?? null;
     out.push({
       kind: 'person', id: email, key: `person:${email}`, title: `${name ?? email}${p?.title ? `, ${p.title}` : ''}${account ? ` at ${account}` : ` (${domainOf(email)})`}`, source: 'the mailbox', url: null, publishedAt: null, observedAt: w.last.toISOString(), truth: 'historical_observation',
-      line: `Wrote to us ${dayText(w.last)} (${w.n} message${w.n === 1 ? '' : 's'})${w.subject ? `, last about "${w.subject.slice(0, 60)}"` : ''}; ${words}${p ? '' : '; not a GAP contact yet'}${placed.ambiguous ? '; two accounts claim this domain: name the account' : ''}. Previously contacted, a response.${st ? ` ${st.quiet.basis.charAt(0).toUpperCase()}${st.quiet.basis.slice(1)}.` : opts.sentFailed?.has(email) ? ' Our Sent could not be read for them, so a reply of ours may exist.' : opts.sentRead === false ? ' Our Sent was not read for this list, so a reply of ours may exist.' : ''}${verdict?.review ? ` Review before outreach: ${verdict.reason}.` : ''}`,
+      line: `Wrote to us ${dayText(w.last)} (${w.n} message${w.n === 1 ? '' : 's'})${w.subject ? `, last about "${w.subject.slice(0, 60)}"` : ''}; ${words}${p ? '' : '; not a GAP contact yet'}${placed.ambiguous ? '; two accounts claim this domain: name the account' : ''}. Previously contacted, a response.${st ? (owed ? ` An answer is owed since ${dayText(st.answerOwed.since ?? w.last)}: ${st.answerOwed.basis}.` : ` ${st.quiet.basis.charAt(0).toUpperCase()}${st.quiet.basis.slice(1)}.`) : opts.sentFailed?.has(email) ? ' Our Sent could not be read for them, so a reply of ours may exist.' : opts.sentRead === false ? ' Our Sent was not read for this list, so a reply of ours may exist.' : opts.sentRead === true ? ' Our Sent was not read for them, so a reply of ours may exist.' : ''}${verdict?.review ? ` Review before outreach: ${verdict.reason}.` : ''}`,
       accountName: account, accountHint: account ? null : domainOf(email), relevance: null, categories: [],
       person: { email, name, title: p?.title ?? null, lastWroteAt: w.last.toISOString(), messages: w.n, via: placed.via, ambiguous: placed.ambiguous, ...(lookup.inDeal === true ? { deals: lookup.account.deals.map((d) => ({ id: d.id, name: d.name, stage: d.stage, nextStep: d.nextStep })) } : {}) },
       opportunity: lookup.inDeal === true ? 'open' : lookup.inDeal === false ? 'none' : 'unknown',
-      ...(st ? { state: { quietDays: st.quiet.days, quietBasis: st.quiet.basis, nextMeetingAt: st.nextMeetingAt, lastOutboundAt: st.lastOutboundAt } } : {}),
+      ...(st ? { state: { quietDays: st.quiet.days, quietBasis: st.quiet.basis, nextMeetingAt: st.nextMeetingAt, lastOutboundAt: st.lastOutboundAt, answerOwedSince: owed ? st.answerOwed.since : null } } : {}),
       ...(verdict?.review ? { review: verdict.reason } : {}),
       decisions: DECISIONS, rank: out.length, ...(inDeal ? { inDeal: true } : {}),
     });
@@ -354,7 +357,7 @@ export async function loadIntelligence(prisma: PrismaLike, opts: { now: Date; li
   const triggers = rankTriggers(triggerRows, new Set(names.map((n) => n.name)), decided, opts.now);
   const since = new Date(opts.now.getTime() - peopleWindowDays * 86_400_000);
   const msgs: Array<{ from_email: string; from_name: string | null; subject: string | null; received_at: Date | string; thread: { account_name: string | null } | null }> = typeof prisma?.inboundMessage?.findMany === 'function'
-    ? await prisma.inboundMessage.findMany({ where: { received_at: { gte: since } }, select: { id: true, from_email: true, from_name: true, subject: true, snippet: true, received_at: true, thread: { select: { account_name: true } } }, orderBy: { received_at: 'desc' }, take: PEOPLE_INTAKE_MAX }).catch(() => [])
+    ? await prisma.inboundMessage.findMany({ where: { received_at: { gte: since } }, select: { id: true, thread_id: true, from_email: true, from_name: true, subject: true, snippet: true, received_at: true, thread: { select: { account_name: true } } }, orderBy: { received_at: 'desc' }, take: PEOPLE_INTAKE_MAX }).catch(() => [])
     : [];
   const emails = [...new Set(msgs.map((m) => m.from_email.toLowerCase()))];
   const personas: PersonaRow[] = emails.length && typeof prisma?.persona?.findMany === 'function' ? await prisma.persona.findMany({ where: { email: { in: emails, mode: 'insensitive' } }, select: { id: true, email: true, name: true, title: true, account_name: true, do_not_contact: true } }).catch(() => []) : [];
@@ -362,16 +365,26 @@ export async function loadIntelligence(prisma: PrismaLike, opts: { now: Date; li
   const unsubscribed = new Set(unsub.map((u) => u.email.toLowerCase()));
   const personaEmails = new Set(personas.filter((p) => p.email).map((p) => String(p.email).toLowerCase()));
   // C09/C11: every inbound message's purpose from its subject and snippet; the sender's re-engage verdict from all of them.
+  // C57 F8 (C12): a seller's correction on one message or one thread is applied before the verdict; the machine purpose is kept beside it.
+  const overrideIds = [...new Set(msgs.flatMap((m) => [String((m as { id?: unknown }).id ?? ''), String((m as { thread_id?: unknown }).thread_id ?? '')].filter(Boolean)))];
+  const overrides = overrideIds.length ? await loadOverrides(prisma, overrideIds).catch(() => new Map<string, ClassificationOverride>()) : new Map<string, ClassificationOverride>();
   const typed = msgs.map((m) => {
     const email = String(m.from_email ?? '').trim().toLowerCase();
     const mail = classifyMailType({ subject: m.subject, from: m.from_email });
-    const purpose: Purpose = mail.type === 'calendar' ? 'calendar' : classifyPurpose({ from: m.from_email, subject: m.subject, excerpt: (m as { snippet?: string | null }).snippet ?? null, direction: 'inbound', type: mail.type, calendar: mail.calendar }, { knownPerson: personaEmails.has(email) }).purpose;
-    return { m, email, mail, purpose };
+    const machine: Purpose = mail.type === 'calendar' ? 'calendar' : classifyPurpose({ from: m.from_email, subject: m.subject, excerpt: (m as { snippet?: string | null }).snippet ?? null, direction: 'inbound', type: mail.type, calendar: mail.calendar }, { knownPerson: personaEmails.has(email) }).purpose;
+    const id = String((m as { id?: unknown }).id ?? '');
+    const threadId = (m as { thread_id?: string | null }).thread_id ?? null;
+    const override = overrideFor({ id, providerIds: id ? [`gmail:${id}`] : [], threadId, purpose: machine }, overrides);
+    const purpose: Purpose = override?.purpose ?? machine;
+    return { m, email, mail, purpose, machine, threadId };
   });
   const purposesBy = new Map<string, Purpose[]>();
   for (const t of typed) purposesBy.set(t.email, [...(purposesBy.get(t.email) ?? []), t.purpose]);
   const verdicts = new Map<string, ReengageVerdict>();
-  for (const [email, purposes] of purposesBy) verdicts.set(email, reengageEligible({ purposes, relationship: personaEmails.has(email) ? 'prospect' : 'unknown', optedOut: unsubscribed.has(email) }));
+  for (const [email, purposes] of purposesBy) {
+    const threadRel = typed.filter((t) => t.email === email).map((t) => relationshipOverride(t.threadId, overrides)).find((r) => r) ?? null;
+    verdicts.set(email, reengageEligible({ purposes, relationship: threadRel ?? (personaEmails.has(email) ? 'prospect' : 'unknown'), optedOut: unsubscribed.has(email) }));
+  }
   const writerRows = msgs.map((m) => ({ from_email: m.from_email, from_name: m.from_name, subject: m.subject, received_at: m.received_at, thread_account: m.thread?.account_name ?? null }));
   const base = { now: opts.now, decided, coverage, identity, unsubscribed, verdicts, sentRead: !!opts.listSent };
   // C10: the seller's Sent is read for the people that would be listed (a bounded number of Gmail reads), and the two-sided state decides quiet and answer owed.
