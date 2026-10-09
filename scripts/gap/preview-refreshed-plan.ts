@@ -173,9 +173,9 @@ async function main() {
       L.push(`Moved (${moved.length}): ${moved.map((m) => `${m.i.accountName} ${m.from} to ${m.to}`).join('; ') || 'none'}.`);
     } else L.push('No stored plan to compare with.');
     L.push('');
-    L.push('## 4. Southern Glazer\'s and Kenco, specifically');
+    L.push('## 4. Southern Glazer\'s, Swire and Kenco, specifically');
     L.push('');
-    for (const name of ['Southern Glazer', 'Kenco']) {
+    for (const name of ['Southern Glazer', 'Swire', 'Kenco']) {
       const wasRows = stored?.items.filter((i) => i.accountName.includes(name)) ?? [];
       const isRows = refreshed.filter((i) => i.accountName.includes(name));
       const card = [...cardsByAccount.values()].find((c) => c.accountName.includes(name));
@@ -191,6 +191,16 @@ async function main() {
       L.push(`- Parked/snoozed/waiting rows naming it: ${[...load.day.waiting.filter((w) => w.accountName.includes(name)).map((w) => `waiting: ${w.line}`), ...load.day.snoozed.filter((s) => s.accountName.includes(name)).map((s) => `snoozed: ${s.line}`)].join('; ') || 'none'}.`);
       L.push('');
     }
+    L.push('### Parked for availability (out-of-office notices whose return day passed; never items)');
+    L.push('');
+    const parkedAvail = load.cards.filter((c) => (c as { availability?: unknown }).availability || /^Back since/.test(c.state));
+    if (!parkedAvail.length) L.push('none');
+    for (const c of parkedAvail) {
+      const a = (c as { availability?: { line: string } }).availability;
+      L.push(`- ${c.accountName}: tier ${c.tier ?? '?'}, "${c.state}"; ${a ? a.line : c.why}`);
+    }
+    L.push(`Counts: availability ${(load.day.counts as { availability?: number }).availability ?? 'not counted'}, parked ${load.day.counts.parked}.`);
+    L.push('');
     L.push('## 5. The intelligence beside the plan');
     L.push('');
     if ('error' in intel) L.push(`The intelligence could not be read: ${intel.error}`);
