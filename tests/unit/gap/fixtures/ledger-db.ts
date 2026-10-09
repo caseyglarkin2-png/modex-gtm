@@ -62,6 +62,10 @@ export interface LedgerSeed {
   accounts?: Array<string | Row>;
   /** C5: canonical_conflicts rows (code, status, account_name, canonical_company_id, reason, created_at). */
   conflicts?: Row[];
+  /** C5 fix: the identity tables loadIdentityContext reads (canonical_companies, canonical_account_links, gap_account_aliases). */
+  companies?: Row[];
+  links?: Row[];
+  aliases?: Row[];
   personas?: Row[];
   audit?: Row[];
   sequenceVersions?: Row[];
@@ -107,6 +111,9 @@ export function ledgerDb(seed: LedgerSeed = {}, start = new Date('2026-10-06T14:
   const store = {
     account: (seed.accounts ?? []).map((a) => (typeof a === 'string' ? { name: a } : { ...a })),
     canonicalConflict: [...(seed.conflicts ?? [])],
+    canonicalCompany: [...(seed.companies ?? [])],
+    canonicalAccountLink: [...(seed.links ?? [])],
+    gapAccountAlias: [...(seed.aliases ?? [])],
     persona: [...(seed.personas ?? [])],
     gapAuditEvent: [...(seed.audit ?? [])],
     sequenceVersion: [...(seed.sequenceVersions ?? [])],
@@ -129,6 +136,8 @@ export function ledgerDb(seed: LedgerSeed = {}, start = new Date('2026-10-06T14:
   const client = () => ({
     account: table(store.account, clock, 'acct'),
     canonicalConflict: table(store.canonicalConflict, clock, 'cc'),
+    // The identity tables are present only when seeded: a client without them never loads an identity context (as before).
+    ...(seed.companies || seed.links || seed.aliases ? { canonicalCompany: table(store.canonicalCompany, clock, 'cco'), canonicalAccountLink: table(store.canonicalAccountLink, clock, 'cal'), gapAccountAlias: table(store.gapAccountAlias, clock, 'al') } : {}),
     persona: table(store.persona, clock, 'p'),
     gapAuditEvent: table(store.gapAuditEvent, clock, 'ev'),
     sequenceVersion: table(store.sequenceVersion, clock, 'sv'),

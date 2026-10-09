@@ -168,6 +168,46 @@ describe('C5: ambiguity said with its candidates; the family and deal tie-break'
     expect(d2.placementLine).toContain('Kenco Logistics Services is in its family (parent brand), unmerged');
   });
 
+  it('C5 fix, the exact production shape: the canonical company is keyed by domain with DOMAIN NULL, both links are in conflict, both accounts have no HubSpot id, the four open conflicts carry two reasons; the identity context is READ from the tables (no injection), the family facts come from the rows, and the pursued item and the people item place at Kenco via family_deal', async () => {
+    const SINCE = new Date('2026-05-05T14:00:00Z');
+    const db = ledgerDb({
+      accounts: [{ name: 'Kenco', parent_brand: null, hubspot_company_id: null }, { name: 'Kenco Logistics Services', parent_brand: 'Kenco', hubspot_company_id: null }, 'PepsiCo'],
+      companies: [{ id: 'domain:kencogroup.com', company_key: 'domain:kencogroup.com', source: 'company_domain', hubspot_company_id: null, domain: null, primary_account_name: 'Kenco', status: 'conflict' }],
+      links: [{ id: 1, account_name: 'Kenco', canonical_company_id: 'domain:kencogroup.com', status: 'conflict' }, { id: 2, account_name: 'Kenco Logistics Services', canonical_company_id: 'domain:kencogroup.com', status: 'conflict' }],
+      aliases: [],
+      conflicts: [
+        { id: 1, code: 'duplicate_company', status: 'open', account_name: 'Kenco Logistics Services', canonical_company_id: 'domain:kencogroup.com', reason: 'Company collides with: Kenco', created_at: SINCE },
+        { id: 2, code: 'duplicate_company', status: 'open', account_name: 'Kenco', canonical_company_id: 'domain:kencogroup.com', reason: 'Company collides with: Kenco Logistics Services', created_at: SINCE },
+        { id: 3, code: 'duplicate_company', status: 'open', account_name: null, canonical_company_id: 'domain:kencogroup.com', reason: 'Canonical company matches multiple account records.', created_at: SINCE },
+        { id: 4, code: 'duplicate_company', status: 'open', account_name: null, canonical_company_id: 'domain:kencogroup.com', reason: 'Canonical company matches multiple account records.', created_at: new Date('2026-05-06T09:00:00Z') },
+      ],
+      personas: [],
+      inbound: [{ id: 'm1', thread_id: 't1', from_email: DAVE, from_name: 'Dave Kiesling', subject: 'Re: yards', received_at: days(20), source: 'gmail', thread: { account_name: null } }],
+    }, NOW);
+    const c = db.client();
+    // The identity context, read from the tables: the host comes from the key, the two conflicted links claim it, nothing is verified.
+    const { loadIdentityContext } = await import('@/lib/gap/identity/service');
+    const ctx = await loadIdentityContext(c);
+    expect([...(ctx.conflictedDomainToAccounts ?? new Map()).entries()]).toEqual([['kencogroup.com', ['Kenco', 'Kenco Logistics Services']]]);
+    expect(ctx.verifiedDomainToAccounts.size).toBe(0);
+    const facts = await loadFamilyFacts(c, ['Kenco', 'Kenco Logistics Services']);
+    expect([...facts.parentBrand.entries()]).toEqual([['Kenco', null], ['Kenco Logistics Services', 'Kenco']]);
+    expect(facts.duplicates.get('Kenco')).toEqual({ companyId: 'domain:kencogroup.com', collidesWith: ['Kenco Logistics Services'], since: '2026-05-05T14:00:00.000Z' });
+    expect(facts.duplicates.get('Kenco Logistics Services')).toEqual({ companyId: 'domain:kencogroup.com', collidesWith: ['Kenco'], since: '2026-05-05T14:00:00.000Z' });
+    await pursueDave(c);
+    const oneDeal = dealCoverageFrom({ ...summary, accounts: [{ ...summary.accounts[0], alsoRecordedAs: [] }] });
+    const x = await loadIntelligence(c, { now: NOW, coverage: oneDeal });
+    const dave = x.pursued.find((p) => p.key === `person:${DAVE}`)!;
+    expect(dave).toMatchObject({ accountName: 'Kenco', accountHint: null, placedVia: 'family_deal', placementChanged: true, dealLine: 'In an open deal: YardFlow - Kenco' });
+    expect(dave.placementLine).toBe("Placed at Kenco, the family's deal-holding account; Kenco Logistics Services is its open duplicate, unmerged; the angle was developed before placement, so Pursue again to develop it as deal work");
+    const person = x.people.find((i) => i.id === DAVE)!;
+    expect(person).toMatchObject({ accountName: 'Kenco', inDeal: true, person: { via: 'family_deal', ambiguous: false } });
+    expect(person.line).toContain("placed at Kenco, the family's deal-holding account; Kenco Logistics Services is its open duplicate, unmerged");
+    // The same rows with no deal: the ambiguity is said with both names and the duplicate since May 5.
+    const y = await loadIntelligence(c, { now: NOW, coverage: dealCoverageFrom({ ...summary, accounts: [] }) });
+    expect(y.pursued.find((p) => p.key === `person:${DAVE}`)!.ambiguityLine).toBe('kencogroup.com is claimed by Kenco and Kenco Logistics Services (an open duplicate since May 5): choose the account');
+  });
+
   it('the family facts are read one bounded query each and soft: a client without the tables keeps the ambiguity', async () => {
     const db = kencoWorld();
     const c = db.client();

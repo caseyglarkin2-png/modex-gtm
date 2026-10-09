@@ -24,6 +24,20 @@ function pushInto(map: Map<string, string[]>, key: string, accountName: string):
   }
 }
 
+/**
+ * C5 fix: the host a canonical company stands for: its `domain` when set, else the host its id or company_key carries
+ * (`domain:<host>`, the company_domain source); null when neither names one. Pure.
+ */
+export function hostOfCompany(c: { id?: string | null; domain?: string | null; company_key?: string | null }): string | null {
+  const d = c.domain?.trim();
+  if (d) return d.toLowerCase().replace(/^www\./, '');
+  for (const key of [c.company_key, c.id]) {
+    const m = /^domain:(.+)$/i.exec(String(key ?? '').trim());
+    if (m && m[1].trim()) return m[1].trim().toLowerCase().replace(/^www\./, '');
+  }
+  return null;
+}
+
 /** Build the resolver's context snapshot from the current database state. */
 export async function loadIdentityContext(prisma: any): Promise<IdentityContext> {
   const [accounts, canonicalCompanies, canonicalLinks, aliases] = await Promise.all([
@@ -48,7 +62,23 @@ export async function loadIdentityContext(prisma: any): Promise<IdentityContext>
 
   const domainByCompanyId = new Map<string, string>();
   for (const c of canonicalCompanies as Array<{ id: string; domain: string | null }>) {
-    if (c.domain) domainByCompanyId.set(c.id, c.domain.trim().toLowerCase().replace(/^www\./, ''));
+    const host = hostOfCompany(c);
+    if (host) domainByCompanyId.set(c.id, host);
+  }
+  // C5 fix (2026-10-09, the production shape): a company keyed by domain (id and company_key `domain:<host>`, source
+  // company_domain) can carry DOMAIN NULL (Kenco's 'domain:kencogroup.com' does): the host is read from the key. The
+  // companies the links point at that the first read left out (a null domain, or a status other than resolved) are read
+  // by id, soft, with their keys, for the verified map and the conflicted one alike.
+  const conflicted: Array<{ account_name: string; canonical_company_id: string }> = await prisma.canonicalAccountLink
+    .findMany({ where: { status: 'conflict' }, select: { account_name: true, canonical_company_id: true } })
+    .catch(() => []);
+  const missing = [...new Set([...(canonicalLinks as Array<{ canonical_company_id: string }>), ...conflicted].map((l) => l.canonical_company_id).filter((id) => !domainByCompanyId.has(id)))];
+  const extra: Array<{ id: string; domain: string | null; company_key?: string | null; source?: string | null }> = missing.length
+    ? await prisma.canonicalCompany.findMany({ where: { id: { in: missing } }, select: { id: true, domain: true, company_key: true, source: true } }).catch(() => [])
+    : [];
+  for (const c of extra) {
+    const host = hostOfCompany(c);
+    if (host) domainByCompanyId.set(c.id, host);
   }
   const verifiedDomainToAccounts = new Map<string, string[]>();
   for (const link of canonicalLinks as Array<{ account_name: string; canonical_company_id: string }>) {
@@ -57,17 +87,9 @@ export async function loadIdentityContext(prisma: any): Promise<IdentityContext>
   }
 
   // C5 (2026-10-09): the CONFLICTED links (two accounts on one canonical company, an open duplicate) are read apart, soft,
-  // with their companies' domains (a company in conflict may not be 'resolved'), so the resolver can say which accounts
-  // claim a domain instead of "no account yet"; they never resolve anything.
+  // with their companies' hosts, so the resolver can say which accounts claim a domain instead of "no account yet"; they
+  // never resolve anything.
   const conflictedDomainToAccounts = new Map<string, string[]>();
-  const conflicted: Array<{ account_name: string; canonical_company_id: string }> = await prisma.canonicalAccountLink
-    .findMany({ where: { status: 'conflict' }, select: { account_name: true, canonical_company_id: true } })
-    .catch(() => []);
-  const missing = [...new Set(conflicted.map((l) => l.canonical_company_id).filter((id) => !domainByCompanyId.has(id)))];
-  const extra: Array<{ id: string; domain: string | null }> = missing.length
-    ? await prisma.canonicalCompany.findMany({ where: { id: { in: missing }, domain: { not: null } }, select: { id: true, domain: true } }).catch(() => [])
-    : [];
-  for (const c of extra) if (c.domain) domainByCompanyId.set(c.id, c.domain.trim().toLowerCase().replace(/^www\./, ''));
   for (const link of conflicted) {
     const domain = domainByCompanyId.get(link.canonical_company_id);
     if (domain) pushInto(conflictedDomainToAccounts, domain, link.account_name);
