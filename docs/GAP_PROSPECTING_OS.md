@@ -2784,7 +2784,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C07 [P1] Read complete bounded thread context
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Builder A (`feat/gap-stream-a`), merged by the lead. Commit 38377c26 (`stream-a-thread-context.test.ts` 7): `context/thread-context.ts` (new): stored inbound rows plus an injected Sent and Drafts reader become typed `TimelineEvent`s; the excerpt is the author's own text with the quoted history cut (`quotedBelow`), bounded; coverage says complete, partial (a cut read, an unread Sent) or unknown (an unreadable store), never no activity.
 - **Change boundary:** Add a reusable context adapter over existing Gmail/InboundMessage and HubSpot engagement readers: inbound and outbound, quoted-text boundaries, participants and pagination coverage.
 - **Acceptance:** Nested MIME September thread retains current author text; quoted earlier messages are not new buyer statements; truncated thread reports partial.
 - **Depends on:** C05.
@@ -2793,7 +2793,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C08 [P1] Distinguish draft, sent, received and calendar mail
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Builder A (`feat/gap-stream-a`), merged by the lead. Commit 38377c26: a draft is typed draft and never counts as contact; calendar invitations and RSVPs are typed calendar with their meeting (kind, meeting key, start) and duplicate RSVP copies collapse to one; provider ids are kept (gmail, hubspot, rfc) and one email seen through both providers merges by RFC Message-ID then provider id, never by subject.
 - **Change boundary:** Context timeline records provider IDs, labels, direction, authoredAt and source; DRAFT never counts as contact; invitations/RSVPs are typed events.
 - **Acceptance:** October 5 Kenco drafts are available as preparation, October 1 is sent, duplicate Oct14 RSVP messages yield one meeting response.
 - **Depends on:** C07.
@@ -2802,7 +2802,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C09 [P1] Classify commercial relationship and message purpose separately
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Builder A (`feat/gap-stream-a`), merged by the lead. Commit d112df10 (`stream-a-purpose.test.ts` 6: the Lazer support ask, the Riserify pitch, a referral request, a court-summons invite, a calendar RSVP, an automated notice): `context/purpose.ts` (new): `classifyPurpose` reads one message with the mailbox's reply vocabulary and says buyer_conversation, customer_support, vendor_solicitation, partner_referral, media, internal, calendar, automated, suspicious or unknown with the cue it matched; `classifyRelationship` reads CRM and ledger evidence only (an open deal under a complete read, customer, persona, placed account, flags; several at once is mixed; nothing is unknown and says the CRM was not read); purpose never proves relationship. Wired into the people ranker by the lead (commit c06d5c1a, `lead-c09-c10-wiring.test.ts` 3): every inbound message's purpose from its subject and snippet, the sender's verdict from all of them.
 - **Change boundary:** Reuse disposition/reply precision; add evidence-backed purposes: buyer conversation, customer support, vendor solicitation, partner/referral, media, internal, calendar, automated, suspicious, unknown. Do not make these CRM truth automatically. Relationship is a separate evidenced axis: active opportunity, customer, prospect, partner, vendor, media, internal, mixed or unknown. One person may have multiple roles by thread/deal; purpose never proves relationship.
 - **Acceptance:** Lazer device-support message routes to support context; Seb sales-service pitch to vendor; referral request remains referral. Unknown is visible for review. A customer can ask a new buying question; a partner can send a vendor pitch; classify each axis separately and preserve unknown.
 - **Depends on:** C07.
@@ -2811,7 +2811,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C10 [P1] Compute answer owed and quietness from both sides
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Builder A (`feat/gap-stream-a`), merged by the lead. Commit e85e4bc3 (`stream-a-people-state.test.ts` 5): `work/people-state.ts` (new, pure): per person lastInboundAt (a calendar RSVP and an automatic reply are not them writing), lastOutboundAt (sent, never a draft), answerOwed when their newest buyer or support message came after our last send (a September 24 inbound answered the same day is not owed), quiet only when no meaningful exchange either way for 14 days and no accepted meeting ahead, with the basis in words (an October 1 send and an accepted October 14 meeting prevent a went-quiet claim built on the September 16 inbound alone), nextMeetingAt, outstanding commitments by the message they came from. Wired by the lead (c06d5c1a): `loadIntelligence` takes the briefing's Gmail Sent reader (`defaultIntel` passes the one the briefing holds), reads Sent for the people that would be listed only, builds the two-sided state, and `rankPeople` judges by it (an owed answer is C35's list, not a re-engagement; a person we wrote to or with a meeting ahead is not quiet; a quiet person carries the basis on the line and the state on the item); without the reader, or when a read fails, the line says our Sent was not read so a reply of ours may exist, and the selection says which.
 - **Change boundary:** work/intel.ts people ranking: newest meaningful conversation state, latest sent action, accepted future meeting and outstanding commitments; date is descriptive and seller-overridable.
 - **Acceptance:** September 24 inbound followed by same-day reply is not answer owed; October 1 send and future meeting prevent went-quiet claim based only on inbound date.
 - **Depends on:** C08,C09.
@@ -2820,7 +2820,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C11 [P1] Expose suspect correspondence for review without prospect claims
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Builder A (`feat/gap-stream-a`), merged by the lead. Commit d112df10: `reengageEligible` keeps suspicious-only, calendar-only, automated, vendor, media, internal and opted-out senders out of re-engagement and sends an unknown purpose to review (listed with a review note, never silently dropped); the module follows no link and deletes nothing. Wired by the lead (c06d5c1a): an ineligible sender is out of the people list, a review note rides on the line and the item.
 - **Change boundary:** Classifier presentation excludes suspicious/calendar-only messages from prospects by default, retains searchable source and reversible classification. Do not click links or auto-delete.
 - **Acceptance:** Court-summons invitation cannot yield a buyer-interest assertion or automatic outreach; seller can inspect and correct classification.
 - **Depends on:** C09.
@@ -2829,7 +2829,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C12 [P1] Make classification corrections durable and explainable
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Builder A (`feat/gap-stream-a`), merged by the lead. Commit 793c9666 (`stream-a-overrides.test.ts` 2): `context/classification-overrides.ts` (new): a seller correction is one append-only `conversation.classified` row in the GAP audit ledger with the source id (one thread or one message; a domain scope is refused), the rationale, the version and the machine suggestion it replaced; `loadOverrides` reads the newest version per source id; `applyOverrides` changes only the conversation named and keeps the machine purpose beside it, so correcting one media thread never touches another thread from the same domain.
 - **Change boundary:** Store seller override with source ID, rationale, version and scope in existing ledger; apply across brief/app/tasks without changing unrelated conversations.
 - **Acceptance:** Correcting one media thread does not blacklist all people at that domain; subsequent agent run honors override and retains original machine suggestion.
 - **Depends on:** C09.
@@ -2852,7 +2852,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C14 [P1] Retrieve linked account, people and meeting notes
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Builder B (`feat/gap-stream-b`), merged by the lead. Commit a7a7d340 (`stream-b-retrieval.test.ts` 7): `context/retrieval.ts` (new): the vault account note read section by section with its wiki-links followed one level into meeting notes, raw transcript spans and people notes, bounded (12 linked notes, 80 claims, 12 per section, 8 transcript spans, 500 chars a claim), every claim keeping its path and heading as the source id; a note at another account is not followed; private detail, engagement and modeled figures are internal; `story/load.ts` reads through it (`knowledgeAdapters`, `loadAccountKnowledge`), the one-paragraph note keeps its outputs.
 - **Change boundary:** Replace wedge-only adapter with bounded account-specific retrieval from canonical vault/index, following relevant wiki-links to meeting notes/raw transcript spans and source references. Preserve raw text attribution.
 - **Acceptance:** Kenco recent inbox notes and July discovery are retrievable alongside account note; unrelated accounts and private personal details are excluded from outbound context.
 - **Depends on:** C13.
@@ -2861,7 +2861,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C15 [P1] Separate document refresh time from claim time
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Builder B (`feat/gap-stream-b`), merged by the lead. Commit a7a7d340: a file's `last_refreshed` and a snapshot's `rebuilt_at` go to `indexedAt`, never `observedAt` (an undated wedge stays undated); the contract's `validateClaims` refuses a refresh time passed as an observation date (C13, 45a335bb).
 - **Change boundary:** story/load.ts and source envelope: file/index rebuilt time never becomes claim observation date. Retain section date and unknown dates.
 - **Acceptance:** October 8 refreshed account with July wedge remains July/undated claim; September buyer mail keeps September date.
 - **Depends on:** C14.
@@ -2870,7 +2870,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C16 [P1] Select Clawd knowledge by source identity and version
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Builder B (`feat/gap-stream-b`), merged by the lead. Commit a7a7d340: Clawd notes are selected by identity and version; identical copies are one claim; an older different text is kept, marked superseded and in conflict; the selection is order independent; `currentClawdClaim` answers the current version. Coverage says offline, timeout, not found, not configured and the bounds, apart from empty.
 - **Change boundary:** story/load.ts cloud adapter: replace first matching Vault wedge with version-aware source retrieval; deduplicate identical claims, preserve superseded history.
 - **Acceptance:** July11 and Aug7 notes select appropriate newest version, retaining citation; unordered array gives same result; contradictory assertions remain visible.
 - **Depends on:** C13.
@@ -2879,7 +2879,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C17 [P1] Resolve conflicting sources with field-specific authority
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Builder B (`feat/gap-stream-b`), merged by the lead. Commit d2889e6b (`stream-b-assemble.test.ts` 7): `context/assemble.ts` (new): the packet is built from injected adapters (identity, the CRM read, builder A's timeline, the vault and Clawd through retrieval.ts, verified public facts, commitments) and each question is answered by its authority: deal existence by the CRM only (a stale vault or Clawd no-deal line stays a seller note), sent and received by the provider, buyer words by buyer sources only (a seller note quoting the buyer is interpretation), public facts with their dates; two buyer sources that keep and drop one system are shown in conflict, both visible.
 - **Change boundary:** Use CRM for deal existence, provider mail for sent/received, buyer source for buyer words, seller notes for interpretation, public citations for external facts. No universal newest-wins rule.
 - **Acceptance:** Kenco stale vault no-deal claim cannot override associated open deal; seller assertion cannot become a buyer quote; two conflicting buyer sources display conflict.
 - **Depends on:** C13,C14,C16.
@@ -2888,7 +2888,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C18 [P1] Separate seller knowledge from externally usable evidence
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Builder B (`feat/gap-stream-b`), merged by the lead. Commit d2889e6b: every chunk is bucketed by the trust vocabulary (a deck-scanner line internal only, a modeled figure modeled and internal, the standup read available to planning); an instruction inside a note or an email is quoted data that changes nothing returned or called; `externallyUsable` (C13) is the gate for buyer use.
 - **Change boundary:** Apply existing trust vocabulary/compiler controls to retrieved chunks: internal-only, buyer-attributed, approved external fact, modeled, inference. Keep useful private context available to internal planning.
 - **Acceptance:** Deck scanner activity cannot be quoted as buyer intent; modeled $98.9M remains modeled/internal unless approved; private standup guides strategy without leaking. Malicious email/vault instructions to send, change flags or reveal secrets remain quoted source data and trigger no tool action.
 - **Depends on:** C17.
@@ -2906,7 +2906,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C20 [P1] Expose retrieval coverage and source freshness
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Builder B (`feat/gap-stream-b`), merged by the lead. Commit d2889e6b: one coverage row per source (configured, reachable, completeness, watermark, indexedAt, the query, what was omitted and why); a vault offline, a Clawd timeout and an unread Sent are reported as such, never as an empty history; `coverageLine` (C13) says it in words. C46 reads these rows into health (lead).
 - **Change boundary:** Packet includes configured, reachable, complete/partial, source watermark, indexedAt, query and omitted source reason; distinguish empty from unavailable.
 - **Acceptance:** Vault offline, Clawd timeout and partial CRM associations produce useful internal packet plus honest gaps; no fabricated empty history.
 - **Depends on:** C13,C14,C16.
@@ -2979,7 +2979,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C27 [P1] Deduplicate obligations by durable origin
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Builder C (`feat/gap-stream-c`), merged by the lead. Commit 3008563b (`stream-c-c27-c28-obligations.test.ts` 9): `work/list.ts`, `work/plan.ts`: an obligation is one per durable origin (account, deal, person by address, persona or name, kind, source kind and id); a reminder about a person folds into the follow-up waiting on them by relationship or by the commitment it derives from, never by title, in every phase (a follow-up plus its derived reminder renders once; two promises to one person stay two); the plan keeps one item per durable object (commitment, meeting, reply) as well as per key.
 - **Change boundary:** work/list.ts, commitments and plan projection: use shared originating message/disposition/commitment ID and relationship scope, not titles alone; retain distinct obligations.
 - **Acceptance:** Diego follow-up plus derived reminder renders once; two different promises to same person remain two. Repeat with missing email and alternate title.
 - **Depends on:** none.
@@ -2988,7 +2988,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C28 [P1] Describe return dates accurately
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Builder C (`feat/gap-stream-c`), merged by the lead. Commit 3008563b: return dates say due today, overdue since <day>, returned on <day>; overdue since then, scheduled for <day> (a May 26 or June 16 reminder read on October 8 never says back today); date-only values are New York days at the due hour, never UTC midnight.
 - **Change boundary:** Follow-up presentation distinguishes due today, overdue since, returned on and scheduled for; date-only values do not shift through UTC conversion.
 - **Acceptance:** May26/Jun16 on Oct8 never says back today; DST and New York midnight cases remain correct.
 - **Depends on:** none.
@@ -3051,7 +3051,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C35 [P1] Keep unresolved obligations durable until resolved
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Builder A (`feat/gap-stream-a`), merged by the lead. Commit fca6151e (`stream-a-answers-owed.test.ts` 3; r63a-answer-owed, r60-recorded-replies and load-day still green): `loadAnswersOwed` in `work/recorded-replies.ts` queries confirmed dispositions by status, a page at a time until the ledger is exhausted, with no 14-day window and no 100-row take (ANSWER_OWED_DAYS removed); resolution is explicit: the answer sent (REPLY_SENT) or the seller's `execution.reply_resolved` row with the reason; a copy is still not an answer; the 15-day-old reply and the 101st reply stay owed.
 - **Change boundary:** work/recorded-replies.ts and task projection: query unresolved status independently of age windows; pagination cannot delete owed work.
 - **Acceptance:** Unanswered confirmed reply aged15d and the 101st reply stay owed; old task remains visible until terminal. Resolution is explicit.
 - **Depends on:** C10.
@@ -3065,7 +3065,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C36 [P1] Separate draft preparation from first-touch completion
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Builder C (`feat/gap-stream-c`), merged by the lead. Commit b0370d1d (`stream-c-activity-truth.test.ts` 10): `work/activity.ts`, `activity-view.tsx`: a draft or an approval PREPARES an outreach item (kind prepares, status prepared, "awaiting your send") and never completes it; a provider send or an explicit seller-reported send completes it with its basis.
 - **Change boundary:** work/activity.ts/accountability: drafted or copy-approved may complete a preparation item, never an outreach item.
 - **Acceptance:** Draft-only first_touch remains awaiting send; provider send or explicit seller-reported send completes correct action with its basis.
 - **Depends on:** none.
@@ -3074,7 +3074,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C37 [P1] Separate meeting outcome from meeting booked
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Builder C (`feat/gap-stream-c`), merged by the lead. Commit b0370d1d: meeting accepted, meeting booked (a calendar proof row) and meeting outcome captured are three kinds; no outcome increments booked.
 - **Change boundary:** work/activity.ts event mapping and scorecard consumers; preserve capture.meeting outcome enum.
 - **Acceptance:** disqualified_problem/no_decision/more_discovery do not increment booked; meeting accepted, booked and outcome captured remain distinguishable.
 - **Depends on:** none.
@@ -3083,7 +3083,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C38a [P1] Label CRM maintenance as CRM updated
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Builder C (`feat/gap-stream-c`), merged by the lead. Commit b0370d1d: a HubSpot note, task, task completion or next step is `crm_updated`, never `deal_advanced`; every kind carries a class (preparation, contact, commercial, maintenance, other) and the view groups the counts by it (17 kinds).
 - **Change boundary:** work/activity.ts taxonomy and scorecard: note/task/next-step write is CRM updated.
 - **Acceptance:** Successful note/task write never increments deal advanced.
 - **Depends on:** none.
@@ -3092,7 +3092,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C38b [P2] Treat recovered CRM writes as successful reconciliation
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Builder C (`feat/gap-stream-c`), merged by the lead. Commit b0370d1d: a recovered CRM write is an update; off, conflict and failed map apart in words.
 - **Change boundary:** work/activity.ts maps recovered/off/conflict/failed separately.
 - **Acceptance:** Recovered write creates no failure count; failed remains failed.
 - **Depends on:** none.
@@ -3101,7 +3101,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C38c [P1] Require evidence for commercial advancement
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Builder C (`feat/gap-stream-c`), merged by the lead. Commit b0370d1d: `deal_advanced` needs an explicit `deal.stage_changed` row or a defined milestone done on one deal id, with basis and deal id; otherwise `obligation_done`.
 - **Change boundary:** work/activity.ts milestone projection uses explicit stage transition or defined confirmed commercial milestone, scoped to a deal.
 - **Acceptance:** No generic CRM update is advancement; validated milestone is one event with basis and deal ID.
 - **Depends on:** none.
@@ -3115,7 +3115,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C39 [P1] Bind initial APPROVE to the assigned revision
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Builder C (`feat/gap-stream-c`), merged by the lead. Commit d6871281 (`stream-c-c39-approve-binding.test.ts` 10; `approve-request.test.ts` 4 updated to seed the assignment row; the audit's revision-0 probe converted into a regression): `agents/approve-request.ts`, `execution/seller-draft.ts`: every APPROVE loads the assignment row of THAT revision and takes its immutable snapshot (copy hash, recipient, subject, body, sender), refuses a hash the reply does not carry, a missing row or a snapshot that does not hash to itself, preflights the current copy (pack hash, persona address, GAP sender) before any provider side effect, passes the snapshot into `createSellerGmailDraft` which rechecks it immediately before the Gmail adapter (copy, recipient and sender drift refuse and are ledgered; an existing draft counts only when it is of the snapshot; the race between preflight and creation is closed there), and validates the returned draft hash (a draft of other copy is reported as `draft_mismatch` naming the id, never as the approval). The send stays CONFIRM + SEND in the app.
 - **Change boundary:** agents/approve-request.ts: validate revision0 exact content/sender/recipient before calling draft adapter, as well as revised content; validate returned draft hash. Pass the expected revision/hash into the draft service and recheck the pinned content immediately before the provider adapter; a post-creation comparison alone is insufficient.
 - **Acceptance:** Assigned A/current B revision0 refuses and draft spy stays zero; unchanged A creates one draft. Recipient-only and sender-only changes refuse. Change source between preflight and creation: refuse before provider side effect or use the exact immutable approved snapshot.
 - **Depends on:** none.
@@ -3210,7 +3210,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C49 [P1] Make activity-read coverage honest
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Builder C (`feat/gap-stream-c`), merged by the lead. Commit 87151412 (`stream-c-c49-activity-coverage.test.ts` 5, `activity-view.test.tsx` 3): `loadActivity` pages the window by a (created_at, id) cursor (1,000 a page, 20 pages) and answers complete, partial (the cap stopped it; the newest rows were read and the counts are a floor, said in words) or unavailable (the ledger threw or no client: the error in words, never a zero-activity day); the same provider evidence recorded twice (a Gmail id, a HubSpot record id, a calendar event, a stage move) counts once while distinct ids and self-reported rows never collapse; the accountability view carries the coverage and its empty state says unknown, not zero.
 - **Change boundary:** work/activity.ts loadActivity returns complete/partial/unavailable; paginate beyond1,000 and handle duplicate provider evidence.
 - **Acceptance:** 1,001 rows show complete counts after paging or explicit partial; thrown read yields unavailable, not a zero-activity day.
 - **Depends on:** C36,C37,C38a,C38b,C38c.
@@ -3242,7 +3242,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C52 [P1] Assemble the reference evaluation set
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Commit (lead; `tests/unit/gap/lead-c52-reference-set.test.ts` 4): `tests/unit/gap/fixtures/reference-set.ts`, frozen by `reference-set.lock` (`1:149869c91330de44`; a deliberate change bumps REFERENCE_SET_VERSION and the lock together with the reason here): twelve de-identified cases grounded in the audit's shapes (the Kenco positive with the deal, the roadmap thread, the Oct 1 send, the accepted meeting, the July vault note and the August Clawd wedge each with its own date apart from the October 8 rebuild; an ambiguous subsidiary domain; three reports of one event; a 2018 fact; a 2013 fact superseded in 2025; a customer support ask; a vendor pitch; a suspicious notice carrying an instruction; an opt-out; an old unanswered buyer reply; two open deals; a model outage), each with source ids, expected identity, opportunity, purposes, relationship and motion, the phrases an output must say, the claims it must never make with the reason, the sources it must retrieve (C53 recall), the quoted instructions it must never execute, and the missing-source variant with its expected words. Every source is a typed claim the C13 contract accepts, the external-use rule holds over the set, and the pure classifiers (purpose, re-engage eligibility) agree with every case on the first run. Not an approved fact about any real buyer: every claim carries its class.
 - **Change boundary:** Create de-identified fixtures grounded in sources: Kenco positive, ambiguous subsidiary, Pepsi repeats, Hormel2018, GeneralMills2013, Lazer support, Riserify vendor, suspicious invite, opt-out, old unanswered reply, two deals, model outage.
 - **Acceptance:** Each fixture has source IDs, expected identity/motion, prohibited claims and missing-source cases; frozen before prompt changes.
 - **Depends on:** C13.
@@ -3357,7 +3357,7 @@ Casey's execution clarifications (2026-10-08/09, verbatim in spirit): build the 
 
 Team: the lead on `feat/gap-execution-engine` (worktree `wt-gap-account-first-ux`: dependency management, the C13 contract, integration, this ledger; implements V1, C13, C29, C30, C34, C45, C50, C46 after C20 and C45, and V9/V10 at the end). Builder A on `feat/gap-stream-a` (`wt-gap-stream-a`: C07, C08, C09, C10, C11, C12, C35, C47; owns `context/thread-context.ts`, `context/purpose.ts`, `context/obligations.ts`). Builder B on `feat/gap-stream-b` (`wt-gap-stream-b`: C14-C23, C25, C26, C24 after C39; owns `context/retrieval.ts`, `context/claims.ts`, `agents/develop-angle.ts`, `agents/prompt-context.ts`). Builder C on `feat/gap-stream-c` (`wt-gap-stream-c`: C39, C36-C38c, C49, C27, C28, C31-C33, C40-C44, C51; owns `agents/approve-request.ts`, `execution/seller-draft.ts`, `work/activity*.ts`, `work/briefing.ts`, `work/obligations*.ts`). Each builder commits on its branch with focused tests, never pushes; the lead merges each slice into the lead branch and runs the slice's focused tests only. `node_modules` is a junction into the lead's worktree; one test or build runs at a time across the four worktrees.
 
-Lead receipts so far (each ticket's Status line above carries the commit and the tests): V1 C01-C06 b21b8230; C13 45a335bb; C29/C30/C34 69909205; C50 f9b149f9; C45 92a7b984; X22 65ceae9d (in production at a195467f). Builder receipts land in their Status lines as each slice is merged.
+Receipts so far (each ticket's Status line above carries the commit and the tests): lead V1 C01-C06 b21b8230; C13 45a335bb; C29/C30/C34 69909205; C50 f9b149f9; C45 92a7b984; C09/C10/C11 wiring c06d5c1a; C52 (the frozen reference set); X22 65ceae9d (in production at a195467f). Builder A merged: C07/C08 38377c26, C09/C11 d112df10, C12 793c9666, C10 e85e4bc3, C35 fca6151e. Builder B merged: C14/C15/C16 a7a7d340, C17/C18/C20 d2889e6b. Builder C merged: C39 d6871281, C36-C38c b0370d1d, C49 87151412, C27/C28 3008563b. Focused tests on the merged tree: 60 across the first merge, 28 across the second, all green; `tsc --noEmit` clean on the GAP surfaces but for a typing gap in builder A's thread-context test fixture (reported to A). Still open: A C47; B C19, C21, C22, C23, C24, C25, C26; C C31, C32, C33, C40, C41, C42, C43, C44, C51; lead C46, C53-C60.
 
 Traps met and closed this session: the ledger fixture ignored `skip`, so a paged read looped until the heap died (the fixture honors `skip` now; the reader bounds the loop); the intel fixture's shared placeholder title clustered every signal into one under C30 (distinct titles per fixture signal); a bash heredoc with quotes and backticks fails on this box (patches are written as files and run with `python -I`).
 
