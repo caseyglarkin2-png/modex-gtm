@@ -170,12 +170,12 @@ export async function applyDecision(prisma: PrismaLike, input: DecideInput, deps
   }
 
   // person (C02, C05, C06): the authoritative sources are reloaded here, never trusted from the link.
-  const persona = typeof prisma.persona?.findFirst === 'function' ? await prisma.persona.findFirst({ where: { email: { equals: parsed.email, mode: 'insensitive' } }, select: { id: true, name: true, title: true, account_name: true } }).catch(() => null) : null;
+  const persona = typeof prisma.persona?.findFirst === 'function' ? await prisma.persona.findFirst({ where: { email: { equals: parsed.email, mode: 'insensitive' } }, select: { id: true, name: true, title: true, account_name: true, hubspot_contact_id: true } }).catch(() => null) : null;
   // C57 F6 (C02/C05): the thread is a relation; without the include the thread-alias placement never ran in production.
   const last = typeof prisma.inboundMessage?.findFirst === 'function' ? await prisma.inboundMessage.findFirst({ where: { from_email: { equals: parsed.email, mode: 'insensitive' } }, orderBy: { received_at: 'desc' }, include: { thread: { select: { account_name: true } } } }).catch(() => null) : null;
   const messages: number = typeof prisma.inboundMessage?.count === 'function' ? await prisma.inboundMessage.count({ where: { from_email: { equals: parsed.email, mode: 'insensitive' } } }).catch(() => 0) : 0;
   // The CRM read is the caller's to supply (the route passes the real one); the library never reaches HubSpot on its own.
-  const contact = persona?.account_name || !deps.contactLookup ? null : await deps.contactLookup(parsed.email).catch(() => null);
+  let contact = persona?.account_name || !deps.contactLookup ? null : await deps.contactLookup(parsed.email).catch(() => null);
   const identity = deps.identity !== undefined ? deps.identity : typeof prisma.canonicalCompany?.findMany === 'function' && typeof prisma.gapAccountAlias?.findMany === 'function' ? await loadIdentityContext(prisma).catch(() => null) : null;
   const placed = resolvePersonAccount({ email: parsed.email, persona, threadAccount: last?.thread?.account_name ?? null, identity, hubspotCompanyIds: contact?.companyIds ?? [] });
   accountName = placed.accountName;
@@ -184,7 +184,17 @@ export async function applyDecision(prisma: PrismaLike, input: DecideInput, deps
     const summary = await (deps.inDeals ?? ((p: PrismaLike, n: Date) => loadInDealsSummary(p, { now: n })))(prisma, input.now).catch(() => null);
     const coverage = dealCoverageFrom(summary);
     const lookup: DealLookup = accountName ? dealsAt(coverage, accountName) : contact?.contactId ? dealsByContactId(coverage, contact.contactId) : { inDeal: null };
-    const deals = lookup.inDeal === true ? lookup.account.deals.filter((d) => !contact?.dealIds?.length || !d.id || contact.dealIds.includes(d.id)).map((d) => ({ id: d.id, name: d.name, stage: d.stage, nextStep: d.nextStep, closeDate: d.closeDate })) : [];
+    // C57 pass 2, finding 2 (C06): a persona-placed person skipped the contact lookup, so every open deal at the account rode the task and
+    // both next steps reached the model. The scope is settled by the CRM's own association: the persona's contact id against each deal's
+    // contact ids first (no network), then the contact lookup when more than one deal remains and a reader was supplied.
+    let candidates = lookup.inDeal === true ? lookup.account.deals : [];
+    const contactIdHint = (persona as { hubspot_contact_id?: string | null } | null)?.hubspot_contact_id ?? contact?.contactId ?? null;
+    if (candidates.length > 1 && contactIdHint) {
+      const mine = candidates.filter((d) => d.contactIds.map(String).includes(String(contactIdHint)));
+      if (mine.length) candidates = mine;
+    }
+    if (candidates.length > 1 && !contact && deps.contactLookup) contact = await deps.contactLookup(parsed.email).catch(() => null);
+    const deals = candidates.filter((d) => !contact?.dealIds?.length || !d.id || contact.dealIds.includes(d.id)).map((d) => ({ id: d.id, name: d.name, stage: d.stage, nextStep: d.nextStep, closeDate: d.closeDate }));
     const excerpt = (typeof last?.body_text === 'string' && last.body_text.trim() ? last.body_text : typeof last?.snippet === 'string' ? last.snippet : '').replace(/\s+/g, ' ').trim().slice(0, 600) || null;
     queued = await angle(prisma, { key, decision: input.decision, note: input.note ?? null, actor: input.actor, now: input.now, via, input: {
       email: parsed.email, personaId: persona?.id ?? null, name: persona?.name ?? contact?.name ?? last?.from_name ?? null, title: persona?.title ?? contact?.title ?? null,
