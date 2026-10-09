@@ -74,8 +74,12 @@ describe('C46: the commercial-context component', () => {
     expect(c.detail).toContain('vault: not configured (no vault configured)');
     expect(c.detail).not.toContain('complete and fresh');
     const none = ctx(base());
-    expect(none).toMatchObject({ state: 'HEALTHY', label: 'Commercial context not read' });
+    expect(none).toMatchObject({ state: 'DEGRADED', label: 'Commercial context not read (the probe failed)' });
     expect(none.detail).toContain('nothing here says they are complete');
+    // C57 F14: a reachable source with no dated knowledge is partial, never complete and fresh.
+    const undated = fresh();
+    undated.vault = { ...undated.vault, watermark: null };
+    expect(ctx({ ...base(), context: undated }).label).toBe('Commercial context partial · vault');
   });
 });
 

@@ -200,7 +200,8 @@ export async function sendAssignment(prisma: PrismaLike, input: SendAssignmentIn
       subject_type: ITEM_SUBJECT_TYPE,
       subject_id: input.item.key,
       // A fresh Gmail message's thread id is its own id; a provider that answers none (the harness sink) is read the same way.
-      payload: { day: input.plan.day, itemToken: input.item.token, revision: input.revision, to: input.to, gmailMessageId: res.id, gmailThreadId: res.threadId ?? res.id, contentHash: built.contentHash, subject: built.subject, prepared: built.prepared, resend: !!input.resend },
+      // C39 / F15: the mailbox this assignment went from is the sender an APPROVE on it is bound to (approve-request.ts).
+      payload: { day: input.plan.day, itemToken: input.item.token, revision: input.revision, to: input.to, senderIdentity: input.sender.userEmail, gmailMessageId: res.id, gmailThreadId: res.threadId ?? res.id, contentHash: built.contentHash, subject: built.subject, prepared: built.prepared, resend: !!input.resend },
     },
   });
   return { sent: true, gmailMessageId: res.id, gmailThreadId: res.threadId ?? res.id, contentHash: built.contentHash, subject: built.subject };

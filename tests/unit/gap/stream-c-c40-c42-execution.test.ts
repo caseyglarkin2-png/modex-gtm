@@ -103,6 +103,9 @@ describe('C41: a timeout after Gmail accepted the send, then the eventual readba
     const sent = d.audit.filter((a) => a.kind === DIRECT_SENT);
     expect(sent).toHaveLength(1);
     expect(sent[0].payload).toMatchObject({ status: 'sent', recipient: JOEY, senderIdentity: 'casey@yardflow.ai', gmailSentMessageId: 'gm-accepted-1', gmailThreadId: 'thr-accepted-1', subject: 'Doors versus spots', stepIndex: 0, reconciledFromSent: true });
+    // C41 (the residual closed): the body hash, the sender and the reviewed subject the seller confirmed survive the readback.
+    expect(sent[0].payload).toMatchObject({ contentHash: pv.contentHash, attributedFromPreview: true, reviewedSubject: 'Doors versus spots' });
+    expect(typeof pv.contentHash).toBe('string');
     expect('delivered' in sent[0].payload).toBe(false);
     expect(sent[0].payload.status).not.toBe('delivered');
     // The activity projection reads it as a message sent (provider-proven), never as delivered.

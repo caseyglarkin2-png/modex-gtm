@@ -22,7 +22,12 @@ import { HEDGE_TOKENS } from '../taxonomy';
 import { SINGULAR_YARD_RE } from '../compiler/checks/c11-banned';
 import { listAgentTasks, type ClaimedTask, type HandlerResult } from './tasks';
 import { HISTORICAL_DAYS, isDateOnly } from '../work/intel';
-import { assembleCommercialContext, type AssembleAdapters } from '../context/assemble';
+import { assembleCommercialContext, type AssembleAdapters, type IdentityQuery } from '../context/assemble';
+import { loadThreadContext, type ThreadContextDeps } from '../context/thread-context';
+import { gapGmailSender } from '../execution/gap-sender';
+import { loadIdentityContext } from '../identity/service';
+import { resolvePersonAccount } from '../work/person-identity';
+import type { ContextIdentity } from '../context/commercial-context';
 import type { CommercialContextPacket } from '../context/commercial-context';
 import { knowledgeAdapters } from '../story/load';
 import { GATE_SIGNAL_SELECT, type GateSignal } from '../research/evidence-gate';
@@ -37,6 +42,8 @@ export interface DevelopAngleDeps {
   context?: AssembleAdapters;
   /** A packet already assembled (tests; a caller that holds one). */
   packet?: CommercialContextPacket;
+  /** C57 F9: the typed timeline's mailbox wiring for the default timeline adapter (the GAP sender's Sent reader by default; tests inject one). */
+  thread?: ThreadContextDeps;
 }
 
 const MAX_TOKENS = 700;
@@ -197,6 +204,34 @@ export function buildAnglePrompt(input: { title: string; sourceLine: string; acc
 
 const ANGLE_KEY = /^(signal|trigger|person):(.+)$/;
 
+/**
+ * C57 F9 (C07/C21): the default timeline adapter, so the angle reads the whole conversation and not only the one message the
+ * Pursue carried: the stored inbound rows plus the GAP mailbox's Sent to the person (read-only, the same listSentTo wiring the
+ * draft and reply services use; skipped when no GAP sender is configured) and its drafts when a reader is given.
+ */
+function defaultTimeline(prisma: PrismaLike, thread: ThreadContextDeps | undefined, env: Record<string, string | undefined> = process.env): NonNullable<AssembleAdapters['timeline']> {
+  return async ({ identity, threadId, now }) => {
+    const sender = gapGmailSender(env);
+    const listSent = thread?.listSent ?? (sender ? async (recipient: string, after: number, before: number) => (await import('@/lib/email/gmail-inbox')).listSentTo(sender, recipient, after, before) : undefined);
+    const ownAddresses = thread?.ownAddresses ?? (sender ? new Set([sender.userEmail.toLowerCase()]) : undefined);
+    const r = await loadThreadContext(prisma, { email: identity.people[0]?.email ?? null, threadId, accountName: identity.accountName, now }, { ...thread, listSent, ownAddresses });
+    return { events: r.events, coverage: r.coverage.filter((c): c is typeof c & { source: 'gmail' | 'hubspot_engagement' } => c.source === 'gmail' || c.source === 'hubspot_engagement') };
+  };
+}
+
+/** C57 F9: the default identity adapter fills a gap only: a person the Pursue could not place is tried against the identity service; a placed one stands. */
+function defaultIdentity(prisma: PrismaLike): NonNullable<AssembleAdapters['identity']> {
+  return async (q: IdentityQuery): Promise<ContextIdentity | null> => {
+    if (q.accountName || typeof prisma?.canonicalCompany?.findMany !== 'function' || typeof prisma?.gapAccountAlias?.findMany !== 'function') return null;
+    const email = q.people[0]?.email ?? null;
+    if (!email) return null;
+    const ctx = await loadIdentityContext(prisma).catch(() => null);
+    if (!ctx) return null;
+    const placed = resolvePersonAccount({ email, identity: ctx });
+    return { accountName: placed.accountName, via: placed.via, ambiguous: placed.ambiguous, hubspotCompanyIds: [], domains: placed.domain ? [placed.domain] : [], people: [...q.people] };
+  };
+}
+
 export async function developAngle(task: ClaimedTask, ctx: { prisma: PrismaLike; now: Date }, deps: DevelopAngleDeps = {}): Promise<HandlerResult> {
   const { prisma, now } = ctx;
   const m = ANGLE_KEY.exec(task.itemKey);
@@ -234,7 +269,7 @@ export async function developAngle(task: ClaimedTask, ctx: { prisma: PrismaLike;
   const emailDomain = person?.email.toLowerCase().split('@')[1] ?? null;
   const domain = emailDomain && !/^(gmail|yahoo|hotmail|outlook|icloud|aol|me|live|msn|protonmail)\.com$/.test(emailDomain) ? emailDomain : accountHint?.includes('.') ? accountHint.toLowerCase() : null;
   const publicFacts = deps.context?.publicFacts ?? (typeof prisma?.gapSignal?.findMany === 'function' ? async (q: { accountName: string }) => (await prisma.gapSignal.findMany({ where: { account_name: q.accountName }, select: GATE_SIGNAL_SELECT, orderBy: { observed_at: 'desc' }, take: 20 }).catch(() => [])) as GateSignal[] : undefined);
-  const packet = deps.packet ?? (await assembleCommercialContext({ ...(deps.context ?? {}), knowledge: deps.context?.knowledge ?? knowledgeAdapters(), publicFacts }, { accountName, domain, people: seed.identity.people, threadId: str(input.threadId), now, seed })).packet;
+  const packet = deps.packet ?? (await assembleCommercialContext({ ...(deps.context ?? {}), knowledge: deps.context?.knowledge ?? knowledgeAdapters(), publicFacts, timeline: deps.context?.timeline ?? defaultTimeline(prisma, deps.thread), identity: deps.context?.identity ?? defaultIdentity(prisma) }, { accountName, domain, people: seed.identity.people, threadId: str(input.threadId), now, seed })).packet;
   const record = packetRecord(packet);
   const prompt = buildAnglePrompt({ title, sourceLine, accountName, accountHint, categories, note: str(input.note), person, roster, theses, recent, candidateAccounts, decision: str(input.decision) ?? task.request, deals: deals.map((d) => ({ id: d.id ?? null, name: d.name ?? null, stage: d.stage ?? '', nextStep: d.nextStep ?? null })), record: record.text });
   const generate = deps.generate ?? ((p: string, m?: number) => gapGenerate(ctx.prisma, { prompt: p, maxTokens: m ?? MAX_TOKENS, tier: task.input && (task.input as Record<string, unknown>).decision === 'more' ? 'strong' : 'routine', task: { id: task.id, kind: task.kind, itemKey: task.itemKey }, now: ctx.now }));
@@ -244,7 +279,9 @@ export async function developAngle(task: ClaimedTask, ctx: { prisma: PrismaLike;
   if (!angle) return { ok: false, reason: 'could_not_satisfy', detail: 'the model returned something that is not a usable angle' };
   let check = validateAngle(angle, rosterIds);
   // C22: the claims are checked once the voice passes (a style break is re-asked first); a claim break is re-asked the same way.
-  const claimsOf = (ang: Angle, styleOk: boolean): ClaimCheck => (styleOk ? validateAngleClaims(ang, ang.support ?? [], record.refs) : { ok: true, support: [] });
+  // C57 F11: the buyer subjects are the packet's people and the roster, never a hard-coded list.
+  const subjects = [...packet.identity.people.map((p) => ({ name: p.name, email: p.email })), ...roster.map((p) => ({ name: p.name })), ...(person ? [{ name: person.name, email: person.email }] : [])];
+  const claimsOf = (ang: Angle, styleOk: boolean): ClaimCheck => (styleOk ? validateAngleClaims(ang, ang.support ?? [], record.refs, { people: subjects }) : { ok: true, support: [] });
   let claims = claimsOf(angle, check.ok);
   let calls = 1;
   // A03/A03c: a fixable voice-rule break is re-asked, naming the break and quoting the place, at most twice (three

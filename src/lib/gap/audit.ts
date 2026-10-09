@@ -22,6 +22,9 @@
 import { postReviewLog, type ReviewLogEntry } from './review-feed';
 
 export type GapAuditKind =
+  | 'conversation.classified'
+  | 'execution.reply_resolved'
+  | 'inbound.provenance_linked'
   | 'hypothesis.submitted'
   | 'hypothesis.review_rejected'
   | 'hypothesis.approved'

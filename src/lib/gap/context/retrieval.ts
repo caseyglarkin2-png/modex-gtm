@@ -19,6 +19,13 @@
  * refuses the other thing. Coverage (C20) says for each source whether it was configured, reachable, complete or
  * partial (a bound hit, a linked note unreadable, the snapshot's 10-note cap), its watermark, its index time, the
  * query and what was omitted and why. Nothing here is an instruction: text from a note is data, whatever it says.
+ *
+ * C48: the index lifecycle, pure over an optional in-memory cache the caller injects (createKnowledgeCache; no file
+ * writes, no table). Every vault file is content-hashed; a file whose hash is unchanged reuses its chunks without a
+ * re-parse, a changed file refreshes only its own chunks (a chunk's identity is the source id plus its text hash);
+ * a chunk that vanished from a re-read file, a file that now reads as absent and a Clawd note missing from a newer
+ * snapshot are TOMBSTONED (kept in the cache's history with the reason, never served again); a source that cannot
+ * be read is served from the cache's last successful sync, said STALE with that sync time on its coverage row.
  */
 import { createHash } from 'node:crypto';
 import { validateClaims, type Authority, type ClaimClass, type ContextClaim, type ContextVisibility, type SourceCoverage } from './commercial-context';
@@ -63,6 +70,8 @@ export interface KnowledgeInput {
   sellerNames?: readonly string[];
   /** Follow the account note's wiki-links (default true); the story's one-paragraph read passes false. */
   followLinks?: boolean;
+  /** C48: the caller's in-memory index (createKnowledgeCache); without it every read is a full read with no history. */
+  cache?: KnowledgeCache | null;
 }
 
 export interface AccountKnowledge {
@@ -71,7 +80,73 @@ export interface AccountKnowledge {
   /** The vault files read beyond the account note. */
   followed: string[];
   notFollowed: Array<{ link: string; reason: 'not_found' | 'other_account' | 'bound' | 'unreadable' }>;
+  /** C48: per source, what this read refreshed, reused and tombstoned, its last successful sync and whether it is stale. */
+  sync: SyncReport[];
+  /** C48: the history retained: every chunk tombstoned so far for this account (never served, never silently gone). */
+  tombstones: Tombstone[];
 }
+
+/** ---------- C48: the index lifecycle ---------- */
+
+/** A read served from the cache, or a sync older than this, is STALE and says so. */
+export const STALE_AFTER_MS = 24 * 3_600_000;
+
+export interface Tombstone {
+  claim: ContextClaim;
+  at: string;
+  /** deleted: the file or note is gone; superseded: the same source id now carries different text. */
+  reason: 'deleted' | 'superseded';
+}
+
+export interface VaultIndex {
+  /** Per vault path: the content hash, the chunk ids it produced, the links and index time an account note carried. */
+  files: Map<string, { hash: string; claimIds: string[]; readAt: string; links?: string[]; indexedAt?: string | null }>;
+  claims: Map<string, ContextClaim>;
+  tombstones: Map<string, Tombstone>;
+  lastSyncAt: string | null;
+}
+
+export interface ClawdIndex {
+  rebuiltAt: string | null;
+  claims: Map<string, ContextClaim>;
+  tombstones: Map<string, Tombstone>;
+  lastSyncAt: string | null;
+}
+
+export interface KnowledgeCache {
+  vault: Map<string, VaultIndex>;
+  clawd: Map<string, ClawdIndex>;
+}
+
+export function createKnowledgeCache(): KnowledgeCache {
+  return { vault: new Map(), clawd: new Map() };
+}
+
+export interface SyncReport {
+  source: 'vault' | 'clawd';
+  lastSyncAt: string | null;
+  stale: boolean;
+  /** True when the source could not be read and the cache's last successful sync was served instead. */
+  servedFromCache: boolean;
+  /** Vault paths re-parsed this read (their hash changed or they were new); Clawd: ['snapshot'] when the notes changed. */
+  refreshed: string[];
+  /** Vault paths whose hash was unchanged: chunks reused without a re-parse. */
+  reused: string[];
+  /** Chunk ids tombstoned by this read. */
+  tombstoned: string[];
+}
+
+/** The seller words for a source's sync (C48): when it last synced, what moved, and STALE when it is. */
+export function syncLine(s: SyncReport): string {
+  const when = s.lastSyncAt ? `last successful sync ${s.lastSyncAt.slice(0, 16).replace('T', ' ')}` : 'never synced';
+  const head = s.stale ? `${s.source}: STALE (${s.servedFromCache ? 'served from the cache; ' : ''}${when})` : `${s.source}: synced (${when})`;
+  const moved = [s.refreshed.length ? `${s.refreshed.length} refreshed` : '', s.reused.length ? `${s.reused.length} reused` : '', s.tombstoned.length ? `${s.tombstoned.length} tombstoned` : ''].filter(Boolean).join(', ');
+  return moved ? `${head}; ${moved}` : head;
+}
+
+const stalenessOf = (lastSyncAt: string | null, now: Date, servedFromCache: boolean): boolean => servedFromCache || !lastSyncAt || now.getTime() - new Date(lastSyncAt).getTime() > STALE_AFTER_MS;
+const staleWord = (lastSyncAt: string | null, servedFromCache: boolean): string => `stale: ${servedFromCache ? 'served from the cache, ' : ''}last successful sync ${lastSyncAt ?? 'never'}`;
+const vaultIndexKey = (input: KnowledgeInput): string => input.accountName.trim().toLowerCase();
 
 const DEFAULT_SELLERS = ['Casey Larkin', 'Jake Koppinger', 'Casey', 'Jake'];
 const PRIVATE_RE = /\b(wife|husband|spouse|medical|pre-op|surgery|procedure|hospital|illness|sick|PTO|vacation|holiday|lives in|family|kids|child|children|pregnan|divorce|funeral|health)\b/i;
@@ -235,13 +310,17 @@ function accountNoteClaims(ctx: VaultCtx, path: string, text: string): { links: 
     const dated = /inbox notes|next action|history|timeline|touches|notes/i.test(s.heading);
     const pick = items.length ? items : paragraphs(s.text).slice(0, 2);
     if (items.length > MAX_CLAIMS_PER_SECTION) ctx.truncated.push(`${s.heading}: ${items.length - MAX_CLAIMS_PER_SECTION} more bullets not read`);
+    // C57 F4 (C15 at the vault path): a section that is a SYNC block ("Live signals (clawd, 2026-10-08)", "Ecosystem engagement
+    // (PostHog, 45d to 2026-08-31)") carries a stamp in its heading: that date is when the block was written, the index time, never
+    // what its bullets observed (a July wedge under an October stamp stays July or undated). Only a bullet's own leading date is its observation.
+    const syncSection = /live signals|ecosystem engagement|clawd|posthog|sync|refreshed|rebuilt/i.test(s.heading);
+    const headDate = isoDay(s.heading);
+    const sectionIndexedAt = syncSection && headDate ? dayIso(headDate) : indexedAt;
     for (const item of pick.slice(0, MAX_CLAIMS_PER_SECTION)) {
-      // The section's date when the section heading carries one ("Live signals (clawd, 2026-10-08)"); the bullet's own leading date otherwise.
-      const own = dated ? isoDay(item.slice(0, 24)) : null;
-      const headDate = isoDay(s.heading);
-      const observedAt = dayIso(own) ?? dayIso(headDate);
+      const own = dated || syncSection ? isoDay(item.slice(0, 24)) : null;
+      const observedAt = dayIso(own) ?? (syncSection ? null : dayIso(headDate));
       const clean = item.replace(/\s*Source:\s*(\[\[[^\]]+\]\],?\s*)+\.?$/i, '').replace(/\[\[([^\]|#]+)(?:[#|][^\]]*)?\]\]/g, '$1');
-      push(ctx, claimOf(ctx, { path, heading: s.heading, text: clean, eventAt: observedAt, observedAt, indexedAt, classified: classifyVaultText(clean, { section: s.heading, others: ctx.others }) }));
+      push(ctx, claimOf(ctx, { path, heading: s.heading, text: clean, eventAt: observedAt, observedAt, indexedAt: sectionIndexedAt, classified: classifyVaultText(clean, { section: s.heading, others: ctx.others }) }));
       if (dated || /committee|sources|provenance/i.test(s.heading)) for (const l of wikiLinks(item)) if (!links.includes(l)) links.push(l);
     }
   }
@@ -333,14 +412,71 @@ async function locate(vault: VaultAdapter, name: string): Promise<{ loc: Located
 
 const linkDate = (name: string) => isoDay(name) ?? '';
 
-async function retrieveVault(vault: VaultAdapter | null | undefined, input: KnowledgeInput): Promise<{ claims: ContextClaim[]; coverage: SourceCoverage; followed: string[]; notFollowed: AccountKnowledge['notFollowed'] }> {
+type VaultRead = { claims: ContextClaim[]; coverage: SourceCoverage; followed: string[]; notFollowed: AccountKnowledge['notFollowed']; sync: SyncReport; tombstones: Tombstone[] };
+
+const liveClaims = (index: VaultIndex | ClawdIndex): ContextClaim[] => [...index.claims.values()].filter((c) => !index.tombstones.has(c.claimId));
+
+async function retrieveVault(vault: VaultAdapter | null | undefined, input: KnowledgeInput): Promise<VaultRead> {
   const names = [input.accountName, ...(input.aliases ?? [])].map((n) => n.trim()).filter(Boolean);
   const others = (input.otherAccounts ?? []).filter((o) => !names.some((n) => n.toLowerCase() === o.toLowerCase()));
   const ctx: VaultCtx = { input, names, nameRe: new RegExp(`\\b(${names.map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})\\b`, 'i'), others, sellers: [...(input.sellerNames ?? DEFAULT_SELLERS)], claims: [], truncated: [] };
   const followed: string[] = [];
   const notFollowed: AccountKnowledge['notFollowed'] = [];
+  const nowIso = input.now.toISOString();
+  const cache = input.cache ?? null;
+  let index: VaultIndex | null = cache ? cache.vault.get(vaultIndexKey(input)) ?? null : null;
+  if (cache && !index) {
+    index = { files: new Map(), claims: new Map(), tombstones: new Map(), lastSyncAt: null };
+    cache.vault.set(vaultIndexKey(input), index);
+  }
+  const sync: SyncReport = { source: 'vault', lastSyncAt: index?.lastSyncAt ?? null, stale: false, servedFromCache: false, refreshed: [], reused: [], tombstoned: [] };
+  const history = () => (index ? [...index.tombstones.values()] : []);
   const cov = (over: Partial<SourceCoverage>): SourceCoverage => ({ source: 'vault', configured: !!vault, reachable: false, completeness: 'unknown', watermark: null, indexedAt: null, query: null, omittedReason: null, ...over });
-  if (!vault) return { claims: [], coverage: cov({ omittedReason: 'no vault configured' }), followed, notFollowed };
+  if (!vault) return { claims: [], coverage: cov({ omittedReason: 'no vault configured' }), followed, notFollowed, sync: { ...sync, stale: true }, tombstones: history() };
+
+  // C48: a chunk is tombstoned with the reason and kept in the history; it is never served again from the cache.
+  const tombstone = (id: string, reason: Tombstone['reason']) => {
+    if (!index) return;
+    const claim = index.claims.get(id);
+    if (!claim || index.tombstones.has(id)) return;
+    index.tombstones.set(id, { claim, at: nowIso, reason });
+    sync.tombstoned.push(id);
+  };
+  const tombstoneFile = (path: string) => {
+    const entry = index?.files.get(path);
+    if (!entry) return;
+    for (const id of entry.claimIds) tombstone(id, 'deleted');
+    index!.files.delete(path);
+  };
+  /** Ingest one file: an unchanged hash reuses its chunks; a changed one is parsed, its vanished chunks tombstoned. */
+  const ingest = (path: string, text: string, parse: () => { links?: string[]; indexedAt?: string | null } | void): { links: string[]; indexedAt: string | null } => {
+    const hash = hash8(text);
+    const entry = index?.files.get(path);
+    if (index && entry && entry.hash === hash) {
+      for (const id of entry.claimIds) {
+        const c = index.claims.get(id);
+        if (c && !index.tombstones.has(id)) push(ctx, c);
+      }
+      sync.reused.push(path);
+      return { links: entry.links ?? [], indexedAt: entry.indexedAt ?? null };
+    }
+    const before = ctx.claims.length;
+    const parsed = parse() ?? {};
+    const mine = ctx.claims.slice(before).filter((c) => c.claimId.startsWith(`vault:${path}#`));
+    const ids = mine.map((c) => c.claimId);
+    if (index) {
+      for (const oldId of entry?.claimIds ?? []) {
+        if (ids.includes(oldId)) continue;
+        const old = index.claims.get(oldId);
+        tombstone(oldId, old && mine.some((c) => c.sourceId === old.sourceId) ? 'superseded' : 'deleted');
+      }
+      for (const c of mine) index.claims.set(c.claimId, c);
+      index.files.set(path, { hash, claimIds: ids, readAt: nowIso, links: parsed.links, indexedAt: parsed.indexedAt ?? null });
+    }
+    sync.refreshed.push(path);
+    return { links: parsed.links ?? [], indexedAt: parsed.indexedAt ?? null };
+  };
+
   let accountPath: string | null = null;
   let text: string | null = null;
   try {
@@ -351,12 +487,19 @@ async function retrieveVault(vault: VaultAdapter | null | undefined, input: Know
         accountPath = p;
         break;
       }
+      if (index?.files.has(p)) tombstoneFile(p);
     }
   } catch (err) {
-    return { claims: [], coverage: cov({ query: `02_Accounts/${safeName(input.accountName)}.md`, omittedReason: `vault unreadable: ${err instanceof Error ? err.message : String(err)}` }), followed, notFollowed };
+    // Unreadable: the cache's last successful sync is served, said stale with its time; never a fabricated empty.
+    const cached = index ? liveClaims(index) : [];
+    const stale = { ...sync, stale: true, servedFromCache: cached.length > 0 };
+    return { claims: cached, coverage: cov({ query: `02_Accounts/${safeName(input.accountName)}.md`, indexedAt: index?.lastSyncAt ?? null, omittedReason: [`vault unreadable: ${err instanceof Error ? err.message : String(err)}`, index?.lastSyncAt || cached.length ? staleWord(index?.lastSyncAt ?? null, cached.length > 0) : ''].filter(Boolean).join('; ') }), followed, notFollowed, sync: stale, tombstones: history() };
   }
-  if (!accountPath || !text) return { claims: [], coverage: cov({ reachable: true, completeness: 'complete', query: `02_Accounts/${safeName(input.accountName)}.md`, omittedReason: 'no account note' }), followed, notFollowed };
-  const { links, indexedAt } = accountNoteClaims(ctx, accountPath, text);
+  if (!accountPath || !text) {
+    if (index) index.lastSyncAt = nowIso;
+    return { claims: [], coverage: cov({ reachable: true, completeness: 'complete', query: `02_Accounts/${safeName(input.accountName)}.md`, omittedReason: 'no account note' }), followed, notFollowed, sync: { ...sync, lastSyncAt: nowIso }, tombstones: history() };
+  }
+  const { links, indexedAt } = ingest(accountPath, text, () => accountNoteClaims(ctx, accountPath!, text!));
   if (input.followLinks !== false) {
     // Dated notes newest first, then people; the bound is a count of files, said in the coverage when hit.
     const ordered = [...links].sort((a, b) => linkDate(b).localeCompare(linkDate(a)));
@@ -374,18 +517,27 @@ async function retrieveVault(vault: VaultAdapter | null | undefined, input: Know
       }
       if (!hit) {
         notFollowed.push({ link: name, reason: 'not_found' });
+        // A note that was indexed and now reads as absent: its chunks are tombstoned, never served from the cache again.
+        if (index) for (const path of [...index.files.keys()]) if (path.endsWith(`/${safeName(name)}.md`)) tombstoneFile(path);
         continue;
       }
-      const r = hit.loc.kind === 'meeting' ? meetingNoteClaims(ctx, hit.loc.path, hit.text) : hit.loc.kind === 'person' ? personNoteClaims(ctx, hit.loc.path, hit.text) : hit.loc.kind === 'raw' ? (transcriptClaims(ctx, hit.loc.path, hit.text), 'ok') : 'ok';
-      if (r === 'other_account') notFollowed.push({ link: name, reason: 'other_account' });
-      else followed.push(hit.loc.path);
+      const { loc, text: body } = hit;
+      const res = { r: 'ok' as 'ok' | 'other_account' };
+      ingest(loc.path, body, () => {
+        res.r = loc.kind === 'meeting' ? meetingNoteClaims(ctx, loc.path, body) : loc.kind === 'person' ? personNoteClaims(ctx, loc.path, body) : loc.kind === 'raw' ? (transcriptClaims(ctx, loc.path, body), 'ok') : 'ok';
+      });
+      if (res.r === 'other_account') notFollowed.push({ link: name, reason: 'other_account' });
+      else followed.push(loc.path);
     }
   }
+  if (index) index.lastSyncAt = nowIso;
+  sync.lastSyncAt = nowIso;
   const partial = ctx.truncated.length > 0 || notFollowed.some((n) => n.reason === 'bound' || n.reason === 'unreadable');
-  // The newest OBSERVED date (a due date in next_action's eventAt is not a watermark).
-  const watermark = ctx.claims.map((c) => c.observedAt ?? '').filter(Boolean).sort().at(-1) ?? null;
+  // The newest OBSERVED date of a claim that is knowledge (a due date in next_action's eventAt is not a watermark; C57 F4: an
+  // internal-only or modeled line, such as a sync block's bullets, never makes the source look fresh).
+  const watermark = ctx.claims.filter((c) => c.claimClass !== 'internal_only' && c.claimClass !== 'modeled').map((c) => c.observedAt ?? '').filter(Boolean).sort().at(-1) ?? null;
   const omitted = [...ctx.truncated, ...notFollowed.filter((n) => n.reason !== 'other_account' && n.reason !== 'not_found').map((n) => `${n.link}: ${n.reason}`)];
-  return { claims: ctx.claims, coverage: cov({ reachable: true, completeness: partial ? 'partial' : 'complete', watermark, indexedAt, query: accountPath, omittedReason: omitted.length ? omitted.join('; ') : null }), followed, notFollowed };
+  return { claims: ctx.claims, coverage: cov({ reachable: true, completeness: partial ? 'partial' : 'complete', watermark, indexedAt, query: accountPath, omittedReason: omitted.length ? omitted.join('; ') : null }), followed, notFollowed, sync, tombstones: history() };
 }
 
 /** ---------- Clawd ---------- */
@@ -456,22 +608,58 @@ export function clawdClaims(snapshot: ClawdSnapshot, input: Pick<KnowledgeInput,
   return out;
 }
 
-async function retrieveClawd(clawd: ClawdAdapter | null | undefined, input: KnowledgeInput): Promise<{ claims: ContextClaim[]; coverage: SourceCoverage }> {
+type ClawdRead = { claims: ContextClaim[]; coverage: SourceCoverage; sync: SyncReport; tombstones: Tombstone[] };
+
+async function retrieveClawd(clawd: ClawdAdapter | null | undefined, input: KnowledgeInput): Promise<ClawdRead> {
   const cov = (over: Partial<SourceCoverage>): SourceCoverage => ({ source: 'clawd', configured: !!clawd, reachable: false, completeness: 'unknown', watermark: null, indexedAt: null, query: input.domain ?? null, omittedReason: null, ...over });
-  if (!clawd) return { claims: [], coverage: cov({ omittedReason: 'no clawd pair configured' }) };
-  if (!input.domain) return { claims: [], coverage: cov({ reachable: true, completeness: 'complete', omittedReason: 'no domain to ask' }) };
+  const nowIso = input.now.toISOString();
+  const cache = input.cache ?? null;
+  const key = (input.domain ?? '').toLowerCase();
+  let index: ClawdIndex | null = cache && key ? cache.clawd.get(key) ?? null : null;
+  if (cache && key && !index) {
+    index = { rebuiltAt: null, claims: new Map(), tombstones: new Map(), lastSyncAt: null };
+    cache.clawd.set(key, index);
+  }
+  const sync: SyncReport = { source: 'clawd', lastSyncAt: index?.lastSyncAt ?? null, stale: false, servedFromCache: false, refreshed: [], reused: [], tombstoned: [] };
+  const history = () => (index ? [...index.tombstones.values()] : []);
+  if (!clawd) return { claims: [], coverage: cov({ omittedReason: 'no clawd pair configured' }), sync: { ...sync, stale: true }, tombstones: history() };
+  if (!input.domain) return { claims: [], coverage: cov({ reachable: true, completeness: 'complete', omittedReason: 'no domain to ask' }), sync, tombstones: history() };
   let snap: ClawdSnapshot;
   try {
     snap = await clawd.fetchSnapshot(input.domain);
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
-    return { claims: [], coverage: cov({ omittedReason: /abort|timeout/i.test(msg) ? 'timeout' : msg }) };
+    const cached = index ? liveClaims(index) : [];
+    const reason = /abort|timeout/i.test(msg) ? 'timeout' : msg;
+    return { claims: cached, coverage: cov({ indexedAt: index?.rebuiltAt ?? null, omittedReason: [reason, index?.lastSyncAt || cached.length ? staleWord(index?.lastSyncAt ?? null, cached.length > 0) : ''].filter(Boolean).join('; ') }), sync: { ...sync, stale: true, servedFromCache: cached.length > 0 }, tombstones: history() };
   }
-  if (!snap.found) return { claims: [], coverage: cov({ reachable: true, completeness: 'complete', indexedAt: snap.rebuiltAt, omittedReason: 'no snapshot for the domain' }) };
+  if (!snap.found) {
+    if (index) {
+      for (const id of [...index.claims.keys()]) if (!index.tombstones.has(id)) { index.tombstones.set(id, { claim: index.claims.get(id)!, at: nowIso, reason: 'deleted' }); sync.tombstoned.push(id); }
+      index.lastSyncAt = nowIso;
+    }
+    return { claims: [], coverage: cov({ reachable: true, completeness: 'complete', indexedAt: snap.rebuiltAt, omittedReason: 'no snapshot for the domain' }), sync: { ...sync, lastSyncAt: nowIso }, tombstones: history() };
+  }
   const claims = clawdClaims(snap, input);
+  if (index) {
+    const ids = new Set(claims.map((c) => c.claimId));
+    const changed = index.rebuiltAt !== snap.rebuiltAt || [...ids].some((id) => !index!.claims.has(id)) || [...index.claims.keys()].some((id) => !ids.has(id) && !index!.tombstones.has(id));
+    for (const [id, old] of index.claims) {
+      if (ids.has(id) || index.tombstones.has(id)) continue;
+      const identity = old.sourceId.split(':').slice(0, 2).join(':');
+      index.tombstones.set(id, { claim: old, at: nowIso, reason: claims.some((c) => c.sourceId.startsWith(`${identity}:`)) ? 'superseded' : 'deleted' });
+      sync.tombstoned.push(id);
+    }
+    for (const c of claims) index.claims.set(c.claimId, c);
+    index.rebuiltAt = snap.rebuiltAt;
+    index.lastSyncAt = nowIso;
+    if (changed) sync.refreshed.push('snapshot');
+    else sync.reused.push('snapshot');
+  }
+  sync.lastSyncAt = nowIso;
   const capped = snap.reasoningNotes.length >= CLAWD_NOTE_CAP;
   const watermark = claims.map((c) => c.observedAt ?? '').filter(Boolean).sort().at(-1) ?? null;
-  return { claims, coverage: cov({ reachable: true, completeness: capped ? 'partial' : 'complete', watermark, indexedAt: snap.rebuiltAt, omittedReason: capped ? `the snapshot holds at most ${CLAWD_NOTE_CAP} notes` : null }) };
+  return { claims, coverage: cov({ reachable: true, completeness: capped ? 'partial' : 'complete', watermark, indexedAt: snap.rebuiltAt, omittedReason: capped ? `the snapshot holds at most ${CLAWD_NOTE_CAP} notes` : null }), sync, tombstones: history() };
 }
 
 /** ---------- the one entry point ---------- */
@@ -482,7 +670,13 @@ export async function retrieveAccountKnowledge(adapters: KnowledgeAdapters, inpu
   // Built here, so every claim validates; a fault would be a bug, kept out and said in the coverage rather than passed on.
   const claims = checked.ok ? checked.claims : [...v.claims, ...c.claims].filter((k) => !checked.faults.some((f) => f.claimId === k.claimId));
   const coverage = [v.coverage, c.coverage].map((cv) => (checked.ok ? cv : { ...cv, omittedReason: [cv.omittedReason, `${checked.faults.length} claim(s) failed validation`].filter(Boolean).join('; ') }));
-  return { claims, coverage, followed: v.followed, notFollowed: v.notFollowed };
+  // C48: a sync older than the window is stale even when the read succeeded from a cache with no fresh write.
+  const syncedNow = input.now.toISOString();
+  const sync = [v.sync, c.sync].map((x) => {
+    const configured = x.source === 'vault' ? v.coverage.configured : c.coverage.configured;
+    return { ...x, stale: x.stale || (configured && x.lastSyncAt !== syncedNow && stalenessOf(x.lastSyncAt, input.now, x.servedFromCache)) };
+  });
+  return { claims, coverage, followed: v.followed, notFollowed: v.notFollowed, sync, tombstones: [...v.tombstones, ...c.tombstones] };
 }
 
 /** The current (not superseded) claim of one Clawd identity, newest version; null when the snapshot holds none. */

@@ -15,7 +15,7 @@
  * sentence the record plainly supports is not refused for the missing label. A supported historical observation is
  * usable with its date: age never refuses. Pinned by tests/unit/gap/develop-angle.test.ts (C21/C22 block).
  */
-import { contextFingerprint, type CommercialContextPacket, type ContextClaim, type ContextIdentity, type ContextOpportunity, type TimelineEvent } from '../context/commercial-context';
+import { contextFingerprint, type CommercialContextPacket, type ContextClaim, type ContextIdentity, type ContextOpportunity, type Purpose, type TimelineEvent } from '../context/commercial-context';
 import { gapLines, incumbentNames, INCUMBENT_RE } from '../context/assemble';
 import { HEDGE_TOKENS } from '../taxonomy';
 import { isDateOnly } from '../work/intel';
@@ -135,7 +135,44 @@ const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 const systemsIn = (s: string): string[] => [...new Set((s.match(new RegExp(INCUMBENT_RE.source, 'gi')) ?? []).map((m) => m.toLowerCase().replace(/[^a-z0-9]/g, '')).filter((k) => !['yms', 'wms', 'tms', 'sap', 'oracle'].includes(k)))];
 
 const BUYER_ATTRIBUTION = /\b(said|says|told|mentioned|asked|wants?|wanted|plans?|planned|confirmed|is looking|are looking|committed|laid out|lays out|decided|expects?|intends?|prefers?|needs?|agreed|promised|requested)\b/i;
-const BUYER_SUBJECT = /\b(dave|craig|he|she|they|the buyer|their team|the committee|you|your)\b/i;
+const GENERIC_BUYER_SUBJECTS = ['he', 'she', 'they', 'the buyer', 'their team', 'the committee', 'you', 'your'];
+const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+/** The tokens that name one person: the full name, the first name, the address's local part (lower-cased). */
+function nameTokens(p: { name?: string | null; email?: string | null }): string[] {
+  const out = new Set<string>();
+  const full = (p.name ?? '').trim().toLowerCase();
+  if (full) {
+    out.add(full);
+    const first = full.split(/\s+/)[0];
+    if (first.length >= 3) out.add(first);
+  }
+  const local = (p.email ?? '').toLowerCase().split('@')[0];
+  if (local.length >= 3) out.add(local);
+  const localFirst = local.split(/[._-]/)[0];
+  if (localFirst.length >= 3) out.add(localFirst);
+  return [...out];
+}
+const personNameRe = (p: { name?: string | null; email?: string | null }): RegExp | null => {
+  const t = nameTokens(p);
+  return t.length ? new RegExp(`\\b(${t.map(escapeRe).join('|')})\\b`, 'i') : null;
+};
+
+/** C57 F11: the subjects a buyer attribution can name: the packet's people (first names and full names) plus the generic nouns; never a hard-coded list. */
+export function buyerSubjectRe(people: ReadonlyArray<{ name?: string | null; email?: string | null }> = []): RegExp {
+  const names = new Set<string>();
+  for (const p of people) {
+    const full = (p.name ?? '').trim();
+    if (full) {
+      names.add(full);
+      const first = full.split(/\s+/)[0];
+      if (first.length >= 3) names.add(first);
+    }
+    const local = (p.email ?? '').split('@')[0].split(/[._-]/)[0];
+    if (local.length >= 3) names.add(local);
+  }
+  return new RegExp(`\\b(${[...names, ...GENERIC_BUYER_SUBJECTS].map(escapeRe).join('|')})\\b`, 'i');
+}
 const PAIN = /\b(dwell|detention|wait(?:ing)? times?|congestion|bottlenecks?|backlogs?|delays?|stalls?|chaos|friction|manual|radios?|clipboards?|spreadsheets?|tribal knowledge|lost (?:production )?capacity)\b/i;
 const ASSERTIVE = /\b(is|are|runs? on|run on|still runs?|suffers?|struggles?|has|have|lose|loses|sits?)\b/i;
 const hedged = (s: string) => HEDGE_TOKENS.some((h) => s.toLowerCase().includes(h)) || /\b(may|might|could|perhaps|possibly|if)\b/i.test(s);
@@ -168,8 +205,9 @@ export function matchSupport(sentence: string, refs: Map<string, ContextClaim>):
  * reference names; an operational pain stated as fact with no hedge and no reference. An inference label keeps
  * the sentence, labelled. A reference label the record does not hold is refused.
  */
-export function validateAngleClaims(a: Pick<Angle, 'whyItMatters' | 'starters'>, support: readonly SupportEntry[], refs: Map<string, ContextClaim>): ClaimCheck {
+export function validateAngleClaims(a: Pick<Angle, 'whyItMatters' | 'starters'>, support: readonly SupportEntry[], refs: Map<string, ContextClaim>, opts: { people?: ReadonlyArray<{ name?: string | null; email?: string | null }> } = {}): ClaimCheck {
   const out: SupportedSentence[] = [];
+  const buyerSubject = buyerSubjectRe(opts.people);
   const unknown = support.flatMap((s) => s.refs).find((r) => !refs.has(r));
   if (unknown) return { ok: false, reason: 'unknown_ref', detail: unknown };
   const units: Array<{ text: string; where: SupportedSentence['where'] }> = [...sentencesOf(a.whyItMatters).map((text) => ({ text, where: 'whyItMatters' as const })), ...a.starters.map((text) => ({ text, where: 'starter' as const }))];
@@ -184,10 +222,14 @@ export function validateAngleClaims(a: Pick<Angle, 'whyItMatters' | 'starters'>,
     // Unlabelled: supported is a fact; unsupported is an inference only when the sentence hedges itself, else it is checked as a fact.
     const kind: 'fact' | 'inference' = entry?.kind ?? (labels.length ? 'fact' : hedged(u.text) ? 'inference' : 'fact');
     const claims = labels.map((l) => refs.get(l)!).filter(Boolean);
-    // A buyer attribution needs a buyer line that plainly carries it: the model's own citation, a shared system, or three shared words (two is a coincidence).
-    const buyerBacked = claims.some((c) => c.claimClass === 'buyer_said' && (entry?.refs.length ? true : supportStrength(u.text, c) === 'system' || (supportStrength(u.text, c) as number) >= 3));
+    // A buyer attribution needs a buyer line that plainly carries it: the model's own citation, a shared system, or three shared words
+    // (two is a coincidence). C57 F11: a sentence that names a specific person is backed only by a line THAT person spoke (the claim's
+    // speaker prefix or address names them); Dave's roadmap never backs "Bryan confirmed".
+    const named = (opts.people ?? []).filter((p) => personNameRe(p)?.test(u.text));
+    const spokenBy = (c: ContextClaim, p: { name?: string | null; email?: string | null }): boolean => { const head = c.text.slice(0, 120).toLowerCase(); return nameTokens(p).some((t) => head.includes(t)); };
+    const buyerBacked = claims.some((c) => c.claimClass === 'buyer_said' && (named.length === 0 || named.some((p) => spokenBy(c, p))) && (entry?.refs.length ? true : supportStrength(u.text, c) === 'system' || (supportStrength(u.text, c) as number) >= 3));
     if (kind !== 'inference') {
-      if (BUYER_ATTRIBUTION.test(u.text) && BUYER_SUBJECT.test(u.text) && !buyerBacked && u.where === 'whyItMatters') return { ok: false, reason: 'unsupported_buyer_claim', detail: u.text.slice(0, 160) };
+      if (BUYER_ATTRIBUTION.test(u.text) && buyerSubject.test(u.text) && !buyerBacked && u.where === 'whyItMatters') return { ok: false, reason: 'unsupported_buyer_claim', detail: u.text.slice(0, 160) };
       const named = systemsIn(u.text);
       const unnamed = named.find((s) => !claims.some((c) => systemsIn(c.text).includes(s)));
       if (unnamed) return { ok: false, reason: 'invented_system', detail: `${unnamed}: ${u.text.slice(0, 140)}` };
@@ -207,6 +249,7 @@ export interface PacketSeed {
 }
 
 const str = (v: unknown): string | null => (typeof v === 'string' && v.trim() ? v.trim() : null);
+const PURPOSES: ReadonlySet<string> = new Set<Purpose>(['buyer_conversation', 'customer_support', 'vendor_solicitation', 'partner_referral', 'media', 'internal', 'calendar', 'automated', 'suspicious', 'unknown']);
 
 /**
  * What the Pursue already resolved (work/decide.ts person branch: the placement, the day's deal read, the message),
@@ -223,7 +266,7 @@ export function packetSeedFromInput(input: Record<string, unknown>): PacketSeed 
   const status = input.opportunity === 'open' || input.opportunity === 'none' ? input.opportunity : 'unknown';
   const opportunity: ContextOpportunity = { status: coverage === 'complete' ? status : 'unknown', deals: deals.map((d) => ({ id: str(d.id), name: str(d.name), stage: str(d.stage) ?? '', nextStep: str(d.nextStep), closeDate: str(d.closeDate), contactIds: [] })), coverage, checkedAt: null, scopedDealId: deals.length === 1 ? str(deals[0].id) : null };
   const at = str(input.lastWroteAt);
-  const timeline: TimelineEvent[] = at && email ? [{ id: str(input.inboundMessageId) ?? `person:${email}`, at, direction: 'inbound', type: 'email', provider: 'gmail', providerIds: [str(input.inboundMessageId) ?? `person:${email}:${at}`], from: email, to: [], subject: str(input.subject), excerpt: str(input.excerpt), isDraft: false, purpose: null }] : [];
+  const timeline: TimelineEvent[] = at && email ? [{ id: str(input.inboundMessageId) ?? `person:${email}`, at, direction: 'inbound', type: 'email', provider: 'gmail', providerIds: [str(input.inboundMessageId) ?? `person:${email}:${at}`], from: email, to: [], subject: str(input.subject), excerpt: str(input.excerpt), isDraft: false, purpose: PURPOSES.has(str(input.purpose) ?? '') ? (str(input.purpose) as Purpose) : null }] : [];
   return { identity, opportunity, timeline };
 }
 

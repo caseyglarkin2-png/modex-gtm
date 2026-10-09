@@ -108,6 +108,8 @@ export type TimelineType = 'email' | 'draft' | 'calendar' | 'meeting' | 'call' |
 
 export interface TimelineEvent {
   id: string;
+  /** The provider's thread, when known (C08/C25: a draft is matched by its thread, never by subject). */
+  threadId?: string | null;
   at: string;
   direction: 'inbound' | 'outbound' | 'internal';
   type: TimelineType;
@@ -180,6 +182,7 @@ export function validateClaims(claims: ReadonlyArray<Partial<ContextClaim>>): { 
     else if (!c.authority || !AUTHORITIES.has(c.authority)) faults.push({ claimId: id, reason: 'no_authority' });
     else if (!c.visibility || !VISIBILITIES.has(c.visibility)) faults.push({ claimId: id, reason: 'no_visibility' });
     else if (!c.text || !c.text.trim()) faults.push({ claimId: id, reason: 'no_text' });
+    // C57 F5 (accepted residual): the guard refuses an undated claim stamped with its refresh time; a claim whose own date happens to be the refresh day (a note written the day it was synced) is legitimate and must pass, so equality with a copied eventAt is NOT refused here. The heading-date source of the real bypass is closed in retrieval (F4).
     else if (c.observedAt && c.indexedAt && c.observedAt === c.indexedAt && c.eventAt === null) faults.push({ claimId: id, reason: 'refresh_as_observation' });
     else out.push(c as ContextClaim);
   }

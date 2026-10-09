@@ -168,7 +168,7 @@ export interface WorkInput {
   /** The account motions the cockpit read (primary and next per account). */
   motions: ReadonlyArray<{ accountName: string; state: string; primary: { name: string; title: string | null } | null; next: { name: string; title: string | null; unlock: string } | null }>;
   /** The In Deals summary: complete, or unavailable (then nothing is claimed about deals). */
-  inDeals: { status: 'complete' | 'unavailable'; /** C01: when HubSpot was read, so a consumer can say so. */ checkedAt?: string | null; accounts: ReadonlyArray<{ accountName: string; deals: ReadonlyArray<{ id?: string; name: string | null; stage: string; lastActivityAt?: string | null; closeDate?: string | null; /** X15c: HubSpot hs_next_step, when set. */ nextStep?: string | null; contactIds?: readonly string[] }> }> };
+  inDeals: { status: 'complete' | 'unavailable'; /** C01: when HubSpot was read, so a consumer can say so. */ checkedAt?: string | null; accounts: ReadonlyArray<{ accountName: string; /** C57 F7 (C03): the other names the deal is recorded under, so the Work page folds aliases as the briefing does. */ alsoRecordedAs?: string[]; deals: ReadonlyArray<{ id?: string; name: string | null; stage: string; lastActivityAt?: string | null; closeDate?: string | null; /** X15c: HubSpot hs_next_step, when set. */ nextStep?: string | null; contactIds?: readonly string[] }> }> };
   /** Accounts a current card holds for an open deal or an UNKNOWN opportunity read (never a cold action). */
   held: ReadonlyMap<string, 'active_opportunity' | 'opportunity_unknown'>;
   /**
