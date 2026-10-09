@@ -84,6 +84,21 @@ describe('C6: loadAccountInbound', () => {
     expect(await loadAccountInbound({}, { accountName: 'Kenco', now: NOW, identity: twoClaim, coverage })).toEqual({ messages: [], identityRead: true, detail: null });
   });
 
+  it('C7: the synced inbox snippet arrives HTML-escaped; the excerpt and the subject are decoded (named, decimal and hex entities) on the placed read and the thread read alike, so the story quotes the buyer\'s words', async () => {
+    const db = world();
+    db.store.inboundMessage.push(
+      { id: 'm-craig-2', thread_id: 't1', from_email: CRAIG, from_name: 'Craig Morrison', subject: 'Re: Primo &amp; the record', snippet: 'Honestly, I&#39;ve only met him once on video &quot;briefly&quot; &lt;last fall&gt;&nbsp;&#x2019;til now &amp; since', body_text: null, received_at: new Date('2026-09-24T15:00:00Z'), source: 'gmail', thread: { account_name: null } },
+      { id: 'm-dave-2', thread_id: 't3', from_email: 'dave.kiesling@kencogroup.com', from_name: 'Dave Kiesling', subject: 'Re: yards', snippet: 'We&#39;re at 40 trailers &amp; counting', body_text: null, received_at: days(30), source: 'gmail', thread: { account_name: 'Kenco' } },
+    );
+    const r = await loadAccountInbound(db.client(), { accountName: 'Kenco', now: NOW, identity: twoClaim, coverage });
+    const craig = r.messages.find((m) => m.id === 'm-craig-2')!;
+    expect(craig).toMatchObject({ via: 'family_deal', subject: 'Re: Primo & the record', snippet: "Honestly, I've only met him once on video \"briefly\" <last fall> ’til now & since" });
+    expect(r.messages.find((m) => m.id === 'm-dave-2')).toMatchObject({ via: 'thread', snippet: "We're at 40 trailers & counting" });
+    // The newest placed message is what the story will quote: no entity reaches it.
+    expect(r.messages[0].id).toBe('m-craig-2');
+    expect(r.messages.every((m) => !/&(#\d+|#x[0-9a-f]+|quot|amp|lt|gt|nbsp|apos);/i.test(m.snippet)), 'no entity left in any excerpt').toBe(true);
+  });
+
   it('a verified domain places without the family facts (the ordinary case), and a persona at this account places by the record', async () => {
     const c = world().client();
     const verified: IdentityContext = { ...twoClaim, verifiedDomainToAccounts: new Map([['kencogroup.com', ['Kenco']]]), conflictedDomainToAccounts: new Map() };

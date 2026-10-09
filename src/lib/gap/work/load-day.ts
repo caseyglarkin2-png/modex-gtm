@@ -23,6 +23,7 @@ import { resolveAccountOpportunity } from '../opportunity/active-opportunity';
 import { cachedRead, type CachedRead } from './cache';
 import { loadCockpit, type CockpitData } from './cockpit-read';
 import { loadPursued, type PursuedItem } from './intel';
+import { dealCoverageFrom } from './deal-coverage';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -119,7 +120,8 @@ export async function loadWorkDay(prisma: PrismaLike, opts: LoadWorkDayOptions):
   const openIds = data.workInput.inDeals.status === 'complete' ? new Set(data.workInput.inDeals.accounts.flatMap((a) => a.deals.map((d) => d.id).filter((x): x is string => !!x))) : null;
   const closureAccounts = [...new Set([...meetingRows, ...commitments].filter((x) => !!x.dealId && /^\d+$/.test(x.dealId) && !openIds?.has(x.dealId)).map((x) => x.accountName))];
   // Seller acceptance follow-up: the prepared angles ride as ranking evidence (never under a lane; soft: unread is none).
-  const pursued: PursuedItem[] = lane ? [] : await loadPursued(prisma, realNow).catch(() => []);
+  // The day's own in-deals read rides along so a person two accounts claim is placed by the family's deal (C5), as the intelligence does.
+  const pursued: PursuedItem[] = lane ? [] : await loadPursued(prisma, realNow, { coverage: dealCoverageFrom(data.workInput.inDeals) }).catch(() => []);
   const preparedAngles = preparedAnglesByAccount(pursued);
   const [priorities, followUpPlans, meetingPreps, closedDeals] = await Promise.all([
     loadAccountPriorities(prisma, [...new Set([...data.workAccounts, ...commitments.map((c) => c.accountName)])]).catch(() => new Map()),

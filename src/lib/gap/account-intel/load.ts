@@ -26,7 +26,7 @@ import { stageLabels, type StageLabelRead } from '../opportunity/stage-labels';
 import { stageName } from '../deals/stage-label';
 import { bidScopeLabeler } from '../deals/opportunities';
 import { fetchAccountContextRows, loadAccountContext, projectAccountContext } from '../context/load';
-import type { AccountContext } from '../context/context';
+import { decodeEntities, type AccountContext } from '../context/context';
 import { accountSlug } from './href';
 import { approachOfHypothesis } from '../research/approach-policy';
 import { factUsability, usabilityLine } from '../research/currentness';
@@ -75,7 +75,8 @@ export async function loadAccountInbound(prisma: PrismaLike, args: { accountName
   const select = { id: true, thread_id: true, from_email: true, from_name: true, subject: true, snippet: true, body_text: true, received_at: true, thread: { select: { account_name: true } } };
   const canRead = typeof prisma?.inboundMessage?.findMany === 'function';
   const messages = new Map<string, AccountInbound['messages'][number]>();
-  const toMessage = (r: InboundRow, via: InboundVia, domain: string | null) => ({ id: r.id, from: lower(r.from_email), name: r.from_name?.trim() || null, at: iso(r.received_at), subject: r.subject ?? null, snippet: (r.snippet ?? r.body_text ?? '').replace(/\s+/g, ' ').trim().slice(0, 600), threadId: r.thread_id ?? null, via, domain });
+  // C7: the synced inbox's snippet arrives HTML-escaped ("I&#39;ve only met him once"); the buyer's words are decoded before the story quotes them.
+  const toMessage = (r: InboundRow, via: InboundVia, domain: string | null) => ({ id: r.id, from: lower(r.from_email), name: r.from_name?.trim() || null, at: iso(r.received_at), subject: r.subject ? decodeEntities(r.subject) : null, snippet: decodeEntities((r.snippet ?? r.body_text ?? '').replace(/\s+/g, ' ').trim()).slice(0, 600), threadId: r.thread_id ?? null, via, domain });
 
   // The thread-keyed read.
   if (canRead && typeof prisma?.emailThread?.findMany === 'function') {
