@@ -163,7 +163,8 @@ export function projectNow(brief: AccountIntelligenceBrief, ctx: AccountContext,
     shown.push(l.text);
     return true;
   };
-  const live = i.facts.filter((f) => !f.expiresAt || new Date(f.expiresAt).getTime() > now.getTime());
+  // I06: live means usable (not ended, closed, undated or superseded); age is a label.
+  const live = i.facts.filter((f) => f.usable !== false && f.continuity !== 'ended');
   const citable = new Set(live.filter((f) => !sensitivityOf(f.quote)).flatMap((f) => [f.id, ...(f.sameQuoteIds ?? [])]));
   const lx = { domains: i.domains, accountName: i.account.name, citable };
   const m = brief.motion;

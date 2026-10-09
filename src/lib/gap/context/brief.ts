@@ -66,7 +66,8 @@ export function briefListenText(accountName: string, sections: readonly BriefSec
 }
 
 export function projectBrief(brief: AccountIntelligenceBrief, ctx: AccountContext, i: Pick<AccountInputs, 'facts' | 'domains' | 'account'> & { bids?: AccountInputs['bids']; firstTouches?: AccountInputs['firstTouches'] }, now: Date): BriefSection[] {
-  const live = i.facts.filter((f) => !f.expiresAt || new Date(f.expiresAt).getTime() > now.getTime());
+  // I06: live means usable (not ended, closed, undated or superseded); age is a label.
+  const live = i.facts.filter((f) => f.usable !== false && f.continuity !== 'ended');
   const lx = { domains: i.domains, accountName: i.account.name, citable: new Set(live.filter((f) => !sensitivityOf(f.quote)).flatMap((f) => [f.id, ...(f.sameQuoteIds ?? [])])) };
   const intel = (key: string, title: string, keys: SectionKey[]): BriefSection => {
     const st = keys.flatMap((k) => brief.sections[k].statements.map((s) => ({ s, k })));

@@ -51,7 +51,7 @@ describe('item 2a: stories past their currentness on the page', () => {
   it('a too-old story is listed with its reason and no draft control; a stale proposal says why and offers only Not this story', () => {
     const view = { ...anchor, primary: null, primaryBy: null, whyTheyCare: null, supporting: null, alternatives: [], draftable: [], tooOld: [{ story: 'PepsiCo will close its warehouse operations at its Tulsa production facility.', sourceLabel: 'news.example, Jul 23, 2026', sourceUrl: 'https://news.example/tulsa', factId: 'f-tulsa', line: 'This story is too old for a first touch: it was current until Sep 5, 2026.' }], pending: [{ ...pendingItem, stale: 'This story is too old for a first touch: it was current until Sep 5, 2026.' }] } as OutreachAnchor;
     render(<OutreachAnchorView accountName="PepsiCo" anchor={view} coldTouchAllowed />);
-    expect(screen.getByTestId('anchor-too-old').textContent).toMatch(/Not offered: too old for a first touch.*Tulsa.*it was current until Sep 5, 2026\./s);
+    expect(screen.getByTestId('anchor-too-old').textContent).toMatch(/Not offered: ended, closed, undated or superseded.*Tulsa.*it was current until Sep 5, 2026\./s);
     expect(screen.getByTestId('anchor-pending-stale').textContent).toBe('This story is too old for a first touch: it was current until Sep 5, 2026. Set it aside; it cannot be approved for a first touch.');
     expect(screen.queryByTestId('anchor-pending-approve')).toBeNull();
     expect(screen.queryByTestId('anchor-pending-family-form')).toBeNull();

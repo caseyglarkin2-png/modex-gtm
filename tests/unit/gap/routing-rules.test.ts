@@ -68,6 +68,7 @@ function base(): RoutingInputs {
       family: 'hidden_capacity',
       confidence: 0.6,
       evidenceFresh: true,
+      evidenceUsable: true,
       hasNewerVersion: false,
       expiresAt: daysAhead(30),
       resumeAt: null,
@@ -510,20 +511,20 @@ describe('routePersona, one rule at a time', () => {
     }
   });
 
-  it('R12 hyp_stale: stale evidence routes research_required evidence_stale; past expiry routes hypothesis_expired', () => {
-    const stale = base();
-    stale.hypothesis!.evidenceFresh = false;
-    const sd = decision(routePersona(stale));
+  it('R12 hyp_stale: UNUSABLE evidence routes research_required evidence_stale; evidence that merely aged, or a dated row expiry, never does (I06)', () => {
+    const unusable = base();
+    unusable.hypothesis!.evidenceUsable = false;
+    const sd = decision(routePersona(unusable));
     expect(sd.ruleId).toBe('hyp_stale');
     expect(sd.action).toBe('research_required');
     expect(sd.reason).toBe('evidence_stale');
-
+    const aged = base();
+    aged.hypothesis!.evidenceFresh = false;
+    expect(decision(routePersona(aged)).ruleId).not.toBe('hyp_stale');
     const expired = base();
     expired.hypothesis!.status = 'active';
     expired.hypothesis!.expiresAt = daysAgo(1);
-    const ed = decision(routePersona(expired));
-    expect(ed.ruleId).toBe('hyp_stale');
-    expect(ed.reason).toBe('hypothesis_expired');
+    expect(decision(routePersona(expired)).ruleId).not.toBe('hyp_stale');
   });
 
   it('R13 hyp_resolved: every terminal status with no newer version routes nurture loop_closed', () => {

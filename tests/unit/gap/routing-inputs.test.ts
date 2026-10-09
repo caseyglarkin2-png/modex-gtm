@@ -427,6 +427,7 @@ describe('assembleRoutingInputs full fixture', () => {
       family: 'hidden_capacity',
       confidence: 60,
       evidenceFresh: true,
+      evidenceUsable: true,
       evidenceThin: false,
       hasNewerVersion: false,
       expiresAt: daysAhead(30),
@@ -525,7 +526,7 @@ describe('assembleRoutingInputs full fixture', () => {
     expect(rj.kind === 'decision' && rj.decision.ruleId).not.toBe('hyp_resolved');
   });
 
-  it('evidenceFresh is false when the only evidenced signal is expired', async () => {
+  it('evidenceFresh is false when the only evidenced signal is expired; evidenceUsable stays true (I06: age is a label, not a gate); an ended fact is unusable', async () => {
     const db = fullDb();
     db.hypotheses[0].signals = [
       signal('sig-expired', { evidence_text: 'a quote', freshness_expires_at: daysAgo(1) }),
@@ -533,6 +534,10 @@ describe('assembleRoutingInputs full fixture', () => {
     ];
     const i = await assemble(db);
     expect(i.hypothesis?.evidenceFresh).toBe(false);
+    expect(i.hypothesis?.evidenceUsable).toBe(true);
+    const ended = fullDb();
+    ended.hypotheses[0].signals = [signal('sig-ended', { evidence_text: 'a quote', freshness_expires_at: daysAgo(1), metadata: { continuity: { kind: 'ended' } } })];
+    expect((await assemble(ended)).hypothesis?.evidenceUsable).toBe(false);
     expect(i.hypothesis?.evidenceIds).toEqual(['sig-expired']);
     expect(i.hypothesis?.signalIds).toEqual(['sig-expired', 'sig-bare-fresh']);
   });

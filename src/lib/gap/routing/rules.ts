@@ -106,10 +106,6 @@ export function hypothesisLive(i: RoutingInputs): boolean {
   return s === 'approved' || s === 'active';
 }
 
-function hypothesisExpired(i: RoutingInputs): boolean {
-  const exp = i.hypothesis?.expiresAt;
-  return exp != null && exp.getTime() <= i.now.getTime();
-}
 
 export function hotTriggerNormThreshold(i: RoutingInputs): number {
   return i.freshness.hotTriggerNormThreshold ?? HOT_TRIGGER_NORM_THRESHOLD;
@@ -468,14 +464,14 @@ export const RULES: RoutingRule[] = [
   {
     id: 'hyp_stale',
     label: 'R12',
-    when: (i) => hypothesisLive(i) && (!i.hypothesis!.evidenceFresh || hypothesisExpired(i)),
+    // I06 (2026-10-08): age never routes research. The rule fires only when no linked fact is USABLE (ended by a
+    // newer source, closed on its due date, undated, superseded); a historical fact is cited with its date instead,
+    // and a dated row expiry from before I06 is not a gate.
+    when: (i) => hypothesisLive(i) && i.hypothesis!.evidenceUsable === false,
     action: 'research_required',
     lane: 'work_queue',
-    reason: (i) => (hypothesisExpired(i) ? 'hypothesis_expired' : 'evidence_stale'),
-    predicate: (i) =>
-      hypothesisExpired(i)
-        ? `hypothesis ${i.hypothesis!.id} expired on ${i.hypothesis!.expiresAt!.toISOString().slice(0, 10)}`
-        : `hypothesis ${i.hypothesis!.id} rests on evidence older than ${i.freshness.evidenceMaxAgeDays} days`,
+    reason: () => 'evidence_stale',
+    predicate: (i) => `hypothesis ${i.hypothesis!.id} rests on no usable fact: its evidence ended, closed, is undated or superseded`,
   },
   {
     id: 'evidence_thin',

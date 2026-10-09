@@ -197,7 +197,8 @@ const names = (text: string, phrases: string[]) => {
 };
 
 export function projectStory(i: StoryInput): AccountStory {
-  const live = i.inputs.facts.filter((f) => !f.expiresAt || new Date(f.expiresAt).getTime() > i.now.getTime());
+  // I06: live means usable (not ended, closed, undated or superseded); age is a label.
+  const live = i.inputs.facts.filter((f) => f.usable !== false && f.continuity !== 'ended');
   const citable = new Set(live.filter((f) => !sensitivityOf(f.quote)).flatMap((f) => [f.id, ...(f.sameQuoteIds ?? [])]));
   const lx = { domains: i.inputs.domains, accountName: i.inputs.account.name, citable };
   // Each idea once across the rows, also when two sources say it in different words (Walmart: the $300M Cincinnati

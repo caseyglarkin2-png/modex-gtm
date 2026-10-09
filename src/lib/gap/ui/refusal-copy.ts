@@ -20,8 +20,8 @@ const COPY: Record<string, RefusalCopy> = {
   },
   evidence_expired: {
     what: 'Not in use.',
-    why: 'The fact behind this thesis is too old to open a conversation with.',
-    next: 'Find fresh verified evidence, then approve the revised observation.',
+    why: 'The fact behind this thesis ended, closed, is undated or was superseded: it cannot open a conversation. (Age alone never blocks a fact: a historical one is cited with its date.)',
+    next: 'Find another verified fact, then approve the revised observation.',
   },
   opener_too_long: {
     what: 'Not in use.',

@@ -126,10 +126,6 @@ function clip(text: string, max = 200): string {
   return oneLine.length <= max ? oneLine : oneLine.slice(0, max);
 }
 
-function isoDay(d: Date): string {
-  return d.toISOString().slice(0, 10);
-}
-
 export function buildWhyAccount(i: RoutingInputs): string {
   const { tam, tamTier, heatTier, heat } = i.account;
   const head = `TAM ${tam}, tier ${tamTier || 'unrated'}, heat tier ${heatTier} (heat ${Math.round(heat)}).`;
@@ -170,18 +166,14 @@ export function buildWhyNow(i: RoutingInputs): string {
   }
   const h = i.hypothesis;
   if (h) {
+    // I06: currentness is a label; only unusable evidence (ended, closed, undated, superseded) holds the card.
     parts.push(
-      h.evidenceFresh
-        ? `Evidence fresh (within ${i.freshness.evidenceMaxAgeDays} d).`
-        : `Evidence older than ${i.freshness.evidenceMaxAgeDays} d.`,
+      h.evidenceUsable === false
+        ? 'Evidence unusable (ended, closed, undated or superseded): research first.'
+        : h.evidenceFresh
+          ? `Evidence current (within ${i.freshness.evidenceMaxAgeDays} d).`
+          : `Evidence historical (older than ${i.freshness.evidenceMaxAgeDays} d): usable, cited with its date.`,
     );
-    if (h.expiresAt) {
-      parts.push(
-        h.expiresAt.getTime() <= i.now.getTime()
-          ? `Hypothesis expired ${isoDay(h.expiresAt)}.`
-          : `Hypothesis expires ${isoDay(h.expiresAt)}.`,
-      );
-    }
     if (h.whyNow && containsForbidden(h.whyNow) == null) parts.push(clip(h.whyNow, 160));
   }
   const d = i.comms.lastDisposition;

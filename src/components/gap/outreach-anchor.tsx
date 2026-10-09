@@ -48,7 +48,7 @@ export const TRANSITION_REFUSAL_TEXT: Record<string, string> = {
   copy_not_installed: 'No first-touch copy is installed for this thesis yet: its copy family must be seeded first.',
   evidence_insufficient: 'The send gate would refuse this opening: its fact is not verified outreach evidence any more.',
   no_evidence: 'No evidence is linked to this thesis.',
-  evidence_expired: 'Its evidence has expired.',
+  evidence_expired: 'Its evidence ended, closed, is undated or was superseded.',
   opener_too_long: 'The opening quote is longer than a first touch can carry.',
   no_persona: 'No person is assigned to this thesis.',
   suppressed: 'That person is on the suppression list: nothing can be prepared for them.',
@@ -312,7 +312,7 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed, appr
         <p className="text-sm text-amber-700 dark:text-amber-400" data-testid="anchor-none">
           No usable thesis at {accountName} yet: nothing to open on.
           {unusable.length ? ` ${unusable.length === 1 ? 'The open thesis' : `${unusable.length} open theses`} would be refused by the send gate: ${unusable[0].unusableWhy}.` : ''}
-          {pending.length ? ` ${pending.length === 1 ? 'A proposal' : `${pending.length} proposals`} below ${pending.length === 1 ? 'is' : 'are'} waiting for your review.` : anchor.draftable.length ? ' A checked fact below can become a thesis (it goes to review).' : (anchor.tooOld ?? []).length ? ' The checked stories here are too old for a first touch (below); open the research plan to find a current fact.' : ' Open the research plan to find a fact; review grounds the thesis.'}
+          {pending.length ? ` ${pending.length === 1 ? 'A proposal' : `${pending.length} proposals`} below ${pending.length === 1 ? 'is' : 'are'} waiting for your review.` : anchor.draftable.length ? ' A checked fact below can become a thesis (it goes to review).' : (anchor.tooOld ?? []).length ? ' The checked stories here cannot open a first touch (below, with the reason); open the research plan to find another fact.' : ' Open the research plan to find a fact; review grounds the thesis.'}
         </p>
       )}
 
@@ -550,8 +550,8 @@ export function OutreachAnchorView({ accountName, anchor, coldTouchAllowed, appr
         </ul>
       ) : null}
       {(anchor.tooOld ?? []).length ? (
-        <ul className="space-y-1 text-xs text-[var(--muted-foreground)]" data-testid="anchor-too-old" aria-label="Stories too old for a first touch">
-          <li className="font-semibold uppercase tracking-wide">Not offered: too old for a first touch</li>
+        <ul className="space-y-1 text-xs text-[var(--muted-foreground)]" data-testid="anchor-too-old" aria-label="Stories that cannot open a first touch">
+          <li className="font-semibold uppercase tracking-wide">Not offered: ended, closed, undated or superseded</li>
           {(anchor.tooOld ?? []).map((t) => (
             <li key={t.factId} data-fact={t.factId}>
               {t.story} ({t.sourceUrl ? <a href={t.sourceUrl} target="_blank" rel="noreferrer" className="underline">{t.sourceLabel}</a> : t.sourceLabel}). {t.line}

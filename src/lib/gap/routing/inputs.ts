@@ -46,7 +46,7 @@ import type { HypothesisStatus, Persona } from '../taxonomy';
 import type { Top100Manifest, Top100RosterPerson } from '../top100/reader';
 import type { SuppressionReader } from './suppression-read';
 import { referralHoldDetail, referralHoldFor } from '../replies/referral-hold';
-import { isCurrentFact } from '../research/currentness';
+import { isCurrentFact, isUsableFact } from '../research/currentness';
 import { DEFAULT_FRESHNESS } from './types';
 import type { OpportunityTruth } from '../opportunity/active-opportunity';
 import type {
@@ -452,6 +452,8 @@ function buildHypothesis(h: HypothesisRow | null, now: Date, hasNewerVersion: bo
   const evidenced = signals.filter(hasEvidence);
   // Item 2a: the one freshness authority (research/currentness.ts), the clock the gate and the compiler read.
   const evidenceFresh = evidenced.some((s) => isCurrentFact(s, now));
+  // I06: the gate reads usability (ended, closed, undated, superseded refuse); currentness stays the label above.
+  const evidenceUsable = evidenced.some((s) => isUsableFact(s, now));
   const m = meta(h.metadata);
   return {
     id: h.id,
@@ -459,6 +461,7 @@ function buildHypothesis(h: HypothesisRow | null, now: Date, hasNewerVersion: bo
     family: isProblemFamily(h.problem_family) ? h.problem_family : 'unmapped',
     confidence: h.confidence,
     evidenceFresh,
+    evidenceUsable,
     // Red team T6: thin = no LIVE outreach fact (research/evidence-gate.ts), the
     // same rule approval, activation, the compiler and the send gate apply.
     // R34: under the thesis's declared approach, as those gates read it (a
