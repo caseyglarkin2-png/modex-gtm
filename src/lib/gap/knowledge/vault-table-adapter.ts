@@ -54,8 +54,17 @@ export function vaultTableAdapter(prisma: PrismaLike): TableVaultAdapter {
     readFile: async (relPath: string) => {
       const t = prisma?.gapKnowledgeNote;
       if (!t || typeof t.findUnique !== 'function') throw new Error('gap_knowledge_notes not readable');
-      const row = (await t.findUnique({ where: { path: normalizeVaultPath(relPath) }, select: { frontmatter: true, text: true } })) as { frontmatter: unknown; text: string } | null;
-      return row ? renderVaultNote(row) : null;
+      const path = normalizeVaultPath(relPath);
+      const row = (await t.findUnique({ where: { path }, select: { frontmatter: true, text: true } })) as { frontmatter: unknown; text: string } | null;
+      if (row) return renderVaultNote(row);
+      // The retrieval asks for the account note by the GAP account name ("02_Accounts/Kenco.md"); the vault names the file by the
+      // company as the vault knows it ("Kenco Logistics.md"). The note whose RESOLVED account is that name answers (case-insensitive).
+      const m = /^02_Accounts\/(.+)\.md$/.exec(path);
+      if (m && typeof t.findFirst === 'function') {
+        const byAccount = (await t.findFirst({ where: { kind: 'account', account_name: { equals: m[1], mode: 'insensitive' } }, orderBy: [{ synced_at: 'desc' }], select: { frontmatter: true, text: true } })) as { frontmatter: unknown; text: string } | null;
+        if (byAccount) return renderVaultNote(byAccount);
+      }
+      return null;
     },
     status: () => (status ??= vaultTableStatus(prisma)),
   };

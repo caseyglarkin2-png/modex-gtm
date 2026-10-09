@@ -16,7 +16,7 @@ import { PrismaClient } from '@prisma/client';
 import { readdir, readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { isSyncedVaultPath, normalizeVaultPath, VAULT_SYNC_FOLDERS } from '../../src/lib/gap/knowledge/vault-note';
-import { MAX_FILES_PER_RUN, recordVaultSync, syncVaultNotes, type SyncCandidate } from '../../src/lib/gap/knowledge/vault-sync';
+import { MAX_FILES_PER_RUN, recordVaultSync, reresolveKnowledgeAccounts, syncVaultNotes, type SyncCandidate } from '../../src/lib/gap/knowledge/vault-sync';
 
 const DEFAULT_VAULT = 'C:/Users/casey/Documents/Obsidian/YardFlow-GTM-Obsidian-Vault';
 
@@ -27,6 +27,7 @@ const arg = (name: string) => {
 const APPLY = process.argv.includes('--apply');
 const VAULT = (arg('--vault') ?? process.env.GAP_VAULT_DIR ?? DEFAULT_VAULT).replace(/[\\/]+$/, '');
 const MAX = Number(arg('--max') ?? MAX_FILES_PER_RUN);
+const RERESOLVE = process.argv.includes('--reresolve');
 
 async function walk(dir: string, rel: string, out: string[]): Promise<void> {
   let entries: string[];
@@ -49,6 +50,18 @@ async function main() {
   if (!process.env.DATABASE_URL) throw new Error('DATABASE_URL is not set (the dry run compares against the table too)');
   if (APPLY && process.env.GAP_RECONCILE_APPLY !== 'yes') throw new Error('--apply needs GAP_RECONCILE_APPLY=yes');
   if (!Number.isFinite(MAX) || MAX <= 0) throw new Error('--max must be a positive number');
+  if (RERESOLVE) {
+    // --reresolve: the rows already on record whose account is a raw vault name are placed again (identity, then the vault's own account notes).
+    const prismaR = new (await import('@prisma/client')).PrismaClient({ datasources: { db: { url: (() => { const u = new URL(process.env.DATABASE_URL!); u.searchParams.set('connection_limit', '1'); return u.toString(); })() } } });
+    try {
+      const r = await reresolveKnowledgeAccounts(prismaR, { apply: APPLY });
+      console.log(`${APPLY ? 'RERESOLVE' : 'RERESOLVE DRY RUN'}: looked ${r.looked}, ${APPLY ? 'changed' : 'would change'} ${r.changed}`);
+      for (const x of r.samples) console.log(`  ${x.path}: ${x.from ?? '(none)'} -> ${x.to}`);
+    } finally {
+      await prismaR.$disconnect().catch(() => undefined);
+    }
+    return;
+  }
   const root = await stat(VAULT).catch(() => null);
   if (!root?.isDirectory()) throw new Error(`no vault folder at ${VAULT}`);
   const paths: string[] = [];

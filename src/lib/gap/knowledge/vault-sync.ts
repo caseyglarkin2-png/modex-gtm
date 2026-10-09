@@ -70,17 +70,56 @@ export async function identityAccountResolver(prisma: PrismaLike): Promise<Accou
     const key = `${raw ?? ''}|${domain ?? ''}`;
     if (memo.has(key)) return memo.get(key) ?? null;
     let out: string | null = raw;
+    let placed = false;
     if (ctx) {
       try {
         const r = await resolveAccountName(prisma, { rawName: raw, domain }, ctx);
-        if (r.ok) out = r.accountName;
+        if (r.ok) { out = r.accountName; placed = true; }
       } catch {
         out = raw;
+      }
+    }
+    // The vault's own account notes map the company as the vault names it ("Kenco Logistics") to the GAP account they
+    // resolved to ("Kenco"): a meeting or deal note that names the company the vault's way lands on the same account.
+    if (!placed && raw && typeof prisma?.gapKnowledgeNote?.findFirst === 'function') {
+      try {
+        const note = (await prisma.gapKnowledgeNote.findFirst({
+          where: { kind: 'account', account_name: { not: null }, OR: [{ title: { equals: raw, mode: 'insensitive' } }, { frontmatter: { path: ['company'], equals: raw } }] },
+          select: { account_name: true },
+        })) as { account_name: string | null } | null;
+        if (note?.account_name) out = note.account_name;
+      } catch {
+        // the vault map is a courtesy; the raw value stands
       }
     }
     memo.set(key, out);
     return out;
   };
+}
+
+/**
+ * Re-resolve the account of every note on record whose account is not a GAP account (the raw vault name kept at its
+ * sync) or absent while its frontmatter names one, through the resolver (the identity context, then the vault's own
+ * account notes). Dry run counts; apply updates. Bounded by `max` rows per call.
+ */
+export async function reresolveKnowledgeAccounts(prisma: PrismaLike, opts: { apply: boolean; max?: number; resolveAccount?: AccountResolver }): Promise<{ looked: number; changed: number; samples: Array<{ path: string; from: string | null; to: string }> }> {
+  const resolve = opts.resolveAccount ?? (await identityAccountResolver(prisma));
+  const accounts = new Set(((await prisma.account.findMany({ select: { name: true } }).catch(() => [])) as Array<{ name: string }>).map((a) => a.name));
+  const rows = (await prisma.gapKnowledgeNote.findMany({ where: { kind: { in: ['meeting', 'deal', 'person', 'raw', 'other'] } }, select: { id: true, path: true, account_name: true, domain: true, frontmatter: true }, take: opts.max ?? 20_000 })) as Array<{ id: string; path: string; account_name: string | null; domain: string | null; frontmatter: Record<string, unknown> | null }>;
+  const out = { looked: 0, changed: 0, samples: [] as Array<{ path: string; from: string | null; to: string }> };
+  for (const r of rows) {
+    if (r.account_name && accounts.has(r.account_name)) continue;
+    const fm = r.frontmatter ?? {};
+    const raw = r.account_name ?? (typeof fm.account === 'string' ? fm.account : typeof fm.company === 'string' ? fm.company : null);
+    if (!raw && !r.domain) continue;
+    out.looked += 1;
+    const to = await resolve(raw, r.domain);
+    if (!to || to === r.account_name || !accounts.has(to)) continue;
+    out.changed += 1;
+    if (out.samples.length < 12) out.samples.push({ path: r.path, from: r.account_name, to });
+    if (opts.apply) await prisma.gapKnowledgeNote.update({ where: { id: r.id }, data: { account_name: to } });
+  }
+  return out;
 }
 
 /** Parse and upsert the candidates that changed. Never throws on one file: its error is counted and the run goes on. */

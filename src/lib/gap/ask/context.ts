@@ -15,7 +15,7 @@ import { accountDomainFor, loadAccountKnowledge } from '../story/load';
 import { knowledgeAdapters } from '../story/load';
 import type { AccountInputs } from '../account-intel/build';
 import type { AccountStory } from '../story/story';
-import { compactContext, type AskContext, type AskCoverage } from './grounding';
+import { compactContext, vaultReasonWords, type AskContext, type AskCoverage } from './grounding';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -66,9 +66,9 @@ function vaultRow(i: AskCoverageInputs): AskCoverage {
   const v = i.vault;
   if (!v) return { source: 'vault', status: !i.vaultConfigured ? 'not_read' : i.vaultNote ? 'read' : 'partial', detail: !i.vaultConfigured ? 'not configured' : i.vaultNote ? null : 'no account note found, or the read failed' };
   if (!v.configured) return { source: 'vault', status: 'not_read', detail: 'not configured' };
-  if (v.reachable === false) return { source: 'vault', status: 'failed', detail: v.omittedReason || 'could not be read' };
+  if (v.reachable === false) return { source: 'vault', status: 'failed', detail: vaultReasonWords(v.omittedReason) || 'could not be read' };
   const held = v.summary?.trim() ? summaryOnClock(v.summary) : [syncedAt(v.indexedAt), typeof v.count === 'number' ? plural(v.count, v.countWord || 'claim') : null].filter((x): x is string => !!x).join(', ');
-  if (v.completeness === 'partial') return { source: 'vault', status: 'partial', detail: [held, v.omittedReason].filter(Boolean).join('; ') || 'partly read' };
+  if (v.completeness === 'partial') return { source: 'vault', status: 'partial', detail: [held, vaultReasonWords(v.omittedReason)].filter(Boolean).join('; ') || 'partly read' };
   return { source: 'vault', status: 'read', detail: held || null };
 }
 
@@ -145,5 +145,7 @@ export async function buildAskContext(prisma: PrismaLike, accountName: string, n
     // Seller acceptance (2026-10-09): what this context was built from, per source, so "no context" is never said over an unread source.
     // Knowledge program: the vault row is the retrieval's own coverage (synced time, counts), read soft.
     coverage: coverageFromPage(inputs, story, process.env, { vault: vaultCoverage }),
+    // The vault note row is seller-only (never model context): it rides apart so the assignment can print it to the seller.
+    sellerNote: (() => { const note = story.rows.find((r) => r.key === 'note'); return note ? { lines: note.sentences.map((x) => x.text) } : null; })(),
   });
 }

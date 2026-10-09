@@ -148,7 +148,7 @@ async function main() {
       const dealIds = dealAccounts.find((d) => d.accountName === a.name)?.deals.map((d) => d.id).filter((x): x is string => !!x) ?? [];
       const hs = dealIds.length ? await hubspotCounts(dealIds, token) : { notes: 0, calls: 0, meetings: 0, emails: 0 };
       const ctx = await buildAskContext(prisma, a.name, now).catch(() => null);
-      const storyText = (ctx?.story ?? []).flatMap((s) => s.lines.map((l) => l.text)).join(' | ');
+      const storyText = [...(ctx?.story ?? []).flatMap((s) => s.lines.map((l) => l.text)), ...((ctx as { sellerNote?: { lines: string[] } | null } | null)?.sellerNote?.lines ?? [])].join(' | ');
       const buyerSaid = (ctx?.buyerSaid ?? []).length;
       const storyHasCall = /\b(call|meeting|met|discovery|demo)\b/i.test(storyText);
       const storyHasNext = !!note?.fm.next_action && storyText.toLowerCase().includes(note.fm.next_action.slice(0, 30).toLowerCase());
@@ -164,7 +164,7 @@ async function main() {
       totals.hsEngagements += hsSum;
       if (storyHasCall) totals.storiesWithCall += 1;
       if (storyHasNext) totals.storiesWithNextAction += 1;
-      if (cov && /vault \(synced|vault: read|the vault \(read/i.test(cov)) totals.coverageSaysVault += 1;
+      if (cov && /the vault \((synced|read|[0-9]+ calls)/i.test(cov)) totals.coverageSaysVault += 1;
       const lastCall = calls.map((c) => c.date ?? '').sort().pop() || '';
       const lastMeeting = meetings.map((c) => c.date ?? '').sort().pop() || '';
       rows.push(`| ${esc(a.name)} | ${note ? 'yes' : 'no'}${note?.fm.next_action ? ` (next action due ${note.fm.next_action_due || 'undated'})` : ''} | ${meetings.length}${lastMeeting ? ` (last ${lastMeeting})` : ''} | ${calls.length}${lastCall ? ` (last ${lastCall})` : ''} | ${people.length} | ${inbound} | ${sent} | ${Object.entries(hs).map(([k, v]) => `${k} ${v}`).join(', ')} | ${(ctx?.story ?? []).reduce((s, x) => s + x.lines.length, 0)} lines, ${buyerSaid} buyer words${storyHasCall ? ', a call or meeting named' : ', no call or meeting named'}${note?.fm.next_action ? storyHasNext ? ', the vault next action named' : ', the vault next action NOT named' : ''} | ${esc(cov).slice(0, 140)} |`);
