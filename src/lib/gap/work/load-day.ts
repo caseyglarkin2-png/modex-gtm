@@ -111,6 +111,14 @@ export function accountKnowledgeOf(notes: readonly KnowledgeNoteLike[], now: Dat
 }
 
 /** C2: the summaries for the day's accounts, a few reads at a time; an account whose read fails has none. */
+/** The production knowledge reader: the vault table's notes for the account, newest first (soft: unreadable is none). */
+export const defaultKnowledgeReader: KnowledgeReader = async (prisma, accountName, opts) => {
+  if (!prisma?.gapKnowledgeNote || typeof prisma.gapKnowledgeNote.findMany !== 'function') return [];
+  const { knowledgeForAccount } = await import('../knowledge/vault-table-adapter');
+  const set = await knowledgeForAccount(prisma, accountName, { limit: opts?.limit, ...(opts?.domains ? { domains: opts.domains } : {}) });
+  return set.all as unknown as Awaited<ReturnType<KnowledgeReader>>;
+};
+
 export async function knowledgeByAccount(prisma: PrismaLike, accounts: readonly string[], reader: KnowledgeReader, now: Date): Promise<Map<string, AccountKnowledge>> {
   const out = new Map<string, AccountKnowledge>();
   const names = [...new Set(accounts)];
@@ -209,7 +217,10 @@ export async function loadWorkDay(prisma: PrismaLike, opts: LoadWorkDayOptions, 
   const preparedAngles = preparedAnglesByAccount(pursued);
   // C2: the vault's account summaries ride as ranking evidence (never under a lane; soft: no reader, or a reader that
   // throws, is no knowledge). The windows are read at `now` (the preview's tomorrow reads tomorrow's windows).
-  const knowledge = lane || !deps.knowledge ? new Map<string, AccountKnowledge>() : await knowledgeByAccount(prisma, [...new Set([...data.workAccounts, ...commitments.map((c) => c.accountName)])], deps.knowledge, now).catch(() => new Map<string, AccountKnowledge>());
+  // The lead's wiring (knowledge program, 2026-10-09): with no reader injected, the production reader is the vault table
+  // (builder A's knowledgeForAccount, its `.all` list); a client without the table reads as no knowledge (soft).
+  const reader: KnowledgeReader | undefined = deps.knowledge ?? defaultKnowledgeReader;
+  const knowledge = lane || !reader ? new Map<string, AccountKnowledge>() : await knowledgeByAccount(prisma, [...new Set([...data.workAccounts, ...commitments.map((c) => c.accountName)])], reader, now).catch(() => new Map<string, AccountKnowledge>());
   const [priorities, followUpPlans, meetingPreps, closedDeals] = await Promise.all([
     loadAccountPriorities(prisma, [...new Set([...data.workAccounts, ...commitments.map((c) => c.accountName)])]).catch(() => new Map()),
     // R43: each follow-up due today, read off the person's own history (prepare, by hand, a saved draft, unknown, held).
