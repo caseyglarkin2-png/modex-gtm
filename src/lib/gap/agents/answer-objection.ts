@@ -77,7 +77,7 @@ function objectionReaskLine(check: Exclude<ObjectionCheck, { ok: true }>): strin
 }
 
 /** The copy rules a talking point must still keep (it is said out loud, so it carries the same truth bar). */
-export function validateObjectionAnswer(a: ObjectionAnswer, factIds: ReadonlySet<string>): ObjectionCheck {
+export function validateObjectionAnswer(a: ObjectionAnswer, factIds: ReadonlySet<string>, opts: { allowSingularYard?: boolean } = {}): ObjectionCheck {
   const text = `${a.answer} ${a.question}`;
   const cited = [...new Set([...text.matchAll(/\[\[SRC:([A-Za-z0-9_-]+)\]\]/g)].map((m) => m[1]))];
   const unknown = cited.filter((id) => !factIds.has(id));
@@ -86,7 +86,7 @@ export function validateObjectionAnswer(a: ObjectionAnswer, factIds: ReadonlySet
   if (/\$\s?\d|\b\d+(\.\d+)?\s?%|\b(dollars|roi|savings)\b/i.test(text)) return { ok: false, reason: 'money_promised' };
   if (/—/.test(text)) return { ok: false, reason: 'em_dash' };
   // A03b: the canonical C14 rule (compounds such as yard management keep the singular).
-  if (SINGULAR_YARD_RE.test(text)) return { ok: false, reason: 'yard_singular', detail: offendingSpan(text, SINGULAR_YARD_RE) };
+  if (!opts.allowSingularYard && SINGULAR_YARD_RE.test(text)) return { ok: false, reason: 'yard_singular', detail: offendingSpan(text, SINGULAR_YARD_RE) };
   if (/\bthroughput\b/i.test(text)) return { ok: false, reason: 'throughput' };
   const words = a.answer.replace(/\[\[SRC:[A-Za-z0-9_-]+\]\]/g, '').trim().split(/\s+/).filter(Boolean).length;
   if (words < MIN_WORDS || words > MAX_WORDS) return { ok: false, reason: 'length', detail: `${words} words` };
@@ -177,10 +177,19 @@ ${out.text.slice(0, 3000)}`, MAX_TOKENS);
     candidate = fixed;
     check = validateObjectionAnswer(fixed, factIds);
   }
+  // A03d: a singular "yard" that survives the re-asks is a warning on the talking point, not a refusal (C14 warns the same way).
+  const warnings: string[] = [];
+  if (!check.ok && check.reason === 'yard_singular') {
+    const relaxed = validateObjectionAnswer(candidate, factIds, { allowSingularYard: true });
+    if (relaxed.ok) {
+      warnings.push(`Voice: it says "yard" in the singular (${check.detail ?? 'yard'}); the canon says yards. Edit that before you say it.`);
+      check = relaxed;
+    }
+  }
   if (!check.ok) return { ok: false, reason: 'could_not_satisfy', detail: `${check.reason}${check.detail ? ` ${check.detail}` : ''}${calls > 1 ? ` (after ${calls - 1 === 1 ? 'one re-ask' : `${calls - 1} re-asks`})` : ''}` };
   return {
     ok: true,
-    result: { dispositionId, accountName: d.account_name, personaId: typeof d.persona_id === 'number' ? d.persona_id : null, hypothesisId: hypothesis?.id ?? null, objection, answer: candidate.answer, question: candidate.question, factsUsed: check.factsUsed, provider: out.provider },
+    result: { dispositionId, accountName: d.account_name, personaId: typeof d.persona_id === 'number' ? d.persona_id : null, hypothesisId: hypothesis?.id ?? null, objection, answer: candidate.answer, question: candidate.question, factsUsed: check.factsUsed, provider: out.provider, warnings },
   };
 }
 

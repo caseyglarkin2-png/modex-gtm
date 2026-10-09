@@ -26,7 +26,7 @@ import { factUrl, liveClaimFailure, liveFactFailure } from './claim-rules';
 import { extractCitationIds } from '../hypothesis/observation';
 import { sourceLabelVariants } from './source-label';
 import { approachOfHypothesis, claimAdmittedFor, type EvidenceApproach } from './approach-policy';
-import { isUsableFact } from './currentness';
+import { isUsableFact, reportedLabel } from './currentness';
 import { classifyContinuity } from './continuity';
 
 export interface GateSignal {
@@ -189,7 +189,7 @@ const norm = (t: string) =>
  */
 export function observationSupportGap(
   observation: string | null | undefined,
-  citedFacts: ReadonlyArray<{ id: string; evidence_text?: string | null; title?: string | null }>,
+  citedFacts: ReadonlyArray<{ id: string; evidence_text?: string | null; title?: string | null; observed_at?: Date | string | null }>,
   accountName: string,
 ): string | null {
   // Quotes are delimited by straight quotes and closed right before a citation
@@ -225,6 +225,11 @@ export function observationSupportGap(
   for (const label of labels) rest = rest.split(label).join(' ');
   // Case-insensitive second pass (a label typed with different casing).
   for (const label of labels) rest = rest.replace(new RegExp(label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'), ' ');
+  // I06: a historical fact's own date, as citedQuote writes it ("(reported May 2018)"), is the fact's word, not a claim.
+  for (const f of facts) {
+    const when = reportedLabel((f as { observed_at?: Date | string | null }).observed_at ?? null);
+    if (when) rest = rest.replace(new RegExp(`\(reported ${when.label}\)`, 'gi'), ' ');
+  }
   const left = rest.replace(/[\s.:,;!?'"()-]+/g, ' ').trim();
   return left.length === 0 ? null : left;
 }

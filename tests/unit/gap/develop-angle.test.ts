@@ -90,9 +90,12 @@ describe('A03: one bounded re-ask on a voice-rule break', () => {
 
     const stubborn = vi.fn<(prompt: string, maxTokens?: number) => Promise<{ text: string; provider: string }>>(async () => ({ text: singular, provider: 'test' }));
     const again = await developAngle(task(), { prisma: w.client(), now: NOW }, { generate: stubborn });
-    expect(again).toMatchObject({ ok: false, reason: 'could_not_satisfy', detail: expect.stringMatching(/^yard_singular .*the yard outside.* \(after 2 re-asks\)$/) });
+    // A03d: a singular "yard" that survives the re-asks is a warning on the angle, never a refusal.
+    expect(again).toMatchObject({ ok: true, result: { calls: 3, warnings: [expect.stringContaining('the yard outside')] } });
     expect(stubborn).toHaveBeenCalledTimes(MAX_ANGLE_CALLS);
     expect(MAX_ANGLE_CALLS).toBe(3);
+    const money = vi.fn<(prompt: string, maxTokens?: number) => Promise<{ text: string; provider: string }>>(async () => ({ text: JSON.stringify({ ...JSON.parse(GOOD), caveat: 'Worth $40,000 a year.' }), provider: 'test' }));
+    expect(await developAngle(task(), { prisma: w.client(), now: NOW }, { generate: money })).toMatchObject({ ok: false, reason: 'could_not_satisfy', detail: 'money_promised (after 2 re-asks)' });
 
     const stranger = vi.fn<(prompt: string, maxTokens?: number) => Promise<{ text: string; provider: string }>>(async () => ({ text: JSON.stringify({ ...JSON.parse(GOOD), people: [9] }), provider: 'test' }));
     const never = await developAngle(task(), { prisma: w.client(), now: NOW }, { generate: stranger });

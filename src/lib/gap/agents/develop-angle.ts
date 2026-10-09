@@ -39,6 +39,8 @@ export interface Angle {
 }
 
 export interface PreparedAngle extends Angle {
+  /** A03d: a voice warning the answer kept after the re-asks (the compiler's C14 warns the same way); Casey edits before a buyer sees it. */
+  warnings?: string[];
   taskId: string;
   key: string;
   title: string;
@@ -111,13 +113,13 @@ export function reaskLine(check: Exclude<AngleCheck, { ok: true }>): string {
 }
 
 /** The rules every GAP text keeps; a person the roster did not offer is never named. */
-export function validateAngle(a: Angle, roster: ReadonlySet<number>): AngleCheck {
+export function validateAngle(a: Angle, roster: ReadonlySet<number>, opts: { allowSingularYard?: boolean } = {}): AngleCheck {
   const text = [a.whyItMatters, ...a.accounts, ...a.roles, ...a.starters, a.caveat ?? ''].join(' ');
   // The prose keeps the voice; a job title ("Yard Operations Manager") is the buyer's words, not ours.
   const prose = [a.whyItMatters, ...a.starters, a.caveat ?? ''].join(' ');
   if (/—/.test(text)) return { ok: false, reason: 'em_dash' };
   // A03b: the canonical C14 rule: singular "yard" outside the accepted compounds (yard network, yard management, ...).
-  if (SINGULAR_YARD_RE.test(prose)) return { ok: false, reason: 'yard_singular', detail: offendingSpan(prose, SINGULAR_YARD_RE) };
+  if (!opts.allowSingularYard && SINGULAR_YARD_RE.test(prose)) return { ok: false, reason: 'yard_singular', detail: offendingSpan(prose, SINGULAR_YARD_RE) };
   if (/\bthroughput\b/i.test(prose)) return { ok: false, reason: 'throughput' };
   if (/\b(yardflow|freightroll|flowgate|flowdriver|flowbol|flowvision|flowyms)\b/i.test([a.whyItMatters, ...a.starters].join(' ').replace(/to YardFlow/gi, ''))) return { ok: false, reason: 'product_named' };
   if (/\$\s?\d|\b\d+(\.\d+)?\s?%|\b(roi|savings|dollars)\b/i.test(text)) return { ok: false, reason: 'money_promised' };
@@ -212,9 +214,19 @@ ${out.text.slice(0, 3000)}`, MAX_TOKENS);
     angle = fixed;
     check = validateAngle(fixed, rosterIds);
   }
+  // A03d: after the re-asks a singular "yard" is a WARNING carried on the angle (the compiler's C14 treats it the same
+  // way), never a refusal: the angle is material Casey reads, and the compiler judges any copy before a buyer sees it.
+  const warnings: string[] = [];
+  if (!check.ok && check.reason === 'yard_singular') {
+    const relaxed = validateAngle(angle, rosterIds, { allowSingularYard: true });
+    if (relaxed.ok) {
+      warnings.push(`Voice: it says "yard" in the singular (${check.detail ?? 'yard'}); the canon says yards. Edit that before a buyer reads it.`);
+      check = relaxed;
+    }
+  }
   if (!check.ok) return { ok: false, reason: 'could_not_satisfy', detail: `${check.reason}${check.detail ? ` ${check.detail}` : ''}${calls > 1 ? ` (after ${calls - 1 === 1 ? 'one re-ask' : `${calls - 1} re-asks`})` : ''}` };
   const peopleNamed = angle.people.map((id) => roster.find((p) => p.id === id)).filter((p): p is { id: number; name: string | null; title: string | null } => !!p).map((p) => ({ personaId: p.id, name: p.name, title: p.title }));
-  const result: Omit<PreparedAngle, 'taskId' | 'preparedAt'> & { provider: string; calls: number } = { key: task.itemKey, title, accountName, accountHint, sourceLine, ...angle, peopleNamed, provider: out.provider, calls };
+  const result: Omit<PreparedAngle, 'taskId' | 'preparedAt'> & { provider: string; calls: number } = { key: task.itemKey, title, accountName, accountHint, sourceLine, ...angle, peopleNamed, provider: out.provider, calls, warnings };
   return { ok: true, result };
 }
 
