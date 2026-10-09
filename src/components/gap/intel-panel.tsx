@@ -111,6 +111,7 @@ function Pursued({ p }: { p: PursuedItem }) {
           {a.peopleNamed.length ? <p className="mt-1">Who: {a.peopleNamed.map((x) => `${x.name ?? `person ${x.personaId}`}${x.title ? ` (${x.title})` : ''}`).join('; ')}.</p> : a.roles.length ? <p className="mt-1">Roles: {a.roles.join(', ')}.</p> : null}
           {a.accounts.length && !p.accountName ? <p className="mt-1">Accounts: {a.accounts.join(', ')}.</p> : null}
           <ul className="mt-1 list-disc pl-4">{a.starters.map((s, i) => <li key={i}>{s}</li>)}</ul>
+          {a.warnings?.length ? <p className="mt-1 text-amber-700 dark:text-amber-400" data-testid="intel-pursued-warning">{a.warnings.join(' ')}</p> : null}
           <p className="mt-1 text-[var(--muted-foreground)]">Proposed: {a.proposedAction === 'email' ? 'an email' : a.proposedAction === 'call' ? 'a call' : 'research first'}.{a.caveat ? ` ${a.caveat}` : ''} Source: {a.sourceLine}.</p>
         </div>
       ) : p.status === 'failed' ? <p className="text-xs text-amber-700 dark:text-amber-400">{p.error ?? 'The task failed.'} Decide it again to retry.</p> : <p className="text-xs text-[var(--muted-foreground)]">It comes back here and in the next briefing.</p>}
