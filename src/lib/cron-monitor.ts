@@ -40,7 +40,7 @@ export const KNOWN_CRONS: Array<{ name: string; label: string; path: string; sch
   // true, which is deliberate: scheduling it now means arming it later is one env
   // var rather than a deploy, and /ops shows it skipping rather than hiding it.
   { name: 'warm-dispatch', label: 'Warm Committee Dispatch', path: '/api/cron/warm-dispatch', schedule: '15 12 * * 1-5' },
-  { name: 'daily-digest', label: 'Daily Digest', path: '/api/cron/daily-digest', schedule: '0 12 * * *' },
+  { name: 'daily-digest', label: 'Daily Digest', path: '/api/cron/daily-digest', schedule: 'unregistered (retired X19 2026-10-09: the GAP morning briefing replaced it; the route is gone)' },
   { name: 'drip-sequence', label: 'Campaign Drip', path: '/api/cron/drip-sequence', schedule: '0 13 * * *' },
   { name: 'pounce-scan', label: 'Pounce Scan', path: '/api/cron/pounce-scan', schedule: '5 13 * * *' },
   { name: 'refresh-intel', label: 'Intel Refresh', path: '/api/cron/refresh-intel', schedule: '0 13 * * 1' },
