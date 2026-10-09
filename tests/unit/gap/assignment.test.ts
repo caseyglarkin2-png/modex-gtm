@@ -12,7 +12,7 @@
  */
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { ledgerDb } from './fixtures/ledger-db';
-import { ASSIGNMENT_SENT, DAY_STARTED, buildAssignment, nextUnassignedItem, sendAssignment, startDay } from '@/lib/gap/work/assignment';
+import { ASSIGNMENT_SENT, DAY_STARTED, ITEM_HELD_FOR_RESEARCH, assignable, buildAssignment, nextAssignableItem, nextUnassignedItem, sendAssignment, startDay } from '@/lib/gap/work/assignment';
 import { COMMAND_WORDS } from '@/lib/gap/work/briefing';
 import type { DayPlan, PlanItem } from '@/lib/gap/work/plan';
 import type { GmailSendPayload } from '@/lib/email/gmail-sender';
@@ -153,5 +153,61 @@ describe('X06: startDay, sendAssignment, nextUnassignedItem', () => {
     expect((await nextUnassignedItem(db.client(), PLAN))?.key).toBe('commitment:c-1');
     await sendAssignment(db.client(), { plan: PLAN, item: ITEMS[1], revision: 0, to: 'casey@freightroll.com', sender: SENDER, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW, actor: 'gap' }, deps);
     expect(await nextUnassignedItem(db.client(), PLAN)).toBeNull();
+  });
+});
+
+describe('seller acceptance follow-up: START and NEXT hand the seller only an assignable item; research is held for the agent', () => {
+  const SGWS = item({ key: "follow_up:Southern Glazer's:2026-10-08", rank: 0, accountName: "Southern Glazer's", token: 'e'.repeat(32), kind: 'follow_up', stateKind: 'follow_up', title: 'Reminder: Follow up with Diego Fonseca when they are back', why: 'Out of office, May 26', href: '/gap/accounts/southern-glazers', person: { name: 'Diego Fonseca', title: null } });
+  const KROGER = ITEMS[1];
+  const PEPSI = ITEMS[0];
+  const SWIRE = item({ key: 'follow_up:Swire:2026-10-08', rank: 3, accountName: 'Swire', token: 'f'.repeat(32), kind: 'follow_up', stateKind: 'follow_up', title: 'Follow up with Ana', why: 'Nothing prepared yet; GAP researches the operator first.', href: '/gap/accounts/swire', person: null });
+  const plan: DayPlan = { ...PLAN, items: [SGWS, { ...KROGER, rank: 1 }, { ...PEPSI, rank: 2 }, SWIRE], revision: 1 };
+  const ctxFor = (accountName: string): AskContext | null =>
+    accountName.startsWith('Southern') ? { ...ASK, accountName, state: { ...ASK.state, state: 'follow_up', stateLine: 'They were out of office in May.', next: "Research the catalysts at Southern Glazer's before reaching Diego." }, story: [], opening: null, buyerSaid: [] }
+    : accountName === 'Kroger' ? { ...ASK, accountName, state: { ...ASK.state, state: 'in_deal', stateLine: 'In a deal.', next: 'Send Joey the dock comparison.' }, story: [], opening: null, buyerSaid: [] }
+    : accountName === 'Swire' ? { ...ASK, accountName, state: { ...ASK.state, state: 'follow_up', stateLine: 'Quiet.', next: 'Send Ana a note.' }, story: [], opening: null, buyerSaid: [] }
+    : ASK;
+  const input = { baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: true, now: NOW };
+
+  it('assignable: nothing prepared and a research-shaped move is held (research_move); a why that says nothing is prepared is held (research_why); a seller move with nothing prepared, or a prepared email, is assignable', async () => {
+    const db = ledgerDb({}, NOW);
+    const deps = { askContext: vi.fn(async (_p: unknown, name: string) => ctxFor(name)), pack: vi.fn(async (_p: unknown, a: { decisionId: string }) => (a.decisionId === 'dec-1' ? PACK : null)), send: vi.fn(async () => ({ provider: 'gmail' as const, id: 'g', threadId: 't' })) };
+    const sgws = await assignable(db.client(), plan, SGWS, input, deps);
+    expect(sgws.ok, 'research move held').toBe(false);
+    expect(sgws).toMatchObject({ reason: 'research_move', detail: "Research the catalysts at Southern Glazer's before reaching Diego." });
+    expect(sgws.built.prepared).toEqual({ kind: 'none' });
+    expect(await assignable(db.client(), plan, SWIRE, input, deps)).toMatchObject({ ok: false, reason: 'research_why' });
+    expect((await assignable(db.client(), plan, KROGER, input, deps)).ok, 'a seller move with nothing prepared is assignable').toBe(true);
+    expect((await assignable(db.client(), plan, PEPSI, input, deps)).ok, 'a prepared email is assignable').toBe(true);
+  });
+
+  it('the walk: the held items are recorded once (work.command_applied, effect item_held_for_research, subject the item) and walked past; the first assignable item comes back with its built assignment; a settled item (an applied SKIP) is skipped; a progress note settles nothing', async () => {
+    const db = ledgerDb({}, NOW);
+    const deps = { askContext: vi.fn(async (_p: unknown, name: string) => ctxFor(name)), pack: vi.fn(async (_p: unknown, a: { decisionId: string }) => (a.decisionId === 'dec-1' ? PACK : null)), send: vi.fn(async () => ({ provider: 'gmail' as const, id: 'g', threadId: 't' })) };
+    const first = await nextAssignableItem(db.client(), plan, { assign: { input, deps, actor: 'test' } });
+    expect(first.item?.key, 'Kroger is the first assignable').toBe('commitment:c-1');
+    expect(first.built?.move).toBe('Send Joey the dock comparison.');
+    expect(first.held.map((h) => [h.item.accountName, h.line, h.recorded])).toEqual([["Southern Glazer's", 'nothing supported to send yet', true]]);
+    const holds = db.store.gapAuditEvent.filter((e) => e.kind === 'work.command_applied' && e.payload.effect === ITEM_HELD_FOR_RESEARCH);
+    expect(holds).toHaveLength(1);
+    expect(holds[0]).toMatchObject({ subject_type: 'work_item', subject_id: "follow_up:Southern Glazer's:2026-10-08", payload: { reason: 'research_move', day: '2026-10-08', itemToken: 'e'.repeat(32), revision: 1 } });
+    // Kroger assigned; the next walk finds the hold already recorded (no second row) and hands PepsiCo.
+    await sendAssignment(db.client(), { plan, item: first.item as PlanItem, revision: 0, to: 'casey@freightroll.com', sender: SENDER, ...input, actor: 'gap', built: first.built }, deps);
+    const second = await nextAssignableItem(db.client(), plan, { assign: { input, deps, actor: 'test' } });
+    expect(second.item?.key).toBe('first_touch:dec-1');
+    expect(second.held.map((h) => [h.item.accountName, h.recorded])).toEqual([["Southern Glazer's", false]]);
+    expect(db.store.gapAuditEvent.filter((e) => e.kind === 'work.command_applied' && e.payload.effect === ITEM_HELD_FOR_RESEARCH), 'held once').toHaveLength(1);
+    // PepsiCo assigned; Swire is held by its why; nothing is left.
+    await sendAssignment(db.client(), { plan, item: second.item as PlanItem, revision: 0, to: 'casey@freightroll.com', sender: SENDER, ...input, actor: 'gap', built: second.built }, deps);
+    const third = await nextAssignableItem(db.client(), plan, { assign: { input, deps, actor: 'test' } });
+    expect(third.item).toBeNull();
+    expect(third.held.map((h) => [h.item.accountName, h.recorded])).toEqual([["Southern Glazer's", false], ['Swire', true]]);
+    // A settled item: an applied SKIP on an unassigned item keeps it off the walk; a progress note does not settle.
+    const db2 = ledgerDb({}, NOW);
+    await db2.client().gapAuditEvent.create({ data: { kind: 'work.command_applied', actor: 'x', subject_type: 'work_item', subject_id: 'commitment:c-1', payload: { command: 'skip', effect: 'commitment_skipped' } } });
+    await db2.client().gapAuditEvent.create({ data: { kind: 'work.command_applied', actor: 'x', subject_type: 'work_item', subject_id: 'first_touch:dec-1', payload: { command: 'done', effect: 'progress_noted', note: 'drafting it' } } });
+    const skipped = await nextAssignableItem(db2.client(), { ...plan, items: [{ ...KROGER, rank: 0 }, { ...PEPSI, rank: 1 }] });
+    expect(skipped.item?.key, 'the skipped Kroger is passed; the progress-noted PepsiCo is still open').toBe('first_touch:dec-1');
+    expect(await nextUnassignedItem(db2.client(), { ...plan, items: [{ ...KROGER, rank: 0 }] })).toBeNull();
   });
 });
