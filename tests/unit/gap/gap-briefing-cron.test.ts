@@ -67,6 +67,11 @@ describe('X05b: the briefing cron route', () => {
     expect(await res.json()).toMatchObject({ sent: true, items: 3 });
     expect(h.success).toHaveBeenCalledTimes(1);
     const [, input, deps] = h.send.mock.calls[1];
+    expect(input.resend).toBe(false);
+    // X22: ?resend=1 with the secret asks for an explicit resend.
+    h.send.mockResolvedValue({ sent: true, day: '2026-10-08', to: 'casey@freightroll.com', gmailMessageId: 'g2', gmailThreadId: 't2', items: 3, recoveredFromSent: false });
+    await GET(new Request('http://localhost/api/cron/gap-briefing?resend=1', { headers: { authorization: 'Bearer s' } }));
+    expect(h.send.mock.calls[2][1].resend).toBe(true);
     expect(input.sender).toMatchObject({ userEmail: 'casey@yardflow.ai' });
     expect(input.settings.briefingTo).toBe('casey@freightroll.com');
     expect(deps.send).toBe(h.sendViaGmail);

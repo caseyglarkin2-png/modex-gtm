@@ -33,8 +33,8 @@ function harness(over: { settings?: Partial<SellerSettings>; sendImpl?: () => Pr
   const send = vi.fn<(p: GmailSendPayload) => Promise<{ provider: 'gmail'; id: string | null; threadId: string | null }>>(over.sendImpl ?? (async () => ({ provider: 'gmail' as const, id: 'gm-1', threadId: 'th-1' })));
   const listSent = vi.fn(async () => over.sent ?? []);
   const load = vi.fn(async () => DAY);
-  const run = (now = NOW) =>
-    sendMorningBriefing(db.client(), { now, settings: { ...SETTINGS, ...over.settings }, sender: SENDER, baseUrl: 'https://app.example', actionSecret: 'secret', commandsEnabled: false, legacyDigest: true, load }, { send, listSent });
+  const run = (now = NOW, extra: { resend?: boolean } = {}) =>
+    sendMorningBriefing(db.client(), { now, settings: { ...SETTINGS, ...over.settings }, sender: SENDER, baseUrl: 'https://app.example', actionSecret: 'secret', commandsEnabled: false, legacyDigest: true, load, ...extra }, { send, listSent });
   return { db, send, listSent, load, run };
 }
 
@@ -76,6 +76,19 @@ describe('X05b: sendMorningBriefing', () => {
     expect(again).toMatchObject({ skipped: true, reason: 'already_sent' });
     expect(h.send).toHaveBeenCalledTimes(1);
     expect(h.load).toHaveBeenCalledTimes(1);
+  });
+
+  it('X22: an explicit resend sends again the same day (past already_sent, past the hour, no claim), records briefing.sent with resend true, and the ordinary tick after it still skips', async () => {
+    const h = harness();
+    expect(await h.run()).toMatchObject({ sent: true });
+    expect(await h.run()).toMatchObject({ skipped: true, reason: 'already_sent' });
+    const again = await h.run(new Date('2026-10-08T10:00:00Z'), { resend: true }); // 6 am New York, before the hour
+    expect(again).toMatchObject({ sent: true, day: '2026-10-08', gmailMessageId: 'gm-1' });
+    expect(h.send).toHaveBeenCalledTimes(2);
+    const rows = h.db.store.gapAuditEvent.filter((e) => e.kind === 'briefing.sent');
+    expect(rows).toHaveLength(2);
+    expect(rows[1].payload).toMatchObject({ resend: true });
+    expect(await h.run()).toMatchObject({ skipped: true, reason: 'already_sent' });
   });
 
   it('the claim is taken BEFORE the send: another instance mid-send holds it, so this tick sends nothing and skips', async () => {

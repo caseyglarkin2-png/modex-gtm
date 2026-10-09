@@ -57,6 +57,8 @@ export async function GET(request: Request) {
   }
   try {
     const settings = await loadSellerSettings(prisma);
+    // X22: an operator's explicit resend (the secret is already checked): sends again now, whatever the hour or the day's row.
+    const resend = new URL(request.url).searchParams.get('resend') === '1';
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL?.trim().replace(/\/$/, '') || 'https://modex-gtm.vercel.app';
     const result = await sendMorningBriefing(
       prisma,
@@ -64,6 +66,7 @@ export async function GET(request: Request) {
         now,
         settings,
         sender,
+        resend,
         baseUrl,
         actionSecret: actionSecret(),
         commandsEnabled: COMMANDS_ENABLED,
