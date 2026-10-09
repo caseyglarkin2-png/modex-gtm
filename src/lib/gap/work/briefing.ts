@@ -18,6 +18,9 @@
  *     an intelligence item at an account with an open deal links to that deal's brief, never to generic Work
  *   - C33: the greeting follows the New York hour of the send (21:47 is "Good evening"); a replay of an earlier plan
  *     says when that plan was made and that what changed since is on Work
+ *   - seller acceptance follow-up (2026-10-09): a resend's plan is REFRESHED (work/plan.ts) and the line says what
+ *     changed ("Refreshed plan (revision 1, 7:51 AM New York): added ...; removed ...; moved ... up") or that nothing
+ *     did ("Unchanged since the 7:05 AM plan"); `planStatusLine` is the one place that says it
  */
 import type { DayPlan, PlanItem } from './plan';
 import type { IntelItem, PursuedItem } from './intel';
@@ -127,6 +130,43 @@ export function itemCardLines(it: PlanItem): string[] {
   return out;
 }
 
+const timeNy = (d: Date) => d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/New_York' });
+
+/** Up to `max` names, then "and N more". */
+function named(keys: readonly string[], labels: Record<string, string>, max = 4, suffix: (k: string) => string = () => ''): string {
+  const names = keys.slice(0, max).map((k) => `${labels[k] ?? k}${suffix(k)}`);
+  const more = keys.length - names.length;
+  return more > 0 ? `${names.join(', ')} and ${more} more` : names.join(', ');
+}
+
+/**
+ * Seller acceptance follow-up (2026-10-09): what a resend says about its plan. A REFRESHED plan (a new revision written
+ * by this send) says what changed, from the plan's own record: "Refreshed plan (revision 1, 7:51 AM New York): added
+ * Kenco: Follow up due; removed Dole: Decide; moved PepsiCo: Ready for a first touch up". An UNCHANGED one says
+ * "Unchanged since the 7:05 AM plan". A replay of an older plan that was NOT compared (the scheduled send reading a
+ * plan the page made earlier) still says it replays that plan as it stood then: no comparison was made, none is claimed.
+ */
+export function planStatusLine(plan: DayPlan, resend: boolean, now: Date): string | null {
+  const plannedAt = new Date(plan.plannedAt);
+  const changes = plan.fresh && (plan.revision ?? 0) > 0 ? plan.changes ?? null : null;
+  let line: string | null = null;
+  if (changes) {
+    const parts = [
+      changes.added.length ? `added ${named(changes.added, changes.labels)}` : null,
+      changes.removed.length ? `removed ${named(changes.removed, changes.labels)}` : null,
+      changes.moved.length ? `moved ${named(changes.moved.map((m) => m.key), changes.labels, 4, (k) => { const m = changes.moved.find((x) => x.key === k); return m ? (m.to < m.from ? ' up' : ' down') : ''; })}` : null,
+    ].filter((x): x is string => !!x);
+    line = `Refreshed plan (revision ${plan.revision}, ${timeNy(plannedAt)} New York): ${parts.length ? parts.join('; ') : 'the order changed'}.`;
+  } else if (plan.unchanged) {
+    line = `Unchanged since the ${timeNy(plannedAt)} plan.`;
+  } else if (!plan.fresh && now.getTime() - plannedAt.getTime() > 5 * 60_000) {
+    line = `This replays the plan GAP made at ${timeNy(plannedAt)} New York on ${dayLabel(plan.day)}, as it stood then; what changed since is on Work, not here.`;
+  } else if (resend) {
+    line = `The plan was made at ${timeNy(plannedAt)} New York on ${dayLabel(plan.day)}.`;
+  }
+  return line ? `${resend ? 'This is a resend. ' : ''}${line}` : null;
+}
+
 export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefing {
   const { plan, links } = input;
   const label = dayLabel(plan.day);
@@ -148,13 +188,10 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
   const greeting = greetingFor(now);
   lines.push(`${greeting} Here is ${label} from GAP, in order.`);
   html.push(`<p>${esc(greeting)} Here is ${esc(label)} from GAP, in order.</p>`);
-  const plannedAt = new Date(plan.plannedAt);
-  const replay = !plan.fresh && now.getTime() - plannedAt.getTime() > 5 * 60_000;
-  if (replay || input.resend) {
-    const when = `${plannedAt.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/New_York' })} New York on ${dayLabel(plan.day)}`;
-    const replayLine = `${input.resend ? 'This is a resend. ' : ''}${replay ? `This replays the plan GAP made at ${when}, as it stood then; what changed since is on Work, not here.` : `The plan was made at ${when}.`}`;
-    lines.push(replayLine);
-    html.push(`<p style="color:#666">${esc(replayLine)}</p>`);
+  const planLine = planStatusLine(plan, input.resend === true, now);
+  if (planLine) {
+    lines.push(planLine);
+    html.push(`<p style="color:#666">${esc(planLine)}</p>`);
   }
   // C31: the count basis, in words: the plan's items are what START and NEXT walk; intelligence is counted apart.
   const basis = [n === 0 ? 'Nothing to execute on the plan' : `${n} to execute: the plan's items, the same list START and NEXT walk, in this order`, toDecide > 0 ? `${toDecide} to decide: intelligence, counted apart${decideTotal > toDecide ? ` (${decideTotal} waiting in all)` : ''}` : null].filter(Boolean).join('. ');

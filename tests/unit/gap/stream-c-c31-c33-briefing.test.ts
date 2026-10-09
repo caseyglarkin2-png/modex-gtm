@@ -136,9 +136,13 @@ describe('C33: the greeting follows the hour of the send; a replay says when its
     expect(fresh.text).not.toMatch(/replays the plan|resend/);
     const justRead = renderBriefing({ plan: plan(THREE, { fresh: false, plannedAt: '2026-10-08T11:04:00.000Z' }), dayToken: 'tok', links, commandsEnabled: false, legacyDigest: false }, MORNING);
     expect(justRead.text).not.toMatch(/replays the plan/);
-    const resend = renderBriefing({ plan: plan(THREE, { fresh: false, plannedAt: '2026-10-08T11:02:00.000Z' }), dayToken: 'tok', links, commandsEnabled: false, legacyDigest: false, resend: true }, NIGHT);
-    expect(resend.text.split('\n')[1]).toMatch(/^This is a resend\. This replays the plan GAP made at 7:02 AM New York on Thu Oct 8/);
+    // Seller acceptance follow-up (2026-10-09): a resend REFRESHES the plan, so its line is "Unchanged since" or "Refreshed plan", never the uncompared replay wording.
+    const resend = renderBriefing({ plan: plan(THREE, { fresh: false, plannedAt: '2026-10-08T11:02:00.000Z', unchanged: true }), dayToken: 'tok', links, commandsEnabled: false, legacyDigest: false, resend: true }, NIGHT);
+    expect(resend.text.split('\n')[1]).toBe('This is a resend. Unchanged since the 7:02 AM plan.');
     for (const line of resend.text.split('\n')) expect(line).not.toMatch(/^(START|APPROVE|REVISE|SKIP|DEFER|DONE|NEXT|HELP)\b/);
+    const refreshed = renderBriefing({ plan: plan(THREE, { fresh: true, plannedAt: '2026-10-08T11:51:00.000Z', revision: 1, changes: { added: ['first_touch:dec-1'], removed: ['review:Dole:2026-10-08'], moved: [{ key: 'reply:msg-77', from: 1, to: 0 }, { key: 'commitment:c-1', from: 0, to: 1 }], labels: { 'first_touch:dec-1': 'PepsiCo: Ready for a first touch', 'review:Dole:2026-10-08': 'Dole: Decide', 'reply:msg-77': 'Boston Beer: Someone replied', 'commitment:c-1': 'Kenco: Send Diego the dock schedule template' } } }), dayToken: 'tok', links, commandsEnabled: false, legacyDigest: false, resend: true }, NIGHT);
+    expect(refreshed.text.split('\n')[1]).toBe('This is a resend. Refreshed plan (revision 1, 7:51 AM New York): added PepsiCo: Ready for a first touch; removed Dole: Decide; moved Boston Beer: Someone replied up, Kenco: Send Diego the dock schedule template down.');
+    expect(refreshed.text).not.toMatch(/replays the plan/);
   });
 });
 
