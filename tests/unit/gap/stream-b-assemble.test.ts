@@ -11,6 +11,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { assembleCommercialContext, buyerClaimsFromTimeline, gapLines, incumbentNames, markBuyerConflicts, publicFactClaims, type AssembleAdapters } from '@/lib/gap/context/assemble';
 import { byAuthority, externallyUsable, type ContextClaim, type ContextIdentity, type ContextOpportunity, type TimelineEvent } from '@/lib/gap/context/commercial-context';
+import { packetRecord } from '@/lib/gap/agents/angle-claims';
 import { VERIFIED_EXCERPT } from '@/lib/gap/research/evidence-gate';
 import { ACCOUNT, DAVE_EMAIL, FILES, KENCO, NOW, ROADMAP, snapshot, vaultOf } from './stream-b-fixture';
 
@@ -132,6 +133,29 @@ describe('C18: the trust vocabulary at the packet', () => {
     expect(facts.map((f) => f.sourceId)).toEqual(['signal:s1', 'signal:s2']);
     expect(facts[0]).toMatchObject({ claimClass: 'checked_public', authority: 'public_fact', visibility: 'external_ok', eventAt: '2026-06-24T12:00:00.000Z', url: 'https://dcvelocity.com/kenco', text: expect.stringMatching(/^DC Velocity: Kenco Logistics opened/) });
     expect(facts[1]).toMatchObject({ visibility: 'internal' });
+  });
+});
+
+describe('C55 (P2-7): a rejected hypothesis guards the record', () => {
+  it('a vault wedge restating a rejected family carries supersededBy rejected:<citation>, stays visible with the rejection words, is absent from externallyUsable, and the record block prints it as a rejected hypothesis, never a live one', async () => {
+    const rejected = vi.fn(async () => [{ accountName: 'Kenco Logistics', family: 'hidden_capacity', problemHypothesis: 'You have already automated the four walls with AMRs, but the yards outside the dock still run on spotters and radios; orchestrate gate-to-dock across your sites.', at: '2026-09-20T12:00:00.000Z', citedBy: ['hypothesis:h-rej', 'disposition:d-9'] }]);
+    const { packet } = await assembleCommercialContext(adapters({ rejected }), { ...KENCO, people: identity.people, threadId: 't-kenco' });
+    expect(rejected).toHaveBeenCalledWith({ accountName: 'Kenco Logistics', identity: expect.objectContaining({ accountName: 'Kenco Logistics' }) });
+    const wedge = packet.sellerHypotheses.find((c) => c.sourceId === 'vault:02_Accounts/Kenco Logistics.md#YardFlow wedge' && /spotters and radios/.test(c.text))!;
+    expect(wedge).toMatchObject({ supersededBy: 'rejected:hypothesis:h-rej', conflictsWith: expect.arrayContaining(['hypothesis:h-rej']) });
+    expect(wedge.text).toMatch(/\[rejected Sep 20, 2026: hypothesis:h-rej, disposition:d-9\]$/);
+    expect(externallyUsable([...packet.buyerFacts, ...packet.sellerHypotheses]).some((c) => c.claimId === wedge.claimId)).toBe(false);
+    expect(packet.buyerFacts.every((c) => !c.supersededBy?.startsWith('rejected:'))).toBe(true);
+    const record = packetRecord(packet, NOW);
+    const printed = record.text.split('\n').find((l) => /spotters and radios/.test(l) && /YardFlow wedge|Rejected hypothesis/.test(l))!;
+    expect(printed).toMatch(/^\[K\d+\] Rejected hypothesis, /);
+    expect(printed).toContain('[rejected Sep 20, 2026');
+    expect(printed).not.toContain('Seller noted');
+    // Without the adapter nothing is marked; a failing adapter is a gap, never a throw.
+    const plain = await assembleCommercialContext(adapters(), { ...KENCO, people: identity.people });
+    expect(plain.packet.sellerHypotheses.every((c) => !c.supersededBy?.startsWith('rejected:'))).toBe(true);
+    const broken = await assembleCommercialContext(adapters({ rejected: async () => { throw new Error('ledger down'); } }), { ...KENCO, people: identity.people });
+    expect(broken.packet.coverage.find((c) => c.source === 'gap')).toMatchObject({ reachable: false, omittedReason: 'rejected hypotheses unreadable: ledger down' });
   });
 });
 

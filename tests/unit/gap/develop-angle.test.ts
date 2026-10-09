@@ -204,6 +204,23 @@ describe('C21/C22: the angle reads the commercial-context packet and every claim
     expect(r.result).not.toHaveProperty('support.0.text', undefined);
   });
 
+  it('C21 (the harness gap): a timeline with an accepted future meeting puts "A meeting is ahead" in the prompt with its date and subject; a cancelled one does not; an unsent draft of ours is named as not a contact', async () => {
+    const w = ledgerDb({ accounts: ['Kenco Logistics'], personas: [] }, NOW);
+    const accepted = { id: 'cal-1', at: '2026-10-06T12:00:00.000Z', direction: 'inbound' as const, type: 'calendar' as const, provider: 'gmail' as const, providerIds: ['cal-1'], from: DAVE_EMAIL, to: ['casey@freightroll.com'], subject: 'Accepted: YardFlow x Kenco budget review', excerpt: null, isDraft: false, purpose: 'calendar' as const, calendar: { kind: 'accepted' as const, meetingKey: 'yardflow x kenco budget review|oct 14', startsAt: '2026-10-14T15:00:00.000Z' } };
+    const cancelled = { ...accepted, id: 'cal-2', at: '2026-10-07T12:00:00.000Z', providerIds: ['cal-2'], subject: 'Canceled: YardFlow x Kenco budget review', calendar: { ...accepted.calendar, kind: 'cancelled' as const } };
+    const ourDraft = { id: 'd-oct5', at: '2026-10-05T10:00:00.000Z', direction: 'outbound' as const, type: 'draft' as const, provider: 'gmail' as const, providerIds: ['r5338'], from: 'casey@freightroll.com', to: [DAVE_EMAIL], subject: 'Phased 2027 proposal', excerpt: null, isDraft: true, purpose: null };
+    const packetWith = (events: TimelineEvent[]) => assembleCommercialContext({ opportunity: async () => ({ opportunity: open }), timeline: async () => ({ events, coverage: [{ source: 'gmail' as const }] }) }, { ...KENCO, people: packetSeedFromInput(personInput).identity.people, threadId: 't-kenco' }).then((r) => r.packet);
+    const ahead = gen(answer());
+    await developAngle(kencoTask(), { prisma: w.client(), now: NOW }, { generate: ahead, packet: await packetWith([sep16, oct1, accepted as unknown as TimelineEvent, ourDraft]) });
+    const prompt = ahead.mock.calls[0][0];
+    expect(prompt).toContain('A meeting is ahead: Oct 14, 2026 ("Accepted: YardFlow x Kenco budget review"), accepted. Write toward it, never a cold re-open.');
+    expect(prompt).toContain('An unsent draft of ours sits in the thread, Oct 5, 2026 ("Phased 2027 proposal"): a draft is never a contact, and the next message must not write past it.');
+    const gone = gen(answer());
+    await developAngle(kencoTask(), { prisma: w.client(), now: NOW }, { generate: gone, packet: await packetWith([sep16, oct1, accepted as unknown as TimelineEvent, cancelled as unknown as TimelineEvent]) });
+    expect(gone.mock.calls[0][0]).not.toContain('A meeting is ahead');
+    expect(gone.mock.calls[0][0]).not.toContain('An unsent draft of ours');
+  });
+
   it('C57 F9: with no timeline injected, the handler reads the typed timeline itself (the stored inbound rows and the Sent reader given), so the prompt carries the last exchange naming our send; the identity the Pursue placed stands', async () => {
     const w = ledgerDb({ accounts: ['Kenco Logistics'], personas: [], inbound: [{ id: 'm-sep16', thread_id: 't-kenco', rfc_message_id: '<sep16@kencogroup.com>', from_email: DAVE_EMAIL, from_name: 'Dave Kiesling', subject: 'Re: YardFlow and the 2027 roadmap', body_text: ROADMAP, received_at: new Date('2026-09-16T14:02:00Z'), source: 'gmail', thread: { account_name: 'Kenco Logistics' } }] }, NOW);
     const listSent = vi.fn<(recipient: string, after: number, before: number) => Promise<Array<{ id: string; threadId: string | null; internalDate: Date; to: string; subject: string }>>>(async () => [{ id: 'sent-oct1', threadId: 't-kenco', internalDate: new Date('2026-10-01T16:00:00Z'), to: DAVE_EMAIL, subject: 'Re: YardFlow and the 2027 roadmap' }]);

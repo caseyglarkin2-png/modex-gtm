@@ -27,6 +27,7 @@ import { loadThreadContext, type ThreadContextDeps } from '../context/thread-con
 import { gapGmailSender } from '../execution/gap-sender';
 import { loadIdentityContext } from '../identity/service';
 import { resolvePersonAccount } from '../work/person-identity';
+import { outcomeLoop, type OutcomeHypothesis, type RejectedFamily } from '../learning/outcome-loop';
 import type { ContextIdentity } from '../context/commercial-context';
 import type { CommercialContextPacket } from '../context/commercial-context';
 import { knowledgeAdapters } from '../story/load';
@@ -219,6 +220,16 @@ function defaultTimeline(prisma: PrismaLike, thread: ThreadContextDeps | undefin
   };
 }
 
+/** C55 (P2-7): the account's rejected hypotheses through the outcome loop (no CRM, no network), so a note restating one carries the rejection. */
+function defaultRejected(prisma: PrismaLike): NonNullable<AssembleAdapters['rejected']> {
+  return async ({ accountName }): Promise<RejectedFamily[]> => {
+    if (!accountName || typeof prisma?.prospectingHypothesis?.findMany !== 'function') return [];
+    const rows = (await prisma.prospectingHypothesis.findMany({ where: { account_name: accountName, status: 'rejected' }, select: { id: true, problem_family: true, problem_hypothesis: true, resolved_at: true }, take: 20 }).catch(() => [])) as Array<{ id: string; problem_family: string | null; problem_hypothesis: string | null; resolved_at: Date | string | null }>;
+    const hypotheses: OutcomeHypothesis[] = rows.filter((r) => r.problem_hypothesis).map((r) => ({ id: r.id, accountName, family: r.problem_family, status: 'rejected', problemHypothesis: String(r.problem_hypothesis), resolvedAt: r.resolved_at ? new Date(r.resolved_at).toISOString() : null, resolutionOutcome: 'rejected' }));
+    return hypotheses.length ? outcomeLoop({ dispositions: [], hypotheses, now: new Date() }).rejected : [];
+  };
+}
+
 /** C57 F9: the default identity adapter fills a gap only: a person the Pursue could not place is tried against the identity service; a placed one stands. */
 function defaultIdentity(prisma: PrismaLike): NonNullable<AssembleAdapters['identity']> {
   return async (q: IdentityQuery): Promise<ContextIdentity | null> => {
@@ -269,8 +280,8 @@ export async function developAngle(task: ClaimedTask, ctx: { prisma: PrismaLike;
   const emailDomain = person?.email.toLowerCase().split('@')[1] ?? null;
   const domain = emailDomain && !/^(gmail|yahoo|hotmail|outlook|icloud|aol|me|live|msn|protonmail)\.com$/.test(emailDomain) ? emailDomain : accountHint?.includes('.') ? accountHint.toLowerCase() : null;
   const publicFacts = deps.context?.publicFacts ?? (typeof prisma?.gapSignal?.findMany === 'function' ? async (q: { accountName: string }) => (await prisma.gapSignal.findMany({ where: { account_name: q.accountName }, select: GATE_SIGNAL_SELECT, orderBy: { observed_at: 'desc' }, take: 20 }).catch(() => [])) as GateSignal[] : undefined);
-  const packet = deps.packet ?? (await assembleCommercialContext({ ...(deps.context ?? {}), knowledge: deps.context?.knowledge ?? knowledgeAdapters(), publicFacts, timeline: deps.context?.timeline ?? defaultTimeline(prisma, deps.thread), identity: deps.context?.identity ?? defaultIdentity(prisma) }, { accountName, domain, people: seed.identity.people, threadId: str(input.threadId), now, seed })).packet;
-  const record = packetRecord(packet);
+  const packet = deps.packet ?? (await assembleCommercialContext({ ...(deps.context ?? {}), knowledge: deps.context?.knowledge ?? knowledgeAdapters(), publicFacts, timeline: deps.context?.timeline ?? defaultTimeline(prisma, deps.thread), identity: deps.context?.identity ?? defaultIdentity(prisma), rejected: deps.context?.rejected ?? defaultRejected(prisma) }, { accountName, domain, people: seed.identity.people, threadId: str(input.threadId), now, seed })).packet;
+  const record = packetRecord(packet, now);
   const prompt = buildAnglePrompt({ title, sourceLine, accountName, accountHint, categories, note: str(input.note), person, roster, theses, recent, candidateAccounts, decision: str(input.decision) ?? task.request, deals: deals.map((d) => ({ id: d.id ?? null, name: d.name ?? null, stage: d.stage ?? '', nextStep: d.nextStep ?? null })), record: record.text });
   const generate = deps.generate ?? ((p: string, m?: number) => gapGenerate(ctx.prisma, { prompt: p, maxTokens: m ?? MAX_TOKENS, tier: task.input && (task.input as Record<string, unknown>).decision === 'more' ? 'strong' : 'routine', task: { id: task.id, kind: task.kind, itemKey: task.itemKey }, now: ctx.now }));
   const rosterIds = new Set(roster.map((p) => p.id));
