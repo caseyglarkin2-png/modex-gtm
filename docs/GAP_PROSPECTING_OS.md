@@ -3516,6 +3516,7 @@ Branch `feat/gap-seller-acceptance` (the lead), merged from `feat/gap-sa-a` (A: 
 - The vault as ranking evidence (`WorkInput.knowledge`, `evidenceRank`): a conversation within 30 days is relationship history; a vault next action due within 7 days or past is deal context; both named in rankWhy; the lead's default reader in load-day.ts makes the page, the briefing cron, /gap/start and the preview read it without edits.
 - The DONE note becomes records (`readDoneNote(note, { now }).facts`, `commitmentsFromSellerNote`): a dated meeting writes one idempotent prepare_meeting commitment (waiting, 8 am New York, source seller_note keyed by the Gmail id and the day); a sent note is recorded as a claim GAP checks against Sent; nothing is marked contact on the seller's word.
 - Auto-advance: every applied SKIP, DEFER or DONE sends the next assignable item in the same mailbox tick (`advancedTo` on the applied row; the answer names it); a progress-noted or refused DONE never advances.
+- The vault's calls on the story (the lead, 1fce9ae9, c46eb396, after the first deploy): a pure reader of a Fireflies capture (`knowledge/fireflies-summary.ts`: the summary bullets, the action items under their names, the keywords; never the transcript, which the vault's own rule keeps as the ground truth); the account inputs carry the account's Fireflies calls and calendar-prepped meetings from the knowledge table, found by the account's domains (the canonical company's and the GAP contacts' own) and its aliases; a call and a held meeting are touches of source vault with the buyers named from the record; the between-us row says "Call Jul 16 with Craig Morrison and Dave Kiesling (Fireflies): <title>. <two summary bullets> Action item (...)" and "Meeting Sep 16 with ...: <title> (on the calendar; the vault's prep note)", tagged Checked with the vault as the basis and the summary said as advisory. The audit after it: a call or meeting named on 8 of 13 stories, the accounts with calls whose story names one 4 of the accounts with calls (was 2). Gate 83 suites, 594 tests, 0 failed.
 
 ### Phase 4: the receipt, after
 
@@ -3528,7 +3529,7 @@ The integrated gate on the final tree (0cef... lineage, the knowledge program at
 ### Named debt
 
 - The cron needs `GAP_VAULT_GITHUB_TOKEN` in Vercel (a read-only fine-grained token on the vault repo), Casey's to create; until then the local push (run by the lead today) is the sync path and the table ages with the vault.
-- The "Read:" part of the coverage line prints after the gaps because the assignment prints a line verbatim only when it starts with a gap prefix.
+- (closed by the calls slice) The assignment prints a coverage line that starts with "Read:" verbatim as well.
 - HubSpot contacts on the account inputs carry no address, so Sent is asked by the account domains and the persona, inbound and first-touch addresses only.
 - A Fireflies capture without participant addresses in its frontmatter matches an account only by its path; the vault's own sweep writes the participants, so the gap is historical.
 
