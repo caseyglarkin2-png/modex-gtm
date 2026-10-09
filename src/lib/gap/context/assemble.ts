@@ -359,8 +359,8 @@ export function competingWork(timeline: readonly TimelineEvent[], drafts: readon
   for (const e of timeline) {
     if (!e.isDraft) continue;
     if (e.providerIds.some((id) => seen.has(`${e.provider}:${id}`)) || seen.has(`${e.provider}:${e.id}`)) continue;
-    // The contract's event carries no thread id (requested of the lead for C08); a timeline draft is judged by its addressees and purpose.
-    const why = judge({ threadId: null, to: e.to, purpose: e.purpose });
+    // Builder A's ThreadEvent carries the thread id beside the contract's fields; a bare contract event is judged by its addressees and purpose.
+    const why = judge({ threadId: (e as { threadId?: string | null }).threadId ?? null, to: e.to, purpose: e.purpose });
     if (!why.length) continue;
     // A draft the timeline holds that no proposal of ours wrote is the seller's own: revise only.
     items.push({ kind: 'in_flight', id: e.providerIds[0] ?? e.id, provider: e.provider, at: e.at, subject: e.subject, to: e.to, threadId: null, why, sellerEdited: true, offer: 'revise', overwrite: false });
