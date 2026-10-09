@@ -1,6 +1,6 @@
 # GAP OS next-version demonstration receipt (C59)
 
-STATUS: DEMONSTRATION RECEIPT, generated 2026-10-09T04:40:27.367Z by scripts/gap/demonstration-receipt.ts on feat/gap-execution-engine at dedbdc75. Local and sink-backed throughout: no production database, no mail credential, no model call, no send, no signed action token. Production is a195467f (dpl_G9KX6ZmwES9f719vk8jsrCcay6r1, READY); nothing in this program is deployed. Regenerate rather than edit.
+STATUS: DEMONSTRATION RECEIPT, generated 2026-10-09T11:15:33.488Z by scripts/gap/demonstration-receipt.ts on feat/gap-execution-engine at 38afd5a9. Local and sink-backed throughout: no production database, no mail credential, no model call, no send, no signed action token. Production is a195467f (dpl_G9KX6ZmwES9f719vk8jsrCcay6r1, READY); nothing in this program is deployed. Regenerate rather than edit.
 <!-- verified:2026-10-09 -->
 
 ## 1. Before and after: the rendered briefing
@@ -39,11 +39,11 @@ and the intelligence GAP already held never got a decision from him. The course 
 
 ```
 GAP today, Fri Oct 9: 17 to execute, 9 to decide [GAP#replay]
-Hello. Here is Fri Oct 9 from GAP, in order.
+Good morning. Here is Fri Oct 9 from GAP, in order.
 17 to execute: the plan's items, the same list START and NEXT walk, in this order. 9 to decide: intelligence, counted apart (11 waiting in all).
 
 Intelligence worth a look (5 of 7). Any age, for your call; Pursue and GAP develops the angle.
-- Bevera Holdings: Bevera and Autoroute expand autonomous middle-mile trucking to Texas. freightnews.example, published Oct 3, 2026. Unverified present-day status. Also reported by supplychainwire.example, newswire.example.
+- Bevera Holdings: Bevera and Autoroute expand autonomous middle-mile trucking to Texas. freightnews.example, published Oct 4, 2026. Unverified present-day status. Also reported by supplychainwire.example, newswire.example.
    Decide it on Work: https://modex-gtm.vercel.app/gap/
 - Kestrel Logistics: Kestrel opens an innovation lab for warehouse automation testing. freightnews.example, published Jun 24, 2026. Historical observation.
    Decide it on Work: https://modex-gtm.vercel.app/gap/
@@ -51,19 +51,19 @@ Intelligence worth a look (5 of 7). Any age, for your call; Pursue and GAP devel
    Decide it on Work: https://modex-gtm.vercel.app/gap/
 - Bevera Holdings: BEV 10-Q filed. EDGAR, published Oct 4, 2026. Unverified present-day status.
    Decide it on Work: https://modex-gtm.vercel.app/gap/
-- Tractor Depot: Tractor Depot opens an Idaho distribution center with automation. chainstoreage.example, published Oct 7, 2026. Unverified present-day status. Tractor Depot is not a GAP account yet. Themes: network capex.
+- Tractor Depot: Tractor Depot opens an Idaho distribution center with automation. chainstoreage.example, published Oct 8, 2026. Unverified present-day status. Tractor Depot is not a GAP account yet. Themes: network capex.
    Decide it on Work: https://modex-gtm.vercel.app/gap/
 
 Prospects to reengage (4). They wrote to us and went quiet.
-- Kestrel Logistics: Chris Ortiz, Director, Distribution at Kestrel Logistics. Wrote to us Sep 2, 2026 (1 message), last about "Re: the Chattanooga yards"; their account is in an open deal (YardFlow - Kestrel, presentationscheduled): work it from the deal. Previously contacted, a response. No exchange either way in 33 days (last: Sep 6, we wrote).
+- Kestrel Logistics: Chris Ortiz, Director, Distribution at Kestrel Logistics. Wrote to us Sep 3, 2026 (1 message), last about "Re: the Chattanooga yards"; their account is in an open deal (YardFlow - Kestrel, presentationscheduled): work it from the deal. Previously contacted, a response. No exchange either way in 33 days (last: Sep 6, we wrote).
    In a deal at Kestrel Logistics: YardFlow - Kestrel (presentationscheduled). Next step: Roadmap sync Oct 14, then the two-site pilot scope. Work it from the deal: https://modex-gtm.vercel.app/gap/accounts/kestrel-logistics/?view=brief
    Decide it on Work: https://modex-gtm.vercel.app/gap/
-- Kestrel Logistics: Kim Lee at Kestrel Logistics. Wrote to us Aug 29, 2026 (1 message), last about "Re: dock scheduling"; their account is in an open deal (YardFlow - Kestrel, presentationscheduled): work it from the deal; not a GAP contact yet. Previously contacted, a response. An answer is owed since Aug 29, 2026: they wrote Aug 29; nothing sent since.
+- Kestrel Logistics: Kim Lee at Kestrel Logistics. Wrote to us Aug 30, 2026 (1 message), last about "Re: dock scheduling"; their account is in an open deal (YardFlow - Kestrel, presentationscheduled): work it from the deal; not a GAP contact yet. Previously contacted, a response. An answer is owed since Aug 30, 2026: they wrote Aug 30; nothing sent since.
    In a deal at Kestrel Logistics: YardFlow - Kestrel (presentationscheduled). Next step: Roadmap sync Oct 14, then the two-site pilot scope. Work it from the deal: https://modex-gtm.vercel.app/gap/accounts/kestrel-logistics/?view=brief
    Decide it on Work: https://modex-gtm.vercel.app/gap/
-- unknownco.example: Pat (unknownco.example). Wrote to us Aug 24, 2026 (1 message), last about "hello"; open deal unknown: the person is not placed at an account; not a GAP contact yet. Previously contacted, a response. No exchange either way in 45 days (last: Aug 24, they wrote). Review before outreach: purpose unknown: review before any outreach.
+- unknownco.example: Pat (unknownco.example). Wrote to us Aug 25, 2026 (1 message), last about "hello"; open deal unknown: the person is not placed at an account; not a GAP contact yet. Previously contacted, a response. No exchange either way in 45 days (last: Aug 25, they wrote). Review before outreach: purpose unknown: review before any outreach.
    Decide it on Work: https://modex-gtm.vercel.app/gap/
-- Glacier Spirits: Phil Sava, VP Operations at Glacier Spirits. Wrote to us Jun 20, 2026 (1 message), last about "Re: yards"; no open deal found (HubSpot read Oct 9, 12:35 AM New York). Previously contacted, a response. An answer is owed since Jun 20, 2026: they wrote Jun 20; nothing sent since.
+- Glacier Spirits: Phil Sava, VP Operations at Glacier Spirits. Wrote to us Jun 21, 2026 (1 message), last about "Re: yards"; no open deal found (HubSpot read Oct 9, 7:10 AM New York). Previously contacted, a response. An answer is owed since Jun 21, 2026: they wrote Jun 21; nothing sent since.
    Decide it on Work: https://modex-gtm.vercel.app/gap/
 
 Begin with item 1, Harbor Co: In a deal. https://modex-gtm.vercel.app/gap/start
@@ -119,10 +119,10 @@ Everything, with what is waiting and parked: https://modex-gtm.vercel.app/gap/
 
 To work from your inbox, reply with START and the first item arrives as its own email. Each item takes APPROVE, REVISE: your words, SKIP, DEFER, DONE: what happened, NEXT or HELP on the first line of your reply.
 
-Sent by GAP at 12:40 AM New York. This is an internal message to you; nothing in it went to a buyer.
+Sent by GAP at 7:15 AM New York. This is an internal message to you; nothing in it went to a buyer.
 ```
 
-HTML rendering: 7694 chars, the same sections (not reproduced).
+HTML rendering: 7699 chars, the same sections (not reproduced).
 
 ## 2. Source manifest and dispositions (the replay, C56)
 
@@ -141,14 +141,14 @@ HTML rendering: 7694 chars, the same sections (not reproduced).
 
 | Ticket | Disposition | Evidence |
 |---|---|---|
-| C01 | demonstrated | Chris at Kestrel: "Wrote to us Sep 2, 2026 (1 message), last about "Re: the Chattanooga yards"; their account is in an open deal (YardFlow - Kestrel, presentationscheduled): work " |
+| C01 | demonstrated | Chris at Kestrel: "Wrote to us Sep 3, 2026 (1 message), last about "Re: the Chattanooga yards"; their account is in an open deal (YardFlow - Kestrel, presentationscheduled): work " |
 | C02 | demonstrated | Chris placed via persona; Kim (no persona) placed at Kestrel Logistics via domain |
 | C03 | demonstrated | the alias "kestrel" on the in-deals read found the deal; opportunity open |
 | C04 | demonstrated | no "no live opportunity" anywhere; the unplaced writer's line says "open deal unknown: the person is not placed at an account" (C57 F1: no identity, no negative) |
 | C05 | demonstrated | the Pursue carries inboundMessageId m-chris-sep2, the date and a 203-char excerpt |
 | C06 | demonstrated | the angle is deal work scoped to 62700000001 (1 succeeded, 0 failed) |
 | C07 | demonstrated | loadThreadContext: 4 typed events; Chris's excerpt is his own text with the quoted history cut (quotedBelow true); gmail coverage complete |
-| C08 | demonstrated | the draft is typed draft and the invitation calendar; neither counts as contact: last outbound stays 2026-09-06 (Sep 5) with a draft on record; both renderer paths produced (7694 chars of HTML, 6524 of text) |
+| C08 | demonstrated | the draft is typed draft and the invitation calendar; neither counts as contact: last outbound stays 2026-09-06 (Sep 5) with a draft on record; both renderer paths produced (7699 chars of HTML, 6529 of text) |
 | C09 | demonstrated | the vendor pitch and the support ask are not prospects to re-engage |
 | C10 | demonstrated | Dan (we wrote Oct 1) is not quiet and not listed; Chris is quiet on both sides: "No exchange either way in 33 days (last: Sep 6, we wrote)" |
 | C11 | demonstrated | the suspicious notice is out; Pat (purpose unknown) carries "purpose unknown: review before any outreach" |
@@ -162,7 +162,7 @@ HTML rendering: 7694 chars, the same sections (not reproduced).
 | C19 | documented | docs/gap/CLAUDE_KNOWLEDGE_INVENTORY.md (builder B, cb2a7fd0) |
 | C20 | demonstrated | coverage rows: crm:complete, gmail:complete, vault:complete, clawd:complete, public:complete |
 | C21 | demonstrated | the angle carries context revision 0fbfcbc1e4eab9b0 |
-| C22 | demonstrated | support entries: 5 |
+| C22 | demonstrated | support entries: 6 |
 | C23 | demonstrated | a second Pursue with the same context: angle_kept |
 | C24 | demonstrated | lane reply, 1 Gmail draft in the sink, 0 sent |
 | C25 | demonstrated | a second acceptance is refused with the competing draft (1 existing draft for this person and deal: reuse or revise before a new one is written.); reuse returns it, lane existing; still one draft |
@@ -173,7 +173,7 @@ HTML rendering: 7694 chars, the same sections (not reproduced).
 | C30 | demonstrated | one item for three reports: "Also reported by supplychainwire" |
 | C31 | demonstrated | the headline says its count basis: "17 to execute: the plan's items, the same list START and NEXT walk, in this order. 9 to decide: intelligence, counted apart (11 waiting in a" |
 | C32 | demonstrated | the Kestrel intelligence item names the deal and its stage in the briefing |
-| C33 | demonstrated | greeting for the New York hour of 2026-10-09T04:40:26.497Z: "Hello. Here is Fri Oct 9 from GAP, in order." |
+| C33 | demonstrated | greeting for the New York hour of 2026-10-09T11:15:23.654Z: "Good morning. Here is Fri Oct 9 from GAP, in order." |
 | C34 | demonstrated | selection: "people who wrote in the last 180 days (up to 2000 messages read); our Sent read for the 5 who would be listed; showing 4 of 4 from 1" |
 | C35 | covered_by_test | pinned by stream-a-answers-owed.test.ts (3) (not re-run in the replay) |
 | C36 | demonstrated | draft_created 1 (provider), it prepares and completes nothing; sends 0 |
@@ -187,8 +187,9 @@ HTML rendering: 7694 chars, the same sections (not reproduced).
 | C42 | covered_by_test | pinned by stream-c-c40-c42-execution.test.ts (5) (not re-run in the replay) |
 | C43 | covered_by_test | pinned by stream-c-c43-c44-commands.test.ts (17) (not re-run in the replay) |
 | C44 | covered_by_test | pinned by stream-a-c44-actions.test.tsx and stream-c-c43-c44-commands.test.ts (not re-run in the replay) |
+| C55 | demonstrated | the wedge carries supersededBy rejected:hypothesis:h-rej and stays visible: "ostings). [rejected Sep 20, 2026: hypothesis:h-rej, disposition:d-rej]"; not externally usable; no buyer line touched |
 
-Demonstrated 33, covered by a focused test 11, documented 2, exceptions 0.
+Demonstrated 34, covered by a focused test 11, documented 2, exceptions 0.
 
 ## 3. Targeted tests (focused suites, one file at a time, `--maxWorkers=1`)
 
@@ -216,12 +217,12 @@ Demonstrated 33, covered by a focused test 11, documented 2, exceptions 0.
 | tests/unit/gap/stream-a-people-state.test.ts | 5 |
 | tests/unit/gap/stream-a-purpose.test.ts | 7 |
 | tests/unit/gap/stream-a-thread-context.test.ts | 7 |
-| tests/unit/gap/stream-b-angle-promote.test.tsx | 3 |
-| tests/unit/gap/stream-b-assemble.test.ts | 8 |
+| tests/unit/gap/stream-b-angle-promote.test.tsx | 4 |
+| tests/unit/gap/stream-b-assemble.test.ts | 9 |
 | tests/unit/gap/stream-b-competing-work.test.ts | 2 |
 | tests/unit/gap/stream-b-index-lifecycle.test.ts | 4 |
-| tests/unit/gap/stream-b-promote-angle.test.ts | 3 |
-| tests/unit/gap/stream-b-promote-route.test.ts | 2 |
+| tests/unit/gap/stream-b-promote-angle.test.ts | 4 |
+| tests/unit/gap/stream-b-promote-route.test.ts | 3 |
 | tests/unit/gap/stream-b-retrieval.test.ts | 7 |
 | tests/unit/gap/stream-c-activity-truth.test.ts | 10 |
 | tests/unit/gap/stream-c-c27-c28-obligations.test.ts | 9 |
@@ -231,7 +232,7 @@ Demonstrated 33, covered by a focused test 11, documented 2, exceptions 0.
 | tests/unit/gap/stream-c-c43-c44-commands.test.ts | 7 |
 | tests/unit/gap/stream-c-c49-activity-coverage.test.ts | 5 |
 | tests/unit/gap/v1-kenco.test.ts | 6 |
-| total | 185 |
+| total | 189 |
 
 Every ticket's Status line in docs/GAP_PROSPECTING_OS.md names its suite and commit; the pre-existing GAP suites the changes touched (briefing, briefing-send, intel, decide, develop-angle, approve-request, commands-apply, health, routing-rules, ai-spend) were run green on the merged tree at each merge.
 
@@ -262,7 +263,7 @@ Every ticket's Status line in docs/GAP_PROSPECTING_OS.md names its suite and com
 |---|---|---|
 | produced | 36 | 0 |
 | motion_and_person | 36 | 0 |
-| known_answer | 36 | 6 |
+| known_answer | 36 | 0 |
 | no_prohibited_claim | 36 | 0 |
 | no_authority_leak | 36 | 0 |
 | supported_claims | 36 | 0 |
@@ -270,15 +271,6 @@ Every ticket's Status line in docs/GAP_PROSPECTING_OS.md names its suite and com
 | disconfirming | 36 | 0 |
 | house_voice | 36 | 0 |
 | missing_source_said | 36 | 0 |
-
-## Failures
-
-- known_answer · kenco-positive (missing_source, pursue): does not say "Oct 14|meeting is ahead"
-- known_answer · kenco-positive (missing_source, pursue): does not say "roadmap"
-- known_answer · kenco-positive (missing_source, more): does not say "Oct 14|meeting is ahead"
-- known_answer · kenco-positive (missing_source, more): does not say "roadmap"
-- known_answer · kenco-positive (missing_source, explore): does not say "Oct 14|meeting is ahead"
-- known_answer · kenco-positive (missing_source, explore): does not say "roadmap"
 
 ## 6. Reviewer findings (C57)
 
@@ -292,7 +284,7 @@ STATUS: ACTIVE (a standing gate). Pass 1 reviewed the first three merges (lead b
 | # | Sev | Ticket | Finding (file) | Disposition |
 |---|---|---|---|---|
 | 1 | P1 | C04 | `work/deal-coverage.ts` dealsAt answered `inDeal: false` for a person with no account name, so an unplaced writer under a complete read read "no open deal found". REPRODUCED. | FIXED (lead): no name is `inDeal: null, why: 'unplaced'`; the words say "open deal unknown: the person is not placed at an account"; the replay's C04 evidence now asserts it. |
-| 2 | P1 | C09/C11 | `context/purpose.ts` orders the vendor branch before the buyer branch and VENDOR matches "open to a quick call", so a buyer's "open to a quick call next week to talk through the pilot at our two yards" is a vendor pitch and dropped silently. REPRODUCED. | ROUTED to builder A: buyer vocabulary in a human reply wins over the vendor cues (or unknown with review); never a silent drop. |
+| 2 | P1 | C09/C11 | `context/purpose.ts` orders the vendor branch before the buyer branch and VENDOR matches "open to a quick call", so a buyer's "open to a quick call next week to talk through the pilot at our two yards" is a vendor pitch and dropped silently. REPRODUCED. | FIXED by builder A, cbbfc523 then corrected at 34ce68f5 and f7e9ace3 (the first rule let the noun "yard" in a pitch addressed to us count as buyer vocabulary and turned the frozen reference vendor case into a buyer; the lead's suites caught it on the merged tree): a pitch that addresses us as a vendor or offers services is vendor_solicitation whatever operational nouns it holds; buyer vocabulary wins only when first-person operational (our yards, our pilot) or in a reply to a thread we started; the reference pitch is pinned verbatim as vendor (stream-a-purpose 7). |
 | 3 | P1 | C10 vs C35 | `work/intel.ts` dropped every owed writer as "C35's list", but `loadAnswersOwed` reads human-confirmed dispositions only: an unanswered writer with no disposition vanished from both. | FIXED (lead): an owed writer stays listed with "An answer is owed since <date>: <basis>" and `state.answerOwedSince`; the wiring test pins it. |
 | 4 | P1 | C15/C46 | `context/retrieval.ts` takes a date in a section heading ("## Live signals (clawd, 2026-10-08)") as the claims' observedAt and the vault watermark, so a rebuilt-but-old wedge reads fresh through the vault path. REPRODUCED. | ROUTED to builder B: a sync-section heading date is indexedAt only; the watermark comes from dated non-internal claims. |
 | 5 | P1 | C13/C15 | `validateClaims` refused refresh-as-observation only with eventAt null; retrieval copies observedAt into eventAt, which bypassed it; observedAt with indexedAt null also passes. REPRODUCED. | ACCEPTED with the reason, after a tried fix was reverted: refusing equality when eventAt equals observedAt refused legitimate claims (a note or a Clawd wedge dated the day it was synced reads observedAt = indexedAt = eventAt and is true), and the two stream-b retrieval suites went red on the merged tree; the validator cannot tell a same-day observation from a copied refresh time, and a claim with indexedAt null cannot be judged by it at all. The real bypass is the heading-date source in retrieval, closed by B's F4 fix; the guard keeps refusing an undated claim stamped with its refresh time. |
@@ -306,7 +298,7 @@ STATUS: ACTIVE (a standing gate). Pass 1 reviewed the first three merges (lead b
 | 13 | P2 | C04/C01 | `dealCoverageFrom` ignored `summary.unresolved`: an open deal at a HubSpot company GAP could not map was invisible, so a same-named account read "no open deal found". | FIXED (lead): unresolved company names fold into `unmappedNames`; `dealsAt` answers `inDeal: null, why: 'unmapped'` with the words "an open deal exists at a HubSpot company of this name that GAP has not mapped to an account". |
 | 14 | P2 | C46 | A failed context probe answered HEALTHY "not read"; a reachable source with no dated knowledge could be "complete and fresh". | FIXED (lead): a failed probe is DEGRADED and says so; no dated knowledge is partial. |
 | 15 | P2 | C39 | approve-request and seller-draft skip the recipient check when the snapshot carries no recipient, and the assignment row records no senderIdentity. | FIXED by builder C, 82c1e489: an APPROVE whose snapshot carries no recipient is refused in words before any preflight or draft (assignment_no_recipient); seller-draft refuses a pinned snapshot with no recipient; the assignment row records senderIdentity and the sender check compares against it (c39 +3, assignment.test pins senderIdentity; mutation red then restored). |
-| 16 | P2 | C47 | The poller joins hs_email_message_id to the stored RFC id with no normalization. Unconfirmed. | ROUTED to builder A: normalize (trim, strip <>, lowercase) on store and lookup, with a test. |
+| 16 | P2 | C47 | The poller joins hs_email_message_id to the stored RFC id with no normalization. Unconfirmed. | FIXED by builder A, 2ba738e2: normalizeRfcId, rfcVariants and rfcWhere in thread-context.ts; the poller, storeInbound and the check-inbox cron look the Message-ID up over the spellings, insensitive; the rfc provenance id is keyed on the normalized form (stream-a-ingest-idempotency 6). |
 | 17 | P2 | ledger | Status lines lagged the code at 9edf2edd (C21-C23, C31-C33, C47). | FIXED: every merged ticket carries its receipt; the C58 reconciliation keeps code, tests, deployed and accepted apart. |
 
 Verified as sound by the reviewer (unchanged): coverage status mapping; resolvePersonAccount; C06 scoping; C23 revision; C13 externallyUsable, byAuthority, fingerprint, emptyPacket; C17 deal existence from the CRM only; C16 Clawd versions; C14 bounds and classes; C08 mail types and provenance merge; C35 paging; C36-C38c projection; C49 paging and dedup; C39 revision-0 binding and the recheck before the adapter; C45 redaction; C50 race guard; no retrieved text reaches a tool; no credential printing.
@@ -316,14 +308,14 @@ Verified as sound by the reviewer (unchanged): coverage status mapping; resolveP
 | From | Request | Disposition |
 |---|---|---|
 | A | `audit.ts` GapAuditKind gains conversation.classified, execution.reply_resolved, inbound.provenance_linked | FIXED (lead). |
-| A | check-inbox cron dedups by RFC but records no provenance link | ROUTED to builder A (reuse storeInbound). |
-| A | no Gmail drafts-by-recipient reader; loadThreadContext.listDrafts unwired | DEFERRED (named debt, owner engineering): a draft is never a contact today because the Sent read holds sends only; the drafts reader is a later wiring. |
+| A | check-inbox cron dedups by RFC but records no provenance link | FIXED by builder A, 2ba738e2 (linkProvenance on the second-copy path). |
+| A | no Gmail drafts-by-recipient reader; loadThreadContext.listDrafts unwired | FIXED by builder A, 7dabebff: `listDraftsTo(sender, recipient)` in gmail-inbox.ts (read-only, newest 25, the To header checked, [] under the sink transport, throws on a read failure so a caller reports partial); the wiring is P2-1 (builder B the route, builder C the reply service). |
 | A, B | `TimelineEvent.threadId` on the contract | FIXED (lead, optional field). |
 | A | no route or UI calls recordOverride / resolveAnswerOwed | DEFERRED (owner: the next seller-evidence ticket): the override is now applied by the intelligence reader; the seller control to record one is a UI ticket Casey raises when a wrong classification costs a day. |
 | B | memory `project_gap_execution_engine.md` said X19 open | FIXED at the memory file and its index line. |
 | B | developAngle default timeline wiring | ROUTED to builder B (= finding 9). |
 | C | unknown-send reconciler drops the body hash (C41 residual) | FIXED by builder C, 82c1e489: the reconciled DIRECT_SENT carries contentHash, senderIdentity, reviewedSubject and the thread from the newest preview row (c40-c42 5, unknown-send-reconcile 7; mutation red then restored). |
-| C | decide, start and item pages execute on a bare GET | ROUTED to builder A: executionAllowed on GET renders a confirm form; apply on POST. |
+| C | decide, start and item pages execute on a bare GET | FIXED by builder A, 5b41a12b: /gap/decide and /gap/start render a one-click confirm form on a bare GET and execute only on the confirmed step executionAllowed names (the start page used to start the day and send the assignment on any GET, a prefetch included; the link now carries prefetch false); /gap/item routes tokens to those pages and never executes (stream-a-execution-gate 6). |
 | C | assignment row records no senderIdentity | ROUTED to builder C (= finding 15). |
 | C | commitmentPhase still says "Back today" on the account page for a passed snooze | DEFERRED (named debt, owner C's next slice): list.ts overrides it on Work; the account page keeps the old words. |
 | C | DRAFT_SENT carries no sent-body hash; day-load says only "sent from Gmail by hand" | ACCEPTED: the activity line says the copy as sent was not checked (C40), which is the truth of a by-hand send. |
@@ -334,9 +326,9 @@ Verified as sound by the reviewer (unchanged): coverage status mapping; resolveP
 
 | # | Sev | Ticket | Finding (file) | Disposition |
 |---|---|---|---|---|
-| P2-1 | P1 | C25 | `agents/promote-angle.ts` reads competing work with no Drafts reader (the route passes no deps; `thread-context.ts` reads Drafts only through an injected `listDrafts`, and no production caller wires one; `seller-reply.ts` checks only GAP's own REPLY_DRAFTED row): Casey's hand-written Gmail drafts to a person are invisible and a promotion writes a third beside them; the replay demonstrated C25 only against GAP's own first draft. | ROUTED: builder A writes a read-only `listDraftsTo(sender, recipient)` beside `listSentTo`; builder B wires it into the promote route's default competing read and the reply draft-outstanding check, with the assertions the reviewer names. |
-| P2-2 | P1 | C06 | `work/decide.ts` skipped the HubSpot contact lookup whenever the persona row carried an account, so every open deal at the account rode the task and both next steps reached the model; the quality harness masked it by pre-scoping from the fixture; `work/briefing.ts` prints deals[0] for the person. | FIXED (lead, af8b9f2b): the persona's contact id is matched against each deal's contact ids first (no network), then the contact lookup runs only when more than one deal remains and a reader was supplied; `lead-c57-pass2.test.ts` pins the Dallas-only task and the unsettled scope without a reader. ROUTED to builder C for the briefing line (say "N open deals; the person's deal is not settled" instead of deals[0]). |
-| P2-3 | P1 | C22 | `agents/angle-claims.ts`: a sentence the model labels `inference` skips the buyer-attribution, invented-system and invented-pain checks; "Alex told us they are replacing Open Dock with Kaleris next year" labelled inference with an empty record passes, and a starter so labelled becomes the Gmail reply body; the mocked generator labelled everything inference so no harness exercised the fact path. | ROUTED to builder B: an attribution and a named system are refused whatever the label; only the pain check honours inference (with the F11 names change). The lead's reworked mock now cites facts with labels (finding 6b), so the fact path runs in the harness. |
+| P2-1 | P1 | C25 | `agents/promote-angle.ts` reads competing work with no Drafts reader (the route passes no deps; `thread-context.ts` reads Drafts only through an injected `listDrafts`, and no production caller wires one; `seller-reply.ts` checks only GAP's own REPLY_DRAFTED row): Casey's hand-written Gmail drafts to a person are invisible and a promotion writes a third beside them; the replay demonstrated C25 only against GAP's own first draft. | IN PROGRESS: the reader is merged (A, 7dabebff); the service half is merged (B, f4bf2d66: two hand drafts read through deps.thread.listDrafts with no GAP row refuse with competing_seller_edit, fresh refused, Gmail untouched; competingWork normalises provider-prefixed ids so GAP's own draft is never counted twice); the route wiring (B) and the reply service's outstanding-draft check (C) are routed with the export in hand. |
+| P2-2 | P1 | C06 | `work/decide.ts` skipped the HubSpot contact lookup whenever the persona row carried an account, so every open deal at the account rode the task and both next steps reached the model; the quality harness masked it by pre-scoping from the fixture; `work/briefing.ts` prints deals[0] for the person. | FIXED (lead, af8b9f2b): the persona's contact id is matched against each deal's contact ids first (no network), then the contact lookup runs only when more than one deal remains and a reader was supplied; `lead-c57-pass2.test.ts` pins the Dallas-only task and the unsettled scope without a reader. FIXED by builder C for the briefing line, 413ed9ff: more than one deal and no settled scope renders "N open deals at <account>; the person's deal is not settled" with the deal-brief link and names no deal; one deal unchanged (stream-c-c31-c33-briefing 10). |
+| P2-3 | P1 | C22 | `agents/angle-claims.ts`: a sentence the model labels `inference` skips the buyer-attribution, invented-system and invented-pain checks; "Alex told us they are replacing Open Dock with Kaleris next year" labelled inference with an empty record passes, and a starter so labelled becomes the Gmail reply body; the mocked generator labelled everything inference so no harness exercised the fact path. | FIXED by builder B, 052c901e: a buyer verb with a packet person or a pronoun as subject is refused unsupported_buyer_claim whatever the label unless a buyer line that person spoke backs it; a system the whole record does not name is refused invented_system whatever the label (a record line naming it becomes the sentence's support); only the pain check honours inference; a statement starter is checked as one (develop-angle 8; the mocked harness green at refused 0 of 36). |
 | P2-4 | P1 | C04 | An unplaced writer told "no open deal found" (= pass-1 F1). | FIXED (lead, 27fbfa47) before this pass's tree; the replay's C04 evidence asserts the unknown words. |
 | P2-5 | P1 | C07/C17/C18/C21 | The production angle handler composed no timeline, CRM or identity adapter (the packet was the seed), and the seed carried the Pursue message with purpose null, which the assembler treats as the buyer's external words: a calendar RSVP or an auto-reply could be rendered as "What the buyer said"; our Sent, drafts and calendar never reached the packet. | FIXED: the lead put the C09 purpose on the Pursue task input (27fbfa47) and builder B wired the handler's default timeline (loadThreadContext with the GAP mailbox's Sent, read-only; 093aefcd), the identity gap-fill adapter (093aefcd) and the seed purpose (23e6dafb); the Drafts side follows P2-1. |
 | P2-6 | P1 | C52-C54, C56 | The evaluators could pass while the real path was wrong: (a) `missingSource.expectedWords` asserted nowhere; (b) the mock echoed `mustSay` and labelled everything inference, so known_answer and supported_claims were tautologies; (c) the retrieval sink hand-built the timeline, purposes and draft typing from the fixture's expected values; (d) replay rows C02, C07, C08 were not demonstrations of the code they named. | FIXED (lead): (b) the mock derives its angle from the record block alone and cites facts with labels; the scorer requires a cited fact where the record offers one; the reference set is v3 (angle words apart from line words); (a) the missing-source variant is judged by `missing_source_said` (a source kind that could not be read at all must be named in the gaps or the caveat; the same class over the retrieval coverage), with `expectedWords` kept as the line-surface statement of the same truth (ACCEPTED: it is documentation for the intel line, which the intel suites assert); (c) the retrieval evaluation builds the timeline through `buildTimeline` and classifies purpose through `classifyPurpose` (identity stays the fixture's: retrieval is measured given an identity; instruction_safety stays as the structural record that the assembler can call only the adapters it is handed); (d) C02 now demonstrates a no-persona writer placed by the verified domain, C07/C08 run `loadThreadContext` over the sink ledger with Sent, Drafts and a calendar invitation and check the draft and calendar never count as contact in `peopleState`. The reworked harness immediately surfaced P2-9. |
@@ -358,6 +350,17 @@ Pass-2 sound list (unchanged): seller-send binding at confirm; copies-reconcile 
 
 ## 9. Commits on the branch since production
 
+- 38afd5a9 fix(gap): C46/C57 F14 said precisely: a context probe that was not run stays "not read" and claims nothing (the older callers and fixtures), a probe that threw is DEGRADED with its reason (th
+- 4a90a0fa fix(gap): C57 P2-1 closed: the promote route wires the GAP mailbox's Sent and Drafts readers into the competing-work read (mailboxThreadDeps from the configured GAP sender, none when no sende
+- ccd779b2 feat(gap): C57 pass 2 closed on the lead side after the ninth merge: the pursued person item carries its writer and the panel hands it to the promote control (P2-8 wired); the P2-9 pins come 
+- 997cee66 fix(gap): C57 pass 2 (P2-1, the sender side) a hand-written Gmail draft of Casey's to the person is outstanding for a GAP first touch too (execution/seller-draft.ts): SellerDraftDeps gains ma
+- 9b8da671 fix(gap): the replay's sink mailbox answers no hand-written drafts (the reply service now reads them before any draft, P2-1)
+- 6add943c fix(gap): C24 P2-8 the promotion of a person item goes to the writer (components/gap/angle-promote.tsx, agents/promote-angle.ts): AnglePromoteProps gains writer ({email, name} for a person it
+- e66d18ac fix(gap): C21 the record block carries the next accepted meeting and an unsent draft of ours (agents/angle-claims.ts packetRecord, now taking the clock): after the last exchange, "A meeting i
+- b30b6d29 fix(gap): C55 P2-7 a rejected hypothesis guards the record (context/assemble.ts, agents/angle-claims.ts, develop-angle.ts): AssembleAdapters gains rejected (the account's RejectedFamily rows 
+- 276d954d fix(gap): C57 pass 2 (P2-1, the reply side) a hand-written Gmail draft of Casey's in the person's thread is outstanding too (execution/seller-reply.ts): SellerReplyDeps gains mailboxDraftsTo 
+- c4f62727 docs(gap): the review doc and the ledger record the eighth merge: F2 corrected, F16, the GET-page gate, the drafts reader, P2-3, the P2-1 service half, the multi-deal briefing line; the integ
+- 686ae2d9 docs(gap): the four receipts regenerated on the eighth merge (dedbdc75): retrieval 8 classes over 24 runs at zero, the mocked quality harness 10 checks over 36 outputs with the two pinned P2-
 - d5171597 docs(gap): C57 review: pass 2 recorded (9 findings with their dispositions: P2-2, P2-4, P2-5, P2-6 fixed; P2-1, P2-3, P2-7, P2-8, P2-9 routed to their owners)
 - f8109d2c fix(gap): C57 pass 2, finding 6, the evaluators cannot pass while the real path is wrong: the mocked generator derives its angle from the record block it is handed (the first buyer line resta
 - f4bf2d66 test(gap): C57 P2-1 (C25), the service half: a seller's hand-written Gmail drafts to the person, read by the typed timeline's drafts reader through deps.thread.listDrafts with no GAP ledger r

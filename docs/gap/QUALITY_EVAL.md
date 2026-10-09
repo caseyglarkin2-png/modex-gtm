@@ -1,6 +1,6 @@
 # GAP OS generated-usefulness evaluation (C54)
 
-STATUS: HARNESS CHECK ONLY (MOCKED generator; this is NOT a live model evaluation and makes no quality claim), generated 2026-10-09T04:40:24.050Z by scripts/gap/quality-eval.ts over reference set v3: 6 generating cases x 2 variants x 3 decisions = 36 outputs, 0 refused. Models: mocked; distinct prompts: 33. Cost from the spend ledger: $0.0000 over 0 calls (0 failed, 0 refused). Regenerate rather than edit.
+STATUS: HARNESS CHECK ONLY (MOCKED generator; this is NOT a live model evaluation and makes no quality claim), generated 2026-10-09T11:14:54.839Z by scripts/gap/quality-eval.ts over reference set v3: 6 generating cases x 2 variants x 3 decisions = 36 outputs, 0 refused. Models: mocked; distinct prompts: 33. Cost from the spend ledger: $0.0000 over 0 calls (0 failed, 0 refused). Regenerate rather than edit.
 <!-- verified:2026-10-09 -->
 
 ## Per check (failures over outputs checked; never one aggregate score)
@@ -9,7 +9,7 @@ STATUS: HARNESS CHECK ONLY (MOCKED generator; this is NOT a live model evaluatio
 |---|---|---|
 | produced | 36 | 0 |
 | motion_and_person | 36 | 0 |
-| known_answer | 36 | 6 |
+| known_answer | 36 | 0 |
 | no_prohibited_claim | 36 | 0 |
 | no_authority_leak | 36 | 0 |
 | supported_claims | 36 | 0 |
@@ -18,23 +18,14 @@ STATUS: HARNESS CHECK ONLY (MOCKED generator; this is NOT a live model evaluatio
 | house_voice | 36 | 0 |
 | missing_source_said | 36 | 0 |
 
-## Failures
-
-- known_answer · kenco-positive (missing_source, pursue): does not say "Oct 14|meeting is ahead"
-- known_answer · kenco-positive (missing_source, pursue): does not say "roadmap"
-- known_answer · kenco-positive (missing_source, more): does not say "Oct 14|meeting is ahead"
-- known_answer · kenco-positive (missing_source, more): does not say "roadmap"
-- known_answer · kenco-positive (missing_source, explore): does not say "Oct 14|meeting is ahead"
-- known_answer · kenco-positive (missing_source, explore): does not say "roadmap"
-
 ## Outputs
 
-- kenco-positive (full, pursue): angle, action email, deal 62700000001, 0 failure(s); packet 0fbfcbc1e4eab9b0; prompt 27c6a5c2287a
-- kenco-positive (full, more): angle, action email, deal 62700000001, 0 failure(s); packet 0fbfcbc1e4eab9b0; prompt 437a9e49fa67
-- kenco-positive (full, explore): angle, action email, deal 62700000001, 0 failure(s); packet 0fbfcbc1e4eab9b0; prompt f90e9fc2b343
-- kenco-positive (missing_source, pursue): angle, action email, 2 failure(s); packet 51b76fbec0b0b6d6; prompt 9c01f82d2133
-- kenco-positive (missing_source, more): angle, action email, 2 failure(s); packet 51b76fbec0b0b6d6; prompt 44fc162bcfc9
-- kenco-positive (missing_source, explore): angle, action email, 2 failure(s); packet 51b76fbec0b0b6d6; prompt 1169acafd4cf
+- kenco-positive (full, pursue): angle, action email, deal 62700000001, 0 failure(s); packet 0fbfcbc1e4eab9b0; prompt 9399db6c09da
+- kenco-positive (full, more): angle, action email, deal 62700000001, 0 failure(s); packet 0fbfcbc1e4eab9b0; prompt d6986ffade66
+- kenco-positive (full, explore): angle, action email, deal 62700000001, 0 failure(s); packet 0fbfcbc1e4eab9b0; prompt c1820928f190
+- kenco-positive (missing_source, pursue): angle, action email, 0 failure(s); packet 51b76fbec0b0b6d6; prompt 060b3acbbf82
+- kenco-positive (missing_source, more): angle, action email, 0 failure(s); packet 51b76fbec0b0b6d6; prompt 3a9115221cb7
+- kenco-positive (missing_source, explore): angle, action email, 0 failure(s); packet 51b76fbec0b0b6d6; prompt 11f1da71dcee
 - ambiguous-subsidiary (full, pursue): angle, action research, 0 failure(s); packet 013b7f81fadf244a; prompt 23040488803c
 - ambiguous-subsidiary (full, more): angle, action research, 0 failure(s); packet 013b7f81fadf244a; prompt 30302673fb59
 - ambiguous-subsidiary (full, explore): angle, action research, 0 failure(s); packet 013b7f81fadf244a; prompt e01b0650e2f7

@@ -1,13 +1,13 @@
 # GAP OS deployment and configuration receipt
 
-STATUS: RECEIPT, generated 2026-10-09T03:13:50.417Z by scripts/gap/deployment-receipt.ts (reads only; no secret values; regenerate rather than edit).
+STATUS: RECEIPT, generated 2026-10-09T11:15:27.577Z by scripts/gap/deployment-receipt.ts (reads only; no secret values; regenerate rather than edit).
 <!-- verified:2026-10-09 -->
 
 Three things kept apart: the LOCAL CODE this receipt was generated from, the DEPLOYED ENVIRONMENT (the deployment Vercel serves on the production alias and the environment it snapshotted at build time), and the PROJECT SETTINGS (what the Vercel project holds now; a change here reaches production only with the next deploy).
 
 ## 1. Local code
 
-- Commit f9b149f9 on feat/gap-execution-engine (uncommitted changes present); origin/main a195467f.
+- Commit 38afd5a9 on feat/gap-execution-engine (uncommitted changes present); origin/main a195467f.
 - Local code is NOT the deployed commit (deployed a195467f).
 
 ## 2. Deployed environment
@@ -26,8 +26,8 @@ Three things kept apart: the LOCAL CODE this receipt was generated from, the DEP
 
 ## 4. Baseline pointer
 
-- docs/gap/STABLE_BASELINE.md says: Production SHA: ed9976e8 (PR #429, X19 + A06 + the hanging items; over 672b8694 = PR #428 docs, 4976f1e5 = PR #427 I06g/A04, a76f3440 = PR #426 I06f/A03d/the completion matrix, 373ea79f = PR #425 I06d/I06e/A03c, 5a39ec9c = PR #424 I06c/A03b ...
-- HISTORICAL: that pointer names ed9976e8 and the deployed commit is a195467f; the pointer is a record of an earlier state, not the live one. Update it at its owning surface when a change ships.
+- docs/gap/STABLE_BASELINE.md says: Production SHA: a195467f (PR #431, X22 the explicit briefing resend; over cfce2f27 = PR #430 docs, ed9976e8 = PR #429 X19 + A06 + the hanging items, 672b8694 = PR #428 docs, 4976f1e5 = PR #427 I06g/A04, a76f3440 = PR #426 I06f/A03d/the comp ...
+- That pointer AGREES with the deployed commit (a195467f).
 
 ## 5. Last successful source reads (health)
 

@@ -1,6 +1,6 @@
 # GAP OS October 8 replay (C56)
 
-STATUS: REPLAY RECEIPT, generated 2026-10-09T04:40:26.497Z by scripts/gap/replay-october8.ts over a sink-backed world shaped like the measured October 8 day (de-identified to the reference set's names). No production database, no mail credential, no model (a scripted generator; no quality claim). Signed action tokens are not in this file. Regenerate rather than edit.
+STATUS: REPLAY RECEIPT, generated 2026-10-09T11:15:23.654Z by scripts/gap/replay-october8.ts over a sink-backed world shaped like the measured October 8 day (de-identified to the reference set's names). No production database, no mail credential, no model (a scripted generator; no quality claim). Signed action tokens are not in this file. Regenerate rather than edit.
 <!-- verified:2026-10-09 -->
 
 ## Before: the October 8 briefing as measured in production (the ledger's record)
@@ -37,11 +37,11 @@ and the intelligence GAP already held never got a decision from him. The course 
 
 ```
 GAP today, Fri Oct 9: 17 to execute, 9 to decide [GAP#replay]
-Hello. Here is Fri Oct 9 from GAP, in order.
+Good morning. Here is Fri Oct 9 from GAP, in order.
 17 to execute: the plan's items, the same list START and NEXT walk, in this order. 9 to decide: intelligence, counted apart (11 waiting in all).
 
 Intelligence worth a look (5 of 7). Any age, for your call; Pursue and GAP develops the angle.
-- Bevera Holdings: Bevera and Autoroute expand autonomous middle-mile trucking to Texas. freightnews.example, published Oct 3, 2026. Unverified present-day status. Also reported by supplychainwire.example, newswire.example.
+- Bevera Holdings: Bevera and Autoroute expand autonomous middle-mile trucking to Texas. freightnews.example, published Oct 4, 2026. Unverified present-day status. Also reported by supplychainwire.example, newswire.example.
    Decide it on Work: https://modex-gtm.vercel.app/gap/
 - Kestrel Logistics: Kestrel opens an innovation lab for warehouse automation testing. freightnews.example, published Jun 24, 2026. Historical observation.
    Decide it on Work: https://modex-gtm.vercel.app/gap/
@@ -49,19 +49,19 @@ Intelligence worth a look (5 of 7). Any age, for your call; Pursue and GAP devel
    Decide it on Work: https://modex-gtm.vercel.app/gap/
 - Bevera Holdings: BEV 10-Q filed. EDGAR, published Oct 4, 2026. Unverified present-day status.
    Decide it on Work: https://modex-gtm.vercel.app/gap/
-- Tractor Depot: Tractor Depot opens an Idaho distribution center with automation. chainstoreage.example, published Oct 7, 2026. Unverified present-day status. Tractor Depot is not a GAP account yet. Themes: network capex.
+- Tractor Depot: Tractor Depot opens an Idaho distribution center with automation. chainstoreage.example, published Oct 8, 2026. Unverified present-day status. Tractor Depot is not a GAP account yet. Themes: network capex.
    Decide it on Work: https://modex-gtm.vercel.app/gap/
 
 Prospects to reengage (4). They wrote to us and went quiet.
-- Kestrel Logistics: Chris Ortiz, Director, Distribution at Kestrel Logistics. Wrote to us Sep 2, 2026 (1 message), last about "Re: the Chattanooga yards"; their account is in an open deal (YardFlow - Kestrel, presentationscheduled): work it from the deal. Previously contacted, a response. No exchange either way in 33 days (last: Sep 6, we wrote).
+- Kestrel Logistics: Chris Ortiz, Director, Distribution at Kestrel Logistics. Wrote to us Sep 3, 2026 (1 message), last about "Re: the Chattanooga yards"; their account is in an open deal (YardFlow - Kestrel, presentationscheduled): work it from the deal. Previously contacted, a response. No exchange either way in 33 days (last: Sep 6, we wrote).
    In a deal at Kestrel Logistics: YardFlow - Kestrel (presentationscheduled). Next step: Roadmap sync Oct 14, then the two-site pilot scope. Work it from the deal: https://modex-gtm.vercel.app/gap/accounts/kestrel-logistics/?view=brief
    Decide it on Work: https://modex-gtm.vercel.app/gap/
-- Kestrel Logistics: Kim Lee at Kestrel Logistics. Wrote to us Aug 29, 2026 (1 message), last about "Re: dock scheduling"; their account is in an open deal (YardFlow - Kestrel, presentationscheduled): work it from the deal; not a GAP contact yet. Previously contacted, a response. An answer is owed since Aug 29, 2026: they wrote Aug 29; nothing sent since.
+- Kestrel Logistics: Kim Lee at Kestrel Logistics. Wrote to us Aug 30, 2026 (1 message), last about "Re: dock scheduling"; their account is in an open deal (YardFlow - Kestrel, presentationscheduled): work it from the deal; not a GAP contact yet. Previously contacted, a response. An answer is owed since Aug 30, 2026: they wrote Aug 30; nothing sent since.
    In a deal at Kestrel Logistics: YardFlow - Kestrel (presentationscheduled). Next step: Roadmap sync Oct 14, then the two-site pilot scope. Work it from the deal: https://modex-gtm.vercel.app/gap/accounts/kestrel-logistics/?view=brief
    Decide it on Work: https://modex-gtm.vercel.app/gap/
-- unknownco.example: Pat (unknownco.example). Wrote to us Aug 24, 2026 (1 message), last about "hello"; open deal unknown: the person is not placed at an account; not a GAP contact yet. Previously contacted, a response. No exchange either way in 45 days (last: Aug 24, they wrote). Review before outreach: purpose unknown: review before any outreach.
+- unknownco.example: Pat (unknownco.example). Wrote to us Aug 25, 2026 (1 message), last about "hello"; open deal unknown: the person is not placed at an account; not a GAP contact yet. Previously contacted, a response. No exchange either way in 45 days (last: Aug 25, they wrote). Review before outreach: purpose unknown: review before any outreach.
    Decide it on Work: https://modex-gtm.vercel.app/gap/
-- Glacier Spirits: Phil Sava, VP Operations at Glacier Spirits. Wrote to us Jun 20, 2026 (1 message), last about "Re: yards"; no open deal found (HubSpot read Oct 9, 12:35 AM New York). Previously contacted, a response. An answer is owed since Jun 20, 2026: they wrote Jun 20; nothing sent since.
+- Glacier Spirits: Phil Sava, VP Operations at Glacier Spirits. Wrote to us Jun 21, 2026 (1 message), last about "Re: yards"; no open deal found (HubSpot read Oct 9, 7:10 AM New York). Previously contacted, a response. An answer is owed since Jun 21, 2026: they wrote Jun 21; nothing sent since.
    Decide it on Work: https://modex-gtm.vercel.app/gap/
 
 Begin with item 1, Harbor Co: In a deal. https://modex-gtm.vercel.app/gap/start
@@ -117,10 +117,10 @@ Everything, with what is waiting and parked: https://modex-gtm.vercel.app/gap/
 
 To work from your inbox, reply with START and the first item arrives as its own email. Each item takes APPROVE, REVISE: your words, SKIP, DEFER, DONE: what happened, NEXT or HELP on the first line of your reply.
 
-Sent by GAP at 12:40 AM New York. This is an internal message to you; nothing in it went to a buyer.
+Sent by GAP at 7:15 AM New York. This is an internal message to you; nothing in it went to a buyer.
 ```
 
-HTML rendering: 7694 chars, the same sections (not reproduced).
+HTML rendering: 7699 chars, the same sections (not reproduced).
 
 ## Source manifest
 
@@ -137,14 +137,14 @@ HTML rendering: 7694 chars, the same sections (not reproduced).
 
 | Ticket | Disposition | Evidence |
 |---|---|---|
-| C01 | demonstrated | Chris at Kestrel: "Wrote to us Sep 2, 2026 (1 message), last about "Re: the Chattanooga yards"; their account is in an open deal (YardFlow - Kestrel, presentationscheduled): work " |
+| C01 | demonstrated | Chris at Kestrel: "Wrote to us Sep 3, 2026 (1 message), last about "Re: the Chattanooga yards"; their account is in an open deal (YardFlow - Kestrel, presentationscheduled): work " |
 | C02 | demonstrated | Chris placed via persona; Kim (no persona) placed at Kestrel Logistics via domain |
 | C03 | demonstrated | the alias "kestrel" on the in-deals read found the deal; opportunity open |
 | C04 | demonstrated | no "no live opportunity" anywhere; the unplaced writer's line says "open deal unknown: the person is not placed at an account" (C57 F1: no identity, no negative) |
 | C05 | demonstrated | the Pursue carries inboundMessageId m-chris-sep2, the date and a 203-char excerpt |
 | C06 | demonstrated | the angle is deal work scoped to 62700000001 (1 succeeded, 0 failed) |
 | C07 | demonstrated | loadThreadContext: 4 typed events; Chris's excerpt is his own text with the quoted history cut (quotedBelow true); gmail coverage complete |
-| C08 | demonstrated | the draft is typed draft and the invitation calendar; neither counts as contact: last outbound stays 2026-09-06 (Sep 5) with a draft on record; both renderer paths produced (7694 chars of HTML, 6524 of text) |
+| C08 | demonstrated | the draft is typed draft and the invitation calendar; neither counts as contact: last outbound stays 2026-09-06 (Sep 5) with a draft on record; both renderer paths produced (7699 chars of HTML, 6529 of text) |
 | C09 | demonstrated | the vendor pitch and the support ask are not prospects to re-engage |
 | C10 | demonstrated | Dan (we wrote Oct 1) is not quiet and not listed; Chris is quiet on both sides: "No exchange either way in 33 days (last: Sep 6, we wrote)" |
 | C11 | demonstrated | the suspicious notice is out; Pat (purpose unknown) carries "purpose unknown: review before any outreach" |
@@ -158,7 +158,7 @@ HTML rendering: 7694 chars, the same sections (not reproduced).
 | C19 | documented | docs/gap/CLAUDE_KNOWLEDGE_INVENTORY.md (builder B, cb2a7fd0) |
 | C20 | demonstrated | coverage rows: crm:complete, gmail:complete, vault:complete, clawd:complete, public:complete |
 | C21 | demonstrated | the angle carries context revision 0fbfcbc1e4eab9b0 |
-| C22 | demonstrated | support entries: 5 |
+| C22 | demonstrated | support entries: 6 |
 | C23 | demonstrated | a second Pursue with the same context: angle_kept |
 | C24 | demonstrated | lane reply, 1 Gmail draft in the sink, 0 sent |
 | C25 | demonstrated | a second acceptance is refused with the competing draft (1 existing draft for this person and deal: reuse or revise before a new one is written.); reuse returns it, lane existing; still one draft |
@@ -169,7 +169,7 @@ HTML rendering: 7694 chars, the same sections (not reproduced).
 | C30 | demonstrated | one item for three reports: "Also reported by supplychainwire" |
 | C31 | demonstrated | the headline says its count basis: "17 to execute: the plan's items, the same list START and NEXT walk, in this order. 9 to decide: intelligence, counted apart (11 waiting in a" |
 | C32 | demonstrated | the Kestrel intelligence item names the deal and its stage in the briefing |
-| C33 | demonstrated | greeting for the New York hour of 2026-10-09T04:40:26.497Z: "Hello. Here is Fri Oct 9 from GAP, in order." |
+| C33 | demonstrated | greeting for the New York hour of 2026-10-09T11:15:23.654Z: "Good morning. Here is Fri Oct 9 from GAP, in order." |
 | C34 | demonstrated | selection: "people who wrote in the last 180 days (up to 2000 messages read); our Sent read for the 5 who would be listed; showing 4 of 4 from 1" |
 | C35 | covered_by_test | pinned by stream-a-answers-owed.test.ts (3) (not re-run in the replay) |
 | C36 | demonstrated | draft_created 1 (provider), it prepares and completes nothing; sends 0 |
@@ -183,5 +183,6 @@ HTML rendering: 7694 chars, the same sections (not reproduced).
 | C42 | covered_by_test | pinned by stream-c-c40-c42-execution.test.ts (5) (not re-run in the replay) |
 | C43 | covered_by_test | pinned by stream-c-c43-c44-commands.test.ts (17) (not re-run in the replay) |
 | C44 | covered_by_test | pinned by stream-a-c44-actions.test.tsx and stream-c-c43-c44-commands.test.ts (not re-run in the replay) |
+| C55 | demonstrated | the wedge carries supersededBy rejected:hypothesis:h-rej and stays visible: "ostings). [rejected Sep 20, 2026: hypothesis:h-rej, disposition:d-rej]"; not externally usable; no buyer line touched |
 
-Demonstrated 33, covered by a focused test 11, documented 2, exceptions 0.
+Demonstrated 34, covered by a focused test 11, documented 2, exceptions 0.
