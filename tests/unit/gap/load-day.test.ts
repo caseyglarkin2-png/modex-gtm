@@ -106,6 +106,7 @@ describe('X01: loadWorkDay, the one day builder', () => {
     h.loadPursued.mockResolvedValue([kenco, older, unplaced, running]);
     const realNow = new Date('2026-10-09T14:00:00Z');
     await loadWorkDay({}, { lane: false, preview: false, fresh: false, now: realNow });
+    expect(h.loadPursued, 'the day\'s in-deals read rides along as the coverage (the C5 family tie-break needs it)').toHaveBeenCalledWith({}, realNow, expect.objectContaining({ coverage: expect.objectContaining({ status: expect.any(String) }) }));
     const input = h.workDay.mock.calls.at(-1)?.[0] as { preparedAngles: Map<string, { who: string; line: string }> };
     expect([...input.preparedAngles.keys()], 'only the ready, placed angle counts; the newest wins').toEqual(['Kenco']);
     expect(input.preparedAngles.get('Kenco')).toEqual({ who: 'Dave Kiesling', line: 'GAP prepared an angle for Dave Kiesling: Kenco runs a network of yards where the gate is the bottleneck.' });
