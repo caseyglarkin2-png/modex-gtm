@@ -33,7 +33,7 @@ export async function composeStoryAndAnchor(x: { inputs: AccountInputs; brief: A
       history: ctx.history,
       firstTouches: inputs.firstTouches,
       clawd: readers.clawd,
-      replies: pursuit.state.lastInbound && pursuit.state.replyClass ? [{ from: pursuit.state.lastInbound.who, at: pursuit.state.lastInbound.at, snippet: pursuit.state.lastInbound.snippet, kind: pursuit.state.replyClass.kind, label: pursuit.state.replyClass.label, address: pursuit.state.lastInbound.from ?? null }] : [],
+      replies: pursuit.state.lastInbound && pursuit.state.replyClass ? [{ from: pursuit.state.lastInbound.who, at: pursuit.state.lastInbound.at, snippet: pursuit.state.lastInbound.snippet, kind: pursuit.state.replyClass.kind, label: pursuit.state.replyClass.label, address: pursuit.state.lastInbound.from ?? null, placedVia: pursuit.state.lastInbound.placedVia ?? null }] : [],
       people: [...inputs.personas.map((p) => ({ name: p.name, title: p.title, email: p.email ?? null })), ...(inputs.hubspotPeople?.people ?? []).map((p) => ({ name: p.name, title: p.title }))],
       now,
     }),

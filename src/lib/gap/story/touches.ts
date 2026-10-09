@@ -36,7 +36,12 @@ export interface StoryTouch {
   source: 'GAP ledger' | 'clawd ledger' | 'account history';
   replyKind?: ReplyClassKind;
   replyLabel?: string;
+  /** C6: the identity path that placed the sender at the account (a thread keyed elsewhere or nowhere); null when the reply list or the history held it. */
+  placedVia?: 'thread' | 'persona' | 'crm_contact' | 'alias' | 'domain' | 'family_deal' | null;
 }
+
+/** C6: the placement in the story's words ("placed by its domain"). */
+export const PLACED_WORDS: Record<NonNullable<StoryTouch['placedVia']>, string> = { thread: 'its thread', persona: 'the GAP contact record', crm_contact: "the CRM contact's company", alias: 'the thread name', domain: 'its domain', family_deal: "the family's deal-holding account" };
 
 /** "michael.jeannotte@fedex.com" -> "Michael Jeannotte"; "kwhite@..." stays "kwhite" (never invented). */
 export function nameFromAddress(address: string): string {
@@ -54,7 +59,7 @@ export function mergeTouches(x: {
   firstTouches: AccountInputs['firstTouches'];
   clawd: ClawdOutreach | null;
   /** R63-A B4: `address` is the message's from address; its sender is named by it, never by a name that two people share. */
-  replies?: Array<{ from: string; at: string; snippet: string; kind: ReplyClassKind; label: string; address?: string | null }>;
+  replies?: Array<{ from: string; at: string; snippet: string; kind: ReplyClassKind; label: string; address?: string | null; placedVia?: StoryTouch['placedVia'] }>;
   people: Array<{ name: string; title: string | null; email?: string | null }>;
   now: Date;
 }): StoryTouch[] {
@@ -93,7 +98,7 @@ export function mergeTouches(x: {
     out.push({ kind: 'send', at: new Date(s.date).toISOString(), ...person(s.to), what: s.subject?.trim() || 'email', source: 'clawd ledger' });
   }
   for (const r of x.replies ?? []) {
-    out.push({ kind: 'reply', at: r.at, ...person(r.from, r.address ?? null), what: r.snippet.replace(/\s+/g, ' ').trim().slice(0, 80), source: 'GAP ledger', replyKind: r.kind, replyLabel: r.label });
+    out.push({ kind: 'reply', at: r.at, ...person(r.from, r.address ?? null), what: r.snippet.replace(/\s+/g, ' ').trim().slice(0, 80), source: 'GAP ledger', replyKind: r.kind, replyLabel: r.label, ...(r.placedVia ? { placedVia: r.placedVia } : {}) });
   }
 
   // One row per event: the same person, the same minute, the same kind (the history and the GAP ledger both record a send).
