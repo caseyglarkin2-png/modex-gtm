@@ -111,6 +111,8 @@ const deps = (gmail: { sent: unknown[]; drafts: unknown[] }, over: Record<string
   materials: async () => [],
   signature: async () => null,
   mailboxSentTo: async () => [] as Array<{ id: string; internalDate: Date; subject: string }>,
+  // C57 pass 2 (P2-1): the GAP mailbox's Drafts to her; empty unless a test plants one of Casey's own.
+  mailboxDraftsTo: async () => [] as Array<{ id: string; draftId: string; threadId: string | null; internalDate: Date; to: string; subject: string }>,
   gmail: { createGmailDraft: vi.fn(async (p: unknown) => { gmail.drafts.push(p); return { provider: 'gmail' as const, draftId: `d-${gmail.drafts.length}`, messageId: 'dm-1', threadId: 'thr-1' }; }) },
   gmailTransport: { sendViaGmail: vi.fn(async (p: unknown) => { gmail.sent.push(p); return { provider: 'gmail' as const, id: `s-${gmail.sent.length}`, threadId: 'thr-1' }; }) },
   ...over,
@@ -293,5 +295,42 @@ describe('the route and the panel (R42b)', () => {
     fireEvent.change(screen.getByTestId('reply-answer-text'), { target: { value: FILLED } });
     expect((screen.getByTestId('reply-answer-send') as HTMLButtonElement).disabled).toBe(false);
     vi.unstubAllGlobals();
+  });
+});
+
+describe('C57 pass 2 (P2-1): a hand-written Gmail draft of Casey\'s in the thread is outstanding too', () => {
+  const hand = (threadId: string | null, to = ANN) => ({ id: 'hm-1', draftId: 'hd-1', threadId, internalDate: new Date('2026-10-06T17:00:00Z'), to, subject: 'Re: trailer turns at your sites' });
+
+  it('a draft of his own in the person\'s thread refuses the GAP draft in words naming it as his; the Gmail create spy stays at zero; nothing is claimed', async () => {
+    const db = world();
+    const gmail = { sent: [] as unknown[], drafts: [] as unknown[] };
+    const d = deps(gmail, { mailboxDraftsTo: async () => [hand('thr-1')] });
+    const r = await createSellerReplyDraft(db.client(), { messageId: 'msg-1', body: FILLED, actor: ACTOR, now: NOW }, d);
+    expect(r).toMatchObject({ ok: false, reason: 'draft_outstanding' });
+    expect((r as { detail?: string }).detail).toMatch(/A draft of yours already sits in this thread \(Re: trailer turns at your sites, Oct 6\); edit or send it in Gmail, or delete it there first\./);
+    expect((d.gmail.createGmailDraft as ReturnType<typeof vi.fn>).mock.calls).toHaveLength(0);
+    expect(gmail.drafts).toEqual([]);
+    expect(db.store.gapAuditEvent.filter((x) => x.kind === REPLY_DRAFTED)).toHaveLength(0);
+    expect(db.store.gapAuditEvent.filter((x) => String(x.kind).includes('reply_claimed'))).toHaveLength(0);
+  });
+
+  it('a reader that throws refuses as unknown ("Gmail drafts could not be read; try again"), never proceeding to Gmail', async () => {
+    const db = world();
+    const gmail = { sent: [] as unknown[], drafts: [] as unknown[] };
+    const d = deps(gmail, { mailboxDraftsTo: async () => { throw new Error('Gmail 503'); } });
+    const r = await createSellerReplyDraft(db.client(), { messageId: 'msg-1', body: FILLED, actor: ACTOR, now: NOW }, d);
+    expect(r).toMatchObject({ ok: false, reason: 'reply_in_progress_or_unknown' });
+    expect((r as { detail?: string }).detail).toBe('Gmail drafts could not be read (Gmail 503); try again.');
+    expect(gmail.drafts).toEqual([]);
+  });
+
+  it('no hand draft (or one in another thread of hers): the GAP draft proceeds as today, once', async () => {
+    const db = world();
+    const gmail = { sent: [] as unknown[], drafts: [] as unknown[] };
+    const r = await createSellerReplyDraft(db.client(), { messageId: 'msg-1', body: FILLED, actor: ACTOR, now: NOW }, deps(gmail, { mailboxDraftsTo: async () => [hand('thr-other')] }));
+    expect(r).toMatchObject({ ok: true, alreadyDrafted: false, drafted: { gmailDraftId: 'd-1' } });
+    expect(gmail.drafts).toHaveLength(1);
+    const none = await createSellerReplyDraft(world().client(), { messageId: 'msg-1', body: FILLED, actor: ACTOR, now: NOW }, deps({ sent: [], drafts: [] }, { mailboxDraftsTo: async () => [] }));
+    expect(none).toMatchObject({ ok: true, alreadyDrafted: false });
   });
 });
