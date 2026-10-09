@@ -108,7 +108,7 @@ async function main() {
       top.push({
         item,
         card: cardsByAccount.get(item.accountName),
-        prepared: built.prepared.kind === 'email' ? `an email to ${built.prepared.to ?? 'the person'}, subject "${built.prepared.subject}"` : 'nothing prepared',
+        prepared: built.prepared.kind === 'email' ? `an email to ${built.prepared.to ?? 'the person'}, subject "${built.prepared.subject}"` : built.prepared.kind === 'angle' ? `an angle for ${built.prepared.who}: ${built.prepared.whyItMatters.slice(0, 160)}${built.prepared.opener ? ` Opener: ${built.prepared.opener.slice(0, 120)}` : ''}` : 'nothing prepared',
         why: line(built.text, 'Why now:') ?? item.why,
         know: section(built.text, 'What we know:'),
         move: line(built.text, 'The move:'),
