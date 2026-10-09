@@ -53,7 +53,7 @@ describe('C09: purpose, with evidence', () => {
     // The frozen reference pitch (lead-c52-reference-set), verbatim: it addresses us as a vendor and offers services,
     // so the operational noun "yard" in it never makes it a buyer.
     const reference = classifyPurpose(inbound('growth@riseagency.example', 'Grow your pipeline', 'We offer outbound services for yard management vendors like YardFlow. Reply YES to book a strategy call.'));
-    expect(reference).toMatchObject({ purpose: 'vendor_solicitation', confidence: 'high', evidence: expect.arrayContaining(['a pitch in their own words: "We offer"', 'it addresses us as a vendor: "yard management vendors"']) });
+    expect(reference).toMatchObject({ purpose: 'vendor_solicitation', confidence: 'high', evidence: ['a person wrote back', 'a pitch in their own words: "Grow your pipeline"', 'it addresses us as a vendor: "yard management vendors"', 'sender is not a known person'] });
     expect(reengageEligible({ purposes: [reference.purpose], relationship: 'unknown' }).eligible).toBe(false);
     // A pitch with "your yards" (second person) is still a pitch; the same words first person in our thread are a buyer.
     expect(classifyPurpose(inbound('seb@riserify.example', 'Yards', 'We provide outsourced SDR services; happy to discuss your yards on a call.'))).toMatchObject({ purpose: 'vendor_solicitation', confidence: 'high' });
