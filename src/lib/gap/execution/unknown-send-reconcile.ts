@@ -18,7 +18,7 @@
  * ever releases a claim.
  */
 import { captureSendAttribution } from './send-attribution';
-import { DIRECT_CLAIMED, DIRECT_RELEASED, DIRECT_SENT, DRAFT_SUBJECT_TYPE, appendLedger } from './draft-ledger';
+import { DIRECT_CLAIMED, DIRECT_PREVIEWED, DIRECT_RELEASED, DIRECT_SENT, DRAFT_SUBJECT_TYPE, appendLedger } from './draft-ledger';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type PrismaLike = any;
@@ -123,6 +123,13 @@ export async function reconcileUnknownSends(
     if (already) continue;
     const m = found[0];
     const decision = await prisma.routingDecision.findUnique({ where: { id: c.decisionId }, select: { hypothesis_id: true, account_name: true } });
+    // C41: the newest final check of this card and step (DIRECT_PREVIEWED: the hash, recipient, sender, subject and
+    // thread the seller confirmed) is what the send carried; the reconciled row keeps it, so the body hash survives.
+    const previews: Array<{ payload: Record<string, unknown> | null; created_at: Date | string }> = await prisma.gapAuditEvent
+      .findMany({ where: { subject_type: DRAFT_SUBJECT_TYPE, subject_id: c.decisionId, kind: DIRECT_PREVIEWED }, select: { payload: true, created_at: true }, orderBy: { created_at: 'desc' } })
+      .catch(() => []);
+    const preview = previews.map((r) => r.payload ?? {}).find((p) => Number(p.stepIndex ?? 0) === c.stepIndex && String(p.recipient ?? '').toLowerCase() === c.recipient) ?? null;
+    const str = (v: unknown) => (typeof v === 'string' && v ? v : null);
     await appendLedger(prisma, DIRECT_SENT, actor, c.decisionId, {
       engine: 'gmail_direct',
       channel: 'gmail',
@@ -133,13 +140,16 @@ export async function reconcileUnknownSends(
       personaId: c.personaId,
       accountName: decision?.account_name ?? null,
       recipient: c.recipient,
-      senderIdentity: deps.mailbox,
+      senderIdentity: str(preview?.sender) ?? deps.mailbox,
       subject: m.subject,
+      contentHash: str(preview?.contentHash),
+      reviewedSubject: str(preview?.subject),
+      attributedFromPreview: !!preview,
       stepIndex: c.stepIndex,
       // The claim is only taken after prepareSellerEmail passed the T6 gate.
       evidenceTier: 'VERIFIED_FACT',
       gmailSentMessageId: m.id,
-      gmailThreadId: m.threadId,
+      gmailThreadId: m.threadId ?? str(preview?.gmailThreadId),
       sentAt: m.internalDate.toISOString(),
       reconciledFromSent: true,
       reconciledAt: input.now.toISOString(),

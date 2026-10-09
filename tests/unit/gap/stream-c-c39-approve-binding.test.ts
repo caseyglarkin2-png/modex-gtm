@@ -181,6 +181,46 @@ describe('C39: the draft service rechecks the pinned snapshot immediately before
     expect(snapshotDrift(e, { contentHash: 'g', recipient: 'b@x.com', senderIdentity: 'z@y.ai' })).toMatchObject({ reason: 'copy_changed_since_review' });
     expect(snapshotDrift(e, { contentHash: 'h', recipient: 'b@x.com', senderIdentity: 'z@y.ai' })).toMatchObject({ reason: 'recipient_changed_since_review' });
     expect(snapshotDrift(e, { contentHash: 'h', recipient: 'a@x.com', senderIdentity: 'z@y.ai' })).toMatchObject({ reason: 'sender_changed_since_review' });
-    expect(snapshotDrift({ ...e, recipient: null, senderIdentity: null }, { contentHash: 'h', recipient: 'anyone', senderIdentity: 'anyone' })).toBeNull();
+    // F15: a snapshot with no recipient is a refusal, never a skipped check; a null sender alone is skipped.
+    expect(snapshotDrift({ ...e, recipient: null, senderIdentity: null }, { contentHash: 'h', recipient: 'anyone', senderIdentity: 'anyone' })).toMatchObject({ reason: 'recipient_changed_since_review' });
+    expect(snapshotDrift({ ...e, senderIdentity: null }, { contentHash: 'h', recipient: 'a@x.com', senderIdentity: 'anyone' })).toBeNull();
+  });
+});
+
+describe('F15 (C57 review of C39): a snapshot with no recipient binds nothing, and the sender is compared against the one the assignment recorded', () => {
+  it('an assignment whose prepared copy carried no recipient refuses the APPROVE in words; the draft spy stays at zero even with a current recipient', async () => {
+    const db = ledgerDb({ audit: [assignmentRow({ to: null })] }, NOW);
+    const draft = vi.fn(async () => drafted(HASH_A));
+    const r = await approveRequest(db.client(), input(), { draft, currentCopy: current(HASH_A, TO) });
+    expect(r).toMatchObject({ ok: false, effect: 'assignment_no_recipient', extra: { revision: 0 } });
+    expect(r.text).toMatch(/carried no recipient/);
+    expect(draft).toHaveBeenCalledTimes(0);
+  });
+
+  it('the draft service refuses a pinned snapshot that names no recipient before the Gmail adapter; the pure drift says so', async () => {
+    expect(snapshotDrift({ revision: 0, contentHash: 'h', recipient: null, senderIdentity: null }, { contentHash: 'h', recipient: 'a@x.com', senderIdentity: 's' })).toMatchObject({ reason: 'recipient_changed_since_review', detail: expect.stringContaining('named no recipient') });
+    expect(snapshotDrift({ revision: 0, contentHash: 'h', recipient: '  ', senderIdentity: null }, { contentHash: 'h', recipient: 'a@x.com', senderIdentity: 's' })).toMatchObject({ reason: 'recipient_changed_since_review' });
+    const d = sellerDb();
+    const gmail = gmailFake();
+    const probe = await createSellerGmailDraft(prismaOf(sellerDb()), { decisionId: 'dec-joey', actor: 'casey', now: SELLER_NOW }, baseDeps(sellerDb(), 'pass', gmailFake()));
+    if (!probe.ok) throw new Error('probe should draft');
+    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: SELLER_NOW, expected: { revision: 0, contentHash: probe.receipt.contentHash, recipient: null, senderIdentity: 'casey@freightroll.com' } }, baseDeps(d, 'pass', gmail));
+    expect(r).toMatchObject({ ok: false, reason: 'recipient_changed_since_review' });
+    expect(gmail.createGmailDraft).not.toHaveBeenCalled();
+  });
+
+  it('the sender check compares against the mailbox the assignment row recorded, not the mailbox that received the reply', async () => {
+    // The assignment went out from casey@yardflow.ai (recorded); the reply arrived at the same GAP identity. The copy
+    // would now be drafted from another mailbox: refused, whatever identity received the reply.
+    const db = ledgerDb({ audit: [assignmentRow({ senderIdentity: 'casey@yardflow.ai' })] }, NOW);
+    const draft = vi.fn(async () => drafted(HASH_A));
+    const r = await approveRequest(db.client(), { ...input(), sender: { ...SENDER, userEmail: 'other@yardflow.ai' } }, { draft, currentCopy: current(HASH_A, TO, 'other@yardflow.ai') });
+    expect(r).toMatchObject({ ok: false, effect: 'sender_changed_since_review', extra: { approved: 'casey@yardflow.ai', current: 'other@yardflow.ai' } });
+    expect(draft).not.toHaveBeenCalled();
+    // The same drift with the recorded sender matching drafts once.
+    const ok = await approveRequest(ledgerDb({ audit: [assignmentRow({ senderIdentity: 'casey@yardflow.ai' })] }, NOW).client(), input(), { draft, currentCopy: current(HASH_A, TO, 'casey@yardflow.ai') });
+    expect(ok).toMatchObject({ ok: true, effect: 'gmail_drafted' });
+    expect(draft).toHaveBeenCalledTimes(1);
+    expect(draft).toHaveBeenCalledWith(expect.anything(), expect.objectContaining({ expected: expect.objectContaining({ senderIdentity: 'casey@yardflow.ai', recipient: TO }) }));
   });
 });

@@ -106,7 +106,12 @@ export async function approveRequest(prisma: PrismaLike, input: ApplyInput & { i
   if (contentHashOf({ subject: snap.subject, body: snap.body }) !== snap.contentHash) {
     return { ok: false, text: 'The recorded copy of the email you answered does not match its own hash, so GAP will not bind an approval to it. Open the item in GAP.', effect: 'snapshot_integrity', extra: { revision: input.ref.revision } };
   }
-  // The mailbox the draft goes from: the one the assignment recorded, else the GAP identity that received this reply.
+  // F15: an assignment that carried no recipient binds no approval (there is no one the copy was approved for).
+  if (!snap.recipient) {
+    return { ok: false, text: 'The email you answered carried no recipient for this copy, so GAP will not bind an approval to it. Open the item in GAP to choose the person and draft it there.', effect: 'assignment_no_recipient', extra: { revision: input.ref.revision } };
+  }
+  // The mailbox the draft goes from: the one the assignment recorded (work/assignment.ts); an older row without one
+  // falls back to the GAP identity that received this reply.
   const expected: ApprovedSnapshot = { revision: input.ref.revision, contentHash: snap.contentHash, recipient: snap.recipient, senderIdentity: snap.senderIdentity ?? input.sender.userEmail };
 
   // 2. A later revision: approve exactly the proposed copy revision that email carried, by its hash.
@@ -131,7 +136,7 @@ export async function approveRequest(prisma: PrismaLike, input: ApplyInput & { i
   if (current.contentHash !== expected.contentHash) {
     return { ok: false, text: `The copy for this item changed after revision ${input.ref.revision} went out, so GAP drafted nothing. ${openInGap}`, effect: 'copy_changed_since_review', extra: { revisionId, revision: input.ref.revision } };
   }
-  if (expected.recipient && lower(current.recipient) !== lower(expected.recipient)) {
+  if (lower(current.recipient) !== lower(expected.recipient)) {
     return { ok: false, text: `The recipient for this item is now ${current.recipient ?? 'unknown'}, not ${expected.recipient} as in the email you approved, so GAP drafted nothing. Open the item in GAP.`, effect: 'recipient_changed_since_review', extra: { revisionId, approved: expected.recipient, current: current.recipient } };
   }
   if (expected.senderIdentity && lower(current.senderIdentity) !== lower(expected.senderIdentity)) {
@@ -146,7 +151,7 @@ export async function approveRequest(prisma: PrismaLike, input: ApplyInput & { i
   }
   const d = r.receipt;
   // 5. The returned draft is the approved copy, or it is reported as something else (it exists; it is not this approval's).
-  if (d.contentHash !== expected.contentHash || (expected.recipient && lower(d.recipient) !== lower(expected.recipient))) {
+  if (d.contentHash !== expected.contentHash || lower(d.recipient) !== lower(expected.recipient)) {
     return {
       ok: false,
       text: `The draft GAP got back (Gmail draft ${d.gmailDraftId}, to ${d.recipient}) is not the copy you approved at revision ${input.ref.revision}. It is not recorded as your approval. Open the item in GAP to review what exists before anything goes out.`,
