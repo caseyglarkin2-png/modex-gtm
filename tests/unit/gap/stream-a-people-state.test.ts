@@ -45,6 +45,25 @@ describe('C10: answer owed from both sides', () => {
   });
 });
 
+describe('A4 (seller acceptance, 2026-10-09): an out-of-office notice is availability, descriptive only', () => {
+  it('the newest notice is exposed with its return day and basis; it never makes an answer owed, never counts as them writing, never gates', () => {
+    const notice = (id: string, at: string, returnDay: string | null) => inbound(id, at, 'automated', { outOfOffice: { returnDay } });
+    const expired = peopleState([sent('s-sep9', '2026-09-09T14:00:00Z'), notice('ooo', '2026-09-10T12:00:00Z', '2026-09-22')], NOW, { ownAddresses: OWN }).get(DAVE)!;
+    expect(expired.availability).toEqual({ returnedOn: '2026-09-22', basis: 'their out-of-office notice of Sep 10: back since Sep 22; no message from them since' });
+    expect(expired.answerOwed.owed).toBe(false);
+    expect(expired.lastInboundAt).toBeNull();
+    expect(expired.quiet).toMatchObject({ quiet: true, basis: 'no exchange either way in 29 days (last: Sep 9, we wrote)' });
+    // Still out: said as such; a notice with no return day says so; they wrote after it: said.
+    expect(peopleState([notice('ooo', '2026-10-06T12:00:00Z', '2026-10-20')], NOW, { ownAddresses: OWN }).get(DAVE)!.availability).toEqual({ returnedOn: '2026-10-20', basis: 'their out-of-office notice of Oct 6: out until Oct 20; no message from them since' });
+    expect(peopleState([notice('ooo', '2026-10-06T12:00:00Z', null)], NOW, { ownAddresses: OWN }).get(DAVE)!.availability).toEqual({ returnedOn: null, basis: 'their out-of-office notice of Oct 6: no return day named; no message from them since' });
+    const wrote = peopleState([notice('ooo-old', '2026-09-01T12:00:00Z', '2026-09-08'), notice('ooo', '2026-09-10T12:00:00Z', '2026-09-22'), inbound('m', '2026-10-01T12:00:00Z', 'buyer_conversation')], NOW, { ownAddresses: OWN }).get(DAVE)!;
+    expect(wrote.availability).toEqual({ returnedOn: '2026-09-22', basis: 'their out-of-office notice of Sep 10: back since Sep 22; they wrote since (Oct 1)' });
+    expect(wrote.answerOwed.owed).toBe(true);
+    // An automatic reply that is not an out-of-office notice (no outOfOffice on the event) exposes nothing.
+    expect(peopleState([inbound('auto', '2026-10-03T12:00:00Z', 'automated')], NOW, { ownAddresses: OWN }).get(DAVE)!.availability).toBeUndefined();
+  });
+});
+
 describe('C10: quiet is descriptive and counts both sides and the calendar', () => {
   it('an October 1 send and an accepted October 14 meeting prevent a went-quiet claim built on the September 16 inbound alone', () => {
     const s = peopleState([inbound('m-sep16', '2026-09-16T14:00:00Z', 'buyer_conversation'), sent('s-oct1', '2026-10-01T16:00:00Z'), accepted('r1', '2026-10-02T12:00:00Z', '2026-10-14T18:00:00Z'), draft('d-oct5', '2026-10-05T13:00:00Z')], NOW, { ownAddresses: OWN }).get(DAVE)!;
