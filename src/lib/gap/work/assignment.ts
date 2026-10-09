@@ -29,6 +29,8 @@ import type { AskContext } from '../ask/grounding';
 import { loadActionPack } from '../execution/action-pack';
 import { signActionToken } from './action-token';
 import { COMMAND_WORDS } from './briefing';
+import { loadInDealsSummary } from '../deals/in-deals';
+import { dealCoverageFrom } from './deal-coverage';
 import { loadPursued, type PursuedItem } from './intel';
 import type { DayPlan, PlanItem } from './plan';
 
@@ -75,6 +77,16 @@ export interface AssignmentDeps {
 
 /** The item kinds a prepared angle is read for: account work, never a first touch with a pack. */
 const ANGLE_KINDS = new Set(['deal', 'follow_up', 'review']);
+
+/**
+ * B9: the pursued read with the DEAL COVERAGE, the way the day loader and the briefing make it (C5: a person at a
+ * family of names is placed at the account only with the coverage; without it Kenco's angle found no account and
+ * the assignment said "nothing prepared"). The in-deals summary is cached in SystemConfig: the read the page already makes.
+ */
+async function defaultPursued(prisma: PrismaLike, now: Date): Promise<PursuedItem[]> {
+  const summary = await loadInDealsSummary(prisma, { now }).catch(() => null);
+  return loadPursued(prisma, now, { coverage: dealCoverageFrom(summary) });
+}
 
 /** The slice of the action pack the assignment reads. */
 export interface PackLike {
@@ -152,10 +164,11 @@ export async function buildAssignment(prisma: PrismaLike, input: BuildAssignment
   // develop_angle task succeeded (a person placed at the account at read time) carries that angle: the Kenco deal
   // item said "nothing prepared" in production although the angle for Dave Kiesling was ready.
   if (ANGLE_KINDS.has(item.kind) && !item.refs.decisionId) {
-    const pursued = await (deps.pursued ?? loadPursued)(prisma, input.now).catch(() => [] as PursuedItem[]);
+    const pursued = await (deps.pursued ?? defaultPursued)(prisma, input.now).catch(() => [] as PursuedItem[]);
     const p = pursued.find((x) => x.accountName === item.accountName && x.status === 'ready' && x.angle);
     if (p?.angle) {
-      const who = p.writer?.name ?? p.writer?.email ?? p.angle.peopleNamed[0]?.name ?? p.title;
+      // The writer's name, else the first person the angle names, before a bare address.
+      const who = p.writer?.name ?? p.angle.peopleNamed[0]?.name ?? p.writer?.email ?? p.title;
       const opener = p.angle.starters[0] ?? null;
       prepared = { kind: 'angle', who, whyItMatters: p.angle.whyItMatters, opener };
       lines.push('', safeLine(`GAP has prepared an angle for ${who}: ${endSentence(p.angle.whyItMatters)}`));

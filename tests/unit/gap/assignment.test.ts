@@ -17,6 +17,12 @@ import { COMMAND_WORDS } from '@/lib/gap/work/briefing';
 import type { DayPlan, PlanItem } from '@/lib/gap/work/plan';
 import type { GmailSendPayload } from '@/lib/email/gmail-sender';
 import type { AskContext } from '@/lib/gap/ask/grounding';
+import { dealCoverageFrom } from '@/lib/gap/work/deal-coverage';
+
+// B9: the default pursued read (no deps.pursued) is loadPursued WITH the deal coverage from the cached in-deals summary.
+const b9 = vi.hoisted(() => ({ loadPursued: vi.fn(async () => [] as unknown[]), loadInDealsSummary: vi.fn(async () => null as unknown) }));
+vi.mock('@/lib/gap/work/intel', async (importOriginal) => ({ ...(await importOriginal<typeof import('@/lib/gap/work/intel')>()), loadPursued: b9.loadPursued }));
+vi.mock('@/lib/gap/deals/in-deals', async (importOriginal) => ({ ...(await importOriginal<typeof import('@/lib/gap/deals/in-deals')>()), loadInDealsSummary: b9.loadInDealsSummary }));
 
 const NOW = new Date('2026-10-08T13:00:00Z');
 const SENDER = { userEmail: 'casey@yardflow.ai', refreshToken: 'r', displayName: 'Casey Larkin' };
@@ -258,5 +264,53 @@ describe('seller acceptance follow-up: START and NEXT hand the seller only an as
     const skipped = await nextAssignableItem(db2.client(), { ...plan, items: [{ ...KROGER, rank: 0 }, { ...PEPSI, rank: 1 }] });
     expect(skipped.item?.key, 'the skipped Kroger is passed; the progress-noted PepsiCo is still open').toBe('first_touch:dec-1');
     expect(await nextUnassignedItem(db2.client(), { ...plan, items: [{ ...KROGER, rank: 0 }] })).toBeNull();
+  });
+});
+
+describe('B9: the assignment reads the pursued angles with the deal coverage, and names the person before a bare address', () => {
+  const kenco = item({ key: 'deal:Kenco:2026-10-08', rank: 0, accountName: 'Kenco', token: 'c'.repeat(32), kind: 'deal', stateKind: 'in_deal', title: 'Next step on the deal: Send the pilot scope', why: 'The deal\'s next step', href: '/gap/accounts/kenco?view=brief', person: null });
+  const angle = { whyItMatters: 'Kenco runs 40 yards with paper gate logs.', starters: ['Dave, is Chattanooga first?'], roles: ['VP Operations'], accounts: ['Kenco'], peopleNamed: [{ personaId: 7, name: 'Dave Kiesling', title: 'VP Operations' }], proposedAction: 'email', caveat: null, sourceLine: 'his reply, Sep 16' };
+  beforeEach(() => {
+    b9.loadPursued.mockClear();
+    b9.loadInDealsSummary.mockClear();
+  });
+  const pursuedOf = (writerName: string | null) => [{ key: 'person:dave.kiesling@kencogroup.com', taskId: 't-1', writer: { email: 'dave.kiesling@kencogroup.com', name: writerName }, kind: 'person' as const, title: 'dave.kiesling@kencogroup.com wrote to us', accountName: 'Kenco', accountHint: null, url: null, decision: 'pursue', decidedAt: '2026-10-08T12:00:00.000Z', status: 'ready' as const, error: null, angle }];
+
+  it('with no deps.pursued, the in-deals summary is read for now and loadPursued is called with its coverage (the read the day loader and the briefing make), so a person placed at Kenco only through the coverage is found', async () => {
+    const { db, deps } = harness();
+    const summary = { status: 'complete' as const, checkedAt: '2026-10-08T12:50:00.000Z', accounts: [{ accountName: 'Kenco', alsoRecordedAs: ['Kenco Logistics'], deals: [{ id: '1001', name: 'YardFlow - Kenco Chattanooga', stage: 'Qualified to buy', contactIds: ['77'] }] }] };
+    b9.loadInDealsSummary.mockResolvedValue(summary);
+    b9.loadPursued.mockResolvedValue(pursuedOf(null));
+    deps.askContext.mockResolvedValue({ ...ASK, accountName: 'Kenco', state: { ...ASK.state, state: 'in_deal', stateLine: 'In a deal.', next: 'Send Dave the pilot scope.' }, story: [], opening: null, buyerSaid: [] });
+    const a = await buildAssignment(db.client(), { plan: { ...PLAN, items: [kenco] }, item: kenco, revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, deps);
+    expect(b9.loadInDealsSummary).toHaveBeenCalledWith(expect.anything(), { now: NOW });
+    expect(b9.loadPursued).toHaveBeenCalledTimes(1);
+    const [, when, opts] = b9.loadPursued.mock.calls[0] as unknown as [unknown, Date, { coverage: ReturnType<typeof dealCoverageFrom> }];
+    expect(when).toBe(NOW);
+    expect(opts.coverage.status, 'the coverage is the summary\'s').toBe('complete');
+    expect(opts.coverage.byName.get('kenco logistics')?.accountName ?? opts.coverage.byName.get('Kenco Logistics')?.accountName, 'the alias is covered').toBe('Kenco');
+    expect(opts.coverage).toEqual(dealCoverageFrom(summary as Parameters<typeof dealCoverageFrom>[0]));
+    // The writer has no name: the first person the angle names is said, not the address.
+    expect(a.prepared).toEqual({ kind: 'angle', who: 'Dave Kiesling', whyItMatters: 'Kenco runs 40 yards with paper gate logs.', opener: 'Dave, is Chattanooga first?' });
+    expect(a.text).toContain('GAP has prepared an angle for Dave Kiesling: Kenco runs 40 yards with paper gate logs.');
+    expect(a.text).not.toContain('angle for dave.kiesling@kencogroup.com');
+  });
+
+  it('a summary that cannot be read gives the absent coverage, never a throw; a writer with a name is named first; deps.pursued stays the seam and skips the reads', async () => {
+    const { db, deps } = harness();
+    b9.loadInDealsSummary.mockRejectedValue(new Error('hubspot down'));
+    b9.loadPursued.mockResolvedValue(pursuedOf('Dave K.'));
+    deps.askContext.mockResolvedValue({ ...ASK, accountName: 'Kenco', state: { ...ASK.state, state: 'in_deal', stateLine: 'In a deal.', next: 'Send Dave the pilot scope.' }, story: [], opening: null, buyerSaid: [] });
+    const a = await buildAssignment(db.client(), { plan: { ...PLAN, items: [kenco] }, item: kenco, revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, deps);
+    const opts = (b9.loadPursued.mock.calls.at(-1) as unknown as [unknown, Date, { coverage: ReturnType<typeof dealCoverageFrom> }])[2];
+    expect(opts.coverage.status).toBe('absent');
+    expect(a.prepared).toMatchObject({ kind: 'angle', who: 'Dave K.' });
+    b9.loadInDealsSummary.mockClear();
+    b9.loadPursued.mockClear();
+    const seam = vi.fn(async () => pursuedOf('Dave K.'));
+    await buildAssignment(db.client(), { plan: { ...PLAN, items: [kenco] }, item: kenco, revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, { ...deps, pursued: seam });
+    expect(seam).toHaveBeenCalledTimes(1);
+    expect(b9.loadInDealsSummary).not.toHaveBeenCalled();
+    expect(b9.loadPursued).not.toHaveBeenCalled();
   });
 });
