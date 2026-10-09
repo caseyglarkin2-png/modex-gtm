@@ -68,7 +68,7 @@ describe('X20b: the projection', () => {
 
 describe('X20b: the accountability view', () => {
   const item = (key: string, accountName: string, kind: PlanItem['kind'] = 'ready'): PlanItem => ({ key, rank: 0, accountName, kind, stateKind: 'ready', title: key, why: '', href: '/x', person: null, refs: {}, token: 'a'.repeat(32) });
-  const ev = (kind: ActivityEvent['kind'], basis: ActivityEvent['basis'], completes: string[], at = AT.toISOString(), prepares: string[] = []): ActivityEvent => ({ kind, basis, at, accountName: null, who: null, line: kind, ref: { kind: 'x', subjectType: 'y', subjectId: 'z' }, completes, prepares, dealId: null });
+  const ev = (kind: ActivityEvent['kind'], basis: ActivityEvent['basis'], completes: string[], at = AT.toISOString(), prepares: string[] = []): ActivityEvent => ({ kind, basis, at, accountName: null, who: null, line: kind, ref: { kind: 'x', subjectType: 'y', subjectId: 'z' }, completes, prepares, dealId: null, evidence: null });
   const task = (over: Partial<AgentTask>): AgentTask => ({ id: 't', kind: 'revise_message', itemKey: 'k', itemToken: '', day: '2026-10-08', revision: 0, request: '', requestedBy: '', requestedFrom: '', status: 'queued', attempts: 0, queuedAt: AT.toISOString(), leaseUntil: null, fence: null, result: null, lastError: null, final: false, supersededBy: null, ...over });
 
   it('each intended item is done by the event that completes it, set aside by a deferral, or open; completed counts split provider from self-reported; blocked and open go to attention; the agents by status', () => {
@@ -110,6 +110,6 @@ describe('X20b: the accountability view', () => {
     expect(a.planned).toBe(true);
     expect(a.events.map((e) => e.kind)).toEqual(['message_sent']);
     expect(a.intended.map((x) => [x.item.key, x.status])).toEqual([['follow_up:Kroger:2026-10-08', 'done']]);
-    expect(await loadActivity({}, { since: AT, until: AT })).toEqual([]);
+    expect(await loadActivity({}, { since: AT, until: AT })).toMatchObject({ events: [], coverage: 'unavailable' });
   });
 });
