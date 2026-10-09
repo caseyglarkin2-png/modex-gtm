@@ -42,7 +42,8 @@ describe('resolveIdentity', () => {
 
   it('refuses ambiguous_identity when two accounts normalize to the same key and neither is an exact match', () => {
     const r = resolveIdentity(ctx({ accountNames: ['Acme Inc', 'Acme LLC'] }), { rawName: 'Acme Corp' });
-    expect(r).toEqual({ ok: false, reason: 'ambiguous_identity' });
+    // C5 (2026-10-09): the ambiguity names its candidates.
+    expect(r).toEqual({ ok: false, reason: 'ambiguous_identity', candidates: ['Acme Inc', 'Acme LLC'] });
   });
 
   // ---------------------------------------------------------------------
@@ -124,7 +125,14 @@ describe('resolveIdentity', () => {
       }),
       { domain: 'shared.com' },
     );
-    expect(r).toEqual({ ok: false, reason: 'ambiguous_identity' });
+    // C5 (2026-10-09): the ambiguity names its candidates.
+    expect(r).toEqual({ ok: false, reason: 'ambiguous_identity', candidates: ['Account One', 'Account Two'] });
+  });
+
+  it('C5: a domain two CONFLICTED links claim (an open duplicate) is ambiguous with the names, never unresolved; one conflicted claim stays unresolved; a conflicted claim never resolves', () => {
+    const c = ctx({ accountNames: ['Kenco', 'Kenco Logistics Services'], conflictedDomainToAccounts: new Map([['kencogroup.com', ['Kenco', 'Kenco Logistics Services']], ['lone.com', ['Lone']]]) });
+    expect(resolveIdentity(c, { domain: 'kencogroup.com' })).toEqual({ ok: false, reason: 'ambiguous_identity', candidates: ['Kenco', 'Kenco Logistics Services'] });
+    expect(resolveIdentity(c, { domain: 'lone.com' })).toEqual({ ok: false, reason: 'unresolved_company' });
   });
 
   it('tier C: an explicit registered alias resolves when no company id or domain is given', () => {

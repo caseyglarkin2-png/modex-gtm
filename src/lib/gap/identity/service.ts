@@ -56,6 +56,23 @@ export async function loadIdentityContext(prisma: any): Promise<IdentityContext>
     if (domain) pushInto(verifiedDomainToAccounts, domain, link.account_name);
   }
 
+  // C5 (2026-10-09): the CONFLICTED links (two accounts on one canonical company, an open duplicate) are read apart, soft,
+  // with their companies' domains (a company in conflict may not be 'resolved'), so the resolver can say which accounts
+  // claim a domain instead of "no account yet"; they never resolve anything.
+  const conflictedDomainToAccounts = new Map<string, string[]>();
+  const conflicted: Array<{ account_name: string; canonical_company_id: string }> = await prisma.canonicalAccountLink
+    .findMany({ where: { status: 'conflict' }, select: { account_name: true, canonical_company_id: true } })
+    .catch(() => []);
+  const missing = [...new Set(conflicted.map((l) => l.canonical_company_id).filter((id) => !domainByCompanyId.has(id)))];
+  const extra: Array<{ id: string; domain: string | null }> = missing.length
+    ? await prisma.canonicalCompany.findMany({ where: { id: { in: missing }, domain: { not: null } }, select: { id: true, domain: true } }).catch(() => [])
+    : [];
+  for (const c of extra) if (c.domain) domainByCompanyId.set(c.id, c.domain.trim().toLowerCase().replace(/^www\./, ''));
+  for (const link of conflicted) {
+    const domain = domainByCompanyId.get(link.canonical_company_id);
+    if (domain) pushInto(conflictedDomainToAccounts, domain, link.account_name);
+  }
+
   const aliasToAccounts = new Map<string, string[]>();
   for (const alias of aliases as Array<{ alias?: string; normalized_alias: string; account_name: string }>) {
     pushInto(aliasToAccounts, alias.normalized_alias, alias.account_name);
@@ -66,7 +83,7 @@ export async function loadIdentityContext(prisma: any): Promise<IdentityContext>
     }
   }
 
-  return { accountsByHubspotCompanyId, verifiedDomainToAccounts, aliasToAccounts, accountNames };
+  return { accountsByHubspotCompanyId, verifiedDomainToAccounts, aliasToAccounts, accountNames, conflictedDomainToAccounts };
 }
 
 /**

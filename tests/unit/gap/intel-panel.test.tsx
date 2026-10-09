@@ -62,6 +62,18 @@ describe('I04: <IntelPanel>', () => {
     expect(fetchSpy, 'rendering a placed item posts nothing').not.toHaveBeenCalled();
   });
 
+  it('C5 (2026-10-09): an ambiguous placement is said with its names on the pursued item and on a people item, never "No account yet"', () => {
+    const line = 'kencogroup.com is claimed by Kenco and Kenco Logistics Services (an open duplicate since May 5): choose the account';
+    const ambiguous: Intelligence = { ...intel, people: [{ ...intel.people[0], accountName: null, accountHint: 'kencogroup.com', ambiguousAmong: ['Kenco', 'Kenco Logistics Services'], ambiguityLine: line }], pursued: [{ ...intel.pursued[0], key: 'person:dave.kiesling@kencogroup.com', kind: 'person', accountName: null, accountHint: 'kencogroup.com', ambiguousAmong: ['Kenco', 'Kenco Logistics Services'], ambiguityLine: line }] };
+    render(<IntelPanel intel={ambiguous} angles={{}} />);
+    expect(screen.getByTestId('intel-pursued-ambiguous').textContent).toBe(line);
+    expect(screen.queryByTestId('intel-pursued-no-account')).toBeNull();
+    const person = screen.getAllByTestId('intel-item').find((li) => li.getAttribute('data-kind') === 'person')!;
+    expect(within(person).getByTestId('intel-ambiguous').textContent).toBe(line);
+    expect(within(person).queryByTestId('intel-no-account')).toBeNull();
+    expect(screen.getByTestId('intel-panel').textContent).not.toContain('No account yet');
+  });
+
   it('a decision posts the key and the decision and shows the line GAP answers; Explore opens the source and records the look', async () => {
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(JSON.stringify({ ok: true, line: 'Pursuing the signal. GAP is developing the angle.' }), { status: 200 }));
     const open = vi.spyOn(window, 'open').mockImplementation(() => null);

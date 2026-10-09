@@ -47,6 +47,13 @@ export interface IdentityContext {
   aliasToAccounts: ReadonlyMap<string, readonly string[]>;
   /** every known account name, for the normalized-name fallback tier. */
   accountNames: readonly string[];
+  /**
+   * Seller acceptance C5 (2026-10-09): normalized domain -> the account name(s) a CONFLICTED canonical link claims
+   * (status 'conflict': two accounts on one canonical company, an open duplicate). A conflicted link never resolves
+   * (C02: it is exactly the guess this resolver refuses), but the claim is SAID: two such claims are ambiguous_identity
+   * with the candidates named, never unresolved_company ("no account yet"). Optional: an older context has none.
+   */
+  conflictedDomainToAccounts?: ReadonlyMap<string, readonly string[]>;
 }
 
 export interface IdentityInput {
@@ -62,7 +69,9 @@ export interface IdentityConflict {
 
 export type ResolveIdentityResult =
   | { ok: true; accountName: string; via: IdentityVia; confidence: number; conflict?: IdentityConflict }
-  | { ok: false; reason: 'no_input' | 'unresolved_company' | 'ambiguous_identity' };
+  | { ok: false; reason: 'no_input' | 'unresolved_company' }
+  /** C5: the account names that claimed the input (every tier's candidates, or the conflicted links'), so ambiguity is said with its names; the resolver always sets it (optional so an older stub still types). */
+  | { ok: false; reason: 'ambiguous_identity'; candidates?: string[] };
 
 interface TierResult {
   via: IdentityVia;
@@ -134,8 +143,12 @@ export function resolveIdentity(ctx: IdentityContext, input: IdentityInput): Res
   const resolved = tiers.find((t) => t.accounts.length === 1);
 
   if (!resolved) {
-    const anyCandidates = tiers.some((t) => t.accounts.length > 0);
-    return { ok: false, reason: anyCandidates ? 'ambiguous_identity' : 'unresolved_company' };
+    const candidates = dedupe(tiers.flatMap((t) => t.accounts));
+    if (candidates.length > 0) return { ok: false, reason: 'ambiguous_identity', candidates };
+    // C5: no verified tier claimed it; two or more CONFLICTED links on the domain are an open duplicate to say, never a resolution.
+    const claimed = input.domain ? dedupe(ctx.conflictedDomainToAccounts?.get(normalizeDomain(input.domain)) ?? []) : [];
+    if (claimed.length > 1) return { ok: false, reason: 'ambiguous_identity', candidates: claimed };
+    return { ok: false, reason: 'unresolved_company' };
   }
 
   const accountName = resolved.accounts[0];
