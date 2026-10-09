@@ -70,7 +70,7 @@ describe('B2: loadCompanyEngagements', () => {
 
   it('a 500 on one object reads as failed with its detail; the other objects stand; the limit is honoured', async () => {
     const hs = hubspot({ calls: { status: 500 } });
-    const r = await readCompanyEngagements('1', { token: 'tok', now: NOW, fetchImpl: hs.fetchImpl, limit: 2 });
+    const r = await readCompanyEngagements('1', { token: 'tok', now: NOW, fetchImpl: hs.fetchImpl, pacingMs: 0, retryDelayMs: 0, limit: 2 });
     expect(r.read).toBe(false);
     expect(r.detail).toBe('HubSpot calls read failed (500)');
     expect(r.items.map((i) => i.id)).toEqual(['e1', 'e2', 'n1', 'm1']);
@@ -81,31 +81,31 @@ describe('B2: loadCompanyEngagements', () => {
     const db = ledgerDb({}, NOW);
     const prisma = db.client();
     const hs = hubspot();
-    const first = await loadCompanyEngagements('7', { token: 'tok', now: NOW, fetchImpl: hs.fetchImpl, prisma });
+    const first = await loadCompanyEngagements('7', { token: 'tok', now: NOW, fetchImpl: hs.fetchImpl, pacingMs: 0, retryDelayMs: 0, prisma });
     expect(first.items.length).toBe(5);
     expect(hs.calls.length).toBe(4);
     const cachedRow = await prisma.systemConfig.findUnique({ where: { key: engagementCacheKey('7') } });
     expect(cachedRow, 'the read is cached per company').toBeTruthy();
-    const second = await loadCompanyEngagements('7', { token: 'tok', now: new Date(NOW.getTime() + ENGAGEMENT_CACHE_MS - 1000), fetchImpl: hs.fetchImpl, prisma });
+    const second = await loadCompanyEngagements('7', { token: 'tok', now: new Date(NOW.getTime() + ENGAGEMENT_CACHE_MS - 1000), fetchImpl: hs.fetchImpl, pacingMs: 0, retryDelayMs: 0, prisma });
     expect(hs.calls.length, 'the cache answered').toBe(4);
     expect(second.items.map((i) => i.id)).toEqual(first.items.map((i) => i.id));
-    const third = await loadCompanyEngagements('7', { token: 'tok', now: new Date(NOW.getTime() + ENGAGEMENT_CACHE_MS + 1000), fetchImpl: hs.fetchImpl, prisma });
+    const third = await loadCompanyEngagements('7', { token: 'tok', now: new Date(NOW.getTime() + ENGAGEMENT_CACHE_MS + 1000), fetchImpl: hs.fetchImpl, pacingMs: 0, retryDelayMs: 0, prisma });
     expect(hs.calls.length, 'past the cache the read runs again').toBe(8);
     expect(third.read).toBe(true);
     // A failure is cached briefly, then retried.
     const bad = hubspot({ notes: { status: 503 } });
     const prisma2 = ledgerDb({}, NOW).client();
-    const f1 = await loadCompanyEngagements('9', { token: 'tok', now: NOW, fetchImpl: bad.fetchImpl, prisma: prisma2 });
+    const f1 = await loadCompanyEngagements('9', { token: 'tok', now: NOW, fetchImpl: bad.fetchImpl, pacingMs: 0, retryDelayMs: 0, prisma: prisma2 });
     expect(f1.read).toBe(false);
     expect(f1.detail).toContain('503');
-    await loadCompanyEngagements('9', { token: 'tok', now: new Date(NOW.getTime() + ENGAGEMENT_FAILURE_CACHE_MS - 1000), fetchImpl: bad.fetchImpl, prisma: prisma2 });
+    await loadCompanyEngagements('9', { token: 'tok', now: new Date(NOW.getTime() + ENGAGEMENT_FAILURE_CACHE_MS - 1000), fetchImpl: bad.fetchImpl, pacingMs: 0, retryDelayMs: 0, prisma: prisma2 });
     expect(bad.calls.length, 'the failure answered from the cache for a minute').toBe(4);
-    await loadCompanyEngagements('9', { token: 'tok', now: new Date(NOW.getTime() + ENGAGEMENT_FAILURE_CACHE_MS + 1000), fetchImpl: bad.fetchImpl, prisma: prisma2 });
+    await loadCompanyEngagements('9', { token: 'tok', now: new Date(NOW.getTime() + ENGAGEMENT_FAILURE_CACHE_MS + 1000), fetchImpl: bad.fetchImpl, pacingMs: 0, retryDelayMs: 0, prisma: prisma2 });
     expect(bad.calls.length, 'then retried').toBe(8);
     // No token: not read, nothing fetched, nothing cached.
     const none = hubspot();
     const prisma3 = ledgerDb({}, NOW).client();
-    const n = await loadCompanyEngagements('11', { token: undefined, now: NOW, fetchImpl: none.fetchImpl, prisma: prisma3 });
+    const n = await loadCompanyEngagements('11', { token: undefined, now: NOW, fetchImpl: none.fetchImpl, pacingMs: 0, retryDelayMs: 0, prisma: prisma3 });
     expect(n).toMatchObject({ items: [], read: false, detail: 'HubSpot is not configured' });
     expect(none.calls.length).toBe(0);
     expect(await prisma3.systemConfig.findUnique({ where: { key: engagementCacheKey('11') } })).toBeNull();

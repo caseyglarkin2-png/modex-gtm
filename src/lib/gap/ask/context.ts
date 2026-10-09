@@ -11,6 +11,7 @@ import { refineNextWithAnchor } from '../pursuit/next-anchor';
 import { storyBesideAnchor } from '../story/anchor';
 import { composeStoryAndAnchor } from '../story/compose';
 import { accountHref } from '../account-intel/href';
+import { accountDomainFor, loadAccountKnowledge } from '../story/load';
 import { knowledgeAdapters } from '../story/load';
 import type { AccountInputs } from '../account-intel/build';
 import type { AccountStory } from '../story/story';
@@ -130,6 +131,7 @@ export async function buildAskContext(prisma: PrismaLike, accountName: string, n
   const href = accountHref(brief.accountName);
   // R63-A S8: the page's composition and its anchor-refined NEXT, so Ask, Work and the page say one move.
   const { story, anchor } = await composeStoryAndAnchor({ inputs, brief, ctx, pursuit, now });
+  const vaultCoverage = await loadAccountKnowledge({ accountName: brief.accountName, domain: accountDomainFor({ domains: inputs.domains, addresses: [] }), now }).then((k) => k.coverage.find((c) => c.source === 'vault') ?? null).catch(() => null);
   const next = refineNextWithAnchor(nextFromPursuit(pursuit.state, { hypothesisId: pursuit.hypothesisId, accountSlugHref: (view) => (view === 'now' ? href : `${href}?view=${view}`), replyThreadHref: null, captureHref: `/gap/capture?account=${encodeURIComponent(brief.accountName)}`, readyHref: pursuit.ready?.href ?? null }), { state: pursuit.state, anchor });
   return compactContext({
     accountName: brief.accountName,
@@ -141,6 +143,7 @@ export async function buildAskContext(prisma: PrismaLike, accountName: string, n
     buyerSaid: inputs.bids.map((b) => ({ text: b.summary, who: b.who ?? null, at: b.at ?? null })),
     nav: { accountHref: href, next: next.control },
     // Seller acceptance (2026-10-09): what this context was built from, per source, so "no context" is never said over an unread source.
-    coverage: coverageFromPage(inputs, story),
+    // Knowledge program: the vault row is the retrieval's own coverage (synced time, counts), read soft.
+    coverage: coverageFromPage(inputs, story, process.env, { vault: vaultCoverage }),
   });
 }

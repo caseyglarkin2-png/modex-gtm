@@ -68,6 +68,9 @@ export interface EngagementReadDeps {
   prisma?: PrismaLike;
   /** Read HubSpot now, whatever the cache holds. */
   fresh?: boolean;
+  /** The gap between the four searches (default 300 ms; the search API allows four a second) and the wait before the one retry of a 429 (default 1500 ms). Tests pass 0. */
+  pacingMs?: number;
+  retryDelayMs?: number;
 }
 
 /** HTML to one line of text (a HubSpot note body is HTML); entities decoded for the few that matter in prose. */
@@ -104,7 +107,7 @@ function toEngagement(kind: EngagementKind, row: SearchRow): CompanyEngagement |
 }
 
 /** One kind for one company: the search POST (read-only), newest first, within the window; throws on a failed read. */
-async function searchKind(kind: EngagementKind, companyId: string, x: { token: string; since: Date; limit: number; signal: AbortSignal; fetchImpl: typeof fetch }): Promise<CompanyEngagement[]> {
+async function searchKind(kind: EngagementKind, companyId: string, x: { token: string; since: Date; limit: number; signal: AbortSignal; fetchImpl: typeof fetch; retried?: boolean; retryDelayMs?: number }): Promise<CompanyEngagement[]> {
   const { object, properties } = OBJECTS[kind];
   const res = await x.fetchImpl(`${HUBSPOT_API}/crm/v3/objects/${object}/search`, {
     method: 'POST',
@@ -117,6 +120,12 @@ async function searchKind(kind: EngagementKind, companyId: string, x: { token: s
     }),
     signal: x.signal,
   });
+  if (res.status === 429 && !x.retried) {
+    // The search API is rate limited (four a second): wait once and try again, then say the failure.
+    const wait = x.retryDelayMs ?? 1500;
+    if (wait > 0) await new Promise((r) => setTimeout(r, wait));
+    return searchKind(kind, companyId, { ...x, retried: true });
+  }
   if (!res.ok) throw new Error(`HubSpot ${object} read failed (${res.status})`);
   const data = (await res.json()) as { results?: SearchRow[] };
   return (data.results ?? []).map((r) => toEngagement(kind, r)).filter((e): e is CompanyEngagement => !!e).slice(0, x.limit);
@@ -133,7 +142,14 @@ export async function readCompanyEngagements(companyId: string, deps: Engagement
   const since = new Date(now.getTime() - ENGAGEMENT_WINDOW_DAYS * 86_400_000);
   const signal = AbortSignal.timeout(deps.timeoutMs ?? ENGAGEMENT_TIMEOUT_MS);
   const fetchImpl = deps.fetchImpl ?? fetch;
-  const results = await Promise.all(KINDS.map((kind) => searchKind(kind, companyId, { token, since, limit, signal, fetchImpl }).then((items) => ({ kind, items, error: null as string | null }), (e: unknown) => ({ kind, items: [] as CompanyEngagement[], error: e instanceof Error ? (e.name === 'TimeoutError' || e.name === 'AbortError' ? `HubSpot ${OBJECTS[kind].object} read timed out` : e.message) : String(e) }))));
+  // One search at a time with a short gap (the search API allows four a second; a burst of four per account tripped 429s on the audit).
+  const results: Array<{ kind: EngagementKind; items: CompanyEngagement[]; error: string | null }> = [];
+  for (const kind of KINDS) {
+    if (results.length && (deps.pacingMs ?? 300) > 0) await new Promise((r) => setTimeout(r, deps.pacingMs ?? 300));
+    // The one timeout covers all four: once it has fired, the kinds not yet read are said as timed out without a call.
+    if (signal.aborted) { results.push({ kind, items: [], error: `HubSpot ${OBJECTS[kind].object} read timed out` }); continue; }
+    results.push(await searchKind(kind, companyId, { token, since, limit, signal, fetchImpl, retryDelayMs: deps.retryDelayMs }).then((items) => ({ kind, items, error: null as string | null }), (e: unknown) => ({ kind, items: [] as CompanyEngagement[], error: e instanceof Error ? (e.name === 'TimeoutError' || e.name === 'AbortError' ? `HubSpot ${OBJECTS[kind].object} read timed out` : e.message) : String(e) })));
+  }
   const items = results.flatMap((r) => r.items).sort((a, b) => b.at.localeCompare(a.at));
   const failures = results.filter((r) => r.error).map((r) => r.error!);
   return { items, read: failures.length === 0, detail: failures.length ? failures.join('; ').slice(0, 300) : null, checkedAt };

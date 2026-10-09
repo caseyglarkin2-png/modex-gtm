@@ -43,6 +43,8 @@ export interface VaultNote {
   observedAt?: string | null;
   indexedAt?: string | null;
   sourceId?: string | null;
+  /** Knowledge program (2026-10-09): the account note's next_action with its due day (the retrieval's #next_action claim); null when the note carries none. */
+  nextAction?: { text: string; due: string | null } | null;
 }
 
 export interface StoryReaders {
@@ -154,7 +156,8 @@ export async function readLocalVaultNote(accountName: string, deps: StoryReaderD
   const own = k?.claims.filter((c) => c.sourceKind === 'vault') ?? [];
   const pick = own.find((c) => /#yardflow wedge$/i.test(c.sourceId)) ?? own.find((c) => /#next_action$/.test(c.sourceId)) ?? own.find((c) => !/#next_action$/.test(c.sourceId)) ?? null;
   if (!pick) return null;
-  return { text: pick.text.slice(0, 400), at: k?.coverage.find((c) => c.source === 'vault')?.indexedAt?.slice(0, 10) ?? null, observedAt: pick.observedAt, indexedAt: pick.indexedAt, sourceId: pick.sourceId };
+  const na = own.find((c) => /#next_action$/.test(c.sourceId)) ?? null;
+  return { text: pick.text.slice(0, 400), at: k?.coverage.find((c) => c.source === 'vault')?.indexedAt?.slice(0, 10) ?? null, observedAt: pick.observedAt, indexedAt: pick.indexedAt, sourceId: pick.sourceId, nextAction: na ? { text: na.text.slice(0, 300), due: na.eventAt ? na.eventAt.slice(0, 10) : null } : null };
 }
 
 async function defaultReadFile(path: string): Promise<string | null> {

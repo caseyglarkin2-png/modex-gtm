@@ -86,7 +86,7 @@ export interface StoryInput {
   touches: StoryTouch[];
   clawdRead: 'ok' | 'unavailable' | 'not_configured';
   /** The vault's account note, when one exists (seller-visible, never quotable, never read aloud). */
-  vaultNote: { text: string; at: string | null } | null;
+  vaultNote: { text: string; at: string | null; nextAction?: { text: string; due: string | null } | null } | null;
   /** The resolver's set-aside people (serializable), for the divested-unit rise; a first-party source when the company announced it. */
   excluded: Array<{ key: string; name: string; title: string | null; code: string; reason: string; source?: { url: string; publisher: string; quote: string; publishedAt: string } | null }>;
 }
@@ -305,7 +305,14 @@ export function projectStory(i: StoryInput): AccountStory {
   if (stories.length) rows.push(row('stories', stories, { collapsed: true }));
 
   // YOUR NOTE: the vault's account note (seller-visible, never quotable, never read aloud).
-  if (i.vaultNote?.text.trim()) rows.push(row('note', [{ text: sentence(i.vaultNote.text.replace(/<[^>]+>/g, '')), tag: 'Our read', basis: `your vault note${i.vaultNote.at ? `, ${day(i.vaultNote.at)}` : ''}; never quote it to the buyer`, basisIds: ['vault:account-note'] }]));
+  if (i.vaultNote?.text.trim()) {
+    const noteBasis = `your vault note${i.vaultNote.at ? `, ${day(i.vaultNote.at)}` : ''}; never quote it to the buyer`;
+    const noteSentences = [{ text: sentence(i.vaultNote.text.replace(/<[^>]+>/g, '')), tag: 'Our read' as const, basis: noteBasis, basisIds: ['vault:account-note'] }];
+    // Knowledge program (2026-10-09): the vault's next action is on the story, with its due day, so Work, Ask and the assignment say it.
+    const na = i.vaultNote.nextAction;
+    if (na?.text.trim()) noteSentences.push({ text: sentence(`Next action on record${na.due ? `, due ${day(na.due)}` : ''}: ${na.text.replace(/<[^>]+>/g, '')}`), tag: 'Our read' as const, basis: noteBasis, basisIds: ['vault:account-note'] });
+    rows.push(row('note', noteSentences));
+  }
 
   // CHECK BEFORE CONTACTING: an Unverified sale or divestiture that names the chosen person's unit, and any
   // set-aside that rests on it.
