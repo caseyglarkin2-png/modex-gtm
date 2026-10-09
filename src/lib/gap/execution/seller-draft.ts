@@ -116,7 +116,37 @@ export type SellerDraftRefusal =
   | 'thesis_needs_review'
   | 'thesis_currentness_unknown'
   | 'active_opportunity'
-  | 'opportunity_unknown';
+  | 'opportunity_unknown'
+  /** C39: the pinned approved snapshot (hash, recipient, sender) no longer matches what would be drafted; nothing was created. */
+  | 'copy_changed_since_review'
+  | 'recipient_changed_since_review'
+  | 'sender_changed_since_review';
+
+/**
+ * C39: the immutable snapshot an approval was given on (the assignment email's copy hash, its recipient and the
+ * mailbox it would go from). A draft created under it is rechecked against the freshly prepared email immediately
+ * before the provider adapter; a mismatch refuses with no side effect. A post-creation comparison alone is not enough.
+ */
+export interface ApprovedSnapshot {
+  revision: number;
+  contentHash: string;
+  recipient: string | null;
+  senderIdentity: string | null;
+}
+
+/** The C39 recheck: what moved between the approved snapshot and the email about to be drafted, or null when nothing did. */
+export function snapshotDrift(expected: ApprovedSnapshot, actual: { contentHash: string; recipient: string; senderIdentity: string }): Refusal | null {
+  if (actual.contentHash !== expected.contentHash) {
+    return { ok: false, reason: 'copy_changed_since_review', detail: `The copy changed after revision ${expected.revision} was approved; nothing was drafted. Open the item in GAP and approve the current copy.` };
+  }
+  if (expected.recipient && actual.recipient.trim().toLowerCase() !== expected.recipient.trim().toLowerCase()) {
+    return { ok: false, reason: 'recipient_changed_since_review', detail: `The recipient is now ${actual.recipient}, not ${expected.recipient} as approved; nothing was drafted.` };
+  }
+  if (expected.senderIdentity && actual.senderIdentity.trim().toLowerCase() !== expected.senderIdentity.trim().toLowerCase()) {
+    return { ok: false, reason: 'sender_changed_since_review', detail: `The email would now go from ${actual.senderIdentity}, not ${expected.senderIdentity} as approved; nothing was drafted.` };
+  }
+  return null;
+}
 
 export type SellerDraftResult =
   | {
@@ -646,15 +676,28 @@ export async function prepareSellerEmail(
 
 export async function createSellerGmailDraft(
   prisma: PrismaLike,
-  input: { decisionId: string; actor: string; now: Date; stepIndex?: number },
+  input: { decisionId: string; actor: string; now: Date; stepIndex?: number; expected?: ApprovedSnapshot },
   deps: SellerDraftDeps = {},
 ): Promise<SellerDraftResult> {
-  const { decisionId, actor, now } = input;
-  const prep = await prepareSellerEmail(prisma, { ...input, mode: 'draft' }, deps);
+  const { decisionId, actor, now, expected } = input;
+  const prep = await prepareSellerEmail(prisma, { decisionId, actor, now, stepIndex: input.stepIndex, mode: 'draft' }, deps);
   if (!prep.ok) return prep;
-  if ('existingDraft' in prep) return { ok: true, alreadyDrafted: true, receipt: prep.existingDraft };
-  const p = prep.prepared;
   const refuse = (pr: PrismaLike, a: string, d: string, r: Refusal) => refuseAs(DRAFT_REFUSED, pr, a, d, r);
+  if ('existingDraft' in prep) {
+    // C39: a draft already there is only this approval's draft when it is of the approved snapshot.
+    const e = prep.existingDraft;
+    const drift = expected ? snapshotDrift(expected, { contentHash: e.contentHash, recipient: e.recipient, senderIdentity: e.senderIdentity }) : null;
+    if (drift) return refuse(prisma, actor, decisionId, drift);
+    return { ok: true, alreadyDrafted: true, receipt: e };
+  }
+  const p = prep.prepared;
+  // C39: the pinned snapshot is rechecked against the freshly prepared email HERE, after every gate and before the
+  // person-step claim and the provider adapter, so a source change between preflight and creation refuses with no
+  // side effect.
+  if (expected) {
+    const drift = snapshotDrift(expected, { contentHash: p.contentHash, recipient: p.recipient, senderIdentity: p.senderIdentity });
+    if (drift) return refuse(prisma, actor, decisionId, drift);
+  }
   const { stepIndex, contentHash, senderIdentity, threadContext, subject, inReplyToGmailMessageId } = p;
   const email = p.recipient;
   const gapSender = p.gapSender;
