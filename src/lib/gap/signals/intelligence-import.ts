@@ -139,6 +139,10 @@ export async function importIntelligenceBatch(prisma: PrismaLike, input: ImportI
             resolution: res.resolution,
             resolution_basis: res.basis,
             research_status: 'none',
+            // Undecided, explicitly: the readers select on feedback IS NULL (an in-memory stand-in reads an absent field as not null).
+            feedback: null,
+            feedback_by: null,
+            feedback_at: null,
             ...(r.kind === 'report' ? { relevance: 'research_lead', score: null, categories: [] } : classification(r, res.accountName)),
             event_id: twin ? (twin.event_id ?? twin.id) : null,
             submitted_by: `import:${r.producer}`,

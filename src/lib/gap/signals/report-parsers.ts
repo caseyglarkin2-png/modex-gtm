@@ -92,7 +92,8 @@ function boldBlocks(lines: string[]): Array<{ label: string | null; head: string
   const blocks: Array<{ label: string | null; head: string; body: string[] }> = [];
   for (const raw of lines) {
     const line = raw.replace(/\s+$/, '');
-    const m = /^\*\*([^*]+?)\*\*(.*)$/.exec(line.trim());
+    // A "Sources:" line that is not bold still starts its own block (it follows the score line in some issues).
+    const m = /^\*\*([^*]+?)\*\*(.*)$/.exec(line.trim()) ?? (/^((?:Direct )?Sources?):\s*(.*)$/i.exec(line.trim()) ? (() => { const s = /^((?:Direct )?Sources?):\s*(.*)$/i.exec(line.trim())!; return [s[0], `${s[1]}:`, s[2]] as unknown as RegExpExecArray; })() : null);
     if (m) {
       const inner = m[1].trim();
       const colon = inner.indexOf(':');
@@ -243,10 +244,19 @@ export function parseSignalDeskReport(text: string, opts: ParseOptions): ParsedR
       passage.push(prose(t));
     }
     n += 1;
+    const people = peopleOf(content);
     const firstBold = /\*\*([^*]+)\*\*/.exec(content);
-    const title = isMove ? stripMarkers(unbold(firstBold?.[1] ?? passage[0] ?? heading)).replace(/\.$/, '').slice(0, 200) : heading.slice(0, 200);
+    const moveWord = heading.replace(/^\d+[).]\s*/, '').toLowerCase();
+    // A move about a person is titled by the person; a post by its thesis (the first bold sentence); the rest by the heading.
+    const title = isMove
+      ? people.length && !/post this/.test(head)
+        ? `${people[0]} (${moveWord})`.slice(0, 200)
+        : stripMarkers(unbold(firstBold?.[1] ?? passage[0] ?? heading)).replace(/([?!])\.$/, '$1').replace(/\.$/, '').slice(0, 200)
+      : heading.slice(0, 200);
     const textOut = passage.join('\n\n').trim();
     if (!textOut && !suggestions.length) continue;
+    // "Exact note:" and "Reply:" lead into a drafted message (a suggestion), not a read.
+    const interpretationOut = interpretation.map((l) => l.replace(/\s*(Exact note|Reply|Note):?\s*$/i, '').trim()).filter(Boolean);
     records.push({
       ...common,
       producerItemId: `${idBase}#${n}-${slug(isMove ? heading : heading)}`,
@@ -254,10 +264,10 @@ export function parseSignalDeskReport(text: string, opts: ParseOptions): ParsedR
       title,
       text: textOut || title,
       sources: linksOf(content),
-      personHints: peopleOf(content),
+      personHints: people,
       accountHint: null,
       producerStatus: isMove ? heading.replace(/^\d+[).]\s*/, '') : isReserve ? 'reserve post' : 'conversation',
-      interpretation: interpretation.length ? interpretation.join('\n') : null,
+      interpretation: interpretationOut.length ? interpretationOut.join('\n') : null,
       suggestions,
       archive: { reportRef: opts.runId, section: b.parent ? `${b.parent} / ${b.heading}` : b.heading },
       visibility: isReserve ? 'archive' : 'digest',

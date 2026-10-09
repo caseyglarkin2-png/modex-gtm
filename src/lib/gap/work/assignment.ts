@@ -65,6 +65,8 @@ export interface BuiltAssignment {
   prepared: Prepared;
   /** The move in words (the Ask context's next, else the item title): what "The move:" says. */
   move: string;
+  /** IW15: the prepared email is addressed to a different person than the item names; the item is held, never assigned. */
+  hold?: { reason: 'recipient_mismatch'; detail: string } | null;
 }
 
 export interface AssignmentDeps {
@@ -93,9 +95,12 @@ export interface PackLike {
   rendered: { queued: { subject: string; body: string } } | null;
   contentHash: string | null;
   emailReady?: boolean;
-  persona?: { email?: string | null } | null;
+  persona?: { email?: string | null; name?: string | null } | null;
   hypothesis?: { signals?: Array<{ signal?: { title?: string | null; evidence_url?: string | null; observed_at?: Date | string | null } | null }> } | null;
 }
+
+/** IW15 (2026-10-09): a name normalised for a same-person comparison ("Morrison, Craig" is "Craig Morrison"). */
+const nameKey = (s: string | null | undefined): string => (s ?? '').toLowerCase().replace(/[^a-z\s]/g, ' ').split(/\s+/).filter(Boolean).sort().join(' ');
 
 export interface BuildAssignmentInput {
   plan: DayPlan;
@@ -187,13 +192,25 @@ export async function buildAssignment(prisma: PrismaLike, input: BuildAssignment
       ? { subject: pack.rendered.queued.subject, body: pack.rendered.queued.body, to: pack.persona?.email ?? null }
       : null;
   if (input.note) lines.push('', input.note);
+  let hold: BuiltAssignment['hold'] = null;
   if (copy) {
     const to = copy.to;
-    prepared = { kind: 'email', to, subject: copy.subject, body: copy.body };
-    lines.push('', `The email${to ? `, to ${to}` : ''}, subject "${copy.subject}":`);
-    for (const l of copy.body.split('\n')) lines.push(`> ${l}`);
-    const sources = (pack?.hypothesis?.signals ?? []).map((s) => s.signal).filter((s): s is NonNullable<typeof s> => !!s && !!s.title);
-    if (sources.length) lines.push(`Sources: ${sources.map((s) => `${s.title}${dateLabel(s.observed_at) ? ` (${dateLabel(s.observed_at)})` : ''}${s.evidence_url ? ` ${s.evidence_url}` : ''}`).join('; ')}`);
+    // IW15 (2026-10-09): the PepsiCo card named Tom while the prepared email was to Shawn. The recipient's name is the
+    // pack's persona name, else the persona record for the address (one bounded read); when the item names a person
+    // and the names disagree, the email is NOT presented as prepared and the item is held: nothing goes out until
+    // the account's chosen person and the draft agree. The intelligence and the rest of the assignment stay readable.
+    const recipientName = pack?.persona?.name ?? (to && typeof prisma?.persona?.findFirst === 'function' ? ((await prisma.persona.findFirst({ where: { email: { equals: to, mode: 'insensitive' } }, select: { name: true } }).catch(() => null)) as { name: string | null } | null)?.name ?? null : null);
+    const itemName = item.person?.name ?? null;
+    if (itemName && recipientName && nameKey(itemName) && nameKey(recipientName) && nameKey(itemName) !== nameKey(recipientName)) {
+      hold = { reason: 'recipient_mismatch', detail: `GAP's prepared email is addressed to ${recipientName}${to ? ` (${to})` : ''}, but this item names ${itemName}. Held: nothing goes out until the account's chosen person and the draft agree; choose on the account.` };
+      lines.push('', safeLine(hold.detail));
+    } else {
+      prepared = { kind: 'email', to, subject: copy.subject, body: copy.body };
+      lines.push('', `The email${to ? `, to ${to}` : ''}, subject "${copy.subject}":`);
+      for (const l of copy.body.split('\n')) lines.push(`> ${l}`);
+      const sources = (pack?.hypothesis?.signals ?? []).map((s) => s.signal).filter((s): s is NonNullable<typeof s> => !!s && !!s.title);
+      if (sources.length) lines.push(`Sources: ${sources.map((s) => `${s.title}${dateLabel(s.observed_at) ? ` (${dateLabel(s.observed_at)})` : ''}${s.evidence_url ? ` ${s.evidence_url}` : ''}`).join('; ')}`);
+    }
   }
   lines.push('', `Open it in GAP: ${itemLink(input)}`);
   if (input.commandsEnabled) {
@@ -203,7 +220,7 @@ export async function buildAssignment(prisma: PrismaLike, input: BuildAssignment
   const text = lines.map(safeLine).join('\n');
   const contentHash = input.copyOverride?.contentHash ?? pack?.contentHash ?? createHash('sha256').update(text).digest('hex');
   const html = `<div style="font-family:system-ui,sans-serif;line-height:1.45;white-space:pre-wrap">${esc(text)}</div>`;
-  return { subject, text, html, contentHash, prepared, move };
+  return { subject, text, html, contentHash, prepared, move, hold };
 }
 
 /** START, once per day. `started: false` when the day was already started (the earlier row stands). */
@@ -280,7 +297,7 @@ const SETTLING_COMMANDS = new Set(['skip', 'defer', 'done']);
 
 export type AssignableInput = Pick<BuildAssignmentInput, 'baseUrl' | 'actionSecret' | 'commandsEnabled' | 'now'>;
 
-export type Assignable = { ok: true; built: BuiltAssignment } | { ok: false; reason: 'research_move' | 'research_why'; detail: string; built: BuiltAssignment };
+export type Assignable = { ok: true; built: BuiltAssignment } | { ok: false; reason: 'research_move' | 'research_why' | 'recipient_mismatch'; detail: string; built: BuiltAssignment };
 
 /**
  * Whether an item can be handed to the seller: it is when something is prepared (an email, or an angle), or when its move is a
@@ -289,6 +306,8 @@ export type Assignable = { ok: true; built: BuiltAssignment } | { ok: false; rea
  */
 export async function assignable(prisma: PrismaLike, plan: DayPlan, item: PlanItem, input: AssignableInput, deps: AssignmentDeps = {}): Promise<Assignable> {
   const built = await buildAssignment(prisma, { plan, item, revision: 0, ...input }, deps);
+  // IW15: a prepared email addressed to someone other than the item's person is held before anything else is judged.
+  if (built.hold) return { ok: false, reason: built.hold.reason, detail: built.hold.detail, built };
   if (built.prepared.kind !== 'none') return { ok: true, built };
   if (RESEARCH_MOVE.test(built.move.trim())) return { ok: false, reason: 'research_move', detail: built.move, built };
   if (RESEARCH_WHY.test(item.why)) return { ok: false, reason: 'research_why', detail: item.why, built };
@@ -312,6 +331,8 @@ export interface NextAssignable {
 }
 
 const HELD_LINE = 'nothing supported to send yet';
+/** IW15: the held line when the prepared email and the item's person disagree. */
+const MISMATCH_LINE = 'the prepared email is addressed to a different person than the item names; choose on the account';
 
 /**
  * The next item START or NEXT hands the seller, walking the plan (its newest revision) in order and skipping: an item
@@ -325,18 +346,20 @@ export async function nextAssignableItem(prisma: PrismaLike, plan: DayPlan, opts
   const sent = new Set(rows.map((r) => r.subject_id));
   const applied: Array<{ subject_id: string; payload: Record<string, unknown> | null }> = await prisma.gapAuditEvent.findMany({ where: { kind: COMMAND_APPLIED, subject_type: ITEM_SUBJECT_TYPE, subject_id: { in: keys } }, select: { subject_id: true, payload: true } });
   const settled = new Set<string>();
-  const heldBefore = new Set<string>();
+  // The held items by key with the reason they were held (a research hold, or IW15's recipient mismatch).
+  const heldBefore = new Map<string, string>();
   for (const r of applied) {
     const p = (r.payload ?? {}) as Record<string, unknown>;
     // A progress note (DONE that said what the seller is doing, not what happened) settles nothing.
     if (SETTLING_COMMANDS.has(String(p.command ?? '')) && p.effect !== 'progress_noted') settled.add(r.subject_id);
-    if (p.effect === ITEM_HELD_FOR_RESEARCH) heldBefore.add(r.subject_id);
+    if (p.effect === ITEM_HELD_FOR_RESEARCH) heldBefore.set(r.subject_id, String(p.reason ?? ''));
   }
+  const heldLine = (reason: string) => (reason === 'recipient_mismatch' ? MISMATCH_LINE : HELD_LINE);
   const held: HeldItem[] = [];
   for (const item of plan.items) {
     if (sent.has(item.key) || settled.has(item.key)) continue;
     if (heldBefore.has(item.key)) {
-      held.push({ item, line: HELD_LINE, recorded: false });
+      held.push({ item, line: heldLine(heldBefore.get(item.key) ?? ''), recorded: false });
       continue;
     }
     if (!opts.assign) return { item, built: null, held };
@@ -345,7 +368,7 @@ export async function nextAssignableItem(prisma: PrismaLike, plan: DayPlan, opts
     await prisma.gapAuditEvent.create({
       data: { kind: COMMAND_APPLIED, actor: opts.assign.actor, subject_type: ITEM_SUBJECT_TYPE, subject_id: item.key, payload: { effect: ITEM_HELD_FOR_RESEARCH, reason: a.reason, detail: a.detail.slice(0, 500), day: plan.day, itemToken: item.token, revision: plan.revision ?? 0, at: opts.assign.input.now.toISOString() } },
     });
-    held.push({ item, line: HELD_LINE, recorded: true });
+    held.push({ item, line: heldLine(a.reason), recorded: true });
   }
   return { item: null, built: null, held };
 }

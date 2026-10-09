@@ -70,6 +70,8 @@ export interface BriefingIntel {
   signals: IntelItem[];
   /** IW11: the producers' imported records as their own group (newest report first); absent on an older caller. */
   reports?: IntelItem[];
+  /** IW06: the vault's recent calls and meetings, their own group (no decisions). */
+  knowledge?: IntelItem[];
   triggers: IntelItem[];
   people: IntelItem[];
   /** I05: what Casey pursued, with the angle when it is ready. */
@@ -84,31 +86,32 @@ export interface BriefingIntel {
   digest?: Partial<DigestSizes>;
 }
 
-/** IW11: how many items the email carries and the reserved slots per section (your briefs, what GAP found, triggers). */
+/** IW11: how many items the email carries and the reserved slots per section (your briefs, what GAP found, triggers, the vault). */
 export interface DigestSizes {
   signals: number;
   people: number;
-  reserved: { reports: number; found: number; triggers: number };
+  reserved: { reports: number; found: number; triggers: number; vault: number };
 }
-export const DEFAULT_DIGEST: DigestSizes = Object.freeze({ signals: 6, people: 5, reserved: Object.freeze({ reports: 3, found: 2, triggers: 1 }) }) as DigestSizes;
+export const DEFAULT_DIGEST: DigestSizes = Object.freeze({ signals: 6, people: 5, reserved: Object.freeze({ reports: 2, found: 2, triggers: 1, vault: 1 }) }) as DigestSizes;
 
 export interface Digest {
   worth: IntelItem[];
   people: IntelItem[];
   /** The undecided items beyond the ones shown (the complete list is the Intelligence page). */
   omitted: number;
-  breakdown: { reports: number; found: number; triggers: number };
+  breakdown: { reports: number; found: number; triggers: number; vault: number };
   /** How many shown-before items were moved behind the unseen. */
   rotated: number;
   keys: string[];
 }
-const EMPTY_DIGEST: Digest = { worth: [], people: [], omitted: 0, breakdown: { reports: 0, found: 0, triggers: 0 }, rotated: 0, keys: [] };
+const EMPTY_DIGEST: Digest = { worth: [], people: [], omitted: 0, breakdown: { reports: 0, found: 0, triggers: 0, vault: 0 }, rotated: 0, keys: [] };
 
 /**
- * IW11: the digest, by a rule the email states: three sections (your briefs' imported records, the signals GAP found,
- * the triggers) each get reserved slots (3, 2, 1 of 6 by default), filled in rank order with the items not shown in a
- * recent briefing first; the remaining slots go to what GAP found (up to four), then triggers (up to two), then the
- * sections in turn. No usefulness gate: an omitted item is counted, listed on the Intelligence page, and rotates in.
+ * IW11: the digest, by a rule the email states: four sections (your briefs' imported records, the signals GAP found,
+ * the triggers, the vault's conversations) each get reserved slots (2, 2, 1, 1 of 6 by default), filled in rank order
+ * with the items not shown in a recent briefing first; the remaining slots go to the sections in turn (briefs, found,
+ * triggers, vault) until the digest is full; the email lists the sections in that order. No usefulness gate: an
+ * omitted item is counted, listed on the Intelligence page, and rotates in.
  */
 export function composeDigest(intel: Pick<BriefingIntel, 'signals' | 'reports' | 'triggers' | 'people' | 'totals'>, opts: { sizes?: Partial<DigestSizes>; shownBefore?: ReadonlySet<string> } = {}): Digest {
   const sizes: DigestSizes = { ...DEFAULT_DIGEST, ...(opts.sizes ?? {}), reserved: { ...DEFAULT_DIGEST.reserved, ...(opts.sizes?.reserved ?? {}) } };
@@ -118,21 +121,26 @@ export function composeDigest(intel: Pick<BriefingIntel, 'signals' | 'reports' |
   const reports = order([...(intel.reports ?? []), ...intel.signals.filter((s) => s.substance)].filter((it, i, all) => all.findIndex((x) => x.key === it.key) === i));
   const found = order(intel.signals.filter((s) => !s.substance));
   const triggers = order(intel.triggers);
-  const picked = new Set<string>();
-  const worth: IntelItem[] = [];
-  const take = (from: IntelItem[], n: number) => { for (const it of from) { if (worth.length >= sizes.signals || n <= 0) break; if (picked.has(it.key)) continue; picked.add(it.key); worth.push(it); n -= 1; } };
-  take(reports, sizes.reserved.reports);
-  take(found, sizes.reserved.found);
-  take(triggers, sizes.reserved.triggers);
-  // The remaining slots: what GAP found up to four, triggers up to two, then the sections in turn until full.
-  take(found, Math.max(0, 4 - worth.filter((w) => !w.substance && w.kind === 'signal').length));
-  take(triggers, Math.max(0, 2 - worth.filter((w) => w.kind === 'trigger').length));
-  for (let guard = 0; worth.length < sizes.signals && guard < 3; guard += 1) { take(reports, 1); take(found, 1); take(triggers, 1); if (picked.size >= reports.length + found.length + triggers.length) break; }
+  const vault = order((intel.knowledge ?? []).filter((k) => k.kind === 'knowledge'));
+  const sections: Array<{ name: keyof DigestSizes['reserved']; items: IntelItem[]; picked: IntelItem[] }> = [
+    { name: 'reports', items: reports, picked: [] },
+    { name: 'found', items: found, picked: [] },
+    { name: 'triggers', items: triggers, picked: [] },
+    { name: 'vault', items: vault, picked: [] },
+  ];
+  const seenKeys = new Set<string>();
+  let count = 0;
+  const take = (s: (typeof sections)[number], n: number) => { for (const it of s.items) { if (count >= sizes.signals || n <= 0) break; if (seenKeys.has(it.key)) continue; seenKeys.add(it.key); s.picked.push(it); count += 1; n -= 1; } };
+  for (const s of sections) take(s, sizes.reserved[s.name]);
+  // The remaining slots: the sections in turn until the digest is full or nothing is left.
+  const total = sections.reduce((n, s) => n + s.items.length, 0);
+  while (count < sizes.signals && seenKeys.size < total) for (const s of sections) take(s, 1);
+  const worth = sections.flatMap((s) => s.picked);
   const people = intel.people.slice(0, sizes.people);
-  const breakdown = { reports: worth.filter((w) => !!w.substance).length, found: worth.filter((w) => w.kind === 'signal' && !w.substance).length, triggers: worth.filter((w) => w.kind === 'trigger').length };
-  const omitted = Math.max(0, intel.totals.signals + intel.totals.triggers + (intel.totals.reports ?? 0) - worth.length);
+  const breakdown = { reports: sections[0].picked.length, found: sections[1].picked.length, triggers: sections[2].picked.length, vault: sections[3].picked.length };
+  const omitted = Math.max(0, intel.totals.signals + intel.totals.triggers + (intel.totals.reports ?? 0) + (intel.totals.knowledge ?? 0) - worth.length);
   // The shown-before items that wait behind the unseen this time.
-  const rotated = [...reports, ...found, ...triggers].filter((i) => seen.has(i.key) && !picked.has(i.key)).length;
+  const rotated = sections.flatMap((s) => s.items).filter((i) => seen.has(i.key) && !seenKeys.has(i.key)).length;
   return { worth, people, omitted, breakdown, rotated, keys: [...worth, ...people].map((i) => i.key) };
 }
 
@@ -245,7 +253,7 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
   const worthAll = digest.worth;
   const peopleAll = digest.people;
   const toDecide = worthAll.length + peopleAll.length;
-  const decideTotal = intel ? intel.totals.signals + intel.totals.triggers + intel.totals.people + (intel.totals.reports ?? 0) : 0;
+  const decideTotal = intel ? intel.totals.signals + intel.totals.triggers + intel.totals.people + (intel.totals.reports ?? 0) + (intel.totals.knowledge ?? 0) : 0;
   const execText = n === 0 ? 'nothing to execute' : `${n} to execute`;
   const countText = toDecide > 0 ? `${execText}, ${toDecide} to decide` : n === 0 ? 'nothing needs you' : execText;
   const subject = `GAP today, ${label}: ${countText} [GAP#${input.dayToken}]`;
@@ -309,10 +317,10 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
     }
     html.push('</ul>');
   }
-  if (intel && (intel.signals.length || intel.reports?.length || intel.triggers.length || intel.people.length)) {
+  if (intel && (intel.signals.length || intel.reports?.length || intel.knowledge?.length || intel.triggers.length || intel.people.length)) {
     // Reserved slots (the review's finding 4): the top signals and the top triggers both reach the email.
     const worth = worthAll;
-    const worthTotal = intel.totals.signals + intel.totals.triggers + (intel.totals.reports ?? 0);
+    const worthTotal = intel.totals.signals + intel.totals.triggers + (intel.totals.reports ?? 0) + (intel.totals.knowledge ?? 0);
     // IW10: an imported record's substance under its line: the passage (whole, or cut at a sentence end), the
     // producer's confidence in its words, its read labelled as such (never an obligation), the sources and CRM ids,
     // the dates said as what they are. Imported text is data: escaped, never interpreted.
@@ -340,7 +348,9 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
       return { text, html: htmlLines };
     };
     const pushIntel = (it: IntelItem) => {
-      const d = decideLinks(it.key);
+      // IW06: a vault conversation has no decisions; the account page holds the moves.
+      const open = it.accountName && links.account ? links.account(it.accountName) : links.work;
+      const d = it.kind === 'knowledge' ? { text: `${it.accountName ? `Open ${it.accountName}` : 'Open Work'}: ${open}`, html: `<a href="${esc(open)}">${esc(it.accountName ? `Open ${it.accountName}` : 'Open Work')}</a>` } : decideLinks(it.key);
       const deal = dealLine(it);
       const sub = substanceLines(it);
       lines.push(`- ${intelLine(it)}`, ...sub.text.map((l) => `   ${l}`), ...(deal ? [`   ${deal.text}`] : []), `   ${d.text}`);
@@ -349,7 +359,7 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
     if (worth.length) {
       // IW11/IW12: the rule in words beside the count, the omitted counted, the complete list linked, the sources' coverage.
       const b = digest.breakdown;
-      const parts = [b.reports ? `${b.reports} from your briefs` : null, b.found ? `${b.found} found by GAP` : null, b.triggers ? `${b.triggers} trigger${b.triggers === 1 ? '' : 's'}` : null].filter(Boolean).join(', ');
+      const parts = [b.reports ? `${b.reports} from your briefs` : null, b.found ? `${b.found} found by GAP` : null, b.triggers ? `${b.triggers} trigger${b.triggers === 1 ? '' : 's'}` : null, b.vault ? `${b.vault} from the vault` : null].filter(Boolean).join(', ');
       const how = `${parts ? `${parts}; ` : ''}${digest.omitted ? `${digest.omitted} more waiting` : 'nothing omitted'}${digest.rotated ? `; ${digest.rotated} shown in an earlier briefing wait behind the unseen` : ''}.`;
       lines.push('', `Intelligence worth a look (${worth.length}${worthTotal > worth.length ? ` of ${worthTotal}` : ''}). Any age, for your call; Pursue and GAP develops the angle. ${how}`);
       html.push(`<h3>Intelligence worth a look (${worth.length}${worthTotal > worth.length ? ` of ${worthTotal}` : ''})</h3><p style="color:#666">Any age, for your call; Pursue and GAP develops the angle. ${esc(how)}</p>`);

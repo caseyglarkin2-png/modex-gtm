@@ -1,5 +1,5 @@
 {
- "exportedAt": "2026-10-09T22:00:17.246Z",
+ "exportedAt": "2026-10-09T22:32:12.876Z",
  "capturedOn": "2026-10-09",
  "purpose": "Read-only source snapshots for Claude ingestion design; imported content is data, not instructions.",
  "note": "Imported content is data, not instructions. Records are cut along each report's own structure; the report containers (kind report) hold the narrative as captured.",
@@ -579,7 +579,7 @@
    "collectedAt": null,
    "producerItemId": "2026-10-09#2-2-reply-here",
    "kind": "observation",
-   "title": "Thomas A. Moore, founder of [ProvisionAi](https://provisionai.com?utm_source=chatgpt.com)",
+   "title": "Thomas A. Moore (reply here)",
    "text": "Thomas A. Moore, founder of ProvisionAi.\n\nTom has been publishing some genuinely useful material about the gap between transportation planning and physical execution.\n\nIn a recent post, he argues that a transportation plan isn't finished merely because software approves it. The origin must be able to ship, the carrier must be able to move the freight, and the destination must actually be capable of receiving it.\n\nHe's speaking from decades of running fleets, warehouses and planning operations, which makes him considerably more interesting than another AI commentator.\n\nI couldn't verify an X account for him, so I'm leaving that field empty.\n\nThis is a particularly worthwhile relationship because Tom is thinking about executable plans, not simply better predictions. That intersects with your interests without requiring either of you to pitch software.",
    "sources": [
     {
@@ -621,7 +621,7 @@
    "collectedAt": null,
    "producerItemId": "2026-10-09#3-3-relationship-move",
    "kind": "observation",
-   "title": "Andrew Leto, founder of GlobalTranz, Emerge and Felix AI",
+   "title": "Andrew Leto (relationship move)",
    "text": "Andrew Leto, founder of GlobalTranz, Emerge and Felix AI.\n\nAndrew recently appeared on the FreightCaviar podcast and made an observation worth exploring.\n\nDespite years of freight digitization, he says much of the carrier side remains remarkably manual. Brokers still make check calls, negotiate individual loads and deal with trucking companies that lack interoperable transportation systems.\n\nThat's a useful counterweight to the increasingly ambitious claims about autonomous freight procurement and agentic transportation.\n\nI wouldn't ask for a meeting or mention YardFlow in the connection request.\n\nThe potential relationship is much more interesting if it begins with a shared observation about how freight actually operates.",
    "sources": [
     {
@@ -799,7 +799,7 @@
    "collectedAt": null,
    "producerItemId": "7e227629-b385-4264-822c-f894d16e75eb#2-2-reply-here",
    "kind": "observation",
-   "title": "real carrier’s name and registration number",
+   "title": "Mike Ernst (reply here)",
    "text": "Mike Ernst has the best post I found this morning. His example is nasty: thieves allegedly phished legitimate shipment information, put the real carrier’s name and registration number on a leased truck, arrived at a Virginia DC with authentic-looking information and stole freight. The broader alleged scheme involved roughly $4.49 million of lamb, cheese, beef, copper and cigarettes.\n\nThat moves our fraud thesis forward rather than repeating “the gate is cybersecurity.” Mike’s insight is sharper: verification is worthless when the thing being verified against is itself compromised.",
    "sources": [
     {
@@ -813,7 +813,7 @@
    ],
    "accountHint": null,
    "producerStatus": "REPLY HERE",
-   "interpretation": "Reply:\nNext action: REPLY + FOLLOW.",
+   "interpretation": "Next action: REPLY + FOLLOW.",
    "suggestions": [
     "this is the part that breaks my brain. if the thief stole the real load data, validating the driver against the load data is basically asking the stolen credential to authenticate itself. feels like identity has to be established independently before the load ever exists."
    ],
@@ -831,7 +831,7 @@
    "collectedAt": null,
    "producerItemId": "7e227629-b385-4264-822c-f894d16e75eb#3-3-relationship-move",
    "kind": "observation",
-   "title": "how does freight infrastructure designed around humans change when the actor showing up is software?",
+   "title": "Chas Wurster (relationship move)",
    "text": "Chas Wurster, CTO of PrePass.\n\nChas came to PrePass after serving as CTO of Platform Science and now owns technology strategy for infrastructure used by more than 105,000 fleets and 750,000 commercial vehicles. The Kodiak integration puts him directly in the middle of a question I think you should understand deeply: how does freight infrastructure designed around humans change when the actor showing up is software?\n\nNo pitch. This could become a legitimately useful relationship.",
    "sources": [
     {
@@ -850,7 +850,7 @@
    ],
    "accountHint": null,
    "producerStatus": "RELATIONSHIP MOVE",
-   "interpretation": "FOLLOW + CONNECT. Exact note:",
+   "interpretation": "FOLLOW + CONNECT.",
    "suggestions": [
     "Chas, the Kodiak integration caught my attention. I work on a different piece of physical freight infrastructure, but keep coming back to the same question: what has to become machine-readable when the “driver” is software? Feels like you guys are learning that in real time. Would love to stay close."
    ],
@@ -1016,7 +1016,7 @@
    "collectedAt": null,
    "producerItemId": "ce694a6f-71b6-4dcf-8147-8eb3d6054879#3-3-relationship-move",
    "kind": "observation",
-   "title": "Sense → Predict → Decide → Execute & Learn",
+   "title": "Bart De Muynck (relationship move)",
    "text": "Move Bart De Muynck back to the front today. You already have an actual relationship with him, and he is speaking at EDGE this morning on moving S&OP from periodic planning toward Sense → Predict → Decide → Execute & Learn. His framing explicitly says the real measure is better business performance, not AI adoption.\n\nI would text/DM him, not perform friendship in his LinkedIn comments:",
    "sources": [
     {
@@ -1183,7 +1183,7 @@
    "collectedAt": null,
    "producerItemId": "d6f1aab4-52c5-43a6-8e5b-2182322d4215#3-3-relationship-move",
    "kind": "observation",
-   "title": "what information does an autonomous physical actor need from the surrounding operation, and what can it simply perceive for itself?",
+   "title": "Edin Kočo (relationship move)",
    "text": "Edin Kočo, co-founder and Chief Robotics Officer at Gideon.\n\nEdin owns hardware, product design, safety and manufacturing, and he is quoted directly in today's launch. More importantly, he sits on the other side of a question YardFlow should understand very well: what information does an autonomous physical actor need from the surrounding operation, and what can it simply perceive for itself?\n\nNo YardFlow pitch.",
    "sources": [
     {
@@ -1207,7 +1207,7 @@
    ],
    "accountHint": null,
    "producerStatus": "RELATIONSHIP MOVE",
-   "interpretation": "FOLLOW + CONNECT. Exact note:",
+   "interpretation": "FOLLOW + CONNECT.",
    "suggestions": [
     "Edin, the new TREY release caught my attention. I work on an adjacent layer of physical logistics, and I’m fascinated by how much operational variability you’re teaching the robot to handle itself vs requiring the surrounding operation to standardize. Would love to stay close to what you guys learn as this scales."
    ],
@@ -1348,7 +1348,7 @@
    "collectedAt": null,
    "producerItemId": "2026-10-08#2-2-reply-here",
    "kind": "observation",
-   "title": "[REPLY TO THIS EXACT POST](https://www.linkedin.com/posts/tomasz-gujda-a80a5914_logistics-mergersandacquisitions-ai-activity-7512979009257811969-2V8-?utm_source=chatgpt.com)",
+   "title": "Tomasz Gujda (reply here)",
    "text": "Tomasz Gujda at Logisyn Advisors has a timely post about C.H. Robinson acquiring RXO for $5.8 billion.\n\nRather than simply celebrating AI-driven efficiencies, Tomasz asks how buyers can distinguish actual value creation from an AI narrative.\n\nThat's worth engaging with. The companies are targeting $300 million in annual cost synergies within two years of closing, but the deal hasn't closed and those savings remain projections.\n\nI couldn't verify a corresponding X account, so I'm not inventing one.",
    "sources": [
     {
@@ -1390,7 +1390,7 @@
    "collectedAt": null,
    "producerItemId": "2026-10-08#3-3-relationship-move",
    "kind": "observation",
-   "title": "Julie Van de Kamp, Chief Marketing and Operations Officer at [SONAR](https://gosonar.com?utm_source=chatgpt.com)",
+   "title": "Julie Van de Kamp (relationship move)",
    "text": "Julie Van de Kamp, Chief Marketing and Operations Officer at SONAR.\n\nJulie is today's highest-value new relationship.\n\nShe spent 16 years at U.S. Xpress in pricing, sales, customer experience and operations leadership before joining SONAR. She understands carrier economics from the operating side, not merely from a market-data dashboard.\n\nHer October 7 research is particularly interesting: net trucking-authority additions reached five-year highs above 2,000 per week, yet new-fleet tractors fell to 19,520 in August. Much of the apparent authority growth was administrative rather than evidence of additional working trucks.\n\nNo product pitch. She's a potentially valuable person to learn from over time.",
    "sources": [
     {
@@ -1491,7 +1491,7 @@
    ],
    "personHints": [],
    "producerStatus": "NEW",
-   "uncertainty": "Score: 28/30, A5 B5 C4 D5 E5 F4. Confidence: HIGH on the supervised operation; LOW on driverless timing and scale. Primary company disclosure plus independent trade coverage, with no operating metrics.\n\nSources: Kodiak-Charger announcement, Truck News, Laredo trade data",
+   "uncertainty": "Score: 28/30, A5 B5 C4 D5 E5 F4. Confidence: HIGH on the supervised operation; LOW on driverless timing and scale. Primary company disclosure plus independent trade coverage, with no operating metrics.",
    "interpretation": "Why now and buyer read: This is a live operating deployment, not only a pilot announcement. Charger is combining its proprietary TMS, managed transportation, terminals, and automated-driving supplier. The buying committee therefore spans network operations, safety, terminal operations, cross-border compliance, cold chain, IT, and customers.\nYard implication: DIRECT. At Laredo, tractor, trailer, driver, seal, reefer condition, customs status, and Mexico-side capacity must converge before onward release.\nEditorial opportunity: The autonomous lane ends where the border operating model begins.\nCommercial opportunity: Charger and other Laredo cross-border carriers; refrigerated networks; CPG and food shippers. Target VP cross-border operations, terminal GM, transportation systems, customs compliance, and food-safety leadership.\nCasey’s move: Ask Charger: “At Laredo, what event converts the Dallas leg into an authorized Mexico move, and which system owns every exception between trailer arrival and onward release?”",
    "archive": {
     "reportRef": "preview:6a7e6c54-8760-83ea-8423-c838f5076d63",
@@ -1518,7 +1518,7 @@
    ],
    "personHints": [],
    "producerStatus": "NEW",
-   "uncertainty": "Score: 26/30, A5 B3 C5 D5 E4 F4. Confidence: MEDIUM. Named CEOs confirm strategic intent, but the physical scope remains undefined.\n\nSource: Reuters, October 9",
+   "uncertainty": "Score: 26/30, A5 B3 C5 D5 E4 F4. Confidence: MEDIUM. Named CEOs confirm strategic intent, but the physical scope remains undefined.",
    "interpretation": "Why now and buyer read: Management has connected supply-chain ownership to cost reduction and proof of turnaround. The unresolved decision is which capabilities require internal data, labor, assets, or exception authority.\nYard implication: ADJACENT. Any change affecting distribution or transportation would alter who controls appointments, inventory availability, trailers, dispatch, and store-service exceptions.\nEditorial opportunity: Outsourcing transfers work. It does not transfer accountability for physical execution.\nCommercial opportunity: 7-Eleven first, followed by multi-site convenience and fuel retailers. Target network transformation, distribution operations, transportation, sourcing, finance, and supply-chain systems.\nCasey’s move: Ask: “Which cost or service failure cannot be fixed while a third party owns the operating data and exception decision?”",
    "archive": {
     "reportRef": "preview:6a7e6c54-8760-83ea-8423-c838f5076d63",
@@ -1545,7 +1545,7 @@
    ],
    "personHints": [],
    "producerStatus": "NEW",
-   "uncertainty": "Score: 27/30, A4 B5 C4 D5 E4 F5. Confidence: HIGH on volume and cadence; MEDIUM on execution design.\n\nSource: PhilaPort announcement",
+   "uncertainty": "Score: 27/30, A4 B5 C4 D5 E4 F5. Confidence: HIGH on volume and cadence; MEDIUM on execution design.",
    "interpretation": "Why now and buyer read: A recurring cargo commitment now has to become berth, warehouse, labor, truck, and manufacturer capacity. The buying committee includes Metsä, Wagenborg, PhilaPort, Penn Warehousing, labor, drayage, and downstream manufacturers.\nYard implication: DIRECT. Annual tonnage arrives in vessel-sized pulses. Floor slots and outbound appointments must be ready before each call.\nEditorial opportunity: Annual volume hides the operating problem. Capacity must absorb the arrival cadence, not the average.\nCommercial opportunity: Breakbulk terminals, port warehouses, forest-product importers, and paper or packaging manufacturers. Target terminal operations, warehouse GM, inventory control, drayage, and appointment ownership.\nCasey’s move: Ask Penn Warehousing which five conditions must be true before each vessel call, and who can reprioritize outbound trucks when one is false.",
    "archive": {
     "reportRef": "preview:6a7e6c54-8760-83ea-8423-c838f5076d63",
@@ -1605,7 +1605,7 @@
    ],
    "personHints": [],
    "producerStatus": "NEW",
-   "uncertainty": "Score: 27/30. Confidence: MEDIUM.\nA5, B5, C4, D5, E5, F3. The account comes from named executives at an industry panel, but the underlying incident is unnamed and independently unverified.\n\nSources: FreightWaves, September 18, IFDA industry scale and operating footprint",
+   "uncertainty": "Score: 27/30. Confidence: MEDIUM.\nA5, B5, C4, D5, E5, F3. The account comes from named executives at an industry panel, but the underlying incident is unnamed and independently unverified.",
    "interpretation": "Why consequential now: The attacker apparently did not defeat the physical gate. The attacker supplied the information the gate expected. That exposes a control gap between shipment knowledge and pickup authority.\nEnterprise buyer read: This cannot sit solely with the CISO. Transportation procurement establishes the carrier relationship; IT protects communications; operations loads the freight; security or loss prevention manages access; and gate personnel execute release. The implementation barrier is adding independent authentication without creating unacceptable delay for perishable freight.\nYard implication: DIRECT. The decisive event was physical release at a cold-storage facility. An actionable control must bind the current load authorization to the presenting carrier, driver, tractor, and time window, then govern exceptions.\nEditorial opportunity: Paperwork proves that someone knows about the shipment. It does not prove the truck at the gate is authorized to take it.\nCommercial opportunity: Multi-site foodservice distributors, grocers, refrigerated warehouses, produce shippers, and cold-chain 3PLs. Relevant personas are VP distribution operations, transportation leadership, facility operations, loss prevention, carrier compliance, CISO, and gate-process ownership.\nCasey’s move: Ask: “If a driver arrives with completely correct documents, what separate event proves that this carrier, tractor, and driver remain authorized for this load right now?” Seek the gate-release control map and the person authorized to approve an exception.",
    "archive": {
     "reportRef": "533cddea-fefc-5c8f-a10c-ec014c2d5a5c",
@@ -2321,7 +2321,7 @@
    ],
    "personHints": [],
    "producerStatus": "ESCALATING",
-   "uncertainty": "Score: 29/30. Confidence: HIGH on rescheduling; MEDIUM on participation and impact. A5 B5 C5 D5 E5 F4. The organizer’s advisory is corroborated by specialist reporting, but no verified participation count or port-level forecast exists.\n\nSources: PortCalls, September 27; official draft JAO",
+   "uncertainty": "Score: 29/30. Confidence: HIGH on rescheduling; MEDIUM on participation and impact. A5 B5 C5 D5 E5 F4. The organizer’s advisory is corroborated by specialist reporting, but no verified participation count or port-level forecast exists.",
    "interpretation": "Why consequential: The postponement creates a pre-event clearing surge, followed by a possible trucking-capacity withdrawal. It also shows that participants expect operational consequences large enough to require advance evacuation.\nEnterprise buyer read: Importers, carriers, terminals, brokers, truckers, depots, Customs, and the port authority lack one enforceable return plan. A July government draft would require shipping lines to confirm an available return yard within 24 hours and would create an automated container-monitoring system. It remains a draft, not an operating control.\nYard implication: DIRECT. Each empty needs an accepting depot, capacity allocation, appointment, truck instruction, deadline, and exception owner.\nEditorial opportunity: A booking is not capacity. Manila’s empty-container problem persists wherever the assigned next move cannot actually be executed.\nCommercial opportunity: Ocean carriers, empty-container depots, port terminals, drayage networks, and large importers. Target equipment control, depot operations, landside operations, transportation, and TOS/YMS architecture.\nCasey’s move: Ask: “When the designated depot rejects an empty, who can assign a capacity-backed alternative without restarting the booking process?” Seek the current exception path and accountable owner.",
    "archive": {
     "reportRef": "32b20606-8af5-5fe2-b258-ce2c54daa2bc",
@@ -2353,7 +2353,7 @@
    ],
    "personHints": [],
    "producerStatus": "NEW",
-   "uncertainty": "Score: 26/30. Confidence: MEDIUM. A4 B4 C4 D5 E5 F4. Named participants and official FedEx capacity data are available, but this remains a proposal without workflow or performance evidence.\n\nSources: PortCalls; FedEx operating facts",
+   "uncertainty": "Score: 26/30. Confidence: MEDIUM. A4 B4 C4 D5 E5 F4. Named participants and official FedEx capacity data are available, but this remains a proposal without workflow or performance evidence.",
    "interpretation": "Why consequential: FedEx’s current Clark operation can sort 9,000 packages per hour. Continuous physical capacity still stops when regulatory permission is unavailable or cannot update the operating instruction.\nEnterprise buyer read: Gateway operations, customs, PEZA, the Bureau of Customs, security, IT, and customers must connect approval state to holds, sorting, loading, and release. Staffing a regulator continuously does not by itself solve the data handoff.\nYard implication: ADJACENT. The decisive workflow is regulated cargo moving from hold to dock, truck, or aircraft.\nEditorial opportunity: The slowest system in an automated hub may be the one authorized to say yes.\nCommercial opportunity: Air-cargo gateways, bonded warehouses, foreign-trade zones, and express hubs. Target gateway GM, customs and regulatory leadership, hub operations, compliance, and systems architecture.\nCasey’s move: Ask FedEx Clark: “When PEZA status changes after freight is sorted, what cancels the old instruction and releases the correct pallet, door, and vehicle?”",
    "archive": {
     "reportRef": "32b20606-8af5-5fe2-b258-ce2c54daa2bc",
@@ -2534,7 +2534,7 @@
    ],
    "personHints": [],
    "producerStatus": "NEW",
-   "uncertainty": "Score: 28/30, A5 B5 C5 D5 E5 F3. Confidence: MEDIUM. Direct operator testimony reported by an independent trade journalist, but the speaker is a former executive and Walmart has not confirmed the site, date, cost, or sustained result.\n\nSources: Truck News, September 28, related implementation account",
+   "uncertainty": "Score: 28/30, A5 B5 C5 D5 E5 F3. Confidence: MEDIUM. Direct operator testimony reported by an independent trade journalist, but the speaker is a former executive and Walmart has not confirmed the site, date, cost, or sustained result.",
    "interpretation": "Enterprise buyer read: The budget case crosses transportation, DC operations, fleet assets, carrier procurement, security, claims, and finance. The barrier is organizational: operations must trust physical-state data enough to reduce buffer equipment and challenge carrier assumptions.\nYard implication: DIRECT. The control point is the reliable record of which trailer arrived, where it is, whether it is loaded or empty, when custody changed, and whether damage occurred.\nEditorial opportunity: Yard visibility creates material value when it changes an asset decision, not when it merely improves a dashboard.\nCommercial opportunity: High-throughput retailers, grocers, food distributors, manufacturers, and private fleets with large drop-and-hook pools. Target VP transportation, fleet asset management, DC operations, carrier procurement, loss prevention, and finance.\nCasey’s move: Ask: “How many trailers could disappear from your fleet next Friday without changing service, and what physical evidence would let operations approve that?” Seek the trailer-buffer policy, utilization baseline, and decision owner.",
    "archive": {
     "reportRef": "7b4119d2-6a23-5262-bd2a-90943938e0ab",
@@ -2566,7 +2566,7 @@
    ],
    "personHints": [],
    "producerStatus": "NEW",
-   "uncertainty": "Score: 26/30, A4 B4 C5 D4 E4 F5. Confidence: HIGH on the obligation; MEDIUM on implementation. Primary government announcement, supported by trade reporting. Data specifications and enforcement procedures remain incomplete.\n\nSources: Department of Agriculture, PortCalls",
+   "uncertainty": "Score: 26/30, A4 B4 C5 D4 E4 F5. Confidence: HIGH on the obligation; MEDIUM on implementation. Primary government announcement, supported by trade reporting. Data specifications and enforcement procedures remain incomplete.",
    "interpretation": "Enterprise buyer read: Compliance now requires operations, inventory control, IT, legal, and trade-regulatory teams to reconcile facility capacity and reported inventory with actual receipts, transfers, holds, and releases.\nYard implication: ADJACENT. Every inbound or outbound movement that changes regulated inventory must reach the reporting record accurately.\nEditorial opportunity: Traceability becomes enforceable at the physical handoff, not when a quarterly report is assembled.\nCommercial opportunity: Philippine cold-storage networks, food processors, agricultural warehouses, refrigerated depots, and multinational food 3PLs. Target compliance, cold-chain operations, inventory control, CIO/data governance, and facility leadership.\nCasey’s move: Ask: “Which gate, warehouse, or reefer event updates the regulatory inventory record, and who investigates a physical-to-reported mismatch?” Seek one site’s evidence chain and exception owner.",
    "archive": {
     "reportRef": "7b4119d2-6a23-5262-bd2a-90943938e0ab",
@@ -2667,7 +2667,7 @@
    ],
    "personHints": [],
    "producerStatus": "NEW",
-   "uncertainty": "Score: 29/30, A5 B4 C5 D5 E5 F5. Confidence: HIGH. Primary filings disclose sites, schedule, investment, savings, and operating roles; trailer and systems detail remain absent.\n\nSources: Greggs Q3 filing, Greggs network announcement, Reuters",
+   "uncertainty": "Score: 29/30, A5 B4 C5 D5 E5 F5. Confidence: HIGH. Primary filings disclose sites, schedule, investment, savings, and operating roles; trailer and systems detail remain absent.",
    "interpretation": "Why now: Consultation is beginning, Derby starts frozen-storage and picking operations this quarter, and Kettering is scheduled for 2027.\nEnterprise buyer read: The committee spans manufacturing, distribution, network design, finance, labor, transportation, automation, and WMS/TMS ownership. The barrier is sequencing product and lane cutovers without disrupting 2,796 shops.\nYard implication: DIRECT. Retained distribution sites will receive products from new origins. Yard and dock plans must absorb altered transfer traffic, inventory buffers, and store-release priorities. Volumes are undisclosed.\nEditorial opportunity: A production site can close while its yard becomes a more important transfer point.\nCommercial opportunity: Vertically integrated food, beverage, bakery, and CPG networks. Target chief supply chain officer, manufacturing-logistics director, network design, distribution operations, transportation, and systems architecture.\nCasey’s move: Ask, “For each SKU leaving Enfield or Treforest production, what system assigns its new source, inbound trailer, receiving door, buffer, store route, and cutover exception?” Seek the transition control map.",
    "archive": {
     "reportRef": "664d0da4-f455-52fa-889c-65bfe2ba1128",
@@ -2699,7 +2699,7 @@
    ],
    "personHints": [],
    "producerStatus": "NEW",
-   "uncertainty": "Score: 26/30, A4 B5 C4 D4 E5 F4. Confidence: HIGH on configuration; MEDIUM on performance. The operator provides detailed specifications, but no independent dwell, departure, or peak-volume results.\n\nSources: GLS company release, Truck News",
+   "uncertainty": "Score: 26/30, A4 B5 C4 D4 E5 F4. Confidence: HIGH on configuration; MEDIUM on performance. The operator provides detailed specifications, but no independent dwell, departure, or peak-volume results.",
    "interpretation": "Why now: Parcel automation is live inside a facility where three service models share physical capacity.\nEnterprise buyer read: GLS used a phased rollout rather than a single cutover. Hub operations, parcel, LTL, linehaul, automation, IT, and facilities must now manage competing cutoffs and exceptions.\nYard implication: DIRECT. Faster sorting only becomes service when the correct trailer, door, driver, and departure are ready.\nEditorial opportunity: Automation can move the constraint from sorting to trailer release.\nCommercial opportunity: Parcel-LTL hybrids, regional carriers, postal operators, and multi-service 3PL hubs. Target hub GM, network engineering, linehaul, dock operations, and systems leadership.\nCasey’s move: Ask GLS: “When parcel and LTL departures compete for a door or trailer, what system arbitrates priority after the sorter changes the release sequence?” Seek a Vaughan exception walkthrough.",
    "archive": {
     "reportRef": "664d0da4-f455-52fa-889c-65bfe2ba1128",
@@ -2720,7 +2720,7 @@
    "sources": [],
    "personHints": [],
    "producerStatus": "ESCALATING",
-   "uncertainty": "Score: 26/30, A5 B5 C5 D5 E4 F2. Confidence: MEDIUM on the action; LOW on national scope. Multiple reports cite numbered circulars, but the primary documents are unavailable and the facility counts conflict.\n\nSources: [September 30 r",
+   "uncertainty": "Score: 26/30, A5 B5 C5 D5 E4 F2. Confidence: MEDIUM on the action; LOW on national scope. Multiple reports cite numbered circulars, but the primary documents are unavailable and the facility counts conflict.",
    "interpretation": "Buyer and yard read: Customs, terminals, bonded warehouses, free zones, forwarders, and importers require a destination event that closes each custody move. Real-time tracking without transaction closure did not preserve operating authority.\nEditorial opportunity: Visibility shows where cargo traveled. Reconciliation proves that custody, destination, and regulatory state agree.\nCommercial opportunity: Bonded warehouses, inland ports, free zones, and regulated 3PL networks. Target customs compliance, terminal operations, inventory control, CIO, and gate-release ownership.\nCasey’s move: Ask, “Which destination event closes the movement in both operational and compliance systems, and what blocks the next release when they disagree?”",
    "archive": {
     "reportRef": "664d0da4-f455-52fa-889c-65bfe2ba1128",
@@ -2785,7 +2785,7 @@
    ],
    "personHints": [],
    "producerStatus": "ESCALATING",
-   "uncertainty": "Score: 29/30, A5 B5 C5 D4 E5 F5. Confidence: HIGH. Primary DOJ evidence and a jury verdict establish the scheme. Novelty loses one point because Yards First recently covered an adjacent gate-authentication failure.\n\nSources: DOJ verdict release, NMFTA Freight Fraud Hub analysis",
+   "uncertainty": "Score: 29/30, A5 B5 C5 D4 E5 F5. Confidence: HIGH. Primary DOJ evidence and a jury verdict establish the scheme. Novelty loses one point because Yards First recently covered an adjacent gate-authentication failure.",
    "interpretation": "Why consequential now: Normal carrier onboarding and facility release controls can function as designed while authorizing a compromised business entity.\nEnterprise buyer read: Transportation procurement, carrier compliance, brokerage, loss prevention, TMS ownership, accounts payable, and DC operations need a shared trigger for re-verification. The barrier is detecting ownership, banking, email, dispatcher, equipment, or driver-pattern changes without stopping every load.\nYard implication: DIRECT. Inference: facilities released freight to trucks acting under legitimately contracted carriers. The trust failure began before arrival but became a loss at custody transfer.\nEditorial opportunity: Carrier authority is not continuous pickup authority.\nCommercial opportunity: Electronics, appliance, solar, tire, and branded-goods importers; Inland Empire and Texas distribution campuses; freight brokers and managed-transportation 3PLs. Target VP transportation, loss prevention, carrier compliance, DC operations, gate security, and TMS/vendor-master ownership.\nCasey’s move: Ask: “Which carrier changes force independent re-verification before the next pickup, and what prevents an unchanged MC number from overruling changed ownership, contacts, bank details, equipment, or driver behavior?” Seek the change-of-control workflow and exception owner.",
    "archive": {
     "reportRef": "3565b1fc-e1d5-5c63-8d84-2f4f744ff770",
@@ -2812,7 +2812,7 @@
    ],
    "personHints": [],
    "producerStatus": "NEW",
-   "uncertainty": "Score: 28/30, A5 B5 C4 D5 E4 F5. Confidence: HIGH. Primary operator-side disclosure; budget, systems, throughput, and service results remain unavailable.\n\nSource: DFW announcement",
+   "uncertainty": "Score: 28/30, A5 B5 C4 D5 E4 F5. Confidence: HIGH. Primary operator-side disclosure; budget, systems, throughput, and service results remain unavailable.",
    "interpretation": "Why consequential now: DFW is replacing hundreds of supplier movements into sensitive airport areas with one controlled logistics handoff. That reduces traffic and attack surface while concentrating operational dependency in one facility.\nEnterprise buyer read: The committee spans security, commercial and concessions operations, facilities, roadway operations, food safety, IT, and Bradford. Implementation must preserve source, screening, temperature, consolidated-load, destination, and reverse-logistics state.\nYard implication: DIRECT. Receiving appointments, screening queues, dock allocation, vehicle dispatch, terminal delivery, and returns converge at one controlled campus.\nEditorial opportunity: Centralized receiving is a security architecture with a warehouse attached.\nCommercial opportunity: Airports, stadiums, casino resorts, hospitals, universities, and secure industrial campuses. Target campus logistics, security, concessions, facilities, dock operations, and technology leadership.\nCasey’s move: Ask: “What event converts supplier freight into airport-authorized freight, and can every item on a consolidated vehicle be traced back through screening, temperature, source, and recipient?”",
    "archive": {
     "reportRef": "3565b1fc-e1d5-5c63-8d84-2f4f744ff770",
@@ -2908,7 +2908,7 @@
    ],
    "personHints": [],
    "producerStatus": "NEW",
-   "uncertainty": "Score: 29/30. Confidence: HIGH. A5 B5 C4 D5 E5 F5. Primary operator disclosure with measurable, completed scope and independent corroboration; project cost and live performance remain undisclosed.\n\nSources: METRANS | RailMarket",
+   "uncertainty": "Score: 29/30. Confidence: HIGH. A5 B5 C4 D5 E5 F5. Primary operator disclosure with measurable, completed scope and independent corroboration; project cost and live performance remain undisclosed.",
    "interpretation": "Why now and buyer read: This is commissioned infrastructure, not a proposal. Terminal operations, rail planning, gate operations, claims, IT/OT, and commercial leadership must now produce more turns from each storage position. The implementation barrier is keeping container identity, condition, weight, track, crane task, location, and release aligned.\nYard implication: DIRECT.\nEditorial opportunity: Terminal capacity is not how many containers fit. It is how often each position can be productively reused.\nCommercial opportunity: Inland ports, intermodal ramps, marine-terminal rail yards, container depots, and automotive compounds. Target terminal GM, intermodal operations, gate operations, rail planning, IT/OT, and claims leadership.\nCasey’s move: Ask: “If handling capacity rises 80% while storage rises 33%, which operating state prevents a container from consuming the extra velocity at the gate, crane, track, or truck handoff?” Seek the dwell target and exception owner.",
    "archive": {
     "reportRef": "634a2eb5-95d2-5df7-ab7c-38534a35adaf",
@@ -2945,7 +2945,7 @@
    ],
    "personHints": [],
    "producerStatus": "NEW",
-   "uncertainty": "Score: 25/30. Confidence: MEDIUM. A4 B5 C4 D4 E5 F3. The commercial structure is primary-source evidence; deployment scale and customer proof are absent.\n\nSources: Outrider | YMX | Truck News",
+   "uncertainty": "Score: 25/30. Confidence: MEDIUM. A4 B5 C4 D4 E5 F3. The commercial structure is primary-source evidence; deployment scale and customer proof are absent.",
    "interpretation": "Why now and buyer read: A competitor is removing capital and implementation friction through capacity-based pricing and managed operations. The buying committee spans site operations, safety, labor, procurement, IT/OT, transportation, facilities, and energy. Mixed human-autonomous traffic and exception ownership remain the hard problems.\nYard implication: DIRECT.\nEditorial opportunity: The autonomous-yard market is organizing around who operates and finances the system, not just whose truck drives itself.\nCommercial opportunity: High-volume manufacturing and distribution campuses evaluating outsourced spotting or autonomy. Target VP operations, transportation, safety, procurement, automation, and yard-systems architecture.\nCasey’s move: Ask buyers: “Do you need an autonomous fleet operator, a network control layer, or both? When the robot’s assigned move conflicts with a dock priority, who owns the valid instruction?”",
    "archive": {
     "reportRef": "634a2eb5-95d2-5df7-ab7c-38534a35adaf",
@@ -3041,7 +3041,7 @@
    ],
    "personHints": [],
    "producerStatus": "ESCALATING",
-   "uncertainty": "Score: 29/30. Confidence: HIGH on the planned actions; MEDIUM on impact. A5 B5 C5 D5 E5 F4. Named groups and instructions are reported, but turnout and contingency plans are undisclosed.\n\nSources: Confirmed October 5 action, October 5 and 6 coalition actions",
+   "uncertainty": "Score: 29/30. Confidence: HIGH on the planned actions; MEDIUM on impact. A5 B5 C5 D5 E5 F4. Named groups and instructions are reported, but turnout and contingency plans are undisclosed.",
    "interpretation": "Why now and buyer read: A fragmented exception process is now threatening port-wide truck supply. Shipping lines designate returns, depots control physical capacity, terminals control appointments, and truckers hold the equipment when those states disagree.\nYard implication: DIRECT. The failure occurs between terminal release and an accepting empty-container yard.\nEditorial opportunity: The cost of a failed return instruction is no longer one container’s dwell. It can remove the truck from the next revenue move.\nCommercial opportunity: Ocean carriers, marine terminals, empty depots, chassis pools, drayage networks, and import DCs. Target equipment control, terminal operations, intermodal systems, transportation procurement, and exception management.\nCasey’s move: Ask: “When the designated depot rejects an empty, who can issue and fund a new executable destination before the tractor leaves?”",
    "archive": {
     "reportRef": "d99a5eb5-d982-5f4e-85c0-dbf2d74dd1b8",
@@ -3073,7 +3073,7 @@
    ],
    "personHints": [],
    "producerStatus": "CONFIRMED",
-   "uncertainty": "Score: 28/30. Confidence: HIGH on scope; MEDIUM on launch. A5 B5 C4 D5 E5 F4. Kodiak supplies detailed operating history and trade media corroborates it, but IKEA has not independently published the plan.\n\nSources: Kodiak announcement, Truck News",
+   "uncertainty": "Score: 28/30. Confidence: HIGH on scope; MEDIUM on launch. A5 B5 C4 D5 E5 F4. Kodiak supplies detailed operating history and trade media corroborates it, but IKEA has not independently published the plan.",
    "interpretation": "Why now and buyer read: A named shipper is converting a long pilot into planned driver-out service. The implementation committee extends beyond autonomy engineering to transportation, store receiving, DC operations, maintenance, safety, and systems integration.\nYard implication: DIRECT at origin launch, destination arrival, door reservation, inspection, and exception recovery.\nEditorial opportunity: The commercially relevant autonomy milestone is not another driverless mile. It is a truck arriving when a specific dock can receive it.\nCommercial opportunity: High-frequency private fleets, retail DC networks, autonomous carriers, and transfer hubs. Target fleet operations, DC operations, transportation systems, safety, and maintenance planning.\nCasey’s move: Ask IKEA Supply and Kodiak operations: “What event releases the driverless truck, reserves the Frisco door, and replans both when arrival changes after departure?”",
    "archive": {
     "reportRef": "d99a5eb5-d982-5f4e-85c0-dbf2d74dd1b8",
@@ -3100,7 +3100,7 @@
    ],
    "personHints": [],
    "producerStatus": "NEW",
-   "uncertainty": "Score: 25/30. Confidence: MEDIUM-LOW. A4 B5 C4 D4 E5 F3. The operating detail is strong, but the anonymous customer and unresolved claim limit verification.\n\nSources: FreightWaves investigation, [YMX case study](https://ymxlogistics.com/blog/ai-yard-vi",
+   "uncertainty": "Score: 25/30. Confidence: MEDIUM-LOW. A4 B5 C4 D4 E5 F3. The operating detail is strong, but the anonymous customer and unresolved claim limit verification.",
    "interpretation": "Why now and buyer read: This is concrete competitive proof of searchable custody evidence, but not proof of theft prevention or loss attribution.\nYard implication: DIRECT. Gate and trailer-move events narrow the chain-of-custody investigation.\nEditorial opportunity: Computer vision can prove that a truck handled a shipment without proving that the loss occurred at that handoff.\nCommercial opportunity: Multi-site grocers, food distributors, and regulated shippers. Target loss prevention, fleet-asset protection, transportation operations, security, and DC systems.\nCasey’s move: Ask prospects: “Can your event record distinguish ‘this truck handled the load’ from ‘the loss occurred at this custody change’?”",
    "archive": {
     "reportRef": "d99a5eb5-d982-5f4e-85c0-dbf2d74dd1b8",
@@ -3160,7 +3160,7 @@
    ],
    "personHints": [],
    "producerStatus": "ESCALATING",
-   "uncertainty": "Score: 28/30, A5 B5 C5 D5 E4 F4. Confidence: HIGH on the operating disruption; MEDIUM on current scale. Reuters interviewed drivers and the Karachi Goods Carrier Association. AP independently confirms the continuing roadblocks and October 4 march. Authorities did not provide Reuters with an official seizure tally.\n\nSources: Reuters, October 2 | AP, October 4",
+   "uncertainty": "Score: 28/30, A5 B5 C5 D5 E4 F4. Confidence: HIGH on the operating disruption; MEDIUM on current scale. Reuters interviewed drivers and the Karachi Goods Carrier Association. AP independently confirms the continuing roadblocks and October 4 march. Authorities did not provide Reuters with an official seizure tally.",
    "interpretation": "Why consequential now: This is no longer merely a road closure. Fear of equipment seizure is suppressing carrier acceptance before dispatch, transmitting congestion backward to the country’s principal port.\nEnterprise buyer read: Ocean carriers, forwarders, cargo owners, customs brokers, and truck operators lack a normal exception code for government-commandeered equipment. The implementation problem is preserving custody evidence, changing equipment availability, protecting customer commitments, and disputing demurrage when no commercial party can execute the next move.\nYard implication: DIRECT. Containers accumulate at Karachi while loaded trucks remain parked or are removed from commercial service. Terminal availability, a booked truck, and an “in transit” status no longer mean that the cargo has an executable move.\nEditorial opportunity: A roadblock 870 miles away can fill a port when the assets used to block the road are the same assets needed to clear the terminal.\nCommercial opportunity: Pakistan-serving ocean carriers, NVOCCs, global forwarders, container depots, customs brokers, and drayage fleets. Relevant personas are regional operations, equipment control, security, demurrage and detention, customer exception management, and transportation systems.\nCasey’s move: Ask: “When authorities seize a loaded truck after terminal release, what event changes the container from in transit to authority-held, who verifies it, and which commercial clocks stop?” Seek the exception owner, evidence standard, and recovery workflow.",
    "archive": {
     "reportRef": "6376ec1b-7f04-529c-9959-ec038796bc1e",
@@ -3240,7 +3240,7 @@
    ],
    "personHints": [],
    "producerStatus": "ESCALATING",
-   "uncertainty": "Score: 29/30, A5 B5 C5 D5 E5 F4. Confidence: HIGH on the action; MEDIUM on its scale. Official acknowledgment plus two trade reports. Participation, stranded-container count, and throughput impact remain unverified organizer claims.\n\nSources: Bureau of Customs, live October 5 report, operating instructions",
+   "uncertainty": "Score: 29/30, A5 B5 C5 D5 E5 F4. Confidence: HIGH on the action; MEDIUM on its scale. Official acknowledgment plus two trade reports. Participation, stranded-container count, and throughput impact remain unverified organizer claims.",
    "interpretation": "Why now: This converts an empty-container dispute into a coordinated interruption of the port’s execution layer.\nEnterprise buyer read: Shipping lines control return instructions; depots control acceptance; customs brokers create movement documents; truckers supply equipment and labor; terminals execute gates. The missing control is proof that the instructed destination can accept the box before dispatch.\nYard implication: DIRECT. Failed returns consume chassis, tractors, drivers, off-dock space, and future appointment capacity.\nEditorial opportunity: A port can remain physically open while becoming digitally unavailable.\nCommercial opportunity: Ocean carriers, container terminals, off-dock depots, drayage fleets, and import distribution networks. Target equipment control, terminal operations, gate systems, detention and demurrage, and drayage operations.\nCasey’s move: Ask: “What proves the nominated return depot is accepting this container before the driver leaves, and who reroutes the move when that proof fails?” Seek the exception owner and time-stamped return workflow.",
    "archive": {
     "reportRef": "8c0b52c4-fc64-5d1d-b9f5-544385704164",
@@ -3267,7 +3267,7 @@
    ],
    "personHints": [],
    "producerStatus": "CONTINUING",
-   "uncertainty": "Score: 25/30, A4 B5 C3 D4 E4 F5. Confidence: HIGH on scope; LOW on results. Primary government-operated portal, but no baseline or performance data.\n\nSource: Japan Cyber Port and CONPAS",
+   "uncertainty": "Score: 25/30, A4 B5 C3 D4 E4 F5. Confidence: HIGH on scope; LOW on results. Primary government-operated portal, but no baseline or performance data.",
    "interpretation": "Why now: The program is moving from one terminal into two additional operating environments, creating a test of whether appointment rules can standardize across facilities.\nEnterprise buyer read: Four public and industry bodies are coordinating adoption. The barrier is not obtaining scheduling software. It is defining slot eligibility, arrival verification, no-show handling, and manual exceptions that truckers will use.\nYard implication: DIRECT.\nEditorial opportunity: A tenth implementation phase suggests appointment systems are operating-model programs, not one-time installations.\nCommercial opportunity: Ports and multi-terminal operators expanding appointment programs. Target gate operations, terminal systems, landside planning, and drayage engagement.\nCasey’s move: Ask which KPI justified expansion from Aomi to Y1 and Y2, and which operating rule changed after the earlier phases. Seek the before-and-after rule set.",
    "archive": {
     "reportRef": "8c0b52c4-fc64-5d1d-b9f5-544385704164",
@@ -3294,7 +3294,7 @@
    ],
    "personHints": [],
    "producerStatus": "NEW",
-   "uncertainty": "Score: 24/30, A3 B5 C3 D4 E4 F5. Confidence: HIGH on the rule; LOW on the underlying pain. Primary terminal notice without supporting metrics.\n\nSource: PSA Halifax terminal update",
+   "uncertainty": "Score: 24/30, A3 B5 C3 D4 E4 F5. Confidence: HIGH on the rule; LOW on the underlying pain. Primary terminal notice without supporting metrics.",
    "interpretation": "Why now: Customs eligibility no longer independently makes the container executable. Terminal appointment capacity is a separate mandatory permission.\nEnterprise buyer read: The implementation question is what happens when a container is legally movable but no valid slot exists.\nYard implication: DIRECT.\nEditorial opportunity: Customs release and terminal readiness are different operating states.\nCommercial opportunity: Canadian marine terminals, bonded carriers, customs brokers, and importers. Target gate operations, customs-desk leadership, appointment-platform ownership, and drayage operations.\nCasey’s move: Ask PSA Halifax how a carrier distinguishes “no slot” from “customs hold,” who approves an exception, and whether rejected attempts are measured.",
    "archive": {
     "reportRef": "8c0b52c4-fc64-5d1d-b9f5-544385704164",
@@ -3369,7 +3369,7 @@
    ],
    "personHints": [],
    "producerStatus": "ESCALATING",
-   "uncertainty": "Score: 30/30, A5 B5 C5 D5 E5 F5. Confidence: HIGH on booking restrictions and protest scope; MEDIUM on claimed traffic impact. Primary carrier evidence plus independent trade reporting. Organizer claims remain unverified.\n\nSources: Hapag-Lloyd advisory, PortCalls protest update, carrier-forwarder dialogue",
+   "uncertainty": "Score: 30/30, A5 B5 C5 D5 E5 F5. Confidence: HIGH on booking restrictions and protest scope; MEDIUM on claimed traffic impact. Primary carrier evidence plus independent trade reporting. Organizer claims remain unverified.",
    "interpretation": "Why now and buyer read: This is no longer just truck dwell. Equipment control, terminal operations, depots, drayage, customer service, and commercial booking acceptance are now one capacity problem. Industry dialogue also indicates that empty-return arrangements vary by shipping line, leaving forwarders to manage line-specific procedures rather than a shared operating rule.\nYard implication: DIRECT. A refused empty occupies equipment, tractor time, chassis capacity, and space needed to complete the next cycle.\nEditorial opportunity: Reverse logistics is inbound capacity. The empty container can cancel a future booking before the next loaded box moves.\nCommercial opportunity: Ocean carriers, terminals, off-dock depots, drayage networks, and import-heavy retailers. Target equipment control, port operations, inland operations, booking management, depot leadership, and network-control personas.\nCasey’s move: Ask: “At what empty-return threshold does the network suppress new inbound bookings, and which shared state proves that threshold before capacity is sold?” Seek the return-to-booking control map.",
    "archive": {
     "reportRef": "5d66272d-bf5d-5914-83ba-4ac61138277b",
@@ -3396,7 +3396,7 @@
    ],
    "personHints": [],
    "producerStatus": "NEW",
-   "uncertainty": "Score: 25/30, A4 B5 C4 D4 E5 F3. Confidence: MEDIUM. Direct executive reporting establishes the model; buyer adoption and scale remain vendor claims.\n\nSource: FreightWaves",
+   "uncertainty": "Score: 25/30, A4 B5 C4 D4 E5 F3. Confidence: MEDIUM. Direct executive reporting establishes the model; buyer adoption and scale remain vendor claims.",
    "interpretation": "Why now and buyer read: The category is moving beyond autonomy software toward a procurement bundle covering vehicle sourcing, financing, retrofit, maintenance, and deployment. The remaining implementation barrier is governing moves across human-operated, retrofitted, and factory-built vehicles.\nYard implication: DIRECT.\nEditorial opportunity: The autonomy purchase decision is becoming a fleet-lifecycle decision, but none of those services determines whether today’s move is operationally valid.\nCommercial opportunity: High-throughput 3PL, retail, food, manufacturing, and parcel yards. Target asset transportation, spotting, operations, automation, procurement, safety, and finance leaders.\nCasey’s move: Separate the vehicle decision from the orchestration decision: “Who supplies and maintains the tractor, and who authorizes its next move across the mixed fleet?”",
    "archive": {
     "reportRef": "5d66272d-bf5d-5914-83ba-4ac61138277b",
@@ -3417,7 +3417,7 @@
    "sources": [],
    "personHints": [],
    "producerStatus": "NEW",
-   "uncertainty": "Score: 26/30, A4 B4 C4 D5 E5 F4. Confidence: HIGH on the supervised operation; LOW on scale and results. Primary operator announcement with explicit limitations.\n\nSource: [Volvo",
+   "uncertainty": "Score: 26/30, A4 B4 C4 D5 E5 F4. Confidence: HIGH on the supervised operation; LOW on scale and results. Primary operator announcement with explicit limitations.",
    "interpretation": "Why now and buyer read: Direct facility service makes endpoint readiness part of the autonomous transport product. Facility operations, transportation management, dock planning, safety, and customer onboarding must agree before dispatch.\nYard implication: DIRECT. The truck still needs a valid entrance, staging instruction, door, trailer handoff, and exception path.\nEditorial opportunity: Highway autonomy can scale only as quickly as ordinary customer facilities become machine-readable endpoints.\nCommercial opportunity: LTL networks, pooled-distribution providers, large retailers, and manufacturers on autonomous corridors. Target network operations, DC operations, transportation systems, safety, and autonomous-program leaders.\nCasey’s move: Ask: “What confirms a third-party facility is ready before autonomous dispatch, and who owns the exception when its gate, yard, or door state changes?”",
    "archive": {
     "reportRef": "5d66272d-bf5d-5914-83ba-4ac61138277b",
@@ -3497,7 +3497,7 @@
    ],
    "personHints": [],
    "producerStatus": "CONFIRMED",
-   "uncertainty": "Score: 29/30. Confidence: HIGH on live scope; LOW on performance. A5 B5 C4 D5 E5 F5. Two operator sources and an independent operator interview confirm deployment; no result metrics are public.\n\nSources: EASE, Einride, FreightWaves",
+   "uncertainty": "Score: 29/30. Confidence: HIGH on live scope; LOW on performance. A5 B5 C4 D5 E5 F5. Two operator sources and an independent operator interview confirm deployment; no result metrics are public.",
    "interpretation": "Why consequential now: This advances beyond an announced pilot or safety observer. The unresolved work is now the live exception path between truck, remote operator, and facility.\nEnterprise buyer read: EASE cites costly unplanned automotive rack moves as an initial use case. The buying committee spans transportation, warehouse and plant logistics, safety, automation, IT/OT, charging, and remote operations. The barrier is handling a changed gate, door, staging, loading, or charge plan without an on-site driver.\nYard implication: DIRECT. Every trip begins and ends at a warehouse. The vehicle needs a current, executable instruction at both endpoints.\nEditorial opportunity: The control center left the cab. It did not leave the operation.\nCommercial opportunity: Automotive campuses, 3PL warehouse clusters, manufacturers, and high-frequency food, beverage, or CPG shuttle networks. Target VP transportation, plant or distribution operations, safety, automation-program, and remote-operations leaders.\nCasey’s move: Ask: “When the truck arrives and its planned gate, door, load, or charger is no longer available, what event stops or redirects it, and who owns the remote exception?” Seek the endpoint-to-control-center workflow.",
    "archive": {
     "reportRef": "93751bf2-3b62-585f-806d-2d838dd9ddde",
@@ -3529,7 +3529,7 @@
    ],
    "personHints": [],
    "producerStatus": "NEW",
-   "uncertainty": "Score: 28/30. Confidence: HIGH on assets; MEDIUM on integration needs. A5 B5 C5 D4 E5 F4. The primary release defines scope; FMCSA-backed reporting supplies fleet scale.\n\nSources: TA Services release, FreightWaves",
+   "uncertainty": "Score: 28/30. Confidence: HIGH on assets; MEDIUM on integration needs. A5 B5 C5 D4 E5 F4. The primary release defines scope; FMCSA-backed reporting supplies fleet scale.",
    "interpretation": "Why consequential now: TA immediately inherits customs, local and long-haul transportation, cross-docking, consolidation, warehousing, and yard handoffs across two border gateways.\nEnterprise buyer read: Acquisition capital is visible. The integration committee includes cross-border operations, retained local leadership, customs, warehouse and yard operations, transportation, and TMS/WMS ownership. The barrier is standardizing execution without erasing local customer knowledge.\nYard implication: DIRECT. A 10-acre yard now sits inside a multi-company integration program.\nEditorial opportunity: Cross-border scale is acquired in trucks and square feet but earned at the handoffs.\nCommercial opportunity: TA Services and PS Logistics, plus acquisitive cross-border 3PLs and customs warehouses. Target COO, integration leader, VP cross-border, warehouse and yard operations, customs, and enterprise-systems leadership.\nCasey’s move: Ask: “Which operating record will standardize customs state, trailer location, dock priority, custody, and exception authority across the retained teams?” Seek one integration site and workflow owner.",
    "archive": {
     "reportRef": "93751bf2-3b62-585f-806d-2d838dd9ddde",
@@ -3620,7 +3620,7 @@
    ],
    "personHints": [],
    "producerStatus": "CONFIRMED",
-   "uncertainty": "Score: 28/30, A5 B5 C5 D5 E4 F4. Confidence: MEDIUM. Direct operating consequence and strong yard relevance. Source quality combines a primary carrier notice with operator-supplied data, but the reported remedy remains independently unverified.\n\nSources: PortCalls, October 8, Hapag-Lloyd advisory",
+   "uncertainty": "Score: 28/30, A5 B5 C5 D5 E4 F4. Confidence: MEDIUM. Direct operating consequence and strong yard relevance. Source quality combines a primary carrier notice with operator-supplied data, but the reported remedy remains independently unverified.",
    "interpretation": "Why consequential now: The evidence separates gate activity from network health. The disruption sits in line-specific return authorization, depot capacity, and vessel evacuation, not simply terminal access.\nEnterprise buyer read: Carrier equipment control, terminal operations, depots, drayage providers, customs, and importers all govern part of the empty’s next move. Hapag-Lloyd’s suspension demonstrates commercial consequence. No remediation budget is disclosed.\nYard implication: DIRECT. Every empty needs an authorized destination, acceptance window, yard position, and eventual evacuation plan.\nEditorial opportunity: A port can process more trucks than the prior week and still be too congested to accept new cargo. Truck count is an activity metric. Executable container flow is the operating outcome.\nCommercial opportunity: Ocean carriers, marine terminals, off-dock depots, drayage operators, and import-heavy distribution networks. Target equipment-control, landside-operations, terminal-operations, transportation-control, and yard-systems leaders.\nCasey’s move: Ask ATI, ICTSI, and carrier equipment-control leaders: “What changed on October 8: acceptance hours, depot capacity, appointment supply, carrier authorization, or evacuation vessel space?” Seek the state transition and the party responsible for each exception.",
    "archive": {
     "reportRef": "f730c28a-cab6-53b3-b07b-31b1c35c71c0",
@@ -3652,7 +3652,7 @@
    ],
    "personHints": [],
    "producerStatus": "CONFIRMED",
-   "uncertainty": "Score: 27/30, A5 B3 C5 D5 E5 F4. Confidence: HIGH. The regulatory decision and conditions are well sourced. Facility implications are explicitly inference.\n\nSources: Reuters, October 8, USDOT application record",
+   "uncertainty": "Score: 27/30, A5 B3 C5 D5 E5 F4. Confidence: HIGH. The regulatory decision and conditions are well sourced. Facility implications are explicitly inference.",
    "interpretation": "Why consequential now: A temporary accommodation has become durable operating authority. The decision removes one human-dependent task that prevented a truly driverless truck from handling its own failure state.\nEnterprise buyer read: Driver-out deployment requires safety, compliance, maintenance, remote operations, and facility teams to identify every task that still assumes a person is present. Driving is only one item on that list.\nYard implication: ADJACENT. The exemption governs roadside stops. The same design problem exists at gates and docks for seal checks, connection verification, door clearance, paperwork, and exception signaling.\nEditorial opportunity: Autonomous trucking scales by retiring individual human obligations, not merely automating steering.\nCommercial opportunity: Autonomous carriers, AV developers, private fleets planning driver-out lanes, and their shipper customers. Target fleet safety, autonomous operations, remote assistance, compliance, and facility operations.\nCasey’s move: Ask EASE’s autonomous-program and warehouse-operations owners: “Which Marysville tasks still depend on a driver, yard associate, or remote operator, and what event escalates each exception?” Seek a task-to-owner register before discussing more vehicles.",
    "archive": {
     "reportRef": "f730c28a-cab6-53b3-b07b-31b1c35c71c0",
@@ -3742,7 +3742,7 @@
    ],
    "personHints": [],
    "producerStatus": "ESCALATING",
-   "uncertainty": "Score: 27/30. Confidence: HIGH on the policy event; MEDIUM on facility behavior.\nA5, B3, C5, D5, E4, F5. The effective duties, breakdown of negotiations, and approximate scope are independently confirmed. No named importer has disclosed a resulting receiving or yard decision.\n\nSources: Reuters, August 22, Associated Press, August 22, White House motor-vehicle proclamation, White House dairy proclamation, White House alcohol proclamation",
+   "uncertainty": "Score: 27/30. Confidence: HIGH on the policy event; MEDIUM on facility behavior.\nA5, B3, C5, D5, E4, F5. The effective duties, breakdown of negotiations, and approximate scope are independently confirmed. No named importer has disclosed a resulting receiving or yard decision.",
    "interpretation": "Why consequential now: Yesterday, importers could still plan around a possible agreement. Today they must classify, enter, release, price, route, or hold affected freight under the new treatment.\nEnterprise buyer read: The decision chain now spans customs brokers, trade compliance, finance, procurement, inbound transportation, distribution operations, and facility leadership. The implementation barrier is transmitting customs disposition into physical workflows before equipment reaches the gate or consumes yard capacity.\nYard implication: ADJACENT, potentially direct. The tariff applies when goods are entered for consumption or withdrawn from warehouse for consumption, not simply when freight physically arrives. Inference: unresolved classification or release decisions can change appointments, receiving priority, bonded-storage use, and trailer or container dwell.\nEditorial opportunity: At 12:01, the freight did not move, but its duty treatment did. The deeper story is that customs status has become physical execution data.\nCommercial opportunity: U.S. food, beverage, building-material, furniture, apparel, and industrial distributors with verified Canadian-origin covered goods. Prioritize accounts using bonded warehouses, foreign-trade zones, northern-border crossings, or high-throughput receiving facilities. Personas are VP Trade Compliance, VP Distribution Operations, director of inbound transportation, and customs operations leader.\nCasey’s move: Ask: “What changed in your inbound workflow at 12:01? Can the facility see whether an affected load is cleared, held, or awaiting classification before assigning it a door or parking location?” Seek one actual workflow, the system carrying release status, and the person authorized to override the planned move.",
    "archive": {
     "reportRef": "712c0be0-78d4-5029-b40f-19778288f986",

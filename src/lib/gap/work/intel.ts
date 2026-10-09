@@ -52,7 +52,8 @@ export { TRUTH_TEXT, type TruthLabel } from './truth-text';
 import { REPORT_ARCHIVE_CLASS, REPORT_IMPORT_ORIGIN, dateOnlyText, importOf, producerLabel, type IntelRecordKind, type IntelSource, type IntelSourceRecordId } from '../signals/intelligence-record';
 
 export interface IntelItem {
-  kind: 'signal' | 'trigger' | 'person';
+  /** knowledge (IW06): a vault conversation projected into the digest; no decisions, the account page holds the moves. */
+  kind: 'signal' | 'trigger' | 'person' | 'knowledge';
   id: string;
   /** `<kind>:<id>`: the decision key the routes and the links carry. */
   key: string;
@@ -141,6 +142,27 @@ export interface IntelSubstance {
   personHints: string[];
   suggestions: number;
   revisions: number;
+}
+
+/**
+ * IW11: within one report date the producers take turns (a, b, c, a, b, ...), so one producer's many items never fill
+ * every reserved slot on a day the others reported too; across dates the order stays newest first. Deterministic.
+ */
+export function interleaveProducers(items: IntelItem[]): IntelItem[] {
+  const out: IntelItem[] = [];
+  const dateOf = (it: IntelItem) => it.substance?.eventDate ?? it.substance?.reportedOn ?? '';
+  let i = 0;
+  while (i < items.length) {
+    const date = dateOf(items[i]);
+    const same: IntelItem[] = [];
+    while (i < items.length && dateOf(items[i]) === date) same.push(items[i++]);
+    const queues = new Map<string, IntelItem[]>();
+    for (const it of same) queues.set(it.substance?.producer ?? '', [...(queues.get(it.substance?.producer ?? '') ?? []), it]);
+    const order = [...queues.keys()].sort();
+    let left = same.length;
+    while (left > 0) for (const p of order) { const q = queues.get(p)!; if (q.length) { out.push(q.shift()!); left -= 1; } }
+  }
+  return out;
 }
 
 /** The imported record's substance from a row, or null when the row is not an import. */
@@ -394,12 +416,14 @@ export interface Intelligence {
   signals: IntelItem[];
   /** IW10/IW11: the producers' imported records (the briefs, the reports), their own group: newest report first, then rank. */
   reports?: IntelItem[];
+  /** IW06: the vault's recent calls and meetings, projected on their own (no decisions). */
+  knowledge?: IntelItem[];
   triggers: IntelItem[];
   people: IntelItem[];
   /** I05: what Casey pursued, with the angle when it is ready (the review's finding 2: a pursued item never vanishes). */
   pursued: PursuedItem[];
   /** How many undecided items the selection was cut from, so the shortage or the depth is said truthfully. */
-  totals: { signals: number; triggers: number; people: number; reports?: number };
+  totals: { signals: number; triggers: number; people: number; reports?: number; knowledge?: number };
   /** C34: how the selection was made (the pulls and windows in words), whether more exists beyond it, and the page shown. */
   selection: { signals: string; people: string; moreSignals: boolean; morePeople: boolean; skipSignals: number; skipPeople: number; peopleWindowDays: number; peopleIntakeTruncated: boolean };
 }
@@ -579,7 +603,7 @@ export async function loadIntelligence(prisma: PrismaLike, opts: { now: Date; li
   const ranked = rankSignals(signalRows, opts.now);
   // IW11: the producers' records are their own group, newest report first (the event date when stated), then rank;
   // what GAP found keeps the ranked order. The digest and the panel show the groups apart, each counted.
-  const reports = ranked.filter((s) => s.substance).sort((a, b) => (b.substance!.eventDate ?? b.substance!.reportedOn).localeCompare(a.substance!.eventDate ?? a.substance!.reportedOn) || a.rank - b.rank).map((s, i) => ({ ...s, rank: i }));
+  const reports = interleaveProducers(ranked.filter((s) => s.substance).sort((a, b) => (b.substance!.eventDate ?? b.substance!.reportedOn).localeCompare(a.substance!.eventDate ?? a.substance!.reportedOn) || a.rank - b.rank)).map((s, i) => ({ ...s, rank: i }));
   const signals = ranked.filter((s) => !s.substance).map((s, i) => ({ ...s, rank: i }));
   const reportTotal: number = typeof prisma?.gapSignal?.count === 'function' ? await prisma.gapSignal.count({ where: { feedback: null, resolution: { not: 'rejected' }, source_class: { not: REPORT_ARCHIVE_CLASS }, origin: REPORT_IMPORT_ORIGIN } }).catch(() => reports.length) : reports.length;
   const signalTotal: number = typeof prisma?.gapSignal?.count === 'function' ? await prisma.gapSignal.count({ where: { feedback: null, resolution: { not: 'rejected' }, source_class: { not: REPORT_ARCHIVE_CLASS }, origin: { not: REPORT_IMPORT_ORIGIN } } }).catch(() => signals.length) : signals.length;
@@ -650,9 +674,11 @@ export async function loadIntelligence(prisma: PrismaLike, opts: { now: Date; li
   const threadAccounts = new Map<string, string | null>();
   for (const w of writerRows) { const e = w.from_email.trim().toLowerCase(); if (!threadAccounts.get(e)) threadAccounts.set(e, w.thread_account ?? threadAccounts.get(e) ?? null); }
   const pursued = await loadPursued(prisma, opts.now, { identity, coverage, personas: new Map(personas.filter((p) => p.email).map((p) => [String(p.email).toLowerCase(), p])), threadAccounts, family });
+  // IW06: the vault's recent calls and meetings as their own group (soft; a client without the table answers none).
+  const knowledge = await import('../knowledge/knowledge-intel').then((m) => m.loadKnowledgeIntel(prisma, { now: opts.now, limit })).catch(() => ({ items: [] as IntelItem[], total: 0 }));
   return {
-    signals: signals.slice(skipSignals, skipSignals + limit), reports: reports.slice(0, limit), triggers: triggers.slice(0, limit), people: people.slice(skipPeople, skipPeople + peopleLimit), pursued,
-    totals: { signals: Math.max(signalTotal, signals.length), triggers: triggers.length, people: people.length, reports: Math.max(reportTotal, reports.length) },
+    signals: signals.slice(skipSignals, skipSignals + limit), reports: reports.slice(0, limit), knowledge: knowledge.items, triggers: triggers.slice(0, limit), people: people.slice(skipPeople, skipPeople + peopleLimit), pursued,
+    totals: { signals: Math.max(signalTotal, signals.length), triggers: triggers.length, people: people.length, reports: Math.max(reportTotal, reports.length), knowledge: knowledge.total },
     selection: {
       signals: `ranked from four bounded pulls (your shares, up to 100; the strongest classes by score, up to 300; the rest newest, up to 200; the producers' imported records, newest report first, up to 200) of ${Math.max(signalTotal, signals.length)} undecided; showing ${Math.min(limit, Math.max(0, signals.length - skipSignals))} from ${skipSignals + 1}; the complete list is on the Intelligence page`,
       people: `people who wrote in the last ${peopleWindowDays} days (up to ${PEOPLE_INTAKE_MAX} messages read${msgs.length >= PEOPLE_INTAKE_MAX ? ', the cap: older writers are not in this list' : ''}); ${opts.listSent ? `our Sent read for the ${sentTargets} who would be listed${sentFailed.size ? ` (${sentFailed.size} read failed)` : ''}` : 'our Sent not read: quiet is judged from their last message alone'}; showing ${Math.min(peopleLimit, Math.max(0, people.length - skipPeople))} of ${people.length} from ${skipPeople + 1}`,

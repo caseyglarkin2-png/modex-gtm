@@ -71,7 +71,7 @@ describe('IW11: the digest by a stated rule', () => {
   it('reserves three from the briefs, two GAP found and one trigger; counts the omitted; rotates the shown-before behind the unseen', () => {
     const d = composeDigest({ signals: [...reports, ...found], triggers, people: [], totals: { signals: 120, triggers: 5, people: 0 } });
     expect(d.worth.map((w) => w.id)).toEqual(['r0', 'r1', 'r2', 's0', 's1', 't0']);
-    expect(d.breakdown).toEqual({ reports: 3, found: 2, triggers: 1 });
+    expect(d.breakdown).toEqual({ reports: 3, found: 2, triggers: 1, vault: 0 });
     expect(d.omitted).toBe(119);
     expect(d.rotated).toBe(0);
     const rotated = composeDigest({ signals: [...reports, ...found], triggers, people: [], totals: { signals: 120, triggers: 5, people: 0 } }, { shownBefore: new Set(['signal:r0', 'signal:r1', 'signal:r2', 'signal:s0', 'trigger:t0']) });
@@ -111,7 +111,7 @@ describe('IW10/IW12: the email carries the substance, the coverage and the full 
     expect(out.html).toContain('<a href="https://www.nasdaq.com/press-release/kodiak-charger">Kodiak-Charger announcement</a>');
     expect(out.text).toContain('Intelligence worth a look (2 of 90). Any age, for your call; Pursue and GAP develops the angle. 2 from your briefs; 88 more waiting.');
     expect(out.subject).toBe('GAP today, Fri Oct 9: 1 to execute, 2 to decide [GAP#tok]');
-    expect(out.digest).toEqual({ keys: ['signal:r1', 'signal:inj'], omitted: 88, breakdown: { reports: 2, found: 0, triggers: 0 }, rotated: 0 });
+    expect(out.digest).toEqual({ keys: ['signal:r1', 'signal:inj'], omitted: 88, breakdown: { reports: 2, found: 0, triggers: 0, vault: 0 }, rotated: 0 });
   });
   it('imported text is escaped in HTML, never starts a body line with a command word, and says its CRM ids, its captured date basis, its revisions and its archived drafts', () => {
     expect(out.html).toContain('&lt;script&gt;alert(1)&lt;/script&gt;');
