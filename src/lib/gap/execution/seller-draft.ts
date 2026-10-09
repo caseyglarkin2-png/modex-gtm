@@ -139,7 +139,11 @@ export function snapshotDrift(expected: ApprovedSnapshot, actual: { contentHash:
   if (actual.contentHash !== expected.contentHash) {
     return { ok: false, reason: 'copy_changed_since_review', detail: `The copy changed after revision ${expected.revision} was approved; nothing was drafted. Open the item in GAP and approve the current copy.` };
   }
-  if (expected.recipient && actual.recipient.trim().toLowerCase() !== expected.recipient.trim().toLowerCase()) {
+  // F15: a snapshot that names no recipient binds nothing: it is refused, never skipped.
+  if (!expected.recipient || !expected.recipient.trim()) {
+    return { ok: false, reason: 'recipient_changed_since_review', detail: 'The approved snapshot named no recipient, so no draft can be bound to it; nothing was drafted. Open the item in GAP.' };
+  }
+  if (actual.recipient.trim().toLowerCase() !== expected.recipient.trim().toLowerCase()) {
     return { ok: false, reason: 'recipient_changed_since_review', detail: `The recipient is now ${actual.recipient}, not ${expected.recipient} as approved; nothing was drafted.` };
   }
   if (expected.senderIdentity && actual.senderIdentity.trim().toLowerCase() !== expected.senderIdentity.trim().toLowerCase()) {
