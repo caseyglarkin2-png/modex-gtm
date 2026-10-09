@@ -18,6 +18,7 @@
 import { contextFingerprint, type CommercialContextPacket, type ContextClaim, type ContextIdentity, type ContextOpportunity, type TimelineEvent } from '../context/commercial-context';
 import { gapLines, incumbentNames, INCUMBENT_RE } from '../context/assemble';
 import { HEDGE_TOKENS } from '../taxonomy';
+import { isDateOnly } from '../work/intel';
 import type { Angle } from './develop-angle';
 
 export const PACKET_BUYER_MAX = 6;
@@ -35,7 +36,7 @@ export const CLASS_LABEL: Record<ContextClaim['claimClass'], string> = {
 };
 
 /** A date-only value (midnight UTC, the vault's and Clawd's convention) is the day it names; a timestamp is New York (C28/C29: no shift through UTC). */
-const dayText = (iso: string | null) => (iso ? new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: /T00:00:00(\.000)?Z$/.test(iso) ? 'UTC' : 'America/New_York' }) : 'no date');
+const dayText = (iso: string | null) => (iso ? new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: isDateOnly(iso) ? 'UTC' : 'America/New_York' }) : 'no date');
 const squash = (s: string) => s.replace(/\s+/g, ' ').trim();
 
 export interface PacketRecord {
