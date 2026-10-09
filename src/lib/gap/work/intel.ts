@@ -264,12 +264,13 @@ export interface PursuedItem {
    * task whose input predates the identity fix (October 9: five Kenco pursues carried accountName null although
    * kencogroup.com is Kenco's verified domain) is no longer shown under "No account yet". `placementChanged` says the
    * placement differs from what the task carried; the line tells the seller the angle was developed before it.
+   * loadPursued always sets the four; they are optional so an older literal (the briefing test's) still types.
    */
-  placedVia: PlacedVia | null;
-  placementChanged: boolean;
-  placementLine: string | null;
+  placedVia?: PlacedVia | null;
+  placementChanged?: boolean;
+  placementLine?: string | null;
   /** "In an open deal: <deal>" from the day's deal coverage (C01), when the placed account is in one; else null. */
-  dealLine: string | null;
+  dealLine?: string | null;
   url: string | null;
   decision: string;
   decidedAt: string;
