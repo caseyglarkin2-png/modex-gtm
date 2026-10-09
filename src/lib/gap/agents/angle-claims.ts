@@ -92,6 +92,7 @@ export function lastExchange(timeline: readonly TimelineEvent[]): string | null 
 }
 
 /** ---------- C22: support and validation ---------- */
+// C57 P2-3: the label never excuses an attribution or a named system; see validateAngleClaims.
 
 export interface SupportEntry {
   text: string;
@@ -217,24 +218,32 @@ export function validateAngleClaims(a: Pick<Angle, 'whyItMatters' | 'starters'>,
       const ns = norm(s.text);
       return ns === nu || (ns.length >= 30 && nu.includes(ns.slice(0, 30))) || (nu.length >= 30 && ns.includes(nu.slice(0, 30)));
     });
-    // The model's own entry is honoured as given (an inference may cite nothing); only a missing entry is matched to the record by its words.
-    const labels = entry ? entry.refs : matchSupport(u.text, refs);
+    // The model's own citations are honoured; an entry that cites nothing (an inference, or a lazy answer) is matched to the record by
+    // its words, so the record decides what backs the sentence while the model's label stays its label.
+    const labels = entry?.refs.length ? entry.refs : matchSupport(u.text, refs);
     // Unlabelled: supported is a fact; unsupported is an inference only when the sentence hedges itself, else it is checked as a fact.
     const kind: 'fact' | 'inference' = entry?.kind ?? (labels.length ? 'fact' : hedged(u.text) ? 'inference' : 'fact');
-    const claims = labels.map((l) => refs.get(l)!).filter(Boolean);
+    const claims: ContextClaim[] = labels.map((l) => refs.get(l)!).filter(Boolean);
     // A buyer attribution needs a buyer line that plainly carries it: the model's own citation, a shared system, or three shared words
     // (two is a coincidence). C57 F11: a sentence that names a specific person is backed only by a line THAT person spoke (the claim's
     // speaker prefix or address names them); Dave's roadmap never backs "Bryan confirmed".
     const named = (opts.people ?? []).filter((p) => personNameRe(p)?.test(u.text));
     const spokenBy = (c: ContextClaim, p: { name?: string | null; email?: string | null }): boolean => { const head = c.text.slice(0, 120).toLowerCase(); return nameTokens(p).some((t) => head.includes(t)); };
     const buyerBacked = claims.some((c) => c.claimClass === 'buyer_said' && (named.length === 0 || named.some((p) => spokenBy(c, p))) && (entry?.refs.length ? true : supportStrength(u.text, c) === 'system' || (supportStrength(u.text, c) as number) >= 3));
-    if (kind !== 'inference') {
-      if (BUYER_ATTRIBUTION.test(u.text) && buyerSubject.test(u.text) && !buyerBacked && u.where === 'whyItMatters') return { ok: false, reason: 'unsupported_buyer_claim', detail: u.text.slice(0, 160) };
-      const named = systemsIn(u.text);
-      const unnamed = named.find((s) => !claims.some((c) => systemsIn(c.text).includes(s)));
-      if (unnamed) return { ok: false, reason: 'invented_system', detail: `${unnamed}: ${u.text.slice(0, 140)}` };
-      if (u.where === 'whyItMatters' && PAIN.test(u.text) && ASSERTIVE.test(u.text) && !hedged(u.text) && !claims.some((c) => PAIN.test(c.text))) return { ok: false, reason: 'invented_pain', detail: u.text.slice(0, 160) };
+    // C57 P2-3: an ATTRIBUTION (a buyer verb with a packet person or a pronoun as its subject) and a NAMED SYSTEM are refused
+    // whatever the label: "inference" never turns "Alex told us they are replacing Open Dock" into a sayable guess. A starter is
+    // an open question; one that is not a question is checked as a statement. Only the pain check honours the inference label.
+    const statement = u.where === 'whyItMatters' || !/\?\s*$/.test(u.text);
+    if (statement && BUYER_ATTRIBUTION.test(u.text) && buyerSubject.test(u.text) && !buyerBacked) return { ok: false, reason: 'unsupported_buyer_claim', detail: u.text.slice(0, 160) };
+    // A system is invented when the RECORD does not name it (not merely the cited lines); a record line that names it is attached as support.
+    const systems = systemsIn(u.text);
+    for (const sys of systems) {
+      if (claims.some((c) => systemsIn(c.text).includes(sys))) continue;
+      const backing = [...refs.entries()].filter(([, c]) => c.claimClass !== 'modeled' && systemsIn(c.text).includes(sys)).map(([l]) => l);
+      if (!backing.length) return { ok: false, reason: 'invented_system', detail: `${sys}: ${u.text.slice(0, 140)}` };
+      for (const l of backing) if (!labels.includes(l)) { labels.push(l); claims.push(refs.get(l)!); }
     }
+    if (kind !== 'inference' && u.where === 'whyItMatters' && PAIN.test(u.text) && ASSERTIVE.test(u.text) && !hedged(u.text) && !claims.some((c) => PAIN.test(c.text))) return { ok: false, reason: 'invented_pain', detail: u.text.slice(0, 160) };
     out.push({ text: u.text, where: u.where, kind, refs: labels.map((l) => ({ ref: l, claimId: refs.get(l)!.claimId, sourceId: refs.get(l)!.sourceId, claimClass: refs.get(l)!.claimClass, at: refs.get(l)!.eventAt ?? refs.get(l)!.observedAt ?? null })) });
   }
   return { ok: true, support: out };
