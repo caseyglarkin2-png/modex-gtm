@@ -217,20 +217,34 @@ export function placeAmongFamily(placed: PersonAccount, facts: FamilyFacts | nul
 /** The reason a duplicate_company conflict carries ("Company collides with: A, B"), as names. */
 const collidesWith = (reason: unknown): string[] => (typeof reason === 'string' ? (reason.match(/collides with:\s*(.+)$/i)?.[1] ?? '').split(',').map((s) => s.trim()).filter(Boolean) : []);
 
-/** C5: the accounts' parent brands and their open duplicate_company conflicts, one bounded query each; soft (unread keeps the ambiguity). */
+/**
+ * C5: the accounts' parent brands and their open duplicate_company conflicts, bounded and soft (unread keeps the
+ * ambiguity). C5 fix (the production shape): the accounts are matched by name without case; a conflict row that names
+ * no account ("Canonical company matches multiple account records.", account_name null) is attributed through its
+ * canonical company to every candidate whose canonical link points at that company (one bounded link read).
+ */
 export async function loadFamilyFacts(prisma: PrismaLike, names: readonly string[]): Promise<FamilyFacts> {
-  const list = [...new Set(names)];
+  const list = [...new Set(names.map((n) => n.trim()).filter(Boolean))];
   if (!list.length) return EMPTY_FAMILY;
-  const accounts: Array<{ name: string; parent_brand: string | null }> = typeof prisma?.account?.findMany === 'function' ? await prisma.account.findMany({ where: { name: { in: list } }, select: { name: true, parent_brand: true }, take: 50 }).catch(() => []) : [];
-  const conflicts: Array<{ account_name: string | null; canonical_company_id: string | null; reason: string | null; created_at: Date | string }> = typeof prisma?.canonicalConflict?.findMany === 'function' ? await prisma.canonicalConflict.findMany({ where: { code: 'duplicate_company', status: 'open', account_name: { in: list } }, select: { account_name: true, canonical_company_id: true, reason: true, created_at: true }, take: 100 }).catch(() => []) : [];
+  const same = (a: string | null | undefined, b: string) => !!a && a.trim().toLowerCase() === b.toLowerCase();
+  const nameOf = (raw: string | null | undefined) => list.find((n) => same(raw, n)) ?? null;
+  const accounts: Array<{ name: string; parent_brand: string | null }> = typeof prisma?.account?.findMany === 'function' ? await prisma.account.findMany({ where: { name: { in: list, mode: 'insensitive' } }, select: { name: true, parent_brand: true }, take: 50 }).catch(() => []) : [];
+  const links: Array<{ account_name: string; canonical_company_id: string }> = typeof prisma?.canonicalAccountLink?.findMany === 'function' ? await prisma.canonicalAccountLink.findMany({ where: { account_name: { in: list, mode: 'insensitive' } }, select: { account_name: true, canonical_company_id: true }, take: 50 }).catch(() => []) : [];
+  const companyIds = [...new Set(links.map((l) => l.canonical_company_id).filter(Boolean))];
+  const where = { code: 'duplicate_company', status: 'open', OR: [{ account_name: { in: list, mode: 'insensitive' } }, ...(companyIds.length ? [{ canonical_company_id: { in: companyIds } }] : [])] };
+  const conflicts: Array<{ account_name: string | null; canonical_company_id: string | null; reason: string | null; created_at: Date | string }> = typeof prisma?.canonicalConflict?.findMany === 'function' ? await prisma.canonicalConflict.findMany({ where, select: { account_name: true, canonical_company_id: true, reason: true, created_at: true }, take: 100 }).catch(() => []) : [];
   const parentBrand = new Map<string, string | null>();
-  for (const a of accounts) parentBrand.set(a.name, a.parent_brand ?? null);
+  for (const a of accounts) parentBrand.set(nameOf(a.name) ?? a.name, a.parent_brand ?? null);
   const duplicates = new Map<string, { companyId: string | null; collidesWith: string[]; since: string | null }>();
-  for (const c of conflicts) {
-    if (!c.account_name) continue;
+  const note = (name: string, c: { canonical_company_id: string | null; reason: string | null; created_at: Date | string }) => {
     const since = new Date(c.created_at).toISOString();
-    const cur = duplicates.get(c.account_name);
-    duplicates.set(c.account_name, { companyId: cur?.companyId ?? c.canonical_company_id ?? null, collidesWith: [...new Set([...(cur?.collidesWith ?? []), ...collidesWith(c.reason)])], since: cur?.since && cur.since < since ? cur.since : since });
+    const cur = duplicates.get(name);
+    duplicates.set(name, { companyId: cur?.companyId ?? c.canonical_company_id ?? null, collidesWith: [...new Set([...(cur?.collidesWith ?? []), ...collidesWith(c.reason)])], since: cur?.since && cur.since < since ? cur.since : since });
+  };
+  for (const c of conflicts) {
+    const named = nameOf(c.account_name);
+    if (named) note(named, c);
+    else if (c.canonical_company_id) for (const l of links) if (l.canonical_company_id === c.canonical_company_id) { const n = nameOf(l.account_name); if (n) note(n, c); }
   }
   return { parentBrand, duplicates };
 }
