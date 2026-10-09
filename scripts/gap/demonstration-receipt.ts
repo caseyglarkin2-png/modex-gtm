@@ -44,7 +44,12 @@ function main() {
   const head = sh('git rev-parse --short HEAD');
   const branch = sh('git rev-parse --abbrev-ref HEAD');
   const prod = /serves deployment (\S+), state (\S+), commit ([0-9a-f]+)/.exec(deployment);
-  const commits = sh('git log --format=%h%x09%s a195467f..HEAD').split('\n').filter((l) => l && !/\tMerge /.test(l));
+  // The deployed commit comes from the C45 receipt; a195467f is the fallback when that receipt is unread.
+  const deployedSha = prod?.[3] ?? 'a195467f';
+  const commits = sh(`git log --format=%h%x09%s ${deployedSha}..HEAD`).split('\n').filter((l) => l && !/\tMerge /.test(l));
+  // Released when the local HEAD is contained in the deployed commit (the merge commit or the same commit).
+  let released = false;
+  try { released = !!prod && sh(`git merge-base --is-ancestor HEAD ${deployedSha} && echo yes`) === 'yes'; } catch { released = false; }
   const tests = suites();
   const L: string[] = [];
   L.push('# GAP OS next-version demonstration receipt (C59)');
@@ -96,10 +101,15 @@ function main() {
   L.push('');
   L.push('## 8. Rollback plan');
   L.push('');
-  L.push(`- Nothing to roll back today: production stays at its current commit; this program lives on ${branch} and reaches production only by a merge Casey authorizes.`);
+  if (released) {
+    L.push(`- RELEASED: this program is in production at ${prod![3]} (deployment ${prod![1]}, state ${prod![2]}, read from docs/gap/DEPLOYMENT_RECEIPT.md); the local HEAD ${head} is contained in it.`);
+    L.push('- To roll back: the previous production deployment is named in docs/gap/STABLE_BASELINE.md (the rollback pointer) and under "Other recent production deployments" in docs/gap/DEPLOYMENT_RECEIPT.md; promote it on Vercel; no schema change in this program, so no migration to reverse; the flags are unchanged by this program.');
+  } else {
+    L.push(`- Nothing to roll back today: production stays at its current commit; this program lives on ${branch} and reaches production only by a merge Casey authorizes.`);
   L.push('- After such a merge: the previous production deployment is named in docs/gap/STABLE_BASELINE.md (the rollback pointer) and in docs/gap/DEPLOYMENT_RECEIPT.md; promote it on Vercel; no schema change in this program, so no migration to reverse; flags unchanged.');
+  }
   L.push('');
-  L.push('## 9. Commits on the branch since production');
+  L.push(released ? `## 9. Commits since the deployed commit ${deployedSha} (none when production is this tree)` : '## 9. Commits on the branch since production');
   L.push('');
   for (const c of commits) L.push(`- ${c.replace('\t', ' ').slice(0, 200)}`);
   L.push('');
