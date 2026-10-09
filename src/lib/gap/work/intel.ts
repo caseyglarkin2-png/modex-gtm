@@ -203,7 +203,8 @@ const sinceText = (iso: string, now: Date) => new Date(iso).toLocaleDateString('
 export function placeAmongFamily(placed: PersonAccount, facts: FamilyFacts | null, coverage: DealCoverage, now: Date): { accountName: string | null; via: PersonVia; ambiguousAmong: string[] | null; ambiguityLine: string | null; familyLine: string | null; tie: ReturnType<typeof tieBreakFamily> } {
   if (!placed.ambiguous || !placed.candidates.length) return { accountName: placed.accountName, via: placed.via, ambiguousAmong: null, ambiguityLine: null, familyLine: null, tie: null };
   const f = facts ?? EMPTY_FAMILY;
-  const tie = tieBreakFamily(placed.candidates, f, (n) => dealsAt(coverage, n).inDeal === true);
+  // The name the CRM read records a candidate's deal under (the summary folds a duplicate onto its deal-holding account), null when in no deal.
+  const tie = tieBreakFamily(placed.candidates, f, (n) => { const l = dealsAt(coverage, n); return l.inDeal === true ? l.account.accountName : null; });
   if (tie) {
     const dup = tie.kind === 'duplicate' ? `${tie.others.join(' and ')} ${tie.others.length === 1 ? 'is' : 'are'} its open duplicate${tie.others.length === 1 ? '' : 's'}, unmerged` : `${tie.others.join(' and ')} ${tie.others.length === 1 ? 'is' : 'are'} in its family (parent brand), unmerged`;
     return { accountName: tie.accountName, via: 'family_deal', ambiguousAmong: null, ambiguityLine: null, familyLine: `placed at ${tie.accountName}, the family's deal-holding account; ${dup}`, tie };
