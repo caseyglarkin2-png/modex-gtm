@@ -3295,7 +3295,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C57 [P1] Run independent adversarial review after each vertical slice
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** IN PROGRESS (a standing gate). Pass 1: an independent reviewer (a separate agent, read-only, in the disposable worktree `wt-gap-review` at 9edf2edd, the first three merges) over V1-V8 as merged then; its report is awaited (it ran, went idle, and was asked to resend; nothing was integrated from it). Pass 2: a second reviewer in `wt-gap-review-2` at a97d7480 over the final integrated tree, the slices merged since (C21-C26, C31-C33, C40-C44, C47, C49, C51, C55, C46) and the evaluators and the replay (whether a demonstrated disposition exercises the production path or a fixture, whether the harness can pass while the real path is wrong). Each finding receives fixed / accepted / deferred with its ticket in `docs/gap/C57_REVIEW.md`, aggregated into the C59 receipt; the writer verifies every proposed edit before it lands (one writer per file: the owning builder or the lead).
 - **Change boundary:** Separate reviewer, read-only source or disposable exclusive mutation workspace. Review evidence joins and product behavior, not just test count. This is a standing gate on each slice; aggregate the per-slice receipts at C56, rather than waiting for C56 to start review.
 - **Acceptance:** Reviewer checks negative controls; writer verifies proposed edits; findings receive fixed/accepted/deferred disposition and linked ticket.
 - **Depends on:** none.
@@ -3313,7 +3313,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C59 [P1] Publish the next-version demonstration receipt locally
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go), the reviewer section pending the C57 report. Commit a97d7480: `scripts/gap/demonstration-receipt.ts` writes `docs/gap/DEMONSTRATION_RECEIPT.md` from artifacts another developer reproduces locally (the three evaluation scripts, then this one): the before and after rendered briefing and the source manifest and dispositions from the C56 replay, the 34 focused suites with their case counts, the mocked and live boundaries said apart (the model, Gmail, HubSpot, the vault, Clawd and the ledger mocked; the deployment receipt read-only live; the live model evaluation and the production seller round trip not run), the retrieval and quality measurements, the reviewer findings section (filled from `docs/gap/C57_REVIEW.md` when the report is on file, each finding with its fixed / accepted / deferred disposition and ticket), the residuals and the owner items, the rollback plan (nothing deployed; production stays at a195467f; after a merge, the previous deployment named in the baseline), the commits on the branch since production; the writer refuses any text shaped like a secret, a key, a connection string or a signed action token.
 - **Change boundary:** Include before/after rendered email, source manifest, targeted tests, mocked/live boundaries, reviewer findings, residuals and rollback plan. No live sends needed.
 - **Acceptance:** Another developer reproduces fixture replay; linked canonical tickets resolve; no credentials, signed actions or raw private mail in shareable report.
 - **Depends on:** C54,C56,C57,C58.
@@ -3322,7 +3322,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C60 [P2] Exercise owner-controlled production acceptance separately
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** CASEY'S, not started and never simulated. After a release Casey authorizes (the merge and deploy of `feat/gap-execution-engine`, the C58 owner table) and an explicit authorization in that session: the real START / REVISE / APPROVE on the production briefing thread, the mail listing, the command ingest, the revised assignment and one editable Gmail draft verified with provider receipts; any send separately authorized and sink-addressed; external buyer sends and flag changes stay outside. The fresh briefing already sent on the prospecting-first composition (thread 1a11e5845f5964a2) is the acceptance test for X01-X22 today; the C program's acceptance waits for its release.
 - **Change boundary:** After code release and explicit authorization in that future session: seller uses real START/REVISE/APPROVE; any send is separately authorized and sink-addressed. Never simulate Casey’s authenticated reply.
 - **Acceptance:** Mail listing, command ingest, revised assignment and one editable draft verified with provider receipts; external buyer sends and flag changes remain outside this audit.
 - **Depends on:** C59.
