@@ -52,7 +52,8 @@ describe('the vault note', () => {
   it('reads the local YardFlow wedge paragraph with the refresh date when GAP_VAULT_DIR is set', async () => {
     const readFile = vi.fn(async (p: string) => (p.endsWith('/02_Accounts/FedEx.md') ? file : null));
     const n = await readLocalVaultNote('FedEx', { env: { GAP_VAULT_DIR: 'C:/vault/' }, readFile });
-    expect(n).toEqual({ text: 'Consolidation makes the yards the constraint. Orchestrate the gate-to-dock handoff across the surviving hubs.', at: '2026-10-05' });
+    // C15 (2026-10-08): `at` stays the file's refresh date as the note's label; the claim's own date is `observedAt` (null: the wedge paragraph is undated).
+    expect(n).toMatchObject({ text: 'Consolidation makes the yards the constraint. Orchestrate the gate-to-dock handoff across the surviving hubs.', at: '2026-10-05', observedAt: null, indexedAt: '2026-10-05T00:00:00.000Z' });
     expect(readFile.mock.calls[0][0]).toBe('C:/vault/02_Accounts/FedEx.md');
   });
   it('falls back to next_action, then the first paragraph; null without a vault dir or a file', async () => {
@@ -63,7 +64,7 @@ describe('the vault note', () => {
   });
   it("reads clawd's copy of the vault wedge from the intel snapshot, HTML stripped, dated", async () => {
     const fetchImpl = vi.fn(async () => json({ found: true, snapshot: { reasoning_notes: ['<strong>Vault wedge (2026-07-10):</strong> Consolidation makes the yards the constraint.', 'gr other note'] } }));
-    expect(await fetchClawdVaultNote('fedex.com', { env, fetchImpl })).toEqual({ text: 'Consolidation makes the yards the constraint.', at: '2026-07-10' });
+    expect(await fetchClawdVaultNote('fedex.com', { env, fetchImpl })).toMatchObject({ text: 'Consolidation makes the yards the constraint.', at: '2026-07-10', observedAt: '2026-07-10T00:00:00.000Z' });
     expect(await fetchClawdVaultNote('fedex.com', { env, fetchImpl: vi.fn(async () => json({ found: false })) })).toBeNull();
     expect(await fetchClawdVaultNote('fedex.com', { env, fetchImpl: vi.fn(async () => { throw new Error('x'); }) })).toBeNull();
   });
@@ -73,7 +74,7 @@ describe('the vault note', () => {
     expect(local.vaultNote!.text).toMatch(/^Consolidation/);
     expect(fetchImpl.mock.calls.map((c) => String(c[0]))).not.toContainEqual(expect.stringMatching(/intel\/account/));
     const remote = await loadStoryReaders({ accountName: 'FedEx', domain: 'fedex.com' }, { env, fetchImpl, readFile: async () => null });
-    expect(remote.vaultNote).toEqual({ text: 'from clawd', at: '2026-07-10' });
+    expect(remote.vaultNote).toMatchObject({ text: 'from clawd', at: '2026-07-10' });
     expect(remote.clawd.read).toBe('ok');
     const down = await loadStoryReaders({ accountName: 'FedEx', domain: 'fedex.com' }, { env, fetchImpl: vi.fn(async () => { throw new Error('down'); }), readFile: async () => null });
     expect(down).toEqual({ clawd: { read: 'unavailable', sends: [] }, vaultNote: null });

@@ -5,12 +5,16 @@
  *   clawd outreach history   GET {CLAWD_CONTROL_PLANE_URL}/api/outreach/history?domain=<d>   the swarm's sends by
  *                            address (the canonical dedup source; prod Postgres, never the local file)
  *   the vault's account note the vault file when GAP_VAULT_DIR names a local vault (Casey's machine), else clawd's
- *                            copy of the vault wedge in /api/yardflow/intel/account reasoning_notes (production)
+ *                            copy of the vault wedge in /api/yardflow/intel/account reasoning_notes (production).
+ *                            Since C14-C16 (2026-10-08) both go through context/retrieval.ts: the whole account's
+ *                            knowledge as attributed claims (loadAccountKnowledge); the one-paragraph note the
+ *                            story shows is picked from those claims.
  *
  * The same env pair as the suppression gate (CLAWD_CONTROL_PLANE_URL / CLAWD_CONTROL_PLANE_TOKEN, with MC_API_TOKEN
  * accepted): one secret to rotate. Nothing here writes. Pinned by tests/unit/gap/story-readers.test.ts.
  */
 import type { ClawdOutreach, ClawdSend } from './touches';
+import { clawdClaims, currentClawdClaim, retrieveAccountKnowledge, type AccountKnowledge, type ClawdAdapter, type KnowledgeAdapters, type VaultAdapter } from '../context/retrieval';
 
 export const STORY_READER_TIMEOUT_MS = 4_000;
 
@@ -23,7 +27,12 @@ export interface StoryReaderDeps {
 
 export interface VaultNote {
   text: string;
+  /** The note's date as a label: the vault file's refresh date, or the date a Clawd wedge carries. */
   at: string | null;
+  /** C15: the claim's own observation date (null when the paragraph is undated); never the refresh time. */
+  observedAt?: string | null;
+  indexedAt?: string | null;
+  sourceId?: string | null;
 }
 
 export interface StoryReaders {
@@ -62,20 +71,46 @@ export async function fetchClawdOutreach(domain: string | null, deps: StoryReade
   }
 }
 
-const strip = (html: string) => html.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/\s+/g, ' ').trim();
-
-/** clawd's copy of the vault wedge ("<strong>Vault wedge (2026-07-10):</strong> ...") from the intel snapshot, else null. */
-export async function fetchClawdVaultNote(domain: string | null, deps: StoryReaderDeps = {}): Promise<VaultNote | null> {
+/**
+ * C14/C16: the adapters the retrieval (context/retrieval.ts) reads through, built from the same env pair and the
+ * same local-file reader; null when a source is not configured (the coverage says so, never a quiet empty).
+ */
+export function knowledgeAdapters(deps: StoryReaderDeps = {}): KnowledgeAdapters {
   const env = deps.env ?? process.env;
+  const dir = env.GAP_VAULT_DIR?.trim();
+  const read = deps.readFile ?? defaultReadFile;
+  const vault: VaultAdapter | null = dir ? { readFile: (rel) => read(`${dir.replace(/[\\/]+$/, '')}/${rel}`) } : null;
   const cfg = clawdBase(env);
-  if (!cfg || !domain) return null;
+  const clawd: ClawdAdapter | null = cfg
+    ? {
+        fetchSnapshot: async (domain) => {
+          const body = (await getJson(`${cfg.base}/api/yardflow/intel/account?domain=${encodeURIComponent(domain)}`, cfg.token, deps.fetchImpl ?? fetch, STORY_READER_TIMEOUT_MS)) as { found?: boolean; rebuilt_at?: unknown; snapshot?: { reasoning_notes?: unknown } };
+          const notes = Array.isArray(body.snapshot?.reasoning_notes) ? body.snapshot!.reasoning_notes.filter((n): n is string => typeof n === 'string') : [];
+          const rebuilt = typeof body.rebuilt_at === 'string' && body.rebuilt_at && body.rebuilt_at !== 'None' ? new Date(body.rebuilt_at) : null;
+          return { found: body.found === true, rebuiltAt: rebuilt && !Number.isNaN(rebuilt.getTime()) ? rebuilt.toISOString() : null, reasoningNotes: notes };
+        },
+      }
+    : null;
+  return { vault, clawd };
+}
+
+/** Everything the two private sources hold about one account, as attributed claims with coverage (C14-C16, C20). Never throws. */
+export async function loadAccountKnowledge(args: { accountName: string; aliases?: readonly string[]; domain: string | null; now: Date; otherAccounts?: readonly string[] }, deps: StoryReaderDeps = {}): Promise<AccountKnowledge> {
+  return retrieveAccountKnowledge(knowledgeAdapters(deps), args);
+}
+
+/**
+ * clawd's copy of the vault wedge from the intel snapshot: the CURRENT version of the "vault wedge" identity (C16: by
+ * identity and date, never the first matching note), with the date the wedge itself carries; null when none or unread.
+ */
+export async function fetchClawdVaultNote(domain: string | null, deps: StoryReaderDeps = {}): Promise<VaultNote | null> {
+  const { clawd } = knowledgeAdapters(deps);
+  if (!clawd || !domain) return null;
   try {
-    const body = (await getJson(`${cfg.base}/api/yardflow/intel/account?domain=${encodeURIComponent(domain)}`, cfg.token, deps.fetchImpl ?? fetch, STORY_READER_TIMEOUT_MS)) as { found?: boolean; snapshot?: { reasoning_notes?: unknown } };
-    const notes = Array.isArray(body.snapshot?.reasoning_notes) ? body.snapshot!.reasoning_notes.filter((n): n is string => typeof n === 'string') : [];
-    const wedge = notes.map(strip).find((n) => /^vault/i.test(n));
-    if (!wedge) return null;
-    const m = wedge.match(/^vault[^(:]*\((\d{4}-\d{2}-\d{2})\):\s*(.+)$/i);
-    return m ? { text: m[2].trim(), at: m[1] } : { text: wedge.replace(/^vault[^:]*:\s*/i, '').trim(), at: null };
+    const snap = await clawd.fetchSnapshot(domain);
+    if (!snap.found) return null;
+    const wedge = currentClawdClaim(clawdClaims(snap, { accountName: domain }), 'vault wedge');
+    return wedge ? { text: wedge.text, at: wedge.version, observedAt: wedge.observedAt, indexedAt: wedge.indexedAt, sourceId: wedge.sourceId } : null;
   } catch {
     return null;
   }
@@ -84,25 +119,18 @@ export async function fetchClawdVaultNote(domain: string | null, deps: StoryRead
 /**
  * The vault's own account note (02_Accounts/<Account>.md): the "YardFlow wedge" section's first paragraph (what clawd
  * copies as the vault wedge), else the frontmatter's next_action, else the first body paragraph. Local only
- * (GAP_VAULT_DIR); production has no vault on disk and reads clawd's copy instead.
+ * (GAP_VAULT_DIR); production has no vault on disk and reads clawd's copy instead. Read through the retrieval, links
+ * not followed. `at` is the FILE's refresh date (a label for "your vault note, Oct 5"); the claim's own observation
+ * date is `observedAt`, null when the paragraph is undated (C15: a refresh time is never a claim date).
  */
 export async function readLocalVaultNote(accountName: string, deps: StoryReaderDeps = {}): Promise<VaultNote | null> {
-  const env = deps.env ?? process.env;
-  const dir = env.GAP_VAULT_DIR?.trim();
-  if (!dir) return null;
-  const read = deps.readFile ?? defaultReadFile;
-  const safe = accountName.replace(/[\\/:*?"<>|]+/g, ' ').replace(/\s+/g, ' ').trim();
-  const text = await read(`${dir.replace(/[\\/]+$/, '')}/02_Accounts/${safe}.md`);
-  if (!text) return null;
-  const fm = text.match(/^---\r?\n([\s\S]*?)\r?\n---/);
-  const front = fm?.[1] ?? '';
-  const field = (k: string) => front.match(new RegExp(`^${k}:\\s*(.+)$`, 'm'))?.[1]?.trim() ?? null;
-  const at = field('last_refreshed') ?? field('last_touched') ?? null;
-  const body = text.slice(fm ? fm[0].length : 0);
-  const wedge = body.match(/^##\s+YardFlow wedge\s*\r?\n([\s\S]*?)(?=\r?\n##\s|\s*$)/m)?.[1];
-  const para = (t: string | undefined) => t?.split(/\r?\n\s*\r?\n/).map((p) => p.trim()).find((p) => p && !/^#/.test(p) && !/^[-*|>]/.test(p) && !/^<!--/.test(p)) ?? null;
-  const pick = para(wedge) ?? field('next_action') ?? para(body);
-  return pick ? { text: pick.replace(/\s+/g, ' ').slice(0, 400), at } : null;
+  const { vault } = knowledgeAdapters(deps);
+  if (!vault) return null;
+  const k = await retrieveAccountKnowledge({ vault }, { accountName, now: new Date(), followLinks: false }).catch(() => null);
+  const own = k?.claims.filter((c) => c.sourceKind === 'vault') ?? [];
+  const pick = own.find((c) => /#yardflow wedge$/i.test(c.sourceId)) ?? own.find((c) => /#next_action$/.test(c.sourceId)) ?? own.find((c) => !/#next_action$/.test(c.sourceId)) ?? null;
+  if (!pick) return null;
+  return { text: pick.text.slice(0, 400), at: k?.coverage.find((c) => c.source === 'vault')?.indexedAt?.slice(0, 10) ?? null, observedAt: pick.observedAt, indexedAt: pick.indexedAt, sourceId: pick.sourceId };
 }
 
 async function defaultReadFile(path: string): Promise<string | null> {
