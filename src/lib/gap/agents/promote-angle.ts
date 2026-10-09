@@ -1,8 +1,8 @@
 /**
- * PROMOTE AN ACCEPTED ANGLE INTO THE EXISTING DRAFT WORKFLOW (C24 of the commercial-context audit, 2026-10-08).
- * Server only. The bridge from a prepared angle (develop_angle's result: agents/develop-angle.ts, with its claim
- * references and its context revision) to the draft preparation GAP already has; no second draft store, no
- * second orchestration, nothing sent.
+ * PROMOTE AN ACCEPTED ANGLE INTO THE EXISTING DRAFT WORKFLOW (C24 of the commercial-context audit, 2026-10-08, with
+ * C25 folded in). Server only. The bridge from a prepared angle (develop_angle's result: agents/develop-angle.ts,
+ * with its claim references and its context revision) to the draft preparation GAP already has; no second draft
+ * store, no second orchestration, nothing sent.
  *
  * The seller accepts an angle for ONE person and ONE action; the lane is decided by what is on record:
  *
@@ -19,19 +19,29 @@
  *   research the accepted action is research, or the item has no message and no verified fact: nothing is drafted;
  *            said in words.
  *
+ * C25, BEFORE any draft or proposal on the email lanes: the existing drafts and in-flight work for the same person,
+ * deal, thread and purpose are read (the typed timeline with its Gmail drafts when the mailbox is wired, and GAP's
+ * own reply-draft state) and judged by context/assemble.ts competingWork. Found and unchosen: the promotion refuses
+ * with the items, the line and the offers; an unsent draft with the seller's own edits is never overwritten (only
+ * `revise` is offered; `fresh` is refused); a reusable draft offers `reuse` or `fresh`. `reuse` and `revise` return
+ * the existing item and create nothing.
+ *
  * Every promotion is one append-only ledger row (`angle.promoted` on the item) carrying the task id, the context
  * revision the angle was prepared against, the claim references (source ids and dates) and the destination (the
- * draft id, the hypothesis id or the href), so the draft links back to its sources and its revision. Pinned by
- * tests/unit/gap/stream-b-promote-angle.test.ts.
+ * draft id, the hypothesis id, the reused item or the href), so the draft links back to its sources and its
+ * revision. Pinned by tests/unit/gap/stream-b-promote-angle.test.ts.
  */
 import { loadAgentTask } from './tasks';
 import type { PreparedAngle } from './develop-angle';
-import { createSellerReplyDraft, type SellerReplyDeps } from '../execution/seller-reply';
+import { createSellerReplyDraft, loadReplyContext, type SellerReplyDeps } from '../execution/seller-reply';
 import { draftThesisFromFact, type DraftFromFactResult } from '../story/draft-from-fact';
 import { citedQuote, reportedFor } from '../research/propose';
 import { GATE_SIGNAL_SELECT } from '../research/evidence-gate';
 import { isPersona, type Persona } from '../taxonomy';
 import { accountHref } from '../account-intel/href';
+import { competingWork, type CompetingItem, type CompetingWork, type ExistingDraft } from '../context/assemble';
+import type { TimelineEvent } from '../context/commercial-context';
+import { loadThreadContext, type ThreadContextDeps } from '../context/thread-context';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -39,7 +49,8 @@ type PrismaLike = any;
 export const ANGLE_PROMOTED = 'angle.promoted' as const;
 export const PROMOTED_SUBJECT_TYPE = 'prospect' as const;
 
-export type PromoteLane = 'reply' | 'thesis' | 'call' | 'research';
+export type PromoteLane = 'reply' | 'thesis' | 'call' | 'research' | 'existing';
+export type PromoteChoice = 'reuse' | 'revise' | 'fresh';
 
 export interface PromoteAngleInput {
   taskId: string;
@@ -53,12 +64,25 @@ export interface PromoteAngleInput {
   body?: string | null;
   /** The thesis lane's family when the seller chose one. */
   problemFamily?: string | null;
+  /** C25: what to do about competing work the first call reported. */
+  choice?: PromoteChoice | null;
+}
+
+export interface CompetingQuery {
+  email: string | null;
+  threadId: string | null;
+  messageId: string | null;
+  now: Date;
 }
 
 export interface PromoteAngleDeps {
   reply?: SellerReplyDeps;
+  /** The typed timeline's mailbox wiring (the Gmail drafts to the person are read when listDrafts is given). */
+  thread?: ThreadContextDeps;
   /** The thesis proposal service (the real one by default; tests inject a stub since it reads prospectingSignal). */
   draftThesis?: typeof draftThesisFromFact;
+  /** C25: the existing drafts and in-flight work read (the typed timeline and GAP's own reply-draft state by default). */
+  competing?: (q: CompetingQuery) => Promise<{ timeline: TimelineEvent[]; drafts: ExistingDraft[] }>;
 }
 
 export interface PromotionLinks {
@@ -69,10 +93,14 @@ export interface PromotionLinks {
   sources: Array<{ sourceId: string; claimClass: string; at: string | null }>;
 }
 
+export type CompetingRefusal = { ok: false; reason: 'competing_work' | 'competing_seller_edit'; detail: string; competing: Extract<CompetingWork, { found: true }>; offers: PromoteChoice[] };
+
 export type PromoteAngleResult =
-  | { ok: true; lane: 'reply'; alreadyDrafted: boolean; gmailDraftId: string; contentHash: string; messageId: string; recipient: string; body: string; href: string; links: PromotionLinks; line: string }
-  | { ok: true; lane: 'thesis'; hypothesisId: string; preparation: Extract<DraftFromFactResult, { ok: true }>['preparation']; existing: boolean; href: string; links: PromotionLinks; line: string }
+  | { ok: true; lane: 'reply'; alreadyDrafted: boolean; gmailDraftId: string; contentHash: string; messageId: string; recipient: string; body: string; href: string; links: PromotionLinks; line: string; competing: CompetingWork }
+  | { ok: true; lane: 'thesis'; hypothesisId: string; preparation: Extract<DraftFromFactResult, { ok: true }>['preparation']; existing: boolean; href: string; links: PromotionLinks; line: string; competing: CompetingWork }
+  | { ok: true; lane: 'existing'; choice: 'reuse' | 'revise'; item: CompetingItem; href: string; links: PromotionLinks; line: string; competing: CompetingWork }
   | { ok: true; lane: 'call' | 'research'; href: string | null; links: PromotionLinks; line: string }
+  | CompetingRefusal
   | { ok: false; reason: 'task_not_found' | 'not_an_angle' | 'angle_not_prepared' | 'person_not_offered' | 'no_person' | 'no_verified_fact' | string; detail?: string };
 
 const str = (v: unknown): string | null => (typeof v === 'string' && v.trim() ? v.trim() : null);
@@ -115,6 +143,17 @@ async function record(prisma: PrismaLike, itemKey: string, actor: string, now: D
   await prisma.gapAuditEvent.create({ data: { kind: ANGLE_PROMOTED, actor, subject_type: PROMOTED_SUBJECT_TYPE, subject_id: itemKey, payload: { ...payload, at: now.toISOString() } } });
 }
 
+/** The default competing read: the typed timeline for the person and thread (with its Gmail drafts when the mailbox is wired) and GAP's own reply-draft state. Soft: an unreadable source is empty, never a throw. */
+async function defaultCompeting(prisma: PrismaLike, q: CompetingQuery, deps: PromoteAngleDeps): Promise<{ timeline: TimelineEvent[]; drafts: ExistingDraft[] }> {
+  const ctx = q.email || q.threadId ? await loadThreadContext(prisma, { email: q.email, threadId: q.threadId, now: q.now }, deps.thread).catch(() => null) : null;
+  const drafts: ExistingDraft[] = [];
+  if (q.messageId) {
+    const rc = await loadReplyContext(prisma, q.messageId, q.now, deps.reply).catch(() => null);
+    if (rc?.states.drafted) drafts.push({ id: rc.states.drafted.draftId, provider: 'gmail', threadId: rc.message.threadId, to: [rc.message.from], subject: rc.message.subject, purpose: 'buyer_conversation', updatedAt: rc.states.drafted.at, sellerEdited: false });
+  }
+  return { timeline: ctx?.events ?? [], drafts };
+}
+
 export async function promoteAngle(prisma: PrismaLike, input: PromoteAngleInput, deps: PromoteAngleDeps = {}): Promise<PromoteAngleResult> {
   const task = await loadAgentTask(prisma, input.taskId);
   if (!task) return { ok: false, reason: 'task_not_found' };
@@ -153,15 +192,34 @@ export async function promoteAngle(prisma: PrismaLike, input: PromoteAngleInput,
     return { ok: true, lane: 'research', href, links, line: 'Nothing drafted: the angle asks for research first. Check the source or find the people on the account page.' };
   }
 
-  // Email: a reply in their thread when they wrote in; else a thesis from the item's verified fact.
+  // Email. C25 first: what already exists for this person, deal, thread and purpose, before anything is created.
   const messageId = str(taskInput.inboundMessageId);
-  if (messageId && personEmail && (!persona || !input.personaId || (persona.email ?? '').toLowerCase() === personEmail)) {
+  const threadId = str(taskInput.threadId);
+  const replyLane = !!messageId && !!personEmail && (!persona || !input.personaId || (persona.email ?? '').toLowerCase() === personEmail);
+  const read = await (deps.competing ? deps.competing({ email: personEmail, threadId, messageId, now: input.now }) : defaultCompeting(prisma, { email: personEmail, threadId, messageId, now: input.now }, deps));
+  const competing = competingWork(read.timeline, read.drafts, { emails: personEmail ? [personEmail] : [], dealId: angle.dealId ?? null, threadId, purpose: 'buyer_conversation' });
+  const href = accountName ? `${accountHref(accountName)}/` : replyLane ? '/gap/replies/' : '/gap/signals/';
+  if (competing.found) {
+    const edited = competing.items.filter((i) => i.sellerEdited);
+    const offers: PromoteChoice[] = edited.length ? ['revise'] : ['reuse', 'fresh'];
+    if (!input.choice || (input.choice === 'fresh' && edited.length) || (input.choice === 'reuse' && edited.length)) {
+      return { ok: false, reason: edited.length ? 'competing_seller_edit' : 'competing_work', detail: edited.length ? `${competing.line} An unsent draft carries your own edits: revise it, GAP will not write a second one.` : competing.line, competing, offers };
+    }
+    if (input.choice === 'reuse' || input.choice === 'revise') {
+      const item = (input.choice === 'revise' ? edited[0] : null) ?? competing.items[0];
+      await record(prisma, task.itemKey, input.actor, input.now, { taskId: task.id, lane: 'existing', choice: input.choice, itemId: item.id, provider: item.provider, href, contextRevision: links.contextRevision, sources: links.sources });
+      const what = item.subject ? `"${item.subject}"` : 'the draft';
+      return { ok: true, lane: 'existing', choice: input.choice, item, href, links, competing, line: input.choice === 'reuse' ? `Reusing the existing draft ${what} (${item.provider === 'gmail' ? 'in Gmail' : 'in GAP'}, ${item.at.slice(0, 10)}): send or edit it there; nothing new was written.` : `Revise the existing draft ${what} (${item.provider === 'gmail' ? 'in Gmail' : 'in GAP'}, ${item.at.slice(0, 10)}): it carries your edits, so GAP wrote nothing over it.` };
+    }
+  }
+
+  // Email: a reply in their thread when they wrote in; else a thesis from the item's verified fact.
+  if (replyLane) {
     const body = (input.body ?? composeAngleReply(angle, { name: personName, email: personEmail }, str(taskInput.lastWroteAt))).trim();
-    const r = await createSellerReplyDraft(prisma, { messageId, body, actor: input.actor, now: input.now }, deps.reply);
+    const r = await createSellerReplyDraft(prisma, { messageId: messageId!, body, actor: input.actor, now: input.now }, deps.reply);
     if (!r.ok) return { ok: false, reason: r.reason, detail: r.detail };
-    const href = accountName ? `${accountHref(accountName)}/` : '/gap/replies/';
     await record(prisma, task.itemKey, input.actor, input.now, { taskId: task.id, lane: 'reply', messageId, gmailDraftId: r.drafted.gmailDraftId, contentHash: r.drafted.contentHash, alreadyDrafted: r.alreadyDrafted, recipient: personEmail, contextRevision: links.contextRevision, sources: links.sources });
-    return { ok: true, lane: 'reply', alreadyDrafted: r.alreadyDrafted, gmailDraftId: r.drafted.gmailDraftId, contentHash: r.drafted.contentHash, messageId, recipient: personEmail, body, href, links, line: `${r.alreadyDrafted ? 'The Gmail draft of this reply already exists' : 'A Gmail draft of the reply is saved'} in ${personName ?? personEmail}'s thread. Edit or send it there, or CONFIRM + SEND from GAP; nothing was sent.` };
+    return { ok: true, lane: 'reply', alreadyDrafted: r.alreadyDrafted, gmailDraftId: r.drafted.gmailDraftId, contentHash: r.drafted.contentHash, messageId: messageId!, recipient: personEmail!, body, href, links, competing, line: `${r.alreadyDrafted ? 'The Gmail draft of this reply already exists' : 'A Gmail draft of the reply is saved'} in ${personName ?? personEmail}'s thread. Edit or send it there, or CONFIRM + SEND from GAP; nothing was sent.` };
   }
 
   const signalId = str(taskInput.signalId) ?? (task.itemKey.startsWith('signal:') ? task.itemKey.slice(7) : null);
@@ -172,10 +230,10 @@ export async function promoteAngle(prisma: PrismaLike, input: PromoteAngleInput,
   const draft = deps.draftThesis ?? draftThesisFromFact;
   const t = await draft(prisma, { accountName, factId: signalId, personaId: persona?.id ?? null, persona: personaKeyOf(persona), observation, problemHypothesis: angle.whyItMatters, falsificationQuestions: angle.starters, whatANoMeans: angle.caveat, problemFamily: input.problemFamily ?? null, actor: input.actor, now: input.now });
   if (!t.ok) return { ok: false, reason: t.reason, detail: t.detail };
-  const href = `/gap/preview/${encodeURIComponent(t.hypothesisId)}`;
+  const reviewHref = `/gap/preview/${encodeURIComponent(t.hypothesisId)}`;
   await record(prisma, task.itemKey, input.actor, input.now, { taskId: task.id, lane: 'thesis', hypothesisId: t.hypothesisId, preparation: t.preparation, existing: t.existing, factId: signalId, personaId: persona?.id ?? null, contextRevision: links.contextRevision, sources: links.sources });
   const words = t.preparation === 'submitted' ? 'is under review: approve it there and the routing prepares the email through the usual draft' : t.preparation === 'in_use' ? 'is already in use' : t.preparation === 'incomplete' ? `needs ${t.missing.join(', ')} before it can be reviewed` : `is a draft (${t.submitRefusal ?? 'not submitted'})`;
-  return { ok: true, lane: 'thesis', hypothesisId: t.hypothesisId, preparation: t.preparation, existing: t.existing, href, links, line: `The angle ${t.existing ? 'joins the existing proposal, which' : 'is now a proposal that'} ${words}. Nothing was sent.` };
+  return { ok: true, lane: 'thesis', hypothesisId: t.hypothesisId, preparation: t.preparation, existing: t.existing, href: reviewHref, links, competing, line: `The angle ${t.existing ? 'joins the existing proposal, which' : 'is now a proposal that'} ${words}. Nothing was sent.` };
 }
 
 /** The promotions recorded for one item, newest first (the UI's "prepared" state beside the angle). */
