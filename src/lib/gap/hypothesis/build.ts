@@ -27,7 +27,7 @@ import {
 } from '../taxonomy';
 import { expiresAtFor } from './machine';
 import { validateObservation } from './observation';
-import { citedQuote } from '../research/propose';
+import { citedQuote, reportedFor } from '../research/propose';
 import { observationTitle } from '../research/source-label';
 import { isPhysicalOpsFact } from '../research/facts';
 
@@ -337,10 +337,10 @@ function secondaryFamilies(primary: ProblemFamily, hits: Record<string, number>)
  * formatter research uses, research/propose.ts citedQuote), never a signal
  * title. The buyer reads a fact, not "10-Q mentions: <keyword>".
  */
-function buildObservation(citable: ClassifiedSignal[], accountName: string): string {
+function buildObservation(citable: ClassifiedSignal[], accountName: string, now: Date): string {
   return citable
     .slice(0, OBSERVATION_MAX_SIGNALS)
-    .map((member) => citedQuote(observationTitle(member.title), member.signal.evidenceText ?? '', member.signal.id, accountName))
+    .map((member) => citedQuote(observationTitle(member.title), member.signal.evidenceText ?? '', member.signal.id, accountName, reportedFor({ observed_at: member.signal.observedAt, freshness_expires_at: member.signal.freshnessExpiresAt ?? null, type: member.signal.type, evidence_text: member.signal.evidenceText ?? null }, now)))
     .join(' ');
 }
 
@@ -441,7 +441,7 @@ export function buildCandidates(input: BuildInput): BuildResult {
       const signalIds = group.members.map((member) => member.signal.id);
 
       // 5: observation from verbatim titles, validated against the linked ids.
-      const observation = buildObservation(group.citable, accountName);
+      const observation = buildObservation(group.citable, accountName, now);
       const validation = validateObservation(observation, signalIds);
       if (!validation.ok) {
         skipped.push({ personaId: persona.id, signalId: group.citable[0].signal.id, reason: 'observation_invalid' });

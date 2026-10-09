@@ -350,7 +350,7 @@ export function projectAnchor(i: AnchorInput): OutreachAnchor {
         if (!notAnOpening.some((n) => n.factId === fact.id)) notAnOpening.push({ story: s.text, sourceLabel: `${host(fact.url) ?? (fact.title || 'source')}, ${day(fact.publishedAt)}`, sourceUrl: fact.url, factId: fact.id, line: noOpeningLine(fact.quote) });
         continue;
       }
-      draftable.push({ approach, story: s.text, sourceLabel: `${host(fact.url) ?? (fact.title || 'source')}, ${day(fact.publishedAt)}`, sourceUrl: fact.url, factId: fact.id, proposedObservation: citedQuote(fact.title || host(fact.url) || 'source', fact.quote.trim().replace(/\s+/g, ' '), fact.id, i.accountName), claimClass: fact.claimClass ?? null, currentLine: fact.usabilityLine ?? (fact.expiresAt ? currentnessLine({ current: new Date(fact.expiresAt).getTime() > i.now.getTime(), until: fact.expiresAt, basis: 'type_window' }) : null) });
+      draftable.push({ approach, story: s.text, sourceLabel: `${host(fact.url) ?? (fact.title || 'source')}, ${day(fact.publishedAt)}`, sourceUrl: fact.url, factId: fact.id, proposedObservation: citedQuote(fact.title || host(fact.url) || 'source', fact.quote.trim().replace(/\s+/g, ' '), fact.id, i.accountName, { historical: fact.historical ?? (!!fact.expiresAt && new Date(fact.expiresAt).getTime() <= i.now.getTime()), at: fact.publishedAt }), claimClass: fact.claimClass ?? null, currentLine: fact.usabilityLine ?? (fact.expiresAt ? currentnessLine({ current: new Date(fact.expiresAt).getTime() > i.now.getTime(), until: fact.expiresAt, basis: 'type_window' }) : null) });
     }
   }
   // NOT OFFERED (I06): a checked, citable story that is UNUSABLE (closed, undated, superseded; an ended one is told in

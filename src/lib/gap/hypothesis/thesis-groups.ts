@@ -21,7 +21,7 @@ import { actionabilityOf, EVIDENCE_REFUSALS, outreachReadiness, type ActionSigna
 import { evidenceDepth, originKeyOf, type DepthSignal, type EvidenceDepth } from '../research/depth';
 import { GATE_SIGNAL_SELECT, outreachFactRefusal, sendableEvidence } from '../research/evidence-gate';
 import { factUsability, isUsableFact } from '../research/currentness';
-import { citedQuote } from '../research/propose';
+import { citedQuote, reportedFor } from '../research/propose';
 import { runEvidenceResearch, type ResearchDeps, type ResearchResult } from '../research/run';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -346,7 +346,7 @@ export async function useEvidenceForThesis(
   if (!primary) return { ok: false, reason: `primary_not_chosen:${primaryId}`, results: [] };
 
   // The observation is the ONE primary fact, quoted whole with its source label and citation.
-  const observation = citedQuote(primary.title ?? '', primary.evidence_text ?? '', primary.id, group.accountName);
+  const observation = citedQuote(primary.title ?? '', primary.evidence_text ?? '', primary.id, group.accountName, reportedFor(primary, input.now));
   if (sendableEvidence(observation, [primary], group.accountName).tier !== 'VERIFIED_FACT') return { ok: false, reason: 'observation_unsupported', results: [] };
   if (!openerFits(observation)) return { ok: false, reason: `opener_too_long:${primary.id}`, results: [] };
 
