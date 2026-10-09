@@ -23,7 +23,7 @@ import { recordOverride, loadOverrides } from '../context/classification-overrid
 import { loadThreadContext } from '../context/thread-context';
 import { peopleState, type StateEvent } from '../work/people-state';
 import { externallyUsable, validateClaims } from '../context/commercial-context';
-import { gapLines } from '../context/assemble';
+import { assembleCommercialContext, gapLines } from '../context/assemble';
 import { gapGmailSender } from '../execution/gap-sender';
 import type { IdentityContext } from '../identity/resolve';
 import type { WorkDay } from '../work/list';
@@ -37,7 +37,7 @@ type Generate = (prompt: string, maxTokens?: number) => Promise<{ text: string; 
 export type DispositionStatus = 'demonstrated' | 'covered_by_test' | 'documented' | 'exception';
 export interface TicketDisposition { id: string; status: DispositionStatus; evidence: string }
 
-export const TICKET_IDS = ['C01', 'C02', 'C03', 'C04', 'C05', 'C06', 'C07', 'C08', 'C09', 'C10', 'C11', 'C12', 'C13', 'C14', 'C15', 'C16', 'C17', 'C18', 'C19', 'C20', 'C21', 'C22', 'C23', 'C24', 'C25', 'C26', 'C27', 'C28', 'C29', 'C30', 'C31', 'C32', 'C33', 'C34', 'C35', 'C36', 'C37', 'C38a', 'C38b', 'C38c', 'C39', 'C40', 'C41', 'C42', 'C43', 'C44'] as const;
+export const TICKET_IDS = ['C01', 'C02', 'C03', 'C04', 'C05', 'C06', 'C07', 'C08', 'C09', 'C10', 'C11', 'C12', 'C13', 'C14', 'C15', 'C16', 'C17', 'C18', 'C19', 'C20', 'C21', 'C22', 'C23', 'C24', 'C25', 'C26', 'C27', 'C28', 'C29', 'C30', 'C31', 'C32', 'C33', 'C34', 'C35', 'C36', 'C37', 'C38a', 'C38b', 'C38c', 'C39', 'C40', 'C41', 'C42', 'C43', 'C44', 'C55'] as const;
 
 export const KESTREL = 'Kestrel Logistics';
 export const DAN = 'd.keller@kestrelgroup.example';
@@ -234,6 +234,12 @@ export async function replayOctober8(prisma: PrismaLike, opts: { now: Date; case
   demo('C17', packet.opportunity.status === 'open' && packet.sellerHypotheses.some((c) => /No associated deal yet/.test(c.text) && c.authority !== 'deal_existence'), 'the CRM answers deal existence (open) while the vault no-deal line stays a seller note');
   demo('C18', externallyUsable([...packet.buyerFacts, ...packet.sellerHypotheses, ...packet.externalFacts]).every((c) => c.claimClass === 'buyer_said' || c.claimClass === 'checked_public'), 'external use holds buyer words and checked facts only');
   documented('C19', 'docs/gap/CLAUDE_KNOWLEDGE_INVENTORY.md (builder B, cb2a7fd0)');
+  // C55 through the assembler's rejected adapter (P2-7): a Clawd wedge restating a rejected hypothesis is superseded by the rejection, visible, never external.
+  const rejectedAt = new Date(now.getTime() - 19 * 86_400_000).toISOString();
+  const guarded = await assembleCommercialContext({ ...adapters, rejected: async () => [{ accountName: KESTREL, family: 'detention', problemHypothesis: 'Wedge: detention at the Chattanooga yard (inferred from job postings).', at: rejectedAt, citedBy: ['hypothesis:h-rej', 'disposition:d-rej'] }] }, { accountName: KESTREL, aliases: ['kestrel'], domain: 'kestrelgroup.example', people: [], now });
+  const wedgeClaim = [...guarded.packet.sellerHypotheses, ...guarded.packet.buyerFacts].find((c) => /detention at the Chattanooga/.test(c.text)) ?? null;
+  const guardedAll = [...guarded.packet.buyerFacts, ...guarded.packet.sellerHypotheses, ...guarded.packet.externalFacts];
+  demo('C55', !!wedgeClaim && /^rejected:/.test(wedgeClaim.supersededBy ?? '') && /\[rejected /.test(wedgeClaim.text) && !externallyUsable(guardedAll).some((c) => c.claimId === wedgeClaim.claimId) && guarded.packet.buyerFacts.every((c) => !c.supersededBy?.startsWith('rejected:')), wedgeClaim ? `the wedge carries supersededBy ${wedgeClaim.supersededBy ?? 'nothing'} and stays visible: "${wedgeClaim.text.slice(-70)}"; not externally usable; no buyer line touched` : 'the wedge claim was not found in the packet');
   demo('C20', packet.coverage.length >= 4 && gapLines(packet).length >= 0, `coverage rows: ${packet.coverage.map((c) => `${c.source}:${c.completeness}`).join(', ')}`);
   demo('C21', !!angle && !!angle.contextRevision, `the angle carries context revision ${angle?.contextRevision ?? 'none'}`);
   demo('C22', !!angle && Array.isArray(angle.support) && angle.support.length > 0, `support entries: ${angle?.support?.length ?? 0}`);

@@ -44,6 +44,8 @@ export function mockedGenerator(opts: { bad?: string | null } = {}): Generate {
     const dealLine = (/is in (?:an open HubSpot deal|\d+ open HubSpot deals): ([^\n]+)/m.exec(prompt)?.[1]?.trim() ?? null)?.replace(/\bYardFlow - /g, '') ?? null;
     const placed = /^Account: /m.test(prompt);
     const gaps = /^Not read \(say so in the caveat when it matters\): (.*)$/m.exec(prompt)?.[1] ?? null;
+    // The record's next accepted meeting (P2-9): the angle writes toward it, never a cold re-open.
+    const meeting = /^A meeting is ahead: ([^(]+?)\s*\("([^"]*)"\), accepted/m.exec(prompt);
     const bad = !!opts.bad && prompt.includes(opts.bad);
     const support: Array<{ text: string; refs: string[]; kind: 'fact' | 'inference' }> = [];
     const sentences: string[] = [];
@@ -65,6 +67,10 @@ export function mockedGenerator(opts: { bad?: string | null } = {}): Generate {
         const c = [...checked].sort((a, b) => dateOf(b.date) - dateOf(a.date))[0];
         const s = `A checked fact reported ${c.date} says ${firstSentence(c.text)}; the date says how current it is.`;
         sentences.push(s); support.push({ text: s, refs: [c.label], kind: 'fact' });
+      }
+      if (meeting) {
+        const s = `A meeting is ahead on ${meeting[1].trim()} (${meeting[2]}), so the next note writes toward that thread rather than reopening cold.`;
+        sentences.push(s); support.push({ text: s, refs: [], kind: 'inference' });
       }
       const s = 'My guess is their yards are where the next conversation sits, and the record above is the only basis for saying so.';
       sentences.push(s); support.push({ text: s, refs: [], kind: 'inference' });

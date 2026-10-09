@@ -57,6 +57,16 @@ export interface SinkRun {
 }
 
 const dayOf = (iso: string | null) => (iso ? iso.slice(0, 10) : null);
+/** "Accepted: Kestrel roadmap sync, Oct 14 2:00 PM New York." + its instant -> "Accepted: Kestrel roadmap sync @ Wed Oct 14, 2026 2:00pm (EDT)". */
+function calendarSubject(text: string, at: Date): string {
+  const m = /^(Accepted|Declined|Tentative|Invitation|Updated invitation|Cancelled event)\s*:\s*([^,@]+)/i.exec(text);
+  const kind = m?.[1] ?? 'Invitation';
+  const title = (m?.[2] ?? text).trim();
+  const ny = new Intl.DateTimeFormat('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'America/New_York' }).formatToParts(at);
+  const part = (t: string) => ny.find((x) => x.type === t)?.value ?? '';
+  const tz = at.getTime() >= Date.UTC(at.getUTCFullYear(), 2, 8) && at.getTime() < Date.UTC(at.getUTCFullYear(), 10, 1) ? 'EDT' : 'EST';
+  return `${kind}: ${title} @ ${part('weekday')} ${part('month')} ${part('day')}, ${part('year')} ${part('hour')}:${part('minute')}${part('dayPeriod').toLowerCase()} (${tz})`;
+}
 const PERSON_SOURCE = (c: ReferenceCase, s: ReferenceSource) => !!c.person && s.kind === 'gmail';
 
 /** The reference case's sources as sink adapters for the real assembler; every call is logged. */
@@ -119,7 +129,8 @@ export function sinkAdapters(c: ReferenceCase, opts: { remove?: string | null; p
         const sent = /^Sent:/.test(s.text);
         const id = s.sourceId.replace(/^(gmail|calendar):(draft:)?/, '');
         const at = new Date(s.at ?? '1970-01-01T00:00:00.000Z');
-        const subject = s.kind === 'calendar' ? s.text.replace(/\.$/, '') : isDraft ? 'Re: the conversation' : sent ? 'Re: the conversation' : 'Re: the conversation';
+        // A calendar source becomes a Google-shaped RSVP subject ("Accepted: <title> @ Wed Oct 14, 2026 2:00pm (EDT)") so the real parser reads its start.
+        const subject = s.kind === 'calendar' ? calendarSubject(s.text, at) : 'Re: the conversation';
         if (isDraft || sent) outbound.push({ id, threadId: `t-${c.id}`, internalDate: at, to: c.person?.email ?? '', subject, text: s.text.replace(/^(Sent|Draft[^:]*):\s*/, ''), isDraft, rfcMessageId: null });
         else inbound.push({ id, thread_id: `t-${c.id}`, rfc_message_id: null, from_email: s.kind === 'calendar' ? (c.person?.email ?? 'calendar-notification@google.com') : (c.person?.email ?? 'someone@example'), from_name: c.person?.name ?? null, subject, body_text: s.text, snippet: s.text.slice(0, 120), received_at: at, source: 'gmail', to: ['casey@yardflow.ai'] });
       }
