@@ -100,7 +100,7 @@ async function main() {
     const plan: DayPlan = { day, plannedAt: now.toISOString(), items: refreshed, counts: load.day.counts, fresh: false };
     // Builder B's assignability (merged later): read when exported, else every item is assignable.
     const assignable = (assignmentModule as unknown as { assignable?: (p: unknown, plan: DayPlan, item: PlanItem) => Promise<{ ok: boolean; reason?: string } | boolean> }).assignable;
-    const top: Array<{ item: PlanItem; card: WorkCard | undefined; prepared: string; why: string; know: string[]; move: string | null; coverage: string | null; held: string | null }> = [];
+    const top: Array<{ item: PlanItem; card: WorkCard | undefined; prepared: string; why: string; know: string[]; move: string | null; coverage: string | null; held: string | null; sellerNote: string[] }> = [];
     for (const item of refreshed.slice(0, TOP)) {
       const built = await buildAssignment(prisma, { plan, item, revision: 0, baseUrl: 'https://modex-gtm.vercel.app', actionSecret: null, commandsEnabled: false, now }).catch((e) => ({ text: `(assignment could not be built: ${e instanceof Error ? e.message : String(e)})`, prepared: { kind: 'none' as const }, subject: '', html: '', contentHash: '' }));
       const a = assignable ? await assignable(prisma, plan, item).catch(() => null) : null;
@@ -113,6 +113,7 @@ async function main() {
         know: section(built.text, 'What we know:'),
         move: line(built.text, 'The move:'),
         coverage: line(built.text, 'Not read this time:') ?? line(built.text, 'Partly read:'),
+        sellerNote: section(built.text, 'Your vault note'),
         held,
       });
     }
@@ -156,6 +157,7 @@ async function main() {
       L.push(`- GAP has prepared: ${t.prepared}.`);
       if (t.move) L.push(`- The move: ${t.move}`);
       if (t.know.length) { L.push('- What we know:'); for (const k of t.know) L.push(`  ${k}`); }
+      if (t.sellerNote.length) { L.push('- Your vault note (seller-only, the knowledge program):'); for (const k of t.sellerNote) L.push(`  ${k}`); }
       L.push(`- Coverage: ${t.coverage ?? 'nothing reported as unread by the Ask context (coverage reporting lands with builder C)'}`);
       if (t.held) L.push(`- Held from assignment: ${t.held}`);
       L.push('');
