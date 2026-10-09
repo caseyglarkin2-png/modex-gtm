@@ -141,3 +141,25 @@ describe('C33: the greeting follows the hour of the send; a replay says when its
     for (const line of resend.text.split('\n')) expect(line).not.toMatch(/^(START|APPROVE|REVISE|SKIP|DEFER|DONE|NEXT|HELP)\b/);
   });
 });
+
+describe('C57 pass 2 (C32): a person at an account with more than one open deal is not given one of them', () => {
+  const dave = (deals: NonNullable<NonNullable<IntelItem['person']>['deals']>): IntelItem => intelItem({ kind: 'person', id: 'dave@kencogroup.com', title: 'Dave Kiesling, VP Operations at Kenco', accountName: 'Kenco', line: 'Wrote to us Sep 16, 2026 (2 messages).', opportunity: 'open', person: { email: 'dave@kencogroup.com', name: 'Dave Kiesling', title: 'VP Operations', lastWroteAt: '2026-09-16T00:00:00.000Z', messages: 2, deals } });
+  const TWO = [
+    { id: '1001', name: 'YardFlow - Kenco Chattanooga', stage: 'Qualified to buy', nextStep: 'Send the pilot scope to Dave.' },
+    { id: '1002', name: 'YardFlow - Kenco Columbus', stage: 'Appointment scheduled', nextStep: 'Book the site walk with Ben.' },
+  ];
+
+  it('two open deals and no settled scope: the card says how many and that the person\'s deal is not settled, names neither, and links the deal brief', () => {
+    const out = renderBriefing({ plan: plan([]), dayToken: 'tok', links, commandsEnabled: false, legacyDigest: false, intel: intelOf([], [dave(TWO)]) }, MORNING);
+    expect(out.text).toContain("   2 open deals at Kenco; the person's deal is not settled. Work it from the deal brief: https://x/accounts/kenco/?view=brief");
+    for (const word of ['Chattanooga', 'Columbus', 'Qualified to buy', 'Appointment scheduled', 'Send the pilot scope', 'Book the site walk']) expect(out.text).not.toContain(word);
+    expect(out.html).toContain('<a href="https://x/accounts/kenco/?view=brief">Work it from the deal</a>');
+    expect(out.html).not.toContain('Chattanooga');
+  });
+
+  it('one open deal: the deal line is unchanged (name, stage, whole next step, deal brief link)', () => {
+    const out = renderBriefing({ plan: plan([]), dayToken: 'tok', links, commandsEnabled: false, legacyDigest: false, intel: intelOf([], [dave([TWO[0]])]) }, MORNING);
+    expect(out.text).toContain('   In a deal at Kenco: YardFlow - Kenco Chattanooga (Qualified to buy). Next step: Send the pilot scope to Dave. Work it from the deal: https://x/accounts/kenco/?view=brief');
+    expect(out.text).not.toContain('not settled');
+  });
+});

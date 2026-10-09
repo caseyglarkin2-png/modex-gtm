@@ -176,10 +176,14 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
   // C32: an item at an account with an open deal names the deal (stage and its whole next step) and links to its brief.
   const dealLine = (it: IntelItem): { text: string; href: string } | null => {
     if (it.opportunity !== 'open' || !it.accountName) return null;
-    const d = it.person?.deals?.[0] ?? null;
+    const href = links.deal ? links.deal(it.accountName) : links.account ? links.account(it.accountName) : links.work;
+    const deals = it.person?.deals ?? [];
+    // C57 pass 2: with more than one open deal and no settled scope, no deal is presented as the person's; the brief
+    // is linked without naming one (the same rule decide.ts holds for the contact lookup).
+    if (deals.length > 1) return { text: `${deals.length} open deals at ${it.accountName}; the person's deal is not settled. Work it from the deal brief: ${href}`, href };
+    const d = deals[0] ?? null;
     const name = d?.name ?? 'an open HubSpot deal';
     const step = d?.nextStep ? ` Next step: ${endSentence(clipAtSentence(d.nextStep, 400))}` : '';
-    const href = links.deal ? links.deal(it.accountName) : links.account ? links.account(it.accountName) : links.work;
     return { text: `In a deal at ${it.accountName}: ${name}${d?.stage ? ` (${d.stage})` : ''}.${step} Work it from the deal: ${href}`, href };
   };
   // I05: what Casey pursued comes first: the angle when it is ready, the state when it is not.
