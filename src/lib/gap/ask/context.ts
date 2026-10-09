@@ -42,17 +42,23 @@ export interface AskCoverageInputs {
   /**
    * B3: the vault's own coverage from the retrieval (context/retrieval.ts SourceCoverage: configured, reachable,
    * completeness, watermark, indexedAt, omittedReason) plus what it held (builder A's table adapter: the count and
-   * its word, "92 calls"). When absent the row falls back to the configuration check and the story's note row.
+   * its word, "92 calls"). Builder A's adapter also writes `summary` on the row ("synced 2026-10-09T14:39Z, 92 calls,
+   * 78 account notes"): when present it is what the line says, with the instant read on the seller's clock ("synced
+   * 10:39 New York, 92 calls, 78 account notes"). When absent the row falls back to the configuration check and the
+   * story's note row.
    */
-  vault?: { configured: boolean; reachable?: boolean; completeness?: 'complete' | 'partial' | 'unknown'; watermark?: string | null; indexedAt?: string | null; omittedReason?: string | null; count?: number | null; countWord?: string | null } | null;
+  vault?: { configured: boolean; reachable?: boolean; completeness?: 'complete' | 'partial' | 'unknown'; watermark?: string | null; indexedAt?: string | null; omittedReason?: string | null; summary?: string | null; count?: number | null; countWord?: string | null } | null;
 }
 
-/** "synced 10:39" (the seller's clock, America/New_York) from an ISO instant; null when none. */
-const syncedAt = (iso: string | null | undefined): string | null => {
-  if (!iso) return null;
+/** "10:39 New York" (the seller's clock) from an ISO instant; null when it does not parse. */
+const clock = (iso: string): string | null => {
   const d = new Date(iso);
-  return Number.isNaN(d.getTime()) ? null : `synced ${d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'America/New_York' })}`;
+  return Number.isNaN(d.getTime()) ? null : `${d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'America/New_York' })} New York`;
 };
+const syncedAt = (iso: string | null | undefined): string | null => (iso && clock(iso) ? `synced ${clock(iso)}` : null);
+/** The adapter's summary with every ISO instant in it said on the seller's clock. */
+const ISO_INSTANT = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?(?:Z|[+-]\d{2}:?\d{2})/g;
+const summaryOnClock = (summary: string): string => summary.replace(ISO_INSTANT, (m) => clock(m) ?? m).replace(/\s+/g, ' ').trim();
 const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? '' : 's'}`;
 
 function vaultRow(i: AskCoverageInputs): AskCoverage {
@@ -60,7 +66,7 @@ function vaultRow(i: AskCoverageInputs): AskCoverage {
   if (!v) return { source: 'vault', status: !i.vaultConfigured ? 'not_read' : i.vaultNote ? 'read' : 'partial', detail: !i.vaultConfigured ? 'not configured' : i.vaultNote ? null : 'no account note found, or the read failed' };
   if (!v.configured) return { source: 'vault', status: 'not_read', detail: 'not configured' };
   if (v.reachable === false) return { source: 'vault', status: 'failed', detail: v.omittedReason || 'could not be read' };
-  const held = [syncedAt(v.indexedAt), typeof v.count === 'number' ? plural(v.count, v.countWord || 'claim') : null].filter((x): x is string => !!x).join(', ');
+  const held = v.summary?.trim() ? summaryOnClock(v.summary) : [syncedAt(v.indexedAt), typeof v.count === 'number' ? plural(v.count, v.countWord || 'claim') : null].filter((x): x is string => !!x).join(', ');
   if (v.completeness === 'partial') return { source: 'vault', status: 'partial', detail: [held, v.omittedReason].filter(Boolean).join('; ') || 'partly read' };
   return { source: 'vault', status: 'read', detail: held || null };
 }
