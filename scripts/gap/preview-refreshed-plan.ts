@@ -208,11 +208,16 @@ async function main() {
       const pursued = intel.pursued ?? [];
       L.push(`Pursued (${pursued.length}):`);
       for (const p of pursued) {
-        const px = p as unknown as { placedVia?: string | null; placementChanged?: boolean; placementLine?: string | null; line?: string | null };
-        L.push(`- ${p.title}: ${p.accountName ?? (p.accountHint ? `${p.accountHint} (no account yet)` : 'No account yet')}${px.placedVia ? ` (placed via ${px.placedVia})` : ''}; status ${p.status}; angle: ${p.angle ? esc(p.angle.whyItMatters).slice(0, 160) : 'none'}${px.placementLine ? `; ${px.placementLine}` : ''}`);
+        const px = p as unknown as { placedVia?: string | null; placementChanged?: boolean; placementLine?: string | null; ambiguousAmong?: string[]; ambiguityLine?: string | null; dealLine?: string | null };
+        const where = p.accountName ?? (px.ambiguityLine ? `AMBIGUOUS: ${px.ambiguityLine}` : p.accountHint ? `${p.accountHint} (no account yet)` : 'No account yet');
+        L.push(`- ${p.title}: ${where}${px.placedVia ? ` (placed via ${px.placedVia})` : ''}${px.dealLine ? `; ${px.dealLine}` : ''}; status ${p.status}; angle: ${p.angle ? esc(p.angle.whyItMatters).slice(0, 160) : 'none'}${px.placementLine ? `; ${px.placementLine}` : ''}`);
       }
       L.push('');
-      L.push(`People who wrote in, ranked (${intel.people.length} shown): ${intel.people.slice(0, 8).map((p) => `${p.accountName ?? p.accountHint ?? 'unplaced'}: ${esc(p.title)}`).join('; ')}`);
+      L.push(`People who wrote in, ranked (${intel.people.length} shown):`);
+      for (const p of intel.people.slice(0, 8)) {
+        const px = p as unknown as { placedVia?: string | null; ambiguityLine?: string | null; line?: string | null };
+        L.push(`- ${p.accountName ?? (px.ambiguityLine ? `AMBIGUOUS: ${px.ambiguityLine}` : p.accountHint ?? 'unplaced')}${px.placedVia ? ` (placed via ${px.placedVia})` : ''}: ${esc(p.title)}; ${esc(px.line ?? '').slice(0, 220)}`);
+      }
       L.push('');
       L.push(`Signals ranked (${intel.signals.length} shown): ${intel.signals.slice(0, 6).map((s) => `${s.accountName ?? s.accountHint ?? 'unplaced'}: ${esc(s.title).slice(0, 60)}`).join('; ')}`);
       L.push('');
