@@ -22,7 +22,7 @@
  * omitted reason); a vault offline, a Clawd timeout and a partial CRM read give a useful packet with honest gaps
  * over emptyPacket, never a fabricated empty history. Pinned by tests/unit/gap/stream-b-assemble.test.ts.
  */
-import { contextFingerprint, emptyPacket, validateClaims, type CommercialContextPacket, type Completeness, type ContextClaim, type ContextCommitment, type ContextIdentity, type ContextOpportunity, type ContextPerson, type SourceCoverage, type SourceKind, type TimelineEvent } from './commercial-context';
+import { contextFingerprint, emptyPacket, validateClaims, type CommercialContextPacket, type Completeness, type ContextClaim, type ContextCommitment, type ContextIdentity, type ContextOpportunity, type ContextPerson, type Purpose, type SourceCoverage, type SourceKind, type TimelineEvent } from './commercial-context';
 import { retrieveAccountKnowledge, type AccountKnowledge, type KnowledgeAdapters } from './retrieval';
 import { VERIFIED_EXCERPT, type GateSignal } from '../research/evidence-gate';
 import { factUsability } from '../research/currentness';
@@ -276,6 +276,100 @@ export async function assembleCommercialContext(adapters: AssembleAdapters, inpu
   const body = { identity, opportunity, relationship, timeline, buyerFacts, sellerHypotheses, commitments, incumbents, externalFacts };
   const packet: CommercialContextPacket = { ...body, coverage, assembledAt: input.now.toISOString(), revision: contextFingerprint(body) };
   return { packet, knowledge, refused };
+}
+
+/** ---------- C25: competing work before another draft is proposed ---------- */
+
+export interface ExistingDraft {
+  id: string;
+  provider: 'gmail' | 'gap';
+  threadId: string | null;
+  to: string[];
+  subject: string | null;
+  dealId?: string | null;
+  purpose?: Purpose | null;
+  /** The draft's own last-edit time (Gmail's, or the proposal's revision time). */
+  updatedAt: string;
+  /** True when the seller edited it (a GAP proposal the seller revised, a Gmail draft GAP did not write): never overwritten. */
+  sellerEdited: boolean;
+  revision?: string | number | null;
+}
+
+export interface CompetingWorkQuery {
+  /** The addresses the new draft would go to (the identity's people, or the one person chosen). */
+  emails: readonly string[];
+  dealId: string | null;
+  threadId: string | null;
+  purpose: Purpose | null;
+}
+
+export type CompetingReason = 'same_thread' | 'same_person' | 'same_deal' | 'same_purpose';
+
+export interface CompetingItem {
+  kind: 'draft' | 'in_flight';
+  id: string;
+  provider: TimelineEvent['provider'] | 'gap';
+  at: string;
+  subject: string | null;
+  to: string[];
+  threadId: string | null;
+  why: CompetingReason[];
+  sellerEdited: boolean;
+  /** reuse: send or revise what exists; revise: the seller edited it, so a new proposal may only revise it, never replace it. */
+  offer: 'reuse' | 'revise';
+  /** Always false: an existing draft is never overwritten by a new proposal (C25). */
+  overwrite: false;
+}
+
+export type CompetingWork = { found: false } | { found: true; items: CompetingItem[]; line: string };
+
+const lowerSet = (xs: readonly string[]) => new Set(xs.map((x) => x.trim().toLowerCase()).filter(Boolean));
+
+/**
+ * C25: before another draft proposal is generated from an angle, the existing drafts and in-flight work for the same
+ * identity, deal, thread and purpose are found and offered for reuse or revision. The same thread is competing work
+ * on its own; the same person is competing work when the deal or the purpose matches too (or neither is known), so
+ * a vendor-support draft to another person at the account is not. Deterministic: the same inputs give the same
+ * items in the same order (newest first). An unsent seller edit is only ever offered for revision.
+ */
+export function competingWork(timeline: readonly TimelineEvent[], drafts: readonly ExistingDraft[], q: CompetingWorkQuery): CompetingWork {
+  const emails = lowerSet(q.emails);
+  const judge = (x: { threadId: string | null; to: readonly string[]; dealId?: string | null; purpose?: Purpose | null }): CompetingReason[] => {
+    const why: CompetingReason[] = [];
+    if (q.threadId && x.threadId && x.threadId === q.threadId) why.push('same_thread');
+    const person = x.to.some((t) => emails.has(t.trim().toLowerCase()));
+    const deal = !!q.dealId && x.dealId === q.dealId;
+    const purpose = !!q.purpose && x.purpose === q.purpose;
+    const neither = (x.dealId === undefined || x.dealId === null) && (x.purpose === undefined || x.purpose === null);
+    if (person && (deal || purpose || neither || why.includes('same_thread'))) {
+      why.push('same_person');
+      if (deal) why.push('same_deal');
+      if (purpose) why.push('same_purpose');
+    }
+    return why;
+  };
+  const items: CompetingItem[] = [];
+  const seen = new Set<string>();
+  for (const d of drafts) {
+    const why = judge(d);
+    if (!why.length) continue;
+    seen.add(`${d.provider}:${d.id}`);
+    items.push({ kind: 'draft', id: d.id, provider: d.provider, at: d.updatedAt, subject: d.subject, to: d.to, threadId: d.threadId, why, sellerEdited: d.sellerEdited, offer: d.sellerEdited ? 'revise' : 'reuse', overwrite: false });
+  }
+  for (const e of timeline) {
+    if (!e.isDraft) continue;
+    if (e.providerIds.some((id) => seen.has(`${e.provider}:${id}`)) || seen.has(`${e.provider}:${e.id}`)) continue;
+    // The contract's event carries no thread id (requested of the lead for C08); a timeline draft is judged by its addressees and purpose.
+    const why = judge({ threadId: null, to: e.to, purpose: e.purpose });
+    if (!why.length) continue;
+    // A draft the timeline holds that no proposal of ours wrote is the seller's own: revise only.
+    items.push({ kind: 'in_flight', id: e.providerIds[0] ?? e.id, provider: e.provider, at: e.at, subject: e.subject, to: e.to, threadId: null, why, sellerEdited: true, offer: 'revise', overwrite: false });
+  }
+  items.sort((a, b) => b.at.localeCompare(a.at) || a.id.localeCompare(b.id));
+  if (!items.length) return { found: false };
+  const n = items.length;
+  const edited = items.filter((i) => i.sellerEdited).length;
+  return { found: true, items, line: `${n} existing draft${n === 1 ? '' : 's'} for this person and deal${edited ? ` (${edited} with your own edits, never overwritten)` : ''}: reuse or revise before a new one is written.` };
 }
 
 /** The seller words for the packet's gaps (C20): what was not read and why, one line per source with a gap. */
