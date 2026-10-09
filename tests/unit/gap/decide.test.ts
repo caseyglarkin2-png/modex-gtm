@@ -12,7 +12,9 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { ledgerDb } from './fixtures/ledger-db';
 import { applyDecision, decisionLine, parseDecisionKey } from '@/lib/gap/work/decide';
 import { PROSPECT_DECISION, loadDecided, loadIntelligence } from '@/lib/gap/work/intel';
-import { listAgentTasks, runAgentTasks } from '@/lib/gap/agents/tasks';
+import { claimAgentTasks, listAgentTasks, queueAgentTask, runAgentTasks } from '@/lib/gap/agents/tasks';
+import type { IdentityContext } from '@/lib/gap/identity/resolve';
+import type { InDealsSummary } from '@/lib/gap/deals/in-deals';
 import { ACTION_OPS, signActionToken, verifyActionToken } from '@/lib/gap/work/action-token';
 
 const NOW = new Date('2026-10-08T16:00:00Z');
@@ -155,5 +157,56 @@ describe('I05: a pursued item never vanishes', () => {
     const after = await loadIntelligence(c, { now: new Date(NOW.getTime() + 2000) });
     expect(after.pursued[0]).toMatchObject({ key: 'signal:s-old', status: 'ready', accountName: 'Kenco', angle: { proposedAction: 'email', peopleNamed: [{ personaId: 1, name: 'Dave Kiesling' }] } });
     expect(after.pursued[0].angle!.whyItMatters).toContain('the yards outside');
+  });
+});
+
+describe('C23: the kept angle is bound to its context revision', () => {
+  const CRAIG = 'craig.morrison@kencogroup.com';
+  const identity: IdentityContext = { accountsByHubspotCompanyId: new Map([['55608495412', 'Kenco Logistics']]), verifiedDomainToAccounts: new Map([['kencogroup.com', ['Kenco Logistics']]]), aliasToAccounts: new Map([['kenco', ['Kenco Logistics']]]), accountNames: ['Kenco Logistics', 'PepsiCo'] };
+  const summary = (nextStep: string): InDealsSummary => ({ status: 'complete', count: 1, openDeals: 1, unresolved: [], checkedAt: '2026-10-08T14:55:00.000Z', accounts: [{ accountName: 'Kenco Logistics', alsoRecordedAs: ['Kenco'], dealContacts: 1, people: [], known: 1, deals: [{ id: '62704698979', name: 'YardFlow - Kenco', stage: 'presentationscheduled', lastActivityAt: null, closeDate: null, nextStep, contactIds: ['234991610011'] }] }] });
+  const prepared = async () => ({ ok: true as const, result: { whyItMatters: 'prepared', accounts: [], roles: [], people: [], starters: ['a', 'b'], proposedAction: 'research' as const, caveat: null } });
+  const craigWorld = () => ledgerDb({ accounts: ['Kenco Logistics', 'PepsiCo'], personas: [], inbound: [{ id: 'm-c', thread_id: 't-c', from_email: CRAIG, from_name: 'Craig', subject: 'Re: the record', body_text: 'Poking holes in the Primo record now.', received_at: days(10), source: 'gmail', thread: { account_name: null } }] }, NOW);
+
+  it('an unchanged Pursue keeps the prepared angle with no new task; the same person placed at the account after the identity fix, or a new deal next step, replaces it; a repeat unchanged click still spends nothing', async () => {
+    const c = craigWorld().client();
+    const at = (n: number) => new Date(NOW.getTime() + n * 1000);
+    // Before the fix: no identity, no CRM read; the angle is prepared with no account.
+    const first = await applyDecision(c, { key: `person:${CRAIG}`, decision: 'pursue', actor: ACTOR, now: at(1) }, { identity: null, inDeals: async () => null, contactLookup: async () => null });
+    expect(first).toMatchObject({ ok: true, accountName: null, effects: ['angle_queued'] });
+    const [t1] = await listAgentTasks(c, { now: at(1), itemKey: `person:${CRAIG}` });
+    expect(typeof t1.input?.contextRevision).toBe('string');
+    expect(await runAgentTasks(c, { now: at(2), max: 5, claimer: 'test', handlers: { develop_angle: prepared } })).toMatchObject({ succeeded: 1 });
+    const same = await applyDecision(c, { key: `person:${CRAIG}`, decision: 'pursue', actor: ACTOR, now: at(3) }, { identity: null, inDeals: async () => null, contactLookup: async () => null });
+    expect(same).toMatchObject({ ok: true, angleTaskId: t1.id, effects: ['angle_kept'] });
+    expect((await listAgentTasks(c, { now: at(3), itemKey: `person:${CRAIG}` })).filter((t) => t.status === 'queued')).toHaveLength(0);
+    // After the fix: the verified domain places Craig at Kenco Logistics and the CRM read finds the deal: the old no-account angle is replaced.
+    const placed = await applyDecision(c, { key: `person:${CRAIG}`, decision: 'pursue', actor: ACTOR, now: at(4) }, { identity, inDeals: async () => summary('Reconnect at the end of October'), contactLookup: async () => null });
+    expect(placed).toMatchObject({ ok: true, accountName: 'Kenco Logistics', effects: ['angle_queued'] });
+    expect(placed.ok && placed.angleTaskId).not.toBe(t1.id);
+    const tasks = await listAgentTasks(c, { now: at(4), itemKey: `person:${CRAIG}` });
+    const t2 = tasks.find((t) => t.status === 'queued')!;
+    expect(t2.input).toMatchObject({ accountName: 'Kenco Logistics', opportunity: 'open' });
+    expect(t2.input?.contextRevision).not.toBe(t1.input?.contextRevision);
+    expect(await runAgentTasks(c, { now: at(5), max: 5, claimer: 'test', handlers: { develop_angle: prepared } })).toMatchObject({ succeeded: 1 });
+    // The same context again: kept, no spend. A changed deal next step: queued again.
+    const again = await applyDecision(c, { key: `person:${CRAIG}`, decision: 'pursue', actor: ACTOR, now: at(6) }, { identity, inDeals: async () => summary('Reconnect at the end of October'), contactLookup: async () => null });
+    expect(again).toMatchObject({ ok: true, angleTaskId: t2.id, effects: ['angle_kept'] });
+    const moved = await applyDecision(c, { key: `person:${CRAIG}`, decision: 'pursue', actor: ACTOR, now: at(7) }, { identity, inDeals: async () => summary('Send the phased proposal'), contactLookup: async () => null });
+    expect(moved).toMatchObject({ ok: true, effects: ['angle_queued'] });
+    expect(moved.ok && moved.angleTaskId).not.toBe(t2.id);
+    expect((await listAgentTasks(c, { now: at(7), itemKey: `person:${CRAIG}` })).filter((t) => t.kind === 'develop_angle')).toHaveLength(3);
+  });
+
+  it('a succeeded angle from before the rule (no revision on its input) is replaced by the next Pursue; a running task is still kept', async () => {
+    const c = craigWorld().client();
+    const legacy = await queueAgentTask(c, { kind: 'develop_angle', itemKey: `person:${CRAIG}`, itemToken: '', day: '2026-10-08', revision: 0, request: 'pursue', requestedBy: ACTOR, requestedFrom: 'app', input: { decision: 'pursue', email: CRAIG, accountName: null } }, { now: NOW, actor: ACTOR });
+    expect(await runAgentTasks(c, { now: new Date(NOW.getTime() + 1000), max: 5, claimer: 'test', handlers: { develop_angle: prepared } })).toMatchObject({ succeeded: 1 });
+    const r = await applyDecision(c, { key: `person:${CRAIG}`, decision: 'pursue', actor: ACTOR, now: new Date(NOW.getTime() + 2000) }, { identity: null, inDeals: async () => null, contactLookup: async () => null });
+    expect(r).toMatchObject({ ok: true, effects: ['angle_queued'] });
+    expect(r.ok && r.angleTaskId).not.toBe(legacy.id);
+    // Running (claimed, not finished): kept whatever the context, so two angle tasks never run at once on one item.
+    await claimAgentTasks(c, { now: new Date(NOW.getTime() + 3000), max: 5, claimer: 'test' });
+    const running = await applyDecision(c, { key: `person:${CRAIG}`, decision: 'pursue', actor: ACTOR, now: new Date(NOW.getTime() + 4000) }, { identity, inDeals: async () => summary('x'), contactLookup: async () => null });
+    expect(running).toMatchObject({ ok: true, angleTaskId: r.ok ? r.angleTaskId : null, effects: ['angle_kept'] });
   });
 });

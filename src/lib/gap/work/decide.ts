@@ -27,6 +27,7 @@ import type { IdentityContext } from '../identity/resolve';
 import { loadInDealsSummary, type InDealsSummary } from '../deals/in-deals';
 import type { ContactLookup } from '../opportunity/contact-reads';
 import { DECISIONS, PROSPECT_DECISION, type Decision } from './intel';
+import { seedRevision } from '../agents/angle-claims';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -76,11 +77,20 @@ const SPENDS = new Set<Decision>(['pursue', 'more']);
  * A02: unchanged work is never regenerated and two angle tasks never run at once on one item. A Pursue without a
  * note on an item whose angle is already prepared keeps that angle (`angle_kept`); a task still running is kept too;
  * More, a note, or a failed task queue a fresh one (the retry path the task row names).
+ *
+ * C23 (the commercial-context audit, 2026-10-08): the kept-angle rule is keyed by the CONTEXT REVISION of what the
+ * Pursue carries (agents/angle-claims.ts seedRevision: the placement, the CRM read, the message; never the clock or
+ * the note) and the seller request. An unchanged Pursue reuses the prepared angle; a changed buyer or CRM context (a
+ * person placed at an account after the identity fix, a new deal next step, a newer message) queues a fresh one, so
+ * an old no-account angle is replaced; a succeeded task from before this rule (no revision on its input) is replaced
+ * too. The revision rides on the task input as `contextRevision`.
  */
 async function queueAngle(prisma: PrismaLike, input: { key: string; decision: Decision; note: string | null; actor: string; now: Date; via: string; input: Record<string, unknown> }): Promise<{ id: string; kept?: boolean }> {
+  const contextRevision = seedRevision(input.input);
   const existing = (await listAgentTasks(prisma, { now: input.now, itemKey: input.key }).catch(() => [])).filter((t) => t.kind === 'develop_angle').sort((a, b) => b.queuedAt.localeCompare(a.queuedAt))[0];
-  if (existing && (existing.status === 'running' || (existing.status === 'succeeded' && input.decision === 'pursue' && !input.note))) return { id: existing.id, kept: true };
-  const q = await queueAgentTask(prisma, { kind: 'develop_angle', itemKey: input.key, itemToken: '', day: nyDay(input.now), revision: 0, request: input.note ?? input.decision, requestedBy: input.actor, requestedFrom: input.via, input: { decision: input.decision, ...input.input } }, { now: input.now, actor: input.actor });
+  const sameContext = existing?.input?.contextRevision === contextRevision;
+  if (existing && (existing.status === 'running' || (existing.status === 'succeeded' && input.decision === 'pursue' && !input.note && sameContext))) return { id: existing.id, kept: true };
+  const q = await queueAgentTask(prisma, { kind: 'develop_angle', itemKey: input.key, itemToken: '', day: nyDay(input.now), revision: 0, request: input.note ?? input.decision, requestedBy: input.actor, requestedFrom: input.via, input: { decision: input.decision, ...input.input, contextRevision } }, { now: input.now, actor: input.actor });
   return { id: q.id };
 }
 
