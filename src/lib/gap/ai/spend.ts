@@ -158,6 +158,33 @@ function fold(rows: readonly Row[]): Omit<SpendReport, 'month' | 'label' | 'ceil
   return { monthUsd, calls, failed, refused, inFlight: reserved.size, lastCall };
 }
 
+/**
+ * C50: the month's commitment AT one reservation: every recorded cost plus every still-open reservation the ledger
+ * ordered at or before it (created_at, then callId). Two workers that both passed the pre-check and both reserved
+ * each re-read the ledger; the later reservation sees the earlier one and yields, so the ceiling holds under a race.
+ */
+export function committedAt(rows: readonly Row[], callId: string): number {
+  const ordered = [...rows].sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime() || idOf(a).localeCompare(idOf(b)));
+  const open = new Map<string, number>();
+  let usd = 0;
+  let seen = false;
+  for (const r of ordered) {
+    const id = idOf(r);
+    if (r.kind === MODEL_CALL_RESERVED) {
+      if (seen) continue;
+      open.set(id, Number((r.payload as Record<string, unknown> | null)?.estimateUsd) || 0);
+      if (id === callId) seen = true;
+      continue;
+    }
+    if (r.kind !== MODEL_CALL) continue;
+    open.delete(id);
+    usd += Number((r.payload as Record<string, unknown> | null)?.costUsd) || 0;
+  }
+  for (const e of open.values()) usd += e;
+  return usd;
+}
+const idOf = (r: Row) => { const p = (r.payload ?? {}) as Record<string, unknown>; return typeof p.callId === 'string' ? p.callId : r.subject_id; };
+
 /** The month's spend as the ledger holds it (recorded cost plus in-flight reservations). Soft: an unreadable table reads as zero calls. */
 export async function loadSpend(prisma: PrismaLike, opts: { now: Date; env?: Record<string, string | undefined>; strict?: boolean }): Promise<SpendReport> {
   const limits = spendLimits(opts.env);
@@ -276,6 +303,12 @@ export async function gapGenerate(prisma: PrismaLike, input: GapGenerateInput, d
   }
 
   await write(MODEL_CALL_RESERVED, { estimateUsd, promptTokensEstimate, maxTokens, at: input.now.toISOString() }, { strict: true });
+  // C50: the post-reservation check. A competing worker may have reserved between the pre-check and this row; the
+  // ledger's order decides, and the later reservation releases itself (a refused row closes it) and makes no call.
+  const committed = committedAt(await monthRows(prisma, monthWindow(input.now).start, true), callId);
+  if (committed > limits.monthlyCeilingUsd) {
+    await refuse('monthly_ceiling', `the GAP model ceiling of $${limits.monthlyCeilingUsd.toFixed(2)} for ${spend.label} would be passed with the calls already in flight ($${committed.toFixed(2)} committed with this one); this call yields and is not made; decide the item again once they finish, or raise GAP_AI_MONTHLY_CEILING_USD with Casey's approval`);
+  }
   const generate: GapGenerate = deps.generate ?? ((p, m, o) => generateTextWithMetadata(p, m, o));
   try {
     // The clawd control plane is never a GAP fallback: a prompt with prospect data would leave for Railway unmetered.
@@ -290,7 +323,8 @@ export async function gapGenerate(prisma: PrismaLike, input: GapGenerateInput, d
     return out;
   } catch (err) {
     const errors = err instanceof AIAllProvidersFailed ? err.errors : [];
-    const { permanent, category } = classifyFailure(errors);
+    // C50: an untyped throw (a socket reset, a timeout outside the provider chain) is an outage, not a configuration fault: transient, so the task and the decision wait for the next attempt.
+    const { permanent, category } = err instanceof AIAllProvidersFailed ? classifyFailure(errors) : { permanent: false, category: 'outage' };
     const message = err instanceof Error ? err.message : String(err);
     // A failed call may still have been billed (a timeout after generation): charge the estimate, never zero, unless no generation could have run.
     const costUsd = category === 'billing' || category === 'authentication' || category === 'model_missing' || category === 'configuration' ? 0 : estimateUsd;
