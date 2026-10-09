@@ -13,7 +13,9 @@ import { INTEL_LIMIT, PROSPECT_DECISION, SKIP_DAYS, loadIntelligence, rankPeople
 
 const NOW = new Date('2026-10-08T16:00:00Z');
 const days = (n: number) => new Date(NOW.getTime() - n * 86_400_000);
-const sig = (over: Record<string, unknown>) => ({ id: 's', url: 'https://news.example/x', title: 'A story', source_name: 'news.example', source_class: 'news', published_at: days(3), created_at: days(1), origin: 'discovery', account_name: 'Kenco', account_hint: null, resolution: 'resolved', research_status: 'none', relevance: 'account_context', categories: [], score: 0, event_id: null, feedback: null, feedback_at: null, note: null, ...over });
+let site = 0;
+// Each fixture signal is its own event (a distinct site number is a distinct mark for C30); a test that wants two reports of one event sets the title.
+const sig = (over: Record<string, unknown>) => ({ id: 's', url: 'https://news.example/x', title: `A story at site ${++site}`, source_name: 'news.example', source_class: 'news', published_at: days(3), created_at: days(1), origin: 'discovery', account_name: 'Kenco', account_hint: null, resolution: 'resolved', research_status: 'none', relevance: 'account_context', categories: [], score: 0, event_id: null, feedback: null, feedback_at: null, note: null, ...over });
 
 describe('I01: signals, no age gate', () => {
   it('an older signal is shown as a historical observation with its date; a recent one is an unverified present-day status; a verified fact and a contradiction say so', () => {
@@ -121,7 +123,7 @@ describe('I01: the loader', () => {
     expect(x.totals).toEqual({ signals: 1, triggers: 1, people: 1 });
     expect(x.pursued).toEqual([]);
     expect(INTEL_LIMIT).toBeGreaterThanOrEqual(8);
-    expect(await loadIntelligence({}, { now: NOW })).toEqual({ signals: [], triggers: [], people: [], pursued: [], totals: { signals: 0, triggers: 0, people: 0 } });
+    expect(await loadIntelligence({}, { now: NOW })).toMatchObject({ signals: [], triggers: [], people: [], pursued: [], totals: { signals: 0, triggers: 0, people: 0 }, selection: { moreSignals: false, morePeople: false } });
   });
 });
 

@@ -60,6 +60,7 @@ import { classifyInboundReply } from '@/lib/email/reply-precision';
 import type { MailboxMessage } from '@/lib/email/gmail-inbox';
 import { recordHardBounce } from '@/lib/email/bounce';
 import { ingestReply } from './ingest';
+import { PROVENANCE_LINKED_KIND, PROVENANCE_SUBJECT_TYPE } from '../context/thread-context';
 import { AUTO_REPLY_SUBJECT, DELIVERY_BLOCKED_KIND, FREEMAIL_DOMAINS, OWN_DOMAINS } from './domains';
 export { DELIVERY_BLOCKED_KIND } from './domains';
 import { DIRECT_SENT, DRAFT_SENT, DRAFT_SUBJECT_TYPE, DRAFTED, MANUAL_SENT } from '../execution/draft-ledger';
@@ -433,9 +434,13 @@ async function handleBounce(prisma: PrismaLike, m: MailboxMessage, dsn: DsnFindi
  * Store the message once; answer the id of the stored row. Ops closeout 14:
  * one RFC message can arrive under two Gmail ids (a calendar invite, a list
  * copy); the RFC Message-ID is the idempotency key, so the second copy points
- * at the first row instead of creating a duplicate.
+ * at the first row instead of creating a duplicate. C47: when the first row
+ * came through HubSpot (the poller landed the engagement first), this Gmail id
+ * is recorded on it as a second provenance link (`inbound.provenance_linked`,
+ * once), so the thread context reads one event with both ids. Never a merge
+ * by subject.
  */
-async function storeInbound(prisma: PrismaLike, m: MailboxMessage, report: MailboxReport): Promise<string> {
+export async function storeInbound(prisma: PrismaLike, m: MailboxMessage, report: MailboxReport, actor = 'cron:gap-mailbox'): Promise<string> {
   const from = lower(m.fromEmail);
   await prisma.emailThread.upsert({
     where: { id: m.threadId },
@@ -444,8 +449,13 @@ async function storeInbound(prisma: PrismaLike, m: MailboxMessage, report: Mailb
   });
   const existing = await prisma.inboundMessage.findUnique({ where: { id: m.id }, select: { id: true } });
   if (existing) return existing.id;
-  const sameRfc = m.rfcMessageId ? await prisma.inboundMessage.findFirst({ where: { rfc_message_id: m.rfcMessageId }, select: { id: true } }) : null;
-  if (sameRfc) return sameRfc.id;
+  const sameRfc: { id: string } | null = m.rfcMessageId ? await prisma.inboundMessage.findFirst({ where: { rfc_message_id: m.rfcMessageId }, select: { id: true } }) : null;
+  if (sameRfc) {
+    const providerId = `gmail:${m.id}`;
+    const linked = await prisma.gapAuditEvent.findFirst({ where: { kind: PROVENANCE_LINKED_KIND, subject_type: PROVENANCE_SUBJECT_TYPE, subject_id: sameRfc.id, payload: { path: ['providerId'], equals: providerId } }, select: { id: true } });
+    if (!linked) await audit(prisma, PROVENANCE_LINKED_KIND, actor, sameRfc.id, { providerId, rfcMessageId: m.rfcMessageId, threadId: m.threadId, receivedAt: m.receivedAt.toISOString() }, PROVENANCE_SUBJECT_TYPE);
+    return sameRfc.id;
+  }
   {
     await prisma.inboundMessage.create({
       data: { id: m.id, thread_id: m.threadId, rfc_message_id: m.rfcMessageId, from_email: from, from_name: m.fromName, subject: m.subject, body_html: m.bodyHtml || null, body_text: m.bodyText || null, snippet: m.snippet, received_at: m.receivedAt },
@@ -457,7 +467,7 @@ async function storeInbound(prisma: PrismaLike, m: MailboxMessage, report: Mailb
 
 async function handleReply(prisma: PrismaLike, m: MailboxMessage, v: Extract<MailboxVerdict, { kind: 'reply' }>, now: Date, actor: string, report: MailboxReport, ingest: typeof ingestReply): Promise<void> {
   const from = lower(m.fromEmail);
-  const storedId = await storeInbound(prisma, m, report);
+  const storedId = await storeInbound(prisma, m, report, actor);
   const bell = await prisma.notification.findFirst({ where: { source_id: storedId, type: 'reply' }, select: { id: true } });
   if (!bell) {
     await prisma.notification.create({ data: { type: 'reply', persona_email: from, subject: m.subject, preview: m.snippet.slice(0, 200), source_id: storedId, read: false } });
@@ -498,7 +508,7 @@ async function processMessage(prisma: PrismaLike, m: MailboxMessage, ctx: GapSen
     report.own += 1;
     await audit(prisma, MAILBOX_KINDS.own, actor, m.id, at);
   } else if (v.kind === 'canary') {
-    await storeInbound(prisma, m, report);
+    await storeInbound(prisma, m, report, actor);
     report.canaries += 1;
     await audit(prisma, MAILBOX_KINDS.canary, actor, m.id, { from: lower(m.fromEmail), subject: m.subject, inboundMessageId: m.id, ...at });
   } else if (v.kind === 'unrelated') {

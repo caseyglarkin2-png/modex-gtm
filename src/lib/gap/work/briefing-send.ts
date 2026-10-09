@@ -99,14 +99,17 @@ function links(input: BriefingSendInput, day: string) {
       return t ? `${base}/gap/decide?t=${encodeURIComponent(t)}` : null;
     },
     account: (name: string) => `${base}${accountHref(name)}/`,
+    // C32: the deal brief for an item at an account with an open deal.
+    deal: (name: string) => `${base}${accountHref(name)}/?view=brief`,
   };
 }
 
 /** I04: the day's intelligence with the prepared angles, for the briefing. */
-export async function defaultIntel(prisma: PrismaLike, now: Date, deps: Pick<BriefingSendDeps, 'inDeals'> & { identity?: IdentityContext | null } = {}): Promise<BriefingIntel> {
+export async function defaultIntel(prisma: PrismaLike, now: Date, deps: Pick<BriefingSendDeps, 'inDeals'> & Partial<Pick<BriefingSendDeps, 'listSent'>> & { identity?: IdentityContext | null } = {}): Promise<BriefingIntel> {
   // C01: the same complete-or-unavailable deal snapshot the day builds, so the email never says "no deal" on an unread CRM.
   const summary = await (deps.inDeals ?? ((p: PrismaLike, n: Date) => loadInDealsSummary(p, { now: n })))(prisma, now).catch(() => null);
-  const x = await loadIntelligence(prisma, { now, coverage: dealCoverageFrom(summary), ...(deps.identity !== undefined ? { identity: deps.identity } : {}) });
+  // C10: the briefing's own Gmail Sent reader, so quiet and answer owed count our side too.
+  const x = await loadIntelligence(prisma, { now, coverage: dealCoverageFrom(summary), ...(deps.identity !== undefined ? { identity: deps.identity } : {}), ...(deps.listSent ? { listSent: deps.listSent } : {}) });
   const keys = [...x.signals, ...x.triggers, ...x.people].map((i) => i.key);
   const angles = await loadAngles(prisma, { keys, now });
   return { ...x, angles: Object.fromEntries([...angles.entries()].map(([k, a]) => [k, { whyItMatters: a.whyItMatters, starters: a.starters, peopleNamed: a.peopleNamed.map((p) => ({ name: p.name, title: p.title })), proposedAction: a.proposedAction }])) };
@@ -150,7 +153,7 @@ export async function sendMorningBriefing(prisma: PrismaLike, input: BriefingSen
     const dayToken = randomBytes(12).toString('hex');
     // I04: the intelligence, read soft (a failure never withholds the briefing).
     const intel: BriefingIntel | null = await (deps.intel ?? ((p: PrismaLike, n: Date) => defaultIntel(p, n, deps)))(prisma, input.now).catch(() => null);
-    const rendered = renderBriefing({ plan, dayToken, links: links(input, day), commandsEnabled: input.commandsEnabled, legacyDigest: input.legacyDigest, intel }, input.now);
+    const rendered = renderBriefing({ plan, dayToken, links: links(input, day), commandsEnabled: input.commandsEnabled, legacyDigest: input.legacyDigest, intel, resend: input.resend === true }, input.now);
     const res = await deps.send({
       to,
       subject: rendered.subject,

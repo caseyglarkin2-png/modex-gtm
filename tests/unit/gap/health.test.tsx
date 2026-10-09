@@ -74,7 +74,7 @@ describe('evaluateHealth', () => {
     i.sender = { configured: false, mailbox: null };
     const r = evaluateHealth(i, NOW);
     expect(r.overall).toBe('BLOCKED');
-    expect(r.components.filter((c) => c.state === 'HEALTHY').map((c) => c.key).sort()).toEqual(['agents', 'briefing', 'hubspot', 'mailbox', 'model', 'suppression']);
+    expect(r.components.filter((c) => c.state === 'HEALTHY').map((c) => c.key).sort()).toEqual(['agents', 'briefing', 'context', 'hubspot', 'mailbox', 'model', 'suppression']);
   });
 });
 
@@ -105,10 +105,15 @@ describe('loadHealthInputs: probes never throw and never read as green', () => {
   });
 
   it('all answering: healthy inputs from the cron state and the last routing run', async () => {
-    const i = await loadHealthInputs(prisma({ lastSuccessAt: min(3).toISOString(), consecutiveFailures: 0, lastMessage: 'apply' }, min(5)), {
+    // C46: all answering includes the context sources (identity tables, associations, Sent, vault and Clawd for a canary account).
+    const withContext = { ...prisma({ lastSuccessAt: min(3).toISOString(), consecutiveFailures: 0, lastMessage: 'apply' }, min(5)), canonicalCompany: { count: async () => 1, findFirst: async () => ({ primary_account_name: 'Kenco', domain: 'kencogroup.com' }) }, gapAccountAlias: { count: async () => 1 } };
+    const i = await loadHealthInputs(withContext, {
       env,
       hubspotPing: async () => undefined,
       suppressionRead: async () => ({ verdict: 'clear' }),
+      associationsProbe: async () => undefined,
+      sentProbe: async () => undefined,
+      knowledge: async () => ({ coverage: ['vault', 'clawd'].map((source) => ({ source, configured: true, reachable: true, completeness: 'complete' as const, watermark: min(60).toISOString(), indexedAt: min(30).toISOString(), omittedReason: null })) }),
     });
     expect(evaluateHealth(i, NOW).overall).toBe('HEALTHY');
   });

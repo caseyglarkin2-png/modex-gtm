@@ -1,0 +1,44 @@
+{
+  "overall": "DEGRADED",
+  "headline": "Recommendations refreshed 3d ago · cards may be stale",
+  "components": [
+    {
+      "key": "mailbox",
+      "name": "Mailbox intake",
+      "state": "HEALTHY",
+      "label": "Mailbox intake 6m ago",
+      "detail": "Last successful run 6m ago (2026-10-08T19:10:50.891Z); 0 consecutive failure(s); last message: apply: 2 inbox messages since 1791474956."
+    },
+    {
+      "key": "hubspot",
+      "name": "HubSpot opportunity truth",
+      "state": "HEALTHY",
+      "label": "HubSpot reads OK",
+      "detail": "HubSpot answered in 120ms."
+    },
+    {
+      "key": "suppression",
+      "name": "Suppression authority",
+      "state": "HEALTHY",
+      "label": "Suppression authority OK",
+      "detail": "Contract answered in 590ms."
+    },
+    {
+      "key": "sender",
+      "name": "GAP sender",
+      "state": "HEALTHY",
+      "label": "Sending as casey@yardflow.ai",
+      "detail": "GAP sends from casey@yardflow.ai."
+    },
+    {
+      "key": "routing",
+      "name": "Routing",
+      "state": "DEGRADED",
+      "label": "Recommendations refreshed 3d ago · cards may be stale",
+      "detail": "Last completed routing run 2026-10-05T20:46:45.554Z. Every outbound click re-checks the card, so an old card cannot send stale.",
+      "owner": "operator",
+      "retry": "Recommendations refresh each weekday morning (the gap-routing schedule, GAP_ROUTING_CRON_ENABLED); to refresh now, open System at the foot of Work and press Run routing"
+    }
+  ],
+  "checkedAt": "2026-10-08T19:17:13.152Z"
+}

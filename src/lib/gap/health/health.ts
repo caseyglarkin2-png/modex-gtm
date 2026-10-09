@@ -16,7 +16,7 @@ import { nyDay, nyDayAt } from '../work/dates';
  */
 
 export type HealthState = 'HEALTHY' | 'DEGRADED' | 'BLOCKED';
-export type HealthKey = 'mailbox' | 'hubspot' | 'suppression' | 'sender' | 'routing' | 'briefing' | 'agents' | 'model';
+export type HealthKey = 'mailbox' | 'hubspot' | 'suppression' | 'sender' | 'routing' | 'briefing' | 'agents' | 'model' | 'context';
 
 export interface HealthComponent {
   key: HealthKey;
@@ -43,6 +43,7 @@ export const HEALTH_REPAIR: Readonly<Record<HealthKey, { owner: string; retry: s
   routing: { owner: 'operator', retry: 'Recommendations refresh each weekday morning (the gap-routing schedule, GAP_ROUTING_CRON_ENABLED); to refresh now, open System at the foot of Work and press Run routing' },
   briefing: { owner: 'operator', retry: 'Check GAP_BRIEFING_ENABLED in Vercel and the briefing address on Settings; read the gap-briefing cron state and the briefing.failed rows for the day; run /api/cron/gap-briefing/ once with the cron secret (it also ticks every hour)' },
   agents: { owner: 'operator', retry: 'Check GAP_AGENT_TASKS_ENABLED in Vercel and the gap-agent-tasks cron state (every 5 minutes); a failed task keeps its error on its ledger row; reply REVISE again, or record the objection again, to queue a fresh task' },
+  context: { owner: 'operator', retry: 'Commercial context is advisory: a send is never blocked by it, but a prepared angle on partial context is labelled so. Identity reads the canonicalCompany and gapAccountAlias tables; associations read HubSpot contacts; Sent reads the GAP sender\'s Gmail; the vault needs GAP_VAULT_DIR on the box that runs it; Clawd needs CLAWD_CONTROL_PLANE_URL and its token. A source rebuilt today whose newest knowledge is months old is said so; refresh the source, not the timestamp' },
   model: { owner: 'Casey', retry: 'Spend is the ledger rows ai.model_call this month against GAP_AI_MONTHLY_CEILING_USD (default $25); a blocked route names the provider reason on the last task row: fix AI_GATEWAY_API_KEY or the model in Vercel and redeploy, top up AI Gateway credits only with Casey, or raise the ceiling only with Casey; then decide the item again' },
 };
 
@@ -59,6 +60,18 @@ export interface HealthReport {
   checkedAt: string;
 }
 
+/** One context source's coverage as retrieval.ts reports it (C20): configured, reachable, how complete, the newest knowledge it holds, when it was rebuilt or indexed. */
+export interface ContextSourceCoverage {
+  configured: boolean;
+  reachable: boolean;
+  completeness: 'complete' | 'partial' | 'unknown';
+  /** The newest observation the source holds (its own clock); null when unknown. */
+  watermark: string | null;
+  /** When the source was rebuilt or indexed; a label, never the knowledge's date (C15). */
+  indexedAt: string | null;
+  omittedReason: string | null;
+}
+
 export interface HealthInputs {
   mailbox: { senderConfigured: boolean; lastSuccessAt: Date | null; lastFailureAt: Date | null; consecutiveFailures: number; lastMessage: string | null };
   hubspot: { configured: boolean; ok: boolean; ms: number | null; error: string | null };
@@ -69,6 +82,18 @@ export interface HealthInputs {
   briefing?: { enabled: boolean; to: string | null; hourNy: number | null; lastSuccessAt: Date | null; consecutiveFailures: number; lastMessage: string | null; sentTodayAt: Date | null; failedToday: number };
   /** X20a: the agent tasks drain (cron gap-agent-tasks, every 5 minutes): REVISE, objections. */
   agents?: { enabled: boolean; lastSuccessAt: Date | null; consecutiveFailures: number; lastMessage: string | null; queued: number; oldestQueuedAt: Date | null; failedFinalToday: number };
+  /** C46: the commercial-context sources: whether each can be read now and how fresh what it holds is. Advisory; send safety is elsewhere. */
+  context?: {
+    identity: { readable: boolean; companies: number | null; aliases: number | null; error: string | null };
+    /** The HubSpot contact association read (the C02 path); null when HubSpot is not configured. */
+    associations: { readable: boolean; ms: number | null; error: string | null } | null;
+    /** The GAP sender's Gmail Sent read; configured false when no sender. */
+    sent: { configured: boolean; readable: boolean | null; ms: number | null; error: string | null };
+    vault: ContextSourceCoverage;
+    clawd: ContextSourceCoverage;
+    /** The account the vault and Clawd reads were run for (the newest account on record); null when none. */
+    canary: { account: string; domain: string | null } | null;
+  };
   /** A02: the GAP model route and its spend this month (src/lib/gap/ai/spend.ts). */
   model?: { month: string; label: string; monthUsd: number; ceilingUsd: number; warnFraction: number; calls: number; failed: number; refused: number; inFlight: number; lastCall: { at: string; outcome: string; model: string | null; errorCategory: string | null } | null; /** A04: the AI Gateway credit balance (every call on the route draws on it, metered or not); null when unread. */ credits?: { balance: number; totalUsed: number } | null };
 }
@@ -170,6 +195,48 @@ function agents(i: HealthInputs['agents'], now: Date): HealthComponent {
   return { ...base, state: 'HEALTHY', label: `Agent tasks ${ago(age)}`, detail };
 }
 
+/** C46: knowledge older than this, however recently rebuilt, is said to be old. */
+export const CONTEXT_STALE_DAYS = 60;
+
+/**
+ * C46: the commercial-context component. Never BLOCKED (send safety is the suppression, sender and HubSpot components);
+ * DEGRADED when a configured source cannot be read, when identity cannot be read, or when a source's newest knowledge
+ * is older than CONTEXT_STALE_DAYS although it was rebuilt recently; a source that is not configured is said as
+ * partial, not as healthy-and-complete. "Complete" is said only when every configured source read whole and fresh.
+ */
+function context(i: HealthInputs['context'], now: Date): HealthComponent {
+  const base = { key: 'context' as const, name: 'Commercial context' };
+  if (!i) return { ...base, state: 'HEALTHY', label: 'Commercial context not read', detail: 'The context sources were not probed this time; nothing here says they are complete.' };
+  const problems: string[] = [];
+  const partial: string[] = [];
+  const facts: string[] = [];
+  const days = (iso: string | null) => (iso ? Math.floor((now.getTime() - new Date(iso).getTime()) / 86_400_000) : null);
+  if (!i.identity.readable) problems.push(`identity tables unreadable${i.identity.error ? ` (${i.identity.error})` : ''}`);
+  else facts.push(`identity: ${i.identity.companies ?? '?'} companies, ${i.identity.aliases ?? '?'} aliases`);
+  if (i.associations === null) partial.push('HubSpot associations: HubSpot not configured');
+  else if (!i.associations.readable) problems.push(`HubSpot associations unreadable${i.associations.error ? ` (${i.associations.error})` : ''}`);
+  else facts.push(`HubSpot associations read in ${i.associations.ms ?? '?'}ms`);
+  if (!i.sent.configured) partial.push('Sent: no GAP sender');
+  else if (i.sent.readable === false) problems.push(`Gmail Sent unreadable${i.sent.error ? ` (${i.sent.error})` : ''}: who we wrote to is unknown, so quiet and answer owed are one-sided`);
+  else if (i.sent.readable === null) partial.push('Sent: not probed');
+  else facts.push(`Sent read in ${i.sent.ms ?? '?'}ms`);
+  for (const [name, c] of [['vault', i.vault], ['Clawd', i.clawd]] as const) {
+    if (!c.configured) { partial.push(`${name}: not configured${c.omittedReason ? ` (${c.omittedReason})` : ''}`); continue; }
+    if (!c.reachable) { problems.push(`${name} unreachable${c.omittedReason ? ` (${c.omittedReason})` : ''}`); continue; }
+    const age = days(c.watermark);
+    const rebuilt = days(c.indexedAt);
+    const words = `${name}: ${c.completeness}${c.watermark ? `, newest knowledge ${c.watermark.slice(0, 10)}` : ', no dated knowledge'}${c.indexedAt ? `, rebuilt ${c.indexedAt.slice(0, 10)}` : ''}`;
+    if (age !== null && age > CONTEXT_STALE_DAYS) problems.push(`${words}: ${age} days old${rebuilt !== null && rebuilt <= 7 ? ' although rebuilt this week: the rebuild carried no newer knowledge' : ''}`);
+    else if (c.completeness === 'partial') partial.push(words + (c.omittedReason ? ` (${c.omittedReason})` : ''));
+    else facts.push(words);
+  }
+  const canary = i.canary ? ` Probed on ${i.canary.account}${i.canary.domain ? ` (${i.canary.domain})` : ''}.` : ' No account on record to probe the vault and Clawd with.';
+  const detail = `${[...problems, ...partial, ...facts].join('; ')}.${canary}${problems.length ? ' A prepared angle on this context is labelled partial; sends are gated elsewhere and unchanged.' : ''}`;
+  if (problems.length) return { ...base, state: 'DEGRADED', label: `Commercial context incomplete · ${problems[0].split(':')[0]}`, detail };
+  if (partial.length) return { ...base, state: 'HEALTHY', label: `Commercial context partial · ${partial.map((p) => p.split(':')[0]).join(', ')}`, detail };
+  return { ...base, state: 'HEALTHY', label: 'Commercial context complete and fresh', detail };
+}
+
 /** The provider reasons that do not get better by trying again: the route is blocked until someone changes it. */
 export const MODEL_PERMANENT = new Set(['billing', 'authentication', 'model_missing', 'configuration']);
 
@@ -190,7 +257,7 @@ function model(i: HealthInputs['model']): HealthComponent {
 }
 
 export function evaluateHealth(inputs: HealthInputs, now: Date): HealthReport {
-  const components = [mailbox(inputs.mailbox, now), hubspot(inputs.hubspot), suppression(inputs.suppression), sender(inputs.sender), routing(inputs.routing, now), briefing(inputs.briefing, now), agents(inputs.agents, now), model(inputs.model)].map(repaired);
+  const components = [mailbox(inputs.mailbox, now), hubspot(inputs.hubspot), suppression(inputs.suppression), sender(inputs.sender), routing(inputs.routing, now), briefing(inputs.briefing, now), agents(inputs.agents, now), model(inputs.model), context(inputs.context, now)].map(repaired);
   const overall = components.reduce<HealthState>((w, c) => (RANK[c.state] > RANK[w] ? c.state : w), 'HEALTHY');
   const routingC = components.find((c) => c.key === 'routing')!;
   const bad = components.filter((c) => c.state !== 'HEALTHY').sort((a, b) => RANK[b.state] - RANK[a.state]);

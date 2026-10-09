@@ -70,7 +70,7 @@ function Item({ item, angle }: { item: IntelItem; angle: PreparedAngle | null })
   );
 }
 
-function Section({ title, hint, items, angles, testId, total }: { title: string; hint: string; items: IntelItem[]; angles: Record<string, PreparedAngle>; testId: string; total: number }) {
+function Section({ title, hint, items, angles, testId, total, selection, moreHref }: { title: string; hint: string; items: IntelItem[]; angles: Record<string, PreparedAngle>; testId: string; total: number; /** C34: how the selection was made, in words. */ selection?: string; /** C34: the next page, when more exists beyond this one. */ moreHref?: string | null }) {
   return (
     <section className="space-y-2" data-testid={testId} aria-label={title}>
       <h2 className="text-sm font-semibold">
@@ -78,6 +78,7 @@ function Section({ title, hint, items, angles, testId, total }: { title: string;
       </h2>
       <p className="text-xs text-[var(--muted-foreground)]">{hint}</p>
       {items.length ? <ul className="space-y-2">{items.map((it) => <Item key={it.key} item={it} angle={angles[it.key] ?? null} />)}</ul> : <p className="text-xs italic text-[var(--muted-foreground)]">Nothing waiting for a decision.</p>}
+      {selection ? <p className="text-[11px] text-[var(--muted-foreground)]" data-testid={`${testId}-selection`}>How this was chosen: {selection}.{moreHref ? <> <Link href={moreHref} className="underline">More</Link></> : null}</p> : null}
     </section>
   );
 }
@@ -135,8 +136,8 @@ export function IntelPanel({ intel, angles }: { intel: Intelligence; angles: Rec
           <ul className="space-y-2">{intel.pursued.map((p) => <Pursued key={p.key} p={p} />)}</ul>
         </section>
       ) : null}
-      <Section title="Intelligence worth a look" hint="What GAP found, any age, for your call. Pursue and GAP develops the angle and checks the source; nothing is sent until you approve it." items={worth} angles={angles} testId="intel-worth" total={intel.totals.signals + intel.totals.triggers} />
-      <Section title="Prospects to reengage" hint="People who wrote to us and went quiet. Pursue and GAP prepares the reopening; an open deal at the account is said, and the deal keeps its hold." items={intel.people} angles={angles} testId="intel-people" total={intel.totals.people} />
+      <Section title="Intelligence worth a look" hint="What GAP found, any age, for your call. Pursue and GAP develops the angle and checks the source; nothing is sent until you approve it." items={worth} angles={angles} testId="intel-worth" total={intel.totals.signals + intel.totals.triggers} selection={intel.selection?.signals} moreHref={intel.selection?.moreSignals ? `/gap?moreSignals=${intel.selection.skipSignals + intel.signals.length}${intel.selection.skipPeople ? `&morePeople=${intel.selection.skipPeople}` : ''}` : null} />
+      <Section title="Prospects to reengage" hint="People who wrote to us and went quiet. Pursue and GAP prepares the reopening; an open deal at the account is said, and the deal keeps its hold." items={intel.people} angles={angles} testId="intel-people" total={intel.totals.people} selection={intel.selection?.people} moreHref={intel.selection?.morePeople ? `/gap?morePeople=${intel.selection.skipPeople + intel.people.length}${intel.selection.skipSignals ? `&moreSignals=${intel.selection.skipSignals}` : ''}` : null} />
       <p className="text-xs text-[var(--muted-foreground)]">
         Decided items leave the day. <Link href="/gap/signals" className="underline">Every signal</Link>, including the ones you set aside.
       </p>

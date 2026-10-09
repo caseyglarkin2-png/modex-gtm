@@ -22,6 +22,11 @@
 import { AUTO_REPLY_SUBJECT, FREEMAIL_DOMAINS, OWN_DOMAINS } from '../replies/domains';
 import { coverageFromNames, dealsAt, dealWords, type DealCoverage } from './deal-coverage';
 import { resolvePersonAccount } from './person-identity';
+import { sameIdea } from '../context/same-idea';
+import { classifyPurpose, reengageEligible, type ReengageVerdict } from '../context/purpose';
+import { classifyMailType } from '../context/thread-context';
+import type { Purpose } from '../context/commercial-context';
+import { peopleState, type PersonState, type StateEvent } from './people-state';
 import type { IdentityContext } from '../identity/resolve';
 import { loadIdentityContext } from '../identity/service';
 import { signalStatus } from '../signals/intake';
@@ -71,6 +76,16 @@ export interface IntelItem {
   person: { email: string; name: string | null; title: string | null; lastWroteAt: string; messages: number; via?: string | null; ambiguous?: boolean; deals?: Array<{ id: string | null; name: string | null; stage: string; nextStep: string | null }> } | null;
   /** C04: the opportunity standing, explicit: open (a complete CRM read found a deal), none (a complete read found none), unknown (no complete read). */
   opportunity?: 'open' | 'none' | 'unknown';
+  /** C10: the two-sided state, when the seller's Sent was read for this person (quiet basis, the next meeting). */
+  state?: { quietDays: number | null; quietBasis: string; nextMeetingAt: string | null; lastOutboundAt: string | null };
+  /** C09/C11: the re-engage verdict's review note, when the purposes asked for one. */
+  review?: string;
+  /** C29: the publication value is a date (no time of day), shown as that calendar day. */
+  publishedDateOnly?: boolean;
+  /** C30: other reports of the same event at the same account, each with its source (the citations are kept; one slot is used). */
+  alsoReported?: Array<{ id: string; source: string | null; url: string | null; publishedAt: string | null }>;
+  /** C30: every signal id in the cluster (the head first); a decision on the head covers them. */
+  clusterIds?: string[];
   /** I05: the person's account is in an open deal: shown and labelled (work it from the deal), never dropped. */
   inDeal?: boolean;
   decisions: readonly Decision[];
@@ -79,7 +94,12 @@ export interface IntelItem {
 }
 
 const NOISE_SENDER = /(^|[._-])(no-?reply|noreply|donotreply|rewards|reserv|notification|newsletter|mailer|billing|account|support|info|news|marketing|hello|team)@/i;
-const dayText = (d: Date | string) => new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' });
+/** C29: a value stored at exactly midnight UTC is a DATE, not an instant (an EDGAR filing date): it is that calendar day everywhere. */
+export const isDateOnly = (d: Date | string): boolean => {
+  const t = new Date(d);
+  return t.getUTCHours() === 0 && t.getUTCMinutes() === 0 && t.getUTCSeconds() === 0 && t.getUTCMilliseconds() === 0;
+};
+const dayText = (d: Date | string) => new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: isDateOnly(d) ? 'UTC' : 'America/New_York' });
 const domainOf = (email: string) => (email.split('@')[1] ?? '').toLowerCase();
 
 /** The truth label the ledger supports for a signal: the research state says what GAP proved, the dates say when. */
@@ -99,25 +119,55 @@ type DecisionRow = { subject_id: string; payload: unknown; created_at: Date | st
 const cats = (v: unknown): string[] => (Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : []);
 
 /** Pure: the signals' selection and order. */
+/** C30: reports of one event arrive within days of each other; the same words months apart are a new event. */
+export const CLUSTER_DAYS = 14;
+
 export function rankSignals(rows: readonly SignalRow[], now: Date): IntelItem[] {
   const skippedUntil = now.getTime() - SKIP_DAYS * 86_400_000;
+  const decided = (r: SignalRow) => !!r.feedback && !(r.feedback === 'skip' && r.feedback_at && new Date(r.feedback_at).getTime() < skippedUntil);
   const byEvent = new Map<string, SignalRow>();
+  const decidedEvents = new Set<string>();
   for (const r of rows) {
     if (r.resolution === 'rejected') continue;
-    if (r.feedback && !(r.feedback === 'skip' && r.feedback_at && new Date(r.feedback_at).getTime() < skippedUntil)) continue;
     const k = r.event_id ?? r.id;
+    if (decided(r)) { decidedEvents.add(k); continue; }
     const cur = byEvent.get(k);
     if (!cur || (r.origin === 'casey_share' && cur.origin !== 'casey_share')) byEvent.set(k, r);
   }
-  const items = [...byEvent.values()].map((r): IntelItem & { sort: number[] } => {
+  for (const k of decidedEvents) byEvent.delete(k);
+  // C30: related reports of one event at one account (the same idea in the title, published within CLUSTER_DAYS of each
+  // other) are one item with every source kept; distinct launches or expansions stay separate (sameIdea is strict), and a
+  // recurring title months apart (a 10-Q each quarter) is a new event. A decision on any member covers the cluster.
+  const at = (r: SignalRow) => new Date(r.published_at ?? r.created_at).getTime();
+  const near = (a: SignalRow, b: SignalRow) => Math.abs(at(a) - at(b)) <= CLUSTER_DAYS * 86_400_000;
+  const heads: SignalRow[] = [];
+  const members = new Map<string, SignalRow[]>();
+  const decidedTitles = rows.filter((r) => r.resolution !== 'rejected' && decided(r));
+  outer: for (const r of [...byEvent.values()]) {
+    const acct = (r.account_name ?? r.account_hint ?? '').trim();
+    const title = r.title ?? '';
+    if (acct && title) {
+      for (const h of heads) {
+        if ((h.account_name ?? h.account_hint ?? '').trim().toLowerCase() === acct.toLowerCase() && h.title && near(h, r) && sameIdea(h.title, title, acct)) { members.get(h.id)!.push(r); continue outer; }
+      }
+      if (decidedTitles.some((d) => (d.account_name ?? d.account_hint ?? '').trim().toLowerCase() === acct.toLowerCase() && d.title && near(d, r) && sameIdea(d.title, title, acct))) continue;
+    }
+    heads.push(r);
+    members.set(r.id, []);
+  }
+  const items = heads.map((r): IntelItem & { sort: number[] } => {
+    const also = members.get(r.id) ?? [];
     const shared = r.origin === 'casey_share' || r.origin === 'conference_note';
     const truth = truthOfSignal(r, now);
     const categories = cats(r.categories);
     const st = signalStatus({ url: r.url, resolution: r.resolution, research_status: r.research_status, feedback: null, origin: r.origin, relevance: r.relevance ?? undefined });
     const when = r.published_at ? `published ${dayText(r.published_at)}` : `observed ${dayText(r.created_at)}`;
-    const line = `${shared ? 'You shared it. ' : ''}${r.source_name ?? r.source_class ?? 'a source'}, ${when}. ${TRUTH_TEXT[truth]}.${categories.length ? ` Themes: ${categories.map((c) => c.replace(/_/g, ' ')).join(', ')}.` : ''}${st.status === 'Fact ready' ? ' A verified fact is in Research.' : ''}`;
+    const hostOf = (u: string | null) => (u ? (() => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch { return null; } })() : null);
+    const line = `${shared ? 'You shared it. ' : ''}${r.source_name ?? r.source_class ?? 'a source'}, ${when}. ${TRUTH_TEXT[truth]}.${categories.length ? ` Themes: ${categories.map((c) => c.replace(/_/g, ' ')).join(', ')}.` : ''}${st.status === 'Fact ready' ? ' A verified fact is in Research.' : ''}${also.length ? ` Also reported by ${also.map((a) => a.source_name ?? hostOf(a.url) ?? 'another source').join(', ')}.` : ''}`;
     return {
-      kind: 'signal', id: r.id, key: `signal:${r.id}`, title: r.title ?? r.url ?? 'A note', source: r.source_name ?? (r.url ? (() => { try { return new URL(r.url).hostname.replace(/^www\./, ''); } catch { return null; } })() : null), url: r.url, publishedAt: r.published_at ? new Date(r.published_at).toISOString() : null, observedAt: new Date(r.created_at).toISOString(), truth, line,
+      kind: 'signal', id: r.id, key: `signal:${r.id}`, title: r.title ?? r.url ?? 'A note', source: r.source_name ?? hostOf(r.url), url: r.url, publishedAt: r.published_at ? new Date(r.published_at).toISOString() : null, observedAt: new Date(r.created_at).toISOString(), truth, line,
+      ...(r.published_at && isDateOnly(r.published_at) ? { publishedDateOnly: true } : {}),
+      ...(also.length ? { alsoReported: also.map((a) => ({ id: a.id, source: a.source_name ?? hostOf(a.url), url: a.url, publishedAt: a.published_at ? new Date(a.published_at).toISOString() : null })), clusterIds: [r.id, ...also.map((a) => a.id)] } : {}),
       accountName: r.account_name, accountHint: r.account_name ? null : r.account_hint, relevance: r.relevance, categories, person: null, decisions: DECISIONS, rank: 0,
       sort: [shared ? 0 : 1, RELEVANCE_RANK[r.relevance ?? ''] ?? 6, categories.length ? 0 : 1, -(r.score ?? 0), -new Date(r.published_at ?? r.created_at).getTime()],
     };
@@ -147,7 +197,7 @@ type WriterRow = { from_email: string; from_name: string | null; subject: string
 type PersonaRow = { id: number; email: string | null; name: string | null; title: string | null; account_name: string | null; do_not_contact?: boolean | null };
 
 /** Pure: the people who wrote in and went quiet, one per address, newest last word first. */
-export function rankPeople(rows: readonly WriterRow[], personas: readonly PersonaRow[], opts: { now: Date; decided: ReadonlySet<string>; /** C01/C04: the deal coverage (the in-deals read with its status); `dealAccounts` is the older names-only form. */ coverage?: DealCoverage; dealAccounts?: ReadonlySet<string> | null; unsubscribed: ReadonlySet<string>; /** C02/C03: the identity context the opportunity resolver uses (aliases, verified domains); null places by persona and thread only. */ identity?: IdentityContext | null; /** C02: HubSpot company ids by sender address, when a contact read carried them. */ contactCompanies?: ReadonlyMap<string, readonly string[]> }): IntelItem[] {
+export function rankPeople(rows: readonly WriterRow[], personas: readonly PersonaRow[], opts: { now: Date; decided: ReadonlySet<string>; /** C01/C04: the deal coverage (the in-deals read with its status); `dealAccounts` is the older names-only form. */ coverage?: DealCoverage; dealAccounts?: ReadonlySet<string> | null; unsubscribed: ReadonlySet<string>; /** C02/C03: the identity context the opportunity resolver uses (aliases, verified domains); null places by persona and thread only. */ identity?: IdentityContext | null; /** C02: HubSpot company ids by sender address, when a contact read carried them. */ contactCompanies?: ReadonlyMap<string, readonly string[]>; /** C10: the two-sided state per address (built from the inbound rows and the seller's Sent); a person with one is judged by it, not by the inbound date alone. */ states?: ReadonlyMap<string, PersonState> | null; /** C09/C11: the re-engage verdict per address; an ineligible sender is out, a review note rides along. */ verdicts?: ReadonlyMap<string, ReengageVerdict> | null; /** Whether the seller's Sent was read for this list at all (false says so on every line; undefined says nothing, for the older callers). */ sentRead?: boolean; /** Addresses whose Sent read failed: judged by the inbound date, said so. */ sentFailed?: ReadonlySet<string> }): IntelItem[] {
   const coverage = opts.coverage ?? coverageFromNames(opts.dealAccounts ?? null);
   const byEmail = new Map<string, { last: Date; n: number; name: string | null; account: string | null; subject: string | null }>();
   for (const r of rows) {
@@ -163,8 +213,14 @@ export function rankPeople(rows: readonly WriterRow[], personas: readonly Person
   const personaByEmail = new Map(personas.filter((p) => p.email).map((p) => [String(p.email).toLowerCase(), p]));
   const out: IntelItem[] = [];
   for (const [email, w] of byEmail) {
-    if (w.last.getTime() > quiet) continue;
+    const st = opts.states?.get(email) ?? null;
+    if (st) {
+      // C10: an owed answer is a reply obligation (C35's list), not a re-engagement; a person we wrote to or who has a meeting ahead is not quiet.
+      if (st.answerOwed.owed || !st.quiet.quiet) continue;
+    } else if (w.last.getTime() > quiet) continue;
     if (opts.decided.has(`person:${email}`) || opts.unsubscribed.has(email)) continue;
+    const verdict = opts.verdicts?.get(email) ?? null;
+    if (verdict && !verdict.eligible) continue;
     const p = personaByEmail.get(email) ?? null;
     if (p?.do_not_contact) continue;
     // C02/C03: placed through the identity machinery (persona, the CRM contact's company, the thread, the domain); ambiguous stays unplaced.
@@ -177,10 +233,12 @@ export function rankPeople(rows: readonly WriterRow[], personas: readonly Person
     const name = p?.name ?? w.name ?? null;
     out.push({
       kind: 'person', id: email, key: `person:${email}`, title: `${name ?? email}${p?.title ? `, ${p.title}` : ''}${account ? ` at ${account}` : ` (${domainOf(email)})`}`, source: 'the mailbox', url: null, publishedAt: null, observedAt: w.last.toISOString(), truth: 'historical_observation',
-      line: `Wrote to us ${dayText(w.last)} (${w.n} message${w.n === 1 ? '' : 's'})${w.subject ? `, last about "${w.subject.slice(0, 60)}"` : ''}; ${words}${p ? '' : '; not a GAP contact yet'}${placed.ambiguous ? '; two accounts claim this domain: name the account' : ''}. Previously contacted, a response.`,
+      line: `Wrote to us ${dayText(w.last)} (${w.n} message${w.n === 1 ? '' : 's'})${w.subject ? `, last about "${w.subject.slice(0, 60)}"` : ''}; ${words}${p ? '' : '; not a GAP contact yet'}${placed.ambiguous ? '; two accounts claim this domain: name the account' : ''}. Previously contacted, a response.${st ? ` ${st.quiet.basis.charAt(0).toUpperCase()}${st.quiet.basis.slice(1)}.` : opts.sentFailed?.has(email) ? ' Our Sent could not be read for them, so a reply of ours may exist.' : opts.sentRead === false ? ' Our Sent was not read for this list, so a reply of ours may exist.' : ''}${verdict?.review ? ` Review before outreach: ${verdict.reason}.` : ''}`,
       accountName: account, accountHint: account ? null : domainOf(email), relevance: null, categories: [],
       person: { email, name, title: p?.title ?? null, lastWroteAt: w.last.toISOString(), messages: w.n, via: placed.via, ambiguous: placed.ambiguous, ...(lookup.inDeal === true ? { deals: lookup.account.deals.map((d) => ({ id: d.id, name: d.name, stage: d.stage, nextStep: d.nextStep })) } : {}) },
       opportunity: lookup.inDeal === true ? 'open' : lookup.inDeal === false ? 'none' : 'unknown',
+      ...(st ? { state: { quietDays: st.quiet.days, quietBasis: st.quiet.basis, nextMeetingAt: st.nextMeetingAt, lastOutboundAt: st.lastOutboundAt } } : {}),
+      ...(verdict?.review ? { review: verdict.reason } : {}),
       decisions: DECISIONS, rank: out.length, ...(inDeal ? { inDeal: true } : {}),
     });
   }
@@ -210,12 +268,22 @@ export interface Intelligence {
   pursued: PursuedItem[];
   /** How many undecided items the selection was cut from, so the shortage or the depth is said truthfully. */
   totals: { signals: number; triggers: number; people: number };
+  /** C34: how the selection was made (the pulls and windows in words), whether more exists beyond it, and the page shown. */
+  selection: { signals: string; people: string; moreSignals: boolean; morePeople: boolean; skipSignals: number; skipPeople: number; peopleWindowDays: number; peopleIntakeTruncated: boolean };
 }
 
 /** The decided trigger and person keys (the newest decision per key; a skip expires after SKIP_DAYS). */
+export const DECIDED_PAGE = 2000;
+
 export async function loadDecided(prisma: PrismaLike, now: Date): Promise<Set<string>> {
   if (typeof prisma?.gapAuditEvent?.findMany !== 'function') return new Set();
-  const rows: DecisionRow[] = await prisma.gapAuditEvent.findMany({ where: { kind: PROSPECT_DECISION }, orderBy: { created_at: 'desc' }, take: 2000, select: { subject_id: true, payload: true, created_at: true } }).catch(() => []);
+  // C34: every decision row is read, a page at a time; a capped read would let a skipped or dismissed item resurface.
+  const rows: DecisionRow[] = [];
+  for (let skip = 0; skip < DECIDED_PAGE * 50; skip += DECIDED_PAGE) {
+    const page: DecisionRow[] = await prisma.gapAuditEvent.findMany({ where: { kind: PROSPECT_DECISION }, orderBy: { created_at: 'desc' }, take: DECIDED_PAGE, skip, select: { subject_id: true, payload: true, created_at: true } }).catch(() => []);
+    rows.push(...page);
+    if (page.length < DECIDED_PAGE) break;
+  }
   const newest = new Map<string, DecisionRow>();
   for (const r of rows) if (!newest.has(r.subject_id)) newest.set(r.subject_id, r);
   const out = new Set<string>();
@@ -257,7 +325,13 @@ export async function loadPursued(prisma: PrismaLike, now: Date): Promise<Pursue
  * shares of any age, the strongest classes by score, then the rest newest; the totals are counts of the undecided
  * universe, not of the window. `dealAccounts` null means the deal state was not read: the person lines say so.
  */
-export async function loadIntelligence(prisma: PrismaLike, opts: { now: Date; limit?: number; peopleLimit?: number; /** C01: the deal coverage from the in-deals read (its status rides along); `dealAccounts` is the older names-only form. */ coverage?: DealCoverage; dealAccounts?: ReadonlySet<string> | null; /** C02/C03: the identity context; read from the database when absent and the client has the tables. */ identity?: IdentityContext | null }): Promise<Intelligence> {
+export const PEOPLE_WINDOW_DAYS = 180;
+export const PEOPLE_INTAKE_MAX = 2000;
+
+export async function loadIntelligence(prisma: PrismaLike, opts: { now: Date; limit?: number; peopleLimit?: number; /** C01: the deal coverage from the in-deals read (its status rides along); `dealAccounts` is the older names-only form. */ coverage?: DealCoverage; dealAccounts?: ReadonlySet<string> | null; /** C02/C03: the identity context; read from the database when absent and the client has the tables. */ identity?: IdentityContext | null; /** C34: the next page of the ranked selection (the Work panel's More), and a wider people window when asked. */ skipSignals?: number; skipPeople?: number; peopleWindowDays?: number; /** C10: the seller's Sent to one recipient (the briefing's Gmail reader); read for the people that would be listed, so quiet and answer owed count both sides. Absent: the inbound date alone, said so. */ listSent?: (recipient: string, afterEpoch: number, beforeEpoch: number) => Promise<Array<{ id: string; threadId: string | null; internalDate: Date; to: string; subject: string }>> }): Promise<Intelligence> {
+  const skipSignals = Math.max(0, opts.skipSignals ?? 0);
+  const skipPeople = Math.max(0, opts.skipPeople ?? 0);
+  const peopleWindowDays = Math.max(1, opts.peopleWindowDays ?? PEOPLE_WINDOW_DAYS);
   const coverage = opts.coverage ?? coverageFromNames(opts.dealAccounts ?? null);
   const identity: IdentityContext | null = opts.identity !== undefined ? opts.identity : typeof prisma?.canonicalCompany?.findMany === 'function' && typeof prisma?.gapAccountAlias?.findMany === 'function' ? await loadIdentityContext(prisma).catch(() => null) : null;
   const limit = opts.limit ?? INTEL_LIMIT;
@@ -276,14 +350,58 @@ export async function loadIntelligence(prisma: PrismaLike, opts: { now: Date; li
   const triggerRows: TriggerRow[] = typeof prisma?.pounceTrigger?.findMany === 'function' ? await prisma.pounceTrigger.findMany({ where: { dismissed: false }, orderBy: [{ first_seen_at: 'desc' }], take: 200 }).catch(() => []) : [];
   const names: Array<{ name: string }> = triggerRows.length && typeof prisma?.account?.findMany === 'function' ? await prisma.account.findMany({ where: { name: { in: [...new Set(triggerRows.map((t) => t.account_name))], mode: 'insensitive' } }, select: { name: true } }).catch(() => []) : [];
   const triggers = rankTriggers(triggerRows, new Set(names.map((n) => n.name)), decided, opts.now);
-  const since = new Date(opts.now.getTime() - 180 * 86_400_000);
+  const since = new Date(opts.now.getTime() - peopleWindowDays * 86_400_000);
   const msgs: Array<{ from_email: string; from_name: string | null; subject: string | null; received_at: Date | string; thread: { account_name: string | null } | null }> = typeof prisma?.inboundMessage?.findMany === 'function'
-    ? await prisma.inboundMessage.findMany({ where: { received_at: { gte: since } }, select: { from_email: true, from_name: true, subject: true, received_at: true, thread: { select: { account_name: true } } }, orderBy: { received_at: 'desc' }, take: 2000 }).catch(() => [])
+    ? await prisma.inboundMessage.findMany({ where: { received_at: { gte: since } }, select: { id: true, from_email: true, from_name: true, subject: true, snippet: true, received_at: true, thread: { select: { account_name: true } } }, orderBy: { received_at: 'desc' }, take: PEOPLE_INTAKE_MAX }).catch(() => [])
     : [];
   const emails = [...new Set(msgs.map((m) => m.from_email.toLowerCase()))];
   const personas: PersonaRow[] = emails.length && typeof prisma?.persona?.findMany === 'function' ? await prisma.persona.findMany({ where: { email: { in: emails, mode: 'insensitive' } }, select: { id: true, email: true, name: true, title: true, account_name: true, do_not_contact: true } }).catch(() => []) : [];
   const unsub: Array<{ email: string }> = emails.length && typeof prisma?.unsubscribedEmail?.findMany === 'function' ? await prisma.unsubscribedEmail.findMany({ where: { email: { in: emails, mode: 'insensitive' } }, select: { email: true } }).catch(() => []) : [];
-  const people = rankPeople(msgs.map((m) => ({ from_email: m.from_email, from_name: m.from_name, subject: m.subject, received_at: m.received_at, thread_account: m.thread?.account_name ?? null })), personas, { now: opts.now, decided, coverage, identity, unsubscribed: new Set(unsub.map((u) => u.email.toLowerCase())) });
+  const unsubscribed = new Set(unsub.map((u) => u.email.toLowerCase()));
+  const personaEmails = new Set(personas.filter((p) => p.email).map((p) => String(p.email).toLowerCase()));
+  // C09/C11: every inbound message's purpose from its subject and snippet; the sender's re-engage verdict from all of them.
+  const typed = msgs.map((m) => {
+    const email = String(m.from_email ?? '').trim().toLowerCase();
+    const mail = classifyMailType({ subject: m.subject, from: m.from_email });
+    const purpose: Purpose = mail.type === 'calendar' ? 'calendar' : classifyPurpose({ from: m.from_email, subject: m.subject, excerpt: (m as { snippet?: string | null }).snippet ?? null, direction: 'inbound', type: mail.type, calendar: mail.calendar }, { knownPerson: personaEmails.has(email) }).purpose;
+    return { m, email, mail, purpose };
+  });
+  const purposesBy = new Map<string, Purpose[]>();
+  for (const t of typed) purposesBy.set(t.email, [...(purposesBy.get(t.email) ?? []), t.purpose]);
+  const verdicts = new Map<string, ReengageVerdict>();
+  for (const [email, purposes] of purposesBy) verdicts.set(email, reengageEligible({ purposes, relationship: personaEmails.has(email) ? 'prospect' : 'unknown', optedOut: unsubscribed.has(email) }));
+  const writerRows = msgs.map((m) => ({ from_email: m.from_email, from_name: m.from_name, subject: m.subject, received_at: m.received_at, thread_account: m.thread?.account_name ?? null }));
+  const base = { now: opts.now, decided, coverage, identity, unsubscribed, verdicts, sentRead: !!opts.listSent };
+  // C10: the seller's Sent is read for the people that would be listed (a bounded number of Gmail reads), and the two-sided state decides quiet and answer owed.
+  let states: Map<string, PersonState> | null = null;
+  const sentFailed = new Set<string>();
+  let sentTargets = 0;
+  if (opts.listSent) {
+    const first = rankPeople(writerRows, personas, base);
+    const targets = first.slice(0, skipPeople + peopleLimit + 5).map((i) => i.id);
+    sentTargets = targets.length;
+    const events: StateEvent[] = [];
+    for (const t of typed) if (targets.includes(t.email)) events.push({ id: String((t.m as { id?: string }).id ?? `${t.email}:${new Date(t.m.received_at).toISOString()}`), at: new Date(t.m.received_at).toISOString(), direction: 'inbound', type: t.mail.type, isDraft: false, from: t.email, to: [], purpose: t.purpose, calendar: t.mail.calendar });
+    for (const email of targets) {
+      const sent = await opts.listSent(email, Math.floor(since.getTime() / 1000), Math.floor(opts.now.getTime() / 1000)).catch(() => null);
+      if (sent === null) { sentFailed.add(email); continue; }
+      for (const s of sent) {
+        const mail = classifyMailType({ subject: s.subject, from: null });
+        events.push({ id: `sent:${s.id}`, at: new Date(s.internalDate).toISOString(), direction: 'outbound', type: mail.type, isDraft: false, from: null, to: [email], purpose: mail.type === 'calendar' ? 'calendar' : 'buyer_conversation', calendar: mail.calendar });
+      }
+    }
+    states = peopleState(events, opts.now);
+    for (const email of sentFailed) states.delete(email);
+  }
+  const people = rankPeople(writerRows, personas, { ...base, states, sentFailed });
   const pursued = await loadPursued(prisma, opts.now);
-  return { signals: signals.slice(0, limit), triggers: triggers.slice(0, limit), people: people.slice(0, peopleLimit), pursued, totals: { signals: Math.max(signalTotal, signals.length), triggers: triggers.length, people: people.length } };
+  return {
+    signals: signals.slice(skipSignals, skipSignals + limit), triggers: triggers.slice(0, limit), people: people.slice(skipPeople, skipPeople + peopleLimit), pursued,
+    totals: { signals: Math.max(signalTotal, signals.length), triggers: triggers.length, people: people.length },
+    selection: {
+      signals: `ranked from three bounded pulls (your shares, up to 100; the strongest classes by score, up to 300; the rest newest, up to 200) of ${Math.max(signalTotal, signals.length)} undecided; showing ${Math.min(limit, Math.max(0, signals.length - skipSignals))} from ${skipSignals + 1}`,
+      people: `people who wrote in the last ${peopleWindowDays} days (up to ${PEOPLE_INTAKE_MAX} messages read${msgs.length >= PEOPLE_INTAKE_MAX ? ', the cap: older writers are not in this list' : ''}); ${opts.listSent ? `our Sent read for the ${sentTargets} who would be listed${sentFailed.size ? ` (${sentFailed.size} read failed)` : ''}` : 'our Sent not read: quiet is judged from their last message alone'}; showing ${Math.min(peopleLimit, Math.max(0, people.length - skipPeople))} of ${people.length} from ${skipPeople + 1}`,
+      moreSignals: signals.length > skipSignals + limit, morePeople: people.length > skipPeople + peopleLimit, skipSignals, skipPeople, peopleWindowDays, peopleIntakeTruncated: msgs.length >= PEOPLE_INTAKE_MAX,
+    },
+  };
 }
