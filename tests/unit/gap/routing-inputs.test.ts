@@ -832,7 +832,9 @@ describe('hypothesis evidence depth (closeout)', () => {
     expect(buildHypothesisForTest(hk([keyword, { ...keyword, id: 's2', source_kind: 'operator_knowledge', evidence_text: 'heard at MODEX' }]) as any, now)!.evidenceThin).toBe(true);
     expect(buildHypothesisForTest(hk([]) as any, now)!.evidenceThin).toBe(true);
     expect(buildHypothesisForTest(hk([keyword, fact]) as any, now)!.evidenceThin).toBe(false);
-    expect(buildHypothesisForTest(hk([keyword, { ...fact, freshness_expires_at: new Date('2026-09-01T00:00:00Z') }]) as any, now)!.evidenceThin).toBe(true);
+    // I06g: a verified fact past its window is NOT thin (age is a label); a fact a newer source says ended is.
+    expect(buildHypothesisForTest(hk([keyword, { ...fact, freshness_expires_at: new Date('2026-09-01T00:00:00Z') }]) as any, now)!.evidenceThin).toBe(false);
+    expect(buildHypothesisForTest(hk([keyword, { ...fact, metadata: { verified: 'excerpt_found_at_source', continuity: { kind: 'ended' } } }]) as any, now)!.evidenceThin).toBe(true);
     // Release C review SF1: a fact linked beside a CITED keyword hit is thin; the observation must cite only facts.
     expect(buildHypothesisForTest({ ...hk([keyword, fact]), observation: 'o [S:s3]. k [S:s1].' } as any, now)!.evidenceThin).toBe(true);
     expect(buildHypothesisForTest({ ...hk([keyword, fact]), observation: 'o, uncited.' } as any, now)!.evidenceThin).toBe(true);

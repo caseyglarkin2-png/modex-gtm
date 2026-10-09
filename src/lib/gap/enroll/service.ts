@@ -130,7 +130,7 @@ import { isResponseClass } from '@/lib/gap/taxonomy';
 import { checkSuppression, enroll, type EnrollRefusal } from '@/lib/gap/sequence/enrollment';
 import type { SuppressionReader } from '@/lib/gap/routing/suppression-read';
 import { evidenceRefsFromSignals } from '@/lib/gap/compiler/evidence-from-signals';
-import { firstNameOf, renderStepCopy, EVIDENCE_SIGNAL_SELECT, type EvidenceSignalRow } from '@/lib/gap/sequence/render';
+import { firstNameOf, historicalLabelsFor, renderStepCopy, EVIDENCE_SIGNAL_SELECT, type EvidenceSignalRow } from '@/lib/gap/sequence/render';
 
 /** Re-exported: the projection now lives with the compiler it serves (R3-3); callers of the old service export keep working. */
 export { evidenceRefsFromSignals } from '@/lib/gap/compiler/evidence-from-signals';
@@ -912,7 +912,7 @@ export async function enrollFromDecision(
   // R3-4: the slot render. The compiler judges `rendered.marked`; the queue gets `rendered.queued`.
   const rendered = renderStepCopy(
     { subject: subjectTemplate, body: bodyTemplate },
-    { firstName: firstNameOf(persona.name), account: accountName, observation: hypothesis.observation ?? null },
+    { firstName: firstNameOf(persona.name), account: accountName, observation: hypothesis.observation ?? null, historical: historicalLabelsFor((hypothesis.signals ?? []).map((link) => link.signal), input.now) },
   );
   if (rendered.unrendered) return refuse(`unrendered_placeholder:${rendered.unrendered}`, { target, token: rendered.unrendered });
   const wouldBe: WouldBeDraftItem = {

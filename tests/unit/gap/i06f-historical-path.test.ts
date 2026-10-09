@@ -21,6 +21,7 @@ import { checkObservationUnsupported } from '@/lib/gap/compiler/checks/c01-evide
 import { hypothesisSendable, VERIFIED_EXCERPT } from '@/lib/gap/research/evidence-gate';
 import { checkEvidenceFreshness } from '@/lib/gap/enroll/service';
 import { factUsability, isCurrentFact } from '@/lib/gap/research/currentness';
+import { historicalLabelsFor, renderStepCopy } from '@/lib/gap/sequence/render';
 
 const NOW = new Date('2026-10-08T15:00:00Z');
 const DAY = 86_400_000;
@@ -107,6 +108,22 @@ describe('I06f: a 2018 observation goes through the whole preparation path', () 
     expect(undated.detail).toMatch(/historical evidence f-hormel-2018 without its date \(May 2018\)/);
     expect(hypothesisSendable({ observation, account_name: 'Hormel Foods', signals: [{ signal: f as never }] }, NOW)).toBe(true);
     expect(checkEvidenceFreshness([f], NOW)).toBeNull();
+  });
+
+  it('I06g: an observation written while its fact was current carries no date; the render adds "(reported May 2018)" once the fact is historical, and C01 passes on the rendered copy', () => {
+    const thenCurrent = citedQuote(TITLE, QUOTE, f.id, 'Hormel Foods', { historical: false, at: f.observed_at });
+    expect(thenCurrent).not.toContain('reported');
+    const historical = historicalLabelsFor([f], NOW);
+    expect(historical).toEqual([{ id: f.id, label: 'May 2018' }]);
+    const rendered = renderStepCopy({ subject: 'Austin yards', body: 'Hi {{first_name}},\n\n{{observation}}\n\nMy guess is the expanded yards still run gate checks on paper. Is that close?' }, { firstName: 'Sam', account: 'Hormel Foods', observation: thenCurrent, historical });
+    expect(rendered.marked.body).toContain('[[SRC:f-hormel-2018]] (reported May 2018).');
+    expect(rendered.queued.body).toContain('(reported May 2018).');
+    const refs = evidenceRefsFromSignals([f as never], NOW);
+    const r = checkObservationUnsupported({ subject: 'Austin yards', body: `${rendered.marked.body}\n\nCasey Larkin` }, c01ctx(thenCurrent, refs));
+    expect(r.passed, r.detail).toBe(true);
+    // A fact still current gets no date added; an observation that already states the date is left alone.
+    expect(historicalLabelsFor([fact({ observed_at: daysAgo(3) })], NOW)).toEqual([]);
+    expect(renderStepCopy({ subject: 's', body: '{{observation}}' }, { firstName: 'Sam', account: 'Hormel Foods', observation: citedQuote(TITLE, QUOTE, f.id, 'Hormel Foods', reportedFor(f, NOW)), historical }).marked.body.match(/reported May 2018/g)).toHaveLength(1);
   });
 
   it('the same fact a newer source says ENDED is refused at every gate, by name, whatever the copy says', () => {
