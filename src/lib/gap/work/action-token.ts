@@ -7,6 +7,12 @@
  * action by itself (the mandate's section 5 and the review's B1). Verification refuses, by name, a forged or tampered
  * token (`bad_signature`), an expired one (`expired`), a malformed one (`malformed`) and a missing secret
  * (`no_secret`): there is no fallback to trust. Pinned by tests/unit/gap/briefing.test.ts.
+ *
+ * C43 (the commercial context and execution audit, 2026-10-08): a verified token is an IDENTITY of a link, not an
+ * authority to execute. Mail clients, chat apps and link scanners fetch links by GET to render a preview, so an op
+ * that changes state (start, decide, defer, review) must never run off a bare GET: the page renders a confirmation
+ * and the confirmed POST executes. `executionAllowed` is the one rule; the pages ask it before any effect. `open` is
+ * navigation and runs on GET.
  */
 import { createHmac, timingSafeEqual } from 'node:crypto';
 
@@ -26,6 +32,23 @@ export interface ActionPayload {
 export type ActionVerification = { ok: true; payload: ActionPayload } | { ok: false; reason: 'malformed' | 'bad_signature' | 'expired' | 'no_secret' };
 
 export const ACTION_TOKEN_TTL_SECONDS = 7 * 86_400;
+
+/** The ops that change state when a link is followed; `open` only navigates. */
+export const EXECUTING_OPS: ReadonlySet<ActionOp> = new Set<ActionOp>(['start', 'decide', 'defer', 'review']);
+
+export type ExecutionVerdict = { ok: true } | { ok: false; reason: 'preview_get' | 'not_executing' };
+
+/**
+ * C43: may this request execute the op the token names? A bare GET (what a link preview, a prefetch or a scanner
+ * sends) may execute nothing: the page shows a confirmation instead. A POST, or a GET the seller confirmed with an
+ * explicit `confirmed` step, may. A non-executing op (`open`) has nothing to execute.
+ */
+export function executionAllowed(input: { op: ActionOp; method: string; confirmed?: boolean }): ExecutionVerdict {
+  if (!EXECUTING_OPS.has(input.op)) return { ok: false, reason: 'not_executing' };
+  const method = String(input.method ?? '').toUpperCase();
+  if (method === 'POST' || (method === 'GET' && input.confirmed === true)) return { ok: true };
+  return { ok: false, reason: 'preview_get' };
+}
 
 /** The secret the links are signed with; null when unset (then links are minted unsigned and never verify). */
 export function actionSecret(env: Record<string, string | undefined> = process.env): string | null {
