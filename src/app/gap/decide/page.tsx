@@ -6,6 +6,7 @@
  * with the way on (the account, the Signals page, Work). A forged or expired link applies nothing. Session only.
  */
 import Link from 'next/link';
+import { hubspotContactByEmail } from '@/lib/gap/opportunity/contact-reads';
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { loginHref } from '@/lib/auth-return';
@@ -34,7 +35,7 @@ export default async function DecidePage({ searchParams }: { searchParams?: Prom
     const decision = sep > 0 ? v.payload.item.slice(sep + 1) : '';
     if (!key || !isDecision(decision)) body = { ok: false, line: 'This decision link names no decision. Nothing was applied.' };
     else {
-      const r = await applyDecision(prisma, { key, decision, actor: session.user.email, now, via: 'gmail:link' });
+      const r = await applyDecision(prisma, { key, decision, actor: session.user.email, now, via: 'gmail:link' }, { contactLookup: hubspotContactByEmail });
       body = r.ok ? { ok: true, line: decisionLine(r), href: r.href, accountName: r.accountName } : { ok: false, line: r.reason === 'not_found' ? 'That item is no longer on record.' : `Not applied: ${String(r.reason).replace(/_/g, ' ')}.` };
     }
   }

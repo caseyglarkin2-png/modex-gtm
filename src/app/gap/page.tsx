@@ -43,6 +43,7 @@ import Link from 'next/link';
 import { WorkToday } from '@/components/gap/work-today';
 import { IntelPanel } from '@/components/gap/intel-panel';
 import { loadIntelligence } from '@/lib/gap/work/intel';
+import { dealCoverageFrom } from '@/lib/gap/work/deal-coverage';
 import { loadAngles } from '@/lib/gap/agents/develop-angle';
 import { loadWorkDay } from '@/lib/gap/work/load-day';
 import { loadSellerSettings } from '@/lib/gap/work/settings';
@@ -237,7 +238,8 @@ export default async function GapCockpitPage({ searchParams }: { searchParams?: 
   // X13: the daily targets for the scorecard (the seller settings; defaults when none are stored).
   const sellerTargets = lane ? {} : (await loadSellerSettings(prisma)).targets;
   // I04: the day's intelligence for Casey's decisions, read soft; the prepared angles by item key.
-  const intel = lane ? null : await loadIntelligence(prisma, { now: new Date(), dealAccounts: new Set(data.inDeals.accounts.map((a) => a.accountName)) }).catch(() => null);
+  // C01/C04: the coverage carries the read's status, so an unavailable CRM says unknown, never no deal.
+  const intel = lane ? null : await loadIntelligence(prisma, { now: new Date(), coverage: dealCoverageFrom({ status: data.inDeals.status, accounts: data.inDeals.accounts.map((a) => ({ ...a, alsoRecordedAs: [], dealContacts: 0, people: [], known: 0 })), checkedAt: (data.inDeals as { checkedAt?: string | null }).checkedAt ?? null }) }).catch(() => null);
   const angles = intel ? Object.fromEntries([...(await loadAngles(prisma, { keys: [...intel.signals, ...intel.triggers, ...intel.people].map((i) => i.key), now: new Date() }).catch(() => new Map())).entries()]) : {};
   // UX-08 parity: after the response is sent, read the canonical pursuit state for the first few Work accounts
   // that have none remembered (serial, bounded, never blocking a render), so the next Work load says what the

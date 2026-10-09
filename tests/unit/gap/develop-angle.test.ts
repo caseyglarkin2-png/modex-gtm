@@ -143,7 +143,7 @@ describe('I03: the task', () => {
     const person = vi.fn<(prompt: string, maxTokens?: number) => Promise<{ text: string; provider: string }>>(async () => ({ text: JSON.stringify({ ...JSON.parse(GOOD), people: [1] }), provider: 'test' }));
     const pr = await developAngle(task({ itemKey: 'person:dave@kencogroup.com', input: { decision: 'pursue', email: 'dave@kencogroup.com', personaId: 1, name: 'Dave Kiesling', title: 'VP Operations', accountName: 'Kenco', lastWroteAt: '2026-09-16T12:00:00.000Z' } }), { prisma: w.client(), now: NOW }, { generate: person });
     expect(pr).toMatchObject({ ok: true, result: { key: 'person:dave@kencogroup.com', sourceLine: 'the mailbox, observed Sep 16, 2026 (a recent report)', peopleNamed: [{ personaId: 1 }] } });
-    expect(person.mock.calls[0][0]).toContain('they last wrote to us Sep 16, 2026. The angle is for reopening that conversation.');
+    expect(person.mock.calls[0][0]).toContain('they last wrote to us Sep 16, 2026. The angle is for continuing that conversation, not opening a new one.');
     const bad: DevelopAngleDeps = { generate: async () => ({ text: 'I cannot help with that.', provider: 'test' }) };
     expect(await developAngle(task(), { prisma: w.client(), now: NOW }, bad)).toMatchObject({ ok: false, reason: 'could_not_satisfy' });
     const stranger: DevelopAngleDeps = { generate: async () => ({ text: JSON.stringify({ ...JSON.parse(GOOD), people: [3] }), provider: 'test' }) };

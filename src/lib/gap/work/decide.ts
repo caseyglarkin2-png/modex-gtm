@@ -20,6 +20,12 @@ import { captureSignal } from '../signals/intake';
 import { listAgentTasks, queueAgentTask } from '../agents/tasks';
 import { nyDay } from './dates';
 import { accountHref } from '../account-intel/href';
+import { dealCoverageFrom, dealsAt, dealsByContactId, type DealLookup } from './deal-coverage';
+import { resolvePersonAccount } from './person-identity';
+import { loadIdentityContext } from '../identity/service';
+import type { IdentityContext } from '../identity/resolve';
+import { loadInDealsSummary, type InDealsSummary } from '../deals/in-deals';
+import type { ContactLookup } from '../opportunity/contact-reads';
 import { DECISIONS, PROSPECT_DECISION, type Decision } from './intel';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -55,6 +61,12 @@ export type DecideResult =
 export interface DecideDeps {
   /** The signal capture (tests inject one; production captures through signals/intake.ts). */
   capture?: typeof captureSignal;
+  /** C02: the HubSpot contact read by address (companies and deals the CRM associates); the real read by default, null when unconfigured. */
+  contactLookup?: ContactLookup;
+  /** C02/C03: the identity context (read from the database by default). */
+  identity?: IdentityContext | null;
+  /** C06: the in-deals read (the day's own by default) that scopes a person to their open deal. */
+  inDeals?: (prisma: PrismaLike, now: Date) => Promise<InDealsSummary | null>;
   queueAngle?: (prisma: PrismaLike, input: { key: string; decision: Decision; note: string | null; actor: string; now: Date; via: string; input: Record<string, unknown> }) => Promise<{ id: string; kept?: boolean }>;
 }
 
@@ -146,18 +158,34 @@ export async function applyDecision(prisma: PrismaLike, input: DecideInput, deps
     return { ok: true, key, decision: input.decision, effects, angleTaskId, accountName, href };
   }
 
-  // person
+  // person (C02, C05, C06): the authoritative sources are reloaded here, never trusted from the link.
   const persona = typeof prisma.persona?.findFirst === 'function' ? await prisma.persona.findFirst({ where: { email: { equals: parsed.email, mode: 'insensitive' } }, select: { id: true, name: true, title: true, account_name: true } }).catch(() => null) : null;
-  accountName = persona?.account_name ?? null;
+  const last = typeof prisma.inboundMessage?.findFirst === 'function' ? await prisma.inboundMessage.findFirst({ where: { from_email: { equals: parsed.email, mode: 'insensitive' } }, orderBy: { received_at: 'desc' } }).catch(() => null) : null;
+  const messages: number = typeof prisma.inboundMessage?.count === 'function' ? await prisma.inboundMessage.count({ where: { from_email: { equals: parsed.email, mode: 'insensitive' } } }).catch(() => 0) : 0;
+  // The CRM read is the caller's to supply (the route passes the real one); the library never reaches HubSpot on its own.
+  const contact = persona?.account_name || !deps.contactLookup ? null : await deps.contactLookup(parsed.email).catch(() => null);
+  const identity = deps.identity !== undefined ? deps.identity : typeof prisma.canonicalCompany?.findMany === 'function' && typeof prisma.gapAccountAlias?.findMany === 'function' ? await loadIdentityContext(prisma).catch(() => null) : null;
+  const placed = resolvePersonAccount({ email: parsed.email, persona, threadAccount: last?.thread?.account_name ?? null, identity, hubspotCompanyIds: contact?.companyIds ?? [] });
+  accountName = placed.accountName;
   href = accountName ? `${accountHref(accountName)}/` : '/gap/replies/';
   if (SPENDS.has(input.decision)) {
-    queued = await angle(prisma, { key, decision: input.decision, note: input.note ?? null, actor: input.actor, now: input.now, via, input: { email: parsed.email, personaId: persona?.id ?? null, name: persona?.name ?? null, title: persona?.title ?? null, accountName } });
+    const summary = await (deps.inDeals ?? ((p: PrismaLike, n: Date) => loadInDealsSummary(p, { now: n })))(prisma, input.now).catch(() => null);
+    const coverage = dealCoverageFrom(summary);
+    const lookup: DealLookup = accountName ? dealsAt(coverage, accountName) : contact?.contactId ? dealsByContactId(coverage, contact.contactId) : { inDeal: null };
+    const deals = lookup.inDeal === true ? lookup.account.deals.filter((d) => !contact?.dealIds?.length || !d.id || contact.dealIds.includes(d.id)).map((d) => ({ id: d.id, name: d.name, stage: d.stage, nextStep: d.nextStep, closeDate: d.closeDate })) : [];
+    const excerpt = (typeof last?.body_text === 'string' && last.body_text.trim() ? last.body_text : typeof last?.snippet === 'string' ? last.snippet : '').replace(/\s+/g, ' ').trim().slice(0, 600) || null;
+    queued = await angle(prisma, { key, decision: input.decision, note: input.note ?? null, actor: input.actor, now: input.now, via, input: {
+      email: parsed.email, personaId: persona?.id ?? null, name: persona?.name ?? contact?.name ?? last?.from_name ?? null, title: persona?.title ?? contact?.title ?? null,
+      accountName, accountHint: accountName ? null : placed.domain, resolvedVia: placed.via, ambiguous: placed.ambiguous,
+      lastWroteAt: last?.received_at ? new Date(last.received_at).toISOString() : null, messages, subject: last?.subject ?? null, inboundMessageId: last?.id ?? null, threadId: last?.thread_id ?? null, excerpt,
+      hubspotContactId: contact?.contactId ?? null, deals, dealCoverage: coverage.status, opportunity: lookup.inDeal === true ? 'open' : lookup.inDeal === false ? 'none' : 'unknown',
+    } });
     angleTaskId = queued.id;
     effects.push(queued.kept ? 'angle_kept' : 'angle_queued');
   } else {
     effects.push(input.decision === 'skip' ? 'skipped_30_days' : input.decision === 'dismiss' ? 'dismissed' : input.decision === 'save' ? 'saved' : 'explored');
   }
-  await recordDecision(prisma, key, input, { accountName, personaId: persona?.id ?? null, effects });
+  await recordDecision(prisma, key, input, { accountName, personaId: persona?.id ?? null, resolvedVia: placed.via, ambiguous: placed.ambiguous, inboundMessageId: last?.id ?? null, effects });
   return { ok: true, key, decision: input.decision, effects, angleTaskId, accountName, href };
 }
 

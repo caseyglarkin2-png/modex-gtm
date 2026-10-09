@@ -20,6 +20,10 @@
  * deal (worked from the deal). Execution safety is downstream and unchanged.
  */
 import { AUTO_REPLY_SUBJECT, FREEMAIL_DOMAINS, OWN_DOMAINS } from '../replies/domains';
+import { coverageFromNames, dealsAt, dealWords, type DealCoverage } from './deal-coverage';
+import { resolvePersonAccount } from './person-identity';
+import type { IdentityContext } from '../identity/resolve';
+import { loadIdentityContext } from '../identity/service';
 import { signalStatus } from '../signals/intake';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -63,8 +67,10 @@ export interface IntelItem {
   accountHint: string | null;
   relevance: string | null;
   categories: string[];
-  /** A person's name and title when GAP holds them. */
-  person: { email: string; name: string | null; title: string | null; lastWroteAt: string; messages: number } | null;
+  /** A person's name and title when GAP holds them; C02/C05: how the account was placed, and the open deals there. */
+  person: { email: string; name: string | null; title: string | null; lastWroteAt: string; messages: number; via?: string | null; ambiguous?: boolean; deals?: Array<{ id: string | null; name: string | null; stage: string; nextStep: string | null }> } | null;
+  /** C04: the opportunity standing, explicit: open (a complete CRM read found a deal), none (a complete read found none), unknown (no complete read). */
+  opportunity?: 'open' | 'none' | 'unknown';
   /** I05: the person's account is in an open deal: shown and labelled (work it from the deal), never dropped. */
   inDeal?: boolean;
   decisions: readonly Decision[];
@@ -141,7 +147,8 @@ type WriterRow = { from_email: string; from_name: string | null; subject: string
 type PersonaRow = { id: number; email: string | null; name: string | null; title: string | null; account_name: string | null; do_not_contact?: boolean | null };
 
 /** Pure: the people who wrote in and went quiet, one per address, newest last word first. */
-export function rankPeople(rows: readonly WriterRow[], personas: readonly PersonaRow[], opts: { now: Date; decided: ReadonlySet<string>; dealAccounts: ReadonlySet<string> | null; unsubscribed: ReadonlySet<string> }): IntelItem[] {
+export function rankPeople(rows: readonly WriterRow[], personas: readonly PersonaRow[], opts: { now: Date; decided: ReadonlySet<string>; /** C01/C04: the deal coverage (the in-deals read with its status); `dealAccounts` is the older names-only form. */ coverage?: DealCoverage; dealAccounts?: ReadonlySet<string> | null; unsubscribed: ReadonlySet<string>; /** C02/C03: the identity context the opportunity resolver uses (aliases, verified domains); null places by persona and thread only. */ identity?: IdentityContext | null; /** C02: HubSpot company ids by sender address, when a contact read carried them. */ contactCompanies?: ReadonlyMap<string, readonly string[]> }): IntelItem[] {
+  const coverage = opts.coverage ?? coverageFromNames(opts.dealAccounts ?? null);
   const byEmail = new Map<string, { last: Date; n: number; name: string | null; account: string | null; subject: string | null }>();
   for (const r of rows) {
     const email = r.from_email.trim().toLowerCase();
@@ -160,15 +167,21 @@ export function rankPeople(rows: readonly WriterRow[], personas: readonly Person
     if (opts.decided.has(`person:${email}`) || opts.unsubscribed.has(email)) continue;
     const p = personaByEmail.get(email) ?? null;
     if (p?.do_not_contact) continue;
-    const account = p?.account_name ?? w.account ?? null;
-    // I05: an open deal at the account is said, never a silent drop (the mandate's section 3); execution stays with the deal.
-    const inDeal = !!(account && opts.dealAccounts && opts.dealAccounts.has(account));
-    const dealWords = opts.dealAccounts ? (inDeal ? 'their account is in an open deal: work it from the deal' : 'no open deal') : 'no open deal on record here';
+    // C02/C03: placed through the identity machinery (persona, the CRM contact's company, the thread, the domain); ambiguous stays unplaced.
+    const placed = resolvePersonAccount({ email, persona: p, threadAccount: w.account, identity: opts.identity ?? null, hubspotCompanyIds: opts.contactCompanies?.get(email) ?? [] });
+    const account = placed.accountName;
+    // I05 + C04: an open deal at the account is said, never a silent drop; a negative only under a complete CRM read.
+    const lookup = dealsAt(coverage, account);
+    const inDeal = lookup.inDeal === true;
+    const words = dealWords(coverage, lookup);
     const name = p?.name ?? w.name ?? null;
     out.push({
       kind: 'person', id: email, key: `person:${email}`, title: `${name ?? email}${p?.title ? `, ${p.title}` : ''}${account ? ` at ${account}` : ` (${domainOf(email)})`}`, source: 'the mailbox', url: null, publishedAt: null, observedAt: w.last.toISOString(), truth: 'historical_observation',
-      line: `Wrote to us ${dayText(w.last)} (${w.n} message${w.n === 1 ? '' : 's'})${w.subject ? `, last about "${w.subject.slice(0, 60)}"` : ''}; ${dealWords}${p ? '' : '; not a GAP contact yet'}. Previously contacted, a response${inDeal ? '' : ', no live opportunity'}.`,
-      accountName: account, accountHint: account ? null : domainOf(email), relevance: null, categories: [], person: { email, name, title: p?.title ?? null, lastWroteAt: w.last.toISOString(), messages: w.n }, decisions: DECISIONS, rank: out.length, ...(inDeal ? { inDeal: true } : {}),
+      line: `Wrote to us ${dayText(w.last)} (${w.n} message${w.n === 1 ? '' : 's'})${w.subject ? `, last about "${w.subject.slice(0, 60)}"` : ''}; ${words}${p ? '' : '; not a GAP contact yet'}${placed.ambiguous ? '; two accounts claim this domain: name the account' : ''}. Previously contacted, a response.`,
+      accountName: account, accountHint: account ? null : domainOf(email), relevance: null, categories: [],
+      person: { email, name, title: p?.title ?? null, lastWroteAt: w.last.toISOString(), messages: w.n, via: placed.via, ambiguous: placed.ambiguous, ...(lookup.inDeal === true ? { deals: lookup.account.deals.map((d) => ({ id: d.id, name: d.name, stage: d.stage, nextStep: d.nextStep })) } : {}) },
+      opportunity: lookup.inDeal === true ? 'open' : lookup.inDeal === false ? 'none' : 'unknown',
+      decisions: DECISIONS, rank: out.length, ...(inDeal ? { inDeal: true } : {}),
     });
   }
   return out.sort((a, b) => b.observedAt.localeCompare(a.observedAt)).map((x, i) => ({ ...x, rank: i }));
@@ -244,7 +257,9 @@ export async function loadPursued(prisma: PrismaLike, now: Date): Promise<Pursue
  * shares of any age, the strongest classes by score, then the rest newest; the totals are counts of the undecided
  * universe, not of the window. `dealAccounts` null means the deal state was not read: the person lines say so.
  */
-export async function loadIntelligence(prisma: PrismaLike, opts: { now: Date; limit?: number; peopleLimit?: number; dealAccounts?: ReadonlySet<string> | null }): Promise<Intelligence> {
+export async function loadIntelligence(prisma: PrismaLike, opts: { now: Date; limit?: number; peopleLimit?: number; /** C01: the deal coverage from the in-deals read (its status rides along); `dealAccounts` is the older names-only form. */ coverage?: DealCoverage; dealAccounts?: ReadonlySet<string> | null; /** C02/C03: the identity context; read from the database when absent and the client has the tables. */ identity?: IdentityContext | null }): Promise<Intelligence> {
+  const coverage = opts.coverage ?? coverageFromNames(opts.dealAccounts ?? null);
+  const identity: IdentityContext | null = opts.identity !== undefined ? opts.identity : typeof prisma?.canonicalCompany?.findMany === 'function' && typeof prisma?.gapAccountAlias?.findMany === 'function' ? await loadIdentityContext(prisma).catch(() => null) : null;
   const limit = opts.limit ?? INTEL_LIMIT;
   const peopleLimit = opts.peopleLimit ?? REENGAGE_LIMIT;
   const decided = await loadDecided(prisma, opts.now);
@@ -268,7 +283,7 @@ export async function loadIntelligence(prisma: PrismaLike, opts: { now: Date; li
   const emails = [...new Set(msgs.map((m) => m.from_email.toLowerCase()))];
   const personas: PersonaRow[] = emails.length && typeof prisma?.persona?.findMany === 'function' ? await prisma.persona.findMany({ where: { email: { in: emails, mode: 'insensitive' } }, select: { id: true, email: true, name: true, title: true, account_name: true, do_not_contact: true } }).catch(() => []) : [];
   const unsub: Array<{ email: string }> = emails.length && typeof prisma?.unsubscribedEmail?.findMany === 'function' ? await prisma.unsubscribedEmail.findMany({ where: { email: { in: emails, mode: 'insensitive' } }, select: { email: true } }).catch(() => []) : [];
-  const people = rankPeople(msgs.map((m) => ({ from_email: m.from_email, from_name: m.from_name, subject: m.subject, received_at: m.received_at, thread_account: m.thread?.account_name ?? null })), personas, { now: opts.now, decided, dealAccounts: opts.dealAccounts ?? null, unsubscribed: new Set(unsub.map((u) => u.email.toLowerCase())) });
+  const people = rankPeople(msgs.map((m) => ({ from_email: m.from_email, from_name: m.from_name, subject: m.subject, received_at: m.received_at, thread_account: m.thread?.account_name ?? null })), personas, { now: opts.now, decided, coverage, identity, unsubscribed: new Set(unsub.map((u) => u.email.toLowerCase())) });
   const pursued = await loadPursued(prisma, opts.now);
   return { signals: signals.slice(0, limit), triggers: triggers.slice(0, limit), people: people.slice(0, peopleLimit), pursued, totals: { signals: Math.max(signalTotal, signals.length), triggers: triggers.length, people: people.length } };
 }

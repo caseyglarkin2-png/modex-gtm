@@ -7,6 +7,7 @@
  * Session only. 200 with the result; 400 bad body; 404 unknown item.
  */
 import { NextRequest, NextResponse } from 'next/server';
+import { hubspotContactByEmail } from '@/lib/gap/opportunity/contact-reads';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 import { badBody, intakeGuard } from '@/lib/gap/intake/route-helpers';
@@ -22,7 +23,7 @@ export async function POST(request: NextRequest) {
   if ('response' in g) return g.response;
   const parsed = Body.safeParse(await request.json().catch(() => ({})));
   if (!parsed.success) return badBody(parsed.error.issues);
-  const r = await applyDecision(prisma, { key: parsed.data.key, decision: parsed.data.decision, note: parsed.data.note ?? null, actor: g.email, now: new Date(), via: 'app' });
+  const r = await applyDecision(prisma, { key: parsed.data.key, decision: parsed.data.decision, note: parsed.data.note ?? null, actor: g.email, now: new Date(), via: 'app' }, { contactLookup: hubspotContactByEmail });
   if (!r.ok) return NextResponse.json({ error: r.reason }, { status: r.reason === 'not_found' ? 404 : 400 });
   return NextResponse.json({ ...r, line: decisionLine(r) });
 }

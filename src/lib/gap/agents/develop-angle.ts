@@ -41,6 +41,10 @@ export interface Angle {
 export interface PreparedAngle extends Angle {
   /** A03d: a voice warning the answer kept after the re-asks (the compiler's C14 warns the same way); Casey edits before a buyer sees it. */
   warnings?: string[];
+  /** C06: the angle is deal work at an open deal; `dealId` is the one deal when the scope is unambiguous. */
+  inDeal?: boolean;
+  dealId?: string | null;
+  dealIds?: Array<string | null>;
   taskId: string;
   key: string;
   title: string;
@@ -130,7 +134,7 @@ export function validateAngle(a: Angle, roster: ReadonlySet<number>, opts: { all
   return { ok: true };
 }
 
-export function buildAnglePrompt(input: { title: string; sourceLine: string; accountName: string | null; accountHint: string | null; categories: string[]; note: string | null; person: { name: string | null; title: string | null; email: string; lastWroteAt?: string | null } | null; roster: Array<{ id: number; name: string | null; title: string | null }>; theses: Array<{ family: string | null; observation: string }>; recent: string[]; candidateAccounts: string[]; decision: string }): string {
+export function buildAnglePrompt(input: { title: string; sourceLine: string; accountName: string | null; accountHint: string | null; categories: string[]; note: string | null; person: { name: string | null; title: string | null; email: string; lastWroteAt?: string | null; subject?: string | null; excerpt?: string | null; messages?: number | null } | null; roster: Array<{ id: number; name: string | null; title: string | null }>; theses: Array<{ family: string | null; observation: string }>; recent: string[]; candidateAccounts: string[]; decision: string; /** C06: the person's open deals, when the Pursue found them. */ deals?: Array<{ id: string | null; name: string | null; stage: string; nextStep: string | null }> }): string {
   const pains = YARDFLOW_MESSAGING.painFramework.defaultPains.map((p) => `- ${p}`).join('\n');
   return [
     'You develop ONE commercial angle for a YardFlow seller from one piece of intelligence. Answer with one JSON object only: {"whyItMatters": "...", "accounts": [...], "roles": [...], "people": [persona ids], "starters": ["...", "..."], "proposedAction": "email" | "call" | "research", "caveat": "..." | null}. No prose around it.',
@@ -145,7 +149,9 @@ export function buildAnglePrompt(input: { title: string; sourceLine: string; acc
     input.note ? `Casey's note: "${input.note}"` : '',
     input.accountName ? `Account: ${input.accountName}.` : input.accountHint ? `The company named is ${input.accountHint}; it is not a GAP account yet. Name the accounts (that company, or others the item points at) in "accounts".` : 'No account is named. Name the kinds of company and any specific accounts the item points at in "accounts".',
     input.candidateAccounts.length ? `GAP accounts whose names match: ${input.candidateAccounts.join('; ')}.` : '',
-    input.person ? `The person: ${input.person.name ?? input.person.email}${input.person.title ? `, ${input.person.title}` : ''}${input.person.lastWroteAt ? `; they last wrote to us ${dayText(input.person.lastWroteAt)}` : ''}. The angle is for reopening that conversation.` : '',
+    input.person ? `The person: ${input.person.name ?? input.person.email}${input.person.title ? `, ${input.person.title}` : ''}${input.person.lastWroteAt ? `; they last wrote to us ${dayText(input.person.lastWroteAt)}${input.person.messages ? ` (${input.person.messages} message${input.person.messages === 1 ? '' : 's'} on record)` : ''}` : ''}. The angle is for continuing that conversation, not opening a new one.` : '',
+    input.person?.excerpt ? `What they last wrote${input.person.lastWroteAt ? ` (${dayText(input.person.lastWroteAt)}${input.person.subject ? `, subject "${input.person.subject.slice(0, 80)}"` : ''})` : ''}, their words, quoted for you only: "${input.person.excerpt.slice(0, 600)}". Build on what they said; do not ask what they already answered.` : '',
+    input.deals?.length ? `${input.accountName ?? 'This account'} is in ${input.deals.length === 1 ? 'an open HubSpot deal' : `${input.deals.length} open HubSpot deals`}: ${input.deals.map((d) => `${d.name ?? 'a deal'}${d.stage ? ` (${d.stage})` : ''}${d.nextStep ? `, next step: ${d.nextStep.slice(0, 160)}` : ''}`).join('; ')}. The angle is deal work: carry the deal's next step forward from the conversation; never a cold opener; "proposedAction" is email or call${input.deals.length > 1 ? '; say in the caveat which deal the angle serves' : ''}.` : '',
     input.roster.length ? `People GAP holds at the account (offer at most three by persona id, the best fit first; never anyone else):\n${input.roster.map((p) => `- id ${p.id}: ${p.name ?? 'unnamed'}${p.title ? `, ${p.title}` : ''}`).join('\n')}` : 'No people are on record for this account: leave "people" empty and name the roles.',
     input.theses.length ? `What GAP already thinks about the account (hypotheses, not facts):\n${input.theses.map((t) => `- ${t.family ?? 'unmapped'}: ${t.observation.slice(0, 200)}`).join('\n')}` : '',
     input.recent.length ? `Other recent items at the account: ${input.recent.map((r) => `"${r.slice(0, 80)}"`).join('; ')}.` : '',
@@ -172,7 +178,9 @@ export async function developAngle(task: ClaimedTask, ctx: { prisma: PrismaLike;
   const accountHint = str(input.accountHint);
   const title = str(input.title) ?? (m[1] === 'person' ? `${str(input.name) ?? str(input.email) ?? 'A person'} wrote to us` : 'An item');
   const categories = Array.isArray(input.categories) ? input.categories.filter((c): c is string => typeof c === 'string') : [];
-  const person = m[1] === 'person' ? { email: str(input.email) ?? m[2], name: str(input.name), title: str(input.title), lastWroteAt: str(input.lastWroteAt) } : null;
+  const person = m[1] === 'person' ? { email: str(input.email) ?? m[2], name: str(input.name), title: str(input.title), lastWroteAt: str(input.lastWroteAt), subject: str(input.subject), excerpt: str(input.excerpt), messages: typeof input.messages === 'number' ? input.messages : null } : null;
+  // C06: the open deals the Pursue scoped the person to (the day's CRM read); the angle is deal work, never a cold opener.
+  const deals = Array.isArray(input.deals) ? (input.deals as Array<{ id?: string | null; name?: string | null; stage?: string; nextStep?: string | null }>).filter((d) => d && typeof d === 'object') : [];
 
   const roster: Array<{ id: number; name: string | null; title: string | null }> = accountName && typeof prisma?.persona?.findMany === 'function'
     ? (await prisma.persona.findMany({ where: { account_name: accountName, do_not_contact: false }, select: { id: true, name: true, title: true }, take: 60 }).catch(() => []) as Array<{ id: number; name: string | null; title: string | null }>)
@@ -190,7 +198,7 @@ export async function developAngle(task: ClaimedTask, ctx: { prisma: PrismaLike;
     : [];
 
   const sourceLine = sourceLineFor({ source: str(input.source), url: str(input.url), publishedAt: str(input.publishedAt), observedAt: str(input.lastWroteAt) ?? str(input.observedAt) }, now);
-  const prompt = buildAnglePrompt({ title, sourceLine, accountName, accountHint, categories, note: str(input.note), person, roster, theses, recent, candidateAccounts, decision: str(input.decision) ?? task.request });
+  const prompt = buildAnglePrompt({ title, sourceLine, accountName, accountHint, categories, note: str(input.note), person, roster, theses, recent, candidateAccounts, decision: str(input.decision) ?? task.request, deals: deals.map((d) => ({ id: d.id ?? null, name: d.name ?? null, stage: d.stage ?? '', nextStep: d.nextStep ?? null })) });
   const generate = deps.generate ?? ((p: string, m?: number) => gapGenerate(ctx.prisma, { prompt: p, maxTokens: m ?? MAX_TOKENS, tier: task.input && (task.input as Record<string, unknown>).decision === 'more' ? 'strong' : 'routine', task: { id: task.id, kind: task.kind, itemKey: task.itemKey }, now: ctx.now }));
   const rosterIds = new Set(roster.map((p) => p.id));
   let out = await generate(prompt, MAX_TOKENS);
@@ -226,7 +234,7 @@ ${out.text.slice(0, 3000)}`, MAX_TOKENS);
   }
   if (!check.ok) return { ok: false, reason: 'could_not_satisfy', detail: `${check.reason}${check.detail ? ` ${check.detail}` : ''}${calls > 1 ? ` (after ${calls - 1 === 1 ? 'one re-ask' : `${calls - 1} re-asks`})` : ''}` };
   const peopleNamed = angle.people.map((id) => roster.find((p) => p.id === id)).filter((p): p is { id: number; name: string | null; title: string | null } => !!p).map((p) => ({ personaId: p.id, name: p.name, title: p.title }));
-  const result: Omit<PreparedAngle, 'taskId' | 'preparedAt'> & { provider: string; calls: number } = { key: task.itemKey, title, accountName, accountHint, sourceLine, ...angle, peopleNamed, provider: out.provider, calls, warnings };
+  const result: Omit<PreparedAngle, 'taskId' | 'preparedAt'> & { provider: string; calls: number } = { key: task.itemKey, title, accountName, accountHint, sourceLine, ...angle, peopleNamed, provider: out.provider, calls, warnings, ...(deals.length ? { inDeal: true, dealId: deals.length === 1 ? deals[0].id ?? null : null, dealIds: deals.map((d) => d.id ?? null) } : {}) };
   return { ok: true, result };
 }
 

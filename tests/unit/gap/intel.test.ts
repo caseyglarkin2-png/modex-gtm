@@ -91,9 +91,13 @@ describe('I01: people who wrote in and went quiet', () => {
     expect(items.map((i) => i.id)).toEqual(['dave.kiesling@kencogroup.com', 'ivanildo.andres@mdlz.com', 'deal@kroger.example']);
     expect(items[2]).toMatchObject({ inDeal: true, accountName: 'Kroger' });
     expect(items[2].line).toContain('their account is in an open deal: work it from the deal');
-    expect(rankPeople(rows.slice(0, 1), personas, { now: NOW, decided: new Set(), dealAccounts: null, unsubscribed: new Set() })[0].line).toContain('no open deal on record here');
+    // C04: no complete CRM read is UNKNOWN, never a negative.
+    const unread = rankPeople(rows.slice(0, 1), personas, { now: NOW, decided: new Set(), dealAccounts: null, unsubscribed: new Set() })[0];
+    expect(unread.line).toContain('open deal unknown');
+    expect(unread.line).not.toMatch(/no live opportunity|no open deal found/);
+    expect(unread.opportunity).toBe('unknown');
     expect(items[0]).toMatchObject({ kind: 'person', key: 'person:dave.kiesling@kencogroup.com', title: 'Dave Kiesling, VP Operations at Kenco', accountName: 'Kenco', truth: 'historical_observation', person: { messages: 2, name: 'Dave Kiesling' } });
-    expect(items[0].line).toMatch(/^Wrote to us Sep 16, 2026 \(2 messages\), last about "Re: yards at Chattanooga"; no open deal\. Previously contacted/);
+    expect(items[0].line).toMatch(/^Wrote to us Sep 16, 2026 \(2 messages\), last about "Re: yards at Chattanooga"; no open deal found\. Previously contacted/);
     expect(items[1]).toMatchObject({ accountName: null, accountHint: 'mdlz.com' });
     expect(items[1].line).toContain('not a GAP contact yet');
   });
