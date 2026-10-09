@@ -358,6 +358,9 @@ async function AccountBody({ slug, q, email, now }: { slug: string; q: AccountQu
             clawd: readers.clawd,
             replies: pursuit.state.lastInbound && pursuit.state.replyClass ? [{ from: pursuit.state.lastInbound.who, at: pursuit.state.lastInbound.at, snippet: pursuit.state.lastInbound.snippet, kind: pursuit.state.replyClass.kind, label: pursuit.state.replyClass.label, address: pursuit.state.lastInbound.from ?? null }] : [],
             people: [...inputs.personas.map((p) => ({ name: p.name, title: p.title, email: p.email ?? null })), ...(inputs.hubspotPeople?.people ?? []).map((p) => ({ name: p.name, title: p.title }))],
+            // B1/B2: our Sent mail and the HubSpot engagements the inputs carry (null when not read this time).
+            sent: inputs.sent ?? null,
+            engagements: inputs.engagements ?? null,
             now,
           }),
           clawdRead: readers.clawd.read,

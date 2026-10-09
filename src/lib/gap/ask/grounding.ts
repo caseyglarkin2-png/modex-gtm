@@ -25,7 +25,7 @@ export const ASK_ANSWER_WORDS = 160;
  * says "no context" over a source that was not read. Derived from the reads the page already made (the HubSpot deal
  * read, the synced inbox, the vault and Clawd readers, the signals); no new read.
  */
-export type AskCoverageSource = 'hubspot' | 'gmail_thread' | 'gmail_sent' | 'gmail_drafts' | 'vault' | 'clawd' | 'signals';
+export type AskCoverageSource = 'hubspot' | 'hubspot_engagements' | 'gmail_thread' | 'gmail_sent' | 'gmail_drafts' | 'vault' | 'clawd' | 'signals';
 export type AskCoverageStatus = 'read' | 'partial' | 'not_read' | 'failed';
 export interface AskCoverage {
   source: AskCoverageSource;
@@ -33,16 +33,23 @@ export interface AskCoverage {
   detail: string | null;
 }
 
-export const ASK_COVERAGE_WORDS: Record<AskCoverageSource, string> = { hubspot: 'HubSpot', gmail_thread: 'the Gmail thread', gmail_sent: 'Gmail Sent', gmail_drafts: 'Gmail drafts', vault: 'the vault', clawd: 'Clawd', signals: 'the signals' };
+export const ASK_COVERAGE_WORDS: Record<AskCoverageSource, string> = { hubspot: 'HubSpot', hubspot_engagements: 'HubSpot engagements', gmail_thread: 'the Gmail thread', gmail_sent: 'Gmail Sent', gmail_drafts: 'Gmail drafts', vault: 'the vault', clawd: 'Clawd', signals: 'the signals' };
 
-/** The one line for the gaps: null when every source was read in full. */
+/**
+ * The one line for what was and was not read: the gaps first ("Not read this time", "Partly read"), then what was read
+ * WITH what it held (B3: "Read: the vault (synced 10:39, 92 calls), Gmail Sent (3 messages), HubSpot engagements (7)");
+ * a read source with nothing to say about its contents is not listed. Null when every source was read in full and none
+ * carries a count. The gaps lead because the assignment prints the line verbatim only when it starts with a gap prefix.
+ */
 export function coverageLineOf(coverage: readonly AskCoverage[]): string | null {
   const say = (c: AskCoverage) => `${ASK_COVERAGE_WORDS[c.source]}${c.detail ? ` (${c.detail})` : ''}`;
   const notRead = coverage.filter((c) => c.status === 'not_read' || c.status === 'failed');
   const partial = coverage.filter((c) => c.status === 'partial');
+  const read = coverage.filter((c) => c.status === 'read' && c.detail);
   const parts: string[] = [];
   if (notRead.length) parts.push(`Not read this time: ${notRead.map(say).join(', ')}`);
   if (partial.length) parts.push(`Partly read: ${partial.map(say).join(', ')}`);
+  if (read.length) parts.push(`Read: ${read.map(say).join(', ')}`);
   return parts.length ? parts.join('. ') : null;
 }
 

@@ -206,6 +206,27 @@ export interface AccountInputs {
     identityRead: boolean;
     detail: string | null;
   } | null;
+  /**
+   * B1 (knowledge program, 2026-10-09): OUR mail to the account from the GAP mailbox's Sent folder, last 180 days, at
+   * most 50, newest first (account-intel/sent.ts). `read` false with `detail`: no GAP sender configured, or the read
+   * failed; `read` true with `detail`: some of it was read (a query failed or hit the deadline). Null: not read this time.
+   */
+  sent?: {
+    messages: Array<{ id: string; to: string; subject: string | null; at: string; excerpt: string; threadId: string | null }>;
+    read: boolean;
+    detail: string | null;
+  } | null;
+  /**
+   * B2 (knowledge program, 2026-10-09): the HubSpot company's notes, calls, meetings and logged emails, last 365 days,
+   * at most 50 each, newest first (hubspot/engagements.ts; cached per company). `read` false with `detail`: no token,
+   * no company, or a read failed (the items read stand). An email carries whose it was and which way it went: only an
+   * email FROM them is ever buyer words. Null: not read this time.
+   */
+  engagements?: {
+    items: Array<{ kind: 'note' | 'call' | 'meeting' | 'email'; at: string; title: string | null; body: string; id: string; from?: string | null; to?: string | null; direction?: 'incoming' | 'outgoing' | null }>;
+    read: boolean;
+    detail: string | null;
+  } | null;
 }
 
 /** C6: how an inbound message reached the account: its thread, or the identity path that placed its sender. */
