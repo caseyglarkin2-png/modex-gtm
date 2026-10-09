@@ -14,7 +14,8 @@ import { agentTaskHandlers } from '@/lib/gap/agents/handlers';
 import { runAgentTasks, type ClaimedTask } from '@/lib/gap/agents/tasks';
 import { applyDecision } from '@/lib/gap/work/decide';
 import { assembleCommercialContext } from '@/lib/gap/context/assemble';
-import { packetRecord, packetSeedFromInput, seedRevision, validateAngleClaims } from '@/lib/gap/agents/angle-claims';
+import { buyerSubjectRe, packetRecord, packetSeedFromInput, seedRevision, validateAngleClaims } from '@/lib/gap/agents/angle-claims';
+import { buyerClaimsFromTimeline } from '@/lib/gap/context/assemble';
 import type { ContextOpportunity, TimelineEvent } from '@/lib/gap/context/commercial-context';
 import { DAVE_EMAIL, FILES, KENCO, ROADMAP, snapshot, vaultOf } from './stream-b-fixture';
 
@@ -203,6 +204,20 @@ describe('C21/C22: the angle reads the commercial-context packet and every claim
     expect(r.result).not.toHaveProperty('support.0.text', undefined);
   });
 
+  it('C57 F9: with no timeline injected, the handler reads the typed timeline itself (the stored inbound rows and the Sent reader given), so the prompt carries the last exchange naming our send; the identity the Pursue placed stands', async () => {
+    const w = ledgerDb({ accounts: ['Kenco Logistics'], personas: [], inbound: [{ id: 'm-sep16', thread_id: 't-kenco', rfc_message_id: '<sep16@kencogroup.com>', from_email: DAVE_EMAIL, from_name: 'Dave Kiesling', subject: 'Re: YardFlow and the 2027 roadmap', body_text: ROADMAP, received_at: new Date('2026-09-16T14:02:00Z'), source: 'gmail', thread: { account_name: 'Kenco Logistics' } }] }, NOW);
+    const listSent = vi.fn<(recipient: string, after: number, before: number) => Promise<Array<{ id: string; threadId: string | null; internalDate: Date; to: string; subject: string }>>>(async () => [{ id: 'sent-oct1', threadId: 't-kenco', internalDate: new Date('2026-10-01T16:00:00Z'), to: DAVE_EMAIL, subject: 'Re: YardFlow and the 2027 roadmap' }]);
+    const generate = gen(answer());
+    const r = await developAngle(kencoTask(), { prisma: w.client(), now: NOW }, { generate, thread: { listSent, ownAddresses: new Set(['casey@yardflow.ai']) } });
+    expect(r.ok).toBe(true);
+    const prompt = generate.mock.calls[0][0];
+    expect(prompt).toContain('Last exchange: they last wrote Sep 16, 2026 ("Re: YardFlow and the 2027 roadmap"); we last wrote Oct 1, 2026');
+    expect(listSent).toHaveBeenCalledTimes(1);
+    expect(String(listSent.mock.calls[0][0])).toBe(DAVE_EMAIL);
+    if (r.ok) expect(r.result).toMatchObject({ accountName: 'Kenco Logistics', inDeal: true });
+    expect(prompt).not.toContain('gmail: could not be read');
+  });
+
   it('C22: an invented installed system is re-asked naming it, then refused; an unsupported buyer claim is refused unless labelled an inference; an unhedged pain with no record is refused; a supported July observation stays usable with its date; a label the record lacks is refused', async () => {
     const w = ledgerDb({ accounts: ['Kenco Logistics'], personas: [] }, NOW);
     const packet = await packetOf();
@@ -217,8 +232,10 @@ describe('C21/C22: the angle reads the commercial-context packet and every claim
     expect(await developAngle(kencoTask(), { prisma: w.client(), now: NOW }, { generate: fixed, packet })).toMatchObject({ ok: true, result: { calls: 2 } });
     // The pure validator: the buyer claim, the pain, the inference label, the historical observation, the unknown label.
     const buyer = { whyItMatters: 'I suspect the timing is right. Dave wants a pilot in Allentown before the budget closes.', starters: STARTERS };
-    expect(validateAngleClaims(buyer, [], record.refs)).toMatchObject({ ok: false, reason: 'unsupported_buyer_claim', detail: 'Dave wants a pilot in Allentown before the budget closes.' });
-    expect(validateAngleClaims(buyer, [{ text: 'Dave wants a pilot in Allentown before the budget closes.', refs: [], kind: 'inference' }], record.refs)).toMatchObject({ ok: true, support: expect.arrayContaining([expect.objectContaining({ text: 'Dave wants a pilot in Allentown before the budget closes.', kind: 'inference', refs: [] })]) });
+    // C57 F11: Dave is a buyer subject because he is a packet person, not because of a list.
+    const dave = { people: [{ name: 'Dave Kiesling', email: DAVE_EMAIL }] };
+    expect(validateAngleClaims(buyer, [], record.refs, dave)).toMatchObject({ ok: false, reason: 'unsupported_buyer_claim', detail: 'Dave wants a pilot in Allentown before the budget closes.' });
+    expect(validateAngleClaims(buyer, [{ text: 'Dave wants a pilot in Allentown before the budget closes.', refs: [], kind: 'inference' }], record.refs, dave)).toMatchObject({ ok: true, support: expect.arrayContaining([expect.objectContaining({ text: 'Dave wants a pilot in Allentown before the budget closes.', kind: 'inference', refs: [] })]) });
     const pain = { whyItMatters: 'Their yards run on radios and clipboards. I suspect the reconnect is the moment to ask about the ungated sites and the gate.', starters: STARTERS };
     expect(validateAngleClaims(pain, [], record.refs)).toMatchObject({ ok: false, reason: 'invented_pain', detail: 'Their yards run on radios and clipboards.' });
     expect(validateAngleClaims({ ...pain, whyItMatters: pain.whyItMatters.replace('Their yards run on', 'My guess is their yards still run on') }, [], record.refs)).toMatchObject({ ok: true });
@@ -227,6 +244,19 @@ describe('C21/C22: the angle reads the commercial-context packet and every claim
     expect(july).toMatchObject({ ok: true });
     if (july.ok) expect(july.support[1].refs[0]).toMatchObject({ ref: julyLabel, at: '2026-07-16T00:00:00.000Z', claimClass: 'buyer_said', sourceId: 'vault:05_Meetings/2026-07-16 Kenco Logistics.md#Buyer words (verbatim)' });
     expect(validateAngleClaims({ whyItMatters: WHY, starters: STARTERS }, [{ text: WHY, refs: ['K99'], kind: 'fact' }], record.refs)).toEqual({ ok: false, reason: 'unknown_ref', detail: 'K99' });
+    // C57 F11: the buyer subjects come from the packet's people, never a hard-coded list: Bryan is refused when Bryan is a packet person and no buyer line supports it.
+    const bryan = { whyItMatters: 'My guess is the timing works. Bryan confirmed the budget for a yard network pilot in 2027.', starters: STARTERS };
+    expect(validateAngleClaims(bryan, [], record.refs, { people: [{ name: 'Bryan Alvarez', email: 'bryan.alvarez@kencogroup.com' }] })).toMatchObject({ ok: false, reason: 'unsupported_buyer_claim', detail: 'Bryan confirmed the budget for a yard network pilot in 2027.' });
+    expect(validateAngleClaims(bryan, [], record.refs, { people: [{ name: 'Dave Kiesling' }] })).toMatchObject({ ok: true });
+    expect(buyerSubjectRe([{ name: 'Bryan Alvarez' }]).test('Bryan said so')).toBe(true);
+    expect(buyerSubjectRe([]).test('Bryan said so')).toBe(false);
+    expect(buyerSubjectRe([]).test('the committee decided')).toBe(true);
+    // C57 F10: the Pursue's purpose rides on the seeded message, so a vendor pitch never seeds a buyer fact.
+    const vendorSeed = packetSeedFromInput({ ...personInput, email: 'seb@riserify.example', purpose: 'vendor_solicitation', excerpt: 'We book meetings for yard software vendors. Reply YES to book a strategy call.' });
+    expect(vendorSeed.timeline[0].purpose).toBe('vendor_solicitation');
+    expect(buyerClaimsFromTimeline(vendorSeed.timeline, 'Kenco Logistics').filter((c) => c.claimClass === 'buyer_said')).toEqual([]);
+    expect(packetSeedFromInput({ ...personInput, purpose: 'not a purpose' }).timeline[0].purpose).toBeNull();
+    expect(packetSeedFromInput(personInput).timeline[0].purpose).toBeNull();
     // C23 seed: the revision of what the Pursue carried moves with the CRM read and the message, not with the clock.
     expect(seedRevision(personInput)).toBe(seedRevision({ ...personInput, decision: 'more', note: 'x' }));
     expect(seedRevision(personInput)).not.toBe(seedRevision({ ...personInput, deals: [{ ...personInput.deals[0], nextStep: 'Send the phased proposal' }] }));
