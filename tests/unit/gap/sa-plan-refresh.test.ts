@@ -106,6 +106,12 @@ describe('B2: a card\'s own move that is its obligation said again is one item, 
     expect(itemsForDay(day([other]), '2026-10-09').map((i) => i.key)).toEqual(['commitment:reply:ooo:diego.fonseca@sgws.com:2026-05-26', "follow_up:Southern Glazer's Wine & Spirits:2026-10-09"]);
   });
 
+  it('an obligation at a parked tier (later, held, research) is never an item: October 9 pushed Kroger\'s "later" follow-up as item 9', () => {
+    const withLater: WorkCard = { ...KROGER_DEAL, obligations: [...(KROGER_DEAL.obligations ?? []), obligation({ key: 'c-kroger-later', title: 'Follow up with joey maggard', tier: 'later', line: 'An open HubSpot deal at Kroger: work it from the deal. No follow-up while it stands.' }), obligation({ key: 'c-kroger-held', title: 'Held thing', tier: 'held' }), obligation({ key: 'c-kroger-research', title: 'Research thing', tier: 'research' })] };
+    const items = itemsForDay(day([withLater]), '2026-10-09');
+    expect(items.map((i) => i.key), 'no parked-tier obligation is an item').toEqual(['deal:Kroger:2026-10-09', 'commitment:c-kroger-1']);
+  });
+
   it('samePerson: by email when both carry one, else by name (case and spaces aside); neither naming anyone is the same', () => {
     expect(samePerson({ name: 'Diego Fonseca' }, { name: ' diego fonseca ', email: 'diego.fonseca@sgws.com' })).toBe(true);
     expect(samePerson({ name: 'Diego Fonseca', email: 'a@x.com' }, { name: 'Diego Fonseca', email: 'b@x.com' })).toBe(false);

@@ -29,6 +29,7 @@ import type { AskContext } from '../ask/grounding';
 import { loadActionPack } from '../execution/action-pack';
 import { signActionToken } from './action-token';
 import { COMMAND_WORDS } from './briefing';
+import { loadPursued, type PursuedItem } from './intel';
 import type { DayPlan, PlanItem } from './plan';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -44,7 +45,15 @@ export interface PreparedEmail {
   subject: string;
   body: string;
 }
-export type Prepared = PreparedEmail | { kind: 'none' };
+/** A prepared ANGLE (a develop_angle task that succeeded for a person at this account): not copy, a grounded opening the seller works from. */
+export interface PreparedAngle {
+  kind: 'angle';
+  /** The writer the angle was developed for (name, else email). */
+  who: string;
+  whyItMatters: string;
+  opener: string | null;
+}
+export type Prepared = PreparedEmail | PreparedAngle | { kind: 'none' };
 
 export interface BuiltAssignment {
   subject: string;
@@ -60,7 +69,12 @@ export interface AssignmentDeps {
   askContext?: (prisma: PrismaLike, accountName: string, now: Date) => Promise<AskContext | null>;
   pack?: (prisma: PrismaLike, args: { decisionId: string }) => Promise<PackLike | null>;
   send?: (payload: GmailSendPayload) => Promise<{ provider: 'gmail'; id: string | null; threadId: string | null }>;
+  /** The pursued items with their angles (work/intel.ts loadPursued by default; tests inject one). */
+  pursued?: (prisma: PrismaLike, now: Date) => Promise<PursuedItem[]>;
 }
+
+/** The item kinds a prepared angle is read for: account work, never a first touch with a pack. */
+const ANGLE_KINDS = new Set(['deal', 'follow_up', 'review']);
 
 /** The slice of the action pack the assignment reads. */
 export interface PackLike {
@@ -127,10 +141,23 @@ export async function buildAssignment(prisma: PrismaLike, input: BuildAssignment
   }
   if (ctx?.opening?.whyTheyCare) lines.push(safeLine(`Why they care: ${endSentence(ctx.opening.whyTheyCare)}`));
   for (const b of (ctx?.buyerSaid ?? []).slice(0, 3)) lines.push(safeLine(`They said: "${b.text}"${b.who || b.at ? ` (${[b.who, b.at].filter(Boolean).join(', ')})` : ''}`));
+  let prepared: Prepared = { kind: 'none' };
+  // Seller acceptance follow-up addendum (2026-10-09): a deal, follow-up or review item at an account where a
+  // develop_angle task succeeded (a person placed at the account at read time) carries that angle: the Kenco deal
+  // item said "nothing prepared" in production although the angle for Dave Kiesling was ready.
+  if (ANGLE_KINDS.has(item.kind) && !item.refs.decisionId) {
+    const pursued = await (deps.pursued ?? loadPursued)(prisma, input.now).catch(() => [] as PursuedItem[]);
+    const p = pursued.find((x) => x.accountName === item.accountName && x.status === 'ready' && x.angle);
+    if (p?.angle) {
+      const who = p.writer?.name ?? p.writer?.email ?? p.angle.peopleNamed[0]?.name ?? p.title;
+      const opener = p.angle.starters[0] ?? null;
+      prepared = { kind: 'angle', who, whyItMatters: p.angle.whyItMatters, opener };
+      lines.push('', safeLine(`GAP has prepared an angle for ${who}: ${endSentence(p.angle.whyItMatters)}`));
+      if (opener) lines.push(safeLine(`Opener: ${opener}`));
+    }
+  }
   const move = ctx?.state.next || item.title;
   lines.push('', `The move: ${endSentence(move)}`);
-
-  let prepared: Prepared = { kind: 'none' };
   // X09: a proposed revision (never approved here) is shown in place of the pack's copy, with the line that says why.
   const copy = input.copyOverride
     ? { subject: input.copyOverride.subject, body: input.copyOverride.body, to: input.copyOverride.to ?? pack?.persona?.email ?? null }
@@ -234,7 +261,7 @@ export type AssignableInput = Pick<BuildAssignmentInput, 'baseUrl' | 'actionSecr
 export type Assignable = { ok: true; built: BuiltAssignment } | { ok: false; reason: 'research_move' | 'research_why'; detail: string; built: BuiltAssignment };
 
 /**
- * Whether an item can be handed to the seller: it is when something is prepared (an email), or when its move is a
+ * Whether an item can be handed to the seller: it is when something is prepared (an email, or an angle), or when its move is a
  * seller action. Nothing prepared AND a research-shaped move (or a why that says nothing is prepared) is held for the
  * agent. The built assignment is returned either way so the send does not build it twice.
  */

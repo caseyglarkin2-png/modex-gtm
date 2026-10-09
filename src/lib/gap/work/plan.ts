@@ -17,7 +17,8 @@
  *     2026-10-09: Southern Glazer's held the commitment "follow up with Diego when they are back" AND the card's own
  *     "Reminder: Follow up with Diego Fonseca when they are back" at ranks 0 and 1): the card says so
  *     (`ownMoveIsObligation`), or an obligation on the card has the same tier and the same person as the card's move
- *   - parked cards (research, holds, the seller's set-asides) are never items, only counted
+ *   - parked cards (research, holds, the seller's set-asides) are never items, only counted; nor is an obligation
+ *     whose tier is parked (a "later" follow-up on a deal card that says no follow-up while the deal stands)
  *   - the first claim of a day wins: a second plan the same day (another instance, the cron after the page) writes
  *     nothing and returns the stored plan, so every consumer reads the same tokens; a new New York day is a new plan
  *   - a REFRESH (an explicit resend, never the schedule) builds the day again and, when the change is MATERIAL (the
@@ -267,7 +268,9 @@ export function itemsForDay(day: WorkDay, nyDate: string, opts: { decisionIds?: 
     const ownItem = own && !ownMoveIsObligation(c) ? { key: own.key, accountName: c.accountName, kind: tier, stateKind: c.stateKind, title: c.move ?? c.state, why: c.rankWhy ?? c.why, href: c.next?.href ?? c.href, person: c.person, refs: own.refs, context: cardContext(c) } : null;
     // The card's own move first when the tier is its own; the obligations in their order (R41: each its own row).
     if (ownItem && (obligations.length === 0 || !obligations.some((o) => o.tier === tier))) push(ownItem);
-    for (const o of obligations) push(obligationItem(c, o));
+    // An obligation at a parked tier (later, held, research) is never an item, like a parked card: production pushed
+    // Kroger's "later" follow-up ("No follow-up while the deal stands") as item 9 of October 9.
+    for (const o of obligations) if (!PARKED_TIERS.has(o.tier)) push(obligationItem(c, o));
     if (ownItem && obligations.length > 0 && obligations.some((o) => o.tier === tier) && !seen.has(ownItem.key)) push(ownItem);
   }
   return out;

@@ -105,6 +105,32 @@ describe('X06: buildAssignment', () => {
     expect(a.text).not.toMatch(/first line of your reply/);
     expect(deps.pack).not.toHaveBeenCalled();
   });
+
+  it('addendum: a deal item at an account where a develop_angle task succeeded for a person placed there carries the angle (prepared angle, the block above the move) and is assignable; a first touch with a pack never reads it', async () => {
+    const { db, deps } = harness();
+    const kenco = item({ key: 'deal:Kenco:2026-10-08', rank: 1, accountName: 'Kenco', token: 'c'.repeat(32), kind: 'deal', stateKind: 'in_deal', title: 'Next step on the deal: Send the pilot scope', why: 'The deal\'s next step', href: '/gap/accounts/kenco?view=brief', person: null });
+    const pursued = vi.fn(async () => [{ key: 'person:dave.kiesling@kencogroup.com', taskId: 't-1', writer: { email: 'dave.kiesling@kencogroup.com', name: 'Dave Kiesling' }, kind: 'person' as const, title: 'Dave Kiesling at Kenco', accountName: 'Kenco', accountHint: null, url: null, decision: 'pursue', decidedAt: '2026-10-08T12:00:00.000Z', status: 'ready' as const, error: null, angle: { whyItMatters: 'Kenco runs 40 yards with paper gate logs; the Chattanooga pilot is where the scope lands.', starters: ['Dave, is Chattanooga still the yard you would pilot first?'], roles: ['VP Operations'], accounts: ['Kenco'], peopleNamed: [{ personaId: 7, name: 'Dave Kiesling', title: 'VP Operations' }], proposedAction: 'email', caveat: null, sourceLine: 'his reply, Sep 16' } }]);
+    deps.askContext.mockResolvedValue({ ...ASK, accountName: 'Kenco', state: { ...ASK.state, state: 'in_deal', stateLine: 'In a deal.', next: 'Send Dave the pilot scope.' }, story: [], opening: null, buyerSaid: [] });
+    const a = await buildAssignment(db.client(), { plan: { ...PLAN, items: [ITEMS[0], kenco] }, item: kenco, revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, { ...deps, pursued });
+    expect(a.prepared).toEqual({ kind: 'angle', who: 'Dave Kiesling', whyItMatters: 'Kenco runs 40 yards with paper gate logs; the Chattanooga pilot is where the scope lands.', opener: 'Dave, is Chattanooga still the yard you would pilot first?' });
+    const t = a.text.split('\n');
+    const angleAt = t.findIndex((l) => l === 'GAP has prepared an angle for Dave Kiesling: Kenco runs 40 yards with paper gate logs; the Chattanooga pilot is where the scope lands.');
+    expect(angleAt, 'the angle block is printed').toBeGreaterThan(0);
+    expect(t[angleAt + 1]).toBe('Opener: Dave, is Chattanooga still the yard you would pilot first?');
+    expect(t.indexOf('The move: Send Dave the pilot scope.'), 'above the move').toBeGreaterThan(angleAt);
+    expect(deps.pack).not.toHaveBeenCalled();
+    const ok = await assignable(db.client(), { ...PLAN, items: [kenco] }, kenco, { baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, { ...deps, pursued });
+    expect(ok.ok, 'an item with a prepared angle is assignable').toBe(true);
+    // A first touch with a pack: the pursued read is not made and the email stays the prepared thing.
+    const ft = await buildAssignment(db.client(), { plan: PLAN, item: ITEMS[0], revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, { ...deps, pursued });
+    expect(ft.prepared.kind).toBe('email');
+    expect(pursued).toHaveBeenCalledTimes(2);
+    // No ready angle at the account (another account, or in progress): nothing prepared, no block.
+    pursued.mockResolvedValue([]);
+    const none = await buildAssignment(db.client(), { plan: { ...PLAN, items: [kenco] }, item: kenco, revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, { ...deps, pursued });
+    expect(none.prepared).toEqual({ kind: 'none' });
+    expect(none.text).not.toContain('prepared an angle');
+  });
 });
 
 describe('X06: startDay, sendAssignment, nextUnassignedItem', () => {
