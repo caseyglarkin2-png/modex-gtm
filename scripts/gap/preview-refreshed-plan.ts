@@ -37,11 +37,13 @@ function readOnly(real: PrismaClient): { client: unknown; writes: string[] } {
       get(t, prop) {
         const key = String(prop);
         if (WRITE_METHODS.has(key)) {
-          return async (args: { data?: Record<string, unknown> } = {}) => {
+          return async (args: { data?: Record<string, unknown>; create?: Record<string, unknown>; update?: Record<string, unknown>; where?: Record<string, unknown> } = {}) => {
             n += 1;
             writes.push(`${model}.${key}`);
             if (key.endsWith('Many')) return { count: 0 };
-            return { id: `readonly_${n}`, created_at: new Date(), updated_at: new Date(), ...(args.data ?? {}) };
+            // The stub answers the row the caller would have written (an upsert's create merged with its update), so a
+            // reader of the returned row (the in-deals summary cache) sees what production would see.
+            return { id: `readonly_${n}`, created_at: new Date(), updated_at: new Date(), ...(args.where ?? {}), ...(args.data ?? {}), ...(args.create ?? {}), ...(args.update ?? {}) };
           };
         }
         return Reflect.get(t, prop);
