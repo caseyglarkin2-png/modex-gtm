@@ -46,6 +46,22 @@ describe('IW10: the reader carries the substance', () => {
     expect(plain.substance).toBeUndefined();
     expect(plain.line).toMatch(/^Yards First Brief, published Oct 9, 2026\./);
   });
+
+  it('loadIntelligence returns the briefs as their own group, newest report first, counted apart from what GAP found; a report container is never a row', async () => {
+    const { loadIntelligence } = await import('@/lib/gap/work/intel');
+    const older = { ...IMPORT, producerItemId: '2026-09-28#1', title: 'Home Depot exposes a buying window', reportedOn: '2026-09-28' };
+    const prisma = ledgerDb({ accounts: [], aliases: [], signals: [
+      row({ id: 'r-old', event_id: 'r-old', title: older.title, published_at: new Date('2026-09-28T00:00:00Z'), created_at: days(0), score: 9, metadata: { import: older } }),
+      row({ id: 'r-new', event_id: 'r-new', created_at: days(1), score: 1 }),
+      row({ id: 'container', event_id: 'container', title: 'Yards First Daily, 2026-10-09', source_class: 'report_archive', metadata: { import: { ...IMPORT, kind: 'report', producerItemId: '2026-10-09#report' } } }),
+      row({ id: 'found', event_id: 'found', origin: 'discovery', source_name: 'news.example', source_class: 'news', metadata: {}, title: 'Kenco expands its Chattanooga testing facility', account_name: 'Kenco', score: 6 }),
+    ] }).client();
+    const x = await loadIntelligence(prisma, { now: NOW });
+    expect(x.reports!.map((r) => r.id)).toEqual(['r-new', 'r-old']);
+    expect(x.signals.map((s) => s.id)).toEqual(['found']);
+    expect(x.totals).toMatchObject({ signals: 1, reports: 2, triggers: 0 });
+    expect(x.selection.signals).toContain('four bounded pulls');
+  });
 });
 
 describe('IW11: the digest by a stated rule', () => {

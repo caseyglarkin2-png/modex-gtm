@@ -131,7 +131,7 @@ export async function defaultIntel(prisma: PrismaLike, now: Date, deps: Pick<Bri
   const summary = await (deps.inDeals ?? ((p: PrismaLike, n: Date) => loadInDealsSummary(p, { now: n })))(prisma, now).catch(() => null);
   // C10: the briefing's own Gmail Sent reader, so quiet and answer owed count our side too.
   const x = await loadIntelligence(prisma, { now, coverage: dealCoverageFrom(summary), ...(deps.identity !== undefined ? { identity: deps.identity } : {}), ...(deps.listSent ? { listSent: deps.listSent } : {}) });
-  const keys = [...x.signals, ...x.triggers, ...x.people].map((i) => i.key);
+  const keys = [...x.signals, ...(x.reports ?? []), ...x.triggers, ...x.people].map((i) => i.key);
   const angles = await loadAngles(prisma, { keys, now });
   // IW12: what recent briefings showed rotates behind the unseen; IW13: the producers' coverage in words; IW11: the sizes.
   const shownBefore = await shownRecently(prisma, now).catch(() => [] as string[]);

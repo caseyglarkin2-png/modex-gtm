@@ -390,13 +390,16 @@ export interface PursuedItem {
 }
 
 export interface Intelligence {
+  /** What GAP found itself (discovery, shares, Pounce captures), ranked. */
   signals: IntelItem[];
+  /** IW10/IW11: the producers' imported records (the briefs, the reports), their own group: newest report first, then rank. */
+  reports?: IntelItem[];
   triggers: IntelItem[];
   people: IntelItem[];
   /** I05: what Casey pursued, with the angle when it is ready (the review's finding 2: a pursued item never vanishes). */
   pursued: PursuedItem[];
   /** How many undecided items the selection was cut from, so the shortage or the depth is said truthfully. */
-  totals: { signals: number; triggers: number; people: number };
+  totals: { signals: number; triggers: number; people: number; reports?: number };
   /** C34: how the selection was made (the pulls and windows in words), whether more exists beyond it, and the page shown. */
   selection: { signals: string; people: string; moreSignals: boolean; morePeople: boolean; skipSignals: number; skipPeople: number; peopleWindowDays: number; peopleIntakeTruncated: boolean };
 }
@@ -573,8 +576,13 @@ export async function loadIntelligence(prisma: PrismaLike, opts: { now: Date; li
     pull({ origin: REPORT_IMPORT_ORIGIN }, [{ published_at: 'desc' }, { created_at: 'desc' }], 200),
   ]);
   const signalRows = [...new Map([...shares, ...strong, ...rest, ...imported].map((r) => [r.id, r])).values()];
-  const signals = rankSignals(signalRows, opts.now);
-  const signalTotal: number = typeof prisma?.gapSignal?.count === 'function' ? await prisma.gapSignal.count({ where: { feedback: null, resolution: { not: 'rejected' }, source_class: { not: REPORT_ARCHIVE_CLASS } } }).catch(() => signals.length) : signals.length;
+  const ranked = rankSignals(signalRows, opts.now);
+  // IW11: the producers' records are their own group, newest report first (the event date when stated), then rank;
+  // what GAP found keeps the ranked order. The digest and the panel show the groups apart, each counted.
+  const reports = ranked.filter((s) => s.substance).sort((a, b) => (b.substance!.eventDate ?? b.substance!.reportedOn).localeCompare(a.substance!.eventDate ?? a.substance!.reportedOn) || a.rank - b.rank).map((s, i) => ({ ...s, rank: i }));
+  const signals = ranked.filter((s) => !s.substance).map((s, i) => ({ ...s, rank: i }));
+  const reportTotal: number = typeof prisma?.gapSignal?.count === 'function' ? await prisma.gapSignal.count({ where: { feedback: null, resolution: { not: 'rejected' }, source_class: { not: REPORT_ARCHIVE_CLASS }, origin: REPORT_IMPORT_ORIGIN } }).catch(() => reports.length) : reports.length;
+  const signalTotal: number = typeof prisma?.gapSignal?.count === 'function' ? await prisma.gapSignal.count({ where: { feedback: null, resolution: { not: 'rejected' }, source_class: { not: REPORT_ARCHIVE_CLASS }, origin: { not: REPORT_IMPORT_ORIGIN } } }).catch(() => signals.length) : signals.length;
   const triggerRows: TriggerRow[] = typeof prisma?.pounceTrigger?.findMany === 'function' ? await prisma.pounceTrigger.findMany({ where: { dismissed: false }, orderBy: [{ first_seen_at: 'desc' }], take: 200 }).catch(() => []) : [];
   const names: Array<{ name: string }> = triggerRows.length && typeof prisma?.account?.findMany === 'function' ? await prisma.account.findMany({ where: { name: { in: [...new Set(triggerRows.map((t) => t.account_name))], mode: 'insensitive' } }, select: { name: true } }).catch(() => []) : [];
   const triggers = rankTriggers(triggerRows, new Set(names.map((n) => n.name)), decided, opts.now);
@@ -643,8 +651,8 @@ export async function loadIntelligence(prisma: PrismaLike, opts: { now: Date; li
   for (const w of writerRows) { const e = w.from_email.trim().toLowerCase(); if (!threadAccounts.get(e)) threadAccounts.set(e, w.thread_account ?? threadAccounts.get(e) ?? null); }
   const pursued = await loadPursued(prisma, opts.now, { identity, coverage, personas: new Map(personas.filter((p) => p.email).map((p) => [String(p.email).toLowerCase(), p])), threadAccounts, family });
   return {
-    signals: signals.slice(skipSignals, skipSignals + limit), triggers: triggers.slice(0, limit), people: people.slice(skipPeople, skipPeople + peopleLimit), pursued,
-    totals: { signals: Math.max(signalTotal, signals.length), triggers: triggers.length, people: people.length },
+    signals: signals.slice(skipSignals, skipSignals + limit), reports: reports.slice(0, limit), triggers: triggers.slice(0, limit), people: people.slice(skipPeople, skipPeople + peopleLimit), pursued,
+    totals: { signals: Math.max(signalTotal, signals.length), triggers: triggers.length, people: people.length, reports: Math.max(reportTotal, reports.length) },
     selection: {
       signals: `ranked from four bounded pulls (your shares, up to 100; the strongest classes by score, up to 300; the rest newest, up to 200; the producers' imported records, newest report first, up to 200) of ${Math.max(signalTotal, signals.length)} undecided; showing ${Math.min(limit, Math.max(0, signals.length - skipSignals))} from ${skipSignals + 1}; the complete list is on the Intelligence page`,
       people: `people who wrote in the last ${peopleWindowDays} days (up to ${PEOPLE_INTAKE_MAX} messages read${msgs.length >= PEOPLE_INTAKE_MAX ? ', the cap: older writers are not in this list' : ''}); ${opts.listSent ? `our Sent read for the ${sentTargets} who would be listed${sentFailed.size ? ` (${sentFailed.size} read failed)` : ''}` : 'our Sent not read: quiet is judged from their last message alone'}; showing ${Math.min(peopleLimit, Math.max(0, people.length - skipPeople))} of ${people.length} from ${skipPeople + 1}`,

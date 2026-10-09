@@ -156,6 +156,9 @@ export function IntelPanel({ intel, angles }: { intel: Intelligence; angles: Rec
           <ul className="space-y-2">{intel.pursued.map((p) => <Pursued key={p.key} p={p} />)}</ul>
         </section>
       ) : null}
+      {intel.reports?.length ? (
+        <Section title="From your briefs" hint="What your briefs and reports collected, newest report first, with the passage, the producer's confidence and its sources. Casey judges usefulness; nothing here is verified by GAP or an obligation." items={intel.reports} angles={angles} testId="intel-reports" total={intel.totals.reports ?? intel.reports.length} selection="the producers' imported records, newest report first; the complete list with filters is on the Intelligence page" moreHref="/gap/intelligence" />
+      ) : null}
       <Section title="Intelligence worth a look" hint="What GAP found, any age, for your call. Pursue and GAP develops the angle and checks the source; nothing is sent until you approve it." items={worth} angles={angles} testId="intel-worth" total={intel.totals.signals + intel.totals.triggers} selection={intel.selection?.signals} moreHref={intel.selection?.moreSignals ? `/gap?moreSignals=${intel.selection.skipSignals + intel.signals.length}${intel.selection.skipPeople ? `&morePeople=${intel.selection.skipPeople}` : ''}` : null} />
       <Section title="Prospects to reengage" hint="People who wrote to us and went quiet. Pursue and GAP prepares the reopening; an open deal at the account is said, and the deal keeps its hold." items={intel.people} angles={angles} testId="intel-people" total={intel.totals.people} selection={intel.selection?.people} moreHref={intel.selection?.morePeople ? `/gap?morePeople=${intel.selection.skipPeople + intel.people.length}${intel.selection.skipSignals ? `&moreSignals=${intel.selection.skipSignals}` : ''}` : null} />
       <p className="text-xs text-[var(--muted-foreground)]">

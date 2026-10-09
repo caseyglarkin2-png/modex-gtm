@@ -68,6 +68,8 @@ export interface BriefingLinks {
 /** I04: the day's intelligence for the briefing (work/intel.ts) with the prepared angles by item key. */
 export interface BriefingIntel {
   signals: IntelItem[];
+  /** IW11: the producers' imported records as their own group (newest report first); absent on an older caller. */
+  reports?: IntelItem[];
   triggers: IntelItem[];
   people: IntelItem[];
   /** I05: what Casey pursued, with the angle when it is ready. */
@@ -108,11 +110,12 @@ const EMPTY_DIGEST: Digest = { worth: [], people: [], omitted: 0, breakdown: { r
  * recent briefing first; the remaining slots go to what GAP found (up to four), then triggers (up to two), then the
  * sections in turn. No usefulness gate: an omitted item is counted, listed on the Intelligence page, and rotates in.
  */
-export function composeDigest(intel: Pick<BriefingIntel, 'signals' | 'triggers' | 'people' | 'totals'>, opts: { sizes?: Partial<DigestSizes>; shownBefore?: ReadonlySet<string> } = {}): Digest {
+export function composeDigest(intel: Pick<BriefingIntel, 'signals' | 'reports' | 'triggers' | 'people' | 'totals'>, opts: { sizes?: Partial<DigestSizes>; shownBefore?: ReadonlySet<string> } = {}): Digest {
   const sizes: DigestSizes = { ...DEFAULT_DIGEST, ...(opts.sizes ?? {}), reserved: { ...DEFAULT_DIGEST.reserved, ...(opts.sizes?.reserved ?? {}) } };
   const seen = opts.shownBefore ?? new Set<string>();
   const order = (items: IntelItem[]) => [...items.filter((i) => !seen.has(i.key)), ...items.filter((i) => seen.has(i.key))];
-  const reports = order(intel.signals.filter((s) => s.substance));
+  // The briefs' group comes from the reader (newest report first); an older caller's signals carry them inline.
+  const reports = order([...(intel.reports ?? []), ...intel.signals.filter((s) => s.substance)].filter((it, i, all) => all.findIndex((x) => x.key === it.key) === i));
   const found = order(intel.signals.filter((s) => !s.substance));
   const triggers = order(intel.triggers);
   const picked = new Set<string>();
@@ -127,7 +130,7 @@ export function composeDigest(intel: Pick<BriefingIntel, 'signals' | 'triggers' 
   for (let guard = 0; worth.length < sizes.signals && guard < 3; guard += 1) { take(reports, 1); take(found, 1); take(triggers, 1); if (picked.size >= reports.length + found.length + triggers.length) break; }
   const people = intel.people.slice(0, sizes.people);
   const breakdown = { reports: worth.filter((w) => !!w.substance).length, found: worth.filter((w) => w.kind === 'signal' && !w.substance).length, triggers: worth.filter((w) => w.kind === 'trigger').length };
-  const omitted = Math.max(0, intel.totals.signals + intel.totals.triggers - worth.length);
+  const omitted = Math.max(0, intel.totals.signals + intel.totals.triggers + (intel.totals.reports ?? 0) - worth.length);
   // The shown-before items that wait behind the unseen this time.
   const rotated = [...reports, ...found, ...triggers].filter((i) => seen.has(i.key) && !picked.has(i.key)).length;
   return { worth, people, omitted, breakdown, rotated, keys: [...worth, ...people].map((i) => i.key) };
@@ -242,7 +245,7 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
   const worthAll = digest.worth;
   const peopleAll = digest.people;
   const toDecide = worthAll.length + peopleAll.length;
-  const decideTotal = intel ? intel.totals.signals + intel.totals.triggers + intel.totals.people : 0;
+  const decideTotal = intel ? intel.totals.signals + intel.totals.triggers + intel.totals.people + (intel.totals.reports ?? 0) : 0;
   const execText = n === 0 ? 'nothing to execute' : `${n} to execute`;
   const countText = toDecide > 0 ? `${execText}, ${toDecide} to decide` : n === 0 ? 'nothing needs you' : execText;
   const subject = `GAP today, ${label}: ${countText} [GAP#${input.dayToken}]`;
@@ -306,10 +309,10 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
     }
     html.push('</ul>');
   }
-  if (intel && (intel.signals.length || intel.triggers.length || intel.people.length)) {
+  if (intel && (intel.signals.length || intel.reports?.length || intel.triggers.length || intel.people.length)) {
     // Reserved slots (the review's finding 4): the top signals and the top triggers both reach the email.
     const worth = worthAll;
-    const worthTotal = intel.totals.signals + intel.totals.triggers;
+    const worthTotal = intel.totals.signals + intel.totals.triggers + (intel.totals.reports ?? 0);
     // IW10: an imported record's substance under its line: the passage (whole, or cut at a sentence end), the
     // producer's confidence in its words, its read labelled as such (never an obligation), the sources and CRM ids,
     // the dates said as what they are. Imported text is data: escaped, never interpreted.
