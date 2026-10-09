@@ -49,6 +49,7 @@ export type Decision = (typeof DECISIONS)[number];
 
 // The truth label words live in the client-safe `./truth-text` (the panel imports them there; this module is server-only).
 export { TRUTH_TEXT, type TruthLabel } from './truth-text';
+import { REPORT_ARCHIVE_CLASS, REPORT_IMPORT_ORIGIN, dateOnlyText, importOf, producerLabel, type IntelRecordKind, type IntelSource, type IntelSourceRecordId } from '../signals/intelligence-record';
 
 export interface IntelItem {
   kind: 'signal' | 'trigger' | 'person';
@@ -88,6 +89,8 @@ export interface IntelItem {
   /** C5 (2026-10-09): the accounts that claim this person's domain or name when no deal settles it; the line says it instead of "no account yet". */
   ambiguousAmong?: string[];
   ambiguityLine?: string;
+  /** Intelligence wiring (IW10): an imported record's substance, whole; absent on a signal GAP found itself. */
+  substance?: IntelSubstance;
   decisions: readonly Decision[];
   /** How it ranked, for the test and the page. */
   rank: number;
@@ -112,7 +115,44 @@ export function truthOfSignal(s: { research_status?: string | null; published_at
 
 const RELEVANCE_RANK: Record<string, number> = { outreach_evidence_candidate: 1, leadership: 2, risk: 2, deal_context: 3, research_lead: 4, account_context: 5 };
 
-type SignalRow = { id: string; url: string | null; title: string | null; source_name: string | null; source_class: string | null; published_at: Date | string | null; created_at: Date | string; origin: string; account_name: string | null; account_hint: string | null; resolution: string; research_status: string; relevance: string | null; categories: unknown; score: number | null; event_id: string | null; feedback: string | null; feedback_at: Date | string | null; note: string | null };
+type SignalRow = { id: string; url: string | null; title: string | null; source_name: string | null; source_class: string | null; published_at: Date | string | null; created_at: Date | string; origin: string; account_name: string | null; account_hint: string | null; resolution: string; research_status: string; relevance: string | null; categories: unknown; score: number | null; event_id: string | null; feedback: string | null; feedback_at: Date | string | null; note: string | null; /** Intelligence wiring (2026-10-09): an imported record's contract rides under metadata.import. */ metadata?: unknown };
+
+/**
+ * Intelligence wiring (IW10, 2026-10-09): the substance of an imported record, carried whole to the panel and the
+ * email: the passage verbatim, its sources and CRM ids, the event date apart from the report date apart from the
+ * import time, the producer's confidence and its read (never an obligation), and how many drafts it archived.
+ */
+export interface IntelSubstance {
+  producer: string;
+  producerLabel: string;
+  producerRunId: string;
+  producerItemId: string;
+  recordKind: IntelRecordKind;
+  text: string;
+  sources: IntelSource[];
+  sourceRecordIds: IntelSourceRecordId[];
+  eventDate: string | null;
+  reportedOn: string;
+  reportedOnBasis: 'stated' | 'captured';
+  importedAt: string;
+  producerStatus: string | null;
+  uncertainty: string | null;
+  interpretation: string | null;
+  personHints: string[];
+  suggestions: number;
+  revisions: number;
+}
+
+/** The imported record's substance from a row, or null when the row is not an import. */
+export function substanceOf(metadata: unknown): IntelSubstance | null {
+  const r = importOf(metadata);
+  if (!r) return null;
+  return {
+    producer: r.producer, producerLabel: r.producerLabel ?? producerLabel(r.producer), producerRunId: r.producerRunId, producerItemId: r.producerItemId, recordKind: r.kind,
+    text: r.text ?? '', sources: r.sources ?? [], sourceRecordIds: r.sourceRecordIds ?? [], eventDate: r.eventDate ?? null, reportedOn: r.reportedOn, reportedOnBasis: r.reportedOnBasis ?? 'stated', importedAt: r.importedAt,
+    producerStatus: r.producerStatus ?? null, uncertainty: r.uncertainty ?? null, interpretation: r.interpretation ?? null, personHints: r.personHints ?? [], suggestions: (r.suggestions ?? []).length, revisions: (r.revisions ?? []).length,
+  };
+}
 type TriggerRow = { id: number; account_name: string; title: string; url: string; source: string; score: number | null; categories: unknown; published_at: Date | string | null; first_seen_at: Date | string; dismissed: boolean };
 type DecisionRow = { subject_id: string; payload: unknown; created_at: Date | string };
 
@@ -163,9 +203,16 @@ export function rankSignals(rows: readonly SignalRow[], now: Date): IntelItem[] 
     const st = signalStatus({ url: r.url, resolution: r.resolution, research_status: r.research_status, feedback: null, origin: r.origin, relevance: r.relevance ?? undefined });
     const when = r.published_at ? `published ${dayText(r.published_at)}` : `observed ${dayText(r.created_at)}`;
     const hostOf = (u: string | null) => (u ? (() => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch { return null; } })() : null);
-    const line = `${shared ? 'You shared it. ' : ''}${r.source_name ?? r.source_class ?? 'a source'}, ${when}. ${TRUTH_TEXT[truth]}.${categories.length ? ` Themes: ${categories.map((c) => c.replace(/_/g, ' ')).join(', ')}.` : ''}${st.status === 'Fact ready' ? ' A verified fact is in Research.' : ''}${also.length ? ` Also reported by ${also.map((a) => a.source_name ?? hostOf(a.url) ?? 'another source').join(', ')}.` : ''}`;
+    // Intelligence wiring (IW10): an imported record says who reported it and when, the event date apart when the
+    // producer stated one, and the producer's own status word; the substance rides whole beside the line.
+    const substance = r.origin === REPORT_IMPORT_ORIGIN ? substanceOf(r.metadata) : null;
+    const reported = substance ? `${substance.producerLabel} reported it ${dateOnlyText(substance.reportedOn)}${substance.reportedOnBasis === 'captured' ? ' (the capture date; the report states none)' : ''}${substance.eventDate ? `; the event ${dateOnlyText(substance.eventDate)}` : ''}${substance.producerStatus ? ` (${substance.producerStatus})` : ''}` : null;
+    const line = substance
+      ? `${reported}. ${TRUTH_TEXT[truth]}.${categories.length ? ` Themes: ${categories.map((c) => c.replace(/_/g, ' ')).join(', ')}.` : ''}${also.length ? ` Also reported by ${also.map((a) => a.source_name ?? hostOf(a.url) ?? 'another source').join(', ')}.` : ''}`
+      : `${shared ? 'You shared it. ' : ''}${r.source_name ?? r.source_class ?? 'a source'}, ${when}. ${TRUTH_TEXT[truth]}.${categories.length ? ` Themes: ${categories.map((c) => c.replace(/_/g, ' ')).join(', ')}.` : ''}${st.status === 'Fact ready' ? ' A verified fact is in Research.' : ''}${also.length ? ` Also reported by ${also.map((a) => a.source_name ?? hostOf(a.url) ?? 'another source').join(', ')}.` : ''}`;
     return {
-      kind: 'signal', id: r.id, key: `signal:${r.id}`, title: r.title ?? r.url ?? 'A note', source: r.source_name ?? hostOf(r.url), url: r.url, publishedAt: r.published_at ? new Date(r.published_at).toISOString() : null, observedAt: new Date(r.created_at).toISOString(), truth, line,
+      kind: 'signal', id: r.id, key: `signal:${r.id}`, title: r.title ?? r.url ?? 'A note', source: substance ? substance.producerLabel : (r.source_name ?? hostOf(r.url)), url: r.url, publishedAt: r.published_at ? new Date(r.published_at).toISOString() : null, observedAt: new Date(r.created_at).toISOString(), truth, line,
+      ...(substance ? { substance } : {}),
       ...(r.published_at && isDateOnly(r.published_at) ? { publishedDateOnly: true } : {}),
       ...(also.length ? { alsoReported: also.map((a) => ({ id: a.id, source: a.source_name ?? hostOf(a.url), url: a.url, publishedAt: a.published_at ? new Date(a.published_at).toISOString() : null })), clusterIds: [r.id, ...also.map((a) => a.id)] } : {}),
       accountName: r.account_name, accountHint: r.account_name ? null : r.account_hint, relevance: r.relevance, categories, person: null, decisions: DECISIONS, rank: 0,
@@ -515,16 +562,19 @@ export async function loadIntelligence(prisma: PrismaLike, opts: { now: Date; li
   const limit = opts.limit ?? INTEL_LIMIT;
   const peopleLimit = opts.peopleLimit ?? REENGAGE_LIMIT;
   const decided = await loadDecided(prisma, opts.now);
-  const undecided = { OR: [{ feedback: null }, { feedback: 'skip' }], resolution: { not: 'rejected' } };
+  // Intelligence wiring (2026-10-09): a report container (the archive of an imported report) is never a digest row.
+  const undecided = { OR: [{ feedback: null }, { feedback: 'skip' }], resolution: { not: 'rejected' }, source_class: { not: REPORT_ARCHIVE_CLASS } };
   const pull = async (where: Record<string, unknown>, orderBy: Array<Record<string, string>>, take: number): Promise<SignalRow[]> => (typeof prisma?.gapSignal?.findMany === 'function' ? prisma.gapSignal.findMany({ where: { ...undecided, ...where }, orderBy, take }).catch(() => []) : []);
-  const [shares, strong, rest] = await Promise.all([
+  const [shares, strong, rest, imported] = await Promise.all([
     pull({ origin: { in: ['casey_share', 'conference_note'] } }, [{ created_at: 'desc' }], 100),
     pull({ relevance: { in: ['outreach_evidence_candidate', 'leadership', 'risk'] } }, [{ score: 'desc' }, { created_at: 'desc' }], 300),
     pull({}, [{ created_at: 'desc' }], 200),
+    // IW10: the producers' records, newest report first, always in the pool (the complete list is the browse, IW05).
+    pull({ origin: REPORT_IMPORT_ORIGIN }, [{ published_at: 'desc' }, { created_at: 'desc' }], 200),
   ]);
-  const signalRows = [...new Map([...shares, ...strong, ...rest].map((r) => [r.id, r])).values()];
+  const signalRows = [...new Map([...shares, ...strong, ...rest, ...imported].map((r) => [r.id, r])).values()];
   const signals = rankSignals(signalRows, opts.now);
-  const signalTotal: number = typeof prisma?.gapSignal?.count === 'function' ? await prisma.gapSignal.count({ where: { feedback: null, resolution: { not: 'rejected' } } }).catch(() => signals.length) : signals.length;
+  const signalTotal: number = typeof prisma?.gapSignal?.count === 'function' ? await prisma.gapSignal.count({ where: { feedback: null, resolution: { not: 'rejected' }, source_class: { not: REPORT_ARCHIVE_CLASS } } }).catch(() => signals.length) : signals.length;
   const triggerRows: TriggerRow[] = typeof prisma?.pounceTrigger?.findMany === 'function' ? await prisma.pounceTrigger.findMany({ where: { dismissed: false }, orderBy: [{ first_seen_at: 'desc' }], take: 200 }).catch(() => []) : [];
   const names: Array<{ name: string }> = triggerRows.length && typeof prisma?.account?.findMany === 'function' ? await prisma.account.findMany({ where: { name: { in: [...new Set(triggerRows.map((t) => t.account_name))], mode: 'insensitive' } }, select: { name: true } }).catch(() => []) : [];
   const triggers = rankTriggers(triggerRows, new Set(names.map((n) => n.name)), decided, opts.now);
@@ -596,7 +646,7 @@ export async function loadIntelligence(prisma: PrismaLike, opts: { now: Date; li
     signals: signals.slice(skipSignals, skipSignals + limit), triggers: triggers.slice(0, limit), people: people.slice(skipPeople, skipPeople + peopleLimit), pursued,
     totals: { signals: Math.max(signalTotal, signals.length), triggers: triggers.length, people: people.length },
     selection: {
-      signals: `ranked from three bounded pulls (your shares, up to 100; the strongest classes by score, up to 300; the rest newest, up to 200) of ${Math.max(signalTotal, signals.length)} undecided; showing ${Math.min(limit, Math.max(0, signals.length - skipSignals))} from ${skipSignals + 1}`,
+      signals: `ranked from four bounded pulls (your shares, up to 100; the strongest classes by score, up to 300; the rest newest, up to 200; the producers' imported records, newest report first, up to 200) of ${Math.max(signalTotal, signals.length)} undecided; showing ${Math.min(limit, Math.max(0, signals.length - skipSignals))} from ${skipSignals + 1}; the complete list is on the Intelligence page`,
       people: `people who wrote in the last ${peopleWindowDays} days (up to ${PEOPLE_INTAKE_MAX} messages read${msgs.length >= PEOPLE_INTAKE_MAX ? ', the cap: older writers are not in this list' : ''}); ${opts.listSent ? `our Sent read for the ${sentTargets} who would be listed${sentFailed.size ? ` (${sentFailed.size} read failed)` : ''}` : 'our Sent not read: quiet is judged from their last message alone'}; showing ${Math.min(peopleLimit, Math.max(0, people.length - skipPeople))} of ${people.length} from ${skipPeople + 1}`,
       moreSignals: signals.length > skipSignals + limit, morePeople: people.length > skipPeople + peopleLimit, skipSignals, skipPeople, peopleWindowDays, peopleIntakeTruncated: msgs.length >= PEOPLE_INTAKE_MAX,
     },

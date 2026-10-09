@@ -51,6 +51,22 @@ function Item({ item, angle }: { item: IntelItem; angle: PreparedAngle | null })
       </div>
       <p className="font-medium">{item.url ? <a href={item.url} target="_blank" rel="noopener noreferrer" className="underline">{item.title}</a> : item.title}</p>
       <p className="text-xs text-[var(--muted-foreground)]" data-testid="intel-line">{item.line}</p>
+      {item.substance ? (
+        <div className="space-y-1 rounded-md border border-[var(--border)] p-2 text-xs" data-testid="intel-substance">
+          <p className="whitespace-pre-line" data-testid="intel-substance-text">{item.substance.text}</p>
+          {item.substance.uncertainty ? <p className="text-[var(--muted-foreground)]" data-testid="intel-substance-uncertainty">In the producer&apos;s words: {item.substance.uncertainty}</p> : null}
+          {item.substance.interpretation ? <p className="whitespace-pre-line text-[var(--muted-foreground)]" data-testid="intel-substance-read">The producer&apos;s read (not an obligation): {item.substance.interpretation}</p> : null}
+          {item.substance.sources.length || item.substance.sourceRecordIds.length ? (
+            <p className="text-[var(--muted-foreground)]" data-testid="intel-substance-sources">
+              {item.substance.sources.filter((s) => s.url).map((s, i) => (
+                <span key={s.url ?? i}>{i ? '; ' : 'Sources: '}<a href={s.url ?? undefined} target="_blank" rel="noopener noreferrer" className="underline">{s.label ?? s.publisher ?? s.url}</a></span>
+              ))}
+              {item.substance.sourceRecordIds.length ? ` CRM: ${item.substance.sourceRecordIds.map((r) => `${r.system} ${r.type} ${r.id}`).join(', ')}.` : ''}
+            </p>
+          ) : null}
+          <p className="text-[var(--muted-foreground)]">Reported {item.substance.reportedOn} by {item.substance.producerLabel}{item.substance.eventDate ? `; event date ${item.substance.eventDate}` : ''}; imported {item.substance.importedAt.slice(0, 10)}{item.substance.revisions ? `; revised ${item.substance.revisions} time${item.substance.revisions === 1 ? '' : 's'}` : ''}{item.substance.suggestions ? `; ${item.substance.suggestions} drafted message${item.substance.suggestions === 1 ? '' : 's'} archived, never sent` : ''}.</p>
+        </div>
+      ) : null}
       {angle ? (
         <div className="rounded-md bg-[var(--muted)] p-2 text-xs" data-testid="intel-angle">
           <p className="font-semibold">The angle, prepared by GAP</p>

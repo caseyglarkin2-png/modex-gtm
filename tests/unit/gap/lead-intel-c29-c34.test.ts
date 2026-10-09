@@ -57,7 +57,7 @@ describe('C34: visibility beyond the bounded windows', () => {
     expect(decided.size).toBe(DECIDED_PAGE + 3);
     expect(decided.has('signal:s2002')).toBe(true);
     const page1 = await loadIntelligence(db.client(), { now: NOW, limit: 1, identity: null });
-    expect(page1.selection.signals).toMatch(/ranked from three bounded pulls/);
+    expect(page1.selection.signals).toMatch(/ranked from four bounded pulls/);
     expect(page1.selection).toMatchObject({ moreSignals: false, skipSignals: 0, peopleWindowDays: 180, peopleIntakeTruncated: false });
     const many = ledgerDb({ signals: [sig('a', { title: 'PepsiCo opens a Denver distribution center' }), sig('b', { title: 'Frito-Lay names a new chief supply chain officer' }), sig('c', { title: 'PepsiCo fleet adds electric tractors in California' })] }, NOW);
     const first = await loadIntelligence(many.client(), { now: NOW, limit: 2, identity: null });

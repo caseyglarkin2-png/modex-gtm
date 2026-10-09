@@ -27,7 +27,8 @@ describe('IW02: the batch import', () => {
     const db = ledgerDb({ accounts: ['Sub-Zero Group', 'Kenco'], aliases: [{ account_name: 'Sub-Zero Group', alias: 'SUBZERO', normalized_alias: 'subzero', status: 'confirmed' }] });
     // Every model the import touches is recorded: the rows, the ledger and the account resolver's tables, nothing else.
     const touched = new Set<string>();
-    const prisma = new Proxy(db.client() as Record<string, unknown>, { get(t, p) { touched.add(String(p)); return Reflect.get(t, p); } });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const prisma: any = new Proxy(db.client() as Record<string, unknown>, { get(t, p) { touched.add(String(p)); return Reflect.get(t, p); } });
     const r = await importIntelligenceBatch(prisma, { records: [kodiak, seven, { producer: 'yards_first_brief', producerRunId: 'msg-1', producerItemId: 'x', kind: 'rumour', title: 't', reportedOn: '2026-10-09' }, container, subzero], actor: 'test', now: NOW });
     expect(r).toMatchObject({ accepted: 4, duplicates: 0, revised: 0, invalid: 1 });
     expect(r.items[2]).toMatchObject({ index: 2, outcome: 'invalid', reason: 'kind_unknown' });
@@ -73,7 +74,7 @@ describe('IW02: the batch import', () => {
     const later = new Date(NOW.getTime() + 7_200_000);
     const rev = await importIntelligenceBatch(prisma, { records: [{ ...kodiak, text: `${kodiak.text} Kodiak later disclosed four trucks.` }], actor: 'test', now: later });
     expect(rev).toMatchObject({ accepted: 0, duplicates: 0, revised: 1 });
-    const after = await prisma.gapSignal.findUnique({ where: { id: k.id } });
+    const after = (await prisma.gapSignal.findUnique({ where: { id: k.id } }))!;
     expect(after.feedback).toBe('good_context');
     const imp = importOf(after.metadata)!;
     expect(imp.text).toContain('four trucks');

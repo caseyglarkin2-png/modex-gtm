@@ -20,7 +20,7 @@
 import { randomBytes } from 'node:crypto';
 import type { GmailSender, GmailSendPayload } from '@/lib/email/gmail-sender';
 import { signActionToken } from './action-token';
-import { renderBriefing, type BriefingIntel } from './briefing';
+import { renderBriefing, type BriefingIntel, type DigestSizes } from './briefing';
 import { loadIntelligence } from './intel';
 import { dealCoverageFrom } from './deal-coverage';
 import type { IdentityContext } from '../identity/resolve';
@@ -61,6 +61,8 @@ export interface BriefingSendDeps {
   intel?: (prisma: PrismaLike, now: Date) => Promise<BriefingIntel | null>;
   /** C01: the in-deals read the intelligence takes its deal coverage from (the day's own reader by default; tests inject one). */
   inDeals?: (prisma: PrismaLike, now: Date) => Promise<InDealsSummary | null>;
+  /** IW12/IW13: the producers' coverage in words for the email (the producer status reader; absent: no coverage line). */
+  coverage?: (prisma: PrismaLike, now: Date) => Promise<{ sources: string; unavailable: string | null } | null>;
   listSent: (recipient: string, afterEpoch: number, beforeEpoch: number) => Promise<Array<{ id: string; threadId: string | null; internalDate: Date; to: string; subject: string }>>;
 }
 
@@ -101,18 +103,40 @@ function links(input: BriefingSendInput, day: string) {
     account: (name: string) => `${base}${accountHref(name)}/`,
     // C32: the deal brief for an item at an account with an open deal.
     deal: (name: string) => `${base}${accountHref(name)}/?view=brief`,
+    // IW12: the complete retained intelligence with filters.
+    intelligence: `${base}/gap/intelligence/`,
   };
 }
 
+/** IW12: the keys shown in the briefings of the last ROTATION_DAYS days, so the digest rotates the unseen forward. */
+export const ROTATION_DAYS = 7;
+export async function shownRecently(prisma: PrismaLike, now: Date): Promise<string[]> {
+  if (typeof prisma?.gapAuditEvent?.findMany !== 'function') return [];
+  const rows: Array<{ payload: unknown }> = await prisma.gapAuditEvent.findMany({ where: { kind: BRIEFING_SENT, subject_type: BRIEFING_SUBJECT_TYPE, created_at: { gte: new Date(now.getTime() - ROTATION_DAYS * 86_400_000) } }, select: { payload: true }, orderBy: { created_at: 'desc' }, take: 50 });
+  const keys = rows.flatMap((r) => { const p = r.payload as { intelKeys?: unknown } | null; return Array.isArray(p?.intelKeys) ? p.intelKeys.filter((k): k is string => typeof k === 'string') : []; });
+  return [...new Set(keys)];
+}
+
+/** IW11: the digest sizes from the environment (GAP_BRIEFING_DIGEST_SIGNALS, GAP_BRIEFING_DIGEST_PEOPLE; 1..40); undefined keeps the defaults. */
+export function digestSizesFromEnv(env: Record<string, string | undefined>): Partial<DigestSizes> | undefined {
+  const n = (v: string | undefined) => { const x = Number(v); return v && Number.isInteger(x) && x > 0 && x <= 40 ? x : null; };
+  const signals = n(env.GAP_BRIEFING_DIGEST_SIGNALS);
+  const people = n(env.GAP_BRIEFING_DIGEST_PEOPLE);
+  return signals || people ? { ...(signals ? { signals } : {}), ...(people ? { people } : {}) } : undefined;
+}
+
 /** I04: the day's intelligence with the prepared angles, for the briefing. */
-export async function defaultIntel(prisma: PrismaLike, now: Date, deps: Pick<BriefingSendDeps, 'inDeals'> & Partial<Pick<BriefingSendDeps, 'listSent'>> & { identity?: IdentityContext | null } = {}): Promise<BriefingIntel> {
+export async function defaultIntel(prisma: PrismaLike, now: Date, deps: Pick<BriefingSendDeps, 'inDeals' | 'coverage'> & Partial<Pick<BriefingSendDeps, 'listSent'>> & { identity?: IdentityContext | null; env?: Record<string, string | undefined> } = {}): Promise<BriefingIntel> {
   // C01: the same complete-or-unavailable deal snapshot the day builds, so the email never says "no deal" on an unread CRM.
   const summary = await (deps.inDeals ?? ((p: PrismaLike, n: Date) => loadInDealsSummary(p, { now: n })))(prisma, now).catch(() => null);
   // C10: the briefing's own Gmail Sent reader, so quiet and answer owed count our side too.
   const x = await loadIntelligence(prisma, { now, coverage: dealCoverageFrom(summary), ...(deps.identity !== undefined ? { identity: deps.identity } : {}), ...(deps.listSent ? { listSent: deps.listSent } : {}) });
   const keys = [...x.signals, ...x.triggers, ...x.people].map((i) => i.key);
   const angles = await loadAngles(prisma, { keys, now });
-  return { ...x, angles: Object.fromEntries([...angles.entries()].map(([k, a]) => [k, { whyItMatters: a.whyItMatters, starters: a.starters, peopleNamed: a.peopleNamed.map((p) => ({ name: p.name, title: p.title })), proposedAction: a.proposedAction }])) };
+  // IW12: what recent briefings showed rotates behind the unseen; IW13: the producers' coverage in words; IW11: the sizes.
+  const shownBefore = await shownRecently(prisma, now).catch(() => [] as string[]);
+  const coverage = deps.coverage ? await deps.coverage(prisma, now).catch(() => null) : null;
+  return { ...x, angles: Object.fromEntries([...angles.entries()].map(([k, a]) => [k, { whyItMatters: a.whyItMatters, starters: a.starters, peopleNamed: a.peopleNamed.map((p) => ({ name: p.name, title: p.title })), proposedAction: a.proposedAction }])), shownBefore, coverage, digest: digestSizesFromEnv(deps.env ?? process.env) };
 }
 
 async function audit(prisma: PrismaLike, kind: string, actor: string, day: string, payload: Record<string, unknown>) {
@@ -167,7 +191,8 @@ export async function sendMorningBriefing(prisma: PrismaLike, input: BriefingSen
       headers: { 'Auto-Submitted': 'auto-generated', 'X-GAP-Day': day },
     });
     // A fresh Gmail message's thread id is its own id; a provider that answers none (the harness sink) is read the same way.
-    await audit(prisma, BRIEFING_SENT, actor, day, { to, gmailMessageId: res.id, resend: input.resend === true, revision: plan.revision ?? 0, gmailThreadId: res.threadId ?? res.id, dayToken, items: plan.items.length, recoveredFromSent: false });
+    // IW12: the sent row records what the email selected and omitted, so the next digest rotates and the coverage is auditable.
+    await audit(prisma, BRIEFING_SENT, actor, day, { to, gmailMessageId: res.id, resend: input.resend === true, revision: plan.revision ?? 0, gmailThreadId: res.threadId ?? res.id, dayToken, items: plan.items.length, recoveredFromSent: false, intelKeys: rendered.digest.keys, intelOmitted: rendered.digest.omitted, intelBreakdown: rendered.digest.breakdown, intelRotated: rendered.digest.rotated, coverage: intel?.coverage ?? null });
     return { sent: true, day, to, gmailMessageId: res.id, gmailThreadId: res.threadId ?? res.id, items: plan.items.length, recoveredFromSent: false };
   } catch (err) {
     await audit(prisma, BRIEFING_FAILED, actor, day, { to, attempt: attempts + 1, error: (err instanceof Error ? err.message : String(err)).slice(0, 500) }).catch(() => undefined);
