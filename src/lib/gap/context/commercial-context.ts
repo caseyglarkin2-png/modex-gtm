@@ -59,7 +59,8 @@ export interface ContextClaim extends SourceEnvelope {
   conflictsWith?: string[];
 }
 
-export type PersonVia = 'persona' | 'hubspot_contact' | 'hubspot_company_id' | 'domain' | 'alias' | 'normalized' | null;
+/** C5 (2026-10-09): 'family_deal' is the family's deal-holding account settling a domain two family accounts claim (work/person-identity.ts). */
+export type PersonVia = 'persona' | 'hubspot_contact' | 'hubspot_company_id' | 'domain' | 'alias' | 'normalized' | 'family_deal' | null;
 
 export interface ContextPerson {
   email: string;

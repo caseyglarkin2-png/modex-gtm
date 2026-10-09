@@ -171,7 +171,8 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
   const intelLine = (it: IntelItem) => {
     const a = intel?.angles[it.key];
     const who = a?.peopleNamed.length ? ` Who: ${a.peopleNamed.map((p) => `${p.name ?? 'someone'}${p.title ? ` (${p.title})` : ''}`).join('; ')}.` : '';
-    return `${it.accountName ?? it.accountHint ?? 'No account yet'}: ${it.title}. ${it.line}${a ? ` The angle: ${a.whyItMatters}${who} Ask: ${a.starters[0] ?? ''}` : ''}`;
+    // C5 (2026-10-09): an ambiguous placement is said with its names (the line carries it), never "No account yet".
+    return `${it.accountName ?? (it.ambiguousAmong?.length ? `Claimed by ${it.ambiguousAmong.join(' and ')}` : null) ?? it.accountHint ?? 'No account yet'}: ${it.title}. ${it.line}${a ? ` The angle: ${a.whyItMatters}${who} Ask: ${a.starters[0] ?? ''}` : ''}`;
   };
   // C32: an item at an account with an open deal names the deal (stage and its whole next step) and links to its brief.
   const dealLine = (it: IntelItem): { text: string; href: string } | null => {
@@ -192,7 +193,8 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
     lines.push('', `Pursued (${pursued.length}): what GAP prepared on your decisions.`);
     html.push(`<h3>Pursued (${pursued.length})</h3><p style="color:#666">What GAP prepared on your decisions.</p><ul>`);
     for (const p of pursued) {
-      const where = p.accountName ?? p.accountHint ?? 'No account yet';
+      // C5 (2026-10-09): an ambiguous placement is said with its names, never "No account yet"; a read-time placement says its line.
+      const where = p.accountName ?? (p.ambiguousAmong?.length ? (p.ambiguityLine ?? `Claimed by ${p.ambiguousAmong.join(' and ')}: choose the account`) : null) ?? p.accountHint ?? 'No account yet';
       const a = p.angle;
       const body = p.status === 'ready' && a ? `The angle: ${a.whyItMatters}${a.peopleNamed.length ? ` Who: ${a.peopleNamed.map((x) => `${x.name ?? 'someone'}${x.title ? ` (${x.title})` : ''}`).join('; ')}.` : a.roles.length ? ` Roles: ${a.roles.join(', ')}.` : ''} Ask: ${a.starters[0] ?? ''} Proposed: ${a.proposedAction === 'email' ? 'an email' : a.proposedAction === 'call' ? 'a call' : 'research first'}.${a.caveat ? ` ${a.caveat}` : ''}` : p.status === 'failed' ? `GAP could not develop the angle${p.error ? ` (${p.error.slice(0, 120)})` : ''}; decide it again on Work to retry.` : 'GAP is developing the angle; it comes back here and on Work.';
       const open = p.accountName && links.account ? links.account(p.accountName) : links.work;

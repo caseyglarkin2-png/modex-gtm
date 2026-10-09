@@ -77,7 +77,7 @@ export const REFERENCE_SET: readonly ReferenceCase[] = [
       relationship: 'prospect',
       motion: 'review_first',
       mustSay: [],
-      lineMustSay: ['two accounts claim this domain|name the account'],
+      lineMustSay: ['two accounts claim this domain|name the account|is claimed by'],
       prohibited: [{ claim: 'at Bevera Holdings', reason: 'placement is ambiguous; the seller names the account (C02)' }, { claim: 'at SnackCo Foods', reason: 'same' }],
       requiredSources: ['gmail:1a0aa0000000010'],
       neverExecute: [],

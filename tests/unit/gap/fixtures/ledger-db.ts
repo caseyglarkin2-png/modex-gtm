@@ -58,7 +58,10 @@ function table(rows: Row[], clock: () => Date, idPrefix: string) {
 }
 
 export interface LedgerSeed {
-  accounts?: string[];
+  /** A name, or an account row (C5: parent_brand, hubspot_company_id). */
+  accounts?: Array<string | Row>;
+  /** C5: canonical_conflicts rows (code, status, account_name, canonical_company_id, reason, created_at). */
+  conflicts?: Row[];
   personas?: Row[];
   audit?: Row[];
   sequenceVersions?: Row[];
@@ -102,7 +105,8 @@ function uniqueKeyTable(rows: Row[], clock: () => Date, idPrefix: string) {
 /** A fresh client over shared rows; `tick` advances the ledger clock so newest-row-wins is deterministic. */
 export function ledgerDb(seed: LedgerSeed = {}, start = new Date('2026-10-06T14:00:00Z')) {
   const store = {
-    account: (seed.accounts ?? []).map((name) => ({ name })),
+    account: (seed.accounts ?? []).map((a) => (typeof a === 'string' ? { name: a } : { ...a })),
+    canonicalConflict: [...(seed.conflicts ?? [])],
     persona: [...(seed.personas ?? [])],
     gapAuditEvent: [...(seed.audit ?? [])],
     sequenceVersion: [...(seed.sequenceVersions ?? [])],
@@ -124,6 +128,7 @@ export function ledgerDb(seed: LedgerSeed = {}, start = new Date('2026-10-06T14:
   const clock = () => new Date((t += 1000));
   const client = () => ({
     account: table(store.account, clock, 'acct'),
+    canonicalConflict: table(store.canonicalConflict, clock, 'cc'),
     persona: table(store.persona, clock, 'p'),
     gapAuditEvent: table(store.gapAuditEvent, clock, 'ev'),
     sequenceVersion: table(store.sequenceVersion, clock, 'sv'),
