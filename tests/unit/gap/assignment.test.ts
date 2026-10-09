@@ -118,6 +118,15 @@ describe('X06: buildAssignment', () => {
     deps.askContext.mockResolvedValue({ ...ASK, coverageLine: null });
     const b = await buildAssignment(db.client(), { plan: PLAN, item: ITEMS[0], revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, deps);
     expect(b.text).not.toContain('Not read this time');
+    // B8: the context's own line (coverageLineOf) already carries its prefixes; it is printed verbatim, never prefixed twice.
+    deps.askContext.mockResolvedValue({ ...ASK, coverageLine: 'Not read this time: Gmail Sent (not read on the account page), the vault (not configured). Partly read: HubSpot (deals only)' });
+    const c = await buildAssignment(db.client(), { plan: PLAN, item: ITEMS[0], revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, deps);
+    expect(c.text.split('\n')).toContain('Not read this time: Gmail Sent (not read on the account page), the vault (not configured). Partly read: HubSpot (deals only)');
+    expect(c.text).not.toContain('Not read this time: Not read this time');
+    deps.askContext.mockResolvedValue({ ...ASK, coverageLine: 'Partly read: HubSpot (deals only)' });
+    const d = await buildAssignment(db.client(), { plan: PLAN, item: ITEMS[0], revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, deps);
+    expect(d.text.split('\n')).toContain('Partly read: HubSpot (deals only)');
+    expect(d.text).not.toContain('Not read this time');
   });
 
   it('addendum: a deal item at an account where a develop_angle task succeeded for a person placed there carries the angle (prepared angle, the block above the move) and is assignable; a first touch with a pack never reads it', async () => {
