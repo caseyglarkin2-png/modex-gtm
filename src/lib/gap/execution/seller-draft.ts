@@ -203,10 +203,21 @@ export interface SellerDraftDeps {
   suppression?: (recipient: string) => Promise<void>;
   /** Ops closeout 19: messages in the GAP mailbox's Sent to this recipient in a window (listSentTo). */
   mailboxSentTo?: (recipient: string, afterEpoch: number, beforeEpoch: number) => Promise<Array<{ id: string; internalDate: Date; subject: string }>>;
+  /**
+   * C57 pass 2 (P2-1, the sender side): the GAP mailbox's Drafts to this recipient (default: listDraftsTo, sink-aware).
+   * A draft of Casey's own hand to the person, in any thread (a first touch has none of its own), refuses a GAP draft
+   * beside it; a read that throws refuses as unknown.
+   */
+  mailboxDraftsTo?: (recipient: string) => Promise<Array<{ id: string; draftId: string; threadId: string | null; internalDate: Date; to: string; subject: string }>>;
 }
 
 /** How far back a first touch reads the GAP mailbox's Sent folder for an unrecorded send. */
 export const FIRST_TOUCH_SENT_LOOKBACK_DAYS = 180;
+
+function defaultMailboxDraftsTo(sender: GmailSender | null): SellerDraftDeps['mailboxDraftsTo'] | null {
+  if (!sender) return null;
+  return async (recipient) => (await import('@/lib/email/gmail-inbox')).listDraftsTo(sender, recipient);
+}
 
 function defaultMailboxSentTo(sender: GmailSender | null): SellerDraftDeps['mailboxSentTo'] | null {
   if (!sender) return null;
@@ -724,6 +735,22 @@ export async function createSellerGmailDraft(
   // Claim this person + step under the person lock BEFORE Gmail (red team
   // Release B review): a double click, a draft on another card or a racing
   // direct send meets it inside the lock; a lost answer leaves the claim open.
+  // C57 pass 2 (P2-1): after the snapshot recheck and before the claim and Gmail, a draft of Casey's own hand to the
+  // person (any thread) is outstanding too: GAP never writes a second draft beside it. A read that throws refuses as
+  // unknown rather than proceeding.
+  const draftsTo = deps.mailboxDraftsTo ?? defaultMailboxDraftsTo(gapSender);
+  if (draftsTo) {
+    let hand: Awaited<ReturnType<NonNullable<SellerDraftDeps['mailboxDraftsTo']>>>;
+    try {
+      hand = await draftsTo(email);
+    } catch (err) {
+      return refuse(prisma, actor, decisionId, { ok: false, reason: 'send_in_progress_or_unknown', detail: `Gmail drafts could not be read (${err instanceof Error ? err.message : String(err)}); try again.` });
+    }
+    const own = hand.find((d) => (d.to.match(/[^\s<>,;"']+@[^\s<>,;"']+/)?.[0] ?? d.to).trim().toLowerCase() === email.toLowerCase());
+    if (own) {
+      return refuse(prisma, actor, decisionId, { ok: false, reason: 'draft_outstanding', detail: `A draft of yours to ${email} already sits in Gmail (${own.subject || 'no subject'}, ${own.internalDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' })}); edit or send it in Gmail, or delete it there first.` });
+    }
+  }
   const claimKey = `${personStepKey(p.personaId, email, stepIndex)}:draft:${now.toISOString()}`;
   const claim = await claimSendKey(prisma, { key: claimKey, decisionId, personaId: p.personaId, recipient: email, stepIndex, actor, now, kind: 'draft', accountName: p.accountName });
   if (!claim.claimed) {
