@@ -13,6 +13,12 @@
  *     the touch
  * Nothing without the proof. Bounded (COPY_RECONCILE_MAX per run) and windowed (COPY_LOOKBACK_DAYS). A Gmail error
  * leaves the copy as it is and is reported, never written.
+ *
+ * C40 / C41 (2026-10-08): a message sent from Gmail by hand went out OUTSIDE GAP's send gate, and its body was not
+ * read here. The proof row therefore says so: `route: 'gmail_by_hand'`, `bodyRead: false`, and the copied text's
+ * hash is kept as `copiedContentHash`, never written as the sent message's `contentHash` (the seller may have edited
+ * it in Gmail; nothing here can tell). A manual record's `matchedOn` carries `body_not_read` for the same reason.
+ * Reconciliation records what happened; it never retroactively validates or blocks a send that already went.
  */
 import type { SentMatch } from './unknown-send-reconcile';
 import { COPY_RELEASED, DIRECT_SENT, DRAFT_SENT, DRAFT_SUBJECT_TYPE, MANUAL_SENT, REPLY_COPIED, REPLY_SENT, REPLY_SUBJECT_TYPE, appendReplyLedger } from './draft-ledger';
@@ -96,7 +102,11 @@ export async function reconcileCopiesFromSent(prisma: PrismaLike, input: { now: 
       personaId: typeof inbound?.persona_id === 'number' ? inbound.persona_id : null,
       recipient,
       subject: m.subject,
-      contentHash: typeof p.contentHash === 'string' ? p.contentHash : null,
+      // C40: the sent body was not read; the copy's hash is not this message's hash.
+      contentHash: null,
+      copiedContentHash: typeof p.contentHash === 'string' ? p.contentHash : null,
+      bodyRead: false,
+      route: 'gmail_by_hand',
       gmailSentMessageId: m.id,
       gmailThreadId: m.threadId ?? null,
       sentAt: m.internalDate.toISOString(),
@@ -152,7 +162,8 @@ export async function reconcileCopiesFromSent(prisma: PrismaLike, input: { now: 
       sequenceVersionId: versionId,
       stepIndex,
       senderIdentity: process.env.GAP_GMAIL_USER_EMAIL?.trim().toLowerCase() ?? '',
-      match: { kind: 'match', message: { id: m.id, threadId: m.threadId ?? '', to: m.to, subject: m.subject, sentAt: m.internalDate.toISOString(), text: '', rfcMessageId: null }, matchedOn: ['recipient', 'after_copy', 'copies_reconcile'] },
+      // C40: the body was not read here (`text` is empty): the recorder's hash is not the approved copy's, and matchedOn says so.
+      match: { kind: 'match', message: { id: m.id, threadId: m.threadId ?? '', to: m.to, subject: m.subject, sentAt: m.internalDate.toISOString(), text: '', rfcMessageId: null }, matchedOn: ['recipient', 'after_copy', 'copies_reconcile', 'body_not_read'] },
       actor,
       now: input.now,
       ownerStatement: null,
@@ -189,7 +200,7 @@ export async function reconcileCopiesFromSent(prisma: PrismaLike, input: { now: 
         actor,
         subject_type: 'account',
         subject_id: r.subject_id,
-        payload: { dealId: String(p.dealId ?? ''), kind: String(p.kind ?? ''), recipient, textHash: typeof p.textHash === 'string' ? p.textHash : null, gmailSentMessageId: m.id, gmailThreadId: m.threadId ?? null, subject: m.subject, sentAt: m.internalDate.toISOString(), copiedAt: new Date(r.created_at).toISOString(), reconciledFromSent: true },
+        payload: { dealId: String(p.dealId ?? ''), kind: String(p.kind ?? ''), recipient, copiedTextHash: typeof p.textHash === 'string' ? p.textHash : null, bodyRead: false, route: 'gmail_by_hand', gmailSentMessageId: m.id, gmailThreadId: m.threadId ?? null, subject: m.subject, sentAt: m.internalDate.toISOString(), copiedAt: new Date(r.created_at).toISOString(), reconciledFromSent: true },
       },
     });
     report.artifacts.reconciled += 1;

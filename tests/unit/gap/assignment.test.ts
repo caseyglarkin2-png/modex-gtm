@@ -135,7 +135,7 @@ describe('X06: startDay, sendAssignment, nextUnassignedItem', () => {
     expect(rows).toHaveLength(1);
     expect(rows[0].subject_type).toBe('work_item');
     expect(rows[0].subject_id).toBe('first_touch:dec-1');
-    expect(rows[0].payload).toMatchObject({ day: '2026-10-08', itemToken: 'a'.repeat(32), revision: 0, to: 'casey@freightroll.com', gmailMessageId: 'gm-9', gmailThreadId: 'th-9', contentHash: 'hash-pack-1', prepared: { kind: 'email', to: 'karen@pepsico.com' } });
+    expect(rows[0].payload).toMatchObject({ day: '2026-10-08', itemToken: 'a'.repeat(32), revision: 0, to: 'casey@freightroll.com', senderIdentity: 'casey@yardflow.ai', gmailMessageId: 'gm-9', gmailThreadId: 'th-9', contentHash: 'hash-pack-1', prepared: { kind: 'email', to: 'karen@pepsico.com' } });
 
     const again = await sendAssignment(db.client(), input, deps);
     expect(again).toMatchObject({ sent: false, reason: 'already_sent' });

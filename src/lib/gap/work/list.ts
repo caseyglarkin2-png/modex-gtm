@@ -38,7 +38,8 @@ import type { PursuitStateKind } from '../pursuit/state';
 import { outcomeLine, type WorkOutcome } from './outcome-model';
 import { MOTION_UNLOCK_BUSINESS_DAYS } from '../motion/account-motion';
 import { buyerMoves, commitmentPhase, commitmentTier, KIND_TEXT, skippedAtClosureOf, type Commitment, type CommitmentKind, type SkippedAtClosure, TERMINAL_STATUSES } from './commitment-model';
-import { dayLabel, nyDay } from './dates';
+import { dayLabel, isDay, nyDay, nyDayAt } from './dates';
+import { clipAtSentence } from './briefing';
 import { stalledSignals } from '../deals/stalled';
 import { closedDealLabel, type ClosedDealRef } from '../deals/scope';
 import type { OpportunityHold } from './opportunity-holds';
@@ -167,7 +168,7 @@ export interface WorkInput {
   /** The account motions the cockpit read (primary and next per account). */
   motions: ReadonlyArray<{ accountName: string; state: string; primary: { name: string; title: string | null } | null; next: { name: string; title: string | null; unlock: string } | null }>;
   /** The In Deals summary: complete, or unavailable (then nothing is claimed about deals). */
-  inDeals: { status: 'complete' | 'unavailable'; accounts: ReadonlyArray<{ accountName: string; deals: ReadonlyArray<{ id?: string; name: string | null; stage: string; lastActivityAt?: string | null; closeDate?: string | null; /** X15c: HubSpot hs_next_step, when set. */ nextStep?: string | null; contactIds?: readonly string[] }> }> };
+  inDeals: { status: 'complete' | 'unavailable'; /** C01: when HubSpot was read, so a consumer can say so. */ checkedAt?: string | null; accounts: ReadonlyArray<{ accountName: string; /** C57 F7 (C03): the other names the deal is recorded under, so the Work page folds aliases as the briefing does. */ alsoRecordedAs?: string[]; deals: ReadonlyArray<{ id?: string; name: string | null; stage: string; lastActivityAt?: string | null; closeDate?: string | null; /** X15c: HubSpot hs_next_step, when set. */ nextStep?: string | null; contactIds?: readonly string[] }> }> };
   /** Accounts a current card holds for an open deal or an UNKNOWN opportunity read (never a cold action). */
   held: ReadonlyMap<string, 'active_opportunity' | 'opportunity_unknown'>;
   /**
@@ -319,6 +320,84 @@ interface Ranked {
   sortKey: Array<number | string>;
   card: Omit<WorkCard, 'href' | 'index' | 'source'>;
   source?: 'pursuit' | 'cockpit';
+}
+
+/**
+ * C28: a commitment's dates as instants. A date-only value ('2026-05-26', a row written before the instant rule or by
+ * hand) is that New York day at the due hour, never UTC midnight (which reads as the evening before in New York, so
+ * May 26 became May 25 and a date due tomorrow became due tonight). Instants pass through unchanged.
+ */
+export function withInstantDates(c: Commitment): Commitment {
+  const fix = (v: string | null): string | null => (v && isDay(v) ? nyDayAt(v).toISOString() : v);
+  const dueAt = fix(c.dueAt);
+  const snoozeUntil = fix(c.snoozeUntil);
+  return dueAt === c.dueAt && snoozeUntil === c.snoozeUntil ? c : { ...c, dueAt, snoozeUntil };
+}
+
+/**
+ * C28: the return date, said as what it is. `due today` for a date that is today; `overdue since <day>` for an open
+ * or waiting obligation past its day; `returned on <day>` for a snooze or a reminder whose day passed (a reminder from
+ * May 26 read on October 8 is not "back today": it returned on May 26 and has waited since); `scheduled for <day>` for
+ * a snooze or a wait on a later day. Follow-ups and buyer promises keep their own words; only the date part moves.
+ */
+export function describeReturn(c: Commitment, phase: { phase: string; line: string; dueDay: string | null }, now: Date): string {
+  const today = nyDay(now);
+  const when = (day: string) => dayLabel(day, now);
+  const onDay = (day: string) => (/^(today|tomorrow|yesterday)$/.test(when(day)) ? when(day) : `on ${when(day)}`);
+  if (c.status === 'snoozed') {
+    const untilDay = c.snoozeUntil ?? c.dueAt ? nyDay((c.snoozeUntil ?? c.dueAt) as string) : null;
+    if (!untilDay) return phase.line;
+    if (phase.phase === 'snoozed') return `Scheduled for ${when(untilDay)}.`;
+    if (phase.phase === 'due' && /^Back early/.test(phase.line)) return phase.line;
+    if (untilDay === today) return 'Back today (snoozed until today).';
+    if (untilDay < today) return `Returned ${onDay(untilDay)}; overdue since then.`;
+    return phase.line;
+  }
+  if (c.status === 'waiting' && phase.phase === 'waiting' && phase.dueDay && phase.dueDay > today) {
+    return `Scheduled for ${when(phase.dueDay)}${c.dependency ? `; waiting on ${c.dependency}` : ''}.`;
+  }
+  if (phase.phase === 'due' && phase.dueDay && c.kind !== 'follow_up' && c.kind !== 'buyer_promise') {
+    if (phase.dueDay === today) return 'Due today.';
+    if (phase.dueDay < today) return `Overdue since ${when(phase.dueDay)}.`;
+  }
+  return phase.line;
+}
+
+/** C27: the person an obligation is about, as a stable key: the address, else the persona, else the name; null when none. */
+export function obligationPersonKey(c: Pick<Commitment, 'person'>): string | null {
+  const email = c.person?.email?.trim().toLowerCase();
+  if (email) return `email:${email}`;
+  if (typeof c.person?.personaId === 'number') return `persona:${c.person.personaId}`;
+  const name = c.person?.name?.trim().toLowerCase().replace(/\s+/g, ' ');
+  return name ? `name:${name}` : null;
+}
+
+/**
+ * C27: the durable origin of an obligation: what created it (the originating message, disposition, send, plan step or
+ * seller note, by its id) within its relationship scope (the account, the deal, the person). Two rows with one origin
+ * are one obligation whatever their titles say; two origins are two obligations whatever their titles say.
+ */
+export function obligationOriginKey(c: Commitment): string {
+  return `${c.accountName}|${c.dealId ?? ''}|${obligationPersonKey(c) ?? ''}|${c.kind}|${c.source.kind}:${c.source.id}`;
+}
+
+/**
+ * C27: does this obligation fold into another live one? A reminder to come back to a person (derived from their
+ * out-of-office notice, their "not now", or the seller's snooze on them) and the follow-up waiting on the same person at
+ * the same account and deal are one obligation: the follow-up is the durable one and it renders. The match is the
+ * relationship (account, deal, person by address, persona or name), never the title. A reminder that names the
+ * commitment it derives from (its source id, or detail.derivedFrom) folds into that one by id. Two different promises
+ * to one person never fold: only a reminder folds, and only into a follow-up.
+ */
+export function foldsInto(c: Commitment, others: readonly Commitment[]): Commitment | null {
+  if (c.kind !== 'reminder') return null;
+  const live = others.filter((o) => o.commitmentId !== c.commitmentId && !TERMINAL_STATUSES.includes(o.status));
+  const derivedFrom = (c.detail as { derivedFrom?: string } | null)?.derivedFrom ?? null;
+  const byId = live.find((o) => o.commitmentId === derivedFrom || o.commitmentId === c.source.id);
+  if (byId) return byId;
+  const person = obligationPersonKey(c);
+  if (!person) return null;
+  return live.find((o) => o.kind === 'follow_up' && o.accountName === c.accountName && (o.dealId ?? null) === (c.dealId ?? null) && obligationPersonKey(o) === person) ?? null;
 }
 
 /** Where an obligation's work runs (the account page unless a better place exists). */
@@ -501,7 +580,8 @@ export function workDay(i: WorkInput): WorkDay {
     // X15c: the buyer's next step (HubSpot hs_next_step) leads the card when one is set; the hygiene line comes second.
     const dealNextStep = a.deals.map((d) => (typeof d.nextStep === 'string' ? d.nextStep.trim() : '')).find(Boolean) ?? null;
     // X17: the step as a phrase (no trailing period, bounded) for the action label and the plan item's title.
-    const clipStep = (s: string) => { const t = s.replace(/\.$/, '').trim(); return t.length > 90 ? `${t.slice(0, 89)}…` : t; };
+    // C32: a long next step is cut at a sentence end or kept whole, never mid-sentence.
+    const clipStep = (s: string) => clipAtSentence(s.replace(/\.$/, '').trim(), 160);
     const dealsLine = `Open HubSpot ${a.deals.length === 1 ? 'deal' : 'deals'}: ${stages}.`;
     offer({ rank: LANE_RANK.deals, sortKey: [name], card: { accountName: name, lane: 'deals', stateKind: 'in_deal', state: STATE_TEXT.in_deal, why: dealNextStep ? `Next step on the deal: ${dealNextStep.replace(/\.$/, '')}. ${dealsLine}` : dealsLine, person: null, next: dealNextStep ? { label: `Next step: ${clipStep(dealNextStep)}`, href: `${accountHref(name)}?view=brief` } : { label: 'Open the deal brief', href: `${accountHref(name)}?view=brief` }, blocker: 'No cold first touch while the deal is open: work it from the deal.', ...(stalled.length ? { stalled } : {}), ...(dealNextStep ? { dealNextStep, move: `Next step on the deal: ${clipStep(dealNextStep)}` } : {}) } });
   }
@@ -635,9 +715,20 @@ export function workDay(i: WorkInput): WorkDay {
   const obligations = new Map<string, WorkObligation[]>();
   const snoozed: WorkDay['snoozed'] = [];
   const outcomeSnoozed = new Set([...(i.outcomes ?? []).values()].filter((o) => o.kind === 'snoozed').map((o) => o.accountName));
-  for (const c of i.commitments ?? []) {
-    const p = commitmentPhase(c, i.now, moved);
+  // C28: every date read as an instant in New York (a date-only row never shifts through UTC).
+  const commitments = (i.commitments ?? []).map(withInstantDates);
+  // C27: one row per durable origin (the same origin recorded twice renders once; the first stands).
+  const seenOrigin = new Set<string>();
+  for (const c of commitments) {
+    const origin = obligationOriginKey(c);
+    if (seenOrigin.has(origin)) continue;
+    seenOrigin.add(origin);
+    const phase = commitmentPhase(c, i.now, moved);
+    const p = { ...phase, line: describeReturn(c, phase, i.now) };
     if (p.phase === 'done' || p.phase === 'skipped') continue;
+    // C27: a reminder about a person folds into the follow-up waiting on them (by relationship, never by title), in
+    // every phase: it is never a second row in Waiting or Snoozed either.
+    if (foldsInto(c, commitments)) continue;
     if (p.phase === 'snoozed') {
       // An account snooze is listed once, as the account (its reminder is the same thing).
       if (!(c.source.kind === 'snooze' && outcomeSnoozed.has(c.accountName))) snoozed.push({ key: c.commitmentId, accountName: c.accountName, line: `${c.title}: ${p.line}`, until: c.snoozeUntil ?? c.dueAt ?? '' });
@@ -664,8 +755,6 @@ export function workDay(i: WorkInput): WorkDay {
     // promotes a held account either; every other kind ranks.
     const tier: WorkTier = c.source.kind === 'snooze' || plan?.action === 'held' ? 'later' : commitmentTier(c);
     const list = obligations.get(c.accountName) ?? [];
-    // I04: a reminder to follow up when someone is back and the follow-up waiting on the same person are one item.
-    if (c.kind === 'reminder' && c.person?.email && (i.commitments ?? []).some((o) => o.kind === 'follow_up' && o.commitmentId !== c.commitmentId && !TERMINAL_STATUSES.includes(o.status) && o.accountName === c.accountName && o.person?.email === c.person?.email && o.title.replace(/^Reminder: /, '') === c.title.replace(/^Reminder: /, ''))) continue;
     list.push({ key: c.commitmentId, commitmentId: c.commitmentId, kind: c.kind, tier, title: c.title, line: plan?.line ?? p.line, dueAt: c.dueAt, dueDay: p.dueDay, person: c.person ? { name: c.person.name, email: c.person.email } : null, basis: c.basis, href: action.href, label: action.label, canComplete: true, scope: dealLabel(c.accountName, c.dealId), proofNeeded: c.detail?.proofNeeded ?? null, ...(c.detail?.skippedAtClosure?.length ? { skippedAtClosure: skippedAtClosureOf(c, i.commitments ?? []) } : {}) });
     obligations.set(c.accountName, list);
   }
@@ -755,7 +844,7 @@ export function workDay(i: WorkInput): WorkDay {
     // obligation that happens to top the card: Ann on the pilot is never logged against Ben's Columbus deal.
     const replier = isReply ? replyContact.get(`${card.accountName}|${card.reply!.from.toLowerCase()}`) ?? null : null;
     const theirs = replier ? deals.filter((d) => (d.contactIds ?? []).includes(replier)) : [];
-    const scoped = isReply ? null : list.map((o) => (o.commitmentId ? (i.commitments ?? []).find((c) => c.commitmentId === o.commitmentId)?.dealId ?? null : null)).find((x): x is string => !!x);
+    const scoped = isReply ? null : list.map((o) => (o.commitmentId ? commitments.find((c) => c.commitmentId === o.commitmentId)?.dealId ?? null : null)).find((x): x is string => !!x);
     const deal = isReply ? (theirs.length === 1 ? theirs[0] : null) : (scoped ? deals.find((d) => d.id === scoped) : null) ?? (deals.length === 1 ? deals[0] : null);
     if (deal?.id) {
       q.set('deal', deal.id);

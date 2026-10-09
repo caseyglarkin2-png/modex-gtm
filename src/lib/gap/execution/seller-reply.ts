@@ -72,6 +72,11 @@ export interface SellerReplyDeps {
   signature?: (sender: GmailSender | undefined) => Promise<string | null>;
   /** The GAP mailbox's Sent folder to this recipient in a window (default: listSentTo, sink-aware). */
   mailboxSentTo?: (recipient: string, afterEpoch: number, beforeEpoch: number) => Promise<Array<{ id: string; internalDate: Date; subject: string }>>;
+  /**
+   * C57 pass 2 (P2-1): the GAP mailbox's Drafts to this recipient (default: listDraftsTo, sink-aware). A draft of
+   * Casey's own in the person's thread refuses a second one beside it; a read that throws refuses as unknown.
+   */
+  mailboxDraftsTo?: (recipient: string) => Promise<Array<{ id: string; draftId: string; threadId: string | null; internalDate: Date; to: string; subject: string }>>;
   gmail?: GmailAdapterDeps;
 }
 
@@ -110,6 +115,11 @@ async function defaultMaterials(accountName: string): Promise<Array<{ kind: stri
 function defaultMailboxSentTo(sender: GmailSender | null): SellerReplyDeps['mailboxSentTo'] | null {
   if (!sender) return null;
   return async (recipient, after, before) => (await import('@/lib/email/gmail-inbox')).listSentTo(sender, recipient, after, before);
+}
+
+function defaultMailboxDraftsTo(sender: GmailSender | null): SellerReplyDeps['mailboxDraftsTo'] | null {
+  if (!sender) return null;
+  return async (recipient) => (await import('@/lib/email/gmail-inbox')).listDraftsTo(sender, recipient);
 }
 
 /** The answer's ledger facts, folded. */
@@ -341,6 +351,24 @@ export async function createSellerReplyDraft(
   if (p.states.drafted) {
     if (p.states.drafted.contentHash === p.contentHash) return { ok: true, alreadyDrafted: true, drafted: { gmailDraftId: p.states.drafted.draftId, contentHash: p.contentHash, at: p.states.drafted.at } };
     return { ok: false, reason: 'draft_outstanding', detail: 'A Gmail draft of this answer already exists: edit or send it in Gmail, or delete it there first.' };
+  }
+  // C57 pass 2 (P2-1): a draft of Casey's own hand in the person's thread (or, with no thread known, to the person) is
+  // outstanding too; GAP never writes a second draft beside it. The read happens before the claim and before Gmail;
+  // a read that throws refuses as unknown rather than proceeding.
+  const draftsTo = deps.mailboxDraftsTo ?? defaultMailboxDraftsTo(p.gapSender);
+  if (draftsTo) {
+    let drafts: Awaited<ReturnType<NonNullable<SellerReplyDeps['mailboxDraftsTo']>>>;
+    try {
+      drafts = await draftsTo(p.recipient);
+    } catch (err) {
+      return { ok: false, reason: 'reply_in_progress_or_unknown', detail: `Gmail drafts could not be read (${err instanceof Error ? err.message : String(err)}); try again.` };
+    }
+    const threadId = p.threadContext?.threadId ?? null;
+    const want = p.recipient.trim().toLowerCase();
+    const hand = drafts.find((d) => (threadId ? d.threadId === threadId : (d.to.match(/[^\s<>,;"']+@[^\s<>,;"']+/)?.[0] ?? d.to).trim().toLowerCase() === want));
+    if (hand) {
+      return { ok: false, reason: 'draft_outstanding', detail: `A draft of yours already sits in this thread (${hand.subject || 'no subject'}, ${hand.internalDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' })}); edit or send it in Gmail, or delete it there first.` };
+    }
   }
   const claim = await claimReply(prisma, { messageId: p.messageId, kind: 'draft', actor: input.actor, now: input.now });
   if (!claim.claimed) return claim.state === 'sent' ? { ok: false, reason: 'already_answered' } : { ok: false, reason: 'reply_in_progress_or_unknown', detail: 'An earlier click on this answer has no outcome on record. Check Gmail Drafts and Sent before trying again.' };

@@ -20,7 +20,15 @@ import { captureSignal } from '../signals/intake';
 import { listAgentTasks, queueAgentTask } from '../agents/tasks';
 import { nyDay } from './dates';
 import { accountHref } from '../account-intel/href';
+import { dealCoverageFrom, dealsAt, dealsByContactId, type DealLookup } from './deal-coverage';
+import { resolvePersonAccount } from './person-identity';
+import { classifyPurpose } from '../context/purpose';
+import { loadIdentityContext } from '../identity/service';
+import type { IdentityContext } from '../identity/resolve';
+import { loadInDealsSummary, type InDealsSummary } from '../deals/in-deals';
+import type { ContactLookup } from '../opportunity/contact-reads';
 import { DECISIONS, PROSPECT_DECISION, type Decision } from './intel';
+import { seedRevision } from '../agents/angle-claims';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -55,6 +63,12 @@ export type DecideResult =
 export interface DecideDeps {
   /** The signal capture (tests inject one; production captures through signals/intake.ts). */
   capture?: typeof captureSignal;
+  /** C02: the HubSpot contact read by address (companies and deals the CRM associates); the real read by default, null when unconfigured. */
+  contactLookup?: ContactLookup;
+  /** C02/C03: the identity context (read from the database by default). */
+  identity?: IdentityContext | null;
+  /** C06: the in-deals read (the day's own by default) that scopes a person to their open deal. */
+  inDeals?: (prisma: PrismaLike, now: Date) => Promise<InDealsSummary | null>;
   queueAngle?: (prisma: PrismaLike, input: { key: string; decision: Decision; note: string | null; actor: string; now: Date; via: string; input: Record<string, unknown> }) => Promise<{ id: string; kept?: boolean }>;
 }
 
@@ -64,11 +78,20 @@ const SPENDS = new Set<Decision>(['pursue', 'more']);
  * A02: unchanged work is never regenerated and two angle tasks never run at once on one item. A Pursue without a
  * note on an item whose angle is already prepared keeps that angle (`angle_kept`); a task still running is kept too;
  * More, a note, or a failed task queue a fresh one (the retry path the task row names).
+ *
+ * C23 (the commercial-context audit, 2026-10-08): the kept-angle rule is keyed by the CONTEXT REVISION of what the
+ * Pursue carries (agents/angle-claims.ts seedRevision: the placement, the CRM read, the message; never the clock or
+ * the note) and the seller request. An unchanged Pursue reuses the prepared angle; a changed buyer or CRM context (a
+ * person placed at an account after the identity fix, a new deal next step, a newer message) queues a fresh one, so
+ * an old no-account angle is replaced; a succeeded task from before this rule (no revision on its input) is replaced
+ * too. The revision rides on the task input as `contextRevision`.
  */
 async function queueAngle(prisma: PrismaLike, input: { key: string; decision: Decision; note: string | null; actor: string; now: Date; via: string; input: Record<string, unknown> }): Promise<{ id: string; kept?: boolean }> {
+  const contextRevision = seedRevision(input.input);
   const existing = (await listAgentTasks(prisma, { now: input.now, itemKey: input.key }).catch(() => [])).filter((t) => t.kind === 'develop_angle').sort((a, b) => b.queuedAt.localeCompare(a.queuedAt))[0];
-  if (existing && (existing.status === 'running' || (existing.status === 'succeeded' && input.decision === 'pursue' && !input.note))) return { id: existing.id, kept: true };
-  const q = await queueAgentTask(prisma, { kind: 'develop_angle', itemKey: input.key, itemToken: '', day: nyDay(input.now), revision: 0, request: input.note ?? input.decision, requestedBy: input.actor, requestedFrom: input.via, input: { decision: input.decision, ...input.input } }, { now: input.now, actor: input.actor });
+  const sameContext = existing?.input?.contextRevision === contextRevision;
+  if (existing && (existing.status === 'running' || (existing.status === 'succeeded' && input.decision === 'pursue' && !input.note && sameContext))) return { id: existing.id, kept: true };
+  const q = await queueAgentTask(prisma, { kind: 'develop_angle', itemKey: input.key, itemToken: '', day: nyDay(input.now), revision: 0, request: input.note ?? input.decision, requestedBy: input.actor, requestedFrom: input.via, input: { decision: input.decision, ...input.input, contextRevision } }, { now: input.now, actor: input.actor });
   return { id: q.id };
 }
 
@@ -146,18 +169,47 @@ export async function applyDecision(prisma: PrismaLike, input: DecideInput, deps
     return { ok: true, key, decision: input.decision, effects, angleTaskId, accountName, href };
   }
 
-  // person
-  const persona = typeof prisma.persona?.findFirst === 'function' ? await prisma.persona.findFirst({ where: { email: { equals: parsed.email, mode: 'insensitive' } }, select: { id: true, name: true, title: true, account_name: true } }).catch(() => null) : null;
-  accountName = persona?.account_name ?? null;
+  // person (C02, C05, C06): the authoritative sources are reloaded here, never trusted from the link.
+  const persona = typeof prisma.persona?.findFirst === 'function' ? await prisma.persona.findFirst({ where: { email: { equals: parsed.email, mode: 'insensitive' } }, select: { id: true, name: true, title: true, account_name: true, hubspot_contact_id: true } }).catch(() => null) : null;
+  // C57 F6 (C02/C05): the thread is a relation; without the include the thread-alias placement never ran in production.
+  const last = typeof prisma.inboundMessage?.findFirst === 'function' ? await prisma.inboundMessage.findFirst({ where: { from_email: { equals: parsed.email, mode: 'insensitive' } }, orderBy: { received_at: 'desc' }, include: { thread: { select: { account_name: true } } } }).catch(() => null) : null;
+  const messages: number = typeof prisma.inboundMessage?.count === 'function' ? await prisma.inboundMessage.count({ where: { from_email: { equals: parsed.email, mode: 'insensitive' } } }).catch(() => 0) : 0;
+  // The CRM read is the caller's to supply (the route passes the real one); the library never reaches HubSpot on its own.
+  let contact = persona?.account_name || !deps.contactLookup ? null : await deps.contactLookup(parsed.email).catch(() => null);
+  const identity = deps.identity !== undefined ? deps.identity : typeof prisma.canonicalCompany?.findMany === 'function' && typeof prisma.gapAccountAlias?.findMany === 'function' ? await loadIdentityContext(prisma).catch(() => null) : null;
+  const placed = resolvePersonAccount({ email: parsed.email, persona, threadAccount: last?.thread?.account_name ?? null, identity, hubspotCompanyIds: contact?.companyIds ?? [] });
+  accountName = placed.accountName;
   href = accountName ? `${accountHref(accountName)}/` : '/gap/replies/';
   if (SPENDS.has(input.decision)) {
-    queued = await angle(prisma, { key, decision: input.decision, note: input.note ?? null, actor: input.actor, now: input.now, via, input: { email: parsed.email, personaId: persona?.id ?? null, name: persona?.name ?? null, title: persona?.title ?? null, accountName } });
+    const summary = await (deps.inDeals ?? ((p: PrismaLike, n: Date) => loadInDealsSummary(p, { now: n })))(prisma, input.now).catch(() => null);
+    const coverage = dealCoverageFrom(summary);
+    const lookup: DealLookup = accountName ? dealsAt(coverage, accountName) : contact?.contactId ? dealsByContactId(coverage, contact.contactId) : { inDeal: null };
+    // C57 pass 2, finding 2 (C06): a persona-placed person skipped the contact lookup, so every open deal at the account rode the task and
+    // both next steps reached the model. The scope is settled by the CRM's own association: the persona's contact id against each deal's
+    // contact ids first (no network), then the contact lookup when more than one deal remains and a reader was supplied.
+    let candidates = lookup.inDeal === true ? lookup.account.deals : [];
+    const contactIdHint = (persona as { hubspot_contact_id?: string | null } | null)?.hubspot_contact_id ?? contact?.contactId ?? null;
+    if (candidates.length > 1 && contactIdHint) {
+      const mine = candidates.filter((d) => d.contactIds.map(String).includes(String(contactIdHint)));
+      if (mine.length) candidates = mine;
+    }
+    if (candidates.length > 1 && !contact && deps.contactLookup) contact = await deps.contactLookup(parsed.email).catch(() => null);
+    const deals = candidates.filter((d) => !contact?.dealIds?.length || !d.id || contact.dealIds.includes(d.id)).map((d) => ({ id: d.id, name: d.name, stage: d.stage, nextStep: d.nextStep, closeDate: d.closeDate }));
+    const excerpt = (typeof last?.body_text === 'string' && last.body_text.trim() ? last.body_text : typeof last?.snippet === 'string' ? last.snippet : '').replace(/\s+/g, ' ').trim().slice(0, 600) || null;
+    queued = await angle(prisma, { key, decision: input.decision, note: input.note ?? null, actor: input.actor, now: input.now, via, input: {
+      email: parsed.email, personaId: persona?.id ?? null, name: persona?.name ?? contact?.name ?? last?.from_name ?? null, title: persona?.title ?? contact?.title ?? null,
+      accountName, accountHint: accountName ? null : placed.domain, resolvedVia: placed.via, ambiguous: placed.ambiguous,
+      lastWroteAt: last?.received_at ? new Date(last.received_at).toISOString() : null, messages, subject: last?.subject ?? null, inboundMessageId: last?.id ?? null, threadId: last?.thread_id ?? null, excerpt,
+      // C57 F10 (C17/C18): the message's purpose rides with it so a vendor's or a support sender's words never seed "what the buyer said".
+      purpose: last ? classifyPurpose({ from: parsed.email, subject: last.subject ?? null, excerpt, direction: 'inbound', type: 'email' }, { knownPerson: !!persona }).purpose : null,
+      hubspotContactId: contact?.contactId ?? null, deals, dealCoverage: coverage.status, opportunity: lookup.inDeal === true ? 'open' : lookup.inDeal === false ? 'none' : 'unknown',
+    } });
     angleTaskId = queued.id;
     effects.push(queued.kept ? 'angle_kept' : 'angle_queued');
   } else {
     effects.push(input.decision === 'skip' ? 'skipped_30_days' : input.decision === 'dismiss' ? 'dismissed' : input.decision === 'save' ? 'saved' : 'explored');
   }
-  await recordDecision(prisma, key, input, { accountName, personaId: persona?.id ?? null, effects });
+  await recordDecision(prisma, key, input, { accountName, personaId: persona?.id ?? null, resolvedVia: placed.via, ambiguous: placed.ambiguous, inboundMessageId: last?.id ?? null, effects });
   return { ok: true, key, decision: input.decision, effects, angleTaskId, accountName, href };
 }
 

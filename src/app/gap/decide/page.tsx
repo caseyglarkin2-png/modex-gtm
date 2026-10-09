@@ -6,19 +6,22 @@
  * with the way on (the account, the Signals page, Work). A forged or expired link applies nothing. Session only.
  */
 import Link from 'next/link';
+import { hubspotContactByEmail } from '@/lib/gap/opportunity/contact-reads';
 import { notFound, redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { loginHref } from '@/lib/auth-return';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
-import { actionSecret, verifyActionToken } from '@/lib/gap/work/action-token';
+import { actionSecret, executionAllowed, verifyActionToken } from '@/lib/gap/work/action-token';
 import { applyDecision, decisionLine, isDecision } from '@/lib/gap/work/decide';
 import { GapSubnav } from '@/components/gap/gap-subnav';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Decided' };
 
-export default async function DecidePage({ searchParams }: { searchParams?: Promise<{ t?: string }> }) {
+const DECISION_WORDS: Record<string, string> = { pursue: 'Pursue', explore: 'Explore', save: 'Save', skip: 'Skip', dismiss: 'Dismiss', more: 'Find out more about' };
+
+export default async function DecidePage({ searchParams }: { searchParams?: Promise<{ t?: string; confirmed?: string }> }) {
   if (assertGapEnabled('GAP_ROUTING_ENABLED')) notFound();
   const session = await auth();
   if (!session?.user?.email) redirect(loginHref('/gap/decide/'));
@@ -33,8 +36,29 @@ export default async function DecidePage({ searchParams }: { searchParams?: Prom
     const key = sep > 0 ? v.payload.item.slice(0, sep) : '';
     const decision = sep > 0 ? v.payload.item.slice(sep + 1) : '';
     if (!key || !isDecision(decision)) body = { ok: false, line: 'This decision link names no decision. Nothing was applied.' };
-    else {
-      const r = await applyDecision(prisma, { key, decision, actor: session.user.email, now, via: 'gmail:link' });
+    else if (!executionAllowed({ op: 'decide', method: 'GET', confirmed: q.confirmed === '1' }).ok) {
+      // C43 / C57 F-C2: a bare GET (a link preview, a prefetch, a scanner) executes nothing. One click confirms.
+      return (
+        <div className="mx-auto max-w-2xl space-y-5">
+          <GapSubnav />
+          <div>
+            <h1 className="text-2xl font-semibold tracking-tight">Confirm the decision</h1>
+            <p className="mt-2 text-sm" data-testid="decide-confirm-line">
+              {DECISION_WORDS[decision]} {key.startsWith('person:') ? 'the person' : key.startsWith('trigger:') ? 'the trigger' : 'the signal'} ({key.slice(key.indexOf(':') + 1)})? Nothing is applied until you confirm; nothing is sent to anyone either way.
+            </p>
+          </div>
+          <form method="get" action="/gap/decide" className="flex flex-wrap items-center gap-3" data-testid="decide-confirm-form">
+            <input type="hidden" name="t" value={q.t} />
+            <input type="hidden" name="confirmed" value="1" />
+            <button type="submit" className="inline-flex min-h-11 items-center rounded-md bg-[var(--primary)] px-3 text-sm font-semibold text-[var(--primary-foreground)]" data-testid="decide-confirm">
+              {DECISION_WORDS[decision]}
+            </button>
+            <Link href="/gap/" className="text-sm underline">Not now, back to Work</Link>
+          </form>
+        </div>
+      );
+    } else {
+      const r = await applyDecision(prisma, { key, decision, actor: session.user.email, now, via: 'gmail:link' }, { contactLookup: hubspotContactByEmail });
       body = r.ok ? { ok: true, line: decisionLine(r), href: r.href, accountName: r.accountName } : { ok: false, line: r.reason === 'not_found' ? 'That item is no longer on record.' : `Not applied: ${String(r.reason).replace(/_/g, ' ')}.` };
     }
   }

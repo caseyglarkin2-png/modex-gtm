@@ -4,6 +4,7 @@
  * that dependency failing, never skipped and never green.
  */
 import { gapGmailSender } from '../execution/gap-sender';
+import type { ContextSourceCoverage } from './health';
 import { ROUTING_RUN_DONE } from '../routing/queue';
 import { ACTION_TIME_SUPPRESSION_TIMEOUT_MS, probeSuppressionContract } from '@/lib/email/suppression-gate';
 import type { HealthInputs } from './health';
@@ -28,6 +29,12 @@ export interface HealthDeps {
   clock?: () => number;
   /** A04: the AI Gateway credit balance read; the default calls the gateway's credits endpoint with the production key, never printing it. */
   gatewayCredits?: () => Promise<{ balance: number; totalUsed: number }>;
+  /** C46: the HubSpot contact association read (the C02 path) for a probe address; the default reads a contact by email. */
+  associationsProbe?: () => Promise<void>;
+  /** C46: the GAP sender's Gmail Sent read for a short window; the default lists Sent to the sender's own address. */
+  sentProbe?: () => Promise<void>;
+  /** C46: the vault and Clawd knowledge read for one account (retrieval.ts coverage); the default is story/load's loadAccountKnowledge. */
+  knowledge?: (input: { accountName: string; domain: string | null; now: Date }) => Promise<{ coverage: Array<{ source: string; configured: boolean; reachable: boolean; completeness: 'complete' | 'partial' | 'unknown'; watermark: string | null; indexedAt: string | null; omittedReason: string | null }> }>;
 }
 
 async function timed<T>(fn: () => Promise<T>, clock: () => number, timeoutMs: number): Promise<{ ok: true; value: T; ms: number } | { ok: false; error: string; ms: number }> {
@@ -58,6 +65,63 @@ async function defaultGatewayCredits(env: Record<string, string | undefined>): P
   return { balance: Number(j.balance), totalUsed: Number(j.total_used) };
 }
 
+async function defaultAssociationsProbe(): Promise<void> {
+  const { hubspotContactByEmail } = await import('../opportunity/contact-reads');
+  await hubspotContactByEmail(HEALTH_PROBE_EMAIL);
+}
+
+async function defaultSentProbe(env: Record<string, string | undefined>, now: Date): Promise<void> {
+  const sender = gapGmailSender(env);
+  if (!sender) throw new Error('no GAP sender');
+  const { listSentTo } = await import('@/lib/email/gmail-inbox');
+  const nowS = Math.floor(now.getTime() / 1000);
+  await listSentTo(sender, sender.userEmail, nowS - 7 * 86_400, nowS);
+}
+
+async function defaultKnowledge(env: Record<string, string | undefined>, input: { accountName: string; domain: string | null; now: Date }) {
+  const { loadAccountKnowledge } = await import('../story/load');
+  return loadAccountKnowledge({ accountName: input.accountName, domain: input.domain, now: input.now }, { env });
+}
+
+/** C46: the context sources, each read soft and bounded; an unreadable source is said as such, never as empty. */
+async function loadContextInputs(prisma: PrismaLike, deps: HealthDeps, env: Record<string, string | undefined>, clock: () => number, hubspotConfigured: boolean): Promise<NonNullable<HealthInputs['context']>> {
+  const now = new Date(clock());
+  const count = async (model: string) => {
+    const m = (prisma as Record<string, { count?: (q?: unknown) => Promise<number> } | undefined>)[model];
+    if (typeof m?.count !== 'function') throw new Error(`${model} not readable`);
+    return m.count();
+  };
+  const [companies, aliases, canaryRow] = await Promise.all([
+    count('canonicalCompany').then((n) => ({ ok: true as const, n })).catch((e: unknown) => ({ ok: false as const, error: e instanceof Error ? e.message.slice(0, 120) : String(e) })),
+    count('gapAccountAlias').then((n) => ({ ok: true as const, n })).catch((e: unknown) => ({ ok: false as const, error: e instanceof Error ? e.message.slice(0, 120) : String(e) })),
+    // The canary: the newest resolved canonical company with a domain and an account name; else the newest account by name alone.
+    typeof prisma?.canonicalCompany?.findFirst === 'function' ? prisma.canonicalCompany.findFirst({ where: { domain: { not: null }, primary_account_name: { not: null } }, orderBy: { updated_at: 'desc' }, select: { primary_account_name: true, domain: true } }).catch(() => null) : Promise.resolve(null),
+  ]);
+  const fallback = !canaryRow && typeof prisma?.account?.findFirst === 'function' ? await prisma.account.findFirst({ orderBy: { updated_at: 'desc' }, select: { name: true } }).catch(() => null) : null;
+  const canary = canaryRow && typeof canaryRow.primary_account_name === 'string' ? { account: canaryRow.primary_account_name, domain: typeof canaryRow.domain === 'string' && canaryRow.domain ? canaryRow.domain : null } : fallback && typeof fallback.name === 'string' ? { account: fallback.name, domain: null } : null;
+  const gapSender = gapGmailSender(env);
+  const [assoc, sent, knowledge] = await Promise.all([
+    hubspotConfigured ? timed(deps.associationsProbe ?? defaultAssociationsProbe, clock, HEALTH_PROBE_TIMEOUT_MS) : Promise.resolve(null),
+    gapSender ? timed(deps.sentProbe ?? (() => defaultSentProbe(env, now)), clock, HEALTH_PROBE_TIMEOUT_MS) : Promise.resolve(null),
+    canary ? timed(() => (deps.knowledge ?? ((i) => defaultKnowledge(env, i)))({ accountName: canary.account, domain: canary.domain, now }), clock, HEALTH_PROBE_TIMEOUT_MS) : Promise.resolve(null),
+  ]);
+  const cov = (source: 'vault' | 'clawd'): ContextSourceCoverage => {
+    if (!knowledge) return { configured: false, reachable: false, completeness: 'unknown', watermark: null, indexedAt: null, omittedReason: canary ? 'not probed' : 'no account on record to probe with' };
+    if (!knowledge.ok) return { configured: true, reachable: false, completeness: 'unknown', watermark: null, indexedAt: null, omittedReason: knowledge.error };
+    const c = knowledge.value.coverage.find((x) => x.source === source);
+    if (!c) return { configured: false, reachable: false, completeness: 'unknown', watermark: null, indexedAt: null, omittedReason: 'no coverage row' };
+    return { configured: c.configured, reachable: c.reachable, completeness: c.completeness, watermark: c.watermark, indexedAt: c.indexedAt, omittedReason: c.omittedReason };
+  };
+  return {
+    identity: companies.ok && aliases.ok ? { readable: true, companies: companies.n, aliases: aliases.n, error: null } : { readable: false, companies: companies.ok ? companies.n : null, aliases: aliases.ok ? aliases.n : null, error: [companies, aliases].map((x) => (x.ok ? null : x.error)).filter(Boolean).join('; ') },
+    associations: assoc === null ? null : { readable: assoc.ok, ms: assoc.ms, error: assoc.ok ? null : assoc.error },
+    sent: !gapSender ? { configured: false, readable: null, ms: null, error: null } : { configured: true, readable: sent ? sent.ok : null, ms: sent?.ms ?? null, error: sent && !sent.ok ? sent.error : null },
+    vault: cov('vault'),
+    clawd: cov('clawd'),
+    canary,
+  };
+}
+
 async function defaultHubspotPing(): Promise<void> {
   const { getHubSpotClient } = await import('@/lib/hubspot/client');
   await getHubSpotClient().crm.companies.basicApi.getPage(1);
@@ -85,7 +149,7 @@ export async function loadHealthInputs(prisma: PrismaLike, deps: HealthDeps = {}
 
   const config = (key: string) => (typeof prisma?.systemConfig?.findUnique === 'function' ? prisma.systemConfig.findUnique({ where: { key } }).catch(() => null) : Promise.resolve(null));
   const day = nyDay(new Date(clock()));
-  const [cron, lastRun, hs, sup, briefingCron, agentsCron, settingsRow, sentToday, failedToday, tasks, spend, credits] = await Promise.all([
+  const [cron, lastRun, hs, sup, briefingCron, agentsCron, settingsRow, sentToday, failedToday, tasks, spend, credits, context] = await Promise.all([
     config('cron:gap-mailbox'),
     prisma.gapAuditEvent.findMany({ where: { kind: ROUTING_RUN_DONE }, orderBy: { created_at: 'desc' }, take: 25, select: { created_at: true, payload: true } }).catch(() => []),
     hubspotConfigured ? timed(deps.hubspotPing ?? defaultHubspotPing, clock, HEALTH_PROBE_TIMEOUT_MS) : Promise.resolve(null),
@@ -109,6 +173,8 @@ export async function loadHealthInputs(prisma: PrismaLike, deps: HealthDeps = {}
     loadSpend(prisma, { now: new Date(clock()), env }).catch(() => null),
     // A04: the gateway's credit balance. Soft, bounded.
     env.AI_GATEWAY_API_KEY?.trim() ? timed(() => (deps.gatewayCredits ?? (() => defaultGatewayCredits(env)))(), clock, 5_000) : Promise.resolve(null),
+    // C46: the context sources, soft and bounded.
+    loadContextInputs(prisma, deps, env, clock, hubspotConfigured).catch((e: unknown) => ({ failed: (e instanceof Error ? e.message : String(e)).slice(0, 160) })),
   ]);
 
   let state: Record<string, unknown> = {};
@@ -167,6 +233,7 @@ export async function loadHealthInputs(prisma: PrismaLike, deps: HealthDeps = {}
       oldestQueuedAt: queued.length ? new Date(Math.min(...queued.map((t) => new Date(t.queuedAt).getTime()))) : null,
       failedFinalToday: (Array.isArray(tasks) ? tasks : []).filter((t) => t.status === 'failed' && t.final && nyDay(new Date(t.queuedAt)) === day).length,
     },
+    context,
     model: spend ? { month: spend.month, label: spend.label, monthUsd: spend.monthUsd, ceilingUsd: spend.ceilingUsd, warnFraction: spendLimits(env).warnFraction, calls: spend.calls, failed: spend.failed, refused: spend.refused, inFlight: spend.inFlight, lastCall: spend.lastCall ? { at: spend.lastCall.at, outcome: spend.lastCall.outcome, model: spend.lastCall.model, errorCategory: spend.lastCall.errorCategory } : null, credits: credits && credits.ok && Number.isFinite(credits.value.balance) ? credits.value : null } : undefined,
   };
 }

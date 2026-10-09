@@ -188,6 +188,8 @@ export const baseDeps = (d: Db, verdict: 'pass' | 'review_required' | 'reject' =
   activeOpportunity: async () => ({ status: 'CLEAR' as const }),
   // Ops closeout 19: the GAP mailbox Sent folder holds nothing unrecorded for this person.
   mailboxSentTo: async () => [],
+  // C57 pass 2 (P2-1): the GAP mailbox's Drafts to the person; empty unless a test plants one of Casey's own.
+  mailboxDraftsTo: async () => [] as Array<{ id: string; draftId: string; threadId: string | null; internalDate: Date; to: string; subject: string }>,
   unsubscribeUrl: (e: string) => `https://modex-gtm.vercel.app/unsubscribe?email=${encodeURIComponent(e)}&token=t`,
   // Execution acceptance: the thesis is current unless a test says otherwise.
   thesisCurrent: async () => ({ current: true as const }),

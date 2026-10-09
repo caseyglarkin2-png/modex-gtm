@@ -116,7 +116,41 @@ export type SellerDraftRefusal =
   | 'thesis_needs_review'
   | 'thesis_currentness_unknown'
   | 'active_opportunity'
-  | 'opportunity_unknown';
+  | 'opportunity_unknown'
+  /** C39: the pinned approved snapshot (hash, recipient, sender) no longer matches what would be drafted; nothing was created. */
+  | 'copy_changed_since_review'
+  | 'recipient_changed_since_review'
+  | 'sender_changed_since_review';
+
+/**
+ * C39: the immutable snapshot an approval was given on (the assignment email's copy hash, its recipient and the
+ * mailbox it would go from). A draft created under it is rechecked against the freshly prepared email immediately
+ * before the provider adapter; a mismatch refuses with no side effect. A post-creation comparison alone is not enough.
+ */
+export interface ApprovedSnapshot {
+  revision: number;
+  contentHash: string;
+  recipient: string | null;
+  senderIdentity: string | null;
+}
+
+/** The C39 recheck: what moved between the approved snapshot and the email about to be drafted, or null when nothing did. */
+export function snapshotDrift(expected: ApprovedSnapshot, actual: { contentHash: string; recipient: string; senderIdentity: string }): Refusal | null {
+  if (actual.contentHash !== expected.contentHash) {
+    return { ok: false, reason: 'copy_changed_since_review', detail: `The copy changed after revision ${expected.revision} was approved; nothing was drafted. Open the item in GAP and approve the current copy.` };
+  }
+  // F15: a snapshot that names no recipient binds nothing: it is refused, never skipped.
+  if (!expected.recipient || !expected.recipient.trim()) {
+    return { ok: false, reason: 'recipient_changed_since_review', detail: 'The approved snapshot named no recipient, so no draft can be bound to it; nothing was drafted. Open the item in GAP.' };
+  }
+  if (actual.recipient.trim().toLowerCase() !== expected.recipient.trim().toLowerCase()) {
+    return { ok: false, reason: 'recipient_changed_since_review', detail: `The recipient is now ${actual.recipient}, not ${expected.recipient} as approved; nothing was drafted.` };
+  }
+  if (expected.senderIdentity && actual.senderIdentity.trim().toLowerCase() !== expected.senderIdentity.trim().toLowerCase()) {
+    return { ok: false, reason: 'sender_changed_since_review', detail: `The email would now go from ${actual.senderIdentity}, not ${expected.senderIdentity} as approved; nothing was drafted.` };
+  }
+  return null;
+}
 
 export type SellerDraftResult =
   | {
@@ -169,10 +203,21 @@ export interface SellerDraftDeps {
   suppression?: (recipient: string) => Promise<void>;
   /** Ops closeout 19: messages in the GAP mailbox's Sent to this recipient in a window (listSentTo). */
   mailboxSentTo?: (recipient: string, afterEpoch: number, beforeEpoch: number) => Promise<Array<{ id: string; internalDate: Date; subject: string }>>;
+  /**
+   * C57 pass 2 (P2-1, the sender side): the GAP mailbox's Drafts to this recipient (default: listDraftsTo, sink-aware).
+   * A draft of Casey's own hand to the person, in any thread (a first touch has none of its own), refuses a GAP draft
+   * beside it; a read that throws refuses as unknown.
+   */
+  mailboxDraftsTo?: (recipient: string) => Promise<Array<{ id: string; draftId: string; threadId: string | null; internalDate: Date; to: string; subject: string }>>;
 }
 
 /** How far back a first touch reads the GAP mailbox's Sent folder for an unrecorded send. */
 export const FIRST_TOUCH_SENT_LOOKBACK_DAYS = 180;
+
+function defaultMailboxDraftsTo(sender: GmailSender | null): SellerDraftDeps['mailboxDraftsTo'] | null {
+  if (!sender) return null;
+  return async (recipient) => (await import('@/lib/email/gmail-inbox')).listDraftsTo(sender, recipient);
+}
 
 function defaultMailboxSentTo(sender: GmailSender | null): SellerDraftDeps['mailboxSentTo'] | null {
   if (!sender) return null;
@@ -646,15 +691,28 @@ export async function prepareSellerEmail(
 
 export async function createSellerGmailDraft(
   prisma: PrismaLike,
-  input: { decisionId: string; actor: string; now: Date; stepIndex?: number },
+  input: { decisionId: string; actor: string; now: Date; stepIndex?: number; expected?: ApprovedSnapshot },
   deps: SellerDraftDeps = {},
 ): Promise<SellerDraftResult> {
-  const { decisionId, actor, now } = input;
-  const prep = await prepareSellerEmail(prisma, { ...input, mode: 'draft' }, deps);
+  const { decisionId, actor, now, expected } = input;
+  const prep = await prepareSellerEmail(prisma, { decisionId, actor, now, stepIndex: input.stepIndex, mode: 'draft' }, deps);
   if (!prep.ok) return prep;
-  if ('existingDraft' in prep) return { ok: true, alreadyDrafted: true, receipt: prep.existingDraft };
-  const p = prep.prepared;
   const refuse = (pr: PrismaLike, a: string, d: string, r: Refusal) => refuseAs(DRAFT_REFUSED, pr, a, d, r);
+  if ('existingDraft' in prep) {
+    // C39: a draft already there is only this approval's draft when it is of the approved snapshot.
+    const e = prep.existingDraft;
+    const drift = expected ? snapshotDrift(expected, { contentHash: e.contentHash, recipient: e.recipient, senderIdentity: e.senderIdentity }) : null;
+    if (drift) return refuse(prisma, actor, decisionId, drift);
+    return { ok: true, alreadyDrafted: true, receipt: e };
+  }
+  const p = prep.prepared;
+  // C39: the pinned snapshot is rechecked against the freshly prepared email HERE, after every gate and before the
+  // person-step claim and the provider adapter, so a source change between preflight and creation refuses with no
+  // side effect.
+  if (expected) {
+    const drift = snapshotDrift(expected, { contentHash: p.contentHash, recipient: p.recipient, senderIdentity: p.senderIdentity });
+    if (drift) return refuse(prisma, actor, decisionId, drift);
+  }
   const { stepIndex, contentHash, senderIdentity, threadContext, subject, inReplyToGmailMessageId } = p;
   const email = p.recipient;
   const gapSender = p.gapSender;
@@ -677,6 +735,22 @@ export async function createSellerGmailDraft(
   // Claim this person + step under the person lock BEFORE Gmail (red team
   // Release B review): a double click, a draft on another card or a racing
   // direct send meets it inside the lock; a lost answer leaves the claim open.
+  // C57 pass 2 (P2-1): after the snapshot recheck and before the claim and Gmail, a draft of Casey's own hand to the
+  // person (any thread) is outstanding too: GAP never writes a second draft beside it. A read that throws refuses as
+  // unknown rather than proceeding.
+  const draftsTo = deps.mailboxDraftsTo ?? defaultMailboxDraftsTo(gapSender);
+  if (draftsTo) {
+    let hand: Awaited<ReturnType<NonNullable<SellerDraftDeps['mailboxDraftsTo']>>>;
+    try {
+      hand = await draftsTo(email);
+    } catch (err) {
+      return refuse(prisma, actor, decisionId, { ok: false, reason: 'send_in_progress_or_unknown', detail: `Gmail drafts could not be read (${err instanceof Error ? err.message : String(err)}); try again.` });
+    }
+    const own = hand.find((d) => (d.to.match(/[^\s<>,;"']+@[^\s<>,;"']+/)?.[0] ?? d.to).trim().toLowerCase() === email.toLowerCase());
+    if (own) {
+      return refuse(prisma, actor, decisionId, { ok: false, reason: 'draft_outstanding', detail: `A draft of yours to ${email} already sits in Gmail (${own.subject || 'no subject'}, ${own.internalDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' })}); edit or send it in Gmail, or delete it there first.` });
+    }
+  }
   const claimKey = `${personStepKey(p.personaId, email, stepIndex)}:draft:${now.toISOString()}`;
   const claim = await claimSendKey(prisma, { key: claimKey, decisionId, personaId: p.personaId, recipient: email, stepIndex, actor, now, kind: 'draft', accountName: p.accountName });
   if (!claim.claimed) {

@@ -175,7 +175,8 @@ afterEach(() => {
 
 describe('ops closeout 14: one RFC message under a second Gmail id', () => {
   it('is skipped before any side effect (no bell, no thread, no CRM write) and labelled processed', async () => {
-    answers['inboundMessage.findFirst'] = ({ where }: any) => (where.rfc_message_id === '<abc@acme.example>' ? { id: 'gm-msg-0' } : null);
+    // C57 F16: the lookup asks for every spelling of the id (brackets or not), case-insensitively.
+    answers['inboundMessage.findFirst'] = ({ where }: any) => (where.rfc_message_id?.in?.includes('<abc@acme.example>') && where.rfc_message_id?.in?.includes('abc@acme.example') && where.rfc_message_id.mode === 'insensitive' ? { id: 'gm-msg-0' } : null);
     const body = await (await GET(req())).json();
     expect(body).toMatchObject({ skipped: 1, notifications_created: 0 });
     expect(calls).not.toContain('notification.create');

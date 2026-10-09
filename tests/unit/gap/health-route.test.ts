@@ -37,6 +37,6 @@ describe('GET /api/gap/health', () => {
     expect(res.headers.get('cache-control')).toBe('no-store');
     const body = await res.json();
     expect(body).toMatchObject({ overall: 'BLOCKED', headline: 'HubSpot opportunity truth unavailable · cold actions fail closed' });
-    expect(body.components).toHaveLength(8);
+    expect(body.components).toHaveLength(9);
   });
 });

@@ -19,6 +19,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { refusalSentence } from '@/lib/gap/ui/refusal-copy';
+import { failedAction, readAction } from '@/lib/gap/ui/action-result';
 import { ReportThis } from './feedback-button';
 import { refreshNow } from '@/components/gap/refresh-now';
 
@@ -121,11 +122,14 @@ export function SellerDraftPanel({ decisionId, emailReady, senderIdentity, draft
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ id: approvalId, action: 'approve' }),
       });
-      if (!res.ok) setApproveError(`Approval failed (HTTP ${res.status}).`);
+      if (!res.ok) setApproveError(readAction(res, await res.json().catch(() => ({})), { verb: 'Approved', source: approvalId }).line);
       else {
         setOutcome(null);
         refreshNow(router);
       }
+    } catch (err) {
+      // C44: an approval whose request did not complete may have applied; say so with the reload path, never nothing.
+      setApproveError(failedAction(err, { verb: 'Approved', source: approvalId }).line);
     } finally {
       setBusy(null);
     }

@@ -12,6 +12,14 @@
  * fetch only, ships behind `GAP_HUBSPOT_SEQUENCE_PUBLISH_ENABLED` (stays
  * OFF), and a live 403 from HubSpot is handled as exactly the documented
  * boundary (`hubspot_write_scope_unavailable`), not a bug.
+ *
+ * C41 (the commercial context and execution audit, 2026-10-08): a lost answer is not a refusal. A network throw or a
+ * 5xx AFTER the request went out may have enrolled the contact; the adapter then READS BACK (`deps.readback`: the
+ * contact's enrollment in that sequence) and answers `queued` with the real id when one exists, a definite refusal
+ * (`hubspot_enroll_network_error`, `hubspot_enroll_failed:<status>`) when the readback proves none, and
+ * `hubspot_enroll_outcome_unknown` when it cannot tell (no readback given, or the readback failed too). A caller must
+ * never retry an unknown outcome blind: `isUncertainEnrollment(receipt)` says which it is. `queued` is HubSpot's
+ * acceptance of the enrollment, never a send and never a delivery.
  */
 import { gapFlag } from '../flags';
 import type { ExecutionIntent, ExecutionReceipt } from './contract';
@@ -28,6 +36,19 @@ export interface HubspotSequenceAdapterDeps {
   fetchImpl?: typeof fetch;
   /** Defaults to process.env.HUBSPOT_ACCESS_TOKEN. */
   accessToken?: string;
+  /**
+   * C41: the provider readback after a lost answer: the contact's enrollment in the sequence, or null when HubSpot
+   * holds none. Absent, a lost answer is `hubspot_enroll_outcome_unknown` (never a refusal a caller may retry).
+   */
+  readback?: (input: HubspotEnrollmentInput) => Promise<{ enrollmentId: string } | null>;
+}
+
+/** The refusal reasons that mean "HubSpot may have acted; do not retry blind". */
+export const UNCERTAIN_ENROLLMENT = /^hubspot_enroll_outcome_unknown/;
+
+/** C41: true when the receipt is a lost answer, not a refusal: a retry would risk a second enrollment. */
+export function isUncertainEnrollment(receipt: Pick<ExecutionReceipt, 'status' | 'refusalReason'>): boolean {
+  return receipt.status === 'refused' && UNCERTAIN_ENROLLMENT.test(receipt.refusalReason ?? '');
 }
 
 /**
@@ -57,6 +78,18 @@ export async function hubspotSequenceAdapter(
   }
 
   const fetchFn = deps.fetchImpl ?? fetch;
+  // C41: a lost answer (a throw after the request went out, a 5xx) may have enrolled the contact. Read back before
+  // answering: the real enrollment when it exists, a definite refusal when the readback proves none, else unknown.
+  const afterLostAnswer = async (what: string): Promise<ExecutionReceipt> => {
+    if (!deps.readback) return { engine: 'hubspot_sequence', status: 'refused', engineId: null, createdAt: intent.now, refusalReason: `hubspot_enroll_outcome_unknown: ${what} (no readback available)` };
+    try {
+      const found = await deps.readback(input);
+      if (found?.enrollmentId) return { engine: 'hubspot_sequence', status: 'queued', engineId: found.enrollmentId, createdAt: intent.now };
+      return { engine: 'hubspot_sequence', status: 'refused', engineId: null, createdAt: intent.now, refusalReason: `hubspot_enroll_network_error: ${what} (readback: not enrolled)` };
+    } catch (err) {
+      return { engine: 'hubspot_sequence', status: 'refused', engineId: null, createdAt: intent.now, refusalReason: `hubspot_enroll_outcome_unknown: ${what}; readback failed: ${err instanceof Error ? err.message : String(err)}` };
+    }
+  };
   let res: Response;
   try {
     res = await fetchFn('https://api.hubapi.com/automation/v4/sequences/enrollments', {
@@ -65,16 +98,11 @@ export async function hubspotSequenceAdapter(
       body: JSON.stringify(input),
     });
   } catch (err) {
-    return {
-      engine: 'hubspot_sequence',
-      status: 'refused',
-      engineId: null,
-      createdAt: intent.now,
-      refusalReason: `hubspot_enroll_network_error: ${err instanceof Error ? err.message : String(err)}`,
-    };
+    return afterLostAnswer(err instanceof Error ? err.message : String(err));
   }
 
   if (!res.ok) {
+    if (res.status >= 500) return afterLostAnswer(`http ${res.status}`);
     return {
       engine: 'hubspot_sequence',
       status: 'refused',

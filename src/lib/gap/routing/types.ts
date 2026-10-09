@@ -120,6 +120,8 @@ export interface RoutingHypothesisInput {
 }
 
 export interface RoutingLastDisposition {
+  /** C55: the disposition row, so the explain can cite it. */
+  id?: string | null;
   responseClass: ResponseClass;
   at: Date;
   resumeAt?: Date | null;

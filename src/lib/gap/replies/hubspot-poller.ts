@@ -60,6 +60,7 @@
 import { classifyInboundReply } from '@/lib/email/reply-precision';
 import { isGapOsEnabled } from '@/lib/gap/flags';
 import { ingestReply } from '@/lib/gap/replies/ingest';
+import { linkProvenance, rfcWhere } from '@/lib/gap/context/thread-context';
 import { getHubSpotClient, withHubSpotRetry } from '@/lib/hubspot/client';
 
 export const WATERMARK_KEY = 'gap_hubspot_replies_watermark';
@@ -68,6 +69,8 @@ export const DEFAULT_LIMIT = 200;
 
 /** Mirrors check-inbox: the type must NOT contain the substring "reply". */
 const FILTERED_TYPE = 'filtered_inbound';
+/** C47: an engagement that was the same email as a Gmail-stored row; read=true, never in the bell, never a reply count. */
+export const LINKED_TYPE = 'linked_inbound';
 const SNIPPET_LENGTH = 200;
 const SUBJECT_LENGTH = 500;
 const HUBSPOT_PAGE_SIZE = 100;
@@ -90,6 +93,12 @@ export interface HubSpotEmailEngagement {
    * HubSpot returned without it: the event time stands in.
    */
   createdAt?: Date;
+  /**
+   * C47: hs_email_message_id, the RFC 2822 Message-ID of the email. The same email a connected inbox logged in
+   * HubSpot and the Gmail path stored already is ONE InboundMessage: the Gmail row gains this engagement id as a
+   * second provenance link instead of a second row. Absent when HubSpot did not return it.
+   */
+  rfcMessageId?: string | null;
 }
 
 export interface PollOptions {
@@ -120,6 +129,8 @@ export interface PollReport {
   seen: number;
   created: number;
   existing: number;
+  /** C47: engagements that were the same email as a row already stored through Gmail (linked, never a second row). */
+  merged?: number;
   unknownSender: number;
   /** X15b: engagements addressed to someone other than a GAP identity (present only when the identities were given). */
   notToGap?: number;
@@ -276,7 +287,7 @@ export async function pollHubSpotReplies(prisma: any, opts: PollOptions, deps: P
     // Idempotency covers BOTH notification types, mirroring check-inbox, so a
     // filtered engagement is not re-recorded on every run.
     const already = await prisma.notification.findFirst({
-      where: { source_id: messageId, type: { in: ['reply', FILTERED_TYPE] } },
+      where: { source_id: messageId, type: { in: ['reply', FILTERED_TYPE, LINKED_TYPE] } },
       select: { type: true },
     });
     if (already) {
@@ -312,6 +323,34 @@ export async function pollHubSpotReplies(prisma: any, opts: PollOptions, deps: P
         }
       }
       continue;
+    }
+
+    // C47: the same email, already stored through Gmail (check-inbox or the GAP mailbox) under its RFC Message-ID,
+    // is ONE message. The stored row gains this engagement id as its second provenance link; no second row, no
+    // second bell, no second ingest (the Gmail path ran it on the same message). A `linked_inbound` marker makes the
+    // next run read it as existing. Never by subject.
+    // C57 F16: the id is matched in every spelling (with or without angle brackets, any case): HubSpot may answer
+    // `abc@host` for a message Gmail stored as `<abc@host>`.
+    const rfc = (engagement.rfcMessageId ?? '').trim();
+    const rfcMatch = rfcWhere(rfc);
+    if (rfcMatch) {
+      const stored: { id: string; hubspot_engagement_id: string | null } | null = await prisma.inboundMessage.findFirst({
+        where: { rfc_message_id: rfcMatch, id: { not: messageId } },
+        select: { id: true, hubspot_engagement_id: true },
+      });
+      if (stored) {
+        report.merged = (report.merged ?? 0) + 1;
+        if (opts.dryRun) continue;
+        if (!stored.hubspot_engagement_id) {
+          await prisma.inboundMessage.update({ where: { id: stored.id }, data: { hubspot_engagement_id: engagement.id } });
+        } else if (stored.hubspot_engagement_id !== engagement.id) {
+          await linkProvenance(prisma, { storedId: stored.id, providerId: `hubspot:${engagement.id}`, actor: 'cron:gap-hubspot-replies', rfcMessageId: rfc });
+        }
+        await prisma.notification.create({
+          data: { type: LINKED_TYPE, account_name: null, persona_email: (engagement.fromEmail ?? '').trim().toLowerCase() || null, subject: `[linked: ${stored.id}] ${(engagement.subject ?? '').trim()}`.slice(0, SUBJECT_LENGTH), preview: null, source_id: messageId, read: true },
+        });
+        continue;
+      }
     }
 
     const fromEmail = (engagement.fromEmail ?? '').trim().toLowerCase();
@@ -516,6 +555,8 @@ const SEARCH_PROPERTIES = [
   'hs_email_text',
   'hs_email_html',
   'hs_email_headers',
+  // C47: the RFC Message-ID, the cross-provider idempotency key.
+  'hs_email_message_id',
 ];
 
 function parseTimestamp(raw: string | null | undefined): Date | null {
@@ -587,6 +628,7 @@ export async function searchIncomingEmailsFromHubSpot(
         html: props.hs_email_html ?? null,
         timestamp,
         createdAt: parseTimestamp(props.hs_createdate) ?? timestamp,
+        rfcMessageId: (props.hs_email_message_id ?? '').trim() || null,
       });
       if (out.length >= args.limit) break;
     }
