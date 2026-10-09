@@ -19,7 +19,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { isAuthorizedQueueAgent } from '@/lib/queue/agent-auth';
-import { generateText } from '@/lib/ai/client';
+import { gapGenerate } from '@/lib/gap/ai/spend';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { suggestReply } from '@/lib/gap/replies/suggest';
 
@@ -53,7 +53,10 @@ export async function POST(request: NextRequest, context: { params: Promise<{ id
   const inboundId = decodeURIComponent(id ?? '').trim();
   if (inboundId.length === 0) return NextResponse.json({ error: 'not_found' }, { status: 404 });
 
-  const result = await suggestReply(prisma, generateText, inboundId);
+  // A04: metered and budgeted like every GAP call.
+  const now = new Date();
+  const metered = (prompt: string, maxTokens?: number) => gapGenerate(prisma, { prompt, maxTokens: maxTokens ?? 600, tier: 'routine', task: { id: `suggest_${inboundId}_${now.getTime().toString(36)}`, kind: 'suggest_reply', itemKey: `inbound:${inboundId}` }, now }).then((r) => r.text);
+  const result = await suggestReply(prisma, metered, inboundId);
   if (!result.ok) {
     if (result.reason === 'not_found') return NextResponse.json({ error: 'not_found' }, { status: 404 });
     if (result.reason === 'classification_disabled') {

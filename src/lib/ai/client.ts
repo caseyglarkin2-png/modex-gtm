@@ -38,6 +38,8 @@ export interface GenerateTextResult {
 export interface GenerateOptions {
   /** The AI Gateway model for this call (`provider/model`); the configured default otherwise. */
   model?: string;
+  /** Never fall through to the clawd control plane (GAP: a prompt with prospect data stays with the metered providers). */
+  skipControlPlane?: boolean;
 }
 
 /** Every provider failed: the per-provider reasons ride along so a caller can tell permanent from transient. */
@@ -320,7 +322,7 @@ export async function generateTextWithMetadata(prompt: string, maxTokens = 1024,
     }
   }
 
-  if (CONTROL_PLANE_URL) {
+  if (CONTROL_PLANE_URL && !opts.skipControlPlane) {
     try {
       return answer('control_plane', await tryControlPlane(prompt, maxTokens));
     } catch (err) {

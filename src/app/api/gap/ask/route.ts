@@ -14,7 +14,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
-import { generateTextWithMetadata } from '@/lib/ai/client';
+import { gapGenerate } from '@/lib/gap/ai/spend';
 import { badBody, intakeGuard } from '@/lib/gap/intake/route-helpers';
 import { buildAskContext } from '@/lib/gap/ask/context';
 import { actionRequest, ASK_QUESTION_MAX, askPrompt, guardBuyerSaid, recallAskContext, rememberAskContext, tidyAnswer } from '@/lib/gap/ask/grounding';
@@ -48,7 +48,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ answer: r.answer, grounded: false, provider: null, acted: false, proposal: r.proposal });
   }
   try {
-    const r = await generateTextWithMetadata(askPrompt(ctx, question), 600);
+    // A04: metered and budgeted like every GAP call (the ledger, the ceiling, no control-plane fallback).
+    const r = await gapGenerate(prisma, { prompt: askPrompt(ctx, question), maxTokens: 600, tier: 'routine', task: { id: `ask_${now.getTime().toString(36)}`, kind: 'ask', itemKey: `account:${ctx.accountName}` }, now });
     return NextResponse.json({ answer: guardBuyerSaid(tidyAnswer(r.text), ctx), grounded: true, provider: r.provider, acted: false });
   } catch (e) {
     return NextResponse.json({ error: 'no_provider', detail: e instanceof Error ? e.message.slice(0, 200) : 'no provider answered' }, { status: 503 });

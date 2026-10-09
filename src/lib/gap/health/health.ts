@@ -70,7 +70,7 @@ export interface HealthInputs {
   /** X20a: the agent tasks drain (cron gap-agent-tasks, every 5 minutes): REVISE, objections. */
   agents?: { enabled: boolean; lastSuccessAt: Date | null; consecutiveFailures: number; lastMessage: string | null; queued: number; oldestQueuedAt: Date | null; failedFinalToday: number };
   /** A02: the GAP model route and its spend this month (src/lib/gap/ai/spend.ts). */
-  model?: { month: string; label: string; monthUsd: number; ceilingUsd: number; warnFraction: number; calls: number; failed: number; refused: number; inFlight: number; lastCall: { at: string; outcome: string; model: string | null; errorCategory: string | null } | null };
+  model?: { month: string; label: string; monthUsd: number; ceilingUsd: number; warnFraction: number; calls: number; failed: number; refused: number; inFlight: number; lastCall: { at: string; outcome: string; model: string | null; errorCategory: string | null } | null; /** A04: the AI Gateway credit balance (every call on the route draws on it, metered or not); null when unread. */ credits?: { balance: number; totalUsed: number } | null };
 }
 
 /** Mailbox intake runs every 10 minutes: one missed run is fine, three are degraded, three hours is blocked. */
@@ -179,12 +179,14 @@ function model(i: HealthInputs['model']): HealthComponent {
   // A real but tiny spend is shown as such, never rounded to nothing (three calls at $0.0002 each are not $0.00).
   const usd = (n: number) => (n > 0 && n < 0.01 ? `$${n.toFixed(4)}` : `$${n.toFixed(2)}`);
   const pct = i.ceilingUsd > 0 ? Math.round((i.monthUsd / i.ceilingUsd) * 100) : 0;
-  const detail = `${usd(i.monthUsd)} of ${usd(i.ceilingUsd)} for ${i.label} (${pct}%): ${i.calls} call${i.calls === 1 ? '' : 's'}, ${i.failed} failed, ${i.refused} refused, ${i.inFlight} in flight${i.lastCall ? `; last call ${i.lastCall.outcome}${i.lastCall.model ? ` on ${i.lastCall.model}` : ''}${i.lastCall.errorCategory ? ` (${i.lastCall.errorCategory})` : ''} at ${i.lastCall.at}` : '; no call this month'}.`;
+  const credits = i.credits ? `; AI Gateway credits ${usd(i.credits.balance)} left (${usd(i.credits.totalUsed)} used, every path on the route)` : '';
+  const detail = `${usd(i.monthUsd)} of ${usd(i.ceilingUsd)} for ${i.label} (${pct}%): ${i.calls} call${i.calls === 1 ? '' : 's'}, ${i.failed} failed, ${i.refused} refused, ${i.inFlight} in flight${i.lastCall ? `; last call ${i.lastCall.outcome}${i.lastCall.model ? ` on ${i.lastCall.model}` : ''}${i.lastCall.errorCategory ? ` (${i.lastCall.errorCategory})` : ''} at ${i.lastCall.at}` : '; no call this month'}${credits}.`;
+  if (i.credits && i.credits.balance <= 0) return { ...base, state: 'BLOCKED', label: 'AI Gateway credits are spent', detail };
   if (i.lastCall && i.lastCall.outcome === 'failed' && i.lastCall.errorCategory && MODEL_PERMANENT.has(i.lastCall.errorCategory)) return { ...base, state: 'BLOCKED', label: `No funded model route · the last call failed (${i.lastCall.errorCategory})`, detail };
   if (i.monthUsd >= i.ceilingUsd) return { ...base, state: 'BLOCKED', label: `Model ceiling reached · ${usd(i.monthUsd)} of ${usd(i.ceilingUsd)} for ${i.label}`, detail };
   if (i.monthUsd >= i.ceilingUsd * i.warnFraction) return { ...base, state: 'DEGRADED', label: `Model spend ${usd(i.monthUsd)} of ${usd(i.ceilingUsd)} for ${i.label} (${pct}%)`, detail };
   if (i.lastCall && i.lastCall.outcome === 'refused') return { ...base, state: 'DEGRADED', label: `The last model call was refused (${i.lastCall.errorCategory ?? 'budget'})`, detail };
-  return { ...base, state: 'HEALTHY', label: `Model spend ${usd(i.monthUsd)} of ${usd(i.ceilingUsd)} for ${i.label}`, detail };
+  return { ...base, state: 'HEALTHY', label: `Model spend ${usd(i.monthUsd)} of ${usd(i.ceilingUsd)} for ${i.label}${i.credits ? ` · gateway credits ${usd(i.credits.balance)}` : ''}`, detail };
 }
 
 export function evaluateHealth(inputs: HealthInputs, now: Date): HealthReport {

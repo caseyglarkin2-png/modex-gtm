@@ -16,6 +16,7 @@
  * dashboard: AI Gateway, Budgets); this ledger is the in-app control and the observable record.
  */
 import { AIAllProvidersFailed, generateTextWithMetadata, type AIErrorInfo, type GenerateTextResult } from '@/lib/ai/client';
+import { randomBytes } from 'node:crypto';
 import { PermanentAgentError } from '../agents/errors';
 import { nyWallToInstant } from '../work/dates';
 
@@ -108,9 +109,25 @@ export function monthWindow(now: Date): { month: string; label: string; start: D
 
 type Row = { kind: string; subject_id: string; payload: unknown; created_at: Date | string };
 
-async function monthRows(prisma: PrismaLike, start: Date): Promise<Row[]> {
+/** The most rows one month's sum reads; at the cap the sum is unknowable and a call is refused (the review's finding 4). */
+export const LEDGER_READ_MAX = 5000;
+
+/**
+ * The month's ledger rows, newest first. `strict` (a call about to spend): a read that throws, or a month at the read
+ * cap, is a configuration failure that refuses the call; soft (health): an unreadable table reads as no rows. A client
+ * without the model (a harness stub) reads as no rows either way.
+ */
+async function monthRows(prisma: PrismaLike, start: Date, strict = false): Promise<Row[]> {
   if (typeof prisma?.gapAuditEvent?.findMany !== 'function') return [];
-  return prisma.gapAuditEvent.findMany({ where: { subject_type: MODEL_CALL_SUBJECT, created_at: { gte: start } }, orderBy: { created_at: 'asc' }, take: 5000 }).catch(() => []) as Promise<Row[]>;
+  let rows: Row[];
+  try {
+    rows = (await prisma.gapAuditEvent.findMany({ where: { subject_type: MODEL_CALL_SUBJECT, created_at: { gte: start } }, orderBy: { created_at: 'desc' }, take: LEDGER_READ_MAX })) as Row[];
+  } catch (e) {
+    if (strict) throw new PermanentAgentError('configuration', `the model spend ledger could not be read, so the month's spend is unknown and no call is made (${e instanceof Error ? e.message.slice(0, 160) : String(e)}); check the database, then decide the item again`);
+    return [];
+  }
+  if (strict && rows.length >= LEDGER_READ_MAX) throw new PermanentAgentError('configuration', `the model spend ledger holds ${LEDGER_READ_MAX} or more rows this month, more than one read sums; raise LEDGER_READ_MAX or wait for next month`);
+  return rows.reverse();
 }
 
 function fold(rows: readonly Row[]): Omit<SpendReport, 'month' | 'label' | 'ceilingUsd' | 'taskBudgetUsd'> {
@@ -142,14 +159,14 @@ function fold(rows: readonly Row[]): Omit<SpendReport, 'month' | 'label' | 'ceil
 }
 
 /** The month's spend as the ledger holds it (recorded cost plus in-flight reservations). Soft: an unreadable table reads as zero calls. */
-export async function loadSpend(prisma: PrismaLike, opts: { now: Date; env?: Record<string, string | undefined> }): Promise<SpendReport> {
+export async function loadSpend(prisma: PrismaLike, opts: { now: Date; env?: Record<string, string | undefined>; strict?: boolean }): Promise<SpendReport> {
   const limits = spendLimits(opts.env);
   const w = monthWindow(opts.now);
-  const folded = fold(await monthRows(prisma, w.start));
+  const folded = fold(await monthRows(prisma, w.start, opts.strict === true));
   return { month: w.month, label: w.label, ceilingUsd: limits.monthlyCeilingUsd, taskBudgetUsd: limits.taskBudgetUsd, ...folded };
 }
 
-export type GapGenerate = (prompt: string, maxTokens: number, opts: { model: string }) => Promise<GenerateTextResult>;
+export type GapGenerate = (prompt: string, maxTokens: number, opts: { model: string; skipControlPlane?: boolean }) => Promise<GenerateTextResult>;
 
 export interface GapGenerateInput {
   prompt: string;
@@ -189,11 +206,16 @@ export async function gapGenerate(prisma: PrismaLike, input: GapGenerateInput, d
   const maxTokens = Math.max(1, Math.min(input.maxTokens, limits.maxOutputTokens));
   const promptTokensEstimate = Math.ceil(prompt.length / CHARS_PER_TOKEN);
   const estimateUsd = estimateCostUsd(model, promptTokensEstimate, maxTokens);
-  const callId = `mc_${input.task.id}_${input.now.getTime().toString(36)}`;
+  const callId = `mc_${input.task.id}_${input.now.getTime().toString(36)}_${randomBytes(3).toString('hex')}`;
   const base = { callId, taskId: input.task.id, taskKind: input.task.kind, itemKey: input.task.itemKey, model, tier: input.tier };
-  const write = async (kind: string, payload: Record<string, unknown>) => {
+  const write = async (kind: string, payload: Record<string, unknown>, opts: { strict?: boolean } = {}) => {
     if (typeof prisma?.gapAuditEvent?.create !== 'function') return;
-    await prisma.gapAuditEvent.create({ data: { kind, actor, subject_type: MODEL_CALL_SUBJECT, subject_id: input.task.id, payload: { ...base, ...payload } } }).catch(() => undefined);
+    try {
+      await prisma.gapAuditEvent.create({ data: { kind, actor, subject_type: MODEL_CALL_SUBJECT, subject_id: input.task.id, payload: { ...base, ...payload } } });
+    } catch (e) {
+      // The reservation must land before a call (the review's finding 4): without it the month cannot count the call.
+      if (opts.strict) throw new PermanentAgentError('configuration', `the model spend ledger could not record the reservation, so no call is made (${e instanceof Error ? e.message.slice(0, 160) : String(e)}); check the database, then decide the item again`);
+    }
   };
   const refuse = async (code: 'monthly_ceiling' | 'task_budget', message: string) => {
     await write(MODEL_CALL, { outcome: 'refused', costUsd: 0, estimated: false, errorCategory: code, error: message, at: input.now.toISOString() });
@@ -203,15 +225,16 @@ export async function gapGenerate(prisma: PrismaLike, input: GapGenerateInput, d
   if (estimateUsd > limits.taskBudgetUsd) {
     await refuse('task_budget', `this call could cost $${estimateUsd.toFixed(4)} on ${model} (${promptTokensEstimate} prompt tokens, ${maxTokens} output), over the per-task budget of $${limits.taskBudgetUsd.toFixed(2)} (GAP_AI_TASK_BUDGET_USD); shorten the context or raise the budget`);
   }
-  const spend = await loadSpend(prisma, { now: input.now, env: deps.env });
+  const spend = await loadSpend(prisma, { now: input.now, env: deps.env, strict: true });
   if (spend.monthUsd + estimateUsd > limits.monthlyCeilingUsd) {
     await refuse('monthly_ceiling', `the GAP model ceiling of $${limits.monthlyCeilingUsd.toFixed(2)} for ${spend.label} is spent ($${spend.monthUsd.toFixed(2)} recorded, $${estimateUsd.toFixed(4)} more needed); raise GAP_AI_MONTHLY_CEILING_USD with Casey's approval or wait for next month, then decide the item again`);
   }
 
-  await write(MODEL_CALL_RESERVED, { estimateUsd, promptTokensEstimate, maxTokens, at: input.now.toISOString() });
+  await write(MODEL_CALL_RESERVED, { estimateUsd, promptTokensEstimate, maxTokens, at: input.now.toISOString() }, { strict: true });
   const generate: GapGenerate = deps.generate ?? ((p, m, o) => generateTextWithMetadata(p, m, o));
   try {
-    const out = await generate(prompt, maxTokens, { model });
+    // The clawd control plane is never a GAP fallback: a prompt with prospect data would leave for Railway unmetered.
+    const out = await generate(prompt, maxTokens, { model, skipControlPlane: true });
     const usedModel = out.model ?? model;
     const promptTokens = out.usage?.promptTokens ?? promptTokensEstimate;
     const completionTokens = out.usage?.completionTokens ?? maxTokens;

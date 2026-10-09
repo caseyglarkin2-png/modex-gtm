@@ -26,6 +26,8 @@ export interface HealthDeps {
   hubspotPing?: () => Promise<void>;
   suppressionRead?: (to: string) => Promise<{ verdict: 'clear' | 'suppressed' | 'unknown' }>;
   clock?: () => number;
+  /** A04: the AI Gateway credit balance read; the default calls the gateway's credits endpoint with the production key, never printing it. */
+  gatewayCredits?: () => Promise<{ balance: number; totalUsed: number }>;
 }
 
 async function timed<T>(fn: () => Promise<T>, clock: () => number, timeoutMs: number): Promise<{ ok: true; value: T; ms: number } | { ok: false; error: string; ms: number }> {
@@ -44,6 +46,16 @@ async function timed<T>(fn: () => Promise<T>, clock: () => number, timeoutMs: nu
   } finally {
     if (timer) clearTimeout(timer);
   }
+}
+
+async function defaultGatewayCredits(env: Record<string, string | undefined>): Promise<{ balance: number; totalUsed: number }> {
+  const key = env.AI_GATEWAY_API_KEY?.trim();
+  if (!key) throw new Error('AI_GATEWAY_API_KEY not set');
+  const base = env.AI_GATEWAY_BASE_URL?.trim() || 'https://ai-gateway.vercel.sh/v1';
+  const r = await fetch(`${base}/credits`, { headers: { authorization: `Bearer ${key}` }, cache: 'no-store' });
+  if (!r.ok) throw new Error(`credits HTTP ${r.status}`);
+  const j = (await r.json()) as { balance?: unknown; total_used?: unknown };
+  return { balance: Number(j.balance), totalUsed: Number(j.total_used) };
 }
 
 async function defaultHubspotPing(): Promise<void> {
@@ -73,7 +85,7 @@ export async function loadHealthInputs(prisma: PrismaLike, deps: HealthDeps = {}
 
   const config = (key: string) => (typeof prisma?.systemConfig?.findUnique === 'function' ? prisma.systemConfig.findUnique({ where: { key } }).catch(() => null) : Promise.resolve(null));
   const day = nyDay(new Date(clock()));
-  const [cron, lastRun, hs, sup, briefingCron, agentsCron, settingsRow, sentToday, failedToday, tasks, spend] = await Promise.all([
+  const [cron, lastRun, hs, sup, briefingCron, agentsCron, settingsRow, sentToday, failedToday, tasks, spend, credits] = await Promise.all([
     config('cron:gap-mailbox'),
     prisma.gapAuditEvent.findMany({ where: { kind: ROUTING_RUN_DONE }, orderBy: { created_at: 'desc' }, take: 25, select: { created_at: true, payload: true } }).catch(() => []),
     hubspotConfigured ? timed(deps.hubspotPing ?? defaultHubspotPing, clock, HEALTH_PROBE_TIMEOUT_MS) : Promise.resolve(null),
@@ -95,6 +107,8 @@ export async function loadHealthInputs(prisma: PrismaLike, deps: HealthDeps = {}
     listAgentTasks(prisma, { now: new Date(clock()) }).catch(() => []),
     // A02: the model spend ledger for the month. Soft.
     loadSpend(prisma, { now: new Date(clock()), env }).catch(() => null),
+    // A04: the gateway's credit balance. Soft, bounded.
+    env.AI_GATEWAY_API_KEY?.trim() ? timed(() => (deps.gatewayCredits ?? (() => defaultGatewayCredits(env)))(), clock, 5_000) : Promise.resolve(null),
   ]);
 
   let state: Record<string, unknown> = {};
@@ -153,6 +167,6 @@ export async function loadHealthInputs(prisma: PrismaLike, deps: HealthDeps = {}
       oldestQueuedAt: queued.length ? new Date(Math.min(...queued.map((t) => new Date(t.queuedAt).getTime()))) : null,
       failedFinalToday: (Array.isArray(tasks) ? tasks : []).filter((t) => t.status === 'failed' && t.final && nyDay(new Date(t.queuedAt)) === day).length,
     },
-    model: spend ? { month: spend.month, label: spend.label, monthUsd: spend.monthUsd, ceilingUsd: spend.ceilingUsd, warnFraction: spendLimits(env).warnFraction, calls: spend.calls, failed: spend.failed, refused: spend.refused, inFlight: spend.inFlight, lastCall: spend.lastCall ? { at: spend.lastCall.at, outcome: spend.lastCall.outcome, model: spend.lastCall.model, errorCategory: spend.lastCall.errorCategory } : null } : undefined,
+    model: spend ? { month: spend.month, label: spend.label, monthUsd: spend.monthUsd, ceilingUsd: spend.ceilingUsd, warnFraction: spendLimits(env).warnFraction, calls: spend.calls, failed: spend.failed, refused: spend.refused, inFlight: spend.inFlight, lastCall: spend.lastCall ? { at: spend.lastCall.at, outcome: spend.lastCall.outcome, model: spend.lastCall.model, errorCategory: spend.lastCall.errorCategory } : null, credits: credits && credits.ok && Number.isFinite(credits.value.balance) ? credits.value : null } : undefined,
   };
 }

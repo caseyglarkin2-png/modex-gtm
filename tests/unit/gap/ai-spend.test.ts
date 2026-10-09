@@ -10,7 +10,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { ledgerDb } from './fixtures/ledger-db';
 import { AIAllProvidersFailed, type AIErrorInfo } from '@/lib/ai/client';
-import { estimateCostUsd, gapGenerate, loadSpend, MODEL_CALL, MODEL_CALL_RESERVED, MODEL_CALL_SUBJECT, monthWindow, spendLimits, type GapGenerate, type GapModelCallContext } from '@/lib/gap/ai/spend';
+import { estimateCostUsd, gapGenerate, LEDGER_READ_MAX, loadSpend, MODEL_CALL, MODEL_CALL_RESERVED, MODEL_CALL_SUBJECT, monthWindow, spendLimits, type GapGenerate, type GapModelCallContext } from '@/lib/gap/ai/spend';
 import { PermanentAgentError } from '@/lib/gap/agents/errors';
 import { loadAgentTask, queueAgentTask, runAgentTasks } from '@/lib/gap/agents/tasks';
 
@@ -25,7 +25,7 @@ describe('A01: the spend ledger', () => {
     const generate = vi.fn<GapGenerate>(ok);
     const r = await gapGenerate(db.client(), { prompt: 'p'.repeat(4000), maxTokens: 700, tier: 'routine', task, now: NOW }, { generate, env });
     expect(r.text).toBe('OK');
-    expect(generate).toHaveBeenCalledWith(expect.any(String), 700, { model: 'google/gemini-2.5-flash-lite' });
+    expect(generate).toHaveBeenCalledWith(expect.any(String), 700, { model: 'google/gemini-2.5-flash-lite', skipControlPlane: true });
     const rows = db.store.gapAuditEvent.filter((e) => e.subject_type === MODEL_CALL_SUBJECT);
     expect(rows.map((e) => e.kind)).toEqual([MODEL_CALL_RESERVED, MODEL_CALL]);
     const done = rows[1].payload as Record<string, unknown>;
@@ -111,6 +111,25 @@ describe('A01: the spend ledger', () => {
     expect(report.results.map((r) => r.outcome)).toEqual(['failed', 'retry']);
     expect(await loadAgentTask(db.client(), perm.id)).toMatchObject({ status: 'failed', final: true, attempts: 1, lastError: 'billing: no funded model route: ai_gateway billing' });
     expect(await loadAgentTask(db.client(), temp.id)).toMatchObject({ status: 'queued', final: false, attempts: 1 });
+  });
+
+  it('A04: the ledger fails CLOSED for a call: an unreadable ledger or a reservation that cannot be written refuses before any call (permanent, configuration); health still reads soft', async () => {
+    const broken = { gapAuditEvent: { findMany: async () => { throw new Error('connection refused'); }, create: async () => undefined } };
+    const generate = vi.fn<GapGenerate>(ok);
+    const err = await gapGenerate(broken, { prompt: 'p', maxTokens: 100, tier: 'routine', task, now: NOW }, { generate, env }).catch((e: unknown) => e);
+    expect(err).toBeInstanceOf(PermanentAgentError);
+    expect((err as PermanentAgentError).code).toBe('configuration');
+    expect((err as PermanentAgentError).message).toMatch(/could not be read/);
+    expect(generate).not.toHaveBeenCalled();
+    expect((await loadSpend(broken, { now: NOW, env })).calls).toBe(0);
+    const noWrite = { gapAuditEvent: { findMany: async () => [], create: async () => { throw new Error('disk full'); } } };
+    const err2 = await gapGenerate(noWrite, { prompt: 'p', maxTokens: 100, tier: 'routine', task, now: NOW }, { generate, env }).catch((e: unknown) => e);
+    expect(err2).toBeInstanceOf(PermanentAgentError);
+    expect((err2 as PermanentAgentError).message).toMatch(/could not record the reservation/);
+    expect(generate).not.toHaveBeenCalled();
+    const huge = { gapAuditEvent: { findMany: async () => Array.from({ length: LEDGER_READ_MAX }, (_, n) => ({ kind: MODEL_CALL, subject_id: 'x', payload: { callId: `c${n}`, costUsd: 0.000001, outcome: 'ok' }, created_at: NOW })), create: async () => undefined } };
+    const err3 = await gapGenerate(huge, { prompt: 'p', maxTokens: 100, tier: 'routine', task, now: NOW }, { generate, env }).catch((e: unknown) => e);
+    expect((err3 as PermanentAgentError).message).toMatch(/or more rows this month/);
   });
 
   it('the month window is the calendar month in New York; the limits read the environment with safe defaults', () => {
