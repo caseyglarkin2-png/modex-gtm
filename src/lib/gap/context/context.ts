@@ -190,9 +190,12 @@ export function activityKind(a: { activity_type: string; outcome?: string | null
   return 'seller';
 }
 
-/** Activity text arrives HTML-escaped ("we&#39;re", "Casey &amp; Jake"). */
+/** Activity text and the synced inbox's snippets arrive HTML-escaped ("we&#39;re", "Casey &amp; Jake", "&#x2019;"); the named, decimal and hex entities are decoded (C7: the placed inbound excerpts too). */
 export const decodeEntities = (s: string) =>
-  s.replace(/&#(\d+);/g, (_m, n: string) => String.fromCharCode(Number(n))).replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&');
+  s
+    .replace(/&#x([0-9a-f]+);/gi, (_m, h: string) => { try { return String.fromCodePoint(parseInt(h, 16)); } catch { return _m; } })
+    .replace(/&#(\d+);/g, (_m, n: string) => { try { return String.fromCodePoint(Number(n)); } catch { return _m; } })
+    .replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&');
 
 /** A campaign-drip "send a touch" task: an instruction someone wrote, not something that happened. */
 export const isDripMarker = (a: { notes?: string | null; next_step?: string | null; outcome?: string | null }) =>
