@@ -102,7 +102,11 @@ export async function syncVaultNotes(prisma: PrismaLike, candidates: readonly Sy
       counts.remaining += 1;
       continue;
     }
-    reads += 1;
+    // The cap counts what costs something: a remote fetch (a candidate with a blob id) or a write. A local file whose
+    // text is unchanged is read for free and never consumes the cap (the local push used to re-read the same first
+    // 200 unchanged files every run and never reach the rest).
+    const remote = !!c.gitSha;
+    if (remote) reads += 1;
     let parsed: ParsedVaultNote;
     try {
       parsed = parseVaultNote(c.path, await c.read());
@@ -118,6 +122,7 @@ export async function syncVaultNotes(prisma: PrismaLike, candidates: readonly Sy
       if (opts.apply && c.gitSha && have.git_sha !== c.gitSha) await prisma.gapKnowledgeNote.update({ where: { path: c.path }, data: { git_sha: c.gitSha } });
       continue;
     }
+    if (!remote) reads += 1;
     if (!opts.apply) {
       counts.written += 1;
       continue;
