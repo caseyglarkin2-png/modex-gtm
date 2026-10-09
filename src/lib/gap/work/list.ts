@@ -42,7 +42,7 @@ import type { PursuitStateKind } from '../pursuit/state';
 import { outcomeLine, type WorkOutcome } from './outcome-model';
 import { MOTION_UNLOCK_BUSINESS_DAYS } from '../motion/account-motion';
 import { buyerMoves, commitmentPhase, commitmentTier, KIND_TEXT, skippedAtClosureOf, type Commitment, type CommitmentKind, type SkippedAtClosure, TERMINAL_STATUSES } from './commitment-model';
-import { dayLabel, isDay, nyDay, nyDayAt } from './dates';
+import { addDays, dayLabel, isDay, nyDay, nyDayAt } from './dates';
 import { clipAtSentence } from './briefing';
 import { stalledSignals } from '../deals/stalled';
 import { closedDealLabel, type ClosedDealRef } from '../deals/scope';
@@ -173,7 +173,28 @@ export interface WorkCard {
   evidence?: { rank: number; why: string };
   /** Seller acceptance A2 addendum: an angle GAP prepared for a person at this account (WorkInput.preparedAngles). */
   preparedAngle?: { who: string; line: string } | null;
+  /** Knowledge program C2 (2026-10-09): what the vault holds on the account (WorkInput.knowledge), so the assignment can print the next action. */
+  knowledge?: AccountKnowledge | null;
 }
+
+/**
+ * Knowledge program C2 (2026-10-09): the vault's account summary as ranking evidence, folded by the day loader from the
+ * account's knowledge notes (load-day.ts accountKnowledgeOf): the newest conversation held (a meeting note, a Fireflies
+ * capture), how many, and the account note's own next action, its due day and when the account was last touched.
+ */
+export interface AccountKnowledge {
+  lastConversationAt: string | null;
+  conversations: number;
+  nextAction: string | null;
+  /** A New York day ('2026-10-15'), or null when the note names none. */
+  nextActionDue: string | null;
+  lastTouched: string | null;
+}
+
+/** C2: a conversation this recent is relationship history (the same evidence level as a prior reply). */
+export const KNOWLEDGE_CONVERSATION_DAYS = 30;
+/** C2: a vault next action due within this many days (or past) is deal context. */
+export const KNOWLEDGE_NEXT_ACTION_DAYS = 7;
 
 export interface WorkInput {
   now: Date;
@@ -235,6 +256,13 @@ export interface WorkInput {
    * something is prepared: an open deal with a prepared angle ranks above a stalled deal with nothing prepared.
    */
   preparedAngles?: ReadonlyMap<string, { who: string; line: string }>;
+  /**
+   * Knowledge program C2 (2026-10-09): the vault's account summaries by account name (the day loader folds them from
+   * Builder A's knowledge reader; absent or unread is none). Evidence: a conversation within KNOWLEDGE_CONVERSATION_DAYS
+   * ranks as relationship history; a next action due within KNOWLEDGE_NEXT_ACTION_DAYS or past ranks as deal context;
+   * both are named in rankWhy, and the card carries the summary so the assignment can print the next action.
+   */
+  knowledge?: ReadonlyMap<string, AccountKnowledge>;
 }
 
 export interface WorkDay {
@@ -449,9 +477,11 @@ export const EVIDENCE_TIERS: ReadonlySet<WorkTier> = new Set<WorkTier>(['deal', 
  * each read from the card and its obligations (no new source):
  *
  *   1  a buyer wrote and an answer is owed (card.answerOwed, a reply on the card)
- *   2  open-deal context: a next step, a deal step due, or a passed close date with something to act on
+ *   2  open-deal context: a next step, a deal step due, a passed close date with something to act on, or (C2) the
+ *      vault's next action due within seven days or past
  *   3  something prepared and ready to send (a ready card, a prepared angle, a follow-up whose plan is prepared)
- *   4  a prior reply from them at any time (a reply on the card, an obligation resting on their words, buyer activity)
+ *   4  a prior reply from them at any time (a reply on the card, an obligation resting on their words, buyer activity,
+ *      or (C2) a conversation held within thirty days by the vault's notes)
  *   5  the seller's standing priority on the account
  *   5.5 deal hygiene alone (a passed close date, nothing prepared, no next step: I04 keeps it after new conversations)
  *   6  a current signal or a decision to review
@@ -461,10 +491,12 @@ export const EVIDENCE_TIERS: ReadonlySet<WorkTier> = new Set<WorkTier>(['deal', 
  * level), so the order is total and deterministic; `why` names the evidence that placed the card, strongest first.
  */
 export function evidenceRank(
-  card: Pick<WorkCard, 'answerOwed' | 'reply' | 'dealNextStep' | 'stalled' | 'stateKind' | 'priority' | 'tier' | 'preparedAngle'>,
+  card: Pick<WorkCard, 'answerOwed' | 'reply' | 'dealNextStep' | 'stalled' | 'stateKind' | 'priority' | 'tier' | 'preparedAngle' | 'knowledge'>,
   obligations: readonly WorkObligation[],
-  ctx: { buyerActivityAt?: number | null } = {},
+  ctx: { buyerActivityAt?: number | null; /** C2: the clock the knowledge windows are read against (no clock: the knowledge is not read). */ now?: Date | null } = {},
 ): { rank: number; why: string } {
+  // C2: the vault's account summary, read against the clock: a recent conversation, a next action coming due.
+  const kn = ctx.now && card.knowledge ? knowledgeEvidence(card.knowledge, ctx.now) : null;
   const theirWords = (o: WorkObligation) => !!o.basis && !/^out of office/i.test(o.basis.trim()) && /^[^"]{1,80}: "/.test(o.basis.trim());
   const stalled = !!card.stalled?.length;
   const stalledWhat = (card.stalled ?? []).some((s) => /close date/i.test(s)) ? 'close date passed' : (card.stalled ?? []).some((s) => /overdue|promised/i.test(s)) ? 'an obligation overdue' : 'no recent activity';
@@ -473,17 +505,18 @@ export function evidenceRank(
   // Prepared means a thing to send exists (a ready first touch, a follow-up whose plan is prepared); the workspace's
   // `preparation` flag is not read here: a deal or follow-up intent reports "ready" by construction (pursuit/actionable.ts).
   const prepared = card.stateKind === 'ready' || preparedFollowUp || !!card.preparedAngle;
-  const priorReply = !!card.reply || obligations.some(theirWords) || !!(ctx.buyerActivityAt && ctx.buyerActivityAt > 0);
+  const repliedBefore = !!card.reply || obligations.some(theirWords) || !!(ctx.buyerActivityAt && ctx.buyerActivityAt > 0);
+  const priorReply = repliedBefore || !!kn?.conversation;
   const answerOwed = !!card.answerOwed || (!!card.reply && card.stateKind === 'replied');
-  const dealContext = !!card.dealNextStep || dealStep || (stalled && (prepared || priorReply));
+  const dealContext = !!card.dealNextStep || dealStep || !!kn?.nextAction || (stalled && (prepared || priorReply));
   const hygieneOnly = stalled && !dealContext;
   const decide = card.stateKind === 'decide' || card.tier === 'review';
   const coldFollowUp = (card.stateKind === 'follow_up' || card.tier === 'follow_up') && !priorReply;
   const levels: Array<[boolean, string]> = [
     [answerOwed, 'a buyer wrote and an answer is owed'],
-    [dealContext, card.dealNextStep ? 'open deal, next step set' : dealStep ? 'open deal, a step due' : `open deal, ${stalledWhat}`],
+    [dealContext, card.dealNextStep ? 'open deal, next step set' : dealStep ? 'open deal, a step due' : kn?.nextAction ? kn.nextAction : `open deal, ${stalledWhat}`],
     [prepared, card.preparedAngle ? `an angle prepared for ${card.preparedAngle.who}` : card.stateKind === 'ready' ? 'a first touch prepared' : 'angle prepared'],
-    [priorReply, 'they have replied before'],
+    [priorReply, repliedBefore ? (kn?.conversation ? `they have replied before; ${kn.conversation}` : 'they have replied before') : (kn?.conversation as string)],
     [!!card.priority, card.priority ? `you prioritized it (${card.priority.reason})` : ''],
     [hygieneOnly, `deal hygiene only (${stalledWhat}, nothing prepared)`],
     [decide, 'a decision to review'],
@@ -493,6 +526,22 @@ export function evidenceRank(
   for (let k = 0; k < levels.length; k += 1) if (!levels[k][0]) rank += 2 ** (levels.length - 1 - k);
   const why = levels.filter(([on]) => on).map(([, text]) => text).join('; ') || 'no evidence beyond its lane';
   return { rank, why };
+}
+
+/**
+ * C2: the vault's evidence in words, read at `now`: a conversation held within KNOWLEDGE_CONVERSATION_DAYS ("a
+ * conversation Sep 16 (the vault)") and a next action due within KNOWLEDGE_NEXT_ACTION_DAYS or past ("the vault's next
+ * action: Regroup with Craig the week of Oct 12, due Oct 15"). An undated next action is context on the card, never
+ * evidence; a conversation older than the window is neither.
+ */
+export function knowledgeEvidence(k: AccountKnowledge, now: Date): { conversation: string | null; nextAction: string | null } {
+  const convAt = k.lastConversationAt ? new Date(k.lastConversationAt).getTime() : NaN;
+  const recent = Number.isFinite(convAt) && convAt <= now.getTime() && now.getTime() - convAt <= KNOWLEDGE_CONVERSATION_DAYS * 86_400_000;
+  const conversation = recent ? `a conversation ${day(k.lastConversationAt as string)} (the vault)` : null;
+  const due = k.nextActionDue && isDay(k.nextActionDue) ? k.nextActionDue : null;
+  const soon = !!due && due <= addDays(nyDay(now), KNOWLEDGE_NEXT_ACTION_DAYS);
+  const nextAction = soon && k.nextAction ? `the vault's next action: ${k.nextAction.replace(/\s+/g, ' ').trim().replace(/\.$/, '').slice(0, 140)}, due ${dayLabel(due as string, now)}` : null;
+  return { conversation, nextAction };
 }
 
 /** Where an obligation's work runs (the account page unless a better place exists). */
@@ -957,8 +1006,10 @@ export function workDay(i: WorkInput): WorkDay {
     // A2: the executable tiers rank by the evidence the card carries (its own fields, its obligations, the buyer activity
     // already read), never by the lane alone.
     const preparedAngle = i.preparedAngles?.get(name) ?? null;
-    const evidence = EVIDENCE_TIERS.has(tier) ? evidenceRank({ ...r.card, tier, priority: prio, preparedAngle }, list, { buyerActivityAt: act }) : null;
-    return { r, tier, lane, list, dueMs, act, prio, oldReplyDays, hygiene, evidence, preparedAngle };
+    // C2: the vault's summary rides as evidence (a recent conversation, a next action coming due) and onto the card.
+    const knowledge = i.knowledge?.get(name) ?? null;
+    const evidence = EVIDENCE_TIERS.has(tier) ? evidenceRank({ ...r.card, tier, priority: prio, preparedAngle, knowledge }, list, { buyerActivityAt: act, now: i.now }) : null;
+    return { r, tier, lane, list, dueMs, act, prio, oldReplyDays, hygiene, evidence, preparedAngle, knowledge };
   });
   const rankOf = (x: { tier: WorkTier; hygiene: boolean }) => (x.hygiene ? DEAL_HYGIENE_RANK : TIER_RANK[x.tier]);
   // The bands: the buyer obligations due (commitment, reply, meeting, in tier order), then the executable work by its
@@ -1001,7 +1052,7 @@ export function workDay(i: WorkInput): WorkDay {
     q.set('from', `work:${card.accountName}`);
     return { href: `/gap/capture?${q.toString()}`, label: 'Log a conversation' };
   };
-  const cards: WorkCard[] = ranked.map(({ r, tier, lane, list, dueMs, act, prio, oldReplyDays, evidence, preparedAngle }, index) => {
+  const cards: WorkCard[] = ranked.map(({ r, tier, lane, list, dueMs, act, prio, oldReplyDays, evidence, preparedAngle, knowledge }, index) => {
     const top = list.find((o) => o.tier === tier);
     const phrase = (line: string) => line.replace(/\.$/, '').replace(/^\w/, (ch) => ch.toLowerCase());
     const bits = [top ? `${TIER_WHY[tier]}: ${top.title}${top.dueDay && top.kind !== 'meeting' ? ` (${phrase(top.line)})` : ''}` : tier === 'admin' && oldReplyDays !== null ? `An old reply to triage (${oldReplyDays} days): record what they said or dismiss it` : tier === 'deal' && r.card.dealNextStep ? `The deal's next step: ${r.card.dealNextStep.replace(/\.$/, '')}${r.card.stalled?.length ? ` (stalled: ${phrase(r.card.stalled[0])})` : ''}` : tier === 'deal' && r.card.stalled?.length ? `A stalled deal: ${phrase(r.card.stalled[0])}` : TIER_WHY[tier]];
@@ -1012,6 +1063,10 @@ export function workDay(i: WorkInput): WorkDay {
     if (r.card.availability) bits.push(`${r.card.availability.who} is back from an out-of-office notice (${dayLabel(r.card.availability.returnedDay, i.now)}): availability, not a priority`);
     // A2 addendum: the prepared angle is said on the card in the loader's words.
     if (preparedAngle) bits.push(preparedAngle.line.replace(/\.$/, ''));
+    // C2: the vault's next action is said on the card (the evidence names it when it is coming due; otherwise it is context, with its due day when it has one).
+    const kn = knowledge ? knowledgeEvidence(knowledge, i.now) : null;
+    if (knowledge?.nextAction && (!evidence || !kn?.nextAction)) bits.push(`the vault's next action: ${knowledge.nextAction.replace(/\s+/g, ' ').trim().replace(/\.$/, '').slice(0, 140)}${knowledge.nextActionDue && isDay(knowledge.nextActionDue) ? `, due ${dayLabel(knowledge.nextActionDue, i.now)}` : ''}`);
+    if (kn?.conversation && !evidence) bits.push(kn.conversation);
     const capture = captureFor(r.card, list);
     // R60, capture once: a reply card offers ONE entry into Capture, which carries the reply's meaning and the buyer's
     // words in one review; the card's next move and its prepared reply point there, and no second record link shows.
@@ -1025,6 +1080,7 @@ export function workDay(i: WorkInput): WorkDay {
       rankWhy: `${bits.join('; ')}.${evidence ? ` Ranked here: ${evidence.why}.` : ''}`,
       ...(evidence ? { evidence } : {}),
       ...(preparedAngle ? { preparedAngle } : {}),
+      ...(knowledge ? { knowledge } : {}),
       obligations: list,
       priority: prio,
       capture: replyCard ? null : capture,

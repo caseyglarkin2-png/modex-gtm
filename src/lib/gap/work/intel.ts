@@ -482,6 +482,27 @@ export async function loadPursued(prisma: PrismaLike, now: Date, opts: PursuedOp
  * shares of any age, the strongest classes by score, then the rest newest; the totals are counts of the undecided
  * universe, not of the window. `dealAccounts` null means the deal state was not read: the person lines say so.
  */
+/** The vault's held meetings and calls with these people as StateEvents (kind call for a Fireflies capture, meeting for a meeting note). */
+export async function conversationEvents(prisma: PrismaLike, emails: readonly string[], now: Date): Promise<StateEvent[]> {
+  if (!emails.length || !prisma?.gapKnowledgeNote || typeof prisma.gapKnowledgeNote.findMany !== 'function') return [];
+  const rows: Array<{ id: string; path: string; kind: string; title: string | null; note_date: Date | string | null; source: string | null; people: string[] }> = await prisma.gapKnowledgeNote.findMany({
+    where: { kind: { in: ['meeting', 'raw'] }, note_date: { not: null, lte: now }, people: { hasSome: [...emails] } },
+    select: { id: true, path: true, kind: true, title: true, note_date: true, source: true, people: true },
+    orderBy: { note_date: 'desc' },
+    take: 200,
+  });
+  const out: StateEvent[] = [];
+  for (const r of rows) {
+    if (r.kind === 'raw' && r.source !== 'fireflies') continue;
+    const at = new Date(r.note_date as Date | string).toISOString();
+    const kind = r.kind === 'raw' ? 'call' : 'meeting';
+    for (const email of r.people.filter((p) => emails.includes(p))) {
+      out.push({ id: `knowledge:${r.id}:${email}`, at, direction: 'inbound', type: 'conversation', isDraft: false, from: email, to: [], purpose: 'buyer_conversation', conversation: { kind, title: r.title, source: r.source ?? 'vault' } } as StateEvent);
+    }
+  }
+  return out;
+}
+
 export const PEOPLE_WINDOW_DAYS = 180;
 export const PEOPLE_INTAKE_MAX = 2000;
 
@@ -560,6 +581,9 @@ export async function loadIntelligence(prisma: PrismaLike, opts: { now: Date; li
         events.push({ id: `sent:${s.id}`, at: new Date(s.internalDate).toISOString(), direction: 'outbound', type: mail.type, isDraft: false, from: null, to: [email], purpose: mail.type === 'calendar' ? 'calendar' : 'buyer_conversation', calendar: mail.calendar });
       }
     }
+    // Knowledge program (2026-10-09): a vault meeting note or a Fireflies call whose participants include the person is a
+    // CONVERSATION (C1: quiet counts from it; an answer is not owed after it). Read from the knowledge table, soft.
+    for (const ev of await conversationEvents(prisma, targets, opts.now).catch(() => [] as StateEvent[])) events.push(ev);
     states = peopleState(events, opts.now);
     for (const email of sentFailed) states.delete(email);
   }

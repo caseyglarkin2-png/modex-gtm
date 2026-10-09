@@ -79,7 +79,9 @@ describe('C10: quiet is descriptive and counts both sides and the calendar', () 
     const afterCancel = peopleState([inbound('m', '2026-09-16T14:00:00Z', 'buyer_conversation'), accepted('r1', '2026-10-02T12:00:00Z', '2026-10-14T18:00:00Z'), cancelled], NOW, { ownAddresses: OWN }).get(DAVE)!;
     expect(afterCancel.nextMeetingAt).toBeNull();
     expect(afterCancel.quiet.quiet).toBe(true);
-    expect(peopleState([accepted('r0', '2026-09-01T12:00:00Z', '2026-09-10T18:00:00Z')], NOW, { ownAddresses: OWN }).get(DAVE)!).toMatchObject({ nextMeetingAt: null, quiet: { quiet: false, days: null, basis: 'no exchange on record either way' } });
+    // Knowledge program C1 (2026-10-09): a meeting they accepted that has been held is a CONVERSATION, so it is no longer
+    // "no exchange on record": the exchange is the meeting, and quiet counts from it (27 days by Oct 8).
+    expect(peopleState([accepted('r0', '2026-09-01T12:00:00Z', '2026-09-10T18:00:00Z')], NOW, { ownAddresses: OWN }).get(DAVE)!).toMatchObject({ nextMeetingAt: null, lastConversationAt: '2026-09-10T18:00:00Z', quiet: { quiet: true, days: 27, since: '2026-09-10T18:00:00Z', basis: 'no exchange either way in 27 days (last: Sep 10, a meeting)' } });
     // Under the threshold is not quiet, said with the days.
     expect(peopleState([sent('s', '2026-10-01T16:00:00Z')], NOW, { ownAddresses: OWN }).get(DAVE)!.quiet).toEqual({ quiet: false, days: 6, since: '2026-10-01T16:00:00Z', basis: 'last exchange Oct 1 (we wrote), 6 days ago' });
     expect(peopleState([sent('s', '2026-10-01T16:00:00Z')], NOW, { ownAddresses: OWN, quietDays: 5 }).get(DAVE)!.quiet.quiet).toBe(true);

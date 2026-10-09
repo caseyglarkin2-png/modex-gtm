@@ -25,7 +25,8 @@ export interface ClawdOutreach {
 }
 
 export interface StoryTouch {
-  kind: 'send' | 'reply' | 'meeting' | 'asset';
+  /** B2: a HubSpot call or note is a touch of its own kind (what the deal team wrote down). */
+  kind: 'send' | 'reply' | 'meeting' | 'asset' | 'call' | 'note';
   at: string;
   /** The person as the seller knows them: the record's name when one matches, else the name read from the address. */
   name: string;
@@ -33,7 +34,12 @@ export interface StoryTouch {
   address: string | null;
   /** The subject, the meeting objective, the reply's first words. */
   what: string;
-  source: 'GAP ledger' | 'clawd ledger' | 'account history';
+  /** B1/B2: our Sent folder and the HubSpot company's engagements are sources of their own, named as such. */
+  source: 'GAP ledger' | 'clawd ledger' | 'account history' | 'Gmail Sent' | 'HubSpot';
+  /** B1/B2: the message snippet or the engagement body (bounded), for the story's excerpt. */
+  excerpt?: string;
+  /** B2: the HubSpot engagement id (the dedup key for a note, call or meeting). */
+  engagementId?: string;
   replyKind?: ReplyClassKind;
   replyLabel?: string;
   /** C6: the identity path that placed the sender at the account (a thread keyed elsewhere or nowhere); null when the reply list or the history held it. */
@@ -61,6 +67,10 @@ export function mergeTouches(x: {
   /** R63-A B4: `address` is the message's from address; its sender is named by it, never by a name that two people share. */
   replies?: Array<{ from: string; at: string; snippet: string; kind: ReplyClassKind; label: string; address?: string | null; placedVia?: StoryTouch['placedVia'] }>;
   people: Array<{ name: string; title: string | null; email?: string | null }>;
+  /** B1: our Sent mail to the account (AccountInputs.sent); absent or null when not read. */
+  sent?: AccountInputs['sent'];
+  /** B2: the HubSpot company's engagements (AccountInputs.engagements); absent or null when not read. */
+  engagements?: AccountInputs['engagements'];
   now: Date;
 }): StoryTouch[] {
   const byName = new Map(x.people.map((p) => [nameKey(p.name), p]));
@@ -100,16 +110,36 @@ export function mergeTouches(x: {
   for (const r of x.replies ?? []) {
     out.push({ kind: 'reply', at: r.at, ...person(r.from, r.address ?? null), what: r.snippet.replace(/\s+/g, ' ').trim().slice(0, 80), source: 'GAP ledger', replyKind: r.kind, replyLabel: r.label, ...(r.placedVia ? { placedVia: r.placedVia } : {}) });
   }
+  // B1: our Sent mail (the GAP mailbox): a send of ours to a person at the account, named by the address it went to.
+  for (const m of x.sent?.messages ?? []) {
+    if (!m.to || isInternalRecipient(m.to)) continue;
+    out.push({ kind: 'send', at: m.at, ...person(m.to), what: m.subject?.trim() || 'email', source: 'Gmail Sent', excerpt: m.excerpt || undefined });
+  }
+  // B2: HubSpot engagements. A logged email is a send of ours or their reply (by its direction and sender); a note, a
+  // call and a meeting are what the deal team wrote down, told as such, never as buyer words.
+  for (const e of x.engagements?.items ?? []) {
+    if (e.kind === 'email') {
+      const from = e.from ?? null;
+      if (e.direction === 'incoming' && from && !isInternalRecipient(from)) {
+        out.push({ kind: 'reply', at: e.at, ...person(from, from), what: (e.body || e.title || '').replace(/\s+/g, ' ').trim().slice(0, 80), source: 'HubSpot', replyKind: 'human', replyLabel: 'replied', excerpt: e.body || undefined });
+      } else if (e.direction === 'outgoing' || (from && isInternalRecipient(from))) {
+        const to = e.to && !isInternalRecipient(e.to) ? e.to : null;
+        out.push({ kind: 'send', at: e.at, ...(to ? person(to) : { name: 'the account', title: null, address: null }), what: e.title?.trim() || 'email', source: 'HubSpot', excerpt: e.body || undefined });
+      }
+      continue;
+    }
+    out.push({ kind: e.kind, at: e.at, name: 'the account', title: null, address: null, what: e.title?.trim() || '', source: 'HubSpot', excerpt: e.body || undefined, engagementId: e.id });
+  }
 
-  // One row per event: the same person, the same minute, the same kind (the history and the GAP ledger both record a send).
-  const seen = new Set<string>();
-  return out
-    .filter((t) => !Number.isNaN(new Date(t.at).getTime()))
-    .sort((a, b) => b.at.localeCompare(a.at))
-    .filter((t) => {
-      const k = `${t.kind}|${nameKey(t.name)}|${t.at.slice(0, 16)}`;
-      if (seen.has(k)) return false;
-      seen.add(k);
-      return true;
-    });
+  // One row per event: the same person, the same minute, the same kind (the history and the GAP ledger both record a
+  // send). When two records are one event, the one that carries the subject stands (Gmail Sent over "GAP first touch").
+  const byKey = new Map<string, StoryTouch>();
+  const bare = (t: StoryTouch) => t.what === 'GAP first touch' || t.what === 'email' || !t.what;
+  for (const t of out.filter((t) => !Number.isNaN(new Date(t.at).getTime())).sort((a, b) => b.at.localeCompare(a.at))) {
+    const k = `${t.kind}|${t.engagementId ? `hs:${t.engagementId}` : nameKey(t.name)}|${t.at.slice(0, 16)}`;
+    const have = byKey.get(k);
+    if (!have) byKey.set(k, t);
+    else if (bare(have) && !bare(t)) byKey.set(k, { ...t, at: have.at });
+  }
+  return [...byKey.values()];
 }

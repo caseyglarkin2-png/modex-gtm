@@ -23,14 +23,26 @@
  *     refused `item_retired` (the plan was refreshed; reply NEXT); SKIP, DEFER and DONE still act (they act on the
  *     object). DONE's note is READ first (work/done-note.ts): a note that says what the seller is doing or will do is
  *     recorded `progress_noted` and changes no commitment or outcome, and it never counts as an applied DONE
+ *   - knowledge program C3 (2026-10-09): a completion DONE becomes RECORDS. Its facts (work/done-note.ts doneNoteFacts)
+ *     are read with the clock: a dated meeting writes ONE prepare_meeting commitment at the account through
+ *     work/commitments.ts commitmentsFromSellerNote (waiting, due 8 am New York on the day, the seller's words as the
+ *     basis, source `seller_note` with the Gmail message id; idempotent by the day); a sent note is recorded on the
+ *     applied row as `claims: [{ kind: 'sent', who, when, channel }]` and the answer says GAP checks Sent for it. Nothing
+ *     here sends or marks contact: a self-reported send is still self-reported (the activity view says so). The October
+ *     9 Kenco note is the pin: "we have meeting scheduled for 10.14.2026. sent them a quick note today ..."
+ *   - knowledge program C4: after an applied SKIP, DEFER or DONE on an assignment, GAP ADVANCES: the next assignable
+ *     item of the newest plan revision goes out in the same tick (nextAssignableItem and sendAssignment, as START does),
+ *     the applied row records `advancedTo: <key>` (or null with `advanceReason`: none_left, all_held, no_briefing_address,
+ *     send_failed, no_plan), and the answer names it ("Next: PepsiCo, a prepared first touch, arriving as its own
+ *     email."). A refused or progress-noted DONE never advances.
  */
 import type { GmailSender, GmailSendPayload } from '@/lib/email/gmail-sender';
 import type { MailboxMessage } from '@/lib/email/gmail-inbox';
 import { ASSIGNMENT_SENT, ITEM_SUBJECT_TYPE, loadAssignments, nextAssignableItem, sendAssignment, startDay, type AssignmentDeps } from '../work/assignment';
 import { BRIEFING_SENT } from '../work/briefing-send';
-import { loadCommitment, transitionCommitment } from '../work/commitments';
-import { nyDayAt, parseDuePhrase } from '../work/dates';
-import { progressLine, readDoneNote } from '../work/done-note';
+import { commitmentsFromSellerNote, loadCommitment, transitionCommitment } from '../work/commitments';
+import { dayLabel, nyDayAt, parseDuePhrase } from '../work/dates';
+import { progressLine, readDoneNote, type DoneFact } from '../work/done-note';
 import { recordWorkOutcome } from '../work/outcome';
 import { loadDayPlan, loadDayPlanRevisions, type DayPlan, type PlanItem } from '../work/plan';
 import type { SellerSettings } from '../work/settings';
@@ -115,12 +127,13 @@ export interface ActionSource {
 }
 
 export type ApplyResult =
-  | { applied: true; command: ParsedCommand['kind']; effect: string; itemKey?: string; until?: string; basis?: 'provider' | 'self_reported'; outcome: ActionOutcome; source: ActionSource | null; next: string }
+  | { applied: true; command: ParsedCommand['kind']; effect: string; itemKey?: string; until?: string; basis?: 'provider' | 'self_reported'; outcome: ActionOutcome; source: ActionSource | null; next: string; /** C4: the item key sent next in the same tick, or null (the applied row says why). */ advancedTo?: string | null }
   | { applied: false; command: ParsedCommand['kind']; reason: string; currentRevision?: number; outcome: ActionOutcome; source: ActionSource | null; next: string };
 
 const NEXT_PATH: Record<string, string> = {
   assignment_sent: 'The item arrives as its own email; answer it there.',
   nothing_left: 'Open Work in GAP for what is waiting and parked.',
+  advanced: 'The next item arrives as its own email; answer it there.',
   help_sent: 'Reply with one of the commands on the first line.',
   commitment_skipped: 'Reply NEXT for the next item.',
   account_skipped: 'It returns tomorrow. Reply NEXT for the next item.',
@@ -371,26 +384,88 @@ async function help(prisma: PrismaLike, input: ApplyInput, deps: ApplyDeps, subj
   return { applied: true, command, effect: 'help_sent', outcome: 'accepted', source, next: nextPath('help_sent') };
 }
 
+/** C4: what the advance after an applied SKIP, DEFER or DONE came to. */
+interface Advance {
+  key: string | null;
+  reason: 'none_left' | 'all_held' | 'no_briefing_address' | 'send_failed' | 'no_plan' | null;
+  /** The seller line: "Next: PepsiCo, a prepared first touch, arriving as its own email." or why nothing followed, with the held items. */
+  line: string;
+  held: string[];
+}
+
+const NONE_LEFT_LINE = 'Nothing left on today\'s list has gone unassigned. Open Work in GAP for what is waiting and parked.';
+
+/** The next item in words: what is prepared for it, else its own title. */
+function nextItemWords(item: PlanItem, built: { prepared: { kind: string; who?: string } } | null): string {
+  const prepared = built?.prepared;
+  if (prepared?.kind === 'email') return item.kind === 'ready' ? 'a prepared first touch' : 'a prepared email';
+  if (prepared?.kind === 'angle') return `an angle prepared for ${prepared.who ?? 'them'}`;
+  return item.title;
+}
+
+/**
+ * C4: send the next assignable item of the day's newest plan revision, the way START and NEXT do (the walk records an
+ * item held for research as it is found). Never throws: a failure is `send_failed` with the error in the line.
+ */
+async function advanceAfter(prisma: PrismaLike, input: ApplyInput, deps: ApplyDeps, day: string): Promise<Advance> {
+  try {
+    const plan = await loadDayPlan(prisma, day);
+    if (!plan) return { key: null, reason: 'no_plan', line: NONE_LEFT_LINE, held: [] };
+    const walk = await nextAssignableItem(prisma, plan, { assign: { input: { baseUrl: input.baseUrl, actionSecret: input.actionSecret, commandsEnabled: true, now: input.now }, deps, actor: input.actor } });
+    const heldLines = walk.held.map((h) => `Held for GAP research: ${h.item.accountName} (${h.line}).`);
+    const held = walk.held.map((h) => h.item.key);
+    if (!walk.item) return { key: null, reason: held.length ? 'all_held' : 'none_left', line: [NONE_LEFT_LINE, ...heldLines].join('\n'), held };
+    if (!input.settings.briefingTo) return { key: null, reason: 'no_briefing_address', line: 'The next item waits: set the briefing address in Settings.', held };
+    const item = walk.item;
+    try {
+      await sendAssignment(prisma, { plan, item, revision: 0, to: input.settings.briefingTo, sender: input.sender, baseUrl: input.baseUrl, actionSecret: input.actionSecret, commandsEnabled: true, now: input.now, actor: input.actor, built: walk.built }, deps);
+    } catch (err) {
+      const message = (err instanceof Error ? err.message : String(err)).slice(0, 300);
+      return { key: null, reason: 'send_failed', line: `GAP could not send the next item (${item.accountName}: ${message}). Reply NEXT to try again.`, held };
+    }
+    return { key: item.key, reason: null, line: [`Next: ${item.accountName}, ${nextItemWords(item, walk.built)}, arriving as its own email.`, ...heldLines].join('\n'), held };
+  } catch (err) {
+    const message = (err instanceof Error ? err.message : String(err)).slice(0, 300);
+    return { key: null, reason: 'send_failed', line: `GAP could not pick the next item (${message}). Reply NEXT to try again.`, held: [] };
+  }
+}
+
+const monthDay = (day: string) => nyDayAt(day, 12).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' });
+const CHANNEL_NOUN = { email: 'note', call: 'call', message: 'message' } as const;
+
+/** C3: "Recorded: a meeting Oct 14 (to prepare), and your note to them today (GAP checks Sent for it)". */
+function factsLine(meetings: ReadonlyArray<{ day: string }>, claims: ReadonlyArray<{ who: string | null; when: string; channel: 'email' | 'call' | 'message' }>, now: Date): string | null {
+  const parts = [
+    ...meetings.map((m) => `a meeting ${monthDay(m.day)} (to prepare)`),
+    ...claims.map((c) => `your ${CHANNEL_NOUN[c.channel]} to ${c.who ?? 'them'} ${dayLabel(c.when, now)} (${c.channel === 'email' ? 'GAP checks Sent for it' : 'your word'})`),
+  ];
+  if (!parts.length) return null;
+  const list = parts.length === 1 ? parts[0] : parts.length === 2 ? `${parts[0]}, and ${parts[1]}` : `${parts.slice(0, -1).join(', ')}, and ${parts[parts.length - 1]}`;
+  return `Recorded: ${list}.`;
+}
+
 async function act(prisma: PrismaLike, input: ApplyInput, deps: ApplyDeps, item: PlanItem, ref: AssignmentRef, command: Extract<ParsedCommand, { kind: 'skip' | 'defer' | 'done' }>, subject: { type: string; id: string }): Promise<ApplyResult> {
   const actor = input.m.fromEmail.toLowerCase();
   const commitmentId = item.refs.commitmentId ?? null;
   const commitment = commitmentId ? await loadCommitment(prisma, commitmentId) : null;
   const source = sourceOf(item);
-  const ok = (effect: string, extra: Partial<Extract<ApplyResult, { applied: true }>> = {}): ApplyResult => ({ applied: true, command: command.kind, effect, itemKey: ref.itemKey, outcome: 'accepted', source, next: nextPath(effect), ...extra });
+  // C4: every applied SKIP, DEFER and DONE records what ran, advances to the next item, and answers in one message.
+  const finish = async (effect: string, payload: Record<string, unknown>, body: string, extra: Partial<Extract<ApplyResult, { applied: true }>> = {}): Promise<ApplyResult> => {
+    const adv = await advanceAfter(prisma, input, deps, ref.day);
+    await recordApplied(prisma, input, subject, { command: command.kind, revision: ref.revision, effect, ...payload, advancedTo: adv.key, ...(adv.key ? {} : { advanceReason: adv.reason }), ...(adv.held.length ? { held: adv.held } : {}) });
+    await answer(input, deps, `${body} ${adv.line}`);
+    return { applied: true, command: command.kind, effect, itemKey: ref.itemKey, outcome: 'accepted', source, next: adv.key ? nextPath('advanced') : nextPath(effect), advancedTo: adv.key, ...extra };
+  };
 
   if (command.kind === 'skip') {
     if (commitment) {
       const t = await transitionCommitment(prisma, { commitmentId: commitment.commitmentId, to: 'skipped', reason: command.reason ?? 'Skipped by email', actor, now: input.now });
       if (!t.ok) return refuse(prisma, input, deps, subject, 'skip', `commitment_${t.reason}`, {}, source);
-      await recordApplied(prisma, input, subject, { command: 'skip', revision: ref.revision, effect: 'commitment_skipped', commitmentId: commitment.commitmentId, reason: command.reason });
-      await answer(input, deps, `Skipped: ${item.title} at ${item.accountName}${command.reason ? ` (${command.reason})` : ''}. Reply NEXT for the next item.`);
-      return ok('commitment_skipped');
+      return finish('commitment_skipped', { commitmentId: commitment.commitmentId, reason: command.reason }, `Skipped: ${item.title} at ${item.accountName}${command.reason ? ` (${command.reason})` : ''}.`);
     }
     const o = await recordWorkOutcome(prisma, { accountName: item.accountName, kind: 'skipped', reason: command.reason ?? null, actor, now: input.now });
     if (!o.ok) return refuse(prisma, input, deps, subject, 'skip', `outcome_${o.reason}`, {}, source);
-    await recordApplied(prisma, input, subject, { command: 'skip', revision: ref.revision, effect: 'account_skipped', reason: command.reason });
-    await answer(input, deps, `Skipped for today: ${item.accountName}. It returns tomorrow. Reply NEXT for the next item.`);
-    return ok('account_skipped');
+    return finish('account_skipped', { reason: command.reason }, `Skipped for today: ${item.accountName}. It returns tomorrow.`);
   }
 
   if (command.kind === 'defer') {
@@ -400,37 +475,39 @@ async function act(prisma: PrismaLike, input: ApplyInput, deps: ApplyDeps, item:
     if (commitment) {
       const t = await transitionCommitment(prisma, { commitmentId: commitment.commitmentId, to: 'snoozed', until, actor, now: input.now });
       if (!t.ok) return refuse(prisma, input, deps, subject, 'defer', `commitment_${t.reason}`, {}, source);
-      await recordApplied(prisma, input, subject, { command: 'defer', revision: ref.revision, effect: 'commitment_snoozed', commitmentId: commitment.commitmentId, until: parsed.day });
-      await answer(input, deps, `Deferred to ${parsed.day}: ${item.title} at ${item.accountName}. Reply NEXT for the next item.`);
-      return ok('commitment_snoozed', { until: parsed.day });
+      return finish('commitment_snoozed', { commitmentId: commitment.commitmentId, until: parsed.day }, `Deferred to ${parsed.day}: ${item.title} at ${item.accountName}.`, { until: parsed.day });
     }
     const o = await recordWorkOutcome(prisma, { accountName: item.accountName, kind: 'snoozed', until: until.toISOString(), reason: command.when ?? null, actor, now: input.now });
     if (!o.ok) return refuse(prisma, input, deps, subject, 'defer', `outcome_${o.reason}`, {}, source);
-    await recordApplied(prisma, input, subject, { command: 'defer', revision: ref.revision, effect: 'account_snoozed', until: parsed.day });
-    await answer(input, deps, `Deferred to ${parsed.day}: ${item.accountName}. Reply NEXT for the next item.`);
-    return ok('account_snoozed', { until: parsed.day });
+    return finish('account_snoozed', { until: parsed.day }, `Deferred to ${parsed.day}: ${item.accountName}.`, { until: parsed.day });
   }
 
   // done: the note is READ before it is recorded (work/done-note.ts). What happened completes; what the seller is doing
   // or will do is progress, recorded as such, and changes no commitment or outcome ("DONE: researching catalysts").
-  const reading = readDoneNote(command.note);
+  const reading = readDoneNote(command.note, { now: input.now });
   if (reading.kind === 'empty') return refuse(prisma, input, deps, subject, 'done', 'note_required', {}, source);
   if (reading.kind === 'progress') {
     await recordApplied(prisma, input, subject, { command: 'done', revision: ref.revision, effect: 'progress_noted', note: reading.note, cue: reading.cue, basis: 'self_reported', ...(commitment ? { commitmentId: commitment.commitmentId } : {}) });
     await answer(input, deps, progressLine(reading));
-    return ok('progress_noted', { basis: 'self_reported' });
+    return { applied: true, command: 'done', effect: 'progress_noted', itemKey: ref.itemKey, outcome: 'accepted', source, next: nextPath('progress_noted'), basis: 'self_reported' };
   }
   const note = reading.note;
+  // C3: the facts the note states become records: a meeting to prepare (one per day, through the commitment writer),
+  // a sent note as a claim on this row. A failure to write the meeting never fails the DONE (the words are recorded).
+  const facts: DoneFact[] = reading.facts ?? [];
+  const claims = facts.filter((f): f is Extract<DoneFact, { kind: 'sent' }> => f.kind === 'sent').map((f) => ({ kind: 'sent' as const, who: f.who, when: f.when, channel: f.channel, words: f.words }));
+  const person = commitment?.person ?? (item.person ? { personaId: null, name: item.person.name, email: null } : null);
+  const meetings = facts.some((f) => f.kind === 'meeting')
+    ? (await commitmentsFromSellerNote(prisma, { accountName: item.accountName, facts, note, gmailMessageId: input.m.id, person, dealId: commitment?.dealId ?? null, actor, now: input.now }).catch(() => ({ meetings: [] }))).meetings
+    : [];
+  const recorded = factsLine(meetings, claims, input.now);
+  const factsPayload = { ...(claims.length ? { claims } : {}), ...(meetings.length ? { meetings } : {}) };
   if (commitment) {
     const t = await transitionCommitment(prisma, { commitmentId: commitment.commitmentId, to: 'done', proof: { kind: 'seller', note }, actor, now: input.now });
     if (!t.ok) return refuse(prisma, input, deps, subject, 'done', `commitment_${t.reason}`, {}, source);
-    await recordApplied(prisma, input, subject, { command: 'done', revision: ref.revision, effect: 'commitment_done', commitmentId: commitment.commitmentId, note, basis: 'self_reported' });
-    await answer(input, deps, `Done, by your word: ${item.title} at ${item.accountName}. Recorded: "${note}". Reply NEXT for the next item.`);
-    return ok('commitment_done', { basis: 'self_reported' });
+    return finish('commitment_done', { commitmentId: commitment.commitmentId, note, basis: 'self_reported', ...factsPayload }, `Done, by your word: ${item.title} at ${item.accountName}. ${recorded ?? `Recorded: "${note}".`}`, { basis: 'self_reported' });
   }
   const o = await recordWorkOutcome(prisma, { accountName: item.accountName, kind: 'logged', reason: note.slice(0, 240), actor, now: input.now });
   if (!o.ok) return refuse(prisma, input, deps, subject, 'done', `outcome_${o.reason}`, {}, source);
-  await recordApplied(prisma, input, subject, { command: 'done', revision: ref.revision, effect: 'account_logged', note, basis: 'self_reported' });
-  await answer(input, deps, `Logged, by your word: ${item.accountName}. Recorded: "${note}". GAP counts what it can prove separately. Reply NEXT for the next item.`);
-  return ok('account_logged', { basis: 'self_reported' });
+  return finish('account_logged', { note, basis: 'self_reported', ...factsPayload }, `Logged, by your word: ${item.accountName}. ${recorded ?? `Recorded: "${note}".`} GAP counts what it can prove separately.`, { basis: 'self_reported' });
 }

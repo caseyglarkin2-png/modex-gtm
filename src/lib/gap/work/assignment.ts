@@ -157,6 +157,9 @@ export async function buildAssignment(prisma: PrismaLike, input: BuildAssignment
   // mistaken for everything there is; nothing is printed when everything was read.
   // The context's own line already carries its prefixes ("Not read this time: ...", "Partly read: ..."): printed verbatim;
   // a bare list gets the prefix. The harness reads the "Not read this time" prefix at the start of the printed line.
+  // Knowledge program (2026-10-09): the vault's account note for the seller (never quotable to the buyer): the wedge read and the next action with its due day.
+  const sellerNote = (ctx as { sellerNote?: { lines: string[] } | null } | null)?.sellerNote?.lines ?? [];
+  if (sellerNote.length) { lines.push('', 'Your vault note (for you, never quote it to the buyer):'); for (const l of sellerNote.slice(0, 3)) lines.push(safeLine(`- ${endSentence(l)}`)); }
   const coverage = typeof ctx?.coverageLine === 'string' ? ctx.coverageLine.trim() : '';
   if (coverage) lines.push(safeLine(/^(Not read this time|Partly read)\b/i.test(coverage) ? coverage : `Not read this time: ${coverage}`));
   let prepared: Prepared = { kind: 'none' };

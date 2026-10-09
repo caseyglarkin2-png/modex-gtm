@@ -93,6 +93,10 @@ export interface HealthInputs {
     clawd: ContextSourceCoverage;
     /** The account the vault and Clawd reads were run for (the newest account on record); null when none. */
     canary: { account: string; domain: string | null } | null;
+    /** Stream A (2026-10-09): the synced vault table (gap_knowledge_notes) and the last gap-vault-sync tick from the ledger; absent when not read. */
+    vaultTable?:
+      | { readable: true; rows: number; lastSyncedAt: string | null; kinds: Record<string, number>; tokenConfigured: boolean; localDir: boolean; lastSync: { ok: boolean; at: string; error: string | null; written: number | null; skipped: boolean } | null }
+      | { readable: false; error: string; tokenConfigured: boolean; localDir: boolean };
   };
   /** A02: the GAP model route and its spend this month (src/lib/gap/ai/spend.ts). */
   model?: { month: string; label: string; monthUsd: number; ceilingUsd: number; warnFraction: number; calls: number; failed: number; refused: number; inFlight: number; lastCall: { at: string; outcome: string; model: string | null; errorCategory: string | null } | null; /** A04: the AI Gateway credit balance (every call on the route draws on it, metered or not); null when unread. */ credits?: { balance: number; totalUsed: number } | null };
@@ -222,7 +226,18 @@ function context(i: HealthInputs['context'], now: Date): HealthComponent {
   else if (i.sent.readable === false) problems.push(`Gmail Sent unreadable${i.sent.error ? ` (${i.sent.error})` : ''}: who we wrote to is unknown, so quiet and answer owed are one-sided`);
   else if (i.sent.readable === null) partial.push('Sent: not probed');
   else facts.push(`Sent read in ${i.sent.ms ?? '?'}ms`);
+  // Stream A: the synced vault table (gap_knowledge_notes) speaks for the vault source when it holds rows ("vault: N
+  // notes (92 calls, 78 account notes), synced 10:39 New York"); a failed last gap-vault-sync tick is a problem; an
+  // empty table while the coverage row says not configured is one "not configured" line naming what is missing.
+  const vt = i.vaultTable;
+  if (vt && !vt.readable) problems.push(`vault table unreadable (${vt.error})`);
+  else if (vt && vt.readable) {
+    if (vt.lastSync && !vt.lastSync.ok) problems.push(`vault sync failed: the last tick ${nyClock(vt.lastSync.at, now)}${vt.lastSync.error ? ` (${vt.lastSync.error})` : ''}; the table still serves what it held`);
+    if (vt.rows > 0) facts.push(`vault: ${vt.rows} notes (${vaultKindWords(vt.kinds)})${vt.lastSyncedAt ? `, synced ${nyClock(vt.lastSyncedAt, now)}` : ''}`);
+    else if (!i.vault.configured) partial.push(`vault: not configured (${vt.tokenConfigured ? 'the token is set; the knowledge table is empty until the first gap-vault-sync tick' : vt.localDir ? 'the local directory is set on this box only; the knowledge table is empty' : 'no GAP_VAULT_GITHUB_TOKEN, no GAP_VAULT_DIR, the knowledge table is empty'})`);
+  }
   for (const [name, c] of [['vault', i.vault], ['Clawd', i.clawd]] as const) {
+    if (name === 'vault' && vt?.readable && vt.rows === 0 && !c.configured) continue; // said above, once
     if (!c.configured) { partial.push(`${name}: not configured${c.omittedReason ? ` (${c.omittedReason})` : ''}`); continue; }
     if (!c.reachable) { problems.push(`${name} unreachable${c.omittedReason ? ` (${c.omittedReason})` : ''}`); continue; }
     const age = days(c.watermark);
@@ -238,6 +253,28 @@ function context(i: HealthInputs['context'], now: Date): HealthComponent {
   if (problems.length) return { ...base, state: 'DEGRADED', label: `Commercial context incomplete · ${problems[0].split(':')[0]}`, detail };
   if (partial.length) return { ...base, state: 'HEALTHY', label: `Commercial context partial · ${partial.map((p) => p.split(':')[0]).join(', ')}`, detail };
   return { ...base, state: 'HEALTHY', label: 'Commercial context complete and fresh', detail };
+}
+
+/** "92 calls, 78 account notes, 85 meeting notes" from the table's counts by kind (stream A). */
+function vaultKindWords(kinds: Record<string, number>): string {
+  const parts: string[] = [];
+  const say = (n: number | undefined, one: string, many: string) => (n ?? 0) > 0 && parts.push(`${n} ${n === 1 ? one : many}`);
+  say(kinds.raw, 'call', 'calls');
+  say(kinds.account, 'account note', 'account notes');
+  say(kinds.meeting, 'meeting note', 'meeting notes');
+  say(kinds.deal, 'deal note', 'deal notes');
+  say(kinds.person, 'people note', 'people notes');
+  return parts.length ? parts.join(', ') : 'no notes by kind';
+}
+
+/** "10:39 New York" for an instant (today's clock), or "Oct 8, 10:39 New York" when it is another day. */
+function nyClock(iso: string, now?: Date): string {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return iso;
+  const time = new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit', hour12: false }).format(d);
+  const sameDay = now ? new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York' }).format(d) === new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York' }).format(now) : false;
+  const day = new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', month: 'short', day: 'numeric' }).format(d);
+  return sameDay ? `${time} New York` : `${day}, ${time} New York`;
 }
 
 /** The provider reasons that do not get better by trying again: the route is blocked until someone changes it. */
