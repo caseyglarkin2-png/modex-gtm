@@ -108,6 +108,15 @@ describe('C24: an accepted angle becomes a draft through the existing workflow',
     const guarded = await promoteAngle(c, { taskId, actor: ACTOR, now: new Date(at.getTime() + 3000), personaId: 1 }, { ...h.deps, competing: async () => sellerEdit });
     expect(guarded).toMatchObject({ ok: false, reason: 'competing_seller_edit', offers: ['revise'], competing: { found: true, items: [{ id: 'r-edited', sellerEdited: true, offer: 'revise' }] } });
     expect(await promoteAngle(c, { taskId, actor: ACTOR, now: new Date(at.getTime() + 3500), personaId: 1, choice: 'fresh' }, { ...h.deps, competing: async () => sellerEdit })).toMatchObject({ ok: false, reason: 'competing_seller_edit' });
+    // C57 P2-1: Casey's own hand-written Gmail draft, read by the typed timeline's drafts reader (deps.thread.listDrafts, no GAP ledger row), is in-flight seller work: the promotion refuses with revise only and writes nothing beside it.
+    const byHand = gmailSpy();
+    const listDrafts = vi.fn<(recipient: string) => Promise<Array<{ id: string; threadId: string | null; internalDate: Date; to: string; subject: string; isDraft: boolean }>>>(async () => [{ id: 'r-hand-1', threadId: 't-kenco', internalDate: new Date('2026-10-05T11:30:00Z'), to: DAVE_EMAIL, subject: 'Phased 2027 proposal', isDraft: true }, { id: 'r-hand-2', threadId: 't-kenco', internalDate: new Date('2026-10-06T09:00:00Z'), to: DAVE_EMAIL, subject: 'Re: YardFlow and the 2027 roadmap', isDraft: true }]);
+    const hand = await promoteAngle(c, { taskId, actor: ACTOR, now: new Date(at.getTime() + 3600), personaId: 1 }, { ...byHand.deps, thread: { listDrafts, listSent: async () => [], ownAddresses: new Set(['casey@yardflow.ai']) } });
+    expect(hand).toMatchObject({ ok: false, reason: 'competing_seller_edit', offers: ['revise'], competing: { found: true, items: expect.arrayContaining([expect.objectContaining({ kind: 'in_flight', id: 'r-hand-2', sellerEdited: true, offer: 'revise' }), expect.objectContaining({ kind: 'in_flight', id: 'r-hand-1', sellerEdited: true })]) } });
+    expect(listDrafts).toHaveBeenCalledWith(DAVE_EMAIL);
+    expect(byHand.drafts).toEqual([]);
+    expect(await promoteAngle(c, { taskId, actor: ACTOR, now: new Date(at.getTime() + 3700), personaId: 1, choice: 'fresh' }, { ...byHand.deps, thread: { listDrafts, listSent: async () => [], ownAddresses: new Set(['casey@yardflow.ai']) } })).toMatchObject({ ok: false, reason: 'competing_seller_edit' });
+    expect(byHand.drafts).toEqual([]);
     const revise = await promoteAngle(c, { taskId, actor: ACTOR, now: new Date(at.getTime() + 4000), personaId: 1, choice: 'revise' }, { ...h.deps, competing: async () => sellerEdit });
     expect(revise).toMatchObject({ ok: true, lane: 'existing', choice: 'revise', item: { id: 'r-edited' }, line: expect.stringMatching(/^Revise the existing draft/) });
     expect(h.drafts).toEqual([]);

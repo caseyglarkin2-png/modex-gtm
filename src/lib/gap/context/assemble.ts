@@ -363,20 +363,22 @@ export function competingWork(timeline: readonly TimelineEvent[], drafts: readon
   };
   const items: CompetingItem[] = [];
   const seen = new Set<string>();
+  // Builder A's timeline carries provider-prefixed ids ("gmail:r5338..."); the ledger's drafts carry the bare id. One draft is one draft.
+  const bare = (id: string) => id.replace(/^(gmail|hubspot|gap):/, '');
   for (const d of drafts) {
     const why = judge(d);
     if (!why.length) continue;
-    seen.add(`${d.provider}:${d.id}`);
+    seen.add(`${d.provider}:${bare(d.id)}`);
     items.push({ kind: 'draft', id: d.id, provider: d.provider, at: d.updatedAt, subject: d.subject, to: d.to, threadId: d.threadId, why, sellerEdited: d.sellerEdited, offer: d.sellerEdited ? 'revise' : 'reuse', overwrite: false });
   }
   for (const e of timeline) {
     if (!e.isDraft) continue;
-    if (e.providerIds.some((id) => seen.has(`${e.provider}:${id}`)) || seen.has(`${e.provider}:${e.id}`)) continue;
+    if (e.providerIds.some((id) => seen.has(`${e.provider}:${bare(id)}`)) || seen.has(`${e.provider}:${bare(e.id)}`)) continue;
     // Builder A's ThreadEvent carries the thread id beside the contract's fields; a bare contract event is judged by its addressees and purpose.
     const why = judge({ threadId: (e as { threadId?: string | null }).threadId ?? null, to: e.to, purpose: e.purpose });
     if (!why.length) continue;
     // A draft the timeline holds that no proposal of ours wrote is the seller's own: revise only.
-    items.push({ kind: 'in_flight', id: e.providerIds[0] ?? e.id, provider: e.provider, at: e.at, subject: e.subject, to: e.to, threadId: null, why, sellerEdited: true, offer: 'revise', overwrite: false });
+    items.push({ kind: 'in_flight', id: bare(e.providerIds[0] ?? e.id), provider: e.provider, at: e.at, subject: e.subject, to: e.to, threadId: (e as { threadId?: string | null }).threadId ?? null, why, sellerEdited: true, offer: 'revise', overwrite: false });
   }
   items.sort((a, b) => b.at.localeCompare(a.at) || a.id.localeCompare(b.id));
   if (!items.length) return { found: false };
