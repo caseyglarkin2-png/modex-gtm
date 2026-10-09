@@ -186,7 +186,7 @@ export interface PursuedItem {
   decidedAt: string;
   status: 'in_progress' | 'ready' | 'failed';
   error: string | null;
-  angle: { whyItMatters: string; starters: string[]; roles: string[]; accounts: string[]; peopleNamed: Array<{ personaId: number; name: string | null; title: string | null }>; proposedAction: string; caveat: string | null; sourceLine: string; warnings: string[] } | null;
+  angle: { whyItMatters: string; starters: string[]; roles: string[]; accounts: string[]; peopleNamed: Array<{ personaId: number; name: string | null; title: string | null }>; proposedAction: string; caveat: string | null; sourceLine: string; warnings?: string[] } | null;
 }
 
 export interface Intelligence {
