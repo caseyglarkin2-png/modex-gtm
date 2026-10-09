@@ -17,7 +17,9 @@ import { ASSIGNMENT_SENT, DAY_STARTED, sendAssignment } from '@/lib/gap/work/ass
 import { ensureCommitment, loadCommitment } from '@/lib/gap/work/commitments';
 import { BRIEFING_SENT } from '@/lib/gap/work/briefing-send';
 import { loadWorkOutcomes } from '@/lib/gap/work/outcome';
-import { planDay, type DayPlan } from '@/lib/gap/work/plan';
+import { DAY_PLANNED, planDay, type DayPlan } from '@/lib/gap/work/plan';
+import { ITEM_HELD_FOR_RESEARCH } from '@/lib/gap/work/assignment';
+import type { AskContext } from '@/lib/gap/ask/grounding';
 import type { WorkDay } from '@/lib/gap/work/list';
 import type { SellerSettings } from '@/lib/gap/work/settings';
 import type { MailboxMessage } from '@/lib/email/gmail-inbox';
@@ -199,5 +201,95 @@ describe('X07b: applyCommand', () => {
     expect(await w.run(msg({ threadId: 'th-item-1', bodyText: 'APPROVE' }))).toMatchObject({ applied: false, reason: 'not_yet_available' });
     expect(await w.run(msg({ threadId: 'th-item-1', bodyText: 'REVISE: make it about the gate' }))).toMatchObject({ applied: false, reason: 'not_yet_available' });
     expect(w.send.mock.calls.at(-1)?.[0].text).toMatch(/not available yet/i);
+  });
+});
+
+/** Seller acceptance follow-up (2026-10-09): what production did on October 9, and what it does now. */
+describe('seller acceptance follow-up: START holds research, a refreshed plan retires approvals, DONE reads its note', () => {
+  const OCT9_NOTE = 'DONE: researching catalysts\n\n--\nCasey Larkin · Founding AE, YardFlow by FreightRoll\ncasey@freightroll.com';
+
+  it('B4: START walks past an item with nothing prepared and a research-shaped move, holds it for GAP (recorded once, subject the item) and hands the first assignable item; the answer names the held item in one line', async () => {
+    const db = ledgerDb({ accounts: ["Southern Glazer's", 'PepsiCo', 'Kroger'] }, NOW);
+    const c = db.client();
+    const made = await ensureCommitment(c, { accountName: 'Kroger', kind: 'deliverable', title: 'Send the dock comparison', source: { kind: 'capture', id: 'cap:3' } }, { actor: SELLER, now: NOW });
+    const base = day(made.ok ? made.commitment.commitmentId : '');
+    const sgws = { accountName: "Southern Glazer's", href: '/gap/accounts/southern-glazers', lane: 'follow_up', stateKind: 'follow_up', state: 'Reminder: Follow up with Diego Fonseca when they are back', why: 'Out of office, May 26', person: { name: 'Diego Fonseca', title: null }, next: null, blocker: null, index: 0, source: 'pursuit', tier: 'follow_up' } as WorkDay['cards'][number];
+    const plan = await planDay(c, { now: NOW, load: async () => ({ ...base, cards: [sgws, ...base.cards] }) }, 'test');
+    expect(plan.items.map((i) => i.accountName)).toEqual(["Southern Glazer's", 'PepsiCo', 'Kroger']);
+    await c.gapAuditEvent.create({ data: { kind: BRIEFING_SENT, actor: 'test', subject_type: 'work_day', subject_id: '2026-10-08', payload: { to: SELLER, gmailThreadId: 'th-brief', dayToken: 'daytok', items: 3 } } });
+    const send = vi.fn<(p: GmailSendPayload) => Promise<{ provider: 'gmail'; id: string | null; threadId: string | null }>>(async () => ({ provider: 'gmail', id: 'g', threadId: 'th-new' }));
+    const askContext = vi.fn(async (_p: unknown, accountName: string): Promise<AskContext | null> => (accountName.startsWith('Southern') ? { accountName, state: { state: 'follow_up', stateLine: 'They were out of office in May.', blocker: null, next: 'Research the catalysts before reaching Diego.', coldTouchAllowed: false }, people: [], setAside: null, story: [], opening: null, otherStories: [], buyerSaid: [] } : null));
+    const deps = { send, askContext, pack: vi.fn(async () => null) };
+    const ctx = await loadCommandContext(c, SETTINGS, NOW);
+    const start = await applyCommand(db.client(), { m: msg({ threadId: 'th-brief', bodyText: 'START' }), ctx, now: NOW, settings: SETTINGS, sender: SENDER, baseUrl: 'https://app.example', actionSecret: null, actor: 'cron' }, deps);
+    expect(start).toMatchObject({ applied: true, effect: 'assignment_sent', itemKey: plan.items[1].key });
+    expect(send.mock.calls[0][0].subject, 'the assignment is PepsiCo, item 2').toMatch(/^GAP 2 of 3, PepsiCo/);
+    expect(send.mock.calls[1][0].threadId, 'the answer goes to the briefing thread').toBe('th-brief');
+    expect(send.mock.calls[1][0].text).toContain("Held for GAP research: Southern Glazer's (nothing supported to send yet).");
+    const holds = db.store.gapAuditEvent.filter((e) => e.kind === COMMAND_APPLIED && e.payload.effect === ITEM_HELD_FOR_RESEARCH);
+    expect(holds).toHaveLength(1);
+    expect(holds[0]).toMatchObject({ subject_type: 'work_item', subject_id: plan.items[0].key, payload: { reason: 'research_move' } });
+    expect(db.store.gapAuditEvent.filter((e) => e.kind === ASSIGNMENT_SENT).map((e) => e.subject_id), "no assignment for Southern Glazer's").toEqual([plan.items[1].key]);
+    const applied = db.store.gapAuditEvent.find((e) => e.kind === COMMAND_APPLIED && e.payload.effect === 'assignment_sent');
+    expect(applied?.payload.held).toEqual([plan.items[0].key]);
+    // NEXT: the hold is not recorded again; Kroger goes out; the held line is still said.
+    const next = await applyCommand(db.client(), { m: msg({ threadId: 'th-brief', bodyText: 'NEXT' }), ctx, now: NOW, settings: SETTINGS, sender: SENDER, baseUrl: 'https://app.example', actionSecret: null, actor: 'cron' }, deps);
+    expect(next).toMatchObject({ applied: true, effect: 'assignment_sent', itemKey: plan.items[2].key });
+    expect(db.store.gapAuditEvent.filter((e) => e.kind === COMMAND_APPLIED && e.payload.effect === ITEM_HELD_FOR_RESEARCH), 'held once').toHaveLength(1);
+    expect(send.mock.calls[3][0].text).toContain("Held for GAP research: Southern Glazer's");
+  });
+
+  it('B5: after a refresh retires an item, APPROVE and REVISE on it are refused item_retired with the time of the refresh; SKIP still acts on the object; an item kept by the refresh keeps its token and its APPROVE', async () => {
+    const w = await world();
+    // The day changed: PepsiCo is no longer on it (a first touch went out by hand), Kroger's obligation stays.
+    w.db.setClock(new Date('2026-10-08T15:00:00Z'));
+    const refreshed = await planDay(w.c, { now: new Date('2026-10-08T15:00:00Z'), load: async () => ({ ...day(w.commitmentId), cards: day(w.commitmentId).cards.slice(1) }), refresh: true }, 'test');
+    expect(refreshed.revision).toBe(1);
+    expect(refreshed.items.map((i) => i.key)).toEqual([w.plan.items[1].key]);
+    expect(refreshed.items[0].token, 'the kept item keeps its token').toBe(w.plan.items[1].token);
+    expect(w.db.store.gapAuditEvent.filter((e) => e.kind === DAY_PLANNED)).toHaveLength(2);
+    const onApprove = vi.fn(async () => ({ ok: true, text: 'drafted', effect: 'gmail_drafted' }));
+    const onRevise = vi.fn(async () => ({ ok: true, text: 'queued', effect: 'revision_queued' }));
+    const deps = { ...w.deps, onApprove, onRevise };
+    const run = (threadId: string, bodyText: string) => applyCommand(w.db.client(), { m: msg({ threadId, bodyText }), ctx: w.ctx, now: new Date('2026-10-08T15:10:00Z'), settings: SETTINGS, sender: SENDER, baseUrl: 'https://app.example', actionSecret: null, actor: 'cron' }, deps);
+    const approve = await run('th-item-0', 'APPROVE');
+    expect(approve).toMatchObject({ applied: false, reason: 'item_retired', outcome: 'refused', source: { accountName: 'PepsiCo' } });
+    expect(onApprove, 'the approval never executes').not.toHaveBeenCalled();
+    expect(w.send.mock.calls[0][0].text).toBe('The plan was refreshed at 11:00 AM and this item is no longer on it. Reply NEXT for the current one.');
+    expect(w.db.store.gapAuditEvent.filter((e) => e.kind === COMMAND_REFUSED && e.payload.reason === 'item_retired')).toHaveLength(1);
+    const revise = await run('th-item-0', 'REVISE: shorter');
+    expect(revise).toMatchObject({ applied: false, reason: 'item_retired' });
+    expect(onRevise).not.toHaveBeenCalled();
+    // SKIP acts on the account outcome although the item is off the plan.
+    const skip = await run('th-item-0', 'SKIP');
+    expect(skip).toMatchObject({ applied: true, effect: 'account_skipped' });
+    expect((await loadWorkOutcomes(w.c, ['PepsiCo'], NOW)).get('PepsiCo')?.kind).toBe('skipped');
+    // The kept item: APPROVE reaches the effect (the token is on the newest revision).
+    const kept = await run('th-item-1', 'APPROVE');
+    expect(kept).toMatchObject({ applied: true, effect: 'gmail_drafted' });
+    expect(onApprove).toHaveBeenCalledTimes(1);
+  });
+
+  it('B6: the October 9 note ("DONE: researching catalysts" with the signature) is progress: recorded progress_noted, the commitment stays open, the seller is told; a later DONE that says what happened still completes it', async () => {
+    const w = await world();
+    const r = await w.run(msg({ threadId: 'th-item-1', bodyText: OCT9_NOTE }));
+    expect(r).toMatchObject({ applied: true, command: 'done', effect: 'progress_noted', basis: 'self_reported', itemKey: w.plan.items[1].key });
+    expect((await loadCommitment(w.c, w.commitmentId))?.status, 'the commitment is not done').not.toBe('done');
+    const noted = w.db.store.gapAuditEvent.filter((e) => e.kind === COMMAND_APPLIED && e.payload.effect === 'progress_noted');
+    expect(noted).toHaveLength(1);
+    expect(noted[0].payload).toMatchObject({ command: 'done', note: 'researching catalysts', cue: 'researching', basis: 'self_reported', commitmentId: w.commitmentId });
+    expect(w.send.mock.calls[0][0].text).toBe('Recorded as in progress, not done: "researching catalysts". The item stays open. When it has happened, reply DONE: what happened; to set it aside, SKIP or DEFER.');
+    // The real DONE later: not refused already_applied, the commitment is done with the words as the proof.
+    const done = await w.run(msg({ threadId: 'th-item-1', bodyText: 'DONE: called Joey, he wants the comparison Friday' }));
+    expect(done).toMatchObject({ applied: true, effect: 'commitment_done' });
+    const c = await loadCommitment(w.c, w.commitmentId);
+    expect(c?.status).toBe('done');
+    expect(c?.proof).toMatchObject({ kind: 'seller', note: 'called Joey, he wants the comparison Friday' });
+    // An account item: "will call tomorrow" is progress and logs no outcome; "called Karen" logs one.
+    const w2 = await world();
+    expect(await w2.run(msg({ threadId: 'th-item-0', bodyText: 'DONE: will call Karen tomorrow' }))).toMatchObject({ applied: true, effect: 'progress_noted' });
+    expect((await loadWorkOutcomes(w2.c, ['PepsiCo'], NOW)).get('PepsiCo')).toBeUndefined();
+    expect(await w2.run(msg({ threadId: 'th-item-0', bodyText: 'DONE: called Karen, she asked for the deck' }))).toMatchObject({ applied: true, effect: 'account_logged' });
+    expect((await loadWorkOutcomes(w2.c, ['PepsiCo'], NOW)).get('PepsiCo')?.kind).toBe('logged');
   });
 });

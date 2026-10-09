@@ -17,15 +17,22 @@
  *   - APPROVE and REVISE run through `deps.onApprove` / `deps.onRevise` when wired (X11, X09); absent, they are
  *     refused `not_yet_available` and the seller is told
  *   - nothing here sends to a buyer, drafts, enrolls or writes HubSpot
+ *   - seller acceptance follow-up (2026-10-09): START and NEXT walk the NEWEST revision of the plan and hand the
+ *     seller only an assignable item (work/assignment.ts nextAssignableItem); an item held for GAP research is named
+ *     in the answer, one line each. APPROVE and REVISE bound to an item whose key is off the newest revision are
+ *     refused `item_retired` (the plan was refreshed; reply NEXT); SKIP, DEFER and DONE still act (they act on the
+ *     object). DONE's note is READ first (work/done-note.ts): a note that says what the seller is doing or will do is
+ *     recorded `progress_noted` and changes no commitment or outcome, and it never counts as an applied DONE
  */
 import type { GmailSender, GmailSendPayload } from '@/lib/email/gmail-sender';
 import type { MailboxMessage } from '@/lib/email/gmail-inbox';
-import { ASSIGNMENT_SENT, ITEM_SUBJECT_TYPE, loadAssignments, nextUnassignedItem, sendAssignment, startDay, type AssignmentDeps } from '../work/assignment';
+import { ASSIGNMENT_SENT, ITEM_SUBJECT_TYPE, loadAssignments, nextAssignableItem, sendAssignment, startDay, type AssignmentDeps } from '../work/assignment';
 import { BRIEFING_SENT } from '../work/briefing-send';
 import { loadCommitment, transitionCommitment } from '../work/commitments';
 import { nyDayAt, parseDuePhrase } from '../work/dates';
+import { progressLine, readDoneNote } from '../work/done-note';
 import { recordWorkOutcome } from '../work/outcome';
-import { loadDayPlan, type PlanItem } from '../work/plan';
+import { loadDayPlan, loadDayPlanRevisions, type DayPlan, type PlanItem } from '../work/plan';
 import type { SellerSettings } from '../work/settings';
 import { authenticateCommand, commandTextOf, matchCommandTarget, parseCommand, type AssignmentRef, type BriefingRef, type CommandContext, type ParsedCommand } from './commands';
 import type { MailboxVerdict } from './gap-mailbox';
@@ -121,6 +128,8 @@ const NEXT_PATH: Record<string, string> = {
   account_snoozed: 'It returns on that day. Reply NEXT for the next item.',
   commitment_done: 'Reply NEXT for the next item.',
   account_logged: 'Reply NEXT for the next item.',
+  progress_noted: 'The item stays open. Reply DONE: what happened when it has, or NEXT for the next item.',
+  item_retired: 'Reply NEXT for the current item.',
   gmail_drafted: 'Send it from GAP (CONFIRM + SEND) or from Gmail; reply NEXT for the next item.',
   already_drafted: 'Send it from GAP (CONFIRM + SEND) or from Gmail; reply NEXT for the next item.',
   revision_queued: 'The revised email comes back as a new email on this item.',
@@ -171,9 +180,8 @@ async function recordRefused(prisma: PrismaLike, input: ApplyInput, subject: { t
   await prisma.gapAuditEvent.create({ data: { kind: COMMAND_REFUSED, actor: input.actor, subject_type: subject.type, subject_id: subject.id, payload: { gmailMessageId: input.m.id, from: input.m.fromEmail.toLowerCase(), at: input.now.toISOString(), ...payload } } });
 }
 
-async function refuse(prisma: PrismaLike, input: ApplyInput, deps: ApplyDeps, subject: { type: string; id: string }, command: ParsedCommand['kind'], reason: string, extra: Record<string, unknown> = {}, source: ActionSource | null = null): Promise<ApplyResult> {
+async function refuse(prisma: PrismaLike, input: ApplyInput, deps: ApplyDeps, subject: { type: string; id: string }, command: ParsedCommand['kind'], reason: string, extra: Record<string, unknown> = {}, source: ActionSource | null = null, text: string | undefined = reasonText[reason]): Promise<ApplyResult> {
   await recordRefused(prisma, input, subject, { command, reason, ...extra });
-  const text = reasonText[reason];
   if (text) await answer(input, deps, text);
   return { applied: false, command, reason, ...(typeof extra.currentRevision === 'number' ? { currentRevision: extra.currentRevision } : {}), outcome: 'refused', source, next: nextPath(reason) };
 }
@@ -201,12 +209,24 @@ async function failed(prisma: PrismaLike, input: ApplyInput, deps: ApplyDeps, su
   return { applied: false, command, reason: 'handler_failed', outcome: 'failed', source, next: nextPath('handler_failed') };
 }
 
+/** Whether `command` was applied on the item before. A progress note (DONE read as what the seller is doing) is never an applied DONE. */
 async function appliedBefore(prisma: PrismaLike, itemKey: string, command: string): Promise<boolean> {
-  const row = await prisma.gapAuditEvent.findFirst({ where: { kind: COMMAND_APPLIED, subject_type: ITEM_SUBJECT_TYPE, subject_id: itemKey, payload: { path: ['command'], equals: command } } }).catch(() => null);
-  if (row) return true;
-  // The fixture and older Prisma versions: fall back to a scan of the item's applied rows.
   const rows: Array<{ payload: Record<string, unknown> | null }> = await prisma.gapAuditEvent.findMany({ where: { kind: COMMAND_APPLIED, subject_type: ITEM_SUBJECT_TYPE, subject_id: itemKey } });
-  return rows.some((r) => (r.payload ?? {}).command === command);
+  return rows.some((r) => (r.payload ?? {}).command === command && (r.payload ?? {}).effect !== 'progress_noted');
+}
+
+const timeNy = (iso: string) => new Date(iso).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/New_York' });
+
+/** The item a reply is bound to, found in any revision of its day, and whether its key is off the NEWEST revision. */
+async function boundItem(prisma: PrismaLike, ref: AssignmentRef): Promise<{ item: PlanItem; newest: DayPlan; retired: boolean } | null> {
+  const revisions = await loadDayPlanRevisions(prisma, ref.day).catch(() => [] as DayPlan[]);
+  const newest = revisions[0] ?? null;
+  if (!newest) return null;
+  for (const p of revisions) {
+    const item = p.items.find((i) => i.token === ref.itemToken);
+    if (item) return { item, newest, retired: !newest.items.some((i) => i.key === item.key) };
+  }
+  return null;
 }
 
 async function helpRecently(prisma: PrismaLike, subject: { type: string; id: string }, now: Date): Promise<boolean> {
@@ -215,16 +235,22 @@ async function helpRecently(prisma: PrismaLike, subject: { type: string; id: str
 }
 
 async function sendNext(prisma: PrismaLike, input: ApplyInput, deps: ApplyDeps, day: string, subject: { type: string; id: string }, command: ParsedCommand['kind']): Promise<ApplyResult> {
+  // The newest revision of the day; the walk skips what was assigned in any revision, what was settled, and what is
+  // held for GAP research (recorded as it is found; the seller is told one line each).
   const plan = await loadDayPlan(prisma, day);
-  const item = plan ? await nextUnassignedItem(prisma, plan) : null;
+  const walk = plan ? await nextAssignableItem(prisma, plan, { assign: { input: { baseUrl: input.baseUrl, actionSecret: input.actionSecret, commandsEnabled: true, now: input.now }, deps, actor: input.actor } }) : { item: null, built: null, held: [] };
+  const heldLines = walk.held.map((h) => `Held for GAP research: ${h.item.accountName} (${h.line}).`);
+  const heldKeys = walk.held.map((h) => h.item.key);
+  const item = walk.item;
   if (!plan || !item) {
-    await recordApplied(prisma, input, subject, { command, effect: 'nothing_left' });
-    await answer(input, deps, 'Nothing left on today\'s list has gone unassigned. Open Work in GAP for what is waiting and parked.');
+    await recordApplied(prisma, input, subject, { command, effect: 'nothing_left', held: heldKeys });
+    await answer(input, deps, ['Nothing left on today\'s list has gone unassigned. Open Work in GAP for what is waiting and parked.', ...heldLines].join('\n'));
     return { applied: true, command, effect: 'nothing_left', outcome: 'accepted', source: null, next: nextPath('nothing_left') };
   }
   if (!input.settings.briefingTo) return refuse(prisma, input, deps, subject, command, 'no_briefing_address');
-  const r = await sendAssignment(prisma, { plan, item, revision: 0, to: input.settings.briefingTo, sender: input.sender, baseUrl: input.baseUrl, actionSecret: input.actionSecret, commandsEnabled: true, now: input.now, actor: input.actor }, deps);
-  await recordApplied(prisma, input, subject, { command, effect: 'assignment_sent', itemKey: item.key, sent: r.sent });
+  const r = await sendAssignment(prisma, { plan, item, revision: 0, to: input.settings.briefingTo, sender: input.sender, baseUrl: input.baseUrl, actionSecret: input.actionSecret, commandsEnabled: true, now: input.now, actor: input.actor, built: walk.built }, deps);
+  await recordApplied(prisma, input, subject, { command, effect: 'assignment_sent', itemKey: item.key, sent: r.sent, held: heldKeys });
+  if (heldLines.length) await answer(input, deps, [`Sent item ${item.rank + 1}, ${item.accountName}: ${item.title}, as its own email.`, ...heldLines].join('\n'));
   return { applied: true, command, effect: 'assignment_sent', itemKey: item.key, outcome: 'accepted', source: sourceOf(item), next: nextPath('assignment_sent') };
 }
 
@@ -259,12 +285,16 @@ export async function applyCommand(prisma: PrismaLike, input: ApplyInput, deps: 
   // An assignment thread: the item, its latest revision, and the once-only rule.
   const ref = target;
   const subject = { type: ITEM_SUBJECT_TYPE, id: ref.itemKey };
-  const plan = await loadDayPlan(prisma, ref.day).catch(() => null);
-  const item = plan?.items.find((i) => i.token === ref.itemToken) ?? null;
-  if (!item) return refuse(prisma, input, deps, subject, command.kind, 'item_not_found');
+  const bound = await boundItem(prisma, ref);
+  if (!bound) return refuse(prisma, input, deps, subject, command.kind, 'item_not_found');
+  const { item, newest, retired } = bound;
   const source = sourceOf(item);
   const latest = Math.max(0, ...(await loadAssignments(prisma, ref.itemKey).catch(() => [])).map((a) => a.revision));
   if (ref.revision < latest) return refuse(prisma, input, deps, subject, command.kind, 'stale_revision', { currentRevision: latest, revision: ref.revision }, source);
+  // An approval or a revision on an item the refreshed plan no longer holds never executes; SKIP, DEFER and DONE act on the object and still do.
+  if (retired && (command.kind === 'approve' || command.kind === 'revise')) {
+    return refuse(prisma, input, deps, subject, command.kind, 'item_retired', { revision: ref.revision, planRevision: newest.revision ?? 0, refreshedAt: newest.plannedAt }, source, `The plan was refreshed at ${timeNy(newest.plannedAt)} and this item is no longer on it. Reply NEXT for the current one.`);
+  }
 
   try {
     switch (command.kind) {
@@ -381,18 +411,26 @@ async function act(prisma: PrismaLike, input: ApplyInput, deps: ApplyDeps, item:
     return ok('account_snoozed', { until: parsed.day });
   }
 
-  // done
-  if (!command.note) return refuse(prisma, input, deps, subject, 'done', 'note_required', {}, source);
+  // done: the note is READ before it is recorded (work/done-note.ts). What happened completes; what the seller is doing
+  // or will do is progress, recorded as such, and changes no commitment or outcome ("DONE: researching catalysts").
+  const reading = readDoneNote(command.note);
+  if (reading.kind === 'empty') return refuse(prisma, input, deps, subject, 'done', 'note_required', {}, source);
+  if (reading.kind === 'progress') {
+    await recordApplied(prisma, input, subject, { command: 'done', revision: ref.revision, effect: 'progress_noted', note: reading.note, cue: reading.cue, basis: 'self_reported', ...(commitment ? { commitmentId: commitment.commitmentId } : {}) });
+    await answer(input, deps, progressLine(reading));
+    return ok('progress_noted', { basis: 'self_reported' });
+  }
+  const note = reading.note;
   if (commitment) {
-    const t = await transitionCommitment(prisma, { commitmentId: commitment.commitmentId, to: 'done', proof: { kind: 'seller', note: command.note }, actor, now: input.now });
+    const t = await transitionCommitment(prisma, { commitmentId: commitment.commitmentId, to: 'done', proof: { kind: 'seller', note }, actor, now: input.now });
     if (!t.ok) return refuse(prisma, input, deps, subject, 'done', `commitment_${t.reason}`, {}, source);
-    await recordApplied(prisma, input, subject, { command: 'done', revision: ref.revision, effect: 'commitment_done', commitmentId: commitment.commitmentId, note: command.note, basis: 'self_reported' });
-    await answer(input, deps, `Done, by your word: ${item.title} at ${item.accountName}. Recorded: "${command.note}". Reply NEXT for the next item.`);
+    await recordApplied(prisma, input, subject, { command: 'done', revision: ref.revision, effect: 'commitment_done', commitmentId: commitment.commitmentId, note, basis: 'self_reported' });
+    await answer(input, deps, `Done, by your word: ${item.title} at ${item.accountName}. Recorded: "${note}". Reply NEXT for the next item.`);
     return ok('commitment_done', { basis: 'self_reported' });
   }
-  const o = await recordWorkOutcome(prisma, { accountName: item.accountName, kind: 'logged', reason: command.note.slice(0, 240), actor, now: input.now });
+  const o = await recordWorkOutcome(prisma, { accountName: item.accountName, kind: 'logged', reason: note.slice(0, 240), actor, now: input.now });
   if (!o.ok) return refuse(prisma, input, deps, subject, 'done', `outcome_${o.reason}`, {}, source);
-  await recordApplied(prisma, input, subject, { command: 'done', revision: ref.revision, effect: 'account_logged', note: command.note, basis: 'self_reported' });
-  await answer(input, deps, `Logged, by your word: ${item.accountName}. Recorded: "${command.note}". GAP counts what it can prove separately. Reply NEXT for the next item.`);
+  await recordApplied(prisma, input, subject, { command: 'done', revision: ref.revision, effect: 'account_logged', note, basis: 'self_reported' });
+  await answer(input, deps, `Logged, by your word: ${item.accountName}. Recorded: "${note}". GAP counts what it can prove separately. Reply NEXT for the next item.`);
   return ok('account_logged', { basis: 'self_reported' });
 }

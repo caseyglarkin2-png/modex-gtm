@@ -58,6 +58,8 @@ export async function GET(request: Request) {
   try {
     const settings = await loadSellerSettings(prisma);
     // X22: an operator's explicit resend (the secret is already checked): sends again now, whatever the hour or the day's row.
+    // Seller acceptance follow-up (2026-10-09): the resend also REFRESHES the plan (a new revision when the day changed
+    // materially; "Unchanged since the 7:05 AM plan" otherwise). The scheduled tick never refreshes: the first claim wins.
     const resend = new URL(request.url).searchParams.get('resend') === '1';
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL?.trim().replace(/\/$/, '') || 'https://modex-gtm.vercel.app';
     const result = await sendMorningBriefing(

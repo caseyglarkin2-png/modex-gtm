@@ -51,7 +51,7 @@ export interface BriefingSendInput {
   /** The one day builder's day (work/load-day.ts) with the ready lane's decision ids, read only when no plan exists yet. */
   load: () => Promise<PlanLoad>;
   actor?: string;
-  /** X22: an operator's explicit "send it again now" (the cron's `?resend=1` with the secret): past the hour, past already_sent, no day claim; the row says resend. Never the schedule's own path. */
+  /** X22: an operator's explicit "send it again now" (the cron's `?resend=1` with the secret): past the hour, past already_sent, no day claim; the row says resend and the revision. It REFRESHES the plan (work/plan.ts). Never the schedule's own path. */
   resend?: boolean;
 }
 
@@ -149,7 +149,9 @@ export async function sendMorningBriefing(prisma: PrismaLike, input: BriefingSen
   if (!input.resend && !(await claim(prisma, day, { claimedAt: input.now.toISOString() }))) return { skipped: true, reason: 'already_sent', day };
 
   try {
-    const plan: DayPlan = await planDay(prisma, { now: input.now, load: input.load }, actor);
+    // Seller acceptance follow-up (2026-10-09): an explicit resend REFRESHES the plan (a new revision when the day
+    // changed materially, the stored plan `unchanged` otherwise); the schedule's own path never does (first claim wins).
+    const plan: DayPlan = await planDay(prisma, { now: input.now, load: input.load, refresh: input.resend === true }, actor);
     const dayToken = randomBytes(12).toString('hex');
     // I04: the intelligence, read soft (a failure never withholds the briefing).
     const intel: BriefingIntel | null = await (deps.intel ?? ((p: PrismaLike, n: Date) => defaultIntel(p, n, deps)))(prisma, input.now).catch(() => null);
@@ -165,7 +167,7 @@ export async function sendMorningBriefing(prisma: PrismaLike, input: BriefingSen
       headers: { 'Auto-Submitted': 'auto-generated', 'X-GAP-Day': day },
     });
     // A fresh Gmail message's thread id is its own id; a provider that answers none (the harness sink) is read the same way.
-    await audit(prisma, BRIEFING_SENT, actor, day, { to, gmailMessageId: res.id, resend: input.resend === true, gmailThreadId: res.threadId ?? res.id, dayToken, items: plan.items.length, recoveredFromSent: false });
+    await audit(prisma, BRIEFING_SENT, actor, day, { to, gmailMessageId: res.id, resend: input.resend === true, revision: plan.revision ?? 0, gmailThreadId: res.threadId ?? res.id, dayToken, items: plan.items.length, recoveredFromSent: false });
     return { sent: true, day, to, gmailMessageId: res.id, gmailThreadId: res.threadId ?? res.id, items: plan.items.length, recoveredFromSent: false };
   } catch (err) {
     await audit(prisma, BRIEFING_FAILED, actor, day, { to, attempt: attempts + 1, error: (err instanceof Error ? err.message : String(err)).slice(0, 500) }).catch(() => undefined);
