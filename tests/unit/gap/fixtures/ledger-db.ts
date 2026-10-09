@@ -86,6 +86,8 @@ export interface LedgerSeed {
   signals?: Row[];
   triggers?: Row[];
   threads?: Row[];
+  /** Stream A (2026-10-09): gap_knowledge_notes rows (the synced vault). */
+  knowledgeNotes?: Row[];
 }
 
 /** X05b: SystemConfig's `key` is its primary key: a second create for the same key is Prisma's P2002 (the daily claims rely on it); delete removes by key. */
@@ -130,6 +132,7 @@ export function ledgerDb(seed: LedgerSeed = {}, start = new Date('2026-10-06T14:
     gapSignal: [...(seed.signals ?? [])],
     pounceTrigger: [...(seed.triggers ?? [])],
     emailThread: [...(seed.threads ?? [])],
+    gapKnowledgeNote: [...(seed.knowledgeNotes ?? [])],
   };
   let t = start.getTime();
   const clock = () => new Date((t += 1000));
@@ -154,6 +157,7 @@ export function ledgerDb(seed: LedgerSeed = {}, start = new Date('2026-10-06T14:
     gapSignal: table(store.gapSignal, clock, 'sig'),
     pounceTrigger: table(store.pounceTrigger, clock, 'trg'),
     emailThread: table(store.emailThread, clock, 'th'),
+    gapKnowledgeNote: table(store.gapKnowledgeNote, clock, 'kn'),
   });
   return { store, client, setClock: (d: Date) => (t = d.getTime()) };
 }

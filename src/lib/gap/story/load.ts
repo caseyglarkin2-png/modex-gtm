@@ -4,8 +4,10 @@
  *
  *   clawd outreach history   GET {CLAWD_CONTROL_PLANE_URL}/api/outreach/history?domain=<d>   the swarm's sends by
  *                            address (the canonical dedup source; prod Postgres, never the local file)
- *   the vault's account note the vault file when GAP_VAULT_DIR names a local vault (Casey's machine), else clawd's
- *                            copy of the vault wedge in /api/yardflow/intel/account reasoning_notes (production).
+ *   the vault's account note the vault file when GAP_VAULT_DIR names a local vault (Casey's machine), else the synced
+ *                            copy in gap_knowledge_notes (stream A, 2026-10-09: knowledge/vault-table-adapter.ts,
+ *                            filled by scripts/gap/vault-push.ts and the cron gap-vault-sync), else clawd's copy of
+ *                            the vault wedge in /api/yardflow/intel/account reasoning_notes.
  *                            Since C14-C16 (2026-10-08) both go through context/retrieval.ts: the whole account's
  *                            knowledge as attributed claims (loadAccountKnowledge); the one-paragraph note the
  *                            story shows is picked from those claims.
@@ -15,6 +17,7 @@
  */
 import type { ClawdOutreach, ClawdSend } from './touches';
 import { clawdClaims, currentClawdClaim, retrieveAccountKnowledge, type AccountKnowledge, type ClawdAdapter, type KnowledgeAdapters, type VaultAdapter } from '../context/retrieval';
+import { vaultTableAdapter } from '../knowledge/vault-table-adapter';
 
 export const STORY_READER_TIMEOUT_MS = 4_000;
 
@@ -23,6 +26,13 @@ export interface StoryReaderDeps {
   fetchImpl?: typeof fetch;
   /** Reads a local file's text, or null when it does not exist (tests pass a stub; the loader uses node:fs). */
   readFile?: (path: string) => Promise<string | null>;
+  /**
+   * Stream A (2026-10-09): the client the table-backed vault (gap_knowledge_notes) is read through when no local
+   * directory is set. Given: used. null: no table. Undefined with the real process.env: the app's prisma, imported on
+   * first read (production). Undefined with a stubbed env: no table (a test says what it configures).
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  prisma?: any;
 }
 
 export interface VaultNote {
@@ -79,7 +89,7 @@ export function knowledgeAdapters(deps: StoryReaderDeps = {}): KnowledgeAdapters
   const env = deps.env ?? process.env;
   const dir = env.GAP_VAULT_DIR?.trim();
   const read = deps.readFile ?? defaultReadFile;
-  const vault: VaultAdapter | null = dir ? { readFile: (rel) => read(`${dir.replace(/[\\/]+$/, '')}/${rel}`) } : null;
+  const vault: VaultAdapter | null = dir ? { readFile: (rel) => read(`${dir.replace(/[\\/]+$/, '')}/${rel}`) } : tableVaultAdapter(deps);
   const cfg = clawdBase(env);
   const clawd: ClawdAdapter | null = cfg
     ? {
@@ -92,6 +102,20 @@ export function knowledgeAdapters(deps: StoryReaderDeps = {}): KnowledgeAdapters
       }
     : null;
   return { vault, clawd };
+}
+
+/**
+ * Stream A: the table-backed vault when no local directory is set. The local directory always wins (the dogfood box);
+ * production, which has no directory, reads gap_knowledge_notes through the app's prisma. A test that stubs env and
+ * passes no prisma gets no vault, as before; a test that passes prisma gets the table over it.
+ */
+function tableVaultAdapter(deps: StoryReaderDeps): VaultAdapter | null {
+  if (deps.prisma === null) return null;
+  if (deps.prisma !== undefined) return vaultTableAdapter(deps.prisma);
+  if (deps.env !== undefined && deps.env !== process.env) return null;
+  let lazy: Promise<VaultAdapter> | null = null;
+  const real = () => (lazy ??= import('@/lib/prisma').then((m) => vaultTableAdapter(m.prisma)));
+  return { readFile: async (rel) => (await real()).readFile(rel), status: async () => (await real()).status!() };
 }
 
 /** Everything the two private sources hold about one account, as attributed claims with coverage (C14-C16, C20). Never throws. */

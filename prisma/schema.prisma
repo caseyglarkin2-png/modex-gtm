@@ -2026,3 +2026,41 @@ model GapCompile {
   @@index([sequence_version_id])
   @@map("gap_compiles")
 }
+
+/// GAP OS knowledge (2026-10-09, stream A): one row per vault note (the private Obsidian vault
+/// caseyglarkin2-png/yardflow-gtm-vault), synced two ways into the same table and idempotent by
+/// (path, sha): scripts/gap/vault-push.ts from the local folder and the cron gap-vault-sync from
+/// the GitHub tree. The parser is src/lib/gap/knowledge/vault-note.ts; the adapter
+/// src/lib/gap/knowledge/vault-table-adapter.ts hands the text to context/retrieval.ts unchanged.
+/// `text` is the note body (the Fireflies verbatim is the ground truth; the summary is advisory).
+model GapKnowledgeNote {
+  id              String    @id @default(cuid())
+  /// The vault-relative path ("02_Accounts/Kenco Logistics.md"), unique
+  path            String    @unique
+  /// sha256 hex of the file text (the idempotency key with path)
+  sha             String
+  /// git's blob id of the same text (sha1 of the blob header plus the bytes) so the cron skips tree blobs it already holds
+  git_sha         String?
+  /// account | person | deal | meeting | raw | other (frontmatter type, else the folder)
+  kind            String
+  /// frontmatter company/account, matched to a GAP account name when identity can, else the raw value
+  account_name    String?
+  domain          String?
+  /// addresses from participants/attendees/body, lowercased
+  people          String[]  @default([])
+  /// date / captured / the filename's leading date
+  note_date       DateTime?
+  title           String
+  frontmatter     Json
+  text            String
+  /// fireflies | calendar-prep | librarian | null (frontmatter source)
+  source          String?
+  /// the repo commit time when known (cron), null for a local push
+  vault_pushed_at DateTime?
+  synced_at       DateTime  @default(now())
+
+  @@index([account_name])
+  @@index([kind])
+  @@index([note_date])
+  @@map("gap_knowledge_notes")
+}
