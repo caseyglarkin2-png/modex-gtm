@@ -54,7 +54,7 @@ describe('the one freshness rule', () => {
     const asSite = factCurrentness({ observed_at: new Date('2026-07-23T00:00:00Z'), type: 'site_expansion', evidence_text: TULSA }, NOW);
     const asNews = factCurrentness({ observed_at: new Date('2026-07-23T00:00:00Z'), type: 'news', evidence_text: TULSA }, NOW);
     expect([asSite.current, currentnessLine(asSite)]).toEqual([true, 'Current until Nov 19, 2026.']);
-    expect([asNews.current, currentnessLine(asNews)]).toEqual([false, 'This story is too old for a first touch: it was current until Sep 5, 2026.']);
+    expect([asNews.current, currentnessLine(asNews)]).toEqual([false, 'A historical observation: it was current until Sep 5, 2026. Cite it with its date.']);
   });
 });
 
