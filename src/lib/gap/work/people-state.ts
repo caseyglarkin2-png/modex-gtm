@@ -16,6 +16,7 @@
  */
 import type { ContextCommitment, Purpose } from '../context/commercial-context';
 import type { CalendarFacts } from '../context/thread-context';
+import { dayLabel, nyDay } from './dates';
 
 export interface StateEvent {
   id: string;
@@ -28,6 +29,11 @@ export interface StateEvent {
   purpose: Purpose | null;
   providerIds?: readonly string[];
   calendar?: CalendarFacts | null;
+  /**
+   * Seller acceptance A4 (2026-10-09): an out-of-office notice of theirs (purpose automated), with the return day it
+   * named when it named one. The reader that builds the timeline sets it; the notice text itself is not carried.
+   */
+  outOfOffice?: { returnDay: string | null } | null;
 }
 
 export interface PersonCommitment extends ContextCommitment {
@@ -44,6 +50,12 @@ export interface PersonState {
   quiet: { quiet: boolean; days: number | null; since: string | null; basis: string };
   nextMeetingAt: string | null;
   commitments: PersonCommitment[];
+  /**
+   * A4: their newest out-of-office notice, as availability: the day they said they would be back (null when the notice
+   * named none) and the basis in words. Descriptive only, never a gate and never an obligation (Casey, 2026-10-09: an
+   * expired out-of-office notice is availability information, not evidence of buying intent).
+   */
+  availability?: { returnedOn: string | null; basis: string };
 }
 
 export interface PeopleStateOptions {
@@ -104,6 +116,7 @@ export function peopleState(timeline: readonly StateEvent[], now: Date, opts: Pe
     let lastDraftAt: string | null = null;
     let lastMeaningfulInbound: string | null = null;
     let newestAnswerable: StateEvent | null = null;
+    let notice: StateEvent | null = null;
     for (const e of events) {
       const purpose = e.purpose ?? 'unknown';
       if (e.direction === 'outbound') {
@@ -111,6 +124,8 @@ export function peopleState(timeline: readonly StateEvent[], now: Date, opts: Pe
         else if (e.type !== 'calendar') lastOutboundAt = newest(lastOutboundAt, e.at);
         continue;
       }
+      // A4: an out-of-office notice is read for availability and nothing else (it is not them writing).
+      if (purpose === 'automated' && e.outOfOffice && (!notice || e.at > notice.at)) notice = e;
       if (e.type === 'calendar' || purpose === 'calendar' || purpose === 'automated') continue;
       lastInboundAt = newest(lastInboundAt, e.at);
       if (MEANINGFUL_INBOUND.has(purpose)) lastMeaningfulInbound = newest(lastMeaningfulInbound, e.at);
@@ -139,7 +154,16 @@ export function peopleState(timeline: readonly StateEvent[], now: Date, opts: Pe
     const ids = new Set(events.flatMap((e) => [e.id, ...(e.providerIds ?? [])]));
     const commitments = outstanding.filter((c) => (c.person ? lower(c.person) === email : ids.has(c.sourceId)));
 
-    out.set(email, { email, lastInboundAt, lastOutboundAt, lastDraftAt, answerOwed, quiet, nextMeetingAt, commitments });
+    let availability: PersonState['availability'];
+    if (notice) {
+      const returnedOn = notice.outOfOffice?.returnDay ?? null;
+      const wroteSince = lastMeaningfulInbound && lastMeaningfulInbound > notice.at ? `; they wrote since (${short(lastMeaningfulInbound)})` : '; no message from them since';
+      const today = nyDay(now);
+      const back = !returnedOn ? 'no return day named' : returnedOn === today ? 'back today' : returnedOn < today ? `back since ${dayLabel(returnedOn, now)}` : `out until ${dayLabel(returnedOn, now)}`;
+      availability = { returnedOn, basis: `their out-of-office notice of ${short(notice.at)}: ${back}${wroteSince}` };
+    }
+
+    out.set(email, { email, lastInboundAt, lastOutboundAt, lastDraftAt, answerOwed, quiet, nextMeetingAt, commitments, ...(availability ? { availability } : {}) });
   }
   return out;
 }

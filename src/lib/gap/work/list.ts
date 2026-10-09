@@ -6,11 +6,15 @@
  *   1 commitment   a buyer commitment due today (the seller promised a deliverable, the buyer asked for something)
  *   2 reply        an actionable reply (a person wrote back; a referral to decide on)
  *   3 meeting      a meeting within 24 hours (prepare it)
+ *   then the executable work, ranked by the EVIDENCE each card carries (seller acceptance A2, 2026-10-09, evidenceRank
+ *   below: an answer owed, open-deal context, something prepared, a prior reply, the seller's priority, deal hygiene,
+ *   a decision to review, a cold follow-up with no reply ever), not by the lane alone; the lanes themselves are
  *   4 deal         opportunity work: an open deal with a step due
  *   5 follow_up    a follow-up due (the interval passed with no reply; a reminder came back)
  *   6 ready        prepared prospecting (a first touch ready; a GAP draft to send or discard)
  *   7 review       a proposal to review (decide the angle)
- *   8 research     research (and a failed address)
+ *   8 research     research (and a failed address; and an account whose only news is a person back from an
+ *                  out-of-office notice, A1: availability, never an obligation)
  *   then the admin (an opt-out to record), the seller's own "not today" (skipped, logged elsewhere) and the holds (in a
  *   deal with nothing due, HubSpot unknown), never a cold action.
  *
@@ -155,6 +159,18 @@ export interface WorkCard {
   dealNextStep?: string | null;
   /** X17: the card's own move in words, when it is not its state (a deal's next step): the plan item's title. */
   move?: string;
+  /**
+   * Seller acceptance A1 (2026-10-09): a person's out-of-office notice whose return day has passed is availability
+   * information, never an obligation and never a priority: it rides on the account's card, said with its date.
+   */
+  availability?: { who: string; email: string | null; returnedDay: string; line: string };
+  /**
+   * Seller acceptance A3: this card was built from the account's top obligation alone (its state IS that obligation),
+   * so the plan carries the obligation's item and never a second item for the card's own move.
+   */
+  ownMoveIsObligation?: boolean;
+  /** Seller acceptance A2: the evidence that placed the card after the buyer-obligation tiers, in words. */
+  evidence?: { rank: number; why: string };
 }
 
 export interface WorkInput {
@@ -219,8 +235,12 @@ export interface WorkDay {
   waiting: WaitingItem[];
   /** Put away by the seller until a date (accounts and obligations). */
   snoozed: Array<{ key: string; accountName: string; line: string; until: string }>;
-  /** needsYou: the cards that need the seller; parked: the research, held and set-aside cards listed after them. */
-  counts: { needsYou: number; parked: number; obligationsDue: number; waiting: number; snoozed: number };
+  /**
+   * needsYou: the cards that need the seller; parked: the research, held and set-aside cards listed after them;
+   * availability (A1): the people back from an out-of-office notice, carried on their cards and never an obligation
+   * (optional in the type so a plan recorded before it still reads; workDay always sets it).
+   */
+  counts: { needsYou: number; parked: number; obligationsDue: number; waiting: number; snoozed: number; availability?: number };
 }
 
 const STATE_TEXT: Record<WorkStateKind, string> = {
@@ -398,6 +418,73 @@ export function foldsInto(c: Commitment, others: readonly Commitment[]): Commitm
   const person = obligationPersonKey(c);
   if (!person) return null;
   return live.find((o) => o.kind === 'follow_up' && o.accountName === c.accountName && (o.dealId ?? null) === (c.dealId ?? null) && obligationPersonKey(o) === person) ?? null;
+}
+
+/**
+ * Seller acceptance A1 (Casey, 2026-10-09: "An expired out-of-office notice is availability information, not evidence
+ * of buying intent or an automatic top priority"): the reminder GAP derives from a person's out-of-office notice
+ * (commitments.ts syncReturnRemindersFromReplies: kind reminder, source reply, basis "Out of office: ..."). Before its
+ * return day it is snoozed like any reminder. On or after that day it never becomes a due obligation, a follow-up tier
+ * item or a Waiting row: the day carries it as availability on the account's card, and an account with nothing else
+ * is parked under research until GAP has an angle. The row itself is untouched (nothing is lost).
+ */
+export function isAvailabilityReminder(c: Pick<Commitment, 'kind' | 'source' | 'basis'>): boolean {
+  return c.kind === 'reminder' && c.source.kind === 'reply' && /^out of office/i.test((c.basis ?? '').trim());
+}
+
+/** A2: the tiers ranked by evidence, after the buyer obligations (commitment, reply, meeting) and before the rest. */
+export const EVIDENCE_TIERS: ReadonlySet<WorkTier> = new Set<WorkTier>(['deal', 'follow_up', 'ready', 'review']);
+
+/**
+ * Seller acceptance A2 (2026-10-09): after the buyer obligations due (commitment, reply, meeting, in that order), the
+ * executable work ranks by the EVIDENCE the card already carries, not by its lane alone. The levels, strongest first,
+ * each read from the card and its obligations (no new source):
+ *
+ *   1  a buyer wrote and an answer is owed (card.answerOwed, a reply on the card)
+ *   2  open-deal context: a next step, a deal step due, or a passed close date with something to act on
+ *   3  something prepared and ready to send (a ready card, a prepared angle, a follow-up whose plan is prepared)
+ *   4  a prior reply from them at any time (a reply on the card, an obligation resting on their words, buyer activity)
+ *   5  the seller's standing priority on the account
+ *   5.5 deal hygiene alone (a passed close date, nothing prepared, no next step: I04 keeps it after new conversations)
+ *   6  a current signal or a decision to review
+ *   7  a follow-up on a cold touch with no reply ever (the lowest of the executable)
+ *
+ * The rank is the levels as a tuple (a present level outranks every absent one below it, and ties fall to the next
+ * level), so the order is total and deterministic; `why` names the evidence that placed the card, strongest first.
+ */
+export function evidenceRank(
+  card: Pick<WorkCard, 'answerOwed' | 'reply' | 'dealNextStep' | 'stalled' | 'stateKind' | 'priority' | 'tier'>,
+  obligations: readonly WorkObligation[],
+  ctx: { buyerActivityAt?: number | null } = {},
+): { rank: number; why: string } {
+  const theirWords = (o: WorkObligation) => !!o.basis && !/^out of office/i.test(o.basis.trim()) && /^[^"]{1,80}: "/.test(o.basis.trim());
+  const stalled = !!card.stalled?.length;
+  const stalledWhat = (card.stalled ?? []).some((s) => /close date/i.test(s)) ? 'close date passed' : (card.stalled ?? []).some((s) => /overdue|promised/i.test(s)) ? 'an obligation overdue' : 'no recent activity';
+  const dealStep = obligations.some((o) => o.tier === 'deal');
+  const preparedFollowUp = obligations.some((o) => o.kind === 'follow_up' && !!o.href && /^Prepare /.test(o.label ?? ''));
+  // Prepared means a thing to send exists (a ready first touch, a follow-up whose plan is prepared); the workspace's
+  // `preparation` flag is not read here: a deal or follow-up intent reports "ready" by construction (pursuit/actionable.ts).
+  const prepared = card.stateKind === 'ready' || preparedFollowUp;
+  const priorReply = !!card.reply || obligations.some(theirWords) || !!(ctx.buyerActivityAt && ctx.buyerActivityAt > 0);
+  const answerOwed = !!card.answerOwed || (!!card.reply && card.stateKind === 'replied');
+  const dealContext = !!card.dealNextStep || dealStep || (stalled && (prepared || priorReply));
+  const hygieneOnly = stalled && !dealContext;
+  const decide = card.stateKind === 'decide' || card.tier === 'review';
+  const coldFollowUp = (card.stateKind === 'follow_up' || card.tier === 'follow_up') && !priorReply;
+  const levels: Array<[boolean, string]> = [
+    [answerOwed, 'a buyer wrote and an answer is owed'],
+    [dealContext, card.dealNextStep ? 'open deal, next step set' : dealStep ? 'open deal, a step due' : `open deal, ${stalledWhat}`],
+    [prepared, card.stateKind === 'ready' ? 'a first touch prepared' : 'angle prepared'],
+    [priorReply, 'they have replied before'],
+    [!!card.priority, card.priority ? `you prioritized it (${card.priority.reason})` : ''],
+    [hygieneOnly, `deal hygiene only (${stalledWhat}, nothing prepared)`],
+    [decide, 'a decision to review'],
+    [coldFollowUp, 'a follow-up on a cold touch, no reply yet'],
+  ];
+  let rank = 0;
+  for (let k = 0; k < levels.length; k += 1) if (!levels[k][0]) rank += 2 ** (levels.length - 1 - k);
+  const why = levels.filter(([on]) => on).map(([, text]) => text).join('; ') || 'no evidence beyond its lane';
+  return { rank, why };
 }
 
 /** Where an obligation's work runs (the account page unless a better place exists). */
@@ -714,6 +801,8 @@ export function workDay(i: WorkInput): WorkDay {
   };
   const obligations = new Map<string, WorkObligation[]>();
   const snoozed: WorkDay['snoozed'] = [];
+  /** A1: the people back from an out-of-office notice, per account (never an obligation, never a Waiting row). */
+  const availability = new Map<string, NonNullable<WorkCard['availability']>[]>();
   const outcomeSnoozed = new Set([...(i.outcomes ?? []).values()].filter((o) => o.kind === 'snoozed').map((o) => o.accountName));
   // C28: every date read as an instant in New York (a date-only row never shifts through UTC).
   const commitments = (i.commitments ?? []).map(withInstantDates);
@@ -732,6 +821,18 @@ export function workDay(i: WorkInput): WorkDay {
     if (p.phase === 'snoozed') {
       // An account snooze is listed once, as the account (its reminder is the same thing).
       if (!(c.source.kind === 'snooze' && outcomeSnoozed.has(c.accountName))) snoozed.push({ key: c.commitmentId, accountName: c.accountName, line: `${c.title}: ${p.line}`, until: c.snoozeUntil ?? c.dueAt ?? '' });
+      continue;
+    }
+    // A1: an out-of-office reminder whose return day came (or whose person wrote first) is availability, not work: it
+    // never becomes a due obligation, a follow-up item or a Waiting row. The row stays open; the card says the date.
+    if (isAvailabilityReminder(c) && p.phase !== 'upcoming' && p.phase !== 'waiting') {
+      const returnedDay = p.dueDay ?? nyDay(c.snoozeUntil ?? c.updatedAt);
+      const who = c.person?.name?.trim() || c.person?.email || 'They';
+      const since = moved(c, c.updatedAt);
+      const back = returnedDay > nyDay(i.now) ? `${who} is out until ${dayLabel(returnedDay, i.now)}` : `${who} returned ${dayLabel(returnedDay, i.now)}`;
+      const list = availability.get(c.accountName) ?? [];
+      list.push({ who, email: c.person?.email ?? null, returnedDay, line: `${back} (their out-of-office notice); ${since ? `they wrote since: ${since.replace(/\.$/, '')}.` : 'no reply from them since.'}` });
+      availability.set(c.accountName, list);
       continue;
     }
     if (p.phase !== 'due') {
@@ -789,7 +890,25 @@ export function workDay(i: WorkInput): WorkDay {
     if (best.has(name)) continue;
     const top = [...list].sort((a, b) => TIER_RANK[a.tier] - TIER_RANK[b.tier])[0];
     const stateKind: WorkStateKind = top.tier === 'meeting' ? 'meeting' : top.tier === 'follow_up' || top.tier === 'later' ? 'follow_up' : 'committed';
-    best.set(name, { rank: 0, sortKey: [name], card: { accountName: name, lane: 'commitments', stateKind, state: `${top.kind === 'meeting' ? 'Meeting' : KIND_TEXT[top.kind]}: ${top.title}`, why: top.line, person: top.person?.name ? { name: top.person.name, title: null } : null, next: top.href && top.label ? { label: top.label, href: top.href } : null, blocker: null } });
+    // A3: the card's state IS its top obligation, so the plan carries that obligation's item and no second item for the card.
+    best.set(name, { rank: 0, sortKey: [name], card: { accountName: name, lane: 'commitments', stateKind, state: `${top.kind === 'meeting' ? 'Meeting' : KIND_TEXT[top.kind]}: ${top.title}`, why: top.line, person: top.person?.name ? { name: top.person.name, title: null } : null, next: top.href && top.label ? { label: top.label, href: top.href } : null, blocker: null, ownMoveIsObligation: true } });
+  }
+  // A1: availability rides on the account's card when the account has other work; an account with nothing else is
+  // PARKED under research (counted apart, never an executable item) until GAP has a supported angle.
+  for (const [name, list] of availability) {
+    const a = [...list].sort((x, y) => y.returnedDay.localeCompare(x.returnedDay))[0];
+    const have = best.get(name);
+    if (have) {
+      best.set(name, { ...have, card: { ...have.card, availability: a } });
+      continue;
+    }
+    const today = nyDay(i.now);
+    const when = a.returnedDay > today ? `Out until ${dayLabel(a.returnedDay, i.now)}` : a.returnedDay === today ? 'Back today' : `Back since ${dayLabel(a.returnedDay, i.now)}`;
+    best.set(name, {
+      rank: LANE_RANK.research,
+      sortKey: [a.returnedDay, name],
+      card: { accountName: name, lane: 'research', stateKind: 'research', state: `${when} (out-of-office notice); nothing prepared yet`, why: 'No supported angle yet: GAP researches it; it returns when there is one.', person: { name: a.who, title: null }, next: { label: 'Open the account', href: accountHref(name) }, blocker: null, availability: a },
+    });
   }
 
   // R14: the seller's recorded outcomes. A snoozed account leaves the list (unless a buyer obligation is due there:
@@ -827,10 +946,17 @@ export function workDay(i: WorkInput): WorkDay {
     const prio = i.priorities?.get(name) ?? null;
     const oldReplyDays = oldReply ? replyAgeDays : null;
     const hygiene = tier === 'deal' && !fromObligation && !r.card.dealNextStep;
-    return { r, tier, lane, list, dueMs, act, prio, oldReplyDays, hygiene };
+    // A2: the executable tiers rank by the evidence the card carries (its own fields, its obligations, the buyer activity
+    // already read), never by the lane alone.
+    const evidence = EVIDENCE_TIERS.has(tier) ? evidenceRank({ ...r.card, tier, priority: prio }, list, { buyerActivityAt: act }) : null;
+    return { r, tier, lane, list, dueMs, act, prio, oldReplyDays, hygiene, evidence };
   });
   const rankOf = (x: { tier: WorkTier; hygiene: boolean }) => (x.hygiene ? DEAL_HYGIENE_RANK : TIER_RANK[x.tier]);
-  ranked.sort((a, b) => Number(PARKED_TIERS.has(a.tier)) - Number(PARKED_TIERS.has(b.tier)) || rankOf(a) - rankOf(b) || a.dueMs - b.dueMs || b.act - a.act || Number(!a.prio) - Number(!b.prio) || a.r.rank - b.r.rank || cmpKeys(a.r.sortKey, b.r.sortKey) || a.r.card.accountName.localeCompare(b.r.card.accountName));
+  // The bands: the buyer obligations due (commitment, reply, meeting, in tier order), then the executable work by its
+  // evidence, then the admin, then the parked cards; inside a band the due time, the newest buyer activity, the priority.
+  const bandOf = (x: { tier: WorkTier }) => (PARKED_TIERS.has(x.tier) ? 3 : TIER_RANK[x.tier] <= TIER_RANK.meeting ? 0 : EVIDENCE_TIERS.has(x.tier) ? 1 : 2);
+  const withinBand = (x: { tier: WorkTier; hygiene: boolean; evidence: { rank: number } | null }) => (x.evidence ? x.evidence.rank : rankOf(x));
+  ranked.sort((a, b) => bandOf(a) - bandOf(b) || withinBand(a) - withinBand(b) || a.dueMs - b.dueMs || b.act - a.act || Number(!a.prio) - Number(!b.prio) || a.r.rank - b.r.rank || cmpKeys(a.r.sortKey, b.r.sortKey) || a.r.card.accountName.localeCompare(b.r.card.accountName));
   /** R44: Capture opened from this card: the account, the person who wrote, the deal, the conversation, the source. */
   const replyPersona = new Map(i.replies.filter((r) => r.personaId != null).map((r) => [`${r.accountName}|${r.contactEmail.toLowerCase()}`, r.personaId as number]));
   const replyContact = new Map(i.replies.filter((r) => r.hubspotContactId).map((r) => [`${r.accountName}|${r.contactEmail.toLowerCase()}`, String(r.hubspotContactId)]));
@@ -866,13 +992,15 @@ export function workDay(i: WorkInput): WorkDay {
     q.set('from', `work:${card.accountName}`);
     return { href: `/gap/capture?${q.toString()}`, label: 'Log a conversation' };
   };
-  const cards: WorkCard[] = ranked.map(({ r, tier, lane, list, dueMs, act, prio, oldReplyDays }, index) => {
+  const cards: WorkCard[] = ranked.map(({ r, tier, lane, list, dueMs, act, prio, oldReplyDays, evidence }, index) => {
     const top = list.find((o) => o.tier === tier);
     const phrase = (line: string) => line.replace(/\.$/, '').replace(/^\w/, (ch) => ch.toLowerCase());
     const bits = [top ? `${TIER_WHY[tier]}: ${top.title}${top.dueDay && top.kind !== 'meeting' ? ` (${phrase(top.line)})` : ''}` : tier === 'admin' && oldReplyDays !== null ? `An old reply to triage (${oldReplyDays} days): record what they said or dismiss it` : tier === 'deal' && r.card.dealNextStep ? `The deal's next step: ${r.card.dealNextStep.replace(/\.$/, '')}${r.card.stalled?.length ? ` (stalled: ${phrase(r.card.stalled[0])})` : ''}` : tier === 'deal' && r.card.stalled?.length ? `A stalled deal: ${phrase(r.card.stalled[0])}` : TIER_WHY[tier]];
     if (!top && dueMs < Number.MAX_SAFE_INTEGER && tier === 'reply') bits[0] = `${TIER_WHY.reply} ${day(new Date(dueMs).toISOString())}`;
     else if (act && tier !== 'reply') bits.push(`buyer activity ${day(new Date(act).toISOString())}`);
-    if (prio) bits.push(`you prioritized it (${prio.reason})`);
+    if (prio && !evidence) bits.push(`you prioritized it (${prio.reason})`);
+    // A1: the availability is said on the card, after what placed it, never as the reason it ranks.
+    if (r.card.availability) bits.push(`${r.card.availability.who} is back from an out-of-office notice (${dayLabel(r.card.availability.returnedDay, i.now)}): availability, not a priority`);
     const capture = captureFor(r.card, list);
     // R60, capture once: a reply card offers ONE entry into Capture, which carries the reply's meaning and the buyer's
     // words in one review; the card's next move and its prepared reply point there, and no second record link shows.
@@ -882,7 +1010,9 @@ export function workDay(i: WorkInput): WorkDay {
       ...(replyCard ? { next: { label: r.card.stateKind === 'opted_out' ? 'Record the opt-out' : capture.label, href: capture.href }, reply: { ...r.card.reply!, record: null } } : {}),
       lane,
       tier,
-      rankWhy: `${bits.join('; ')}.`,
+      // A2: an executable card says which evidence placed it ("Ranked here: open deal, close date passed; angle prepared").
+      rankWhy: `${bits.join('; ')}.${evidence ? ` Ranked here: ${evidence.why}.` : ''}`,
+      ...(evidence ? { evidence } : {}),
       obligations: list,
       priority: prio,
       capture: replyCard ? null : capture,
@@ -897,7 +1027,8 @@ export function workDay(i: WorkInput): WorkDay {
   snoozed.sort((a, b) => a.until.localeCompare(b.until) || a.accountName.localeCompare(b.accountName));
   waiting.sort((a, b) => String(a.dueDay ?? '9999').localeCompare(String(b.dueDay ?? '9999')) || a.accountName.localeCompare(b.accountName));
   const needs = cards.filter(needsYouCard).length;
-  return { cards, waiting, snoozed, counts: { needsYou: needs, parked: cards.length - needs, obligationsDue: cards.reduce((n, c) => n + (c.obligations?.length ?? 0), 0), waiting: waiting.length, snoozed: snoozed.length } };
+  const availabilityCount = [...availability.values()].reduce((n, l) => n + l.length, 0);
+  return { cards, waiting, snoozed, counts: { needsYou: needs, parked: cards.length - needs, obligationsDue: cards.reduce((n, c) => n + (c.obligations?.length ?? 0), 0), waiting: waiting.length, snoozed: snoozed.length, availability: availabilityCount } };
 }
 
 /** The cards alone (the order Work shows). */
