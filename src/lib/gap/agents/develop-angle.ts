@@ -8,6 +8,13 @@
  * never sent, never a thesis by itself. The item's dates ride along, said as what they are (a historical observation
  * is never presented as today). Checked like every GAP text: no em dash, "yards" plural, no product claim or money,
  * no person outside the roster offered; a model answer that breaks a rule ends `could_not_satisfy`, final.
+ *
+ * C21/C22 (the commercial-context audit, 2026-10-08): the prompt consumes the bounded commercial-context packet
+ * (context/assemble.ts, seeded from what the Pursue carried and joined with the vault, Clawd and the verified public
+ * facts): the systems on record, the buyer's words, the last exchange, the deal's next step, the seller's hypotheses
+ * as hypotheses, the checked facts with dates, the gaps. The answer carries SUPPORT per sentence (agents/angle-claims.ts):
+ * an unsupported buyer claim, an invented installed system or an invented pain is re-asked, then refused, unless
+ * labelled an inference; the result carries the claim references, the context revision (C23) and the gaps.
  */
 import { gapGenerate } from '../ai/spend';
 import { YARDFLOW_MESSAGING } from '@/lib/ai/yardflow-context';
@@ -15,12 +22,21 @@ import { HEDGE_TOKENS } from '../taxonomy';
 import { SINGULAR_YARD_RE } from '../compiler/checks/c11-banned';
 import { listAgentTasks, type ClaimedTask, type HandlerResult } from './tasks';
 import { HISTORICAL_DAYS } from '../work/intel';
+import { assembleCommercialContext, type AssembleAdapters } from '../context/assemble';
+import type { CommercialContextPacket } from '../context/commercial-context';
+import { knowledgeAdapters } from '../story/load';
+import { GATE_SIGNAL_SELECT, type GateSignal } from '../research/evidence-gate';
+import { packetRecord, packetSeedFromInput, parseSupport, reaskClaimLine, validateAngleClaims, type ClaimCheck, type SupportEntry, type SupportedSentence } from './angle-claims';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
 
 export interface DevelopAngleDeps {
   generate?: (prompt: string, maxTokens?: number) => Promise<{ text: string; provider: string }>;
+  /** C21: the context adapters (the vault and Clawd from the env by default, the verified facts from the database; the timeline and the CRM when the caller wires them). */
+  context?: AssembleAdapters;
+  /** A packet already assembled (tests; a caller that holds one). */
+  packet?: CommercialContextPacket;
 }
 
 const MAX_TOKENS = 700;
@@ -36,9 +52,19 @@ export interface Angle {
   starters: string[];
   proposedAction: 'email' | 'call' | 'research';
   caveat: string | null;
+  /** C22: the model's own support entries (per sentence: labels and fact or inference); validated into PreparedAngle.support. */
+  support?: SupportEntry[];
 }
 
-export interface PreparedAngle extends Angle {
+export interface PreparedAngle extends Omit<Angle, 'support'> {
+  /** C22: each sentence of whyItMatters and each starter with the record claims that support it and its fact-or-inference label. */
+  support?: SupportedSentence[];
+  /** C23: the packet revision the angle was prepared against. */
+  contextRevision?: string;
+  /** C20: the sources not read when the angle was prepared. */
+  contextGaps?: string[];
+  /** C21: the systems on record at the account, by the strongest class that names each. */
+  incumbents?: Array<{ name: string; claimClass: string; at: string | null }>;
   /** A03d: a voice warning the answer kept after the re-asks (the compiler's C14 warns the same way); Casey edits before a buyer sees it. */
   warnings?: string[];
   /** C06: the angle is deal work at an open deal; `dealId` is the one deal when the scope is unambiguous. */
@@ -79,7 +105,7 @@ export function parseAngle(text: string): Angle | null {
     if (!whyItMatters || starters.length < 2 || !action) return null;
     // A03b: the model answers "id 1" as often as 1; both are the persona id.
     const people = Array.isArray(o.people) ? o.people.map((x) => (typeof x === 'number' ? x : typeof x === 'string' && /^(?:id\s*)?\d+$/i.test(x.trim()) ? Number(x.trim().replace(/^id\s*/i, '')) : NaN)).filter((x): x is number => Number.isInteger(x)).slice(0, 3) : [];
-    return { whyItMatters, accounts: strs(o.accounts, 5), roles: strs(o.roles, 4), people, starters, proposedAction: action, caveat: typeof o.caveat === 'string' && o.caveat.trim() ? o.caveat.trim() : null };
+    return { whyItMatters, accounts: strs(o.accounts, 5), roles: strs(o.roles, 4), people, starters, proposedAction: action, caveat: typeof o.caveat === 'string' && o.caveat.trim() ? o.caveat.trim() : null, support: parseSupport(o.support) };
   } catch {
     return null;
   }
@@ -134,10 +160,10 @@ export function validateAngle(a: Angle, roster: ReadonlySet<number>, opts: { all
   return { ok: true };
 }
 
-export function buildAnglePrompt(input: { title: string; sourceLine: string; accountName: string | null; accountHint: string | null; categories: string[]; note: string | null; person: { name: string | null; title: string | null; email: string; lastWroteAt?: string | null; subject?: string | null; excerpt?: string | null; messages?: number | null } | null; roster: Array<{ id: number; name: string | null; title: string | null }>; theses: Array<{ family: string | null; observation: string }>; recent: string[]; candidateAccounts: string[]; decision: string; /** C06: the person's open deals, when the Pursue found them. */ deals?: Array<{ id: string | null; name: string | null; stage: string; nextStep: string | null }> }): string {
+export function buildAnglePrompt(input: { title: string; sourceLine: string; accountName: string | null; accountHint: string | null; categories: string[]; note: string | null; person: { name: string | null; title: string | null; email: string; lastWroteAt?: string | null; subject?: string | null; excerpt?: string | null; messages?: number | null } | null; roster: Array<{ id: number; name: string | null; title: string | null }>; theses: Array<{ family: string | null; observation: string }>; recent: string[]; candidateAccounts: string[]; decision: string; /** C06: the person's open deals, when the Pursue found them. */ deals?: Array<{ id: string | null; name: string | null; stage: string; nextStep: string | null }>; /** C21: the packet's record block (angle-claims.ts packetRecord), labelled [K1]... */ record?: string }): string {
   const pains = YARDFLOW_MESSAGING.painFramework.defaultPains.map((p) => `- ${p}`).join('\n');
   return [
-    'You develop ONE commercial angle for a YardFlow seller from one piece of intelligence. Answer with one JSON object only: {"whyItMatters": "...", "accounts": [...], "roles": [...], "people": [persona ids], "starters": ["...", "..."], "proposedAction": "email" | "call" | "research", "caveat": "..." | null}. No prose around it.',
+    'You develop ONE commercial angle for a YardFlow seller from one piece of intelligence. Answer with one JSON object only: {"whyItMatters": "...", "accounts": [...], "roles": [...], "people": [persona ids], "starters": ["...", "..."], "proposedAction": "email" | "call" | "research", "caveat": "..." | null, "support": [{"text": "<one sentence of whyItMatters or one starter, verbatim>", "refs": ["K1"], "kind": "fact" | "inference"}]}. No prose around it.',
     '',
     'YardFlow, in one breath: the yards of plants and distribution centers run on manual gate check-in, radio dispatching and tribal knowledge; dwell, detention and dock friction hide lost production capacity. YardFlow standardizes the driver journey (gate check-in, yard routing, dock assignment, BOL proof) first and automates after. Typical realities a buyer recognizes:',
     pains,
@@ -155,6 +181,7 @@ export function buildAnglePrompt(input: { title: string; sourceLine: string; acc
     input.roster.length ? `People GAP holds at the account (offer at most three by persona id, the best fit first; never anyone else):\n${input.roster.map((p) => `- id ${p.id}: ${p.name ?? 'unnamed'}${p.title ? `, ${p.title}` : ''}`).join('\n')}` : 'No people are on record for this account: leave "people" empty and name the roles.',
     input.theses.length ? `What GAP already thinks about the account (hypotheses, not facts):\n${input.theses.map((t) => `- ${t.family ?? 'unmapped'}: ${t.observation.slice(0, 200)}`).join('\n')}` : '',
     input.recent.length ? `Other recent items at the account: ${input.recent.map((r) => `"${r.slice(0, 80)}"`).join('; ')}.` : '',
+    input.record ? `\n${input.record}` : '',
     '',
     'Hard rules (a checker rejects the answer otherwise):',
     '- "whyItMatters": 15 to 120 words, hedged (' + HEDGE_TOKENS.slice(0, 6).join(', ') + '). Say what the item suggests about their yards and why a conversation could be worth having. State the date as the source line says it: a historical observation is never presented as happening today.',
@@ -162,6 +189,7 @@ export function buildAnglePrompt(input: { title: string; sourceLine: string; acc
     '- "starters": exactly 2 open questions about their operation, in plain words, no pitch.',
     '- "proposedAction": "email" when a person and a sayable angle exist, "call" when a person exists and the item is a conversation opener, "research" when GAP should check the source or find the people first.',
     '- "caveat": what is not known or should be verified before writing (or null).',
+    '- "support": one entry per sentence of "whyItMatters" and per starter: the [K] labels from the record that support it and "kind": "fact" when a label supports it, "inference" when it is your guess. Never attribute words or intent to the buyer without a "Buyer said" label; never name an installed system the record does not name; a pain you cannot cite is an inference, said as one. A dated record is cited with its date, never as today.',
     '- Never name YardFlow or a product, never promise savings, money, percentages or ROI, never invent a number. No em dashes. Say "yards" (plural) in prose: "their yards", "operations in their yards", never "the yard", "yard operations" or "yard processes" (only yard network, yard management, yard system, yard check, yard truck, yard move and yard spotting keep the singular). Say "production capacity", never "throughput". "people" holds plain integers.',
   ].filter((l) => l !== '').join('\n');
 }
@@ -198,20 +226,33 @@ export async function developAngle(task: ClaimedTask, ctx: { prisma: PrismaLike;
     : [];
 
   const sourceLine = sourceLineFor({ source: str(input.source), url: str(input.url), publishedAt: str(input.publishedAt), observedAt: str(input.lastWroteAt) ?? str(input.observedAt) }, now);
-  const prompt = buildAnglePrompt({ title, sourceLine, accountName, accountHint, categories, note: str(input.note), person, roster, theses, recent, candidateAccounts, decision: str(input.decision) ?? task.request, deals: deals.map((d) => ({ id: d.id ?? null, name: d.name ?? null, stage: d.stage ?? '', nextStep: d.nextStep ?? null })) });
+  // C21: the commercial-context packet, seeded from what the Pursue carried (the placement, the day's deal read, the
+  // message) and joined with the vault and Clawd (the env's adapters), the verified public facts and whatever the
+  // caller wired (the timeline, the CRM). Every source failure is a gap on the packet, never a thrown task.
+  const seed = packetSeedFromInput(input);
+  const emailDomain = person?.email.toLowerCase().split('@')[1] ?? null;
+  const domain = emailDomain && !/^(gmail|yahoo|hotmail|outlook|icloud|aol|me|live|msn|protonmail)\.com$/.test(emailDomain) ? emailDomain : accountHint?.includes('.') ? accountHint.toLowerCase() : null;
+  const publicFacts = deps.context?.publicFacts ?? (typeof prisma?.gapSignal?.findMany === 'function' ? async (q: { accountName: string }) => (await prisma.gapSignal.findMany({ where: { account_name: q.accountName }, select: GATE_SIGNAL_SELECT, orderBy: { observed_at: 'desc' }, take: 20 }).catch(() => [])) as GateSignal[] : undefined);
+  const packet = deps.packet ?? (await assembleCommercialContext({ ...(deps.context ?? {}), knowledge: deps.context?.knowledge ?? knowledgeAdapters(), publicFacts }, { accountName, domain, people: seed.identity.people, threadId: str(input.threadId), now, seed })).packet;
+  const record = packetRecord(packet);
+  const prompt = buildAnglePrompt({ title, sourceLine, accountName, accountHint, categories, note: str(input.note), person, roster, theses, recent, candidateAccounts, decision: str(input.decision) ?? task.request, deals: deals.map((d) => ({ id: d.id ?? null, name: d.name ?? null, stage: d.stage ?? '', nextStep: d.nextStep ?? null })), record: record.text });
   const generate = deps.generate ?? ((p: string, m?: number) => gapGenerate(ctx.prisma, { prompt: p, maxTokens: m ?? MAX_TOKENS, tier: task.input && (task.input as Record<string, unknown>).decision === 'more' ? 'strong' : 'routine', task: { id: task.id, kind: task.kind, itemKey: task.itemKey }, now: ctx.now }));
   const rosterIds = new Set(roster.map((p) => p.id));
   let out = await generate(prompt, MAX_TOKENS);
   let angle = parseAngle(out.text);
   if (!angle) return { ok: false, reason: 'could_not_satisfy', detail: 'the model returned something that is not a usable angle' };
   let check = validateAngle(angle, rosterIds);
+  // C22: the claims are checked once the voice passes (a style break is re-asked first); a claim break is re-asked the same way.
+  const claimsOf = (ang: Angle, styleOk: boolean): ClaimCheck => (styleOk ? validateAngleClaims(ang, ang.support ?? [], record.refs) : { ok: true, support: [] });
+  let claims = claimsOf(angle, check.ok);
   let calls = 1;
   // A03/A03c: a fixable voice-rule break is re-asked, naming the break and quoting the place, at most twice (three
   // calls per task, all on the spend ledger); the refusal stands if the last answer still breaks a rule.
-  while (!check.ok && REASK_REASONS.has(check.reason) && calls < MAX_ANGLE_CALLS) {
+  while (((!check.ok && REASK_REASONS.has(check.reason)) || (check.ok && !claims.ok)) && calls < MAX_ANGLE_CALLS) {
+    const why = !check.ok ? reaskLine(check) : reaskClaimLine(claims as Exclude<ClaimCheck, { ok: true }>);
     const again = await generate(`${prompt}
 
-Your previous answer was rejected by the checker: ${reaskLine(check)}. Fix only that and answer again with the complete JSON object.
+Your previous answer was rejected by the checker: ${why}. Fix only that and answer again with the complete JSON object.
 
 Previous answer:
 ${out.text.slice(0, 3000)}`, MAX_TOKENS);
@@ -221,6 +262,7 @@ ${out.text.slice(0, 3000)}`, MAX_TOKENS);
     out = again;
     angle = fixed;
     check = validateAngle(fixed, rosterIds);
+    claims = claimsOf(fixed, check.ok);
   }
   // A03d: after the re-asks a singular "yard" is a WARNING carried on the angle (the compiler's C14 treats it the same
   // way), never a refusal: the angle is material Casey reads, and the compiler judges any copy before a buyer sees it.
@@ -230,11 +272,16 @@ ${out.text.slice(0, 3000)}`, MAX_TOKENS);
     if (relaxed.ok) {
       warnings.push(`Voice: it says "yard" in the singular (${check.detail ?? 'yard'}); the canon says yards. Edit that before a buyer reads it.`);
       check = relaxed;
+      claims = claimsOf(angle, true);
     }
   }
-  if (!check.ok) return { ok: false, reason: 'could_not_satisfy', detail: `${check.reason}${check.detail ? ` ${check.detail}` : ''}${calls > 1 ? ` (after ${calls - 1 === 1 ? 'one re-ask' : `${calls - 1} re-asks`})` : ''}` };
+  const after = calls > 1 ? ` (after ${calls - 1 === 1 ? 'one re-ask' : `${calls - 1} re-asks`})` : '';
+  if (!check.ok) return { ok: false, reason: 'could_not_satisfy', detail: `${check.reason}${check.detail ? ` ${check.detail}` : ''}${after}` };
+  if (!claims.ok) return { ok: false, reason: 'could_not_satisfy', detail: `${claims.reason} ${claims.detail}${after}` };
   const peopleNamed = angle.people.map((id) => roster.find((p) => p.id === id)).filter((p): p is { id: number; name: string | null; title: string | null } => !!p).map((p) => ({ personaId: p.id, name: p.name, title: p.title }));
-  const result: Omit<PreparedAngle, 'taskId' | 'preparedAt'> & { provider: string; calls: number } = { key: task.itemKey, title, accountName, accountHint, sourceLine, ...angle, peopleNamed, provider: out.provider, calls, warnings, ...(deals.length ? { inDeal: true, dealId: deals.length === 1 ? deals[0].id ?? null : null, dealIds: deals.map((d) => d.id ?? null) } : {}) };
+  const { support: _raw, ...body } = angle;
+  void _raw;
+  const result: Omit<PreparedAngle, 'taskId' | 'preparedAt'> & { provider: string; calls: number } = { key: task.itemKey, title, accountName, accountHint, sourceLine, ...body, support: claims.support, contextRevision: packet.revision, contextGaps: record.gaps, incumbents: record.incumbents.map((i) => ({ name: i.name, claimClass: i.claimClass, at: i.at })), peopleNamed, provider: out.provider, calls, warnings, ...(deals.length ? { inDeal: true, dealId: deals.length === 1 ? deals[0].id ?? null : null, dealIds: deals.map((d) => d.id ?? null) } : {}) };
   return { ok: true, result };
 }
 
