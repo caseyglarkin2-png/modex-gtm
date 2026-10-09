@@ -21,7 +21,7 @@ import { YARDFLOW_MESSAGING } from '@/lib/ai/yardflow-context';
 import { HEDGE_TOKENS } from '../taxonomy';
 import { SINGULAR_YARD_RE } from '../compiler/checks/c11-banned';
 import { listAgentTasks, type ClaimedTask, type HandlerResult } from './tasks';
-import { HISTORICAL_DAYS } from '../work/intel';
+import { HISTORICAL_DAYS, isDateOnly } from '../work/intel';
 import { assembleCommercialContext, type AssembleAdapters } from '../context/assemble';
 import type { CommercialContextPacket } from '../context/commercial-context';
 import { knowledgeAdapters } from '../story/load';
@@ -82,7 +82,8 @@ export interface PreparedAngle extends Omit<Angle, 'support'> {
   preparedAt: string;
 }
 
-const dayText = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' });
+/** C54-1 (C29 at this surface): a value at exactly midnight UTC is a DATE (a filing day) and names its own day; a real instant converts to New York. */
+const dayText = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: isDateOnly(iso) ? 'UTC' : 'America/New_York' });
 
 export function sourceLineFor(i: { source?: string | null; url?: string | null; publishedAt?: string | null; observedAt?: string | null }, now: Date): string {
   const host = i.source ?? (i.url ? (() => { try { return new URL(i.url as string).hostname.replace(/^www\./, ''); } catch { return 'the source'; } })() : 'the mailbox');

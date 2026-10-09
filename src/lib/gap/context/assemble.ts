@@ -84,34 +84,47 @@ export interface AssembleReport {
 export const INCUMBENT_RE = /\b(open ?dock|blue yonder|bird'?s ?eye|birdseye|kaleris|claris|terminal|highway|takt|locus|manhattan|c3 ?(reservations|yard)?|transporeon|pinc|yardview|fourkites|project44|descartes|oracle|sap|yms|wms|tms)\b/i;
 const NEGATION_RE = /\b(no longer|dropped|replaced|replacing|moved off|moving off|not using|stopped using|retired|sunset|cancel+ed)\b/i;
 const MAX_BUYER_EVENTS = 6;
+/** Non-buyer inbound (notices, pitches, media, referrals) kept as internal data: a wider window, since they are context, never evidence. */
+const MAX_OTHER_EVENTS = 8;
 
 const cov = (source: SourceKind, over: Partial<SourceCoverage> = {}): SourceCoverage => ({ source, configured: false, reachable: false, completeness: 'unknown', watermark: null, indexedAt: null, query: null, omittedReason: 'not configured', ...over });
 const errText = (err: unknown) => (err instanceof Error ? err.message : String(err));
 const failReason = (err: unknown) => (/abort|timeout/i.test(errText(err)) ? 'timeout' : errText(err));
 
-/** An inbound message is the buyer's words, by the provider that holds it (C17 buyer_words). A draft or an outbound message never is. */
+/** C53-1: the purposes whose inbound words are a BUYER's; every other purpose (a vendor pitch, media, internal mail, a referral, a notice, a calendar message, a suspicious one) is kept as internal data, never buyer evidence. */
+export const BUYER_PURPOSES: ReadonlySet<Purpose> = new Set<Purpose>(['buyer_conversation', 'customer_support', 'unknown']);
+
+/**
+ * An inbound message is the buyer's words, by the provider that holds it (C17 buyer_words), when its purpose is a
+ * buyer's (or not yet classified: the honest default). A draft or an outbound message never is. C53-1: a vendor
+ * solicitation, media, internal, partner-referral, suspicious, automated or calendar message becomes an
+ * internal_only claim under the seller's authority: its text stays as data and is never externally usable.
+ */
 export function buyerClaimsFromTimeline(events: readonly TimelineEvent[], subjectId: string): ContextClaim[] {
-  return events
+  const isBuyer = (e: TimelineEvent) => e.purpose === null || BUYER_PURPOSES.has(e.purpose);
+  const inbound = events
     .filter((e) => e.direction === 'inbound' && !e.isDraft && (e.type === 'email' || e.type === 'reply_recorded' || e.type === 'meeting' || e.type === 'call') && e.excerpt && e.excerpt.trim())
-    .sort((a, b) => b.at.localeCompare(a.at))
-    .slice(0, MAX_BUYER_EVENTS)
+    .sort((a, b) => b.at.localeCompare(a.at));
+  // The newest of each kind, so a run of notices never crowds out the buyer's own words (nor the other way round).
+  return [...inbound.filter(isBuyer).slice(0, MAX_BUYER_EVENTS), ...inbound.filter((e) => !isBuyer(e)).slice(0, MAX_OTHER_EVENTS)]
     .map((e) => {
       const sourceId = `${e.provider}:${e.providerIds[0] ?? e.id}`;
       const text = e.excerpt!.replace(/\s+/g, ' ').trim().slice(0, 600);
+      const buyer = isBuyer(e);
       return {
         claimId: `${sourceId}:${hash8(text)}`,
         sourceId,
         sourceKind: e.provider === 'gmail' ? 'gmail' : e.provider === 'hubspot' ? 'hubspot_engagement' : 'gap',
-        authority: 'buyer_words',
+        authority: buyer ? 'buyer_words' : 'seller_interpretation',
         eventAt: e.at,
         observedAt: e.at,
         indexedAt: null,
         url: null,
         version: null,
         completeness: e.quotedBelow ? 'partial' : 'complete',
-        visibility: e.purpose === 'suspicious' || e.purpose === 'automated' ? 'internal' : 'external_ok',
+        visibility: buyer ? 'external_ok' : 'internal',
         text: e.from ? `${e.from}: ${text}` : text,
-        claimClass: 'buyer_said',
+        claimClass: buyer ? 'buyer_said' : 'internal_only',
         about: 'account',
         subjectId,
       } satisfies ContextClaim;

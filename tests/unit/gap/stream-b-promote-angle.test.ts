@@ -89,14 +89,28 @@ describe('C24: an accepted angle becomes a draft through the existing workflow',
     const replyKinds = db.store.gapAuditEvent.filter((e) => e.subject_type === 'inbound_message').map((e) => e.kind);
     expect(replyKinds).toContain('execution.reply_drafted');
     expect(replyKinds).not.toContain('execution.reply_sent');
-    // A second acceptance: the same draft, no second Gmail write.
+    // A second acceptance meets the saved draft as competing work (C25, server side, before anything is created): the seller chooses.
     const again = await promoteAngle(c, { taskId, actor: ACTOR, now: new Date(at.getTime() + 1000), personaId: 1 }, g.deps);
-    expect(again).toMatchObject({ ok: true, lane: 'reply', alreadyDrafted: true, gmailDraftId: 'd-1' });
+    expect(again).toMatchObject({ ok: false, reason: 'competing_work', offers: ['reuse', 'fresh'], competing: { found: true, items: [{ kind: 'draft', id: 'd-1', provider: 'gmail', sellerEdited: false, offer: 'reuse', why: ['same_thread', 'same_person', 'same_purpose'] }], line: '1 existing draft for this person and deal: reuse or revise before a new one is written.' } });
     expect(g.drafts).toHaveLength(1);
-    // The seller's edit while that draft stands: refused in words, never a second conflicting draft (C25 at the thread).
-    const edited = await promoteAngle(c, { taskId, actor: ACTOR, now: new Date(at.getTime() + 2000), personaId: 1, body: 'Hi Dave,\n\nA different note.' }, g.deps);
+    const reuse = await promoteAngle(c, { taskId, actor: ACTOR, now: new Date(at.getTime() + 1500), personaId: 1, choice: 'reuse' }, g.deps);
+    expect(reuse).toMatchObject({ ok: true, lane: 'existing', choice: 'reuse', item: { id: 'd-1' }, line: expect.stringMatching(/^Reusing the existing draft/) });
+    expect(g.drafts).toHaveLength(1);
+    // A fresh one with the same text is the same draft; the seller's edit while that draft stands is refused in words, never a second conflicting draft.
+    const fresh = await promoteAngle(c, { taskId, actor: ACTOR, now: new Date(at.getTime() + 1800), personaId: 1, choice: 'fresh' }, g.deps);
+    expect(fresh).toMatchObject({ ok: true, lane: 'reply', alreadyDrafted: true, gmailDraftId: 'd-1' });
+    const edited = await promoteAngle(c, { taskId, actor: ACTOR, now: new Date(at.getTime() + 2000), personaId: 1, body: 'Hi Dave,\n\nA different note.', choice: 'fresh' }, g.deps);
     expect(edited).toMatchObject({ ok: false, reason: 'draft_outstanding' });
     expect(g.drafts).toHaveLength(1);
+    // An unsent draft with the seller's own edits (an injected competing read): no second draft is ever created; only revise is offered, and revise returns that draft.
+    const sellerEdit = { timeline: [], drafts: [{ id: 'r-edited', provider: 'gmail' as const, threadId: 't-kenco', to: [DAVE_EMAIL], subject: 'Phased 2027 proposal', dealId: '62704698979', purpose: 'buyer_conversation' as const, updatedAt: '2026-10-05T11:30:00.000Z', sellerEdited: true }] };
+    const h = gmailSpy();
+    const guarded = await promoteAngle(c, { taskId, actor: ACTOR, now: new Date(at.getTime() + 3000), personaId: 1 }, { ...h.deps, competing: async () => sellerEdit });
+    expect(guarded).toMatchObject({ ok: false, reason: 'competing_seller_edit', offers: ['revise'], competing: { found: true, items: [{ id: 'r-edited', sellerEdited: true, offer: 'revise' }] } });
+    expect(await promoteAngle(c, { taskId, actor: ACTOR, now: new Date(at.getTime() + 3500), personaId: 1, choice: 'fresh' }, { ...h.deps, competing: async () => sellerEdit })).toMatchObject({ ok: false, reason: 'competing_seller_edit' });
+    const revise = await promoteAngle(c, { taskId, actor: ACTOR, now: new Date(at.getTime() + 4000), personaId: 1, choice: 'revise' }, { ...h.deps, competing: async () => sellerEdit });
+    expect(revise).toMatchObject({ ok: true, lane: 'existing', choice: 'revise', item: { id: 'r-edited' }, line: expect.stringMatching(/^Revise the existing draft/) });
+    expect(h.drafts).toEqual([]);
     // A text with an em dash never reaches Gmail.
     const dash = await promoteAngle(c, { taskId, actor: ACTOR, now: new Date(at.getTime() + 3000), personaId: 1, body: 'Hi Dave — a note.' }, g.deps);
     expect(dash.ok).toBe(false);
@@ -114,6 +128,7 @@ describe('C24: an accepted angle becomes a draft through the existing workflow',
     expect(research).toMatchObject({ ok: true, lane: 'research', href: '/gap/accounts/kenco-logistics/' });
     expect(g.drafts).toEqual([]);
     expect(await loadPromotions(c, `person:${DAVE_EMAIL}`)).toHaveLength(2);
+    expect(g.sent).toEqual([]);
     expect(await promoteAngle(c, { taskId: 'at_nope', actor: ACTOR, now: NOW }, g.deps)).toEqual({ ok: false, reason: 'task_not_found' });
     const queued = await queueAgentTask(c, { kind: 'develop_angle', itemKey: 'signal:s-x', itemToken: '', day: '2026-10-08', revision: 0, request: 'pursue', requestedBy: ACTOR, requestedFrom: 'app', input: {} }, { now: NOW, actor: ACTOR });
     expect(await promoteAngle(c, { taskId: queued.id, actor: ACTOR, now: NOW }, g.deps)).toMatchObject({ ok: false, reason: 'angle_not_prepared', detail: 'queued' });

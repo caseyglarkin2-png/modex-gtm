@@ -52,6 +52,9 @@ describe('I03: the source line, the parser and the checks', () => {
     expect(sourceLineFor({ source: 'chainstoreage.com', publishedAt: '2026-10-07T12:00:00.000Z' }, NOW)).toBe('chainstoreage.com, published Oct 7, 2026 (a recent report)');
     expect(sourceLineFor({ observedAt: '2026-09-16T12:00:00.000Z' }, NOW)).toBe('the mailbox, observed Sep 16, 2026 (a recent report)');
     expect(sourceLineFor({}, NOW)).toBe('the mailbox, undated');
+    // C54-1 (C29 at this surface): a date-only publication (an EDGAR filing day at midnight UTC) names its own day, never the prior New York day.
+    expect(sourceLineFor({ source: 'x', publishedAt: '2026-10-03T00:00:00.000Z' }, NOW)).toBe('x, published Oct 3, 2026 (a recent report)');
+    expect(sourceLineFor({ source: 'x', publishedAt: '2026-10-03T02:30:00.000Z' }, NOW)).toBe('x, published Oct 2, 2026 (a recent report)');
   });
 
   it('the parser wants why, two starters and an action; the checks refuse an em dash, "yard" alone, a product name, money, a person not offered, a why too short', () => {

@@ -23,14 +23,8 @@ describe('C54: the quality harness', () => {
     expect(REFERENCE_SET.filter((c) => GENERATING_MOTIONS.has(c.expected.motion)).map((c) => c.id)).toEqual(['kenco-positive', 'ambiguous-subsidiary', 'pepsi-repeats', 'hormel-2018', 'general-mills-2013', 'two-deals']);
     expect(r.checks.produced.checked).toBe(36);
     for (const k of QUALITY_CHECKS) {
-      // FINDING C54-1 (open, routed to builder B, agents/develop-angle.ts sourceLineFor): a date-only publication (2026-10-03T00:00:00Z, an
-      // EDGAR-style filing day) is rendered "published Oct 2, 2026" in New York, the C29 fault at a second surface; the scorer reports it on
-      // the three decisions of the pepsi case. Pinned until the fix lands (work/intel.ts isDateOnly is the shared rule), then back to [].
-      if (k === 'no_prohibited_claim') {
-        expect(r.checks[k].failures.map((f) => `${f.caseId}/${f.variant}/${f.decision}`)).toEqual(['pepsi-repeats/full/pursue', 'pepsi-repeats/full/more', 'pepsi-repeats/full/explore']);
-        expect(r.checks[k].failures[0].detail).toMatch(/says "Oct 2"/);
-        continue;
-      }
+      // FINDING C54-1 (closed by builder B, agents/develop-angle.ts sourceLineFor through work/intel.ts isDateOnly): a date-only
+      // publication names its own day; the pepsi case's three decisions are back to [].
       expect(r.checks[k].failures, k).toEqual([]);
     }
     expect(r.outputs.every((o) => o.packetRevision && o.promptHash)).toBe(true);
@@ -40,7 +34,7 @@ describe('C54: the quality harness', () => {
     expect(kenco.angle).toMatchObject({ inDeal: true, dealId: '62700000001' });
     const md = renderQualityEval(r);
     expect(md).toContain('HARNESS CHECK ONLY (MOCKED generator; this is NOT a live model evaluation');
-    expect(md).toContain('| no_prohibited_claim | 36 | 3 |');
+    expect(md).toContain('| no_prohibited_claim | 36 | 0 |');
     expect(md).toContain('| no_authority_leak | 36 | 0 |');
     expect(md).toContain(`${DECISIONS.length} decisions = 36 outputs`);
   });

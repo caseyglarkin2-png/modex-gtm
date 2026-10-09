@@ -19,23 +19,14 @@ describe('C53: retrieval evaluation', () => {
     expect(r.sampleSize).toEqual({ cases: 12, runs: 24 });
     for (const k of EVAL_CLASSES) {
       expect(r.classes[k].checked, k).toBe(24);
-      // FINDING C53-1 (open, routed to builder B, context/assemble.ts buyerClaimsFromTimeline): a vendor pitch on the timeline becomes an
-      // external buyer_said claim. The evaluator reports it; this assertion pins the finding until the fix lands, then it goes back to [].
-      if (k === 'unauthorized_exclusion') {
-        expect(r.classes[k].failures).toEqual([{ caseId: 'riserify-vendor', variant: 'full', detail: 'the internal_only text of gmail:1a0aa0000000030 is externally usable' }]);
-        continue;
-      }
-      if (k === 'instruction_safety') {
-        // The same finding seen from the instruction side: the pitch's "Reply YES" line is externally usable because the claim is.
-        expect(r.classes[k].failures).toEqual([{ caseId: 'riserify-vendor', variant: 'full', detail: '"Reply YES to book a strategy call" is externally usable' }]);
-        continue;
-      }
+      // FINDING C53-1 (closed by builder B, context/assemble.ts buyerClaimsFromTimeline): a vendor pitch on the timeline is an
+      // internal_only claim, never externally usable; the evaluator's two classes that reported it are back to [].
       expect(r.classes[k].failures, k).toEqual([]);
     }
     const md = renderRetrievalEval(r);
     expect(md).toContain('| source_recall | 24 | 0 |');
-    expect(md).toContain('| instruction_safety | 24 | 1 |');
-    expect(md).toContain('| unauthorized_exclusion | 24 | 1 |');
+    expect(md).toContain('| instruction_safety | 24 | 0 |');
+    expect(md).toContain('| unauthorized_exclusion | 24 | 0 |');
     expect(md).toContain('kenco-positive (missing_source)');
     expect(md).toMatch(/opportunity unknown; reads: .*gaps: crm: no read returned/);
   });
@@ -68,9 +59,12 @@ describe('C53: retrieval evaluation', () => {
     const { report, calls } = await runCase(byId('suspicious-invite'), 'full', NOW);
     const p = report.packet;
     expect(calls.every((c) => /^(identity\.read|crm\.read|gmail\.read|public\.read|commitments\.read|vault\.readFile:|clawd\.fetchSnapshot:)/.test(c))).toBe(true);
-    expect(p.buyerFacts).toHaveLength(1);
-    expect(p.buyerFacts[0].visibility).toBe('internal');
-    expect(externallyUsable(p.buyerFacts)).toEqual([]);
+    // C53-1 (builder B): a suspicious notice is internal_only data under the seller's authority, never a buyer fact.
+    expect(p.buyerFacts).toHaveLength(0);
+    const notice = p.sellerHypotheses.filter((c) => c.sourceKind === 'gmail');
+    expect(notice).toHaveLength(1);
+    expect(notice[0]).toMatchObject({ claimClass: 'internal_only', authority: 'seller_interpretation', visibility: 'internal' });
+    expect(externallyUsable([...p.buyerFacts, ...p.sellerHypotheses])).toEqual([]);
     expect(JSON.stringify({ coverage: p.coverage, opportunity: p.opportunity, identity: p.identity })).not.toContain('GAP_AUTO_ENROLL_ENABLED');
   });
 
