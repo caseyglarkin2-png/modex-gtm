@@ -1374,3 +1374,54 @@ describe('Release C re-review S7: the account-reply hold at live enrollment', ()
     expect(r.ok).toBe(true);
   });
 });
+
+// ---------------------------------------------------------------------------
+// C42 (GAP OS commercial context and execution audit, 2026-10-08): the enrollment lanes reuse the guards
+// ---------------------------------------------------------------------------
+
+describe('C42: the enrollment lane reuses the cross-plane suppression, autonomy, employment and duplicate-contact guards at action time', () => {
+  it('a suppression set between approval and confirm blocks the enroll: the same request that passed at approval is refused suppressed at confirm, nothing written', async () => {
+    const clear = staticSuppressionReader('clear');
+    const hit = staticSuppressionReader('suppressed');
+    let reads = 0;
+    // The reader answers clear at approval time and suppressed at confirm time (the cross-plane list moved between them).
+    const moving = { read: async (...a: unknown[]) => (reads++ === 0 ? clear : hit).read(...(a as Parameters<typeof clear.read>)) } as unknown as typeof clear;
+    const d = deps({ suppression: moving });
+    const approval = await enrollFromDecision(makePrisma(), input({ mode: 'live' }), d);
+    expect(approval.ok).toBe(true);
+    expect(refusedPredicates()).toEqual([]);
+    const prisma = makePrisma();
+    const confirm = await enrollFromDecision(prisma, input({ mode: 'live' }), d);
+    expect(confirm).toMatchObject({ ok: false, reason: 'suppressed' });
+    expect(refusedPredicates()).toEqual(['suppressed']);
+    expect(writes(prisma).filter((w) => !w.startsWith('gapAuditEvent'))).toEqual([]);
+  });
+
+  it('publish enabled with autonomy halted does not imply an executable enrollment: live is refused autonomy_halted with the native publish flag on, nothing queued, nothing enrolled', async () => {
+    const saved = process.env.GAP_HUBSPOT_SEQUENCE_PUBLISH_ENABLED;
+    process.env.GAP_HUBSPOT_SEQUENCE_PUBLISH_ENABLED = 'true';
+    try {
+      const d = deps({ autonomy: vi.fn(async () => ({ halted: true, reason: 'outreach motion halted' })) });
+      const prisma = makePrisma();
+      const r = await enrollFromDecision(prisma, input({ mode: 'live', actorKind: 'human' }), d);
+      expect(r).toEqual({ ok: false, reason: 'autonomy_halted', detail: 'outreach motion halted' });
+      expect(d.addOne).not.toHaveBeenCalled();
+      expect(mockedEnroll).not.toHaveBeenCalled();
+      expect(mockedRecord).not.toHaveBeenCalled();
+      expect(writes(prisma).filter((w) => !w.startsWith('gapAuditEvent'))).toEqual([]);
+    } finally {
+      if (saved === undefined) delete process.env.GAP_HUBSPOT_SEQUENCE_PUBLISH_ENABLED;
+      else process.env.GAP_HUBSPOT_SEQUENCE_PUBLISH_ENABLED = saved;
+    }
+  });
+
+  it('an active deal routes deal work: a live enroll at an account with an open HubSpot deal is refused active_opportunity before any write', async () => {
+    const withDeal = fakeHubSpot({ companyDeals: { '111': ['d1'] }, deals: [{ id: 'd1', closed: 'false', name: 'YardFlow - Acme' }] });
+    const d = deps({ opportunity: opportunityVia(withDeal) });
+    const prisma = makePrisma();
+    const r = await enrollFromDecision(prisma, input({ mode: 'live' }), d);
+    expect(r).toMatchObject({ ok: false, reason: 'active_opportunity' });
+    expect(d.addOne).not.toHaveBeenCalled();
+    expect(mockedEnroll).not.toHaveBeenCalled();
+  });
+});

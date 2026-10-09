@@ -174,7 +174,8 @@ export async function sendSellerEmail(
 
   if (!input.confirm) {
     // Batch item 7: record what the final check showed, so the confirm binds the sending mailbox too (never a send).
-    await appendLedger(prisma, DIRECT_PREVIEWED, actor, decisionId, { contentHash: p.contentHash, recipient: p.recipient, sender: p.senderIdentity, stepIndex, at: now.toISOString() }).catch(() => undefined);
+    // C41: the subject and the thread ride on the preview too, so a send whose answer is lost can be attributed from it.
+    await appendLedger(prisma, DIRECT_PREVIEWED, actor, decisionId, { contentHash: p.contentHash, recipient: p.recipient, sender: p.senderIdentity, subject: p.subject, gmailThreadId: p.threadContext?.threadId ?? null, stepIndex, at: now.toISOString() }).catch(() => undefined);
     return {
       ok: true,
       preview: {
@@ -205,6 +206,18 @@ export async function sendSellerEmail(
     return { ok: false, reason: 'sender_changed_since_review', detail: `The email would now go from ${p.senderIdentity}, not ${shownSender} as you reviewed. Review and confirm again.` };
   }
 
+  // C42: the cross-plane suppression read at ACTION time, before the claim, when a reader is injected (the wire adapter
+  // runs assertSuppressionPermitsSend itself by default, so a suppression set between review and confirm is refused
+  // either way; with a reader given here it is refused before anything is claimed). Fail closed: unreadable refuses.
+  if (deps.suppression) {
+    try {
+      await deps.suppression(p.recipient);
+    } catch (err) {
+      const why = err instanceof Error ? err.message : String(err);
+      const kind = suppressionRefusalKind(why);
+      return { ok: false, reason: kind === 'suppressed' ? 'recipient_suppressed' : 'suppression_unreadable', detail: why };
+    }
+  }
   const key = personStepKey(p.personaId, p.recipient, stepIndex);
   const claim = await (deps.claim ?? claimSendKey)(prisma, { key, decisionId, personaId: p.personaId, recipient: p.recipient, stepIndex, actor, now, accountName: p.accountName });
   if (!claim.claimed) {
