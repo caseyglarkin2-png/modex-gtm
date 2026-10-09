@@ -216,33 +216,44 @@ describe('A2: after the buyer obligations, the executable work ranks by its evid
   const fixture = (): WorkInput =>
     base({
       replies: [{ accountName: 'Reply Co', contactEmail: 'ann@reply.example.com', subject: 'Re: yards', snippet: 'Happy to talk, what does a pilot look like?', receivedAt: '2026-10-06T13:00:00Z' }],
-      // The Kenco shape: an open deal past its close date, with a prepared follow-up (the plan's "Prepare touch 2").
-      inDeals: { status: 'complete', accounts: [{ accountName: 'Kenco Shape Co', deals: [{ id: 'd-k', name: 'Kenco Shape Co yard pilot', stage: 'Proposal', lastActivityAt: '2026-09-01T00:00:00Z', closeDate: '2026-09-30' }] }] },
+      // The Kenco shape: an open deal past its close date with a prepared angle (the loader's preparedAngles, from a
+      // develop_angle task that succeeded for a placed person). The Stalled shape: the same deal with nothing prepared.
+      inDeals: { status: 'complete', accounts: [{ accountName: 'Kenco Shape Co', deals: [{ id: 'd-k', name: 'Kenco Shape Co yard pilot', stage: 'Proposal', lastActivityAt: '2026-09-01T00:00:00Z', closeDate: '2026-09-30' }] }, { accountName: 'Stalled Shape Co', deals: [{ id: 'd-s', name: 'Stalled Shape Co pilot', stage: 'Proposal', lastActivityAt: '2026-09-01T00:00:00Z', closeDate: '2026-09-30' }] }] },
+      preparedAngles: new Map([['Kenco Shape Co', { who: 'Craig Morrison', line: 'An angle is prepared for Craig Morrison (the Nashville dwell story).' }]]),
       commitments: [
-        commit('Kenco Shape Co', 'follow_up', 'Follow up with Dave Kiesling', { status: 'waiting', dependency: "Dave's reply", dueAt: nyDayAt('2026-10-05').toISOString(), person: { personaId: 9, name: 'Dave Kiesling', email: 'dave@kenco-shape.example.com' }, source: { kind: 'send', id: 'k-send' }, detail: { decisionId: 'dec-k', stepIndex: 0 } }),
         // The Southern Glazer's shape: only an out-of-office reminder whose return day passed in May.
         ooo("Southern Glazer's Shape Co", 'Diego Fonseca', 'diego@sgws-shape.example.com', '2026-05-26'),
+        // The Swire shape (the live October 9 reproduction: "Follow up with Bryan Sink when they are back", returned Jun 16, at #1 and #2 of 17).
+        ooo('Swire Shape Co', 'Bryan Sink', 'bryan@swire-shape.example.com', '2026-06-16'),
         // A current (future) out-of-office stays snoozed.
-        ooo('Swire Shape Co', 'Pat Lee', 'pat@swire-shape.example.com', '2026-10-20'),
+        ooo('Future OOO Co', 'Pat Lee', 'pat@future-shape.example.com', '2026-10-20'),
       ],
       // The PepsiCo shape: a prepared first touch. The Coca-Cola shape: a proposal to review. A cold follow-up with no reply ever.
       dbState: new Map([['PepsiCo Shape Co', { sendable: true, chosen: { name: 'Karen Darling', title: 'Senior Director' } }]]),
       candidates: [cand('review', 'Coca-Cola Shape Co', 'Decide the angle'), cand('follow_up', 'Cold Shape Co', 'Follow up with Mark')],
     });
 
-  it('a real buyer reply stays first; then the open deal with a prepared angle, the prepared first touch, the proposal to review, the cold follow-up; the availability-only account is parked, not an item; the future out-of-office stays snoozed', () => {
+  it('a real buyer reply stays first; then the open deal with a prepared angle, the prepared first touch, the stalled deal with nothing prepared, the proposal to review, the cold follow-up; the availability-only accounts are parked, not items; the future out-of-office stays snoozed', () => {
     const day = workDay(fixture());
     expect(day.cards.map((c) => [c.accountName, c.tier]), JSON.stringify(day.cards.map((c) => [c.accountName, c.tier, c.rankWhy]))).toEqual([
       ['Reply Co', 'reply'],
       ['Kenco Shape Co', 'deal'],
       ['PepsiCo Shape Co', 'ready'],
+      // I04 kept: deal hygiene alone sits after the prepared first touch and before the review, as DEAL_HYGIENE_RANK did.
+      ['Stalled Shape Co', 'deal'],
       ['Coca-Cola Shape Co', 'review'],
       ['Cold Shape Co', 'follow_up'],
       ["Southern Glazer's Shape Co", 'research'],
+      ['Swire Shape Co', 'research'],
     ]);
     const by = (name: string) => day.cards.find((c) => c.accountName === name)!;
-    expect(by('Kenco Shape Co').rankWhy).toMatch(/Ranked here: open deal, close date passed; angle prepared\.$/);
+    expect(by('Kenco Shape Co').rankWhy).toMatch(/^A stalled deal: .*; An angle is prepared for Craig Morrison \(the Nashville dwell story\)\. Ranked here: open deal, close date passed; an angle prepared for Craig Morrison\.$/);
+    expect(by('Kenco Shape Co').preparedAngle).toEqual({ who: 'Craig Morrison', line: 'An angle is prepared for Craig Morrison (the Nashville dwell story).' });
     expect(by('Kenco Shape Co').evidence?.rank).toBeLessThan(by('PepsiCo Shape Co').evidence!.rank);
+    expect(by('Stalled Shape Co').rankWhy).toMatch(/Ranked here: deal hygiene only \(close date passed, nothing prepared\)\.$/);
+    expect(by('Stalled Shape Co').preparedAngle).toBeUndefined();
+    expect(by('Swire Shape Co')).toMatchObject({ stateKind: 'research', state: 'Back since Jun 16 (out-of-office notice); nothing prepared yet', availability: { who: 'Bryan Sink', returnedDay: '2026-06-16' } });
+    expect(by('Swire Shape Co').obligations).toEqual([]);
     expect(by('PepsiCo Shape Co').rankWhy).toMatch(/Ranked here: a first touch prepared\.$/);
     expect(by('Coca-Cola Shape Co').rankWhy).toMatch(/Ranked here: a decision to review\.$/);
     expect(by('Cold Shape Co').rankWhy).toMatch(/Ranked here: a follow-up on a cold touch, no reply yet\.$/);
@@ -254,8 +265,8 @@ describe('A2: after the buyer obligations, the executable work ranks by its evid
     expect(sgws.obligations).toEqual([]);
     expect(sgws.availability).toEqual({ who: 'Diego Fonseca', email: 'diego@sgws-shape.example.com', returnedDay: '2026-05-26', line: 'Diego Fonseca returned May 26 (their out-of-office notice); no reply from them since.' });
     expect(day.waiting.map((w) => w.accountName)).toEqual([]);
-    expect(day.snoozed.map((s) => [s.accountName, s.line])).toEqual([['Swire Shape Co', 'Follow up with Pat Lee when they are back: Scheduled for Oct 20.']]);
-    expect(day.counts).toEqual({ needsYou: 5, parked: 1, obligationsDue: 1, waiting: 0, snoozed: 1, availability: 1 });
+    expect(day.snoozed.map((s) => [s.accountName, s.line])).toEqual([['Future OOO Co', 'Follow up with Pat Lee when they are back: Scheduled for Oct 20.']]);
+    expect(day.counts).toEqual({ needsYou: 6, parked: 2, obligationsDue: 0, waiting: 0, snoozed: 1, availability: 2 });
   });
 
   it('a prior reply from them lifts a follow-up above a cold one; the seller\'s priority lifts a card above its peers without it; the tuple is deterministic', () => {
@@ -273,6 +284,9 @@ describe('A2: after the buyer obligations, the executable work ranks by its evid
     expect(evidenceRank({ stateKind: 'follow_up', tier: 'follow_up' }, []).why).toBe('a follow-up on a cold touch, no reply yet');
     expect(evidenceRank({ stateKind: 'in_deal', tier: 'deal', stalled: ['The close date (Sep 30) has passed and the deal is still open. Confirm the real date.'] }, [])).toEqual({ rank: 251, why: 'deal hygiene only (close date passed, nothing prepared)' });
     expect(evidenceRank({ stateKind: 'in_deal', tier: 'deal', dealNextStep: 'Send the scope' }, []).rank).toBeLessThan(evidenceRank({ stateKind: 'ready', tier: 'ready' }, []).rank);
+    // The addendum: a prepared angle alone is evidence (3), and with a stalled deal it is deal context (2) too.
+    expect(evidenceRank({ stateKind: 'in_deal', tier: 'deal', stalled: ['The close date (Sep 30) has passed and the deal is still open.'], preparedAngle: { who: 'Craig Morrison', line: 'x' } }, [])).toEqual({ rank: 159, why: 'open deal, close date passed; an angle prepared for Craig Morrison' });
+    expect(evidenceRank({ stateKind: 'decide', tier: 'review', preparedAngle: { who: 'Jo', line: 'x' } }, []).why).toBe('an angle prepared for Jo; a decision to review');
     expect(evidenceRank({ stateKind: 'replied', tier: 'deal', answerOwed: true }, []).why).toMatch(/^a buyer wrote and an answer is owed/);
   });
 });

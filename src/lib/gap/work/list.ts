@@ -171,6 +171,8 @@ export interface WorkCard {
   ownMoveIsObligation?: boolean;
   /** Seller acceptance A2: the evidence that placed the card after the buyer-obligation tiers, in words. */
   evidence?: { rank: number; why: string };
+  /** Seller acceptance A2 addendum: an angle GAP prepared for a person at this account (WorkInput.preparedAngles). */
+  preparedAngle?: { who: string; line: string } | null;
 }
 
 export interface WorkInput {
@@ -227,6 +229,12 @@ export interface WorkInput {
   followUpPlans?: ReadonlyMap<string, FollowUpPlan>;
   /** Sprint 5 review: the deals GAP recorded as closed (deals/closure.ts), by HubSpot id, so a row on one is named. */
   closedDeals?: ReadonlyMap<string, ClosedDealRef>;
+  /**
+   * Seller acceptance A2 addendum (2026-10-09): the angles GAP prepared, by account (a develop_angle task that succeeded
+   * for a person placed at the account; the day loader reads them from the placed pursued items). Evidence that
+   * something is prepared: an open deal with a prepared angle ranks above a stalled deal with nothing prepared.
+   */
+  preparedAngles?: ReadonlyMap<string, { who: string; line: string }>;
 }
 
 export interface WorkDay {
@@ -453,7 +461,7 @@ export const EVIDENCE_TIERS: ReadonlySet<WorkTier> = new Set<WorkTier>(['deal', 
  * level), so the order is total and deterministic; `why` names the evidence that placed the card, strongest first.
  */
 export function evidenceRank(
-  card: Pick<WorkCard, 'answerOwed' | 'reply' | 'dealNextStep' | 'stalled' | 'stateKind' | 'priority' | 'tier'>,
+  card: Pick<WorkCard, 'answerOwed' | 'reply' | 'dealNextStep' | 'stalled' | 'stateKind' | 'priority' | 'tier' | 'preparedAngle'>,
   obligations: readonly WorkObligation[],
   ctx: { buyerActivityAt?: number | null } = {},
 ): { rank: number; why: string } {
@@ -464,7 +472,7 @@ export function evidenceRank(
   const preparedFollowUp = obligations.some((o) => o.kind === 'follow_up' && !!o.href && /^Prepare /.test(o.label ?? ''));
   // Prepared means a thing to send exists (a ready first touch, a follow-up whose plan is prepared); the workspace's
   // `preparation` flag is not read here: a deal or follow-up intent reports "ready" by construction (pursuit/actionable.ts).
-  const prepared = card.stateKind === 'ready' || preparedFollowUp;
+  const prepared = card.stateKind === 'ready' || preparedFollowUp || !!card.preparedAngle;
   const priorReply = !!card.reply || obligations.some(theirWords) || !!(ctx.buyerActivityAt && ctx.buyerActivityAt > 0);
   const answerOwed = !!card.answerOwed || (!!card.reply && card.stateKind === 'replied');
   const dealContext = !!card.dealNextStep || dealStep || (stalled && (prepared || priorReply));
@@ -474,7 +482,7 @@ export function evidenceRank(
   const levels: Array<[boolean, string]> = [
     [answerOwed, 'a buyer wrote and an answer is owed'],
     [dealContext, card.dealNextStep ? 'open deal, next step set' : dealStep ? 'open deal, a step due' : `open deal, ${stalledWhat}`],
-    [prepared, card.stateKind === 'ready' ? 'a first touch prepared' : 'angle prepared'],
+    [prepared, card.preparedAngle ? `an angle prepared for ${card.preparedAngle.who}` : card.stateKind === 'ready' ? 'a first touch prepared' : 'angle prepared'],
     [priorReply, 'they have replied before'],
     [!!card.priority, card.priority ? `you prioritized it (${card.priority.reason})` : ''],
     [hygieneOnly, `deal hygiene only (${stalledWhat}, nothing prepared)`],
@@ -948,8 +956,9 @@ export function workDay(i: WorkInput): WorkDay {
     const hygiene = tier === 'deal' && !fromObligation && !r.card.dealNextStep;
     // A2: the executable tiers rank by the evidence the card carries (its own fields, its obligations, the buyer activity
     // already read), never by the lane alone.
-    const evidence = EVIDENCE_TIERS.has(tier) ? evidenceRank({ ...r.card, tier, priority: prio }, list, { buyerActivityAt: act }) : null;
-    return { r, tier, lane, list, dueMs, act, prio, oldReplyDays, hygiene, evidence };
+    const preparedAngle = i.preparedAngles?.get(name) ?? null;
+    const evidence = EVIDENCE_TIERS.has(tier) ? evidenceRank({ ...r.card, tier, priority: prio, preparedAngle }, list, { buyerActivityAt: act }) : null;
+    return { r, tier, lane, list, dueMs, act, prio, oldReplyDays, hygiene, evidence, preparedAngle };
   });
   const rankOf = (x: { tier: WorkTier; hygiene: boolean }) => (x.hygiene ? DEAL_HYGIENE_RANK : TIER_RANK[x.tier]);
   // The bands: the buyer obligations due (commitment, reply, meeting, in tier order), then the executable work by its
@@ -992,7 +1001,7 @@ export function workDay(i: WorkInput): WorkDay {
     q.set('from', `work:${card.accountName}`);
     return { href: `/gap/capture?${q.toString()}`, label: 'Log a conversation' };
   };
-  const cards: WorkCard[] = ranked.map(({ r, tier, lane, list, dueMs, act, prio, oldReplyDays, evidence }, index) => {
+  const cards: WorkCard[] = ranked.map(({ r, tier, lane, list, dueMs, act, prio, oldReplyDays, evidence, preparedAngle }, index) => {
     const top = list.find((o) => o.tier === tier);
     const phrase = (line: string) => line.replace(/\.$/, '').replace(/^\w/, (ch) => ch.toLowerCase());
     const bits = [top ? `${TIER_WHY[tier]}: ${top.title}${top.dueDay && top.kind !== 'meeting' ? ` (${phrase(top.line)})` : ''}` : tier === 'admin' && oldReplyDays !== null ? `An old reply to triage (${oldReplyDays} days): record what they said or dismiss it` : tier === 'deal' && r.card.dealNextStep ? `The deal's next step: ${r.card.dealNextStep.replace(/\.$/, '')}${r.card.stalled?.length ? ` (stalled: ${phrase(r.card.stalled[0])})` : ''}` : tier === 'deal' && r.card.stalled?.length ? `A stalled deal: ${phrase(r.card.stalled[0])}` : TIER_WHY[tier]];
@@ -1001,6 +1010,8 @@ export function workDay(i: WorkInput): WorkDay {
     if (prio && !evidence) bits.push(`you prioritized it (${prio.reason})`);
     // A1: the availability is said on the card, after what placed it, never as the reason it ranks.
     if (r.card.availability) bits.push(`${r.card.availability.who} is back from an out-of-office notice (${dayLabel(r.card.availability.returnedDay, i.now)}): availability, not a priority`);
+    // A2 addendum: the prepared angle is said on the card in the loader's words.
+    if (preparedAngle) bits.push(preparedAngle.line.replace(/\.$/, ''));
     const capture = captureFor(r.card, list);
     // R60, capture once: a reply card offers ONE entry into Capture, which carries the reply's meaning and the buyer's
     // words in one review; the card's next move and its prepared reply point there, and no second record link shows.
@@ -1013,6 +1024,7 @@ export function workDay(i: WorkInput): WorkDay {
       // A2: an executable card says which evidence placed it ("Ranked here: open deal, close date passed; angle prepared").
       rankWhy: `${bits.join('; ')}.${evidence ? ` Ranked here: ${evidence.why}.` : ''}`,
       ...(evidence ? { evidence } : {}),
+      ...(preparedAngle ? { preparedAngle } : {}),
       obligations: list,
       priority: prio,
       capture: replyCard ? null : capture,
