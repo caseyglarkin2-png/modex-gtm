@@ -42,7 +42,8 @@ export type CommitmentKind = (typeof COMMITMENT_KINDS)[number];
 export const PROOF_KINDS = ['ledger', 'disposition', 'capture', 'bid', 'mailbox_sent', 'outcome', 'seller'] as const;
 export type ProofKind = (typeof PROOF_KINDS)[number];
 
-export const SOURCE_KINDS = ['bid', 'disposition', 'send', 'snooze', 'capture', 'reply', 'seller', 'plan', 'deal'] as const;
+/** Knowledge program C3 (2026-10-09): `seller_note` is a DONE note by email that named a meeting (commitments.ts commitmentsFromSellerNote), keyed by the Gmail message and the day. */
+export const SOURCE_KINDS = ['bid', 'disposition', 'send', 'snooze', 'capture', 'reply', 'seller', 'plan', 'deal', 'seller_note'] as const;
 export type CommitmentSourceKind = (typeof SOURCE_KINDS)[number];
 
 /** Sprint 5 review (R55): one obligation a deal's closure skipped, as its reopening lists it. */

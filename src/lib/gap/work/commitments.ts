@@ -30,6 +30,7 @@ import { DIRECT_SENT, DRAFT_SENT, DRAFT_SUBJECT_TYPE, DRAFTED, MANUAL_SENT } fro
 import { personStepKey } from '../execution/person-history';
 import { addDays, dayLabel, nextBusinessDay, nyDay, nyDayAt, parseReturnDate } from './dates';
 import { classifyReply } from '../replies/classify';
+import type { DoneFact } from './done-note';
 import {
   COMMITMENT_EVENT,
   COMMITMENT_KINDS,
@@ -616,6 +617,60 @@ export async function commitmentsAnsweredBySend(
     if (t?.ok) done += 1;
   }
   return done;
+}
+
+/** The hour a meeting named in a DONE note is due to be prepared (8 am New York on the meeting day). */
+export const SELLER_NOTE_MEETING_HOUR = 8;
+const monthDay = (day: string) => nyDayAt(day, 12).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' });
+
+/**
+ * Knowledge program C3 (2026-10-09): the obligations a seller's DONE note states (work/done-note.ts doneNoteFacts). A
+ * dated meeting ("meeting scheduled for 10.14.2026") becomes ONE prepare_meeting commitment at the account: status
+ * waiting (on the meeting day), due at 8 am New York that day, the basis the seller's own words, the source the Gmail
+ * message and the day (`seller_note`). Idempotent two ways: the source key (the same message read twice writes nothing)
+ * and the day (a live prepare_meeting at the account already due that day is returned, never doubled). A sent-note
+ * fact writes nothing here: a self-reported send is a claim the command layer records, never a send or a contact. Nothing
+ * here sends, drafts, enrolls or writes HubSpot. Fail-soft: the caller swallows a failure (the DONE itself stands).
+ */
+export async function commitmentsFromSellerNote(
+  prisma: PrismaLike,
+  input: { accountName: string; facts: readonly DoneFact[]; note: string; gmailMessageId: string; person?: CommitmentPerson | null; dealId?: string | null; actor: string; now: Date },
+): Promise<{ meetings: Array<{ day: string; commitmentId: string; created: boolean; title: string }> }> {
+  const out: { meetings: Array<{ day: string; commitmentId: string; created: boolean; title: string }> } = { meetings: [] };
+  const meetings = input.facts.filter((f): f is Extract<DoneFact, { kind: 'meeting' }> => f.kind === 'meeting');
+  if (!meetings.length || !ledgerReadable(prisma)) return out;
+  const live = (await loadCommitments(prisma, { accountNames: [input.accountName] })).filter((c) => c.kind === 'prepare_meeting' && !TERMINAL_STATUSES.includes(c.status));
+  for (const m of meetings) {
+    const existing = live.find((c) => c.dueAt && nyDay(c.dueAt) === m.day);
+    if (existing) {
+      out.meetings.push({ day: m.day, commitmentId: existing.commitmentId, created: false, title: existing.title });
+      continue;
+    }
+    const who = input.person?.name?.trim() || null;
+    const title = `Prepare the meeting${who ? ` with ${who}` : ''} (${monthDay(m.day)})`.slice(0, TITLE_MAX);
+    const r = await ensureCommitment(
+      prisma,
+      {
+        accountName: input.accountName,
+        kind: 'prepare_meeting',
+        status: 'waiting',
+        title,
+        basis: `Your note of ${monthDay(nyDay(input.now))}: ${input.note}`,
+        dueAt: nyDayAt(m.day, SELLER_NOTE_MEETING_HOUR),
+        dependency: `the meeting day, ${monthDay(m.day)}`,
+        person: input.person ?? null,
+        dealId: input.dealId ?? null,
+        source: { kind: 'seller_note', id: `${input.gmailMessageId}:${m.day}` },
+        detail: { meetingAt: nyDayAt(m.day, SELLER_NOTE_MEETING_HOUR).toISOString(), ...(m.ambiguous ? { ambiguousDate: m.phrase } : {}) },
+      },
+      { actor: input.actor, now: input.now },
+    );
+    if (r.ok) {
+      out.meetings.push({ day: m.day, commitmentId: r.commitment.commitmentId, created: r.created, title: r.commitment.title });
+      if (r.created) live.push(r.commitment);
+    }
+  }
+  return out;
 }
 
 /** When a message was written (its received time), else `now` for a row that carries none. */

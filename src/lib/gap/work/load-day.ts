@@ -8,8 +8,9 @@
  * everything time-dependent while every write (the sweeps, the closure reconcile) stays at the real time, and under a
  * lane or a preview nothing is swept. Server only; nothing here renders.
  */
-import { addDays, nyDay, nyDayAt } from './dates';
-import { workDay, type WorkCard, type WorkDay } from './list';
+import { addDays, isDay, nyDay, nyDayAt } from './dates';
+import { workDay, type AccountKnowledge, type WorkCard, type WorkDay } from './list';
+import { mapLimit } from './map-limit';
 import { todaySummary, type TodaySummary } from './today';
 import { buyerMoves } from './commitment-model';
 import { loadCompletedToday, loadMeetingRows, loadMeetingStartingPoints, loadWorkCommitments, resolveMeetingDeals } from './day-load';
@@ -37,6 +38,89 @@ export interface LoadWorkDayOptions {
   fresh: boolean;
   /** The real time (tests and crons pass it; the page lets it default). */
   now?: Date;
+}
+
+/**
+ * Knowledge program C2 (2026-10-09): the shape of one vault note as Builder A's table holds it (`GapKnowledgeNote`;
+ * only the fields the day reads). The reader is injected (`LoadWorkDayDeps.knowledge`, the shape of
+ * `knowledgeForAccount(prisma, accountName, { limit })`: the account's notes newest first); with none injected the
+ * day reads no knowledge.
+ */
+export interface KnowledgeNoteLike {
+  path: string;
+  kind: 'account' | 'person' | 'deal' | 'meeting' | 'raw' | 'other';
+  account_name?: string | null;
+  note_date: Date | string | null;
+  title?: string | null;
+  frontmatter?: Record<string, unknown> | null;
+  source?: 'fireflies' | 'calendar-prep' | 'librarian' | null;
+  people?: readonly string[] | null;
+}
+export type KnowledgeReader = (prisma: PrismaLike, accountName: string, opts: { limit?: number; domains?: readonly string[] }) => Promise<readonly KnowledgeNoteLike[]>;
+
+export interface LoadWorkDayDeps {
+  /** C2: Builder A's knowledge reader (the lead wires the real one). Soft: a reader that throws reads as no knowledge. */
+  knowledge?: KnowledgeReader;
+}
+
+/** How many notes per account the day reads (the newest first; the account note and the recent meetings are among them). */
+export const KNOWLEDGE_NOTES_LIMIT = 40;
+const KNOWLEDGE_CONCURRENCY = 4;
+
+const noteAt = (n: KnowledgeNoteLike): number => {
+  const t = n.note_date ? new Date(n.note_date).getTime() : NaN;
+  return Number.isFinite(t) ? t : NaN;
+};
+const str = (v: unknown): string | null => (typeof v === 'string' && v.trim() ? v.trim() : null);
+/** A frontmatter day: a Date, an ISO day, or a datetime string, as a New York day; anything else is none. */
+function frontmatterDay(v: unknown): string | null {
+  if (v instanceof Date) return Number.isNaN(v.getTime()) ? null : nyDay(v);
+  const t = str(v);
+  if (!t) return null;
+  if (isDay(t)) return t;
+  const d = new Date(t);
+  return Number.isNaN(d.getTime()) ? null : nyDay(d);
+}
+function frontmatterAt(v: unknown): string | null {
+  if (v instanceof Date) return Number.isNaN(v.getTime()) ? null : v.toISOString();
+  const t = str(v);
+  if (!t) return null;
+  const d = new Date(t);
+  return Number.isNaN(d.getTime()) ? null : d.toISOString();
+}
+
+/**
+ * C2: fold an account's notes into the day's summary. A conversation is a meeting note or a raw Fireflies capture whose
+ * date is not after `now` (a prep note for a meeting ahead is not a conversation held); the next action, its due day
+ * and the last touch come from the newest account note's frontmatter (next_action, next_action_due, last_touched).
+ * No notes at all is null (the card carries nothing).
+ */
+export function accountKnowledgeOf(notes: readonly KnowledgeNoteLike[], now: Date): AccountKnowledge | null {
+  if (!notes.length) return null;
+  const held = notes.filter((n) => (n.kind === 'meeting' || (n.kind === 'raw' && n.source === 'fireflies')) && Number.isFinite(noteAt(n)) && noteAt(n) <= now.getTime());
+  const newestHeld = held.map(noteAt).sort((a, b) => b - a)[0];
+  const account = notes.filter((n) => n.kind === 'account').sort((a, b) => (noteAt(b) || 0) - (noteAt(a) || 0))[0] ?? null;
+  const fm = (account?.frontmatter ?? {}) as Record<string, unknown>;
+  return {
+    lastConversationAt: newestHeld !== undefined ? new Date(newestHeld).toISOString() : null,
+    conversations: held.length,
+    nextAction: str(fm.next_action),
+    nextActionDue: frontmatterDay(fm.next_action_due),
+    lastTouched: frontmatterAt(fm.last_touched),
+  };
+}
+
+/** C2: the summaries for the day's accounts, a few reads at a time; an account whose read fails has none. */
+export async function knowledgeByAccount(prisma: PrismaLike, accounts: readonly string[], reader: KnowledgeReader, now: Date): Promise<Map<string, AccountKnowledge>> {
+  const out = new Map<string, AccountKnowledge>();
+  const names = [...new Set(accounts)];
+  const results = await mapLimit(names, KNOWLEDGE_CONCURRENCY, (name) => reader(prisma, name, { limit: KNOWLEDGE_NOTES_LIMIT }));
+  results.forEach((r, k) => {
+    if (r.status !== 'fulfilled' || !Array.isArray(r.value)) return;
+    const k2 = accountKnowledgeOf(r.value, now);
+    if (k2) out.set(names[k], k2);
+  });
+  return out;
 }
 
 export interface WorkDayLoad {
@@ -68,7 +152,7 @@ export function preparedAnglesByAccount(pursued: readonly PursuedItem[]): Map<st
   return out;
 }
 
-export async function loadWorkDay(prisma: PrismaLike, opts: LoadWorkDayOptions): Promise<WorkDayLoad> {
+export async function loadWorkDay(prisma: PrismaLike, opts: LoadWorkDayOptions, deps: LoadWorkDayDeps = {}): Promise<WorkDayLoad> {
   const { fresh } = opts;
   const read = await cachedRead('cockpit', () => loadCockpit(prisma), { fresh });
   const data = read.value;
@@ -123,6 +207,9 @@ export async function loadWorkDay(prisma: PrismaLike, opts: LoadWorkDayOptions):
   // The day's own in-deals read rides along so a person two accounts claim is placed by the family's deal (C5), as the intelligence does.
   const pursued: PursuedItem[] = lane ? [] : await loadPursued(prisma, realNow, { coverage: dealCoverageFrom(data.workInput.inDeals) }).catch(() => []);
   const preparedAngles = preparedAnglesByAccount(pursued);
+  // C2: the vault's account summaries ride as ranking evidence (never under a lane; soft: no reader, or a reader that
+  // throws, is no knowledge). The windows are read at `now` (the preview's tomorrow reads tomorrow's windows).
+  const knowledge = lane || !deps.knowledge ? new Map<string, AccountKnowledge>() : await knowledgeByAccount(prisma, [...new Set([...data.workAccounts, ...commitments.map((c) => c.accountName)])], deps.knowledge, now).catch(() => new Map<string, AccountKnowledge>());
   const [priorities, followUpPlans, meetingPreps, closedDeals] = await Promise.all([
     loadAccountPriorities(prisma, [...new Set([...data.workAccounts, ...commitments.map((c) => c.accountName)])]).catch(() => new Map()),
     // R43: each follow-up due today, read off the person's own history (prepare, by hand, a saved draft, unknown, held).
@@ -131,7 +218,7 @@ export async function loadWorkDay(prisma: PrismaLike, opts: LoadWorkDayOptions):
     loadMeetingStartingPoints(prisma, meetingRows.filter((m) => new Date(m.at).getTime() <= now.getTime() + 24 * 3_600_000), commitments, now).catch(() => new Map()),
     closureAccounts.length ? loadRecordedClosures(prisma, closureAccounts).catch(() => new Map()) : Promise.resolve(new Map()),
   ]);
-  const day = workDay({ ...data.workInput, replies: live.replies, now, summaries, outcomes, commitments, meetings, canceledMeetings, meetingPreps, priorities, followUpPlans, closedDeals, preparedMeetings, preparedAngles });
+  const day = workDay({ ...data.workInput, replies: live.replies, now, summaries, outcomes, commitments, meetings, canceledMeetings, meetingPreps, priorities, followUpPlans, closedDeals, preparedMeetings, preparedAngles, knowledge });
   // R45: close the day and keep tomorrow, derived from actual state (no new storage).
   const doneToday = lane || preview ? [] : await loadCompletedToday(prisma, now).catch(() => []);
   const today = todaySummary({ now, commitments, done: doneToday, waiting: day.waiting, meetings, moved: buyerMoves(data.workInput.replies) });
