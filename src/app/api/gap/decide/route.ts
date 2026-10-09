@@ -25,5 +25,7 @@ export async function POST(request: NextRequest) {
   if (!parsed.success) return badBody(parsed.error.issues);
   const r = await applyDecision(prisma, { key: parsed.data.key, decision: parsed.data.decision, note: parsed.data.note ?? null, actor: g.email, now: new Date(), via: 'app' }, { contactLookup: hubspotContactByEmail });
   if (!r.ok) return NextResponse.json({ error: r.reason }, { status: r.reason === 'not_found' ? 404 : 400 });
-  return NextResponse.json({ ...r, line: decisionLine(r) });
+  // C44: the state the action came to. Pursue and More queue background work (the angle, the research); the rest are recorded now.
+  const state = r.decision === 'pursue' || r.decision === 'more' ? 'queued' : 'accepted';
+  return NextResponse.json({ ...r, state, line: decisionLine(r) });
 }

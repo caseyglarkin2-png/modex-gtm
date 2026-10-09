@@ -18,6 +18,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { doneNextLinks, readWorkOrder, type DoneNextLinks } from '@/lib/gap/work/order';
+import { postAction, type ActionResult } from '@/lib/gap/ui/action-result';
+import { refreshNow } from './refresh-now';
 
 const BTN = 'inline-flex min-h-11 items-center justify-center rounded-md px-3 text-sm font-medium';
 const PRIMARY = `${BTN} bg-[var(--primary)] text-[var(--primary-foreground)] hover:opacity-90`;
@@ -37,32 +39,29 @@ export function DoneNext({ slug, index, accountName }: { slug: string; index: nu
   const [until, setUntil] = useState(() => dateInput(addDays(new Date(), 7)));
   const [note, setNote] = useState('');
   const [busy, setBusy] = useState(false);
-  const [status, setStatus] = useState<{ kind: 'status' | 'alert'; text: string } | null>(null);
+  const [status, setStatus] = useState<{ kind: 'status' | 'alert'; text: string; result: ActionResult | null } | null>(null);
+  const [last, setLast] = useState<'skipped' | 'snoozed' | 'logged' | null>(null);
   const statusRef = useRef<HTMLParagraphElement>(null);
 
   async function record(kind: 'skipped' | 'snoozed' | 'logged') {
     if (!accountName) return;
     setBusy(true);
     setStatus(null);
-    try {
-      const body: Record<string, unknown> = { accountName, kind };
-      if (kind === 'snoozed') body.until = new Date(`${until}T12:00:00Z`).toISOString();
-      if (kind === 'logged' && note.trim()) body.reason = note.trim();
-      const res = await fetch('/api/gap/accounts/outcome', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
-      const r = (await res.json().catch(() => ({}))) as { line?: string | null; error?: string };
-      if (!res.ok) {
-        setStatus({ kind: 'alert', text: `Could not record it (${r.error ?? res.status}). Nothing changed.` });
-        requestAnimationFrame(() => statusRef.current?.focus());
-        return;
-      }
-      setStatus({ kind: 'status', text: `${r.line ?? 'Recorded.'} ${links.next ? 'Moving to the next account.' : 'Back to Work.'}` });
-      setMode('idle');
-      router.push(links.next ? links.next.href : links.backToWork);
-    } catch (e) {
-      setStatus({ kind: 'alert', text: e instanceof Error ? e.message : 'network error' });
-    } finally {
-      setBusy(false);
+    setLast(kind);
+    const body: Record<string, unknown> = { accountName, kind };
+    if (kind === 'snoozed') body.until = new Date(`${until}T12:00:00Z`).toISOString();
+    if (kind === 'logged' && note.trim()) body.reason = note.trim();
+    // C44: never a throw; a refusal keeps its words and nothing changed; an incomplete request may have applied (reload).
+    const r = await postAction('/api/gap/accounts/outcome', body, { verb: 'Recorded', source: accountName, refusedLine: (code) => `Could not record it (${code}). Nothing changed.` });
+    setBusy(false);
+    if (r.state !== 'accepted' && r.state !== 'queued') {
+      setStatus({ kind: 'alert', text: r.line, result: r });
+      requestAnimationFrame(() => statusRef.current?.focus());
+      return;
     }
+    setStatus({ kind: 'status', text: `${r.line} ${links.next ? 'Moving to the next account.' : 'Back to Work.'}`, result: r });
+    setMode('idle');
+    router.push(links.next ? links.next.href : links.backToWork);
   }
 
   return (
@@ -125,8 +124,24 @@ export function DoneNext({ slug, index, accountName }: { slug: string; index: nu
           <button type="submit" className={PRIMARY} disabled={busy} data-testid="done-next-logged-confirm">{busy ? 'Recording...' : 'Record it'}</button>
         </form>
       ) : null}
-      <p ref={statusRef} tabIndex={-1} role={status?.kind === 'alert' ? 'alert' : 'status'} aria-live="polite" className={`text-xs outline-none ${status?.kind === 'alert' ? 'text-red-700 dark:text-red-400' : 'text-[var(--muted-foreground)]'}`} data-testid="done-next-status">
+      <p ref={statusRef} tabIndex={-1} role={status?.kind === 'alert' ? 'alert' : 'status'} aria-live="polite" className={`text-xs outline-none ${status?.kind === 'alert' ? 'text-red-700 dark:text-red-400' : 'text-[var(--muted-foreground)]'}`} data-testid="done-next-status" data-state={status?.result?.state ?? 'idle'}>
         {status?.text ?? ''}
+        {status?.result?.retry && last ? (
+          <>
+            {' '}
+            <button type="button" className="rounded border border-[var(--border)] px-1.5 py-0.5 text-xs hover:bg-[var(--muted)] disabled:opacity-60" disabled={busy} onClick={() => void record(last)} data-testid="done-next-status-retry">
+              Try again
+            </button>
+          </>
+        ) : null}
+        {status?.result?.next?.kind === 'reload' ? (
+          <>
+            {' '}
+            <button type="button" className="rounded border border-[var(--border)] px-1.5 py-0.5 text-xs hover:bg-[var(--muted)] disabled:opacity-60" disabled={busy} onClick={() => refreshNow(router)} data-testid="done-next-status-reload">
+              {status.result.next.label}
+            </button>
+          </>
+        ) : null}
       </p>
     </nav>
   );
