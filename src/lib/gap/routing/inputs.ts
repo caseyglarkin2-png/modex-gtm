@@ -466,10 +466,11 @@ function buildHypothesis(h: HypothesisRow | null, now: Date, hasNewerVersion: bo
     // same rule approval, activation, the compiler and the send gate apply.
     // R34: under the thesis's declared approach, as those gates read it (a
     // job-led thesis on a live posting is not thin for want of a physical fact).
+    // I06g (the review's finding 1): thin is judged over USABLE facts; a fact past its window is not thin for its age.
     evidenceThin:
       sendableEvidence(
         h.observation,
-        signals.filter((s) => isCurrentFact(s, now)),
+        signals.filter((s) => isUsableFact(s, now)),
         h.account_name ?? '',
         { approach: approachOfHypothesis(h) },
       ).tier !== 'VERIFIED_FACT',

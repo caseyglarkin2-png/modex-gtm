@@ -123,7 +123,8 @@ describe('POST /api/gap/replies/[id]/suggest', () => {
     const res = await suggest('hs:44');
     expect(res.status).toBe(200);
     expect(await res.json()).toEqual({ suggestion: { id: 'D_ai', responseClass: 'timing', bids: [], why: 'Q1' } });
-    expect(mockedSuggest.mock.calls[0]).toEqual([{ __tag: 'fake-prisma' }, mockedGenerate, 'hs:44']);
+    // A04: the route hands suggestReply the metered generator (gapGenerate over the ledger), not the bare client.
+    expect(mockedSuggest.mock.calls[0]).toEqual([{ __tag: 'fake-prisma' }, expect.any(Function), 'hs:44']);
   });
 
   it('a rejected model answer is 200 with suggestion null and the reason', async () => {

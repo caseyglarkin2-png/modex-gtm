@@ -172,6 +172,9 @@ describe('X20a: the briefing and agent-task crons on health', () => {
     expect(comp({ ...base, model: { ...base.model!, lastCall: { at: min(1).toISOString(), outcome: 'failed', model: null, errorCategory: 'quota' } } }, 'model')).toMatchObject({ state: 'HEALTHY' });
     expect(comp({ ...base, model: { ...base.model!, lastCall: { at: min(1).toISOString(), outcome: 'refused', model: null, errorCategory: 'task_budget' } } }, 'model')).toMatchObject({ state: 'DEGRADED', label: 'The last model call was refused (task_budget)' });
     expect(comp({ ...base, model: undefined }, 'model')).toMatchObject({ state: 'HEALTHY', label: 'Model spend not read' });
+    // A04: the gateway's credit balance rides on the label and the detail; spent credits block.
+    expect(comp({ ...base, model: { ...base.model!, credits: { balance: 4.11, totalUsed: 1.28 } } }, 'model')).toMatchObject({ state: 'HEALTHY', label: 'Model spend $0.42 of $25.00 for September · gateway credits $4.11', detail: expect.stringContaining('AI Gateway credits $4.11 left ($1.28 used, every path on the route)') });
+    expect(comp({ ...base, model: { ...base.model!, credits: { balance: 0, totalUsed: 5.4 } } }, 'model')).toMatchObject({ state: 'BLOCKED', label: 'AI Gateway credits are spent' });
     expect(evaluateHealth({ ...base, model: { ...base.model!, monthUsd: 26 } }, NOW).overall).toBe('BLOCKED');
   });
 
@@ -197,7 +200,12 @@ describe('X20a: the briefing and agent-task crons on health', () => {
     expect(bare.briefing).toMatchObject({ enabled: false, to: null, sentTodayAt: null, lastSuccessAt: null });
     expect(bare.agents).toMatchObject({ enabled: false, lastSuccessAt: null, queued: 0 });
     // A02: the spend ledger read through the same client; empty answers zero calls under the default ceiling.
-    expect(i.model).toMatchObject({ monthUsd: 0, ceilingUsd: 25, calls: 0, lastCall: null, warnFraction: 0.8 });
+    expect(i.model).toMatchObject({ monthUsd: 0, ceilingUsd: 25, calls: 0, lastCall: null, warnFraction: 0.8, credits: null });
+    // A04: with a gateway key the credits read is injected and lands on the inputs; a failing read is null, never a throw.
+    const withKey = await loadHealthInputs(prisma, { env: { ...env, AI_GATEWAY_API_KEY: 'k' }, clock: () => NOW.getTime(), gatewayCredits: async () => ({ balance: 4.11, totalUsed: 1.28 }) });
+    expect(withKey.model?.credits).toEqual({ balance: 4.11, totalUsed: 1.28 });
+    const failing = await loadHealthInputs(prisma, { env: { ...env, AI_GATEWAY_API_KEY: 'k' }, clock: () => NOW.getTime(), gatewayCredits: async () => { throw new Error('503'); } });
+    expect(failing.model?.credits).toBeNull();
   });
 });
 

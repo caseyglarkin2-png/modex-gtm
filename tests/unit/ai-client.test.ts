@@ -90,6 +90,28 @@ describe('classifyAIError: a retired model is model_missing, never a timeout (pr
   });
 });
 
+describe('A04: the clawd control plane is never a fallback when the caller says so', () => {
+  it('with only CLAWD_CONTROL_PLANE_URL set, skipControlPlane throws AIAllProvidersFailed without a request; without the option the control plane is tried', async () => {
+    vi.resetModules();
+    delete process.env.AI_GATEWAY_API_KEY;
+    delete process.env.OPENAI_API_KEY;
+    delete process.env.GEMINI_API_KEY;
+    process.env.CLAWD_CONTROL_PLANE_URL = 'https://control-plane.example/generate';
+    const fetchMock = vi.fn(async () => new Response(JSON.stringify({ text: 'from clawd' }), { status: 200, headers: { 'content-type': 'application/json' } }));
+    vi.stubGlobal('fetch', fetchMock);
+    try {
+      const { generateTextWithMetadata, AIAllProvidersFailed } = await import('@/lib/ai/client');
+      await expect(generateTextWithMetadata('prospect data', 100, { skipControlPlane: true })).rejects.toBeInstanceOf(AIAllProvidersFailed);
+      expect(fetchMock).not.toHaveBeenCalled();
+      await expect(generateTextWithMetadata('prospect data', 100)).resolves.toMatchObject({ provider: 'control_plane', text: 'from clawd' });
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+    } finally {
+      vi.unstubAllGlobals();
+      delete process.env.CLAWD_CONTROL_PLANE_URL;
+    }
+  });
+});
+
 describe('A01: exhausted billing is permanent, never a transient quota; an invalid key is permanent; the gateway answers with its model and cost', () => {
   it('classifies OpenAI insufficient_quota (a 429), the gateway free-tier 403 and a 402 as billing, non-retryable; a 401 as authentication; a 503 as service, retryable', async () => {
     const { classifyAIError } = await import('@/lib/ai/client');

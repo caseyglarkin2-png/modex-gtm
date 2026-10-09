@@ -36,6 +36,7 @@
  * by the enroll service and the runtime. Voice: no em dashes.
  */
 import { stripSourceMarkers } from '@/lib/source-backed/attribution';
+import { factUsability, reportedLabel } from '../research/currentness';
 import type { SignalRow } from '@/lib/gap/compiler/evidence-from-signals';
 
 export interface RenderValues {
@@ -46,6 +47,12 @@ export interface RenderValues {
 export interface RenderCopyValues extends RenderValues {
   /** The hypothesis observation with its `[S:id]` tokens; null or empty leaves `{{observation}}` unrendered. */
   observation?: string | null;
+  /**
+   * I06g: the cited facts that are HISTORICAL at render time with their reported-date labels ("May 2018"). An
+   * observation written while its fact was current carries no date; the render adds "(reported May 2018)" so the
+   * compiler's C01 (which holds historical copy to its date) passes and an old event is never written as today.
+   */
+  historical?: ReadonlyArray<{ id: string; label: string }>;
 }
 
 export interface StepCopy {
@@ -98,10 +105,30 @@ export function observationToMarkers(observation: string): string {
  * Fill `{{observation}}` with the marked observation. An empty or missing
  * observation leaves the slot in place so `unrenderedPlaceholder` refuses it.
  */
-export function renderObservationSlot(text: string, observation: string | null | undefined): string {
+export function renderObservationSlot(text: string, observation: string | null | undefined, historical: ReadonlyArray<{ id: string; label: string }> = []): string {
   const obs = (observation ?? '').trim();
   if (!obs) return text;
-  return text.replaceAll(PLACEHOLDER_OBSERVATION, observationToMarkers(obs));
+  return text.replaceAll(PLACEHOLDER_OBSERVATION, observationToMarkers(withReportedDates(obs, historical)));
+}
+
+/** I06g: append "(reported <Month YYYY>)" for each cited historical fact whose date the observation does not state. */
+export function withReportedDates(observation: string, historical: ReadonlyArray<{ id: string; label: string }>): string {
+  const cited = new Set([...observation.matchAll(OBSERVATION_TOKEN_RE)].map((m) => m[1]));
+  const missing = [...new Set(historical.filter((h) => cited.has(h.id) && !observation.includes(`reported ${h.label}`)).map((h) => h.label))];
+  if (missing.length === 0) return observation;
+  return `${observation.replace(/\s*\.?\s*$/, '')} (reported ${missing.join(' and ')}).`;
+}
+
+/** The historical cited facts with their labels, from signal rows the one authority can read (research/currentness.ts). */
+export function historicalLabelsFor(signals: ReadonlyArray<{ id?: string | null; observed_at?: Date | string | null; freshness_expires_at?: Date | string | null; type?: string | null; evidence_text?: string | null; metadata?: unknown } | null | undefined>, now: Date): Array<{ id: string; label: string }> {
+  const out: Array<{ id: string; label: string }> = [];
+  for (const s of signals) {
+    if (!s || typeof s.id !== 'string') continue;
+    const u = factUsability(s, now);
+    const when = u.usable && u.historical ? reportedLabel(s.observed_at ?? null) : null;
+    if (when) out.push({ id: s.id, label: when.label });
+  }
+  return out;
 }
 
 /**
@@ -125,7 +152,7 @@ export function unrenderedPlaceholder(text: string): string | null {
 
 /** Render one step's templates into the marked copy (for the compiler) and the queued copy (for the queue). */
 export function renderStepCopy(templates: StepCopy, values: RenderCopyValues): RenderedCopy {
-  const fill = (text: string) => renderPlaceholders(renderObservationSlot(text, values.observation), values);
+  const fill = (text: string) => renderPlaceholders(renderObservationSlot(text, values.observation, values.historical ?? []), values);
   const marked: StepCopy = { subject: fill(templates.subject), body: fill(templates.body) };
   const queued: StepCopy = { subject: stripCitationMarkers(marked.subject), body: stripCitationMarkers(marked.body) };
   return { marked, queued, unrendered: unrenderedPlaceholder(marked.subject) ?? unrenderedPlaceholder(marked.body) };

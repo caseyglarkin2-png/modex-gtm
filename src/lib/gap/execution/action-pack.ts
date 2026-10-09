@@ -28,7 +28,7 @@ import type { EnrollTarget, RoutingInputs, RoutingTop100Input } from '../routing
 import { parseSteps, type StepsV2 } from '../sequence/steps';
 import { APPROACH_PROGRAM, approachOfFamilyProgram } from '../sequences/families';
 import { approachOfHypothesis, type EvidenceApproach } from '../research/approach-policy';
-import { firstNameOf, renderStepCopy, type RenderedCopy } from '../sequence/render';
+import { firstNameOf, historicalLabelsFor, renderStepCopy, type RenderedCopy } from '../sequence/render';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -301,7 +301,7 @@ export async function loadActionPack(prisma: PrismaLike, args: LoadActionPackArg
     persona && step0?.templates?.subjectTemplate && step0.templates.bodyTemplate
       ? renderStepCopy(
           { subject: step0.templates.subjectTemplate, body: step0.templates.bodyTemplate },
-          { firstName: firstNameOf(persona.name), account: hypothesis.account_name, observation: hypothesis.observation },
+          { firstName: firstNameOf(persona.name), account: hypothesis.account_name, observation: hypothesis.observation, historical: historicalLabelsFor(Array.isArray(hypothesis.signals) ? hypothesis.signals.map((l: { signal?: unknown }) => l.signal as never) : [], new Date()) },
         )
       : null;
   // X10: an approved copy revision for THIS card and step is what the pack renders, hashes and finds the compile row

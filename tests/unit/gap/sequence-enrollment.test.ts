@@ -227,7 +227,7 @@ describe('enroll refusals, in guard order', () => {
     ['no linked signal', []],
     ['a keyword hit', [{ signal: { ...VERIFIED_SIGNAL, evidence_text: null, metadata: null } }]],
     ['an unverified quote', [{ signal: { ...VERIFIED_SIGNAL, metadata: null } }]],
-    ['an expired fact', [{ signal: { ...VERIFIED_SIGNAL, freshness_expires_at: new Date('2020-01-01T00:00:00.000Z') } }]],
+    ['an ended fact (I06g: an expired one is sufficient, cited with its date)', [{ signal: { ...VERIFIED_SIGNAL, freshness_expires_at: new Date('2020-01-01T00:00:00.000Z'), metadata: { ...(VERIFIED_SIGNAL.metadata as Record<string, unknown>), continuity: { kind: 'ended' } } } }]],
     ["another account's fact", [{ signal: { ...VERIFIED_SIGNAL, account_name: 'Other Co' } }]],
   ])('red team T6: evidence_insufficient on a ready hypothesis with %s; nothing written', async (_label, signals) => {
     const prisma = makePrisma();

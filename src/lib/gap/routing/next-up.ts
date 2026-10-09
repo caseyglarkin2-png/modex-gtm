@@ -116,7 +116,7 @@ export function buildNextUpCandidates(input: NextUpInput): NextCandidate[] {
       lane: 'ready',
       accountName: c.account.name,
       title: `Contact ${who(c.persona)}`,
-      detail: `${c.account.name}${c.persona.title ? `, ${c.persona.title}` : ''}.${exp ? ` The fact is usable until ${exp.slice(0, 10)}.` : ''}`,
+      detail: `${c.account.name}${c.persona.title ? `, ${c.persona.title}` : ''}.${exp ? ` The fact is current until ${exp.slice(0, 10)}; after that it is cited with its date.` : ''}`,
       href: input.openHref('ready', c.id),
       sortKey: [timeKey(exp), tier(c.account.name), timeKey(c.createdAt)],
     });
