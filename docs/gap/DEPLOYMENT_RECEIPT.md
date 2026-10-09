@@ -1,19 +1,19 @@
 # GAP OS deployment and configuration receipt
 
-STATUS: RECEIPT, generated 2026-10-09T11:15:27.577Z by scripts/gap/deployment-receipt.ts (reads only; no secret values; regenerate rather than edit).
+STATUS: RECEIPT, generated 2026-10-09T11:52:37.154Z by scripts/gap/deployment-receipt.ts (reads only; no secret values; regenerate rather than edit).
 <!-- verified:2026-10-09 -->
 
 Three things kept apart: the LOCAL CODE this receipt was generated from, the DEPLOYED ENVIRONMENT (the deployment Vercel serves on the production alias and the environment it snapshotted at build time), and the PROJECT SETTINGS (what the Vercel project holds now; a change here reaches production only with the next deploy).
 
 ## 1. Local code
 
-- Commit 38afd5a9 on feat/gap-execution-engine (uncommitted changes present); origin/main a195467f.
-- Local code is NOT the deployed commit (deployed a195467f).
+- Commit fd4091bc on feat/gap-execution-engine (uncommitted changes present); origin/main fd4091bc.
+- Local code IS the deployed commit (deployed fd4091bc).
 
 ## 2. Deployed environment
 
-- Production alias modex-gtm.vercel.app serves deployment dpl_G9KX6ZmwES9f719vk8jsrCcay6r1, state READY, commit a195467f, ready 2026-10-09T01:47:22.876Z (alias binding from the API: modex-gtm.vercel.app).
-- Other recent production deployments: dpl_8uZtsdeXsHBH7wNZsBQWomBESN24 READY cfce2f27 2026-10-09T01:42:56.040Z; dpl_ChJ8apYhQmWeQ9UgmBrNGHXno6rq READY ed9976e8 2026-10-09T01:37:25.771Z; dpl_F7CbnmnmAxGi2o6MFkY3n5sLiQtY READY 672b8694 2026-10-09T01:14:25.843Z; dpl_A3wfy29ckQtKmnhym4TLSaQkkaMB READY 4976f1e5 2026-10-09T01:09:38.958Z.
+- Production alias modex-gtm.vercel.app serves deployment dpl_91j7Tf4qZPjJqqbBo7AMWCX6eVNU, state READY, commit fd4091bc, ready 2026-10-09T11:51:11.833Z (alias binding from the API: modex-gtm.vercel.app).
+- Other recent production deployments: dpl_G9KX6ZmwES9f719vk8jsrCcay6r1 READY a195467f 2026-10-09T01:47:22.876Z; dpl_8uZtsdeXsHBH7wNZsBQWomBESN24 READY cfce2f27 2026-10-09T01:42:56.040Z; dpl_ChJ8apYhQmWeQ9UgmBrNGHXno6rq READY ed9976e8 2026-10-09T01:37:25.771Z; dpl_F7CbnmnmAxGi2o6MFkY3n5sLiQtY READY 672b8694 2026-10-09T01:14:25.843Z.
 - The environment a deployment runs with is the project environment snapshotted at ITS build; a project setting changed after that time is not in it until the next deploy.
 - Crons in the deployed build: not read (the local vercel.json below is the code's declaration; the deployed set is what Vercel registered at build).
 
@@ -26,17 +26,12 @@ Three things kept apart: the LOCAL CODE this receipt was generated from, the DEP
 
 ## 4. Baseline pointer
 
-- docs/gap/STABLE_BASELINE.md says: Production SHA: a195467f (PR #431, X22 the explicit briefing resend; over cfce2f27 = PR #430 docs, ed9976e8 = PR #429 X19 + A06 + the hanging items, 672b8694 = PR #428 docs, 4976f1e5 = PR #427 I06g/A04, a76f3440 = PR #426 I06f/A03d/the comp ...
-- That pointer AGREES with the deployed commit (a195467f).
+- docs/gap/STABLE_BASELINE.md says: Production SHA: fd4091bc (PR #432, the commercial-context and execution audit C01-C60 with the client-chunk build fix b76dc1d5; Vercel `dpl_91j7Tf4qZPjJqqbBo7AMWCX6eVNU` READY 2026-10-09T11:51:11Z; rollback a195467f `dpl_G9KX6ZmwES9f719vk8j ...
+- That pointer AGREES with the deployed commit (fd4091bc).
 
 ## 5. Last successful source reads (health)
 
-- Health read 2026-10-08T19:17:13.152Z (saved file docs/gap/health-capture-2026-10-08.json): overall DEGRADED.
-- mailbox: HEALTHY. Mailbox intake 6m ago. Last successful run 6m ago (2026-10-08T19:10:50.891Z); 0 consecutive failure(s); last message: apply: 2 inbox messages since 1791474956.
-- hubspot: HEALTHY. HubSpot reads OK. HubSpot answered in 120ms.
-- suppression: HEALTHY. Suppression authority OK. Contract answered in 590ms.
-- sender: HEALTHY. Sending as [value of GAP_GMAIL_USER_EMAIL]. GAP sends from [value of GAP_GMAIL_USER_EMAIL].
-- routing: DEGRADED. Recommendations refreshed 3d ago · cards may be stale. Last completed routing run 2026-10-05T20:46:45.554Z. Every outbound click re-checks the card, so an old card cannot send stale.
+- Not read this run: the health route needs a seller session; pass --health <json file saved from /api/gap/health> to include it. Absent here means unread, not healthy.
 
 ## 6. Unread
 
