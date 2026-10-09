@@ -143,7 +143,10 @@ export async function buildAssignment(prisma: PrismaLike, input: BuildAssignment
   for (const b of (ctx?.buyerSaid ?? []).slice(0, 3)) lines.push(safeLine(`They said: "${b.text}"${b.who || b.at ? ` (${[b.who, b.at].filter(Boolean).join(', ')})` : ''}`));
   // Seller acceptance (C4): the sources the Ask context did NOT read this time are named, so "what we know" is never
   // mistaken for everything there is; nothing is printed when everything was read.
-  if (typeof ctx?.coverageLine === 'string' && ctx.coverageLine.trim()) lines.push(safeLine(`Not read this time: ${ctx.coverageLine.trim()}`));
+  // The context's own line already carries its prefixes ("Not read this time: ...", "Partly read: ..."): printed verbatim;
+  // a bare list gets the prefix. The harness reads the "Not read this time" prefix at the start of the printed line.
+  const coverage = typeof ctx?.coverageLine === 'string' ? ctx.coverageLine.trim() : '';
+  if (coverage) lines.push(safeLine(/^(Not read this time|Partly read)\b/i.test(coverage) ? coverage : `Not read this time: ${coverage}`));
   let prepared: Prepared = { kind: 'none' };
   // Seller acceptance follow-up addendum (2026-10-09): a deal, follow-up or review item at an account where a
   // develop_angle task succeeded (a person placed at the account at read time) carries that angle: the Kenco deal
