@@ -44,12 +44,19 @@ const key = (name: string) => name.trim().toLowerCase();
 export const ABSENT_COVERAGE: DealCoverage = { status: 'absent', checkedAt: null, byName: new Map(), byContactId: new Map(), unmappedNames: new Set() };
 
 /** The coverage the in-deals summary gives (the same read the day, the Work page and the briefing use). */
-export function dealCoverageFrom(summary: Pick<InDealsSummary, 'status' | 'accounts'> & { checkedAt?: string | null } | null | undefined): DealCoverage {
+/** The structural shape the coverage reads: the in-deals summary, or the day's narrowed copy of it (WorkInput.inDeals). */
+export interface CoverageSummaryLike {
+  status: string;
+  checkedAt?: string | null;
+  accounts?: ReadonlyArray<{ accountName: string; alsoRecordedAs?: readonly string[]; deals?: ReadonlyArray<{ id?: string | null; name?: string | null; stage?: string | null; nextStep?: string | null; closeDate?: string | null; contactIds?: readonly string[] }> }>;
+}
+
+export function dealCoverageFrom(summary: CoverageSummaryLike | Pick<InDealsSummary, 'status' | 'accounts'> | null | undefined): DealCoverage {
   if (!summary) return ABSENT_COVERAGE;
   const byName = new Map<string, CoveredAccount>();
   const byContactId = new Map<string, CoveredAccount>();
   for (const a of summary.accounts ?? []) {
-    const deals: CoveredDeal[] = (a.deals ?? []).map((d) => ({ id: d.id ?? null, name: d.name ?? null, stage: d.stage, nextStep: d.nextStep ?? null, closeDate: d.closeDate ?? null, contactIds: [...(d.contactIds ?? [])] }));
+    const deals: CoveredDeal[] = (a.deals ?? []).map((d) => ({ id: d.id ?? null, name: d.name ?? null, stage: d.stage ?? '', nextStep: d.nextStep ?? null, closeDate: d.closeDate ?? null, contactIds: [...(d.contactIds ?? [])] }));
     const names = [a.accountName, ...(a.alsoRecordedAs ?? [])];
     const entry: CoveredAccount = { accountName: a.accountName, names, deals };
     for (const n of names) byName.set(key(n), entry);
@@ -61,7 +68,7 @@ export function dealCoverageFrom(summary: Pick<InDealsSummary, 'status' | 'accou
     for (const k of ['companyName', 'name', 'accountName', 'hubspotCompanyName']) if (typeof u[k] === 'string' && (u[k] as string).trim()) unmappedNames.add(key(u[k] as string));
     for (const d of (Array.isArray(u.deals) ? (u.deals as Array<Record<string, unknown>>) : [])) if (typeof d.companyName === 'string') unmappedNames.add(key(d.companyName));
   }
-  return { status: summary.status === 'complete' ? 'complete' : 'unavailable', checkedAt: summary.checkedAt ?? null, byName, byContactId, unmappedNames };
+  return { status: summary.status === 'complete' ? 'complete' : 'unavailable', checkedAt: (summary as { checkedAt?: string | null }).checkedAt ?? null, byName, byContactId, unmappedNames };
 }
 
 /** Compatibility with the older `dealAccounts` set (names only): null is absent, a set is a complete read of those names. */

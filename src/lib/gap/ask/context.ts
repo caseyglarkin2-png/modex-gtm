@@ -11,10 +11,60 @@ import { refineNextWithAnchor } from '../pursuit/next-anchor';
 import { storyBesideAnchor } from '../story/anchor';
 import { composeStoryAndAnchor } from '../story/compose';
 import { accountHref } from '../account-intel/href';
-import { compactContext, type AskContext } from './grounding';
+import { knowledgeAdapters } from '../story/load';
+import type { AccountInputs } from '../account-intel/build';
+import type { AccountStory } from '../story/story';
+import { compactContext, type AskContext, type AskCoverage } from './grounding';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
+
+/** What the account page's own reads say about each source (seller acceptance, 2026-10-09). Pure. */
+export interface AskCoverageInputs {
+  /** AccountInputs.opportunity: null is "HubSpot not read this time"; UNKNOWN is a read that did not settle (its detail says why). */
+  opportunity: AccountInputs['opportunity'];
+  /** The vault note row is on the story: the vault was read and held a note. */
+  vaultNote: boolean;
+  vaultConfigured: boolean;
+  clawdConfigured: boolean;
+  /** The story said Clawd's history could not be read. */
+  clawdFailed: boolean;
+  /** A GAP sender exists (GAP_GMAIL_USER_EMAIL); Sent is still not read on the account page. */
+  senderConfigured: boolean;
+  /** GAP drafts the ledger knows (first touches with a Gmail draft id); Gmail's own drafts are not read. */
+  draftsOnRecord: number;
+  /** C6: the inbound read (thread-keyed and placed): how many placed messages were merged, and whether the identity context was readable. */
+  inbound?: { placed: number; identityRead: boolean; detail: string | null } | null;
+}
+
+export function askCoverageOf(i: AskCoverageInputs): AskCoverage[] {
+  const o = i.opportunity;
+  return [
+    { source: 'hubspot', status: !o ? 'not_read' : o.status === 'UNKNOWN' ? 'failed' : 'read', detail: !o ? 'not read this time' : o.status === 'UNKNOWN' ? o.detail || 'the read did not settle' : null },
+    // The replies the page shows come from GAP's synced inbox (the poller's copy), never a live thread read.
+    { source: 'gmail_thread', status: 'partial', detail: `GAP's synced inbox, not a live thread read${i.inbound ? (i.inbound.identityRead ? `; ${i.inbound.placed} placed sender message${i.inbound.placed === 1 ? '' : 's'} merged` : `; ${i.inbound.detail ?? 'senders could not be placed'}`) : ''}` },
+    { source: 'gmail_sent', status: 'not_read', detail: i.senderConfigured ? 'not read on the account page' : 'no GAP sender configured' },
+    { source: 'gmail_drafts', status: i.draftsOnRecord > 0 ? 'partial' : 'not_read', detail: i.draftsOnRecord > 0 ? `${i.draftsOnRecord} GAP draft${i.draftsOnRecord === 1 ? '' : 's'} known from the ledger; Gmail drafts not read` : 'Gmail drafts not read' },
+    { source: 'vault', status: !i.vaultConfigured ? 'not_read' : i.vaultNote ? 'read' : 'partial', detail: !i.vaultConfigured ? 'not configured' : i.vaultNote ? null : 'no account note found, or the read failed' },
+    { source: 'clawd', status: !i.clawdConfigured ? 'not_read' : i.clawdFailed ? 'failed' : 'read', detail: !i.clawdConfigured ? 'not configured' : i.clawdFailed ? 'could not be read' : null },
+    { source: 'signals', status: 'read', detail: null },
+  ];
+}
+
+/** The coverage the page's own reads support, from the inputs and the composed story (no new read; the adapters are a config check). */
+export function coverageFromPage(inputs: Pick<AccountInputs, 'opportunity' | 'firstTouches'> & { inbound?: AccountInputs['inbound'] }, story: AccountStory | null, env: Record<string, string | undefined> = process.env): AskCoverage[] {
+  const { vault, clawd } = knowledgeAdapters({ env });
+  return askCoverageOf({
+    opportunity: inputs.opportunity,
+    inbound: inputs.inbound ? { placed: inputs.inbound.messages.filter((m) => m.via !== 'thread').length, identityRead: inputs.inbound.identityRead, detail: inputs.inbound.detail } : null,
+    vaultNote: (story?.rows ?? []).some((r) => r.key === 'note'),
+    vaultConfigured: !!vault,
+    clawdConfigured: !!clawd,
+    clawdFailed: (story?.rows ?? []).some((r) => r.sentences.some((s) => /clawd's (send )?history could not be read/i.test(s.text))),
+    senderConfigured: !!env.GAP_GMAIL_USER_EMAIL?.trim(),
+    draftsOnRecord: inputs.firstTouches.filter((t) => !!t.gmailDraftId).length,
+  });
+}
 
 export async function buildAskContext(prisma: PrismaLike, accountName: string, now: Date = new Date()): Promise<AskContext | null> {
   const inputs = await loadAccountInputs(prisma, accountName, now, { live: true });
@@ -36,5 +86,7 @@ export async function buildAskContext(prisma: PrismaLike, accountName: string, n
     stack: pursuit.stack,
     buyerSaid: inputs.bids.map((b) => ({ text: b.summary, who: b.who ?? null, at: b.at ?? null })),
     nav: { accountHref: href, next: next.control },
+    // Seller acceptance (2026-10-09): what this context was built from, per source, so "no context" is never said over an unread source.
+    coverage: coverageFromPage(inputs, story),
   });
 }

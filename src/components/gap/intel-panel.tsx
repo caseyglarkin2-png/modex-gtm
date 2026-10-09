@@ -46,7 +46,7 @@ function Item({ item, angle }: { item: IntelItem; angle: PreparedAngle | null })
     <li data-testid="intel-item" data-kind={item.kind} data-key={item.key} className="space-y-1 rounded-md border border-[var(--border)] p-3 text-sm">
       <div className="flex flex-wrap items-center gap-x-2 text-xs text-[var(--muted-foreground)]">
         <span className="rounded bg-[var(--muted)] px-1.5 py-0.5 font-semibold" data-testid="intel-truth">{TRUTH_TEXT[item.truth]}</span>
-        {item.accountName ? <AccountLink name={item.accountName} /> : <span data-testid="intel-no-account">{item.accountHint ? `${item.accountHint} (no account yet)` : 'No account yet'}</span>}
+        {item.accountName ? <AccountLink name={item.accountName} /> : item.ambiguousAmong?.length ? <span data-testid="intel-ambiguous">{item.ambiguityLine ?? `claimed by ${item.ambiguousAmong.join(' and ')}: choose the account`}</span> : <span data-testid="intel-no-account">{item.accountHint ? `${item.accountHint} (no account yet)` : 'No account yet'}</span>}
         {item.inDeal ? <span className="rounded bg-amber-500/15 px-1.5 py-0.5" data-testid="intel-in-deal">in an open deal</span> : null}
       </div>
       <p className="font-medium">{item.url ? <a href={item.url} target="_blank" rel="noopener noreferrer" className="underline">{item.title}</a> : item.title}</p>
@@ -102,9 +102,12 @@ function Pursued({ p }: { p: PursuedItem }) {
     <li data-testid="intel-pursued" data-key={p.key} data-status={p.status} className="space-y-1 rounded-md border border-[var(--primary)] p-3 text-sm">
       <div className="flex flex-wrap items-center gap-x-2 text-xs text-[var(--muted-foreground)]">
         <span className="rounded bg-[var(--muted)] px-1.5 py-0.5 font-semibold">{p.status === 'ready' ? 'The angle is ready' : p.status === 'failed' ? 'GAP could not develop the angle' : 'GAP is developing the angle'}</span>
-        {p.accountName ? <AccountLink name={p.accountName} /> : <span>{p.accountHint ? `${p.accountHint} (no account yet)` : 'No account yet'}</span>}
+        {p.accountName ? <AccountLink name={p.accountName} /> : p.ambiguousAmong?.length ? <span data-testid="intel-pursued-ambiguous">{p.ambiguityLine ?? `claimed by ${p.ambiguousAmong.join(' and ')}: choose the account`}</span> : <span data-testid="intel-pursued-no-account">{p.accountHint ? `${p.accountHint} (no account yet)` : 'No account yet'}</span>}
+        {p.dealLine ? <span className="rounded bg-amber-500/15 px-1.5 py-0.5" data-testid="intel-pursued-deal">{p.dealLine}</span> : null}
       </div>
       <p className="font-medium">{p.url ? <a href={p.url} target="_blank" rel="noopener noreferrer" className="underline">{p.title}</a> : p.title}</p>
+      {/* Seller acceptance (2026-10-09): a person placed at read time (the task predates the identity fix) says so; nothing is queued, the seller decides. */}
+      {p.placementLine ? <p className="text-xs text-amber-700 dark:text-amber-400" data-testid="intel-pursued-placement">{p.placementLine}.</p> : null}
       {a ? (
         <div className="rounded-md bg-[var(--muted)] p-2 text-xs" data-testid="intel-pursued-angle">
           <p>{a.whyItMatters}</p>

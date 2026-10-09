@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { loadIdentityContext, registerAlias, resolveAccountName } from '@/lib/gap/identity/service';
+import { hostOfCompany, loadIdentityContext, registerAlias, resolveAccountName } from '@/lib/gap/identity/service';
 
 function asyncSpy(impl?: (...args: any[]) => Promise<any>) {
   return impl ? vi.fn<(...args: any[]) => Promise<any>>(impl) : vi.fn<(...args: any[]) => Promise<any>>();
@@ -50,6 +50,27 @@ describe('loadIdentityContext', () => {
     // Only resolved companies/links are read: the query itself is scoped to status: 'resolved'.
     expect(prisma.canonicalCompany.findMany.mock.calls[0][0].where.status).toBe('resolved');
     expect(prisma.canonicalAccountLink.findMany.mock.calls[0][0].where.status).toBe('resolved');
+  });
+
+  it('C5 fix (the production shape): a canonical company keyed by domain with DOMAIN NULL gives its host from the key; two conflicted links on it make the conflicted map, a resolved link on such a company makes the verified map; the first reads stay scoped to resolved', async () => {
+    const prisma = makePrisma() as unknown as Prisma;
+    prisma.account.findMany = asyncSpy(async () => [{ name: 'Kenco', hubspot_company_id: null }, { name: 'Kenco Logistics Services', hubspot_company_id: null }, { name: 'Primo', hubspot_company_id: null }]);
+    // The first company read (status resolved, domain not null) returns nothing for Kenco: its company carries domain null.
+    prisma.canonicalCompany.findMany = asyncSpy(async (args: any) => (args?.where?.id?.in
+      ? [{ id: 'domain:kencogroup.com', company_key: 'domain:kencogroup.com', source: 'company_domain', domain: null, status: 'conflict' }, { id: 'domain:primowater.com', company_key: 'domain:primowater.com', source: 'company_domain', domain: null, status: 'resolved' }].filter((c) => args.where.id.in.includes(c.id))
+      : []));
+    prisma.canonicalAccountLink.findMany = asyncSpy(async (args: any) => (args?.where?.status === 'conflict'
+      ? [{ account_name: 'Kenco', canonical_company_id: 'domain:kencogroup.com' }, { account_name: 'Kenco Logistics Services', canonical_company_id: 'domain:kencogroup.com' }]
+      : [{ account_name: 'Primo', canonical_company_id: 'domain:primowater.com' }]));
+    const ctx = await loadIdentityContext(prisma);
+    expect(ctx.conflictedDomainToAccounts?.get('kencogroup.com')).toEqual(['Kenco', 'Kenco Logistics Services']);
+    expect(ctx.verifiedDomainToAccounts.get('primowater.com')).toEqual(['Primo']);
+    expect(ctx.verifiedDomainToAccounts.get('kencogroup.com')).toBeUndefined();
+    expect(prisma.canonicalCompany.findMany.mock.calls[0][0].where.status).toBe('resolved');
+    expect(prisma.canonicalCompany.findMany.mock.calls[1][0].where).toEqual({ id: { in: ['domain:primowater.com', 'domain:kencogroup.com'] } });
+    expect(hostOfCompany({ id: 'cc_1', domain: 'WWW.Niagara.com' })).toBe('niagara.com');
+    expect(hostOfCompany({ id: 'domain:Kencogroup.com', domain: null })).toBe('kencogroup.com');
+    expect(hostOfCompany({ id: 'hubspot:1', company_key: 'hubspot:1', domain: null })).toBeNull();
   });
 
   it('builds the alias map from gap_account_aliases, grouping by normalized_alias', async () => {

@@ -12,11 +12,17 @@
  */
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { ledgerDb } from './fixtures/ledger-db';
-import { ASSIGNMENT_SENT, DAY_STARTED, buildAssignment, nextUnassignedItem, sendAssignment, startDay } from '@/lib/gap/work/assignment';
+import { ASSIGNMENT_SENT, DAY_STARTED, ITEM_HELD_FOR_RESEARCH, assignable, buildAssignment, nextAssignableItem, nextUnassignedItem, sendAssignment, startDay } from '@/lib/gap/work/assignment';
 import { COMMAND_WORDS } from '@/lib/gap/work/briefing';
 import type { DayPlan, PlanItem } from '@/lib/gap/work/plan';
 import type { GmailSendPayload } from '@/lib/email/gmail-sender';
 import type { AskContext } from '@/lib/gap/ask/grounding';
+import { dealCoverageFrom } from '@/lib/gap/work/deal-coverage';
+
+// B9: the default pursued read (no deps.pursued) is loadPursued WITH the deal coverage from the cached in-deals summary.
+const b9 = vi.hoisted(() => ({ loadPursued: vi.fn(async () => [] as unknown[]), loadInDealsSummary: vi.fn(async () => null as unknown) }));
+vi.mock('@/lib/gap/work/intel', async (importOriginal) => ({ ...(await importOriginal<typeof import('@/lib/gap/work/intel')>()), loadPursued: b9.loadPursued }));
+vi.mock('@/lib/gap/deals/in-deals', async (importOriginal) => ({ ...(await importOriginal<typeof import('@/lib/gap/deals/in-deals')>()), loadInDealsSummary: b9.loadInDealsSummary }));
 
 const NOW = new Date('2026-10-08T13:00:00Z');
 const SENDER = { userEmail: 'casey@yardflow.ai', refreshToken: 'r', displayName: 'Casey Larkin' };
@@ -105,6 +111,55 @@ describe('X06: buildAssignment', () => {
     expect(a.text).not.toMatch(/first line of your reply/);
     expect(deps.pack).not.toHaveBeenCalled();
   });
+
+  it('B7 (C4): the sources the Ask context did not read are named after what we know and before the move; nothing is printed when everything was read', async () => {
+    const { db, deps } = harness();
+    deps.askContext.mockResolvedValue({ ...ASK, coverageLine: 'Gmail Sent (no GAP sender configured), the vault (not configured)' });
+    const a = await buildAssignment(db.client(), { plan: PLAN, item: ITEMS[0], revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, deps);
+    const t = a.text.split('\n');
+    const at = t.indexOf('Not read this time: Gmail Sent (no GAP sender configured), the vault (not configured)');
+    expect(at, 'the coverage line is printed').toBeGreaterThan(0);
+    expect(at, 'after what we know').toBeGreaterThan(t.indexOf('What we know:'));
+    expect(at, 'before the move').toBeLessThan(t.indexOf('The move: Send the first touch to Karen Ortiz.'));
+    deps.askContext.mockResolvedValue({ ...ASK, coverageLine: null });
+    const b = await buildAssignment(db.client(), { plan: PLAN, item: ITEMS[0], revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, deps);
+    expect(b.text).not.toContain('Not read this time');
+    // B8: the context's own line (coverageLineOf) already carries its prefixes; it is printed verbatim, never prefixed twice.
+    deps.askContext.mockResolvedValue({ ...ASK, coverageLine: 'Not read this time: Gmail Sent (not read on the account page), the vault (not configured). Partly read: HubSpot (deals only)' });
+    const c = await buildAssignment(db.client(), { plan: PLAN, item: ITEMS[0], revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, deps);
+    expect(c.text.split('\n')).toContain('Not read this time: Gmail Sent (not read on the account page), the vault (not configured). Partly read: HubSpot (deals only)');
+    expect(c.text).not.toContain('Not read this time: Not read this time');
+    deps.askContext.mockResolvedValue({ ...ASK, coverageLine: 'Partly read: HubSpot (deals only)' });
+    const d = await buildAssignment(db.client(), { plan: PLAN, item: ITEMS[0], revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, deps);
+    expect(d.text.split('\n')).toContain('Partly read: HubSpot (deals only)');
+    expect(d.text).not.toContain('Not read this time');
+  });
+
+  it('addendum: a deal item at an account where a develop_angle task succeeded for a person placed there carries the angle (prepared angle, the block above the move) and is assignable; a first touch with a pack never reads it', async () => {
+    const { db, deps } = harness();
+    const kenco = item({ key: 'deal:Kenco:2026-10-08', rank: 1, accountName: 'Kenco', token: 'c'.repeat(32), kind: 'deal', stateKind: 'in_deal', title: 'Next step on the deal: Send the pilot scope', why: 'The deal\'s next step', href: '/gap/accounts/kenco?view=brief', person: null });
+    const pursued = vi.fn(async () => [{ key: 'person:dave.kiesling@kencogroup.com', taskId: 't-1', writer: { email: 'dave.kiesling@kencogroup.com', name: 'Dave Kiesling' }, kind: 'person' as const, title: 'Dave Kiesling at Kenco', accountName: 'Kenco', accountHint: null, url: null, decision: 'pursue', decidedAt: '2026-10-08T12:00:00.000Z', status: 'ready' as const, error: null, angle: { whyItMatters: 'Kenco runs 40 yards with paper gate logs; the Chattanooga pilot is where the scope lands.', starters: ['Dave, is Chattanooga still the yard you would pilot first?'], roles: ['VP Operations'], accounts: ['Kenco'], peopleNamed: [{ personaId: 7, name: 'Dave Kiesling', title: 'VP Operations' }], proposedAction: 'email', caveat: null, sourceLine: 'his reply, Sep 16' } }]);
+    deps.askContext.mockResolvedValue({ ...ASK, accountName: 'Kenco', state: { ...ASK.state, state: 'in_deal', stateLine: 'In a deal.', next: 'Send Dave the pilot scope.' }, story: [], opening: null, buyerSaid: [] });
+    const a = await buildAssignment(db.client(), { plan: { ...PLAN, items: [ITEMS[0], kenco] }, item: kenco, revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, { ...deps, pursued });
+    expect(a.prepared).toEqual({ kind: 'angle', who: 'Dave Kiesling', whyItMatters: 'Kenco runs 40 yards with paper gate logs; the Chattanooga pilot is where the scope lands.', opener: 'Dave, is Chattanooga still the yard you would pilot first?' });
+    const t = a.text.split('\n');
+    const angleAt = t.findIndex((l) => l === 'GAP has prepared an angle for Dave Kiesling: Kenco runs 40 yards with paper gate logs; the Chattanooga pilot is where the scope lands.');
+    expect(angleAt, 'the angle block is printed').toBeGreaterThan(0);
+    expect(t[angleAt + 1]).toBe('Opener: Dave, is Chattanooga still the yard you would pilot first?');
+    expect(t.indexOf('The move: Send Dave the pilot scope.'), 'above the move').toBeGreaterThan(angleAt);
+    expect(deps.pack).not.toHaveBeenCalled();
+    const ok = await assignable(db.client(), { ...PLAN, items: [kenco] }, kenco, { baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, { ...deps, pursued });
+    expect(ok.ok, 'an item with a prepared angle is assignable').toBe(true);
+    // A first touch with a pack: the pursued read is not made and the email stays the prepared thing.
+    const ft = await buildAssignment(db.client(), { plan: PLAN, item: ITEMS[0], revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, { ...deps, pursued });
+    expect(ft.prepared.kind).toBe('email');
+    expect(pursued).toHaveBeenCalledTimes(2);
+    // No ready angle at the account (another account, or in progress): nothing prepared, no block.
+    pursued.mockResolvedValue([]);
+    const none = await buildAssignment(db.client(), { plan: { ...PLAN, items: [kenco] }, item: kenco, revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, { ...deps, pursued });
+    expect(none.prepared).toEqual({ kind: 'none' });
+    expect(none.text).not.toContain('prepared an angle');
+  });
 });
 
 describe('X06: startDay, sendAssignment, nextUnassignedItem', () => {
@@ -153,5 +208,109 @@ describe('X06: startDay, sendAssignment, nextUnassignedItem', () => {
     expect((await nextUnassignedItem(db.client(), PLAN))?.key).toBe('commitment:c-1');
     await sendAssignment(db.client(), { plan: PLAN, item: ITEMS[1], revision: 0, to: 'casey@freightroll.com', sender: SENDER, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW, actor: 'gap' }, deps);
     expect(await nextUnassignedItem(db.client(), PLAN)).toBeNull();
+  });
+});
+
+describe('seller acceptance follow-up: START and NEXT hand the seller only an assignable item; research is held for the agent', () => {
+  const SGWS = item({ key: "follow_up:Southern Glazer's:2026-10-08", rank: 0, accountName: "Southern Glazer's", token: 'e'.repeat(32), kind: 'follow_up', stateKind: 'follow_up', title: 'Reminder: Follow up with Diego Fonseca when they are back', why: 'Out of office, May 26', href: '/gap/accounts/southern-glazers', person: { name: 'Diego Fonseca', title: null } });
+  const KROGER = ITEMS[1];
+  const PEPSI = ITEMS[0];
+  const SWIRE = item({ key: 'follow_up:Swire:2026-10-08', rank: 3, accountName: 'Swire', token: 'f'.repeat(32), kind: 'follow_up', stateKind: 'follow_up', title: 'Follow up with Ana', why: 'Nothing prepared yet; GAP researches the operator first.', href: '/gap/accounts/swire', person: null });
+  const plan: DayPlan = { ...PLAN, items: [SGWS, { ...KROGER, rank: 1 }, { ...PEPSI, rank: 2 }, SWIRE], revision: 1 };
+  const ctxFor = (accountName: string): AskContext | null =>
+    accountName.startsWith('Southern') ? { ...ASK, accountName, state: { ...ASK.state, state: 'follow_up', stateLine: 'They were out of office in May.', next: "Research the catalysts at Southern Glazer's before reaching Diego." }, story: [], opening: null, buyerSaid: [] }
+    : accountName === 'Kroger' ? { ...ASK, accountName, state: { ...ASK.state, state: 'in_deal', stateLine: 'In a deal.', next: 'Send Joey the dock comparison.' }, story: [], opening: null, buyerSaid: [] }
+    : accountName === 'Swire' ? { ...ASK, accountName, state: { ...ASK.state, state: 'follow_up', stateLine: 'Quiet.', next: 'Send Ana a note.' }, story: [], opening: null, buyerSaid: [] }
+    : ASK;
+  const input = { baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: true, now: NOW };
+
+  it('assignable: nothing prepared and a research-shaped move is held (research_move); a why that says nothing is prepared is held (research_why); a seller move with nothing prepared, or a prepared email, is assignable', async () => {
+    const db = ledgerDb({}, NOW);
+    const deps = { askContext: vi.fn(async (_p: unknown, name: string) => ctxFor(name)), pack: vi.fn(async (_p: unknown, a: { decisionId: string }) => (a.decisionId === 'dec-1' ? PACK : null)), send: vi.fn(async () => ({ provider: 'gmail' as const, id: 'g', threadId: 't' })) };
+    const sgws = await assignable(db.client(), plan, SGWS, input, deps);
+    expect(sgws.ok, 'research move held').toBe(false);
+    expect(sgws).toMatchObject({ reason: 'research_move', detail: "Research the catalysts at Southern Glazer's before reaching Diego." });
+    expect(sgws.built.prepared).toEqual({ kind: 'none' });
+    expect(await assignable(db.client(), plan, SWIRE, input, deps)).toMatchObject({ ok: false, reason: 'research_why' });
+    expect((await assignable(db.client(), plan, KROGER, input, deps)).ok, 'a seller move with nothing prepared is assignable').toBe(true);
+    expect((await assignable(db.client(), plan, PEPSI, input, deps)).ok, 'a prepared email is assignable').toBe(true);
+  });
+
+  it('the walk: the held items are recorded once (work.command_applied, effect item_held_for_research, subject the item) and walked past; the first assignable item comes back with its built assignment; a settled item (an applied SKIP) is skipped; a progress note settles nothing', async () => {
+    const db = ledgerDb({}, NOW);
+    const deps = { askContext: vi.fn(async (_p: unknown, name: string) => ctxFor(name)), pack: vi.fn(async (_p: unknown, a: { decisionId: string }) => (a.decisionId === 'dec-1' ? PACK : null)), send: vi.fn(async () => ({ provider: 'gmail' as const, id: 'g', threadId: 't' })) };
+    const first = await nextAssignableItem(db.client(), plan, { assign: { input, deps, actor: 'test' } });
+    expect(first.item?.key, 'Kroger is the first assignable').toBe('commitment:c-1');
+    expect(first.built?.move).toBe('Send Joey the dock comparison.');
+    expect(first.held.map((h) => [h.item.accountName, h.line, h.recorded])).toEqual([["Southern Glazer's", 'nothing supported to send yet', true]]);
+    const holds = db.store.gapAuditEvent.filter((e) => e.kind === 'work.command_applied' && e.payload.effect === ITEM_HELD_FOR_RESEARCH);
+    expect(holds).toHaveLength(1);
+    expect(holds[0]).toMatchObject({ subject_type: 'work_item', subject_id: "follow_up:Southern Glazer's:2026-10-08", payload: { reason: 'research_move', day: '2026-10-08', itemToken: 'e'.repeat(32), revision: 1 } });
+    // Kroger assigned; the next walk finds the hold already recorded (no second row) and hands PepsiCo.
+    await sendAssignment(db.client(), { plan, item: first.item as PlanItem, revision: 0, to: 'casey@freightroll.com', sender: SENDER, ...input, actor: 'gap', built: first.built }, deps);
+    const second = await nextAssignableItem(db.client(), plan, { assign: { input, deps, actor: 'test' } });
+    expect(second.item?.key).toBe('first_touch:dec-1');
+    expect(second.held.map((h) => [h.item.accountName, h.recorded])).toEqual([["Southern Glazer's", false]]);
+    expect(db.store.gapAuditEvent.filter((e) => e.kind === 'work.command_applied' && e.payload.effect === ITEM_HELD_FOR_RESEARCH), 'held once').toHaveLength(1);
+    // PepsiCo assigned; Swire is held by its why; nothing is left.
+    await sendAssignment(db.client(), { plan, item: second.item as PlanItem, revision: 0, to: 'casey@freightroll.com', sender: SENDER, ...input, actor: 'gap', built: second.built }, deps);
+    const third = await nextAssignableItem(db.client(), plan, { assign: { input, deps, actor: 'test' } });
+    expect(third.item).toBeNull();
+    expect(third.held.map((h) => [h.item.accountName, h.recorded])).toEqual([["Southern Glazer's", false], ['Swire', true]]);
+    // A settled item: an applied SKIP on an unassigned item keeps it off the walk; a progress note does not settle.
+    const db2 = ledgerDb({}, NOW);
+    await db2.client().gapAuditEvent.create({ data: { kind: 'work.command_applied', actor: 'x', subject_type: 'work_item', subject_id: 'commitment:c-1', payload: { command: 'skip', effect: 'commitment_skipped' } } });
+    await db2.client().gapAuditEvent.create({ data: { kind: 'work.command_applied', actor: 'x', subject_type: 'work_item', subject_id: 'first_touch:dec-1', payload: { command: 'done', effect: 'progress_noted', note: 'drafting it' } } });
+    const skipped = await nextAssignableItem(db2.client(), { ...plan, items: [{ ...KROGER, rank: 0 }, { ...PEPSI, rank: 1 }] });
+    expect(skipped.item?.key, 'the skipped Kroger is passed; the progress-noted PepsiCo is still open').toBe('first_touch:dec-1');
+    expect(await nextUnassignedItem(db2.client(), { ...plan, items: [{ ...KROGER, rank: 0 }] })).toBeNull();
+  });
+});
+
+describe('B9: the assignment reads the pursued angles with the deal coverage, and names the person before a bare address', () => {
+  const kenco = item({ key: 'deal:Kenco:2026-10-08', rank: 0, accountName: 'Kenco', token: 'c'.repeat(32), kind: 'deal', stateKind: 'in_deal', title: 'Next step on the deal: Send the pilot scope', why: 'The deal\'s next step', href: '/gap/accounts/kenco?view=brief', person: null });
+  const angle = { whyItMatters: 'Kenco runs 40 yards with paper gate logs.', starters: ['Dave, is Chattanooga first?'], roles: ['VP Operations'], accounts: ['Kenco'], peopleNamed: [{ personaId: 7, name: 'Dave Kiesling', title: 'VP Operations' }], proposedAction: 'email', caveat: null, sourceLine: 'his reply, Sep 16' };
+  beforeEach(() => {
+    b9.loadPursued.mockClear();
+    b9.loadInDealsSummary.mockClear();
+  });
+  const pursuedOf = (writerName: string | null) => [{ key: 'person:dave.kiesling@kencogroup.com', taskId: 't-1', writer: { email: 'dave.kiesling@kencogroup.com', name: writerName }, kind: 'person' as const, title: 'dave.kiesling@kencogroup.com wrote to us', accountName: 'Kenco', accountHint: null, url: null, decision: 'pursue', decidedAt: '2026-10-08T12:00:00.000Z', status: 'ready' as const, error: null, angle }];
+
+  it('with no deps.pursued, the in-deals summary is read for now and loadPursued is called with its coverage (the read the day loader and the briefing make), so a person placed at Kenco only through the coverage is found', async () => {
+    const { db, deps } = harness();
+    const summary = { status: 'complete' as const, checkedAt: '2026-10-08T12:50:00.000Z', accounts: [{ accountName: 'Kenco', alsoRecordedAs: ['Kenco Logistics'], deals: [{ id: '1001', name: 'YardFlow - Kenco Chattanooga', stage: 'Qualified to buy', contactIds: ['77'] }] }] };
+    b9.loadInDealsSummary.mockResolvedValue(summary);
+    b9.loadPursued.mockResolvedValue(pursuedOf(null));
+    deps.askContext.mockResolvedValue({ ...ASK, accountName: 'Kenco', state: { ...ASK.state, state: 'in_deal', stateLine: 'In a deal.', next: 'Send Dave the pilot scope.' }, story: [], opening: null, buyerSaid: [] });
+    const a = await buildAssignment(db.client(), { plan: { ...PLAN, items: [kenco] }, item: kenco, revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, deps);
+    expect(b9.loadInDealsSummary).toHaveBeenCalledWith(expect.anything(), { now: NOW });
+    expect(b9.loadPursued).toHaveBeenCalledTimes(1);
+    const [, when, opts] = b9.loadPursued.mock.calls[0] as unknown as [unknown, Date, { coverage: ReturnType<typeof dealCoverageFrom> }];
+    expect(when).toBe(NOW);
+    expect(opts.coverage.status, 'the coverage is the summary\'s').toBe('complete');
+    expect(opts.coverage.byName.get('kenco logistics')?.accountName ?? opts.coverage.byName.get('Kenco Logistics')?.accountName, 'the alias is covered').toBe('Kenco');
+    expect(opts.coverage).toEqual(dealCoverageFrom(summary as Parameters<typeof dealCoverageFrom>[0]));
+    // The writer has no name: the first person the angle names is said, not the address.
+    expect(a.prepared).toEqual({ kind: 'angle', who: 'Dave Kiesling', whyItMatters: 'Kenco runs 40 yards with paper gate logs.', opener: 'Dave, is Chattanooga first?' });
+    expect(a.text).toContain('GAP has prepared an angle for Dave Kiesling: Kenco runs 40 yards with paper gate logs.');
+    expect(a.text).not.toContain('angle for dave.kiesling@kencogroup.com');
+  });
+
+  it('a summary that cannot be read gives the absent coverage, never a throw; a writer with a name is named first; deps.pursued stays the seam and skips the reads', async () => {
+    const { db, deps } = harness();
+    b9.loadInDealsSummary.mockRejectedValue(new Error('hubspot down'));
+    b9.loadPursued.mockResolvedValue(pursuedOf('Dave K.'));
+    deps.askContext.mockResolvedValue({ ...ASK, accountName: 'Kenco', state: { ...ASK.state, state: 'in_deal', stateLine: 'In a deal.', next: 'Send Dave the pilot scope.' }, story: [], opening: null, buyerSaid: [] });
+    const a = await buildAssignment(db.client(), { plan: { ...PLAN, items: [kenco] }, item: kenco, revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, deps);
+    const opts = (b9.loadPursued.mock.calls.at(-1) as unknown as [unknown, Date, { coverage: ReturnType<typeof dealCoverageFrom> }])[2];
+    expect(opts.coverage.status).toBe('absent');
+    expect(a.prepared).toMatchObject({ kind: 'angle', who: 'Dave K.' });
+    b9.loadInDealsSummary.mockClear();
+    b9.loadPursued.mockClear();
+    const seam = vi.fn(async () => pursuedOf('Dave K.'));
+    await buildAssignment(db.client(), { plan: { ...PLAN, items: [kenco] }, item: kenco, revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, { ...deps, pursued: seam });
+    expect(seam).toHaveBeenCalledTimes(1);
+    expect(b9.loadInDealsSummary).not.toHaveBeenCalled();
+    expect(b9.loadPursued).not.toHaveBeenCalled();
   });
 });

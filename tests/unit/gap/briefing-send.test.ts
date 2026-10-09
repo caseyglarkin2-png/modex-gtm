@@ -92,6 +92,31 @@ describe('X05b: sendMorningBriefing', () => {
     expect(await h.run()).toMatchObject({ skipped: true, reason: 'already_sent' });
   });
 
+  it('seller acceptance follow-up: a resend REFRESHES the plan (a new revision when the day changed, said in the email; the row carries the revision) and the scheduled tick never does', async () => {
+    const h = harness();
+    expect(await h.run()).toMatchObject({ sent: true });
+    expect(h.send.mock.calls[0][0].text).not.toMatch(/Refreshed plan|Unchanged since/);
+    // The day changed: Kenco's follow-up came due. The resend builds the day again and mails revision 1.
+    h.load.mockResolvedValue({ ...DAY, cards: [{ accountName: 'Kenco', href: '/gap/accounts/kenco', lane: 'follow_up', stateKind: 'follow_up', state: 'Follow up due', why: 'Dave asked for the comparison', person: { name: 'Dave', title: null }, next: null, blocker: null, index: 0, source: 'pursuit', tier: 'follow_up' }, ...DAY.cards] });
+    h.db.setClock(new Date('2026-10-08T13:30:00Z'));
+    const resend = await h.run(new Date('2026-10-08T13:30:00Z'), { resend: true });
+    expect(resend).toMatchObject({ sent: true, items: 2 });
+    expect(h.load, 'the resend loads the day again').toHaveBeenCalledTimes(2);
+    expect(h.db.store.gapAuditEvent.filter((e) => e.kind === DAY_PLANNED), 'revision 1 written').toHaveLength(2);
+    const text = h.send.mock.calls[1][0].text;
+    // PepsiCo shifted down by the insertion above it; a shift is not a move, so only the addition is said.
+    expect(text).toContain('This is a resend. Refreshed plan (revision 1, 9:30 AM New York): added Kenco: Follow up due.');
+    expect(text).toContain('1. Kenco: Follow up due.');
+    const rows = h.db.store.gapAuditEvent.filter((e) => e.kind === BRIEFING_SENT);
+    expect(rows[1].payload).toMatchObject({ resend: true, revision: 1 });
+    // Nothing changed since: the next resend writes no revision and says so.
+    const same = await h.run(new Date('2026-10-08T14:30:00Z'), { resend: true });
+    expect(same).toMatchObject({ sent: true, items: 2 });
+    expect(h.db.store.gapAuditEvent.filter((e) => e.kind === DAY_PLANNED), 'no third revision').toHaveLength(2);
+    expect(h.send.mock.calls[2][0].text).toContain('This is a resend. Unchanged since the 9:30 AM plan.');
+    expect(h.db.store.gapAuditEvent.filter((e) => e.kind === BRIEFING_SENT)[2].payload).toMatchObject({ resend: true, revision: 1 });
+  });
+
   it('the claim is taken BEFORE the send: another instance mid-send holds it, so this tick sends nothing and skips', async () => {
     const h = harness();
     await h.db.client().systemConfig.create({ data: { key: briefingClaimKey('2026-10-08'), value: '{"claimedAt":"2026-10-08T12:29:58Z"}' } });

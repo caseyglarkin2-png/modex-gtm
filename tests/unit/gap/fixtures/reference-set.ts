@@ -20,7 +20,7 @@ export type { Motion, ReferenceCase, ReferenceSource } from '@/lib/gap/evaluatio
 
 /** v2 (2026-10-09): the two-deals missing-source variant expects open (the CRM still holds the other deal under a complete read), the scope is what is unknown; found by the C53 evaluator.
  * v3 (2026-10-09, C57 pass 2 finding 6): mustSay holds angle words derivable from the record; line words ("two accounts claim this domain", "Also reported by", the deal's name) move to lineMustSay so the harness can no longer pass by echoing them. */
-export const REFERENCE_SET_VERSION = 3;
+export const REFERENCE_SET_VERSION = 4;
 
 const KENCO: ReferenceCase['account'] = { name: 'Kestrel Logistics', aliases: ['kestrel'], domains: ['kestrelgroup.example'], hubspotCompanyId: '55600000001' };
 
@@ -77,7 +77,7 @@ export const REFERENCE_SET: readonly ReferenceCase[] = [
       relationship: 'prospect',
       motion: 'review_first',
       mustSay: [],
-      lineMustSay: ['two accounts claim this domain|name the account'],
+      lineMustSay: ['two accounts claim this domain|name the account|is claimed by'],
       prohibited: [{ claim: 'at Bevera Holdings', reason: 'placement is ambiguous; the seller names the account (C02)' }, { claim: 'at SnackCo Foods', reason: 'same' }],
       requiredSources: ['gmail:1a0aa0000000010'],
       neverExecute: [],

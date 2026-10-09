@@ -15,6 +15,7 @@ const h = vi.hoisted(() => ({
   loadWorkCommitments: vi.fn(async () => []),
   loadCompletedToday: vi.fn(async () => []),
   loadCockpit: vi.fn(),
+  loadPursued: vi.fn(async () => [] as unknown[]),
 }));
 
 vi.mock('@/lib/gap/work/list', () => ({ workDay: h.workDay }));
@@ -36,6 +37,7 @@ vi.mock('@/lib/gap/work/recorded-replies', () => ({
   withoutRecordedReplies: vi.fn((replies: unknown[], summaries: unknown) => ({ replies, summaries })),
 }));
 vi.mock('@/lib/gap/work/priority', () => ({ loadAccountPriorities: vi.fn(async () => new Map()) }));
+vi.mock('@/lib/gap/work/intel', () => ({ loadPursued: h.loadPursued }));
 vi.mock('@/lib/gap/execution/follow-up-load', () => ({ loadFollowUpPlans: vi.fn(async () => new Map()) }));
 vi.mock('@/lib/gap/opportunity/active-opportunity', () => ({ resolveAccountOpportunity: vi.fn() }));
 
@@ -94,6 +96,24 @@ describe('X01: loadWorkDay, the one day builder', () => {
     expect(h.workDay.mock.calls[0][0].now.toISOString()).toBe(realNow.toISOString());
     expect(h.loadCompletedToday).toHaveBeenCalledWith({}, realNow);
     expect(out.today.done).toEqual([]);
+  });
+
+  it('seller acceptance follow-up: the prepared angles ride into workDay as evidence by account (ready, placed; the newest decision wins; a lane reads none)', async () => {
+    const kenco = { key: 'person:dave.kiesling@kencogroup.com', taskId: 't1', kind: 'person', writer: { email: 'dave.kiesling@kencogroup.com', name: 'Dave Kiesling' }, title: 'Dave Kiesling wrote to us', accountName: 'Kenco', accountHint: null, decision: 'pursue', decidedAt: '2026-10-09T00:32:00Z', status: 'ready', error: null, angle: { whyItMatters: 'Kenco runs a network of yards where the gate is the bottleneck.', starters: ['Ask about the Chattanooga gate.'], roles: [], accounts: ['Kenco'], peopleNamed: [] } };
+    const unplaced = { ...kenco, key: 'person:someone@gmail.com', taskId: 't2', accountName: null, writer: { email: 'someone@gmail.com', name: null } };
+    const older = { ...kenco, taskId: 't0', decidedAt: '2026-10-08T00:00:00Z', angle: { ...kenco.angle, whyItMatters: 'an older angle' } };
+    const running = { ...kenco, taskId: 't3', accountName: 'Kroger', status: 'in_progress', angle: null };
+    h.loadPursued.mockResolvedValue([kenco, older, unplaced, running]);
+    const realNow = new Date('2026-10-09T14:00:00Z');
+    await loadWorkDay({}, { lane: false, preview: false, fresh: false, now: realNow });
+    expect(h.loadPursued, 'the day\'s in-deals read rides along as the coverage (the C5 family tie-break needs it)').toHaveBeenCalledWith({}, realNow, expect.objectContaining({ coverage: expect.objectContaining({ status: expect.any(String) }) }));
+    const input = h.workDay.mock.calls.at(-1)?.[0] as { preparedAngles: Map<string, { who: string; line: string }> };
+    expect([...input.preparedAngles.keys()], 'only the ready, placed angle counts; the newest wins').toEqual(['Kenco']);
+    expect(input.preparedAngles.get('Kenco')).toEqual({ who: 'Dave Kiesling', line: 'GAP prepared an angle for Dave Kiesling: Kenco runs a network of yards where the gate is the bottleneck.' });
+    h.loadPursued.mockClear();
+    await loadWorkDay({}, { lane: true, preview: false, fresh: false, now: realNow });
+    expect(h.loadPursued, 'a lane reads no pursued items').not.toHaveBeenCalled();
+    expect((h.workDay.mock.calls.at(-1)?.[0] as { preparedAngles: Map<string, unknown> }).preparedAngles.size).toBe(0);
   });
 
   it('a preview reads tomorrow 8 am New York for the day and never sweeps; done today is empty', async () => {

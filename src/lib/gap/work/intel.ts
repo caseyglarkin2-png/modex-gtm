@@ -21,7 +21,7 @@
  */
 import { AUTO_REPLY_SUBJECT, FREEMAIL_DOMAINS, OWN_DOMAINS } from '../replies/domains';
 import { coverageFromNames, dealsAt, dealWords, type DealCoverage } from './deal-coverage';
-import { resolvePersonAccount } from './person-identity';
+import { EMPTY_FAMILY, resolvePersonAccount, sameFamily, tieBreakFamily, type FamilyFacts, type PersonAccount, type PersonVia } from './person-identity';
 import { sameIdea } from '../context/same-idea';
 import { classifyPurpose, reengageEligible, type ReengageVerdict } from '../context/purpose';
 import { classifyMailType } from '../context/thread-context';
@@ -85,6 +85,9 @@ export interface IntelItem {
   clusterIds?: string[];
   /** I05: the person's account is in an open deal: shown and labelled (work it from the deal), never dropped. */
   inDeal?: boolean;
+  /** C5 (2026-10-09): the accounts that claim this person's domain or name when no deal settles it; the line says it instead of "no account yet". */
+  ambiguousAmong?: string[];
+  ambiguityLine?: string;
   decisions: readonly Decision[];
   /** How it ranked, for the test and the page. */
   rank: number;
@@ -193,8 +196,62 @@ export function rankTriggers(rows: readonly TriggerRow[], accountNames: Readonly
 type WriterRow = { from_email: string; from_name: string | null; subject: string | null; received_at: Date | string; thread_account: string | null };
 type PersonaRow = { id: number; email: string | null; name: string | null; title: string | null; account_name: string | null; do_not_contact?: boolean | null };
 
+/** C5: "May 5" in the current year, "May 5, 2025" otherwise. */
+const sinceText = (iso: string, now: Date) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', ...(new Date(iso).getUTCFullYear() === now.getUTCFullYear() ? {} : { year: 'numeric' }), timeZone: 'America/New_York' });
+
+/** C5: the placement after the family tie-break, or the ambiguity said with its names. Pure. */
+export function placeAmongFamily(placed: PersonAccount, facts: FamilyFacts | null, coverage: DealCoverage, now: Date): { accountName: string | null; via: PersonVia; ambiguousAmong: string[] | null; ambiguityLine: string | null; familyLine: string | null; tie: ReturnType<typeof tieBreakFamily> } {
+  if (!placed.ambiguous || !placed.candidates.length) return { accountName: placed.accountName, via: placed.via, ambiguousAmong: null, ambiguityLine: null, familyLine: null, tie: null };
+  const f = facts ?? EMPTY_FAMILY;
+  // The name the CRM read records a candidate's deal under (the summary folds a duplicate onto its deal-holding account), null when in no deal.
+  const tie = tieBreakFamily(placed.candidates, f, (n) => { const l = dealsAt(coverage, n); return l.inDeal === true ? l.account.accountName : null; });
+  if (tie) {
+    const dup = tie.kind === 'duplicate' ? `${tie.others.join(' and ')} ${tie.others.length === 1 ? 'is' : 'are'} its open duplicate${tie.others.length === 1 ? '' : 's'}, unmerged` : `${tie.others.join(' and ')} ${tie.others.length === 1 ? 'is' : 'are'} in its family (parent brand), unmerged`;
+    return { accountName: tie.accountName, via: 'family_deal', ambiguousAmong: null, ambiguityLine: null, familyLine: `placed at ${tie.accountName}, the family's deal-holding account; ${dup}`, tie };
+  }
+  const names = placed.candidates;
+  const fam = names.length === 2 ? sameFamily(names[0], names[1], f) : null;
+  const dupWords = fam?.kind === 'duplicate' ? ` (an open duplicate${fam.since ? ` since ${sinceText(fam.since, now)}` : ''})` : fam?.kind === 'parent_brand' ? ' (one family, parent brand)' : '';
+  return { accountName: null, via: null, ambiguousAmong: [...names], ambiguityLine: `${placed.claimed ?? 'this person'} is claimed by ${names.join(' and ')}${dupWords}: choose the account`, familyLine: null, tie: null };
+}
+
+/** The reason a duplicate_company conflict carries ("Company collides with: A, B"), as names. */
+const collidesWith = (reason: unknown): string[] => (typeof reason === 'string' ? (reason.match(/collides with:\s*(.+)$/i)?.[1] ?? '').split(',').map((s) => s.trim()).filter(Boolean) : []);
+
+/**
+ * C5: the accounts' parent brands and their open duplicate_company conflicts, bounded and soft (unread keeps the
+ * ambiguity). C5 fix (the production shape): the accounts are matched by name without case; a conflict row that names
+ * no account ("Canonical company matches multiple account records.", account_name null) is attributed through its
+ * canonical company to every candidate whose canonical link points at that company (one bounded link read).
+ */
+export async function loadFamilyFacts(prisma: PrismaLike, names: readonly string[]): Promise<FamilyFacts> {
+  const list = [...new Set(names.map((n) => n.trim()).filter(Boolean))];
+  if (!list.length) return EMPTY_FAMILY;
+  const same = (a: string | null | undefined, b: string) => !!a && a.trim().toLowerCase() === b.toLowerCase();
+  const nameOf = (raw: string | null | undefined) => list.find((n) => same(raw, n)) ?? null;
+  const accounts: Array<{ name: string; parent_brand: string | null }> = typeof prisma?.account?.findMany === 'function' ? await prisma.account.findMany({ where: { name: { in: list, mode: 'insensitive' } }, select: { name: true, parent_brand: true }, take: 50 }).catch(() => []) : [];
+  const links: Array<{ account_name: string; canonical_company_id: string }> = typeof prisma?.canonicalAccountLink?.findMany === 'function' ? await prisma.canonicalAccountLink.findMany({ where: { account_name: { in: list, mode: 'insensitive' } }, select: { account_name: true, canonical_company_id: true }, take: 50 }).catch(() => []) : [];
+  const companyIds = [...new Set(links.map((l) => l.canonical_company_id).filter(Boolean))];
+  const where = { code: 'duplicate_company', status: 'open', OR: [{ account_name: { in: list, mode: 'insensitive' } }, ...(companyIds.length ? [{ canonical_company_id: { in: companyIds } }] : [])] };
+  const conflicts: Array<{ account_name: string | null; canonical_company_id: string | null; reason: string | null; created_at: Date | string }> = typeof prisma?.canonicalConflict?.findMany === 'function' ? await prisma.canonicalConflict.findMany({ where, select: { account_name: true, canonical_company_id: true, reason: true, created_at: true }, take: 100 }).catch(() => []) : [];
+  const parentBrand = new Map<string, string | null>();
+  for (const a of accounts) parentBrand.set(nameOf(a.name) ?? a.name, a.parent_brand ?? null);
+  const duplicates = new Map<string, { companyId: string | null; collidesWith: string[]; since: string | null }>();
+  const note = (name: string, c: { canonical_company_id: string | null; reason: string | null; created_at: Date | string }) => {
+    const since = new Date(c.created_at).toISOString();
+    const cur = duplicates.get(name);
+    duplicates.set(name, { companyId: cur?.companyId ?? c.canonical_company_id ?? null, collidesWith: [...new Set([...(cur?.collidesWith ?? []), ...collidesWith(c.reason)])], since: cur?.since && cur.since < since ? cur.since : since });
+  };
+  for (const c of conflicts) {
+    const named = nameOf(c.account_name);
+    if (named) note(named, c);
+    else if (c.canonical_company_id) for (const l of links) if (l.canonical_company_id === c.canonical_company_id) { const n = nameOf(l.account_name); if (n) note(n, c); }
+  }
+  return { parentBrand, duplicates };
+}
+
 /** Pure: the people who wrote in and went quiet, one per address, newest last word first. */
-export function rankPeople(rows: readonly WriterRow[], personas: readonly PersonaRow[], opts: { now: Date; decided: ReadonlySet<string>; /** C01/C04: the deal coverage (the in-deals read with its status); `dealAccounts` is the older names-only form. */ coverage?: DealCoverage; dealAccounts?: ReadonlySet<string> | null; unsubscribed: ReadonlySet<string>; /** C02/C03: the identity context the opportunity resolver uses (aliases, verified domains); null places by persona and thread only. */ identity?: IdentityContext | null; /** C02: HubSpot company ids by sender address, when a contact read carried them. */ contactCompanies?: ReadonlyMap<string, readonly string[]>; /** C10: the two-sided state per address (built from the inbound rows and the seller's Sent); a person with one is judged by it, not by the inbound date alone. */ states?: ReadonlyMap<string, PersonState> | null; /** C09/C11: the re-engage verdict per address; an ineligible sender is out, a review note rides along. */ verdicts?: ReadonlyMap<string, ReengageVerdict> | null; /** Whether the seller's Sent was read for this list at all (false says so on every line; undefined says nothing, for the older callers). */ sentRead?: boolean; /** Addresses whose Sent read failed: judged by the inbound date, said so. */ sentFailed?: ReadonlySet<string> }): IntelItem[] {
+export function rankPeople(rows: readonly WriterRow[], personas: readonly PersonaRow[], opts: { now: Date; decided: ReadonlySet<string>; /** C5: the family facts for the ambiguous candidates (null: not read; the ambiguity stands). */ family?: FamilyFacts | null; /** C01/C04: the deal coverage (the in-deals read with its status); `dealAccounts` is the older names-only form. */ coverage?: DealCoverage; dealAccounts?: ReadonlySet<string> | null; unsubscribed: ReadonlySet<string>; /** C02/C03: the identity context the opportunity resolver uses (aliases, verified domains); null places by persona and thread only. */ identity?: IdentityContext | null; /** C02: HubSpot company ids by sender address, when a contact read carried them. */ contactCompanies?: ReadonlyMap<string, readonly string[]>; /** C10: the two-sided state per address (built from the inbound rows and the seller's Sent); a person with one is judged by it, not by the inbound date alone. */ states?: ReadonlyMap<string, PersonState> | null; /** C09/C11: the re-engage verdict per address; an ineligible sender is out, a review note rides along. */ verdicts?: ReadonlyMap<string, ReengageVerdict> | null; /** Whether the seller's Sent was read for this list at all (false says so on every line; undefined says nothing, for the older callers). */ sentRead?: boolean; /** Addresses whose Sent read failed: judged by the inbound date, said so. */ sentFailed?: ReadonlySet<string> }): IntelItem[] {
   const coverage = opts.coverage ?? coverageFromNames(opts.dealAccounts ?? null);
   const byEmail = new Map<string, { last: Date; n: number; name: string | null; account: string | null; subject: string | null }>();
   for (const r of rows) {
@@ -224,7 +281,9 @@ export function rankPeople(rows: readonly WriterRow[], personas: readonly Person
     if (p?.do_not_contact) continue;
     // C02/C03: placed through the identity machinery (persona, the CRM contact's company, the thread, the domain); ambiguous stays unplaced.
     const placed = resolvePersonAccount({ email, persona: p, threadAccount: w.account, identity: opts.identity ?? null, hubspotCompanyIds: opts.contactCompanies?.get(email) ?? [] });
-    const account = placed.accountName;
+    // C5: a family's deal-holding account settles an ambiguous domain; otherwise the claim is said with its names.
+    const among = placeAmongFamily(placed, opts.family ?? null, coverage, opts.now);
+    const account = among.accountName;
     // I05 + C04: an open deal at the account is said, never a silent drop; a negative only under a complete CRM read.
     const lookup = dealsAt(coverage, account);
     const inDeal = lookup.inDeal === true;
@@ -232,9 +291,10 @@ export function rankPeople(rows: readonly WriterRow[], personas: readonly Person
     const name = p?.name ?? w.name ?? null;
     out.push({
       kind: 'person', id: email, key: `person:${email}`, title: `${name ?? email}${p?.title ? `, ${p.title}` : ''}${account ? ` at ${account}` : ` (${domainOf(email)})`}`, source: 'the mailbox', url: null, publishedAt: null, observedAt: w.last.toISOString(), truth: 'historical_observation',
-      line: `Wrote to us ${dayText(w.last)} (${w.n} message${w.n === 1 ? '' : 's'})${w.subject ? `, last about "${w.subject.slice(0, 60)}"` : ''}; ${words}${p ? '' : '; not a GAP contact yet'}${placed.ambiguous ? '; two accounts claim this domain: name the account' : ''}. Previously contacted, a response.${st ? (owed ? ` An answer is owed since ${dayText(st.answerOwed.since ?? w.last)}: ${st.answerOwed.basis}.` : ` ${st.quiet.basis.charAt(0).toUpperCase()}${st.quiet.basis.slice(1)}.`) : opts.sentFailed?.has(email) ? ' Our Sent could not be read for them, so a reply of ours may exist.' : opts.sentRead === false ? ' Our Sent was not read for this list, so a reply of ours may exist.' : opts.sentRead === true ? ' Our Sent was not read for them, so a reply of ours may exist.' : ''}${verdict?.review ? ` Review before outreach: ${verdict.reason}.` : ''}`,
+      line: `Wrote to us ${dayText(w.last)} (${w.n} message${w.n === 1 ? '' : 's'})${w.subject ? `, last about "${w.subject.slice(0, 60)}"` : ''}; ${words}${p ? '' : '; not a GAP contact yet'}${among.ambiguityLine ? `; ${among.ambiguityLine}` : among.familyLine ? `; ${among.familyLine}` : ''}. Previously contacted, a response.${st ? (owed ? ` An answer is owed since ${dayText(st.answerOwed.since ?? w.last)}: ${st.answerOwed.basis}.` : ` ${st.quiet.basis.charAt(0).toUpperCase()}${st.quiet.basis.slice(1)}.`) : opts.sentFailed?.has(email) ? ' Our Sent could not be read for them, so a reply of ours may exist.' : opts.sentRead === false ? ' Our Sent was not read for this list, so a reply of ours may exist.' : opts.sentRead === true ? ' Our Sent was not read for them, so a reply of ours may exist.' : ''}${verdict?.review ? ` Review before outreach: ${verdict.reason}.` : ''}`,
       accountName: account, accountHint: account ? null : domainOf(email), relevance: null, categories: [],
-      person: { email, name, title: p?.title ?? null, lastWroteAt: w.last.toISOString(), messages: w.n, via: placed.via, ambiguous: placed.ambiguous, ...(lookup.inDeal === true ? { deals: lookup.account.deals.map((d) => ({ id: d.id, name: d.name, stage: d.stage, nextStep: d.nextStep })) } : {}) },
+      person: { email, name, title: p?.title ?? null, lastWroteAt: w.last.toISOString(), messages: w.n, via: among.via, ambiguous: !!among.ambiguousAmong, ...(lookup.inDeal === true ? { deals: lookup.account.deals.map((d) => ({ id: d.id, name: d.name, stage: d.stage, nextStep: d.nextStep })) } : {}) },
+      ...(among.ambiguousAmong ? { ambiguousAmong: among.ambiguousAmong, ambiguityLine: among.ambiguityLine ?? undefined } : {}),
       opportunity: lookup.inDeal === true ? 'open' : lookup.inDeal === false ? 'none' : 'unknown',
       ...(st ? { state: { quietDays: st.quiet.days, quietBasis: st.quiet.basis, nextMeetingAt: st.nextMeetingAt, lastOutboundAt: st.lastOutboundAt, answerOwedSince: owed ? st.answerOwed.since : null } } : {}),
       ...(verdict?.review ? { review: verdict.reason } : {}),
@@ -243,6 +303,9 @@ export function rankPeople(rows: readonly WriterRow[], personas: readonly Person
   }
   return out.sort((a, b) => b.observedAt.localeCompare(a.observedAt)).map((x, i) => ({ ...x, rank: i }));
 }
+
+/** How a pursued person was placed at an account (the identity machinery's path, in four words; C5 adds the family's deal-holding account). */
+export type PlacedVia = 'persona' | 'crm_contact' | 'alias' | 'domain' | 'family_deal';
 
 /** I05: an item Casey pursued (or asked more about): the angle task's state and its result when ready. */
 export interface PursuedItem {
@@ -255,6 +318,22 @@ export interface PursuedItem {
   title: string;
   accountName: string | null;
   accountHint: string | null;
+  /**
+   * Seller acceptance (2026-10-09): a person is placed at READ time through the same identity path the people ranker
+   * uses (persona, the CRM contact's company, the thread's account, the verified domain; freemail never places), so a
+   * task whose input predates the identity fix (October 9: five Kenco pursues carried accountName null although
+   * kencogroup.com is Kenco's verified domain) is no longer shown under "No account yet". `placementChanged` says the
+   * placement differs from what the task carried; the line tells the seller the angle was developed before it.
+   * loadPursued always sets the four; they are optional so an older literal (the briefing test's) still types.
+   */
+  placedVia?: PlacedVia | null;
+  placementChanged?: boolean;
+  placementLine?: string | null;
+  /** "In an open deal: <deal>" from the day's deal coverage (C01), when the placed account is in one; else null. */
+  dealLine?: string | null;
+  /** C5: the accounts that claim the person's domain or name when no deal settles it, and the line that says it instead of "no account yet". */
+  ambiguousAmong?: string[];
+  ambiguityLine?: string | null;
   url: string | null;
   decision: string;
   decidedAt: string;
@@ -299,21 +378,96 @@ export async function loadDecided(prisma: PrismaLike, now: Date): Promise<Set<st
   return out;
 }
 
-/** I05: the pursued items from the angle tasks (any state, the task window), newest decision first, one per key. */
-export async function loadPursued(prisma: PrismaLike, now: Date): Promise<PursuedItem[]> {
+/** The identity path in the four words the pursued item carries; null when nothing placed the person. */
+export const placedViaOf = (v: PersonVia | string | null | undefined): PlacedVia | null =>
+  v === 'persona' ? 'persona' : v === 'hubspot_contact' || v === 'hubspot_company_id' ? 'crm_contact' : v === 'alias' || v === 'normalized' ? 'alias' : v === 'domain' ? 'domain' : v === 'family_deal' ? 'family_deal' : null;
+
+const PLACED_BY: Record<PlacedVia, string> = { persona: 'by the GAP contact record', crm_contact: "by the CRM contact's company", alias: "by the thread's account name", domain: 'by its verified domain', family_deal: "as the family's deal-holding account" };
+
+export interface PursuedOpts {
+  /** C02/C03: the identity context (read from the database when absent and the client has the tables). */
+  identity?: IdentityContext | null;
+  /** C01: the deal coverage; absent is "not read" and no deal line is said. */
+  coverage?: DealCoverage;
+  /** The persona by lowercased address and the thread's account by address, when the caller already read them (loadIntelligence does); a missing address is read here, one bounded row each. */
+  personas?: ReadonlyMap<string, PersonaRow>;
+  threadAccounts?: ReadonlyMap<string, string | null>;
+  /** C5: the family facts the caller already read for the ambiguous candidates; the ones it lacks are read here, one bounded query each. */
+  family?: FamilyFacts | null;
+}
+
+/**
+ * I05: the pursued items from the angle tasks (any state, the task window), newest decision first, one per key.
+ * Seller acceptance (2026-10-09): a person whose task carries no account is placed here through resolvePersonAccount
+ * (the same path the people ranker takes; no new sources: the persona and the thread the loader already holds, read
+ * one row each when it does not), the deal coverage says whether the placed account is in an open deal, and nothing
+ * is queued: the line asks the seller to Pursue again so the angle is developed with the placement.
+ */
+export async function loadPursued(prisma: PrismaLike, now: Date, opts: PursuedOpts = {}): Promise<PursuedItem[]> {
   if (typeof prisma?.gapAuditEvent?.findMany !== 'function') return [];
   const { listAgentTasks } = await import('../agents/tasks');
   const tasks = await listAgentTasks(prisma, { now }).catch(() => []);
-  const out = new Map<string, PursuedItem>();
+  const coverage = opts.coverage ?? coverageFromNames(null);
+  const identity: IdentityContext | null = opts.identity !== undefined ? opts.identity : typeof prisma?.canonicalCompany?.findMany === 'function' && typeof prisma?.gapAccountAlias?.findMany === 'function' ? await loadIdentityContext(prisma).catch(() => null) : null;
+  const personaFor = async (email: string): Promise<PersonaRow | null> => {
+    if (opts.personas?.has(email)) return opts.personas.get(email) ?? null;
+    if (typeof prisma?.persona?.findFirst !== 'function') return null;
+    return prisma.persona.findFirst({ where: { email: { equals: email, mode: 'insensitive' } }, select: { id: true, email: true, name: true, title: true, account_name: true, do_not_contact: true } }).catch(() => null);
+  };
+  const threadAccountFor = async (email: string): Promise<string | null> => {
+    if (opts.threadAccounts?.has(email)) return opts.threadAccounts.get(email) ?? null;
+    if (typeof prisma?.inboundMessage?.findFirst !== 'function') return null;
+    const last = await prisma.inboundMessage.findFirst({ where: { from_email: { equals: email, mode: 'insensitive' } }, orderBy: { received_at: 'desc' }, include: { thread: { select: { account_name: true } } } }).catch(() => null);
+    return last?.thread?.account_name ?? null;
+  };
+  const str = (v: unknown) => (typeof v === 'string' && v.trim() ? v.trim() : null);
+  const strs = (v: unknown) => (Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : []);
+  // Pass 1: the newest task per key and, for a person the task left unplaced, the identity path's answer.
+  const heads: Array<{ t: (typeof tasks)[number]; input: Record<string, unknown>; kind: PursuedItem['kind']; email: string | null; placed: PersonAccount | null }> = [];
+  const seen = new Set<string>();
   for (const t of tasks.filter((x) => x.kind === 'develop_angle').sort((a, b) => b.queuedAt.localeCompare(a.queuedAt))) {
-    if (out.has(t.itemKey) || t.status === 'superseded') continue;
+    if (seen.has(t.itemKey) || t.status === 'superseded') continue;
+    seen.add(t.itemKey);
     const input = (t.input ?? {}) as Record<string, unknown>;
-    const str = (v: unknown) => (typeof v === 'string' && v.trim() ? v.trim() : null);
     const kind = (t.itemKey.split(':')[0] as PursuedItem['kind']) ?? 'signal';
+    const email = kind === 'person' ? (str(input.email) ?? t.itemKey.slice('person:'.length)).toLowerCase() : null;
+    const placed = !str(input.accountName) && email ? resolvePersonAccount({ email, persona: await personaFor(email), threadAccount: await threadAccountFor(email), identity, hubspotCompanyIds: [] }) : null;
+    heads.push({ t, input, kind, email, placed });
+  }
+  // C5: the family facts for every ambiguous candidate not already supplied (one bounded query each; soft).
+  const wanted = [...new Set(heads.flatMap((h) => h.placed?.candidates ?? []))].filter((n) => !opts.family || (!opts.family.parentBrand.has(n) && !opts.family.duplicates.has(n)));
+  const extra = wanted.length ? await loadFamilyFacts(prisma, wanted) : EMPTY_FAMILY;
+  const family: FamilyFacts = { parentBrand: new Map([...(opts.family?.parentBrand ?? []), ...extra.parentBrand]), duplicates: new Map([...(opts.family?.duplicates ?? []), ...extra.duplicates]) };
+  const out = new Map<string, PursuedItem>();
+  for (const { t, input, kind, email, placed } of heads) {
     const r = (t.status === 'succeeded' && t.result && typeof t.result.whyItMatters === 'string' ? t.result : null) as Record<string, unknown> | null;
-    const strs = (v: unknown) => (Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : []);
+    // The placement: what the task carried when it carried one; else the identity path at read time (a person only), the family tie-break over an ambiguous domain, else the ambiguity said.
+    let accountName = str(input.accountName);
+    let accountHint = str(input.accountHint);
+    let placedVia: PlacedVia | null = accountName ? placedViaOf(str(input.resolvedVia)) : null;
+    let placementChanged = false;
+    let familyLine: string | null = null;
+    let ambiguousAmong: string[] | undefined;
+    let ambiguityLine: string | null = null;
+    if (placed) {
+      const among = placeAmongFamily(placed, family, coverage, now);
+      if (among.accountName) {
+        accountName = among.accountName;
+        accountHint = null;
+        placedVia = placedViaOf(among.via);
+        placementChanged = true;
+        familyLine = among.familyLine;
+      } else if (among.ambiguousAmong) {
+        ambiguousAmong = among.ambiguousAmong;
+        ambiguityLine = among.ambiguityLine;
+      }
+    }
+    const lookup = dealsAt(coverage, accountName);
+    const dealLine = lookup.inDeal === true ? `In an open deal: ${lookup.account.deals.map((d) => d.name).filter((n): n is string => !!n).join(', ') || lookup.account.accountName}` : null;
+    const placementLine = placementChanged && accountName ? `${familyLine ? `${familyLine.charAt(0).toUpperCase()}${familyLine.slice(1)}` : `Placed at ${accountName} ${PLACED_BY[placedVia ?? 'domain']} after the identity fix`}; the angle was developed before placement, so Pursue again to develop it ${lookup.inDeal === true ? 'as deal work' : 'at the account'}` : null;
     out.set(t.itemKey, {
-      key: t.itemKey, taskId: t.id, kind, writer: kind === 'person' ? { email: str(input.email) ?? t.itemKey.slice('person:'.length), name: str(input.name) } : null, title: str(input.title) ?? (kind === 'person' ? `${str(input.name) ?? str(input.email) ?? 'A person'} wrote to us` : 'An item'), accountName: str(input.accountName), accountHint: str(input.accountHint), url: str(input.url),
+      key: t.itemKey, taskId: t.id, kind, writer: email ? { email, name: str(input.name) } : null, title: str(input.title) ?? (kind === 'person' ? `${str(input.name) ?? str(input.email) ?? 'A person'} wrote to us` : 'An item'), accountName, accountHint, url: str(input.url),
+      placedVia, placementChanged, placementLine, dealLine, ...(ambiguousAmong ? { ambiguousAmong, ambiguityLine } : {}),
       decision: str(input.decision) ?? t.request, decidedAt: t.queuedAt,
       status: r ? 'ready' : t.status === 'failed' ? 'failed' : 'in_progress', error: t.status === 'failed' ? t.lastError : null,
       angle: r ? { whyItMatters: String(r.whyItMatters), starters: strs(r.starters), roles: strs(r.roles), accounts: strs(r.accounts), peopleNamed: Array.isArray(r.peopleNamed) ? (r.peopleNamed as Array<{ personaId: number; name: string | null; title: string | null }>) : [], proposedAction: String(r.proposedAction ?? 'research'), caveat: str(r.caveat), sourceLine: String(r.sourceLine ?? ''), warnings: strs(r.warnings) } : null,
@@ -384,7 +538,10 @@ export async function loadIntelligence(prisma: PrismaLike, opts: { now: Date; li
     verdicts.set(email, reengageEligible({ purposes, relationship: threadRel ?? (personaEmails.has(email) ? 'prospect' : 'unknown'), optedOut: unsubscribed.has(email) }));
   }
   const writerRows = msgs.map((m) => ({ from_email: m.from_email, from_name: m.from_name, subject: m.subject, received_at: m.received_at, thread_account: m.thread?.account_name ?? null }));
-  const base = { now: opts.now, decided, coverage, identity, unsubscribed, verdicts, sentRead: !!opts.listSent };
+  // C5: the ambiguous candidates of a first pure pass get their family facts (one bounded query each), so a family's deal-holding account can settle them.
+  const ambiguousNames = [...new Set(rankPeople(writerRows, personas, { now: opts.now, decided, coverage, identity, unsubscribed, verdicts }).flatMap((i) => i.ambiguousAmong ?? []))];
+  const family = ambiguousNames.length ? await loadFamilyFacts(prisma, ambiguousNames) : EMPTY_FAMILY;
+  const base = { now: opts.now, decided, coverage, identity, unsubscribed, verdicts, sentRead: !!opts.listSent, family };
   // C10: the seller's Sent is read for the people that would be listed (a bounded number of Gmail reads), and the two-sided state decides quiet and answer owed.
   let states: Map<string, PersonState> | null = null;
   const sentFailed = new Set<string>();
@@ -407,7 +564,10 @@ export async function loadIntelligence(prisma: PrismaLike, opts: { now: Date; li
     for (const email of sentFailed) states.delete(email);
   }
   const people = rankPeople(writerRows, personas, { ...base, states, sentFailed });
-  const pursued = await loadPursued(prisma, opts.now);
+  // The pursued items are placed with what this read already holds (the personas and the threads of the window's writers; no new source).
+  const threadAccounts = new Map<string, string | null>();
+  for (const w of writerRows) { const e = w.from_email.trim().toLowerCase(); if (!threadAccounts.get(e)) threadAccounts.set(e, w.thread_account ?? threadAccounts.get(e) ?? null); }
+  const pursued = await loadPursued(prisma, opts.now, { identity, coverage, personas: new Map(personas.filter((p) => p.email).map((p) => [String(p.email).toLowerCase(), p])), threadAccounts, family });
   return {
     signals: signals.slice(skipSignals, skipSignals + limit), triggers: triggers.slice(0, limit), people: people.slice(skipPeople, skipPeople + peopleLimit), pursued,
     totals: { signals: Math.max(signalTotal, signals.length), triggers: triggers.length, people: people.length },

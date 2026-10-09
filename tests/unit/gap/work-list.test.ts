@@ -37,13 +37,13 @@ const input = (over: Partial<WorkInput> = {}): WorkInput => ({
 describe('buildWorkList', () => {
   // Batch item 8: research and holds are parked (never "needs you"), listed after every card that needs the seller; the
   // opt-out to record is admin only the seller can do, so it needs the seller and sits after the decide card.
-  it('one card per account, the human reply first, then follow up, ready, decide, the opt-out (admin, never cold work); then parked: research, deals last', () => {
+  it('one card per account, the human reply first, then ready, decide, the cold follow-up (A2, 2026-10-09: evidence ranks the executable work, and a follow-up on a cold touch with no reply ever is the lowest of it), the opt-out (admin, never cold work); then parked: research, deals last', () => {
     const cards = buildWorkList(input());
     expect(cards.map((c) => [c.accountName, c.stateKind])).toEqual([
       ['NFI Industries', 'replied'],
-      ['H-E-B', 'follow_up'],
       ['PepsiCo', 'ready'],
       ['General Mills', 'decide'],
+      ['H-E-B', 'follow_up'],
       ['Walmart Inc.', 'opted_out'],
       ['Tyson Foods', 'research'],
       ['Dollar General', 'unknown_deal'],

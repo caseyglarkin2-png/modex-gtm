@@ -22,6 +22,8 @@ import { loadRecordedReplyIds, withoutRecordedReplies, loadAnswersOwed } from '.
 import { resolveAccountOpportunity } from '../opportunity/active-opportunity';
 import { cachedRead, type CachedRead } from './cache';
 import { loadCockpit, type CockpitData } from './cockpit-read';
+import { loadPursued, type PursuedItem } from './intel';
+import { dealCoverageFrom } from './deal-coverage';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -49,6 +51,21 @@ export interface WorkDayLoad {
   commitments: Awaited<ReturnType<typeof loadWorkCommitments>>;
   meetings: Array<{ accountName: string; at: string; what: string; meetingId: number | null; dealId: string | null }>;
   today: TodaySummary;
+}
+
+/**
+ * Seller acceptance follow-up (2026-10-09): the angles GAP has already prepared, by account, as evidence for the day's
+ * ranking (work/list.ts evidenceRank). A pursued item counts when its angle is ready and the person is placed at an
+ * account (the placement is read-time, through the identity machinery in work/intel.ts); the newest decision wins.
+ */
+export function preparedAnglesByAccount(pursued: readonly PursuedItem[]): Map<string, { who: string; line: string }> {
+  const out = new Map<string, { who: string; line: string }>();
+  for (const p of pursued) {
+    if (p.status !== 'ready' || !p.angle || !p.accountName || out.has(p.accountName)) continue;
+    const who = p.writer?.name ?? p.writer?.email ?? p.title;
+    out.set(p.accountName, { who, line: `GAP prepared an angle for ${who}: ${p.angle.whyItMatters.replace(/\s+/g, ' ').trim().slice(0, 140)}` });
+  }
+  return out;
 }
 
 export async function loadWorkDay(prisma: PrismaLike, opts: LoadWorkDayOptions): Promise<WorkDayLoad> {
@@ -102,6 +119,10 @@ export async function loadWorkDay(prisma: PrismaLike, opts: LoadWorkDayOptions):
   // (its name, outcome and date), read in this same wave and only for the accounts that hold one.
   const openIds = data.workInput.inDeals.status === 'complete' ? new Set(data.workInput.inDeals.accounts.flatMap((a) => a.deals.map((d) => d.id).filter((x): x is string => !!x))) : null;
   const closureAccounts = [...new Set([...meetingRows, ...commitments].filter((x) => !!x.dealId && /^\d+$/.test(x.dealId) && !openIds?.has(x.dealId)).map((x) => x.accountName))];
+  // Seller acceptance follow-up: the prepared angles ride as ranking evidence (never under a lane; soft: unread is none).
+  // The day's own in-deals read rides along so a person two accounts claim is placed by the family's deal (C5), as the intelligence does.
+  const pursued: PursuedItem[] = lane ? [] : await loadPursued(prisma, realNow, { coverage: dealCoverageFrom(data.workInput.inDeals) }).catch(() => []);
+  const preparedAngles = preparedAnglesByAccount(pursued);
   const [priorities, followUpPlans, meetingPreps, closedDeals] = await Promise.all([
     loadAccountPriorities(prisma, [...new Set([...data.workAccounts, ...commitments.map((c) => c.accountName)])]).catch(() => new Map()),
     // R43: each follow-up due today, read off the person's own history (prepare, by hand, a saved draft, unknown, held).
@@ -110,7 +131,7 @@ export async function loadWorkDay(prisma: PrismaLike, opts: LoadWorkDayOptions):
     loadMeetingStartingPoints(prisma, meetingRows.filter((m) => new Date(m.at).getTime() <= now.getTime() + 24 * 3_600_000), commitments, now).catch(() => new Map()),
     closureAccounts.length ? loadRecordedClosures(prisma, closureAccounts).catch(() => new Map()) : Promise.resolve(new Map()),
   ]);
-  const day = workDay({ ...data.workInput, replies: live.replies, now, summaries, outcomes, commitments, meetings, canceledMeetings, meetingPreps, priorities, followUpPlans, closedDeals, preparedMeetings });
+  const day = workDay({ ...data.workInput, replies: live.replies, now, summaries, outcomes, commitments, meetings, canceledMeetings, meetingPreps, priorities, followUpPlans, closedDeals, preparedMeetings, preparedAngles });
   // R45: close the day and keep tomorrow, derived from actual state (no new storage).
   const doneToday = lane || preview ? [] : await loadCompletedToday(prisma, now).catch(() => []);
   const today = todaySummary({ now, commitments, done: doneToday, waiting: day.waiting, meetings, moved: buyerMoves(data.workInput.replies) });

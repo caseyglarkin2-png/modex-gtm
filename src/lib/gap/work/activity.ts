@@ -35,6 +35,7 @@ import { COMMAND_APPLIED, COMMAND_REFUSED } from '../replies/commands-apply';
 import { ARTIFACT_SENT, ARTIFACT_USED } from '../deals/artifacts';
 import { TASK_SUCCEEDED, listAgentTasks, type AgentTask } from '../agents/tasks';
 import { COMMITMENT_EVENT, type Commitment } from './commitment-model';
+import { readDoneNote, sellerWordsOf } from './done-note';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -55,6 +56,8 @@ export const ACTIVITY_KINDS = [
   'crm_updated',
   'deal_advanced',
   'obligation_done',
+  /** Seller acceptance (2026-10-09): a DONE whose note reads as work in progress (researching, will call): recorded as progress, never a completion. */
+  'progress_noted',
   'task_deferred',
   'work_blocked',
 ] as const;
@@ -78,6 +81,7 @@ export const ACTIVITY_LABEL: Record<ActivityKind, string> = {
   crm_updated: 'CRM updated',
   deal_advanced: 'Deal advanced',
   obligation_done: 'Obligation done',
+  progress_noted: 'In progress (your note)',
   task_deferred: 'Task deferred',
   work_blocked: 'Work blocked',
 };
@@ -98,6 +102,7 @@ export const ACTIVITY_CLASS: Record<ActivityKind, ActivityClass> = {
   deal_advanced: 'commercial',
   crm_updated: 'maintenance',
   obligation_done: 'other',
+  progress_noted: 'other',
   task_deferred: 'other',
   work_blocked: 'other',
 };
@@ -143,6 +148,11 @@ export const DEAL_STAGE_CHANGED = 'deal.stage_changed' as const;
 export const MEETING_BOOKED = 'meeting.booked' as const;
 
 const RESEARCH_KINDS = ['research.background_run', 'signal.grounded_discovery', 'research.manual_fact', 'signal.discovery'];
+/** Seller acceptance (2026-10-09): the research run's own completion row (research/run.ts: outcome, facts, rejected, accountName): preparation the agent did, said with its outcome; never contact. */
+export const RESEARCH_COMPLETED = 'research.completed' as const;
+/** Builder B's command effects (replies/commands-apply.ts): a DONE note read as progress; an item held for the agent's research. */
+export const PROGRESS_NOTED_EFFECT = 'progress_noted' as const;
+export const HELD_FOR_RESEARCH_EFFECT = 'item_held_for_research' as const;
 const PROPOSAL_KINDS = ['research.proposal_prepared', COPY_REVISION_PROPOSED, TASK_SUCCEEDED];
 const DRAFT_KINDS: readonly string[] = [DRAFTED, REPLY_DRAFTED];
 const APPROVED_KINDS: readonly string[] = [COPY_REVISION_APPROVED, 'hypothesis.approved'];
@@ -153,6 +163,7 @@ const BLOCKED_KINDS = [DIRECT_REFUSED, DRAFT_REFUSED, COPY_REFUSED, 'enroll.refu
 /** Every ledger kind the projection reads (the loader's `in` filter). */
 export const ACTIVITY_LEDGER_KINDS: readonly string[] = [
   ...RESEARCH_KINDS,
+  RESEARCH_COMPLETED,
   ...PROPOSAL_KINDS,
   ...DRAFT_KINDS,
   ...APPROVED_KINDS,
@@ -198,6 +209,14 @@ export function projectActivity(r: LedgerRow): ActivityEvent | null {
   const ev = (kind: ActivityKind, basis: ActivityBasis, line: string, who: string | null = null, completes: string[] = [], extra: Partial<Pick<ActivityEvent, 'prepares' | 'dealId' | 'evidence'>> = {}): ActivityEvent => ({ kind, basis, at, accountName, who, line, ref, completes, prepares: extra.prepares ?? [], dealId: extra.dealId ?? null, evidence: extra.evidence ?? null });
   const accountKey = (tier: string) => (accountName ? [`${tier}:${accountName}:${dayOf(at)}`] : []);
 
+  // Seller acceptance (2026-10-09): the agent's own research run shows as what it was (October 9: insufficient evidence, 0 facts, 9 rejected, shown nowhere before).
+  if (r.kind === RESEARCH_COMPLETED) {
+    const facts = Number(p.facts ?? 0);
+    const rejected = Number(p.rejected ?? 0);
+    const who = accountName ?? 'the account';
+    const said = String(p.outcome ?? '') === 'insufficient_evidence' ? `insufficient evidence (${facts} fact${facts === 1 ? '' : 's'}, ${rejected} rejected)` : `${facts} fact${facts === 1 ? '' : 's'} found${rejected ? `, ${rejected} rejected` : ''}${p.outcome && p.outcome !== 'facts_found' && p.outcome !== 'ok' ? ` (${words(p.outcome)})` : ''}`;
+    return ev('research_generated', 'provider', `GAP researched ${who}: ${said}.`, null, [], { evidence: `research:${r.subject_id}` });
+  }
   if (RESEARCH_KINDS.includes(r.kind)) return ev('research_generated', 'provider', accountName ? `Research ran on ${accountName}.` : 'Background research ran.');
   if (r.kind === 'research.proposal_prepared') return ev('proposal_prepared', 'provider', `A proposal was prepared${accountName ? ` for ${accountName}` : ''} (${words(p.status) || 'prepared'}).`);
   if (r.kind === COPY_REVISION_PROPOSED) return ev('proposal_prepared', 'provider', 'A revised email was proposed by the agent.', null, [], { prepares: str(p.decisionId) ? [`first_touch:${str(p.decisionId)}`] : [] });
@@ -214,6 +233,10 @@ export function projectActivity(r: LedgerRow): ActivityEvent | null {
     const command = String(p.command ?? '').toUpperCase();
     // The command rows carry the item key (START/NEXT), the commitment id (SKIP/DEFER) or the decision id (APPROVE).
     const key = str(p.itemKey) ?? (str(p.commitmentId) ? `commitment:${str(p.commitmentId)}` : null) ?? (str(p.decisionId) ? `first_touch:${str(p.decisionId)}` : null);
+    const effect = str(p.effect);
+    // Seller acceptance (2026-10-09): a DONE whose note reads as progress is progress (it completes nothing); an item held for GAP's research is preparation.
+    if (effect === PROGRESS_NOTED_EFFECT) return ev('progress_noted', 'self_reported', `In progress (your note): ${sellerWordsOf(str(p.note)) || str(p.note) || 'no words'}.`);
+    if (effect === HELD_FOR_RESEARCH_EFFECT) return ev('research_generated', 'provider', `Held for GAP research: ${accountName ?? key ?? r.subject_id}.`);
     if (command === 'APPROVE') return ev('message_approved', 'provider', 'Approved by email: the Gmail draft was created; not a send until Sent shows it.', null, [], { prepares: key ? [key] : [] });
     if (command === 'DEFER' || command === 'SKIP') return ev('task_deferred', 'self_reported', `${command === 'DEFER' ? 'Deferred' : 'Skipped'} by email${str(p.reason) ? `: ${str(p.reason)}` : ''}.`, null, key ? [key] : []);
     return null;
@@ -276,6 +299,11 @@ export function projectActivity(r: LedgerRow): ActivityEvent | null {
     if (c.status === 'done') {
       const confirmed = !!c.proof && c.proof.kind !== 'seller';
       const basis: ActivityBasis = confirmed ? 'provider' : 'self_reported';
+      // Seller acceptance (2026-10-09): a done proved only by the seller's note, where the note says what the seller is DOING
+      // (October 9: "DONE: researching catalysts" closed "Follow up with Diego Fonseca"), is said as work in progress: it
+      // completes the commitment key the row closed and nothing else (never a first touch, a reply or a deal), never contact.
+      const reading = !confirmed ? readDoneNote(c.proof?.note ?? null) : null;
+      if (reading?.kind === 'progress') return ev('obligation_done', 'self_reported', `Marked done by your note "${reading.note.slice(0, 120)}", which reads as work in progress, not a completed follow-up.`, null, [key], { dealId: c.dealId ?? null });
       // C38c: advancement is a DEFINED milestone (deals/action-plan.ts) done on ONE deal id; a done to-do is an obligation done.
       if (c.kind === 'deal_step' && c.dealId && c.detail?.milestone) return ev('deal_advanced', basis, `Milestone reached on the deal: ${c.title}${confirmed ? ` (${words(c.proof!.kind)})` : ' (your word)'}.`, null, [key, ...accountKey('deal')], { dealId: c.dealId });
       return ev('obligation_done', basis, `Done: ${c.title}${c.kind === 'deal_step' && !c.dealId ? ' (a deal step with no deal named: not advancement)' : ''}.`, null, [key, ...(c.kind === 'deal_step' ? accountKey('deal') : [])], { dealId: c.dealId ?? null });

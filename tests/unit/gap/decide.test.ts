@@ -54,21 +54,34 @@ describe('I02: decisions on signals', () => {
     expect(decisionLine(r)).toMatch(/^Pursuing the signal\. GAP is developing the angle and checking the source/);
   });
 
-  it('A02: a second Pursue without a note on an item whose angle is prepared keeps the angle (no regeneration); a running task is kept; More, a note or a failed task queue a fresh one', async () => {
+  it('A02 + seller acceptance (2026-10-09): a second Pursue while the task is queued or running keeps it ("Already queued; GAP is on it"), never a second task; a prepared angle is kept; More with a note queues a fresh one; a failed task re-queues on Pursue (the retry path)', async () => {
     const c = db.client();
     const first = await applyDecision(c, { key: 'signal:s-old', decision: 'pursue', actor: ACTOR, now: NOW });
     if (!first.ok) throw new Error('first');
     const again = await applyDecision(c, { key: 'signal:s-old', decision: 'pursue', actor: ACTOR, now: new Date(NOW.getTime() + 5000) });
-    // queued (not yet run): the queue supersedes, as X08 pins; the task is fresh
-    expect(again).toMatchObject({ ok: true, effects: expect.arrayContaining(['angle_queued']) });
+    // Changed 2026-10-09 (C2): the old pin let a queued task be superseded by a fresh one on every click (October 9: five tasks on one person); a queued task is now kept like a running one.
+    expect(again).toMatchObject({ ok: true, angleTaskId: first.angleTaskId, angle: 'kept_in_progress', effects: expect.arrayContaining(['angle_kept']) });
+    expect(again.ok && decisionLine(again)).toMatch(/^Already queued; GAP is on it\./);
+    expect((await listAgentTasks(c, { now: new Date(NOW.getTime() + 5000), itemKey: 'signal:s-old' })).filter((t) => t.kind === 'develop_angle'), 'one task on the key after two clicks').toHaveLength(1);
     const [task] = await runAgentTasks(c, { now: new Date(NOW.getTime() + 6000), max: 5, claimer: 'test', handlers: { develop_angle: async () => ({ ok: true, result: { whyItMatters: 'prepared', accounts: [], roles: [], people: [], starters: ['a', 'b'], proposedAction: 'research', caveat: null } }) } }).then((r) => r.results);
     expect(task.outcome).toBe('succeeded');
     const third = await applyDecision(c, { key: 'signal:s-old', decision: 'pursue', actor: ACTOR, now: new Date(NOW.getTime() + 7000) });
-    expect(third).toMatchObject({ ok: true, angleTaskId: task.id, effects: expect.arrayContaining(['angle_kept']) });
+    expect(third).toMatchObject({ ok: true, angleTaskId: task.id, angle: 'kept_prepared', effects: expect.arrayContaining(['angle_kept']) });
+    expect(third.ok && decisionLine(third)).toMatch(/already prepared on the item/);
     expect((await listAgentTasks(c, { now: new Date(NOW.getTime() + 7000), itemKey: 'signal:s-old' })).filter((t) => t.status === 'queued')).toHaveLength(0);
     const more = await applyDecision(c, { key: 'signal:s-old', decision: 'more', actor: ACTOR, now: new Date(NOW.getTime() + 8000), note: 'focus on the gate' });
-    expect(more).toMatchObject({ ok: true, effects: expect.arrayContaining(['angle_queued']) });
+    expect(more).toMatchObject({ ok: true, angle: 'queued', effects: expect.arrayContaining(['angle_queued']) });
     expect(more.ok && more.angleTaskId).not.toBe(task.id);
+    // A retryable failure (the handler threw, not final): the task is queued for its retry and a click keeps it.
+    await runAgentTasks(c, { now: new Date(NOW.getTime() + 9000), max: 5, claimer: 'test', handlers: { develop_angle: async () => { throw new Error('transient'); } } });
+    const awaitingRetry = await applyDecision(c, { key: 'signal:s-old', decision: 'pursue', actor: ACTOR, now: new Date(NOW.getTime() + 10_000) });
+    expect(awaitingRetry).toMatchObject({ ok: true, angleTaskId: more.ok ? more.angleTaskId : null, angle: 'kept_in_progress' });
+    // A final failure (the handler refused): an explicit Pursue re-queues; that is the retry path.
+    await runAgentTasks(c, { now: new Date(NOW.getTime() + 11_000), max: 5, claimer: 'test', handlers: { develop_angle: async () => ({ ok: false, reason: 'ai_billing' }) } });
+    expect((await listAgentTasks(c, { now: new Date(NOW.getTime() + 11_000), itemKey: 'signal:s-old' })).map((t) => t.status).sort()).toEqual(['failed', 'succeeded']);
+    const retry = await applyDecision(c, { key: 'signal:s-old', decision: 'pursue', actor: ACTOR, now: new Date(NOW.getTime() + 12_000) });
+    expect(retry).toMatchObject({ ok: true, angle: 'queued', effects: expect.arrayContaining(['angle_queued']) });
+    expect(retry.ok && retry.angleTaskId).not.toBe(more.ok ? more.angleTaskId : null);
   });
 
   it('More on a signal with no account queues the angle only; Save keeps context; Skip hides 30 days; Dismiss ignores; Explore changes nothing; an unknown signal is not_found', async () => {

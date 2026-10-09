@@ -20,6 +20,32 @@ import type { AskControls } from './proposal';
 export const ASK_QUESTION_MAX = 400;
 export const ASK_ANSWER_WORDS = 160;
 
+/**
+ * Seller acceptance (2026-10-09): what the context was built from, per source, so an assignment or an answer never
+ * says "no context" over a source that was not read. Derived from the reads the page already made (the HubSpot deal
+ * read, the synced inbox, the vault and Clawd readers, the signals); no new read.
+ */
+export type AskCoverageSource = 'hubspot' | 'gmail_thread' | 'gmail_sent' | 'gmail_drafts' | 'vault' | 'clawd' | 'signals';
+export type AskCoverageStatus = 'read' | 'partial' | 'not_read' | 'failed';
+export interface AskCoverage {
+  source: AskCoverageSource;
+  status: AskCoverageStatus;
+  detail: string | null;
+}
+
+export const ASK_COVERAGE_WORDS: Record<AskCoverageSource, string> = { hubspot: 'HubSpot', gmail_thread: 'the Gmail thread', gmail_sent: 'Gmail Sent', gmail_drafts: 'Gmail drafts', vault: 'the vault', clawd: 'Clawd', signals: 'the signals' };
+
+/** The one line for the gaps: null when every source was read in full. */
+export function coverageLineOf(coverage: readonly AskCoverage[]): string | null {
+  const say = (c: AskCoverage) => `${ASK_COVERAGE_WORDS[c.source]}${c.detail ? ` (${c.detail})` : ''}`;
+  const notRead = coverage.filter((c) => c.status === 'not_read' || c.status === 'failed');
+  const partial = coverage.filter((c) => c.status === 'partial');
+  const parts: string[] = [];
+  if (notRead.length) parts.push(`Not read this time: ${notRead.map(say).join(', ')}`);
+  if (partial.length) parts.push(`Partly read: ${partial.map(say).join(', ')}`);
+  return parts.length ? parts.join('. ') : null;
+}
+
 export interface AskContext {
   accountName: string;
   state: { state: string; stateLine: string; blocker: string | null; next: string; coldTouchAllowed: boolean };
@@ -29,6 +55,9 @@ export interface AskContext {
   opening: { fact: string; basis: string; whyTheyCare: string | null; supporting: string | null; proof: string } | null;
   otherStories: Array<{ fact: string; usable: boolean; why: string | null }>;
   buyerSaid: Array<{ text: string; who: string | null; at: string | null }>;
+  /** Seller acceptance (2026-10-09): per source, whether it was read; the assignment prints `coverageLine` when there is a gap. compactContext always sets both; optional so an older literal (a test's) still types. */
+  coverage?: AskCoverage[];
+  coverageLine?: string | null;
   /** R35: the page's controls, for a proposal; never sent to the model (askPrompt drops it). */
   controls?: AskControls;
 }
@@ -89,6 +118,8 @@ export function compactContext(i: {
   buyerSaid?: Array<{ text: string; who: string | null; at: string | null }>;
   /** R35: where the page's controls live (the account page's own href and NEXT's control). */
   nav?: { accountHref?: string; next?: { label: string; href: string } | null };
+  /** What the context was built from; absent means the caller said nothing about it (the coverage is empty, no line). */
+  coverage?: readonly AskCoverage[];
 }): AskContext {
   const rows = [...(i.stack?.rows ?? []), ...(i.stack?.more ?? []).slice(0, 6), ...(i.stack?.slots ?? [])];
   const dnu = new Set((i.anchor?.doNotUse ?? []).map((d) => d.text.trim().toLowerCase()));
@@ -96,6 +127,8 @@ export function compactContext(i: {
   const buyerSaid = [...(i.buyerSaid ?? [])];
   // An opt-out is the buyer's word too ("stop"): never "the buyer has not told us" over it.
   if (i.state.lastInbound && (i.state.lastInbound.kind === 'human' || i.state.lastInbound.kind === 'opt_out') && i.state.lastInbound.snippet.trim()) buyerSaid.unshift({ text: i.state.lastInbound.kind === 'opt_out' ? `Asked not to be contacted: "${i.state.lastInbound.snippet.trim()}"` : i.state.lastInbound.snippet, who: i.state.lastInbound.who, at: i.state.lastInbound.at });
+  // The coverage details are scrubbed like everything else (a detail may name an address), and the line is built from the scrubbed rows.
+  const coverage: AskCoverage[] = (i.coverage ?? []).map((c) => ({ source: c.source, status: c.status, detail: c.detail ? scrub(c.detail) : null }));
   return {
     accountName: i.accountName,
     state: { state: i.state.state, stateLine: scrub(i.state.stateLine), blocker: i.state.blocker ? scrub(i.state.blocker) : null, next: scrub(i.nextText), coldTouchAllowed: i.state.coldTouchAllowed },
@@ -110,6 +143,8 @@ export function compactContext(i: {
       : null,
     otherStories: (i.anchor?.alternatives ?? []).slice(0, 4).map((t) => ({ fact: scrub(t.observation), usable: t.usable, why: t.unusableWhy ? scrub(t.unusableWhy) : null })),
     buyerSaid: buyerSaid.slice(0, 8).map((b) => ({ text: scrub(b.text), who: b.who ? scrub(b.who) : null, at: b.at })),
+    coverage,
+    coverageLine: coverageLineOf(coverage),
     controls: {
       accountHref: i.nav?.accountHref ?? accountHref(i.accountName),
       person: i.state.person ? { personaId: i.state.person.personaId ?? null, name: i.state.person.name, title: i.state.person.title ?? null } : null,

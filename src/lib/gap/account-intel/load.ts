@@ -26,17 +26,102 @@ import { stageLabels, type StageLabelRead } from '../opportunity/stage-labels';
 import { stageName } from '../deals/stage-label';
 import { bidScopeLabeler } from '../deals/opportunities';
 import { fetchAccountContextRows, loadAccountContext, projectAccountContext } from '../context/load';
-import type { AccountContext } from '../context/context';
+import { decodeEntities, type AccountContext } from '../context/context';
 import { accountSlug } from './href';
 import { approachOfHypothesis } from '../research/approach-policy';
 import { factUsability, usabilityLine } from '../research/currentness';
 import { draftApproachFor } from '../story/draft-approach';
 import { nameFromAddress } from '../story/touches';
 import { wordingOf } from '../bid/wording';
+import type { IdentityContext } from '../identity/resolve';
+import { loadIdentityContext } from '../identity/service';
+import { resolvePersonAccount } from '../work/person-identity';
+import { loadFamilyFacts, placeAmongFamily, placedViaOf } from '../work/intel';
+import { ABSENT_COVERAGE, dealCoverageFrom, type DealCoverage } from '../work/deal-coverage';
+import { loadInDealsSummary, type InDealsSummary } from '../deals/in-deals';
+import { AUTO_REPLY_SUBJECT, FREEMAIL_DOMAINS, OWN_DOMAINS } from '../replies/domains';
+import type { InboundVia } from './build';
 /** R30/R31: the non-physical claim classes the read keeps as story facts of their own kind. */
 const CLAIM_FACT_CLASSES: ReadonlySet<string> = new Set(['JOB_POSTING', 'PROCUREMENT']);
 
 export { accountSlug };
+
+/** C6: the inbound read's window and bound (each way). */
+export const INBOUND_WINDOW_DAYS = 180;
+export const INBOUND_MAX = 50;
+
+type InboundRow = { id: string; thread_id: string | null; from_email: string; from_name: string | null; subject: string | null; snippet: string | null; body_text?: string | null; received_at: Date | string; thread?: { account_name: string | null } | null };
+
+export type AccountInbound = NonNullable<AccountInputs['inbound']>;
+
+/**
+ * C6 (seller acceptance, 2026-10-09; Casey's rule 3: retrieve the Gmail conversation before declaring there is no
+ * context). The account's inbound mail from GAP's synced inbox, two bounded reads merged by message id:
+ *   thread   the messages of the threads keyed to this account (email_threads.account_name), the read the story had
+ *   placed   the messages whose SENDER the identity machinery places here (resolvePersonAccount with the same identity
+ *            context the people ranker uses, then the C5 family tie-break under the day's deal coverage): a persona, the
+ *            CRM contact's company, the thread's name, the verified domain, the family's deal-holding account. A thread
+ *            keyed to ANOTHER account is never taken; a freemail sender is never placed; own-domain and automated mail
+ *            is left out.
+ * Soft: a client without the tables, or a failed read, gives what was read and says so; identityRead false means the
+ * identity context could not be read and only the thread read ran (the coverage says partial with that detail).
+ */
+export async function loadAccountInbound(prisma: PrismaLike, args: { accountName: string; now: Date; domains?: readonly string[]; personaEmails?: readonly string[]; identity?: IdentityContext | null; coverage?: DealCoverage }): Promise<AccountInbound> {
+  const { accountName, now } = args;
+  const since = new Date(now.getTime() - INBOUND_WINDOW_DAYS * 86_400_000);
+  const iso = (d: Date | string) => new Date(d).toISOString();
+  const lower = (s: string) => s.trim().toLowerCase();
+  const sameName = (a: string | null | undefined) => !!a && lower(a) === lower(accountName);
+  const select = { id: true, thread_id: true, from_email: true, from_name: true, subject: true, snippet: true, body_text: true, received_at: true, thread: { select: { account_name: true } } };
+  const canRead = typeof prisma?.inboundMessage?.findMany === 'function';
+  const messages = new Map<string, AccountInbound['messages'][number]>();
+  // C7: the synced inbox's snippet arrives HTML-escaped ("I&#39;ve only met him once"); the buyer's words are decoded before the story quotes them.
+  const toMessage = (r: InboundRow, via: InboundVia, domain: string | null) => ({ id: r.id, from: lower(r.from_email), name: r.from_name?.trim() || null, at: iso(r.received_at), subject: r.subject ? decodeEntities(r.subject) : null, snippet: decodeEntities((r.snippet ?? r.body_text ?? '').replace(/\s+/g, ' ').trim()).slice(0, 600), threadId: r.thread_id ?? null, via, domain });
+
+  // The thread-keyed read.
+  if (canRead && typeof prisma?.emailThread?.findMany === 'function') {
+    const threads: Array<{ id: string }> = await prisma.emailThread.findMany({ where: { account_name: accountName }, select: { id: true }, take: 200 }).catch(() => []);
+    if (threads.length) {
+      const rows: InboundRow[] = await prisma.inboundMessage.findMany({ where: { thread_id: { in: threads.map((t) => t.id) }, received_at: { gte: since } }, select, orderBy: { received_at: 'desc' }, take: INBOUND_MAX }).catch(() => []);
+      for (const r of rows) if (!messages.has(r.id)) messages.set(r.id, toMessage(r, 'thread', r.from_email.includes('@') ? lower(r.from_email.split('@')[1]) : null));
+    }
+  }
+
+  // The placed read: the identity context first (the people ranker's), then the senders a domain or a persona could place.
+  const identity: IdentityContext | null | undefined = args.identity !== undefined ? args.identity : typeof prisma?.canonicalCompany?.findMany === 'function' && typeof prisma?.gapAccountAlias?.findMany === 'function' ? await loadIdentityContext(prisma).catch(() => null) : null;
+  const identityRead = !!identity;
+  const claimedDomains = new Set<string>((args.domains ?? []).map(lower));
+  if (identity) {
+    for (const m of [identity.verifiedDomainToAccounts, identity.conflictedDomainToAccounts ?? new Map<string, readonly string[]>()]) for (const [d, names] of m) if (names.some(sameName)) claimedDomains.add(lower(d));
+  }
+  for (const e of args.personaEmails ?? []) { const d = e.includes('@') ? lower(e.split('@')[1]) : ''; if (d && !FREEMAIL_DOMAINS.has(d)) claimedDomains.add(d); }
+  for (const d of [...claimedDomains]) if (OWN_DOMAINS.has(d) || FREEMAIL_DOMAINS.has(d)) claimedDomains.delete(d);
+  const personaEmails = [...new Set((args.personaEmails ?? []).map(lower).filter((e) => e.includes('@')))];
+  if (canRead && identity && (claimedDomains.size || personaEmails.length)) {
+    const or = [...(personaEmails.length ? [{ from_email: { in: personaEmails, mode: 'insensitive' } }] : []), ...[...claimedDomains].map((d) => ({ from_email: { endsWith: `@${d}`, mode: 'insensitive' } }))];
+    const rows: InboundRow[] = await prisma.inboundMessage.findMany({ where: { received_at: { gte: since }, OR: or }, select, orderBy: { received_at: 'desc' }, take: INBOUND_MAX }).catch(() => []);
+    const fresh = rows.filter((r) => !messages.has(r.id) && r.from_email.includes('@') && !OWN_DOMAINS.has(lower(r.from_email.split('@')[1])) && !AUTO_REPLY_SUBJECT.test(r.subject ?? '') && !(r.thread?.account_name && !sameName(r.thread.account_name)));
+    if (fresh.length) {
+      // The senders' personas (any account: a persona elsewhere places the sender elsewhere, never here).
+      const senders = [...new Set(fresh.map((r) => lower(r.from_email)))];
+      const personas: Array<{ email: string | null; account_name: string | null }> = typeof prisma?.persona?.findMany === 'function' ? await prisma.persona.findMany({ where: { email: { in: senders, mode: 'insensitive' } }, select: { email: true, account_name: true } }).catch(() => []) : [];
+      const personaByEmail = new Map(personas.filter((p) => p.email).map((p) => [lower(String(p.email)), p]));
+      const placedBy = new Map(senders.map((e) => [e, resolvePersonAccount({ email: e, persona: personaByEmail.get(e) ?? null, threadAccount: null, identity, hubspotCompanyIds: [] })]));
+      const candidates = [...new Set([...placedBy.values()].flatMap((p) => p.candidates))];
+      const family = candidates.length ? await loadFamilyFacts(prisma, candidates).catch(() => null) : null;
+      const coverage = args.coverage ?? ABSENT_COVERAGE;
+      for (const r of fresh) {
+        const placed = placedBy.get(lower(r.from_email))!;
+        const among = placeAmongFamily(placed, family, coverage, now);
+        if (!sameName(among.accountName)) continue;
+        const via = placedViaOf(among.via) ?? 'domain';
+        messages.set(r.id, toMessage(r, via, lower(r.from_email.split('@')[1])));
+      }
+    }
+  }
+  const out = [...messages.values()].sort((a, b) => b.at.localeCompare(a.at)).slice(0, INBOUND_MAX * 2);
+  return { messages: out, identityRead, detail: identityRead ? null : 'identity context unreadable: senders could not be placed, only the threads keyed to the account were read' };
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -119,7 +204,7 @@ export async function loadAccountInputs(
   now: Date,
   opts: {
     live?: boolean;
-    deps?: { opportunity?: (p: PrismaLike, a: string) => Promise<OpportunityTruth>; hubspotPeople?: HubSpotPeopleReads; stageLabels?: StageLabelRead };
+    deps?: { opportunity?: (p: PrismaLike, a: string) => Promise<OpportunityTruth>; hubspotPeople?: HubSpotPeopleReads; stageLabels?: StageLabelRead; /** C6: the identity context and the in-deals read the placed inbound read uses (tests inject them; the live page reads the cached summary). */ identity?: IdentityContext | null; inDeals?: (p: PrismaLike, now: Date) => Promise<InDealsSummary | null> };
     hypothesisId?: string;
     /**
      * Execution acceptance: only what the current-actionable-thesis rule reads (theses, facts, buyer truth, review
@@ -310,6 +395,13 @@ export async function loadAccountInputs(
         return ids.length ? loadHubSpotPeopleForCompanies(ids, opts.deps?.hubspotPeople) : null;
       })().catch(() => null));
   const hsById = new Map((hsPeople?.people ?? []).map((h) => [h.id, h]));
+  // C6: the account's inbound mail, thread-keyed and placed (the live page reads the cached in-deals summary for the C5 tie-break; soft).
+  const inboundP: Promise<AccountInputs['inbound']> = lean
+    ? Promise.resolve(null)
+    : (async () => {
+        const summary = opts.deps?.inDeals ? await opts.deps.inDeals(prisma, now).catch(() => null) : opts.live && typeof prisma?.systemConfig?.findUnique === 'function' ? await loadInDealsSummary(prisma, { now }).catch(() => null) : null;
+        return loadAccountInbound(prisma, { accountName, now, domains, personaEmails: (personas as Row[]).map((p) => String(p.email ?? '')).filter(Boolean), identity: opts.deps?.identity, coverage: dealCoverageFrom(summary) });
+      })().catch(() => null);
   // Contact currentness for the GAP contacts (database evidence plus the live HubSpot properties where linked).
   const hsProps = new Map<string, HubSpotEmploymentProps>();
   for (const h of hsPeople?.people ?? []) hsProps.set(h.id, { company: h.company ?? null, title: h.title, email: null, lastModifiedAt: h.lastModifiedAt ?? null, apolloEmploymentStatus: h.apolloEmploymentStatus ?? null, apolloVerifiedAt: h.apolloVerifiedAt ?? null });
@@ -389,6 +481,7 @@ export async function loadAccountInputs(
     roi,
     scout: scoutOf(candidate),
     family,
+    inbound: await inboundP,
   };
 }
 
