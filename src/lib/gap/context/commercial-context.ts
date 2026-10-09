@@ -148,6 +148,8 @@ export interface SourceCoverage {
   /** What was asked (an address, an account, a query) so a reader can repeat it. */
   query: string | null;
   omittedReason: string | null;
+  /** Stream A (2026-10-09): what the source holds in words ("92 calls, 78 account notes"), when it can say; absent otherwise. */
+  summary?: string | null;
 }
 
 export interface CommercialContextPacket {
@@ -232,5 +234,5 @@ export function coverageLine(c: SourceCoverage): string {
   if (!c.configured) return `${c.source}: not configured`;
   if (!c.reachable) return `${c.source}: unreachable${c.omittedReason ? ` (${c.omittedReason})` : ''}`;
   const when = c.watermark ? `, newest ${c.watermark.slice(0, 10)}` : '';
-  return `${c.source}: ${c.completeness}${when}${c.indexedAt ? `, indexed ${c.indexedAt.slice(0, 10)}` : ''}`;
+  return `${c.source}: ${c.completeness}${when}${c.indexedAt ? `, indexed ${c.indexedAt.slice(0, 10)}` : ''}${c.summary ? ` (${c.summary})` : ''}`;
 }

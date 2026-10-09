@@ -41,6 +41,12 @@ export const CLAWD_NOTE_CAP = 10;
 export interface VaultAdapter {
   /** One vault file by its path relative to the vault root ("02_Accounts/Kenco Logistics.md"); null when absent; throws when the vault itself cannot be read. */
   readFile: (relPath: string) => Promise<string | null>;
+  /**
+   * Stream A (2026-10-09): a table-backed vault (knowledge/vault-table-adapter.ts) says how many notes it holds, when the
+   * newest was synced and the counts by kind; an empty table is "not configured", the sync time is the source's
+   * indexedAt (a label, never a claim date) and the counts become the coverage's summary. A directory adapter has none.
+   */
+  status?: () => Promise<{ rows: number; syncedAt: string | null; kinds: Record<string, number> } | null>;
 }
 
 export interface ClawdSnapshot {
@@ -412,6 +418,18 @@ async function locate(vault: VaultAdapter, name: string): Promise<{ loc: Located
 
 const linkDate = (name: string) => isoDay(name) ?? '';
 
+/** "92 calls, 78 account notes, 85 meeting notes": the counts a table-backed vault reports (stream A). */
+function vaultSummaryWords(s: { rows: number; kinds: Record<string, number> }): string {
+  const parts: string[] = [];
+  const say = (n: number | undefined, one: string, many: string) => (n ?? 0) > 0 && parts.push(`${n} ${n === 1 ? one : many}`);
+  say(s.kinds.raw, 'call', 'calls');
+  say(s.kinds.account, 'account note', 'account notes');
+  say(s.kinds.meeting, 'meeting note', 'meeting notes');
+  say(s.kinds.deal, 'deal note', 'deal notes');
+  say(s.kinds.person, 'people note', 'people notes');
+  return parts.length ? parts.join(', ') : `${s.rows} notes`;
+}
+
 type VaultRead = { claims: ContextClaim[]; coverage: SourceCoverage; followed: string[]; notFollowed: AccountKnowledge['notFollowed']; sync: SyncReport; tombstones: Tombstone[] };
 
 const liveClaims = (index: VaultIndex | ClawdIndex): ContextClaim[] => [...index.claims.values()].filter((c) => !index.tombstones.has(c.claimId));
@@ -433,6 +451,18 @@ async function retrieveVault(vault: VaultAdapter | null | undefined, input: Know
   const history = () => (index ? [...index.tombstones.values()] : []);
   const cov = (over: Partial<SourceCoverage>): SourceCoverage => ({ source: 'vault', configured: !!vault, reachable: false, completeness: 'unknown', watermark: null, indexedAt: null, query: null, omittedReason: null, ...over });
   if (!vault) return { claims: [], coverage: cov({ omittedReason: 'no vault configured' }), followed, notFollowed, sync: { ...sync, stale: true }, tombstones: history() };
+  // Stream A: a table-backed vault reports its status first; an empty table is not a configured vault, an unreadable one is said so.
+  let tableStatus: { rows: number; syncedAt: string | null; kinds: Record<string, number> } | null = null;
+  if (vault.status) {
+    try {
+      tableStatus = await vault.status();
+    } catch (err) {
+      const cached = index ? liveClaims(index) : [];
+      return { claims: cached, coverage: cov({ omittedReason: `vault unreadable: ${err instanceof Error ? err.message : String(err)}` }), followed, notFollowed, sync: { ...sync, stale: true, servedFromCache: cached.length > 0 }, tombstones: history() };
+    }
+    if (tableStatus && tableStatus.rows === 0) return { claims: [], coverage: cov({ configured: false, omittedReason: 'no vault configured (the knowledge table is empty; run the vault sync)' }), followed, notFollowed, sync: { ...sync, stale: true }, tombstones: history() };
+  }
+  const tableWords: { indexedAt?: string | null; summary?: string } = tableStatus ? { indexedAt: tableStatus.syncedAt, summary: vaultSummaryWords(tableStatus) } : {};
 
   // C48: a chunk is tombstoned with the reason and kept in the history; it is never served again from the cache.
   const tombstone = (id: string, reason: Tombstone['reason']) => {
@@ -497,7 +527,7 @@ async function retrieveVault(vault: VaultAdapter | null | undefined, input: Know
   }
   if (!accountPath || !text) {
     if (index) index.lastSyncAt = nowIso;
-    return { claims: [], coverage: cov({ reachable: true, completeness: 'complete', query: `02_Accounts/${safeName(input.accountName)}.md`, omittedReason: 'no account note' }), followed, notFollowed, sync: { ...sync, lastSyncAt: nowIso }, tombstones: history() };
+    return { claims: [], coverage: cov({ reachable: true, completeness: 'complete', query: `02_Accounts/${safeName(input.accountName)}.md`, omittedReason: 'no account note', ...tableWords }), followed, notFollowed, sync: { ...sync, lastSyncAt: nowIso }, tombstones: history() };
   }
   const { links, indexedAt } = ingest(accountPath, text, () => accountNoteClaims(ctx, accountPath!, text!));
   if (input.followLinks !== false) {
@@ -537,7 +567,7 @@ async function retrieveVault(vault: VaultAdapter | null | undefined, input: Know
   // internal-only or modeled line, such as a sync block's bullets, never makes the source look fresh).
   const watermark = ctx.claims.filter((c) => c.claimClass !== 'internal_only' && c.claimClass !== 'modeled').map((c) => c.observedAt ?? '').filter(Boolean).sort().at(-1) ?? null;
   const omitted = [...ctx.truncated, ...notFollowed.filter((n) => n.reason !== 'other_account' && n.reason !== 'not_found').map((n) => `${n.link}: ${n.reason}`)];
-  return { claims: ctx.claims, coverage: cov({ reachable: true, completeness: partial ? 'partial' : 'complete', watermark, indexedAt, query: accountPath, omittedReason: omitted.length ? omitted.join('; ') : null }), followed, notFollowed, sync, tombstones: history() };
+  return { claims: ctx.claims, coverage: cov({ reachable: true, completeness: partial ? 'partial' : 'complete', watermark, query: accountPath, omittedReason: omitted.length ? omitted.join('; ') : null, ...tableWords, indexedAt: tableWords.indexedAt ?? indexedAt }), followed, notFollowed, sync, tombstones: history() };
 }
 
 /** ---------- Clawd ---------- */

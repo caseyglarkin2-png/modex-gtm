@@ -180,6 +180,17 @@ export function parseVaultNote(path: string, raw: string): ParsedVaultNote {
   };
 }
 
+/**
+ * The file text back from a stored row: the frontmatter block rendered as `key: value` lines (a list inline) and the
+ * body as stored. context/retrieval.ts parses it exactly as it parses a file on disk (parseFrontmatter reads one
+ * `key: value` per line), so the table adapter hands retrieval the same thing the local directory does.
+ */
+export function renderVaultNote(row: { frontmatter: unknown; text: string }): string {
+  const fm = row.frontmatter && typeof row.frontmatter === 'object' && !Array.isArray(row.frontmatter) ? (row.frontmatter as Record<string, unknown>) : {};
+  const lines = Object.entries(fm).map(([k, v]) => `${k}: ${Array.isArray(v) ? `[${v.map(String).join(', ')}]` : v == null ? '' : String(v).replace(/\r?\n/g, ' ')}`);
+  return lines.length ? `---\n${lines.join('\n')}\n---\n${row.text}` : row.text;
+}
+
 /** The row data for gap_knowledge_notes from a parsed note (the account name after identity, the commit time when known). */
 export function knowledgeRowOf(n: ParsedVaultNote, over: { accountName?: string | null; vaultPushedAt?: Date | null; syncedAt: Date }) {
   return {
