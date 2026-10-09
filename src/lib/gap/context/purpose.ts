@@ -60,7 +60,11 @@ const AUTOMATED_SENDER = /^(?:no-?reply|do-?not-?reply|donotreply|notifications?
 const SUSPICIOUS = /\b(?:summons|subpoena|court (?:date|hearing|notice|order|appearance)|appear in court|lawsuit|legal action|arrest warrant|warrant (?:for|has been)|final (?:notice|warning)|account (?:has been |will be )?(?:suspended|locked|closed|terminated)|verify your (?:account|identity|password|payment)|confirm your (?:account|password|identity)|wire (?:transfer|the funds)|gift cards?|bitcoin|crypto wallet|urgent(?:ly)?[^.]{0,30}(?:payment|transfer|respond)|password (?:expires?|expired|reset required)|unclaimed (?:funds|package|parcel)|your (?:package|parcel|delivery) (?:is|was) (?:held|on hold)|irs\b|tax refund|w-?2 forms?)\b/i;
 const MEDIA = /\b(?:journalist|reporter|press (?:inquiry|request)|podcast|interview (?:request|you|casey)|feature (?:you|your company|yardflow)|for (?:an|our|a) (?:article|story|piece|feature|episode)|editor (?:at|of|for)|publication|quote for (?:a|an|our|the) (?:story|piece|article)|media (?:inquiry|request)|would love to feature)\b/i;
 const PARTNER = /\b(?:referral (?:partner|program|fee|agreement)|refer (?:you|clients|business|customers)|(?:introduce|intro) (?:you|me|us) to|make an intro(?:duction)?|an intro to|can you (?:connect|introduce|refer) me|looking for a referral|partnership|co-?sell|reseller|channel partner|integration partner|partner with (?:you|yardflow)|become a partner|referral for)\b/i;
-const VENDOR = /\b(?:we (?:offer|provide|specialize|specialise|deliver|help (?:companies|businesses|teams|brands|startups|founders)|build|are an? (?:agency|firm|studio|team of))|our (?:services?|agency|firm|team can|platform helps|solution helps|clients (?:see|get|achieve)|developers|engineers)|outsourc(?:ed|ing)|lead gen(?:eration)?|sdr (?:services?|team|as a service)|appointment setting|book(?:ing)? (?:a|your) (?:quick |brief )?(?:\d{1,2}[- ]?min(?:ute)?s?|call)|open to a (?:quick|brief|short|\d{1,2}[- ]?min(?:ute)?s?) (?:call|chat|conversation)|staff augmentation|developers for hire|seo (?:services?|audit|ranking)|grow your (?:pipeline|revenue|business|sales)|fill your (?:pipeline|calendar)|special offer|limited[- ]time|free (?:trial|audit|consultation)|pricing plans|sales[- ]service|case stud(?:y|ies) (?:of|from) our clients|white[- ]?label)\b/i;
+/**
+ * A pitch in the sender's own words: what THEY offer. An ask for a call ("open to a quick call", "book 15 minutes")
+ * is not a vendor cue by itself (C57 F2): a buyer says it too, and the buyer vocabulary decides.
+ */
+const VENDOR = /\b(?:we (?:offer|provide|specialize|specialise|deliver|help (?:companies|businesses|teams|brands|startups|founders)|build|are an? (?:agency|firm|studio|team of))|our (?:services?|agency|firm|team can|platform helps|solution helps|clients (?:see|get|achieve)|developers|engineers)|outsourc(?:ed|ing)|lead gen(?:eration)?|sdr (?:services?|team|as a service)|appointment setting|staff augmentation|developers for hire|seo (?:services?|audit|ranking)|grow your (?:pipeline|revenue|business|sales)|fill your (?:pipeline|calendar)|special offer|limited[- ]time|free (?:trial|audit|consultation)|pricing plans|sales[- ]service|case stud(?:y|ies) (?:of|from) our clients|white[- ]?label)\b/i;
 const SUPPORT = /\b(?:not working|stopped (?:working|scanning|syncing|printing|responding)|isn'?t working|won'?t (?:load|open|scan|connect|sync|start|boot)|troubleshoot(?:ing)?|(?:the |our |a )?(?:device|tablet|scanner|kiosk|printer|handheld|gate (?:unit|kiosk|tablet)|camera|reader) (?:is|at|on|keeps|has)|log ?in (?:issue|problem|fails?|failed)|can'?t (?:log ?in|access|see|open|sign in)|password reset|error (?:message|code|when)|getting an error|broken|crash(?:es|ed|ing)?|bug|outage|is down|down (?:since|again)|support (?:ticket|request|case|team)|replacement (?:unit|device|tablet)|\brma\b|how do (?:i|we) (?:add|change|reset|remove|update|configure)|user (?:access|account) (?:for|request)|add (?:a )?(?:new )?user)\b/i;
 const BUYER = /\b(?:yards?|yms|gate|gates|dock|docks|trailers?|detention|dwell|pilot|roadmap|budget(?:ing)?|demo|proposal|pricing for|a quote|rollout|our (?:sites|facilit(?:y|ies)|network|fleet|dcs?|operations?|team)|warehouses?|carriers?|drivers?|reconnect|next (?:steps?|quarter|year)|open dock|blue yonder|yard (?:walk|audit|check)|case study|roi|security|automation|wms|tms|procurement|contract|renewal|site visit|on-?site)\b/i;
 
@@ -127,15 +131,20 @@ export function classifyPurpose(event: PurposeInput, context: PurposeContext = {
   if (support && (context.customer || !vendor)) {
     return { purpose: 'customer_support', evidence: [...evidence, `support words: "${support[0]}"`], confidence: context.customer ? 'high' : 'medium' };
   }
-  if (partner && !(known && buyer)) return { purpose: 'partner_referral', evidence: [...evidence, `referral or partner words: "${partner[0]}"`], confidence: known ? 'medium' : 'medium' };
-  if (vendor && !known) return { purpose: 'vendor_solicitation', evidence: [...evidence, `a pitch in their own words: "${vendor[0]}"`, 'sender is not a known person'], confidence: buyer ? 'medium' : 'high' };
+  if (partner && !(known && buyer)) return { purpose: 'partner_referral', evidence: [...evidence, `referral or partner words: "${partner[0]}"`], confidence: 'medium' };
   if (reply.kind === 'opt_out') return { purpose: 'buyer_conversation', evidence, confidence: 'high' };
-  // A known person (a partner, a customer) can still send a pitch: the purpose says so, the relationship is judged apart.
-  if (vendor && known && !buyer) return { purpose: 'vendor_solicitation', evidence: [...evidence, `a pitch in their own words: "${vendor[0]}"`, 'from a known person: the relationship is judged apart'], confidence: 'low' };
-  if (reply.kind === 'human' && (known || buyer)) {
-    if (buyer) evidence.push(`buyer vocabulary: "${buyer[0]}"`);
-    return { purpose: 'buyer_conversation', evidence, confidence: known && buyer ? 'high' : 'medium' };
+  // C57 F2: a person writing back in the BUYER vocabulary (yards, a pilot, a demo, pricing, the roadmap, the dock,
+  // the gate, trailers) is a buyer conversation before any pitch cue is weighed; a pitch beside it is said in the
+  // evidence, never used to drop the person. A vendor needs pitch cues WITHOUT the buyer vocabulary.
+  if (reply.kind === 'human' && buyer) {
+    evidence.push(`buyer vocabulary: "${buyer[0]}"`);
+    if (vendor && !known) evidence.push(`pitch words beside it: "${vendor[0]}"; judged a buyer by the vocabulary, review if it reads as a pitch`);
+    return { purpose: 'buyer_conversation', evidence, confidence: known ? 'high' : vendor ? 'low' : 'medium' };
   }
+  if (vendor && !known) return { purpose: 'vendor_solicitation', evidence: [...evidence, `a pitch in their own words: "${vendor[0]}"`, 'sender is not a known person'], confidence: 'high' };
+  // A known person (a partner, a customer) can still send a pitch: the purpose says so, the relationship is judged apart.
+  if (vendor && known) return { purpose: 'vendor_solicitation', evidence: [...evidence, `a pitch in their own words: "${vendor[0]}"`, 'from a known person: the relationship is judged apart'], confidence: 'low' };
+  if (reply.kind === 'human' && known) return { purpose: 'buyer_conversation', evidence, confidence: 'medium' };
   if (media) return { purpose: 'media', evidence: [...evidence, `press words: "${media[0]}"`], confidence: 'low' };
   return { purpose: 'unknown', evidence: [...evidence, 'no purpose cue matched: review it'], confidence: 'low' };
 }
