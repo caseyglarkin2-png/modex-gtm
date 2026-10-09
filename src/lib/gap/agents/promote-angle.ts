@@ -144,14 +144,37 @@ async function record(prisma: PrismaLike, itemKey: string, actor: string, now: D
 }
 
 /** The default competing read: the typed timeline for the person and thread (with its Gmail drafts when the mailbox is wired) and GAP's own reply-draft state. Soft: an unreadable source is empty, never a throw. */
-async function defaultCompeting(prisma: PrismaLike, q: CompetingQuery, deps: PromoteAngleDeps): Promise<{ timeline: TimelineEvent[]; drafts: ExistingDraft[] }> {
-  const ctx = q.email || q.threadId ? await loadThreadContext(prisma, { email: q.email, threadId: q.threadId, now: q.now }, deps.thread).catch(() => null) : null;
+/**
+ * C57 P2-1: the GAP mailbox's own Sent and Drafts readers for the typed timeline, from the configured GAP sender; undefined
+ * when no sender is configured (the sink and the harness), so a caller that passes nothing reads nothing and says so.
+ */
+export async function mailboxThreadDeps(env: Record<string, string | undefined> = process.env): Promise<ThreadContextDeps | undefined> {
+  const { gapGmailSender } = await import('../execution/gap-sender');
+  const sender = gapGmailSender(env);
+  if (!sender) return undefined;
+  const { listSentTo, listDraftsTo } = await import('@/lib/email/gmail-inbox');
+  return { listSent: (recipient, afterEpoch, beforeEpoch) => listSentTo(sender, recipient, afterEpoch, beforeEpoch), listDrafts: (recipient) => listDraftsTo(sender, recipient), ownAddresses: new Set([sender.userEmail.toLowerCase()]) };
+}
+
+async function defaultCompeting(prisma: PrismaLike, q: CompetingQuery, deps: PromoteAngleDeps): Promise<{ timeline: TimelineEvent[]; drafts: ExistingDraft[]; unreadable?: string }> {
+  let ctx: Awaited<ReturnType<typeof loadThreadContext>> | null = null;
+  let unreadable: string | undefined;
+  if (q.email || q.threadId) {
+    try {
+      ctx = await loadThreadContext(prisma, { email: q.email, threadId: q.threadId, now: q.now }, deps.thread);
+      // A drafts read that failed is not "no drafts": the thread reader records it on the gmail coverage row (P2-1).
+      const gmail = ctx.coverage.find((c) => c.source === 'gmail');
+      if (gmail?.omittedReason && /drafts read failed/.test(gmail.omittedReason)) unreadable = gmail.omittedReason;
+    } catch (e) {
+      unreadable = `the thread could not be read: ${e instanceof Error ? e.message : String(e)}`;
+    }
+  }
   const drafts: ExistingDraft[] = [];
   if (q.messageId) {
     const rc = await loadReplyContext(prisma, q.messageId, q.now, deps.reply).catch(() => null);
     if (rc?.states.drafted) drafts.push({ id: rc.states.drafted.draftId, provider: 'gmail', threadId: rc.message.threadId, to: [rc.message.from], subject: rc.message.subject, purpose: 'buyer_conversation', updatedAt: rc.states.drafted.at, sellerEdited: false });
   }
-  return { timeline: ctx?.events ?? [], drafts };
+  return { timeline: ctx?.events ?? [], drafts, ...(unreadable ? { unreadable } : {}) };
 }
 
 export async function promoteAngle(prisma: PrismaLike, input: PromoteAngleInput, deps: PromoteAngleDeps = {}): Promise<PromoteAngleResult> {
@@ -202,6 +225,7 @@ export async function promoteAngle(prisma: PrismaLike, input: PromoteAngleInput,
   const threadId = str(taskInput.threadId);
   const replyLane = !!messageId && !!personEmail && (!persona || !input.personaId || (persona.email ?? '').toLowerCase() === personEmail);
   const read = await (deps.competing ? deps.competing({ email: personEmail, threadId, messageId, now: input.now }) : defaultCompeting(prisma, { email: personEmail, threadId, messageId, now: input.now }, deps));
+  if ('unreadable' in read && read.unreadable) return { ok: false, reason: 'drafts_unreadable', detail: `Gmail drafts could not be read (${read.unreadable}); nothing was drafted. Try again, or open Gmail and check the thread yourself.` };
   const competing = competingWork(read.timeline, read.drafts, { emails: personEmail ? [personEmail] : [], dealId: angle.dealId ?? null, threadId, purpose: 'buyer_conversation' });
   const href = accountName ? `${accountHref(accountName)}/` : replyLane ? '/gap/replies/' : '/gap/signals/';
   if (competing.found) {

@@ -12,7 +12,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { ledgerDb } from './fixtures/ledger-db';
 import { queueAgentTask, runAgentTasks } from '@/lib/gap/agents/tasks';
-import { ANGLE_PROMOTED, composeAngleReply, loadPromotions, personaKeyOf, promoteAngle, type PromoteAngleDeps } from '@/lib/gap/agents/promote-angle';
+import { ANGLE_PROMOTED, composeAngleReply, loadPromotions, mailboxThreadDeps, personaKeyOf, promoteAngle, type PromoteAngleDeps } from '@/lib/gap/agents/promote-angle';
 import { VERIFIED_EXCERPT } from '@/lib/gap/research/evidence-gate';
 import type { draftThesisFromFact } from '@/lib/gap/story/draft-from-fact';
 import { DAVE_EMAIL, NOW, ROADMAP } from './stream-b-fixture';
@@ -49,6 +49,8 @@ const gmailSpy = () => {
     materials: async () => [],
     signature: async () => null,
     mailboxSentTo: async () => [] as Array<{ id: string; internalDate: Date; subject: string }>,
+    // P2-1: the reply service reads the mailbox's own drafts before any draft; the sink holds none (the hand-draft case is read through deps.thread.listDrafts).
+    mailboxDraftsTo: async () => [],
     gmail: { createGmailDraft: vi.fn(async (p: unknown) => { drafts.push(p); return { provider: 'gmail' as const, draftId: `d-${drafts.length}`, messageId: 'dm-1', threadId: 't-kenco' }; }), sendViaGmail: vi.fn(async (p: unknown) => { sent.push(p); return { provider: 'gmail' as const, id: 's-1', threadId: 't-kenco' }; }) },
   };
   return { drafts, sent, deps: { reply } as PromoteAngleDeps };
@@ -60,6 +62,24 @@ async function preparedTask(c: ReturnType<ReturnType<typeof world>['client']>, o
   expect(r.succeeded).toBe(1);
   return q.id;
 }
+
+describe('C57 P2-1: the mailbox wiring and an unreadable drafts read', () => {
+  it('a drafts reader that throws refuses the promotion in words and touches nothing; no configured sender gives no wiring; a configured sender gives Sent and Drafts readers', async () => {
+    const db = world();
+    const c = db.client();
+    const taskId = await preparedTask(c);
+    const g = gmailSpy();
+    const r = await promoteAngle(c, { taskId, actor: ACTOR, now: new Date(NOW.getTime() + 2000), action: 'email' }, { ...g.deps, thread: { listSent: async () => [], listDrafts: async () => { throw new Error('Gmail drafts list failed (500)'); } } });
+    expect(r, JSON.stringify(r).slice(0, 300)).toMatchObject({ ok: false, reason: 'drafts_unreadable' });
+    if (!r.ok) expect(r.detail).toMatch(/Gmail drafts could not be read \(drafts read failed for .*Gmail drafts list failed \(500\)\); nothing was drafted/);
+    expect(g.drafts).toHaveLength(0);
+    expect(await mailboxThreadDeps({})).toBeUndefined();
+    const wired = await mailboxThreadDeps({ GAP_GMAIL_USER_EMAIL: 'casey@yardflow.ai', GAP_GOOGLE_REFRESH_TOKEN: 'r' });
+    expect(typeof wired?.listSent, JSON.stringify(wired ? Object.keys(wired) : wired)).toBe('function');
+    expect(typeof wired?.listDrafts).toBe('function');
+    expect([...(wired?.ownAddresses ?? [])]).toEqual(['casey@yardflow.ai']);
+  });
+});
 
 describe('C24: an accepted angle becomes a draft through the existing workflow', () => {
   it('Pursue on Dave -> the angle -> accept the email -> a Gmail draft of a reply in his thread, composed from the starters, with the source and revision links on the ledger; nothing sent; a repeat returns the same draft; an edited text while the draft stands is refused in words', async () => {

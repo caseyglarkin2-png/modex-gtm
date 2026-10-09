@@ -11,7 +11,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 import { badBody, intakeGuard } from '@/lib/gap/intake/route-helpers';
-import { promoteAngle } from '@/lib/gap/agents/promote-angle';
+import { mailboxThreadDeps, promoteAngle } from '@/lib/gap/agents/promote-angle';
 
 export const dynamic = 'force-dynamic';
 
@@ -30,7 +30,9 @@ export async function POST(request: NextRequest) {
   const parsed = Body.safeParse(await request.json().catch(() => ({})));
   if (!parsed.success) return badBody(parsed.error.issues);
   const d = parsed.data;
-  const r = await promoteAngle(prisma, { taskId: d.taskId, actor: g.email, now: new Date(), personaId: d.personaId ?? null, action: d.action, body: d.body ?? null, choice: d.choice ?? null, problemFamily: d.problemFamily ?? null });
+  // C57 P2-1: the GAP mailbox's Sent and Drafts are read for the competing-work check (Casey's own hand-written drafts count); none configured reads nothing and the service says so.
+  const thread = await mailboxThreadDeps();
+  const r = await promoteAngle(prisma, { taskId: d.taskId, actor: g.email, now: new Date(), personaId: d.personaId ?? null, action: d.action, body: d.body ?? null, choice: d.choice ?? null, problemFamily: d.problemFamily ?? null }, thread ? { thread } : {});
   if (!r.ok) {
     if ('competing' in r) return NextResponse.json({ ok: false, reason: r.reason, line: r.detail, competing: r.competing, offers: r.offers }, { status: 409 });
     return NextResponse.json({ ok: false, error: r.reason, detail: r.detail ?? null }, { status: r.reason === 'task_not_found' ? 404 : 400 });

@@ -10,12 +10,12 @@ import { NextRequest } from 'next/server';
 import { ledgerDb } from './fixtures/ledger-db';
 import { queueAgentTask, runAgentTasks } from '@/lib/gap/agents/tasks';
 
-const h = vi.hoisted(() => ({ client: null as unknown, session: { user: { email: 'casey@freightroll.com' } } as { user: { email: string } } | null, competing: null as null | (() => Promise<unknown>) }));
+const h = vi.hoisted(() => ({ client: null as unknown, session: { user: { email: 'casey@freightroll.com' } } as { user: { email: string } } | null, competing: null as null | (() => Promise<unknown>), lastDeps: null as null | Record<string, unknown> }));
 vi.mock('@/lib/prisma', () => ({ get prisma() { return h.client; } }));
 vi.mock('@/lib/auth', () => ({ auth: async () => h.session }));
 vi.mock('@/lib/gap/agents/promote-angle', async (importOriginal) => {
   const mod = await importOriginal<typeof import('@/lib/gap/agents/promote-angle')>();
-  return { ...mod, promoteAngle: (prisma: unknown, input: Parameters<typeof mod.promoteAngle>[1]) => mod.promoteAngle(prisma, input, h.competing ? { competing: h.competing as never } : {}) };
+  return { ...mod, promoteAngle: (prisma: unknown, input: Parameters<typeof mod.promoteAngle>[1], deps?: Record<string, unknown>) => { h.lastDeps = deps ?? null; return mod.promoteAngle(prisma, input, { ...(deps ?? {}), ...(h.competing ? { competing: h.competing as never } : {}) }); } };
 });
 import { POST } from '@/app/api/gap/angles/promote/route';
 
@@ -23,6 +23,26 @@ const post = (body: unknown) => new NextRequest('http://localhost/api/gap/angles
 const NOW = new Date('2026-10-08T16:00:00Z');
 const DAVE = 'dave.kiesling@kencogroup.com';
 const ANGLE = { whyItMatters: 'My guess is the end-of-October reconnect is the moment to ask where a standard driver journey still adds production capacity across those yards.', accounts: ['Kenco Logistics'], roles: ['VP'], people: [1], starters: ['Which sites move first?', 'Where does the gate hand off?'], proposedAction: 'email', caveat: null, key: `person:${DAVE}`, title: 'Dave wrote to us', accountName: 'Kenco Logistics', accountHint: null, sourceLine: 'the mailbox', peopleNamed: [{ personaId: 1, name: 'Dave Kiesling', title: 'VP' }], provider: 'test', calls: 1, warnings: [], contextRevision: 'rev-1', support: [] };
+
+describe('C57 P2-1: the route wires the mailbox readers from the configured GAP sender', () => {
+  it('no sender: the service gets no thread wiring; a sender configured: Sent and Drafts readers ride along (the competing read stubbed so nothing is called)', async () => {
+    process.env.GAP_OS_ENABLED = 'true';
+    process.env.GAP_ROUTING_ENABLED = 'true';
+    h.session = { user: { email: 'casey@freightroll.com' } };
+    h.client = ledgerDb({}, NOW).client();
+    delete process.env.GAP_GMAIL_USER_EMAIL;
+    delete process.env.GAP_GOOGLE_REFRESH_TOKEN;
+    h.competing = async () => ({ timeline: [], drafts: [] });
+    await POST(post({ taskId: 'at_missing' }));
+    expect(h.lastDeps?.thread).toBeUndefined();
+    process.env.GAP_GMAIL_USER_EMAIL = 'casey@yardflow.ai';
+    process.env.GAP_GOOGLE_REFRESH_TOKEN = 'r';
+    await POST(post({ taskId: 'at_missing' }));
+    expect(typeof (h.lastDeps?.thread as { listDrafts?: unknown } | undefined)?.listDrafts, JSON.stringify({ keys: h.lastDeps ? Object.keys(h.lastDeps) : null, env: [process.env.GAP_GMAIL_USER_EMAIL, process.env.GAP_GOOGLE_REFRESH_TOKEN] })).toBe('function');
+    delete process.env.GAP_GMAIL_USER_EMAIL;
+    delete process.env.GAP_GOOGLE_REFRESH_TOKEN;
+  });
+});
 
 describe('POST /api/gap/angles/promote', () => {
   let db: ReturnType<typeof ledgerDb>;
