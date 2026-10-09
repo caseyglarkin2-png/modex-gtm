@@ -657,37 +657,41 @@ export async function countDeliveryFailures(sender: GmailSender, address: string
 
 /**
  * Ops closeout 13B: messages in this mailbox's Sent addressed to `recipient`
- * between two epochs (at most 10, metadata only). Used to reconcile a direct
- * send whose Gmail answer was lost. Throws on any read failure.
+ * between two epochs (at most 10 by default, metadata only; `opts.max` raises
+ * the bound to at most 50 for the account story's read, B1, which also reads
+ * the message snippet Gmail returns with the metadata). Used to reconcile a
+ * direct send whose Gmail answer was lost. Throws on any read failure.
  */
 export async function listSentTo(
   sender: GmailSender,
   recipient: string,
   afterEpoch: number,
   beforeEpoch: number,
-): Promise<Array<{ id: string; threadId: string | null; internalDate: Date; to: string; subject: string }>> {
+  opts: { max?: number } = {},
+): Promise<Array<{ id: string; threadId: string | null; internalDate: Date; to: string; subject: string; snippet?: string }>> {
   // The transport sink (./transport-sink.ts, GAP_SEND_TRANSPORT=sink, unset in production) is the harness mailbox:
   // its Sent folder is what it wrote. Real Gmail is never read under it.
   const sink = sinkConfig();
   if (sink) return sinkSentTo(sink, recipient, afterEpoch, beforeEpoch);
+  const max = Math.max(1, Math.min(opts.max ?? 10, 50));
   const accessToken = await accessTokenForSender(sender);
   const mailbox = sender.userEmail.toLowerCase();
   const listUrl = new URL(`${GMAIL_API}/users/${encodeURIComponent(mailbox)}/messages`);
   listUrl.searchParams.set('q', `in:sent to:${recipient} after:${afterEpoch} before:${beforeEpoch}`);
   // Closeout review: a first touch sent and then trashed is still a first touch.
   listUrl.searchParams.set('includeSpamTrash', 'true');
-  listUrl.searchParams.set('maxResults', '10');
+  listUrl.searchParams.set('maxResults', String(max));
   const res = await fetch(listUrl.toString(), { headers: { Authorization: `Bearer ${accessToken}` }, signal: AbortSignal.timeout(15_000) });
   if (!res.ok) throw new Error(`Gmail sent list failed (${res.status})`);
   const data = (await res.json()) as { messages?: Array<{ id: string }> };
-  const out: Array<{ id: string; threadId: string | null; internalDate: Date; to: string; subject: string }> = [];
-  for (const { id } of data.messages ?? []) {
+  const out: Array<{ id: string; threadId: string | null; internalDate: Date; to: string; subject: string; snippet?: string }> = [];
+  for (const { id } of (data.messages ?? []).slice(0, max)) {
     const url = `${GMAIL_API}/users/${encodeURIComponent(mailbox)}/messages/${encodeURIComponent(id)}?format=metadata&metadataHeaders=To&metadataHeaders=Subject`;
     const m = await fetch(url, { headers: { Authorization: `Bearer ${accessToken}` }, signal: AbortSignal.timeout(15_000) });
     if (!m.ok) throw new Error(`Gmail sent get failed (${m.status})`);
-    const d = (await m.json()) as { id: string; threadId?: string; internalDate?: string; payload?: { headers?: Array<{ name: string; value: string }> } };
+    const d = (await m.json()) as { id: string; threadId?: string; internalDate?: string; snippet?: string; payload?: { headers?: Array<{ name: string; value: string }> } };
     const header = (n: string) => d.payload?.headers?.find((h) => h.name.toLowerCase() === n)?.value ?? '';
-    out.push({ id: d.id, threadId: d.threadId ?? null, internalDate: new Date(Number(d.internalDate ?? 0)), to: header('to'), subject: header('subject') });
+    out.push({ id: d.id, threadId: d.threadId ?? null, internalDate: new Date(Number(d.internalDate ?? 0)), to: header('to'), subject: header('subject'), snippet: d.snippet ?? '' });
   }
   return out;
 }

@@ -118,6 +118,11 @@ const sentence = (t: string) => {
   return /[.!?]$/.test(cut) ? cut : `${cut}.`;
 };
 export const STORY_SENTENCE_MAX = 200;
+/** B1: a send younger than this is not silence yet ("No answer owed yet", never "No answer on record"). */
+export const ANSWER_GRACE_DAYS = 3;
+/** B2: how many HubSpot engagements the between-us row tells, and how much of each body. */
+export const ENGAGEMENT_ROWS_MAX = 3;
+export const ENGAGEMENT_EXCERPT_MAX = 140;
 /** The same money and a shared name is the same project however the two sources word it ("$300 million ... Greater Cincinnati" and "$300M project in Cincinnati-Dayton"). */
 const money = (t: string) => (t.match(/\$\s?(\d+(?:\.\d+)?)\s*(m\b|million|b\b|billion)/gi) ?? []).map((m) => m.toLowerCase().replace(/\s+/g, '').replace(/million/, 'm').replace(/billion/, 'b'));
 const properNouns = (t: string, account: string) => {
@@ -417,8 +422,12 @@ function betweenUs(i: StoryInput): StoryRow {
   if (last) {
     const subject = last.what.replace(/^Re:\s*/i, '').replace(/^["“]+|["”]+$/g, '').trim();
     const what = subject === 'GAP first touch' ? ' (a GAP first touch)' : subject && subject !== 'email' ? `: "${subject}"` : '';
-    const silence = optedOutBefore ? ` Sent after they opted out on ${day(optedOutBefore.at)}: nothing else goes to them.` : !answered ? (i.clawdRead === 'ok' ? ' No answer on record.' : " No answer in GAP's records (clawd's history could not be read).") : '';
-    s.push({ text: `Last email to ${who(last)}, ${day(last.at)}${what}.${silence}`, tag: !optedOutBefore && !answered && i.clawdRead !== 'ok' ? 'Unknown' : 'Checked', basis: `${last.source}, ${day(last.at)}${optedOutBefore ? `; their opt-out, ${day(optedOutBefore.at)}` : !answered && i.clawdRead === 'ok' ? '; GAP, clawd and the account history for the silence' : ''}`, basisIds: [`touch:${last.at}`, ...(optedOutBefore ? [`touch:${optedOutBefore.at}`] : [])] });
+    // B1: silence counts from OUR last send; a send this recent is not silence yet (no answer is owed by them).
+    const tooSoon = i.now.getTime() - new Date(last.at).getTime() < ANSWER_GRACE_DAYS * 86_400_000;
+    const silence = optedOutBefore ? ` Sent after they opted out on ${day(optedOutBefore.at)}: nothing else goes to them.` : !answered ? (tooSoon ? ' No answer owed yet.' : i.clawdRead === 'ok' ? ' No answer on record.' : " No answer in GAP's records (clawd's history could not be read).") : '';
+    // B1: our own Sent folder says it in the first person (we wrote them); the ledgers keep "Last email to".
+    const lead = last.source === 'Gmail Sent' ? `We wrote ${who(last)} on ${day(last.at)}${what}.` : `Last email to ${who(last)}, ${day(last.at)}${what}.`;
+    s.push({ text: `${lead}${silence}`, tag: !optedOutBefore && !answered && !tooSoon && i.clawdRead !== 'ok' ? 'Unknown' : 'Checked', basis: `${last.source}, ${day(last.at)}${optedOutBefore ? `; their opt-out, ${day(optedOutBefore.at)}` : !answered && !tooSoon && i.clawdRead === 'ok' ? '; GAP, clawd and the account history for the silence' : ''}`, basisIds: [`touch:${last.at}`, ...(optedOutBefore ? [`touch:${optedOutBefore.at}`] : [])] });
   }
   if (lastReply) {
     const k = lastReply.replyKind ?? 'human';
@@ -444,8 +453,19 @@ function betweenUs(i: StoryInput): StoryRow {
   // Sprint 5 review: only a meeting that took place has happened between us: a future one (prepared on the brief) or a
   // canceled one (said on Work) is not told here as Checked history; the history's own "Meeting (status):" prefix is
   // not repeated.
-  const meeting = t.find((x) => x.kind === 'meeting' && new Date(x.at).getTime() <= i.now.getTime() && !/\bcancel(?:l)?ed\b/i.test(x.what));
+  const meeting = t.find((x) => x.kind === 'meeting' && x.source !== 'HubSpot' && new Date(x.at).getTime() <= i.now.getTime() && !/\bcancel(?:l)?ed\b/i.test(x.what));
   if (meeting) s.push({ text: `Meeting ${day(meeting.at)}: ${meeting.what.replace(/^Meeting \([^)]*\):?\s*/, '').replace(/\.$/, '') || 'held'}.`, tag: 'Checked', basis: `account history, ${day(meeting.at)}`, basisIds: [`touch:${meeting.at}`] });
+  // B2: what the deal team wrote down in HubSpot (a note, a call, a meeting that took place), dated and tagged by its
+  // origin, newest first, a few; never buyer words (only an email FROM them is, and that is a reply above).
+  const logged = t.filter((x) => x.source === 'HubSpot' && (x.kind === 'note' || x.kind === 'call' || x.kind === 'meeting') && new Date(x.at).getTime() <= i.now.getTime()).slice(0, ENGAGEMENT_ROWS_MAX);
+  for (const e of logged) {
+    const excerpt = (e.excerpt ?? '').replace(/\s+/g, ' ').trim();
+    const cut = excerpt.length > ENGAGEMENT_EXCERPT_MAX ? `${excerpt.slice(0, ENGAGEMENT_EXCERPT_MAX).replace(/\s+\S*$/, '')}...` : excerpt;
+    const title = e.what.replace(/\.$/, '').trim();
+    const body = [title, cut.replace(/\.$/, '')].filter(Boolean).join(': ');
+    const head = e.kind === 'note' ? `HubSpot note ${day(e.at)}` : `HubSpot ${e.kind} logged ${day(e.at)}`;
+    s.push({ text: `${head}${body ? `: ${body}` : ''}.`, tag: 'Checked', basis: `HubSpot, ${day(e.at)}`, basisIds: [`hubspot:${e.kind}:${e.engagementId ?? e.at}`] });
+  }
   if (!s.length) {
     // R63-B S9: the same reader as the learn row: an open deal, their words, a recorded conversation, a meeting ahead.
     const other = beyondTouches(i);

@@ -41,6 +41,10 @@ import { ABSENT_COVERAGE, dealCoverageFrom, type DealCoverage } from '../work/de
 import { loadInDealsSummary, type InDealsSummary } from '../deals/in-deals';
 import { AUTO_REPLY_SUBJECT, FREEMAIL_DOMAINS, OWN_DOMAINS } from '../replies/domains';
 import type { InboundVia } from './build';
+import { loadAccountSent, type LoadAccountSentArgs } from './sent';
+import { loadCompanyEngagements } from '../hubspot/engagements';
+import { gapGmailSender } from '../execution/gap-sender';
+import type { GmailSender } from '@/lib/email/gmail-sender';
 /** R30/R31: the non-physical claim classes the read keeps as story facts of their own kind. */
 const CLAIM_FACT_CLASSES: ReadonlySet<string> = new Set(['JOB_POSTING', 'PROCUREMENT']);
 
@@ -204,7 +208,18 @@ export async function loadAccountInputs(
   now: Date,
   opts: {
     live?: boolean;
-    deps?: { opportunity?: (p: PrismaLike, a: string) => Promise<OpportunityTruth>; hubspotPeople?: HubSpotPeopleReads; stageLabels?: StageLabelRead; /** C6: the identity context and the in-deals read the placed inbound read uses (tests inject them; the live page reads the cached summary). */ identity?: IdentityContext | null; inDeals?: (p: PrismaLike, now: Date) => Promise<InDealsSummary | null> };
+    deps?: {
+      opportunity?: (p: PrismaLike, a: string) => Promise<OpportunityTruth>;
+      hubspotPeople?: HubSpotPeopleReads;
+      stageLabels?: StageLabelRead;
+      /** C6: the identity context and the in-deals read the placed inbound read uses (tests inject them; the live page reads the cached summary). */
+      identity?: IdentityContext | null;
+      inDeals?: (p: PrismaLike, now: Date) => Promise<InDealsSummary | null>;
+      /** B1: our Sent mail to the account (tests inject; the live page reads the GAP mailbox through account-intel/sent.ts). */
+      sent?: (args: Omit<LoadAccountSentArgs, 'sender'> & { sender: GmailSender | null }) => Promise<AccountInputs['sent']>;
+      /** B2: the HubSpot company's engagements (tests inject; the live page reads hubspot/engagements.ts with its cache). */
+      engagements?: (companyId: string, now: Date) => Promise<AccountInputs['engagements']>;
+    };
     hypothesisId?: string;
     /**
      * Execution acceptance: only what the current-actionable-thesis rule reads (theses, facts, buyer truth, review
@@ -402,6 +417,31 @@ export async function loadAccountInputs(
         const summary = opts.deps?.inDeals ? await opts.deps.inDeals(prisma, now).catch(() => null) : opts.live && typeof prisma?.systemConfig?.findUnique === 'function' ? await loadInDealsSummary(prisma, { now }).catch(() => null) : null;
         return loadAccountInbound(prisma, { accountName, now, domains, personaEmails: (personas as Row[]).map((p) => String(p.email ?? '')).filter(Boolean), identity: opts.deps?.identity, coverage: dealCoverageFrom(summary) });
       })().catch(() => null);
+  // B1: our Sent mail to the account's people (the GAP mailbox, after the inbound read names its senders; live only; soft).
+  const sentP: Promise<AccountInputs['sent']> = lean || !(opts.deps?.sent || opts.live)
+    ? Promise.resolve(null)
+    : (async () => {
+        const inbound = await inboundP;
+        const firstTouchRecipients = ((touches as Map<string, Array<{ recipient: string }>>).get(accountName) ?? []).map((t) => t.recipient);
+        const addresses = [...new Set([...(personas as Row[]).map((p) => String(p.email ?? '')), ...(inbound?.messages ?? []).map((m) => m.from), ...firstTouchRecipients].map((a) => a.trim().toLowerCase()).filter((a) => a.includes('@')))];
+        const args = { accountName, addresses, domains, now, sender: gapGmailSender() };
+        return opts.deps?.sent ? opts.deps.sent(args) : loadAccountSent(prisma, args);
+      })().catch(() => null);
+  // B2: the HubSpot company's engagements: the linked company, else the first company the identity resolved for deal
+  // truth (the one identity rule the people read uses); live only; soft; cached per company.
+  const engagementsP: Promise<AccountInputs['engagements']> = lean || !(opts.deps?.engagements || opts.live)
+    ? Promise.resolve(null)
+    : (async () => {
+        let companyId = account.hubspot_company_id ? String(account.hubspot_company_id) : null;
+        if (!companyId && oppP) {
+          const o: OpportunityTruth = await oppP;
+          companyId = ('companyIds' in o ? o.companyIds : [])[0] ?? null;
+        }
+        if (!companyId) return { items: [], read: false, detail: 'no HubSpot company linked to the account' };
+        if (opts.deps?.engagements) return opts.deps.engagements(companyId, now);
+        const r = await loadCompanyEngagements(companyId, { token: process.env.HUBSPOT_ACCESS_TOKEN, now, prisma });
+        return { items: r.items.map((e) => ({ kind: e.kind, at: e.at, title: e.title, body: e.body, id: e.id, from: e.from ?? null, to: e.to ?? null, direction: e.direction ?? null })), read: r.read, detail: r.detail };
+      })().catch(() => null);
   // Contact currentness for the GAP contacts (database evidence plus the live HubSpot properties where linked).
   const hsProps = new Map<string, HubSpotEmploymentProps>();
   for (const h of hsPeople?.people ?? []) hsProps.set(h.id, { company: h.company ?? null, title: h.title, email: null, lastModifiedAt: h.lastModifiedAt ?? null, apolloEmploymentStatus: h.apolloEmploymentStatus ?? null, apolloVerifiedAt: h.apolloVerifiedAt ?? null });
@@ -482,6 +522,8 @@ export async function loadAccountInputs(
     scout: scoutOf(candidate),
     family,
     inbound: await inboundP,
+    sent: await sentP,
+    engagements: await engagementsP,
   };
 }
 
