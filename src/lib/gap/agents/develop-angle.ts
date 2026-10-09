@@ -12,6 +12,7 @@
 import { gapGenerate } from '../ai/spend';
 import { YARDFLOW_MESSAGING } from '@/lib/ai/yardflow-context';
 import { HEDGE_TOKENS } from '../taxonomy';
+import { SINGULAR_YARD_RE } from '../compiler/checks/c11-banned';
 import { listAgentTasks, type ClaimedTask, type HandlerResult } from './tasks';
 import { HISTORICAL_DAYS } from '../work/intel';
 
@@ -70,26 +71,28 @@ export function parseAngle(text: string): Angle | null {
     const starters = strs(o.starters, 3);
     const action = o.proposedAction === 'email' || o.proposedAction === 'call' || o.proposedAction === 'research' ? o.proposedAction : null;
     if (!whyItMatters || starters.length < 2 || !action) return null;
-    const people = Array.isArray(o.people) ? o.people.filter((x): x is number => typeof x === 'number' && Number.isInteger(x)).slice(0, 3) : [];
+    // A03b: the model answers "id 1" as often as 1; both are the persona id.
+    const people = Array.isArray(o.people) ? o.people.map((x) => (typeof x === 'number' ? x : typeof x === 'string' && /^(?:id\s*)?\d+$/i.test(x.trim()) ? Number(x.trim().replace(/^id\s*/i, '')) : NaN)).filter((x): x is number => Number.isInteger(x)).slice(0, 3) : [];
     return { whyItMatters, accounts: strs(o.accounts, 5), roles: strs(o.roles, 4), people, starters, proposedAction: action, caveat: typeof o.caveat === 'string' && o.caveat.trim() ? o.caveat.trim() : null };
   } catch {
     return null;
   }
 }
 
-export type AngleCheck = { ok: true } | { ok: false; reason: 'em_dash' | 'yard_singular' | 'product_named' | 'money_promised' | 'person_not_offered' | 'length'; detail?: string };
+export type AngleCheck = { ok: true } | { ok: false; reason: 'em_dash' | 'yard_singular' | 'throughput' | 'product_named' | 'money_promised' | 'person_not_offered' | 'length'; detail?: string };
 
 /**
  * A03 (2026-10-09): the first three production angles all failed `could_not_satisfy: yard_singular` (the model wrote
  * "yard" alone despite the rule). A voice-rule break is fixable by the model: it gets ONE re-ask naming the break, then
  * the refusal stands. At most two calls per task (both on the spend ledger); a person outside the roster is never re-asked.
  */
-export const REASK_REASONS: ReadonlySet<string> = new Set(['em_dash', 'yard_singular', 'product_named', 'money_promised', 'length']);
+export const REASK_REASONS: ReadonlySet<string> = new Set(['em_dash', 'yard_singular', 'throughput', 'product_named', 'money_promised', 'length']);
 export const MAX_ANGLE_CALLS = 2;
 
 export function reaskLine(check: Exclude<AngleCheck, { ok: true }>): string {
   switch (check.reason) {
-    case 'yard_singular': return 'it says "yard" in the singular somewhere in the prose (whyItMatters, starters or caveat); YardFlow copy always says "yards" (write "their yards", "yards and docks", never "the yard" or "yard routing")';
+    case 'yard_singular': return 'it says "yard" in the singular somewhere in the prose (whyItMatters, starters or caveat); YardFlow copy says "yards" (write "their yards", "yard operations" is "operations in their yards", "yard processes" is "the processes in their yards"; only yard network, yard management, yard system, yard check, yard truck, yard move and yard spotting keep the singular)';
+    case 'throughput': return 'it says "throughput"; YardFlow copy says "production capacity" (or "turns", "flow")';
     case 'em_dash': return 'it contains an em dash; use a comma or a period instead';
     case 'product_named': return 'it names YardFlow or a product; name neither';
     case 'money_promised': return 'it promises money, savings, a percentage or ROI; remove the number or the claim';
@@ -104,7 +107,9 @@ export function validateAngle(a: Angle, roster: ReadonlySet<number>): AngleCheck
   // The prose keeps the voice; a job title ("Yard Operations Manager") is the buyer's words, not ours.
   const prose = [a.whyItMatters, ...a.starters, a.caveat ?? ''].join(' ');
   if (/—/.test(text)) return { ok: false, reason: 'em_dash' };
-  if (/\byard\b/i.test(prose)) return { ok: false, reason: 'yard_singular' };
+  // A03b: the canonical C14 rule: singular "yard" outside the accepted compounds (yard network, yard management, ...).
+  if (SINGULAR_YARD_RE.test(prose)) return { ok: false, reason: 'yard_singular', detail: SINGULAR_YARD_RE.exec(prose)?.[0] };
+  if (/\bthroughput\b/i.test(prose)) return { ok: false, reason: 'throughput' };
   if (/\b(yardflow|freightroll|flowgate|flowdriver|flowbol|flowvision|flowyms)\b/i.test([a.whyItMatters, ...a.starters].join(' ').replace(/to YardFlow/gi, ''))) return { ok: false, reason: 'product_named' };
   if (/\$\s?\d|\b\d+(\.\d+)?\s?%|\b(roi|savings|dollars)\b/i.test(text)) return { ok: false, reason: 'money_promised' };
   const stranger = a.people.find((id) => !roster.has(id));
@@ -140,7 +145,7 @@ export function buildAnglePrompt(input: { title: string; sourceLine: string; acc
     '- "starters": exactly 2 open questions about their operation, in plain words, no pitch.',
     '- "proposedAction": "email" when a person and a sayable angle exist, "call" when a person exists and the item is a conversation opener, "research" when GAP should check the source or find the people first.',
     '- "caveat": what is not known or should be verified before writing (or null).',
-    '- Never name YardFlow or a product, never promise savings, money, percentages or ROI, never invent a number. No em dashes. Say "yards" never "yard" alone.',
+    '- Never name YardFlow or a product, never promise savings, money, percentages or ROI, never invent a number. No em dashes. Say "yards" (plural) in prose: "their yards", "operations in their yards", never "the yard", "yard operations" or "yard processes" (only yard network, yard management, yard system, yard check, yard truck, yard move and yard spotting keep the singular). Say "production capacity", never "throughput". "people" holds plain integers.',
   ].filter((l) => l !== '').join('\n');
 }
 

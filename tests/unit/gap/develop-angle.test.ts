@@ -58,7 +58,12 @@ describe('I03: the source line, the parser and the checks', () => {
     const roster = new Set([1, 2]);
     expect(validateAngle(a, roster)).toEqual({ ok: true });
     expect(validateAngle({ ...a, whyItMatters: a.whyItMatters.replace(', and', ' — and') }, roster)).toMatchObject({ ok: false, reason: 'em_dash' });
-    expect(validateAngle({ ...a, whyItMatters: a.whyItMatters.replace('the yards outside', 'the yard outside') }, roster)).toMatchObject({ ok: false, reason: 'yard_singular' });
+    expect(validateAngle({ ...a, whyItMatters: a.whyItMatters.replace('the yards outside', 'the yard outside') }, roster)).toMatchObject({ ok: false, reason: 'yard_singular', detail: 'yard' });
+    // A03b: the canonical compounds keep the singular; "throughput" is refused (the canon says production capacity); "id 1" parses as 1.
+    expect(validateAngle({ ...a, whyItMatters: a.whyItMatters.replace('the yards outside', 'the yard management outside') }, roster)).toEqual({ ok: true });
+    expect(validateAngle({ ...a, whyItMatters: a.whyItMatters.replace('the yards outside', 'the yard operations outside') }, roster)).toMatchObject({ ok: false, reason: 'yard_singular' });
+    expect(validateAngle({ ...a, caveat: 'Throughput at the docks is unknown.' }, roster)).toMatchObject({ ok: false, reason: 'throughput' });
+    expect(parseAngle(JSON.stringify({ ...JSON.parse(GOOD), people: ['id 1', '2', 'x'] }))?.people).toEqual([1, 2]);
     expect(validateAngle({ ...a, starters: ['Would YardFlow fit?', a.starters[1]] }, roster)).toMatchObject({ ok: false, reason: 'product_named' });
     expect(validateAngle({ ...a, caveat: 'Worth $40,000 a year.' }, roster)).toMatchObject({ ok: false, reason: 'money_promised' });
     expect(validateAngle({ ...a, people: [1, 9] }, roster)).toMatchObject({ ok: false, reason: 'person_not_offered', detail: '9' });
@@ -84,7 +89,7 @@ describe('A03: one bounded re-ask on a voice-rule break', () => {
 
     const stubborn = vi.fn<(prompt: string, maxTokens?: number) => Promise<{ text: string; provider: string }>>(async () => ({ text: singular, provider: 'test' }));
     const again = await developAngle(task(), { prisma: w.client(), now: NOW }, { generate: stubborn });
-    expect(again).toEqual({ ok: false, reason: 'could_not_satisfy', detail: 'yard_singular (after one re-ask)' });
+    expect(again).toEqual({ ok: false, reason: 'could_not_satisfy', detail: 'yard_singular yard (after one re-ask)' });
     expect(stubborn).toHaveBeenCalledTimes(MAX_ANGLE_CALLS);
 
     const stranger = vi.fn<(prompt: string, maxTokens?: number) => Promise<{ text: string; provider: string }>>(async () => ({ text: JSON.stringify({ ...JSON.parse(GOOD), people: [9] }), provider: 'test' }));
