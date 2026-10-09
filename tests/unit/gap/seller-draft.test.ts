@@ -397,10 +397,14 @@ describe('T6: an INSUFFICIENT hypothesis never sends', () => {
     expect(ok).toMatchObject({ ok: true });
   });
 
-  it('an expired outreach fact does not keep a hypothesis sendable', async () => {
+  it('an ENDED outreach fact does not keep a hypothesis sendable; an expired one does (I06: the copy states its date)', async () => {
     const d = db();
     d.hypotheses[0].signals[0].signal.freshness_expires_at = new Date(NOW.getTime() - 1000);
-    const r = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d));
+    const aged = await createSellerGmailDraft(prismaOf(d), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(d));
+    expect(aged).not.toMatchObject({ ok: false, reason: 'evidence_insufficient' });
+    const e = db();
+    e.hypotheses[0].signals[0].signal.metadata = { ...(e.hypotheses[0].signals[0].signal.metadata as Record<string, unknown>), continuity: { kind: 'ended' } };
+    const r = await createSellerGmailDraft(prismaOf(e), { decisionId: 'dec-joey', actor: 'casey', now: NOW }, baseDeps(e));
     expect(r).toMatchObject({ ok: false, reason: 'evidence_insufficient' });
   });
 });

@@ -559,24 +559,27 @@ describe('enrollFromDecision guards, in order', () => {
   });
 
   describe('SF14: evidence freshness recheck (checkEvidenceFreshness opt-in)', () => {
-    it('item 2a, the one freshness authority: a future expiry, or none with a date inside the type window, is fresh; a past expiry, or an undated row, is not', () => {
+    it('I06, the one authority: a dated fact is usable whatever its expiry; an undated row, or one a newer source says ended, is not', () => {
       expect(checkEvidenceFreshness([{ freshness_expires_at: null, observed_at: new Date(NOW.getTime() - 10 * 86_400_000), type: 'news' }], NOW)).toBeNull();
       expect(checkEvidenceFreshness([{ freshness_expires_at: null }], NOW)).toBe('evidence_expired');
-      expect(checkEvidenceFreshness([{ freshness_expires_at: '2026-12-01T00:00:00.000Z' }], NOW)).toBeNull();
-      expect(checkEvidenceFreshness([{ freshness_expires_at: '2026-09-01T00:00:00.000Z' }], NOW)).toBe('evidence_expired');
+      expect(checkEvidenceFreshness([{ freshness_expires_at: '2026-12-01T00:00:00.000Z', observed_at: new Date('2026-09-01T00:00:00.000Z') }], NOW)).toBeNull();
+      expect(checkEvidenceFreshness([{ freshness_expires_at: '2026-09-01T00:00:00.000Z', observed_at: new Date('2026-07-01T00:00:00.000Z') }], NOW)).toBeNull();
+      expect(checkEvidenceFreshness([{ freshness_expires_at: null, observed_at: new Date('2026-07-01T00:00:00.000Z'), metadata: { continuity: { kind: 'ended' } } }], NOW)).toBe('evidence_expired');
     });
 
-    it('the enroll service refuses evidence_expired only when deps.checkEvidenceFreshness is true, and never with the default hypothesis fixture (a fact with no expiry)', async () => {
+    it('the enroll service refuses evidence_expired only when deps.checkEvidenceFreshness is true and a cited fact is unusable (I06: a past expiry alone enrolls)', async () => {
       const withoutOptIn = await enrollFromDecision(makePrisma(), input({ mode: 'live' }), deps());
       expect(withoutOptIn.ok).toBe(true);
 
-      const expiredHypothesis = {
+      const agedHypothesis = {
         id: 'H1',
         status: 'approved',
         account_name: 'Acme Logistics',
         observation: '"Acme Logistics opened a new distribution center in Columbus with 40 dock doors" [S:sig_1].',
         signals: [{ signal: { ...VERIFIED_SIGNAL, id: 'sig_1', freshness_expires_at: '2026-09-01T00:00:00.000Z' } }],
       };
+      expect((await enrollFromDecision(makePrisma({ hypothesis: agedHypothesis }), input({ mode: 'live' }), deps({ checkEvidenceFreshness: true }))).ok).toBe(true);
+      const expiredHypothesis = { ...agedHypothesis, signals: [{ signal: { ...VERIFIED_SIGNAL, id: 'sig_1', freshness_expires_at: '2026-09-01T00:00:00.000Z', metadata: { ...(VERIFIED_SIGNAL.metadata as Record<string, unknown>), continuity: { kind: 'ended' } } } }] };
       const withOptIn = await enrollFromDecision(
         makePrisma({ hypothesis: expiredHypothesis }),
         input({ mode: 'live' }),
@@ -690,7 +693,7 @@ describe('target resolution', () => {
     ['a keyword hit', [{ signal: { ...VERIFIED_SIGNAL, evidence_text: null, metadata: null } }]],
     ['operator knowledge', [{ signal: { ...VERIFIED_SIGNAL, source_kind: 'operator_knowledge' } }]],
     ['an unverified quote', [{ signal: { ...VERIFIED_SIGNAL, metadata: null } }]],
-    ['an expired fact', [{ signal: { ...VERIFIED_SIGNAL, freshness_expires_at: new Date('2026-09-01T00:00:00.000Z') } }]],
+    ['an ended fact (I06: an expired one is sufficient, cited with its date)', [{ signal: { ...VERIFIED_SIGNAL, freshness_expires_at: new Date('2026-09-01T00:00:00.000Z'), metadata: { ...(VERIFIED_SIGNAL.metadata as Record<string, unknown>), continuity: { kind: 'ended' } } } }]],
     ['a financial-statement mention', [{ signal: { ...VERIFIED_SIGNAL, evidence_text: 'Acme Logistics recorded a $12 million impairment on its distribution centers.' } }]],
   ])('evidence_insufficient with %s, in shadow and live; nothing written', async (_label, signals) => {
     for (const mode of ['shadow', 'live'] as const) {
@@ -925,10 +928,11 @@ describe('evidenceRefsFromSignals', () => {
       now,
     );
     expect(refs).toEqual([
-      { id: 'a', title: 'A', url: null, externalOk: false, fresh: true, superseded: false, firstParty: false },
-      { id: 'b', title: 'B', url: 'https://x', externalOk: true, fresh: false, superseded: false, firstParty: false },
-      { id: 'c', title: 'C', url: null, externalOk: false, fresh: true, superseded: false, firstParty: true },
-      { id: 'd', title: 'D', url: null, externalOk: true, fresh: true, superseded: true, firstParty: true },
+      { id: 'a', title: 'A', url: null, externalOk: false, fresh: true, usable: true, observedAt: '2026-09-01T00:00:00.000Z', superseded: false, firstParty: false },
+      // I06: b is past its window: not fresh, still usable (cited with its date); d is superseded: not usable.
+      { id: 'b', title: 'B', url: 'https://x', externalOk: true, fresh: false, usable: true, observedAt: '2026-06-01T00:00:00.000Z', superseded: false, firstParty: false },
+      { id: 'c', title: 'C', url: null, externalOk: false, fresh: true, usable: true, observedAt: '2026-06-01T00:00:00.000Z', superseded: false, firstParty: true },
+      { id: 'd', title: 'D', url: null, externalOk: true, fresh: true, usable: false, observedAt: '2026-09-20T00:00:00.000Z', superseded: true, firstParty: true },
     ]);
   });
 });
@@ -1205,7 +1209,7 @@ describe('modex_queue', () => {
         problemFamily: 'hidden_capacity',
       },
       evidence: [
-        { id: 'sig_1', title: 'Three gate-clerk roles posted', url: 'https://example.com/jobs', excerpt: VERIFIED_FACT.evidence_text, externalOk: true, fresh: true, superseded: false, firstParty: false },
+        { id: 'sig_1', title: 'Three gate-clerk roles posted', url: 'https://example.com/jobs', excerpt: VERIFIED_FACT.evidence_text, externalOk: true, fresh: true, usable: true, observedAt: expect.any(String), superseded: false, firstParty: false },
       ],
       stepCount: 2,
       claimsUsed: ['CR-001'],

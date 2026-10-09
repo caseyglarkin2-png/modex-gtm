@@ -26,7 +26,7 @@ import { factUrl, liveClaimFailure, liveFactFailure } from './claim-rules';
 import { extractCitationIds } from '../hypothesis/observation';
 import { sourceLabelVariants } from './source-label';
 import { approachOfHypothesis, claimAdmittedFor, type EvidenceApproach } from './approach-policy';
-import { isCurrentFact } from './currentness';
+import { isUsableFact } from './currentness';
 import { classifyContinuity } from './continuity';
 
 export interface GateSignal {
@@ -269,10 +269,9 @@ export const GATE_SIGNAL_SELECT = {
 
 /**
  * The send decision for a loaded hypothesis row (`signals: [{ signal }]`),
- * with only CURRENT signals considered (Release C re-review S8; item 2a: the one
- * freshness authority, research/currentness.ts, the clock the compiler reads
- * too): a fact past its currentness never makes a hypothesis sendable, and is
- * never read aloud as an opener.
+ * with only USABLE signals considered (I06, 2026-10-08, over Release C re-review S8 and item 2a): a fact that
+ * ended, closed, is undated or was superseded never makes a hypothesis sendable and is never read aloud as an
+ * opener; a fact that merely aged does, and the copy states its date (the compiler's C01 holds it to that).
  */
 export function hypothesisSendable(
   h: { observation?: string | null; account_name: string; metadata?: unknown; signals?: ReadonlyArray<{ signal?: (GateSignal & { freshness_expires_at?: Date | string | null }) | null }> | null },
@@ -280,6 +279,6 @@ export function hypothesisSendable(
 ): boolean {
   const live = (h.signals ?? [])
     .map((l) => l.signal)
-    .filter((s): s is GateSignal & { freshness_expires_at?: Date | string | null } => !!s && isCurrentFact(s, now));
+    .filter((s): s is GateSignal & { freshness_expires_at?: Date | string | null } => !!s && isUsableFact(s, now));
   return sendableEvidence(h.observation, live, h.account_name, { approach: approachOfHypothesis(h) }).tier === 'VERIFIED_FACT';
 }

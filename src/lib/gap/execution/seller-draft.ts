@@ -38,7 +38,7 @@ import { sendableEvidence } from '../research/evidence-gate';
 import { seedCopyOutdated } from '../sequences/seed-drift';
 import { accountRepliedRecently } from '../replies/account-reply';
 import { referralHoldDetail, referralHoldFor } from '../replies/referral-hold';
-import { isCurrentFact } from '../research/currentness';
+import { isUsableFact } from '../research/currentness';
 import { getGmailSignature, gmailSenderAddress } from '@/lib/email/gmail-sender';
 import { COMPANY_POSTAL_ADDRESS, oneClickUnsubscribeUrl, unsubscribePageUrl } from '@/lib/email/compliance';
 import { personMovedSince } from './stale-card';
@@ -357,7 +357,8 @@ export async function prepareSellerEmail(
   // One live outreach fact (verified, dated, quoted, this account, a network
   // change) or no email; a keyword hit can only send this card to research.
   const linked = Array.isArray(pack.hypothesis.signals) ? pack.hypothesis.signals.map((l: { signal?: unknown }) => l.signal).filter(Boolean) : [];
-  const live = linked.filter((sig: { freshness_expires_at?: Date | string | null }) => isCurrentFact(sig, now));
+  // I06: usable, whatever its age (ended, closed, undated or superseded is not).
+  const live = linked.filter((sig: { freshness_expires_at?: Date | string | null }) => isUsableFact(sig, now));
   // R30: the gate judges the thesis under its declared approach; R34: only the event-led path has copy today.
   const hypRow: { metadata?: unknown } | null = await prisma.prospectingHypothesis.findUnique({ where: { id: pack.hypothesis.id }, select: { metadata: true } }).catch(() => null);
   const approach = approachOfHypothesis(hypRow);

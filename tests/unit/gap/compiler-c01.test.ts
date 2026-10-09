@@ -104,14 +104,21 @@ describe('C01 OBSERVATION_UNSUPPORTED', () => {
     expect(r.span?.text).toBe('[[SRC:ev_1]]');
   });
 
-  it('fails a stale ref and names the id', () => {
-    const r = checkObservationUnsupported(
-      draft(body(OBS, HYP)),
-      ctx({ evidence: [ref('ev_1', { fresh: false })] }),
-    );
-    expect(r.passed).toBe(false);
-    expect(r.detail).toContain('ev_1');
-    expect(r.detail).toMatch(/stale/);
+  it('I06: a historical ref (usable, not fresh) passes only when the copy states its month and year; without the date it fails naming the month; without any date on the ref it fails; an unusable ref fails whatever the copy says', () => {
+    const dated = ref('ev_1', { title: 'Ohio DC posts three gate-clerk roles', fresh: false, observedAt: '2018-05-01T12:00:00.000Z' });
+    const withDate = checkObservationUnsupported(draft(body('Your Ohio DC posted three gate-clerk roles in August (reported May 2018) [[SRC:ev_1]].', HYP)), ctx({ evidence: [dated] }));
+    expect(withDate.passed).toBe(true);
+    const shortMonth = checkObservationUnsupported(draft(body('Back in May 2018 your Ohio DC posted three gate-clerk roles [[SRC:ev_1]].', HYP)), ctx({ evidence: [dated] }));
+    expect(shortMonth.passed).toBe(true);
+    const without = checkObservationUnsupported(draft(body(OBS, HYP)), ctx({ evidence: [dated] }));
+    expect(without.passed).toBe(false);
+    expect(without.detail).toMatch(/historical evidence ev_1 without its date \(May 2018\)/);
+    const undated = checkObservationUnsupported(draft(body(OBS, HYP)), ctx({ evidence: [ref('ev_1', { fresh: false })] }));
+    expect(undated.passed).toBe(false);
+    expect(undated.detail).toMatch(/historical evidence ev_1 that carries no date/);
+    const unusable = checkObservationUnsupported(draft(body('Your Ohio DC posted three gate-clerk roles in August (reported May 2018) [[SRC:ev_1]].', HYP)), ctx({ evidence: [ref('ev_1', { fresh: false, usable: false, observedAt: '2018-05-01T12:00:00.000Z' })] }));
+    expect(unusable.passed).toBe(false);
+    expect(unusable.detail).toMatch(/unusable evidence ev_1/);
   });
 
   it('fails a ref that is neither external_ok nor first-party', () => {
@@ -196,7 +203,7 @@ describe('C01 OBSERVATION_UNSUPPORTED', () => {
         ctx({ evidence: [doors()], contract: { evidenceIds: ['ev_1'] } }),
       );
       expect(r).toMatchObject({ code: 'C01', passed: true, severity: 'reject' });
-      expect(r.detail).toBe('0 marker(s) + 1 evidence_ids resolve to fresh evidence; every number is cited or canon');
+      expect(r.detail).toBe('0 marker(s) + 1 evidence_ids resolve to usable evidence (historical ones dated in the copy); every number is cited or canon');
     });
 
     it('covers a number from the excerpt of an evidence_ids ref', () => {
@@ -222,7 +229,7 @@ describe('C01 OBSERVATION_UNSUPPORTED', () => {
         ctx({ evidence: [doors({ fresh: false })], contract: { evidenceIds: ['ev_1'] } }),
       );
       expect(r.passed).toBe(false);
-      expect(r.detail).toBe('evidence_ids ev_1 cites stale evidence ev_1');
+      expect(r.detail).toBe('evidence_ids ev_1 cites historical evidence ev_1 that carries no date');
       expect(r.span).toBeNull();
     });
 
@@ -258,7 +265,7 @@ describe('C01 OBSERVATION_UNSUPPORTED', () => {
         draft(body('Your Ohio DC added 110 dock doors this spring [[SRC:ev_1]].', HYP)),
         ctx({ evidence: [doors({ fresh: false })], contract: { evidenceIds: ['ev_1'] } }),
       );
-      expect(r.detail).toBe('marker [[SRC:ev_1]] cites stale evidence ev_1');
+      expect(r.detail).toBe('marker [[SRC:ev_1]] cites historical evidence ev_1 that carries no date');
       expect(r.span?.text).toBe('[[SRC:ev_1]]');
     });
 
@@ -287,7 +294,7 @@ describe('C01 OBSERVATION_UNSUPPORTED', () => {
         }),
       );
       expect(r.passed).toBe(true);
-      expect(r.detail).toBe('0 marker(s) + 0 evidence_ids resolve to fresh evidence; every number is cited or canon');
+      expect(r.detail).toBe('0 marker(s) + 0 evidence_ids resolve to usable evidence (historical ones dated in the copy); every number is cited or canon');
     });
 
     it('keeps the hypothesis-observation gate on every step: a later uncited step with an observation still fails', () => {

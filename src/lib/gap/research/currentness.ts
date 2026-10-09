@@ -155,6 +155,22 @@ export function isUsableFact(f: CurrentnessFact, now: Date): boolean {
   return factUsability(f, now).usable;
 }
 
+/** The month-and-year label a historical fact is cited with ("May 2018"), in New York time; the compiler's C01 looks for it. */
+export function reportedLabel(at: Date | string | null | undefined): { label: string; year: string; month: string; short: string } | null {
+  const d = toDate(at ?? null);
+  if (!d) return null;
+  const month = d.toLocaleDateString('en-US', { month: 'long', timeZone: 'America/New_York' });
+  const year = d.toLocaleDateString('en-US', { year: 'numeric', timeZone: 'America/New_York' });
+  return { label: `${month} ${year}`, year, month, short: month.slice(0, 3) };
+}
+
+/** Does the copy state the fact's month and year (long or short month, the year)? */
+export function statesReportedDate(text: string, at: Date | string | null | undefined): boolean {
+  const r = reportedLabel(at);
+  if (!r) return false;
+  return new RegExp(`\\b${r.year}\\b`).test(text) && new RegExp(`\\b(?:${r.month}|${r.short})\\.?\\b`, 'i').test(text);
+}
+
 /** The seller words for usability: why a fact cannot carry a thesis, or that it is historical and how to cite it. */
 export function usabilityLine(u: Usability, f?: CurrentnessFact): string {
   if (u.reason === 'superseded') return 'Research marked this fact superseded by a newer one: it is not quoted.';

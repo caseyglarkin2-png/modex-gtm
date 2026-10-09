@@ -38,6 +38,7 @@
  */
 
 import { HEDGE_TOKENS } from '../../taxonomy';
+import { reportedLabel, statesReportedDate } from '../../research/currentness';
 import {
   CANON_NUMBERS,
   NUMBER_TOKEN_RE,
@@ -220,10 +221,17 @@ function pass(code: string, detail: string): CheckResult {
  * citation form ("marker [[SRC:id]]" or "evidence_ids id"). Null when the ref
  * is fresh, not superseded and external_ok or first-party.
  */
-function citationFault(source: string, id: string, ref: CompileEvidenceRef | undefined): string | null {
+function citationFault(source: string, id: string, ref: CompileEvidenceRef | undefined, body: string): string | null {
   if (!ref) return `${source} resolves to no evidence ref (id ${id})`;
   if (ref.superseded) return `${source} cites superseded evidence ${id}`;
-  if (!ref.fresh) return `${source} cites stale evidence ${id}`;
+  // I06: a ref that ended, closed, is undated or was superseded is never citable; a HISTORICAL ref (usable, past its
+  // window) is citable only when the copy states its month and year, so an old event is never written as today.
+  if (ref.usable === false) return `${source} cites unusable evidence ${id} (ended, closed, undated or superseded)`;
+  if (!ref.fresh) {
+    const when = reportedLabel(ref.observedAt ?? null);
+    if (!when) return `${source} cites historical evidence ${id} that carries no date`;
+    if (!statesReportedDate(body, ref.observedAt)) return `${source} cites historical evidence ${id} without its date (${when.label}): say when it was reported`;
+  }
   if (!ref.externalOk && !ref.firstParty) return `${source} cites evidence ${id} that is neither external_ok nor first-party`;
   return null;
 }
@@ -235,7 +243,7 @@ export const checkObservationUnsupported: Check = (draft, ctx) => {
 
   for (const marker of markers) {
     const span: CheckSpan = { start: marker.index, end: marker.index + marker.text.length, text: marker.text };
-    const fault = citationFault(`marker ${marker.text}`, marker.id, refs.get(marker.id));
+    const fault = citationFault(`marker ${marker.text}`, marker.id, refs.get(marker.id), draft.body);
     if (fault) return fail(C01_CODE, fault, span);
   }
 
@@ -243,7 +251,7 @@ export const checkObservationUnsupported: Check = (draft, ctx) => {
   const markerIdSet = new Set(markers.map((m) => m.id));
   const extraIds = citation.evidenceIds.filter((id) => !markerIdSet.has(id));
   for (const id of extraIds) {
-    const fault = citationFault(`evidence_ids ${id}`, id, refs.get(id));
+    const fault = citationFault(`evidence_ids ${id}`, id, refs.get(id), draft.body);
     if (fault) return fail(C01_CODE, fault, null);
   }
 
@@ -324,7 +332,7 @@ export const checkObservationUnsupported: Check = (draft, ctx) => {
 
   return pass(
     C01_CODE,
-    `${markers.length} marker(s) + ${extraIds.length} evidence_ids resolve to fresh evidence; every number is cited or canon`,
+    `${markers.length} marker(s) + ${extraIds.length} evidence_ids resolve to usable evidence (historical ones dated in the copy); every number is cited or canon`,
   );
 };
 

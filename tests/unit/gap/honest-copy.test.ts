@@ -178,13 +178,14 @@ describe('red team T7: the numbers in a verified quote are covered by C01', () =
   });
 });
 
-describe('Release C re-review S8: an expired fact never opens a call', () => {
+describe('Release C re-review S8, under I06: an ENDED fact never opens a call (an expired one does, cited with its date)', () => {
   const sig = { id: 'sig-ge', title: 'KROGER CO 10-Q (filed 2026-09-18)', account_name: 'Kroger', source_kind: 'evidence_record', source_type: 'public_primary', evidence_text: GIANT_EAGLE, evidence_url: 'https://www.sec.gov/x', observed_at: new Date('2026-09-18T00:00:00Z'), external_ok: true, metadata: { verified: 'excerpt_found_at_source' } };
   const now = new Date('2026-09-27T00:00:00Z');
   it('the call-pack gate uses live signals only', () => {
     expect(hypothesisSendable({ observation: OBSERVATION, account_name: 'Kroger', signals: [{ signal: { ...sig, freshness_expires_at: null } }] }, now)).toBe(true);
     expect(hypothesisSendable({ observation: OBSERVATION, account_name: 'Kroger', signals: [{ signal: { ...sig, freshness_expires_at: new Date('2026-12-01T00:00:00Z') } }] }, now)).toBe(true);
-    expect(hypothesisSendable({ observation: OBSERVATION, account_name: 'Kroger', signals: [{ signal: { ...sig, freshness_expires_at: new Date('2026-09-20T00:00:00Z') } }] }, now)).toBe(false);
+    expect(hypothesisSendable({ observation: OBSERVATION, account_name: 'Kroger', signals: [{ signal: { ...sig, freshness_expires_at: new Date('2026-09-20T00:00:00Z') } }] }, now)).toBe(true);
+    expect(hypothesisSendable({ observation: OBSERVATION, account_name: 'Kroger', signals: [{ signal: { ...sig, metadata: { ...sig.metadata, continuity: { kind: 'ended' } } } }] }, now)).toBe(false);
   });
 
   it('the action pack view builds its call script through that gate', async () => {

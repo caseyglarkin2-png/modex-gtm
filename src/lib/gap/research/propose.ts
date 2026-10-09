@@ -23,7 +23,7 @@
 import { sourceLabel } from './source-label';
 import { proposeHypothesis } from '../hypothesis/service';
 import { GATE_SIGNAL_SELECT, outreachFactRefusal, type GateSignal } from './evidence-gate';
-import { isCurrentFact } from './currentness';
+import { isUsableFact, factUsability, reportedLabel, type CurrentnessFact } from './currentness';
 import { actionabilityOf } from '../hypothesis/actionability';
 import { existingRevisionFor, type ExistingRevision } from '../hypothesis/current-revision';
 import { factFitsOpener } from './opener';
@@ -36,10 +36,21 @@ import { entityTypeOf, type AccountInputs } from '../account-intel/build';
  * a citation token placed right after each such period keeps the quote's
  * words intact (the renderer strips the tokens) and every fragment cited.
  */
-export function citedQuote(title: string, excerpt: string, signalId: string, accountName?: string | null): string {
+/**
+ * I06: a historical fact (usable, past its window) is cited WITH its date, in the source label, so a June event is
+ * never written as today: `From the 10-Q filed July 9 (reported July 2026): "..." [S:id].` The compiler's C01 holds
+ * the copy to that date for every historical ref. `reported` carries the fact's standing and its observation date.
+ */
+export function citedQuote(title: string, excerpt: string, signalId: string, accountName?: string | null, reported?: { historical: boolean; at: Date | string | null | undefined } | null): string {
   const token = `[S:${signalId}]`;
   const quote = excerpt.trim().replace(/[.!?]+$/, '').replace(/([.!?])(\s)/g, `$1${token}$2`);
-  return `${sourceLabel(title, accountName)}: "${quote}" ${token}.`;
+  const when = reported?.historical ? reportedLabel(reported.at) : null;
+  return `${sourceLabel(title, accountName)}${when ? ` (reported ${when.label})` : ''}: "${quote}" ${token}.`;
+}
+
+/** The `reported` argument for citedQuote from a signal row: its standing by the one authority at `now`. */
+export function reportedFor(f: CurrentnessFact, now: Date): { historical: boolean; at: Date | string | null | undefined } {
+  return { historical: factUsability(f, now).historical, at: f.observed_at };
 }
 
 // Moved to ./source-label (ops closeout 16: the evidence gate reads it too).
@@ -140,7 +151,8 @@ export async function proposeFromResearch(
         })
       : [];
   }
-  const fresh = signals.filter((s) => isCurrentFact(s, input.now));
+  // I06: usable (not ended, closed, undated or superseded), whatever its age; the observation states a historical date.
+  const fresh = signals.filter((s) => isUsableFact(s, input.now));
   if (fresh.length === 0) return { ok: false, reason: 'no_fresh_evidence' };
   // Red team T6/T7: the observation is built only from evidence that passes
   // the SAME gate approval applies. A verified quote that states no network
@@ -167,7 +179,7 @@ export async function proposeFromResearch(
     : null;
   // One fact opens the first touch (red team T6/T7); a second outreach fact
   // stays linked as supporting evidence, never a second quote in the email.
-  const observation = citedQuote(quotable[0].title, quotable[0].evidence_text!, quotable[0].id, run.account_name);
+  const observation = citedQuote(quotable[0].title, quotable[0].evidence_text!, quotable[0].id, run.account_name, reportedFor(quotable[0], input.now));
   // A 3PL, carrier or terminal runs the sites: its thesis speaks to the yards it runs, not a shipper's production.
   const acct: { vertical: string | null } | null = prisma.account?.findUnique ? await prisma.account.findUnique({ where: { name: run.account_name }, select: { vertical: true } }).catch(() => null) : null;
   const scouted: { scout: unknown } | null = prisma.gapAccountCandidate?.findFirst ? await prisma.gapAccountCandidate.findFirst({ where: { account_name: run.account_name, scouted_at: { not: null } }, orderBy: { scouted_at: 'desc' }, select: { scout: true } }).catch(() => null) : null;

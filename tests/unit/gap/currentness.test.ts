@@ -63,16 +63,18 @@ describe('every reader agrees: the compiler, the gate and enrollment read the sa
   const hyp = (s: Record<string, unknown>) => ({ account_name: 'PepsiCo', observation: `PepsiCo to cease warehouse operations at Oklahoma production site: "${TULSA.replace(/\.$/, '')}" [S:s1].`, signals: [{ signal: s as never }] });
 
   it.each([
-    ['a 75-day-old site change (current)', {}, true],
-    ['a 75-day-old news item (too old)', { type: 'news' }, false],
-    ['a recorded expiry in the past', { freshness_expires_at: daysAgo(1) }, false],
-    ['a newer source says it ended', { metadata: { verified: VERIFIED_EXCERPT, continuity: { kind: 'ended' } } }, false],
-  ])('%s: compiler fresh, the send gate and enrollment answer the same', (_label, over, current) => {
+    ['a 75-day-old site change (current, usable)', {}, true, true],
+    ['a 75-day-old news item (historical, usable: I06)', { type: 'news' }, false, true],
+    ['a recorded expiry in the past (historical, usable: I06)', { freshness_expires_at: daysAgo(1) }, false, true],
+    ['a newer source says it ended (unusable)', { metadata: { verified: VERIFIED_EXCERPT, continuity: { kind: 'ended' } } }, false, false],
+  ])('%s: the compiler ref carries current and usable; the send gate and enrollment read usable', (_label, over, current, usable) => {
     const s = sig(over);
     expect(isCurrentFact(s, NOW)).toBe(current);
-    expect(evidenceRefsFromSignals([s as never], NOW)[0].fresh).toBe(current);
-    expect(hypothesisSendable(hyp(s), NOW)).toBe(current);
-    expect(checkEvidenceFreshness([s], NOW)).toBe(current ? null : 'evidence_expired');
+    const ref = evidenceRefsFromSignals([s as never], NOW)[0];
+    expect(ref.fresh).toBe(current);
+    expect(ref.usable).toBe(usable);
+    expect(hypothesisSendable(hyp(s), NOW)).toBe(usable);
+    expect(checkEvidenceFreshness([s], NOW)).toBe(usable ? null : 'evidence_expired');
   });
 });
 

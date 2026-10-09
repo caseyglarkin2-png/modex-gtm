@@ -138,7 +138,7 @@ import { parseSteps } from '@/lib/gap/sequence/steps';
 import { sendableEvidence } from '@/lib/gap/research/evidence-gate';
 import { seedCopyOutdated } from '@/lib/gap/sequences/seed-drift';
 import { accountRepliedRecently } from '@/lib/gap/replies/account-reply';
-import { isCurrentFact, type CurrentnessFact } from '@/lib/gap/research/currentness';
+import { isUsableFact, type CurrentnessFact } from '@/lib/gap/research/currentness';
 import { referralHoldDetail, referralHoldFor } from '@/lib/gap/replies/referral-hold';
 import { materializeSequence, type MaterializeRefusal } from '@/lib/gap/sequences/service';
 import type { RoutingAction } from '@/lib/gap/taxonomy';
@@ -407,12 +407,12 @@ export async function verifyCompiles(
 export type EvidenceFreshnessRow = CurrentnessFact;
 
 /**
- * SF14 (6B-T2): every cited signal must still be CURRENT at `now`, by the one
- * freshness authority (research/currentness.ts, item 2a). Pure; opt-in only
- * (see `EnrollDeps.checkEvidenceFreshness`).
+ * SF14 (6B-T2), re-read under I06 (2026-10-08): every cited signal must still be USABLE at `now` by the one
+ * authority (research/currentness.ts): not ended, closed, undated or superseded. Age alone never refuses; a
+ * historical fact enrolls and the copy states its date. Pure; opt-in only (see `EnrollDeps.checkEvidenceFreshness`).
  */
 export function checkEvidenceFreshness(signals: readonly EvidenceFreshnessRow[], now: Date): 'evidence_expired' | null {
-  for (const s of signals) if (!isCurrentFact(s, now)) return 'evidence_expired';
+  for (const s of signals) if (!isUsableFact(s, now)) return 'evidence_expired';
   return null;
 }
 
@@ -737,7 +737,7 @@ export async function enrollFromDecision(
   // account, a physical-network change) means no sequence at all.
   const liveSignals = (hypothesis.signals ?? [])
     .map((link) => link.signal)
-    .filter((s): s is EvidenceSignalRow => s !== null && isCurrentFact(s, input.now));
+    .filter((s): s is EvidenceSignalRow => s !== null && isUsableFact(s, input.now));
   const approach = approachOfHypothesis(hypothesis as { metadata?: unknown });
   if (!copyFamilySupports(approach)) return refuse('evidence_insufficient', { detail: COPY_UNSUPPORTED_DETAIL(approach) });
   // R34: the version's copy is for the thesis's approach, never another's (a job-led thesis never enrolls on an

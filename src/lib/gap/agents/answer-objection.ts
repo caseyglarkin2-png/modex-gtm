@@ -13,7 +13,7 @@
  * sibling), read from the task's own result: no second record.
  */
 import { gapGenerate } from '../ai/spend';
-import { MAX_ANGLE_CALLS, REASK_REASONS } from './develop-angle';
+import { MAX_ANGLE_CALLS, offendingSpan, REASK_REASONS } from './develop-angle';
 import { SINGULAR_YARD_RE } from '../compiler/checks/c11-banned';
 import { HEDGE_TOKENS } from '../taxonomy';
 import { nyDay } from '../work/dates';
@@ -66,7 +66,7 @@ export type ObjectionCheck = { ok: true; factsUsed: string[] } | { ok: false; re
 
 function objectionReaskLine(check: Exclude<ObjectionCheck, { ok: true }>): string {
   switch (check.reason) {
-    case 'yard_singular': return 'it says "yard" in the singular; YardFlow copy says "yards" (write "their yards", "operations in their yards"; only yard network, yard management, yard system, yard check, yard truck, yard move and yard spotting keep the singular)';
+    case 'yard_singular': return `it says "yard" in the singular here: "${check.detail ?? 'yard'}". YardFlow copy says "yards" (write "their yards", "operations in their yards"; only yard network, yard management, yard system, yard check, yard truck, yard move and yard spotting keep the singular). Rewrite that sentence`;
     case 'throughput': return 'it says "throughput"; YardFlow copy says "production capacity"';
     case 'em_dash': return 'it contains an em dash; use a comma or a period instead';
     case 'product_named': return 'it names YardFlow or a product; name neither';
@@ -86,7 +86,7 @@ export function validateObjectionAnswer(a: ObjectionAnswer, factIds: ReadonlySet
   if (/\$\s?\d|\b\d+(\.\d+)?\s?%|\b(dollars|roi|savings)\b/i.test(text)) return { ok: false, reason: 'money_promised' };
   if (/—/.test(text)) return { ok: false, reason: 'em_dash' };
   // A03b: the canonical C14 rule (compounds such as yard management keep the singular).
-  if (SINGULAR_YARD_RE.test(text)) return { ok: false, reason: 'yard_singular', detail: SINGULAR_YARD_RE.exec(text)?.[0] };
+  if (SINGULAR_YARD_RE.test(text)) return { ok: false, reason: 'yard_singular', detail: offendingSpan(text, SINGULAR_YARD_RE) };
   if (/\bthroughput\b/i.test(text)) return { ok: false, reason: 'throughput' };
   const words = a.answer.replace(/\[\[SRC:[A-Za-z0-9_-]+\]\]/g, '').trim().split(/\s+/).filter(Boolean).length;
   if (words < MIN_WORDS || words > MAX_WORDS) return { ok: false, reason: 'length', detail: `${words} words` };
@@ -162,8 +162,8 @@ export async function answerObjection(task: ClaimedTask, ctx: { prisma: PrismaLi
   if (!candidate) return { ok: false, reason: 'could_not_satisfy', detail: 'the model returned something that is not a usable talking point' };
   let check = validateObjectionAnswer(candidate, factIds);
   let calls = 1;
-  if (!check.ok && REASK_REASONS.has(check.reason) && calls < MAX_ANGLE_CALLS) {
-    // A03: one re-ask naming the voice-rule break (the angle task's rule), then the refusal stands.
+  // A03/A03c: the angle task's rule: re-asked with the place quoted, at most twice; then the refusal stands.
+  while (!check.ok && REASK_REASONS.has(check.reason) && calls < MAX_ANGLE_CALLS) {
     const again = await generate(`${prompt}
 
 Your previous answer was rejected by the checker: ${objectionReaskLine(check)}. Fix only that and answer again with the complete JSON object.
@@ -172,13 +172,12 @@ Previous answer:
 ${out.text.slice(0, 3000)}`, MAX_TOKENS);
     calls += 1;
     const fixed = parseObjectionAnswer(again.text);
-    if (fixed) {
-      out = again;
-      candidate = fixed;
-      check = validateObjectionAnswer(fixed, factIds);
-    }
+    if (!fixed) break;
+    out = again;
+    candidate = fixed;
+    check = validateObjectionAnswer(fixed, factIds);
   }
-  if (!check.ok) return { ok: false, reason: 'could_not_satisfy', detail: `${check.reason}${check.detail ? ` ${check.detail}` : ''}${calls > 1 ? ' (after one re-ask)' : ''}` };
+  if (!check.ok) return { ok: false, reason: 'could_not_satisfy', detail: `${check.reason}${check.detail ? ` ${check.detail}` : ''}${calls > 1 ? ` (after ${calls - 1 === 1 ? 'one re-ask' : `${calls - 1} re-asks`})` : ''}` };
   return {
     ok: true,
     result: { dispositionId, accountName: d.account_name, personaId: typeof d.persona_id === 'number' ? d.persona_id : null, hypothesisId: hypothesis?.id ?? null, objection, answer: candidate.answer, question: candidate.question, factsUsed: check.factsUsed, provider: out.provider },

@@ -17,7 +17,7 @@
  *   - each preparation writes one `research.proposal_prepared` audit row naming the fact and the proposal
  */
 import { assertGapEnabled } from '../flags';
-import { citedQuote } from './propose';
+import { citedQuote, reportedFor } from './propose';
 import type { ClaimType } from './claim-types';
 import { draftThesisFromFact } from '../story/draft-from-fact';
 import { draftApproachFor } from '../story/draft-approach';
@@ -59,9 +59,9 @@ export async function prepareProposalsFromResearch(
     where: { signal_id: { in: ids } },
     select: { signal_id: true, hypothesis: { select: { status: true, account_name: true } } },
   });
-  const rows: Array<{ id: string; title: string | null; evidence_text: string | null; claim_class: string | null; metadata: unknown }> = await prisma.prospectingSignal.findMany({
+  const rows: Array<{ id: string; title: string | null; evidence_text: string | null; claim_class: string | null; metadata: unknown; observed_at?: Date | string | null; type?: string | null; freshness_expires_at?: Date | string | null }> = await prisma.prospectingSignal.findMany({
     where: { id: { in: ids }, account_name: input.accountName },
-    select: { id: true, title: true, evidence_text: true, claim_class: true, metadata: true },
+    select: { id: true, title: true, evidence_text: true, claim_class: true, metadata: true, observed_at: true, type: true, freshness_expires_at: true },
   });
   const byId = new Map(rows.map((r) => [r.id, r]));
   const draft = deps.draft ?? draftThesisFromFact;
@@ -100,7 +100,7 @@ export async function prepareProposalsFromResearch(
       factId: f.signalId,
       personaId: null,
       persona: ACCOUNT_PERSONA,
-      observation: citedQuote(row.title ?? 'source', row.evidence_text, f.signalId, input.accountName),
+      observation: citedQuote(row.title ?? 'source', row.evidence_text, f.signalId, input.accountName, reportedFor(row, input.now)),
       problemHypothesis: d.problem,
       falsificationQuestions: [d.falsification],
       whatANoMeans: d.noMeans,
