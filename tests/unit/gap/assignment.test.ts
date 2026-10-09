@@ -106,6 +106,20 @@ describe('X06: buildAssignment', () => {
     expect(deps.pack).not.toHaveBeenCalled();
   });
 
+  it('B7 (C4): the sources the Ask context did not read are named after what we know and before the move; nothing is printed when everything was read', async () => {
+    const { db, deps } = harness();
+    deps.askContext.mockResolvedValue({ ...ASK, coverageLine: 'Gmail Sent (no GAP sender configured), the vault (not configured)' });
+    const a = await buildAssignment(db.client(), { plan: PLAN, item: ITEMS[0], revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, deps);
+    const t = a.text.split('\n');
+    const at = t.indexOf('Not read this time: Gmail Sent (no GAP sender configured), the vault (not configured)');
+    expect(at, 'the coverage line is printed').toBeGreaterThan(0);
+    expect(at, 'after what we know').toBeGreaterThan(t.indexOf('What we know:'));
+    expect(at, 'before the move').toBeLessThan(t.indexOf('The move: Send the first touch to Karen Ortiz.'));
+    deps.askContext.mockResolvedValue({ ...ASK, coverageLine: null });
+    const b = await buildAssignment(db.client(), { plan: PLAN, item: ITEMS[0], revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, deps);
+    expect(b.text).not.toContain('Not read this time');
+  });
+
   it('addendum: a deal item at an account where a develop_angle task succeeded for a person placed there carries the angle (prepared angle, the block above the move) and is assignable; a first touch with a pack never reads it', async () => {
     const { db, deps } = harness();
     const kenco = item({ key: 'deal:Kenco:2026-10-08', rank: 1, accountName: 'Kenco', token: 'c'.repeat(32), kind: 'deal', stateKind: 'in_deal', title: 'Next step on the deal: Send the pilot scope', why: 'The deal\'s next step', href: '/gap/accounts/kenco?view=brief', person: null });
