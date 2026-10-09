@@ -87,11 +87,20 @@ export type AngleCheck = { ok: true } | { ok: false; reason: 'em_dash' | 'yard_s
  * the refusal stands. At most two calls per task (both on the spend ledger); a person outside the roster is never re-asked.
  */
 export const REASK_REASONS: ReadonlySet<string> = new Set(['em_dash', 'yard_singular', 'throughput', 'product_named', 'money_promised', 'length']);
-export const MAX_ANGLE_CALLS = 2;
+export const MAX_ANGLE_CALLS = 3;
+
+/** The offending word with its neighbours, so the re-ask points at the exact place ("...in their Austin yard outside..."). */
+export function offendingSpan(text: string, re: RegExp): string {
+  const m = new RegExp(re.source, re.flags.replace('g', '')).exec(text);
+  if (!m || m.index === undefined) return '';
+  const start = Math.max(0, m.index - 30);
+  const end = Math.min(text.length, m.index + m[0].length + 30);
+  return `${start > 0 ? '...' : ''}${text.slice(start, end).trim()}${end < text.length ? '...' : ''}`;
+}
 
 export function reaskLine(check: Exclude<AngleCheck, { ok: true }>): string {
   switch (check.reason) {
-    case 'yard_singular': return 'it says "yard" in the singular somewhere in the prose (whyItMatters, starters or caveat); YardFlow copy says "yards" (write "their yards", "yard operations" is "operations in their yards", "yard processes" is "the processes in their yards"; only yard network, yard management, yard system, yard check, yard truck, yard move and yard spotting keep the singular)';
+    case 'yard_singular': return `it says "yard" in the singular here: "${check.detail ?? 'yard'}". YardFlow copy says "yards" (plural) in prose: write "their yards", "operations in their yards", "the yards at the plant"; only yard network, yard management, yard system, yard check, yard truck, yard move and yard spotting keep the singular. Rewrite that sentence`;
     case 'throughput': return 'it says "throughput"; YardFlow copy says "production capacity" (or "turns", "flow")';
     case 'em_dash': return 'it contains an em dash; use a comma or a period instead';
     case 'product_named': return 'it names YardFlow or a product; name neither';
@@ -108,7 +117,7 @@ export function validateAngle(a: Angle, roster: ReadonlySet<number>): AngleCheck
   const prose = [a.whyItMatters, ...a.starters, a.caveat ?? ''].join(' ');
   if (/—/.test(text)) return { ok: false, reason: 'em_dash' };
   // A03b: the canonical C14 rule: singular "yard" outside the accepted compounds (yard network, yard management, ...).
-  if (SINGULAR_YARD_RE.test(prose)) return { ok: false, reason: 'yard_singular', detail: SINGULAR_YARD_RE.exec(prose)?.[0] };
+  if (SINGULAR_YARD_RE.test(prose)) return { ok: false, reason: 'yard_singular', detail: offendingSpan(prose, SINGULAR_YARD_RE) };
   if (/\bthroughput\b/i.test(prose)) return { ok: false, reason: 'throughput' };
   if (/\b(yardflow|freightroll|flowgate|flowdriver|flowbol|flowvision|flowyms)\b/i.test([a.whyItMatters, ...a.starters].join(' ').replace(/to YardFlow/gi, ''))) return { ok: false, reason: 'product_named' };
   if (/\$\s?\d|\b\d+(\.\d+)?\s?%|\b(roi|savings|dollars)\b/i.test(text)) return { ok: false, reason: 'money_promised' };
@@ -187,8 +196,9 @@ export async function developAngle(task: ClaimedTask, ctx: { prisma: PrismaLike;
   if (!angle) return { ok: false, reason: 'could_not_satisfy', detail: 'the model returned something that is not a usable angle' };
   let check = validateAngle(angle, rosterIds);
   let calls = 1;
-  if (!check.ok && REASK_REASONS.has(check.reason) && calls < MAX_ANGLE_CALLS) {
-    // A03: one re-ask naming the break, with the rejected answer; the refusal stands if it breaks a rule again.
+  // A03/A03c: a fixable voice-rule break is re-asked, naming the break and quoting the place, at most twice (three
+  // calls per task, all on the spend ledger); the refusal stands if the last answer still breaks a rule.
+  while (!check.ok && REASK_REASONS.has(check.reason) && calls < MAX_ANGLE_CALLS) {
     const again = await generate(`${prompt}
 
 Your previous answer was rejected by the checker: ${reaskLine(check)}. Fix only that and answer again with the complete JSON object.
@@ -197,13 +207,12 @@ Previous answer:
 ${out.text.slice(0, 3000)}`, MAX_TOKENS);
     calls += 1;
     const fixed = parseAngle(again.text);
-    if (fixed) {
-      out = again;
-      angle = fixed;
-      check = validateAngle(fixed, rosterIds);
-    }
+    if (!fixed) break;
+    out = again;
+    angle = fixed;
+    check = validateAngle(fixed, rosterIds);
   }
-  if (!check.ok) return { ok: false, reason: 'could_not_satisfy', detail: `${check.reason}${check.detail ? ` ${check.detail}` : ''}${calls > 1 ? ' (after one re-ask)' : ''}` };
+  if (!check.ok) return { ok: false, reason: 'could_not_satisfy', detail: `${check.reason}${check.detail ? ` ${check.detail}` : ''}${calls > 1 ? ` (after ${calls - 1 === 1 ? 'one re-ask' : `${calls - 1} re-asks`})` : ''}` };
   const peopleNamed = angle.people.map((id) => roster.find((p) => p.id === id)).filter((p): p is { id: number; name: string | null; title: string | null } => !!p).map((p) => ({ personaId: p.id, name: p.name, title: p.title }));
   const result: Omit<PreparedAngle, 'taskId' | 'preparedAt'> & { provider: string; calls: number } = { key: task.itemKey, title, accountName, accountHint, sourceLine, ...angle, peopleNamed, provider: out.provider, calls };
   return { ok: true, result };
