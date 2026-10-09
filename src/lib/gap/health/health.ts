@@ -82,8 +82,8 @@ export interface HealthInputs {
   briefing?: { enabled: boolean; to: string | null; hourNy: number | null; lastSuccessAt: Date | null; consecutiveFailures: number; lastMessage: string | null; sentTodayAt: Date | null; failedToday: number };
   /** X20a: the agent tasks drain (cron gap-agent-tasks, every 5 minutes): REVISE, objections. */
   agents?: { enabled: boolean; lastSuccessAt: Date | null; consecutiveFailures: number; lastMessage: string | null; queued: number; oldestQueuedAt: Date | null; failedFinalToday: number };
-  /** C46: the commercial-context sources: whether each can be read now and how fresh what it holds is. Advisory; send safety is elsewhere. */
-  context?: {
+  /** C46: the commercial-context sources: whether each can be read now and how fresh what it holds is. Advisory; send safety is elsewhere. Absent: not probed (nothing claimed); `{ failed }`: the probe itself threw (C57 F14: that is not health). */
+  context?: { failed: string } | {
     identity: { readable: boolean; companies: number | null; aliases: number | null; error: string | null };
     /** The HubSpot contact association read (the C02 path); null when HubSpot is not configured. */
     associations: { readable: boolean; ms: number | null; error: string | null } | null;
@@ -206,8 +206,9 @@ export const CONTEXT_STALE_DAYS = 60;
  */
 function context(i: HealthInputs['context'], now: Date): HealthComponent {
   const base = { key: 'context' as const, name: 'Commercial context' };
-  // C57 F14: the loader reads the sources soft and hands null only when the probe itself failed; that is not health.
-  if (!i) return { ...base, state: 'DEGRADED', label: 'Commercial context not read (the probe failed)', detail: 'The context sources could not be probed this time; nothing here says they are complete. Read the server log for the probe error.' };
+  if (!i) return { ...base, state: 'HEALTHY', label: 'Commercial context not read', detail: 'The context sources were not probed this time; nothing here says they are complete.' };
+  // C57 F14: the loader reads each source soft; when the probe itself throws, that is said as a failure, never as health.
+  if ('failed' in i) return { ...base, state: 'DEGRADED', label: 'Commercial context not read (the probe failed)', detail: `The context sources could not be probed this time (${i.failed}); nothing here says they are complete.` };
   const problems: string[] = [];
   const partial: string[] = [];
   const facts: string[] = [];

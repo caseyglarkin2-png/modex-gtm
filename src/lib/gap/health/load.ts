@@ -174,7 +174,7 @@ export async function loadHealthInputs(prisma: PrismaLike, deps: HealthDeps = {}
     // A04: the gateway's credit balance. Soft, bounded.
     env.AI_GATEWAY_API_KEY?.trim() ? timed(() => (deps.gatewayCredits ?? (() => defaultGatewayCredits(env)))(), clock, 5_000) : Promise.resolve(null),
     // C46: the context sources, soft and bounded.
-    loadContextInputs(prisma, deps, env, clock, hubspotConfigured).catch(() => null),
+    loadContextInputs(prisma, deps, env, clock, hubspotConfigured).catch((e: unknown) => ({ failed: (e instanceof Error ? e.message : String(e)).slice(0, 160) })),
   ]);
 
   let state: Record<string, unknown> = {};
@@ -233,7 +233,7 @@ export async function loadHealthInputs(prisma: PrismaLike, deps: HealthDeps = {}
       oldestQueuedAt: queued.length ? new Date(Math.min(...queued.map((t) => new Date(t.queuedAt).getTime()))) : null,
       failedFinalToday: (Array.isArray(tasks) ? tasks : []).filter((t) => t.status === 'failed' && t.final && nyDay(new Date(t.queuedAt)) === day).length,
     },
-    ...(context ? { context } : {}),
+    context,
     model: spend ? { month: spend.month, label: spend.label, monthUsd: spend.monthUsd, ceilingUsd: spend.ceilingUsd, warnFraction: spendLimits(env).warnFraction, calls: spend.calls, failed: spend.failed, refused: spend.refused, inFlight: spend.inFlight, lastCall: spend.lastCall ? { at: spend.lastCall.at, outcome: spend.lastCall.outcome, model: spend.lastCall.model, errorCategory: spend.lastCall.errorCategory } : null, credits: credits && credits.ok && Number.isFinite(credits.value.balance) ? credits.value : null } : undefined,
   };
 }

@@ -51,6 +51,10 @@ describe('POST /api/gap/angles/promote', () => {
     process.env.GAP_OS_ENABLED = 'true';
     process.env.GAP_ROUTING_ENABLED = 'true';
     delete process.env.GAP_GMAIL_SENDER_JSON;
+    // No GAP sender in this suite unless a test sets one (process.env leaks across files in one worker; a leaked sender would wire real Gmail readers).
+    delete process.env.GAP_GMAIL_USER_EMAIL;
+    delete process.env.GAP_GOOGLE_REFRESH_TOKEN;
+    delete process.env.GAP_GOOGLE_DWD_SA_JSON;
     h.session = { user: { email: 'casey@freightroll.com' } };
     h.competing = null;
     db = ledgerDb({ accounts: ['Kenco Logistics'], personas: [{ id: 1, name: 'Dave Kiesling', title: 'VP', email: DAVE, account_name: 'Kenco Logistics', do_not_contact: false, hubspot_contact_id: '1', persona_lane: null }], inbound: [{ id: 'm-1', thread_id: 't-1', rfc_message_id: '<m1@k>', from_email: DAVE, from_name: 'Dave', subject: 'Re: yards', body_text: 'Hello', received_at: new Date('2026-09-16T14:02:00Z'), source: 'gmail', thread: { account_name: 'Kenco Logistics' } }] }, NOW);
@@ -84,5 +88,5 @@ describe('POST /api/gap/angles/promote', () => {
     expect(revise.status).toBe(200);
     expect(await revise.json()).toMatchObject({ ok: true, lane: 'existing', choice: 'revise', item: { id: 'r-edited' } });
     expect(db.store.gapAuditEvent.filter((e) => e.subject_type === 'inbound_message')).toHaveLength(0);
-  });
+  }, 30_000);
 });

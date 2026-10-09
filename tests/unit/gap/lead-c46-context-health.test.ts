@@ -19,7 +19,8 @@ const base = (): HealthInputs => ({
   sender: { configured: true, mailbox: 'casey@yardflow.ai' },
   routing: { lastRunAt: new Date(NOW.getTime() - 3_600_000) },
 });
-const fresh = (): NonNullable<HealthInputs['context']> => ({
+type ContextProbe = Exclude<NonNullable<HealthInputs['context']>, { failed: string }>;
+const fresh = (): ContextProbe => ({
   identity: { readable: true, companies: 412, aliases: 96, error: null },
   associations: { readable: true, ms: 140, error: null },
   sent: { configured: true, readable: true, ms: 900, error: null },
@@ -74,8 +75,12 @@ describe('C46: the commercial-context component', () => {
     expect(c.detail).toContain('vault: not configured (no vault configured)');
     expect(c.detail).not.toContain('complete and fresh');
     const none = ctx(base());
-    expect(none).toMatchObject({ state: 'DEGRADED', label: 'Commercial context not read (the probe failed)' });
+    expect(none).toMatchObject({ state: 'HEALTHY', label: 'Commercial context not read' });
     expect(none.detail).toContain('nothing here says they are complete');
+    // C57 F14: a probe that threw is said as a failure, never as health.
+    const failed = ctx({ ...base(), context: { failed: 'canonicalCompany not readable' } });
+    expect(failed).toMatchObject({ state: 'DEGRADED', label: 'Commercial context not read (the probe failed)' });
+    expect(failed.detail).toContain('(canonicalCompany not readable)');
     // C57 F14: a reachable source with no dated knowledge is partial, never complete and fresh.
     const undated = fresh();
     undated.vault = { ...undated.vault, watermark: null };
