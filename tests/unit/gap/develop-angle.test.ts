@@ -13,6 +13,10 @@ import { buildAnglePrompt, developAngle, loadAngles, parseAngle, sourceLineFor, 
 import { agentTaskHandlers } from '@/lib/gap/agents/handlers';
 import { runAgentTasks, type ClaimedTask } from '@/lib/gap/agents/tasks';
 import { applyDecision } from '@/lib/gap/work/decide';
+import { assembleCommercialContext } from '@/lib/gap/context/assemble';
+import { packetRecord, packetSeedFromInput, seedRevision, validateAngleClaims } from '@/lib/gap/agents/angle-claims';
+import type { ContextOpportunity, TimelineEvent } from '@/lib/gap/context/commercial-context';
+import { DAVE_EMAIL, FILES, KENCO, ROADMAP, snapshot, vaultOf } from './stream-b-fixture';
 
 const NOW = new Date('2026-10-08T16:00:00Z');
 const ACTOR = 'casey@freightroll.com';
@@ -151,5 +155,79 @@ describe('I03: the task', () => {
     const outside: DevelopAngleDeps = { generate: async () => ({ text: JSON.stringify({ ...JSON.parse(GOOD), people: [4] }), provider: 'test' }) };
     expect(await developAngle(task(), { prisma: w.client(), now: NOW }, outside)).toMatchObject({ ok: false, reason: 'could_not_satisfy', detail: 'person_not_offered 4' });
     expect(buildAnglePrompt({ title: 't', sourceLine: 's', accountName: null, accountHint: null, categories: [], note: null, person: null, roster: [], theses: [], recent: [], candidateAccounts: [], decision: 'more' })).toContain('No account is named.');
+  });
+});
+
+describe('C21/C22: the angle reads the commercial-context packet and every claim is traceable', () => {
+  const open: ContextOpportunity = { status: 'open', deals: [{ id: '62704698979', name: 'YardFlow - Kenco', stage: 'presentationscheduled', nextStep: 'Reconnect at the end of October during 2027 budgeting', closeDate: '2026-09-30', contactIds: ['217664765537'] }], coverage: 'complete', checkedAt: '2026-10-08T14:55:00.000Z', scopedDealId: '62704698979' };
+  const sep16: TimelineEvent = { id: 'm-sep16', at: '2026-09-16T14:02:00.000Z', direction: 'inbound', type: 'email', provider: 'gmail', providerIds: ['1a0aa7d3c587d944'], from: DAVE_EMAIL, to: ['casey@freightroll.com'], subject: 'Re: YardFlow and the 2027 roadmap', excerpt: ROADMAP, isDraft: false, purpose: 'buyer_conversation' };
+  const oct1: TimelineEvent = { id: 'm-oct1', at: '2026-10-01T16:00:00.000Z', direction: 'outbound', type: 'email', provider: 'gmail', providerIds: ['out1'], from: 'casey@freightroll.com', to: [DAVE_EMAIL], subject: 'Re: YardFlow and the 2027 roadmap', excerpt: 'Understood, I will reconnect at the end of October.', isDraft: false, purpose: 'buyer_conversation' };
+  const personInput = { decision: 'pursue', email: DAVE_EMAIL, name: 'David Kiesling', title: 'Vice President of Transportation Management', accountName: 'Kenco Logistics', resolvedVia: 'hubspot_contact', ambiguous: false, lastWroteAt: '2026-09-16T14:02:00.000Z', subject: 'Re: YardFlow and the 2027 roadmap', excerpt: ROADMAP, inboundMessageId: 'm-sep16', threadId: 't-kenco', hubspotContactId: '217664765537', deals: [{ id: '62704698979', name: 'YardFlow - Kenco', stage: 'presentationscheduled', nextStep: 'Reconnect at the end of October during 2027 budgeting' }], dealCoverage: 'complete', opportunity: 'open' };
+  const kencoTask = (over: Partial<ClaimedTask> = {}) => task({ itemKey: `person:${DAVE_EMAIL}`, input: personInput, ...over });
+  const packetOf = (over: { vaultDown?: boolean } = {}) => assembleCommercialContext({ opportunity: async () => ({ opportunity: open }), timeline: async () => ({ events: [sep16, oct1], coverage: [{ source: 'gmail' as const }] }), knowledge: { vault: over.vaultDown ? { readFile: async () => { throw new Error('vault not mounted'); } } : vaultOf(FILES), clawd: { fetchSnapshot: async () => snapshot() } } }, { ...KENCO, people: packetSeedFromInput(personInput).identity.people, threadId: 't-kenco' }).then((r) => r.packet);
+  const gen = (text: string) => vi.fn<(prompt: string, maxTokens?: number) => Promise<{ text: string; provider: string }>>(async () => ({ text, provider: 'test' }));
+  const WHY = 'My guess is Dave has laid out the 2027 roadmap already: Open Dock stays at the ungated sites, Birdseye covers the secure yards and Blue Yonder YMS pilots follow the WMS migration, so the end-of-October reconnect is about where a standard driver journey still adds production capacity across those yards.';
+  const STARTERS = ['Which sites move to Blue Yonder first, and how are drivers checked in there today?', 'Where does Birdseye hand off to the dock once a truck is inside the secure yards?'];
+  const answer = (over: Record<string, unknown> = {}) => JSON.stringify({ whyItMatters: WHY, accounts: ['Kenco Logistics'], roles: ['Vice President of Transportation Management'], people: [], starters: STARTERS, proposedAction: 'email', caveat: null, ...over });
+
+  it('C21: the prompt carries the systems on record with their class and date, the buyer words, the last exchange, the deal next step, the seller hypotheses as hypotheses and the gaps; the result carries the references, the revision and the gaps', async () => {
+    const w = ledgerDb({ accounts: ['Kenco Logistics'], personas: [] }, NOW);
+    const packet = await packetOf({ vaultDown: true });
+    const record = packetRecord(packet);
+    const buyerLabel = [...record.refs.entries()].find(([, c]) => c.sourceId === 'gmail:1a0aa7d3c587d944')![0];
+    const generate = gen(answer({ support: [{ text: WHY, refs: [buyerLabel], kind: 'fact' }, { text: STARTERS[0], refs: [buyerLabel], kind: 'fact' }, { text: STARTERS[1], refs: [buyerLabel], kind: 'inference' }] }));
+    const r = await developAngle(kencoTask(), { prisma: w.client(), now: NOW }, { generate, packet });
+    expect(r.ok).toBe(true);
+    if (!r.ok) return;
+    const prompt = generate.mock.calls[0][0];
+    expect(prompt).toContain('Systems on record at the account (never ask about these as if unknown): ');
+    expect(prompt).toMatch(/Open Dock \(Buyer said, Sep 16, 2026\)/);
+    expect(prompt).toMatch(/Blue Yonder \(Buyer said, Sep 16, 2026\)/);
+    expect(prompt).toContain(`[${buyerLabel}] Buyer said, Sep 16, 2026: ${DAVE_EMAIL}: We will keep Open Dock`);
+    expect(prompt).toContain('Last exchange: they last wrote Sep 16, 2026 ("Re: YardFlow and the 2027 roadmap"); we last wrote Oct 1, 2026: "Understood, I will reconnect at the end of October."');
+    expect(prompt).toContain("The deal's recorded next step: Reconnect at the end of October during 2027 budgeting.");
+    expect(prompt).toContain('What the seller thinks (hypotheses, not facts');
+    expect(prompt).toMatch(/Seller noted, Aug 7, 2026: Craig is bought in/);
+    expect(prompt).toContain('Not read (say so in the caveat when it matters): vault: could not be read (vault unreadable: vault not mounted)');
+    expect(prompt).not.toMatch(/\$98\.9M|Deck engagement|already emailed/);
+    expect(prompt).toContain('"support": [{"text"');
+    expect(r.result).toMatchObject({ contextRevision: packet.revision, contextGaps: ['vault: could not be read (vault unreadable: vault not mounted)', 'public: not configured'], inDeal: true, dealId: '62704698979' });
+    expect((r.result.incumbents as Array<{ name: string }>).map((i) => i.name.toLowerCase())).toEqual(expect.arrayContaining(['open dock', 'blue yonder', 'birdseye']));
+    const support = r.result.support as Array<{ where: string; kind: string; refs: Array<{ ref: string; sourceId: string; at: string | null; claimClass: string }> }>;
+    expect(support.map((s) => s.where)).toEqual(['whyItMatters', 'starter', 'starter']);
+    expect(support[0].refs[0]).toMatchObject({ ref: buyerLabel, sourceId: 'gmail:1a0aa7d3c587d944', claimClass: 'buyer_said', at: '2026-09-16T14:02:00.000Z' });
+    expect(support[2].kind).toBe('inference');
+    expect(r.result).not.toHaveProperty('support.0.text', undefined);
+  });
+
+  it('C22: an invented installed system is re-asked naming it, then refused; an unsupported buyer claim is refused unless labelled an inference; an unhedged pain with no record is refused; a supported July observation stays usable with its date; a label the record lacks is refused', async () => {
+    const w = ledgerDb({ accounts: ['Kenco Logistics'], personas: [] }, NOW);
+    const packet = await packetOf();
+    const record = packetRecord(packet);
+    const manhattan = gen(answer({ whyItMatters: WHY.replace('Open Dock', 'Manhattan') }));
+    const refused = await developAngle(kencoTask(), { prisma: w.client(), now: NOW }, { generate: manhattan, packet });
+    expect(refused).toMatchObject({ ok: false, reason: 'could_not_satisfy', detail: expect.stringMatching(/^invented_system manhattan: .* \(after 2 re-asks\)$/) });
+    expect(manhattan).toHaveBeenCalledTimes(MAX_ANGLE_CALLS);
+    expect(manhattan.mock.calls[1][0]).toContain('it names an installed system the record does not name (manhattan');
+    // A fixed second answer succeeds with calls 2.
+    const fixed = vi.fn<(prompt: string, maxTokens?: number) => Promise<{ text: string; provider: string }>>().mockResolvedValueOnce({ text: answer({ whyItMatters: WHY.replace('Open Dock', 'Manhattan') }), provider: 'test' }).mockResolvedValueOnce({ text: answer(), provider: 'test' });
+    expect(await developAngle(kencoTask(), { prisma: w.client(), now: NOW }, { generate: fixed, packet })).toMatchObject({ ok: true, result: { calls: 2 } });
+    // The pure validator: the buyer claim, the pain, the inference label, the historical observation, the unknown label.
+    const buyer = { whyItMatters: 'I suspect the timing is right. Dave wants a pilot in Allentown before the budget closes.', starters: STARTERS };
+    expect(validateAngleClaims(buyer, [], record.refs)).toMatchObject({ ok: false, reason: 'unsupported_buyer_claim', detail: 'Dave wants a pilot in Allentown before the budget closes.' });
+    expect(validateAngleClaims(buyer, [{ text: 'Dave wants a pilot in Allentown before the budget closes.', refs: [], kind: 'inference' }], record.refs)).toMatchObject({ ok: true, support: expect.arrayContaining([expect.objectContaining({ text: 'Dave wants a pilot in Allentown before the budget closes.', kind: 'inference', refs: [] })]) });
+    const pain = { whyItMatters: 'Their yards run on radios and clipboards. I suspect the reconnect is the moment to ask about the ungated sites and the gate.', starters: STARTERS };
+    expect(validateAngleClaims(pain, [], record.refs)).toMatchObject({ ok: false, reason: 'invented_pain', detail: 'Their yards run on radios and clipboards.' });
+    expect(validateAngleClaims({ ...pain, whyItMatters: pain.whyItMatters.replace('Their yards run on', 'My guess is their yards still run on') }, [], record.refs)).toMatchObject({ ok: true });
+    const julyLabel = [...record.refs.entries()].find(([, c]) => /open dock, we've got Terminal/.test(c.text))![0];
+    const july = validateAngleClaims({ whyItMatters: 'My guess is the July picture still holds. In July Dave said the stack was all over the place with no real consistency, and the September roadmap keeps Open Dock and Blue Yonder.', starters: STARTERS }, [{ text: 'In July Dave said the stack was all over the place with no real consistency, and the September roadmap keeps Open Dock and Blue Yonder.', refs: [julyLabel], kind: 'fact' }], record.refs);
+    expect(july).toMatchObject({ ok: true });
+    if (july.ok) expect(july.support[1].refs[0]).toMatchObject({ ref: julyLabel, at: '2026-07-16T00:00:00.000Z', claimClass: 'buyer_said', sourceId: 'vault:05_Meetings/2026-07-16 Kenco Logistics.md#Buyer words (verbatim)' });
+    expect(validateAngleClaims({ whyItMatters: WHY, starters: STARTERS }, [{ text: WHY, refs: ['K99'], kind: 'fact' }], record.refs)).toEqual({ ok: false, reason: 'unknown_ref', detail: 'K99' });
+    // C23 seed: the revision of what the Pursue carried moves with the CRM read and the message, not with the clock.
+    expect(seedRevision(personInput)).toBe(seedRevision({ ...personInput, decision: 'more', note: 'x' }));
+    expect(seedRevision(personInput)).not.toBe(seedRevision({ ...personInput, deals: [{ ...personInput.deals[0], nextStep: 'Send the phased proposal' }] }));
+    expect(seedRevision(personInput)).not.toBe(seedRevision({ ...personInput, accountName: null, resolvedVia: null }));
+    expect(seedRevision(personInput)).not.toBe(seedRevision({ ...personInput, lastWroteAt: '2026-10-07T10:00:00.000Z', inboundMessageId: 'm-oct7' }));
   });
 });
