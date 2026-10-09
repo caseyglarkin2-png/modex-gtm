@@ -176,6 +176,27 @@ async function main() {
     L.push('');
     L.push(`The HTML body is beside this receipt: ${HTML}.`);
     L.push('');
+    // IW14: the named checks of the integrated replay, each a PASS or FAIL in words (never a claim without the check).
+    const has = (s: string) => rendered.text.includes(s) && rendered.html.includes(s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'));
+    const peopleEmails = intel.people.map((p) => p.id.toLowerCase());
+    const overlayById = (producerItemId: string) => overlayRows.find((r) => String(r.metadata?.import?.producerItemId ?? '') === producerItemId);
+    const subzero = overlayById('2026-10-08#250520610151');
+    const worldMarket = overlayById('2026-10-08#252589576372');
+    const kodiak = overlayById('2026-10-09#1');
+    const checks: Array<[string, boolean, string]> = [
+      ['Kodiak: the development and the supervised-operation caveat are in the text and the HTML', has('A safety driver remains behind the wheel; truck count, frequency, customers, and performance are undisclosed.') && has('HIGH on the supervised operation; LOW on driverless timing and scale'), kodiak ? `row ${kodiak.id}, resolution ${kodiak.resolution}` : 'no Kodiak row'],
+      ['7-Eleven: the uncertainty survives in the overlay (what was not named)', !!overlayById('2026-10-09#2')?.metadata?.import?.text?.includes('No function, site, partner, budget, or deadline was named.'), overlayById('2026-10-09#2') ? `row ${overlayById('2026-10-09#2')!.id}` : 'no row'],
+      ['Sub-Zero: the engagement record carries contact 250520610151 and engagement 118262547717', !!subzero && JSON.stringify(subzero.metadata?.import?.sourceRecordIds ?? []).includes('118262547717'), subzero ? `row ${subzero.id}, account ${subzero.account_name ?? 'none'} (${subzero.resolution})` : 'no row'],
+      ['World Market: the record keeps "company association is not verified" and stays unresolved or ambiguous as the resolver says', !!worldMarket && String(worldMarket.metadata?.import?.uncertainty ?? '').includes('not verified'), worldMarket ? `row ${worldMarket.id}, account ${worldMarket.account_name ?? 'none'} (${worldMarket.resolution})` : 'no row'],
+      ['Southern Glazer\'s: the May out-of-office writer is not a prospect to reengage (availability, parked), and not an intelligence item', !peopleEmails.some((e) => /sgws\.com|southernglazers/.test(e)) && !rendered.text.toLowerCase().includes('southern glazer'), `people listed: ${peopleEmails.length}`],
+      ['Nothing imported became a plan item or an obligation', plan.items.every((it) => !it.key.startsWith('signal:')), `${plan.items.length} plan items`],
+      ['No production write', writes.filter((w) => !w.startsWith('systemConfig.')).length === 0, writes.length ? writes.join(', ') : 'none'],
+      ['Approval bindings untouched (no assignment, no approval row written)', !writes.some((w) => /gapAuditEvent|gapCompile|routingDecision/.test(w)), writes.join(', ') || 'none'],
+    ];
+    L.push('## Named checks (IW14)');
+    L.push('');
+    for (const [name, ok, detail] of checks) L.push(`- ${ok ? 'PASS' : 'FAIL'}: ${name} (${detail}).`);
+    L.push('');
     L.push('## Intercepted production writes (proof of read-only)');
     L.push('');
     L.push(writes.length ? writes.map((w) => `- ${w}`).join('\n') : '- none');

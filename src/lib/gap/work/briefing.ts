@@ -76,7 +76,7 @@ export interface BriefingIntel {
   people: IntelItem[];
   /** I05: what Casey pursued, with the angle when it is ready. */
   pursued?: PursuedItem[];
-  totals: { signals: number; triggers: number; people: number };
+  totals: { signals: number; triggers: number; people: number; reports?: number; knowledge?: number };
   angles: Record<string, { whyItMatters: string; starters: string[]; peopleNamed: Array<{ name: string | null; title: string | null }>; proposedAction: string }>;
   /** IW12/IW13: the producers' coverage in words (which sources were read and when; which were not), printed under the section head. */
   coverage?: { sources: string; unavailable: string | null } | null;
@@ -113,7 +113,7 @@ const EMPTY_DIGEST: Digest = { worth: [], people: [], omitted: 0, breakdown: { r
  * triggers, vault) until the digest is full; the email lists the sections in that order. No usefulness gate: an
  * omitted item is counted, listed on the Intelligence page, and rotates in.
  */
-export function composeDigest(intel: Pick<BriefingIntel, 'signals' | 'reports' | 'triggers' | 'people' | 'totals'>, opts: { sizes?: Partial<DigestSizes>; shownBefore?: ReadonlySet<string> } = {}): Digest {
+export function composeDigest(intel: Pick<BriefingIntel, 'signals' | 'reports' | 'knowledge' | 'triggers' | 'people' | 'totals'>, opts: { sizes?: Partial<DigestSizes>; shownBefore?: ReadonlySet<string> } = {}): Digest {
   const sizes: DigestSizes = { ...DEFAULT_DIGEST, ...(opts.sizes ?? {}), reserved: { ...DEFAULT_DIGEST.reserved, ...(opts.sizes?.reserved ?? {}) } };
   const seen = opts.shownBefore ?? new Set<string>();
   const order = (items: IntelItem[]) => [...items.filter((i) => !seen.has(i.key)), ...items.filter((i) => seen.has(i.key))];

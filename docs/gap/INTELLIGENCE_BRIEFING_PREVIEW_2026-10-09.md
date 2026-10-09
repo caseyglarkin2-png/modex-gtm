@@ -1,6 +1,6 @@
 # Intelligence briefing preview (intelligence wiring, October 9, 2026)
 
-STATUS: RECEIPT. Rendered 2026-10-09T22:33:40.736Z (2026-10-09 New York) in 12854 ms against production data, READ ONLY: the fixture's records were imported into an in-memory overlay (never the production table), the intelligence was read from the overlay and production together, and every production write was intercepted (listed at the end). Nothing was sent, drafted, enrolled, queued or stored. The plan is the stored day (revision 2, planned 2026-10-09T19:13:20.759Z); Gmail Sent is not read by this process.
+STATUS: RECEIPT. Rendered 2026-10-09T22:34:47.249Z (2026-10-09 New York) in 13646 ms against production data, READ ONLY: the fixture's records were imported into an in-memory overlay (never the production table), the intelligence was read from the overlay and production together, and every production write was intercepted (listed at the end). Nothing was sent, drafted, enrolled, queued or stored. The plan is the stored day (revision 2, planned 2026-10-09T19:13:20.759Z); Gmail Sent is not read by this process.
 
 ## The import (into the overlay)
 
@@ -140,10 +140,21 @@ Everything, with what is waiting and parked: https://modex-gtm.vercel.app/gap/
 
 To work from your inbox, reply with START and the first item arrives as its own email. Each item takes APPROVE, REVISE: your words, SKIP, DEFER, DONE: what happened, NEXT or HELP on the first line of your reply.
 
-Sent by GAP at 6:33 PM New York. This is an internal message to you; nothing in it went to a buyer.
+Sent by GAP at 6:34 PM New York. This is an internal message to you; nothing in it went to a buyer.
 ```
 
 The HTML body is beside this receipt: docs/gap/INTELLIGENCE_BRIEFING_PREVIEW_2026-10-09.html.
+
+## Named checks (IW14)
+
+- PASS: Kodiak: the development and the supervised-operation caveat are in the text and the HTML (row sig00055, resolution needs_account).
+- PASS: 7-Eleven: the uncertainty survives in the overlay (what was not named) (row sig00057).
+- PASS: Sub-Zero: the engagement record carries contact 250520610151 and engagement 118262547717 (row sig00313, account none (needs_account)).
+- PASS: World Market: the record keeps "company association is not verified" and stays unresolved or ambiguous as the resolver says (row sig00315, account none (needs_account)).
+- PASS: Southern Glazer's: the May out-of-office writer is not a prospect to reengage (availability, parked), and not an intelligence item (people listed: 8).
+- PASS: Nothing imported became a plan item or an obligation (12 plan items).
+- PASS: No production write (systemConfig.upsert).
+- PASS: Approval bindings untouched (no assignment, no approval row written) (systemConfig.upsert).
 
 ## Intercepted production writes (proof of read-only)
 
