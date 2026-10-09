@@ -79,6 +79,25 @@ export function parseAngle(text: string): Angle | null {
 
 export type AngleCheck = { ok: true } | { ok: false; reason: 'em_dash' | 'yard_singular' | 'product_named' | 'money_promised' | 'person_not_offered' | 'length'; detail?: string };
 
+/**
+ * A03 (2026-10-09): the first three production angles all failed `could_not_satisfy: yard_singular` (the model wrote
+ * "yard" alone despite the rule). A voice-rule break is fixable by the model: it gets ONE re-ask naming the break, then
+ * the refusal stands. At most two calls per task (both on the spend ledger); a person outside the roster is never re-asked.
+ */
+export const REASK_REASONS: ReadonlySet<string> = new Set(['em_dash', 'yard_singular', 'product_named', 'money_promised', 'length']);
+export const MAX_ANGLE_CALLS = 2;
+
+export function reaskLine(check: Exclude<AngleCheck, { ok: true }>): string {
+  switch (check.reason) {
+    case 'yard_singular': return 'it says "yard" in the singular somewhere in the prose (whyItMatters, starters or caveat); YardFlow copy always says "yards" (write "their yards", "yards and docks", never "the yard" or "yard routing")';
+    case 'em_dash': return 'it contains an em dash; use a comma or a period instead';
+    case 'product_named': return 'it names YardFlow or a product; name neither';
+    case 'money_promised': return 'it promises money, savings, a percentage or ROI; remove the number or the claim';
+    case 'length': return `"whyItMatters" is ${check.detail ?? 'the wrong length'}; it must be 15 to 120 words`;
+    default: return check.reason;
+  }
+}
+
 /** The rules every GAP text keeps; a person the roster did not offer is never named. */
 export function validateAngle(a: Angle, roster: ReadonlySet<number>): AngleCheck {
   const text = [a.whyItMatters, ...a.accounts, ...a.roles, ...a.starters, a.caveat ?? ''].join(' ');
@@ -156,13 +175,32 @@ export async function developAngle(task: ClaimedTask, ctx: { prisma: PrismaLike;
 
   const sourceLine = sourceLineFor({ source: str(input.source), url: str(input.url), publishedAt: str(input.publishedAt), observedAt: str(input.lastWroteAt) ?? str(input.observedAt) }, now);
   const prompt = buildAnglePrompt({ title, sourceLine, accountName, accountHint, categories, note: str(input.note), person, roster, theses, recent, candidateAccounts, decision: str(input.decision) ?? task.request });
-  const out = await (deps.generate ?? ((p: string, m?: number) => gapGenerate(ctx.prisma, { prompt: p, maxTokens: m ?? MAX_TOKENS, tier: task.input && (task.input as Record<string, unknown>).decision === 'more' ? 'strong' : 'routine', task: { id: task.id, kind: task.kind, itemKey: task.itemKey }, now: ctx.now })))(prompt, MAX_TOKENS);
-  const angle = parseAngle(out.text);
+  const generate = deps.generate ?? ((p: string, m?: number) => gapGenerate(ctx.prisma, { prompt: p, maxTokens: m ?? MAX_TOKENS, tier: task.input && (task.input as Record<string, unknown>).decision === 'more' ? 'strong' : 'routine', task: { id: task.id, kind: task.kind, itemKey: task.itemKey }, now: ctx.now }));
+  const rosterIds = new Set(roster.map((p) => p.id));
+  let out = await generate(prompt, MAX_TOKENS);
+  let angle = parseAngle(out.text);
   if (!angle) return { ok: false, reason: 'could_not_satisfy', detail: 'the model returned something that is not a usable angle' };
-  const check = validateAngle(angle, new Set(roster.map((p) => p.id)));
-  if (!check.ok) return { ok: false, reason: 'could_not_satisfy', detail: `${check.reason}${check.detail ? ` ${check.detail}` : ''}` };
+  let check = validateAngle(angle, rosterIds);
+  let calls = 1;
+  if (!check.ok && REASK_REASONS.has(check.reason) && calls < MAX_ANGLE_CALLS) {
+    // A03: one re-ask naming the break, with the rejected answer; the refusal stands if it breaks a rule again.
+    const again = await generate(`${prompt}
+
+Your previous answer was rejected by the checker: ${reaskLine(check)}. Fix only that and answer again with the complete JSON object.
+
+Previous answer:
+${out.text.slice(0, 3000)}`, MAX_TOKENS);
+    calls += 1;
+    const fixed = parseAngle(again.text);
+    if (fixed) {
+      out = again;
+      angle = fixed;
+      check = validateAngle(fixed, rosterIds);
+    }
+  }
+  if (!check.ok) return { ok: false, reason: 'could_not_satisfy', detail: `${check.reason}${check.detail ? ` ${check.detail}` : ''}${calls > 1 ? ' (after one re-ask)' : ''}` };
   const peopleNamed = angle.people.map((id) => roster.find((p) => p.id === id)).filter((p): p is { id: number; name: string | null; title: string | null } => !!p).map((p) => ({ personaId: p.id, name: p.name, title: p.title }));
-  const result: Omit<PreparedAngle, 'taskId' | 'preparedAt'> & { provider: string } = { key: task.itemKey, title, accountName, accountHint, sourceLine, ...angle, peopleNamed, provider: out.provider };
+  const result: Omit<PreparedAngle, 'taskId' | 'preparedAt'> & { provider: string; calls: number } = { key: task.itemKey, title, accountName, accountHint, sourceLine, ...angle, peopleNamed, provider: out.provider, calls };
   return { ok: true, result };
 }
 

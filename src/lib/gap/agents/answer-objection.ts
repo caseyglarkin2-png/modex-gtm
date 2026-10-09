@@ -13,6 +13,7 @@
  * sibling), read from the task's own result: no second record.
  */
 import { gapGenerate } from '../ai/spend';
+import { MAX_ANGLE_CALLS, REASK_REASONS } from './develop-angle';
 import { HEDGE_TOKENS } from '../taxonomy';
 import { nyDay } from '../work/dates';
 import { listAgentTasks, queueAgentTask, type ClaimedTask, type HandlerResult } from './tasks';
@@ -61,6 +62,17 @@ export function parseObjectionAnswer(text: string): ObjectionAnswer | null {
 }
 
 export type ObjectionCheck = { ok: true; factsUsed: string[] } | { ok: false; reason: 'unknown_fact' | 'product_named' | 'money_promised' | 'em_dash' | 'yard_singular' | 'length'; detail?: string };
+
+function objectionReaskLine(check: Exclude<ObjectionCheck, { ok: true }>): string {
+  switch (check.reason) {
+    case 'yard_singular': return 'it says "yard" in the singular; YardFlow copy always says "yards" (write "their yards", never "the yard")';
+    case 'em_dash': return 'it contains an em dash; use a comma or a period instead';
+    case 'product_named': return 'it names YardFlow or a product; name neither';
+    case 'money_promised': return 'it promises money, savings, a percentage or ROI; remove the number or the claim';
+    case 'length': return `the answer is ${check.detail ?? 'the wrong length'}`;
+    default: return check.reason;
+  }
+}
 
 /** The copy rules a talking point must still keep (it is said out loud, so it carries the same truth bar). */
 export function validateObjectionAnswer(a: ObjectionAnswer, factIds: ReadonlySet<string>): ObjectionCheck {
@@ -140,11 +152,29 @@ export async function answerObjection(task: ClaimedTask, ctx: { prisma: PrismaLi
     problemHypothesis: String(hypothesis?.problem_hypothesis ?? ''),
     whatANoMeans: typeof hypothesis?.what_a_no_means === 'string' && hypothesis.what_a_no_means.trim() ? hypothesis.what_a_no_means.trim() : null,
   });
-  const out = await (deps.generate ?? ((p: string, m?: number) => gapGenerate(ctx.prisma, { prompt: p, maxTokens: m ?? MAX_TOKENS, tier: 'routine', task: { id: task.id, kind: task.kind, itemKey: task.itemKey }, now: ctx.now })))(prompt, MAX_TOKENS);
-  const candidate = parseObjectionAnswer(out.text);
+  const generate = deps.generate ?? ((p: string, m?: number) => gapGenerate(ctx.prisma, { prompt: p, maxTokens: m ?? MAX_TOKENS, tier: 'routine', task: { id: task.id, kind: task.kind, itemKey: task.itemKey }, now: ctx.now }));
+  let out = await generate(prompt, MAX_TOKENS);
+  let candidate = parseObjectionAnswer(out.text);
   if (!candidate) return { ok: false, reason: 'could_not_satisfy', detail: 'the model returned something that is not a usable talking point' };
-  const check = validateObjectionAnswer(candidate, factIds);
-  if (!check.ok) return { ok: false, reason: 'could_not_satisfy', detail: `${check.reason}${check.detail ? ` ${check.detail}` : ''}` };
+  let check = validateObjectionAnswer(candidate, factIds);
+  let calls = 1;
+  if (!check.ok && REASK_REASONS.has(check.reason) && calls < MAX_ANGLE_CALLS) {
+    // A03: one re-ask naming the voice-rule break (the angle task's rule), then the refusal stands.
+    const again = await generate(`${prompt}
+
+Your previous answer was rejected by the checker: ${objectionReaskLine(check)}. Fix only that and answer again with the complete JSON object.
+
+Previous answer:
+${out.text.slice(0, 3000)}`, MAX_TOKENS);
+    calls += 1;
+    const fixed = parseObjectionAnswer(again.text);
+    if (fixed) {
+      out = again;
+      candidate = fixed;
+      check = validateObjectionAnswer(fixed, factIds);
+    }
+  }
+  if (!check.ok) return { ok: false, reason: 'could_not_satisfy', detail: `${check.reason}${check.detail ? ` ${check.detail}` : ''}${calls > 1 ? ' (after one re-ask)' : ''}` };
   return {
     ok: true,
     result: { dispositionId, accountName: d.account_name, personaId: typeof d.persona_id === 'number' ? d.persona_id : null, hypothesisId: hypothesis?.id ?? null, objection, answer: candidate.answer, question: candidate.question, factsUsed: check.factsUsed, provider: out.provider },

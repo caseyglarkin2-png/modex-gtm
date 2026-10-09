@@ -176,7 +176,8 @@ export const MODEL_PERMANENT = new Set(['billing', 'authentication', 'model_miss
 function model(i: HealthInputs['model']): HealthComponent {
   const base = { key: 'model' as const, name: 'Model route and spend' };
   if (!i) return { ...base, state: 'HEALTHY', label: 'Model spend not read', detail: 'The spend ledger was not read this time.' };
-  const usd = (n: number) => `$${n.toFixed(2)}`;
+  // A real but tiny spend is shown as such, never rounded to nothing (three calls at $0.0002 each are not $0.00).
+  const usd = (n: number) => (n > 0 && n < 0.01 ? `$${n.toFixed(4)}` : `$${n.toFixed(2)}`);
   const pct = i.ceilingUsd > 0 ? Math.round((i.monthUsd / i.ceilingUsd) * 100) : 0;
   const detail = `${usd(i.monthUsd)} of ${usd(i.ceilingUsd)} for ${i.label} (${pct}%): ${i.calls} call${i.calls === 1 ? '' : 's'}, ${i.failed} failed, ${i.refused} refused, ${i.inFlight} in flight${i.lastCall ? `; last call ${i.lastCall.outcome}${i.lastCall.model ? ` on ${i.lastCall.model}` : ''}${i.lastCall.errorCategory ? ` (${i.lastCall.errorCategory})` : ''} at ${i.lastCall.at}` : '; no call this month'}.`;
   if (i.lastCall && i.lastCall.outcome === 'failed' && i.lastCall.errorCategory && MODEL_PERMANENT.has(i.lastCall.errorCategory)) return { ...base, state: 'BLOCKED', label: `No funded model route · the last call failed (${i.lastCall.errorCategory})`, detail };

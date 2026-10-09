@@ -23,6 +23,9 @@
  *   EVENT / STATE      otherwise the type's window from the fact's own date: a one-day event is stale after it.
  *
  * Undated is never current. Nothing here reads the clock: `now` is passed in.
+ *
+ * I06 (2026-10-08): currentness is the LABEL; `factUsability` below is what the gates read, and age alone never
+ * disqualifies a fact there.
  */
 import { SIGNAL_TTL_DAYS } from '../signals/freshness';
 
@@ -115,9 +118,50 @@ export function factCurrentness(f: CurrentnessFact, now: Date): Currentness {
   return bounded({ current: until.getTime() > now.getTime(), until: until.toISOString(), basis: effective ? 'effective_date' : 'type_window' });
 }
 
-/** The boolean every gate reads. */
+/** Whether the fact is CURRENT (inside its window): a label from here on, never a gate (I06). */
 export function isCurrentFact(f: CurrentnessFact, now: Date): boolean {
   return factCurrentness(f, now).current;
+}
+
+export type UsabilityReason = 'ended' | 'closed' | 'undated' | 'superseded';
+
+export interface Usability {
+  /** May this fact support a thesis and an approved outreach strategy? Age alone never says no. */
+  usable: boolean;
+  /** Usable but past its window: cite it with its date, never as today's news. */
+  historical: boolean;
+  reason: UsabilityReason | null;
+  currentness: Currentness;
+}
+
+/**
+ * I06 (the prospecting-first course correction, 2026-10-08): signal AGE is never an automatic disqualification.
+ * A fact is unusable only for a reason that is not the calendar: a newer source says the program ENDED, a notice
+ * CLOSED on its stated due date (a closed RFP is not an opening), it is UNDATED (it cannot be cited with its date),
+ * or research marked it SUPERSEDED. Otherwise it is usable; past its window it is HISTORICAL and must be cited with
+ * its date. Every gate on the path (approval, activation, routing, enrollment, the compiler, the send gate) reads
+ * `isUsableFact`; `isCurrentFact` and `currentnessLine` remain the chronological label beside it.
+ */
+export function factUsability(f: CurrentnessFact, now: Date): Usability {
+  const currentness = factCurrentness(f, now);
+  const superseded = isObj(f.metadata) && f.metadata.superseded === true;
+  if (superseded) return { usable: false, historical: !currentness.current, reason: 'superseded', currentness };
+  if (currentness.basis === 'ended' || currentness.basis === 'closed' || currentness.basis === 'undated') return { usable: false, historical: !currentness.current, reason: currentness.basis, currentness };
+  return { usable: true, historical: !currentness.current, reason: null, currentness };
+}
+
+/** The boolean every gate reads (I06). */
+export function isUsableFact(f: CurrentnessFact, now: Date): boolean {
+  return factUsability(f, now).usable;
+}
+
+/** The seller words for usability: why a fact cannot carry a thesis, or that it is historical and how to cite it. */
+export function usabilityLine(u: Usability, f?: CurrentnessFact): string {
+  if (u.reason === 'superseded') return 'Research marked this fact superseded by a newer one: it is not quoted.';
+  if (u.reason) return currentnessLine(u.currentness);
+  if (!u.historical) return currentnessLine(u.currentness);
+  const observed = f ? toDate(f.observed_at) : null;
+  return `A historical observation${observed ? ` from ${dayLabel(observed.toISOString())}` : ''} (its window ran until ${dayLabel(u.currentness.until!)}): it can carry a thesis, and the copy must say the date.`;
 }
 
 /** The last second of a calendar day in New York: 23:59:59 EST, or 23:59:59 EDT when daylight time is on. */
@@ -135,7 +179,8 @@ export function currentnessLine(c: Currentness): string {
   if (c.basis === 'undated') return 'Undated: not a story for a first touch.';
   if (c.basis === 'closed') return `This notice closed on ${dayLabel(c.until!)}: not a story for a first touch.`;
   if (c.current) return `Current until ${dayLabel(c.until!)}${c.basis === 'effective_date' ? ' (the change takes effect later)' : ''}.`;
-  return `This story is too old for a first touch: it was current until ${dayLabel(c.until!)}.`;
+  // I06: past the window is a label, not a refusal; the copy says the date.
+  return `A historical observation: it was current until ${dayLabel(c.until!)}. Cite it with its date.`;
 }
 
 /** The fields every currentness reader must select on a prospecting signal. */

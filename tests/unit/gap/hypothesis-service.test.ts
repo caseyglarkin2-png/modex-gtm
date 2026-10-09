@@ -579,7 +579,7 @@ describe('transitionHypothesis', () => {
     expect(await transitionHypothesis(prisma, 'H1', 'approve', { now: NOW, actor: 'casey' }, deps)).toEqual({ ok: false, reason: 'evidence_insufficient' });
   });
 
-  it('activate sets activated_at and expires_at to the earliest signal expiry', async () => {
+  it('activate sets activated_at and, since I06, no expires_at', async () => {
     prisma.prospectingHypothesis.findUnique.mockResolvedValue(row({ status: 'approved', reviewed_by: 'casey' }));
     prisma.tx.prospectingHypothesis.updateMany.mockImplementation(updateManyAgainst('approved'));
 
@@ -592,7 +592,8 @@ describe('transitionHypothesis', () => {
     });
     expect(prisma.tx.prospectingHypothesis.updateMany).toHaveBeenCalledWith({
       where: { id: 'H1', status: 'approved' },
-      data: { status: 'active', activated_at: NOW, expires_at: FUTURE_B },
+      // I06: no calendar expiry is written on activation.
+      data: { status: 'active', activated_at: NOW, expires_at: null },
     });
     expect(auditSpy.mock.calls[0][1]).toMatchObject({ kind: 'hypothesis.activated' });
   });

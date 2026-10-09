@@ -74,15 +74,25 @@ describe('X16d: the task', () => {
 
   it('garbage from the model, or a talking point that breaks a rule, is could_not_satisfy and final; an unconfirmed or missing disposition is refused', async () => {
     const w = world();
+    // A03: a voice-rule break is re-asked once; a second break stands.
+    const singular = JSON.stringify({ ...JSON.parse(GOOD), answer: JSON.parse(GOOD).answer.replace('when the yards fill up', 'when the yard fills up') });
+    w.generate.mockResolvedValueOnce({ text: singular, provider: 'test' }).mockResolvedValueOnce({ text: GOOD, provider: 'test' });
+    const reasked = await answerObjection(w.task(), { prisma: w.c, now: NOW }, w.deps);
+    expect(reasked.ok).toBe(true);
+    expect(w.generate.mock.calls[w.generate.mock.calls.length - 1][0]).toContain('rejected by the checker: it says "yard" in the singular');
+    w.generate.mockResolvedValueOnce({ text: singular, provider: 'test' }).mockResolvedValueOnce({ text: singular, provider: 'test' });
+    expect(await answerObjection(w.task(), { prisma: w.c, now: NOW }, w.deps)).toEqual({ ok: false, reason: 'could_not_satisfy', detail: 'yard_singular (after one re-ask)' });
     w.generate.mockResolvedValueOnce({ text: 'I cannot help with that.', provider: 'test' });
     expect(await answerObjection(w.task(), { prisma: w.c, now: NOW }, w.deps)).toMatchObject({ ok: false, reason: 'could_not_satisfy' });
-    w.generate.mockResolvedValueOnce({ text: JSON.stringify({ answer: 'YardFlow fixes that for the yards across every site we have seen so far, honestly, and it does it in a week or two at most without any trouble.', question: 'Would you like a demo?' }), provider: 'test' });
+    const named = { text: JSON.stringify({ answer: 'YardFlow fixes that for the yards across every site we have seen so far, honestly, and it does it in a week or two at most without any trouble.', question: 'Would you like a demo?' }), provider: 'test' };
+    // A03: a product name is re-asked once; named twice, the refusal stands.
+    w.generate.mockResolvedValueOnce(named).mockResolvedValueOnce(named);
     expect(await answerObjection(w.task(), { prisma: w.c, now: NOW }, w.deps)).toMatchObject({ ok: false, reason: 'could_not_satisfy', detail: expect.stringContaining('product_named') });
     const q = await queueObjectionTask(w.c, { dispositionId: 'D1', accountName: 'PepsiCo', personaId: 7, contactEmail: 'karen@pepsico.com', hypothesisId: 'hyp-1', objection: 'We already run a YMS.', buyerLanguage: null, actor: 'x', now: NOW });
     w.generate.mockResolvedValueOnce({ text: 'nope', provider: 'test' });
     await runAgentTasks(w.c, { now: new Date(NOW.getTime() + 1000), max: 5, claimer: 'test', handlers: { answer_objection: (t, ctx) => answerObjection(t, ctx, w.deps) } });
     expect(await loadAgentTask(w.c, q.id)).toMatchObject({ status: 'failed', final: true });
-    expect(w.generate).toHaveBeenCalledTimes(3);
+    expect(w.generate).toHaveBeenCalledTimes(8); // A03: two re-asked pairs, one garbage, one product pair, one nope
     const unconfirmed = world({ confirmed: false });
     expect(await answerObjection(unconfirmed.task(), { prisma: unconfirmed.c, now: NOW }, unconfirmed.deps)).toMatchObject({ ok: false, reason: 'not_confirmed' });
     expect(await answerObjection(w.task({ itemKey: 'objection:D9' }), { prisma: w.c, now: NOW }, w.deps)).toMatchObject({ ok: false, reason: 'disposition_not_found' });

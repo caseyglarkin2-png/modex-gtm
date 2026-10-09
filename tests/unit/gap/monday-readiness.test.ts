@@ -103,7 +103,9 @@ describe('1-4. actionability is server-derived from the canonical evidence gate'
   it('distinguishes no_evidence and evidence_expired from insufficient', () => {
     expect(outreachReadiness({ observation: KW_OBS, account_name: 'PepsiCo', signals: [{ ...KW, evidence_url: null }] }, NOW).reason).toBe('no_evidence');
     const obs = FACT_OBS;
-    expect(outreachReadiness({ observation: obs, account_name: 'PepsiCo', signals: [{ ...FACT, freshness_expires_at: new Date('2026-09-01') }] }, NOW)).toEqual({ ready: false, reason: 'evidence_expired' });
+    // I06: a fact past its window is READY (the copy says its date); only a fact that ended, closed, is undated or superseded is evidence_expired.
+    expect(outreachReadiness({ observation: obs, account_name: 'PepsiCo', signals: [{ ...FACT, freshness_expires_at: new Date('2026-09-01') }] }, NOW)).toEqual({ ready: true, reason: null });
+    expect(outreachReadiness({ observation: obs, account_name: 'PepsiCo', signals: [{ ...FACT, metadata: { ...(FACT.metadata as Record<string, unknown>), superseded: true } }] }, NOW)).toEqual({ ready: false, reason: 'evidence_expired' });
   });
 
   it('the group card carries readiness and per-person next steps; insufficient is RESEARCH, not REVIEW', async () => {
@@ -222,11 +224,11 @@ describe('5-7, 9. USE THIS VERIFIED EVIDENCE', () => {
     expect(propose).not.toHaveBeenCalled();
   });
 
-  it('7. an expired fact is refused', async () => {
-    const prisma = db(PEP5(), [KW, IRRELEVANT, { ...FACT, freshness_expires_at: new Date('2026-09-01') }]);
+  it('7. an ENDED fact is refused by name; a fact past its window is not (I06)', async () => {
+    const prisma = db(PEP5(), [KW, IRRELEVANT, { ...FACT, freshness_expires_at: new Date('2026-09-01'), metadata: { ...(FACT.metadata as Record<string, unknown>), continuity: { kind: 'ended' } } }]);
     const fp = (await loadThesisGroups(prisma, {}, { now: NOW }))[0].fingerprint;
     const r = await useEvidenceForThesis(prisma, { fingerprint: fp, hypothesisIds: ['a1'], signalIds: ['fact'], actor: 'c', now: NOW }, { propose: vi.fn() as any });
-    expect(r.reason).toBe('not_verified_evidence:fact:expired');
+    expect(r.reason).toMatch(/^not_verified_evidence:fact:(ended|superseded)$/);
   });
 });
 

@@ -163,6 +163,7 @@ describe('X20a: the briefing and agent-task crons on health', () => {
   it('A02 the model route: spend under the warning is healthy with the figure; past the warning fraction is degraded; at the ceiling is blocked; a last call that failed on billing, authentication, a missing model or configuration is blocked with the reason; a refused last call is degraded; an unread ledger is said', () => {
     const base = healthy();
     expect(comp(base, 'model')).toMatchObject({ state: 'HEALTHY', label: 'Model spend $0.42 of $25.00 for September' });
+    expect(comp({ ...base, model: { ...base.model!, monthUsd: 0.0006 } }, 'model')).toMatchObject({ state: 'HEALTHY', label: 'Model spend $0.0006 of $25.00 for September' });
     expect(comp({ ...base, model: { ...base.model!, monthUsd: 20.5 } }, 'model')).toMatchObject({ state: 'DEGRADED', label: 'Model spend $20.50 of $25.00 for September (82%)', owner: 'Casey' });
     expect(comp({ ...base, model: { ...base.model!, monthUsd: 25.01 } }, 'model')).toMatchObject({ state: 'BLOCKED', label: 'Model ceiling reached · $25.01 of $25.00 for September', retry: expect.stringContaining('GAP_AI_MONTHLY_CEILING_USD') });
     for (const reason of ['billing', 'authentication', 'model_missing', 'configuration']) {

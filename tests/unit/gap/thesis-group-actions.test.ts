@@ -159,11 +159,13 @@ describe('FIND CORROBORATING EVIDENCE: once per thesis', () => {
     expect(run).toHaveBeenCalledTimes(1);
   });
 
-  it('NO SECOND SOURCE when nothing fresh and new is found; CONTRADICTS on a conflict', async () => {
+  it('NO SECOND SOURCE when nothing new is found (I06: an older second source still corroborates; it is dated when cited); CONTRADICTS on a conflict', async () => {
     const { prisma } = db(PEP());
     const fp = (await loadThesisGroups(prisma))[0].fingerprint;
-    const none = vi.fn(async () => ({ runId: 'r2', outcome: 'insufficient_evidence' as const, facts: [fact('old', 'https://x.example/a', 'PepsiCo closed a plant years ago in Ohio for good.', false)], rejected: [], conflicts: [], notes: [] }));
+    const none = vi.fn(async () => ({ runId: 'r2', outcome: 'insufficient_evidence' as const, facts: [], rejected: [], conflicts: [], notes: [] }));
     expect(await corroborateThesis(prisma, { fingerprint: fp, actor: 'c', now: NOW, force: true }, { run: none as any })).toMatchObject({ outcome: 'no_second_source', newIndependent: [] });
+    const older = vi.fn(async () => ({ runId: 'r2b', outcome: 'insufficient_evidence' as const, facts: [fact('old', 'https://x.example/a', 'PepsiCo closed a plant years ago in Ohio for good.', false)], rejected: [], conflicts: [], notes: [] }));
+    expect(await corroborateThesis(prisma, { fingerprint: fp, actor: 'c', now: NOW, force: true }, { run: older as any })).not.toMatchObject({ outcome: 'no_second_source' });
     const conflict = vi.fn(async () => ({ runId: 'r3', outcome: 'conflicting_evidence' as const, facts: [], rejected: [], conflicts: [{ site: 'Monroe', signalIds: ['a', 'b'] }], notes: [] }));
     expect(await corroborateThesis(prisma, { fingerprint: fp, actor: 'c', now: NOW, force: true }, { run: conflict as any })).toMatchObject({ outcome: 'contradicts' });
   });

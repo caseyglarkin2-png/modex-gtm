@@ -355,7 +355,8 @@ describe('buildCandidates: scoring and expiry', () => {
   });
 
   it('expiresAt equals the earliest linked signal expiry', () => {
-    expect(siteOpsHiddenCapacity().expiresAt).toEqual(daysAhead(10));
+    // I06: no calendar expiry on a candidate.
+    expect(siteOpsHiddenCapacity().expiresAt).toBeNull();
   });
 
   it('records the builder and the family hits in provenance', () => {

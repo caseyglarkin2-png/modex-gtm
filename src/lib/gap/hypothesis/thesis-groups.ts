@@ -20,7 +20,7 @@ import { groupSiblings, REVIEWABLE_STATUSES, thesisFingerprint, type ThesisGroup
 import { actionabilityOf, EVIDENCE_REFUSALS, outreachReadiness, type ActionSignal, type NextStep, type ReadinessReason } from './actionability';
 import { evidenceDepth, originKeyOf, type DepthSignal, type EvidenceDepth } from '../research/depth';
 import { GATE_SIGNAL_SELECT, outreachFactRefusal, sendableEvidence } from '../research/evidence-gate';
-import { isCurrentFact } from '../research/currentness';
+import { factUsability, isUsableFact } from '../research/currentness';
 import { citedQuote } from '../research/propose';
 import { runEvidenceResearch, type ResearchDeps, type ResearchResult } from '../research/run';
 
@@ -335,7 +335,9 @@ export async function useEvidenceForThesis(
     if (!s) return { ok: false, reason: `unknown_signal:${id}`, results: [] };
     const why = outreachFactRefusal(s, group.accountName);
     if (why) return { ok: false, reason: `not_verified_evidence:${id}:${why}`, results: [] };
-    if (!isCurrentFact(s, input.now)) return { ok: false, reason: `not_verified_evidence:${id}:expired`, results: [] };
+    // I06: age never refuses; ended, closed, undated or superseded does, by name.
+    const standing = factUsability(s, input.now);
+    if (!standing.usable) return { ok: false, reason: `not_verified_evidence:${id}:${standing.reason}`, results: [] };
     facts.push(s);
   }
   if (facts.length === 0) return { ok: false, reason: 'no_signals', results: [] };
@@ -559,9 +561,9 @@ export async function corroborateThesis(
     // it as a repeated origin would report "no verified fact" when one was found. Offer every fresh,
     // not-yet-linked fact that passes the outreach gate (the only facts use_evidence accepts).
     const linked = new Set(group.members.flatMap((m) => m.signalIds));
-    const candidates = research.facts.filter((f) => f.fresh && !linked.has(f.signalId));
+    const candidates = research.facts.filter((f) => !linked.has(f.signalId));
     const rows: any[] = candidates.length ? await prisma.prospectingSignal.findMany({ where: { id: { in: candidates.map((f) => f.signalId) } }, select: SIGNAL_SELECT }) : [];
-    const gate = new Map(rows.map((s) => [s.id, outreachFactRefusal(s, group.accountName) === null && isCurrentFact(s, input.now)]));
+    const gate = new Map(rows.map((s) => [s.id, outreachFactRefusal(s, group.accountName) === null && isUsableFact(s, input.now)]));
     newIndependent = candidates.filter((f) => gate.get(f.signalId) === true);
   }
   const outcome: CorroborationOutcome = research.conflicts.length > 0 ? 'contradicts' : newIndependent.length > 0 ? 'corroborated' : research.outcome === 'provider_unavailable' ? 'search_unavailable' : 'no_second_source';

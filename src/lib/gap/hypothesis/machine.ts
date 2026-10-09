@@ -48,6 +48,12 @@ export interface LinkedSignal {
    * snapshot loader; absent reads as false. A keyword hit is never one.
    */
   outreachFact?: boolean;
+  /**
+   * I06 (2026-10-08): may the fact support a thesis at all? False only for a reason that is not the calendar (ended
+   * by a newer source, closed on its due date, undated, superseded), judged by research/currentness.ts
+   * `isUsableFact` in the snapshot loader. Absent reads as usable: age alone never disqualifies.
+   */
+  usable?: boolean;
   expiresAt: Date | null;
 }
 
@@ -115,24 +121,19 @@ export const LEGAL_TRANSITIONS: readonly LegalTransition[] = [
 ];
 
 export const DEFAULT_EXPIRY_DAYS = 45;
-const DAY_MS = 24 * 60 * 60 * 1000;
 
 export function isTerminalStatus(status: HypothesisStatus): boolean {
   return (HYPOTHESIS_TERMINAL_STATUSES as readonly string[]).includes(status);
 }
 
-/** The earliest linked-signal expiry, or `now` plus 45 days when no signal carries one. */
-export function expiresAtFor(linkedSignals: readonly LinkedSignal[], now: Date): Date {
-  let min: Date | null = null;
-  for (const signal of linkedSignals) {
-    if (signal.expiresAt === null) continue;
-    if (min === null || signal.expiresAt.getTime() < min.getTime()) {
-      min = signal.expiresAt;
-    }
-  }
-  return min === null
-    ? new Date(now.getTime() + DEFAULT_EXPIRY_DAYS * DAY_MS)
-    : new Date(min.getTime());
+/**
+ * I06 (2026-10-08): a thesis no longer expires on the calendar. Its expiry used to be the earliest linked-signal
+ * expiry (or 45 days), which was signal age as an automatic disqualification; a fact's usability is judged by its
+ * content (ended, closed, undated, superseded), never by the clock. Null: no expiry. Rows that carry a date from
+ * before this change keep it (the sweep still reads it); nothing new is written.
+ */
+export function expiresAtFor(): Date | null {
+  return null;
 }
 
 // ---------------------------------------------------------------------------
@@ -143,15 +144,19 @@ function nonBlank(value: string | null | undefined): value is string {
   return typeof value === 'string' && value.trim().length > 0;
 }
 
+/** The clock helper the explicit `expire` action still reads for rows that carry a date from before I06; no guard on the way to approval, activation or use reads it. */
 function isExpired(expiresAt: Date | null, now: Date): boolean {
   return expiresAt !== null && expiresAt.getTime() <= now.getTime();
 }
 
-/** `null` when live evidence exists, else the refusal reason. */
-function evidenceGuard(snapshot: HypothesisSnapshot, now: Date): 'no_evidence' | 'evidence_expired' | null {
+/** I06: a fact is usable unless the loader judged it ended, closed, undated or superseded; age never counts. */
+const usable = (signal: LinkedSignal): boolean => signal.usable !== false;
+
+/** `null` when usable evidence exists, else the refusal reason (`evidence_expired` now means ended, closed, undated or superseded). */
+function evidenceGuard(snapshot: HypothesisSnapshot): 'no_evidence' | 'evidence_expired' | null {
   const evidenced = snapshot.linkedSignals.filter((signal) => signal.hasEvidence);
   if (evidenced.length === 0) return 'no_evidence';
-  if (!evidenced.some((signal) => !isExpired(signal.expiresAt, now))) return 'evidence_expired';
+  if (!evidenced.some(usable)) return 'evidence_expired';
   return null;
 }
 
@@ -160,11 +165,12 @@ function evidenceGuard(snapshot: HypothesisSnapshot, now: Date): 'no_evidence' |
  * Evidence GAP itself rates INSUFFICIENT (keyword hits, operator hearsay,
  * unverified or irrelevant sentences) can inform research, never use.
  */
-function outreachFactGuard(snapshot: HypothesisSnapshot, now: Date): 'evidence_insufficient' | 'opener_too_long' | null {
+function outreachFactGuard(snapshot: HypothesisSnapshot): 'evidence_insufficient' | 'opener_too_long' | null {
   // Final Monday P1: an opener quoting more than the compiler lets one first
   // touch carry can never pass Send. It is never approved or put in use.
   if (!openerFits(snapshot.observation)) return 'opener_too_long';
-  const live = (signal: LinkedSignal) => signal.outreachFact === true && !isExpired(signal.expiresAt, now);
+  // I06: a usable outreach fact, whatever its age (the copy states the date).
+  const live = (signal: LinkedSignal) => signal.outreachFact === true && usable(signal);
   if (!snapshot.linkedSignals.some(live)) return 'evidence_insufficient';
   // Release C review SF1: the observation is the sentence the buyer reads.
   // Every signal it cites must itself be a live outreach fact; a fact linked
@@ -218,13 +224,13 @@ function submitGuard(snapshot: HypothesisSnapshot): string | null {
   return null;
 }
 
-function activateGuard(snapshot: HypothesisSnapshot, now: Date): string | null {
+function activateGuard(snapshot: HypothesisSnapshot): string | null {
   const narrative = submitGuard(snapshot);
   if (narrative) return narrative;
   if (!nonBlank(snapshot.reviewedBy)) return 'not_reviewed';
-  const evidence = evidenceGuard(snapshot, now);
+  const evidence = evidenceGuard(snapshot);
   if (evidence) return evidence;
-  const fact = outreachFactGuard(snapshot, now);
+  const fact = outreachFactGuard(snapshot);
   if (fact) return fact;
   if (snapshot.primaryPersonaId === null) return 'no_persona';
   if (snapshot.personaSuppressed) return 'suppressed';
@@ -275,15 +281,15 @@ export function transition(
     const narrative = submitGuard(snapshot);
     if (narrative) return refuse(narrative);
     if (!nonBlank(ctx.actor)) return refuse('no_actor');
-    const evidence = evidenceGuard(snapshot, ctx.now);
+    const evidence = evidenceGuard(snapshot);
     if (evidence) return refuse(evidence);
-    const fact = outreachFactGuard(snapshot, ctx.now);
+    const fact = outreachFactGuard(snapshot);
     if (fact) return refuse(fact);
     return move('approved', ['set_reviewed']);
   }
 
   if (from === 'approved' && action === 'activate') {
-    const failure = activateGuard(snapshot, ctx.now);
+    const failure = activateGuard(snapshot);
     return failure ? refuse(failure) : move('active', ['set_activated', 'freeze_narrative', 'set_expires_at']);
   }
 

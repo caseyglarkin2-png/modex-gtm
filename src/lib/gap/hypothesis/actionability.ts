@@ -20,7 +20,7 @@
 import { sendableEvidence, type GateSignal } from '../research/evidence-gate';
 import { openerFits } from '../research/opener';
 import { approachOfHypothesis } from '../research/approach-policy';
-import { isCurrentFact } from '../research/currentness';
+import { isUsableFact } from '../research/currentness';
 
 export type ReadinessReason = 'no_evidence' | 'evidence_expired' | 'evidence_insufficient' | 'opener_too_long';
 
@@ -56,8 +56,8 @@ export interface ActionabilityInput {
 
 const EDITABLE = new Set(['draft', 'review_required']);
 
-// Item 2a: the one freshness authority (research/currentness.ts).
-const live = (s: ActionSignal, now: Date) => isCurrentFact(s, now);
+// I06: the one usability authority (research/currentness.ts): age never disqualifies; ended, closed, undated or superseded does.
+const live = (s: ActionSignal, now: Date) => isUsableFact(s, now);
 
 /** Outreach readiness of the observation + linked signals, and why not. */
 export function outreachReadiness(input: Omit<ActionabilityInput, 'status'>, now: Date): { ready: boolean; reason: ReadinessReason | null } {
@@ -69,7 +69,7 @@ export function outreachReadiness(input: Omit<ActionabilityInput, 'status'>, now
   }
   const evidenced = signals.filter((s) => (s.evidence_text ?? '').trim() || (s.evidence_url ?? '').trim());
   if (evidenced.length === 0) return { ready: false, reason: 'no_evidence' };
-  // It would be sendable but for the clock: the facts behind it expired.
+  // It would be sendable but for the facts' standing: ended, closed, undated or superseded (never their age, I06).
   if (sendableEvidence(input.observation, signals, input.account_name, opts).tier === 'VERIFIED_FACT') return { ready: false, reason: 'evidence_expired' };
   return { ready: false, reason: 'evidence_insufficient' };
 }

@@ -25,7 +25,7 @@ import {
   type PounceTheme,
   type ProblemFamily,
 } from '../taxonomy';
-import { expiresAtFor, type LinkedSignal } from './machine';
+import { expiresAtFor } from './machine';
 import { validateObservation } from './observation';
 import { citedQuote } from '../research/propose';
 import { observationTitle } from '../research/source-label';
@@ -87,7 +87,7 @@ export interface BuildCandidate {
   signalIds: string[];
   primarySignalId: string;
   confidence: number;
-  expiresAt: Date;
+  expiresAt: Date | null;
   provenance: { builder: typeof BUILDER_ID; familyHits: Record<string, number> };
 }
 
@@ -347,13 +347,6 @@ function buildObservation(citable: ClassifiedSignal[], accountName: string): str
 /** A signal title that only reports a keyword match in a document. */
 const KEYWORD_TITLE = /\bmentions:/i;
 
-function toLinkedSignals(members: ClassifiedSignal[]): LinkedSignal[] {
-  return members.map((member) => ({
-    id: member.signal.id,
-    hasEvidence: Boolean(member.signal.evidenceUrl || member.signal.evidenceText),
-    expiresAt: member.signal.freshnessExpiresAt ?? null,
-  }));
-}
 
 // ---------------------------------------------------------------------------
 // Builder
@@ -482,7 +475,8 @@ export function buildCandidates(input: BuildInput): BuildResult {
         primarySignalId: group.citable[0].signal.id,
         // Red team T7: no auto confidence number (the column is required; 0 = unscored).
         confidence: 0,
-        expiresAt: expiresAtFor(toLinkedSignals(group.members), now),
+        // I06: no calendar expiry (expiresAtFor is null); the fact's usability is judged by its content downstream.
+        expiresAt: expiresAtFor(),
         provenance: { builder: BUILDER_ID, familyHits },
       });
     }

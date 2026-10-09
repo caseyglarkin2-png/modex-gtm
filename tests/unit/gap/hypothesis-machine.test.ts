@@ -228,13 +228,13 @@ describe('review_required + approve', () => {
     expect(transition(snapshot({ status, linkedSignals, observation: OBSERVATION_ONLY_A, ...extra }), action, reviewCtx).ok).toBe(true);
   });
 
-  it('T6: an outreach fact that has expired does not satisfy the gate', () => {
+  it('T6: an outreach fact that ENDED (I06: never one that merely aged) does not satisfy the gate', () => {
     expect(
       transition(
         snapshot({
           status: 'review_required',
           linkedSignals: [
-            { id: 'sig_a', hasEvidence: true, outreachFact: true, expiresAt: PAST },
+            { id: 'sig_a', hasEvidence: true, outreachFact: true, expiresAt: PAST, usable: false },
             { id: 'sig_b', hasEvidence: true, outreachFact: false, expiresAt: FUTURE },
           ],
         }),
@@ -258,13 +258,13 @@ describe('review_required + approve', () => {
     ).toEqual({ ok: false, reason: 'no_evidence' });
   });
 
-  it('refuses evidence_expired when every evidenced signal is past its expiry', () => {
+  it('refuses evidence_expired when every evidenced signal is unusable (ended, closed, undated, superseded; I06: never for age)', () => {
     expect(
       transition(
         snapshot({
           status: 'review_required',
           linkedSignals: [
-            { id: 'sig_a', hasEvidence: true, outreachFact: true, expiresAt: PAST },
+            { id: 'sig_a', hasEvidence: true, outreachFact: true, expiresAt: PAST, usable: false },
             { id: 'sig_b', hasEvidence: false, expiresAt: FUTURE },
           ],
         }),
@@ -288,18 +288,20 @@ describe('review_required + approve', () => {
     ).toEqual({ ok: true, to: 'approved', effects: ['set_reviewed'] });
   });
 
-  it('treats a signal expiring exactly now as expired', () => {
-    expect(
-      transition(
-        snapshot({
-          status: 'review_required',
-          observation: OBSERVATION_ONLY_A,
-          linkedSignals: [{ id: 'sig_a', hasEvidence: true, outreachFact: true, expiresAt: new Date(NOW) }],
-        }),
-        'approve',
-        reviewCtx,
-      ),
-    ).toEqual({ ok: false, reason: 'evidence_expired' });
+  it('I06: a signal whose window closed (even long ago) still approves: age is never a disqualification', () => {
+    for (const expiresAt of [new Date(NOW), PAST, new Date('2018-08-29T12:00:00.000Z')]) {
+      expect(
+        transition(
+          snapshot({
+            status: 'review_required',
+            observation: OBSERVATION_ONLY_A,
+            linkedSignals: [{ id: 'sig_a', hasEvidence: true, outreachFact: true, expiresAt }],
+          }),
+          'approve',
+          reviewCtx,
+        ),
+      ).toEqual({ ok: true, to: 'approved', effects: ['set_reviewed'] });
+    }
   });
 
   describe('re-runs the submit guard set (review-stage edits cannot bypass it)', () => {
@@ -423,13 +425,14 @@ describe('approved + activate', () => {
     ).toEqual({ ok: false, reason: 'no_evidence' });
   });
 
-  it('refuses evidence_expired', () => {
+  it('refuses evidence_expired for an unusable fact (I06: an aged one activates)', () => {
+    expect(transition({ ...activatable(), observation: OBSERVATION_ONLY_A, linkedSignals: [{ id: 'sig_a', hasEvidence: true, outreachFact: true, expiresAt: PAST }] }, 'activate', ctx).ok).toBe(true);
     expect(
       transition(
         {
           ...activatable(),
           observation: OBSERVATION_ONLY_A,
-          linkedSignals: [{ id: 'sig_a', hasEvidence: true, outreachFact: true, expiresAt: PAST }],
+          linkedSignals: [{ id: 'sig_a', hasEvidence: true, outreachFact: true, expiresAt: PAST, usable: false }],
         },
         'activate',
         ctx,
@@ -808,29 +811,8 @@ describe('LEGAL_TRANSITIONS', () => {
 });
 
 describe('expiresAtFor', () => {
-  it('returns the minimum non-null signal expiresAt', () => {
-    const signals = [
-      { id: 'a', hasEvidence: true, expiresAt: FUTURE },
-      { id: 'b', hasEvidence: true, expiresAt: null },
-      { id: 'c', hasEvidence: true, expiresAt: PAST },
-    ];
-    expect(expiresAtFor(signals, NOW)).toEqual(PAST);
+  it('I06: a thesis has no calendar expiry (its evidence\'s age was the only clock, and age never disqualifies)', () => {
+    expect(expiresAtFor()).toBeNull();
   });
 
-  it('defaults to now + 45 days when no signal carries an expiry', () => {
-    const signals = [{ id: 'a', hasEvidence: true, expiresAt: null }];
-    expect(expiresAtFor(signals, NOW)).toEqual(new Date('2026-11-07T12:00:00.000Z'));
-  });
-
-  it('defaults to now + 45 days for an empty list', () => {
-    expect(expiresAtFor([], NOW)).toEqual(new Date(NOW.getTime() + 45 * 24 * 60 * 60 * 1000));
-  });
-
-  it('does not mutate the caller inputs', () => {
-    const d = new Date(FUTURE);
-    const signals = [{ id: 'a', hasEvidence: true, expiresAt: d }];
-    const out = expiresAtFor(signals, NOW);
-    expect(out).toEqual(FUTURE);
-    expect(out).not.toBe(d);
-  });
 });

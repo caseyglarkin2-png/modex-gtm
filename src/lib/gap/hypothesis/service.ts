@@ -21,6 +21,7 @@
  */
 
 import { GATE_SIGNAL_SELECT, outreachFactRefusal } from '../research/evidence-gate';
+import { isUsableFact } from '../research/currentness';
 import { audit as defaultAudit, recordHypothesisEvent, type GapAuditKind } from '../audit';
 import { mirrorHypothesisEvent as defaultMirror, type MirrorAction } from '../hubspot-mirror';
 import {
@@ -367,6 +368,8 @@ export async function loadSnapshot(prisma: any, id: string): Promise<LoadedSnaps
     // Red team T6: the one evidence rule (research/evidence-gate.ts), re-judged at every transition.
     outreachFact: link.signal ? outreachFactRefusal(link.signal, row.account_name, { approach: approachOfHypothesis(row) }) === null : false,
     expiresAt: link.signal?.freshness_expires_at ?? null,
+    // I06: usable unless ended, closed, undated or superseded (research/currentness.ts); age never counts.
+    usable: link.signal ? isUsableFact(link.signal, new Date()) : false,
     title: typeof link.signal?.title === 'string' ? link.signal.title : '',
     evidenceUrl: link.signal?.evidence_url ?? null,
   }));
@@ -442,7 +445,7 @@ function columnsForEffects(
     } else if (effect === 'set_activated') {
       data.activated_at = ctx.now;
     } else if (effect === 'set_expires_at') {
-      data.expires_at = expiresAtFor(snapshot.linkedSignals, ctx.now);
+      data.expires_at = expiresAtFor();
     } else if (effect === 'set_resolved') {
       data.resolved_at = ctx.now;
       data.resolved_by = actor;
