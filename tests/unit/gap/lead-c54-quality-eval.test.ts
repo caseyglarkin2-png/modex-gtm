@@ -10,6 +10,7 @@ import { ledgerDb } from './fixtures/ledger-db';
 import { REFERENCE_SET, REFERENCE_SET_VERSION, byId } from './fixtures/reference-set';
 import { mockedGenerator } from './fixtures/mocked-angle-generator';
 import { DECISIONS, evaluateQuality, GENERATING_MOTIONS, leakedSpan, mentions, QUALITY_CHECKS, renderQualityEval, scoreAngle, taskFor } from '@/lib/gap/evaluation/quality-eval';
+import type { PreparedAngle } from '@/lib/gap/agents/develop-angle';
 
 const NOW = new Date('2026-10-08T15:00:00Z');
 const world = () => ledgerDb({ accounts: [...new Set(REFERENCE_SET.map((c) => c.account?.name).filter((x): x is string => !!x))], personas: REFERENCE_SET.filter((c) => c.person && c.account).map((c, n) => ({ id: n + 1, email: c.person!.email, name: c.person!.name, title: c.person!.title, account_name: c.account!.name, do_not_contact: false })) }, NOW);
@@ -50,7 +51,7 @@ describe('C54: the quality harness', () => {
     expect(renderQualityEval(r)).toContain('## Failures');
     // The scorer on its own, over the bad angle as if the handler had let it through.
     const k = byId('kenco-positive');
-    const bad = { whyItMatters: 'There is no live opportunity here, so a cold opener is the move: no associated deal yet; the committee is the problem, so press on their yards today.', accounts: [], roles: [], people: [], peopleNamed: [], starters: ['Can we book thirty minutes to show the product?', 'Who signs the contract?'], proposedAction: 'email' as const, caveat: null, key: 'x', title: 'x', accountName: null, accountHint: null, sourceLine: '', preparedAt: NOW.toISOString(), inDeal: false, dealId: null, support: [] };
+    const bad = { whyItMatters: 'There is no live opportunity here, so a cold opener is the move: no associated deal yet; the committee is the problem, so press on their yards today.', accounts: [], roles: [], people: [], peopleNamed: [], starters: ['Can we book thirty minutes to show the product?', 'Who signs the contract?'], proposedAction: 'email' as const, caveat: null, key: 'x', title: 'x', accountName: null, accountHint: null, sourceLine: '', preparedAt: NOW.toISOString(), inDeal: false, dealId: null, support: [] } as unknown as PreparedAngle;
     const checks = scoreAngle(k, 'full', bad);
     const details = (c: string) => checks.filter((f) => f.check === c).map((f) => f.detail);
     expect(details('no_prohibited_claim').some((d) => /no live opportunity/.test(d))).toBe(true);
@@ -71,7 +72,7 @@ describe('C54: the quality harness', () => {
     const t = taskFor(byId('two-deals'), 'full', 'pursue', NOW);
     expect(t.itemKey).toBe('person:a.diaz@meridianfoods.example');
     expect(t.input).toMatchObject({ accountName: 'Meridian Foods', deals: [{ id: '62700000010', name: 'YardFlow - Meridian Dallas' }], opportunity: 'open', excerpt: expect.stringContaining('Dallas yard pilot') });
-    const good = { whyItMatters: 'My guess is the record already says Open Dock stays, the account is in an open deal and a meeting is ahead on Oct 14, so the roadmap conversation about their yards continues from there rather than as a fresh opener.', accounts: [], roles: [], people: [], peopleNamed: [], starters: ['Is Open Dock still the plan at the ungated yards, or has that moved?', 'Who owns the roadmap sync on your side?'], proposedAction: 'email' as const, caveat: null, key: 'x', title: 'x', accountName: null, accountHint: null, sourceLine: '', preparedAt: NOW.toISOString(), inDeal: true, dealId: '62700000001', support: [{ text: 'x', where: 'whyItMatters' as const, refs: [{ label: 'K1' }] as never, kind: 'fact' as const }] };
+    const good = { whyItMatters: 'My guess is the record already says Open Dock stays, the account is in an open deal and a meeting is ahead on Oct 14, so the roadmap conversation about their yards continues from there rather than as a fresh opener.', accounts: [], roles: [], people: [], peopleNamed: [], starters: ['Is Open Dock still the plan at the ungated yards, or has that moved?', 'Who owns the roadmap sync on your side?'], proposedAction: 'email' as const, caveat: null, key: 'x', title: 'x', accountName: null, accountHint: null, sourceLine: '', preparedAt: NOW.toISOString(), inDeal: true, dealId: '62700000001', support: [{ text: 'x', where: 'whyItMatters' as const, refs: [{ label: 'K1' }] as never, kind: 'fact' as const }] } as unknown as PreparedAngle;
     expect(scoreAngle(k, 'full', good)).toEqual([]);
     expect(scoreAngle(k, 'full', { ...good, inDeal: false, dealId: null }).map((f) => f.check)).toEqual(['motion_and_person', 'motion_and_person']);
   });
