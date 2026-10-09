@@ -9,6 +9,13 @@
  *                     gate: a seller may still write, and the basis says what the days were counted from
  *   nextMeetingAt     an accepted calendar event (either side accepted) or their invitation, in the future, not cancelled
  *   commitments       the outstanding ones (not resolved), attributed to the person whose message they came from
+ *   lastConversationAt  knowledge program C1 (2026-10-09): the newest CONVERSATION with them: a held meeting or a call
+ *                     (a vault meeting note or a Fireflies capture whose participants include the person, set on the
+ *                     event as `conversation` by the caller), or a calendar RSVP they accepted whose meeting has been
+ *                     held (its start is past and it was not cancelled). A conversation counts as an exchange: quiet
+ *                     counts from the latest of the last exchange either way and the last conversation, and an answer
+ *                     is not owed after a conversation later than their message (Kenco: a Sep 16 meeting after a
+ *                     Sep 16 inbound means no answer owed and not quiet on Sep 20).
  *
  * The audit's two cases: a September 24 inbound answered the same day is not answer owed; an October 1 send and a
  * future accepted meeting prevent a went-quiet claim built on the inbound date alone. work/intel.ts ranks people on
@@ -34,6 +41,12 @@ export interface StateEvent {
    * named when it named one. The reader that builds the timeline sets it; the notice text itself is not carried.
    */
   outOfOffice?: { returnDay: string | null } | null;
+  /**
+   * Knowledge program C1 (2026-10-09): this event IS a conversation held with the person (a meeting note or a Fireflies
+   * capture whose participants include them, by the caller's reading of the knowledge notes; `at` is when it was held).
+   * The person is read from `from` (inbound) or `to` (outbound) as for any event. The pure function reads it only.
+   */
+  conversation?: { kind: 'call' | 'meeting'; title: string | null; source: string } | null;
 }
 
 export interface PersonCommitment extends ContextCommitment {
@@ -49,6 +62,8 @@ export interface PersonState {
   answerOwed: { owed: boolean; since: string | null; messageId: string | null; basis: string };
   quiet: { quiet: boolean; days: number | null; since: string | null; basis: string };
   nextMeetingAt: string | null;
+  /** C1: the newest conversation held with them (a meeting or a call), or null when none is on record. */
+  lastConversationAt: string | null;
   commitments: PersonCommitment[];
   /**
    * A4: their newest out-of-office notice, as availability: the day they said they would be back (null when the notice
@@ -94,6 +109,18 @@ function nextMeeting(events: readonly StateEvent[], now: Date): string | null {
   return candidates[0] ?? null;
 }
 
+/** C1: the meetings a person accepted that have been held (started before `now`, not cancelled since the acceptance), newest first. */
+function heldMeetings(events: readonly StateEvent[], now: Date): string[] {
+  const cancelled = new Map<string, string>();
+  for (const e of events) if (e.calendar?.kind === 'cancelled') cancelled.set(e.calendar.meetingKey, newest(cancelled.get(e.calendar.meetingKey) ?? null, e.at));
+  return events
+    .filter((e) => e.direction === 'inbound' && e.calendar?.kind === 'accepted' && !!e.calendar.startsAt && new Date(e.calendar.startsAt).getTime() <= now.getTime())
+    .filter((e) => !(cancelled.get(e.calendar!.meetingKey) && (cancelled.get(e.calendar!.meetingKey) as string) > e.at))
+    .map((e) => e.calendar!.startsAt as string)
+    .sort()
+    .reverse();
+}
+
 export function peopleState(timeline: readonly StateEvent[], now: Date, opts: PeopleStateOptions = {}): Map<string, PersonState> {
   const own = new Set([...(opts.ownAddresses ?? [])].map(lower));
   const quietDays = opts.quietDays ?? QUIET_DAYS;
@@ -117,8 +144,17 @@ export function peopleState(timeline: readonly StateEvent[], now: Date, opts: Pe
     let lastMeaningfulInbound: string | null = null;
     let newestAnswerable: StateEvent | null = null;
     let notice: StateEvent | null = null;
+    // C1: a conversation held (a meeting note, a Fireflies capture) is read off the event whatever its direction.
+    let lastConversation: { at: string; kind: 'call' | 'meeting' } | null = null;
+    for (const e of events) {
+      if (e.conversation && (!lastConversation || e.at > lastConversation.at)) lastConversation = { at: e.at, kind: e.conversation.kind };
+    }
+    const heldAt = heldMeetings(events, now)[0] ?? null;
+    if (heldAt && (!lastConversation || heldAt > lastConversation.at)) lastConversation = { at: heldAt, kind: 'meeting' };
+    const lastConversationAt = lastConversation?.at ?? null;
     for (const e of events) {
       const purpose = e.purpose ?? 'unknown';
+      if (e.conversation) continue;
       if (e.direction === 'outbound') {
         if (e.isDraft || e.type === 'draft') lastDraftAt = newest(lastDraftAt, e.at);
         else if (e.type !== 'calendar') lastOutboundAt = newest(lastOutboundAt, e.at);
@@ -132,20 +168,26 @@ export function peopleState(timeline: readonly StateEvent[], now: Date, opts: Pe
       if (ANSWERABLE.has(purpose) && (!newestAnswerable || e.at > newestAnswerable.at)) newestAnswerable = e;
     }
 
-    const owed = !!newestAnswerable && (lastOutboundAt === null || newestAnswerable.at > lastOutboundAt);
+    const sentAfter = !!newestAnswerable && lastOutboundAt !== null && lastOutboundAt >= newestAnswerable.at;
+    // C1: a conversation later than their message answers it (a meeting held after they wrote is the answer).
+    const talkedAfter = !!newestAnswerable && !!lastConversation && lastConversation.at > newestAnswerable.at;
+    const owed = !!newestAnswerable && !sentAfter && !talkedAfter;
     const answerOwed = newestAnswerable
       ? owed
         ? { owed: true, since: newestAnswerable.at, messageId: newestAnswerable.id, basis: `they wrote ${short(newestAnswerable.at)}${lastOutboundAt ? `; our last send was ${short(lastOutboundAt)}, before it` : '; nothing sent since'}` }
-        : { owed: false, since: null, messageId: null, basis: `they wrote ${short(newestAnswerable.at)} and we sent ${short(lastOutboundAt as string)} after it` }
+        : sentAfter
+          ? { owed: false, since: null, messageId: null, basis: `they wrote ${short(newestAnswerable.at)} and we sent ${short(lastOutboundAt as string)} after it` }
+          : { owed: false, since: null, messageId: null, basis: `they wrote ${short(newestAnswerable.at)} and ${lastConversation!.kind === 'call' ? 'we talked' : 'we met'} ${short(lastConversation!.at)} after it` }
       : { owed: false, since: null, messageId: null, basis: lastInboundAt ? 'nothing of theirs asks for an answer' : 'they have not written' };
 
     const nextMeetingAt = nextMeeting(events, now);
-    const lastExchange = lastMeaningfulInbound && lastOutboundAt ? (lastMeaningfulInbound > lastOutboundAt ? lastMeaningfulInbound : lastOutboundAt) : lastMeaningfulInbound ?? lastOutboundAt;
+    // C1: the last exchange is the latest of their message, our send and a conversation held.
+    const lastExchange = [lastMeaningfulInbound, lastOutboundAt, lastConversationAt].filter((x): x is string => !!x).sort().at(-1) ?? null;
     let quiet: PersonState['quiet'];
     if (!lastExchange) quiet = { quiet: false, days: null, since: null, basis: 'no exchange on record either way' };
     else {
       const days = Math.floor((now.getTime() - new Date(lastExchange).getTime()) / DAY_MS);
-      const who = lastExchange === lastOutboundAt ? 'we wrote' : 'they wrote';
+      const who = lastExchange === lastConversationAt ? (lastConversation!.kind === 'call' ? 'a call' : 'a meeting') : lastExchange === lastOutboundAt ? 'we wrote' : 'they wrote';
       if (nextMeetingAt) quiet = { quiet: false, days, since: lastExchange, basis: `last exchange ${short(lastExchange)} (${who}); a meeting is ahead on ${short(nextMeetingAt)}` };
       else if (days >= quietDays) quiet = { quiet: true, days, since: lastExchange, basis: `no exchange either way in ${days} days (last: ${short(lastExchange)}, ${who})` };
       else quiet = { quiet: false, days, since: lastExchange, basis: `last exchange ${short(lastExchange)} (${who}), ${days} days ago` };
@@ -163,7 +205,7 @@ export function peopleState(timeline: readonly StateEvent[], now: Date, opts: Pe
       availability = { returnedOn, basis: `their out-of-office notice of ${short(notice.at)}: ${back}${wroteSince}` };
     }
 
-    out.set(email, { email, lastInboundAt, lastOutboundAt, lastDraftAt, answerOwed, quiet, nextMeetingAt, commitments, ...(availability ? { availability } : {}) });
+    out.set(email, { email, lastInboundAt, lastOutboundAt, lastDraftAt, answerOwed, quiet, nextMeetingAt, lastConversationAt, commitments, ...(availability ? { availability } : {}) });
   }
   return out;
 }
