@@ -208,6 +208,28 @@ describe('C5: ambiguity said with its candidates; the family and deal tie-break'
     expect(y.pursued.find((p) => p.key === `person:${DAVE}`)!.ambiguityLine).toBe('kencogroup.com is claimed by Kenco and Kenco Logistics Services (an open duplicate since May 5): choose the account');
   });
 
+  it('C5 refinement, the exact production coverage: the in-deals summary folds the family onto ONE deal ({ accountName "Kenco", alsoRecordedAs ["Kenco Logistics Services"] }), so both candidates are "in a deal" under the same recorded account; the person places at Kenco via family_deal; two deals recorded under two accounts stay ambiguous', async () => {
+    const db = kencoWorld();
+    const c = db.client();
+    await pursueDave(c);
+    const folded = dealCoverageFrom({ ...summary, accounts: [{ ...summary.accounts[0], accountName: 'Kenco', alsoRecordedAs: ['Kenco Logistics Services'] }] });
+    const x = await loadIntelligence(c, { now: NOW, identity: twoClaim, coverage: folded });
+    const dave = x.pursued.find((p) => p.key === `person:${DAVE}`)!;
+    expect(dave).toMatchObject({ accountName: 'Kenco', accountHint: null, placedVia: 'family_deal', placementChanged: true, dealLine: 'In an open deal: YardFlow - Kenco' });
+    expect(dave.placementLine).toBe("Placed at Kenco, the family's deal-holding account; Kenco Logistics Services is its open duplicate, unmerged; the angle was developed before placement, so Pursue again to develop it as deal work");
+    const person = x.people.find((i) => i.id === DAVE)!;
+    expect(person).toMatchObject({ accountName: 'Kenco', inDeal: true, person: { via: 'family_deal', ambiguous: false } });
+    expect(person.line).toContain("placed at Kenco, the family's deal-holding account; Kenco Logistics Services is its open duplicate, unmerged");
+    // The candidates in the production order (the links' order) place the same way.
+    const reversed: IdentityContext = { ...twoClaim, conflictedDomainToAccounts: new Map([['kencogroup.com', ['Kenco Logistics Services', 'Kenco']]]) };
+    expect((await loadPursued(c, NOW, { identity: reversed, coverage: folded })).find((p) => p.key === `person:${DAVE}`)).toMatchObject({ accountName: 'Kenco', placedVia: 'family_deal' });
+    // Two deals recorded under two accounts: nothing settles it.
+    const two = dealCoverageFrom({ ...summary, accounts: [{ ...summary.accounts[0], alsoRecordedAs: [] }, { ...summary.accounts[0], accountName: 'Kenco Logistics Services', alsoRecordedAs: [], deals: [{ ...summary.accounts[0].deals[0], id: '99', name: 'YardFlow - KLS' }] }] });
+    const d2 = (await loadPursued(c, NOW, { identity: twoClaim, coverage: two })).find((p) => p.key === `person:${DAVE}`)!;
+    expect(d2).toMatchObject({ accountName: null, ambiguousAmong: ['Kenco', 'Kenco Logistics Services'] });
+    expect(d2.ambiguityLine).toBe('kencogroup.com is claimed by Kenco and Kenco Logistics Services (an open duplicate since May 5): choose the account');
+  });
+
   it('the family facts are read one bounded query each and soft: a client without the tables keeps the ambiguity', async () => {
     const db = kencoWorld();
     const c = db.client();
@@ -218,6 +240,11 @@ describe('C5: ambiguity said with its candidates; the family and deal tie-break'
     expect(tieBreakFamily(['Kenco', 'Kenco Logistics Services'], facts, (n) => n === 'Kenco')).toEqual({ accountName: 'Kenco', others: ['Kenco Logistics Services'], kind: 'duplicate', since: '2026-05-05T14:00:00.000Z' });
     expect(tieBreakFamily(['Kenco', 'Kenco Logistics Services'], facts, () => false)).toBeNull();
     expect(tieBreakFamily(['Kenco'], facts, () => true)).toBeNull();
+    // The refinement: both candidates in a deal RECORDED under one of them place there; recorded under different accounts, or under a third name, stay ambiguous.
+    expect(tieBreakFamily(['Kenco', 'Kenco Logistics Services'], facts, () => 'Kenco')).toMatchObject({ accountName: 'Kenco', others: ['Kenco Logistics Services'] });
+    expect(tieBreakFamily(['Kenco', 'Kenco Logistics Services'], facts, () => 'kenco')).toMatchObject({ accountName: 'Kenco' });
+    expect(tieBreakFamily(['Kenco', 'Kenco Logistics Services'], facts, (n) => n)).toBeNull();
+    expect(tieBreakFamily(['Kenco', 'Kenco Logistics Services'], facts, () => 'Kenco Holdings')).toBeNull();
     const bare = { gapAuditEvent: c.gapAuditEvent, persona: c.persona, inboundMessage: c.inboundMessage };
     await pursueDave(c);
     const d = (await loadPursued(bare, NOW, { identity: twoClaim, coverage })).find((p) => p.key === `person:${DAVE}`)!;

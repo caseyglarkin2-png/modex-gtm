@@ -101,11 +101,15 @@ export function sameFamily(a: string, b: string, facts: FamilyFacts): { kind: 'p
 export type FamilyTieBreak = { accountName: string; others: string[]; kind: 'parent_brand' | 'duplicate'; since: string | null };
 
 /**
- * The candidates are one family (every pair linked) and exactly one of them is in an open deal (the caller's
- * `inDeal` answers true only under a complete CRM read): that one is the placement. Anything else is null: the
- * ambiguity stands.
+ * The candidates are one family (every pair linked) and the family's open deal settles the placement. `dealAccountOf`
+ * answers, under a complete CRM read only, the account name the CRM read RECORDS a candidate's open deal under (the
+ * in-deals summary folds a duplicate onto its deal-holding account: "Kenco", alsoRecordedAs "Kenco Logistics
+ * Services", one deal), or null when the candidate is in no deal; `true` stands for the candidate's own name. When
+ * every in-deal candidate resolves to the SAME recorded name and that name is one of the candidates, the person is
+ * placed there; when the in-deal candidates resolve to different recorded accounts (two deals, two accounts), or no
+ * candidate is in a deal, the ambiguity stands (null).
  */
-export function tieBreakFamily(candidates: readonly string[], facts: FamilyFacts, inDeal: (accountName: string) => boolean): FamilyTieBreak | null {
+export function tieBreakFamily(candidates: readonly string[], facts: FamilyFacts, dealAccountOf: (accountName: string) => string | boolean | null): FamilyTieBreak | null {
   const names = [...new Set(candidates)];
   if (names.length < 2) return null;
   let kind: 'parent_brand' | 'duplicate' | null = null;
@@ -118,7 +122,15 @@ export function tieBreakFamily(candidates: readonly string[], facts: FamilyFacts
       since = earliest([since, f.since]);
     }
   }
-  const dealt = names.filter((n) => inDeal(n));
-  if (dealt.length !== 1 || !kind) return null;
-  return { accountName: dealt[0], others: names.filter((n) => n !== dealt[0]), kind, since };
+  const recorded = new Set<string>();
+  for (const n of names) {
+    const r = dealAccountOf(n);
+    const name = r === true ? n : typeof r === 'string' && r.trim() ? r.trim() : null;
+    if (name) recorded.add(name.toLowerCase());
+  }
+  if (recorded.size !== 1 || !kind) return null;
+  const [one] = [...recorded];
+  const holder = names.find((n) => n.toLowerCase() === one);
+  if (!holder) return null;
+  return { accountName: holder, others: names.filter((n) => n !== holder), kind, since };
 }
