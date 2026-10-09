@@ -10,7 +10,7 @@ import { auth } from '@/lib/auth';
 import { loginHref } from '@/lib/auth-return';
 import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
-import { actionSecret, verifyActionToken } from '@/lib/gap/work/action-token';
+import { EXECUTING_OPS, actionSecret, executionAllowed, verifyActionToken } from '@/lib/gap/work/action-token';
 import { findPlanItemByToken } from '@/lib/gap/work/plan';
 
 export const dynamic = 'force-dynamic';
@@ -23,7 +23,11 @@ export default async function ItemPage({ searchParams }: { searchParams?: Promis
   const now = new Date();
   const v = q.t ? verifyActionToken(q.t, { secret: actionSecret(), now }) : null;
   if (!v || !v.ok) redirect(`/gap/?link=${v ? v.reason : 'missing'}`);
+  // C43 / C57 F-C2: an executing op never runs from here. Start and decide go to their own page, which asks for one
+  // click before anything is applied; `open` (and any other op) is navigation only.
   if (v.payload.op === 'start') redirect(`/gap/start?t=${encodeURIComponent(q.t as string)}`);
+  if (v.payload.op === 'decide') redirect(`/gap/decide?t=${encodeURIComponent(q.t as string)}`);
+  if (EXECUTING_OPS.has(v.payload.op) && !executionAllowed({ op: v.payload.op, method: 'GET' }).ok && !v.payload.item) redirect('/gap/?link=needs_confirmation');
   const found = v.payload.item ? await findPlanItemByToken(prisma, v.payload.item, { now }) : null;
   if (!found) redirect('/gap/?link=unknown_item');
   redirect(found.item.href);
