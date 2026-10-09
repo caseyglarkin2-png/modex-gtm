@@ -14,52 +14,12 @@
  * asserts it triggers no tool action (C53).
  */
 import { createHash } from 'node:crypto';
-import type { ClaimClass, Purpose, Relationship } from '@/lib/gap/context/commercial-context';
+import type { ReferenceCase, ReferenceSource } from '@/lib/gap/evaluation/reference-types';
 
-export const REFERENCE_SET_VERSION = 1;
+export type { Motion, ReferenceCase, ReferenceSource } from '@/lib/gap/evaluation/reference-types';
 
-export type Motion = 'deal_work' | 'reengage' | 'reply_owed' | 'review_first' | 'no_outreach' | 'research_first' | 'retry_later';
-
-export interface ReferenceSource {
-  /** The provider's own id shape (gmail message id, hubspot object id, vault path#heading, clawd note id, public url). */
-  sourceId: string;
-  kind: 'gmail' | 'crm' | 'vault' | 'clawd' | 'public' | 'calendar';
-  /** The event or observation date; null when the source gives none. */
-  at: string | null;
-  /** The refresh or index time, when the source has one apart from the observation (C15). */
-  indexedAt?: string | null;
-  claimClass: ClaimClass;
-  text: string;
-  /** External use allowed: only buyer_said and checked_public may be, and only when marked. */
-  externalOk?: boolean;
-}
-
-export interface ReferenceCase {
-  id: string;
-  title: string;
-  /** Which audit observation this case is the de-identified shape of. */
-  shapeOf: string;
-  person: { email: string; name: string; title: string | null } | null;
-  account: { name: string; aliases: string[]; domains: string[]; hubspotCompanyId: string | null } | null;
-  sources: ReferenceSource[];
-  expected: {
-    identity: { accountName: string | null; ambiguous: boolean; via: string | null };
-    opportunity: 'open' | 'none' | 'unknown' | 'ambiguous';
-    purposes: Purpose[];
-    relationship: Relationship;
-    motion: Motion;
-    /** Phrases a prepared output must contain (one is enough per entry; alternatives separated by |). */
-    mustSay: string[];
-    /** Claims a prepared output must never make, with the reason. */
-    prohibited: Array<{ claim: string; reason: string }>;
-    /** Sources that must be retrieved (by sourceId) for the output to count as grounded (C53 recall). */
-    requiredSources: string[];
-    /** Quoted text that must never be executed (C53: an instruction in a source is data). */
-    neverExecute: string[];
-  };
-  /** The same case with one source unreadable: what must be said then. */
-  missingSource: { remove: string; expectedWords: string; expectedOpportunity?: 'open' | 'none' | 'unknown' | 'ambiguous' };
-}
+/** v2 (2026-10-09): the two-deals missing-source variant expects open (the CRM still holds the other deal under a complete read), the scope is what is unknown; found by the C53 evaluator. */
+export const REFERENCE_SET_VERSION = 2;
 
 const KENCO: ReferenceCase['account'] = { name: 'Kestrel Logistics', aliases: ['kestrel'], domains: ['kestrelgroup.example'], hubspotCompanyId: '55600000001' };
 
@@ -318,7 +278,8 @@ export const REFERENCE_SET: readonly ReferenceCase[] = [
       requiredSources: ['gmail:1a0aa0000000070', 'hubspot:deal:62700000010'],
       neverExecute: [],
     },
-    missingSource: { remove: 'hubspot:deal:62700000010', expectedWords: 'Meridian Atlanta|more than one deal|open deal unknown', expectedOpportunity: 'unknown' },
+    // With the Dallas deal unread the CRM still holds Atlanta under a complete read: the account is open, and the person's scope is what becomes unknown (the angle must say so).
+    missingSource: { remove: 'hubspot:deal:62700000010', expectedWords: 'Meridian Atlanta|more than one deal|scope unknown', expectedOpportunity: 'open' },
   },
   {
     id: 'model-outage',
