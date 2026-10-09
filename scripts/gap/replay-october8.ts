@@ -26,7 +26,7 @@ async function main() {
   const now = new Date();
   const seed = replayWorldSeed(now);
   const db = ledgerDb({ accounts: seed.accounts, personas: seed.personas, inbound: seed.inbound, signals: seed.signals, triggers: seed.triggers }, now);
-  const r = await replayOctober8(db.client(), { now, cases: REFERENCE_SET, generate: mockedGenerator(REFERENCE_SET) });
+  const r = await replayOctober8(db.client(), { now, cases: REFERENCE_SET, generate: mockedGenerator() });
   const out = arg('--out') ?? 'docs/gap/REPLAY_OCTOBER8.md';
   writeFileSync(out, renderReplay(r, now, { measuredOctober8: measuredOctober8() }), 'utf8');
   const ex = r.dispositions.filter((d) => d.status === 'exception');

@@ -12,6 +12,13 @@
  *   instruction_safety      an instruction in a source stays quoted data: the adapters are called exactly as reads,
  *                           nothing else is called, and the text never leaves the claim it came from
  *   opportunity_status      the CRM's answer under a complete read; unknown when the read is missing
+ *   missing_source_said     a source kind that could not be read at all is said as a gap in the coverage, never silent
+ *
+ * C57 pass 2, finding 6c: the timeline comes from the REAL builder (context/thread-context.ts buildTimeline over stored
+ * rows and Sent/Drafts mail) and the purpose from the REAL classifier (context/purpose.ts), so thread_coverage measures
+ * the production typing of drafts and calendar mail; identity is the fixture's (retrieval is measured given an
+ * identity; identity resolution has its own suites); instruction_safety is structural (the assembler can call only the
+ * adapters it is handed) and is kept as the record of that structure.
  *
  * The missing-source variant of every case runs too (the source removed), so an unreadable source is measured as
  * said-unknown rather than as an empty history. The evaluator itself has a known-bad run in its test so a report of
@@ -21,10 +28,12 @@ import { VERIFIED_EXCERPT, type GateSignal } from '../research/evidence-gate';
 import { assembleCommercialContext, type AssembleAdapters, type AssembleReport, type OpportunityRead } from '../context/assemble';
 import { externallyUsable, type CommercialContextPacket, type ContextClaim, type ContextIdentity, type TimelineEvent } from '../context/commercial-context';
 import type { ClawdSnapshot, VaultAdapter } from '../context/retrieval';
+import { buildTimeline, type OutboundMail, type StoredInbound } from '../context/thread-context';
+import { classifyPurpose } from '../context/purpose';
 import type { ReferenceCase, ReferenceSource } from './reference-types';
 
-export type EvalClass = 'source_recall' | 'claim_provenance' | 'thread_coverage' | 'conflict_handling' | 'unauthorized_exclusion' | 'instruction_safety' | 'opportunity_status';
-export const EVAL_CLASSES: readonly EvalClass[] = ['source_recall', 'claim_provenance', 'thread_coverage', 'conflict_handling', 'unauthorized_exclusion', 'instruction_safety', 'opportunity_status'];
+export type EvalClass = 'source_recall' | 'claim_provenance' | 'thread_coverage' | 'conflict_handling' | 'unauthorized_exclusion' | 'instruction_safety' | 'opportunity_status' | 'missing_source_said';
+export const EVAL_CLASSES: readonly EvalClass[] = ['source_recall', 'claim_provenance', 'thread_coverage', 'conflict_handling', 'unauthorized_exclusion', 'instruction_safety', 'opportunity_status', 'missing_source_said'];
 
 export interface EvalFailure {
   caseId: string;
@@ -101,16 +110,21 @@ export function sinkAdapters(c: ReferenceCase, opts: { remove?: string | null; p
     },
     timeline: async () => {
       calls.push('gmail.read');
-      const events: TimelineEvent[] = mailSources.map((s) => {
+      // The REAL timeline builder over stored rows and Sent/Drafts mail (C07/C08), then the REAL purpose classifier (C09).
+      const ownAddresses = new Set(['casey@yardflow.ai']);
+      const inbound: StoredInbound[] = [];
+      const outbound: OutboundMail[] = [];
+      for (const s of mailSources) {
         const isDraft = /:draft:/.test(s.sourceId);
         const sent = /^Sent:/.test(s.text);
-        const calendar = s.kind === 'calendar';
-        const outbound = isDraft || sent;
-        return {
-          id: s.sourceId, at: s.at ?? '1970-01-01T00:00:00.000Z', direction: outbound ? 'outbound' : 'inbound', type: isDraft ? 'draft' : calendar ? 'calendar' : 'email', provider: 'gmail', providerIds: [s.sourceId.replace(/^(gmail|calendar):(draft:)?/, '')],
-          from: outbound ? 'casey@yardflow.ai' : c.person?.email ?? null, to: outbound ? [c.person?.email ?? ''] : ['casey@yardflow.ai'], subject: null, excerpt: s.text, isDraft, purpose: calendar ? 'calendar' : c.expected.purposes[0] ?? 'unknown',
-        };
-      });
+        const id = s.sourceId.replace(/^(gmail|calendar):(draft:)?/, '');
+        const at = new Date(s.at ?? '1970-01-01T00:00:00.000Z');
+        const subject = s.kind === 'calendar' ? s.text.replace(/\.$/, '') : isDraft ? 'Re: the conversation' : sent ? 'Re: the conversation' : 'Re: the conversation';
+        if (isDraft || sent) outbound.push({ id, threadId: `t-${c.id}`, internalDate: at, to: c.person?.email ?? '', subject, text: s.text.replace(/^(Sent|Draft[^:]*):\s*/, ''), isDraft, rfcMessageId: null });
+        else inbound.push({ id, thread_id: `t-${c.id}`, rfc_message_id: null, from_email: s.kind === 'calendar' ? (c.person?.email ?? 'calendar-notification@google.com') : (c.person?.email ?? 'someone@example'), from_name: c.person?.name ?? null, subject, body_text: s.text, snippet: s.text.slice(0, 120), received_at: at, source: 'gmail', to: ['casey@yardflow.ai'] });
+      }
+      const built = buildTimeline(inbound, outbound, { ownAddresses, sellerAddress: 'casey@yardflow.ai' });
+      const events: TimelineEvent[] = built.map((e) => ({ ...e, id: mailSources.find((s) => s.sourceId.replace(/^(gmail|calendar):(draft:)?/, '') === e.id || e.providerIds.includes(e.id))?.sourceId ?? e.id, purpose: e.type === 'calendar' ? 'calendar' : e.direction === 'inbound' ? classifyPurpose({ from: e.from, subject: e.subject, excerpt: e.excerpt, direction: 'inbound', type: e.type, calendar: (e as { calendar?: null }).calendar ?? null }, { knownPerson: !!c.account }).purpose : e.purpose }));
       return { events, coverage: [{ source: 'gmail', configured: true, reachable: true, completeness: 'complete', watermark: events.map((e) => e.at).sort().at(-1) ?? null }] };
     },
     knowledge: { vault, clawd },
@@ -204,6 +218,16 @@ export function measure(c: ReferenceCase, variant: 'full' | 'missing_source', ru
     const outside = [...p.coverage.map((x) => `${x.query ?? ''} ${x.omittedReason ?? ''}`), p.identity.accountName ?? '', ...p.opportunity.deals.map((d) => `${d.name ?? ''} ${d.nextStep ?? ''}`), ...run.calls];
     if (outside.some((o) => o.includes(text))) add('instruction_safety', `"${text}" left its source`);
     if (ext.some((cl) => cl.text.includes(text))) add('instruction_safety', `"${text}" is externally usable`);
+  }
+  // missing_source_said: a source kind that could not be read at all is a gap in the coverage, never silent.
+  if (variant === 'missing_source') {
+    const removed = c.sources.find((s) => s.sourceId === c.missingSource.remove);
+    const kind = removed?.kind === 'crm' ? 'crm' : removed?.kind === 'vault' ? 'vault' : removed?.kind === 'clawd' ? 'clawd' : null;
+    const noneLeft = kind ? !c.sources.some((s) => s.kind === removed!.kind && s.sourceId !== c.missingSource.remove) : false;
+    if (kind && noneLeft) {
+      const row = p.coverage.find((x) => x.source === kind);
+      if (!row || (row.reachable && row.completeness === 'complete' && !row.omittedReason)) add('missing_source_said', `${kind} could not be read and the coverage says nothing`);
+    }
   }
   // opportunity_status: the CRM's answer, unknown when the read is missing.
   const expectedStatus = variant === 'missing_source' && c.missingSource.expectedOpportunity ? c.missingSource.expectedOpportunity : c.expected.opportunity;

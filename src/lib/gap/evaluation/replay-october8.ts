@@ -20,6 +20,8 @@ import { runAgentTasks, type ClaimedTask, type HandlerResult } from '../agents/t
 import { promoteAngle, type PromoteAngleResult } from '../agents/promote-angle';
 import { loadAccountability, type Accountability } from '../work/activity';
 import { recordOverride, loadOverrides } from '../context/classification-overrides';
+import { loadThreadContext } from '../context/thread-context';
+import { peopleState, type StateEvent } from '../work/people-state';
 import { externallyUsable, validateClaims } from '../context/commercial-context';
 import { gapLines } from '../context/assemble';
 import { gapGmailSender } from '../execution/gap-sender';
@@ -40,6 +42,8 @@ export const TICKET_IDS = ['C01', 'C02', 'C03', 'C04', 'C05', 'C06', 'C07', 'C08
 export const KESTREL = 'Kestrel Logistics';
 export const DAN = 'd.keller@kestrelgroup.example';
 export const CHRIS = 'c.ortiz@kestrelgroup.example';
+/** A writer at the verified domain with NO persona: placed by the domain (C02). */
+export const KIM = 'k.lee@kestrelgroup.example';
 const ACTOR = 'casey@freightroll.com';
 
 export interface ReplayWorldSeed {
@@ -64,7 +68,8 @@ export function replayWorldSeed(now: Date): ReplayWorldSeed {
     ],
     inbound: [
       inbound('m-dan-sep16', DAN, 'Dan Keller', 'Re: YardFlow and the 2027 roadmap', 'We will keep Open Dock at the ungated yards and pilot a YMS where the WMS migrates next year. Birdseye stays for the camera gates.', d(22), KESTREL),
-      inbound('m-chris-sep2', CHRIS, 'Chris Ortiz', 'Re: the Chattanooga yards', 'Our yards at Chattanooga run three shifts; who handles the gate when the yard driver is out?', d(36), KESTREL),
+      inbound('m-chris-sep2', CHRIS, 'Chris Ortiz', 'Re: the Chattanooga yards', 'Our yards at Chattanooga run three shifts; who handles the gate when the yard driver is out?\n\nOn Mon, Sep 1, 2026, Casey Larkin wrote:\n> Chris, quick one on the Chattanooga yards: who runs the gate today?', d(36), KESTREL),
+      inbound('m-kim-aug', KIM, 'Kim Lee', 'Re: dock scheduling', 'We are looking at dock scheduling for the Chattanooga yards next year; what does the gate side need?', d(40), null),
       inbound('m-phil-jun', 'p.sava@glacierspirits.example', 'Phil Sava', 'Re: yards', 'Not this quarter; our yards are mid-move. Try me after the Tracy DC opens.', d(110), 'Glacier Spirits'),
       inbound('m-vendor', 'growth@riseagency.example', 'Rise Agency', 'Grow your pipeline', 'We offer outbound services for yard management vendors like YardFlow. Reply YES to book a strategy call.', d(30)),
       inbound('m-support', 'ops@lanternfreight.example', 'Lantern Ops', 'Gate tablet', 'The gate tablet stopped scanning yesterday; drivers are being waved through. Can someone call us?', d(2), 'Lantern Freight'),
@@ -171,7 +176,8 @@ export async function replayOctober8(prisma: PrismaLike, opts: { now: Date; case
   const gatik = intel.signals.find((s) => s.id === 's-gatik-1') ?? null;
 
   demo('C01', !!chris && /in an open deal \(YardFlow - Kestrel, presentationscheduled\)/.test(chris.line), chris ? `Chris at Kestrel: "${chris.line.slice(0, 160)}"` : 'Chris not listed');
-  demo('C02', !!chris && (chris.person?.via === 'persona' || chris.person?.via === 'domain'), `placed via ${chris?.person?.via ?? 'none'}`);
+  const kim = intel.people.find((p) => p.id === KIM) ?? null;
+  demo('C02', !!chris && chris.person?.via === 'persona' && !!kim && kim.person?.via === 'domain' && kim.accountName === KESTREL, `Chris placed via ${chris?.person?.via ?? 'none'}; Kim (no persona) placed at ${kim?.accountName ?? 'nothing'} via ${kim?.person?.via ?? 'none'}`);
   demo('C03', !!chris && chris.opportunity === 'open', `the alias "kestrel" on the in-deals read found the deal; opportunity ${chris?.opportunity ?? 'none'}`);
   demo('C04', !/no live opportunity/i.test(text) && (pat?.line.includes('open deal unknown: the person is not placed at an account') ?? false), `no "no live opportunity" anywhere; the unplaced writer's line says "${pat?.line.match(/open deal unknown[^.;]*/)?.[0] ?? 'nothing'}" (C57 F1: no identity, no negative)`);
   demo('C09', !intel.people.some((p) => p.id === 'growth@riseagency.example') && !intel.people.some((p) => p.id === 'ops@lanternfreight.example'), 'the vendor pitch and the support ask are not prospects to re-engage');
@@ -187,7 +193,20 @@ export async function replayOctober8(prisma: PrismaLike, opts: { now: Date; case
   demo('C33', briefing.text.includes(['Good morning.', 'Good afternoon.', 'Good evening.', 'Hello.'].find((g) => briefing.text.includes(g)) ?? '') , `greeting for the New York hour of ${now.toISOString()}: "${briefing.text.split('\n').find((l) => /^Good |^Hello/.test(l)) ?? ''}"`);
   const selection = (intel as unknown as Intelligence).selection;
   demo('C34', /ranked from three bounded pulls/.test(selection?.signals ?? '') && /our Sent read for the \d+ who would be listed/.test(selection?.people ?? ''), `selection: "${selection?.people ?? ''}"`);
-  demo('C08', briefing.html.length > 0 && !/<script/i.test(briefing.html) && briefing.text.length > 0, 'both renderer paths produced (text and HTML); drafts never count as contact: Chris is quiet although a draft to him could exist (the Sent read holds sends only)');
+  // C07/C08 through context/thread-context.ts itself: the stored rows, the Sent reader (with a calendar invitation of ours) and a Drafts reader.
+  const invitation = { id: 'sent-invite', threadId: 't-m-chris-sep2', internalDate: new Date(now.getTime() - 2 * 86_400_000), to: CHRIS, subject: 'Invitation: Chattanooga site walk @ Thu Oct 22, 2026 10am - 11am (EDT)' };
+  const thread = await loadThreadContext(prisma, { email: CHRIS, now }, {
+    listSent: async (recipient) => [...(await listSent(recipient)), ...(recipient.toLowerCase() === CHRIS ? [invitation] : [])],
+    listDrafts: async (recipient) => (recipient.toLowerCase() === CHRIS ? [{ id: 'draft-1', threadId: 't-m-chris-sep2', internalDate: new Date(now.getTime() - 86_400_000), to: CHRIS, subject: 'Re: the Chattanooga yards', text: 'Chris, picking this back up.', isDraft: true }] : []),
+    ownAddresses: new Set(['casey@yardflow.ai']),
+  });
+  const chrisInbound = thread.events.find((e) => e.direction === 'inbound' && e.from?.toLowerCase() === CHRIS) ?? null;
+  const draftEvent = thread.events.find((e) => e.isDraft) ?? null;
+  const calendarEvent = thread.events.find((e) => e.type === 'calendar') ?? null;
+  demo('C07', !!chrisInbound && !!chrisInbound.excerpt && !/Casey Larkin wrote/.test(chrisInbound.excerpt) && chrisInbound.quotedBelow === true && thread.coverage.some((c) => c.source === 'gmail' && c.completeness === 'complete'), `loadThreadContext: ${thread.events.length} typed events; Chris's excerpt is his own text with the quoted history cut (quotedBelow ${String(chrisInbound?.quotedBelow)}); gmail coverage ${thread.coverage.find((c) => c.source === 'gmail')?.completeness ?? 'none'}`);
+  const stateEvents: StateEvent[] = thread.events.map((e) => ({ id: e.id, at: e.at, direction: e.direction, type: e.type, isDraft: e.isDraft, from: e.from, to: e.to, purpose: e.direction === 'inbound' && e.type === 'email' ? 'buyer_conversation' : e.purpose, calendar: (e as { calendar?: StateEvent['calendar'] }).calendar ?? null }));
+  const chrisState = peopleState(stateEvents, now).get(CHRIS) ?? null;
+  demo('C08', !!draftEvent && draftEvent.type === 'draft' && !!calendarEvent && calendarEvent.direction === 'outbound' && !!chrisState && chrisState.lastOutboundAt === new Date(now.getTime() - 33 * 86_400_000).toISOString() && chrisState.lastDraftAt !== null, `the draft is typed draft and the invitation calendar; neither counts as contact: last outbound stays ${chrisState?.lastOutboundAt?.slice(0, 10) ?? 'none'} (Sep 5) with a draft on record; both renderer paths produced (${briefing.html.length} chars of HTML, ${briefing.text.length} of text)`);
 
   // 2. Pursue on Chris: the decision carries the provenance, the angle is deal work on the C53 packet, a second Pursue keeps it.
   const decision = await applyDecision(prisma, { key: `person:${CHRIS}`, decision: 'pursue', actor: ACTOR, now, via: 'app' }, { contactLookup: async () => ({ contactId: '217664765537', email: CHRIS, companyIds: ['55600000001'], dealIds: ['62700000001'], name: 'Chris Ortiz', title: 'Director, Distribution' }), identity, inDeals: async () => inDeals });
@@ -207,7 +226,7 @@ export async function replayOctober8(prisma: PrismaLike, opts: { now: Date; case
     angleRefusal = angle ? null : run.results.find((x) => x.id === decision.angleTaskId)?.error ?? (run.failed ? 'failed' : null);
   }
   demo('C06', !!angle && angle.inDeal === true && angle.dealId === '62700000001', `the angle is deal work scoped to ${angle?.dealId ?? 'nothing'} (${run.succeeded} succeeded, ${run.failed} failed${angleRefusal ? `: ${angleRefusal}` : ''})`);
-  demo('C07', packet.timeline.some((e) => e.direction === 'inbound' && !!e.excerpt), `the packet timeline carries ${packet.timeline.length} typed events with the author's own text`);
+  // (C07 is demonstrated above through loadThreadContext; the C53 packet's timeline is the sink's.)
   demo('C13', validateClaims([...packet.buyerFacts, ...packet.sellerHypotheses, ...packet.externalFacts]).ok && packetRun.report.refused.length === 0, 'every packet claim validates; none refused');
   demo('C14', packet.sellerHypotheses.some((c) => c.sourceKind === 'vault'), `vault claims: ${packet.sellerHypotheses.filter((c) => c.sourceKind === 'vault').map((c) => c.sourceId).join(', ')}`);
   demo('C15', packet.sellerHypotheses.filter((c) => c.sourceKind === 'vault' || c.sourceKind === 'clawd').every((c) => c.indexedAt && c.observedAt && c.indexedAt.slice(0, 10) !== c.observedAt.slice(0, 10)), 'every vault and Clawd claim is dated by its own day, not the October 8 rebuild');

@@ -23,7 +23,7 @@ async function main() {
   if (live && !process.env.AI_GATEWAY_API_KEY?.trim()) throw new Error('--live needs AI_GATEWAY_API_KEY in the environment (never printed); none is set');
   const now = new Date();
   const db = ledgerDb({ accounts: [...new Set(REFERENCE_SET.map((c) => c.account?.name).filter((x): x is string => !!x))], personas: REFERENCE_SET.filter((c) => c.person && c.account).map((c, n) => ({ id: n + 1, email: c.person!.email, name: c.person!.name, title: c.person!.title, account_name: c.account!.name, do_not_contact: false })) }, now);
-  const report = await evaluateQuality(REFERENCE_SET, { now, referenceVersion: REFERENCE_SET_VERSION, prisma: db.client(), ...(live ? {} : { generate: mockedGenerator(REFERENCE_SET) }) });
+  const report = await evaluateQuality(REFERENCE_SET, { now, referenceVersion: REFERENCE_SET_VERSION, prisma: db.client(), ...(live ? {} : { generate: mockedGenerator() }) });
   const out = arg('--out') ?? 'docs/gap/QUALITY_EVAL.md';
   writeFileSync(out, renderQualityEval(report), 'utf8');
   const failures = QUALITY_CHECKS.reduce((n, k) => n + report.checks[k].failures.length, 0);

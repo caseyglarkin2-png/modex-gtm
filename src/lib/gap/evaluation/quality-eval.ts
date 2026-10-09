@@ -13,6 +13,9 @@
  *   specific_next_step   the proposed action fits the motion and the starters are open questions
  *   disconfirming        at least one starter admits a "no" (asks whether, or, if, still, already, not)
  *   house_voice          no em dash, no throughput, yards plural, no product, no money (the handler's own checks)
+ *   missing_source_said  when a whole source kind could not be read (the missing-source variant removed the last CRM, vault
+ *                        or Clawd source), the angle's context gaps or caveat name it; a silent angle fails
+ *   supported_claims     also: at least one sentence is a FACT citing a record label, so the C22 fact path is exercised
  *
  * The run records the model and provider that answered, the prompt hash, the reference version and each packet
  * revision, and the cost from the spend ledger. A MOCKED run (a scripted generator) is labelled so and never claimed
@@ -28,8 +31,8 @@ import type { ReferenceCase, ReferenceSource } from './reference-types';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
 
-export type QualityCheck = 'produced' | 'motion_and_person' | 'known_answer' | 'no_prohibited_claim' | 'no_authority_leak' | 'supported_claims' | 'specific_next_step' | 'disconfirming' | 'house_voice';
-export const QUALITY_CHECKS: readonly QualityCheck[] = ['produced', 'motion_and_person', 'known_answer', 'no_prohibited_claim', 'no_authority_leak', 'supported_claims', 'specific_next_step', 'disconfirming', 'house_voice'];
+export type QualityCheck = 'produced' | 'motion_and_person' | 'known_answer' | 'no_prohibited_claim' | 'no_authority_leak' | 'supported_claims' | 'specific_next_step' | 'disconfirming' | 'house_voice' | 'missing_source_said';
+export const QUALITY_CHECKS: readonly QualityCheck[] = ['produced', 'motion_and_person', 'known_answer', 'no_prohibited_claim', 'no_authority_leak', 'supported_claims', 'specific_next_step', 'disconfirming', 'house_voice', 'missing_source_said'];
 export const DECISIONS = ['pursue', 'more', 'explore'] as const;
 export type Decision = (typeof DECISIONS)[number];
 /** The motions that produce an angle; a reply owed, an opt-out, a vendor or a suspicious sender never reach the handler (the ranker keeps them out). */
@@ -94,18 +97,35 @@ export function scoreAngle(c: ReferenceCase, variant: 'full' | 'missing_source',
     const scoped = c.id === 'two-deals' ? '62700000010' : c.sources.find((s) => /^hubspot:deal:/.test(s.sourceId))?.sourceId.replace(/^hubspot:deal:/, '') ?? null;
     if (scoped && variant === 'full' && angle.dealId !== scoped) f.push({ check: 'motion_and_person', detail: `scoped to deal ${angle.dealId ?? 'none'}, expected ${scoped}` });
   } else if (angle.inDeal && !dealSourcePresent) f.push({ check: 'motion_and_person', detail: 'deal work claimed with no deal on record' });
-  // known_answer
-  for (const m of c.expected.mustSay) if (!mentions(text, m)) f.push({ check: 'known_answer', detail: `does not say "${m}"` });
-  // no_prohibited_claim
-  for (const p of c.expected.prohibited) if (mentions(text, p.claim)) f.push({ check: 'no_prohibited_claim', detail: `says "${p.claim}": ${p.reason}` });
+  // known_answer: an entry is required only while a remaining source can supply it (the missing-source variant removes one).
+  const remaining = c.sources.filter((s) => !(variant === 'missing_source' && s.sourceId === c.missingSource.remove));
+  const supplied = remaining.map((s) => lower(s.text)).join('\n');
+  const derivable = (entry: string) => entry.split('|').some((alt) => alt.trim() && supplied.includes(lower(alt.trim()))) || /^open deal\b|deal work/i.test(entry) && remaining.some((s) => /^hubspot:deal:/.test(s.sourceId));
+  for (const m of c.expected.mustSay) if (derivable(m) && !mentions(text, m)) f.push({ check: 'known_answer', detail: `does not say "${m}"` });
+  // no_prohibited_claim: the prohibited list was written against the whole record; the missing-source variant is judged by missing_source_said instead.
+  if (variant === 'full') for (const p of c.expected.prohibited) if (mentions(text, p.claim)) f.push({ check: 'no_prohibited_claim', detail: `says "${p.claim}": ${p.reason}` });
   // no_authority_leak
   for (const s of c.sources.filter((x) => x.claimClass === 'seller_noted' || x.claimClass === 'inference' || x.claimClass === 'internal_only' || x.claimClass === 'modeled')) {
     const span = leakedSpan(text, s);
     if (span) f.push({ check: 'no_authority_leak', detail: `${s.sourceId} (${s.claimClass}): "${span}"` });
   }
-  // supported_claims
+  // supported_claims (C57 pass 2, 6b: an all-inference answer never exercises the fact path; one cited fact is required where the record offers a buyer line or a checked fact)
   if (!angle.support || !angle.support.length) f.push({ check: 'supported_claims', detail: 'no support block on the angle' });
-  else for (const s of angle.support) if (s.kind === 'fact' && !s.refs.length) f.push({ check: 'supported_claims', detail: `a fact with no record label: "${s.text.slice(0, 60)}"` });
+  else {
+    for (const s of angle.support) if (s.kind === 'fact' && !s.refs.length) f.push({ check: 'supported_claims', detail: `a fact with no record label: "${s.text.slice(0, 60)}"` });
+    const recordOffersFacts = remaining.some((s) => (s.claimClass === 'buyer_said' && s.externalOk) || (s.claimClass === 'checked_public' && s.externalOk));
+    if (recordOffersFacts && !angle.support.some((s) => s.kind === 'fact' && s.refs.length)) f.push({ check: 'supported_claims', detail: 'the record offers buyer words or a checked fact, and no sentence cites one as a fact' });
+  }
+  // missing_source_said
+  if (variant === 'missing_source') {
+    const removed = c.sources.find((s) => s.sourceId === c.missingSource.remove);
+    const kind = removed?.kind === 'crm' ? 'crm' : removed?.kind === 'vault' ? 'vault' : removed?.kind === 'clawd' ? 'clawd' : null;
+    const noneLeft = kind ? !c.sources.some((s) => s.kind === removed!.kind && s.sourceId !== c.missingSource.remove) : false;
+    if (kind && noneLeft) {
+      const said = (angle.contextGaps ?? []).some((g) => g.toLowerCase().includes(kind)) || /not read|could not be read|unknown|unavailable/i.test(angle.caveat ?? '');
+      if (!said) f.push({ check: 'missing_source_said', detail: `${kind} could not be read and neither the context gaps nor the caveat say so` });
+    }
+  }
   // specific_next_step
   const allowed = ACTION_BY_MOTION[c.expected.motion] ?? ['email', 'call', 'research'];
   if (!allowed.includes(angle.proposedAction)) f.push({ check: 'specific_next_step', detail: `action ${angle.proposedAction} for motion ${c.expected.motion}` });

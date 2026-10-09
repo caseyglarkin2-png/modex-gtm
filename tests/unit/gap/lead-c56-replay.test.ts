@@ -17,7 +17,7 @@ describe('C56: the October 8 replay', () => {
   it('runs the day end to end on sinks: every C01-C44 ticket has a disposition, none an exception, nothing sent, both renderings present', async () => {
     const seed = replayWorldSeed(NOW);
     const db = ledgerDb({ accounts: seed.accounts, personas: seed.personas, inbound: seed.inbound, signals: seed.signals, triggers: seed.triggers }, NOW);
-    const r = await replayOctober8(db.client(), { now: NOW, cases: REFERENCE_SET, generate: mockedGenerator(REFERENCE_SET) });
+    const r = await replayOctober8(db.client(), { now: NOW, cases: REFERENCE_SET, generate: mockedGenerator() });
     const byId = new Map(r.dispositions.map((d) => [d.id, d]));
     for (const id of TICKET_IDS) expect(byId.has(id), id).toBe(true);
     const exceptions = r.dispositions.filter((d) => d.status === 'exception');

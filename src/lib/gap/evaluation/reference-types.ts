@@ -34,8 +34,10 @@ export interface ReferenceCase {
     purposes: Purpose[];
     relationship: Relationship;
     motion: Motion;
-    /** Phrases a prepared output must contain (one is enough per entry; alternatives separated by |). */
+    /** Phrases a prepared ANGLE must contain, derivable from the record it is handed (one is enough per entry; alternatives separated by |). */
     mustSay: string[];
+    /** Phrases the intelligence LINE (work/intel.ts) must contain for this item; asserted by the intel suites and the replay, never by the angle scorer. */
+    lineMustSay?: string[];
     /** Claims a prepared output must never make, with the reason. */
     prohibited: Array<{ claim: string; reason: string }>;
     /** Sources that must be retrieved (by sourceId) for the output to count as grounded (C53 recall). */

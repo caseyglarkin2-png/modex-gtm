@@ -17,12 +17,19 @@ const world = () => ledgerDb({ accounts: [...new Set(REFERENCE_SET.map((c) => c.
 
 describe('C54: the quality harness', () => {
   it('36 held-out outputs (6 generating cases x 2 variants x 3 decisions) through the real handler with the mocked generator; every check reports its sample; the report is labelled MOCKED', async () => {
-    const r = await evaluateQuality(REFERENCE_SET, { now: NOW, referenceVersion: REFERENCE_SET_VERSION, prisma: world().client(), generate: mockedGenerator(REFERENCE_SET) });
+    const r = await evaluateQuality(REFERENCE_SET, { now: NOW, referenceVersion: REFERENCE_SET_VERSION, prisma: world().client(), generate: mockedGenerator() });
     expect(r.mode).toBe('MOCKED');
     expect(r.sampleSize).toEqual({ cases: 6, outputs: 36, refused: 0 });
     expect(REFERENCE_SET.filter((c) => GENERATING_MOTIONS.has(c.expected.motion)).map((c) => c.id)).toEqual(['kenco-positive', 'ambiguous-subsidiary', 'pepsi-repeats', 'hormel-2018', 'general-mills-2013', 'two-deals']);
     expect(r.checks.produced.checked).toBe(36);
     for (const k of QUALITY_CHECKS) {
+      // FINDING C57-P2-9 (open, routed to builder B, agents/angle-claims.ts packetRecord): the record block never carries the next accepted
+      // meeting, so with the CRM unread the Kenco angle cannot say a meeting is ahead on Oct 14 or that the roadmap is the thread; the
+      // record-derived mock shows it on the kenco missing-source variant. Pinned until the fix lands, then back to [].
+      if (k === 'known_answer') {
+        expect([...new Set(r.checks[k].failures.map((f) => `${f.caseId}/${f.variant}: ${f.detail}`))]).toEqual(['kenco-positive/missing_source: does not say "Oct 14|meeting is ahead"', 'kenco-positive/missing_source: does not say "roadmap"']);
+        continue;
+      }
       // FINDING C54-1 (closed by builder B, agents/develop-angle.ts sourceLineFor through work/intel.ts isDateOnly): a date-only
       // publication names its own day; the pepsi case's three decisions are back to [].
       expect(r.checks[k].failures, k).toEqual([]);
@@ -35,12 +42,15 @@ describe('C54: the quality harness', () => {
     const md = renderQualityEval(r);
     expect(md).toContain('HARNESS CHECK ONLY (MOCKED generator; this is NOT a live model evaluation');
     expect(md).toContain('| no_prohibited_claim | 36 | 0 |');
+    expect(md).toContain('| known_answer | 36 | 6 |');
+    expect(md).toContain('| missing_source_said | 36 | 0 |');
+    expect(md).toContain('| supported_claims | 36 | 0 |');
     expect(md).toContain('| no_authority_leak | 36 | 0 |');
     expect(md).toContain(`${DECISIONS.length} decisions = 36 outputs`);
   });
 
   it('a deliberately bad answer never passes: the handler refuses it or the scorer catches the prohibited claim, the leaked seller note, the pitch and the missing disconfirming question', async () => {
-    const r = await evaluateQuality(REFERENCE_SET, { now: NOW, referenceVersion: REFERENCE_SET_VERSION, prisma: world().client(), generate: mockedGenerator(REFERENCE_SET, { bad: 'kenco-positive' }), cases: [byId('kenco-positive')] });
+    const r = await evaluateQuality(REFERENCE_SET, { now: NOW, referenceVersion: REFERENCE_SET_VERSION, prisma: world().client(), generate: mockedGenerator({ bad: 'Dan Keller' }), cases: [byId('kenco-positive')] });
     expect(r.outputs.every((o) => !o.ok || o.failures.length > 0)).toBe(true);
     expect(renderQualityEval(r)).toContain('## Failures');
     // The scorer on its own, over the bad angle as if the handler had let it through.
