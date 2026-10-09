@@ -94,7 +94,7 @@ describe('C08: draft, sent, received and calendar mail', () => {
     const rsvps = ctx.events.filter((e) => e.type === 'calendar');
     expect(rsvps).toHaveLength(1);
     expect(rsvps[0]).toMatchObject({ id: 'g-rsvp1', direction: 'inbound', calendar: { kind: 'accepted', meetingKey: 'yard walk|tue oct 14, 2026 2pm - 3pm (edt)', startsAt: '2026-10-14T18:00:00.000Z' } });
-    expect(rsvps[0].providerIds).toEqual(['gmail:g-rsvp1', 'rfc:<rsvp1@google.com>', 'gmail:g-rsvp2', 'rfc:<rsvp2@google.com>']);
+    expect(rsvps[0].providerIds).toEqual(['gmail:g-rsvp1', 'rfc:rsvp1@google.com', 'gmail:g-rsvp2', 'rfc:rsvp2@google.com']);
     expect(ctx.events.map((e) => e.id)).toEqual(['hs:7002', 'g-sep16', 'g-oct1', 'g-rsvp1', 'g-draft-oct5']);
   });
 
@@ -127,14 +127,14 @@ describe('C47 (read side): one email through Gmail and HubSpot is one event with
   it('merges by RFC Message-ID, then by a shared provider id; never by subject', async () => {
     const w = world();
     const ctx = await loadThreadContext(w.client(), { threadId: 't-kenco', now: NOW }, { listSent: async () => [] });
-    const sep16 = ctx.events.filter((e) => e.providerIds.includes('rfc:<sep16@kencogroup.com>'));
+    const sep16 = ctx.events.filter((e) => e.providerIds.includes('rfc:sep16@kencogroup.com'));
     expect(sep16).toHaveLength(1);
     expect(sep16[0]).toMatchObject({ id: 'g-sep16', provider: 'gmail', at: '2026-09-16T14:00:00.000Z' });
-    expect(sep16[0].providerIds).toEqual(['gmail:g-sep16', 'rfc:<sep16@kencogroup.com>', 'hubspot:7001']);
+    expect(sep16[0].providerIds).toEqual(['gmail:g-sep16', 'rfc:sep16@kencogroup.com', 'hubspot:7001']);
     // Same subject, different message: two events.
     const sameSubject = ctx.events.filter((e) => e.subject === 'Re: YardFlow and the 2027 roadmap');
     expect(sameSubject.map((e) => e.id)).toEqual(['g-sep16']);
-    expect(ctx.events.find((e) => e.id === 'hs:7002')).toMatchObject({ provider: 'hubspot', excerpt: 'Yes, Thursday works for us.', providerIds: ['hubspot:7002', 'rfc:<sep15b@kencogroup.com>'] });
+    expect(ctx.events.find((e) => e.id === 'hs:7002')).toMatchObject({ provider: 'hubspot', excerpt: 'Yes, Thursday works for us.', providerIds: ['hubspot:7002', 'rfc:sep15b@kencogroup.com'] });
     // A gmail row that already carries the engagement id (the poller linked it) shares a provider id with the HubSpot row.
     const merged = mergeProvenance(buildTimeline([row({ id: 'g-x', hubspot_engagement_id: '9', received_at: new Date('2026-09-01T00:00:00Z') }), row({ id: 'hs:9', source: 'hubspot', hubspot_engagement_id: '9', received_at: new Date('2026-09-01T00:00:01Z') })], []));
     expect(merged.map((e) => [e.id, e.providerIds])).toEqual([['g-x', ['gmail:g-x', 'hubspot:9']]]);
@@ -142,6 +142,6 @@ describe('C47 (read side): one email through Gmail and HubSpot is one event with
     const w2 = world();
     w2.store.gapAuditEvent.push({ id: 'ev1', kind: 'inbound.provenance_linked', subject_type: 'inbound_message', subject_id: 'hs:7002', actor: 'cron:gap-mailbox', payload: { providerId: 'gmail:g-sep15b' }, created_at: NOW });
     const ctx2 = await loadThreadContext(w2.client(), { threadId: 't-kenco', now: NOW }, { listSent: async () => [] });
-    expect(ctx2.events.find((e) => e.id === 'hs:7002')?.providerIds).toEqual(['hubspot:7002', 'rfc:<sep15b@kencogroup.com>', 'gmail:g-sep15b']);
+    expect(ctx2.events.find((e) => e.id === 'hs:7002')?.providerIds).toEqual(['hubspot:7002', 'rfc:sep15b@kencogroup.com', 'gmail:g-sep15b']);
   });
 });

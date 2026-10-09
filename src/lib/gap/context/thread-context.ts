@@ -224,6 +224,45 @@ export function classifyMailType(input: MailTypeInput): { type: TimelineType; is
 }
 
 // ---------------------------------------------------------------------------
+// The RFC Message-ID as a key (C47, C57 F16)
+// ---------------------------------------------------------------------------
+
+/**
+ * One form of an RFC 2822 Message-ID for matching: trimmed, the angle brackets dropped, lowercased. Gmail reports
+ * `<abc@host>`, HubSpot's hs_email_message_id may report `abc@host`; a stored row may hold either. Null for nothing.
+ */
+export function normalizeRfcId(raw: string | null | undefined): string | null {
+  const core = (raw ?? '').trim().replace(/^<+/, '').replace(/>+$/, '').trim().toLowerCase();
+  return core ? core : null;
+}
+
+/** The stored spellings one Message-ID may have: with and without brackets (a lookup uses them case-insensitively). */
+export function rfcVariants(raw: string | null | undefined): string[] {
+  const core = normalizeRfcId(raw);
+  if (!core) return [];
+  const given = (raw ?? '').trim();
+  return [...new Set([core, `<${core}>`, given].filter(Boolean))];
+}
+
+/** A Prisma `where` on rfc_message_id that matches any spelling of the id, case-insensitively; null for nothing. */
+export function rfcWhere(raw: string | null | undefined): { in: string[]; mode: 'insensitive' } | null {
+  const v = rfcVariants(raw);
+  return v.length ? { in: v, mode: 'insensitive' } : null;
+}
+
+/**
+ * Record that a stored message was seen again through another provider id (`gmail:<id>` or `hubspot:<id>`), once
+ * per provider id. Soft: a store without the audit delegate records nothing and reports false.
+ */
+export async function linkProvenance(prisma: PrismaLike, input: { storedId: string; providerId: string; actor: string; rfcMessageId?: string | null; extra?: Record<string, unknown> }): Promise<boolean> {
+  if (typeof prisma?.gapAuditEvent?.findFirst !== 'function' || typeof prisma?.gapAuditEvent?.create !== 'function') return false;
+  const linked = await prisma.gapAuditEvent.findFirst({ where: { kind: PROVENANCE_LINKED_KIND, subject_type: PROVENANCE_SUBJECT_TYPE, subject_id: input.storedId, payload: { path: ['providerId'], equals: input.providerId } }, select: { id: true } });
+  if (linked) return false;
+  await prisma.gapAuditEvent.create({ data: { kind: PROVENANCE_LINKED_KIND, actor: input.actor, subject_type: PROVENANCE_SUBJECT_TYPE, subject_id: input.storedId, payload: { providerId: input.providerId, rfcMessageId: input.rfcMessageId ?? null, ...(input.extra ?? {}) } } });
+  return true;
+}
+
+// ---------------------------------------------------------------------------
 // Rows to events
 // ---------------------------------------------------------------------------
 
@@ -235,7 +274,8 @@ export function providerIdsOf(row: Pick<StoredInbound, 'id' | 'rfc_message_id' |
     ids.push(`gmail:${row.id}`);
     if (row.hubspot_engagement_id) ids.push(`hubspot:${row.hubspot_engagement_id}`);
   }
-  if (row.rfc_message_id) ids.push(`rfc:${row.rfc_message_id.trim()}`);
+  const rfc = normalizeRfcId(row.rfc_message_id);
+  if (rfc) ids.push(`rfc:${rfc}`);
   return ids;
 }
 
@@ -268,7 +308,8 @@ export function outboundToEvent(m: OutboundMail, opts: { from?: string | null } 
   const typed = classifyMailType({ subject: m.subject, from: opts.from ?? null, isDraft: m.isDraft === true });
   const { excerpt, quotedBelow } = excerptOf(m.text ?? null);
   const ids = [`gmail:${m.id}`];
-  if (m.rfcMessageId) ids.push(`rfc:${m.rfcMessageId.trim()}`);
+  const rfc = normalizeRfcId(m.rfcMessageId);
+  if (rfc) ids.push(`rfc:${rfc}`);
   return {
     id: m.id,
     at: iso(m.internalDate),

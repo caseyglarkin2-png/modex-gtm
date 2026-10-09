@@ -15,7 +15,7 @@ import { prisma } from '@/lib/prisma';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { gapGmailSender } from '@/lib/gap/execution/gap-sender';
 import { GapSubnav } from '@/components/gap/gap-subnav';
-import { actionSecret, verifyActionToken } from '@/lib/gap/work/action-token';
+import { actionSecret, executionAllowed, verifyActionToken } from '@/lib/gap/work/action-token';
 import { nextUnassignedItem, sendAssignment, startDay } from '@/lib/gap/work/assignment';
 import { nyDay } from '@/lib/gap/work/dates';
 import { loadWorkDay } from '@/lib/gap/work/load-day';
@@ -25,7 +25,7 @@ import { loadSellerSettings } from '@/lib/gap/work/settings';
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Start the day' };
 
-export default async function StartPage({ searchParams }: { searchParams?: Promise<{ t?: string; next?: string }> }) {
+export default async function StartPage({ searchParams }: { searchParams?: Promise<{ t?: string; next?: string; confirmed?: string }> }) {
   if (assertGapEnabled('GAP_ROUTING_ENABLED')) notFound();
   const session = await auth();
   if (!session?.user?.email) redirect(loginHref('/gap/start/'));
@@ -35,6 +35,31 @@ export default async function StartPage({ searchParams }: { searchParams?: Promi
   const day = nyDay(now);
   const token = q.t ? verifyActionToken(q.t, { secret: actionSecret(), now }) : null;
   const via = token?.ok ? 'link' : 'app';
+
+  // C43 / C57 F-C2: starting the day records a row and sends an assignment email, so a bare GET (a link preview, a
+  // prefetch of the nav link, a scanner) does nothing. One click confirms; the token and `next` ride along.
+  if (!executionAllowed({ op: 'start', method: 'GET', confirmed: q.confirmed === '1' }).ok) {
+    return (
+      <div className="mx-auto max-w-2xl space-y-5">
+        <GapSubnav />
+        <div>
+          <h1 className="text-2xl font-semibold tracking-tight">{q.next === '1' ? 'Send the next assignment?' : 'Start the day?'}</h1>
+          <p className="mt-1 text-sm text-[var(--muted-foreground)]" data-testid="start-confirm-line">
+            {q.next === '1' ? 'The next unassigned item on today\'s list goes to your briefing address as its own email.' : 'This records the day as started, plans it if it is not planned yet, and sends the first assignment to your briefing address.'} Nothing goes to a buyer. Nothing happens until you confirm.
+          </p>
+        </div>
+        <form method="get" action="/gap/start" className="flex flex-wrap items-center gap-3" data-testid="start-confirm-form">
+          {q.t ? <input type="hidden" name="t" value={q.t} /> : null}
+          {q.next === '1' ? <input type="hidden" name="next" value="1" /> : null}
+          <input type="hidden" name="confirmed" value="1" />
+          <button type="submit" className="inline-flex min-h-11 items-center rounded-md bg-[var(--primary)] px-3 text-sm font-semibold text-[var(--primary-foreground)]" data-testid="start-confirm">
+            {q.next === '1' ? 'Send the next one' : 'Start the day'}
+          </button>
+          <Link href="/gap/" className="text-sm underline">Not now, back to Work</Link>
+        </form>
+      </div>
+    );
+  }
 
   const plan = await planDay(
     prisma,
@@ -82,7 +107,7 @@ export default async function StartPage({ searchParams }: { searchParams?: Promi
           {mailed && 'reason' in mailed ? <p className="text-xs text-[var(--muted-foreground)]">Not emailed: {mailed.reason}.</p> : null}
           <div className="flex flex-wrap gap-2">
             <Link href={item.href} className="inline-flex min-h-11 items-center rounded-md bg-[var(--primary)] px-3 text-sm font-semibold text-[var(--primary-foreground)]" data-testid="start-open">Open it</Link>
-            <Link href="/gap/start?next=1" className="inline-flex min-h-11 items-center rounded-md border border-[var(--border)] px-3 text-sm">Send the next one by email</Link>
+            <Link href="/gap/start?next=1" prefetch={false} className="inline-flex min-h-11 items-center rounded-md border border-[var(--border)] px-3 text-sm">Send the next one by email</Link>
             <Link href="/gap/" className="inline-flex min-h-11 items-center text-sm underline">Work</Link>
           </div>
         </section>

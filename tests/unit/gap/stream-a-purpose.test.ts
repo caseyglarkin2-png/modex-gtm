@@ -45,6 +45,19 @@ describe('C09: purpose, with evidence', () => {
     expect(classifyPurpose(inbound('x@y.example', 'URGENT', 'Your account has been suspended. Verify your identity within 24 hours.'))).toMatchObject({ purpose: 'suspicious', confidence: 'medium' });
   });
 
+  it('C57 F2: a prospect with no persona who says yes to a call about the pilot at their yards is a buyer conversation and stays re-engageable; the Riserify pitch is still a vendor', () => {
+    const yes = classifyPurpose(inbound('ops@newprospect.example', 'Re: trailer turns', 'Yes, open to a quick call next week to talk through the pilot at our two yards.'));
+    expect(yes).toMatchObject({ purpose: 'buyer_conversation', confidence: 'medium', evidence: expect.arrayContaining(['a person wrote back', expect.stringMatching(/^buyer vocabulary: "(trailer|pilot|yards)"$/)]) });
+    expect(reengageEligible({ purposes: [yes.purpose], relationship: 'unknown' })).toMatchObject({ eligible: true });
+    expect(classifyPurpose(inbound('ops@newprospect.example', 'Re: 15 minutes?', 'Sure, book a 15-min call for Thursday; bring the demo.')).purpose).toBe('buyer_conversation');
+    // Pitch cues beside buyer vocabulary: a buyer at low confidence, the pitch words said in the evidence.
+    const mixed = classifyPurpose(inbound('seb@riserify.example', 'Yards', 'We provide outsourced SDR services; happy to discuss your yards on a call.'));
+    expect(mixed).toMatchObject({ purpose: 'buyer_conversation', confidence: 'low', evidence: expect.arrayContaining([expect.stringContaining('pitch words beside it: "We provide"')]) });
+    expect(classifyPurpose(RISERIFY)).toMatchObject({ purpose: 'vendor_solicitation', confidence: 'high' });
+    // An ask for a call alone is not a pitch: with no buyer vocabulary and no pitch cue it is unknown, for review.
+    expect(classifyPurpose(inbound('x@somewhere.example', 'Hi', 'Open to a quick call sometime?')).purpose).toBe('unknown');
+  });
+
   it('unknown stays unknown; a draft and our own sends are never a contact of theirs; each axis is judged apart', () => {
     expect(classifyPurpose(inbound('stranger@somewhere.example', 'quick question', 'Hey, quick question for you.'))).toEqual({ purpose: 'unknown', confidence: 'low', evidence: ['a person wrote back', 'no purpose cue matched: review it'] });
     expect(classifyPurpose({ from: 'casey@freightroll.com', subject: 'Re: Kenco', excerpt: 'Three numbers', direction: 'outbound', isDraft: true }, { knownPerson: true })).toMatchObject({ purpose: 'buyer_conversation', evidence: ['a draft: preparation, not a contact'] });

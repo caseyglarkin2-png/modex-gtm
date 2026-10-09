@@ -60,7 +60,7 @@
 import { classifyInboundReply } from '@/lib/email/reply-precision';
 import { isGapOsEnabled } from '@/lib/gap/flags';
 import { ingestReply } from '@/lib/gap/replies/ingest';
-import { PROVENANCE_LINKED_KIND, PROVENANCE_SUBJECT_TYPE } from '@/lib/gap/context/thread-context';
+import { linkProvenance, rfcWhere } from '@/lib/gap/context/thread-context';
 import { getHubSpotClient, withHubSpotRetry } from '@/lib/hubspot/client';
 
 export const WATERMARK_KEY = 'gap_hubspot_replies_watermark';
@@ -329,10 +329,13 @@ export async function pollHubSpotReplies(prisma: any, opts: PollOptions, deps: P
     // is ONE message. The stored row gains this engagement id as its second provenance link; no second row, no
     // second bell, no second ingest (the Gmail path ran it on the same message). A `linked_inbound` marker makes the
     // next run read it as existing. Never by subject.
+    // C57 F16: the id is matched in every spelling (with or without angle brackets, any case): HubSpot may answer
+    // `abc@host` for a message Gmail stored as `<abc@host>`.
     const rfc = (engagement.rfcMessageId ?? '').trim();
-    if (rfc) {
+    const rfcMatch = rfcWhere(rfc);
+    if (rfcMatch) {
       const stored: { id: string; hubspot_engagement_id: string | null } | null = await prisma.inboundMessage.findFirst({
-        where: { rfc_message_id: rfc, id: { not: messageId } },
+        where: { rfc_message_id: rfcMatch, id: { not: messageId } },
         select: { id: true, hubspot_engagement_id: true },
       });
       if (stored) {
@@ -341,7 +344,7 @@ export async function pollHubSpotReplies(prisma: any, opts: PollOptions, deps: P
         if (!stored.hubspot_engagement_id) {
           await prisma.inboundMessage.update({ where: { id: stored.id }, data: { hubspot_engagement_id: engagement.id } });
         } else if (stored.hubspot_engagement_id !== engagement.id) {
-          await prisma.gapAuditEvent.create({ data: { kind: PROVENANCE_LINKED_KIND, actor: 'cron:gap-hubspot-replies', subject_type: PROVENANCE_SUBJECT_TYPE, subject_id: stored.id, payload: { providerId: `hubspot:${engagement.id}`, rfcMessageId: rfc } } });
+          await linkProvenance(prisma, { storedId: stored.id, providerId: `hubspot:${engagement.id}`, actor: 'cron:gap-hubspot-replies', rfcMessageId: rfc });
         }
         await prisma.notification.create({
           data: { type: LINKED_TYPE, account_name: null, persona_email: (engagement.fromEmail ?? '').trim().toLowerCase() || null, subject: `[linked: ${stored.id}] ${(engagement.subject ?? '').trim()}`.slice(0, SUBJECT_LENGTH), preview: null, source_id: messageId, read: true },
