@@ -31,6 +31,7 @@ import { loadOverrides, overrideFor, relationshipOverride, type ClassificationOv
 import type { IdentityContext } from '../identity/resolve';
 import { loadIdentityContext } from '../identity/service';
 import { signalStatus } from '../signals/intake';
+import { TRUTH_TEXT, type TruthLabel } from './truth-text';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -46,13 +47,8 @@ export const PROSPECT_DECISION = 'prospect.decision' as const;
 export const DECISIONS = ['pursue', 'explore', 'save', 'skip', 'dismiss', 'more'] as const;
 export type Decision = (typeof DECISIONS)[number];
 
-export type TruthLabel = 'historical_observation' | 'verified_fact' | 'unverified_status' | 'contradicted';
-export const TRUTH_TEXT: Record<TruthLabel, string> = {
-  historical_observation: 'Historical observation',
-  verified_fact: 'Verified fact',
-  unverified_status: 'Unverified present-day status',
-  contradicted: 'Contradicted or superseded',
-};
+// The truth label words live in the client-safe `./truth-text` (the panel imports them there; this module is server-only).
+export { TRUTH_TEXT, type TruthLabel } from './truth-text';
 
 export interface IntelItem {
   kind: 'signal' | 'trigger' | 'person';

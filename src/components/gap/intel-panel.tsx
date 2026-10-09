@@ -12,7 +12,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import type { Intelligence, IntelItem, Decision, PursuedItem } from '@/lib/gap/work/intel';
 import type { PreparedAngle } from '@/lib/gap/agents/develop-angle';
-import { TRUTH_TEXT } from '@/lib/gap/work/intel';
+import { TRUTH_TEXT } from '@/lib/gap/work/truth-text';
 import { AccountLink } from './account-link';
 import { accountHref } from '@/lib/gap/account-intel/href';
 import { refreshNow } from './refresh-now';
