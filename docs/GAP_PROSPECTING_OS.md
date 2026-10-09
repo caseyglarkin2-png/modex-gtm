@@ -2507,6 +2507,7 @@ targets are kept (Casey asked for daily activity counts against a target) but af
 - X15b `replies/hubspot-poller.ts` (`gapIdentities`, `PollOptions.gapIdentities`, `report.notToGap`) + `/api/cron/gap-hubspot-replies`: HubSpot logs every teammate's inbound email, and the poller landed any from a known person as a reply to GAP; now an engagement addressed to someone other than a GAP identity (the GAP mailbox, the briefing address, the command senders) is counted and never landed; a row with no recipient still lands; older callers without the identities are unchanged (hubspot-poller.test.ts +3, RED on the production code). Rows landed before this stay; X15a ranks the old ones as admin.
 - X15d `components/gap/health-strip.tsx` (`placement`): the health line lives in System at the foot of Work; the head carries it only when outbound is BLOCKED or health could not be checked (the live page led with "Degraded: recommendations refreshed 3d ago" above the seller's day) (health.test.tsx +2, RED on the production code)
 - X21 (a P1 found by X20a on production, 2026-10-08 19:05Z: the first briefing tick failed "Transaction already closed", the cron state read "never completed", no plan for the day) `work/plan.ts`: `planDay` ran the whole day builder (HubSpot reads, the cockpit read) INSIDE the advisory-lock transaction, which has a short timeout; the harness never saw it (scratch is fast). Now the day is built before the lock; the lock guards only the re-check and the one write, and a plan written meanwhile wins (day-plan.test.ts +1, RED on the production code). X17-X20 merged to main 146fb342 (PR #415), production READY 19:59Z (dpl_AkHc9jyjsvDKvfiF6s7kcJeF1Eif); smoke: health shows the two new components (and the briefing failure above), `/gap/activity` renders (112 research runs today, provider-proven), no stepped deal card today.
+- X22 (Casey, 2026-10-09: "was the email sent? havent received the new one i dont think"): an explicit resend of the morning briefing. `GET /api/cron/gap-briefing/?resend=1` with the secret sends the briefing again now, past the hour window and past the day's already-sent row, with no day claim taken; the `briefing.sent` row says `resend: true`; the schedule itself never takes that path. Commit 65ceae9d, merged to main a195467f (PR #431), production READY `dpl_G9KX6ZmwES9f719vk8jsrCcay6r1` 2026-10-09 01:47Z (the C45 receipt binds the alias to it); the fresh briefing on the prospecting-first composition was resent to Casey after the deploy (thread 1a11e5845f5964a2; the acceptance reply START/REVISE/APPROVE is Casey's, never simulated).
 - X20b `work/activity.ts` (the projection: thirteen activity kinds over the existing ledger, each with `basis: provider | self_reported`; a copy is content copied, a dial link is a call attempted, a manual send without its Gmail id is self-reported, delivered is never a kind; `accountability()`: what I intended against the plan's items, each done, set aside or open by the events that complete them, what was completed by kind and basis, what needs attention, what the agents are handling) + `/gap/activity` (`components/gap/activity-view.tsx`, `?day=` for an earlier day; Activity under More) (activity.test.ts 6, activity-view.test.tsx 2)
 - X20a `health/health.ts` + `health/load.ts`: two health components, `briefing` (off says off; no address degraded; sent today with the time; unsent past a 90-minute grace after the seller's hour degraded; failed today degraded; before the hour "due") and `agents` (off says off; never run, stale past 30 minutes, a task waiting past 20 minutes or a task failed today degraded), each with an owner and a retry path; read from the cron-monitor states, the seller settings, the day's briefing rows and the task rows (health.test.tsx +3, health-route.test.ts pin 7). Closes the named debt below.
 - X18 `work/plan.ts` (`markCarried`, `loadPreviousPlan`: an item carried when the newest earlier plan within the lookback held the same object, or the same kind at the same account; `carriedFrom` stored on the plan row) + `work/briefing.ts` (the item says "Carried from <day>"; the body counts "Carried over: n of N (one from <day>, ...)") (day-plan.test.ts +2, briefing.test.ts +1)
@@ -2724,7 +2725,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C01 [P1] Carry deal coverage into briefing intelligence
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Commit b21b8230 (V1, C01-C06 together; `tests/unit/gap/v1-kenco.test.ts` 6, the joined Kenco fixture: Kenco Logistics with alias kenco, domain kencogroup.com, HubSpot company 55608495412, the open deal at presentationscheduled, Dave and Craig as contacts; focused run green, serial, one worker). `work/deal-coverage.ts` (new): the day's in-deals read becomes a `DealCoverage` with its status (complete, unavailable, absent) and `checkedAt`; `defaultIntel` in `work/briefing-send.ts` takes the same read the day took (`deps.inDeals`, soft) and the cockpit page passes it through `dealCoverageFrom`; the real composition is exercised, not a hand-built ranker fixture.
 - **Change boundary:** work/briefing-send.ts defaultIntel and its caller: pass the same complete/unavailable deal snapshot used by the day, including checkedAt.
 - **Acceptance:** Complete Kenco snapshot reaches rankPeople in both surfaces; failed snapshot produces unknown. Exercise the real defaultIntel composition, not a manually built ranker fixture.
 - **Depends on:** none.
@@ -2733,7 +2734,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C02 [P1] Resolve a mailbox person through existing identity machinery
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Commit b21b8230 (V1, C01-C06 together; `tests/unit/gap/v1-kenco.test.ts` 6, the joined Kenco fixture: Kenco Logistics with alias kenco, domain kencogroup.com, HubSpot company 55608495412, the open deal at presentationscheduled, Dave and Craig as contacts; focused run green, serial, one worker). `work/person-identity.ts` (new): `resolvePersonAccount` places a mailbox person through the existing identity service (persona, the CRM contact's company id, the thread's alias, the verified domain; freemail never places; ambiguity is kept, not resolved by guess); `opportunity/contact-reads.ts` (new) reads a HubSpot contact by address with its company and deal associations, supplied by the routes only (the library never calls the CRM by default, so a test cannot make a live call).
 - **Change boundary:** work/decide.ts and identity/opportunity adapters: exact normalized email -> CRM contact associations -> company IDs/domain aliases. Preserve competing matches; do not auto-create CRM records.
 - **Acceptance:** Dave without Persona resolves to company 55608495412 and deal 62704698979; shared corporate domain with two candidate subsidiaries stays ambiguous.
 - **Depends on:** none.
@@ -2742,7 +2743,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C03 [P1] Use stable IDs and alias-aware relationship matching
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Commit b21b8230 (V1, C01-C06 together; `tests/unit/gap/v1-kenco.test.ts` 6, the joined Kenco fixture: Kenco Logistics with alias kenco, domain kencogroup.com, HubSpot company 55608495412, the open deal at presentationscheduled, Dave and Craig as contacts; focused run green, serial, one worker). Coverage is folded by every recorded deal name and alias (`byName`) and by contact id (`byContactId`); `dealsAt(coverage, name, extraNames)` answers for the canonical name and its aliases; `dealsByContactId` for a person; the `kenco` alias finds the Kenco Logistics deal.
 - **Change boundary:** work/intel.ts: replace exact account-name Set membership with existing resolved identity references; retain display names as labels.
 - **Acceptance:** Kenco, Kenco Logistics and kencogroup.com map to one supported identity; unrelated similarly named company does not.
 - **Depends on:** C02.
@@ -2751,7 +2752,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C04 [P1] Make negative opportunity claims conditional on complete reads
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Commit b21b8230 (V1, C01-C06 together; `tests/unit/gap/v1-kenco.test.ts` 6, the joined Kenco fixture: Kenco Logistics with alias kenco, domain kencogroup.com, HubSpot company 55608495412, the open deal at presentationscheduled, Dave and Craig as contacts; focused run green, serial, one worker). `dealWords`: "their account is in an open deal (name, stage): work it from the deal" under a complete read with a deal; "no open deal found (HubSpot read <time> New York)" only under a complete read; "open deal unknown: HubSpot could not be read" or "not read for this list" otherwise; `rankPeople` sets `IntelItem.opportunity` to open, none or unknown and never writes "no live opportunity"; the briefing composition carries the same words.
 - **Change boundary:** work/intel.ts and intel line model: present open, none-confirmed, unknown, ambiguous explicitly.
 - **Acceptance:** Missing identity, timeout, pagination truncation and absent dealAccounts never say no live opportunity; complete empty association read may.
 - **Depends on:** C01,C03.
@@ -2760,7 +2761,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C05 [P1] Preserve message provenance on Pursue
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Commit b21b8230 (V1, C01-C06 together; `tests/unit/gap/v1-kenco.test.ts` 6, the joined Kenco fixture: Kenco Logistics with alias kenco, domain kencogroup.com, HubSpot company 55608495412, the open deal at presentationscheduled, Dave and Craig as contacts; focused run green, serial, one worker). `work/decide.ts`: a Pursue on a person reloads the newest inbound row by address and carries the date, thread id, subject, inbound message id, message count and a bounded excerpt (600 chars of the body or the snippet) into the task input; `recordDecision` carries `resolvedVia`, `ambiguous` and `inboundMessageId`; a prepared angle is kept across a note-less Pursue (A02).
 - **Change boundary:** work/decide.ts person branch: carry source message/thread IDs, mailbox identity, receivedAt, lastWroteAt, body reference and account resolution; reload authoritative source rather than trusting URL payload.
 - **Acceptance:** Dave September 16 remains dated after queue -> task -> angle; missing body is an explicit retrieval gap. Replaying cannot attach another sender’s thread.
 - **Depends on:** C02.
@@ -2769,7 +2770,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C06 [P1] Scope active-deal preparation to the right opportunity
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Commit b21b8230 (V1, C01-C06 together; `tests/unit/gap/v1-kenco.test.ts` 6, the joined Kenco fixture: Kenco Logistics with alias kenco, domain kencogroup.com, HubSpot company 55608495412, the open deal at presentationscheduled, Dave and Craig as contacts; focused run green, serial, one worker). `agents/develop-angle.ts`: the person's open deals (id, name, stage, next step) ride with the task; the prompt says the angle is deal work from the deal's next step, never a cold opener; the result is scoped (`inDeal`, `dealId`, `dealIds`), and more than one deal leaves the scope said as ambiguous rather than picked. The negative control (no deal, a complete read) still says none.
 - **Change boundary:** Reuse deals/scope.ts and active-opportunity resolver before angle/action selection. Resolve Dave and Craig through contact-deal associations; multiple deals require explicit supported scope.
 - **Acceptance:** Two deals at one company with shared contacts do not inherit each other’s next step; active deal proposes deal work without authorizing cold enrollment.
 - **Depends on:** C03,C05.
@@ -2842,7 +2843,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C13 [P1] Define the shared commercial-context contract
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Commit 45a335bb: `context/commercial-context.ts` (new; `tests/unit/gap/commercial-context.test.ts` 4): the one packet (identity, opportunity with coverage and `scopedDealId`, relationship, a typed timeline with drafts and calendar apart, attributed claims with source id, kind, authority, class, visibility, event and observation dates, commitments, incumbents, external facts, per-source coverage, `assembledAt`, `revision`); `validateClaims` refuses an untyped claim by its fault and a refresh time passed as an observation date; `externallyUsable` keeps internal, modeled, inferred and superseded claims out of buyer use; `byAuthority` answers one question by its authoritative source (deal existence is the CRM's, not the vault's); `contextFingerprint` is order independent and moves only with a source id, version or date (C23 keys on it); `emptyPacket` says every source absent, never an empty history. Builders A, B and C build to this contract.
 - **Change boundary:** Extend existing AccountContext/Story rather than a new CRM. Packet: identity, opportunity, timeline, buyer facts, seller hypotheses, commitments, incumbent systems, source IDs, event dates, observed dates, visibility and coverage.
 - **Acceptance:** Contract fixture requires provenance and coverage for each source; API/schema tests reject untyped facts and maintain compatibility.
 - **Depends on:** C06,C08,C09.
@@ -2996,7 +2997,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C29 [P1] Preserve publication date semantics
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Commit 69909205 (`tests/unit/gap/lead-intel-c29-c34.test.ts` 3): `isDateOnly` in `work/intel.ts`: a publication value stored at exactly midnight UTC is a date (an EDGAR filing day) and is formatted in UTC, so an October 8 filing says Oct 8, never Oct 7 New York; a real instant still converts; the item carries `publishedDateOnly`. The proven fault: `2026-10-08T00:00:00Z` rendered "Oct 7, 2026" before.
 - **Change boundary:** Signal/trigger display carries date-only versus timestamp type; do not interpret an EDGAR filing date at UTC midnight as prior New York day.
 - **Acceptance:** 2026-10-08 filing displays Oct8; actual timestamp converts correctly. Do not alter underlying factual date without source evidence.
 - **Depends on:** none.
@@ -3005,7 +3006,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C30 [P2] Cluster related intelligence with retained sources
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Commit 69909205: `rankSignals` clusters related reports of one event at one account (the same idea in the title by `sameIdea`, published within 14 days of each other) under the strongest report; every other source is kept on the item (`alsoReported` with id, source, url, date; `clusterIds`) and the line ends "Also reported by X, Y"; distinct events (a Denver DC, another account) and a recurring title months apart (a 10-Q each quarter) stay separate; a decision on any member removes the whole cluster for the day. The intel fixture signals became distinct events (a site number each) so the old placeholder title no longer masks clustering.
 - **Change boundary:** Reuse signal event IDs and cross-source identity; group related Pepsi/Gatik reports rather than losing three of six slots; avoid merging distinct launches.
 - **Acceptance:** Three corroborating reports one event with three sources; different dates/expansions stay separate when evidence does not establish same event.
 - **Depends on:** none.
@@ -3041,7 +3042,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C34 [P2] Maintain visibility beyond bounded selection windows
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Commit 69909205: `loadDecided` reads every decision row in pages of 2000 (a capped read let a dismissed item resurface past the cap; the fixture now honors `skip`); `loadIntelligence` returns `selection` (the three pulls and their caps in words, the people window in days, the intake cap and whether it was hit, the page shown, `moreSignals`/`morePeople`), accepts `skipSignals`/`skipPeople`/`peopleWindowDays`; `/gap?moreSignals=N&morePeople=N` pages the Work panel and each section says "How this was chosen" with a More link. No age gate was added anywhere (I06 intact).
 - **Change boundary:** Reader coverage/pagination for signals, people, decisions and pursued tasks. Retain any-age intelligence; explain selection and allow more/search. Do not reintroduce age cutoff as relevance policy.
 - **Acceptance:** An older relevant signal beyond initial windows can be retrieved; 3,023 is not labelled completely reviewed; skipped/dismissed state survives capped decision reads.
 - **Depends on:** C20.
@@ -3173,7 +3174,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C45 [P2] Record a single deployment/configuration receipt
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Commit 92a7b984: `scripts/gap/deployment-receipt.ts` (reads only) composes `docs/gap/DEPLOYMENT_RECEIPT.md` through `health/deployment-receipt.ts` (`tests/unit/gap/lead-c45-deployment-receipt.test.ts` 3): local code (commit, branch, origin/main, clean or not), the deployed environment (the deployment the production alias is bound to by the alias API, its commit and ready time, the other recent production deployments, the rule that a deployment runs the environment snapshotted at ITS build), the project settings now (64 production env NAMES with their Vercel type, 17 GAP flags with values only when the value is a flag word, the local vercel.json crons), the baseline pointer (marked HISTORICAL when it names another commit than the deployed one: ed9976e8 vs the live a195467f at generation), and the last health read from a saved capture (`docs/gap/health-capture-2026-10-08.json`; absent means unread, never healthy). No value that is not a flag word can reach the file: every other configuration value seen is redacted by its key (the sender address quoted by the health sender line became "[value of GAP_GMAIL_USER_EMAIL]") and a final guard refuses the write otherwise. Generated 2026-10-09T03:13Z against the live project.
 - **Change boundary:** A read-only operator report records repo SHA, deployment ID/alias binding, environment, nonsecret flags, cron settings and last successful source reads; avoid printing keys.
 - **Acceptance:** Receipt distinguishes Vercel project settings from deployed environment and local code; stale baseline pointers marked historical.
 - **Depends on:** none.
@@ -3218,7 +3219,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C50 [P2] Verify every model path is metered without losing task truth
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Commit f9b149f9 (`tests/unit/gap/lead-c50-spend-concurrency.test.ts` 4): a post-reservation re-read in `gapGenerate` (`committedAt`: every recorded cost plus every open reservation the ledger ordered at or before this one, by created_at then callId) makes the later of two racing reservations yield with `monthly_ceiling`, release its row (a refused row closes it) and make no call, so two workers that both passed the pre-check cannot spend past the ceiling (the race test: one model call, one refusal, month at or under $25, no reservation left open; proven RED with the check removed, then restored); an untyped throw from the model route (a socket reset, a timeout outside the provider chain) is an `outage`, transient, never a permanent configuration fault, so the task and the decision wait for the next attempt; a fallback model is priced at the model that answered and the row says which and that the price is estimated. No cap was raised; A01-A06 unchanged.
 - **Change boundary:** Retain A01-A06 model route and budgets. Test reservation/concurrency, fallback price, failed/partial runs, context retrieval cost and per-task reason; no cap increases.
 - **Acceptance:** Two competing workers cannot spend beyond intended policy; failed reservation makes no call; model outage preserves decision and work for retry.
 - **Depends on:** none.
@@ -3349,6 +3350,16 @@ Read CLAUDE.md, STABLE_BASELINE.md and this addendum in the existing canonical f
 For each ticket record changed files, code revision, exact focused tests and counts, before/after fixture behavior, mutation result, review disposition and residuals. Report code implemented, tests passed, deployed and seller accepted separately. Never mark an entire family DONE while required acceptance is missing. Update this single ledger in the same commit as the change. Existing historical receipts stay historical.
 
 This handoff is a work specification for a future implementation session, not authorization here to push, deploy, send, enroll, buy credits, alter production settings or write CRM records. Keep demonstrations local/sink-backed until authorized otherwise. Casey controls priorities and time management; do not invent dates or estimates. End every slice with a demoable result and the exact next unresolved ticket, carrying forward every remaining obligation.
+
+### Implementation log (2026-10-09, the coordinated implementation session)
+
+Casey's execution clarifications (2026-10-08/09, verbatim in spirit): build the 62-ticket plan as the implementation backlog, keep working without stopping for approval after every ticket or slice, no mutation test, independent review or polished demo per ticket, no repeated full suite, defer comprehensive replay, generated-quality evaluation, consolidated independent review and seller acceptance until the implementation is integrated; one lead and up to three builders in separate worktrees with explicit file ownership, one writer per file, small working changes integrated continuously, never two heavy test runs or builds at once; ask Casey only for a material product decision, missing access or an action requiring new authorization. External sends, CRM and production mutations, flag changes, enrollments, purchases, deployment and pushes stay unauthorized in this session; the outreach halt stays until Casey changes it.
+
+Team: the lead on `feat/gap-execution-engine` (worktree `wt-gap-account-first-ux`: dependency management, the C13 contract, integration, this ledger; implements V1, C13, C29, C30, C34, C45, C50, C46 after C20 and C45, and V9/V10 at the end). Builder A on `feat/gap-stream-a` (`wt-gap-stream-a`: C07, C08, C09, C10, C11, C12, C35, C47; owns `context/thread-context.ts`, `context/purpose.ts`, `context/obligations.ts`). Builder B on `feat/gap-stream-b` (`wt-gap-stream-b`: C14-C23, C25, C26, C24 after C39; owns `context/retrieval.ts`, `context/claims.ts`, `agents/develop-angle.ts`, `agents/prompt-context.ts`). Builder C on `feat/gap-stream-c` (`wt-gap-stream-c`: C39, C36-C38c, C49, C27, C28, C31-C33, C40-C44, C51; owns `agents/approve-request.ts`, `execution/seller-draft.ts`, `work/activity*.ts`, `work/briefing.ts`, `work/obligations*.ts`). Each builder commits on its branch with focused tests, never pushes; the lead merges each slice into the lead branch and runs the slice's focused tests only. `node_modules` is a junction into the lead's worktree; one test or build runs at a time across the four worktrees.
+
+Lead receipts so far (each ticket's Status line above carries the commit and the tests): V1 C01-C06 b21b8230; C13 45a335bb; C29/C30/C34 69909205; C50 f9b149f9; C45 92a7b984; X22 65ceae9d (in production at a195467f). Builder receipts land in their Status lines as each slice is merged.
+
+Traps met and closed this session: the ledger fixture ignored `skip`, so a paged read looped until the heap died (the fixture honors `skip` now; the reader bounds the loop); the intel fixture's shared placeholder title clustered every signal into one under C30 (distinct titles per fixture signal); a bash heredoc with quotes and backticks fails on this box (patches are written as files and run with `python -I`).
 
 ## 12. Migration, backfill and rollback
 
