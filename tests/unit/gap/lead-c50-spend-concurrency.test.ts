@@ -7,7 +7,7 @@
  */
 import { describe, expect, it, vi } from 'vitest';
 import { ledgerDb } from './fixtures/ledger-db';
-import type { AIErrorInfo } from '@/lib/ai/client';
+import type { AIErrorInfo, GenerateTextResult } from '@/lib/ai/client';
 import { committedAt, estimateCostUsd, gapGenerate, loadSpend, MODEL_CALL, MODEL_CALL_RESERVED, MODEL_CALL_SUBJECT, type GapGenerate } from '@/lib/gap/ai/spend';
 import { PermanentAgentError } from '@/lib/gap/agents/errors';
 
@@ -67,7 +67,7 @@ describe('C50: the ceiling holds under a race', () => {
 
   it('a fallback model is priced at the model that answered, and the row says which one and that the price is estimated', async () => {
     const db = ledgerDb({}, NOW);
-    const fallback: GapGenerate = async () => ({ text: 'OK', provider: 'openai', model: 'openai/gpt-5-mini', usage: { promptTokens: 1000, completionTokens: 200 }, errors: [{ provider: 'ai_gateway', category: 'rate_limit', message: '429' }] as AIErrorInfo[] });
+    const fallback: GapGenerate = async () => ({ text: 'OK', provider: 'openai', model: 'openai/gpt-5-mini', usage: { promptTokens: 1000, completionTokens: 200 } as GenerateTextResult['usage'], errors: [{ provider: 'ai_gateway', category: 'rate_limit', retryable: true, message: '429' }] as unknown as AIErrorInfo[] });
     await gapGenerate(db.client(), { prompt: 'p', maxTokens: 200, tier: 'routine', task: { id: 'at_f', kind: 'develop_angle', itemKey: 'signal:f' }, now: NOW }, { generate: fallback, env });
     const call = db.store.gapAuditEvent.find((e) => e.kind === MODEL_CALL)!;
     expect(call.payload).toMatchObject({ outcome: 'ok', model: 'openai/gpt-5-mini', estimated: true, costUsd: estimateCostUsd('openai/gpt-5-mini', 1000, 200), providerErrors: ['ai_gateway:rate_limit'] });
