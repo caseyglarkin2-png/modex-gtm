@@ -15,6 +15,11 @@ import { TRUTH_TEXT } from '@/lib/gap/work/intel';
 import { AccountLink } from './account-link';
 import { accountHref } from '@/lib/gap/account-intel/href';
 import { refreshNow } from './refresh-now';
+import { ActionStatus } from './action-status';
+import { postAction, type ActionResult } from '@/lib/gap/ui/action-result';
+
+/** C44: a decision came to accepted or queued (an angle task); anything else stands as its own state with a next path. */
+const landed = (r: ActionResult) => r.state === 'accepted' || r.state === 'queued' || r.state === 'prepared';
 
 const BTN = 'min-h-11 rounded-md border border-[var(--border)] px-3 py-2 text-xs hover:bg-[var(--muted)] disabled:opacity-50 sm:min-h-9';
 const PRIMARY = 'min-h-11 rounded-md bg-[var(--primary)] px-3 py-2 text-xs font-medium text-[var(--primary-foreground)] hover:opacity-90 disabled:opacity-50 sm:min-h-9';
@@ -23,21 +28,18 @@ const DECISION_TEXT: Record<Decision, string> = { pursue: 'Pursue', explore: 'Ex
 function Item({ item, angle }: { item: IntelItem; angle: PreparedAngle | null }) {
   const router = useRouter();
   const [busy, setBusy] = useState(false);
-  const [line, setLine] = useState<string | null>(null);
+  const [result, setResult] = useState<ActionResult | null>(null);
+  const [last, setLast] = useState<Decision | null>(null);
   async function decide(decision: Decision) {
     // Explore opens the source AND records the look (the review's finding 13: one meaning for explore).
     if (decision === 'explore' && item.url) window.open(item.url, '_blank', 'noopener');
     setBusy(true);
-    try {
-      const res = await fetch('/api/gap/decide', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ key: item.key, decision }) });
-      const b = (await res.json().catch(() => ({}))) as { line?: string; error?: string };
-      setLine(res.ok ? (b.line ?? 'Decided.') : `Not decided: ${(b.error ?? String(res.status)).replace(/_/g, ' ')}.`);
-      if (res.ok) refreshNow(router);
-    } catch {
-      setLine('Not decided: no connection.');
-    } finally {
-      setBusy(false);
-    }
+    setLast(decision);
+    // C44: never throws; refused, failed and unknown each come back as a state with its next path and the button free again.
+    const r = await postAction('/api/gap/decide', { key: item.key, decision }, { verb: 'Decided', source: item.key });
+    setResult(r);
+    setBusy(false);
+    if (landed(r)) refreshNow(router);
   }
   return (
     <li data-testid="intel-item" data-kind={item.kind} data-key={item.key} className="space-y-1 rounded-md border border-[var(--border)] p-3 text-sm">
@@ -64,7 +66,7 @@ function Item({ item, angle }: { item: IntelItem; angle: PreparedAngle | null })
             {DECISION_TEXT[d]}
           </button>
         ))}
-        {line ? <span role="status" className="text-xs text-[var(--muted-foreground)]" data-testid="intel-decided">{line}</span> : null}
+        <ActionStatus result={result} testId="intel-decided" busy={busy} onRetry={() => { if (last) void decide(last); }} />
       </div>
     </li>
   );
@@ -86,17 +88,13 @@ function Section({ title, hint, items, angles, testId, total, selection, moreHre
 function Pursued({ p }: { p: PursuedItem }) {
   const router = useRouter();
   const [busy, setBusy] = useState(false);
-  const [line, setLine] = useState<string | null>(null);
+  const [result, setResult] = useState<ActionResult | null>(null);
   async function done() {
     setBusy(true);
-    try {
-      const res = await fetch('/api/gap/decide', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ key: p.key, decision: 'dismiss' }) });
-      const b = (await res.json().catch(() => ({}))) as { line?: string; error?: string };
-      setLine(res.ok ? 'Done with it.' : `Not done: ${(b.error ?? String(res.status)).replace(/_/g, ' ')}.`);
-      if (res.ok) refreshNow(router);
-    } finally {
-      setBusy(false);
-    }
+    const r = await postAction('/api/gap/decide', { key: p.key, decision: 'dismiss' }, { verb: 'Done', source: p.key });
+    setResult(landed(r) ? { ...r, line: 'Done with it.' } : r);
+    setBusy(false);
+    if (landed(r)) refreshNow(router);
   }
   const a = p.angle;
   return (
@@ -119,7 +117,7 @@ function Pursued({ p }: { p: PursuedItem }) {
       <div className="flex flex-wrap items-center gap-2 pt-1">
         {p.accountName ? <Link href={accountHref(p.accountName)} className={PRIMARY}>Open {p.accountName}: draft, call or research</Link> : <Link href="/gap/signals" className={PRIMARY}>Name the account on Signals</Link>}
         <button type="button" className={BTN} disabled={busy} onClick={() => void done()} data-testid="intel-pursued-done">Done with it</button>
-        {line ? <span role="status" className="text-xs text-[var(--muted-foreground)]">{line}</span> : null}
+        <ActionStatus result={result} testId="intel-pursued-status" busy={busy} onRetry={() => void done()} />
       </div>
     </li>
   );

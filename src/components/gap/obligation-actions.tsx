@@ -8,20 +8,22 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { refreshNow } from '@/components/gap/refresh-now';
+import { ActionStatus } from '@/components/gap/action-status';
+import { postAction, type ActionResult } from '@/lib/gap/ui/action-result';
 import type { SkippedAtClosure as SkippedItem } from '@/lib/gap/work/commitment-model';
 
 const SMALL = 'inline-flex min-h-11 items-center justify-center rounded-md border border-[var(--border)] px-2.5 text-xs hover:bg-[var(--muted)] disabled:opacity-60 sm:min-h-9';
 const INPUT = 'min-h-11 rounded-md border border-[var(--border)] bg-transparent px-2 text-sm sm:min-h-9';
 
-export async function postJson(url: string, body: unknown): Promise<{ ok: boolean; error: string | null }> {
-  try {
-    const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-    if (res.ok) return { ok: true, error: null };
-    const j = (await res.json().catch(() => ({}))) as { error?: string };
-    return { ok: false, error: j.error ?? `HTTP ${res.status}` };
-  } catch {
-    return { ok: false, error: 'no connection' };
-  }
+/**
+ * C44: one request, never a throw. `ok` is accepted, queued or prepared; otherwise `error` is the route's code (or
+ * `request_incomplete` when the request did not complete and may have applied) and `result` carries the state, the
+ * line and the next path.
+ */
+export async function postJson(url: string, body: unknown, verb = 'Recorded'): Promise<{ ok: boolean; error: string | null; result: ActionResult }> {
+  const result = await postAction(url, body, { verb });
+  const ok = result.state === 'accepted' || result.state === 'queued' || result.state === 'prepared';
+  return { ok, error: ok ? null : result.error, result };
 }
 
 export const REFUSAL_TEXT: Record<string, string> = {
@@ -52,9 +54,10 @@ export function SkippedAtClosure({ items }: { items: ReadonlyArray<SkippedItem &
   if (!items.length) return null;
   async function restore(id: string) {
     setBusy(id);
-    const r = await postJson('/api/gap/commitments', { op: 'restore', commitmentId: id });
+    const r = await postJson('/api/gap/commitments', { op: 'restore', commitmentId: id }, 'Restored');
     setBusy(null);
-    setDone((m) => ({ ...m, [id]: r.ok ? 'Restored.' : `Not restored: ${RESTORE_REFUSAL[r.error ?? ''] ?? r.error}.` }));
+    // A refusal keeps its own words; an incomplete request says it may have applied (the line carries reload).
+    setDone((m) => ({ ...m, [id]: r.ok ? 'Restored.' : r.result.state === 'refused' ? `Not restored: ${RESTORE_REFUSAL[r.error ?? ''] ?? r.error}.` : r.result.line }));
     if (r.ok) refreshNow(router);
   }
   return (
@@ -88,18 +91,21 @@ export function ObligationActions({ commitmentId, proofNeeded = null }: { commit
   const [mode, setMode] = useState<'none' | 'done' | 'snooze' | 'skip'>('none');
   const [text, setText] = useState('');
   const [busy, setBusy] = useState(false);
-  const [status, setStatus] = useState<string | null>(null);
+  const [status, setStatus] = useState<ActionResult | null>(null);
+  const [last, setLast] = useState<'done' | 'snoozed' | 'skipped' | null>(null);
   if (!commitmentId) return null;
   async function record(to: 'done' | 'snoozed' | 'skipped') {
     setBusy(true);
     setStatus(null);
-    const r = await postJson('/api/gap/commitments', { op: 'status', commitmentId, to, ...(to === 'done' && text.trim() ? { note: text.trim() } : {}), ...(to === 'snoozed' ? { until: text.trim() } : {}), ...(to === 'skipped' && text.trim() ? { reason: text.trim() } : {}) });
+    setLast(to);
+    const r = await postJson('/api/gap/commitments', { op: 'status', commitmentId, to, ...(to === 'done' && text.trim() ? { note: text.trim() } : {}), ...(to === 'snoozed' ? { until: text.trim() } : {}), ...(to === 'skipped' && text.trim() ? { reason: text.trim() } : {}) }, 'Recorded');
     setBusy(false);
     if (!r.ok) {
-      setStatus(`Not recorded: ${REFUSAL_TEXT[r.error ?? ''] ?? r.error}.`);
+      // C44: a refusal in the seller's words, the originals standing; failed and unknown keep their state and next path.
+      setStatus(r.result.state === 'refused' ? { ...r.result, line: `Not recorded: ${REFUSAL_TEXT[r.error ?? ''] ?? r.error}.` } : r.result);
       return;
     }
-    setStatus(to === 'done' ? 'Recorded as done.' : to === 'snoozed' ? 'Snoozed.' : 'Skipped.');
+    setStatus({ ...r.result, line: to === 'done' ? 'Recorded as done.' : to === 'snoozed' ? 'Snoozed.' : 'Skipped.' });
     setMode('none');
     refreshNow(router);
   }
@@ -123,7 +129,7 @@ export function ObligationActions({ commitmentId, proofNeeded = null }: { commit
           <button type="button" className={SMALL} onClick={() => setMode('none')}>Cancel</button>
         </>
       )}
-      {status ? <span role="status" className="text-xs text-[var(--muted-foreground)]" data-testid="obligation-status">{status}</span> : null}
+      <ActionStatus result={status} testId="obligation-status" busy={busy} onRetry={() => { if (last) void record(last); }} />
     </div>
   );
 }

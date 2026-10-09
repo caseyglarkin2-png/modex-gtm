@@ -13,6 +13,7 @@ import type { QueueItem } from '@/lib/gap/entity/candidates';
 import { ENTITY_LABEL, FIT_LABEL, type EntityType } from '@/lib/gap/entity/fit';
 import { AccountLink } from './account-link';
 import { refreshNow } from '@/components/gap/refresh-now';
+import { failedAction } from '@/lib/gap/ui/action-result';
 
 const VERDICT_LABEL: Record<string, string> = FIT_LABEL;
 const VERDICT_TONE: Record<string, string> = {
@@ -41,9 +42,18 @@ const safe = (u: string) => {
   }
 };
 
+/**
+ * C44: never throws. A request that did not complete answers status 0 with `error: request_incomplete` and the
+ * seller line in `reason` (it may have applied; reload to see), so no button stays disabled and nothing is silent.
+ */
 async function post(body: Record<string, unknown>) {
-  const res = await fetch('/api/gap/candidates', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-  return { ok: res.ok, status: res.status, body: ((await res.json().catch(() => ({}))) ?? {}) as Record<string, unknown> };
+  try {
+    const res = await fetch('/api/gap/candidates', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    return { ok: res.ok, status: res.status, body: ((await res.json().catch(() => ({}))) ?? {}) as Record<string, unknown> };
+  } catch (err) {
+    const r = failedAction(err, { verb: 'Saved' });
+    return { ok: false, status: 0, body: { error: r.error, reason: r.line } as Record<string, unknown> };
+  }
 }
 
 function Claims({ label, items }: { label: string; items: Array<{ claim: string; url: string }> }) {
@@ -188,6 +198,7 @@ function Candidate({ c }: { c: QueueItem }) {
     setBusy(op);
     const r = await post({ op, company: c.company, ...(op === 'scout' && c.titles.length ? { hint: `people there: ${c.titles.join(', ')}` } : {}), ...(op === 'scout' && c.scouted ? { force: true } : {}) });
     setBusy(null);
+    if (r.status === 0) return setMsg(String(r.body.reason));
     if (r.status === 503) return setMsg(`${String(r.body.reason ?? 'The web pass failed.')} Nothing was saved.`);
     if (r.status === 409) return setMsg('A Scout of this company is already running; refresh in a minute.');
     if (r.status === 429) return setMsg(r.body.error === 'daily_cap' || r.body.error === 'attempt_cap' ? 'Scout has done its passes for today; try again tomorrow.' : 'Scouted within the last day already.');
