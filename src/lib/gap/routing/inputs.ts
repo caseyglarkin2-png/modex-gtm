@@ -206,6 +206,7 @@ interface HypothesisRow {
 }
 
 interface DispositionRow {
+  id?: string | number | null;
   response_class: string;
   created_at: Date;
   confirmed_at?: Date | null;
@@ -505,6 +506,7 @@ function buildLastDisposition(d: DispositionRow | null): RoutingLastDisposition 
         }
       : null;
   return {
+    id: d.id != null ? String(d.id) : null,
     responseClass: d.response_class,
     at: d.confirmed_at ?? d.created_at,
     resumeAt: asDate(m.resumeAt),

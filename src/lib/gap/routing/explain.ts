@@ -177,7 +177,12 @@ export function buildWhyNow(i: RoutingInputs): string {
     if (h.whyNow && containsForbidden(h.whyNow) == null) parts.push(clip(h.whyNow, 160));
   }
   const d = i.comms.lastDisposition;
-  if (d) parts.push(`Last disposition ${d.responseClass} ${days(i, d.at)} ago.`);
+  if (d) {
+    // C55: the outcome is cited by its row and attributed to what the buyer said (a return date, a referral), never restated as a fact.
+    const cite = d.id ? ` [disposition:${d.id}]` : '';
+    const tail = d.responseClass === 'timing' && d.resumeAt ? `, resume after ${d.resumeAt.toISOString().slice(0, 10)}` : d.responseClass === 'referral' && d.referral && (d.referral.name || d.referral.title) ? `, referred to ${d.referral.name ?? 'someone'}${d.referral.title ? ` (${d.referral.title})` : ''}` : '';
+    parts.push(`Last disposition ${d.responseClass} ${days(i, d.at)} ago${cite}${tail}.`);
+  }
   return parts.join(' ');
 }
 
