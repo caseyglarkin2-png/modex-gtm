@@ -39,6 +39,7 @@ import { outcomeLine, type WorkOutcome } from './outcome-model';
 import { MOTION_UNLOCK_BUSINESS_DAYS } from '../motion/account-motion';
 import { buyerMoves, commitmentPhase, commitmentTier, KIND_TEXT, skippedAtClosureOf, type Commitment, type CommitmentKind, type SkippedAtClosure, TERMINAL_STATUSES } from './commitment-model';
 import { dayLabel, isDay, nyDay, nyDayAt } from './dates';
+import { clipAtSentence } from './briefing';
 import { stalledSignals } from '../deals/stalled';
 import { closedDealLabel, type ClosedDealRef } from '../deals/scope';
 import type { OpportunityHold } from './opportunity-holds';
@@ -579,7 +580,8 @@ export function workDay(i: WorkInput): WorkDay {
     // X15c: the buyer's next step (HubSpot hs_next_step) leads the card when one is set; the hygiene line comes second.
     const dealNextStep = a.deals.map((d) => (typeof d.nextStep === 'string' ? d.nextStep.trim() : '')).find(Boolean) ?? null;
     // X17: the step as a phrase (no trailing period, bounded) for the action label and the plan item's title.
-    const clipStep = (s: string) => { const t = s.replace(/\.$/, '').trim(); return t.length > 90 ? `${t.slice(0, 89)}…` : t; };
+    // C32: a long next step is cut at a sentence end or kept whole, never mid-sentence.
+    const clipStep = (s: string) => clipAtSentence(s.replace(/\.$/, '').trim(), 160);
     const dealsLine = `Open HubSpot ${a.deals.length === 1 ? 'deal' : 'deals'}: ${stages}.`;
     offer({ rank: LANE_RANK.deals, sortKey: [name], card: { accountName: name, lane: 'deals', stateKind: 'in_deal', state: STATE_TEXT.in_deal, why: dealNextStep ? `Next step on the deal: ${dealNextStep.replace(/\.$/, '')}. ${dealsLine}` : dealsLine, person: null, next: dealNextStep ? { label: `Next step: ${clipStep(dealNextStep)}`, href: `${accountHref(name)}?view=brief` } : { label: 'Open the deal brief', href: `${accountHref(name)}?view=brief` }, blocker: 'No cold first touch while the deal is open: work it from the deal.', ...(stalled.length ? { stalled } : {}), ...(dealNextStep ? { dealNextStep, move: `Next step on the deal: ${clipStep(dealNextStep)}` } : {}) } });
   }

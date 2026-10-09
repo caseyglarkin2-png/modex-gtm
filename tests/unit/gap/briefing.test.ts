@@ -66,7 +66,8 @@ describe('X05a: renderBriefing (pure)', () => {
   const out = renderBriefing({ plan: PLAN, dayToken: 'day0token', links, commandsEnabled: false, legacyDigest: false }, NOW);
 
   it('the subject names the day, the count and the day token', () => {
-    expect(out.subject).toBe('GAP today, Thu Oct 8: 3 need you [GAP#day0token]');
+    // C31: the count names its basis (the plan's items, what START and NEXT walk).
+    expect(out.subject).toBe('GAP today, Thu Oct 8: 3 to execute [GAP#day0token]');
   });
 
   it('lists the items in order with account, person, what, why and the link; the start link leads', () => {
@@ -134,9 +135,10 @@ describe('I04: the briefing leads with intelligence, then the items in sections,
 
   it('intelligence comes before the items, each with its decision links and the prepared angle; the sections name what is owed, ready and followed up; stalled deals are one line; the count in the subject is unchanged', () => {
     const out = renderBriefing({ plan: dealPlan, dayToken: 'tok', links, commandsEnabled: false, legacyDigest: false, intel }, NOW);
-    expect(out.subject).toBe('GAP today, Thu Oct 8: 6 need you [GAP#tok]');
+    // C31: the execution count and the intelligence shown, counted apart (3 shown of 26 waiting).
+    expect(out.subject).toBe('GAP today, Thu Oct 8: 6 to execute, 3 to decide [GAP#tok]');
     const t = out.text;
-    expect(t.indexOf('Intelligence worth a look (2 of 17)')).toBeLessThan(t.indexOf('Begin with the first item'));
+    expect(t.indexOf('Intelligence worth a look (2 of 17)')).toBeLessThan(t.indexOf('Begin with item 1'));
     expect(t).toContain('- Kenco: Kenco opens new innovation lab. news.example, published Jun 24, 2026. Historical observation. The angle: My guess is the lab means the warehouses are standardized while the yards still run on radio. Who: Dave Kiesling (VP Operations). Ask: How does the gate know where a trailer goes?');
     expect(t).toContain('Pursue: https://x/decide/signal%3As-old/pursue  Skip: https://x/decide/signal%3As-old/skip  Dismiss: https://x/decide/signal%3As-old/dismiss  More: https://x/decide/signal%3As-old/more');
     expect(t).toContain('- Tractor Supply Company: Tractor Supply opens Idaho DC with automation. chainstoreage.com, published Oct 7, 2026. Unverified present-day status. Tractor Supply Company is not a GAP account yet.');
@@ -148,6 +150,7 @@ describe('I04: the briefing leads with intelligence, then the items in sections,
     expect(t).toContain('Follow-ups (1)\n6. Swire: Follow up with Bryan Sink when they are back.');
     expect(t).toContain('Deals with a next step (1)\n5. Kroger: Next step on the deal: Send the pilot scope to Ann.');
     expect(t).toContain('Deals, in one line (1): Boston Beer (the close date (Sep 30) has passed and the deal is still open). The deal workspace holds the detail.');
+    expect(t).toContain('Begin with item 1, Boston Beer: Someone replied. https://x/start');
     expect(t).not.toMatch(/^4\. Boston Beer: In a deal/m);
     expect(out.html).toContain('<h3>Intelligence worth a look (2 of 17)</h3>');
     expect(out.html).toContain('<a href="https://x/decide/signal%3As-old/pursue">Pursue</a>');
