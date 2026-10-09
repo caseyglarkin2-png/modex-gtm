@@ -2897,7 +2897,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C19 [P2] Index Claude knowledge as attributed artifacts, not implicit memory
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Builder B (`feat/gap-stream-b`), merged by the lead. Commit cb2a7fd0: `docs/gap/CLAUDE_KNOWLEDGE_INVENTORY.md`: no model API reads Claude chat, project memory or CLAUDE.md; which canonical accepted decisions may be imported as attributed artifacts with origin and version (through the retrieval claim vocabulary, C13) and which never; the stale memory lines named against the ledger. Nothing in a generation path assumes a model can see Claude memory.
 - **Change boundary:** Inventory relevant CLAUDE.md, project memory and accepted plans; import only canonical accepted decisions/approved commercial notes with origin/version. Do not copy chat instructions into tool authority.
 - **Acceptance:** Stale Claude memory X19-open does not override later canonical X19-retired; no assumption that selecting a Claude model grants project-chat access.
 - **Depends on:** C13.
@@ -2956,7 +2956,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C25 [P1] Reuse existing drafts and check for competing work
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Builder B (`feat/gap-stream-b`), merged by the lead. Commit 76219a85 (`stream-b-competing-work.test.ts`): `competingWork` in `context/assemble.ts`: the existing drafts and in-flight work for the same identity, deal, thread and purpose are found and offered for reuse or revision before a proposal is generated from an angle; the same thread competes on its own, the same person competes when the deal or the purpose matches or neither is known, so a vendor or support draft to another person at the account does not; an unsent seller edit and a timeline draft no proposal wrote are revise-only and never overwritten (overwrite is always false); deterministic, newest first, the same inputs give the same answer on a retry. The UI wiring on the outreach anchor is the lead's (see C24).
 - **Change boundary:** Before generating another draft, compare same identity/deal/thread/purpose and existing draft revision. Offer reuse/revise; do not overwrite unsent seller edits.
 - **Acceptance:** October 5 Kenco draft appears as existing work; retry does not create a second conflicting agenda.
 - **Depends on:** C08,C24.
@@ -2965,7 +2965,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C26 [P2] Inventory handler coverage and make unsupported actions explicit
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). Builder B (`feat/gap-stream-b`), merged by the lead. Commit cb2a7fd0: `docs/gap/HANDLER_INVENTORY.md`: every declared task kind, email command, signed link op and intelligence decision against the code that answers it; research_focus, prepare_call, prepare_follow_up and prepare_meeting are declared, unsupported and unreachable, promised by no exposed action, so nothing was registered; the scope every generated result must carry. An unsupported command is refused in words by the existing command path.
 - **Change boundary:** Compare every exposed call/follow-up/meeting action and declared task kind with registered handlers; mark unsupported paths explicitly and create individually scoped implementation children only for demonstrated missing promises.
 - **Acceptance:** Each exposed action has a registered tested handler or is explicitly unavailable; generated follow-up/call brief keeps account/deal scope and sources.
 - **Depends on:** C13.
