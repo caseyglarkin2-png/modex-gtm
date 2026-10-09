@@ -3304,7 +3304,7 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 
 #### C58 [P1] Reconcile all old ledger families and known debt
 
-- **Status:** OPEN correction/validation; not implemented in this audit.
+- **Status:** SHIPPED on `feat/gap-execution-engine` (the lead branch; NOT in production until merged and deployed on Casey's go). The reconciliation below ("C58 reconciliation") gives every prior family and every named owner decision a disposition with code, tests, deployed and accepted kept apart, and names the owner and the reason for each deferred item. The completion matrix above keeps its rows; its "DONE" means code merged, focused tests green and deployed to production, never seller acceptance, which the matrix never claimed and C58 says in words. R43 and R61 debt have explicit dispositions. No family is marked DONE as a whole.
 - **Change boundary:** Retain R00-R65, UX01-17, X01-X21, I01-I06, A01-A06 history. Add code/test/deployed/accepted distinctions, owners and reasons for deferred work; no mass DONE claims.
 - **Acceptance:** Every prior family and named owner decision has a disposition; no follow-on prompt abandons remaining tickets.
 - **Depends on:** C45,C56.
@@ -3345,6 +3345,37 @@ This is the current corrective audit addendum, based on main `a195467f6c723b8859
 | Top100/PIC/war-room | Preserve existing lane, evidence contracts, claims and import history. C42/C47/C51 check cross-lane activity and authority; do not revive abandoned GTM-YardFlow. |
 | Owner commercial judgments | Pepsi thesis approval, 5% wording and transcription spend remain Casey decisions. A code change does not approve them. |
 | Infrastructure/acceptance | No GitHub Actions work requested; no production mailbox command/send test in this audit. C45/C60 own missing proof, not a false completed checkbox. |
+
+### C58 reconciliation: every family and owner decision, with code, tests, deployed and accepted apart
+<!-- verified:2026-10-09 -->
+
+Vocabulary: **code** = merged on the branch named; **tests** = the focused suites green on that tree (never the full suite); **deployed** = READY on the production alias (the C45 receipt binds the alias to a commit); **accepted** = Casey exercised it on production with a real reply, click or outcome. A row says all four apart; none is implied by another.
+
+| Family | Code | Tests | Deployed | Accepted | Deferred or owner items, with the owner and the reason |
+|---|---|---|---|---|---|
+| R00-R65 execution recovery | main 542a6b4d (PR #410) and the fixes through PR #412 | the R-series suites, green at release | yes, since 2026-10-08 | partially: Casey used Work and the cockpit; the production seller round trip (an email command on an assignment) is not yet exercised | R43 touch 2 and later: PARTIAL, owner copy (every seeded approach family is single-touch; a step-1 copy family must be written and seeded before a prepared follow-up exists; the plan says follow up by hand). R61 speed targets: PARTIAL, owner engineering (measured on the production build, p50/p90/p95 recorded; the full account read and the cockpit read behind cachedRead remain the slow paths; not reopened by this audit). R55 legacy-name closure: FIXED (e2da206e). |
+| UX-01 to UX-17 account-first UX | main through PR #409 | the UX suites | yes, since 2026-10-06 | partially (dogfood); transcription OFF pending spend approval | transcription spend: OWNER Casey (a paid feature; off until approved). |
+| X01-X22 sales execution engine | main through a195467f (X22, PR #431) | the X suites; briefing-send 7 incl. the X22 resend | yes (dpl_G9KX6ZmwES9f719vk8jsrCcay6r1) | NOT accepted: the START / REVISE / APPROVE round trip on the fresh briefing (thread 1a11e5845f5964a2) is Casey's reply and was never simulated | X19 (the legacy digest retirement) shipped; the production seller reply is the acceptance test (section 7 of the mandate), OWNER Casey. |
+| I01-I05 prospecting first | main f374ec3f (PR #420) and after | the I suites | yes | partially: three Pursues applied on production by the lead after each deploy; no seller decision cycle yet | the Kenco "No account yet" defect the audit found is corrected by C01-C06 on the lead branch (not deployed). |
+| I06a-I06g currentness as a label | main through PR #428 | currentness, render, routing suites | yes | n/a (a display and routing rule) | C29/C34 corrected the display and the coverage on the lead branch without any age gate (I06 not rebuilt). |
+| A01-A06 AI recovery and cost control | main through PR #429 | ai-spend 11 and the harness | yes | n/a; the $25 monthly AI Gateway TEAM budget is set (alerts at 50/75/100%) | C50 adds the race guard and the outage class on the lead branch; no cap raised; the C54 LIVE run (a few dollars at most, metered) needs Casey's go. |
+| C01-C60 commercial context and execution audit | `feat/gap-execution-engine` (the lead branch; six merges of three builder streams) | every ticket's focused suite named in its Status line; `tsc --noEmit` clean on the GAP surfaces | NO: nothing from this program is deployed; production stays a195467f | NO | C57 review 2 after the last merge (lead); C59 the demonstration receipt (lead); C60 the owner-controlled production acceptance (Casey, after a release he authorizes). |
+
+Named owner decisions (unchanged by any code in this program; a code change approves nothing):
+
+| Decision | Owner | State | What it gates |
+|---|---|---|---|
+| PepsiCo thesis approval | Casey | open | the PepsiCo first touch (the only ready item on October 8) |
+| The "5%" measured-capacity wording | Casey | open | copy that cites the Primo number |
+| Transcription spend | Casey | open (OFF) | UX call transcription |
+| The production seller reply (START, REVISE, APPROVE on the real briefing thread) | Casey | open; never simulated | acceptance of X01-X22 and, after a release, C60 |
+| Merge and deploy of `feat/gap-execution-engine` | Casey | open | every C ticket reaching production; the rollback is to leave production at a195467f |
+| The C54 live model evaluation (metered, a few dollars at most) | Casey | open | a quality claim about generated angles (today's receipt is a mocked harness check, no claim) |
+| Clawd `hubspot_autopush update_deal_stage` enabled by default outside GAP's gates (found by C51) | Casey | open | deal stages written by a system GAP does not gate; no flag changed here |
+| GitHub Actions runner work | Casey | declined for now (the mandate) | CI on the repository |
+| The outreach halt | Casey | in force | any external send; nothing in this program sends |
+
+Debt named and left as debt (incidental to this program, recorded, not rewritten): non-GAP model routes and the Clawd model fallback (a separate inventory; no fallback enabled); the vault is not readable on Vercel (C46 says partial, never complete); the Work page does not read Gmail Sent (the briefing does; the page line says so); `tests/unit/gap/stream-*` names carry the stream, not the ticket, by design (one suite per slice).
 
 ### Codex-to-Claude execution handoff
 
