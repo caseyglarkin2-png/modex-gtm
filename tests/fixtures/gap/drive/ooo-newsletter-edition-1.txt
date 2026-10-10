@@ -1,0 +1,47 @@
+TITLE (paste into LinkedIn's title field):
+48-minute turns became 24. The order matters.
+
+
+===== ARTICLE BODY BELOW THIS LINE. Select from here to the end and paste. =====
+
+
+Nobody thinks about the water main under the street until the day it breaks. It carries everything, it is invisible while it works, and it becomes the only thing anyone talks about the moment it fails. Yards operate on the same terms.
+
+At one Primo Brands site, 48-minute drop-and-hook turns became 24. Same gate, same trucks, measured side by side.
+
+Across that network, the sites running the standardized driver journey moved about 5% more realized production capacity than comparable sites without it, on the same dock-office headcount. Volume moved, counted. Not a model output.
+
+Those two numbers are why this newsletter exists.
+
+Standardize first. Automate second.
+
+Every plant and DC network has a layer nobody instruments: the yards. The ERP runs in seconds, the warehouse runs in minutes, and the yards still run on clipboards, radios, and tribal knowledge.
+
+What changed at Primo was not a robot. It was the driver journey: arrival, identity, instructions, signature, seal, and exit, turned into structured events instead of handoffs at a window.
+
+We published the full case as The Order of Operations for Autonomous Yards. The short version: standardize your yards before you automate them. Standardization is the strategy. Automation is the option it earns. The research is open:
+https://yardflow.ai/order-of-operations/?utm_source=linkedin&utm_medium=newsletter&utm_campaign=ooo&utm_content=edition-1
+
+>>> INSERT IMAGE 1 HERE: ooo-scene-card.png (delete this line after inserting)
+
+[H2] The cost of doing it backwards
+
+Kroger wrote off roughly $2.6 billion in automated fulfillment. The research walks through why automating ahead of standardizing keeps producing that story, from Webvan to Adidas to Tesla.
+
+The appetite is real. The 2026 yard survey of 149 supply chain professionals found 72.7% exploring automation and 12.9% with a plan. This newsletter lives in that gap.
+
+[H2] Check your own yards this week
+
+Three questions you should be able to answer from a screen, not a radio call:
+
+1. How long did your last 100 gate-to-gate turns take? Timestamps, not memory. The Primo site above started at 48 minutes.
+2. Which trailers have sat in your yards the longest, and what is that costing you in detention?
+3. When was your trailer inventory last updated, by a system or by a person walking the yards?
+
+[H2] Where the digital supply chain goes to die
+
+That is how FreightWaves titled the WHAT THE TRUCK?!? episode on the yards. Casey and I made the case on the show. The clips are in the research library:
+https://yardflow.ai/resources/?utm_source=linkedin&utm_medium=newsletter&utm_campaign=wtt-yard-black-hole&utm_content=edition-1
+
+Jake Koppinger
+Co-Founder and CEO, YardFlow by FreightRoll

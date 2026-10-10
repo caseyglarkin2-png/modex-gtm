@@ -15,8 +15,9 @@ import { VAULT_SYNCED_KIND } from '../knowledge/vault-sync';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
 
-export type ProducerState = 'current' | 'stale' | 'never' | 'failed';
-export type ProducerRunStatus = 'ok' | 'partial' | 'failed';
+/** not_configured (the Drive sync, 2026-10-10): the producer's consumer runs but has no credential; the line names the variables. */
+export type ProducerState = 'current' | 'stale' | 'never' | 'failed' | 'not_configured';
+export type ProducerRunStatus = 'ok' | 'partial' | 'failed' | 'not_configured';
 
 export interface ProducerStatus {
   producer: string;
@@ -61,14 +62,20 @@ const plural = (count: number, word: string) => `${count} ${word}${count === 1 ?
 
 type LedgerRow = { subject_id: string; actor?: string | null; payload: unknown; created_at: Date | string };
 
-function stateOf(lastAt: string | null, cadenceDays: number, failed: boolean, now: Date): ProducerState {
+function stateOf(lastAt: string | null, cadenceDays: number, failed: boolean, now: Date, notConfigured = false): ProducerState {
   if (!lastAt) return 'never';
+  if (notConfigured) return 'not_configured';
   if (failed) return 'failed';
   return now.getTime() - new Date(lastAt).getTime() > (cadenceDays + 1) * 86_400_000 ? 'stale' : 'current';
 }
 
+/** The Drive sync's own words for its missing credential, else the generic sentence. */
+const NOT_CONFIGURED_WORDS = 'not configured: set GAP_DRIVE_REFRESH_TOKEN (or the delegation pair)';
+const notConfiguredLine = (s: Pick<ProducerStatus, 'label' | 'lastProducerState' | 'totalItems'>): string => `${s.label}: ${s.lastProducerState?.detail?.startsWith('not configured') ? NOT_CONFIGURED_WORDS : (s.lastProducerState?.detail ?? NOT_CONFIGURED_WORDS)}${s.totalItems ? ` (${plural(s.totalItems, 'item')} held from earlier runs)` : ''}.`;
+
 function importLine(s: Omit<ProducerStatus, 'line'>): string {
   if (s.state === 'never') return `${s.label}: never imported.`;
+  if (s.state === 'not_configured') return notConfiguredLine(s);
   const counts = `${plural(s.totalReports, 'report')}, ${plural(s.totalItems, 'item')}${s.lastReportedOn ? `, reports through ${dateOnlyWords(s.lastReportedOn)}` : ''}`;
   const last = `last import ${dayWords(s.lastImportAt!)} (${counts})`;
   if (s.state === 'failed') return `${s.label}: ${last}; the last run failed${s.lastProducerState?.detail ? ` (${s.lastProducerState.detail})` : ''}.`;
@@ -94,7 +101,7 @@ export async function loadProducerStatus(prisma: PrismaLike, now: Date, opts: { 
     const r = newest.get(producer) ?? null;
     const p = (r?.payload && typeof r.payload === 'object' ? r.payload : {}) as Record<string, unknown>;
     const ps = p.producerState && typeof p.producerState === 'object' ? (p.producerState as { status?: unknown; detail?: unknown }) : null;
-    const status: ProducerRunStatus | null = ps?.status === 'failed' || ps?.status === 'partial' || ps?.status === 'ok' ? ps.status : r ? 'ok' : null;
+    const status: ProducerRunStatus | null = ps?.status === 'failed' || ps?.status === 'partial' || ps?.status === 'ok' || ps?.status === 'not_configured' ? ps.status : r ? 'ok' : null;
     const [totalItems, totalReports] = await Promise.all([count({ submitted_by: `import:${producer}`, source_class: { not: REPORT_ARCHIVE_CLASS } }), count({ submitted_by: `import:${producer}`, source_class: REPORT_ARCHIVE_CLASS })]);
     const lastImportAt = r ? new Date(typeof p.at === 'string' && !Number.isNaN(Date.parse(p.at)) ? p.at : r.created_at).toISOString() : null;
     const cadenceDays = INTEL_PRODUCERS[producer]?.cadenceDays ?? UNKNOWN_PRODUCER_CADENCE_DAYS;
@@ -110,7 +117,7 @@ export async function loadProducerStatus(prisma: PrismaLike, now: Date, opts: { 
       cursor: cursorOf.get(producer) ?? null,
       totalItems,
       totalReports,
-      state: stateOf(lastImportAt, cadenceDays, status === 'failed', now),
+      state: stateOf(lastImportAt, cadenceDays, status === 'failed', now, status === 'not_configured'),
     };
     out.push({ ...base, line: importLine(base) });
   }
@@ -163,6 +170,8 @@ export function producerShort(s: ProducerStatus): string {
       return `${s.label}: stalled since ${dayWords(s.lastImportAt!)}${s.lastReportedOn ? ` (reports through ${dateOnlyWords(s.lastReportedOn)})` : ''}`;
     case 'failed':
       return `${s.label}: failed ${dayWords(s.lastImportAt!)}`;
+    case 'not_configured':
+      return notConfiguredLine(s).replace(/\.$/, '');
     default:
       return `${s.label}: never ${s.producer === VAULT_PRODUCER ? 'synced' : 'imported'}`;
   }

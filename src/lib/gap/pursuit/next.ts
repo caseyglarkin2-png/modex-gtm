@@ -40,13 +40,14 @@ export function nextFromPursuit(
   switch (s.state) {
     case 'replied':
       return {
-        text: `Read ${p ? `${p.name}'s` : 'the'} reply of ${s.lastInbound ? day(s.lastInbound.at) : 'today'} and record what they said. Nobody at ${s.accountName} gets a cold email until then.`,
+        // The seller judges the activity: no blanket "nobody gets a cold email" is imposed here (Casey, 2026-10-10).
+        text: `Read ${p ? `${p.name}'s` : 'the'} reply of ${s.lastInbound ? day(s.lastInbound.at) : 'today'} and record what they said.`,
         // R60: the reply is read and recorded on this account (its own waiting replies, in place); Gmail answers it.
         control: opts.replyCaptureHref ? { href: opts.replyCaptureHref, label: 'Log what they said' } : { href: `${opts.accountSlugHref('now')}#record-reply`, label: 'Open the reply' },
         source: 'pursuit',
       };
     case 'opted_out':
-      return { text: `Record ${s.lastInbound ? `${s.lastInbound.who}'s` : 'the'} opt-out as do not contact. No reply goes back; the account cools before anyone else is touched.`, control: { href: opts.replyCaptureHref ?? `${opts.accountSlugHref('now')}#record-reply`, label: 'Record the opt-out' }, source: 'pursuit' };
+      return { text: `Record ${s.lastInbound ? `${s.lastInbound.who}'s` : 'the'} opt-out as do not contact. No reply goes back.`, control: { href: opts.replyCaptureHref ?? `${opts.accountSlugHref('now')}#record-reply`, label: 'Record the opt-out' }, source: 'pursuit' };
     case 'in_deal':
       // R50: two opportunities are two pieces of work, each worked on its own in the deal brief.
       return s.deals.length > 1

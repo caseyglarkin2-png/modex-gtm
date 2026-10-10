@@ -521,7 +521,7 @@ interface Advance {
 const NONE_LEFT_LINE = 'Nothing left on today\'s list has gone unassigned. Open Work in GAP for what is waiting and parked.';
 
 /** The next item in words: what is prepared for it, else its own title. */
-function nextItemWords(item: PlanItem, built: { prepared: { kind: string; who?: string } } | null): string {
+function nextItemWords(item: PlanItem, built: { prepared: { kind: string; who?: string | null } } | null): string {
   const prepared = built?.prepared;
   if (prepared?.kind === 'email') return item.kind === 'ready' ? 'a prepared first touch' : 'a prepared email';
   if (prepared?.kind === 'angle') return `an angle prepared for ${prepared.who ?? 'them'}`;

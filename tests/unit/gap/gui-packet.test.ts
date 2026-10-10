@@ -27,7 +27,7 @@ const plan = (items: PlanItem[]): DayPlan => ({ day: '2026-10-10', plannedAt: NO
 const ask = (over: Partial<AskContext> & { accountName: string }): AskContext => ({ state: { state: 'ready', stateLine: 'Ready for a first touch.', blocker: null, next: 'Prepare the first touch.', coldTouchAllowed: true }, people: [], setAside: null, story: [], opening: null, otherStories: [], buyerSaid: [], ...over });
 
 const rel = (over: Partial<RelationshipState> & { person: RelationshipState['person'] }): RelationshipState => ({
-  purpose: 'buyer_conversation', purposeWord: 'buyer', lastInbound: null, lastOutbound: null, laterResponse: null, answerOwed: { owed: false, basis: 'nothing of theirs asks for an answer' }, quiet: { quiet: false, days: null, basis: 'no exchange on record either way' }, request: null, requestState: 'none', meetings: [], nextMeetingAt: null, deals: [], promises: [], drafts: [], optOut: null, links: { thread: null, hubspotContact: null, hubspotCompany: null }, searched: "GAP's synced inbox (1 message from them); our Sent to them (2 messages); read Oct 10, 2026, 9:00 AM New York", ...over,
+  purpose: 'buyer_conversation', purposeWord: 'buyer', lastInbound: null, lastOutbound: null, laterResponse: null, answerOwed: { owed: false, basis: 'nothing of theirs asks for an answer', known: true }, quiet: { quiet: false, days: null, basis: 'no exchange on record either way' }, request: null, requestState: 'none', referral: null, correspondents: [], hubspotCompanyId: null, outboundRead: { read: true, basis: 'our Sent was read (2 messages to them)' }, reads: { inbox: { read: true, count: 1, detail: null }, sent: { read: true, count: 2, detail: null }, drafts: { read: true, count: 0, detail: null }, engagements: { read: true, count: 3, detail: null }, commitments: { read: true, count: 0 }, deals: { read: true, detail: null }, conversations: { read: true, count: 0 } }, meetings: [], nextMeetingAt: null, deals: [], promises: [], drafts: [], optOut: null, links: { thread: null, threadKind: null, hubspotContact: null, hubspotCompany: null }, searched: "GAP's synced inbox (1 message from them); our Sent to them (2 messages); read Oct 10, 2026, 9:00 AM New York", ...over,
 });
 const input = { revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: true, now: NOW };
 const lines = (t: string) => t.split('\n');
@@ -46,8 +46,8 @@ describe('GUI-02 / GUI-05 / GUI-08: Boston Beer, Phil Savastano asked for four d
     sellerNote: { lines: ['In-sourcing moves the bottleneck to your own gates.', 'Next action on record, due Oct 8: Send the 4 tracked sales docs (Pilot-Program, Pricing-and-Packaging, ROI-One-Pager, Solution-Overview) as tracked links, first stop per [[RETIREMENT-HANDOFF]] since the handoff.'] },
     coverageLine: 'Not read this time: Gmail Sent (no GAP sender configured)',
   });
-  const request = (state: 'fulfilled' | 'unfulfilled' | 'unknown', basis: string): RelationshipState['request'] => ({ at: '2026-06-10T13:50:48.000Z', subject: 'Re: Call follow up', excerpt: 'Casey, can you send the four documents? We are all out Thursday.', state, basis, fulfilledBy: state === 'fulfilled' ? { at: '2026-06-11T15:00:00.000Z', subject: 'Re: Call follow up' } : null, draft: null });
-  const base = (r: RelationshipState['request']) => rel({ person: { email: PHIL, name: 'Savastano, Philip' }, lastInbound: { at: '2026-06-10T13:50:48.000Z', subject: 'Re: Call follow up', purpose: 'buyer_conversation', excerpt: 'Casey, can you send the four documents?', threadId: 't-1' }, lastOutbound: { at: '2026-10-02T15:00:00.000Z', subject: 'Onsite at Primo', threadId: 't-9', source: 'HubSpot (logged email)' }, request: r, requestState: r ? r.state : 'none', links: { thread: `https://mail.google.com/mail/u/0/#search/from%3A%22${PHIL}%22`, hubspotContact: 'https://app.hubspot.com/contacts/3819073/record/0-1/980', hubspotCompany: 'https://app.hubspot.com/contacts/3819073/record/0-2/55' } });
+  const request = (state: 'fulfilled' | 'unfulfilled' | 'unknown', basis: string): RelationshipState['request'] => ({ at: '2026-06-10T13:50:48.000Z', subject: 'Re: Call follow up', excerpt: 'Casey, can you send the four documents? We are all out Thursday.', state, basis, fulfilledBy: state === 'fulfilled' ? { at: '2026-06-11T15:00:00.000Z', subject: 'Re: Call follow up' } : null, draft: null, redirectedTo: null });
+  const base = (r: RelationshipState['request']) => rel({ person: { email: PHIL, name: 'Savastano, Philip' }, lastInbound: { at: '2026-06-10T13:50:48.000Z', subject: 'Re: Call follow up', purpose: 'buyer_conversation', excerpt: 'Casey, can you send the four documents?', threadId: 't-1' }, lastOutbound: { at: '2026-10-02T15:00:00.000Z', subject: 'Onsite at Primo', threadId: 't-9', source: 'HubSpot (logged email)' }, request: r, requestState: r ? r.state : 'none', links: { thread: `https://mail.google.com/mail/u/0/#search/from%3A%22${PHIL}%22`, threadKind: 'search', hubspotContact: 'https://app.hubspot.com/contacts/3819073/record/0-1/980', hubspotCompany: 'https://app.hubspot.com/contacts/3819073/record/0-2/55' } });
   const db = () => ledgerDb({ accounts: [{ name: 'The Boston Beer Company', hubspot_company_id: '55' }], personas: [{ id: 980, name: 'Savastano, Philip', title: 'Director of Supply Chain', email: PHIL, email_status: 'verified', phone: '+1 617 555 0100', phone_status: 'verified', linkedin_url: 'https://www.linkedin.com/in/phil-savastano/', linkedin_confidence: 80, hubspot_contact_id: '980', account_name: 'The Boston Beer Company', updated_at: new Date('2026-10-01T12:00:00Z') }] }, NOW);
   const build = (r: RelationshipState) => buildAssignment(db().client(), { plan: plan([boston]), item: boston, ...input }, { askContext: async () => ctx, packet: { relationship: async () => r, contact: { hubspotContact: null } }, senderEmail: null });
 
@@ -61,7 +61,7 @@ describe('GUI-02 / GUI-05 / GUI-08: Boston Beer, Phil Savastano asked for four d
     expect(L[changedAt + 2], 'the story\'s "what is changing" line is a changed fact with the report date and the publisher apart').toBe('- Boston Beer is in-sourcing its Pennsylvania distribution. (reported Sep 12, 2026; brewbound.com)');
     expect(t).toContain('- Their request of Jun 10, 2026 ("Re: Call follow up"): UNFULFILLED: nothing from us after their message of Jun 10, 2026: our Sent was read (2 messages to them).');
     expect(t).toContain("- Answer Savastano, Philip's request of Jun 10, 2026: nothing from us after their message of Jun 10, 2026");
-    expect(t).toContain("- Read Savastano, Philip's reply of Jun 10 and record what they said (administrative): an administrative item: record what they said or dismiss it; no outbound is prepared.");
+    expect(t).toContain("- Read Savastano, Philip's reply of Jun 10, 2026 and record what they said (administrative): an administrative item: record what they said or dismiss it; no outbound is prepared.");
     expect(t).toContain('Nothing is prepared yet; preparation remains: an administrative item has nothing to prepare.');
     expect(t).not.toContain('Ready to send');
     expect(a.prepared).toEqual({ kind: 'none' });
@@ -90,11 +90,16 @@ describe('GUI-02 / GUI-05 / GUI-08: Boston Beer, Phil Savastano asked for four d
     expect(t).toContain('- Last from us: Oct 2, 2026, "Onsite at Primo" (HubSpot (logged email)). Nothing from them since (no exchange on record either way).');
     expect(t).toContain('- Last email to Brian Kellogg, Director Planning, Oct 2: "Re: Call follow up". No answer on record. (HubSpot, Oct 2)');
     expect(t).toContain("- Searched: GAP's synced inbox (1 message from them); our Sent to them (2 messages); read Oct 10, 2026, 9:00 AM New York.");
-    expect(t).toContain('Assets named: Pilot-Program (no link on record); Pricing-and-Packaging (no link on record); ROI-One-Pager (no link on record); Solution-Overview (no link on record).');
+    // The four documents are the app's own PDFs (modex-gtm public/docs): canonical links, said as not tracked links.
+    expect(t).toContain("Assets named: Pilot-Program (https://app.example/docs/pilot-program.pdf, the app's own PDF; not a tracked link); Pricing-and-Packaging (https://app.example/docs/pricing-and-packaging.pdf, the app's own PDF; not a tracked link); ROI-One-Pager (https://app.example/docs/roi-one-pager.pdf, the app's own PDF; not a tracked link); Solution-Overview (https://app.example/docs/solution-overview.pdf, the app's own PDF; not a tracked link).");
     expect(t).toContain('- Next action on record, due Oct 8: Send the 4 tracked sales docs (Pilot-Program, Pricing-and-Packaging, ROI-One-Pager, Solution-Overview) as tracked links, first stop per RETIREMENT-HANDOFF since the handoff.');
     expect(t).not.toContain('[[');
     expect(a.html).not.toContain('[[');
-    expect(lines(t)).toContain('Not read this time: Gmail Sent (no GAP sender configured)');
+    // The bookkeeping (what was read, what was not) is the last section, after the controls.
+    const L2 = lines(t);
+    expect(L2).toContain('- Not read this time: Gmail Sent (no GAP sender configured)');
+    expect(L2.indexOf('Read for this packet:')).toBeGreaterThan(L2.indexOf('Controls:'));
+    expect(L2.indexOf('Evidence:')).toBeLessThan(L2.indexOf('Controls:'));
     expect(a.packet?.assets.map((x) => x.name)).toEqual(['Pilot-Program', 'Pricing-and-Packaging', 'ROI-One-Pager', 'Solution-Overview']);
   });
 
@@ -122,7 +127,10 @@ describe('GUI-07: PepsiCo, the IW15 hold stands and "preparation remains"', () =
     expect(t).not.toContain('Ready to send');
     expect(t).not.toContain('Shawn, the doors.');
     expect(t).toContain('- Choose the person on the account, then APPROVE on the next revision (internal work): the prepared email and this item name different people; nothing goes out until they agree.');
-    expect(t).toContain('PepsiCo: Tom Kamantauskas (Senior Director, Logistics). Why now: A prepared first touch. Ready for a first touch: Tom Kamantauskas. As of Oct 10, 2026, 9:00 AM New York.');
+    // The first line and the subject say the held state, never "Ready for a first touch" (Casey, 2026-10-10).
+    expect(t).toContain("PepsiCo: Tom Kamantauskas (Senior Director, Logistics). Why now: Held: GAP's prepared email is addressed to Shawn Miller (shawn.miller@pepsico.com), but this item names Tom Kamantauskas. Held: nothing goes out until the account's chosen person and the draft agree; choose on the account. As of Oct 10, 2026, 9:00 AM New York.");
+    expect(a.subject).toBe(`GAP 1 of 1, PepsiCo: Held: the prepared email names Shawn Miller, not Tom Kamantauskas [GAP#${'a'.repeat(32)}.0]`);
+    expect(t).not.toContain('Why now: A prepared first touch. Ready for a first touch');
     noCommandLines(t);
   });
 
@@ -156,9 +164,10 @@ describe('GUI-06: Walmart, STOP first and no outbound move', () => {
     expect(L[1]).toBe('Walmart Inc.: Tim Cooper. Why now: Admin: record it; buyer activity Oct 5. Opted out: Tim Cooper, Oct 5. As of Oct 10, 2026, 9:00 AM New York.');
     expect(a.packet?.moves.map((m) => m.kind)).toEqual(['administrative', 'none']);
     expect(a.packet?.moves.some((m) => m.kind === 'outbound'), 'no outbound to an opted-out person').toBe(false);
-    expect(a.text).toContain("- Record Tim Cooper's opt-out as do not contact and close the item (DONE: what happened) (administrative): they asked not to be contacted; nothing goes back to them and the account cools before anyone else is touched.");
+    expect(a.text).toContain("- Record Tim Cooper's opt-out as do not contact and close the item (DONE: what happened) (administrative): they asked not to be contacted; nothing goes back to them from this item.");
+    expect(a.text, 'no blanket instruction about the rest of the account').not.toMatch(/account cools|gets a cold email/);
     expect(a.text).toContain('- Opt-out: Tim Cooper asked not to be contacted on Oct 5, 2026 ("stop"); their message of Oct 5, 2026; NOT yet on the suppression list.');
-    expect(a.text).toContain('They said: "Asked not to be contacted: "stop"" (Tim Cooper, Oct 5, 2026)');
+    expect(a.text).toContain('Tim Cooper said: "Asked not to be contacted: "stop"" (Oct 5, 2026)');
     expect(a.text).toContain('- Walmart also reported plans to invest more than $330 million to upgrade its regional distribution center in Opelousas, Louisiana. (reported Oct 1, 2026; supplychaindive.com)');
     expect(a.html.indexOf('STOP: Tim Cooper asked not to be contacted on Oct 5, 2026')).toBeLessThan(a.html.indexOf('Walmart Inc.: Tim Cooper.'));
     noCommandLines(a.text);
@@ -197,7 +206,9 @@ describe('GUI-08: a deal item carries the exchange, the stakeholder, the promise
     expect(t).toContain('- Last meaningful exchange: they wrote Sep 16, 2026 ("Re: Chattanooga"); we wrote Oct 1, 2026 ("Pilot scope draft").');
     expect(t).toContain('- Promise: "Send Dave the pilot scope" (casey@freightroll.com, due Oct 8, 2026, open).');
     expect(t).toContain('- Next action on record, due Oct 8: one pilot Dave owns at Chattanooga. (your vault note; not a buyer commitment)');
-    expect(t).toContain('- Open deal: YardFlow - Kenco Chattanooga (Qualified to buy), next step: Send pilot scope https://app.hubspot.com/contacts/3819073/record/0-3/1001.');
+    // The deal context carries the deal and the promise; the relationship lines do not repeat them.
+    expect(t).not.toContain('- Open deal: YardFlow - Kenco Chattanooga');
+    expect(t).not.toContain('- Promises:');
     expect(t).toContain("Nothing is prepared yet; preparation remains: the deal's next step is yours to take; GAP has no copy for it.");
     noCommandLines(t);
   });

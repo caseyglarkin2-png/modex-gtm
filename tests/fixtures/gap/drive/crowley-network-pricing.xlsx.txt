@@ -1,0 +1,41 @@
+## The Offer
+Crowley x YardFlow by FreightRoll - Pricing Offer,,,
+Start with one chassis pool. Prove it. Roll the North America network. Extend across the Americas.,,,
+1. START HERE: THE PILOT (Talleyrand chassis pool),,,
+"Pilot, standalone",,"$25,000","flat, ~60 days, Year 1 or Year 2"
+"Machine vision at the gate proves who took every chassis, when, and whether it is earning. No app, no stop, no PIN. The easy way in.",,,
+"The $25K pilot CREDITS toward Year 1 of the network. Prove it, then scale it.",,,
+2. PHASE 1 - THE NORTH AMERICA NETWORK (a blue-chip partner rate),,,
+"The committed network: 19 US + Puerto Rico + USVI yards. Talleyrand converts from pilot to a live site. We want Crowley as our flagship maritime partner, and the rate says so.",,,
+"Phase 1 rack rate (19 yards, sized on public data)",,"$660,000",
+base platform (Core),,"$237,500","driver journey + YMS, every yard"
+gate machine vision + automation,,"$247,500",who/what/when at every gate
+RTLS (gated terminals),,"$175,000",live yard tracking
+Deployments quoted,,45,drives the discount (see schedule)
+Volume discount (by deployment count),,25%,
+Net after volume discount,,"$495,000",
+less blue-chip partner credit (logo + 2 case studies),,"-$50,000",
+less sign-by bonus (by target date),,"-$25,000",
+"PHASE 1 BLUE-CHIP PARTNER RATE, net",,"$420,000",per year
+" per yard, average",,"$22,105",fully covered yard
+total off the rack rate,,"$240,000",what Crowley saves as a flagship partner
+3. PHASE 2 - AMERICAS EXPANSION (the runway),,,
+"Extend the same operating layer to the 6 international container terminals: DR (Puerto Plata, Rio Haina), Guatemala, Honduras, Costa Rica, Panama. Priced and ready when Crowley is.",,,
+Phase 2 rack rate (6 terminals),,"$320,000",
+Phase 2 net (25% volume rate),,"$240,000","per year, additive"
+## Network Build
+#,Site,Location,Facility type,Size / char.,Point,Gate add-on,RTLS,Core ($/yr),Gate ($/yr),RTLS ($/yr),Site total ($/yr),Deployments
+PHASE 1 - NORTH AMERICA NETWORK (committed),,,,,,,,,,,,
+1,Talleyrand Terminal,"Jacksonville, FL",Marine terminal + chassis pool (197 ac),Larger / Gated,High,Gate Automation + MV,Yes,"$20,000","$25,000","$25,000","$70,000",3
+2,Isla Grande,"San Juan, PR","Marine terminal (largest, 7-lane gate, 160 ac)",Larger / Gated,High,Gate Automation + MV,Yes,"$20,000","$25,000","$25,000","$70,000",3
+3,Port Everglades,"Ft. Lauderdale, FL",Marine terminal (78 ac),Larger / Gated,High,Gate Automation + MV,Yes,"$20,000","$25,000","$25,000","$70,000",3
+8,Conley Container Yard,"Conley (Atlanta), GA",Inland container / drop yard,Smaller / Ungated,Mid,MV @ Gate Add-On,No,"$12,500","$7,500",$0,"$20,000",2
+9,JAX Cross-Dock,"Jacksonville, FL",Cross-dock / distribution,Smaller / Ungated,Mid,MV @ Gate Add-On,No,"$12,500","$7,500",$0,"$20,000",2
+13,CrowleyFresh,"Medley, FL",Temp-controlled DC,Smaller / Ungated,Low,MV @ Gate Add-On,No,"$5,000","$5,000",$0,"$10,000",2
+,,,,,PHASE 1 SUBTOTAL,,,"$237,500","$247,500","$175,000","$660,000",45
+## Rollout Schedule
+Stage,Window,Sites,What happens
+Pilot,Month 0-2,Talleyrand,"Cameras up, fleet file ingested, live chassis accountability + aging/exception reporting. Closeout + network rollout plan."
+Sign,Month 2-3,-,"Pilot review, network SOW signed within the sign-by window to lock the bonus."
+Phase 1 - Wave 1 (FL hub),Month 3-5,"Talleyrand, Port Everglades, Miami DC, CrowleyFresh, JAX Cross-Dock, JAX DC, Tradeport",Florida core goes live first off the proven Talleyrand template.
+Phase 2 - Americas,Year 2 (1-2 / quarter),"Santo Tomas, Puerto Cortes, Rio Haina, Puerto Plata, Limon, Manzanillo","International container terminals, sequenced 1-2 per quarter."

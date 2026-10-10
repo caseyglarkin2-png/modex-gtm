@@ -11,6 +11,18 @@ import type { ReplyClassKind } from '../replies/classify';
 import { isInternalRecipient } from '../context/context';
 import { displayName } from '../people/display-name';
 
+/**
+ * A reply's words for the story, cut at a word (never "a fe" mid-word; the Kenco packet of October 10 showed one):
+ * up to 200 characters, with an ellipsis when cut; a quoted header after their own words is dropped first.
+ */
+export function cutWords(s: string, max = 200): string {
+  const own = s.replace(/\s+/g, ' ').trim().split(/\s(?:From|Sent|To):\s|\sOn .{5,80}? wrote:/)[0].trim();
+  if (own.length <= max) return own;
+  const head = own.slice(0, max + 1);
+  const space = head.lastIndexOf(' ');
+  return `${own.slice(0, space > max / 2 ? space : max).trim()}...`;
+}
+
 export interface ClawdSend {
   type: string;
   date: string;
@@ -110,7 +122,7 @@ export function mergeTouches(x: {
     out.push({ kind: 'send', at: new Date(s.date).toISOString(), ...person(s.to), what: s.subject?.trim() || 'email', source: 'clawd ledger' });
   }
   for (const r of x.replies ?? []) {
-    out.push({ kind: 'reply', at: r.at, ...person(r.from, r.address ?? null), what: r.snippet.replace(/\s+/g, ' ').trim().slice(0, 80), source: 'GAP ledger', replyKind: r.kind, replyLabel: r.label, ...(r.placedVia ? { placedVia: r.placedVia } : {}) });
+    out.push({ kind: 'reply', at: r.at, ...person(r.from, r.address ?? null), what: cutWords(r.snippet), source: 'GAP ledger', replyKind: r.kind, replyLabel: r.label, ...(r.placedVia ? { placedVia: r.placedVia } : {}) });
   }
   // B1: our Sent mail (the GAP mailbox): a send of ours to a person at the account, named by the address it went to.
   for (const m of x.sent?.messages ?? []) {
@@ -123,7 +135,7 @@ export function mergeTouches(x: {
     if (e.kind === 'email') {
       const from = e.from ?? null;
       if (e.direction === 'incoming' && from && !isInternalRecipient(from)) {
-        out.push({ kind: 'reply', at: e.at, ...person(from, from), what: (e.body || e.title || '').replace(/\s+/g, ' ').trim().slice(0, 80), source: 'HubSpot', replyKind: 'human', replyLabel: 'replied', excerpt: e.body || undefined });
+        out.push({ kind: 'reply', at: e.at, ...person(from, from), what: cutWords(e.body || e.title || ''), source: 'HubSpot', replyKind: 'human', replyLabel: 'replied', excerpt: e.body || undefined });
       } else if (e.direction === 'outgoing' || (from && isInternalRecipient(from))) {
         const to = e.to && !isInternalRecipient(e.to) ? e.to : null;
         out.push({ kind: 'send', at: e.at, ...(to ? person(to) : { name: 'the account', title: null, address: null }), what: e.title?.trim() || 'email', source: 'HubSpot', excerpt: e.body || undefined });

@@ -93,9 +93,18 @@ export interface HubSpotContactLive {
   updatedAt: string | null;
 }
 
+/** A HubSpot contact found by address when GAP holds no row for the person (one bounded search, cached). */
+export interface HubSpotContactFound {
+  id: string;
+  name: string | null;
+  live: HubSpotContactLive;
+}
+
 export interface ContactPacketDeps {
   /** A live HubSpot contact read by id; absent (tests, no token) means the stored row alone. Never throws through. */
   hubspotContact?: ((contactId: string) => Promise<HubSpotContactLive | null>) | null;
+  /** A HubSpot contact found by address when no GAP row exists; absent means the search below (with a token), null means never. */
+  hubspotContactByEmail?: ((email: string) => Promise<HubSpotContactFound | null>) | null;
   /** The account's open deals (id, name); absent means none listed (the caller hands down the in-deals summary it holds). */
   deals?: (accountName: string) => Promise<Array<{ id?: string | null; name: string | null }>>;
 }
@@ -106,11 +115,22 @@ export interface ContactPacketQuery {
   name?: string | null;
   accountName: string;
   now: Date;
+  /** The HubSpot company when the account record carries none (the one the deals resolve); the account's own wins. */
+  hubspotCompanyId?: string | null;
 }
 
 export const CONTACT_LIVE_CACHE_MS = 30 * 60_000;
 export const contactLiveCacheKey = (contactId: string) => `gap:contact-live:${contactId}`;
 const CONTACT_PROPS = ['firstname', 'lastname', 'jobtitle', 'phone', 'mobilephone', 'hs_linkedin_url', 'linkedin_url', 'linkedinbio', 'hs_timezone', 'lastmodifieddate'];
+
+/** "phil savastano" -> "Phil Savastano"; a value with any capital letter is left as written (it was typed by someone). */
+export function properCase(s: string | null | undefined): string | null {
+  if (!s || !s.trim()) return null;
+  const t = s.trim();
+  if (/[A-Z]/.test(t)) return t;
+  const small = new Set(['of', 'and', 'the', 'for', 'at', 'in', 'on', 'to', 'de', 'van', 'von', 'da', 'del', 'la', 'le', 'du']);
+  return t.replace(/\b([a-z])([a-z'-]*)/g, (m, a: string, rest: string, offset: number) => (offset > 0 && small.has(m) ? m : a.toUpperCase() + rest.replace(/(['-])([a-z])/g, (_x, p: string, c: string) => p + c.toUpperCase())));
+}
 
 const clean = (v: unknown): string | null => (typeof v === 'string' && v.trim() ? v.trim() : null);
 const iso = (d: unknown): string | null => {
@@ -179,6 +199,62 @@ export async function readHubSpotContactLive(prisma: PrismaLike, contactId: stri
   return contact;
 }
 
+const liveOf = (p: Record<string, string | null | undefined>): HubSpotContactLive => {
+  const linkedinRaw = clean(p.hs_linkedin_url) ?? clean(p.linkedin_url) ?? clean(p.linkedinbio);
+  return { phone: clean(p.phone), mobilephone: clean(p.mobilephone), jobtitle: clean(p.jobtitle), linkedin: linkedinRaw && LINKEDIN_PROFILE.test(linkedinRaw) ? linkedinRaw : null, timezone: clean(p.hs_timezone), updatedAt: iso(clean(p.lastmodifieddate)) };
+};
+export const contactByEmailCacheKey = (email: string) => `gap:contact-live:email:${email.trim().toLowerCase()}`;
+
+/**
+ * The HubSpot contact for an address GAP holds no row for (Dave Kiesling at Kenco, October 10: the email was logged to
+ * him in HubSpot, GAP had no persona): one exact-match search, cached per address like the live read. Without a token:
+ * null, said by the caller. Never throws.
+ */
+export async function readHubSpotContactByEmail(prisma: PrismaLike, email: string, now: Date, deps: { search?: (email: string, props: string[]) => Promise<{ id: string; properties: Record<string, string | null | undefined> } | null>; configured?: boolean } = {}): Promise<HubSpotContactFound | null> {
+  const address = lower(email);
+  if (!address.includes('@')) return null;
+  const configured = deps.configured ?? !!process.env.HUBSPOT_ACCESS_TOKEN;
+  if (!configured) return null;
+  const key = contactByEmailCacheKey(address);
+  const canCache = typeof prisma?.systemConfig?.findUnique === 'function';
+  if (canCache) {
+    try {
+      const row = await prisma.systemConfig.findUnique({ where: { key } });
+      const cached = row?.value ? (JSON.parse(String(row.value)) as { checkedAt: string; found: HubSpotContactFound | null }) : null;
+      const age = cached?.checkedAt ? now.getTime() - new Date(cached.checkedAt).getTime() : Infinity;
+      if (cached && age >= 0 && age < CONTACT_LIVE_CACHE_MS) return cached.found;
+    } catch {
+      // an unreadable cache is a cache miss
+    }
+  }
+  let found: HubSpotContactFound | null = null;
+  try {
+    const search = deps.search ?? (async (value: string, props: string[]) => {
+      const { getHubSpotClient, withHubSpotRetry } = await import('@/lib/hubspot/client');
+      const client = getHubSpotClient();
+      const r = (await withHubSpotRetry(() => client.crm.contacts.searchApi.doSearch({ filterGroups: [{ filters: [{ propertyName: 'email', operator: 'EQ' as never, value }] }], properties: props, limit: 1, after: '0', sorts: [] }), `gap-contact-packet contact search (${value})`)) as { results?: Array<{ id: string; properties?: Record<string, string | null | undefined> }> } | null;
+      const hit = r?.results?.[0];
+      return hit ? { id: hit.id, properties: hit.properties ?? {} } : null;
+    });
+    const hit = await search(address, [...CONTACT_PROPS, 'email']);
+    if (hit) {
+      const name = [clean(hit.properties.firstname), clean(hit.properties.lastname)].filter(Boolean).join(' ') || null;
+      found = { id: String(hit.id), name, live: liveOf(hit.properties) };
+    }
+  } catch {
+    found = null;
+  }
+  if (canCache && typeof prisma?.systemConfig?.upsert === 'function' && found) {
+    try {
+      const value = JSON.stringify({ checkedAt: now.toISOString(), found });
+      await prisma.systemConfig.upsert({ where: { key }, create: { key, value }, update: { value } });
+    } catch {
+      // the read stands without the cache
+    }
+  }
+  return found;
+}
+
 /** The persona row for the query: by id, else by address, else by name AT the account (never a name across accounts). */
 export async function findPersonaContact(prisma: PrismaLike, q: ContactPacketQuery): Promise<PersonaContactRow | null> {
   if (q.personaId != null && typeof prisma?.persona?.findUnique === 'function') {
@@ -212,9 +288,13 @@ export function projectContactPacket(x: {
   live: HubSpotContactLive | null;
   /** Whether a live read was attempted ("read live" versus "not read"). */
   liveRead: boolean;
+  /** A HubSpot contact found by address when no GAP row exists. */
+  found?: HubSpotContactFound | null;
 }): ContactPacket | null {
   const p = x.persona;
-  const name = p?.name?.trim() || x.fallback?.name?.trim() || null;
+  const fallbackName = x.fallback?.name?.trim() || null;
+  // A fallback that is an address is a last resort: the found contact's name, else the address's words.
+  const name = properCase(p?.name) ?? (fallbackName && !fallbackName.includes('@') ? properCase(fallbackName) : null) ?? properCase(x.found?.name) ?? fallbackName ?? null;
   if (!name) return null;
   const phones: ContactPhone[] = [];
   const personaUpdated = iso(p?.updated_at ?? null);
@@ -234,24 +314,28 @@ export function projectContactPacket(x: {
     add('direct', x.live.phone, 'HubSpot contact (phone field), read live', x.live.updatedAt);
   }
   if (p?.phone && !PHONE_DEAD.has(lower(p.phone_status))) add('direct', p.phone, `GAP contact record${p.phone_status && p.phone_status !== 'unknown' ? ` (status ${p.phone_status})` : ' (status not checked)'}`, personaUpdated);
+  if (!p && x.found) {
+    add('mobile', x.found.live.mobilephone, 'HubSpot contact (mobile phone field), found by address, read live', x.found.live.updatedAt);
+    add('direct', x.found.live.phone, 'HubSpot contact (phone field), found by address, read live', x.found.live.updatedAt);
+  }
   const linkedinStored = p?.linkedin_url && (p.linkedin_confidence ?? 0) >= LINKEDIN_CONFIDENCE_FLOOR && LINKEDIN_PROFILE.test(p.linkedin_url) ? p.linkedin_url.trim() : null;
   const email = clean(p?.email) ?? clean(x.fallback?.email);
-  const contactId = clean(p?.hubspot_contact_id);
-  const sources = [p ? `GAP contact record ${p.id}` : 'no GAP contact record', x.live ? 'the HubSpot contact, read live' : x.liveRead ? 'the HubSpot contact (not readable)' : contactId ? 'the HubSpot contact (not read this time)' : 'no HubSpot contact link'];
+  const contactId = clean(p?.hubspot_contact_id) ?? (x.found ? x.found.id : null);
+  const sources = [p ? `GAP contact record ${p.id}` : 'no GAP contact record', x.live ? 'the HubSpot contact, read live' : x.found ? 'the HubSpot contact, found by address, read live' : x.liveRead ? 'the HubSpot contact (not readable)' : contactId ? 'the HubSpot contact (not read this time)' : 'no HubSpot contact link'];
   return {
     name,
-    title: clean(x.live?.jobtitle) ?? clean(p?.title) ?? clean(x.fallback?.title),
+    title: properCase(clean(x.live?.jobtitle) ?? clean(p?.title) ?? clean(x.found?.live.jobtitle) ?? clean(x.fallback?.title)),
     company: x.accountName,
     email: email ? email.toLowerCase() : null,
     emailStatus: email ? (p?.email ? p.email_status ?? null : 'not on the GAP record') : null,
     phones,
-    timezone: clean(x.live?.timezone),
-    linkedin: x.live?.linkedin ?? linkedinStored,
+    timezone: clean(x.live?.timezone) ?? clean(x.found?.live.timezone),
+    linkedin: x.live?.linkedin ?? linkedinStored ?? x.found?.live.linkedin ?? null,
     hubspotContactUrl: contactId ? hubspotRecordUrl('contact', contactId) : null,
     hubspotCompanyUrl: x.hubspotCompanyId ? hubspotRecordUrl('company', x.hubspotCompanyId) : null,
     dealUrls: x.deals.filter((d) => d.id).map((d) => ({ name: d.name ?? 'an unnamed deal', url: hubspotRecordUrl('deal', String(d.id)) })),
     source: sources.join(' and '),
-    updatedAt: [personaUpdated, x.live?.updatedAt ?? null].filter((d): d is string => !!d).sort().at(-1) ?? null,
+    updatedAt: [personaUpdated, x.live?.updatedAt ?? null, x.found?.live.updatedAt ?? null].filter((d): d is string => !!d).sort().at(-1) ?? null,
   };
 }
 
@@ -267,5 +351,9 @@ export async function contactPacketFor(prisma: PrismaLike, q: ContactPacketQuery
   const contactId = clean(persona?.hubspot_contact_id);
   const reader = deps.hubspotContact === undefined ? (id: string) => readHubSpotContactLive(prisma, id, q.now) : deps.hubspotContact;
   const live = contactId && reader ? await reader(contactId).catch(() => null) : null;
-  return projectContactPacket({ accountName: q.accountName, persona, fallback: q.fallback ?? { name: q.name ?? null, title: null, email: q.email ?? null }, hubspotCompanyId: account?.hubspot_company_id ?? null, deals, live, liveRead: !!contactId && !!reader });
+  // No GAP row but an address: the HubSpot contact by address (one bounded search), so Who is never empty for a person the CRM knows.
+  const address = lower(q.email) || lower(q.fallback?.email) || null;
+  const finder = deps.hubspotContactByEmail === undefined ? (e: string) => readHubSpotContactByEmail(prisma, e, q.now) : deps.hubspotContactByEmail;
+  const found = !persona && address && finder ? await finder(address).catch(() => null) : null;
+  return projectContactPacket({ accountName: q.accountName, persona, fallback: q.fallback ?? { name: q.name ?? null, title: null, email: q.email ?? null }, hubspotCompanyId: account?.hubspot_company_id ?? q.hubspotCompanyId ?? null, deals, live, liveRead: !!contactId && !!reader, found });
 }

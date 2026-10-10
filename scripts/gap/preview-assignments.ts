@@ -47,7 +47,8 @@ async function main() {
   const realClient = new PrismaClient({ datasources: { db: { url: url.toString() } } });
   const { client: prisma, writes } = readOnly(realClient);
   const now = new Date();
-  const day = nyDay(now);
+  // --day YYYY-MM-DD renders a stored plan of another day (after midnight New York the new day has no plan until the cron plans it).
+  const day = arg('--day') ?? nyDay(now);
   const L: string[] = [];
   const H: string[] = [];
   try {
