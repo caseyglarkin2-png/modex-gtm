@@ -79,7 +79,8 @@ describe('X05a: renderBriefing (pure)', () => {
     expect(out.text).toContain('2. Kroger: Send the dock comparison. Joey Maggard. Due today.');
     expect(out.text).toContain('3. PepsiCo: Ready for a first touch. Karen Ortiz (Director, Transportation). A prepared first touch.');
     expect(out.text.indexOf('1. Boston Beer')).toBeLessThan(out.text.indexOf('2. Kroger'));
-    expect(out.text).toContain('Waiting on them: 4. Parked (research, holds, set aside): 12. Snoozed: 1.');
+    // GUI-11 (2026-10-10): the counts say their unit.
+    expect(out.text).toContain('Waiting on them: 4 accounts. Parked (research, holds, set aside): 12 accounts. Snoozed: 1 account.');
     expect(out.html).toContain('<a href="https://app.example/gap/start?t=S"');
     expect(out.html).toContain('PepsiCo');
   });

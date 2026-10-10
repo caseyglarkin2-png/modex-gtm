@@ -35,10 +35,16 @@
  *     the applied row records `advancedTo: <key>` (or null with `advanceReason`: none_left, all_held, no_briefing_address,
  *     send_failed, no_plan), and the answer names it ("Next: PepsiCo, a prepared first touch, arriving as its own
  *     email."). A refused or progress-noted DONE never advances.
+ *   - the Gmail action UI audit (GUI-09, 2026-10-10): ITEM n (also OPEN n, SEND ME n), on the briefing thread or on
+ *     any assignment thread, sends item n of the day's NEWEST plan revision as its own email through sendAssignment,
+ *     judged by `assignable` the way START is: a held item answers the hold's line (recorded held once, never sent);
+ *     an item already sent answers "Already in your inbox: <subject>" and is not sent again; ITEM with no number, or a
+ *     number off the plan, answers the numbered list with each item's standing. The applied row says what the provider
+ *     confirmed (`receipt`: provider_confirmed with the Gmail id, or recorded_not_confirmed when Gmail returned none).
  */
 import type { GmailSender, GmailSendPayload } from '@/lib/email/gmail-sender';
 import type { MailboxMessage } from '@/lib/email/gmail-inbox';
-import { ASSIGNMENT_SENT, ITEM_SUBJECT_TYPE, loadAssignments, nextAssignableItem, sendAssignment, startDay, type AssignmentDeps } from '../work/assignment';
+import { ASSIGNMENT_SENT, ITEM_HELD_FOR_RESEARCH, ITEM_SUBJECT_TYPE, assignable, loadAssignments, nextAssignableItem, sendAssignment, startDay, type AssignmentDeps, type SendAssignmentResult } from '../work/assignment';
 import { BRIEFING_SENT } from '../work/briefing-send';
 import { commitmentsFromSellerNote, loadCommitment, transitionCommitment } from '../work/commitments';
 import { dayLabel, nyDayAt, parseDuePhrase } from '../work/dates';
@@ -59,7 +65,24 @@ export const COMMAND_LOOKBACK_DAYS = 14;
 export const HELP_INTERVAL_MS = 60 * 60_000;
 const DAY_MS = 86_400_000;
 
-export const COMMANDS_HELP = 'Commands, on the first line of your reply: APPROVE, REVISE: your words, SKIP, DEFER Oct 14, DONE: what happened, NEXT, HELP. APPROVE creates the Gmail draft; REVISE has GAP rewrite and come back; SKIP sets it aside for today; DEFER brings it back on that day; DONE records what happened as your word; NEXT sends the next item. Anything longer than a sentence is read as a revision request.';
+/**
+ * GUI-09: every command with its exact effect, one line each. No line starts with a command word (a quoted help never
+ * reads as a command), and the three safety facts are said: APPROVE approves for the send step in the app only, a link
+ * never approves or sends, a reply to a GAP message never reaches a buyer.
+ */
+export const COMMANDS_HELP = [
+  'Commands, on the first line of your reply: APPROVE, REVISE: your words, SKIP, DEFER Oct 14, DONE: what happened, NEXT, ITEM 6, HELP.',
+  'Reply APPROVE to approve this item\'s email for the send step in the app only; nothing is sent until you press CONFIRM + SEND there.',
+  'Reply REVISE: your words and GAP rewrites the email on your words and sends the revision back to you here; nothing goes to the buyer.',
+  'Reply SKIP to set this item aside for today; it returns tomorrow.',
+  'Reply DEFER Oct 14 to bring this item back on that day.',
+  'Reply DONE: what happened to record your words as this item\'s record; GAP sends nothing.',
+  'Reply NEXT and the next item on today\'s plan arrives as its own email.',
+  'Reply ITEM 6 (or OPEN 6, SEND ME 6) and item 6 of today\'s plan arrives as its own email; ITEM alone lists the items with their numbers.',
+  'Reply START on the briefing to start the day; item 1 arrives as its own email.',
+  'Reply HELP for this list.',
+  'Opening a link in a GAP email never approves or sends anything. A reply to a GAP message reaches GAP only, never a buyer. Anything longer than a sentence is read as a revision request.',
+].join('\n');
 
 /** The command senders and every recorded assignment and briefing thread of the lookback, keyed for the verdict. */
 export async function loadCommandContext(prisma: PrismaLike, settings: SellerSettings, now: Date): Promise<CommandContext> {
@@ -159,6 +182,10 @@ const NEXT_PATH: Record<string, string> = {
   not_yet_available: 'Open the item in GAP to do it there.',
   help_rate_limited: 'The commands were sent within the hour; see that email.',
   no_briefing_address: 'Set the briefing address in Settings.',
+  item_list_sent: 'Reply ITEM and the number, and that item arrives as its own email.',
+  already_in_inbox: 'Answer that item in its own email; reply ITEM and another number for a different one.',
+  item_held: 'GAP is researching it. Reply ITEM and another number, or NEXT.',
+  no_plan: 'Open Work in GAP; no plan is recorded for that day.',
 };
 const nextPath = (key: string, fallback = 'Open the item in GAP.') => NEXT_PATH[key] ?? fallback;
 const outcomeOfEffect = (effect: string): ActionOutcome => (effect === 'gmail_drafted' || effect === 'already_drafted' ? 'prepared' : effect === 'revision_queued' || /queued/.test(effect) ? 'queued' : 'accepted');
@@ -262,9 +289,96 @@ async function sendNext(prisma: PrismaLike, input: ApplyInput, deps: ApplyDeps, 
   }
   if (!input.settings.briefingTo) return refuse(prisma, input, deps, subject, command, 'no_briefing_address');
   const r = await sendAssignment(prisma, { plan, item, revision: 0, to: input.settings.briefingTo, sender: input.sender, baseUrl: input.baseUrl, actionSecret: input.actionSecret, commandsEnabled: true, now: input.now, actor: input.actor, built: walk.built }, deps);
-  await recordApplied(prisma, input, subject, { command, effect: 'assignment_sent', itemKey: item.key, sent: r.sent, held: heldKeys });
-  if (heldLines.length) await answer(input, deps, [`Sent item ${item.rank + 1}, ${item.accountName}: ${item.title}, as its own email.`, ...heldLines].join('\n'));
+  await recordApplied(prisma, input, subject, { command, effect: 'assignment_sent', itemKey: item.key, sent: r.sent, ...receiptOf(r), held: heldKeys });
+  if (heldLines.length) await answer(input, deps, [`Sent item ${item.rank + 1}, ${item.accountName}: ${item.title}, as its own email ${receiptWords(r)}.`, ...heldLines].join('\n'));
   return { applied: true, command, effect: 'assignment_sent', itemKey: item.key, outcome: 'accepted', source: sourceOf(item), next: nextPath('assignment_sent') };
+}
+
+/**
+ * GUI-10: what the provider confirmed about an assignment send, on the applied row: Gmail's message id when it
+ * answered one (`provider_confirmed`), else `recorded_not_confirmed` (GAP recorded the send; Gmail returned no id).
+ */
+function receiptOf(r: SendAssignmentResult): { receipt: 'provider_confirmed' | 'recorded_not_confirmed' | 'not_sent'; gmailMessageId: string | null } {
+  if (!r.sent) return { receipt: 'not_sent', gmailMessageId: null };
+  return r.gmailMessageId ? { receipt: 'provider_confirmed', gmailMessageId: r.gmailMessageId } : { receipt: 'recorded_not_confirmed', gmailMessageId: null };
+}
+/** The same receipt in the seller's words: "(Gmail message gm-7)" or "(recorded, not confirmed by Gmail)". */
+function receiptWords(r: SendAssignmentResult): string {
+  if (!r.sent) return '(not sent: it was already in your inbox)';
+  return r.gmailMessageId ? `(Gmail message ${r.gmailMessageId})` : '(recorded, not confirmed by Gmail)';
+}
+
+/** GUI-09: each plan item's standing for the list: in your inbox, held, settled, or not sent yet. */
+async function itemStandings(prisma: PrismaLike, plan: DayPlan): Promise<Map<string, { standing: 'in_inbox' | 'held' | 'settled' | 'unsent'; subject: string | null }>> {
+  const keys = plan.items.map((i) => i.key);
+  const out = new Map<string, { standing: 'in_inbox' | 'held' | 'settled' | 'unsent'; subject: string | null }>();
+  for (const k of keys) out.set(k, { standing: 'unsent', subject: null });
+  if (!keys.length) return out;
+  const applied: Array<{ subject_id: string; payload: Record<string, unknown> | null }> = await prisma.gapAuditEvent.findMany({ where: { kind: COMMAND_APPLIED, subject_type: ITEM_SUBJECT_TYPE, subject_id: { in: keys } }, select: { subject_id: true, payload: true } });
+  for (const r of applied) {
+    const p = (r.payload ?? {}) as Record<string, unknown>;
+    if (['skip', 'defer', 'done'].includes(String(p.command ?? '')) && p.effect !== 'progress_noted') out.set(r.subject_id, { standing: 'settled', subject: null });
+    else if (p.effect === ITEM_HELD_FOR_RESEARCH && out.get(r.subject_id)?.standing === 'unsent') out.set(r.subject_id, { standing: 'held', subject: null });
+  }
+  const sent: Array<{ subject_id: string; payload: Record<string, unknown> | null; created_at: Date | string }> = await prisma.gapAuditEvent.findMany({ where: { kind: ASSIGNMENT_SENT, subject_type: ITEM_SUBJECT_TYPE, subject_id: { in: keys } }, orderBy: [{ created_at: 'asc' }] });
+  for (const r of sent) {
+    const p = (r.payload ?? {}) as Record<string, unknown>;
+    if (out.get(r.subject_id)?.standing === 'settled') continue;
+    out.set(r.subject_id, { standing: 'in_inbox', subject: typeof p.subject === 'string' ? p.subject : null });
+  }
+  return out;
+}
+
+const STANDING_WORDS = { in_inbox: 'in your inbox', held: 'held for GAP research', settled: 'settled today', unsent: 'not sent yet' } as const;
+
+/**
+ * GUI-09: ITEM n. Sends item n of the day's newest plan revision as its own email, judged by `assignable` the way START
+ * judges the next item; a held item answers the hold's line; an item already in the inbox answers its subject and is
+ * not sent again; no number, or a number off the plan, answers the numbered list with each item's standing.
+ */
+async function sendItem(prisma: PrismaLike, input: ApplyInput, deps: ApplyDeps, day: string, subject: { type: string; id: string }, n: number | null): Promise<ApplyResult> {
+  const plan = await loadDayPlan(prisma, day);
+  if (!plan) return refuse(prisma, input, deps, subject, 'item', 'no_plan', {}, null, `No plan is recorded for ${day}. Open Work in GAP.`);
+  const standings = await itemStandings(prisma, plan);
+  const list = () => plan.items.map((it) => `${it.rank + 1}. ${it.accountName}: ${it.title} (${STANDING_WORDS[standings.get(it.key)?.standing ?? 'unsent']})`);
+  if (n === null || n < 1 || n > plan.items.length) {
+    const head = n === null ? `Today's ${plan.items.length === 1 ? 'item' : 'items'}, by number (reply ITEM and the number for one as its own email):` : `There is no item ${n}; today's plan has ${plan.items.length} ${plan.items.length === 1 ? 'item' : 'items'}:`;
+    await recordApplied(prisma, input, subject, { command: 'item', effect: 'item_list_sent', requested: n, items: plan.items.length });
+    await answer(input, deps, [head, ...list(), ...(plan.items.length ? [] : ['Nothing is on the plan. Open Work in GAP.'])].join('\n'));
+    return { applied: true, command: 'item', effect: 'item_list_sent', outcome: 'accepted', source: null, next: nextPath('item_list_sent') };
+  }
+  const item = plan.items[n - 1];
+  const source = sourceOf(item);
+  const standing = standings.get(item.key);
+  if (standing?.standing === 'in_inbox') {
+    await recordApplied(prisma, input, subject, { command: 'item', effect: 'already_in_inbox', itemKey: item.key, requested: n, subject: standing.subject });
+    await answer(input, deps, `Already in your inbox: ${standing.subject ?? `item ${n}, ${item.accountName}: ${item.title}`}. Nothing was sent again; answer it there.`);
+    return { applied: true, command: 'item', effect: 'already_in_inbox', itemKey: item.key, outcome: 'accepted', source, next: nextPath('already_in_inbox') };
+  }
+  if (standing?.standing === 'settled') {
+    return refuse(prisma, input, deps, subject, 'item', 'item_settled', { itemKey: item.key, requested: n }, source, `Item ${n}, ${item.accountName}: ${item.title}, was settled today (skipped, deferred or done) and is not sent again. Open it in GAP to reopen it.`);
+  }
+  if (!input.settings.briefingTo) return refuse(prisma, input, deps, subject, 'item', 'no_briefing_address', { itemKey: item.key, requested: n }, source);
+  const assignInput = { baseUrl: input.baseUrl, actionSecret: input.actionSecret, commandsEnabled: true, now: input.now };
+  const a = await assignable(prisma, plan, item, assignInput, deps);
+  if (!a.ok) {
+    // Held the way the START walk holds it (one row per item; a hold found already is not written again).
+    if (standing?.standing !== 'held') {
+      await prisma.gapAuditEvent.create({ data: { kind: COMMAND_APPLIED, actor: input.actor, subject_type: ITEM_SUBJECT_TYPE, subject_id: item.key, payload: { effect: ITEM_HELD_FOR_RESEARCH, reason: a.reason, detail: a.detail.slice(0, 500), day: plan.day, itemToken: item.token, revision: plan.revision ?? 0, at: input.now.toISOString() } } });
+    }
+    const line = a.reason === 'recipient_mismatch' ? 'the prepared email is addressed to a different person than the item names; choose on the account' : 'nothing supported to send yet';
+    await recordApplied(prisma, input, subject, { command: 'item', effect: 'item_held', itemKey: item.key, requested: n, reason: a.reason });
+    await answer(input, deps, `Held for GAP research: item ${n}, ${item.accountName}: ${item.title} (${line}). It is not sent as an assignment.`);
+    return { applied: true, command: 'item', effect: 'item_held', itemKey: item.key, outcome: 'accepted', source, next: nextPath('item_held') };
+  }
+  const r = await sendAssignment(prisma, { plan, item, revision: 0, to: input.settings.briefingTo, sender: input.sender, baseUrl: input.baseUrl, actionSecret: input.actionSecret, commandsEnabled: true, now: input.now, actor: input.actor, built: a.built }, deps);
+  if (!r.sent) {
+    await recordApplied(prisma, input, subject, { command: 'item', effect: 'already_in_inbox', itemKey: item.key, requested: n, subject: a.built.subject });
+    await answer(input, deps, `Already in your inbox: ${a.built.subject}. Nothing was sent again; answer it there.`);
+    return { applied: true, command: 'item', effect: 'already_in_inbox', itemKey: item.key, outcome: 'accepted', source, next: nextPath('already_in_inbox') };
+  }
+  await recordApplied(prisma, input, subject, { command: 'item', effect: 'assignment_sent', itemKey: item.key, requested: n, sent: true, ...receiptOf(r) });
+  return { applied: true, command: 'item', effect: 'assignment_sent', itemKey: item.key, outcome: 'accepted', source, next: nextPath('assignment_sent') };
 }
 
 export async function applyCommand(prisma: PrismaLike, input: ApplyInput, deps: ApplyDeps): Promise<ApplyResult> {
@@ -288,6 +402,8 @@ export async function applyCommand(prisma: PrismaLike, input: ApplyInput, deps: 
         return await sendNext(prisma, input, deps, target.day, subject, 'start');
       }
       if (command.kind === 'next') return await sendNext(prisma, input, deps, target.day, subject, 'next');
+      // GUI-09: a direct pick of item n, from the briefing.
+      if (command.kind === 'item') return await sendItem(prisma, input, deps, target.day, subject, command.n);
       if (command.kind === 'help' || command.kind === 'unknown') return await help(prisma, input, deps, subject, command.kind);
       return await refuse(prisma, input, deps, subject, command.kind, 'needs_an_assignment');
     } catch (err) {
@@ -298,6 +414,15 @@ export async function applyCommand(prisma: PrismaLike, input: ApplyInput, deps: 
   // An assignment thread: the item, its latest revision, and the once-only rule.
   const ref = target;
   const subject = { type: ITEM_SUBJECT_TYPE, id: ref.itemKey };
+  // GUI-09: a direct pick of item n from any assignment thread is about the DAY, not this item: it is judged on the
+  // newest plan revision and recorded on the day, whatever revision this thread carries.
+  if (command.kind === 'item') {
+    try {
+      return await sendItem(prisma, input, deps, ref.day, { type: 'work_day', id: ref.day }, command.n);
+    } catch (err) {
+      return failed(prisma, input, deps, { type: 'work_day', id: ref.day }, 'item', err, null);
+    }
+  }
   const bound = await boundItem(prisma, ref);
   if (!bound) return refuse(prisma, input, deps, subject, command.kind, 'item_not_found');
   const { item, newest, retired } = bound;
