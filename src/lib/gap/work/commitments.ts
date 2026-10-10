@@ -353,6 +353,12 @@ export async function commitmentsFromDisposition(
     channel?: string | null;
     /** X16b: confirmed unanswered calls since the last substantive answer, this one included (the routing count). */
     unansweredCalls?: number | null;
+    /**
+     * The DONE unification (2026-10-10): the row is the seller's DONE by email on a reply, which says the answer was
+     * handled. It creates no obligation (no "Answer them", no "Prepare the meeting": a meeting the note names is
+     * already written by commitmentsFromSellerNote); their answer still settles what waited on them (below).
+     */
+    settleOnly?: boolean;
     actor: string;
     now: Date;
   },
@@ -372,7 +378,9 @@ export async function commitmentsFromDisposition(
     );
     for (const c of waiting) await transitionCommitment(prisma, { commitmentId: c.commitmentId, to: 'done', proof: { kind: 'disposition', id: d.dispositionId, note: `Called ${who} (${d.responseClass.replace(/_/g, ' ')}).` }, actor: d.actor, now: d.now });
   }
-  if (isCall && (d.responseClass === 'no_answer' || d.responseClass === 'voicemail')) {
+  if (d.settleOnly) {
+    // Nothing is created; the settle below still runs.
+  } else if (isCall && (d.responseClass === 'no_answer' || d.responseClass === 'voicemail')) {
     const attempts = Math.max(1, Math.floor(d.unansweredCalls ?? 1));
     if (attempts < MAX_CALL_FOLLOW_UPS) {
       const dueAt = nyDayAt(nextBusinessDay(nyDay(d.now), CALL_RETRY_BUSINESS_DAYS));

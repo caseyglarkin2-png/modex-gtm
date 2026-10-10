@@ -1696,7 +1696,9 @@ model GapAuditEvent {
 /// GAP_DISPOSITION_FROZEN). Response classes: section 7.
 model ConversationDisposition {
   id                    String    @id @default(cuid())
-  hypothesis_id         String
+  /// Null only for a reply-triage disposition recorded without a thesis (source_kind email_command: the seller's DONE
+  /// on a reply, 2026-10-10). GAP never invents a hypothesis to fill it.
+  hypothesis_id         String?
   account_name          String
   persona_id            Int?
   contact_email         String // ALWAYS lowercased on write
@@ -1725,10 +1727,10 @@ model ConversationDisposition {
   created_at            DateTime  @default(now())
   updated_at            DateTime  @updatedAt
 
-  hypothesis ProspectingHypothesis @relation(fields: [hypothesis_id], references: [id])
-  account    Account               @relation(fields: [account_name], references: [name])
-  persona    Persona?              @relation(fields: [persona_id], references: [id])
-  enrollment SequenceEnrollment?   @relation(fields: [enrollment_id], references: [id])
+  hypothesis ProspectingHypothesis? @relation(fields: [hypothesis_id], references: [id])
+  account    Account                @relation(fields: [account_name], references: [name])
+  persona    Persona?               @relation(fields: [persona_id], references: [id])
+  enrollment SequenceEnrollment?    @relation(fields: [enrollment_id], references: [id])
 
   bids BuyerInputData[]
 

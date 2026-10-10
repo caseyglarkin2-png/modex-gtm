@@ -52,6 +52,13 @@
  *      the rest.
  *   6. `mirrorDisposition` (fail-open; its status is recorded, never thrown).
  *
+ * The DONE unification (2026-10-10): the seller's completion DONE on a reply item, by email, records through this same
+ * service (replies/done-reply.ts) with the server-only source kind `email_command` (keyed by the command's Gmail id),
+ * the reply on `inbound_message_id`, and `provenance` in the metadata. Such a reply-triage row may stand WITHOUT a
+ * hypothesis (`hypothesis_id` null, the account named by the caller and required to exist); the steps that need a
+ * thesis (resolution, the wrong-person re-target) are then skipped with the refusal `no_hypothesis`, a BID is refused,
+ * and the commitments run settle-only (the DONE says the answer was handled). No hypothesis is ever invented.
+ *
  * House convention for DB glue is `prisma: any`. Voice: no em dashes,
  * "yards" plural.
  */
@@ -81,8 +88,38 @@ export { unansweredCallsFor };
 // Types
 // ---------------------------------------------------------------------------
 
+/** The source kinds a caller of the disposition ROUTE may name (the route's schema and the client list are pinned equal). */
 export const DISPOSITION_SOURCE_KINDS = ['inbound_message', 'hubspot_engagement', 'call', 'meeting', 'manual'] as const;
-export type DispositionSourceKind = (typeof DISPOSITION_SOURCE_KINDS)[number];
+/**
+ * `email_command` (the DONE unification, 2026-10-10): a disposition the seller reported by an authenticated email command
+ * (DONE on a reply item, replies/done-reply.ts). Its id is the Gmail message id of the COMMAND, so the same command
+ * applied twice (the cron overlapping, a retry after a lost answer) collides on the (source_kind, source_id) key and
+ * records once. SERVER ONLY: it is not in DISPOSITION_SOURCE_KINDS, so the route (and any browser or agent token)
+ * can never write a row that claims the email command's provenance.
+ */
+export const INTERNAL_DISPOSITION_SOURCE_KINDS = ['email_command'] as const;
+export type DispositionSourceKind = (typeof DISPOSITION_SOURCE_KINDS)[number] | (typeof INTERNAL_DISPOSITION_SOURCE_KINDS)[number];
+
+/**
+ * The source kinds a disposition may be recorded under WITHOUT a hypothesis (a reply-triage disposition: the reply is
+ * the conversation, a thesis is not required for it to mean something). GAP never invents a hypothesis to satisfy the
+ * row: with none, `hypothesis_id` is null, the account comes from the caller (`accountName`, which must exist), and the
+ * steps that need a thesis (resolution, the wrong-person re-target) are skipped with the refusal `no_hypothesis`.
+ */
+export const HYPOTHESIS_OPTIONAL_SOURCE_KINDS: readonly DispositionSourceKind[] = ['email_command'];
+
+/** Where a disposition came from when it is not the buyer's message itself: the seller's word, by an email command. */
+export interface DispositionProvenance {
+  basis: 'self_reported';
+  via: 'email_command';
+  /** The Gmail message id of the command (also the source id). */
+  commandMessageId: string;
+  /** The seller's own words after DONE (never stored as the buyer's language). */
+  note?: string | null;
+}
+
+/** The provenance in the seller's words, for the CRM note and the activity line. */
+export const PROVENANCE_WORDS = 'self-reported by email command';
 
 /** The actor a route derives: a session is human, a header token is an agent. */
 export const AI_ACTOR = 'ai' as const;
@@ -98,7 +135,14 @@ export interface DispositionBidInput {
 
 /** The Sprint 4 contract body plus the actor the route derived. */
 export interface RecordDispositionInput {
-  hypothesisId: string;
+  /** Required unless the source kind is in HYPOTHESIS_OPTIONAL_SOURCE_KINDS (then `accountName` names the account). */
+  hypothesisId?: string | null;
+  /** The account, when no hypothesis is given (a reply-triage disposition). Must exist. Ignored with a hypothesis. */
+  accountName?: string | null;
+  /** The reply the row is about when the source is not the message itself (an email command): stored as inbound_message_id. */
+  inboundMessageId?: string | null;
+  /** The seller's word by an email command: stored in `metadata.provenance` (frozen once confirmed) and said on the CRM note. */
+  provenance?: DispositionProvenance | null;
   personaId?: number | null;
   contactEmail: string;
   channel: string;
@@ -133,6 +177,14 @@ export interface RecordDispositionDeps {
   commitments?: typeof defaultCommitments;
   /** X16d: a confirmed objection queues the agent's talking point (behind GAP_AGENT_TASKS_ENABLED). Fail-open. */
   queueObjection?: typeof defaultQueueObjection;
+}
+
+/** The one line the CRM note carries for a disposition: the class, the channel and, for the seller's word, its provenance and words. */
+export function dispositionMirrorSummary(d: { responseClass: string; channel: string; provenance?: DispositionProvenance | null }): string {
+  const base = `${d.responseClass} via ${d.channel}`;
+  if (!d.provenance) return base;
+  const note = (d.provenance.note ?? '').replace(/\s+/g, ' ').trim().slice(0, 240);
+  return `${base}, ${PROVENANCE_WORDS}${note ? `: "${note}"` : ''}`;
 }
 
 export type DispositionStep = 'stop' | 'unsubscribe' | 'resolve' | 'retarget' | 'referral' | 'mirror';
@@ -246,7 +298,7 @@ interface LoadedPersona {
  */
 async function resolvePersona(
   prisma: any,
-  hypothesis: LoadedHypothesis,
+  hypothesis: Pick<LoadedHypothesis, 'account_name' | 'primary_persona'>,
   personaId: number | null | undefined,
   email: string,
 ): Promise<LoadedPersona | null> {
@@ -349,6 +401,14 @@ function metadataFor(input: RecordDispositionInput, valid: ValidDisposition, ai:
       matched: ai.response_class === valid.responseClass,
     };
   }
+  if (input.provenance) {
+    metadata.provenance = {
+      basis: input.provenance.basis,
+      via: input.provenance.via,
+      commandMessageId: input.provenance.commandMessageId,
+      ...(input.provenance.note ? { note: String(input.provenance.note).slice(0, 2000) } : {}),
+    };
+  }
   return Object.keys(metadata).length > 0 ? metadata : null;
 }
 
@@ -368,14 +428,21 @@ export async function recordDisposition(
   if (!validation.ok) return { ok: false, kind: 'invalid_body', field: validation.field, reason: validation.reason };
   const valid = validation.value;
 
-  if (!input.source || !(DISPOSITION_SOURCE_KINDS as readonly string[]).includes(input.source.kind)) {
+  if (!input.source || !([...DISPOSITION_SOURCE_KINDS, ...INTERNAL_DISPOSITION_SOURCE_KINDS] as readonly string[]).includes(input.source.kind)) {
     return { ok: false, kind: 'invalid_body', field: 'source.kind', reason: 'unknown_source_kind' };
   }
   if (typeof input.source.id !== 'string' || input.source.id.trim().length === 0) {
     return { ok: false, kind: 'invalid_body', field: 'source.id', reason: 'empty_source_id' };
   }
-  if (typeof input.hypothesisId !== 'string' || input.hypothesisId.trim().length === 0) {
-    return { ok: false, kind: 'invalid_body', field: 'hypothesisId', reason: 'no_hypothesis' };
+  const hypothesisGiven = typeof input.hypothesisId === 'string' && input.hypothesisId.trim().length > 0;
+  if (!hypothesisGiven) {
+    // A reply-triage disposition (an email command) may stand without a thesis; nothing else may, and none is invented.
+    if (!HYPOTHESIS_OPTIONAL_SOURCE_KINDS.includes(input.source.kind as DispositionSourceKind)) {
+      return { ok: false, kind: 'invalid_body', field: 'hypothesisId', reason: 'no_hypothesis' };
+    }
+    if (typeof input.accountName !== 'string' || input.accountName.trim().length === 0) {
+      return { ok: false, kind: 'invalid_body', field: 'accountName', reason: 'no_account' };
+    }
   }
   if (input.aiSuggestionId && input.actorKind !== 'human') {
     return { ok: false, kind: 'refused', reason: 'agent_cannot_confirm' };
@@ -384,36 +451,45 @@ export async function recordDisposition(
   const bidActor: BidActor = { id: input.actor, kind: input.actorKind };
   const bidInputs = input.bids ?? [];
 
-  let hypothesis: LoadedHypothesis | null;
+  let hypothesis: LoadedHypothesis | null = null;
+  let accountName: string;
   let persona: LoadedPersona | null;
   let ai: AiSuggestionRow | null = null;
   try {
-    hypothesis = await prisma.prospectingHypothesis.findUnique({
-      where: { id: input.hypothesisId },
-      select: {
-        id: true,
-        status: true,
-        account_name: true,
-        primary_persona_id: true,
-        problem_family: true,
-        problem_hypothesis: true,
-        primary_persona: { select: { id: true, email: true, hubspot_contact_id: true, account_name: true } },
-      },
-    });
-    if (!hypothesis) throw new Refusal('refused', 'hypothesis_not_found');
-    // B1: a buyer's answer (stop, DNC, mirror) must be recordable for any
-    // non-terminal hypothesis, not only `active`. An `approved` hypothesis
-    // that has not yet been manually activated must still be able to record
-    // a "stop emailing me" reply. Only step 5 (resolve) keeps the stricter
-    // `active`-only requirement, enforced by the state machine itself
-    // (the transition table has no `resolve` edge off `active`).
-    if (isTerminalStatus(hypothesis.status as HypothesisStatus)) {
-      throw new Refusal('refused', 'hypothesis_terminal');
+    if (hypothesisGiven) {
+      hypothesis = await prisma.prospectingHypothesis.findUnique({
+        where: { id: input.hypothesisId },
+        select: {
+          id: true,
+          status: true,
+          account_name: true,
+          primary_persona_id: true,
+          problem_family: true,
+          problem_hypothesis: true,
+          primary_persona: { select: { id: true, email: true, hubspot_contact_id: true, account_name: true } },
+        },
+      });
+      if (!hypothesis) throw new Refusal('refused', 'hypothesis_not_found');
+      // B1: a buyer's answer (stop, DNC, mirror) must be recordable for any
+      // non-terminal hypothesis, not only `active`. An `approved` hypothesis
+      // that has not yet been manually activated must still be able to record
+      // a "stop emailing me" reply. Only step 5 (resolve) keeps the stricter
+      // `active`-only requirement, enforced by the state machine itself
+      // (the transition table has no `resolve` edge off `active`).
+      if (isTerminalStatus(hypothesis.status as HypothesisStatus)) {
+        throw new Refusal('refused', 'hypothesis_terminal');
+      }
+      accountName = hypothesis.account_name;
+    } else {
+      const account: { name: string } | null = await prisma.account.findUnique({ where: { name: input.accountName!.trim() }, select: { name: true } });
+      if (!account) throw new Refusal('refused', 'account_not_found');
+      accountName = account.name;
     }
-    persona = await resolvePersona(prisma, hypothesis, input.personaId, valid.contactEmail);
+    persona = await resolvePersona(prisma, hypothesis ?? { account_name: accountName, primary_persona: null }, input.personaId, valid.contactEmail);
     ai = await resolveAdoptable(prisma, input);
 
-    // BID shapes are checked before the transaction so a bad BID never costs a row.
+    // BID shapes are checked before the transaction so a bad BID never costs a row (a BID needs a thesis).
+    if (bidInputs.length > 0 && !hypothesis) throw new Refusal('invalid_body', 'no_hypothesis', 'bids');
     bidInputs.forEach((bid, index) => {
       const check = validateBidInput({
         hypothesisId: hypothesis!.id,
@@ -437,13 +513,14 @@ export async function recordDisposition(
   // ---- 2. the row and its BIDs, one transaction ---------------------------
   const humanConfirmed = input.actorKind === 'human';
   const metadata = metadataFor(input, valid, ai);
+  const inboundMessageId = input.source.kind === 'inbound_message' ? input.source.id : (input.inboundMessageId?.trim() || null);
   const rowData: Record<string, unknown> = {
-    hypothesis_id: hypothesis.id,
-    account_name: hypothesis.account_name,
+    hypothesis_id: hypothesis?.id ?? null,
+    account_name: accountName,
     persona_id: persona?.id ?? null,
     contact_email: valid.contactEmail,
     hubspot_contact_id: persona?.hubspot_contact_id ?? null,
-    inbound_message_id: input.source.kind === 'inbound_message' ? input.source.id : null,
+    inbound_message_id: inboundMessageId,
     hubspot_engagement_id: input.source.kind === 'hubspot_engagement' ? input.source.id : null,
     source_kind: input.source.kind,
     source_id: input.source.id,
@@ -527,13 +604,17 @@ export async function recordDisposition(
     subjectType: 'disposition',
     subjectId: dispositionId,
     payload: {
-      hypothesisId: hypothesis.id,
-      accountName: hypothesis.account_name,
+      hypothesisId: hypothesis?.id ?? null,
+      accountName,
       personaId: persona?.id ?? null,
       contactEmail: valid.contactEmail,
       channel: valid.channel,
       responseClass: valid.responseClass,
       source: input.source,
+      // The DONE unification: the reply the row is about, so the activity view completes that reply's plan item
+      // (work/activity.ts reads `inboundMessageId`), and who said so when it was the seller's word by email.
+      inboundMessageId,
+      ...(input.provenance ? { provenance: metadata?.provenance ?? null } : {}),
       bidIds,
       actorKind: input.actorKind,
       humanConfirmed,
@@ -541,7 +622,7 @@ export async function recordDisposition(
       metadata,
     },
     review: {
-      target: hypothesis.account_name,
+      target: accountName,
       title: `${valid.responseClass} via ${valid.channel}: ${valid.contactEmail}`,
       intent: humanConfirmed ? 'human-confirmed disposition' : 'unconfirmed disposition (no effects)',
     },
@@ -555,7 +636,7 @@ export async function recordDisposition(
     try {
       await (deps.commitments ?? defaultCommitments)(prisma, {
         dispositionId,
-        accountName: hypothesis.account_name,
+        accountName,
         responseClass: valid.responseClass,
         contactEmail: valid.contactEmail,
         personaId: persona?.id ?? null,
@@ -568,6 +649,9 @@ export async function recordDisposition(
         unansweredCalls: valid.channel === 'call' ? await unansweredCallsFor(prisma, valid.contactEmail) : 0,
         actor: input.actor,
         now: input.now,
+        // The DONE unification: the seller's DONE by email says the answer was handled, so the row creates no new
+        // obligation (no "Answer them", no second "Prepare the meeting"); their answer still settles what waited on them.
+        ...(input.source.kind === 'email_command' ? { settleOnly: true } : {}),
       });
     } catch {
       // The commitment ledger never gates the disposition.
@@ -582,7 +666,7 @@ export async function recordDisposition(
     const objection = (typeof valid.objection === 'string' && valid.objection.trim()) || bid?.rawBuyerLanguage.trim() || null;
     if (!objection) return;
     try {
-      await (deps.queueObjection ?? defaultQueueObjection)(prisma, { dispositionId, accountName: hypothesis.account_name, personaId: persona?.id ?? null, contactEmail: valid.contactEmail, hypothesisId: hypothesis.id, objection, buyerLanguage: valid.buyerLanguage ?? null, actor: input.actor, now: input.now });
+      await (deps.queueObjection ?? defaultQueueObjection)(prisma, { dispositionId, accountName, personaId: persona?.id ?? null, contactEmail: valid.contactEmail, hypothesisId: hypothesis?.id ?? null, objection, buyerLanguage: valid.buyerLanguage ?? null, actor: input.actor, now: input.now });
     } catch {
       // The task queue never gates the disposition.
     }
@@ -596,7 +680,7 @@ export async function recordDisposition(
     // confirmed rows, so it is skipped here too.
     const applied: RecordedEffects = humanConfirmed ? { ...NO_EFFECTS_RUN } : NO_EFFECTS_RUN;
     if (humanConfirmed) {
-      const mirrored = await runMirror(prisma, deps, input, dispositionId, hypothesis, persona, valid);
+      const mirrored = await runMirror(prisma, deps, input, dispositionId, accountName, hypothesis, persona, valid);
       applied.mirrored = mirrored.mirrored;
       const refusals = mirrored.refusal ? [mirrored.refusal] : [];
       await settleCommitments(false);
@@ -657,15 +741,22 @@ export async function recordDisposition(
     }
   }
 
-  // 5. resolution, re-target, referral
+  // 5. resolution, re-target, referral. With no hypothesis (a reply-triage disposition) the thesis steps are skipped
+  // and say so; nothing is resolved or re-targeted on a thesis the row is not tied to.
   if (effects.resolves !== null) {
-    const r = await resolveHypothesis(prisma, deps, input, hypothesis, dispositionId);
-    if (r.ok) applied.resolution = r.resolution;
-    else refusals.push({ step: 'resolve', reason: r.reason, id: hypothesis.id });
+    if (!hypothesis) refusals.push({ step: 'resolve', reason: 'no_hypothesis' });
+    else {
+      const r = await resolveHypothesis(prisma, deps, input, hypothesis, dispositionId);
+      if (r.ok) applied.resolution = r.resolution;
+      else refusals.push({ step: 'resolve', reason: r.reason, id: hypothesis.id });
+    }
   } else if (valid.responseClass === 'wrong_person') {
-    const r = await retargetForWrongPerson(prisma, deps, input, hypothesis, dispositionId);
-    if (r.ok) applied.retarget = r.retarget;
-    else refusals.push({ step: 'retarget', reason: r.reason, id: hypothesis.id });
+    if (!hypothesis) refusals.push({ step: 'retarget', reason: 'no_hypothesis' });
+    else {
+      const r = await retargetForWrongPerson(prisma, deps, input, hypothesis, dispositionId);
+      if (r.ok) applied.retarget = r.retarget;
+      else refusals.push({ step: 'retarget', reason: r.reason, id: hypothesis.id });
+    }
   } else if (valid.responseClass === 'referral') {
     const namingBid = await prisma.buyerInputData.findFirst({
       where: { disposition_id: dispositionId },
@@ -683,9 +774,9 @@ export async function recordDisposition(
       actor: input.actor,
       subjectType: 'disposition',
       subjectId: dispositionId,
-      payload: { hypothesisId: hypothesis.id, accountName: hypothesis.account_name, referral: applied.referral, bidIds },
+      payload: { hypothesisId: hypothesis?.id ?? null, accountName, referral: applied.referral, bidIds },
       review: {
-        target: hypothesis.account_name,
+        target: accountName,
         title: `Referral from ${valid.contactEmail}${fromMeta.name ? `: ${String(fromMeta.name)}` : ''}`,
         intent: 'research the referred person before any touch',
       },
@@ -693,7 +784,7 @@ export async function recordDisposition(
   }
 
   // 6. HubSpot mirror, fail-open
-  const mirrored = await runMirror(prisma, deps, input, dispositionId, hypothesis, persona, valid);
+  const mirrored = await runMirror(prisma, deps, input, dispositionId, accountName, hypothesis, persona, valid);
   applied.mirrored = mirrored.mirrored;
   if (mirrored.refusal) refusals.push(mirrored.refusal);
 
@@ -941,7 +1032,8 @@ async function runMirror(
   deps: RecordDispositionDeps,
   input: RecordDispositionInput,
   dispositionId: string,
-  hypothesis: LoadedHypothesis,
+  accountName: string,
+  hypothesis: LoadedHypothesis | null,
   persona: LoadedPersona | null,
   valid: ValidDisposition,
 ): Promise<{ mirrored: boolean; refusal: DispositionRefusalEntry | null }> {
@@ -952,11 +1044,11 @@ async function runMirror(
       hubspotContactId: persona?.hubspot_contact_id ?? null,
       responseClass: valid.responseClass,
       confirmedAt: input.now,
-      hypothesisId: hypothesis.id,
-      accountName: hypothesis.account_name,
-      summary: `${valid.responseClass} via ${valid.channel}`,
+      hypothesisId: hypothesis?.id ?? null,
+      accountName,
+      summary: dispositionMirrorSummary({ responseClass: valid.responseClass, channel: valid.channel, provenance: input.provenance ?? null }),
       channel: valid.channel,
-      hypothesisTitle: hypothesis.problem_family,
+      ...(hypothesis ? { hypothesisTitle: hypothesis.problem_family } : {}),
     });
     if (result.status === 'written') return { mirrored: true, refusal: null };
     return { mirrored: false, refusal: { step: 'mirror', reason: result.status } };

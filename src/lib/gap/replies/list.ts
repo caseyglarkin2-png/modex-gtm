@@ -628,8 +628,10 @@ export async function loadReplyForCapture(prisma: any, replyId: string, now: Dat
   });
   if (!row) return null;
   const known = await loadKnownAddresses(prisma);
+  // The DONE unification: a reply the seller settled by DONE by email carries its disposition on inbound_message_id
+  // (source email_command), so Capture opened on it says recorded before and never records it twice.
   const joined: DispositionJoinRow[] = await prisma.conversationDisposition.findMany({
-    where: { source_kind: { in: ['inbound_message', 'hubspot_engagement'] }, source_id: row.id },
+    where: { OR: [{ source_kind: { in: ['inbound_message', 'hubspot_engagement'] }, source_id: row.id }, { source_kind: 'email_command', inbound_message_id: row.id, human_confirmed: true }] },
     select: { id: true, source_kind: true, source_id: true, human_confirmed: true, created_by: true, ai_suggested: true },
   });
   const dispositionId = joined.find((d) => d.human_confirmed)?.id ?? null;
