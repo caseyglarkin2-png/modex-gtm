@@ -80,12 +80,14 @@ describe('X06: buildAssignment', () => {
     const t = a.text;
     expect(t).toContain('PepsiCo: Karen Ortiz (Director, Transportation).');
     expect(t).toContain('Why now: A prepared first touch. Ready for a first touch: Karen Ortiz, from the Tulsa expansion.');
-    expect(t).toContain('What we know:');
+    // GUI-02 (2026-10-10): "What we know" became the packet's Evidence section; the "They said" date is said in words.
+    expect(t).toContain('Evidence:');
     expect(t).toContain('- PepsiCo is expanding its Tulsa distribution center by 180,000 square feet (announced Jul 23). (Tulsa World, Jul 23)');
     expect(t).toContain('Why they care: More doors with the same gate team means longer waits at the gate.');
-    expect(t).toContain('They said: "We lose trailers on the lot every week." (Karen Ortiz, 2026-09-30)');
+    expect(t).toContain('They said: "We lose trailers on the lot every week." (Karen Ortiz, Sep 30, 2026)');
     expect(t).toContain('The move: Send the first touch to Karen Ortiz.');
-    expect(t).toContain('The email, to karen@pepsico.com, subject "Tulsa: the new doors":');
+    // GUI-07: "Ready to send" names the actual recipient and the sender (none configured in the test).
+    expect(t).toContain('Ready to send, to karen@pepsico.com, from the GAP mailbox (not configured yet), subject "Tulsa: the new doors":');
     expect(t).toContain('> Approve me if you like.');
     expect(t).toContain('> Karen, the Tulsa expansion adds dock doors.');
     expect(t).toContain('Sources: PepsiCo expands Tulsa DC (Jul 23, 2026) https://tulsaworld.com/pepsico');
@@ -106,7 +108,7 @@ describe('X06: buildAssignment', () => {
     expect(a.contentHash).toMatch(/^[a-f0-9]{64}$/);
     expect(a.text).toContain('Kroger: Joey Maggard.');
     expect(a.text).toContain('Why now: Due today. In a deal: work it from the deal.');
-    expect(a.text).not.toContain('The email,');
+    expect(a.text).not.toContain('Ready to send');
     expect(a.text).toContain('Open it in GAP: https://app.example/gap/accounts/kroger');
     expect(a.text).not.toMatch(/first line of your reply/);
     expect(deps.pack).not.toHaveBeenCalled();
@@ -119,7 +121,7 @@ describe('X06: buildAssignment', () => {
     const t = a.text.split('\n');
     const at = t.indexOf('Not read this time: Gmail Sent (no GAP sender configured), the vault (not configured)');
     expect(at, 'the coverage line is printed').toBeGreaterThan(0);
-    expect(at, 'after what we know').toBeGreaterThan(t.indexOf('What we know:'));
+    expect(at, 'after the evidence').toBeGreaterThan(t.indexOf('Evidence:'));
     expect(at, 'before the move').toBeLessThan(t.indexOf('The move: Send the first touch to Karen Ortiz.'));
     deps.askContext.mockResolvedValue({ ...ASK, coverageLine: null });
     const b = await buildAssignment(db.client(), { plan: PLAN, item: ITEMS[0], revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, deps);
@@ -146,7 +148,8 @@ describe('X06: buildAssignment', () => {
     const angleAt = t.findIndex((l) => l === 'GAP has prepared an angle for Dave Kiesling: Kenco runs 40 yards with paper gate logs; the Chattanooga pilot is where the scope lands.');
     expect(angleAt, 'the angle block is printed').toBeGreaterThan(0);
     expect(t[angleAt + 1]).toBe('Opener: Dave, is Chattanooga still the yard you would pilot first?');
-    expect(t.indexOf('The move: Send Dave the pilot scope.'), 'above the move').toBeGreaterThan(angleAt);
+    // GUI-02 (2026-10-10): the angle is Prepared material, which the packet prints AFTER "Possible next move" (the move leads).
+    expect(t.indexOf('The move: Send Dave the pilot scope.'), 'the move leads; the prepared angle follows').toBeLessThan(angleAt);
     expect(deps.pack).not.toHaveBeenCalled();
     const ok = await assignable(db.client(), { ...PLAN, items: [kenco] }, kenco, { baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, { ...deps, pursued });
     expect(ok.ok, 'an item with a prepared angle is assignable').toBe(true);
