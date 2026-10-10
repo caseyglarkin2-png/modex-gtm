@@ -150,6 +150,12 @@ export interface WorkCard {
   priority?: { reason: string; by: string; at: string } | null;
   /** R42: the incoming message this card is about and its prepared notes (never copy, never a send). */
   reply?: ReplyPrep | null;
+  /**
+   * The walk fix (2026-10-10): the reply a card relabelled "Someone replied" by the pursuit summary is about, when the
+   * summary names its message (the card carries no prepared reply). The plan binds the item to that message, so a DONE
+   * settles it and it never returns as a new item on the next day.
+   */
+  replyRef?: { messageId: string; at: string } | null;
   /** R44: Capture, opened with the account, person, deal and conversation this card is about already filled in. */
   capture?: { href: string; label: string } | null;
   /** R55: stalled-deal suggestions on an in-deal card (overdue obligations, no recent activity, a passed close date). */
@@ -594,6 +600,28 @@ export function isAnsweredReply(answered: WorkInput['answered'], r: { accountNam
   return answered.some((a) => a.accountName === r.accountName && ((!!a.id && !!r.id && a.id === r.id) || (a.from.trim().toLowerCase() === from && minute(a.at) === minute(r.receivedAt))));
 }
 
+/**
+ * The walk fix (2026-10-10): whether a seller's DONE (a `done` outcome) settles a "replied" state whose reply arrived
+ * at `replyAt`: it does when the DONE came at or after that reply. Any other outcome settles no reply.
+ */
+export function doneSettles(o: WorkOutcome | null | undefined, replyAt: string | null | undefined): boolean {
+  if (!o || o.kind !== 'done' || !replyAt) return false;
+  const done = new Date(o.at).getTime();
+  const reply = new Date(replyAt).getTime();
+  return Number.isFinite(done) && Number.isFinite(reply) && done >= reply;
+}
+
+/**
+ * The walk fix: whether a `done` outcome still holds the account's card off the day: nothing new since it (no buyer
+ * message, no activity on the account's deals after it). Pure.
+ */
+export function doneStillHolds(o: WorkOutcome, x: { buyerActivityAt: number; dealActivity: ReadonlyArray<string | null> }): boolean {
+  const done = new Date(o.at).getTime();
+  if (!Number.isFinite(done)) return false;
+  if (x.buyerActivityAt > done) return false;
+  return !x.dealActivity.some((a) => !!a && new Date(a).getTime() > done);
+}
+
 /** R63-A B3: the answers that stop outreach at the account (motion/approach.ts STOP_CLASSES, read the same way). */
 const CONVERSATION_STOPS: ReadonlySet<string> = new Set(['do_not_contact', 'meeting_declined', 'problem_rejected', 'not_priority']);
 
@@ -805,6 +833,9 @@ export function workDay(i: WorkInput): WorkDay {
     let have = best.get(name);
     // R63-A S4: a recorded reply's answer card says what is owed; a remembered "replied" never relabels it.
     if (have?.card.answerOwed) continue;
+    // The walk fix: a "replied" the seller settled with DONE (a done outcome newer than the reply it is about) never
+    // relabels the card again; a reply newer than the DONE does.
+    if (s.state === 'replied' && doneSettles(i.outcomes?.get(name), s.reply?.at ?? s.at)) continue;
     const waitingTouch = motionWaiting.get(name);
     if (!have && !waitingTouch) continue;
     // A first touch moved to Waiting is still the account's card for a newer summary that says something else (a
@@ -855,6 +886,8 @@ export function workDay(i: WorkInput): WorkDay {
           : (s.state === 'held' || s.state === 'in_deal' || s.state === 'replied' || s.state === 'opted_out') && (s.blocker ?? have.card.blocker) !== (s.nextText ?? s.blocker ?? have.card.why) ? (s.blocker ?? have.card.blocker) : null,
         next: action,
         preparation: s.actionable?.preparation ?? null,
+        // The walk fix: a summary's reply binds the plan item to its message when the card holds no prepared reply.
+        ...(s.state === 'replied' && !have.card.reply && s.reply?.id ? { replyRef: { messageId: s.reply.id, at: s.reply.at } } : {}),
       },
     });
   }
@@ -1000,6 +1033,9 @@ export function workDay(i: WorkInput): WorkDay {
     const have = best.get(name);
     if (!have) continue;
     if (have.card.stateKind === 'replied' || have.card.stateKind === 'opted_out') continue;
+    // The walk fix: a DONE holds the card off the day until something new happens at the account (a buyer message,
+    // the deal's own activity after it); an obligation coming due still places the card by its own tier below.
+    if (o.kind === 'done' && !doneStillHolds(o, { buyerActivityAt: activity.get(name) ?? 0, dealActivity: (dealAccounts.get(name)?.deals ?? []).map((d) => d.lastActivityAt ?? null) })) continue;
     const due = (obligations.get(name) ?? []).filter((x) => x.tier !== 'later');
     if (o.kind === 'snoozed' && due.length === 0) {
       best.delete(name);

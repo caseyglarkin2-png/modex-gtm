@@ -83,7 +83,7 @@ export function rememberPursuitSummary(s: PursuitState, now: Date = new Date(), 
     nextText: nextText ?? a?.recommendation ?? null,
     actionable: a ? { intent: a.intent, allowed: a.allowed, preparation: a.preparation, completion: a.completion, hypothesisId: a.hypothesisId } : null,
     ...(s.answered?.length ? { answered: s.answered.map((x) => ({ from: x.from, at: x.at, answeredAt: x.answeredAt, ...(x.id ? { id: x.id } : {}) })) } : {}),
-    ...(s.state === 'replied' && s.lastInbound?.kind === 'human' && !s.lastInbound.answeredAt ? { reply: { id: s.lastInbound.id ?? null, at: s.lastInbound.at } } : {}),
+    ...(s.state === 'replied' && s.replyRef ? { reply: { id: s.replyRef.id, at: s.replyRef.at } } : {}),
     at: now.toISOString(),
   };
   cache.set(s.accountName, out);

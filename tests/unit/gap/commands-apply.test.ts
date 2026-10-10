@@ -132,7 +132,7 @@ describe('X07b: applyCommand', () => {
     expect((await loadWorkOutcomes(w3.c, ['PepsiCo'], NOW)).get('PepsiCo')).toBeUndefined();
   });
 
-  it('DONE needs words; with them an obligation is done with the note as the proof and an account item is logged (self-reported)', async () => {
+  it('DONE needs words; with them an obligation is done with the note as the proof and an account item is recorded done (self-reported; the walk fix, never a one-day log)', async () => {
     expect(await w.run(msg({ threadId: 'th-item-1', bodyText: 'DONE' }))).toMatchObject({ applied: false, reason: 'note_required' });
     const r = await w.run(msg({ threadId: 'th-item-1', bodyText: 'DONE: sent Joey the comparison, he will review Friday' }));
     expect(r).toMatchObject({ applied: true, effect: 'commitment_done' });
@@ -140,8 +140,8 @@ describe('X07b: applyCommand', () => {
     expect(c?.status).toBe('done');
     expect(c?.proof).toMatchObject({ kind: 'seller', note: 'sent Joey the comparison, he will review Friday' });
     const a = await w.run(msg({ threadId: 'th-item-0', bodyText: 'Done: called Karen instead, she asked for the deck' }));
-    expect(a).toMatchObject({ applied: true, effect: 'account_logged', basis: 'self_reported' });
-    expect((await loadWorkOutcomes(w.c, ['PepsiCo'], NOW)).get('PepsiCo')?.kind).toBe('logged');
+    expect(a).toMatchObject({ applied: true, effect: 'account_done', basis: 'self_reported' });
+    expect((await loadWorkOutcomes(w.c, ['PepsiCo'], NOW)).get('PepsiCo')?.kind).toBe('done');
   });
 
   it('a command on an older revision is refused stale_revision and the seller is told to answer the latest', async () => {
@@ -289,7 +289,7 @@ describe('seller acceptance follow-up: START holds research, a refreshed plan re
     const w2 = await world();
     expect(await w2.run(msg({ threadId: 'th-item-0', bodyText: 'DONE: will call Karen tomorrow' }))).toMatchObject({ applied: true, effect: 'progress_noted' });
     expect((await loadWorkOutcomes(w2.c, ['PepsiCo'], NOW)).get('PepsiCo')).toBeUndefined();
-    expect(await w2.run(msg({ threadId: 'th-item-0', bodyText: 'DONE: called Karen, she asked for the deck' }))).toMatchObject({ applied: true, effect: 'account_logged' });
-    expect((await loadWorkOutcomes(w2.c, ['PepsiCo'], NOW)).get('PepsiCo')?.kind).toBe('logged');
+    expect(await w2.run(msg({ threadId: 'th-item-0', bodyText: 'DONE: called Karen, she asked for the deck' }))).toMatchObject({ applied: true, effect: 'account_done' });
+    expect((await loadWorkOutcomes(w2.c, ['PepsiCo'], NOW)).get('PepsiCo')?.kind).toBe('done');
   });
 });

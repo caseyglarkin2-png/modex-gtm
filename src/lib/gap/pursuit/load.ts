@@ -17,7 +17,7 @@ import { loadAnchorChoices } from '../motion/persona-angle';
 import { loadSellerPreferences } from '../people/seller-preference';
 import { hypothesisSendable } from '../research/evidence-gate';
 import { EVIDENCE_SIGNAL_SELECT } from '../sequence/render';
-import { listReplies, type ReplyItem } from '../replies/list';
+import { listReplies, resolvedMessages, type ReplyItem } from '../replies/list';
 import { loadOwnerResolution } from '../people/owner-resolution-load';
 import type { OwnerResolution } from '../people/owner-resolution';
 import { buildPeopleStack, type PeopleStack } from '../people/stack';
@@ -88,7 +88,8 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
   for (const r of repliesPage.items.filter((x) => x.accountName === accountName)) {
     // Batch item 8: an answer GAP sent in their thread is the record of their reply (handled, never asked again).
     // R60: the replier by name when the message carries it (the card said "lisa@..." beside "Lisa Scratch").
-    replies.push({ from: r.contactEmail, name: r.fromName?.trim() || null, at: r.receivedAt, subject: r.subject, snippet: r.snippet, triaged: !!r.dispositionId || !!r.answeredAt, id: r.id, threadId: r.threadId ?? null });
+    // The walk fix: a reply the seller settled by his word (DONE on its item) is handled too.
+    replies.push({ from: r.contactEmail, name: r.fromName?.trim() || null, at: r.receivedAt, subject: r.subject, snippet: r.snippet, triaged: !!r.dispositionId || !!r.answeredAt || !!r.resolvedAt, id: r.id, threadId: r.threadId ?? null });
   }
   const lastSend = ctx.history.filter((h) => h.kind === 'email_sent' || h.kind === 'asset_sent').sort((a, b) => b.at.localeCompare(a.at))[0] ?? null;
   for (const h of ctx.history.filter((x) => x.kind === 'reply')) {
@@ -101,10 +102,13 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
   }
   // C6: the account's inbound mail the loader read (its threads, and the senders the identity machinery places here),
   // merged by time with what the reply list and the history already hold; a placed message says how it was placed.
-  for (const m of inputs.inbound?.messages ?? []) {
+  // The walk fix: a placed message the seller settled by his word (DONE on its item) is handled (one ledger read).
+  const inboundMessages = inputs.inbound?.messages ?? [];
+  const settled = inboundMessages.length ? await soft(Promise.resolve().then(() => resolvedMessages(prisma, inboundMessages.map((m) => m.id))), new Map<string, string>()) : new Map<string, string>();
+  for (const m of inboundMessages) {
     if (replies.some((r) => Math.abs(new Date(r.at).getTime() - new Date(m.at).getTime()) < 60_000 && (r.from.toLowerCase() === m.from || !r.from.includes('@')))) continue;
     const answered = !!lastSend && lastSend.at > m.at;
-    replies.push({ from: m.from, name: m.name, at: m.at, subject: m.subject, snippet: m.snippet, triaged: answered, placedVia: m.via, id: m.id, threadId: m.threadId ?? null });
+    replies.push({ from: m.from, name: m.name, at: m.at, subject: m.subject, snippet: m.snippet, triaged: answered || settled.has(m.id), placedVia: m.via, id: m.id, threadId: m.threadId ?? null });
   }
   // The walk fix (2026-10-10): our sends, read off the story's own touches (the account history, GAP's first touches,
   // our Gmail Sent and HubSpot's outgoing email, as the inputs carry them; clawd's history is the page's own read and

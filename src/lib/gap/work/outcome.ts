@@ -7,6 +7,9 @@
  *   snoozed    "come back on <date>": the card leaves Work until then (the date is the seller's; never silently moved)
  *   logged     "done outside GAP" (a call, a hallway conversation, an email from another mailbox): the card drops for
  *              the stated window and the note says what happened; it never claims a send GAP did not prove
+ *   done       the walk fix (2026-10-10): a DONE by email on an item that is not a commitment and not a reply. It
+ *              does not expire the next day: the card stays off the day until something new happens at the account
+ *              (work/list.ts doneStillHolds) or DONE_HOLD_DAYS pass; self-reported, never a claim of a send
  *
  * Sent, drafted, failed or unknown sends are NOT recorded here: the execution ledger owns them (execution/draft-
  * ledger.ts) and the pursuit state already reads them (in motion, a draft outstanding, outcome unknown). A reply
@@ -15,10 +18,10 @@
  */
 import { accountSlug } from '../account-intel/href';
 import { nyDay } from './dates';
-import { outcomeLine, SNOOZE_MAX_DAYS, OUTCOME_REASON_MAX, WORK_OUTCOME, type WorkOutcome, type WorkOutcomeKind } from './outcome-model';
+import { DONE_HOLD_DAYS, outcomeLine, SNOOZE_MAX_DAYS, OUTCOME_REASON_MAX, WORK_OUTCOME, type WorkOutcome, type WorkOutcomeKind } from './outcome-model';
 
 // The client-safe model lives in ./outcome-model (the Work list reads only that); re-exported for the server callers.
-export { outcomeLine, SNOOZE_MAX_DAYS, OUTCOME_REASON_MAX, WORK_OUTCOME, type WorkOutcome, type WorkOutcomeKind } from './outcome-model';
+export { DONE_HOLD_DAYS, outcomeLine, SNOOZE_MAX_DAYS, OUTCOME_REASON_MAX, WORK_OUTCOME, type WorkOutcome, type WorkOutcomeKind } from './outcome-model';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -46,7 +49,7 @@ export async function loadWorkOutcomes(prisma: PrismaLike, accountNames: readonl
     const p = isObj(r.payload) ? r.payload : {};
     if (p.kind === 'clear') continue;
     const kind = p.kind;
-    if (kind !== 'skipped' && kind !== 'snoozed' && kind !== 'logged') continue;
+    if (kind !== 'skipped' && kind !== 'snoozed' && kind !== 'logged' && kind !== 'done') continue;
     const until = typeof p.until === 'string' ? p.until : null;
     if (!until || Number.isNaN(new Date(until).getTime()) || new Date(until).getTime() <= now.getTime()) continue;
     out.set(r.subject_id, { accountName: r.subject_id, kind, reason: typeof p.reason === 'string' ? p.reason : null, until, by: r.actor, at: new Date(r.created_at).toISOString() });
@@ -96,6 +99,9 @@ export async function recordWorkOutcome(prisma: PrismaLike, input: RecordOutcome
     if (until.getTime() > now.getTime() + SNOOZE_MAX_DAYS * DAY_MS) return { ok: false, reason: 'until_too_far' };
   } else if (input.kind === 'skipped' || input.kind === 'logged') {
     until = nextDayBoundary(now, 1);
+  } else if (input.kind === 'done') {
+    // The walk fix: a DONE never expires the next day; Work lets it go when something new happens at the account.
+    until = new Date(now.getTime() + DONE_HOLD_DAYS * DAY_MS);
   } else if (input.kind === 'prepared') {
     // R63-A S11: prepared holds until the meeting has run (its time plus two hours).
     const at = input.meeting?.at ? new Date(input.meeting.at) : null;
@@ -125,7 +131,7 @@ export async function recordWorkOutcome(prisma: PrismaLike, input: RecordOutcome
   if (row?.id && input.kind !== 'prepared') {
     try {
       const { commitmentsFromOutcome } = await import('./commitments');
-      await commitmentsFromOutcome(prisma, { outcomeId: String(row.id), accountName: account.name, kind: input.kind as 'skipped' | 'snoozed' | 'logged' | 'clear', until: until ? until.toISOString() : null, reason, actor: input.actor, now });
+      await commitmentsFromOutcome(prisma, { outcomeId: String(row.id), accountName: account.name, kind: input.kind as 'skipped' | 'snoozed' | 'logged' | 'done' | 'clear', until: until ? until.toISOString() : null, reason, actor: input.actor, now });
     } catch {
       // The reminder never gates the outcome.
     }

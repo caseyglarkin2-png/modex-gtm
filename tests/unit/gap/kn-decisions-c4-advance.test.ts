@@ -7,7 +7,7 @@
  *   C3  the same note now records a prepare_meeting commitment at Kenco (Oct 14, 8 am New York, the words as the
  *       basis, source seller_note with the Gmail message id), a `claims` sent record on the applied row, and the
  *       answer says "Recorded: a meeting Oct 14 (to prepare), and your note to them today (GAP checks Sent for it)";
- *       nothing is sent to a buyer and no contact is marked (the outcome stays "logged", self-reported)
+ *       nothing is sent to a buyer and no contact is marked (the outcome is "done" since the walk fix of 2026-10-10, self-reported)
  *   C4  the applied DONE advances: item 2 goes out in the same tick as its own email, the applied row carries
  *       `advancedTo`, the answer names it; a second DONE on the same item is refused and does not advance; SKIP and
  *       DEFER advance the same way; a progress-noted DONE does not; with nothing left the answer says so and the row
@@ -83,13 +83,13 @@ async function started() {
 }
 
 describe("C3: Casey's October 9 note on the Kenco assignment becomes records", () => {
-  it('a meeting Oct 14 to prepare, a sent-note claim, the outcome logged (self-reported), the answer says what was recorded; nothing to a buyer', async () => {
+  it('a meeting Oct 14 to prepare, a sent-note claim, the outcome recorded done (self-reported), the answer says what was recorded; nothing to a buyer', async () => {
     const w = await started();
     const m = msg({ threadId: 'th-item-0', bodyText: OCT9_NOTE, rawText: OCT9_NOTE });
     const r = await w.run(m);
-    expect(r).toMatchObject({ applied: true, command: 'done', effect: 'account_logged', basis: 'self_reported', outcome: 'accepted', source: { accountName: 'Kenco' }, advancedTo: w.plan.items[1].key, next: 'The next item arrives as its own email; answer it there.' });
-    // The outcome: logged, the words, nothing marked as contact.
-    expect((await loadWorkOutcomes(w.c, ['Kenco'], NOW)).get('Kenco')).toMatchObject({ kind: 'logged' });
+    expect(r).toMatchObject({ applied: true, command: 'done', effect: 'account_done', basis: 'self_reported', outcome: 'accepted', source: { accountName: 'Kenco' }, advancedTo: w.plan.items[1].key, next: 'The next item arrives as its own email; answer it there.' });
+    // The outcome: done (the walk fix: never a one-day log), the words, nothing marked as contact.
+    expect((await loadWorkOutcomes(w.c, ['Kenco'], NOW)).get('Kenco')).toMatchObject({ kind: 'done' });
     // The meeting: one prepare_meeting commitment at Kenco, waiting, due 8 am New York Oct 14, the words as the basis, keyed by the message and the day.
     const kenco = await loadCommitments(w.c, { accountNames: ['Kenco'] });
     expect(kenco).toHaveLength(1);
@@ -103,7 +103,7 @@ describe("C3: Casey's October 9 note on the Kenco assignment becomes records", (
       source: { kind: 'seller_note', id: `${m.id}:2026-10-14` },
     });
     // The applied row: the claim, the meeting, the advance.
-    const row = w.applied().find((e) => e.payload.effect === 'account_logged');
+    const row = w.applied().find((e) => e.payload.effect === 'account_done');
     expect(row?.payload).toMatchObject({
       command: 'done',
       note: 'we have meeting scheduled for 10.14.2026. sent them a quick note today to keep em warm and remind them',
@@ -116,7 +116,8 @@ describe("C3: Casey's October 9 note on the Kenco assignment becomes records", (
     // The answer, in the item's thread, after the next assignment went out.
     const texts = w.send.mock.calls.map((c) => c[0]);
     expect(texts.map((t) => t.threadId)).toEqual([undefined, 'th-item-0']);
-    expect(texts[1].text).toBe('Logged, by your word: Kenco. Recorded: a meeting Oct 14 (to prepare), and your note to them today (GAP checks Sent for it). GAP counts what it can prove separately. Next: PepsiCo, a prepared first touch, arriving as its own email.');
+    // The walk fix (2026-10-10): a completion DONE records `done` (it holds the card until something new happens), never a one-day log.
+    expect(texts[1].text).toBe('Done, by your word: Kenco. Recorded: a meeting Oct 14 (to prepare), and your note to them today (GAP checks Sent for it). It stays off your day until something new happens there; GAP counts what it can prove separately. Next: PepsiCo, a prepared first touch, arriving as its own email.');
     // Every send went to the seller (the assignment and the answer); nothing went to a buyer.
     expect(texts.every((t) => t.to === SELLER && t.purpose === 'OPERATOR_ALERT')).toBe(true);
   });
@@ -145,7 +146,7 @@ describe('C4: an applied SKIP, DEFER or DONE advances to the next item in the sa
   it('DONE advances to item 2 (sent as its own email, recorded on the row); a second DONE on the same item is refused and does not advance; with nothing left the answer says so', async () => {
     const w = await started();
     const done = await w.run(msg({ threadId: 'th-item-0', bodyText: 'DONE: emailed Dave', rawText: 'DONE: emailed Dave' }));
-    expect(done).toMatchObject({ applied: true, effect: 'account_logged', advancedTo: w.plan.items[1].key });
+    expect(done).toMatchObject({ applied: true, effect: 'account_done', advancedTo: w.plan.items[1].key });
     expect(w.assignments().map((a) => a.key), 'item 2 went out').toEqual([w.plan.items[0].key, w.plan.items[1].key]);
     expect(w.send.mock.calls[0][0].subject, 'the assignment email').toMatch(/^GAP 2 of 3, PepsiCo/);
     expect(w.send.mock.calls[1][0].text).toMatch(/Next: PepsiCo, a prepared first touch, arriving as its own email\.$/);
@@ -190,9 +191,9 @@ describe('C4: an applied SKIP, DEFER or DONE advances to the next item in the sa
       throw new Error('gmail 503');
     });
     const r = await w.run(msg({ threadId: 'th-item-0', bodyText: 'DONE: emailed Dave', rawText: 'DONE: emailed Dave' }));
-    expect(r).toMatchObject({ applied: true, effect: 'account_logged', advancedTo: null, next: 'Reply NEXT for the next item.' });
-    expect((await loadWorkOutcomes(w.c, ['Kenco'], NOW)).get('Kenco')?.kind).toBe('logged');
-    expect(w.applied().find((e) => e.payload.effect === 'account_logged')?.payload).toMatchObject({ advancedTo: null, advanceReason: 'send_failed' });
+    expect(r).toMatchObject({ applied: true, effect: 'account_done', advancedTo: null, next: 'Reply NEXT for the next item.' });
+    expect((await loadWorkOutcomes(w.c, ['Kenco'], NOW)).get('Kenco')?.kind).toBe('done');
+    expect(w.applied().find((e) => e.payload.effect === 'account_done')?.payload).toMatchObject({ advancedTo: null, advanceReason: 'send_failed' });
     expect(w.send.mock.calls.at(-1)?.[0].text).toMatch(/GAP could not send the next item \(PepsiCo: gmail 503\)\. Reply NEXT to try again\.$/);
     expect(w.assignments(), 'the failed send recorded no assignment').toHaveLength(1);
   });

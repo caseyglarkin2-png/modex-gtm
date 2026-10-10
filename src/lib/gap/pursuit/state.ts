@@ -136,6 +136,8 @@ export interface PursuitState {
   lastInbound: { who: string; at: string; kind: ReplyClass['kind']; label: string; /** The reply's first words (for the story's between-us row). */ snippet: string; /** R63-A B4: the address it came from (the story names its sender by it). */ from?: string; /** C6: the identity path that placed the sender here, when the message came from the placed read. */ placedVia?: PursuitReply['placedVia']; /** The walk fix: the message id, when known. */ id?: string | null; /** The walk fix: when we answered it (a human reply only), else absent. */ answeredAt?: string | null } | null;
   /** The walk fix: the human replies at the account we answered (a send of ours after each), for Work to drop their cards. */
   answered?: Array<{ from: string; at: string; answeredAt: string; source: string; id?: string | null }>;
+  /** The walk fix: when REPLIED on an unrecorded reply, that reply (its message id when known, and its time). */
+  replyRef?: { id: string | null; at: string } | null;
   lastOutbound: PursuitInput['lastOutbound'];
   chosenMissing: string | null;
   /** The next person after the chosen one, when the motion names one, with what unlocks them. */
@@ -241,6 +243,7 @@ export function projectPursuitState(i: PursuitInput): PursuitState {
         stateLine: `${STATE_LINE.replied}: ${newestReply.name ?? newestReply.from}, ${day(newestReply.at)}`,
         blocker: `${newestReply.name ?? newestReply.from} wrote on ${day(newestReply.at)}; the reply is not recorded yet.`,
         unlock: 'Read the reply and record what they said; the next person unlocks after that.',
+        replyRef: { id: newestReply.id ?? null, at: newestReply.at },
       });
     }
     if (replyClass.kind === 'opt_out') {
