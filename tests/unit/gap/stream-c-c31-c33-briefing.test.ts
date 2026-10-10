@@ -37,12 +37,14 @@ describe('C31: the headline names its count basis and reconciles with START and 
     expect(out.subject).toBe('GAP today, Thu Oct 8: 3 to execute, 2 to decide [GAP#tok]');
     // GUI-11 (2026-10-10): the basis says its units (plan items; intelligence items split into records and people; the retained records placed).
     expect(out.text).toContain('3 plan items to execute, in this order (the list START, NEXT and ITEM walk); 2 intelligence items to decide, 1 of them record and 1 person; 16 more retained records are on the Intelligence page, not in this email; 8 more people who wrote in are on Work.');
-    expect(out.text).toContain('Begin with item 1, Kenco: Send Diego the dock schedule template. https://x/start');
-    // The first visible execution row is the START target, whatever section it renders in.
+    // The walk fix (2026-10-10): START walks the replies to answer first, so the pointer names the reply with its number.
+    expect(out.text).toContain('Begin with item 2, Boston Beer: Someone replied. https://x/start');
+    // The numbering is the plan's own: row 1 is still Kenco; the row the pointer names is Boston Beer.
     const first = /^1\. (\w+):/m.exec(out.text);
     expect(first?.[1]).toBe('Kenco');
+    expect(/^2\. ([\w ]+):/m.exec(out.text)?.[1]).toBe('Boston Beer');
     // Intelligence stays first but is never in the execution count.
-    expect(out.text.indexOf('Intelligence worth a look (1 of 17)')).toBeLessThan(out.text.indexOf('Begin with item 1'));
+    expect(out.text.indexOf('Intelligence worth a look (1 of 17)')).toBeLessThan(out.text.indexOf('Begin with item 2'));
     expect(out.text).not.toMatch(/5 to execute/);
   });
 

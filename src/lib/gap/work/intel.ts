@@ -16,7 +16,7 @@
  *             opportunity): a prospect worth reengaging, with the account the thread or the persona names
  *
  * The only things left out: an item Casey already decided (feedback set; a skip comes back after SKIP_DAYS), a
- * rejected signal, a dismissed trigger, automated and own-domain senders, and a person at an account in an open
+ * sender he marked not a prospect (`never` on the address or its domain, for good), a rejected signal, a dismissed trigger, automated and own-domain senders, and a person at an account in an open
  * deal (worked from the deal). Execution safety is downstream and unchanged.
  */
 import { AUTO_REPLY_SUBJECT, FREEMAIL_DOMAINS, OWN_DOMAINS } from '../replies/domains';
@@ -44,8 +44,27 @@ export const INTEL_LIMIT = 12;
 export const REENGAGE_LIMIT = 8;
 /** I02: the decision row for a trigger or a person (signals keep theirs on the signal). */
 export const PROSPECT_DECISION = 'prospect.decision' as const;
+/** The decisions a signal or a trigger offers. */
 export const DECISIONS = ['pursue', 'explore', 'save', 'skip', 'dismiss', 'more'] as const;
-export type Decision = (typeof DECISIONS)[number];
+/**
+ * The people fix of October 10 (Casey's own insurance adjuster, firecrown.com and riserify.com were listed as
+ * prospects to reengage): a sender also takes `never`, "not a prospect". On `person:<address>` or `domain:<domain>`,
+ * it never expires, a later decision on the key never undoes it (an old email's Skip would otherwise expire it after
+ * SKIP_DAYS), and rankPeople drops the address, or every address at the domain and its subdomains, on every later day.
+ */
+export const PERSON_DECISIONS = [...DECISIONS, 'never'] as const;
+export type Decision = (typeof PERSON_DECISIONS)[number];
+/** The words for a `never` live in the client-safe `./truth-text` (the briefing and the panel read them there). */
+export { NEVER_WORDS, neverDomainWords } from './truth-text';
+
+/** Whether a `never` covers this address: on the address itself, or on its domain or any parent domain (two labels or more). */
+export function neverCovers(decided: ReadonlySet<string>, email: string): boolean {
+  const e = email.trim().toLowerCase();
+  if (decided.has(`never:person:${e}`)) return true;
+  const labels = (e.split('@')[1] ?? '').split('.').filter(Boolean);
+  for (let i = 0; i + 2 <= labels.length; i += 1) if (decided.has(`domain:${labels.slice(i).join('.')}`)) return true;
+  return false;
+}
 
 // The truth label words live in the client-safe `./truth-text` (the panel imports them there; this module is server-only).
 export { TRUTH_TEXT, type TruthLabel } from './truth-text';
@@ -349,7 +368,8 @@ export function rankPeople(rows: readonly WriterRow[], personas: readonly Person
       // C10: a person we wrote to after their message, or who has a meeting ahead, is not quiet; an owed writer is listed as owed.
       if (!owed && !st.quiet.quiet) continue;
     } else if (w.last.getTime() > quiet) continue;
-    if (opts.decided.has(`person:${email}`) || opts.unsubscribed.has(email)) continue;
+    // The people fix (2026-10-10): a `never` on the address or on its domain is honored on every later day.
+    if (opts.decided.has(`person:${email}`) || neverCovers(opts.decided, email) || opts.unsubscribed.has(email)) continue;
     const verdict = opts.verdicts?.get(email) ?? null;
     if (verdict && !verdict.eligible) continue;
     // The morning audit of October 10: a vendor pitch, an automated sender, a calendar response or an internal thread is not a prospect to re-engage.
@@ -377,7 +397,7 @@ export function rankPeople(rows: readonly WriterRow[], personas: readonly Person
       opportunity: lookup.inDeal === true ? 'open' : lookup.inDeal === false ? 'none' : 'unknown',
       ...(st ? { state: { quietDays: st.quiet.days, quietBasis: st.quiet.basis, nextMeetingAt: st.nextMeetingAt, lastOutboundAt: st.lastOutboundAt, answerOwedSince: owed ? st.answerOwed.since : null } } : {}),
       ...(verdict?.review ? { review: verdict.reason } : {}),
-      decisions: DECISIONS, rank: out.length, ...(inDeal ? { inDeal: true } : {}),
+      decisions: PERSON_DECISIONS, rank: out.length, ...(inDeal ? { inDeal: true } : {}),
     });
   }
   return out.sort((a, b) => b.observedAt.localeCompare(a.observedAt)).map((x, i) => ({ ...x, rank: i }));
@@ -457,14 +477,26 @@ export async function loadDecided(prisma: PrismaLike, now: Date): Promise<Set<st
     rows.push(...page);
     if (page.length < DECIDED_PAGE) break;
   }
+  const decisionOf = (r: DecisionRow) => (r.payload && typeof r.payload === 'object' ? (r.payload as { decision?: string }).decision : undefined) ?? '';
   const newest = new Map<string, DecisionRow>();
-  for (const r of rows) if (!newest.has(r.subject_id)) newest.set(r.subject_id, r);
+  // The people fix (2026-10-10): a `never` on a sender sticks whatever came after it on the key.
+  const never = new Set<string>();
+  for (const r of rows) {
+    if (!newest.has(r.subject_id)) newest.set(r.subject_id, r);
+    if (decisionOf(r) === 'never' && (r.subject_id.startsWith('person:') || r.subject_id.startsWith('domain:'))) never.add(r.subject_id);
+  }
   const out = new Set<string>();
   for (const [key, r] of newest) {
-    const d = (r.payload && typeof r.payload === 'object' ? (r.payload as { decision?: string }).decision : undefined) ?? '';
+    // A domain key carries only a `never` (decide.ts refuses anything else there).
+    if (key.startsWith('domain:')) continue;
+    const d = decisionOf(r);
     if (d === 'skip' && now.getTime() - new Date(r.created_at).getTime() > SKIP_DAYS * 86_400_000) continue;
     if (d === 'explore' || d === 'more') continue;
     out.add(key);
+  }
+  for (const key of never) {
+    out.add(key);
+    if (key.startsWith('person:')) out.add(`never:${key}`);
   }
   return out;
 }

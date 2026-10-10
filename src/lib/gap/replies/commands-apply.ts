@@ -35,6 +35,11 @@
  *     the applied row records `advancedTo: <key>` (or null with `advanceReason`: none_left, all_held, no_briefing_address,
  *     send_failed, no_plan), and the answer names it ("Next: PepsiCo, a prepared first touch, arriving as its own
  *     email."). A refused or progress-noted DONE never advances.
+ *   - the walk fix (Casey, 2026-10-10, "yes, change the command"): a completion DONE records the disposition, never a
+ *     one-day log: on a reply item, the C35 resolution row on its message (`reply_settled`: the reply list, the pursuit
+ *     read and the owed answers read it, so it never returns); on any other item that is not a commitment, a `done`
+ *     outcome that holds the account's card off the day until something new happens there (`account_done`). An opt-out
+ *     is never settled by DONE: it keeps the one-day log and the answer says it stays until it is recorded
  *   - the Gmail action UI audit (GUI-09, 2026-10-10): ITEM n (also OPEN n, SEND ME n), on the briefing thread or on
  *     any assignment thread, sends item n of the day's NEWEST plan revision as its own email through sendAssignment,
  *     judged by `assignable` the way START is: a held item answers the hold's line (recorded held once, never sent);
@@ -50,6 +55,7 @@ import { commitmentsFromSellerNote, loadCommitment, transitionCommitment } from 
 import { dayLabel, nyDay, nyDayAt, parseDuePhrase } from '../work/dates';
 import { progressLine, readDoneNote, type DoneFact } from '../work/done-note';
 import { recordWorkOutcome } from '../work/outcome';
+import { resolveAnswerOwed } from '../work/recorded-replies';
 import { loadDayPlan, loadDayPlanRevisions, type DayPlan, type PlanItem } from '../work/plan';
 import type { SellerSettings } from '../work/settings';
 import { authenticateCommand, commandTextOf, matchCommandTarget, parseCommand, type AssignmentRef, type BriefingRef, type CommandContext, type ParsedCommand } from './commands';
@@ -164,6 +170,8 @@ const NEXT_PATH: Record<string, string> = {
   account_snoozed: 'It returns on that day. Reply NEXT for the next item.',
   commitment_done: 'Reply NEXT for the next item.',
   account_logged: 'Reply NEXT for the next item.',
+  account_done: 'Reply NEXT for the next item.',
+  reply_settled: 'Reply NEXT for the next item.',
   progress_noted: 'The item stays open. Reply DONE: what happened when it has, or NEXT for the next item.',
   item_retired: 'Reply NEXT for the current item.',
   gmail_drafted: 'Send it from GAP (CONFIRM + SEND) or from Gmail; reply NEXT for the next item.',
@@ -641,7 +649,27 @@ async function act(prisma: PrismaLike, input: ApplyInput, deps: ApplyDeps, item:
     if (!t.ok) return refuse(prisma, input, deps, subject, 'done', `commitment_${t.reason}`, {}, source);
     return finish('commitment_done', { commitmentId: commitment.commitmentId, note, basis: 'self_reported', ...factsPayload }, `Done, by your word: ${item.title} at ${item.accountName}. ${recorded ?? `Recorded: "${note}".`}`, { basis: 'self_reported' });
   }
-  const o = await recordWorkOutcome(prisma, { accountName: item.accountName, kind: 'logged', reason: note.slice(0, 240), actor, now: input.now });
+  // The walk fix (Casey, 2026-10-10): DONE records the disposition instead of a one-day log. On a reply item (a person
+  // wrote; or their recorded reply still owed an answer) the reply is SETTLED by the seller's word: the C35 resolution
+  // row on its message (work/recorded-replies.ts resolveAnswerOwed), which the reply list, the pursuit read and the owed
+  // answers all read, so it never returns; a new message from them is new work. No disposition is written here (the
+  // disposition service needs a thesis and runs the CRM mirror and the enrollment stops; DONE runs neither).
+  if (item.stateKind === 'replied' && item.refs.replyMessageId) {
+    const r = await resolveAnswerOwed(prisma, { messageId: item.refs.replyMessageId, actor, reason: `DONE by email: ${note}`.slice(0, 500), now: input.now });
+    if (!r.ok) return refuse(prisma, input, deps, subject, 'done', `reply_${r.reason}`, {}, source);
+    const whose = item.person?.name ? `${item.person.name}'s reply` : 'the reply';
+    return finish('reply_settled', { replyMessageId: item.refs.replyMessageId, resolutionId: r.id, note, basis: 'self_reported', ...factsPayload }, `Settled, by your word: ${whose} at ${item.accountName}. ${recorded ?? `Recorded: "${note}".`} It does not come back; a new message from them does.`, { basis: 'self_reported' });
+  }
+  // An opt-out is never settled by DONE: it stays until it is recorded as do not contact on the account. The words are
+  // logged for the day, as before, and the seller is told.
+  if (item.stateKind === 'opted_out') {
+    const o = await recordWorkOutcome(prisma, { accountName: item.accountName, kind: 'logged', reason: note.slice(0, 240), actor, now: input.now });
+    if (!o.ok) return refuse(prisma, input, deps, subject, 'done', `outcome_${o.reason}`, {}, source);
+    return finish('account_logged', { note, basis: 'self_reported', ...factsPayload }, `Logged, by your word: ${item.accountName}. ${recorded ?? `Recorded: "${note}".`} The opt-out stays on your list until it is recorded as do not contact on the account.`, { basis: 'self_reported' });
+  }
+  // Any other item (and a reply GAP read with no message to name): a `done` outcome that does not expire the next day.
+  // The account's card stays off the day until something new happens there (work/list.ts doneStillHolds).
+  const o = await recordWorkOutcome(prisma, { accountName: item.accountName, kind: 'done', reason: note.slice(0, 240), actor, now: input.now });
   if (!o.ok) return refuse(prisma, input, deps, subject, 'done', `outcome_${o.reason}`, {}, source);
-  return finish('account_logged', { note, basis: 'self_reported', ...factsPayload }, `Logged, by your word: ${item.accountName}. ${recorded ?? `Recorded: "${note}".`} GAP counts what it can prove separately.`, { basis: 'self_reported' });
+  return finish('account_done', { note, basis: 'self_reported', ...factsPayload }, `Done, by your word: ${item.accountName}. ${recorded ?? `Recorded: "${note}".`} It stays off your day until something new happens there; GAP counts what it can prove separately.`, { basis: 'self_reported' });
 }

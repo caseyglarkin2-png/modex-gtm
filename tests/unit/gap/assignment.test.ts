@@ -7,7 +7,7 @@
  * hash (what a reply's APPROVE will be bound to, X07/X11). Pinned: the subject carries the item token and the
  * revision in brackets; the prepared email is quoted line by line and no line of the body starts with a command word;
  * the content hash is the pack's for a first touch; an assignment is sent once per (item, revision) and a resend is
- * explicit; the next unassigned item is the first in the plan with no assignment; the mail is an internal message from
+ * explicit; the next unassigned item is the first in the walk (work/walk.ts) with no assignment; the mail is an internal message from
  * the GAP identity with Reply-To the GAP mailbox.
  */
 import { beforeEach, describe, expect, it, vi } from 'vitest';
@@ -209,8 +209,9 @@ describe('X06: startDay, sendAssignment, nextUnassignedItem', () => {
     expect(deps.send).toHaveBeenCalledTimes(3);
   });
 
-  it('the next unassigned item is the first in the plan with no assignment yet; none when every item went out', async () => {
-    expect((await nextUnassignedItem(db.client(), PLAN))?.key).toBe('first_touch:dec-1');
+  it('the next unassigned item is the first in the walk with no assignment yet; none when every item went out', async () => {
+    // The walk fix (2026-10-10): the walk takes what is due (Kroger's commitment) before a ready first touch.
+    expect((await nextUnassignedItem(db.client(), PLAN))?.key).toBe('commitment:c-1');
     await sendAssignment(db.client(), { plan: PLAN, item: ITEMS[0], revision: 0, to: 'casey@freightroll.com', sender: SENDER, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW, actor: 'gap' }, deps);
     expect((await nextUnassignedItem(db.client(), PLAN))?.key).toBe('commitment:c-1');
     await sendAssignment(db.client(), { plan: PLAN, item: ITEMS[1], revision: 0, to: 'casey@freightroll.com', sender: SENDER, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW, actor: 'gap' }, deps);
@@ -253,17 +254,18 @@ describe('seller acceptance follow-up: START and NEXT hand the seller only an as
     const holds = db.store.gapAuditEvent.filter((e) => e.kind === 'work.command_applied' && e.payload.effect === ITEM_HELD_FOR_RESEARCH);
     expect(holds).toHaveLength(1);
     expect(holds[0]).toMatchObject({ subject_type: 'work_item', subject_id: "follow_up:Southern Glazer's:2026-10-08", payload: { reason: 'research_move', day: '2026-10-08', itemToken: 'e'.repeat(32), revision: 1 } });
-    // Kroger assigned; the next walk finds the hold already recorded (no second row) and hands PepsiCo.
+    // Kroger assigned; the next walk finds the hold already recorded (no second row), holds Swire by its why (a
+    // follow-up is walked with what is due, before a first touch: the walk fix, 2026-10-10) and hands PepsiCo.
     await sendAssignment(db.client(), { plan, item: first.item as PlanItem, revision: 0, to: 'casey@freightroll.com', sender: SENDER, ...input, actor: 'gap', built: first.built }, deps);
     const second = await nextAssignableItem(db.client(), plan, { assign: { input, deps, actor: 'test' } });
     expect(second.item?.key).toBe('first_touch:dec-1');
-    expect(second.held.map((h) => [h.item.accountName, h.recorded])).toEqual([["Southern Glazer's", false]]);
-    expect(db.store.gapAuditEvent.filter((e) => e.kind === 'work.command_applied' && e.payload.effect === ITEM_HELD_FOR_RESEARCH), 'held once').toHaveLength(1);
-    // PepsiCo assigned; Swire is held by its why; nothing is left.
+    expect(second.held.map((h) => [h.item.accountName, h.recorded])).toEqual([["Southern Glazer's", false], ['Swire', true]]);
+    expect(db.store.gapAuditEvent.filter((e) => e.kind === 'work.command_applied' && e.payload.effect === ITEM_HELD_FOR_RESEARCH), 'each held once').toHaveLength(2);
+    // PepsiCo assigned; nothing is left, and both holds stand as recorded.
     await sendAssignment(db.client(), { plan, item: second.item as PlanItem, revision: 0, to: 'casey@freightroll.com', sender: SENDER, ...input, actor: 'gap', built: second.built }, deps);
     const third = await nextAssignableItem(db.client(), plan, { assign: { input, deps, actor: 'test' } });
     expect(third.item).toBeNull();
-    expect(third.held.map((h) => [h.item.accountName, h.recorded])).toEqual([["Southern Glazer's", false], ['Swire', true]]);
+    expect(third.held.map((h) => [h.item.accountName, h.recorded])).toEqual([["Southern Glazer's", false], ['Swire', false]]);
     // A settled item: an applied SKIP on an unassigned item keeps it off the walk; a progress note does not settle.
     const db2 = ledgerDb({}, NOW);
     await db2.client().gapAuditEvent.create({ data: { kind: 'work.command_applied', actor: 'x', subject_type: 'work_item', subject_id: 'commitment:c-1', payload: { command: 'skip', effect: 'commitment_skipped' } } });

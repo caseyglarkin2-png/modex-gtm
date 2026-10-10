@@ -17,7 +17,8 @@ import { loadCompletedToday, loadMeetingRows, loadMeetingStartingPoints, loadWor
 import { loadAccountPriorities } from './priority';
 import { loadFollowUpPlans } from '../execution/follow-up-load';
 import { loadWorkOutcomes, loadPreparedMeetings } from './outcome';
-import { loadPursuitSummaries } from '../pursuit/summary';
+import { loadPursuitSummaries, type PursuitSummary } from '../pursuit/summary';
+import { ANSWERED_FACTS_MAX_MS, PURSUIT_SUMMARY_TTL_MS } from '../pursuit/summary-ttl';
 import { loadRecordedClosures, sweepClosedDeals } from '../deals/closure';
 import { loadRecordedReplyIds, withoutRecordedReplies, loadAnswersOwed } from './recorded-replies';
 import { resolveAccountOpportunity } from '../opportunity/active-opportunity';
@@ -131,6 +132,22 @@ export async function knowledgeByAccount(prisma: PrismaLike, accounts: readonly 
   return out;
 }
 
+/**
+ * The walk fix (2026-10-10): the summaries read past the TTL, split. `fresh` (within PURSUIT_SUMMARY_TTL_MS) speak for
+ * the cards as before; `answered` gathers every summary's answered replies, whatever its age: once a send of ours
+ * followed a reply it stays answered. Pure.
+ */
+export function splitSummaries(all: ReadonlyMap<string, PursuitSummary>, now: Date): { fresh: Map<string, PursuitSummary>; answered: Array<{ accountName: string; from: string; at: string; answeredAt: string; id?: string | null }> } {
+  const fresh = new Map<string, PursuitSummary>();
+  const answered: Array<{ accountName: string; from: string; at: string; answeredAt: string; id?: string | null }> = [];
+  for (const [name, s] of all) {
+    const age = now.getTime() - new Date(s.at).getTime();
+    if (age >= 0 && age <= PURSUIT_SUMMARY_TTL_MS) fresh.set(name, s);
+    for (const a of s.answered ?? []) answered.push({ accountName: name, ...a });
+  }
+  return { fresh, answered };
+}
+
 export interface WorkDayLoad {
   read: CachedRead<CockpitData>;
   data: CockpitData;
@@ -181,10 +198,12 @@ export async function loadWorkDay(prisma: PrismaLike, opts: LoadWorkDayOptions, 
   // R41: the obligations (after the bounded follow-up sweep), the next day's meetings and the seller's priorities are
   // read on every render, never cached with the lanes, so a write shows on the next load.
   // R60 capture once: which remembered replies were recorded since the read (one live read, in this same wave).
-  const [summariesRead, outcomes, commitments, meetingRowsRaw, recordedReplies, answersOwed, preparedMeetings] = await Promise.all([
+  const [summariesAnyAge, outcomes, commitments, meetingRowsRaw, recordedReplies, answersOwed, preparedMeetings] = await Promise.all([
     // R63-A B3: the preview starts from what the workspace says NOW (a summary read at tomorrow's time aged out and the
     // preview fell back to cards that knew nothing of a reply, a do not contact or a hold).
-    loadPursuitSummaries(prisma, data.workAccounts, realNow),
+    // The walk fix (2026-10-10): ONE read past the TTL; only the fresh summaries speak for the cards, while the answered
+    // replies an older summary recorded still stand (a reply answered stays answered).
+    loadPursuitSummaries(prisma, data.workAccounts, realNow, ANSWERED_FACTS_MAX_MS),
     loadWorkOutcomes(prisma, data.workAccounts, now).catch(() => new Map()),
     // The sweep writes at the real time only; the phases are read at `now`.
     lane ? Promise.resolve([]) : loadWorkCommitments(prisma, realNow, { replies: data.workInput.replies }).catch(() => []),
@@ -196,6 +215,7 @@ export async function loadWorkDay(prisma: PrismaLike, opts: LoadWorkDayOptions, 
     // R63-A S11: the meetings marked prepared (they leave what needs you).
     loadPreparedMeetings(prisma, data.workAccounts, realNow).catch(() => new Set<string>()),
   ]);
+  const { fresh: summariesRead, answered } = splitSummaries(summariesAnyAge, realNow);
   // R63-A S1: the list is complete when the reply read had no further page (then a remembered "replied" with no reply
   // waiting is stale, recorded since).
   const liveRead = withoutRecordedReplies(data.workInput.replies, summariesRead, recordedReplies, { complete: !data.counts.replies.atLeast });
@@ -229,7 +249,7 @@ export async function loadWorkDay(prisma: PrismaLike, opts: LoadWorkDayOptions, 
     loadMeetingStartingPoints(prisma, meetingRows.filter((m) => new Date(m.at).getTime() <= now.getTime() + 24 * 3_600_000), commitments, now).catch(() => new Map()),
     closureAccounts.length ? loadRecordedClosures(prisma, closureAccounts).catch(() => new Map()) : Promise.resolve(new Map()),
   ]);
-  const day = workDay({ ...data.workInput, replies: live.replies, now, summaries, outcomes, commitments, meetings, canceledMeetings, meetingPreps, priorities, followUpPlans, closedDeals, preparedMeetings, preparedAngles, knowledge });
+  const day = workDay({ ...data.workInput, replies: live.replies, now, summaries, answered, outcomes, commitments, meetings, canceledMeetings, meetingPreps, priorities, followUpPlans, closedDeals, preparedMeetings, preparedAngles, knowledge });
   // R45: close the day and keep tomorrow, derived from actual state (no new storage).
   const doneToday = lane || preview ? [] : await loadCompletedToday(prisma, now).catch(() => []);
   const today = todaySummary({ now, commitments, done: doneToday, waiting: day.waiting, meetings, moved: buyerMoves(data.workInput.replies) });

@@ -14,6 +14,11 @@
  *
  * A skip hides the item for SKIP_DAYS (work/intel.ts); a dismiss hides it until Casey changes his mind on the
  * Signals page; explore records the look and changes nothing else.
+ *
+ * The people fix (2026-10-10): `never` is "not a prospect" on a sender, `person:<address>` or `domain:<domain>`; it
+ * never expires and nothing later on the key undoes it (work/intel.ts loadDecided). A signal or a trigger refuses it;
+ * a domain key takes nothing else, and refuses a freemail or our own domain and a domain that places at a GAP account
+ * (a whole account's people are never hidden by one click; decide the person instead).
  */
 import { applySignalOp } from '../signals/ops';
 import { captureSignal } from '../signals/intake';
@@ -27,24 +32,32 @@ import { loadIdentityContext } from '../identity/service';
 import type { IdentityContext } from '../identity/resolve';
 import { loadInDealsSummary, type InDealsSummary } from '../deals/in-deals';
 import type { ContactLookup } from '../opportunity/contact-reads';
-import { DECISIONS, PROSPECT_DECISION, type Decision } from './intel';
+import { PERSON_DECISIONS, PROSPECT_DECISION, type Decision } from './intel';
+import { resolveIdentity } from '../identity/resolve';
+import { FREEMAIL_DOMAINS, OWN_DOMAINS } from '../replies/domains';
 import { seedRevision } from '../agents/angle-claims';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
 
-export type DecisionKey = { kind: 'signal'; id: string } | { kind: 'trigger'; id: number } | { kind: 'person'; email: string };
+export type DecisionKey = { kind: 'signal'; id: string } | { kind: 'trigger'; id: number } | { kind: 'person'; email: string } | { kind: 'domain'; domain: string };
+
+const DOMAIN = /^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)+$/;
 
 export function parseDecisionKey(key: string): DecisionKey | null {
-  const m = /^(signal|trigger|person):(.+)$/.exec(key.trim());
+  const m = /^(signal|trigger|person|domain):(.+)$/.exec(key.trim());
   if (!m) return null;
   if (m[1] === 'signal') return { kind: 'signal', id: m[2] };
+  if (m[1] === 'domain') {
+    const domain = m[2].trim().toLowerCase().replace(/^@/, '').replace(/^www\./, '');
+    return DOMAIN.test(domain) ? { kind: 'domain', domain } : null;
+  }
   if (m[1] === 'trigger') return /^\d+$/.test(m[2]) ? { kind: 'trigger', id: Number(m[2]) } : null;
   const email = m[2].trim().toLowerCase();
   return email.includes('@') ? { kind: 'person', email } : null;
 }
 
-export const isDecision = (v: unknown): v is Decision => typeof v === 'string' && (DECISIONS as readonly string[]).includes(v);
+export const isDecision = (v: unknown): v is Decision => typeof v === 'string' && (PERSON_DECISIONS as readonly string[]).includes(v);
 
 export interface DecideInput {
   key: string;
@@ -112,6 +125,9 @@ export async function applyDecision(prisma: PrismaLike, input: DecideInput, deps
   const parsed = parseDecisionKey(input.key);
   if (!parsed) return { ok: false, reason: 'bad_key' };
   if (!isDecision(input.decision)) return { ok: false, reason: 'bad_decision' };
+  // The people fix (2026-10-10): `never` is for a sender only; a domain key takes nothing else.
+  if (input.decision === 'never' && (parsed.kind === 'signal' || parsed.kind === 'trigger')) return { ok: false, reason: 'never_is_for_senders' };
+  if (parsed.kind === 'domain') return neverDomain(prisma, parsed.domain, input, deps);
   const key = parsed.kind === 'person' ? `person:${parsed.email}` : parsed.kind === 'trigger' ? `trigger:${parsed.id}` : `signal:${parsed.id}`;
   const via = input.via ?? 'app';
   const effects: string[] = [];
@@ -221,16 +237,37 @@ export async function applyDecision(prisma: PrismaLike, input: DecideInput, deps
     angleState = stateOf(queued);
     effects.push(queued.kept ? 'angle_kept' : 'angle_queued');
   } else {
-    effects.push(input.decision === 'skip' ? 'skipped_30_days' : input.decision === 'dismiss' ? 'dismissed' : input.decision === 'save' ? 'saved' : 'explored');
+    effects.push(input.decision === 'never' ? 'not_a_prospect' : input.decision === 'skip' ? 'skipped_30_days' : input.decision === 'dismiss' ? 'dismissed' : input.decision === 'save' ? 'saved' : 'explored');
   }
   await recordDecision(prisma, key, input, { accountName, personaId: persona?.id ?? null, resolvedVia: placed.via, ambiguous: placed.ambiguous, inboundMessageId: last?.id ?? null, effects });
   return { ok: true, key, decision: input.decision, effects, angleTaskId, accountName, href, angle: angleState };
 }
 
+/**
+ * The people fix (2026-10-10): `never` on a whole sender domain, one ledger row keyed `domain:<domain>`. Refused for a
+ * freemail or our own domain, and for a domain the identity machinery places at a GAP account (verified or registered),
+ * so one click never hides an account's buyers. Nothing else happens: no contact, no CRM write.
+ */
+async function neverDomain(prisma: PrismaLike, domain: string, input: DecideInput, deps: DecideDeps): Promise<DecideResult> {
+  if (input.decision !== 'never') return { ok: false, reason: 'domain_takes_never_only' };
+  if (FREEMAIL_DOMAINS.has(domain) || OWN_DOMAINS.has(domain)) return { ok: false, reason: 'domain_not_allowed' };
+  const identity = deps.identity !== undefined ? deps.identity : typeof prisma.canonicalCompany?.findMany === 'function' && typeof prisma.gapAccountAlias?.findMany === 'function' ? await loadIdentityContext(prisma).catch(() => null) : null;
+  const placed = identity ? resolveIdentity(identity, { domain }) : null;
+  if (placed && (placed.ok || placed.reason === 'ambiguous_identity')) return { ok: false, reason: 'domain_is_an_account' };
+  const key = `domain:${domain}`;
+  const effects = ['not_a_prospect_domain'];
+  await recordDecision(prisma, key, input, { domain, effects });
+  return { ok: true, key, decision: 'never', effects, angleTaskId: null, accountName: null, href: '/gap/signals/', angle: null };
+}
+
 /** The seller line for a decision just taken. */
 export function decisionLine(r: Extract<DecideResult, { ok: true }>): string {
-  const what = r.key.startsWith('person:') ? 'the person' : r.key.startsWith('trigger:') ? 'the trigger' : 'the signal';
+  const what = r.key.startsWith('person:') ? 'the person' : r.key.startsWith('trigger:') ? 'the trigger' : r.key.startsWith('domain:') ? 'the domain' : 'the signal';
   switch (r.decision) {
+    case 'never':
+      return r.key.startsWith('domain:')
+        ? `Not a prospect: no one at ${r.key.slice('domain:'.length)} is listed to reengage again. Nothing was sent to anyone.`
+        : `Not a prospect: ${r.key.slice('person:'.length)} is never listed to reengage again. Nothing was sent to anyone.`;
     case 'pursue':
       // Seller acceptance (2026-10-09): a repeated click finds the task already queued or running; the answer says so and queues nothing.
       if (r.angle === 'kept_in_progress') return `Already queued; GAP is on it. The angle for ${what} comes back on the item and in the next briefing. Nothing is sent until you approve it.`;

@@ -10,9 +10,13 @@
  *   - NO line of the body starts with a command word: a reply that quotes the body must never read as a command
  *   - the commands footer appears only when email commands are enabled (X07); before that the links are the way
  *   - when nothing needs the seller the briefing says so in words; the legacy pipeline digest is named while it runs
- *   - C31: the headline names its count basis: "N to execute" is the plan's items, the same durable list in the same
- *     order START and NEXT walk (item 1 is what START opens, named in the body); "M to decide" is the intelligence
- *     shown, counted apart and never folded into the execution count
+ *   - C31: the headline names its count basis: "N to execute" is the plan's items, the same durable list START and
+ *     NEXT walk (the walk's first item is what START opens, named in the body with its number); "M to decide" is the
+ *     intelligence shown, counted apart and never folded into the execution count
+ *   - the walk fix (2026-10-10): START and NEXT walk replies to answer, commitments due, ready first touches, reviews,
+ *     then admin, and never deal hygiene (work/walk.ts); the body says the walk order when it differs from the
+ *     numbered order, and says the shortage plainly when fewer than half the items are new conversations ("New
+ *     conversations today: 0 of 14 items are a first touch or a reply from a buyer; the rest is deal work and admin.")
  *   - C32: each item card carries the identity, the relationship or motion, why it surfaced, the last material
  *     exchange, the next prepared action (whole, never cut mid-sentence), the source and date, and its own deep link;
  *     an intelligence item at an account with an open deal links to that deal's brief, never to generic Work
@@ -25,7 +29,9 @@
 import type { DayPlan, PlanItem } from './plan';
 import type { IntelItem, PursuedItem } from './intel';
 import { dateOnlyText } from '../signals/intelligence-record';
+import { NEVER_WORDS, neverDomainWords } from './truth-text';
 import { cleanLine, dedupeSentences } from './clean-text';
+import { isDealHygiene, newConversationLine, walkOrder } from './walk';
 
 /**
  * GUI-11 (the Gmail action UI audit, 2026-10-10): the template rules this renderer holds, pinned by
@@ -82,7 +88,7 @@ export interface BriefingLinks {
   work: string;
   item: (it: PlanItem) => string;
   /** I04: a decision link for an intelligence item (null when links cannot be signed: the item then says "on Work"). */
-  decide?: (key: string, decision: 'pursue' | 'skip' | 'dismiss' | 'more') => string | null;
+  decide?: (key: string, decision: 'pursue' | 'skip' | 'dismiss' | 'more' | 'never') => string | null;
   /** I05: the account page. */
   account?: (name: string) => string;
   /** C32: the account's deal brief (the deal workspace), for an item at an account with an open deal. */
@@ -338,15 +344,43 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
   ].filter(Boolean).join('; ');
   lines.push(`${basis}.`);
   html.push(`<p style="color:#666">${esc(basis)}.</p>`);
+  // The walk fix (2026-10-10): START and NEXT walk replies first, then what is due, first touches, reviews and admin,
+  // and leave deal hygiene to the one line (work/walk.ts); said when that differs from the numbered order. And the
+  // shortage of new conversations, plainly, when fewer than half the items are a first touch or a buyer's reply.
+  const walk = walkOrder(plan.items);
+  const notWalked = plan.items.length - walk.length;
+  const reordered = walk.some((it, k) => it.key !== plan.items[k]?.key) || notWalked > 0;
+  if (n > 0 && reordered) {
+    // No body line may start with a command word: the line leads with "Walk order".
+    const walkLine = `Walk order (START, then NEXT): the replies to answer first, then what is due, the ready first touches, the reviews and the admin${notWalked ? `; the ${notWalked === 1 ? 'deal' : `${notWalked} deals`} in one line ${notWalked === 1 ? 'is' : 'are'} not walked` : ''}.`;
+    lines.push(walkLine);
+    html.push(`<p style="color:#666">${esc(walkLine)}</p>`);
+  }
+  const shortage = newConversationLine(plan.items);
+  if (shortage) {
+    lines.push(shortage);
+    html.push(`<p><b>${esc(shortage)}</b></p>`);
+  }
   // GUI-11: the bookkeeping (how the digest was composed, the producers' coverage, the retained list) follows the items.
   const bookkeeping: { text: string[]; html: string[] } = { text: [], html: [] };
   // I04: intelligence first (the day is for new conversations), then the items in sections, deals in one line.
-  const decideLinks = (key: string) => {
-    const parts = (['pursue', 'skip', 'dismiss', 'more'] as const).map((d) => {
+  const decideLinks = (key: string, it?: IntelItem) => {
+    const parts: Array<{ label: string; href: string }> = (['pursue', 'skip', 'dismiss', 'more'] as const).map((d) => {
       const href = links.decide ? links.decide(key, d) : null;
-      return href ? { d, href } : null;
-    }).filter((x): x is { d: 'pursue' | 'skip' | 'dismiss' | 'more'; href: string } => !!x);
-    return { text: parts.length ? parts.map((p) => `${p.d.charAt(0).toUpperCase()}${p.d.slice(1)}: ${p.href}`).join('  ') : `Decide it on Work: ${links.work}`, html: parts.length ? parts.map((p) => `<a href="${esc(p.href)}">${esc(p.d.charAt(0).toUpperCase() + p.d.slice(1))}</a>`).join(' · ') : `<a href="${esc(links.work)}">Decide it on Work</a>` };
+      return href ? { label: `${d.charAt(0).toUpperCase()}${d.slice(1)}`, href } : null;
+    }).filter((x): x is { label: string; href: string } => !!x);
+    // The people fix (2026-10-10): a person who wrote in also takes "not a prospect" (never, for good), and, when the
+    // sender is at no account, the same for the whole domain (firecrown.com, riserify.com); decide.ts refuses a domain
+    // that places at an account, so the link is offered only for an unplaced sender.
+    if (key.startsWith('person:') && links.decide) {
+      const never = links.decide(key, 'never');
+      if (never) parts.push({ label: NEVER_WORDS, href: never });
+      const domain = key.slice('person:'.length).split('@')[1] ?? '';
+      const unplaced = !!it && !it.accountName && !it.ambiguousAmong?.length && !it.inDeal;
+      const onDomain = unplaced && domain ? links.decide(`domain:${domain}`, 'never') : null;
+      if (onDomain) parts.push({ label: neverDomainWords(domain), href: onDomain });
+    }
+    return { text: parts.length ? parts.map((p) => `${p.label}: ${p.href}`).join('  ') : `Decide it on Work: ${links.work}`, html: parts.length ? parts.map((p) => `<a href="${esc(p.href)}">${esc(p.label)}</a>`).join(' · ') : `<a href="${esc(links.work)}">Decide it on Work</a>` };
   };
   const intelLine = (it: IntelItem) => {
     const a = intel?.angles[it.key];
@@ -438,7 +472,7 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
     const pushIntel = (it: IntelItem) => {
       // IW06: a vault conversation has no decisions; the account page holds the moves.
       const open = it.accountName && links.account ? links.account(it.accountName) : links.work;
-      const d = it.kind === 'knowledge' ? { text: `${it.accountName ? `Open ${it.accountName}` : 'Open Work'}: ${open}`, html: `<a href="${esc(open)}">${esc(it.accountName ? `Open ${it.accountName}` : 'Open Work')}</a>` } : decideLinks(it.key);
+      const d = it.kind === 'knowledge' ? { text: `${it.accountName ? `Open ${it.accountName}` : 'Open Work'}: ${open}`, html: `<a href="${esc(open)}">${esc(it.accountName ? `Open ${it.accountName}` : 'Open Work')}</a>` } : decideLinks(it.key, it);
       const deal = dealLine(it);
       const sub = substanceLines(it);
       lines.push(`- ${intelLine(it)}`, ...sub.text.map((l) => `   ${l}`), ...(deal ? [`   ${deal.text}`] : []), `   ${d.text}`);
@@ -483,12 +517,18 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
     lines.push('', 'Nothing on the list needs you today. Open Work to see what is waiting and what is parked.');
     html.push('<p>Nothing on the list needs you today. Open Work to see what is waiting and what is parked.</p>');
   } else {
-    // C31: the START target is item 1 of the plan, named here so the pointer and the rows reconcile.
-    const first = plan.items[0];
-    lines.push('', `Begin with item 1, ${first.accountName}: ${endSentence(first.title)} ${links.start}`, '');
-    html.push(`<p><a href="${esc(links.start)}" style="font-weight:600">Begin with item 1, ${esc(first.accountName)}: ${esc(endSentence(first.title))}</a></p>`);
+    // C31: the START target is the walk's first item (work/walk.ts; item 1 when the walk keeps the plan's order),
+    // named here with its number so the pointer and the rows reconcile.
+    const first = walk[0] ?? null;
+    const firstNo = first ? plan.items.findIndex((it) => it.key === first.key) + 1 : 0;
+    if (first) {
+      lines.push('', `Begin with item ${firstNo}, ${first.accountName}: ${endSentence(first.title)} ${links.start}`, '');
+      html.push(`<p><a href="${esc(links.start)}" style="font-weight:600">Begin with item ${firstNo}, ${esc(first.accountName)}: ${esc(endSentence(first.title))}</a></p>`);
+    } else {
+      lines.push('', 'Nothing on the plan is walked today: only the deals in one line below. Open Work for them.', '');
+      html.push('<p>Nothing on the plan is walked today: only the deals in one line below. Open Work for them.</p>');
+    }
     // The sections: what is owed and prepared, numbered in the plan's order; the stalled deals in one line.
-    const isDealHygiene = (it: PlanItem) => it.kind === 'deal' && it.stateKind === 'in_deal' && !/^Next step/i.test(it.title);
     const sections: Array<{ title: string; items: PlanItem[] }> = [
       { title: 'Ready to send', items: plan.items.filter((it) => it.kind === 'ready') },
       { title: 'Owed and in conversation', items: plan.items.filter((it) => it.kind === 'commitment' || it.kind === 'reply' || it.kind === 'meeting') },

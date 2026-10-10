@@ -2,7 +2,8 @@
  * POST /api/gap/decide   `{ key, decision, note? }`   (I02, GAP OS prospecting first, 2026-10-08)
  *
  * Casey's decision on an intelligence item from Work or the Signals page: pursue | explore | save | skip | dismiss |
- * more, over `signal:<id>`, `trigger:<id>` or `person:<email>` (work/intel.ts). The service (work/decide.ts) records
+ * more, over `signal:<id>`, `trigger:<id>` or `person:<email>`, and never (not a prospect) over `person:<email>` or
+ * `domain:<domain>` (work/intel.ts). The service (work/decide.ts) records
  * it and, for pursue and more, queues the angle task and the existing research. Nothing here contacts anyone.
  * Session only. 200 with the result; 400 bad body; 404 unknown item.
  */
@@ -11,12 +12,12 @@ import { hubspotContactByEmail } from '@/lib/gap/opportunity/contact-reads';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 import { badBody, intakeGuard } from '@/lib/gap/intake/route-helpers';
-import { DECISIONS } from '@/lib/gap/work/intel';
+import { PERSON_DECISIONS } from '@/lib/gap/work/intel';
 import { applyDecision, decisionLine } from '@/lib/gap/work/decide';
 
 export const dynamic = 'force-dynamic';
 
-const Body = z.object({ key: z.string().trim().min(3).max(400), decision: z.enum(DECISIONS), note: z.string().trim().max(500).optional() }).strict();
+const Body = z.object({ key: z.string().trim().min(3).max(400), decision: z.enum(PERSON_DECISIONS), note: z.string().trim().max(500).optional() }).strict();
 
 export async function POST(request: NextRequest) {
   const g = await intakeGuard();
