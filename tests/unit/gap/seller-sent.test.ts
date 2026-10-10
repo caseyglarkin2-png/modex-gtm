@@ -11,7 +11,7 @@
  */
 import { describe, expect, it } from 'vitest';
 import { ledgerDb } from './fixtures/ledger-db';
-import { envGmailSender, sellerMailboxes, unionListSent, type SellerSentRow } from '@/lib/gap/execution/seller-sent';
+import { envGmailSender, sellerMailboxes, sellerMailboxSlots, unionListSent, type SellerSentRow } from '@/lib/gap/execution/seller-sent';
 import { loadIntelligence } from '@/lib/gap/work/intel';
 import { defaultIntel } from '@/lib/gap/work/briefing-send';
 import type { GmailSender } from '@/lib/email/gmail-sender';
@@ -45,6 +45,22 @@ describe('the seller mailboxes', () => {
     expect((await read(CRISTIAN, 0, 2_000_000_000)).map((r) => r.id)).toEqual(['1a0c4673d9d75a75', 'gap-1']);
     const failing = unionListSent(sellerMailboxes(ENV), async (s) => { if (s.userEmail === 'casey@freightroll.com') throw new Error('Gmail sent list failed (403)'); return [older]; });
     await expect(failing(CRISTIAN, 0, 2_000_000_000)).rejects.toThrow('403');
+  });
+
+  it('account Sent coverage (2026-10-10): every mailbox is a slot, configured or not (a missing one is named, never skipped); every row says the mailbox it came from; a failure names its mailbox', async () => {
+    expect(sellerMailboxSlots(ENV).map((m) => [m.address, !!m.sender])).toEqual([['casey@yardflow.ai', true], ['casey@freightroll.com', true]]);
+    expect(sellerMailboxSlots({ GAP_GMAIL_USER_EMAIL: 'casey@yardflow.ai', GAP_GOOGLE_REFRESH_TOKEN: 'gap-token' }).map((m) => [m.address, !!m.sender])).toEqual([['casey@yardflow.ai', true], ['casey@freightroll.com', false]]);
+    expect(sellerMailboxSlots({ GOOGLE_REFRESH_TOKEN: 'env-token' }).map((m) => [m.address, !!m.sender])).toEqual([['the GAP mailbox', false], ['casey@freightroll.com', true]]);
+    expect(sellerMailboxSlots({ ...ENV, GMAIL_USER_EMAIL: 'casey@yardflow.ai' }).map((m) => m.address)).toEqual(['casey@yardflow.ai']);
+    // The readable slots are exactly the mailboxes the assignment's relationship reads.
+    for (const env of [ENV, { GAP_GMAIL_USER_EMAIL: 'casey@yardflow.ai', GAP_GOOGLE_REFRESH_TOKEN: 'gap-token' }, { GOOGLE_REFRESH_TOKEN: 'env-token' }, {}]) {
+      expect(sellerMailboxSlots(env).filter((s) => s.sender).map((s) => s.sender!.userEmail)).toEqual(sellerMailboxes(env).map((s) => s.userEmail));
+    }
+    const older = { ...REPLY, id: 'gap-1', internalDate: new Date('2026-09-01T10:00:00Z') };
+    const rows = await unionListSent(sellerMailboxes(ENV), async (s) => (s.userEmail === 'casey@yardflow.ai' ? [older] : [REPLY]))(CRISTIAN, 0, 2_000_000_000);
+    expect(rows.map((r) => [r.id, r.mailbox])).toEqual([['1a0c4673d9d75a75', 'casey@freightroll.com'], ['gap-1', 'casey@yardflow.ai']]);
+    const failing = unionListSent(sellerMailboxes(ENV), async (s) => { if (s.userEmail === 'casey@freightroll.com') throw new Error('Gmail sent list failed (403)'); return [older]; });
+    await expect(failing(CRISTIAN, 0, 2_000_000_000)).rejects.toThrow('casey@freightroll.com: Gmail sent list failed (403)');
   });
 });
 

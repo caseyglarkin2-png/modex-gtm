@@ -85,3 +85,32 @@ export function pausedStateLine(p: PausedReply): string {
   const to = p.proposed.to?.trim();
   return `Reply on record: ${p.reply.name}, ${pausedDay(p.reply.at)}. ${kind.charAt(0).toUpperCase()}${kind.slice(1)}${to ? ` to ${to}` : ''} paused, nothing sent`;
 }
+
+/**
+ * ACCOUNT SENT COVERAGE (Casey, 2026-10-10: "Show which sources were read and when; missing access means unknown, never
+ * 'nothing sent.'"): one seller mailbox's Sent read (account-intel/sent.ts), and every mailbox in words, read or not and
+ * when: "casey@yardflow.ai read 14:02; casey@freightroll.com not read: not configured". The coverage line and the story
+ * say it as it is. Client-safe, like the rest here. Pinned by tests/unit/gap/account-sent-coverage.test.ts.
+ */
+export interface SentMailboxRead {
+  address: string;
+  status: 'read' | 'partial' | 'failed' | 'not_configured';
+  /** When it was read (ISO), null when it was not. */
+  at: string | null;
+  detail: string | null;
+}
+/** "14:02" on the seller's clock (America/New_York, 24 hours). */
+const sentClock = (iso: string) => new Date(iso).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hourCycle: 'h23', timeZone: 'America/New_York' });
+export function sentMailboxWords(mailboxes: readonly SentMailboxRead[]): string {
+  return mailboxes
+    .map((m) => {
+      const when = m.at ? ` ${sentClock(m.at)}` : '';
+      if (m.status === 'read') return `${m.address} read${when}`;
+      if (m.status === 'partial') return `${m.address} partly read${when} (${m.detail ?? 'some queries failed'})`;
+      return `${m.address} not read: ${m.detail ?? 'not configured'}`;
+    })
+    .join('; ');
+}
+/** Was any seller mailbox left unread or partly read? Then a silence in our Sent is unknown, never "nothing sent". */
+export const sentIncomplete = (sent: { read: boolean; detail: string | null; mailboxes?: readonly SentMailboxRead[] } | null | undefined): boolean =>
+  !!sent && (!sent.read || (sent.mailboxes ?? []).some((m) => m.status !== 'read'));

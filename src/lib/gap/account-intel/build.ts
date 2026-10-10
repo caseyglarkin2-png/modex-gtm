@@ -207,14 +207,17 @@ export interface AccountInputs {
     detail: string | null;
   } | null;
   /**
-   * B1 (knowledge program, 2026-10-09): OUR mail to the account from the GAP mailbox's Sent folder, last 180 days, at
-   * most 50, newest first (account-intel/sent.ts). `read` false with `detail`: no GAP sender configured, or the read
-   * failed; `read` true with `detail`: some of it was read (a query failed or hit the deadline). Null: not read this time.
+   * B1 (knowledge program, 2026-10-09): OUR mail to the account from the seller's Sent, last 180 days, at most 50,
+   * newest first (account-intel/sent.ts). Since 2026-10-10 every seller mailbox (execution/seller-sent.ts), each message
+   * carrying the `mailbox` it came from and each mailbox saying whether it was read and when (`mailboxes`). `read` false
+   * with `detail`: a mailbox not configured or not answering (named); `read` true with `detail`: some of it was read (a
+   * query failed or hit the deadline). Null: not read this time.
    */
   sent?: {
-    messages: Array<{ id: string; to: string; subject: string | null; at: string; excerpt: string; threadId: string | null }>;
+    messages: Array<{ id: string; to: string; subject: string | null; at: string; excerpt: string; threadId: string | null; mailbox?: string | null }>;
     read: boolean;
     detail: string | null;
+    mailboxes?: Array<{ address: string; status: 'read' | 'partial' | 'failed' | 'not_configured'; at: string | null; detail: string | null }>;
   } | null;
   /**
    * B2 (knowledge program, 2026-10-09): the HubSpot company's notes, calls, meetings and logged emails, last 365 days,
