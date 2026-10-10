@@ -229,6 +229,12 @@ export interface WorkInput {
   /** Fresh canonical pursuit summaries by account (pursuit/summary.ts), when any. */
   summaries?: ReadonlyMap<string, PursuitSummary>;
   /**
+   * The walk fix (2026-10-10): the human replies a send of ours answered (the pursuit read's `answered`, carried on the
+   * summaries and read past their TTL: a reply answered stays answered). An answered reply is never a card: not
+   * "Someone replied", not "Answer them", not an old reply to triage. An opt-out is never in this list.
+   */
+  answered?: ReadonlyArray<{ accountName: string; from: string; at: string; answeredAt: string; id?: string | null }>;
+  /**
    * What the database alone says per account, read on every load (no HubSpot, no process memory): whether a usable
    * (sendable, grounded, open) thesis exists, and the recorded chosen person.
    */
@@ -574,6 +580,20 @@ export function meetingKeyOf(m: { accountName: string; at: string; meetingId?: n
   return m.meetingId != null ? `meeting:${m.meetingId}` : `meeting:${m.accountName}:${m.at}`;
 }
 
+/**
+ * The walk fix (2026-10-10): whether a reply row is one the pursuit read found answered: the same message id, else the
+ * same account, address and minute.
+ */
+export function isAnsweredReply(answered: WorkInput['answered'], r: { accountName: string; contactEmail: string; receivedAt: string; id?: string | null }): boolean {
+  if (!answered?.length) return false;
+  const minute = (s: string) => {
+    const d = new Date(s);
+    return Number.isNaN(d.getTime()) ? s : d.toISOString().slice(0, 16);
+  };
+  const from = r.contactEmail.trim().toLowerCase();
+  return answered.some((a) => a.accountName === r.accountName && ((!!a.id && !!r.id && a.id === r.id) || (a.from.trim().toLowerCase() === from && minute(a.at) === minute(r.receivedAt))));
+}
+
 /** R63-A B3: the answers that stop outreach at the account (motion/approach.ts STOP_CLASSES, read the same way). */
 const CONVERSATION_STOPS: ReadonlySet<string> = new Set(['do_not_contact', 'meeting_declined', 'problem_rejected', 'not_priority']);
 
@@ -609,6 +629,8 @@ export function workDay(i: WorkInput): WorkDay {
     if (c.kind === 'human' || c.kind === 'opt_out') activity.set(r.accountName, Math.max(activity.get(r.accountName) ?? 0, at));
     const rank = REPLY_RANK[c.kind];
     if (rank === null) continue; // an automatic reply is not work
+    // The walk fix: a human reply we answered (a send of ours after it) is not waiting: no card at all.
+    if (c.kind === 'human' && isAnsweredReply(i.answered, r)) continue;
     const kind: WorkStateKind = c.kind === 'human' ? 'replied' : c.kind === 'opt_out' ? 'opted_out' : 'bounced';
     const quote = (r.subject ?? r.snippet).replace(/\s+/g, ' ').trim().slice(0, 90);
     // R63-A S4: a reply recorded through Capture still owes its answer: "Answer <them>", the prepared answer on the card.

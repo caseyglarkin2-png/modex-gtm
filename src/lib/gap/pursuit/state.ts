@@ -17,6 +17,14 @@
  * opt-out is OPTED OUT; an out-of-office or a bounce never reads as a conversation. Priority is fixed and never
  * re-ordered by a surface: reply > deal / hold > follow up > in motion > ready > choose > research. Pure: the loader
  * (pursuit/load.ts) gathers; this only decides. Pinned by tests/unit/gap/pursuit-state.test.ts.
+ *
+ * The walk fix (Casey, 2026-10-10, "yes, change the command. optimize!"): a human reply WE ANSWERED is not a waiting
+ * reply. Casey answered Craig Morrison (Kenco) six minutes after his Sep 24 reply, from Gmail, and the account said
+ * "Someone replied" every day after. A reply is answered when one of our sends (`sends`: the story's touches, account
+ * history, GAP first touches, Gmail Sent, HubSpot outgoing email) went to that address, or into its thread, after it
+ * (answerOf). An answered reply never makes the account REPLIED; it is carried as `answered` (Work drops its card) and on
+ * `lastInbound.answeredAt` (the story says "they wrote; we answered" once). An opt-out is never answered: it stays an
+ * opt-out until it is recorded. Pinned by tests/unit/gap/walk-answered-reply.test.ts.
  */
 import { cutWords } from '../story/touches';
 import { classifyReply, type ReplyClass } from '../replies/classify';
@@ -45,6 +53,43 @@ export interface PursuitReply {
   triaged: boolean;
   /** C6: how the message reached the account when it came from the placed inbound read (null: the reply list or the history). */
   placedVia?: 'thread' | 'persona' | 'crm_contact' | 'alias' | 'domain' | 'family_deal' | null;
+  /** The walk fix: the inbound message id, when the reader knows it (the reply list, the placed inbound read). */
+  id?: string | null;
+  /** The walk fix: the Gmail thread the message is in, when known (a send of ours in it after the message answers it). */
+  threadId?: string | null;
+}
+
+/** The walk fix: one send of ours (the story's touches): to whom, when, from which record, and its thread when known. */
+export interface OurSend {
+  to: string;
+  at: string;
+  source: string;
+  threadId?: string | null;
+}
+
+/**
+ * The walk fix (2026-10-10): the send of ours that answered a reply: the EARLIEST send after the reply's time that went
+ * to the reply's address, or into the reply's own thread. Null when none did, when the reply carries no address and
+ * no thread (a name alone never matches), or when a time cannot be read.
+ */
+export function answerOf(reply: { from: string; at: string; threadId?: string | null }, sends: readonly OurSend[] | null | undefined): OurSend | null {
+  if (!sends?.length) return null;
+  const from = reply.from.trim().toLowerCase();
+  const address = from.includes('@') ? from : null;
+  const thread = reply.threadId?.trim() || null;
+  if (!address && !thread) return null;
+  const t = new Date(reply.at).getTime();
+  if (!Number.isFinite(t)) return null;
+  let best: { s: OurSend; at: number } | null = null;
+  for (const s of sends) {
+    const at = new Date(s.at).getTime();
+    if (!Number.isFinite(at) || at <= t) continue;
+    const sameAddress = !!address && s.to.trim().toLowerCase() === address;
+    const sameThread = !!thread && !!s.threadId && s.threadId === thread;
+    if (!sameAddress && !sameThread) continue;
+    if (!best || at < best.at) best = { s, at };
+  }
+  return best?.s ?? null;
 }
 
 export interface PursuitInput {
@@ -64,6 +109,8 @@ export interface PursuitInput {
   /** Replies at the account, newest first, with their triage state. */
   replies: PursuitReply[];
   lastOutbound: { to: string; at: string; what: string; source: string } | null;
+  /** The walk fix: our sends at the account (the story's touches), so a reply we answered is not waiting. Absent: none read. */
+  sends?: readonly OurSend[] | null;
   outstandingDraft: { recipient: string; name: string | null; decisionId: string } | null;
   followUpDue: { personaId: number | null; name: string; dueAt: string; cardHref: string } | null;
   /** The resolver's eligible people for the cold first touch, in its order. */
@@ -86,7 +133,9 @@ export interface PursuitState {
   /** May the seller choose or re-order people right now (never under a reply, an opt-out, a deal or a hold)? */
   chooseAllowed: boolean;
   replyClass: ReplyClass | null;
-  lastInbound: { who: string; at: string; kind: ReplyClass['kind']; label: string; /** The reply's first words (for the story's between-us row). */ snippet: string; /** R63-A B4: the address it came from (the story names its sender by it). */ from?: string; /** C6: the identity path that placed the sender here, when the message came from the placed read. */ placedVia?: PursuitReply['placedVia'] } | null;
+  lastInbound: { who: string; at: string; kind: ReplyClass['kind']; label: string; /** The reply's first words (for the story's between-us row). */ snippet: string; /** R63-A B4: the address it came from (the story names its sender by it). */ from?: string; /** C6: the identity path that placed the sender here, when the message came from the placed read. */ placedVia?: PursuitReply['placedVia']; /** The walk fix: the message id, when known. */ id?: string | null; /** The walk fix: when we answered it (a human reply only), else absent. */ answeredAt?: string | null } | null;
+  /** The walk fix: the human replies at the account we answered (a send of ours after each), for Work to drop their cards. */
+  answered?: Array<{ from: string; at: string; answeredAt: string; source: string; id?: string | null }>;
   lastOutbound: PursuitInput['lastOutbound'];
   chosenMissing: string | null;
   /** The next person after the chosen one, when the motion names one, with what unlocks them. */
@@ -140,7 +189,16 @@ const who = (by: string) => (/^casey@|^caseyglarkin/i.test(by) ? 'you' : by.repl
 export function projectPursuitState(i: PursuitInput): PursuitState {
   const newestReply = [...i.replies].sort((a, b) => b.at.localeCompare(a.at))[0] ?? null;
   const replyClass = newestReply ? classifyReply({ snippet: newestReply.snippet, subject: newestReply.subject, from: newestReply.from }) : null;
-  const lastInbound = newestReply && replyClass ? { who: newestReply.name ?? newestReply.from, at: newestReply.at, kind: replyClass.kind, label: replyClass.label, snippet: cutWords(newestReply.snippet), from: newestReply.from, ...(newestReply.placedVia ? { placedVia: newestReply.placedVia } : {}) } : null;
+  // The walk fix: a HUMAN reply a send of ours followed (to them, or in their thread) is answered; an opt-out, an
+  // automatic notice and a bounce never are.
+  const answered: NonNullable<PursuitState['answered']> = [];
+  for (const r of i.replies) {
+    if (classifyReply({ snippet: r.snippet, subject: r.subject, from: r.from }).kind !== 'human') continue;
+    const a = answerOf(r, i.sends);
+    if (a) answered.push({ from: r.from, at: r.at, answeredAt: a.at, source: a.source, ...(r.id ? { id: r.id } : {}) });
+  }
+  const newestAnswer = newestReply && replyClass?.kind === 'human' ? answerOf(newestReply, i.sends) : null;
+  const lastInbound = newestReply && replyClass ? { who: newestReply.name ?? newestReply.from, at: newestReply.at, kind: replyClass.kind, label: replyClass.label, snippet: cutWords(newestReply.snippet), from: newestReply.from, ...(newestReply.placedVia ? { placedVia: newestReply.placedVia } : {}), ...(newestReply.id ? { id: newestReply.id } : {}), ...(newestAnswer ? { answeredAt: newestAnswer.at } : {}) } : null;
 
   // The newest human choice wins; a choice that is no longer eligible is said, never silently dropped.
   const choices = [
@@ -165,6 +223,7 @@ export function projectPursuitState(i: PursuitInput): PursuitState {
     chooseAllowed: false,
     replyClass,
     lastInbound,
+    answered,
     lastOutbound: i.lastOutbound,
     chosenMissing,
     next: i.motion?.next ? { name: i.motion.next.name, title: i.motion.next.title, unlock: i.motion.next.unlock } : null,
@@ -173,9 +232,10 @@ export function projectPursuitState(i: PursuitInput): PursuitState {
     ...over,
   });
 
-  // 1. A reply nobody has recorded, by its class.
+  // 1. A reply nobody has recorded, by its class. The walk fix: a human reply we answered is not waiting (an opt-out
+  // never counts as answered: it stays until it is recorded).
   if (newestReply && replyClass && !newestReply.triaged) {
-    if (replyClass.kind === 'human') {
+    if (replyClass.kind === 'human' && !newestAnswer) {
       return base('replied', {
         person: { key: `reply:${newestReply.from}`, personaId: null, name: newestReply.name ?? newestReply.from, title: null, chosenBy: null },
         stateLine: `${STATE_LINE.replied}: ${newestReply.name ?? newestReply.from}, ${day(newestReply.at)}`,

@@ -22,7 +22,8 @@ import { loadOwnerResolution } from '../people/owner-resolution-load';
 import type { OwnerResolution } from '../people/owner-resolution';
 import { buildPeopleStack, type PeopleStack } from '../people/stack';
 import { readyTargetOf, type ReadyTarget } from '../context/send-target';
-import { isRealRelationship, projectPursuitState, type PursuitInput, type PursuitReply, type PursuitState } from './state';
+import { mergeTouches } from '../story/touches';
+import { isRealRelationship, projectPursuitState, type OurSend, type PursuitInput, type PursuitReply, type PursuitState } from './state';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -87,7 +88,7 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
   for (const r of repliesPage.items.filter((x) => x.accountName === accountName)) {
     // Batch item 8: an answer GAP sent in their thread is the record of their reply (handled, never asked again).
     // R60: the replier by name when the message carries it (the card said "lisa@..." beside "Lisa Scratch").
-    replies.push({ from: r.contactEmail, name: r.fromName?.trim() || null, at: r.receivedAt, subject: r.subject, snippet: r.snippet, triaged: !!r.dispositionId || !!r.answeredAt });
+    replies.push({ from: r.contactEmail, name: r.fromName?.trim() || null, at: r.receivedAt, subject: r.subject, snippet: r.snippet, triaged: !!r.dispositionId || !!r.answeredAt, id: r.id, threadId: r.threadId ?? null });
   }
   const lastSend = ctx.history.filter((h) => h.kind === 'email_sent' || h.kind === 'asset_sent').sort((a, b) => b.at.localeCompare(a.at))[0] ?? null;
   for (const h of ctx.history.filter((x) => x.kind === 'reply')) {
@@ -103,8 +104,14 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
   for (const m of inputs.inbound?.messages ?? []) {
     if (replies.some((r) => Math.abs(new Date(r.at).getTime() - new Date(m.at).getTime()) < 60_000 && (r.from.toLowerCase() === m.from || !r.from.includes('@')))) continue;
     const answered = !!lastSend && lastSend.at > m.at;
-    replies.push({ from: m.from, name: m.name, at: m.at, subject: m.subject, snippet: m.snippet, triaged: answered, placedVia: m.via });
+    replies.push({ from: m.from, name: m.name, at: m.at, subject: m.subject, snippet: m.snippet, triaged: answered, placedVia: m.via, id: m.id, threadId: m.threadId ?? null });
   }
+  // The walk fix (2026-10-10): our sends, read off the story's own touches (the account history, GAP's first touches,
+  // our Gmail Sent and HubSpot's outgoing email, as the inputs carry them; clawd's history is the page's own read and
+  // is not here), so a reply we answered is not "Someone replied" (state.ts answerOf).
+  const sends: OurSend[] = mergeTouches({ history: ctx.history, firstTouches: inputs.firstTouches, clawd: null, people: [], sent: inputs.sent ?? null, engagements: inputs.engagements ?? null, now })
+    .filter((t) => (t.kind === 'send' || t.kind === 'asset') && !!t.address)
+    .map((t) => ({ to: t.address as string, at: t.at, source: t.source, threadId: t.threadId ?? null }));
 
   const choice = choices.get(accountName) ?? null;
   const od = inputs.firstTouches.find((t) => t.state === 'draft outstanding') ?? null;
@@ -135,6 +142,7 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
     choice: choice ? { personaId: choice.primaryPersonaId, by: choice.by, at: choice.at, source: 'motion' } : null,
     activePersona: assigned,
     replies,
+    sends,
     lastOutbound: lastSend ? { to: lastSend.text.replace(/^.*?\bto\s+/, '').slice(0, 80), at: lastSend.at, what: lastSend.text, source: 'GAP history' } : null,
     outstandingDraft: od ? { recipient: od.recipient, name: null, decisionId: od.decisionId ?? '' } : null,
     followUpDue: due ? { personaId: due.persona.id, name: due.persona.displayName ?? due.persona.email ?? 'the person', dueAt: due.touch?.dueAt ?? now.toISOString(), cardHref: packHref(due.id) } : null,

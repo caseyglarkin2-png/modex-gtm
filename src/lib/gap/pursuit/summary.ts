@@ -24,11 +24,12 @@ import { composeStoryAndAnchor } from '../story/compose';
 import { actionableFromPursuit, type ActionableResult } from './actionable';
 import { accountHref } from '../account-intel/href';
 import type { PursuitState } from './state';
+import { ANSWERED_FACTS_MAX_MS, PURSUIT_SUMMARY_TTL_MS } from './summary-ttl';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
 
-export const PURSUIT_SUMMARY_TTL_MS = 15 * 60_000;
+export { ANSWERED_FACTS_MAX_MS, PURSUIT_SUMMARY_TTL_MS };
 /** The shell may show a last-known state this old, labeled with its age; Work never ranks by one older than the TTL. */
 export const PURSUIT_SUMMARY_SHELL_MAX_MS = 24 * 60 * 60_000;
 export const WARM_PER_REQUEST = 3;
@@ -49,6 +50,14 @@ export interface PursuitSummary {
   nextText: string | null;
   /** R10: the actionable result the workspace rendered (intent, the one allowed action, preparation, completion). */
   actionable?: Pick<ActionableResult, 'intent' | 'allowed' | 'preparation' | 'completion' | 'hypothesisId'> | null;
+  /**
+   * The walk fix (2026-10-10): the human replies at the account a send of ours answered (state.ts answerOf). A FACT, not
+   * display state: once answered, a reply stays answered, so Work reads these past the TTL (ANSWERED_FACTS_MAX_MS) and
+   * never makes a "Someone replied" card for one.
+   */
+  answered?: Array<{ from: string; at: string; answeredAt: string; id?: string | null }>;
+  /** The walk fix: when the state is "replied", the reply it is about (its message id when known, and its time). */
+  reply?: { id: string | null; at: string } | null;
   /** When this read happened (ISO). */
   at: string;
 }
@@ -73,6 +82,8 @@ export function rememberPursuitSummary(s: PursuitState, now: Date = new Date(), 
     coldTouchAllowed: s.coldTouchAllowed,
     nextText: nextText ?? a?.recommendation ?? null,
     actionable: a ? { intent: a.intent, allowed: a.allowed, preparation: a.preparation, completion: a.completion, hypothesisId: a.hypothesisId } : null,
+    ...(s.answered?.length ? { answered: s.answered.map((x) => ({ from: x.from, at: x.at, answeredAt: x.answeredAt, ...(x.id ? { id: x.id } : {}) })) } : {}),
+    ...(s.state === 'replied' && s.lastInbound?.kind === 'human' && !s.lastInbound.answeredAt ? { reply: { id: s.lastInbound.id ?? null, at: s.lastInbound.at } } : {}),
     at: now.toISOString(),
   };
   cache.set(s.accountName, out);
