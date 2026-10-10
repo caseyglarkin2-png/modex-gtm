@@ -450,7 +450,8 @@ function betweenUs(i: StoryInput): StoryRow {
     const tooSoon = i.now.getTime() - new Date(last.at).getTime() < ANSWER_GRACE_DAYS * 86_400_000;
     const silence = optedOutBefore ? ` Sent after they opted out on ${day(optedOutBefore.at)}: nothing else goes to them.` : !answered ? (tooSoon ? ' No answer owed yet.' : i.clawdRead === 'ok' ? ' No answer on record.' : " No answer in GAP's records (clawd's history could not be read).") : '';
     // B1: our own Sent folder says it in the first person (we wrote them); the ledgers keep "Last email to".
-    const lead = last.source === 'Gmail Sent' ? `We wrote ${who(last)} on ${day(last.at)}${what}.` : `Last email to ${who(last)}, ${day(last.at)}${what}.`;
+    // R5 review (finding 8): the Sent row names the seller mailbox it came from.
+    const lead = last.source === 'Gmail Sent' ? `We wrote ${who(last)}${last.mailbox ? ` from ${last.mailbox}` : ''} on ${day(last.at)}${what}.` : `Last email to ${who(last)}, ${day(last.at)}${what}.`;
     lastWords = { what, silence };
     if (!merged) s.push({ text: `${lead}${silence}`, tag: !optedOutBefore && !answered && !tooSoon && i.clawdRead !== 'ok' ? 'Unknown' : 'Checked', basis: `${last.source}, ${day(last.at)}${optedOutBefore ? `; their opt-out, ${day(optedOutBefore.at)}` : !answered && !tooSoon && i.clawdRead === 'ok' ? '; GAP, clawd and the account history for the silence' : ''}`, basisIds: [`touch:${last.at}`, ...(optedOutBefore ? [`touch:${optedOutBefore.at}`] : [])] });
   }

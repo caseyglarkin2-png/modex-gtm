@@ -20,6 +20,7 @@ import { askCoverageOf, coverageFromPage } from '@/lib/gap/ask/context';
 import { ASK_COVERAGE_WORDS, coverageLineOf, type AskCoverage } from '@/lib/gap/ask/grounding';
 import type { PursuitState } from '@/lib/gap/pursuit/state';
 import { sellerMailboxSlots } from '@/lib/gap/execution/seller-sent';
+import { peopleNamedIn, storyWroteOn } from '@/lib/gap/work/assignment-packet';
 
 const NOW = new Date('2026-10-09T13:00:00Z');
 const CRAIG = 'craig.morrison@kencogroup.com';
@@ -142,6 +143,15 @@ describe('B1: our Sent on the story', () => {
     expect(answered.sentences.map((s) => s.text).join(' ')).not.toContain('No answer');
     const { row: ledger } = betweenUs(inputsWith({ firstTouches: [{ recipient: CRAIG, sentAt: '2026-09-28T10:00:00.000Z', state: 'sent', personaId: 1 }] }), []);
     expect(ledger.sentences[0].text).toBe('Last email to Craig Morrison, VP Operations, Sep 28 (a GAP first touch). No answer on record.');
+  });
+
+  it('R5 review (finding 8): a Sent row names the mailbox it came from: "We wrote X from casey@freightroll.com on <date>"; the packet still reads the person and the date', () => {
+    const { touches, row } = betweenUs(inputsWith({ sent: sentAt('2026-09-28T10:00:00.000Z', { mailbox: 'casey@freightroll.com' }) }), []);
+    expect(touches[0]).toMatchObject({ kind: 'send', source: 'Gmail Sent', name: 'Craig Morrison', mailbox: 'casey@freightroll.com' });
+    const text = row.sentences[0].text;
+    expect(text).toBe('We wrote Craig Morrison, VP Operations from casey@freightroll.com on Sep 28: "Primo and the yards". No answer on record.');
+    expect(storyWroteOn([text], 'Craig Morrison', NOW)).toEqual({ at: '2026-09-28', source: 'the account story' });
+    expect(peopleNamedIn([text])).toEqual(['Craig Morrison']);
   });
 
   it('the ledger\'s record and the Sent row of the same send are one row, with the subject; two sends count once each', () => {

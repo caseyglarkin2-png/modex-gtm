@@ -98,7 +98,8 @@ describe('the account page reads every seller mailbox through the canonical read
     expect(quiet.sentences.map((s) => [s.text, s.tag])).toEqual([["No touch in GAP's own records; whether we wrote is not known: Gmail Sent (casey@yardflow.ai read 14:02; casey@freightroll.com not read: not configured).", 'Unknown']]);
     const withTouch = storyRow(inputsWith({ sent: await readSent(GAP_ONLY) }));
     const texts = withTouch.sentences.map((s) => s.text);
-    expect(texts[0]).toBe('We wrote Craig Morrison, VP Operations on Sep 20: "The record". No answer on record.');
+    // R5 review (finding 8): the Sent row names the mailbox it came from.
+    expect(texts[0]).toBe('We wrote Craig Morrison, VP Operations from casey@yardflow.ai on Sep 20: "The record". No answer on record.');
     expect(texts.at(-1)).toBe('Our Sent was not fully read: Gmail Sent (casey@yardflow.ai read 14:02; casey@freightroll.com not read: not configured); an email from a mailbox that was not read is not in this story.');
     expect(withTouch.sentences.at(-1)?.tag).toBe('Unknown');
     // Every mailbox read: no such sentence.
@@ -123,7 +124,7 @@ describe('the assignment and the account page agree about the same conversation'
     const page = storyRow(inputsWith({ sent: await readSent(BOTH) }));
     const wrote = storyWroteOn(page.sentences.map((s) => s.text), 'Craig Morrison', NOW);
     expect(wrote?.at).toBe(rel.lastOutbound!.at.slice(0, 10));
-    expect(page.sentences[0].text).toContain('We wrote Craig Morrison, VP Operations on Oct 9: "Primo and the yards".');
+    expect(page.sentences[0].text).toContain('We wrote Craig Morrison, VP Operations from casey@freightroll.com on Oct 9: "Primo and the yards".');
     // The defect this replaces: the account page read the GAP mailbox alone and named an older note as our last.
     const gapOnlyPage = await loadAccountSent(null, { accountName: 'Kenco', addresses: [CRAIG], domains: ['kencogroup.com'], now: NOW, mailboxes: [{ address: 'casey@yardflow.ai', sender: sellerMailboxes(BOTH)[0] }], listSent: reader });
     expect(storyWroteOn(storyRow(inputsWith({ sent: gapOnlyPage })).sentences.map((s) => s.text), 'Craig Morrison', NOW)?.at).toBe('2026-09-20');

@@ -58,6 +58,8 @@ export interface StoryTouch {
   placedVia?: 'thread' | 'persona' | 'crm_contact' | 'alias' | 'domain' | 'family_deal' | null;
   /** The walk fix (2026-10-10): the Gmail thread of a Sent message, so a send in a buyer's thread answers their reply. */
   threadId?: string | null;
+  /** R5 review (finding 8): the seller mailbox a Sent row came from (casey@yardflow.ai, casey@freightroll.com), said on the story. */
+  mailbox?: string | null;
 }
 
 /** C6: the placement in the story's words ("placed by its domain"). */
@@ -129,7 +131,7 @@ export function mergeTouches(x: {
   // B1: our Sent mail (the GAP mailbox): a send of ours to a person at the account, named by the address it went to.
   for (const m of x.sent?.messages ?? []) {
     if (!m.to || isInternalRecipient(m.to)) continue;
-    out.push({ kind: 'send', at: m.at, ...person(m.to), what: m.subject?.trim() || 'email', source: 'Gmail Sent', excerpt: m.excerpt || undefined, ...(m.threadId ? { threadId: m.threadId } : {}) });
+    out.push({ kind: 'send', at: m.at, ...person(m.to), what: m.subject?.trim() || 'email', source: 'Gmail Sent', excerpt: m.excerpt || undefined, ...(m.threadId ? { threadId: m.threadId } : {}), ...(m.mailbox ? { mailbox: m.mailbox } : {}) });
   }
   // B2: HubSpot engagements. A logged email is a send of ours or their reply (by its direction and sender); a note, a
   // call and a meeting are what the deal team wrote down, told as such, never as buyer words.

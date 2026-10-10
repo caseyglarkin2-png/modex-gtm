@@ -246,7 +246,8 @@ export function storyDate(words: string, now: Date): string | null {
 export function storyWroteOn(lines: readonly string[], name: string, now: Date): { at: string; source: string } | null {
   for (const raw of lines) {
     const l = cleanLine(raw);
-    const m = /^(?:Last email to|We wrote)\s+(.+?)(?:,\s+([A-Z][a-z]{2}\s+\d{1,2}(?:,\s*\d{4})?)|\s+on\s+([A-Z][a-z]{2}\s+\d{1,2}(?:,\s*\d{4})?))[:.]/.exec(l);
+    // R5 review (finding 8): "We wrote <name> from <mailbox> on <date>" names the mailbox between the person and the date.
+    const m = /^(?:Last email to|We wrote)\s+(.+?)(?:\s+from\s+\S+@\S+)?(?:,\s+([A-Z][a-z]{2}\s+\d{1,2}(?:,\s*\d{4})?)|\s+on\s+([A-Z][a-z]{2}\s+\d{1,2}(?:,\s*\d{4})?))[:.]/.exec(l);
     if (!m) continue;
     const named = m[1].split(',')[0].trim();
     if (nameKeyOf(named) !== nameKeyOf(name)) continue;
@@ -277,7 +278,7 @@ export function peopleNamedIn(lines: readonly string[]): string[] {
   const out: string[] = [];
   for (const raw of lines) {
     const l = cleanLine(raw);
-    const m = /^(?:Last email to|We wrote)\s+([A-Z][\w'.-]+(?:\s+[A-Z][\w'.-]+)+?)(?:,|\s+on\b)/.exec(l) ?? /^([A-Z][\w'.-]+(?:\s+[A-Z][\w'.-]+)+?)(?:,.*?)?\s+(?:replied|wrote|opted out)\b/.exec(l);
+    const m = /^(?:Last email to|We wrote)\s+([A-Z][\w'.-]+(?:\s+[A-Z][\w'.-]+)+?)(?:,|\s+on\b|\s+from\b)/.exec(l) ?? /^([A-Z][\w'.-]+(?:\s+[A-Z][\w'.-]+)+?)(?:,.*?)?\s+(?:replied|wrote|opted out)\b/.exec(l);
     if (m && !out.some((x) => nameKeyOf(x) === nameKeyOf(m[1]))) out.push(m[1]);
   }
   return out;
