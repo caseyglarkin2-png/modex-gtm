@@ -11,6 +11,8 @@ import { ledgerDb } from './fixtures/ledger-db';
 import { buildAssignment } from '@/lib/gap/work/assignment';
 import { isStaleBriefingDay, staleDayText } from '@/lib/gap/replies/commands-apply';
 import { mergeTouches } from '@/lib/gap/story/touches';
+import { knowledgeEvidence } from '@/lib/gap/work/list';
+import { rankPeople } from '@/lib/gap/work/intel';
 import type { DayPlan, PlanItem } from '@/lib/gap/work/plan';
 import type { AskContext } from '@/lib/gap/ask/grounding';
 import type { RelationshipState } from '@/lib/gap/work/relationship-state';
@@ -94,5 +96,29 @@ describe('a HubSpot-logged reply is classified', () => {
     expect(byKind.out_of_office).toContain('jamie');
     expect(byKind.human).toContain('craig');
     expect(replies.find((r) => r.replyKind === 'out_of_office')?.replyLabel).not.toBe('replied');
+  });
+});
+
+describe('ranking evidence and the re-engage list', () => {
+  it('a vault next action overdue by more than 30 days is not ranking evidence; one due last week is', () => {
+    const k = (due: string) => ({ lastConversationAt: null, nextAction: 'One pilot Brian owns, configured per site so it carves cleanly between the two companies, with the number Roger takes to the board.', nextActionDue: due, noteUpdatedAt: null } as unknown as Parameters<typeof knowledgeEvidence>[0]);
+    expect(knowledgeEvidence(k('2026-07-17'), NOW).nextAction).toBeNull();
+    const recent = knowledgeEvidence(k('2026-10-03'), NOW).nextAction;
+    expect(recent).toMatch(/^the vault's next action: One pilot Brian owns/);
+    expect(recent).not.toMatch(/\bwit,/);
+  });
+
+  it('rankPeople drops a vendor pitch and a calendar response; a quiet buyer stays', () => {
+    const old = new Date('2026-08-01T12:00:00Z');
+    const rows = [
+      { from_email: 'sales@leadgenpro.io', from_name: 'LeadGen Pro', subject: 'Fill your pipeline: lead generation with a limited-time offer', received_at: old, thread_account: null },
+      { from_email: 'ops@acmefoods.com', from_name: 'Dana Ops', subject: 'Re: yard throughput at Reno', received_at: old, thread_account: 'Acme Foods' },
+      { from_email: 'carl@acmefoods.com', from_name: 'Carl', subject: 'Accepted: Yard walk @ Tue Aug 4', received_at: old, thread_account: 'Acme Foods' },
+    ];
+    const out = rankPeople(rows, [], { now: NOW, decided: new Set(), unsubscribed: new Set(), coverage: undefined, identity: null, states: null, verdicts: null });
+    const emails = out.map((i) => (i as unknown as { email?: string | null }).email ?? (i.title ?? '')).map(String);
+    expect(emails.some((e) => e.includes('leadgenpro'))).toBe(false);
+    expect(emails.some((e) => e.includes('Accepted') || e.includes('carl@'))).toBe(false);
+    expect(out.length).toBe(1);
   });
 });

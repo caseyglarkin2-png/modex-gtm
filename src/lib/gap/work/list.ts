@@ -196,6 +196,8 @@ export interface AccountKnowledge {
 export const KNOWLEDGE_CONVERSATION_DAYS = 30;
 /** C2: a vault next action due within this many days (or past) is deal context. */
 export const KNOWLEDGE_NEXT_ACTION_DAYS = 7;
+/** The morning audit of October 10: a vault next action overdue by more than this many days ranked an item first (KDP, due July 17); past that it is context, not evidence. */
+export const KNOWLEDGE_NEXT_ACTION_STALE_DAYS = 30;
 
 export interface WorkInput {
   now: Date;
@@ -540,7 +542,7 @@ export function knowledgeEvidence(k: AccountKnowledge, now: Date): { conversatio
   const recent = Number.isFinite(convAt) && convAt <= now.getTime() && now.getTime() - convAt <= KNOWLEDGE_CONVERSATION_DAYS * 86_400_000;
   const conversation = recent ? `a conversation ${day(k.lastConversationAt as string)} (the vault)` : null;
   const due = k.nextActionDue && isDay(k.nextActionDue) ? k.nextActionDue : null;
-  const soon = !!due && due <= addDays(nyDay(now), KNOWLEDGE_NEXT_ACTION_DAYS);
+  const soon = !!due && due <= addDays(nyDay(now), KNOWLEDGE_NEXT_ACTION_DAYS) && due >= addDays(nyDay(now), -KNOWLEDGE_NEXT_ACTION_STALE_DAYS);
   const nextAction = soon && k.nextAction ? `the vault's next action: ${cutWords(k.nextAction.replace(/\.$/, ''), 140).replace(/\.$/, '')}, due ${dayLabel(due as string, now)}` : null;
   return { conversation, nextAction };
 }

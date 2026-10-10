@@ -23,7 +23,7 @@ import { importIntelligenceBatch } from '../../src/lib/gap/signals/intelligence-
 import { INTEL_IMPORTED_EVENT, producerLabel } from '../../src/lib/gap/signals/intelligence-record';
 import { defaultIntel } from '../../src/lib/gap/work/briefing-send';
 import { renderBriefing } from '../../src/lib/gap/work/briefing';
-import { loadDayPlan, planDay, type DayPlan, type PlanItem } from '../../src/lib/gap/work/plan';
+import { loadDayPlan, planDay, type DayPlan, type PlanItem, decisionIdsFromCandidates } from '../../src/lib/gap/work/plan';
 import { loadWorkDay } from '../../src/lib/gap/work/load-day';
 import { loadInDealsSummary } from '../../src/lib/gap/deals/in-deals';
 import { nyDay } from '../../src/lib/gap/work/dates';
@@ -118,7 +118,7 @@ async function main() {
     const prisma = hybrid(real, mem, ['gapSignal', 'gapAuditEvent']);
     // 4. The plan (the stored day, else planned read-only through the day builder), the intelligence, the email.
     const stored: DayPlan | null = await loadDayPlan(prisma, day).catch(() => null);
-    const plan: DayPlan = stored ?? (await planDay(prisma, { now, load: async () => { const l = await loadWorkDay(prisma, { lane: false, preview: false, fresh: true, now }); return { day: l.day, candidates: l.data.workInput.candidates } as Any; } }, 'preview-harness'));
+    const plan: DayPlan = stored ?? (await planDay(prisma, { now, load: async () => { const l = await loadWorkDay(prisma, { lane: false, preview: false, fresh: true, now }); return { day: l.day, decisionIds: decisionIdsFromCandidates(l.data.workInput.candidates) } as Any; } }, 'preview-harness'));
     const summary = await loadInDealsSummary(prisma, { now }).catch(() => null);
     const inventory = fixture.sources.map((s) => `${producerLabel(s.producer)} (${s.distinctReports} report${s.distinctReports === 1 ? '' : 's'}, ${s.reports.reduce((n, r) => n + r.items, 0)} items, through ${s.reports[s.reports.length - 1]?.reportedOn ?? '?'})`);
     // IW13: the same coverage paragraph the cron prints (the producer status over the overlay's import ledger and
