@@ -31,7 +31,7 @@ import type { IntelItem, PursuedItem } from './intel';
 import { dateOnlyText } from '../signals/intelligence-record';
 import { NEVER_WORDS, neverDomainWords } from './truth-text';
 import { cleanLine, dedupeSentences } from './clean-text';
-import { isDealHygiene, newConversationLine, walkOrder } from './walk';
+import { isDealHygiene, newConversationLine, walkBegins, walkOrder } from './walk';
 
 /**
  * GUI-11 (the Gmail action UI audit, 2026-10-10): the template rules this renderer holds, pinned by
@@ -519,7 +519,8 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
   } else {
     // C31: the START target is the walk's first item (work/walk.ts; item 1 when the walk keeps the plan's order),
     // named here with its number so the pointer and the rows reconcile.
-    const first = walk[0] ?? null;
+    // A held item is recorded and walked past by START, so the pointer names the first item that is not held.
+    const first = walkBegins(plan.items) ?? null;
     const firstNo = first ? plan.items.findIndex((it) => it.key === first.key) + 1 : 0;
     if (first) {
       lines.push('', `Begin with item ${firstNo}, ${first.accountName}: ${endSentence(first.title)} ${links.start}`, '');

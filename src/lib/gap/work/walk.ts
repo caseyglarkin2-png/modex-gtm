@@ -38,6 +38,14 @@ export function walkSkips(it: Pick<PlanItem, 'kind' | 'stateKind' | 'title'> & {
 /** The walk's groups by plan item kind; anything else walks last. */
 export const WALK_GROUP: Readonly<Partial<Record<PlanItem['kind'], number>>> = { reply: 0, commitment: 1, meeting: 1, follow_up: 1, deal: 1, ready: 2, review: 3, admin: 4 };
 
+/** A held item (the prepared email names another person; "Held: ..." on the plan): START records the hold and walks past it, so the briefing never says "Begin with" it. */
+export const isHeld = (it: Pick<PlanItem, 'title'> & { hold?: PlanItem['hold'] }): boolean => !!it.hold || /^Held:/.test(it.title);
+
+/** The item the briefing points at: the first walked item that is not held. */
+export function walkBegins<T extends WalkItem & { hold?: PlanItem['hold'] }>(items: readonly T[]): T | null {
+  return walkOrder(items).find((it) => !isHeld(it)) ?? null;
+}
+
 /** The plan's items in the order START and NEXT walk them, deal hygiene left out. Stable. */
 export function walkOrder<T extends WalkItem>(items: readonly T[]): T[] {
   return items
