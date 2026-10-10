@@ -27,12 +27,12 @@ const file = (over: Partial<DriveFile> & { id: string; name: string; mimeType: s
 const GEMINI_AUG = fx('kenco-discovery-2026-07-16.gemini.md').replace(/Jul 16, 2026/g, 'Aug 29, 2026').replace(/Discovery/g, 'Case studies');
 
 interface Fake { client: DriveClient; calls: string[] }
-function fakeClient(opts: { folders: Record<string, string>; files: Record<string, DriveFile[]>; texts?: Record<string, string>; bytes?: Record<string, Buffer>; fail?: 'list' | 'folders'; byId?: Record<string, DriveFile | null>; subfolders?: Record<string, Array<{ id: string; name: string }>> }): Fake {
+function fakeClient(opts: { folders: Record<string, string>; files: Record<string, DriveFile[]>; texts?: Record<string, string>; bytes?: Record<string, Buffer>; fail?: 'list' | 'folders'; failMessage?: string; byId?: Record<string, DriveFile | null>; subfolders?: Record<string, Array<{ id: string; name: string }>> }): Fake {
   const calls: string[] = [];
   const client: DriveClient = {
     async resolveFolders(names) {
       calls.push(`folders:${names.join(',')}`);
-      if (opts.fail === 'folders') throw new Error('Drive refused the request (403)');
+      if (opts.fail === 'folders') throw new Error(opts.failMessage ?? 'Drive refused the request (403)');
       // As the real resolver: names compare normalized and the folder comes back under its real name.
       return names.flatMap((n) => Object.entries(opts.folders).filter(([real]) => normalizeFolderName(real) === normalizeFolderName(n)).slice(0, 1).map(([real, id]) => ({ id, name: real })));
     },
@@ -214,7 +214,7 @@ describe('the Drive sync', () => {
   it('NOT CONFIGURED is one ledger row naming the variables, said by producer status in words; a dry run writes nothing', async () => {
     const db = ledgerDb({ accounts: [], aliases: [] });
     const r = await runDriveSync(db.client(), { now: NOW, client: null, folders: ['Meet Recordings'] });
-    expect(r).toMatchObject({ ok: false, status: 'not_configured', detail: 'not configured: set GAP_DRIVE_REFRESH_TOKEN (with GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET) or the delegation pair GAP_DRIVE_DWD_SA_JSON and GAP_DRIVE_USER_EMAIL' });
+    expect(r).toMatchObject({ ok: false, status: 'not_configured', detail: 'not configured: set GAP_DRIVE_REFRESH_TOKEN (with GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET) or the delegation pair GAP_DRIVE_DWD_SA_JSON and GAP_DRIVE_USER_EMAIL, or set GAP_DRIVE_DELEGATION=gmail after adding the drive.readonly scope to the existing delegation' });
     expect(r.ledgerId).toBeTruthy();
     expect(db.store.gapAuditEvent[0]).toMatchObject({ kind: INTEL_IMPORTED_EVENT, subject_type: 'producer', subject_id: 'google_drive', payload: { producerState: { status: NOT_CONFIGURED_STATUS } } });
     const again = await runDriveSync(db.client(), { now: new Date(NOW.getTime() + 6 * 3_600_000), client: null, folders: ['Meet Recordings'] });
@@ -223,8 +223,8 @@ describe('the Drive sync', () => {
     const statuses = await loadProducerStatus(db.client(), new Date(NOW.getTime() + 86_400_000 * 30), { env: {} });
     const drive = statuses.find((s) => s.producer === 'google_drive')!;
     expect(drive.state).toBe('not_configured');
-    expect(drive.line).toBe('Google Drive document: not configured: set GAP_DRIVE_REFRESH_TOKEN (or the delegation pair).');
-    expect(producerStatusLine(statuses)).toContain('Google Drive document: not configured: set GAP_DRIVE_REFRESH_TOKEN (or the delegation pair)');
+    expect(drive.line).toBe('Google Drive document: not configured: set GAP_DRIVE_REFRESH_TOKEN (or the delegation pair), or set GAP_DRIVE_DELEGATION=gmail after adding the drive.readonly scope to the existing delegation.');
+    expect(producerStatusLine(statuses)).toContain('Google Drive document: not configured: set GAP_DRIVE_REFRESH_TOKEN (or the delegation pair), or set GAP_DRIVE_DELEGATION=gmail after adding the drive.readonly scope to the existing delegation');
     expect(statuses.find((s) => s.producer === 'gemini_notes')!.state).toBe('never');
     const dry = await runDriveSync(db.client(), { now: NOW, client: fakeClient(base()).client, folders: ['Meet Recordings'], limit: 5, dryRun: true, state: { folders: {} }, firstRunDays: 120 });
     expect(dry.ok && dry).toMatchObject({ listed: 5, records: 2, ledgerId: null, imported: { accepted: 0 } });
@@ -249,5 +249,11 @@ describe('the Drive sync', () => {
     expect(statuses.find((s) => s.producer === 'google_drive')!.line).toContain('the last run failed (network: socket hang up)');
     const refused = await runDriveSync(db.client(), { now: new Date(NOW.getTime() + 2 * 3_600_000), client: fakeClient({ ...base(), fail: 'folders' }).client, folders: ['Meet Recordings'] });
     expect(refused).toMatchObject({ ok: false, status: 'failed', error: 'Drive refused the request (403)' });
+    // GAP_DRIVE_DELEGATION=gmail before the admin adds the scope: the failed row carries Google's words and the step, whole, to health.
+    const words = 'Drive delegation (GAP_DRIVE_DELEGATION=gmail) refused: Client is unauthorized to retrieve access tokens using this method, or client not authorized for any of the scopes requested.; the Workspace admin adds the drive.readonly scope to the GAP_GOOGLE_DWD_SA_JSON delegation';
+    const scope = await runDriveSync(db.client(), { now: new Date(NOW.getTime() + 3 * 3_600_000), client: fakeClient({ ...base(), fail: 'folders', failMessage: words }).client, folders: ['Meet Recordings'] });
+    expect(scope).toMatchObject({ ok: false, status: 'failed', error: words });
+    const after = await loadProducerStatus(db.client(), new Date(NOW.getTime() + 4 * 3_600_000), { env: {} });
+    expect(after.find((s) => s.producer === 'google_drive')!.line).toContain(`the last run failed (${words})`);
   });
 });

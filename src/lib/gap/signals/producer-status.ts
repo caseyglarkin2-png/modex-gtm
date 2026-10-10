@@ -69,8 +69,11 @@ function stateOf(lastAt: string | null, cadenceDays: number, failed: boolean, no
   return now.getTime() - new Date(lastAt).getTime() > (cadenceDays + 1) * 86_400_000 ? 'stale' : 'current';
 }
 
-/** The Drive sync's own words for its missing credential, else the generic sentence. */
-const NOT_CONFIGURED_WORDS = 'not configured: set GAP_DRIVE_REFRESH_TOKEN (or the delegation pair)';
+/**
+ * The Drive sync's own words for its missing credential, else the generic sentence; the last option is the path that
+ * needs no new secret (drive-client.ts DRIVE_DELEGATION_OPTION, the same words).
+ */
+const NOT_CONFIGURED_WORDS = 'not configured: set GAP_DRIVE_REFRESH_TOKEN (or the delegation pair), or set GAP_DRIVE_DELEGATION=gmail after adding the drive.readonly scope to the existing delegation';
 const notConfiguredLine = (s: Pick<ProducerStatus, 'label' | 'lastProducerState' | 'totalItems'>): string => `${s.label}: ${s.lastProducerState?.detail?.startsWith('not configured') ? NOT_CONFIGURED_WORDS : (s.lastProducerState?.detail ?? NOT_CONFIGURED_WORDS)}${s.totalItems ? ` (${plural(s.totalItems, 'item')} held from earlier runs)` : ''}.`;
 
 function importLine(s: Omit<ProducerStatus, 'line'>): string {
@@ -113,7 +116,8 @@ export async function loadProducerStatus(prisma: PrismaLike, now: Date, opts: { 
       lastRunId: typeof p.runId === 'string' ? p.runId : null,
       lastReportedOn: typeof p.reportedOnTo === 'string' ? p.reportedOnTo : null,
       lastCounts: r ? { accepted: n(p.accepted), revised: n(p.revised), duplicates: n(p.duplicates), invalid: n(p.invalid) } : null,
-      lastProducerState: status ? { status, detail: typeof ps?.detail === 'string' && ps.detail ? ps.detail.slice(0, 160) : null } : null,
+      // 300, as the producers cut their own detail: a refused Drive delegation carries Google's words and the scope step.
+      lastProducerState: status ? { status, detail: typeof ps?.detail === 'string' && ps.detail ? ps.detail.slice(0, 300) : null } : null,
       cursor: cursorOf.get(producer) ?? null,
       totalItems,
       totalReports,

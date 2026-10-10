@@ -6,9 +6,10 @@
  * text it yields; a PDF is unreadable with the exact reason; the HTTP client's folder query, listing, export, 404
  * as null, a refused token as an auth error; the credential travels only in the Authorization header.
  */
+import { generateKeyPairSync } from 'node:crypto';
 import { crc32, deflateRawSync } from 'node:zlib';
 import { describe, expect, it } from 'vitest';
-import { DRIVE_DEFAULT_FOLDERS, DRIVE_YARD_AUDIT_FOLDER, DriveApiError, PDF_UNREADABLE_REASON, createDriveClient, driveConfigFromEnv, driveFoldersFromEnv, driveMaxBytes, extractDriveText, normalizeFolderName, readZipEntries, textOfDocx, textOfPptx, textOfXlsx } from '@/lib/gap/signals/drive-client';
+import { DRIVE_CREDENTIAL_VARS, DRIVE_DEFAULT_FOLDERS, DRIVE_YARD_AUDIT_FOLDER, DriveApiError, PDF_UNREADABLE_REASON, createDriveClient, driveConfigFromEnv, driveFoldersFromEnv, driveMaxBytes, extractDriveText, normalizeFolderName, readZipEntries, textOfDocx, textOfPptx, textOfXlsx } from '@/lib/gap/signals/drive-client';
 
 /** A minimal zip writer: local headers, central directory, end record; `deflate` chooses the method per entry. */
 function zip(entries: Array<{ name: string; text: string; deflate?: boolean }>): Buffer {
@@ -75,6 +76,39 @@ describe('the Drive reader', () => {
     expect(driveFoldersFromEnv({ GAP_DRIVE_FOLDERS: 'Meet Recordings, 1AbCdEfGhIjKlMnOpQrStUvWxYz0123 ,Meet Recordings' })).toEqual(['Meet Recordings', '1AbCdEfGhIjKlMnOpQrStUvWxYz0123']);
     expect(driveMaxBytes({})).toBe(8 * 1024 * 1024);
     expect(driveMaxBytes({ GAP_DRIVE_MAX_BYTES: '1024' })).toBe(1024);
+  });
+
+  it('GAP_DRIVE_DELEGATION=gmail (2026-10-10): with no Drive credential the GAP sender delegation is used for drive.readonly; a Drive credential still wins; a refusal says Google\'s words and the scope step', async () => {
+    const gmailPair = { GAP_GOOGLE_DWD_SA_JSON: '{"sa":"gmail"}', GAP_GMAIL_USER_EMAIL: 'Casey@YardFlow.ai' };
+    expect(driveConfigFromEnv({ ...gmailPair, GAP_DRIVE_DELEGATION: 'gmail' })).toEqual({ kind: 'delegated', serviceAccountJson: '{"sa":"gmail"}', userEmail: 'casey@yardflow.ai', via: 'gmail' });
+    expect(driveConfigFromEnv({ ...gmailPair, GAP_DRIVE_DELEGATION: ' Gmail ' }), 'the flag reads case and spacing loosely').toMatchObject({ via: 'gmail' });
+    expect(driveConfigFromEnv(gmailPair), 'without the flag the Gmail delegation is never borrowed').toBeNull();
+    expect(driveConfigFromEnv({ GAP_DRIVE_DELEGATION: 'gmail' }), 'the flag without the Gmail pair configures nothing').toBeNull();
+    expect(driveConfigFromEnv({ GAP_DRIVE_DELEGATION: 'gmail', GAP_GOOGLE_DWD_SA_JSON: '{}' })).toBeNull();
+    expect(driveConfigFromEnv({ ...gmailPair, GAP_DRIVE_DELEGATION: 'yes' }), 'only the word gmail turns it on').toBeNull();
+    expect(driveConfigFromEnv({ ...gmailPair, GAP_DRIVE_DELEGATION: 'gmail', GAP_DRIVE_DWD_SA_JSON: '{"sa":"drive"}', GAP_DRIVE_USER_EMAIL: 'casey@freightroll.com' }), 'a Drive-specific pair wins').toEqual({ kind: 'delegated', serviceAccountJson: '{"sa":"drive"}', userEmail: 'casey@freightroll.com' });
+    expect(driveConfigFromEnv({ ...gmailPair, GAP_DRIVE_DELEGATION: 'gmail', GAP_DRIVE_REFRESH_TOKEN: 'r', GOOGLE_CLIENT_ID: 'c', GOOGLE_CLIENT_SECRET: 's' })).toMatchObject({ kind: 'refresh_token' });
+    expect(DRIVE_CREDENTIAL_VARS).toContain('or set GAP_DRIVE_DELEGATION=gmail after adding the drive.readonly scope to the existing delegation');
+
+    // The grant asks for drive.readonly as the Gmail user; the admin has not added the scope: Google's words, then the step.
+    const { privateKey } = generateKeyPairSync('rsa', { modulusLength: 2048 });
+    const saJson = JSON.stringify({ client_email: 'gap-sender@yardflow.iam.gserviceaccount.com', private_key: privateKey.export({ type: 'pkcs8', format: 'pem' }).toString() });
+    const config = driveConfigFromEnv({ GAP_DRIVE_DELEGATION: 'gmail', GAP_GOOGLE_DWD_SA_JSON: saJson, GAP_GMAIL_USER_EMAIL: 'casey@yardflow.ai' })!;
+    let assertion = '';
+    const fetchImpl = (async (url: string | URL, init?: RequestInit) => {
+      if (String(url).startsWith('https://oauth2.googleapis.com/token')) {
+        assertion = new URLSearchParams(String(init?.body)).get('assertion') ?? '';
+        return new Response(JSON.stringify({ error: 'unauthorized_client', error_description: 'Client is unauthorized to retrieve access tokens using this method, or client not authorized for any of the scopes requested.' }), { status: 401 });
+      }
+      return new Response('{}', { status: 500 });
+    }) as unknown as typeof fetch;
+    const err = await createDriveClient(config, { fetchImpl }).listFolders('f-audits', 5).catch((e: unknown) => e);
+    expect(err).toBeInstanceOf(DriveApiError);
+    expect((err as DriveApiError).kind).toBe('auth');
+    expect((err as Error).message).toBe('Drive delegation (GAP_DRIVE_DELEGATION=gmail) refused: Client is unauthorized to retrieve access tokens using this method, or client not authorized for any of the scopes requested.; the Workspace admin adds the drive.readonly scope to the GAP_GOOGLE_DWD_SA_JSON delegation');
+    expect((err as Error).message).not.toContain('PRIVATE KEY');
+    const claims = JSON.parse(Buffer.from(assertion.split('.')[1], 'base64url').toString()) as { sub: string; scope: string };
+    expect(claims).toMatchObject({ sub: 'casey@yardflow.ai', scope: 'https://www.googleapis.com/auth/drive.readonly' });
   });
 
   it('the folder names (2026-10-10): the defaults name the real yard-audit root; names compare normalized (case, any dash or spacing run)', async () => {
