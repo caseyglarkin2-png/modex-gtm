@@ -87,6 +87,47 @@ export interface PlanItem {
   carriedFrom?: string;
   /** C32: the card context (motion, last exchange, next action, source and date), when the card carried it. */
   context?: PlanItemContext;
+  /** IW15 at plan time: the prepared email names a different person than the card; the title says held and the assignment holds. */
+  hold?: { reason: 'recipient_mismatch'; recipient: string };
+}
+
+/** The one title a held item carries everywhere (the plan, the digest, the subject, the packet's first line). */
+export const heldTitle = (recipientName: string, itemName: string) => `Held: the prepared email names ${recipientName}, not ${itemName}`;
+
+/** A name normalised for a same-person comparison ("Morrison, Craig" is "Craig Morrison"). */
+const nameKeyOf = (s: string | null | undefined): string => (s ?? '').toLowerCase().replace(/[^a-z\s]/g, ' ').split(/\s+/).filter(Boolean).sort().join(' ');
+
+/** The pack reader the hold check uses: the decision's action pack persona (name, email); injectable for tests. */
+export type PackPersonaReader = (decisionId: string) => Promise<{ name: string | null; email: string | null } | null>;
+
+async function defaultPackPersona(prisma: PrismaLike, decisionId: string): Promise<{ name: string | null; email: string | null } | null> {
+  const d = await prisma.routingDecision.findUnique({ where: { id: decisionId }, select: { hypothesis_id: true } });
+  if (!d?.hypothesis_id) return null;
+  const { loadActionPack } = await import('../execution/action-pack');
+  const pack = await loadActionPack(prisma, { hypothesisId: d.hypothesis_id, decisionId });
+  const persona = (pack as { persona?: { name?: string | null; email?: string | null } | null } | null)?.persona ?? null;
+  return persona ? { name: persona.name ?? null, email: persona.email ?? null } : null;
+}
+
+/**
+ * IW15 at plan time (Casey, 2026-10-10: "make the subject, plan state, digest and assignment all describe the same
+ * held state"): a ready item whose pack's prepared email names a different person than the card is marked held here,
+ * so the digest line, the subject and the packet agree before START walks the plan. A read that fails leaves the item
+ * as it is (the assignment's own check still holds it). Bounded to the ready items with a decision.
+ */
+export async function applyRecipientHolds(prisma: PrismaLike, items: PlanItem[], reader?: PackPersonaReader): Promise<PlanItem[]> {
+  const read = reader ?? ((id: string) => defaultPackPersona(prisma, id));
+  const out: PlanItem[] = [];
+  for (const it of items) {
+    if (it.kind !== 'ready' || !it.refs.decisionId || !it.person?.name) { out.push(it); continue; }
+    let persona: { name: string | null; email: string | null } | null = null;
+    try { persona = await read(it.refs.decisionId); } catch { persona = null; }
+    const recipient = persona?.name ?? null;
+    if (recipient && nameKeyOf(recipient) && nameKeyOf(it.person.name) && nameKeyOf(recipient) !== nameKeyOf(it.person.name)) {
+      out.push({ ...it, title: heldTitle(recipient, it.person.name), hold: { reason: 'recipient_mismatch', recipient } });
+    } else out.push(it);
+  }
+  return out;
 }
 
 /** What a refreshed revision changed against the one it supersedes, by item key. */
@@ -382,7 +423,7 @@ export async function loadDayPlan(prisma: PrismaLike, day: string): Promise<DayP
  */
 export type PlanLoad = WorkDay | { day: WorkDay; decisionIds?: ReadonlyMap<string, string> };
 
-export async function planDay(prisma: PrismaLike, input: { now: Date; load: () => Promise<PlanLoad>; refresh?: boolean }, actor: string): Promise<DayPlan> {
+export async function planDay(prisma: PrismaLike, input: { now: Date; load: () => Promise<PlanLoad>; refresh?: boolean; packPersona?: PackPersonaReader }, actor: string): Promise<DayPlan> {
   const day = nyDay(input.now);
   const existing = await loadDayPlan(prisma, day);
   if (existing && !input.refresh) return existing;
@@ -393,7 +434,7 @@ export async function planDay(prisma: PrismaLike, input: { now: Date; load: () =
   const built = 'cards' in loaded ? loaded : loaded.day;
   const decisionIds = 'cards' in loaded ? undefined : loaded.decisionIds;
   const previous = await loadPreviousPlan(prisma, day, { now: input.now }).catch(() => null);
-  let items = markCarried(itemsForDay(built, day, { decisionIds }), previous);
+  let items = markCarried(await applyRecipientHolds(prisma, itemsForDay(built, day, { decisionIds }), input.packPersona), previous);
   const counts = { counts: built.counts, waiting: built.waiting.length, snoozed: built.snoozed.length };
 
   if (!existing) {

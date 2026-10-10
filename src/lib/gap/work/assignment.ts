@@ -37,7 +37,7 @@ import { gapGmailSender } from '../execution/gap-sender';
 import { buildAssignmentPacket, renderPacketHtml, renderPacketText, type AssignmentPacket, type BuildPacketDeps } from './assignment-packet';
 import { dealCoverageFrom } from './deal-coverage';
 import { loadPursued, type PursuedItem } from './intel';
-import type { DayPlan, PlanItem } from './plan';
+import { heldTitle, type DayPlan, type PlanItem } from './plan';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -57,8 +57,12 @@ export interface PreparedAngle {
   kind: 'angle';
   /** The writer the angle was developed for (name, else email). */
   who: string;
+  /** The writer's address when the pursued item carries one. */
+  email?: string | null;
   whyItMatters: string;
   opener: string | null;
+  /** ISO instant the angle was decided (the pursue), so later correspondence with its target can be seen to supersede it. */
+  preparedAt?: string | null;
 }
 export type Prepared = PreparedEmail | PreparedAngle | { kind: 'none' };
 
@@ -127,6 +131,7 @@ export interface BuildAssignmentInput {
 }
 
 export const assignmentTag = (itemToken: string, revision: number) => `[GAP#${itemToken}.${revision}]`;
+export { heldTitle };
 
 function itemLink(input: BuildAssignmentInput): string {
   const base = input.baseUrl.replace(/\/$/, '');
@@ -148,7 +153,7 @@ export async function buildAssignment(prisma: PrismaLike, input: BuildAssignment
   const pack = item.refs.decisionId ? await (deps.pack ?? packForDecision)(prisma, { decisionId: item.refs.decisionId }).catch(() => null) : null;
 
   const n = item.rank + 1;
-  const subject = `GAP ${n} of ${plan.items.length}, ${item.accountName}: ${item.title} ${assignmentTag(item.token, input.revision)}`;
+  let subject = `GAP ${n} of ${plan.items.length}, ${item.accountName}: ${item.title} ${assignmentTag(item.token, input.revision)}`;
 
   let prepared: Prepared = { kind: 'none' };
   let pursued: PursuedItem[] = [];
@@ -166,7 +171,7 @@ export async function buildAssignment(prisma: PrismaLike, input: BuildAssignment
       // The writer's name, else the first person the angle names, before a bare address.
       const who = p.writer?.name ?? p.angle.peopleNamed[0]?.name ?? p.writer?.email ?? p.title;
       const opener = p.angle.starters[0] ?? null;
-      prepared = { kind: 'angle', who, whyItMatters: p.angle.whyItMatters, opener };
+      prepared = { kind: 'angle', who, email: p.writer?.email ?? null, whyItMatters: p.angle.whyItMatters, opener, preparedAt: p.decidedAt ?? null };
     }
   }
   const move = ctx?.state.next || item.title;
@@ -187,6 +192,8 @@ export async function buildAssignment(prisma: PrismaLike, input: BuildAssignment
     const itemName = item.person?.name ?? null;
     if (itemName && recipientName && nameKey(itemName) && nameKey(recipientName) && nameKey(itemName) !== nameKey(recipientName)) {
       hold = { reason: 'recipient_mismatch', detail: `GAP's prepared email is addressed to ${recipientName}${to ? ` (${to})` : ''}, but this item names ${itemName}. Held: nothing goes out until the account's chosen person and the draft agree; choose on the account.` };
+      // The subject says the same held state the plan, the digest and the packet say (never "Ready for a first touch").
+      subject = `GAP ${n} of ${plan.items.length}, ${item.accountName}: ${heldTitle(recipientName, itemName)} ${assignmentTag(item.token, input.revision)}`;
     } else {
       prepared = { kind: 'email', to, subject: copy.subject, body: copy.body };
     }

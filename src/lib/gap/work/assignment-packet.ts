@@ -55,6 +55,8 @@ export interface PacketFact {
   interpretation: string | null;
   /** Only the producer's claim is available (a headline, a classifier score, a label): said as such. */
   weak: boolean;
+  /** What kind of claim the text is: a reported fact with an outside source, our own interpretation (a dossier, a thesis), or the buyer's words. */
+  claim: 'reported' | 'interpretation' | 'buyer';
 }
 
 export interface PacketEvidence {
@@ -63,7 +65,33 @@ export interface PacketEvidence {
   eventDate: string | null;
   reportedOn: string | null;
   weak: boolean;
+  /** The story marked it unverified (a fact whose present-day status is not established). */
+  unverified?: boolean;
 }
+
+/** Our own web properties: a record whose only sources are these is our interpretation, never a reported fact. */
+export const OWN_SOURCE_DOMAINS = ['yardflow.ai', 'modex-gtm.vercel.app', 'freightroll.com'];
+const ownUrl = (url: string | null | undefined) => !!url && OWN_SOURCE_DOMAINS.some((d) => { try { const h = new URL(url).hostname.replace(/^www\./, ''); return h === d || h.endsWith(`.${d}`); } catch { return false; } });
+
+/**
+ * The sales documents GAP serves itself (modex-gtm's public/docs): the canonical links the vault's notes name by
+ * title ("Pilot-Program"). Nothing is invented: a name not here has no link on record.
+ */
+export const KNOWN_ASSET_PATHS: Readonly<Record<string, string>> = {
+  'pilot-program': '/docs/pilot-program.pdf',
+  'pricing-and-packaging': '/docs/pricing-and-packaging.pdf',
+  'roi-one-pager': '/docs/roi-one-pager.pdf',
+  'solution-overview': '/docs/solution-overview.pdf',
+};
+/** The asset registry as a link function over the app's base URL. */
+export const knownAssetLink = (baseUrl: string) => (name: string): string | null => {
+  const path = KNOWN_ASSET_PATHS[name.toLowerCase()];
+  return path ? `${baseUrl.replace(/\/$/, '')}${path}` : null;
+};
+
+/** A blanket instruction the agent imposed on the seller ("Nobody at X gets a cold email until then"): not a rule GAP enforces, so it is not said. */
+const BLANKET = /\s*Nobody (?:at [^.]*|they named) gets a cold email until [^.]*\.|;?\s*[Tt]he account cools before anyone else is touched(\.?)|;?\s*a cold email to anyone else waits for their answer(\.?)|\s*before anyone (?:there|at the account) gets a cold email(\.?)/g;
+export const stripBlanket = (s: string): string => s.replace(BLANKET, (m, d1?: string, d2?: string, d3?: string) => (m.trimStart().startsWith(';') ? (d1 || d2 || d3 || '') : '')).replace(/\s{2,}/g, ' ').trim();
 
 export type MoveKind = 'outbound' | 'internal' | 'administrative' | 'vendor' | 'none';
 
@@ -108,6 +136,8 @@ export interface AssignmentPacket {
   note: string | null;
   assets: PacketAsset[];
   hold: { reason: 'recipient_mismatch'; detail: string } | null;
+  /** A prepared angle that later correspondence with its target supersedes: what happened since, in words; null when the angle stands. */
+  angleSuperseded: { since: string; target: string } | null;
   coverageLine: string | null;
   sellerNote: string[];
   /** GUI-08: a deal item's context, in lines (the exchange, the stakeholder, the promise, the next-step evidence). */
@@ -145,8 +175,10 @@ export interface BuildPacketDeps {
   contact?: ContactPacketDeps;
   /** The account's imported intelligence records (gap_signals of origin report_import); absent means the table. */
   imported?: (prisma: PrismaLike, accountName: string) => Promise<ImportedRow[]>;
-  /** A link for a named asset ("Pilot-Program"), when a registry knows one; absent means none on record. */
+  /** A link for a named asset ("Pilot-Program"), when a registry knows one; absent means the app's own documents (KNOWN_ASSET_PATHS). */
   assetLink?: (name: string, accountName: string) => string | null;
+  /** The account's signal rows with links, for the evidence links; absent means the table. */
+  signalLinks?: (prisma: PrismaLike, accountName: string) => Promise<SignalLinkRow[]>;
 }
 
 export interface ImportedRow {
@@ -177,10 +209,26 @@ const ASSET_NAME = /\b([A-Z][A-Za-z0-9]*(?:-[A-Za-z0-9]+)+)\b/g;
 const URL_IN = /https?:\/\/[^\s)<>"']+/g;
 
 /** The situation sentence list with repeats dropped ("Opted out: Tim Cooper, Oct 5" said once). */
-function situationOf(item: PlanItem, ctx: AskContext | null): string {
+function situationOf(item: PlanItem, ctx: AskContext | null, hold: AssignmentPacket['hold']): string {
+  if (hold) return `Held: ${cleanLine(hold.detail)}`;
   const parts = [endSentence(item.why), ctx?.state.stateLine ? endSentence(ctx.state.stateLine) : null].filter((x): x is string => !!x);
-  const sentences = parts.flatMap((p) => p.split(/(?<=[.!?])\s+/));
-  return dedupeSentences(sentences.map(cleanLine)).join(' ');
+  const sentences = parts.flatMap((p) => p.split(/(?<=[.!?])\s+/)).map(cleanLine).map(stripBlanket).filter(Boolean);
+  const own = item.person?.name ? nameKeyOf(item.person.name) : null;
+  // "Someone replied: Cowan, David, Jun 10" on Phil's item: another person's reply is the account's state, not this item's.
+  const kept = own ? sentences.filter((x) => { const m = /^(?:Someone replied|Opted out|Replied|Wrote):\s*(.+?),\s*[A-Z][a-z]{2} \d{1,2}/.exec(x); return !m || nameKeyOf(m[1]) === own; }) : sentences;
+  return dedupeSentences(kept).join(' ');
+}
+
+const nameKeyOf = (s: string | null | undefined) => lower(s).replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter(Boolean).sort().join(' ');
+/** The people a between-us line names ("Last email to Dave Kiesling, Oct 9", "Craig Morrison, Vice President replied on Sep 24"). */
+export function peopleNamedIn(lines: readonly string[]): string[] {
+  const out: string[] = [];
+  for (const raw of lines) {
+    const l = cleanLine(raw);
+    const m = /^(?:Last email to|We wrote)\s+([A-Z][\w'.-]+(?:\s+[A-Z][\w'.-]+)+?)(?:,|\s+on\b)/.exec(l) ?? /^([A-Z][\w'.-]+(?:\s+[A-Z][\w'.-]+)+?)(?:,.*?)?\s+(?:replied|wrote|opted out)\b/.exec(l);
+    if (m && !out.some((x) => nameKeyOf(x) === nameKeyOf(m[1]))) out.push(m[1]);
+  }
+  return out;
 }
 
 /** "reported by supplychaindive.com, Oct 1, 2026" -> the label and the date words it carries. */
@@ -207,16 +255,20 @@ function factsFromImported(rows: ImportedRow[]): PacketFact[] {
   for (const r of rows) {
     const rec = importOf(r.metadata);
     if (!rec || rec.visibility === 'archive') continue;
-    const src = rec.sources.find((s) => s.url) ?? rec.sources[0] ?? null;
-    const weak = !src?.url;
+    const outside = rec.sources.find((s) => s.url && !ownUrl(s.url)) ?? null;
+    const src = outside ?? rec.sources.find((s) => s.url) ?? rec.sources[0] ?? null;
+    // A dossier we wrote, or a record whose only links are our own pages, is our interpretation: said as such, never "reported".
+    const ours = rec.producer === 'war_room_dossier' || (!outside && rec.sources.some((s) => ownUrl(s.url)));
+    const weak = !ours && !src?.url;
     out.push({
       text: clipWords(cleanLine(rec.text || rec.title), 260),
       eventDate: rec.eventDate ? dateOnlyText(rec.eventDate) : null,
       reportedOn: `${dateOnlyText(rec.reportedOn)}${rec.reportedOnBasis === 'captured' ? ' (the capture date; the report states none)' : ''}`,
       capturedOn: dateWords(rec.importedAt),
-      source: { label: weak ? `${rec.producerLabel}: only the producer's claim is available` : src?.publisher ?? src?.label ?? rec.producerLabel, url: src?.url ?? null },
+      source: { label: ours ? `${rec.producerLabel}, our own material` : weak ? `${rec.producerLabel}: only the producer's claim is available` : src?.publisher ?? src?.label ?? rec.producerLabel, url: src?.url ?? null },
       interpretation: rec.interpretation ? clipWords(cleanLine(rec.interpretation), 200) : null,
       weak,
+      claim: ours ? 'interpretation' : 'reported',
     });
   }
   return out;
@@ -233,10 +285,13 @@ function evidenceFromStory(ctx: AskContext | null): { evidence: PacketEvidence[]
       if (row.label === BETWEEN_US) { betweenUs.push(`${endSentence(text)}${l.basis ? ` (${cleanLine(l.basis)})` : ''}`); continue; }
       if (row.label === NOTE_ROW) continue;
       const src = sourceOfBasis(l.basis || 'no source named');
-      const weak = l.tag === 'Unverified' || l.tag === 'Unknown' || /only the producer|headline|classifier|fit_rationale|score \d/i.test(l.basis);
+      // Weak is a producer's bare claim (a headline, a score); an unverified or unknown fact is said apart, never as "the producer's claim".
+      const weak = /only the producer|headline|classifier|fit_rationale|score \d/i.test(l.basis);
+      const unverified = l.tag === 'Unverified';
+      const ours = /^(our read|our thesis)/i.test(l.basis) || /\(our read[;,]/i.test(text);
       // A story's "reported by X, <date>" basis: the date is the REPORT's, the label the publisher; the event date is not stated.
-      if (row.label === CHANGING) changed.push({ text: endSentence(text), eventDate: null, reportedOn: src.date, capturedOn: null, source: { label: src.label || 'no source named', url: null }, interpretation: null, weak });
-      else evidence.push({ text: endSentence(text), source: { label: cleanLine(l.basis) || 'no source named', url: null }, eventDate: src.date, reportedOn: null, weak });
+      if (row.label === CHANGING) changed.push({ text: endSentence(text), eventDate: null, reportedOn: src.date, capturedOn: null, source: { label: src.label || 'no source named', url: null }, interpretation: null, weak, claim: ours ? 'interpretation' : 'reported' });
+      else evidence.push({ text: endSentence(text), source: { label: cleanLine(l.basis) || 'no source named', url: null }, eventDate: src.date, reportedOn: null, weak, unverified });
     }
   }
   return { evidence, changed, betweenUs };
@@ -248,6 +303,26 @@ function evidenceFromPack(pack: PackLike | null): { evidence: PacketEvidence[]; 
   const sources = signals.map((s) => `${s.title}${s.observed_at ? ` (${dateWords(s.observed_at)})` : ''}${s.evidence_url ? ` ${s.evidence_url}` : ''}`);
   const evidence = signals.map((s) => ({ text: `${cleanLine(String(s.title))} (a headline link, not full evidence)`, source: { label: s.evidence_url ? new URL(s.evidence_url).hostname.replace(/^www\./, '') : 'the pack', url: s.evidence_url ?? null }, eventDate: s.observed_at ? dateWords(s.observed_at) : null, reportedOn: null, weak: true }));
   return { evidence, sources };
+}
+
+/** The account's signal rows GAP holds (title, url, publisher), bounded, for linking a story excerpt to its original article. */
+export interface SignalLinkRow { title: string | null; url: string | null; source_name: string | null }
+async function defaultSignalLinks(prisma: PrismaLike, accountName: string): Promise<SignalLinkRow[]> {
+  if (typeof prisma?.gapSignal?.findMany !== 'function') return [];
+  return prisma.gapSignal.findMany({ where: { account_name: accountName, url: { not: null } }, orderBy: { created_at: 'desc' }, take: 80, select: { title: true, url: true, source_name: true } }).catch(() => []);
+}
+/** The first words of a text as a match key (the story's excerpt starts with the signal's title or summary). */
+const headKey = (s: string) => textKey(s).split(' ').slice(0, 9).join(' ');
+/** An excerpt gets its original link when a signal row's title (or the excerpt) starts the other. */
+export function linkEvidence<T extends { text: string; source: PacketSource }>(items: T[], rows: readonly SignalLinkRow[]): T[] {
+  if (!rows.length) return items;
+  return items.map((e) => {
+    if (e.source.url) return e;
+    const k = headKey(e.text);
+    if (k.split(' ').length < 4) return e;
+    const hit = rows.find((r) => { if (!r.url || !r.title) return false; const t = headKey(r.title); return t.length >= 16 && (k.startsWith(t) || t.startsWith(k)); });
+    return hit?.url ? { ...e, source: { ...e.source, url: hit.url } } : e;
+  });
 }
 
 /** Independent evidence: one entry per distinct text; syndications of one text under several names count once. */
@@ -283,13 +358,13 @@ export function assetsOf(lines: readonly string[], accountName: string, link?: (
 }
 
 /** The possible moves for the item: the lead, then the alternatives, each with a reason; no outbound to an opted-out person. */
-export function movesOf(x: { item: PlanItem; move: string; prepared: Prepared; hold: AssignmentPacket['hold']; rel: RelationshipState; personName: string | null }): PacketMove[] {
+export function movesOf(x: { item: PlanItem; move: string; prepared: Prepared; hold: AssignmentPacket['hold']; rel: RelationshipState; personName: string | null; angleSuperseded?: AssignmentPacket['angleSuperseded'] }): PacketMove[] {
   const moves: PacketMove[] = [];
   const who = x.personName ?? 'them';
   const stopped = !!x.rel.optOut;
   const vendorish = x.rel.purpose === 'vendor_solicitation' || x.rel.purpose === 'media';
   if (stopped) {
-    moves.push({ label: `Record ${who}'s opt-out as do not contact and close the item (DONE: what happened)`, reason: 'they asked not to be contacted; nothing goes back to them and the account cools before anyone else is touched', kind: 'administrative' });
+    moves.push({ label: `Record ${who}'s opt-out as do not contact and close the item (DONE: what happened)`, reason: 'they asked not to be contacted; nothing goes back to them from this item', kind: 'administrative' });
     moves.push({ label: 'No action (SKIP)', reason: 'the opt-out stands either way; nothing is lost by leaving it', kind: 'none' });
     return moves;
   }
@@ -311,9 +386,14 @@ export function movesOf(x: { item: PlanItem; move: string; prepared: Prepared; h
     return moves;
   }
   if (x.prepared.kind === 'angle') {
-    moves.push({ label: `Write ${x.prepared.who} from the prepared angle, in your own words`, reason: 'the angle is grounded; the email is not written yet (nothing is prepared to send)', kind: 'outbound' });
-    moves.push({ label: `Call ${x.prepared.who} on the opener`, reason: 'a call needs no copy; record what happened with DONE', kind: 'outbound' });
-    moves.push({ label: 'No action today (DEFER)', reason: 'the angle keeps; the item returns on the next plan', kind: 'none' });
+    if (x.angleSuperseded) {
+      moves.push({ label: `Continue the correspondence with ${x.angleSuperseded.target} in your own words`, reason: `${x.angleSuperseded.since}; the prepared angle predates it and is kept below for reference, not as a first touch`, kind: 'outbound' });
+      moves.push({ label: `Call ${x.angleSuperseded.target}`, reason: 'a call needs no copy; record what happened with DONE', kind: 'outbound' });
+    } else {
+      moves.push({ label: `Write ${x.prepared.who} from the prepared angle, in your own words`, reason: 'the angle is grounded; the email is not written yet (nothing is prepared to send)', kind: 'outbound' });
+      moves.push({ label: `Call ${x.prepared.who} on the opener`, reason: 'a call needs no copy; record what happened with DONE', kind: 'outbound' });
+    }
+    moves.push({ label: 'No action today (DEFER)', reason: 'the item returns on the next plan', kind: 'none' });
     return moves;
   }
   const admin = x.item.kind === 'admin' || x.item.stateKind === 'replied';
@@ -321,8 +401,13 @@ export function movesOf(x: { item: PlanItem; move: string; prepared: Prepared; h
     moves.push({ label: `Answer ${who}'s request of ${dateWords(x.rel.request.at)}${x.rel.request.draft ? ' (a draft exists, unsent)' : ''}`, reason: x.rel.request.basis, kind: 'outbound' });
   } else if (x.rel.requestState === 'unknown' && x.rel.request) {
     moves.push({ label: `Check whether ${who}'s request of ${dateWords(x.rel.request.at)} was met before writing`, reason: x.rel.request.basis, kind: 'internal' });
+  } else if (x.rel.requestState === 'redirected' && x.rel.request?.redirectedTo) {
+    const r = x.rel.request.redirectedTo;
+    moves.push(r.writtenAfter
+      ? { label: `Follow the thread with ${r.name} (we wrote ${dateWords(r.writtenAfter.at)}), not ${who}`, reason: x.rel.request.basis, kind: 'outbound' }
+      : { label: `Write ${r.name}, whom ${who} pointed to on ${dateWords(r.at)}`, reason: x.rel.request.basis, kind: 'outbound' });
   }
-  moves.push({ label: moveLabel(x.move), reason: admin ? 'an administrative item: record what they said or dismiss it; no outbound is prepared' : x.item.kind === 'deal' ? "the deal's next step as GAP reads it; the exchange and the promise are under Relationship" : "GAP's read of the next step; nothing is prepared to send", kind: admin ? 'administrative' : x.item.kind === 'deal' ? 'outbound' : 'internal' });
+  moves.push({ label: moveLabel(stripBlanket(x.move)), reason: admin ? 'an administrative item: record what they said or dismiss it; no outbound is prepared' : x.item.kind === 'deal' ? "the deal's next step as GAP reads it; the exchange and the promise are under Relationship" : "GAP's read of the next step; nothing is prepared to send", kind: admin ? 'administrative' : x.item.kind === 'deal' ? 'outbound' : 'internal' });
   if (admin) moves.push({ label: 'Record what they said (DONE: what happened) or dismiss it (SKIP)', reason: 'either settles the item for the day', kind: 'administrative' });
   moves.push({ label: 'No action today (DEFER)', reason: 'the item returns on the next plan', kind: 'none' });
   return moves;
@@ -373,43 +458,86 @@ export async function buildAssignmentPacket(prisma: PrismaLike, a: BuildPacketAr
     ? await contactPacketFor(prisma, { name: personName, email: relationship.person.email, accountName: item.accountName, now, fallback: { name: personName, title: item.person?.title ?? null, email: relationship.person.email } }, contactDeps).catch(() => null)
     : null;
   if (first) who.push({ ...first, purpose: purposeWord });
-  const chosen = (ctx?.people ?? []).find((p) => p.chosen && (!first || lower(p.name) !== lower(first.name))) ?? null;
+  const has = (name: string | null | undefined, email?: string | null) => who.some((w) => (name && nameKeyOf(w.name) === nameKeyOf(name)) || (email && w.email && lower(w.email) === lower(email)));
+  const story = evidenceFromStory(ctx);
+  // The prepared email's or angle's target: never recommended by address alone while Who is empty (Kenco, October 10).
+  const targetName = a.prepared.kind === 'angle' ? (a.prepared.who.includes('@') ? null : a.prepared.who) : a.prepared.kind === 'email' ? a.pack?.persona?.name ?? null : null;
+  const targetEmail = a.prepared.kind === 'angle' ? (a.prepared.who.includes('@') ? a.prepared.who : a.prepared.email ?? null) : a.prepared.kind === 'email' ? a.prepared.to : null;
+  if ((targetName || targetEmail) && !has(targetName, targetEmail)) {
+    const t = await contactPacketFor(prisma, { name: targetName, email: targetEmail, accountName: item.accountName, now, fallback: { name: targetName ?? targetEmail, title: null, email: targetEmail } }, { ...contactDeps, hubspotContact: first ? null : contactDeps.hubspotContact }).catch(() => null);
+    if (t) who.push({ ...t, purpose: a.prepared.kind === 'angle' ? 'the prepared angle is for them' : 'the prepared email is to them' });
+  }
+  const chosen = (ctx?.people ?? []).find((p) => p.chosen && !has(p.name)) ?? null;
   if (chosen) {
     const other = await contactPacketFor(prisma, { name: chosen.name, accountName: item.accountName, now, fallback: { name: chosen.name, title: chosen.title, email: null } }, { ...contactDeps, hubspotContact: null }).catch(() => null);
     if (other) who.push({ ...other, purpose: `${chosen.slot}: ${cleanLine(chosen.reason)}` });
   }
+  // An item with no person of its own names the people the correspondence names (the last person we wrote, the one who replied), bounded.
+  if (!personName) {
+    for (const name of peopleNamedIn(story.betweenUs)) {
+      if (who.length >= 3 || has(name)) continue;
+      const c = await contactPacketFor(prisma, { name, accountName: item.accountName, now, fallback: { name, title: null, email: null } }, { ...contactDeps, hubspotContact: null }).catch(() => null);
+      if (c) who.push({ ...c, purpose: 'named in the correspondence (under Relationship)' });
+    }
+  }
 
-  const story = evidenceFromStory(ctx);
+  // A prepared angle that the correspondence has moved past: we wrote (or they wrote) its target after the angle was
+  // prepared. The angle is kept for reference; the moves follow the correspondence (Kenco: the angle for Dave Kiesling
+  // spoke of an undated note while we had written Dave on October 9).
+  let angleSuperseded: AssignmentPacket['angleSuperseded'] = null;
+  if (a.prepared.kind === 'angle' && a.prepared.preparedAt) {
+    const target = who.find((w) => (targetName && nameKeyOf(w.name) === nameKeyOf(targetName)) || (targetEmail && w.email && lower(w.email) === lower(targetEmail))) ?? null;
+    const tEmail = target?.email ?? targetEmail;
+    const tName = target?.name ?? targetName ?? tEmail ?? a.prepared.who;
+    const sameAsItem = relationship.person.email && tEmail && lower(relationship.person.email) === lower(tEmail);
+    const tRel = sameAsItem ? relationship : (tEmail || tName) ? await (deps.relationship ? deps.relationship(prisma, { accountName: item.accountName, email: tEmail ? lower(tEmail) : null, name: tName, now }) : relationshipStateFor(prisma, { accountName: item.accountName, email: tEmail ? lower(tEmail) : null, name: tName, now }, relationshipDeps)).catch(() => null) : null;
+    const since = a.prepared.preparedAt;
+    const later = [tRel?.lastOutbound && tRel.lastOutbound.at > since ? `we wrote ${tName} ${dateWords(tRel.lastOutbound.at)}${tRel.lastOutbound.subject ? ` ("${cleanLine(tRel.lastOutbound.subject)}")` : ''} (${tRel.lastOutbound.source})` : null, tRel?.lastInbound && tRel.lastInbound.at > since ? `${tName} wrote ${dateWords(tRel.lastInbound.at)}${tRel.lastInbound.subject ? ` ("${cleanLine(tRel.lastInbound.subject)}")` : ''}` : null].filter((x): x is string => !!x);
+    if (later.length) angleSuperseded = { since: `since the angle was prepared on ${dateWords(since)}: ${later.join('; ')}`, target: tName };
+  }
+
   const packEv = evidenceFromPack(a.pack);
   const importedRows = await (deps.imported ? deps.imported(prisma, item.accountName) : defaultImported(prisma, item.accountName)).catch(() => [] as ImportedRow[]);
+  const signalRows = await (deps.signalLinks ? deps.signalLinks(prisma, item.accountName) : defaultSignalLinks(prisma, item.accountName)).catch(() => [] as SignalLinkRow[]);
   const changed: PacketFact[] = [];
+  const whoName = relationship.person.name ?? relationship.person.email ?? 'They';
   if (relationship.request && relationship.requestState !== 'fulfilled') {
     const r = relationship.request;
-    changed.push({ text: `${relationship.person.name ?? relationship.person.email ?? 'They'} asked for something on ${dateWords(r.at)}${r.subject ? ` ("${cleanLine(r.subject)}")` : ''}${r.excerpt ? `, "${clipWords(cleanLine(r.excerpt), 140).replace(/[.]+$/, '')}"` : ''}. ${r.state === 'unfulfilled' ? 'Unresolved' : 'Whether it was met is unknown'}: ${r.basis}.`, eventDate: dateWords(r.at), reportedOn: null, capturedOn: null, source: { label: "GAP's synced inbox", url: relationship.links.thread }, interpretation: null, weak: false });
+    const verdict = r.state === 'unfulfilled' ? 'Unresolved' : r.state === 'redirected' ? `Redirected to ${r.redirectedTo?.name ?? 'someone else'}` : 'Whether it was met is unknown';
+    changed.push({ text: `${whoName} asked for something on ${dateWords(r.at)}${r.subject ? ` ("${cleanLine(r.subject)}")` : ''}${r.excerpt ? `, "${clipWords(cleanLine(r.excerpt), 140).replace(/[.]+$/, '')}"` : ''}. ${verdict}: ${r.basis}.`, eventDate: dateWords(r.at), reportedOn: null, capturedOn: null, source: { label: relationship.links.threadKind === 'thread' ? 'their Gmail thread' : "GAP's synced inbox", url: relationship.links.thread }, interpretation: null, weak: false, claim: 'buyer' });
   } else if (relationship.request?.state === 'fulfilled') {
     const r = relationship.request;
-    changed.push({ text: `${relationship.person.name ?? 'They'} asked for something on ${dateWords(r.at)}${r.subject ? ` ("${cleanLine(r.subject)}")` : ''}; met: ${r.basis}. No repeat send is inferred from the old reply.`, eventDate: dateWords(r.at), reportedOn: null, capturedOn: null, source: { label: "GAP's synced inbox and our Sent", url: relationship.links.thread }, interpretation: null, weak: false });
+    changed.push({ text: `${relationship.person.name ?? 'They'} asked for something on ${dateWords(r.at)}${r.subject ? ` ("${cleanLine(r.subject)}")` : ''}; met: ${r.basis}. No repeat send is inferred from the old reply.`, eventDate: dateWords(r.at), reportedOn: null, capturedOn: null, source: { label: "GAP's synced inbox and our Sent", url: relationship.links.thread }, interpretation: null, weak: false, claim: 'buyer' });
+  }
+  if (relationship.referral && !(relationship.request?.redirectedTo && relationship.request.redirectedTo.at === relationship.referral.at)) {
+    const f = relationship.referral;
+    changed.push({ text: `${whoName} pointed to ${f.name} on ${dateWords(f.at)}${f.subject ? ` ("${cleanLine(f.subject)}")` : ''}. ${f.writtenAfter ? `We wrote ${f.name} ${dateWords(f.writtenAfter.at)}${f.writtenAfter.subject ? ` under "${cleanLine(f.writtenAfter.subject)}"` : ''} (${f.writtenAfter.source}).` : relationship.outboundRead.read ? `Nothing to ${f.name} on record after that.` : `Whether we wrote ${f.name} is not known (${relationship.outboundRead.basis}).`}`, eventDate: dateWords(f.at), reportedOn: null, capturedOn: null, source: { label: relationship.links.threadKind === 'thread' ? 'their Gmail thread' : "GAP's synced inbox", url: relationship.links.thread }, interpretation: null, weak: false, claim: 'buyer' });
   }
   if (item.context?.lastExchange || item.context?.nextAction) {
     const c = item.context;
-    changed.push({ text: [c.lastExchange ? endSentence(cleanLine(c.lastExchange)) : null, c.nextAction ? `Next prepared action: ${endSentence(cleanLine(c.nextAction))}` : null].filter(Boolean).join(' '), eventDate: c.date, reportedOn: null, capturedOn: null, source: { label: c.source ?? 'the Work card', url: null }, interpretation: null, weak: false });
+    changed.push({ text: [c.lastExchange ? endSentence(cleanLine(c.lastExchange)) : null, c.nextAction ? `Next prepared action: ${endSentence(stripBlanket(cleanLine(c.nextAction)))}` : null].filter(Boolean).join(' '), eventDate: c.date, reportedOn: null, capturedOn: null, source: { label: c.source ?? 'the Work card', url: null }, interpretation: null, weak: false, claim: 'reported' });
   }
   changed.push(...factsFromImported(importedRows));
   changed.push(...story.changed);
-  const changedUnique = dedupeFacts(changed).slice(0, 3);
+  const changedUnique = linkEvidence(dedupeFacts(changed), signalRows).slice(0, 3);
 
-  const allEvidence = independent([...story.evidence, ...packEv.evidence]);
+  const allEvidence = linkEvidence(independent([...story.evidence, ...packEv.evidence]), signalRows);
   const evidence = allEvidence.slice(0, 3);
   const sellerNote = ((ctx as { sellerNote?: { lines: string[] } | null } | null)?.sellerNote?.lines ?? []).map((l) => cleanLine(l));
-  const move = ctx?.state.next || item.title;
-  const moves = movesOf({ item, move, prepared: a.prepared, hold: a.hold, rel: relationship, personName: first?.name ?? personName });
+  // A reply item's move is about ITS person's reply, never the account's newest reply from someone else.
+  const replyItem = item.stateKind === 'replied' && !!personName;
+  const ownReplyAt = replyItem ? (relationship.lastInbound?.at ?? item.context?.date ?? null) : null;
+  const move = stripBlanket(replyItem ? `Read ${personName}'s reply${ownReplyAt ? ` of ${dateWords(ownReplyAt)}` : ''} and record what they said.` : ctx?.state.next || item.title);
+  const moves = movesOf({ item, move, prepared: a.prepared, hold: a.hold, rel: relationship, personName: first?.name ?? personName, angleSuperseded });
   const coverage = typeof ctx?.coverageLine === 'string' ? ctx.coverageLine.trim() : '';
+  // The buyer's words: the item's own person first, each attributed.
+  const buyerSaid = (ctx?.buyerSaid ?? []).slice().sort((x, y) => Number(!!personName && !!y.who && nameKeyOf(y.who) === nameKeyOf(personName)) - Number(!!personName && !!x.who && nameKeyOf(x.who) === nameKeyOf(personName))).slice(0, 3).map((b) => ({ text: cleanLine(b.text), who: b.who, at: b.at }));
 
   return {
     account: item.accountName,
     accountUrl: `${a.baseUrl.replace(/\/$/, '')}${accountHref(item.accountName)}`,
     person: first,
-    situation: situationOf(item, ctx),
+    situation: situationOf(item, ctx, a.hold),
     // The stop: the suppression row when the person's address is known; else the item's own state (the Work card said
     // opted out) with the message on record, so an opt-out without an address on the contact still leads the packet.
     stop: relationship.optOut
@@ -424,15 +552,16 @@ export async function buildAssignmentPacket(prisma: PrismaLike, a: BuildPacketAr
     evidence,
     evidenceMore: Math.max(0, allEvidence.length - evidence.length),
     whyTheyCare: ctx?.opening?.whyTheyCare ? cleanLine(ctx.opening.whyTheyCare) : null,
-    buyerSaid: (ctx?.buyerSaid ?? []).slice(0, 3).map((b) => ({ text: cleanLine(b.text), who: b.who, at: b.at })),
+    buyerSaid,
     move,
     moves,
     prepared: a.prepared,
     preparedSender: a.senderEmail ?? null,
     preparedSources: packEv.sources,
     note: a.note ?? null,
-    assets: assetsOf([...sellerNote, move, item.title], item.accountName, deps.assetLink),
+    assets: assetsOf([...sellerNote, move, item.title], item.accountName, deps.assetLink ?? knownAssetLink(a.baseUrl)),
     hold: a.hold,
+    angleSuperseded,
     coverageLine: coverage ? (/^(Not read this time|Partly read|Read)\b/i.test(coverage) ? coverage : `Not read this time: ${coverage}`) : null,
     sellerNote,
     dealContext: dealContextOf(item, relationship, sellerNote),
@@ -461,17 +590,20 @@ function emptyRelationship(q: { accountName: string; email: string | null; name:
     lastInbound: null,
     lastOutbound: null,
     laterResponse: null,
-    answerOwed: { owed: false, basis: 'not read' },
+    answerOwed: { owed: false, basis: 'not read', known: false },
     quiet: { quiet: false, days: null, basis: 'not read' },
     request: null,
     requestState: 'none',
+    referral: null,
+    outboundRead: { read: false, basis: `the relationship could not be read: ${why}` },
+    reads: { inbox: { read: false, count: 0, detail: why }, sent: { read: false, count: 0, detail: why }, drafts: { read: false, count: 0, detail: why }, engagements: { read: false, count: 0, detail: why }, commitments: { read: false, count: 0 }, deals: { read: false, detail: why }, conversations: { read: false, count: 0 } },
     meetings: [],
     nextMeetingAt: null,
     deals: [],
     promises: [],
     drafts: [],
     optOut: null,
-    links: { thread: null, hubspotContact: null, hubspotCompany: null },
+    links: { thread: null, threadKind: null, hubspotContact: null, hubspotCompany: null },
     searched: `the relationship could not be read: ${why}; read ${clock(q.now)}`,
   };
 }
@@ -509,24 +641,38 @@ function whoLines(c: ContactPacket): string[] {
   ];
 }
 
+/** The request state in capitals, for the relationship line. */
+const REQUEST_WORD: Record<string, string> = { fulfilled: 'MET', unfulfilled: 'UNFULFILLED', unknown: 'UNKNOWN', redirected: 'REDIRECTED' };
+
 function relationshipLines(p: AssignmentPacket): string[] {
   const r = p.relationship;
+  const named = !!(r.person.name || r.person.email);
   const who = r.person.name ?? r.person.email ?? 'this person';
   const lines: string[] = [];
-  lines.push(r.lastInbound ? `- Last from ${who}: ${dateWords(r.lastInbound.at)}${r.lastInbound.subject ? `, "${cleanLine(r.lastInbound.subject)}"` : ''}${r.lastInbound.excerpt ? `: "${clipWords(r.lastInbound.excerpt, 120)}"` : ''} (${r.lastInbound.purpose ? PURPOSE_LINE[r.lastInbound.purpose] : 'purpose unknown'}).` : `- Nothing from ${who} in what was searched.`);
-  lines.push(r.lastOutbound ? `- Last from us: ${dateWords(r.lastOutbound.at)}${r.lastOutbound.subject ? `, "${cleanLine(r.lastOutbound.subject)}"` : ''} (${r.lastOutbound.source}). ${r.laterResponse ? `They wrote after it on ${dateWords(r.laterResponse.at)}.` : r.answerOwed.owed ? `An answer is owed: ${r.answerOwed.basis}.` : `Nothing from them since (${r.quiet.basis}).`}` : `- Nothing from us to ${who} in what was searched${r.answerOwed.owed ? `; an answer is owed: ${r.answerOwed.basis}` : ''}.`);
-  if (r.request) lines.push(`- Their request of ${dateWords(r.request.at)}${r.request.subject ? ` ("${cleanLine(r.request.subject)}")` : ''}: ${r.request.state === 'fulfilled' ? 'MET' : r.request.state === 'unfulfilled' ? 'UNFULFILLED' : 'UNKNOWN'}: ${endSentence(r.request.basis)}`);
-  lines.push(r.meetings.length ? `- Meetings and calls: ${r.meetings.slice(0, 3).map((m) => `${dateWords(m.at)} ${m.kind}${m.title ? ` "${cleanLine(m.title)}"` : ''} (${m.source})${m.outcome ? `: ${clipWords(cleanLine(m.outcome), 160)}` : ''}`).join('; ')}.` : '- Meetings and calls: none on record in what was searched.');
+  if (named) {
+    lines.push(r.lastInbound ? `- Last from ${who}: ${dateWords(r.lastInbound.at)}${r.lastInbound.subject ? `, "${cleanLine(r.lastInbound.subject)}"` : ''}${r.lastInbound.excerpt ? `: "${clipWords(r.lastInbound.excerpt, 160)}"` : ''} (${r.lastInbound.purpose ? PURPOSE_LINE[r.lastInbound.purpose] : 'purpose unknown'}).` : `- Nothing from ${who} in what was read.`);
+    // What we sent is only evidence when our outbound history was read; otherwise it is not known, said as such.
+    const owedWords = r.answerOwed.known ? (r.answerOwed.owed ? `An answer is owed: ${r.answerOwed.basis}.` : null) : `Whether an answer went is not known: ${r.answerOwed.basis}.`;
+    if (r.lastOutbound) lines.push(`- Last from us: ${dateWords(r.lastOutbound.at)}${r.lastOutbound.subject ? `, "${cleanLine(r.lastOutbound.subject)}"` : ''} (${r.lastOutbound.source}). ${r.laterResponse ? `They wrote after it on ${dateWords(r.laterResponse.at)}.` : owedWords ?? `Nothing from them since (${r.quiet.basis}).`}`);
+    else lines.push(r.outboundRead.read ? `- Nothing from us to ${who} on record (${r.outboundRead.basis})${r.answerOwed.known && r.answerOwed.owed ? `; an answer is owed: ${r.answerOwed.basis}` : ''}.` : `- What we sent ${who} is not known: ${r.outboundRead.basis}.`);
+    if (r.request) lines.push(`- Their request of ${dateWords(r.request.at)}${r.request.subject ? ` ("${cleanLine(r.request.subject)}")` : ''}: ${REQUEST_WORD[r.request.state] ?? 'UNKNOWN'}: ${endSentence(r.request.basis)}`);
+    if (r.referral && !(r.request?.redirectedTo && r.request.redirectedTo.at === r.referral.at)) lines.push(`- They pointed to ${r.referral.name} on ${dateWords(r.referral.at)}${r.referral.writtenAfter ? `; we wrote ${r.referral.name} ${dateWords(r.referral.writtenAfter.at)} (${r.referral.writtenAfter.source})` : r.outboundRead.read ? `; nothing to ${r.referral.name} on record after that` : `; whether we wrote ${r.referral.name} is not known`}.`);
+  }
+  lines.push(r.meetings.length ? `- Meetings and calls: ${r.meetings.slice(0, 3).map((m) => `${dateWords(m.at)} ${m.kind}${m.title ? ` "${cleanLine(m.title)}"` : ''} (${m.source})${m.outcome ? `: ${clipWords(cleanLine(m.outcome), 160)}` : ''}`).join('; ')}.` : '- Meetings and calls: none on record in what was read.');
   if (r.nextMeetingAt) lines.push(`- A meeting is ahead on ${dateWords(r.nextMeetingAt)}.`);
-  lines.push(r.deals.length ? `- Open deal: ${r.deals.map((d) => `${d.name}${d.stage ? ` (${d.stage})` : ''}${d.nextStep ? `, next step: ${clipWords(cleanLine(d.nextStep), 120)}` : ''}${d.url ? ` ${d.url}` : ''}`).join('; ')}.` : '- Open deal: none read.');
-  lines.push(r.promises.length ? `- Promises: ${r.promises.slice(0, 3).map((c) => `"${cleanLine(c.title)}" (${c.theirs ? `with ${who}, ` : ''}${c.owner}${c.dueAt ? `, due ${dateWords(c.dueAt)}` : ''}, ${c.status})`).join('; ')}.` : '- Promises: none on the ledger.');
-  lines.push(r.drafts.length ? `- Drafts: ${r.drafts.map((d) => `${dateWords(d.at)}${d.subject ? ` "${cleanLine(d.subject)}"` : ''}`).join('; ')} (unsent; a draft is never a contact).` : '- Drafts: none to them on record.');
-  lines.push(r.optOut ? `- Opt-out: ${who} asked not to be contacted${r.optOut.at ? ` on ${dateWords(r.optOut.at)}` : ''}${r.optOut.words ? ` ("${cleanLine(r.optOut.words)}")` : ''}; ${r.optOut.source}.` : '- Opt-out: none on record.');
-  const links = [r.links.thread ? `their thread ${r.links.thread}` : null, r.links.hubspotContact ? `HubSpot contact ${r.links.hubspotContact}` : null, r.links.hubspotCompany ? `HubSpot company ${r.links.hubspotCompany}` : null].filter(Boolean);
-  if (links.length) lines.push(`- Links: ${links.join('; ')}.`);
+  // The deal context (a deal item) carries the deal and the promise in full; they are not repeated here.
+  if (!p.dealContext.length) {
+    lines.push(r.deals.length ? `- Open deal: ${r.deals.map((d) => `${d.name}${d.stage ? ` (${d.stage})` : ''}${d.nextStep ? `, next step: ${clipWords(cleanLine(d.nextStep), 120)}` : ''}${d.url ? ` ${d.url}` : ''}`).join('; ')}.` : '- Open deal: none read.');
+    lines.push(r.promises.length ? `- Promises: ${r.promises.slice(0, 3).map((c) => `"${cleanLine(c.title)}" (${c.theirs ? `with ${who}, ` : ''}${c.owner}${c.dueAt ? `, due ${dateWords(c.dueAt)}` : ''}, ${c.status})`).join('; ')}.` : '- Promises: none on the ledger.');
+  }
+  if (named) {
+    if (r.drafts.length) lines.push(`- Drafts: ${r.drafts.map((d) => `${dateWords(d.at)}${d.subject ? ` "${cleanLine(d.subject)}"` : ''}`).join('; ')} (unsent; a draft is never a contact).`);
+    lines.push(r.optOut ? `- Opt-out: ${who} asked not to be contacted${r.optOut.at ? ` on ${dateWords(r.optOut.at)}` : ''}${r.optOut.words ? ` ("${cleanLine(r.optOut.words)}")` : ''}; ${r.optOut.source}.` : '- Opt-out: none on record.');
+    const links = [r.links.thread ? `${r.links.threadKind === 'thread' ? 'their Gmail thread' : 'a Gmail search for their address (no thread id on record)'} ${r.links.thread}` : null, r.links.hubspotContact ? `HubSpot contact ${r.links.hubspotContact}` : null, r.links.hubspotCompany ? `HubSpot company ${r.links.hubspotCompany}` : null].filter(Boolean);
+    if (links.length) lines.push(`- Links: ${links.join('; ')}.`);
+  }
   for (const b of dedupeSentences(p.betweenUs)) lines.push(`- ${b}`);
   for (const d of p.dealContext) lines.push(`- ${d}`);
-  lines.push(`- Searched: ${r.searched}.`);
   return lines;
 }
 
@@ -557,28 +703,28 @@ export function packetSections(p: AssignmentPacket, links: PacketLinks, opts: Re
     heading: 'What changed or remains unresolved:',
     lines: p.changed.length
       ? p.changed.flatMap((f) => {
-          const when = [f.eventDate ? `event ${f.eventDate}` : null, f.reportedOn ? `reported ${f.reportedOn}` : null, f.capturedOn ? `imported ${f.capturedOn}` : null].filter(Boolean).join('; ');
+          const when = [f.eventDate ? `event ${f.eventDate}` : null, f.reportedOn ? `${f.claim === 'interpretation' ? 'written' : 'reported'} ${f.reportedOn}` : null, f.capturedOn ? `imported ${f.capturedOn}` : null].filter(Boolean).join('; ');
           const src = `${f.source.label}${f.source.url ? ` ${f.source.url}` : ''}`;
-          const out = [`- ${f.text} (${[when, src].filter(Boolean).join('; ')})`];
-          if (f.interpretation) out.push(`  The producer's read (not an obligation): ${endSentence(f.interpretation)}`);
+          const prefix = f.claim === 'interpretation' ? 'Our read (interpretation, not a reported fact or a buyer statement): ' : '';
+          const out = [`- ${prefix}${f.text} (${[when, src].filter(Boolean).join('; ')})`];
+          if (f.interpretation) out.push(`  ${f.claim === 'interpretation' ? 'Its one-line read' : "The producer's read"} (not an obligation): ${endSentence(f.interpretation)}`);
           return out;
         })
       : ['- Nothing new on record since the last plan; the relationship and the evidence below are what GAP holds.'],
   });
 
-  sections.push({ heading: 'Who:', lines: p.who.length ? p.who.flatMap(whoLines) : ['- No person is named on this item; the account page lists the people.'] });
-  sections.push({ heading: p.relationship.person.name ? `Relationship with ${p.relationship.person.name} (${p.relationship.purposeWord}):` : 'Relationship:', lines: relationshipLines(p) });
+  sections.push({ heading: 'Who:', lines: p.who.length ? p.who.flatMap(whoLines) : ['- No person is named on this item and none is named in the correspondence on record; the account page lists the people.'] });
+  sections.push({ heading: p.relationship.person.name ? `Relationship with ${p.relationship.person.name} (${p.relationship.purposeWord}):` : 'Relationship (the account):', lines: relationshipLines(p) });
 
-  const ev: string[] = p.evidence.map((e) => `- ${e.text} (${e.source.label}${e.eventDate && !e.source.label.includes(e.eventDate) ? `, ${e.eventDate}` : ''})${e.source.url ? ` ${e.source.url}` : ''}${e.weak && !/headline link/.test(e.text) ? " (only the producer's claim is available)" : ''}`);
+  const ev: string[] = p.evidence.map((e) => `- ${e.text} (${e.source.label}${e.eventDate && !e.source.label.includes(e.eventDate) ? `, ${e.eventDate}` : ''})${e.source.url ? ` ${e.source.url}` : ''}${e.weak && !/headline link/.test(e.text) ? " (only the producer's claim is available)" : ''}${e.unverified ? ' (unverified: its present-day status is not established)' : ''}`);
   if (!ev.length) ev.push('- No excerpt on record beyond the relationship above.');
   if (p.evidenceMore > 0) ev.push(`- ${p.evidenceMore} more independent source${p.evidenceMore === 1 ? '' : 's'} on record (syndications of one text not counted); open the account for them.`);
-  if (p.whyTheyCare) ev.push(`Why they care: ${endSentence(p.whyTheyCare)}`);
-  for (const b of p.buyerSaid) ev.push(`They said: "${b.text}"${b.who || b.at ? ` (${[b.who, b.at ? dateWords(b.at) : null].filter(Boolean).join(', ')})` : ''}`);
+  if (p.whyTheyCare) ev.push(`Why they care (our read): ${endSentence(p.whyTheyCare)}`);
+  for (const b of p.buyerSaid) ev.push(`${b.who ? `${cleanLine(b.who)} said` : 'They said'}: "${b.text}"${b.at ? ` (${dateWords(b.at)})` : ''}`);
   if (p.sellerNote.length) {
     ev.push('Your vault note (for you, never quote it to the buyer):');
     for (const l of p.sellerNote.slice(0, 3)) ev.push(`- ${endSentence(l)}`);
   }
-  if (p.coverageLine) ev.push(p.coverageLine);
   sections.push({ heading: 'Evidence:', lines: ev });
 
   const mv: string[] = [`The move: ${endSentence(p.move)}`];
@@ -595,13 +741,19 @@ export function packetSections(p: AssignmentPacket, links: PacketLinks, opts: Re
     for (const l of p.prepared.body.split('\n')) pm.push(`> ${l}`);
     if (p.preparedSources.length) pm.push(`Sources: ${p.preparedSources.join('; ')}`);
   } else if (p.prepared.kind === 'angle') {
-    pm.push(`GAP has prepared an angle for ${p.prepared.who}: ${endSentence(p.prepared.whyItMatters)}`);
-    if (p.prepared.opener) pm.push(`Opener: ${p.prepared.opener}`);
-    pm.push('Nothing is prepared to send yet; preparation remains: the email or the call written from this opener, by you.');
+    if (p.angleSuperseded) {
+      pm.push(`The angle GAP prepared for ${p.prepared.who}${p.prepared.preparedAt ? ` on ${dateWords(p.prepared.preparedAt)}` : ''} is superseded by later correspondence (${p.angleSuperseded.since}). Kept for reference, not as a first touch: ${endSentence(p.prepared.whyItMatters)}`);
+      if (p.prepared.opener) pm.push(`Its opener was: ${p.prepared.opener}`);
+      pm.push('Nothing is prepared to send; the next message follows the correspondence above, in your words.');
+    } else {
+      pm.push(`GAP has prepared an angle for ${p.prepared.who}${p.prepared.preparedAt ? ` (prepared ${dateWords(p.prepared.preparedAt)})` : ''}: ${endSentence(p.prepared.whyItMatters)}`);
+      if (p.prepared.opener) pm.push(`Opener: ${p.prepared.opener}`);
+      pm.push('Nothing is prepared to send yet; preparation remains: the email or the call written from this opener, by you.');
+    }
   } else {
     pm.push(`Nothing is prepared yet; preparation remains: ${p.item.kind === 'admin' || p.item.stateKind === 'replied' || p.item.stateKind === 'opted_out' ? 'an administrative item has nothing to prepare' : p.item.kind === 'deal' ? "the deal's next step is yours to take; GAP has no copy for it" : 'no grounded angle or copy is ready for this item'}.`);
   }
-  if (p.assets.length) pm.push(`Assets named: ${p.assets.map((x) => `${x.name} (${x.url ?? 'no link on record'})`).join('; ')}.`);
+  if (p.assets.length) pm.push(`Assets named: ${p.assets.map((x) => `${x.name} (${x.url ? `${x.url}, the app's own PDF; not a tracked link` : 'no link on record'})`).join('; ')}.`);
   if (p.hold || p.prepared.kind !== 'none' || p.assets.length) sections.push({ heading: p.hold || p.prepared.kind === 'none' ? null : 'Prepared material:', lines: pm });
   else sections.push({ heading: null, lines: pm });
 
@@ -617,6 +769,10 @@ export function packetSections(p: AssignmentPacket, links: PacketLinks, opts: Re
     ctl.push('Opening a link never approves or sends anything.');
   }
   sections.push({ heading: 'Controls:', lines: ctl });
+  // The bookkeeping last: what was read for this packet, and what was not.
+  const read: string[] = [`- Searched: ${p.relationship.searched}.`];
+  if (p.coverageLine) read.push(`- ${p.coverageLine}`);
+  sections.push({ heading: 'Read for this packet:', lines: read });
   sections.push({ heading: null, lines: ['This is an internal message from GAP to you; nothing in it went to a buyer.'] });
   return sections;
 }

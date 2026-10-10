@@ -73,7 +73,7 @@ describe('GUI-05: the request state (Boston Beer, Phil asked for four documents 
   it('UNKNOWN when our Sent was not read, and the basis says so', () => {
     const s = relationshipStateFrom(inputs([ASK], { reads: reads({ sent: { read: false, count: 0, detail: 'no GAP sender configured' } }) }));
     expect(s.requestState).toBe('unknown');
-    expect(s.request?.basis).toBe('nothing from us after their message of Jun 10, 2026 in what was read, but our Sent was not read (no GAP sender configured), so this is not known');
+    expect(s.request?.basis).toBe("nothing from us after their message of Jun 10, 2026 in what was read (HubSpot's logged emails at The Boston Beer Company were read), but our Sent was not read (no GAP sender configured), so this is not known");
     expect(s.searched).toContain('our Sent to them (not read: no GAP sender configured)');
   });
 
@@ -151,7 +151,7 @@ describe('GUI-06: the opt-out and the relationship word', () => {
     expect(s.meetings[1].outcome).toBe('Outcome: agreed to a pilot scope by October.');
     expect(s.deals[0]).toMatchObject({ id: '1001', name: 'YardFlow - Kenco Chattanooga', stage: 'Qualified to buy', nextStep: 'Send pilot scope', url: 'https://app.hubspot.com/contacts/3819073/record/0-3/1001' });
     expect(s.promises[0]).toMatchObject({ title: 'Send Phil the four documents', theirs: true });
-    expect(s.links).toEqual({ thread: `https://mail.google.com/mail/u/0/?authuser=casey%40yardflow.ai#search/${encodeURIComponent(`from:"${PHIL}"`)}`, hubspotContact: 'https://app.hubspot.com/contacts/3819073/record/0-1/980', hubspotCompany: 'https://app.hubspot.com/contacts/3819073/record/0-2/55' });
+    expect(s.links).toEqual({ thread: `https://mail.google.com/mail/u/0/?authuser=casey%40yardflow.ai#search/${encodeURIComponent(`from:"${PHIL}"`)}`, threadKind: 'search', hubspotContact: 'https://app.hubspot.com/contacts/3819073/record/0-1/980', hubspotCompany: 'https://app.hubspot.com/contacts/3819073/record/0-2/55' });
     expect(s.searched).toBe(`GAP's synced inbox for ${PHIL} (1 message from them); our Sent to them (0 messages); Gmail drafts to them (0); HubSpot engagements at The Boston Beer Company (1); the commitments ledger (2); open deals (1); the vault's calls and meetings (1); the suppression list; read Oct 10, 2026, 9:00 AM New York`);
   });
 
