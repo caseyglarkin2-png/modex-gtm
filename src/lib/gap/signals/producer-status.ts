@@ -42,6 +42,9 @@ export interface ProducerStatus {
   lastReportedOn: string | null;
   /** Set when `state` is stale (optional so older callers keep their shape). */
   staleKind?: StaleKind | null;
+  /** A paged export's backlog from the newest row (clawd-import.ts): rows wait behind the cursor, and the estimate when the export gave one. */
+  more?: boolean;
+  remaining?: number | null;
   lastCounts: { accepted: number; revised: number; duplicates: number; invalid: number } | null;
   lastProducerState: { status: ProducerRunStatus; detail: string | null } | null;
   /** The newest cursor the producer's export reached (a paged export); null when none was recorded. */
@@ -130,16 +133,20 @@ export function producerStateWords(s: Pick<ProducerStatus, 'state' | 'staleKind'
 const NOT_CONFIGURED_WORDS = 'not configured: set GAP_DRIVE_REFRESH_TOKEN (or the delegation pair), or set GAP_DRIVE_DELEGATION=gmail after adding the drive.readonly scope to the existing delegation';
 const notConfiguredLine = (s: Pick<ProducerStatus, 'label' | 'lastProducerState' | 'totalItems'>): string => `${s.label}: ${s.lastProducerState?.detail?.startsWith('not configured') ? NOT_CONFIGURED_WORDS : (s.lastProducerState?.detail ?? NOT_CONFIGURED_WORDS)}${s.totalItems ? ` (${plural(s.totalItems, 'item')} held from earlier runs)` : ''}.`;
 
+/** "; more waiting behind the cursor (about 8,214 rows)" when the newest row said rows wait; empty otherwise. */
+const backlogWords = (s: Pick<ProducerStatus, 'more' | 'remaining'>): string => (s.more ? `; more waiting behind the cursor${s.remaining != null && s.remaining > 0 ? ` (about ${s.remaining.toLocaleString('en-US')} rows)` : ''}` : '');
+
 function importLine(s: Omit<ProducerStatus, 'line'>): string {
   if (s.state === 'never') return `${s.label}: never imported.`;
   if (s.state === 'not_configured') return notConfiguredLine(s);
   const counts = `${plural(s.totalReports, 'report')}, ${plural(s.totalItems, 'item')}${s.lastReportedOn ? `, reports through ${dateOnlyWords(s.lastReportedOn)}` : ''}`;
   const last = `last import ${dayWords(s.lastImportAt!)} (${counts})`;
   if (s.state === 'failed') return `${s.label}: ${last}; the last run failed${s.lastProducerState?.detail ? ` (${s.lastProducerState.detail})` : ''}.`;
-  if (s.state === 'stale') return `${s.label}: ${last}; ${producerStateWords(s)}.`;
+  const backlog = backlogWords(s);
+  if (s.state === 'stale') return `${s.label}: ${last}${backlog}; ${producerStateWords(s)}.`;
   if (s.state === 'one_time') return `${s.label}: ${producerStateWords(s)}; ${counts}.`;
   const partial = s.lastProducerState?.status === 'partial' ? `; the last run was partial${s.lastProducerState.detail ? ` (${s.lastProducerState.detail})` : ''}` : '';
-  return `${s.label}: ${last}${partial}; current.`;
+  return `${s.label}: ${last}${partial}${backlog}; current.`;
 }
 
 /** One status per known producer and per producer the ledger names, plus the vault; every read soft. */
@@ -177,6 +184,9 @@ export async function loadProducerStatus(prisma: PrismaLike, now: Date, opts: { 
       lastRunId: typeof p.runId === 'string' ? p.runId : null,
       lastReportedOn,
       staleKind: judged.staleKind,
+      // The paged export's backlog, from the newest row (producerState, where clawd-import.ts puts it; a top-level field read too).
+      more: (ps as { more?: unknown } | null)?.more === true || p.more === true,
+      remaining: (() => { const v = (ps as { remaining?: unknown } | null)?.remaining ?? p.remaining; return typeof v === 'number' && Number.isFinite(v) && v >= 0 ? v : null; })(),
       lastCounts: r ? { accepted: n(p.accepted), revised: n(p.revised), duplicates: n(p.duplicates), invalid: n(p.invalid) } : null,
       // 300, as the producers cut their own detail: a refused Drive delegation carries Google's words and the scope step.
       lastProducerState: status ? { status, detail: typeof ps?.detail === 'string' && ps.detail ? ps.detail.slice(0, 300) : null } : null,
@@ -231,7 +241,7 @@ export function producerShort(s: ProducerStatus): string {
     // Two dates, never one: when the producer's newest report was written, and when GAP last imported. A reimport of
     // an old report moves the second date only; the first says how fresh the information is.
     case 'current':
-      return `${s.label} ${s.lastReportedOn ? `reports through ${dateOnlyWords(s.lastReportedOn)}, ` : ''}imported ${dayWords(s.lastImportAt!)} (${plural(s.totalItems, unit)})`;
+      return `${s.label} ${s.lastReportedOn ? `reports through ${dateOnlyWords(s.lastReportedOn)}, ` : ''}imported ${dayWords(s.lastImportAt!)} (${plural(s.totalItems, unit)}${s.more ? ', more waiting behind the cursor' : ''})`;
     case 'stale':
       // Reimported recently but the newest report is old: the import date is not freshness (2026-10-10).
       if (s.staleKind === 'reimported') return `${s.label}: stale (reimported ${dayWords(s.lastImportAt!)}${s.lastReportedOn ? `; reports through ${dateOnlyWords(s.lastReportedOn)}` : ''})`;
