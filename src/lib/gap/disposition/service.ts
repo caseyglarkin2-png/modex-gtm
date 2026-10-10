@@ -456,6 +456,17 @@ export async function recordDisposition(
   let persona: LoadedPersona | null;
   let ai: AiSuggestionRow | null = null;
   try {
+    // R5 review (finding 2): a reply is recorded once, whatever recorded it first. A reply's own source (Capture's
+    // inbound_message, a HubSpot engagement) collides with ANY human-confirmed row about the same message, a DONE by
+    // email (source email_command, the reply on inbound_message_id) included, never only with its own source key.
+    if ((input.source.kind === 'inbound_message' || input.source.kind === 'hubspot_engagement') && typeof prisma.conversationDisposition?.findFirst === 'function') {
+      const settled: { id: string } | null = await prisma.conversationDisposition.findFirst({
+        where: { human_confirmed: true, inbound_message_id: input.source.id },
+        select: { id: true },
+        orderBy: { created_at: 'asc' },
+      });
+      if (settled) throw new Refusal('refused', 'duplicate_source', undefined, settled.id);
+    }
     if (hypothesisGiven) {
       hypothesis = await prisma.prospectingHypothesis.findUnique({
         where: { id: input.hypothesisId },

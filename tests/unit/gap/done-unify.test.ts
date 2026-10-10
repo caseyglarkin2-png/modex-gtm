@@ -350,6 +350,25 @@ describe('the opt-out, the progress note, a reply recorded before and a non-repl
     expect(w.send.mock.calls.find((call) => /Settled, by your word/.test(String(call[0].text)))![0].text).toContain('What their reply means was recorded before ("They asked for something"); nothing was recorded twice.');
   });
 
+  it('R5 review (finding 2): Capture confirmed after a DONE never records the reply a second time: one disposition, one CRM note', async () => {
+    const w = await world();
+    await w.apply(msg(w.thread('reply:m-craig'), 'DONE: answered Craig from Gmail the same day'));
+    expect(w.db.store.conversationDisposition).toHaveLength(1);
+    const done = w.db.store.conversationDisposition[0];
+    // The reply's thesis, as Capture holds it (the DONE row stands without one).
+    w.db.store.prospectingHypothesis.push({ id: 'hyp-kenco', status: 'active', account_name: 'Kenco', primary_persona_id: 11, problem_family: 'gate dwell', problem_hypothesis: 'Trailers wait at the gate.', primary_persona: { id: 11, email: CRAIG, hubspot_contact_id: 'hs-11', account_name: 'Kenco' } });
+    // Capture's confirm (capture/store.ts decideReplyKind) records on the reply's own source: inbound_message m-craig.
+    const capture = await recordDisposition(w.c, { hypothesisId: 'hyp-kenco', personaId: 11, contactEmail: CRAIG, channel: 'email', responseClass: 'problem_confirmed', buyerLanguage: 'Can you send the two-site comparison?', source: { kind: 'inbound_message', id: 'm-craig' }, actor: SELLER, actorKind: 'human', now: NOW }, { mirror: w.mirror, stopRuns: w.stopRuns as any, audit: async () => ({ stored: true, reviewQueued: false }) });
+    expect(capture).toEqual({ ok: false, kind: 'refused', reason: 'duplicate_source', existingId: done.id });
+    expect(w.db.store.conversationDisposition, 'one disposition').toHaveLength(1);
+    expect(w.mirror, 'one mirror call').toHaveBeenCalledTimes(1);
+    expect(w.notes, 'one CRM note').toHaveLength(1);
+    // The same holds for a reply that arrived through HubSpot (its engagement id is the reply's id).
+    const engagement = await recordDisposition(w.c, { hypothesisId: 'hyp-kenco', personaId: 11, contactEmail: CRAIG, channel: 'email', responseClass: 'problem_confirmed', buyerLanguage: 'x', source: { kind: 'hubspot_engagement', id: 'm-craig' }, actor: SELLER, actorKind: 'human', now: NOW }, { mirror: w.mirror, stopRuns: w.stopRuns as any, audit: async () => ({ stored: true, reviewQueued: false }) });
+    expect(engagement).toMatchObject({ ok: false, reason: 'duplicate_source', existingId: done.id });
+    expect(w.db.store.conversationDisposition).toHaveLength(1);
+  });
+
   it('a DONE on a non-reply item keeps the done outcome: no disposition, the service never called', async () => {
     const w = await world();
     const r = await w.apply(msg(w.thread('deal:Boston Beer:2026-10-10'), 'DONE: sent Phil the four documents'));
