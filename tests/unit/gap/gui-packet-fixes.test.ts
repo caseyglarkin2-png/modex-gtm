@@ -161,7 +161,7 @@ describe('Evidence: our dossier is interpretation, an excerpt gets its original 
     const a = await buildAssignment(ledgerDb({}).client(), { plan: plan([acme]), item: acme, ...input }, { askContext: async () => ask({ accountName: 'Acme Foods' }), pursued: async () => [], packet: { relationship, imported, contact: { hubspotContact: null } }, senderEmail: null });
     const L = lines(a.text);
     const at = L.indexOf('What changed or remains unresolved:');
-    expect(L[at + 1]).toBe('- Our read (interpretation, not a reported fact or a buyer statement): Acme pulled production in-house, so the yards at its own plants are now the live constraint on shipped volume. (written Jun 25, 2026; imported Oct 9, 2026; War-room dossier, our own material https://yardflow.ai/for/acme-foods)');
+    expect(L[at + 1]).toBe('- Our read (interpretation, not a reported fact or a buyer statement): Acme pulled production in-house, so the yards at its own plants are now the live constraint on shipped volume. (written Jun 25, 2026; imported Oct 9, 2026; war-room dossier, our own material https://yardflow.ai/for/acme-foods)');
     expect(L[at + 2]).toBe("  Its one-line read (not an obligation): The dossier's one-liner: Acme is in-sourcing.");
     expect(L[at + 3]).toBe('- Acme Foods is opening a 900,000 square foot distribution center in Reno with 120 dock doors. (event Sep 24, 2026; reported Oct 1, 2026; imported Oct 9, 2026; supplychaindive.com https://supplychaindive.com/acme-reno)');
     expect(a.packet?.changed.map((c) => c.claim)).toEqual(['interpretation', 'reported']);

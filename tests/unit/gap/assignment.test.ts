@@ -135,7 +135,7 @@ describe('X06: buildAssignment', () => {
     expect(c.text).not.toContain('Not read this time: Not read this time');
     deps.askContext.mockResolvedValue({ ...ASK, coverageLine: 'Partly read: HubSpot (deals only)' });
     const d = await buildAssignment(db.client(), { plan: PLAN, item: ITEMS[0], revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, deps);
-    expect(d.text.split('\n')).toContain('Partly read: HubSpot (deals only)');
+    expect(d.text.split('\n')).toContain('- Partly read: HubSpot (deals only)');
     expect(d.text).not.toContain('Not read this time');
   });
 

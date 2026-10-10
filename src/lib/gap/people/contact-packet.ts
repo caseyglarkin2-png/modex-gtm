@@ -126,7 +126,8 @@ export function properCase(s: string | null | undefined): string | null {
   if (!s || !s.trim()) return null;
   const t = s.trim();
   if (/[A-Z]/.test(t)) return t;
-  return t.replace(/\b([a-z])([a-z'-]*)/g, (_m, a: string, rest: string) => a.toUpperCase() + rest.replace(/(['-])([a-z])/g, (_x, p: string, c: string) => p + c.toUpperCase()));
+  const small = new Set(['of', 'and', 'the', 'for', 'at', 'in', 'on', 'to', 'de', 'van', 'von', 'da', 'del', 'la', 'le', 'du']);
+  return t.replace(/\b([a-z])([a-z'-]*)/g, (m, a: string, rest: string, offset: number) => (offset > 0 && small.has(m) ? m : a.toUpperCase() + rest.replace(/(['-])([a-z])/g, (_x, p: string, c: string) => p + c.toUpperCase())));
 }
 
 const clean = (v: unknown): string | null => (typeof v === 'string' && v.trim() ? v.trim() : null);

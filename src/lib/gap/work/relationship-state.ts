@@ -110,7 +110,7 @@ export interface Referral {
  * "you can contact Jane"): a second-person frame before the verb, never their own next step ("let me check with Dave",
  * "I will ask Legal"), which stays theirs. The review of October 10 found both read as referrals.
  */
-const REFERRAL = /(?:^|[.;!?]\s*|\b(?:please|feel free to|you (?:can|could|should|may|might want to)|best to|better to|and)\s+)(?:reach out to|reach out directly to|contact|talk to|talk with|speak to|speak with|loop in|connect with|work with|check with|coordinate with|go through|try|ask|ping|email|cc|copy)\s+(?:my colleague\s+|our\s+)?([A-Z][a-z]+(?:\s+(?:[A-Z]\.?\s+)?[A-Z][a-zA-Z'-]+)?)\b/;
+const REFERRAL = /(?:^|[.;!?]\s*|\b(?:[Pp]lease|[Ff]eel free to|[Yy]ou (?:can|could|should|may|might want to)|[Bb]est to|[Bb]etter to|[Aa]nd)\s+)(?:reach out to|reach out directly to|contact|talk to|talk with|speak to|speak with|loop in|connect with|work with|check with|coordinate with|go through|try|ask|ping|email|cc|copy)\s+(?:my colleague\s+|our\s+)?([A-Z][a-z]+(?:\s+(?:[A-Z]\.?\s+)?[A-Z][a-zA-Z'-]+)?)\b/;
 const FIRST_PERSON_BEFORE = /\b(?:I|I'll|I will|I'd|I can|let me|we'll|we will|we can|we'd|I'm going to|we're going to)\s+(?:also\s+|just\s+)?$/i;
 /** The seller's own names: never a referral. */
 export const OWN_NAME_KEYS: ReadonlySet<string> = new Set(['casey', 'larkin', 'casey larkin']);
@@ -135,7 +135,9 @@ export function resolveReferralName(name: string, people: ReadonlyArray<{ name: 
     if (!last) return true;
     return ps.some((x) => x !== first && x.slice(0, 4) === last.slice(0, 4));
   });
-  if (near.length === 1) return { name: near[0].name ?? nameFromAddress(near[0].email as string), email: lower(near[0].email) || null };
+  // The same person known twice (a persona row and a correspondent address) is one candidate.
+  const uniq = [...new Map(near.map((p) => [lower(p.email) || nameKeyOf(p.name), p] as const)).values()];
+  if (uniq.length === 1) return { name: uniq[0].name ?? nameFromAddress(uniq[0].email as string), email: lower(uniq[0].email) || null };
   return { name: name.trim(), email: null };
 }
 
