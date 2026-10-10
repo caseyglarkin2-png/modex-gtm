@@ -530,17 +530,39 @@ export function neverMarksFrom(rows: readonly DecisionRow[]): NeverMark[] {
   return out.sort((a, b) => b.since.localeCompare(a.since));
 }
 
+/**
+ * R5 review (finding 9): the decision that stands on one key (its rows newest first). A relist reverses ONLY the never
+ * it ended: that never and the relist are passed over, and the newest decision before the never stands again (dismiss,
+ * never, relist: dismissed). With nothing before the never, nothing stands (undecided). Pure.
+ */
+function standingDecision(rows: readonly DecisionRow[]): DecisionRow | null {
+  let i = 0;
+  while (i < rows.length) {
+    if (decisionOf(rows[i]) !== RELIST) return rows[i];
+    const ended = rows.findIndex((r, k) => k > i && decisionOf(r) === 'never');
+    if (ended < 0) return null;
+    i = ended + 1;
+  }
+  return null;
+}
+
 /** The decided trigger and person keys from the decision rows (newest first). Pure; loadDecided reads the rows. */
 export function decidedFrom(rows: readonly DecisionRow[], now: Date): Set<string> {
-  const newest = new Map<string, DecisionRow>();
-  for (const r of rows) if (!newest.has(r.subject_id)) newest.set(r.subject_id, r);
+  const byKey = new Map<string, DecisionRow[]>();
+  for (const r of rows) {
+    const list = byKey.get(r.subject_id);
+    if (list) list.push(r);
+    else byKey.set(r.subject_id, [r]);
+  }
   const out = new Set<string>();
-  for (const [key, r] of newest) {
+  for (const [key, list] of byKey) {
     // A domain key carries only a `never` or its `relist` (decide.ts refuses anything else there); the marks below say which stands.
     if (key.startsWith('domain:')) continue;
+    // A relist decides nothing by itself: the decision before the never it ended stands again (finding 9), read as usual.
+    const r = standingDecision(list);
+    if (!r) continue;
     const d = decisionOf(r);
     if (d === 'skip' && now.getTime() - new Date(r.created_at).getTime() > SKIP_DAYS * 86_400_000) continue;
-    // A relist decides nothing by itself: the key is undecided again from its time on (a later decision decides it as usual).
     if (d === 'explore' || d === 'more' || d === RELIST) continue;
     out.add(key);
   }

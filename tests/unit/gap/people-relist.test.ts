@@ -169,6 +169,25 @@ describe('the newest never-or-relist row on a key decides', () => {
     expect(RECORDED_DECISIONS).toContain('relist');
     expect(PERSON_DECISIONS as readonly string[]).not.toContain('relist');
   });
+
+  it('R5 review (finding 9): a relist reverses only the never: the newest decision before the never stands again (dismiss, never, relist: dismissed)', () => {
+    const desc = (rows: Row[]) => [...rows].sort((a, b) => b.created_at.getTime() - a.created_at.getTime());
+    const a = 'person:a@x-co.com';
+    const dismissed = desc([row(a, 'dismiss', '2026-10-01T00:00:00Z'), row(a, 'never', '2026-10-02T00:00:00Z'), row(a, 'relist', '2026-10-03T00:00:00Z')]);
+    expect(neverMarksFrom(dismissed as never)).toEqual([]);
+    expect(decidedFrom(dismissed as never, NOW)).toEqual(new Set([a]));
+    // The decision before the never is read as it always is: an explore decides nothing, a skip only for SKIP_DAYS.
+    const explored = desc([row(a, 'explore', '2026-10-01T00:00:00Z'), row(a, 'never', '2026-10-02T00:00:00Z'), row(a, 'relist', '2026-10-03T00:00:00Z')]);
+    expect(decidedFrom(explored as never, NOW)).toEqual(new Set());
+    const skipped = desc([row(a, 'skip', '2026-10-08T00:00:00Z'), row(a, 'never', '2026-10-08T01:00:00Z'), row(a, 'relist', '2026-10-08T02:00:00Z')]);
+    expect(decidedFrom(skipped as never, NOW)).toEqual(new Set([a]));
+    expect(decidedFrom(skipped as never, later(SKIP_DAYS + 3))).toEqual(new Set());
+    // Two nevers each relisted: the decision before the first stands; nothing before it: undecided.
+    const twice = desc([row(a, 'dismiss', '2026-10-01T00:00:00Z'), row(a, 'never', '2026-10-02T00:00:00Z'), row(a, 'relist', '2026-10-03T00:00:00Z'), row(a, 'never', '2026-10-04T00:00:00Z'), row(a, 'relist', '2026-10-05T00:00:00Z')]);
+    expect(decidedFrom(twice as never, NOW)).toEqual(new Set([a]));
+    const bare = desc([row(a, 'never', '2026-10-02T00:00:00Z'), row(a, 'relist', '2026-10-03T00:00:00Z')]);
+    expect(decidedFrom(bare as never, NOW)).toEqual(new Set());
+  });
 });
 
 describe('refusals', () => {
