@@ -324,10 +324,16 @@ function producers(i: HealthInputs['producers']): HealthComponent | null {
   const day = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' });
   const bad = ever.filter((s) => s.state === 'stale' || s.state === 'failed');
   if (bad.length) {
-    const words = bad.map((s) => (s.state === 'failed' ? `${s.label} failed ${day(s.lastImportAt!)}` : `${s.label} stalled since ${day(s.lastImportAt!)}`));
+    // 2026-10-10: a stale producer is judged by its newest report date; one reimported recently says so, never "stalled since" a fresh import.
+    const staleWords = (s: ProducerStatus) => (s.staleKind === 'reimported' ? `stale (reimported ${day(s.lastImportAt!)})` : s.staleKind === 'nothing_newer' ? `stale (newest report ${s.lastReportedOn ?? 'undated'}; nothing newer on ${day(s.lastImportAt!)})` : `stalled since ${day(s.lastImportAt!)}`);
+    const words = bad.map((s) => (s.state === 'failed' ? `${s.label} failed ${day(s.lastImportAt!)}` : `${s.label} ${staleWords(s)}`));
     return { ...base, state: 'DEGRADED', label: `Intelligence producers: ${words.join('; ')}`, detail };
   }
-  return { ...base, state: 'HEALTHY', label: `Intelligence producers current: ${ever.map((s) => s.label).join(', ')}`, detail };
+  // A one-time import (oneShot) is held by design: named apart, never as current and never as stalled.
+  const current = ever.filter((s) => s.state !== 'one_time').map((s) => s.label);
+  const once = ever.filter((s) => s.state === 'one_time').map((s) => s.label);
+  const label = [current.length ? `Intelligence producers current: ${current.join(', ')}` : 'No producer current', once.length ? `one-time: ${once.join(', ')}` : null].filter(Boolean).join('; ');
+  return { ...base, state: 'HEALTHY', label, detail };
 }
 
 export function evaluateHealth(inputs: HealthInputs, now: Date): HealthReport {
