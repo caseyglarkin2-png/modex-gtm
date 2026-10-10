@@ -4,7 +4,7 @@ STATUS: HANDOFF (the overnight continuation of the intelligence wiring program; 
 
 ## 1. What shipped
 
-- PR #445, merged to main at RELEASE2_SHA; production RELEASE2_DEPLOY. Rollback: 4e5e552e (`dpl_G8mUVu2cW83GTaiakA4vL6ubpXZy`, the Gmail action UI release of 01:31Z).
+- PR #445, merged to main at f06a47f0; production `dpl_FjBEPuuVbMeY5mhuD9jUr4kUqDYm` READY 2026-10-10T04:15:10Z on f06a47f0. Rollback: 4e5e552e (`dpl_G8mUVu2cW83GTaiakA4vL6ubpXZy`, the Gmail action UI release of 01:31Z).
 - The packet's contradictions (three commits, e3a24cd3, 4e42307f + 1e2a8793, 90a3b12a), each pinned by tests: `gui-packet-fixes` (8), `gui-packet-fixes-2` (10), `gui-relationship-fixes` (6), `gui-relationship-fixes-2` (4), `gui-plan-hold` (3); the earlier pins updated deliberately.
 - The Google Workspace and Gemini extension (four commits by builder F, merged): `signals/drive-parsers.ts`, `drive-records.ts`, `drive-client.ts`, `drive-sync.ts`, `work/evidence-group.ts`, the cron `/api/cron/gap-drive-sync` (every six hours), `scripts/gap/sync-drive.ts` (dry run by default), the contract's `evidenceGroup`, real fixtures with their Drive ids; 27 tests across six files; the readability guard proven RED when disabled.
 - The Clawd cron: three pages of 100 per run (the export holds more than 8,000 rows behind the cursor; one page ran in 53 s; three pages of 200 timed out on October 9).
@@ -50,6 +50,7 @@ What the preview cannot show: our Sent and Drafts. Production holds the GAP mail
 | The Hitlist one-time read | OPTIONAL | only with its service key, if the Railway service still exists; never its frontend or sequences |
 | sales-agent | READ, one optional candidate | the bounded read found one candidate (per-account LLM research briefs, undated, no sources, through its export endpoint with the key modex already holds) and nothing else GAP lacks; the checklist's Priority 4 row has the table; not imported unless you say undated LLM briefs are worth it; its signals, intel-vault and export GET routes carry no auth (worth a look) |
 | Stray folder `C:\Users\casey\wt-clawd-main` | NAMED DEBT | not a registered worktree; delete by hand when convenient |
+| GitHub CI (typecheck, unit-tests) | IGNORED by your word (no budget) | it fails on every run; merges proceed on the local gate (the focused battery, tsc, eslint); nothing to do |
 
 ## 4. The one consolidated list of credentials and user actions
 

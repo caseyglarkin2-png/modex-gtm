@@ -4,8 +4,8 @@ STATUS: ACTIVE. The consolidated scope (the wiring plan IW01-IW16, the second li
 
 ## Release 2: the overnight continuation (October 10, 2026)
 
-- MERGED: modex-gtm PR #445 (main RELEASE2_SHA): the packet's two rounds of fixes (e3a24cd3, 4e42307f, 1e2a8793), the Drive and Gemini extension (builder F: 7fdc4d17, a38b6d6c, bf71fe55, 7c7e47bf), the Clawd cron at three pages per run.
-- DEPLOYED: RELEASE2_DEPLOY (rollback: 4e5e552e, `dpl_G8mUVu2cW83GTaiakA4vL6ubpXZy` at 821c43ec).
+- MERGED: modex-gtm PR #445 (main f06a47f0): the packet's two rounds of fixes (e3a24cd3, 4e42307f, 1e2a8793), the Drive and Gemini extension (builder F: 7fdc4d17, a38b6d6c, bf71fe55, 7c7e47bf), the Clawd cron at three pages per run.
+- DEPLOYED: `dpl_FjBEPuuVbMeY5mhuD9jUr4kUqDYm` READY 2026-10-10T04:15:10Z on f06a47f0 (rollback: 4e5e552e, `dpl_G8mUVu2cW83GTaiakA4vL6ubpXZy` at 821c43ec).
 - DEMONSTRATED: `docs/gap/ASSIGNMENT_PACKETS_PREVIEW_2026-10-10.md` (and `.html`) re-rendered against production with the fixed renderer, read only: Kenco, The Boston Beer Company, PepsiCo, Walmart, Keurig Dr Pepper and an information-only signal.
 - REVIEWED: an independent read-only reviewer inspected the first round (identity attribution, uncertain outbound history, recipient binding, suppression, duplicate activity) and verified five defects; all five are fixed in the second round and pinned by tests (`gui-relationship-fixes-2`, `gui-packet-fixes-2`).
 - PRODUCERS: the vault pushed again on October 10 (7,434 notes on record, a `knowledge.vault_synced` ledger row); the Clawd cron ran on schedule every two hours overnight (cursor 1207 to 1713 by 02:21Z, 100 accepted and 0 duplicates per run after the 61/39 proof), more than 8,000 export rows wait behind the cursor, so the bound is now three pages of 100 per run (about 3,600 a day); the export-folder consumer ran once by hand (0 files; Codex has not written its first structured export yet).
