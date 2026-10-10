@@ -9,6 +9,7 @@ vi.mock('next/navigation', () => ({ useRouter: () => ({ refresh: vi.fn() }) }));
 
 import { listReplies } from '@/lib/gap/replies/list';
 import { accountRepliedRecently } from '@/lib/gap/replies/account-reply';
+import { matchesWhere } from './fixtures/where';
 import { CaptureFlow } from '@/components/gap/capture-flow';
 
 const T = (m: number) => new Date(Date.UTC(2026, 8, 28, 12, m));
@@ -51,7 +52,8 @@ describe('D6: hold clearing', () => {
     const inbound = [{ id: 'hs:991', from_email: 'boss@pepsico.com', subject: 'Re: yards', received_at: T(1) }];
     const prisma = (dispositions: any[]) => ({
       inboundMessage: { findMany: vi.fn(async () => inbound) },
-      conversationDisposition: { findMany: vi.fn(async ({ where }: any) => dispositions.filter((d) => where.source_kind.in.includes(d.source_kind) && where.source_id.in.includes(d.source_id))) },
+      // The shared where evaluator (R5 review: the hold's query also reads DONE rows by inbound_message_id), not one hand-matched shape.
+      conversationDisposition: { findMany: vi.fn(async ({ where }: any) => dispositions.filter((d) => matchesWhere({ human_confirmed: true, inbound_message_id: null, ...d }, where))) },
     });
     expect(await accountRepliedRecently(prisma([]), 'maria@pepsico.com', T(30))).toMatchObject({ id: 'hs:991' });
     expect(await accountRepliedRecently(prisma([{ source_kind: 'hubspot_engagement', source_id: 'hs:991' }]), 'maria@pepsico.com', T(30))).toBeNull();
