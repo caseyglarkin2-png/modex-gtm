@@ -311,7 +311,8 @@ function producers(i: HealthInputs['producers']): HealthComponent | null {
   if (i === undefined) return null;
   if (i === null) return { ...base, state: 'DEGRADED', label: 'Intelligence producers not readable', detail: 'The producer ledger could not be read this time.' };
   const detail = i.map((s) => s.line).join(' ') || 'No producer on record.';
-  const ever = i.filter((s) => s.state !== 'never');
+  // A producer whose consumer has no credential yet (not_configured) is a setup step, not a stalled source: named in the detail, not in the label.
+  const ever = i.filter((s) => s.state !== 'never' && s.state !== 'not_configured');
   if (!ever.length) return { ...base, state: 'HEALTHY', label: 'No producer has imported yet', detail };
   const day = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' });
   const bad = ever.filter((s) => s.state === 'stale' || s.state === 'failed');
