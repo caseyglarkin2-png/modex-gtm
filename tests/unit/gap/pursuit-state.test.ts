@@ -238,11 +238,32 @@ describe('paused reply (Casey, 2026-10-10): the reply on record and the first to
     expect(s.stateLine).not.toMatch(/Someone replied/);
   });
 
-  it('a motion read before its hold rode along says the writer and the day off its headline; with nobody lined up, the first touch to anyone else there is what is paused', () => {
-    const s = projectPursuitState(base({ eligible: [], motion: { state: 'paused_reply', primary: null, next: null, headline: pausedMotion.headline } }));
+  it('a motion read before its hold rode along says the writer and the day off its headline; with people eligible and nobody chosen, the first touch to anyone else there is what is paused', () => {
+    const two = [
+      { key: 'gap:1', personaId: 1, name: 'Doug Estrada', title: 'Director Transportation' },
+      { key: 'gap:2', personaId: 2, name: 'Sam Ortiz', title: 'Director Logistics' },
+    ];
+    const s = projectPursuitState(base({ eligible: two, motion: { state: 'paused_reply', primary: null, next: null, headline: pausedMotion.headline } }));
     expect(s.paused).toMatchObject({ reply: { name: 'dana@acmefoods.com', words: null }, proposed: { kind: 'first_touch', to: null } });
     expect(s.blocker).toBe("A reply from dana@acmefoods.com on Oct 4 was received (its words are not in GAP's synced inbox). The proposed first touch to anyone else at Acme Foods is paused by the send gate: the reply is not recorded yet; nothing was sent.");
     expect(s.stateLine).toBe('Reply on record: dana@acmefoods.com, Oct 4. First touch paused, nothing sent');
+  });
+
+  it('R5 review (finding 6): nothing proposed (no ready card, nobody eligible, no follow-up due) pauses nothing: no "proposed first touch to anyone else"', () => {
+    const s = projectPursuitState(base({ eligible: [], motion: { state: 'paused_reply', primary: null, next: null, headline: pausedMotion.headline, pausedBy: HOLD } }));
+    expect(s.paused ?? null).toBeNull();
+    expect(`${s.stateLine} ${s.blocker}`).not.toMatch(/proposed|paused by the send gate/);
+    const listed = projectPursuitState(base({ eligible: [], motion: { state: 'paused_reply', primary: null, next: null, headline: pausedMotion.headline, pausedBy: HOLD }, replies: [{ from: 'dana@acmefoods.com', name: 'Dana Trans', at: '2026-10-04T12:00:00Z', subject: 'Re: Yard question', snippet: WORDS, triaged: false, id: 'm-dana' }] }));
+    expect(listed.state).toBe('replied');
+    expect(listed.paused ?? null).toBeNull();
+    expect(listed.blocker).toBe('Dana Trans wrote on Oct 4; the reply is not recorded yet.');
+  });
+
+  it('R5 review (finding 6): with nobody eligible and a follow-up due, the kind follows what exists: the follow-up to that person is what is paused', () => {
+    const s = projectPursuitState(base({ eligible: [], followUpDue: { personaId: 7, name: 'Pat Lee', dueAt: '2026-10-05T12:00:00Z', cardHref: '/gap/pack/d7' }, motion: { state: 'paused_reply', primary: null, next: null, headline: pausedMotion.headline, pausedBy: HOLD } }));
+    expect(s.paused?.proposed).toEqual({ kind: 'follow_up', to: 'Pat Lee' });
+    expect(s.blocker).toBe(`A reply from dana@acmefoods.com on Oct 4 was received ("${WORDS}"). The proposed follow-up to Pat Lee is paused by the send gate: the reply is not recorded yet; nothing was sent.`);
+    expect(s.stateLine).toBe('Reply on record: dana@acmefoods.com, Oct 4. Follow-up to Pat Lee paused, nothing sent');
   });
 
   it('an unrecorded reply the gate does not hold on (no paused motion: older than its window) pauses nothing: said as the reply alone; an opt-out under the hold stays an opt-out', () => {

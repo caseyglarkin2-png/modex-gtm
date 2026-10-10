@@ -206,13 +206,30 @@ const PAUSED_HEADLINE = /^Paused: (\S+) at .+? wrote in on (\d{4}-\d{2}-\d{2})/;
  * holds (the motion's next person, else the chosen or only eligible person, else anyone else at the account). Null
  * unless the motion is `paused_reply`: an unrecorded reply the gate does not hold on (older than its window) pauses
  * nothing and is said as a reply alone.
+ * R5 review (finding 6): paused only when something is proposed. A ready card (the motion's next person) or an eligible
+ * person proposes a first touch; else a due follow-up proposes a follow-up; else nothing is proposed and the reply is
+ * said alone (never "the proposed first touch to anyone else" when there is no one).
  */
 export function pausedOf(
-  i: Pick<PursuitInput, 'accountName' | 'replies'> & { motion: { state: string; next: { name: string } | null; headline?: string; pausedBy?: NonNullable<PursuitInput['motion']>['pausedBy'] } | null },
+  i: Pick<PursuitInput, 'accountName' | 'replies'> & {
+    motion: { state: string; next: { name: string } | null; headline?: string; pausedBy?: NonNullable<PursuitInput['motion']>['pausedBy'] } | null;
+    /** The resolver's eligible people (the account page); absent where the caller holds only the motion (Work). */
+    eligible?: ReadonlyArray<unknown>;
+    followUpDue?: { name: string } | null;
+  },
   firstTouchTo: string | null,
 ): PausedReply | null {
   const m = i.motion;
   if (m?.state !== 'paused_reply') return null;
+  const proposed: PausedReply['proposed'] | null =
+    m.next?.name || firstTouchTo
+      ? { kind: 'first_touch', to: m.next?.name ?? firstTouchTo }
+      : (i.eligible?.length ?? 0) > 0
+        ? { kind: 'first_touch', to: null }
+        : i.followUpDue?.name
+          ? { kind: 'follow_up', to: i.followUpDue.name }
+          : null;
+  if (!proposed) return null;
   const head = PAUSED_HEADLINE.exec(m.headline ?? '');
   const by = m.pausedBy ?? (head ? { from: head[1], receivedAt: `${head[2]}T12:00:00.000Z`, snippet: null, id: null } : null);
   const from = by?.from.trim().toLowerCase() || null;
@@ -231,7 +248,7 @@ export function pausedOf(
       words: src?.snippet ?? by?.snippet ?? null,
       id: src?.id ?? by?.id ?? null,
     },
-    proposed: { kind: 'first_touch', to: m.next?.name ?? firstTouchTo },
+    proposed,
     reason: 'reply_unrecorded',
   };
 }
