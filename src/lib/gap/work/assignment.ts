@@ -2,13 +2,17 @@
  * START AND THE ASSIGNMENT (X06, GAP OS sales execution engine, 2026-10-08). Server only.
  *
  * START (`work.day_started`, once per New York day) is the seller beginning the day, from the briefing's link or by
- * reply. An ASSIGNMENT is one email per plan item (work/plan.ts): the account and the person, why now, what we know
- * (the account's Ask context: the one composition Work, Ask and the page share, ask/context.ts), the move, and, for a
- * first touch, the action pack's rendered copy quoted line by line with its sources. It is recorded as
- * `work.assignment_sent` (subject `work_item` / the item key) with the Gmail thread id, the RFC message id when Gmail
- * returns one, the item token, the revision and the content hash: what a reply's APPROVE is bound to (X07, X11).
+ * reply. An ASSIGNMENT is one email per plan item (work/plan.ts), composed as the ASSIGNMENT PACKET (the Gmail
+ * action UI audit, GUI-02, 2026-10-10; work/assignment-packet.ts): the account, the person and the situation; what
+ * changed or remains unresolved; who (the contact packet, people/contact-packet.ts); the relationship reconciled across
+ * both sides of the mail (work/relationship-state.ts); the evidence with its sources and dates (from the account's Ask
+ * context: the one composition Work, Ask and the page share, ask/context.ts); the possible moves; the prepared
+ * material (for a first touch, the action pack's rendered copy quoted line by line with its sources); the controls.
+ * It is recorded as `work.assignment_sent` (subject `work_item` / the item key) with the Gmail thread id, the RFC
+ * message id when Gmail returns one, the item token, the revision and the content hash: what a reply's APPROVE is
+ * bound to (X07, X11).
  *
- * Rules (pinned by tests/unit/gap/assignment.test.ts):
+ * Rules (pinned by tests/unit/gap/assignment.test.ts and gui-packet.test.ts):
  *   - the subject carries `[GAP#<item token>.<revision>]`, which a reply keeps
  *   - the prepared email is QUOTED (`> `) line by line and no line of the body starts with a command word, so a
  *     reply that quotes the assignment never reads as a command
@@ -28,8 +32,9 @@ import { buildAskContext } from '../ask/context';
 import type { AskContext } from '../ask/grounding';
 import { loadActionPack } from '../execution/action-pack';
 import { signActionToken } from './action-token';
-import { COMMAND_WORDS } from './briefing';
-import { loadInDealsSummary } from '../deals/in-deals';
+import { loadInDealsSummary, type InDealsSummary } from '../deals/in-deals';
+import { gapGmailSender } from '../execution/gap-sender';
+import { buildAssignmentPacket, renderPacketHtml, renderPacketText, type AssignmentPacket, type BuildPacketDeps } from './assignment-packet';
 import { dealCoverageFrom } from './deal-coverage';
 import { loadPursued, type PursuedItem } from './intel';
 import type { DayPlan, PlanItem } from './plan';
@@ -67,6 +72,8 @@ export interface BuiltAssignment {
   move: string;
   /** IW15: the prepared email is addressed to a different person than the item names; the item is held, never assigned. */
   hold?: { reason: 'recipient_mismatch'; detail: string } | null;
+  /** GUI-02: the view model the text and the HTML were rendered from. */
+  packet?: AssignmentPacket;
 }
 
 export interface AssignmentDeps {
@@ -75,6 +82,10 @@ export interface AssignmentDeps {
   send?: (payload: GmailSendPayload) => Promise<{ provider: 'gmail'; id: string | null; threadId: string | null }>;
   /** The pursued items with their angles (work/intel.ts loadPursued by default; tests inject one). */
   pursued?: (prisma: PrismaLike, now: Date) => Promise<PursuedItem[]>;
+  /** GUI-02: the packet's readers (the relationship, the contact packet, the imported records); tests inject them. */
+  packet?: BuildPacketDeps;
+  /** GUI-07: the mailbox a prepared email would go from; `undefined` means the GAP sender's (null when none is configured). */
+  senderEmail?: string | null;
 }
 
 /** The item kinds a prepared angle is read for: account work, never a first touch with a pack. */
@@ -85,8 +96,7 @@ const ANGLE_KINDS = new Set(['deal', 'follow_up', 'review']);
  * family of names is placed at the account only with the coverage; without it Kenco's angle found no account and
  * the assignment said "nothing prepared"). The in-deals summary is cached in SystemConfig: the read the page already makes.
  */
-async function defaultPursued(prisma: PrismaLike, now: Date): Promise<PursuedItem[]> {
-  const summary = await loadInDealsSummary(prisma, { now }).catch(() => null);
+async function defaultPursued(prisma: PrismaLike, now: Date, summary: InDealsSummary | null): Promise<PursuedItem[]> {
   return loadPursued(prisma, now, { coverage: dealCoverageFrom(summary) });
 }
 
@@ -116,13 +126,6 @@ export interface BuildAssignmentInput {
   note?: string | null;
 }
 
-const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-const endSentence = (s: string) => (/[.!?]$/.test(s.trim()) ? s.trim() : `${s.trim()}.`);
-const COMMAND_LINE = new RegExp(`^(${COMMAND_WORDS.join('|')})\\b`, 'i');
-/** A body line must never start with a command word; one that would is led with a dash. */
-const safeLine = (s: string) => (COMMAND_LINE.test(s) ? `- ${s}` : s);
-const dateLabel = (d: Date | string | null | undefined) => (d ? new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' }) : null);
-
 export const assignmentTag = (itemToken: string, revision: number) => `[GAP#${itemToken}.${revision}]`;
 
 function itemLink(input: BuildAssignmentInput): string {
@@ -146,52 +149,33 @@ export async function buildAssignment(prisma: PrismaLike, input: BuildAssignment
 
   const n = item.rank + 1;
   const subject = `GAP ${n} of ${plan.items.length}, ${item.accountName}: ${item.title} ${assignmentTag(item.token, input.revision)}`;
-  const who = item.person?.name ? (item.person.title ? `${item.person.name} (${item.person.title})` : item.person.name) : null;
 
-  const lines: string[] = [];
-  lines.push(`${item.accountName}${who ? `: ${who}` : ''}.`);
-  lines.push(`Why now: ${[endSentence(item.why), ctx?.state.stateLine ? endSentence(ctx.state.stateLine) : null].filter(Boolean).join(' ')}`);
-  const known = (ctx?.story ?? []).flatMap((s) => s.lines).slice(0, 6);
-  if (known.length) {
-    lines.push('', 'What we know:');
-    for (const l of known) lines.push(safeLine(`- ${endSentence(l.text)}${l.basis ? ` (${l.basis})` : ''}`));
-  }
-  if (ctx?.opening?.whyTheyCare) lines.push(safeLine(`Why they care: ${endSentence(ctx.opening.whyTheyCare)}`));
-  for (const b of (ctx?.buyerSaid ?? []).slice(0, 3)) lines.push(safeLine(`They said: "${b.text}"${b.who || b.at ? ` (${[b.who, b.at].filter(Boolean).join(', ')})` : ''}`));
-  // Seller acceptance (C4): the sources the Ask context did NOT read this time are named, so "what we know" is never
-  // mistaken for everything there is; nothing is printed when everything was read.
-  // The context's own line already carries its prefixes ("Not read this time: ...", "Partly read: ..."): printed verbatim;
-  // a bare list gets the prefix. The harness reads the "Not read this time" prefix at the start of the printed line.
-  // Knowledge program (2026-10-09): the vault's account note for the seller (never quotable to the buyer): the wedge read and the next action with its due day.
-  const sellerNote = (ctx as { sellerNote?: { lines: string[] } | null } | null)?.sellerNote?.lines ?? [];
-  if (sellerNote.length) { lines.push('', 'Your vault note (for you, never quote it to the buyer):'); for (const l of sellerNote.slice(0, 3)) lines.push(safeLine(`- ${endSentence(l)}`)); }
-  const coverage = typeof ctx?.coverageLine === 'string' ? ctx.coverageLine.trim() : '';
-  if (coverage) lines.push(safeLine(/^(Not read this time|Partly read|Read)\b/i.test(coverage) ? coverage : `Not read this time: ${coverage}`));
   let prepared: Prepared = { kind: 'none' };
+  let pursued: PursuedItem[] = [];
+  // The in-deals summary (cached in SystemConfig: the read the page already makes), read ONCE here for the deal
+  // coverage of the pursued read and for the packet's deal links and stages; an injected pursued read (the test seam)
+  // skips it, and the packet then says the deals were not read.
+  const summary = deps.pursued ? null : await loadInDealsSummary(prisma, { now: input.now }).catch(() => null);
   // Seller acceptance follow-up addendum (2026-10-09): a deal, follow-up or review item at an account where a
   // develop_angle task succeeded (a person placed at the account at read time) carries that angle: the Kenco deal
   // item said "nothing prepared" in production although the angle for Dave Kiesling was ready.
   if (ANGLE_KINDS.has(item.kind) && !item.refs.decisionId) {
-    const pursued = await (deps.pursued ?? defaultPursued)(prisma, input.now).catch(() => [] as PursuedItem[]);
+    pursued = await (deps.pursued ? deps.pursued(prisma, input.now) : defaultPursued(prisma, input.now, summary)).catch(() => [] as PursuedItem[]);
     const p = pursued.find((x) => x.accountName === item.accountName && x.status === 'ready' && x.angle);
     if (p?.angle) {
       // The writer's name, else the first person the angle names, before a bare address.
       const who = p.writer?.name ?? p.angle.peopleNamed[0]?.name ?? p.writer?.email ?? p.title;
       const opener = p.angle.starters[0] ?? null;
       prepared = { kind: 'angle', who, whyItMatters: p.angle.whyItMatters, opener };
-      lines.push('', safeLine(`GAP has prepared an angle for ${who}: ${endSentence(p.angle.whyItMatters)}`));
-      if (opener) lines.push(safeLine(`Opener: ${opener}`));
     }
   }
   const move = ctx?.state.next || item.title;
-  lines.push('', `The move: ${endSentence(move)}`);
   // X09: a proposed revision (never approved here) is shown in place of the pack's copy, with the line that says why.
   const copy = input.copyOverride
     ? { subject: input.copyOverride.subject, body: input.copyOverride.body, to: input.copyOverride.to ?? pack?.persona?.email ?? null }
     : pack?.rendered?.queued
       ? { subject: pack.rendered.queued.subject, body: pack.rendered.queued.body, to: pack.persona?.email ?? null }
       : null;
-  if (input.note) lines.push('', input.note);
   let hold: BuiltAssignment['hold'] = null;
   if (copy) {
     const to = copy.to;
@@ -203,24 +187,19 @@ export async function buildAssignment(prisma: PrismaLike, input: BuildAssignment
     const itemName = item.person?.name ?? null;
     if (itemName && recipientName && nameKey(itemName) && nameKey(recipientName) && nameKey(itemName) !== nameKey(recipientName)) {
       hold = { reason: 'recipient_mismatch', detail: `GAP's prepared email is addressed to ${recipientName}${to ? ` (${to})` : ''}, but this item names ${itemName}. Held: nothing goes out until the account's chosen person and the draft agree; choose on the account.` };
-      lines.push('', safeLine(hold.detail));
     } else {
       prepared = { kind: 'email', to, subject: copy.subject, body: copy.body };
-      lines.push('', `The email${to ? `, to ${to}` : ''}, subject "${copy.subject}":`);
-      for (const l of copy.body.split('\n')) lines.push(`> ${l}`);
-      const sources = (pack?.hypothesis?.signals ?? []).map((s) => s.signal).filter((s): s is NonNullable<typeof s> => !!s && !!s.title);
-      if (sources.length) lines.push(`Sources: ${sources.map((s) => `${s.title}${dateLabel(s.observed_at) ? ` (${dateLabel(s.observed_at)})` : ''}${s.evidence_url ? ` ${s.evidence_url}` : ''}`).join('; ')}`);
     }
   }
-  lines.push('', `Open it in GAP: ${itemLink(input)}`);
-  if (input.commandsEnabled) {
-    lines.push('', 'To act from here, put one of these on the first line of your reply: APPROVE, REVISE: your words, SKIP, DEFER, DONE: what happened, NEXT, HELP.');
-  }
-  lines.push('', 'This is an internal message from GAP to you; nothing in it went to a buyer.');
-  const text = lines.map(safeLine).join('\n');
+  // GUI-02 (2026-10-10): the one view model (the relationship reconciled, the contact packet, the evidence with its
+  // sources and dates, the moves, the prepared material, the controls) and its two renderers (work/assignment-packet.ts).
+  const senderEmail = deps.senderEmail !== undefined ? deps.senderEmail : gapGmailSender()?.userEmail ?? null;
+  const packet = await buildAssignmentPacket(prisma, { item, plan, now: input.now, ctx, pack, pursued, prepared, hold, copy: hold ? null : copy, note: input.note ?? null, baseUrl: input.baseUrl, senderEmail, inDeals: summary }, deps.packet ?? {});
+  const links = { open: itemLink(input) };
+  const text = renderPacketText(packet, links, { commandsEnabled: input.commandsEnabled });
+  const html = renderPacketHtml(packet, links, { commandsEnabled: input.commandsEnabled });
   const contentHash = input.copyOverride?.contentHash ?? pack?.contentHash ?? createHash('sha256').update(text).digest('hex');
-  const html = `<div style="font-family:system-ui,sans-serif;line-height:1.45;white-space:pre-wrap">${esc(text)}</div>`;
-  return { subject, text, html, contentHash, prepared, move, hold };
+  return { subject, text, html, contentHash, prepared, move, hold, packet };
 }
 
 /** START, once per day. `started: false` when the day was already started (the earlier row stands). */
