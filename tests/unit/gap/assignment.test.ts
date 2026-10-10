@@ -92,7 +92,7 @@ describe('X06: buildAssignment', () => {
     expect(t).toContain('> Karen, the Tulsa expansion adds dock doors.');
     expect(t).toContain('Sources: PepsiCo expands Tulsa DC (Jul 23, 2026) https://tulsaworld.com/pepsico');
     expect(t).toMatch(/Open it in GAP: https:\/\/app\.example\/gap\/item\?t=/);
-    expect(t).toContain('To act from here, put one of these on the first line of your reply: APPROVE, REVISE: your words, SKIP, DEFER, DONE: what happened, NEXT, HELP.');
+    expect(t).toContain('To act from here, put one of these on the first line of your reply: APPROVE, REVISE: your words, SKIP, DEFER, DONE: what happened, NEXT, ITEM n, HELP.');
     const words = new RegExp(`^(${COMMAND_WORDS.join('|')})\\b`, 'i');
     for (const line of t.split('\n')) expect(line).not.toMatch(words);
     expect(a.html).toContain('Tulsa: the new doors');

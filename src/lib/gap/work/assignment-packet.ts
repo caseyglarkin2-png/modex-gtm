@@ -351,9 +351,15 @@ function dealContextOf(item: PlanItem, rel: RelationshipState, sellerNote: reado
 export async function buildAssignmentPacket(prisma: PrismaLike, a: BuildPacketArgs, deps: BuildPacketDeps = {}): Promise<AssignmentPacket> {
   const { item, ctx, now } = a;
   const personName = item.person?.name ?? null;
-  const personEmail = a.copy?.to ?? a.pack?.persona?.email ?? null;
+  // A reply item names its person without an address (the card carries name and title only); the address is on the
+  // inbound message the item's link points at (`from=reply:<id>`), so the relationship and the contact can be read.
+  const replyId = /from=reply(?:%3A|:)([A-Za-z0-9]+)/.exec(item.href ?? '')?.[1] ?? null;
+  const replyRow: { from_email: string | null; from_name: string | null } | null = replyId && typeof prisma?.inboundMessage?.findUnique === 'function'
+    ? await prisma.inboundMessage.findUnique({ where: { id: replyId }, select: { from_email: true, from_name: true } }).catch(() => null)
+    : null;
+  const personEmail = a.copy?.to ?? a.pack?.persona?.email ?? replyRow?.from_email ?? null;
   // The relationship for the item's person: by their address when the prepared email names it and no hold stands, else by name at the account.
-  const relQuery = { accountName: item.accountName, email: !a.hold && personEmail ? lower(personEmail) : null, name: personName, now };
+  const relQuery = { accountName: item.accountName, email: a.hold ? (replyRow?.from_email ? lower(replyRow.from_email) : null) : personEmail ? lower(personEmail) : null, name: personName, now };
   // The deals come from the summary the assignment already read (one HubSpot-backed read for the day, never one per packet).
   const dealsRead = dealsFromSummary(a.inDeals ?? null, item.accountName);
   const relationshipDeps: RelationshipDeps = { deals: async () => dealsRead, ...(deps.relationshipDeps ?? {}) };
@@ -404,7 +410,13 @@ export async function buildAssignmentPacket(prisma: PrismaLike, a: BuildPacketAr
     accountUrl: `${a.baseUrl.replace(/\/$/, '')}${accountHref(item.accountName)}`,
     person: first,
     situation: situationOf(item, ctx),
-    stop: relationship.optOut ? { name: first?.name ?? personName ?? relationship.person.email ?? 'This person', at: relationship.optOut.at, words: relationship.optOut.words, source: relationship.optOut.source } : null,
+    // The stop: the suppression row when the person's address is known; else the item's own state (the Work card said
+    // opted out) with the message on record, so an opt-out without an address on the contact still leads the packet.
+    stop: relationship.optOut
+      ? { name: first?.name ?? personName ?? relationship.person.email ?? 'This person', at: relationship.optOut.at, words: relationship.optOut.words, source: relationship.optOut.source }
+      : item.stateKind === 'opted_out'
+        ? (() => { const said = (ctx?.buyerSaid ?? []).find((b) => /asked not to be contacted/i.test(b.text)); return { name: personName ?? first?.name ?? 'This person', at: said?.at ?? null, words: said?.text.replace(/^Asked not to be contacted:\s*/i, '').replace(/^"|"$/g, '') ?? null, source: "the item's state (opted out) and their message on record" }; })()
+        : null,
     changed: changedUnique,
     who,
     relationship,
@@ -595,7 +607,8 @@ export function packetSections(p: AssignmentPacket, links: PacketLinks, opts: Re
 
   const ctl: string[] = [`Open it in GAP: ${links.open}`, `The account: ${p.accountUrl}`];
   if (opts.commandsEnabled) {
-    ctl.push('To act from here, put one of these on the first line of your reply: APPROVE, REVISE: your words, SKIP, DEFER, DONE: what happened, NEXT, HELP.');
+    ctl.push('To act from here, put one of these on the first line of your reply: APPROVE, REVISE: your words, SKIP, DEFER, DONE: what happened, NEXT, ITEM n, HELP.');
+    ctl.push('- ITEM n: sends item n of today\'s plan as its own email (ITEM alone lists the items with their standing); nothing goes to a buyer.');
     ctl.push('- APPROVE: approves the prepared email for the send step in the app (CONFIRM + SEND there); nothing is sent from your reply.');
     ctl.push('- REVISE: your words: GAP rewrites the copy on your words and sends a new revision here; nothing goes out.');
     ctl.push('- SKIP: drops the item for today. DEFER: holds it; it returns on the next plan.');
