@@ -28,6 +28,7 @@ const req = (auth = true) => new Request('http://localhost/api/cron/gap-drive-sy
 function client(opts: { fail?: boolean } = {}): DriveClient {
   return {
     async resolveFolders(names) { return names.map((n) => ({ id: `id-${n}`, name: n })); },
+    async listFolders() { return { folders: [], complete: true }; },
     async listFiles() { if (opts.fail) throw new Error('network: socket hang up'); return { files: [{ id: 'd1', name: 'Kenco x YardFlow - Discovery', mimeType: 'application/vnd.google-apps.document', modifiedTime: '2026-09-01T00:00:00.000Z', owners: ['casey@freightroll.com'], webViewLink: 'https://docs.google.com/document/d/d1', parents: [], size: null, trashed: false }], nextPageToken: null }; },
     async listIds() { return { ids: ['d1'], complete: true }; },
     async getFile() { return null; },
@@ -83,7 +84,7 @@ describe('the Drive sync cron route', () => {
     expect(h.create).toHaveBeenCalledWith({ kind: 'refresh_token', refreshToken: 'rt-secret-value', clientId: 'cid', clientSecret: 'cs-secret-value' });
     // The fake lists the same document under each of the three default folders: one record, then two duplicates, never copies.
     expect(body).toMatchObject({ ok: true, status: 'ok', listed: 3, imported: { accepted: 1, duplicates: 2 }, foldersMissing: [] });
-    expect(body.folders.map((f: { name: string }) => f.name)).toEqual(['Meet Recordings', 'Gemini Artifacts', 'Yard Audits']);
+    expect(body.folders.map((f: { name: string }) => f.name), 'the defaults name the real yard-audit root (2026-10-10)').toEqual(['Meet Recordings', 'Gemini Artifacts', 'YardFlow \u2014 Prospect Yard Audits']);
     expect(JSON.stringify(body)).not.toContain('secret-value');
     expect(JSON.stringify(h.db!.store.gapAuditEvent)).not.toContain('secret-value');
     expect(h.db!.store.gapSignal).toHaveLength(1);

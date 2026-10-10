@@ -16,13 +16,16 @@ const CRON_SCHEDULE = '45 */6 * * *';
 /**
  * GET /api/cron/gap-drive-sync   (the Google Workspace and Gemini extension, 2026-10-10)
  *
- * The agreed Drive folders (GAP_DRIVE_FOLDERS, default Meet Recordings, Gemini Artifacts and the yard-audit folder)
+ * The agreed Drive folders (GAP_DRIVE_FOLDERS, default Meet Recordings, Gemini Artifacts and the yard-audit root, each
+ * read one level down into its subfolders, names matched normalized; drive-client.ts DRIVE_DEFAULT_FOLDERS)
  * into GAP's intelligence records every six hours: one page of DRIVE_FILES_PER_RUN files modified after the cursor
  * the last run recorded (the first run bounded to GAP_DRIVE_FIRST_RUN_DAYS), each exported or downloaded under
  * GAP_DRIVE_MAX_BYTES, parsed and imported (producer google_drive or gemini_notes); the unreadable files named on
  * the ledger row, never recorded as extracted; removals said; a failure as a failed ledger row (health shows it).
  * The credential is GAP_DRIVE_REFRESH_TOKEN (with GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET) or the delegation
- * pair GAP_DRIVE_DWD_SA_JSON and GAP_DRIVE_USER_EMAIL; none is a NOT CONFIGURED ledger row and a skip in words,
+ * pair GAP_DRIVE_DWD_SA_JSON and GAP_DRIVE_USER_EMAIL, or, needing no new secret, GAP_DRIVE_DELEGATION=gmail (the GAP
+ * sender's delegation asked for drive.readonly, once the Workspace admin adds that scope; a refusal is a failed ledger
+ * row in Google's words); none is a NOT CONFIGURED ledger row and a skip in words,
  * never an error. No credential is logged. Nothing here sends, writes HubSpot, enrolls, calls Slack or changes Drive.
  *
  * - Auth first, then GAP_OS_ENABLED. Off answers 200 with the skip payload.

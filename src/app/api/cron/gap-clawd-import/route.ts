@@ -20,8 +20,9 @@ const CRON_SCHEDULE = '20 */2 * * *';
  * GET /api/cron/gap-clawd-import   (intelligence wiring, IW07 on a schedule, 2026-10-09)
  *
  * The Clawd signal hunter's read-only export into GAP's intelligence records every two hours: from the cursor the
- * last import recorded, at most three pages of two hundred, the retained low-score candidates included, one retry on
- * a network failure, a failed ledger row on a failure (health and the briefing's coverage say so). The control plane
+ * last import recorded, at most PAGES_PER_RUN pages of PAGE_LIMIT, the retained low-score candidates included, one retry on
+ * a network failure, a failed ledger row on a failure (health and the briefing's coverage say so); each page's row
+ * says whether more waits behind the cursor and, when the export estimates it, how many rows. The control plane
  * is CLAWD_CONTROL_PLANE_URL with CLAWD_CONTROL_PLANE_TOKEN (the production names; MC_API_TOKEN and CLAWD_BASE_URL
  * are read too). No credential is logged. Nothing here posts to Slack, writes HubSpot, drafts or sends.
  *
@@ -50,7 +51,8 @@ export async function GET(request: Request) {
       await markCronFailure(CRON_NAME, { path: CRON_PATH, schedule: CRON_SCHEDULE, durationMs: Date.now() - startedAt, error: new Error(`${result.kind}: ${result.error}`) }).catch(() => undefined);
       return NextResponse.json(result, { status: 502 });
     }
-    const message = `${result.pages} page${result.pages === 1 ? '' : 's'}, ${result.items} items: ${result.accepted} accepted, ${result.duplicates} duplicates, ${result.revised} revised, ${result.invalid} invalid${result.more ? '; more waits for the next run' : ''}`;
+    // The backlog is on every page's intelligence.imported row too (producerState.more and .remaining), where producer status reads it.
+    const message = `${result.pages} page${result.pages === 1 ? '' : 's'}, ${result.items} items: ${result.accepted} accepted, ${result.duplicates} duplicates, ${result.revised} revised, ${result.invalid} invalid${result.more ? `; more waits behind the cursor for the next run${result.remaining != null ? ` (about ${result.remaining} rows)` : ''}` : ''}`;
     await markCronSuccess(CRON_NAME, { path: CRON_PATH, schedule: CRON_SCHEDULE, durationMs: Date.now() - startedAt, message, stats: { ...result } }).catch(() => undefined);
     return NextResponse.json(result);
   } catch (error) {

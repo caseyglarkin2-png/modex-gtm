@@ -131,6 +131,61 @@ describe('loadProducerStatus', () => {
     expect(producerShort(stale)).toBe('the vault: stalled since Oct 5, 2026');
   });
 
+  it('current is the newest REPORT date, not the import time (2026-10-10): an old report reimported today reads stale (reimported <date>)', async () => {
+    const db = ledgerDb(
+      {
+        audit: [
+          // Imported two hours ago, but the newest report it carried is dated Oct 1: a daily producer, eight days old.
+          run('codex_hubspot_report', day(0.1), {}, { accepted: 0, duplicates: 4, reportedOnFrom: '2026-09-28', reportedOnTo: '2026-10-01' }),
+          // A recent run that imported nothing (no report date) after an older run whose newest report is fresh: current.
+          run('yards_first_brief', day(1.5), {}, { reportedOnTo: '2026-10-09' }),
+          run('yards_first_brief', day(0.1), {}, { accepted: 0, duplicates: 0, reportedOnFrom: null, reportedOnTo: null }),
+          // A recent run that found nothing new while the newest report held is old: stale, said as nothing newer.
+          run('freight_x_signal_desk', day(6), {}, { reportedOnTo: '2026-10-03' }),
+          run('freight_x_signal_desk', day(0.2), {}, { accepted: 0, duplicates: 0, reportedOnFrom: null, reportedOnTo: null }),
+        ],
+        signals: [signal(1, 'codex_hubspot_report')],
+      },
+      NOW,
+    );
+    const list = await loadProducerStatus(db.client(), NOW, { env: {} });
+    const hs = by(list, 'codex_hubspot_report');
+    expect(hs).toMatchObject({ state: 'stale', staleKind: 'reimported', lastReportedOn: '2026-10-01', lastImportAt: day(0.1).toISOString() });
+    expect(hs.line).toBe('HubSpot Activity & Engagement report: last import Oct 9, 2026 (0 reports, 1 item, reports through Oct 1, 2026); stale (reimported Oct 9, 2026).');
+    expect(producerShort(hs)).toBe('HubSpot Activity & Engagement report: stale (reimported Oct 9, 2026; reports through Oct 1, 2026)');
+    const yfb = by(list, 'yards_first_brief');
+    expect(yfb, 'the newest report date is read across the rows, not only the newest row').toMatchObject({ state: 'current', lastReportedOn: '2026-10-09', staleKind: null });
+    const desk = by(list, 'freight_x_signal_desk');
+    expect(desk).toMatchObject({ state: 'stale', staleKind: 'nothing_newer', lastReportedOn: '2026-10-03' });
+    expect(desk.line).toBe('Freight X Signal Desk: last import Oct 9, 2026 (0 reports, 0 items, reports through Oct 3, 2026); stale (newest report Oct 3, 2026; the last run Oct 9, 2026 found nothing newer).');
+    const line = producerStatusLine(list);
+    expect(line).toContain('Not read this time: ');
+    expect(line.split('Not read this time: ')[1]).toContain('HubSpot Activity & Engagement report: stale (reimported Oct 9, 2026; reports through Oct 1, 2026)');
+    expect(line.split('Not read this time: ')[0], 'a reimported old report is not a source read this time').not.toContain('HubSpot');
+    // The imports themselves stopped too: stalled since the last import, as before.
+    const stopped = by(await loadProducerStatus(ledgerDb({ audit: [run('codex_hubspot_report', day(4), {}, { reportedOnTo: '2026-10-05' })] }, NOW).client(), NOW, { env: {} }), 'codex_hubspot_report');
+    expect(stopped).toMatchObject({ state: 'stale', staleKind: 'stalled' });
+    expect(stopped.line).toContain('; stalled since Oct 5, 2026.');
+  });
+
+  it('a one-shot producer (the war-room dossiers, oneShot in INTEL_PRODUCERS) says "one-time import (<date>)" and is never stale', async () => {
+    expect(INTEL_PRODUCERS.war_room_dossier.oneShot).toBe(true);
+    expect(Object.entries(INTEL_PRODUCERS).filter(([, v]) => v.oneShot).map(([k]) => k), 'only the dossiers are one-shot').toEqual(['war_room_dossier']);
+    const db = ledgerDb({ audit: [run('war_room_dossier', day(40), {}, { accepted: 12, reportedOnFrom: '2026-08-01', reportedOnTo: '2026-08-28' })], signals: [signal(1, 'war_room_dossier'), signal(2, 'war_room_dossier')] }, NOW);
+    const list = await loadProducerStatus(db.client(), NOW, { env: {} });
+    const wr = by(list, 'war_room_dossier');
+    expect(wr).toMatchObject({ state: 'one_time', staleKind: null, lastReportedOn: '2026-08-28' });
+    expect(wr.line).toBe('war-room dossier: one-time import (Aug 30, 2026); 0 reports, 2 items, reports through Aug 28, 2026.');
+    expect(wr.line).not.toMatch(/stale|stalled/);
+    expect(producerShort(wr)).toBe('war-room dossier: one-time import (Aug 30, 2026, 2 items)');
+    const line = producerStatusLine(list);
+    expect(line.startsWith('Sources: war-room dossier: one-time import (Aug 30, 2026, 2 items).'), line).toBe(true);
+    // Never imported is still never; a failed run is still failed.
+    expect(by(await loadProducerStatus(ledgerDb({}, NOW).client(), NOW, { env: {} }), 'war_room_dossier').state).toBe('never');
+    const failed = ledgerDb({ audit: [run('war_room_dossier', day(1), {}, { producerState: { status: 'failed', detail: 'no checkout' } })] }, NOW);
+    expect(by(await loadProducerStatus(failed.client(), NOW, { env: {} }), 'war_room_dossier').state).toBe('failed');
+  });
+
   it('a client without the tables answers never, not a throw', async () => {
     const list = await loadProducerStatus({}, NOW, { env: {} });
     expect(list.every((s) => s.state === 'never')).toBe(true);

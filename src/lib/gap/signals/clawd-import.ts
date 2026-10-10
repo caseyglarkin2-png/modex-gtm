@@ -7,6 +7,13 @@
  * and hands each page to `importIntelligenceBatch` with the page's cursor and the producer's state. A failure writes
  * a `failed` ledger row (health and the briefing's coverage paragraph show it) and ends the run; the next run resumes
  * from the last good cursor. Nothing here posts to Slack, writes HubSpot, queues research, drafts or sends.
+ *
+ * The backlog, visible (2026-10-10): every page's ledger row carries, in the producer's own account of the run
+ * (`producerState`), `more` (the export answered a next cursor: rows wait behind it) and `remaining` (an estimate, only
+ * when the export answers one: an explicit `remaining`, or a `count` larger than the page, read as the rows matching
+ * after the cursor; a `count` that only echoes the page size is no estimate, null). A page that imports nothing (the
+ * import writes no row for an empty batch) gets its own row, so the newest row never claims a backlog that is gone.
+ * Producer status says "more waiting behind the cursor" from the newest row.
  */
 import { CLAWD_PRODUCER, mapClawdPage, type ClawdExportPage } from './clawd-export';
 import { importIntelligenceBatch, type ImportResult } from './intelligence-import';
@@ -33,8 +40,18 @@ export interface ClawdImportInput {
   retryDelayMs?: number;
 }
 
+/** The producer's account of one page, as the ledger row records it (the import stores producerState verbatim). */
+export interface ClawdPageState {
+  status: 'ok' | 'partial';
+  detail?: string | null;
+  /** The export answered a next cursor: rows wait behind it. */
+  more: boolean;
+  /** Rows estimated to wait behind the cursor; null when the export answered no estimate. */
+  remaining: number | null;
+}
+
 export type ClawdImportResult =
-  | { ok: true; pages: number; items: number; mapped: number; skipped: number; accepted: number; duplicates: number; revised: number; invalid: number; cursorFrom: string | null; cursorTo: string | null; more: boolean }
+  | { ok: true; pages: number; items: number; mapped: number; skipped: number; accepted: number; duplicates: number; revised: number; invalid: number; cursorFrom: string | null; cursorTo: string | null; more: boolean; remaining: number | null }
   | { ok: false; error: string; kind: 'auth' | 'network' | 'shape'; pages: number; cursorFrom: string | null; ledgerId: string | null };
 
 export class ClawdExportError extends Error {
@@ -51,7 +68,16 @@ export async function storedClawdCursor(prisma: PrismaLike): Promise<string | nu
   return typeof p?.cursor === 'string' && p.cursor ? p.cursor : null;
 }
 
-async function fetchPage(input: ClawdImportInput, after: string | null): Promise<ClawdExportPage> {
+/** The export's remaining estimate: an explicit `remaining`, else a `count` larger than the page (the rows after the cursor); else null. */
+export function remainingEstimate(body: { remaining?: unknown; count?: unknown }, pageItems: number): number | null {
+  const explicit = Number(body.remaining);
+  if (body.remaining != null && Number.isFinite(explicit) && explicit >= 0) return Math.floor(explicit);
+  const count = Number(body.count);
+  if (body.count != null && Number.isFinite(count) && count > pageItems) return Math.floor(count - pageItems);
+  return null;
+}
+
+async function fetchPage(input: ClawdImportInput, after: string | null): Promise<ClawdExportPage & { remaining: number | null }> {
   const url = new URL(`${input.baseUrl.replace(/\/$/, '')}/api/yardflow/signals/export`);
   url.searchParams.set('limit', String(input.pageLimit ?? CLAWD_IMPORT_PAGE_LIMIT));
   if (after) url.searchParams.set('after', after);
@@ -70,12 +96,14 @@ async function fetchPage(input: ClawdImportInput, after: string | null): Promise
   }
   if (res.status === 401 || res.status === 403) throw new ClawdExportError(`the export refused the token (${res.status})`, 'auth');
   if (!res.ok) throw new ClawdExportError(`the export answered ${res.status}`, 'network');
-  const body = (await res.json().catch(() => null)) as ClawdExportPage | null;
+  const body = (await res.json().catch(() => null)) as (ClawdExportPage & { remaining?: unknown }) | null;
   if (!body || !Array.isArray(body.items)) throw new ClawdExportError('the export answered without items', 'shape');
-  return { items: body.items, next: typeof body.next === 'string' && body.next ? body.next : null, count: body.items.length, source: String(body.source ?? '') };
+  const next = typeof body.next === 'string' && body.next ? body.next : null;
+  // No next cursor: nothing waits behind this page, whatever the counts say.
+  return { items: body.items, next, count: body.items.length, source: String(body.source ?? ''), remaining: next ? remainingEstimate(body, body.items.length) : 0 };
 }
 
-async function fetchWithRetry(input: ClawdImportInput, after: string | null): Promise<ClawdExportPage> {
+async function fetchWithRetry(input: ClawdImportInput, after: string | null): Promise<ClawdExportPage & { remaining: number | null }> {
   try {
     return await fetchPage(input, after);
   } catch (e) {
@@ -99,9 +127,10 @@ export async function runClawdImport(prisma: PrismaLike, input: ClawdImportInput
   let skipped = 0;
   const totals = { accepted: 0, duplicates: 0, revised: 0, invalid: 0 };
   let more = false;
+  let remaining: number | null = null;
   let lastCursor = cursorFrom;
   for (let i = 0; i < maxPages; i += 1) {
-    let page: ClawdExportPage;
+    let page: ClawdExportPage & { remaining: number | null };
     try {
       page = await fetchWithRetry(input, after);
     } catch (e) {
@@ -117,15 +146,25 @@ export async function runClawdImport(prisma: PrismaLike, input: ClawdImportInput
     skipped += m.skipped;
     // The page's own position when it is the last one (next null): the consumer resumes after it next time.
     const pageCursor = page.next ?? (page.items.length ? lastCursor : lastCursor);
-    const r: ImportResult = await importIntelligenceBatch(prisma, { records: m.records, actor, now: input.now, producer: CLAWD_PRODUCER, runId, cursor: page.next ?? pageCursor, producerState: m.skipped ? { status: 'partial', detail: `${m.skipped} item${m.skipped === 1 ? '' : 's'} had no title and no text` } : { status: 'ok' } });
+    // The backlog rides on the page's own account of the run: the import stores producerState verbatim on its row.
+    const producerState: ClawdPageState = m.skipped
+      ? { status: 'partial', detail: `${m.skipped} item${m.skipped === 1 ? '' : 's'} had no title and no text`, more: !!page.next, remaining: page.remaining }
+      : { status: 'ok', more: !!page.next, remaining: page.remaining };
+    const r: ImportResult = await importIntelligenceBatch(prisma, { records: m.records, actor, now: input.now, producer: CLAWD_PRODUCER, runId, cursor: page.next ?? pageCursor, producerState });
+    if (!r.runs.length && typeof prisma?.gapAuditEvent?.create === 'function') {
+      // An empty page writes no import row; the run still happened and the backlog it saw must replace the last row's claim.
+      const payload = { runId, runIds: [runId], cursor: page.next ?? pageCursor, accepted: 0, duplicates: 0, revised: 0, invalid: 0, reportedOnFrom: null, reportedOnTo: null, producerState, at: input.now.toISOString() };
+      await prisma.gapAuditEvent.create({ data: { kind: INTEL_IMPORTED_EVENT, actor, subject_type: 'producer', subject_id: CLAWD_PRODUCER, payload }, select: { id: true } }).catch(() => null);
+    }
     totals.accepted += r.accepted;
     totals.duplicates += r.duplicates;
     totals.revised += r.revised;
     totals.invalid += r.invalid;
     lastCursor = page.next ?? lastCursor;
+    remaining = page.remaining;
     if (!page.next) { more = false; break; }
     after = page.next;
     more = true;
   }
-  return { ok: true, pages, items, mapped, skipped, ...totals, cursorFrom, cursorTo: lastCursor, more };
+  return { ok: true, pages, items, mapped, skipped, ...totals, cursorFrom, cursorTo: lastCursor, more, remaining };
 }

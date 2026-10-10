@@ -3,9 +3,12 @@
  *
  * The continuing sync, visible: one status per intelligence producer GAP knows (INTEL_PRODUCERS) or has ever heard
  * from (an `intelligence.imported` ledger row), read from the ledger the import writes and the rows it stored. The
- * state is said in words a seller can act on: current (the newest import is within the producer's cadence plus a
- * day), stalled since a date (older than that; never "zero results"), failed (the producer's own last run said so)
- * or never imported. The vault rides along as a pseudo-producer read from the `knowledge.vault_synced` rows the
+ * state is said in words a seller can act on: current (2026-10-10: the NEWEST REPORT DATE the producer stated, the
+ * largest reportedOnTo on its ledger rows, is within its cadence plus a day; the import time only when no row ever
+ * carried a report date), stale (older than that: "stalled since" the last import when the imports stopped too,
+ * "stale (reimported <date>)" when an old report was imported again recently; never "zero results"), failed (the
+ * producer's own last run said so), not configured, a one-time import (a producer INTEL_PRODUCERS marks oneShot: the
+ * date it was imported, never stale) or never imported. The vault rides along as a pseudo-producer read from the `knowledge.vault_synced` rows the
  * local push and the cron write, so the briefing's one coverage paragraph (`producerStatusLine`) says every source
  * it read and every source it did not. Nothing here imports, fetches or calls anything.
  */
@@ -15,9 +18,18 @@ import { VAULT_SYNCED_KIND } from '../knowledge/vault-sync';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
 
-/** not_configured (the Drive sync, 2026-10-10): the producer's consumer runs but has no credential; the line names the variables. */
-export type ProducerState = 'current' | 'stale' | 'never' | 'failed' | 'not_configured';
+/**
+ * not_configured (the Drive sync, 2026-10-10): the producer's consumer runs but has no credential; the line names the
+ * variables. one_time (2026-10-10): a producer imported once by design (oneShot in INTEL_PRODUCERS), read, never stale.
+ */
+export type ProducerState = 'current' | 'stale' | 'never' | 'failed' | 'not_configured' | 'one_time';
 export type ProducerRunStatus = 'ok' | 'partial' | 'failed' | 'not_configured';
+/**
+ * Why a producer is stale: `stalled` (the imports stopped too: the last import is past the cadence), `reimported`
+ * (a recent import carried only old reports), `nothing_newer` (a recent run imported nothing and the newest report it
+ * holds is old).
+ */
+export type StaleKind = 'stalled' | 'reimported' | 'nothing_newer';
 
 export interface ProducerStatus {
   producer: string;
@@ -26,8 +38,13 @@ export interface ProducerStatus {
   /** ISO instant of the newest import ledger row (its `at`, else its created_at); null when never. */
   lastImportAt: string | null;
   lastRunId: string | null;
-  /** The newest report date the last import covered (YYYY-MM-DD). */
+  /** The newest report date any import covered (YYYY-MM-DD, the largest reportedOnTo on the ledger rows read): the freshness basis. */
   lastReportedOn: string | null;
+  /** Set when `state` is stale (optional so older callers keep their shape). */
+  staleKind?: StaleKind | null;
+  /** A paged export's backlog from the newest row (clawd-import.ts): rows wait behind the cursor, and the estimate when the export gave one. */
+  more?: boolean;
+  remaining?: number | null;
   lastCounts: { accepted: number; revised: number; duplicates: number; invalid: number } | null;
   lastProducerState: { status: ProducerRunStatus; detail: string | null } | null;
   /** The newest cursor the producer's export reached (a paged export); null when none was recorded. */
@@ -62,6 +79,7 @@ const plural = (count: number, word: string) => `${count} ${word}${count === 1 ?
 
 type LedgerRow = { subject_id: string; actor?: string | null; payload: unknown; created_at: Date | string };
 
+/** The vault's rule (its sync time): the import producers use importStateOf below. */
 function stateOf(lastAt: string | null, cadenceDays: number, failed: boolean, now: Date, notConfigured = false): ProducerState {
   if (!lastAt) return 'never';
   if (notConfigured) return 'not_configured';
@@ -69,9 +87,54 @@ function stateOf(lastAt: string | null, cadenceDays: number, failed: boolean, no
   return now.getTime() - new Date(lastAt).getTime() > (cadenceDays + 1) * 86_400_000 ? 'stale' : 'current';
 }
 
-/** The Drive sync's own words for its missing credential, else the generic sentence. */
-const NOT_CONFIGURED_WORDS = 'not configured: set GAP_DRIVE_REFRESH_TOKEN (or the delegation pair)';
+/**
+ * An import producer's state: current means the newest report the producer dated is within its cadence plus a day,
+ * so an old report imported again today is NOT current. A producer that never dated a report is judged by its import
+ * time. A oneShot producer is a one-time import once anything arrived.
+ */
+export function importStateOf(input: { lastImportAt: string | null; newestReportedOn: string | null; cadenceDays: number; failed: boolean; notConfigured: boolean; oneShot: boolean; lastRunBroughtRecords: boolean; now: Date }): { state: ProducerState; staleKind: StaleKind | null } {
+  const { lastImportAt, newestReportedOn, cadenceDays, now } = input;
+  if (!lastImportAt) return { state: 'never', staleKind: null };
+  if (input.notConfigured) return { state: 'not_configured', staleKind: null };
+  if (input.failed) return { state: 'failed', staleKind: null };
+  if (input.oneShot) return { state: 'one_time', staleKind: null };
+  const window = (cadenceDays + 1) * 86_400_000;
+  const importOld = now.getTime() - new Date(lastImportAt).getTime() > window;
+  const reportAt = newestReportedOn && !Number.isNaN(Date.parse(`${newestReportedOn}T00:00:00Z`)) ? Date.parse(`${newestReportedOn}T00:00:00Z`) : null;
+  const reportOld = reportAt === null ? importOld : now.getTime() - reportAt > window;
+  if (!reportOld) return { state: 'current', staleKind: null };
+  if (importOld) return { state: 'stale', staleKind: 'stalled' };
+  return { state: 'stale', staleKind: input.lastRunBroughtRecords ? 'reimported' : 'nothing_newer' };
+}
+
+/** The state in a few words, for the short form and the health label ("stalled since Oct 6, 2026", "stale (reimported Oct 9, 2026)"). */
+export function producerStateWords(s: Pick<ProducerStatus, 'state' | 'staleKind' | 'lastImportAt' | 'lastReportedOn'>): string {
+  const at = s.lastImportAt ? dayWords(s.lastImportAt) : 'never';
+  switch (s.state) {
+    case 'stale':
+      if (s.staleKind === 'reimported') return `stale (reimported ${at})`;
+      if (s.staleKind === 'nothing_newer') return `stale (newest report ${s.lastReportedOn ? dateOnlyWords(s.lastReportedOn) : 'undated'}; the last run ${at} found nothing newer)`;
+      return `stalled since ${at}`;
+    case 'failed':
+      return `failed ${at}`;
+    case 'one_time':
+      return `one-time import (${at})`;
+    case 'current':
+      return 'current';
+    default:
+      return s.state;
+  }
+}
+
+/**
+ * The Drive sync's own words for its missing credential, else the generic sentence; the last option is the path that
+ * needs no new secret (drive-client.ts DRIVE_DELEGATION_OPTION, the same words).
+ */
+const NOT_CONFIGURED_WORDS = 'not configured: set GAP_DRIVE_REFRESH_TOKEN (or the delegation pair), or set GAP_DRIVE_DELEGATION=gmail after adding the drive.readonly scope to the existing delegation';
 const notConfiguredLine = (s: Pick<ProducerStatus, 'label' | 'lastProducerState' | 'totalItems'>): string => `${s.label}: ${s.lastProducerState?.detail?.startsWith('not configured') ? NOT_CONFIGURED_WORDS : (s.lastProducerState?.detail ?? NOT_CONFIGURED_WORDS)}${s.totalItems ? ` (${plural(s.totalItems, 'item')} held from earlier runs)` : ''}.`;
+
+/** "; more waiting behind the cursor (about 8,214 rows)" when the newest row said rows wait; empty otherwise. */
+const backlogWords = (s: Pick<ProducerStatus, 'more' | 'remaining'>): string => (s.more ? `; more waiting behind the cursor${s.remaining != null && s.remaining > 0 ? ` (about ${s.remaining.toLocaleString('en-US')} rows)` : ''}` : '');
 
 function importLine(s: Omit<ProducerStatus, 'line'>): string {
   if (s.state === 'never') return `${s.label}: never imported.`;
@@ -79,9 +142,11 @@ function importLine(s: Omit<ProducerStatus, 'line'>): string {
   const counts = `${plural(s.totalReports, 'report')}, ${plural(s.totalItems, 'item')}${s.lastReportedOn ? `, reports through ${dateOnlyWords(s.lastReportedOn)}` : ''}`;
   const last = `last import ${dayWords(s.lastImportAt!)} (${counts})`;
   if (s.state === 'failed') return `${s.label}: ${last}; the last run failed${s.lastProducerState?.detail ? ` (${s.lastProducerState.detail})` : ''}.`;
-  if (s.state === 'stale') return `${s.label}: ${last}; stalled since ${dayWords(s.lastImportAt!)}.`;
+  const backlog = backlogWords(s);
+  if (s.state === 'stale') return `${s.label}: ${last}${backlog}; ${producerStateWords(s)}.`;
+  if (s.state === 'one_time') return `${s.label}: ${producerStateWords(s)}; ${counts}.`;
   const partial = s.lastProducerState?.status === 'partial' ? `; the last run was partial${s.lastProducerState.detail ? ` (${s.lastProducerState.detail})` : ''}` : '';
-  return `${s.label}: ${last}${partial}; current.`;
+  return `${s.label}: ${last}${partial}${backlog}; current.`;
 }
 
 /** One status per known producer and per producer the ledger names, plus the vault; every read soft. */
@@ -89,10 +154,14 @@ export async function loadProducerStatus(prisma: PrismaLike, now: Date, opts: { 
   const rows: LedgerRow[] = typeof prisma?.gapAuditEvent?.findMany === 'function' ? await prisma.gapAuditEvent.findMany({ where: { kind: INTEL_IMPORTED_EVENT }, orderBy: { created_at: 'desc' }, take: LEDGER_PAGE, select: { subject_id: true, payload: true, created_at: true } }).catch(() => []) : [];
   const newest = new Map<string, LedgerRow>();
   const cursorOf = new Map<string, string>();
+  // The freshness basis: the newest report date any row of the producer carried (a run that imported nothing has none).
+  const reportedOf = new Map<string, string>();
   for (const r of rows) {
     if (!newest.has(r.subject_id)) newest.set(r.subject_id, r);
     const c = (r.payload as { cursor?: unknown } | null)?.cursor;
     if (!cursorOf.has(r.subject_id) && typeof c === 'string' && c) cursorOf.set(r.subject_id, c);
+    const to = (r.payload as { reportedOnTo?: unknown } | null)?.reportedOnTo;
+    if (typeof to === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(to) && to > (reportedOf.get(r.subject_id) ?? '')) reportedOf.set(r.subject_id, to);
   }
   const producers = [...new Set([...Object.keys(INTEL_PRODUCERS), ...newest.keys()])];
   const count = async (where: Record<string, unknown>): Promise<number> => (typeof prisma?.gapSignal?.count === 'function' ? prisma.gapSignal.count({ where }).catch(() => 0) : 0);
@@ -105,19 +174,26 @@ export async function loadProducerStatus(prisma: PrismaLike, now: Date, opts: { 
     const [totalItems, totalReports] = await Promise.all([count({ submitted_by: `import:${producer}`, source_class: { not: REPORT_ARCHIVE_CLASS } }), count({ submitted_by: `import:${producer}`, source_class: REPORT_ARCHIVE_CLASS })]);
     const lastImportAt = r ? new Date(typeof p.at === 'string' && !Number.isNaN(Date.parse(p.at)) ? p.at : r.created_at).toISOString() : null;
     const cadenceDays = INTEL_PRODUCERS[producer]?.cadenceDays ?? UNKNOWN_PRODUCER_CADENCE_DAYS;
+    const lastReportedOn = reportedOf.get(producer) ?? null;
+    const judged = importStateOf({ lastImportAt, newestReportedOn: lastReportedOn, cadenceDays, failed: status === 'failed', notConfigured: status === 'not_configured', oneShot: INTEL_PRODUCERS[producer]?.oneShot === true, lastRunBroughtRecords: n(p.accepted) + n(p.revised) + n(p.duplicates) > 0, now });
     const base: Omit<ProducerStatus, 'line'> = {
       producer,
       label: producerLabel(producer),
       cadenceDays,
       lastImportAt,
       lastRunId: typeof p.runId === 'string' ? p.runId : null,
-      lastReportedOn: typeof p.reportedOnTo === 'string' ? p.reportedOnTo : null,
+      lastReportedOn,
+      staleKind: judged.staleKind,
+      // The paged export's backlog, from the newest row (producerState, where clawd-import.ts puts it; a top-level field read too).
+      more: (ps as { more?: unknown } | null)?.more === true || p.more === true,
+      remaining: (() => { const v = (ps as { remaining?: unknown } | null)?.remaining ?? p.remaining; return typeof v === 'number' && Number.isFinite(v) && v >= 0 ? v : null; })(),
       lastCounts: r ? { accepted: n(p.accepted), revised: n(p.revised), duplicates: n(p.duplicates), invalid: n(p.invalid) } : null,
-      lastProducerState: status ? { status, detail: typeof ps?.detail === 'string' && ps.detail ? ps.detail.slice(0, 160) : null } : null,
+      // 300, as the producers cut their own detail: a refused Drive delegation carries Google's words and the scope step.
+      lastProducerState: status ? { status, detail: typeof ps?.detail === 'string' && ps.detail ? ps.detail.slice(0, 300) : null } : null,
       cursor: cursorOf.get(producer) ?? null,
       totalItems,
       totalReports,
-      state: stateOf(lastImportAt, cadenceDays, status === 'failed', now, status === 'not_configured'),
+      state: judged.state,
     };
     out.push({ ...base, line: importLine(base) });
   }
@@ -165,9 +241,14 @@ export function producerShort(s: ProducerStatus): string {
     // Two dates, never one: when the producer's newest report was written, and when GAP last imported. A reimport of
     // an old report moves the second date only; the first says how fresh the information is.
     case 'current':
-      return `${s.label} ${s.lastReportedOn ? `reports through ${dateOnlyWords(s.lastReportedOn)}, ` : ''}imported ${dayWords(s.lastImportAt!)} (${plural(s.totalItems, unit)})`;
+      return `${s.label} ${s.lastReportedOn ? `reports through ${dateOnlyWords(s.lastReportedOn)}, ` : ''}imported ${dayWords(s.lastImportAt!)} (${plural(s.totalItems, unit)}${s.more ? ', more waiting behind the cursor' : ''})`;
     case 'stale':
+      // Reimported recently but the newest report is old: the import date is not freshness (2026-10-10).
+      if (s.staleKind === 'reimported') return `${s.label}: stale (reimported ${dayWords(s.lastImportAt!)}${s.lastReportedOn ? `; reports through ${dateOnlyWords(s.lastReportedOn)}` : ''})`;
+      if (s.staleKind === 'nothing_newer') return `${s.label}: ${producerStateWords(s)}`;
       return `${s.label}: stalled since ${dayWords(s.lastImportAt!)}${s.lastReportedOn ? ` (reports through ${dateOnlyWords(s.lastReportedOn)})` : ''}`;
+    case 'one_time':
+      return `${s.label}: one-time import (${dayWords(s.lastImportAt!)}, ${plural(s.totalItems, unit)})`;
     case 'failed':
       return `${s.label}: failed ${dayWords(s.lastImportAt!)}`;
     case 'not_configured':
@@ -177,10 +258,13 @@ export function producerShort(s: ProducerStatus): string {
   }
 }
 
+/** A status whose records are read as they are: current, or a one-time import (held by design, never stale). */
+export const isReadState = (state: ProducerState): boolean => state === 'current' || state === 'one_time';
+
 /** The one coverage paragraph the briefing prints: what was read, then what was not. */
 export function producerStatusLine(statuses: readonly ProducerStatus[]): string {
-  const read = statuses.filter((s) => s.state === 'current').map(producerShort);
-  const notRead = statuses.filter((s) => s.state !== 'current').map(producerShort);
+  const read = statuses.filter((s) => isReadState(s.state)).map(producerShort);
+  const notRead = statuses.filter((s) => !isReadState(s.state)).map(producerShort);
   const first = read.length ? `Sources: ${read.join('; ')}.` : 'Sources: none read this time.';
   return notRead.length ? `${first} Not read this time: ${notRead.join('; ')}.` : first;
 }

@@ -95,9 +95,13 @@ export interface HealthInputs {
     clawd: ContextSourceCoverage;
     /** The account the vault and Clawd reads were run for (the newest account on record); null when none. */
     canary: { account: string; domain: string | null } | null;
-    /** Stream A (2026-10-09): the synced vault table (gap_knowledge_notes) and the last gap-vault-sync tick from the ledger; absent when not read. */
+    /**
+     * Stream A (2026-10-09): the synced vault table (gap_knowledge_notes) and the last gap-vault-sync tick from the
+     * ledger; absent when not read. `commitSha` (and `branch`, when the reader returns it): the vault revision that
+     * tick recorded (2026-10-10); optional so older callers keep their shape.
+     */
     vaultTable?:
-      | { readable: true; rows: number; lastSyncedAt: string | null; kinds: Record<string, number>; tokenConfigured: boolean; localDir: boolean; lastSync: { ok: boolean; at: string; error: string | null; written: number | null; skipped: boolean } | null }
+      | { readable: true; rows: number; lastSyncedAt: string | null; kinds: Record<string, number>; tokenConfigured: boolean; localDir: boolean; lastSync: { ok: boolean; at: string; error: string | null; written: number | null; skipped: boolean; commitSha?: string | null; branch?: string | null } | null }
       | { readable: false; error: string; tokenConfigured: boolean; localDir: boolean };
   };
   /** IW13: the intelligence producers (signals/producer-status.ts). Absent: not read (no component); null: the read failed. */
@@ -237,7 +241,10 @@ function context(i: HealthInputs['context'], now: Date): HealthComponent {
   if (vt && !vt.readable) problems.push(`vault table unreadable (${vt.error})`);
   else if (vt && vt.readable) {
     if (vt.lastSync && !vt.lastSync.ok) problems.push(`vault sync failed: the last tick ${nyClock(vt.lastSync.at, now)}${vt.lastSync.error ? ` (${vt.lastSync.error})` : ''}; the table still serves what it held`);
-    if (vt.rows > 0) facts.push(`vault: ${vt.rows} notes (${vaultKindWords(vt.kinds)})${vt.lastSyncedAt ? `, synced ${nyClock(vt.lastSyncedAt, now)}` : ''}`);
+    // The last good tick and the vault revision it recorded ("last sync 10:39 New York, vault revision 1a2b3c4"), so the
+    // seller can tell which vault the table holds; a tick that recorded no revision says the time only.
+    const tick = vt.lastSync && vt.lastSync.ok ? `, last sync ${nyClock(vt.lastSync.at, now)}${vt.lastSync.commitSha ? `, vault revision ${vt.lastSync.commitSha.slice(0, 7)}${vt.lastSync.branch ? ` (${vt.lastSync.branch})` : ''}` : ''}` : '';
+    if (vt.rows > 0) facts.push(`vault: ${vt.rows} notes (${vaultKindWords(vt.kinds)})${vt.lastSyncedAt ? `, synced ${nyClock(vt.lastSyncedAt, now)}` : ''}${tick}`);
     else if (!i.vault.configured) partial.push(`vault: not configured (${vt.tokenConfigured ? 'the token is set; the knowledge table is empty until the first gap-vault-sync tick' : vt.localDir ? 'the local directory is set on this box only; the knowledge table is empty' : 'no GAP_VAULT_GITHUB_TOKEN, no GAP_VAULT_DIR, the knowledge table is empty'})`);
   }
   for (const [name, c] of [['vault', i.vault], ['Clawd', i.clawd]] as const) {
@@ -317,10 +324,16 @@ function producers(i: HealthInputs['producers']): HealthComponent | null {
   const day = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' });
   const bad = ever.filter((s) => s.state === 'stale' || s.state === 'failed');
   if (bad.length) {
-    const words = bad.map((s) => (s.state === 'failed' ? `${s.label} failed ${day(s.lastImportAt!)}` : `${s.label} stalled since ${day(s.lastImportAt!)}`));
+    // 2026-10-10: a stale producer is judged by its newest report date; one reimported recently says so, never "stalled since" a fresh import.
+    const staleWords = (s: ProducerStatus) => (s.staleKind === 'reimported' ? `stale (reimported ${day(s.lastImportAt!)})` : s.staleKind === 'nothing_newer' ? `stale (newest report ${s.lastReportedOn ?? 'undated'}; nothing newer on ${day(s.lastImportAt!)})` : `stalled since ${day(s.lastImportAt!)}`);
+    const words = bad.map((s) => (s.state === 'failed' ? `${s.label} failed ${day(s.lastImportAt!)}` : `${s.label} ${staleWords(s)}`));
     return { ...base, state: 'DEGRADED', label: `Intelligence producers: ${words.join('; ')}`, detail };
   }
-  return { ...base, state: 'HEALTHY', label: `Intelligence producers current: ${ever.map((s) => s.label).join(', ')}`, detail };
+  // A one-time import (oneShot) is held by design: named apart, never as current and never as stalled.
+  const current = ever.filter((s) => s.state !== 'one_time').map((s) => s.label);
+  const once = ever.filter((s) => s.state === 'one_time').map((s) => s.label);
+  const label = [current.length ? `Intelligence producers current: ${current.join(', ')}` : 'No producer current', once.length ? `one-time: ${once.join(', ')}` : null].filter(Boolean).join('; ');
+  return { ...base, state: 'HEALTHY', label, detail };
 }
 
 export function evaluateHealth(inputs: HealthInputs, now: Date): HealthReport {
