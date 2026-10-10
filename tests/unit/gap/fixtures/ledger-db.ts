@@ -43,6 +43,16 @@ function table(rows: Row[], clock: () => Date, idPrefix: string) {
       Object.assign(r, q.data, { updated_at: clock() });
       return pick(r, q.select);
     },
+    /** R5 review (finding 4): a conditional update (the mirror lease's claim): every matching row, and how many. */
+    updateMany: async (q: { where?: Row; data: Row }) => {
+      let count = 0;
+      for (const r of rows) {
+        if (!matchesWhere(r, q.where)) continue;
+        Object.assign(r, q.data, { updated_at: clock() });
+        count += 1;
+      }
+      return { count };
+    },
     upsert: async (q: { where: Row; create: Row; update: Row }) => {
       const r = rows.find((x) => matchesWhere(x, q.where));
       if (r) {
@@ -151,7 +161,8 @@ export function ledgerDb(seed: LedgerSeed = {}, start = new Date('2026-10-06T14:
     unsubscribedEmail: table(store.unsubscribedEmail, clock, 'u'),
     prospectingHypothesis: table(store.prospectingHypothesis, clock, 'h'),
     buyerInputData: table(store.buyerInputData, clock, 'b'),
-    gapHubSpotMirror: table(store.gapHubSpotMirror, clock, 'mir'),
+    // The mirror row's `key` is its primary key (a second create is P2002): the lease's first claim relies on it.
+    gapHubSpotMirror: uniqueKeyTable(store.gapHubSpotMirror, clock, 'mir'),
     systemConfig: uniqueKeyTable(store.systemConfig, clock, 'cfg'),
     gapCompile: table(store.gapCompile, clock, 'cmp'),
     gapSignal: table(store.gapSignal, clock, 'sig'),

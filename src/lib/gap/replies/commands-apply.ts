@@ -16,7 +16,8 @@
  *   - HELP, and an unknown line, answer with the commands once per item per hour (HELP_INTERVAL_MS)
  *   - APPROVE and REVISE run through `deps.onApprove` / `deps.onRevise` when wired (X11, X09); absent, they are
  *     refused `not_yet_available` and the seller is told
- *   - nothing here sends to a buyer, drafts, enrolls or writes HubSpot
+ *   - nothing here sends to a buyer, drafts or enrolls; HubSpot is written only through the disposition service's mirror
+ *     and consent writer, on a completion DONE on a reply (below)
  *   - seller acceptance follow-up (2026-10-09): START and NEXT walk the NEWEST revision of the plan and hand the
  *     seller only an assignable item (work/assignment.ts nextAssignableItem); an item held for GAP research is named
  *     in the answer, one line each. APPROVE and REVISE bound to an item whose key is off the newest revision are
@@ -40,6 +41,16 @@
  *     read and the owed answers read it, so it never returns); on any other item that is not a commitment, a `done`
  *     outcome that holds the account's card off the day until something new happens there (`account_done`). An opt-out
  *     is never settled by DONE: it keeps the one-day log and the answer says it stays until it is recorded
+ *   - the DONE unification (Casey, 2026-10-10: "Route email-reply DONE through the same canonical activity recording
+ *     and HubSpot mirror used by Capture"): a completion DONE on a reply item (the item names its reply message, in
+ *     its refs or its link `from=reply:<id>`) records ONE disposition through the disposition service the way Capture
+ *     does (replies/done-reply.ts recordReplyDone: the reply read by Capture's reader, the class the message states,
+ *     the person and account from the reply row, source `email_command` keyed by this command's Gmail id, provenance
+ *     self-reported by email command), then settles the reply (the C35 row, written once). The applied row carries the
+ *     disposition and the CRM receipt: `mirrored`, `recorded_not_mirrored` with the reason (a failure is retried by
+ *     disposition/mirror-retry.ts and the answer says so; it never says mirrored), `recorded_before` or
+ *     `not_recorded`. An opt-out recorded as do not contact by the consent writer is settled; one GAP could not record
+ *     keeps the one-day log and the answer says it stays. A progress note never reaches the service
  *   - the Gmail action UI audit (GUI-09, 2026-10-10): ITEM n (also OPEN n, SEND ME n), on the briefing thread or on
  *     any assignment thread, sends item n of the day's NEWEST plan revision as its own email through sendAssignment,
  *     judged by `assignable` the way START is: a held item answers the hold's line (recorded held once, never sent);
@@ -55,7 +66,9 @@ import { commitmentsFromSellerNote, loadCommitment, transitionCommitment } from 
 import { dayLabel, nyDay, nyDayAt, parseDuePhrase } from '../work/dates';
 import { progressLine, readDoneNote, type DoneFact } from '../work/done-note';
 import { recordWorkOutcome } from '../work/outcome';
-import { resolveAnswerOwed } from '../work/recorded-replies';
+import { loadResolvedReplyIds, resolveAnswerOwed } from '../work/recorded-replies';
+import { NOT_THE_OPT_OUT, recordLine, recordReplyDone as defaultRecordReplyDone, type ReplyDoneInput, type ReplyDoneResult } from './done-reply';
+import { accountHref } from '../account-intel/href';
 import { loadDayPlan, loadDayPlanRevisions, type DayPlan, type PlanItem } from '../work/plan';
 import type { SellerSettings } from '../work/settings';
 import { authenticateCommand, commandTextOf, matchCommandTarget, parseCommand, type AssignmentRef, type BriefingRef, type CommandContext, type ParsedCommand } from './commands';
@@ -66,6 +79,13 @@ type PrismaLike = any;
 
 export const COMMAND_APPLIED = 'work.command_applied' as const;
 export const COMMAND_REFUSED = 'work.command_refused' as const;
+/**
+ * R5 review (finding 5b): the receipt of a reply DONE, written the moment the disposition is recorded and BEFORE any
+ * later step (the opt-out log, the C35 settle, the answer). It carries the disposition id and the mirror's receipt, so
+ * a failed mirror stays visible and retryable (disposition/mirror-retry.ts reads it) even when a later step throws. A
+ * receipt is not an applied command: it never settles the item and never refuses a second DONE.
+ */
+export const DONE_RECEIPT = 'work.done_receipt' as const;
 /** The assignment and briefing threads a command may answer are read this far back. */
 export const COMMAND_LOOKBACK_DAYS = 14;
 export const HELP_INTERVAL_MS = 60 * 60_000;
@@ -130,6 +150,13 @@ export interface ApplyDeps extends AssignmentDeps {
   onApprove?: (prisma: PrismaLike, input: ApplyInput & { item: PlanItem; ref: AssignmentRef }) => Promise<EffectOutcome>;
   /** X09: REVISE on an assignment (the agent task). Absent: refused not_yet_available. */
   onRevise?: (prisma: PrismaLike, input: ApplyInput & { item: PlanItem; ref: AssignmentRef; critique: string }) => Promise<EffectOutcome>;
+  /** The DONE unification: a completion DONE on a reply, recorded through the disposition service. Defaults to replies/done-reply.ts. */
+  recordReplyDone?: (prisma: PrismaLike, input: ReplyDoneInput) => Promise<ReplyDoneResult>;
+}
+
+/** The reply message a plan item is about: its refs, else its link (`from=reply:<id>`, as the assignment packet reads it). */
+export function replyIdOf(item: Pick<PlanItem, 'refs' | 'href'>): string | null {
+  return item.refs.replyMessageId ?? /from=reply(?:%3A|:)([A-Za-z0-9_-]+)/.exec(item.href ?? '')?.[1] ?? null;
 }
 
 /** What an effect handler answers: `ok: false` is a refusal in words (recorded refused, never applied; the seller is told). */
@@ -181,6 +208,7 @@ const NEXT_PATH: Record<string, string> = {
   stale_revision: 'Answer the latest email for this item.',
   duplicate_message: 'Nothing to do: this exact message was already handled.',
   handler_failed: 'Nothing changed. Send the same command again, or open the item in GAP.',
+  recorded_then_failed: 'Send DONE again on this item to finish it (nothing is recorded twice), or open it in GAP.',
   effect_unknown: 'Nothing is recorded as done. Open the item in GAP to see its state.',
   not_a_command: 'Reply with one of the commands on the first line.',
   needs_an_assignment: 'Reply to the email of the item you mean, or reply NEXT here.',
@@ -193,6 +221,7 @@ const NEXT_PATH: Record<string, string> = {
   item_list_sent: 'Reply ITEM and the number, and that item arrives as its own email.',
   already_in_inbox: 'Answer that item in its own email; reply ITEM and another number for a different one.',
   item_held: 'GAP is researching it. Reply ITEM and another number, or NEXT.',
+  not_the_opt_out: 'Open the account in GAP and record the opt-out on the person who sent it.',
   no_plan: 'Open Work in GAP; no plan is recorded for that day.',
 };
 const nextPath = (key: string, fallback = 'Open the item in GAP.') => NEXT_PATH[key] ?? fallback;
@@ -261,6 +290,18 @@ async function failed(prisma: PrismaLike, input: ApplyInput, deps: ApplyDeps, su
   await recordRefused(prisma, input, subject, { command, reason: 'handler_failed', error: message }).catch(() => undefined);
   await answer(input, deps, `GAP could not carry out ${command.toUpperCase()}${source ? ` on ${source.accountName}: ${source.title}` : ''} (${message}). Nothing changed. Send the same command again, or open the item in GAP.`).catch(() => undefined);
   return { applied: false, command, reason: 'handler_failed', outcome: 'failed', source, next: nextPath('handler_failed') };
+}
+
+/**
+ * R5 review (finding 5b): a step after the reply's disposition was recorded failed (it threw, or refused). The answer
+ * says what IS recorded and what failed, never "Nothing changed"; recorded refused (not applied), so DONE again finishes
+ * it and records nothing twice (the disposition is found by the reply, the C35 row by the message).
+ */
+async function recordedThenFailed(prisma: PrismaLike, input: ApplyInput, deps: ApplyDeps, subject: { type: string; id: string }, rec: Exclude<ReplyDoneResult, { kind: 'not_recorded' }>, step: string, detail: string, extra: Record<string, unknown>, source: ActionSource | null): Promise<ApplyResult> {
+  const why = detail.slice(0, 300);
+  await recordRefused(prisma, input, subject, { command: 'done', reason: 'recorded_then_failed', failedStep: step, error: why, ...extra }).catch(() => undefined);
+  await answer(input, deps, `Recorded in GAP; ${step} failed (${why}). ${recordLine(rec)} ${NEXT_PATH.recorded_then_failed}`).catch(() => undefined);
+  return { applied: false, command: 'done', reason: 'recorded_then_failed', outcome: 'failed', source, next: nextPath('recorded_then_failed') };
 }
 
 /** Whether `command` was applied on the item before. A progress note (DONE read as what the seller is doing) is never an applied DONE. */
@@ -634,9 +675,19 @@ async function act(prisma: PrismaLike, input: ApplyInput, deps: ApplyDeps, item:
     return { applied: true, command: 'done', effect: 'progress_noted', itemKey: ref.itemKey, outcome: 'accepted', source, next: nextPath('progress_noted'), basis: 'self_reported' };
   }
   const note = reading.note;
+  const facts: DoneFact[] = reading.facts ?? [];
+  // A completion DONE on a reply item is recorded FIRST (replies/done-reply.ts), so a refusal records nothing at all:
+  // R5 review (finding 1): an opted-out item whose message is not the opt-out (Bob's reply under "Opted out: Tim")
+  // never records do not contact on that message's writer, and nothing else either (no meeting, no settle, no log).
+  const replyId = commitment ? null : replyIdOf(item);
+  const rec = replyId && (item.stateKind === 'replied' || item.stateKind === 'opted_out' || item.stateKind === 'bounced')
+    ? await (deps.recordReplyDone ?? ((p: PrismaLike, i: ReplyDoneInput) => defaultRecordReplyDone(p, i)))(prisma, { replyId, note, facts, commandMessageId: input.m.id, stateKind: item.stateKind, actor, now: input.now })
+    : null;
+  if (rec?.kind === 'not_recorded' && rec.code === 'not_the_opt_out') {
+    return refuse(prisma, input, deps, subject, 'done', 'not_the_opt_out', { replyMessageId: replyId }, source, `Not recorded: ${NOT_THE_OPT_OUT}; open the account: ${input.baseUrl.replace(/\/$/, '')}${accountHref(item.accountName)}`);
+  }
   // C3: the facts the note states become records: a meeting to prepare (one per day, through the commitment writer),
   // a sent note as a claim on this row. A failure to write the meeting never fails the DONE (the words are recorded).
-  const facts: DoneFact[] = reading.facts ?? [];
   const claims = facts.filter((f): f is Extract<DoneFact, { kind: 'sent' }> => f.kind === 'sent').map((f) => ({ kind: 'sent' as const, who: f.who, when: f.when, channel: f.channel, words: f.words }));
   const person = commitment?.person ?? (item.person ? { personaId: null, name: item.person.name, email: null } : null);
   const meetings = facts.some((f) => f.kind === 'meeting')
@@ -652,16 +703,54 @@ async function act(prisma: PrismaLike, input: ApplyInput, deps: ApplyDeps, item:
   // The walk fix (Casey, 2026-10-10): DONE records the disposition instead of a one-day log. On a reply item (a person
   // wrote; or their recorded reply still owed an answer) the reply is SETTLED by the seller's word: the C35 resolution
   // row on its message (work/recorded-replies.ts resolveAnswerOwed), which the reply list, the pursuit read and the owed
-  // answers all read, so it never returns; a new message from them is new work. No disposition is written here (the
-  // disposition service needs a thesis and runs the CRM mirror and the enrollment stops; DONE runs neither).
-  if (item.stateKind === 'replied' && item.refs.replyMessageId) {
-    const r = await resolveAnswerOwed(prisma, { messageId: item.refs.replyMessageId, actor, reason: `DONE by email: ${note}`.slice(0, 500), now: input.now });
-    if (!r.ok) return refuse(prisma, input, deps, subject, 'done', `reply_${r.reason}`, {}, source);
-    const whose = item.person?.name ? `${item.person.name}'s reply` : 'the reply';
-    return finish('reply_settled', { replyMessageId: item.refs.replyMessageId, resolutionId: r.id, note, basis: 'self_reported', ...factsPayload }, `Settled, by your word: ${whose} at ${item.accountName}. ${recorded ?? `Recorded: "${note}".`} It does not come back; a new message from them does.`, { basis: 'self_reported' });
+  // answers all read, so it never returns; a new message from them is new work.
+  // The DONE unification (Casey, 2026-10-10): before it is settled, the reply is RECORDED the way Capture records it,
+  // through the one disposition service (replies/done-reply.ts): one disposition keyed by this command's Gmail id, the
+  // enrollment stops and the consent writer its class runs, the HubSpot mirror with its receipt. A replayed command
+  // records nothing twice and settles nothing twice.
+  if (rec && replyId) {
+    const receipt = rec.kind === 'recorded' ? (rec.mirror.receipt === 'mirrored' ? { receipt: 'mirrored' as const } : { receipt: 'recorded_not_mirrored' as const, mirrorReason: rec.mirror.reason, retryable: rec.mirror.retryable }) : rec.kind === 'recorded_before' ? { receipt: 'recorded_before' as const } : { receipt: 'not_recorded' as const, notRecordedReason: rec.reason };
+    const recordPayload = { ...(rec.kind !== 'not_recorded' ? { dispositionId: rec.dispositionId, responseClass: rec.responseClass } : {}), ...(rec.kind === 'recorded' && rec.replay ? { replay: true } : {}), ...receipt };
+    const optOut = rec.kind === 'not_recorded' ? item.stateKind === 'opted_out' : rec.responseClass === 'do_not_contact';
+    // "Walmart Inc." ends its own sentence: never "Walmart Inc..".
+    const acct = item.accountName.replace(/\.+$/, '');
+    // An opt-out is settled only when the consent writer recorded it as do not contact; otherwise it stays on the list.
+    const dncRecorded = rec.kind === 'recorded' ? rec.unsubscribed : rec.kind === 'recorded_before' && rec.responseClass === 'do_not_contact';
+    // R5 review (finding 5b): once the disposition is recorded, every later step is said as recorded-then-failed (a
+    // throw or a refusal), never "Nothing changed"; and the receipt is durable before any of them.
+    const recordedRec = rec.kind === 'not_recorded' ? null : rec;
+    let step = 'writing the receipt';
+    const failedAfter = (what: string, detail: string) => recordedThenFailed(prisma, input, deps, subject, recordedRec!, what, detail, { replyMessageId: replyId, ...recordPayload }, source);
+    try {
+      if (recordedRec) {
+        await prisma.gapAuditEvent.create({ data: { kind: DONE_RECEIPT, actor: input.actor, subject_type: subject.type, subject_id: subject.id, payload: { gmailMessageId: input.m.id, from: input.m.fromEmail.toLowerCase(), at: input.now.toISOString(), command: 'done', revision: ref.revision, replyMessageId: replyId, ...recordPayload } } });
+      }
+      if (optOut && !dncRecorded) {
+        step = 'logging the opt-out for the day';
+        const o = await recordWorkOutcome(prisma, { accountName: item.accountName, kind: 'logged', reason: note.slice(0, 240), actor, now: input.now });
+        if (!o.ok) return recordedRec ? await failedAfter(step, `outcome ${o.reason}`) : await refuse(prisma, input, deps, subject, 'done', `outcome_${o.reason}`, recordPayload, source);
+        const why = rec.kind === 'recorded' ? ' Recorded in GAP as "Do not contact them again", but the do-not-contact write did not complete.' : ` ${recordLine(rec)}`;
+        step = 'answering';
+        return await finish('account_logged', { note, basis: 'self_reported', replyMessageId: replyId, ...recordPayload, ...factsPayload }, `Logged, by your word: ${acct}. ${recorded ?? `Recorded: "${note}".`} The opt-out stays on your list until it is recorded as do not contact on the account.${why}`, { basis: 'self_reported' });
+      }
+      // The C35 row once per message: a replayed command finds it and writes no second one.
+      step = 'settling the reply';
+      const already = (await loadResolvedReplyIds(prisma, [replyId]).catch(() => new Set<string>())).has(replyId);
+      const r = already ? null : await resolveAnswerOwed(prisma, { messageId: replyId, actor, reason: `DONE by email: ${note}`.slice(0, 500), now: input.now });
+      if (r && !r.ok) return recordedRec ? await failedAfter(step, `reply ${r.reason.replace(/_/g, ' ')}`) : await refuse(prisma, input, deps, subject, 'done', `reply_${r.reason}`, recordPayload, source);
+      const whose = item.person?.name ? `${item.person.name}'s reply` : 'the reply';
+      const head = optOut ? `Recorded as do not contact, by your word: ${whose} at ${acct}.` : `Settled, by your word: ${whose} at ${acct}.`;
+      const tail = optOut ? 'GAP will not contact them again.' : 'It does not come back; a new message from them does.';
+      step = 'answering';
+      return await finish('reply_settled', { replyMessageId: replyId, resolutionId: r?.id ?? null, ...(already ? { resolvedBefore: true } : {}), note, basis: 'self_reported', ...recordPayload, ...factsPayload }, `${head} ${recorded ?? `Recorded: "${note}".`} ${tail} ${recordLine(rec)}`, { basis: 'self_reported' });
+    } catch (err) {
+      // Nothing recorded: the C44 path ("Nothing changed") stays true. Recorded: say it, and what failed.
+      if (!recordedRec) throw err;
+      return failedAfter(step, err instanceof Error ? err.message : String(err));
+    }
   }
-  // An opt-out is never settled by DONE: it stays until it is recorded as do not contact on the account. The words are
-  // logged for the day, as before, and the seller is told.
+  // An opt-out with no message to name is never settled by DONE: it stays until it is recorded as do not contact on the
+  // account. The words are logged for the day, as before, and the seller is told.
   if (item.stateKind === 'opted_out') {
     const o = await recordWorkOutcome(prisma, { accountName: item.accountName, kind: 'logged', reason: note.slice(0, 240), actor, now: input.now });
     if (!o.ok) return refuse(prisma, input, deps, subject, 'done', `outcome_${o.reason}`, {}, source);

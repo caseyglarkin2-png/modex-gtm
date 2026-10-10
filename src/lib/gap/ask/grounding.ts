@@ -16,6 +16,8 @@ import type { OutreachAnchor } from '../story/anchor';
 import type { PeopleStack } from '../people/stack';
 import { accountHref } from '../account-intel/href';
 import type { AskControls } from './proposal';
+import { pausedReplyText } from '../work/truth-text';
+import { OWN_DOMAINS } from '../replies/domains';
 
 export const ASK_QUESTION_MAX = 400;
 export const ASK_ANSWER_WORDS = 160;
@@ -63,7 +65,8 @@ export function coverageLineOf(coverage: readonly AskCoverage[]): string | null 
 
 export interface AskContext {
   accountName: string;
-  state: { state: string; stateLine: string; blocker: string | null; next: string; coldTouchAllowed: boolean };
+  /** `paused` (2026-10-10): under the send gate's reply hold, the reply on record and the paused first touch, two sentences (work/truth-text.ts). */
+  state: { state: string; stateLine: string; blocker: string | null; next: string; coldTouchAllowed: boolean; paused?: string | null };
   people: Array<{ name: string; title: string | null; slot: string; reason: string; currentness: string | null; chosen: boolean; whyOverNext: string | null; setAsideByYou: string | null }>;
   setAside: string | null;
   story: Array<{ label: string; tag: string; lines: Array<{ text: string; tag: string; basis: string }> }>;
@@ -123,6 +126,8 @@ function contextable(s: { text: string; tag: string; cite?: string | null }, key
 }
 
 const scrub = (t: string) => t.replace(/[\w.+-]+@[\w-]+(?:\.[\w-]+)+/g, 'their address').replace(/\bhttps?:\/\/\S+/gi, '').replace(/\s+/g, ' ').trim();
+/** The coverage names OUR mailboxes (which was read, and when: "casey@yardflow.ai read 14:02"); a buyer's address never. */
+const scrubCoverage = (t: string) => t.replace(/[\w.+-]+@[\w-]+(?:\.[\w-]+)+/g, (m) => (OWN_DOMAINS.has((m.split('@')[1] ?? '').toLowerCase()) ? m : 'their address')).replace(/\bhttps?:\/\/\S+/gi, '').replace(/\s+/g, ' ').trim();
 
 /** The bounded context: what the page shows and nothing it hides. */
 export function compactContext(i: {
@@ -146,10 +151,10 @@ export function compactContext(i: {
   // An opt-out is the buyer's word too ("stop"): never "the buyer has not told us" over it.
   if (i.state.lastInbound && (i.state.lastInbound.kind === 'human' || i.state.lastInbound.kind === 'opt_out') && i.state.lastInbound.snippet.trim()) buyerSaid.unshift({ text: i.state.lastInbound.kind === 'opt_out' ? `Asked not to be contacted: "${i.state.lastInbound.snippet.trim()}"` : i.state.lastInbound.snippet, who: i.state.lastInbound.who, at: i.state.lastInbound.at });
   // The coverage details are scrubbed like everything else (a detail may name an address), and the line is built from the scrubbed rows.
-  const coverage: AskCoverage[] = (i.coverage ?? []).map((c) => ({ source: c.source, status: c.status, detail: c.detail ? scrub(c.detail) : null }));
+  const coverage: AskCoverage[] = (i.coverage ?? []).map((c) => ({ source: c.source, status: c.status, detail: c.detail ? scrubCoverage(c.detail) : null }));
   return {
     accountName: i.accountName,
-    state: { state: i.state.state, stateLine: scrub(i.state.stateLine), blocker: i.state.blocker ? scrub(i.state.blocker) : null, next: scrub(i.nextText), coldTouchAllowed: i.state.coldTouchAllowed },
+    state: { state: i.state.state, stateLine: scrub(i.state.stateLine), blocker: i.state.blocker ? scrub(i.state.blocker) : null, next: scrub(i.nextText), coldTouchAllowed: i.state.coldTouchAllowed, ...(i.state.paused ? { paused: scrub(pausedReplyText(i.state.paused)) } : {}) },
     people: rows.map((r) => ({ name: r.name, title: r.title, slot: r.slot, reason: scrub(r.reason), currentness: r.currentness, chosen: r.chosen, whyOverNext: r.leadOver ? `${r.leadOver.tie ? 'tie with' : r.leadOver.leads ? 'leads' : 'behind'} ${r.leadOver.over}: ${scrub(r.leadOver.text)}` : null, setAsideByYou: r.preference?.line ?? null })),
     setAside: i.stack?.setAside.line ?? null,
     // The vault note is seller-only and never quotable: it is not context. Private engagement is not a story row. A

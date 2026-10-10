@@ -39,6 +39,14 @@ describe('replies are classified before they rank', () => {
     expect(s.blocker).toMatch(/record it as do not contact/i);
     expect(s.lastInbound).toMatchObject({ who: 'timothy.cooper@walmart.com', kind: 'opt_out' });
   });
+  it('R5 review (finding 1): the opt-out state names the opt-out message, so Work binds its item to it', () => {
+    const s = projectPursuitState(base({ accountName: 'Walmart Inc.', replies: [
+      { from: 'bob@walmart.com', name: 'Bob Hale', at: '2026-10-04T13:58:00Z', subject: 'Re: yards', snippet: 'Tell me more about the gate.', triaged: false, id: 'm-bob' },
+      { from: 'timothy.cooper@walmart.com', name: 'Tim Cooper', at: '2026-10-05T13:58:00Z', subject: 'Re: yards', snippet: 'stop', triaged: false, id: 'm-tim' },
+    ] }));
+    expect(s.state).toBe('opted_out');
+    expect(s.replyRef).toEqual({ id: 'm-tim', at: '2026-10-05T13:58:00Z' });
+  });
   it('a human reply nobody has recorded pauses the account: REPLIED leads, the next person waits with the unlock named', () => {
     const s = projectPursuitState(base({ replies: [{ from: 'dana@acmefoods.com', name: 'Dana Trans', at: '2026-10-04T12:00:00Z', subject: 'Re: Yard question', snippet: 'Thanks Casey, we are looking at gate dwell at two DCs. Can you send more?', triaged: false }] }));
     expect(s.state).toBe('replied');
@@ -209,5 +217,71 @@ describe('approvalHoldFor: a proposal is approvable unless the account is under 
     expect(held.state).toBe('held');
     expect(approvalHoldFor(held)).toMatch(/No cold touch/);
     expect(approvalHoldFor({ state: 'held', blocker: null })).toBe('A hold on the account stops approval for use.');
+  });
+});
+
+describe('paused reply (Casey, 2026-10-10): the reply on record and the first touch the send gate pauses, said apart', () => {
+  const WORDS = 'Thanks Casey, we are looking at gate dwell at two DCs. Can you send more?';
+  const HOLD = { from: 'dana@acmefoods.com', receivedAt: '2026-10-04T12:00:00.000Z', snippet: WORDS, id: 'm-dana' };
+  const pausedMotion = { state: 'paused_reply', primary: null, next: { personaId: 1, name: 'Doug Estrada', title: null, unlock: "after dana@acmefoods.com's reply is triaged in Replies" }, headline: 'Paused: dana@acmefoods.com at Acme Foods wrote in on 2026-10-04. Triage it in Replies before anyone there gets a cold email.', pausedBy: HOLD };
+  const RECEIVED = `A reply from Dana Trans on Oct 4 was received ("${WORDS}").`;
+  const PAUSED = 'The proposed first touch to Doug Estrada is paused by the send gate: the reply is not recorded yet; nothing was sent.';
+
+  it('the reply list holds it: the line and the blocker say the reply received (their words) and the paused first touch, two sentences; nothing sent; never "Someone replied" alone', () => {
+    const s = projectPursuitState(base({ motion: pausedMotion, replies: [{ from: 'dana@acmefoods.com', name: 'Dana Trans', at: '2026-10-04T12:00:00Z', subject: 'Re: Yard question', snippet: WORDS, triaged: false, id: 'm-dana' }] }));
+    expect(s.state).toBe('replied');
+    expect(s.stateLine).toBe('Reply on record: Dana Trans, Oct 4. First touch to Doug Estrada paused, nothing sent');
+    expect(s.blocker).toBe(`${RECEIVED} ${PAUSED}`);
+    expect(s.paused).toEqual({ accountName: 'Acme Foods', reply: { name: 'Dana Trans', from: 'dana@acmefoods.com', at: '2026-10-04T12:00:00Z', words: WORDS, id: 'm-dana' }, proposed: { kind: 'first_touch', to: 'Doug Estrada' }, reason: 'reply_unrecorded' });
+    expect(s.person?.name).toBe('Dana Trans');
+    expect(s.coldTouchAllowed).toBe(false);
+    expect(`${s.stateLine} ${s.blocker}`).not.toMatch(/Someone replied/);
+  });
+
+  it("the reply list does not hold it (the gate reads every domain at the account): the gate's own message keeps the buyer's words; the same two sentences", () => {
+    const s = projectPursuitState(base({ motion: pausedMotion, replies: [] }));
+    expect(s.state).toBe('replied');
+    expect(s.paused?.reply).toEqual({ name: 'dana@acmefoods.com', from: 'dana@acmefoods.com', at: HOLD.receivedAt, words: WORDS, id: 'm-dana' });
+    expect(s.blocker).toBe(`A reply from dana@acmefoods.com on Oct 4 was received ("${WORDS}"). ${PAUSED}`);
+    expect(s.stateLine).not.toMatch(/Someone replied/);
+  });
+
+  it('a motion read before its hold rode along says the writer and the day off its headline; with people eligible and nobody chosen, the first touch to anyone else there is what is paused', () => {
+    const two = [
+      { key: 'gap:1', personaId: 1, name: 'Doug Estrada', title: 'Director Transportation' },
+      { key: 'gap:2', personaId: 2, name: 'Sam Ortiz', title: 'Director Logistics' },
+    ];
+    const s = projectPursuitState(base({ eligible: two, motion: { state: 'paused_reply', primary: null, next: null, headline: pausedMotion.headline } }));
+    expect(s.paused).toMatchObject({ reply: { name: 'dana@acmefoods.com', words: null }, proposed: { kind: 'first_touch', to: null } });
+    expect(s.blocker).toBe("A reply from dana@acmefoods.com on Oct 4 was received (its words are not in GAP's synced inbox). The proposed first touch to anyone else at Acme Foods is paused by the send gate: the reply is not recorded yet; nothing was sent.");
+    expect(s.stateLine).toBe('Reply on record: dana@acmefoods.com, Oct 4. First touch paused, nothing sent');
+  });
+
+  it('R5 review (finding 6): nothing proposed (no ready card, nobody eligible, no follow-up due) pauses nothing: no "proposed first touch to anyone else"', () => {
+    const s = projectPursuitState(base({ eligible: [], motion: { state: 'paused_reply', primary: null, next: null, headline: pausedMotion.headline, pausedBy: HOLD } }));
+    expect(s.paused ?? null).toBeNull();
+    expect(`${s.stateLine} ${s.blocker}`).not.toMatch(/proposed|paused by the send gate/);
+    const listed = projectPursuitState(base({ eligible: [], motion: { state: 'paused_reply', primary: null, next: null, headline: pausedMotion.headline, pausedBy: HOLD }, replies: [{ from: 'dana@acmefoods.com', name: 'Dana Trans', at: '2026-10-04T12:00:00Z', subject: 'Re: Yard question', snippet: WORDS, triaged: false, id: 'm-dana' }] }));
+    expect(listed.state).toBe('replied');
+    expect(listed.paused ?? null).toBeNull();
+    expect(listed.blocker).toBe('Dana Trans wrote on Oct 4; the reply is not recorded yet.');
+  });
+
+  it('R5 review (finding 6): with nobody eligible and a follow-up due, the kind follows what exists: the follow-up to that person is what is paused', () => {
+    const s = projectPursuitState(base({ eligible: [], followUpDue: { personaId: 7, name: 'Pat Lee', dueAt: '2026-10-05T12:00:00Z', cardHref: '/gap/pack/d7' }, motion: { state: 'paused_reply', primary: null, next: null, headline: pausedMotion.headline, pausedBy: HOLD } }));
+    expect(s.paused?.proposed).toEqual({ kind: 'follow_up', to: 'Pat Lee' });
+    expect(s.blocker).toBe(`A reply from dana@acmefoods.com on Oct 4 was received ("${WORDS}"). The proposed follow-up to Pat Lee is paused by the send gate: the reply is not recorded yet; nothing was sent.`);
+    expect(s.stateLine).toBe('Reply on record: dana@acmefoods.com, Oct 4. Follow-up to Pat Lee paused, nothing sent');
+  });
+
+  it('an unrecorded reply the gate does not hold on (no paused motion: older than its window) pauses nothing: said as the reply alone; an opt-out under the hold stays an opt-out', () => {
+    const old = projectPursuitState(base({ replies: [{ from: 'emily@gusto.example', name: 'Emily Maja', at: '2026-08-19T12:00:00Z', subject: null, snippet: 'Happy to chat in Q4.', triaged: false }] }));
+    expect(old.state).toBe('replied');
+    expect(old.paused).toBeUndefined();
+    expect(old.stateLine).toBe('Someone replied: Emily Maja, Aug 19');
+    expect(old.blocker).not.toMatch(/send gate/);
+    const stop = projectPursuitState(base({ motion: pausedMotion, replies: [{ from: 'dana@acmefoods.com', name: 'Dana Trans', at: '2026-10-04T12:00:00Z', subject: null, snippet: 'stop', triaged: false }] }));
+    expect(stop.state).toBe('opted_out');
+    expect(stop.paused).toBeUndefined();
   });
 });

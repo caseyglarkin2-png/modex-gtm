@@ -77,7 +77,7 @@
     },
     {
       "path": "/api/cron/gap-clawd-import/",
-      "schedule": "20 */2 * * *"
+      "schedule": "20 * * * *"
     },
     {
       "path": "/api/cron/gap-drive-sync/",

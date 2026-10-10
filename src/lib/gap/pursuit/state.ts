@@ -30,6 +30,7 @@ import { cutWords } from '../story/touches';
 import { classifyReply, type ReplyClass } from '../replies/classify';
 import type { MotionType } from '../account-intel/build';
 import { identityHold, unknownReasonWords, unknownUnlock } from '../opportunity/unknown-words';
+import { pausedReplyText, pausedStateLine, type PausedReply } from '../work/truth-text';
 
 export type PursuitStateKind = 'replied' | 'opted_out' | 'in_deal' | 'held' | 'follow_up_due' | 'in_motion' | 'ready' | 'choose_person' | 'research' | 'idle';
 
@@ -100,8 +101,11 @@ export interface PursuitInput {
   opportunity: { status: 'CLEAR' | 'OPEN' | 'UNKNOWN' | string; detail: string; deals: Array<{ name: string | null; stage: string | null }>; closure?: { kind: 'customer' | 'parked'; why: string } | null };
   restriction: { kind: string; introducer: string; route: string } | null;
   familyHold: { detail: string } | null;
-  /** The cockpit's account motion for this account, when one exists (motion/account-motion.ts). */
-  motion: { state: string; primary: { personaId: number; name: string; title: string | null } | null; next: { personaId: number; name: string; title: string | null; unlock: string } | null; headline: string } | null;
+  /**
+   * The cockpit's account motion for this account, when one exists (motion/account-motion.ts). `pausedBy`: the message
+   * the send gate holds on under `paused_reply` (motion/load.ts loadReplyHolds; its words when the gate read them).
+   */
+  motion: { state: string; primary: { personaId: number; name: string; title: string | null } | null; next: { personaId: number; name: string; title: string | null; unlock: string } | null; headline: string; pausedBy?: { from: string; receivedAt: string; snippet?: string | null; id?: string | null } | null } | null;
   /** The newest recorded motion choice (account.motion audit row). */
   choice: { personaId: number; by: string; at: string; source: 'motion' | 'owner_resolution' } | null;
   /** The newest active hypothesis whose person a human assigned (hypothesis.persona_assigned / activate rows). */
@@ -136,8 +140,16 @@ export interface PursuitState {
   lastInbound: { who: string; at: string; kind: ReplyClass['kind']; label: string; /** The reply's first words (for the story's between-us row). */ snippet: string; /** R63-A B4: the address it came from (the story names its sender by it). */ from?: string; /** C6: the identity path that placed the sender here, when the message came from the placed read. */ placedVia?: PursuitReply['placedVia']; /** The walk fix: the message id, when known. */ id?: string | null; /** The walk fix: when we answered it (a human reply only), else absent. */ answeredAt?: string | null } | null;
   /** The walk fix: the human replies at the account we answered (a send of ours after each), for Work to drop their cards. */
   answered?: Array<{ from: string; at: string; answeredAt: string; source: string; id?: string | null }>;
-  /** The walk fix: when REPLIED on an unrecorded reply, that reply (its message id when known, and its time). */
+  /**
+   * The walk fix: when REPLIED on an unrecorded reply, that reply (its message id when known, and its time). R5 review
+   * (finding 1): when OPTED OUT, the opt-out message itself, so Work binds the item to it and never to another reply.
+   */
   replyRef?: { id: string | null; at: string } | null;
+  /**
+   * Paused reply (Casey, 2026-10-10): under the send gate's reply hold (the motion is `paused_reply`), the reply on
+   * record and the proposed action it pauses, apart (work/truth-text.ts says them); absent when nothing is paused.
+   */
+  paused?: PausedReply | null;
   lastOutbound: PursuitInput['lastOutbound'];
   chosenMissing: string | null;
   /** The next person after the chosen one, when the motion names one, with what unlocks them. */
@@ -188,6 +200,62 @@ export function approvalHoldFor(state: Pick<PursuitState, 'state' | 'blocker'>):
 const day = (s: string) => new Date(s).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' });
 const who = (by: string) => (/^casey@|^caseyglarkin/i.test(by) ? 'you' : by.replace(/@.*/, ''));
 
+/** "Paused: tim@walmart.com at Walmart Inc. wrote in on 2026-10-05. ..." (a motion read before its hold rode along). */
+const PAUSED_HEADLINE = /^Paused: (\S+) at .+? wrote in on (\d{4}-\d{2}-\d{2})/;
+
+/**
+ * Paused reply (Casey, 2026-10-10): what the send gate's reply hold pauses, read off the motion's own hold (the gate's
+ * reader: the message it holds on, matched in the reply list for the writer's name and words) and the first touch it
+ * holds (the motion's next person, else the chosen or only eligible person, else anyone else at the account). Null
+ * unless the motion is `paused_reply`: an unrecorded reply the gate does not hold on (older than its window) pauses
+ * nothing and is said as a reply alone.
+ * R5 review (finding 6): paused only when something is proposed. A ready card (the motion's next person) or an eligible
+ * person proposes a first touch; else a due follow-up proposes a follow-up; else nothing is proposed and the reply is
+ * said alone (never "the proposed first touch to anyone else" when there is no one).
+ */
+export function pausedOf(
+  i: Pick<PursuitInput, 'accountName' | 'replies'> & {
+    motion: { state: string; next: { name: string } | null; headline?: string; pausedBy?: NonNullable<PursuitInput['motion']>['pausedBy'] } | null;
+    /** The resolver's eligible people (the account page); absent where the caller holds only the motion (Work). */
+    eligible?: ReadonlyArray<unknown>;
+    followUpDue?: { name: string } | null;
+  },
+  firstTouchTo: string | null,
+): PausedReply | null {
+  const m = i.motion;
+  if (m?.state !== 'paused_reply') return null;
+  const proposed: PausedReply['proposed'] | null =
+    m.next?.name || firstTouchTo
+      ? { kind: 'first_touch', to: m.next?.name ?? firstTouchTo }
+      : (i.eligible?.length ?? 0) > 0
+        ? { kind: 'first_touch', to: null }
+        : i.followUpDue?.name
+          ? { kind: 'follow_up', to: i.followUpDue.name }
+          : null;
+  if (!proposed) return null;
+  const head = PAUSED_HEADLINE.exec(m.headline ?? '');
+  const by = m.pausedBy ?? (head ? { from: head[1], receivedAt: `${head[2]}T12:00:00.000Z`, snippet: null, id: null } : null);
+  const from = by?.from.trim().toLowerCase() || null;
+  const t = by ? new Date(by.receivedAt).getTime() : NaN;
+  const same = from ? i.replies.filter((r) => r.from.trim().toLowerCase() === from).sort((a, b) => b.at.localeCompare(a.at)) : [];
+  // The gate's own message by its minute; a hold read off the headline carries only its day, so its writer's newest.
+  const row = same.find((r) => Number.isFinite(t) && Math.abs(new Date(r.at).getTime() - t) < 60_000) ?? (!m.pausedBy ? same[0] ?? null : null);
+  const fallback = !by ? [...i.replies].filter((r) => !r.triaged).sort((a, b) => b.at.localeCompare(a.at))[0] ?? null : null;
+  const src = row ?? fallback;
+  return {
+    accountName: i.accountName,
+    reply: {
+      name: src?.name?.trim() || from || src?.from || 'someone at the account',
+      from: from ?? src?.from ?? null,
+      at: src?.at ?? by?.receivedAt ?? '',
+      words: src?.snippet ?? by?.snippet ?? null,
+      id: src?.id ?? by?.id ?? null,
+    },
+    proposed,
+    reason: 'reply_unrecorded',
+  };
+}
+
 export function projectPursuitState(i: PursuitInput): PursuitState {
   const newestReply = [...i.replies].sort((a, b) => b.at.localeCompare(a.at))[0] ?? null;
   const replyClass = newestReply ? classifyReply({ snippet: newestReply.snippet, subject: newestReply.subject, from: newestReply.from }) : null;
@@ -234,16 +302,20 @@ export function projectPursuitState(i: PursuitInput): PursuitState {
     ...over,
   });
 
+  // Paused reply (2026-10-10): under the gate's reply hold, the reply on record and the first touch it pauses, apart.
+  const paused = pausedOf(i, (chosen ?? only)?.name ?? null);
+
   // 1. A reply nobody has recorded, by its class. The walk fix: a human reply we answered is not waiting (an opt-out
   // never counts as answered: it stays until it is recorded).
   if (newestReply && replyClass && !newestReply.triaged) {
     if (replyClass.kind === 'human' && !newestAnswer) {
       return base('replied', {
         person: { key: `reply:${newestReply.from}`, personaId: null, name: newestReply.name ?? newestReply.from, title: null, chosenBy: null },
-        stateLine: `${STATE_LINE.replied}: ${newestReply.name ?? newestReply.from}, ${day(newestReply.at)}`,
-        blocker: `${newestReply.name ?? newestReply.from} wrote on ${day(newestReply.at)}; the reply is not recorded yet.`,
+        stateLine: paused ? pausedStateLine(paused) : `${STATE_LINE.replied}: ${newestReply.name ?? newestReply.from}, ${day(newestReply.at)}`,
+        blocker: paused ? pausedReplyText(paused) : `${newestReply.name ?? newestReply.from} wrote on ${day(newestReply.at)}; the reply is not recorded yet.`,
         unlock: 'Read the reply and record what they said; the next person unlocks after that.',
         replyRef: { id: newestReply.id ?? null, at: newestReply.at },
+        ...(paused ? { paused } : {}),
       });
     }
     if (replyClass.kind === 'opt_out') {
@@ -251,6 +323,7 @@ export function projectPursuitState(i: PursuitInput): PursuitState {
         stateLine: `${STATE_LINE.opted_out}: ${newestReply.name ?? newestReply.from}, ${day(newestReply.at)}`,
         blocker: `${newestReply.name ?? newestReply.from} replied "${newestReply.snippet.slice(0, 40)}" on ${day(newestReply.at)}: record it as do not contact. No reply goes back.`,
         unlock: 'Record the opt-out; GAP then sets that person aside. Anyone else here is your call afterwards, not the queue\'s.',
+        replyRef: { id: newestReply.id ?? null, at: newestReply.at },
       });
     }
     // out_of_office and bounce: noted on the inbound line, never a state of their own.
@@ -258,6 +331,17 @@ export function projectPursuitState(i: PursuitInput): PursuitState {
 
   // 1b. The cockpit's own motion already knows a conversation or an untriaged reply at the account (its readers see
   // addresses the reply list may not): the same hold, never a surface that recomputes it away.
+  // Paused reply (2026-10-10): under the gate's hold the state says the reply on record (their words) and the paused
+  // first touch, never "Someone replied" alone.
+  if (paused) {
+    return base('replied', {
+      person: { key: `reply:${paused.reply.from ?? paused.reply.name}`, personaId: null, name: paused.reply.name, title: null, chosenBy: null },
+      stateLine: pausedStateLine(paused),
+      blocker: pausedReplyText(paused),
+      unlock: 'Read the reply and record what they said; the next person unlocks after that.',
+      paused,
+    });
+  }
   if (i.motion?.state === 'in_conversation' || i.motion?.state === 'paused_reply') {
     const who = i.motion.headline.match(/^(?:In a conversation|Paused): (.+?) (?:answered|at )/)?.[1] ?? 'someone at the account';
     return base('replied', {

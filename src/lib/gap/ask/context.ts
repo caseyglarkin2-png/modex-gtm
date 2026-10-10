@@ -16,6 +16,7 @@ import { knowledgeAdapters } from '../story/load';
 import type { AccountInputs } from '../account-intel/build';
 import type { AccountStory } from '../story/story';
 import { compactContext, vaultReasonWords, type AskContext, type AskCoverage } from './grounding';
+import { sentMailboxWords, type SentMailboxRead } from '../account-intel/sent';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -36,8 +37,11 @@ export interface AskCoverageInputs {
   draftsOnRecord: number;
   /** C6: the inbound read (thread-keyed and placed): how many placed messages were merged, and whether the identity context was readable. */
   inbound?: { placed: number; identityRead: boolean; detail: string | null } | null;
-  /** B1: the Sent read (AccountInputs.sent): read with its count, partly read with its detail, or not read with the reason; absent means not read this time. */
-  sent?: { read: boolean; count: number; detail: string | null } | null;
+  /**
+   * B1: the Sent read (AccountInputs.sent): read with its count, partly read with its detail, or not read with the reason; absent means not read this time.
+   * `mailboxes` (2026-10-10): each seller mailbox read or not and when; the row then says each ("casey@yardflow.ai read 14:02; casey@freightroll.com not read: not configured").
+   */
+  sent?: { read: boolean; count: number; detail: string | null; mailboxes?: SentMailboxRead[] } | null;
   /** B2: the HubSpot engagements read (AccountInputs.engagements): read with its count, or failed or not configured with the reason; absent means not read this time. */
   engagements?: { read: boolean; count: number; detail: string | null } | null;
   /**
@@ -72,6 +76,20 @@ function vaultRow(i: AskCoverageInputs): AskCoverage {
   return { source: 'vault', status: 'read', detail: held || null };
 }
 
+/**
+ * Account Sent coverage (2026-10-10): the Sent row from every seller mailbox, each said read (with its time) or not
+ * (with its reason): "Gmail Sent (2 messages; casey@yardflow.ai read 14:02; casey@freightroll.com not read: not
+ * configured)". A mailbox not read makes the row partly read (or not read, when none was): unknown, never "nothing sent".
+ */
+function sentCoverage(sent: { read: boolean; count: number; detail: string | null; mailboxes: SentMailboxRead[] }): AskCoverage {
+  const anyRead = sent.mailboxes.some((m) => m.status === 'read' || m.status === 'partial');
+  const status: AskCoverage['status'] = sent.read ? (sent.detail ? 'partial' : 'read') : anyRead ? 'partial' : sent.mailboxes.every((m) => m.status === 'not_configured') ? 'not_read' : 'failed';
+  // A note that is not a mailbox's own ("no address or domain on record to look for") rides after the mailboxes.
+  const note = sent.read && sent.detail && !sent.mailboxes.some((m) => m.status === 'partial') ? sent.detail : null;
+  const detail = [sent.count > 0 || sent.read ? plural(sent.count, 'message') : null, sentMailboxWords(sent.mailboxes), note].filter(Boolean).join('; ');
+  return { source: 'gmail_sent', status, detail };
+}
+
 export function askCoverageOf(i: AskCoverageInputs): AskCoverage[] {
   const o = i.opportunity;
   const sent = i.sent;
@@ -89,6 +107,8 @@ export function askCoverageOf(i: AskCoverageInputs): AskCoverage[] {
     // B1: our Sent folder (account-intel/sent.ts), read with its count; a sender must exist for it to be read at all.
     !sent
       ? { source: 'gmail_sent', status: 'not_read', detail: i.senderConfigured ? 'not read this time' : 'no GAP sender configured' }
+      : sent.mailboxes?.length
+        ? sentCoverage({ ...sent, mailboxes: sent.mailboxes })
       : sent.read
         ? { source: 'gmail_sent', status: sent.detail ? 'partial' : 'read', detail: sent.detail ? `${plural(sent.count, 'message')}; ${sent.detail}` : plural(sent.count, 'message') }
         : { source: 'gmail_sent', status: 'not_read', detail: sent.detail || 'could not be read' },
@@ -109,7 +129,7 @@ export function coverageFromPage(inputs: Pick<AccountInputs, 'opportunity' | 'fi
   return askCoverageOf({
     opportunity: inputs.opportunity,
     inbound: inputs.inbound ? { placed: inputs.inbound.messages.filter((m) => m.via !== 'thread').length, identityRead: inputs.inbound.identityRead, detail: inputs.inbound.detail } : null,
-    sent: inputs.sent ? { read: inputs.sent.read, count: inputs.sent.messages.length, detail: inputs.sent.detail } : null,
+    sent: inputs.sent ? { read: inputs.sent.read, count: inputs.sent.messages.length, detail: inputs.sent.detail, ...(inputs.sent.mailboxes?.length ? { mailboxes: inputs.sent.mailboxes } : {}) } : null,
     engagements: inputs.engagements ? { read: inputs.engagements.read, count: inputs.engagements.items.length, detail: inputs.engagements.detail } : null,
     vaultNote: (story?.rows ?? []).some((r) => r.key === 'note'),
     vaultConfigured: !!vault,

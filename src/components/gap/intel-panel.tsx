@@ -5,14 +5,18 @@
  * each item with its source and dates said as what they are, the account when known, the prepared angle when the
  * agent has one, and the decisions: Pursue, Explore, Save, Skip, Dismiss, More (POST /api/gap/decide). Nothing here
  * contacts anyone. Voice: no em dashes, "yards" plural.
+ *
+ * The undo of `never` (2026-10-10): the senders and domains marked not a prospect are listed under the people, each
+ * with "Not a prospect since <date>" and its reversal ("List this sender again", decision `relist`), which ends only
+ * that mark.
  */
 import { useState } from 'react';
 import { AnglePromote } from './angle-promote';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import type { Intelligence, IntelItem, Decision, PursuedItem } from '@/lib/gap/work/intel';
+import type { Intelligence, IntelItem, Decision, NeverMark, PursuedItem } from '@/lib/gap/work/intel';
 import type { PreparedAngle } from '@/lib/gap/agents/develop-angle';
-import { TRUTH_TEXT } from '@/lib/gap/work/truth-text';
+import { RELIST_WORDS, TRUTH_TEXT, notProspectSince, relistDomainWords } from '@/lib/gap/work/truth-text';
 import { AccountLink } from './account-link';
 import { accountHref } from '@/lib/gap/account-intel/href';
 import { refreshNow } from './refresh-now';
@@ -24,7 +28,31 @@ const landed = (r: ActionResult) => r.state === 'accepted' || r.state === 'queue
 
 const BTN = 'min-h-11 rounded-md border border-[var(--border)] px-3 py-2 text-xs hover:bg-[var(--muted)] disabled:opacity-50 sm:min-h-9';
 const PRIMARY = 'min-h-11 rounded-md bg-[var(--primary)] px-3 py-2 text-xs font-medium text-[var(--primary-foreground)] hover:opacity-90 disabled:opacity-50 sm:min-h-9';
-const DECISION_TEXT: Record<Decision, string> = { pursue: 'Pursue', explore: 'Explore', save: 'Save', skip: 'Skip', dismiss: 'Dismiss', more: 'More', never: 'Not a prospect' };
+const DECISION_TEXT: Record<Decision, string> = { pursue: 'Pursue', explore: 'Explore', save: 'Save', skip: 'Skip', dismiss: 'Dismiss', more: 'More', never: 'Not a prospect', relist: RELIST_WORDS };
+
+/** A standing never, reversible: the mark said with its date, and the one control that ends only it. */
+function NotProspect({ m }: { m: NeverMark }) {
+  const router = useRouter();
+  const [busy, setBusy] = useState(false);
+  const [result, setResult] = useState<ActionResult | null>(null);
+  async function relist() {
+    setBusy(true);
+    const r = await postAction('/api/gap/decide', { key: m.key, decision: 'relist' }, { verb: 'Listed again', source: m.key });
+    setResult(r);
+    setBusy(false);
+    if (landed(r)) refreshNow(router);
+  }
+  return (
+    <li data-testid="intel-not-prospect" data-key={m.key} className="flex flex-wrap items-center gap-2 text-xs">
+      <span className="font-medium">{m.kind === 'domain' ? `Everyone at ${m.id}` : m.id}</span>
+      <span className="text-[var(--muted-foreground)]" data-testid="intel-not-prospect-since">{notProspectSince(m.since)}{m.note ? `; your note: ${m.note}` : ''}</span>
+      <button type="button" className={BTN} disabled={busy} onClick={() => void relist()} data-testid="intel-relist">
+        {m.kind === 'domain' ? relistDomainWords(m.id) : RELIST_WORDS}
+      </button>
+      <ActionStatus result={result} testId="intel-relisted" busy={busy} onRetry={() => void relist()} />
+    </li>
+  );
+}
 
 function Item({ item, angle }: { item: IntelItem; angle: PreparedAngle | null }) {
   const router = useRouter();
@@ -164,6 +192,13 @@ export function IntelPanel({ intel, angles }: { intel: Intelligence; angles: Rec
         <Section title="From the vault" hint="Your recent calls and meetings on the vault, newest first: the Fireflies summary (advisory; the verbatim is on the note) and the action items. No decisions here; the account page holds the moves." items={intel.knowledge} angles={angles} testId="intel-knowledge" total={intel.totals.knowledge ?? intel.knowledge.length} selection="the vault's held calls and meetings of the last 45 days" moreHref={null} />
       ) : null}
       <Section title="Prospects to reengage" hint="People who wrote to us and went quiet. Pursue and GAP prepares the reopening; an open deal at the account is said, and the deal keeps its hold." items={intel.people} angles={angles} testId="intel-people" total={intel.totals.people} selection={intel.selection?.people} moreHref={intel.selection?.morePeople ? `/gap?morePeople=${intel.selection.skipPeople + intel.people.length}${intel.selection.skipSignals ? `&moreSignals=${intel.selection.skipSignals}` : ''}` : null} />
+      {intel.notProspects?.length ? (
+        <details className="space-y-2" data-testid="intel-not-prospects">
+          <summary className="cursor-pointer text-sm font-semibold">Not a prospect <span className="text-xs font-normal text-[var(--muted-foreground)]">({intel.notProspects.length})</span></summary>
+          <p className="text-xs text-[var(--muted-foreground)]">Senders you marked not a prospect. Listing one again reverses only that mark: an opt-out, a suppression or do not contact stays.</p>
+          <ul className="space-y-1">{intel.notProspects.map((m) => <NotProspect key={m.key} m={m} />)}</ul>
+        </details>
+      ) : null}
       <p className="text-xs text-[var(--muted-foreground)]">
         Decided items leave the day. <Link href="/gap/signals" className="underline">Every signal</Link>, including the ones you set aside.
       </p>

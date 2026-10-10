@@ -19,10 +19,14 @@ import { mergeTouches } from '@/lib/gap/story/touches';
 import { askCoverageOf, coverageFromPage } from '@/lib/gap/ask/context';
 import { ASK_COVERAGE_WORDS, coverageLineOf, type AskCoverage } from '@/lib/gap/ask/grounding';
 import type { PursuitState } from '@/lib/gap/pursuit/state';
+import { sellerMailboxSlots } from '@/lib/gap/execution/seller-sent';
+import { peopleNamedIn, storyWroteOn } from '@/lib/gap/work/assignment-packet';
 
 const NOW = new Date('2026-10-09T13:00:00Z');
 const CRAIG = 'craig.morrison@kencogroup.com';
 const SENDER = { refreshToken: 'r', userEmail: 'casey@yardflow.ai' } as const;
+/** The 2026-10-10 contract: the reader takes the seller's mailbox slots (here the GAP mailbox alone; account-sent-coverage.test.ts pins both). */
+const GAP_ONLY = [{ address: 'casey@yardflow.ai', sender: SENDER }];
 const at = (iso: string) => new Date(iso);
 const row = (id: string, to: string, subject: string, when: string, snippet = ''): SentRow => ({ id, threadId: `t-${id}`, internalDate: at(when), to, subject, snippet });
 
@@ -33,7 +37,7 @@ beforeEach(() => {
 describe('B1: loadAccountSent', () => {
   it('asks Sent by the account domains and the outside addresses, filters the loose to: match by the address list, merges by id newest first; the To header is parsed for the buyer address', async () => {
     const asked: string[] = [];
-    const listSent = async (recipient: string) => {
+    const listSent = async (_sender: unknown, recipient: string) => {
       asked.push(recipient);
       if (recipient === 'kencogroup.com') return [
         row('s1', 'Craig Morrison <craig.morrison@kencogroup.com>', 'Primo and the yards', '2026-10-09T10:00:00Z', 'Craig, two things from the record...'),
@@ -44,38 +48,39 @@ describe('B1: loadAccountSent', () => {
       if (recipient === 'joe.freemail@gmail.com') return [row('s4', 'joe.freemail@gmail.com', 'Hello Joe', '2026-09-28T10:00:00Z'), row('s1', CRAIG, 'Primo and the yards', '2026-10-09T10:00:00Z')];
       return [];
     };
-    const r = await loadAccountSent(null, { accountName: 'Kenco', addresses: [CRAIG, 'joe.freemail@gmail.com', 'casey@yardflow.ai'], domains: ['https://www.kencogroup.com/', 'yardflow.ai'], now: NOW, sender: SENDER, listSent });
+    const r = await loadAccountSent(null, { accountName: 'Kenco', addresses: [CRAIG, 'joe.freemail@gmail.com', 'casey@yardflow.ai'], domains: ['https://www.kencogroup.com/', 'yardflow.ai'], now: NOW, mailboxes: GAP_ONLY, listSent });
     expect(asked).toEqual(['kencogroup.com', 'joe.freemail@gmail.com']);
     expect(r.read, r.detail ?? '').toBe(true);
     expect(r.detail).toBeNull();
     expect(r.messages.map((m) => [m.id, m.to, m.at.slice(0, 10)])).toEqual([['s1', CRAIG, '2026-10-09'], ['s2', 'dave.kiesling@kencogroup.com', '2026-09-30'], ['s4', 'joe.freemail@gmail.com', '2026-09-28']]);
-    expect(r.messages[0]).toMatchObject({ subject: 'Primo and the yards', excerpt: 'Craig, two things from the record...', threadId: 't-s1' });
+    expect(r.messages[0]).toMatchObject({ subject: 'Primo and the yards', excerpt: 'Craig, two things from the record...', threadId: 't-s1', mailbox: 'casey@yardflow.ai' });
+    expect(r.mailboxes).toEqual([{ address: 'casey@yardflow.ai', status: 'read', at: NOW.toISOString(), detail: null }]);
     expect(sentTargets({ domains: ['Kencogroup.com', 'freightroll.com', 'gmail.com', 'not-a-domain'], addresses: ['A@kencogroup.com', 'joe@gmail.com', 'casey@freightroll.com', 'nobody'] })).toEqual({ domains: ['kencogroup.com'], addresses: ['joe@gmail.com'] });
     expect(addressesIn('Craig Morrison <Craig.Morrison@kencogroup.com>; "Dave" <dave@x.com>')).toEqual(['craig.morrison@kencogroup.com', 'dave@x.com']);
     expect(SENT_MAX).toBe(50);
   });
 
-  it('no sender configured: not read, said, and the reader is never asked; nothing to look for is read with its note; a failed query is said while the rest stands; every query failing is not read; the deadline skips the rest', async () => {
+  it('no mailbox configured: not read, said by the mailbox, and the reader is never asked; nothing to look for is read with its note; a failed query is said (with its mailbox) while the rest stands; every query failing is not read; the deadline skips the rest', async () => {
     let asked = 0;
     const listSent = async () => { asked += 1; return []; };
-    const none = await loadAccountSent(null, { accountName: 'Kenco', addresses: [CRAIG], domains: ['kencogroup.com'], now: NOW, sender: null, listSent });
-    expect(none).toEqual({ messages: [], read: false, detail: 'no GAP sender configured' });
+    const none = await loadAccountSent(null, { accountName: 'Kenco', addresses: [CRAIG], domains: ['kencogroup.com'], now: NOW, mailboxes: [{ address: 'the GAP mailbox', sender: null }], listSent });
+    expect(none).toEqual({ messages: [], read: false, detail: 'the GAP mailbox: not configured', mailboxes: [{ address: 'the GAP mailbox', status: 'not_configured', at: null, detail: 'not configured' }] });
     expect(asked).toBe(0);
-    const nothing = await loadAccountSent(null, { accountName: 'Kenco', addresses: ['casey@yardflow.ai'], domains: [], now: NOW, sender: SENDER, listSent });
-    expect(nothing).toEqual({ messages: [], read: true, detail: 'no address or domain on record to look for' });
-    const partly = await loadAccountSent(null, { accountName: 'Kenco', addresses: ['joe@gmail.com'], domains: ['kencogroup.com'], now: NOW, sender: SENDER, listSent: async (q) => { if (q === 'joe@gmail.com') throw new Error('Gmail sent list failed (503)'); return [row('s1', CRAIG, 'Primo', '2026-10-09T10:00:00Z')]; } });
+    const nothing = await loadAccountSent(null, { accountName: 'Kenco', addresses: ['casey@yardflow.ai'], domains: [], now: NOW, mailboxes: GAP_ONLY, listSent });
+    expect(nothing).toMatchObject({ messages: [], read: true, detail: 'no address or domain on record to look for' });
+    const partly = await loadAccountSent(null, { accountName: 'Kenco', addresses: ['joe@gmail.com'], domains: ['kencogroup.com'], now: NOW, mailboxes: GAP_ONLY, listSent: async (_s, q) => { if (q === 'joe@gmail.com') throw new Error('Gmail sent list failed (503)'); return [row('s1', CRAIG, 'Primo', '2026-10-09T10:00:00Z')]; } });
     expect(partly.read).toBe(true);
     expect(partly.messages.map((m) => m.id)).toEqual(['s1']);
-    expect(partly.detail).toBe('Gmail Sent read failed for 1 of 2 queries (joe@gmail.com: Gmail sent list failed (503))');
-    const failed = await loadAccountSent(null, { accountName: 'Kenco', addresses: [], domains: ['kencogroup.com'], now: NOW, sender: SENDER, listSent: async () => { throw new Error('Gmail sent list failed (401)'); } });
+    expect(partly.detail).toBe('casey@yardflow.ai: Gmail Sent read failed for 1 of 2 queries (joe@gmail.com: Gmail sent list failed (503))');
+    const failed = await loadAccountSent(null, { accountName: 'Kenco', addresses: [], domains: ['kencogroup.com'], now: NOW, mailboxes: GAP_ONLY, listSent: async () => { throw new Error('Gmail sent list failed (401)'); } });
     expect(failed.read).toBe(false);
-    expect(failed.detail).toBe('Gmail Sent read failed for 1 of 1 query (kencogroup.com: Gmail sent list failed (401))');
-    const slow = await loadAccountSent(null, { accountName: 'Kenco', addresses: [], domains: ['kencogroup.com'], now: NOW, sender: SENDER, timeoutMs: 5, listSent: () => new Promise((resolve) => setTimeout(() => resolve([]), 400)) });
+    expect(failed.detail).toBe('casey@yardflow.ai: Gmail Sent read failed for 1 of 1 query (kencogroup.com: Gmail sent list failed (401))');
+    const slow = await loadAccountSent(null, { accountName: 'Kenco', addresses: [], domains: ['kencogroup.com'], now: NOW, mailboxes: GAP_ONLY, timeoutMs: 5, listSent: () => new Promise((resolve) => setTimeout(() => resolve([]), 400)) });
     expect(slow.read).toBe(false);
     expect(slow.detail).toContain('timed out');
     // The window: 180 days back to a minute past now, in epoch seconds.
     let window: number[] = [];
-    await loadAccountSent(null, { accountName: 'Kenco', addresses: [], domains: ['kencogroup.com'], now: NOW, sender: SENDER, listSent: async (_q, after, before) => { window = [after, before]; return []; } });
+    await loadAccountSent(null, { accountName: 'Kenco', addresses: [], domains: ['kencogroup.com'], now: NOW, mailboxes: GAP_ONLY, listSent: async (_s, _q, after, before) => { window = [after, before]; return []; } });
     expect(window).toEqual([Math.floor((NOW.getTime() - 180 * 86_400_000) / 1000), Math.floor(NOW.getTime() / 1000) + 60]);
   });
 
@@ -138,6 +143,15 @@ describe('B1: our Sent on the story', () => {
     expect(answered.sentences.map((s) => s.text).join(' ')).not.toContain('No answer');
     const { row: ledger } = betweenUs(inputsWith({ firstTouches: [{ recipient: CRAIG, sentAt: '2026-09-28T10:00:00.000Z', state: 'sent', personaId: 1 }] }), []);
     expect(ledger.sentences[0].text).toBe('Last email to Craig Morrison, VP Operations, Sep 28 (a GAP first touch). No answer on record.');
+  });
+
+  it('R5 review (finding 8): a Sent row names the mailbox it came from: "We wrote X from casey@freightroll.com on <date>"; the packet still reads the person and the date', () => {
+    const { touches, row } = betweenUs(inputsWith({ sent: sentAt('2026-09-28T10:00:00.000Z', { mailbox: 'casey@freightroll.com' }) }), []);
+    expect(touches[0]).toMatchObject({ kind: 'send', source: 'Gmail Sent', name: 'Craig Morrison', mailbox: 'casey@freightroll.com' });
+    const text = row.sentences[0].text;
+    expect(text).toBe('We wrote Craig Morrison, VP Operations from casey@freightroll.com on Sep 28: "Primo and the yards". No answer on record.');
+    expect(storyWroteOn([text], 'Craig Morrison', NOW)).toEqual({ at: '2026-09-28', source: 'the account story' });
+    expect(peopleNamedIn([text])).toEqual(['Craig Morrison']);
   });
 
   it('the ledger\'s record and the Sent row of the same send are one row, with the subject; two sends count once each', () => {
@@ -204,16 +218,16 @@ describe('B1/B2: loadAccountInputs carries both reads', () => {
     return new Proxy(own, { get: (t, k) => (k in t ? t[k as keyof typeof t] : typeof k === 'string' && !k.startsWith('$') && k !== 'then' ? empty : undefined) }) as never;
   }
 
-  it('the Sent read gets the account name, the known addresses, the domains and the configured sender (none here); the engagements read gets the linked company id; lean reads neither', async () => {
+  it('the Sent read gets the account name, the known addresses, the domains and the seller mailboxes from the canonical reader (configured or not); the engagements read gets the linked company id; lean reads neither', async () => {
     const seen: { sent: unknown[]; engagements: unknown[] } = { sent: [], engagements: [] };
     const deps = {
-      sent: async (args: { accountName: string; addresses: readonly string[]; domains: readonly string[]; sender: unknown }) => { seen.sent.push(args); return sentAt('2026-10-09T10:00:00.000Z'); },
+      sent: async (args: { accountName: string; addresses: readonly string[]; domains: readonly string[]; mailboxes: unknown }) => { seen.sent.push(args); return sentAt('2026-10-09T10:00:00.000Z'); },
       engagements: async (companyId: string) => { seen.engagements.push(companyId); return { items: [], read: true, detail: null }; },
     };
     const i = await loadAccountInputs(fake(), 'Kenco', NOW, { deps });
     expect(i?.sent?.messages.map((m) => m.id)).toEqual(['s1']);
     expect(i?.engagements).toEqual({ items: [], read: true, detail: null });
-    expect(seen.sent[0]).toMatchObject({ accountName: 'Kenco', addresses: [CRAIG], sender: null });
+    expect(seen.sent[0]).toMatchObject({ accountName: 'Kenco', addresses: [CRAIG], mailboxes: sellerMailboxSlots() });
     expect(seen.engagements).toEqual(['55608495412']);
     const lean = await loadAccountInputs(fake(), 'Kenco', NOW, { deps, lean: true });
     expect(lean?.sent ?? null).toBeNull();

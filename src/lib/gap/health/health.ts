@@ -17,7 +17,7 @@ import type { ProducerStatus } from '../signals/producer-status';
  */
 
 export type HealthState = 'HEALTHY' | 'DEGRADED' | 'BLOCKED';
-export type HealthKey = 'mailbox' | 'hubspot' | 'suppression' | 'sender' | 'routing' | 'briefing' | 'agents' | 'model' | 'context' | 'producers';
+export type HealthKey = 'mailbox' | 'hubspot' | 'suppression' | 'sender' | 'routing' | 'briefing' | 'agents' | 'model' | 'context' | 'producers' | 'crm_mirror';
 
 export interface HealthComponent {
   key: HealthKey;
@@ -47,6 +47,7 @@ export const HEALTH_REPAIR: Readonly<Record<HealthKey, { owner: string; retry: s
   context: { owner: 'operator', retry: 'Commercial context is advisory: a send is never blocked by it, but a prepared angle on partial context is labelled so. Identity reads the canonicalCompany and gapAccountAlias tables; associations read HubSpot contacts; Sent reads the GAP sender\'s Gmail; the vault needs GAP_VAULT_DIR on the box that runs it; Clawd needs CLAWD_CONTROL_PLANE_URL and its token. A source rebuilt today whose newest knowledge is months old is said so; refresh the source, not the timestamp' },
   model: { owner: 'Casey', retry: 'Spend is the ledger rows ai.model_call this month against GAP_AI_MONTHLY_CEILING_USD (default $25); a blocked route names the provider reason on the last task row: fix AI_GATEWAY_API_KEY or the model in Vercel and redeploy, top up AI Gateway credits only with Casey, or raise the ceiling only with Casey; then decide the item again' },
   producers: { owner: 'operator', retry: 'Each producer is read from its intelligence.imported ledger rows (the import writes one per run) and the vault from knowledge.vault_synced; a stalled producer needs its export run and imported again through the import, a failed one carries its reason on the last row, and the vault needs the local push or GAP_VAULT_GITHUB_TOKEN in Vercel for the cron' },
+  crm_mirror: { owner: 'operator', retry: 'The gap-mailbox cron retries each failed disposition mirror up to three times (disposition.mirror_retry rows carry each reason); an exhausted one stays recorded in GAP and not in HubSpot: fix the cause the last attempt names (HubSpot token, scope, the contact), then mirror it again (a retry never posts a second note: the gap:disp key is idempotent)' },
 };
 
 const repaired = (c: HealthComponent): HealthComponent => {
@@ -106,6 +107,11 @@ export interface HealthInputs {
   };
   /** IW13: the intelligence producers (signals/producer-status.ts). Absent: not read (no component); null: the read failed. */
   producers?: ProducerStatus[] | null;
+  /**
+   * R5 review (finding 5a): the dispositions recorded in GAP whose HubSpot mirror failed and is not yet mirrored, and
+   * how many used every retry (disposition/mirror-retry.ts loadMirrorBacklog). Absent: not read (no component); null: unreadable.
+   */
+  crmMirror?: { awaiting: number; exhausted: number } | null;
   /** A02: the GAP model route and its spend this month (src/lib/gap/ai/spend.ts). */
   model?: { month: string; label: string; monthUsd: number; ceilingUsd: number; warnFraction: number; calls: number; failed: number; refused: number; inFlight: number; lastCall: { at: string; outcome: string; model: string | null; errorCategory: string | null } | null; /** A04: the AI Gateway credit balance (every call on the route draws on it, metered or not); null when unread. */ credits?: { balance: number; totalUsed: number } | null };
 }
@@ -336,8 +342,23 @@ function producers(i: HealthInputs['producers']): HealthComponent | null {
   return { ...base, state: 'HEALTHY', label, detail };
 }
 
+/**
+ * R5 review (finding 5a): the disposition mirror backlog. HEALTHY when nothing awaits; DEGRADED while any disposition is
+ * recorded in GAP and not in HubSpot (the exhausted ones named apart: no retry is coming for them). Never BLOCKED: the
+ * CRM mirror is not a send safety matter. Absent: not read (no component); null: unreadable, said as such.
+ */
+function crmMirror(i: HealthInputs['crmMirror']): HealthComponent | null {
+  const base = { key: 'crm_mirror' as const, name: 'HubSpot disposition mirror' };
+  if (i === undefined) return null;
+  if (i === null) return { ...base, state: 'DEGRADED', label: 'The HubSpot mirror backlog is not readable', detail: 'The disposition receipts and retry rows could not be read this time.' };
+  if (i.awaiting === 0) return { ...base, state: 'HEALTHY', label: 'No disposition is awaiting a HubSpot mirror', detail: 'Every disposition whose HubSpot mirror failed has since been mirrored.' };
+  const retrying = i.awaiting - i.exhausted;
+  const detail = `${i.awaiting} disposition${i.awaiting === 1 ? ' is' : 's are'} recorded in GAP and not in HubSpot: ${retrying} still being retried by the gap-mailbox cron, ${i.exhausted} used all 3 attempts and will not be retried on its own.`;
+  return { ...base, state: 'DEGRADED', label: `Dispositions awaiting a HubSpot mirror: ${i.awaiting} (${i.exhausted} exhausted)`, detail };
+}
+
 export function evaluateHealth(inputs: HealthInputs, now: Date): HealthReport {
-  const components = [mailbox(inputs.mailbox, now), hubspot(inputs.hubspot), suppression(inputs.suppression), sender(inputs.sender), routing(inputs.routing, now), briefing(inputs.briefing, now), agents(inputs.agents, now), model(inputs.model), context(inputs.context, now), producers(inputs.producers)].filter((c): c is HealthComponent => c !== null).map(repaired);
+  const components = [mailbox(inputs.mailbox, now), hubspot(inputs.hubspot), suppression(inputs.suppression), sender(inputs.sender), routing(inputs.routing, now), briefing(inputs.briefing, now), agents(inputs.agents, now), model(inputs.model), context(inputs.context, now), producers(inputs.producers), crmMirror(inputs.crmMirror)].filter((c): c is HealthComponent => c !== null).map(repaired);
   const overall = components.reduce<HealthState>((w, c) => (RANK[c.state] > RANK[w] ? c.state : w), 'HEALTHY');
   const routingC = components.find((c) => c.key === 'routing')!;
   const bad = components.filter((c) => c.state !== 'HEALTHY').sort((a, b) => RANK[b.state] - RANK[a.state]);

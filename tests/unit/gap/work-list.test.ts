@@ -5,6 +5,7 @@
  */
 import { describe, expect, it } from 'vitest';
 import { buildWorkList, filterWork, snoozedWork, workCounts, workDay, type WorkInput } from '@/lib/gap/work/list';
+import { itemsForDay } from '@/lib/gap/work/plan';
 import type { WorkOutcome } from '@/lib/gap/work/outcome';
 import type { NextCandidate } from '@/lib/gap/routing/next-up';
 
@@ -260,5 +261,73 @@ describe('a motion in flight on the Work list (R14, as ranked by R41)', () => {
     const back = workDay(input({ inMotion, summaries: heldNow }));
     expect(back.cards.find((c) => c.accountName === 'PepsiCo')?.stateKind).toBe('replied');
     expect(back.waiting.map((w) => w.accountName)).toEqual([]);
+  });
+});
+
+describe('paused reply (Casey, 2026-10-10): the card says the reply on record and the paused first touch, apart, and keeps the message', () => {
+  const NFI_WORDS = 'Send me the two-site comparison and we can talk Thursday.';
+  const RECEIVED = `A reply from ops@nfiindustries.com on Oct 6 was received ("${NFI_WORDS}").`;
+  const PAUSED = 'The proposed first touch to Sam Ortiz is paused by the send gate: the reply is not recorded yet; nothing was sent.';
+  const pausedMotion = { accountName: 'NFI Industries', state: 'paused_reply', primary: null, next: { name: 'Sam Ortiz', title: 'VP Transportation', unlock: "after ops@nfiindustries.com's reply is triaged in Replies" }, pausedBy: { from: 'ops@nfiindustries.com', receivedAt: '2026-10-06T09:00:00.000Z', snippet: NFI_WORDS, id: 'm-nfi' } };
+
+  it('a reply row under the hold: the state, the why (received, their words) and the blocker (paused, nothing sent) are two sentences; the message panel stays; never "Someone replied" alone', () => {
+    const card = buildWorkList(input({ motions: [...input().motions, pausedMotion] })).find((c) => c.accountName === 'NFI Industries')!;
+    expect(card.stateKind).toBe('replied');
+    expect(card.state).toBe('Reply on record: ops@nfiindustries.com, Oct 6. First touch to Sam Ortiz paused, nothing sent');
+    expect(card.why).toBe(RECEIVED);
+    expect(card.blocker).toBe(PAUSED);
+    expect(card.paused).toMatchObject({ reply: { from: 'ops@nfiindustries.com', words: NFI_WORDS }, proposed: { kind: 'first_touch', to: 'Sam Ortiz' }, reason: 'reply_unrecorded' });
+    expect(card.reply?.snippet).toBe(NFI_WORDS);
+    expect(`${card.state} ${card.why} ${card.blocker}`).not.toMatch(/Someone replied/);
+    // No hold, no pause: the reply alone, as before.
+    const plain = buildWorkList(input()).find((c) => c.accountName === 'NFI Industries')!;
+    expect(plain.paused).toBeUndefined();
+    expect(plain.state).toBe('Someone replied');
+    expect(plain.blocker).toBe('A reply is waiting to be recorded.');
+  });
+
+  it("the workspace's pause speaks over a card with no message panel (the gate saw a domain the reply list does not), and a summary remembered before the fix never undoes the card's own pause", () => {
+    const paused = { accountName: 'PepsiCo', reply: { name: 'Karen Darling', from: 'karen.darling@pepsico.com', at: '2026-10-06T13:00:00.000Z', words: 'We are moving the Plano DC first.', id: 'm-karen' }, proposed: { kind: 'first_touch' as const, to: 'Shawn Miller' }, reason: 'reply_unrecorded' as const };
+    const summary = new Map([['PepsiCo', { accountName: 'PepsiCo', state: 'replied' as const, stateLine: 'Reply on record: Karen Darling, Oct 6. First touch to Shawn Miller paused, nothing sent', person: { name: 'Karen Darling', title: null }, blocker: 'x', coldTouchAllowed: false, nextText: "Read Karen Darling's reply of Oct 6 and record what they said.", paused, at: '2026-10-06T14:30:00Z' }]]);
+    const card = buildWorkList(input({ summaries: summary })).find((c) => c.accountName === 'PepsiCo')!;
+    expect(card.source).toBe('pursuit');
+    expect(card.state).toBe('Reply on record: Karen Darling, Oct 6. First touch to Shawn Miller paused, nothing sent');
+    expect(card.why).toBe('A reply from Karen Darling on Oct 6 was received ("We are moving the Plano DC first.").');
+    expect(card.blocker).toBe('The proposed first touch to Shawn Miller is paused by the send gate: the reply is not recorded yet; nothing was sent.');
+    expect(card.paused).toEqual(paused);
+    const older = new Map([['NFI Industries', { accountName: 'NFI Industries', state: 'replied' as const, stateLine: 'Someone replied: ops@nfiindustries.com', person: { name: 'ops@nfiindustries.com', title: null }, blocker: 'Paused: ops@nfiindustries.com at NFI Industries wrote in on 2026-10-06.', coldTouchAllowed: false, nextText: 'Read the reply.', at: '2026-10-06T14:30:00Z' }]]);
+    const nfi = buildWorkList(input({ motions: [...input().motions, pausedMotion], summaries: older })).find((c) => c.accountName === 'NFI Industries')!;
+    expect(nfi.state).toBe('Reply on record: ops@nfiindustries.com, Oct 6. First touch to Sam Ortiz paused, nothing sent');
+    expect([nfi.why, nfi.blocker]).toEqual([RECEIVED, PAUSED]);
+  });
+});
+
+describe('R5 review (finding 1): an opted-out item is bound to the opt-out message, never another reply at the account', () => {
+  const replies = [
+    { accountName: 'Acme Foods', contactEmail: 'bob@acmefoods.example', fromName: 'Bob Hale', subject: 'Re: yards', snippet: 'Interesting. What does the gate look like on a Monday?', receivedAt: '2026-10-04T14:00:00Z', id: 'm-bob' },
+    { accountName: 'Acme Foods', contactEmail: 'tim@acmefoods.example', fromName: 'Tim Cole', subject: 'Re: yards', snippet: 'stop', receivedAt: '2026-10-05T14:00:00Z', id: 'm-tim' },
+  ];
+  const optedOut = { accountName: 'Acme Foods', state: 'opted_out' as const, stateLine: 'Opted out: Tim Cole, Oct 5', person: null, blocker: 'Tim Cole replied "stop" on Oct 5: record it as do not contact. No reply goes back.', coldTouchAllowed: false, nextText: null, reply: { id: 'm-tim', at: '2026-10-05T14:00:00Z' }, at: NOW.toISOString() };
+
+  it("Bob replied Oct 4 and Tim wrote stop Oct 5: the card says Tim's opt-out, carries Tim's message, and the plan item binds to it", () => {
+    const day = workDay(input({ candidates: [], replies, summaries: new Map([['Acme Foods', optedOut]]) }));
+    const card = day.cards.find((c) => c.accountName === 'Acme Foods')!;
+    expect(card.stateKind).toBe('opted_out');
+    expect(card.state).toBe('Opted out: Tim Cole, Oct 5');
+    expect(card.reply?.messageId).toBe('m-tim');
+    expect(card.reply?.from).toBe('tim@acmefoods.example');
+    expect(card.next?.href).toContain('from=reply%3Am-tim');
+    const item = itemsForDay(day, '2026-10-06').find((i) => i.accountName === 'Acme Foods')!;
+    expect(item.refs.replyMessageId).toBe('m-tim');
+    expect(item.key).toBe('reply:m-tim');
+  });
+
+  it('the opt-out message not in the reply list: the panel of another reply is dropped and the item binds to the opt-out by its id', () => {
+    const day = workDay(input({ candidates: [], replies: replies.slice(0, 1), summaries: new Map([['Acme Foods', optedOut]]) }));
+    const card = day.cards.find((c) => c.accountName === 'Acme Foods')!;
+    expect(card.stateKind).toBe('opted_out');
+    expect(card.reply ?? null).toBeNull();
+    expect(card.replyRef?.messageId).toBe('m-tim');
+    expect(itemsForDay(day, '2026-10-06').find((i) => i.accountName === 'Acme Foods')!.refs.replyMessageId).toBe('m-tim');
   });
 });

@@ -35,6 +35,7 @@ import { randomBytes } from 'node:crypto';
 import { PARKED_TIERS, type WorkCard, type WorkDay, type WorkObligation, type WorkStateKind, type WorkTier } from './list';
 import { nyDay } from './dates';
 import { properCase } from '../people/contact-packet';
+import { pausedReceivedSentence } from './truth-text';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -184,8 +185,9 @@ function cardKey(c: WorkCard, day: string, decisionIds?: ReadonlyMap<string, str
     case 'replied':
     case 'opted_out':
     case 'bounced': {
-      // The walk fix: a card the summary relabelled "Someone replied" is bound to the reply the summary names.
-      const id = c.reply?.messageId ?? c.replyRef?.messageId;
+      // The walk fix: a card the summary relabelled "Someone replied" is bound to the reply the summary names. R5 review
+      // (finding 1): an opted-out card is bound to the opt-out message first, never to another reply's panel.
+      const id = c.stateKind === 'opted_out' ? c.replyRef?.messageId ?? c.reply?.messageId : c.reply?.messageId ?? c.replyRef?.messageId;
       return id ? { key: `reply:${id}`, refs: { replyMessageId: id } } : { key: `reply:${c.accountName}:${day}`, refs: {} };
     }
     case 'ready': {
@@ -223,10 +225,11 @@ export function cardContext(c: WorkCard): PlanItemContext {
   const motion = c.stateKind === 'in_deal' && c.dealNextStep ? `${c.state}; HubSpot next step: ${c.dealNextStep.replace(/\.$/, '')}` : c.state;
   return {
     motion,
-    lastExchange: r ? `${r.fromName ?? r.from} wrote ${replyDay(r.at)}${r.subject ? `, "${r.subject}"` : ''}: ${r.snippet.replace(/\s+/g, ' ').trim().slice(0, 160)}` : null,
+    // Paused reply (2026-10-10): with no message panel on the card, the reply the send gate holds on keeps its words here.
+    lastExchange: r ? `${r.fromName ?? r.from} wrote ${replyDay(r.at)}${r.subject ? `, "${r.subject}"` : ''}: ${r.snippet.replace(/\s+/g, ' ').trim().slice(0, 160)}` : c.paused ? pausedReceivedSentence(c.paused) : null,
     nextAction: c.dealNextStep ? `Next step on the deal: ${c.dealNextStep.replace(/\.$/, '')}` : c.next?.label ?? null,
-    source: r ? 'their email in the GAP mailbox' : c.stateKind === 'in_deal' || c.stateKind === 'unknown_deal' ? 'HubSpot deals' : c.source === 'pursuit' ? 'the pursuit record' : 'the Work lanes',
-    date: r?.at ?? c.replyRef?.at ?? null,
+    source: r || c.paused ? 'their email in the GAP mailbox' : c.stateKind === 'in_deal' || c.stateKind === 'unknown_deal' ? 'HubSpot deals' : c.source === 'pursuit' ? 'the pursuit record' : 'the Work lanes',
+    date: r?.at ?? c.replyRef?.at ?? c.paused?.reply.at ?? null,
   };
 }
 

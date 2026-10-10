@@ -99,12 +99,15 @@ function nonEmpty(value: unknown): boolean {
 export async function loadLearningInputs(prisma: any, filters: LearningFilters = {}): Promise<LearningInputs> {
   const program = filters.program?.trim() || null;
 
+  // R5 review (finding 10): a DONE by email (source email_command) records that the seller handled a reply, with no
+  // thesis and the default request_information: never a buyer conversation in the funnel, so it is excluded here and
+  // never dilutes the problem-resonance denominator.
   const dispositionWhere: Record<string, unknown> = program
     ? // A program filter requires a real, external, in-program enrollment;
       // a disposition with no enrollment (a bare call) cannot match a program.
-      { human_confirmed: true, enrollment: { is_test: false, family: { program } } }
+      { human_confirmed: true, source_kind: { not: 'email_command' }, enrollment: { is_test: false, family: { program } } }
     : // No program filter: the B9 OR gate lets a no-enrollment disposition through.
-      { human_confirmed: true, OR: [{ enrollment_id: null }, { enrollment: { is_test: false } }] };
+      { human_confirmed: true, source_kind: { not: 'email_command' }, OR: [{ enrollment_id: null }, { enrollment: { is_test: false } }] };
   if (filters.from || filters.to) {
     dispositionWhere.confirmed_at = {
       ...(filters.from ? { gte: filters.from } : {}),

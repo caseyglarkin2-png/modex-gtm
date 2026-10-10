@@ -260,9 +260,12 @@ export function projectActivity(r: LedgerRow): ActivityEvent | null {
     if (p.humanConfirmed !== true) return null;
     const who = str(p.contactEmail);
     const cls = words(p.responseClass);
+    // The DONE unification: a row the seller reported by an email command says so (provenance), and completes the reply it is about.
+    const byCommand = isObj(p.provenance) && p.provenance.via === 'email_command' ? ', by your DONE by email' : '';
+    const replyKeys = str(p.inboundMessageId) ? [`reply:${str(p.inboundMessageId)}`] : [];
     // C37: accepted is the buyer's word as the seller recorded it; booked needs a calendar or provider proof (MEETING_BOOKED).
-    if (p.responseClass === 'meeting_accepted') return ev('meeting_accepted', 'self_reported', `${who ?? 'They'} accepted a meeting; booked when the calendar shows it.`, who, [], { dealId: str(p.dealId) });
-    return ev('conversation_completed', 'self_reported', `Recorded ${who ? `${who}'s` : 'their'} answer (${cls})${p.channel === 'call' ? ', by phone' : ''}.`, who, [...(str(p.inboundMessageId) ? [`reply:${str(p.inboundMessageId)}`] : []), ...accountKey('reply')]);
+    if (p.responseClass === 'meeting_accepted') return ev('meeting_accepted', 'self_reported', `${who ?? 'They'} accepted a meeting${byCommand}; booked when the calendar shows it.`, who, byCommand ? replyKeys : [], { dealId: str(p.dealId) });
+    return ev('conversation_completed', 'self_reported', `Recorded ${who ? `${who}'s` : 'their'} answer (${cls})${p.channel === 'call' ? ', by phone' : ''}${byCommand}.`, who, [...replyKeys, ...accountKey('reply')]);
   }
   if (r.kind === MEETING_BOOKED) {
     const proof = str(p.calendarEventId) ?? str(p.providerRef);

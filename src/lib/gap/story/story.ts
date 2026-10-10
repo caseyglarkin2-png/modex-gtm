@@ -31,6 +31,7 @@ import type { PursuitState } from '../pursuit/state';
 import { PLACED_WORDS, type StoryTouch } from './touches';
 import { isCostBid } from '../bid/cost';
 import { isReplyKindClass, REPLY_KIND_WORDS } from '../capture/reply-kind';
+import { sentIncomplete, sentMailboxWords } from '../work/truth-text';
 
 export type StoryTag = SellerTag;
 
@@ -77,7 +78,7 @@ export interface StoryInput {
   state: PursuitState;
   brief: AccountIntelligenceBrief;
   /** R63-B S9: the open deals and the last recorded conversation feed "what has happened between us" too. */
-  inputs: Pick<AccountInputs, 'facts' | 'bids' | 'domains' | 'account' | 'signals'> & Partial<Pick<AccountInputs, 'opportunity' | 'conversation'>>;
+  inputs: Pick<AccountInputs, 'facts' | 'bids' | 'domains' | 'account' | 'signals'> & Partial<Pick<AccountInputs, 'opportunity' | 'conversation' | 'sent'>>;
   /** R63-B S9: the meeting on the calendar ahead (context relationship), when one is booked. */
   booked?: { at: string; what: string } | null;
   /** NOW's own WHY NOW and KNOW lines (already filtered: no market chatter, no imagery, one idea once). */
@@ -406,10 +407,16 @@ export function happenedSoFar(i: Pick<StoryInput, 'touches' | 'inputs' | 'booked
 
 function betweenUs(i: StoryInput): StoryRow {
   const t = i.touches;
+  // Account Sent coverage (Casey, 2026-10-10): a seller mailbox whose Sent was not read is said, with what was read and
+  // when; a silence in our Sent is then unknown, never "nothing sent" (account-intel/sent.ts, work/truth-text.ts).
+  const sent = i.inputs.sent ?? null;
+  const sentGap = sent && sentIncomplete(sent) ? `Gmail Sent (${sent.mailboxes?.length ? sentMailboxWords(sent.mailboxes) : `not read: ${sent.detail ?? 'could not be read'}`})` : null;
+  const sentGapSentence: StorySentence | null = sentGap ? { text: `Our Sent was not fully read: ${sentGap}; an email from a mailbox that was not read is not in this story.`, tag: 'Unknown', basis: sentGap, basisIds: [] } : null;
   if (!t.length) {
     // R63-B S9: no email or meeting on record is not "nothing happened" when a deal, their words or a meeting are.
     const other = beyondTouches(i);
-    if (other.length) return row('between_us', other);
+    if (other.length) return row('between_us', sentGapSentence ? [...other, sentGapSentence] : other);
+    if (sentGap) return row('between_us', [{ text: `No touch in GAP's own records; whether we wrote is not known: ${sentGap}.`, tag: 'Unknown', basis: `GAP and the account history; ${sentGap}`, basisIds: [] }]);
     return i.clawdRead === 'ok'
       ? row('between_us', [{ text: 'No touch on record between us.', tag: 'Checked', basis: 'GAP, the outreach log and the account history: nothing found', basisIds: [] }])
       : row('between_us', [{ text: i.clawdRead === 'not_configured' ? "No touch in GAP's own records; clawd's send history is not connected here." : "No touch in GAP's own records; clawd's send history could not be read.", tag: 'Unknown', basis: 'GAP and the account history only', basisIds: [] }]);
@@ -443,7 +450,8 @@ function betweenUs(i: StoryInput): StoryRow {
     const tooSoon = i.now.getTime() - new Date(last.at).getTime() < ANSWER_GRACE_DAYS * 86_400_000;
     const silence = optedOutBefore ? ` Sent after they opted out on ${day(optedOutBefore.at)}: nothing else goes to them.` : !answered ? (tooSoon ? ' No answer owed yet.' : i.clawdRead === 'ok' ? ' No answer on record.' : " No answer in GAP's records (clawd's history could not be read).") : '';
     // B1: our own Sent folder says it in the first person (we wrote them); the ledgers keep "Last email to".
-    const lead = last.source === 'Gmail Sent' ? `We wrote ${who(last)} on ${day(last.at)}${what}.` : `Last email to ${who(last)}, ${day(last.at)}${what}.`;
+    // R5 review (finding 8): the Sent row names the seller mailbox it came from.
+    const lead = last.source === 'Gmail Sent' ? `We wrote ${who(last)}${last.mailbox ? ` from ${last.mailbox}` : ''} on ${day(last.at)}${what}.` : `Last email to ${who(last)}, ${day(last.at)}${what}.`;
     lastWords = { what, silence };
     if (!merged) s.push({ text: `${lead}${silence}`, tag: !optedOutBefore && !answered && !tooSoon && i.clawdRead !== 'ok' ? 'Unknown' : 'Checked', basis: `${last.source}, ${day(last.at)}${optedOutBefore ? `; their opt-out, ${day(optedOutBefore.at)}` : !answered && !tooSoon && i.clawdRead === 'ok' ? '; GAP, clawd and the account history for the silence' : ''}`, basisIds: [`touch:${last.at}`, ...(optedOutBefore ? [`touch:${optedOutBefore.at}`] : [])] });
   }
@@ -507,8 +515,9 @@ function betweenUs(i: StoryInput): StoryRow {
     const other = beyondTouches(i);
     if (other.length) return row('between_us', other);
     const booked = happenedSoFar(i).booked;
-    s.push({ text: booked ? `Nothing has happened between us yet; a meeting is booked for ${day(booked.at)}.` : 'Nothing has happened between us yet.', tag: 'Checked', basis: 'GAP and the account history', basisIds: booked ? [`touch:${booked.at}`] : [] });
+    s.push({ text: booked ? `Nothing has happened between us yet; a meeting is booked for ${day(booked.at)}.` : 'Nothing has happened between us yet.', tag: sentGapSentence ? 'Unknown' : 'Checked', basis: 'GAP and the account history', basisIds: booked ? [`touch:${booked.at}`] : [] });
   }
+  if (sentGapSentence) s.push(sentGapSentence);
   return row('between_us', s);
 }
 

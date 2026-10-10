@@ -18,6 +18,7 @@
 import { FREEMAIL_DOMAINS, OWN_DOMAINS } from './domains';
 import { isPersonReply } from './classify';
 import { REPLY_SENT, REPLY_SUBJECT_TYPE } from '../execution/draft-ledger';
+import { REPLY_RESOLVED } from '../work/recorded-replies';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -70,15 +71,30 @@ export async function accountRepliedRecently(prisma: PrismaLike, recipient: stri
   const human = rows.filter((r) => isPersonReply({ text: r.body_text, snippet: r.snippet, subject: r.subject, from: r.from_email }));
   if (human.length === 0) return null;
   // A message a human has already read and dispositioned no longer holds anyone.
-  const read: Array<{ source_id: string }> = prisma.conversationDisposition?.findMany
+  const ids = human.map((r) => r.id);
+  const read: Array<{ source_kind?: string; source_id: string; inbound_message_id?: string | null }> = prisma.conversationDisposition?.findMany
     ? await prisma.conversationDisposition.findMany({
         // Phase 2 D6: a reply that arrived through HubSpot is dispositioned as source_kind
         // hubspot_engagement (same inbound id); either kind of human disposition clears the hold.
-        where: { source_kind: { in: ['inbound_message', 'hubspot_engagement'] }, source_id: { in: human.map((r) => r.id) }, human_confirmed: true },
-        select: { source_id: true },
+        // R5 review (finding 3): a DONE by email records the reply as source email_command with the reply on
+        // inbound_message_id; that human disposition clears the hold too.
+        where: {
+          human_confirmed: true,
+          OR: [
+            { source_kind: { in: ['inbound_message', 'hubspot_engagement'] }, source_id: { in: ids } },
+            { source_kind: 'email_command', inbound_message_id: { in: ids } },
+          ],
+        },
+        select: { source_kind: true, source_id: true, inbound_message_id: true },
       })
     : [];
-  const done = new Set(read.map((r) => r.source_id));
+  const done = new Set(read.map((r) => (r.source_kind === 'email_command' ? String(r.inbound_message_id ?? '') : r.source_id)));
+  // R5 review (finding 3): the C35 resolution row (the reply settled by the seller's word, work/recorded-replies.ts
+  // resolveAnswerOwed, which DONE writes) is the record of the message too.
+  if (prisma.gapAuditEvent?.findMany) {
+    const resolved: Array<{ kind?: string; subject_type?: string; subject_id: string }> = await prisma.gapAuditEvent.findMany({ where: { kind: REPLY_RESOLVED, subject_type: REPLY_SUBJECT_TYPE, subject_id: { in: ids } }, select: { kind: true, subject_type: true, subject_id: true } });
+    for (const a of resolved ?? []) if (a.kind === REPLY_RESOLVED && a.subject_type === REPLY_SUBJECT_TYPE) done.add(String(a.subject_id));
+  }
   // Batch item 8 (finding 3): an answer GAP sent in their thread is the record of their message too. The account stays
   // in a conversation (motion/load.ts loadAccountConversations counts the answer), so nobody else there gets a cold
   // first touch because of it.

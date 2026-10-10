@@ -29,7 +29,7 @@ import { peopleState, type StateEvent } from './people-state';
 import { gmailThreadHref } from '../account-intel/href';
 import { findPersonaContact, hubspotRecordUrl } from '../people/contact-packet';
 import { gapGmailSender } from '../execution/gap-sender';
-import { sellerMailboxes, unionListSent } from '../execution/seller-sent';
+import { sellerMailboxes, sellerMailboxSlots, unionListSent } from '../execution/seller-sent';
 import { listDraftsTo, listSentTo } from '@/lib/email/gmail-inbox';
 import { loadCompanyEngagements } from '../hubspot/engagements';
 import { loadCommitments } from './commitments';
@@ -458,6 +458,11 @@ export interface RelationshipDeps {
   conversations?: (email: string, now: Date) => Promise<StateEvent[]>;
   /** The HubSpot company for an account with none on its record (the opportunity identity the story uses); absent means opportunity/active-opportunity.ts. */
   companyFor?: (accountName: string) => Promise<string | null>;
+  /**
+   * R5 review (finding 8): the seller mailboxes whose Sent the reader cannot read (not configured). Absent with an
+   * injected `thread`: none; the default reader names them from the seller's mailbox slots.
+   */
+  unreadMailboxes?: readonly string[];
   env?: Record<string, string | undefined>;
 }
 
@@ -470,6 +475,11 @@ async function defaultCompanyFor(prisma: PrismaLike, accountName: string): Promi
   } catch {
     return null;
   }
+}
+
+/** R5 review (finding 8): the seller mailboxes GAP cannot read Sent from (no credential), by address. */
+function unconfiguredMailboxes(env: Record<string, string | undefined>): string[] {
+  return sellerMailboxSlots(env).filter((s) => !s.sender).map((s) => s.address);
 }
 
 function defaultThreadDeps(env: Record<string, string | undefined>): ThreadContextDeps | null {
@@ -510,6 +520,7 @@ export async function relationshipStateFor(prisma: PrismaLike, q: RelationshipQu
   const account = typeof prisma?.account?.findUnique === 'function' ? ((await prisma.account.findUnique({ where: { name: q.accountName }, select: { hubspot_company_id: true } }).catch(() => null)) as { hubspot_company_id: string | null } | null) : null;
 
   const threadDeps = deps.thread === undefined ? defaultThreadDeps(env) : deps.thread;
+  const unreadMailboxes = deps.thread === undefined ? unconfiguredMailboxes(env) : [...(deps.unreadMailboxes ?? [])];
   const mailbox = threadDeps?.ownAddresses ? [...threadDeps.ownAddresses][0] ?? null : null;
   const reads: RelationshipReads = {
     inbox: { read: false, count: 0, detail: email ? null : 'no address' },
@@ -532,6 +543,12 @@ export async function relationshipStateFor(prisma: PrismaLike, q: RelationshipQu
       const draftRows = ctx.events.filter((e) => e.direction === 'outbound' && e.isDraft);
       const reason = gmail?.omittedReason ?? '';
       reads.sent = threadDeps?.listSent ? { read: !/sent read failed/.test(reason), count: sentRows.length, detail: /sent read failed/.test(reason) ? reason : null } : reads.sent;
+      // R5 review (finding 8): a seller mailbox not configured was not read: the Sent read is not complete (never
+      // "nothing sent"), and the detail names it, as the account page's coverage line does.
+      if (threadDeps?.listSent && unreadMailboxes.length) {
+        const missing = unreadMailboxes.map((a) => `${a} not read: not configured`).join('; ');
+        reads.sent = { read: false, count: sentRows.length, detail: reads.sent.detail ? `${reads.sent.detail}; ${missing}` : missing };
+      }
       reads.drafts = threadDeps?.listDrafts ? { read: !/drafts read failed/.test(reason), count: draftRows.length, detail: /drafts read failed/.test(reason) ? reason : null } : reads.drafts;
       for (const e of ctx.events) {
         if (e.direction === 'internal') continue;
