@@ -19,7 +19,14 @@ import { GapSubnav } from '@/components/gap/gap-subnav';
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Decided' };
 
-const DECISION_WORDS: Record<string, string> = { pursue: 'Pursue', explore: 'Explore', save: 'Save', skip: 'Skip', dismiss: 'Dismiss', more: 'Find out more about' };
+const DECISION_WORDS: Record<string, string> = { pursue: 'Pursue', explore: 'Explore', save: 'Save', skip: 'Skip', dismiss: 'Dismiss', more: 'Find out more about', never: 'Not a prospect' };
+
+/** The confirm question in words (the people fix of 2026-10-10 adds `never` on a person or a domain). */
+function confirmLine(decision: string, key: string): string {
+  const id = key.slice(key.indexOf(':') + 1);
+  if (decision === 'never') return key.startsWith('domain:') ? `Not a prospect: never list anyone at ${id} again?` : `Not a prospect: never list this sender (${id}) again?`;
+  return `${DECISION_WORDS[decision]} ${key.startsWith('person:') ? 'the person' : key.startsWith('trigger:') ? 'the trigger' : 'the signal'} (${id})?`;
+}
 
 export default async function DecidePage({ searchParams }: { searchParams?: Promise<{ t?: string; confirmed?: string }> }) {
   if (assertGapEnabled('GAP_ROUTING_ENABLED')) notFound();
@@ -44,7 +51,7 @@ export default async function DecidePage({ searchParams }: { searchParams?: Prom
           <div>
             <h1 className="text-2xl font-semibold tracking-tight">Confirm the decision</h1>
             <p className="mt-2 text-sm" data-testid="decide-confirm-line">
-              {DECISION_WORDS[decision]} {key.startsWith('person:') ? 'the person' : key.startsWith('trigger:') ? 'the trigger' : 'the signal'} ({key.slice(key.indexOf(':') + 1)})? Nothing is applied until you confirm; nothing is sent to anyone either way.
+              {confirmLine(decision, key)} Nothing is applied until you confirm; nothing is sent to anyone either way.
             </p>
           </div>
           <form method="get" action="/gap/decide" className="flex flex-wrap items-center gap-3" data-testid="decide-confirm-form">

@@ -24,7 +24,7 @@ const landed = (r: ActionResult) => r.state === 'accepted' || r.state === 'queue
 
 const BTN = 'min-h-11 rounded-md border border-[var(--border)] px-3 py-2 text-xs hover:bg-[var(--muted)] disabled:opacity-50 sm:min-h-9';
 const PRIMARY = 'min-h-11 rounded-md bg-[var(--primary)] px-3 py-2 text-xs font-medium text-[var(--primary-foreground)] hover:opacity-90 disabled:opacity-50 sm:min-h-9';
-const DECISION_TEXT: Record<Decision, string> = { pursue: 'Pursue', explore: 'Explore', save: 'Save', skip: 'Skip', dismiss: 'Dismiss', more: 'More' };
+const DECISION_TEXT: Record<Decision, string> = { pursue: 'Pursue', explore: 'Explore', save: 'Save', skip: 'Skip', dismiss: 'Dismiss', more: 'More', never: 'Not a prospect' };
 
 function Item({ item, angle }: { item: IntelItem; angle: PreparedAngle | null }) {
   const router = useRouter();
