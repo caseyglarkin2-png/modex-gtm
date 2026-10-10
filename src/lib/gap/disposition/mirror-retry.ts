@@ -11,10 +11,12 @@
  *     that landed before is reused, never posted twice; `written` or `skipped:already_mirrored` ends the row `mirrored`
  *   - a skip by policy (the mirror off, no contact) is recorded with its reason and counts as an attempt
  * The ledger is append-only: a retry adds rows, it never edits the applied row. Nothing here sends or enrolls.
+ * R5 review (finding 5b): the receipts are read from the applied rows AND from the DONE receipts written the moment the
+ * disposition was recorded (commands-apply.ts DONE_RECEIPT), so a DONE whose later step threw still has its mirror retried.
  */
 import { mirrorDisposition as defaultMirror } from '../hubspot-mirror';
 import { mirrorReceiptOf } from '../replies/done-reply';
-import { COMMAND_APPLIED } from '../replies/commands-apply';
+import { COMMAND_APPLIED, DONE_RECEIPT } from '../replies/commands-apply';
 import { dispositionMirrorSummary, type DispositionProvenance } from './service';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -45,7 +47,7 @@ export async function retryDispositionMirrors(
   const limit = Math.max(0, Math.floor(opts.limit ?? MIRROR_RETRY_LIMIT));
   if (!limit || typeof prisma?.gapAuditEvent?.findMany !== 'function') return report;
   const applied: Array<{ payload: unknown }> = await prisma.gapAuditEvent.findMany({
-    where: { kind: COMMAND_APPLIED, payload: { path: ['receipt'], equals: 'recorded_not_mirrored' } },
+    where: { kind: { in: [COMMAND_APPLIED, DONE_RECEIPT] }, payload: { path: ['receipt'], equals: 'recorded_not_mirrored' } },
     orderBy: [{ created_at: 'desc' }],
     take: APPLIED_SCAN,
     select: { payload: true },

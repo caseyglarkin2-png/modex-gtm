@@ -25,7 +25,7 @@
  */
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ledgerDb } from './fixtures/ledger-db';
-import { applyCommand, COMMAND_APPLIED, loadCommandContext, replyIdOf } from '@/lib/gap/replies/commands-apply';
+import { applyCommand, COMMAND_APPLIED, COMMAND_REFUSED, DONE_RECEIPT, loadCommandContext, replyIdOf } from '@/lib/gap/replies/commands-apply';
 import { classWords, doneReplyClass, mirrorReceiptOf, recordReplyDone, type ReplyDoneDeps } from '@/lib/gap/replies/done-reply';
 import { DISPOSITION_SOURCE_KINDS, INTERNAL_DISPOSITION_SOURCE_KINDS, recordDisposition } from '@/lib/gap/disposition/service';
 import { MIRROR_RETRY, MIRROR_RETRY_MAX, retryDispositionMirrors } from '@/lib/gap/disposition/mirror-retry';
@@ -154,10 +154,21 @@ async function world(opts: { noteFails?: number; unsubscribeOk?: boolean; cards?
   const recordReply = vi.fn((p: any, i: any) => recordReplyDone(p, i, replyDeps));
   const deps = { ...assignDeps, recordReplyDone: recordReply };
   const ctx = await loadCommandContext(c, SETTINGS, NOW);
-  const apply = (m: MailboxMessage) => applyCommand(serviceClient(db), { m, ctx, now: NOW, settings: SETTINGS, sender: SENDER, baseUrl: 'https://app.example', actionSecret: null, actor: 'cron:gap-mailbox' }, deps);
+  // R5 review (finding 5b): a ledger write of this kind throws (the database drops mid-command), when set.
+  const faults: { auditKind: string | null } = { auditKind: null };
+  const faulty = () => {
+    const sc = serviceClient(db);
+    const create = sc.gapAuditEvent.create;
+    sc.gapAuditEvent = { ...sc.gapAuditEvent, create: async (q: any) => {
+      if (faults.auditKind && q?.data?.kind === faults.auditKind) throw new Error('database is down');
+      return create(q);
+    } };
+    return sc;
+  };
+  const apply = (m: MailboxMessage) => applyCommand(faulty(), { m, ctx, now: NOW, settings: SETTINGS, sender: SENDER, baseUrl: 'https://app.example', actionSecret: null, actor: 'cron:gap-mailbox' }, deps);
   const thread = (key: string) => `th-item-${plan.items.findIndex((i) => i.key === key)}`;
   const kinds = (k: string) => db.store.gapAuditEvent.filter((e) => e.kind === k);
-  return { db, c, plan, send, apply, thread, kinds, mirror, createContactNote, notes, mirrorDeps, recordUnsubscribe, recordReply, loadReply, stopRuns };
+  return { db, c, plan, send, apply, thread, kinds, mirror, createContactNote, notes, mirrorDeps, recordUnsubscribe, recordReply, loadReply, stopRuns, faults };
 }
 
 beforeEach(() => {
@@ -271,6 +282,40 @@ describe('a failed mirror stays visible and is retried, never claimed', () => {
       [3, 'recorded_not_mirrored', 'HubSpot 502 Bad Gateway'],
     ]);
     expect(w.notes).toHaveLength(0);
+  });
+
+  it('R5 review (finding 5b): a step that throws after the disposition is recorded: the answer says recorded in GAP and what failed, never "Nothing changed"; the receipt was written first, so the failed mirror is still retried', async () => {
+    const w = await world({ noteFails: 1 });
+    w.faults.auditKind = REPLY_RESOLVED;
+    const m = msg(w.thread('reply:m-craig'), 'DONE: answered Craig from Gmail the same day');
+    const r = await w.apply(m);
+    expect(r).toMatchObject({ applied: false, command: 'done', reason: 'recorded_then_failed', outcome: 'failed' });
+    expect(w.db.store.conversationDisposition).toHaveLength(1);
+    const d = w.db.store.conversationDisposition[0];
+    const said = String(w.send.mock.calls.at(-1)![0].text);
+    expect(said).toMatch(/^Recorded in GAP; settling the reply failed \(database is down\)\./);
+    expect(said).toContain('; the HubSpot mirror failed: HubSpot 502 Bad Gateway; it will be retried.');
+    expect(said).not.toMatch(/Nothing changed/);
+    expect(said, 'never claims CRM success').not.toMatch(/mirrored to HubSpot/);
+    // The receipt is durable and was written before the step that failed.
+    const receipts = w.kinds(DONE_RECEIPT);
+    expect(receipts).toHaveLength(1);
+    expect(receipts[0].payload).toMatchObject({ gmailMessageId: m.id, replyMessageId: 'm-craig', dispositionId: d.id, receipt: 'recorded_not_mirrored', mirrorReason: 'HubSpot 502 Bad Gateway', retryable: true });
+    const refused = w.kinds(COMMAND_REFUSED).filter((e) => e.payload.gmailMessageId === m.id);
+    expect(refused.map((e) => e.payload)).toEqual([expect.objectContaining({ command: 'done', reason: 'recorded_then_failed', failedStep: 'settling the reply', error: 'database is down', dispositionId: d.id })]);
+    expect(w.db.store.gapAuditEvent.indexOf(receipts[0])).toBeLessThan(w.db.store.gapAuditEvent.indexOf(refused[0]));
+    expect(w.kinds(REPLY_RESOLVED)).toEqual([]);
+    // The failed mirror did not drop out of sight: the retry pass reads the receipt and mirrors once.
+    const pass = await retryDispositionMirrors(w.c, { now: NOW }, { mirror: (p, i) => mirrorDisposition(p, i, w.mirrorDeps) });
+    expect(pass).toEqual({ tried: 1, mirrored: 1, failed: 0, exhausted: [] });
+    expect(w.notes).toHaveLength(1);
+    // DONE again (a new command) finishes it: recorded before, settled once, no second disposition, no second note.
+    w.faults.auditKind = null;
+    const again = await w.apply(msg(w.thread('reply:m-craig'), 'DONE: answered Craig from Gmail the same day'));
+    expect(again).toMatchObject({ applied: true, effect: 'reply_settled' });
+    expect(w.db.store.conversationDisposition).toHaveLength(1);
+    expect(w.kinds(REPLY_RESOLVED)).toHaveLength(1);
+    expect(w.notes).toHaveLength(1);
   });
 
   it('a mirror skipped by policy says HubSpot was not written and why, and is not retried', async () => {
