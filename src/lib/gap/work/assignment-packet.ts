@@ -250,12 +250,13 @@ export function storyWroteOn(lines: readonly string[], name: string, now: Date):
 }
 /** A buyer quote cut short upstream ("...once on video a fe") takes the story's longer copy of the same words when one exists. */
 export function lengthenQuote(text: string, lines: readonly string[]): string {
+  const plain = (s: string) => s.replace(/[\u2018\u2019]/g, "'").replace(/[\u201c\u201d]/g, '"').replace(/\s+/g, ' ').trim();
   const t = text.replace(/\s+/g, ' ').trim();
   if (t.length < 60 || /[.!?"]$/.test(t)) return t;
-  const head = t.slice(0, 50).toLowerCase();
+  const head = plain(t).slice(0, 50).toLowerCase();
   for (const raw of lines) {
-    for (const q of raw.matchAll(/"([^"]{60,})"/g)) {
-      const cand = q[1].replace(/\s+/g, ' ').trim();
+    for (const q of plain(raw).matchAll(/"([^"]{60,})"/g)) {
+      const cand = q[1].trim();
       if (cand.length > t.length && cand.toLowerCase().startsWith(head)) return cand;
     }
   }
@@ -481,7 +482,7 @@ function dealContextOf(item: PlanItem, rel: RelationshipState, sellerNote: reado
   const stakeholder = rel.person.name ?? rel.person.email;
   lines.push(stakeholder ? `Stakeholder: ${stakeholder} (${rel.purposeWord}).` : 'Stakeholder: nobody named on the item; the people are under Who.');
   const last = [rel.lastInbound ? `they wrote ${dateWords(rel.lastInbound.at)}${rel.lastInbound.subject ? ` ("${rel.lastInbound.subject}")` : ''}` : null, rel.lastOutbound ? `we wrote ${dateWords(rel.lastOutbound.at)}${rel.lastOutbound.subject ? ` ("${rel.lastOutbound.subject}")` : ''}` : null].filter(Boolean);
-  lines.push(last.length ? `Last meaningful exchange: ${last.join('; ')}.` : 'Last meaningful exchange: none on record in what was searched.');
+  lines.push(last.length ? `Last meaningful exchange: ${last.join('; ')}.` : stakeholder ? 'Last meaningful exchange: none on record in what was searched.' : 'Last meaningful exchange: nobody is named on the item; the correspondence lines above carry the account\'s exchanges.');
   const promise = rel.promises[0];
   lines.push(promise ? `Promise: "${promise.title}" (${promise.owner}${promise.dueAt ? `, due ${dateWords(promise.dueAt)}` : ''}, ${promise.status}).` : 'Promise: none on the ledger.');
   const vaultNext = sellerNote.find((l) => /^next action/i.test(cleanLine(l)));
@@ -510,8 +511,9 @@ export async function buildAssignmentPacket(prisma: PrismaLike, a: BuildPacketAr
   // Who: the item's person (the one live read), then the account's chosen person when different (no live read).
   const who: ContactPacket[] = [];
   const contactDeps: ContactPacketDeps = { deals: async () => dealsRead.deals, ...(deps.contact ?? {}) };
+  const company = relationship.hubspotCompanyId ?? null;
   const first = personName || relationship.person.email
-    ? await contactPacketFor(prisma, { name: personName, email: relationship.person.email, accountName: item.accountName, now, fallback: { name: personName, title: item.person?.title ?? null, email: relationship.person.email } }, contactDeps).catch(() => null)
+    ? await contactPacketFor(prisma, { name: personName, email: relationship.person.email, accountName: item.accountName, now, hubspotCompanyId: company, fallback: { name: personName, title: item.person?.title ?? null, email: relationship.person.email } }, contactDeps).catch(() => null)
     : null;
   if (first) who.push({ ...first, purpose: purposeWord });
   // One person is one entry: by address, by name, or by a name against an address's words ("dave.kiesling" is Dave Kiesling).
@@ -525,12 +527,12 @@ export async function buildAssignmentPacket(prisma: PrismaLike, a: BuildPacketAr
   const targetEmail = a.prepared.kind === 'angle' ? (a.prepared.who?.includes('@') ? a.prepared.who : a.prepared.email ?? null) : a.prepared.kind === 'email' ? a.prepared.to : null;
   const targetName = a.prepared.kind === 'angle' ? (a.prepared.who && !a.prepared.who.includes('@') ? a.prepared.who : targetEmail ? nameFor(targetEmail) : null) : a.prepared.kind === 'email' ? a.pack?.persona?.name ?? (a.prepared.to ? nameFor(a.prepared.to) : null) : null;
   if ((targetName || targetEmail) && !has(targetName, targetEmail)) {
-    const t = await contactPacketFor(prisma, { name: targetName, email: targetEmail ?? (targetName ? addressFor(targetName) : null), accountName: item.accountName, now, fallback: { name: targetName ?? (targetEmail ? nameFromAddress(targetEmail) : null), title: null, email: targetEmail } }, { ...contactDeps, hubspotContact: first ? null : contactDeps.hubspotContact }).catch(() => null);
+    const t = await contactPacketFor(prisma, { name: targetName, email: targetEmail ?? (targetName ? addressFor(targetName) : null), accountName: item.accountName, now, hubspotCompanyId: company, fallback: { name: targetName ?? (targetEmail ? nameFromAddress(targetEmail) : null), title: null, email: targetEmail } }, { ...contactDeps, hubspotContact: first ? null : contactDeps.hubspotContact }).catch(() => null);
     if (t) who.push({ ...t, purpose: a.prepared.kind === 'angle' ? 'the prepared angle is for them' : 'the prepared email is to them' });
   }
   const chosen = (ctx?.people ?? []).find((p) => p.chosen && !has(p.name)) ?? null;
   if (chosen) {
-    const other = await contactPacketFor(prisma, { name: chosen.name, email: addressFor(chosen.name), accountName: item.accountName, now, fallback: { name: chosen.name, title: chosen.title, email: null } }, { ...contactDeps, hubspotContact: null }).catch(() => null);
+    const other = await contactPacketFor(prisma, { name: chosen.name, email: addressFor(chosen.name), accountName: item.accountName, now, hubspotCompanyId: company, fallback: { name: chosen.name, title: chosen.title, email: null } }, { ...contactDeps, hubspotContact: null }).catch(() => null);
     if (other) who.push({ ...other, purpose: `${chosen.slot}: ${cleanLine(chosen.reason)}` });
   }
   // An item with no person of its own names the people the correspondence names (the last person we wrote, the one who replied), bounded.
@@ -538,7 +540,7 @@ export async function buildAssignmentPacket(prisma: PrismaLike, a: BuildPacketAr
     for (const name of peopleNamedIn(story.betweenUs)) {
       if (who.length >= 3 || has(name)) continue;
       const email = addressFor(name);
-      const c = await contactPacketFor(prisma, { name, email, accountName: item.accountName, now, fallback: { name, title: null, email } }, { ...contactDeps, hubspotContact: null }).catch(() => null);
+      const c = await contactPacketFor(prisma, { name, email, accountName: item.accountName, now, hubspotCompanyId: company, fallback: { name, title: null, email } }, { ...contactDeps, hubspotContact: null }).catch(() => null);
       if (c) who.push({ ...c, purpose: 'named in the correspondence (under Relationship)' });
     }
   }
@@ -562,6 +564,11 @@ export async function buildAssignmentPacket(prisma: PrismaLike, a: BuildPacketAr
     }
     if (later.length) angleSuperseded = { since: `since the angle was prepared on ${dateWords(since)}: ${later.join('; ')}`, target: tName };
   }
+
+  // The angle's target by name once Who resolved the address (never "an angle for dave.kiesling@...").
+  const prepared: Prepared = a.prepared.kind === 'angle' && a.prepared.who?.includes('@')
+    ? { ...a.prepared, who: who.find((w) => w.email && lower(w.email) === lower(a.prepared.kind === 'angle' ? a.prepared.who : null))?.name ?? a.prepared.who }
+    : a.prepared;
 
   const packEv = evidenceFromPack(a.pack);
   const importedRows = await (deps.imported ? deps.imported(prisma, item.accountName) : defaultImported(prisma, item.accountName)).catch(() => [] as ImportedRow[]);
@@ -595,7 +602,7 @@ export async function buildAssignmentPacket(prisma: PrismaLike, a: BuildPacketAr
   const replyItem = item.stateKind === 'replied' && !!personName;
   const ownReplyAt = replyItem ? (relationship.lastInbound?.at ?? item.context?.date ?? null) : null;
   const move = stripBlanket(replyItem ? `Read ${personName}'s reply${ownReplyAt ? ` of ${dateWords(ownReplyAt)}` : ''} and record what they said.` : ctx?.state.next || item.title);
-  const moves = movesOf({ item, move, prepared: a.prepared, hold: a.hold, rel: relationship, personName: first?.name ?? personName, angleSuperseded });
+  const moves = movesOf({ item, move, prepared, hold: a.hold, rel: relationship, personName: first?.name ?? personName, angleSuperseded });
   const coverage = typeof ctx?.coverageLine === 'string' ? ctx.coverageLine.trim() : '';
   // The buyer's words: the item's own person first, each attributed.
   const buyerSaid = (ctx?.buyerSaid ?? []).slice().sort((x, y) => Number(!!personName && !!y.who && nameKeyOf(y.who) === nameKeyOf(personName)) - Number(!!personName && !!x.who && nameKeyOf(x.who) === nameKeyOf(personName))).slice(0, 3).map((b) => ({ text: cleanLine(lengthenQuote(b.text, story.betweenUs)), who: properCase(b.who) ?? b.who, at: b.at }));
@@ -622,7 +629,7 @@ export async function buildAssignmentPacket(prisma: PrismaLike, a: BuildPacketAr
     buyerSaid,
     move,
     moves,
-    prepared: a.prepared,
+    prepared,
     preparedSender: a.senderEmail ?? null,
     preparedSources: packEv.sources,
     note: a.note ?? null,
@@ -664,6 +671,7 @@ function emptyRelationship(q: { accountName: string; email: string | null; name:
     referral: null,
     outboundRead: { read: false, basis: `the relationship could not be read: ${why}` },
     correspondents: [],
+    hubspotCompanyId: null,
     reads: { inbox: { read: false, count: 0, detail: why }, sent: { read: false, count: 0, detail: why }, drafts: { read: false, count: 0, detail: why }, engagements: { read: false, count: 0, detail: why }, commitments: { read: false, count: 0 }, deals: { read: false, detail: why }, conversations: { read: false, count: 0 } },
     meetings: [],
     nextMeetingAt: null,

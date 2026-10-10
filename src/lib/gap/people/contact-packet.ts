@@ -115,6 +115,8 @@ export interface ContactPacketQuery {
   name?: string | null;
   accountName: string;
   now: Date;
+  /** The HubSpot company when the account record carries none (the one the deals resolve); the account's own wins. */
+  hubspotCompanyId?: string | null;
 }
 
 export const CONTACT_LIVE_CACHE_MS = 30 * 60_000;
@@ -353,5 +355,5 @@ export async function contactPacketFor(prisma: PrismaLike, q: ContactPacketQuery
   const address = lower(q.email) || lower(q.fallback?.email) || null;
   const finder = deps.hubspotContactByEmail === undefined ? (e: string) => readHubSpotContactByEmail(prisma, e, q.now) : deps.hubspotContactByEmail;
   const found = !persona && address && finder ? await finder(address).catch(() => null) : null;
-  return projectContactPacket({ accountName: q.accountName, persona, fallback: q.fallback ?? { name: q.name ?? null, title: null, email: q.email ?? null }, hubspotCompanyId: account?.hubspot_company_id ?? null, deals, live, liveRead: !!contactId && !!reader, found });
+  return projectContactPacket({ accountName: q.accountName, persona, fallback: q.fallback ?? { name: q.name ?? null, title: null, email: q.email ?? null }, hubspotCompanyId: account?.hubspot_company_id ?? q.hubspotCompanyId ?? null, deals, live, liveRead: !!contactId && !!reader, found });
 }

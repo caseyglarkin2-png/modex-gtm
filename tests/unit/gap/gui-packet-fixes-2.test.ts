@@ -26,7 +26,7 @@ const plan = (items: PlanItem[]): DayPlan => ({ day: '2026-10-10', plannedAt: NO
 const ask = (over: Partial<AskContext> & { accountName: string }): AskContext => ({ state: { state: 'ready', stateLine: 'Ready for a first touch.', blocker: null, next: 'Prepare the first touch.', coldTouchAllowed: true }, people: [], setAside: null, story: [], opening: null, otherStories: [], buyerSaid: [], ...over });
 const reads = { inbox: { read: true, count: 0, detail: null }, sent: { read: false, count: 0, detail: 'no GAP sender configured' }, drafts: { read: false, count: 0, detail: 'no GAP sender configured' }, engagements: { read: true, count: 3, detail: 'the company resolved from the deals' }, commitments: { read: true, count: 0 }, deals: { read: true, detail: null }, conversations: { read: true, count: 0 } };
 const rel = (over: Partial<RelationshipState> & { person: RelationshipState['person'] }): RelationshipState => ({
-  purpose: null, purposeWord: 'prospect, no message from them on record', lastInbound: null, lastOutbound: null, laterResponse: null, answerOwed: { owed: false, basis: 'no message either way on record', known: true }, quiet: { quiet: false, days: null, basis: 'no exchange on record either way' }, request: null, requestState: 'none', referral: null, correspondents: [], outboundRead: { read: true, basis: "HubSpot's logged emails were read" }, reads, meetings: [], nextMeetingAt: null, deals: [], promises: [], drafts: [], optOut: null, links: { thread: null, threadKind: null, hubspotContact: null, hubspotCompany: null }, searched: 'read Oct 10, 2026, 9:00 AM New York', ...over,
+  purpose: null, purposeWord: 'prospect, no message from them on record', lastInbound: null, lastOutbound: null, laterResponse: null, answerOwed: { owed: false, basis: 'no message either way on record', known: true }, quiet: { quiet: false, days: null, basis: 'no exchange on record either way' }, request: null, requestState: 'none', referral: null, correspondents: [], hubspotCompanyId: null, outboundRead: { read: true, basis: "HubSpot's logged emails were read" }, reads, meetings: [], nextMeetingAt: null, deals: [], promises: [], drafts: [], optOut: null, links: { thread: null, threadKind: null, hubspotContact: null, hubspotCompany: null }, searched: 'read Oct 10, 2026, 9:00 AM New York', ...over,
 });
 const input = { revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: true, now: NOW };
 
@@ -141,5 +141,29 @@ describe('contact-packet: the HubSpot contact by address', () => {
     expect(searched).toBe(1);
     const nobody = await contactPacketFor(db, { email: 'nobody@kencogroup.com', accountName: 'Kenco', now: NOW, fallback: { name: 'nobody@kencogroup.com', title: null, email: 'nobody@kencogroup.com' } }, { hubspotContact: null, hubspotContactByEmail: finder });
     expect(nobody).toMatchObject({ name: 'nobody@kencogroup.com', source: 'no GAP contact record and no HubSpot contact link' });
+  });
+});
+
+describe('the residuals of the second production preview', () => {
+  it('lengthenQuote tolerates curly quotes in the story copy; contactPacketFor takes the company the relationship resolved when the account record has none', async () => {
+    const lines = ['Craig Morrison replied on Sep 24: "Hey Casey, good to hear from you. Honestly, I\u2019ve only met him once on video a few weeks ago and it was a review."'];
+    expect(lengthenQuote("Hey Casey, good to hear from you. Honestly, I've only met him once on video a fe", lines)).toBe("Hey Casey, good to hear from you. Honestly, I've only met him once on video a few weeks ago and it was a review.");
+    const db = ledgerDb({ accounts: [{ name: 'Kenco', hubspot_company_id: null }], personas: [] }, NOW).client();
+    const c = await contactPacketFor(db, { email: 'dave.kiesling@kencogroup.com', accountName: 'Kenco', now: NOW, hubspotCompanyId: '77', fallback: { name: 'dave.kiesling@kencogroup.com', title: null, email: 'dave.kiesling@kencogroup.com' } }, { hubspotContact: null, hubspotContactByEmail: null });
+    expect(c?.hubspotCompanyUrl).toBe('https://app.hubspot.com/contacts/3819073/record/0-2/77');
+  });
+
+  it('the angle target is shown by name once Who resolved the address; a deal item naming nobody says where the exchanges are', async () => {
+    const DAVE = 'dave.kiesling@kencogroup.com';
+    const kenco = item({ key: 'deal:Kenco:2026-10-10', accountName: 'Kenco', token: 'k'.repeat(32), kind: 'deal', stateKind: 'in_deal', title: 'In a deal', why: 'The deal.', href: '/gap/accounts/kenco?view=brief', person: null });
+    const pursued: PursuedItem[] = [{ key: 'p-1', taskId: 't-1', writer: { email: DAVE, name: null }, kind: 'person', title: DAVE, accountName: 'Kenco', accountHint: null, url: null, decision: 'pursue', decidedAt: '2026-10-08T12:00:00.000Z', status: 'ready', error: null, angle: { whyItMatters: 'Kenco runs 40 yards with paper gate logs.', starters: ['Dave, is Chattanooga first?'], roles: [], accounts: [], peopleNamed: [], proposedAction: 'email', caveat: null, sourceLine: 'x' } }];
+    const relationship = async (_p: unknown, q: { email: string | null }) => rel({ person: { email: q.email === DAVE ? DAVE : null, name: q.email === DAVE ? 'Dave Kiesling' : null }, correspondents: [{ name: null, email: DAVE, lastAt: '2026-10-01T14:00:00.000Z' }], hubspotCompanyId: '77', deals: [{ id: '1001', name: 'YardFlow - Kenco', stage: 'Presentation scheduled', nextStep: null, closeDate: null, lastActivityAt: null, url: 'https://app.hubspot.com/contacts/3819073/record/0-3/1001' }] });
+    const found = async (email: string) => (email === DAVE ? { id: '7007', name: 'Dave Kiesling', live: { phone: null, mobilephone: null, jobtitle: 'VP Operations', linkedin: null, timezone: null, updatedAt: null } } : null);
+    const a = await buildAssignment(ledgerDb({ accounts: [{ name: 'Kenco', hubspot_company_id: null }] }, NOW).client(), { plan: plan([kenco]), item: kenco, ...input }, { askContext: async () => ask({ accountName: 'Kenco', state: { state: 'in_deal', stateLine: 'In a deal.', blocker: null, next: 'Work the deal.', coldTouchAllowed: false } }), pursued: async () => pursued, packet: { relationship, contact: { hubspotContact: null, hubspotContactByEmail: found } }, senderEmail: null });
+    expect(a.packet?.prepared).toMatchObject({ kind: 'angle', who: 'Dave Kiesling' });
+    expect(a.text).toContain('GAP has prepared an angle for Dave Kiesling (prepared Oct 8, 2026): Kenco runs 40 yards with paper gate logs.');
+    expect(a.text).not.toContain('angle for dave.kiesling@');
+    expect(a.text).toContain("- Last meaningful exchange: nobody is named on the item; the correspondence lines above carry the account's exchanges.");
+    expect(a.text).toContain('HubSpot company: https://app.hubspot.com/contacts/3819073/record/0-2/77.');
   });
 });

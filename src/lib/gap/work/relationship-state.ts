@@ -165,6 +165,8 @@ export interface RelationshipState {
   reads: RelationshipReads;
   /** The other people at the account the correspondence names, with their addresses (we wrote them, or they wrote us), newest first. */
   correspondents: Array<{ name: string | null; email: string; lastAt: string }>;
+  /** The HubSpot company the relationship was read against (the account's, else the one the deals resolve), for the contact packet's company link. */
+  hubspotCompanyId: string | null;
   meetings: Array<{ at: string; title: string | null; kind: 'meeting' | 'call'; outcome: string | null; source: string }>;
   nextMeetingAt: string | null;
   deals: Array<{ id: string | null; name: string; stage: string | null; nextStep: string | null; closeDate: string | null; lastActivityAt: string | null; url: string | null }>;
@@ -396,6 +398,7 @@ export function relationshipStateFrom(i: RelationshipInputs): RelationshipState 
     outboundRead,
     reads: i.reads,
     correspondents,
+    hubspotCompanyId: i.hubspotCompanyId,
     meetings: uniqueMeetings,
     nextMeetingAt: st?.nextMeetingAt ?? null,
     deals,

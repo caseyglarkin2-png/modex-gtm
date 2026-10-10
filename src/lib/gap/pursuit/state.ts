@@ -18,6 +18,7 @@
  * re-ordered by a surface: reply > deal / hold > follow up > in motion > ready > choose > research. Pure: the loader
  * (pursuit/load.ts) gathers; this only decides. Pinned by tests/unit/gap/pursuit-state.test.ts.
  */
+import { cutWords } from '../story/touches';
 import { classifyReply, type ReplyClass } from '../replies/classify';
 import type { MotionType } from '../account-intel/build';
 import { identityHold, unknownReasonWords, unknownUnlock } from '../opportunity/unknown-words';
@@ -139,7 +140,7 @@ const who = (by: string) => (/^casey@|^caseyglarkin/i.test(by) ? 'you' : by.repl
 export function projectPursuitState(i: PursuitInput): PursuitState {
   const newestReply = [...i.replies].sort((a, b) => b.at.localeCompare(a.at))[0] ?? null;
   const replyClass = newestReply ? classifyReply({ snippet: newestReply.snippet, subject: newestReply.subject, from: newestReply.from }) : null;
-  const lastInbound = newestReply && replyClass ? { who: newestReply.name ?? newestReply.from, at: newestReply.at, kind: replyClass.kind, label: replyClass.label, snippet: newestReply.snippet.replace(/\s+/g, ' ').trim().slice(0, 80), from: newestReply.from, ...(newestReply.placedVia ? { placedVia: newestReply.placedVia } : {}) } : null;
+  const lastInbound = newestReply && replyClass ? { who: newestReply.name ?? newestReply.from, at: newestReply.at, kind: replyClass.kind, label: replyClass.label, snippet: cutWords(newestReply.snippet), from: newestReply.from, ...(newestReply.placedVia ? { placedVia: newestReply.placedVia } : {}) } : null;
 
   // The newest human choice wins; a choice that is no longer eligible is said, never silently dropped.
   const choices = [
