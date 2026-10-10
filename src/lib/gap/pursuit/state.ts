@@ -179,14 +179,14 @@ export function projectPursuitState(i: PursuitInput): PursuitState {
       return base('replied', {
         person: { key: `reply:${newestReply.from}`, personaId: null, name: newestReply.name ?? newestReply.from, title: null, chosenBy: null },
         stateLine: `${STATE_LINE.replied}: ${newestReply.name ?? newestReply.from}, ${day(newestReply.at)}`,
-        blocker: `${newestReply.name ?? newestReply.from} wrote on ${day(newestReply.at)}. No cold email to anyone at ${i.accountName} until it is recorded.`,
+        blocker: `${newestReply.name ?? newestReply.from} wrote on ${day(newestReply.at)}; the reply is not recorded yet.`,
         unlock: 'Read the reply and record what they said; the next person unlocks after that.',
       });
     }
     if (replyClass.kind === 'opt_out') {
       return base('opted_out', {
         stateLine: `${STATE_LINE.opted_out}: ${newestReply.name ?? newestReply.from}, ${day(newestReply.at)}`,
-        blocker: `${newestReply.name ?? newestReply.from} replied "${newestReply.snippet.slice(0, 40)}" on ${day(newestReply.at)}: record it as do not contact. No reply goes back, and nobody at ${i.accountName} gets a cold email until it is recorded.`,
+        blocker: `${newestReply.name ?? newestReply.from} replied "${newestReply.snippet.slice(0, 40)}" on ${day(newestReply.at)}: record it as do not contact. No reply goes back.`,
         unlock: 'Record the opt-out; GAP then sets that person aside. Anyone else here is your call afterwards, not the queue\'s.',
       });
     }

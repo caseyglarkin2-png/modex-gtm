@@ -91,6 +91,13 @@ export const knownAssetLink = (baseUrl: string) => (name: string): string | null
   return path ? `${baseUrl.replace(/\/$/, '')}${path}` : null;
 };
 
+/** A line that points at the account page's layout ("The opening story, above.", "the proposal below"), meaningless in an email. */
+const POINTER = /^(?:the )?(?:opening story|story|anchor|proposal)[^.]{0,20}\b(?:above|below)\b\.?$/i;
+/** "below" and "above" in a move written for the account page become the page itself. */
+const unpoint = (s: string) => s.replace(/\b(?:just )?(?:below|above)\b/g, 'on the account page').replace(/\s{2,}/g, ' ');
+/** The story's "no buyer input" sentence: an invented absence when the buyer has written or met us. */
+const NO_BUYER = /^Nothing from the buyer yet\b/i;
+
 /** A blanket instruction the agent imposed on the seller ("Nobody at X gets a cold email until then"): not a rule GAP enforces, so it is not said. */
 const BLANKET = /\s*Nobody (?:at [^.]*|they named) gets a cold email until [^.]*\.|;?\s*[Tt]he account cools before anyone else is touched(\.?)|;?\s*a cold email to anyone else waits for their answer(\.?)|\s*before anyone (?:there|at the account) gets a cold email(\.?)/g;
 export const stripBlanket = (s: string): string => s.replace(BLANKET, (m, d1?: string, d2?: string, d3?: string) => (m.trimStart().startsWith(';') ? (d1 || d2 || d3 || '') : '')).replace(/\s{2,}/g, ' ').trim();
@@ -128,6 +135,8 @@ export interface AssignmentPacket {
   buyerSaid: Array<{ text: string; who: string | null; at: string | null }>;
   /** The move in words (what "The move:" says). */
   move: string;
+  /** "Buyer input on record: ..." when the story's "no buyer input" line was dropped for the buyer's own words. */
+  buyerInputLine?: string | null;
   moves: PacketMove[];
   prepared: Prepared;
   /** The sender the prepared email would go from (the GAP mailbox), or null when none is configured. */
@@ -333,6 +342,8 @@ function evidenceFromStory(ctx: AskContext | null): { evidence: PacketEvidence[]
       const unverified = l.tag === 'Unverified';
       const ours = /^(our read|our thesis)/i.test(l.basis) || /\(our read[;,]/i.test(text);
       // A story's "reported by X, <date>" basis: the date is the REPORT's, the label the publisher; the event date is not stated.
+      // A pointer into the account page ("The opening story, above.") is not a fact in an email.
+      if (POINTER.test(text)) continue;
       if (row.label === CHANGING) changed.push({ text: endSentence(text), eventDate: null, reportedOn: src.date, capturedOn: null, source: { label: src.label || 'no source named', url: null }, interpretation: null, weak, claim: ours ? 'interpretation' : 'reported' });
       else evidence.push({ text: endSentence(text), source: { label: cleanLine(l.basis) || 'no source named', url: null }, eventDate: src.date, reportedOn: null, weak, unverified });
     }
@@ -601,9 +612,17 @@ export async function buildAssignmentPacket(prisma: PrismaLike, a: BuildPacketAr
   // A reply item's move is about ITS person's reply, never the account's newest reply from someone else.
   const replyItem = item.stateKind === 'replied' && !!personName;
   const ownReplyAt = replyItem ? (relationship.lastInbound?.at ?? item.context?.date ?? null) : null;
-  const move = stripBlanket(replyItem ? `Read ${personName}'s reply${ownReplyAt ? ` of ${dateWords(ownReplyAt)}` : ''} and record what they said.` : ctx?.state.next || item.title);
+  const move = a.hold
+    ? 'Choose the person on the account; the prepared email and this item name different people.'
+    : unpoint(stripBlanket(replyItem ? `Read ${personName}'s reply${ownReplyAt ? ` of ${dateWords(ownReplyAt)}` : ''} and record what they said.` : ctx?.state.next || item.title));
   const moves = movesOf({ item, move, prepared, hold: a.hold, rel: relationship, personName: first?.name ?? personName, angleSuperseded });
   const coverage = typeof ctx?.coverageLine === 'string' ? ctx.coverageLine.trim() : '';
+  // "Nothing from the buyer yet" is not said when the buyer has written or met us: the count is said instead.
+  const buyerOnRecord = (ctx?.buyerSaid ?? []).length + (relationship.lastInbound ? 1 : 0) + relationship.meetings.length;
+  const evidenceShown = buyerOnRecord > 0 ? evidence.filter((e) => !NO_BUYER.test(e.text)) : evidence;
+  const buyerInputLine = buyerOnRecord > 0 && evidence.some((e) => NO_BUYER.test(e.text))
+    ? `Buyer input on record: ${relationship.reads.inbox.read ? `${relationship.reads.inbox.count} message${relationship.reads.inbox.count === 1 ? '' : 's'} from ${relationship.person.name ?? 'them'}` : 'their messages (see Relationship)'}${relationship.meetings.length ? `, ${relationship.meetings.length} held meeting${relationship.meetings.length === 1 ? '' : 's'}` : ''}${(ctx?.buyerSaid ?? []).length ? `, ${(ctx?.buyerSaid ?? []).length} quoted line${(ctx?.buyerSaid ?? []).length === 1 ? '' : 's'} below` : ''}.`
+    : null;
   // The buyer's words: the item's own person first, each attributed.
   const buyerSaid = (ctx?.buyerSaid ?? []).slice().sort((x, y) => Number(!!personName && !!y.who && nameKeyOf(y.who) === nameKeyOf(personName)) - Number(!!personName && !!x.who && nameKeyOf(x.who) === nameKeyOf(personName))).slice(0, 3).map((b) => ({ text: cleanLine(lengthenQuote(b.text, story.betweenUs)), who: properCase(b.who) ?? b.who, at: b.at }));
 
@@ -623,8 +642,9 @@ export async function buildAssignmentPacket(prisma: PrismaLike, a: BuildPacketAr
     who,
     relationship,
     betweenUs: story.betweenUs,
-    evidence,
+    evidence: evidenceShown,
     evidenceMore: Math.max(0, allEvidence.length - evidence.length),
+    buyerInputLine,
     whyTheyCare: ctx?.opening?.whyTheyCare ? cleanLine(ctx.opening.whyTheyCare) : null,
     buyerSaid,
     move,
@@ -795,6 +815,7 @@ export function packetSections(p: AssignmentPacket, links: PacketLinks, opts: Re
   const ev: string[] = p.evidence.map((e) => `- ${e.text} (${e.source.label}${e.eventDate && !e.source.label.includes(e.eventDate) ? `, ${e.eventDate}` : ''})${e.source.url ? ` ${e.source.url}` : ''}${e.weak && !/headline link/.test(e.text) ? " (only the producer's claim is available)" : ''}${e.unverified ? ' (unverified: its present-day status is not established)' : ''}`);
   if (!ev.length) ev.push('- No excerpt on record beyond the relationship above.');
   if (p.evidenceMore > 0) ev.push(`- ${p.evidenceMore} more independent source${p.evidenceMore === 1 ? '' : 's'} on record (syndications of one text not counted); open the account for them.`);
+  if (p.buyerInputLine) ev.push(p.buyerInputLine);
   if (p.whyTheyCare) ev.push(`Why they care (our read): ${endSentence(p.whyTheyCare)}`);
   for (const b of p.buyerSaid) ev.push(`${b.who ? `${cleanLine(b.who)} said` : 'They said'}: "${b.text}"${b.at ? ` (${dateWords(b.at)})` : ''}`);
   if (p.sellerNote.length) {
@@ -803,8 +824,10 @@ export function packetSections(p: AssignmentPacket, links: PacketLinks, opts: Re
   }
   sections.push({ heading: 'Evidence:', lines: ev });
 
-  const mv: string[] = [`The move: ${endSentence(p.move)}`];
-  for (const m of p.moves) mv.push(`- ${m.label}${KIND_LABEL[m.kind]}: ${endSentence(m.reason)}`);
+  // "The move:" is said once: when the first option is the move itself, the options carry it.
+  const firstLabel = p.moves[0] ? textKey(unpoint(moveLabel(p.moves[0].label))) : '';
+  const mv: string[] = firstLabel && textKey(p.move) === firstLabel ? [] : [`The move: ${endSentence(p.move)}`];
+  for (const m of p.moves) mv.push(`- ${unpoint(m.label)}${KIND_LABEL[m.kind]}: ${endSentence(m.reason)}`);
   sections.push({ heading: 'Possible next move:', lines: mv });
 
   const pm: string[] = [];
@@ -850,7 +873,7 @@ export function packetSections(p: AssignmentPacket, links: PacketLinks, opts: Re
   }
   sections.push({ heading: 'Controls:', lines: ctl });
   // The bookkeeping last: what was read for this packet, and what was not.
-  const read: string[] = [`- Searched: ${p.relationship.searched}.`];
+  const read: string[] = [`- Searched: ${p.relationship.searched.replace(/^no address on record for this person: the inbox was not searched/, 'no person is named on the item, so the inbox was not searched by address')}.`];
   if (p.coverageLine) read.push(`- ${p.coverageLine}`);
   sections.push({ heading: 'Read for this packet:', lines: read });
   sections.push({ heading: null, lines: ['This is an internal message from GAP to you; nothing in it went to a buyer.'] });

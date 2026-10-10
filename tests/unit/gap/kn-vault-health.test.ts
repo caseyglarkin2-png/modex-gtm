@@ -42,6 +42,10 @@ describe('the context component with the synced vault table', () => {
     expect(c.detail, 'the coverage row still speaks for the canary account').toContain('vault: complete, newest knowledge 2026-10-07, rebuilt 2026-10-09');
     const other = ctx({ ...base(), context: probe({ vaultTable: { readable: true, rows: 3, lastSyncedAt: '2026-10-08T22:10:00.000Z', kinds: { account: 1, person: 0, deal: 0, meeting: 1, raw: 1, other: 0 }, tokenConfigured: true, localDir: false, lastSync: null } }) });
     expect(other.detail, 'another day carries its date').toContain('vault: 3 notes (1 call, 1 account note, 1 meeting note), synced Oct 8, 18:10 New York');
+    // 2026-10-10: the last good tick and the vault revision it recorded ride on the same line; no revision, the time only.
+    expect(c.detail).toContain('synced 10:39 New York, last sync 10:39 New York;');
+    const rev = ctx({ ...base(), context: probe({ vaultTable: { readable: true, rows: 775, lastSyncedAt: '2026-10-09T14:39:00.000Z', kinds, tokenConfigured: true, localDir: false, lastSync: { ok: true, at: '2026-10-09T14:41:00.000Z', error: null, written: 0, skipped: true, commitSha: '9f8e7d6c5b4a39281706f5e4d3c2b1a098765432', branch: 'main' } } }) });
+    expect(rev.detail).toContain('vault: 775 notes (92 calls, 78 account notes, 85 meeting notes, 12 deal notes, 508 people notes), synced 10:39 New York, last sync 10:41 New York, vault revision 9f8e7d6 (main)');
   });
 
   it('an empty table and nothing set: one "not configured" line naming what is missing, said as partial, never twice', () => {
@@ -72,17 +76,19 @@ describe('the loader reads the table and the ledger', () => {
       { path: '02_Accounts/Kenco.md', sha: 'a', git_sha: null, kind: 'account', account_name: 'Kenco', domain: 'kencogroup.com', people: [], note_date: null, title: 'Kenco', frontmatter: { type: 'account', company: 'Kenco', last_refreshed: '2026-10-09', next_action: 'Regroup with Craig the week of 2026-10-12.', next_action_due: '2026-10-15' }, text: '# Kenco\n\n## One-line read\nThe largest woman-owned 3PL.\n', source: null, vault_pushed_at: null, synced_at: new Date('2026-10-09T14:39:00Z') },
       { path: '00_Inbox/raw/2026-07-16-call.md', sha: 'b', git_sha: null, kind: 'raw', account_name: null, domain: null, people: ['craig.morrison@kencogroup.com'], note_date: new Date('2026-07-16T00:00:00Z'), title: 'Kenco x YardFlow', frontmatter: { type: 'raw', source: 'fireflies' }, text: '## Transcript (verbatim)\n**Craig Morrison:** The yard is radios.\n', source: 'fireflies', vault_pushed_at: null, synced_at: new Date('2026-10-09T14:38:00Z') },
     ] }, NOW);
-    await recordVaultSync(db.client(), { ok: true, repo: 'o/r', branch: 'main', commitSha: 'c1', treeSha: 't1', commitAt: null, etag: null, counts: null, durationMs: 5, error: null, skipped: null });
+    await recordVaultSync(db.client(), { ok: true, repo: 'o/r', branch: 'main', commitSha: '0a1b2c3d4e5f60718293a4b5c6d7e8f901234567', treeSha: 't1', commitAt: null, etag: null, counts: null, durationMs: 5, error: null, skipped: null });
     const client = db.client() as Record<string, unknown>;
     const prisma = { ...client, canonicalCompany: { count: async () => 1, findMany: async () => [], findFirst: async () => ({ primary_account_name: 'Kenco', domain: 'kencogroup.com' }) }, gapAccountAlias: { count: async () => 0, findMany: async () => [] } };
     const env = { GAP_VAULT_GITHUB_TOKEN: 'set' };
     const inputs = await loadHealthInputs(prisma as never, { env, clock: () => NOW.getTime() });
     const c = inputs.context as ContextProbe;
-    expect(c.vaultTable).toEqual({ readable: true, rows: 2, lastSyncedAt: '2026-10-09T14:39:00.000Z', kinds: { account: 1, person: 0, deal: 0, meeting: 0, raw: 1, other: 0 }, tokenConfigured: true, localDir: false, lastSync: { ok: true, at: expect.any(String), error: null, written: null, skipped: false } });
+    // The revision the sync recorded is carried (2026-10-10); the ledger reader (vault-sync.ts lastVaultSync) does not return the branch yet, so it is null here.
+    expect(c.vaultTable).toEqual({ readable: true, rows: 2, lastSyncedAt: '2026-10-09T14:39:00.000Z', kinds: { account: 1, person: 0, deal: 0, meeting: 0, raw: 1, other: 0 }, tokenConfigured: true, localDir: false, lastSync: { ok: true, at: expect.any(String), error: null, written: null, skipped: false, commitSha: '0a1b2c3d4e5f60718293a4b5c6d7e8f901234567', branch: null } });
     expect(c.vault, 'the coverage came from the table through prisma (configured, reachable, the sync time as index time)').toMatchObject({ configured: true, reachable: true, indexedAt: '2026-10-09T14:39:00.000Z' });
     expect(c.canary).toEqual({ account: 'Kenco', domain: 'kencogroup.com' });
     const comp = evaluateHealth(inputs, NOW).components.find((x) => x.key === 'context')!;
     expect(comp.detail).toContain('vault: 2 notes (1 call, 1 account note), synced 10:39 New York');
+    expect(comp.detail, 'the health vault line names the vault revision the last sync recorded').toMatch(/vault: 2 notes \(1 call, 1 account note\), synced 10:39 New York, last sync [^,]+ New York, vault revision 0a1b2c3[;.]/);
     // A client that does not know the model is not probed (absent, nothing claimed); one that knows it and cannot read it
     // (the migration not applied: the query throws) is said unreadable, never a crash.
     const bare = await loadHealthInputs({ gapAuditEvent: { findMany: async () => [], findFirst: async () => null, count: async () => 0 } } as never, { env: {}, clock: () => NOW.getTime() });

@@ -7,7 +7,7 @@
  */
 import type { AccountContext } from '../context/context';
 import type { AccountInputs } from '../account-intel/build';
-import type { ReplyClassKind } from '../replies/classify';
+import { classifyReply, type ReplyClassKind } from '../replies/classify';
 import { isInternalRecipient } from '../context/context';
 import { displayName } from '../people/display-name';
 
@@ -135,7 +135,9 @@ export function mergeTouches(x: {
     if (e.kind === 'email') {
       const from = e.from ?? null;
       if (e.direction === 'incoming' && from && !isInternalRecipient(from)) {
-        out.push({ kind: 'reply', at: e.at, ...person(from, from), what: cutWords(e.body || e.title || ''), source: 'HubSpot', replyKind: 'human', replyLabel: 'replied', excerpt: e.body || undefined });
+        // The adversarial audit of October 10: an out-of-office logged in HubSpot read as "replied" and put its sender in Who.
+        const cls = classifyReply({ snippet: e.body, subject: e.title, from });
+        out.push({ kind: 'reply', at: e.at, ...person(from, from), what: cutWords(e.body || e.title || ''), source: 'HubSpot', replyKind: cls.kind, replyLabel: cls.kind === 'human' ? 'replied' : cls.label, excerpt: e.body || undefined });
       } else if (e.direction === 'outgoing' || (from && isInternalRecipient(from))) {
         const to = e.to && !isInternalRecipient(e.to) ? e.to : null;
         out.push({ kind: 'send', at: e.at, ...(to ? person(to) : { name: 'the account', title: null, address: null }), what: e.title?.trim() || 'email', source: 'HubSpot', excerpt: e.body || undefined });

@@ -85,7 +85,9 @@ describe('X06: buildAssignment', () => {
     expect(t).toContain('- PepsiCo is expanding its Tulsa distribution center by 180,000 square feet (announced Jul 23). (Tulsa World, Jul 23)');
     expect(t).toContain('Why they care (our read): More doors with the same gate team means longer waits at the gate.');
     expect(t).toContain('Karen Ortiz said: "We lose trailers on the lot every week." (Sep 30, 2026)');
-    expect(t).toContain('The move: Send the first touch to Karen Ortiz.');
+    // 2026-10-10: the move is said once; when the first option is the move itself, the option carries it.
+    expect(t).not.toContain('The move: Send the first touch to Karen Ortiz.');
+    expect(t).toContain('- Send the first touch to Karen Ortiz: a prepared email to karen@pepsico.com is below');
     // GUI-07: "Ready to send" names the actual recipient and the sender (none configured in the test).
     expect(t).toContain('Ready to send, to karen@pepsico.com, from the GAP mailbox (not configured yet), subject "Tulsa: the new doors":');
     expect(t).toContain('> Approve me if you like.');
@@ -123,7 +125,7 @@ describe('X06: buildAssignment', () => {
     const at = t.indexOf('- Not read this time: Gmail Sent (no GAP sender configured), the vault (not configured)');
     expect(at, 'the coverage line is printed').toBeGreaterThan(0);
     expect(at, 'after the evidence').toBeGreaterThan(t.indexOf('Evidence:'));
-    expect(at, 'after the move').toBeGreaterThan(t.indexOf('The move: Send the first touch to Karen Ortiz.'));
+    expect(at, 'after the move').toBeGreaterThan(t.indexOf('- Send the first touch to Karen Ortiz: a prepared email'));
     expect(at, 'under the read-for-this-packet section').toBeGreaterThan(t.indexOf('Read for this packet:'));
     deps.askContext.mockResolvedValue({ ...ASK, coverageLine: null });
     const b = await buildAssignment(db.client(), { plan: PLAN, item: ITEMS[0], revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, deps);

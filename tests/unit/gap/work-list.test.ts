@@ -59,7 +59,7 @@ describe('buildWorkList', () => {
     const walmart = cards.find((c) => c.accountName === 'Walmart Inc.')!;
     expect(walmart.stateKind).toBe('opted_out');
     expect(walmart.next?.label).toBe('Record the opt-out');
-    expect(walmart.blocker).toMatch(/no cold work here until it is recorded/);
+    expect(walmart.blocker).toMatch(/They asked not to be contacted: record it/);
     expect(cards.filter((c) => c.accountName === 'Walmart Inc.')).toHaveLength(1);
     expect(cards[0]).toMatchObject({ accountName: 'NFI Industries', stateKind: 'replied' });
   });
@@ -78,7 +78,7 @@ describe('buildWorkList', () => {
     expect(cards.some((c) => c.accountName === 'FedEx')).toBe(false);
     const nfi = cards[0];
     expect(nfi.state).toBe('Someone replied');
-    expect(nfi.blocker).toMatch(/No cold email to anyone here until it is recorded/);
+    expect(nfi.blocker).toMatch(/A reply is waiting to be recorded/);
     expect(nfi.next?.label).toBe('Log what they said');
   });
   it('a held account is never a cold action: Kroger lists In a deal with the deal brief, its READY card dropped; UNKNOWN is a caution with no action', () => {

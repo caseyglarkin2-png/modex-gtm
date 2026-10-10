@@ -72,6 +72,15 @@ describe('the Intelligence producers component', () => {
     expect(r.headline).toContain('Intelligence producers: HubSpot report stalled since Oct 6, 2026');
   });
 
+  it('2026-10-10: a reimported old report is stale (reimported <date>), never "stalled since" the fresh import; a one-time import is named apart and never degrades', () => {
+    const reimported = comp({ ...healthy(), producers: [status({}), status({ producer: 'codex_hubspot_report', label: 'HubSpot report', state: 'stale', staleKind: 'reimported', lastImportAt: day(0.1).toISOString(), lastReportedOn: '2026-10-01', line: 'HubSpot report: last import Oct 9, 2026 (0 reports, 1 item, reports through Oct 1, 2026); stale (reimported Oct 9, 2026).' })] })!;
+    expect(reimported.state).toBe('DEGRADED');
+    expect(reimported.label).toBe('Intelligence producers: HubSpot report stale (reimported Oct 9, 2026)');
+    const once = comp({ ...healthy(), producers: [status({}), status({ producer: 'war_room_dossier', label: 'war-room dossier', state: 'one_time', lastImportAt: day(40).toISOString(), line: 'war-room dossier: one-time import (Aug 30, 2026); 0 reports, 2 items.' })] })!;
+    expect(once.state).toBe('HEALTHY');
+    expect(once.label).toBe('Intelligence producers current: Yards First Brief; one-time: war-room dossier');
+  });
+
   it('unreadable (null): DEGRADED, said so, never a throw', () => {
     expect(comp({ ...healthy(), producers: null })).toMatchObject({ state: 'DEGRADED', label: 'Intelligence producers not readable' });
   });

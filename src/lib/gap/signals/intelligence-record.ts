@@ -34,12 +34,13 @@ export const INTEL_RECORD_KINDS = ['development', 'engagement', 'observation', '
 export type IntelRecordKind = (typeof INTEL_RECORD_KINDS)[number];
 
 /** The producers GAP knows by name (any other producer string is accepted and shown by its id). */
-export const INTEL_PRODUCERS: Record<string, { label: string; cadenceDays: number; how: string }> = {
+/** `oneShot`: imported once by design; producer status says "one-time import (<date>)" and never stale (2026-10-10). */
+export const INTEL_PRODUCERS: Record<string, { label: string; cadenceDays: number; how: string; oneShot?: boolean }> = {
   yards_first_brief: { label: 'Yards First Brief', cadenceDays: 1, how: 'a ChatGPT daily brief, exported as records' },
   freight_x_signal_desk: { label: 'Freight X Signal Desk', cadenceDays: 1, how: 'a ChatGPT daily desk, exported as records' },
   codex_hubspot_report: { label: 'HubSpot Activity & Engagement report', cadenceDays: 1, how: 'the Codex weekday automation, exported as records' },
   clawd_signal_hunter: { label: 'Clawd signal hunter', cadenceDays: 1, how: 'the yardflow_signals dataset, read through its export' },
-  war_room_dossier: { label: 'war-room dossier', cadenceDays: 30, how: 'the war-room account dossiers in its git checkout, read by scripts/gap/import-warroom-dossiers.ts' },
+  war_room_dossier: { label: 'war-room dossier', cadenceDays: 30, how: 'the war-room account dossiers in its git checkout, read by scripts/gap/import-warroom-dossiers.ts', oneShot: true },
   google_drive: { label: 'Google Drive document', cadenceDays: 7, how: 'a Doc, Sheet, Slides or uploaded document in the agreed Drive folders, read by /api/cron/gap-drive-sync (signals/drive-sync.ts)' },
   gemini_notes: { label: 'Gemini meeting notes', cadenceDays: 7, how: 'a Notes by Gemini document in Meet Recordings: its notes labelled as generated, its transcript excerpts as what people said, read by the same sync' },
 };

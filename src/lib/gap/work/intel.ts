@@ -264,6 +264,10 @@ export function rankTriggers(rows: readonly TriggerRow[], accountNames: Readonly
     });
 }
 
+/** The purposes that never make a re-engage candidate (the morning audit of October 10). */
+const NOT_A_PROSPECT: ReadonlySet<string> = new Set(['vendor_solicitation', 'internal', 'calendar', 'automated', 'suspicious', 'media']);
+/** A calendar response by its subject (the ranker has no calendar facts): never a person to re-engage. */
+const CALENDAR_SUBJECT = /^(?:re:\s*)?(?:accepted|declined|tentative(?:ly accepted)?|invitation|updated invitation|cancel(?:l)?ed(?: event)?|new time proposed):/i;
 type WriterRow = { from_email: string; from_name: string | null; subject: string | null; received_at: Date | string; thread_account: string | null };
 type PersonaRow = { id: number; email: string | null; name: string | null; title: string | null; account_name: string | null; do_not_contact?: boolean | null };
 
@@ -348,6 +352,10 @@ export function rankPeople(rows: readonly WriterRow[], personas: readonly Person
     if (opts.decided.has(`person:${email}`) || opts.unsubscribed.has(email)) continue;
     const verdict = opts.verdicts?.get(email) ?? null;
     if (verdict && !verdict.eligible) continue;
+    // The morning audit of October 10: a vendor pitch, an automated sender, a calendar response or an internal thread is not a prospect to re-engage.
+    const purpose = classifyPurpose({ from: email, subject: w.subject, excerpt: null, direction: 'inbound', isDraft: false, type: 'email', calendar: null }, { knownPerson: personaByEmail.has(email) }).purpose;
+    if (NOT_A_PROSPECT.has(purpose)) continue;
+    if (CALENDAR_SUBJECT.test(w.subject ?? '')) continue;
     const p = personaByEmail.get(email) ?? null;
     if (p?.do_not_contact) continue;
     // C02/C03: placed through the identity machinery (persona, the CRM contact's company, the thread, the domain); ambiguous stays unplaced.
@@ -411,6 +419,13 @@ export interface PursuedItem {
   status: 'in_progress' | 'ready' | 'failed';
   error: string | null;
   angle: { whyItMatters: string; starters: string[]; roles: string[]; accounts: string[]; peopleNamed: Array<{ personaId: number; name: string | null; title: string | null }>; proposedAction: string; caveat: string | null; sourceLine: string; warnings?: string[] } | null;
+  /**
+   * The morning audit (2026-10-10): the correspondence has moved past the angle (we wrote the writer, or they wrote
+   * us, after `decidedAt`), in words ("we wrote Oct 9, 2026"); null when the writer's relationship was read and nothing
+   * is later (or the read failed); absent when it was not read (no writer, not ready, or past the briefing's three).
+   * Set by briefing-send's markSupersededPursued; loadPursued leaves it absent.
+   */
+  superseded?: { since: string } | null;
 }
 
 export interface Intelligence {

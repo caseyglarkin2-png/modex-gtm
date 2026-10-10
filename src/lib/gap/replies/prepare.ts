@@ -109,7 +109,7 @@ export function prepareReply(r: ReplyPrepInput, opts: { mailbox?: string | null;
       if (day) notes.push(`They named a day: ${day.phrase} (${dayLabel(day.day, opts.now)}${day.ambiguous ? ', check which one they mean' : ''}). Offer a time then, or ask what suits.`);
       if (!ask && !day) notes.push('Thank them and answer what they wrote, in the thread, in a few lines.');
     }
-    notes.push('Then record what they said; the next step follows from it, and nobody at the account gets a cold email until then.');
+    notes.push('Then record what they said; the next step follows from it.');
   } else if (c.kind === 'opt_out') {
     notes.push('No reply goes back.');
     notes.push('Record it as do not contact; the person is set aside and the account cools.');

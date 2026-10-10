@@ -31,6 +31,7 @@
  * a lane card), the ledger's touches, the seller's outcomes and the commitments (work/commitment-model.ts). Pinned by
  * tests/unit/gap/work-list.test.ts and tests/unit/gap/work-rank.test.ts.
  */
+import { cutWords } from '../story/touches';
 import { accountHref, isCockpitLaneHref, packHref, recordReplyHref } from '../account-intel/href';
 import { classifyReply, HUMAN_REPLY_LABEL, type ReplyClassKind } from '../replies/classify';
 import { prepareReply, type ReplyPrep } from '../replies/prepare';
@@ -195,6 +196,8 @@ export interface AccountKnowledge {
 export const KNOWLEDGE_CONVERSATION_DAYS = 30;
 /** C2: a vault next action due within this many days (or past) is deal context. */
 export const KNOWLEDGE_NEXT_ACTION_DAYS = 7;
+/** The morning audit of October 10: a vault next action overdue by more than this many days ranked an item first (KDP, due July 17); past that it is context, not evidence. */
+export const KNOWLEDGE_NEXT_ACTION_STALE_DAYS = 30;
 
 export interface WorkInput {
   now: Date;
@@ -325,8 +328,8 @@ function pursuitAction(state: PursuitStateKind, accountName: string, stateLine =
 
 /** The hold a reply card states on its own; the reply panel and the card's sentence already say it (R60: said once). */
 export const GENERIC_REPLY_BLOCKERS: ReadonlySet<string> = new Set([
-  'No cold email to anyone here until it is recorded.',
-  'They asked not to be contacted: no cold work here until it is recorded.',
+  'A reply is waiting to be recorded.',
+  'They asked not to be contacted: record it.',
 ]);
 
 /** The rank a classified reply takes: a human reply first of all; an opt-out after READY; a bounce with research. */
@@ -539,8 +542,8 @@ export function knowledgeEvidence(k: AccountKnowledge, now: Date): { conversatio
   const recent = Number.isFinite(convAt) && convAt <= now.getTime() && now.getTime() - convAt <= KNOWLEDGE_CONVERSATION_DAYS * 86_400_000;
   const conversation = recent ? `a conversation ${day(k.lastConversationAt as string)} (the vault)` : null;
   const due = k.nextActionDue && isDay(k.nextActionDue) ? k.nextActionDue : null;
-  const soon = !!due && due <= addDays(nyDay(now), KNOWLEDGE_NEXT_ACTION_DAYS);
-  const nextAction = soon && k.nextAction ? `the vault's next action: ${k.nextAction.replace(/\s+/g, ' ').trim().replace(/\.$/, '').slice(0, 140)}, due ${dayLabel(due as string, now)}` : null;
+  const soon = !!due && due <= addDays(nyDay(now), KNOWLEDGE_NEXT_ACTION_DAYS) && due >= addDays(nyDay(now), -KNOWLEDGE_NEXT_ACTION_STALE_DAYS);
+  const nextAction = soon && k.nextAction ? `the vault's next action: ${cutWords(k.nextAction.replace(/\.$/, ''), 140).replace(/\.$/, '')}, due ${dayLabel(due as string, now)}` : null;
   return { conversation, nextAction };
 }
 
@@ -631,7 +634,7 @@ export function workDay(i: WorkInput): WorkDay {
         why: `${r.fromName?.trim() || r.contactEmail} wrote ${day(r.receivedAt)}: "${quote}". ${c.consequence}`,
         person: { name: r.contactEmail, title: null },
         next: { label: c.kind === 'human' ? humanNext : c.kind === 'opt_out' ? 'Record the opt-out' : 'Find a working address', href: c.kind === 'bounce' ? accountHref(r.accountName) : recordReplyHref(r.accountName) },
-        blocker: c.kind === 'human' ? 'No cold email to anyone here until it is recorded.' : c.kind === 'opt_out' ? 'They asked not to be contacted: no cold work here until it is recorded.' : null,
+        blocker: c.kind === 'human' ? 'A reply is waiting to be recorded.' : c.kind === 'opt_out' ? 'They asked not to be contacted: record it.' : null,
         ...(r.fromName?.trim() && c.kind !== 'bounce' ? { person: { name: r.fromName.trim(), title: null } } : {}),
         // R42: the message itself and the prepared notes ride on the card (never copy, never a send).
         reply: prepareReply({ id: r.id ?? `${r.contactEmail}:${r.receivedAt}`, from: r.contactEmail, fromName: r.fromName ?? null, subject: r.subject, snippet: r.snippet, receivedAt: r.receivedAt, threadId: r.threadId ?? null, accountName: r.accountName }, { mailbox: i.mailbox ?? null, now: i.now }),
@@ -1065,7 +1068,7 @@ export function workDay(i: WorkInput): WorkDay {
     if (preparedAngle) bits.push(preparedAngle.line.replace(/\.$/, ''));
     // C2: the vault's next action is said on the card (the evidence names it when it is coming due; otherwise it is context, with its due day when it has one).
     const kn = knowledge ? knowledgeEvidence(knowledge, i.now) : null;
-    if (knowledge?.nextAction && (!evidence || !kn?.nextAction)) bits.push(`the vault's next action: ${knowledge.nextAction.replace(/\s+/g, ' ').trim().replace(/\.$/, '').slice(0, 140)}${knowledge.nextActionDue && isDay(knowledge.nextActionDue) ? `, due ${dayLabel(knowledge.nextActionDue, i.now)}` : ''}`);
+    if (knowledge?.nextAction && (!evidence || !kn?.nextAction)) bits.push(`the vault's next action: ${cutWords(knowledge.nextAction.replace(/\.$/, ''), 140).replace(/\.$/, '')}${knowledge.nextActionDue && isDay(knowledge.nextActionDue) ? `, due ${dayLabel(knowledge.nextActionDue, i.now)}` : ''}`);
     if (kn?.conversation && !evidence) bits.push(kn.conversation);
     const capture = captureFor(r.card, list);
     // R60, capture once: a reply card offers ONE entry into Capture, which carries the reply's meaning and the buyer's

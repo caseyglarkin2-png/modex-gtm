@@ -50,8 +50,8 @@ export interface ReplyClass {
 
 export const HUMAN_REPLY_LABEL: Record<HumanReplyKind, string> = { reply: 'Someone replied', referral: 'They named someone', objection: 'They objected' };
 const HUMAN_CONSEQUENCE: Record<HumanReplyKind, string> = {
-  reply: 'Read it and record what they said before anyone at the account gets a cold email.',
-  referral: 'They pointed to someone else. Record who they named; nobody they named gets a cold email until you choose how to approach them.',
+  reply: 'Read it and record what they said.',
+  referral: 'They pointed to someone else. Record who they named; how to approach them is your call.',
   objection: 'They pushed back. Acknowledge it, ask one question that tests it, and record it; no cold email here meanwhile.',
 };
 
@@ -63,7 +63,7 @@ export const REPLY_CLASS_LABEL: Record<ReplyClassKind, string> = {
 };
 
 const CONSEQUENCE: Record<ReplyClassKind, string> = {
-  human: 'Read it and record what they said before anyone at the account gets a cold email.',
+  human: 'Read it and record what they said.',
   opt_out: 'They asked not to be contacted: record it as do not contact. No reply goes back.',
   out_of_office: 'An automatic notice, not an answer. Nothing to reply to; the person is reachable again later.',
   bounce: 'The address failed. Find a working address or the next person.',
