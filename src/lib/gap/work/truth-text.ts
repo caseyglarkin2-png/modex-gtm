@@ -10,3 +10,10 @@ export const TRUTH_TEXT: Record<TruthLabel, string> = {
   unverified_status: 'Unverified present-day status',
   contradicted: 'Contradicted or superseded',
 };
+
+/**
+ * The people fix (2026-10-10): the words for a sender's `never` (not a prospect), on the briefing's links and the
+ * panel's button alike. Client-safe for the same reason as TRUTH_TEXT; intel.ts re-exports them.
+ */
+export const NEVER_WORDS = 'Not a prospect: never list this sender again';
+export const neverDomainWords = (domain: string) => `Not a prospect: never list anyone at ${domain}`;

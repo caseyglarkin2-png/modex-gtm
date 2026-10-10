@@ -3,6 +3,7 @@ import { isAuthorizedCronRequest } from '@/lib/cron-auth';
 import { markCronFailure, markCronSkipped, markCronStarted, markCronSuccess } from '@/lib/cron-monitor';
 import { assertGapEnabled } from '@/lib/gap/flags';
 import { gapGmailSender } from '@/lib/gap/execution/gap-sender';
+import { sellerMailboxes, unionListSent } from '@/lib/gap/execution/seller-sent';
 import { sendViaGmail } from '@/lib/email/gmail-sender';
 import { listSentTo } from '@/lib/email/gmail-inbox';
 import { actionSecret } from '@/lib/gap/work/action-token';
@@ -79,7 +80,9 @@ export async function GET(request: Request) {
           return { day: l.day, decisionIds: decisionIdsFromCandidates(l.data.workInput.candidates) };
         },
       },
-      { send: sendViaGmail, listSent: (rcpt, a, b) => listSentTo(sender, rcpt, a, b) },
+      // The people fix (2026-10-10, Lazer): the people state reads the seller's Sent in both mailboxes (a reply from
+      // casey@freightroll.com is not in the GAP mailbox's Sent); the recovery read stays the GAP mailbox's.
+      { send: sendViaGmail, listSent: (rcpt, a, b) => listSentTo(sender, rcpt, a, b), listSellerSent: unionListSent(sellerMailboxes(), (s, rcpt, a, b) => listSentTo(s, rcpt, a, b)) },
     );
     if ('skipped' in result) {
       await markCronSkipped(CRON_NAME, { path: CRON_PATH, schedule: CRON_SCHEDULE, reason: result.reason }).catch(() => undefined);

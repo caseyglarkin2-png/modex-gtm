@@ -25,6 +25,7 @@
 import type { DayPlan, PlanItem } from './plan';
 import type { IntelItem, PursuedItem } from './intel';
 import { dateOnlyText } from '../signals/intelligence-record';
+import { NEVER_WORDS, neverDomainWords } from './truth-text';
 import { cleanLine, dedupeSentences } from './clean-text';
 
 /**
@@ -82,7 +83,7 @@ export interface BriefingLinks {
   work: string;
   item: (it: PlanItem) => string;
   /** I04: a decision link for an intelligence item (null when links cannot be signed: the item then says "on Work"). */
-  decide?: (key: string, decision: 'pursue' | 'skip' | 'dismiss' | 'more') => string | null;
+  decide?: (key: string, decision: 'pursue' | 'skip' | 'dismiss' | 'more' | 'never') => string | null;
   /** I05: the account page. */
   account?: (name: string) => string;
   /** C32: the account's deal brief (the deal workspace), for an item at an account with an open deal. */
@@ -341,12 +342,23 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
   // GUI-11: the bookkeeping (how the digest was composed, the producers' coverage, the retained list) follows the items.
   const bookkeeping: { text: string[]; html: string[] } = { text: [], html: [] };
   // I04: intelligence first (the day is for new conversations), then the items in sections, deals in one line.
-  const decideLinks = (key: string) => {
-    const parts = (['pursue', 'skip', 'dismiss', 'more'] as const).map((d) => {
+  const decideLinks = (key: string, it?: IntelItem) => {
+    const parts: Array<{ label: string; href: string }> = (['pursue', 'skip', 'dismiss', 'more'] as const).map((d) => {
       const href = links.decide ? links.decide(key, d) : null;
-      return href ? { d, href } : null;
-    }).filter((x): x is { d: 'pursue' | 'skip' | 'dismiss' | 'more'; href: string } => !!x);
-    return { text: parts.length ? parts.map((p) => `${p.d.charAt(0).toUpperCase()}${p.d.slice(1)}: ${p.href}`).join('  ') : `Decide it on Work: ${links.work}`, html: parts.length ? parts.map((p) => `<a href="${esc(p.href)}">${esc(p.d.charAt(0).toUpperCase() + p.d.slice(1))}</a>`).join(' · ') : `<a href="${esc(links.work)}">Decide it on Work</a>` };
+      return href ? { label: `${d.charAt(0).toUpperCase()}${d.slice(1)}`, href } : null;
+    }).filter((x): x is { label: string; href: string } => !!x);
+    // The people fix (2026-10-10): a person who wrote in also takes "not a prospect" (never, for good), and, when the
+    // sender is at no account, the same for the whole domain (firecrown.com, riserify.com); decide.ts refuses a domain
+    // that places at an account, so the link is offered only for an unplaced sender.
+    if (key.startsWith('person:') && links.decide) {
+      const never = links.decide(key, 'never');
+      if (never) parts.push({ label: NEVER_WORDS, href: never });
+      const domain = key.slice('person:'.length).split('@')[1] ?? '';
+      const unplaced = !!it && !it.accountName && !it.ambiguousAmong?.length && !it.inDeal;
+      const onDomain = unplaced && domain ? links.decide(`domain:${domain}`, 'never') : null;
+      if (onDomain) parts.push({ label: neverDomainWords(domain), href: onDomain });
+    }
+    return { text: parts.length ? parts.map((p) => `${p.label}: ${p.href}`).join('  ') : `Decide it on Work: ${links.work}`, html: parts.length ? parts.map((p) => `<a href="${esc(p.href)}">${esc(p.label)}</a>`).join(' · ') : `<a href="${esc(links.work)}">Decide it on Work</a>` };
   };
   const intelLine = (it: IntelItem) => {
     const a = intel?.angles[it.key];
@@ -438,7 +450,7 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
     const pushIntel = (it: IntelItem) => {
       // IW06: a vault conversation has no decisions; the account page holds the moves.
       const open = it.accountName && links.account ? links.account(it.accountName) : links.work;
-      const d = it.kind === 'knowledge' ? { text: `${it.accountName ? `Open ${it.accountName}` : 'Open Work'}: ${open}`, html: `<a href="${esc(open)}">${esc(it.accountName ? `Open ${it.accountName}` : 'Open Work')}</a>` } : decideLinks(it.key);
+      const d = it.kind === 'knowledge' ? { text: `${it.accountName ? `Open ${it.accountName}` : 'Open Work'}: ${open}`, html: `<a href="${esc(open)}">${esc(it.accountName ? `Open ${it.accountName}` : 'Open Work')}</a>` } : decideLinks(it.key, it);
       const deal = dealLine(it);
       const sub = substanceLines(it);
       lines.push(`- ${intelLine(it)}`, ...sub.text.map((l) => `   ${l}`), ...(deal ? [`   ${deal.text}`] : []), `   ${d.text}`);

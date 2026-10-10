@@ -29,6 +29,7 @@ import { peopleState, type StateEvent } from './people-state';
 import { gmailThreadHref } from '../account-intel/href';
 import { findPersonaContact, hubspotRecordUrl } from '../people/contact-packet';
 import { gapGmailSender } from '../execution/gap-sender';
+import { sellerMailboxes, unionListSent } from '../execution/seller-sent';
 import { listDraftsTo, listSentTo } from '@/lib/email/gmail-inbox';
 import { loadCompanyEngagements } from '../hubspot/engagements';
 import { loadCommitments } from './commitments';
@@ -474,7 +475,10 @@ async function defaultCompanyFor(prisma: PrismaLike, accountName: string): Promi
 function defaultThreadDeps(env: Record<string, string | undefined>): ThreadContextDeps | null {
   const sender = gapGmailSender(env);
   if (!sender) return null;
-  return { listSent: (recipient, afterEpoch, beforeEpoch) => listSentTo(sender, recipient, afterEpoch, beforeEpoch, { max: 50 }), listDrafts: (recipient) => listDraftsTo(sender, recipient), ownAddresses: new Set([sender.userEmail.toLowerCase()]), maxSentRecipients: 1 };
+  // The people fix (2026-10-10, Lazer): our Sent is every seller mailbox (a reply from casey@freightroll.com is not in
+  // the GAP mailbox's Sent), and each mailbox's address is ours; drafts stay the GAP mailbox's (GAP creates them there).
+  const mailboxes = sellerMailboxes(env);
+  return { listSent: unionListSent(mailboxes, (s, recipient, afterEpoch, beforeEpoch) => listSentTo(s, recipient, afterEpoch, beforeEpoch, { max: 50 })), listDrafts: (recipient) => listDraftsTo(sender, recipient), ownAddresses: new Set(mailboxes.map((m) => m.userEmail.toLowerCase())), maxSentRecipients: 1 };
 }
 
 /**

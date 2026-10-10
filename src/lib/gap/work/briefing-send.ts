@@ -65,6 +65,11 @@ export interface BriefingSendDeps {
   /** IW12/IW13: the producers' coverage in words for the email (the producer status reader; absent: no coverage line). */
   coverage?: (prisma: PrismaLike, now: Date) => Promise<{ sources: string; unavailable: string | null } | null>;
   listSent: (recipient: string, afterEpoch: number, beforeEpoch: number) => Promise<Array<{ id: string; threadId: string | null; internalDate: Date; to: string; subject: string }>>;
+  /**
+   * The people fix (2026-10-10, Lazer): the seller's Sent in every mailbox (execution/seller-sent.ts), for the people
+   * state of the intelligence; absent means `listSent` (the GAP mailbox, which stays the briefing's own recovery read).
+   */
+  listSellerSent?: (recipient: string, afterEpoch: number, beforeEpoch: number) => Promise<Array<{ id: string; threadId: string | null; internalDate: Date; to: string; subject: string }>>;
   /** The writer's relationship for a pursued angle's supersession (relationship-state's one reader by default; tests inject one). */
   relationship?: (prisma: PrismaLike, q: RelationshipQuery) => Promise<RelationshipState>;
 }
@@ -159,11 +164,13 @@ export async function markSupersededPursued(prisma: PrismaLike, pursued: readonl
 }
 
 /** I04: the day's intelligence with the prepared angles, for the briefing. */
-export async function defaultIntel(prisma: PrismaLike, now: Date, deps: Pick<BriefingSendDeps, 'inDeals' | 'coverage' | 'relationship'> & Partial<Pick<BriefingSendDeps, 'listSent'>> & { identity?: IdentityContext | null; env?: Record<string, string | undefined> } = {}): Promise<BriefingIntel> {
+export async function defaultIntel(prisma: PrismaLike, now: Date, deps: Pick<BriefingSendDeps, 'inDeals' | 'coverage' | 'relationship'> & Partial<Pick<BriefingSendDeps, 'listSent' | 'listSellerSent'>> & { identity?: IdentityContext | null; env?: Record<string, string | undefined> } = {}): Promise<BriefingIntel> {
   // C01: the same complete-or-unavailable deal snapshot the day builds, so the email never says "no deal" on an unread CRM.
   const summary = await (deps.inDeals ?? ((p: PrismaLike, n: Date) => loadInDealsSummary(p, { now: n })))(prisma, now).catch(() => null);
-  // C10: the briefing's own Gmail Sent reader, so quiet and answer owed count our side too.
-  const loaded = await loadIntelligence(prisma, { now, coverage: dealCoverageFrom(summary), ...(deps.identity !== undefined ? { identity: deps.identity } : {}), ...(deps.listSent ? { listSent: deps.listSent } : {}) });
+  // C10: the briefing's own Gmail Sent reader, so quiet and answer owed count our side too; the people fix
+  // (2026-10-10): the seller's Sent in every mailbox when the caller supplies it.
+  const listSent = deps.listSellerSent ?? deps.listSent;
+  const loaded = await loadIntelligence(prisma, { now, coverage: dealCoverageFrom(summary), ...(deps.identity !== undefined ? { identity: deps.identity } : {}), ...(listSent ? { listSent } : {}) });
   // The morning audit (2026-10-10): a pursued angle the correspondence has moved past is said as such, not re-offered.
   const x = { ...loaded, pursued: await markSupersededPursued(prisma, loaded.pursued, now, { relationship: deps.relationship }).catch(() => loaded.pursued) };
   const keys = [...x.signals, ...(x.reports ?? []), ...x.triggers, ...x.people].map((i) => i.key);
