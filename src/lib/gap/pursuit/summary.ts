@@ -24,6 +24,7 @@ import { composeStoryAndAnchor } from '../story/compose';
 import { actionableFromPursuit, type ActionableResult } from './actionable';
 import { accountHref } from '../account-intel/href';
 import type { PursuitState } from './state';
+import type { PausedReply } from '../work/truth-text';
 import { ANSWERED_FACTS_MAX_MS, PURSUIT_SUMMARY_TTL_MS } from './summary-ttl';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -58,6 +59,8 @@ export interface PursuitSummary {
   answered?: Array<{ from: string; at: string; answeredAt: string; id?: string | null }>;
   /** The walk fix: when the state is "replied", the reply it is about (its message id when known, and its time). */
   reply?: { id: string | null; at: string } | null;
+  /** Paused reply (2026-10-10): the reply on record and the first touch the send gate pauses (state.ts pausedOf), so the Work card says both apart. */
+  paused?: PausedReply | null;
   /** When this read happened (ISO). */
   at: string;
 }
@@ -84,6 +87,7 @@ export function rememberPursuitSummary(s: PursuitState, now: Date = new Date(), 
     actionable: a ? { intent: a.intent, allowed: a.allowed, preparation: a.preparation, completion: a.completion, hypothesisId: a.hypothesisId } : null,
     ...(s.answered?.length ? { answered: s.answered.map((x) => ({ from: x.from, at: x.at, answeredAt: x.answeredAt, ...(x.id ? { id: x.id } : {}) })) } : {}),
     ...(s.state === 'replied' && s.replyRef ? { reply: { id: s.replyRef.id, at: s.replyRef.at } } : {}),
+    ...(s.state === 'replied' && s.paused ? { paused: s.paused } : {}),
     at: now.toISOString(),
   };
   cache.set(s.accountName, out);

@@ -218,9 +218,13 @@ export async function loadAccountFirstTouches(prisma: PrismaLike, accountNames: 
   return out;
 }
 
-/** An account reply nobody has triaged yet, found through any address GAP holds at the account. */
-export async function loadReplyHolds(prisma: PrismaLike, emailsByAccount: ReadonlyMap<string, string>, now: Date): Promise<Map<string, { from: string; receivedAt: string }>> {
-  const out = new Map<string, { from: string; receivedAt: string }>();
+/**
+ * An account reply nobody has triaged yet, found through any address GAP holds at the account. The paused-reply fix
+ * (2026-10-10): the hold carries the message's id and its words (the snippet, else the text's start), so every surface
+ * that says the pause keeps the buyer's message beside it.
+ */
+export async function loadReplyHolds(prisma: PrismaLike, emailsByAccount: ReadonlyMap<string, string>, now: Date): Promise<Map<string, { from: string; receivedAt: string; snippet?: string | null; id?: string | null }>> {
+  const out = new Map<string, { from: string; receivedAt: string; snippet?: string | null; id?: string | null }>();
   // R61: the accounts are checked a few at a time (one after another, Work's read waited one round trip chain per
   // account); a failed read still fails the whole hold read, as before (the caller fails closed).
   const entries = [...emailsByAccount];
@@ -229,7 +233,9 @@ export async function loadReplyHolds(prisma: PrismaLike, emailsByAccount: Readon
   results.forEach((res, i) => {
     if (res.status === 'rejected') throw res.reason;
     const r = res.value;
-    if (r) out.set(entries[i][0], { from: r.from_email, receivedAt: new Date(r.received_at).toISOString() });
+    if (!r) return;
+    const words = r.snippet?.trim() || r.body_text?.replace(/\s+/g, ' ').trim().slice(0, 400) || null;
+    out.set(entries[i][0], { from: r.from_email, receivedAt: new Date(r.received_at).toISOString(), ...(words ? { snippet: words } : {}), ...(r.id ? { id: r.id } : {}) });
   });
   return out;
 }

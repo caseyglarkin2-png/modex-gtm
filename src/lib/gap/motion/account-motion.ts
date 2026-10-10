@@ -88,7 +88,8 @@ export interface AccountMotion {
   heldCardIds: string[];
   /** One plain line for the seller. */
   headline: string;
-  pausedBy?: { from: string; receivedAt: string };
+  /** The message the send gate holds on (motion/load.ts loadReplyHolds), with its id and words when the gate read them. */
+  pausedBy?: { from: string; receivedAt: string; snippet?: string | null; id?: string | null };
 }
 
 export { titleSeniority } from '../people/person-prior';
@@ -163,7 +164,7 @@ export function computeAccountMotion(input: {
   readyEmailCards: readonly MotionCard[];
   choice: MotionChoice | null;
   firstTouches: readonly FirstTouch[];
-  replyHold: { from: string; receivedAt: string } | null;
+  replyHold: { from: string; receivedAt: string; snippet?: string | null; id?: string | null } | null;
   /** The newest buyer answer at the account (motion/load.ts loadAccountConversations). */
   conversation?: { who: string; responseClass: string; at: string } | null;
   /** UX-07: people the seller set aside here (not a fit / not now): never suggested, never lined up as next. */

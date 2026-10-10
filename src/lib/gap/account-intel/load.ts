@@ -43,8 +43,7 @@ import { AUTO_REPLY_SUBJECT, FREEMAIL_DOMAINS, OWN_DOMAINS } from '../replies/do
 import type { InboundVia } from './build';
 import { loadAccountSent, type LoadAccountSentArgs } from './sent';
 import { loadCompanyEngagements } from '../hubspot/engagements';
-import { gapGmailSender } from '../execution/gap-sender';
-import type { GmailSender } from '@/lib/email/gmail-sender';
+import { sellerMailboxSlots } from '../execution/seller-sent';
 /** R30/R31: the non-physical claim classes the read keeps as story facts of their own kind. */
 const CLAIM_FACT_CLASSES: ReadonlySet<string> = new Set(['JOB_POSTING', 'PROCUREMENT']);
 
@@ -215,8 +214,8 @@ export async function loadAccountInputs(
       /** C6: the identity context and the in-deals read the placed inbound read uses (tests inject them; the live page reads the cached summary). */
       identity?: IdentityContext | null;
       inDeals?: (p: PrismaLike, now: Date) => Promise<InDealsSummary | null>;
-      /** B1: our Sent mail to the account (tests inject; the live page reads the GAP mailbox through account-intel/sent.ts). */
-      sent?: (args: Omit<LoadAccountSentArgs, 'sender'> & { sender: GmailSender | null }) => Promise<AccountInputs['sent']>;
+      /** B1: our Sent mail to the account (tests inject; the live page reads every seller mailbox through account-intel/sent.ts). */
+      sent?: (args: LoadAccountSentArgs) => Promise<AccountInputs['sent']>;
       /** B2: the HubSpot company's engagements (tests inject; the live page reads hubspot/engagements.ts with its cache). */
       engagements?: (companyId: string, now: Date) => Promise<AccountInputs['engagements']>;
       /** Knowledge program: the vault's calls and meetings for the account (tests inject; the live page reads the knowledge table). */
@@ -419,14 +418,15 @@ export async function loadAccountInputs(
         const summary = opts.deps?.inDeals ? await opts.deps.inDeals(prisma, now).catch(() => null) : opts.live && typeof prisma?.systemConfig?.findUnique === 'function' ? await loadInDealsSummary(prisma, { now }).catch(() => null) : null;
         return loadAccountInbound(prisma, { accountName, now, domains, personaEmails: (personas as Row[]).map((p) => String(p.email ?? '')).filter(Boolean), identity: opts.deps?.identity, coverage: dealCoverageFrom(summary) });
       })().catch(() => null);
-  // B1: our Sent mail to the account's people (the GAP mailbox, after the inbound read names its senders; live only; soft).
+  // B1: our Sent mail to the account's people (every seller mailbox, the canonical reader's set (execution/seller-sent.ts),
+  // after the inbound read names its senders; live only; soft).
   const sentP: Promise<AccountInputs['sent']> = lean || !(opts.deps?.sent || opts.live)
     ? Promise.resolve(null)
     : (async () => {
         const inbound = await inboundP;
         const firstTouchRecipients = ((touches as Map<string, Array<{ recipient: string }>>).get(accountName) ?? []).map((t) => t.recipient);
         const addresses = [...new Set([...(personas as Row[]).map((p) => String(p.email ?? '')), ...(inbound?.messages ?? []).map((m) => m.from), ...firstTouchRecipients].map((a) => a.trim().toLowerCase()).filter((a) => a.includes('@')))];
-        const args = { accountName, addresses, domains, now, sender: gapGmailSender() };
+        const args: LoadAccountSentArgs = { accountName, addresses, domains, now, mailboxes: sellerMailboxSlots() };
         return opts.deps?.sent ? opts.deps.sent(args) : loadAccountSent(prisma, args);
       })().catch(() => null);
   // B2: the HubSpot company's engagements: the linked company, else the first company the identity resolved for deal

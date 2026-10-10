@@ -28,6 +28,7 @@ import type { AccountStory } from '@/lib/gap/story/story';
 import type { OutreachAnchor } from '@/lib/gap/story/anchor';
 import { OutreachAnchorView } from '@/components/gap/outreach-anchor';
 import { approvalHoldFor } from '@/lib/gap/pursuit/state';
+import { pausedActionSentence, pausedReceivedSentence } from '@/lib/gap/work/truth-text';
 import type { PeopleStack } from '@/lib/gap/people/stack';
 import type { PursuitState } from '@/lib/gap/pursuit/state';
 
@@ -94,7 +95,11 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, 
   // UX-05: when the story's between-us row carries the last email and the reply, the header does not say them again
   // (PepsiCo showed two "last" facts that disagreed; Walmart said the opt-out four times).
   const storyBetweenUs = !!pursuit?.story?.rows.some((r) => r.key === 'between_us');
-  const inbound = storyBetweenUs ? null : pursuit?.state.lastInbound ?? null;
+  // Paused reply (2026-10-10): under the send gate's reply hold the header says the reply on record (their words) and the
+  // first touch it pauses, as two lines (work/truth-text.ts, the words Work and the packet say); the inbound line is then
+  // that first line.
+  const paused = pursuit?.state.paused ?? null;
+  const inbound = storyBetweenUs || paused ? null : pursuit?.state.lastInbound ?? null;
   const tone = pursuit ? STATE_TONE[pursuit.state.state] ?? 'text-[var(--muted-foreground)]' : 'text-[var(--muted-foreground)]';
   // NEXT carries the one primary control; the chosen row in the stack shows no second one (UX-04).
   const primaryInNext = !!(nextHref && nextLabel);
@@ -122,6 +127,12 @@ export function AccountNowView({ v, nextHref, nextLabel, links, mailbox = null, 
             </p>
             <VoicePreviewButton text={v.listen} label="Listen" className="min-h-11 shrink-0 px-4" wrapperClassName="hidden md:block" />
           </div>
+          {paused ? (
+            <div className="space-y-0.5" data-testid="now-paused">
+              <p className="break-words text-xs font-medium text-sky-800 dark:text-sky-300" data-testid="now-paused-reply">{pausedReceivedSentence(paused)}</p>
+              <p className="break-words text-xs text-amber-700 dark:text-amber-400" data-testid="now-paused-action">{pausedActionSentence(paused)}</p>
+            </div>
+          ) : null}
           {lastTouch ? (
             <p className="text-xs text-[var(--muted-foreground)]" data-testid="now-last-touch">
               {lastTouch}
