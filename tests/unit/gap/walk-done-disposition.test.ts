@@ -4,8 +4,11 @@
  * October 9 DONE on Kenco produced a "logged" outcome that expired the next day, so Kenco, Boston Beer and Gusto came
  * back as "Someone replied" every morning. Pinned here:
  *   - DONE on a reply item SETTLES the reply by his word (the C35 resolution row on its message): the reply list never
- *     lists it again, the pursuit read counts it handled, and no CRM write, disposition or enrollment stop runs
- *   - DONE on an opt-out never settles it: the one-day log as before, and the answer says it stays until recorded
+ *     lists it again, the pursuit read counts it handled. Since the DONE unification (2026-10-10) a reply GAP can read
+ *     is first recorded through the disposition service with its HubSpot mirror (pinned in done-unify.test.ts); the
+ *     replies of this world are not stored, so here nothing is recorded and the answer says so
+ *   - DONE on an opt-out GAP cannot record as do not contact never settles it: the one-day log as before, and the
+ *     answer says it stays until recorded (a readable opt-out is recorded through the consent writer: done-unify)
  *   - DONE on any other item records a `done` outcome that does not expire the next day: the card stays off the day
  *     (parked, never a plan item) until something new happens at the account (a buyer message, the deal's activity)
  *   - after DONE, nextAssignableItem never offers the item again on later days; after a progress note it still does

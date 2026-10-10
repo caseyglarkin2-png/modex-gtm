@@ -315,7 +315,8 @@ export interface MirrorDispositionInput {
   hubspotContactId: string | null;
   responseClass: string;
   confirmedAt: Date;
-  hypothesisId: string;
+  /** Null for a reply-triage disposition recorded without a thesis (an email command's DONE on a reply). */
+  hypothesisId: string | null;
   accountName: string;
   /**
    * One line built by the caller from class, channel and hypothesis title.
@@ -381,13 +382,13 @@ export function dispositionNoteBody(input: {
   responseClass: string;
   channel?: string;
   accountName: string;
-  hypothesisId: string;
+  hypothesisId: string | null;
   hypothesisTitle?: string;
   summary: string;
   confirmedAt: Date;
 }): string {
   const { key, responseClass, channel, accountName, hypothesisId, hypothesisTitle, summary, confirmedAt } = input;
-  const hypothesis = hypothesisTitle ? withholdPrivateIntent(hypothesisTitle) : hypothesisId;
+  const hypothesis = hypothesisTitle ? withholdPrivateIntent(hypothesisTitle) : (hypothesisId ?? 'none (recorded from a reply)');
   return [
     `<b>GAP · DISPOSITION ${escapeHtml(responseClass.toUpperCase())}</b> <i>(${escapeHtml(channel ?? 'unknown channel')}, ${confirmedAt.toISOString()})</i>`,
     `Account: ${escapeHtml(accountName)}`,

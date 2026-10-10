@@ -11,6 +11,7 @@ import { reconcileCopiesFromSent } from '@/lib/gap/execution/copies-reconcile';
 import { prisma } from '@/lib/prisma';
 import { sendViaGmail } from '@/lib/email/gmail-sender';
 import { applyCommand, loadCommandContext } from '@/lib/gap/replies/commands-apply';
+import { retryDispositionMirrors } from '@/lib/gap/disposition/mirror-retry';
 import { reviseRequest } from '@/lib/gap/agents/revise-message';
 import { approveRequest } from '@/lib/gap/agents/approve-request';
 import { agentTaskHandlers } from '@/lib/gap/agents/handlers';
@@ -110,6 +111,9 @@ export async function GET(request: Request) {
           },
         )),
       };
+      // The DONE unification: a reply DONE whose HubSpot mirror failed is retried here (at most three attempts each,
+      // bounded per tick; the mirror is idempotent by its key, so a retry never posts a second note).
+      report.mirrorRetries = await retryDispositionMirrors(prisma, { now }).catch((e) => ({ error: e instanceof Error ? e.message : String(e) }));
       // Ops closeout 13B: direct sends whose Gmail answer was lost, reconciled against Sent.
       // Still-unknown ones stay visible in the report; they are never read as not sent.
       report.unknownSends = await reconcileUnknownSends(prisma, { now }, { listSent: (rcpt, a, b) => listSentTo(sender, rcpt, a, b), mailbox: sender.userEmail });
