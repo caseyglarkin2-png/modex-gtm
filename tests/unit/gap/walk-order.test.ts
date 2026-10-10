@@ -143,3 +143,17 @@ describe('the briefing: the walk and the shortage, said plainly', () => {
     expect(newConversationLine([item(0, 'A', 'admin', { stateKind: 'replied' }), item(1, 'B', 'admin')])).toBe('New conversations today: 0 of 2 items are a first touch or a reply from a buyer; the rest is admin.');
   });
 });
+
+describe('a held item is not what the briefing begins with', () => {
+  it('walkBegins: the first walked item that is not held; walkSkips leaves a held item in the walk (START records the hold and walks past it)', async () => {
+    const { walkSkips, walkOrder, walkBegins, isHeld } = await import('@/lib/gap/work/walk');
+    const held = { kind: 'ready' as const, stateKind: 'ready' as const, title: 'Held: the prepared email names Shawn Miller, not Tom Kamantauskas', refs: {}, rank: 0, hold: { reason: 'recipient_mismatch' as const, recipient: 'Shawn Miller' } };
+    const ready = { kind: 'ready' as const, stateKind: 'ready' as const, title: 'Ready for a first touch: Karen Ortiz', refs: {}, rank: 1 };
+    expect(isHeld(held)).toBe(true);
+    expect(isHeld({ ...held, hold: undefined })).toBe(true);
+    expect(walkSkips(held)).toBe(false);
+    expect(walkOrder([held, ready]).map((i) => i.title)[0]).toMatch(/^Held:/);
+    expect(walkBegins([held, ready])?.title).toBe('Ready for a first touch: Karen Ortiz');
+    expect(walkBegins([held])).toBeNull();
+  });
+});
