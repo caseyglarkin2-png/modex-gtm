@@ -10,6 +10,9 @@
  *   - the mirror is the one used by Capture (hubspot-mirror.ts mirrorDisposition), idempotent by `gap:disp:<id>`: a note
  *     that landed before is reused, never posted twice; `written` or `skipped:already_mirrored` ends the row `mirrored`
  *   - a skip by policy (the mirror off, no contact) is recorded with its reason and counts as an attempt
+ *   - R5 review (finding 4): overlapping ticks never post twice: the mirror claims the key before posting
+ *     (hubspot-mirror.ts MIRROR_IN_FLIGHT); a pass that finds it claimed (`skipped:in_flight`) records no attempt and
+ *     counts nothing (the claiming pass's attempt is the attempt)
  * The ledger is append-only: a retry adds rows, it never edits the applied row. Nothing here sends or enrolls.
  * R5 review (finding 5b): the receipts are read from the applied rows AND from the DONE receipts written the moment the
  * disposition was recorded (commands-apply.ts DONE_RECEIPT), so a DONE whose later step threw still has its mirror retried.
@@ -99,6 +102,10 @@ export async function retryDispositionMirrors(
       status = r.status;
     } catch (err) {
       status = `error:${err instanceof Error ? err.message : String(err)}`;
+    }
+    if (status === 'skipped:in_flight') {
+      report.tried -= 1;
+      continue;
     }
     const receipt = mirrorReceiptOf(status);
     const attempt = mine.length + 1;

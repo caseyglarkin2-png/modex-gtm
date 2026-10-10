@@ -345,7 +345,9 @@ export type DispositionSkipReason =
   | 'gap_mirror_disabled'
   | 'hubspot_sync_disabled'
   | 'no_contact_id'
-  | 'already_mirrored';
+  | 'already_mirrored'
+  /** R5 review (finding 4): another pass holds the key's lease; nothing was posted by this one. */
+  | 'in_flight';
 
 export type DispositionMirrorStatus = 'written' | `skipped:${DispositionSkipReason}` | `error:${string}`;
 
@@ -365,6 +367,46 @@ const WITHHELD = '(withheld: private intent token)';
 /** The idempotency key and note marker for one disposition. */
 export function dispositionMirrorKey(dispositionId: string): string {
   return `gap:disp:${dispositionId}`;
+}
+
+/**
+ * R5 review (finding 4): the mirror LEASE. Two overlapping cron ticks over one failed row each read "failed, no note"
+ * and each posted a note. Before posting, a pass claims the key: the mirror row's `error` set to this in-flight marker
+ * and `written_at` to the claim time, by a conditional write (create for a new key, which the primary key makes
+ * exclusive; a conditional updateMany for a failed row, skipped while another claim is younger than
+ * MIRROR_LEASE_MS). The claim is released by the outcome row (error null on success, the reason on failure). A pass
+ * that finds the key claimed answers `skipped:in_flight` and posts nothing.
+ */
+export const MIRROR_IN_FLIGHT = 'in_flight: a HubSpot mirror attempt is in progress';
+export const MIRROR_LEASE_MS = 10 * 60_000;
+
+async function claimMirrorKey(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- house prisma glue convention (see audit.ts)
+  prisma: any,
+  key: string,
+  contactId: string,
+  existing: { error?: string | null; note_id?: string | null } | null,
+  at: Date,
+): Promise<boolean> {
+  const t = prisma.gapHubSpotMirror;
+  if (!existing) {
+    // A new key: the primary key makes the first create the only claim (another pass's create is P2002).
+    if (typeof t?.create !== 'function') return true;
+    try {
+      await t.create({ data: { key, object_type: 'contact', object_id: contactId, note_id: null, written_at: at, error: MIRROR_IN_FLIGHT } });
+      return true;
+    } catch (err) {
+      if ((err as { code?: string })?.code === 'P2002') return false;
+      throw err;
+    }
+  }
+  if (typeof t?.updateMany !== 'function') return true;
+  const stale = new Date(at.getTime() - MIRROR_LEASE_MS);
+  const claimed: { count: number } = await t.updateMany({
+    where: { key, AND: [{ error: { not: null } }, { OR: [{ error: { not: MIRROR_IN_FLIGHT } }, { written_at: { lt: stale } }] }] },
+    data: { error: MIRROR_IN_FLIGHT, written_at: at },
+  });
+  return claimed.count === 1;
 }
 
 /** Text that trips the copy-safe private-intent floor is withheld from the note. */
@@ -431,6 +473,12 @@ export async function mirrorDisposition(
   }
   if (existing && existing.error === null) {
     return { status: 'skipped:already_mirrored', mirrorId: key, noteId: existing.note_id ?? null };
+  }
+  // R5 review (finding 4): the key is claimed before anything is posted; another pass's live claim posts nothing here.
+  try {
+    if (!(await claimMirrorKey(prisma, key, contactId, existing, now()))) return { status: 'skipped:in_flight', mirrorId: key, noteId: existing?.note_id ?? null };
+  } catch (err) {
+    return { status: `error:${errorMessage(err)}` };
   }
 
   // A prior failed attempt may have landed the note before the property stamp

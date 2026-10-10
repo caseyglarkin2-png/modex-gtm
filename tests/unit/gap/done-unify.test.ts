@@ -29,7 +29,7 @@ import { applyCommand, COMMAND_APPLIED, COMMAND_REFUSED, DONE_RECEIPT, loadComma
 import { classWords, doneReplyClass, mirrorReceiptOf, recordReplyDone, type ReplyDoneDeps } from '@/lib/gap/replies/done-reply';
 import { DISPOSITION_SOURCE_KINDS, INTERNAL_DISPOSITION_SOURCE_KINDS, recordDisposition } from '@/lib/gap/disposition/service';
 import { MIRROR_RETRY, MIRROR_RETRY_MAX, retryDispositionMirrors } from '@/lib/gap/disposition/mirror-retry';
-import { mirrorDisposition } from '@/lib/gap/hubspot-mirror';
+import { MIRROR_IN_FLIGHT, mirrorDisposition } from '@/lib/gap/hubspot-mirror';
 import { audit } from '@/lib/gap/audit';
 import { projectActivity, type LedgerRow } from '@/lib/gap/work/activity';
 import { COMMITMENT_EVENT } from '@/lib/gap/work/commitment-model';
@@ -267,6 +267,41 @@ describe('a failed mirror stays visible and is retried, never claimed', () => {
     // Mirrored is final: the next pass tries nothing.
     expect(await retryDispositionMirrors(w.c, { now: later }, { mirror: (p, i) => mirrorDisposition(p, i, w.mirrorDeps) })).toEqual({ tried: 0, mirrored: 0, failed: 0, exhausted: [] });
     expect(w.notes).toHaveLength(1);
+  });
+
+  it('R5 review (finding 4): two overlapping cron passes over one failed row post ONE note: the key is claimed before posting, released after', async () => {
+    const w = await world({ noteFails: 1 });
+    await w.apply(msg(w.thread('reply:m-craig'), 'DONE: answered Craig from Gmail the same day'));
+    expect(w.notes).toHaveLength(0);
+    // HubSpot answers slowly, so both passes are in flight at once.
+    const slow = { ...w.mirrorDeps, createContactNote: vi.fn(async (id: string, body: string) => {
+      await new Promise((r) => setTimeout(r, 25));
+      return w.mirrorDeps.createContactNote(id, body);
+    }) };
+    const pass = () => retryDispositionMirrors(w.c, { now: NOW }, { mirror: (p, i) => mirrorDisposition(p, i, slow) });
+    const [a, b] = await Promise.all([pass(), pass()]);
+    expect(slow.createContactNote, 'one post').toHaveBeenCalledTimes(1);
+    expect(w.notes, 'one CRM note').toHaveLength(1);
+    expect(a.mirrored + b.mirrored).toBe(1);
+    expect(a.failed + b.failed, 'the pass that found the key claimed is not a failed attempt').toBe(0);
+    expect(w.kinds(MIRROR_RETRY).map((e) => e.payload.receipt), 'one attempt recorded').toEqual(['mirrored']);
+    expect(w.db.store.gapHubSpotMirror).toHaveLength(1);
+    expect(w.db.store.gapHubSpotMirror[0]).toMatchObject({ error: null, note_id: 'note-1' });
+  });
+
+  it('R5 review (finding 4): a claim younger than ten minutes is honored (nothing posted, no attempt counted); an older one (a pass that died) is reclaimed', async () => {
+    const w = await world({ noteFails: 1 });
+    await w.apply(msg(w.thread('reply:m-craig'), 'DONE: answered Craig from Gmail the same day'));
+    const row = w.db.store.gapHubSpotMirror[0];
+    Object.assign(row, { error: MIRROR_IN_FLIGHT, written_at: new Date(NOW.getTime() - 60_000) });
+    const run = () => retryDispositionMirrors(w.c, { now: NOW }, { mirror: (p, i) => mirrorDisposition(p, i, w.mirrorDeps) });
+    expect(await run()).toEqual({ tried: 0, mirrored: 0, failed: 0, exhausted: [] });
+    expect(w.notes).toHaveLength(0);
+    expect(w.kinds(MIRROR_RETRY)).toEqual([]);
+    Object.assign(row, { written_at: new Date(NOW.getTime() - 11 * 60_000) });
+    expect(await run()).toEqual({ tried: 1, mirrored: 1, failed: 0, exhausted: [] });
+    expect(w.notes).toHaveLength(1);
+    expect(row).toMatchObject({ error: null, note_id: 'note-1' });
   });
 
   it('a mirror that keeps failing is tried at most three times, each attempt recorded with its reason, then stays recorded_not_mirrored', async () => {

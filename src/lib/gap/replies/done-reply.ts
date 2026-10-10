@@ -72,6 +72,8 @@ const SKIP_WORDS: Record<string, string> = {
 export function mirrorReceiptOf(status: string | null | undefined): MirrorReceipt {
   const s = String(status ?? '').trim();
   if (s === 'written' || s === 'skipped:already_mirrored') return { receipt: 'mirrored' };
+  // R5 review (finding 4): another pass held the mirror's lease: its outcome is not known here, so it is read again.
+  if (s === 'skipped:in_flight') return { receipt: 'recorded_not_mirrored', reason: 'another HubSpot mirror attempt was in progress', retryable: true };
   if (s.startsWith('skipped:')) return { receipt: 'recorded_not_mirrored', reason: SKIP_WORDS[s] ?? s.slice('skipped:'.length).replace(/_/g, ' '), retryable: false };
   const reason = (s.startsWith('error:') ? s.slice('error:'.length) : s).trim() || 'unknown error';
   return { receipt: 'recorded_not_mirrored', reason: reason.slice(0, 300), retryable: true };
