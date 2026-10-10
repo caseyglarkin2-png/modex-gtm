@@ -83,8 +83,8 @@ describe('X06: buildAssignment', () => {
     // GUI-02 (2026-10-10): "What we know" became the packet's Evidence section; the "They said" date is said in words.
     expect(t).toContain('Evidence:');
     expect(t).toContain('- PepsiCo is expanding its Tulsa distribution center by 180,000 square feet (announced Jul 23). (Tulsa World, Jul 23)');
-    expect(t).toContain('Why they care: More doors with the same gate team means longer waits at the gate.');
-    expect(t).toContain('They said: "We lose trailers on the lot every week." (Karen Ortiz, Sep 30, 2026)');
+    expect(t).toContain('Why they care (our read): More doors with the same gate team means longer waits at the gate.');
+    expect(t).toContain('Karen Ortiz said: "We lose trailers on the lot every week." (Sep 30, 2026)');
     expect(t).toContain('The move: Send the first touch to Karen Ortiz.');
     // GUI-07: "Ready to send" names the actual recipient and the sender (none configured in the test).
     expect(t).toContain('Ready to send, to karen@pepsico.com, from the GAP mailbox (not configured yet), subject "Tulsa: the new doors":');
@@ -119,17 +119,19 @@ describe('X06: buildAssignment', () => {
     deps.askContext.mockResolvedValue({ ...ASK, coverageLine: 'Gmail Sent (no GAP sender configured), the vault (not configured)' });
     const a = await buildAssignment(db.client(), { plan: PLAN, item: ITEMS[0], revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, deps);
     const t = a.text.split('\n');
-    const at = t.indexOf('Not read this time: Gmail Sent (no GAP sender configured), the vault (not configured)');
+    // 2026-10-10: the coverage line is bookkeeping and rides in the last section, after the controls (Casey: evidence and contacts before bookkeeping).
+    const at = t.indexOf('- Not read this time: Gmail Sent (no GAP sender configured), the vault (not configured)');
     expect(at, 'the coverage line is printed').toBeGreaterThan(0);
     expect(at, 'after the evidence').toBeGreaterThan(t.indexOf('Evidence:'));
-    expect(at, 'before the move').toBeLessThan(t.indexOf('The move: Send the first touch to Karen Ortiz.'));
+    expect(at, 'after the move').toBeGreaterThan(t.indexOf('The move: Send the first touch to Karen Ortiz.'));
+    expect(at, 'under the read-for-this-packet section').toBeGreaterThan(t.indexOf('Read for this packet:'));
     deps.askContext.mockResolvedValue({ ...ASK, coverageLine: null });
     const b = await buildAssignment(db.client(), { plan: PLAN, item: ITEMS[0], revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, deps);
     expect(b.text).not.toContain('Not read this time');
     // B8: the context's own line (coverageLineOf) already carries its prefixes; it is printed verbatim, never prefixed twice.
     deps.askContext.mockResolvedValue({ ...ASK, coverageLine: 'Not read this time: Gmail Sent (not read on the account page), the vault (not configured). Partly read: HubSpot (deals only)' });
     const c = await buildAssignment(db.client(), { plan: PLAN, item: ITEMS[0], revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, deps);
-    expect(c.text.split('\n')).toContain('Not read this time: Gmail Sent (not read on the account page), the vault (not configured). Partly read: HubSpot (deals only)');
+    expect(c.text.split('\n')).toContain('- Not read this time: Gmail Sent (not read on the account page), the vault (not configured). Partly read: HubSpot (deals only)');
     expect(c.text).not.toContain('Not read this time: Not read this time');
     deps.askContext.mockResolvedValue({ ...ASK, coverageLine: 'Partly read: HubSpot (deals only)' });
     const d = await buildAssignment(db.client(), { plan: PLAN, item: ITEMS[0], revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, deps);
@@ -143,9 +145,9 @@ describe('X06: buildAssignment', () => {
     const pursued = vi.fn(async () => [{ key: 'person:dave.kiesling@kencogroup.com', taskId: 't-1', writer: { email: 'dave.kiesling@kencogroup.com', name: 'Dave Kiesling' }, kind: 'person' as const, title: 'Dave Kiesling at Kenco', accountName: 'Kenco', accountHint: null, url: null, decision: 'pursue', decidedAt: '2026-10-08T12:00:00.000Z', status: 'ready' as const, error: null, angle: { whyItMatters: 'Kenco runs 40 yards with paper gate logs; the Chattanooga pilot is where the scope lands.', starters: ['Dave, is Chattanooga still the yard you would pilot first?'], roles: ['VP Operations'], accounts: ['Kenco'], peopleNamed: [{ personaId: 7, name: 'Dave Kiesling', title: 'VP Operations' }], proposedAction: 'email', caveat: null, sourceLine: 'his reply, Sep 16' } }]);
     deps.askContext.mockResolvedValue({ ...ASK, accountName: 'Kenco', state: { ...ASK.state, state: 'in_deal', stateLine: 'In a deal.', next: 'Send Dave the pilot scope.' }, story: [], opening: null, buyerSaid: [] });
     const a = await buildAssignment(db.client(), { plan: { ...PLAN, items: [ITEMS[0], kenco] }, item: kenco, revision: 0, baseUrl: 'https://app.example', actionSecret: null, commandsEnabled: false, now: NOW }, { ...deps, pursued });
-    expect(a.prepared).toEqual({ kind: 'angle', who: 'Dave Kiesling', whyItMatters: 'Kenco runs 40 yards with paper gate logs; the Chattanooga pilot is where the scope lands.', opener: 'Dave, is Chattanooga still the yard you would pilot first?' });
+    expect(a.prepared).toMatchObject({ kind: 'angle', who: 'Dave Kiesling', whyItMatters: 'Kenco runs 40 yards with paper gate logs; the Chattanooga pilot is where the scope lands.', opener: 'Dave, is Chattanooga still the yard you would pilot first?' });
     const t = a.text.split('\n');
-    const angleAt = t.findIndex((l) => l === 'GAP has prepared an angle for Dave Kiesling: Kenco runs 40 yards with paper gate logs; the Chattanooga pilot is where the scope lands.');
+    const angleAt = t.findIndex((l) => l.startsWith('GAP has prepared an angle for Dave Kiesling') && l.endsWith(': Kenco runs 40 yards with paper gate logs; the Chattanooga pilot is where the scope lands.'));
     expect(angleAt, 'the angle block is printed').toBeGreaterThan(0);
     expect(t[angleAt + 1]).toBe('Opener: Dave, is Chattanooga still the yard you would pilot first?');
     // GUI-02 (2026-10-10): the angle is Prepared material, which the packet prints AFTER "Possible next move" (the move leads).
@@ -294,8 +296,8 @@ describe('B9: the assignment reads the pursued angles with the deal coverage, an
     expect(opts.coverage.byName.get('kenco logistics')?.accountName ?? opts.coverage.byName.get('Kenco Logistics')?.accountName, 'the alias is covered').toBe('Kenco');
     expect(opts.coverage).toEqual(dealCoverageFrom(summary as Parameters<typeof dealCoverageFrom>[0]));
     // The writer has no name: the first person the angle names is said, not the address.
-    expect(a.prepared).toEqual({ kind: 'angle', who: 'Dave Kiesling', whyItMatters: 'Kenco runs 40 yards with paper gate logs.', opener: 'Dave, is Chattanooga first?' });
-    expect(a.text).toContain('GAP has prepared an angle for Dave Kiesling: Kenco runs 40 yards with paper gate logs.');
+    expect(a.prepared).toMatchObject({ kind: 'angle', who: 'Dave Kiesling', whyItMatters: 'Kenco runs 40 yards with paper gate logs.', opener: 'Dave, is Chattanooga first?' });
+    expect(a.text).toMatch(/GAP has prepared an angle for Dave Kiesling( \(prepared [A-Z][a-z]{2} \d{1,2}, \d{4}\))?: Kenco runs 40 yards with paper gate logs\./);
     expect(a.text).not.toContain('angle for dave.kiesling@kencogroup.com');
   });
 

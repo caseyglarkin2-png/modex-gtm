@@ -89,6 +89,8 @@ export interface RelationshipInputs {
   people?: Array<{ name: string | null; email: string | null }>;
   /** Our emails to OTHER people at the account (HubSpot's logged emails, our Sent), so a referral can be followed to the person they named. */
   othersWritten?: Array<{ at: string; to: string; toName: string | null; subject: string | null; source: string }>;
+  /** Other people at the account who wrote us (HubSpot's logged emails), with their addresses, so a name in the correspondence resolves. */
+  othersWrote?: Array<{ at: string; from: string; fromName: string | null; subject: string | null; source: string }>;
 }
 
 /** 'redirected': they pointed to someone else after asking (Phil Savastano, Jun 3: "reach out to Brian Kellog"); the request follows that person. */
@@ -103,25 +105,37 @@ export interface Referral {
   writtenAfter: { at: string; subject: string | null; source: string } | null;
 }
 
-/** A message of theirs that points to someone else ("reach out to Brian Kellog", "loop in Dave", "Jane owns this"). */
-const REFERRAL = /\b(?:reach out to|reach out directly to|contact|talk to|talk with|speak to|speak with|loop in|connect with|work with|check with|coordinate with|go through|try|ask|ping|email|cc|copy)\s+(?:my colleague\s+|our\s+)?([A-Z][a-z]+(?:\s+(?:[A-Z]\.?\s+)?[A-Z][a-zA-Z'-]+)?)\b/;
+/**
+ * A message of theirs that points US to someone else ("feel free to reach out to Brian Kellog", "please loop in Dave",
+ * "you can contact Jane"): a second-person frame before the verb, never their own next step ("let me check with Dave",
+ * "I will ask Legal"), which stays theirs. The review of October 10 found both read as referrals.
+ */
+const REFERRAL = /(?:^|[.;!?]\s*|\b(?:please|feel free to|you (?:can|could|should|may|might want to)|best to|better to|and)\s+)(?:reach out to|reach out directly to|contact|talk to|talk with|speak to|speak with|loop in|connect with|work with|check with|coordinate with|go through|try|ask|ping|email|cc|copy)\s+(?:my colleague\s+|our\s+)?([A-Z][a-z]+(?:\s+(?:[A-Z]\.?\s+)?[A-Z][a-zA-Z'-]+)?)\b/;
+const FIRST_PERSON_BEFORE = /\b(?:I|I'll|I will|I'd|I can|let me|we'll|we will|we can|we'd|I'm going to|we're going to)\s+(?:also\s+|just\s+)?$/i;
+/** The seller's own names: never a referral. */
+export const OWN_NAME_KEYS: ReadonlySet<string> = new Set(['casey', 'larkin', 'casey larkin']);
 
 /** The referral's name against the account's people: the whole name, or a first name that only one person carries. */
+/** The words a person is known by: their name, else the words of their address ("brian.kellogg@x.com" is "brian kellogg"). */
+export const personWords = (p: { name: string | null; email: string | null }): string[] => (p.name ? lower(p.name).replace(/,/g, ' ') : lower(p.email).split('@')[0].replace(/\d+/g, ' ').replace(/[._-]+/g, ' ')).split(/\s+/).filter(Boolean);
+/** A display name for a person known only by address ("brian.kellogg" -> "Brian Kellogg"). */
+export const nameFromAddress = (email: string): string => personWords({ name: null, email }).map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+
 export function resolveReferralName(name: string, people: ReadonlyArray<{ name: string | null; email: string | null }>): { name: string; email: string | null } {
   const want = nameKeyOf(name);
-  const whole = people.find((p) => p.name && nameKeyOf(p.name) === want);
-  if (whole) return { name: whole.name as string, email: lower(whole.email) || null };
+  const whole = people.find((p) => personWords(p).slice().sort().join(' ') === want);
+  if (whole) return { name: whole.name ?? nameFromAddress(whole.email as string), email: lower(whole.email) || null };
   const parts = name.trim().split(/\s+/);
   const first = lower(parts[0]);
   const last = parts.length > 1 ? lower(parts[parts.length - 1]) : null;
-  // "Brian Kellog" against "Brian Kellogg": the first name and the first four letters of the last name.
+  // "Brian Kellog" against "Brian Kellogg" (a name, or an address's words): the first name and the first four letters of the last name.
   const near = people.filter((p) => {
-    const ps = lower(p.name).replace(/,/g, ' ').split(/\s+/).filter(Boolean);
+    const ps = personWords(p);
     if (!ps.includes(first)) return false;
     if (!last) return true;
     return ps.some((x) => x !== first && x.slice(0, 4) === last.slice(0, 4));
   });
-  if (near.length === 1) return { name: near[0].name as string, email: lower(near[0].email) || null };
+  if (near.length === 1) return { name: near[0].name ?? nameFromAddress(near[0].email as string), email: lower(near[0].email) || null };
   return { name: name.trim(), email: null };
 }
 
@@ -147,6 +161,8 @@ export interface RelationshipState {
   /** Whether what we sent was read (our Sent, or HubSpot's logged emails), and on what basis; an absence of ours is only evidence when this is true. */
   outboundRead: { read: boolean; basis: string };
   reads: RelationshipReads;
+  /** The other people at the account the correspondence names, with their addresses (we wrote them, or they wrote us), newest first. */
+  correspondents: Array<{ name: string | null; email: string; lastAt: string }>;
   meetings: Array<{ at: string; title: string | null; kind: 'meeting' | 'call'; outcome: string | null; source: string }>;
   nextMeetingAt: string | null;
   deals: Array<{ id: string | null; name: string; stage: string | null; nextStep: string | null; closeDate: string | null; lastActivityAt: string | null; url: string | null }>;
@@ -243,16 +259,33 @@ export function relationshipStateFrom(i: RelationshipInputs): RelationshipState 
       ? { read: true, basis: `our Sent was not read (${sentDetail}); HubSpot's logged emails at ${i.accountName} were read (${i.reads.engagements.count} engagements), which is our outbound record here` }
       : { read: false, basis: `our Sent was not read (${sentDetail}) and HubSpot engagements at ${i.accountName} were not read (${i.reads.engagements.detail ?? 'not configured'}), so what we sent is not known` };
 
-  // A referral in their words: the newest message of theirs that points to someone else, resolved to the account's people.
+  // The other people the correspondence names, with their addresses, newest first (one entry per address).
+  const corr = new Map<string, { name: string | null; email: string; lastAt: string }>();
+  for (const w of [...(i.othersWritten ?? []).map((w) => ({ email: lower(w.to), name: w.toName, at: w.at })), ...(i.othersWrote ?? []).map((w) => ({ email: lower(w.from), name: w.fromName, at: w.at }))]) {
+    if (!w.email.includes('@')) continue;
+    const prev = corr.get(w.email);
+    if (!prev || prev.lastAt < w.at) corr.set(w.email, { name: w.name ?? prev?.name ?? null, email: w.email, lastAt: w.at });
+    else if (!prev.name && w.name) prev.name = w.name;
+  }
+  const correspondents = [...corr.values()].sort((a, b) => b.lastAt.localeCompare(a.lastAt));
+  const knownPeople = [...(i.people ?? []), ...correspondents.map((c) => ({ name: c.name, email: c.email }))];
+
+  // A referral in their words: the newest message of theirs that points us to someone else, resolved to the account's people.
   let referral: Referral | null = null;
   for (const e of inbound.slice().reverse()) {
     if (!e.purpose || !ANSWERABLE.has(e.purpose)) continue;
-    const m = REFERRAL.exec(ownWordsOf(e));
+    const words = ownWordsOf(e);
+    const m = REFERRAL.exec(words);
     if (!m) continue;
-    const who = resolveReferralName(m[1], i.people ?? []);
+    // Their own next step ("let me check with Dave") is theirs, not a referral to us.
+    if (FIRST_PERSON_BEFORE.test(words.slice(0, (m.index ?? 0) + m[0].length - m[1].length))) continue;
+    const who = resolveReferralName(m[1], knownPeople);
+    // A lone first name that no known person carries is not a referral ("ask Legal", "try Monday").
+    if (!who.email && !m[1].trim().includes(' ')) continue;
     // Their own name, or ours, is not a referral.
     if (i.person.name && nameKeyOf(who.name) === nameKeyOf(i.person.name)) continue;
-    if (/^(casey|larkin)$/i.test(who.name)) continue;
+    if (who.email && email && who.email === email) continue;
+    if (OWN_NAME_KEYS.has(nameKeyOf(who.name)) || (who.email && /@(yardflow\.ai|freightroll\.com)$/i.test(who.email))) continue;
     const written = (i.othersWritten ?? []).filter((w) => w.at > e.at && ((who.email && lower(w.to) === who.email) || (w.toName && nameKeyOf(w.toName) === nameKeyOf(who.name)))).sort((a, b) => a.at.localeCompare(b.at))[0] ?? null;
     referral = { at: e.at, subject: e.subject, name: who.name, email: who.email, writtenAfter: written ? { at: written.at, subject: written.subject, source: written.source } : null };
     break;
@@ -283,9 +316,13 @@ export function relationshipStateFrom(i: RelationshipInputs): RelationshipState 
     } else if (after.length) {
       state = 'unknown';
       basis = `we wrote ${dateWords(after[after.length - 1].at)}${after[after.length - 1].subject ? ` under "${after[after.length - 1].subject}"` : ''} after it, not in the request's thread; whether that met the request is your call`;
-    } else if (draftAfter) {
+    } else if (draftAfter && sentRead) {
       state = 'unfulfilled';
       basis = `a draft exists, unsent (${dateWords(draftAfter.at)}${draftAfter.subject ? `, "${draftAfter.subject}"` : ''}); nothing went to them after their message of ${dateWords(asking.at)}`;
+    } else if (draftAfter) {
+      // The review of October 10: a draft is not evidence that nothing was sent when Sent itself was not read.
+      state = 'unknown';
+      basis = `a draft exists, unsent (${dateWords(draftAfter.at)}${draftAfter.subject ? `, "${draftAfter.subject}"` : ''}); whether anything went to them after their message of ${dateWords(asking.at)} is not known: our Sent was not read (${sentDetail})`;
     } else if (sentRead) {
       state = 'unfulfilled';
       basis = `nothing from us after their message of ${dateWords(asking.at)}: our Sent was read (${i.reads.sent.count} message${i.reads.sent.count === 1 ? '' : 's'} to them)${i.reads.engagements.read ? ', HubSpot engagements read' : ''}`;
@@ -356,6 +393,7 @@ export function relationshipStateFrom(i: RelationshipInputs): RelationshipState 
     referral,
     outboundRead,
     reads: i.reads,
+    correspondents,
     meetings: uniqueMeetings,
     nextMeetingAt: st?.nextMeetingAt ?? null,
     deals,
@@ -402,7 +440,20 @@ export interface RelationshipDeps {
   commitments?: (accountName: string) => Promise<RelationshipInputs['commitments']>;
   /** The vault's held calls and meetings naming the person; absent means work/intel.ts conversationEvents. */
   conversations?: (email: string, now: Date) => Promise<StateEvent[]>;
+  /** The HubSpot company for an account with none on its record (the opportunity identity the story uses); absent means opportunity/active-opportunity.ts. */
+  companyFor?: (accountName: string) => Promise<string | null>;
   env?: Record<string, string | undefined>;
+}
+
+/** The HubSpot company the deals resolve for the account (the story's rule, B2 in account-intel/load.ts), soft. */
+async function defaultCompanyFor(prisma: PrismaLike, accountName: string): Promise<string | null> {
+  try {
+    const { resolveAccountOpportunity } = await import('../opportunity/active-opportunity');
+    const o = await resolveAccountOpportunity(prisma, accountName);
+    return 'companyIds' in o ? o.companyIds[0] ?? null : null;
+  } catch {
+    return null;
+  }
 }
 
 function defaultThreadDeps(env: Record<string, string | undefined>): ThreadContextDeps | null {
@@ -477,14 +528,22 @@ export async function relationshipStateFor(prisma: PrismaLike, q: RelationshipQu
     : [];
   const nameOf = (address: string | null | undefined): string | null => (address ? people.find((p) => lower(p.email) === lower(address))?.name ?? null : null);
   const othersWritten: NonNullable<RelationshipInputs['othersWritten']> = [];
+  const othersWrote: NonNullable<RelationshipInputs['othersWrote']> = [];
   // HubSpot engagements: the company's logged emails to or from the person are events; notes, calls and meetings ride
-  // apart; our logged emails to OTHER people at the company are kept so a referral can be followed.
+  // apart; the logged emails to and from OTHER people at the company are kept so a referral can be followed and a
+  // name in the correspondence resolves to an address. The company: the account's own, else the one the deals resolve
+  // (the story's rule; Kenco's record carries none while its deal does).
   const engagements: RelationshipInputs['engagements'] = [];
-  const companyId = account?.hubspot_company_id ?? null;
+  let companyId = account?.hubspot_company_id ?? null;
+  let companyVia = 'the account record';
+  if (!companyId) {
+    companyId = await (deps.companyFor ? deps.companyFor(q.accountName) : defaultCompanyFor(prisma, q.accountName)).catch(() => null);
+    if (companyId) companyVia = 'the deals';
+  }
   if (companyId) {
     try {
       const r = await (deps.engagements ? deps.engagements(companyId, q.now) : loadCompanyEngagements(companyId, { token: env.HUBSPOT_ACCESS_TOKEN, prisma, now: q.now }));
-      reads.engagements = { read: r.read, count: r.items.length, detail: r.detail };
+      reads.engagements = { read: r.read, count: r.items.length, detail: r.detail ?? (companyVia === 'the deals' ? 'the company resolved from the deals' : null) };
       const known = new Set(events.flatMap((e) => [e.id, ...(e.providerIds ?? [])]));
       for (const g of r.items) {
         if (g.kind === 'email') {
@@ -492,6 +551,7 @@ export async function relationshipStateFor(prisma: PrismaLike, q: RelationshipQu
           const outgoing = !!email && g.direction !== 'incoming' && lower(g.to) === email;
           if (!incoming && !outgoing) {
             if (g.direction !== 'incoming' && g.to && lower(g.to) !== email) othersWritten.push({ at: g.at, to: lower(g.to), toName: nameOf(g.to), subject: g.title, source: 'HubSpot (logged email)' });
+            else if (g.direction === 'incoming' && g.from && lower(g.from) !== email && !/@(yardflow\.ai|freightroll\.com)$/i.test(g.from)) othersWrote.push({ at: g.at, from: lower(g.from), fromName: nameOf(g.from), subject: g.title, source: 'HubSpot (logged email)' });
             continue;
           }
           if (known.has(`hs:${g.id}`) || known.has(`hubspot:${g.id}`)) continue;
@@ -501,7 +561,7 @@ export async function relationshipStateFor(prisma: PrismaLike, q: RelationshipQu
     } catch (e) {
       reads.engagements = { read: false, count: 0, detail: e instanceof Error ? e.message : String(e) };
     }
-  } else reads.engagements = { read: false, count: 0, detail: 'no HubSpot company on the account record' };
+  } else reads.engagements = { read: false, count: 0, detail: 'no HubSpot company on the account record and none resolved from the deals' };
 
   if (email) {
     try {
@@ -545,5 +605,6 @@ export async function relationshipStateFor(prisma: PrismaLike, q: RelationshipQu
     hubspotCompanyId: companyId,
     people,
     othersWritten,
+    othersWrote,
   });
 }

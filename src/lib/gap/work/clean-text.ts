@@ -8,7 +8,12 @@
 
 /** "[[RETIREMENT-HANDOFF]]" -> "RETIREMENT-HANDOFF"; "[[Kenco|the account]]" -> "the account". */
 export function scrubWiki(s: string): string {
-  return s.replace(/\[\[([^\]|]+)\|([^\]]+)\]\]/g, '$2').replace(/\[\[([^\]]+)\]\]/g, '$1');
+  return s
+    .replace(/\[\[([^\]|]+)\|([^\]]+)\]\]/g, '$2')
+    .replace(/\[\[([^\]]+)\]\]/g, '$1')
+    // A link cut by an earlier clip ("first stop per [[RE, due yesterday"): the dangling "per [[..." clause goes, the rest stays.
+    .replace(/,?\s*(?:first stop\s+)?per\s+\[\[[^\],]*(?=,|$)/, '')
+    .replace(/\[\[([^\]|]*)$/, '$1');
 }
 
 /** A URL left cut by an earlier clip ("https://gusto.com/some/pa...") is dropped from the words, never shown half. */

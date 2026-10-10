@@ -38,6 +38,7 @@ import { buildAssignmentPacket, renderPacketHtml, renderPacketText, type Assignm
 import { dealCoverageFrom } from './deal-coverage';
 import { loadPursued, type PursuedItem } from './intel';
 import { heldTitle, type DayPlan, type PlanItem } from './plan';
+import { properCase } from '../people/contact-packet';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -55,8 +56,8 @@ export interface PreparedEmail {
 /** A prepared ANGLE (a develop_angle task that succeeded for a person at this account): not copy, a grounded opening the seller works from. */
 export interface PreparedAngle {
   kind: 'angle';
-  /** The writer the angle was developed for (name, else email). */
-  who: string;
+  /** The writer the angle was developed for (name, else email); null when the angle names nobody (a signal's angle: the review found a headline shown as a person). */
+  who: string | null;
   /** The writer's address when the pursued item carries one. */
   email?: string | null;
   whyItMatters: string;
@@ -169,7 +170,7 @@ export async function buildAssignment(prisma: PrismaLike, input: BuildAssignment
     const p = pursued.find((x) => x.accountName === item.accountName && x.status === 'ready' && x.angle);
     if (p?.angle) {
       // The writer's name, else the first person the angle names, before a bare address.
-      const who = p.writer?.name ?? p.angle.peopleNamed[0]?.name ?? p.writer?.email ?? p.title;
+      const who = p.writer?.name ?? p.angle.peopleNamed[0]?.name ?? p.writer?.email ?? null;
       const opener = p.angle.starters[0] ?? null;
       prepared = { kind: 'angle', who, email: p.writer?.email ?? null, whyItMatters: p.angle.whyItMatters, opener, preparedAt: p.decidedAt ?? null };
     }
@@ -191,9 +192,10 @@ export async function buildAssignment(prisma: PrismaLike, input: BuildAssignment
     const recipientName = pack?.persona?.name ?? (to && typeof prisma?.persona?.findFirst === 'function' ? ((await prisma.persona.findFirst({ where: { email: { equals: to, mode: 'insensitive' } }, select: { name: true } }).catch(() => null)) as { name: string | null } | null)?.name ?? null : null);
     const itemName = item.person?.name ?? null;
     if (itemName && recipientName && nameKey(itemName) && nameKey(recipientName) && nameKey(itemName) !== nameKey(recipientName)) {
-      hold = { reason: 'recipient_mismatch', detail: `GAP's prepared email is addressed to ${recipientName}${to ? ` (${to})` : ''}, but this item names ${itemName}. Held: nothing goes out until the account's chosen person and the draft agree; choose on the account.` };
+      const shown = properCase(recipientName) ?? recipientName;
+      hold = { reason: 'recipient_mismatch', detail: `GAP's prepared email is addressed to ${shown}${to ? ` (${to})` : ''}, but this item names ${itemName}. Held: nothing goes out until the account's chosen person and the draft agree; choose on the account.` };
       // The subject says the same held state the plan, the digest and the packet say (never "Ready for a first touch").
-      subject = `GAP ${n} of ${plan.items.length}, ${item.accountName}: ${heldTitle(recipientName, itemName)} ${assignmentTag(item.token, input.revision)}`;
+      subject = `GAP ${n} of ${plan.items.length}, ${item.accountName}: ${heldTitle(shown, itemName)} ${assignmentTag(item.token, input.revision)}`;
     } else {
       prepared = { kind: 'email', to, subject: copy.subject, body: copy.body };
     }

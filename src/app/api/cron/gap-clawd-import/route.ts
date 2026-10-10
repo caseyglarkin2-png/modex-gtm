@@ -8,7 +8,8 @@ import { prisma } from '@/lib/prisma';
 export const dynamic = 'force-dynamic';
 export const maxDuration = 300;
 /** Each row costs a few database round trips (the account resolver, the identity check, the write): one page of a hundred per run keeps a run well inside the function's time; the next run continues from the cursor. */
-const PAGES_PER_RUN = 1;
+/** 2026-10-10: the export holds more than 8,000 rows behind the cursor; one page of 100 ran in 53 s, so three pages fit the function's 300 s with room (one page of 200 three times did not, on October 9). */
+const PAGES_PER_RUN = 3;
 const PAGE_LIMIT = 100;
 
 const CRON_NAME = 'gap-clawd-import';

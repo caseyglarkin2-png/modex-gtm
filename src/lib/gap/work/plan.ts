@@ -34,6 +34,7 @@
 import { randomBytes } from 'node:crypto';
 import { PARKED_TIERS, type WorkCard, type WorkDay, type WorkObligation, type WorkStateKind, type WorkTier } from './list';
 import { nyDay } from './dates';
+import { properCase } from '../people/contact-packet';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -122,7 +123,7 @@ export async function applyRecipientHolds(prisma: PrismaLike, items: PlanItem[],
     if (it.kind !== 'ready' || !it.refs.decisionId || !it.person?.name) { out.push(it); continue; }
     let persona: { name: string | null; email: string | null } | null = null;
     try { persona = await read(it.refs.decisionId); } catch { persona = null; }
-    const recipient = persona?.name ?? null;
+    const recipient = properCase(persona?.name) ?? null;
     if (recipient && nameKeyOf(recipient) && nameKeyOf(it.person.name) && nameKeyOf(recipient) !== nameKeyOf(it.person.name)) {
       out.push({ ...it, title: heldTitle(recipient, it.person.name), hold: { reason: 'recipient_mismatch', recipient } });
     } else out.push(it);
