@@ -334,7 +334,7 @@ export function relationshipStateFrom(i: RelationshipInputs): RelationshipState 
       state = 'unknown';
       basis = `nothing from us after their message of ${dateWords(asking.at)} in what was read${i.reads.engagements.read ? ` (HubSpot's logged emails at ${i.accountName} were read)` : ''}, but our Sent was not read (${sentDetail}), so this is not known`;
     }
-    request = { at: asking.at, subject: asking.subject, excerpt: asking.excerpt ? asking.excerpt.replace(/\s+/g, ' ').trim().slice(0, 240) : null, state, basis, fulfilledBy: met ? { at: met.at, subject: met.subject } : null, draft: draftAfter ? { at: draftAfter.at, subject: draftAfter.subject } : null, redirectedTo: redirected };
+    request = { at: asking.at, subject: asking.subject, excerpt: asking.excerpt ? asking.excerpt.replace(/\s+/g, ' ').trim().slice(0, 240) : null, state, basis, fulfilledBy: met ? { at: met.at, subject: met.subject } : null, draft: draftAfter ? { at: draftAfter.at, subject: draftAfter.subject } : null, redirectedTo: state === 'redirected' ? redirected : null };
   }
 
   // Meetings and calls: held conversations, accepted calendar events that have started, HubSpot meetings and calls (the outcome is what the team wrote).

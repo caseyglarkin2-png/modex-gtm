@@ -26,6 +26,12 @@ describe('a draft with Sent unread', () => {
     const read = relationshipStateFrom(inputs([ASK, ev({ id: 'd-1', at: '2026-06-04T10:00:00.000Z', direction: 'outbound', isDraft: true, type: 'draft', subject: 'Re: Deck', threadId: '19e8826006435cef', source: 'Gmail drafts' })], { reads: reads({ sent: { read: true, count: 0, detail: null } }) }));
     expect(read.requestState).toBe('unfulfilled');
   });
+  it('a request MET and a later referral: the request carries no redirect pointer and the referral still stands on its own (Phil, June 2 and June 3)', () => {
+    const s = relationshipStateFrom(inputs([ASK, ev({ id: 'r-1', at: '2026-06-02T15:00:00.000Z', direction: 'outbound', subject: 'Re: Deck', threadId: '19e8826006435cef', source: 'HubSpot (logged email)' }), ev({ id: 'f-1', at: '2026-06-03T12:00:00.000Z', direction: 'inbound', subject: 'FW: Deck', excerpt: 'Hi Casey. Feel free to reach out to Brian Kellog to see if can work timing.' })]));
+    expect(s.requestState).toBe('fulfilled');
+    expect(s.request?.redirectedTo).toBeNull();
+    expect(s.referral).toMatchObject({ name: 'Brian Kellogg', email: 'brian.kellogg@bostonbeer.com' });
+  });
 });
 
 describe('what is not a referral', () => {
