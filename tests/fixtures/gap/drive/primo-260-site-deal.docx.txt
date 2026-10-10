@@ -1,0 +1,55 @@
+SEO Metadata
+
+Display headline: YardFlow lands 260-site yard automation deal
+
+Subhead: Bottled-water giant moves 5% more freight with flat headcount after standardizing driver check-in and digital bills of lading
+
+Excerpt: YardFlow has processed nearly 2 million shipments across 26 facilities. Its largest customer now wants the system in every one of its 260 sites, including the smallest.
+
+Alt text: Truck drivers waiting to check in at a warehouse gate where yard automation software manages arrivals
+
+Primary focus keyword: yard automation
+
+Supporting keywords: yard management system / digital bill of lading / driver check-in process / detention and dwell time / trailer visibility
+
+Meta description: A bottled-water giant is scaling yard automation to 260 facilities after moving 5% more freight with flat headcount. YardFlow's founder explains the sequence.
+
+Slug: yard-flow-260-site-yard-automation-deal
+
+The most challenging areas in freight are not the highways but the yards and docks across multitudes of shippers and receivers. The battle against utilization entropy is fought on the loading and unloading docks. It mostly happens inside a warehouse fence line, where a driver sits in a line of 10 trucks waiting to talk to one person behind a pane of glass.
+
+YardFlow is expanding its yard automation software to all 260 facilities of a bottled-water giant after a 26-site deployment. The shipper moved 5% more freight with the same headcount according to a YardFlow analysis.
+
+"That's tens of millions of dollars of incremental profit," Jake Koppinger, founder of YardFlow, told FreightWaves.
+
+The customer is expanding the rollout from its largest facilities down to its smallest. "They're pushing us into all 260 of their facilities, including their smallest, so biggest to smallest, because they want to see that standardization," Koppinger said.
+
+YardFlow has processed close to 2 million shipments across the 26 sites. The system runs at three-nines or 99.9% uptime.
+
+## The Box in the Back of the Warehouse
+
+The problem YardFlow originally tackled began with paper. Specifically, the bill of lading handoff that still runs through a printer, a stapler and a slot in a window at thousands of U.S. distribution centers.
+
+Koppinger walked through the analog process with a hypothetical example. A dock coordinator prints three copies, collates them, passes them through the glass, takes back a signature, then files the shipper's copy.
+
+"They build up this big pile of paper, rubber band, put a date on it, go in the box," he said. Once the box fills, it goes into storage for seven years to satisfy the statute of limitations.
+
+That box becomes a cash problem roughly 60 days later. If a shipper invoices a retailer for 24 pallets and the retailer says it received 23, the dispute surfaces inside a lump-sum payment.
+
+## Why Yard Automation Starts With the Driver, Not the Robot
+
+YardFlow's core product is what Koppinger calls the driver journey: a digitized path from gate check-in through dock assignment to check-out and signed documentation. The system has processed close to 2 million shipments and runs at 99.9% uptime. Drivers need no app download, and QR code check-in is optional.
+
+The harder obstacle remains organizational. Warehouses run on tribal knowledge, and each one has its own unique operational peculiarities.
+
+## An Eye in the Sky Over the Yard
+
+With the driver journey deployed, the customer asked for a yard management system. YardFlow built one and is now deploying it, extending the same standardization to yard spotters, jockeys and trailer inventory.
+
+Cameras on moving spotters build what Koppinger describes as a digital twin of the yard. Gate cameras read arriving and departing trucks and trailers, validating carrier identity against DOT and MC numbers.
+
+## The Steak Before the Sizzle
+
+He calls the sequencing an order of operations. "Let's get the operations fixed. Let's standardize your processes and protocols across your yards. Let's get everything digitized so that you can then be in a position to start layering in these other layers of automation," he said.
+
+Deployment speed reinforces the order. The driver journey and the yard management system go live in 30 minutes remotely. Machine vision requires on-site hardware installation and takes considerably longer.
