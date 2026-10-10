@@ -149,19 +149,15 @@ export interface IntelSubstance {
  * every reserved slot on a day the others reported too; across dates the order stays newest first. Deterministic.
  */
 export function interleaveProducers(items: IntelItem[]): IntelItem[] {
+  // The producers take turns across the whole group (each producer's own queue stays newest first), so a producer
+  // that collects hundreds of rows a day never fills every reserved slot while the others wait. The first turn goes
+  // to the producer with the newest item, then the others in the order of their newest items.
+  const queues = new Map<string, IntelItem[]>();
+  for (const it of items) { const p = it.substance?.producer ?? ''; queues.set(p, [...(queues.get(p) ?? []), it]); }
+  const order = [...queues.keys()];
   const out: IntelItem[] = [];
-  const dateOf = (it: IntelItem) => it.substance?.eventDate ?? it.substance?.reportedOn ?? '';
-  let i = 0;
-  while (i < items.length) {
-    const date = dateOf(items[i]);
-    const same: IntelItem[] = [];
-    while (i < items.length && dateOf(items[i]) === date) same.push(items[i++]);
-    const queues = new Map<string, IntelItem[]>();
-    for (const it of same) queues.set(it.substance?.producer ?? '', [...(queues.get(it.substance?.producer ?? '') ?? []), it]);
-    const order = [...queues.keys()].sort();
-    let left = same.length;
-    while (left > 0) for (const p of order) { const q = queues.get(p)!; if (q.length) { out.push(q.shift()!); left -= 1; } }
-  }
+  let left = items.length;
+  while (left > 0) for (const p of order) { const q = queues.get(p)!; if (q.length) { out.push(q.shift()!); left -= 1; } }
   return out;
 }
 

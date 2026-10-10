@@ -6,7 +6,10 @@ import { runClawdImport } from '@/lib/gap/signals/clawd-import';
 import { prisma } from '@/lib/prisma';
 
 export const dynamic = 'force-dynamic';
-export const maxDuration = 120;
+export const maxDuration = 300;
+/** Each row costs a few database round trips (the account resolver, the identity check, the write): one page of a hundred per run keeps a run well inside the function's time; the next run continues from the cursor. */
+const PAGES_PER_RUN = 1;
+const PAGE_LIMIT = 100;
 
 const CRON_NAME = 'gap-clawd-import';
 const CRON_PATH = '/api/cron/gap-clawd-import';
@@ -41,7 +44,7 @@ export async function GET(request: Request) {
     return NextResponse.json({ skipped: true, reason });
   }
   try {
-    const result = await runClawdImport(prisma, { now: new Date(), baseUrl, token, candidates: true });
+    const result = await runClawdImport(prisma, { now: new Date(), baseUrl, token, candidates: true, maxPages: PAGES_PER_RUN, pageLimit: PAGE_LIMIT });
     if (!result.ok) {
       await markCronFailure(CRON_NAME, { path: CRON_PATH, schedule: CRON_SCHEDULE, durationMs: Date.now() - startedAt, error: new Error(`${result.kind}: ${result.error}`) }).catch(() => undefined);
       return NextResponse.json(result, { status: 502 });

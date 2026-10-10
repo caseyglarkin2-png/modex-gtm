@@ -34,6 +34,7 @@ const FIXTURE = arg('--fixture') ?? 'tests/fixtures/gap/intelligence-import-2026
 const OUT = arg('--out') ?? 'docs/gap/INTELLIGENCE_BRIEFING_PREVIEW_2026-10-09.md';
 const HTML = arg('--html') ?? 'docs/gap/INTELLIGENCE_BRIEFING_PREVIEW_2026-10-09.html';
 const BASE = 'https://modex-gtm.vercel.app';
+const NO_OVERLAY = process.argv.includes('--no-overlay');
 const WRITE_METHODS = new Set(['create', 'createMany', 'createManyAndReturn', 'update', 'updateMany', 'upsert', 'delete', 'deleteMany']);
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Any = any;
@@ -110,7 +111,8 @@ async function main() {
       real.canonicalCompany.findMany({ take: 5000 }).catch(() => []),
     ]);
     const mem = ledgerDb({ accounts, aliases, links, companies, signals: [], audit: [] }).client() as Any;
-    const imported = await importIntelligenceBatch(mem, { records: fixture.records, actor: 'preview-harness', now });
+    // --no-overlay (after the production import): nothing is overlaid; the receipt reads the persisted rows alone.
+    const imported = await importIntelligenceBatch(mem, { records: NO_OVERLAY ? [] : fixture.records, actor: 'preview-harness', now });
     const overlayRows: Any[] = await mem.gapSignal.findMany({});
     // 3. The hybrid: signals and the import ledger from both; everything else production, read only.
     const prisma = hybrid(real, mem, ['gapSignal', 'gapAuditEvent']);
@@ -124,7 +126,7 @@ async function main() {
     const { loadProducerStatus, producerStatusLine } = await import('../../src/lib/gap/signals/producer-status');
     const statuses = await loadProducerStatus(prisma, now);
     const coverage = {
-      sources: `${producerStatusLine(statuses)} The briefs' records were imported into this preview from the captured snapshots of ${fixture.capturedOn} (${inventory.join('; ')}).`,
+      sources: `${producerStatusLine(statuses)}${NO_OVERLAY ? ' Every record here is persisted in production; nothing is overlaid.' : ` The briefs' records were imported into this preview from the captured snapshots of ${fixture.capturedOn} (${inventory.join('; ')}).`}`,
       unavailable: 'our Gmail Sent (this process has no sender credential; production reads it).',
     };
     const intel = await defaultIntel(prisma, now, { inDeals: async () => summary, coverage: async () => coverage });
@@ -184,13 +186,17 @@ async function main() {
     // IW14: the named checks of the integrated replay, each a PASS or FAIL in words (never a claim without the check).
     const has = (s: string) => rendered.text.includes(s) && rendered.html.includes(s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'));
     const peopleEmails = intel.people.map((p) => p.id.toLowerCase());
-    const overlayById = (producerItemId: string) => overlayRows.find((r) => String(r.metadata?.import?.producerItemId ?? '') === producerItemId);
-    const subzero = overlayById('2026-10-08#250520610151');
-    const worldMarket = overlayById('2026-10-08#252589576372');
-    const kodiak = overlayById('2026-10-09#1');
+    // The checks' rows: from the overlay, or from production itself after the import (the JSON path on the contract).
+    const overlayById = async (producerItemId: string): Promise<Any> => NO_OVERLAY
+      ? real.gapSignal.findFirst({ where: { origin: 'report_import', metadata: { path: ['import', 'producerItemId'], equals: producerItemId } } }).catch(() => null)
+      : overlayRows.find((r) => String(r.metadata?.import?.producerItemId ?? '') === producerItemId);
+    const subzero = await overlayById('2026-10-08#250520610151');
+    const worldMarket = await overlayById('2026-10-08#252589576372');
+    const kodiak = await overlayById('2026-10-09#1');
+    const sevenEleven = await overlayById('2026-10-09#2');
     const checks: Array<[string, boolean, string]> = [
       ['Kodiak: the development and the supervised-operation caveat are in the text and the HTML', has('A safety driver remains behind the wheel; truck count, frequency, customers, and performance are undisclosed.') && has('HIGH on the supervised operation; LOW on driverless timing and scale'), kodiak ? `row ${kodiak.id}, resolution ${kodiak.resolution}` : 'no Kodiak row'],
-      ['7-Eleven: the uncertainty survives in the overlay (what was not named)', !!overlayById('2026-10-09#2')?.metadata?.import?.text?.includes('No function, site, partner, budget, or deadline was named.'), overlayById('2026-10-09#2') ? `row ${overlayById('2026-10-09#2')!.id}` : 'no row'],
+      ['7-Eleven: the uncertainty survives (what was not named)', !!sevenEleven?.metadata?.import?.text?.includes('No function, site, partner, budget, or deadline was named.'), sevenEleven ? `row ${sevenEleven.id}` : 'no row'],
       ['Sub-Zero: the engagement record carries contact 250520610151 and engagement 118262547717', !!subzero && JSON.stringify(subzero.metadata?.import?.sourceRecordIds ?? []).includes('118262547717'), subzero ? `row ${subzero.id}, account ${subzero.account_name ?? 'none'} (${subzero.resolution})` : 'no row'],
       ['World Market: the record keeps "company association is not verified" and stays unresolved or ambiguous as the resolver says', !!worldMarket && String(worldMarket.metadata?.import?.uncertainty ?? '').includes('not verified'), worldMarket ? `row ${worldMarket.id}, account ${worldMarket.account_name ?? 'none'} (${worldMarket.resolution})` : 'no row'],
       ['Southern Glazer\'s: the May out-of-office writer is not a prospect to reengage (availability, parked), and not an intelligence item', !peopleEmails.some((e) => /sgws\.com|southernglazers/.test(e)) && !rendered.text.toLowerCase().includes('southern glazer'), `people listed: ${peopleEmails.length}`],
