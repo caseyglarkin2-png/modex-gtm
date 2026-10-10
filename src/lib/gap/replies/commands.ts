@@ -12,9 +12,14 @@
  *   4. not auto-submitted (Auto-Submitted other than "no", the vendor autoresponder headers, Precedence bulk/junk/
  *      list/auto_reply) and not a forward (a Fwd: subject or a forwarded-message marker as the first line)
  * The PARSER reads the first non-quoted line only: APPROVE | REVISE: words | SKIP [reason] | DEFER [when] | DONE: what
- * happened | NEXT | HELP | START. A line of sentence length that is none of these is REVISE with the body as the
- * critique (the mandate's example); a short unknown line is `unknown` and draws one HELP reply. A command word inside
- * quoted text is never read. Effects live in commands-apply.ts (X07b); nothing here writes or sends.
+ * happened | NEXT | HELP | START | ITEM [n]. A line of sentence length that is none of these is REVISE with the body as
+ * the critique (the mandate's example); a short unknown line is `unknown` and draws one HELP reply. A command word
+ * inside quoted text is never read. Effects live in commands-apply.ts (X07b); nothing here writes or sends.
+ *
+ * Direct selection (GUI-09, the Gmail action UI audit, 2026-10-10): `ITEM 6`, `OPEN 6` and `SEND ME 6` select item 6
+ * of the day's plan (`ITEM #6` and `item 6 please` read the same); `ITEM` with no number asks for the list. OPEN and
+ * SEND ME count only WITH a number: a reply that opens "Open to that, but make it shorter and lead with the gate" is a
+ * critique, never a selection.
  */
 import type { MailboxMessage } from '@/lib/email/gmail-inbox';
 
@@ -27,6 +32,8 @@ export type ParsedCommand =
   | { kind: 'next' }
   | { kind: 'help' }
   | { kind: 'start' }
+  /** GUI-09: item `n` of the day's plan (1-based); null asks for the list. */
+  | { kind: 'item'; n: number | null }
   | { kind: 'unknown'; line: string };
 
 export interface AssignmentRef {
@@ -110,9 +117,23 @@ function fromFirstLine(text: string): string {
 /** The words after the command word: the leading separator goes, the seller's own punctuation stays. */
 const strip = (s: string) => s.replace(/^[\s:,\-–]+/, '').trim();
 
+/** GUI-09: `ITEM 6` | `ITEM #6` | `OPEN 6` | `SEND ME 6` (the number required for OPEN and SEND ME); `ITEM` alone is the list. */
+const SELECT_WITH_NUMBER = /^(?:item|open|send\s+me)\s*#?\s*(\d{1,3})(?!\d)/i;
+const SELECT_LIST = /^item(?![a-z])/i;
+
+/** The selection a first line makes, or null when it makes none. Exported for the renderers' no-command-line rule. */
+export function parseSelection(line: string): Extract<ParsedCommand, { kind: 'item' }> | null {
+  const m = SELECT_WITH_NUMBER.exec(line.trim());
+  if (m) return { kind: 'item', n: Number(m[1]) };
+  if (SELECT_LIST.test(line.trim())) return { kind: 'item', n: null };
+  return null;
+}
+
 export function parseCommand(text: string): ParsedCommand {
   const line = firstLine(text);
   const body = fromFirstLine(text);
+  const selection = parseSelection(line);
+  if (selection) return selection;
   const word = /^([A-Za-z]+)\b/.exec(line)?.[1]?.toUpperCase() ?? '';
   const rest = (s: string) => strip(s.replace(/^[A-Za-z]+/, ''));
   switch (word) {

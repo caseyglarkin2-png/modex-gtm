@@ -35,7 +35,8 @@ describe('C31: the headline names its count basis and reconciles with START and 
     const intel = intelOf([intelItem({ kind: 'signal', id: 's1', title: 'Kenco opens new innovation lab', accountName: 'Kenco' })], [intelItem({ kind: 'person', id: 'dave@kencogroup.com', title: 'Dave Kiesling at Kenco', accountName: 'Kenco' })], { signals: 14, triggers: 3, people: 9 });
     const out = renderBriefing({ plan: plan(THREE), dayToken: 'tok', links, commandsEnabled: false, legacyDigest: false, intel }, MORNING);
     expect(out.subject).toBe('GAP today, Thu Oct 8: 3 to execute, 2 to decide [GAP#tok]');
-    expect(out.text).toContain("3 to execute: the plan's items, the same list START and NEXT walk, in this order. 2 to decide: intelligence, counted apart (26 waiting in all).");
+    // GUI-11 (2026-10-10): the basis says its units (plan items; intelligence items split into records and people; the retained records placed).
+    expect(out.text).toContain('3 plan items to execute, in this order (the list START, NEXT and ITEM walk); 2 intelligence items to decide, 1 of them record and 1 person; 16 more retained records are on the Intelligence page, not in this email; 8 more people who wrote in are on Work.');
     expect(out.text).toContain('Begin with item 1, Kenco: Send Diego the dock schedule template. https://x/start');
     // The first visible execution row is the START target, whatever section it renders in.
     const first = /^1\. (\w+):/m.exec(out.text);
@@ -49,7 +50,7 @@ describe('C31: the headline names its count basis and reconciles with START and 
     const intel = intelOf([intelItem({ kind: 'signal', id: 's1', title: 'Kenco opens new innovation lab', accountName: 'Kenco' })]);
     const onlyIntel = renderBriefing({ plan: plan([]), dayToken: 'tok', links, commandsEnabled: false, legacyDigest: false, intel }, MORNING);
     expect(onlyIntel.subject).toBe('GAP today, Thu Oct 8: nothing to execute, 1 to decide [GAP#tok]');
-    expect(onlyIntel.text).toContain('Nothing to execute on the plan. 1 to decide: intelligence, counted apart.');
+    expect(onlyIntel.text).toContain('Nothing to execute on the plan; 1 intelligence item to decide, 1 of them record and 0 people.');
     expect(onlyIntel.text).not.toContain('Begin with item');
     const onlyItems = renderBriefing({ plan: plan(THREE), dayToken: 'tok', links, commandsEnabled: false, legacyDigest: false, intel: intelOf([]) }, MORNING);
     expect(onlyItems.subject).toBe('GAP today, Thu Oct 8: 3 to execute [GAP#tok]');
