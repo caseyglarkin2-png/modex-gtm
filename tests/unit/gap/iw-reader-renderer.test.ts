@@ -109,7 +109,10 @@ describe('IW10/IW12: the email carries the substance, the coverage and the full 
     }
     expect(out.text).toContain('Sources: Kodiak-Charger announcement https://www.nasdaq.com/press-release/kodiak-charger; Truck News https://www.trucknews.com/x.');
     expect(out.html).toContain('<a href="https://www.nasdaq.com/press-release/kodiak-charger">Kodiak-Charger announcement</a>');
-    expect(out.text).toContain('Intelligence worth a look (2 of 90). Any age, for your call; Pursue and GAP develops the angle. 2 from your briefs; 88 more waiting.');
+    // GUI-11 (2026-10-10): the section head stays with the items; how the digest was composed follows the items as bookkeeping.
+    expect(out.text).toContain('Intelligence worth a look (2 of 90). Any age, for your call; Pursue and GAP develops the angle.');
+    expect(out.text).toContain('How this email was composed: 2 from your briefs; 88 more waiting.');
+    expect(out.text.indexOf('How this email was composed:')).toBeGreaterThan(out.text.indexOf('Begin with item 1'));
     expect(out.subject).toBe('GAP today, Fri Oct 9: 1 to execute, 2 to decide [GAP#tok]');
     expect(out.digest).toEqual({ keys: ['signal:r1', 'signal:inj'], omitted: 88, breakdown: { reports: 2, found: 0, triggers: 0, vault: 0 }, rotated: 0 });
   });

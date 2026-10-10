@@ -25,6 +25,27 @@
 import type { DayPlan, PlanItem } from './plan';
 import type { IntelItem, PursuedItem } from './intel';
 import { dateOnlyText } from '../signals/intelligence-record';
+import { cleanLine, dedupeSentences } from './clean-text';
+
+/**
+ * GUI-11 (the Gmail action UI audit, 2026-10-10): the template rules this renderer holds, pinned by
+ * tests/unit/gap/gui-digest.test.ts:
+ *   - every prose line goes through cleanLine (no [[wiki]] syntax, no URL cut mid-way) before it is printed
+ *   - an item's line and card lines are deduplicated by sentence (dedupeSentences): a state word prints once
+ *   - the count basis says its units: plan items to execute; intelligence items to decide, split into records and
+ *     people; the retained records not in this email are counted and placed (the Intelligence page)
+ *   - content first: the intelligence items, the pursued, the plan items; the digest's composition, the producers'
+ *     coverage and the retained-list link follow the items as bookkeeping
+ *   - a classifier-only source label (fit_rationale, a snake_case field) prints as "the producer's own claim (no
+ *     source link)", never as a source
+ *   - the HTML is one column, table-free, max-width 640px with 16px side padding, long words and links allowed to wrap
+ *   - no body line starts with a command word or a selection (ITEM 6, OPEN 6, SEND ME 6)
+ */
+const fmt = (n: number) => n.toLocaleString('en-US');
+const plural = (n: number, one: string, many = `${one}s`) => (n === 1 ? one : many);
+/** A source label that is a classifier's field (fit_rationale, urgency_score), not a publication. */
+const CLASSIFIER_LABEL = /^[a-z]+(_[a-z0-9]+)+$/;
+const OWN_CLAIM = "the producer's own claim (no source link)";
 
 /**
  * C32: a long text kept whole or cut at a sentence end, never mid-sentence. Under `max` it is returned as is; over it,
@@ -181,10 +202,16 @@ function who(it: PlanItem): string | null {
 }
 
 /** One item line: "1. Boston Beer: Someone replied. Phil Savastano (VP Operations). Phil Savastano wrote Oct 8." */
-export function itemLine(it: PlanItem, n: number): string {
+/** GUI-11: the item line's sentences, cleaned and deduplicated (the title, the person, the why, the carried-from day). */
+function itemParts(it: PlanItem): string[] {
   // X18: carried work says the day it came from.
-  const parts = [endSentence(it.title), who(it) ? endSentence(who(it) as string) : null, it.why ? endSentence(it.why) : null, it.carriedFrom ? `Carried from ${dayLabel(it.carriedFrom)}.` : null].filter((x): x is string => !!x);
-  return `${n}. ${it.accountName}: ${parts.join(' ')}`;
+  // Cleaned before the sentence is closed, so a dropped cut URL never leaves the sentence open.
+  const parts = [endSentence(cleanLine(it.title)), who(it) ? endSentence(cleanLine(who(it) as string)) : null, it.why ? endSentence(cleanLine(it.why)) : null, it.carriedFrom ? `Carried from ${dayLabel(it.carriedFrom)}.` : null].filter((x): x is string => !!x);
+  return dedupeSentences(parts);
+}
+
+export function itemLine(it: PlanItem, n: number): string {
+  return `${n}. ${cleanLine(it.accountName)}: ${itemParts(it).join(' ')}`;
 }
 
 const dateText = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' });
@@ -197,12 +224,14 @@ export function itemCardLines(it: PlanItem): string[] {
   const c = it.context;
   if (!c) return [];
   const out: string[] = [];
-  if (c.motion) out.push(endSentence(c.motion));
-  if (c.lastExchange) out.push(`Last: ${endSentence(c.lastExchange)}`);
-  if (c.nextAction) out.push(`Next: ${endSentence(clipAtSentence(c.nextAction, 400))}`);
-  const src = [c.source, c.date ? dateText(c.date) : null].filter(Boolean).join(', ');
+  if (c.motion) out.push(endSentence(cleanLine(c.motion)));
+  if (c.lastExchange) out.push(`Last: ${endSentence(cleanLine(c.lastExchange))}`);
+  if (c.nextAction) out.push(`Next: ${endSentence(cleanLine(clipAtSentence(c.nextAction, 400)))}`);
+  const src = [c.source ? cleanLine(c.source) : null, c.date ? dateText(c.date) : null].filter(Boolean).join(', ');
   if (src) out.push(`Source: ${src}.`);
-  return out;
+  // GUI-11: a card line that repeats one of the item line's own sentences (the state word again) prints once.
+  const parts = itemParts(it);
+  return dedupeSentences([...parts, ...out]).filter((l) => !parts.includes(l));
 }
 
 const timeNy = (d: Date) => d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/New_York' });
@@ -253,7 +282,6 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
   const worthAll = digest.worth;
   const peopleAll = digest.people;
   const toDecide = worthAll.length + peopleAll.length;
-  const decideTotal = intel ? intel.totals.signals + intel.totals.triggers + intel.totals.people + (intel.totals.reports ?? 0) + (intel.totals.knowledge ?? 0) : 0;
   const execText = n === 0 ? 'nothing to execute' : `${n} to execute`;
   const countText = toDecide > 0 ? `${execText}, ${toDecide} to decide` : n === 0 ? 'nothing needs you' : execText;
   const subject = `GAP today, ${label}: ${countText} [GAP#${input.dayToken}]`;
@@ -271,9 +299,21 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
     html.push(`<p style="color:#666">${esc(planLine)}</p>`);
   }
   // C31: the count basis, in words: the plan's items are what START and NEXT walk; intelligence is counted apart.
-  const basis = [n === 0 ? 'Nothing to execute on the plan' : `${n} to execute: the plan's items, the same list START and NEXT walk, in this order`, toDecide > 0 ? `${toDecide} to decide: intelligence, counted apart${decideTotal > toDecide ? ` (${decideTotal} waiting in all)` : ''}` : null].filter(Boolean).join('. ');
+  // GUI-11: with its units: plan items; intelligence items split into records and people; the retained records
+  // not in this email counted and placed (the Intelligence page), the people not shown placed on Work.
+  const recordsTotal = intel ? intel.totals.signals + intel.totals.triggers + (intel.totals.reports ?? 0) + (intel.totals.knowledge ?? 0) : 0;
+  const recordsOmitted = Math.max(0, recordsTotal - worthAll.length);
+  const peopleOmitted = intel ? Math.max(0, intel.totals.people - peopleAll.length) : 0;
+  const basis = [
+    n === 0 ? 'Nothing to execute on the plan' : `${n} plan ${plural(n, 'item')} to execute, in this order (the list START, NEXT and ITEM walk)`,
+    toDecide > 0 ? `${toDecide} intelligence ${plural(toDecide, 'item')} to decide, ${worthAll.length} of them ${plural(worthAll.length, 'record')} and ${peopleAll.length} ${plural(peopleAll.length, 'person', 'people')}` : null,
+    recordsOmitted > 0 ? `${fmt(recordsOmitted)} more retained ${plural(recordsOmitted, 'record')} ${recordsOmitted === 1 ? 'is' : 'are'} on the Intelligence page, not in this email` : null,
+    peopleOmitted > 0 ? `${fmt(peopleOmitted)} more ${plural(peopleOmitted, 'person', 'people')} who wrote in ${peopleOmitted === 1 ? 'is' : 'are'} on Work` : null,
+  ].filter(Boolean).join('; ');
   lines.push(`${basis}.`);
   html.push(`<p style="color:#666">${esc(basis)}.</p>`);
+  // GUI-11: the bookkeeping (how the digest was composed, the producers' coverage, the retained list) follows the items.
+  const bookkeeping: { text: string[]; html: string[] } = { text: [], html: [] };
   // I04: intelligence first (the day is for new conversations), then the items in sections, deals in one line.
   const decideLinks = (key: string) => {
     const parts = (['pursue', 'skip', 'dismiss', 'more'] as const).map((d) => {
@@ -286,7 +326,7 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
     const a = intel?.angles[it.key];
     const who = a?.peopleNamed.length ? ` Who: ${a.peopleNamed.map((p) => `${p.name ?? 'someone'}${p.title ? ` (${p.title})` : ''}`).join('; ')}.` : '';
     // C5 (2026-10-09): an ambiguous placement is said with its names (the line carries it), never "No account yet".
-    return `${it.accountName ?? (it.ambiguousAmong?.length ? `Claimed by ${it.ambiguousAmong.join(' and ')}` : null) ?? it.accountHint ?? 'No account yet'}: ${it.title}. ${it.line}${a ? ` The angle: ${a.whyItMatters}${who} Ask: ${a.starters[0] ?? ''}` : ''}`;
+    return cleanLine(`${it.accountName ?? (it.ambiguousAmong?.length ? `Claimed by ${it.ambiguousAmong.join(' and ')}` : null) ?? it.accountHint ?? 'No account yet'}: ${it.title}. ${it.line}${a ? ` The angle: ${a.whyItMatters}${who} Ask: ${a.starters[0] ?? ''}` : ''}`);
   };
   // C32: an item at an account with an open deal names the deal (stage and its whole next step) and links to its brief.
   const dealLine = (it: IntelItem): { text: string; href: string } | null => {
@@ -298,7 +338,7 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
     if (deals.length > 1) return { text: `${deals.length} open deals at ${it.accountName}; the person's deal is not settled. Work it from the deal brief: ${href}`, href };
     const d = deals[0] ?? null;
     const name = d?.name ?? 'an open HubSpot deal';
-    const step = d?.nextStep ? ` Next step: ${endSentence(clipAtSentence(d.nextStep, 400))}` : '';
+    const step = d?.nextStep ? ` Next step: ${endSentence(cleanLine(clipAtSentence(d.nextStep, 400)))}` : '';
     return { text: `In a deal at ${it.accountName}: ${name}${d?.stage ? ` (${d.stage})` : ''}.${step} Work it from the deal: ${href}`, href };
   };
   // I05, moved by the intelligence wiring (2026-10-09): what Casey pursued FOLLOWS the newly collected intelligence
@@ -317,8 +357,9 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
       const a = p.angle;
       const body = p.status === 'ready' && a ? `The angle: ${a.whyItMatters}${a.peopleNamed.length ? ` Who: ${a.peopleNamed.map((x) => `${x.name ?? 'someone'}${x.title ? ` (${x.title})` : ''}`).join('; ')}.` : a.roles.length ? ` Roles: ${a.roles.join(', ')}.` : ''} Ask: ${a.starters[0] ?? ''} Proposed: ${a.proposedAction === 'email' ? 'an email' : a.proposedAction === 'call' ? 'a call' : 'research first'}.${a.caveat ? ` ${a.caveat}` : ''}` : p.status === 'failed' ? `GAP could not develop the angle${p.error ? ` (${p.error.slice(0, 120)})` : ''}; decide it again on Work to retry.` : 'GAP is developing the angle; it comes back here and on Work.';
       const open = p.accountName && links.account ? links.account(p.accountName) : links.work;
-      lines.push(`- ${where}: ${p.title}. ${body}`, `   ${p.accountName ? `Open ${p.accountName}` : 'Open Work'}: ${open}`);
-      html.push(`<li>- ${esc(`${where}: ${p.title}. ${body}`)} <a href="${esc(open)}">${esc(p.accountName ? `Open ${p.accountName}` : 'Open Work')}</a></li>`);
+      const said = cleanLine(`${where}: ${p.title}. ${body}`);
+      lines.push(`- ${said}`, `   ${p.accountName ? `Open ${p.accountName}` : 'Open Work'}: ${open}`);
+      html.push(`<li>- ${esc(said)} <a href="${esc(open)}">${esc(p.accountName ? `Open ${p.accountName}` : 'Open Work')}</a></li>`);
     }
     html.push('</ul>');
   };
@@ -336,16 +377,18 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
       const text: string[] = [];
       const htmlLines: string[] = [];
       // Cut at a sentence end past the cap; a passage with no sentence end is cut hard at twice the cap.
-      const passage = clipAtSentence(oneLine(s.text), SUBSTANCE_MAX).slice(0, SUBSTANCE_MAX * 2);
+      const passage = cleanLine(clipAtSentence(oneLine(s.text), SUBSTANCE_MAX).slice(0, SUBSTANCE_MAX * 2));
       text.push(`What was reported: ${passage}`);
       htmlLines.push(`<b>What was reported:</b> ${esc(passage)}`);
-      if (s.uncertainty) { const u = clipAtSentence(oneLine(s.uncertainty), 320); text.push(`In the producer's words: ${u}`); htmlLines.push(`<b>In the producer's words:</b> ${esc(u)}`); }
-      if (s.interpretation) { const r = clipAtSentence(oneLine(s.interpretation), 320); text.push(`The producer's read (not an obligation): ${r}`); htmlLines.push(`<b>The producer's read (not an obligation):</b> ${esc(r)}`); }
-      const src = s.sources.filter((x) => x.url);
+      if (s.uncertainty) { const u = cleanLine(clipAtSentence(oneLine(s.uncertainty), 320)); text.push(`In the producer's words: ${u}`); htmlLines.push(`<b>In the producer's words:</b> ${esc(u)}`); }
+      if (s.interpretation) { const r = cleanLine(clipAtSentence(oneLine(s.interpretation), 320)); text.push(`The producer's read (not an obligation): ${r}`); htmlLines.push(`<b>The producer's read (not an obligation):</b> ${esc(r)}`); }
+      // GUI-11: a source whose label is a classifier's field (fit_rationale) is the producer's own claim, not a
+      // publication: said as such, its URL (the company's site, not evidence) left out.
+      const src = s.sources.filter((x) => x.url || (x.label && CLASSIFIER_LABEL.test(x.label))).map((x) => (x.label && CLASSIFIER_LABEL.test(x.label) && !x.publisher ? { label: OWN_CLAIM, url: null } : { label: x.label ?? x.publisher ?? 'source', url: x.url }));
       const ids = s.sourceRecordIds.map((r) => `${r.system} ${r.type} ${r.id}`);
       if (src.length || ids.length) {
-        text.push(`${src.length ? `Sources: ${src.map((x) => `${x.label ?? x.publisher ?? 'source'} ${x.url}`).join('; ')}.` : ''}${ids.length ? ` CRM: ${ids.join(', ')}.` : ''}`.trim());
-        htmlLines.push(`${src.length ? `Sources: ${src.map((x) => `<a href="${esc(x.url as string)}">${esc(x.label ?? x.publisher ?? 'source')}</a>`).join('; ')}.` : ''}${ids.length ? ` CRM: ${esc(ids.join(', '))}.` : ''}`.trim());
+        text.push(`${src.length ? `Sources: ${src.map((x) => (x.url ? `${x.label} ${x.url}` : x.label)).join('; ')}.` : ''}${ids.length ? ` CRM: ${ids.join(', ')}.` : ''}`.trim());
+        htmlLines.push(`${src.length ? `Sources: ${src.map((x) => (x.url ? `<a href="${esc(x.url)}">${esc(x.label)}</a>` : esc(x.label))).join('; ')}.` : ''}${ids.length ? ` CRM: ${esc(ids.join(', '))}.` : ''}`.trim());
       }
       const when = `Reported ${dateOnlyText(s.reportedOn)} by ${s.producerLabel}${s.reportedOnBasis === 'captured' ? ' (the capture date; the report states none)' : ''}${s.eventDate ? `; event date ${dateOnlyText(s.eventDate)}` : ''}; imported ${dateOnlyText(s.importedAt.slice(0, 10))}${s.revisions ? `; revised ${s.revisions} time${s.revisions === 1 ? '' : 's'}` : ''}${s.suggestions ? `; ${s.suggestions} drafted message${s.suggestions === 1 ? '' : 's'} archived, never sent` : ''}.`;
       text.push(when);
@@ -365,17 +408,20 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
       // IW11/IW12: the rule in words beside the count, the omitted counted, the complete list linked, the sources' coverage.
       const b = digest.breakdown;
       const parts = [b.reports ? `${b.reports} from your briefs` : null, b.found ? `${b.found} found by GAP` : null, b.triggers ? `${b.triggers} trigger${b.triggers === 1 ? '' : 's'}` : null, b.vault ? `${b.vault} from the vault` : null].filter(Boolean).join(', ');
-      const how = `${parts ? `${parts}; ` : ''}${digest.omitted ? `${digest.omitted} more waiting` : 'nothing omitted'}${digest.rotated ? `; ${digest.rotated} shown in an earlier briefing wait behind the unseen` : ''}.`;
-      lines.push('', `Intelligence worth a look (${worth.length}${worthTotal > worth.length ? ` of ${worthTotal}` : ''}). Any age, for your call; Pursue and GAP develops the angle. ${how}`);
-      html.push(`<h3>Intelligence worth a look (${worth.length}${worthTotal > worth.length ? ` of ${worthTotal}` : ''})</h3><p style="color:#666">Any age, for your call; Pursue and GAP develops the angle. ${esc(how)}</p>`);
+      const how = `${parts ? `${parts}; ` : ''}${digest.omitted ? `${fmt(digest.omitted)} more waiting` : 'nothing omitted'}${digest.rotated ? `; ${digest.rotated} shown in an earlier briefing wait behind the unseen` : ''}.`;
+      lines.push('', `Intelligence worth a look (${worth.length}${worthTotal > worth.length ? ` of ${fmt(worthTotal)}` : ''}). Any age, for your call; Pursue and GAP develops the angle.`);
+      html.push(`<h3>Intelligence worth a look (${worth.length}${worthTotal > worth.length ? ` of ${fmt(worthTotal)}` : ''})</h3><p style="color:#666">Any age, for your call; Pursue and GAP develops the angle.</p>`);
+      // GUI-11: how the digest was composed, the producers' coverage and the retained list follow the items.
+      bookkeeping.text.push(`How this email was composed: ${how}`);
+      bookkeeping.html.push(`<p style="color:#666">How this email was composed: ${esc(how)}</p>`);
       if (intel.coverage) {
-        const cov = `${intel.coverage.sources}${intel.coverage.unavailable ? ` Not read this time: ${intel.coverage.unavailable}` : ''}`;
-        lines.push(`   ${cov}`);
-        html.push(`<p style="color:#666">${esc(cov)}</p>`);
+        const cov = cleanLine(`${intel.coverage.sources}${intel.coverage.unavailable ? ` Not read this time: ${intel.coverage.unavailable}` : ''}`);
+        bookkeeping.text.push(cov);
+        bookkeeping.html.push(`<p style="color:#666">${esc(cov)}</p>`);
       }
       if (links.intelligence) {
-        lines.push(`   Everything retained, with filters: ${links.intelligence}`);
-        html.push(`<p style="color:#666"><a href="${esc(links.intelligence)}">Everything retained, with filters</a></p>`);
+        bookkeeping.text.push(`Everything retained, with filters: ${links.intelligence}`);
+        bookkeeping.html.push(`<p style="color:#666"><a href="${esc(links.intelligence)}">Everything retained, with filters</a></p>`);
       }
       html.push('<ul>');
       worth.forEach(pushIntel);
@@ -442,13 +488,27 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
     lines.push('', line);
     html.push(`<p>${esc(line)}</p>`);
   }
-  const counts = `Waiting on them: ${c.waiting}. Parked (research, holds, set aside): ${c.parked}. Snoozed: ${c.snoozed}.`;
+  // GUI-11: the bookkeeping after the items: how the digest was composed, the coverage, the retained list, the counts.
+  if (bookkeeping.text.length) {
+    lines.push('', ...bookkeeping.text);
+    html.push(...bookkeeping.html);
+  }
+  const counts = `Waiting on them: ${c.waiting} ${plural(c.waiting, 'account')}. Parked (research, holds, set aside): ${c.parked} ${plural(c.parked, 'account')}. Snoozed: ${c.snoozed} ${plural(c.snoozed, 'account')}.`;
   lines.push('', counts, `Everything, with what is waiting and parked: ${links.work}`);
   html.push(`<p>${esc(counts)}<br/><a href="${esc(links.work)}">Everything, with what is waiting and parked</a></p>`);
   if (input.commandsEnabled) {
-    const cmd = 'To work from your inbox, reply with START and the first item arrives as its own email. Each item takes APPROVE, REVISE: your words, SKIP, DEFER, DONE: what happened, NEXT or HELP on the first line of your reply.';
-    lines.push('', cmd);
-    html.push(`<p>${esc(cmd)}</p>`);
+    // GUI-09: every command with its exact effect, one line each; no line starts with a command word or a selection.
+    const cmd = [
+      'To work from your inbox, reply with START and item 1 arrives as its own email. Reply ITEM 6 (or OPEN 6, SEND ME 6) and item 6 arrives as its own email; ITEM alone lists the items with their numbers.',
+      'On an item\'s email, the first line of your reply is the command:',
+      '- Reply APPROVE to approve its email for the send step in the app only; nothing is sent until you press CONFIRM + SEND there.',
+      '- Reply REVISE: your words and GAP rewrites the email on your words and sends the revision back to you.',
+      '- Reply SKIP to set it aside for today; DEFER Oct 14 to bring it back that day; DONE: what happened to record your words as the record.',
+      '- Reply NEXT for the next item; HELP for this list.',
+      'Opening a link in this email never approves or sends anything. A reply to a GAP message reaches GAP only, never a buyer.',
+    ];
+    lines.push('', ...cmd);
+    html.push(`<p>${cmd.map(esc).join('<br/>')}</p>`);
   }
   if (input.legacyDigest) {
     const legacy = 'The HubSpot pipeline digest still arrives separately each morning; say the word and it stops.';
@@ -458,5 +518,7 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
   const stamp = `Sent by GAP at ${now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/New_York' })} New York. This is an internal message to you; nothing in it went to a buyer.`;
   lines.push('', stamp);
   html.push(`<p style="color:#888;font-size:12px">${esc(stamp)}</p>`);
-  return { subject, text: lines.join('\n'), html: `<div style="font-family:system-ui,sans-serif;line-height:1.45">${html.join('\n')}</div>`, digest: { keys: digest.keys, omitted: digest.omitted, breakdown: digest.breakdown, rotated: digest.rotated } };
+  // GUI-11: one column, table-free, 640px at most with 16px side padding; long links and words wrap at 360px.
+  const wrapper = 'max-width:640px;margin:0 auto;padding:0 16px;font-family:system-ui,sans-serif;font-size:15px;line-height:1.45;color:#111;overflow-wrap:anywhere;word-break:break-word';
+  return { subject, text: lines.join('\n'), html: `<div style="${wrapper}">${html.join('\n')}</div>`, digest: { keys: digest.keys, omitted: digest.omitted, breakdown: digest.breakdown, rotated: digest.rotated } };
 }
