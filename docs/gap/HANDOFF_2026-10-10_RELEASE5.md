@@ -4,7 +4,7 @@ STATUS: HANDOFF. One concise record of the named-debt instruction of October 10 
 
 ## 1. What changed and deployed
 
-- PR #451 merged to main RELEASE5_SHA; production RELEASE5_DEPLOY. Rollback: 2143cb92 (`dpl_3Btc6K6yFcdch4x7hzPbKGTbNZRQ`).
+- PR #451 merged to main 9d082def; production `dpl_DAKmigGPmtTr8E7R2U3MqzPutsgV` READY 2026-10-10T17:12:07Z on 9d082def. Rollback: 2143cb92 (`dpl_3Btc6K6yFcdch4x7hzPbKGTbNZRQ`).
 - The schema: `conversation_dispositions.hypothesis_id` is nullable (a reply-triage disposition recorded without a thesis). Pushed to production before the deploy, the eight forward SQL guard files re-applied, `verify-triggers` 33 of 33 (one rolled-back transaction).
 - Three Opus builders with disjoint files, one lead integration, one independent read-only review of the integrated tip: ten verified defects, one P1 (a DONE on an "Opted out" card bound to another person's message could have suppressed that person), all ten fixed with reproducing tests before the merge; the list is in the checklist's Release 5 block. The local gate: 46 focused test files green, tsc clean. CI on GitHub is ignored by Casey's word.
 - Also in this release: the Clawd import cron hourly (three pages of 100 each run; the backlog drains in about a day); the war-room review feed proven with the token production holds (one internal entry accepted); the briefing never begins with a held item.
