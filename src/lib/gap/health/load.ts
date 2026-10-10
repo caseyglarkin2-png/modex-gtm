@@ -15,6 +15,7 @@ import { SELLER_SETTINGS_KEY } from '../work/settings';
 import { vaultTableStatus } from '../knowledge/vault-table-adapter';
 import { lastVaultSync } from '../knowledge/vault-sync';
 import { loadProducerStatus } from '../signals/producer-status';
+import { loadMirrorBacklog } from '../disposition/mirror-retry';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -173,7 +174,7 @@ export async function loadHealthInputs(prisma: PrismaLike, deps: HealthDeps = {}
 
   const config = (key: string) => (typeof prisma?.systemConfig?.findUnique === 'function' ? prisma.systemConfig.findUnique({ where: { key } }).catch(() => null) : Promise.resolve(null));
   const day = nyDay(new Date(clock()));
-  const [cron, lastRun, hs, sup, briefingCron, agentsCron, settingsRow, sentToday, failedToday, tasks, spend, credits, context, producers] = await Promise.all([
+  const [cron, lastRun, hs, sup, briefingCron, agentsCron, settingsRow, sentToday, failedToday, tasks, spend, credits, context, producers, crmMirror] = await Promise.all([
     config('cron:gap-mailbox'),
     prisma.gapAuditEvent.findMany({ where: { kind: ROUTING_RUN_DONE }, orderBy: { created_at: 'desc' }, take: 25, select: { created_at: true, payload: true } }).catch(() => []),
     hubspotConfigured ? timed(deps.hubspotPing ?? defaultHubspotPing, clock, HEALTH_PROBE_TIMEOUT_MS) : Promise.resolve(null),
@@ -202,6 +203,9 @@ export async function loadHealthInputs(prisma: PrismaLike, deps: HealthDeps = {}
     // IW13: the intelligence producers, read from the import ledger and the signal rows. A client without the signal
     // table is not read (no component); a read that throws is null (said unreadable).
     typeof prisma?.gapSignal?.count === 'function' ? loadProducerStatus(prisma, new Date(clock()), { env }).catch(() => null) : Promise.resolve(undefined),
+    // R5 review (finding 5a): the dispositions awaiting a HubSpot mirror. A client without the mirror table is not read
+    // (no component); a read that throws is null (said unreadable).
+    typeof prisma?.gapHubSpotMirror?.findMany === 'function' ? loadMirrorBacklog(prisma).catch(() => null) : Promise.resolve(undefined),
   ]);
 
   let state: Record<string, unknown> = {};
@@ -262,6 +266,7 @@ export async function loadHealthInputs(prisma: PrismaLike, deps: HealthDeps = {}
     },
     context,
     ...(producers !== undefined ? { producers } : {}),
+    ...(crmMirror !== undefined ? { crmMirror } : {}),
     model: spend ? { month: spend.month, label: spend.label, monthUsd: spend.monthUsd, ceilingUsd: spend.ceilingUsd, warnFraction: spendLimits(env).warnFraction, calls: spend.calls, failed: spend.failed, refused: spend.refused, inFlight: spend.inFlight, lastCall: spend.lastCall ? { at: spend.lastCall.at, outcome: spend.lastCall.outcome, model: spend.lastCall.model, errorCategory: spend.lastCall.errorCategory } : null, credits: credits && credits.ok && Number.isFinite(credits.value.balance) ? credits.value : null } : undefined,
   };
 }

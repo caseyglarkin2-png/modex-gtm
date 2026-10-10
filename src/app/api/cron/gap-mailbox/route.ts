@@ -11,7 +11,7 @@ import { reconcileCopiesFromSent } from '@/lib/gap/execution/copies-reconcile';
 import { prisma } from '@/lib/prisma';
 import { sendViaGmail } from '@/lib/email/gmail-sender';
 import { applyCommand, loadCommandContext } from '@/lib/gap/replies/commands-apply';
-import { retryDispositionMirrors } from '@/lib/gap/disposition/mirror-retry';
+import { mirrorRetryVerdict, retryDispositionMirrors } from '@/lib/gap/disposition/mirror-retry';
 import { reviseRequest } from '@/lib/gap/agents/revise-message';
 import { approveRequest } from '@/lib/gap/agents/approve-request';
 import { agentTaskHandlers } from '@/lib/gap/agents/handlers';
@@ -68,6 +68,7 @@ export async function GET(request: Request) {
 
   try {
     let report: Record<string, unknown>;
+    let mirrorVerdict: { ok: boolean; line: string | null } = { ok: true, line: null };
     if (dryRun) {
       const stored = await prisma.systemConfig.findUnique({ where: { key: GAP_MAILBOX_WATERMARK_KEY } });
       const parsed = stored?.value ? Number.parseInt(stored.value, 10) : NaN;
@@ -114,6 +115,9 @@ export async function GET(request: Request) {
       // The DONE unification: a reply DONE whose HubSpot mirror failed is retried here (at most three attempts each,
       // bounded per tick; the mirror is idempotent by its key, so a retry never posts a second note).
       report.mirrorRetries = await retryDispositionMirrors(prisma, { now }).catch((e) => ({ error: e instanceof Error ? e.message : String(e) }));
+      // R5 review (finding 5a): a disposition that used every attempt (or a pass that failed) keeps the result from
+      // reading ok; the status message names it. Intake itself ran, so the mailbox's own success stands.
+      mirrorVerdict = mirrorRetryVerdict(report.mirrorRetries as Parameters<typeof mirrorRetryVerdict>[0]);
       // Ops closeout 13B: direct sends whose Gmail answer was lost, reconciled against Sent.
       // Still-unknown ones stay visible in the report; they are never read as not sent.
       report.unknownSends = await reconcileUnknownSends(prisma, { now }, { listSent: (rcpt, a, b) => listSentTo(sender, rcpt, a, b), mailbox: sender.userEmail });
@@ -138,10 +142,10 @@ export async function GET(request: Request) {
       path: CRON_PATH,
       schedule: CRON_SCHEDULE,
       durationMs: Date.now() - startedAt,
-      message: `${mode}: ${String(report.seen)} inbox messages since ${String(report.since)}${(report.unknownSends as { stillUnknown?: unknown[] } | undefined)?.stillUnknown?.length ? `; ${(report.unknownSends as { stillUnknown: unknown[] }).stillUnknown.length} unknown-outcome send(s)` : ''}`,
+      message: `${mode}: ${String(report.seen)} inbox messages since ${String(report.since)}${(report.unknownSends as { stillUnknown?: unknown[] } | undefined)?.stillUnknown?.length ? `; ${(report.unknownSends as { stillUnknown: unknown[] }).stillUnknown.length} unknown-outcome send(s)` : ''}${mirrorVerdict.line ? `; ${mirrorVerdict.line}` : ''}`,
       stats: { mode, ...report },
     }).catch(() => undefined);
-    return NextResponse.json({ ...report, mode, mailbox: sender.userEmail });
+    return NextResponse.json({ ...report, mode, mailbox: sender.userEmail, ...(mirrorVerdict.ok ? {} : { ok: false }) });
   } catch (error) {
     await markCronFailure(CRON_NAME, { path: CRON_PATH, schedule: CRON_SCHEDULE, durationMs: Date.now() - startedAt, error }).catch(() => undefined);
     return NextResponse.json({ error: error instanceof Error ? error.message : String(error) }, { status: 500 });

@@ -12,6 +12,8 @@ const reconcile = vi.fn(async () => ({ checked: 1, reconciled: 0, stillUnknown: 
 vi.mock('@/lib/email/gmail-inbox', () => ({ listMailboxIds: (...a: unknown[]) => (list as any)(...a), getMailboxMessage: (...a: unknown[]) => (fetchOne as any)(...a), listSentTo: vi.fn() }));
 vi.mock('@/lib/gap/execution/unknown-send-reconcile', async (orig) => ({ ...(await orig<typeof import('@/lib/gap/execution/unknown-send-reconcile')>()), reconcileUnknownSends: (...a: unknown[]) => (reconcile as any)(...a) }));
 vi.mock('@/lib/gap/replies/gap-mailbox', async (orig) => ({ ...(await orig<typeof import('@/lib/gap/replies/gap-mailbox')>()), pollGapMailbox: (...a: unknown[]) => (poll as any)(...a) }));
+const mirrorRetry = vi.fn(async () => ({ tried: 0, mirrored: 0, failed: 0, exhausted: [] as string[] }));
+vi.mock('@/lib/gap/disposition/mirror-retry', async (orig) => ({ ...(await orig<typeof import('@/lib/gap/disposition/mirror-retry')>()), retryDispositionMirrors: (...a: unknown[]) => (mirrorRetry as any)(...a) }));
 
 import { GET } from '@/app/api/cron/gap-mailbox/route';
 import { markCronFailure, markCronSuccess } from '@/lib/cron-monitor';
@@ -65,6 +67,16 @@ describe('GET /api/cron/gap-mailbox', () => {
     expect((poll.mock.calls[0] as any[])[2].mailbox).toBe('casey@yardflow.ai');
     expect(markCronSuccess).toHaveBeenCalledTimes(1);
     expect(markCronFailure).not.toHaveBeenCalled();
+  });
+
+  it('R5 review (finding 5a): a disposition that exhausted the HubSpot mirror retries keeps the result from reading ok, and the cron status names it', async () => {
+    mirrorRetry.mockResolvedValueOnce({ tried: 0, mirrored: 0, failed: 0, exhausted: ['d1'] });
+    const res = await GET(req('http://localhost/api/cron/gap-mailbox/?mode=apply', { authorization: 'Bearer shh' }));
+    expect(await res.json()).toMatchObject({ ok: false, mode: 'apply', mirrorRetries: { exhausted: ['d1'] } });
+    expect(vi.mocked(markCronSuccess).mock.calls[0][1]).toMatchObject({ message: expect.stringContaining('1 disposition(s) exhausted the HubSpot mirror retries') });
+    // A clean pass: no ok:false.
+    const clean = await (await GET(req('http://localhost/api/cron/gap-mailbox/?mode=apply', { authorization: 'Bearer shh' }))).json();
+    expect(clean.ok).toBeUndefined();
   });
 
   it('Release C review S2: intake errors mark the cron run FAILED, never a quiet success', async () => {

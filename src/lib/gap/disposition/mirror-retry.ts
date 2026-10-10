@@ -17,7 +17,7 @@
  * R5 review (finding 5b): the receipts are read from the applied rows AND from the DONE receipts written the moment the
  * disposition was recorded (commands-apply.ts DONE_RECEIPT), so a DONE whose later step threw still has its mirror retried.
  */
-import { mirrorDisposition as defaultMirror } from '../hubspot-mirror';
+import { dispositionMirrorKey, mirrorDisposition as defaultMirror } from '../hubspot-mirror';
 import { mirrorReceiptOf } from '../replies/done-reply';
 import { COMMAND_APPLIED, DONE_RECEIPT } from '../replies/commands-apply';
 import { dispositionMirrorSummary, type DispositionProvenance } from './service';
@@ -125,4 +125,48 @@ export async function retryDispositionMirrors(
     });
   }
   return report;
+}
+
+/**
+ * R5 review (finding 5a): the dispositions awaiting a HubSpot mirror, read the way the retry pass reads them (the
+ * retryable recorded_not_mirrored receipts on the applied rows and the DONE receipts), less those mirrored since (a
+ * mirrored attempt, or the mirror row holding the note), and how many of them used every attempt. A skip by policy
+ * (the mirror off, no contact) is not awaiting a mirror. Read by health (health/load.ts); bounded like the pass.
+ */
+export async function loadMirrorBacklog(prisma: PrismaLike): Promise<{ awaiting: number; exhausted: number }> {
+  const rows: Array<{ payload: unknown }> = await prisma.gapAuditEvent.findMany({
+    where: { kind: { in: [COMMAND_APPLIED, DONE_RECEIPT] }, payload: { path: ['receipt'], equals: 'recorded_not_mirrored' } },
+    orderBy: [{ created_at: 'desc' }],
+    take: APPLIED_SCAN,
+    select: { payload: true },
+  });
+  const ids = [...new Set(rows.map((r) => (isObj(r.payload) ? r.payload : {})).filter((p) => p.receipt === 'recorded_not_mirrored' && p.retryable === true && typeof p.dispositionId === 'string').map((p) => String(p.dispositionId)))];
+  if (!ids.length) return { awaiting: 0, exhausted: 0 };
+  const attempts: Array<{ subject_id: string; payload: unknown }> = await prisma.gapAuditEvent.findMany({
+    where: { kind: MIRROR_RETRY, subject_type: 'disposition', subject_id: { in: ids } },
+    select: { subject_id: true, payload: true },
+  });
+  const landed: Array<{ key: string; error: string | null }> = typeof prisma?.gapHubSpotMirror?.findMany === 'function'
+    ? await prisma.gapHubSpotMirror.findMany({ where: { key: { in: ids.map(dispositionMirrorKey) } }, select: { key: true, error: true } })
+    : [];
+  const mirrored = new Set(landed.filter((m) => m.error === null).map((m) => m.key));
+  let awaiting = 0;
+  let exhausted = 0;
+  for (const id of ids) {
+    const mine = attempts.filter((a) => a.subject_id === id).map((a) => (isObj(a.payload) ? a.payload : {}));
+    if (mine.some((a) => a.receipt === 'mirrored') || mirrored.has(dispositionMirrorKey(id))) continue;
+    awaiting += 1;
+    if (mine.length >= MIRROR_RETRY_MAX) exhausted += 1;
+  }
+  return { awaiting, exhausted };
+}
+
+/**
+ * R5 review (finding 5a): the retry pass's verdict for the mailbox cron's own result: never a clean ok while a
+ * disposition has used every attempt, or when the pass itself failed. The line goes into the cron's status message.
+ */
+export function mirrorRetryVerdict(r: MirrorRetryReport | { error: string }): { ok: boolean; line: string | null } {
+  if ('error' in r) return { ok: false, line: `the HubSpot mirror retry failed (${r.error.slice(0, 200)})` };
+  if (r.exhausted.length) return { ok: false, line: `${r.exhausted.length} disposition(s) exhausted the HubSpot mirror retries` };
+  return { ok: true, line: null };
 }
