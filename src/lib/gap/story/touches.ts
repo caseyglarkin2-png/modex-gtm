@@ -56,6 +56,8 @@ export interface StoryTouch {
   replyLabel?: string;
   /** C6: the identity path that placed the sender at the account (a thread keyed elsewhere or nowhere); null when the reply list or the history held it. */
   placedVia?: 'thread' | 'persona' | 'crm_contact' | 'alias' | 'domain' | 'family_deal' | null;
+  /** The walk fix (2026-10-10): the Gmail thread of a Sent message, so a send in a buyer's thread answers their reply. */
+  threadId?: string | null;
 }
 
 /** C6: the placement in the story's words ("placed by its domain"). */
@@ -127,7 +129,7 @@ export function mergeTouches(x: {
   // B1: our Sent mail (the GAP mailbox): a send of ours to a person at the account, named by the address it went to.
   for (const m of x.sent?.messages ?? []) {
     if (!m.to || isInternalRecipient(m.to)) continue;
-    out.push({ kind: 'send', at: m.at, ...person(m.to), what: m.subject?.trim() || 'email', source: 'Gmail Sent', excerpt: m.excerpt || undefined });
+    out.push({ kind: 'send', at: m.at, ...person(m.to), what: m.subject?.trim() || 'email', source: 'Gmail Sent', excerpt: m.excerpt || undefined, ...(m.threadId ? { threadId: m.threadId } : {}) });
   }
   // B2: HubSpot engagements. A logged email is a send of ours or their reply (by its direction and sender); a note, a
   // call and a meeting are what the deal team wrote down, told as such, never as buyer words.

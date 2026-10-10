@@ -112,26 +112,31 @@ describe('B1: our Sent on the story', () => {
     const { touches, row } = betweenUs(inputsWith({ sent }));
     expect(touches[0]).toMatchObject({ kind: 'send', source: 'Gmail Sent', name: 'Craig Morrison', title: 'VP Operations', address: CRAIG, what: 'Primo and the yards', excerpt: 'Craig, two things from the record.' });
     const texts = row.sentences.map((s) => s.text);
-    expect(texts[0], texts.join(' | ')).toBe('We wrote Craig Morrison, VP Operations on Oct 9: "Primo and the yards". No answer owed yet.');
-    expect(row.sentences[0].tag).toBe('Checked');
-    expect(row.sentences[0].basis).toBe('Gmail Sent, Oct 9');
+    // The walk fix (2026-10-10): our Oct 9 note followed Craig's Sep 24 reply, so it is his answer, said ONCE with his
+    // words ("they wrote; we answered"), never "We wrote" beside "replied" for the same exchange.
+    expect(texts[0], texts.join(' | ')).toBe('Craig Morrison, VP Operations wrote Sep 24: "Poking holes in the Primo record now."; we answered Oct 9: "Primo and the yards". No answer owed yet.');
+    expect(row.sentences[0].tag).toBe('Buyer said');
+    expect(row.sentences[0].basis).toBe('GAP ledger, Sep 24; Gmail Sent, Oct 9');
     expect(texts.join(' ')).not.toContain('No answer on record');
-    expect(texts[1], texts.join(' | ')).toBe('Craig Morrison, VP Operations replied on Sep 24: "Poking holes in the Primo record now.".');
-    expect(row.sentences[1].tag).toBe('Buyer said');
-    expect(texts[2]).toBe('2 emails to 1 person since Sep 2026.');
+    expect(texts[1]).toBe('2 emails to 1 person since Sep 2026.');
     // A reply with no send of ours before it on any record is still said as answering an email the ledgers lack.
     const { row: orphan } = betweenUs(inputsWith({ sent: sentAt('2026-10-09T10:00:00.000Z') }));
-    expect(orphan.sentences[1].text).toBe('Craig Morrison, VP Operations replied on Sep 24: "Poking holes in the Primo record now.". The email it answered is not in GAP\'s ledgers.');
+    expect(orphan.sentences[0].text).toBe('Craig Morrison, VP Operations wrote Sep 24: "Poking holes in the Primo record now."; we answered Oct 9: "Primo and the yards". No answer owed yet. The email it answered is not in GAP\'s ledgers.');
   });
 
   it('an older send with no later inbound says "No answer on record" from OUR last send; a send the buyer answered carries no silence; without a Sent read the ledgers keep "Last email to"', () => {
+    // The walk fix: the Sep 28 send followed Craig's Sep 24 reply, so it is said as his answer, with the silence since.
     const { row: silent } = betweenUs(inputsWith({ sent: sentAt('2026-09-28T10:00:00.000Z') }));
-    expect(silent.sentences[0].text).toBe('We wrote Craig Morrison, VP Operations on Sep 28: "Primo and the yards". No answer on record.');
-    expect(silent.sentences[0].basis).toBe('Gmail Sent, Sep 28; GAP, clawd and the account history for the silence');
+    expect(silent.sentences[0].text).toBe('Craig Morrison, VP Operations wrote Sep 24: "Poking holes in the Primo record now."; we answered Sep 28: "Primo and the yards". No answer on record. The email it answered is not in GAP\'s ledgers.');
+    expect(silent.sentences[0].basis).toBe('GAP ledger, Sep 24; Gmail Sent, Sep 28');
+    // With no reply of theirs, the silence is said from our last send, as before.
+    const { row: alone } = betweenUs(inputsWith({ sent: sentAt('2026-09-28T10:00:00.000Z') }), []);
+    expect(alone.sentences[0].text).toBe('We wrote Craig Morrison, VP Operations on Sep 28: "Primo and the yards". No answer on record.');
+    expect(alone.sentences[0].basis).toBe('Gmail Sent, Sep 28; GAP, clawd and the account history for the silence');
     const { row: answered } = betweenUs(inputsWith({ sent: sentAt('2026-09-20T10:00:00.000Z') }));
     expect(answered.sentences[0].text).toBe('We wrote Craig Morrison, VP Operations on Sep 20: "Primo and the yards".');
     expect(answered.sentences.map((s) => s.text).join(' ')).not.toContain('No answer');
-    const { row: ledger } = betweenUs(inputsWith({ firstTouches: [{ recipient: CRAIG, sentAt: '2026-09-28T10:00:00.000Z', state: 'sent', personaId: 1 }] }));
+    const { row: ledger } = betweenUs(inputsWith({ firstTouches: [{ recipient: CRAIG, sentAt: '2026-09-28T10:00:00.000Z', state: 'sent', personaId: 1 }] }), []);
     expect(ledger.sentences[0].text).toBe('Last email to Craig Morrison, VP Operations, Sep 28 (a GAP first touch). No answer on record.');
   });
 

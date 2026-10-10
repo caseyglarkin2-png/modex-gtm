@@ -206,7 +206,7 @@ export async function loadCompletedToday(prisma: PrismaLike, now: Date): Promise
         out.push({ at, accountName: r.subject_id, line: `Prepared: ${typeof p.what === 'string' && p.what ? p.what : 'the meeting'}.`, kind: 'done' });
         continue;
       }
-      const line = kind === 'skipped' ? 'Set aside for today.' : kind === 'snoozed' && typeof p.until === 'string' ? `Snoozed until ${dayLabel(nyDay(p.until), now)}.` : kind === 'logged' ? `Logged outside GAP${p.reason ? ` (${String(p.reason)})` : ''}.` : null;
+      const line = kind === 'skipped' ? 'Set aside for today.' : kind === 'snoozed' && typeof p.until === 'string' ? `Snoozed until ${dayLabel(nyDay(p.until), now)}.` : kind === 'logged' ? `Logged outside GAP${p.reason ? ` (${String(p.reason)})` : ''}.` : kind === 'done' ? `Done, by your word${p.reason ? ` (${String(p.reason)})` : ''}.` : null;
       // Batch item 8: the seller's own outcomes are set aside, never done (a log outside GAP proves nothing here).
       // R63-B S3: the same outcome twice in a day (written before the store was idempotent) is one line.
       if (line && !out.some((x) => x.kind === 'set_aside' && x.accountName === r.subject_id && x.line === line)) out.push({ at, accountName: r.subject_id, line, kind: 'set_aside' });

@@ -184,7 +184,8 @@ function cardKey(c: WorkCard, day: string, decisionIds?: ReadonlyMap<string, str
     case 'replied':
     case 'opted_out':
     case 'bounced': {
-      const id = c.reply?.messageId;
+      // The walk fix: a card the summary relabelled "Someone replied" is bound to the reply the summary names.
+      const id = c.reply?.messageId ?? c.replyRef?.messageId;
       return id ? { key: `reply:${id}`, refs: { replyMessageId: id } } : { key: `reply:${c.accountName}:${day}`, refs: {} };
     }
     case 'ready': {
@@ -225,7 +226,7 @@ export function cardContext(c: WorkCard): PlanItemContext {
     lastExchange: r ? `${r.fromName ?? r.from} wrote ${replyDay(r.at)}${r.subject ? `, "${r.subject}"` : ''}: ${r.snippet.replace(/\s+/g, ' ').trim().slice(0, 160)}` : null,
     nextAction: c.dealNextStep ? `Next step on the deal: ${c.dealNextStep.replace(/\.$/, '')}` : c.next?.label ?? null,
     source: r ? 'their email in the GAP mailbox' : c.stateKind === 'in_deal' || c.stateKind === 'unknown_deal' ? 'HubSpot deals' : c.source === 'pursuit' ? 'the pursuit record' : 'the Work lanes',
-    date: r?.at ?? null,
+    date: r?.at ?? c.replyRef?.at ?? null,
   };
 }
 

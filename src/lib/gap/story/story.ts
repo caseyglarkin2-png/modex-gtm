@@ -426,6 +426,16 @@ function betweenUs(i: StoryInput): StoryRow {
   // must never read as ordinary silence).
   const firstName = (x: StoryTouch) => (x.address ? x.address.split('@')[0] : x.name).toLowerCase().replace(/[^a-z]+/g, ' ').trim().split(' ')[0] ?? '';
   const optedOutBefore = last && lastReply?.replyKind === 'opt_out' && lastReply.at < last.at && firstName(lastReply) === firstName(last) ? lastReply : null;
+  // The walk fix (2026-10-10): a human reply a send of ours followed (to their address, or in their thread) was
+  // answered, and the story says so once: "they wrote <date>; we answered <date>". When that answer is our last send,
+  // the two touches are ONE sentence (never "We wrote" and "replied" side by side for the same exchange).
+  const replyAddress = lastReply?.address?.trim().toLowerCase() || null;
+  const answer = lastReply && (lastReply.replyKind ?? 'human') === 'human' && replyAddress
+    ? [...sends].reverse().find((x) => x.at > lastReply.at && x.address?.trim().toLowerCase() === replyAddress) ?? null
+    : null;
+  const merged = !!answer && answer === last;
+  // Our last send's words, kept for the merged sentence when that send answered their reply.
+  let lastWords: { what: string; silence: string } | null = null;
   if (last) {
     const subject = last.what.replace(/^Re:\s*/i, '').replace(/^["“]+|["”]+$/g, '').trim();
     const what = subject === 'GAP first touch' ? ' (a GAP first touch)' : subject && subject !== 'email' ? `: "${subject}"` : '';
@@ -434,9 +444,17 @@ function betweenUs(i: StoryInput): StoryRow {
     const silence = optedOutBefore ? ` Sent after they opted out on ${day(optedOutBefore.at)}: nothing else goes to them.` : !answered ? (tooSoon ? ' No answer owed yet.' : i.clawdRead === 'ok' ? ' No answer on record.' : " No answer in GAP's records (clawd's history could not be read).") : '';
     // B1: our own Sent folder says it in the first person (we wrote them); the ledgers keep "Last email to".
     const lead = last.source === 'Gmail Sent' ? `We wrote ${who(last)} on ${day(last.at)}${what}.` : `Last email to ${who(last)}, ${day(last.at)}${what}.`;
-    s.push({ text: `${lead}${silence}`, tag: !optedOutBefore && !answered && !tooSoon && i.clawdRead !== 'ok' ? 'Unknown' : 'Checked', basis: `${last.source}, ${day(last.at)}${optedOutBefore ? `; their opt-out, ${day(optedOutBefore.at)}` : !answered && !tooSoon && i.clawdRead === 'ok' ? '; GAP, clawd and the account history for the silence' : ''}`, basisIds: [`touch:${last.at}`, ...(optedOutBefore ? [`touch:${optedOutBefore.at}`] : [])] });
+    lastWords = { what, silence };
+    if (!merged) s.push({ text: `${lead}${silence}`, tag: !optedOutBefore && !answered && !tooSoon && i.clawdRead !== 'ok' ? 'Unknown' : 'Checked', basis: `${last.source}, ${day(last.at)}${optedOutBefore ? `; their opt-out, ${day(optedOutBefore.at)}` : !answered && !tooSoon && i.clawdRead === 'ok' ? '; GAP, clawd and the account history for the silence' : ''}`, basisIds: [`touch:${last.at}`, ...(optedOutBefore ? [`touch:${optedOutBefore.at}`] : [])] });
   }
-  if (lastReply) {
+  if (lastReply && answer) {
+    // The walk fix: their reply and our answer, said once (the reply is a human one with an address; see above).
+    const sentTo = sends.some((x) => x.name.toLowerCase() === lastReply.name.toLowerCase() && x.at < lastReply.at);
+    const orphan = sentTo ? '' : " The email it answered is not in GAP's ledgers.";
+    const placed = lastReply.placedVia && lastReply.placedVia !== 'thread' ? ` (${lastReply.address?.split('@')[1] ?? 'their domain'}, placed by ${PLACED_WORDS[lastReply.placedVia]})` : '';
+    const ours = merged && lastWords ? `we answered ${day(answer.at)}${lastWords.what}.${lastWords.silence}` : `we answered ${day(answer.at)}.`;
+    s.push({ text: `${who(lastReply)}${placed} wrote ${day(lastReply.at)}: "${lastReply.what}"; ${ours}${orphan}`, tag: 'Buyer said', basis: `${lastReply.source}, ${day(lastReply.at)}; ${answer.source}, ${day(answer.at)}`, basisIds: [`touch:${lastReply.at}`, `touch:${answer.at}`] });
+  } else if (lastReply) {
     const k = lastReply.replyKind ?? 'human';
     // The email a reply answered is not always in GAP's ledgers (Walmart's opt-out answered a Resend-era send).
     const sentTo = sends.some((x) => x.name.toLowerCase() === lastReply.name.toLowerCase() && x.at < lastReply.at);

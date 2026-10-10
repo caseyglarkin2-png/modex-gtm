@@ -421,7 +421,7 @@ export async function commitmentsFromDisposition(
  */
 export async function commitmentsFromOutcome(
   prisma: PrismaLike,
-  o: { outcomeId: string; accountName: string; kind: 'skipped' | 'snoozed' | 'logged' | 'clear'; until: string | null; reason: string | null; actor: string; now: Date },
+  o: { outcomeId: string; accountName: string; kind: 'skipped' | 'snoozed' | 'logged' | 'done' | 'clear'; until: string | null; reason: string | null; actor: string; now: Date },
 ): Promise<void> {
   if (!ledgerReadable(prisma)) return;
   const older = (await loadCommitments(prisma, { accountNames: [o.accountName] })).filter((c) => c.source.kind === 'snooze' && c.source.id !== o.outcomeId && !TERMINAL_STATUSES.includes(c.status));

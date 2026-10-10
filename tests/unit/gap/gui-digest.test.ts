@@ -108,7 +108,8 @@ describe('GUI-11: the digest template', () => {
     const firstRecord = at('- No account yet: Kodiak reaches Laredo, but not yet Mexico.');
     const people = at('Prospects to reengage (5 of 69).');
     const pursued = at('Pursued (1): what GAP prepared on your decisions.');
-    const begin = at('Begin with item 1, PepsiCo: Ready for a first touch.');
+    // The walk fix (2026-10-10): START walks the replies first, so the pointer names the reply, numbered 3.
+    const begin = at('Begin with item 3, Boston Beer: Someone replied.');
     const lastItem = at('13. Primo: Ready for a first touch.');
     const how = at('How this email was composed: 4 from your briefs, 1 trigger, 1 from the vault; 3,800 more waiting.');
     const coverage = at('Sources: Yards First Brief reports through Oct 9, 2026, imported Oct 9, 2026 (83 items);');
