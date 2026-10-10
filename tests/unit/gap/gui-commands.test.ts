@@ -274,8 +274,10 @@ describe('GUI-09: a GET link is never a send path', () => {
     const decide = page('decide');
     const gateDecide = decide.indexOf("executionAllowed({ op: 'decide', method: 'GET', confirmed: q.confirmed === '1' })");
     expect(gateDecide).toBeGreaterThan(0);
-    expect(decide.indexOf('data-testid="decide-confirm-form"')).toBeGreaterThan(gateDecide);
-    expect(decide.indexOf('await applyDecision(')).toBeGreaterThan(decide.indexOf('data-testid="decide-confirm-form"'));
+    // Release 5: the confirm form is a component on the page (testId="decide-confirm-form"); the order rule is unchanged.
+    const confirmAt = Math.max(decide.indexOf('data-testid="decide-confirm-form"'), decide.indexOf('testId="decide-confirm-form"'));
+    expect(confirmAt).toBeGreaterThan(gateDecide);
+    expect(decide.indexOf('await applyDecision(')).toBeGreaterThan(confirmAt);
     for (const forbidden of ['sendAssignment', 'sendViaGmail', 'onApprove']) expect(decide, forbidden).not.toContain(forbidden);
     expect(decide).toContain('Nothing is applied until you confirm; nothing is sent to anyone either way.');
   });

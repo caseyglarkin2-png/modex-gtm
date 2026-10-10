@@ -1,33 +1,34 @@
 # Assignment packets preview (the Gmail action UI audit, October 10, 2026)
 
-STATUS: RECEIPT. Rendered 2026-10-10T14:20:45.186Z with the deployed renderer against production, READ ONLY (every write intercepted, listed at the end). The stored plan of 2026-10-09: revision 3, 13 items, planned 2026-10-09T23:59:48.139Z. Each packet below is the assignment email the item would receive (its subject, text and HTML), followed by one information-only intelligence item as the briefing prints it. Nothing was sent.
+STATUS: RECEIPT. Rendered 2026-10-10T15:53:36.048Z with the deployed renderer against production, READ ONLY (every write intercepted, listed at the end). The stored plan of 2026-10-10: revision 0, 14 items, planned 2026-10-10T11:05:48.417Z. Each packet below is the assignment email the item would receive (its subject, text and HTML), followed by one information-only intelligence item as the briefing prints it. Nothing was sent.
 
 ## The plan, in order
 
 | # | Account | Kind | Title | Person |
 |---|---|---|---|---|
-| 1 | Keurig Dr Pepper | review | Decide the angle |  |
-| 2 | Crowley | deal | In a deal |  |
-| 3 | GXO Logistics | deal | In a deal |  |
-| 4 | Kraft Heinz | deal | In a deal |  |
-| 5 | Kroger | deal | In a deal |  |
-| 6 | PepsiCo | ready | Ready for a first touch: Tom Kamantauskas | Tom Kamantauskas |
-| 7 | Boston Beer Company | deal | In a deal |  |
-| 8 | Mondelez International | deal | In a deal |  |
-| 9 | Wesco International | deal | In a deal |  |
-| 10 | Coca-Cola | review | Decide the angle |  |
-| 11 | Walmart Inc. | admin | Opted out | Tim Cooper |
-| 12 | Gusto | admin | Someone replied | Emily Maja |
-| 13 | The Boston Beer Company | admin | Someone replied | Savastano, Philip |
+| 1 | Crowley | deal | In a deal |  |
+| 2 | Kroger | deal | In a deal |  |
+| 3 | PepsiCo | ready | Held: the prepared email names Shawn Miller, not Tom Kamantauskas | Tom Kamantauskas |
+| 4 | Boston Beer Company | deal | In a deal |  |
+| 5 | GXO Logistics | deal | In a deal |  |
+| 6 | Kraft Heinz | deal | In a deal |  |
+| 7 | Mondelez International | deal | In a deal |  |
+| 8 | Wesco International | deal | In a deal |  |
+| 9 | Coca-Cola | review | Decide the angle |  |
+| 10 | Keurig Dr Pepper | review | Decide the angle |  |
+| 11 | FedEx | review | Decide the angle |  |
+| 12 | Walmart Inc. | admin | Opted out | Tim Cooper |
+| 13 | Gusto | admin | Someone replied | Emily Maja |
+| 14 | The Boston Beer Company | admin | Someone replied | Savastano, Philip |
 
 ## Kenco
 
 Not on the plan today; rendered as a review item: review, The account as GAP reads it (preview, not on the plan). Prepared: angle.
 
-Subject: GAP 14 of 13, Kenco: The account as GAP reads it (preview, not on the plan) [GAP#ffffffffffffffffffffffffffffffff.3]
+Subject: GAP 15 of 14, Kenco: The account as GAP reads it (preview, not on the plan) [GAP#ffffffffffffffffffffffffffffffff.0]
 
 ```text
-Kenco. Why now: A preview of the packet for an account that is not on today's list. In a deal: YardFlow - Kenco (Proposal). As of Oct 10, 2026, 10:20 AM New York.
+Kenco. Why now: A preview of the packet for an account that is not on today's list. In a deal: YardFlow - Kenco (Proposal). As of Oct 10, 2026, 11:53 AM New York.
 
 What changed or remains unresolved:
 - Nothing new on record since the last plan; the relationship and the evidence below are what GAP holds.
@@ -88,20 +89,20 @@ To act from here, put one of these on the first line of your reply: APPROVE, REV
 Opening a link never approves or sends anything.
 
 Read for this packet:
-- Searched: no person is named on the item, so the inbox was not searched by address; HubSpot engagements at Kenco (58); the commitments ledger (1); open deals (1); the vault's calls and meetings (not read); the suppression list; read Oct 10, 2026, 10:20 AM New York.
-- Not read this time: Gmail Sent (no GAP sender configured), Gmail drafts (Gmail drafts not read). Partly read: the Gmail thread (GAP's synced inbox, not a live thread read; 19 placed sender messages merged), the vault (103 calls, 6731 account notes, 85 meeting notes, 7 deal notes, 508 people notes). Read: HubSpot engagements (58)
+- Searched: no person is named on the item, so the inbox was not searched by address; HubSpot engagements at Kenco (58); the commitments ledger (1); open deals (1); the vault's calls and meetings (not read); the suppression list; read Oct 10, 2026, 11:53 AM New York.
+- Not read this time: Gmail Sent (casey@yardflow.ai not read: not configured; casey@freightroll.com not read: Gmail Sent read failed for 12 of 12 queries (their address: Gmail sender not configured: missing GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, or GOOGLE)), Gmail drafts (Gmail drafts not read). Partly read: the Gmail thread (GAP's synced inbox, not a live thread read; 19 placed sender messages merged), the vault (103 calls, 6731 account notes, 85 meeting notes, 7 deal notes, 508 people notes). Read: HubSpot engagements (58)
 
 This is an internal message from GAP to you; nothing in it went to a buyer.
 ```
 
 ## The Boston Beer Company
 
-Item 13 of 13: admin, Someone replied. Prepared: none.
+Item 14 of 14: admin, Someone replied. Prepared: none.
 
-Subject: GAP 13 of 13, The Boston Beer Company: Someone replied [GAP#1195a77c039005dd75f49aacced7cd60.3]
+Subject: GAP 14 of 14, The Boston Beer Company: Someone replied [GAP#8e92942ea48086a23643e08a3be5c391.0]
 
 ```text
-The Boston Beer Company: Savastano, Philip. Why now: An old reply to triage (129 days): record what they said or dismiss it; buyer activity Jun 3; the vault's next action: Send the 4 tracked sales docs (Pilot-Program, Pricing-and-Packaging, ROI-One-Pager, Solution-Overview) as tracked links, due yesterday. In a deal: YardFlow - The Boston Beer Company (Discovery). As of Oct 10, 2026, 10:20 AM New York.
+The Boston Beer Company: Savastano, Philip. Why now: An old reply to triage (129 days): record what they said or dismiss it; buyer activity Jun 3; the vault's next action: Send the 4 tracked sales docs (Pilot-Program, Pricing-and-Packaging, ROI-One-Pager, Solution-Overview) as tracked links, first stop per.., due Oct 8. In a deal: YardFlow - The Boston Beer Company (Discovery). As of Oct 10, 2026, 11:53 AM New York.
 
 What changed or remains unresolved:
 - Savastano, Philip asked for something on Jun 2, 2026 ("Re: [EXTERNAL] Yard flow insights amid leadership change"); met: we wrote Jun 2, 2026 under "Re: [EXTERNAL] Yard flow insights amid leadership change" (HubSpot (logged email)), after their message of Jun 2, 2026. No repeat send is inferred from the old reply. (event Jun 2, 2026; GAP's synced inbox and our Sent https://mail.google.com/mail/u/0/#search/from%3A%22philip.savastano%40bostonbeer.com%22)
@@ -158,20 +159,20 @@ To act from here, put one of these on the first line of your reply: APPROVE, REV
 Opening a link never approves or sends anything.
 
 Read for this packet:
-- Searched: GAP's synced inbox for philip.savastano@bostonbeer.com (4 messages from them); our Sent to them (not read: no GAP sender configured); Gmail drafts to them (not read: no GAP sender configured); HubSpot engagements at The Boston Beer Company (53); the commitments ledger (0); open deals (1); the vault's calls and meetings (0); the suppression list; read Oct 10, 2026, 10:20 AM New York.
-- Not read this time: Gmail Sent (no GAP sender configured), Gmail drafts (Gmail drafts not read). Partly read: the Gmail thread (GAP's synced inbox, not a live thread read; 2 placed sender messages merged), the vault (103 calls, 6731 account notes, 85 meeting notes, 7 deal notes, 508 people notes). Read: HubSpot engagements (53)
+- Searched: GAP's synced inbox for philip.savastano@bostonbeer.com (4 messages from them); our Sent to them (not read: no GAP sender configured); Gmail drafts to them (not read: no GAP sender configured); HubSpot engagements at The Boston Beer Company (53); the commitments ledger (0); open deals (1); the vault's calls and meetings (0); the suppression list; read Oct 10, 2026, 11:53 AM New York.
+- Not read this time: Gmail Sent (casey@yardflow.ai not read: not configured; casey@freightroll.com not read: Gmail Sent read failed for 4 of 4 queries (their address: Gmail sender not configured: missing GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, or GOOGLE_)), Gmail drafts (Gmail drafts not read). Partly read: the Gmail thread (GAP's synced inbox, not a live thread read; 2 placed sender messages merged), the vault (103 calls, 6731 account notes, 85 meeting notes, 7 deal notes, 508 people notes). Read: HubSpot engagements (53)
 
 This is an internal message from GAP to you; nothing in it went to a buyer.
 ```
 
 ## PepsiCo
 
-Item 6 of 13: ready, Ready for a first touch: Tom Kamantauskas. Prepared: none (held: recipient_mismatch).
+Item 3 of 14: ready, Held: the prepared email names Shawn Miller, not Tom Kamantauskas. Prepared: none (held: recipient_mismatch).
 
-Subject: GAP 6 of 13, PepsiCo: Held: the prepared email names Shawn Miller, not Tom Kamantauskas [GAP#1afff4e0fc25890040c49dab7cefa859.3]
+Subject: GAP 3 of 14, PepsiCo: Held: the prepared email names Shawn Miller, not Tom Kamantauskas [GAP#db35d13b15807edcdf40243994679454.0]
 
 ```text
-PepsiCo: Tom Kamantauskas (Senior Director - Logistics, Distribution & Transportation). Why now: Held: GAP's prepared email is addressed to Shawn Miller (shawn.miller@pepsico.com), but this item names Tom Kamantauskas. Held: nothing goes out until the account's chosen person and the draft agree; choose on the account. As of Oct 10, 2026, 10:20 AM New York.
+PepsiCo: Tom Kamantauskas (Senior Director - Logistics, Distribution & Transportation). Why now: Held: GAP's prepared email is addressed to Shawn Miller (shawn.miller@pepsico.com), but this item names Tom Kamantauskas. Held: nothing goes out until the account's chosen person and the draft agree; choose on the account. As of Oct 10, 2026, 11:53 AM New York.
 
 What changed or remains unresolved:
 - Next prepared action: Prepare the first touch. (the Work lanes)
@@ -228,21 +229,21 @@ To act from here, put one of these on the first line of your reply: APPROVE, REV
 Opening a link never approves or sends anything.
 
 Read for this packet:
-- Searched: GAP's synced inbox for tom.kamantauskas@pepsico.com (0 messages from them); our Sent to them (not read: no GAP sender configured); Gmail drafts to them (not read: no GAP sender configured); HubSpot engagements at PepsiCo (60); the commitments ledger (0); open deals (0); the vault's calls and meetings (0); the suppression list; read Oct 10, 2026, 10:20 AM New York.
-- Not read this time: Gmail Sent (no GAP sender configured), Gmail drafts (Gmail drafts not read). Partly read: the Gmail thread (GAP's synced inbox, not a live thread read; 0 placed sender messages merged), the vault (103 calls, 6731 account notes, 85 meeting notes, 7 deal notes, 508 people notes). Read: HubSpot engagements (60)
+- Searched: GAP's synced inbox for tom.kamantauskas@pepsico.com (0 messages from them); our Sent to them (not read: no GAP sender configured); Gmail drafts to them (not read: no GAP sender configured); HubSpot engagements at PepsiCo (60); the commitments ledger (0); open deals (0); the vault's calls and meetings (0); the suppression list; read Oct 10, 2026, 11:53 AM New York.
+- Not read this time: Gmail Sent (casey@yardflow.ai not read: not configured; casey@freightroll.com not read: Gmail Sent read failed for 12 of 12 queries (their address: Gmail sender not configured: missing GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, or GOOGLE_REFRESH_)), Gmail drafts (Gmail drafts not read). Partly read: the Gmail thread (GAP's synced inbox, not a live thread read; 0 placed sender messages merged), the vault (103 calls, 6731 account notes, 85 meeting notes, 7 deal notes, 508 people notes). Read: HubSpot engagements (60)
 
 This is an internal message from GAP to you; nothing in it went to a buyer.
 ```
 
 ## Walmart Inc.
 
-Item 11 of 13: admin, Opted out. Prepared: none.
+Item 12 of 14: admin, Opted out. Prepared: none.
 
-Subject: GAP 11 of 13, Walmart Inc.: Opted out [GAP#1ff9077559ada7ee3d78c107987eacff.3]
+Subject: GAP 12 of 14, Walmart Inc.: Opted out [GAP#315eefba78f454278ff9a1f5d5125d3f.0]
 
 ```text
 STOP: Tim Cooper asked not to be contacted on Oct 5, 2026 ("stop"). No outbound to them from this item; their message of Oct 5, 2026; on the suppression list.
-Walmart Inc.: Tim Cooper. Why now: Admin: record it; buyer activity Oct 5; the vault's next action: One regional DC, one pilot: prove the gate-to-dock flow gain at a single site Tim or Hugo owns, then take the number to Montgomery, due Jul 24. Opted out: Tim Cooper, Oct 5. As of Oct 10, 2026, 10:20 AM New York.
+Walmart Inc.: Tim Cooper. Why now: Admin: record it; buyer activity Oct 5; the vault's next action: One regional DC, one pilot: prove the gate-to-dock flow gain at a single site Tim or Hugo owns, then take the number to Montgomery, due Jul 24. Opted out: Tim Cooper, Oct 5. As of Oct 10, 2026, 11:53 AM New York.
 
 What changed or remains unresolved:
 - Tim Cooper wrote Oct 5, "Re: Leaving this with you": stop. Next prepared action: Record the opt-out. (event 2026-10-05T13:58:03.000Z; their email in the GAP mailbox)
@@ -304,20 +305,20 @@ To act from here, put one of these on the first line of your reply: APPROVE, REV
 Opening a link never approves or sends anything.
 
 Read for this packet:
-- Searched: GAP's synced inbox for timothy.cooper@walmart.com (1 message from them); our Sent to them (not read: no GAP sender configured); Gmail drafts to them (not read: no GAP sender configured); HubSpot engagements at Walmart Inc. (52); the commitments ledger (0); open deals (0); the vault's calls and meetings (0); the suppression list; read Oct 10, 2026, 10:20 AM New York.
-- Not read this time: Gmail Sent (no GAP sender configured), Gmail drafts (Gmail drafts not read). Partly read: the Gmail thread (GAP's synced inbox, not a live thread read; 0 placed sender messages merged). Read: HubSpot engagements (52), the vault (103 calls, 6731 account notes, 85 meeting notes, 7 deal notes, 508 people notes)
+- Searched: GAP's synced inbox for timothy.cooper@walmart.com (1 message from them); our Sent to them (not read: no GAP sender configured); Gmail drafts to them (not read: no GAP sender configured); HubSpot engagements at Walmart Inc. (52); the commitments ledger (0); open deals (0); the vault's calls and meetings (0); the suppression list; read Oct 10, 2026, 11:53 AM New York.
+- Not read this time: Gmail Sent (casey@yardflow.ai not read: not configured; casey@freightroll.com not read: Gmail Sent read failed for 1 of 1 query (their address: Gmail sender not configured: missing GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, or GOOGLE_REFRESH)), Gmail drafts (Gmail drafts not read). Partly read: the Gmail thread (GAP's synced inbox, not a live thread read; 0 placed sender messages merged). Read: HubSpot engagements (52), the vault (103 calls, 6731 account notes, 85 meeting notes, 7 deal notes, 508 people notes)
 
 This is an internal message from GAP to you; nothing in it went to a buyer.
 ```
 
 ## Keurig Dr Pepper
 
-Item 1 of 13: review, Decide the angle. Prepared: none.
+Item 10 of 14: review, Decide the angle. Prepared: none.
 
-Subject: GAP 1 of 13, Keurig Dr Pepper: Decide the angle [GAP#1dbe76e86b04c6f54d465edfedf9e1f6.3]
+Subject: GAP 10 of 14, Keurig Dr Pepper: Decide the angle [GAP#11d433a38bf3129a9eb1cebaf5a6b784.0]
 
 ```text
-Keurig Dr Pepper. Why now: A proposal to review. Ranked here: the vault's next action: One DSD or beverage-plant yard, one pilot Brian owns, configured per site so it carves cleanly between Beverage Co and Global Coffee Co, wit, due Jul 17; a decision to review. Research: no usable angle to open on yet (6 eligible). As of Oct 10, 2026, 10:20 AM New York.
+Keurig Dr Pepper. Why now: A proposal to review; the vault's next action: One DSD or beverage-plant yard, one pilot Brian owns, configured per site so it carves cleanly between Beverage Co and Global Coffee Co,.., due Jul 17. Ranked here: a decision to review. Research: no usable angle to open on yet (6 eligible). As of Oct 10, 2026, 11:53 AM New York.
 
 What changed or remains unresolved:
 - Next prepared action: Decide the angle. (the Work lanes)
@@ -367,8 +368,8 @@ To act from here, put one of these on the first line of your reply: APPROVE, REV
 Opening a link never approves or sends anything.
 
 Read for this packet:
-- Searched: no person is named on the item, so the inbox was not searched by address; HubSpot engagements at Keurig Dr Pepper (40); the commitments ledger (0); open deals (0); the vault's calls and meetings (not read); the suppression list; read Oct 10, 2026, 10:20 AM New York.
-- Not read this time: Gmail Sent (no GAP sender configured), Gmail drafts (Gmail drafts not read). Partly read: the Gmail thread (GAP's synced inbox, not a live thread read; 0 placed sender messages merged), the vault (103 calls, 6731 account notes, 85 meeting notes, 7 deal notes, 508 people notes). Read: HubSpot engagements (40)
+- Searched: no person is named on the item, so the inbox was not searched by address; HubSpot engagements at Keurig Dr Pepper (40); the commitments ledger (0); open deals (0); the vault's calls and meetings (not read); the suppression list; read Oct 10, 2026, 11:53 AM New York.
+- Not read this time: Gmail Sent (casey@yardflow.ai not read: not configured; casey@freightroll.com not read: Gmail Sent read failed for 6 of 6 queries (their address: Gmail sender not configured: missing GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, or GOOGLE_REF)), Gmail drafts (Gmail drafts not read). Partly read: the Gmail thread (GAP's synced inbox, not a live thread read; 0 placed sender messages merged), the vault (103 calls, 6731 account notes, 85 meeting notes, 7 deal notes, 508 people notes). Read: HubSpot engagements (40)
 
 This is an internal message from GAP to you; nothing in it went to a buyer.
 ```
