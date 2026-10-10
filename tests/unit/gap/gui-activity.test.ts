@@ -144,7 +144,8 @@ describe('GUI-10 (c): receipts say what the provider confirmed', () => {
     expect(r).toMatchObject({ applied: true, effect: 'assignment_sent' });
     const row = db.store.gapAuditEvent.find((e) => e.kind === COMMAND_APPLIED && e.payload.effect === 'assignment_sent');
     expect(row?.payload).toMatchObject({ receipt: 'provider_confirmed', gmailMessageId: 'gm-1', sent: true });
-    expect(send.mock.calls[1][0].text).toContain('Sent item 2, PepsiCo: Ready for a first touch, as its own email (Gmail message gm-1).');
+    // The walk fix (2026-10-10): the walk takes Kroger's due commitment (item 3) before PepsiCo's first touch.
+    expect(send.mock.calls[1][0].text).toContain('Sent item 3, Kroger: Send the dock comparison, as its own email (Gmail message gm-1).');
   });
 
   it('Gmail answered no id: the row says recorded_not_confirmed and the answer says "recorded, not confirmed by Gmail"', async () => {
@@ -152,7 +153,7 @@ describe('GUI-10 (c): receipts say what the provider confirmed', () => {
     expect(r).toMatchObject({ applied: true, effect: 'assignment_sent' });
     const row = db.store.gapAuditEvent.find((e) => e.kind === COMMAND_APPLIED && e.payload.effect === 'assignment_sent');
     expect(row?.payload).toMatchObject({ receipt: 'recorded_not_confirmed', gmailMessageId: null, sent: true });
-    expect(send.mock.calls[1][0].text).toContain('Sent item 2, PepsiCo: Ready for a first touch, as its own email (recorded, not confirmed by Gmail).');
+    expect(send.mock.calls[1][0].text).toContain('Sent item 3, Kroger: Send the dock comparison, as its own email (recorded, not confirmed by Gmail).');
   });
 
   it('the activity projection: a sent row with a Gmail id is provider-confirmed with the id as evidence; a by-hand record without one is self-reported and says so', () => {

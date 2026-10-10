@@ -159,7 +159,7 @@ describe('X07b: applyCommand', () => {
     const none = await w2.run(msg({ threadId: 'th-item-0', bodyText: 'NEXT' }));
     expect(none).toMatchObject({ applied: true, effect: 'nothing_left' });
     expect(w2.send.mock.calls[0][0].text).toMatch(/Nothing left/);
-    // A fresh day with no assignments: START from the briefing sends item 0, NEXT sends item 1.
+    // A fresh day with no assignments: START from the briefing sends the walk's first (Kroger's commitment), NEXT the first touch.
     const db = ledgerDb({ accounts: ['PepsiCo', 'Kroger'] }, NOW);
     const c = db.client();
     const made = await ensureCommitment(c, { accountName: 'Kroger', kind: 'deliverable', title: 'Send the dock comparison', source: { kind: 'capture', id: 'cap:2' } }, { actor: SELLER, now: NOW });
@@ -169,13 +169,14 @@ describe('X07b: applyCommand', () => {
     const deps = { send, askContext: vi.fn(async () => null), pack: vi.fn(async () => null) };
     const ctx = await loadCommandContext(c, SETTINGS, NOW);
     const start = await applyCommand(db.client(), { m: msg({ threadId: 'th-brief', bodyText: 'START' }), ctx, now: NOW, settings: SETTINGS, sender: SENDER, baseUrl: 'https://app.example', actionSecret: null, actor: 'cron' }, deps);
-    expect(start).toMatchObject({ applied: true, effect: 'assignment_sent', itemKey: plan.items[0].key });
+    // The walk fix (2026-10-10): the walk takes what is due (Kroger's commitment, item 2) before a ready first touch.
+    expect(start).toMatchObject({ applied: true, effect: 'assignment_sent', itemKey: plan.items[1].key });
     expect(db.store.gapAuditEvent.filter((e) => e.kind === DAY_STARTED)).toHaveLength(1);
     expect(db.store.gapAuditEvent.filter((e) => e.kind === ASSIGNMENT_SENT)).toHaveLength(1);
-    expect(send.mock.calls[0][0].subject).toMatch(/^GAP 1 of 2, PepsiCo/);
+    expect(send.mock.calls[0][0].subject).toMatch(/^GAP 2 of 2, Kroger/);
     const next = await applyCommand(db.client(), { m: msg({ threadId: 'th-brief', bodyText: 'NEXT' }), ctx, now: NOW, settings: SETTINGS, sender: SENDER, baseUrl: 'https://app.example', actionSecret: null, actor: 'cron' }, deps);
-    expect(next).toMatchObject({ applied: true, effect: 'assignment_sent', itemKey: plan.items[1].key });
-    expect(send.mock.calls[1][0].subject).toMatch(/^GAP 2 of 2, Kroger/);
+    expect(next).toMatchObject({ applied: true, effect: 'assignment_sent', itemKey: plan.items[0].key });
+    expect(send.mock.calls[1][0].subject).toMatch(/^GAP 1 of 2, PepsiCo/);
   });
 
   it('X12 finding: an APPROVE the effect refuses (the revision not cleared) is recorded refused, and a later APPROVE on a cleared revision proceeds; a successful APPROVE is consumed once', async () => {
@@ -222,19 +223,21 @@ describe('seller acceptance follow-up: START holds research, a refreshed plan re
     const deps = { send, askContext, pack: vi.fn(async () => null) };
     const ctx = await loadCommandContext(c, SETTINGS, NOW);
     const start = await applyCommand(db.client(), { m: msg({ threadId: 'th-brief', bodyText: 'START' }), ctx, now: NOW, settings: SETTINGS, sender: SENDER, baseUrl: 'https://app.example', actionSecret: null, actor: 'cron' }, deps);
-    expect(start).toMatchObject({ applied: true, effect: 'assignment_sent', itemKey: plan.items[1].key });
-    expect(send.mock.calls[0][0].subject, 'the assignment is PepsiCo, item 2').toMatch(/^GAP 2 of 3, PepsiCo/);
+    // The walk fix (2026-10-10): Southern Glazer's (a follow-up) and Kroger (a commitment) are walked as what is due,
+    // before PepsiCo's first touch: Southern Glazer's is held, Kroger (item 3) goes out.
+    expect(start).toMatchObject({ applied: true, effect: 'assignment_sent', itemKey: plan.items[2].key });
+    expect(send.mock.calls[0][0].subject, 'the assignment is Kroger, item 3').toMatch(/^GAP 3 of 3, Kroger/);
     expect(send.mock.calls[1][0].threadId, 'the answer goes to the briefing thread').toBe('th-brief');
     expect(send.mock.calls[1][0].text).toContain("Held for GAP research: Southern Glazer's (nothing supported to send yet).");
     const holds = db.store.gapAuditEvent.filter((e) => e.kind === COMMAND_APPLIED && e.payload.effect === ITEM_HELD_FOR_RESEARCH);
     expect(holds).toHaveLength(1);
     expect(holds[0]).toMatchObject({ subject_type: 'work_item', subject_id: plan.items[0].key, payload: { reason: 'research_move' } });
-    expect(db.store.gapAuditEvent.filter((e) => e.kind === ASSIGNMENT_SENT).map((e) => e.subject_id), "no assignment for Southern Glazer's").toEqual([plan.items[1].key]);
+    expect(db.store.gapAuditEvent.filter((e) => e.kind === ASSIGNMENT_SENT).map((e) => e.subject_id), "no assignment for Southern Glazer's").toEqual([plan.items[2].key]);
     const applied = db.store.gapAuditEvent.find((e) => e.kind === COMMAND_APPLIED && e.payload.effect === 'assignment_sent');
     expect(applied?.payload.held).toEqual([plan.items[0].key]);
-    // NEXT: the hold is not recorded again; Kroger goes out; the held line is still said.
+    // NEXT: the hold is not recorded again; PepsiCo goes out; the held line is still said.
     const next = await applyCommand(db.client(), { m: msg({ threadId: 'th-brief', bodyText: 'NEXT' }), ctx, now: NOW, settings: SETTINGS, sender: SENDER, baseUrl: 'https://app.example', actionSecret: null, actor: 'cron' }, deps);
-    expect(next).toMatchObject({ applied: true, effect: 'assignment_sent', itemKey: plan.items[2].key });
+    expect(next).toMatchObject({ applied: true, effect: 'assignment_sent', itemKey: plan.items[1].key });
     expect(db.store.gapAuditEvent.filter((e) => e.kind === COMMAND_APPLIED && e.payload.effect === ITEM_HELD_FOR_RESEARCH), 'held once').toHaveLength(1);
     expect(send.mock.calls[3][0].text).toContain("Held for GAP research: Southern Glazer's");
   });

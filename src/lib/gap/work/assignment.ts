@@ -25,6 +25,9 @@
  *     angle ...", "Review the angle ...", or a why that says nothing is prepared or GAP researches). Such an item is
  *     HELD for the agent (`work.command_applied`, effect `item_held_for_research`, subject the item) and never handed
  *     to the seller: October 9 handed him Southern Glazer's with prepared none and a move that amounted to "research it"
+ *   - the walk fix (2026-10-10): START and NEXT walk replies to answer, commitments due, ready first touches, review
+ *     items, then admin, and never deal hygiene (work/walk.ts); October 10 handed him seven "Confirm the real date"
+ *     items before anything new
  */
 import { createHash } from 'node:crypto';
 import type { GmailSender, GmailSendPayload } from '@/lib/email/gmail-sender';
@@ -38,6 +41,7 @@ import { buildAssignmentPacket, renderPacketHtml, renderPacketText, type Assignm
 import { dealCoverageFrom } from './deal-coverage';
 import { loadPursued, type PursuedItem } from './intel';
 import { heldTitle, type DayPlan, type PlanItem } from './plan';
+import { walkOrder } from './walk';
 import { properCase } from '../people/contact-packet';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -323,9 +327,10 @@ const HELD_LINE = 'nothing supported to send yet';
 const MISMATCH_LINE = 'the prepared email is addressed to a different person than the item names; choose on the account';
 
 /**
- * The next item START or NEXT hands the seller, walking the plan (its newest revision) in order and skipping: an item
- * assigned in any revision (by key), an item with an applied SKIP, DEFER or DONE, an item already held, and (when
- * `assign` is given) an item that is not assignable, which is recorded held for the agent and walked past.
+ * The next item START or NEXT hands the seller, walking the plan (its newest revision) in the WALK order (work/walk.ts:
+ * replies to answer, commitments due, ready first touches, review items, then admin; deal hygiene is not walked) and
+ * skipping: an item assigned in any revision (by key), an item with an applied SKIP, DEFER or DONE, an item already
+ * held, and (when `assign` is given) an item that is not assignable, which is recorded held for the agent and walked past.
  */
 export async function nextAssignableItem(prisma: PrismaLike, plan: DayPlan, opts: { assign?: { input: AssignableInput; deps?: AssignmentDeps; actor: string } } = {}): Promise<NextAssignable> {
   const keys = plan.items.map((i) => i.key);
@@ -344,7 +349,9 @@ export async function nextAssignableItem(prisma: PrismaLike, plan: DayPlan, opts
   }
   const heldLine = (reason: string) => (reason === 'recipient_mismatch' ? MISMATCH_LINE : HELD_LINE);
   const held: HeldItem[] = [];
-  for (const item of plan.items) {
+  // The walk fix (2026-10-10): replies to answer, then what is due, the ready first touches, the reviews and the
+  // admin; deal hygiene is not walked (work/walk.ts). The plan's numbering stays as it is.
+  for (const item of walkOrder(plan.items)) {
     if (sent.has(item.key) || settled.has(item.key)) continue;
     if (heldBefore.has(item.key)) {
       held.push({ item, line: heldLine(heldBefore.get(item.key) ?? ''), recorded: false });
