@@ -16,9 +16,15 @@
  * Signals page; explore records the look and changes nothing else.
  *
  * The people fix (2026-10-10): `never` is "not a prospect" on a sender, `person:<address>` or `domain:<domain>`; it
- * never expires and nothing later on the key undoes it (work/intel.ts loadDecided). A signal or a trigger refuses it;
- * a domain key takes nothing else, and refuses a freemail or our own domain and a domain that places at a GAP account
- * (a whole account's people are never hidden by one click; decide the person instead).
+ * never expires and nothing later on the key undoes it (work/intel.ts loadDecided) except its own undo. A signal or a
+ * trigger refuses it; a domain key takes nothing else, and refuses a freemail or our own domain and a domain that
+ * places at a GAP account (a whole account's people are never hidden by one click; decide the person instead).
+ *
+ * The undo (2026-10-10, Casey: "Add undo for 'never'"): `relist`, "List this sender again", on a sender key where a
+ * never STANDS. One more PROSPECT_DECISION row on the same key carrying the never it ends (its row id, time, actor);
+ * the never row is kept. It refuses a signal or a trigger, and a key with no standing never. It writes nothing else:
+ * no persona, no suppression, no disposition, no activity, no CRM, no mail. A relisted person still covered by a
+ * standing never on their domain says so (the domain's own relist lists them).
  */
 import { applySignalOp } from '../signals/ops';
 import { captureSignal } from '../signals/intake';
@@ -32,7 +38,8 @@ import { loadIdentityContext } from '../identity/service';
 import type { IdentityContext } from '../identity/resolve';
 import { loadInDealsSummary, type InDealsSummary } from '../deals/in-deals';
 import type { ContactLookup } from '../opportunity/contact-reads';
-import { PERSON_DECISIONS, PROSPECT_DECISION, type Decision } from './intel';
+import { PROSPECT_DECISION, RECORDED_DECISIONS, RELIST, neverMarksFrom, type Decision, type NeverMark } from './intel';
+import { sinceDay } from './truth-text';
 import { resolveIdentity } from '../identity/resolve';
 import { FREEMAIL_DOMAINS, OWN_DOMAINS } from '../replies/domains';
 import { seedRevision } from '../agents/angle-claims';
@@ -57,7 +64,7 @@ export function parseDecisionKey(key: string): DecisionKey | null {
   return email.includes('@') ? { kind: 'person', email } : null;
 }
 
-export const isDecision = (v: unknown): v is Decision => typeof v === 'string' && (PERSON_DECISIONS as readonly string[]).includes(v);
+export const isDecision = (v: unknown): v is Decision => typeof v === 'string' && (RECORDED_DECISIONS as readonly string[]).includes(v);
 
 export interface DecideInput {
   key: string;
@@ -73,7 +80,7 @@ export interface DecideInput {
 export type AngleState = 'queued' | 'kept_in_progress' | 'kept_prepared';
 
 export type DecideResult =
-  | { ok: true; key: string; decision: Decision; effects: string[]; angleTaskId: string | null; accountName: string | null; href: string; angle?: AngleState | null }
+  | { ok: true; key: string; decision: Decision; effects: string[]; angleTaskId: string | null; accountName: string | null; href: string; angle?: AngleState | null; /** A relist: the never it ended. */ endedNever?: NeverMark | null; /** A relisted person: the standing never on their domain that still keeps them off the list. */ stillCoveredBy?: NeverMark | null }
   | { ok: false; reason: 'bad_key' | 'bad_decision' | 'not_found' | string };
 
 export interface DecideDeps {
@@ -127,6 +134,11 @@ export async function applyDecision(prisma: PrismaLike, input: DecideInput, deps
   if (!isDecision(input.decision)) return { ok: false, reason: 'bad_decision' };
   // The people fix (2026-10-10): `never` is for a sender only; a domain key takes nothing else.
   if (input.decision === 'never' && (parsed.kind === 'signal' || parsed.kind === 'trigger')) return { ok: false, reason: 'never_is_for_senders' };
+  // Its undo is for a sender too, and only where a never stands.
+  if (input.decision === RELIST) {
+    if (parsed.kind === 'signal' || parsed.kind === 'trigger') return { ok: false, reason: 'relist_is_for_senders' };
+    return relistSender(prisma, parsed.kind === 'person' ? `person:${parsed.email}` : `domain:${parsed.domain}`, input);
+  }
   if (parsed.kind === 'domain') return neverDomain(prisma, parsed.domain, input, deps);
   const key = parsed.kind === 'person' ? `person:${parsed.email}` : parsed.kind === 'trigger' ? `trigger:${parsed.id}` : `signal:${parsed.id}`;
   const via = input.via ?? 'app';
@@ -260,6 +272,51 @@ async function neverDomain(prisma: PrismaLike, domain: string, input: DecideInpu
   return { ok: true, key, decision: 'never', effects, angleTaskId: null, accountName: null, href: '/gap/signals/', angle: null };
 }
 
+/** The domain keys a `never` on an address's domain could stand on (the domain and each parent of two labels or more), as work/intel.ts neverCovers reads them. */
+function domainKeysOf(email: string): string[] {
+  const labels = (email.split('@')[1] ?? '').toLowerCase().split('.').filter(Boolean);
+  const out: string[] = [];
+  for (let i = 0; i + 2 <= labels.length; i += 1) out.push(`domain:${labels.slice(i).join('.')}`);
+  return out;
+}
+
+/** The decision rows on these keys, newest first (the same rows loadDecided reads, narrowed to the keys). */
+async function rowsOn(prisma: PrismaLike, keys: string[]) {
+  if (!keys.length || typeof prisma?.gapAuditEvent?.findMany !== 'function') return [];
+  return prisma.gapAuditEvent.findMany({ where: { kind: PROSPECT_DECISION, subject_id: { in: keys } }, orderBy: { created_at: 'desc' }, select: { id: true, subject_id: true, actor: true, payload: true, created_at: true } });
+}
+
+/**
+ * The never that stands on a sender key (`person:<address>` or `domain:<domain>`), or null: the newest never-or-relist
+ * row on the key decides, as loadDecided reads it. The decide page asks it to offer the undo where the never was taken.
+ */
+export async function neverStanding(prisma: PrismaLike, key: string): Promise<NeverMark | null> {
+  const parsed = parseDecisionKey(key);
+  if (!parsed || (parsed.kind !== 'person' && parsed.kind !== 'domain')) return null;
+  const k = parsed.kind === 'person' ? `person:${parsed.email}` : `domain:${parsed.domain}`;
+  return neverMarksFrom(await rowsOn(prisma, [k]).catch(() => [])).find((m) => m.key === k) ?? null;
+}
+
+/** The standing never on an address's domain (or a parent domain) that keeps the address off the list, or null. */
+export async function domainNeverCovering(prisma: PrismaLike, email: string): Promise<NeverMark | null> {
+  return neverMarksFrom(await rowsOn(prisma, domainKeysOf(email)).catch(() => []))[0] ?? null;
+}
+
+/**
+ * The undo of `never` (2026-10-10). One PROSPECT_DECISION row `relist` on the key, carrying the never it ends; the
+ * never row is kept, so the ledger reads never, then relist. Refused when no never stands on the key (nothing to
+ * undo; a second click is a no-op said as such). Nothing else is read or written.
+ */
+async function relistSender(prisma: PrismaLike, key: string, input: DecideInput): Promise<DecideResult> {
+  const standing = neverMarksFrom(await rowsOn(prisma, [key])).find((m) => m.key === key) ?? null;
+  if (!standing) return { ok: false, reason: 'nothing_to_relist' };
+  const isDomain = key.startsWith('domain:');
+  const stillCoveredBy = isDomain ? null : await domainNeverCovering(prisma, key.slice('person:'.length));
+  const effects = [isDomain ? 'relisted_domain' : 'relisted', ...(stillCoveredBy ? [`still_not_a_prospect_by:${stillCoveredBy.key}`] : [])];
+  await recordDecision(prisma, key, { ...input, decision: RELIST }, { endsNever: { eventId: standing.eventId, at: standing.since, actor: standing.actor, via: standing.via }, effects });
+  return { ok: true, key, decision: RELIST, effects, angleTaskId: null, accountName: null, href: '/gap/signals/', angle: null, endedNever: standing, stillCoveredBy };
+}
+
 /** The seller line for a decision just taken. */
 export function decisionLine(r: Extract<DecideResult, { ok: true }>): string {
   const what = r.key.startsWith('person:') ? 'the person' : r.key.startsWith('trigger:') ? 'the trigger' : r.key.startsWith('domain:') ? 'the domain' : 'the signal';
@@ -268,6 +325,14 @@ export function decisionLine(r: Extract<DecideResult, { ok: true }>): string {
       return r.key.startsWith('domain:')
         ? `Not a prospect: no one at ${r.key.slice('domain:'.length)} is listed to reengage again. Nothing was sent to anyone.`
         : `Not a prospect: ${r.key.slice('person:'.length)} is never listed to reengage again. Nothing was sent to anyone.`;
+    case 'relist': {
+      // The undo of `never` (2026-10-10): what was reversed, what was not, and a domain never that still stands.
+      const since = r.endedNever ? ` (marked ${sinceDay(r.endedNever.since)})` : '';
+      const kept = 'Only that mark was reversed: an opt-out, a suppression or do not contact still stands, and nothing else changed.';
+      if (r.key.startsWith('domain:')) return `Listed again: people at ${r.key.slice('domain:'.length)} are no longer marked not a prospect${since}, so the prospects to reengage can list them again. ${kept} Nothing was sent to anyone.`;
+      const still = r.stillCoveredBy ? ` They stay off the list while everyone at ${r.stillCoveredBy.id} is marked not a prospect; list that domain again to list them.` : '';
+      return `Listed again: ${r.key.slice('person:'.length)} is no longer marked not a prospect${since}, so the prospects to reengage can list them again. ${kept}${still} Nothing was sent to anyone.`;
+    }
     case 'pursue':
       // Seller acceptance (2026-10-09): a repeated click finds the task already queued or running; the answer says so and queues nothing.
       if (r.angle === 'kept_in_progress') return `Already queued; GAP is on it. The angle for ${what} comes back on the item and in the next briefing. Nothing is sent until you approve it.`;

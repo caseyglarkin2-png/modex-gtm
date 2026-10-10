@@ -53,9 +53,20 @@ export const DECISIONS = ['pursue', 'explore', 'save', 'skip', 'dismiss', 'more'
  * SKIP_DAYS), and rankPeople drops the address, or every address at the domain and its subdomains, on every later day.
  */
 export const PERSON_DECISIONS = [...DECISIONS, 'never'] as const;
-export type Decision = (typeof PERSON_DECISIONS)[number];
-/** The words for a `never` live in the client-safe `./truth-text` (the briefing and the panel read them there). */
-export { NEVER_WORDS, neverDomainWords } from './truth-text';
+/**
+ * The undo of a `never` (Casey, 2026-10-10: "Add undo for 'never'"): `relist`, "List this sender again". Its own
+ * PROSPECT_DECISION row on the same key (the `never` row is never deleted or edited); loadDecided reads the newer of
+ * the two on a key, so a relist ends the never from its time on and a later never starts a new one. It is never on an
+ * item's decision list (a listed person has no never to undo); the decide page, the panel's not-a-prospect list and
+ * the route offer it where a never stands. It reverses only the never: suppression, do_not_contact, an opt-out
+ * disposition and activity are other tables it never reads or writes.
+ */
+export const RELIST = 'relist' as const;
+/** Every decision the ledger records and the route accepts: the item decisions, `never` and its undo. */
+export const RECORDED_DECISIONS = [...PERSON_DECISIONS, RELIST] as const;
+export type Decision = (typeof RECORDED_DECISIONS)[number];
+/** The words for a `never` and its undo live in the client-safe `./truth-text` (the briefing and the panel read them there). */
+export { NEVER_WORDS, neverDomainWords, RELIST_WORDS, relistDomainWords, notProspectSince } from './truth-text';
 
 /** Whether a `never` covers this address: on the address itself, or on its domain or any parent domain (two labels or more). */
 export function neverCovers(decided: ReadonlySet<string>, email: string): boolean {
@@ -197,7 +208,7 @@ export function substanceOf(metadata: unknown): IntelSubstance | null {
   };
 }
 type TriggerRow = { id: number; account_name: string; title: string; url: string; source: string; score: number | null; categories: unknown; published_at: Date | string | null; first_seen_at: Date | string; dismissed: boolean };
-type DecisionRow = { subject_id: string; payload: unknown; created_at: Date | string };
+type DecisionRow = { id?: unknown; subject_id: string; actor?: unknown; payload: unknown; created_at: Date | string };
 
 const cats = (v: unknown): string[] => (Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : []);
 
@@ -459,6 +470,8 @@ export interface Intelligence {
   people: IntelItem[];
   /** I05: what Casey pursued, with the angle when it is ready (the review's finding 2: a pursued item never vanishes). */
   pursued: PursuedItem[];
+  /** The undo of `never` (2026-10-10): the senders and domains marked not a prospect that still stand, newest first, each reversible ("List this sender again"). */
+  notProspects?: NeverMark[];
   /** How many undecided items the selection was cut from, so the shortage or the depth is said truthfully. */
   totals: { signals: number; triggers: number; people: number; reports?: number; knowledge?: number };
   /** C34: how the selection was made (the pulls and windows in words), whether more exists beyond it, and the page shown. */
@@ -468,37 +481,85 @@ export interface Intelligence {
 /** The decided trigger and person keys (the newest decision per key; a skip expires after SKIP_DAYS). */
 export const DECIDED_PAGE = 2000;
 
-export async function loadDecided(prisma: PrismaLike, now: Date): Promise<Set<string>> {
-  if (typeof prisma?.gapAuditEvent?.findMany !== 'function') return new Set();
-  // C34: every decision row is read, a page at a time; a capped read would let a skipped or dismissed item resurface.
+/** C34: every decision row, newest first, a page at a time; a capped read would let a skipped or dismissed item resurface. */
+export async function readDecisionRows(prisma: PrismaLike): Promise<DecisionRow[]> {
+  if (typeof prisma?.gapAuditEvent?.findMany !== 'function') return [];
   const rows: DecisionRow[] = [];
   for (let skip = 0; skip < DECIDED_PAGE * 50; skip += DECIDED_PAGE) {
-    const page: DecisionRow[] = await prisma.gapAuditEvent.findMany({ where: { kind: PROSPECT_DECISION }, orderBy: { created_at: 'desc' }, take: DECIDED_PAGE, skip, select: { subject_id: true, payload: true, created_at: true } }).catch(() => []);
+    const page: DecisionRow[] = await prisma.gapAuditEvent.findMany({ where: { kind: PROSPECT_DECISION }, orderBy: { created_at: 'desc' }, take: DECIDED_PAGE, skip, select: { id: true, subject_id: true, actor: true, payload: true, created_at: true } }).catch(() => []);
     rows.push(...page);
     if (page.length < DECIDED_PAGE) break;
   }
-  const decisionOf = (r: DecisionRow) => (r.payload && typeof r.payload === 'object' ? (r.payload as { decision?: string }).decision : undefined) ?? '';
-  const newest = new Map<string, DecisionRow>();
-  // The people fix (2026-10-10): a `never` on a sender sticks whatever came after it on the key.
-  const never = new Set<string>();
+  return rows;
+}
+
+const decisionOf = (r: DecisionRow) => (r.payload && typeof r.payload === 'object' ? (r.payload as { decision?: string }).decision : undefined) ?? '';
+const isSenderKey = (key: string) => key.startsWith('person:') || key.startsWith('domain:');
+
+/** A standing `never` on a sender key: when it was taken, by whom, with what note, from where, and the row it is. */
+export interface NeverMark {
+  key: string;
+  kind: 'person' | 'domain';
+  /** The address or the domain. */
+  id: string;
+  /** When the standing never was recorded (the ledger row's time). */
+  since: string;
+  actor: string | null;
+  note: string | null;
+  via: string | null;
+  eventId: string | null;
+}
+
+/**
+ * The undo of `never` (2026-10-10): the never marks that STAND, from the decision rows (newest first). On each sender
+ * key the newest `never` or `relist` row decides: a `never` stands, a `relist` ended it. Nothing else on the key (a
+ * skip, an explore, a more) touches it. Pure.
+ */
+export function neverMarksFrom(rows: readonly DecisionRow[]): NeverMark[] {
+  const head = new Map<string, DecisionRow>();
   for (const r of rows) {
-    if (!newest.has(r.subject_id)) newest.set(r.subject_id, r);
-    if (decisionOf(r) === 'never' && (r.subject_id.startsWith('person:') || r.subject_id.startsWith('domain:'))) never.add(r.subject_id);
+    const d = decisionOf(r);
+    if ((d === 'never' || d === RELIST) && isSenderKey(r.subject_id) && !head.has(r.subject_id)) head.set(r.subject_id, r);
   }
+  const out: NeverMark[] = [];
+  for (const [key, r] of head) {
+    if (decisionOf(r) !== 'never') continue;
+    const p = (r.payload && typeof r.payload === 'object' ? r.payload : {}) as { note?: unknown; via?: unknown };
+    out.push({ key, kind: key.startsWith('domain:') ? 'domain' : 'person', id: key.slice(key.indexOf(':') + 1), since: new Date(r.created_at).toISOString(), actor: typeof r.actor === 'string' ? r.actor : null, note: typeof p.note === 'string' ? p.note : null, via: typeof p.via === 'string' ? p.via : null, eventId: typeof r.id === 'string' ? r.id : null });
+  }
+  return out.sort((a, b) => b.since.localeCompare(a.since));
+}
+
+/** The decided trigger and person keys from the decision rows (newest first). Pure; loadDecided reads the rows. */
+export function decidedFrom(rows: readonly DecisionRow[], now: Date): Set<string> {
+  const newest = new Map<string, DecisionRow>();
+  for (const r of rows) if (!newest.has(r.subject_id)) newest.set(r.subject_id, r);
   const out = new Set<string>();
   for (const [key, r] of newest) {
-    // A domain key carries only a `never` (decide.ts refuses anything else there).
+    // A domain key carries only a `never` or its `relist` (decide.ts refuses anything else there); the marks below say which stands.
     if (key.startsWith('domain:')) continue;
     const d = decisionOf(r);
     if (d === 'skip' && now.getTime() - new Date(r.created_at).getTime() > SKIP_DAYS * 86_400_000) continue;
-    if (d === 'explore' || d === 'more') continue;
+    // A relist decides nothing by itself: the key is undecided again from its time on (a later decision decides it as usual).
+    if (d === 'explore' || d === 'more' || d === RELIST) continue;
     out.add(key);
   }
-  for (const key of never) {
-    out.add(key);
-    if (key.startsWith('person:')) out.add(`never:${key}`);
+  // The people fix (2026-10-10): a `never` on a sender sticks whatever came after it on the key, except its own undo,
+  // a `relist` (2026-10-10, Casey: "Add undo for 'never'"), which ends it from its time on.
+  for (const m of neverMarksFrom(rows)) {
+    out.add(m.key);
+    if (m.kind === 'person') out.add(`never:${m.key}`);
   }
   return out;
+}
+
+export async function loadDecided(prisma: PrismaLike, now: Date): Promise<Set<string>> {
+  return decidedFrom(await readDecisionRows(prisma), now);
+}
+
+/** The never marks that stand (newest first), for the panel's not-a-prospect list. */
+export async function loadNeverMarks(prisma: PrismaLike): Promise<NeverMark[]> {
+  return neverMarksFrom(await readDecisionRows(prisma));
 }
 
 /** The identity path in the four words the pursued item carries; null when nothing placed the person. */
@@ -637,7 +698,8 @@ export async function loadIntelligence(prisma: PrismaLike, opts: { now: Date; li
   const identity: IdentityContext | null = opts.identity !== undefined ? opts.identity : typeof prisma?.canonicalCompany?.findMany === 'function' && typeof prisma?.gapAccountAlias?.findMany === 'function' ? await loadIdentityContext(prisma).catch(() => null) : null;
   const limit = opts.limit ?? INTEL_LIMIT;
   const peopleLimit = opts.peopleLimit ?? REENGAGE_LIMIT;
-  const decided = await loadDecided(prisma, opts.now);
+  const decisionRows = await readDecisionRows(prisma);
+  const decided = decidedFrom(decisionRows, opts.now);
   // Intelligence wiring (2026-10-09): a report container (the archive of an imported report) is never a digest row.
   const undecided = { OR: [{ feedback: null }, { feedback: 'skip' }], resolution: { not: 'rejected' }, source_class: { not: REPORT_ARCHIVE_CLASS } };
   const pull = async (where: Record<string, unknown>, orderBy: Array<Record<string, string>>, take: number): Promise<SignalRow[]> => (typeof prisma?.gapSignal?.findMany === 'function' ? prisma.gapSignal.findMany({ where: { ...undecided, ...where }, orderBy, take }).catch(() => []) : []);
@@ -729,6 +791,7 @@ export async function loadIntelligence(prisma: PrismaLike, opts: { now: Date; li
   const groupedReports = collapseEvidenceGroups(reports, knowledge.items);
   return {
     signals: signals.slice(skipSignals, skipSignals + limit), reports: groupedReports.slice(0, limit), knowledge: knowledge.items, triggers: triggers.slice(0, limit), people: people.slice(skipPeople, skipPeople + peopleLimit), pursued,
+    notProspects: neverMarksFrom(decisionRows),
     totals: { signals: Math.max(signalTotal, signals.length), triggers: triggers.length, people: people.length, reports: Math.max(reportTotal, reports.length), knowledge: knowledge.total },
     selection: {
       signals: `ranked from four bounded pulls (your shares, up to 100; the strongest classes by score, up to 300; the rest newest, up to 200; the producers' imported records, newest report first, up to 200) of ${Math.max(signalTotal, signals.length)} undecided; showing ${Math.min(limit, Math.max(0, signals.length - skipSignals))} from ${skipSignals + 1}; the complete list is on the Intelligence page`,
