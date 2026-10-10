@@ -41,7 +41,7 @@
     },
     {
       "path": "/api/cron/gap-mailbox/?mode=apply",
-      "schedule": "*/10 * * * *"
+      "schedule": "*/3 * * * *"
     },
     {
       "path": "/api/cron/gap-background-research/",

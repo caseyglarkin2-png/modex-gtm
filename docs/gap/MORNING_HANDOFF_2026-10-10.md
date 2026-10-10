@@ -4,7 +4,7 @@ STATUS: HANDOFF (the overnight continuation of the intelligence wiring program; 
 
 ## 1. What shipped
 
-- PR #445, merged to main at f06a47f0; production `dpl_FjBEPuuVbMeY5mhuD9jUr4kUqDYm` READY 2026-10-10T04:15:10Z on f06a47f0. Rollback: 4e5e552e (`dpl_G8mUVu2cW83GTaiakA4vL6ubpXZy`, the Gmail action UI release of 01:31Z).
+- PR #445, merged to main at f06a47f0; production `dpl_FjBEPuuVbMeY5mhuD9jUr4kUqDYm` READY 2026-10-10T04:15:10Z on f06a47f0. Rollback: 821c43ec (`dpl_G8mUVu2cW83GTaiakA4vL6ubpXZy`, the Gmail action UI release of 01:31Z; 4e5e552e was the docs merge over it).
 - The packet's contradictions (three commits, e3a24cd3, 4e42307f + 1e2a8793, 90a3b12a), each pinned by tests: `gui-packet-fixes` (8), `gui-packet-fixes-2` (10), `gui-relationship-fixes` (6), `gui-relationship-fixes-2` (4), `gui-plan-hold` (3); the earlier pins updated deliberately.
 - The Google Workspace and Gemini extension (four commits by builder F, merged): `signals/drive-parsers.ts`, `drive-records.ts`, `drive-client.ts`, `drive-sync.ts`, `work/evidence-group.ts`, the cron `/api/cron/gap-drive-sync` (every six hours), `scripts/gap/sync-drive.ts` (dry run by default), the contract's `evidenceGroup`, real fixtures with their Drive ids; 27 tests across six files; the readability guard proven RED when disabled.
 - The Clawd cron: three pages of 100 per run (the export holds more than 8,000 rows behind the cursor; one page ran in 53 s; three pages of 200 timed out on October 9).
@@ -60,7 +60,10 @@ What the preview cannot show: our Sent and Drafts. Production holds the GAP mail
 4. `GAP_DRIVE_REFRESH_TOKEN` (OAuth refresh token for the app's Google client with `https://www.googleapis.com/auth/drive.readonly`), or `GAP_DRIVE_DWD_SA_JSON` + `GAP_DRIVE_USER_EMAIL`, in Vercel production, then redeploy.
 5. Add Sub-Zero through Add to GAP, or name the account the SUBZERO contact belongs to.
 6. The Gemini canvas "Order of Operations Thesis Asset": Share, Export to Docs.
-7. The Hitlist service key, only if the optional read is wanted.
+7. The Hitlist service key, only if the optional read is wanted (the Railway MCP answered Unauthorized, so whether the service still exists is unverified; `railway login` on your side would settle it).
+8. Paste the ChatGPT export instruction (the JSON block plus the Markdown fallback, one save into the watched folder) into the Yards First and Signal Desk briefs: `docs/gap/INTELLIGENCE_PRODUCER_HANDOFF.md` holds the exact text.
+9. The two public Manifest-era repositories (GTM-YardFlow, YardFlow-Hitlist) carry attendee names and a hardcoded seed password: make them private or remove the seed, your call.
+10. sales-agent's signals, intel-vault and export GET routes carry no auth: worth a look on that service.
 
 ## 5. The shortest Gmail steps to exercise the finished workflow
 

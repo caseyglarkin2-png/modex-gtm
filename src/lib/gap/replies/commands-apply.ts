@@ -47,7 +47,7 @@ import type { MailboxMessage } from '@/lib/email/gmail-inbox';
 import { ASSIGNMENT_SENT, ITEM_HELD_FOR_RESEARCH, ITEM_SUBJECT_TYPE, assignable, loadAssignments, nextAssignableItem, sendAssignment, startDay, type AssignmentDeps, type SendAssignmentResult } from '../work/assignment';
 import { BRIEFING_SENT } from '../work/briefing-send';
 import { commitmentsFromSellerNote, loadCommitment, transitionCommitment } from '../work/commitments';
-import { dayLabel, nyDayAt, parseDuePhrase } from '../work/dates';
+import { dayLabel, nyDay, nyDayAt, parseDuePhrase } from '../work/dates';
 import { progressLine, readDoneNote, type DoneFact } from '../work/done-note';
 import { recordWorkOutcome } from '../work/outcome';
 import { loadDayPlan, loadDayPlanRevisions, type DayPlan, type PlanItem } from '../work/plan';
@@ -200,7 +200,13 @@ const reasonText: Record<string, string> = {
   item_not_found: 'GAP could not find the item this reply is about. Open Work in GAP.',
   needs_an_assignment: 'Reply to the email of the item you mean, or reply NEXT here to get the next one.',
   help_rate_limited: '',
+  stale_day: 'That briefing is from an earlier day; its plan is not today\'s. Reply START on today\'s briefing, or open Work in GAP.',
 };
+
+/** The adversarial audit of October 10: START on Friday's briefing walked Friday's plan on Saturday. A briefing of a past New York day is stale. */
+export const isStaleBriefingDay = (day: string, now: Date): boolean => /^\d{4}-\d{2}-\d{2}$/.test(day) && day < nyDay(now);
+export const staleDayText = (day: string, now: Date, baseUrl: string): string => `That briefing is from ${monthDayOf(day)}; its plan is not today's (${monthDayOf(nyDay(now))}). Reply START on today's briefing when it arrives, or open Work: ${baseUrl.replace(/\/$/, '')}/gap/`;
+const monthDayOf = (day: string) => nyDayAt(day, 12).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' });
 
 async function answer(input: ApplyInput, deps: ApplyDeps, text: string): Promise<{ id: string | null }> {
   const subject = /^re:/i.test(input.m.subject ?? '') ? input.m.subject : `Re: ${input.m.subject ?? 'GAP'}`;
@@ -397,6 +403,9 @@ export async function applyCommand(prisma: PrismaLike, input: ApplyInput, deps: 
   if (target.kind === 'briefing') {
     const subject = { type: 'work_day', id: target.day };
     try {
+      if ((command.kind === 'start' || command.kind === 'next' || command.kind === 'item') && isStaleBriefingDay(target.day, input.now)) {
+        return await refuse(prisma, input, deps, subject, command.kind, 'stale_day', { day: target.day, today: nyDay(input.now) }, null, staleDayText(target.day, input.now, input.baseUrl));
+      }
       if (command.kind === 'start') {
         await startDay(prisma, { day: target.day, now: input.now, actor: input.m.fromEmail.toLowerCase(), via: 'email' });
         return await sendNext(prisma, input, deps, target.day, subject, 'start');

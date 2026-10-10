@@ -43,7 +43,7 @@ describe('the prepared reply (R42; R42b makes a real reply answerable)', () => {
     expect(prep.notes).toEqual([
       'They asked: "Can you send the two-site comparison?". Answer that first.',
       'They named a day: Thursday (Oct 8). Offer a time then, or ask what suits.',
-      'Then record what they said; the next step follows from it, and nobody at the account gets a cold email until then.',
+      'Then record what they said; the next step follows from it.',
     ]);
     expect(prep.threadHref).toBe('https://mail.google.com/mail/u/0/?authuser=casey%40yardflow.ai#all/thr-1');
     // Never a send path, never a chat-generated draft: the only links are the Gmail thread and the record form.

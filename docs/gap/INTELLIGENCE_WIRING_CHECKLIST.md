@@ -5,7 +5,7 @@ STATUS: ACTIVE. The consolidated scope (the wiring plan IW01-IW16, the second li
 ## Release 2: the overnight continuation (October 10, 2026)
 
 - MERGED: modex-gtm PR #445 (main f06a47f0): the packet's two rounds of fixes (e3a24cd3, 4e42307f, 1e2a8793), the Drive and Gemini extension (builder F: 7fdc4d17, a38b6d6c, bf71fe55, 7c7e47bf), the Clawd cron at three pages per run.
-- DEPLOYED: `dpl_FjBEPuuVbMeY5mhuD9jUr4kUqDYm` READY 2026-10-10T04:15:10Z on f06a47f0 (rollback: 4e5e552e, `dpl_G8mUVu2cW83GTaiakA4vL6ubpXZy` at 821c43ec).
+- DEPLOYED: `dpl_FjBEPuuVbMeY5mhuD9jUr4kUqDYm` READY 2026-10-10T04:15:10Z on f06a47f0 (rollback: 821c43ec `dpl_G8mUVu2cW83GTaiakA4vL6ubpXZy`).
 - DEMONSTRATED: `docs/gap/ASSIGNMENT_PACKETS_PREVIEW_2026-10-10.md` (and `.html`) re-rendered against production with the fixed renderer, read only: Kenco, The Boston Beer Company, PepsiCo, Walmart, Keurig Dr Pepper and an information-only signal.
 - REVIEWED: an independent read-only reviewer inspected the first round (identity attribution, uncertain outbound history, recipient binding, suppression, duplicate activity) and verified five defects; all five are fixed in the second round and pinned by tests (`gui-relationship-fixes-2`, `gui-packet-fixes-2`).
 - PRODUCERS: the vault pushed again on October 10 (7,434 notes on record, a `knowledge.vault_synced` ledger row); the Clawd cron ran on schedule every two hours overnight (cursor 1207 to 1713 by 02:21Z, 100 accepted and 0 duplicates per run after the 61/39 proof), more than 8,000 export rows wait behind the cursor, so the bound is now three pages of 100 per run (about 3,600 a day); the export-folder consumer ran once by hand (0 files; Codex has not written its first structured export yet).
@@ -64,6 +64,7 @@ STATUS: ACTIVE. The consolidated scope (the wiring plan IW01-IW16, the second li
 | Clawd collectors | REUSED | the signals export is the one interface; the intel ledger re-ingests GAP's own streams (never import it back); push-hubspot, signal_actuator and actuator_send write or send (never run) |
 | The vault automation | ALREADY CONNECTED | the single path for Fireflies, calendar, self-mail and the war-room imports; `hubspot-sync.mjs` writes HubSpot daily (untouched) |
 | GTM-YardFlow + YardFlow-Hitlist (Manifest era) | OPTIONAL RECOVERY, not required for completion | seed lists (2,652 companies, 5,408 people, no sources) and Gemini text without URLs; only the Hitlist meetings and outreach history (dated, with Gmail thread ids) would be worth a one-time read through `GET /api/export/full?format=json` with its service key, if that Railway service and database still exist (unverified); never its frontend, sequences or crons; both repos are public with attendee names and a hardcoded seed password (Casey's call) |
+| war-room PIC importer (`scripts/gap/import-pics.ts`) | TRACED, read only | imports PIC charts as DRAFT hypotheses plus signals, dry run by default, `--apply` needs DATABASE_URL; never activates a hypothesis; the charts live on disk, not on GitHub; never run against production in this program |
 | war-room | ADAPTER DEPLOYED, FEED BLOCKED (token) | the adapter `scripts/gap/import-warroom-dossiers.ts` (58 dossiers imported, a revision on change; a war-room record on the twelve-slot preview); the review feed has been silent since September 26 for want of the war-room's own token (`WAR_ROOM_TOKEN` in modex, a sensitive value the agent cannot read back); the war-room deploys by manual CLI upload (not git-connected; last deploy August 24), nothing of it was changed |
 | Flow-State- content | NO DEMONSTRATED BENEFIT | our own site content, not prospect intelligence |
 
@@ -93,5 +94,8 @@ STATUS: ACTIVE. The consolidated scope (the wiring plan IW01-IW16, the second li
 4. The Drive credential, the last step of the Workspace extension: `GAP_DRIVE_REFRESH_TOKEN` (an OAuth refresh token for the app's `GOOGLE_CLIENT_ID`/`GOOGLE_CLIENT_SECRET` with the scope `https://www.googleapis.com/auth/drive.readonly`), or `GAP_DRIVE_DWD_SA_JSON` with `GAP_DRIVE_USER_EMAIL` (domain-wide delegation), in Vercel production, then a redeploy; the cron then imports on its own, and `npx tsx scripts/gap/sync-drive.ts` shows the first page dry.
 5. Sub-Zero: add the account through Add to GAP (or name the account the SUBZERO contact belongs to).
 6. The Gemini canvas "Order of Operations Thesis Asset": Share, Export to Docs, when wanted in the import.
-7. The Hitlist service key, only if the optional one-time read of its meetings and outreach history is wanted and the service still exists.
-8. The inbox round trip: reply to the next briefing or assignment (START, ITEM n, DONE, SKIP) and judge the packets; nothing is marked accepted for you.
+7. The Hitlist service key, only if the optional one-time read of its meetings and outreach history is wanted and the service still exists (the Railway MCP answered Unauthorized; unverified).
+8. Paste the ChatGPT export instruction into the Yards First and Signal Desk briefs (`docs/gap/INTELLIGENCE_PRODUCER_HANDOFF.md` holds the exact text).
+9. The two public Manifest-era repositories carry attendee names and a hardcoded seed password: private or scrubbed, your call.
+10. sales-agent's unauthenticated GET routes (signals, intel vault, export): worth a look on that service.
+11. The inbox round trip: reply to the next briefing or assignment (START, ITEM n, DONE, SKIP) and judge the packets; nothing is marked accepted for you.
