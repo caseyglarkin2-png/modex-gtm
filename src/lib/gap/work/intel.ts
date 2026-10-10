@@ -50,6 +50,7 @@ export type Decision = (typeof DECISIONS)[number];
 // The truth label words live in the client-safe `./truth-text` (the panel imports them there; this module is server-only).
 export { TRUTH_TEXT, type TruthLabel } from './truth-text';
 import { REPORT_ARCHIVE_CLASS, REPORT_IMPORT_ORIGIN, dateOnlyText, importOf, producerLabel, type IntelRecordKind, type IntelSource, type IntelSourceRecordId } from '../signals/intelligence-record';
+import { collapseEvidenceGroups } from './evidence-group';
 
 export interface IntelItem {
   /** knowledge (IW06): a vault conversation projected into the digest; no decisions, the account page holds the moves. */
@@ -92,6 +93,8 @@ export interface IntelItem {
   ambiguityLine?: string;
   /** Intelligence wiring (IW10): an imported record's substance, whole; absent on a signal GAP found itself. */
   substance?: IntelSubstance;
+  /** The Google Workspace extension (2026-10-10): the other copies of the same evidence (the vault's capture, Gemini notes), each with its provenance (work/evidence-group.ts). */
+  alsoHeldAs?: Array<{ key: string; producer: string; producerLabel: string; date: string | null; label: string | null; url: string | null }>;
   decisions: readonly Decision[];
   /** How it ranked, for the test and the page. */
   rank: number;
@@ -142,6 +145,8 @@ export interface IntelSubstance {
   personHints: string[];
   suggestions: number;
   revisions: number;
+  /** The Google Workspace extension (2026-10-10): the evidence group key (account | date | title words), when the producer stated one. */
+  evidenceGroup?: string | null;
 }
 
 /**
@@ -169,6 +174,7 @@ export function substanceOf(metadata: unknown): IntelSubstance | null {
     producer: r.producer, producerLabel: r.producerLabel ?? producerLabel(r.producer), producerRunId: r.producerRunId, producerItemId: r.producerItemId, recordKind: r.kind,
     text: r.text ?? '', sources: r.sources ?? [], sourceRecordIds: r.sourceRecordIds ?? [], eventDate: r.eventDate ?? null, reportedOn: r.reportedOn, reportedOnBasis: r.reportedOnBasis ?? 'stated', importedAt: r.importedAt,
     producerStatus: r.producerStatus ?? null, uncertainty: r.uncertainty ?? null, interpretation: r.interpretation ?? null, personHints: r.personHints ?? [], suggestions: (r.suggestions ?? []).length, revisions: (r.revisions ?? []).length,
+    evidenceGroup: typeof r.evidenceGroup === 'string' && r.evidenceGroup ? r.evidenceGroup : null,
   };
 }
 type TriggerRow = { id: number; account_name: string; title: string; url: string; source: string; score: number | null; categories: unknown; published_at: Date | string | null; first_seen_at: Date | string; dismissed: boolean };
@@ -672,8 +678,10 @@ export async function loadIntelligence(prisma: PrismaLike, opts: { now: Date; li
   const pursued = await loadPursued(prisma, opts.now, { identity, coverage, personas: new Map(personas.filter((p) => p.email).map((p) => [String(p.email).toLowerCase(), p])), threadAccounts, family });
   // IW06: the vault's recent calls and meetings as their own group (soft; a client without the table answers none).
   const knowledge = await import('../knowledge/knowledge-intel').then((m) => m.loadKnowledgeIntel(prisma, { now: opts.now, limit })).catch(() => ({ items: [] as IntelItem[], total: 0 }));
+  // The Google Workspace extension (2026-10-10): the same evidence held in several places is one report item with its copies as provenance.
+  const groupedReports = collapseEvidenceGroups(reports, knowledge.items);
   return {
-    signals: signals.slice(skipSignals, skipSignals + limit), reports: reports.slice(0, limit), knowledge: knowledge.items, triggers: triggers.slice(0, limit), people: people.slice(skipPeople, skipPeople + peopleLimit), pursued,
+    signals: signals.slice(skipSignals, skipSignals + limit), reports: groupedReports.slice(0, limit), knowledge: knowledge.items, triggers: triggers.slice(0, limit), people: people.slice(skipPeople, skipPeople + peopleLimit), pursued,
     totals: { signals: Math.max(signalTotal, signals.length), triggers: triggers.length, people: people.length, reports: Math.max(reportTotal, reports.length), knowledge: knowledge.total },
     selection: {
       signals: `ranked from four bounded pulls (your shares, up to 100; the strongest classes by score, up to 300; the rest newest, up to 200; the producers' imported records, newest report first, up to 200) of ${Math.max(signalTotal, signals.length)} undecided; showing ${Math.min(limit, Math.max(0, signals.length - skipSignals))} from ${skipSignals + 1}; the complete list is on the Intelligence page`,

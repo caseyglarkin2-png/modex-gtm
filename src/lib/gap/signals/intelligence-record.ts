@@ -40,8 +40,8 @@ export const INTEL_PRODUCERS: Record<string, { label: string; cadenceDays: numbe
   codex_hubspot_report: { label: 'HubSpot Activity & Engagement report', cadenceDays: 1, how: 'the Codex weekday automation, exported as records' },
   clawd_signal_hunter: { label: 'Clawd signal hunter', cadenceDays: 1, how: 'the yardflow_signals dataset, read through its export' },
   war_room_dossier: { label: 'war-room dossier', cadenceDays: 30, how: 'the war-room account dossiers in its git checkout, read by scripts/gap/import-warroom-dossiers.ts' },
-  google_drive: { label: 'Google Drive document', cadenceDays: 7, how: 'a Doc, Sheet, Slides or uploaded document in the agreed Drive scope (the follow-up release)' },
-  gemini_notes: { label: 'Gemini meeting notes', cadenceDays: 7, how: 'a Notes by Gemini document in Meet Recordings, generated; never the transcript (the follow-up release)' },
+  google_drive: { label: 'Google Drive document', cadenceDays: 7, how: 'a Doc, Sheet, Slides or uploaded document in the agreed Drive folders, read by /api/cron/gap-drive-sync (signals/drive-sync.ts)' },
+  gemini_notes: { label: 'Gemini meeting notes', cadenceDays: 7, how: 'a Notes by Gemini document in Meet Recordings: its notes labelled as generated, its transcript excerpts as what people said, read by the same sync' },
 };
 export const producerLabel = (producer: string): string => INTEL_PRODUCERS[producer]?.label ?? producer;
 
@@ -86,6 +86,12 @@ export interface IntelligenceRecordInput {
   archive?: { reportRef: string; section: string | null };
   /** digest: a candidate for the briefing and the panel; archive: reachable in the full list only. */
   visibility?: 'digest' | 'archive';
+  /**
+   * The Google Workspace extension (2026-10-10): a deterministic key for the same underlying evidence held in several
+   * places (`evidenceGroupKey`: account slug | meeting date | title words), so the reader can group a Fireflies capture
+   * in the vault, Gemini notes in Drive and a producer's report of the same call while keeping every copy's provenance.
+   */
+  evidenceGroup?: string | null;
 }
 
 /** A record as stored under `metadata.import` (every field present, the hash and the import time set). */
@@ -112,6 +118,8 @@ export interface IntelligenceRecord {
   suggestions: string[];
   archive: { reportRef: string; section: string | null };
   visibility: 'digest' | 'archive';
+  /** Optional (additive, 2026-10-10): the evidence group key, when the producer could state one. */
+  evidenceGroup?: string | null;
   contentHash: string;
   /** Earlier versions of this item (the producer revised it): the hash and when it was replaced. */
   revisions: Array<{ contentHash: string; replacedAt: string }>;
@@ -216,8 +224,27 @@ export function validateIntelligenceRecord(input: unknown): { ok: true; record: 
       suggestions: strings(o.suggestions).slice(0, 10),
       archive: { reportRef: str(archive.reportRef) || producerRunId, section: nonEmpty(archive.section) },
       visibility: kind === 'report' ? 'archive' : o.visibility === 'archive' ? 'archive' : 'digest',
+      evidenceGroup: nonEmpty(o.evidenceGroup)?.slice(0, 200) ?? null,
     },
   };
+}
+
+/** The words of a title that identify the evidence: lower-cased, our own names, the account's words and filler cut. */
+const GROUP_FILLER = new Set(['x', 'and', 'with', 'the', 'a', 'an', 'of', 'by', 'yardflow', 'freightroll', 'notes', 'gemini', 'meeting', 'call', 'transcript', 'recording']);
+const slugWords = (s: string): string[] => s.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim().split(/\s+/).filter(Boolean);
+
+/**
+ * The evidence group key: `${accountSlug}|${YYYY-MM-DD}|${titleWords}` (the Kenco Discovery call of July 16 as a
+ * Fireflies capture in the vault, as Gemini notes in Drive and as a producer report all carry `kenco|2026-07-16|discovery`).
+ * Null when the account or the date is unknown: a key is never guessed.
+ */
+export function evidenceGroupKey(accountHint: string | null | undefined, eventDate: string | null | undefined, title: string | null | undefined): string | null {
+  if (!accountHint || !eventDate || !DATE_ONLY.test(eventDate)) return null;
+  const account = slugWords(accountHint);
+  if (!account.length) return null;
+  const accountSet = new Set(account);
+  const words = slugWords(title ?? '').filter((w) => !GROUP_FILLER.has(w) && !accountSet.has(w));
+  return `${account.join('-')}|${eventDate}|${words.join('-') || 'untitled'}`;
 }
 
 /** The stable identity of an imported item: producer + item id, hashed into the `url_hash` slot (unique). */

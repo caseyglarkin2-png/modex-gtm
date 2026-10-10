@@ -12,7 +12,7 @@
 import { parseFirefliesCapture } from './fireflies-summary';
 import { HISTORICAL_DAYS, type IntelItem } from '../work/intel';
 import { TRUTH_TEXT } from '../work/truth-text';
-import { dateOnlyText } from '../signals/intelligence-record';
+import { dateOnlyText, evidenceGroupKey } from '../signals/intelligence-record';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PrismaLike = any;
@@ -59,6 +59,8 @@ export function knowledgeItemOf(n: NoteRow, now: Date): IntelItem | null {
       producer: 'vault', producerLabel: 'the vault', producerRunId: n.git_sha ?? 'local push', producerItemId: n.path, recordKind: 'observation',
       text, sources: [{ url: null, publisher: 'the vault', label: n.path }], sourceRecordIds: [], eventDate: day, reportedOn: day, reportedOnBasis: 'stated', importedAt: new Date(n.synced_at).toISOString(),
       producerStatus: isCall ? 'call' : 'meeting', uncertainty, interpretation: null, personHints: buyers, suggestions: 0, revisions: 0,
+      // The same conversation held elsewhere (Gemini notes in Drive, a producer's report) carries this key too (work/evidence-group.ts).
+      evidenceGroup: evidenceGroupKey(n.account_name, day, n.title),
     },
   };
 }
