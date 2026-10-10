@@ -12,6 +12,7 @@
 import { describe, expect, it, vi } from 'vitest';
 
 import { buildLearningReport, loadLearningInputs } from '@/lib/gap/learning/query';
+import { matchesWhere } from './fixtures/where';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 function asyncSpy(impl: (...args: any[]) => Promise<any>) {
@@ -67,7 +68,7 @@ describe('loadLearningInputs: AI/unconfirmed exclusion', () => {
     await loadLearningInputs(prisma);
     expect(prisma.conversationDisposition.findMany).toHaveBeenCalledWith(
       expect.objectContaining({
-        where: { human_confirmed: true, OR: [{ enrollment_id: null }, { enrollment: { is_test: false } }] },
+        where: { human_confirmed: true, source_kind: { not: 'email_command' }, OR: [{ enrollment_id: null }, { enrollment: { is_test: false } }] },
       }),
     );
   });
@@ -189,12 +190,29 @@ describe('loadLearningInputs: AI/unconfirmed exclusion', () => {
   });
 });
 
+describe('R5 review (finding 10): a DONE by email is never a conversation in the funnel', () => {
+  it('an email_command row (no thesis, the default request_information) stays out of the problem-resonance denominator', async () => {
+    const rows = [
+      disposition({ id: 'D1', hypothesis_id: 'H1', response_class: 'problem_confirmed', source_kind: 'inbound_message', human_confirmed: true, enrollment_id: null }),
+      disposition({ id: 'D_done', hypothesis_id: null, response_class: 'request_information', channel: 'email', source_kind: 'email_command', human_confirmed: true, enrollment_id: null }),
+    ];
+    const prisma = makePrisma({ hypotheses: [hypothesis()] });
+    // What Postgres would return for the query's own where (the rows carry no enrollment, so the B9 OR gate passes them).
+    prisma.conversationDisposition.findMany = asyncSpy(async (q: any) => rows.filter((r) => matchesWhere(r, q.where)));
+    const { conversations } = await loadLearningInputs(prisma);
+    expect(conversations.map((c) => c.id)).toEqual(['D1']);
+    const report = await buildLearningReport(prisma);
+    expect(report.funnel.problemResonanceRate).toMatchObject({ numerator: 1, n: 1 });
+    expect(report.dispositionDistribution.map((d) => d.responseClass)).not.toContain('request_information');
+  });
+});
+
 describe('R-A: campaign/program and date-range filters (owner-confirmed finish requirement, 2026-09-24)', () => {
   it('no filters: the disposition where clause is the plain B9 gate, no program/date added', async () => {
     const prisma = makePrisma();
     await loadLearningInputs(prisma);
     expect(prisma.conversationDisposition.findMany).toHaveBeenCalledWith(
-      expect.objectContaining({ where: { human_confirmed: true, OR: [{ enrollment_id: null }, { enrollment: { is_test: false } }] } }),
+      expect.objectContaining({ where: { human_confirmed: true, source_kind: { not: 'email_command' }, OR: [{ enrollment_id: null }, { enrollment: { is_test: false } }] } }),
     );
     expect(prisma.sequenceEnrollment.findMany).toHaveBeenCalledWith(
       expect.objectContaining({ where: { hypothesis_id: { not: null } } }),
@@ -210,7 +228,7 @@ describe('R-A: campaign/program and date-range filters (owner-confirmed finish r
     const prisma = makePrisma();
     await loadLearningInputs(prisma, { program: 'Inland26' });
     expect(prisma.conversationDisposition.findMany).toHaveBeenCalledWith(
-      expect.objectContaining({ where: { human_confirmed: true, enrollment: { is_test: false, family: { program: 'Inland26' } } } }),
+      expect.objectContaining({ where: { human_confirmed: true, source_kind: { not: 'email_command' }, enrollment: { is_test: false, family: { program: 'Inland26' } } } }),
     );
     expect(prisma.sequenceEnrollment.findMany).toHaveBeenCalledWith(
       expect.objectContaining({ where: { hypothesis_id: { not: null }, family: { program: 'Inland26' } } }),
