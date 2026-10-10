@@ -96,7 +96,10 @@ async function loadVaultTable(prisma: PrismaLike, env: Record<string, string | u
   if (typeof prisma?.gapKnowledgeNote?.count !== 'function') return undefined;
   try {
     const [status, last] = await Promise.all([vaultTableStatus(prisma), lastVaultSync(prisma).catch(() => null)]);
-    return { readable: true, rows: status.rows, lastSyncedAt: status.syncedAt, kinds: status.kinds, tokenConfigured, localDir, lastSync: last ? { ok: last.ok, at: last.at, error: last.error, written: last.written, skipped: last.skipped } : null };
+    // The source revision the sync recorded (vault-push.ts and the cron put commitSha on the ledger row): health says
+    // which vault revision the table holds. The branch rides along when the ledger reader returns it.
+    const branch = (last as { branch?: unknown } | null)?.branch;
+    return { readable: true, rows: status.rows, lastSyncedAt: status.syncedAt, kinds: status.kinds, tokenConfigured, localDir, lastSync: last ? { ok: last.ok, at: last.at, error: last.error, written: last.written, skipped: last.skipped, commitSha: last.commitSha, branch: typeof branch === 'string' && branch ? branch : null } : null };
   } catch (e) {
     return { readable: false, error: (e instanceof Error ? e.message : String(e)).slice(0, 160), tokenConfigured, localDir };
   }
