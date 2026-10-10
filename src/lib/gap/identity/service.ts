@@ -38,6 +38,14 @@ export function hostOfCompany(c: { id?: string | null; domain?: string | null; c
   return null;
 }
 
+const DOMAIN_HOST = /^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)*\.[a-z]{2,}$/;
+
+/** The host an alias names when its text is a bare domain ("mdlz.com", "@mdlz.com", "www.mdlz.com"), else null. Pure. */
+export function domainAliasHost(alias: string | null | undefined): string | null {
+  const t = String(alias ?? '').trim().toLowerCase().replace(/^@/, '').replace(/^www\./, '');
+  return t && DOMAIN_HOST.test(t) ? t : null;
+}
+
 /** Build the resolver's context snapshot from the current database state. */
 export async function loadIdentityContext(prisma: any): Promise<IdentityContext> {
   const [accounts, canonicalCompanies, canonicalLinks, aliases] = await Promise.all([
@@ -98,6 +106,12 @@ export async function loadIdentityContext(prisma: any): Promise<IdentityContext>
   const aliasToAccounts = new Map<string, string[]>();
   for (const alias of aliases as Array<{ alias?: string; normalized_alias: string; account_name: string }>) {
     pushInto(aliasToAccounts, alias.normalized_alias, alias.account_name);
+    // The people fix (2026-10-10, mdlz.com): an alias registered AS A DOMAIN (a seller-confirmed row, `alias` a bare
+    // host) is one more domain of the account for the domain tier. An account has one canonical link (the column is
+    // unique), so a second mail domain (Mondelez International: mondelezinternational.com in the CRM, mdlz.com on
+    // every buyer's address) can only be said this way. Two accounts on one domain stay ambiguous (never a guess).
+    const host = domainAliasHost(alias.alias);
+    if (host) pushInto(verifiedDomainToAccounts, host, alias.account_name);
     // A key stored under the old normalization also answers to today's ("nestl usa" and "nestle usa").
     if (alias.alias) {
       const today = normalizeCompanyName(alias.alias);

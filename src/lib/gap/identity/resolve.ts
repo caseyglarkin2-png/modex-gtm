@@ -41,7 +41,7 @@ export type IdentityVia = 'hubspot_company_id' | 'domain' | 'alias' | 'normalize
 export interface IdentityContext {
   /** accounts.hubspot_company_id -> accounts.name. Unique by construction (DB unique index). */
   accountsByHubspotCompanyId: ReadonlyMap<string, string>;
-  /** normalized domain -> the account name(s) a "verified"/resolved canonical link points at. */
+  /** normalized domain -> the account name(s) a "verified"/resolved canonical link points at, or a seller-confirmed alias registered as a bare domain names (service.ts, 2026-10-10). */
   verifiedDomainToAccounts: ReadonlyMap<string, readonly string[]>;
   /** normalized alias key -> the account name(s) explicitly registered under it. */
   aliasToAccounts: ReadonlyMap<string, readonly string[]>;
