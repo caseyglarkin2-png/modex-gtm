@@ -13,8 +13,8 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { ledgerDb } from './fixtures/ledger-db';
-import type { DriveClient, DriveFile } from '@/lib/gap/signals/drive-client';
-import { NOT_CONFIGURED_STATUS, runDriveSync, storedDriveState } from '@/lib/gap/signals/drive-sync';
+import { normalizeFolderName, type DriveClient, type DriveFile } from '@/lib/gap/signals/drive-client';
+import { DEEP_FOLDER_SKIP_REASON, NOT_CONFIGURED_STATUS, SUBFOLDER_SKIP_REASON, runDriveSync, storedDriveState } from '@/lib/gap/signals/drive-sync';
 import { INTEL_IMPORTED_EVENT } from '@/lib/gap/signals/intelligence-record';
 import { loadProducerStatus, producerStatusLine } from '@/lib/gap/signals/producer-status';
 
@@ -27,13 +27,19 @@ const file = (over: Partial<DriveFile> & { id: string; name: string; mimeType: s
 const GEMINI_AUG = fx('kenco-discovery-2026-07-16.gemini.md').replace(/Jul 16, 2026/g, 'Aug 29, 2026').replace(/Discovery/g, 'Case studies');
 
 interface Fake { client: DriveClient; calls: string[] }
-function fakeClient(opts: { folders: Record<string, string>; files: Record<string, DriveFile[]>; texts?: Record<string, string>; bytes?: Record<string, Buffer>; fail?: 'list' | 'folders'; byId?: Record<string, DriveFile | null> }): Fake {
+function fakeClient(opts: { folders: Record<string, string>; files: Record<string, DriveFile[]>; texts?: Record<string, string>; bytes?: Record<string, Buffer>; fail?: 'list' | 'folders'; byId?: Record<string, DriveFile | null>; subfolders?: Record<string, Array<{ id: string; name: string }>> }): Fake {
   const calls: string[] = [];
   const client: DriveClient = {
     async resolveFolders(names) {
       calls.push(`folders:${names.join(',')}`);
       if (opts.fail === 'folders') throw new Error('Drive refused the request (403)');
-      return names.filter((n) => opts.folders[n]).map((n) => ({ id: opts.folders[n], name: n }));
+      // As the real resolver: names compare normalized and the folder comes back under its real name.
+      return names.flatMap((n) => Object.entries(opts.folders).filter(([real]) => normalizeFolderName(real) === normalizeFolderName(n)).slice(0, 1).map(([real, id]) => ({ id, name: real })));
+    },
+    async listFolders(parentId, max) {
+      calls.push(`subfolders:${parentId}:${max}`);
+      const all = opts.subfolders?.[parentId] ?? [];
+      return { folders: all.slice(0, max), complete: all.length <= max };
     },
     async listFiles({ folderId, modifiedAfter, pageSize }) {
       calls.push(`list:${folderId}:${modifiedAfter ?? 'none'}:${pageSize}`);
@@ -129,6 +135,66 @@ describe('the Drive sync', () => {
     const again = await runDriveSync(db.client(), { now: new Date(NOW.getTime() + 13 * 3_600_000), client: fakeClient(base()).client, folders: ['Meet Recordings'], limit: 10, state: { folders: {} }, firstRunDays: 120 });
     expect(again.ok && again).toMatchObject({ listed: 6, imported: { accepted: 0, duplicates: 4, revised: 0 } });
     expect(db.store.gapSignal, 'no copies').toHaveLength(4);
+  });
+
+  it('a configured root is read ONE level down (2026-10-10): each prospect subfolder with its own cursor and its name as the account hint; a folder two levels down is skipped, said; the root resolves under a dash variant of its name', async () => {
+    const ROOT = 'YardFlow — Prospect Yard Audits';
+    const FOLDER = 'application/vnd.google-apps.folder';
+    const text = (who: string) => `# ${who} yard audit\n\nThe cross dock runs 58 dock doors on paper and a radio; the gate queue backs onto the street at the morning wave.`;
+    const data = {
+      folders: { [ROOT]: 'f-audits' },
+      subfolders: { 'f-audits': [{ id: 'sub-crowley', name: 'Crowley' }, { id: 'sub-dannon', name: 'Dannon' }], 'sub-crowley': [{ id: 'sub-dossiers', name: 'dossiers' }] },
+      files: {
+        'f-audits': [
+          file({ id: 'manifest', name: 'Audit index', mimeType: DOC, modifiedTime: '2026-09-01T00:00:00.000Z' }),
+          file({ id: 'sub-crowley', name: 'Crowley', mimeType: FOLDER, modifiedTime: '2026-09-02T00:00:00.000Z' }),
+        ],
+        'sub-crowley': [
+          file({ id: 'c-doc', name: 'Jacksonville site walk', mimeType: DOC, modifiedTime: '2026-09-05T00:00:00.000Z' }),
+          file({ id: 'sub-dossiers', name: 'dossiers', mimeType: FOLDER, modifiedTime: '2026-09-06T00:00:00.000Z' }),
+        ],
+        'sub-dannon': [file({ id: 'd-doc', name: 'Site walk notes', mimeType: DOC, modifiedTime: '2026-09-07T00:00:00.000Z' })],
+        'sub-dossiers': [file({ id: 'deep', name: 'Crowley dossier', mimeType: DOC, modifiedTime: '2026-09-08T00:00:00.000Z' })],
+      },
+      texts: { manifest: text('Index'), 'c-doc': text('Crowley'), 'd-doc': text('Dannon'), deep: text('Deep') },
+    };
+    const db = ledgerDb({ accounts: ['Crowley', 'Dannon'], aliases: [] });
+    const fake = fakeClient(data);
+    const r = await runDriveSync(db.client(), { now: NOW, client: fake.client, folders: ['YardFlow - Prospect Yard Audits'], limit: 25, firstRunDays: 120 });
+    expect(r.ok, JSON.stringify(r)).toBe(true);
+    if (!r.ok) return;
+    expect(r).toMatchObject({ status: 'ok', foldersMissing: [], listed: 5, more: false });
+    expect(fake.calls.filter((c) => c.startsWith('subfolders:')), 'the subfolders of the root are listed once, bounded; a subfolder is not descended into').toEqual(['subfolders:f-audits:50']);
+    expect(fake.calls.filter((c) => c.startsWith('list:'))).toEqual(['list:f-audits:2026-06-12T03:00:00.000Z:25', 'list:sub-crowley:2026-06-12T03:00:00.000Z:23', 'list:sub-dannon:2026-06-12T03:00:00.000Z:21']);
+    expect(fake.calls.some((c) => c.includes('sub-dossiers') && !c.startsWith('subfolders:')), 'nothing two levels down is read').toBe(false);
+    expect(r.skipped.map((s) => [s.id, s.folder, s.reason])).toEqual([['sub-crowley', ROOT, SUBFOLDER_SKIP_REASON], ['sub-dossiers', `${ROOT}/Crowley`, DEEP_FOLDER_SKIP_REASON]]);
+    expect(DEEP_FOLDER_SKIP_REASON).toBe('a folder two levels down');
+    expect(r.readable.map((f) => [f.id, f.folder])).toEqual([['manifest', ROOT], ['c-doc', `${ROOT}/Crowley`], ['d-doc', `${ROOT}/Dannon`]]);
+    expect(r.folders.map((f) => [f.name, f.parent, f.newest])).toEqual([[ROOT, null, '2026-09-02T00:00:00.000Z'], [`${ROOT}/Crowley`, 'f-audits', '2026-09-06T00:00:00.000Z'], [`${ROOT}/Dannon`, 'f-audits', '2026-09-07T00:00:00.000Z']]);
+    // The subfolder's name is the account hint for its files; the root is a scope, never a hint.
+    const hintOf = (id: string) => db.store.gapSignal.find((x) => x.metadata.import.producerItemId === id)?.account_hint;
+    expect(hintOf('c-doc')).toBe('Crowley');
+    expect(hintOf('d-doc')).toBe('Dannon');
+    expect(hintOf('manifest')).not.toBe(ROOT);
+    // Each folder keeps its own cursor on the ledger; the next run reads each after its own position.
+    const state = await storedDriveState(db.client());
+    expect(state.folders['sub-crowley']).toEqual({ name: 'Crowley', newest: '2026-09-06T00:00:00.000Z', ids: ['c-doc', 'sub-dossiers'], parent: 'f-audits' });
+    expect(state.folders['f-audits']).toEqual({ name: ROOT, newest: '2026-09-02T00:00:00.000Z', ids: ['manifest', 'sub-crowley'] });
+    const fake2 = fakeClient(data);
+    const r2 = await runDriveSync(db.client(), { now: new Date(NOW.getTime() + 6 * 3_600_000), client: fake2.client, folders: [ROOT], limit: 25 });
+    expect(r2.ok && r2).toMatchObject({ listed: 0, removed: [] });
+    expect(fake2.calls.filter((c) => c.startsWith('list:'))).toEqual(['list:f-audits:2026-09-02T00:00:00.000Z:25', 'list:sub-crowley:2026-09-06T00:00:00.000Z:25', 'list:sub-dannon:2026-09-07T00:00:00.000Z:25']);
+
+    // The bound: a root with more than fifty subfolders reads the first fifty by name and says so (partial).
+    const many = Array.from({ length: 52 }, (_, i) => ({ id: `sub-${String(i).padStart(2, '0')}`, name: `Prospect ${String(i).padStart(2, '0')}` }));
+    const wide = fakeClient({ ...data, subfolders: { 'f-audits': many } });
+    const wideDb = ledgerDb({ accounts: [], aliases: [] });
+    const r3 = await runDriveSync(wideDb.client(), { now: NOW, client: wide.client, folders: [ROOT], limit: 25, firstRunDays: 120 });
+    expect(r3.ok && r3.folders.length).toBe(51);
+    expect(r3.ok && r3.status).toBe('partial');
+    expect(wide.calls.filter((c) => c.startsWith('list:sub-'))).toHaveLength(50);
+    const wideRow = wideDb.store.gapAuditEvent.filter((e) => e.subject_id === 'google_drive').pop()!;
+    expect(wideRow.payload.producerState).toEqual({ status: 'partial', detail: `${ROOT}: more than 50 subfolders, the first 50 by name read` });
   });
 
   it('a file known from the last run that the folder no longer lists is removed with its fate; nothing is deleted in GAP', async () => {

@@ -9,11 +9,14 @@
  * records through `importIntelligenceBatch` (producer google_drive or gemini_notes); the unreadable ones are named on
  * the ledger row with their reason and make NO record. A file known from the last run that is no longer listed is
  * `removed` on the ledger row (trashed, deleted or access lost, when one metadata read can tell); nothing is deleted
- * in GAP. NOT CONFIGURED is a ledger row with status `not_configured` naming the variables (once per state, never
+ * in GAP. Each configured root is read ONE level down (2026-10-10, the per-prospect folders under the yard-audit
+ * root): at most DRIVE_SUBFOLDERS_MAX subfolders per root, each with its own cursor by the same rule and its own name
+ * as the account hint for its files; a folder below that is skipped with the reason "a folder two levels down", and
+ * a root with more subfolders than the bound says so on the ledger row (partial). NOT CONFIGURED is a ledger row with status `not_configured` naming the variables (once per state, never
  * silent); a client failure is a `failed` row (health shows it) and the cursor stays. Nothing here sends mail,
  * writes HubSpot, enrolls anything, calls Slack or changes Drive; a document's words are data, never instructions.
  */
-import { DRIVE_CREDENTIAL_VARS, GOOGLE_DOC, GOOGLE_SHEET, GOOGLE_SLIDES, MIME_PDF, extractDriveText, type DriveClient, type DriveFile } from './drive-client';
+import { DRIVE_CREDENTIAL_VARS, DRIVE_SUBFOLDERS_MAX, GOOGLE_DOC, GOOGLE_FOLDER, GOOGLE_SHEET, GOOGLE_SLIDES, MIME_PDF, extractDriveText, normalizeFolderName, type DriveClient, type DriveFile } from './drive-client';
 import { parseDriveText } from './drive-parsers';
 import { DRIVE_PRODUCER, GEMINI_PRODUCER, driveRecordsOf, type DriveFileMeta } from './drive-records';
 import { importIntelligenceBatch } from './intelligence-import';
@@ -33,7 +36,6 @@ export const NOT_CONFIGURED_STATUS = 'not_configured';
 const SKIP_BY_TYPE: Array<{ test: (f: DriveFile) => boolean; reason: string }> = [
   { test: (f) => f.mimeType.startsWith('image/'), reason: 'an image' },
   { test: (f) => f.mimeType.startsWith('video/') || f.mimeType.startsWith('audio/'), reason: 'a recording (video or audio)' },
-  { test: (f) => f.mimeType === 'application/vnd.google-apps.folder', reason: 'a folder' },
   { test: (f) => f.mimeType === 'application/vnd.google-apps.shortcut', reason: 'a shortcut' },
   { test: (f) => /^application\/vnd\.google-apps\.(form|map|site|jam|drawing|script|fusiontable)$/.test(f.mimeType), reason: 'a Google app type without a text export' },
   { test: (f) => /^application\/(zip|x-zip-compressed|gzip|x-tar|x-7z-compressed)$/.test(f.mimeType), reason: 'an archive' },
@@ -41,7 +43,15 @@ const SKIP_BY_TYPE: Array<{ test: (f: DriveFile) => boolean; reason: string }> =
   { test: (f) => f.mimeType === 'application/vnd.google-apps.unknown' || /gemini.*canvas|canvas.*gemini/i.test(f.name), reason: 'a Gemini canvas (needs one export step: Share, Export to Docs)' },
 ];
 
-export interface DriveFolderState { name: string; newest: string | null; ids: string[] }
+/** A folder item in a configured root's listing: its files are read on their own, one level down. */
+export const SUBFOLDER_SKIP_REASON = 'a subfolder (its files are read one level down)';
+/** A folder item inside a subfolder: the descent is one level, so it is not read. */
+export const DEEP_FOLDER_SKIP_REASON = 'a folder two levels down';
+/** A subfolder past the per-root bound: listed in the root, not read. */
+export const UNREAD_SUBFOLDER_REASON = `a subfolder past the ${DRIVE_SUBFOLDERS_MAX}-subfolder bound (not read)`;
+
+/** `parent`: the configured root a subfolder was read under (absent for a root). */
+export interface DriveFolderState { name: string; newest: string | null; ids: string[]; parent?: string }
 export interface DriveState { folders: Record<string, DriveFolderState> }
 
 export interface DriveSyncInput {
@@ -66,7 +76,8 @@ export type DriveSyncResult =
       ok: true;
       status: 'ok' | 'partial';
       runId: string;
-      folders: Array<{ id: string; name: string; newest: string | null; known: number; more: boolean }>;
+      /** One per folder read: a root, then its subfolders (`name` "<root>/<subfolder>", `parent` the root's id). */
+      folders: Array<{ id: string; name: string; parent: string | null; newest: string | null; known: number; more: boolean }>;
       foldersMissing: string[];
       listed: number;
       imported: { accepted: number; duplicates: number; revised: number; invalid: number };
@@ -141,17 +152,24 @@ export async function runDriveSync(prisma: PrismaLike, input: DriveSyncInput): P
   const unreadable: Array<DriveSyncFileReport & { reason: string }> = [];
   const skipped: Array<DriveSyncFileReport & { reason: string }> = [];
   const removed: Array<{ id: string; folder: string; fate: 'trashed' | 'deleted_or_access_lost' | 'unknown' }> = [];
-  const folderReports: Array<{ id: string; name: string; newest: string | null; known: number; more: boolean }> = [];
+  const folderReports: Array<{ id: string; name: string; parent: string | null; newest: string | null; known: number; more: boolean }> = [];
   const nextState: DriveState = { folders: {} };
   let listed = 0;
   let more = false;
   const extractedAt = now.toISOString();
   try {
     const resolved = await client.resolveFolders(input.folders);
-    const foldersMissing = input.folders.filter((f) => !resolved.some((r) => r.id === f || r.name === f));
+    const foldersMissing = input.folders.filter((f) => !resolved.some((r) => r.id === f || r.name === f || normalizeFolderName(r.name) === normalizeFolderName(f)));
     let budget = limit;
     const byProducer: Record<string, IntelligenceRecordInput[]> = { [DRIVE_PRODUCER]: [], [GEMINI_PRODUCER]: [] };
-    for (const folder of resolved) {
+    const visited = new Set<string>();
+    const boundNotes: string[] = [];
+    /**
+     * One folder's page: a root (depth 0, its subfolders listed in `readSubfolders`) or a subfolder one level down
+     * (depth 1, `label` "<root>/<subfolder>", its own name the account hint for its files).
+     */
+    const readFolder = async (folder: { id: string; name: string }, where: { label: string; depth: 0 | 1; parent: string | null; readSubfolders: Set<string> }) => {
+      visited.add(folder.id);
       const prev = state.folders[folder.id] ?? { name: folder.name, newest: null, ids: [] };
       const known = new Set(prev.ids);
       let newest = prev.newest;
@@ -162,9 +180,14 @@ export async function runDriveSync(prisma: PrismaLike, input: DriveSyncInput): P
         for (const file of page.files) {
           listed += 1;
           budget -= 1;
-          const report: DriveSyncFileReport = { id: file.id, name: file.name, folder: folder.name, mimeType: file.mimeType, modifiedTime: file.modifiedTime };
+          const report: DriveSyncFileReport = { id: file.id, name: file.name, folder: where.label, mimeType: file.mimeType, modifiedTime: file.modifiedTime };
           known.add(file.id);
           if (!newest || file.modifiedTime > newest) newest = file.modifiedTime;
+          if (file.mimeType === GOOGLE_FOLDER) {
+            const reason = where.depth === 1 ? DEEP_FOLDER_SKIP_REASON : where.readSubfolders.has(file.id) ? SUBFOLDER_SKIP_REASON : UNREAD_SUBFOLDER_REASON;
+            skipped.push({ ...report, reason });
+            continue;
+          }
           const skip = SKIP_BY_TYPE.find((s) => s.test(file));
           if (skip) { skipped.push({ ...report, reason: skip.reason }); continue; }
           let text: { text: string | null; unreadableReason: string | null };
@@ -176,6 +199,7 @@ export async function runDriveSync(prisma: PrismaLike, input: DriveSyncInput): P
           }
           const parse = parseDriveText({ mimeType: file.mimeType, name: file.name, text: text.text, unreadableReason: text.unreadableReason });
           if (!parse.readable) { unreadable.push({ ...report, reason: parse.unreadableReason ?? 'unreadable' }); continue; }
+          // The folder the file sits in names its account hint: a prospect subfolder ("Crowley") does; a scope root does not (drive-records).
           const meta: DriveFileMeta = { id: file.id, name: file.name, mimeType: file.mimeType, modifiedTime: file.modifiedTime, owners: file.owners, webViewLink: file.webViewLink, folderName: folder.name, size: file.size };
           const records = driveRecordsOf(meta, parse, { extractedAt, runId });
           if (!records.length) { unreadable.push({ ...report, reason: 'the parse yielded no passage' }); continue; }
@@ -198,16 +222,28 @@ export async function runDriveSync(prisma: PrismaLike, input: DriveSyncInput): P
               const f = await client.getFile(id).catch(() => undefined);
               fate = f === null ? 'deleted_or_access_lost' : f?.trashed ? 'trashed' : f === undefined ? 'unknown' : 'deleted_or_access_lost';
             }
-            removed.push({ id, folder: folder.name, fate });
+            removed.push({ id, folder: where.label, fate });
           }
         }
       }
       const ids = [...known].slice(-DRIVE_KNOWN_IDS_MAX);
-      nextState.folders[folder.id] = { name: folder.name, newest, ids };
-      folderReports.push({ id: folder.id, name: folder.name, newest, known: ids.length, more: folderMore });
+      nextState.folders[folder.id] = where.parent ? { name: folder.name, newest, ids, parent: where.parent } : { name: folder.name, newest, ids };
+      folderReports.push({ id: folder.id, name: where.label, parent: where.parent, newest, known: ids.length, more: folderMore });
       more = more || folderMore;
+    };
+    for (const root of resolved) {
+      if (visited.has(root.id)) continue;
+      // The subfolders are listed first (bounded) so the root's own listing can say which folder item is read on its own.
+      const subs = await client.listFolders(root.id, DRIVE_SUBFOLDERS_MAX);
+      if (!subs.complete) boundNotes.push(`${root.name}: more than ${DRIVE_SUBFOLDERS_MAX} subfolders, the first ${subs.folders.length} by name read`);
+      await readFolder(root, { label: root.name, depth: 0, parent: null, readSubfolders: new Set(subs.folders.map((s) => s.id)) });
+      for (const sub of subs.folders) {
+        if (visited.has(sub.id)) continue;
+        await readFolder(sub, { label: `${root.name}/${sub.name}`, depth: 1, parent: root.id, readSubfolders: new Set() });
+      }
     }
-    const cursor = folderReports.map((f) => `${f.name}=${f.newest ?? 'start'}`).join('; ') || null;
+    // The roots always; a subfolder once it has a position (forty "start" entries would say nothing).
+    const cursor = folderReports.filter((f) => !f.parent || f.newest).map((f) => `${f.name}=${f.newest ?? 'start'}`).join('; ') || null;
     const all = [...byProducer[DRIVE_PRODUCER], ...byProducer[GEMINI_PRODUCER]];
     if (input.dryRun) {
       return { ok: true, status: unreadable.length ? 'partial' : 'ok', runId, folders: folderReports, foldersMissing, listed, imported: counts, records: all.length, readable, unreadable, skipped, removed, more, ledgerId: null, plan: all };
@@ -221,10 +257,11 @@ export async function runDriveSync(prisma: PrismaLike, input: DriveSyncInput): P
       counts.revised += r.revised;
       counts.invalid += r.invalid;
     }
-    const status: 'ok' | 'partial' = unreadable.length || foldersMissing.length ? 'partial' : 'ok';
+    const status: 'ok' | 'partial' = unreadable.length || foldersMissing.length || boundNotes.length ? 'partial' : 'ok';
     const detail = [
       unreadable.length ? `${unreadable.length} unreadable: ${unreadable.slice(0, 5).map((u) => `${u.name} (${u.reason})`).join('; ')}` : null,
       foldersMissing.length ? `folders not found: ${foldersMissing.join(', ')}` : null,
+      ...boundNotes,
     ].filter(Boolean).join('. ') || null;
     const reportedOn = all.map((r) => r.reportedOn).sort();
     const ledgerId = await ledger(prisma, actor, {

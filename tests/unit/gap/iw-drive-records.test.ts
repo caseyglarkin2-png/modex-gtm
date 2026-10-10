@@ -64,6 +64,12 @@ describe('Drive records', () => {
     const file = meta({ id: 'c1', name: 'Deep-Audit Dossier — Crowley Jacksonville Cross Dock Facility', folderName: 'Yard Audits', modifiedTime: '2026-09-20T10:00:00.000Z', webViewLink: 'https://docs.google.com/document/d/c1/edit' });
     const parse = parseDriveText({ mimeType: DOC, name: file.name, text: fx('crowley-jacksonville-cross-dock.doc.md') });
     expect(accountHintOf(file, parse)).toEqual({ hint: 'Crowley', basis: 'text' });
+    // The real yard-audit root (its Drive name carries an em dash) and its Master Audits subfolder are scopes, never an
+    // account hint, however the dash is written; a prospect subfolder beside them is the hint (2026-10-10).
+    for (const scope of ['YardFlow — Prospect Yard Audits', 'YardFlow - Prospect Yard Audits', 'Master Audits']) {
+      expect(accountHintOf({ ...file, folderName: scope }, parse), scope).toEqual({ hint: 'Crowley', basis: 'text' });
+    }
+    expect(accountHintOf({ ...file, folderName: 'Crowley' }, parse)).toEqual({ hint: 'Crowley', basis: 'folder' });
     const records = driveRecordsOf(file, parse, OPTS);
     expect(records.length).toBeGreaterThanOrEqual(1);
     expect(records.length).toBeLessThanOrEqual(RECORDS_PER_FILE);

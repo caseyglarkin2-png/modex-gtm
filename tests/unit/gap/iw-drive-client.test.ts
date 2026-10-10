@@ -8,7 +8,7 @@
  */
 import { crc32, deflateRawSync } from 'node:zlib';
 import { describe, expect, it } from 'vitest';
-import { DRIVE_DEFAULT_FOLDERS, DriveApiError, PDF_UNREADABLE_REASON, createDriveClient, driveConfigFromEnv, driveFoldersFromEnv, driveMaxBytes, extractDriveText, readZipEntries, textOfDocx, textOfPptx, textOfXlsx } from '@/lib/gap/signals/drive-client';
+import { DRIVE_DEFAULT_FOLDERS, DRIVE_YARD_AUDIT_FOLDER, DriveApiError, PDF_UNREADABLE_REASON, createDriveClient, driveConfigFromEnv, driveFoldersFromEnv, driveMaxBytes, extractDriveText, normalizeFolderName, readZipEntries, textOfDocx, textOfPptx, textOfXlsx } from '@/lib/gap/signals/drive-client';
 
 /** A minimal zip writer: local headers, central directory, end record; `deflate` chooses the method per entry. */
 function zip(entries: Array<{ name: string; text: string; deflate?: boolean }>): Buffer {
@@ -77,6 +77,32 @@ describe('the Drive reader', () => {
     expect(driveMaxBytes({ GAP_DRIVE_MAX_BYTES: '1024' })).toBe(1024);
   });
 
+  it('the folder names (2026-10-10): the defaults name the real yard-audit root; names compare normalized (case, any dash or spacing run)', async () => {
+    expect(DRIVE_YARD_AUDIT_FOLDER, 'the name as Drive holds it, em dash included').toBe('YardFlow — Prospect Yard Audits');
+    expect(DRIVE_DEFAULT_FOLDERS).toEqual(['Meet Recordings', 'Gemini Artifacts', 'YardFlow — Prospect Yard Audits']);
+    expect(DRIVE_DEFAULT_FOLDERS, 'the old guess named no real folder').not.toContain('Yard Audits');
+    for (const variant of ['YardFlow — Prospect Yard Audits', 'YardFlow - Prospect Yard Audits', 'yardflow prospect yard audits', '  YARDFLOW –– Prospect   Yard\tAudits ', 'YardFlow—Prospect Yard Audits', 'YardFlow — Prospect Yard Audits']) {
+      expect(normalizeFolderName(variant), JSON.stringify(variant)).toBe('yardflow prospect yard audits');
+    }
+    expect(normalizeFolderName('Meet Recordings')).not.toBe(normalizeFolderName('Meet Recording'));
+    // The client: the query asks for the exact name and the first word as a prefix; the match is made on the normalized name.
+    const queries: string[] = [];
+    const fetchImpl = (async (url: string | URL) => {
+      const u = String(url);
+      if (u.startsWith('https://oauth2.googleapis.com/token')) return new Response(JSON.stringify({ access_token: 'at' }), { status: 200 });
+      const parsed = new URL(u);
+      const query = parsed.searchParams.get('q') ?? '';
+      queries.push(query);
+      if (query.includes('in parents')) return new Response(JSON.stringify({ files: [{ id: 'sub-crowley', name: 'Crowley' }, { id: 'sub-dannon', name: 'Dannon' }], nextPageToken: 'more' }), { status: 200 });
+      return new Response(JSON.stringify({ files: [{ id: 'f-other', name: 'YardFlow Decks' }, { id: 'f-audits', name: 'YardFlow — Prospect Yard Audits' }, { id: 'f-meet', name: 'Meet Recordings' }] }), { status: 200 });
+    }) as unknown as typeof fetch;
+    const client = createDriveClient({ kind: 'refresh_token', refreshToken: 'r', clientId: 'c', clientSecret: 's' }, { fetchImpl });
+    expect(await client.resolveFolders(['yardflow - prospect yard audits', 'meet recordings', 'YardFlow Pitch'])).toEqual([{ id: 'f-audits', name: 'YardFlow — Prospect Yard Audits' }, { id: 'f-meet', name: 'Meet Recordings' }]);
+    expect(queries[0]).toBe("mimeType = 'application/vnd.google-apps.folder' and trashed = false and (name = 'yardflow - prospect yard audits' or name contains 'yardflow' or name = 'meet recordings' or name contains 'meet' or name = 'YardFlow Pitch' or name contains 'YardFlow')");
+    expect(await client.listFolders('f-audits', 2)).toEqual({ folders: [{ id: 'sub-crowley', name: 'Crowley' }, { id: 'sub-dannon', name: 'Dannon' }], complete: false });
+    expect(queries[1]).toBe("'f-audits' in parents and mimeType = 'application/vnd.google-apps.folder' and trashed = false");
+  });
+
   it('the zip reader: STORE and DEFLATE entries, the wanted filter, a malformed buffer refused', () => {
     const buf = zip([{ name: 'a.txt', text: 'stored words' }, { name: 'dir/b.txt', text: 'deflated words '.repeat(50), deflate: true }]);
     const all = readZipEntries(buf);
@@ -139,7 +165,7 @@ describe('the Drive reader', () => {
     expect(list.searchParams.get('q')).toBe("'f-meet' in parents and trashed = false and modifiedTime > '2026-06-01T00:00:00.000Z'");
     expect(list.searchParams.get('orderBy')).toBe('modifiedTime');
     const folders = new URL(api[0].url);
-    expect(folders.searchParams.get('q')).toBe("mimeType = 'application/vnd.google-apps.folder' and trashed = false and (name = 'Meet Recordings' or name = 'Missing')");
+    expect(folders.searchParams.get('q')).toBe("mimeType = 'application/vnd.google-apps.folder' and trashed = false and (name = 'Meet Recordings' or name contains 'Meet' or name = 'Missing' or name contains 'Missing')");
     const exp = new URL(api.find((c) => c.url.includes('/export'))!.url);
     expect(exp.searchParams.get('mimeType')).toBe('text/plain');
   });

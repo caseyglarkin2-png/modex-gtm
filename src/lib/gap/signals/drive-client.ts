@@ -6,7 +6,8 @@
  *     with https://www.googleapis.com/auth/drive.readonly; the Gmail modules mint the same way)
  *   GAP_DRIVE_DWD_SA_JSON with GAP_DRIVE_USER_EMAIL (domain-wide delegation, the pattern of gap-sender.ts and
  *     email/google-delegated.ts, the Drive read-only scope)
- * Operations: resolve folder names to ids under the configured roots; list a folder's files modified after a cursor
+ * Operations: resolve folder names to ids under the configured roots (names compared normalized: case, dashes and
+ * spacing never hide a folder); list one folder's subfolders (bounded, for the sync's one-level descent); list a folder's files modified after a cursor
  * (id, name, mime type, modified time, owners, link, parents, size, trashed); a folder's complete id set (for the
  * removal diff); one file's metadata (null on 404, trashed said); export a Doc, Sheet or Slides to text; download an
  * uploaded file's bytes under GAP_DRIVE_MAX_BYTES. Text extraction for the binaries is here too and pure: DOCX, XLSX
@@ -20,7 +21,31 @@ import { mintDelegatedAccessToken } from '@/lib/email/google-delegated';
 export const DRIVE_SCOPE = 'https://www.googleapis.com/auth/drive.readonly';
 export const DRIVE_API = 'https://www.googleapis.com/drive/v3';
 export const DRIVE_MAX_BYTES_DEFAULT = 8 * 1024 * 1024;
-export const DRIVE_DEFAULT_FOLDERS = ['Meet Recordings', 'Gemini Artifacts', 'Yard Audits'];
+/**
+ * The prospect yard-audit root as Drive holds it (folder id 1arpvfAFP2Gyj1PmVtPvPgrw7Z_XZ115P, confirmed read-only on
+ * 2026-10-10). Its real name carries an em dash, written here as an escape because it is Drive's data, not our copy;
+ * the resolver normalizes names (normalizeFolderName), so "YardFlow - Prospect Yard Audits" in GAP_DRIVE_FOLDERS
+ * resolves to the same folder. Its per-prospect subfolders are read one level down (drive-sync.ts).
+ */
+export const DRIVE_YARD_AUDIT_FOLDER = 'YardFlow — Prospect Yard Audits';
+export const DRIVE_DEFAULT_FOLDERS = ['Meet Recordings', 'Gemini Artifacts', DRIVE_YARD_AUDIT_FOLDER];
+/** Subfolders read under one configured root (one level down only; a folder below that is skipped, said). */
+export const DRIVE_SUBFOLDERS_MAX = 50;
+/** Pages of the folder-name query read before the resolver stops (200 folders a page). */
+const FOLDER_QUERY_PAGES = 5;
+/** A run of dashes (hyphen, the en and em dashes, minus and their kin) or whitespace: one separator. */
+const SEPARATOR_RUN = /[\s\-‐-―−⸺⸻﹘﹣－]+/g;
+
+/**
+ * A folder name as the resolver compares it: case-insensitive, any run of dashes or whitespace read as one space,
+ * trimmed. "YardFlow — Prospect Yard Audits", "YardFlow - Prospect Yard Audits" and "yardflow prospect yard
+ * audits" are one name.
+ */
+export function normalizeFolderName(name: string): string {
+  return name.normalize('NFKC').toLowerCase().replace(SEPARATOR_RUN, ' ').trim();
+}
+/** The first word of a name as written: the Drive query's prefix term (the exact comparison is made here, normalized). */
+const firstWord = (name: string): string => name.normalize('NFKC').split(SEPARATOR_RUN).find(Boolean) ?? '';
 /** The variable names health and the ledger name when nothing is configured. */
 export const DRIVE_CREDENTIAL_VARS = 'GAP_DRIVE_REFRESH_TOKEN (with GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET) or the delegation pair GAP_DRIVE_DWD_SA_JSON and GAP_DRIVE_USER_EMAIL';
 
@@ -74,8 +99,10 @@ export interface DriveFile {
 }
 
 export interface DriveClient {
-  /** Folder names to their ids (a name that is already an id passes through); a name not found is absent. */
+  /** Folder names to their ids (a name that is already an id passes through; names compare normalized); a name not found is absent. */
   resolveFolders(namesOrIds: string[]): Promise<Array<{ id: string; name: string }>>;
+  /** The folders directly inside one folder, by name, at most `max`; `complete` says whether the bound was reached. */
+  listFolders(parentId: string, max: number): Promise<{ folders: Array<{ id: string; name: string }>; complete: boolean }>;
   /** Files in one folder modified after the cursor, oldest first, one page. */
   listFiles(opts: { folderId: string; modifiedAfter: string | null; pageSize: number; pageToken?: string | null }): Promise<{ files: DriveFile[]; nextPageToken: string | null }>;
   /** The folder's live file ids (not trashed), bounded; `complete` says whether the bound was reached. */
@@ -157,14 +184,34 @@ export function createDriveClient(config: DriveConfig, opts: { fetchImpl?: typeo
       const names = namesOrIds.filter((n) => !looksLikeId(n));
       for (const id of namesOrIds.filter(looksLikeId)) out.push({ id, name: id });
       if (names.length) {
-        const query = `mimeType = '${GOOGLE_FOLDER}' and trashed = false and (${names.map((n) => `name = '${q(n)}'`).join(' or ')})`;
-        const body = (await call('/files', { q: query, fields: 'files(id,name)', pageSize: '50', includeItemsFromAllDrives: 'true' }, 'json')) as { files?: Array<{ id: string; name: string }> };
+        // Drive compares `name =` exactly, so the query also asks for each name's first word as a prefix (`name
+        // contains`) and the match is made here on the normalized name: a dash or a spacing difference never hides it.
+        const clauses = [...new Set(names.flatMap((n) => [`name = '${q(n)}'`, ...(firstWord(n) ? [`name contains '${q(firstWord(n))}'`] : [])]))];
+        const query = `mimeType = '${GOOGLE_FOLDER}' and trashed = false and (${clauses.join(' or ')})`;
+        const found: Array<{ id: string; name: string }> = [];
+        let pageToken: string | null = null;
+        for (let page = 0; page < FOLDER_QUERY_PAGES; page += 1) {
+          const params: Record<string, string> = { q: query, fields: 'nextPageToken,files(id,name)', pageSize: '200', includeItemsFromAllDrives: 'true' };
+          if (pageToken) params.pageToken = pageToken;
+          const body = (await call('/files', params, 'json')) as { files?: Array<{ id: string; name: string }>; nextPageToken?: string };
+          found.push(...(body.files ?? []));
+          pageToken = body.nextPageToken ?? null;
+          if (!pageToken) break;
+        }
         for (const name of names) {
-          const hit = (body.files ?? []).find((x) => x.name === name);
-          if (hit) out.push({ id: hit.id, name: hit.name });
+          const want = normalizeFolderName(name);
+          const hit = found.find((x) => x.name === name) ?? found.find((x) => normalizeFolderName(String(x.name ?? '')) === want);
+          if (hit && !out.some((o) => o.id === hit.id)) out.push({ id: hit.id, name: hit.name });
         }
       }
       return out;
+    },
+    async listFolders(parentId, max) {
+      const bound = Math.max(1, max);
+      const params: Record<string, string> = { q: `'${q(parentId)}' in parents and mimeType = '${GOOGLE_FOLDER}' and trashed = false`, fields: 'nextPageToken,files(id,name)', orderBy: 'name', pageSize: String(Math.min(1000, bound)), includeItemsFromAllDrives: 'true' };
+      const body = (await call('/files', params, 'json')) as { files?: Array<{ id: string; name: string }>; nextPageToken?: string };
+      const files = body.files ?? [];
+      return { folders: files.slice(0, bound).map((x) => ({ id: String(x.id), name: String(x.name ?? '') })), complete: !body.nextPageToken && files.length <= bound };
     },
     async listFiles({ folderId, modifiedAfter, pageSize, pageToken }) {
       const query = `'${q(folderId)}' in parents and trashed = false${modifiedAfter ? ` and modifiedTime > '${modifiedAfter}'` : ''}`;

@@ -12,6 +12,7 @@
  * from its topic notes and apart from what people said; the archive naming the Drive id and the mime type. An
  * unreadable parse yields NO record: the sync records the file as unreadable instead.
  */
+import { normalizeFolderName } from './drive-client';
 import { datesIn, isGeminiSummaryHeading, type DriveParse, type DrivePassage } from './drive-parsers';
 import { evidenceGroupKey, type IntelSource, type IntelligenceRecordInput } from './intelligence-record';
 
@@ -34,8 +35,12 @@ export interface DriveFileMeta {
   size?: number | null;
 }
 
-/** Folders that name a scope, not an account. */
-const SCOPE_FOLDERS = /^(meet recordings|gemini artifacts|my drive|shared with me|root|yard audits?|audits?|documents|exports?|inbox)$/i;
+/**
+ * Folders that name a scope, not an account, tested on the normalized name (normalizeFolderName: lower case, dash and
+ * space runs as one space): the yard-audit root ("YardFlow — Prospect Yard Audits" in Drive) and its "Master Audits"
+ * subfolder are scopes; the per-prospect subfolders beside them ("Crowley", "Dannon") are accounts.
+ */
+const SCOPE_FOLDERS = /^(meet recordings|gemini artifacts|my drive|shared with me|root|yard audits?|audits?|documents|exports?|inbox|(yardflow |yard flow )?prospect yard audits?|master audits?)$/;
 const OUR_NAMES = /^(yardflow|freightroll|yard flow|freight roll|yardflow by freightroll)$/i;
 const INTERNAL_EMAIL = /@(freightroll\.com|yardflow\.ai)$/i;
 const NAME_DATE = /(\d{4}-\d{2}-\d{2})/;
@@ -51,7 +56,7 @@ const hostOf = (url: string): string | null => {
 /** The account hint: the folder name when it names an account; else the title's first segment when it is not us. */
 export function accountHintOf(file: Pick<DriveFileMeta, 'name' | 'folderName'>, parse: Pick<DriveParse, 'title' | 'passages'>): { hint: string | null; basis: 'folder' | 'title' | 'text' | null } {
   const folder = (file.folderName ?? '').trim();
-  if (folder && !SCOPE_FOLDERS.test(folder) && !OUR_NAMES.test(folder)) return { hint: folder.slice(0, 120), basis: 'folder' };
+  if (folder && !SCOPE_FOLDERS.test(normalizeFolderName(folder)) && !OUR_NAMES.test(folder)) return { hint: folder.slice(0, 120), basis: 'folder' };
   // The file's name first (Drive names are the inventory's names), then the document's own title.
   for (const candidate of [file.name, parse.title ?? '']) {
     const name = candidate.replace(/\.[a-z0-9]{2,5}$/i, '').replace(/\s*\((?:Notes by Gemini|\d+)\)\s*$/i, '').trim();

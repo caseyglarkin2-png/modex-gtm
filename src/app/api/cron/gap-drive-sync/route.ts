@@ -16,7 +16,8 @@ const CRON_SCHEDULE = '45 */6 * * *';
 /**
  * GET /api/cron/gap-drive-sync   (the Google Workspace and Gemini extension, 2026-10-10)
  *
- * The agreed Drive folders (GAP_DRIVE_FOLDERS, default Meet Recordings, Gemini Artifacts and the yard-audit folder)
+ * The agreed Drive folders (GAP_DRIVE_FOLDERS, default Meet Recordings, Gemini Artifacts and the yard-audit root, each
+ * read one level down into its subfolders, names matched normalized; drive-client.ts DRIVE_DEFAULT_FOLDERS)
  * into GAP's intelligence records every six hours: one page of DRIVE_FILES_PER_RUN files modified after the cursor
  * the last run recorded (the first run bounded to GAP_DRIVE_FIRST_RUN_DAYS), each exported or downloaded under
  * GAP_DRIVE_MAX_BYTES, parsed and imported (producer google_drive or gemini_notes); the unreadable files named on
