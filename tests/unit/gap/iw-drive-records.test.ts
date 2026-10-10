@@ -66,7 +66,7 @@ describe('Drive records', () => {
     expect(accountHintOf(file, parse)).toEqual({ hint: 'Crowley', basis: 'text' });
     // The real yard-audit root (its Drive name carries an em dash) and its Master Audits subfolder are scopes, never an
     // account hint, however the dash is written; a prospect subfolder beside them is the hint (2026-10-10).
-    for (const scope of ['YardFlow — Prospect Yard Audits', 'YardFlow - Prospect Yard Audits', 'Master Audits']) {
+    for (const scope of ['YardFlow \u2014 Prospect Yard Audits', 'YardFlow - Prospect Yard Audits', 'Master Audits']) {
       expect(accountHintOf({ ...file, folderName: scope }, parse), scope).toEqual({ hint: 'Crowley', basis: 'text' });
     }
     expect(accountHintOf({ ...file, folderName: 'Crowley' }, parse)).toEqual({ hint: 'Crowley', basis: 'folder' });

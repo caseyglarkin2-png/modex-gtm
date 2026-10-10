@@ -30,18 +30,18 @@ export const DRIVE_MAX_BYTES_DEFAULT = 8 * 1024 * 1024;
  * the resolver normalizes names (normalizeFolderName), so "YardFlow - Prospect Yard Audits" in GAP_DRIVE_FOLDERS
  * resolves to the same folder. Its per-prospect subfolders are read one level down (drive-sync.ts).
  */
-export const DRIVE_YARD_AUDIT_FOLDER = 'YardFlow — Prospect Yard Audits';
+export const DRIVE_YARD_AUDIT_FOLDER = 'YardFlow \u2014 Prospect Yard Audits';
 export const DRIVE_DEFAULT_FOLDERS = ['Meet Recordings', 'Gemini Artifacts', DRIVE_YARD_AUDIT_FOLDER];
 /** Subfolders read under one configured root (one level down only; a folder below that is skipped, said). */
 export const DRIVE_SUBFOLDERS_MAX = 50;
 /** Pages of the folder-name query read before the resolver stops (200 folders a page). */
 const FOLDER_QUERY_PAGES = 5;
 /** A run of dashes (hyphen, the en and em dashes, minus and their kin) or whitespace: one separator. */
-const SEPARATOR_RUN = /[\s\-‐-―−⸺⸻﹘﹣－]+/g;
+const SEPARATOR_RUN = /[\s\-\u2010-\u2015\u2212\u2E3A\u2E3B\uFE58\uFE63\uFF0D]+/g;
 
 /**
  * A folder name as the resolver compares it: case-insensitive, any run of dashes or whitespace read as one space,
- * trimmed. "YardFlow — Prospect Yard Audits", "YardFlow - Prospect Yard Audits" and "yardflow prospect yard
+ * trimmed. "YardFlow \u2014 Prospect Yard Audits", "YardFlow - Prospect Yard Audits" and "yardflow prospect yard
  * audits" are one name.
  */
 export function normalizeFolderName(name: string): string {

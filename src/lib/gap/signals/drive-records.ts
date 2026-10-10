@@ -37,7 +37,7 @@ export interface DriveFileMeta {
 
 /**
  * Folders that name a scope, not an account, tested on the normalized name (normalizeFolderName: lower case, dash and
- * space runs as one space): the yard-audit root ("YardFlow — Prospect Yard Audits" in Drive) and its "Master Audits"
+ * space runs as one space): the yard-audit root ("YardFlow \u2014 Prospect Yard Audits" in Drive) and its "Master Audits"
  * subfolder are scopes; the per-prospect subfolders beside them ("Crowley", "Dannon") are accounts.
  */
 const SCOPE_FOLDERS = /^(meet recordings|gemini artifacts|my drive|shared with me|root|yard audits?|audits?|documents|exports?|inbox|(yardflow |yard flow )?prospect yard audits?|master audits?)$/;

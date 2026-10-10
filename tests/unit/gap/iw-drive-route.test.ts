@@ -84,7 +84,7 @@ describe('the Drive sync cron route', () => {
     expect(h.create).toHaveBeenCalledWith({ kind: 'refresh_token', refreshToken: 'rt-secret-value', clientId: 'cid', clientSecret: 'cs-secret-value' });
     // The fake lists the same document under each of the three default folders: one record, then two duplicates, never copies.
     expect(body).toMatchObject({ ok: true, status: 'ok', listed: 3, imported: { accepted: 1, duplicates: 2 }, foldersMissing: [] });
-    expect(body.folders.map((f: { name: string }) => f.name), 'the defaults name the real yard-audit root (2026-10-10)').toEqual(['Meet Recordings', 'Gemini Artifacts', 'YardFlow — Prospect Yard Audits']);
+    expect(body.folders.map((f: { name: string }) => f.name), 'the defaults name the real yard-audit root (2026-10-10)').toEqual(['Meet Recordings', 'Gemini Artifacts', 'YardFlow \u2014 Prospect Yard Audits']);
     expect(JSON.stringify(body)).not.toContain('secret-value');
     expect(JSON.stringify(h.db!.store.gapAuditEvent)).not.toContain('secret-value');
     expect(h.db!.store.gapSignal).toHaveLength(1);

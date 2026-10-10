@@ -138,7 +138,7 @@ describe('the Drive sync', () => {
   });
 
   it('a configured root is read ONE level down (2026-10-10): each prospect subfolder with its own cursor and its name as the account hint; a folder two levels down is skipped, said; the root resolves under a dash variant of its name', async () => {
-    const ROOT = 'YardFlow — Prospect Yard Audits';
+    const ROOT = 'YardFlow \u2014 Prospect Yard Audits';
     const FOLDER = 'application/vnd.google-apps.folder';
     const text = (who: string) => `# ${who} yard audit\n\nThe cross dock runs 58 dock doors on paper and a radio; the gate queue backs onto the street at the morning wave.`;
     const data = {

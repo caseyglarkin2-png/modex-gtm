@@ -18,7 +18,7 @@ Skipped at capture: `FreightRoll -- Mutual NDA (Form).DOCX` and the ISEE NDAs (l
 
 ## The folders the sync reads (confirmed read-only through the Drive MCP, 2026-10-10)
 
-`DRIVE_DEFAULT_FOLDERS` in `src/lib/gap/signals/drive-client.ts` names these three roots. The names below are Drive's own data, copied exactly (the yard-audit root carries an em dash; the code writes it as `—`). The resolver compares names normalized (case-insensitive, any run of dashes or whitespace as one space), so `GAP_DRIVE_FOLDERS=YardFlow - Prospect Yard Audits` resolves to the same folder; an id in `GAP_DRIVE_FOLDERS` passes through unchanged. <!-- verified:2026-10-10 -->
+`DRIVE_DEFAULT_FOLDERS` in `src/lib/gap/signals/drive-client.ts` names these three roots. The names below are Drive's own data, copied exactly (the yard-audit root carries an em dash; the code writes it as `\u2014`). The resolver compares names normalized (case-insensitive, any run of dashes or whitespace as one space), so `GAP_DRIVE_FOLDERS=YardFlow - Prospect Yard Audits` resolves to the same folder; an id in `GAP_DRIVE_FOLDERS` passes through unchanged. <!-- verified:2026-10-10 -->
 
 | Root | Drive id | Parent | Owner | Created | What sits in it |
 |---|---|---|---|---|---|
