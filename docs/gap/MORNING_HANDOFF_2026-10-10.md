@@ -2,6 +2,12 @@
 
 STATUS: HANDOFF (the overnight continuation of the intelligence wiring program; Casey's instruction of the evening of October 9: fix the packet's contradictions, complete the Gmail action packet, finish the Google Workspace and Gemini extension, close the recurring feeds and the reuse work, merge and deploy within the authorization already given, leave acceptance to him). The one checklist is `docs/gap/INTELLIGENCE_WIRING_CHECKLIST.md`. Implemented, deployed, demonstrated and accepted are four different words; nothing below is accepted. <!-- verified:2026-10-10 -->
 
+## 0. The two audits you asked for, and Release 3
+
+After Release 2 you asked for an exhaustive completion audit and an adversarial audit of your morning. Both ran on Opus, read only. The completion audit found three items marked done that were not (the Drive folder scope, the vault revision on health, the blanket "no cold email" clauses) and a dozen smaller gaps; the adversarial audit read your inbox and found what would have misled you on Saturday (Friday's email walking Friday's plan, a meeting four days ahead printed as held, an out-of-office as a reply, the superseded Kenco angle still in Pursued, "the proposal below" in an email, a ten-minute command lag). Everything bounded and testable was fixed and shipped as PR #447 (main RELEASE3_SHA, production RELEASE3_DEPLOY); the checklist's Release 3 block lists each item. What was not done tonight is in section 3 with its owner.
+
+What changes for you on Saturday: reply START only on Saturday's briefing (a reply to Friday's now answers with today's pointer); commands answer within about three minutes; Kenco says "a meeting is ahead on Oct 14" and Pursued no longer repeats the old angle; nothing says "no cold email until"; the first item's move never points "below".
+
 ## 1. What shipped
 
 - PR #445, merged to main at f06a47f0; production `dpl_FjBEPuuVbMeY5mhuD9jUr4kUqDYm` READY 2026-10-10T04:15:10Z on f06a47f0. Rollback: 821c43ec (`dpl_G8mUVu2cW83GTaiakA4vL6ubpXZy`, the Gmail action UI release of 01:31Z; 4e5e552e was the docs merge over it).
@@ -51,6 +57,12 @@ What the preview cannot show: our Sent and Drafts. Production holds the GAP mail
 | sales-agent | READ, one optional candidate | the bounded read found one candidate (per-account LLM research briefs, undated, no sources, through its export endpoint with the key modex already holds) and nothing else GAP lacks; the checklist's Priority 4 row has the table; not imported unless you say undated LLM briefs are worth it; its signals, intel-vault and export GET routes carry no auth (worth a look) |
 | Stray folder `C:\Users\casey\wt-clawd-main` | NAMED DEBT | not a registered worktree; delete by hand when convenient |
 | GitHub CI (typecheck, unit-tests) | IGNORED by your word (no budget) | it fails on every run; merges proceed on the local gate (the focused battery, tsc, eslint); nothing to do |
+| Reply items never settle from email (Kenco, Boston Beer, Gusto come back every day) | TO DO (agent, your call on the rule) | a reply answered by a later outbound should not stay "Someone replied"; DONE should record the disposition instead of a one-day "logged" outcome (`work/outcome.ts`); it changes what a seller command means, so say yes and it is built with its test |
+| Your October 9 Kenco DONE notes lost their facts (ran before the newer parser) | TO DO (agent dry run, you apply) | a replay of the notes through the current parser shows the Oct 14 meeting and the sent note on the commitments ledger; applied only on your go |
+| Deal hygiene in the START/NEXT walk; no shortage line | TO DO (agent) | seven "Confirm the real date" items sit in the walk; the briefing should say "0 of 14 are new conversations" when that is so |
+| Lazer: "no exchange since Sep 21" while your reply of 14:38Z is in the mailbox | TO DO (agent) | root cause not found tonight (a Sent read or a thread placement); the harness cannot read Sent |
+| A persistent "not a prospect" control; the mdlz.com alias | TO DO (agent, then you) | the re-engage list now drops vendors, calendar responses and automated senders; a personal thread (your insurance adjuster) needs a one-click "never" that sticks, and the Mondelez decline needs its alias |
+| Two Boston Beer accounts on one plan; the Walmart opt-out still "NOT yet on the suppression list" | YOUR CLICKS | merge the accounts on the account page; record Tim Cooper's opt-out (DONE on the item, or the Record control) |
 
 ## 4. The one consolidated list of credentials and user actions
 
