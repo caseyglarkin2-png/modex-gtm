@@ -1,6 +1,6 @@
 # Assignment packets preview (the Gmail action UI audit, October 10, 2026)
 
-STATUS: RECEIPT. Rendered 2026-10-10T00:24:42.718Z with the deployed renderer against production, READ ONLY (every write intercepted, listed at the end). The stored plan of 2026-10-09: revision 3, 13 items, planned 2026-10-09T23:59:48.139Z. Each packet below is the assignment email the item would receive (its subject, text and HTML), followed by one information-only intelligence item as the briefing prints it. Nothing was sent.
+STATUS: RECEIPT. Rendered 2026-10-10T00:30:36.826Z with the deployed renderer against production, READ ONLY (every write intercepted, listed at the end). The stored plan of 2026-10-09: revision 3, 13 items, planned 2026-10-09T23:59:48.139Z. Each packet below is the assignment email the item would receive (its subject, text and HTML), followed by one information-only intelligence item as the briefing prints it. Nothing was sent.
 
 ## The plan, in order
 
@@ -22,7 +22,22 @@ STATUS: RECEIPT. Rendered 2026-10-10T00:24:42.718Z with the deployed renderer ag
 
 ## Kenco
 
-No plan item at Kenco today (the account is not on the day's list).
+Not on the plan today; rendered as a review item: review, The account as GAP reads it (preview, not on the plan). Prepared: none.
+
+Subject: GAP 14 of 13, undefined: The account as GAP reads it (preview, not on the plan) [GAP#ffffffffffffffffffffffffffffffff.3]
+
+```text
+undefined.
+Why now: A preview of the packet for an account that is not on today's list.
+
+The move: The account as GAP reads it (preview, not on the plan).
+
+Open it in GAP: https://modex-gtm.vercel.app/gap/accounts/kenco/
+
+To act from here, put one of these on the first line of your reply: APPROVE, REVISE: your words, SKIP, DEFER, DONE: what happened, NEXT, HELP.
+
+This is an internal message from GAP to you; nothing in it went to a buyer.
+```
 
 ## The Boston Beer Company
 
@@ -173,6 +188,7 @@ Intelligence worth a look (1). Any age, for your call; Pursue and GAP develops t
 
 ## Intercepted production writes (proof of read-only)
 
+- systemConfig.upsert
 - systemConfig.upsert
 - systemConfig.upsert
 - systemConfig.upsert

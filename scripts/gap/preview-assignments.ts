@@ -62,9 +62,11 @@ async function main() {
     L.push('');
     for (const f of found) {
       L.push(`## ${f.account}`, '');
-      if (!f.item) { L.push(`No plan item at ${f.account} today (the account is not on the day's list).`, ''); H.push(`<h2>${esc(f.account)}</h2><p>No plan item today.</p>`); continue; }
-      const built = await buildAssignment(prisma, { plan, item: f.item, revision: plan.revision ?? 0, baseUrl: BASE, actionSecret: null, commandsEnabled: true, now }).catch((e) => ({ subject: '(failed)', text: `(assignment could not be built: ${e instanceof Error ? e.message : String(e)})`, html: '', contentHash: '', prepared: { kind: 'none' as const }, move: '', hold: null }));
-      L.push(`Item ${f.item.rank + 1} of ${plan.items.length}: ${f.item.kind}, ${f.item.title}. Prepared: ${built.prepared.kind}${built.hold ? ` (held: ${built.hold.reason})` : ''}.`, '', `Subject: ${built.subject}`, '', '```text', built.text, '```', '');
+      // An account off today's list (Kenco after Casey's DONE) is rendered as a review item, so its packet can be judged too.
+      const synthetic = !f.item;
+      const item: PlanItem = f.item ?? ({ key: `preview:${f.account}`, token: 'f'.repeat(32), kind: 'review', stateKind: 'in_deal', title: 'The account as GAP reads it (preview, not on the plan)', why: 'A preview of the packet for an account that is not on today\'s list', href: `${accountHref(f.account)}/`, person: null, refs: {}, rank: plan.items.length } as unknown as PlanItem);
+      const built = await buildAssignment(prisma, { plan, item, revision: plan.revision ?? 0, baseUrl: BASE, actionSecret: null, commandsEnabled: true, now }).catch((e) => ({ subject: '(failed)', text: `(assignment could not be built: ${e instanceof Error ? e.message : String(e)})`, html: '', contentHash: '', prepared: { kind: 'none' as const }, move: '', hold: null }));
+      L.push(`${synthetic ? 'Not on the plan today; rendered as a review item' : `Item ${item.rank + 1} of ${plan.items.length}`}: ${item.kind}, ${item.title}. Prepared: ${built.prepared.kind}${built.hold ? ` (held: ${built.hold.reason})` : ''}.`, '', `Subject: ${built.subject}`, '', '```text', built.text, '```', '');
       H.push(`<h2>${esc(f.account)}</h2><p style="color:#666">${esc(built.subject)}</p><div style="border:1px solid #ddd;padding:12px;max-width:640px">${built.html || `<pre>${esc(built.text)}</pre>`}</div>`);
     }
     // The information-only item: the newest imported record with substance, as the briefing prints it (no plan).

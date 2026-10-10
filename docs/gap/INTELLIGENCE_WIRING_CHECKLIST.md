@@ -55,6 +55,23 @@ STATUS: ACTIVE. The consolidated scope (the wiring plan IW01-IW16, the second li
 | war-room | DONE (adapter), BLOCKED (feed) | existing connections traced: GAP posts review telemetry to `/api/review/log` (none since September 26 for want of the right token: the war-room's token differs from the Clawd token modex holds, and it is a sensitive variable that cannot be read back) and imports the PIC by a manual dry-run CLI (never applied to production; the charts are on disk, not on GitHub); the stores: dossiers (seller interpretation, reach GAP via the vault), intel snapshots (a copy of Clawd), engagement and heat (context), call dispositions (also in HubSpot), the daily brief (an action route, never called); the adapter `scripts/gap/import-warroom-dossiers.ts` reads the 58 dossier files from the war-room's git checkout, keeps the why-now evidence and findings, labels the intent score and views context, leaves the talk track out, and is a revision on change; imported into production; a war-room record on the twelve-slot preview; the war-room deploys by manual CLI upload (not git-connected; the last deploy August 24, 2026) so nothing of it was changed |
 | Flow-State- content | NO DEMONSTRATED BENEFIT | our own site content, not prospect intelligence |
 
+## Priority 5: the Gmail action UI (the audit of October 9, GUI-01 to GUI-12; appended October 10)
+
+| Item | State | Reference |
+|---|---|---|
+| GUI-01 trace the deployed digest and START assignment renderers; the field map | DONE | `scripts/gap/preview-assignments.ts` (read only; four real packets in `docs/gap/ASSIGNMENT_PACKETS_PREVIEW_2026-10-10.md`); the field map `docs/gap/GMAIL_ACTION_UI_FIELD_MAP.md` |
+| GUI-02 one shared assignment view model | IN PROGRESS | builder D: `work/assignment-packet.ts` |
+| GUI-03 business contact details and CRM/profile links | IN PROGRESS | builder D: `people/contact-packet.ts` (persona phone, LinkedIn, HubSpot ids; a bounded live contact read; unavailable said, never guessed) |
+| GUI-04 original-source excerpts with separated dates | IN PROGRESS | builder D (the story rows and the imported records' substance) |
+| GUI-05 relationship reconciliation before proposing actions | IN PROGRESS | builder D: `work/relationship-state.ts` (Phil's request: fulfilled, unfulfilled or unknown) |
+| GUI-06 relationship purpose and suppression labels | IN PROGRESS | builder D (STOP first; vendor, media, administrative labelled) |
+| GUI-07 prepared-state wording matches the material | IN PROGRESS | builder D on top of the IW15 hold |
+| GUI-08 sales-asset links and deal context | IN PROGRESS | builder D |
+| GUI-09 direct item selection and exact command effects | IN PROGRESS | builder E: `ITEM <n>` on the existing command handler; no GET link sends |
+| GUI-10 activity reconciliation verified | IN PROGRESS | builder E (focused tests over the existing recovery, idempotency and receipts) |
+| GUI-11 templates simplified | IN PROGRESS | builder E on the digest; builder D on the assignment; `work/clean-text.ts` |
+| GUI-12 representative packets and one inbox round trip | REMAINING | the preview harness on the merged tree: Kenco, Boston Beer, PepsiCo, Walmart, an information-only signal, an admin item; the round trip is Casey's reply |
+
 ## The consolidated request (what only Casey can do)
 
 1. The export-folder consumer's schedule, one PowerShell command (the agent's registration was refused by the permission classifier):
