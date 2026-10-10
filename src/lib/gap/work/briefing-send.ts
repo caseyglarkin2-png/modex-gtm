@@ -20,8 +20,9 @@
 import { randomBytes } from 'node:crypto';
 import type { GmailSender, GmailSendPayload } from '@/lib/email/gmail-sender';
 import { signActionToken } from './action-token';
-import { renderBriefing, type BriefingIntel, type DigestSizes } from './briefing';
-import { loadIntelligence } from './intel';
+import { PURSUED_SHOWN, renderBriefing, type BriefingIntel, type DigestSizes } from './briefing';
+import { loadIntelligence, type PursuedItem } from './intel';
+import { dateWords, relationshipStateFor, type RelationshipQuery, type RelationshipState } from './relationship-state';
 import { dealCoverageFrom } from './deal-coverage';
 import type { IdentityContext } from '../identity/resolve';
 import { loadInDealsSummary, type InDealsSummary } from '../deals/in-deals';
@@ -64,6 +65,8 @@ export interface BriefingSendDeps {
   /** IW12/IW13: the producers' coverage in words for the email (the producer status reader; absent: no coverage line). */
   coverage?: (prisma: PrismaLike, now: Date) => Promise<{ sources: string; unavailable: string | null } | null>;
   listSent: (recipient: string, afterEpoch: number, beforeEpoch: number) => Promise<Array<{ id: string; threadId: string | null; internalDate: Date; to: string; subject: string }>>;
+  /** The writer's relationship for a pursued angle's supersession (relationship-state's one reader by default; tests inject one). */
+  relationship?: (prisma: PrismaLike, q: RelationshipQuery) => Promise<RelationshipState>;
 }
 
 export type BriefingSendResult =
@@ -132,12 +135,37 @@ export function digestSizesFromEnv(env: Record<string, string | undefined>): Par
   return signals || people ? { ...(signals ? { signals } : {}), ...(people ? { people } : {}) } : undefined;
 }
 
+/**
+ * The morning audit (2026-10-10): a pursued angle the correspondence has moved past. For each READY item among the
+ * ones the email shows (the first PURSUED_SHOWN) with a writer address, the writer's relationship is read through
+ * relationship-state's one reader, one at a time; when we wrote them or they wrote us after the decision, the item
+ * carries `superseded` with the words ("we wrote Oct 9, 2026") and the email prints one line instead of the angle
+ * (Kenco: the angle for Dave Kiesling was decided Oct 8; we wrote Dave Oct 9 and he replied). Soft: a failed read is
+ * not superseded (null). An item not read is returned as it came. Reads only; nothing is written or queued.
+ */
+export async function markSupersededPursued(prisma: PrismaLike, pursued: readonly PursuedItem[], now: Date, deps: Pick<BriefingSendDeps, 'relationship'> = {}): Promise<PursuedItem[]> {
+  const read = deps.relationship ?? ((p: PrismaLike, q: RelationshipQuery) => relationshipStateFor(p, q));
+  const out = [...pursued];
+  for (let k = 0; k < Math.min(PURSUED_SHOWN, out.length); k += 1) {
+    const p = out[k];
+    if (p.status !== 'ready' || !p.writer?.email) continue;
+    const decided = new Date(p.decidedAt).getTime();
+    const rel = await read(prisma, { accountName: p.accountName ?? p.accountHint ?? '', email: p.writer.email, name: p.writer.name, now }).catch(() => null);
+    const later = (at: string | null | undefined) => !!at && Number.isFinite(decided) && new Date(at).getTime() > decided;
+    const since = [later(rel?.lastOutbound?.at) ? `we wrote ${dateWords(rel?.lastOutbound?.at)}` : null, later(rel?.lastInbound?.at) ? `they wrote ${dateWords(rel?.lastInbound?.at)}` : null].filter((x): x is string => !!x);
+    out[k] = { ...p, superseded: since.length ? { since: since.join('; ') } : null };
+  }
+  return out;
+}
+
 /** I04: the day's intelligence with the prepared angles, for the briefing. */
-export async function defaultIntel(prisma: PrismaLike, now: Date, deps: Pick<BriefingSendDeps, 'inDeals' | 'coverage'> & Partial<Pick<BriefingSendDeps, 'listSent'>> & { identity?: IdentityContext | null; env?: Record<string, string | undefined> } = {}): Promise<BriefingIntel> {
+export async function defaultIntel(prisma: PrismaLike, now: Date, deps: Pick<BriefingSendDeps, 'inDeals' | 'coverage' | 'relationship'> & Partial<Pick<BriefingSendDeps, 'listSent'>> & { identity?: IdentityContext | null; env?: Record<string, string | undefined> } = {}): Promise<BriefingIntel> {
   // C01: the same complete-or-unavailable deal snapshot the day builds, so the email never says "no deal" on an unread CRM.
   const summary = await (deps.inDeals ?? ((p: PrismaLike, n: Date) => loadInDealsSummary(p, { now: n })))(prisma, now).catch(() => null);
   // C10: the briefing's own Gmail Sent reader, so quiet and answer owed count our side too.
-  const x = await loadIntelligence(prisma, { now, coverage: dealCoverageFrom(summary), ...(deps.identity !== undefined ? { identity: deps.identity } : {}), ...(deps.listSent ? { listSent: deps.listSent } : {}) });
+  const loaded = await loadIntelligence(prisma, { now, coverage: dealCoverageFrom(summary), ...(deps.identity !== undefined ? { identity: deps.identity } : {}), ...(deps.listSent ? { listSent: deps.listSent } : {}) });
+  // The morning audit (2026-10-10): a pursued angle the correspondence has moved past is said as such, not re-offered.
+  const x = { ...loaded, pursued: await markSupersededPursued(prisma, loaded.pursued, now, { relationship: deps.relationship }).catch(() => loaded.pursued) };
   const keys = [...x.signals, ...(x.reports ?? []), ...x.triggers, ...x.people].map((i) => i.key);
   const angles = await loadAngles(prisma, { keys, now });
   // IW12: what recent briefings showed rotates behind the unseen; IW13: the producers' coverage in words; IW11: the sizes.

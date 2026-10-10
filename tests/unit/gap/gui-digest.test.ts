@@ -120,13 +120,15 @@ describe('GUI-11: the digest template', () => {
     expect(out.html.indexOf('How this email was composed:')).toBeGreaterThan(out.html.indexOf('13. Primo') > 0 ? out.html.indexOf('13. Primo') : out.html.indexOf('Primo'));
   });
 
-  it('a classifier-only source label is the producer\'s own claim, no link; a real source stays a link', () => {
+  // Pin changed deliberately by the morning audit of 2026-10-10 (tests/unit/gap/gui-briefing-morning.test.ts): a
+  // classifier label is the producer's own claim whatever the publisher, its link KEPT ("(no source link)" only when
+  // there is none); it was "(no source link)" with the URL dropped, and only when the row carried no publisher.
+  it('a classifier-only source label is the producer\'s own claim, its link kept; a real source stays a link', () => {
     const xrite = t.slice(t.indexOf('- X-Rite: X-Rite: 45-yard shipper network.'), t.indexOf('- Charger adds'));
-    expect(xrite).toContain("Sources: the producer's own claim (no source link).");
+    expect(xrite).toContain("Sources: the producer's own claim https://xrite.com/.");
     expect(xrite).not.toContain('fit_rationale');
-    expect(xrite).not.toContain('https://xrite.com/');
-    expect(out.html).toContain("Sources: the producer&#39;s own claim (no source link).".replace('&#39;', "'"));
-    expect(out.html).not.toContain('<a href="https://xrite.com/">');
+    expect(out.html).toContain('Sources: <a href="https://xrite.com/">the producer\'s own claim</a>.');
+    expect(out.html).not.toContain('fit_rationale');
     expect(t).toContain('Sources: Kodiak-Charger announcement https://www.nasdaq.com/press-release/kodiak-charger; Truck News https://www.trucknews.com/x; Laredo trade data https://www.laredoedc.org/site-selection/international-trade/.');
     expect(out.html).toContain('<a href="https://www.nasdaq.com/press-release/kodiak-charger">Kodiak-Charger announcement</a>');
   });

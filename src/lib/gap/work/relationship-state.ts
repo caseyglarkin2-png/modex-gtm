@@ -338,13 +338,23 @@ export function relationshipStateFrom(i: RelationshipInputs): RelationshipState 
   }
 
   // Meetings and calls: held conversations, accepted calendar events that have started, HubSpot meetings and calls (the outcome is what the team wrote).
+  // A HubSpot meeting or call dated after now has not been held: it is excluded here and is the next meeting (the
+  // earliest one ahead) when the people state names none (the morning audit of 2026-10-10: Kenco's Oct 14 "Next
+  // Steps" meeting read as a held one four days before it).
   const meetings: RelationshipState['meetings'] = [];
   for (const e of events) {
     if (e.conversation) meetings.push({ at: e.at, title: e.conversation.title, kind: e.conversation.kind, outcome: null, source: e.conversation.source === 'fireflies' ? "the vault's Fireflies capture" : "the vault's meeting note" });
     else if (e.calendar?.kind === 'accepted' && e.calendar.startsAt && new Date(e.calendar.startsAt).getTime() <= i.now.getTime()) meetings.push({ at: e.calendar.startsAt, title: e.calendar.meetingKey.split('|')[0] || e.subject, kind: 'meeting', outcome: null, source: 'the calendar (accepted; held by its date)' });
   }
+  let hubspotAhead: string | null = null;
   for (const g of i.engagements) {
-    if (g.kind === 'meeting' || g.kind === 'call') meetings.push({ at: g.at, title: g.title, kind: g.kind, outcome: g.body ? g.body.replace(/\s+/g, ' ').trim().slice(0, 240) : null, source: 'HubSpot' });
+    if (g.kind !== 'meeting' && g.kind !== 'call') continue;
+    const at = new Date(g.at).getTime();
+    if (at > i.now.getTime()) {
+      if (!hubspotAhead || at < new Date(hubspotAhead).getTime()) hubspotAhead = g.at;
+      continue;
+    }
+    meetings.push({ at: g.at, title: g.title, kind: g.kind, outcome: g.body ? g.body.replace(/\s+/g, ' ').trim().slice(0, 240) : null, source: 'HubSpot' });
   }
   meetings.sort((a, b) => b.at.localeCompare(a.at));
   const seen = new Set<string>();
@@ -400,7 +410,7 @@ export function relationshipStateFrom(i: RelationshipInputs): RelationshipState 
     correspondents,
     hubspotCompanyId: i.hubspotCompanyId,
     meetings: uniqueMeetings,
-    nextMeetingAt: st?.nextMeetingAt ?? null,
+    nextMeetingAt: st?.nextMeetingAt ?? hubspotAhead,
     deals,
     promises,
     drafts: drafts.slice().reverse().slice(0, 3).map((d) => ({ at: d.at, subject: d.subject, to: d.to[0] ?? null, threadId: d.threadId, draftId: d.draftId ?? null })),
