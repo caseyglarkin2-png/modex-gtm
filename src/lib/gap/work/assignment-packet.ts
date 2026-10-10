@@ -222,7 +222,7 @@ const URL_IN = /https?:\/\/[^\s)<>"']+/g;
 /** The situation sentence list with repeats dropped ("Opted out: Tim Cooper, Oct 5" said once). */
 function situationOf(item: PlanItem, ctx: AskContext | null, hold: AssignmentPacket['hold']): string {
   if (hold) return `Held: ${cleanLine(hold.detail)}`;
-  const parts = [endSentence(item.why), ctx?.state.stateLine ? endSentence(ctx.state.stateLine) : null].filter((x): x is string => !!x);
+  const parts = [endSentence(item.why), ctx?.state.paused ? ctx.state.paused : ctx?.state.stateLine ? endSentence(ctx.state.stateLine) : null].filter((x): x is string => !!x);
   const sentences = parts.flatMap((p) => p.split(/(?<=[.!?])\s+/)).map(cleanLine).map(stripBlanket).filter(Boolean);
   const own = item.person?.name ? nameKeyOf(item.person.name) : null;
   // "Someone replied: Cowan, David, Jun 10" on Phil's item: another person's reply is the account's state, not this item's.

@@ -39,7 +39,8 @@ import type { FollowUpPlan } from '../execution/follow-up-plan';
 import { LANE_RANK, type NextCandidate } from '../routing/next-up';
 import { hubspotCompanySearchUrl } from '../routing/seller-action';
 import type { PursuitSummary } from '../pursuit/summary';
-import type { PursuitStateKind } from '../pursuit/state';
+import { pausedOf, type PursuitStateKind } from '../pursuit/state';
+import { pausedActionSentence, pausedReceivedSentence, pausedStateLine, type PausedReply } from './truth-text';
 import { outcomeLine, type WorkOutcome } from './outcome-model';
 import { MOTION_UNLOCK_BUSINESS_DAYS } from '../motion/account-motion';
 import { buyerMoves, commitmentPhase, commitmentTier, KIND_TEXT, skippedAtClosureOf, type Commitment, type CommitmentKind, type SkippedAtClosure, TERMINAL_STATUSES } from './commitment-model';
@@ -156,6 +157,12 @@ export interface WorkCard {
    * settles it and it never returns as a new item on the next day.
    */
   replyRef?: { messageId: string; at: string } | null;
+  /**
+   * Paused reply (Casey, 2026-10-10): under the send gate's reply hold, the reply on record (the buyer's words) and the
+   * proposed first touch it pauses. The card says them apart: `why` is the reply received, `blocker` the action paused
+   * and that nothing was sent (work/truth-text.ts, the words the account page and the packet say too).
+   */
+  paused?: PausedReply | null;
   /** R44: Capture, opened with the account, person, deal and conversation this card is about already filled in. */
   capture?: { href: string; label: string } | null;
   /** R55: stalled-deal suggestions on an in-deal card (overdue obligations, no recent activity, a passed close date). */
@@ -213,8 +220,8 @@ export interface WorkInput {
   replies: ReadonlyArray<{ accountName: string; contactEmail: string; subject: string | null; snippet: string; receivedAt: string; id?: string; threadId?: string | null; fromName?: string | null; personaId?: number | null; hubspotContactId?: string | null; /** R63-A S4: what they said is recorded; the answer is still owed. */ recorded?: boolean }>;
   /** R42: the GAP mailbox, for the thread link on a reply card. */
   mailbox?: string | null;
-  /** The account motions the cockpit read (primary and next per account). */
-  motions: ReadonlyArray<{ accountName: string; state: string; primary: { name: string; title: string | null } | null; next: { name: string; title: string | null; unlock: string } | null }>;
+  /** The account motions the cockpit read (primary and next per account; `pausedBy`: the message the send gate holds on under `paused_reply`). */
+  motions: ReadonlyArray<{ accountName: string; state: string; primary: { name: string; title: string | null } | null; next: { name: string; title: string | null; unlock: string } | null; pausedBy?: { from: string; receivedAt: string; snippet?: string | null; id?: string | null } | null }>;
   /** The In Deals summary: complete, or unavailable (then nothing is claimed about deals). */
   inDeals: { status: 'complete' | 'unavailable'; /** C01: when HubSpot was read, so a consumer can say so. */ checkedAt?: string | null; accounts: ReadonlyArray<{ accountName: string; /** C57 F7 (C03): the other names the deal is recorded under, so the Work page folds aliases as the briefing does. */ alsoRecordedAs?: string[]; deals: ReadonlyArray<{ id?: string; name: string | null; stage: string; lastActivityAt?: string | null; closeDate?: string | null; /** X15c: HubSpot hs_next_step, when set. */ nextStep?: string | null; contactIds?: readonly string[] }> }> };
   /** Accounts a current card holds for an open deal or an UNKNOWN opportunity read (never a cold action). */
@@ -673,6 +680,10 @@ export function workDay(i: WorkInput): WorkDay {
       continue;
     }
     const humanNext = c.human === 'referral' ? 'Record who they named' : c.human === 'objection' ? 'Record the objection' : 'Read the reply and record what they said';
+    // Paused reply (2026-10-10): under the send gate's reply hold (the motion is paused_reply), the card says the reply
+    // on record and the first touch it pauses, apart, in the words the account page and the packet say.
+    const m = motion.get(r.accountName);
+    const paused = c.kind === 'human' && m?.state === 'paused_reply' ? pausedOf({ accountName: r.accountName, replies: i.replies.filter((x) => x.accountName === r.accountName).map((x) => ({ from: x.contactEmail, name: x.fromName?.trim() || null, at: x.receivedAt, subject: x.subject, snippet: x.snippet, triaged: !!x.recorded, id: x.id ?? null })), motion: { state: m.state, next: m.next, pausedBy: m.pausedBy ?? null } }, null) : null;
     offerReply({
       rank,
       sortKey: [at || Number.MAX_SAFE_INTEGER],
@@ -680,11 +691,12 @@ export function workDay(i: WorkInput): WorkDay {
         accountName: r.accountName,
         lane: c.kind === 'bounce' ? 'research' : 'replies',
         stateKind: kind,
-        state: c.human ? HUMAN_REPLY_LABEL[c.human] : STATE_TEXT[kind],
-        why: `${r.fromName?.trim() || r.contactEmail} wrote ${day(r.receivedAt)}: "${quote}". ${c.consequence}`,
+        state: paused ? pausedStateLine(paused) : c.human ? HUMAN_REPLY_LABEL[c.human] : STATE_TEXT[kind],
+        why: paused ? pausedReceivedSentence(paused) : `${r.fromName?.trim() || r.contactEmail} wrote ${day(r.receivedAt)}: "${quote}". ${c.consequence}`,
         person: { name: r.contactEmail, title: null },
         next: { label: c.kind === 'human' ? humanNext : c.kind === 'opt_out' ? 'Record the opt-out' : 'Find a working address', href: c.kind === 'bounce' ? accountHref(r.accountName) : recordReplyHref(r.accountName) },
-        blocker: c.kind === 'human' ? 'A reply is waiting to be recorded.' : c.kind === 'opt_out' ? 'They asked not to be contacted: record it.' : null,
+        blocker: paused ? pausedActionSentence(paused) : c.kind === 'human' ? 'A reply is waiting to be recorded.' : c.kind === 'opt_out' ? 'They asked not to be contacted: record it.' : null,
+        ...(paused ? { paused } : {}),
         ...(r.fromName?.trim() && c.kind !== 'bounce' ? { person: { name: r.fromName.trim(), title: null } } : {}),
         // R42: the message itself and the prepared notes ride on the card (never copy, never a send).
         reply: prepareReply({ id: r.id ?? `${r.contactEmail}:${r.receivedAt}`, from: r.contactEmail, fromName: r.fromName ?? null, subject: r.subject, snippet: r.snippet, receivedAt: r.receivedAt, threadId: r.threadId ?? null, accountName: r.accountName }, { mailbox: i.mailbox ?? null, now: i.now }),
@@ -870,6 +882,9 @@ export function workDay(i: WorkInput): WorkDay {
     const action = s.actionable ? (remembered ? { label: remembered.label, href: /^#/.test(remembered.href) ? `${accountHref(name)}${remembered.href}` : remembered.href } : s.actionable.allowed ? pursuitAction(s.state, name, s.stateLine) : null) : pursuitAction(s.state, name, s.stateLine);
     // R60: a reply card says the hold once (its sentence and the reply panel); a deal's or HubSpot's hold still shows.
     const replyCard = (s.state === 'replied' || s.state === 'opted_out') && !!have.card.reply;
+    // Paused reply (2026-10-10): the workspace's pause (or, under a summary remembered before it, the card's own) is said
+    // as the reply on record (why) and the first touch it pauses (blocker), never a bare "Someone replied".
+    const paused = s.state === 'replied' ? s.paused ?? have.card.paused ?? null : null;
     best.set(name, {
       rank: PURSUIT_RANK[s.state],
       sortKey: have.sortKey,
@@ -878,16 +893,19 @@ export function workDay(i: WorkInput): WorkDay {
         ...have.card,
         lane: PURSUIT_LANE[s.state],
         stateKind: kind,
-        state: s.stateLine,
+        state: paused ? pausedStateLine(paused) : s.stateLine,
         person: s.person ?? (have.card.stateKind === kind ? have.card.person : null),
-        why: s.nextText ?? s.blocker ?? have.card.why,
-        blocker: replyCard
-          ? have.card.blocker && !GENERIC_REPLY_BLOCKERS.has(have.card.blocker) ? have.card.blocker : null
-          : (s.state === 'held' || s.state === 'in_deal' || s.state === 'replied' || s.state === 'opted_out') && (s.blocker ?? have.card.blocker) !== (s.nextText ?? s.blocker ?? have.card.why) ? (s.blocker ?? have.card.blocker) : null,
+        why: paused ? pausedReceivedSentence(paused) : s.nextText ?? s.blocker ?? have.card.why,
+        blocker: paused
+          ? pausedActionSentence(paused)
+          : replyCard
+            ? have.card.blocker && !GENERIC_REPLY_BLOCKERS.has(have.card.blocker) ? have.card.blocker : null
+            : (s.state === 'held' || s.state === 'in_deal' || s.state === 'replied' || s.state === 'opted_out') && (s.blocker ?? have.card.blocker) !== (s.nextText ?? s.blocker ?? have.card.why) ? (s.blocker ?? have.card.blocker) : null,
         next: action,
         preparation: s.actionable?.preparation ?? null,
         // The walk fix: a summary's reply binds the plan item to its message when the card holds no prepared reply.
         ...(s.state === 'replied' && !have.card.reply && s.reply?.id ? { replyRef: { messageId: s.reply.id, at: s.reply.at } } : {}),
+        ...(paused ? { paused } : have.card.paused ? { paused: null } : {}),
       },
     });
   }

@@ -142,7 +142,7 @@ export async function loadPursuit(prisma: PrismaLike, args: { brief: AccountInte
     opportunity: inputs.opportunity ?? { status: 'UNKNOWN', detail: 'opportunity truth not read', deals: [] },
     restriction: restriction ? { kind: restriction.kind, introducer: restriction.introducer, route: restriction.route } : null,
     familyHold: brief.family?.hold ? { detail: brief.family.hold.detail } : null,
-    motion: motion ? { state: motion.state, primary: motion.primary ? { personaId: motion.primary.personaId, name: motion.primary.name, title: motion.primary.title } : null, next: motion.next ? { personaId: motion.next.personaId, name: motion.next.name, title: motion.next.title, unlock: motion.next.unlock } : null, headline: motion.headline } : null,
+    motion: motion ? { state: motion.state, primary: motion.primary ? { personaId: motion.primary.personaId, name: motion.primary.name, title: motion.primary.title } : null, next: motion.next ? { personaId: motion.next.personaId, name: motion.next.name, title: motion.next.title, unlock: motion.next.unlock } : null, headline: motion.headline, ...(motion.pausedBy ? { pausedBy: motion.pausedBy } : {}) } : null,
     choice: choice ? { personaId: choice.primaryPersonaId, by: choice.by, at: choice.at, source: 'motion' } : null,
     activePersona: assigned,
     replies,

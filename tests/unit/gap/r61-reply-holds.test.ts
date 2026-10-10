@@ -13,6 +13,7 @@ const replied = vi.fn(async (_p: unknown, email: string) => {
   await new Promise((r) => setTimeout(r, 5));
   running -= 1;
   if (email === 'boom@c.example.com') throw new Error('read failed');
+  if (email === 'dana@d.example.com') return { id: 'm-dana', from_email: 'dana@d.example.com', received_at: new Date('2026-10-07T13:00:00Z'), snippet: null, body_text: 'Send me the two-site   comparison.\nThanks' };
   return email === 'ann@a.example.com' ? { from_email: 'ann@a.example.com', received_at: new Date('2026-10-07T12:00:00Z') } : null;
 });
 vi.mock('@/lib/gap/replies/account-reply', () => ({ accountRepliedRecently: (...a: [unknown, string]) => replied(...a) }));
@@ -27,6 +28,10 @@ describe('loadReplyHolds', () => {
     expect(peak).toBeGreaterThan(1);
     expect(peak).toBeLessThanOrEqual(5);
     expect([...holds]).toEqual([['Acct 0', { from: 'ann@a.example.com', receivedAt: '2026-10-07T12:00:00.000Z' }]]);
+  });
+  it('the paused-reply fix (2026-10-10): a hold carries the message id and its words (the snippet, else the text), so the pause keeps the buyer\'s message', async () => {
+    const holds = await loadReplyHolds({}, new Map([['D', 'dana@d.example.com']]), NOW);
+    expect(holds.get('D')).toEqual({ from: 'dana@d.example.com', receivedAt: '2026-10-07T13:00:00.000Z', snippet: 'Send me the two-site comparison. Thanks', id: 'm-dana' });
   });
   it('a failed read fails the whole hold read, as before', async () => {
     await expect(loadReplyHolds({}, new Map([['A', 'ok@a.example.com'], ['C', 'boom@c.example.com']]), NOW)).rejects.toThrow('read failed');

@@ -211,3 +211,48 @@ describe('approvalHoldFor: a proposal is approvable unless the account is under 
     expect(approvalHoldFor({ state: 'held', blocker: null })).toBe('A hold on the account stops approval for use.');
   });
 });
+
+describe('paused reply (Casey, 2026-10-10): the reply on record and the first touch the send gate pauses, said apart', () => {
+  const WORDS = 'Thanks Casey, we are looking at gate dwell at two DCs. Can you send more?';
+  const HOLD = { from: 'dana@acmefoods.com', receivedAt: '2026-10-04T12:00:00.000Z', snippet: WORDS, id: 'm-dana' };
+  const pausedMotion = { state: 'paused_reply', primary: null, next: { personaId: 1, name: 'Doug Estrada', title: null, unlock: "after dana@acmefoods.com's reply is triaged in Replies" }, headline: 'Paused: dana@acmefoods.com at Acme Foods wrote in on 2026-10-04. Triage it in Replies before anyone there gets a cold email.', pausedBy: HOLD };
+  const RECEIVED = `A reply from Dana Trans on Oct 4 is on record ("${WORDS}").`;
+  const PAUSED = 'The proposed first touch to Doug Estrada is paused by the send gate: the reply is not recorded yet; nothing was sent.';
+
+  it('the reply list holds it: the line and the blocker say the reply received (their words) and the paused first touch, two sentences; nothing sent; never "Someone replied" alone', () => {
+    const s = projectPursuitState(base({ motion: pausedMotion, replies: [{ from: 'dana@acmefoods.com', name: 'Dana Trans', at: '2026-10-04T12:00:00Z', subject: 'Re: Yard question', snippet: WORDS, triaged: false, id: 'm-dana' }] }));
+    expect(s.state).toBe('replied');
+    expect(s.stateLine).toBe('Reply on record: Dana Trans, Oct 4. First touch to Doug Estrada paused, nothing sent');
+    expect(s.blocker).toBe(`${RECEIVED} ${PAUSED}`);
+    expect(s.paused).toEqual({ accountName: 'Acme Foods', reply: { name: 'Dana Trans', from: 'dana@acmefoods.com', at: '2026-10-04T12:00:00Z', words: WORDS, id: 'm-dana' }, proposed: { kind: 'first_touch', to: 'Doug Estrada' }, reason: 'reply_unrecorded' });
+    expect(s.person?.name).toBe('Dana Trans');
+    expect(s.coldTouchAllowed).toBe(false);
+    expect(`${s.stateLine} ${s.blocker}`).not.toMatch(/Someone replied/);
+  });
+
+  it("the reply list does not hold it (the gate reads every domain at the account): the gate's own message keeps the buyer's words; the same two sentences", () => {
+    const s = projectPursuitState(base({ motion: pausedMotion, replies: [] }));
+    expect(s.state).toBe('replied');
+    expect(s.paused?.reply).toEqual({ name: 'dana@acmefoods.com', from: 'dana@acmefoods.com', at: HOLD.receivedAt, words: WORDS, id: 'm-dana' });
+    expect(s.blocker).toBe(`A reply from dana@acmefoods.com on Oct 4 is on record ("${WORDS}"). ${PAUSED}`);
+    expect(s.stateLine).not.toMatch(/Someone replied/);
+  });
+
+  it('a motion read before its hold rode along says the writer and the day off its headline; with nobody lined up, the first touch to anyone else there is what is paused', () => {
+    const s = projectPursuitState(base({ eligible: [], motion: { state: 'paused_reply', primary: null, next: null, headline: pausedMotion.headline } }));
+    expect(s.paused).toMatchObject({ reply: { name: 'dana@acmefoods.com', words: null }, proposed: { kind: 'first_touch', to: null } });
+    expect(s.blocker).toBe("A reply from dana@acmefoods.com on Oct 4 is on record (its words are not in GAP's synced inbox). The proposed first touch to anyone else at Acme Foods is paused by the send gate: the reply is not recorded yet; nothing was sent.");
+    expect(s.stateLine).toBe('Reply on record: dana@acmefoods.com, Oct 4. First touch paused, nothing sent');
+  });
+
+  it('an unrecorded reply the gate does not hold on (no paused motion: older than its window) pauses nothing: said as the reply alone; an opt-out under the hold stays an opt-out', () => {
+    const old = projectPursuitState(base({ replies: [{ from: 'emily@gusto.example', name: 'Emily Maja', at: '2026-08-19T12:00:00Z', subject: null, snippet: 'Happy to chat in Q4.', triaged: false }] }));
+    expect(old.state).toBe('replied');
+    expect(old.paused).toBeUndefined();
+    expect(old.stateLine).toBe('Someone replied: Emily Maja, Aug 19');
+    expect(old.blocker).not.toMatch(/send gate/);
+    const stop = projectPursuitState(base({ motion: pausedMotion, replies: [{ from: 'dana@acmefoods.com', name: 'Dana Trans', at: '2026-10-04T12:00:00Z', subject: null, snippet: 'stop', triaged: false }] }));
+    expect(stop.state).toBe('opted_out');
+    expect(stop.paused).toBeUndefined();
+  });
+});

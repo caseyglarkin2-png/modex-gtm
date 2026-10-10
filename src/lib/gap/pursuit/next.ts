@@ -41,7 +41,8 @@ export function nextFromPursuit(
     case 'replied':
       return {
         // The seller judges the activity: no blanket "nobody gets a cold email" is imposed here (Casey, 2026-10-10).
-        text: `Read ${p ? `${p.name}'s` : 'the'} reply of ${s.lastInbound ? day(s.lastInbound.at) : 'today'} and record what they said.`,
+        // Paused reply (2026-10-10): the reply the send gate holds on is the one to read, with its own date.
+        text: `Read ${p ? `${p.name}'s` : 'the'} reply of ${s.paused?.reply.at ? day(s.paused.reply.at) : s.lastInbound ? day(s.lastInbound.at) : 'today'} and record what they said.`,
         // R60: the reply is read and recorded on this account (its own waiting replies, in place); Gmail answers it.
         control: opts.replyCaptureHref ? { href: opts.replyCaptureHref, label: 'Log what they said' } : { href: `${opts.accountSlugHref('now')}#record-reply`, label: 'Open the reply' },
         source: 'pursuit',

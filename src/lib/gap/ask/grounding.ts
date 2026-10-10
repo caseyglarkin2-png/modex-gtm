@@ -16,6 +16,7 @@ import type { OutreachAnchor } from '../story/anchor';
 import type { PeopleStack } from '../people/stack';
 import { accountHref } from '../account-intel/href';
 import type { AskControls } from './proposal';
+import { pausedReplyText } from '../work/truth-text';
 
 export const ASK_QUESTION_MAX = 400;
 export const ASK_ANSWER_WORDS = 160;
@@ -63,7 +64,8 @@ export function coverageLineOf(coverage: readonly AskCoverage[]): string | null 
 
 export interface AskContext {
   accountName: string;
-  state: { state: string; stateLine: string; blocker: string | null; next: string; coldTouchAllowed: boolean };
+  /** `paused` (2026-10-10): under the send gate's reply hold, the reply on record and the paused first touch, two sentences (work/truth-text.ts). */
+  state: { state: string; stateLine: string; blocker: string | null; next: string; coldTouchAllowed: boolean; paused?: string | null };
   people: Array<{ name: string; title: string | null; slot: string; reason: string; currentness: string | null; chosen: boolean; whyOverNext: string | null; setAsideByYou: string | null }>;
   setAside: string | null;
   story: Array<{ label: string; tag: string; lines: Array<{ text: string; tag: string; basis: string }> }>;
@@ -149,7 +151,7 @@ export function compactContext(i: {
   const coverage: AskCoverage[] = (i.coverage ?? []).map((c) => ({ source: c.source, status: c.status, detail: c.detail ? scrub(c.detail) : null }));
   return {
     accountName: i.accountName,
-    state: { state: i.state.state, stateLine: scrub(i.state.stateLine), blocker: i.state.blocker ? scrub(i.state.blocker) : null, next: scrub(i.nextText), coldTouchAllowed: i.state.coldTouchAllowed },
+    state: { state: i.state.state, stateLine: scrub(i.state.stateLine), blocker: i.state.blocker ? scrub(i.state.blocker) : null, next: scrub(i.nextText), coldTouchAllowed: i.state.coldTouchAllowed, ...(i.state.paused ? { paused: scrub(pausedReplyText(i.state.paused)) } : {}) },
     people: rows.map((r) => ({ name: r.name, title: r.title, slot: r.slot, reason: scrub(r.reason), currentness: r.currentness, chosen: r.chosen, whyOverNext: r.leadOver ? `${r.leadOver.tie ? 'tie with' : r.leadOver.leads ? 'leads' : 'behind'} ${r.leadOver.over}: ${scrub(r.leadOver.text)}` : null, setAsideByYou: r.preference?.line ?? null })),
     setAside: i.stack?.setAside.line ?? null,
     // The vault note is seller-only and never quotable: it is not context. Private engagement is not a story row. A
