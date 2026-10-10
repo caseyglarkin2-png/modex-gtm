@@ -41,7 +41,10 @@ describe('loadProducerStatus', () => {
     expect(list.map((s) => s.producer)).toEqual([...Object.keys(INTEL_PRODUCERS), 'vault']);
     for (const p of Object.keys(INTEL_PRODUCERS)) expect(by(list, p)).toMatchObject({ state: 'never', lastImportAt: null, lastCounts: null, cursor: null, totalItems: 0, totalReports: 0, line: `${INTEL_PRODUCERS[p].label}: never imported.` });
     expect(by(list, 'vault')).toMatchObject({ state: 'never', line: 'the vault: never synced; the cron waits for its GitHub token.' });
-    expect(producerStatusLine(list)).toBe('Sources: none read this time. Not read this time: Yards First Brief: never imported; Freight X Signal Desk: never imported; HubSpot Activity & Engagement report: never imported; Clawd signal hunter: never imported; the vault: never synced.');
+    const none = producerStatusLine(list);
+    expect(none.startsWith('Sources: none read this time. Not read this time: Yards First Brief: never imported; Freight X Signal Desk: never imported; HubSpot Activity & Engagement report: never imported; Clawd signal hunter: never imported;')).toBe(true);
+    for (const p of Object.keys(INTEL_PRODUCERS)) expect(none).toContain(`${INTEL_PRODUCERS[p].label}: never imported`);
+    expect(none.endsWith('; the vault: never synced.')).toBe(true);
   });
 
   it('current, stalled since a date, failed with its reason, and a producer the ledger names that INTEL_PRODUCERS does not', async () => {
@@ -79,7 +82,8 @@ describe('loadProducerStatus', () => {
     expect(line.startsWith('Sources: Yards First Brief ')).toBe(true);
     expect(line).toContain('imported Oct 9, 2026 (3 items); some_new_tool ');
     expect(line).toContain('imported Oct 4, 2026 (0 items). Not read this time: Freight X Signal Desk: never imported; HubSpot Activity & Engagement report: stalled since Oct 6, 2026');
-    expect(line.endsWith('; Clawd signal hunter: failed Oct 8, 2026; the vault: never synced.')).toBe(true);
+    expect(line).toContain('; Clawd signal hunter: failed Oct 8, 2026;');
+    expect(line.endsWith('; the vault: never synced.')).toBe(true);
   });
 
   it('a partial run followed by a later run advances the cursor and the state; a later run without a cursor keeps the last one', async () => {

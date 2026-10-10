@@ -39,6 +39,9 @@ export const INTEL_PRODUCERS: Record<string, { label: string; cadenceDays: numbe
   freight_x_signal_desk: { label: 'Freight X Signal Desk', cadenceDays: 1, how: 'a ChatGPT daily desk, exported as records' },
   codex_hubspot_report: { label: 'HubSpot Activity & Engagement report', cadenceDays: 1, how: 'the Codex weekday automation, exported as records' },
   clawd_signal_hunter: { label: 'Clawd signal hunter', cadenceDays: 1, how: 'the yardflow_signals dataset, read through its export' },
+  war_room_dossier: { label: 'war-room dossier', cadenceDays: 30, how: 'the war-room account dossiers in its git checkout, read by scripts/gap/import-warroom-dossiers.ts' },
+  google_drive: { label: 'Google Drive document', cadenceDays: 7, how: 'a Doc, Sheet, Slides or uploaded document in the agreed Drive scope (the follow-up release)' },
+  gemini_notes: { label: 'Gemini meeting notes', cadenceDays: 7, how: 'a Notes by Gemini document in Meet Recordings, generated; never the transcript (the follow-up release)' },
 };
 export const producerLabel = (producer: string): string => INTEL_PRODUCERS[producer]?.label ?? producer;
 

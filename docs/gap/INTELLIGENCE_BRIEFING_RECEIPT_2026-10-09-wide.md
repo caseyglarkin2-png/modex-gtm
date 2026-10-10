@@ -1,6 +1,6 @@
 # Intelligence briefing preview (intelligence wiring, October 9, 2026)
 
-STATUS: RECEIPT. Rendered 2026-10-10T00:14:41.760Z (2026-10-09 New York) in 14103 ms against production data, READ ONLY: the fixture's records were imported into an in-memory overlay (never the production table), the intelligence was read from the overlay and production together, and every production write was intercepted (listed at the end). Nothing was sent, drafted, enrolled, queued or stored. The plan is the stored day (revision 3, planned 2026-10-09T23:59:48.139Z); Gmail Sent is not read by this process.
+STATUS: RECEIPT. Rendered 2026-10-10T00:15:22.266Z (2026-10-09 New York) in 13956 ms against production data, READ ONLY: the fixture's records were imported into an in-memory overlay (never the production table), the intelligence was read from the overlay and production together, and every production write was intercepted (listed at the end). Nothing was sent, drafted, enrolled, queued or stored. The plan is the stored day (revision 3, planned 2026-10-09T23:59:48.139Z); Gmail Sent is not read by this process.
 
 ## The import (into the overlay)
 
@@ -23,14 +23,17 @@ STATUS: RECEIPT. Rendered 2026-10-10T00:14:41.760Z (2026-10-09 New York) in 1410
 
 ## The digest
 
-- Shown 11 (2 from the briefs, 2 GAP found, 1 triggers; 8 people), 4115 omitted and reachable on the Intelligence page; 5 rotated.
-- Subject: GAP today, Fri Oct 9: 13 to execute, 11 to decide [GAP#preview]
+- Shown 17 (4 from the briefs, 4 GAP found, 2 triggers; 8 people), 4109 omitted and reachable on the Intelligence page; 5 rotated.
+- Subject: GAP today, Fri Oct 9: 13 to execute, 17 to decide [GAP#preview]
 
 | Key | Producer | Account | Title | Truth |
 |---|---|---|---|---|
 | signal:cmul615nk0001l7041bvnozli | Trucking Dive | PepsiCo | PepsiCo expanding autonomous truck use in its supply chain | verified_fact |
 | signal:cmul6drwl0000i304qjn3bdr1 | Food Dive | General Mills | General Mills to build $24M distribution center in Michigan | historical_observation |
+| signal:cmurn8upl0002i404zykegis1 | careers.walmart.com | Walmart Inc. | https://careers.walmart.com/us/en/jobs/R-2426277 | unverified_status |
+| signal:cmurn8s8n0001i4043qhabxw8 | careers.walmart.com | Walmart Inc. | https://careers.walmart.com/us/en/jobs/R-2547672 | unverified_status |
 | trigger:93 | clawd | PepsiCo | PEP 10-Q (2026-10-08) mentions: capital expenditure | unverified_status |
+| trigger:92 | clawd | Costco Wholesale (no account yet) | COST 10-K (2026-10-07) mentions: capital expenditure | unverified_status |
 | person:craig.morrison@kencogroup.com | inbound | Kenco | Morrison, Craig at Kenco | historical_observation |
 | person:ccuebas@lazerlogistics.com | inbound | Lazer Logistics | Cristian Cuebas Morales at Lazer Logistics | historical_observation |
 | person:twasson@firecrown.com | inbound | firecrown.com (no account yet) | Thomas Wasson (firecrown.com) | historical_observation |
@@ -42,9 +45,9 @@ STATUS: RECEIPT. Rendered 2026-10-10T00:14:41.760Z (2026-10-09 New York) in 1410
 ```text
 Good evening. Here is Fri Oct 9 from GAP, in order.
 This replays the plan GAP made at 7:59 PM New York on Fri Oct 9, as it stood then; what changed since is on Work, not here.
-13 to execute: the plan's items, the same list START and NEXT walk, in this order. 11 to decide: intelligence, counted apart (4190 waiting in all).
+13 to execute: the plan's items, the same list START and NEXT walk, in this order. 17 to decide: intelligence, counted apart (4190 waiting in all).
 
-Intelligence worth a look (6 of 4121). Any age, for your call; Pursue and GAP develops the angle. 2 from your briefs, 2 found by GAP, 1 trigger, 1 from the vault; 4115 more waiting; 5 shown in an earlier briefing wait behind the unseen.
+Intelligence worth a look (12 of 4121). Any age, for your call; Pursue and GAP develops the angle. 4 from your briefs, 4 found by GAP, 2 triggers, 2 from the vault; 4109 more waiting; 5 shown in an earlier briefing wait behind the unseen.
    Sources: Yards First Brief reports through Oct 9, 2026, imported Oct 9, 2026 (83 items); Freight X Signal Desk reports through Oct 9, 2026, imported Oct 9, 2026 (21 items); HubSpot Activity & Engagement report reports through Oct 8, 2026, imported Oct 9, 2026 (3 items); Clawd signal hunter reports through Oct 10, 2026, imported Oct 9, 2026 (500 items); war_room_dossier reports through Aug 27, 2026, imported Oct 9, 2026 (58 items); the vault reports through Oct 9, 2026, imported Oct 9, 2026 (7434 notes). Every record here is persisted in production; nothing is overlaid. Not read this time: our Gmail Sent (this process has no sender credential; production reads it).
    Everything retained, with filters: https://modex-gtm.vercel.app/gap/intelligence/
 - X-Rite: X-Rite: 45-yard shipper network. Clawd signal hunter reported it Oct 10, 2026 (the capture date; the report states none) (relevance 20). Unverified present-day status.
@@ -61,14 +64,39 @@ Intelligence worth a look (6 of 4121). Any age, for your call; Pursue and GAP de
    Sources: Kodiak-Charger announcement https://www.nasdaq.com/press-release/kodiak-ai-and-charger-usa-launch-autonomous-trucking-between-dallas-and-laredo-2026; Truck News https://www.trucknews.com/technology/kodiak-charger-launch-autonomous-freight-service-between-dallas-and-laredo/1003222975/; Laredo trade data https://www.laredoedc.org/site-selection/international-trade/.
    Reported Oct 9, 2026 by Yards First Brief; imported Oct 9, 2026.
    Decide it on Work: https://modex-gtm.vercel.app/gap/
+- World Market: Jarrod Black — World Market. HubSpot Activity & Engagement report reported it Oct 8, 2026 (active evaluation). Unverified present-day status.
+   What was reported: Accepted the demo and Oct. 8 demo-debrief invitation.
+   In the producer's words: active evaluation, medium confidence The contact’s company field says World Market, but the company association is not verified.
+   The producer's read (not an obligation): Next: prepare a concrete debrief agenda and decision path.
+   Sources: HubSpot contact record https://app.hubspot.com/contacts/3819073/record/0-1/252589576372; HubSpot engagement (evidence) https://app.hubspot.com/contacts/3819073/objects/0-49?filters=%5B%7B%22property%22%3A%22hs_object_id%22%2C%22operator%22%3A%22EQ%22%2C%22value%22%3A%22118263986727%22%7D%5D. CRM: hubspot contact 252589576372, hubspot engagement 118263986727.
+   Reported Oct 8, 2026 by HubSpot Activity & Engagement report; imported Oct 9, 2026.
+   Decide it on Work: https://modex-gtm.vercel.app/gap/
+- General Motors: General Motors: why now, from the war-room dossier. war_room_dossier reported it Aug 27, 2026 (tam tier A). Unverified present-day status. Themes: digital ops.
+   What was reported: In March 2025 GM and NVIDIA announced an Omniverse digital-twin collaboration to build virtual replicas of GM assembly lines for material-handling robotics, transport and precision welding. The twin models the plant; the yards is the part it cannot run, and that gate-to-dock seam is exactly where realized capacity is hiding. GM committed a $4 billion US manufacturing investment over two years, including $2B at Arlington for full-size SUVs and $1.5B at Flint for heavy-duty trucks, and Flint Assembly moves to six days a week from June 2026, so every added shift puts more trucks through the same gates the network runs blind on.
+   In the producer's words: A seller-written dossier from the war-room, last changed 2026-08-27; its claims are as written, the sources named but not linked here; intent score 88 (last 2026-06-18); 2 deck views, 0 page visits: engagement context, never buying intent.
+   The producer's read (not an obligation): The dossier's one-liner: GM runs two yards inside every plant, parts in and vehicles out, and is publicly rebuilding its factories around an NVIDIA Omniverse digital twin that models the line but cannot run the gate.
+   Sources: the for page https://yardflow.ai/for/general-motors; the demo page https://yardflow.ai/demo/general-motors. CRM: war_room dossier general-motors.
+   Reported Aug 27, 2026 by war_room_dossier; imported Oct 10, 2026.
+   Decide it on Work: https://modex-gtm.vercel.app/gap/
 - PepsiCo: PepsiCo expanding autonomous truck use in its supply chain. You shared it. Trucking Dive, published Jun 15, 2026. Verified fact. Themes: autonomy. A verified fact is in Research.
    Decide it on Work: https://modex-gtm.vercel.app/gap/
 - General Mills: General Mills to build $24M distribution center in Michigan. You shared it. Food Dive, published Nov 6, 2013. Historical observation. Themes: network capex.
    Decide it on Work: https://modex-gtm.vercel.app/gap/
+- Walmart Inc.: https://careers.walmart.com/us/en/jobs/R-2426277. You shared it. careers.walmart.com, observed Oct 2, 2026. Unverified present-day status.
+   Decide it on Work: https://modex-gtm.vercel.app/gap/
+- Walmart Inc.: https://careers.walmart.com/us/en/jobs/R-2547672. You shared it. careers.walmart.com, observed Oct 2, 2026. Unverified present-day status.
+   Decide it on Work: https://modex-gtm.vercel.app/gap/
 - PepsiCo: PEP 10-Q (2026-10-08) mentions: capital expenditure. clawd, published Oct 8, 2026. Unverified present-day status. Themes: network capex, facility expansion.
+   Decide it on Work: https://modex-gtm.vercel.app/gap/
+- Costco Wholesale: COST 10-K (2026-10-07) mentions: capital expenditure. clawd, published Oct 7, 2026. Unverified present-day status. Costco Wholesale is not a GAP account yet. Themes: network capex, facility expansion.
    Decide it on Work: https://modex-gtm.vercel.app/gap/
 - No account yet: YMX<>FR. A Fireflies call Oct 6, 2026 with jhiller@ymxlogistics.com, on the vault. Unverified present-day status. The summary is advisory; the verbatim is on the note.
    What was reported: Allentown rollout: 12 spotters deployed using Zebra handhelds; V2 hardware review planned in two weeks. Vision platform: Proprietary system supports existing yard software; V0, V1, and V2 deployments are progressing. Location accuracy: Uses roughly 30 variables beyond GPS to validate trailer locations and confidence. Action item (Jake Koppinger): Keep Jeff Hiller updated Action item (Jake Koppinger): Finalize V2 hardware bill
+   In the producer's words: The Fireflies summary is advisory and has been seen to hallucinate; the verbatim transcript on the note is the ground truth.
+   Reported Oct 6, 2026 by the vault; event date Oct 6, 2026; imported Oct 9, 2026.
+   Open Work: https://modex-gtm.vercel.app/gap/
+- No account yet: World Market x YardFlow - Demo. A Fireflies call Oct 6, 2026 with jarrod.black@worldmarket.com, on the vault. Unverified present-day status. The summary is advisory; the verbatim is on the note.
+   What was reported: Dock Management: Workflow includes driver SMS, dock timers, outbound coordination, and spotter tasking. Operations History: Tasking app tracks trailer history and related dock activities. Unrecorded Item: One system item lacks a matching record; record creation remains open. Action item: (none captured)
    In the producer's words: The Fireflies summary is advisory and has been seen to hallucinate; the verbatim transcript on the note is the ground truth.
    Reported Oct 6, 2026 by the vault; event date Oct 6, 2026; imported Oct 9, 2026.
    Open Work: https://modex-gtm.vercel.app/gap/
@@ -143,10 +171,10 @@ Everything, with what is waiting and parked: https://modex-gtm.vercel.app/gap/
 
 To work from your inbox, reply with START and the first item arrives as its own email. Each item takes APPROVE, REVISE: your words, SKIP, DEFER, DONE: what happened, NEXT or HELP on the first line of your reply.
 
-Sent by GAP at 8:14 PM New York. This is an internal message to you; nothing in it went to a buyer.
+Sent by GAP at 8:15 PM New York. This is an internal message to you; nothing in it went to a buyer.
 ```
 
-The HTML body is beside this receipt: docs/gap/INTELLIGENCE_BRIEFING_RECEIPT_2026-10-09.html.
+The HTML body is beside this receipt: docs/gap/INTELLIGENCE_BRIEFING_RECEIPT_2026-10-09-wide.html.
 
 ## Named checks (IW14)
 

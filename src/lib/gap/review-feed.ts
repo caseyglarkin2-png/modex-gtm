@@ -53,7 +53,10 @@ function resolveWarRoomUrl(env: ReviewEnv): string {
 }
 
 function resolveToken(env: ReviewEnv): string {
-  return env.MC_API_TOKEN?.trim() || '';
+  // The war-room adapter (2026-10-09): the review feed's bearer is the WAR-ROOM's token, which is not the Clawd
+  // token the other MC_API_TOKEN readers mean (critic-client, clawd-dispatch); WAR_ROOM_TOKEN names it apart, the
+  // older name stays as the fallback. The feed had posted nothing since September 26, 2026 for want of it.
+  return env.WAR_ROOM_TOKEN?.trim() || env.MC_API_TOKEN?.trim() || '';
 }
 
 export async function postReviewLog(
