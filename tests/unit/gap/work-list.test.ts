@@ -265,7 +265,7 @@ describe('a motion in flight on the Work list (R14, as ranked by R41)', () => {
 
 describe('paused reply (Casey, 2026-10-10): the card says the reply on record and the paused first touch, apart, and keeps the message', () => {
   const NFI_WORDS = 'Send me the two-site comparison and we can talk Thursday.';
-  const RECEIVED = `A reply from ops@nfiindustries.com on Oct 6 is on record ("${NFI_WORDS}").`;
+  const RECEIVED = `A reply from ops@nfiindustries.com on Oct 6 was received ("${NFI_WORDS}").`;
   const PAUSED = 'The proposed first touch to Sam Ortiz is paused by the send gate: the reply is not recorded yet; nothing was sent.';
   const pausedMotion = { accountName: 'NFI Industries', state: 'paused_reply', primary: null, next: { name: 'Sam Ortiz', title: 'VP Transportation', unlock: "after ops@nfiindustries.com's reply is triaged in Replies" }, pausedBy: { from: 'ops@nfiindustries.com', receivedAt: '2026-10-06T09:00:00.000Z', snippet: NFI_WORDS, id: 'm-nfi' } };
 
@@ -291,7 +291,7 @@ describe('paused reply (Casey, 2026-10-10): the card says the reply on record an
     const card = buildWorkList(input({ summaries: summary })).find((c) => c.accountName === 'PepsiCo')!;
     expect(card.source).toBe('pursuit');
     expect(card.state).toBe('Reply on record: Karen Darling, Oct 6. First touch to Shawn Miller paused, nothing sent');
-    expect(card.why).toBe('A reply from Karen Darling on Oct 6 is on record ("We are moving the Plano DC first.").');
+    expect(card.why).toBe('A reply from Karen Darling on Oct 6 was received ("We are moving the Plano DC first.").');
     expect(card.blocker).toBe('The proposed first touch to Shawn Miller is paused by the send gate: the reply is not recorded yet; nothing was sent.');
     expect(card.paused).toEqual(paused);
     const older = new Map([['NFI Industries', { accountName: 'NFI Industries', state: 'replied' as const, stateLine: 'Someone replied: ops@nfiindustries.com', person: { name: 'ops@nfiindustries.com', title: null }, blocker: 'Paused: ops@nfiindustries.com at NFI Industries wrote in on 2026-10-06.', coldTouchAllowed: false, nextText: 'Read the reply.', at: '2026-10-06T14:30:00Z' }]]);

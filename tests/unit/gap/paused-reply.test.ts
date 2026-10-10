@@ -35,7 +35,7 @@ const WORDS = 'Send me the two-site comparison and we can talk Thursday.';
 const AT = '2026-10-09T14:00:00.000Z';
 const HOLD = { from: DANA, receivedAt: AT, snippet: WORDS, id: 'm-dana' };
 const motion = { state: 'paused_reply', primary: null, next: { personaId: 7, name: 'Sam Ortiz', title: 'VP Transportation', unlock: `after ${DANA}'s reply is triaged in Replies` }, headline: `Paused: ${DANA} at ${ACCOUNT} wrote in on 2026-10-09. Triage it in Replies before anyone there gets a cold email.`, pausedBy: HOLD };
-const RECEIVED = `A reply from Dana Trans on Oct 9 is on record ("${WORDS}").`;
+const RECEIVED = `A reply from Dana Trans on Oct 9 was received ("${WORDS}").`;
 const PAUSED = 'The proposed first touch to Sam Ortiz is paused by the send gate: the reply is not recorded yet; nothing was sent.';
 const LINE = 'Reply on record: Dana Trans, Oct 9. First touch to Sam Ortiz paused, nothing sent';
 

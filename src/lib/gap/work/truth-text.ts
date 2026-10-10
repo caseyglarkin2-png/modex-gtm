@@ -70,10 +70,13 @@ export function pausedWords(s: string | null | undefined, max = PAUSED_WORDS_MAX
   return `${own.slice(0, space > max / 2 ? space : max).trim()}...`;
 }
 
-/** The reply received, with their words: 'A reply from Jane Doe on Oct 9 is on record ("We are looking at gate dwell").' */
+/**
+ * The reply received, with their words: 'A reply from Jane Doe on Oct 9 was received ("We are looking at gate dwell").'
+ * Received, never "on record": the second sentence says the reply is not recorded yet (R5 review, finding 7).
+ */
 export function pausedReceivedSentence(p: PausedReply): string {
   const words = pausedWords(p.reply.words);
-  return `A reply from ${p.reply.name} on ${pausedDay(p.reply.at)} is on record (${words ? `"${words}"` : "its words are not in GAP's synced inbox"}).`;
+  return `A reply from ${p.reply.name} on ${pausedDay(p.reply.at)} was received (${words ? `"${words}"` : "its words are not in GAP's synced inbox"}).`;
 }
 
 /** The action paused: "The proposed first touch to Phil Smith is paused by the send gate: the reply is not recorded yet; nothing was sent." */
