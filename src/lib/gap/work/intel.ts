@@ -411,6 +411,13 @@ export interface PursuedItem {
   status: 'in_progress' | 'ready' | 'failed';
   error: string | null;
   angle: { whyItMatters: string; starters: string[]; roles: string[]; accounts: string[]; peopleNamed: Array<{ personaId: number; name: string | null; title: string | null }>; proposedAction: string; caveat: string | null; sourceLine: string; warnings?: string[] } | null;
+  /**
+   * The morning audit (2026-10-10): the correspondence has moved past the angle (we wrote the writer, or they wrote
+   * us, after `decidedAt`), in words ("we wrote Oct 9, 2026"); null when the writer's relationship was read and nothing
+   * is later (or the read failed); absent when it was not read (no writer, not ready, or past the briefing's three).
+   * Set by briefing-send's markSupersededPursued; loadPursued leaves it absent.
+   */
+  superseded?: { since: string } | null;
 }
 
 export interface Intelligence {

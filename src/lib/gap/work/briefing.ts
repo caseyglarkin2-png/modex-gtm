@@ -36,16 +36,21 @@ import { cleanLine, dedupeSentences } from './clean-text';
  *     people; the retained records not in this email are counted and placed (the Intelligence page)
  *   - content first: the intelligence items, the pursued, the plan items; the digest's composition, the producers'
  *     coverage and the retained-list link follow the items as bookkeeping
- *   - a classifier-only source label (fit_rationale, a snake_case field) prints as "the producer's own claim (no
- *     source link)", never as a source
+ *   - a classifier-only source label (fit_rationale, relevance, score, a snake_case field) prints as "the producer's
+ *     own claim", never as a source, WHATEVER the publisher (the morning audit of 2026-10-10: a Clawd row always
+ *     carries its URL's host as the publisher, so "Sources: fit_rationale https://celestica.com/" went out); its link
+ *     is kept, and without one it says "(no source link)"
  *   - the HTML is one column, table-free, max-width 640px with 16px side padding, long words and links allowed to wrap
  *   - no body line starts with a command word or a selection (ITEM 6, OPEN 6, SEND ME 6)
  */
 const fmt = (n: number) => n.toLocaleString('en-US');
 const plural = (n: number, one: string, many = `${one}s`) => (n === 1 ? one : many);
-/** A source label that is a classifier's field (fit_rationale, urgency_score), not a publication. */
-const CLASSIFIER_LABEL = /^[a-z]+(_[a-z0-9]+)+$/;
-const OWN_CLAIM = "the producer's own claim (no source link)";
+/** A source label that is a classifier's field (fit_rationale, urgency_score, relevance, score), not a publication. */
+const CLASSIFIER_LABEL = /^(?:[a-z]+(?:_[a-z0-9]+)+|relevance|score)$/;
+const OWN_CLAIM_WORDS = "the producer's own claim";
+const OWN_CLAIM = `${OWN_CLAIM_WORDS} (no source link)`;
+/** I05: how many pursued items the email shows (the rest are on Work); briefing-send reads supersession for these. */
+export const PURSUED_SHOWN = 3;
 
 /**
  * C32: a long text kept whole or cut at a sentence end, never mid-sentence. Under `max` it is returned as is; over it,
@@ -215,6 +220,27 @@ export function itemLine(it: PlanItem, n: number): string {
 }
 
 const dateText = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/New_York' });
+/** "Oct 8, 2026" on the seller's clock (the words relationship-state's dateWords says; kept here so the renderer stays pure). */
+const dayWords = (iso: string) => {
+  const d = new Date(iso);
+  return Number.isNaN(d.getTime()) ? 'an unknown date' : d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' });
+};
+/**
+ * A lowercase name proper-cased ("nicholas schwartz" is Nicholas Schwartz; "o'neil-smith" is O'Neil-Smith); a name
+ * with any capital is kept as written. The same rule as people/contact-packet.ts properCase, copied rather than
+ * imported: this renderer is reachable from a client component (components/gap/work-list.tsx through work/list.ts),
+ * and contact-packet carries a dynamic import of the HubSpot client. tests/unit/gap/gui-briefing-morning.test.ts pins
+ * the two equal.
+ */
+export function properCaseName(s: string | null | undefined): string | null {
+  if (!s || !s.trim()) return null;
+  const t = s.trim();
+  if (/[A-Z]/.test(t)) return t;
+  const small = new Set(['of', 'and', 'the', 'for', 'at', 'in', 'on', 'to', 'de', 'van', 'von', 'da', 'del', 'la', 'le', 'du']);
+  return t.replace(/\b([a-z])([a-z'-]*)/g, (m, a: string, rest: string, offset: number) => (offset > 0 && small.has(m) ? m : a.toUpperCase() + rest.replace(/(['-])([a-z])/g, (_x, p: string, c: string) => p + c.toUpperCase())));
+}
+/** A person named from an address ("dave.kiesling@kencogroup.com" is Dave Kiesling); the address itself when nothing is left. */
+const nameOfAddress = (email: string) => properCaseName(email.split('@')[0].replace(/\d+/g, ' ').replace(/[._-]+/g, ' ').replace(/\s+/g, ' ').trim()) ?? email;
 
 /**
  * C32: the card lines under an item: the relationship or motion, the last material exchange, the next prepared action
@@ -345,7 +371,7 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
   // (the angle when it is ready, the state when it is not), capped at three with the rest on Work, so an old pursued
   // angle never sits ahead of what was collected today while staying reachable.
   const pursuedAll = intel?.pursued ?? [];
-  const pursued = pursuedAll.slice(0, 3);
+  const pursued = pursuedAll.slice(0, PURSUED_SHOWN);
   const renderPursued = () => {
     if (!pursued.length) return;
     const more = pursuedAll.length - pursued.length;
@@ -355,9 +381,19 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
       // C5 (2026-10-09): an ambiguous placement is said with its names, never "No account yet"; a read-time placement says its line.
       const where = p.accountName ?? (p.ambiguousAmong?.length ? (p.ambiguityLine ?? `Claimed by ${p.ambiguousAmong.join(' and ')}: choose the account`) : null) ?? p.accountHint ?? 'No account yet';
       const a = p.angle;
-      const body = p.status === 'ready' && a ? `The angle: ${a.whyItMatters}${a.peopleNamed.length ? ` Who: ${a.peopleNamed.map((x) => `${x.name ?? 'someone'}${x.title ? ` (${x.title})` : ''}`).join('; ')}.` : a.roles.length ? ` Roles: ${a.roles.join(', ')}.` : ''} Ask: ${a.starters[0] ?? ''} Proposed: ${a.proposedAction === 'email' ? 'an email' : a.proposedAction === 'call' ? 'a call' : 'research first'}.${a.caveat ? ` ${a.caveat}` : ''}` : p.status === 'failed' ? `GAP could not develop the angle${p.error ? ` (${p.error.slice(0, 120)})` : ''}; decide it again on Work to retry.` : 'GAP is developing the angle; it comes back here and on Work.';
+      // The morning audit (2026-10-10): a lowercase name prints proper-cased ("nicholas schwartz" is Nicholas
+      // Schwartz), the writer in the title and the people the angle names alike; a writer with no name is named from
+      // the address, never by it.
+      const writerName = p.writer ? properCaseName(p.writer.name) ?? nameOfAddress(p.writer.email) : null;
+      const title = p.writer?.name && writerName && p.writer.name !== writerName ? p.title.split(p.writer.name).join(writerName) : p.title;
+      const body = p.status === 'ready' && a ? `The angle: ${a.whyItMatters}${a.peopleNamed.length ? ` Who: ${a.peopleNamed.map((x) => `${properCaseName(x.name) ?? 'someone'}${x.title ? ` (${x.title})` : ''}`).join('; ')}.` : a.roles.length ? ` Roles: ${a.roles.join(', ')}.` : ''} Ask: ${a.starters[0] ?? ''} Proposed: ${a.proposedAction === 'email' ? 'an email' : a.proposedAction === 'call' ? 'a call' : 'research first'}.${a.caveat ? ` ${a.caveat}` : ''}` : p.status === 'failed' ? `GAP could not develop the angle${p.error ? ` (${p.error.slice(0, 120)})` : ''}; decide it again on Work to retry.` : 'GAP is developing the angle; it comes back here and on Work.';
       const open = p.accountName && links.account ? links.account(p.accountName) : links.work;
-      const said = cleanLine(`${where}: ${p.title}. ${body}`);
+      // The morning audit (2026-10-10): an angle the correspondence has moved past (we wrote the writer, or they
+      // wrote us, after the decision; briefing-send's markSupersededPursued reads it) is one line, never the angle text
+      // or the Ask (Kenco: the angle for Dave Kiesling was decided Oct 8, we wrote Dave Oct 9 and he replied).
+      const said = p.superseded
+        ? cleanLine(`${where}: the angle for ${writerName ?? 'this person'} (prepared ${dayWords(p.decidedAt)}) is superseded by later correspondence (${p.superseded.since}); it is kept on the account page.`)
+        : cleanLine(`${where}: ${title}. ${body}`);
       lines.push(`- ${said}`, `   ${p.accountName ? `Open ${p.accountName}` : 'Open Work'}: ${open}`);
       html.push(`<li>- ${esc(said)} <a href="${esc(open)}">${esc(p.accountName ? `Open ${p.accountName}` : 'Open Work')}</a></li>`);
     }
@@ -382,9 +418,13 @@ export function renderBriefing(input: BriefingInput, now: Date): RenderedBriefin
       htmlLines.push(`<b>What was reported:</b> ${esc(passage)}`);
       if (s.uncertainty) { const u = cleanLine(clipAtSentence(oneLine(s.uncertainty), 320)); text.push(`In the producer's words: ${u}`); htmlLines.push(`<b>In the producer's words:</b> ${esc(u)}`); }
       if (s.interpretation) { const r = cleanLine(clipAtSentence(oneLine(s.interpretation), 320)); text.push(`The producer's read (not an obligation): ${r}`); htmlLines.push(`<b>The producer's read (not an obligation):</b> ${esc(r)}`); }
-      // GUI-11: a source whose label is a classifier's field (fit_rationale) is the producer's own claim, not a
-      // publication: said as such, its URL (the company's site, not evidence) left out.
-      const src = s.sources.filter((x) => x.url || (x.label && CLASSIFIER_LABEL.test(x.label))).map((x) => (x.label && CLASSIFIER_LABEL.test(x.label) && !x.publisher ? { label: OWN_CLAIM, url: null } : { label: x.label ?? x.publisher ?? 'source', url: x.url }));
+      // GUI-11, the morning audit of 2026-10-10: a source whose label is a classifier's field (fit_rationale,
+      // relevance, score) is the producer's own claim, not a publication, whatever the publisher: said as such with
+      // its link kept; two fields over one link are one claim, said once.
+      const src = s.sources
+        .filter((x) => x.url || (x.label && CLASSIFIER_LABEL.test(x.label)))
+        .map((x) => (x.label && CLASSIFIER_LABEL.test(x.label) ? { label: x.url ? OWN_CLAIM_WORDS : OWN_CLAIM, url: x.url } : { label: x.label ?? x.publisher ?? 'source', url: x.url }))
+        .filter((x, k, all) => all.findIndex((y) => y.label === x.label && y.url === x.url) === k);
       const ids = s.sourceRecordIds.map((r) => `${r.system} ${r.type} ${r.id}`);
       if (src.length || ids.length) {
         text.push(`${src.length ? `Sources: ${src.map((x) => (x.url ? `${x.label} ${x.url}` : x.label)).join('; ')}.` : ''}${ids.length ? ` CRM: ${ids.join(', ')}.` : ''}`.trim());
