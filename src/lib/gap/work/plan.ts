@@ -185,8 +185,9 @@ function cardKey(c: WorkCard, day: string, decisionIds?: ReadonlyMap<string, str
     case 'replied':
     case 'opted_out':
     case 'bounced': {
-      // The walk fix: a card the summary relabelled "Someone replied" is bound to the reply the summary names.
-      const id = c.reply?.messageId ?? c.replyRef?.messageId;
+      // The walk fix: a card the summary relabelled "Someone replied" is bound to the reply the summary names. R5 review
+      // (finding 1): an opted-out card is bound to the opt-out message first, never to another reply's panel.
+      const id = c.stateKind === 'opted_out' ? c.replyRef?.messageId ?? c.reply?.messageId : c.reply?.messageId ?? c.replyRef?.messageId;
       return id ? { key: `reply:${id}`, refs: { replyMessageId: id } } : { key: `reply:${c.accountName}:${day}`, refs: {} };
     }
     case 'ready': {

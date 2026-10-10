@@ -57,7 +57,7 @@ export interface PursuitSummary {
    * never makes a "Someone replied" card for one.
    */
   answered?: Array<{ from: string; at: string; answeredAt: string; id?: string | null }>;
-  /** The walk fix: when the state is "replied", the reply it is about (its message id when known, and its time). */
+  /** The walk fix: when the state is "replied" (R5 review: or "opted_out"), the message it is about (its id when known, and its time). */
   reply?: { id: string | null; at: string } | null;
   /** Paused reply (2026-10-10): the reply on record and the first touch the send gate pauses (state.ts pausedOf), so the Work card says both apart. */
   paused?: PausedReply | null;
@@ -86,7 +86,7 @@ export function rememberPursuitSummary(s: PursuitState, now: Date = new Date(), 
     nextText: nextText ?? a?.recommendation ?? null,
     actionable: a ? { intent: a.intent, allowed: a.allowed, preparation: a.preparation, completion: a.completion, hypothesisId: a.hypothesisId } : null,
     ...(s.answered?.length ? { answered: s.answered.map((x) => ({ from: x.from, at: x.at, answeredAt: x.answeredAt, ...(x.id ? { id: x.id } : {}) })) } : {}),
-    ...(s.state === 'replied' && s.replyRef ? { reply: { id: s.replyRef.id, at: s.replyRef.at } } : {}),
+    ...((s.state === 'replied' || s.state === 'opted_out') && s.replyRef ? { reply: { id: s.replyRef.id, at: s.replyRef.at } } : {}),
     ...(s.state === 'replied' && s.paused ? { paused: s.paused } : {}),
     at: now.toISOString(),
   };

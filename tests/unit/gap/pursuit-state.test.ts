@@ -39,6 +39,14 @@ describe('replies are classified before they rank', () => {
     expect(s.blocker).toMatch(/record it as do not contact/i);
     expect(s.lastInbound).toMatchObject({ who: 'timothy.cooper@walmart.com', kind: 'opt_out' });
   });
+  it('R5 review (finding 1): the opt-out state names the opt-out message, so Work binds its item to it', () => {
+    const s = projectPursuitState(base({ accountName: 'Walmart Inc.', replies: [
+      { from: 'bob@walmart.com', name: 'Bob Hale', at: '2026-10-04T13:58:00Z', subject: 'Re: yards', snippet: 'Tell me more about the gate.', triaged: false, id: 'm-bob' },
+      { from: 'timothy.cooper@walmart.com', name: 'Tim Cooper', at: '2026-10-05T13:58:00Z', subject: 'Re: yards', snippet: 'stop', triaged: false, id: 'm-tim' },
+    ] }));
+    expect(s.state).toBe('opted_out');
+    expect(s.replyRef).toEqual({ id: 'm-tim', at: '2026-10-05T13:58:00Z' });
+  });
   it('a human reply nobody has recorded pauses the account: REPLIED leads, the next person waits with the unlock named', () => {
     const s = projectPursuitState(base({ replies: [{ from: 'dana@acmefoods.com', name: 'Dana Trans', at: '2026-10-04T12:00:00Z', subject: 'Re: Yard question', snippet: 'Thanks Casey, we are looking at gate dwell at two DCs. Can you send more?', triaged: false }] }));
     expect(s.state).toBe('replied');

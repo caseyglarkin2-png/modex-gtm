@@ -52,14 +52,16 @@ const SETTINGS: SellerSettings = { briefingTo: SELLER, briefingHourNy: 7, comman
 const AUTH_OK = 'mx.google.com; spf=pass smtp.mailfrom=casey@freightroll.com; dmarc=pass (p=NONE) header.from=freightroll.com';
 const CRAIG = 'craig.morrison@kencogroup.com';
 const TIM = 'timothy.cooper@walmart.com';
+const BOB = 'bob.hale@acmefoods.example';
 
 const prep = (messageId: string, from: string, fromName: string, snippet: string) =>
   ({ messageId, from, fromName, at: '2026-10-09T15:00:00.000Z', subject: 'Re: yards', snippet, kind: 'human', human: null, label: 'replied', copyFamily: null, answerable: true, noAnswerLine: null, notes: [], threadHref: '', record: null }) as unknown as WorkCard['reply'];
 const card = (c: Partial<WorkCard> & Pick<WorkCard, 'accountName' | 'stateKind' | 'state'>): WorkCard => ({ href: `/gap/accounts/${c.accountName.toLowerCase()}`, lane: 'ready', why: '', person: null, next: null, blocker: null, index: 0, source: 'cockpit', ...c });
 
-function day(): WorkDay {
+function day(extra: WorkCard[] = []): WorkDay {
   return {
     cards: [
+      ...extra,
       card({ accountName: 'Kenco', stateKind: 'replied', state: 'Someone replied', tier: 'reply', lane: 'replies', person: { name: 'Craig Morrison', title: null }, reply: prep('m-craig', CRAIG, 'Craig Morrison', 'Can you send the two-site comparison?') }),
       card({ accountName: 'Walmart Inc.', stateKind: 'opted_out', state: 'Opted out', tier: 'admin', lane: 'replies', person: { name: 'Tim Cooper', title: null }, reply: prep('m-stop', TIM, 'Tim Cooper', 'stop') }),
       card({ accountName: 'Boston Beer', stateKind: 'in_deal', state: 'In a deal', tier: 'deal', lane: 'deals', dealNextStep: 'Send the four documents', move: 'Next step on the deal: Send the four documents' }),
@@ -73,6 +75,7 @@ function day(): WorkDay {
 /** The reply as Capture's reader returns it (replies/list.ts loadReplyForCapture): the person and account from the row; no thesis. */
 const REPLIES: Record<string, any> = {
   'm-craig': { item: { id: 'm-craig', source: { kind: 'inbound_message', id: 'm-craig' }, contactEmail: CRAIG, personaId: 11, accountName: 'Kenco', hypothesisId: '', hypothesisTitle: null, subject: 'Re: yards', snippet: 'Can you send the two-site comparison?', receivedAt: '2026-10-09T15:00:00.000Z', enrollmentId: null, enrollmentStatus: null }, text: 'Can you send the two-site comparison?', dispositionId: null },
+  'm-bob': { item: { id: 'm-bob', source: { kind: 'inbound_message', id: 'm-bob' }, contactEmail: BOB, personaId: 13, accountName: 'Acme Foods', hypothesisId: '', hypothesisTitle: null, subject: 'Re: yards', snippet: 'Tell me more about the gate on a Monday.', receivedAt: '2026-10-08T15:00:00.000Z', enrollmentId: null, enrollmentStatus: null }, text: 'Tell me more about the gate on a Monday.', dispositionId: null },
   'm-stop': { item: { id: 'm-stop', source: { kind: 'inbound_message', id: 'm-stop' }, contactEmail: TIM, personaId: 12, accountName: 'Walmart Inc.', hypothesisId: '', hypothesisTitle: null, subject: 'Re: yards', snippet: 'stop', receivedAt: '2026-10-09T15:00:00.000Z', enrollmentId: null, enrollmentStatus: null }, text: 'stop', dispositionId: null },
 };
 
@@ -105,19 +108,20 @@ function serviceClient(db: ReturnType<typeof ledgerDb>) {
   return c;
 }
 
-async function world(opts: { noteFails?: number; unsubscribeOk?: boolean } = {}) {
+async function world(opts: { noteFails?: number; unsubscribeOk?: boolean; cards?: WorkCard[] } = {}) {
   const db = ledgerDb(
     {
-      accounts: ['Kenco', 'Walmart Inc.', 'Boston Beer'],
+      accounts: ['Kenco', 'Walmart Inc.', 'Boston Beer', 'Acme Foods'],
       personas: [
         { id: 11, name: 'Craig Morrison', email: CRAIG, account_name: 'Kenco', hubspot_contact_id: 'hs-11' },
         { id: 12, name: 'Tim Cooper', email: TIM, account_name: 'Walmart Inc.', hubspot_contact_id: 'hs-12' },
+        { id: 13, name: 'Bob Hale', email: BOB, account_name: 'Acme Foods', hubspot_contact_id: 'hs-13' },
       ],
     },
     NOW,
   );
   const c = serviceClient(db);
-  const plan: DayPlan = await planDay(c, { now: NOW, load: async () => day() }, 'test');
+  const plan: DayPlan = await planDay(c, { now: NOW, load: async () => day(opts.cards) }, 'test');
   let n = 0;
   const send = vi.fn<(p: GmailSendPayload) => Promise<{ provider: 'gmail'; id: string | null; threadId: string | null }>>(async (p) => {
     n += 1;
@@ -307,6 +311,23 @@ describe('the opt-out, the progress note, a reply recorded before and a non-repl
     expect(said).toContain('The opt-out stays on your list until it is recorded as do not contact on the account. Recorded in GAP as "Do not contact them again", but the do-not-contact write did not complete.');
   });
 
+  it('R5 review (finding 1): an "Opted out: Tim" item bound to Bob\'s human reply records nothing on Bob: not recorded, the answer says why', async () => {
+    // A summary remembered before the binding fix: the card says Tim's opt-out while its message panel is Bob's reply.
+    const stale = card({ accountName: 'Acme Foods', stateKind: 'opted_out', state: 'Opted out: Tim Cole, Oct 9', tier: 'admin', lane: 'replies', person: null, reply: prep('m-bob', BOB, 'Bob Hale', 'Tell me more about the gate on a Monday.') });
+    const w = await world({ cards: [stale] });
+    const r = await w.apply(msg(w.thread('reply:m-bob'), 'DONE: recorded the stop'));
+    expect(r).toMatchObject({ applied: false, command: 'done', reason: 'not_the_opt_out', outcome: 'refused' });
+    expect(w.db.store.conversationDisposition, 'no disposition on Bob').toEqual([]);
+    expect(w.recordUnsubscribe, 'Bob is never suppressed').not.toHaveBeenCalled();
+    expect(w.stopRuns).not.toHaveBeenCalled();
+    expect(w.mirror).not.toHaveBeenCalled();
+    expect(w.kinds(REPLY_RESOLVED)).toEqual([]);
+    expect(await loadWorkOutcomes(w.c, ['Acme Foods'], NOW)).toEqual(new Map());
+    expect(w.kinds(COMMITMENT_EVENT)).toEqual([]);
+    const said = String(w.send.mock.calls.at(-1)![0].text);
+    expect(said).toBe("Not recorded: the item's message is not the opt-out; open the account: https://app.example/gap/accounts/acme-foods");
+  });
+
   it('a progress note on a reply never reaches the service: no disposition, no mirror, no settle', async () => {
     const w = await world();
     const r = await w.apply(msg(w.thread('reply:m-craig'), 'DONE: will send Craig the comparison tomorrow'));
@@ -341,7 +362,9 @@ describe('the opt-out, the progress note, a reply recorded before and a non-repl
 describe('the pieces, pure and at the service', () => {
   it('the class: the message states it, an opted-out or bounced card keeps its reading, a named meeting, else a plain reply handled', () => {
     expect(doneReplyClass({ kind: 'opt_out', human: null }, [])).toEqual({ responseClass: 'do_not_contact', basis: 'message' });
-    expect(doneReplyClass({ kind: 'human', human: 'reply' }, [], { stateKind: 'opted_out' })).toEqual({ responseClass: 'do_not_contact', basis: 'card' });
+    // R5 review (finding 1): do not contact only when the message itself is the opt-out; another message is refused.
+    expect(doneReplyClass({ kind: 'opt_out', human: null }, [], { stateKind: 'opted_out' })).toEqual({ responseClass: 'do_not_contact', basis: 'message' });
+    expect(doneReplyClass({ kind: 'human', human: 'reply' }, [], { stateKind: 'opted_out' })).toEqual({ refused: 'not_the_opt_out' });
     expect(doneReplyClass({ kind: 'bounce', human: null }, [])).toEqual({ responseClass: 'bounce', basis: 'message' });
     expect(doneReplyClass({ kind: 'out_of_office', human: null }, [])).toEqual({ responseClass: 'out_of_office', basis: 'message' });
     expect(doneReplyClass({ kind: 'human', human: 'referral' }, [])).toEqual({ responseClass: 'referral', basis: 'message' });

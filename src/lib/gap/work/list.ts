@@ -880,8 +880,18 @@ export function workDay(i: WorkInput): WorkDay {
     // action stands in for it (never a lane).
     const remembered = s.actionable?.allowed && !isCockpitLaneHref(s.actionable.allowed.href) ? s.actionable.allowed : null;
     const action = s.actionable ? (remembered ? { label: remembered.label, href: /^#/.test(remembered.href) ? `${accountHref(name)}${remembered.href}` : remembered.href } : s.actionable.allowed ? pursuitAction(s.state, name, s.stateLine) : null) : pursuitAction(s.state, name, s.stateLine);
+    // R5 review (finding 1): an opted-out card is bound to the opt-out message the summary names: its own panel when the
+    // reply list holds it, else no panel and the reference alone. Another reply's panel (Bob's, under Tim's opt-out) is
+    // never kept, so neither DONE nor Capture records the opt-out on the wrong person.
+    const optOut = s.state === 'opted_out' && s.reply?.id ? { messageId: s.reply.id, at: s.reply.at } : null;
+    const optOutRow = optOut && have.card.reply?.messageId !== optOut.messageId ? i.replies.find((x) => x.accountName === name && x.id === optOut.messageId) ?? null : null;
+    const panel = optOut && have.card.reply?.messageId !== optOut.messageId
+      ? optOutRow
+        ? prepareReply({ id: optOut.messageId, from: optOutRow.contactEmail, fromName: optOutRow.fromName ?? null, subject: optOutRow.subject, snippet: optOutRow.snippet, receivedAt: optOutRow.receivedAt, threadId: optOutRow.threadId ?? null, accountName: name }, { mailbox: i.mailbox ?? null, now: i.now })
+        : null
+      : have.card.reply ?? null;
     // R60: a reply card says the hold once (its sentence and the reply panel); a deal's or HubSpot's hold still shows.
-    const replyCard = (s.state === 'replied' || s.state === 'opted_out') && !!have.card.reply;
+    const replyCard = (s.state === 'replied' || s.state === 'opted_out') && !!panel;
     // Paused reply (2026-10-10): the workspace's pause (or, under a summary remembered before it, the card's own) is said
     // as the reply on record (why) and the first touch it pauses (blocker), never a bare "Someone replied".
     const paused = s.state === 'replied' ? s.paused ?? have.card.paused ?? null : null;
@@ -905,6 +915,7 @@ export function workDay(i: WorkInput): WorkDay {
         preparation: s.actionable?.preparation ?? null,
         // The walk fix: a summary's reply binds the plan item to its message when the card holds no prepared reply.
         ...(s.state === 'replied' && !have.card.reply && s.reply?.id ? { replyRef: { messageId: s.reply.id, at: s.reply.at } } : {}),
+        ...(optOut ? { replyRef: optOut, reply: panel } : {}),
         ...(paused ? { paused } : have.card.paused ? { paused: null } : {}),
       },
     });

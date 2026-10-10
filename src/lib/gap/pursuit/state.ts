@@ -140,7 +140,10 @@ export interface PursuitState {
   lastInbound: { who: string; at: string; kind: ReplyClass['kind']; label: string; /** The reply's first words (for the story's between-us row). */ snippet: string; /** R63-A B4: the address it came from (the story names its sender by it). */ from?: string; /** C6: the identity path that placed the sender here, when the message came from the placed read. */ placedVia?: PursuitReply['placedVia']; /** The walk fix: the message id, when known. */ id?: string | null; /** The walk fix: when we answered it (a human reply only), else absent. */ answeredAt?: string | null } | null;
   /** The walk fix: the human replies at the account we answered (a send of ours after each), for Work to drop their cards. */
   answered?: Array<{ from: string; at: string; answeredAt: string; source: string; id?: string | null }>;
-  /** The walk fix: when REPLIED on an unrecorded reply, that reply (its message id when known, and its time). */
+  /**
+   * The walk fix: when REPLIED on an unrecorded reply, that reply (its message id when known, and its time). R5 review
+   * (finding 1): when OPTED OUT, the opt-out message itself, so Work binds the item to it and never to another reply.
+   */
   replyRef?: { id: string | null; at: string } | null;
   /**
    * Paused reply (Casey, 2026-10-10): under the send gate's reply hold (the motion is `paused_reply`), the reply on
@@ -320,6 +323,7 @@ export function projectPursuitState(i: PursuitInput): PursuitState {
         stateLine: `${STATE_LINE.opted_out}: ${newestReply.name ?? newestReply.from}, ${day(newestReply.at)}`,
         blocker: `${newestReply.name ?? newestReply.from} replied "${newestReply.snippet.slice(0, 40)}" on ${day(newestReply.at)}: record it as do not contact. No reply goes back.`,
         unlock: 'Record the opt-out; GAP then sets that person aside. Anyone else here is your call afterwards, not the queue\'s.',
+        replyRef: { id: newestReply.id ?? null, at: newestReply.at },
       });
     }
     // out_of_office and bounce: noted on the inbound line, never a state of their own.

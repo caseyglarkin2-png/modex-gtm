@@ -5,6 +5,7 @@
  */
 import { describe, expect, it } from 'vitest';
 import { buildWorkList, filterWork, snoozedWork, workCounts, workDay, type WorkInput } from '@/lib/gap/work/list';
+import { itemsForDay } from '@/lib/gap/work/plan';
 import type { WorkOutcome } from '@/lib/gap/work/outcome';
 import type { NextCandidate } from '@/lib/gap/routing/next-up';
 
@@ -298,5 +299,35 @@ describe('paused reply (Casey, 2026-10-10): the card says the reply on record an
     const nfi = buildWorkList(input({ motions: [...input().motions, pausedMotion], summaries: older })).find((c) => c.accountName === 'NFI Industries')!;
     expect(nfi.state).toBe('Reply on record: ops@nfiindustries.com, Oct 6. First touch to Sam Ortiz paused, nothing sent');
     expect([nfi.why, nfi.blocker]).toEqual([RECEIVED, PAUSED]);
+  });
+});
+
+describe('R5 review (finding 1): an opted-out item is bound to the opt-out message, never another reply at the account', () => {
+  const replies = [
+    { accountName: 'Acme Foods', contactEmail: 'bob@acmefoods.example', fromName: 'Bob Hale', subject: 'Re: yards', snippet: 'Interesting. What does the gate look like on a Monday?', receivedAt: '2026-10-04T14:00:00Z', id: 'm-bob' },
+    { accountName: 'Acme Foods', contactEmail: 'tim@acmefoods.example', fromName: 'Tim Cole', subject: 'Re: yards', snippet: 'stop', receivedAt: '2026-10-05T14:00:00Z', id: 'm-tim' },
+  ];
+  const optedOut = { accountName: 'Acme Foods', state: 'opted_out' as const, stateLine: 'Opted out: Tim Cole, Oct 5', person: null, blocker: 'Tim Cole replied "stop" on Oct 5: record it as do not contact. No reply goes back.', coldTouchAllowed: false, nextText: null, reply: { id: 'm-tim', at: '2026-10-05T14:00:00Z' }, at: NOW.toISOString() };
+
+  it("Bob replied Oct 4 and Tim wrote stop Oct 5: the card says Tim's opt-out, carries Tim's message, and the plan item binds to it", () => {
+    const day = workDay(input({ candidates: [], replies, summaries: new Map([['Acme Foods', optedOut]]) }));
+    const card = day.cards.find((c) => c.accountName === 'Acme Foods')!;
+    expect(card.stateKind).toBe('opted_out');
+    expect(card.state).toBe('Opted out: Tim Cole, Oct 5');
+    expect(card.reply?.messageId).toBe('m-tim');
+    expect(card.reply?.from).toBe('tim@acmefoods.example');
+    expect(card.next?.href).toContain('from=reply%3Am-tim');
+    const item = itemsForDay(day, '2026-10-06').find((i) => i.accountName === 'Acme Foods')!;
+    expect(item.refs.replyMessageId).toBe('m-tim');
+    expect(item.key).toBe('reply:m-tim');
+  });
+
+  it('the opt-out message not in the reply list: the panel of another reply is dropped and the item binds to the opt-out by its id', () => {
+    const day = workDay(input({ candidates: [], replies: replies.slice(0, 1), summaries: new Map([['Acme Foods', optedOut]]) }));
+    const card = day.cards.find((c) => c.accountName === 'Acme Foods')!;
+    expect(card.stateKind).toBe('opted_out');
+    expect(card.reply ?? null).toBeNull();
+    expect(card.replyRef?.messageId).toBe('m-tim');
+    expect(itemsForDay(day, '2026-10-06').find((i) => i.accountName === 'Acme Foods')!.refs.replyMessageId).toBe('m-tim');
   });
 });

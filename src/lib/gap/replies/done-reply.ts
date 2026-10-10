@@ -12,8 +12,10 @@
  *     account and the thesis come from the reply row, never from the plan item's words
  *   - the message is classified the way Capture classifies it (replies/classify.ts) and the class is the one the
  *     message itself states (capture/reply-kind.ts proposedReplyKind: an opt-out is do_not_contact, an automatic
- *     notice out_of_office, a failed address bounce, a named referral referral); a card the Work list showed as opted
- *     out or bounced keeps that reading (stricter, never looser); a plain reply whose note names a dated meeting is
+ *     notice out_of_office, a failed address bounce, a named referral referral); a card the Work list showed as
+ *     bounced keeps that reading (stricter, never looser); R5 review (finding 1): do not contact ONLY when the message
+ *     itself is the opt-out: an opted-out card bound to any other message records nothing (`not_the_opt_out`), so the
+ *     opt-out of one person is never written on another; a plain reply whose note names a dated meeting is
  *     meeting_accepted (by the seller's word); any other plain reply is request_information (a person wrote and the
  *     seller answered by hand, once: the class whose effect is exactly that). Nothing here enrolls or sends
  *   - the source is `{ kind: 'email_command', id: <the command's Gmail message id> }`, so the same command applied
@@ -40,10 +42,15 @@ type PrismaLike = any;
 /** Why the class is what it is: the message states it, the seller's note names a meeting, or a plain reply the seller handled. */
 export type DoneReplyBasis = 'message' | 'card' | 'note' | 'handled';
 
-/** Pure: the disposition class of a completion DONE on a reply. Never a class that needs the buyer's words. */
-export function doneReplyClass(c: Pick<ReplyClass, 'kind' | 'human'>, facts: readonly DoneFact[], card: { stateKind?: string | null } = {}): { responseClass: ReplyKindClass; basis: DoneReplyBasis } {
-  // The Work card's own reading holds when it is stricter: an opted-out card is recorded as do not contact.
-  if (card.stateKind === 'opted_out') return { responseClass: 'do_not_contact', basis: c.kind === 'opt_out' ? 'message' : 'card' };
+/** The refusal's words: the item's message is not the opt-out, so nothing is recorded on its writer. */
+export const NOT_THE_OPT_OUT = "the item's message is not the opt-out";
+
+/**
+ * Pure: the disposition class of a completion DONE on a reply. Never a class that needs the buyer's words. R5 review
+ * (finding 1): an opted-out card whose message is not itself the opt-out is refused (never do not contact on its writer).
+ */
+export function doneReplyClass(c: Pick<ReplyClass, 'kind' | 'human'>, facts: readonly DoneFact[], card: { stateKind?: string | null } = {}): { responseClass: ReplyKindClass; basis: DoneReplyBasis } | { refused: 'not_the_opt_out' } {
+  if (card.stateKind === 'opted_out') return c.kind === 'opt_out' ? { responseClass: 'do_not_contact', basis: 'message' } : { refused: 'not_the_opt_out' };
   const stated = proposedReplyKind(c);
   if (stated) return { responseClass: stated, basis: 'message' };
   if (card.stateKind === 'bounced') return { responseClass: 'bounce', basis: 'card' };
@@ -84,7 +91,7 @@ export type ReplyDoneResult =
       replay: boolean;
     }
   | { kind: 'recorded_before'; dispositionId: string; responseClass: string; contactEmail: string }
-  | { kind: 'not_recorded'; reason: string };
+  | { kind: 'not_recorded'; reason: string; /** R5 review (finding 1): the opted-out item's message is not the opt-out. */ code?: 'not_the_opt_out' };
 
 export interface ReplyDoneInput {
   replyId: string;
@@ -134,12 +141,15 @@ async function replayReceipt(prisma: PrismaLike, dispositionId: string): Promise
 export async function recordReplyDone(prisma: PrismaLike, input: ReplyDoneInput, deps: ReplyDoneDeps = {}): Promise<ReplyDoneResult> {
   const r = await (deps.loadReply ?? loadReplyForCapture)(prisma, input.replyId, input.now).catch(() => null);
   if (!r) return { kind: 'not_recorded', reason: 'GAP could not read the reply as one from a person at an account' };
+  // The class first (pure): an opted-out item whose message is not the opt-out records nothing, recorded before or not.
+  const cls = classifyReply({ snippet: r.text || r.item.snippet, subject: r.item.subject, from: r.item.contactEmail });
+  const cl = doneReplyClass(cls, input.facts, { stateKind: input.stateKind });
+  if ('refused' in cl) return { kind: 'not_recorded', reason: NOT_THE_OPT_OUT, code: 'not_the_opt_out' };
   const prior = await recordedFor(prisma, r.item.id).catch(() => null);
   if (prior && !(prior.source_kind === 'email_command' && prior.source_id === input.commandMessageId)) {
     return { kind: 'recorded_before', dispositionId: prior.id, responseClass: prior.response_class, contactEmail: r.item.contactEmail };
   }
-  const cls = classifyReply({ snippet: r.text || r.item.snippet, subject: r.item.subject, from: r.item.contactEmail });
-  const { responseClass, basis } = doneReplyClass(cls, input.facts, { stateKind: input.stateKind });
+  const { responseClass, basis } = cl;
   const record = deps.recordDisposition ?? defaultRecordDisposition;
   const body = (hypothesisId: string | null) => ({
     hypothesisId,

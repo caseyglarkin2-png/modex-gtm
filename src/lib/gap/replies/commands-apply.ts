@@ -67,7 +67,8 @@ import { dayLabel, nyDay, nyDayAt, parseDuePhrase } from '../work/dates';
 import { progressLine, readDoneNote, type DoneFact } from '../work/done-note';
 import { recordWorkOutcome } from '../work/outcome';
 import { loadResolvedReplyIds, resolveAnswerOwed } from '../work/recorded-replies';
-import { recordLine, recordReplyDone as defaultRecordReplyDone, type ReplyDoneInput, type ReplyDoneResult } from './done-reply';
+import { NOT_THE_OPT_OUT, recordLine, recordReplyDone as defaultRecordReplyDone, type ReplyDoneInput, type ReplyDoneResult } from './done-reply';
+import { accountHref } from '../account-intel/href';
 import { loadDayPlan, loadDayPlanRevisions, type DayPlan, type PlanItem } from '../work/plan';
 import type { SellerSettings } from '../work/settings';
 import { authenticateCommand, commandTextOf, matchCommandTarget, parseCommand, type AssignmentRef, type BriefingRef, type CommandContext, type ParsedCommand } from './commands';
@@ -212,6 +213,7 @@ const NEXT_PATH: Record<string, string> = {
   item_list_sent: 'Reply ITEM and the number, and that item arrives as its own email.',
   already_in_inbox: 'Answer that item in its own email; reply ITEM and another number for a different one.',
   item_held: 'GAP is researching it. Reply ITEM and another number, or NEXT.',
+  not_the_opt_out: 'Open the account in GAP and record the opt-out on the person who sent it.',
   no_plan: 'Open Work in GAP; no plan is recorded for that day.',
 };
 const nextPath = (key: string, fallback = 'Open the item in GAP.') => NEXT_PATH[key] ?? fallback;
@@ -653,9 +655,19 @@ async function act(prisma: PrismaLike, input: ApplyInput, deps: ApplyDeps, item:
     return { applied: true, command: 'done', effect: 'progress_noted', itemKey: ref.itemKey, outcome: 'accepted', source, next: nextPath('progress_noted'), basis: 'self_reported' };
   }
   const note = reading.note;
+  const facts: DoneFact[] = reading.facts ?? [];
+  // A completion DONE on a reply item is recorded FIRST (replies/done-reply.ts), so a refusal records nothing at all:
+  // R5 review (finding 1): an opted-out item whose message is not the opt-out (Bob's reply under "Opted out: Tim")
+  // never records do not contact on that message's writer, and nothing else either (no meeting, no settle, no log).
+  const replyId = commitment ? null : replyIdOf(item);
+  const rec = replyId && (item.stateKind === 'replied' || item.stateKind === 'opted_out' || item.stateKind === 'bounced')
+    ? await (deps.recordReplyDone ?? ((p: PrismaLike, i: ReplyDoneInput) => defaultRecordReplyDone(p, i)))(prisma, { replyId, note, facts, commandMessageId: input.m.id, stateKind: item.stateKind, actor, now: input.now })
+    : null;
+  if (rec?.kind === 'not_recorded' && rec.code === 'not_the_opt_out') {
+    return refuse(prisma, input, deps, subject, 'done', 'not_the_opt_out', { replyMessageId: replyId }, source, `Not recorded: ${NOT_THE_OPT_OUT}; open the account: ${input.baseUrl.replace(/\/$/, '')}${accountHref(item.accountName)}`);
+  }
   // C3: the facts the note states become records: a meeting to prepare (one per day, through the commitment writer),
   // a sent note as a claim on this row. A failure to write the meeting never fails the DONE (the words are recorded).
-  const facts: DoneFact[] = reading.facts ?? [];
   const claims = facts.filter((f): f is Extract<DoneFact, { kind: 'sent' }> => f.kind === 'sent').map((f) => ({ kind: 'sent' as const, who: f.who, when: f.when, channel: f.channel, words: f.words }));
   const person = commitment?.person ?? (item.person ? { personaId: null, name: item.person.name, email: null } : null);
   const meetings = facts.some((f) => f.kind === 'meeting')
@@ -676,9 +688,7 @@ async function act(prisma: PrismaLike, input: ApplyInput, deps: ApplyDeps, item:
   // through the one disposition service (replies/done-reply.ts): one disposition keyed by this command's Gmail id, the
   // enrollment stops and the consent writer its class runs, the HubSpot mirror with its receipt. A replayed command
   // records nothing twice and settles nothing twice.
-  const replyId = replyIdOf(item);
-  if (replyId && (item.stateKind === 'replied' || item.stateKind === 'opted_out' || item.stateKind === 'bounced')) {
-    const rec = await (deps.recordReplyDone ?? ((p: PrismaLike, i: ReplyDoneInput) => defaultRecordReplyDone(p, i)))(prisma, { replyId, note, facts, commandMessageId: input.m.id, stateKind: item.stateKind, actor, now: input.now });
+  if (rec && replyId) {
     const receipt = rec.kind === 'recorded' ? (rec.mirror.receipt === 'mirrored' ? { receipt: 'mirrored' as const } : { receipt: 'recorded_not_mirrored' as const, mirrorReason: rec.mirror.reason, retryable: rec.mirror.retryable }) : rec.kind === 'recorded_before' ? { receipt: 'recorded_before' as const } : { receipt: 'not_recorded' as const, notRecordedReason: rec.reason };
     const recordPayload = { ...(rec.kind !== 'not_recorded' ? { dispositionId: rec.dispositionId, responseClass: rec.responseClass } : {}), ...(rec.kind === 'recorded' && rec.replay ? { replay: true } : {}), ...receipt };
     const optOut = rec.kind === 'not_recorded' ? item.stateKind === 'opted_out' : rec.responseClass === 'do_not_contact';
